@@ -16,6 +16,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 
         XposedBridge.log("SIAPOSED : " + lpparam.packageName);
         XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader, "setBuildText", new removeBuildText());
+
     }
 }
 

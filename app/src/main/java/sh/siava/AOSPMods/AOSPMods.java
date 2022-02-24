@@ -1,14 +1,23 @@
 package sh.siava.AOSPMods;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.content.res.XModuleResources;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -18,47 +27,9 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+public class AOSPMods implements IXposedHookLoadPackage{
 
-public class AOSPMods implements IXposedHookLoadPackage, IXposedHookInitPackageResources, IXposedHookZygoteInit {
 
-    protected static Object pwrDispatch, vmDispatch, vuDispatch;
-
-    private String MODULE_PATH;
-
-    private XC_InitPackageResources.InitPackageResourcesParam resparam;
-    private XModuleResources modRes;
-
-    protected static SparseIntArray mappedResource = new SparseIntArray();
-
-    @Override
-    public void handleInitPackageResources(XC_InitPackageResources.InitPackageResourcesParam resparam) throws Throwable {
-
-        XModuleResources modRes = XModuleResources.createInstance(MODULE_PATH, resparam.res);
-
-        this.resparam = resparam;
-        this.modRes = modRes;
-
-        //map drawables
-        mapResource(R.drawable.ic_sysbar_power);
-        mapResource(R.drawable.ic_sysbar_volume_plus);
-        mapResource(R.drawable.ic_sysbar_volume_minus);
-
-        //map ids
-        mapResource(R.id.power);
-        mapResource(R.id.volume_plus);
-        mapResource(R.id.volume_minus);
-
-        //map layouts
-        mapResource(R.layout.power);
-        mapResource(R.layout.volume_plus);
-        mapResource(R.layout.volume_minus);
-
-    }
-
-    private void mapResource(int res)
-    {
-        mappedResource.put(res, resparam.res.addResource(modRes, res));
-    }
 
 
     @Override
@@ -69,16 +40,13 @@ public class AOSPMods implements IXposedHookLoadPackage, IXposedHookInitPackageR
         XposedBridge.log("SIAPOSED : " + lpparam.packageName);
         XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader, "setBuildText", new removeBuildText());
 
-        try {
-            modNavBar(lpparam);
-        } catch (Throwable throwable) {
-            XposedBridge.log("SIAPOSED ERROR");
-        }
-
+        aModManager batteryStyle = null;
+        batteryStyle = new BatteryStyleManager(lpparam, 2, true);
+        batteryStyle.hookMethods();
 
     }
 
-    private static void modNavBar(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+/*    private static void modNavBar(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
         Class navbarClass = XposedHelpers.findClass("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader);
 
@@ -186,12 +154,8 @@ public class AOSPMods implements IXposedHookLoadPackage, IXposedHookInitPackageR
             }
         });
 
-    }
+    }*/
 
-    @Override
-    public void initZygote(StartupParam startupParam) throws Throwable {
-        MODULE_PATH = startupParam.modulePath;
-    }
 }
 
 class removeBuildText extends XC_MethodHook {

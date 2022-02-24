@@ -5,6 +5,7 @@ import android.util.SparseIntArray;
 
 import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookZygoteInit;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
 
 public class ResourceManager implements IXposedHookInitPackageResources, IXposedHookZygoteInit {
@@ -28,19 +29,28 @@ public class ResourceManager implements IXposedHookInitPackageResources, IXposed
         this.modRes = modRes;
 
         //map drawables
-        mapResource(R.drawable.ic_sysbar_power);
-        mapResource(R.drawable.ic_sysbar_volume_plus);
-        mapResource(R.drawable.ic_sysbar_volume_minus);
+//        mapResource(R.drawable.ic_sysbar_power);
+//        mapResource(R.drawable.ic_sysbar_volume_plus);
+//        mapResource(R.drawable.ic_sysbar_volume_minus);
 
         //map ids
-        mapResource(R.id.power);
-        mapResource(R.id.volume_plus);
-        mapResource(R.id.volume_minus);
+//        mapResource(R.id.power);
+//        mapResource(R.id.volume_plus);
+//        mapResource(R.id.volume_minus);
 
         //map layouts
-        mapResource(R.layout.power);
-        mapResource(R.layout.volume_plus);
-        mapResource(R.layout.volume_minus);
+//        mapResource(R.layout.power);
+//        mapResource(R.layout.volume_plus);
+//        mapResource(R.layout.volume_minus);
+
+//        resparam.res.setReplacement("com.android.systemui", "raw", "udfps_lockscreen_fp", modRes.fwd(R.raw.udfps_lockscreen_fp));
+
+        XposedBridge.log("RESSIAPOSD package: " + resparam.packageName);
+        if(resparam.packageName.startsWith("com.android.systemui")) {
+            UDFPSResources udfpsResources = new UDFPSResources(MODULE_PATH, resparam, modRes);
+            udfpsResources.hookResources();
+            udfpsResources.setTransparent(true);
+        }
     }
 
     private void mapResource(int res)

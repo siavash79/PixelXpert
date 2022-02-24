@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/fingerprint_bg.xml" value="0.12" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/fingerprint_bg_transparent.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_sysbar_power.xml" value="0.10625" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_sysbar_volume_minus.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_sysbar_volume_plus.xml" value="0.10989583333333333" />
@@ -11,6 +13,7 @@
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/volume_plus.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/power.xml" value="0.2" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/recent_apps.xml" value="0.1" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/udfps_keyguard_view.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/volume_minus.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/volume_plus.xml" value="0.1" />
       </map>

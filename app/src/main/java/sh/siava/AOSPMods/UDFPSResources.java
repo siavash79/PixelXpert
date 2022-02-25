@@ -20,7 +20,7 @@ public class UDFPSResources extends aResManager {
     {
         if(transparent)
         {
-            resparam.res.setReplacement(resparam.packageName, "drawable", "fingerprint_bg", modRes.fwd(R.drawable.fingerprint_bg_transparent));
+//            resparam.res.setReplacement(resparam.packageName, "drawable", "fingerprint_bg", modRes.fwd(R.drawable.fingerprint_bg_transparent));
         }
         else
         {

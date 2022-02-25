@@ -47,9 +47,9 @@ public class ResourceManager implements IXposedHookInitPackageResources, IXposed
 
         XposedBridge.log("RESSIAPOSD package: " + resparam.packageName);
         if(resparam.packageName.startsWith("com.android.systemui")) {
-            UDFPSResources udfpsResources = new UDFPSResources(MODULE_PATH, resparam, modRes);
+/*            UDFPSResources udfpsResources = new UDFPSResources(MODULE_PATH, resparam, modRes);
             udfpsResources.hookResources();
-            udfpsResources.setTransparent(true);
+            udfpsResources.setTransparent(true);*/
         }
     }
 

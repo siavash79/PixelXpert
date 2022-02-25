@@ -40,11 +40,26 @@ public class AOSPMods implements IXposedHookLoadPackage{
         XposedBridge.log("SIAPOSED : " + lpparam.packageName);
         XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader, "setBuildText", new removeBuildText());
 
-        aModManager batteryStyle = null;
-        batteryStyle = new BatteryStyleManager(lpparam, 2, true);
-        batteryStyle.hookMethods();
+        try {
+            aModManager batteryStyle = null;
+            batteryStyle = new BatteryStyleManager(lpparam, 2, true);
+//            batteryStyle.hookMethods();
+        }
+        catch(Exception e){}
 
-    }
+        try {
+            aModManager udfpsManager = new UDFPSManager(lpparam, true);
+            udfpsManager.hookMethods();
+        }
+        catch(Exception e){}
+
+        try {
+            aModManager backGestureManager = new BackGestureManager(lpparam);
+            backGestureManager.hookMethods();
+        }
+        catch(Exception e){}
+
+}
 
 /*    private static void modNavBar(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 

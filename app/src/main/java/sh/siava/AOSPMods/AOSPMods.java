@@ -34,7 +34,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         try {
             aModManager batteryStyle = null;
             batteryStyle = new BatteryStyleManager(lpparam, 2, true);
-//            batteryStyle.hookMethods();
+            batteryStyle.hookMethods();
         }
         catch(Exception e){}
 

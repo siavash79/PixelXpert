@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package sh.siava.AOSPMods
+package sh.siava.AOSPMods.systemui
 
 import android.content.Context
 import android.content.res.Resources
@@ -22,6 +22,7 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import androidx.annotation.ColorInt
 import android.util.TypedValue
+import sh.siava.AOSPMods.R
 import kotlin.math.max
 import kotlin.math.min
 

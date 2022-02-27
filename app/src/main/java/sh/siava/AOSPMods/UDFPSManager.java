@@ -1,10 +1,7 @@
 package sh.siava.AOSPMods;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
-
-import java.io.PrintWriter;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;

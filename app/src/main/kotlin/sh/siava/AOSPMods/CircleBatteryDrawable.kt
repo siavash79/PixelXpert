@@ -17,14 +17,11 @@
 package sh.siava.AOSPMods
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.content.res.Resources
-import android.content.res.TypedArray
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
 import android.util.TypedValue
-import de.robv.android.xposed.XposedBridge
 import kotlin.math.max
 import kotlin.math.min
 

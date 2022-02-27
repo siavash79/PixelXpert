@@ -2,9 +2,7 @@ package sh.siava.AOSPMods;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.res.XResources;
 import android.graphics.Color;
-import android.widget.Switch;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;

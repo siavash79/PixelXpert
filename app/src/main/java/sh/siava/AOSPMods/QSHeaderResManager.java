@@ -1,9 +1,6 @@
 package sh.siava.AOSPMods;
 
-import android.content.res.Resources;
 import android.content.res.XModuleResources;
-import android.content.res.XResources;
-import android.view.View;
 
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;

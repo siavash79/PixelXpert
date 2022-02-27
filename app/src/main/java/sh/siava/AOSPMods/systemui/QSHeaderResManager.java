@@ -1,9 +1,11 @@
-package sh.siava.AOSPMods;
+package sh.siava.AOSPMods.systemui;
 
 import android.content.res.XModuleResources;
 
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
+import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.aResManager;
 
 public class QSHeaderResManager extends aResManager {
     public QSHeaderResManager(String MODULE_PATH, XC_InitPackageResources.InitPackageResourcesParam resparam, XModuleResources modRes) {

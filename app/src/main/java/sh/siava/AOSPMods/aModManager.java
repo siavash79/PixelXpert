@@ -2,10 +2,10 @@ package sh.siava.AOSPMods;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-abstract class aModManager {
+public abstract class aModManager {
     protected XC_LoadPackage.LoadPackageParam lpparam;
 
-    aModManager(XC_LoadPackage.LoadPackageParam lpparam) {
+    public aModManager(XC_LoadPackage.LoadPackageParam lpparam) {
 //        this.getClass().getConstructor(String.class);
         this.lpparam = lpparam;
     }

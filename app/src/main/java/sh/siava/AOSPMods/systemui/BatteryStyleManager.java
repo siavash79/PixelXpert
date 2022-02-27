@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods;
+package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -12,18 +12,20 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.CircleBatteryDrawable;
+import sh.siava.AOSPMods.aModManager;
 
 
 //TODO: unknown battery symbol / percent text beside icon / update shape upon request / other shapes / dual tone
 
-public class BatteryStyleManager extends aModManager{
+public class BatteryStyleManager extends aModManager {
 
     private int frameColor;
     protected int BatteryStyle;
     protected boolean ShowPercent;
 
 
-    BatteryStyleManager(XC_LoadPackage.LoadPackageParam lpparam, int BatteryStyle, boolean ShowPercent){
+    public BatteryStyleManager(XC_LoadPackage.LoadPackageParam lpparam, int BatteryStyle, boolean ShowPercent){
         super(lpparam);
         this.BatteryStyle = BatteryStyle;
         this.ShowPercent = ShowPercent;

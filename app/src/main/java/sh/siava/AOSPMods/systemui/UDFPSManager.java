@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods;
+package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
 import android.widget.ImageView;
@@ -7,11 +7,12 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.aModManager;
 
 public class UDFPSManager extends aModManager {
     boolean transparentBG;
 
-    UDFPSManager(XC_LoadPackage.LoadPackageParam lpparam, boolean transparentBG) {
+    public UDFPSManager(XC_LoadPackage.LoadPackageParam lpparam, boolean transparentBG) {
         super(lpparam);
         this.transparentBG = transparentBG;
     }

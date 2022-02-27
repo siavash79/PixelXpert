@@ -1,9 +1,10 @@
-package sh.siava.AOSPMods;
+package sh.siava.AOSPMods.systemui;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.aModManager;
 
 import android.content.Context;
 import android.os.PowerManager;
@@ -14,7 +15,7 @@ import android.view.View;
 
 public class DoubleTapSleepLS extends aModManager {
     boolean mIsLockscreenDoubleTapEnabled = true;
-    DoubleTapSleepLS(XC_LoadPackage.LoadPackageParam lpparam) {
+    public DoubleTapSleepLS(XC_LoadPackage.LoadPackageParam lpparam) {
         super(lpparam);
     }
 

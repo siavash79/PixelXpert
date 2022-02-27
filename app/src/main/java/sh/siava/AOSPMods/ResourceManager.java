@@ -5,6 +5,7 @@ import android.content.res.XModuleResources;
 import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
+import sh.siava.AOSPMods.systemui.QSHeaderResManager;
 
 public class ResourceManager implements IXposedHookInitPackageResources, IXposedHookZygoteInit {
 

@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">AOSP Mods</string>
-    <string name="xposed_desc">Modifications on AOSP based ROMs</string>
+    <string name="app_name" translatable="false">AOSP Mods</string>
+    <string name="xposed_desc" translatable="false">Modifications on AOSP based ROMs</string>
 </resources>

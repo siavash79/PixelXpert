@@ -13,7 +13,6 @@ public class ResourceManager implements IXposedHookInitPackageResources, IXposed
     private String MODULE_PATH;
     private XC_InitPackageResources.InitPackageResourcesParam resparam;
     private XModuleResources modRes;
-    protected static SparseIntArray mappedResource = new SparseIntArray();
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
@@ -45,17 +44,15 @@ public class ResourceManager implements IXposedHookInitPackageResources, IXposed
 
 //        resparam.res.setReplacement("com.android.systemui", "raw", "udfps_lockscreen_fp", modRes.fwd(R.raw.udfps_lockscreen_fp));
 
-        XposedBridge.log("RESSIAPOSD package: " + resparam.packageName);
         if(resparam.packageName.startsWith("com.android.systemui")) {
 /*            UDFPSResources udfpsResources = new UDFPSResources(MODULE_PATH, resparam, modRes);
             udfpsResources.hookResources();
             udfpsResources.setTransparent(true);*/
+
+            aResManager QSHeader = new QSHeaderResManager(MODULE_PATH, resparam, modRes);
+            QSHeader.hookResources();
         }
     }
 
-    private void mapResource(int res)
-    {
-        mappedResource.put(res, resparam.res.addResource(modRes, res));
-    }
 
 }

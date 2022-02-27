@@ -10,5 +10,5 @@ abstract class aModManager {
         this.lpparam = lpparam;
     }
 
-    protected abstract void hookMethods();
+    protected abstract void hookMethods() throws InstantiationException, IllegalAccessException;
 }

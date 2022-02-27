@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+** Copyright 2016, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License"); 
+** you may not use this file except in compliance with the License. 
+** You may obtain a copy of the License at 
+**
+**     http://www.apache.org/licenses/LICENSE-2.0 
+**
+** Unless required by applicable law or agreed to in writing, software 
+** distributed under the License is distributed on an "AS IS" BASIS, 
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+** See the License for the specific language governing permissions and 
+** limitations under the License.
+*/
+-->
+
+<!-- These resources are around just to allow their values to be customized
+     for different hardware and product builds. -->
+<resources>
+    <dimen name="qs_detail_items_padding_top">16dp</dimen>
+
+    <!-- Global actions grid -->
+    <dimen name="global_actions_grid_vertical_padding">8dp</dimen>
+    <dimen name="global_actions_grid_horizontal_padding">4dp</dimen>
+
+    <dimen name="global_actions_grid_item_side_margin">12dp</dimen>
+    <dimen name="global_actions_grid_item_vertical_margin">8dp</dimen>
+    <dimen name="global_actions_grid_item_width">72dp</dimen>
+    <dimen name="global_actions_grid_item_height">72dp</dimen>
+
+    <dimen name="global_actions_grid_item_icon_width">24dp</dimen>
+    <dimen name="global_actions_grid_item_icon_height">24dp</dimen>
+    <dimen name="global_actions_grid_item_icon_top_margin">18dp</dimen>
+    <dimen name="global_actions_grid_item_icon_side_margin">24dp</dimen>
+    <dimen name="global_actions_grid_item_icon_bottom_margin">4dp</dimen>
+
+</resources>

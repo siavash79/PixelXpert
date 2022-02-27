@@ -18,7 +18,7 @@ public class QSHeaderResManager extends aResManager {
         mapResource(R.style.Theme_SystemUI_QuickSettings);
         resparam.res.setReplacement(resparam.packageName, "style", "QSCustomizeToolbar", modRes.fwd(R.style.QSCustomizeToolbar));
 //        resparam.res.setReplacement(resparam.packageName, "style", "Theme_SystemUI_QuickSettings", modRes.fwd(R.style.Theme_SystemUI_QuickSettings));
-        XposedBridge.log("resource added");
+        //Xposedbridge.log("resource added");
 
 //        resparam.res.setReplacement("com.android.systemui", "attr", "underSurfaceColor", resparam.res.getColor(resparam.res.getIdentifier("@android:color/system_neutral1_100", "attr", "com.android.systemui")));
 

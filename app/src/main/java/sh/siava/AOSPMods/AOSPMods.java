@@ -17,7 +17,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         if (!lpparam.packageName.equals("com.android.systemui"))
             return;
 
-        XposedBridge.log("SIAPOSED : " + lpparam.packageName);
+        //Xposedbridge.log("SIAPOSED : " + lpparam.packageName);
         XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader, "setBuildText", new removeBuildText());
 /*
         aModManager qsHeader = new QSHeaderManager(lpparam);
@@ -56,7 +56,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
         Class navbarClass = XposedHelpers.findClass("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader);
 
-        XposedBridge.log("SIAPOSED : found nav class");
+        //Xposedbridge.log("SIAPOSED : found nav class");
 
         String POWER = "power";
         String VOLUME_UP = "volup";
@@ -72,7 +72,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
                         LayoutInflater inflater = (LayoutInflater) param.args[2];
                         ViewGroup parent = (ViewGroup) param.args[1];
 
-                        XposedBridge.log("SIAPOSED btn :" + button);
+                        //Xposedbridge.log("SIAPOSED btn :" + button);
                         if (POWER.equals(button)) {
                             v = inflater.inflate(mappedResource.get(R.layout.power), parent, false);
                         } else if (VOLUME_UP.equals(button)) {
@@ -94,34 +94,34 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
 
         Class ButtonDispatcherClass = XposedHelpers.findClass("com.android.systemui.navigationbar.buttons.ButtonDispatcher", lpparam.classLoader);
-        XposedBridge.log("SIAPOSED : found btnclass");
+        //Xposedbridge.log("SIAPOSED : found btnclass");
 
         XposedHelpers.findAndHookConstructor("com.android.systemui.navigationbar.NavigationBarView", lpparam.classLoader, Context.class, AttributeSet.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                XposedBridge.log("SIAPOSED : in const hook");
+                //Xposedbridge.log("SIAPOSED : in const hook");
                 Class ButtonDispatcherClass = XposedHelpers.findClass("com.android.systemui.navigationbar.buttons.ButtonDispatcher", lpparam.classLoader);
                 Class KeyButtonDrawableClass = XposedHelpers.findClass("com.android.systemui.navigationbar.buttons.KeyButtonDrawable", lpparam.classLoader);
 
-                XposedBridge.log("SIAPOSED : line 94");
+                //Xposedbridge.log("SIAPOSED : line 94");
 
                 SparseArray mButtonDispatchers = (SparseArray) XposedHelpers.getObjectField(param.thisObject, "mButtonDispatchers");
 
                 Object temp, btnTemp;
 
-                XposedBridge.log("SIAPOSED : line 100");
+                //Xposedbridge.log("SIAPOSED : line 100");
 
                 temp = ButtonDispatcherClass.getDeclaredConstructor(int.class).newInstance(mappedResource.get(R.id.power));
-                XposedBridge.log("SIAPOSED : line 101");
+                //Xposedbridge.log("SIAPOSED : line 101");
                 
                 btnTemp = XposedHelpers.callMethod(param.thisObject, "getDrawable", mappedResource.get(R.drawable.ic_sysbar_power));
-                XposedBridge.log("SIAPOSED : line 102");
+                //Xposedbridge.log("SIAPOSED : line 102");
                 XposedHelpers.callMethod(temp, "setImageDrawable", btnTemp);
                 XposedHelpers.callMethod(temp, "setVisibility", View.VISIBLE);
                 mButtonDispatchers.put(mappedResource.get(R.id.power), temp);
                 pwrDispatch = temp;
 
-                XposedBridge.log("SIAPOSED : line 108");
+                //Xposedbridge.log("SIAPOSED : line 108");
 
                 temp = ButtonDispatcherClass.getDeclaredConstructor(int.class).newInstance(mappedResource.get(R.id.volume_minus));
                 btnTemp = XposedHelpers.callMethod(param.thisObject, "getDrawable", mappedResource.get(R.drawable.ic_sysbar_volume_minus));
@@ -137,7 +137,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
                 mButtonDispatchers.put(mappedResource.get(R.id.volume_plus), temp);
                 vuDispatch = temp;
 
-                XposedBridge.log("SIAPOSED : line 122");
+                //Xposedbridge.log("SIAPOSED : line 122");
             }
         });
 

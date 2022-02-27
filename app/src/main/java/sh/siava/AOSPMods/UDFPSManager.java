@@ -53,7 +53,7 @@ public class UDFPSManager extends aModManager {
                                 mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
 
                         XposedHelpers.setObjectField(param.thisObject, "mTextColorPrimary", mTextColorPrimary);
-                           XposedBridge.log("SIAPOSED color:" + mTextColorPrimary);
+                           //Xposedbridge.log("SIAPOSED color:" + mTextColorPrimary);
 
                         XposedHelpers.callMethod(mLockScreenFp, "invalidate");
                         param.setResult(null);

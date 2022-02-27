@@ -26,7 +26,7 @@ public class BackGestureManager extends aModManager {
 
                         if (mEdgeHeight != 0) {
                             if (y < (mDisplaySize.y - mBottomGestureHeight - mEdgeHeight)) {
-                                XposedBridge.log("SIAPOSED back i didn't approve" + mEdgeHeight);
+                                //Xposedbridge.log("SIAPOSED back i didn't approve" + mEdgeHeight);
                                 param.setResult(false);
                                 return;
                             }
@@ -39,7 +39,7 @@ public class BackGestureManager extends aModManager {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         Point mDisplaySize = (Point) XposedHelpers.getObjectField(param.thisObject, "mDisplaySize");
-                        XposedBridge.log("SIAPOSED back i set edge height");
+                        //Xposedbridge.log("SIAPOSED back i set edge height");
 
                         XposedHelpers.setAdditionalInstanceField(param.thisObject, "mEdgeHeight", mDisplaySize.y / 2);
                     }

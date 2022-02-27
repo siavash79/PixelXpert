@@ -24,7 +24,7 @@ public class DoubleTapSleepLS extends aModManager {
         GestureDetector mLockscreenDoubleTapToSleep = new GestureDetector(context[0], new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onDoubleTap(MotionEvent e) {
-                XposedBridge.log("got DT");
+                //Xposedbridge.log("got DT");
 
                 PowerManager pm = (PowerManager) context[0].getSystemService(Context.POWER_SERVICE);
                 if (pm != null) {
@@ -56,12 +56,12 @@ public class DoubleTapSleepLS extends aModManager {
                                 "onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
                                     @Override
                                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                        XposedBridge.log("puls " + mPulsing);
-                                        XposedBridge.log("doze " + mDozing);
-                                        XposedBridge.log("bar " + mBarState);
+                                        //Xposedbridge.log("puls " + mPulsing);
+                                        //Xposedbridge.log("doze " + mDozing);
+                                        //Xposedbridge.log("bar " + mBarState);
                                         if (mIsLockscreenDoubleTapEnabled && !mPulsing && !mDozing
                                                 && mBarState == 0) {
-                                            XposedBridge.log("check for DT " + mBarState);
+                                            //Xposedbridge.log("check for DT " + mBarState);
                                             mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[1]);
                                         }
                                     }

@@ -28,7 +28,7 @@ public class BatteryStyleManager extends aModManager{
         this.BatteryStyle = BatteryStyle;
         this.ShowPercent = ShowPercent;
 
-        XposedBridge.log("BSIAPOSED: Init done");
+        //Xposedbridge.log("BSIAPOSED: Init done");
     }
 
     public void setBatteryStyle(int BatteryStyle)
@@ -38,7 +38,7 @@ public class BatteryStyleManager extends aModManager{
 
     @Override
     protected void hookMethods() {
-        XposedBridge.log("BSIAPOSED: hook start");
+        //Xposedbridge.log("BSIAPOSED: hook start");
 
         XposedHelpers.findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
             @Override
@@ -47,7 +47,7 @@ public class BatteryStyleManager extends aModManager{
             }
         });
 
-        XposedBridge.log("BSIAPOSED: part 2");
+        //Xposedbridge.log("BSIAPOSED: part 2");
 
         XposedHelpers.findAndHookConstructor("com.android.systemui.BatteryMeterView", lpparam.classLoader, Context.class, AttributeSet.class, new XC_MethodHook() {
             @Override
@@ -80,7 +80,7 @@ public class BatteryStyleManager extends aModManager{
             }
         });
 
-        XposedBridge.log("BSIAPOSED: part 3");
+        //Xposedbridge.log("BSIAPOSED: part 3");
 
 
         XposedHelpers.findAndHookMethod("com.android.systemui.BatteryMeterView", lpparam.classLoader,
@@ -95,11 +95,11 @@ public class BatteryStyleManager extends aModManager{
                         mBatteryIconView.setImageDrawable(mCircleDrawable);
                         XposedHelpers.setObjectField(param.thisObject, "mBatteryIconView", mBatteryIconView);
 
-                        XposedBridge.log("SIAPOSED: unknown called for no reason!");
+                        //Xposedbridge.log("SIAPOSED: unknown called for no reason!");
                     }
                 });
 
-        XposedBridge.log("BSIAPOSED: part 4");
+        //Xposedbridge.log("BSIAPOSED: part 4");
 
         XposedHelpers.findAndHookMethod("com.android.systemui.BatteryMeterView", lpparam.classLoader,
                 "scaleBatteryMeterViews", new XC_MethodHook() {
@@ -117,13 +117,13 @@ public class BatteryStyleManager extends aModManager{
                         res.getValue(res.getIdentifier("status_bar_icon_scale_factor", "dimen", context.getPackageName()), typedValue, true);
                         float iconScaleFactor = typedValue.getFloat();
 
-                        XposedBridge.log("SIAPOSED: scalefac " + iconScaleFactor);
+                        //Xposedbridge.log("SIAPOSED: scalefac " + iconScaleFactor);
 
                         int batteryHeight = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
                         int batteryWidth = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
                         int marginBottom = res.getDimensionPixelSize(res.getIdentifier("battery_margin_bottom", "dimen", context.getPackageName()));
 
-                        XposedBridge.log("SIAPOSED: height " + batteryHeight);
+                        //Xposedbridge.log("SIAPOSED: height " + batteryHeight);
 
                         LinearLayout.LayoutParams scaledLayoutParams = new LinearLayout.LayoutParams(
                                 (int) (batteryWidth * iconScaleFactor), (int) (batteryHeight * iconScaleFactor));
@@ -136,7 +136,7 @@ public class BatteryStyleManager extends aModManager{
                     }
                 });
 
-        XposedBridge.log("BSIAPOSED: part 5");
+        //Xposedbridge.log("BSIAPOSED: part 5");
 
         XposedHelpers.findAndHookMethod("com.android.systemui.BatteryMeterView", lpparam.classLoader,
                 "onBatteryLevelChanged", int.class, boolean.class, boolean.class, new XC_MethodHook() {
@@ -148,7 +148,7 @@ public class BatteryStyleManager extends aModManager{
                     }
                 });
 
-        XposedBridge.log("BSIAPOSED: part 6");
+        //Xposedbridge.log("BSIAPOSED: part 6");
 
         XposedHelpers.findAndHookMethod("com.android.systemui.BatteryMeterView", lpparam.classLoader,
                 "onPowerSaveChanged", boolean.class, new XC_MethodHook() {
@@ -159,7 +159,7 @@ public class BatteryStyleManager extends aModManager{
                     }
                 });
 
-        XposedBridge.log("BSIAPOSED: part 7");
+        //Xposedbridge.log("BSIAPOSED: part 7");
 
         XposedHelpers.findAndHookMethod("com.android.systemui.BatteryMeterView", lpparam.classLoader,
                 "updateColors", int.class, int.class, int.class, new XC_MethodHook() {
@@ -170,7 +170,7 @@ public class BatteryStyleManager extends aModManager{
                         mCircleDrawable.setColors((int) param.args[0], (int) param.args[1], (int) param.args[2]);
                     }
                 });
-        XposedBridge.log("BSIAPOSED: part 8");
-        XposedBridge.log("BSIAPOSED: hook finished?");
+        //Xposedbridge.log("BSIAPOSED: part 8");
+        //Xposedbridge.log("BSIAPOSED: hook finished?");
     }
 }

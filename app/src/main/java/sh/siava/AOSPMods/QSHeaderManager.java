@@ -62,12 +62,12 @@ public class QSHeaderManager extends aModManager {
             switch(enumVal)
             {
                 case "KEYGUARD":
-                    XposedBridge.log("SIAPOSED found keyguard");
+                    //Xposedbridge.log("SIAPOSED found keyguard");
                     XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                                    XposedBridge.log("SIAPOSED found keyguard method");
+                                    //Xposedbridge.log("SIAPOSED found keyguard method");
 
                                     boolean mClipQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipQsScrim");
                                     if(mClipQsScrim)
@@ -79,23 +79,23 @@ public class QSHeaderManager extends aModManager {
                            });
                     break;
                 case "BOUNCER":
-                    XposedBridge.log("SIAPOSED found bouncer");
+                    //Xposedbridge.log("SIAPOSED found bouncer");
                     XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                                    XposedBridge.log("SIAPOSED found bouncer method");
+                                    //Xposedbridge.log("SIAPOSED found bouncer method");
                                     XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
                                 }
                             });
                     break;
                 case "SHADE_LOCKED":
-                    XposedBridge.log("SIAPOSED found shade lock");
+                    //Xposedbridge.log("SIAPOSED found shade lock");
                     XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                                    XposedBridge.log("SIAPOSED found shade lock method");
+                                    //Xposedbridge.log("SIAPOSED found shade lock method");
                                     XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
 
                                     boolean mClipQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipQsScrim");
@@ -115,12 +115,12 @@ public class QSHeaderManager extends aModManager {
                             });
                     break;
                 case "UNLOCKED":
-                    XposedBridge.log("SIAPOSED found unlock");
+                    //Xposedbridge.log("SIAPOSED found unlock");
                     XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                                    XposedBridge.log("SIAPOSED found unlock method");
+                                    //Xposedbridge.log("SIAPOSED found unlock method");
                                     XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
 
                                     Object mScrimBehind = XposedHelpers.getObjectField(param.thisObject, "mScrimBehind");

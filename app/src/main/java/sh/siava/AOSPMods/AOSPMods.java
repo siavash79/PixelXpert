@@ -6,49 +6,52 @@ import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.android.HideGoogle2021;
 import sh.siava.AOSPMods.systemui.*;
 public class AOSPMods implements IXposedHookLoadPackage{
 
-
-
-
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-        if (!lpparam.packageName.equals("com.android.systemui"))
-            return;
+ /*       if (lpparam.packageName.startsWith(""))
+        {
+            aModManager photosHider = new HideGoogle2021(lpparam);
+            photosHider.hookMethods();
+        }*/
+        if (lpparam.packageName.equals("com.android.systemui")) {
 
-        //Xposedbridge.log("SIAPOSED : " + lpparam.packageName);
-        XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader, "setBuildText", new removeBuildText());
-/*
-        aModManager qsHeader = new QSHeaderManager(lpparam);
-        try {
+            //Xposedbridge.log("SIAPOSED : " + lpparam.packageName);
+            XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader, "setBuildText", new removeBuildText());
+
+            aModManager qsHeader = new QSHeaderManager(lpparam);
+            try {
             qsHeader.hookMethods();
-        }
-        catch(Exception e){}
-*/
-        try {
-            aModManager doubleTapSleepLS = new DoubleTapSleepLS(lpparam);
-            doubleTapSleepLS.hookMethods();
-        }
-        catch(Exception e){}
-        try {
-            aModManager batteryStyle = null;
-            batteryStyle = new BatteryStyleManager(lpparam, 2, true);
-            batteryStyle.hookMethods();
-        }
-        catch(Exception e){}
+            } catch (Exception e) {
+            }
 
-        try {
-            aModManager udfpsManager = new UDFPSManager(lpparam, true);
-            udfpsManager.hookMethods();
-        }
-        catch(Exception e){}
+            try {
+                aModManager doubleTapSleepLS = new DoubleTapSleepLS(lpparam);
+                doubleTapSleepLS.hookMethods();
+            } catch (Exception e) {
+            }
+            try {
+                aModManager batteryStyle = null;
+                batteryStyle = new BatteryStyleManager(lpparam, 2, true);
+                batteryStyle.hookMethods();
+            } catch (Exception e) {
+            }
 
-        try {
-            aModManager backGestureManager = new BackGestureManager(lpparam);
-            backGestureManager.hookMethods();
+            try {
+                aModManager udfpsManager = new UDFPSManager(lpparam, true);
+                udfpsManager.hookMethods();
+            } catch (Exception e) {
+            }
+
+            try {
+                aModManager backGestureManager = new BackGestureManager(lpparam);
+                backGestureManager.hookMethods();
+            } catch (Exception e) {
+            }
         }
-        catch(Exception e){}
 
 }
 

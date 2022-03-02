@@ -155,9 +155,12 @@ public class QSHeaderManager extends aModManager {
                         XposedBridge.log("reload theme");
 
 
-                        Process process = Runtime.getRuntime().exec("cmd overlay disable sh.siava.a");
+                        Runtime.getRuntime().exec("cmd overlay disable sh.siava.AOSPMods_QSTheme");
                         Thread.sleep(50);
-                        process = Runtime.getRuntime().exec("cmd overlay enable sh.siava.a");
+                        Runtime.getRuntime().exec("cmd overlay enable sh.siava.AOSPMods_QSTheme");
+                        Thread.sleep(50);
+                        Runtime.getRuntime().exec("cmd overlay set-priority sh.siava.AOSPMods_QSTheme lowest");
+
 
                     }
                 });

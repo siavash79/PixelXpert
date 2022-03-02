@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 
+import java.lang.reflect.InvocationTargetException;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -12,12 +14,12 @@ import sh.siava.AOSPMods.aModManager;
 
 public class QSHeaderManager extends aModManager {
 
-    QSHeaderManager(XC_LoadPackage.LoadPackageParam lpparam) {
+    public QSHeaderManager(XC_LoadPackage.LoadPackageParam lpparam) {
         super(lpparam);
     }
     public static int resid = 0;
     @Override
-    protected void hookMethods() throws InstantiationException, IllegalAccessException {
+    protected void hookMethods() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
         XposedHelpers.findAndHookMethod("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader,
                 "updateResources", new XC_MethodHook() {
                     @Override
@@ -26,6 +28,7 @@ public class QSHeaderManager extends aModManager {
                         Resources res = context.getResources();
 
                         int iconColor = res.getColor(res.getIdentifier("android:color/system_neutral1_900", "color", context.getPackageName()));
+                        //XposedBridge.log("iconcolor :" + iconColor);
                         XposedHelpers.setObjectField(param.thisObject, "iconColor", iconColor);
                     }
                 });
@@ -39,7 +42,9 @@ public class QSHeaderManager extends aModManager {
 
                 Object colorActive = XposedHelpers.callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
                         context,
-                        context.getResources().getIdentifier("anroid:attr/colorAccent", "attr", context.getPackageName()));
+                        context.getResources().getIdentifier("android:attr/colorAccent", "attr", "com.android.systemui"));
+
+//                XposedBridge.log("active :" + colorActive);
                 XposedHelpers.setObjectField(param.thisObject, "colorActive", colorActive);
             }
         });
@@ -131,5 +136,32 @@ public class QSHeaderManager extends aModManager {
                     break;
             }
         }
+
+/*        Class FragmentClass = XposedHelpers.findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
+        XposedBridge.hookAllConstructors(FragmentClass, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+               Class InterestingClass = XposedHelpers.findClass("com.android.settingslib.applications.InterestingConfigChanges", lpparam.classLoader);
+                Object o = InterestingClass.getDeclaredConstructor(int.class).newInstance(0x40000000 | 0x0004 | 0x0100 | 0x80000000 | 0x0200);
+//                Class ActivityClass = XposedHelpers.findClass("android.content.pm.ActivityInfo", lpparam.classLoader);
+                XposedHelpers.setObjectField(param.thisObject, "mConfigChanges", o);
+            }
+        });
+*/
+        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader,
+                "updateTheme", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        XposedBridge.log("reload theme");
+
+
+                        Process process = Runtime.getRuntime().exec("cmd overlay disable sh.siava.a");
+                        Thread.sleep(50);
+                        process = Runtime.getRuntime().exec("cmd overlay enable sh.siava.a");
+
+                    }
+                });
+
+
     }
 }

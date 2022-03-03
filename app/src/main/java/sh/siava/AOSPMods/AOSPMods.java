@@ -20,18 +20,17 @@ public class AOSPMods implements IXposedHookLoadPackage{
         UDFPSManager.transparentBG = true;
         QSHeaderManager.setLightQSHeader(true);
 
+        BatteryStyleManager.circleBatteryEnabled = true;
+        BatteryStyleManager.BatteryStyle = 2;
+        BatteryStyleManager.ShowPercent = true;
+
+
         if (lpparam.packageName.equals("com.android.systemui")) {
 
             //Xposedbridge.log("SIAPOSED : " + lpparam.packageName);
             XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader, "setBuildText", new removeBuildText());
 
 
-            try {
-                aModManager batteryStyle = null;
-                batteryStyle = new BatteryStyleManager(lpparam, 2, true);
-                batteryStyle.hookMethods();
-            } catch (Exception e) {}
-            XposedBridge.log("SIAPOSED: continue");
 
         }
 

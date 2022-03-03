@@ -31,6 +31,7 @@ public class DoubleTapSleepLS implements IXposedHookLoadPackage {
                 PowerManager pm = (PowerManager) context[0].getSystemService(Context.POWER_SERVICE);
                 if (pm != null) {
                     XposedHelpers.callMethod(pm, "goToSleep", SystemClock.uptimeMillis());
+
                 }
                 return true;
             }

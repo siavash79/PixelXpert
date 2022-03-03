@@ -3,3 +3,4 @@ sh.siava.AOSPMods.systemui.BackGestureManager
 sh.siava.AOSPMods.systemui.DoubleTapSleepLS
 sh.siava.AOSPMods.systemui.UDFPSManager
 sh.siava.AOSPMods.systemui.QSHeaderManager
+sh.siava.AOSPMods.systemui.BatteryStyleManager

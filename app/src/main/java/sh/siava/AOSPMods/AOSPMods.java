@@ -15,7 +15,9 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-        backGestureHeightFraction = 2;
+        BackGestureManager.backGestureHeightFraction = 2;
+        DoubleTapSleepLS.doubleTapToSleepEnabled = true;
+
  /*       if (lpparam.packageName.startsWith(""))
         {
             aModManager photosHider = new HideGoogle2021(lpparam);
@@ -33,11 +35,6 @@ public class AOSPMods implements IXposedHookLoadPackage{
             }
 
             try {
-                aModManager doubleTapSleepLS = new DoubleTapSleepLS(lpparam);
-                doubleTapSleepLS.hookMethods();
-            } catch (Exception e) {
-            }
-            try {
                 aModManager batteryStyle = null;
                 batteryStyle = new BatteryStyleManager(lpparam, 2, true);
 //                batteryStyle.hookMethods();
@@ -49,11 +46,6 @@ public class AOSPMods implements IXposedHookLoadPackage{
             } catch (Exception e) {
             }
 
-/*            try {
-                aModManager backGestureManager = new BackGestureManager(lpparam);
-                backGestureManager.hookMethods();
-            } catch (Exception e) {
-            }*/
         }
 
 }

@@ -1,10 +1,10 @@
 package sh.siava.AOSPMods.systemui;
 
+import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.aModManager;
 
 import android.content.Context;
 import android.os.PowerManager;
@@ -13,15 +13,16 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class DoubleTapSleepLS extends aModManager {
-    boolean mIsLockscreenDoubleTapEnabled = true;
-    public DoubleTapSleepLS(XC_LoadPackage.LoadPackageParam lpparam) {
-        super(lpparam);
-    }
+public class DoubleTapSleepLS implements IXposedHookLoadPackage {
+    public static final String listenPackage = "com.android.systemui";
+    public static boolean doubleTapToSleepEnabled = false;
+
+    final Context[] context = new Context[1];
 
     @Override
-    protected void hookMethods() {
-        final Context[] context = new Context[1];
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+        if(!lpparam.packageName.equals(listenPackage)) return;
+
         GestureDetector mLockscreenDoubleTapToSleep = new GestureDetector(context[0], new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onDoubleTap(MotionEvent e) {
@@ -60,7 +61,7 @@ public class DoubleTapSleepLS extends aModManager {
                                         //Xposedbridge.log("puls " + mPulsing);
                                         //Xposedbridge.log("doze " + mDozing);
                                         //Xposedbridge.log("bar " + mBarState);
-                                        if (mIsLockscreenDoubleTapEnabled && !mPulsing && !mDozing
+                                        if (doubleTapToSleepEnabled && !mPulsing && !mDozing
                                                 && mBarState == 0) {
                                             //Xposedbridge.log("check for DT " + mBarState);
                                             mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[1]);

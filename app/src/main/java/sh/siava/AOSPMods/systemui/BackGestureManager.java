@@ -15,8 +15,6 @@ public class BackGestureManager implements IXposedHookLoadPackage {
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-        XposedBridge.log(lpparam.packageName);
-        XposedBridge.log(listenPackage);
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         XposedHelpers.findAndHookMethod("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader,

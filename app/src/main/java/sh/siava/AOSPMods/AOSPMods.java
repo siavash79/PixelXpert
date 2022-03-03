@@ -1,9 +1,12 @@
 package sh.siava.AOSPMods;
 
+import static sh.siava.AOSPMods.systemui.BackGestureManager.backGestureHeightFraction;
+
 import android.widget.TextView;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.android.HideGoogle2021;
@@ -12,6 +15,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+        backGestureHeightFraction = 2;
  /*       if (lpparam.packageName.startsWith(""))
         {
             aModManager photosHider = new HideGoogle2021(lpparam);
@@ -22,9 +26,9 @@ public class AOSPMods implements IXposedHookLoadPackage{
             //Xposedbridge.log("SIAPOSED : " + lpparam.packageName);
             XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader, "setBuildText", new removeBuildText());
 
-            aModManager qsHeader = new QSHeaderManager(lpparam);
+//            aModManager qsHeader = new QSHeaderManager(lpparam);
             try {
-            qsHeader.hookMethods();
+//            qsHeader.hookMethods();
             } catch (Exception e) {
             }
 
@@ -36,21 +40,20 @@ public class AOSPMods implements IXposedHookLoadPackage{
             try {
                 aModManager batteryStyle = null;
                 batteryStyle = new BatteryStyleManager(lpparam, 2, true);
-                batteryStyle.hookMethods();
-            } catch (Exception e) {
-            }
-
+//                batteryStyle.hookMethods();
+            } catch (Exception e) {}
+            XposedBridge.log("SIAPOSED: continue");
             try {
                 aModManager udfpsManager = new UDFPSManager(lpparam, true);
                 udfpsManager.hookMethods();
             } catch (Exception e) {
             }
 
-            try {
+/*            try {
                 aModManager backGestureManager = new BackGestureManager(lpparam);
                 backGestureManager.hookMethods();
             } catch (Exception e) {
-            }
+            }*/
         }
 
 }

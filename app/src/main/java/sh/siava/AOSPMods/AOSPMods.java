@@ -13,6 +13,9 @@ import sh.siava.AOSPMods.android.HideGoogle2021;
 import sh.siava.AOSPMods.systemui.*;
 public class AOSPMods implements IXposedHookLoadPackage{
 
+    // THIS is used to detect either the module is enabled correctly or not
+    public static boolean systemUIconnected = false;
+
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         BackGestureManager.backGestureHeightFraction = 2;
@@ -24,14 +27,8 @@ public class AOSPMods implements IXposedHookLoadPackage{
         BatteryStyleManager.BatteryStyle = 2;
         BatteryStyleManager.ShowPercent = true;
 
-
         if (lpparam.packageName.equals("com.android.systemui")) {
-
-            //Xposedbridge.log("SIAPOSED : " + lpparam.packageName);
-            XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader, "setBuildText", new removeBuildText());
-
-
-
+            systemUIconnected = true;
         }
 
 }
@@ -148,19 +145,6 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
 }
 
-class removeBuildText extends XC_MethodHook {
-    @Override
-    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-        super.afterHookedMethod(param);
-
-        TextView mBuildText = (TextView) XposedHelpers.getObjectField(param.thisObject, "mBuildText");
-        boolean mShouldShowBuildText = (boolean) XposedHelpers.getObjectField(param.thisObject, "mShouldShowBuildText");
-
-        mBuildText.setText("Siavash + XPOSED");
-        mShouldShowBuildText = true;
-        mBuildText.setSelected(true);
-    }
 
 
-}
 

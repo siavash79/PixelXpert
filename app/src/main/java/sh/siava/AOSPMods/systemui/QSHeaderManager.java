@@ -23,16 +23,19 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
         if(lightQSHeaderEnabled != state) {
             lightQSHeaderEnabled = state;
 
-            switch (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
-                case Configuration.UI_MODE_NIGHT_YES:
-                    break;
-                case Configuration.UI_MODE_NIGHT_NO:
-                    try {
-                        Runtime.getRuntime().exec("settings get secure ui_night_mode 2");
-                        Thread.sleep(500);
-                        Runtime.getRuntime().exec("settings get secure ui_night_mode 1");
-                    }catch (Exception e){}
-                    break;
+            if(context != null) {
+                switch (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+                    case Configuration.UI_MODE_NIGHT_YES:
+                        break;
+                    case Configuration.UI_MODE_NIGHT_NO:
+                        try {
+                            Runtime.getRuntime().exec("settings get secure ui_night_mode 2");
+                            Thread.sleep(500);
+                            Runtime.getRuntime().exec("settings get secure ui_night_mode 1");
+                        } catch (Exception e) {
+                        }
+                        break;
+                }
             }
 
         }

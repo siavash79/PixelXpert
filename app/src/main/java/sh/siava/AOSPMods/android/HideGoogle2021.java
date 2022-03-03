@@ -1,5 +1,4 @@
 package sh.siava.AOSPMods.android;
-import java.util.Arrays;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -7,7 +6,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.*;
 
-public class HideGoogle2021 extends aModManager {
+public class HideGoogle2021  {
 
     private static final String[] pixel6Codenames = {
             "oriole",
@@ -42,12 +41,12 @@ public class HideGoogle2021 extends aModManager {
             "com.google.android.feature.GOOGLE_BUILD",
             "com.google.android.feature.GOOGLE_EXPERIENCE"
     };
-
+    XC_LoadPackage.LoadPackageParam lpparam;
     public HideGoogle2021(XC_LoadPackage.LoadPackageParam lpparam) {
-        super(lpparam);
+        this.lpparam = lpparam;
     }
 
-    @Override
+
     protected void hookMethods() {
         XposedHelpers.findAndHookMethod("android.app.ApplicationPackageManager", lpparam.classLoader,
                 "hasSystemFeature", String.class, int.class, new XC_MethodHook() {

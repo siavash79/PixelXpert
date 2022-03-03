@@ -5,14 +5,11 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 
-import java.lang.reflect.InvocationTargetException;
-
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.aModManager;
 
 public class QSHeaderManager implements IXposedHookLoadPackage {
     public static final String listenPackage = "com.android.systemui";

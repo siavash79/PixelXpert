@@ -10,10 +10,8 @@ import android.widget.LinearLayout;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.aModManager;
 
 
 //TODO: unknown battery symbol / percent text beside icon / update shape upon request / other shapes / dual tone

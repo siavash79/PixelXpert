@@ -4,10 +4,8 @@ import android.graphics.Point;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.aModManager;
 
 public class BackGestureManager implements IXposedHookLoadPackage {
     private static final String listenPackage = "com.android.systemui";

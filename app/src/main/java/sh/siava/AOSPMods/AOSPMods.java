@@ -17,34 +17,25 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         BackGestureManager.backGestureHeightFraction = 2;
         DoubleTapSleepLS.doubleTapToSleepEnabled = true;
+        UDFPSManager.transparentBG = true;
 
- /*       if (lpparam.packageName.startsWith(""))
-        {
-            aModManager photosHider = new HideGoogle2021(lpparam);
-            photosHider.hookMethods();
-        }*/
         if (lpparam.packageName.equals("com.android.systemui")) {
 
             //Xposedbridge.log("SIAPOSED : " + lpparam.packageName);
             XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader, "setBuildText", new removeBuildText());
 
-//            aModManager qsHeader = new QSHeaderManager(lpparam);
+            aModManager qsHeader = new QSHeaderManager(lpparam);
             try {
-//            qsHeader.hookMethods();
+            qsHeader.hookMethods();
             } catch (Exception e) {
             }
 
             try {
                 aModManager batteryStyle = null;
                 batteryStyle = new BatteryStyleManager(lpparam, 2, true);
-//                batteryStyle.hookMethods();
+                batteryStyle.hookMethods();
             } catch (Exception e) {}
             XposedBridge.log("SIAPOSED: continue");
-            try {
-                aModManager udfpsManager = new UDFPSManager(lpparam, true);
-                udfpsManager.hookMethods();
-            } catch (Exception e) {
-            }
 
         }
 

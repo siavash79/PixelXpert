@@ -10,7 +10,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.aModManager;
 
 public class BackGestureManager implements IXposedHookLoadPackage {
-    public static final String listenPackage = "com.android.systemui";
+    private static final String listenPackage = "com.android.systemui";
     public static int backGestureHeightFraction = 1;
 
     @Override
@@ -26,11 +26,11 @@ public class BackGestureManager implements IXposedHookLoadPackage {
                         Point mDisplaySize = (Point) XposedHelpers.getObjectField(param.thisObject, "mDisplaySize");
                         float mBottomGestureHeight = (float) XposedHelpers.getObjectField(param.thisObject, "mBottomGestureHeight");
                         int mEdgeHeight = mDisplaySize.y / backGestureHeightFraction;
-                        XposedBridge.log("SIAPOSED: height:" + mEdgeHeight);
+  //                      XposedBridge.log("SIAPOSED: height:" + mEdgeHeight);
 
                         if (mEdgeHeight != 0) {
                             if (y < (mDisplaySize.y - mBottomGestureHeight - mEdgeHeight)) {
-                                XposedBridge.log("SIAPOSED back i didn't approve" + mEdgeHeight);
+//                                XposedBridge.log("SIAPOSED back i didn't approve" + mEdgeHeight);
                                 param.setResult(false);
                                 return;
                             }

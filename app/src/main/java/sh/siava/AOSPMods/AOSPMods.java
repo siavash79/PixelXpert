@@ -18,17 +18,13 @@ public class AOSPMods implements IXposedHookLoadPackage{
         BackGestureManager.backGestureHeightFraction = 2;
         DoubleTapSleepLS.doubleTapToSleepEnabled = true;
         UDFPSManager.transparentBG = true;
+        QSHeaderManager.setLightQSHeader(true);
 
         if (lpparam.packageName.equals("com.android.systemui")) {
 
             //Xposedbridge.log("SIAPOSED : " + lpparam.packageName);
             XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader, "setBuildText", new removeBuildText());
 
-            aModManager qsHeader = new QSHeaderManager(lpparam);
-            try {
-            qsHeader.hookMethods();
-            } catch (Exception e) {
-            }
 
             try {
                 aModManager batteryStyle = null;

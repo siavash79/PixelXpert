@@ -18,6 +18,8 @@ public class AOSPMods implements IXposedHookLoadPackage{
         BatteryStyleManager.circleBatteryEnabled = true;
         BatteryStyleManager.BatteryStyle = 2;
         BatteryStyleManager.ShowPercent = true;
+        CarrierTextManager.isEnabled = true;
+        CarrierTextManager.customText = "Siavash";
 
         if (lpparam.packageName.equals("com.android.systemui")) {
             systemUIconnected = true;

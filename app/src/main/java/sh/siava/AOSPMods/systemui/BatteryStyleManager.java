@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.systemui;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.ImageView;
@@ -38,14 +39,23 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
 
         //Xposedbridge.log("BSIAPOSED: part 2");
 
-        XposedHelpers.findAndHookConstructor("com.android.systemui.BatteryMeterView", lpparam.classLoader,
-                Context.class, AttributeSet.class, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if(!circleBatteryEnabled) return;
+        Class BatteryMeterViewClass;
+        if(Build.VERSION.SDK_INT == 31) {
+            BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.BatteryMeterView", lpparam.classLoader);
+        }
+        else
+        {
+            BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
+        }
 
-                Context context = (Context) param.args[0];
-                //Resources res = context.getResources();
+        XposedHelpers.findAndHookConstructor(BatteryMeterViewClass,
+                    Context.class, AttributeSet.class, new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if (!circleBatteryEnabled) return;
+
+                            Context context = (Context) param.args[0];
+                            //Resources res = context.getResources();
 
 
 /*                TypedArray atts = context.obtainStyledAttributes((AttributeSet) param.args[1],
@@ -56,26 +66,27 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                 final int frameColor = atts.getColor(res.getIdentifier("BatteryMeterView_frameColor", "styleable", context.getPackageName()),
                         context.getColor(res.getIdentifier("meter_background_color", "color", context.getPackageName())));
 */
-                //context.getColor(res.getIdentifier("meter_background_color", "color", context.getPackageName()))
+                            //context.getColor(res.getIdentifier("meter_background_color", "color", context.getPackageName()))
 
-                CircleBatteryDrawable circl = new CircleBatteryDrawable((Context) param.args[0], frameColor);
-                circl.setShowPercent(ShowPercent);
-                circl.setMeterStyle(BatteryStyle);
+                            CircleBatteryDrawable circl = new CircleBatteryDrawable((Context) param.args[0], frameColor);
+                            circl.setShowPercent(ShowPercent);
+                            circl.setMeterStyle(BatteryStyle);
 
-                XposedHelpers.setAdditionalInstanceField(param.thisObject, "mCircleDrawable", circl);
+                            XposedHelpers.setAdditionalInstanceField(param.thisObject, "mCircleDrawable", circl);
 
-                ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
+                            ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
 
-                Drawable mCircleDrawable = (Drawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
-                mBatteryIconView.setImageDrawable(mCircleDrawable);
-                XposedHelpers.setObjectField(param.thisObject, "mBatteryIconView", mBatteryIconView);
-            }
-        });
+                            Drawable mCircleDrawable = (Drawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
+                            mBatteryIconView.setImageDrawable(mCircleDrawable);
+                            XposedHelpers.setObjectField(param.thisObject, "mBatteryIconView", mBatteryIconView);
+                        }
+                    });
+
 
         //Xposedbridge.log("BSIAPOSED: part 3");
 
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.BatteryMeterView", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                 "onBatteryUnknownStateChanged", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -95,7 +106,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
 
         //Xposedbridge.log("BSIAPOSED: part 4");
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.BatteryMeterView", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                 "scaleBatteryMeterViews", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -134,7 +145,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
 
         //Xposedbridge.log("BSIAPOSED: part 5");
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.BatteryMeterView", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                 "onBatteryLevelChanged", int.class, boolean.class, boolean.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -148,7 +159,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
 
         //Xposedbridge.log("BSIAPOSED: part 6");
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.BatteryMeterView", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                 "onPowerSaveChanged", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -161,7 +172,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
 
         //Xposedbridge.log("BSIAPOSED: part 7");
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.BatteryMeterView", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                 "updateColors", int.class, int.class, int.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {

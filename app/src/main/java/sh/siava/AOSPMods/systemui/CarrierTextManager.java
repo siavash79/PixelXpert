@@ -12,13 +12,13 @@ public class CarrierTextManager implements IXposedHookLoadPackage {
     public static String customText = "";
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         XposedHelpers.findAndHookConstructor("com.android.keyguard.CarrierTextManager$CarrierTextCallbackInfo", lpparam.classLoader,
                 CharSequence.class, CharSequence[].class, boolean.class, int[].class, boolean.class, new XC_MethodHook() {
                     @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    protected void beforeHookedMethod(MethodHookParam param)  {
                         if(isEnabled)
                         {
                             XposedHelpers.setObjectField(param.thisObject, "carrierText", customText);
@@ -27,7 +27,6 @@ public class CarrierTextManager implements IXposedHookLoadPackage {
                             XposedHelpers.setObjectField(param.thisObject, "subscriptionIds", new int[0]);
                             XposedHelpers.setObjectField(param.thisObject, "airplaneMode", false);
                             param.setResult(null);
-                            return;
                         }
                     }
                 });

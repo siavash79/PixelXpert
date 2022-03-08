@@ -9,10 +9,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        tools:ignore="AllowBackup" >
-    <meta-data android:name="xposeddescription" android:value="@string/xposed_desc" />
-    <meta-data android:name="xposedminversion" android:value="93" />
-    <meta-data android:name="xposedscope" android:resource="@array/module_scope" />
-</application>
+        android:theme="@style/Theme.AppCompat.Light"
+        tools:ignore="AllowBackup">
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_settings" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="xposeddescription"
+            android:value="@string/xposed_desc" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="93" />
+        <meta-data
+            android:name="xposedscope"
+            android:resource="@array/module_scope" />
+    </application>
 
 </manifest>

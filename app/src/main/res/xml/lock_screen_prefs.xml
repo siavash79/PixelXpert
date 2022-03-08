@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:visibility="visible">
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="@string/UDFPS_hide_key"
+        android:summaryOff="@string/transparent_fingerprint_circle_off"
+        android:title="@string/transparent_fingerprint_circle"
+        app:summaryOn="@string/transparent_fingerprint_circle_on" />
+    <PreferenceCategory android:title="@string/carrier_text_category">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="carrierTextMod"
+            android:title="@string/configure_carrier_text"
+            app:summaryOff="@string/carrier_text_mod_disabled"
+            app:summaryOn="@string/carrier_text_mod_enabled" />
+        <EditTextPreference
+            android:key="carrierTextValue"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/carrier_text_value" />
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

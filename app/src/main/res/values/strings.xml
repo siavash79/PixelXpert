@@ -1,4 +1,32 @@
 <resources>
     <string name="app_name" translatable="false">AOSP Mods</string>
     <string name="xposed_desc" translatable="false">Modifications on AOSP based ROMs</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <string name="transparent_fingerprint_circle">Hide under-display fingerprint circle</string>
+    <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
+    <string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
+    <string name="carrier_text_category">Carrier Text</string>
+    <string name="configure_carrier_text">Configure Carrier Text</string>
+    <string name="carrier_text_mod_disabled">Carrier Text unchaged</string>
+    <string name="carrier_text_mod_enabled">Modify Carrier Text</string>
+    <string name="carrier_text_value">Text to Show</string>
+    <string name="lockscreen_header_title">Lockscreen Settings</string>
+    <string name="UDFPS_hide_key">fingerprint_circle_hide</string>
+
 </resources>

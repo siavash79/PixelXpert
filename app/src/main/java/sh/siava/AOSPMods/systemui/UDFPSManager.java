@@ -5,16 +5,26 @@ import android.widget.ImageView;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.XPrefs;
 
 public class UDFPSManager implements IXposedHookLoadPackage {
     private static final String listenPackage = "com.android.systemui";
     public static boolean transparentBG = false;
 
+    public static String UDFPS_hide_key = "fingerprint_circle_hide";
+
+    public static void updatePrefs()
+    {
+        transparentBG = XPrefs.Xprefs.getBoolean(UDFPSManager.UDFPS_hide_key, false);
+    }
+
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
+
         XposedHelpers.findAndHookMethod(" com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
                 "updateAlpha", new XC_MethodHook() {
                     @Override
@@ -33,6 +43,7 @@ public class UDFPSManager implements IXposedHookLoadPackage {
                 "setUseBackground", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        XposedBridge.log("SIAPOSED: transparentBG:" + transparentBG);
                         if(!transparentBG) return;
                         param.args[0] = false;
                     }

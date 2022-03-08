@@ -5,11 +5,18 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.XPrefs;
 
 public class CarrierTextManager implements IXposedHookLoadPackage {
     public static final String listenPackage = "com.android.systemui";
     public static boolean isEnabled = false;
     public static String customText = "";
+
+    public static void updatePrefs()
+    {
+        isEnabled = XPrefs.Xprefs.getBoolean("carrierTextMod", false);
+        customText = XPrefs.Xprefs.getString("carrierTextValue", "");
+    }
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {

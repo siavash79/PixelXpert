@@ -62,7 +62,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
         if(Build.VERSION.SDK_INT == 31) { //Andriod 12
             BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.BatteryMeterView", lpparam.classLoader);
         }
-        else if (Build.VERSION.SDK_INT == 32) //Android 12L
+        else if (Build.VERSION.SDK_INT == 32) //Android 12L-13
         {
             BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
         }
@@ -168,7 +168,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
 
         //Xposedbridge.log("BSIAPOSED: part 5");
 
-        if(Build.VERSION.SDK_INT == 31) {
+        if(Build.VERSION.SDK_INT == 31) { //Android 12
 
             XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                     "onBatteryLevelChanged", int.class, boolean.class, boolean.class, new XC_MethodHook() {
@@ -183,7 +183,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                     });
         }
         else
-        {
+        { //Probably SDK 32-33
             XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                     "onBatteryLevelChanged", int.class, boolean.class, new XC_MethodHook() {
                         @Override

@@ -84,7 +84,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
             }
         });
 
-        if(Build.VERSION.SDK_INT == 31) {
+        if(Build.VERSION.SDK_INT == 31) { //Android 12
             XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
                     "applyStateToAlpha", new XC_MethodHook() {
                         @Override
@@ -99,7 +99,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
                     });
         }
         else
-        {
+        { //Probably SDK 32-33
             XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
                     "applyState", new XC_MethodHook() {
                         @Override

@@ -9,8 +9,11 @@ import android.util.TypedValue;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.lang.reflect.Method;
+
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.XPrefs;
@@ -165,18 +168,34 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
 
         //Xposedbridge.log("BSIAPOSED: part 5");
 
-        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
-                "onBatteryLevelChanged", int.class, boolean.class, boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!circleBatteryEnabled) return;
+        if(Build.VERSION.SDK_INT == 31) {
 
-                        CircleBatteryDrawable mCircleDrawable = (CircleBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
-                        mCircleDrawable.setCharging((boolean) param.args[1]);
-                        mCircleDrawable.setBatteryLevel((int) param.args[0]);
-                    }
-                });
+            XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
+                    "onBatteryLevelChanged", int.class, boolean.class, boolean.class, new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if (!circleBatteryEnabled) return;
 
+                            CircleBatteryDrawable mCircleDrawable = (CircleBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
+                            mCircleDrawable.setCharging((boolean) param.args[1]);
+                            mCircleDrawable.setBatteryLevel((int) param.args[0]);
+                        }
+                    });
+        }
+        else
+        {
+            XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
+                    "onBatteryLevelChanged", int.class, boolean.class, new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if (!circleBatteryEnabled) return;
+
+                            CircleBatteryDrawable mCircleDrawable = (CircleBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
+                            mCircleDrawable.setCharging((boolean) param.args[1]);
+                            mCircleDrawable.setBatteryLevel((int) param.args[0]);
+                        }
+                    });
+        }
         //Xposedbridge.log("BSIAPOSED: part 6");
 
         XposedHelpers.findAndHookMethod(BatteryMeterViewClass,

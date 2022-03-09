@@ -39,6 +39,7 @@ public class SettingsActivity extends AppCompatActivity implements
         try {
             getApplicationContext().getSharedPreferences("sh.siava.AOSPMods_preferences", Context.MODE_WORLD_READABLE);
         } catch (SecurityException ignored) {
+            Log.d("SIAPOSED", "onCreate: failed to world read");
             // The new XSharedPreferences is not enabled or module's not loading
             // other fallback, if any
         }

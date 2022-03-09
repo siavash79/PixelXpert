@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.Build;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -83,19 +84,37 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
             }
         });
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
-                "applyStateToAlpha", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!lightQSHeaderEnabled) return;
+        if(Build.VERSION.SDK_INT == 31) {
+            XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
+                    "applyStateToAlpha", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if (!lightQSHeaderEnabled) return;
 
-                        boolean mClipsQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipsQsScrim");
-                        if(mClipsQsScrim)
-                        {
-                            XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
+                            boolean mClipsQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipsQsScrim");
+                            if (mClipsQsScrim) {
+                                XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
+                            }
                         }
-                    }
-                });
+                    });
+        }
+        else
+        {
+            XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
+                    "applyState", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if (!lightQSHeaderEnabled) return;
+
+                            boolean mClipsQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipsQsScrim");
+                            if (mClipsQsScrim) {
+                                XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
+                            }
+                        }
+                    });
+
+        }
+
         Class ScrimStateEnum = XposedHelpers.findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
         Object[] constants =  ScrimStateEnum.getEnumConstants();
         for(int i = 0; i< constants.length; i++)

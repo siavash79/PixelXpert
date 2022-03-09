@@ -29,6 +29,8 @@
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/power.xml" value="0.2" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/recent_apps.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/settings_activity.xml" value="0.1" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/slider_pref.xml" value="0.16" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/sliderlayout.xml" value="0.15" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/udfps_keyguard_view.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/volume_minus.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/volume_plus.xml" value="0.1" />
@@ -37,6 +39,7 @@
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/lock_screen_prefs.xml" value="0.15" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/messages_preferences.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/root_preferences.xml" value="0.1" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/statusbar_settings.xml" value="0.18" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/sync_preferences.xml" value="0.1" />
       </map>
     </option>

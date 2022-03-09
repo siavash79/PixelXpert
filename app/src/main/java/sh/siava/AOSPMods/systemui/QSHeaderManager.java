@@ -10,34 +10,40 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.XPrefs;
 
 public class QSHeaderManager implements IXposedHookLoadPackage {
     public static final String listenPackage = "com.android.systemui";
 
     private static boolean lightQSHeaderEnabled = false;
 
+    public static void updatePrefs()
+    {
+        setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
+    }
+
     private static Context context;
     public static void setLightQSHeader(boolean state)
     {
-        XposedBridge.log("SIA QS set to " + state);
         if(lightQSHeaderEnabled != state) {
             lightQSHeaderEnabled = state;
 
             if(context != null) {
+
                 switch (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
                     case Configuration.UI_MODE_NIGHT_YES:
                         break;
                     case Configuration.UI_MODE_NIGHT_NO:
+
                         try {
-                            Runtime.getRuntime().exec("settings get secure ui_night_mode 2");
+                            Runtime.getRuntime().exec("cmd uimode night yes");
                             Thread.sleep(500);
-                            Runtime.getRuntime().exec("settings get secure ui_night_mode 1");
-                        } catch (Exception e) {
-                        }
+                            Runtime.getRuntime().exec("cmd uimode night no");
+                        } catch (Exception e) {}
+
                         break;
                 }
             }
-
         }
     }
 
@@ -64,9 +70,9 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
         XposedBridge.hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if(!lightQSHeaderEnabled) return;
-
                 context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                //we need the context anyway
+                if(!lightQSHeaderEnabled) return;
 
                 Object colorActive = XposedHelpers.callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
                         context,

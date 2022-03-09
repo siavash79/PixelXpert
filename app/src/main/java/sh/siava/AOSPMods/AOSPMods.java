@@ -11,8 +11,6 @@ public class AOSPMods implements IXposedHookLoadPackage{
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
 //        BackGestureManager.backGestureHeightFraction = 2;
-        DoubleTapSleepLS.doubleTapToSleepEnabled = true;
-        QSHeaderManager.setLightQSHeader(true);
 
         BatteryStyleManager.circleBatteryEnabled = true;
         BatteryStyleManager.BatteryStyle = 2;

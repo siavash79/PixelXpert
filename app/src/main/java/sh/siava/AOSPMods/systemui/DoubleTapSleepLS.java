@@ -5,6 +5,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.XPrefs;
 
 import android.content.Context;
 import android.os.PowerManager;
@@ -18,6 +19,11 @@ public class DoubleTapSleepLS implements IXposedHookLoadPackage {
     public static boolean doubleTapToSleepEnabled = false;
 
     final Context[] context = new Context[1];
+
+    public static void updatePrefs()
+    {
+        doubleTapToSleepEnabled = XPrefs.Xprefs.getBoolean("DoubleTapSleep", false);
+    }
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {

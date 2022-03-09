@@ -40,12 +40,16 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
         //Xposedbridge.log("BSIAPOSED: part 2");
 
         Class BatteryMeterViewClass;
-        if(Build.VERSION.SDK_INT == 31) {
+        if(Build.VERSION.SDK_INT == 31) { //Andriod 12
             BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.BatteryMeterView", lpparam.classLoader);
         }
-        else
+        else if (Build.VERSION.SDK_INT == 32) //Android 12L
         {
             BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
+        }
+        else //not compatible
+        {
+            return;
         }
 
         XposedHelpers.findAndHookConstructor(BatteryMeterViewClass,

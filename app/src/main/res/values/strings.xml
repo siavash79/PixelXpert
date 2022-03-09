@@ -3,20 +3,7 @@
     <string name="xposed_desc" translatable="false">Modifications on AOSP based ROMs</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
     <string name="transparent_fingerprint_circle">Hide under-display fingerprint circle</string>
     <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
@@ -28,5 +15,16 @@
     <string name="carrier_text_value">Text to Show</string>
     <string name="lockscreen_header_title">Lockscreen Settings</string>
     <string name="UDFPS_hide_key">fingerprint_circle_hide</string>
+    <string name="double_tap_sleep_title">Double-tap to sleep</string>
+    <string name="double_tap_sleep_off">Double-tap will not turn off the display</string>
+    <string name="double_tap_sleep_on">Double-tap on Statusbar or Lockscreen turns the display off</string>
+    <string name="qs_footer_mod_title">Modify Buildnumber text on Quick Settings Menu</string>
+    <string name="qs_footer_text_value">Custom text to show</string>
+    <string name="qs_footer_text_summary">Leave blank to remove the text completely</string>
+    <string name="qs_mod_category_title">Build Number in Quick Settings</string>
+    <string name="statusbar_header">Statusbar Settings</string>
+    <string name="qs_footer_text_desc">You will need to turn your display off/on to apply</string>
+    <string name="light_qs_title">Light QS Panel during light theme (might be buggy)</string>
+
 
 </resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:visibility="visible">
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="LightQSPanel"
+        android:title="@string/light_qs_title" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="DoubleTapSleep"
+        android:title="@string/double_tap_sleep_title"
+        app:summaryOff="@string/double_tap_sleep_off"
+        app:summaryOn="@string/double_tap_sleep_on" />
+    <PreferenceCategory
+        android:title="@string/qs_mod_category_title"
+        app:summary="@string/qs_footer_text_desc">
+
+    </PreferenceCategory>
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="QSFooterMod"
+        android:title="@string/qs_footer_mod_title" />
+    <EditTextPreference
+        android:key="QSFooterText"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/qs_footer_text_value"
+        app:summary="@string/qs_footer_text_summary" />
+</PreferenceScreen>

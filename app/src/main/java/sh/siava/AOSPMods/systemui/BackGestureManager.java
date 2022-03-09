@@ -4,15 +4,27 @@ import android.graphics.Point;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.XPrefs;
 
 public class BackGestureManager implements IXposedHookLoadPackage {
     private static final String listenPackage = "com.android.systemui";
-    public static float backGestureHeightFractionLeft = 0.5f; // 50% of screen height. can be anything between 0 to 1
-    public static float backGestureHeightFractionRight = 0.5f; // 50% of screen height. can be anything between 0 to 1
+    public static float backGestureHeightFractionLeft = 1f; // % of screen height. can be anything between 0 to 1
+    public static float backGestureHeightFractionRight = 1f; // % of screen height. can be anything between 0 to 1
     public static boolean leftEnabled = true;
     public static boolean rightEnabled = true;
+
+    public static void updatePrefs()
+    {
+        leftEnabled = XPrefs.Xprefs.getBoolean("BackFromLeft", true);
+        rightEnabled = XPrefs.Xprefs.getBoolean("BackFromRight", true);
+        backGestureHeightFractionLeft = XPrefs.Xprefs.getInt("BackLeftHeight", 100) / 100f;
+
+        XposedBridge.log("SIAPOSED left height: " + backGestureHeightFractionLeft);
+        backGestureHeightFractionRight = XPrefs.Xprefs.getInt("BackRightHeight", 100) / 100f;
+    }
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {

@@ -33,6 +33,11 @@
     <string name="battery_show_percent_title">Show battery percentage</string>
     <string name="battery_style_category_title">Battery Style</string>
     <string name="battery_style_category_summary">You will need to turn your display off/on to apply</string>
+    <string name="back_gesture_category_title">Configure Back Gesture</string>
+    <string name="back_from_left_title">Left side of the screen</string>
+    <string name="back_from_right_title">Right side of the screen</string>
+    <string name="back_height_title">Gesture Height</string>
+    <string name="gesturenav_header">Gesture Navigation Settings</string>
 
 
 </resources>

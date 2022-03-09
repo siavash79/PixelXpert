@@ -122,6 +122,7 @@ public class SettingsActivity extends AppCompatActivity implements
     public static class StatusbarFragment extends PreferenceFragmentCompat {
 
         Preference QSPulldownPercent;
+        private Context mContext;
 
         SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -147,18 +148,18 @@ public class SettingsActivity extends AppCompatActivity implements
         };
 
         private void updateBatteryMod() {
-            boolean enabled = !(PreferenceManager.getDefaultSharedPreferences(getContext()).getString("BatteryStyle", "0").equals(("0")));
+            boolean enabled = !(PreferenceManager.getDefaultSharedPreferences(mContext).getString("BatteryStyle", "0").equals(("0")));
             findPreference("BatteryShowPercent").setEnabled(enabled);
         }
 
         private void updateQSFooterMod() {
-            boolean enabled = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("QSFooterMod", false);
+            boolean enabled = PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("QSFooterMod", false);
 
             findPreference("QSFooterText").setEnabled(enabled);
         }
 
         private void updateQSPulldownEnabld() {
-            boolean enabled = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("QSPullodwnEnabled", false);
+            boolean enabled = PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("QSPullodwnEnabled", false);
 
             findPreference("QSPulldownPercent").setEnabled(enabled);
             findPreference("QSPulldownSide").setEnabled(enabled);
@@ -166,21 +167,57 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateQSPulldownPercent()
         {
-            int value = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt("QSPulldownPercent", 0);
+            int value = PreferenceManager.getDefaultSharedPreferences(mContext).getInt("QSPulldownPercent", 25);
             QSPulldownPercent.setSummary(value + "%");
         }
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            mContext = getContext();
             setPreferencesFromResource(R.xml.statusbar_settings, rootKey);
             QSPulldownPercent = findPreference("QSPulldownPercent");
 
-            PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(listener);
+            PreferenceManager.getDefaultSharedPreferences(mContext).registerOnSharedPreferenceChangeListener(listener);
 
             updateQSPulldownPercent();
             updateQSPulldownEnabld();
             updateQSFooterMod();
             updateBatteryMod();
+        }
+
+    }
+
+
+    public static class GestureNavFragment extends PreferenceFragmentCompat {
+
+        private Context mContext;
+
+
+        SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                updateBackGesture();
+            }
+
+        };
+
+        private void updateBackGesture() {
+            findPreference("BackLeftHeight").setEnabled(PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("BackFromLeft", true));
+            findPreference("BackRightHeight").setEnabled(PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("BackFromRight", true));
+
+
+            findPreference("BackLeftHeight").setSummary(PreferenceManager.getDefaultSharedPreferences(mContext).getInt("BackLeftHeight", 100) + "%");
+            findPreference("BackRightHeight").setSummary(PreferenceManager.getDefaultSharedPreferences(mContext).getInt("BackRightHeight", 100) + "%");
+        }
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            mContext =getContext();
+            setPreferencesFromResource(R.xml.gesture_nav_perfs, rootKey);
+
+            PreferenceManager.getDefaultSharedPreferences(mContext).registerOnSharedPreferenceChangeListener(listener);
+
+            updateBackGesture();
         }
 
     }

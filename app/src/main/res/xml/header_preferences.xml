@@ -10,4 +10,10 @@
         app:key="statusbar_header"
         app:title="@string/statusbar_header" />
 
+    <Preference
+        app:fragment="sh.siava.AOSPMods.SettingsActivity$GestureNavFragment"
+        app:key="gesturenav_header"
+        app:title="@string/gesturenav_header" />
+
+
 </PreferenceScreen>

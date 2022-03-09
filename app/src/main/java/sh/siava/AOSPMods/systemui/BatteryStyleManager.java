@@ -13,17 +13,33 @@ import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.XPrefs;
 
 
 //TODO: unknown battery symbol / percent text beside icon / update shape upon request / other shapes / dual tone
 
 public class BatteryStyleManager implements IXposedHookLoadPackage {
     public static final String listenPackage = "com.android.systemui";
-    public static boolean circleBatteryEnabled = true;
+    public static boolean circleBatteryEnabled = false;
 
     private int frameColor;
-    public static int BatteryStyle = 2;
-    public static boolean ShowPercent = true;
+    public static int BatteryStyle = 1;
+    public static boolean ShowPercent = false;
+
+    public static void updatePrefs()
+    {
+        String BatteryStyleStr = XPrefs.Xprefs.getString("BatteryStyle", "0");
+        int batteryStyle = Integer.parseInt(BatteryStyleStr);
+
+        if(batteryStyle == 0)
+        {
+            return;
+        }
+        circleBatteryEnabled = true;
+
+        BatteryStyle = batteryStyle;
+        ShowPercent = XPrefs.Xprefs.getBoolean("BatteryShowPercent", false);
+    }
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {

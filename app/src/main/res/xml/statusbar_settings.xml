@@ -15,16 +15,50 @@
     <PreferenceCategory
         android:title="@string/qs_mod_category_title"
         app:summary="@string/qs_footer_text_desc">
-
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="QSFooterMod"
+            android:title="@string/qs_footer_mod_title" />
+        <EditTextPreference
+            android:key="QSFooterText"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/qs_footer_text_value"
+            app:summary="@string/qs_footer_text_summary" />
     </PreferenceCategory>
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="QSFooterMod"
-        android:title="@string/qs_footer_mod_title" />
-    <EditTextPreference
-        android:key="QSFooterText"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/qs_footer_text_value"
-        app:summary="@string/qs_footer_text_summary" />
+    <PreferenceCategory android:title="@string/qs_pulldown_category">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="QSPullodwnEnabled"
+            android:title="@string/qs_pulldown_switch_title" />
+
+        <SeekBarPreference
+            android:key="QSPulldownPercent"
+            android:defaultValue="25"
+            app:title="@string/qs_pulldown_size" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/qs_pulldown_side_names"
+            android:entryValues="@array/qs_pulldown_side_left"
+            android:key="QSPulldownSide"
+            android:title="@string/qs_pulldown_side_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/battery_style_category_title"
+        app:summary="@string/battery_style_category_summary">
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/battery_style_names"
+            android:entryValues="@array/battery_style_codes"
+            android:key="BatteryStyle"
+            android:title="@string/battery_style_title" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="BatteryShowPercent"
+            android:title="@string/battery_show_percent_title" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

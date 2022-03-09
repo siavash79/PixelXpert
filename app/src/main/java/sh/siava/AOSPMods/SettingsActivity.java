@@ -3,21 +3,28 @@ package sh.siava.AOSPMods;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import java.io.File;
+import java.util.List;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
+import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
 
 public class SettingsActivity extends AppCompatActivity implements
@@ -109,15 +116,71 @@ public class SettingsActivity extends AppCompatActivity implements
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.lock_screen_prefs, rootKey);
 
-
         }
     }
 
     public static class StatusbarFragment extends PreferenceFragmentCompat {
 
+        Preference QSPulldownPercent;
+
+        SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                if(key.equals("QSPulldownPercent"))
+                {
+                    updateQSPulldownPercent();
+                }
+                else if(key.equals("QSPullodwnEnabled"))
+                {
+                    updateQSPulldownEnabld();
+                }
+                else if(key.equals("QSFooterMod"))
+                {
+                    updateQSFooterMod();
+                }
+                else if(key.equals("BatteryStyle"))
+                {
+                    updateBatteryMod();
+                }
+            }
+
+        };
+
+        private void updateBatteryMod() {
+            boolean enabled = !(PreferenceManager.getDefaultSharedPreferences(getContext()).getString("BatteryStyle", "0").equals(("0")));
+            findPreference("BatteryShowPercent").setEnabled(enabled);
+        }
+
+        private void updateQSFooterMod() {
+            boolean enabled = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("QSFooterMod", false);
+
+            findPreference("QSFooterText").setEnabled(enabled);
+        }
+
+        private void updateQSPulldownEnabld() {
+            boolean enabled = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("QSPullodwnEnabled", false);
+
+            findPreference("QSPulldownPercent").setEnabled(enabled);
+            findPreference("QSPulldownSide").setEnabled(enabled);
+        }
+
+        private void updateQSPulldownPercent()
+        {
+            int value = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt("QSPulldownPercent", 0);
+            QSPulldownPercent.setSummary(value + "%");
+        }
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.statusbar_settings, rootKey);
+            QSPulldownPercent = findPreference("QSPulldownPercent");
+
+            PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(listener);
+
+            updateQSPulldownPercent();
+            updateQSPulldownEnabld();
+            updateQSFooterMod();
+            updateBatteryMod();
         }
 
     }

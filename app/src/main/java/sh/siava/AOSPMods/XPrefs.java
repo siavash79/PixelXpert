@@ -16,10 +16,12 @@ import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import sh.siava.AOSPMods.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.systemui.CarrierTextManager;
 import sh.siava.AOSPMods.systemui.DoubleTapSleepLS;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSHeaderManager;
+import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
 
 public class XPrefs implements IXposedHookZygoteInit {
@@ -58,6 +60,9 @@ public class XPrefs implements IXposedHookZygoteInit {
         DoubleTapSleepLS.updatePrefs();
         QSFooterTextManager.updatePrefs();
         QSHeaderManager.updatePrefs();
+        QSQuickPullDown.updatePrefs();
+        BatteryStyleManager.updatePrefs();
+
 
     }
 }

@@ -25,6 +25,14 @@
     <string name="statusbar_header">Statusbar Settings</string>
     <string name="qs_footer_text_desc">You will need to turn your display off/on to apply</string>
     <string name="light_qs_title">Light QS Panel during light theme (might be buggy)</string>
+    <string name="qs_pulldown_size">Quick pulldown Width</string>
+    <string name="qs_pulldown_switch_title">Quick QS panel pulldown from statusbar</string>
+    <string name="qs_pulldown_side_title">Quick pulldown side</string>
+    <string name="qs_pulldown_category">Quick Settings Pulldown</string>
+    <string name="battery_style_title">Configure Battery Style</string>
+    <string name="battery_show_percent_title">Show battery percentage</string>
+    <string name="battery_style_category_title">Battery Style</string>
+    <string name="battery_style_category_summary">You will need to turn your display off/on to apply</string>
 
 
 </resources>

@@ -12,9 +12,6 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
 //        BackGestureManager.backGestureHeightFraction = 2;
 
-        BatteryStyleManager.circleBatteryEnabled = true;
-        BatteryStyleManager.BatteryStyle = 2;
-        BatteryStyleManager.ShowPercent = true;
 
         if (lpparam.packageName.equals("com.android.systemui")) {
             systemUIconnected = true;

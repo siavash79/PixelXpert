@@ -38,7 +38,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
 
                         try {
                             Runtime.getRuntime().exec("cmd uimode night yes");
-                            Thread.sleep(500);
+                            Thread.sleep(1000);
                             Runtime.getRuntime().exec("cmd uimode night no");
                         } catch (Exception e) {}
 

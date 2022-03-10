@@ -9,6 +9,7 @@ import androidx.preference.PreferenceDataStore;
 import androidx.preference.PreferenceManager;
 
 import java.io.File;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import javax.security.auth.callback.Callback;
 
@@ -32,30 +33,52 @@ public class XPrefs implements IXposedHookZygoteInit {
         XSharedPreferences pref = new XSharedPreferences(BuildConfig.APPLICATION_ID, path);
         if(pref == null)
         {
+            XposedBridge.log("SIAPOS null pref");
             return null;
         }
+
+        XposedBridge.log("SIAPOS pref not null");
+        XposedBridge.log("SIAPOS pref readable: " + pref.getFile().canRead());
 
         return pref.getFile().canRead() ? pref : null;
     }
 
+    Thread configLoader = new Thread()
+    {
+        @Override
+        public void run()
+        {
+            while (true) {
+                Xprefs = getPref("sh.siava.AOSPMods_preferences");
+                if (Xprefs != null) break;
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {}
+            }
+
+            loadEverything();
+            Xprefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+                @Override
+                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                    loadEverything();
+                }
+            });
+        }
+    };
+
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
 
-        Xprefs = getPref("sh.siava.AOSPMods_preferences");
-
+        configLoader.start(); //while the data partition isn't decrypted, we can't access config
         //first we assume that module isn't enabled for systemui, until it's proved otherwise
-        loadEverything();
 
-        Xprefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                loadEverything();
-            }
-        });
+
     }
 
     private static void loadEverything()
     {
+        if(Xprefs == null) return;
+
         Xprefs.reload();
 
         UDFPSManager.updatePrefs();
@@ -66,7 +89,5 @@ public class XPrefs implements IXposedHookZygoteInit {
         QSQuickPullDown.updatePrefs();
         BatteryStyleManager.updatePrefs();
         BackGestureManager.updatePrefs();
-
-
     }
 }

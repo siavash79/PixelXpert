@@ -9,7 +9,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
 
         if (lpparam.packageName.equals("com.android.systemui")) {
-            XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", true).commit();
+//            XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", true).commit();
         }
     }
 }

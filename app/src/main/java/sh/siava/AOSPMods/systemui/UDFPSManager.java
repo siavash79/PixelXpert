@@ -34,8 +34,6 @@ public class UDFPSManager implements IXposedHookLoadPackage {
                         ImageView mBgProtection = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBgProtection");
                         mBgProtection.setImageAlpha(0);
 //                        ImageView mLockScreenFp = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mLockScreenFp");
-
-
                     }
                 });
 
@@ -43,7 +41,6 @@ public class UDFPSManager implements IXposedHookLoadPackage {
                 "setUseBackground", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        XposedBridge.log("SIAPOSED: transparentBG:" + transparentBG);
                         if(!transparentBG) return;
                         param.args[0] = false;
                     }

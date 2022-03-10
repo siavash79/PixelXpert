@@ -154,12 +154,10 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
                             });
                     break;
                 case "SHADE_LOCKED":
-                    //Xposedbridge.log("SIAPOSED found shade lock");
                     XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                                    //Xposedbridge.log("SIAPOSED found shade lock method");
                                     if(!lightQSHeaderEnabled) return;
 
                                     XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
@@ -183,14 +181,13 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
                             });
                     break;
                 case "UNLOCKED":
-                    //Xposedbridge.log("SIAPOSED found unlock");
+
                     XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if(!lightQSHeaderEnabled) return;
 
-                                    //Xposedbridge.log("SIAPOSED found unlock method");
                                     XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
 
                                     Object mScrimBehind = XposedHelpers.getObjectField(param.thisObject, "mScrimBehind");
@@ -201,7 +198,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
             }
         }
 
-/*        Class FragmentClass = XposedHelpers.findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
+        Class FragmentClass = XposedHelpers.findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
         XposedBridge.hookAllConstructors(FragmentClass, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -211,7 +208,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
                 XposedHelpers.setObjectField(param.thisObject, "mConfigChanges", o);
             }
         });
-*/
+
         XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader,
                 "updateTheme", new XC_MethodHook() {
                     @Override

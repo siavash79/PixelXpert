@@ -22,7 +22,6 @@ public class BackGestureManager implements IXposedHookLoadPackage {
         rightEnabled = XPrefs.Xprefs.getBoolean("BackFromRight", true);
         backGestureHeightFractionLeft = XPrefs.Xprefs.getInt("BackLeftHeight", 100) / 100f;
 
-        XposedBridge.log("SIAPOSED left height: " + backGestureHeightFractionLeft);
         backGestureHeightFractionRight = XPrefs.Xprefs.getInt("BackRightHeight", 100) / 100f;
     }
 

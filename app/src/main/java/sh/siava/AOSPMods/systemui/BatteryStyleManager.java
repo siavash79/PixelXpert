@@ -47,7 +47,6 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
-        //Xposedbridge.log("BSIAPOSED: hook start");
 
         XposedHelpers.findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
             @Override
@@ -55,8 +54,6 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                 frameColor = (int) param.args[1];
             }
         });
-
-        //Xposedbridge.log("BSIAPOSED: part 2");
 
         Class BatteryMeterViewClass;
         if(Build.VERSION.SDK_INT == 31) { //Andriod 12
@@ -77,20 +74,6 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                             if (!circleBatteryEnabled) return;
 
-                            Context context = (Context) param.args[0];
-                            //Resources res = context.getResources();
-
-
-/*                TypedArray atts = context.obtainStyledAttributes((AttributeSet) param.args[1],
-                        R.styleable.BatteryMeterView ,//res.getIntArray(res.getIdentifier("BatteryMeterView", "styleable", context.getPackageName())),
-                        (int) param.args[2],
-                        0);
-
-                final int frameColor = atts.getColor(res.getIdentifier("BatteryMeterView_frameColor", "styleable", context.getPackageName()),
-                        context.getColor(res.getIdentifier("meter_background_color", "color", context.getPackageName())));
-*/
-                            //context.getColor(res.getIdentifier("meter_background_color", "color", context.getPackageName()))
-
                             CircleBatteryDrawable circl = new CircleBatteryDrawable((Context) param.args[0], frameColor);
                             circl.setShowPercent(ShowPercent);
                             circl.setMeterStyle(BatteryStyle);
@@ -104,9 +87,6 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                             XposedHelpers.setObjectField(param.thisObject, "mBatteryIconView", mBatteryIconView);
                         }
                     });
-
-
-        //Xposedbridge.log("BSIAPOSED: part 3");
 
 
         XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
@@ -123,11 +103,9 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                         mBatteryIconView.setImageDrawable(mCircleDrawable);
                         XposedHelpers.setObjectField(param.thisObject, "mBatteryIconView", mBatteryIconView);
 
-                        //Xposedbridge.log("SIAPOSED: unknown called for no reason!");
                     }
                 });
 
-        //Xposedbridge.log("BSIAPOSED: part 4");
 
         XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                 "scaleBatteryMeterViews", new XC_MethodHook() {
@@ -147,13 +125,9 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                         res.getValue(res.getIdentifier("status_bar_icon_scale_factor", "dimen", context.getPackageName()), typedValue, true);
                         float iconScaleFactor = typedValue.getFloat();
 
-                        //Xposedbridge.log("SIAPOSED: scalefac " + iconScaleFactor);
-
                         int batteryHeight = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
                         int batteryWidth = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
                         int marginBottom = res.getDimensionPixelSize(res.getIdentifier("battery_margin_bottom", "dimen", context.getPackageName()));
-
-                        //Xposedbridge.log("SIAPOSED: height " + batteryHeight);
 
                         LinearLayout.LayoutParams scaledLayoutParams = new LinearLayout.LayoutParams(
                                 (int) (batteryWidth * iconScaleFactor), (int) (batteryHeight * iconScaleFactor));
@@ -165,8 +139,6 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                         param.setResult(null);
                     }
                 });
-
-        //Xposedbridge.log("BSIAPOSED: part 5");
 
         if(Build.VERSION.SDK_INT == 31) { //Android 12
 
@@ -196,7 +168,6 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                         }
                     });
         }
-        //Xposedbridge.log("BSIAPOSED: part 6");
 
         XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                 "onPowerSaveChanged", boolean.class, new XC_MethodHook() {
@@ -209,7 +180,6 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                     }
                 });
 
-        //Xposedbridge.log("BSIAPOSED: part 7");
 
         XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                 "updateColors", int.class, int.class, int.class, new XC_MethodHook() {
@@ -222,7 +192,5 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                         mCircleDrawable.setColors((int) param.args[0], (int) param.args[1], (int) param.args[2]);
                     }
                 });
-        //Xposedbridge.log("BSIAPOSED: part 8");
-        //Xposedbridge.log("BSIAPOSED: hook finished?");
     }
 }

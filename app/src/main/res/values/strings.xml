@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">AOSP Mods</string>
     <string name="xposed_desc" translatable="false">Modifications on AOSP based ROMs</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings">AOSP Mods</string>
 
 
 
@@ -38,6 +38,7 @@
     <string name="back_from_right_title">Right side of the screen</string>
     <string name="back_height_title">Gesture Height</string>
     <string name="gesturenav_header">Gesture Navigation Settings</string>
+    <string name="error_not_activated">Module does not seem to be correctly activated in LSPosed</string>
 
 
 </resources>

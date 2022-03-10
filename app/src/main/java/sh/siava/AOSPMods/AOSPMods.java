@@ -5,16 +5,11 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.systemui.*;
 public class AOSPMods implements IXposedHookLoadPackage{
 
-    // THIS is used to detect either the module is enabled correctly or not
-    public static boolean systemUIconnected = false;
-
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-//        BackGestureManager.backGestureHeightFraction = 2;
-
 
         if (lpparam.packageName.equals("com.android.systemui")) {
-            systemUIconnected = true;
+            XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", true).commit();
         }
     }
 }

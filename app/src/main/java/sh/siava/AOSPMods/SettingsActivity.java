@@ -1,13 +1,17 @@
 package sh.siava.AOSPMods;
 
+import android.app.AlertDialog;
 import android.app.Application;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.ActionBar;
@@ -64,7 +68,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 });
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(false);
         }
     }
 
@@ -98,6 +102,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 .addToBackStack(null)
                 .commit();
         setTitle(pref.getTitle());
+
         return true;
     }
 

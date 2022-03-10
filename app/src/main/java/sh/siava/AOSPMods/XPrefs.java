@@ -42,6 +42,9 @@ public class XPrefs implements IXposedHookZygoteInit {
     public void initZygote(StartupParam startupParam) throws Throwable {
 
         Xprefs = getPref("sh.siava.AOSPMods_preferences");
+
+        //first we assume that module isn't enabled for systemui, until it's proved otherwise
+        XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", false).commit();
         loadEverything();
 
         Xprefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {

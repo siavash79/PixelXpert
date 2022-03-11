@@ -11,7 +11,7 @@
     </string-array>
 
     <string-array name="battery_style_names">
-        <item>Default (reuires restart to apply)</item>
+        <item>Default (requires restart to apply)</item>
         <item>Circle</item>
         <item>Dashed Circle</item>
     </string-array>

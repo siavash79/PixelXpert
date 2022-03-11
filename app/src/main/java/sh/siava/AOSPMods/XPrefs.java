@@ -21,6 +21,7 @@ import sh.siava.AOSPMods.systemui.BackGestureManager;
 import sh.siava.AOSPMods.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.systemui.CarrierTextManager;
 import sh.siava.AOSPMods.systemui.DoubleTapSleepLS;
+import sh.siava.AOSPMods.systemui.NavBarResizer;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSHeaderManager;
 import sh.siava.AOSPMods.systemui.QSQuickPullDown;
@@ -89,5 +90,6 @@ public class XPrefs implements IXposedHookZygoteInit {
         QSQuickPullDown.updatePrefs();
         BatteryStyleManager.updatePrefs();
         BackGestureManager.updatePrefs();
+        NavBarResizer.updatePrefs();
     }
 }

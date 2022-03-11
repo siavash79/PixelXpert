@@ -2,6 +2,6 @@
 <resources>
     <string-array name="module_scope">
         <item>com.android.systemui</item>
-        <item>com.google.android.apps.photos</item>
+        <item>android</item>
     </string-array>
 </resources>

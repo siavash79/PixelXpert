@@ -24,6 +24,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -35,6 +36,16 @@ public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     private static final String TITLE_TAG = "settingsActivityTitle";
+
+    public void RestartSysui(View view)
+    {
+        try {
+            Runtime.getRuntime().exec("su -c killall com.android.systemui");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,9 +214,15 @@ public class SettingsActivity extends AppCompatActivity implements
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
                 updateBackGesture();
+                updateNavPill();
             }
 
         };
+
+        private void updateNavPill() {
+            findPreference("GesPillWidthModPos").setEnabled(PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("GesPillWidthMod", true));
+            findPreference("GesPillWidthModPos").setSummary(PreferenceManager.getDefaultSharedPreferences(mContext).getInt("GesPillWidthModPos", 50)*2 + "% of standard width");
+        }
 
         private void updateBackGesture() {
             findPreference("BackLeftHeight").setEnabled(PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("BackFromLeft", true));
@@ -224,6 +241,7 @@ public class SettingsActivity extends AppCompatActivity implements
             PreferenceManager.getDefaultSharedPreferences(mContext).registerOnSharedPreferenceChangeListener(listener);
 
             updateBackGesture();
+            updateNavPill();
         }
 
     }

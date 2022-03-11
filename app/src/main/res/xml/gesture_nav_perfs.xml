@@ -21,5 +21,17 @@
             app:title="@string/back_height_title" />
 
     </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/gesture_nav_pill_cat"
+        app:summary="@string/sysui_restart_needed">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="GesPillWidthMod"
+            android:title="@string/gesture_nav_pill_mod_title" />
+        <SeekBarPreference
+            android:defaultValue="50"
+            android:key="GesPillWidthModPos"
+            app:title="@string/gesture_nav_pill_width_title" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

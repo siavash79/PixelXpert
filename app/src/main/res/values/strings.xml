@@ -39,6 +39,10 @@
     <string name="back_height_title">Gesture Height</string>
     <string name="gesturenav_header">Gesture Navigation Settings</string>
     <string name="error_not_activated">Module does not seem to be correctly activated in LSPosed</string>
+    <string name="gesture_nav_pill_cat">Navigation Bar Pill Width</string>
+    <string name="gesture_nav_pill_mod_title">Modify Navbar Pill Width</string>
+    <string name="gesture_nav_pill_width_title">Width comparing to standard size</string>
+    <string name="sysui_restart_needed">Requires restarting SystemUI to apply</string>
 
 
 </resources>

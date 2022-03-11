@@ -1,3 +1,4 @@
+sh.siava.AOSPMods.XPrefs
 sh.siava.AOSPMods.AOSPMods
 sh.siava.AOSPMods.systemui.BackGestureManager
 sh.siava.AOSPMods.systemui.DoubleTapSleepLS
@@ -8,4 +9,5 @@ sh.siava.AOSPMods.systemui.QSFooterTextManager
 sh.siava.AOSPMods.systemui.QSQuickPullDown
 sh.siava.AOSPMods.systemui.CarrierTextManager
 sh.siava.AOSPMods.systemui.KeyguardCameraShortcut
-sh.siava.AOSPMods.XPrefs
+sh.siava.AOSPMods.systemui.BackToKill
+sh.siava.AOSPMods.systemui.NavBarResizer

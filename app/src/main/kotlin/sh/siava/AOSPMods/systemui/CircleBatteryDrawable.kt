@@ -319,7 +319,7 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
         if (colors.size > 1) {
             warningTextPaint.color = colors[1]
         }
-        chargeColor = R.color.ic_launcher_background //getColorStateListDefaultColor(context, res.getIdentifier("fillColor", "attr", context.opPackageName)) //R.attr.fillColor)//R.color.meter_consumed_color)
+        chargeColor = res.getIdentifier("meter_consumed_color", "color", context.packageName) //getColorStateListDefaultColor(context, res.getIdentifier("fillColor", "attr", context.opPackageName)) //R.attr.fillColor)//R.color.meter_consumed_color)
         boltPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         boltPaint.color = getColorStateListDefaultColor(
                 context,

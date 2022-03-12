@@ -1,36 +1,20 @@
 package sh.siava.AOSPMods;
 
-import android.app.AlertDialog;
-import android.app.Application;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
-import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
-import sh.siava.AOSPMods.systemui.QSQuickPullDown;
-import sh.siava.AOSPMods.systemui.UDFPSManager;
 
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
@@ -125,6 +109,14 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
+    public static class NavFragment extends PreferenceFragmentCompat {
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.nav_prefs, rootKey);
+        }
+    }
+
 
 
     public static class LockScreenFragment extends PreferenceFragmentCompat {
@@ -133,6 +125,14 @@ public class SettingsActivity extends AppCompatActivity implements
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.lock_screen_prefs, rootKey);
 
+        }
+    }
+
+    public static class ThreeButtonNavFragment extends PreferenceFragmentCompat {
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.three_button_prefs, rootKey);
         }
     }
 

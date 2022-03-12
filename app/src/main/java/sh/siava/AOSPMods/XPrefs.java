@@ -18,9 +18,11 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import sh.siava.AOSPMods.systemui.BackGestureManager;
+import sh.siava.AOSPMods.systemui.BackToKill;
 import sh.siava.AOSPMods.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.systemui.CarrierTextManager;
 import sh.siava.AOSPMods.systemui.DoubleTapSleepLS;
+import sh.siava.AOSPMods.systemui.LTEiconChange;
 import sh.siava.AOSPMods.systemui.NavBarResizer;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSHeaderManager;
@@ -91,5 +93,7 @@ public class XPrefs implements IXposedHookZygoteInit {
         BatteryStyleManager.updatePrefs();
         BackGestureManager.updatePrefs();
         NavBarResizer.updatePrefs();
+        LTEiconChange.updatePrefs();
+        BackToKill.updatePrefs();
     }
 }

@@ -8,6 +8,10 @@
         android:title="@string/light_qs_title" />
     <SwitchPreference
         android:defaultValue="false"
+        android:key="Show4GIcon"
+        android:title="@string/lte_icon_mod_title" />
+    <SwitchPreference
+        android:defaultValue="false"
         android:key="DoubleTapSleep"
         android:title="@string/double_tap_sleep_title"
         app:summaryOff="@string/double_tap_sleep_off"

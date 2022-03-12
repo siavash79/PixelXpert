@@ -43,6 +43,10 @@
     <string name="gesture_nav_pill_mod_title">Modify Navbar Pill Width</string>
     <string name="gesture_nav_pill_width_title">Width comparing to standard size</string>
     <string name="sysui_restart_needed">Requires restarting SystemUI to apply</string>
+    <string name="threebutton_header_title">3-Button Navigation Settings</string>
+    <string name="nav_header">Navigationbar Settings</string>
+    <string name="back_longpress_kill_title">Longpress Back to kill foreground app</string>
+    <string name="lte_icon_mod_title">Show 4G icon instead to LTE</string>
 
 
 </resources>

@@ -1,0 +1,10 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Preference
+        app:fragment="sh.siava.AOSPMods.SettingsActivity$GestureNavFragment"
+        app:key="gesturenav_header"
+        app:title="@string/gesturenav_header" />
+    <Preference
+        app:fragment="sh.siava.AOSPMods.SettingsActivity$ThreeButtonNavFragment"
+        app:key="threebutton_header"
+        app:title="@string/threebutton_header_title" />
+</PreferenceScreen>

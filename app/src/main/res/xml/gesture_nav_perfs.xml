@@ -2,6 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:visibility="visible">
+
     <PreferenceCategory android:title="@string/back_gesture_category_title">
         <SwitchPreference
             android:defaultValue="true"

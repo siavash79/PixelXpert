@@ -20,8 +20,8 @@
             android:key="BackRightHeight"
             android:defaultValue="100"
             app:title="@string/back_height_title" />
-
     </PreferenceCategory>
+
     <PreferenceCategory
         android:title="@string/gesture_nav_pill_cat"
         app:summary="@string/sysui_restart_needed">

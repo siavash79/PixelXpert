@@ -9,8 +9,8 @@ android {
         applicationId "sh.siava.AOSP_lightQSOverlay"
         minSdk 31
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "0.0.003"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

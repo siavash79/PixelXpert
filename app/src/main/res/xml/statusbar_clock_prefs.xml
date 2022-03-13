@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="0"
+        android:entries="@array/sbc_position_names"
+        android:entryValues="@array/sbc_position_codes"
+        android:key="SBClockLoc"
+        android:title="@string/sbc_position_title"
+        app:summary="@string/sysui_restart_needed" />
+    <ListPreference
+        android:defaultValue="2"
+        android:entries="@array/sbc_ampm_style_names"
+        android:entryValues="@array/sbc_ampm_style_codes"
+        android:key="SBCAmPmStyle"
+        android:summary="@string/sbc_may_take_one_minute"
+        android:title="@string/sbc_ampm_style" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="SBCShowSeconds"
+        android:title="@string/sbc_show_secs" />
+    <PreferenceCategory
+        android:summary="@string/sbc_may_take_one_minute"
+        android:title="@string/sbc_date_cat">
+        <DropDownPreference
+            android:defaultValue="0"
+            android:entries="@array/sbc_day_week_names"
+            android:entryValues="@array/sbc_day_week_codes"
+            android:key="SBCDayOfWeekMode"
+            android:title="@string/sbc_day_of_week_options" />
+        <PreferenceCategory
+            android:title="@string/sbc_advanced_cat"
+            app:summary="@string/sbc_advanced_sum">
+            <EditTextPreference
+                android:defaultValue=""
+                android:key="DateFormatBeforeSBC"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="@string/sbc_custom_date_before" />
+            <SwitchPreference
+                android:defaultValue="true"
+                android:key="BeforeSBCSmall"
+                android:title="@string/sbc_date_small" />
+            <EditTextPreference
+                android:defaultValue=""
+                android:key="DateFormatAfterSBC"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="@string/sbc_custom_date_after" />
+            <SwitchPreference
+                android:defaultValue="true"
+                android:key="AfterSBCSmall"
+                android:title="@string/sbc_date_small" />
+        </PreferenceCategory>
+    </PreferenceCategory>
+</PreferenceScreen>

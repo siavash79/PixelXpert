@@ -22,5 +22,45 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="sbc_position_names">
+        <item>Left (Default)</item>
+        <item>Center</item>
+        <item>Right</item>
+    </string-array>
+
+    <string-array name="sbc_position_codes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="sbc_ampm_style_names">
+        <item>Hide (Default)</item>
+        <item>100% size of the clock</item>
+        <item>70% size of the clock</item>
+    </string-array>
+
+    <string-array name="sbc_ampm_style_codes">
+        <item>2</item>
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+
+    <string-array name="sbc_day_week_names">
+        <item>Hide (Default)</item>
+        <item>Before Clock (100%)</item>
+        <item>Before Clock (70%)</item>
+        <item>After Clock (100%)</item>
+        <item>After Clock (70%)</item>
+    </string-array>
+
+    <string-array name="sbc_day_week_codes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 
 </resources>

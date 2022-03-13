@@ -27,6 +27,7 @@ import sh.siava.AOSPMods.systemui.NavBarResizer;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSHeaderManager;
 import sh.siava.AOSPMods.systemui.QSQuickPullDown;
+import sh.siava.AOSPMods.systemui.StatusbarClock;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
 
 public class XPrefs implements IXposedHookZygoteInit {
@@ -72,15 +73,17 @@ public class XPrefs implements IXposedHookZygoteInit {
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
 
-        configLoader.start(); //while the data partition isn't decrypted, we can't access config
-        //first we assume that module isn't enabled for systemui, until it's proved otherwise
-
+        loadEverything();
 
     }
 
-    private static void loadEverything()
+    private void loadEverything()
     {
-        if(Xprefs == null) return;
+        if(Xprefs == null || !Xprefs.getFile().canRead())
+        {
+            configLoader.start();
+            return;
+        }
 
         Xprefs.reload();
 
@@ -95,5 +98,6 @@ public class XPrefs implements IXposedHookZygoteInit {
         NavBarResizer.updatePrefs();
         LTEiconChange.updatePrefs();
         BackToKill.updatePrefs();
+        StatusbarClock.updatePrefs();
     }
 }

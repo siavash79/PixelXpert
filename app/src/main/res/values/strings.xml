@@ -47,6 +47,18 @@
     <string name="nav_header">Navigationbar Settings</string>
     <string name="back_longpress_kill_title">Longpress Back to kill foreground app</string>
     <string name="lte_icon_mod_title">Show 4G icon instead to LTE</string>
+    <string name="sbc_position_title">Clock Position</string>
+    <string name="sbc_ampm_style">AM/PM Style</string>
+    <string name="sbc_show_secs">Show seconds</string>
+    <string name="sbc_date_cat">Date Options</string>
+    <string name="sbc_day_of_week_options">Show day of week with clock</string>
+    <string name="sbc_advanced_cat">Advanced date (will supersede above setting!)</string>
+    <string name="sbc_advanced_sum">Please read Java date format documentation</string>
+    <string name="sbc_custom_date_before">Custom date format before clock</string>
+    <string name="sbc_date_small">Smaller size (70%)</string>
+    <string name="sbc_custom_date_after">Custom date format after clock</string>
+    <string name="sbc_header">Statusbar Clock Customization...</string>
+    <string name="sbc_may_take_one_minute">Applied on next time update or SystemUI restart</string>
 
 
 </resources>

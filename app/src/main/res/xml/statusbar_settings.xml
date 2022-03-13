@@ -16,6 +16,10 @@
         android:title="@string/double_tap_sleep_title"
         app:summaryOff="@string/double_tap_sleep_off"
         app:summaryOn="@string/double_tap_sleep_on" />
+   <Preference
+       app:fragment="sh.siava.AOSPMods.SettingsActivity$SBCFragment"
+       app:key="sbc_header"
+       app:title="@string/sbc_header" />
     <PreferenceCategory
         android:title="@string/qs_mod_category_title"
         app:summary="@string/qs_footer_text_desc">

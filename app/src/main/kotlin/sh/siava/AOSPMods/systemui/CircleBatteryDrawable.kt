@@ -155,6 +155,9 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
 
         iconTint = fillColor
         framePaint.color = bgColor
+//<Sia: Fixed visibility issues
+        framePaint.alpha = 80;
+//>
         boltPaint.color = fillColor
         chargeColor = fillColor
 

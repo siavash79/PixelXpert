@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -85,7 +86,19 @@ public class StatusbarClock implements IXposedHookLoadPackage {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader,
+
+        Class CollapsedStatusBarFragmentClass;
+        if(Build.VERSION.SDK_INT == 31) { //Andriod 12
+            CollapsedStatusBarFragmentClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.CollapsedStatusBarFragment", lpparam.classLoader);
+        }
+        else if (Build.VERSION.SDK_INT == 32) //Android 12L-13
+        {
+            CollapsedStatusBarFragmentClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
+        } else
+        {
+            return;
+        }
+        XposedHelpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
                 "onViewCreated", View.class, Bundle.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {

@@ -98,13 +98,38 @@ public class StatusbarClock implements IXposedHookLoadPackage {
         {
             return;
         }
+        Class QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
+        XposedBridge.hookAllConstructors(QuickStatusBarHeaderControllerClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                XposedHelpers.setAdditionalInstanceField(
+                        XposedHelpers.getObjectField(param.thisObject, "mClockView"),
+                        "mClockParent",
+                        2);
+            }
+        });
+        Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
+
+        XposedHelpers.findAndHookMethod(QuickStatusBarHeaderClass,
+                "onFinishInflate", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        XposedHelpers.setAdditionalInstanceField(
+                                XposedHelpers.getObjectField(param.thisObject, "mClockView"),
+                                "mClockParent",
+                                3);
+                    }
+                });
+
         XposedHelpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
                 "onViewCreated", View.class, Bundle.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        View mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
+                        XposedHelpers.setAdditionalInstanceField(mClockView, "mClockParent", 1);
+
                         if(position == POSITION_LEFT) return;
 
-                        View mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
                         ViewGroup mClockParent = (ViewGroup) mClockView.getParent();
 
                         ViewGroup targetArea = null;
@@ -139,6 +164,15 @@ public class StatusbarClock implements IXposedHookLoadPackage {
                 "getSmallTime", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        int mClockParent = 1;
+                        try {
+                            mClockParent = (int) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mClockParent");
+//                            XposedBridge.log("SIAPOSED clock parent:" + mClockParent);
+                        }
+                        catch(Exception e){}
+
+                        if(mClockParent > 1) return; //We don't want custom format in QS header. do we?
+
                         Calendar mCalendar = (Calendar) XposedHelpers.getObjectField(param.thisObject, "mCalendar");
 
                         SpannableStringBuilder result = new SpannableStringBuilder();

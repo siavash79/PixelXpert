@@ -25,6 +25,7 @@ import sh.siava.AOSPMods.systemui.DoubleTapSleepLS;
 import sh.siava.AOSPMods.systemui.LTEiconChange;
 import sh.siava.AOSPMods.systemui.NavBarResizer;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
+import sh.siava.AOSPMods.systemui.QSHaptic;
 import sh.siava.AOSPMods.systemui.QSHeaderManager;
 import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.StatusbarClock;
@@ -99,5 +100,6 @@ public class XPrefs implements IXposedHookZygoteInit {
         LTEiconChange.updatePrefs();
         BackToKill.updatePrefs();
         StatusbarClock.updatePrefs();
+        QSHaptic.updatePrefs();
     }
 }

@@ -1,22 +1,10 @@
 package sh.siava.AOSPMods;
 
-import android.app.Application;
 import android.content.SharedPreferences;
-import android.view.inputmethod.InputMethodSession;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceDataStore;
-import androidx.preference.PreferenceManager;
-
-import java.io.File;
-import java.util.concurrent.ThreadPoolExecutor;
-
-import javax.security.auth.callback.Callback;
 
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import sh.siava.AOSPMods.systemui.BackGestureManager;
 import sh.siava.AOSPMods.systemui.BackToKill;
 import sh.siava.AOSPMods.systemui.BatteryStyleManager;
@@ -28,7 +16,7 @@ import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSHaptic;
 import sh.siava.AOSPMods.systemui.QSHeaderManager;
 import sh.siava.AOSPMods.systemui.QSQuickPullDown;
-import sh.siava.AOSPMods.systemui.StatusbarClock;
+import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
 
 public class XPrefs implements IXposedHookZygoteInit {
@@ -99,7 +87,7 @@ public class XPrefs implements IXposedHookZygoteInit {
         NavBarResizer.updatePrefs();
         LTEiconChange.updatePrefs();
         BackToKill.updatePrefs();
-        StatusbarClock.updatePrefs();
+        StatusbarMods.updatePrefs();
         QSHaptic.updatePrefs();
     }
 }

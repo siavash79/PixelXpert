@@ -1,7 +1,10 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.CharacterStyle;
@@ -9,11 +12,10 @@ import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.provider.AlarmClock;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import javax.security.auth.callback.Callback;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -22,9 +24,10 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.XPrefs;
 
-public class StatusbarClock implements IXposedHookLoadPackage {
+public class StatusbarMods implements IXposedHookLoadPackage {
     public static final String listenPackage = "com.android.systemui";
 
+    //Clock Settings
     private static final int POSITION_LEFT = 0;
     private static final int POSITION_CENTER = 1;
     private static final int POSITION_RIGHT = 2;
@@ -33,15 +36,21 @@ public class StatusbarClock implements IXposedHookLoadPackage {
     private static final int AM_PM_STYLE_SMALL   = 1;
     private static final int AM_PM_STYLE_GONE    = 2;
 
-    public static int position = POSITION_LEFT;
+    public static int clockPosition = POSITION_LEFT;
     public static int mAmPmStyle = AM_PM_STYLE_GONE;
     public static boolean mShowSeconds = false;
     public static String mDateFormatBefore = "", mDateFormatAfter = "";
     public static boolean mBeforeSmall = true, mAfterSmall = true;
 
+    //clickable settings
+    Object mActivityStarter;
+
+
     public static void updatePrefs()
     {
-        position = Integer.parseInt(XPrefs.Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
+
+        //clock settings
+        clockPosition = Integer.parseInt(XPrefs.Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
         mShowSeconds = XPrefs.Xprefs.getBoolean("SBCShowSeconds", false);
         mAmPmStyle = Integer.parseInt(XPrefs.Xprefs.getString("SBCAmPmStyle", String.valueOf(AM_PM_STYLE_GONE)));
 
@@ -80,14 +89,20 @@ public class StatusbarClock implements IXposedHookLoadPackage {
                     break;
             }
         }
+        //end clock settings
+
+        //clickable battery settings
+
     }
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-
+        Class ActivityStarterClass = XposedHelpers.findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
+        Class DependencyClass = XposedHelpers.findClass("com.android.systemui.Dependency", lpparam.classLoader);
         Class CollapsedStatusBarFragmentClass;
+
         if(Build.VERSION.SDK_INT == 31) { //Andriod 12
             CollapsedStatusBarFragmentClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.CollapsedStatusBarFragment", lpparam.classLoader);
         }
@@ -99,6 +114,15 @@ public class StatusbarClock implements IXposedHookLoadPackage {
             return;
         }
         Class QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
+        Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
+
+        XposedBridge.hookAllConstructors(QuickStatusBarHeaderClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                mActivityStarter = XposedHelpers.callStaticMethod(DependencyClass, "get", ActivityStarterClass);
+            }
+        });
+
         XposedBridge.hookAllConstructors(QuickStatusBarHeaderControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -108,12 +132,26 @@ public class StatusbarClock implements IXposedHookLoadPackage {
                         2);
             }
         });
-        Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 
         XposedHelpers.findAndHookMethod(QuickStatusBarHeaderClass,
                 "onFinishInflate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        //Clickable icons
+                        Object mBatteryRemainingIcon = XposedHelpers.getObjectField(param.thisObject, "mBatteryRemainingIcon");
+                        Object mDateView = XposedHelpers.getObjectField(param.thisObject, "mDateView");
+                        Object mClockView = XposedHelpers.getObjectField(param.thisObject, "mClockView");
+
+                        ClickListener clickListener = new ClickListener(param.thisObject);
+
+
+                        XposedHelpers.callMethod(mBatteryRemainingIcon, "setOnClickListener", clickListener);
+                        XposedHelpers.callMethod(mClockView, "setOnClickListener", clickListener);
+                        XposedHelpers.callMethod(mClockView, "setOnLongClickListener", clickListener);
+                        XposedHelpers.callMethod(mDateView, "setOnClickListener", clickListener);
+                        XposedHelpers.callMethod(mDateView, "setOnLongClickListener", clickListener);
+
+                        //to recognize clock's parent
                         XposedHelpers.setAdditionalInstanceField(
                                 XposedHelpers.getObjectField(param.thisObject, "mClockView"),
                                 "mClockParent",
@@ -128,13 +166,13 @@ public class StatusbarClock implements IXposedHookLoadPackage {
                         View mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
                         XposedHelpers.setAdditionalInstanceField(mClockView, "mClockParent", 1);
 
-                        if(position == POSITION_LEFT) return;
+                        if(clockPosition == POSITION_LEFT) return;
 
                         ViewGroup mClockParent = (ViewGroup) mClockView.getParent();
 
                         ViewGroup targetArea = null;
 
-                        switch (position)
+                        switch (clockPosition)
                         {
                             case POSITION_CENTER:
                                 View mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
@@ -182,6 +220,56 @@ public class StatusbarClock implements IXposedHookLoadPackage {
                         param.setResult(result);
                     }
                 });
+    }
+
+    class ClickListener implements View.OnClickListener, View.OnLongClickListener
+    {
+        Object parent;
+        public ClickListener(Object parent)
+        {
+            this.parent = parent;
+        }
+        @Override
+        public void onClick(View v) {
+            Object mBatteryRemainingIcon = XposedHelpers.getObjectField(parent, "mBatteryRemainingIcon");
+            Object mDateView = XposedHelpers.getObjectField(parent, "mDateView");
+            Object mClockView = XposedHelpers.getObjectField(parent, "mClockView");
+            boolean mExpanded = (boolean) XposedHelpers.getObjectField(parent, "mExpanded");
+
+
+            if(v.equals(mBatteryRemainingIcon))
+            {
+                XposedHelpers.callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(Intent.ACTION_POWER_USAGE_SUMMARY),0);
+            }
+            else if(mExpanded && v.equals(mClockView))
+            {
+                XposedHelpers.callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(AlarmClock.ACTION_SHOW_ALARMS),0);
+            }
+            else if (v == mDateView || (v == mClockView && !mExpanded))
+            {
+                Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+                builder.appendPath("time");
+                builder.appendPath(Long.toString(System.currentTimeMillis()));
+                Intent todayIntent = new Intent(Intent.ACTION_VIEW, builder.build());
+                XposedHelpers.callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", todayIntent,0);
+            }
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            Object mDateView = XposedHelpers.getObjectField(parent, "mDateView");
+            Object mClockView = XposedHelpers.getObjectField(parent, "mClockView");
+
+            if (v == mClockView || v == mDateView) {
+                Intent nIntent = new Intent(Intent.ACTION_MAIN);
+                nIntent.setClassName("com.android.settings",
+                        "com.android.settings.Settings$DateTimeSettingsActivity");
+                XposedHelpers.callMethod(mActivityStarter, "startActivity", nIntent, true /* dismissShade */);
+//                mVibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                return true;
+            }
+            return false;
+        }
     }
 
     private static CharSequence getFormattedDate(String dateFormat, Calendar calendar, boolean small)

@@ -10,7 +10,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 public class KeyguardCameraShortcut implements IXposedHookLoadPackage {
     public static final String listenPackage = "com.android.systemui";
-    public static boolean showCameraOnLockscreen = true;
+    public static boolean showCameraOnLockscreen = false;
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {

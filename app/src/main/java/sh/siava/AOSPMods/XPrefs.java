@@ -17,8 +17,10 @@ import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSHaptic;
 import sh.siava.AOSPMods.systemui.QSHeaderManager;
 import sh.siava.AOSPMods.systemui.QSQuickPullDown;
+import sh.siava.AOSPMods.systemui.ScreenshotController;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
+
 
 public class XPrefs implements IXposedHookZygoteInit {
 
@@ -91,6 +93,7 @@ public class XPrefs implements IXposedHookZygoteInit {
         StatusbarMods.updatePrefs();
         QSHaptic.updatePrefs();
         FeatureFlagsMods.updatePrefs();
+        ScreenshotController.updatePrefs();
 
 
     }

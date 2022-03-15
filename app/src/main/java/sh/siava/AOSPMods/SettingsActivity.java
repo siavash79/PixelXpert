@@ -130,6 +130,16 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
+    public static class MiscFragment extends PreferenceFragmentCompat {
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.misc_prefs, rootKey);
+
+        }
+    }
+
+
     public static class SBCFragment extends PreferenceFragmentCompat {
 
         @Override

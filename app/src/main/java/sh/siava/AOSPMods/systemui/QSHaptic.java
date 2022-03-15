@@ -13,13 +13,13 @@ import sh.siava.AOSPMods.XPrefs;
 
 public class QSHaptic implements IXposedHookLoadPackage {
     public static final String listenPackage = "com.android.systemui";
-    public static boolean QSHapticEnabled = true;
+    public static boolean QSHapticEnabled = false;
     public static boolean hasVibrator = false;
     private static Vibrator mVibrator;
 
     public static void updatePrefs()
     {
-        QSHapticEnabled = XPrefs.Xprefs.getBoolean("QSHapticEnabled", true);
+        QSHapticEnabled = XPrefs.Xprefs.getBoolean("QSHapticEnabled", false);
     }
 
     @Override
@@ -49,6 +49,7 @@ public class QSHaptic implements IXposedHookLoadPackage {
     class vibrateFeedback extends XC_MethodHook {
         @Override
         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+            if(!QSHapticEnabled) return;
             XposedHelpers.callMethod(mVibrator, "vibrate", 8);
         }
     }

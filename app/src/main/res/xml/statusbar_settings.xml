@@ -16,6 +16,10 @@
         android:title="@string/double_tap_sleep_title"
         app:summaryOff="@string/double_tap_sleep_off"
         app:summaryOn="@string/double_tap_sleep_on" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="QSHapticEnabled"
+        android:title="@string/qs_haptic_switch_title" />
    <Preference
        app:fragment="sh.siava.AOSPMods.SettingsActivity$SBCFragment"
        app:key="sbc_header"

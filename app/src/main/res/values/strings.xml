@@ -59,6 +59,9 @@
     <string name="sbc_custom_date_after">Custom date format after clock</string>
     <string name="sbc_header">Statusbar Clock Customization...</string>
     <string name="sbc_may_take_one_minute">Applied on next time update or SystemUI restart</string>
+    <string name="misc_header">Miscellaneous Settings</string>
+    <string name="screenshot_sound_disable_title">Disable Screenshot sound</string>
+    <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
 
 
 </resources>

@@ -94,7 +94,5 @@ public class XPrefs implements IXposedHookZygoteInit {
         QSHaptic.updatePrefs();
         FeatureFlagsMods.updatePrefs();
         ScreenshotController.updatePrefs();
-
-
     }
 }

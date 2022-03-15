@@ -15,5 +15,9 @@
         app:key="nav_header"
         app:title="@string/nav_header" />
 
+    <Preference
+        app:fragment="sh.siava.AOSPMods.SettingsActivity$MiscFragment"
+        app:key="misc_header"
+        app:title="@string/misc_header" />
 
 </PreferenceScreen>

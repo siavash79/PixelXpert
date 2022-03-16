@@ -12,7 +12,7 @@ android {
         minSdkVersion 31
         targetSdkVersion 31
         versionCode 4
-        versionName "1.0.0-canary-005"
+        versionName "1.0.0-canary-004"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

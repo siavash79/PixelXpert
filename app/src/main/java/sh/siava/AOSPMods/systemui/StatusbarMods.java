@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -12,7 +13,6 @@ import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.provider.AlarmClock;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

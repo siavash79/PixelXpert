@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -45,6 +47,8 @@ public class StatusbarMods implements IXposedHookLoadPackage {
     //clickable settings
     Object mActivityStarter;
 
+    //vibration icon
+    public static boolean showVibrationIcon = true;
 
     public static void updatePrefs()
     {
@@ -102,6 +106,9 @@ public class StatusbarMods implements IXposedHookLoadPackage {
         Class ActivityStarterClass = XposedHelpers.findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
         Class DependencyClass = XposedHelpers.findClass("com.android.systemui.Dependency", lpparam.classLoader);
         Class CollapsedStatusBarFragmentClass;
+        Class KeyguardStatusBarViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
+        Class QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
+        Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 
         if(Build.VERSION.SDK_INT == 31) { //Andriod 12
             CollapsedStatusBarFragmentClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.CollapsedStatusBarFragment", lpparam.classLoader);
@@ -113,8 +120,6 @@ public class StatusbarMods implements IXposedHookLoadPackage {
         {
             return;
         }
-        Class QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
-        Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 
         XposedBridge.hookAllConstructors(QuickStatusBarHeaderClass, new XC_MethodHook() {
             @Override
@@ -159,10 +164,43 @@ public class StatusbarMods implements IXposedHookLoadPackage {
                     }
                 });
 
+        XposedBridge.hookAllConstructors(KeyguardStatusBarViewControllerClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                //Removing vibration icon from blocked icons in lockscreen
+                if(showVibrationIcon) {
+                    List<String> OldmBlockedIcons = (List<String>) XposedHelpers.getObjectField(param.thisObject, "mBlockedIcons");
+                    List<String> NewmBlockedIcons = new ArrayList<>();
+                    for (String item : OldmBlockedIcons) {
+                        if (!item.equals("volume")) {
+                            NewmBlockedIcons.add(item);
+                        }
+                    }
+                    XposedHelpers.setObjectField(param.thisObject, "mBlockedIcons", NewmBlockedIcons);
+                }
+            }
+        });
+
         XposedHelpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
                 "onViewCreated", View.class, Bundle.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+
+                        //<Showing vibration icon in collapsed statusbar>
+                        if(showVibrationIcon) {
+                            List<String> mBlockedIcons = (List<String>) XposedHelpers.getObjectField(param.thisObject, "mBlockedIcons");
+                            Object mStatusBarIconController = XposedHelpers.getObjectField(param.thisObject, "mStatusBarIconController");
+                            Object mDarkIconManager = XposedHelpers.getObjectField(param.thisObject, "mDarkIconManager");
+
+                            XposedHelpers.callMethod(mStatusBarIconController, "removeIconGroup", mDarkIconManager);
+
+                            mBlockedIcons.remove("volume");
+                            XposedHelpers.callMethod(mDarkIconManager, "setBlockList", mBlockedIcons);
+                            XposedHelpers.callMethod(mStatusBarIconController, "addIconGroup", mDarkIconManager);
+                        }
+                        //</Showing vibration icon in collapsed statusbar>
+
+                        //<modding clock>
                         View mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
                         XposedHelpers.setAdditionalInstanceField(mClockView, "mClockParent", 1);
 
@@ -186,6 +224,7 @@ public class StatusbarMods implements IXposedHookLoadPackage {
                         }
                         mClockParent.removeView(mClockView);
                         targetArea.addView(mClockView);
+                        //</modding clock>
                     }
                 });
 

@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +28,6 @@ public class SettingsActivity extends AppCompatActivity implements
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -44,6 +41,21 @@ public class SettingsActivity extends AppCompatActivity implements
             // The new XSharedPreferences is not enabled or module's not loading
             // other fallback, if any
         }
+
+        //update settings from previous config file
+        try {
+            if(PreferenceManager.getDefaultSharedPreferences(this).contains("Show4GIcon"))
+            {
+                boolean fourGEnabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("Show4GIcon", false);
+                if(fourGEnabled)
+                {
+                    PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("LTE4GIconMod", 2).apply();
+                }
+                PreferenceManager.getDefaultSharedPreferences(this).edit().remove("Show4GIcon").commit();
+            }
+        }
+        catch(Exception e){}
+
 
         setContentView(R.layout.settings_activity);
         if (savedInstanceState == null) {

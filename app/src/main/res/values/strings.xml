@@ -46,7 +46,7 @@
     <string name="threebutton_header_title">3-Button Navigation Settings</string>
     <string name="nav_header">Navigationbar Settings</string>
     <string name="back_longpress_kill_title">Longpress Back to kill foreground app</string>
-    <string name="lte_icon_mod_title">Show 4G icon instead to LTE</string>
+    <string name="lte_4g_icon_title">LTE / 4G Icon</string>
     <string name="sbc_position_title">Clock Position</string>
     <string name="sbc_ampm_style">AM/PM Style</string>
     <string name="sbc_show_secs">Show seconds</string>

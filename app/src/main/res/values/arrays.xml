@@ -63,4 +63,16 @@
         <item>4</item>
     </string-array>
 
+    <string-array name="lte4g_icon_names">
+        <item>System Default</item>
+        <item>Force LTE icon</item>
+        <item>Force 4G icon</item>
+    </string-array>
+
+    <string-array name="lte4g_icon_codes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>

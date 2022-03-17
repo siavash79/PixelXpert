@@ -11,10 +11,15 @@ import sh.siava.AOSPMods.XPrefs;
 public class LTEiconChange implements IXposedHookLoadPackage {
     public static final String listenPackage = "com.android.systemui";
     public static boolean isEnabled = false;
+    public static int SBLTEIcon = 0;
+
+    private static final int DEFAULT = 0;
+    private static final int FORCE_LTE = 1;
+    private static final int FORCE_4G = 2;
 
     public static void updatePrefs()
     {
-        isEnabled = XPrefs.Xprefs.getBoolean("Show4GIcon", false);
+        SBLTEIcon = Integer.parseInt(XPrefs.Xprefs.getString("LTE4GIconMod", "0"));
     }
 
     @Override
@@ -25,10 +30,16 @@ public class LTEiconChange implements IXposedHookLoadPackage {
                 "readConfig", Context.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!isEnabled) return;
+                        if(SBLTEIcon == DEFAULT) return;
 
                         Object config = param.getResult();
-                        XposedHelpers.setObjectField(config, "show4gForLte", true);
+                        if(SBLTEIcon == FORCE_LTE) {
+                            XposedHelpers.setObjectField(config, "show4gForLte", false);
+                        }
+                        else
+                        {
+                            XposedHelpers.setObjectField(config, "show4gForLte", true);
+                        }
                     }
                 });
     }

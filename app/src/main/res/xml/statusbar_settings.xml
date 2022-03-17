@@ -6,10 +6,12 @@
         android:defaultValue="false"
         android:key="LightQSPanel"
         android:title="@string/light_qs_title" />
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="Show4GIcon"
-        android:title="@string/lte_icon_mod_title" />
+    <ListPreference
+        android:defaultValue="0"
+        android:entries="@array/lte4g_icon_names"
+        android:entryValues="@array/lte4g_icon_codes"
+        android:key="LTE4GIconMod"
+        android:title="@string/lte_4g_icon_title" />
     <SwitchPreference
         android:defaultValue="false"
         android:key="DoubleTapSleep"

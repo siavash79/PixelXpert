@@ -1,14 +1,11 @@
 package sh.siava.AOSPMods.systemui;
 
-import android.content.Context;
 import android.view.View;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.XPrefs;
@@ -33,7 +30,7 @@ public class BackToKill implements IXposedHookLoadPackage {
         View.OnLongClickListener listener = new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                XposedBridge.log("SIAPOSED: back long detected");
+                if(!isEnabled) return true;
                 try {
                     Runtime.getRuntime().exec("su -c am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)");
                 } catch (IOException e) {

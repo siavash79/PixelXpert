@@ -168,8 +168,9 @@ public class StatusbarMods implements IXposedHookLoadPackage {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 //Removing vibration icon from blocked icons in lockscreen
-                if(showVibrationIcon) {
+                if(showVibrationIcon && (XposedHelpers.findFieldIfExists(KeyguardStatusBarViewControllerClass, "mBlockedIcons") != null)) { //Android 12 doesn't have such thing at all
                     List<String> OldmBlockedIcons = (List<String>) XposedHelpers.getObjectField(param.thisObject, "mBlockedIcons");
+
                     List<String> NewmBlockedIcons = new ArrayList<>();
                     for (String item : OldmBlockedIcons) {
                         if (!item.equals("volume")) {

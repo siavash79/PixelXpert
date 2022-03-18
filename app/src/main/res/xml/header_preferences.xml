@@ -1,23 +1,27 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Preference
-        app:fragment="sh.siava.AOSPMods.SettingsActivity$LockScreenFragment"
-        app:key="lockscreen_header"
-        app:title="@string/lockscreen_header_title" />
-
-    <Preference
         app:fragment="sh.siava.AOSPMods.SettingsActivity$StatusbarFragment"
         app:key="statusbar_header"
-        app:title="@string/statusbar_header" />
+        app:title="@string/statusbar_header"
+        app:icon="@drawable/ic_settings_statusbar" />
+
+    <Preference
+        app:fragment="sh.siava.AOSPMods.SettingsActivity$LockScreenFragment"
+        app:key="lockscreen_header"
+        app:title="@string/lockscreen_header_title"
+        app:icon="@drawable/ic_settings_lockscreen" />
 
     <Preference
         app:fragment="sh.siava.AOSPMods.SettingsActivity$NavFragment"
         app:key="nav_header"
-        app:title="@string/nav_header" />
+        app:title="@string/nav_header"
+        app:icon="@drawable/ic_settings_navigation" />
 
     <Preference
         app:fragment="sh.siava.AOSPMods.SettingsActivity$MiscFragment"
         app:key="misc_header"
-        app:title="@string/misc_header" />
+        app:title="@string/misc_header"
+        app:icon="@drawable/ic_settings_miscellaneous" />
 
 </PreferenceScreen>

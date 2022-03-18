@@ -17,7 +17,8 @@
             android:alpha="70"
             android:clickable="true"
             android:elevation="10dp"
-            android:onClick="RestartSysui"
+            android:onClick="RestartSysUI"
             app:srcCompat="@android:drawable/ic_menu_rotate" />
+
     </FrameLayout>
 </LinearLayout>

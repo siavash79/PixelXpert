@@ -14,25 +14,55 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import com.stericson.RootShell.exceptions.RootDeniedException;
+import com.stericson.RootShell.execution.Command;
+import com.stericson.RootTools.RootTools;
+
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     private static final String TITLE_TAG = "settingsActivityTitle";
 
-    public void RestartSysui(View view)
-    {
+    //Gets string for running shell commands, using stericson RootTools lib
+    private void runCommandAction(String command) {
+        Command c = new Command(0, command);
         try {
-            Runtime.getRuntime().exec("su -c killall com.android.systemui");
+            RootTools.getShell(true).add(c);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        } catch (RootDeniedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void RestartSysUI(View view) {
+        runCommandAction("killall com.android.systemui");
+
+    }
+
+    public void backButtonEnabled(){
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    public void backButtonDisabled(){
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
         }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        backButtonDisabled();
 
         try {
             getApplicationContext().getSharedPreferences("sh.siava.AOSPMods_preferences", Context.MODE_WORLD_READABLE);
@@ -58,6 +88,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
 
         setContentView(R.layout.settings_activity);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -66,18 +97,26 @@ public class SettingsActivity extends AppCompatActivity implements
         } else {
             setTitle(savedInstanceState.getCharSequence(TITLE_TAG));
         }
+
         getSupportFragmentManager().addOnBackStackChangedListener(
                 new FragmentManager.OnBackStackChangedListener() {
                     @Override
                     public void onBackStackChanged() {
                         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
                             setTitle(R.string.title_activity_settings);
+                            backButtonDisabled();
                         }
                     }
                 });
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if (getTitle() == getString(R.string.title_activity_settings)){
+        backButtonDisabled();
+        } else {
+            backButtonEnabled();
         }
     }
 
@@ -111,7 +150,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 .addToBackStack(null)
                 .commit();
         setTitle(pref.getTitle());
-
+        backButtonEnabled();
         return true;
     }
 
@@ -131,14 +170,11 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
-
-
     public static class LockScreenFragment extends PreferenceFragmentCompat {
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.lock_screen_prefs, rootKey);
-
         }
     }
 
@@ -147,17 +183,14 @@ public class SettingsActivity extends AppCompatActivity implements
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.misc_prefs, rootKey);
-
         }
     }
-
 
     public static class SBCFragment extends PreferenceFragmentCompat {
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.statusbar_clock_prefs, rootKey);
-
         }
     }
 
@@ -177,20 +210,13 @@ public class SettingsActivity extends AppCompatActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                if(key.equals("QSPulldownPercent"))
-                {
+                if (key.equals("QSPulldownPercent")) {
                     updateQSPulldownPercent();
-                }
-                else if(key.equals("QSPullodwnEnabled"))
-                {
+                } else if (key.equals("QSPullodwnEnabled")) {
                     updateQSPulldownEnabld();
-                }
-                else if(key.equals("QSFooterMod"))
-                {
+                } else if (key.equals("QSFooterMod")) {
                     updateQSFooterMod();
-                }
-                else if(key.equals("BatteryStyle"))
-                {
+                } else if (key.equals("BatteryStyle")) {
                     updateBatteryMod();
                 }
             }
@@ -215,8 +241,7 @@ public class SettingsActivity extends AppCompatActivity implements
             findPreference("QSPulldownSide").setEnabled(enabled);
         }
 
-        private void updateQSPulldownPercent()
-        {
+        private void updateQSPulldownPercent() {
             int value = PreferenceManager.getDefaultSharedPreferences(mContext).getInt("QSPulldownPercent", 25);
             QSPulldownPercent.setSummary(value + "%");
         }
@@ -225,6 +250,7 @@ public class SettingsActivity extends AppCompatActivity implements
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             mContext = getContext();
             setPreferencesFromResource(R.xml.statusbar_settings, rootKey);
+
             QSPulldownPercent = findPreference("QSPulldownPercent");
 
             PreferenceManager.getDefaultSharedPreferences(mContext).registerOnSharedPreferenceChangeListener(listener);
@@ -234,14 +260,11 @@ public class SettingsActivity extends AppCompatActivity implements
             updateQSFooterMod();
             updateBatteryMod();
         }
-
     }
-
 
     public static class GestureNavFragment extends PreferenceFragmentCompat {
 
         private Context mContext;
-
 
         SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -254,13 +277,12 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateNavPill() {
             findPreference("GesPillWidthModPos").setEnabled(PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("GesPillWidthMod", true));
-            findPreference("GesPillWidthModPos").setSummary(PreferenceManager.getDefaultSharedPreferences(mContext).getInt("GesPillWidthModPos", 50)*2 + "% of standard width");
+            findPreference("GesPillWidthModPos").setSummary(PreferenceManager.getDefaultSharedPreferences(mContext).getInt("GesPillWidthModPos", 50)*2 + getString(R.string.pill_width_summary));
         }
 
         private void updateBackGesture() {
             findPreference("BackLeftHeight").setEnabled(PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("BackFromLeft", true));
             findPreference("BackRightHeight").setEnabled(PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("BackFromRight", true));
-
 
             findPreference("BackLeftHeight").setSummary(PreferenceManager.getDefaultSharedPreferences(mContext).getInt("BackLeftHeight", 100) + "%");
             findPreference("BackRightHeight").setSummary(PreferenceManager.getDefaultSharedPreferences(mContext).getInt("BackRightHeight", 100) + "%");
@@ -278,5 +300,4 @@ public class SettingsActivity extends AppCompatActivity implements
         }
 
     }
-
 }

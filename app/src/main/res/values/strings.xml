@@ -1,67 +1,108 @@
 <resources>
+    <!--General strings-->
     <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Modifications on AOSP based ROMs</string>
-    <string name="title_activity_settings">AOSP Mods</string>
+    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
+    <string name="title_activity_settings" translatable="false">@string/app_name</string>
+    <string name="error_not_activated">Please confirm if the module is activated on LSPosed Manager</string>
+    <string name="hide_default">Hide (Default)</string>
 
+    <!--Category titles-->
+    <string name="lockscreen_header_title">Lock Screen</string>
+    <string name="statusbar_header">Status Bar</string>
+    <string name="nav_header">Navigation bar</string>
+    <string name="misc_header">Miscellaneous</string>
 
-
+    <!--Lock screen related-->
     <string name="transparent_fingerprint_circle">Hide under-display fingerprint circle</string>
     <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
     <string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
-    <string name="carrier_text_category">Carrier Text</string>
-    <string name="configure_carrier_text">Configure Carrier Text</string>
-    <string name="carrier_text_mod_disabled">Carrier Text unchaged</string>
-    <string name="carrier_text_mod_enabled">Modify Carrier Text</string>
-    <string name="carrier_text_value">Text to Show</string>
-    <string name="lockscreen_header_title">Lockscreen Settings</string>
-    <string name="UDFPS_hide_key">fingerprint_circle_hide</string>
-    <string name="double_tap_sleep_title">Double-tap to sleep</string>
-    <string name="double_tap_sleep_off">Double-tap will not turn off the display</string>
-    <string name="double_tap_sleep_on">Double-tap on Statusbar or Lockscreen turns the display off</string>
-    <string name="qs_footer_mod_title">Modify Buildnumber text on Quick Settings Menu</string>
-    <string name="qs_footer_text_value">Custom text to show</string>
-    <string name="qs_footer_text_summary">Leave blank to remove the text completely</string>
-    <string name="qs_mod_category_title">Build Number in Quick Settings</string>
-    <string name="statusbar_header">Statusbar Settings</string>
-    <string name="qs_footer_text_desc">You will need to turn your display off/on to apply</string>
+    <string name="carrier_text_category">Carrier text</string>
+    <string name="configure_carrier_text">Configure carrier text</string>
+    <string name="carrier_text_mod_disabled">Carrier text unchanged</string>
+    <string name="carrier_text_mod_enabled">Custom carrier text</string>
+    <string name="carrier_text_value">Insert custom text</string>
+    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
+
+    <!--Status bar related-->
+    <string name="double_tap_sleep_title">Double tap to sleep</string>
+    <string name="double_tap_sleep_off">"Double tap won't turn off the display"</string>
+    <string name="double_tap_sleep_on">Double tap on status bar, or lock screen, turns the display off</string>
+    <string name="qs_mod_category_title">Build number on QS Panel footer</string>
+    <string name="qs_footer_mod_title">Modify build text number on QS panel</string>
+    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
+    <string name="qs_footer_text_summary">Leave it blank to remove the text completely</string>
+    <string name="qs_footer_text_desc">Turn the display off/on to apply</string>
     <string name="light_qs_title">Light QS Panel during light theme (might be buggy)</string>
-    <string name="qs_pulldown_size">Quick pulldown Width</string>
-    <string name="qs_pulldown_switch_title">Quick QS panel pulldown from statusbar</string>
-    <string name="qs_pulldown_side_title">Quick pulldown side</string>
-    <string name="qs_pulldown_category">Quick Settings Pulldown</string>
-    <string name="battery_style_title">Configure Battery Style</string>
+    <string name="qs_pulldown_size">Quick pull down width</string>
+    <string name="qs_pulldown_switch_title">Quick QS panel pull down from status bar</string>
+    <string name="qs_pulldown_side_title">Quick pull down side</string>
+    <string name="qs_pulldown_category">Quick settings pull down</string>
+    <string name="battery_style_title">Choose a battery style</string>
     <string name="battery_show_percent_title">Show battery percentage</string>
-    <string name="battery_style_category_title">Battery Style</string>
-    <string name="battery_style_category_summary">You will need to turn your display off/on to apply</string>
-    <string name="back_gesture_category_title">Configure Back Gesture</string>
-    <string name="back_from_left_title">Left side of the screen</string>
-    <string name="back_from_right_title">Right side of the screen</string>
-    <string name="back_height_title">Gesture Height</string>
-    <string name="gesturenav_header">Gesture Navigation Settings</string>
-    <string name="error_not_activated">Module does not seem to be correctly activated in LSPosed</string>
-    <string name="gesture_nav_pill_cat">Navigation Bar Pill Width</string>
-    <string name="gesture_nav_pill_mod_title">Modify Navbar Pill Width</string>
-    <string name="gesture_nav_pill_width_title">Width comparing to standard size</string>
-    <string name="sysui_restart_needed">Requires restarting SystemUI to apply</string>
-    <string name="threebutton_header_title">3-Button Navigation Settings</string>
-    <string name="nav_header">Navigationbar Settings</string>
-    <string name="back_longpress_kill_title">Longpress Back to kill foreground app</string>
+    <string name="battery_style_category_title">Battery style</string>
+    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
-    <string name="sbc_position_title">Clock Position</string>
+    <string name="sbc_position_title">Clock position</string>
     <string name="sbc_ampm_style">AM/PM Style</string>
     <string name="sbc_show_secs">Show seconds</string>
-    <string name="sbc_date_cat">Date Options</string>
+    <string name="sbc_date_cat">Date options</string>
     <string name="sbc_day_of_week_options">Show day of week with clock</string>
     <string name="sbc_advanced_cat">Advanced date (will supersede above setting!)</string>
     <string name="sbc_advanced_sum">Please read Java date format documentation</string>
     <string name="sbc_custom_date_before">Custom date format before clock</string>
     <string name="sbc_date_small">Smaller size (70%)</string>
     <string name="sbc_custom_date_after">Custom date format after clock</string>
-    <string name="sbc_header">Statusbar Clock Customization...</string>
-    <string name="sbc_may_take_one_minute">Applied on next time update or SystemUI restart</string>
-    <string name="misc_header">Miscellaneous Settings</string>
-    <string name="screenshot_sound_disable_title">Disable Screenshot sound</string>
+    <string name="sbc_header">Status bar clock customization</string>
+    <string name="sbc_may_take_one_minute">Takes effect on time update or SysUI restart</string>
     <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
 
+    <!--Navigation bar related-->
+    <string name="back_gesture_category_title">Configure back gesture</string>
+    <string name="back_from_left_title">Left side of the screen</string>
+    <string name="back_from_right_title">Right side of the screen</string>
+    <string name="back_height_title">Gesture height</string>
+    <string name="gesturenav_header">Gesture navigation</string>
+    <string name="gesture_nav_pill_cat">Navigation bar pill width</string>
+    <string name="gesture_nav_pill_mod_title">Modify NavBar pill width</string>
+    <string name="gesture_nav_pill_width_title">Width comparing to standard size</string>
+    <string name="sysui_restart_needed">Requires a SystemUI restart to apply</string>
+    <string name="threebutton_header_title">3-Button navigation</string>
+    <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
+    <string name="pill_width_summary">% of standard size</string>
+
+    <!--Miscellaneous bar related-->
+    <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
+
+    <!-- Arrays strings -->
+    <!-- Quick pull down -->
+    <string name="pull_down_left">Left</string>
+    <string name="pull_down_right">Right</string>
+
+    <!-- Battery styles -->
+    <string name="battery_default">Default (requires restart to apply)</string>
+    <string name="battery_circle">Circle</string>
+    <string name="battery_dashed_circle">Dashed Circle</string>
+
+    <!-- Clock position -->
+    <string name="clock_default">Left (Default)</string>
+    <string name="clock_center">Center</string>
+    <string name="clock_right">Right</string>
+
+    <!-- AM/PM style -->
+    <string name="am_pm_default" translatable="false">@string/hide_default</string>
+    <string name="am_pm_normal">100% size of the clock</string>
+    <string name="am_pm_small">70% size of the clock</string>
+
+    <!-- Date position -->
+    <string name="date_default" translatable="false">@string/hide_default</string>
+    <string name="date_before">Before Clock (100%)</string>
+    <string name="date_before_small">Before Clock (70%)</string>
+    <string name="date_after">After Clock (100%)</string>
+    <string name="date_after_small">After Clock (70%)</string>
+
+    <!-- 4G | LTE -->
+    <string name="fourg_lte_default">System Default</string>
+    <string name="fourg_lte_lte">Force LTE icon</string>
+    <string name="fourg_lte_fourg">Force 4G icon</string>
 
 </resources>

@@ -205,7 +205,7 @@ public class SettingsActivity extends AppCompatActivity implements
     public static class StatusbarFragment extends PreferenceFragmentCompat {
 
         Preference QSPulldownPercent;
-        private Context mContext;
+
 
         SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -218,82 +218,125 @@ public class SettingsActivity extends AppCompatActivity implements
                     updateQSFooterMod();
                 } else if (key.equals("BatteryStyle")) {
                     updateBatteryMod();
+                } else if (key.equals("BatteryIconScaleFactor")) {
+                    updateBatteryIconScaleFactor();
                 }
             }
 
         };
 
+        private void updateBatteryIconScaleFactor() {
+            try {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+                findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50)*2 + getString(R.string.battery_size_summary));
+            }
+            catch(Exception e){
+                return;
+            }
+
+        }
+
         private void updateBatteryMod() {
-            boolean enabled = !(PreferenceManager.getDefaultSharedPreferences(mContext).getString("BatteryStyle", "0").equals(("0")));
-            findPreference("BatteryShowPercent").setEnabled(enabled);
+            try {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+                boolean enabled = !(prefs.getString("BatteryStyle", "0").equals(("0")));
+                findPreference("BatteryShowPercent").setEnabled(enabled);
+            }catch(Exception e){}
         }
 
         private void updateQSFooterMod() {
-            boolean enabled = PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("QSFooterMod", false);
+            try {
 
-            findPreference("QSFooterText").setEnabled(enabled);
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                boolean enabled = prefs.getBoolean("QSFooterMod", false);
+
+                findPreference("QSFooterText").setEnabled(enabled);
+            } catch(Exception e){}
         }
 
         private void updateQSPulldownEnabld() {
-            boolean enabled = PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("QSPullodwnEnabled", false);
+            try {
 
-            findPreference("QSPulldownPercent").setEnabled(enabled);
-            findPreference("QSPulldownSide").setEnabled(enabled);
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                boolean enabled = prefs.getBoolean("QSPullodwnEnabled", false);
+
+                findPreference("QSPulldownPercent").setEnabled(enabled);
+                findPreference("QSPulldownSide").setEnabled(enabled);
+            }catch(Exception e){}
         }
 
         private void updateQSPulldownPercent() {
-            int value = PreferenceManager.getDefaultSharedPreferences(mContext).getInt("QSPulldownPercent", 25);
-            QSPulldownPercent.setSummary(value + "%");
+            try {
+
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+                int value = prefs.getInt("QSPulldownPercent", 25);
+                QSPulldownPercent.setSummary(value + "%");
+            }catch(Exception e){}
         }
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            mContext = getContext();
+
             setPreferencesFromResource(R.xml.statusbar_settings, rootKey);
 
             QSPulldownPercent = findPreference("QSPulldownPercent");
 
-            PreferenceManager.getDefaultSharedPreferences(mContext).registerOnSharedPreferenceChangeListener(listener);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+            prefs.registerOnSharedPreferenceChangeListener(listener);
 
             updateQSPulldownPercent();
             updateQSPulldownEnabld();
             updateQSFooterMod();
             updateBatteryMod();
+            updateBatteryIconScaleFactor();
         }
     }
 
     public static class GestureNavFragment extends PreferenceFragmentCompat {
 
-        private Context mContext;
-
+        Context context;
         SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
                 updateBackGesture();
                 updateNavPill();
             }
-
         };
 
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+            this.context= context;
+        }
+
         private void updateNavPill() {
-            findPreference("GesPillWidthModPos").setEnabled(PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("GesPillWidthMod", true));
-            findPreference("GesPillWidthModPos").setSummary(PreferenceManager.getDefaultSharedPreferences(mContext).getInt("GesPillWidthModPos", 50)*2 + getString(R.string.pill_width_summary));
+            try {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                findPreference("GesPillWidthModPos").setEnabled(prefs.getBoolean("GesPillWidthMod", true));
+                findPreference("GesPillWidthModPos").setSummary(prefs.getInt("GesPillWidthModPos", 50)*2 + getString(R.string.pill_width_summary));
+            } catch(Exception e){}
         }
 
         private void updateBackGesture() {
-            findPreference("BackLeftHeight").setEnabled(PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("BackFromLeft", true));
-            findPreference("BackRightHeight").setEnabled(PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("BackFromRight", true));
+            try {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                findPreference("BackLeftHeight").setEnabled(prefs.getBoolean("BackFromLeft", true));
+                findPreference("BackRightHeight").setEnabled(prefs.getBoolean("BackFromRight", true));
 
-            findPreference("BackLeftHeight").setSummary(PreferenceManager.getDefaultSharedPreferences(mContext).getInt("BackLeftHeight", 100) + "%");
-            findPreference("BackRightHeight").setSummary(PreferenceManager.getDefaultSharedPreferences(mContext).getInt("BackRightHeight", 100) + "%");
+                findPreference("BackLeftHeight").setSummary(prefs.getInt("BackLeftHeight", 100) + "%");
+                findPreference("BackRightHeight").setSummary(prefs.getInt("BackRightHeight", 100) + "%");
+            } catch(Exception e){}
         }
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            mContext =getContext();
             setPreferencesFromResource(R.xml.gesture_nav_perfs, rootKey);
 
-            PreferenceManager.getDefaultSharedPreferences(mContext).registerOnSharedPreferenceChangeListener(listener);
+            PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(listener);
 
             updateBackGesture();
             updateNavPill();

@@ -27,6 +27,7 @@
     <string name="qs_pulldown_side_title">Lado por onde deslizar</string>
     <string name="qs_pulldown_category">Deslize rápido para baixo</string>
     <string name="battery_style_title">Escolha um estilo de bateria</string>
+    <string name="battery_icon_size_title">Battery Icon Size</string>
     <string name="battery_show_percent_title">Mostrar percentagem</string>
     <string name="battery_style_category_title">Estilo da bateria</string>
     <string name="sbc_position_title">Posição do relógio</string>
@@ -74,4 +75,5 @@
     <string name="fourg_lte_fourg">Forçar 4G</string>
     <string name="lte_4g_icon_title">Ícone 4G / LTE</string>
     <string name="pill_width_summary">% do tamanho padrão</string>
+    <string name="battery_size_summary">% of default size</string>
 </resources>

@@ -69,6 +69,10 @@
             android:entryValues="@array/battery_style_codes"
             android:key="BatteryStyle"
             android:title="@string/battery_style_title" />
+        <SeekBarPreference
+            android:defaultValue="50"
+            android:key="BatteryIconScaleFactor"
+            app:title="@string/battery_icon_size_title" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="BatteryShowPercent"

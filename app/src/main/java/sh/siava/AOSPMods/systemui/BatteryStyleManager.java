@@ -31,7 +31,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
     public static void updatePrefs()
     {
         String BatteryStyleStr = XPrefs.Xprefs.getString("BatteryStyle", "0");
-        scaleFactor = XPrefs.Xprefs.getInt("BatteryIconScaleFactor", 100);
+        scaleFactor = XPrefs.Xprefs.getInt("BatteryIconScaleFactor", 50)*2;
         int batteryStyle = Integer.parseInt(BatteryStyleStr);
 
         if(batteryStyle == 0)
@@ -102,7 +102,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                 "scaleBatteryMeterViews", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!circleBatteryEnabled) return;
+                        //if(!circleBatteryEnabled) return;
 
                         ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
                         if (mBatteryIconView == null)

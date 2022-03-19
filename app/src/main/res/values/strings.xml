@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!--General strings-->
     <string name="app_name" translatable="false">AOSP Mods</string>
     <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
@@ -38,6 +38,7 @@
     <string name="qs_pulldown_side_title">Quick pull down side</string>
     <string name="qs_pulldown_category">Quick settings pull down</string>
     <string name="battery_style_title">Choose a battery style</string>
+    <string name="battery_icon_size_title">Battery Icon Size</string>
     <string name="battery_show_percent_title">Show battery percentage</string>
     <string name="battery_style_category_title">Battery style</string>
     <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
@@ -104,5 +105,6 @@
     <string name="fourg_lte_default">System Default</string>
     <string name="fourg_lte_lte">Force LTE icon</string>
     <string name="fourg_lte_fourg">Force 4G icon</string>
+    <string name="battery_size_summary">% of default size</string>
 
 </resources>

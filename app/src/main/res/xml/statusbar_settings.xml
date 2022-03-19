@@ -20,6 +20,10 @@
         app:summaryOn="@string/double_tap_sleep_on" />
     <SwitchPreference
         android:defaultValue="false"
+        android:key="combinedSignalEnabled"
+        android:title="@string/combined_signal_icon_title" />
+    <SwitchPreference
+        android:defaultValue="false"
         android:key="QSHapticEnabled"
         android:title="@string/qs_haptic_switch_title" />
    <Preference

@@ -106,5 +106,6 @@
     <string name="fourg_lte_lte">Force LTE icon</string>
     <string name="fourg_lte_fourg">Force 4G icon</string>
     <string name="battery_size_summary">% of default size</string>
+    <string name="combined_signal_icon_title">Combined signal icons</string>
 
 </resources>

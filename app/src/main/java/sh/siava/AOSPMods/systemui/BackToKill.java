@@ -2,7 +2,7 @@ package sh.siava.AOSPMods.systemui;
 
 import android.view.View;
 
-import java.io.IOException;
+import com.topjohnwu.superuser.Shell;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -31,12 +31,9 @@ public class BackToKill implements IXposedHookLoadPackage {
             @Override
             public boolean onLongClick(View v) {
                 if(!isEnabled) return true;
-                try {
-                    Runtime.getRuntime().exec("su -c am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                
+
+                Shell.su("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
+
                 return true;
             }
         };

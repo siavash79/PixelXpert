@@ -14,34 +14,16 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-import com.stericson.RootShell.exceptions.RootDeniedException;
-import com.stericson.RootShell.execution.Command;
-import com.stericson.RootTools.RootTools;
-
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
+import com.topjohnwu.superuser.Shell;
 
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     private static final String TITLE_TAG = "settingsActivityTitle";
 
-    //Gets string for running shell commands, using stericson RootTools lib
-    private void runCommandAction(String command) {
-        Command c = new Command(0, command);
-        try {
-            RootTools.getShell(true).add(c);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        } catch (RootDeniedException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void RestartSysUI(View view) {
-        runCommandAction("killall com.android.systemui");
+        Shell.su("killall com.android.systemui").submit();
+//        runCommandAction("killall com.android.systemui");
 
     }
 

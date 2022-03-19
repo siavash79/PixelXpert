@@ -4,5 +4,66 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/ui_statusbar</item>
+
+        <item name="alertDialogTheme">@style/AppTheme.Dialog</item>
+
+        <item name="actionBarTheme">@style/AppTheme.ActionBar</item>
+
+        <item name="android:colorBackground">@color/ui_bg</item>
+        <item name="colorBackgroundFloating">@color/ui_bg</item>
+        <item name="colorSurface">@color/ui_bg_surface</item>
+        <item name="colorPrimarySurface">@color/ui_bg_toolbar</item>
+
+        <item name="colorPrimary">@color/ui_accent</item>
+        <item name="colorPrimaryVariant">@color/ui_accent</item>
+        <item name="colorOnPrimary">@color/ui_fg</item>
+
+        <item name="colorSecondary">@color/ui_accent</item>
+        <item name="colorSecondaryVariant">@color/ui_accent</item>
+        <item name="colorOnSecondary">@color/ui_fg</item>
+
+        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary</item>
+
+        <item name="textAppearanceListItem">@style/TextAppearance.App.ListItem.Title</item>
+
     </style>
+
+    <style name="AppTheme.ActionBar" parent="">
+        <item name="colorSurface">@color/ui_actionbar</item>
+
+    </style>
+
+    <style name="TextAppearance.App.ListItem.Title" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textSize">19sp</item> <!-- A12 B2: 20sp -->
+    </style>
+
+    <style name="AppTheme.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+
+        <item name="android:dialogCornerRadius">32dp</item>
+        <item name="android:backgroundDimAmount">0.60</item>
+
+        <item name="android:colorBackground">@color/ui_bg</item>
+        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary</item>
+
+        <item name="colorBackgroundFloating">@color/ui_bg</item>
+        <item name="colorSurface">@color/ui_bg_surface</item>
+        <item name="colorPrimarySurface">@color/ui_bg_toolbar</item>
+
+        <item name="colorPrimary">@color/ui_accent</item>
+        <item name="colorPrimaryVariant">@color/ui_accent</item>
+        <item name="colorOnPrimary">@color/ui_fg</item>
+
+        <item name="colorSecondary">@color/ui_accent</item>
+        <item name="colorSecondaryVariant">@color/ui_accent</item>
+        <item name="colorOnSecondary">@color/ui_fg</item>
+
+        <item name="colorAccent">@color/ui_accent</item>
+
+    </style>
+
 </resources>

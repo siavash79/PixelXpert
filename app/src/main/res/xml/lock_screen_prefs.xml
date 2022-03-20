@@ -9,6 +9,18 @@
         android:summaryOff="@string/transparent_fingerprint_circle_off"
         android:title="@string/transparent_fingerprint_circle"
         app:summaryOn="@string/transparent_fingerprint_circle_on" />
+    <PreferenceCategory android:title="@string/keyguard_bottom_category">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="KeyguardBottomButtonsTransparent"
+            android:title="@string/keyguard_bottom_buttons_transparent_title" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="KeyguardCameraEnabled"
+            android:title="@string/keyguard_bottom_force_camera_title" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/carrier_text_category">
 
         <SwitchPreference

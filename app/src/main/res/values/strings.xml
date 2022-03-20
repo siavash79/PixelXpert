@@ -107,5 +107,8 @@
     <string name="fourg_lte_fourg">Force 4G icon</string>
     <string name="battery_size_summary">% of default size</string>
     <string name="combined_signal_icon_title">Combined signal icons</string>
+    <string name="keyguard_bottom_category">Bottom area shortcuts</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Hide circle around shortcuts</string>
+    <string name="keyguard_bottom_force_camera_title">Force camera shortcut</string>
 
 </resources>

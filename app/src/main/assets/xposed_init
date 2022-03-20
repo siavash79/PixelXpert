@@ -16,3 +16,4 @@ sh.siava.AOSPMods.systemui.StatusbarMods
 sh.siava.AOSPMods.systemui.QSHaptic
 sh.siava.AOSPMods.systemui.ScreenshotController
 sh.siava.AOSPMods.systemui.FeatureFlagsMods
+sh.siava.AOSPMods.systemui.KeyguardCameraShortcut

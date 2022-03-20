@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.os.Build;
+
+import com.topjohnwu.superuser.Shell;
+
+import java.lang.reflect.Method;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -39,9 +42,9 @@ public class QSHeaderManager implements IXposedModPack {
                     case Configuration.UI_MODE_NIGHT_NO:
 
                         try {
-                            Runtime.getRuntime().exec("cmd uimode night yes");
+                            Shell.su("cmd uimode night yes").exec();
                             Thread.sleep(1000);
-                            Runtime.getRuntime().exec("cmd uimode night no");
+                            Shell.su("cmd uimode night no").exec();
                         } catch (Exception e) {}
 
                         break;
@@ -54,7 +57,30 @@ public class QSHeaderManager implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Helpers.findAndHookMethod("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader,
+        Class QSTileViewImplClass = Helpers.findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
+        Class UtilsClass = Helpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
+        Class OngoingPrivacyChipClass = Helpers.findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
+        Class FragmentClass = XposedHelpers.findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
+
+
+        if(QSTileViewImplClass == null ||
+                UtilsClass == null ||
+                OngoingPrivacyChipClass == null ||
+                FragmentClass == null) return; //we didn't find them
+
+        Method ScrimControllerMethod = Helpers.findMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
+                "applyStateToAlpha");
+        if(ScrimControllerMethod == null)
+        {
+            ScrimControllerMethod = Helpers.findMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
+                    "applyState");
+        }
+        if(ScrimControllerMethod == null)
+        {
+            return;
+        }
+
+        Helpers.findAndHookMethod(OngoingPrivacyChipClass,
                 "updateResources", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -67,8 +93,6 @@ public class QSHeaderManager implements IXposedModPack {
                         XposedHelpers.setObjectField(param.thisObject, "iconColor", iconColor);
                     }
                 });
-        Class QSTileViewImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
-        Class UtilsClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
 
         XposedBridge.hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
             @Override
@@ -86,38 +110,20 @@ public class QSHeaderManager implements IXposedModPack {
             }
         });
 
-        if(Build.VERSION.SDK_INT == 31) { //Android 12
-            Helpers.findAndHookMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
-                    "applyStateToAlpha", new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            if (!lightQSHeaderEnabled) return;
 
-                            boolean mClipsQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipsQsScrim");
-                            if (mClipsQsScrim) {
-                                XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
-                            }
-                        }
-                    });
-        }
-        else
-        { //Probably SDK 32-33
-            Helpers.findAndHookMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
-                    "applyState", new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            if (!lightQSHeaderEnabled) return;
+        XposedBridge.hookMethod(ScrimControllerMethod, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                if (!lightQSHeaderEnabled) return;
 
-                            boolean mClipsQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipsQsScrim");
-                            if (mClipsQsScrim) {
-                                XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
-                            }
-                        }
-                    });
+                boolean mClipsQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipsQsScrim");
+                if (mClipsQsScrim) {
+                    XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
+                }
+            }
+        });
 
-        }
-
-        Class ScrimStateEnum = XposedHelpers.findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
+        Class ScrimStateEnum = Helpers.findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
         Object[] constants =  ScrimStateEnum.getEnumConstants();
         for(int i = 0; i< constants.length; i++)
         {
@@ -200,7 +206,6 @@ public class QSHeaderManager implements IXposedModPack {
             }
         }
 
-        Class FragmentClass = XposedHelpers.findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
         XposedBridge.hookAllConstructors(FragmentClass, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -225,7 +230,5 @@ public class QSHeaderManager implements IXposedModPack {
                         }
                     }
                 });
-
-
     }
 }

@@ -2,7 +2,6 @@ package sh.siava.AOSPMods.systemui;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
@@ -105,23 +104,20 @@ public class StatusbarMods implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Class ActivityStarterClass = XposedHelpers.findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
-        Class DependencyClass = XposedHelpers.findClass("com.android.systemui.Dependency", lpparam.classLoader);
+        Class ActivityStarterClass = Helpers.findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
+        Class DependencyClass = Helpers.findClass("com.android.systemui.Dependency", lpparam.classLoader);
         Class CollapsedStatusBarFragmentClass;
-        Class KeyguardStatusBarViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
-        Class QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
-        Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
+        Class KeyguardStatusBarViewControllerClass = Helpers.findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
+        Class QuickStatusBarHeaderControllerClass = Helpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
+        Class QuickStatusBarHeaderClass = Helpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 
-        if(Build.VERSION.SDK_INT == 31) { //Andriod 12
-            CollapsedStatusBarFragmentClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.CollapsedStatusBarFragment", lpparam.classLoader);
-        }
-        else if (Build.VERSION.SDK_INT == 32) //Android 12L-13
+        CollapsedStatusBarFragmentClass = Helpers.findClass("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
+
+        if(CollapsedStatusBarFragmentClass == null)
         {
-            CollapsedStatusBarFragmentClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
-        } else
-        {
-            return;
+            CollapsedStatusBarFragmentClass = Helpers.findClass("com.android.systemui.statusbar.phone.CollapsedStatusBarFragment", lpparam.classLoader);
         }
+        if(CollapsedStatusBarFragmentClass == null) return; //we didn't find it
 
         XposedBridge.hookAllConstructors(QuickStatusBarHeaderClass, new XC_MethodHook() {
             @Override

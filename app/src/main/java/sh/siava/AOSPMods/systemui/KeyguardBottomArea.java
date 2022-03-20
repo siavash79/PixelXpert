@@ -87,12 +87,13 @@ public class KeyguardBottomArea implements IXposedHookLoadPackage {
                 });
 
         //Set camera intent to be always secure when launchd from keyguard screen
-        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
+
+        Class CameraIntentsClass = XposedHelpers.findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
+        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass.getName()+"$DefaultRightButton", lpparam.classLoader,
                 "getIntent", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!showCameraOnLockscreen) return;
-                        Class CameraIntentsClass = XposedHelpers.findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
+                        if(!showCameraOnLockscreen || mContext[0] == null) return;
                         param.setResult(XposedHelpers.callStaticMethod(CameraIntentsClass, "getSecureCameraIntent", mContext[0]));
                     }
                 });

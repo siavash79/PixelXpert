@@ -11,7 +11,7 @@ import sh.siava.AOSPMods.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.systemui.CarrierTextManager;
 import sh.siava.AOSPMods.systemui.DoubleTapSleepLS;
 import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
-import sh.siava.AOSPMods.systemui.KeyguardCameraShortcut;
+import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
 import sh.siava.AOSPMods.systemui.LTEiconChange;
 import sh.siava.AOSPMods.systemui.NavBarResizer;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
@@ -95,6 +95,6 @@ public class XPrefs implements IXposedHookZygoteInit {
         QSHaptic.updatePrefs();
         FeatureFlagsMods.updatePrefs();
         ScreenshotController.updatePrefs();
-        KeyguardCameraShortcut.updatePrefs();
+        KeyguardBottomArea.updatePrefs();
     }
 }

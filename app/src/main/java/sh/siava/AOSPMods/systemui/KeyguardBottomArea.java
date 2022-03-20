@@ -11,7 +11,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.XPrefs;
 
-public class KeyguardCameraShortcut implements IXposedHookLoadPackage {
+public class KeyguardBottomArea implements IXposedHookLoadPackage {
     public static final String listenPackage = "com.android.systemui";
     public static boolean showCameraOnLockscreen = false;
     public static boolean transparentBGcolor = false;
@@ -25,11 +25,10 @@ public class KeyguardCameraShortcut implements IXposedHookLoadPackage {
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if(!lpparam.packageName.equals(listenPackage) || !showCameraOnLockscreen) return;
+        if(!lpparam.packageName.equals(listenPackage)) return;
 
         Class KeyguardbottomAreaViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
         Class UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
-
 
         //convert wallet button to camera button
         XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,

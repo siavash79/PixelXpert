@@ -8,7 +8,7 @@ sh.siava.AOSPMods.systemui.BatteryStyleManager
 sh.siava.AOSPMods.systemui.QSFooterTextManager
 sh.siava.AOSPMods.systemui.QSQuickPullDown
 sh.siava.AOSPMods.systemui.CarrierTextManager
-sh.siava.AOSPMods.systemui.KeyguardCameraShortcut
+sh.siava.AOSPMods.systemui.KeyguardBottomArea
 sh.siava.AOSPMods.systemui.BackToKill
 sh.siava.AOSPMods.systemui.NavBarResizer
 sh.siava.AOSPMods.systemui.LTEiconChange
@@ -16,4 +16,4 @@ sh.siava.AOSPMods.systemui.StatusbarMods
 sh.siava.AOSPMods.systemui.QSHaptic
 sh.siava.AOSPMods.systemui.ScreenshotController
 sh.siava.AOSPMods.systemui.FeatureFlagsMods
-sh.siava.AOSPMods.systemui.KeyguardCameraShortcut
+sh.siava.AOSPMods.systemui.KeyguardBottomArea

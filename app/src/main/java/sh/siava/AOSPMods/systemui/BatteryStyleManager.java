@@ -27,6 +27,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
     public static int BatteryStyle = 1;
     public static boolean ShowPercent = false;
     public static int scaleFactor = 100;
+    public static boolean scaleWithPrecent =false;
 
     public static void updatePrefs()
     {
@@ -56,6 +57,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
         });
 
         Class BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
+
         if(BatteryMeterViewClass == null)
         {
             BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.BatteryMeterView", lpparam.classLoader);
@@ -71,7 +73,6 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                             CircleBatteryDrawable mCircleDrawable = new CircleBatteryDrawable((Context) param.args[0], frameColor);
                             mCircleDrawable.setShowPercent(ShowPercent);
                             mCircleDrawable.setMeterStyle(BatteryStyle);
-
                             XposedHelpers.setAdditionalInstanceField(param.thisObject, "mCircleDrawable", mCircleDrawable);
 
                             ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
@@ -97,50 +98,34 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                     }
                 });
 
+        Method scaleBatteryMeterViewsMethod = XposedHelpers.findMethodExactIfExists(BatteryMeterViewClass, "scaleBatteryMeterViews");
 
-        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
-                "scaleBatteryMeterViews", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        //if(!circleBatteryEnabled) return;
+        if(scaleBatteryMeterViewsMethod != null)
+        {
+            XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
+                    "scaleBatteryMeterViews", new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            scale(param);
+                        }
+                    });
 
-                        ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
-                        if (mBatteryIconView == null)
-                            param.setResult(null);
+            XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
+                    "onPowerSaveChanged", boolean.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if(!circleBatteryEnabled) return;
 
-                        Context context = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
-                        Resources res = context.getResources();
+                            CircleBatteryDrawable mCircleDrawable = (CircleBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
+                            mCircleDrawable.setPowerSaveEnabled((boolean) param.args[0]);
+                        }
+                    });
+        }
+        else
+        {
+            scaleWithPrecent = true;
+        }
 
-                        TypedValue typedValue = new TypedValue();
-
-                        res.getValue(res.getIdentifier("status_bar_icon_scale_factor", "dimen", context.getPackageName()), typedValue, true);
-                        float iconScaleFactor = typedValue.getFloat() * (scaleFactor/100f);
-                        int batteryHeight = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
-                        int batteryWidth = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
-                        int marginBottom = res.getDimensionPixelSize(res.getIdentifier("battery_margin_bottom", "dimen", context.getPackageName()));
-
-                        LinearLayout.LayoutParams scaledLayoutParams = new LinearLayout.LayoutParams(
-                                (int) (batteryWidth * iconScaleFactor), (int) (batteryHeight * iconScaleFactor));
-
-                        scaledLayoutParams.setMargins(0, 0, 0, marginBottom);
-
-                        mBatteryIconView.setLayoutParams(scaledLayoutParams);
-
-                        param.setResult(null);
-                    }
-                });
-
-
-        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
-                "onPowerSaveChanged", boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!circleBatteryEnabled) return;
-
-                        CircleBatteryDrawable mCircleDrawable = (CircleBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
-                        mCircleDrawable.setPowerSaveEnabled((boolean) param.args[0]);
-                    }
-                });
 
         //Android 12 June beta
         Method updatePercentTextMethod = XposedHelpers.findMethodExactIfExists(BatteryMeterViewClass, "updatePercentText");
@@ -183,6 +168,37 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
 
             mCircleDrawable.setCharging(mCharging);
             mCircleDrawable.setBatteryLevel(mLevel);
+
+            if(scaleWithPrecent) scale(param);
         }
+    }
+
+    public static void scale(XC_MethodHook.MethodHookParam param)
+    {
+        ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
+
+        param.setResult(null);
+        if (mBatteryIconView == null) {
+            return;
+        }
+
+        Context context = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
+        Resources res = context.getResources();
+
+        TypedValue typedValue = new TypedValue();
+
+        res.getValue(res.getIdentifier("status_bar_icon_scale_factor", "dimen", context.getPackageName()), typedValue, true);
+        float iconScaleFactor = typedValue.getFloat() * (scaleFactor/100f);
+
+        int batteryHeight = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
+        int batteryWidth = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
+        int marginBottom = res.getDimensionPixelSize(res.getIdentifier("battery_margin_bottom", "dimen", context.getPackageName()));
+
+        LinearLayout.LayoutParams scaledLayoutParams = new LinearLayout.LayoutParams(
+                (int) (batteryWidth * iconScaleFactor), (int) (batteryHeight * iconScaleFactor));
+
+        scaledLayoutParams.setMargins(0, 0, 0, marginBottom);
+
+        mBatteryIconView.setLayoutParams(scaledLayoutParams);
     }
 }

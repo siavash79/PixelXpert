@@ -1,27 +1,21 @@
 package sh.siava.AOSPMods.systemui;
 
-import android.content.ComponentName;
-import android.graphics.Rect;
 import android.media.MediaActionSound;
-import android.net.Uri;
-import android.provider.MediaStore;
 
-import java.util.function.Consumer;
-
-import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import kotlin.OverloadResolutionByLambdaReturnType;
+import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class ScreenshotController implements IXposedHookLoadPackage {
+public class ScreenshotController implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean disableScreenshotSound = false;
 
-    public static void updatePrefs()
+    public void updatePrefs()
     {
+        if(XPrefs.Xprefs == null) return;
         disableScreenshotSound = XPrefs.Xprefs.getBoolean("disableScreenshotSound", false);
     }
 

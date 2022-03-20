@@ -1,24 +1,24 @@
 package sh.siava.AOSPMods.systemui;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Helpers;
+import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class NavBarResizer implements IXposedHookLoadPackage {
+public class NavBarResizer implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean isEnabled = false;
     public static float sizeFactor = 1f;
 
-    public static void updatePrefs()
+    public void updatePrefs()
     {
+        if(XPrefs.Xprefs == null) return;
         isEnabled = XPrefs.Xprefs.getBoolean("GesPillWidthMod", false);
         sizeFactor = XPrefs.Xprefs.getInt("GesPillWidthModPos", 50) * .02f;
     }
@@ -27,7 +27,7 @@ public class NavBarResizer implements IXposedHookLoadPackage {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader,
+        Helpers.findAndHookMethod("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader,
                 "createView", String.class, ViewGroup.class, LayoutInflater.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {

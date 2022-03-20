@@ -4,21 +4,23 @@ import android.content.Context;
 import android.os.Vibrator;
 import android.view.View;
 
-import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Helpers;
+import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class QSHaptic implements IXposedHookLoadPackage {
+public class QSHaptic implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean QSHapticEnabled = false;
     public static boolean hasVibrator = false;
     private static Vibrator mVibrator;
 
-    public static void updatePrefs()
+    public void updatePrefs()
     {
+        if(XPrefs.Xprefs == null) return;
         QSHapticEnabled = XPrefs.Xprefs.getBoolean("QSHapticEnabled", false);
     }
 
@@ -39,10 +41,10 @@ public class QSHaptic implements IXposedHookLoadPackage {
             }
         });
 
-        XposedHelpers.findAndHookMethod(QSTileImplClass,
+        Helpers.findAndHookMethod(QSTileImplClass,
                 "click", View.class ,new vibrateFeedback());
 
-        XposedHelpers.findAndHookMethod(QSTileImplClass,
+        Helpers.findAndHookMethod(QSTileImplClass,
                 "longClick", View.class ,new vibrateFeedback());
     }
 

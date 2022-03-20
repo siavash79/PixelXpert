@@ -6,20 +6,22 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 
-import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Helpers;
+import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class QSHeaderManager implements IXposedHookLoadPackage {
+public class QSHeaderManager implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
     private static boolean lightQSHeaderEnabled = false;
 
-    public static void updatePrefs()
+    public void updatePrefs()
     {
+        if(XPrefs.Xprefs == null) return;
         setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
     }
 
@@ -52,7 +54,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader,
+        Helpers.findAndHookMethod("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader,
                 "updateResources", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -85,7 +87,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
         });
 
         if(Build.VERSION.SDK_INT == 31) { //Android 12
-            XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
+            Helpers.findAndHookMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
                     "applyStateToAlpha", new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -100,7 +102,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
         }
         else
         { //Probably SDK 32-33
-            XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
+            Helpers.findAndHookMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
                     "applyState", new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -124,7 +126,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
             {
                 case "KEYGUARD":
                     //Xposedbridge.log("SIAPOSED found keyguard");
-                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
+                    Helpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -142,7 +144,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
                     break;
                 case "BOUNCER":
                     //Xposedbridge.log("SIAPOSED found bouncer");
-                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
+                    Helpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -154,7 +156,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
                             });
                     break;
                 case "SHADE_LOCKED":
-                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
+                    Helpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -170,7 +172,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
                                     }
                                 }
                             });
-                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
+                    Helpers.findAndHookMethod(constants[i].getClass(),
                             "getBehindTint", new XC_MethodHook() {
                                 @Override
                                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -182,7 +184,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
                     break;
                 case "UNLOCKED":
 
-                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
+                    Helpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -209,7 +211,7 @@ public class QSHeaderManager implements IXposedHookLoadPackage {
             }
         });
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader,
+        Helpers.findAndHookMethod("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader,
                 "updateTheme", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {

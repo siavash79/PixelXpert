@@ -1,19 +1,19 @@
 package sh.siava.AOSPMods.systemui;
 
-import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class CarrierTextManager implements IXposedHookLoadPackage {
+public class CarrierTextManager implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean isEnabled = false;
     public static String customText = "";
 
-    public static void updatePrefs()
+    public void updatePrefs()
     {
+        if(XPrefs.Xprefs == null) return;
         isEnabled = XPrefs.Xprefs.getBoolean("carrierTextMod", false);
         customText = XPrefs.Xprefs.getString("carrierTextValue", "");
     }

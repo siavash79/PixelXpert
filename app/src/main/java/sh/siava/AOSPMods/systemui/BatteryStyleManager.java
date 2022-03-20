@@ -9,18 +9,20 @@ import android.widget.LinearLayout;
 
 import java.lang.reflect.Method;
 
-import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Helpers;
+import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 
 //TODO: unknown battery symbol / percent text beside icon / update shape upon request / other shapes / dual tone
 
-public class BatteryStyleManager implements IXposedHookLoadPackage {
+public class BatteryStyleManager implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
+
     public static boolean circleBatteryEnabled = false;
 
     private int frameColor;
@@ -29,8 +31,9 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
     public static int scaleFactor = 100;
     public static boolean scaleWithPrecent =false;
 
-    public static void updatePrefs()
+    public void updatePrefs()
     {
+        if(XPrefs.Xprefs == null) return;
         String BatteryStyleStr = XPrefs.Xprefs.getString("BatteryStyle", "0");
         scaleFactor = XPrefs.Xprefs.getInt("BatteryIconScaleFactor", 50)*2;
         int batteryStyle = Integer.parseInt(BatteryStyleStr);
@@ -83,7 +86,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                     });
 
 
-        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
+        Helpers.findAndHookMethod(BatteryMeterViewClass,
                 "onBatteryUnknownStateChanged", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -102,7 +105,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
 
         if(scaleBatteryMeterViewsMethod != null)
         {
-            XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
+            Helpers.findAndHookMethod(BatteryMeterViewClass,
                     "scaleBatteryMeterViews", new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -110,7 +113,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
                         }
                     });
 
-            XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
+            Helpers.findAndHookMethod(BatteryMeterViewClass,
                     "onPowerSaveChanged", boolean.class, new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -144,7 +147,7 @@ public class BatteryStyleManager implements IXposedHookLoadPackage {
             }
         }
 
-        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
+        Helpers.findAndHookMethod(BatteryMeterViewClass,
                 "updateColors", int.class, int.class, int.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {

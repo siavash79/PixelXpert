@@ -19,14 +19,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Helpers;
+import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class StatusbarMods implements IXposedHookLoadPackage {
+public class StatusbarMods implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
     //Clock Settings
@@ -50,8 +51,9 @@ public class StatusbarMods implements IXposedHookLoadPackage {
     //vibration icon
     public static boolean showVibrationIcon = true;
 
-    public static void updatePrefs()
+    public void updatePrefs()
     {
+        if(XPrefs.Xprefs == null) return;
 
         //clock settings
         clockPosition = Integer.parseInt(XPrefs.Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
@@ -138,7 +140,7 @@ public class StatusbarMods implements IXposedHookLoadPackage {
             }
         });
 
-        XposedHelpers.findAndHookMethod(QuickStatusBarHeaderClass,
+        Helpers.findAndHookMethod(QuickStatusBarHeaderClass,
                 "onFinishInflate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -150,12 +152,13 @@ public class StatusbarMods implements IXposedHookLoadPackage {
                         ClickListener clickListener = new ClickListener(param.thisObject);
 
 
-                        XposedHelpers.callMethod(mBatteryRemainingIcon, "setOnClickListener", clickListener);
-                        XposedHelpers.callMethod(mClockView, "setOnClickListener", clickListener);
-                        XposedHelpers.callMethod(mClockView, "setOnLongClickListener", clickListener);
-                        XposedHelpers.callMethod(mDateView, "setOnClickListener", clickListener);
-                        XposedHelpers.callMethod(mDateView, "setOnLongClickListener", clickListener);
-
+                        try {
+                            XposedHelpers.callMethod(mBatteryRemainingIcon, "setOnClickListener", clickListener);
+                            XposedHelpers.callMethod(mClockView, "setOnClickListener", clickListener);
+                            XposedHelpers.callMethod(mClockView, "setOnLongClickListener", clickListener);
+                            XposedHelpers.callMethod(mDateView, "setOnClickListener", clickListener);
+                            XposedHelpers.callMethod(mDateView, "setOnLongClickListener", clickListener);
+                        }catch(Exception e) { return;}
                         //to recognize clock's parent
                         XposedHelpers.setAdditionalInstanceField(
                                 XposedHelpers.getObjectField(param.thisObject, "mClockView"),
@@ -182,7 +185,7 @@ public class StatusbarMods implements IXposedHookLoadPackage {
             }
         });
 
-        XposedHelpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
+        Helpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
                 "onViewCreated", View.class, Bundle.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -192,6 +195,7 @@ public class StatusbarMods implements IXposedHookLoadPackage {
                             List<String> mBlockedIcons = (List<String>) XposedHelpers.getObjectField(param.thisObject, "mBlockedIcons");
                             Object mStatusBarIconController = XposedHelpers.getObjectField(param.thisObject, "mStatusBarIconController");
                             Object mDarkIconManager = XposedHelpers.getObjectField(param.thisObject, "mDarkIconManager");
+
 
                             XposedHelpers.callMethod(mStatusBarIconController, "removeIconGroup", mDarkIconManager);
 
@@ -229,7 +233,7 @@ public class StatusbarMods implements IXposedHookLoadPackage {
                     }
                 });
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader,
+        Helpers.findAndHookMethod("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader,
                 "getSmallTime", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -238,7 +242,7 @@ public class StatusbarMods implements IXposedHookLoadPackage {
                     }
                 });
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader,
+        Helpers.findAndHookMethod("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader,
                 "getSmallTime", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -301,10 +305,10 @@ public class StatusbarMods implements IXposedHookLoadPackage {
             Object mClockView = XposedHelpers.getObjectField(parent, "mClockView");
 
             if (v == mClockView || v == mDateView) {
-                Intent nIntent = new Intent(Intent.ACTION_MAIN);
-                nIntent.setClassName("com.android.settings",
+                Intent mIntent = new Intent(Intent.ACTION_MAIN);
+                mIntent.setClassName("com.android.settings",
                         "com.android.settings.Settings$DateTimeSettingsActivity");
-                XposedHelpers.callMethod(mActivityStarter, "startActivity", nIntent, true /* dismissShade */);
+                XposedHelpers.callMethod(mActivityStarter, "startActivity", mIntent, true /* dismissShade */);
 //                mVibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
                 return true;
             }

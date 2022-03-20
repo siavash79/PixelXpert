@@ -5,22 +5,6 @@ import android.content.SharedPreferences;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-import sh.siava.AOSPMods.systemui.BackGestureManager;
-import sh.siava.AOSPMods.systemui.BackToKill;
-import sh.siava.AOSPMods.systemui.BatteryStyleManager;
-import sh.siava.AOSPMods.systemui.CarrierTextManager;
-import sh.siava.AOSPMods.systemui.DoubleTapSleepLS;
-import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
-import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
-import sh.siava.AOSPMods.systemui.LTEiconChange;
-import sh.siava.AOSPMods.systemui.NavBarResizer;
-import sh.siava.AOSPMods.systemui.QSFooterTextManager;
-import sh.siava.AOSPMods.systemui.QSHaptic;
-import sh.siava.AOSPMods.systemui.QSHeaderManager;
-import sh.siava.AOSPMods.systemui.QSQuickPullDown;
-import sh.siava.AOSPMods.systemui.ScreenshotController;
-import sh.siava.AOSPMods.systemui.StatusbarMods;
-import sh.siava.AOSPMods.systemui.UDFPSManager;
 
 
 public class XPrefs implements IXposedHookZygoteInit {
@@ -80,21 +64,9 @@ public class XPrefs implements IXposedHookZygoteInit {
 
         Xprefs.reload();
 
-        UDFPSManager.updatePrefs();
-        CarrierTextManager.updatePrefs();
-        DoubleTapSleepLS.updatePrefs();
-        QSFooterTextManager.updatePrefs();
-        QSHeaderManager.updatePrefs();
-        QSQuickPullDown.updatePrefs();
-        BatteryStyleManager.updatePrefs();
-        BackGestureManager.updatePrefs();
-        NavBarResizer.updatePrefs();
-        LTEiconChange.updatePrefs();
-        BackToKill.updatePrefs();
-        StatusbarMods.updatePrefs();
-        QSHaptic.updatePrefs();
-        FeatureFlagsMods.updatePrefs();
-        ScreenshotController.updatePrefs();
-        KeyguardBottomArea.updatePrefs();
+        for(IXposedModPack thisMod : AOSPMods.runningMods)
+        {
+            thisMod.updatePrefs();
+        }
     }
 }

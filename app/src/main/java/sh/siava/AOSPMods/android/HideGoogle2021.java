@@ -48,7 +48,7 @@ public class HideGoogle2021  {
 
 
     protected void hookMethods() {
-        XposedHelpers.findAndHookMethod("android.app.ApplicationPackageManager", lpparam.classLoader,
+        Helpers.findAndHookMethod("android.app.ApplicationPackageManager", lpparam.classLoader,
                 "hasSystemFeature", String.class, int.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

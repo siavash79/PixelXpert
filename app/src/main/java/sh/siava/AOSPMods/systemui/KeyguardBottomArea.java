@@ -5,20 +5,22 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 
-import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Helpers;
+import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class KeyguardBottomArea implements IXposedHookLoadPackage {
+public class KeyguardBottomArea implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean showCameraOnLockscreen = false;
     public static boolean transparentBGcolor = false;
     final Context[] mContext = new Context[1];
 
-    public static void updatePrefs()
+    public void updatePrefs()
     {
+        if(XPrefs.Xprefs == null) return;
         showCameraOnLockscreen = XPrefs.Xprefs.getBoolean("KeyguardCameraEnabled", false);
         transparentBGcolor = XPrefs.Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
     }
@@ -31,7 +33,7 @@ public class KeyguardBottomArea implements IXposedHookLoadPackage {
         Class UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
 
         //convert wallet button to camera button
-        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
+        Helpers.findAndHookMethod(KeyguardbottomAreaViewClass,
                 "onFinishInflate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -53,7 +55,7 @@ public class KeyguardBottomArea implements IXposedHookLoadPackage {
                 });
 
         //make sure system won't play with our camera button
-        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
+        Helpers.findAndHookMethod(KeyguardbottomAreaViewClass,
                 "updateWalletVisibility", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -65,7 +67,7 @@ public class KeyguardBottomArea implements IXposedHookLoadPackage {
                 });
 
         //Transparent background
-        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
+        Helpers.findAndHookMethod(KeyguardbottomAreaViewClass,
                 "updateAffordanceColors", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -89,7 +91,7 @@ public class KeyguardBottomArea implements IXposedHookLoadPackage {
         //Set camera intent to be always secure when launchd from keyguard screen
 
         Class CameraIntentsClass = XposedHelpers.findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
-        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass.getName()+"$DefaultRightButton", lpparam.classLoader,
+        Helpers.findAndHookMethod(KeyguardbottomAreaViewClass.getName()+"$DefaultRightButton", lpparam.classLoader,
                 "getIntent", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

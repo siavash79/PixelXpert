@@ -3,20 +3,22 @@ package sh.siava.AOSPMods.systemui;
 import android.content.Context;
 import android.widget.ImageView;
 
-import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Helpers;
+import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class UDFPSManager implements IXposedHookLoadPackage {
+public class UDFPSManager implements IXposedModPack {
     private static final String listenPackage = "com.android.systemui";
     public static boolean transparentBG = false;
 
     public static String UDFPS_hide_key = "fingerprint_circle_hide";
 
-    public static void updatePrefs()
+    public void updatePrefs()
     {
+        if(XPrefs.Xprefs == null) return;
         transparentBG = XPrefs.Xprefs.getBoolean(UDFPSManager.UDFPS_hide_key, false);
     }
 
@@ -24,7 +26,7 @@ public class UDFPSManager implements IXposedHookLoadPackage {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        XposedHelpers.findAndHookMethod(" com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
+        Helpers.findAndHookMethod(" com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
                 "updateAlpha", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -36,7 +38,7 @@ public class UDFPSManager implements IXposedHookLoadPackage {
                     }
                 });
 
-        XposedHelpers.findAndHookMethod("com.android.keyguard.LockIconView", lpparam.classLoader,
+        Helpers.findAndHookMethod("com.android.keyguard.LockIconView", lpparam.classLoader,
                 "setUseBackground", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -44,7 +46,7 @@ public class UDFPSManager implements IXposedHookLoadPackage {
                         param.args[0] = false;
                     }
                 });
-        XposedHelpers.findAndHookMethod("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
+        Helpers.findAndHookMethod("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
                 "updateColor", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

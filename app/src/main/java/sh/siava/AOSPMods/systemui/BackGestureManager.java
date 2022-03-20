@@ -2,22 +2,23 @@ package sh.siava.AOSPMods.systemui;
 
 import android.graphics.Point;
 
-import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Helpers;
+import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class BackGestureManager implements IXposedHookLoadPackage {
+public class BackGestureManager implements IXposedModPack {
     private static final String listenPackage = "com.android.systemui";
     public static float backGestureHeightFractionLeft = 1f; // % of screen height. can be anything between 0 to 1
     public static float backGestureHeightFractionRight = 1f; // % of screen height. can be anything between 0 to 1
     public static boolean leftEnabled = true;
     public static boolean rightEnabled = true;
 
-    public static void updatePrefs()
+    public void updatePrefs()
     {
+        if(XPrefs.Xprefs == null) return;
         leftEnabled = XPrefs.Xprefs.getBoolean("BackFromLeft", true);
         rightEnabled = XPrefs.Xprefs.getBoolean("BackFromRight", true);
         backGestureHeightFractionLeft = XPrefs.Xprefs.getInt("BackLeftHeight", 100) / 100f;
@@ -29,7 +30,7 @@ public class BackGestureManager implements IXposedHookLoadPackage {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader,
+        Helpers.findAndHookMethod("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader,
                 "isWithinInsets", int.class, int.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

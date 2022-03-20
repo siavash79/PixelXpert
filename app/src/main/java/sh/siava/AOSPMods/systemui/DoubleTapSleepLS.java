@@ -1,12 +1,5 @@
 package sh.siava.AOSPMods.systemui;
 
-import de.robv.android.xposed.IXposedHookLoadPackage;
-import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.XPrefs;
-
 import android.content.Context;
 import android.os.PowerManager;
 import android.os.SystemClock;
@@ -14,14 +7,23 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class DoubleTapSleepLS implements IXposedHookLoadPackage {
+import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Helpers;
+import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.XPrefs;
+
+public class DoubleTapSleepLS implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean doubleTapToSleepEnabled = false;
 
     final Context[] context = new Context[1];
 
-    public static void updatePrefs()
+    public void updatePrefs()
     {
+        if(XPrefs.Xprefs == null) return;
         doubleTapToSleepEnabled = XPrefs.Xprefs.getBoolean("DoubleTapSleep", false);
     }
 
@@ -37,7 +39,6 @@ public class DoubleTapSleepLS implements IXposedHookLoadPackage {
                 PowerManager pm = (PowerManager) context[0].getSystemService(Context.POWER_SERVICE);
                 if (pm != null) {
                     XposedHelpers.callMethod(pm, "goToSleep", SystemClock.uptimeMillis());
-
                 }
                 return true;
             }
@@ -52,7 +53,7 @@ public class DoubleTapSleepLS implements IXposedHookLoadPackage {
                         context[0] = (Context) XposedHelpers.callMethod(mView, "getContext");
                     }
                 });
-        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader,
+        Helpers.findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader,
                 "createTouchHandler", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -61,7 +62,7 @@ public class DoubleTapSleepLS implements IXposedHookLoadPackage {
                         boolean mDozing = (boolean) XposedHelpers.getObjectField(param.thisObject, "mDozing");
                         int mBarState = (int) XposedHelpers.getObjectField(param.thisObject, "mBarState");
 
-                        XposedHelpers.findAndHookMethod((Class)touchHandler.getClass(),
+                        Helpers.findAndHookMethod((Class)touchHandler.getClass(),
                                 "onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
                                     @Override
                                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

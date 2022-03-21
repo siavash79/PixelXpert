@@ -1,10 +1,11 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!--General strings-->
     <string name="app_name" translatable="false">AOSP Mods</string>
     <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Please confirm if the module is activated on LSPosed Manager</string>
     <string name="hide_default">Hide (Default)</string>
+    <string name="percent_of_default_size">% of default size</string>
 
     <!--Category titles-->
     <string name="lockscreen_header_title">Lock Screen</string>
@@ -22,6 +23,9 @@
     <string name="carrier_text_mod_enabled">Custom carrier text</string>
     <string name="carrier_text_value">Insert custom text</string>
     <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
+    <string name="keyguard_bottom_category">Bottom area shortcuts</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Hide circle around icons</string>
+    <string name="keyguard_bottom_force_camera_title">Show camera shortcut</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Double tap to sleep</string>
@@ -37,12 +41,15 @@
     <string name="qs_pulldown_switch_title">Quick QS panel pull down from status bar</string>
     <string name="qs_pulldown_side_title">Quick pull down side</string>
     <string name="qs_pulldown_category">Quick settings pull down</string>
+    <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
     <string name="battery_style_title">Choose a battery style</string>
-    <string name="battery_icon_size_title">Battery Icon Size</string>
     <string name="battery_show_percent_title">Show battery percentage</string>
     <string name="battery_style_category_title">Battery style</string>
     <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
+    <string name="battery_icon_size_title">Battery Icon Size</string>
+    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
+    <string name="combined_signal_icon_title">Combined signal icons</string>
     <string name="sbc_position_title">Clock position</string>
     <string name="sbc_ampm_style">AM/PM Style</string>
     <string name="sbc_show_secs">Show seconds</string>
@@ -55,7 +62,6 @@
     <string name="sbc_custom_date_after">Custom date format after clock</string>
     <string name="sbc_header">Status bar clock customization</string>
     <string name="sbc_may_take_one_minute">Takes effect on time update or SysUI restart</string>
-    <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configure back gesture</string>
@@ -69,7 +75,7 @@
     <string name="sysui_restart_needed">Requires a SystemUI restart to apply</string>
     <string name="threebutton_header_title">3-Button navigation</string>
     <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
-    <string name="pill_width_summary">% of standard size</string>
+    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
 
     <!--Miscellaneous bar related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
@@ -105,10 +111,5 @@
     <string name="fourg_lte_default">System Default</string>
     <string name="fourg_lte_lte">Force LTE icon</string>
     <string name="fourg_lte_fourg">Force 4G icon</string>
-    <string name="battery_size_summary">% of default size</string>
-    <string name="combined_signal_icon_title">Combined signal icons</string>
-    <string name="keyguard_bottom_category">Bottom area shortcuts</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Hide circle around shortcuts</string>
-    <string name="keyguard_bottom_force_camera_title">Force camera shortcut</string>
 
 </resources>

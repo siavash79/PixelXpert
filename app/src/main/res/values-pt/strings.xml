@@ -27,7 +27,6 @@
     <string name="qs_pulldown_side_title">Lado por onde deslizar</string>
     <string name="qs_pulldown_category">Deslize rápido para baixo</string>
     <string name="battery_style_title">Escolha um estilo de bateria</string>
-    <string name="battery_icon_size_title">Battery Icon Size</string>
     <string name="battery_show_percent_title">Mostrar percentagem</string>
     <string name="battery_style_category_title">Estilo da bateria</string>
     <string name="sbc_position_title">Posição do relógio</string>
@@ -74,10 +73,10 @@
     <string name="fourg_lte_lte">Forçar LTE</string>
     <string name="fourg_lte_fourg">Forçar 4G</string>
     <string name="lte_4g_icon_title">Ícone 4G / LTE</string>
-    <string name="pill_width_summary">% do tamanho padrão</string>
-    <string name="battery_size_summary">% of default size</string>
-    <string name="combined_signal_icon_title">Combined signal icons</string>
-    <string name="keyguard_bottom_category">Bottom area shortcuts</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Hide circle around shortcuts</string>
-    <string name="keyguard_bottom_force_camera_title">Force camera shortcut</string>
+    <string name="keyguard_bottom_category">Atalhos no fundo do ecrã</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Escoder círculo à volta dos ícones</string>
+    <string name="keyguard_bottom_force_camera_title">Mostrar atalho da Câmara</string>
+    <string name="combined_signal_icon_title">Ícones de sinal combinados</string>
+    <string name="percent_of_default_size">% do tamanho padrão</string>
+    <string name="battery_icon_size_title">Tamanho do ícone da bateria</string>
 </resources>

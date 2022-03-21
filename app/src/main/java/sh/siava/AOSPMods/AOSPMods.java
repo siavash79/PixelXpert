@@ -16,6 +16,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         if (lpparam.packageName.equals("com.android.systemui")) {
 //            XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", true).commit();
 
+            modPacks.add(StatusbarMods.class);
             modPacks.add(BackGestureManager.class);
             modPacks.add(BackToKill.class);
             modPacks.add(BatteryStyleManager.class);
@@ -30,8 +31,8 @@ public class AOSPMods implements IXposedHookLoadPackage{
             modPacks.add(QSHeaderManager.class);
             modPacks.add(QSQuickPullDown.class);
             modPacks.add(ScreenshotController.class);
-            modPacks.add(StatusbarMods.class);
             modPacks.add(UDFPSManager.class);
+
 
             for (Class mod : modPacks)
             {
@@ -41,7 +42,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
                     instance.handleLoadPackage(lpparam);
                     runningMods.add(instance);
                 }
-                catch (Exception ignored){}
+                catch (Exception | Error ignored){}
             }
         }
     }

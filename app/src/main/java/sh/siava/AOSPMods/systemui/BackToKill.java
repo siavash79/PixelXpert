@@ -7,7 +7,6 @@ import com.topjohnwu.superuser.Shell;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Helpers;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -40,7 +39,7 @@ public class BackToKill implements IXposedModPack {
             }
         };
 
-        Helpers.findAndHookMethod(NavBarClass,
+        XposedHelpers.findAndHookMethod(NavBarClass,
                 "getView", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {

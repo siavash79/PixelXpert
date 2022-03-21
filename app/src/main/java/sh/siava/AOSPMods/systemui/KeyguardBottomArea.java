@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Helpers;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -31,9 +30,10 @@ public class KeyguardBottomArea implements IXposedModPack {
 
         Class KeyguardbottomAreaViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
         Class UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
+        Class CameraIntentsClass = XposedHelpers.findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
 
         //convert wallet button to camera button
-        Helpers.findAndHookMethod(KeyguardbottomAreaViewClass,
+        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
                 "onFinishInflate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -55,19 +55,29 @@ public class KeyguardBottomArea implements IXposedModPack {
                 });
 
         //make sure system won't play with our camera button
-        Helpers.findAndHookMethod(KeyguardbottomAreaViewClass,
+        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
                 "updateWalletVisibility", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if(!showCameraOnLockscreen) return;
+
                         ImageView mWalletButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mWalletButton");
-                        mWalletButton.setVisibility(View.VISIBLE);
+                        boolean mDozing = (boolean) XposedHelpers.getObjectField(param.thisObject, "mDozing");
+
+                        if(mDozing) // AOD is showing
+                        {
+                            mWalletButton.setVisibility(View.GONE);
+                        }
+                        else
+                        {
+                            mWalletButton.setVisibility(View.VISIBLE);
+                        }
                         param.setResult(null);
                     }
                 });
 
         //Transparent background
-        Helpers.findAndHookMethod(KeyguardbottomAreaViewClass,
+        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
                 "updateAffordanceColors", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -90,8 +100,7 @@ public class KeyguardBottomArea implements IXposedModPack {
 
         //Set camera intent to be always secure when launchd from keyguard screen
 
-        Class CameraIntentsClass = XposedHelpers.findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
-        Helpers.findAndHookMethod(KeyguardbottomAreaViewClass.getName()+"$DefaultRightButton", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass.getName()+"$DefaultRightButton", lpparam.classLoader,
                 "getIntent", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

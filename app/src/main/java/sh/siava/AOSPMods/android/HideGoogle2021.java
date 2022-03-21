@@ -4,7 +4,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.*;
 
 public class HideGoogle2021  {
 
@@ -48,7 +47,7 @@ public class HideGoogle2021  {
 
 
     protected void hookMethods() {
-        Helpers.findAndHookMethod("android.app.ApplicationPackageManager", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod("android.app.ApplicationPackageManager", lpparam.classLoader,
                 "hasSystemFeature", String.class, int.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -57,7 +56,7 @@ public class HideGoogle2021  {
                         String name = (String) param.args[0];
                         XposedBridge.log("SIAPOSED: " + lpparam.packageName + " asking for: " + name);
 /*
-                        Class SysPropClass = XposedHelpers.findClass("android.os.SystemProperties", lpparam.classLoader);
+                        Class SysPropClass = Helpers.findClass("android.os.SystemProperties", lpparam.classLoader);
                         boolean isPixel6Device = false;//Arrays.asList(pixel6Codenames).contains(SystemProperties.get(DEVICE));
                         String packageName = lpparam.packageName;
 

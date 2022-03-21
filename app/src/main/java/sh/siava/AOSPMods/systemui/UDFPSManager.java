@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Helpers;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -26,7 +25,10 @@ public class UDFPSManager implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Helpers.findAndHookMethod(" com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
+        Class UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
+
+
+        XposedHelpers.findAndHookMethod("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
                 "updateAlpha", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -38,7 +40,7 @@ public class UDFPSManager implements IXposedModPack {
                     }
                 });
 
-        Helpers.findAndHookMethod("com.android.keyguard.LockIconView", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod("com.android.keyguard.LockIconView", lpparam.classLoader,
                 "setUseBackground", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -46,7 +48,7 @@ public class UDFPSManager implements IXposedModPack {
                         param.args[0] = false;
                     }
                 });
-        Helpers.findAndHookMethod("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
                 "updateColor", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -55,7 +57,6 @@ public class UDFPSManager implements IXposedModPack {
 
                         Object mLockScreenFp = XposedHelpers.getObjectField(param.thisObject, "mLockScreenFp");
 
-                        Class UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
 
                         int mTextColorPrimary = (int) XposedHelpers.callStaticMethod(UtilClass, "getColorAttrDefaultColor", mContext,
                                 mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));

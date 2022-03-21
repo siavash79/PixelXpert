@@ -5,7 +5,6 @@ import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Helpers;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -25,17 +24,19 @@ public class QSFooterTextManager implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Helpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod("com.android.systemui.qs.QSFooterView", lpparam.classLoader,
                 "setBuildText", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!customQSFooterTextEnabled) return;
 
                         TextView mBuildText = (TextView) XposedHelpers.getObjectField(param.thisObject, "mBuildText");
-                        boolean mShouldShowBuildText = (boolean) XposedHelpers.getObjectField(param.thisObject, "mShouldShowBuildText");
 
                         mBuildText.setText(customText);
-                        mShouldShowBuildText = true;
+
+                        boolean mShouldShowBuildText = customText.trim().length() > 0;
+
+                        XposedHelpers.setObjectField(param.thisObject, "mShouldShowBuildText", mShouldShowBuildText);
                         mBuildText.setSelected(true);
                     }
                 });

@@ -13,7 +13,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Helpers;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -59,13 +58,28 @@ public class BatteryStyleManager implements IXposedModPack {
             }
         });
 
-        Class BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
+        Class BatteryMeterViewClass = XposedHelpers.findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
 
         if(BatteryMeterViewClass == null)
         {
             BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.BatteryMeterView", lpparam.classLoader);
         }
-        if(BatteryMeterViewClass == null) return; //we didn't find it!
+
+        //Android 12 June beta
+        Method updatePercentTextMethod = XposedHelpers.findMethodExactIfExists(BatteryMeterViewClass, "updatePercentText");
+        if(updatePercentTextMethod != null) {
+            XposedBridge.hookMethod(updatePercentTextMethod, new batteryUpdater());
+        }
+        else {
+            //Android 12L+
+            Method onBatteryLevelChangedMethod = XposedHelpers.findMethodExactIfExists(BatteryMeterViewClass, "onBatteryLevelChanged", boolean.class, int.class);
+            if (onBatteryLevelChangedMethod == null) {
+                //Android 12
+                onBatteryLevelChangedMethod = XposedHelpers.findMethodExact(BatteryMeterViewClass, "onBatteryLevelChanged", boolean.class, int.class, int.class);
+            }
+            XposedBridge.hookMethod(onBatteryLevelChangedMethod, new batteryUpdater());
+        }
+
 
         XposedHelpers.findAndHookConstructor(BatteryMeterViewClass,
                     Context.class, AttributeSet.class, new XC_MethodHook() {
@@ -86,7 +100,7 @@ public class BatteryStyleManager implements IXposedModPack {
                     });
 
 
-        Helpers.findAndHookMethod(BatteryMeterViewClass,
+        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                 "onBatteryUnknownStateChanged", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -105,15 +119,14 @@ public class BatteryStyleManager implements IXposedModPack {
 
         if(scaleBatteryMeterViewsMethod != null)
         {
-            Helpers.findAndHookMethod(BatteryMeterViewClass,
-                    "scaleBatteryMeterViews", new XC_MethodHook() {
+            XposedBridge.hookMethod(scaleBatteryMeterViewsMethod, new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             scale(param);
                         }
                     });
 
-            Helpers.findAndHookMethod(BatteryMeterViewClass,
+            XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                     "onPowerSaveChanged", boolean.class, new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -129,25 +142,7 @@ public class BatteryStyleManager implements IXposedModPack {
             scaleWithPrecent = true;
         }
 
-
-        //Android 12 June beta
-        Method updatePercentTextMethod = XposedHelpers.findMethodExactIfExists(BatteryMeterViewClass, "updatePercentText");
-        if(updatePercentTextMethod != null) {
-            XposedBridge.hookMethod(updatePercentTextMethod, new batteryUpdater());
-        }
-        else {
-            //Android 12L+
-            Method onBatteryLevelChangedMethod = XposedHelpers.findMethodExactIfExists(BatteryMeterViewClass, "onBatteryLevelChanged", boolean.class, int.class);
-            if (onBatteryLevelChangedMethod == null) {
-                //Android 12
-                onBatteryLevelChangedMethod = XposedHelpers.findMethodExactIfExists(BatteryMeterViewClass, "onBatteryLevelChanged", boolean.class, int.class, int.class);
-            }
-            if (onBatteryLevelChangedMethod != null) {
-                XposedBridge.hookMethod(onBatteryLevelChangedMethod, new batteryUpdater());
-            }
-        }
-
-        Helpers.findAndHookMethod(BatteryMeterViewClass,
+        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
                 "updateColors", int.class, int.class, int.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -159,6 +154,7 @@ public class BatteryStyleManager implements IXposedModPack {
                     }
                 });
     }
+
     class batteryUpdater extends XC_MethodHook {
         @Override
         protected void afterHookedMethod(MethodHookParam param) throws Throwable {

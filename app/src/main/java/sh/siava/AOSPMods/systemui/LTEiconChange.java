@@ -5,7 +5,6 @@ import android.content.Context;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Helpers;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -28,7 +27,7 @@ public class LTEiconChange implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Helpers.findAndHookMethod("com.android.settingslib.mobile.MobileMappings$Config", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod("com.android.settingslib.mobile.MobileMappings$Config", lpparam.classLoader,
                 "readConfig", Context.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {

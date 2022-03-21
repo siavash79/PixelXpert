@@ -5,7 +5,6 @@ import android.os.Build;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Helpers;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -27,7 +26,8 @@ public class FeatureFlagsMods implements IXposedModPack {
         if(Build.VERSION.SDK_INT < 32) return; //Feature flags is newly introduced!
 
         Class FeatureFlagsClass = XposedHelpers.findClass("com.android.systemui.flags.FeatureFlags", lpparam.classLoader);
-        Helpers.findAndHookMethod(FeatureFlagsClass, "isCombinedStatusBarSignalIconsEnabled", new XC_MethodHook() {
+
+        XposedHelpers.findAndHookMethod(FeatureFlagsClass, "isCombinedStatusBarSignalIconsEnabled", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 param.setResult(combinedSignalEnabled);

@@ -13,7 +13,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Helpers;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -57,30 +56,20 @@ public class QSHeaderManager implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Class QSTileViewImplClass = Helpers.findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
-        Class UtilsClass = Helpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
-        Class OngoingPrivacyChipClass = Helpers.findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
+        Class QSTileViewImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
+        Class UtilsClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
+        Class OngoingPrivacyChipClass = XposedHelpers.findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
         Class FragmentClass = XposedHelpers.findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
 
-
-        if(QSTileViewImplClass == null ||
-                UtilsClass == null ||
-                OngoingPrivacyChipClass == null ||
-                FragmentClass == null) return; //we didn't find them
-
-        Method ScrimControllerMethod = Helpers.findMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
+        Method ScrimControllerMethod = XposedHelpers.findMethodExactIfExists("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
                 "applyStateToAlpha");
         if(ScrimControllerMethod == null)
         {
-            ScrimControllerMethod = Helpers.findMethod("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
+            ScrimControllerMethod = XposedHelpers.findMethodExact("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
                     "applyState");
         }
-        if(ScrimControllerMethod == null)
-        {
-            return;
-        }
 
-        Helpers.findAndHookMethod(OngoingPrivacyChipClass,
+        XposedHelpers.findAndHookMethod(OngoingPrivacyChipClass,
                 "updateResources", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -123,7 +112,8 @@ public class QSHeaderManager implements IXposedModPack {
             }
         });
 
-        Class ScrimStateEnum = Helpers.findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
+        Class ScrimStateEnum = XposedHelpers.findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
+
         Object[] constants =  ScrimStateEnum.getEnumConstants();
         for(int i = 0; i< constants.length; i++)
         {
@@ -132,7 +122,7 @@ public class QSHeaderManager implements IXposedModPack {
             {
                 case "KEYGUARD":
                     //Xposedbridge.log("SIAPOSED found keyguard");
-                    Helpers.findAndHookMethod(constants[i].getClass(),
+                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -150,7 +140,7 @@ public class QSHeaderManager implements IXposedModPack {
                     break;
                 case "BOUNCER":
                     //Xposedbridge.log("SIAPOSED found bouncer");
-                    Helpers.findAndHookMethod(constants[i].getClass(),
+                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -162,7 +152,7 @@ public class QSHeaderManager implements IXposedModPack {
                             });
                     break;
                 case "SHADE_LOCKED":
-                    Helpers.findAndHookMethod(constants[i].getClass(),
+                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -178,7 +168,7 @@ public class QSHeaderManager implements IXposedModPack {
                                     }
                                 }
                             });
-                    Helpers.findAndHookMethod(constants[i].getClass(),
+                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "getBehindTint", new XC_MethodHook() {
                                 @Override
                                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -190,7 +180,7 @@ public class QSHeaderManager implements IXposedModPack {
                     break;
                 case "UNLOCKED":
 
-                    Helpers.findAndHookMethod(constants[i].getClass(),
+                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -210,13 +200,14 @@ public class QSHeaderManager implements IXposedModPack {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                Class InterestingClass = XposedHelpers.findClass("com.android.settingslib.applications.InterestingConfigChanges", lpparam.classLoader);
+
                 Object o = InterestingClass.getDeclaredConstructor(int.class).newInstance(0x40000000 | 0x0004 | 0x0100 | 0x80000000 | 0x0200);
-//                Class ActivityClass = XposedHelpers.findClass("android.content.pm.ActivityInfo", lpparam.classLoader);
+//                Class ActivityClass = Helpers.findClass("android.content.pm.ActivityInfo", lpparam.classLoader);
                 XposedHelpers.setObjectField(param.thisObject, "mConfigChanges", o);
             }
         });
 
-        Helpers.findAndHookMethod("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader,
                 "updateTheme", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {

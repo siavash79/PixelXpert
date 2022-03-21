@@ -22,7 +22,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Helpers;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -104,20 +103,21 @@ public class StatusbarMods implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Class ActivityStarterClass = Helpers.findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
-        Class DependencyClass = Helpers.findClass("com.android.systemui.Dependency", lpparam.classLoader);
+        Class ActivityStarterClass = XposedHelpers.findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
+        Class DependencyClass = XposedHelpers.findClass("com.android.systemui.Dependency", lpparam.classLoader);
         Class CollapsedStatusBarFragmentClass;
-        Class KeyguardStatusBarViewControllerClass = Helpers.findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
-        Class QuickStatusBarHeaderControllerClass = Helpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
-        Class QuickStatusBarHeaderClass = Helpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
+        Class KeyguardStatusBarViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
+        Class QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
+        Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
+        Class ClockClass = XposedHelpers.findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 
-        CollapsedStatusBarFragmentClass = Helpers.findClass("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
+
+        CollapsedStatusBarFragmentClass = XposedHelpers.findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 
         if(CollapsedStatusBarFragmentClass == null)
         {
-            CollapsedStatusBarFragmentClass = Helpers.findClass("com.android.systemui.statusbar.phone.CollapsedStatusBarFragment", lpparam.classLoader);
+            CollapsedStatusBarFragmentClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.CollapsedStatusBarFragment", lpparam.classLoader);
         }
-        if(CollapsedStatusBarFragmentClass == null) return; //we didn't find it
 
         XposedBridge.hookAllConstructors(QuickStatusBarHeaderClass, new XC_MethodHook() {
             @Override
@@ -136,7 +136,7 @@ public class StatusbarMods implements IXposedModPack {
             }
         });
 
-        Helpers.findAndHookMethod(QuickStatusBarHeaderClass,
+        XposedHelpers.findAndHookMethod(QuickStatusBarHeaderClass,
                 "onFinishInflate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -181,7 +181,7 @@ public class StatusbarMods implements IXposedModPack {
             }
         });
 
-        Helpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
+        XposedHelpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
                 "onViewCreated", View.class, Bundle.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -229,7 +229,7 @@ public class StatusbarMods implements IXposedModPack {
                     }
                 });
 
-        Helpers.findAndHookMethod("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod(ClockClass,
                 "getSmallTime", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -238,7 +238,7 @@ public class StatusbarMods implements IXposedModPack {
                     }
                 });
 
-        Helpers.findAndHookMethod("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader,
+        XposedHelpers.findAndHookMethod(ClockClass,
                 "getSmallTime", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -335,5 +335,4 @@ public class StatusbarMods implements IXposedModPack {
         }
 
     }
-
 }

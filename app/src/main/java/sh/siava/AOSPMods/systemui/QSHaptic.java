@@ -8,7 +8,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Helpers;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -29,6 +28,7 @@ public class QSHaptic implements IXposedModPack {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         Class QSTileImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
+
         XposedBridge.hookAllConstructors(QSTileImplClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -41,10 +41,10 @@ public class QSHaptic implements IXposedModPack {
             }
         });
 
-        Helpers.findAndHookMethod(QSTileImplClass,
+        XposedHelpers.findAndHookMethod(QSTileImplClass,
                 "click", View.class ,new vibrateFeedback());
 
-        Helpers.findAndHookMethod(QSTileImplClass,
+        XposedHelpers.findAndHookMethod(QSTileImplClass,
                 "longClick", View.class ,new vibrateFeedback());
     }
 

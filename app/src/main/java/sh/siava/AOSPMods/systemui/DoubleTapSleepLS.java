@@ -11,7 +11,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Helpers;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -45,15 +44,8 @@ public class DoubleTapSleepLS implements IXposedModPack {
         });
 
         Class NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
-        XposedBridge.hookAllConstructors(NotificationPanelViewControllerClass,
-                new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        Object mView = XposedHelpers.getObjectField(param.thisObject, "mView");
-                        context[0] = (Context) XposedHelpers.callMethod(mView, "getContext");
-                    }
-                });
-        Helpers.findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader,
+
+        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader,
                 "createTouchHandler", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -62,7 +54,7 @@ public class DoubleTapSleepLS implements IXposedModPack {
                         boolean mDozing = (boolean) XposedHelpers.getObjectField(param.thisObject, "mDozing");
                         int mBarState = (int) XposedHelpers.getObjectField(param.thisObject, "mBarState");
 
-                        Helpers.findAndHookMethod((Class)touchHandler.getClass(),
+                        XposedHelpers.findAndHookMethod((Class)touchHandler.getClass(),
                                 "onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
                                     @Override
                                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -76,6 +68,16 @@ public class DoubleTapSleepLS implements IXposedModPack {
                                         }
                                     }
                                 });
+                    }
+                });
+
+
+        XposedBridge.hookAllConstructors(NotificationPanelViewControllerClass,
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        Object mView = XposedHelpers.getObjectField(param.thisObject, "mView");
+                        context[0] = (Context) XposedHelpers.callMethod(mView, "getContext");
                     }
                 });
 

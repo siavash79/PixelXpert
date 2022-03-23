@@ -79,6 +79,7 @@
 
     <!--Miscellaneous bar related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
+    <string name="volume_key_skip_title">Use volume key to skip</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

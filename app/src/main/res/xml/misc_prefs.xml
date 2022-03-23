@@ -5,4 +5,8 @@
         android:defaultValue="false"
         android:key="disableScreenshotSound"
         android:title="@string/screenshot_sound_disable_title" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="volumeToSkip"
+        android:title="@string/volume_key_skip_title" />
 </PreferenceScreen>

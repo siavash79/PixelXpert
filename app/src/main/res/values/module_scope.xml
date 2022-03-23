@@ -2,5 +2,6 @@
 <resources>
     <string-array name="module_scope">
         <item>com.android.systemui</item>
+        <item>android.inputmethodservice.InputMethodService</item>
     </string-array>
 </resources>

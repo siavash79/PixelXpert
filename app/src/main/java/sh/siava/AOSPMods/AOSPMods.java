@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.systemui.*;
+import sh.siava.AOSPMods.android.*;
 
 public class AOSPMods implements IXposedHookLoadPackage{
 
@@ -44,6 +45,22 @@ public class AOSPMods implements IXposedHookLoadPackage{
                 }
                 catch (Exception | Error ignored){}
             }
+        }
+        if (lpparam.packageName.equals("android.inputmethodservice.InputMethodService")) {
+              XPrefs.Xprefs.edit().putBoolean(InputMethodServiceConnected", true).commit();
+            
+            modPacks.add(VolumeToSkip.class);
+               
+            for (class mod : modPacks)
+            {
+                try {
+                    IXposedModPack instance = ((IXposedModPack) mod.newInstance());
+                    instance.updatePrefs();
+                    instance.handleLoadPackage(lpparam);
+                    runningMods.add(instance);
+                }
+                catch (Exception | Error ignored){}
+            }                             
         }
     }
 

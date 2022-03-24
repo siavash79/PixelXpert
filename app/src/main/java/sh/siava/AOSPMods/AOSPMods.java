@@ -29,6 +29,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
         if (lpparam.packageName.equals("com.android.systemui")) {
+
 //            XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", true).commit();
 
 //            Helpers.dumpClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam);
@@ -59,7 +60,10 @@ public class AOSPMods implements IXposedHookLoadPackage{
                     instance.handleLoadPackage(lpparam);
                     runningMods.add(instance);
                 }
-                catch (Exception | Error ignored){}
+                catch (Throwable T)
+                {
+                    T.printStackTrace();
+                }
             }
         }
     }

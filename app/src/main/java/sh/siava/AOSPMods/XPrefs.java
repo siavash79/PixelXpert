@@ -1,6 +1,7 @@
 package sh.siava.AOSPMods;
 
 import android.content.SharedPreferences;
+import android.content.res.XModuleResources;
 
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XSharedPreferences;
@@ -10,8 +11,13 @@ import de.robv.android.xposed.XposedBridge;
 public class XPrefs implements IXposedHookZygoteInit {
 
     public static XSharedPreferences Xprefs;
+    public static String MOD_PATH = "";
+    public static XModuleResources modRes;
+
+
     private static XSharedPreferences getPref(String path) {
         XSharedPreferences pref = new XSharedPreferences(BuildConfig.APPLICATION_ID, path);
+
         if(pref == null)
         {
             XposedBridge.log("SIAPOS null pref");
@@ -50,8 +56,10 @@ public class XPrefs implements IXposedHookZygoteInit {
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
 
-        loadEverything();
+        MOD_PATH = startupParam.modulePath;
+        modRes = XModuleResources.createInstance(XPrefs.MOD_PATH, null);
 
+        loadEverything();
     }
 
     private void loadEverything()

@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.security.Key;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -53,6 +55,16 @@ public class KeyguardBottomArea implements IXposedModPack {
                         mWalletButton.setClickable(true);
                     }
                 });
+
+        //make sure system won't play with our camera button
+        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass, "onWalletCardsRetrieved", "android.service.quickaccesswallet.GetWalletCardsResponse", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                if(!showCameraOnLockscreen) return;
+                param.setResult(null);
+            }
+        });
+
 
         //make sure system won't play with our camera button
         XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,

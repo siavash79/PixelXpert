@@ -27,6 +27,7 @@ public class QSHaptic implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+
         Class QSTileImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
 
         XposedBridge.hookAllConstructors(QSTileImplClass, new XC_MethodHook() {
@@ -54,6 +55,11 @@ public class QSHaptic implements IXposedModPack {
             if(!QSHapticEnabled) return;
             XposedHelpers.callMethod(mVibrator, "vibrate", 8);
         }
+    }
+
+    @Override
+    public String getListenPack() {
+        return listenPackage;
     }
 
 

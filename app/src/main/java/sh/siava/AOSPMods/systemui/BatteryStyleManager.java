@@ -200,4 +200,10 @@ public class BatteryStyleManager implements IXposedModPack {
 
         mBatteryIconView.setLayoutParams(scaledLayoutParams);
     }
+
+    @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
+
 }

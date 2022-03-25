@@ -23,6 +23,7 @@ public class ScreenshotController implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+
         Class ScreenshotControllerClass = XposedHelpers.findClass("com.android.systemui.screenshot.ScreenshotController", lpparam.classLoader);
 
         XposedBridge.hookAllConstructors(ScreenshotControllerClass, new XC_MethodHook() {
@@ -46,4 +47,10 @@ public class ScreenshotController implements IXposedModPack {
         @Override
         public void release(){}
     }
+
+    @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
+
 }

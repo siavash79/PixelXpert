@@ -27,6 +27,7 @@ public class LTEiconChange implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+
         XposedHelpers.findAndHookMethod("com.android.settingslib.mobile.MobileMappings$Config", lpparam.classLoader,
                 "readConfig", Context.class, new XC_MethodHook() {
                     @Override
@@ -44,4 +45,11 @@ public class LTEiconChange implements IXposedModPack {
                     }
                 });
     }
+
+    @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
+
+
 }

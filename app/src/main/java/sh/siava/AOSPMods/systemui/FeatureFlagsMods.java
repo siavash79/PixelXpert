@@ -34,4 +34,10 @@ public class FeatureFlagsMods implements IXposedModPack {
             }
         });
     }
+
+    @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
+
 }

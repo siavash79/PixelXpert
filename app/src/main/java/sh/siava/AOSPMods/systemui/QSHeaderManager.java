@@ -56,6 +56,7 @@ public class QSHeaderManager implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+
         Class QSTileViewImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
         Class UtilsClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
         Class OngoingPrivacyChipClass = XposedHelpers.findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
@@ -222,4 +223,11 @@ public class QSHeaderManager implements IXposedModPack {
                     }
                 });
     }
+
+    @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
+
+
 }

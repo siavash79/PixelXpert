@@ -22,6 +22,11 @@ public class UDFPSManager implements IXposedModPack {
     }
 
     @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
+
+    @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 

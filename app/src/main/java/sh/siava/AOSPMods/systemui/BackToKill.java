@@ -51,4 +51,10 @@ public class BackToKill implements IXposedModPack {
                     }
                 });
     }
+
+    @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
+
 }

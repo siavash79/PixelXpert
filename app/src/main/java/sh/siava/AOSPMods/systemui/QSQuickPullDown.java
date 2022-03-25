@@ -26,6 +26,7 @@ public class QSQuickPullDown implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+
         XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader,
                 "isOpenQsEvent", MotionEvent.class, new XC_MethodHook() {
                     @Override
@@ -61,4 +62,11 @@ public class QSQuickPullDown implements IXposedModPack {
                     }
                 });
     }
+
+    @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
+
+
 }

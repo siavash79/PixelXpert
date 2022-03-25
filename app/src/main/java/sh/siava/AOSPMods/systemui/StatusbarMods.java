@@ -103,6 +103,7 @@ public class StatusbarMods implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+
         Class ActivityStarterClass = XposedHelpers.findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
         Class DependencyClass = XposedHelpers.findClass("com.android.systemui.Dependency", lpparam.classLoader);
         Class CollapsedStatusBarFragmentClass;
@@ -335,4 +336,11 @@ public class StatusbarMods implements IXposedModPack {
         }
 
     }
+    
+    @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
+
+
 }

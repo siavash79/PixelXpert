@@ -73,5 +73,9 @@ public class BackGestureManager implements IXposedModPack {
                 });
     }
 
+    @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
 
 }

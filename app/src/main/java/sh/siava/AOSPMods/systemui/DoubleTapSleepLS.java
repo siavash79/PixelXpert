@@ -82,4 +82,10 @@ public class DoubleTapSleepLS implements IXposedModPack {
                 });
 
     }
+
+    @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
+
 }

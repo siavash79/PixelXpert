@@ -38,4 +38,10 @@ public class CarrierTextManager implements IXposedModPack {
                     }
                 });
     }
+
+    @Override
+    public String getListenPack() {
+        return listenPackage;
+    }
+
 }

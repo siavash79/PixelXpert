@@ -14,6 +14,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.XPrefs;
 
 public class QSHeaderManager implements IXposedModPack {
@@ -212,13 +213,11 @@ public class QSHeaderManager implements IXposedModPack {
                 "updateTheme", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        Runtime.getRuntime().exec("cmd overlay disable sh.siava.AOSPMods_QSTheme");
+                        Helpers.setOverlay("QSLightTheme", false);
                         Thread.sleep(50);
 
                         if(lightQSHeaderEnabled) {
-                            Runtime.getRuntime().exec("cmd overlay enable sh.siava.AOSPMods_QSTheme");
-                            Thread.sleep(50);
-                            Runtime.getRuntime().exec("cmd overlay set-priority sh.siava.AOSPMods_QSTheme lowest");
+                            Helpers.setOverlay("QSLightTheme", true);
                         }
                     }
                 });

@@ -13,7 +13,7 @@ public class Overlays {
         Overlays = new HashMap<>();
 
         Overlays.put("HideNavbarOverlay", new overlayProp("com.android.overlay.removenavbar", false));
-
+        Overlays.put("QSLightTheme", new overlayProp("sh.siava.AOSPMods_QSTheme", false));
 
         try {
             setAll();

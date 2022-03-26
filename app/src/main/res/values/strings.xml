@@ -116,5 +116,6 @@
     <string name="so_power_longpress_torch_title">Longpress Power to torch*</string>
     <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
     <string name="battry_hidden">Hidden</string>
+    <string name="hide_navbar_title">Hide navigation bar</string>
 
 </resources>

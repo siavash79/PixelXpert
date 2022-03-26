@@ -3,24 +3,10 @@ package sh.siava.AOSPMods;
 import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.android.powerTorch;
-import sh.siava.AOSPMods.systemui.BackGestureManager;
-import sh.siava.AOSPMods.systemui.BackToKill;
-import sh.siava.AOSPMods.systemui.BatteryStyleManager;
-import sh.siava.AOSPMods.systemui.CarrierTextManager;
-import sh.siava.AOSPMods.systemui.DoubleTapSleepLS;
-import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
-import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
-import sh.siava.AOSPMods.systemui.LTEiconChange;
-import sh.siava.AOSPMods.systemui.NavBarResizer;
-import sh.siava.AOSPMods.systemui.QSFooterTextManager;
-import sh.siava.AOSPMods.systemui.QSHaptic;
-import sh.siava.AOSPMods.systemui.QSHeaderManager;
-import sh.siava.AOSPMods.systemui.QSQuickPullDown;
-import sh.siava.AOSPMods.systemui.ScreenshotController;
-import sh.siava.AOSPMods.systemui.StatusbarMods;
-import sh.siava.AOSPMods.systemui.UDFPSManager;
+import sh.siava.AOSPMods.systemui.*;
 
 public class AOSPMods implements IXposedHookLoadPackage{
 
@@ -29,6 +15,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
     public AOSPMods()
     {
+
         modPacks.add(StatusbarMods.class);
         modPacks.add(BackGestureManager.class);
         modPacks.add(BackToKill.class);
@@ -46,6 +33,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(ScreenshotController.class);
         modPacks.add(UDFPSManager.class);
         modPacks.add(powerTorch.class);
+
     }
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
@@ -55,13 +43,13 @@ public class AOSPMods implements IXposedHookLoadPackage{
 //            XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", true).commit();
         }
 //            Helpers.dumpClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam);
-
+        XposedBridge.log("Package: " + lpparam.packageName);
 
         for (Class mod : modPacks)
         {
             try {
                 IXposedModPack instance = ((IXposedModPack) mod.newInstance());
-                if(instance.getListenPack() != lpparam.packageName) return;
+                if(!instance.getListenPack().equals(lpparam.packageName)) continue;
                 instance.updatePrefs();
                 instance.handleLoadPackage(lpparam);
                 runningMods.add(instance);

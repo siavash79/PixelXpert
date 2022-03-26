@@ -6,6 +6,7 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.os.Handler;
+import android.os.SystemClock;
 
 import androidx.annotation.NonNull;
 
@@ -22,9 +23,10 @@ import sh.siava.AOSPMods.XPrefs;
 public class powerTorch implements IXposedModPack {
     public static final String listenPackage = "android";
     private boolean torchOn = false;
-    private static boolean replaceAssistantwithTorch = false;
+    private static boolean replaceAssistantwithTorch = true;
     private CameraManager cameraManager = null;
     private long wakeTime = 0;
+    private Context mContext;
 
     CameraManager.TorchCallback torchCallback = new CameraManager.TorchCallback() {
         @Override
@@ -36,7 +38,7 @@ public class powerTorch implements IXposedModPack {
 
     @Override
     public void updatePrefs() {
-        replaceAssistantwithTorch = XPrefs.Xprefs.getBoolean("replaceAssistantwithTorch", false);
+        replaceAssistantwithTorch = XPrefs.Xprefs.getBoolean("replaceAssistantwithTorch", true);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class powerTorch implements IXposedModPack {
         }
         catch(Throwable t)
         {
-            XposedBridge.log("SIAPOSED: error");
+            t.printStackTrace();
             return;
         }
         if(startedWakingUp ==null || powerLongPress == null || init == null)
@@ -84,10 +86,9 @@ public class powerTorch implements IXposedModPack {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 try
                 {
-                    Context mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                    mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     if (mContext == null)
                     {
-                        XposedBridge.log("context null");
                         return;
                     }
                     cameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
@@ -108,10 +109,16 @@ public class powerTorch implements IXposedModPack {
                 try {
                     int behavior = (int) XposedHelpers.callMethod(param.thisObject, "getResolvedLongPressOnPowerBehavior");
 
-                    if(behavior == 5)
+                    if(behavior == 3) // this is a force shutdown event. never play with it (3=LONG_PRESS_POWER_SHUT_OFF_NO_CONFIRM)
                     {
-                        toggleFlash();
-                        param.setResult(null);
+                        return;
+                    }
+
+                    toggleFlash();
+                    param.setResult(null);
+                    if(mContext != null) {
+                        Object pm = mContext.getSystemService(Context.POWER_SERVICE);
+                        XposedHelpers.callMethod(pm, "goToSleep", SystemClock.uptimeMillis());
                     }
                 }
                 catch (Throwable T){
@@ -163,5 +170,4 @@ public class powerTorch implements IXposedModPack {
     public String getListenPack() {
         return listenPackage;
     }
-
 }

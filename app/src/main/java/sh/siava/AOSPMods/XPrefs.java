@@ -1,77 +1,46 @@
 package sh.siava.AOSPMods;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.XModuleResources;
 
+import androidx.preference.PreferenceManager;
+
+import com.crossbowffs.remotepreferences.RemotePreferences;
+
 import de.robv.android.xposed.IXposedHookZygoteInit;
-import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import sh.siava.AOSPMods.Utils.Overlays;
 
 
 public class XPrefs implements IXposedHookZygoteInit {
 
-    public static XSharedPreferences Xprefs;
     public static String MOD_PATH = "";
     public static XModuleResources modRes;
+    public static SharedPreferences Xprefs;
 
+    static SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything();
 
-    private static XSharedPreferences getPref(String path) {
-        XSharedPreferences pref = new XSharedPreferences(BuildConfig.APPLICATION_ID, path);
-
-        if(pref == null)
+    public static void loadPrefs(Context mContext) {
+        if(mContext.getPackageName() == BuildConfig.APPLICATION_ID)
         {
-            XposedBridge.log("SIAPOS null pref");
-            return null;
+            Xprefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         }
-
-        XposedBridge.log("SIAPOS pref not null");
-        XposedBridge.log("SIAPOS pref readable: " + pref.getFile().canRead());
-
-        return pref.getFile().canRead() ? pref : null;
+        else {
+            Xprefs = new RemotePreferences(mContext, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences");
+        }
+        Xprefs.registerOnSharedPreferenceChangeListener(listener);
+        loadEverything();
     }
-
-    Thread configLoader = new Thread()
-    {
-        @Override
-        public void run()
-        {
-            while (true) {
-                Xprefs = getPref("sh.siava.AOSPMods_preferences");
-                if (Xprefs != null) break;
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {}
-            }
-
-            loadEverything();
-            Xprefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-                @Override
-                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                    loadEverything();
-                }
-            });
-        }
-    };
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
 
         MOD_PATH = startupParam.modulePath;
         modRes = XModuleResources.createInstance(XPrefs.MOD_PATH, null);
-
-        loadEverything();
     }
 
-    private void loadEverything()
+    public static void loadEverything()
     {
-        if(Xprefs == null || !Xprefs.getFile().canRead())
-        {
-            configLoader.start();
-            return;
-        }
-
-        Xprefs.reload();
         Overlays.setAll();
         for(IXposedModPack thisMod : AOSPMods.runningMods)
         {

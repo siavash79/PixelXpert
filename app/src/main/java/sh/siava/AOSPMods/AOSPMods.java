@@ -1,8 +1,13 @@
 package sh.siava.AOSPMods;
 
+import android.app.Instrumentation;
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.Utils.Overlays;
 import sh.siava.AOSPMods.android.powerTorch;
@@ -27,6 +32,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
     public static ArrayList<Class> modPacks = new ArrayList<>();
     public static ArrayList<IXposedModPack> runningMods = new ArrayList<>();
+    public Context mContext = null;
 
     public AOSPMods()
     {
@@ -54,18 +60,33 @@ public class AOSPMods implements IXposedHookLoadPackage{
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
-        if (lpparam.packageName.equals("com.android.systemui")) {
+//        Helpers.dumpClass("android.app.Instrumentation", lpparam);
 
-//            XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", true).commit();
+        if(mContext == null) {
+            if (lpparam.packageName.equals("com.android.systemui") || lpparam.packageName.equals("android")) {
+                XposedHelpers.findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mContext == null) setContext((Context) param.args[2]);
+                    }
+                });
+            }
         }
-//            Helpers.dumpClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam);
+
+        if (lpparam.packageName.equals("com.android.systemui")) {
+            try {
+                XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", true).commit();
+            }catch(Throwable t){}
+        }
 
         for (Class mod : modPacks)
         {
             try {
                 IXposedModPack instance = ((IXposedModPack) mod.newInstance());
                 if(!instance.getListenPack().equals(lpparam.packageName)) continue;
-                instance.updatePrefs();
+                try {
+                    instance.updatePrefs();
+                } catch(Throwable ignored){}
                 instance.handleLoadPackage(lpparam);
                 runningMods.add(instance);
             }
@@ -74,6 +95,11 @@ public class AOSPMods implements IXposedHookLoadPackage{
                 T.printStackTrace();
             }
         }
+    }
+
+    private void setContext(Context context) {
+        mContext = context;
+        XPrefs.loadPrefs(mContext);
     }
 }
 

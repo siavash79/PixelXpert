@@ -47,7 +47,7 @@ dependencies {
     compileOnly 'de.robv.android.xposed:api:82:sources'
     compileOnly 'de.robv.android.xposed:api:82'
     implementation 'com.github.topjohnwu.libsu:core:3.1.2'
-    implementation "com.google.guava:guava:31.1-android"
+    implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8'
 }
 repositories {
     mavenCentral()

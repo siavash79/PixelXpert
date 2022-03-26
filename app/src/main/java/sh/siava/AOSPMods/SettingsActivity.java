@@ -3,7 +3,6 @@ package sh.siava.AOSPMods;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
@@ -49,15 +48,7 @@ public class SettingsActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         backButtonDisabled();
 
-        new Overlays().initOverlays();
-
-        try {
-            getApplicationContext().getSharedPreferences("sh.siava.AOSPMods_preferences", Context.MODE_WORLD_READABLE);
-        } catch (SecurityException ignored) {
-            Log.d("SIAPOSED", "onCreate: failed to world read");
-            // The new XSharedPreferences is not enabled or module's not loading
-            // other fallback, if any
-        }
+        new Overlays().initOverlays(getApplicationContext());
 
         //update settings from previous config file
         try {

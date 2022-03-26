@@ -1,5 +1,10 @@
 package sh.siava.AOSPMods.Utils;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import androidx.preference.PreferenceManager;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +12,15 @@ import sh.siava.AOSPMods.XPrefs;
 
 public class Overlays {
     public static Map<String, overlayProp> Overlays = null;
+
+    static SharedPreferences prefs = null; //we load prefs from different sources depending on if it's from Xposed or App
+
+    public void initOverlays(Context context)
+    {
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        initOverlays();
+    }
 
     public void initOverlays()
     {
@@ -22,9 +36,14 @@ public class Overlays {
 
     public static void setAll()
     {
-        if(XPrefs.Xprefs == null || Overlays == null) return; // something not ready
+        if(prefs == null)
+        {
+            prefs = XPrefs.Xprefs;
+        }
 
-        Map<String, ?> allPrefs = XPrefs.Xprefs.getAll();
+        if(prefs == null || Overlays == null) return; // something not ready
+
+        Map<String, ?> allPrefs = prefs.getAll();
 
         for(String pref : allPrefs.keySet())
         {

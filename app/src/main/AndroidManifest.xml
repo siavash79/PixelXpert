@@ -17,6 +17,12 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name=".Utils.RemotePrefProvider"
+            android:authorities="sh.siava.AOSPMods"
+            android:exported="true"
+            android:directBootAware="true"/>
+
         <meta-data
             android:name="xposeddescription"
             android:value="@string/xposed_desc" />

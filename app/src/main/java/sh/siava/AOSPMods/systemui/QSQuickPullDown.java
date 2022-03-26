@@ -42,14 +42,12 @@ public class QSQuickPullDown implements IXposedModPack {
 
                         boolean showQsOverride = false;
 
-                        boolean isRtl = (boolean) XposedHelpers.callMethod(mView, "isLayoutRtl");
-
                         switch (pullDownSide) {
                             case 1: // Right side pulldown
-                                showQsOverride = isRtl ? x < region : w - region < x;
+                                showQsOverride = w - region < x;
                                 break;
                             case 2: // Left side pulldown
-                                showQsOverride = isRtl ? w - region < x : x < region;
+                                showQsOverride = x < region;
                                 break;
                         }
                         int mBarState = (int) XposedHelpers.getObjectField(param.thisObject, "mBarState");

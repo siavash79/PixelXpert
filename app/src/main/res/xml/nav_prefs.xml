@@ -1,4 +1,5 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <Preference
         app:fragment="sh.siava.AOSPMods.SettingsActivity$GestureNavFragment"
         app:key="gesturenav_header"
@@ -7,4 +8,8 @@
         app:fragment="sh.siava.AOSPMods.SettingsActivity$ThreeButtonNavFragment"
         app:key="threebutton_header"
         app:title="@string/threebutton_header_title" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="HideNavbarOverlay"
+        android:title="Switch preference" />
 </PreferenceScreen>

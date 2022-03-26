@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -29,6 +30,7 @@ public class BatteryStyleManager implements IXposedModPack {
     public static boolean ShowPercent = false;
     public static int scaleFactor = 100;
     public static boolean scaleWithPrecent =false;
+    static boolean hideBattery = false;
 
     public void updatePrefs()
     {
@@ -39,6 +41,13 @@ public class BatteryStyleManager implements IXposedModPack {
 
         if(batteryStyle == 0)
         {
+            circleBatteryEnabled = false;
+            return;
+        }
+        else if(batteryStyle == 99)
+        {
+            hideBattery = true;
+            circleBatteryEnabled = false;
             return;
         }
         circleBatteryEnabled = true;
@@ -85,14 +94,21 @@ public class BatteryStyleManager implements IXposedModPack {
                     Context.class, AttributeSet.class, new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
+
+                            if(hideBattery)
+                            {
+                                ViewGroup batteryParent = (ViewGroup) mBatteryIconView.getParent();
+                                batteryParent.removeView(mBatteryIconView);
+                                return;
+                            }
+
                             if (!circleBatteryEnabled) return;
 
                             CircleBatteryDrawable mCircleDrawable = new CircleBatteryDrawable((Context) param.args[0], frameColor);
                             mCircleDrawable.setShowPercent(ShowPercent);
                             mCircleDrawable.setMeterStyle(BatteryStyle);
                             XposedHelpers.setAdditionalInstanceField(param.thisObject, "mCircleDrawable", mCircleDrawable);
-
-                            ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
 
                             mBatteryIconView.setImageDrawable(mCircleDrawable);
                             XposedHelpers.setObjectField(param.thisObject, "mBatteryIconView", mBatteryIconView);

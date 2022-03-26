@@ -24,4 +24,10 @@
         app:title="@string/misc_header"
         app:icon="@drawable/ic_settings_miscellaneous" />
 
+    <Preference
+        app:fragment="sh.siava.AOSPMods.SettingsActivity$ScreenOffFragment"
+        app:key="doze_header"
+        app:title="@string/doze_header"
+        app:icon="@drawable/ic_settings_lockscreen" />
+
 </PreferenceScreen>

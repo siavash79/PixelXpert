@@ -47,11 +47,14 @@ public class StatusbarMods implements IXposedModPack {
     Object mActivityStarter;
 
     //vibration icon
-    public static boolean showVibrationIcon = true;
+    public static boolean showVibrationIcon = false;
 
     public void updatePrefs()
     {
         if(XPrefs.Xprefs == null) return;
+
+        //vibration settings
+        showVibrationIcon = XPrefs.Xprefs.getBoolean("SBshowVibrationIcon", false);
 
         //clock settings
         clockPosition = Integer.parseInt(XPrefs.Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));

@@ -79,4 +79,9 @@
     <string name="combined_signal_icon_title">Ícones de sinal combinados</string>
     <string name="percent_of_default_size">% do tamanho padrão</string>
     <string name="battery_icon_size_title">Tamanho do ícone da bateria</string>
+    <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
+    <string name="doze_header">While screen is off...</string>
+    <string name="so_power_longpress_torch_title">Longpress Power to torch*</string>
+    <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
+    <string name="battry_hidden">Hidden</string>
 </resources>

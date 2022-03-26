@@ -6,6 +6,7 @@ import android.content.res.XModuleResources;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
+import sh.siava.AOSPMods.Utils.Overlays;
 
 
 public class XPrefs implements IXposedHookZygoteInit {
@@ -71,7 +72,7 @@ public class XPrefs implements IXposedHookZygoteInit {
         }
 
         Xprefs.reload();
-
+        Overlays.setAll();
         for(IXposedModPack thisMod : AOSPMods.runningMods)
         {
             thisMod.updatePrefs();

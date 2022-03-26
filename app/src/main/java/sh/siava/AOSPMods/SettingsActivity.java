@@ -16,6 +16,9 @@ import androidx.preference.PreferenceManager;
 
 import com.topjohnwu.superuser.Shell;
 
+import sh.siava.AOSPMods.Utils.Helpers;
+import sh.siava.AOSPMods.Utils.Overlays;
+
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
@@ -45,6 +48,8 @@ public class SettingsActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         backButtonDisabled();
+
+        new Overlays().initOverlays();
 
         try {
             getApplicationContext().getSharedPreferences("sh.siava.AOSPMods_preferences", Context.MODE_WORLD_READABLE);
@@ -146,10 +151,22 @@ public class SettingsActivity extends AppCompatActivity implements
 
     public static class NavFragment extends PreferenceFragmentCompat {
 
+        SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                if(key.endsWith("Overlay"))
+                {
+                    Helpers.setOverlay(key, sharedPreferences.getBoolean(key, false));
+                }
+            }
+        };
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.nav_prefs, rootKey);
+            PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(listener);
         }
+
     }
 
     public static class LockScreenFragment extends PreferenceFragmentCompat {
@@ -175,6 +192,15 @@ public class SettingsActivity extends AppCompatActivity implements
             setPreferencesFromResource(R.xml.statusbar_clock_prefs, rootKey);
         }
     }
+
+    public static class ScreenOffFragment extends PreferenceFragmentCompat {
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.screen_off_prefs, rootKey);
+        }
+    }
+
 
     public static class ThreeButtonNavFragment extends PreferenceFragmentCompat {
 

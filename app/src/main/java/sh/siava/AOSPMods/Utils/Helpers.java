@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods.Utils;
 
+import com.topjohnwu.superuser.Shell;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -38,5 +40,23 @@ public class Helpers {
             XposedBridge.log("\t\t" + f.getName() + "-" + f.getType().getName());
         }
         XposedBridge.log("End dump");
+    }
+
+
+    public static void setOverlay(String Key, boolean enabled) {
+        String mode = (enabled) ? "enable" : "disable";
+        Overlays.overlayProp op = Overlays.Overlays.get(Key);
+        if(enabled && op.exclusive)
+        {
+            mode += "-exclusive";
+        }
+        boolean wasEnabled = Shell.su("cmd overlay list " + op.name + " | grep [x]").exec().getOut().size() > 0;
+
+        if(enabled == wasEnabled)
+        {
+            return; //nothing to do
+        }
+
+        Shell.su("cmd overlay " + mode + " " + op.name).submit();
     }
 }

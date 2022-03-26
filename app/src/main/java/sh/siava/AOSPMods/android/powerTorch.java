@@ -23,7 +23,7 @@ import sh.siava.AOSPMods.XPrefs;
 public class powerTorch implements IXposedModPack {
     public static final String listenPackage = "android";
     private boolean torchOn = false;
-    private static boolean replaceAssistantwithTorch = true;
+    private static boolean replaceAssistantwithTorch = false;
     private CameraManager cameraManager = null;
     private long wakeTime = 0;
     private Context mContext;
@@ -38,7 +38,7 @@ public class powerTorch implements IXposedModPack {
 
     @Override
     public void updatePrefs() {
-        replaceAssistantwithTorch = XPrefs.Xprefs.getBoolean("replaceAssistantwithTorch", true);
+        replaceAssistantwithTorch = XPrefs.Xprefs.getBoolean("replaceAssistantwithTorch", false);
     }
 
     @Override

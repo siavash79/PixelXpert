@@ -14,12 +14,14 @@
         <item>@string/battery_default</item>
         <item>@string/battery_circle</item>
         <item>@string/battery_dashed_circle</item>
+        <item>@string/battry_hidden</item>
     </string-array>
 
     <string-array name="battery_style_codes">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>99</item>
     </string-array>
 
     <string-array name="sbc_position_names">

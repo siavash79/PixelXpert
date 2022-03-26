@@ -111,5 +111,10 @@
     <string name="fourg_lte_default">System Default</string>
     <string name="fourg_lte_lte">Force LTE icon</string>
     <string name="fourg_lte_fourg">Force 4G icon</string>
+    <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
+    <string name="doze_header">While screen is off...</string>
+    <string name="so_power_longpress_torch_title">Longpress Power to torch*</string>
+    <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
+    <string name="battry_hidden">Hidden</string>
 
 </resources>

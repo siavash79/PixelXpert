@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Utils.Overlays;
 import sh.siava.AOSPMods.android.powerTorch;
 import sh.siava.AOSPMods.systemui.BackGestureManager;
 import sh.siava.AOSPMods.systemui.BackToKill;
@@ -29,6 +30,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
     public AOSPMods()
     {
+        new Overlays().initOverlays();
 
         modPacks.add(StatusbarMods.class);
         modPacks.add(BackGestureManager.class);

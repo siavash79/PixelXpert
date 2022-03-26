@@ -57,6 +57,12 @@ public class Helpers {
             return; //nothing to do
         }
 
-        Shell.su("cmd overlay " + mode + " " + op.name).submit();
+        try {
+            Shell.su("cmd overlay " + mode + " " + op.name).exec();
+        }
+        catch(Throwable t)
+        {
+            t.printStackTrace();
+        }
     }
 }

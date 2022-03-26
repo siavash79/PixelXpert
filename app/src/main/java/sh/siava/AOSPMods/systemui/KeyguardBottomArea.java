@@ -51,18 +51,19 @@ public class KeyguardBottomArea implements IXposedModPack {
                         mWalletButton.setImageDrawable(((Context) mContext).getResources().getDrawable(mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName())));
                         mWalletButton.setOnClickListener(cameraListener);
                         mWalletButton.setClickable(true);
+                        mWalletButton.setVisibility(View.VISIBLE);
                     }
                 });
 
         //make sure system won't play with our camera button
-        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass, "onWalletCardsRetrieved", "android.service.quickaccesswallet.GetWalletCardsResponse", new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                if(!showCameraOnLockscreen) return;
-                param.setResult(null);
-            }
-        });
-
+        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass.getName() + "$" + "WalletCardRetriever", lpparam.classLoader,
+                "onWalletCardsRetrieved", "android.service.quickaccesswallet.GetWalletCardsResponse", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (!showCameraOnLockscreen) return;
+                        param.setResult(null);
+                    }
+                });
 
         //make sure system won't play with our camera button
         XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,

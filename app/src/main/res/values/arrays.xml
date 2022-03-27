@@ -77,4 +77,10 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="network_sb_locations">
+        <item>@string/ntsb_far_left</item>
+        <item>@string/ntsb_mid_left</item>
+        <item>@string/ntsb_mid_right</item>
+    </string-array>
+
 </resources>

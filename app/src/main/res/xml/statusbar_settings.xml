@@ -35,6 +35,27 @@
        app:key="sbc_header"
        app:title="@string/sbc_header" />
     <PreferenceCategory
+        android:title="@string/ntsb_category_title" >
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="networkOnSBEnabled"
+            android:title="@string/ntsb_enabled_title" />
+        <ListPreference
+            android:defaultValue="2"
+            android:entries="@array/network_sb_locations"
+            android:entryValues="@array/sbc_position_codes"
+            android:key="networkTrafficPosition"
+            android:title="@string/ntsb_position_title" />
+        <EditTextPreference
+            android:key="networkTrafficTreshold"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/ntsb_treshold_title"
+            app:defaultValue="10"
+            app:summary="@string/ntsb_treshold_summary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/qs_mod_category_title"
         app:summary="@string/qs_footer_text_desc">
         <SwitchPreference

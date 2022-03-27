@@ -4,11 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.XModuleResources;
 
-import androidx.preference.PreferenceManager;
-
 import com.crossbowffs.remotepreferences.RemotePreferences;
 
 import de.robv.android.xposed.IXposedHookZygoteInit;
+import de.robv.android.xposed.XposedBridge;
 import sh.siava.AOSPMods.Utils.Overlays;
 
 
@@ -21,13 +20,8 @@ public class XPrefs implements IXposedHookZygoteInit {
     static SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything();
 
     public static void loadPrefs(Context mContext) {
-        if(mContext.getPackageName() == BuildConfig.APPLICATION_ID)
-        {
-            Xprefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        }
-        else {
-            Xprefs = new RemotePreferences(mContext, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences");
-        }
+        Xprefs = new RemotePreferences(mContext, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
+        XposedBridge.log("size: " + Xprefs.getAll().keySet().size());
         Xprefs.registerOnSharedPreferenceChangeListener(listener);
         loadEverything();
     }

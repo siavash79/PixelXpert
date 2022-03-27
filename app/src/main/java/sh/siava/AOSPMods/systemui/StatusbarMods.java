@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.CharacterStyle;
 import android.text.style.RelativeSizeSpan;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -23,6 +25,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.Utils.NetworkTrafficSB;
 import sh.siava.AOSPMods.XPrefs;
 
 public class StatusbarMods implements IXposedModPack {
@@ -49,9 +52,31 @@ public class StatusbarMods implements IXposedModPack {
     //vibration icon
     public static boolean showVibrationIcon = false;
 
+    //network traffic
+    public static boolean networkOnSBEnabled = true;
+    public static int networkTrafficPosition = POSITION_LEFT;
+    public static int networkTrafficTreshold = 10;
+    public NetworkTrafficSB networkTrafficSB = null;
+    private Context mContext;
+
     public void updatePrefs()
     {
         if(XPrefs.Xprefs == null) return;
+
+        //network Traffic settings
+        networkOnSBEnabled = XPrefs.Xprefs.getBoolean("networkOnSBEnabled", false);
+        networkTrafficPosition = Integer.parseInt(XPrefs.Xprefs.getString("networkTrafficPosition", "2"));
+        String tresholdText = XPrefs.Xprefs.getString("networkTrafficTreshold", "10");
+
+        try {
+            networkTrafficTreshold = Math.round(Float.parseFloat(tresholdText));
+        }
+        catch (Exception e) {
+            networkTrafficTreshold = 10;
+        }
+        finally {
+            NetworkTrafficSB.setHideTreshold(networkTrafficTreshold);
+        }
 
         //vibration settings
         showVibrationIcon = XPrefs.Xprefs.getBoolean("SBshowVibrationIcon", false);
@@ -114,7 +139,9 @@ public class StatusbarMods implements IXposedModPack {
         Class QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
         Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
         Class ClockClass = XposedHelpers.findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
-
+        Class StatusBarIconListClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusBarIconList", lpparam.classLoader);
+        Class SlotClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusBarIconList$Slot", lpparam.classLoader);
+        Class StatusBarIconHolderClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
 
         CollapsedStatusBarFragmentClass = XposedHelpers.findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 
@@ -186,9 +213,61 @@ public class StatusbarMods implements IXposedModPack {
         });
 
         XposedHelpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
+                "hideClock", boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        networkTrafficSB.setVisibility(View.INVISIBLE);
+                    }
+                });
+
+        XposedHelpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
+                "showClock", boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        networkTrafficSB.setVisibility(View.VISIBLE);
+                    }
+                });
+
+
+        XposedHelpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
                 "onViewCreated", View.class, Bundle.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        mContext = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
+
+                        View mNotificationIconAreaInner = (View) XposedHelpers.getObjectField(param.thisObject, "mNotificationIconAreaInner");
+                        View mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
+                        ViewGroup mClockParent = (ViewGroup) mClockView.getParent();
+                        View mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
+                        LinearLayout mSystemIconArea = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mSystemIconArea");
+
+
+                        if(networkOnSBEnabled)
+                        {
+                            networkTrafficSB = new NetworkTrafficSB(mContext);
+                            networkTrafficSB.setHideTreshold(networkTrafficTreshold);
+
+                            LinearLayout.LayoutParams ntsbLayoutP = null;
+
+                            switch(networkTrafficPosition)
+                            {
+                                case POSITION_RIGHT:
+                                    mSystemIconArea.addView(networkTrafficSB,0);
+                                    networkTrafficSB.setPadding(40, 0,5,0);
+                                    break;
+                                case POSITION_LEFT:
+                                    mClockParent.addView(networkTrafficSB,0);
+                                    networkTrafficSB.setPadding(0,0,10,0);
+                                    break;
+                                case POSITION_CENTER:
+                                    mClockParent.addView(networkTrafficSB);
+                                    break;
+                            }
+                            ntsbLayoutP = (LinearLayout.LayoutParams) networkTrafficSB.getLayoutParams();
+                            ntsbLayoutP.gravity = Gravity.CENTER_VERTICAL;
+                            networkTrafficSB.setLayoutParams(ntsbLayoutP);
+
+                        }
 
                         //<Showing vibration icon in collapsed statusbar>
                         if(showVibrationIcon) {
@@ -196,39 +275,34 @@ public class StatusbarMods implements IXposedModPack {
                             Object mStatusBarIconController = XposedHelpers.getObjectField(param.thisObject, "mStatusBarIconController");
                             Object mDarkIconManager = XposedHelpers.getObjectField(param.thisObject, "mDarkIconManager");
 
-
-                            XposedHelpers.callMethod(mStatusBarIconController, "removeIconGroup", mDarkIconManager);
-
                             mBlockedIcons.remove("volume");
                             XposedHelpers.callMethod(mDarkIconManager, "setBlockList", mBlockedIcons);
-                            XposedHelpers.callMethod(mStatusBarIconController, "addIconGroup", mDarkIconManager);
+                            XposedHelpers.callMethod(mStatusBarIconController, "refreshIconGroups");
                         }
                         //</Showing vibration icon in collapsed statusbar>
 
                         //<modding clock>
-                        View mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
                         XposedHelpers.setAdditionalInstanceField(mClockView, "mClockParent", 1);
 
                         if(clockPosition == POSITION_LEFT) return;
-
-                        ViewGroup mClockParent = (ViewGroup) mClockView.getParent();
 
                         ViewGroup targetArea = null;
 
                         switch (clockPosition)
                         {
                             case POSITION_CENTER:
-                                View mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
                                 targetArea = (ViewGroup) mCenteredIconArea.getParent();
                                 break;
                             case POSITION_RIGHT:
-                                LinearLayout mSystemIconArea = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mSystemIconArea");
                                 mClockView.setPadding(20,0,0,0);
                                 targetArea = ((ViewGroup) mSystemIconArea.getParent());
                                 break;
                         }
                         mClockParent.removeView(mClockView);
                         targetArea.addView(mClockView);
+
+                        //View v = LayoutInflater.from(mClockParent.getContext()).inflate(XPrefs.modRes.getLayout(R.layout.status_bar), mClockParent);
+//                        ((LinearLayout.LayoutParams) nt.getLayoutParams()).leftMargin = 2;
                         //</modding clock>
                     }
                 });

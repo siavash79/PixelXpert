@@ -75,7 +75,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
         if (lpparam.packageName.equals("com.android.systemui")) {
             try {
-                XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", true).commit();
+//                XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", true).commit();
             }catch(Throwable t){}
         }
 

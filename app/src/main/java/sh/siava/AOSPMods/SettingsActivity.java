@@ -17,6 +17,7 @@ import com.topjohnwu.superuser.Shell;
 
 import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.Utils.Overlays;
+import sh.siava.AOSPModss.R;
 
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
@@ -46,6 +47,7 @@ public class SettingsActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         backButtonDisabled();
 
         new Overlays().initOverlays(getApplicationContext());

@@ -14,7 +14,7 @@
         <item>@string/battery_default</item>
         <item>@string/battery_circle</item>
         <item>@string/battery_dashed_circle</item>
-        <item>@string/battry_hidden</item>
+        <item>@string/battery_hidden</item>
     </string-array>
 
     <string-array name="battery_style_codes">

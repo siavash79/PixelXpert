@@ -48,8 +48,10 @@
     <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Battery Icon Size</string>
     <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
+    <string name="battery_hidden">Hidden</string>
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
     <string name="combined_signal_icon_title">Combined signal icons</string>
+    <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
     <string name="sbc_position_title">Clock position</string>
     <string name="sbc_ampm_style">AM/PM Style</string>
     <string name="sbc_show_secs">Show seconds</string>
@@ -76,9 +78,12 @@
     <string name="threebutton_header_title">3-Button navigation</string>
     <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
+    <string name="hide_navbar_title">Hide navigation bar</string>
 
-    <!--Miscellaneous bar related-->
+    <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
+    <string name="so_power_longpress_torch_title">Long press Power to torch*</string>
+    <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -111,7 +116,9 @@
     <string name="fourg_lte_default">System Default</string>
     <string name="fourg_lte_lte">Force LTE icon</string>
     <string name="fourg_lte_fourg">Force 4G icon</string>
-    <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
+
+    <!-- Screen off section -->
+    <!-- Let's disable this for the time being...
     <string name="doze_header">While screen is off...</string>
     <string name="so_power_longpress_torch_title">Longpress Power to torch*</string>
     <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
@@ -125,5 +132,6 @@
     <string name="ntsb_position_title">Monitor Position</string>
     <string name="ntsb_treshold_title">Auto-hide treshold</string>
     <string name="ntsb_treshold_summary">Hide if traffic is less than... (Kilobytes)</string>
+    -->
 
 </resources>

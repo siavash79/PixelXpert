@@ -79,6 +79,12 @@
     <string name="combined_signal_icon_title">Ícones de sinal combinados</string>
     <string name="percent_of_default_size">% do tamanho padrão</string>
     <string name="battery_icon_size_title">Tamanho do ícone da bateria</string>
+    <string name="sb_vibration_switch_title">"Mostar os ícones vibrar/silêncio"</string>
+    <string name="doze_header">"Enquanto o ecrã está desligado..."</string>
+    <string name="so_power_longpress_torch_title">"Lanterna ao manter premido o botão ligar/desligar*"</string>
+    <string name="framework_needed_caution_summary">Requer ativar a Framework na Lsposed. USAR COM CUIDADO</string>
+    <string name="battery_hidden">Escondida</string>
+    <string name="hide_navbar_title">Esconder a barra de navegação</string>
     <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
     <string name="doze_header">While screen is off...</string>
     <string name="so_power_longpress_torch_title">Longpress Power to torch*</string>

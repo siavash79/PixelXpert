@@ -186,6 +186,7 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
+    /* Let's disable this for the time being...
     public static class ScreenOffFragment extends PreferenceFragmentCompat {
 
         @Override
@@ -193,7 +194,7 @@ public class SettingsActivity extends AppCompatActivity implements
             setPreferencesFromResource(R.xml.screen_off_prefs, rootKey);
         }
     }
-
+    */
 
     public static class ThreeButtonNavFragment extends PreferenceFragmentCompat {
 

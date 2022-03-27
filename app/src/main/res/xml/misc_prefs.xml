@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
         android:defaultValue="false"
         android:key="disableScreenshotSound"
         android:title="@string/screenshot_sound_disable_title" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="replaceAssistantwithTorch"
+        android:title="@string/so_power_longpress_torch_title"
+        app:summary="@string/framework_needed_caution_summary" />
 </PreferenceScreen>

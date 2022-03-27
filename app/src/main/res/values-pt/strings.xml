@@ -85,12 +85,7 @@
     <string name="framework_needed_caution_summary">Requer ativar a Framework na Lsposed. USAR COM CUIDADO</string>
     <string name="battery_hidden">Escondida</string>
     <string name="hide_navbar_title">Esconder a barra de navegação</string>
-    <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
-    <string name="doze_header">While screen is off...</string>
-    <string name="so_power_longpress_torch_title">Longpress Power to torch*</string>
-    <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
     <string name="battry_hidden">Hidden</string>
-    <string name="hide_navbar_title">Hide navigation bar</string>
     <string name="ntsb_far_left">Far Left</string>
     <string name="ntsb_mid_left">Mid-Left</string>
     <string name="ntsb_mid_right">Mid-Right</string>

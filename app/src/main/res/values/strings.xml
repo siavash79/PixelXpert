@@ -117,13 +117,8 @@
     <string name="fourg_lte_lte">Force LTE icon</string>
     <string name="fourg_lte_fourg">Force 4G icon</string>
 
-    <!-- Screen off section -->
-    <!-- Let's disable this for the time being...
-    <string name="doze_header">While screen is off...</string>
-    <string name="so_power_longpress_torch_title">Longpress Power to torch*</string>
-    <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
+
     <string name="battry_hidden">Hidden</string>
-    <string name="hide_navbar_title">Hide navigation bar</string>
     <string name="ntsb_far_left">Far Left</string>
     <string name="ntsb_mid_left">Mid-Left</string>
     <string name="ntsb_mid_right">Mid-Right</string>
@@ -132,6 +127,10 @@
     <string name="ntsb_position_title">Monitor Position</string>
     <string name="ntsb_treshold_title">Auto-hide treshold</string>
     <string name="ntsb_treshold_summary">Hide if traffic is less than... (Kilobytes)</string>
+
+    <!-- Screen off section -->
+    <!-- Let's disable this for the time being...
+    <string name="doze_header">While screen is off...</string>
     -->
 
 </resources>

@@ -17,7 +17,7 @@ import com.topjohnwu.superuser.Shell;
 
 import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.Utils.Overlays;
-import sh.siava.AOSPModss.R;
+
 
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {

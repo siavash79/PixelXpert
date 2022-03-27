@@ -50,7 +50,7 @@ public class Helpers {
         {
             mode += "-exclusive";
         }
-        boolean wasEnabled = Shell.su("cmd overlay list " + op.name + " | grep [x]").exec().getOut().size() > 0;
+        boolean wasEnabled = Shell.su("cmd overlay list --user 0 " + op.name + " | grep [x]").exec().getOut().size() > 0;
 
         if(enabled == wasEnabled)
         {
@@ -58,7 +58,7 @@ public class Helpers {
         }
 
         try {
-            Shell.su("cmd overlay " + mode + " " + op.name).exec();
+            Shell.su("cmd overlay " + mode + " --user 0 " + op.name).exec();
         }
         catch(Throwable t)
         {

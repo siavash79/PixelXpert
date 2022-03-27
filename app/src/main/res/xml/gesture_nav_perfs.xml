@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:visibility="visible" >
+    android:visibility="visible">
 
     <PreferenceCategory android:title="@string/back_gesture_category_title">
         <SwitchPreference
@@ -9,21 +9,22 @@
             android:key="BackFromLeft"
             android:title="@string/back_from_left_title" />
         <SeekBarPreference
-            android:key="BackLeftHeight"
-            app:min="10"
-            android:max="100"
+            android:layout_width="wrap_content"
             android:defaultValue="100"
-            android:title="@string/back_height_title" />
+            android:key="BackLeftHeight"
+            android:max="100"
+            android:title="@string/back_height_title"
+            app:min="10" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="BackFromRight"
             android:title="@string/back_from_right_title" />
         <SeekBarPreference
-            android:key="BackRightHeight"
-            app:min="10"
-            android:max="100"
             android:defaultValue="100"
-            android:title="@string/back_height_title" />
+            android:key="BackRightHeight"
+            android:max="100"
+            android:title="@string/back_height_title"
+            app:min="10" />
     </PreferenceCategory>
 
     <PreferenceCategory

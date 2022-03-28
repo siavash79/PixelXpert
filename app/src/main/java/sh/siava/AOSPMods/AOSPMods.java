@@ -16,6 +16,7 @@ import sh.siava.AOSPMods.systemui.BackToKill;
 import sh.siava.AOSPMods.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.systemui.CarrierTextManager;
 import sh.siava.AOSPMods.systemui.DoubleTapSleepLS;
+import sh.siava.AOSPMods.systemui.DoubleTaptoWake;
 import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
 import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
 import sh.siava.AOSPMods.systemui.LTEiconChange;
@@ -55,6 +56,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(ScreenshotController.class);
         modPacks.add(UDFPSManager.class);
         modPacks.add(powerTorch.class);
+        modPacks.add(DoubleTaptoWake.class);
 
     }
     @Override

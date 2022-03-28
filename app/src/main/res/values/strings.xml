@@ -64,6 +64,14 @@
     <string name="sbc_custom_date_after">Custom date format after clock</string>
     <string name="sbc_header">Status bar clock customization</string>
     <string name="sbc_may_take_one_minute">Takes effect on time update or SysUI restart</string>
+    <string name="ntsb_far_left">Far Left</string>
+    <string name="ntsb_mid_left">Mid-Left</string>
+    <string name="ntsb_mid_right">Mid-Right</string>
+    <string name="ntsb_category_title">Network Monitor</string>
+    <string name="ntsb_enabled_title">Enable network monitor</string>
+    <string name="ntsb_position_title">Monitor Position</string>
+    <string name="ntsb_treshold_title">Auto-hide treshold</string>
+    <string name="ntsb_treshold_summary">"Hide if traffic is less than… (Kilobytes)"</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configure back gesture</string>
@@ -84,6 +92,8 @@
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
     <string name="so_power_longpress_torch_title">Long press Power to torch*</string>
     <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
+    <string name="so_double_tap_wake_title">Double-tap to wake phone</string>
+    <string name="so_double_tap_wake_summary">Disables single-tap to wake</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -116,19 +126,6 @@
     <string name="fourg_lte_default">System Default</string>
     <string name="fourg_lte_lte">Force LTE icon</string>
     <string name="fourg_lte_fourg">Force 4G icon</string>
-
-
-    <string name="battry_hidden">Hidden</string>
-    <string name="ntsb_far_left">Far Left</string>
-    <string name="ntsb_mid_left">Mid-Left</string>
-    <string name="ntsb_mid_right">Mid-Right</string>
-    <string name="ntsb_category_title">Network Monitor</string>
-    <string name="ntsb_enabled_title">Enable network monitor</string>
-    <string name="ntsb_position_title">Monitor Position</string>
-    <string name="ntsb_treshold_title">Auto-hide treshold</string>
-    <string name="ntsb_treshold_summary">Hide if traffic is less than... (Kilobytes)</string>
-    <string name="so_double_tap_wake_title">Double-tap to wake phone</string>
-    <string name="so_double_tap_wake_summary">Disables single-tap to wake</string>
 
     <!-- Screen off section -->
     <!-- Let's disable this for the time being...

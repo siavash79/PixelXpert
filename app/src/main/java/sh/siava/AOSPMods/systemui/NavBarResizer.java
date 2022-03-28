@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
@@ -15,17 +16,41 @@ public class NavBarResizer implements IXposedModPack {
     public static boolean isEnabled = false;
     public static float sizeFactor = 1f;
 
+    private static Object mNavigationBarInflaterView = null;
+
     public void updatePrefs()
     {
         if(XPrefs.Xprefs == null) return;
-        isEnabled = XPrefs.Xprefs.getBoolean("GesPillWidthMod", false);
-        sizeFactor = XPrefs.Xprefs.getInt("GesPillWidthModPos", 50) * .02f;
+
+        boolean newisEnabled = XPrefs.Xprefs.getBoolean("GesPillWidthMod", false);
+        float newsizeFactor = XPrefs.Xprefs.getInt("GesPillWidthModPos", 50) * .02f;
+
+        if(isEnabled != newisEnabled || sizeFactor != newsizeFactor)
+        {
+            isEnabled = newisEnabled;
+            sizeFactor = newsizeFactor;
+
+            if(mNavigationBarInflaterView != null)
+            {
+                XposedHelpers.callMethod(mNavigationBarInflaterView, "clearViews");
+                Object defaultLayout = XposedHelpers.callMethod(mNavigationBarInflaterView, "getDefaultLayout");
+                XposedHelpers.callMethod(mNavigationBarInflaterView, "inflateLayout", defaultLayout);
+            }
+        }
     }
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+        Class NavigationBarInflaterViewClass = XposedHelpers.findClass("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader);
+
+        XposedBridge.hookAllConstructors(NavigationBarInflaterViewClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                mNavigationBarInflaterView = param.thisObject;
+            }
+        });
 
         XposedHelpers.findAndHookMethod("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader,
                 "createView", String.class, ViewGroup.class, LayoutInflater.class, new XC_MethodHook() {

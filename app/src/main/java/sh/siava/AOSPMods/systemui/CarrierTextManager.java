@@ -11,19 +11,38 @@ public class CarrierTextManager implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean isEnabled = false;
     public static String customText = "";
+    private static Object mCarrierTextManager = null;
 
     public void updatePrefs()
     {
         if(XPrefs.Xprefs == null) return;
-        isEnabled = XPrefs.Xprefs.getBoolean("carrierTextMod", false);
-        customText = XPrefs.Xprefs.getString("carrierTextValue", "");
+        boolean newisEnabled = XPrefs.Xprefs.getBoolean("carrierTextMod", false);
+        String newcustomText = XPrefs.Xprefs.getString("carrierTextValue", "");
+
+        if(newisEnabled != isEnabled || !newcustomText.equals(customText))
+        {
+            isEnabled = newisEnabled;
+            customText = newcustomText;
+            if(mCarrierTextManager != null)
+            {
+                XposedHelpers.callMethod(mCarrierTextManager, "updateCarrierText");
+            }
+        }
     }
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+        Class CarrierTextManagerClass = XposedHelpers.findClass("com.android.keyguard.CarrierTextManager", lpparam.classLoader);
         Class CarrierTextCallbackInfo = XposedHelpers.findClass("com.android.keyguard.CarrierTextManager$CarrierTextCallbackInfo", lpparam.classLoader);
+
+        XposedBridge.hookAllConstructors(CarrierTextManagerClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                mCarrierTextManager = param.thisObject;
+            }
+        });
 
         XposedBridge.hookAllConstructors(CarrierTextCallbackInfo, new XC_MethodHook() {
             @Override

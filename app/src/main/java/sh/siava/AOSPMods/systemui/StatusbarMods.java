@@ -53,19 +53,39 @@ public class StatusbarMods implements IXposedModPack {
     public static boolean showVibrationIcon = false;
 
     //network traffic
-    public static boolean networkOnSBEnabled = true;
+    public static boolean networkOnSBEnabled = false;
     public static int networkTrafficPosition = POSITION_LEFT;
     public static int networkTrafficTreshold = 10;
     public NetworkTrafficSB networkTrafficSB = null;
-    private Context mContext;
+    private static Context mContext;
+    private static Object mQuickStatusBarHeader = null;
+    private static Object mQuickStatusBarHeaderControllerClass = null;
+    private static View mClockView = null;
+    private static ViewGroup mClockParent = null;
+    private static View mCenteredIconArea = null;
+    private static LinearLayout mSystemIconArea = null;
 
     public void updatePrefs()
     {
         if(XPrefs.Xprefs == null) return;
 
         //network Traffic settings
-        networkOnSBEnabled = XPrefs.Xprefs.getBoolean("networkOnSBEnabled", false);
-        networkTrafficPosition = Integer.parseInt(XPrefs.Xprefs.getString("networkTrafficPosition", "2"));
+        boolean newnetworkOnSBEnabled = XPrefs.Xprefs.getBoolean("networkOnSBEnabled", false);
+        if(newnetworkOnSBEnabled != networkOnSBEnabled)
+        {
+            networkOnSBEnabled = newnetworkOnSBEnabled;
+            if(networkTrafficSB == null && mContext != null)
+            {
+                networkTrafficSB = new NetworkTrafficSB(mContext);
+            }
+            networkTrafficPosition = -1; //anyway we have to call placer method
+        }
+        int newnetworkTrafficPosition = Integer.parseInt(XPrefs.Xprefs.getString("networkTrafficPosition", "2"));
+        if(newnetworkTrafficPosition != networkTrafficPosition)
+        {
+            networkTrafficPosition = newnetworkTrafficPosition;
+            placeNTSB();
+        }
         String tresholdText = XPrefs.Xprefs.getString("networkTrafficTreshold", "10");
 
         try {
@@ -77,6 +97,7 @@ public class StatusbarMods implements IXposedModPack {
         finally {
             NetworkTrafficSB.setHideTreshold(networkTrafficTreshold);
         }
+        //end network settings
 
         //vibration settings
         showVibrationIcon = XPrefs.Xprefs.getBoolean("SBshowVibrationIcon", false);
@@ -153,6 +174,7 @@ public class StatusbarMods implements IXposedModPack {
         XposedBridge.hookAllConstructors(QuickStatusBarHeaderClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                mQuickStatusBarHeader = param.thisObject;
                 mActivityStarter = XposedHelpers.callStaticMethod(DependencyClass, "get", ActivityStarterClass);
             }
         });
@@ -160,6 +182,7 @@ public class StatusbarMods implements IXposedModPack {
         XposedBridge.hookAllConstructors(QuickStatusBarHeaderControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                mQuickStatusBarHeaderControllerClass = param.thisObject;
                 XposedHelpers.setAdditionalInstanceField(
                         XposedHelpers.getObjectField(param.thisObject, "mClockView"),
                         "mClockParent",
@@ -224,7 +247,9 @@ public class StatusbarMods implements IXposedModPack {
                 "showClock", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        networkTrafficSB.setVisibility(View.VISIBLE);
+                        if(networkTrafficSB != null) {
+                            networkTrafficSB.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
 
@@ -235,38 +260,17 @@ public class StatusbarMods implements IXposedModPack {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         mContext = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
 
-                        View mNotificationIconAreaInner = (View) XposedHelpers.getObjectField(param.thisObject, "mNotificationIconAreaInner");
+                        //View mNotificationIconAreaInner = (View) XposedHelpers.getObjectField(param.thisObject, "mNotificationIconAreaInner");
                         View mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
-                        ViewGroup mClockParent = (ViewGroup) mClockView.getParent();
-                        View mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
-                        LinearLayout mSystemIconArea = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mSystemIconArea");
-
+                        mClockParent = (ViewGroup) mClockView.getParent();
+                        mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
+                        mSystemIconArea = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mSystemIconArea");
 
                         if(networkOnSBEnabled)
                         {
-                            networkTrafficSB = new NetworkTrafficSB(mContext);
+                            networkTrafficSB = (networkTrafficSB == null) ? new NetworkTrafficSB(mContext) : networkTrafficSB;
                             networkTrafficSB.setHideTreshold(networkTrafficTreshold);
-
-                            LinearLayout.LayoutParams ntsbLayoutP = null;
-
-                            switch(networkTrafficPosition)
-                            {
-                                case POSITION_RIGHT:
-                                    mSystemIconArea.addView(networkTrafficSB,0);
-                                    networkTrafficSB.setPadding(40, 0,5,0);
-                                    break;
-                                case POSITION_LEFT:
-                                    mClockParent.addView(networkTrafficSB,0);
-                                    networkTrafficSB.setPadding(0,0,10,0);
-                                    break;
-                                case POSITION_CENTER:
-                                    mClockParent.addView(networkTrafficSB);
-                                    break;
-                            }
-                            ntsbLayoutP = (LinearLayout.LayoutParams) networkTrafficSB.getLayoutParams();
-                            ntsbLayoutP.gravity = Gravity.CENTER_VERTICAL;
-                            networkTrafficSB.setLayoutParams(ntsbLayoutP);
-
+                            placeNTSB();
                         }
 
                         //<Showing vibration icon in collapsed statusbar>
@@ -338,6 +342,41 @@ public class StatusbarMods implements IXposedModPack {
                         param.setResult(result);
                     }
                 });
+    }
+
+    private void placeNTSB() {
+        if(networkTrafficSB == null)
+        {
+            return;
+        }
+        try
+        {
+            ((ViewGroup) networkTrafficSB.getParent()).removeView(networkTrafficSB);
+        }
+        catch(Exception e){}
+        if(!networkOnSBEnabled) return;
+
+        LinearLayout.LayoutParams ntsbLayoutP = null;
+
+        XposedBridge.log("position is:" + networkTrafficPosition);
+        switch(networkTrafficPosition)
+        {
+            case POSITION_RIGHT:
+                mSystemIconArea.addView(networkTrafficSB,0);
+                networkTrafficSB.setPadding(40, 0,5,0);
+                break;
+            case POSITION_LEFT:
+                mClockParent.addView(networkTrafficSB,0);
+                networkTrafficSB.setPadding(0,0,10,0);
+                break;
+            case POSITION_CENTER:
+                mClockParent.addView(networkTrafficSB);
+                networkTrafficSB.setPadding(0,0,0,0);
+                break;
+        }
+        ntsbLayoutP = (LinearLayout.LayoutParams) networkTrafficSB.getLayoutParams();
+        ntsbLayoutP.gravity = Gravity.CENTER_VERTICAL;
+        networkTrafficSB.setLayoutParams(ntsbLayoutP);
     }
 
     class ClickListener implements View.OnClickListener, View.OnLongClickListener

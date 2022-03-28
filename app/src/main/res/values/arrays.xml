@@ -1,5 +1,14 @@
 <resources>
 
+    <array name="batterymeter_color_levels">
+        <item>0</item>
+        <item>100</item>
+    </array>
+    <array name="batterymeter_color_values">
+        <item>?android:attr/colorError</item>
+        <item>@android:color/white</item>
+    </array>
+
     <string-array name="qs_pulldown_side_names">
         <item>@string/pull_down_left</item>
         <item>@string/pull_down_right</item>

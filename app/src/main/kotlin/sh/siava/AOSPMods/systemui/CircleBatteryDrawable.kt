@@ -23,6 +23,7 @@ import android.graphics.drawable.Drawable
 import androidx.annotation.ColorInt
 import android.util.TypedValue
 import sh.siava.AOSPMods.R
+import sh.siava.AOSPMods.XPrefs
 import kotlin.math.max
 import kotlin.math.min
 
@@ -187,6 +188,7 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
         ] = circleSize - strokeWidth / 2.0f
         // set the battery charging color
         batteryPaint.color = batteryColorForLevel(batteryLevel)
+
         if (charging) { // define the bolt shape
             val bl = frame.left + frame.width() / 3.0f
             val bt = frame.top + frame.height() / 3.4f
@@ -287,8 +289,8 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
     init {
         val res = context.resources
 
-        val color_levels = res.obtainTypedArray(res.getIdentifier("batterymeter_color_levels", "array", context.opPackageName))
-        val color_values = res.obtainTypedArray(res.getIdentifier("batterymeter_color_values", "array", context.opPackageName))
+        val color_levels = XPrefs.modRes.obtainTypedArray(R.array.batterymeter_color_levels)
+        val color_values = XPrefs.modRes.obtainTypedArray(R.array.batterymeter_color_values)
         colors = IntArray(2 * color_levels.length())
         for (i in 0 until color_levels.length()) {
             colors[2 * i] = color_levels.getInt(i, 0)

@@ -98,4 +98,5 @@
     <string name="so_double_tap_wake_title">Duplo toque para acender</string>
     <string name="so_double_tap_wake_summary">Usar duplo toque ao invés de um toque para acender o ecrã</string>
     <string name="overlay_none_title">(Default)</string>
+    <string name="qs_panel_category_title">Quick Settings Panel</string>
 </resources>

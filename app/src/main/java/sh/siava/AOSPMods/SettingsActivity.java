@@ -15,7 +15,6 @@ import androidx.preference.PreferenceManager;
 
 import com.topjohnwu.superuser.Shell;
 
-import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.Utils.Overlays;
 
 
@@ -144,20 +143,9 @@ public class SettingsActivity extends AppCompatActivity implements
 
     public static class NavFragment extends PreferenceFragmentCompat {
 
-        SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                if(key.endsWith("Overlay"))
-                {
-                    Helpers.setOverlay(key, sharedPreferences.getBoolean(key, false));
-                }
-            }
-        };
-
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.nav_prefs, rootKey);
-            PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(listener);
         }
 
     }

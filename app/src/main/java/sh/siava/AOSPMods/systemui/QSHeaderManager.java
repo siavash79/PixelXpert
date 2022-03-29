@@ -213,11 +213,11 @@ public class QSHeaderManager implements IXposedModPack {
                 "updateTheme", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        Helpers.setOverlay("QSLightTheme", false);
+                        Helpers.setOverlay("QSLightThemeOverlay", false, true);
                         Thread.sleep(50);
 
                         if(lightQSHeaderEnabled) {
-                            Helpers.setOverlay("QSLightTheme", true);
+                            Helpers.setOverlay("QSLightThemeOverlay", true, true);
                         }
                     }
                 });

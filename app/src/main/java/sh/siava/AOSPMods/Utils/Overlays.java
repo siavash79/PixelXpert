@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.robv.android.xposed.XposedBridge;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -43,7 +44,7 @@ public class Overlays {
 
         //independent overlays
         Overlays.put("HideNavbarOverlay", new overlayProp("com.android.overlay.removenavbar", false));
-        Overlays.put("QSLightTheme", new overlayProp("sh.siava.AOSPMods_QSTheme", false));
+        Overlays.put("QSLightThemeOverlay", new overlayProp("sh.siava.AOSPMods_QSTheme", false));
 
         try {
             setAll();
@@ -67,7 +68,7 @@ public class Overlays {
                     {
                         members.add(new overlayProp(overlayNames[j], true));
                     }
-                    Overlays.put(resources.getResourceName(resid), new overlayGroup(resources.getResourceName(resid), members));
+                    Overlays.put(resources.getResourceName(resid).replace("sh.siava.AOSPMods:array/", ""), new overlayGroup(resources.getResourceName(resid), members));
                 }
             }catch(Exception e){}
         }
@@ -75,6 +76,11 @@ public class Overlays {
 
     public static void setAll() //make sure settings are applied to device
     {
+        try
+        {
+        XposedBridge.log("inside set all");
+        }catch(Throwable t){}
+
         if(prefs == null)
         {
             prefs = XPrefs.Xprefs;
@@ -104,7 +110,7 @@ public class Overlays {
 
                     if(isEnabledNow != shouldBeActive)
                     {
-                        if(thisProp.name != "None") {
+                        if(!thisProp.name.equals("None")) {
                             Helpers.setOverlay(thisProp.name, shouldBeActive);
                         }
                     }

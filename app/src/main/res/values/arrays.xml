@@ -93,15 +93,19 @@
     </string-array>
 
 
-    <string-array name="QSThemeOverlayEx_names"> <!-- same is key, added _names -->
+    <string-array name="QSRowCountOverlayEx_names"> <!-- same is key, added _names -->
         <item>@string/overlay_none_title</item> <!-- item None MUST be present in the list if user can disable them fully -->
-        <item>theme 1</item>
-        <item>theme 2</item>
+        <item>Force 2 Rows</item>
+        <item>Force 3 Rows</item>
+        <item>Force 4 Rows</item>
+        <item>Force 5 Rows</item>
     </string-array>
 
-    <string-array name="QSThemeOverlayEx">
+    <string-array name="QSRowCountOverlayEx">
         <item>None</item> <!-- every group MUST have item None, so that we can disable the whole list-->
-        <item>com.theme1</item>
-        <item>com.theme2</item>
+        <item>com.android.systemui.qstiles2r</item>
+        <item>com.android.systemui.qstiles3r</item>
+        <item>com.android.systemui.qstiles4r</item>
+        <item>com.android.systemui.qstiles5r</item>
     </string-array>
 </resources>

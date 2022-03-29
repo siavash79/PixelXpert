@@ -59,6 +59,10 @@ public class Helpers {
         }
         activeOverlays = result;
     }
+    public static void setOverlay(String Key, boolean enabled, boolean refresh) {
+        if(refresh) getActiveOverlays();
+        setOverlay(Key, enabled);
+    }
 
     public static void setOverlay(String Key, boolean enabled) {
         if(activeOverlays == null) getActiveOverlays(); //make sure we have a list in hand
@@ -66,6 +70,7 @@ public class Helpers {
         String mode = (enabled) ? "enable" : "disable";
         String packname;
         boolean exclusive = false;
+
         if(Key.endsWith("Overlay")) {
             Overlays.overlayProp op = (Overlays.overlayProp) Overlays.Overlays.get(Key);
             packname = op.name;
@@ -78,15 +83,26 @@ public class Helpers {
         }
 
         if (enabled && exclusive) {
-            mode += "-exclusive";
+            //mode += "-exclusive"; //since we are checking all overlays, we don't need exclusive anymore.
         }
 
         boolean wasEnabled = (activeOverlays.contains(packname));
+
+        try
+        {
+            XposedBridge.log("pack is to:" + packname + wasEnabled + enabled);
+        }catch(Throwable e){}
 
         if(enabled == wasEnabled)
         {
             return; //nothing to do
         }
+        try
+        {
+            XposedBridge.log("action:" + packname + mode);
+            XposedBridge.log("cmd:" + "cmd overlay " + mode + " --user 0 " + packname);
+        }catch(Throwable e){}
+
 
         try {
             Shell.su("cmd overlay " + mode + " --user 0 " + packname).exec();

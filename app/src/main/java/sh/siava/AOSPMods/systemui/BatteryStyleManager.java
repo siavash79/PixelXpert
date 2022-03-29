@@ -15,7 +15,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
-import sh.siava.AOSPMods.Utils.NetworkTrafficSB;
 import sh.siava.AOSPMods.XPrefs;
 
 
@@ -24,7 +23,6 @@ import sh.siava.AOSPMods.XPrefs;
 public class BatteryStyleManager implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
-    public static int currentColor = 0;
     public static boolean circleBatteryEnabled = false;
 
     private int frameColor;
@@ -98,6 +96,7 @@ public class BatteryStyleManager implements IXposedModPack {
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                             ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
 
+
                             if(hideBattery)
                             {
                                 ViewGroup batteryParent = (ViewGroup) mBatteryIconView.getParent();
@@ -164,9 +163,6 @@ public class BatteryStyleManager implements IXposedModPack {
                 "updateColors", int.class, int.class, int.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        NetworkTrafficSB.setTint((int) param.args[2]); //also sync network traffic color!
-                        currentColor = (int) param.args[2]; //record it for network traffic use
-
                         if(!circleBatteryEnabled) return;
 
                         CircleBatteryDrawable mCircleDrawable = (CircleBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");

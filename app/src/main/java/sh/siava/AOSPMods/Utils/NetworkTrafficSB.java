@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.XPrefs;
-import sh.siava.AOSPMods.systemui.BatteryStyleManager;
+import sh.siava.AOSPMods.systemui.StatusbarMods;
 
 public class NetworkTrafficSB extends LinearLayout {
 
@@ -48,7 +48,7 @@ public class NetworkTrafficSB extends LinearLayout {
         networkTraffic.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
 
         //colors
-        setTint(BatteryStyleManager.currentColor);
+        setTint(StatusbarMods.clockColor);
 
         //parents
         this.addView(mArrow);

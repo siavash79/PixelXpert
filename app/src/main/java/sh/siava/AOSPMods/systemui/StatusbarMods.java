@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class StatusbarMods implements IXposedModPack {
     private static ViewGroup mClockParent = null;
     private static View mCenteredIconArea = null;
     private static LinearLayout mSystemIconArea = null;
+    public static int clockColor = 0;
 
     public void updatePrefs()
     {
@@ -325,6 +327,23 @@ public class StatusbarMods implements IXposedModPack {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         XposedHelpers.setObjectField(param.thisObject, "mAmPmStyle", mAmPmStyle);
                         XposedHelpers.setObjectField(param.thisObject, "mShowSeconds", mShowSeconds);
+                    }
+                });
+
+        XposedBridge.hookAllMethods(ClockClass,
+                "onDarkChanged", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        int mClockParent = 1;
+                        try {
+                            mClockParent = (int) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mClockParent");
+                        }
+                        catch(Exception e){}
+
+                        if(mClockParent > 1) return; //We don't want colors of QS header. only statusbar
+
+                        clockColor = ((TextView) param.thisObject).getTextColors().getDefaultColor();
+                        NetworkTrafficSB.setTint(clockColor);
                     }
                 });
 

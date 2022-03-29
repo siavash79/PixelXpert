@@ -1,0 +1,158 @@
+<resources>
+    <!--General strings-->
+    <string name="app_name" translatable="false">AOSP Mods</string>
+    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
+    <string name="title_activity_settings" translatable="false">@string/app_name</string>
+    <string name="error_not_activated">Bitte kontrolliere, ob das Modul im LSPosed Manager aktiviert ist!</string>
+    <string name="hide_default">Verstecken (Standart)</string>
+    <string name="percent_of_default_size">% von der Standart Größe</string>
+    <string name="overlay_none_title">(Standart)</string>
+    <string name="general_section">Allgemeine Optionen</string>
+    <string name="general_on">Ein</string>
+    <string name="general_off">Aus</string>
+
+    <!--Category titles-->
+    <string name="lockscreen_header_title">Sperrbildschirm</string>
+    <string name="statusbar_header">Statusleiste</string>
+    <string name="nav_header">Navigationsleiste</string>
+    <string name="misc_header">Verschiedenes</string>
+    <string name="qs_panel_category_title">Schnelleinstellungen</string>
+
+    <!--Lock screen related-->
+    <string name="transparent_fingerprint_circle">Verstecke den Kreis um das Fingerabdrucksymbol</string>
+    <string name="transparent_fingerprint_circle_off">Kreis um das Fingerabdrucksymbol wird angezeigt</string>
+    <string name="transparent_fingerprint_circle_on">Kreis um das Fingerabdrucksymbol wird versteckt</string>
+    <string name="carrier_text_category">Betreibertext</string>
+    <string name="configure_carrier_text">Konfiguriere den Betreibertext</string>
+    <string name="carrier_text_mod_disabled">Betreibertext unverändert</string>
+    <string name="carrier_text_mod_enabled">Benutzerdefinierter Betreibertext</string>
+    <string name="carrier_text_value">Benutzerdefinierten Text eingeben</string>
+    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
+    <string name="keyguard_bottom_category">Verknüpfungen im unterem Bereich</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Verstecke den Kreis um die Symbole</string>
+    <string name="keyguard_bottom_force_camera_title">Zeige Kamera Verknüpfung</string>
+    <string name="keyguard_left_shortcut">Zeige die linke Verknüpfung auf dem Sperrbildschirm</string>
+
+    <!--Status bar related-->
+    <string name="double_tap_sleep_title">Doppelt Tippen zum Sperren</string>
+    <string name="double_tap_sleep_off">"Doppelt Tippen schaltet das Display nicht aus"</string>
+    <string name="double_tap_sleep_on">Doppelt Tippen auf die Statusleiste oder den Sperrbildschirm schaltet das Display aus</string>
+    <string name="battery_style_title">Wähle den Akku Stil</string>
+    <string name="battery_show_percent_title">Zeige die Akkuprozente</string>
+    <string name="battery_style_category_title">Akku Stil</string>
+    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
+    <string name="battery_icon_size_title">Akkusymbolgröße</string>
+    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
+    <string name="battery_hidden">Versteckt</string>
+    <string name="lte_4g_icon_title">LTE / 4G Symbol</string>
+    <string name="combined_signal_icon_title">Kombinierte Empfangssymbole</string>
+    <string name="sb_vibration_switch_title">Zeige Vibration/Lautlos Symbole</string>
+    <string name="sbc_position_title">Uhr Position</string>
+    <string name="sbc_ampm_style">AM/PM Stil</string>
+    <string name="sbc_show_secs">Zeige Sekunden</string>
+    <string name="sbc_date_cat">Datumsoptionen</string>
+    <string name="sbc_day_of_week_options">Zeige den Wochentag mit der Uhr</string>
+    <string name="sbc_advanced_cat">Erweitertes Datum (ersetzt obige Einstellung!)</string>
+    <string name="sbc_advanced_sum">Bitte lies die Dokumentation zum Java-Datumsformat</string>
+    <string name="sbc_custom_date_before">Benutzerdefiniertes Datumsformat vor der Uhr</string>
+    <string name="sbc_date_small">Kleiner (70%)</string>
+    <string name="sbc_custom_date_after">Benutzerdefiniertes Datumsformat nach der Uhr</string>
+    <string name="sbc_header">Statusleisten Uhr Anpassung</string>
+    <string name="sbc_may_take_one_minute">Wird bei Zeitaktualisierung oder SysUI-Neustart wirksam</string>
+    <string name="ntsb_far_left">Ganz links</string>
+    <string name="ntsb_mid_left">Mitte links</string>
+    <string name="ntsb_mid_right">Mitte rechts</string>
+    <string name="ntsb_category_title">Netzwerkanzeige</string>
+    <string name="ntsb_enabled_title">Aktiviere Netzwerkanzeige</string>
+    <string name="ntsb_position_title">Anzeige Position</string>
+    <string name="ntsb_treshold_title">Schwellenwert für automatisches Ausblenden</string>
+    <string name="ntsb_treshold_summary">"Verstecke wenn der Traffic unter… (Kilobytes)"</string>
+    <string name="statusbar_general_options">Statusleisten Optionen</string>
+    <string name="dual_tone_battery_title">Aktivieren die Zweiton-Akkuanzeige</string>
+    <string name="dual_tone_battery_on_summary">Ein (Funktioniert nur mit dem Portrait Symbol)</string>
+    <string name="unread_messages_title">Zeige die Anzahl der ungelesenen Nachrichten</string>
+    <string name="status_bar_height">Statusleistenhöhe</string>
+    <string name="status_bar_height_small">Klein</string>
+    <string name="status_bar_height_medium">Mittel</string>
+    <string name="fix_status_bar_padding">Korrigiere den Abstand links</string>
+
+    <!--Quick settings panel related-->
+    <string name="qs_mod_category_title">Versionsnummer in der Schnelleinstellungs Fußzeile</string>
+    <string name="qs_footer_mod_title">Ändere die Versionsnummer in den Schnelleinstellungen</string>
+    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
+    <string name="qs_footer_text_summary">Leer lassen um den Text zu entfernen</string>
+    <string name="qs_footer_text_desc">Schalte das Display Ein/Aus um zu aktivieren</string>
+    <string name="light_qs_title">Helle Schnelleinstellungen während hellem Thema (könnte fehlerhaft sein)</string>
+    <string name="qs_pulldown_size">Schnell herunterziehen Größe</string>
+    <string name="qs_pulldown_switch_title">Schnelles herunterziehen des Schnelleinstellungsmenüs von der Statusleiste </string>
+    <string name="qs_pulldown_side_title">Schnelles herunterziehen Seite</string>
+    <string name="qs_pulldown_category">Schnelleinstellungen herunterziehen</string>
+    <string name="qs_haptic_switch_title">Vibriere beim berühren eines Schneleinstellungs Tab </string>
+    <string name="qs_rows_number">Anzahl Reihen in den Schnelleinstellungen</string>
+    <string name="qs_general_options">Schnelleinstellungs Optionen</string>
+
+    <!--Navigation bar related-->
+    <string name="back_gesture_category_title">Anpassen der Zurück-Geste</string>
+    <string name="back_from_left_title">linker Bildschirmrand</string>
+    <string name="back_from_right_title">rechter Bildschirmrand</string>
+    <string name="back_height_title">Gestenhöhe</string>
+    <string name="gesturenav_header">Gesten Navigation</string>
+    <string name="gesture_nav_pill_cat">Navigationsleistenbreite</string>
+    <string name="gesture_nav_pill_mod_title">Ändere die Navigationsleistenbreite</string>
+    <string name="gesture_nav_pill_width_title">Breite im Vergleich zu der Standartbreite</string>
+    <string name="sysui_restart_needed">Benötigt einen SystemUI Neustart zum aktivieren</string>
+    <string name="threebutton_header_title">3-Schaltflächen Navigation</string>
+    <string name="back_longpress_kill_title">Zurück Taste lange drücken um die Anwendung im Vordergrund zu schließen</string>
+    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
+    <string name="hide_navbar_title">Verstecke Navigationsleiste</string>
+
+    <!--Miscellaneous section related-->
+    <string name="screenshot_sound_disable_title">Deaktiviere Screenshot Ton</string>
+    <string name="so_power_longpress_torch_title">Einschalter lange drücken für Taschenlampe*</string>
+    <string name="framework_needed_caution_summary">Benötigt die Aktivierung des System Frameworks in LSposed. BENUTZE ES MIT VORSICHT</string>
+    <string name="so_double_tap_wake_title">Doppelt Tippen zum Aufwecken des Telefons</string>
+    <string name="so_double_tap_wake_summary">Deaktiviert einzelnes Tippen</string>
+    <string name="doze_header">Während der Bildschirm aus ist…</string>
+    <string name="custom_themed_icons_title">Benutzerdefiniertes Symbolthema</string>
+    <string name="custom_themed_icons_off">Benutzerdefinierte Symbole deaktiviert</string>
+    <string name="custom_themed_icons_on">Benutzerdefinierte Symbole aktiviert</string>
+
+    <!-- Arrays strings -->
+    <!-- Quick pull down -->
+    <string name="pull_down_left">links</string>
+    <string name="pull_down_right">rechts</string>
+
+    <!-- Battery styles -->
+    <string name="battery_default">Standart (Benötigt Neustart)</string>
+    <string name="battery_circle">Kreis</string>
+    <string name="battery_dashed_circle">gepunkteter Kreis</string>
+
+    <!-- Clock position -->
+    <string name="clock_default">links (Standart)</string>
+    <string name="clock_center">zentriert</string>
+    <string name="clock_right">rechts</string>
+
+    <!-- AM/PM style -->
+    <string name="am_pm_default" translatable="false">@string/hide_default</string>
+    <string name="am_pm_normal">100% Größe der Uhr</string>
+    <string name="am_pm_small">70% Größe der Uhr</string>
+
+    <!-- Date position -->
+    <string name="date_default" translatable="false">@string/hide_default</string>
+    <string name="date_before">Vor der Uhr (100%)</string>
+    <string name="date_before_small">Vor der Uhr (70%)</string>
+    <string name="date_after">Nach der Uhr (100%)</string>
+    <string name="date_after_small">Nach der Uhr (70%)</string>
+
+    <!-- 4G | LTE -->
+    <string name="fourg_lte_default">Systemstandart</string>
+    <string name="fourg_lte_lte">Erzwinge LTE Symbol</string>
+    <string name="fourg_lte_fourg">Erzwinge 4G Symbol</string>
+
+    <!-- QS Rows overlays -->
+    <string name="qs_2_rows">Erzwinge 2 Reihen</string>
+    <string name="qs_3_rows">Erzwinge 3 Reihen</string>
+    <string name="qs_4_rows">Erzwinge 4 Reihen</string>
+    <string name="qs_5_rows">Erzwinge 5 Reihen</string>
+
+</resources>

@@ -11,5 +11,7 @@
     <SwitchPreference
         android:defaultValue="false"
         android:key="HideNavbarOverlay"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
         android:title="@string/hide_navbar_title" />
 </PreferenceScreen>

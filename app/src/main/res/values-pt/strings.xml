@@ -74,7 +74,7 @@
     <string name="fourg_lte_fourg">Forçar 4G</string>
     <string name="lte_4g_icon_title">Ícone 4G / LTE</string>
     <string name="keyguard_bottom_category">Atalhos no fundo do ecrã</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Escoder círculo à volta dos ícones</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Esconder círculo à volta dos ícones</string>
     <string name="keyguard_bottom_force_camera_title">Mostrar atalho da Câmara</string>
     <string name="combined_signal_icon_title">Ícones de sinal combinados</string>
     <string name="percent_of_default_size">% do tamanho padrão</string>
@@ -108,5 +108,15 @@
     <string name="custom_themed_icons_title">Ícones temáticos personalizados</string>
     <string name="custom_themed_icons_off">Ícones personalizados inativos</string>
     <string name="custom_themed_icons_on">Ícones personalizados ativos</string>
+    <string name="general_on">Ativado</string>
+    <string name="general_off">Desativado</string>
+    <string name="dual_tone_battery_title">Ativar ícone de dons tons</string>
+    <string name="dual_tone_battery_on_summary">Ativado (apenas para o ícone em retrato)</string>
+    <string name="unread_messages_title">Mostrar nr. de mensagens não lidas</string>
+    <string name="keyguard_left_shortcut">Mostrar atalho do lado esquerdo</string>
+    <string name="status_bar_height">Altura da barra de estado</string>
+    <string name="status_bar_height_small">Pequena</string>
+    <string name="status_bar_height_medium">Média</string>
+    <string name="fix_status_bar_padding">Corrigir espaço do lado esquerdo</string>
 
 </resources>

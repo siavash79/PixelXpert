@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
     <SwitchPreference
         android:defaultValue="false"
         android:key="BackLongPressKill"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
         android:title="@string/back_longpress_kill_title" />
 </PreferenceScreen>

@@ -19,11 +19,33 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="combinedSignalEnabled"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
             android:title="@string/combined_signal_icon_title" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="SBshowVibrationIcon"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
             android:title="@string/sb_vibration_switch_title" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="UnreadMessagesNumberOverlay"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/unread_messages_title" />
+        <ListPreference
+            android:defaultValue="None"
+            android:entries="@array/StatusBarHeightOverlayEx_names"
+            android:entryValues="@array/StatusBarHeightOverlayEx"
+            android:key="StatusBarHeightOverlayEx"
+            android:title="@string/status_bar_height" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="FixSBLeftPadddingOverlay"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/fix_status_bar_padding" />
         <PreferenceCategory
             android:title="@string/battery_style_category_title"
             app:summary="@string/battery_style_category_summary">
@@ -33,6 +55,12 @@
                 android:entryValues="@array/battery_style_codes"
                 android:key="BatteryStyle"
                 android:title="@string/battery_style_title" />
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="DualToneBatteryOverlay"
+                android:summaryOff="@string/general_off"
+                android:summaryOn="@string/dual_tone_battery_on_summary"
+                android:title="@string/dual_tone_battery_title" />
             <SeekBarPreference
                 android:defaultValue="50"
                 android:key="BatteryIconScaleFactor"
@@ -40,6 +68,8 @@
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="BatteryShowPercent"
+                android:summaryOff="@string/general_off"
+                android:summaryOn="@string/general_on"
                 android:title="@string/battery_show_percent_title" />
         </PreferenceCategory>
         <PreferenceCategory
@@ -47,6 +77,8 @@
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="networkOnSBEnabled"
+                android:summaryOff="@string/general_off"
+                android:summaryOn="@string/general_on"
                 android:title="@string/ntsb_enabled_title" />
             <ListPreference
                 android:defaultValue="2"

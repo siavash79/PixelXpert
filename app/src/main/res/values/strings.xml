@@ -8,6 +8,8 @@
     <string name="percent_of_default_size">% of default size</string>
     <string name="overlay_none_title">(Default)</string>
     <string name="general_section">General options</string>
+    <string name="general_on">On</string>
+    <string name="general_off">Off</string>
 
     <!--Category titles-->
     <string name="lockscreen_header_title">Lock Screen</string>
@@ -29,6 +31,7 @@
     <string name="keyguard_bottom_category">Bottom area shortcuts</string>
     <string name="keyguard_bottom_buttons_transparent_title">Hide circle around icons</string>
     <string name="keyguard_bottom_force_camera_title">Show camera shortcut</string>
+    <string name="keyguard_left_shortcut">Show left shortcut on lock screen</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Double tap to sleep</string>
@@ -65,6 +68,13 @@
     <string name="ntsb_treshold_title">Auto-hide treshold</string>
     <string name="ntsb_treshold_summary">"Hide if traffic is less than… (Kilobytes)"</string>
     <string name="statusbar_general_options">Status Bar Options</string>
+    <string name="dual_tone_battery_title">Enable dual tone battery meter</string>
+    <string name="dual_tone_battery_on_summary">On (only works with portrait icon)</string>
+    <string name="unread_messages_title">Show number of unread messages</string>
+    <string name="status_bar_height">Status bar height</string>
+    <string name="status_bar_height_small">Small</string>
+    <string name="status_bar_height_medium">Medium</string>
+    <string name="fix_status_bar_padding">Correct left side padding</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Build number on QS Panel footer</string>

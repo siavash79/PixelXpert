@@ -255,7 +255,9 @@ public class StatusbarMods implements IXposedModPack {
                 "hideClock", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        networkTrafficSB.setVisibility(View.INVISIBLE);
+                        if(networkTrafficSB != null) {
+                            networkTrafficSB.setVisibility(View.INVISIBLE);
+                        }
                     }
                 });
 

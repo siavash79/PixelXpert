@@ -21,6 +21,7 @@ import sh.siava.AOSPMods.Utils.Overlays;
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
+    Context DPContext;
     private static final String TITLE_TAG = "settingsActivityTitle";
 
     public void RestartSysUI(View view) {
@@ -45,22 +46,24 @@ public class SettingsActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DPContext = this.createDeviceProtectedStorageContext();
+        DPContext.moveSharedPreferencesFrom(this, BuildConfig.APPLICATION_ID + "_preferences");
         super.onCreate(savedInstanceState);
 
         backButtonDisabled();
 
-        new Overlays().initOverlays(getApplicationContext());
+        new Overlays().initOverlays(DPContext);
 
         //update settings from previous config file
         try {
-            if(PreferenceManager.getDefaultSharedPreferences(this).contains("Show4GIcon"))
+            if(PreferenceManager.getDefaultSharedPreferences(DPContext).contains("Show4GIcon"))
             {
-                boolean fourGEnabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("Show4GIcon", false);
+                boolean fourGEnabled = PreferenceManager.getDefaultSharedPreferences(DPContext).getBoolean("Show4GIcon", false);
                 if(fourGEnabled)
                 {
-                    PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("LTE4GIconMod", 2).apply();
+                    PreferenceManager.getDefaultSharedPreferences(DPContext).edit().putInt("LTE4GIconMod", 2).apply();
                 }
-                PreferenceManager.getDefaultSharedPreferences(this).edit().remove("Show4GIcon").commit();
+                PreferenceManager.getDefaultSharedPreferences(DPContext).edit().remove("Show4GIcon").commit();
             }
         }
         catch(Exception e){}
@@ -137,6 +140,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.header_preferences, rootKey);
         }
     }
@@ -145,6 +149,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.nav_prefs, rootKey);
         }
 
@@ -154,6 +159,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.lock_screen_prefs, rootKey);
         }
     }
@@ -162,6 +168,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.misc_prefs, rootKey);
         }
     }
@@ -170,6 +177,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.statusbar_clock_prefs, rootKey);
         }
     }
@@ -188,6 +196,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.three_button_prefs, rootKey);
         }
     }
@@ -207,7 +216,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateBatteryIconScaleFactor() {
             try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 
                 findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50)*2 + getString(R.string.battery_size_summary));
             }
@@ -219,7 +228,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateBatteryMod() {
             try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 
                 boolean enabled = !(prefs.getString("BatteryStyle", "0").equals(("0")));
                 findPreference("BatteryShowPercent").setEnabled(enabled);
@@ -228,8 +237,9 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.statusbar_settings, rootKey);
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
             prefs.registerOnSharedPreferenceChangeListener(listener);
             updateBatteryMod();
             updateBatteryIconScaleFactor();
@@ -256,7 +266,7 @@ public class SettingsActivity extends AppCompatActivity implements
         private void updateQSFooterMod() {
             try {
 
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
                 boolean enabled = prefs.getBoolean("QSFooterMod", false);
 
                 findPreference("QSFooterText").setEnabled(enabled);
@@ -266,7 +276,7 @@ public class SettingsActivity extends AppCompatActivity implements
         private void updateQSPulldownEnabld() {
             try {
 
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
                 boolean enabled = prefs.getBoolean("QSPullodwnEnabled", false);
 
                 findPreference("QSPulldownPercent").setEnabled(enabled);
@@ -277,7 +287,7 @@ public class SettingsActivity extends AppCompatActivity implements
         private void updateQSPulldownPercent() {
             try {
 
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 
                 int value = prefs.getInt("QSPulldownPercent", 25);
                 QSPulldownPercent.setSummary(value + "%");
@@ -286,9 +296,10 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.quicksettings_prefs, rootKey);
             QSPulldownPercent = findPreference("QSPulldownPercent");
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
             prefs.registerOnSharedPreferenceChangeListener(listener);
             updateQSPulldownPercent();
             updateQSPulldownEnabld();
@@ -310,12 +321,12 @@ public class SettingsActivity extends AppCompatActivity implements
         @Override
         public void onAttach(Context context) {
             super.onAttach(context);
-            this.context= context;
+            this.context= context.createDeviceProtectedStorageContext();
         }
 
         private void updateNavPill() {
             try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
                 findPreference("GesPillWidthModPos").setEnabled(prefs.getBoolean("GesPillWidthMod", true));
                 findPreference("GesPillWidthModPos").setSummary(prefs.getInt("GesPillWidthModPos", 50)*2 + getString(R.string.pill_width_summary));
             } catch(Exception e){}
@@ -323,7 +334,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateBackGesture() {
             try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
                 findPreference("BackLeftHeight").setEnabled(prefs.getBoolean("BackFromLeft", true));
                 findPreference("BackRightHeight").setEnabled(prefs.getBoolean("BackFromRight", true));
 
@@ -334,9 +345,10 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.gesture_nav_perfs, rootKey);
 
-            PreferenceManager.getDefaultSharedPreferences(getContext()).registerOnSharedPreferenceChangeListener(listener);
+            PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext()).registerOnSharedPreferenceChangeListener(listener);
 
             updateBackGesture();
             updateNavPill();

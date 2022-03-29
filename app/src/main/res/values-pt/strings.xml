@@ -80,9 +80,7 @@
     <string name="percent_of_default_size">% do tamanho padrão</string>
     <string name="battery_icon_size_title">Tamanho do ícone da bateria</string>
     <string name="sb_vibration_switch_title">"Mostar os ícones vibrar/silêncio"</string>
-    <!--
-    <string name="doze_header">"Enquanto o ecrã está desligado..."</string>
-    -->
+    <string name="doze_header">"Enquanto o ecrã está desligado…"</string>
     <string name="so_power_longpress_torch_title">"Lanterna ao manter premido o botão ligar/desligar*"</string>
     <string name="framework_needed_caution_summary">Requer ativar a Framework na Lsposed. USAR COM CUIDADO</string>
     <string name="battery_hidden">Escondida</string>
@@ -97,6 +95,14 @@
     <string name="ntsb_treshold_summary">"Esconder se o tráfego for menor que… (Kilobytes)"</string>
     <string name="so_double_tap_wake_title">Duplo toque para acender</string>
     <string name="so_double_tap_wake_summary">Usar duplo toque ao invés de um toque para acender o ecrã</string>
-    <string name="overlay_none_title">(Default)</string>
-    <string name="qs_panel_category_title">Quick Settings Panel</string>
+    <string name="overlay_none_title">(Padrão)</string>
+    <string name="qs_panel_category_title">Definições rápidas</string>
+    <string name="qs_2_rows">Forçar 2 linhas</string>
+    <string name="qs_3_rows">Forçar 3 linhas</string>
+    <string name="qs_4_rows">Forçar 4 linhas</string>
+    <string name="qs_5_rows">Forçar 5 linhas</string>
+    <string name="qs_rows_number">Número de linhas</string>
+    <string name="qs_general_options">Preferências das definições rápidas</string>
+    <string name="statusbar_general_options">Preferências da barra de estado</string>
+
 </resources>

@@ -126,6 +126,7 @@
     <string name="fourg_lte_default">System Default</string>
     <string name="fourg_lte_lte">Force LTE icon</string>
     <string name="fourg_lte_fourg">Force 4G icon</string>
+    <string name="overlay_none_title">(Default)</string>
 
     <!-- Screen off section -->
     <!-- Let's disable this for the time being...

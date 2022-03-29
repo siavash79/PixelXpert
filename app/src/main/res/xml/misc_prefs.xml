@@ -12,6 +12,8 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="disableScreenshotSound"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
             android:title="@string/screenshot_sound_disable_title" />
     </PreferenceCategory>
     <PreferenceCategory

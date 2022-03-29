@@ -2,7 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:visibility="visible">
-
     <PreferenceCategory android:title="@string/back_gesture_category_title">
         <SwitchPreference
             android:defaultValue="true"
@@ -26,7 +25,6 @@
             android:title="@string/back_height_title"
             app:min="10" />
     </PreferenceCategory>
-
     <PreferenceCategory
         android:title="@string/gesture_nav_pill_cat"
         app:summary="@string/sysui_restart_needed">
@@ -39,5 +37,4 @@
             android:key="GesPillWidthModPos"
             app:title="@string/gesture_nav_pill_width_title" />
     </PreferenceCategory>
-
 </PreferenceScreen>

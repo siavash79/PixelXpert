@@ -2,7 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:visibility="visible">
-
     <SwitchPreference
         android:defaultValue="false"
         android:key="@string/UDFPS_hide_key"
@@ -10,19 +9,26 @@
         android:title="@string/transparent_fingerprint_circle"
         app:summaryOn="@string/transparent_fingerprint_circle_on" />
     <PreferenceCategory android:title="@string/keyguard_bottom_category">
-
         <SwitchPreference
             android:defaultValue="false"
             android:key="KeyguardBottomButtonsTransparent"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
             android:title="@string/keyguard_bottom_buttons_transparent_title" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="KeyguardCameraEnabled"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
             android:title="@string/keyguard_bottom_force_camera_title" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="KeyguardLeftShortcutOverlay"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/keyguard_left_shortcut" />
     </PreferenceCategory>
-
     <PreferenceCategory android:title="@string/carrier_text_category">
-
         <SwitchPreference
             android:defaultValue="false"
             android:key="carrierTextMod"
@@ -35,6 +41,4 @@
             android:singleLine="true"
             android:title="@string/carrier_text_value" />
     </PreferenceCategory>
-
-
 </PreferenceScreen>

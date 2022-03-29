@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
     <ListPreference
         android:defaultValue="0"
         android:entries="@array/sbc_position_names"
@@ -19,6 +18,8 @@
     <SwitchPreference
         android:defaultValue="false"
         android:key="SBCShowSeconds"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
         android:title="@string/sbc_show_secs" />
     <PreferenceCategory
         android:summary="@string/sbc_may_take_one_minute"

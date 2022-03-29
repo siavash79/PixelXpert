@@ -8,10 +8,14 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="LightQSPanel"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
             android:title="@string/light_qs_title" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="QSHapticEnabled"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
             android:title="@string/qs_haptic_switch_title" />
         <ListPreference
             android:defaultValue="None"
@@ -37,6 +41,8 @@
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="QSPullodwnEnabled"
+                android:summaryOff="@string/general_off"
+                android:summaryOn="@string/general_on"
                 android:title="@string/qs_pulldown_switch_title" />
             <SeekBarPreference
                 android:defaultValue="25"

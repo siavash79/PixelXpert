@@ -45,6 +45,7 @@ public class Overlays {
         //independent overlays
         Overlays.put("HideNavbarOverlay", new overlayProp("com.android.overlay.removenavbar", false));
         Overlays.put("QSLightThemeOverlay", new overlayProp("sh.siava.AOSPMods_QSTheme", false));
+        Overlays.put("CustomThemedIconsOverlay", new overlayProp("com.romcontrolicons.nexuslauncher", false));
 
         try {
             setAll();

@@ -7,6 +7,7 @@
     <string name="hide_default">Hide (Default)</string>
     <string name="percent_of_default_size">% of default size</string>
     <string name="overlay_none_title">(Default)</string>
+    <string name="general_section">General options</string>
 
     <!--Category titles-->
     <string name="lockscreen_header_title">Lock Screen</string>
@@ -102,6 +103,9 @@
     <string name="so_double_tap_wake_title">Double-tap to wake phone</string>
     <string name="so_double_tap_wake_summary">Disables single-tap to wake</string>
     <string name="doze_header">While screen is off…</string>
+    <string name="custom_themed_icons_title">Custom themed icons</string>
+    <string name="custom_themed_icons_off">Custom icons disabled</string>
+    <string name="custom_themed_icons_on">Custom icons enabled</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

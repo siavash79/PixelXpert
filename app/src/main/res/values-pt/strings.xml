@@ -104,5 +104,9 @@
     <string name="qs_rows_number">Número de linhas</string>
     <string name="qs_general_options">Preferências das definições rápidas</string>
     <string name="statusbar_general_options">Preferências da barra de estado</string>
+    <string name="general_section">Opções genéricas</string>
+    <string name="custom_themed_icons_title">Ícones temáticos personalizados</string>
+    <string name="custom_themed_icons_off">Ícones personalizados inativos</string>
+    <string name="custom_themed_icons_on">Ícones personalizados ativos</string>
 
 </resources>

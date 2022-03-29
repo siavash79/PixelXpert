@@ -95,10 +95,10 @@
 
     <string-array name="QSRowCountOverlayEx_names"> <!-- same is key, added _names -->
         <item>@string/overlay_none_title</item> <!-- item None MUST be present in the list if user can disable them fully -->
-        <item>Force 2 Rows</item>
-        <item>Force 3 Rows</item>
-        <item>Force 4 Rows</item>
-        <item>Force 5 Rows</item>
+        <item>@string/qs_2_rows</item>
+        <item>@string/qs_3_rows</item>
+        <item>@string/qs_4_rows</item>
+        <item>@string/qs_5_rows</item>
     </string-array>
 
     <string-array name="QSRowCountOverlayEx">

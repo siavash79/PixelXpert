@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:visibility="visible">
+    <PreferenceCategory
+        android:elevation="10dp"
+        android:title="@string/qs_general_options">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="LightQSPanel"
+            android:title="@string/light_qs_title" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="QSHapticEnabled"
+            android:title="@string/qs_haptic_switch_title" />
+        <ListPreference
+            android:defaultValue="None"
+            android:entries="@array/QSRowCountOverlayEx_names"
+            android:entryValues="@array/QSRowCountOverlayEx"
+            android:key="QSRowCountOverlayEx"
+            android:title="@string/qs_rows_number" />
+        <PreferenceCategory
+            android:title="@string/qs_mod_category_title"
+            app:summary="@string/qs_footer_text_desc">
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="QSFooterMod"
+                android:title="@string/qs_footer_mod_title" />
+            <EditTextPreference
+                android:key="QSFooterText"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="@string/qs_footer_text_value"
+                app:summary="@string/qs_footer_text_summary" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/qs_pulldown_category">
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="QSPullodwnEnabled"
+                android:title="@string/qs_pulldown_switch_title" />
+            <SeekBarPreference
+                android:defaultValue="25"
+                android:key="QSPulldownPercent"
+                app:title="@string/qs_pulldown_size" />
+            <ListPreference
+                android:defaultValue="1"
+                android:entries="@array/qs_pulldown_side_names"
+                android:entryValues="@array/qs_pulldown_side_left"
+                android:key="QSPulldownSide"
+                android:title="@string/qs_pulldown_side_title" />
+        </PreferenceCategory>
+    </PreferenceCategory>
+</PreferenceScreen>

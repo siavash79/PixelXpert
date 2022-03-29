@@ -6,12 +6,14 @@
     <string name="error_not_activated">Please confirm if the module is activated on LSPosed Manager</string>
     <string name="hide_default">Hide (Default)</string>
     <string name="percent_of_default_size">% of default size</string>
+    <string name="overlay_none_title">(Default)</string>
 
     <!--Category titles-->
     <string name="lockscreen_header_title">Lock Screen</string>
     <string name="statusbar_header">Status Bar</string>
     <string name="nav_header">Navigation bar</string>
     <string name="misc_header">Miscellaneous</string>
+    <string name="qs_panel_category_title">Quick Settings Panel</string>
 
     <!--Lock screen related-->
     <string name="transparent_fingerprint_circle">Hide under-display fingerprint circle</string>
@@ -31,17 +33,6 @@
     <string name="double_tap_sleep_title">Double tap to sleep</string>
     <string name="double_tap_sleep_off">"Double tap won't turn off the display"</string>
     <string name="double_tap_sleep_on">Double tap on status bar, or lock screen, turns the display off</string>
-    <string name="qs_mod_category_title">Build number on QS Panel footer</string>
-    <string name="qs_footer_mod_title">Modify build text number on QS panel</string>
-    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
-    <string name="qs_footer_text_summary">Leave it blank to remove the text completely</string>
-    <string name="qs_footer_text_desc">Turn the display off/on to apply</string>
-    <string name="light_qs_title">Light QS Panel during light theme (might be buggy)</string>
-    <string name="qs_pulldown_size">Quick pull down width</string>
-    <string name="qs_pulldown_switch_title">Quick QS panel pull down from status bar</string>
-    <string name="qs_pulldown_side_title">Quick pull down side</string>
-    <string name="qs_pulldown_category">Quick settings pull down</string>
-    <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
     <string name="battery_style_title">Choose a battery style</string>
     <string name="battery_show_percent_title">Show battery percentage</string>
     <string name="battery_style_category_title">Battery style</string>
@@ -72,6 +63,22 @@
     <string name="ntsb_position_title">Monitor Position</string>
     <string name="ntsb_treshold_title">Auto-hide treshold</string>
     <string name="ntsb_treshold_summary">"Hide if traffic is less than… (Kilobytes)"</string>
+    <string name="statusbar_general_options">Status Bar Options</string>
+
+    <!--Quick settings panel related-->
+    <string name="qs_mod_category_title">Build number on QS Panel footer</string>
+    <string name="qs_footer_mod_title">Modify build text number on QS panel</string>
+    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
+    <string name="qs_footer_text_summary">Leave it blank to remove the text completely</string>
+    <string name="qs_footer_text_desc">Turn the display off/on to apply</string>
+    <string name="light_qs_title">Light QS Panel during light theme (might be buggy)</string>
+    <string name="qs_pulldown_size">Quick pull down width</string>
+    <string name="qs_pulldown_switch_title">Quick QS panel pull down from status bar</string>
+    <string name="qs_pulldown_side_title">Quick pull down side</string>
+    <string name="qs_pulldown_category">Quick settings pull down</string>
+    <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
+    <string name="qs_rows_number">QS Rows number</string>
+    <string name="qs_general_options">Quick settings options</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configure back gesture</string>
@@ -94,6 +101,7 @@
     <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
     <string name="so_double_tap_wake_title">Double-tap to wake phone</string>
     <string name="so_double_tap_wake_summary">Disables single-tap to wake</string>
+    <string name="doze_header">While screen is off…</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -126,12 +134,11 @@
     <string name="fourg_lte_default">System Default</string>
     <string name="fourg_lte_lte">Force LTE icon</string>
     <string name="fourg_lte_fourg">Force 4G icon</string>
-    <string name="overlay_none_title">(Default)</string>
-    <string name="qs_panel_category_title">Quick Settings Panel</string>
 
-    <!-- Screen off section -->
-    <!-- Let's disable this for the time being...
-    <string name="doze_header">While screen is off...</string>
-    -->
+    <!-- QS Rows overlays -->
+    <string name="qs_2_rows">Force 2 rows</string>
+    <string name="qs_3_rows">Force 3 rows</string>
+    <string name="qs_4_rows">Force 4 rows</string>
+    <string name="qs_5_rows">Force 5 rows</string>
 
 </resources>

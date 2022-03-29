@@ -194,25 +194,15 @@ public class SettingsActivity extends AppCompatActivity implements
 
     public static class StatusbarFragment extends PreferenceFragmentCompat {
 
-        Preference QSPulldownPercent;
-
-
         SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                if (key.equals("QSPulldownPercent")) {
-                    updateQSPulldownPercent();
-                } else if (key.equals("QSPullodwnEnabled")) {
-                    updateQSPulldownEnabld();
-                } else if (key.equals("QSFooterMod")) {
-                    updateQSFooterMod();
-                } else if (key.equals("BatteryStyle")) {
+                if (key.equals("BatteryStyle")) {
                     updateBatteryMod();
                 } else if (key.equals("BatteryIconScaleFactor")) {
                     updateBatteryIconScaleFactor();
                 }
             }
-
         };
 
         private void updateBatteryIconScaleFactor() {
@@ -235,6 +225,33 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("BatteryShowPercent").setEnabled(enabled);
             }catch(Exception e){}
         }
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.statusbar_settings, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+            updateBatteryMod();
+            updateBatteryIconScaleFactor();
+        }
+    }
+
+    public static class QuicksettingsFragment extends PreferenceFragmentCompat {
+
+        Preference QSPulldownPercent;
+
+        SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                if (key.equals("QSPulldownPercent")) {
+                    updateQSPulldownPercent();
+                } else if (key.equals("QSPullodwnEnabled")) {
+                    updateQSPulldownEnabld();
+                } else if (key.equals("QSFooterMod")) {
+                    updateQSFooterMod();
+                }
+            }
+        };
 
         private void updateQSFooterMod() {
             try {
@@ -269,20 +286,13 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-
-            setPreferencesFromResource(R.xml.statusbar_settings, rootKey);
-
+            setPreferencesFromResource(R.xml.quicksettings_prefs, rootKey);
             QSPulldownPercent = findPreference("QSPulldownPercent");
-
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-
             prefs.registerOnSharedPreferenceChangeListener(listener);
-
             updateQSPulldownPercent();
             updateQSPulldownEnabld();
             updateQSFooterMod();
-            updateBatteryMod();
-            updateBatteryIconScaleFactor();
         }
     }
 

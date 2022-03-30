@@ -17,7 +17,7 @@ public class LTEiconChange implements IXposedModPack {
     private static final int FORCE_LTE = 1;
     private static final int FORCE_4G = 2;
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         SBLTEIcon = Integer.parseInt(XPrefs.Xprefs.getString("LTE4GIconMod", "0"));

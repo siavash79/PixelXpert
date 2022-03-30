@@ -7,7 +7,15 @@ import sh.siava.AOSPMods.XPrefs;
 public class miscSettings implements IXposedModPack {
 
     @Override
-    public void updatePrefs() {
+    public void updatePrefs(String...Key) {
+        if(Key == null)
+        {
+            //we are at startup
+        }
+        else
+        {
+            //we know what has changed
+        }
         // her you can ask for preferences and do stuff based on them.
         //preferences are located here: XPrefs.Xprefs
         XPrefs.Xprefs.getBoolean("something", false);

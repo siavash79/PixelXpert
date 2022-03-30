@@ -13,7 +13,7 @@ public class QSFooterTextManager implements IXposedModPack {
     public static boolean customQSFooterTextEnabled = false;
     public static String customText = "";
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         customQSFooterTextEnabled = XPrefs.Xprefs.getBoolean("QSFooterMod", false);

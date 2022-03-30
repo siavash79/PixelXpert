@@ -15,7 +15,7 @@ public class UDFPSManager implements IXposedModPack {
 
     public static String UDFPS_hide_key = "fingerprint_circle_hide";
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         transparentBG = XPrefs.Xprefs.getBoolean(UDFPSManager.UDFPS_hide_key, false);

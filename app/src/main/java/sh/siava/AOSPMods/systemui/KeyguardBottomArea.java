@@ -17,7 +17,7 @@ public class KeyguardBottomArea implements IXposedModPack {
     public static boolean transparentBGcolor = false;
     final Context[] mContext = new Context[1];
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         showCameraOnLockscreen = XPrefs.Xprefs.getBoolean("KeyguardCameraEnabled", false);

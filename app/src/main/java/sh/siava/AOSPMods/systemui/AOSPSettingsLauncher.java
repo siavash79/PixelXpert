@@ -15,7 +15,7 @@ public class AOSPSettingsLauncher implements IXposedModPack {
 
     private static Object activityStarter = null;
     @Override
-    public void updatePrefs() {
+    public void updatePrefs(String...Key) {
 
     }
 

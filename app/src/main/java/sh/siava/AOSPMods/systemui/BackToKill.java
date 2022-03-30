@@ -14,7 +14,7 @@ public class BackToKill implements IXposedModPack {
     private static final String listenPackage = "com.android.systemui";
     private static boolean isEnabled = false;
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         isEnabled = XPrefs.Xprefs.getBoolean("BackLongPressKill", false);

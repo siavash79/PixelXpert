@@ -20,7 +20,7 @@ public class DoubleTapSleepLS implements IXposedModPack {
 
     final Context[] context = new Context[1];
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         doubleTapToSleepEnabled = XPrefs.Xprefs.getBoolean("DoubleTapSleep", false);

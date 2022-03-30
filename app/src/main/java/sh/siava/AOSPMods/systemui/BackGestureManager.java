@@ -15,7 +15,7 @@ public class BackGestureManager implements IXposedModPack {
     public static boolean leftEnabled = true;
     public static boolean rightEnabled = true;
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         leftEnabled = XPrefs.Xprefs.getBoolean("BackFromLeft", true);

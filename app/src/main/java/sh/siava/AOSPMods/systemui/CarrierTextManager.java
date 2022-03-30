@@ -13,7 +13,7 @@ public class CarrierTextManager implements IXposedModPack {
     public static String customText = "";
     private static Object mCarrierTextManager = null;
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         boolean newisEnabled = XPrefs.Xprefs.getBoolean("carrierTextMod", false);

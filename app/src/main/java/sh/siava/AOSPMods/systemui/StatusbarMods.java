@@ -68,7 +68,7 @@ public class StatusbarMods implements IXposedModPack {
     private static LinearLayout mSystemIconArea = null;
     public static int clockColor = 0;
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
 

@@ -13,7 +13,7 @@ public class FeatureFlagsMods implements IXposedModPack {
 
     public static boolean combinedSignalEnabled = false;
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         combinedSignalEnabled = XPrefs.Xprefs.getBoolean("combinedSignalEnabled", false);

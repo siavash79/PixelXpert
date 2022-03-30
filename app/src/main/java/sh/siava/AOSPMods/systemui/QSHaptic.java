@@ -17,7 +17,7 @@ public class QSHaptic implements IXposedModPack {
     public static boolean hasVibrator = false;
     private static Vibrator mVibrator;
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         QSHapticEnabled = XPrefs.Xprefs.getBoolean("QSHapticEnabled", false);

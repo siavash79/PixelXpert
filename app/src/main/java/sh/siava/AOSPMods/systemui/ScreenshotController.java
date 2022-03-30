@@ -13,7 +13,7 @@ public class ScreenshotController implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean disableScreenshotSound = false;
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         disableScreenshotSound = XPrefs.Xprefs.getBoolean("disableScreenshotSound", false);

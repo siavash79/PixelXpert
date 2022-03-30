@@ -14,7 +14,7 @@ public class QSQuickPullDown implements IXposedModPack {
     public static boolean oneFingerPulldownEnabled = false;
     public static float statusbarPortion = 0.25f; // now set to 25% of the screen. it can be anything between 0 to 100%
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         oneFingerPulldownEnabled = XPrefs.Xprefs.getBoolean("QSPullodwnEnabled", false);

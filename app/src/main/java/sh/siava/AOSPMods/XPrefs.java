@@ -17,7 +17,7 @@ public class XPrefs implements IXposedHookZygoteInit {
     public static XModuleResources modRes;
     public static SharedPreferences Xprefs;
 
-    static SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything();
+    static SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything(key);
 
     public static void loadPrefs(Context mContext) {
         Xprefs = new RemotePreferences(mContext, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
@@ -33,12 +33,12 @@ public class XPrefs implements IXposedHookZygoteInit {
         modRes = XModuleResources.createInstance(XPrefs.MOD_PATH, null);
     }
 
-    public static void loadEverything()
+    public static void loadEverything(String...key)
     {
         Overlays.setAll();
         for(IXposedModPack thisMod : AOSPMods.runningMods)
         {
-            thisMod.updatePrefs();
+            thisMod.updatePrefs(key);
         }
     }
 }

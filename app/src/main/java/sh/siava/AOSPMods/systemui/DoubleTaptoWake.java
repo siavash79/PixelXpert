@@ -21,7 +21,7 @@ public class DoubleTaptoWake implements IXposedModPack {
     private static boolean mDoubleTap = false;
 
     @Override
-    public void updatePrefs() {
+    public void updatePrefs(String...Key) {
         doubleTapToWake = XPrefs.Xprefs.getBoolean("doubleTapToWake", false);
     }
 

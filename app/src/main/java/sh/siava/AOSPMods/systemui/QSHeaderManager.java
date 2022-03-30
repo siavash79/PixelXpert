@@ -22,7 +22,7 @@ public class QSHeaderManager implements IXposedModPack {
 
     private static boolean lightQSHeaderEnabled = false;
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));

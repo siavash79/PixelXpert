@@ -37,7 +37,7 @@ public class powerTorch implements IXposedModPack {
     };
 
     @Override
-    public void updatePrefs() {
+    public void updatePrefs(String...Key) {
         replaceAssistantwithTorch = XPrefs.Xprefs.getBoolean("replaceAssistantwithTorch", false);
     }
 

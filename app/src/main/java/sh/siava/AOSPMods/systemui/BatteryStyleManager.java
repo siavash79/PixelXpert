@@ -32,7 +32,7 @@ public class BatteryStyleManager implements IXposedModPack {
     public static boolean scaleWithPrecent =false;
     static boolean hideBattery = false;
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
         String BatteryStyleStr = XPrefs.Xprefs.getString("BatteryStyle", "0");

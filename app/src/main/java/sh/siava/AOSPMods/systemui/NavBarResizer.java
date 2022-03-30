@@ -18,7 +18,7 @@ public class NavBarResizer implements IXposedModPack {
 
     private static Object mNavigationBarInflaterView = null;
 
-    public void updatePrefs()
+    public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
 

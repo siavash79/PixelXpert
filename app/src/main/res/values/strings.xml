@@ -90,6 +90,12 @@
     <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
     <string name="qs_rows_number">QS Rows number</string>
     <string name="qs_general_options">Quick settings options</string>
+    <string name="qs_tiles_3_columns_title">Enable 3 QS Tiles columns</string>
+    <string name="qs_text_size_title">QS Tiles text size</string>
+    <string name="qs_text_size">Reduce QS Tiles text size</string>
+    <string name="wifi_cell_title">Internet Tile</string>
+    <string name="wifi_cell_on">Use Wifi and Data separate Tiles</string>
+    <string name="wifi_cell_off">Use single Internet Tile</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configure back gesture</string>
@@ -105,6 +111,15 @@
     <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Hide navigation bar</string>
+    <string name="gesture_navbar_thickness_title">Navbar pill thickness</string>
+    <string name="gesture_navbar_thickness">Modify NavBar pill thickness</string>
+    <string name="gesture_navbar_thin">Thin</string>
+    <string name="gesture_navbar_thick">Thick</string>
+    <string name="gesture_navbar_thicker">Thicker</string>
+    <string name="colorpill_title">Colorize gestures pill</string>
+    <string name="colorpill">Accent colored gestures pill</string>
+    <string name="reducekeyboard_title">Gestures keyboard space</string>
+    <string name="reducekeyboard">Reduce space on keyboard</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>

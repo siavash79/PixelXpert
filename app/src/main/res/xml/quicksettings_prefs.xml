@@ -23,6 +23,27 @@
             android:entryValues="@array/QSRowCountOverlayEx"
             android:key="QSRowCountOverlayEx"
             android:title="@string/qs_rows_number" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="QS3ColumnsOverlay"
+            android:title="@string/qs_tiles_3_columns_title"
+            app:summaryOn="@string/general_on"
+            app:summaryOff="@string/general_off"/>
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="wifi_cell"
+            android:summaryOff="@string/wifi_cell_off"
+            android:summaryOn="@string/wifi_cell_on"
+            android:title="@string/wifi_cell_title" />
+        <PreferenceCategory
+            android:title="@string/qs_text_size_title">
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="QSSmallTextOverlay"
+                android:title="@string/qs_text_size"
+                app:summaryOn="@string/general_on"
+                app:summaryOff="@string/general_off"/>
+        </PreferenceCategory>
         <PreferenceCategory
             android:title="@string/qs_mod_category_title"
             app:summary="@string/qs_footer_text_desc">

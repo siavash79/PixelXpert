@@ -121,4 +121,18 @@
         <item>com.android.sb_height_medium</item>
     </string-array>
 
+    <string-array name="NBPThicknessOverlayEx_names">
+        <item>@string/overlay_none_title</item>
+        <item>@string/gesture_navbar_thin</item>
+        <item>@string/gesture_navbar_thick</item>
+        <item>@string/gesture_navbar_thicker</item>
+    </string-array>
+
+    <string-array name="NBPThicknessOverlayEx">
+        <item>None</item>
+        <item>com.android.systemui.overlay.thinpill</item>
+        <item>com.android.systemui.overlay.thickpill</item>
+        <item>com.android.systemui.overlay.thickerpill</item>
+    </string-array>
+
 </resources>

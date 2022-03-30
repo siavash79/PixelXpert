@@ -118,5 +118,20 @@
     <string name="status_bar_height_small">Pequena</string>
     <string name="status_bar_height_medium">Média</string>
     <string name="fix_status_bar_padding">Corrigir espaço do lado esquerdo</string>
+    <string name="qs_tiles_3_columns_title">Ativar 3 colunas nas definições rápidas</string>
+    <string name="qs_text_size_title">Tamanho do texto nos atalhos das definições rápidas</string>
+    <string name="qs_text_size">Diminuir o tamanho do texto</string>
+    <string name="gesture_navbar_thickness_title">Espessura da barra de navegação</string>
+    <string name="gesture_navbar_thickness">Personalizar a espessura da barra</string>
+    <string name="gesture_navbar_thin">Fina</string>
+    <string name="gesture_navbar_thick">Espessa</string>
+    <string name="gesture_navbar_thicker">Mais espessa</string>
+    <string name="colorpill_title">Colorir a barra de navegação</string>
+    <string name="colorpill">Aplicar cor de destaque na barra</string>
+    <string name="reducekeyboard_title">Espaço dos gestos no teclado</string>
+    <string name="reducekeyboard">Reduzir o espaço no teclado</string>
+    <string name="wifi_cell_title">Atalho da Internet</string>
+    <string name="wifi_cell_on">Usar Wifi e Dados em separado</string>
+    <string name="wifi_cell_off">Usar apenas o atalho Internet</string>
 
 </resources>

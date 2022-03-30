@@ -88,9 +88,9 @@
     <string name="qs_pulldown_side_title">Schnelles herunterziehen Seite</string>
     <string name="qs_pulldown_category">Schnelleinstellungen herunterziehen</string>
     <string name="qs_haptic_switch_title">Vibriere beim berühren eines Schneleinstellungs Tab </string>
-    <string name="qs_rows_number">Anzahl Spalten in den Schnelleinstellungen</string>
+    <string name="qs_rows_number">Anzahl Reihen in den Schnelleinstellungen</string>
     <string name="qs_general_options">Schnelleinstellungs Optionen</string>
-    <string name="qs_tiles_3_columns_title">Aktiviere 3 Reihige Schnelleinstellungen</string>
+    <string name="qs_tiles_3_columns_title">Aktiviere 3 Spalten Schnelleinstellungen</string>
     <string name="qs_text_size_title">Schnelleinstellungselemente Schriftgröße</string>
     <string name="qs_text_size">Schriftgröße der Schnelleinstellungselemente verkleinern</string>
     <string name="wifi_cell_title">Internet Element</string>

@@ -88,23 +88,38 @@
     <string name="qs_pulldown_side_title">Schnelles herunterziehen Seite</string>
     <string name="qs_pulldown_category">Schnelleinstellungen herunterziehen</string>
     <string name="qs_haptic_switch_title">Vibriere beim berühren eines Schneleinstellungs Tab </string>
-    <string name="qs_rows_number">Anzahl Reihen in den Schnelleinstellungen</string>
+    <string name="qs_rows_number">Anzahl Spalten in den Schnelleinstellungen</string>
     <string name="qs_general_options">Schnelleinstellungs Optionen</string>
-
+    <string name="qs_tiles_3_columns_title">Aktiviere 3 Reihige Schnelleinstellungen</string>
+    <string name="qs_text_size_title">Schnelleinstellungselemente Schriftgröße</string>
+    <string name="qs_text_size">Schriftgröße der Schnelleinstellungselemente verkleinern</string>
+    <string name="wifi_cell_title">Internet Element</string>
+    <string name="wifi_cell_on">Benutze seperate Elemente für Wifi und Daten</string>
+    <string name="wifi_cell_off">Benutze Internet Element</string>
+	
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Anpassen der Zurück-Geste</string>
     <string name="back_from_left_title">linker Bildschirmrand</string>
     <string name="back_from_right_title">rechter Bildschirmrand</string>
     <string name="back_height_title">Gestenhöhe</string>
     <string name="gesturenav_header">Gesten Navigation</string>
-    <string name="gesture_nav_pill_cat">Navigationsleistenbreite</string>
+    <string name="gesture_nav_pill_cat">Gestennavigationsleistenbreite</string>
     <string name="gesture_nav_pill_mod_title">Ändere die Navigationsleistenbreite</string>
     <string name="gesture_nav_pill_width_title">Breite im Vergleich zu der Standartbreite</string>
     <string name="sysui_restart_needed">Benötigt einen SystemUI Neustart zum aktivieren</string>
     <string name="threebutton_header_title">3-Schaltflächen Navigation</string>
     <string name="back_longpress_kill_title">Zurück Taste lange drücken um die Anwendung im Vordergrund zu schließen</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
-    <string name="hide_navbar_title">Verstecke Navigationsleiste</string>
+    <string name="hide_navbar_title">Verstecke Gestennavigationsleiste</string>
+    <string name="gesture_navbar_thickness_title">Gestennavigationsleiste Stärke</string>
+    <string name="gesture_navbar_thickness">Ändere die Stärke der Gestennavigationsleiste</string>
+    <string name="gesture_navbar_thin">Dünn</string>
+    <string name="gesture_navbar_thick">Fett</string>
+    <string name="gesture_navbar_thicker">Fetter</string>
+    <string name="colorpill_title">Gestennavigationsleistenfarbe</string>
+    <string name="colorpill">Gestennavigationsleisten in Akzentfarbe</string>
+    <string name="reducekeyboard_title">Tastatur Gestenbereich</string>
+    <string name="reducekeyboard">Reduziere den Gestenbereich der Tastatur</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Deaktiviere Screenshot Ton</string>

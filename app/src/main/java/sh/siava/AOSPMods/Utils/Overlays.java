@@ -69,7 +69,7 @@ public class Overlays {
         {
             try {
                 int resid = fileds[i].getInt(R.array.module_scope);
-                if(resources.getResourceName(resid).endsWith("OverlayEx"))
+                if(resources.getResourceName(resid).endsWith("OverlayEx") || resources.getResourceName(resid).endsWith("OverlayG"))
                 {
                     String[] overlayNames = resources.getStringArray(resid);
                     ArrayList<overlayProp> members = new ArrayList<>();

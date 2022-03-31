@@ -115,7 +115,7 @@
     <string name="reducekeyboard">減少鍵盤上的空間</string>
 
     <!--Miscellaneous section related-->
-    <string name="screenshot_sound_disable_title"禁用螢幕截圖的聲音</string>
+    <string name="screenshot_sound_disable_title">禁用螢幕截圖的聲音</string>
     <string name="so_power_longpress_torch_title">長按電源開啟電筒</string>
     <string name="framework_needed_caution_summary">需要在 LSPosed 啟用中勾選系統框架，請謹慎使用。</string>
     <string name="so_double_tap_wake_title">雙擊喚醒手機</string>

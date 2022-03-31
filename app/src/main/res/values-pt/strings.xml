@@ -133,5 +133,7 @@
     <string name="wifi_cell_title">Atalho da Internet</string>
     <string name="wifi_cell_on">Usar Wifi e Dados em separado</string>
     <string name="wifi_cell_off">Usar apenas o atalho Internet</string>
+    <string name="theme_customization_category">Temas</string>
+    <string name="theme_customization_font_title">Fonte do título / corpo do texto</string>
 
 </resources>

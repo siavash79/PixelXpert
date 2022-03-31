@@ -135,4 +135,108 @@
         <item>com.android.systemui.overlay.thickerpill</item>
     </string-array>
 
+    <string-array name="FontsOverlayEx_names">
+        <item>@string/overlay_none_title</item>
+        <item>Blender Pro</item>
+        <item>Euclid Circular</item>
+        <item>Harmony</item>
+        <item>Inter</item>
+        <item>Linotte</item>
+        <item>Evolve Sans</item>
+        <item>Manrope</item>
+        <item>MiLan Pro</item>
+        <item>Noto Sans</item>
+        <item>Noto Serif / Source Sans Pro</item>
+        <item>One Plus Sans</item>
+        <item>One Plus Slate</item>
+        <item>Poppins</item>
+        <item>Recursive Casual</item>
+        <item>Recursive Linear</item>
+        <item>Roboto</item>
+        <item>Rosemary</item>
+        <item>Source Sans</item>
+        <item>Source Serif</item>
+        <item>Storopia</item>
+        <item>Simple Day</item>
+        <item>LG Smart Gothic</item>
+        <item>Nokia Pure</item>
+        <item>Bariol</item>
+        <item>Comfortaa</item>
+        <item>Cool Story</item>
+        <item>Comic Sans</item>
+        <item>Sony Sketch</item>
+        <item>Amarante</item>
+        <item>Cocon</item>
+        <item>Fucek</item>
+        <item>Oduda</item>
+        <item>Lemon Milk</item>
+        <item>Aclonica</item>
+        <item>Fifa 2018</item>
+        <item>Reemkufi</item>
+        <item>Exo Two</item>
+        <item>Samsung One</item>
+        <item>Nunito</item>
+        <item>Quando</item>
+        <item>Ubuntu</item>
+        <item>Antipasto Pro</item>
+        <item>Surfer</item>
+        <item>Cagliostro</item>
+        <item>Grand Hotel</item>
+        <item>Redressed</item>
+        <item>JetBrains Mono</item>
+        <item>Roboto Serif</item>
+    </string-array>
+
+    <string-array name="FontsOverlayEx">
+        <item>None</item>
+        <item>org.protonaosp.theme.font.blenderpro</item>
+        <item>org.protonaosp.theme.font.euclid</item>
+        <item>org.protonaosp.theme.font.harmonysans</item>
+        <item>org.protonaosp.theme.font.googlesans.inter</item>
+        <item>org.protonaosp.theme.font.linottesource</item>
+        <item>com.android.theme.font.evolvesans</item>
+        <item>org.protonaosp.theme.font.manrope</item>
+        <item>org.protonaosp.theme.font.milanpro</item>
+        <item>org.protonaosp.theme.font.noto_sans</item>
+        <item>com.android.theme.font.notoserifsource</item>
+        <item>com.android.theme.font.opsans</item>
+        <item>com.android.theme.font.oneplusslate</item>
+        <item>org.protonaosp.theme.font.poppins</item>
+        <item>org.protonaosp.theme.font.recursive_casual</item>
+        <item>org.protonaosp.theme.font.recursive_linear</item>
+        <item>org.protonaosp.theme.font.roboto</item>
+        <item>com.android.theme.font.rosemarysource</item>
+        <item>org.protonaosp.theme.font.source_sans</item>
+        <item>org.protonaosp.theme.font.source_serif</item>
+        <item>com.android.theme.font.storopia</item>
+        <item>com.android.theme.font.simpleday</item>
+        <item>com.android.theme.font.lgsmartgothicsource</item>
+        <item>com.android.theme.font.nokiapure</item>
+        <item>com.android.theme.font.bariolsource</item>
+        <item>com.android.theme.font.comfortaa</item>
+        <item>com.android.theme.font.coolstorysource</item>
+        <item>com.android.theme.font.comicsans</item>
+        <item>com.android.theme.font.sonysketchsource</item>
+        <item>com.android.theme.font.amarantesource</item>
+        <item>com.android.theme.font.cocon</item>
+        <item>com.android.theme.font.fucek</item>
+        <item>com.android.theme.font.oduda</item>
+        <item>com.android.theme.font.lemonmilk</item>
+        <item>com.android.theme.font.aclonicasource</item>
+        <item>com.android.theme.font.fifa2018</item>
+        <item>com.android.theme.font.reemkufi</item>
+        <item>com.android.theme.font.exotwo</item>
+        <item>com.android.theme.font.samsungone</item>
+        <item>com.android.theme.font.nunito</item>
+        <item>com.android.theme.font.quando</item>
+        <item>com.android.theme.font.ubuntu</item>
+        <item>com.android.theme.font.antipastopro</item>
+        <item>com.android.theme.font.surfersource</item>
+        <item>com.android.theme.font.cagliostrosource</item>
+        <item>com.android.theme.font.grandhotel</item>
+        <item>com.android.theme.font.redressed</item>
+        <item>com.android.theme.font.jbmono</item>
+        <item>com.android.theme.font.rbserif</item>
+    </string-array>
+
 </resources>

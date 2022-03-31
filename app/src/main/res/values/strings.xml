@@ -17,6 +17,7 @@
     <string name="nav_header">Navigation bar</string>
     <string name="misc_header">Miscellaneous</string>
     <string name="qs_panel_category_title">Quick Settings Panel</string>
+    <string name="theme_customization_category">Theming</string>
 
     <!--Lock screen related-->
     <string name="transparent_fingerprint_circle">Hide under-display fingerprint circle</string>
@@ -131,6 +132,9 @@
     <string name="custom_themed_icons_title">Custom themed icons</string>
     <string name="custom_themed_icons_off">Custom icons disabled</string>
     <string name="custom_themed_icons_on">Custom icons enabled</string>
+
+    <!-- Theming section related -->
+    <string name="theme_customization_font_title">Headline / Body font</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

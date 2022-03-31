@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/theme_customization_font_title">
+        <ListPreference
+            android:defaultValue="None"
+            android:entries="@array/FontsOverlayEx_names"
+            android:entryValues="@array/FontsOverlayEx"
+            android:key="FontsOverlayEx"
+            android:title="@string/theme_customization_font_title" />
+    </PreferenceCategory>
+</PreferenceScreen>

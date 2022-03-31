@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2019-2020 The Evolution X Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24.0"
+    android:viewportHeight="24.0"
+    android:tint="?android:attr/colorControlNormal">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M2.53,19.65 L3.87,20.21 L3.87,11.18 L1.44,17.04 C1.03,18.06,1.52,19.23,2.53,19.65 Z M22.03,15.95 L17.07,3.98 C16.76,3.23,16.03,2.77,15.26,2.75 C15,2.75,14.73,2.79,14.47,2.9 L7.1,5.95 C6.35,6.26,5.89,6.98,5.87,7.75 C5.86,8.02,5.91,8.29,6.02,8.55 L10.98,20.52 C11.29,21.28,12.03,21.74,12.81,21.75 C13.07,21.75,13.33,21.7,13.58,21.6 L20.94,18.55 C21.96,18.13,22.45,16.96,22.03,15.95 Z M12.83,19.75 L7.87,7.79 L15.22,4.75 L15.23,4.75 L20.18,16.7 L12.83,19.75 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M11,8 C11.5523,8,12,8.44771,12,9 C12,9.55229,11.5523,10,11,10 C10.4477,10,10,9.55229,10,9 C10,8.44771,10.4477,8,11,8 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M5.88,19.75 C5.88,20.85,6.78,21.75,7.88,21.75 L9.33,21.75 L5.88,13.41 L5.88,19.75 Z" />
+</vector>

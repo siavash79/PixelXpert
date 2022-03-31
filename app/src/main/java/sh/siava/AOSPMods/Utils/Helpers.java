@@ -75,6 +75,15 @@ public class Helpers {
             packname = op.name;
             exclusive = op.exclusive;
         }
+        else if(Key.endsWith("OverlayG")) //It's a group of overlays to work together as a team
+        {
+            try {
+                setOverlayGroup(Key, enabled);
+            }catch (Exception ignored){}
+            finally {
+                return;
+            }
+        }
         else
         {
             packname = Key;
@@ -98,6 +107,15 @@ public class Helpers {
         catch(Throwable t)
         {
             t.printStackTrace();
+        }
+    }
+
+    private static void setOverlayGroup(String key, boolean enabled) {
+        Overlays.overlayGroup thisGroup = (Overlays.overlayGroup) Overlays.Overlays.get(key);
+
+        for(Overlays.overlayProp thisProp : thisGroup.members)
+        {
+            Helpers.setOverlay(thisProp.name, enabled);
         }
     }
 }

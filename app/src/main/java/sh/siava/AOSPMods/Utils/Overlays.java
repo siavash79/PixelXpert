@@ -114,14 +114,8 @@ public class Overlays {
 
                 overlayGroup thisGroup = (overlayGroup) Overlays.get(pref);
                 for (overlayProp thisProp : thisGroup.members) {
-                    boolean isEnabledNow = Helpers.activeOverlays.contains(thisProp.name);
-                    boolean shouldBeActive = activeOverlay.equals(thisProp.name);
-
-                    if(isEnabledNow != shouldBeActive)
-                    {
-                        if(!thisProp.name.equals("None")) {
-                            Helpers.setOverlay(thisProp.name, shouldBeActive);
-                        }
+                    if(!thisProp.name.equals("None")) {
+                        Helpers.setOverlay(thisProp.name, activeOverlay.equals(thisProp.name));
                     }
                 }
             }

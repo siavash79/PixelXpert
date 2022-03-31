@@ -10,6 +10,8 @@
     <string name="general_section">General options</string>
     <string name="general_on">On</string>
     <string name="general_off">Off</string>
+    <string name="sysui_restart_needed">Requires a SystemUI restart to apply</string>
+    <string name="restart_needed">Requires a restart to apply</string>
 
     <!--Category titles-->
     <string name="lockscreen_header_title">Lock Screen</string>
@@ -107,7 +109,6 @@
     <string name="gesture_nav_pill_cat">Navigation bar pill width</string>
     <string name="gesture_nav_pill_mod_title">Modify NavBar pill width</string>
     <string name="gesture_nav_pill_width_title">Width comparing to standard size</string>
-    <string name="sysui_restart_needed">Requires a SystemUI restart to apply</string>
     <string name="threebutton_header_title">3-Button navigation</string>
     <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
@@ -134,7 +135,10 @@
     <string name="custom_themed_icons_on">Custom icons enabled</string>
 
     <!-- Theming section related -->
+    <string name="gsans_override_title">Force Google Sans font system wide</string>
     <string name="theme_customization_font_title">Headline / Body font</string>
+    <string name="icons_style_title">Icons Style</string>
+    <string name="icon_shapes_title">Icon Shapes</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

@@ -239,4 +239,139 @@
         <item>com.android.theme.font.rbserif</item>
     </string-array>
 
+    <string-array name="IconShapesOverlayEx_names">
+        <item>@string/overlay_none_title</item>
+        <item>Cylinder</item>
+        <item>Leaf</item>
+        <item>Heart</item>
+        <item>Hexagon</item>
+        <item>Mallow</item>
+        <item>Pebble</item>
+        <item>Roundedhexagon</item>
+        <item>Roundedrect</item>
+        <item>Square</item>
+        <item>Squircle</item>
+        <item>Taperedrect</item>
+        <item>Teardrop</item>
+        <item>Vessel</item>
+        <item>Cloudy</item>
+        <item>Flower</item>
+        <item>Stretched</item>
+    </string-array>
+
+    <string-array name="IconShapesOverlayEx">
+        <item>None</item>
+        <item>com.android.theme.icon.cylinder</item>
+        <item>com.android.theme.icon.leaf</item>
+        <item>com.android.theme.icon.heart</item>
+        <item>com.android.theme.icon.hexagon</item>
+        <item>com.android.theme.icon.mallow</item>
+        <item>com.android.theme.icon.pebble</item>
+        <item>com.android.theme.icon.roundedhexagon</item>
+        <item>com.android.theme.icon.roundedrect</item>
+        <item>com.android.theme.icon.square</item>
+        <item>com.android.theme.icon.squircle</item>
+        <item>com.android.theme.icon.taperedrect</item>
+        <item>com.android.theme.icon.teardrop</item>
+        <item>com.android.theme.icon.vessel</item>
+        <item>com.android.theme.icon.cloudy</item>
+        <item>com.android.theme.icon.flower</item>
+        <item>com.android.theme.icon.stretched</item>
+    </string-array>
+
+    <string-array name="IconPacksOverlayEx_names">
+        <item>@string/overlay_none_title</item>
+        <item>Acherus</item>
+        <item>Circular</item>
+        <item>Filled</item>
+        <item>Kai</item>
+        <item>OxigenOS</item>
+        <item>Rounded</item>
+        <item>Sam</item>
+        <item>Victor</item>
+        <item>Outline</item>
+        <item>Liv</item>
+    </string-array>
+
+    <string-array name="IconPacksOverlayEx">
+        <item>None</item>
+        <item>AcherusOverlayG</item>
+        <item>CircularOverlayG</item>
+        <item>FilledOverlayG</item>
+        <item>KaiOverlayG</item>
+        <item>OxigenOSOverlayG</item>
+        <item>RoundedOverlayG</item>
+        <item>SamOverlayG</item>
+        <item>VictorOverlayG</item>
+        <item>OutlineOverlayG</item>
+        <item>com.android.theme.icon_pack.liv.android</item>
+    </string-array>
+
+    <string-array name="AcherusOverlayG">
+        <item>com.android.theme.icon_pack.acherus.android</item>
+        <item>com.android.theme.icon_pack.acherus.systemui</item>
+    </string-array>
+
+    <string-array name="CircularOverlayG">
+        <item>com.android.theme.icon_pack.circular.android</item>
+        <item>com.android.theme.icon_pack.circular.systemui</item>
+        <item>com.android.theme.icon_pack.circular.settings</item>
+        <item>com.android.theme.icon_pack.circular.launcher</item>
+        <item>com.android.theme.icon_pack.circular.themepicker</item>
+    </string-array>
+
+    <string-array name="FilledOverlayG">
+        <item>com.android.theme.icon_pack.filled.android</item>
+        <item>com.android.theme.icon_pack.filled.systemui</item>
+        <item>com.android.theme.icon_pack.filled.settings</item>
+        <item>com.android.theme.icon_pack.filled.launcher</item>
+        <item>com.android.theme.icon_pack.filled.themepicker</item>
+    </string-array>
+
+    <string-array name="KaiOverlayG">
+        <item>com.android.theme.icon_pack.kai.android</item>
+        <item>com.android.theme.icon_pack.kai.systemui</item>
+        <item>com.android.theme.icon_pack.kai.settings</item>
+        <item>com.android.theme.icon_pack.kai.launcher</item>
+        <item>com.android.theme.icon_pack.kai.themepicker</item>
+    </string-array>
+
+    <string-array name="OxigenOSOverlayG">
+        <item>com.android.theme.icon_pack.oos.android</item>
+        <item>com.android.theme.icon_pack.oos.systemui</item>
+        <item>com.android.theme.icon_pack.oos.settings</item>
+        <item>com.android.theme.icon_pack.oos.launcher</item>
+        <item>com.android.theme.icon_pack.oos.themepicker</item>
+    </string-array>
+
+    <string-array name="RoundedOverlayG">
+        <item>com.android.theme.icon_pack.rounded.android</item>
+        <item>com.android.theme.icon_pack.rounded.systemui</item>
+        <item>com.android.theme.icon_pack.rounded.settings</item>
+        <item>com.android.theme.icon_pack.rounded.launcher</item>
+        <item>com.android.theme.icon_pack.rounded.themepicker</item>
+    </string-array>
+
+    <string-array name="SamOverlayG">
+        <item>com.android.theme.icon_pack.sam.android</item>
+        <item>com.android.theme.icon_pack.sam.systemui</item>
+        <item>com.android.theme.icon_pack.sam.settings</item>
+        <item>com.android.theme.icon_pack.sam.launcher</item>
+        <item>com.android.theme.icon_pack.sam.themepicker</item>
+    </string-array>
+
+    <string-array name="VictorOverlayG">
+        <item>com.android.theme.icon_pack.victor.android</item>
+        <item>com.android.theme.icon_pack.victor.systemui</item>
+        <item>com.android.theme.icon_pack.victor.settings</item>
+        <item>com.android.theme.icon_pack.victor.launcher</item>
+        <item>com.android.theme.icon_pack.victor.themepicker</item>
+    </string-array>
+
+    <string-array name="OutlineOverlayG">
+        <item>com.android.theme.icon_pack.outline.android</item>
+        <item>com.android.theme.icon_pack.outline.systemui</item>
+        <item>com.android.theme.icon_pack.outline.settings</item>
+    </string-array>
+
 </resources>

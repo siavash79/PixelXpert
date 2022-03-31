@@ -19,6 +19,7 @@ public class miscSettings implements IXposedModPack {
             //we are at startup
             updateSysUITuner();
             updateWifiCell();
+            updateGSansOverride();
         }
         else
         {
@@ -31,6 +32,8 @@ public class miscSettings implements IXposedModPack {
                 case "wifi_cell":
                     updateWifiCell();
                     break;
+                case "gsans_override":
+                    updateGSansOverride();
             }
         }
     }
@@ -83,6 +86,23 @@ public class miscSettings implements IXposedModPack {
 
         try {
             Shell.su("pm " + mode + " com.android.systemui/.tuner.TunerActivity").exec();
+        }catch(Exception ignored){}
+    }
+
+    private void updateGSansOverride() {
+        Boolean GSansOverrideEnabled = XPrefs.Xprefs.getBoolean("gsans_override", false);
+        try {
+            if (GSansOverrideEnabled){
+                /* To do
+                * replace module path name on the command
+                * Shell.su ("cp /data/adb/modules/AOSPMods/data/fontz/GSans/*.ttf /data/adb/modules/AOSPMods/system/fonts/ && cp /data/adb/modules/AOSPMods/data/productz/etc/fonts_customization.xml.NEW /data/adb/modules/AOSPMods/system/product/etc/fonts_customization.xml").exec();*/
+                Shell.su ("cp /data/adb/modules/AddonFeaturesForPixel/data/fontz/GSans/*.ttf /data/adb/modules/AddonFeaturesForPixel/system/fonts/ && cp /data/adb/modules/AddonFeaturesForPixel/data/productz/etc/fonts_customization.xml.NEW /data/adb/modules/AddonFeaturesForPixel/system/product/etc/fonts_customization.xml").exec();
+            } else {
+                /* To do
+                 * replace module path name on the command
+                 * Shell.su ("rm -rf /data/adb/modules/AOSPMods/system/fonts/*.ttf && cp /data/adb/modules/AOSPMods/data/productz/etc/fonts_customization.xml.OLD /data/adb/modules/AOSPMods/system/product/etc/fonts_customization.xml").exec();*/
+                Shell.su ("rm -rf /data/adb/modules/AddonFeaturesForPixel/system/fonts/*.ttf && cp /data/adb/modules/AddonFeaturesForPixel/data/productz/etc/fonts_customization.xml.OLD /data/adb/modules/AddonFeaturesForPixel/system/product/etc/fonts_customization.xml").exec();
+            }
         }catch(Exception ignored){}
     }
 

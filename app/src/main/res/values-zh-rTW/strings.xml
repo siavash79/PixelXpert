@@ -1,0 +1,167 @@
+<resources>
+    <!--General strings-->
+    <string name="error_not_activated">請確認該模組在 LSPosed 上是否被啟用。</string>
+    <string name="hide_default">隱藏 (預設)</string>
+    <string name="percent_of_default_size">預設尺寸 %</string>
+    <string name="overlay_none_title">(預設)</string>
+    <string name="general_section">一般選項</string>
+    <string name="general_on">開啟</string>
+    <string name="general_off">關閉</string>
+
+    <!--Category titles-->
+    <string name="lockscreen_header_title">鎖定畫面</string>
+    <string name="statusbar_header">狀態列</string>
+    <string name="nav_header">導航欄</string>
+    <string name="misc_header">雜項</string>
+    <string name="qs_panel_category_title">快速設定面板</string>
+    <string name="theme_customization_category">風格和主題</string>
+
+    <!--Lock screen related-->
+    <string name="transparent_fingerprint_circle">隱藏顯示下的指紋圓圈</string>
+    <string name="transparent_fingerprint_circle_off">指紋圖示周圍的圓圈被啟用</string>
+    <string name="transparent_fingerprint_circle_on">指紋圖示周圍的圓圈將被隱藏</string>
+    <string name="carrier_text_category">運營商文字</string>
+    <string name="configure_carrier_text">設定載體文字</string>
+    <string name="carrier_text_mod_disabled">運營商文字不變</string>
+    <string name="carrier_text_mod_enabled">自定義載體文字</string>
+    <string name="carrier_text_value">插入自定義文字</string>
+    <string name="keyguard_bottom_category">底部區域的快捷</string>
+    <string name="keyguard_bottom_buttons_transparent_title">隱藏圖示周圍的圓圈</string>
+    <string name="keyguard_bottom_force_camera_title">顯示相機快捷</string>
+    <string name="keyguard_left_shortcut">在螢幕鎖定狀態下顯示左邊的快捷</string>
+
+    <!--Status bar related-->
+    <string name="double_tap_sleep_title">雙擊睡眠</string>
+    <string name="double_tap_sleep_off">「雙擊睡眠不會關閉螢幕」</string>
+    <string name="double_tap_sleep_on">在狀態列或鎖定狀態下點兩下，就會關閉螢幕</string>
+    <string name="battery_style_title">選擇一種電池風格</string>
+    <string name="battery_show_percent_title">顯示電池百分比</string>
+    <string name="battery_style_category_title">電池樣式</string>
+    <string name="battery_icon_size_title">電池圖示大小</string>
+    <string name="battery_hidden">隱藏</string>
+    <string name="lte_4g_icon_title">LTE / 4G 圖示</string>
+    <string name="combined_signal_icon_title">合併訊號圖示</string>
+    <string name="sb_vibration_switch_title">顯示振動 / 靜音圖示</string>
+    <string name="sbc_position_title">時鐘位置</string>
+    <string name="sbc_ampm_style">AM/PM 風格</string>
+    <string name="sbc_show_secs">顯示秒數</string>
+    <string name="sbc_date_cat">日期選項</string>
+    <string name="sbc_day_of_week_options">顯示星期</string>
+    <string name="sbc_advanced_cat">日期進階選項 (將取代上述設定！)</string>
+    <string name="sbc_advanced_sum">請閱讀 Java 的日期格式文件</string>
+    <string name="sbc_custom_date_before">自定時鐘左側的格式</string>
+    <string name="sbc_date_small">較小的尺寸 (70%)</string>
+    <string name="sbc_custom_date_after">自定時鐘右側的格式</string>
+    <string name="sbc_header">狀態列時鐘定製</string>
+    <string name="sbc_may_take_one_minute">在時間更新或 SystemUI 重啟時生效</string>
+    <string name="ntsb_far_left">最左邊</string>
+    <string name="ntsb_mid_left">中間偏左</string>
+    <string name="ntsb_mid_right">中間偏右</string>
+    <string name="ntsb_category_title">網路監視器</string>
+    <string name="ntsb_enabled_title">啟用網路監視器</string>
+    <string name="ntsb_position_title">網路監視器位置</string>
+    <string name="ntsb_treshold_title">自動隱藏閾值</string>
+    <string name="ntsb_treshold_summary">「如果流量小於設定就隱藏...(Kilobytes)」</string>
+    <string name="statusbar_general_options">狀態列選項</string>
+    <string name="dual_tone_battery_title">啟用雙音電池表</string>
+    <string name="dual_tone_battery_on_summary">開啟（僅適用於縱向圖示）</string>
+    <string name="unread_messages_title">顯示未讀資訊的數量</string>
+    <string name="status_bar_height">狀態列高度</string>
+    <string name="status_bar_height_small">小</string>
+    <string name="status_bar_height_medium">中</string>
+    <string name="fix_status_bar_padding">對準左側</string>
+
+    <!--Quick settings panel related-->
+    <string name="qs_mod_category_title">QS 面板頁尾上的版本編號</string>
+    <string name="qs_footer_mod_title">自訂 QS 面板頁尾上的版本編號</string>
+    <string name="qs_footer_text_summary">留空可完全刪除</string>
+    <string name="qs_footer_text_desc">關閉 / 開啟顯示以應用</string>
+    <string name="light_qs_title">在燈光主題期間點亮 QS 面板 (可能是 Bug)</string>
+    <string name="qs_pulldown_size">快速下拉的寬度</string>
+    <string name="qs_pulldown_switch_title">從狀態列快速展開 QS 面板</string>
+    <string name="qs_pulldown_side_title">從側面快速下拉</string>
+    <string name="qs_pulldown_category">設定快速下拉</string>
+    <string name="qs_haptic_switch_title">點選 QS 方塊後震動</string>
+    <string name="qs_rows_number">QS 行數</string>
+    <string name="qs_general_options">快速設定選項</string>
+    <string name="qs_tiles_3_columns_title">啟用 3 個 QS 方塊列</string>
+    <string name="qs_text_size_title">QS 方塊的文字大小</string>
+    <string name="qs_text_size">縮小 QS 方塊的文字大小</string>
+    <string name="wifi_cell_title">網際網路方塊</string>
+    <string name="wifi_cell_on">使用獨立的 Wifi 和網路方塊</string>
+    <string name="wifi_cell_off">使用單一的網際網路方塊</string>
+
+    <!--Navigation bar related-->
+    <string name="back_gesture_category_title">設定背部手勢</string>
+    <string name="back_from_left_title">螢幕左側</string>
+    <string name="back_from_right_title">螢幕右側</string>
+    <string name="back_height_title">手勢高度</string>
+    <string name="gesturenav_header">手勢導航</string>
+    <string name="gesture_nav_pill_cat">導航欄的寬度</string>
+    <string name="gesture_nav_pill_mod_title">修改導航欄的寬度</string>
+    <string name="gesture_nav_pill_width_title">與標準尺寸相比的寬度</string>
+    <string name="sysui_restart_needed">需要重新啟動 SystemUI 才能應用</string>
+    <string name="threebutton_header_title">三鍵導航欄</string>
+    <string name="back_longpress_kill_title">長按回車鍵可殺死前臺應用程式</string>
+    <string name="hide_navbar_title">隱藏導航條</string>
+    <string name="gesture_navbar_thickness_title">導航欄的厚度</string>
+    <string name="gesture_navbar_thickness">修改導航條柱子的厚度</string>
+    <string name="gesture_navbar_thin">薄</string>
+    <string name="gesture_navbar_thick">厚</string>
+    <string name="gesture_navbar_thicker">更厚</string>
+    <string name="colorpill_title">給手勢丸塗上顏色</string>
+    <string name="colorpill">突出彩色手勢丸</string>
+    <string name="reducekeyboard_title">手勢鍵盤空間</string>
+    <string name="reducekeyboard">減少鍵盤上的空間</string>
+
+    <!--Miscellaneous section related-->
+    <string name="screenshot_sound_disable_title"禁用螢幕截圖的聲音</string>
+    <string name="so_power_longpress_torch_title">長按電源開啟電筒</string>
+    <string name="framework_needed_caution_summary">需要在 LSPosed 啟用中勾選系統框架，請謹慎使用。</string>
+    <string name="so_double_tap_wake_title">雙擊喚醒手機</string>
+    <string name="so_double_tap_wake_summary">禁用單點喚醒</string>
+    <string name="doze_header">當螢幕關閉時...</string>
+    <string name="custom_themed_icons_title">自定義的主題圖示</string>
+    <string name="custom_themed_icons_off">自定義圖示被禁用</string>
+    <string name="custom_themed_icons_on">啟用自定義圖示</string>
+
+    <!-- Theming section related -->
+    <string name="theme_customization_font_title">標題 / 主字型</string>
+
+    <!-- Arrays strings -->
+    <!-- Quick pull down -->
+    <string name="pull_down_left">左邊</string>
+    <string name="pull_down_right">右邊</string>
+
+    <!-- Battery styles -->
+    <string name="battery_default">預設 (需要重新啟動才能應用)</string>
+    <string name="battery_circle">圓圈</string>
+    <string name="battery_dashed_circle">虛線圓圈</string>
+
+    <!-- Clock position -->
+    <string name="clock_default">左邊 (預設)</string>
+    <string name="clock_center">中間</string>
+    <string name="clock_right">右邊</string>
+
+    <!-- AM/PM style -->
+    <string name="am_pm_normal">100%</string>
+    <string name="am_pm_small">70%</string>
+
+    <!-- Date position -->
+    <string name="date_before">時鐘左側 (100%)</string>
+    <string name="date_before_small">時鐘左側 (70%)</string>
+    <string name="date_after">時鐘右側 (100%)</string>
+    <string name="date_after_small">時鐘右側 (70%)</string>
+
+    <!-- 4G | LTE -->
+    <string name="fourg_lte_default">系统默认值</string>
+    <string name="fourg_lte_lte">强制使用 LTE 图标</string>
+    <string name="fourg_lte_fourg">强制使用 4G 图标</string>
+
+    <!-- QS Rows overlays -->
+    <string name="qs_2_rows">强制雙排</string>
+    <string name="qs_3_rows">强制三排</string>
+    <string name="qs_4_rows">强制四排</string>
+    <string name="qs_5_rows">强制五排</string>
+
+</resources>

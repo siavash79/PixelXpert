@@ -1,6 +1,6 @@
 {
-    "version": "V008",
-    "versionCode": 8,
-    "zipUrl": "zip address",
+    "version": "V009",
+    "versionCode": 9,
+    "zipUrl": "https://googl.com/test.zip",
     "changelog": "https://raw.githubusercontent.com/.../Changelog.md"
 }

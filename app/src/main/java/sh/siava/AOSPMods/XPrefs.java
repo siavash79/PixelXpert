@@ -16,12 +16,14 @@ public class XPrefs implements IXposedHookZygoteInit {
     public static String MOD_PATH = "";
     public static XModuleResources modRes;
     public static SharedPreferences Xprefs;
+    public static String MagiskRoot = "/data/adb/modules/AOSPMods";
 
     static SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything(key);
 
     public static void loadPrefs(Context mContext) {
         Xprefs = new RemotePreferences(mContext, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
-        XposedBridge.log("size: " + Xprefs.getAll().keySet().size());
+        XposedBridge.log("AOSPMods Version: " + BuildConfig.VERSION_NAME);
+        XposedBridge.log("AOSPMods Records: " + Xprefs.getAll().keySet().size());
         Xprefs.registerOnSharedPreferenceChangeListener(listener);
         loadEverything();
     }

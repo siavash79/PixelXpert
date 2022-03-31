@@ -92,20 +92,14 @@ public class miscSettings implements IXposedModPack {
     private void updateGSansOverride() {
         Boolean GSansOverrideEnabled = XPrefs.Xprefs.getBoolean("gsans_override", false);
         try {
+
             if (GSansOverrideEnabled){
-                /* To do
-                * replace module path name on the command
-                * Shell.su ("cp /data/adb/modules/AOSPMods/data/fontz/GSans/*.ttf /data/adb/modules/AOSPMods/system/fonts/ && cp /data/adb/modules/AOSPMods/data/productz/etc/fonts_customization.xml.NEW /data/adb/modules/AOSPMods/system/product/etc/fonts_customization.xml").exec();*/
-                Shell.su ("cp /data/adb/modules/AddonFeaturesForPixel/data/fontz/GSans/*.ttf /data/adb/modules/AddonFeaturesForPixel/system/fonts/ && cp /data/adb/modules/AddonFeaturesForPixel/data/productz/etc/fonts_customization.xml.NEW /data/adb/modules/AddonFeaturesForPixel/system/product/etc/fonts_customization.xml").exec();
+                Shell.su(String.format("cp %s/data/fontz/GSans/*.ttf %s/system/fonts/ && cp %s/data/productz/etc/fonts_customization.xml.NEW %s/system/product/etc/fonts_customization.xml",XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
             } else {
-                /* To do
-                 * replace module path name on the command
-                 * Shell.su ("rm -rf /data/adb/modules/AOSPMods/system/fonts/*.ttf && cp /data/adb/modules/AOSPMods/data/productz/etc/fonts_customization.xml.OLD /data/adb/modules/AOSPMods/system/product/etc/fonts_customization.xml").exec();*/
-                Shell.su ("rm -rf /data/adb/modules/AddonFeaturesForPixel/system/fonts/*.ttf && cp /data/adb/modules/AddonFeaturesForPixel/data/productz/etc/fonts_customization.xml.OLD /data/adb/modules/AddonFeaturesForPixel/system/product/etc/fonts_customization.xml").exec();
+                Shell.su(String.format("rm -rf %s/system/fonts/*.ttf && cp %s/data/productz/etc/fonts_customization.xml.OLD %s/system/product/etc/fonts_customization.xml", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
             }
         }catch(Exception ignored){}
     }
-
 
     @Override
     public String getListenPack() {

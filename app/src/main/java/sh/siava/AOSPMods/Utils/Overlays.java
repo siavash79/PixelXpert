@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.robv.android.xposed.XposedBridge;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -87,7 +86,6 @@ public class Overlays {
     {
         try
         {
-        XposedBridge.log("inside set all");
         }catch(Throwable t){}
 
         if(prefs == null)

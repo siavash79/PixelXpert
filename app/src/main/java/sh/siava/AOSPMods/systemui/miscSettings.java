@@ -2,7 +2,8 @@ package sh.siava.AOSPMods.systemui;
 
 import com.topjohnwu.superuser.Shell;
 
-import de.robv.android.xposed.XposedBridge;
+import java.util.regex.Pattern;
+
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
@@ -40,40 +41,40 @@ public class miscSettings implements IXposedModPack {
         try {
             String currentTiles = Shell.su("settings get secure sysui_qs_tiles").exec().getOut().get(0);
 
-            boolean hasWifi = currentTiles.contains("wifi");
-            boolean hasCell = currentTiles.contains("cell");
-            boolean hasInternet = currentTiles.contains("internet");
+            boolean hasWifi = Pattern.matches(getPattern("wifi"), currentTiles);
+            boolean hasCell = Pattern.matches(getPattern("cell"), currentTiles);
+            boolean hasInternet = Pattern.matches(getPattern("internet"), currentTiles);
 
             boolean providerModel;
+
             if (WifiCellEnabled) {
                 providerModel = false;
                 if (!hasCell) {
-                    currentTiles = "cell," + currentTiles;
+                    currentTiles = String.format("cell,%s", currentTiles);
                 }
                 if (!hasWifi) {
-                    currentTiles = "wifi," + currentTiles;
+                    currentTiles = String.format("wifi,%s", currentTiles);
                 }
-                currentTiles = currentTiles.replace(",,", ",");
+                currentTiles = currentTiles.replaceAll(getPattern("internet"), "$2$3$5"); //remove intrnet
+
             } else {
                 providerModel = true;
 
-                currentTiles = currentTiles.replace("wifi", "").replace(",,", ",").replace("cell", "").replace(",,", ",");
+                currentTiles = currentTiles.replaceAll(getPattern("cell"), "$2$3$5"); //remove cell
+                currentTiles = currentTiles.replaceAll(getPattern("wifi"), "$2$3$5"); //remove wifi
+
                 if (!hasInternet) {
                     currentTiles = "internet," + currentTiles;
                 }
-                currentTiles = currentTiles.replace(",,", ",");
-
             }
 
-            if (currentTiles.startsWith(",")) {
-                currentTiles = currentTiles.substring(1, currentTiles.length() - 1);
-            }
-            // sorry I was toooo lazy to go through regex work..... this seems good enough
-            XposedBridge.log(currentTiles);
-
-            XposedBridge.log("settings put global settings_provider_model " + providerModel + "; settings put secure sysui_qs_tiles \"" + currentTiles + "\"");
             Shell.su("settings put global settings_provider_model " + providerModel + "; settings put secure sysui_qs_tiles \"" + currentTiles + "\"").exec();
         }catch (Exception ignored){}
+    }
+
+    private static String getPattern(String tile)
+    {
+        return String.format("^(%s,)(.+)|(.+)(,%s)(,.+|$)",tile,tile);
     }
 
     private void updateSysUITuner() {

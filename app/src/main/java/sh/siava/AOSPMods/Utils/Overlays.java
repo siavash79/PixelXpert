@@ -21,16 +21,7 @@ public class Overlays {
     Resources resources;
     boolean fromApp = false;
 
-    public void initOverlays(Context context)
-    {
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        resources = context.getResources();
-        fromApp = true;
-
-        initOverlays();
-    }
-
-    public void initOverlays()
+    public void initOverlays() //If called from UI OR Xposed
     {
         Overlays = new HashMap<>();
 
@@ -39,7 +30,7 @@ public class Overlays {
             resources = XPrefs.modRes;
         }
 
-        fillOverlays(); //these are groups - to be loaded from resource arrays that end with "OverlayEx"
+        fillOverlays(); //these are groups - to be loaded from resource arrays that end with "OverlayEx" or "OverlayG"
 
         //independent overlays
         Overlays.put("HideNavbarOverlay", new overlayProp("com.android.overlay.removenavbar", false));
@@ -57,6 +48,15 @@ public class Overlays {
         try {
             setAll();
         }catch(Throwable ignored){}
+    }
+
+    public void initOverlays(Context context) //If called from UI
+    {
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        resources = context.getResources();
+        fromApp = true;
+
+        initOverlays();
     }
 
     private void fillOverlays() { //filling overlay list from resources, using a bit of reflection :D

@@ -1,12 +1,10 @@
-package sh.siava.AOSPMods.systemui;
+package sh.siava.AOSPMods;
 
 import com.topjohnwu.superuser.Shell;
 
 import java.util.regex.Pattern;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.IXposedModPack;
-import sh.siava.AOSPMods.XPrefs;
 
 public class miscSettings implements IXposedModPack {
 
@@ -34,6 +32,7 @@ public class miscSettings implements IXposedModPack {
                     break;
                 case "gsans_override":
                     updateGSansOverride();
+                    break;
             }
         }
     }

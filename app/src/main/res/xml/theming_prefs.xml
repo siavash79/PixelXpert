@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/theme_customization_font_title">
         <SwitchPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="gsans_override"
             android:summaryOff="@string/restart_needed"
             android:summaryOn="@string/restart_needed"

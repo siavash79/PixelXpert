@@ -29,7 +29,6 @@ import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.ScreenshotController;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
-import sh.siava.AOSPMods.systemui.miscSettings;
 
 public class AOSPMods implements IXposedHookLoadPackage{
 

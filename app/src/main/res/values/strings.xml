@@ -139,6 +139,7 @@
     <string name="theme_customization_font_title">Headline / Body font</string>
     <string name="icons_style_title">Icons Style</string>
     <string name="icon_shapes_title">Icon Shapes</string>
+    <string name="signal_icons_theme_title">Signal Icons Theme</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

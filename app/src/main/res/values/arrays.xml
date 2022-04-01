@@ -374,4 +374,68 @@
         <item>com.android.theme.icon_pack.outline.settings</item>
     </string-array>
 
+    <string-array name="SignalIconsOverlayEx_names">
+        <item>@string/overlay_none_title</item>
+        <item>Stroke</item>
+        <item>Sneaky</item>
+        <item>Xperia</item>
+        <item>Zig-Zag</item>
+        <item>Wavy</item>
+        <item>Round</item>
+        <item>Inside</item>
+        <item>Bars</item>
+    </string-array>
+
+    <string-array name="SignalIconsOverlayEx">
+        <item>None</item>
+        <item>StrokeOverlayG</item>
+        <item>SneakyOverlayG</item>
+        <item>XperiaOverlayG</item>
+        <item>ZigZagOverlayG</item>
+        <item>WavyOverlayG</item>
+        <item>RoundOverlayG</item>
+        <item>InsideOverlayG</item>
+        <item>BarsOverlayG</item>
+    </string-array>
+
+    <string-array name="StrokeOverlayG">
+        <item>com.tenx.systemui.signalbar_a</item>
+        <item>com.tenx.systemui.wifibar_a</item>
+    </string-array>
+
+    <string-array name="SneakyOverlayG">
+        <item>com.tenx.systemui.signalbar_b</item>
+        <item>com.tenx.systemui.wifibar_b</item>
+    </string-array>
+
+    <string-array name="XperiaOverlayG">
+        <item>com.tenx.systemui.signalbar_c</item>
+        <item>com.tenx.systemui.wifibar_c</item>
+    </string-array>
+
+    <string-array name="ZigZagOverlayG">
+        <item>com.tenx.systemui.signalbar_d</item>
+        <item>com.tenx.systemui.wifibar_d</item>
+    </string-array>
+
+    <string-array name="WavyOverlayG">
+        <item>com.tenx.systemui.signalbar_e</item>
+        <item>com.tenx.systemui.wifibar_e</item>
+    </string-array>
+
+    <string-array name="RoundOverlayG">
+        <item>com.tenx.systemui.signalbar_f</item>
+        <item>com.tenx.systemui.wifibar_f</item>
+    </string-array>
+
+    <string-array name="InsideOverlayG">
+        <item>com.tenx.systemui.signalbar_g</item>
+        <item>com.tenx.systemui.wifibar_g</item>
+    </string-array>
+
+    <string-array name="BarsOverlayG">
+        <item>com.tenx.systemui.signalbar_h</item>
+        <item>com.tenx.systemui.wifibar_h</item>
+    </string-array>
+
 </resources>

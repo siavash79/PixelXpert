@@ -31,4 +31,12 @@
             android:key="IconShapesOverlayEx"
             android:title="@string/icon_shapes_title" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/signal_icons_theme_title">
+        <ListPreference
+            android:defaultValue="None"
+            android:entries="@array/SignalIconsOverlayEx_names"
+            android:entryValues="@array/SignalIconsOverlayEx"
+            android:key="SignalIconsOverlayEx"
+            android:title="@string/signal_icons_theme_title" />
+    </PreferenceCategory>
 </PreferenceScreen>

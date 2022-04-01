@@ -1,0 +1,182 @@
+<resources>
+    <!--General strings-->
+    <string name="app_name" translatable="false">AOSP Mods</string>
+    <string name="xposed_desc" translatable="false">Funciones personalizadas para ROMS basadas en AOSP Android 12+ </string>
+    <string name="title_activity_settings" translatable="false">@string/app_name</string>
+    <string name="error_not_activated">Por favor, confirme que el módulo está ativado en el gestor LSposed</string>
+    <string name="hide_default">No mostrar (por defecto)</string>
+    <string name="percent_of_default_size">% del tamaño por defecto</string>
+    <string name="overlay_none_title">(Por defecto)</string>
+    <string name="general_section">Opciones generales</string>
+    <string name="general_on">Activado</string>
+    <string name="general_off">Desactivado</string>
+    <string name="sysui_restart_needed">Requiere reiniciar UI del sistema</string>
+    <string name="restart_needed">Requiere reiniciar</string>
+
+    <!--Category titles-->
+    <string name="lockscreen_header_title">Pantalla de bloqueo</string>
+    <string name="statusbar_header">Barra de estado</string>
+    <string name="nav_header">Barra de navegación</string>
+    <string name="misc_header">Miscelaneo</string>
+    <string name="qs_panel_category_title">Ajustes rápidos</string>
+    <string name="theme_customization_category">Temas</string>
+
+    <!--Lock screen related-->
+    <string name="transparent_fingerprint_circle">Esconder círculo del icono de la huella digital</string>
+    <string name="transparent_fingerprint_circle_off">El círculo se activará</string>
+    <string name="transparent_fingerprint_circle_on">El círculo se ocultará</string> 
+    <string name="carrier_text_category">Texto del operador</string>
+    <string name="configure_carrier_text">Personalizar texto del operador</string>
+    <string name="carrier_text_mod_disabled">Texto por defecto</string>
+    <string name="carrier_text_mod_enabled">Texto personalizado</string>
+    <string name="carrier_text_value">Insertar un texto personalizado</string> 
+    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
+    <string name="keyguard_bottom_category">Accesos directos en la parte inferior de la pantalla</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Ocultar círculo alrededor de los iconos</string>
+    <string name="keyguard_bottom_force_camera_title">Mostrar atajo a la Camara</string>
+    <string name="keyguard_left_shortcut">Mostrar atajo en el lado izquierdo</string>
+
+    <!--Status bar related-->
+    <string name="double_tap_sleep_title">Doble toque para bloquear pantalla</string>
+    <string name="double_tap_sleep_off">El doble toque no bloquea la pantalla</string>
+    <string name="double_tap_sleep_on">El doble toque bloquea la pantalla, en barra de estado y en pantalla de bloqueo</string>
+    <string name="battery_style_title">Escoger un estilo de batería</string>
+    <string name="battery_show_percent_title">Mostrar porcentage</string>
+    <string name="battery_style_category_title">Estilo de batería</string>
+    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
+    <string name="battery_icon_size_title">Tamaño del icono de batería</string> 
+    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
+    <string name="battery_hidden">Oculta</string>
+    <string name="lte_4g_icon_title">Icono 4G / LTE</string>
+    <string name="combined_signal_icon_title">Iconos de señal combinados</string>
+    <string name="sb_vibration_switch_title">"Mostar los iconos vibrar/silencio"</string>
+    <string name="sbc_position_title">Posición del reloj</string>
+    <string name="sbc_ampm_style">Estilo AM/PM</string>
+    <string name="sbc_show_secs">Mostrar segundos</string>
+    <string name="sbc_date_cat">Opciones de fecha</string>
+    <string name="sbc_day_of_week_options">Mostrar fecha junto al reloj</string>
+    <string name="sbc_advanced_cat">Opciones avanzadas de fecha (anula la opción anterior)</string>
+    <string name="sbc_advanced_sum">Lea la documentación del formato de fecha de Java</string>
+    <string name="sbc_custom_date_before">Formato de fecha personalizado antes del reloj</string>
+    <string name="sbc_date_small">Tamaño mśs pequeño (70%)</string>
+    <string name="sbc_custom_date_after">Formato de fecha personalizado despues del reloj</string>
+    <string name="sbc_header">Personalizar el reloj</string>
+    <string name="sbc_may_take_one_minute">Requiere actualización de la hora o reinicio de la interfaz de usuario</string>
+    <string name="ntsb_far_left">Lado izquierdo</string>
+    <string name="ntsb_mid_left">Mitad a la izquierda</string>
+    <string name="ntsb_mid_right">Mitad a la derecha</string>
+    <string name="ntsb_category_title">Tráfico de red</string>
+    <string name="ntsb_enabled_title">Activar monitor de tráfico de red</string>
+    <string name="ntsb_position_title">Localización del monitor</string>
+    <string name="ntsb_treshold_title">Esconder automaticamente</string>
+    <string name="ntsb_treshold_summary">"Esconder si el tráfico es menor a… (Kilobytes)"</string>
+    <string name="statusbar_general_options">Preferencias de barra de estado</string>
+    <string name="dual_tone_battery_title">Activar icono de tono dual</string>
+    <string name="dual_tone_battery_on_summary">Activado (solo en modo horizontal)</string>
+    <string name="unread_messages_title">Mostrar número de mensajes no leídos</string>
+    <string name="status_bar_height">Anchura de barra de estado</string>
+    <string name="status_bar_height_small">Pequeña</string>
+    <string name="status_bar_height_medium">Media</string>
+    <string name="fix_status_bar_padding">Corregir espacio en el lado izquierdo</string>
+
+    <!--Quick settings panel related-->
+    <string name="qs_mod_category_title">Número de compilación en el panel de ajustes rápidos</string>
+    <string name="qs_footer_mod_title">Personalizar el número de compilación</string>
+    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
+    <string name="qs_footer_text_summary">Dejar en blanco para eliminar el texto</string>
+    <string name="qs_footer_text_desc">Requiere apagar/encender la pantalla</string>
+    <string name="light_qs_title">Panel de ajustes rápidos claro (aún en pruebas)</string>
+    <string name="qs_pulldown_size">distancia para deslizamiento rápido de ajustes rápidos</string>
+    <string name="qs_pulldown_switch_title">Deslize rápido para abajo desde la barra de estado</string>
+    <string name="qs_pulldown_side_title">Lado por donde deslizar</string>
+    <string name="qs_pulldown_category">Deslizar rápido para abajo en ajustes rápidos</string>     
+    <string name="qs_haptic_switch_title">Vibrar al tocar los ajustes rápidos</string>
+    <string name="qs_rows_number">Número de lineas</string>
+    <string name="qs_general_options">Preferencias de ajustes rápidos</string>
+    <string name="qs_tiles_3_columns_title">Activar 3 columnas en los ajustes rápidos</string>
+    <string name="qs_text_size_title">Tamaño del texto en los ajustes rápidos</string>
+    <string name="qs_text_size">Disminuir el tamaño del texto</string>
+    <string name="wifi_cell_title">Atajo de Internet</string>
+    <string name="wifi_cell_on">Usar Wifi y Datos por separado</string>
+    <string name="wifi_cell_off">Usar solo el atajo de Internet</string>
+
+    <!--Navigation bar related-->
+    <string name="back_gesture_category_title">Personalizar gesto atrás</string>
+    <string name="back_from_left_title">Lado izquierdo de la pantalla</string>
+    <string name="back_from_right_title">Lado derecho de la pantalla</string>
+    <string name="back_height_title">Altura del gesto</string>
+    <string name="gesturenav_header">Navegación por gestos</string>
+    <string name="gesture_nav_pill_cat">Altura de la barra de navegación</string>
+    <string name="gesture_nav_pill_mod_title">Personalizar la altura de la barra</string>
+    <string name="gesture_nav_pill_width_title">Altura en comparación con el tamaño estándar</string>
+    <string name="threebutton_header_title">Navegación con 3 botones</string>
+    <string name="back_longpress_kill_title">Mantener presionado el botón para cerrar aplicación</string>
+    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
+    <string name="hide_navbar_title">Ocultar la barra de navegación</string>
+    <string name="gesture_navbar_thickness_title">Grosor de la barra de navegación por gestos</string>
+    <string name="gesture_navbar_thickness">Personalizar la barra de navegación</string>
+    <string name="gesture_navbar_thin">Fina</string>
+    <string name="gesture_navbar_thick">Gruesa</string>
+    <string name="gesture_navbar_thicker">Más gruesa</string>
+    <string name="colorpill_title">Color de la barra de navegación por gestos</string>
+    <string name="colorpill">Aplicar color de resaltado a la barra</string>
+    <string name="reducekeyboard_title">Espacio de gestos en el teclado</string>
+    <string name="reducekeyboard">Reducir el espacio en el teclado</string>
+
+    <!--Miscellaneous section related-->
+    <string name="screenshot_sound_disable_title">Desactivar sonido de captura de pantalla</string>
+    <string name="so_power_longpress_torch_title">"Linterna manteniendo presionado el botón de encendido/apagado*"</string>
+    <string name="framework_needed_caution_summary">Requiere activar Framework en Lsposed. USAR CON CUIDADO</string>   
+    <string name="so_double_tap_wake_title">Doble toque para despertar pantalla</string>
+    <string name="so_double_tap_wake_summary">Usar doble toque en vez de un toque para encender la pantalla</string>
+    <string name="doze_header">"Mientras la pantalla está apagada..."</string>
+    <string name="custom_themed_icons_title">Iconos tematizados personalizados</string>
+    <string name="custom_themed_icons_off">Iconos personalizados inactivos</string>
+    <string name="custom_themed_icons_on">Iconos personalizados activos</string>
+
+    <!-- Theming section related -->
+    <string name="gsans_override_title">Forzar la fuente Google Sans en todo el sistema</string>
+    <string name="theme_customization_font_title">Fuente de título / cuerpo del texto</string>
+    <string name="icons_style_title">Estilo de los iconos</string>
+    <string name="icon_shapes_title">Forma de los iconos</string>
+    <string name="signal_icons_theme_title">Tema de los iconos de red</string>
+
+    <!-- Arrays strings -->
+    <!-- Quick pull down -->
+    <string name="pull_down_left">Izquierda</string>
+    <string name="pull_down_right">Derecha</string>
+
+    <!-- Battery styles -->
+    <string name="battery_default">Por defecto (requiere reiniciar)</string>
+    <string name="battery_circle">Circular</string>
+    <string name="battery_dashed_circle">Circular punteada</string>
+ 
+    <!-- Clock position -->
+    <string name="clock_default">Izquierda (por defecto)</string>
+    <string name="clock_center">Centro</string>
+    <string name="clock_right">Derecha</string>
+
+    <!-- AM/PM style -->
+    <string name="am_pm_default" translatable="false">@string/hide_default</string>
+    <string name="am_pm_normal">Igual al tamaño del reloj</string>
+    <string name="am_pm_small">70% del tamaño del reloj</string>
+ 
+    <!-- Date position -->
+    <string name="date_default" translatable="false">@string/hide_default</string>
+    <string name="date_before">Antes del reloj (100%)</string>
+    <string name="date_before_small">Antes del reloj (70%)</string>
+    <string name="date_after">Después del reloj (100%)</string>
+    <string name="date_after_small">Después del reloj (70%)</string>
+
+    <!-- 4G | LTE -->
+    <string name="fourg_lte_default">Predeterminado por el sistema</string>
+    <string name="fourg_lte_lte">Forzar LTE</string>
+    <string name="fourg_lte_fourg">Forzar 4G</string>
+
+    <!-- QS Rows overlays -->
+    <string name="qs_2_rows">Forzar 2 lineas</string>
+    <string name="qs_3_rows">Forzar 3 lineas</string>
+    <string name="qs_4_rows">Forzar 4 lineas</string>
+    <string name="qs_5_rows">Forzar 5 lineas</string>
+    
+</resources>

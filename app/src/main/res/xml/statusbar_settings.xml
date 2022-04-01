@@ -8,6 +8,7 @@
             android:defaultValue="0"
             android:entries="@array/lte4g_icon_names"
             android:entryValues="@array/lte4g_icon_codes"
+            android:summary="%s"
             android:key="LTE4GIconMod"
             android:title="@string/lte_4g_icon_title" />
         <SwitchPreference
@@ -38,6 +39,7 @@
             android:defaultValue="None"
             android:entries="@array/StatusBarHeightOverlayEx_names"
             android:entryValues="@array/StatusBarHeightOverlayEx"
+            android:summary="%s"
             android:key="StatusBarHeightOverlayEx"
             android:title="@string/status_bar_height" />
         <SwitchPreference
@@ -53,6 +55,7 @@
                 android:defaultValue="0"
                 android:entries="@array/battery_style_names"
                 android:entryValues="@array/battery_style_codes"
+                android:summary="%s"
                 android:key="BatteryStyle"
                 android:title="@string/battery_style_title" />
             <SwitchPreference
@@ -84,6 +87,7 @@
                 android:defaultValue="2"
                 android:entries="@array/network_sb_locations"
                 android:entryValues="@array/sbc_position_codes"
+                android:summary="%s"
                 android:key="networkTrafficPosition"
                 android:title="@string/ntsb_position_title" />
             <EditTextPreference

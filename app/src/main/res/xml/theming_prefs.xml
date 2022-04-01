@@ -12,6 +12,7 @@
             android:defaultValue="None"
             android:entries="@array/FontsOverlayEx_names"
             android:entryValues="@array/FontsOverlayEx"
+            android:summary="%s"
             android:key="FontsOverlayEx"
             android:title="@string/theme_customization_font_title" />
     </PreferenceCategory>
@@ -20,6 +21,7 @@
             android:defaultValue="None"
             android:entries="@array/IconPacksOverlayEx_names"
             android:entryValues="@array/IconPacksOverlayEx"
+            android:summary="%s"
             android:key="IconPacksOverlayEx"
             android:title="@string/icons_style_title" />
     </PreferenceCategory>
@@ -28,6 +30,7 @@
             android:defaultValue="None"
             android:entries="@array/IconShapesOverlayEx_names"
             android:entryValues="@array/IconShapesOverlayEx"
+            android:summary="%s"
             android:key="IconShapesOverlayEx"
             android:title="@string/icon_shapes_title" />
     </PreferenceCategory>
@@ -36,6 +39,7 @@
             android:defaultValue="None"
             android:entries="@array/SignalIconsOverlayEx_names"
             android:entryValues="@array/SignalIconsOverlayEx"
+            android:summary="%s"
             android:key="SignalIconsOverlayEx"
             android:title="@string/signal_icons_theme_title" />
     </PreferenceCategory>

@@ -28,6 +28,7 @@
             android:defaultValue="0"
             android:entries="@array/sbc_day_week_names"
             android:entryValues="@array/sbc_day_week_codes"
+            android:summary="%s"
             android:key="SBCDayOfWeekMode"
             android:title="@string/sbc_day_of_week_options" />
         <PreferenceCategory

@@ -4,7 +4,7 @@
     <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Potwierdż, czy moduł jest aktywowany w LSPosed Manager</string>
-    <string name="hide_default">Ukryj (Domyslne)</string>
+    <string name="hide_default">Ukryj (Domyślne)</string>
     <string name="percent_of_default_size">% o domyślnym rozmiarze</string>
     <string name="overlay_none_title">(Domyślne)</string>
     <string name="general_section">Opcje ogólne</string>

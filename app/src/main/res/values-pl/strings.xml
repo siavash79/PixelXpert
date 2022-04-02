@@ -8,8 +8,8 @@
     <string name="percent_of_default_size">% o domyślnym rozmiarze</string>
     <string name="overlay_none_title">(Domyślne)</string>
     <string name="general_section">Opcje ogólne</string>
-    <string name="general_on">On</string>
-    <string name="general_off">Off</string>
+    <string name="general_on">Włącz</string>
+    <string name="general_off">Wyłącz</string>
     <string name="sysui_restart_needed">Wymaga ponownego uruchomienia SystemUI</string>
     <string name="restart_needed">Wymaga ponownego uruchomienia w celu zastosowania</string>
 

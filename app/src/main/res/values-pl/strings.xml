@@ -32,12 +32,12 @@
     <string name="carrier_text_value">Wstaw własną nazwę</string>
     <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Skróty w dolnej częsci ekranu</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Ukryj kółko wokół ikon</string>
-    <string name="keyguard_bottom_force_camera_title">Pokaz skrot do aparatu</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Ukryj cień pod ikoną</string>
+    <string name="keyguard_bottom_force_camera_title">Pokaz skrót do aparatu</string>
     <string name="keyguard_left_shortcut">Pokaz lewy skrót na ekranie blokady</string>
 
     <!--Status bar related-->
-    <string name="double_tap_sleep_title">Kliknij dwukrotnie aby uspać</string>
+    <string name="double_tap_sleep_title">Kliknij dwukrotnie aby wyłączyc ekran</string>
     <string name="double_tap_sleep_off">"Dwukrotne dotknięcie nie spowoduje wyłączenia wyświetlacza"</string>
     <string name="double_tap_sleep_on">Dwukrotne dotknięcie paska stanu lub ekranu blokady spowoduje wyłączenie wyświetlacza</string>
     <string name="battery_style_title">Wybierz styl baterii</string>
@@ -60,14 +60,14 @@
     <string name="sbc_custom_date_before">Niestandardowy format daty przed zegarem</string>
     <string name="sbc_date_small">Mniejszy rozmiar (70%)</string>
     <string name="sbc_custom_date_after">Niestandardowy format daty po zegarze</string>
-    <string name="sbc_header">Dostosowywanie zegara paska stanu</string>
+    <string name="sbc_header">Dostosowanie zegara na paska stanu</string>
     <string name="sbc_may_take_one_minute">Włącza się po aktualizacji czasu lub ponownym uruchomieniu SysUI</string>
     <string name="ntsb_far_left">Skrajnie w lewo</string>
     <string name="ntsb_mid_left">Srodkowa lewa</string>
     <string name="ntsb_mid_right">Srodkowy prawy</string>
     <string name="ntsb_category_title">Monitor sieci</string>
     <string name="ntsb_enabled_title">Włącz monitor sieci</string>
-    <string name="ntsb_position_title">Pozycja monitora</string>
+    <string name="ntsb_position_title">Pozycja monitora sieci</string>
     <string name="ntsb_treshold_title">Próg automatycznego ukrywania</string>
     <string name="ntsb_treshold_summary">"Ukryj, jesli ruch jest mniejszy niż… (Kilobytes)"</string>
     <string name="statusbar_general_options">Opcje paska stanu</string>
@@ -87,14 +87,14 @@
     <string name="qs_footer_text_desc">Wyłacz/włacz wyswietlacz, aby zastosowac zmiany</string>
     <string name="light_qs_title">Jasny panel QS podczas jasnego motywu (mogą wystepowac błedy)</string>
     <string name="qs_pulldown_size">Szerokość szybkich ustawień</string>
-    <string name="qs_pulldown_switch_title">Panel QS rozwijany z paska stanu</string>
+    <string name="qs_pulldown_switch_title">Panel szybkich ustawien rozwijany z paska stanu</string>
     <string name="qs_pulldown_side_title">Pociągnij w dół</string>
     <string name="qs_pulldown_category">Rozwijane szybkie ustawienia</string>
-    <string name="qs_haptic_switch_title">Wibracje przy dotknięciu kafelka QS</string>
-    <string name="qs_rows_number">Liczba wierszy QS</string>
+    <string name="qs_haptic_switch_title">Wibracje przy dotknięciu panelu szybkich ustawień</string>
+    <string name="qs_rows_number">Liczba wierszy szybkich ustawień</string>
     <string name="qs_general_options">Opcje szybkich ustawień</string>
-    <string name="qs_tiles_3_columns_title">Włącz szybkie ustawienia 3 kolumn</string>
-    <string name="qs_text_size_title">Elementy szybkiego ustawiania rozmiaru czcionki</string>
+    <string name="qs_tiles_3_columns_title">Włącz 3 kolumny szybkich ustawienien</string>
+    <string name="qs_text_size_title">Rozmiar czcionki elementów szybkich ustawianien</string>
     <string name="qs_text_size">Zmniejsz rozmiar czcionki elementów szybkiego ustawiania</string>
     <string name="wifi_cell_title">Ikonka internetu</string>
     <string name="wifi_cell_on">Użyj oddzielnych ikon Wi-Fi i danych</string>
@@ -148,7 +148,7 @@
     <!-- Battery styles -->
     <string name="battery_default">Domyślny (wymaga ponownego uruchomienia, aby zastosować)</string>
     <string name="battery_circle">Koło</string>
-    <string name="battery_dashed_circle">Przerywany krag</string>
+    <string name="battery_dashed_circle">Przerywane koło</string>
 
     <!-- Clock position -->
     <string name="clock_default">Lewa strona (domyślnie)</string>
@@ -157,8 +157,8 @@
 
     <!-- AM/PM style -->
     <string name="am_pm_default" translatable="false">@string/hide_default</string>
-    <string name="am_pm_normal">100% rozmiar zegara</string>
-    <string name="am_pm_small">70% rozmiar zegara</string>
+    <string name="am_pm_normal">100% rozmiaru zegara</string>
+    <string name="am_pm_small">70% rozmiaru zegara</string>
 
     <!-- Date position -->
     <string name="date_default" translatable="false">@string/hide_default</string>
@@ -169,8 +169,8 @@
 
     <!-- 4G | LTE -->
     <string name="fourg_lte_default">Domyślne ustawienie systemowe</string>
-    <string name="fourg_lte_lte">Pokazyj ikone LTE</string>
-    <string name="fourg_lte_fourg">Pokazuj ikone 4G</string>
+    <string name="fourg_lte_lte">Pokazyj ikonę LTE</string>
+    <string name="fourg_lte_fourg">Pokazuj ikonę 4G</string>
 
     <!-- QS Rows overlays -->
     <string name="qs_2_rows">Wymuś 2 rzędy</string>

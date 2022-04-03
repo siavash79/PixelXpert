@@ -9,6 +9,18 @@
         <item>@android:color/white</item>
     </array>
 
+    <array name="lockScreenShortcut_names">
+        <item>@string/overlay_none_title</item>
+        <item>@string/camera_shortcut</item>
+        <item>@string/assistant_shortcut</item>
+    </array>
+
+    <array name="lockScreenShortcut_values">
+        <item>""</item>
+        <item>camera</item>
+        <item>assistant</item>
+    </array>
+
     <string-array name="qs_pulldown_side_names">
         <item>@string/pull_down_left</item>
         <item>@string/pull_down_right</item>

@@ -15,12 +15,20 @@
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
             android:title="@string/keyguard_bottom_buttons_transparent_title" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="KeyguardCameraEnabled"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/keyguard_bottom_force_camera_title" />
+        <ListPreference
+            android:defaultValue=""
+            android:entries="@array/lockScreenShortcut_names"
+            android:entryValues="@array/lockScreenShortcut_values"
+            android:key="leftKeyguardShortcut"
+            android:title="@string/LSleftShortcutTitle"
+            app:summary="%s"/>
+        <ListPreference
+            android:defaultValue=""
+            android:entries="@array/lockScreenShortcut_names"
+            android:entryValues="@array/lockScreenShortcut_values"
+            android:key="rightKeyguardShortcut"
+            android:title="@string/LSrightShortcutTitle"
+            app:summary="%s" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="KeyguardLeftShortcutOverlay"
@@ -41,4 +49,5 @@
             android:singleLine="true"
             android:title="@string/carrier_text_value" />
     </PreferenceCategory>
+
 </PreferenceScreen>

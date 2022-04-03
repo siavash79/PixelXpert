@@ -2,10 +2,12 @@ package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
@@ -13,14 +15,27 @@ import sh.siava.AOSPMods.XPrefs;
 
 public class KeyguardBottomArea implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
-    public static boolean showCameraOnLockscreen = false;
     public static boolean transparentBGcolor = false;
-    final Context[] mContext = new Context[1];
+    public static String leftShortcut = "";
+    public static String rightShortcut = "";
+
+    private static ImageView mWalletButton;
+    private static ImageView mControlsButton;
+    private Context mContext = null;
+    private Object thisObject = null;
 
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
-        showCameraOnLockscreen = XPrefs.Xprefs.getBoolean("KeyguardCameraEnabled", false);
+        leftShortcut = XPrefs.Xprefs.getString("leftKeyguardShortcut", "");
+        rightShortcut = XPrefs.Xprefs.getString("rightKeyguardShortcut", "");
+
+        if(mContext != null)
+        {
+            convertShortcut(mWalletButton, rightShortcut, thisObject);
+            convertShortcut(mControlsButton, leftShortcut, thisObject);
+        }
+
         transparentBGcolor = XPrefs.Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
     }
 
@@ -37,52 +52,50 @@ public class KeyguardBottomArea implements IXposedModPack {
                 "onFinishInflate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!showCameraOnLockscreen) return;
+                        mWalletButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mWalletButton");
+                        mControlsButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mControlsButton");
+                        mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                        thisObject = param.thisObject;
 
-                        View.OnClickListener cameraListener = new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                XposedHelpers.callMethod(param.thisObject, "launchCamera", "lockscreen_affordance");
-                            }
-                        };
-
-                        ImageView mWalletButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mWalletButton");
-                        Context mContext = mWalletButton.getContext();
-                        mWalletButton.setImageDrawable(((Context) mContext).getResources().getDrawable(mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName())));
-                        mWalletButton.setOnClickListener(cameraListener);
-                        mWalletButton.setClickable(true);
-                        mWalletButton.setVisibility(View.VISIBLE);
+                        if(leftShortcut.length() > 0)
+                        {
+                            convertShortcut(mControlsButton, leftShortcut, param.thisObject);
+                        }
+                        if(rightShortcut.length() > 0)
+                        {
+                            convertShortcut(mWalletButton, rightShortcut, param.thisObject);
+                        }
                     }
                 });
 
-        //make sure system won't play with our camera button
+        //make sure system won't play with our button
         XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass.getName() + "$" + "WalletCardRetriever", lpparam.classLoader,
                 "onWalletCardsRetrieved", "android.service.quickaccesswallet.GetWalletCardsResponse", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (!showCameraOnLockscreen) return;
+                        if (rightShortcut.length() == 0) return;
                         param.setResult(null);
                     }
                 });
 
-        //make sure system won't play with our camera button
+        //make sure system won't play with our button
+        XposedBridge.hookAllMethods(KeyguardbottomAreaViewClass,
+                "updateControlsVisibility", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if(leftShortcut.length() == 0 || mControlsButton == null) return;
+                        updateVisibility(mControlsButton, param.thisObject);
+                        param.setResult(null);
+                    }
+                });
+
+        //make sure system won't play with our button
         XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
                 "updateWalletVisibility", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!showCameraOnLockscreen) return;
-
-                        ImageView mWalletButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mWalletButton");
-                        boolean mDozing = (boolean) XposedHelpers.getObjectField(param.thisObject, "mDozing");
-
-                        if(mDozing) // AOD is showing
-                        {
-                            mWalletButton.setVisibility(View.GONE);
-                        }
-                        else
-                        {
-                            mWalletButton.setVisibility(View.VISIBLE);
-                        }
+                        if(rightShortcut.length() == 0 || mWalletButton == null) return;
+                        updateVisibility(mWalletButton, param.thisObject);
                         param.setResult(null);
                     }
                 });
@@ -96,10 +109,8 @@ public class KeyguardBottomArea implements IXposedModPack {
                         ImageView mWalletButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mWalletButton");
                         ImageView mControlsButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mControlsButton");
 
-                        mContext[0] = mControlsButton.getContext();
-
-                        int mTextColorPrimary = (int) XposedHelpers.callStaticMethod(UtilClass, "getColorAttrDefaultColor", mContext[0],
-                                mContext[0].getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext[0].getPackageName()));
+                        int mTextColorPrimary = (int) XposedHelpers.callStaticMethod(UtilClass, "getColorAttrDefaultColor", mContext,
+                                mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
 
                         mControlsButton.setBackgroundColor(Color.TRANSPARENT);
                         mControlsButton.setColorFilter(mTextColorPrimary);
@@ -110,16 +121,63 @@ public class KeyguardBottomArea implements IXposedModPack {
                 });
 
         //Set camera intent to be always secure when launchd from keyguard screen
-
         XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass.getName()+"$DefaultRightButton", lpparam.classLoader,
                 "getIntent", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!showCameraOnLockscreen || mContext[0] == null) return;
-                        param.setResult(XposedHelpers.callStaticMethod(CameraIntentsClass, "getSecureCameraIntent", mContext[0]));
+                        if((!leftShortcut.equals("camera") && !rightShortcut.equals("camera")) || mContext == null) return;
+                        param.setResult(XposedHelpers.callStaticMethod(CameraIntentsClass, "getSecureCameraIntent", mContext));
                     }
                 });
     }
+
+    private void updateVisibility(ImageView Button, Object thisObject) {
+        boolean mDozing = (boolean) XposedHelpers.getObjectField(thisObject, "mDozing");
+
+        if (mDozing) // AOD is showing
+        {
+            Button.setVisibility(View.GONE);
+        } else {
+            Button.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void convertShortcut(ImageView Button, String type, Object thisObject) {
+        View.OnClickListener listener = null;
+        Drawable drawable = null;
+        switch(type)
+        {
+            case "camera":
+                listener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        XposedHelpers.callMethod(thisObject, "launchCamera", "lockscreen_affordance");
+                    }
+                };
+                drawable = mContext.getResources().getDrawable(mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName()));
+                break;
+            case "assistant":
+                listener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        XposedHelpers.callMethod(thisObject, "launchVoiceAssist");
+                    }
+                };
+                drawable = mContext.getResources().getDrawable(mContext.getResources().getIdentifier("ic_mic_26dp", "drawable", mContext.getPackageName()));
+                break;
+        }
+        if(drawable != null) {
+            Button.setImageDrawable(drawable);
+            Button.setOnClickListener(listener);
+            Button.setClickable(true);
+            Button.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            Button.setVisibility(View.GONE);
+        }
+    }
+
 
     @Override
     public String getListenPack() {

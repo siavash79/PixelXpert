@@ -178,5 +178,9 @@
     <string name="qs_3_rows">Force 3 rows</string>
     <string name="qs_4_rows">Force 4 rows</string>
     <string name="qs_5_rows">Force 5 rows</string>
+    <string name="LSleftShortcutTitle">Left shortcut</string>
+    <string name="LSrightShortcutTitle">Right shortcut</string>
+    <string name="camera_shortcut">Camera</string>
+    <string name="assistant_shortcut">Assistant</string>
 
 </resources>

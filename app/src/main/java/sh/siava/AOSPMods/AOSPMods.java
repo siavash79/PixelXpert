@@ -10,7 +10,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.Utils.Overlays;
-import sh.siava.AOSPMods.android.powerTorch;
+import sh.siava.AOSPMods.android.screenOffKeys;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.systemui.BackGestureManager;
 import sh.siava.AOSPMods.systemui.BackToKill;
@@ -56,7 +56,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(QSQuickPullDown.class);
         modPacks.add(ScreenshotController.class);
         modPacks.add(UDFPSManager.class);
-        modPacks.add(powerTorch.class);
+        modPacks.add(screenOffKeys.class);
         modPacks.add(DoubleTaptoWake.class);
         modPacks.add(AOSPSettingsLauncher.class);
         modPacks.add(miscSettings.class);

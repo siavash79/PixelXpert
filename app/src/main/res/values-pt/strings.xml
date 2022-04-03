@@ -140,5 +140,10 @@
     <string name="icon_shapes_title">Forma dos Ícones</string>
     <string name="restart_needed">Requer reiniciar</string>
     <string name="signal_icons_theme_title">Tema dos ícones de rede</string>
+    <string name="LSleftShortcutTitle">Atalho esquerdo</string>
+    <string name="LSrightShortcutTitle">Atalho direito</string>
+    <string name="camera_shortcut">Câmara</string>
+    <string name="assistant_shortcut">Assistente</string>
+    <string name="so_vol_longpress_skip">Mater premido para mudar de faixa</string>
 
 </resources>

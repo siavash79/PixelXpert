@@ -30,12 +30,18 @@ public class KeyguardBottomArea implements IXposedModPack {
         leftShortcut = XPrefs.Xprefs.getString("leftKeyguardShortcut", "");
         rightShortcut = XPrefs.Xprefs.getString("rightKeyguardShortcut", "");
 
-        if(mContext != null)
-        {
-            convertShortcut(mWalletButton, rightShortcut, thisObject);
-            convertShortcut(mControlsButton, leftShortcut, thisObject);
+        if(Key.length > 0) {
+            switch (Key[0]) {
+                case "leftKeyguardShortcut":
+                    if (thisObject != null)
+                        convertShortcut(mControlsButton, leftShortcut, thisObject);
+                    break;
+                case "rightKeyguardShortcut":
+                    if (thisObject != null)
+                        convertShortcut(mWalletButton, rightShortcut, thisObject);
+                    break;
+            }
         }
-
         transparentBGcolor = XPrefs.Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
     }
 
@@ -166,7 +172,7 @@ public class KeyguardBottomArea implements IXposedModPack {
                 drawable = mContext.getResources().getDrawable(mContext.getResources().getIdentifier("ic_mic_26dp", "drawable", mContext.getPackageName()));
                 break;
         }
-        if(drawable != null) {
+        if(type.length() > 0) {
             Button.setImageDrawable(drawable);
             Button.setOnClickListener(listener);
             Button.setClickable(true);

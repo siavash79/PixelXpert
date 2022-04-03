@@ -139,5 +139,6 @@
     <string name="icons_style_title">Estilo dos Ícones</string>
     <string name="icon_shapes_title">Forma dos Ícones</string>
     <string name="restart_needed">Requer reiniciar</string>
+    <string name="signal_icons_theme_title">Tema dos ícones de rede</string>
 
 </resources>

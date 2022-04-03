@@ -21,6 +21,7 @@
             android:defaultValue="None"
             android:entries="@array/QSRowCountOverlayEx_names"
             android:entryValues="@array/QSRowCountOverlayEx"
+            android:summary="%s"
             android:key="QSRowCountOverlayEx"
             android:title="@string/qs_rows_number" />
         <SwitchPreference
@@ -73,6 +74,7 @@
                 android:defaultValue="1"
                 android:entries="@array/qs_pulldown_side_names"
                 android:entryValues="@array/qs_pulldown_side_left"
+                android:summary="%s"
                 android:key="QSPulldownSide"
                 android:title="@string/qs_pulldown_side_title" />
         </PreferenceCategory>

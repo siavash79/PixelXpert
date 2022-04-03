@@ -10,13 +10,16 @@
     <string name="general_section">Allgemeine Optionen</string>
     <string name="general_on">Ein</string>
     <string name="general_off">Aus</string>
+    <string name="sysui_restart_needed">Benötigt einen SystemUI Neustart zum aktivieren</string>
+    <string name="restart_needed">Benötigt einen Neustart zum aktivieren</string>
 
     <!--Category titles-->
     <string name="lockscreen_header_title">Sperrbildschirm</string>
     <string name="statusbar_header">Statusleiste</string>
     <string name="nav_header">Navigationsleiste</string>
     <string name="misc_header">Verschiedenes</string>
-    <string name="qs_panel_category_title">Schnelleinstellungen</string>
+    <string name="qs_panel_category_title">Schnelleinstellungen</string> 
+    <string name="theme_customization_category">Theme Einstellungen</string>   
 
     <!--Lock screen related-->
     <string name="transparent_fingerprint_circle">Verstecke den Kreis um das Fingerabdrucksymbol</string>
@@ -87,7 +90,7 @@
     <string name="qs_pulldown_switch_title">Schnelles herunterziehen des Schnelleinstellungsmenüs von der Statusleiste </string>
     <string name="qs_pulldown_side_title">Schnelles herunterziehen Seite</string>
     <string name="qs_pulldown_category">Schnelleinstellungen herunterziehen</string>
-    <string name="qs_haptic_switch_title">Vibriere beim berühren eines Schneleinstellungs Tab </string>
+    <string name="qs_haptic_switch_title">Vibriere beim berühren eines Schnelleinstellungs Tab </string>
     <string name="qs_rows_number">Anzahl Reihen in den Schnelleinstellungen</string>
     <string name="qs_general_options">Schnelleinstellungs Optionen</string>
     <string name="qs_tiles_3_columns_title">Aktiviere 3 Spalten Schnelleinstellungen</string>
@@ -95,7 +98,7 @@
     <string name="qs_text_size">Schriftgröße der Schnelleinstellungselemente verkleinern</string>
     <string name="wifi_cell_title">Internet Element</string>
     <string name="wifi_cell_on">Benutze seperate Elemente für Wifi und Daten</string>
-    <string name="wifi_cell_off">Benutze Internet Element</string>
+    <string name="wifi_cell_off">Benutze einzelnes Internet Element</string>
 	
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Anpassen der Zurück-Geste</string>
@@ -106,7 +109,6 @@
     <string name="gesture_nav_pill_cat">Gestennavigationsleistenbreite</string>
     <string name="gesture_nav_pill_mod_title">Ändere die Navigationsleistenbreite</string>
     <string name="gesture_nav_pill_width_title">Breite im Vergleich zu der Standartbreite</string>
-    <string name="sysui_restart_needed">Benötigt einen SystemUI Neustart zum aktivieren</string>
     <string name="threebutton_header_title">3-Schaltflächen Navigation</string>
     <string name="back_longpress_kill_title">Zurück Taste lange drücken um die Anwendung im Vordergrund zu schließen</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
@@ -132,6 +134,13 @@
     <string name="custom_themed_icons_off">Benutzerdefinierte Symbole deaktiviert</string>
     <string name="custom_themed_icons_on">Benutzerdefinierte Symbole aktiviert</string>
 
+    <!-- Theming section related -->
+    <string name="gsans_override_title">Erzwinge Google Sans Schriftart systemweit</string>
+    <string name="theme_customization_font_title">Über- / Haupt-Schriftart</string>
+    <string name="icons_style_title">Symbolstil</string>
+    <string name="icon_shapes_title">Symbolform</string>
+    <string name="signal_icons_theme_title">Empfangssymbolstile</string>
+	
     <!-- Arrays strings -->
     <!-- Quick pull down -->
     <string name="pull_down_left">links</string>

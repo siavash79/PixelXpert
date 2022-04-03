@@ -35,6 +35,10 @@
     <string name="keyguard_bottom_buttons_transparent_title">Hide circle around icons</string>
     <string name="keyguard_bottom_force_camera_title">Show camera shortcut</string>
     <string name="keyguard_left_shortcut">Show left shortcut on lock screen</string>
+    <string name="LSleftShortcutTitle">Left shortcut</string>
+    <string name="LSrightShortcutTitle">Right shortcut</string>
+    <string name="camera_shortcut">Camera</string>
+    <string name="assistant_shortcut">Assistant</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Double tap to sleep</string>
@@ -133,6 +137,7 @@
     <string name="custom_themed_icons_title">Custom themed icons</string>
     <string name="custom_themed_icons_off">Custom icons disabled</string>
     <string name="custom_themed_icons_on">Custom icons enabled</string>
+    <string name="so_vol_longpress_skip">Long press Volume to skip music*</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Force Google Sans font system wide</string>
@@ -178,10 +183,5 @@
     <string name="qs_3_rows">Force 3 rows</string>
     <string name="qs_4_rows">Force 4 rows</string>
     <string name="qs_5_rows">Force 5 rows</string>
-    <string name="LSleftShortcutTitle">Left shortcut</string>
-    <string name="LSrightShortcutTitle">Right shortcut</string>
-    <string name="camera_shortcut">Camera</string>
-    <string name="assistant_shortcut">Assistant</string>
-    <string name="so_vol_longpress_skip">Longpress Volume to skip music*</string>
 
 </resources>

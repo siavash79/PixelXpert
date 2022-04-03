@@ -77,7 +77,7 @@
     <string name="status_bar_height">Wysokosc paska stanu</string>
     <string name="status_bar_height_small">Mały</string>
     <string name="status_bar_height_medium">Średni</string>
-    <string name="fix_status_bar_padding">Popraw odstepy po lewej stronie</string>
+    <string name="fix_status_bar_padding">Popraw odstep po lewej stronie</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numer kompilacji w stopce panelu QS</string>
@@ -85,7 +85,7 @@
     <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
     <string name="qs_footer_text_summary">Pozostaw puste miejsce, aby całkowicie usunac tekst</string>
     <string name="qs_footer_text_desc">Wyłacz/włacz wyswietlacz, aby zastosowac zmiany</string>
-    <string name="light_qs_title">Jasny panel QS podczas jasnego motywu (mogą wystepowac błedy)</string>
+    <string name="light_qs_title">Jasny panel szybkich ustawien podczas jasnego motywu (mogą wystepowac błedy)</string>
     <string name="qs_pulldown_size">Szerokość szybkich ustawień</string>
     <string name="qs_pulldown_switch_title">Panel szybkich ustawien rozwijany z paska stanu</string>
     <string name="qs_pulldown_side_title">Pociągnij w dół</string>
@@ -177,5 +177,10 @@
     <string name="qs_3_rows">Wymuś 3 rzędy</string>
     <string name="qs_4_rows">Wymuś 4 rzędy</string>
     <string name="qs_5_rows">Wymuś 5 rzędy</string>
+    <string name="LSleftShortcutTitle">Lewy skrót</string>
+    <string name="LSrightShortcutTitle">Prawy skrót</string>
+    <string name="camera_shortcut">Aparat</string>
+    <string name="assistant_shortcut">Asystant</string>
 
-</resources>
+
+    </resources>

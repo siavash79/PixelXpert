@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
-import android.os.PowerManager;
 import android.os.SystemClock;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -18,7 +17,7 @@ public class DoubleTapSleepLS implements IXposedModPack {
 	public static final String listenPackage = "com.android.systemui";
 	public static boolean doubleTapToSleepEnabled = false;
 	
-	final Context[] context = new Context[1];
+	private Context mContext = null;
 	
 	public void updatePrefs(String...Key)
 	{
@@ -32,11 +31,11 @@ public class DoubleTapSleepLS implements IXposedModPack {
 		
 		Class NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
 		
-		GestureDetector mLockscreenDoubleTapToSleep = new GestureDetector(context[0], new GestureDetector.SimpleOnGestureListener() {
+		GestureDetector mLockscreenDoubleTapToSleep = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
 			@Override
 			public boolean onDoubleTap(MotionEvent e) {
 				
-				Object pm = (PowerManager) context[0].getSystemService(Context.POWER_SERVICE);
+				Object pm = mContext.getSystemService(Context.POWER_SERVICE);
 				if (pm != null) {
 					XposedHelpers.callMethod(pm, "goToSleep", SystemClock.uptimeMillis());
 				}
@@ -76,7 +75,7 @@ public class DoubleTapSleepLS implements IXposedModPack {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						Object mView = XposedHelpers.getObjectField(param.thisObject, "mView");
-						context[0] = (Context) XposedHelpers.callMethod(mView, "getContext");
+						mContext = (Context) XposedHelpers.callMethod(mView, "getContext");
 					}
 				});
 		

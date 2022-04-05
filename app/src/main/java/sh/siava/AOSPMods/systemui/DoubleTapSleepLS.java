@@ -49,6 +49,7 @@ public class DoubleTapSleepLS implements IXposedModPack {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						Object touchHandler = param.getResult();
+						Object ThisNotificationPanel = param.thisObject;
 						
 						XposedHelpers.findAndHookMethod(touchHandler.getClass(),
 								"onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
@@ -56,12 +57,12 @@ public class DoubleTapSleepLS implements IXposedModPack {
 									protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 										if(!doubleTapToSleepEnabled) return;
 										
-										boolean mPulsing = (boolean) XposedHelpers.getObjectField(param.thisObject, "mPulsing");
-										boolean mDozing = (boolean) XposedHelpers.getObjectField(param.thisObject, "mDozing");
-										int mBarState = (int) XposedHelpers.getObjectField(param.thisObject, "mBarState");
+										boolean mPulsing = (boolean) XposedHelpers.getObjectField(ThisNotificationPanel, "mPulsing");
+										boolean mDozing = (boolean) XposedHelpers.getObjectField(ThisNotificationPanel, "mDozing");
+										int mBarState = (int) XposedHelpers.getObjectField(ThisNotificationPanel, "mBarState");
 										
 										if (!mPulsing && !mDozing
-												&& mBarState == 0) {
+												&& mBarState < 2) {
 											mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[1]);
 										}
 									}

@@ -23,8 +23,8 @@
 
     <!--Lock screen related-->
     <string name="transparent_fingerprint_circle">Ukryj okrąg pod ikoną odcisku palca</string>
-    <string name="transparent_fingerprint_circle_off">Okrag pod ikoną odcisku palca jest aktywny</string>
-    <string name="transparent_fingerprint_circle_on">Okrag pod ikoną odcisku palca zostanie ukryty</string>
+    <string name="transparent_fingerprint_circle_off">Okrąg pod ikoną odcisku palca jest aktywny</string>
+    <string name="transparent_fingerprint_circle_on">Okrąg pod ikoną odcisku palca zostanie ukryty</string>
     <string name="carrier_text_category">Nazwa operatora</string>
     <string name="configure_carrier_text">Skonfiguruj nazwę operatora</string>
     <string name="carrier_text_mod_disabled">Nazwa operatora bez zmian</string>
@@ -33,8 +33,8 @@
     <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Skróty w dolnej częsci ekranu</string>
     <string name="keyguard_bottom_buttons_transparent_title">Ukryj okrąg pod ikoną</string>
-    <string name="keyguard_bottom_force_camera_title">Pokaz skrót do aparatu</string>
-    <string name="keyguard_left_shortcut">Pokaz lewy skrót na ekranie blokady</string>
+    <string name="keyguard_bottom_force_camera_title">Pokaż skrót do aparatu</string>
+    <string name="keyguard_left_shortcut">Pokaż lewy skrót na ekranie blokady</string>
     <string name="LSleftShortcutTitle">Lewy skrót</string>
     <string name="LSrightShortcutTitle">Prawy skrót</string>
     <string name="camera_shortcut">Aparat</string>

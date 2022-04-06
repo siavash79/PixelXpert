@@ -270,10 +270,21 @@ public class SettingsActivity extends AppCompatActivity implements
                     updateQSPulldownEnabld();
                 } else if (key.equals("QSFooterMod")) {
                     updateQSFooterMod();
+                } else if (key.equals("QSBrightnessDisabled")){
+                    updateQQSBrightness();
                 }
             }
         };
-
+    
+        private void updateQQSBrightness() {
+            try {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+                boolean disabled = prefs.getBoolean("QSBrightnessDisabled", false);
+        
+                findPreference("QQSBrightnessEnabled").setEnabled(!disabled);
+            } catch(Exception e){}
+        }
+    
         private void updateQSFooterMod() {
             try {
 
@@ -315,6 +326,7 @@ public class SettingsActivity extends AppCompatActivity implements
             updateQSPulldownPercent();
             updateQSPulldownEnabld();
             updateQSFooterMod();
+            updateQQSBrightness();
         }
     }
 

@@ -184,5 +184,6 @@
     <string name="qs_4_rows">Force 4 rows</string>
     <string name="qs_5_rows">Force 5 rows</string>
     <string name="QQS_brightness_title">Brightness slider in collapsed quick settings</string>
+    <string name="QS_brightness_disable_title">Hide brightness slider from Quick Settings</string>
 
 </resources>

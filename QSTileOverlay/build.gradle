@@ -26,6 +26,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     compileSdk 31
-    buildToolsVersion '33.0.0 rc1'
+    buildToolsVersion '33.0.0 rc2'
 }
 

@@ -183,5 +183,6 @@
     <string name="camera_shortcut">Camera</string>
     <string name="assistant_shortcut">Assistant</string>
     <string name="so_vol_longpress_skip">Longpress Volume to skip music*</string>
+    <string name="QQS_brightness_title">Brightness slider in collapsed quick settings</string>
 
 </resources>

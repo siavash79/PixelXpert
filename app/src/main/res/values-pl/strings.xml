@@ -22,9 +22,9 @@
     <string name="theme_customization_category">Tematy</string>
 
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Ukryj okrąg wokół ikony odcisku palca</string>
-    <string name="transparent_fingerprint_circle_off">Okrag wokół ikony odcisku palca jest aktywny</string>
-    <string name="transparent_fingerprint_circle_on">Okrag wokół ikony odcisku palca zostanie ukryty</string>
+    <string name="transparent_fingerprint_circle">Ukryj okrąg pod ikoną odcisku palca</string>
+    <string name="transparent_fingerprint_circle_off">Okrag pod ikoną odcisku palca jest aktywny</string>
+    <string name="transparent_fingerprint_circle_on">Okrag pod ikoną odcisku palca zostanie ukryty</string>
     <string name="carrier_text_category">Nazwa operatora</string>
     <string name="configure_carrier_text">Skonfiguruj nazwę operatora</string>
     <string name="carrier_text_mod_disabled">Nazwa operatora bez zmian</string>
@@ -32,13 +32,13 @@
     <string name="carrier_text_value">Wstaw własną nazwę</string>
     <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Skróty w dolnej częsci ekranu</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Ukryj cień pod ikoną</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Ukryj okrąg pod ikoną</string>
     <string name="keyguard_bottom_force_camera_title">Pokaz skrót do aparatu</string>
     <string name="keyguard_left_shortcut">Pokaz lewy skrót na ekranie blokady</string>
     <string name="LSleftShortcutTitle">Lewy skrót</string>
     <string name="LSrightShortcutTitle">Prawy skrót</string>
     <string name="camera_shortcut">Aparat</string>
-    <string name="assistant_shortcut">Asystant</string>
+    <string name="assistant_shortcut">Asystent</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Kliknij dwukrotnie aby wyłączyc ekran</string>
@@ -183,5 +183,7 @@
     <string name="qs_3_rows">Wymuś 3 rzędy</string>
     <string name="qs_4_rows">Wymuś 4 rzędy</string>
     <string name="qs_5_rows">Wymuś 5 rzędy</string>
+    <string name="QQS_brightness_title">Kontrola jasności w zwiniętych szybkich ustawieniach</string>
+    <string name="QS_brightness_disable_title">Ukryj suwak jasności w szybkich ustawieniach</string>
     
 </resources>

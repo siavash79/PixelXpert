@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
 import android.view.View;
-import android.view.ViewGroup;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -46,12 +45,12 @@ public class QQSBrightness implements IXposedModPack {
         if(brightnessSliderView == null) return;
         if(QQSBrightnessEnabled)
         {
-            XposedHelpers.callMethod(QQS, "setBrightnessView", brightnessSliderView);
+            brightnessSliderView.setVisibility(View.VISIBLE);
         }
         else
         {
             try {
-                ((ViewGroup) brightnessSliderView.getParent()).removeView(brightnessSliderView);
+                brightnessSliderView.setVisibility(View.GONE);
             }catch(Exception ignored){}
         }
     }
@@ -77,7 +76,7 @@ public class QQSBrightness implements IXposedModPack {
                 BrightnessMirrorController = param.args[0];
             }
         });
-
+        
         XposedBridge.hookAllConstructors(QSPanelControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -101,7 +100,7 @@ public class QQSBrightness implements IXposedModPack {
 
                 //Place it to QQS
                 brightnessSliderView = (View) XposedHelpers.callMethod(QQSBrightnessSliderController, "getRootView");
- //               XposedHelpers.callMethod(QQS, "setBrightnessView", brightnessSliderView);
+                XposedHelpers.callMethod(QQS, "setBrightnessView", brightnessSliderView);
 
                 //Creating controller and handler
                 Object mBrightnessController = XposedHelpers.callMethod(brightnessControllerFactory, "create", QQSBrightnessSliderController);
@@ -113,7 +112,7 @@ public class QQSBrightness implements IXposedModPack {
                 XposedHelpers.callMethod(mBrightnessController, "registerCallbacks");
                 XposedHelpers.callMethod(mBrightnessController, "checkRestrictionAndSetEnabled");
                 XposedHelpers.callMethod(mBrightnessMirrorHandlerController, "onQsPanelAttached");
-
+                
                 setView();
             }
         });

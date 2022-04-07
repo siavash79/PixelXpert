@@ -2,7 +2,6 @@ package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.AlarmClock;
@@ -27,7 +26,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.Utils.BatteryBarView;
 import sh.siava.AOSPMods.Utils.NetworkTrafficSB;
@@ -576,14 +574,4 @@ public class StatusbarMods implements IXposedModPack {
     public String getListenPack() {
         return listenPackage;
     }
-    static Context mGbContext;
-    public static synchronized Context getGbContext(Context context, Configuration config) throws Throwable {
-        if (mGbContext == null) {
-            mGbContext = context.createPackageContext(BuildConfig.APPLICATION_ID,
-                    Context.CONTEXT_IGNORE_SECURITY);
-            mGbContext = mGbContext.createDeviceProtectedStorageContext();
-        }
-        return (config == null ? mGbContext : mGbContext.createConfigurationContext(config));
-    }
-
 }

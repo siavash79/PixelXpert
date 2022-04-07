@@ -82,6 +82,14 @@
     <string name="status_bar_height_small">Small</string>
     <string name="status_bar_height_medium">Medium</string>
     <string name="fix_status_bar_padding">Correct left side padding</string>
+    <string name="sbbb_header">Battery bar settings</string>
+    <string name="BB_enable_title">Enable Battery Bar</string>
+    <string name="BB_onlycharging_title">Only during charging</string>
+    <string name="BB_move_SB_bottom_title">At bottom of Statusbar</string>
+    <string name="BB_colorful_title">Make it colorful</string>
+    <string name="BB_Opacity_title">Bar opacity</string>
+    <string name="BB_center_align_title">Center Aligned</string>
+    <string name="BB_Thickness_title">Bar thickness</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Build number on QS Panel footer</string>
@@ -103,6 +111,30 @@
     <string name="wifi_cell_title">Internet Tile</string>
     <string name="wifi_cell_on">Use Wifi and Data separate Tiles</string>
     <string name="wifi_cell_off">Use single Internet Tile</string>
+    <string name="QQS_brightness_category">Brightness slider options</string>
+    <string name="QQS_brightness_title">Show brightness slider on QQS Panel</string>
+    <string name="QS_brightness_disable_title">Hide brightness slider from Quick Settings</string>
+    <string name="bs_thick_track">Use a thick track on brightness slider</string>
+    <string name="quick_settings_tiles_category">QS Tiles Options</string>
+    <string name="qs_tile_style_title">QS Tiles themes</string>
+    <string name="qstile_default">Default</string>
+    <string name="qstile_cookie">Cookie</string>
+    <string name="qstile_triangles">Triangle</string>
+    <string name="qstile_divided">Divided Circle</string>
+    <string name="qstile_attemptmountain">An attempt of a mountain</string>
+    <string name="qstile_squircle_trim">Squircle with trim</string>
+    <string name="qstile_ninja">Ninja</string>
+    <string name="qstile_wavey">Wavey</string>
+    <string name="qstile_squaremedo">The Squaremedo</string>
+    <string name="qstile_dual_tone_circle">Dual-toned circle</string>
+    <string name="qstile_circleoutline">Circle Outline</string>
+    <string name="qstile_pokesign">Pokesign</string>
+    <string name="qstile_cosmos">Shishu Cosmos</string>
+    <string name="qstile_neonlike">Neon Light</string>
+    <string name="qstile_circle_trim">Circle with trim</string>
+    <string name="qstile_dottedcircle">Dotted Circle</string>
+    <string name="qstile_inkdrop">Ink</string>
+    <string name="qstile_circle">Circle</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configure back gesture</string>
@@ -145,6 +177,17 @@
     <string name="icons_style_title">Icons Style</string>
     <string name="icon_shapes_title">Icon Shapes</string>
     <string name="signal_icons_theme_title">Signal Icons Theme</string>
+    <string name="dt_styles_category">Dark theme styles</string>
+    <string name="dt_styles">Choose a style</string>
+    <string name="dt_black">Pitch black</string>
+    <string name="dt_bakedgreen">Baked Green</string>
+    <string name="dt_chocox">Choco X</string>
+    <string name="dt_darkaubergine">Dark Aubergine</string>
+    <string name="dt_style">Dark Blue</string>
+    <string name="dt_darkgray">Dark Grey</string>
+    <string name="dt_materialocean">Material Ocean</string>
+    <string name="dt_night">Night</string>
+    <string name="dt_solarizeddark">Solarized Dark</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -183,15 +226,5 @@
     <string name="qs_3_rows">Force 3 rows</string>
     <string name="qs_4_rows">Force 4 rows</string>
     <string name="qs_5_rows">Force 5 rows</string>
-    <string name="QQS_brightness_title">Brightness slider in collapsed quick settings</string>
-    <string name="QS_brightness_disable_title">Hide brightness slider from Quick Settings</string>
-    <string name="BB_enable_title">Enable Battery Bar</string>
-    <string name="BB_onlycharging_title">Only during charging</string>
-    <string name="BB_move_SB_bottom_title">At bottom of Statusbar</string>
-    <string name="BB_colorful_title">Make it colorful</string>
-    <string name="BB_Opacity_title">Bar opacity</string>
-    <string name="BB_center_align_title">Center Aligned</string>
-    <string name="sbbb_header">Battery Bar settings...</string>
-    <string name="BB_Thickness_title">Bar thickness</string>
 
 </resources>

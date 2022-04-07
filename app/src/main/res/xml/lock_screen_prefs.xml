@@ -29,12 +29,14 @@
             android:key="rightKeyguardShortcut"
             android:title="@string/LSrightShortcutTitle"
             app:summary="%s" />
+        <!-- Deprecated shortcut...no longer makes sense
         <SwitchPreference
             android:defaultValue="false"
             android:key="KeyguardLeftShortcutOverlay"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
             android:title="@string/keyguard_left_shortcut" />
+        -->
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/carrier_text_category">
         <SwitchPreference

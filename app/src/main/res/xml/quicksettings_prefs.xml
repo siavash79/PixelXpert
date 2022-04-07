@@ -11,45 +11,40 @@
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
             android:title="@string/light_qs_title" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="QSBrightnessDisabled"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/QS_brightness_disable_title" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="QQSBrightnessEnabled"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/QQS_brightness_title" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="QSHapticEnabled"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/qs_haptic_switch_title" />
-        <ListPreference
-            android:defaultValue="None"
-            android:entries="@array/QSRowCountOverlayEx_names"
-            android:entryValues="@array/QSRowCountOverlayEx"
-            android:summary="%s"
-            android:key="QSRowCountOverlayEx"
-            android:title="@string/qs_rows_number" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="QS3ColumnsOverlay"
-            android:title="@string/qs_tiles_3_columns_title"
-            app:summaryOn="@string/general_on"
-            app:summaryOff="@string/general_off"/>
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="wifi_cell"
-            android:summaryOff="@string/wifi_cell_off"
-            android:summaryOn="@string/wifi_cell_on"
-            android:title="@string/wifi_cell_title" />
         <PreferenceCategory
-            android:title="@string/qs_text_size_title">
+            android:title="@string/quick_settings_tiles_category">
+            <ListPreference
+                android:defaultValue="None"
+                android:entries="@array/QSTilesThemesOverlayEx_names"
+                android:entryValues="@array/QSTilesThemesOverlayEx"
+                android:summary="%s"
+                android:key="QSTilesThemesOverlayEx"
+                android:title="@string/qs_tile_style_title" />
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="QSHapticEnabled"
+                android:summaryOff="@string/general_off"
+                android:summaryOn="@string/general_on"
+                android:title="@string/qs_haptic_switch_title" />
+            <ListPreference
+                android:defaultValue="None"
+                android:entries="@array/QSRowCountOverlayEx_names"
+                android:entryValues="@array/QSRowCountOverlayEx"
+                android:summary="%s"
+                android:key="QSRowCountOverlayEx"
+                android:title="@string/qs_rows_number" />
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="QS3ColumnsOverlay"
+                android:title="@string/qs_tiles_3_columns_title"
+                app:summaryOn="@string/general_on"
+                app:summaryOff="@string/general_off"/>
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="wifi_cell"
+                android:summaryOff="@string/wifi_cell_off"
+                android:summaryOn="@string/wifi_cell_on"
+                android:title="@string/wifi_cell_title" />
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="QSSmallTextOverlay"
@@ -70,6 +65,26 @@
                 android:singleLine="true"
                 android:title="@string/qs_footer_text_value"
                 app:summary="@string/qs_footer_text_summary" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/QQS_brightness_category">
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="QSBrightnessDisabled"
+                android:summaryOff="@string/general_off"
+                android:summaryOn="@string/general_on"
+                android:title="@string/QS_brightness_disable_title" />
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="QQSBrightnessEnabled"
+                android:summaryOff="@string/general_off"
+                android:summaryOn="@string/general_on"
+                android:title="@string/QQS_brightness_title" />
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="BSThickTrackOverlay"
+                android:title="@string/bs_thick_track"
+                app:summaryOn="@string/general_on"
+                app:summaryOff="@string/general_off"/>
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/qs_pulldown_category">
             <SwitchPreference

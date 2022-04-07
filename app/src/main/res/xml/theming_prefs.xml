@@ -43,4 +43,13 @@
             android:key="SignalIconsOverlayEx"
             android:title="@string/signal_icons_theme_title" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/dt_styles_category">
+        <ListPreference
+            android:defaultValue="None"
+            android:entries="@array/DTStylesOverlayEx_names"
+            android:entryValues="@array/DTStylesOverlayEx"
+            android:summary="%s"
+            android:key="DTStylesOverlayEx"
+            android:title="@string/dt_styles" />
+    </PreferenceCategory>
 </PreferenceScreen>

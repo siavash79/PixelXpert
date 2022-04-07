@@ -450,4 +450,94 @@
         <item>com.tenx.systemui.wifibar_h</item>
     </string-array>
 
+    <string-array name="QSTilesThemesOverlayEx_names">
+        <item>@string/overlay_none_title</item>
+        <item>No34D</item>
+        <item>@string/qstile_circleoutline</item>
+        <item>@string/qstile_dual_tone_circle</item>
+        <item>@string/qstile_cookie</item>
+        <item>O34D</item>
+        <item>@string/qstile_ninja</item>
+        <item>@string/qstile_cosmos</item>
+        <item>@string/qstile_dottedcircle</item>
+        <item>@string/qstile_inkdrop</item>
+        <item>@string/qstile_wavey</item>
+        <item>@string/qstile_attemptmountain</item>
+        <item>@string/qstile_squircle_trim</item>
+        <item>@string/qstile_pokesign</item>
+        <item>@string/qstile_neonlike</item>
+        <item>@string/qstile_squaremedo</item>
+        <item>@string/qstile_divided</item>
+        <item>@string/qstile_triangles</item>
+        <item>@string/qstile_circle_trim</item>
+        <item>@string/qstile_circle</item>
+        <item>LiArch</item>
+        <item>LiArch2</item>
+        <item>LiArch3</item>
+        <item>LiArch4</item>
+        <item>LiArch5</item>
+        <item>LiArch6</item>
+        <item>LiArch7</item>
+        <item>LiArch8</item>
+        <item>LiArch9</item>
+        <item>LiArch10</item>
+    </string-array>
+
+    <string-array name="QSTilesThemesOverlayEx">
+        <item>None</item>
+        <item>com.android.systemui.qstile.no34d.overlay</item>
+        <item>com.android.systemui.qstile.circout.overlay</item>
+        <item>com.android.systemui.qstile.dualtone.overlay</item>
+        <item>com.android.systemui.qstile.cookie.overlay</item>
+        <item>com.android.systemui.qstile.o34d.overlay</item>
+        <item>com.android.systemui.qstile.ninja.overlay</item>
+        <item>com.android.systemui.qstile.cosmos.overlay</item>
+        <item>com.android.systemui.qstile.dottedcircle.overlay</item>
+        <item>com.android.systemui.qstile.inkdrop.overlay</item>
+        <item>com.android.systemui.qstile.wavey.overlay</item>
+        <item>com.android.systemui.qstile.attemptmountain.overlay</item>
+        <item>com.android.systemui.qstile.squircle.overlay</item>
+        <item>com.android.systemui.qstile.pokesign.overlay</item>
+        <item>com.android.systemui.qstile.neonlike.overlay</item>
+        <item>com.android.systemui.qstile.squaremedo.overlay</item>
+        <item>com.android.systemui.qstile.divided.overlay</item>
+        <item>com.android.systemui.qstile.triangles.overlay</item>
+        <item>com.android.systemui.qstile.circletrim.overlay</item>
+        <item>com.android.systemui.qstile.circle.overlay</item>
+        <item>com.android.systemui.qstile.liarch.overlay</item>
+        <item>com.android.systemui.qstile.liarch2.overlay</item>
+        <item>com.android.systemui.qstile.liarch3.overlay</item>
+        <item>com.android.systemui.qstile.liarch4.overlay</item>
+        <item>com.android.systemui.qstile.liarch5.overlay</item>
+        <item>com.android.systemui.qstile.liarch6.overlay</item>
+        <item>com.android.systemui.qstile.liarch7.overlay</item>
+        <item>com.android.systemui.qstile.liarch8.overlay</item>
+        <item>com.android.systemui.qstile.liarch9.overlay</item>
+        <item>com.android.systemui.qstile.liarch10.overlay</item>
+    </string-array>
+
+    <string-array name="DTStylesOverlayEx_names">
+        <item>@string/overlay_none_title</item>
+        <item>@string/dt_bakedgreen</item>
+        <item>@string/dt_chocox</item>
+        <item>@string/dt_darkgray</item>
+        <item>@string/dt_materialocean</item>
+        <item>@string/dt_black</item>
+        <item>@string/dt_solarizeddark</item>
+        <item>@string/dt_darkaubergine</item>
+        <item>@string/dt_style</item>
+    </string-array>
+
+    <string-array name="DTStylesOverlayEx">
+        <item>None</item>
+        <item>com.android.dark.bakedgreen</item>
+        <item>com.android.dark.chocox</item>
+        <item>com.android.dark.darkgrey</item>
+        <item>com.android.dark.materialocean</item>
+        <item>com.android.dark.pitchblack</item>
+        <item>com.android.dark.solarizeddark</item>
+        <item>com.android.dark.darkaubergine</item>
+        <item>com.android.dark.style</item>
+    </string-array>
+
 </resources>

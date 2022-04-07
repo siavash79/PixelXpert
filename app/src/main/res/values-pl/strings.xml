@@ -82,6 +82,14 @@
     <string name="status_bar_height_small">Mały</string>
     <string name="status_bar_height_medium">Średni</string>
     <string name="fix_status_bar_padding">Popraw odstęp po lewej stronie</string>
+     <string name="sbbb_header">Ustawienia paska baterii</string>
+    <string name="BB_enable_title">Włącz pasek baterii</string>
+    <string name="BB_onlycharging_title">Tylko podczas ładowania</string>
+    <string name="BB_move_SB_bottom_title">Na dole paska stanu</string>
+    <string name="BB_colorful_title">Kolorowy</string>
+    <string name="BB_Opacity_title">Krycie paska</string>
+    <string name="BB_center_align_title">Wyrównany do środka</string>
+    <string name="BB_Thickness_title">Grubość paska</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numer kompilacji w stopce panelu QS</string>
@@ -103,6 +111,30 @@
     <string name="wifi_cell_title">Ikona internetu</string>
     <string name="wifi_cell_on">Użyj oddzielnych ikon Wi-Fi i danych</string>
     <string name="wifi_cell_off">Użyj ikony interetu</string>
+    <string name="QQS_brightness_category">Opcje suwaka jasności</string>
+    <string name="QQS_brightness_title">Pokaż suwak jasności na panelu QQS</string>
+    <string name="QS_brightness_disable_title">Ukryj suwak jasności w szybkich ustawieniach</string>
+    <string name="bs_thick_track">Pogrubienie ścieżki na suwaku jasności</string>
+    <string name="quick_settings_tiles_category">Opcje ikon szybkich ustawień</string>
+    <string name="qs_tile_style_title">Motywy ikon szybkich ustawień</string>
+    <string name="qstile_default">Domyślna</string>
+    <string name="qstile_cookie">Cookie</string>
+    <string name="qstile_triangles">Triangle</string>
+    <string name="qstile_divided">Divided Circle</string>
+    <string name="qstile_attemptmountain">An attempt of a mountain</string>
+    <string name="qstile_squircle_trim">Squircle with trim</string>
+    <string name="qstile_ninja">Ninja</string>
+    <string name="qstile_wavey">Wavey</string>
+    <string name="qstile_squaremedo">The Squaremedo</string>
+    <string name="qstile_dual_tone_circle">Dual-toned circle</string>
+    <string name="qstile_circleoutline">Circle Outline</string>
+    <string name="qstile_pokesign">Pokesign</string>
+    <string name="qstile_cosmos">Shishu Cosmos</string>
+    <string name="qstile_neonlike">Neon Light</string>
+    <string name="qstile_circle_trim">Circle with trim</string>
+    <string name="qstile_dottedcircle">Dotted Circle</string>
+    <string name="qstile_inkdrop">Ink</string>
+    <string name="qstile_circle">Circle</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Skonfiguruj gest powrotu</string>
@@ -145,6 +177,17 @@
     <string name="icons_style_title">Styl ikon</string>
     <string name="icon_shapes_title">Kształty ikon</string>
     <string name="signal_icons_theme_title">Motyw ikon sygnału</string>
+    <string name="dt_styles_category">Ciemne style motywów</string>
+    <string name="dt_styles">Wybierz styl</string>
+    <string name="dt_black">Czarna smoła</string>
+    <string name="dt_bakedgreen">Pieczony Zielony</string>
+    <string name="dt_chocox">Czekolada X</string>
+    <string name="dt_darkaubergine">Ciemny Bakłażan</string>
+    <string name="dt_style">Ciemny niebieski</string>
+    <string name="dt_darkgray">Ciemno szary</string>
+    <string name="dt_materialocean">Material Ocean</string>
+    <string name="dt_night">Noc</string>
+    <string name="dt_solarizeddark">Solarized Dark</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -183,7 +226,5 @@
     <string name="qs_3_rows">Wymuś 3 rzędy</string>
     <string name="qs_4_rows">Wymuś 4 rzędy</string>
     <string name="qs_5_rows">Wymuś 5 rzędów</string>
-    <string name="QQS_brightness_title">Kontrola jasności w zwiniętych szybkich ustawieniach</string>
-    <string name="QS_brightness_disable_title">Ukryj suwak jasności w szybkich ustawieniach</string>
     
 </resources>

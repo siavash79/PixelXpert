@@ -22,26 +22,26 @@
     <string name="theme_customization_category">Tematy</string>
 
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Ukryj okrąg wokół ikony odcisku palca</string>
-    <string name="transparent_fingerprint_circle_off">Okrag wokół ikony odcisku palca jest aktywny</string>
-    <string name="transparent_fingerprint_circle_on">Okrag wokół ikony odcisku palca zostanie ukryty</string>
+    <string name="transparent_fingerprint_circle">Ukryj okrąg pod ikoną odcisku palca</string>
+    <string name="transparent_fingerprint_circle_off">Okrąg pod ikoną odcisku palca jest aktywny</string>
+    <string name="transparent_fingerprint_circle_on">Okrąg pod ikoną odcisku palca zostanie ukryty</string>
     <string name="carrier_text_category">Nazwa operatora</string>
     <string name="configure_carrier_text">Skonfiguruj nazwę operatora</string>
     <string name="carrier_text_mod_disabled">Nazwa operatora bez zmian</string>
     <string name="carrier_text_mod_enabled">Niestandardowa nazwa operatora</string>
     <string name="carrier_text_value">Wstaw własną nazwę</string>
     <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
-    <string name="keyguard_bottom_category">Skróty w dolnej częsci ekranu</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Ukryj cień pod ikoną</string>
-    <string name="keyguard_bottom_force_camera_title">Pokaz skrót do aparatu</string>
-    <string name="keyguard_left_shortcut">Pokaz lewy skrót na ekranie blokady</string>
+    <string name="keyguard_bottom_category">Skróty w dolnej części ekranu</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Ukryj okrąg pod ikoną</string>
+    <string name="keyguard_bottom_force_camera_title">Pokaż skrót do aparatu</string>
+    <string name="keyguard_left_shortcut">Pokaż lewy skrót na ekranie blokady</string>
     <string name="LSleftShortcutTitle">Lewy skrót</string>
     <string name="LSrightShortcutTitle">Prawy skrót</string>
     <string name="camera_shortcut">Aparat</string>
-    <string name="assistant_shortcut">Asystant</string>
+    <string name="assistant_shortcut">Asystent</string>
 
     <!--Status bar related-->
-    <string name="double_tap_sleep_title">Kliknij dwukrotnie aby wyłączyc ekran</string>
+    <string name="double_tap_sleep_title">Kliknij dwukrotnie aby wyłączyć ekran</string>
     <string name="double_tap_sleep_off">"Dwukrotne dotknięcie nie spowoduje wyłączenia wyświetlacza"</string>
     <string name="double_tap_sleep_on">Dwukrotne dotknięcie paska stanu lub ekranu blokady spowoduje wyłączenie wyświetlacza</string>
     <string name="battery_style_title">Wybierz styl baterii</string>
@@ -58,7 +58,7 @@
     <string name="sbc_ampm_style">Styl AM/PM</string>
     <string name="sbc_show_secs">Pokaż sekundy</string>
     <string name="sbc_date_cat">Opcje daty</string>
-    <string name="sbc_day_of_week_options">Pokaż dzien tygodnia z zegarem</string>
+    <string name="sbc_day_of_week_options">Pokaż dzień tygodnia z zegarem</string>
     <string name="sbc_advanced_cat">Zaawansowana data (zastąpi powyższe ustawienie!)</string>
     <string name="sbc_advanced_sum">Proszę przeczytać dokumentację formatu daty Java</string>
     <string name="sbc_custom_date_before">Niestandardowy format daty przed zegarem</string>
@@ -67,8 +67,8 @@
     <string name="sbc_header">Dostosowanie zegara na paska stanu</string>
     <string name="sbc_may_take_one_minute">Włącza się po aktualizacji czasu lub ponownym uruchomieniu SysUI</string>
     <string name="ntsb_far_left">Skrajnie w lewo</string>
-    <string name="ntsb_mid_left">Srodkowa lewa</string>
-    <string name="ntsb_mid_right">Srodkowy prawy</string>
+    <string name="ntsb_mid_left">Środkowa lewa</string>
+    <string name="ntsb_mid_right">Środkowy prawy</string>
     <string name="ntsb_category_title">Monitor sieci</string>
     <string name="ntsb_enabled_title">Włącz monitor sieci</string>
     <string name="ntsb_position_title">Pozycja monitora sieci</string>
@@ -76,33 +76,33 @@
     <string name="ntsb_treshold_summary">"Ukryj, jesli ruch jest mniejszy niż… (Kilobytes)"</string>
     <string name="statusbar_general_options">Opcje paska stanu</string>
     <string name="dual_tone_battery_title">Włącz dwutonowy miernik baterii</string>
-    <string name="dual_tone_battery_on_summary">Włączony (Dziala tylko z ikoną poziomą)</string>
-    <string name="unread_messages_title">Pokaz liczbę nieprzeczytanych wiadomosci</string>
-    <string name="status_bar_height">Wysokosc paska stanu</string>
+    <string name="dual_tone_battery_on_summary">Włączony (Działa tylko z ikoną poziomą)</string>
+    <string name="unread_messages_title">Pokaż liczbę nieprzeczytanych wiadomości</string>
+    <string name="status_bar_height">Wysokość paska stanu</string>
     <string name="status_bar_height_small">Mały</string>
     <string name="status_bar_height_medium">Średni</string>
-    <string name="fix_status_bar_padding">Popraw odstep po lewej stronie</string>
+    <string name="fix_status_bar_padding">Popraw odstęp po lewej stronie</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numer kompilacji w stopce panelu QS</string>
     <string name="qs_footer_mod_title">Zmień numer wersji w szybkich ustawieniach</string>
     <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
-    <string name="qs_footer_text_summary">Pozostaw puste miejsce, aby całkowicie usunac tekst</string>
-    <string name="qs_footer_text_desc">Wyłacz/włacz wyswietlacz, aby zastosowac zmiany</string>
-    <string name="light_qs_title">Jasny panel szybkich ustawien podczas jasnego motywu (mogą wystepowac błedy)</string>
+    <string name="qs_footer_text_summary">Pozostaw puste miejsce, aby całkowicie usunąć tekst</string>
+    <string name="qs_footer_text_desc">Wyłącz/włącz wyswietlacz, aby zastosowac zmiany</string>
+    <string name="light_qs_title">Jasny panel szybkich ustawien podczas jasnego motywu (mogą wystepować błędy)</string>
     <string name="qs_pulldown_size">Szerokość szybkich ustawień</string>
-    <string name="qs_pulldown_switch_title">Panel szybkich ustawien rozwijany z paska stanu</string>
+    <string name="qs_pulldown_switch_title">Panel szybkich ustawień rozwijany z paska stanu</string>
     <string name="qs_pulldown_side_title">Pociągnij w dół</string>
     <string name="qs_pulldown_category">Rozwijane szybkie ustawienia</string>
     <string name="qs_haptic_switch_title">Wibracje przy dotknięciu panelu szybkich ustawień</string>
     <string name="qs_rows_number">Liczba wierszy szybkich ustawień</string>
     <string name="qs_general_options">Opcje szybkich ustawień</string>
-    <string name="qs_tiles_3_columns_title">Włącz 3 kolumny szybkich ustawienien</string>
-    <string name="qs_text_size_title">Rozmiar czcionki elementów szybkich ustawianien</string>
+    <string name="qs_tiles_3_columns_title">Włącz 3 kolumny szybkich ustawienień</string>
+    <string name="qs_text_size_title">Rozmiar czcionki elementów szybkich ustawianień</string>
     <string name="qs_text_size">Zmniejsz rozmiar czcionki elementów szybkiego ustawiania</string>
-    <string name="wifi_cell_title">Ikonka internetu</string>
+    <string name="wifi_cell_title">Ikona internetu</string>
     <string name="wifi_cell_on">Użyj oddzielnych ikon Wi-Fi i danych</string>
-    <string name="wifi_cell_off">Użyj ikonki interetu</string>
+    <string name="wifi_cell_off">Użyj ikony interetu</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Skonfiguruj gest powrotu</string>
@@ -114,25 +114,25 @@
     <string name="gesture_nav_pill_mod_title">Zmień szerokość paska nawigacyjnego</string>
     <string name="gesture_nav_pill_width_title">Szerokość w porównaniu ze standardowym rozmiarem</string>
     <string name="threebutton_header_title">3-przyciskowa nawigacja</string>
-    <string name="back_longpress_kill_title">Naciśnij i przytrzymaj klawisz wstecz, aby zamknac aplikację na pierwszym planie</string>
+    <string name="back_longpress_kill_title">Naciśnij i przytrzymaj klawisz wstecz, aby zamknąć aplikację na pierwszym planie</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
-    <string name="hide_navbar_title">Ukryj pasek nawigacyjny</string>
-    <string name="gesture_navbar_thickness_title">Grubość paska nawigacyjnego</string>
-    <string name="gesture_navbar_thickness">Zmodyfikuj grubość paska nawigacyjnego</string>
+    <string name="hide_navbar_title">Ukryj pasek nawigacji</string>
+    <string name="gesture_navbar_thickness_title">Grubość paska nawigacyji</string>
+    <string name="gesture_navbar_thickness">Zmodyfikuj grubość paska nawigacyji</string>
     <string name="gesture_navbar_thin">Chudy</string>
     <string name="gesture_navbar_thick">Gruby</string>
     <string name="gesture_navbar_thicker">Grubszy</string>
     <string name="colorpill_title">Kolor paska nawigacji gestów</string>
-    <string name="colorpill">Paski nawigacyjne w kolorze</string>
+    <string name="colorpill">Pasek nawigacyji w kolorze</string>
     <string name="reducekeyboard_title">Obszar gestów klawiatury</string>
     <string name="reducekeyboard">Zmniejsz zakres gestów klawiatury</string>
 
     <!--Miscellaneous section related-->
-    <string name="screenshot_sound_disable_title">Wyłącz dzwiek zrzutu ekranu</string>
-    <string name="so_power_longpress_torch_title">Dlugie nacisniecie włącza latarke*</string>
+    <string name="screenshot_sound_disable_title">Wyłącz dzwięk zrzutu ekranu</string>
+    <string name="so_power_longpress_torch_title">Długie naciśnięcie włącza latarkę*</string>
     <string name="framework_needed_caution_summary">Wymaga aktywacji System Framework w Lsposed. UZYWAJ OSTROŻNIE</string>
     <string name="so_double_tap_wake_title">Kliknij dwukrotnie, aby wybudzić telefon</string>
-    <string name="so_double_tap_wake_summary">Wyłącza jedno dotkniecie, aby wybudzic telefon</string>
+    <string name="so_double_tap_wake_summary">Wyłącza jedno dotknięcie, aby wybudzić telefon</string>
     <string name="doze_header">Gdy ekran jest wyłączony…</string>
     <string name="custom_themed_icons_title">Niestandardowe ikony tematyczne</string>
     <string name="custom_themed_icons_off">Wyłączone niestandardowe ikony</string>
@@ -143,7 +143,7 @@
     <string name="gsans_override_title">Wymuś używanie czcionek Google Sans w systemie</string>
     <string name="theme_customization_font_title">Czcionka główna</string>
     <string name="icons_style_title">Styl ikon</string>
-    <string name="icon_shapes_title">Ksztalty ikon</string>
+    <string name="icon_shapes_title">Kształty ikon</string>
     <string name="signal_icons_theme_title">Motyw ikon sygnału</string>
 
     <!-- Arrays strings -->
@@ -174,7 +174,7 @@
     <string name="date_after_small">Po zegarze (70%)</string>
 
     <!-- 4G | LTE -->
-    <string name="fourg_lte_default">Domyślne ustawienie systemowe</string>
+    <string name="fourg_lte_default">Domyślne ustawienia systemowe</string>
     <string name="fourg_lte_lte">Pokazyj ikonę LTE</string>
     <string name="fourg_lte_fourg">Pokazuj ikonę 4G</string>
 
@@ -182,6 +182,8 @@
     <string name="qs_2_rows">Wymuś 2 rzędy</string>
     <string name="qs_3_rows">Wymuś 3 rzędy</string>
     <string name="qs_4_rows">Wymuś 4 rzędy</string>
-    <string name="qs_5_rows">Wymuś 5 rzędy</string>
+    <string name="qs_5_rows">Wymuś 5 rzędów</string>
+    <string name="QQS_brightness_title">Kontrola jasności w zwiniętych szybkich ustawieniach</string>
+    <string name="QS_brightness_disable_title">Ukryj suwak jasności w szybkich ustawieniach</string>
     
 </resources>

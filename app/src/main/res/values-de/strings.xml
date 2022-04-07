@@ -183,5 +183,7 @@
     <string name="qs_3_rows">Erzwinge 3 Reihen</string>
     <string name="qs_4_rows">Erzwinge 4 Reihen</string>
     <string name="qs_5_rows">Erzwinge 5 Reihen</string>
+    <string name="QQS_brightness_title">Helligkeitsregler in eingeklappten Schnelleinstellungen</string>
+    <string name="QS_brightness_disable_title">Verstecke Helligkeitsregler von den Schnelleinstellungen</string>
 
 </resources>

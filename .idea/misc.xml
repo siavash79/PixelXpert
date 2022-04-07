@@ -52,6 +52,8 @@
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/volume_minus.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/layout/volume_plus.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.11145833333333334" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/mipmap-anydpi-v31/ic_launcher.xml" value="0.128" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/mipmap-anydpi-v31/ic_launcher_round.xml" value="0.128" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/gesture_nav_perfs.xml" value="0.2" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/header_preferences.xml" value="0.18" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/lock_screen_prefs.xml" value="0.22" />
@@ -61,8 +63,9 @@
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/quicksettings_prefs.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/root_preferences.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/screen_off_prefs.xml" value="0.22" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/statusbar_batterybar_prefs.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/statusbar_clock_prefs.xml" value="0.2" />
-        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/statusbar_settings.xml" value="0.18" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/statusbar_settings.xml" value="0.2" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/sync_preferences.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/theming_prefs.xml" value="0.22" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/three_button_prefs.xml" value="0.2" />

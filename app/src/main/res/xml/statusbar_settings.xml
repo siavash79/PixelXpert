@@ -102,5 +102,9 @@
             app:fragment="sh.siava.AOSPMods.SettingsActivity$SBCFragment"
             app:key="sbc_header"
             app:title="@string/sbc_header" />
+        <Preference
+            app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBBFragment"
+            app:key="sbbb_header"
+            app:title="@string/sbbb_header" />
     </PreferenceCategory>
 </PreferenceScreen>

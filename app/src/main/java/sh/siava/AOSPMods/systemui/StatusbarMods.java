@@ -79,6 +79,7 @@ public class StatusbarMods implements IXposedModPack {
     private static boolean BBOnBottom;
     private static boolean BBSetCentered;
     private static int BBOpacity = 100;
+    private static int BBarHeight = 10;
     
     Object STB;
 
@@ -93,6 +94,7 @@ public class StatusbarMods implements IXposedModPack {
         BBOnBottom = XPrefs.Xprefs.getBoolean("BBOnBottom", false);
         BBSetCentered = XPrefs.Xprefs.getBoolean("BBSetCentered", false);
         BBOpacity = XPrefs.Xprefs.getInt("BBOpacity" , 100);
+        BBarHeight = XPrefs.Xprefs.getInt("BBarHeight" , 50);
         
         if(BatteryBarView.hasInstance())
         {
@@ -193,6 +195,7 @@ public class StatusbarMods implements IXposedModPack {
         instance.setCenterBased(BBSetCentered);
         instance.setSingleColorTone(clockColor);
         instance.setAlphaPct(BBOpacity);
+        instance.setBarHeight(Math.round(BBarHeight/10)+5);
     }
     
     @Override
@@ -297,6 +300,10 @@ public class StatusbarMods implements IXposedModPack {
                 "hideClock", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if(BatteryBarView.hasInstance())
+                        {
+                            BatteryBarView.getInstance().setVisible(false);
+                        }
                         if(networkTrafficSB != null) {
                             networkTrafficSB.setVisibility(View.INVISIBLE);
                         }
@@ -307,6 +314,10 @@ public class StatusbarMods implements IXposedModPack {
                 "showClock", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if(BatteryBarView.hasInstance())
+                        {
+                            BatteryBarView.getInstance().setVisible(true);
+                        }
                         if(networkTrafficSB != null) {
                             networkTrafficSB.setVisibility(View.VISIBLE);
                         }

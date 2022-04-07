@@ -173,7 +173,19 @@ public class SettingsActivity extends AppCompatActivity implements
             setPreferencesFromResource(R.xml.lock_screen_prefs, rootKey);
         }
     }
-
+    
+    public static class SBBBFragment extends PreferenceFragmentCompat {
+        
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
+            setPreferencesFromResource(R.xml.statusbar_batterybar_prefs, rootKey);
+        }
+        
+        
+    }
+    
+    
     public static class MiscFragment extends PreferenceFragmentCompat {
 
         @Override

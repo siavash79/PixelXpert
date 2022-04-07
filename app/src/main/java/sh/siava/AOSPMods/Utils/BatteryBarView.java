@@ -29,6 +29,8 @@ public class BatteryBarView extends FrameLayout {
 	private static BatteryBarView instance = null;
 	private boolean isCharging = false;
 	private boolean onlyWhileCharging = false;
+	private boolean isEnabled = true;
+	private boolean isHidden = false;
 	
 	public void setOnTop(boolean onTop)
 	{
@@ -61,16 +63,11 @@ public class BatteryBarView extends FrameLayout {
 	{
 		if(!isAttachedToWindow()) return;
 		
-		if(onlyWhileCharging && !isCharging) {
-			barView.setVisibility(GONE);
-			return;
-		}
-		barView.setVisibility(VISIBLE);
+		refreshVisibility();
+		
+		if(barView.getVisibility() == GONE) return;
 		maskLayout.setLayoutParams(maskLayoutParams());
 		barView.setLayoutParams(barLayoutParams());
-		XposedBridge.log("bw,bh " + barView.getWidth() + ","+ barView.getHeight());
-		XposedBridge.log("mw,mh " + maskLayout.getWidth() + ","+ maskLayout.getHeight());
-		XposedBridge.log("w,h " + getWidth() + ","+ getHeight());
 	}
 	
 	private FrameLayout.LayoutParams maskLayoutParams() {
@@ -95,11 +92,10 @@ public class BatteryBarView extends FrameLayout {
 		batteryPCT = initialLevel;
 		isCharging = initialCharging;
 		
-		mDrawable.setColor(singleColorTone);
-		mDrawable.setAlpha(alphaPct);
-		mDrawable.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
 		mDrawable.setShape(GradientDrawable.RECTANGLE);
-		
+		this.setSingleColorTone(singleColorTone);
+		this.setAlphaPct(alphaPct);
+		this.setRTL(false);
 		
 		barView = new ImageView(mContext);
 		barView.setImageDrawable(mDrawable);
@@ -124,7 +120,7 @@ public class BatteryBarView extends FrameLayout {
 		return  result;
 	}
 	
-	private void setBarHeight(int height)
+	public void setBarHeight(int height)
 	{
 		barHeight = height;
 		refreshLayout();
@@ -132,47 +128,42 @@ public class BatteryBarView extends FrameLayout {
 	
 	public void setColorful(boolean colorful) {
 		this.colorful = colorful;
-		if(colorful)
-		{
-			setCenterBased(isCenterBased);
-		}
-		else
-		{
-			mDrawable.setColor(singleColorTone);
-		}
+		setCenterBased(isCenterBased);
 	}
 	
 	public void setSingleColorTone(int colorTone)
 	{
 		this.singleColorTone = colorTone;
-		
-		if(!colorful)
-		{
-			mDrawable.setColor(singleColorTone);
-		}
+		setCenterBased(isCenterBased);
 	}
 	
 	public void setCenterBased(boolean centerBased)
 	{
 		isCenterBased = centerBased;
-		if(centerBased)
+		
+		if(colorful)
 		{
-			colors = new int[] {Color.GREEN,Color.GREEN,Color.YELLOW,Color.RED,Color.YELLOW,Color.GREEN,Color.GREEN};
+			if(centerBased)
+			{
+				colors = new int[] {Color.GREEN,Color.GREEN,Color.YELLOW,Color.RED,Color.YELLOW,Color.GREEN,Color.GREEN};
+			}
+			else
+			{
+				colors = new int[] {Color.RED,Color.YELLOW,Color.GREEN,Color.GREEN};
+			}
 		}
 		else
 		{
-			colors = new int[] {Color.RED,Color.YELLOW,Color.GREEN,Color.GREEN};
+			colors = new int[] {singleColorTone, singleColorTone};
 		}
-		if(colorful)
-		{
-			mDrawable.setColors(colors);
-		}
+		mDrawable.setColors(colors);
+		
 		refreshLayout();
 	}
 	
 	public void setAlphaPct(int alphaPct) {
 		this.alphaPct = alphaPct;
-		mDrawable.setAlpha(alphaPct);
+		mDrawable.setAlpha(Math.round(alphaPct*2.55f));
 	}
 	
 	public void setRTL(boolean RTL)
@@ -180,6 +171,28 @@ public class BatteryBarView extends FrameLayout {
 		this.RTL = RTL;
 		mDrawable.setOrientation((RTL) ? GradientDrawable.Orientation.RIGHT_LEFT : GradientDrawable.Orientation.LEFT_RIGHT);
 	}
+	
+	public void setEnabled(boolean enabled)
+	{
+		this.isEnabled = enabled;
+		refreshVisibility();
+	}
+	public void setVisible(boolean visible)
+	{
+		this.isHidden = !visible;
+		refreshVisibility();
+	}
+	
+	private void refreshVisibility() {
+		if(!isEnabled || isHidden || (onlyWhileCharging && !isCharging)) {
+			barView.setVisibility(GONE);
+		}
+		else {
+			barView.setVisibility(VISIBLE);
+		}
+	}
+	
+	
 	public static void setStaticLevel(int level, boolean charging)
 	{
 		initialLevel = level;

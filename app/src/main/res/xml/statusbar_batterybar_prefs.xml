@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="BBarEnabled"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/BB_enable_title" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="BBOnlyWhileCharging"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/BB_onlycharging_title" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="BBOnBottom"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/BB_move_SB_bottom_title" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="BBarColorful"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/BB_colorful_title" />
+    <SeekBarPreference
+        android:defaultValue="100"
+        android:key="BBOpacity"
+        android:title="@string/BB_Opacity_title"
+        app:showSeekBarValue="true"/>
+    <SeekBarPreference
+        android:defaultValue="50"
+        android:key="BBarHeight"
+        android:title="@string/BB_Thickness_title"/>
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="BBSetCentered"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/BB_center_align_title" />
+</PreferenceScreen>

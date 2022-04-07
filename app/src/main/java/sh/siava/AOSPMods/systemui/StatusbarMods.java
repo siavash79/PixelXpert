@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.AlarmClock;
@@ -13,6 +14,7 @@ import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,7 +27,9 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.Utils.BatteryBarView;
 import sh.siava.AOSPMods.Utils.NetworkTrafficSB;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -67,11 +71,35 @@ public class StatusbarMods implements IXposedModPack {
     private static View mCenteredIconArea = null;
     private static LinearLayout mSystemIconArea = null;
     public static int clockColor = 0;
+    private FrameLayout fullStatusbar;
+    
+    private static boolean BBarEnabled;
+    private static boolean BBarColorful;
+    private static boolean BBOnlyWhileCharging;
+    private static boolean BBOnBottom;
+    private static boolean BBSetCentered;
+    private static int BBOpacity = 100;
+    
+    Object STB;
 
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
-
+        
+        //BatteryBar Settings
+        BBarEnabled = XPrefs.Xprefs.getBoolean("BBarEnabled", false);
+        BBarColorful = XPrefs.Xprefs.getBoolean("BBarColorful", false);
+        BBOnlyWhileCharging = XPrefs.Xprefs.getBoolean("BBOnlyWhileCharging", false);
+        BBOnBottom = XPrefs.Xprefs.getBoolean("BBOnBottom", false);
+        BBSetCentered = XPrefs.Xprefs.getBoolean("BBSetCentered", false);
+        BBOpacity = XPrefs.Xprefs.getInt("BBOpacity" , 100);
+        
+        if(BatteryBarView.hasInstance())
+        {
+            refreshBatteryBar(BatteryBarView.getInstance());
+        }
+        //end BatteryBar Settings
+        
         //network Traffic settings
         boolean newnetworkOnSBEnabled = XPrefs.Xprefs.getBoolean("networkOnSBEnabled", false);
         if(newnetworkOnSBEnabled != networkOnSBEnabled)
@@ -156,12 +184,21 @@ public class StatusbarMods implements IXposedModPack {
         //clickable battery settings
 
     }
-
+    
+    private void refreshBatteryBar(BatteryBarView instance) {
+        instance.setVisibility((BBarEnabled) ? View.VISIBLE : View.GONE);
+        instance.setColorful(BBarColorful);
+        instance.setOnlyWhileCharging(BBOnlyWhileCharging);
+        instance.setOnTop(!BBOnBottom);
+        instance.setCenterBased(BBSetCentered);
+        instance.setSingleColorTone(clockColor);
+        instance.setAlphaPct(BBOpacity);
+    }
+    
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
-
-
+        
         Class ActivityStarterClass = XposedHelpers.findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
         Class DependencyClass = XposedHelpers.findClass("com.android.systemui.Dependency", lpparam.classLoader);
         Class CollapsedStatusBarFragmentClass;
@@ -169,9 +206,7 @@ public class StatusbarMods implements IXposedModPack {
         Class QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
         Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
         Class ClockClass = XposedHelpers.findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
-        Class StatusBarIconListClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusBarIconList", lpparam.classLoader);
-        Class SlotClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusBarIconList$Slot", lpparam.classLoader);
-        Class StatusBarIconHolderClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
+        Class PhoneStatusBarViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
 
         CollapsedStatusBarFragmentClass = XposedHelpers.findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 
@@ -187,6 +222,13 @@ public class StatusbarMods implements IXposedModPack {
             }
         });
 
+        XposedBridge.hookAllConstructors(PhoneStatusBarViewClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                STB = param.thisObject;
+            }
+        });
+        
         XposedBridge.hookAllConstructors(QuickStatusBarHeaderClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -283,7 +325,18 @@ public class StatusbarMods implements IXposedModPack {
                         mClockParent = (ViewGroup) mClockView.getParent();
                         mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
                         mSystemIconArea = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mSystemIconArea");
-
+    
+                        View mStatusbar = (View) XposedHelpers.getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
+                        FrameLayout fullStatusbar = (FrameLayout) mStatusbar.getParent();
+                        
+                        if(BBarEnabled)
+                        {
+                            try {
+                                fullStatusbar.addView(BatteryBarView.getInstance(fullStatusbar.getContext()));
+                                refreshBatteryBar(BatteryBarView.getInstance());
+                            }catch(Throwable ignored){}
+                        }
+                        
                         if(networkOnSBEnabled)
                         {
                             networkTrafficSB = (networkTrafficSB == null) ? new NetworkTrafficSB(mContext) : networkTrafficSB;
@@ -346,6 +399,10 @@ public class StatusbarMods implements IXposedModPack {
 
                         clockColor = ((TextView) param.thisObject).getTextColors().getDefaultColor();
                         NetworkTrafficSB.setTint(clockColor);
+                        if(BatteryBarView.hasInstance())
+                        {
+                            refreshBatteryBar(BatteryBarView.getInstance());
+                        }
                     }
                 });
 
@@ -387,7 +444,14 @@ public class StatusbarMods implements IXposedModPack {
             XposedHelpers.callMethod(mStatusBarIconController, "refreshIconGroups");
         }catch(Throwable ignored){}
     }
-
+    
+    class lb extends LinearLayout
+    {
+        public lb(Context context) {
+            super(context);
+            setLayoutParams(new LayoutParams(200,50));
+        }
+    }
     private void placeNTSB() {
         if(networkTrafficSB == null)
         {
@@ -501,6 +565,14 @@ public class StatusbarMods implements IXposedModPack {
     public String getListenPack() {
         return listenPackage;
     }
-
+    static Context mGbContext;
+    public static synchronized Context getGbContext(Context context, Configuration config) throws Throwable {
+        if (mGbContext == null) {
+            mGbContext = context.createPackageContext(BuildConfig.APPLICATION_ID,
+                    Context.CONTEXT_IGNORE_SECURITY);
+            mGbContext = mGbContext.createDeviceProtectedStorageContext();
+        }
+        return (config == null ? mGbContext : mGbContext.createConfigurationContext(config));
+    }
 
 }

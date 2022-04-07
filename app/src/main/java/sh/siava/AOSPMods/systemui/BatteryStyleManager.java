@@ -15,6 +15,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.Utils.BatteryBarView;
 import sh.siava.AOSPMods.XPrefs;
 
 
@@ -29,7 +30,7 @@ public class BatteryStyleManager implements IXposedModPack {
     public static int BatteryStyle = 1;
     public static boolean ShowPercent = false;
     public static int scaleFactor = 100;
-    public static boolean scaleWithPrecent =false;
+    public static boolean scaleWithPercent =false;
     static boolean hideBattery = false;
 
     public void updatePrefs(String...Key)
@@ -156,7 +157,7 @@ public class BatteryStyleManager implements IXposedModPack {
         }
         else
         {
-            scaleWithPrecent = true;
+            scaleWithPercent = true;
         }
 
         XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
@@ -175,17 +176,21 @@ public class BatteryStyleManager implements IXposedModPack {
     class batteryUpdater extends XC_MethodHook {
         @Override
         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+            boolean mCharging = (boolean) XposedHelpers.getObjectField(param.thisObject, "mCharging");
+            int mLevel = (int) XposedHelpers.getObjectField(param.thisObject, "mLevel");
+
+            //Feeding battery bar
+            BatteryBarView.setStaticLevel(mLevel, mCharging);
+
             if (!circleBatteryEnabled) return;
 
             CircleBatteryDrawable mCircleDrawable = (CircleBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
             if (mCircleDrawable == null) return;
-            boolean mCharging = (boolean) XposedHelpers.getObjectField(param.thisObject, "mCharging");
-            int mLevel = (int) XposedHelpers.getObjectField(param.thisObject, "mLevel");
-
+    
             mCircleDrawable.setCharging(mCharging);
             mCircleDrawable.setBatteryLevel(mLevel);
 
-            if(scaleWithPrecent) scale(param);
+            if(scaleWithPercent) scale(param);
         }
     }
 

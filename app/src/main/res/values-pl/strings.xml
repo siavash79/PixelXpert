@@ -226,7 +226,5 @@
     <string name="qs_3_rows">Wymuś 3 rzędy</string>
     <string name="qs_4_rows">Wymuś 4 rzędy</string>
     <string name="qs_5_rows">Wymuś 5 rzędów</string>
-    <string name="QQS_brightness_title">Kontrola jasności w zwiniętych szybkich ustawieniach</string>
-    <string name="QS_brightness_disable_title">Ukryj suwak jasności w szybkich ustawieniach</string>
     
 </resources>

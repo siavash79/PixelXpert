@@ -336,7 +336,7 @@ public class StatusbarMods implements IXposedModPack {
                         mSystemIconArea = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mSystemIconArea");
     
                         View mStatusbar = (View) XposedHelpers.getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
-                        FrameLayout fullStatusbar = (FrameLayout) mStatusbar.getParent();
+                        fullStatusbar = (FrameLayout) mStatusbar.getParent();
                         
                         if(BBarEnabled)
                         {
@@ -378,10 +378,7 @@ public class StatusbarMods implements IXposedModPack {
                         }
                         mClockParent.removeView(mClockView);
                         targetArea.addView(mClockView);
-
-                        //View v = LayoutInflater.from(mClockParent.getContext()).inflate(XPrefs.modRes.getLayout(R.layout.status_bar), mClockParent);
-//                        ((LinearLayout.LayoutParams) nt.getLayoutParams()).leftMargin = 2;
-                        //</modding clock>
+                        
                     }
                 });
 

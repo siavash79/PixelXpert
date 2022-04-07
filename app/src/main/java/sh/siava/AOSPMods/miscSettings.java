@@ -16,7 +16,6 @@ public class miscSettings implements IXposedModPack {
         {
             //we are at startup
             updateSysUITuner();
-            updateWifiCell();
             updateGSansOverride();
         }
         else

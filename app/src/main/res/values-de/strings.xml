@@ -185,5 +185,13 @@
     <string name="qs_5_rows">Erzwinge 5 Reihen</string>
     <string name="QQS_brightness_title">Helligkeitsregler in eingeklappten Schnelleinstellungen</string>
     <string name="QS_brightness_disable_title">Verstecke Helligkeitsregler von den Schnelleinstellungen</string>
+    <string name="BB_enable_title">Aktiviere Akkuleiste</string>
+    <string name="BB_onlycharging_title">Nur während dem Laden</string>
+    <string name="BB_move_SB_bottom_title">An der Unterseite der Statusleiste</string>
+    <string name="BB_colorful_title">Mach es bunt</string>
+    <string name="BB_Opacity_title">Leistensichtbarkeit</string>
+    <string name="BB_center_align_title">Mittige Anordnung</string>
+    <string name="sbbb_header">Akkuleisten Optionen...</string>
+    <string name="BB_Thickness_title">Leistendicke</string>
 
 </resources>

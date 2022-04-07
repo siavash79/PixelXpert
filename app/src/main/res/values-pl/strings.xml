@@ -177,6 +177,17 @@
     <string name="icons_style_title">Styl ikon</string>
     <string name="icon_shapes_title">Kształty ikon</string>
     <string name="signal_icons_theme_title">Motyw ikon sygnału</string>
+    <string name="dt_styles_category">Ciemne style motywów</string>
+    <string name="dt_styles">Wybierz styl</string>
+    <string name="dt_black">Czarna smoła</string>
+    <string name="dt_bakedgreen">Pieczony Zielony</string>
+    <string name="dt_chocox">Czekolada X</string>
+    <string name="dt_darkaubergine">Ciemny Bakłażan</string>
+    <string name="dt_style">Ciemny niebieski</string>
+    <string name="dt_darkgray">Ciemno szary</string>
+    <string name="dt_materialocean">Material Ocean</string>
+    <string name="dt_night">Noc</string>
+    <string name="dt_solarizeddark">Solarized Dark</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

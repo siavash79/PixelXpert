@@ -35,6 +35,10 @@
     <string name="keyguard_bottom_buttons_transparent_title">Ocultar círculo alrededor de los iconos</string>
     <string name="keyguard_bottom_force_camera_title">Mostrar atajo a la Camara</string>
     <string name="keyguard_left_shortcut">Mostrar atajo en el lado izquierdo</string>
+    <string name="LSleftShortcutTitle">Acceso directo izquierda</string>
+    <string name="LSrightShortcutTitle">Acceso directo derecho</string>
+    <string name="camera_shortcut">Cámara</string>
+    <string name="assistant_shortcut">Asistente</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doble toque para bloquear pantalla</string>
@@ -78,6 +82,14 @@
     <string name="status_bar_height_small">Pequeña</string>
     <string name="status_bar_height_medium">Media</string>
     <string name="fix_status_bar_padding">Corregir espacio en el lado izquierdo</string>
+    <string name="sbbb_header">Barra de batería parámetros</string>
+    <string name="BB_enable_title">Activar barra de batería</string>
+    <string name="BB_onlycharging_title">Solo mientras de cargar</string>
+    <string name="BB_move_SB_bottom_title">En la parte inferior de barra de estado</string>
+    <string name="BB_colorful_title">Lo hacer colorido</string>
+    <string name="BB_Opacity_title">Opacidad de barra</string>
+    <string name="BB_center_align_title">Centrada</string>
+    <string name="BB_Thickness_title">Espesor de barra</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Número de compilación en el panel de ajustes rápidos</string>
@@ -99,6 +111,30 @@
     <string name="wifi_cell_title">Atajo de Internet</string>
     <string name="wifi_cell_on">Usar Wifi y Datos por separado</string>
     <string name="wifi_cell_off">Usar solo el atajo de Internet</string>
+    <string name="QQS_brightness_category">Preferencias de la barra de brillo</string>
+    <string name="QQS_brightness_title">Mostrar la barra de brillo en QQS Panel</string>
+    <string name="QS_brightness_disable_title">Ocultar la barra de brillo de Ajustes Rápidos</string>
+    <string name="bs_thick_track">Usar un pista gruesa en la barra de brillo</string>
+    <string name="quick_settings_tiles_category">Opciones de QS botónes</string>
+    <string name="qs_tile_style_title">Temas de QS botónes</string>
+    <string name="qstile_default">Defecto</string>
+    <string name="qstile_cookie">Galleta</string>
+    <string name="qstile_triangles">Triángulo</string>
+    <string name="qstile_divided">Círculo dividida</string>
+    <string name="qstile_attemptmountain">Montaña</string>
+    <string name="qstile_squircle_trim">Circulo cuadrado con ribete</string>
+    <string name="qstile_ninja">Ninja</string>
+    <string name="qstile_wavey">Onda</string>
+    <string name="qstile_squaremedo">El Squaremedo</string>
+    <string name="qstile_dual_tone_circle">Circulo de doble tono</string>
+    <string name="qstile_circleoutline">Circulo con contorno</string>
+    <string name="qstile_pokesign">Letero de Pokémon</string>
+    <string name="qstile_cosmos">Cosmos de Shishu</string>
+    <string name="qstile_neonlike">Luz de neón</string>
+    <string name="qstile_circle_trim">Circulo con ribete</string>
+    <string name="qstile_dottedcircle">Circulo punteado</string>
+    <string name="qstile_inkdrop">Gota de tinta</string>
+    <string name="qstile_circle">Circulo</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Personalizar gesto atrás</string>
@@ -133,6 +169,7 @@
     <string name="custom_themed_icons_title">Iconos tematizados personalizados</string>
     <string name="custom_themed_icons_off">Iconos personalizados inactivos</string>
     <string name="custom_themed_icons_on">Iconos personalizados activos</string>
+    <string name="so_vol_longpress_skip">Mantenga presionado botón del volumen para saltar pistas</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Forzar la fuente Google Sans en todo el sistema</string>
@@ -140,6 +177,17 @@
     <string name="icons_style_title">Estilo de los iconos</string>
     <string name="icon_shapes_title">Forma de los iconos</string>
     <string name="signal_icons_theme_title">Tema de los iconos de red</string>
+    <string name="dt_styles_category">Estilos de tema oscuro</string>
+    <string name="dt_styles">Seleccione un estilo</string>
+    <string name="dt_black">Oscuridad total</string>
+    <string name="dt_bakedgreen">Verde al horno</string>
+    <string name="dt_chocox">Choco X</string>
+    <string name="dt_darkaubergine">Aubergine Oscuro</string>
+    <string name="dt_style">Azul Oscuro</string>
+    <string name="dt_darkgray">Gris Oscuro</string>
+    <string name="dt_materialocean">Océano Material</string>
+    <string name="dt_night">Noche</string>
+    <string name="dt_solarizeddark">Solarizado</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

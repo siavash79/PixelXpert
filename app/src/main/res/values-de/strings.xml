@@ -82,7 +82,15 @@
     <string name="status_bar_height_small">Klein</string>
     <string name="status_bar_height_medium">Mittel</string>
     <string name="fix_status_bar_padding">Korrigiere den Abstand links</string>
-
+    <string name="sbbb_header">Akkuleisten Optionen...</string>
+    <string name="BB_enable_title">Aktiviere Akkuleiste</string>
+    <string name="BB_onlycharging_title">Nur während dem Laden</string>
+    <string name="BB_move_SB_bottom_title">An der Unterseite der Statusleiste</string>
+    <string name="BB_colorful_title">Mach es bunt</string>
+    <string name="BB_Opacity_title">Leistensichtbarkeit</string>
+    <string name="BB_center_align_title">Mittige Anordnung</string>
+    <string name="BB_Thickness_title">Leistendicke</string>
+	
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Versionsnummer in der Schnelleinstellungs Fußzeile</string>
     <string name="qs_footer_mod_title">Ändere die Versionsnummer in den Schnelleinstellungen</string>
@@ -103,6 +111,30 @@
     <string name="wifi_cell_title">Internet Element</string>
     <string name="wifi_cell_on">Benutze seperate Elemente für Wifi und Daten</string>
     <string name="wifi_cell_off">Benutze einzelnes Internet Element</string>
+    <string name="QQS_brightness_category">Helligkeitsregler Optionen</string>
+    <string name="QQS_brightness_title">Zeige Helligkeitsregler in eingeklappten Schnelleinstellungen</string>
+    <string name="QS_brightness_disable_title">Verstecke Helligkeitsregler in eingeklappten Schnelleinstellungen</string>
+    <string name="bs_thick_track">Benutze eine dicke Spur für den Helligkeitsregler</string>
+    <string name="quick_settings_tiles_category">Schnelleinstellungsverknüpfingsoptionen</string>
+    <string name="qs_tile_style_title">Schnelleinstellungsstile</string>
+    <string name="qstile_default">Standart</string>
+    <string name="qstile_cookie">Keks</string>
+    <string name="qstile_triangles">Dreieck</string>
+    <string name="qstile_divided">Geteilter Kreis</string>
+    <string name="qstile_attemptmountain">Ein Versuch eines Berges</string>
+    <string name="qstile_squircle_trim">Squircle mit einem Schnitt</string>
+    <string name="qstile_ninja">Ninja</string>
+    <string name="qstile_wavey">Wellig</string>
+    <string name="qstile_squaremedo">The Squaremedo</string>
+    <string name="qstile_dual_tone_circle">2-farbiger Kreis</string>
+    <string name="qstile_circleoutline">Kreisförmige Außenlinie</string>
+    <string name="qstile_pokesign">Pokesign</string>
+    <string name="qstile_cosmos">Shishu Cosmos</string>
+    <string name="qstile_neonlike">Neon Light</string>
+    <string name="qstile_circle_trim">Kreis mit einem Schnitt</string>
+    <string name="qstile_dottedcircle">gepunkteter Kreis</string>
+    <string name="qstile_inkdrop">Tinte</string>
+    <string name="qstile_circle">Kreis</string>
 	
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Anpassen der Zurück-Geste</string>
@@ -145,6 +177,17 @@
     <string name="icons_style_title">Symbolstil</string>
     <string name="icon_shapes_title">Symbolform</string>
     <string name="signal_icons_theme_title">Empfangssymbolstile</string>
+    <string name="dt_styles_category">Dunkelmodus Stile</string>
+    <string name="dt_styles">Wähle einen Stil</string>
+    <string name="dt_black">Pechschwarz</string>
+    <string name="dt_bakedgreen">Gebackenes Grün</string>
+    <string name="dt_chocox">Choco X</string>
+    <string name="dt_darkaubergine">Dunkle Aubergine</string>
+    <string name="dt_style">Dunkelblau</string>
+    <string name="dt_darkgray">Dunkelgrau</string>
+    <string name="dt_materialocean">Material Ocean</string>
+    <string name="dt_night">Nacht</string>
+    <string name="dt_solarizeddark">Solarized Dark</string>
 	
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -183,15 +226,5 @@
     <string name="qs_3_rows">Erzwinge 3 Reihen</string>
     <string name="qs_4_rows">Erzwinge 4 Reihen</string>
     <string name="qs_5_rows">Erzwinge 5 Reihen</string>
-    <string name="QQS_brightness_title">Helligkeitsregler in eingeklappten Schnelleinstellungen</string>
-    <string name="QS_brightness_disable_title">Verstecke Helligkeitsregler von den Schnelleinstellungen</string>
-    <string name="BB_enable_title">Aktiviere Akkuleiste</string>
-    <string name="BB_onlycharging_title">Nur während dem Laden</string>
-    <string name="BB_move_SB_bottom_title">An der Unterseite der Statusleiste</string>
-    <string name="BB_colorful_title">Mach es bunt</string>
-    <string name="BB_Opacity_title">Leistensichtbarkeit</string>
-    <string name="BB_center_align_title">Mittige Anordnung</string>
-    <string name="sbbb_header">Akkuleisten Optionen...</string>
-    <string name="BB_Thickness_title">Leistendicke</string>
 
 </resources>

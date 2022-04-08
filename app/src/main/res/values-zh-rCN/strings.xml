@@ -170,5 +170,13 @@
     <string name="qs_5_rows">强制 5 行</string>
     <string name="QQS_brightness_title">磁贴面板显示亮度滑块</string>
     <string name="QS_brightness_disable_title">磁贴面板隐藏亮度滑块</string>
+    <string name="BB_enable_title">启用电量条</string>
+    <string name="BB_onlycharging_title">仅在充电时</string>
+    <string name="BB_move_SB_bottom_title">状态栏底部</string>
+    <string name="BB_colorful_title">丰富的色彩</string>
+    <string name="BB_Opacity_title">不透明度</string>
+    <string name="BB_center_align_title">居中</string>
+    <string name="sbbb_header">电量条设置</string>
+    <string name="BB_Thickness_title">粗细</string>
 
 </resources>

@@ -170,6 +170,8 @@
     <string name="custom_themed_icons_off">Wyłączone niestandardowe ikony</string>
     <string name="custom_themed_icons_on">Włączone niestandardowe ikony</string>
     <string name="so_vol_longpress_skip">Przytrzymaj przycisk głośności, aby pominąć muzykę*</string>
+    <string name="notifications_header">Opcje powiadomień</string>
+    <string name="expand_notifications_icons_title">"Dodaj rozwiń/zwiń wszystkie przyciski</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Wymuś używanie czcionek Google Sans w systemie</string>

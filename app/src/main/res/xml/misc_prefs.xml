@@ -40,4 +40,13 @@
             android:title="@string/so_double_tap_wake_title"
             app:summary="@string/so_double_tap_wake_summary" />
     </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/notifications_header">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="notificationExpandallEnabled"
+            android:title="@string/expand_notifications_icons_title"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on" />
+    </PreferenceCategory>
 </PreferenceScreen>

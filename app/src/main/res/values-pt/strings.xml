@@ -188,5 +188,7 @@
     <string name="dt_materialocean">Oceano</string>
     <string name="dt_night">Noite</string>
     <string name="dt_solarizeddark">Solarizado</string>
+    <string name="notifications_header">Opções das notificações</string>
+    <string name="expand_notifications_icons_title">"Mostar botões expandir/encolher tudo</string>
 
 </resources>

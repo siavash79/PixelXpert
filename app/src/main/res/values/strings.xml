@@ -170,6 +170,8 @@
     <string name="custom_themed_icons_off">Custom icons disabled</string>
     <string name="custom_themed_icons_on">Custom icons enabled</string>
     <string name="so_vol_longpress_skip">Long press Volume to skip music*</string>
+    <string name="notifications_header">Notifications options</string>
+    <string name="expand_notifications_icons_title">"Add expand/collapse all buttons</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Force Google Sans font system wide</string>

@@ -31,7 +31,7 @@ public class NotificationExpander implements IXposedModPack {
 	
 	@Override
 	public void updatePrefs(String... Key) {
-		notificationExpandallEnabled = XPrefs.Xprefs.getBoolean("notificationExpandallEnabled", true);
+		notificationExpandallEnabled = XPrefs.Xprefs.getBoolean("notificationExpandallEnabled", false);
 		notificationExpandallHookEnabled = XPrefs.Xprefs.getBoolean("notificationExpandallHookEnabled", true);
 
 		if(Key.length > 0 && Key[0].equals("notificationExpandallEnabled"))
@@ -131,7 +131,6 @@ public class NotificationExpander implements IXposedModPack {
 		
 		Drawable expandArrows = XPrefs.modRes.getDrawable(R.drawable.exapnd_icon);
 		expandArrows.setTint(tc);
-		
 		ExpandBtn.setBackground(expandArrows);
 		
 		Drawable collapseArrows = XPrefs.modRes.getDrawable(R.drawable.collapse_icon);

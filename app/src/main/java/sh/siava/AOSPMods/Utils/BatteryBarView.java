@@ -107,7 +107,15 @@ public class BatteryBarView extends FrameLayout {
 		
 		this.addView(maskLayout);
 		this.setClipChildren(true);
+		this.setRTL(this.getLayoutDirection() == LAYOUT_DIRECTION_RTL);
 		refreshLayout();
+	}
+	
+	@Override
+	public void setLayoutDirection(int direction)
+	{
+		super.setLayoutDirection(direction);
+		this.setRTL(direction == LAYOUT_DIRECTION_RTL);
 	}
 	
 	private FrameLayout.LayoutParams barLayoutParams() {

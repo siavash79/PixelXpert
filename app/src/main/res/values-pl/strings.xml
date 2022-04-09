@@ -64,7 +64,7 @@
     <string name="sbc_custom_date_before">Niestandardowy format daty przed zegarem</string>
     <string name="sbc_date_small">Mniejszy rozmiar (70%)</string>
     <string name="sbc_custom_date_after">Niestandardowy format daty po zegarze</string>
-    <string name="sbc_header">Dostosowanie zegara na paska stanu</string>
+    <string name="sbc_header">Dostosowanie zegara na pasku stanu</string>
     <string name="sbc_may_take_one_minute">Włącza się po aktualizacji czasu lub ponownym uruchomieniu SysUI</string>
     <string name="ntsb_far_left">Skrajnie w lewo</string>
     <string name="ntsb_mid_left">Środkowa lewa</string>
@@ -88,7 +88,7 @@
     <string name="BB_move_SB_bottom_title">Na dole paska stanu</string>
     <string name="BB_colorful_title">Kolorowy</string>
     <string name="BB_Opacity_title">Krycie paska</string>
-    <string name="BB_center_align_title">Wyrównany do środka</string>
+    <string name="BB_center_align_title">Na środku</string>
     <string name="BB_Thickness_title">Grubość paska</string>
 
     <!--Quick settings panel related-->
@@ -118,23 +118,23 @@
     <string name="quick_settings_tiles_category">Opcje ikon szybkich ustawień</string>
     <string name="qs_tile_style_title">Motywy ikon szybkich ustawień</string>
     <string name="qstile_default">Domyślna</string>
-    <string name="qstile_cookie">Cookie</string>
-    <string name="qstile_triangles">Triangle</string>
-    <string name="qstile_divided">Divided Circle</string>
-    <string name="qstile_attemptmountain">An attempt of a mountain</string>
-    <string name="qstile_squircle_trim">Squircle with trim</string>
+    <string name="qstile_cookie">Ciasteczka</string>
+    <string name="qstile_triangles">Trójkąty</string>
+    <string name="qstile_divided">Podzielone koło</string>
+    <string name="qstile_attemptmountain">Gory</string>
+    <string name="qstile_squircle_trim">Okrąg z ramką</string>
     <string name="qstile_ninja">Ninja</string>
     <string name="qstile_wavey">Wavey</string>
     <string name="qstile_squaremedo">The Squaremedo</string>
-    <string name="qstile_dual_tone_circle">Dual-toned circle</string>
-    <string name="qstile_circleoutline">Circle Outline</string>
+    <string name="qstile_dual_tone_circle">Dwukolorowe koło</string>
+    <string name="qstile_circleoutline">Zarys koła</string>
     <string name="qstile_pokesign">Pokesign</string>
     <string name="qstile_cosmos">Shishu Cosmos</string>
-    <string name="qstile_neonlike">Neon Light</string>
-    <string name="qstile_circle_trim">Circle with trim</string>
-    <string name="qstile_dottedcircle">Dotted Circle</string>
-    <string name="qstile_inkdrop">Ink</string>
-    <string name="qstile_circle">Circle</string>
+    <string name="qstile_neonlike">Światło neonowe</string>
+    <string name="qstile_circle_trim">Koło z wykończeniem</string>
+    <string name="qstile_dottedcircle">Kropkowane kółko</string>
+    <string name="qstile_inkdrop">Atrament</string>
+    <string name="qstile_circle">Koło</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Skonfiguruj gest powrotu</string>
@@ -170,6 +170,8 @@
     <string name="custom_themed_icons_off">Wyłączone niestandardowe ikony</string>
     <string name="custom_themed_icons_on">Włączone niestandardowe ikony</string>
     <string name="so_vol_longpress_skip">Przytrzymaj przycisk głośności, aby pominąć muzykę*</string>
+    <string name="notifications_header">Opcje powiadomień</string>
+    <string name="expand_notifications_icons_title">"Dodaj rozwiń/zwiń wszystkie przyciski</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Wymuś używanie czcionek Google Sans w systemie</string>

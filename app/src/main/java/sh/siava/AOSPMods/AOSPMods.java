@@ -22,6 +22,7 @@ import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
 import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
 import sh.siava.AOSPMods.systemui.LTEiconChange;
 import sh.siava.AOSPMods.systemui.NavBarResizer;
+import sh.siava.AOSPMods.systemui.NotificationExpander;
 import sh.siava.AOSPMods.systemui.QQSBrightness;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSHaptic;
@@ -62,6 +63,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(AOSPSettingsLauncher.class);
         modPacks.add(miscSettings.class);
         modPacks.add(QQSBrightness.class);
+        modPacks.add(NotificationExpander.class);
 
     }
     @Override

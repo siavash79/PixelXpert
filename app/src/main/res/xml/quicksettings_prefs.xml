@@ -96,7 +96,8 @@
             <SeekBarPreference
                 android:defaultValue="25"
                 android:key="QSPulldownPercent"
-                app:title="@string/qs_pulldown_size" />
+                app:title="@string/qs_pulldown_size"
+                app:updatesContinuously="true"/>
             <ListPreference
                 android:defaultValue="1"
                 android:entries="@array/qs_pulldown_side_names"

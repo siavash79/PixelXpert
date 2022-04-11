@@ -170,6 +170,8 @@
     <string name="custom_themed_icons_off">Benutzerdefinierte Symbole deaktiviert</string>
     <string name="custom_themed_icons_on">Benutzerdefinierte Symbole aktiviert</string>
     <string name="so_vol_longpress_skip">Lautstärke lange drücken um Titel zu überspringen*</string>
+    <string name="notifications_header">Benachrichtigungseinstellungen</string>
+    <string name="expand_notifications_icons_title">Alle ausklappen/einklappen aktivieren</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Erzwinge Google Sans Schriftart systemweit</string>

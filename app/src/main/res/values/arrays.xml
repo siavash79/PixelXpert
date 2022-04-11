@@ -471,16 +471,6 @@
         <item>@string/qstile_triangles</item>
         <item>@string/qstile_circle_trim</item>
         <item>@string/qstile_circle</item>
-        <item>LiArch</item>
-        <item>LiArch2</item>
-        <item>LiArch3</item>
-        <item>LiArch4</item>
-        <item>LiArch5</item>
-        <item>LiArch6</item>
-        <item>LiArch7</item>
-        <item>LiArch8</item>
-        <item>LiArch9</item>
-        <item>LiArch10</item>
     </string-array>
 
     <string-array name="QSTilesThemesOverlayEx">
@@ -504,16 +494,6 @@
         <item>com.android.systemui.qstile.triangles.overlay</item>
         <item>com.android.systemui.qstile.circletrim.overlay</item>
         <item>com.android.systemui.qstile.circle.overlay</item>
-        <item>com.android.systemui.qstile.liarch.overlay</item>
-        <item>com.android.systemui.qstile.liarch2.overlay</item>
-        <item>com.android.systemui.qstile.liarch3.overlay</item>
-        <item>com.android.systemui.qstile.liarch4.overlay</item>
-        <item>com.android.systemui.qstile.liarch5.overlay</item>
-        <item>com.android.systemui.qstile.liarch6.overlay</item>
-        <item>com.android.systemui.qstile.liarch7.overlay</item>
-        <item>com.android.systemui.qstile.liarch8.overlay</item>
-        <item>com.android.systemui.qstile.liarch9.overlay</item>
-        <item>com.android.systemui.qstile.liarch10.overlay</item>
     </string-array>
 
     <string-array name="DTStylesOverlayEx_names">

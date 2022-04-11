@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="module_scope">
-        <item>com.android.systemui</item>
+        <item>com.android.systemui</item> <!-- systemUI -->
+        <item>com.google.android.apps.nexuslauncher</item> <!-- Pixel Launcher - Taskbar -->
+<!--    <item>android</item>   it's there, but not recommended to user: although very unlikely, but can cause bootloops -->
     </string-array>
 </resources>

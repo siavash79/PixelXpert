@@ -190,5 +190,8 @@
     <string name="dt_solarizeddark">Solarizado</string>
     <string name="notifications_header">Opções das notificações</string>
     <string name="expand_notifications_icons_title">"Mostar botões expandir/encolher tudo</string>
+    <string name="taskbar_status_title">Barra de tarefas Android</string>
+    <string name="taskbar_force_enable_title">Forçar ativar</string>
+    <string name="taskbar_force_disable_title">Forçar desativar</string>
 
 </resources>

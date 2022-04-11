@@ -31,6 +31,7 @@ import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.ScreenshotController;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
+import sh.siava.AOSPMods.launcher.TaskbarActivator;
 
 public class AOSPMods implements IXposedHookLoadPackage{
 
@@ -64,6 +65,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(miscSettings.class);
         modPacks.add(QQSBrightness.class);
         modPacks.add(NotificationExpander.class);
+        modPacks.add(TaskbarActivator.class);
 
     }
     @Override

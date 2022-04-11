@@ -158,6 +158,9 @@
     <string name="colorpill">Pasek nawigacyji w kolorze</string>
     <string name="reducekeyboard_title">Obszar gestów klawiatury</string>
     <string name="reducekeyboard">Zmniejsz zakres gestów klawiatury</string>
+    <string name="taskbar_status_title">Pasek zadań Androida</string>
+    <string name="taskbar_force_enable_title">Wymuś włączenie </string>
+    <string name="taskbar_force_disable_title">Wymuś wyłączenie</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Wyłącz dzwięk zrzutu ekranu</string>

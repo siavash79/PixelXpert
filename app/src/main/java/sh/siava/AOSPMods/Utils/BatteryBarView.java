@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import de.robv.android.xposed.XposedBridge;
-
 public class BatteryBarView extends FrameLayout {
 	private GradientDrawable mDrawable = new GradientDrawable();
 	FrameLayout maskLayout;
@@ -208,7 +206,6 @@ public class BatteryBarView extends FrameLayout {
 		if(instance != null)
 		{
 			instance.setBatteryLevel(level, charging);
-			XposedBridge.log("received update");
 		}
 	}
 	

@@ -38,7 +38,6 @@ public class AOSPSettingsLauncher implements IXposedModPack {
                     Intent launchInent = context.getPackageManager().getLaunchIntentForPackage("sh.siava.AOSPMods");
                     XposedHelpers.callMethod(activityStarter, "startActivity", launchInent, true, null);
                 }catch(Exception ignored){}
-                XposedBridge.log("on new method");
                 return true;
             }
         };

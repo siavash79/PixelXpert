@@ -158,6 +158,9 @@
     <string name="colorpill">Accent colored gestures pill</string>
     <string name="reducekeyboard_title">Gestures keyboard space</string>
     <string name="reducekeyboard">Reduce space on keyboard</string>
+    <string name="taskbar_status_title">Android Taskbar</string>
+    <string name="taskbar_force_enable_title">Force Enabled</string>
+    <string name="taskbar_force_disable_title">Force Disabled</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>

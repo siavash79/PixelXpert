@@ -104,6 +104,18 @@
         <item>@string/ntsb_mid_right</item>
     </string-array>
 
+    <string-array name="taskbar_option_names">
+        <item>@string/overlay_none_title</item>
+        <item>@string/taskbar_force_enable_title</item>
+        <item>@string/taskbar_force_disable_title</item>
+    </string-array>
+
+    <string-array name="taskbar_option_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 
     <string-array name="QSRowCountOverlayEx_names"> <!-- same is key, added _names -->
         <item>@string/overlay_none_title</item> <!-- item None MUST be present in the list if user can disable them fully -->

@@ -11,6 +11,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.Utils.Overlays;
 import sh.siava.AOSPMods.android.screenOffKeys;
+import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.systemui.BackGestureManager;
 import sh.siava.AOSPMods.systemui.BackToKill;
@@ -31,7 +32,6 @@ import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.ScreenshotController;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
-import sh.siava.AOSPMods.launcher.TaskbarActivator;
 
 public class AOSPMods implements IXposedHookLoadPackage{
 
@@ -72,24 +72,14 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
 //        Helpers.dumpClass("android.app.Instrumentation", lpparam);
-
-        if(mContext == null) {
-            if (lpparam.packageName.equals("com.android.systemui") || lpparam.packageName.equals("android")) {
-                XposedHelpers.findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mContext == null) setContext((Context) param.args[2]);
-                    }
-                });
+    
+        XposedHelpers.findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                if (mContext == null) setContext((Context) param.args[2]);
             }
-        }
-
-        if (lpparam.packageName.equals("com.android.systemui")) {
-            try {
-//                XPrefs.Xprefs.edit().putBoolean("SystemUIConncted", true).commit();
-            }catch(Throwable t){}
-        }
-
+        });
+ 
         for (Class mod : modPacks)
         {
             try {
@@ -113,7 +103,3 @@ public class AOSPMods implements IXposedHookLoadPackage{
         XPrefs.loadPrefs(mContext);
     }
 }
-
-
-
-

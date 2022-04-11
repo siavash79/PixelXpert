@@ -14,4 +14,12 @@
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
         android:title="@string/hide_navbar_title" />
+    <ListPreference
+        android:defaultValue="0"
+        android:entries="@array/taskbar_option_names"
+        android:entryValues="@array/taskbar_option_value"
+        android:summary="%s"
+        android:key="taskBarMode"
+        android:title="@string/taskbar_status_title" />
+
 </PreferenceScreen>

@@ -1,7 +1,5 @@
 package sh.siava.AOSPMods.launcher;
 
-import com.topjohnwu.superuser.Shell;
-
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -26,7 +24,7 @@ public class TaskbarActivator implements IXposedModPack {
 				int newtaskbarMode = Integer.parseInt(taskbarModeStr);
 				if (newtaskbarMode != taskbarMode) {
 					taskbarMode = newtaskbarMode;
-					Shell.su("killall com.google.android.apps.nexuslauncher").submit();
+					android.os.Process.killProcess(android.os.Process.myPid());
 				}
 			} catch (Exception ignored) {
 			}

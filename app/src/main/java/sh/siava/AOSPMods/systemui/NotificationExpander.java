@@ -102,7 +102,6 @@ public class NotificationExpander implements IXposedModPack {
 		XposedBridge.hookAllConstructors(NotificationEntryManagerClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				XposedBridge.log("initiated");
 				NotificationEntryManager = param.thisObject;
 			}
 		});

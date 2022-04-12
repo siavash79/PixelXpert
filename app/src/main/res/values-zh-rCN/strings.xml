@@ -31,6 +31,10 @@
     <string name="keyguard_bottom_buttons_transparent_title">隐藏图标周围圆圈</string>
     <string name="keyguard_bottom_force_camera_title">显示相机快捷方式</string>
     <string name="keyguard_left_shortcut">锁屏显示左划快捷方式</string>
+    <string name="LSleftShortcutTitle">左侧</string>
+    <string name="LSrightShortcutTitle">右侧</string>
+    <string name="camera_shortcut">相机</string>
+    <string name="assistant_shortcut">语音助手</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">双击息屏</string>
@@ -72,12 +76,20 @@
     <string name="status_bar_height_small">小</string>
     <string name="status_bar_height_medium">中</string>
     <string name="fix_status_bar_padding">纠正时钟左侧空白</string>
+    <string name="sbbb_header">电池条设置</string>
+    <string name="BB_enable_title">启用电池条</string>
+    <string name="BB_onlycharging_title">仅充电时</string>
+    <string name="BB_move_SB_bottom_title">状态栏下方</string>
+    <string name="BB_colorful_title">丰富的色彩</string>
+    <string name="BB_Opacity_title">不透明度</string>
+    <string name="BB_center_align_title">剧中对齐</string>
+    <string name="BB_Thickness_title">粗细度</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">下拉磁贴面板底部版本号</string>
     <string name="qs_footer_mod_title">修改版本号文本</string>
     <string name="qs_footer_text_summary">留空以移除</string>
-    <string name="qs_footer_text_desc">重开屏幕后生效</string>
+    <string name="qs_footer_text_desc">关闭并打开屏幕后生效</string>
     <string name="light_qs_title">浅色主题下使用浅色磁贴面板(可能会出现问题)</string>
     <string name="qs_pulldown_size">快速下拉磁贴面板</string>
     <string name="qs_pulldown_switch_title">快速下拉磁贴面板</string>
@@ -92,6 +104,30 @@
     <string name="wifi_cell_title">网络磁贴</string>
     <string name="wifi_cell_on">分离 WIFI 和数据磁贴</string>
     <string name="wifi_cell_off">合并 WIFI 和数据磁贴</string>
+    <string name="QQS_brightness_category">亮度滑块选项</string>
+    <string name="QQS_brightness_title">在下拉磁贴面板显示</string>
+    <string name="QS_brightness_disable_title">在磁贴面板中隐藏</string>
+    <string name="bs_thick_track">使用较粗的亮度滑块</string>
+    <string name="quick_settings_tiles_category">磁贴选项</string>
+    <string name="qs_tile_style_title">磁贴主题</string>
+    <string name="qstile_default">默认</string>
+    <string name="qstile_cookie">曲奇</string>
+    <string name="qstile_triangles">三角形</string>
+    <string name="qstile_divided">半圆形</string>
+    <string name="qstile_attemptmountain">山脉形</string>
+    <string name="qstile_squircle_trim">带边框的圆角方形</string>
+    <string name="qstile_ninja">Ninja</string>
+    <string name="qstile_wavey">波纹</string>
+    <string name="qstile_squaremedo">The Squaremedo</string>
+    <string name="qstile_dual_tone_circle">双色圆形</string>
+    <string name="qstile_circleoutline">圆形轮廓</string>
+    <string name="qstile_pokesign">半圆口袋</string>
+    <string name="qstile_cosmos">宇宙星光</string>
+    <string name="qstile_neonlike">霓虹灯</string>
+    <string name="qstile_circle_trim">带边框的圆形</string>
+    <string name="qstile_dottedcircle">点状圆形</string>
+    <string name="qstile_inkdrop">墨水边框</string>
+    <string name="qstile_circle">圆形</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">配置返回手势</string>
@@ -114,17 +150,23 @@
     <string name="colorpill">小白条强调色</string>
     <string name="reducekeyboard_title">键盘空间</string>
     <string name="reducekeyboard">减小键盘底部空间</string>
+    <string name="taskbar_status_title">任务栏</string>
+    <string name="taskbar_force_enable_title">强制开启</string>
+    <string name="taskbar_force_disable_title">强制关闭</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">关闭截图提示音</string>
-    <string name="so_power_longpress_torch_title">Long press Power to torch*</string>
-    <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
+    <string name="so_power_longpress_torch_title">长按电源开启手电筒</string>
+    <string name="framework_needed_caution_summary">需要在 LSPosed 作用域中勾选系统框架以生效，谨慎使用！</string>
     <string name="so_double_tap_wake_title">双击亮屏</string>
     <string name="so_double_tap_wake_summary">将禁用单击唤醒</string>
     <string name="doze_header">锁屏时</string>
     <string name="custom_themed_icons_title">自定义带主题的图标</string>
-    <string name="custom_themed_icons_off">禁用自定义图标</string>
-    <string name="custom_themed_icons_on">启用自定义图标</string>
+    <string name="custom_themed_icons_off">自定义图标已禁用</string>
+    <string name="custom_themed_icons_on">自定义图标已启用</string>
+    <string name="so_vol_longpress_skip">长按音量键跳过歌曲</string>
+    <string name="notifications_header">通知选项</string>
+    <string name="expand_notifications_icons_title">添加展开 / 折叠所有按钮</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">系统范围内强制使用 Google Sans</string>
@@ -132,6 +174,17 @@
     <string name="icons_style_title">图标样式</string>
     <string name="icon_shapes_title">图标形状</string>
     <string name="signal_icons_theme_title">信号图标主题</string>
+    <string name="dt_styles_category">深色主题样式</string>
+    <string name="dt_styles">选择样式</string>
+    <string name="dt_black">纯黑</string>
+    <string name="dt_bakedgreen">黄绿色</string>
+    <string name="dt_chocox">巧克力色</string>
+    <string name="dt_darkaubergine">深紫色</string>
+    <string name="dt_style">深蓝色</string>
+    <string name="dt_darkgray">深灰色</string>
+    <string name="dt_materialocean">海蓝色</string>
+    <string name="dt_night">深色</string>
+    <string name="dt_solarizeddark">焦黑色</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -168,15 +221,5 @@
     <string name="qs_3_rows">强制 3 行</string>
     <string name="qs_4_rows">强制 4 行</string>
     <string name="qs_5_rows">强制 5 行</string>
-    <string name="QQS_brightness_title">磁贴面板显示亮度滑块</string>
-    <string name="QS_brightness_disable_title">磁贴面板隐藏亮度滑块</string>
-    <string name="BB_enable_title">启用电量条</string>
-    <string name="BB_onlycharging_title">仅在充电时</string>
-    <string name="BB_move_SB_bottom_title">状态栏底部</string>
-    <string name="BB_colorful_title">丰富的色彩</string>
-    <string name="BB_Opacity_title">不透明度</string>
-    <string name="BB_center_align_title">居中</string>
-    <string name="sbbb_header">电量条设置</string>
-    <string name="BB_Thickness_title">粗细</string>
 
 </resources>

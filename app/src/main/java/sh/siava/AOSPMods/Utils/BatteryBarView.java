@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import de.robv.android.xposed.XposedBridge;
-
 public class BatteryBarView extends FrameLayout {
 	private GradientDrawable mDrawable = new GradientDrawable();
 	FrameLayout maskLayout;
@@ -180,7 +178,6 @@ public class BatteryBarView extends FrameLayout {
 			for (int i = 0; i < batteryLevels.length; i++) {
 				if (batteryPCT <= batteryLevels[i]) {
 					singleColor = batteryColors[i];
-					XposedBridge.log("found level" + i);
 					break;
 				}
 			}

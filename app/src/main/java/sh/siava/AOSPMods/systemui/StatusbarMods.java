@@ -78,6 +78,7 @@ public class StatusbarMods implements IXposedModPack {
     private static boolean BBSetCentered;
     private static int BBOpacity = 100;
     private static int BBarHeight = 10;
+    private static Object KIC = null;
     
     Object STB;
 
@@ -208,6 +209,7 @@ public class StatusbarMods implements IXposedModPack {
         Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
         Class ClockClass = XposedHelpers.findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
         Class PhoneStatusBarViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
+        Class KeyGuardIndicationClass = XposedHelpers.findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
         Class BatteryTrackerClass = XposedHelpers.findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
         
         CollapsedStatusBarFragmentClass = XposedHelpers.findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
@@ -216,11 +218,18 @@ public class StatusbarMods implements IXposedModPack {
         {
             CollapsedStatusBarFragmentClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.CollapsedStatusBarFragment", lpparam.classLoader);
         }
+        
+        XposedBridge.hookAllConstructors(KeyGuardIndicationClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                KIC = param.thisObject;
+            }
+        });
 
         XposedBridge.hookAllMethods(BatteryTrackerClass, "onRefreshBatteryInfo", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                int mChargingSpeed = XposedHelpers.getIntField(param.thisObject, "mChargingSpeed");
+                int mChargingSpeed = XposedHelpers.getIntField(KIC, "mChargingSpeed");
                 if(mChargingSpeed == CHARGING_FAST)
                 {
                     BatteryBarView.setIsFastCharginging(true);

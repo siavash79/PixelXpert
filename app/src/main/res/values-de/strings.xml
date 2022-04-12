@@ -158,7 +158,10 @@
     <string name="colorpill">Gestennavigationsleisten in Akzentfarbe</string>
     <string name="reducekeyboard_title">Tastatur Gestenbereich</string>
     <string name="reducekeyboard">Reduziere den Gestenbereich der Tastatur</string>
-
+    <string name="taskbar_status_title">Android Taskleiste</string>
+    <string name="taskbar_force_enable_title">erzwinge Ein</string>
+    <string name="taskbar_force_disable_title">erzwinge Aus</string>
+	
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Deaktiviere Screenshot Ton</string>
     <string name="so_power_longpress_torch_title">Einschalter lange drücken für Taschenlampe*</string>

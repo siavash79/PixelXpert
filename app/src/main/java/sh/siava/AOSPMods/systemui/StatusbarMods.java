@@ -33,6 +33,8 @@ import sh.siava.AOSPMods.XPrefs;
 
 public class StatusbarMods implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
+    
+    public static final int CHARGING_FAST = 2;
 
     //Clock Settings
     private static final int POSITION_LEFT = 0;
@@ -61,8 +63,6 @@ public class StatusbarMods implements IXposedModPack {
     public static int networkTrafficTreshold = 10;
     public NetworkTrafficSB networkTrafficSB = null;
     private static Context mContext;
-    private static Object mQuickStatusBarHeader = null;
-    private static Object mQuickStatusBarHeaderController = null;
     private static Object mCollapsedStatusBarFragment = null;
     private static View mClockView = null;
     private static ViewGroup mClockParent = null;
@@ -190,7 +190,7 @@ public class StatusbarMods implements IXposedModPack {
         instance.setColorful(BBarColorful);
         instance.setOnlyWhileCharging(BBOnlyWhileCharging);
         instance.setOnTop(!BBOnBottom);
-        instance.setCenterBased(BBSetCentered);
+        instance.refreshColors(BBSetCentered);
         instance.setSingleColorTone(clockColor);
         instance.setAlphaPct(BBOpacity);
         instance.setBarHeight(Math.round(BBarHeight/10)+5);
@@ -208,7 +208,8 @@ public class StatusbarMods implements IXposedModPack {
         Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
         Class ClockClass = XposedHelpers.findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
         Class PhoneStatusBarViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
-
+        Class BatteryTrackerClass = XposedHelpers.findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
+        
         CollapsedStatusBarFragmentClass = XposedHelpers.findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 
         if(CollapsedStatusBarFragmentClass == null)
@@ -216,6 +217,22 @@ public class StatusbarMods implements IXposedModPack {
             CollapsedStatusBarFragmentClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.CollapsedStatusBarFragment", lpparam.classLoader);
         }
 
+        XposedBridge.hookAllMethods(BatteryTrackerClass, "onRefreshBatteryInfo", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                int mChargingSpeed = XposedHelpers.getIntField(param.thisObject, "mChargingSpeed");
+                if(mChargingSpeed == CHARGING_FAST)
+                {
+                    BatteryBarView.setIsFastCharginging(true);
+                    BatteryStyleManager.isFastCharging = true;
+                }
+                else
+                {
+                    BatteryStyleManager.isFastCharging = false;
+                }
+            }
+        });
+        
         XposedBridge.hookAllConstructors(CollapsedStatusBarFragmentClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -233,7 +250,6 @@ public class StatusbarMods implements IXposedModPack {
         XposedBridge.hookAllConstructors(QuickStatusBarHeaderClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                mQuickStatusBarHeader = param.thisObject;
                 mActivityStarter = XposedHelpers.callStaticMethod(DependencyClass, "get", ActivityStarterClass);
             }
         });
@@ -241,7 +257,6 @@ public class StatusbarMods implements IXposedModPack {
         XposedBridge.hookAllConstructors(QuickStatusBarHeaderControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                mQuickStatusBarHeaderController = param.thisObject;
                 XposedHelpers.setAdditionalInstanceField(
                         XposedHelpers.getObjectField(param.thisObject, "mClockView"),
                         "mClockParent",

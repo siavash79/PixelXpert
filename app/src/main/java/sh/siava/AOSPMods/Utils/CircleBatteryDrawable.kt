@@ -21,13 +21,14 @@ import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import androidx.annotation.ColorInt
-import android.util.TypedValue
-import sh.siava.AOSPMods.R
-import sh.siava.AOSPMods.XPrefs
 import kotlin.math.max
 import kotlin.math.min
 
-class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Drawable() {
+class CircleBatteryDrawable(
+    private val context: Context,
+    frameColor: Int
+) : Drawable() {
+    private var fastChargeColor: Int = Color.WHITE
     private val criticalLevel: Int
     private val warningString: String
     private val framePaint: Paint
@@ -37,15 +38,18 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
     private val boltPaint: Paint
     private val plusPaint: Paint
     private val powerSavePaint: Paint
-    private val colors: IntArray
     private val boltPoints: FloatArray
     private val boltPath = Path()
     private val padding = Rect()
     private val frame = RectF()
     private val boltFrame = RectF()
     private val pathEffect = DashPathEffect(floatArrayOf(3f,2f),0f)
+    private val batteryLevels : FloatArray = FloatArray(0)
+    private val batteryColors : IntArray = IntArray(0)
+    private val indicateCharging : Boolean = false
+    private val indicateFastCharging : Boolean = false
 
-    private var chargeColor: Int
+    private var chargeColor: Int = Color.WHITE
     private var iconTint = Color.WHITE
     private var intrinsicWidth: Int
     private var intrinsicHeight: Int
@@ -63,9 +67,17 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
 
     override fun getIntrinsicWidth() = intrinsicWidth
 
+    var fastCharing = false
+        set(value) {
+            field = value
+            if(value) charging = true
+            postInvalidate()
+        }
+
     var charging = false
         set(value) {
             field = value
+            if(!value) fastCharing = false
             postInvalidate()
         }
 
@@ -126,28 +138,21 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
     }
 
     private fun getColorForLevel(percent: Int): Int {
-        var thresh: Int
-        var color = 0
-        var i = 0
-        while (i < colors.size) {
-            thresh = colors[i]
-            color = colors[i + 1]
-            if (percent <= thresh) {
-                // Respect tinting for "normal" level
-                return if (i == colors.size - 2) {
-                    iconTint
-                } else {
-                    color
-                }
+        for(i in 0 until batteryLevels.size)
+        {
+            if(percent < batteryLevels[i])
+            {
+                return batteryColors[i]
             }
-            i += 2
         }
-        return color
+        return iconTint
     }
 
     private fun batteryColorForLevel(level: Int) =
-            if (charging || powerSaveEnabled)
-                chargeColor
+            if (fastCharing && indicateFastCharging)
+                    fastChargeColor
+            else if (charging && indicateCharging)
+                    chargeColor
             else
                 getColorForLevel(level)
 
@@ -157,11 +162,8 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
         iconTint = fillColor
         framePaint.color = bgColor
 //<Sia: Fixed visibility issues
-        framePaint.alpha = 80;
+        framePaint.alpha = 80
 //>
-        boltPaint.color = fillColor
-        chargeColor = fillColor
-
         invalidateSelf()
     }
 
@@ -188,6 +190,7 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
         ] = circleSize - strokeWidth / 2.0f
         // set the battery charging color
         batteryPaint.color = batteryColorForLevel(batteryLevel)
+        boltPaint.color = batteryPaint.color
 
         if (charging) { // define the bolt shape
             val bl = frame.left + frame.width() / 3.0f
@@ -247,7 +250,12 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
     }
 
     // Some stuff required by Drawable.
-    override fun setAlpha(alpha: Int) {}
+    override fun setAlpha(alpha: Int) {
+        val alpha2 = Math.round(alpha*2.55f)
+        batteryPaint.alpha = alpha2
+        boltPaint.alpha = alpha2
+        framePaint.alpha = if (alpha2 > 20) (alpha2 - 20) else alpha2
+    }
 
     override fun setColorFilter(colorFilter: ColorFilter?) {
         framePaint.colorFilter = colorFilter
@@ -289,23 +297,11 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
     init {
         val res = context.resources
 
-        val color_levels = XPrefs.modRes.obtainTypedArray(R.array.batterymeter_color_levels)
-        val color_values = XPrefs.modRes.obtainTypedArray(R.array.batterymeter_color_values)
-        colors = IntArray(2 * color_levels.length())
-        for (i in 0 until color_levels.length()) {
-            colors[2 * i] = color_levels.getInt(i, 0)
-            if (color_values.getType(i) == TypedValue.TYPE_ATTRIBUTE) {
-                colors[2 * i + 1] = getColorAttrDefaultColor(
-                        context,
-                        res.getIdentifier("singleToneColor", "attr", context.opPackageName)//R.attr.singleToneColor // color_values.getThemeAttributeId(i, 0)
-                )
+//        this.batteryLevels = batteryLevels
+//        this.batteryColors = batteryColors
+//        this.indicateCharging = indicateCharging
+//        this.indicateFastCharging = indicateFastCharging
 
-            } else {
-                colors[2 * i + 1] = color_values.getColor(i, 0)
-            }
-        }
-        color_levels.recycle()
-        color_values.recycle()
         warningString = "!"//res.getString(R.string.battery_meter_very_low_overlay_symbol)
         criticalLevel = 5 /*res.getInteger(
                 com.android.internal.R.integer.config_criticalBatteryWarningLevel
@@ -321,15 +317,12 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
         warningTextPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         warningTextPaint.typeface = Typeface.create("sans-serif", Typeface.BOLD)
         warningTextPaint.textAlign = Paint.Align.CENTER
-        if (colors.size > 1) {
-            warningTextPaint.color = colors[1]
-        }
-        chargeColor = res.getIdentifier("meter_consumed_color", "color", context.packageName) //getColorStateListDefaultColor(context, res.getIdentifier("fillColor", "attr", context.opPackageName)) //R.attr.fillColor)//R.color.meter_consumed_color)
+
+
+//        this.chargeColor = chargeColor
+//        this.fastChargeColor = fastChargeColor
         boltPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        boltPaint.color = getColorStateListDefaultColor(
-                context,
-                res.getIdentifier("batterymeter_bolt_color", "color", context.packageName)//R.color.batterymeter_bolt_color
-        )
+        boltPaint.color = chargeColor
         boltPoints =
                 loadPoints(res, res.getIdentifier("batterymeter_bolt_points", "array", context.packageName))// R.array.batterymeter_bolt_points)
         plusPaint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -344,14 +337,6 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
         intrinsicHeight = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", context.packageName))//R.dimen.battery_height)
 
         dualTone = false//res.getBoolean(com.android.internal.R.bool.config_batterymeterDualTone)
-    }
-
-    @ColorInt
-    fun getColorAttrDefaultColor(context: Context, attr: Int): Int {
-        val ta = context.obtainStyledAttributes(intArrayOf(attr))
-        @ColorInt val colorAccent = ta.getColor(0, 0)
-        ta.recycle()
-        return colorAccent
     }
 
     @ColorInt

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import de.robv.android.xposed.XposedBridge;
+
 public class BatteryBarView extends FrameLayout {
 	private GradientDrawable mDrawable = new GradientDrawable();
 	FrameLayout maskLayout;
@@ -25,10 +27,26 @@ public class BatteryBarView extends FrameLayout {
 	private static int initialLevel = 0;
 	private static boolean initialCharging = false;
 	private static BatteryBarView instance = null;
-	private boolean isCharging = false;
+	private static boolean isCharging = false;
+	private static boolean isFastCharging = false;
 	private boolean onlyWhileCharging = false;
 	private boolean isEnabled = true;
 	private boolean isHidden = false;
+	private static float[] batteryLevels = new float[]{20f,40f};
+	private static int[] batteryColors = new int[]{Color.RED, Color.YELLOW};;
+	private static int chargingColor = Color.WHITE;
+	private static int fastChargingColor = Color.WHITE;
+	private static boolean indicateCharging = false;
+	private static boolean indicateFastCharging = false;
+	
+	public static void setStaticColor(float[] batteryLevels, int[] batteryColors, boolean indicateCharging, int charingColor, boolean indicateFastCharging, int fastChargingColor) {
+		BatteryBarView.batteryLevels = batteryLevels;
+		BatteryBarView.batteryColors = batteryColors;
+		BatteryBarView.chargingColor = charingColor;
+		BatteryBarView.fastChargingColor = fastChargingColor;
+		BatteryBarView.indicateCharging = indicateCharging;
+		BatteryBarView.indicateFastCharging = indicateFastCharging;
+	}
 	
 	public void setOnTop(boolean onTop)
 	{
@@ -66,6 +84,7 @@ public class BatteryBarView extends FrameLayout {
 		if(barView.getVisibility() == GONE) return;
 		maskLayout.setLayoutParams(maskLayoutParams());
 		barView.setLayoutParams(barLayoutParams());
+		refreshColors(isCenterBased);
 	}
 	
 	private FrameLayout.LayoutParams maskLayoutParams() {
@@ -134,20 +153,39 @@ public class BatteryBarView extends FrameLayout {
 	
 	public void setColorful(boolean colorful) {
 		this.colorful = colorful;
-		setCenterBased(isCenterBased);
+		refreshColors(isCenterBased);
 	}
 	
 	public void setSingleColorTone(int colorTone)
 	{
 		this.singleColorTone = colorTone;
-		setCenterBased(isCenterBased);
+		refreshColors(isCenterBased);
 	}
 	
-	public void setCenterBased(boolean centerBased)
+	public void refreshColors(boolean centerBased)
 	{
 		isCenterBased = centerBased;
 		
-		if(colorful)
+		colors = null;
+		int singleColor = singleColorTone;          //default color: statusbar icons
+		if(isFastCharging && indicateFastCharging) //fast charing color
+		{
+			singleColor = fastChargingColor;
+		}
+		else if(isCharging && indicateCharging) //normal chargin color
+		{
+			singleColor = chargingColor;
+		}
+		else if(!colorful) {                    //not charging color
+			for (int i = 0; i < batteryLevels.length; i++) {
+				if (batteryPCT <= batteryLevels[i]) {
+					singleColor = batteryColors[i];
+					XposedBridge.log("found level" + i);
+					break;
+				}
+			}
+		}
+		else                                    //it's colorful
 		{
 			if(centerBased)
 			{
@@ -158,13 +196,14 @@ public class BatteryBarView extends FrameLayout {
 				colors = new int[] {Color.RED,Color.YELLOW,Color.GREEN,Color.GREEN};
 			}
 		}
-		else
+		if(colors == null)                  //don't show colorful: either charging or colorful is off
 		{
-			colors = new int[] {singleColorTone, singleColorTone};
+			colors = new int[] {singleColor, singleColor};
 		}
+		
 		mDrawable.setColors(colors);
 		
-		refreshLayout();
+//		refreshLayout();
 	}
 	
 	public void setAlphaPct(int alphaPct) {
@@ -228,5 +267,13 @@ public class BatteryBarView extends FrameLayout {
 	public static boolean hasInstance()
 	{
 		return (instance != null);
+	}
+	
+	public static void setIsFastCharginging(boolean isFast)
+	{
+		if(isFast != isFastCharging) {
+			isFastCharging = isFast;
+			instance.refreshLayout();
+		}
 	}
 }

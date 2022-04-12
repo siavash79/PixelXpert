@@ -1,14 +1,5 @@
 <resources>
 
-    <array name="batterymeter_color_levels">
-        <item>0</item>
-        <item>100</item>
-    </array>
-    <array name="batterymeter_color_values">
-        <item>?android:attr/colorError</item>
-        <item>@android:color/white</item>
-    </array>
-
     <array name="lockScreenShortcut_names">
         <item>@string/overlay_none_title</item>
         <item>@string/camera_shortcut</item>

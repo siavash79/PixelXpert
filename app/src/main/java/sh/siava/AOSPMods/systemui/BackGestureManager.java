@@ -60,8 +60,7 @@ public class BackGestureManager implements IXposedModPack {
                             }
                             mEdgeHeight = Math.round(mDisplaySize.y * backGestureHeightFractionRight);
                         }
-  //                      XposedBridge.log("SIAPOSED: height:" + mEdgeHeight);
-
+                        
                         if (mEdgeHeight != 0) {
                             if (y < (mDisplaySize.y - mBottomGestureHeight - mEdgeHeight)) {
 //                                XposedBridge.log("SIAPOSED back i didn't approve" + mEdgeHeight);
@@ -77,5 +76,4 @@ public class BackGestureManager implements IXposedModPack {
     public String getListenPack() {
         return listenPackage;
     }
-
 }

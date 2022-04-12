@@ -26,17 +26,14 @@ public class BackToKill implements IXposedModPack {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 
-        Class NavBarClass = XposedHelpers.findClass("com.android.systemui.navigationbar.NavigationBar", lpparam.classLoader);
+        Class<?> NavBarClass = XposedHelpers.findClass("com.android.systemui.navigationbar.NavigationBar", lpparam.classLoader);
 
-        View.OnLongClickListener listener = new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if(!isEnabled) return true;
+        View.OnLongClickListener listener = v -> {
+            if(!isEnabled) return true;
 
-                Shell.su("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
+            Shell.su("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
 
-                return true;
-            }
+            return true;
         };
 
         XposedHelpers.findAndHookMethod(NavBarClass,

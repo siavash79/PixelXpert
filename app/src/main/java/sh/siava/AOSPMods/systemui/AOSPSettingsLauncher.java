@@ -28,18 +28,15 @@ public class AOSPSettingsLauncher implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Class FooterActionsControllerClass = XposedHelpers.findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
+        Class<?> FooterActionsControllerClass = XposedHelpers.findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
 
-        View.OnLongClickListener listener = new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                try {
-                    Context context = v.getContext();
-                    Intent launchInent = context.getPackageManager().getLaunchIntentForPackage("sh.siava.AOSPMods");
-                    XposedHelpers.callMethod(activityStarter, "startActivity", launchInent, true, null);
-                }catch(Exception ignored){}
-                return true;
-            }
+        View.OnLongClickListener listener = v -> {
+            try {
+                Context context = v.getContext();
+                Intent launchInent = context.getPackageManager().getLaunchIntentForPackage("sh.siava.AOSPMods");
+                XposedHelpers.callMethod(activityStarter, "startActivity", launchInent, true, null);
+            }catch(Exception ignored){}
+            return true;
         };
 
         XposedBridge.hookAllMethods(FooterActionsControllerClass,

@@ -3,7 +3,7 @@
     <string name="app_name" translatable="false">AOSP Mods</string>
     <string name="xposed_desc" translatable="false">Funciones personalizadas para ROMS basadas en AOSP Android 12+ </string>
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
-    <string name="error_not_activated">Por favor, confirme que el módulo está ativado en el gestor LSposed</string>
+    <string name="error_not_activated">Por favor, confirme que el módulo está activado en el gestor LSposed</string>
     <string name="hide_default">No mostrar (por defecto)</string>
     <string name="percent_of_default_size">% del tamaño por defecto</string>
     <string name="overlay_none_title">(Por defecto)</string>
@@ -22,7 +22,7 @@
     <string name="theme_customization_category">Temas</string>
 
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Esconder círculo del icono de la huella digital</string>
+    <string name="transparent_fingerprint_circle">Ocultar círculo del icono de la huella digital</string>
     <string name="transparent_fingerprint_circle_off">El círculo se activará</string>
     <string name="transparent_fingerprint_circle_on">El círculo se ocultará</string> 
     <string name="carrier_text_category">Texto del operador</string>
@@ -62,7 +62,7 @@
     <string name="sbc_advanced_cat">Opciones avanzadas de fecha (anula la opción anterior)</string>
     <string name="sbc_advanced_sum">Lea la documentación del formato de fecha de Java</string>
     <string name="sbc_custom_date_before">Formato de fecha personalizado antes del reloj</string>
-    <string name="sbc_date_small">Tamaño mśs pequeño (70%)</string>
+    <string name="sbc_date_small">Tamaño más pequeño (70%)</string>
     <string name="sbc_custom_date_after">Formato de fecha personalizado despues del reloj</string>
     <string name="sbc_header">Personalizar el reloj</string>
     <string name="sbc_may_take_one_minute">Requiere actualización de la hora o reinicio de la interfaz de usuario</string>
@@ -72,8 +72,8 @@
     <string name="ntsb_category_title">Tráfico de red</string>
     <string name="ntsb_enabled_title">Activar monitor de tráfico de red</string>
     <string name="ntsb_position_title">Localización del monitor</string>
-    <string name="ntsb_treshold_title">Esconder automaticamente</string>
-    <string name="ntsb_treshold_summary">"Esconder si el tráfico es menor a… (Kilobytes)"</string>
+    <string name="ntsb_treshold_title">Ocultar automaticamente</string>
+    <string name="ntsb_treshold_summary">"Ocultar si el tráfico es menor a… (Kilobytes)"</string>
     <string name="statusbar_general_options">Preferencias de barra de estado</string>
     <string name="dual_tone_battery_title">Activar icono de tono dual</string>
     <string name="dual_tone_battery_on_summary">Activado (solo en modo horizontal)</string>
@@ -84,12 +84,12 @@
     <string name="fix_status_bar_padding">Corregir espacio en el lado izquierdo</string>
     <string name="sbbb_header">Barra de batería parámetros</string>
     <string name="BB_enable_title">Activar barra de batería</string>
-    <string name="BB_onlycharging_title">Solo mientras de cargar</string>
+    <string name="BB_onlycharging_title">Solo mientras se carga</string>
     <string name="BB_move_SB_bottom_title">En la parte inferior de barra de estado</string>
-    <string name="BB_colorful_title">Lo hacer colorido</string>
+    <string name="BB_colorful_title">Hacerlo colorido</string>
     <string name="BB_Opacity_title">Opacidad de barra</string>
     <string name="BB_center_align_title">Centrada</string>
-    <string name="BB_Thickness_title">Espesor de barra</string>
+    <string name="BB_Thickness_title">Grosor de barra</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Número de compilación en el panel de ajustes rápidos</string>
@@ -98,7 +98,7 @@
     <string name="qs_footer_text_summary">Dejar en blanco para eliminar el texto</string>
     <string name="qs_footer_text_desc">Requiere apagar/encender la pantalla</string>
     <string name="light_qs_title">Panel de ajustes rápidos claro (aún en pruebas)</string>
-    <string name="qs_pulldown_size">distancia para deslizamiento rápido de ajustes rápidos</string>
+    <string name="qs_pulldown_size">Distancia para deslizamiento rápido de ajustes rápidos</string>
     <string name="qs_pulldown_switch_title">Deslize rápido para abajo desde la barra de estado</string>
     <string name="qs_pulldown_side_title">Lado por donde deslizar</string>
     <string name="qs_pulldown_category">Deslizar rápido para abajo en ajustes rápidos</string>     
@@ -112,12 +112,12 @@
     <string name="wifi_cell_on">Usar Wifi y Datos por separado</string>
     <string name="wifi_cell_off">Usar solo el atajo de Internet</string>
     <string name="QQS_brightness_category">Preferencias de la barra de brillo</string>
-    <string name="QQS_brightness_title">Mostrar la barra de brillo en QQS Panel</string>
-    <string name="QS_brightness_disable_title">Ocultar la barra de brillo de Ajustes Rápidos</string>
-    <string name="bs_thick_track">Usar un pista gruesa en la barra de brillo</string>
-    <string name="quick_settings_tiles_category">Opciones de QS botónes</string>
-    <string name="qs_tile_style_title">Temas de QS botónes</string>
-    <string name="qstile_default">Defecto</string>
+    <string name="QQS_brightness_title">Mostrar la barra de brillo en el panel de ajustes rápidos</string>
+    <string name="QS_brightness_disable_title">Ocultar la barra de brillo en el panel de ajustes rápidos</string>
+    <string name="bs_thick_track">Usar una barra gruesa en la barra de brillo</string>
+    <string name="quick_settings_tiles_category">Opciones de los botones de ajustes rápidos</string>
+    <string name="qs_tile_style_title">Temas de los botones de ajustes rápidos</string>
+    <string name="qstile_default"> Por defecto</string>
     <string name="qstile_cookie">Galleta</string>
     <string name="qstile_triangles">Triángulo</string>
     <string name="qstile_divided">Círculo dividida</string>
@@ -128,7 +128,7 @@
     <string name="qstile_squaremedo">El Squaremedo</string>
     <string name="qstile_dual_tone_circle">Circulo de doble tono</string>
     <string name="qstile_circleoutline">Circulo con contorno</string>
-    <string name="qstile_pokesign">Letero de Pokémon</string>
+    <string name="qstile_pokesign">Símbolo de Pokémon</string>
     <string name="qstile_cosmos">Cosmos de Shishu</string>
     <string name="qstile_neonlike">Luz de neón</string>
     <string name="qstile_circle_trim">Circulo con ribete</string>
@@ -158,6 +158,9 @@
     <string name="colorpill">Aplicar color de resaltado a la barra</string>
     <string name="reducekeyboard_title">Espacio de gestos en el teclado</string>
     <string name="reducekeyboard">Reducir el espacio en el teclado</string>
+    <string name="taskbar_status_title">Barra de tareas de Android</string>
+    <string name="taskbar_force_enable_title">Forzar activada</string>
+    <string name="taskbar_force_disable_title">Forzar desactivada</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Desactivar sonido de captura de pantalla</string>
@@ -170,6 +173,8 @@
     <string name="custom_themed_icons_off">Iconos personalizados inactivos</string>
     <string name="custom_themed_icons_on">Iconos personalizados activos</string>
     <string name="so_vol_longpress_skip">Mantenga presionado botón del volumen para saltar pistas</string>
+    <string name="notifications_header">Opciones de notificación</string>
+    <string name="expand_notifications_icons_title">"Agregar expandir/contraer todos los botones</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Forzar la fuente Google Sans en todo el sistema</string>
@@ -180,12 +185,12 @@
     <string name="dt_styles_category">Estilos de tema oscuro</string>
     <string name="dt_styles">Seleccione un estilo</string>
     <string name="dt_black">Oscuridad total</string>
-    <string name="dt_bakedgreen">Verde al horno</string>
+    <string name="dt_bakedgreen">Verde oscuro</string>
     <string name="dt_chocox">Choco X</string>
-    <string name="dt_darkaubergine">Aubergine Oscuro</string>
-    <string name="dt_style">Azul Oscuro</string>
-    <string name="dt_darkgray">Gris Oscuro</string>
-    <string name="dt_materialocean">Océano Material</string>
+    <string name="dt_darkaubergine">Berengena oscuro</string>
+    <string name="dt_style">Azul oscuro</string>
+    <string name="dt_darkgray">Gris oscuro</string>
+    <string name="dt_materialocean">Océanico Material</string>
     <string name="dt_night">Noche</string>
     <string name="dt_solarizeddark">Solarizado</string>
 

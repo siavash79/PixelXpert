@@ -51,6 +51,7 @@ dependencies {
     compileOnly 'de.robv.android.xposed:api:82'
     implementation 'com.github.topjohnwu.libsu:core:3.1.2'
     implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8'
+    implementation 'com.jaredrummler:colorpicker:1.1.0'
 }
 repositories {
     mavenCentral()

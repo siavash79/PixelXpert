@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.AlarmClock;
@@ -16,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.nfx.android.rangebarpreference.RangeBarHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -79,6 +82,13 @@ public class StatusbarMods implements IXposedModPack {
     private static int BBOpacity = 100;
     private static int BBarHeight = 10;
     private static Object KIC = null;
+    private static float[] batteryLevels = new float[]{20f, 40f};;
+    private static int[] batteryColors = new int[]{Color.RED, Color.YELLOW};
+    private static int charingColor = Color.WHITE;
+    private static int fastChargingColor = Color.WHITE;
+    private static boolean indicateCharging = false;
+    private static boolean indicateFastCharging = false;
+    
     
     Object STB;
 
@@ -94,6 +104,24 @@ public class StatusbarMods implements IXposedModPack {
         BBSetCentered = XPrefs.Xprefs.getBoolean("BBSetCentered", false);
         BBOpacity = XPrefs.Xprefs.getInt("BBOpacity" , 100);
         BBarHeight = XPrefs.Xprefs.getInt("BBarHeight" , 50);
+    
+        String jsonString = XPrefs.Xprefs.getString("batteryWarningRange", "");
+        if(jsonString.length() > 0)
+        {
+            batteryLevels = new float[]{
+                    RangeBarHelper.getLowValueFromJsonString(jsonString),
+                    RangeBarHelper.getHighValueFromJsonString(jsonString)};
+        }
+    
+        batteryColors = new int[]{
+                XPrefs.Xprefs.getInt("batteryCriticalColor", Color.RED),
+                XPrefs.Xprefs.getInt("batteryWarningColor", Color.YELLOW)};
+    
+        indicateFastCharging = XPrefs.Xprefs.getBoolean("indicateFastCharging", false);
+        indicateCharging = XPrefs.Xprefs.getBoolean("indicateCharging", true);
+    
+        charingColor = XPrefs.Xprefs.getInt("batteryChargingColor", Color.GREEN);
+        fastChargingColor = XPrefs.Xprefs.getInt("batteryFastChargingColor", Color.BLUE);
         
         if(BatteryBarView.hasInstance())
         {
@@ -187,6 +215,7 @@ public class StatusbarMods implements IXposedModPack {
     }
     
     private void refreshBatteryBar(BatteryBarView instance) {
+        BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor);
         instance.setVisibility((BBarEnabled) ? View.VISIBLE : View.GONE);
         instance.setColorful(BBarColorful);
         instance.setOnlyWhileCharging(BBOnlyWhileCharging);
@@ -195,6 +224,7 @@ public class StatusbarMods implements IXposedModPack {
         instance.setSingleColorTone(clockColor);
         instance.setAlphaPct(BBOpacity);
         instance.setBarHeight(Math.round(BBarHeight/10)+5);
+        instance.refreshLayout();
     }
     
     @Override

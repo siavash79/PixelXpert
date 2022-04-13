@@ -52,6 +52,7 @@ dependencies {
     implementation 'com.github.topjohnwu.libsu:core:3.1.2'
     implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8'
     implementation 'com.jaredrummler:colorpicker:1.1.0'
+    implementation 'com.nfx.android:range-bar-preference:0.0.6'
 }
 repositories {
     mavenCentral()

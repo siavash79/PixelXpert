@@ -48,28 +48,32 @@
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
         android:title="@string/BB_indicate_charging" />
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="-16711936"
+        android:key="batteryChargingColor"
+        android:title="@string/BB_batteryChargingColor" />
+
     <SwitchPreference
         android:defaultValue="false"
         android:key="indicateFastCharging"
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
         android:title="@string/BB_indicate_fast_charging" />
-    <SeekBarPreference
-        android:layout_width="wrap_content"
-        android:defaultValue="15"
-        android:key="batteryCriticalLevel"
-        android:max="20"
-        android:title="@string/BB_critical_level"
-        app:min="0"
-        app:showSeekBarValue="true"/>
-    <SeekBarPreference
-        android:layout_width="wrap_content"
-        android:defaultValue="40"
-        android:key="batteryWarningLevel"
-        android:max="40"
-        android:title="@string/BB_warning_level"
-        app:min="20"
-        app:showSeekBarValue="true"/>
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="-16776961"
+        android:key="batteryFastChargingColor"
+        android:title="@string/BB_batteryFastChargingColor" />
+
+    <com.nfx.android.rangebarpreference.RangeBarPreferenceCompat
+            android:key="batteryWarningRange"
+            android:title="@string/BB_warning_level"
+            android:summary="@string/BB_warning_tip"
+            app:rbp_measurementUnit="%"
+            app:rbp_tickStart="0"
+            app:rbp_tickEnd="100"
+            app:rbp_tickInterval="1"
+            app:rbp_view_defaultHighValue="15"
+            app:rbp_view_defaultLowValue="40" />
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         android:defaultValue="-65536"
         android:key="batteryCriticalColor"
@@ -78,12 +82,4 @@
         android:defaultValue="-256"
         android:key="batteryWarningColor"
         android:title="@string/BB_batteryWarningColor" />
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="-16711936"
-        android:key="batteryChargingColor"
-        android:title="@string/BB_batteryChargingColor" />
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="-16776961"
-        android:key="batteryFastChargingColor"
-        android:title="@string/BB_batteryFastChargingColor" />
 </PreferenceScreen>

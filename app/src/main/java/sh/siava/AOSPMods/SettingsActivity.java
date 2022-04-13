@@ -13,6 +13,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import com.nfx.android.rangebarpreference.RangeBarHelper;
 import com.topjohnwu.superuser.Shell;
 
 import sh.siava.AOSPMods.Utils.Overlays;
@@ -180,11 +181,41 @@ public class SettingsActivity extends AppCompatActivity implements
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.statusbar_batterybar_prefs, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            prefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+                @Override
+                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                    updateVisibility(prefs);
+                }
+            });
+            updateVisibility(prefs);
         }
-        
-        
-    }
     
+        private void updateVisibility(SharedPreferences prefs) {
+            String json = prefs.getString("batteryWarningRange", "");
+            boolean critZero = RangeBarHelper.getLowValueFromJsonString(json) == 0;
+            boolean warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
+            boolean bBarEnabled = prefs.getBoolean("BBarEnabled", false);
+            boolean isColorful = prefs.getBoolean("BBarColorful", false);
+    
+    
+            findPreference("batteryFastChargingColor").setVisible(prefs.getBoolean("indicateFastCharging", false) && bBarEnabled);
+            findPreference("batteryChargingColor").setVisible(prefs.getBoolean("indicateCharging", false) && bBarEnabled);
+            findPreference("batteryCriticalColor").setVisible(!critZero && bBarEnabled && !isColorful);
+            findPreference("batteryWarningColor").setVisible(!warnZero && bBarEnabled && !isColorful);
+    
+            findPreference("BBOnlyWhileCharging").setVisible(bBarEnabled);
+            findPreference("BBOnBottom").setVisible(bBarEnabled);
+            findPreference("BBarColorful").setVisible(bBarEnabled);
+            findPreference("BBOpacity").setVisible(bBarEnabled);
+            findPreference("BBarHeight").setVisible(bBarEnabled);
+            findPreference("BBSetCentered").setVisible(bBarEnabled);
+            findPreference("indicateCharging").setVisible(bBarEnabled);
+            findPreference("indicateFastCharging").setVisible(bBarEnabled);
+            findPreference("batteryWarningRange").setVisible(bBarEnabled && !isColorful);
+        }
+    
+    }
     
     public static class MiscFragment extends PreferenceFragmentCompat {
 

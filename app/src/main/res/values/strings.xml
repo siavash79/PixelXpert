@@ -39,6 +39,8 @@
     <string name="LSrightShortcutTitle">Right shortcut</string>
     <string name="camera_shortcut">Camera</string>
     <string name="assistant_shortcut">Assistant</string>
+    <string name="album_art_category">Media options</string>
+    <string name="album_art_title">Enable album art when playing media</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Double tap to sleep</string>

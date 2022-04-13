@@ -38,6 +38,14 @@
             android:title="@string/keyguard_left_shortcut" />
         -->
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/album_art_category">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="albumArtLockScreenEnabled"
+            android:title="@string/album_art_title"
+            app:summaryOff="@string/general_off"
+            app:summaryOn="@string/general_on" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/carrier_text_category">
         <SwitchPreference
             android:defaultValue="false"
@@ -51,5 +59,4 @@
             android:singleLine="true"
             android:title="@string/carrier_text_value" />
     </PreferenceCategory>
-
 </PreferenceScreen>

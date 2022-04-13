@@ -195,11 +195,12 @@
     <string name="taskbar_force_disable_title">Forçar desativar</string>
     <string name="BB_indicate_charging">Indicar a carregar</string>
     <string name="BB_indicate_fast_charging">Indicar a carregar rápido</string>
-    <string name="BB_critical_level">Valor para bateria crítica</string>
-    <string name="BB_warning_level">Valor para bateria fraca</string>
+    <string name="BB_warning_level">"Limites para bateria fraca/crítica"</string>
     <string name="BB_batteryCriticalColor">Cor para bateria crítica</string>
     <string name="BB_batteryWarningColor">Cor para bateria fraca</string>
     <string name="BB_batteryChargingColor">Cor ao carregar</string>
     <string name="BB_batteryFastChargingColor">Cor ao carregar rápido</string>
+    <string name="album_art_category">Opções de mídia</string>
+    <string name="album_art_title">Ativar arte do álbum ao reproduzir mídia</string>
 
 </resources>

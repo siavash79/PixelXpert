@@ -35,6 +35,8 @@
     <string name="LSrightShortcutTitle">右侧</string>
     <string name="camera_shortcut">相机</string>
     <string name="assistant_shortcut">语音助手</string>
+    <string name="album_art_category">媒体选项</string>
+    <string name="album_art_title">播放媒体时显示专辑封面</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">双击息屏</string>
@@ -84,6 +86,14 @@
     <string name="BB_Opacity_title">不透明度</string>
     <string name="BB_center_align_title">剧中对齐</string>
     <string name="BB_Thickness_title">粗细度</string>
+    <string name="BB_indicate_charging">充电显示</string>
+    <string name="BB_indicate_fast_charging">快充显示</string>
+    <string name="BB_warning_level">警告值</string>
+    <string name="BB_warning_tip">两值都设为 0 来禁用基于电量的颜色</string>
+    <string name="BB_batteryCriticalColor">临界值颜色</string>
+    <string name="BB_batteryWarningColor">警告值颜色</string>
+    <string name="BB_batteryChargingColor">充电颜色</string>
+    <string name="BB_batteryFastChargingColor">快充颜色</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">下拉磁贴面板底部版本号</string>

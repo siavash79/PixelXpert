@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import androidx.core.graphics.ColorUtils;
+
 public class BatteryBarView extends FrameLayout {
 	private GradientDrawable mDrawable = new GradientDrawable();
 	FrameLayout maskLayout;
@@ -36,8 +38,10 @@ public class BatteryBarView extends FrameLayout {
 	private static int fastChargingColor = Color.WHITE;
 	private static boolean indicateCharging = false;
 	private static boolean indicateFastCharging = false;
+	private static boolean transitColors = false;
 	
-	public static void setStaticColor(float[] batteryLevels, int[] batteryColors, boolean indicateCharging, int charingColor, boolean indicateFastCharging, int fastChargingColor) {
+	public static void setStaticColor(float[] batteryLevels, int[] batteryColors, boolean indicateCharging, int charingColor, boolean indicateFastCharging, int fastChargingColor, boolean transitColors) {
+		BatteryBarView.transitColors = transitColors;
 		BatteryBarView.batteryLevels = batteryLevels;
 		BatteryBarView.batteryColors = batteryColors;
 		BatteryBarView.chargingColor = charingColor;
@@ -177,7 +181,16 @@ public class BatteryBarView extends FrameLayout {
 		else if(!colorful) {                    //not charging color
 			for (int i = 0; i < batteryLevels.length; i++) {
 				if (batteryPCT <= batteryLevels[i]) {
-					singleColor = batteryColors[i];
+					if(transitColors && i > 0)
+					{
+						float range = batteryLevels[i] - batteryLevels[i-1];
+						float currentPos = batteryPCT - batteryLevels[i-1];
+						float ratio = currentPos/range;
+						singleColor = ColorUtils.blendARGB(batteryColors[i-1], batteryColors[i], ratio);
+					}
+					else {
+						singleColor = batteryColors[i];
+					}
 					break;
 				}
 			}

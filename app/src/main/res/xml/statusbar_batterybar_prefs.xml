@@ -74,6 +74,14 @@
             app:rbp_tickInterval="1"
             app:rbp_view_defaultHighValue="15"
             app:rbp_view_defaultLowValue="40" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="BBarTransitColors"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/BB_transit_colors" />
+
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         android:defaultValue="-65536"
         android:key="batteryCriticalColor"

@@ -197,13 +197,14 @@ public class SettingsActivity extends AppCompatActivity implements
             boolean warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
             boolean bBarEnabled = prefs.getBoolean("BBarEnabled", false);
             boolean isColorful = prefs.getBoolean("BBarColorful", false);
-    
+            boolean transitColors = prefs.getBoolean("BBarTransitColors", false);
     
             findPreference("batteryFastChargingColor").setVisible(prefs.getBoolean("indicateFastCharging", false) && bBarEnabled);
             findPreference("batteryChargingColor").setVisible(prefs.getBoolean("indicateCharging", false) && bBarEnabled);
-            findPreference("batteryCriticalColor").setVisible(!critZero && bBarEnabled && !isColorful);
             findPreference("batteryWarningColor").setVisible(!warnZero && bBarEnabled && !isColorful);
+            findPreference("batteryCriticalColor").setVisible((!critZero || transitColors) && bBarEnabled && !isColorful && findPreference("batteryWarningColor").isVisible());
     
+            findPreference("BBarTransitColors").setVisible(bBarEnabled && !isColorful);
             findPreference("BBOnlyWhileCharging").setVisible(bBarEnabled);
             findPreference("BBOnBottom").setVisible(bBarEnabled);
             findPreference("BBarColorful").setVisible(bBarEnabled);

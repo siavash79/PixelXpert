@@ -4,16 +4,16 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "sh.siava.AOSP_lightQSOverlay",
+  "applicationId": "sh.siava.AOSPMods",
   "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
-      "versionName": "1.0",
-      "outputFile": "app-release.apk"
+      "versionCode": 13,
+      "versionName": "1.0.0-canary-009-Rev-01",
+      "outputFile": "AOSPMods.apk"
     }
   ],
   "elementType": "File"

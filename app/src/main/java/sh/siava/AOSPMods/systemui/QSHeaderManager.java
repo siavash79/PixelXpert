@@ -40,7 +40,6 @@ public class QSHeaderManager implements IXposedModPack {
                     case Configuration.UI_MODE_NIGHT_YES:
                         break;
                     case Configuration.UI_MODE_NIGHT_NO:
-
                         try {
                             Shell.su("cmd uimode night yes").exec();
                             Thread.sleep(1000);
@@ -80,7 +79,6 @@ public class QSHeaderManager implements IXposedModPack {
                         Resources res = context.getResources();
 
                         int iconColor = res.getColor(res.getIdentifier("android:color/system_neutral1_900", "color", context.getPackageName()));
-                        //XposedBridge.log("iconcolor :" + iconColor);
                         XposedHelpers.setObjectField(param.thisObject, "iconColor", iconColor);
                     }
                 });
@@ -96,11 +94,9 @@ public class QSHeaderManager implements IXposedModPack {
                         context,
                         context.getResources().getIdentifier("android:attr/colorAccent", "attr", "com.android.systemui"));
 
-//                XposedBridge.log("active :" + colorActive);
                 XposedHelpers.setObjectField(param.thisObject, "colorActive", colorActive);
             }
         });
-
 
         XposedBridge.hookMethod(ScrimControllerMethod, new XC_MethodHook() {
             @Override
@@ -123,12 +119,10 @@ public class QSHeaderManager implements IXposedModPack {
             switch(enumVal)
             {
                 case "KEYGUARD":
-                    //Xposedbridge.log("SIAPOSED found keyguard");
                     XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                                    //Xposedbridge.log("SIAPOSED found keyguard method");
                                     if(!lightQSHeaderEnabled) return;
 
                                     boolean mClipQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipQsScrim");
@@ -141,12 +135,10 @@ public class QSHeaderManager implements IXposedModPack {
                            });
                     break;
                 case "BOUNCER":
-                    //Xposedbridge.log("SIAPOSED found bouncer");
                     XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                                    //Xposedbridge.log("SIAPOSED found bouncer method");
                                     if(!lightQSHeaderEnabled) return;
 
                                     XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
@@ -154,8 +146,8 @@ public class QSHeaderManager implements IXposedModPack {
                             });
                     break;
                 case "SHADE_LOCKED":
-                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
-                            "prepare", ScrimStateEnum, new XC_MethodHook() {
+                    XposedBridge.hookAllMethods(constants[i].getClass(),
+                            "prepare", new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if(!lightQSHeaderEnabled) return;
@@ -170,18 +162,17 @@ public class QSHeaderManager implements IXposedModPack {
                                     }
                                 }
                             });
-                    XposedHelpers.findAndHookMethod(constants[i].getClass(),
+                    XposedBridge.hookAllMethods(constants[i].getClass(),
                             "getBehindTint", new XC_MethodHook() {
                                 @Override
                                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                                     if(!lightQSHeaderEnabled) return;
-
                                     param.setResult(Color.TRANSPARENT);
                                 }
                             });
                     break;
+                    
                 case "UNLOCKED":
-
                     XposedHelpers.findAndHookMethod(constants[i].getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
@@ -204,7 +195,6 @@ public class QSHeaderManager implements IXposedModPack {
                Class InterestingClass = XposedHelpers.findClass("com.android.settingslib.applications.InterestingConfigChanges", lpparam.classLoader);
 
                 Object o = InterestingClass.getDeclaredConstructor(int.class).newInstance(0x40000000 | 0x0004 | 0x0100 | 0x80000000 | 0x0200);
-//                Class ActivityClass = Helpers.findClass("android.content.pm.ActivityInfo", lpparam.classLoader);
                 XposedHelpers.setObjectField(param.thisObject, "mConfigChanges", o);
             }
         });
@@ -227,6 +217,4 @@ public class QSHeaderManager implements IXposedModPack {
     public String getListenPack() {
         return listenPackage;
     }
-
-
 }

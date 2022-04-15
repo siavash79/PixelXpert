@@ -4,6 +4,7 @@ import com.topjohnwu.superuser.Shell;
 
 import java.util.regex.Pattern;
 
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 public class miscSettings implements IXposedModPack {
@@ -11,15 +12,10 @@ public class miscSettings implements IXposedModPack {
     @Override
     public void updatePrefs(String...Key) {
         if(XPrefs.Xprefs == null) return; //it won't be null. but anyway...
-
-        if(Key.length == 0)
+        
+        if(Key.length > 0)
         {
-            //we are at startup
-            updateSysUITuner();
-            updateGSansOverride();
-        }
-        else
-        {
+            //we're not at startup
             //we know what has changed
             switch(Key[0])
             {
@@ -106,6 +102,13 @@ public class miscSettings implements IXposedModPack {
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        return;
+        
+        if(lpparam.processName.contains(":"))
+            //this is a second process
+            return;
+
+        //startup jobs
+        updateSysUITuner();
+        updateGSansOverride();
     }
 }

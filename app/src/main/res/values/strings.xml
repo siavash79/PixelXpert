@@ -100,6 +100,7 @@
     <string name="BB_batteryWarningColor">Warning level color</string>
     <string name="BB_batteryChargingColor">Charging color</string>
     <string name="BB_batteryFastChargingColor">Fast charging color</string>
+    <string name="BB_transit_colors">Shade colors between the range</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Build number on QS Panel footer</string>

@@ -18,6 +18,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.graphics.ColorUtils;
+
 import com.nfx.android.rangebarpreference.RangeBarHelper;
 
 import java.text.SimpleDateFormat;
@@ -88,7 +90,7 @@ public class StatusbarMods implements IXposedModPack {
     private static int fastChargingColor = Color.WHITE;
     private static boolean indicateCharging = false;
     private static boolean indicateFastCharging = false;
-    
+    private static boolean BBarTransitColors = false;
     
     Object STB;
 
@@ -104,6 +106,7 @@ public class StatusbarMods implements IXposedModPack {
         BBSetCentered = XPrefs.Xprefs.getBoolean("BBSetCentered", false);
         BBOpacity = XPrefs.Xprefs.getInt("BBOpacity" , 100);
         BBarHeight = XPrefs.Xprefs.getInt("BBarHeight" , 50);
+        BBarTransitColors = XPrefs.Xprefs.getBoolean("BBarTransitColors", false);
     
         String jsonString = XPrefs.Xprefs.getString("batteryWarningRange", "");
         if(jsonString.length() > 0)
@@ -215,7 +218,7 @@ public class StatusbarMods implements IXposedModPack {
     }
     
     private void refreshBatteryBar(BatteryBarView instance) {
-        BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor);
+        BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor, BBarTransitColors);
         instance.setVisibility((BBarEnabled) ? View.VISIBLE : View.GONE);
         instance.setColorful(BBarColorful);
         instance.setOnlyWhileCharging(BBOnlyWhileCharging);
@@ -267,6 +270,7 @@ public class StatusbarMods implements IXposedModPack {
                 }
                 else
                 {
+                    BatteryBarView.setIsFastCharginging(false);
                     BatteryStyleManager.isFastCharging = false;
                 }
             }

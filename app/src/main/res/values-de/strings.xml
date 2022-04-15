@@ -39,6 +39,8 @@
     <string name="LSrightShortcutTitle">Verknüpfung rechts</string>
     <string name="camera_shortcut">Kamera</string>
     <string name="assistant_shortcut">Assistent</string>
+    <string name="album_art_category">Medieneinstellungen</string>
+    <string name="album_art_title">Aktiviere Album Anzeige wenn Medien abgespielt werden</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doppelt Tippen zum Sperren</string>
@@ -92,8 +94,8 @@
     <string name="BB_Thickness_title">Leistendicke</string>
     <string name="BB_indicate_charging">Ladeanzeige</string>
     <string name="BB_indicate_fast_charging">Schnelladeanzeige</string>
-    <string name="BB_critical_level">Kritischer Akkulevel</string>
     <string name="BB_warning_level">Warnung bei Akkulevel</string>
+    <string name="BB_warning_tip">Setze beide auf 0 um die Level basierenden Farben zu deaktivieren</string>
     <string name="BB_batteryCriticalColor">Farbe bei kritischem Akkulevel</string>
     <string name="BB_batteryWarningColor">Farbe bei Warnung des Akkulevel</string>
     <string name="BB_batteryChargingColor">Farbe beim Laden</string>

@@ -39,6 +39,8 @@
     <string name="LSrightShortcutTitle">Acceso directo derecho</string>
     <string name="camera_shortcut">Cámara</string>
     <string name="assistant_shortcut">Asistente</string>
+    <string name="album_art_category">Opciones de visualización de reproducción de música</string>
+    <string name="album_art_title">Habilitar visualización de reproducción de música</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doble toque para bloquear pantalla</string>
@@ -90,6 +92,15 @@
     <string name="BB_Opacity_title">Opacidad de barra</string>
     <string name="BB_center_align_title">Centrada</string>
     <string name="BB_Thickness_title">Grosor de barra</string>
+    <string name="BB_indicate_charging">Indicador de carga</string>
+    <string name="BB_indicate_fast_charging">Indicar carga rápida</string>
+    <string name="BB_warning_level">Valor del nivel critico de batería</string>
+    <string name="BB_warning_tip">Poner los dos a 0 para deshabilitar los colores de nivel de batería</string>
+    <string name="BB_batteryCriticalColor">Color <string name="album_art_category">Media options</string>
+    <string name="BB_batteryWarningColor">Aviso de nivel de batería</string>
+    <string name="BB_batteryChargingColor">Color de carga</string>
+    <string name="BB_batteryFastChargingColor">Color de carga rápida</string>
+    <string name="BB_transit_colors">Sombrear colores en transito de cambio</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Número de compilación en el panel de ajustes rápidos</string>
@@ -187,7 +198,7 @@
     <string name="dt_black">Oscuridad total</string>
     <string name="dt_bakedgreen">Verde oscuro</string>
     <string name="dt_chocox">Choco X</string>
-    <string name="dt_darkaubergine">Berengena oscuro</string>
+    <string name="dt_darkaubergine">Berenjena oscuro</string>
     <string name="dt_style">Azul oscuro</string>
     <string name="dt_darkgray">Gris oscuro</string>
     <string name="dt_materialocean">Océanico Material</string>

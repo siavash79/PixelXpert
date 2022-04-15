@@ -267,6 +267,7 @@ public class StatusbarMods implements IXposedModPack {
                 }
                 else
                 {
+                    BatteryBarView.setIsFastCharginging(false);
                     BatteryStyleManager.isFastCharging = false;
                 }
             }

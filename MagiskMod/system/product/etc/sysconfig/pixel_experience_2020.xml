@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- These are configurations that should exist on Google's 2020 and newer devices. -->
+<config>
+    <!-- This is meant to be the canonical feature identifying 2020 and newer devices. -->
+    <feature name="com.google.android.feature.PIXEL_2020_EXPERIENCE" />
+
+    <!-- Allow Flipendo in power save. -->
+    <allow-in-power-save-except-idle package="com.google.android.flipendo" />
+</config>

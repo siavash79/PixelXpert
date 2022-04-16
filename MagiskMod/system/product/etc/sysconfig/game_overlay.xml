@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- These are configurations that should exist on devices that support Game Dashboard -->
+<config>
+    <!-- This feature is meant to be the feature identifying devices that support
+         Game Dashboard -->
+    <feature name="com.google.android.feature.GAME_OVERLAY" />
+</config>

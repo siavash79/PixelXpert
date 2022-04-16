@@ -96,7 +96,6 @@
     <string name="BB_indicate_fast_charging">Indicar carga rápida</string>
     <string name="BB_warning_level">Valor del nivel critico de batería</string>
     <string name="BB_warning_tip">Poner los dos a 0 para deshabilitar los colores de nivel de batería</string>
-    <string name="BB_batteryCriticalColor">Color <string name="album_art_category">Media options</string>
     <string name="BB_batteryWarningColor">Aviso de nivel de batería</string>
     <string name="BB_batteryChargingColor">Color de carga</string>
     <string name="BB_batteryFastChargingColor">Color de carga rápida</string>

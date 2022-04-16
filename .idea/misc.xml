@@ -63,12 +63,8 @@
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/statusbar_clock_prefs.xml" value="0.2" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/statusbar_settings.xml" value="0.18" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/sync_preferences.xml" value="0.1" />
-        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/theming_prefs.xml" value="0.22" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/theming_prefs.xml" value="0.18" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/three_button_prefs.xml" value="0.2" />
-        <entry key="QSTileOverlay/src/main/res/drawable/brightness_progress_full_drawable.xml" value="0.332" />
-        <entry key="QSTileOverlay/src/main/res/drawable/qs_footer_action_chip_background.xml" value="0.4" />
-        <entry key="QSTileOverlay/src/main/res/drawable/qs_security_footer_background.xml" value="0.332" />
-        <entry key="QSTileOverlay/src/main/res/drawable/qs_tile_background_shape.xml" value="0.332" />
         <entry key="app/src/main/res/drawable/collapse_icon.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/drawable/exapnd_icon.xml" value="0.4755" />
       </map>

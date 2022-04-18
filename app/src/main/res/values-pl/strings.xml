@@ -100,6 +100,7 @@
     <string name="BB_batteryWarningColor">Kolor poziomu ostrzeżenia</string>
     <string name="BB_batteryChargingColor">Kolor ładowania</string>
     <string name="BB_batteryFastChargingColor">Kolor szybkiego ładowania</string>
+    <string name="BB_transit_colors">Odcień kolorów między zakresem</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numer kompilacji w stopce panelu QS</string>
@@ -156,7 +157,7 @@
     <string name="gesture_nav_pill_mod_title">Zmień szerokość paska nawigacyjnego</string>
     <string name="gesture_nav_pill_width_title">Szerokość w porównaniu ze standardowym rozmiarem</string>
     <string name="threebutton_header_title">3-przyciskowa nawigacja</string>
-    <string name="back_longpress_kill_title">Naciśnij i przytrzymaj klawisz wstecz, aby zamknąć aplikację na pierwszym planie</string>
+    <string name="back_longpress_kill_title">Przytrzymanie klawisza wstecz zamyka aplikację na pierwszym planie</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Ukryj pasek nawigacji</string>
     <string name="gesture_navbar_thickness_title">Grubość paska nawigacyji</string>

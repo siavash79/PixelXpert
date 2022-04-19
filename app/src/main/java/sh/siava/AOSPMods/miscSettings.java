@@ -4,6 +4,7 @@ import com.jaredrummler.ktsh.Shell;
 
 import java.util.regex.Pattern;
 
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 public class miscSettings implements IXposedModPack {
@@ -28,6 +29,18 @@ public class miscSettings implements IXposedModPack {
                     updateGSansOverride();
                     break;
             }
+        }
+        else
+        {
+            if(AOSPMods.isSecondProcess) return;
+    
+            //startup jobs
+            try {
+                updateSysUITuner();
+            }catch(Exception e){}
+            try {
+                updateGSansOverride();
+            } catch(Exception e){};
         }
     }
 
@@ -83,7 +96,10 @@ public class miscSettings implements IXposedModPack {
     }
 
     private void updateGSansOverride() {
+        XposedBridge.log("g sans start");
         Boolean GSansOverrideEnabled = XPrefs.Xprefs.getBoolean("gsans_override", false);
+        XposedBridge.log("g sans " + GSansOverrideEnabled);
+    
         try {
 
             if (GSansOverrideEnabled){
@@ -102,10 +118,5 @@ public class miscSettings implements IXposedModPack {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         
-        if(AOSPMods.isSecondProcess) return;
-
-        //startup jobs
-        updateSysUITuner();
-        updateGSansOverride();
     }
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.android.screenOffKeys;
@@ -84,9 +85,10 @@ public class AOSPMods implements IXposedHookLoadPackage{
             try {
                 IXposedModPack instance = ((IXposedModPack) mod.newInstance());
                 if(!instance.getListenPack().equals(lpparam.packageName)) continue;
+                XposedBridge.log(mod.getName());
                 try {
                     instance.updatePrefs();
-                } catch(Throwable ignored){}
+                } catch(Throwable ignored){ }
                 instance.handleLoadPackage(lpparam);
                 runningMods.add(instance);
             }

@@ -1,6 +1,6 @@
 package sh.siava.AOSPMods;
 
-import com.jaredrummler.ktsh.Shell;
+import com.topjohnwu.superuser.Shell;
 
 import java.util.regex.Pattern;
 
@@ -48,7 +48,7 @@ public class miscSettings implements IXposedModPack {
         Boolean WifiCellEnabled = XPrefs.Xprefs.getBoolean("wifi_cell", false);
 
         try {
-            String currentTiles = new Shell("sh").run("settings get secure sysui_qs_tiles").getOutput().get(0);
+            String currentTiles = Shell.su("settings get secure sysui_qs_tiles").exec().getOut().get(0);
 
             boolean hasWifi = Pattern.matches(getPattern("wifi"), currentTiles);
             boolean hasCell = Pattern.matches(getPattern("cell"), currentTiles);

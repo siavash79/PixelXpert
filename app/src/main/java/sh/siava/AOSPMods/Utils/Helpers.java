@@ -1,7 +1,5 @@
 package sh.siava.AOSPMods.Utils;
 
-import com.jaredrummler.ktsh.Shell;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -48,12 +46,7 @@ public class Helpers {
 
     public static void getActiveOverlays(){
         List<String> result = new ArrayList<>();
-        List<String> lines = new ArrayList<>();
-        try {
-            lines = new Shell("sh").run("cmd overlay list --user 0").getOutput();
-        } catch (Shell.ClosedException e) {
-            e.printStackTrace();
-        }
+        List<String> lines = com.topjohnwu.superuser.Shell.su("cmd overlay list --user 0").exec().getOut();
         //List<String> lines = Shell.sh("cmd overlay list --user 0").exec().getOut();
         for(String thisLine : lines)
         {

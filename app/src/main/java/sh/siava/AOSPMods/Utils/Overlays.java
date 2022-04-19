@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -47,10 +48,8 @@ public class Overlays {
         Overlays.put("ColorizeNavbarOverlay", new overlayProp("com.android.systemui.overlay.colorpill", false));
         Overlays.put("ReduceKeyboardSpaceOverlay", new overlayProp("com.android.overlay.reducekeyboard", false));
         Overlays.put("BSThickTrackOverlay", new overlayProp("com.android.systemui.bstrack.overlay", false));
-
-        try {
-            setAll();
-        }catch(Throwable ignored){}
+        
+        setAll();
     }
 
     public void initOverlays(Context context) //If called from UI
@@ -87,10 +86,8 @@ public class Overlays {
 
     public static void setAll() //make sure settings are applied to device
     {
-        try
-        {
-        }catch(Throwable t){}
-
+        if(AOSPMods.isSecondProcess) return;
+        
         if(prefs == null)
         {
             prefs = XPrefs.Xprefs;

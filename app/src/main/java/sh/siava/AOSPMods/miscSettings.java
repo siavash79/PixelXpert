@@ -102,9 +102,7 @@ public class miscSettings implements IXposedModPack {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         
-        if(lpparam.processName.contains(":"))
-            //this is a second process
-            return;
+        if(AOSPMods.isSecondProcess) return;
 
         //startup jobs
         updateSysUITuner();

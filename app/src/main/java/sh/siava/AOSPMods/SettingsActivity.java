@@ -16,8 +16,6 @@ import androidx.preference.PreferenceManager;
 import com.nfx.android.rangebarpreference.RangeBarHelper;
 import com.topjohnwu.superuser.Shell;
 
-import sh.siava.AOSPMods.Utils.Overlays;
-
 
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
@@ -50,9 +48,7 @@ public class SettingsActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         backButtonDisabled();
-
-        new Overlays().initOverlays(DPContext);
-
+        
         //update settings from previous config file
         try {
             if(PreferenceManager.getDefaultSharedPreferences(DPContext).contains("Show4GIcon"))

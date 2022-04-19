@@ -6,8 +6,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.View;
 
-import com.topjohnwu.superuser.Shell;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
@@ -37,22 +35,10 @@ public class QSHeaderManager implements IXposedModPack {
     {
         if(lightQSHeaderEnabled != state) {
             lightQSHeaderEnabled = state;
-
-            if(context != null) {
-
-                switch (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
-                    case Configuration.UI_MODE_NIGHT_YES:
-                        break;
-                    case Configuration.UI_MODE_NIGHT_NO:
-                        try {
-                            Shell.su("cmd uimode night yes").exec();
-                            Thread.sleep(1000);
-                            Shell.su("cmd uimode night no").exec();
-                        } catch (Exception ignored) {}
-
-                        break;
-                }
-            }
+    
+            try {
+                onStatChanged();
+            } catch (Throwable throwable) {}
         }
     }
 
@@ -204,52 +190,58 @@ public class QSHeaderManager implements IXposedModPack {
                 "updateTheme", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(context == null) return;
-                        Resources res = context.getResources();
-                        boolean isDark = (res.getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) == Configuration.UI_MODE_NIGHT_YES;
-    
-                        Helpers.setOverlay("QSLightThemeOverlay", false, true);
-                        Thread.sleep(50);
-    
-                        if(lightQSHeaderEnabled && !isDark) {
-                            Helpers.setOverlay("QSLightThemeOverlay", true, true);
-    
-                            Thread t = new Thread(() -> {
-                                try {
-                                    Thread.sleep(1500); //wait for animation to finish
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                
-                                int colorUnavailable = res.getColor(
-                                        res.getIdentifier("android:color/system_neutral1_10", "color", lpparam.packageName),
-                                        context.getTheme());
-
-                                int colorInactive = res.getColor(
-                                        res.getIdentifier("android:color/system_accent1_10", "color", lpparam.packageName),
-                                        context.getTheme());
-                                
-                                
-                                for (View v : tiles) {
-                                    XposedHelpers.setObjectField(v, "colorInactive", colorInactive);
-                                    XposedHelpers.setObjectField(v, "colorUnavailable", colorUnavailable);
-            
-                                    Object lastState = XposedHelpers.getObjectField(v, "lastState");
-                                    Object o = XposedHelpers.callMethod(v, "getBackgroundColorForState", lastState);
-                                    XposedHelpers.callMethod(v, "setColor", o);
-            
-                                }
-        
-        
-                            });
-                            t.start();
-    
-                        }
-                        
+                        onStatChanged();
                     }
                 });
     }
-
+    
+    private static void onStatChanged() throws Throwable {
+        if (context == null) return;
+        Resources res = context.getResources();
+    
+        boolean isDark = getIsDark();
+    
+        Helpers.setOverlay("QSLightThemeOverlay", false, true);
+        Thread.sleep(50);
+    
+        if (lightQSHeaderEnabled && !isDark) {
+            Helpers.setOverlay("QSLightThemeOverlay", true, true);
+        
+            Thread t = new Thread(() -> {
+                try {
+                    Thread.sleep(1500); //wait for animation to finish
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            
+                int colorUnavailable = res.getColor(
+                        res.getIdentifier("android:color/system_neutral1_10", "color", listenPackage),
+                        context.getTheme());
+            
+                int colorInactive = res.getColor(
+                        res.getIdentifier("android:color/system_accent1_10", "color", listenPackage),
+                        context.getTheme());
+            
+            
+                for (View v : tiles) {
+                    XposedHelpers.setObjectField(v, "colorInactive", colorInactive);
+                    XposedHelpers.setObjectField(v, "colorUnavailable", colorUnavailable);
+                
+                    Object lastState = XposedHelpers.getObjectField(v, "lastState");
+                    Object o = XposedHelpers.callMethod(v, "getBackgroundColorForState", lastState);
+                    XposedHelpers.callMethod(v, "setColor", o);
+                
+                }
+            });
+            t.start();
+        }
+    }
+    
+    private static boolean getIsDark() {
+        return (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) == Configuration.UI_MODE_NIGHT_YES;
+    }
+    
+    
     @Override
     public String getListenPack() {
         return listenPackage;

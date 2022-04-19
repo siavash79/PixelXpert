@@ -100,6 +100,7 @@
     <string name="BB_batteryWarningColor">Farbe bei Warnung des Akkulevel</string>
     <string name="BB_batteryChargingColor">Farbe beim Laden</string>
     <string name="BB_batteryFastChargingColor">Farbe beim Schnelladen</string>
+    <string name="BB_transit_colors">Schattierungsfarben zwischen den Bereichen</string>
 	
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Versionsnummer in der Schnelleinstellungs Fußzeile</string>

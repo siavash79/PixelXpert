@@ -1,6 +1,6 @@
 package sh.siava.AOSPMods.Utils;
 
-import com.topjohnwu.superuser.Shell;
+import com.jaredrummler.ktsh.Shell;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -45,9 +45,15 @@ public class Helpers {
         XposedBridge.log("End dump");
     }
 
-    public static void getActiveOverlays() {
+    public static void getActiveOverlays(){
         List<String> result = new ArrayList<>();
-        List<String> lines = Shell.su("cmd overlay list --user 0").exec().getOut();
+        List<String> lines = new ArrayList<>();
+        try {
+            lines = new Shell("sh").run("cmd overlay list --user 0").getOutput();
+        } catch (Shell.ClosedException e) {
+            e.printStackTrace();
+        }
+        //List<String> lines = Shell.sh("cmd overlay list --user 0").exec().getOut();
         for(String thisLine : lines)
         {
             if(thisLine.startsWith("[x]"))
@@ -102,7 +108,7 @@ public class Helpers {
         }
 
         try {
-            Shell.su("cmd overlay " + mode + " --user 0 " + packname).exec();
+            com.topjohnwu.superuser.Shell.su("cmd overlay " + mode + " --user 0 " + packname).exec();
         }
         catch(Throwable t)
         {

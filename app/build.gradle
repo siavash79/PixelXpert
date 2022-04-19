@@ -53,6 +53,7 @@ dependencies {
     implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8'
     implementation 'com.jaredrummler:colorpicker:1.1.0'
     implementation 'com.nfx.android:range-bar-preference:0.0.6'
+    implementation 'com.jaredrummler:ktsh:1.0.0'
 }
 repositories {
     mavenCentral()

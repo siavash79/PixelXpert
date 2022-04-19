@@ -27,8 +27,6 @@ public class SettingsActivity extends AppCompatActivity implements
 
     public void RestartSysUI(View view) {
         Shell.su("killall com.android.systemui").submit();
-//        runCommandAction("killall com.android.systemui");
-
     }
 
     public void backButtonEnabled(){

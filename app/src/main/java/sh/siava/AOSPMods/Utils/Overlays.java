@@ -87,7 +87,9 @@ public class Overlays {
     public static void setAll() //make sure settings are applied to device
     {
         if(AOSPMods.isSecondProcess) return;
-        
+    
+        if(Overlays == null) new Overlays().initOverlays();
+    
         if(prefs == null)
         {
             prefs = XPrefs.Xprefs;

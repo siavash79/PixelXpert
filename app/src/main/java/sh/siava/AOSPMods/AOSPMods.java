@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Utils.Overlays;
 import sh.siava.AOSPMods.android.screenOffKeys;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
@@ -39,11 +39,9 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public static ArrayList<Class> modPacks = new ArrayList<>();
     public static ArrayList<IXposedModPack> runningMods = new ArrayList<>();
     public Context mContext = null;
-
+    public static boolean isSecondProcess = false;
     public AOSPMods()
     {
-        new Overlays().initOverlays();
-
         modPacks.add(StatusbarMods.class);
         modPacks.add(BackGestureManager.class);
         modPacks.add(BackToKill.class);
@@ -71,8 +69,9 @@ public class AOSPMods implements IXposedHookLoadPackage{
     }
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+        isSecondProcess =  lpparam.processName.contains(":");
 
-//        Helpers.dumpClass("android.app.Instrumentation", lpparam);
+        //        Helpers.dumpClass("android.app.Instrumentation", lpparam);
     
         XposedHelpers.findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
             @Override
@@ -86,9 +85,10 @@ public class AOSPMods implements IXposedHookLoadPackage{
             try {
                 IXposedModPack instance = ((IXposedModPack) mod.newInstance());
                 if(!instance.getListenPack().equals(lpparam.packageName)) continue;
+                XposedBridge.log(mod.getName());
                 try {
                     instance.updatePrefs();
-                } catch(Throwable ignored){}
+                } catch(Throwable ignored){ }
                 instance.handleLoadPackage(lpparam);
                 runningMods.add(instance);
             }

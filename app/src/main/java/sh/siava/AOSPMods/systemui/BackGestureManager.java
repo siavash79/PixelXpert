@@ -63,7 +63,6 @@ public class BackGestureManager implements IXposedModPack {
                         
                         if (mEdgeHeight != 0) {
                             if (y < (mDisplaySize.y - mBottomGestureHeight - mEdgeHeight)) {
-//                                XposedBridge.log("SIAPOSED back i didn't approve" + mEdgeHeight);
                                 param.setResult(false);
                                 return;
                             }

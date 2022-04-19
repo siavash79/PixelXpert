@@ -96,9 +96,7 @@ public class miscSettings implements IXposedModPack {
     }
 
     private void updateGSansOverride() {
-        XposedBridge.log("g sans start");
         Boolean GSansOverrideEnabled = XPrefs.Xprefs.getBoolean("gsans_override", false);
-        XposedBridge.log("g sans " + GSansOverrideEnabled);
     
         try {
 

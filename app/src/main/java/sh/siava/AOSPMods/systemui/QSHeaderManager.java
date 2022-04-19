@@ -24,12 +24,14 @@ public class QSHeaderManager implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
     private static boolean lightQSHeaderEnabled = false;
+    private static boolean dualToneQSEnabled = true;
     
     private static final ArrayList<View> tiles = new ArrayList<>();
     
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
+        dualToneQSEnabled = XPrefs.Xprefs.getBoolean("dualToneQSEnabled", true);
         setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
     }
 
@@ -74,7 +76,6 @@ public class QSHeaderManager implements IXposedModPack {
                 "onUiModeChanged", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        XposedBridge.log("SIAPOS init behindcolor");
                         mBehindColors = GradientColorsClass.newInstance();
                     }
                 });
@@ -83,7 +84,7 @@ public class QSHeaderManager implements IXposedModPack {
                 "updateScrims", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!lightQSHeaderEnabled) return;
+                        if(!dualToneQSEnabled) return;
     
                         Object mScrimBehind = XposedHelpers.getObjectField(param.thisObject, "mScrimBehind");
                         boolean mBlankScreen = (boolean) XposedHelpers.getObjectField(param.thisObject, "mBlankScreen");
@@ -98,7 +99,7 @@ public class QSHeaderManager implements IXposedModPack {
                 "updateThemeColors", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!lightQSHeaderEnabled) return;
+                        if(!dualToneQSEnabled) return;
     
                         Object mScrimBehind = XposedHelpers.getObjectField(param.thisObject, "mScrimBehind");
     
@@ -128,7 +129,7 @@ public class QSHeaderManager implements IXposedModPack {
                 "updateResources", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!lightQSHeaderEnabled) return;
+                        if(!dualToneQSEnabled) return;
                         Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                         Resources res = context.getResources();
 

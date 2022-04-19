@@ -10,6 +10,7 @@ import java.util.List;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.AOSPMods;
 
 public class Helpers {
 
@@ -70,6 +71,8 @@ public class Helpers {
     }
 
     public static void setOverlay(String Key, boolean enabled) {
+        if(AOSPMods.isSecondProcess) return;
+    
         if(activeOverlays == null) getActiveOverlays(); //make sure we have a list in hand
 
         String mode = (enabled) ? "enable" : "disable";

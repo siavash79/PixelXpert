@@ -1,10 +1,13 @@
 package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.View;
+
+import androidx.core.graphics.ColorUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -21,16 +24,20 @@ public class QSHeaderManager implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
     private static boolean lightQSHeaderEnabled = false;
+    private static boolean dualToneQSEnabled = false;
     
     private static final ArrayList<View> tiles = new ArrayList<>();
     
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
+        dualToneQSEnabled = XPrefs.Xprefs.getBoolean("dualToneQSEnabled", false);
         setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
     }
 
     private static Context context;
+    Object mBehindColors;
+    
     public static void setLightQSHeader(boolean state)
     {
         if(lightQSHeaderEnabled != state) {
@@ -38,7 +45,7 @@ public class QSHeaderManager implements IXposedModPack {
     
             try {
                 onStatChanged();
-            } catch (Throwable throwable) {}
+            } catch (Throwable ignored) {}
         }
     }
 
@@ -51,14 +58,72 @@ public class QSHeaderManager implements IXposedModPack {
         Class<?> UtilsClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
         Class<?> OngoingPrivacyChipClass = XposedHelpers.findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
         Class<?> FragmentClass = XposedHelpers.findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
+        Class<?> ScrimControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
+        Class<?> GradientColorsClass = XposedHelpers.findClass("com.android.internal.colorextraction.ColorExtractor.GradientColors", lpparam.classLoader);
         
-        Method ScrimControllerMethod = XposedHelpers.findMethodExactIfExists("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
-                "applyStateToAlpha");
-        if(ScrimControllerMethod == null)
+        Method applyStateMethod = XposedHelpers.findMethodExactIfExists(ScrimControllerClass, "applyStateToAlpha");
+        if(applyStateMethod == null)
         {
-            ScrimControllerMethod = XposedHelpers.findMethodExact("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader,
-                    "applyState");
+            applyStateMethod = XposedHelpers.findMethodExact(ScrimControllerClass, "applyState");
         }
+    
+        try {
+            mBehindColors = GradientColorsClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        XposedBridge.hookAllMethods(ScrimControllerClass,
+                "onUiModeChanged", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        mBehindColors = GradientColorsClass.newInstance();
+                    }
+                });
+        
+        XposedBridge.hookAllMethods(ScrimControllerClass,
+                "updateScrims", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if(!dualToneQSEnabled) return;
+    
+                        Object mScrimBehind = XposedHelpers.getObjectField(param.thisObject, "mScrimBehind");
+                        boolean mBlankScreen = (boolean) XposedHelpers.getObjectField(param.thisObject, "mBlankScreen");
+                        float alpha = (float) XposedHelpers.callMethod(mScrimBehind, "getViewAlpha");
+                        boolean animateBehindScrim =  alpha!= 0 && !mBlankScreen;
+    
+                        XposedHelpers.callMethod(mScrimBehind, "setColors", mBehindColors, animateBehindScrim);
+                    }
+                });
+        
+        XposedBridge.hookAllMethods(ScrimControllerClass,
+                "updateThemeColors", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if(!dualToneQSEnabled) return;
+    
+                        Object mScrimBehind = XposedHelpers.getObjectField(param.thisObject, "mScrimBehind");
+    
+                        context = (Context) XposedHelpers.callMethod(mScrimBehind, "getContext");
+                        ColorStateList states = (ColorStateList) XposedHelpers.callStaticMethod(UtilsClass,
+                                "getColorAttr",
+                                context,
+                                context.getResources().getIdentifier("android:attr/colorSurfaceHeader", "attr", listenPackage));
+                        int surfaceBackground = states.getDefaultColor();
+
+                        ColorStateList accentStates = (ColorStateList) XposedHelpers.callStaticMethod(UtilsClass,
+                                "getColorAccent",
+                                context);
+                        int accent = accentStates.getDefaultColor();
+
+                        XposedHelpers.callMethod(mBehindColors, "setMainColor", surfaceBackground);
+                        XposedHelpers.callMethod(mBehindColors, "setSecondaryColor", accent);
+                        
+                        double contrast = ColorUtils.calculateContrast((int) XposedHelpers.callMethod(mBehindColors, "getMainColor"), Color.WHITE);
+                        
+                        XposedHelpers.callMethod(mBehindColors, "setSupportsDarkText", contrast > 4.5);
+                    }
+                });
+        
         
         XposedHelpers.findAndHookMethod(OngoingPrivacyChipClass,
                 "updateResources", new XC_MethodHook() {
@@ -68,7 +133,7 @@ public class QSHeaderManager implements IXposedModPack {
                         Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                         Resources res = context.getResources();
 
-                        int iconColor = res.getColor(res.getIdentifier("android:color/system_neutral1_900", "color", context.getPackageName()));
+                        int iconColor = context.getColor(res.getIdentifier("android:color/system_neutral1_900", "color", context.getPackageName()));
                         XposedHelpers.setObjectField(param.thisObject, "iconColor", iconColor);
                     }
                 });
@@ -89,7 +154,7 @@ public class QSHeaderManager implements IXposedModPack {
             }
         });
 
-        XposedBridge.hookMethod(ScrimControllerMethod, new XC_MethodHook() {
+        XposedBridge.hookMethod(applyStateMethod, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if (!lightQSHeaderEnabled) return;

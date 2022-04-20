@@ -36,6 +36,8 @@ public class Overlays {
         //independent overlays
         Overlays.put("HideNavbarOverlay", new overlayProp("com.android.overlay.removenavbar", false));
         Overlays.put("QSLightThemeOverlay", new overlayProp("sh.siava.AOSPMods_QSTheme", false));
+        Overlays.put("QSLightThemeOverlayBST", new overlayProp("sh.siava.AOSPMods_QSTheme_BST", false));
+        Overlays.put("QSDualToneOverlay", new overlayProp("sh.siava.AOSPMods_QSDualTone", false));
         Overlays.put("CustomThemedIconsOverlay", new overlayProp("com.romcontrolicons.nexuslauncher", false));
         Overlays.put("DualToneBatteryOverlay", new overlayProp("com.android.dualtonebattery", false));
         Overlays.put("UnreadMessagesNumberOverlay", new overlayProp("com.android.systemui.shownumber", false));

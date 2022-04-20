@@ -108,7 +108,8 @@
     <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
     <string name="qs_footer_text_summary">Leave it blank to remove the text completely</string>
     <string name="qs_footer_text_desc">Turn the display off/on to apply</string>
-    <string name="light_qs_title">Light QS Panel during light theme (might be buggy)</string>
+    <string name="light_qs_title">Light QS Panel during light theme</string>
+    <string name="light_dualtone_qs_title">Enable dual tone QS Panel</string>
     <string name="qs_pulldown_size">Quick pull down width</string>
     <string name="qs_pulldown_switch_title">Quick QS panel pull down from status bar</string>
     <string name="qs_pulldown_side_title">Quick pull down side</string>

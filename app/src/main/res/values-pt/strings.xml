@@ -21,7 +21,8 @@
     <string name="qs_footer_mod_title">Personalizar o número de compilação</string>
     <string name="qs_footer_text_summary">Deixe em branco para remover o texto</string>
     <string name="qs_footer_text_desc">Requer desligar/ligar o ecrã</string>
-    <string name="light_qs_title">Painel das QS claro (ainda em testes)</string>
+    <string name="light_qs_title">Ativar painel das QS claro</string>
+    <string name="light_dualtone_qs_title">Painel das QS com dois tons</string>
     <string name="qs_pulldown_size">Largura da ação deslize rápido para baixo</string>
     <string name="qs_pulldown_switch_title">Deslize rápido para baixo desde a barra de estado</string>
     <string name="qs_pulldown_side_title">Lado por onde deslizar</string>
@@ -200,6 +201,7 @@
     <string name="BB_batteryWarningColor">Cor para bateria fraca</string>
     <string name="BB_batteryChargingColor">Cor ao carregar</string>
     <string name="BB_batteryFastChargingColor">Cor ao carregar rápido</string>
+    <string name="BB_warning_tip">Defina 0 para ambas de modo a desativar as cores por nível</string>
     <string name="album_art_category">Opções de mídia</string>
     <string name="album_art_title">Ativar arte do álbum ao reproduzir mídia</string>
 

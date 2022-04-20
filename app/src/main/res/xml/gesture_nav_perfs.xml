@@ -13,7 +13,8 @@
             android:key="BackLeftHeight"
             android:max="100"
             android:title="@string/back_height_title"
-            app:min="10" />
+            app:min="10"
+            app:updatesContinuously="true"/>
         <SwitchPreference
             android:defaultValue="true"
             android:key="BackFromRight"
@@ -23,7 +24,8 @@
             android:key="BackRightHeight"
             android:max="100"
             android:title="@string/back_height_title"
-            app:min="10" />
+            app:min="10"
+            app:updatesContinuously="true"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/gesture_nav_pill_cat">
@@ -34,7 +36,8 @@
         <SeekBarPreference
             android:defaultValue="50"
             android:key="GesPillWidthModPos"
-            app:title="@string/gesture_nav_pill_width_title" />
+            app:title="@string/gesture_nav_pill_width_title"
+            app:updatesContinuously="true" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/gesture_navbar_thickness_title"

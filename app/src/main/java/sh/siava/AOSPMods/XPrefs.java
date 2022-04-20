@@ -40,7 +40,6 @@ public class XPrefs implements IXposedHookZygoteInit {
         Overlays.setAll();
         for(IXposedModPack thisMod : AOSPMods.runningMods)
         {
-            XposedBridge.log(thisMod.getClass().getName());
             thisMod.updatePrefs(key);
         }
     }

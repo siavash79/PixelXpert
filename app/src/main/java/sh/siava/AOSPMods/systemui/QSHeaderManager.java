@@ -24,14 +24,14 @@ public class QSHeaderManager implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
     private static boolean lightQSHeaderEnabled = false;
-    private static boolean dualToneQSEnabled = true;
+    private static boolean dualToneQSEnabled = false;
     
     private static final ArrayList<View> tiles = new ArrayList<>();
     
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
-        dualToneQSEnabled = XPrefs.Xprefs.getBoolean("dualToneQSEnabled", true);
+        dualToneQSEnabled = XPrefs.Xprefs.getBoolean("dualToneQSEnabled", false);
         setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
     }
 
@@ -45,7 +45,7 @@ public class QSHeaderManager implements IXposedModPack {
     
             try {
                 onStatChanged();
-            } catch (Throwable throwable) {}
+            } catch (Throwable ignored) {}
         }
     }
 
@@ -109,12 +109,12 @@ public class QSHeaderManager implements IXposedModPack {
                                 context,
                                 context.getResources().getIdentifier("android:attr/colorSurfaceHeader", "attr", listenPackage));
                         int surfaceBackground = states.getDefaultColor();
-                        
+
                         ColorStateList accentStates = (ColorStateList) XposedHelpers.callStaticMethod(UtilsClass,
                                 "getColorAccent",
                                 context);
                         int accent = accentStates.getDefaultColor();
-                        
+
                         XposedHelpers.callMethod(mBehindColors, "setMainColor", surfaceBackground);
                         XposedHelpers.callMethod(mBehindColors, "setSecondaryColor", accent);
                         
@@ -133,7 +133,7 @@ public class QSHeaderManager implements IXposedModPack {
                         Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                         Resources res = context.getResources();
 
-                        int iconColor = res.getColor(res.getIdentifier("android:color/system_neutral1_900", "color", context.getPackageName()));
+                        int iconColor = context.getColor(res.getIdentifier("android:color/system_neutral1_900", "color", context.getPackageName()));
                         XposedHelpers.setObjectField(param.thisObject, "iconColor", iconColor);
                     }
                 });

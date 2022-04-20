@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.systemui;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -66,17 +67,14 @@ public class QQSBrightness implements IXposedModPack {
     }
     
     private void setQQSVisibility() {
-        if(QQSbrightnessSliderView == null) return;
-        if(QQSBrightnessEnabled)
-        {
-            QQSbrightnessSliderView.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            try {
-                QQSbrightnessSliderView.setVisibility(View.GONE);
-            }catch(Exception ignored){}
-        }
+        if (QQSbrightnessSliderView == null) return;
+        try{
+            if (QQSBrightnessEnabled) {
+                XposedHelpers.callMethod(QQS, "setBrightnessView", QQSbrightnessSliderView);
+            } else {
+                ((FrameLayout) QQSbrightnessSliderView.getParent()).removeView(QQSbrightnessSliderView);
+            }
+        } catch(Exception ignored){}
     }
 
     @Override
@@ -130,7 +128,6 @@ public class QQSBrightness implements IXposedModPack {
 
                 //Place it to QQS
                 QQSbrightnessSliderView = (View) XposedHelpers.callMethod(QQSBrightnessSliderController, "getRootView");
-                XposedHelpers.callMethod(QQS, "setBrightnessView", QQSbrightnessSliderView);
 
                 //Creating controller and handler
                 Object mBrightnessController = XposedHelpers.callMethod(brightnessControllerFactory, "create", QQSBrightnessSliderController);

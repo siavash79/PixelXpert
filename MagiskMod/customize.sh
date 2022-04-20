@@ -75,8 +75,6 @@ activateModuleLSPD()
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"$PKGNAME\",0);" && runSQL
 }
 
-rm -f "$MODPATH/sqlite3"
-
 prepareSQL
 
 ui_print ''

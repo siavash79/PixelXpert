@@ -29,7 +29,7 @@ grantRootUID(){
  
 #grant root access to given package name 
 grantRootPkg(){ 
-	ui_print "- 	Granting root access to $1..." 
+	echo "- 	Granting root access to $1..." 
 	UID=$(pm list packages -U $1 --user 0 | grep ":$1 " | awk -F 'uid:' '{ print $2 }') 
  
 	grantRootUID $UID $1 
@@ -46,7 +46,7 @@ activateModuleLSPD()
 {	 
 	DBPATH=$LSPDDBPATH 
 	 
-	ui_print '- Trying to activate the module in Lsposed...'	 
+	echo '- Trying to activate the module in Lsposed...'	 
 	 
 	CMD="select mid from modules where module_pkg_name like \"$PKGNAME\";" && runSQL 
 	OLDMID=$(echo $SQLREUSLT | xargs) 

@@ -17,7 +17,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.Utils.BatteryBarView;
-import sh.siava.AOSPMods.Utils.CircleBatteryDrawable;
+import sh.siava.AOSPMods.Utils.CircleFilledBatteryDrawable;
 import sh.siava.AOSPMods.XPrefs;
 
 
@@ -113,7 +113,7 @@ public class BatteryStyleManager implements IXposedModPack {
 
                             if (!circleBatteryEnabled) return;
 
-                            CircleBatteryDrawable mCircleDrawable = new CircleBatteryDrawable((Context) param.args[0], frameColor);//, batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor);
+                            CircleFilledBatteryDrawable mCircleDrawable = new CircleFilledBatteryDrawable((Context) param.args[0], frameColor);//, batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor);
                             mCircleDrawable.setShowPercent(ShowPercent);
                             mCircleDrawable.setMeterStyle(BatteryStyle);
                             XposedHelpers.setAdditionalInstanceField(param.thisObject, "mCircleDrawable", mCircleDrawable);
@@ -131,7 +131,7 @@ public class BatteryStyleManager implements IXposedModPack {
                         if(!circleBatteryEnabled) return;
 
                         ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
-                        CircleBatteryDrawable mCircleDrawable = (CircleBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
+                        CircleFilledBatteryDrawable mCircleDrawable = (CircleFilledBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
 
                         mCircleDrawable.setMeterStyle(BatteryStyle);
 
@@ -155,8 +155,8 @@ public class BatteryStyleManager implements IXposedModPack {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             if(!circleBatteryEnabled) return;
-
-                            CircleBatteryDrawable mCircleDrawable = (CircleBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
+    
+                            CircleFilledBatteryDrawable mCircleDrawable = (CircleFilledBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
                             mCircleDrawable.setPowerSaveEnabled((boolean) param.args[0]);
                         }
                     });
@@ -172,7 +172,7 @@ public class BatteryStyleManager implements IXposedModPack {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!circleBatteryEnabled) return;
 
-                        CircleBatteryDrawable mCircleDrawable = (CircleBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
+                        CircleFilledBatteryDrawable mCircleDrawable = (CircleFilledBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
                         if(mCircleDrawable == null) return;
                         mCircleDrawable.setColors((int) param.args[0], (int) param.args[1], (int) param.args[2]);
                     }
@@ -190,7 +190,7 @@ public class BatteryStyleManager implements IXposedModPack {
 
             if (!circleBatteryEnabled) return;
 
-            CircleBatteryDrawable mCircleDrawable = (CircleBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
+            CircleFilledBatteryDrawable mCircleDrawable = (CircleFilledBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
             if (mCircleDrawable == null) return;
             
             mCircleDrawable.setFastCharing(isFastCharging);

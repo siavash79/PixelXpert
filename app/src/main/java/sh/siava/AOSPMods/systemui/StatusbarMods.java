@@ -18,8 +18,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.core.graphics.ColorUtils;
-
 import com.nfx.android.rangebarpreference.RangeBarHelper;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +31,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.Utils.BatteryBarView;
+import sh.siava.AOSPMods.Utils.CircleFilledBatteryDrawable;
 import sh.siava.AOSPMods.Utils.NetworkTrafficSB;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -218,6 +217,7 @@ public class StatusbarMods implements IXposedModPack {
     }
     
     private void refreshBatteryBar(BatteryBarView instance) {
+        CircleFilledBatteryDrawable.setStaticColor(batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor, BBarTransitColors);
         BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor, BBarTransitColors);
         instance.setVisibility((BBarEnabled) ? View.VISIBLE : View.GONE);
         instance.setColorful(BBarColorful);

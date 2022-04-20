@@ -129,7 +129,7 @@ public class QSHeaderManager implements IXposedModPack {
                 "updateResources", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!dualToneQSEnabled) return;
+                        if(!lightQSHeaderEnabled) return;
                         Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                         Resources res = context.getResources();
 

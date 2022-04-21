@@ -32,9 +32,9 @@ public class QSHeaderManager implements IXposedModPack {
     {
         if(XPrefs.Xprefs == null) return;
         dualToneQSEnabled = XPrefs.Xprefs.getBoolean("dualToneQSEnabled", false);
-        if (dualToneQSEnabled) {
-            Helpers.setOverlay("QSDualToneOverlay", true, true);
-        }
+
+        Helpers.setOverlay("QSDualToneOverlay", dualToneQSEnabled, true);
+        
         setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
     }
 

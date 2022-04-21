@@ -279,14 +279,9 @@ public class QSHeaderManager implements IXposedModPack {
         
         if (lightQSHeaderEnabled && !isDark) {
             
-            if(brightnessThickTrackEnabled) {
-                Helpers.setOverlay("QSLightThemeOverlay", false, true);
-                Helpers.setOverlay("QSLightThemeBSTOverlay", true, true);
-            } else {
-                Helpers.setOverlay("QSLightThemeBSTOverlay", false, true);
-                Helpers.setOverlay("QSLightThemeOverlay", true, true);
-            }
-            
+            Helpers.setOverlay("QSLightThemeOverlay", !brightnessThickTrackEnabled, true);
+            Helpers.setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, true);
+
             Thread t = new Thread(() -> {
                 try {
                     Thread.sleep(1500); //wait for animation to finish

@@ -130,7 +130,14 @@ public class QQSBrightness implements IXposedModPack {
                 QQSbrightnessSliderView = (View) XposedHelpers.callMethod(QQSBrightnessSliderController, "getRootView");
 
                 //Creating controller and handler
-                Object mBrightnessController = XposedHelpers.callMethod(brightnessControllerFactory, "create", QQSBrightnessSliderController);
+                Object mBrightnessController = null;
+                try {
+                    mBrightnessController = XposedHelpers.callMethod(brightnessControllerFactory, "create", QQSBrightnessSliderController);
+                }
+                catch(Exception e) //some custom roms added icon into signature. like ArrowOS
+                {
+                    mBrightnessController = XposedHelpers.callMethod(brightnessControllerFactory, "create", null, QQSBrightnessSliderController);
+                }
                 mBrightnessMirrorHandlerController = BrightnessMirrorHandlerClass.getConstructors()[0].newInstance(mBrightnessController);
                 XposedHelpers.callMethod(mBrightnessMirrorHandlerController, "setController", BrightnessMirrorController);
 

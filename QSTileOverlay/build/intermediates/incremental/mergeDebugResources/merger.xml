@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res"/><source path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\build\generated\res\rs\debug"/><source path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res"><file name="brightness_progress_full_drawable" path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\drawable\brightness_progress_full_drawable.xml" qualifiers="" type="drawable"/><file name="ic_arrow_back" path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\drawable\ic_arrow_back.xml" qualifiers="" type="drawable"/><file name="ic_brightness" path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\drawable\ic_brightness.xml" qualifiers="" type="drawable"/><file name="ic_brightness_full" path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\drawable\ic_brightness_full.xml" qualifiers="" type="drawable"/><file name="ic_brightness_low" path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\drawable\ic_brightness_low.xml" qualifiers="" type="drawable"/><file name="ic_brightness_medium" path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\drawable\ic_brightness_medium.xml" qualifiers="" type="drawable"/><file name="qs_footer_action_chip_background" path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\drawable\qs_footer_action_chip_background.xml" qualifiers="" type="drawable"/><file name="qs_security_footer_background" path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\drawable\qs_security_footer_background.xml" qualifiers="" type="drawable"/><file name="qs_tile_background_shape" path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\drawable\qs_tile_background_shape.xml" qualifiers="" type="drawable"/><file path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\values\attrs.xml" qualifiers=""><attr format="reference" name="lightIconTheme"/><attr format="reference" name="darkIconTheme"/><attr format="reference|color" name="offStateColor"/><attr format="reference|color" name="underSurfaceColor"/><declare-styleable name="TonedIcon">
+        <attr format="integer" name="backgroundColor"/>
+        <attr format="integer" name="fillColor"/>
+        <attr format="integer" name="singleToneColor"/>
+        <attr format="integer" name="homeHandleColor"/>
+    </declare-styleable></file><file path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\values\colors.xml" qualifiers=""><color name="control_primary_text">#E6FFFFFF</color><color name="dark_mode_icon_color_dual_tone_background">#3d000000</color><color name="dark_mode_icon_color_dual_tone_fill">#7a000000</color><color name="dark_mode_icon_color_single_tone">#99000000</color><color name="navigation_bar_home_handle_dark_color">#99000000</color><color name="light_mode_icon_color_dual_tone_background">#4dffffff</color><color name="light_mode_icon_color_dual_tone_fill">#ffffff</color><color name="light_mode_icon_color_single_tone">#ffffff</color><color name="navigation_bar_home_handle_light_color">#EBffffff</color><color name="dark_mode_qs_icon_color_single_tone">#B3000000</color></file><file path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\values\dimens.xml" qualifiers=""><dimen name="control_menu_item_text_size">16sp</dimen><dimen name="control_menu_item_min_height">56dp</dimen><dimen name="rounded_slider_height">48dp</dimen><dimen name="rounded_slider_corner_radius">24dp</dimen><dimen name="rounded_slider_icon_size">20dp</dimen><dimen name="rounded_slider_icon_inset">14dp</dimen><dimen name="qs_footer_action_inset">2dp</dimen><dimen name="qs_footer_action_corner_radius">20dp</dimen><dimen name="qs_security_footer_corner_radius">28dp</dimen><dimen name="qs_security_footer_background_inset">12dp</dimen><dimen name="qs_corner_radius">28dp</dimen></file><file path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\values\styles.xml" qualifiers=""><style name="Theme.SystemUI.QuickSettings" parent="@*android:style/Theme.DeviceDefault.SystemUI">
+        <item name="lightIconTheme">@style/QSIconTheme</item>
+        <item name="darkIconTheme">@style/QSIconTheme</item>
+        <item name="android:colorError">@*android:color/error_color_material_light</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
+        <item name="offStateColor">@*android:color/surface_light</item>
+        <item name="android:itemTextAppearance">@style/Control.MenuItem</item>
+    </style><style name="QSIconTheme">
+        <item name="backgroundColor">?android:attr/textColorHint</item>
+        <item name="fillColor">?android:attr/textColorPrimary</item>
+        <item name="singleToneColor">?android:attr/textColorPrimary</item>
+    </style><style name="Control"/><style name="Control.MenuItem">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+        <item name="android:textSize">@dimen/control_menu_item_text_size</item>
+        <item name="android:textColor">@color/control_primary_text</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">@dimen/control_menu_item_min_height</item>
+    </style><style name="Theme.SystemUI.QuickSettings.BrightnessDialog" parent="@android:style/Theme.DeviceDefault.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style><style name="QSCustomizeToolbar" parent="@*android:style/Widget.DeviceDefault.Toolbar">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:elevation">0dp</item>
+    </style></file><file path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\res\values-night\styles.xml" qualifiers="night-v8"><style name="Theme.SystemUI.QuickSettings" parent="@*android:style/Theme.DeviceDefault.SystemUI">
+        <item name="lightIconTheme">@style/QSIconTheme</item>
+        <item name="darkIconTheme">@style/QSIconTheme</item>
+        <item name="android:colorError">@*android:color/error_color_material_dark</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
+        <item name="offStateColor">@android:color/system_neutral1_800</item>
+        <item name="android:itemTextAppearance">@style/Control.MenuItem</item>
+    </style></file></source><source path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\build\generated\res\rs\debug"/><source path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\debug\res"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="TonedIcon">
+        <attr format="integer" name="backgroundColor"/>
+        <attr format="integer" name="fillColor"/>
+        <attr format="integer" name="singleToneColor"/>
+        <attr format="integer" name="homeHandleColor"/>
+    </declare-styleable></configuration></mergedItems></merger>

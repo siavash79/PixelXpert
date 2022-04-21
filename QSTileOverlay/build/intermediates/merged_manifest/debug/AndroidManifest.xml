@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="sh.siava.AOSP_lightQSOverlay"
+    platformBuildVersionCode="31"
+    platformBuildVersionName="12"
+    android:compileSdkVersion="31"
+    android:compileSdkVersionCodename="12"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="31"
+        android:targetSdkVersion="31" />
+
+    <overlay
+        android:category="android.theme.customization.qs_header_style_vm"
+        android:isStatic="false"
+        android:priority="1"
+        android:targetPackage="com.android.systemui" />
+
+    <application
+        android:debuggable="true"
+        android:extractNativeLibs="false"
+        android:hasCode="false"
+        android:label="AOSP Mods QS Panel Theme Overlay" />
+
+</manifest>

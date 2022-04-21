@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\build\\intermediates\\merged_res\\debug\\drawable_ic_brightness_full.xml.flat",
+        "source": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\src\\main\\res\\drawable\\ic_brightness_full.xml"
+    },
+    {
+        "merged": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\build\\intermediates\\merged_res\\debug\\drawable_ic_brightness_medium.xml.flat",
+        "source": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\src\\main\\res\\drawable\\ic_brightness_medium.xml"
+    },
+    {
+        "merged": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\build\\intermediates\\merged_res\\debug\\drawable_ic_brightness_low.xml.flat",
+        "source": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\src\\main\\res\\drawable\\ic_brightness_low.xml"
+    },
+    {
+        "merged": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\build\\intermediates\\merged_res\\debug\\drawable_qs_footer_action_chip_background.xml.flat",
+        "source": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\src\\main\\res\\drawable\\qs_footer_action_chip_background.xml"
+    },
+    {
+        "merged": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\build\\intermediates\\merged_res\\debug\\drawable_qs_tile_background_shape.xml.flat",
+        "source": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\src\\main\\res\\drawable\\qs_tile_background_shape.xml"
+    },
+    {
+        "merged": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\build\\intermediates\\merged_res\\debug\\drawable_ic_brightness.xml.flat",
+        "source": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\src\\main\\res\\drawable\\ic_brightness.xml"
+    },
+    {
+        "merged": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\build\\intermediates\\merged_res\\debug\\drawable_qs_security_footer_background.xml.flat",
+        "source": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\src\\main\\res\\drawable\\qs_security_footer_background.xml"
+    },
+    {
+        "merged": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\build\\intermediates\\merged_res\\debug\\drawable_brightness_progress_full_drawable.xml.flat",
+        "source": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\src\\main\\res\\drawable\\brightness_progress_full_drawable.xml"
+    },
+    {
+        "merged": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\build\\intermediates\\merged_res\\debug\\drawable_ic_arrow_back.xml.flat",
+        "source": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\src\\main\\res\\drawable\\ic_arrow_back.xml"
+    }
+]

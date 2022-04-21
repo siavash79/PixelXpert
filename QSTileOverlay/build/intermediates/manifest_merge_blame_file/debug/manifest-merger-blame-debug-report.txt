@@ -1,0 +1,38 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="sh.siava.AOSP_lightQSOverlay"
+4    platformBuildVersionCode="31"
+5    platformBuildVersionName="12"
+6    android:compileSdkVersion="31"
+7    android:compileSdkVersionCodename="12"
+8    android:versionCode="1"
+9    android:versionName="1.0" >
+10
+11    <uses-sdk
+12        android:minSdkVersion="31"
+12-->E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\AndroidManifest.xml
+13        android:targetSdkVersion="31" />
+13-->E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\AndroidManifest.xml
+14
+15    <overlay
+15-->E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\AndroidManifest.xml:2:5-172
+16        android:category="android.theme.customization.qs_header_style_vm"
+16-->E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\AndroidManifest.xml:2:14-79
+17        android:isStatic="false"
+17-->E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\AndroidManifest.xml:2:80-104
+18        android:priority="1"
+18-->E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\AndroidManifest.xml:2:105-125
+19        android:targetPackage="com.android.systemui" />
+19-->E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\AndroidManifest.xml:2:126-170
+20
+21    <application
+21-->E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\AndroidManifest.xml:3:5-126
+22        android:debuggable="true"
+23        android:extractNativeLibs="false"
+23-->E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\AndroidManifest.xml:3:18-51
+24        android:hasCode="false"
+24-->E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\AndroidManifest.xml:3:52-75
+25        android:label="AOSP Mods QS Panel Theme Overlay" />
+25-->E:\Software\Android_Tools\AndroidStudioProjects\AOSPMods\QSTileOverlay\src\main\AndroidManifest.xml:3:76-124
+26
+27</manifest>

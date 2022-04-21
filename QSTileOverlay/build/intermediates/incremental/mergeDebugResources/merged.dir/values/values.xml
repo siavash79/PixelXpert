@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="reference" name="darkIconTheme"/>
+    <attr format="reference" name="lightIconTheme"/>
+    <attr format="reference|color" name="offStateColor"/>
+    <attr format="reference|color" name="underSurfaceColor"/>
+    <color name="control_primary_text">#E6FFFFFF</color>
+    <color name="dark_mode_icon_color_dual_tone_background">#3d000000</color>
+    <color name="dark_mode_icon_color_dual_tone_fill">#7a000000</color>
+    <color name="dark_mode_icon_color_single_tone">#99000000</color>
+    <color name="dark_mode_qs_icon_color_single_tone">#B3000000</color>
+    <color name="light_mode_icon_color_dual_tone_background">#4dffffff</color>
+    <color name="light_mode_icon_color_dual_tone_fill">#ffffff</color>
+    <color name="light_mode_icon_color_single_tone">#ffffff</color>
+    <color name="navigation_bar_home_handle_dark_color">#99000000</color>
+    <color name="navigation_bar_home_handle_light_color">#EBffffff</color>
+    <dimen name="control_menu_item_min_height">56dp</dimen>
+    <dimen name="control_menu_item_text_size">16sp</dimen>
+    <dimen name="qs_corner_radius">28dp</dimen>
+    <dimen name="qs_footer_action_corner_radius">20dp</dimen>
+    <dimen name="qs_footer_action_inset">2dp</dimen>
+    <dimen name="qs_security_footer_background_inset">12dp</dimen>
+    <dimen name="qs_security_footer_corner_radius">28dp</dimen>
+    <dimen name="rounded_slider_corner_radius">24dp</dimen>
+    <dimen name="rounded_slider_height">48dp</dimen>
+    <dimen name="rounded_slider_icon_inset">14dp</dimen>
+    <dimen name="rounded_slider_icon_size">20dp</dimen>
+    <style name="Control"/>
+    <style name="Control.MenuItem">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+        <item name="android:textSize">@dimen/control_menu_item_text_size</item>
+        <item name="android:textColor">@color/control_primary_text</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">@dimen/control_menu_item_min_height</item>
+    </style>
+    <style name="QSCustomizeToolbar" parent="@*android:style/Widget.DeviceDefault.Toolbar">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+    <style name="QSIconTheme">
+        <item name="backgroundColor">?android:attr/textColorHint</item>
+        <item name="fillColor">?android:attr/textColorPrimary</item>
+        <item name="singleToneColor">?android:attr/textColorPrimary</item>
+    </style>
+    <style name="Theme.SystemUI.QuickSettings" parent="@*android:style/Theme.DeviceDefault.SystemUI">
+        <item name="lightIconTheme">@style/QSIconTheme</item>
+        <item name="darkIconTheme">@style/QSIconTheme</item>
+        <item name="android:colorError">@*android:color/error_color_material_light</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
+        <item name="offStateColor">@*android:color/surface_light</item>
+        <item name="android:itemTextAppearance">@style/Control.MenuItem</item>
+    </style>
+    <style name="Theme.SystemUI.QuickSettings.BrightnessDialog" parent="@android:style/Theme.DeviceDefault.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <declare-styleable name="TonedIcon">
+        <attr format="integer" name="backgroundColor"/>
+        <attr format="integer" name="fillColor"/>
+        <attr format="integer" name="singleToneColor"/>
+        <attr format="integer" name="homeHandleColor"/>
+    </declare-styleable>
+</resources>

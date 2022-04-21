@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "map": [
+                {
+                    "source": "E:\\Software\\Android_Tools\\AndroidStudioProjects\\AOSPMods\\QSTileOverlay\\src\\main\\res\\values-night\\styles.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "118",
+                        "endLines": "11",
+                        "endColumns": "12",
+                        "endOffsets": "740"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "10",
+                        "endColumns": "12",
+                        "endOffsets": "669"
+                    }
+                }
+            ]
+        }
+    ]
+}

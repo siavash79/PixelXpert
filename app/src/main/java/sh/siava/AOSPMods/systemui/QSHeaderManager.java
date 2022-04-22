@@ -38,7 +38,14 @@ public class QSHeaderManager implements IXposedModPack {
         
         setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
     
-        brightnessThickTrackEnabled = XPrefs.Xprefs.getBoolean("BSThickTrackOverlay", false);
+        boolean newbrightnessThickTrackEnabled = XPrefs.Xprefs.getBoolean("BSThickTrackOverlay", false);
+        if(newbrightnessThickTrackEnabled != brightnessThickTrackEnabled)
+        {
+            brightnessThickTrackEnabled = newbrightnessThickTrackEnabled;
+            try {
+                onStatChanged();
+            } catch (Throwable ignored){}
+        }
     }
     
     private static Context context;
@@ -273,14 +280,14 @@ public class QSHeaderManager implements IXposedModPack {
         boolean isDark = getIsDark();
         
         Helpers.setOverlay("QSLightThemeOverlay", false, true);
-        Helpers.setOverlay("QSLightThemeBSTOverlay", false, true);
+        Helpers.setOverlay("QSLightThemeBSTOverlay", false, false);
         
         Thread.sleep(50);
         
         if (lightQSHeaderEnabled && !isDark) {
             
             Helpers.setOverlay("QSLightThemeOverlay", !brightnessThickTrackEnabled, true);
-            Helpers.setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, true);
+            Helpers.setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, false);
 
             Thread t = new Thread(() -> {
                 try {

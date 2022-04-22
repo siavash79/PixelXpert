@@ -257,7 +257,7 @@ public class CircleFilledBatteryDrawable extends Drawable {
 	
 	public void setBatteryLevel(int mLevel) {
 		if(mLevel != batteryLevel) {
-			batteryLevel = 100;
+			batteryLevel = mLevel;
 			invalidateSelf();
 		}
 	}

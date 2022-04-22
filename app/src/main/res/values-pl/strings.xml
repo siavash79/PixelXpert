@@ -108,7 +108,8 @@
     <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
     <string name="qs_footer_text_summary">Pozostaw puste miejsce, aby całkowicie usunąć tekst</string>
     <string name="qs_footer_text_desc">Wyłącz/włącz wyswietlacz, aby zastosowac zmiany</string>
-    <string name="light_qs_title">Jasny panel szybkich ustawien podczas jasnego motywu (mogą wystepować błędy)</string>
+    <string name="light_qs_title">Jasny panel szybkich ustawien podczas jasnego motywu</string>
+    <string name="light_dualtone_qs_title">Włącz dwutonowy panel szybkich ustawień</string>
     <string name="qs_pulldown_size">Szerokość szybkich ustawień</string>
     <string name="qs_pulldown_switch_title">Panel szybkich ustawień rozwijany z paska stanu</string>
     <string name="qs_pulldown_side_title">Pociągnij w dół</string>

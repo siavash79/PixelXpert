@@ -15,6 +15,7 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.TypedArrayUtils;
 import androidx.core.graphics.ColorUtils;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class CircleFilledBatteryDrawable extends Drawable {
 	private static boolean transitColors = false;
 	private int intrinsicHeight;
 	private int intrinsicWidth;
-	private int size = 1;
+	private int size;
 	private Rect padding = new Rect();
 	private int fgColor = Color.WHITE;
 	private int bgColor = Color.WHITE;
@@ -49,7 +50,6 @@ public class CircleFilledBatteryDrawable extends Drawable {
 	private boolean isColorful = false;
 	private static int[] shadeColors = null;
 	private static float[] shadeLevels = null;
-	private RectF chargeFrame;
 	
 	public CircleFilledBatteryDrawable(Context context)
 	{
@@ -61,7 +61,6 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		intrinsicHeight = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", mContext.getPackageName()));
 		intrinsicWidth = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", mContext.getPackageName()));
 		size = Math.min(intrinsicHeight, intrinsicWidth);
-		setChargeFrame();
 	}
 	
 	public void setColorful(boolean colorful)
@@ -90,20 +89,31 @@ public class CircleFilledBatteryDrawable extends Drawable {
 	private static void refreshShadeColors() {
 		if(batteryColors == null) return;
 		
-		List<Integer> colors = Arrays.stream(batteryColors).boxed().collect(Collectors.toList());
-		colors.add(Color.GREEN);
-		
-		shadeLevels = new float[colors.size()];
-		
-		shadeLevels[0] = 0;
-		for(int i = 0; i < batteryLevels.length-1; i++)
+		shadeColors = new int[batteryLevels.length*2+2];
+		XposedBridge.log("len" + batteryColors.length);
+
+		XposedBridge.log("len2" + shadeColors.length);
+		shadeLevels = new float[shadeColors.length];
+		float prev = 0;
+		for(int i = 0; i < batteryLevels.length; i++)
 		{
-			shadeLevels[i+1] = (batteryLevels[i] + batteryLevels[i+1]) /200;
-			XposedBridge.log("level " + i+1 + " is " + shadeLevels[i+1]);
+			float rangeLength = batteryLevels[i] - prev;
+			XposedBridge.log("range:" + rangeLength);
+			shadeLevels[2*i]=(prev + rangeLength*.3f)/100;
+			shadeColors[2*i]=batteryColors[i];
+			XposedBridge.log("level " + shadeLevels[2*i] + " color " + shadeColors[2*i]);
+
+			shadeLevels[2*i+1]=(batteryLevels[i] - rangeLength*.3f)/100;
+			shadeColors[2*i+1]=batteryColors[i];
+			XposedBridge.log("level " + shadeLevels[2*i+1] + " color " + shadeColors[2*i+1]);
+			
+			prev = batteryLevels[i];
 		}
-		shadeLevels[shadeLevels.length-1] = 1f;
 		
-		shadeColors = colors.stream().mapToInt(i->i).toArray();
+		shadeLevels[shadeLevels.length-2] = (batteryLevels[batteryLevels.length-1]+(100-batteryLevels[batteryLevels.length-1])*.3f)/100;
+		shadeColors[shadeColors.length-2] = Color.GREEN;
+		shadeLevels[shadeLevels.length-1] = 1f;
+		shadeColors[shadeColors.length-1] = Color.GREEN;
 	}
 	
 	public void refresh()
@@ -192,6 +202,10 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		}
 		else
 		{
+			for(int i = 0; i< shadeColors.length; i++)
+			{
+				XposedBridge.log(String.format("i = %s level = %s color = %s", i, shadeLevels[i], shadeColors[i]));
+			}
 			RadialGradient shader = new RadialGradient(cx,cy,baseRadius, shadeColors, shadeLevels, Shader.TileMode.CLAMP);
 			paint.setShader(shader);
 		}
@@ -215,16 +229,9 @@ public class CircleFilledBatteryDrawable extends Drawable {
 	{
 		super.setBounds(bounds);
 		this.size = Math.max((bounds.height() - padding.height()), (bounds.width() - padding.width()));
-		setChargeFrame();
 		invalidateSelf();
 	}
 	
-	private void setChargeFrame() {
-		float chargeWidth = size/6f;
-		chargeFrame = new RectF(padding.left+chargeWidth, padding.top+chargeWidth, padding.left + size - (chargeWidth*2), padding.top + size - (chargeWidth*2));
-		XposedBridge.log(chargeFrame.left+ " " + chargeFrame.right+ " "+chargeFrame.top+ " "+chargeFrame.bottom);
-
-	}
 	
 	@Override
 	public int getOpacity() {

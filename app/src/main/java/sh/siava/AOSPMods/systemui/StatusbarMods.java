@@ -76,7 +76,7 @@ public class StatusbarMods implements IXposedModPack {
     private FrameLayout fullStatusbar;
     
     private static boolean BBarEnabled;
-    private static boolean BBarColorful;
+    public static boolean BBarColorful;
     private static boolean BBOnlyWhileCharging;
     private static boolean BBOnBottom;
     private static boolean BBSetCentered;

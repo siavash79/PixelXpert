@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.RadialGradient;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 
@@ -18,6 +19,8 @@ import androidx.core.graphics.ColorUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import de.robv.android.xposed.XposedBridge;
 
@@ -44,15 +47,21 @@ public class CircleFilledBatteryDrawable extends Drawable {
 	private int alpha = 255;
 	private int[] colors;
 	private boolean isColorful = false;
+	private static int[] shadeColors = null;
+	private static float[] shadeLevels = null;
+	private RectF chargeFrame;
 	
 	public CircleFilledBatteryDrawable(Context context)
 	{
 		this.mContext = context;
-		XposedBridge.log("init");
+//		XposedBridge.log("init");
+		
+		
 		Resources res = mContext.getResources();
 		intrinsicHeight = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", mContext.getPackageName()));
 		intrinsicWidth = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", mContext.getPackageName()));
 		size = Math.min(intrinsicHeight, intrinsicWidth);
+		setChargeFrame();
 	}
 	
 	public void setColorful(boolean colorful)
@@ -60,7 +69,7 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		if(isColorful != colorful)
 		{
 			isColorful = colorful;
-			invalidateSelf();
+			if(isColorful) refresh();
 		}
 	}
 	
@@ -76,6 +85,31 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		CircleFilledBatteryDrawable.chargingColor = charingColor;
 		CircleFilledBatteryDrawable.fastChargingColor = fastChargingColor;
 		CircleFilledBatteryDrawable.transitColors = transitColors;
+	}
+	
+	private static void refreshShadeColors() {
+		if(batteryColors == null) return;
+		
+		List<Integer> colors = Arrays.stream(batteryColors).boxed().collect(Collectors.toList());
+		colors.add(Color.GREEN);
+		
+		shadeLevels = new float[colors.size()];
+		
+		shadeLevels[0] = 0;
+		for(int i = 0; i < batteryLevels.length-1; i++)
+		{
+			shadeLevels[i+1] = (batteryLevels[i] + batteryLevels[i+1]) /200;
+			XposedBridge.log("level " + i+1 + " is " + shadeLevels[i+1]);
+		}
+		shadeLevels[shadeLevels.length-1] = 1f;
+		
+		shadeColors = colors.stream().mapToInt(i->i).toArray();
+	}
+	
+	public void refresh()
+	{
+		refreshShadeColors();
+		this.invalidateSelf();
 	}
 	
 	@Override
@@ -105,24 +139,38 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		
 		float levelRedius = baseRadius*batteryLevel/100f;
 		
-		setLevelPaint(levelPaint, cx, cy, baseRadius);
-		
-		XposedBridge.log("cx "+ cx);
-		XposedBridge.log("cy "+ cy);
-		XposedBridge.log("br "+ baseRadius);
-		XposedBridge.log("lr "+ levelRedius);
-		
+		try {
+			setLevelPaint(levelPaint, cx, cy, baseRadius);
+		}
+		catch (Throwable t)
+		{
+			levelPaint.setColor(Color.BLACK);
+		}
 		
 		canvas.drawCircle(cx, cy, baseRadius, basePaint);
 		canvas.drawCircle(cy, cy, levelRedius, levelPaint);
 	}
 	
 	private void setLevelPaint(Paint paint, float cx, float cy, float baseRadius) {
-		paint.setColor(Color.WHITE);
-		if(true) return;
 		int singleColor = fgColor;
 		
-		if(!isColorful) {
+		if(isFastCharging && showFastCharing && batteryLevel < 100)
+		{
+			paint.setColor(fastChargingColor);
+			return;
+		}
+		else if (isCharging && showFastCharing && batteryLevel < 100)
+		{
+			paint.setColor(chargingColor);
+			return;
+		}
+		else if (isPowerSaving)
+		{
+			paint.setColor(Color.RED);
+			return;
+		}
+		
+		if(!isColorful || shadeColors == null) {
 			for (int i = 0; i < batteryLevels.length; i++) {
 				if (batteryLevel <= batteryLevels[i]) {
 					if (transitColors && i > 0) {
@@ -133,6 +181,10 @@ public class CircleFilledBatteryDrawable extends Drawable {
 					} else {
 						singleColor = batteryColors[i];
 					}
+					XposedBridge.log("level" + batteryLevel);
+					XposedBridge.log("i:" + i);
+					XposedBridge.log("level I"+ batteryLevels[i]);
+					XposedBridge.log("color I" + batteryColors[i]);
 					break;
 				}
 			}
@@ -140,21 +192,8 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		}
 		else
 		{
-			ArrayList<Integer> colors = new ArrayList(Arrays.asList(batteryColors));
-			colors.add(Color.GREEN);
-			
-			float[] levels = new float[colors.size()];
-			
-			levels[0] = 0;
-			for(int i = 0; i < batteryLevels.length-1; i++)
-			{
-				levels[i+1] = (batteryLevels[i] + batteryLevels[i+1]) /2;
-			}
-			levels[levels.length-1] = 100;
-			
-			int[] colorsA = colors.stream().mapToInt(i -> i).toArray();
-			RadialGradient g = new RadialGradient(cx,cy,baseRadius, colorsA, levels, Shader.TileMode.CLAMP);
-			paint.setShader(g);
+			RadialGradient shader = new RadialGradient(cx,cy,baseRadius, shadeColors, shadeLevels, Shader.TileMode.CLAMP);
+			paint.setShader(shader);
 		}
 	}
 	
@@ -176,7 +215,15 @@ public class CircleFilledBatteryDrawable extends Drawable {
 	{
 		super.setBounds(bounds);
 		this.size = Math.max((bounds.height() - padding.height()), (bounds.width() - padding.width()));
+		setChargeFrame();
 		invalidateSelf();
+	}
+	
+	private void setChargeFrame() {
+		float chargeWidth = size/6f;
+		chargeFrame = new RectF(padding.left+chargeWidth, padding.top+chargeWidth, padding.left + size - (chargeWidth*2), padding.top + size - (chargeWidth*2));
+		XposedBridge.log(chargeFrame.left+ " " + chargeFrame.right+ " "+chargeFrame.top+ " "+chargeFrame.bottom);
+
 	}
 	
 	@Override
@@ -210,7 +257,7 @@ public class CircleFilledBatteryDrawable extends Drawable {
 	
 	public void setBatteryLevel(int mLevel) {
 		if(mLevel != batteryLevel) {
-			batteryLevel = 50;
+			batteryLevel = 100;
 			invalidateSelf();
 		}
 	}

@@ -114,6 +114,7 @@ public class BatteryStyleManager implements IXposedModPack {
                             if (!circleBatteryEnabled) return;
 
                             CircleFilledBatteryDrawable mCircleDrawable = new CircleFilledBatteryDrawable((Context) param.args[0], frameColor);//, batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor);
+                            mCircleDrawable.setColorful(true);
                             mCircleDrawable.setShowPercent(ShowPercent);
                             mCircleDrawable.setMeterStyle(BatteryStyle);
                             XposedHelpers.setAdditionalInstanceField(param.thisObject, "mCircleDrawable", mCircleDrawable);

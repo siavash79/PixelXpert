@@ -47,7 +47,7 @@
     <string name="double_tap_sleep_off">El doble toque no bloquea la pantalla</string>
     <string name="double_tap_sleep_on">El doble toque bloquea la pantalla, en barra de estado y en pantalla de bloqueo</string>
     <string name="battery_style_title">Escoger un estilo de batería</string>
-    <string name="battery_show_percent_title">Mostrar porcentage</string>
+    <string name="battery_show_percent_title">Mostrar porcentaje</string>
     <string name="battery_style_category_title">Estilo de batería</string>
     <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Tamaño del icono de batería</string> 
@@ -96,6 +96,7 @@
     <string name="BB_indicate_fast_charging">Indicar carga rápida</string>
     <string name="BB_warning_level">Valor del nivel critico de batería</string>
     <string name="BB_warning_tip">Poner los dos a 0 para deshabilitar los colores de nivel de batería</string>
+    <string name="BB_batteryCriticalColor">Color de nivel de bateria critíco</string>
     <string name="BB_batteryWarningColor">Aviso de nivel de batería</string>
     <string name="BB_batteryChargingColor">Color de carga</string>
     <string name="BB_batteryFastChargingColor">Color de carga rápida</string>

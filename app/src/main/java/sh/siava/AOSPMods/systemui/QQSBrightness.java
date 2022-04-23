@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.systemui;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -134,9 +135,10 @@ public class QQSBrightness implements IXposedModPack {
                 try {
                     mBrightnessController = XposedHelpers.callMethod(brightnessControllerFactory, "create", QQSBrightnessSliderController);
                 }
-                catch(Exception e) //some custom roms added icon into signature. like ArrowOS
+                catch(Throwable e) //some custom roms added icon into signature. like ArrowOS
                 {
-                    mBrightnessController = XposedHelpers.callMethod(brightnessControllerFactory, "create", null, QQSBrightnessSliderController);
+                    ImageView icon = (ImageView) XposedHelpers.callMethod(QQSBrightnessSliderController, "getIconView");
+                    mBrightnessController = XposedHelpers.callMethod(brightnessControllerFactory, "create", icon, QQSBrightnessSliderController);
                 }
                 mBrightnessMirrorHandlerController = BrightnessMirrorHandlerClass.getConstructors()[0].newInstance(mBrightnessController);
                 XposedHelpers.callMethod(mBrightnessMirrorHandlerController, "setController", BrightnessMirrorController);

@@ -1,6 +1,7 @@
 package sh.siava.AOSPMods.Utils;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,30 +10,23 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.RadialGradient;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.TypedArrayUtils;
 import androidx.core.graphics.ColorUtils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import de.robv.android.xposed.XposedBridge;
 
 public class CircleFilledBatteryDrawable extends Drawable {
-	private Context mContext;
+	private final Context mContext;
 	private boolean isCharging = false;
 	private boolean isFastCharging = false;
 	private int batteryLevel = 0;
 	private static float[] batteryLevels;
 	private static int[] batteryColors;
-	private static boolean showColors = false;
 	private static boolean showCharging = false;
 	private static boolean showFastCharing = false;
 	private static int chargingColor = 0;
@@ -46,18 +40,20 @@ public class CircleFilledBatteryDrawable extends Drawable {
 	private int bgColor = Color.WHITE;
 	private boolean isPowerSaving = false;
 	private int alpha = 255;
-	private int[] colors;
 	private boolean isColorful = false;
 	private static int[] shadeColors = null;
 	private static float[] shadeLevels = null;
+	private final int powerSaveColor;
 	
 	public CircleFilledBatteryDrawable(Context context)
 	{
 		this.mContext = context;
-//		XposedBridge.log("init");
-		
 		
 		Resources res = mContext.getResources();
+		powerSaveColor = getColorStateListDefaultColor(
+				mContext,
+				mContext.getResources().getIdentifier("batterymeter_plus_color", "color", mContext.getPackageName()));
+				
 		intrinsicHeight = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", mContext.getPackageName()));
 		intrinsicWidth = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", mContext.getPackageName()));
 		size = Math.min(intrinsicHeight, intrinsicWidth);
@@ -68,7 +64,7 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		if(isColorful != colorful)
 		{
 			isColorful = colorful;
-			if(isColorful) refresh();
+			if(isColorful) invalidateSelf();
 		}
 	}
 	
@@ -84,6 +80,8 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		CircleFilledBatteryDrawable.chargingColor = charingColor;
 		CircleFilledBatteryDrawable.fastChargingColor = fastChargingColor;
 		CircleFilledBatteryDrawable.transitColors = transitColors;
+		
+		refreshShadeColors();
 	}
 	
 	private static void refreshShadeColors() {
@@ -114,12 +112,6 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		shadeColors[shadeColors.length-2] = Color.GREEN;
 		shadeLevels[shadeLevels.length-1] = 1f;
 		shadeColors[shadeColors.length-1] = Color.GREEN;
-	}
-	
-	public void refresh()
-	{
-		refreshShadeColors();
-		this.invalidateSelf();
 	}
 	
 	@Override
@@ -169,14 +161,14 @@ public class CircleFilledBatteryDrawable extends Drawable {
 			paint.setColor(fastChargingColor);
 			return;
 		}
-		else if (isCharging && showFastCharing && batteryLevel < 100)
+		else if (isCharging && showCharging && batteryLevel < 100)
 		{
 			paint.setColor(chargingColor);
 			return;
 		}
 		else if (isPowerSaving)
 		{
-			paint.setColor(Color.RED);
+			paint.setColor(powerSaveColor);
 			return;
 		}
 		
@@ -221,7 +213,6 @@ public class CircleFilledBatteryDrawable extends Drawable {
 	
 	@Override
 	public void setColorFilter(@Nullable ColorFilter colorFilter) {
-		return;
 	}
 	
 	@Override
@@ -282,4 +273,9 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		}
 	}
 	
+	@ColorInt
+	private int getColorStateListDefaultColor(Context context, int resId){
+		ColorStateList list = context.getResources().getColorStateList(resId, context.getTheme());
+		return list.getDefaultColor();
+	}
 }

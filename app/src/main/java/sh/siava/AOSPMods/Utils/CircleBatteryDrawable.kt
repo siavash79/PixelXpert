@@ -149,10 +149,6 @@ class CircleBatteryDrawable(
         return true
     }
 
-    override fun setColorful(colorful: Boolean) {
-        TODO("Not yet implemented")
-    }
-
     private fun getColorForLevel(percent: Int): Int {
         for(i in 0 until batteryLevels.size)
         {

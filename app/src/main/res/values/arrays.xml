@@ -26,6 +26,7 @@
         <item>@string/battery_default</item>
         <item>@string/battery_circle</item>
         <item>@string/battery_dashed_circle</item>
+        <item>@string/battery_circle_filled</item>
         <item>@string/battery_hidden</item>
     </string-array>
 
@@ -33,6 +34,7 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
         <item>99</item>
     </string-array>
 

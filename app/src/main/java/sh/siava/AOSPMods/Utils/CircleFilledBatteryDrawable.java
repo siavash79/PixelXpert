@@ -11,7 +11,6 @@ import android.graphics.PixelFormat;
 import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.Shader;
-import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -25,13 +24,6 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 	private boolean isCharging = false;
 	private boolean isFastCharging = false;
 	private int batteryLevel = 0;
-	private static float[] batteryLevels;
-	private static int[] batteryColors;
-	private static boolean showCharging = false;
-	private static boolean showFastCharing = false;
-	private static int chargingColor = 0;
-	private static int fastChargingColor = 0;
-	private static boolean transitColors = false;
 	private int intrinsicHeight;
 	private int intrinsicWidth;
 	private int size;
@@ -40,10 +32,10 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 	private int bgColor = Color.WHITE;
 	private boolean isPowerSaving = false;
 	private int alpha = 255;
-	private boolean isColorful = false;
 	private static int[] shadeColors = null;
 	private static float[] shadeLevels = null;
 	private final int powerSaveColor;
+	private long lastUpdate = -1;
 	
 	public CircleFilledBatteryDrawable(Context context)
 	{
@@ -59,31 +51,10 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 		size = Math.min(intrinsicHeight, intrinsicWidth);
 	}
 	
-	@Override
-	public void setColorful(boolean colorful)
-	{
-		if(isColorful != colorful)
-		{
-			isColorful = colorful;
-			if(isColorful) invalidateSelf();
-		}
-	}
 	
 	public CircleFilledBatteryDrawable(Context context, int frameColor) {
 		this(context);
 		bgColor = frameColor;
-	}
-	
-	public static void setStaticColor(float[] batteryLevels, int[] batteryColors, boolean indicateCharging, int charingColor, boolean indicateFastCharging, int fastChargingColor, boolean transitColors) {
-		CircleFilledBatteryDrawable.batteryColors = batteryColors;
-		CircleFilledBatteryDrawable.batteryLevels = batteryLevels;
-		CircleFilledBatteryDrawable.showCharging = indicateCharging;
-		CircleFilledBatteryDrawable.showFastCharing = indicateFastCharging;
-		CircleFilledBatteryDrawable.chargingColor = charingColor;
-		CircleFilledBatteryDrawable.fastChargingColor = fastChargingColor;
-		CircleFilledBatteryDrawable.transitColors = transitColors;
-		
-		refreshShadeColors();
 	}
 	
 	private static void refreshShadeColors() {
@@ -129,6 +100,11 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 	
 	@Override
 	public void draw(@NonNull Canvas canvas) {
+		if(lastUpdate != lastVarUpdate)
+		{
+			lastUpdate = lastVarUpdate;
+			refreshShadeColors();
+		}
 		Paint basePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		basePaint.setColor(bgColor);
 		basePaint.setAlpha(80*(alpha/255));
@@ -174,7 +150,7 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 			return;
 		}
 		
-		if(!isColorful || shadeColors == null) {
+		if(!colorful || shadeColors == null) {
 			for (int i = 0; i < batteryLevels.length; i++) {
 				if (batteryLevel <= batteryLevels[i]) {
 					if (transitColors && i > 0) {
@@ -185,10 +161,6 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 					} else {
 						singleColor = batteryColors[i];
 					}
-					XposedBridge.log("level" + batteryLevel);
-					XposedBridge.log("i:" + i);
-					XposedBridge.log("level I"+ batteryLevels[i]);
-					XposedBridge.log("color I" + batteryColors[i]);
 					break;
 				}
 			}

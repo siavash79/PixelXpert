@@ -2,7 +2,6 @@ package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.Utils.BatteryBarView;
 import sh.siava.AOSPMods.Utils.CircleBatteryDrawable;
-import sh.siava.AOSPMods.Utils.IBatteryDrawable;
+import sh.siava.AOSPMods.Utils.CircleFilledBatteryDrawable;
 import sh.siava.AOSPMods.Utils.IBatteryDrawable;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -107,12 +106,22 @@ public class BatteryStyleManager implements IXposedModPack {
 
                             if (!circleBatteryEnabled) return;
                             
-                            IBatteryDrawable mCircleDrawable = new CircleBatteryDrawable((Context) param.args[0], frameColor);//, batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor);
-                            mCircleDrawable.setShowPercent(ShowPercent);
-                            mCircleDrawable.setMeterStyle(BatteryStyle);
-                            XposedHelpers.setAdditionalInstanceField(param.thisObject, "mCircleDrawable", mCircleDrawable);
+                            IBatteryDrawable mBatteryDrawable = null;
+                            switch (BatteryStyle)
+                            {
+                                case 1:
+                                case 2:
+                                    mBatteryDrawable = new CircleBatteryDrawable((Context) param.args[0], frameColor);
+                                    break;
+                                case 3:
+                                    mBatteryDrawable = new CircleFilledBatteryDrawable((Context) param.args[0], frameColor);
+                                    break;
+                            }
+                            mBatteryDrawable.setShowPercent(ShowPercent);
+                            mBatteryDrawable.setMeterStyle(BatteryStyle);
+                            XposedHelpers.setAdditionalInstanceField(param.thisObject, "mBatteryDrawable", mBatteryDrawable);
 
-                            mBatteryIconView.setImageDrawable(mCircleDrawable);
+                            mBatteryIconView.setImageDrawable(mBatteryDrawable);
                             XposedHelpers.setObjectField(param.thisObject, "mBatteryIconView", mBatteryIconView);
                         }
                     });
@@ -125,11 +134,11 @@ public class BatteryStyleManager implements IXposedModPack {
                         if(!circleBatteryEnabled) return;
 
                         ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
-                        IBatteryDrawable mCircleDrawable = (IBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
+                        IBatteryDrawable mBatteryDrawable = (IBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mBatteryDrawable");
 
-                        mCircleDrawable.setMeterStyle(BatteryStyle);
+                        mBatteryDrawable.setMeterStyle(BatteryStyle);
 
-                        mBatteryIconView.setImageDrawable(mCircleDrawable);
+                        mBatteryIconView.setImageDrawable(mBatteryDrawable);
                     }
                 });
 
@@ -150,8 +159,8 @@ public class BatteryStyleManager implements IXposedModPack {
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             if(!circleBatteryEnabled) return;
 
-                            IBatteryDrawable mCircleDrawable = (IBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
-                            mCircleDrawable.setPowerSaveEnabled((boolean) param.args[0]);
+                            IBatteryDrawable mBatteryDrawable = (IBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mBatteryDrawable");
+                            mBatteryDrawable.setPowerSaveEnabled((boolean) param.args[0]);
                         }
                     });
         }
@@ -166,9 +175,9 @@ public class BatteryStyleManager implements IXposedModPack {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!circleBatteryEnabled) return;
 
-                        IBatteryDrawable mCircleDrawable = (IBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
-                        if(mCircleDrawable == null) return;
-                        mCircleDrawable.setColors((int) param.args[0], (int) param.args[1], (int) param.args[2]);
+                        IBatteryDrawable mBatteryDrawable = (IBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mBatteryDrawable");
+                        if(mBatteryDrawable == null) return;
+                        mBatteryDrawable.setColors((int) param.args[0], (int) param.args[1], (int) param.args[2]);
                     }
                 });
     }
@@ -184,12 +193,12 @@ public class BatteryStyleManager implements IXposedModPack {
 
             if (!circleBatteryEnabled) return;
 
-            IBatteryDrawable mCircleDrawable = (IBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mCircleDrawable");
-            if (mCircleDrawable == null) return;
+            IBatteryDrawable mBatteryDrawable = (IBatteryDrawable) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mBatteryDrawable");
+            if (mBatteryDrawable == null) return;
             
-            mCircleDrawable.setFastCharging(isFastCharging);
-            mCircleDrawable.setCharging(mCharging);
-            mCircleDrawable.setBatteryLevel(mLevel);
+            mBatteryDrawable.setFastCharging(isFastCharging);
+            mBatteryDrawable.setCharging(mCharging);
+            mBatteryDrawable.setBatteryLevel(mLevel);
             
 
             if(scaleWithPercent) scale(param);
@@ -199,8 +208,6 @@ public class BatteryStyleManager implements IXposedModPack {
     public static void scale(XC_MethodHook.MethodHookParam param)
     {
         ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
-    
-        SweepGradient s;
         
         param.setResult(null);
         if (mBatteryIconView == null) {

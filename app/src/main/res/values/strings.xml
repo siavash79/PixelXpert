@@ -215,6 +215,7 @@
     <string name="battery_default">Default (requires restart to apply)</string>
     <string name="battery_circle">Circle</string>
     <string name="battery_dashed_circle">Dashed Circle</string>
+    <string name="battery_circle_filled">Filled Circle</string>
 
     <!-- Clock position -->
     <string name="clock_default">Left (Default)</string>

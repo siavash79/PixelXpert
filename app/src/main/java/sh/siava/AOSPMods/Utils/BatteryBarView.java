@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.Utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -29,6 +30,7 @@ public class BatteryBarView extends FrameLayout {
 	private boolean onTop = true;
 	private static int initialLevel = 0;
 	private static boolean initialCharging = false;
+	@SuppressLint("StaticFieldLeak")
 	private static BatteryBarView instance = null;
 	private static boolean isCharging = false;
 	private static boolean isFastCharging = false;

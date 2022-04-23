@@ -71,6 +71,7 @@ public class BatteryBarView extends FrameLayout {
 	public void setBatteryLevel(int level, boolean charging)
 	{
 		isCharging = charging;
+		if(!charging) setIsFastCharging(false);
 		batteryPCT = level;
 		refreshLayout();
 	}
@@ -163,7 +164,6 @@ public class BatteryBarView extends FrameLayout {
 	
 	public void setColorful(boolean colorful) {
 		this.colorful = colorful;
-		mDrawable.getPaint().setShader(null);
 		refreshLayout();
 	}
 	
@@ -178,6 +178,7 @@ public class BatteryBarView extends FrameLayout {
 		if(lenX == 0) return; //we're not ready yet
 		refreshShadeColors();
 		Paint mPaint = mDrawable.getPaint();
+		mPaint.setShader(null);
 		mDrawable.setIntrinsicWidth(lenX);
 		mDrawable.setIntrinsicHeight(lenY);
 		if(isFastCharging && indicateFastCharging) //fast charging color
@@ -301,6 +302,7 @@ public class BatteryBarView extends FrameLayout {
 	{
 		if(isFast != isFastCharging) {
 			isFastCharging = isFast;
+			if(isFast) isCharging = true;
 			instance.refreshLayout();
 		}
 	}

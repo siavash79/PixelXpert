@@ -2,11 +2,14 @@ package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.nfx.android.rangebarpreference.RangeBarHelper;
 
 import java.lang.reflect.Method;
 
@@ -37,7 +40,17 @@ public class BatteryStyleManager implements IXposedModPack {
     static boolean hideBattery = false;
     public static boolean isFastCharging = false;
     private static int BatteryIconOpacity = 100;
-
+    private static int BIconbatteryWarningColor = Color.GREEN;
+    private static int BIconbatteryCriticalColor = Color.RED;
+    private static boolean BIconTransitColors = false;
+    private static boolean BIconColorful = false;
+    private static boolean BIconindicateFastCharging = false;
+    private static int batteryIconFastChargingColor = Color.BLUE;
+    private static int batteryChargingColor = Color.GREEN;
+    private static boolean BIconindicateCharging = false;
+    private static float[] batteryLevels = new float[]{20f, 40f};
+    private static int[] batteryColors = new int[]{Color.RED, Color.YELLOW};
+    
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -62,6 +75,28 @@ public class BatteryStyleManager implements IXposedModPack {
 
         BatteryStyle = batteryStyle;
         ShowPercent = XPrefs.Xprefs.getBoolean("BatteryShowPercent", false);
+    
+        BIconTransitColors = XPrefs.Xprefs.getBoolean("BIconTransitColors", false);
+        BIconColorful = XPrefs.Xprefs.getBoolean("BIconColorful", false);
+        BIconindicateFastCharging = XPrefs.Xprefs.getBoolean("BIconindicateFastCharging", false);
+        batteryIconFastChargingColor = XPrefs.Xprefs.getInt("batteryIconFastChargingColor", Color.BLUE);
+        batteryChargingColor = XPrefs.Xprefs.getInt("batteryChargingColor", Color.GREEN);
+        BIconindicateCharging = XPrefs.Xprefs.getBoolean("BIconindicateCharging", false);
+    
+        String jsonString = XPrefs.Xprefs.getString("BIconbatteryWarningRange", "");
+        if(jsonString.length() > 0)
+        {
+            batteryLevels = new float[]{
+                    RangeBarHelper.getLowValueFromJsonString(jsonString),
+                    RangeBarHelper.getHighValueFromJsonString(jsonString)};
+        }
+    
+        batteryColors = new int[]{
+                XPrefs.Xprefs.getInt("BIconbatteryCriticalColor", Color.RED),
+                XPrefs.Xprefs.getInt("BIconbatteryWarningColor", Color.YELLOW)};
+    
+    
+        IBatteryDrawable.setStaticColor(batteryLevels, batteryColors, BIconindicateCharging, batteryChargingColor, BIconindicateFastCharging, batteryIconFastChargingColor, BIconTransitColors, BIconColorful);
     }
 
     @Override

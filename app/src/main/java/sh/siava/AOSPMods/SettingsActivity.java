@@ -212,6 +212,56 @@ public class SettingsActivity extends AppCompatActivity implements
     
     }
     
+    public static class SBBIconFragment extends PreferenceFragmentCompat {
+        
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
+            setPreferencesFromResource(R.xml.statusbar_batteryicon_prefs, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+            updateBatteryMod();
+            updateBatteryIconScaleFactor();
+            updateVisibility(prefs);
+        }
+        
+        private void updateVisibility(SharedPreferences prefs) {
+        }
+    
+        SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                updateBatteryMod();
+                updateBatteryIconScaleFactor();
+                updateVisibility(sharedPreferences);
+            }
+        };
+    
+        private void updateBatteryIconScaleFactor() {
+            try {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            
+                findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50)*2 + getString(R.string.battery_size_summary));
+            }
+            catch(Exception e){
+                return;
+            }
+        
+        }
+    
+        private void updateBatteryMod() {
+            try {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            
+                boolean enabled = !(prefs.getString("BatteryStyle", "0").equals(("0")));
+                findPreference("BatteryShowPercent").setEnabled(enabled);
+            }catch(Exception e){}
+        }
+    
+    
+    }
+    
+    
     public static class MiscFragment extends PreferenceFragmentCompat {
 
         @Override
@@ -252,46 +302,12 @@ public class SettingsActivity extends AppCompatActivity implements
 
     public static class StatusbarFragment extends PreferenceFragmentCompat {
 
-        SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                if (key.equals("BatteryStyle")) {
-                    updateBatteryMod();
-                } else if (key.equals("BatteryIconScaleFactor")) {
-                    updateBatteryIconScaleFactor();
-                }
-            }
-        };
-
-        private void updateBatteryIconScaleFactor() {
-            try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-
-                findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50)*2 + getString(R.string.battery_size_summary));
-            }
-            catch(Exception e){
-                return;
-            }
-
-        }
-
-        private void updateBatteryMod() {
-            try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-
-                boolean enabled = !(prefs.getString("BatteryStyle", "0").equals(("0")));
-                findPreference("BatteryShowPercent").setEnabled(enabled);
-            }catch(Exception e){}
-        }
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.statusbar_settings, rootKey);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-            prefs.registerOnSharedPreferenceChangeListener(listener);
-            updateBatteryMod();
-            updateBatteryIconScaleFactor();
         }
     }
 

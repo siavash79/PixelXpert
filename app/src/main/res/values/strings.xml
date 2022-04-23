@@ -85,6 +85,7 @@
     <string name="status_bar_height_medium">Medium</string>
     <string name="fix_status_bar_padding">Correct left side padding</string>
     <string name="sbbb_header">Battery bar settings</string>
+    <string name="sbbIcon_header">Battery icon settings</string>
     <string name="BB_enable_title">Enable Battery Bar</string>
     <string name="BB_onlycharging_title">Only during charging</string>
     <string name="BB_move_SB_bottom_title">At bottom of Statusbar</string>

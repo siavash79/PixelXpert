@@ -83,7 +83,7 @@ public class StatusbarMods implements IXposedModPack {
     private static int BBOpacity = 100;
     private static int BBarHeight = 10;
     private static Object KIC = null;
-    private static float[] batteryLevels = new float[]{20f, 40f};;
+    private static float[] batteryLevels = new float[]{20f, 40f};
     private static int[] batteryColors = new int[]{Color.RED, Color.YELLOW};
     private static int charingColor = Color.WHITE;
     private static int fastChargingColor = Color.WHITE;
@@ -217,7 +217,6 @@ public class StatusbarMods implements IXposedModPack {
     }
     
     private void refreshBatteryBar(BatteryBarView instance) {
-        IBatteryDrawable.setStaticColor(batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor, BBarTransitColors, BBarColorful);
         BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor, BBarTransitColors);
         instance.setVisibility((BBarEnabled) ? View.VISIBLE : View.GONE);
         instance.setColorful(BBarColorful);

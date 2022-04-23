@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="0"
+        android:entries="@array/battery_style_names"
+        android:entryValues="@array/battery_style_codes"
+        android:summary="%s"
+        android:key="BatteryStyle"
+        android:title="@string/battery_style_title" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="DualToneBatteryOverlay"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/dual_tone_battery_on_summary"
+        android:title="@string/dual_tone_battery_title" />
+
+    <SeekBarPreference
+        android:defaultValue="50"
+        android:key="BatteryIconScaleFactor"
+        android:title="@string/battery_icon_size_title"
+        app:updatesContinuously="true" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="BatteryShowPercent"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/battery_show_percent_title" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="BIconindicateCharging"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/BB_indicate_charging" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="-16711936"
+        android:key="batteryChargingColor"
+        android:title="@string/BB_batteryChargingColor" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="BIconindicateFastCharging"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/BB_indicate_fast_charging" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="-16776961"
+        android:key="batteryIconFastChargingColor"
+        android:title="@string/BB_batteryFastChargingColor" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="BIconColorful"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/BB_colorful_title" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="BIconTransitColors"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/BB_transit_colors" />
+
+    <com.nfx.android.rangebarpreference.RangeBarPreferenceCompat
+        android:key="BIconbatteryWarningRange"
+        android:title="@string/BB_warning_level"
+        android:summary="@string/BB_warning_tip"
+        app:rbp_measurementUnit="%"
+        app:rbp_tickStart="0"
+        app:rbp_tickEnd="100"
+        app:rbp_tickInterval="1"
+        app:rbp_view_defaultHighValue="15"
+        app:rbp_view_defaultLowValue="40" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="-65536"
+        android:key="BIconbatteryCriticalColor"
+        android:title="@string/BB_batteryCriticalColor" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="-256"
+        android:key="BIconbatteryWarningColor"
+        android:title="@string/BB_batteryWarningColor" />
+</PreferenceScreen>

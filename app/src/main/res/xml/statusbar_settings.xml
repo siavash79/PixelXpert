@@ -56,34 +56,11 @@
             app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBBFragment"
             app:key="sbbb_header"
             app:title="@string/sbbb_header" />
-        <PreferenceCategory
-            android:title="@string/battery_style_category_title"
-            app:summary="@string/battery_style_category_summary">
-            <ListPreference
-                android:defaultValue="0"
-                android:entries="@array/battery_style_names"
-                android:entryValues="@array/battery_style_codes"
-                android:summary="%s"
-                android:key="BatteryStyle"
-                android:title="@string/battery_style_title" />
-            <SwitchPreference
-                android:defaultValue="false"
-                android:key="DualToneBatteryOverlay"
-                android:summaryOff="@string/general_off"
-                android:summaryOn="@string/dual_tone_battery_on_summary"
-                android:title="@string/dual_tone_battery_title" />
-            <SeekBarPreference
-                android:defaultValue="50"
-                android:key="BatteryIconScaleFactor"
-                android:title="@string/battery_icon_size_title"
-                app:updatesContinuously="true" />
-            <SwitchPreference
-                android:defaultValue="false"
-                android:key="BatteryShowPercent"
-                android:summaryOff="@string/general_off"
-                android:summaryOn="@string/general_on"
-                android:title="@string/battery_show_percent_title" />
-        </PreferenceCategory>
+        <Preference
+            app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBIconFragment"
+            app:key="sbbIcon_header"
+            app:title="@string/sbbIcon_header" />
+
         <PreferenceCategory
             android:title="@string/ntsb_category_title" >
             <SwitchPreference

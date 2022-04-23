@@ -18,8 +18,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.core.graphics.ColorUtils;
-
 import com.nfx.android.rangebarpreference.RangeBarHelper;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +31,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.Utils.BatteryBarView;
+import sh.siava.AOSPMods.Utils.IBatteryDrawable;
 import sh.siava.AOSPMods.Utils.NetworkTrafficSB;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -218,15 +217,16 @@ public class StatusbarMods implements IXposedModPack {
     }
     
     private void refreshBatteryBar(BatteryBarView instance) {
+        IBatteryDrawable.setStaticColor(batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor, BBarTransitColors, BBarColorful);
         BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor, BBarTransitColors);
         instance.setVisibility((BBarEnabled) ? View.VISIBLE : View.GONE);
         instance.setColorful(BBarColorful);
         instance.setOnlyWhileCharging(BBOnlyWhileCharging);
         instance.setOnTop(!BBOnBottom);
-        instance.refreshColors(BBSetCentered);
         instance.setSingleColorTone(clockColor);
         instance.setAlphaPct(BBOpacity);
         instance.setBarHeight(Math.round(BBarHeight/10)+5);
+        instance.setCenterBased(BBSetCentered);
         instance.refreshLayout();
     }
     
@@ -265,12 +265,12 @@ public class StatusbarMods implements IXposedModPack {
                 int mChargingSpeed = XposedHelpers.getIntField(KIC, "mChargingSpeed");
                 if(mChargingSpeed == CHARGING_FAST)
                 {
-                    BatteryBarView.setIsFastCharginging(true);
+                    BatteryBarView.setIsFastCharging(true);
                     BatteryStyleManager.isFastCharging = true;
                 }
                 else
                 {
-                    BatteryBarView.setIsFastCharginging(false);
+                    BatteryBarView.setIsFastCharging(false);
                     BatteryStyleManager.isFastCharging = false;
                 }
             }

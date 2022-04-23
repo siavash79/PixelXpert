@@ -195,8 +195,8 @@ public class SettingsActivity extends AppCompatActivity implements
     
             findPreference("batteryFastChargingColor").setVisible(prefs.getBoolean("indicateFastCharging", false) && bBarEnabled);
             findPreference("batteryChargingColor").setVisible(prefs.getBoolean("indicateCharging", false) && bBarEnabled);
-            findPreference("batteryWarningColor").setVisible(!warnZero && bBarEnabled && !isColorful);
-            findPreference("batteryCriticalColor").setVisible((!critZero || transitColors) && bBarEnabled && !isColorful && findPreference("batteryWarningColor").isVisible());
+            findPreference("batteryWarningColor").setVisible(!warnZero && bBarEnabled);
+            findPreference("batteryCriticalColor").setVisible((!critZero || transitColors) && bBarEnabled && findPreference("batteryWarningColor").isVisible());
     
             findPreference("BBarTransitColors").setVisible(bBarEnabled && !isColorful);
             findPreference("BBOnlyWhileCharging").setVisible(bBarEnabled);
@@ -207,7 +207,7 @@ public class SettingsActivity extends AppCompatActivity implements
             findPreference("BBSetCentered").setVisible(bBarEnabled);
             findPreference("indicateCharging").setVisible(bBarEnabled);
             findPreference("indicateFastCharging").setVisible(bBarEnabled);
-            findPreference("batteryWarningRange").setVisible(bBarEnabled && !isColorful);
+            findPreference("batteryWarningRange").setVisible(bBarEnabled);
         }
     
     }

@@ -20,7 +20,7 @@ import androidx.core.graphics.ColorUtils;
 
 import de.robv.android.xposed.XposedBridge;
 
-public class CircleFilledBatteryDrawable extends Drawable {
+public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 	private final Context mContext;
 	private boolean isCharging = false;
 	private boolean isFastCharging = false;
@@ -59,6 +59,7 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		size = Math.min(intrinsicHeight, intrinsicWidth);
 	}
 	
+	@Override
 	public void setColorful(boolean colorful)
 	{
 		if(isColorful != colorful)
@@ -70,6 +71,7 @@ public class CircleFilledBatteryDrawable extends Drawable {
 	
 	public CircleFilledBatteryDrawable(Context context, int frameColor) {
 		this(context);
+		bgColor = frameColor;
 	}
 	
 	public static void setStaticColor(float[] batteryLevels, int[] batteryColors, boolean indicateCharging, int charingColor, boolean indicateFastCharging, int fastChargingColor, boolean transitColors) {
@@ -229,15 +231,18 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		return PixelFormat.UNKNOWN;
 	}
 	
+	@Override
 	public void setShowPercent(boolean showPercent) { //not applicable
 		return;
 	}
 	
+	@Override
 	public void setMeterStyle(int batteryStyle) { //not applicable
 		return;
 	}
 	
-	public void setFastCharing(boolean isFastCharging) {
+	@Override
+	public void setFastCharging(boolean isFastCharging) {
 		if(this.isFastCharging != isFastCharging) {
 			this.isFastCharging = isFastCharging;
 			if (isFastCharging) isCharging = true;
@@ -245,6 +250,7 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		}
 	}
 	
+	@Override
 	public void setCharging(boolean mCharging) {
 		if(mCharging != isCharging) {
 			isCharging = mCharging;
@@ -253,6 +259,7 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		}
 	}
 	
+	@Override
 	public void setBatteryLevel(int mLevel) {
 		if(mLevel != batteryLevel) {
 			batteryLevel = mLevel;
@@ -260,12 +267,14 @@ public class CircleFilledBatteryDrawable extends Drawable {
 		}
 	}
 	
+	@Override
 	public void setColors(int fgColor, int bgColor, int singleToneColor) {
 		this.fgColor = fgColor;
 		this.bgColor = bgColor;
 		invalidateSelf();
 	}
 	
+	@Override
 	public void setPowerSaveEnabled(boolean isPowerSaving) {
 		if(isPowerSaving != this.isPowerSaving) {
 			this.isPowerSaving = isPowerSaving;

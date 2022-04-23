@@ -19,7 +19,6 @@ package sh.siava.AOSPMods.Utils
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
-import android.graphics.drawable.Drawable
 import androidx.annotation.ColorInt
 import kotlin.math.max
 import kotlin.math.min
@@ -27,7 +26,7 @@ import kotlin.math.min
 class CircleBatteryDrawable(
     private val context: Context,
     frameColor: Int
-) : Drawable() {
+) : IBatteryDrawable() {
     private var fastChargeColor: Int = Color.WHITE
     private val criticalLevel: Int
     private val warningString: String
@@ -67,43 +66,56 @@ class CircleBatteryDrawable(
 
     override fun getIntrinsicWidth() = intrinsicWidth
 
-    var fastCharing = false
-        set(value) {
-            field = value
-            if(value) charging = true
-            postInvalidate()
-        }
+    private var fastCharging: Boolean = false
 
-    var charging = false
-        set(value) {
-            field = value
-            if(!value) fastCharing = false
-            postInvalidate()
+    override fun setFastCharging(isFastCharging: Boolean) {
+        this.fastCharging = isFastCharging
+        if(!isFastCharging)
+        {
+            charging = false
         }
+        postInvalidate()
+    }
 
-    var powerSaveEnabled = false
-        set(value) {
-            field = value
-            postInvalidate()
-        }
+    private var charging: Boolean = false
 
-    var showPercent = false
-        set(value) {
-            field = value
-            postInvalidate()
-        }
+    override fun setCharging(isCharging : Boolean)
+    {
+        charging = isCharging
+        if(!charging) fastCharging = false
+        postInvalidate()
+    }
 
-    var batteryLevel = -1
-        set(value) {
-            field = value
-            postInvalidate()
-        }
 
-    var meterStyle = BATTERY_STYLE_CIRCLE
-        set(value) {
-            field = value
-            postInvalidate()
-        }
+    private var powerSaving: Boolean = false
+
+    override fun setPowerSaveEnabled(isPowerSaving: Boolean) {
+        powerSaving = isPowerSaving
+        postInvalidate()
+    }
+
+
+
+    private var showPercentage: Boolean = false
+
+    override fun setShowPercent(showPercent: Boolean) {
+        showPercentage = showPercent
+        postInvalidate()
+    }
+
+    private var batteryLevel: Int = -1
+
+    override fun setBatteryLevel(mLevel: Int) {
+        batteryLevel = mLevel
+        postInvalidate()
+    }
+
+    private var bMeterStyle: Int = BATTERY_STYLE_CIRCLE
+
+    override fun setMeterStyle(batteryStyle: Int) {
+        bMeterStyle = batteryStyle
+        postInvalidate()
+    }
 
     // an approximation of View.postInvalidate()
     private fun postInvalidate() {
@@ -137,6 +149,10 @@ class CircleBatteryDrawable(
         return true
     }
 
+    override fun setColorful(colorful: Boolean) {
+        TODO("Not yet implemented")
+    }
+
     private fun getColorForLevel(percent: Int): Int {
         for(i in 0 until batteryLevels.size)
         {
@@ -149,14 +165,14 @@ class CircleBatteryDrawable(
     }
 
     private fun batteryColorForLevel(level: Int) =
-            if (fastCharing && indicateFastCharging)
+            if (fastCharging && indicateFastCharging)
                     fastChargeColor
             else if (charging && indicateCharging)
                     chargeColor
             else
                 getColorForLevel(level)
 
-    fun setColors(fgColor: Int, bgColor: Int, singleToneColor: Int) {
+    override fun setColors(fgColor: Int, bgColor: Int, singleToneColor: Int) {
         val fillColor = if (dualTone) fgColor else singleToneColor
 
         iconTint = fillColor
@@ -175,8 +191,8 @@ class CircleBatteryDrawable(
         framePaint.style = Paint.Style.STROKE
         batteryPaint.strokeWidth = strokeWidth
         batteryPaint.style = Paint.Style.STROKE
-        if (meterStyle == BATTERY_STYLE_DOTTED_CIRCLE ||
-                meterStyle == BATTERY_STYLE_BIG_DOTTED_CIRCLE) {
+        if (bMeterStyle == BATTERY_STYLE_DOTTED_CIRCLE ||
+                bMeterStyle == BATTERY_STYLE_BIG_DOTTED_CIRCLE) {
             batteryPaint.pathEffect = pathEffect
             powerSavePaint.pathEffect = pathEffect
         } else {
@@ -227,14 +243,14 @@ class CircleBatteryDrawable(
         c.drawArc(frame, 270f, 360f, false, framePaint)
         // draw colored arc representing charge level
         if (batteryLevel > 0) {
-            if (!charging && powerSaveEnabled) {
+            if (!charging && powerSaving) {
                 c.drawArc(frame, 270f, 3.6f * batteryLevel, false, powerSavePaint)
             } else {
                 c.drawArc(frame, 270f, 3.6f * batteryLevel, false, batteryPaint)
             }
         }
         // compute percentage text
-        if (!charging && batteryLevel != 100 && showPercent) {
+        if (!charging && batteryLevel != 100 && showPercentage) {
             textPaint.color = getColorForLevel(batteryLevel)
             textPaint.textSize = height * 0.52f
             val textHeight = -textPaint.fontMetrics.ascent
@@ -340,7 +356,7 @@ class CircleBatteryDrawable(
     }
 
     @ColorInt
-    fun getColorStateListDefaultColor(context: Context, resId: Int): Int {
+    private fun getColorStateListDefaultColor(context: Context, resId: Int): Int {
         val list = context.resources.getColorStateList(resId, context.theme)
         return list.defaultColor
     }

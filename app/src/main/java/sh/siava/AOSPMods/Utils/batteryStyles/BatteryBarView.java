@@ -304,7 +304,9 @@ public class BatteryBarView extends FrameLayout {
 		if(isFast != isFastCharging) {
 			isFastCharging = isFast;
 			if(isFast) isCharging = true;
-			instance.refreshLayout();
+			if(hasInstance()) {
+				instance.refreshLayout();
+			}
 		}
 	}
 	

@@ -21,11 +21,11 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
-import sh.siava.AOSPMods.Utils.BatteryBarView;
-import sh.siava.AOSPMods.Utils.BatteryDrawable;
-import sh.siava.AOSPMods.Utils.CircleBatteryDrawable;
-import sh.siava.AOSPMods.Utils.CircleFilledBatteryDrawable;
-import sh.siava.AOSPMods.Utils.hiddenBatteryDrawable;
+import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
+import sh.siava.AOSPMods.Utils.batteryStyles.BatteryDrawable;
+import sh.siava.AOSPMods.Utils.batteryStyles.CircleBatteryDrawable;
+import sh.siava.AOSPMods.Utils.batteryStyles.CircleFilledBatteryDrawable;
+import sh.siava.AOSPMods.Utils.batteryStyles.hiddenBatteryDrawable;
 import sh.siava.AOSPMods.XPrefs;
 
 

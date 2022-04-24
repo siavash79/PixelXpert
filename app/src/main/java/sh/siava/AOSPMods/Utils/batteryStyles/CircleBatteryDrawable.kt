@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package sh.siava.AOSPMods.Utils
+package sh.siava.AOSPMods.Utils.batteryStyles
 
 import android.content.Context
 import android.content.res.Resources

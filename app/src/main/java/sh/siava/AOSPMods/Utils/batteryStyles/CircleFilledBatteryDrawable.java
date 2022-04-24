@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.Utils;
+package sh.siava.AOSPMods.Utils.batteryStyles;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

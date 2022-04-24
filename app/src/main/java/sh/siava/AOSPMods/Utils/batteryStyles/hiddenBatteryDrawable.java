@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.Utils;
+package sh.siava.AOSPMods.Utils.batteryStyles;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -6,6 +6,8 @@ import android.graphics.PixelFormat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import sh.siava.AOSPMods.Utils.batteryStyles.BatteryDrawable;
 
 public class hiddenBatteryDrawable extends BatteryDrawable {
 	@Override

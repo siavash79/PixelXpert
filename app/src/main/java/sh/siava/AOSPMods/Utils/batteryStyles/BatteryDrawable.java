@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.Utils;
+package sh.siava.AOSPMods.Utils.batteryStyles;
 
 import android.graphics.drawable.Drawable;
 

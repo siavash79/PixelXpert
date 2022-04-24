@@ -61,22 +61,17 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 		if(batteryColors == null) return;
 		
 		shadeColors = new int[batteryLevels.length*2+2];
-		XposedBridge.log("len" + batteryColors.length);
-		
-		XposedBridge.log("len2" + shadeColors.length);
+
 		shadeLevels = new float[shadeColors.length];
 		float prev = 0;
 		for(int i = 0; i < batteryLevels.length; i++)
 		{
 			float rangeLength = batteryLevels[i] - prev;
-			XposedBridge.log("range:" + rangeLength);
 			shadeLevels[2*i]=(prev + rangeLength*.3f)/100;
 			shadeColors[2*i]=batteryColors[i];
-			XposedBridge.log("level " + shadeLevels[2*i] + " color " + shadeColors[2*i]);
 			
 			shadeLevels[2*i+1]=(batteryLevels[i] - rangeLength*.3f)/100;
 			shadeColors[2*i+1]=batteryColors[i];
-			XposedBridge.log("level " + shadeLevels[2*i+1] + " color " + shadeColors[2*i+1]);
 			
 			prev = batteryLevels[i];
 		}
@@ -168,10 +163,6 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 		}
 		else
 		{
-			for(int i = 0; i< shadeColors.length; i++)
-			{
-				XposedBridge.log(String.format("i = %s level = %s color = %s", i, shadeLevels[i], shadeColors[i]));
-			}
 			RadialGradient shader = new RadialGradient(cx,cy,baseRadius, shadeColors, shadeLevels, Shader.TileMode.CLAMP);
 			paint.setShader(shader);
 		}

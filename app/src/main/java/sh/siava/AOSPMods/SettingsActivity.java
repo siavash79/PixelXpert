@@ -49,21 +49,6 @@ public class SettingsActivity extends AppCompatActivity implements
 
         backButtonDisabled();
         
-        //update settings from previous config file
-        try {
-            if(PreferenceManager.getDefaultSharedPreferences(DPContext).contains("Show4GIcon"))
-            {
-                boolean fourGEnabled = PreferenceManager.getDefaultSharedPreferences(DPContext).getBoolean("Show4GIcon", false);
-                if(fourGEnabled)
-                {
-                    PreferenceManager.getDefaultSharedPreferences(DPContext).edit().putInt("LTE4GIconMod", 2).apply();
-                }
-                PreferenceManager.getDefaultSharedPreferences(DPContext).edit().remove("Show4GIcon").commit();
-            }
-        }
-        catch(Exception e){}
-
-
         setContentView(R.layout.settings_activity);
 
         if (savedInstanceState == null) {
@@ -226,6 +211,23 @@ public class SettingsActivity extends AppCompatActivity implements
         }
         
         private void updateVisibility(SharedPreferences prefs) {
+            int style = Integer.parseInt(prefs.getString("BatteryStyle", "0"));
+            String json = prefs.getString("BIconbatteryWarningRange", "");
+            boolean critZero = RangeBarHelper.getLowValueFromJsonString(json) == 0;
+            boolean warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
+            boolean colorful = prefs.getBoolean("BIconColorful", false);
+            findPreference("DualToneBatteryOverlay").setVisible(style==0);
+            findPreference("BatteryIconScaleFactor").setVisible(style<99);
+            findPreference("BatteryShowPercent").setVisible(style == 1 || style == 2);
+            findPreference("BIconindicateCharging").setVisible(style==3);
+            findPreference("batteryIconChargingColor").setVisible(style==3 && prefs.getBoolean("BIconindicateCharging", false));
+            findPreference("BIconindicateFastCharging").setVisible(style==3);
+            findPreference("batteryIconFastChargingColor").setVisible(style==3 && prefs.getBoolean("BIconindicateFastCharging", false));
+            findPreference("BIconColorful").setVisible(style==3 && !prefs.getBoolean("BIconTransitColors", false));
+            findPreference("BIconTransitColors").setVisible(style==3 && !prefs.getBoolean("BIconColorful", false));
+            findPreference("BIconbatteryWarningRange").setVisible(style==3);
+            findPreference("BIconbatteryCriticalColor").setVisible(style==3 && (colorful || !critZero));
+            findPreference("BIconbatteryWarningColor").setVisible(style==3 && (colorful || !warnZero));
         }
     
         SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {

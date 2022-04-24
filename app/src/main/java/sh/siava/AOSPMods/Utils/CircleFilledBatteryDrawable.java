@@ -126,6 +126,8 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	private void setLevelPaint(Paint paint, float cx, float cy, float baseRadius) {
 		int singleColor = fgColor;
 		
+		paint.setAlpha(255);
+		paint.setShader(null);
 		if(isFastCharging && showFastCharging && batteryLevel < 100)
 		{
 			paint.setColor(fastChargingColor);
@@ -162,6 +164,7 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 		{
 			RadialGradient shader = new RadialGradient(cx,cy,baseRadius, shadeColors, shadeLevels, Shader.TileMode.CLAMP);
 			paint.setShader(shader);
+			paint.setAlpha(128);
 		}
 	}
 	
@@ -239,6 +242,12 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 			invalidateSelf();
 		}
 	}
+	
+	@Override
+	public void refresh() {
+		invalidateSelf();
+	}
+	
 	
 	@ColorInt
 	private int getColorStateListDefaultColor(Context context, int resId){

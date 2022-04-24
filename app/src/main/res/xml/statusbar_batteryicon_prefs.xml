@@ -39,7 +39,7 @@
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         android:defaultValue="-16711936"
-        android:key="batteryChargingColor"
+        android:key="batteryIconChargingColor"
         android:title="@string/BB_batteryChargingColor" />
 
     <SwitchPreference
@@ -67,6 +67,13 @@
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
         android:title="@string/BB_transit_colors" />
+
+    <SeekBarPreference
+        android:defaultValue="100"
+        android:key="BIconOpacity"
+        android:title="@string/BIcon_Opacity_title"
+        app:showSeekBarValue="true"
+        app:updatesContinuously="true" />
 
     <com.nfx.android.rangebarpreference.RangeBarPreferenceCompat
         android:key="BIconbatteryWarningRange"

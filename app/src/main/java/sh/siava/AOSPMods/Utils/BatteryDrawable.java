@@ -13,6 +13,8 @@ public abstract class BatteryDrawable extends Drawable {
 	public abstract void setBatteryLevel(int mLevel);
 	public abstract void setColors(int fgColor, int bgColor, int singleToneColor);
 	public abstract void setPowerSaveEnabled(boolean isPowerSaving);
+	public abstract void refresh();
+	
 	
 	public static boolean colorful;
 	public static float[] batteryLevels = new float[0];
@@ -37,5 +39,4 @@ public abstract class BatteryDrawable extends Drawable {
 		
 		lastVarUpdate = Calendar.getInstance().getTime().getTime();
 	}
-	
 }

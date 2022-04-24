@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
 import androidx.core.graphics.ColorUtils;
 
 public class BatteryBarView extends FrameLayout {

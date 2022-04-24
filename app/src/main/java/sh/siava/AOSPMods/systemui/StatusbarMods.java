@@ -264,12 +264,12 @@ public class StatusbarMods implements IXposedModPack {
                 if(mChargingSpeed == CHARGING_FAST)
                 {
                     BatteryBarView.setIsFastCharging(true);
-                    BatteryStyleManager.isFastCharging = true;
+                    BatteryStyleManager.setIsFastCharging(true);
                 }
                 else
                 {
                     BatteryBarView.setIsFastCharging(false);
-                    BatteryStyleManager.isFastCharging = false;
+                    BatteryStyleManager.setIsFastCharging(false);
                 }
             }
         });

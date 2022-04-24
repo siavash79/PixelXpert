@@ -17,17 +17,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 
-import de.robv.android.xposed.XposedBridge;
-
 public class CircleFilledBatteryDrawable extends IBatteryDrawable {
-	private final Context mContext;
 	private boolean isCharging = false;
 	private boolean isFastCharging = false;
 	private int batteryLevel = 0;
-	private int intrinsicHeight;
-	private int intrinsicWidth;
+	private final int intrinsicHeight;
+	private final int intrinsicWidth;
 	private int size;
-	private Rect padding = new Rect();
+	private final Rect padding = new Rect();
 	private int fgColor = Color.WHITE;
 	private int bgColor = Color.WHITE;
 	private boolean isPowerSaving = false;
@@ -39,15 +36,15 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 	
 	public CircleFilledBatteryDrawable(Context context)
 	{
-		this.mContext = context;
 		
-		Resources res = mContext.getResources();
+		Resources res = context.getResources();
+		//noinspection SpellCheckingInspection
 		powerSaveColor = getColorStateListDefaultColor(
-				mContext,
-				mContext.getResources().getIdentifier("batterymeter_plus_color", "color", mContext.getPackageName()));
+				context,
+				context.getResources().getIdentifier("batterymeter_plus_color", "color", context.getPackageName()));
 		
-		intrinsicHeight = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", mContext.getPackageName()));
-		intrinsicWidth = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", mContext.getPackageName()));
+		intrinsicHeight = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", context.getPackageName()));
+		intrinsicWidth = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", context.getPackageName()));
 		size = Math.min(intrinsicHeight, intrinsicWidth);
 	}
 	
@@ -112,7 +109,7 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 		
 		float baseRadius = size/2f;
 		
-		float levelRedius = baseRadius*batteryLevel/100f;
+		float levelRadius = baseRadius*batteryLevel/100f;
 		
 		try {
 			setLevelPaint(levelPaint, cx, cy, baseRadius);
@@ -123,7 +120,7 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 		}
 		
 		canvas.drawCircle(cx, cy, baseRadius, basePaint);
-		canvas.drawCircle(cy, cy, levelRedius, levelPaint);
+		canvas.drawCircle(cy, cy, levelRadius, levelPaint);
 	}
 	
 	private void setLevelPaint(Paint paint, float cx, float cy, float baseRadius) {
@@ -196,12 +193,10 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 	
 	@Override
 	public void setShowPercent(boolean showPercent) { //not applicable
-		return;
 	}
 	
 	@Override
 	public void setMeterStyle(int batteryStyle) { //not applicable
-		return;
 	}
 	
 	@Override

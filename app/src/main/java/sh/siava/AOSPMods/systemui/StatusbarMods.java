@@ -31,7 +31,6 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.Utils.BatteryBarView;
-import sh.siava.AOSPMods.Utils.IBatteryDrawable;
 import sh.siava.AOSPMods.Utils.NetworkTrafficSB;
 import sh.siava.AOSPMods.XPrefs;
 

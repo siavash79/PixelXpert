@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 
-public class CircleFilledBatteryDrawable extends IBatteryDrawable {
+public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	private boolean isCharging = false;
 	private boolean isFastCharging = false;
 	private int batteryLevel = 0;
@@ -126,7 +126,7 @@ public class CircleFilledBatteryDrawable extends IBatteryDrawable {
 	private void setLevelPaint(Paint paint, float cx, float cy, float baseRadius) {
 		int singleColor = fgColor;
 		
-		if(isFastCharging && showFastCharing && batteryLevel < 100)
+		if(isFastCharging && showFastCharging && batteryLevel < 100)
 		{
 			paint.setColor(fastChargingColor);
 			return;

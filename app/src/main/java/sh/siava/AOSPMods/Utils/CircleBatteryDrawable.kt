@@ -26,7 +26,7 @@ import kotlin.math.min
 class CircleBatteryDrawable(
     private val context: Context,
     frameColor: Int
-) : IBatteryDrawable() {
+) : BatteryDrawable() {
     private var fastChargeColor: Int = Color.WHITE
     private val criticalLevel: Int
     private val warningString: String

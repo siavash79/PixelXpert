@@ -53,6 +53,8 @@
     <string name="battery_icon_size_title">Akkusymbolgröße</string>
     <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Versteckt</string>
+    <string name="BIcon_Opacity_title">Sichtbarkeit</string>
+
     <string name="lte_4g_icon_title">LTE / 4G Symbol</string>
     <string name="combined_signal_icon_title">Kombinierte Empfangssymbole</string>
     <string name="sb_vibration_switch_title">Zeige Vibration/Lautlos Symbole</string>
@@ -85,6 +87,7 @@
     <string name="status_bar_height_medium">Mittel</string>
     <string name="fix_status_bar_padding">Korrigiere den Abstand links</string>
     <string name="sbbb_header">Akkuleisten Optionen...</string>
+    <string name="sbbIcon_header">Akkusymbol Einstellungen</string>
     <string name="BB_enable_title">Aktiviere Akkuleiste</string>
     <string name="BB_onlycharging_title">Nur während dem Laden</string>
     <string name="BB_move_SB_bottom_title">An der Unterseite der Statusleiste</string>
@@ -109,6 +112,7 @@
     <string name="qs_footer_text_summary">Leer lassen um den Text zu entfernen</string>
     <string name="qs_footer_text_desc">Schalte das Display Ein/Aus um zu aktivieren</string>
     <string name="light_qs_title">Helle Schnelleinstellungen während hellem Thema (könnte fehlerhaft sein)</string>
+    <string name="light_dualtone_qs_title">Aktiviere zweifarbige Schnelleinstellungen</string>
     <string name="qs_pulldown_size">Schnell herunterziehen Größe</string>
     <string name="qs_pulldown_switch_title">Schnelles herunterziehen des Schnelleinstellungsmenüs von der Statusleiste </string>
     <string name="qs_pulldown_side_title">Schnelles herunterziehen Seite</string>
@@ -214,6 +218,7 @@
     <string name="battery_default">Standart (Benötigt Neustart)</string>
     <string name="battery_circle">Kreis</string>
     <string name="battery_dashed_circle">gepunkteter Kreis</string>
+    <string name="battery_circle_filled">ausgefüllter Kreis</string>
 
     <!-- Clock position -->
     <string name="clock_default">links (Standart)</string>

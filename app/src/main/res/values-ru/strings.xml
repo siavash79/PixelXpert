@@ -209,7 +209,7 @@
     <!-- Battery styles -->
     <string name="battery_default">По умолчанию (для применения требуется перезагрузка)</string>
     <string name="battery_circle">Круг</string>
-    <string name="battery_dashed_circle">Пунктирный</string>
+    <string name="battery_dashed_circle">Пунктирный круг</string>
     <string name="battery_circle_filled">Заполненный круг</string>
 
     <!-- Clock position -->

@@ -53,6 +53,8 @@
     <string name="battery_icon_size_title">Tamaño del icono de batería</string> 
     <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Oculta</string>
+	 <string name="BIcon_Opacity_title">Opacidad</string>
+
     <string name="lte_4g_icon_title">Icono 4G / LTE</string>
     <string name="combined_signal_icon_title">Iconos de señal combinados</string>
     <string name="sb_vibration_switch_title">"Mostar los iconos vibrar/silencio"</string>
@@ -85,6 +87,7 @@
     <string name="status_bar_height_medium">Media</string>
     <string name="fix_status_bar_padding">Corregir espacio en el lado izquierdo</string>
     <string name="sbbb_header">Barra de batería parámetros</string>
+	<string name="sbbIcon_header">Ajustes de icono de batería</string>
     <string name="BB_enable_title">Activar barra de batería</string>
     <string name="BB_onlycharging_title">Solo mientras se carga</string>
     <string name="BB_move_SB_bottom_title">En la parte inferior de barra de estado</string>
@@ -108,7 +111,8 @@
     <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
     <string name="qs_footer_text_summary">Dejar en blanco para eliminar el texto</string>
     <string name="qs_footer_text_desc">Requiere apagar/encender la pantalla</string>
-    <string name="light_qs_title">Panel de ajustes rápidos claro (aún en pruebas)</string>
+    <string name="light_qs_title">Panel de ajustes rápidos claro</string>
+	<string name="light_dualtone_qs_title">Activar tono dual en ajustes rápidos</string>
     <string name="qs_pulldown_size">Distancia para deslizamiento rápido de ajustes rápidos</string>
     <string name="qs_pulldown_switch_title">Deslize rápido para abajo desde la barra de estado</string>
     <string name="qs_pulldown_side_title">Lado por donde deslizar</string>
@@ -214,6 +218,7 @@
     <string name="battery_default">Por defecto (requiere reiniciar)</string>
     <string name="battery_circle">Circular</string>
     <string name="battery_dashed_circle">Circular punteada</string>
+	<string name="battery_circle_filled">Cícrulo lleno</string>
  
     <!-- Clock position -->
     <string name="clock_default">Izquierda (por defecto)</string>

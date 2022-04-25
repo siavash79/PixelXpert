@@ -1,1 +1,241 @@
+<resources>
+    <!--General strings-->
+    <string name="error_not_activated">Пожалуйста, проверьте, активирован ли модуль в LSPosed Manager</string>
+    <string name="hide_default">Скрыть (по умолчанию)</string>
+    <string name="percent_of_default_size">% от стандартного размера</string>
+    <string name="overlay_none_title">(по умолчанию)</string>
+    <string name="general_section">Основные параметры</string>
+    <string name="general_on">Вкл</string>
+    <string name="general_off">Выкл</string>
+    <string name="sysui_restart_needed">Требуется перезагрузка SystemUI для применения</string>
+    <string name="restart_needed">Требуется перезагрузка для применения</string>
 
+    <!--Category titles-->
+    <string name="lockscreen_header_title">Экран блокировки</string>
+    <string name="statusbar_header">Строка состояния</string>
+    <string name="nav_header">Панель навигации</string>
+    <string name="misc_header">Разное</string>
+    <string name="qs_panel_category_title">Панель быстрых настроек</string>
+    <string name="theme_customization_category">Покраска</string>
+
+    <!--Lock screen related-->
+    <string name="transparent_fingerprint_circle">Скрыть круг для отпечатков пальцев под дисплеем </string>
+    <string name="transparent_fingerprint_circle_off">Круг вокруг значка отпечатка пальца активен</string>
+    <string name="transparent_fingerprint_circle_on">Круг вокруг значка отпечатка пальца будет скрыт</string>
+    <string name="carrier_text_category">Текст носителя</string>
+    <string name="configure_carrier_text">Настройка текста носителя</string>
+    <string name="carrier_text_mod_disabled">Текст носителя не изменен</string>
+    <string name="carrier_text_mod_enabled">Пользовательский текст носителя</string>
+    <string name="carrier_text_value">Вставка пользовательского текста</string>
+    <string name="keyguard_bottom_category">Ярлыки нижней области</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Скрыть круг вокруг значков</string>
+    <string name="keyguard_bottom_force_camera_title">Показать ярлык камеры</string>
+    <string name="keyguard_left_shortcut">Показывать левый ярлык на экране блокировки</string>
+    <string name="LSleftShortcutTitle">Левый ярлык</string>
+    <string name="LSrightShortcutTitle">Правый ярлык</string>
+    <string name="camera_shortcut">Камера</string>
+    <string name="assistant_shortcut">Ассистент</string>
+    <string name="album_art_category">Параметры мультимедиа</string>
+    <string name="album_art_title">Показывать обложки альбомов при воспроизведении медиафайлов</string>
+
+    <!--Status bar related-->
+    <string name="double_tap_sleep_title">Двойное нажатие для перехода в спящий режим</string>
+    <string name="double_tap_sleep_off">"Двойное нажатие не выключает экран"</string>
+    <string name="double_tap_sleep_on">Двойное нажатие на строке состояния или экране блокировки выключает экран</string>
+    <string name="battery_style_title">Выберите стиль батареи</string>
+    <string name="battery_show_percent_title">Показать процент заряда батареи</string>
+    <string name="battery_style_category_title">Стиль батареи</string>
+    <string name="battery_icon_size_title">Размер значка батареи</string>
+    <string name="battery_hidden">Скрытый</string>
+    <string name="BIcon_Opacity_title">Полупрозрачный</string>
+
+    <string name="lte_4g_icon_title">Значок LTE / 4G</string>
+    <string name="combined_signal_icon_title">Комбинированные значки сигналов</string>
+    <string name="sb_vibration_switch_title">Показать значки Вибрации/Без звука</string>
+    <string name="sbc_position_title">Расположение часов</string>
+    <string name="sbc_ampm_style">Стиль AM/PM</string>
+    <string name="sbc_show_secs">Показать секунды</string>
+    <string name="sbc_date_cat">Параметры даты</string>
+    <string name="sbc_day_of_week_options">Показывать день недели с часами</string>
+    <string name="sbc_advanced_cat">Дополнительные параметры даты (заменяет вышеуказанные настройки!)</string>
+    <string name="sbc_advanced_sum">Пожалуйста, ознакомьтесь с документацией по формату даты Java</string>
+    <string name="sbc_custom_date_before">Пользовательский формат даты перед часами</string>
+    <string name="sbc_date_small">Меньший размер (70%)</string>
+    <string name="sbc_custom_date_after">Пользовательский формат даты после часов</string>
+    <string name="sbc_header">Настройка часов в строке состояния</string>
+    <string name="sbc_may_take_one_minute">Вступает в силу при обновлении времени или перезапуске SystemUI</string>
+    <string name="ntsb_far_left">С левого края</string>
+    <string name="ntsb_mid_left">По середине слева</string>
+    <string name="ntsb_mid_right">По середине справа</string>
+    <string name="ntsb_category_title">Мониторинг сетевого трафика</string>
+    <string name="ntsb_enabled_title">Включить мониторинг трафика</string>
+    <string name="ntsb_position_title">Расположение мониторинга</string>
+    <string name="ntsb_treshold_title">Порог автоскрытия</string>
+    <string name="ntsb_treshold_summary">"Скрыть, если трафик меньше... (Килобайт)"</string>
+    <string name="statusbar_general_options">Параметры строки состояния</string>
+    <string name="dual_tone_battery_title">Включить двухтонный измеритель заряда батареи</string>
+    <string name="dual_tone_battery_on_summary">Вкл (работает только с портретным значком)</string>
+    <string name="unread_messages_title">Показать количество непрочитанных сообщений</string>
+    <string name="status_bar_height">Высота строки состояния</string>
+    <string name="status_bar_height_small">Маленькая</string>
+    <string name="status_bar_height_medium">Средняя</string>
+    <string name="fix_status_bar_padding">Корректировка отступа слева</string>
+    <string name="sbbb_header">Настройка панели заряда батареи</string>
+    <string name="sbbIcon_header">Настройка значка батареи</string>
+    <string name="BB_enable_title">Включить панель заряда батареи</string>
+    <string name="BB_onlycharging_title">Только во время зарядки</string>
+    <string name="BB_move_SB_bottom_title">В нижней части строки состояния</string>
+    <string name="BB_colorful_title">Сделайте его красочным</string>
+    <string name="BB_Opacity_title">Полупрозрачность строки</string>
+    <string name="BB_center_align_title">Выравнивание по центру</string>
+    <string name="BB_Thickness_title">Толщина строки</string>
+    <string name="BB_indicate_charging">Индикатор зарядки</string>
+    <string name="BB_indicate_fast_charging">Индикатор быстрой зарядки</string>
+    <string name="BB_warning_level">Диапазон уровней предупреждения</string>
+    <string name="BB_warning_tip">Установите оба значения в 0, чтобы отключить цвета на основе уровней</string>
+    <string name="BB_batteryCriticalColor">Цвет критического уровня</string>
+    <string name="BB_batteryWarningColor">Цвет уровня предупреждения</string>
+    <string name="BB_batteryChargingColor">Цвет зарядки</string>
+    <string name="BB_batteryFastChargingColor">Цвет быстрой зарядки</string>
+    <string name="BB_transit_colors">Цвета оттенков между диапазоном</string>
+
+    <!--Quick settings panel related-->
+    <string name="qs_mod_category_title">Номер сборки в нижнем колонтитуле панели быстрых настроек</string>
+    <string name="qs_footer_mod_title">Изменить номер текста сборки на панели быстрых настроек</string>
+    <string name="qs_footer_text_summary">Оставьте его пустым, чтобы полностью удалить текст</string>
+    <string name="qs_footer_text_desc">Выкл/вкл экран, чтобы применить</string>
+    <string name="light_qs_title">Белая панель быстрых настроек при светлой теме</string>
+    <string name="light_dualtone_qs_title">Включить двухтонную панель быстрых настроек</string>
+    <string name="qs_pulldown_size">Ширина быстрого вытягивания</string>
+    <string name="qs_pulldown_switch_title">Быстрое вытягивание панели быстрых настроек из строки состояния</string>
+    <string name="qs_pulldown_side_title">Сторона быстрого вытягивания</string>
+    <string name="qs_pulldown_category">Вытягивание быстрых настроек</string>
+    <string name="qs_haptic_switch_title">Вибрация при касании плиток быстрых настроек</string>
+    <string name="qs_rows_number">Количество рядов быстрых настроек</string>
+    <string name="qs_general_options">Параметры быстрых настроек</string>
+    <string name="qs_tiles_3_columns_title">Включить 3 колонки с плитками быстрых настроек</string>
+    <string name="qs_text_size_title">Размер текста плиток быстрых настроек</string>
+    <string name="qs_text_size">Уменьшить размер текста плиток быстрых настроек</string>
+    <string name="wifi_cell_title">Плитка интернета</string>
+    <string name="wifi_cell_on">Использовать отдельные плитки для WiFi и мобильных данных</string>
+    <string name="wifi_cell_off">Использовать одну плитку интернета</string>
+    <string name="QQS_brightness_category">Параметры ползунка яркости</string>
+    <string name="QQS_brightness_title">Показывать ползунок яркости в полураскрытой панели быстрых настроек</string>
+    <string name="QS_brightness_disable_title">Скрыть ползунок яркости из быстрых настроек</string>
+    <string name="bs_thick_track">Использовать толстый ползунок яркости</string>
+    <string name="quick_settings_tiles_category">Параметры быстрых настроек</string>
+    <string name="qs_tile_style_title">Темы плиток быстрых настроек</string>
+    <string name="qstile_default">По умолчанию</string>
+    <string name="qstile_cookie">Печенье</string>
+    <string name="qstile_triangles">Треугольник</string>
+    <string name="qstile_divided">Разделенный круг</string>
+    <string name="qstile_attemptmountain">Горы</string>
+    <string name="qstile_squircle_trim">Округлый квадрат с окантовкой</string>
+    <string name="qstile_ninja">Ниндзя</string>
+    <string name="qstile_wavey">Волнистый</string>
+    <string name="qstile_squaremedo">Сквермедо</string>
+    <string name="qstile_dual_tone_circle">Двухтонный круг</string>
+    <string name="qstile_circleoutline">Очертание круга</string>
+    <string name="qstile_pokesign">Pokesign</string>
+    <string name="qstile_cosmos">Shishu Cosmos</string>
+    <string name="qstile_neonlike">Неоновый свет</string>
+    <string name="qstile_circle_trim">Круг с окантовкой</string>
+    <string name="qstile_dottedcircle">Точечный круг</string>
+    <string name="qstile_inkdrop">Чернила</string>
+    <string name="qstile_circle">Круг</string>
+
+    <!--Navigation bar related-->
+    <string name="back_gesture_category_title">Настройка жеста назад</string>
+    <string name="back_from_left_title">Левая часть экрана</string>
+    <string name="back_from_right_title">Правая часть экрана</string>
+    <string name="back_height_title">Высота жеста назад</string>
+    <string name="gesturenav_header">Навигация жестами</string>
+    <string name="gesture_nav_pill_cat">Ширина панели жестов</string>
+    <string name="gesture_nav_pill_mod_title">Изменение ширины панели жестов</string>
+    <string name="gesture_nav_pill_width_title">Ширина по сравнению со стандартным размером</string>
+    <string name="threebutton_header_title">Навигация с помощью трех кнопок</string>
+    <string name="back_longpress_kill_title">Длительное нажатие кнопки "Назад", принудительно закрывает приложение</string>
+    <string name="hide_navbar_title">Скрыть панель жестов</string>
+    <string name="gesture_navbar_thickness_title">Толщина панели жестов</string>
+    <string name="gesture_navbar_thickness">Изменение толщины панели жестов</string>
+    <string name="gesture_navbar_thin">Тонкая</string>
+    <string name="gesture_navbar_thick">Толстая</string>
+    <string name="gesture_navbar_thicker">Толще</string>
+    <string name="colorpill_title">Раскрасьте панель жестов</string>
+    <string name="colorpill">Панель жестов с цветом акцента</string>
+    <string name="reducekeyboard_title">Пространство клавиатуры с жестами</string>
+    <string name="reducekeyboard">Уменьшить пространство на клавиатуре</string>
+    <string name="taskbar_status_title">Android Taskbar</string>
+    <string name="taskbar_force_enable_title">Принудительно включен</string>
+    <string name="taskbar_force_disable_title">Принудительно отключен</string>
+
+    <!--Miscellaneous section related-->
+    <string name="screenshot_sound_disable_title">Отключить звука скриншота</string>
+    <string name="so_power_longpress_torch_title">Долгое нажатие кнопки питания для включения фонарика*</string>
+    <string name="framework_needed_caution_summary">Требуется активация System Framework в Lsposed. ИСПОЛЬЗУЙТЕ С ОСТОРОЖНОСТЬЮ</string>
+    <string name="so_double_tap_wake_title">Двойное нажатие для пробуждения телефона</string>
+    <string name="so_double_tap_wake_summary">Отключение однократного нажатия для пробуждения</string>
+    <string name="doze_header">Когда экран выключен…</string>
+    <string name="custom_themed_icons_title">Пользовательские тематические иконки</string>
+    <string name="custom_themed_icons_off">Пользовательские значки отключены</string>
+    <string name="custom_themed_icons_on">Пользовательские значки включены</string>
+    <string name="so_vol_longpress_skip">Долгое нажатие клавиши громкости для пропуска музыки*</string>
+    <string name="notifications_header">Параметры уведомлений</string>
+    <string name="expand_notifications_icons_title">"Добавить кнопки развернуть/свернуть все</string>
+
+    <!-- Theming section related -->
+    <string name="gsans_override_title">Принудительное использование шрифта Google Sans во всей системе</string>
+    <string name="theme_customization_font_title">Заголовок / Основной шрифт</string>
+    <string name="icons_style_title">Стиль иконок</string>
+    <string name="icon_shapes_title">Формы значков</string>
+    <string name="signal_icons_theme_title">Тема иконок сигнала</string>
+    <string name="dt_styles_category">Стили темной темы</string>
+    <string name="dt_styles">Выберите стиль</string>
+    <string name="dt_black">Принудительно черный</string>
+    <string name="dt_bakedgreen">Baked Green</string>
+    <string name="dt_chocox">Choco X</string>
+    <string name="dt_darkaubergine">Темно-баклажановый</string>
+    <string name="dt_style">Темно-синий</string>
+    <string name="dt_darkgray">Темно-зеленый</string>
+    <string name="dt_materialocean">Material Ocean</string>
+    <string name="dt_night">Ночной</string>
+    <string name="dt_solarizeddark">Solarized Dark</string>
+
+    <!-- Arrays strings -->
+    <!-- Quick pull down -->
+    <string name="pull_down_left">Слева</string>
+    <string name="pull_down_right">Справа</string>
+
+    <!-- Battery styles -->
+    <string name="battery_default">По умолчанию (для применения требуется перезагрузка)</string>
+    <string name="battery_circle">Круг</string>
+    <string name="battery_dashed_circle">Пунктирный</string>
+    <string name="battery_circle_filled">Заполненный круг</string>
+
+    <!-- Clock position -->
+    <string name="clock_default">Слева (по умолчанию)</string>
+    <string name="clock_center">По центру</string>
+    <string name="clock_right">Справа</string>
+
+    <!-- AM/PM style -->
+    <string name="am_pm_normal">100% размер часов</string>
+    <string name="am_pm_small">70% размер часов</string>
+
+    <!-- Date position -->
+    <string name="date_before">До часов (100%)</string>
+    <string name="date_before_small">До часов (70%)</string>
+    <string name="date_after">После часов (100%)</string>
+    <string name="date_after_small">После часов (70%)</string>
+
+    <!-- 4G | LTE -->
+    <string name="fourg_lte_default">По умолчанию в системе</string>
+    <string name="fourg_lte_lte">Принудительно значок LTE</string>
+    <string name="fourg_lte_fourg">Принудительно значок 4G</string>
+
+    <!-- QS Rows overlays -->
+    <string name="qs_2_rows">Принудительно 2 ряда</string>
+    <string name="qs_3_rows">Принудительно 3 ряда</string>
+    <string name="qs_4_rows">Принудительно 4 ряда</string>
+    <string name="qs_5_rows">Принудительно 5 рядов</string>
+
+</resources>

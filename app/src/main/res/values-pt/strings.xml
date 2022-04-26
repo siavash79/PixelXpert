@@ -204,5 +204,10 @@
     <string name="BB_warning_tip">Defina 0 para ambas de modo a desativar as cores por nível</string>
     <string name="album_art_category">Opções de mídia</string>
     <string name="album_art_title">Ativar arte do álbum ao reproduzir mídia</string>
+    <string name="BIcon_Opacity_title">Opacidade</string>
+    <string name="sbbIcon_header">Opções do ícone da bateria</string>
+    <string name="battery_circle_filled">Círculo preenchido</string>
+    <string name="BB_transit_colors">Cores entre o intervalo</string>
+    <string name="shufflePin_title">Pin aleatório</string>
 
 </resources>

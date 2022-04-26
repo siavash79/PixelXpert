@@ -189,7 +189,9 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("BBOnBottom").setVisible(bBarEnabled);
                 findPreference("BBarColorful").setVisible(bBarEnabled);
                 findPreference("BBOpacity").setVisible(bBarEnabled);
+                findPreference("BBOpacity").setSummary(prefs.getInt("BBOpacity", 100) + "%");
                 findPreference("BBarHeight").setVisible(bBarEnabled);
+                findPreference("BBarHeight").setSummary(prefs.getInt("BBarHeight", 50) + "%");
                 findPreference("BBSetCentered").setVisible(bBarEnabled);
                 findPreference("indicateCharging").setVisible(bBarEnabled);
                 findPreference("indicateFastCharging").setVisible(bBarEnabled);
@@ -221,6 +223,7 @@ public class SettingsActivity extends AppCompatActivity implements
             boolean colorful = prefs.getBoolean("BIconColorful", false);
             findPreference("DualToneBatteryOverlay").setVisible(style==0);
             findPreference("BIconOpacity").setVisible(style>0 && style<99);
+            findPreference("BIconOpacity").setSummary(prefs.getInt("BIconOpacity", 100) + "%");
             findPreference("BatteryIconScaleFactor").setVisible(style<99);
             findPreference("BatteryShowPercent").setVisible(style == 1 || style == 2);
             findPreference("BIconindicateCharging").setVisible(style == 3);

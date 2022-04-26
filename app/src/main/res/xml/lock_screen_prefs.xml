@@ -8,6 +8,12 @@
         android:summaryOff="@string/transparent_fingerprint_circle_off"
         android:title="@string/transparent_fingerprint_circle"
         app:summaryOn="@string/transparent_fingerprint_circle_on" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="shufflePinEnabled"
+        android:summaryOff="@string/general_off"
+        android:title="@string/shufflePin_title"
+        app:summaryOn="@string/general_on" />
     <PreferenceCategory android:title="@string/keyguard_bottom_category">
         <SwitchPreference
             android:defaultValue="false"

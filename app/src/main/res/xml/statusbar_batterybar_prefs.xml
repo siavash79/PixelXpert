@@ -29,13 +29,11 @@
         android:defaultValue="100"
         android:key="BBOpacity"
         android:title="@string/BB_Opacity_title"
-        app:showSeekBarValue="true"
         app:updatesContinuously="true" />
     <SeekBarPreference
         android:defaultValue="50"
         android:key="BBarHeight"
         android:title="@string/BB_Thickness_title"
-        app:showSeekBarValue="true"
         app:updatesContinuously="true"/>
     <SwitchPreference
         android:defaultValue="false"

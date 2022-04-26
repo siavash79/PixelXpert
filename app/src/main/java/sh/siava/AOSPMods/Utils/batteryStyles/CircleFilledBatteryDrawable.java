@@ -99,10 +99,9 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 		}
 		Paint basePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		basePaint.setColor(bgColor);
-		basePaint.setAlpha(80*(alpha/255));
+		basePaint.setAlpha(Math.round(80f*(alpha/255f)));
 		
 		Paint levelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		levelPaint.setAlpha(alpha);
 		
 		float cx = size/2f + padding.left;
 		float cy = size/2f + padding.top;
@@ -113,6 +112,7 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 		
 		try {
 			setLevelPaint(levelPaint, cx, cy, baseRadius);
+			levelPaint.setAlpha(alpha);
 		}
 		catch (Throwable t)
 		{
@@ -126,7 +126,6 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	private void setLevelPaint(Paint paint, float cx, float cy, float baseRadius) {
 		int singleColor = fgColor;
 		
-		paint.setAlpha(255);
 		paint.setShader(null);
 		if(isFastCharging && showFastCharging && batteryLevel < 100)
 		{
@@ -164,7 +163,7 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 		{
 			RadialGradient shader = new RadialGradient(cx,cy,baseRadius, shadeColors, shadeLevels, Shader.TileMode.CLAMP);
 			paint.setShader(shader);
-			paint.setAlpha(128);
+//			paint.setAlpha(128);
 		}
 	}
 	

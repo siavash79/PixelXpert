@@ -217,6 +217,7 @@ public class SettingsActivity extends AppCompatActivity implements
             boolean warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
             boolean colorful = prefs.getBoolean("BIconColorful", false);
             findPreference("DualToneBatteryOverlay").setVisible(style==0);
+            findPreference("BIconOpacity").setVisible(style>0 && style<99);
             findPreference("BatteryIconScaleFactor").setVisible(style<99);
             findPreference("BatteryShowPercent").setVisible(style == 1 || style == 2);
             findPreference("BIconindicateCharging").setVisible(style==3);

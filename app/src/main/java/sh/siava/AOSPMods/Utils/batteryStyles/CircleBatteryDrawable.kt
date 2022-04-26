@@ -22,6 +22,7 @@ import android.graphics.*
 import androidx.annotation.ColorInt
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.roundToInt
 
 class CircleBatteryDrawable(
     private val context: Context,
@@ -129,6 +130,10 @@ class CircleBatteryDrawable(
         super.setBounds(left, top, right, bottom)
         updateSize()
     }
+    var javaAlpha : Int = 255
+    override fun setAlpha(alpha: Int) {
+        javaAlpha = alpha
+    }
 
     private fun updateSize() {
         val res = context.resources
@@ -176,7 +181,6 @@ class CircleBatteryDrawable(
         iconTint = fillColor
         framePaint.color = bgColor
 //<Sia: Fixed visibility issues
-        framePaint.alpha = 80
 //>
         invalidateSelf()
     }
@@ -203,7 +207,6 @@ class CircleBatteryDrawable(
         ] = circleSize - strokeWidth / 2.0f
         // set the battery charging color
         batteryPaint.color = batteryColorForLevel(batteryLevel)
-        batteryPaint.alpha = alpha;
         boltPaint.color = batteryPaint.color
 
         if (charging) { // define the bolt shape
@@ -235,15 +238,19 @@ class CircleBatteryDrawable(
                         boltFrame.top + boltPoints[1] * boltFrame.height()
                 )
             }
+            boltPaint.alpha = javaAlpha
             c.drawPath(boltPath, boltPaint)
         }
         // draw thin gray ring first
+        framePaint.alpha = (80*javaAlpha/255f).roundToInt()
         c.drawArc(frame, 270f, 360f, false, framePaint)
         // draw colored arc representing charge level
         if (batteryLevel > 0) {
             if (!charging && powerSaving) {
+                powerSavePaint.alpha = javaAlpha
                 c.drawArc(frame, 270f, 3.6f * batteryLevel, false, powerSavePaint)
             } else {
+                batteryPaint.alpha = javaAlpha
                 c.drawArc(frame, 270f, 3.6f * batteryLevel, false, batteryPaint)
             }
         }
@@ -259,15 +266,9 @@ class CircleBatteryDrawable(
                         warningString
             val pctX = width * 0.5f
             val pctY = (height + textHeight) * 0.47f
+            textPaint.alpha = javaAlpha
             c.drawText(pctText, pctX, pctY, textPaint)
         }
-    }
-
-    // Some stuff required by Drawable.
-    override fun setAlpha(alpha: Int) {
-        boltPaint.alpha = alpha
-        framePaint.alpha = if (alpha > 20) (alpha - 20) else alpha
-        postInvalidate()
     }
 
     override fun setColorFilter(colorFilter: ColorFilter?) {

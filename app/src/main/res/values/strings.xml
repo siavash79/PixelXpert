@@ -215,7 +215,7 @@
     <string name="pull_down_right">Right</string>
 
     <!-- Battery styles -->
-    <string name="battery_default">Default (requires restart to apply)</string>
+    <string name="battery_default">Default</string>
     <string name="battery_circle">Circle</string>
     <string name="battery_dashed_circle">Dashed Circle</string>
     <string name="battery_circle_filled">Filled Circle</string>

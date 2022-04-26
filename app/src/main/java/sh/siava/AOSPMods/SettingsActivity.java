@@ -220,15 +220,15 @@ public class SettingsActivity extends AppCompatActivity implements
             findPreference("BIconOpacity").setVisible(style>0 && style<99);
             findPreference("BatteryIconScaleFactor").setVisible(style<99);
             findPreference("BatteryShowPercent").setVisible(style == 1 || style == 2);
-            findPreference("BIconindicateCharging").setVisible(style==3);
-            findPreference("batteryIconChargingColor").setVisible(style==3 && prefs.getBoolean("BIconindicateCharging", false));
-            findPreference("BIconindicateFastCharging").setVisible(style==3);
-            findPreference("batteryIconFastChargingColor").setVisible(style==3 && prefs.getBoolean("BIconindicateFastCharging", false));
-            findPreference("BIconColorful").setVisible(style==3 && !prefs.getBoolean("BIconTransitColors", false));
-            findPreference("BIconTransitColors").setVisible(style==3 && !prefs.getBoolean("BIconColorful", false));
-            findPreference("BIconbatteryWarningRange").setVisible(style==3);
-            findPreference("BIconbatteryCriticalColor").setVisible(style==3 && (colorful || !critZero));
-            findPreference("BIconbatteryWarningColor").setVisible(style==3 && (colorful || !warnZero));
+            findPreference("BIconindicateCharging").setVisible(style == 3);
+            findPreference("batteryIconChargingColor").setVisible(style == 3 && prefs.getBoolean("BIconindicateCharging", false));
+            findPreference("BIconindicateFastCharging").setVisible(style>0 && style<99);
+            findPreference("batteryIconFastChargingColor").setVisible(style>0 && style<99 && prefs.getBoolean("BIconindicateFastCharging", false));
+            findPreference("BIconColorful").setVisible(style>0 && style<99 && !prefs.getBoolean("BIconTransitColors", false));
+            findPreference("BIconTransitColors").setVisible(style>0 && style<99 && !prefs.getBoolean("BIconColorful", false));
+            findPreference("BIconbatteryWarningRange").setVisible(style>0 && style<99);
+            findPreference("BIconbatteryCriticalColor").setVisible(style>0 && style<99 && (colorful || !critZero));
+            findPreference("BIconbatteryWarningColor").setVisible(style>0 && style<99 && (colorful || !warnZero));
         }
     
         SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {

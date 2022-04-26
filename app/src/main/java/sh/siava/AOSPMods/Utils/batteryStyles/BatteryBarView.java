@@ -8,6 +8,7 @@ import android.graphics.RadialGradient;
 import android.graphics.Shader;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -15,15 +16,17 @@ import android.widget.ImageView;
 
 import androidx.core.graphics.ColorUtils;
 
+import java.util.Locale;
+
 public class BatteryBarView extends FrameLayout {
 	private static int[] shadeColors;
+	private final boolean RTL;
 	private static float[] shadeLevels = new float[0];
 	private final ShapeDrawable mDrawable = new ShapeDrawable();
 	FrameLayout maskLayout;
 	private boolean colorful = false;
 	private int alphaPct = 100;
 	private int singleColorTone = Color.WHITE;
-	private boolean RTL = false;
 	private boolean isCenterBased = false;
 	private int barHeight = 10;
 	private final ImageView barView;
@@ -124,7 +127,6 @@ public class BatteryBarView extends FrameLayout {
 		mDrawable.setShape(new RectShape());
 		this.setSingleColorTone(singleColorTone);
 		this.setAlphaPct(alphaPct);
-		this.setRTL(false);
 		
 		barView = new ImageView(context);
 		barView.setImageDrawable(mDrawable);
@@ -136,7 +138,9 @@ public class BatteryBarView extends FrameLayout {
 		
 		this.addView(maskLayout);
 		this.setClipChildren(true);
-		this.setRTL(this.getLayoutDirection() == LAYOUT_DIRECTION_RTL);
+		
+		RTL=(TextUtils.getLayoutDirectionFromLocale(Locale.getDefault())==LAYOUT_DIRECTION_RTL);
+		
 		refreshLayout();
 	}
 	
@@ -144,7 +148,6 @@ public class BatteryBarView extends FrameLayout {
 	public void setLayoutDirection(int direction)
 	{
 		super.setLayoutDirection(direction);
-		this.setRTL(direction == LAYOUT_DIRECTION_RTL);
 	}
 	
 	private FrameLayout.LayoutParams barLayoutParams() {
@@ -247,11 +250,6 @@ public class BatteryBarView extends FrameLayout {
 	public void setAlphaPct(int alphaPct) {
 		this.alphaPct = alphaPct;
 		mDrawable.setAlpha(Math.round(alphaPct*2.55f));
-	}
-	
-	public void setRTL(boolean RTL)
-	{
-		this.RTL = RTL;
 	}
 	
 	public void setEnabled(boolean enabled)

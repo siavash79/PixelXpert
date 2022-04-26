@@ -28,7 +28,7 @@ public class QSHaptic implements IXposedModPack {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 
-        Class QSTileImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
+        Class<?> QSTileImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
 
         XposedBridge.hookAllConstructors(QSTileImplClass, new XC_MethodHook() {
             @Override
@@ -43,13 +43,13 @@ public class QSHaptic implements IXposedModPack {
         });
 
         XposedHelpers.findAndHookMethod(QSTileImplClass,
-                "click", View.class ,new vibrateFeedback());
+                "click", View.class , new vibrateFeedback());
 
         XposedHelpers.findAndHookMethod(QSTileImplClass,
-                "longClick", View.class ,new vibrateFeedback());
+                "longClick", View.class , new vibrateFeedback());
     }
 
-    class vibrateFeedback extends XC_MethodHook {
+    static class vibrateFeedback extends XC_MethodHook {
         @Override
         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
             if(!QSHapticEnabled) return;

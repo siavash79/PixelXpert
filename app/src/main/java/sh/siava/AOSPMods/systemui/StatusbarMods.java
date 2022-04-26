@@ -65,12 +65,11 @@ public class StatusbarMods implements IXposedModPack {
     public static int networkTrafficPosition = POSITION_LEFT;
     public static int networkTrafficTreshold = 10;
     public NetworkTrafficSB networkTrafficSB = null;
-    private static Context mContext;
+    private  Context mContext;
     private static Object mCollapsedStatusBarFragment = null;
-    private static View mClockView = null;
-    private static ViewGroup mClockParent = null;
-    private static View mCenteredIconArea = null;
-    private static LinearLayout mSystemIconArea = null;
+    private ViewGroup mClockParent = null;
+    private View mCenteredIconArea = null;
+    private LinearLayout mSystemIconArea = null;
     public static int clockColor = 0;
     private FrameLayout fullStatusbar;
     
@@ -223,7 +222,7 @@ public class StatusbarMods implements IXposedModPack {
         instance.setOnTop(!BBOnBottom);
         instance.setSingleColorTone(clockColor);
         instance.setAlphaPct(BBOpacity);
-        instance.setBarHeight(Math.round(BBarHeight/10)+5);
+        instance.setBarHeight(Math.round(BBarHeight/10f)+5);
         instance.setCenterBased(BBSetCentered);
         instance.refreshLayout();
     }
@@ -232,16 +231,16 @@ public class StatusbarMods implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
         
-        Class ActivityStarterClass = XposedHelpers.findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
-        Class DependencyClass = XposedHelpers.findClass("com.android.systemui.Dependency", lpparam.classLoader);
-        Class CollapsedStatusBarFragmentClass;
-        Class KeyguardStatusBarViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
-        Class QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
-        Class QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
-        Class ClockClass = XposedHelpers.findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
-        Class PhoneStatusBarViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
-        Class KeyGuardIndicationClass = XposedHelpers.findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
-        Class BatteryTrackerClass = XposedHelpers.findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
+        Class<?> ActivityStarterClass = XposedHelpers.findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
+        Class<?> DependencyClass = XposedHelpers.findClass("com.android.systemui.Dependency", lpparam.classLoader);
+        Class<?> CollapsedStatusBarFragmentClass;
+        Class<?> KeyguardStatusBarViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
+        Class<?> QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
+        Class<?> QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
+        Class<?> ClockClass = XposedHelpers.findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
+        Class<?> PhoneStatusBarViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
+        Class<?> KeyGuardIndicationClass = XposedHelpers.findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
+        Class<?> BatteryTrackerClass = XposedHelpers.findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
         
         CollapsedStatusBarFragmentClass = XposedHelpers.findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 
@@ -405,7 +404,7 @@ public class StatusbarMods implements IXposedModPack {
                         if(networkOnSBEnabled)
                         {
                             networkTrafficSB = (networkTrafficSB == null) ? new NetworkTrafficSB(mContext) : networkTrafficSB;
-                            networkTrafficSB.setHideTreshold(networkTrafficTreshold);
+                            NetworkTrafficSB.setHideTreshold(networkTrafficTreshold);
                             placeNTSB();
                         }
 
@@ -455,7 +454,7 @@ public class StatusbarMods implements IXposedModPack {
                         try {
                             mClockParent = (int) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mClockParent");
                         }
-                        catch(Exception e){}
+                        catch(Exception ignored){}
 
                         if(mClockParent > 1) return; //We don't want colors of QS header. only statusbar
 
@@ -476,7 +475,7 @@ public class StatusbarMods implements IXposedModPack {
                         try {
                             mClockParent = (int) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mClockParent");
                         }
-                        catch(Exception e){}
+                        catch(Exception ignored){}
 
                         if(mClockParent > 1) return; //We don't want custom format in QS header. do we?
 
@@ -507,7 +506,7 @@ public class StatusbarMods implements IXposedModPack {
         }catch(Throwable ignored){}
     }
     
-    class lb extends LinearLayout
+    static class lb extends LinearLayout
     {
         public lb(Context context) {
             super(context);
@@ -523,11 +522,11 @@ public class StatusbarMods implements IXposedModPack {
         {
             ((ViewGroup) networkTrafficSB.getParent()).removeView(networkTrafficSB);
         }
-        catch(Exception e){}
+        catch(Exception ignored){}
         if(!networkOnSBEnabled) return;
 
         try {
-            LinearLayout.LayoutParams ntsbLayoutP = null;
+            LinearLayout.LayoutParams ntsbLayoutP;
 
             switch (networkTrafficPosition) {
                 case POSITION_RIGHT:

@@ -24,7 +24,7 @@ public class ScreenshotController implements IXposedModPack {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 
-        Class ScreenshotControllerClass = XposedHelpers.findClass("com.android.systemui.screenshot.ScreenshotController", lpparam.classLoader);
+        Class<?> ScreenshotControllerClass = XposedHelpers.findClass("com.android.systemui.screenshot.ScreenshotController", lpparam.classLoader);
 
         XposedBridge.hookAllConstructors(ScreenshotControllerClass, new XC_MethodHook() {
             @Override
@@ -38,7 +38,7 @@ public class ScreenshotController implements IXposedModPack {
     }
 
     //A Media player that does nothing at all
-    class NothingPlayer extends MediaActionSound
+    static class NothingPlayer extends MediaActionSound
     {
         @Override
         public void play(int o) {}

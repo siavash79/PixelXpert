@@ -57,11 +57,11 @@ public class screenOffKeys implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if (!lpparam.packageName.equals(listenPackage)) return;
 
-        Class PhoneWindowManager = null;
-        Method init = null;
-        Method powerLongPress = null;
-        Method startedWakingUp = null;
-        Method interceptKeyBeforeQueueing = null;
+        Class<?> PhoneWindowManager;
+        Method init;
+        Method powerLongPress;
+        Method startedWakingUp;
+        Method interceptKeyBeforeQueueing;
 
         try {
             PhoneWindowManager = XposedHelpers.findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
@@ -108,7 +108,7 @@ public class screenOffKeys implements IXposedModPack {
                                 mHandler.postDelayed(mVolumeLongPress, ViewConfiguration.getLongPressTimeout());
                             }
                     }
-                }catch (Throwable ignored){ignored.printStackTrace();}
+                }catch (Throwable e){e.printStackTrace();}
             }
         });
 
@@ -184,7 +184,7 @@ public class screenOffKeys implements IXposedModPack {
             }
 
             String flashID = getFlashID(cameraManager);
-            if(flashID == "")
+            if(flashID.equals(""))
             {
                 return;
             }

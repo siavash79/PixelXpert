@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import androidx.core.content.res.ResourcesCompat;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -49,10 +51,10 @@ public class NotificationExpander implements IXposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if(!listenPackage.equals(lpparam.packageName) || !notificationExpandallHookEnabled) return;
 		
-		Class NotificationEntryManagerClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.NotificationEntryManager", lpparam.classLoader);
-		Class FooterViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.row.FooterView", lpparam.classLoader);
-		Class FooterViewButtonClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.row.FooterViewButton", lpparam.classLoader);
-		Class NotificationStackScrollLayoutControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController", lpparam.classLoader);
+		Class<?> NotificationEntryManagerClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.NotificationEntryManager", lpparam.classLoader);
+		Class<?> FooterViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.row.FooterView", lpparam.classLoader);
+		Class<?> FooterViewButtonClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.row.FooterViewButton", lpparam.classLoader);
+		Class<?> NotificationStackScrollLayoutControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController", lpparam.classLoader);
 		
 		//Notification Footer, where shortcuts should live
 		XposedBridge.hookAllMethods(FooterViewClass, "onFinishInflate", new XC_MethodHook() {
@@ -128,11 +130,11 @@ public class NotificationExpander implements IXposedModPack {
 
 		int tc = (int) XposedHelpers.callMethod(mDismissButton, "getCurrentTextColor");
 		
-		Drawable expandArrows = XPrefs.modRes.getDrawable(R.drawable.exapnd_icon);
+		Drawable expandArrows = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.exapnd_icon, mContext.getTheme());
 		expandArrows.setTint(tc);
 		ExpandBtn.setBackground(expandArrows);
 		
-		Drawable collapseArrows = XPrefs.modRes.getDrawable(R.drawable.collapse_icon);
+		Drawable collapseArrows = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.collapse_icon, mContext.getTheme());
 		collapseArrows.setTint(tc);
 		CollapseBtn.setBackground(collapseArrows);
 		
@@ -147,7 +149,7 @@ public class NotificationExpander implements IXposedModPack {
 			XposedHelpers.callMethod(Scroller, "resetScrollPosition");
 		}
 		
-		android.util.ArraySet entries = (android.util.ArraySet) XposedHelpers.getObjectField(NotificationEntryManager, "mAllNotifications");
+		android.util.ArraySet<?> entries = (android.util.ArraySet<?>) XposedHelpers.getObjectField(NotificationEntryManager, "mAllNotifications");
 		
 		for(Object entry : entries.toArray())
 		{

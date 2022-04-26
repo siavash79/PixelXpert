@@ -64,7 +64,7 @@ public class QQSBrightness implements IXposedModPack {
                 Object mView = XposedHelpers.getObjectField(QS, "mView");
                 XposedHelpers.callMethod(mView, "setBrightnessView", QSbrightnessSliderView);
             }
-        }catch (Exception e){}
+        } catch (Exception ignored){}
     }
     
     private void setQQSVisibility() {
@@ -88,9 +88,9 @@ public class QQSBrightness implements IXposedModPack {
         if(!BrightnessHookEnabled) //master switch
             return;
 
-        Class QuickQSPanelClass = XposedHelpers.findClass("com.android.systemui.qs.QuickQSPanel", lpparam.classLoader);
-        Class QSPanelControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
-        Class BrightnessMirrorHandlerClass = XposedHelpers.findClass("com.android.systemui.settings.brightness.BrightnessMirrorHandler", lpparam.classLoader);
+        Class<?> QuickQSPanelClass = XposedHelpers.findClass("com.android.systemui.qs.QuickQSPanel", lpparam.classLoader);
+        Class<?> QSPanelControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
+        Class<?> BrightnessMirrorHandlerClass = XposedHelpers.findClass("com.android.systemui.settings.brightness.BrightnessMirrorHandler", lpparam.classLoader);
 
         //Stealing info from Main QS
         XposedBridge.hookAllMethods(QSPanelControllerClass, "setBrightnessMirror", new XC_MethodHook() {
@@ -131,7 +131,7 @@ public class QQSBrightness implements IXposedModPack {
                 QQSbrightnessSliderView = (View) XposedHelpers.callMethod(QQSBrightnessSliderController, "getRootView");
 
                 //Creating controller and handler
-                Object mBrightnessController = null;
+                Object mBrightnessController;
                 try {
                     mBrightnessController = XposedHelpers.callMethod(brightnessControllerFactory, "create", QQSBrightnessSliderController);
                 }

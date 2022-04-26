@@ -20,9 +20,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
 import androidx.annotation.ColorInt
-
 import androidx.core.graphics.ColorUtils
-import de.robv.android.xposed.XposedBridge
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -47,8 +45,6 @@ class CircleBatteryDrawable(
     private val frame = RectF()
     private val boltFrame = RectF()
     private val pathEffect = DashPathEffect(floatArrayOf(3f,2f),0f)
-    private val batteryLevels : FloatArray = FloatArray(0)
-    private val batteryColors : IntArray = IntArray(0)
 
     private var iconTint = Color.WHITE
     private var intrinsicWidth: Int
@@ -59,8 +55,8 @@ class CircleBatteryDrawable(
     private var powerSaveColor : Int
 
 
-    private var BATTERY_STYLE_CIRCLE = 1
-    private var BATTERY_STYLE_DOTTED_CIRCLE = 2
+    private val BATTERY_STYLE_CIRCLE = 1
+    private val BATTERY_STYLE_DOTTED_CIRCLE = 2
 
     // Dual tone implies that battery level is a clipped overlay over top of the whole shape
     private var dualTone = false
@@ -133,7 +129,7 @@ class CircleBatteryDrawable(
         super.setBounds(left, top, right, bottom)
         updateSize()
     }
-    var javaAlpha : Int = 255
+    private var javaAlpha : Int = 255
     override fun setAlpha(alpha: Int) {
         javaAlpha = alpha
     }
@@ -157,17 +153,6 @@ class CircleBatteryDrawable(
         }
         padding.set(this.padding)
         return true
-    }
-
-    private fun getColorForLevel(percent: Int): Int {
-        for(i in 0 until batteryLevels.size)
-        {
-            if(percent < batteryLevels[i])
-            {
-                return batteryColors[i]
-            }
-        }
-        return iconTint
     }
 
     override fun setColors(fgColor: Int, bgColor: Int, singleToneColor: Int) {
@@ -275,7 +260,6 @@ class CircleBatteryDrawable(
     }
 
     private fun setLevelPaint(paint: Paint, cx: Float, cy: Float) {
-        XposedBridge.log("shadecolors"+ shadeColors.size)
         var singleColor: Int = fgColor
         paint.shader = null
         if (fastCharging && showFastCharging && batteryLevel < 100) {
@@ -289,20 +273,20 @@ class CircleBatteryDrawable(
             return
         }
 
-        if (!colorful || shadeColors.size == 0) {
-            for (i in BatteryDrawable.batteryLevels.indices) {
-                if (batteryLevel <= BatteryDrawable.batteryLevels[i]) {
+        if (!colorful || shadeColors.isEmpty()) {
+            for (i in batteryLevels.indices) {
+                if (batteryLevel <= batteryLevels[i]) {
                     singleColor = if (transitColors && i > 0) {
                         val range =
-                            BatteryDrawable.batteryLevels[i] - BatteryDrawable.batteryLevels[i - 1]
-                        val currentPos = batteryLevel - BatteryDrawable.batteryLevels[i - 1]
+                            batteryLevels[i] - batteryLevels[i - 1]
+                        val currentPos = batteryLevel - batteryLevels[i - 1]
                         val ratio = currentPos / range
                         ColorUtils.blendARGB(
-                            BatteryDrawable.batteryColors[i - 1],
-                            BatteryDrawable.batteryColors[i], ratio
+                            batteryColors[i - 1],
+                            batteryColors[i], ratio
                         )
                     } else {
-                        BatteryDrawable.batteryColors[i]
+                        batteryColors[i]
                     }
                     break
                 }
@@ -315,7 +299,7 @@ class CircleBatteryDrawable(
                 shadeColors,
                 shadeLevels,
             )
-            var shaderMatrix = Matrix()
+            val shaderMatrix = Matrix()
             shaderMatrix.preRotate(270f, cx, cy)
             shader.setLocalMatrix(shaderMatrix)
             paint.shader = shader
@@ -324,23 +308,23 @@ class CircleBatteryDrawable(
     }
 
     private fun refreshShadeColors() {
-        if (BatteryDrawable.batteryColors == null) return
+        if (batteryColors == null) return
         shadeColors =
-            IntArray(BatteryDrawable.batteryLevels.size * 2 + 2)
+            IntArray(batteryLevels.size * 2 + 2)
         shadeLevels =
             FloatArray(shadeColors.size)
         var prev = 0f
-        for (i in BatteryDrawable.batteryLevels.indices) {
-            val rangeLength = BatteryDrawable.batteryLevels[i] - prev
+        for (i in batteryLevels.indices) {
+            val rangeLength = batteryLevels[i] - prev
             shadeLevels[2 * i] = (prev + rangeLength * .3f) / 100
-            shadeColors[2 * i] = BatteryDrawable.batteryColors[i]
+            shadeColors[2 * i] = batteryColors[i]
             shadeLevels[2 * i + 1] =
-                (BatteryDrawable.batteryLevels[i] - rangeLength * .3f) / 100
-            shadeColors[2 * i + 1] = BatteryDrawable.batteryColors[i]
-            prev = BatteryDrawable.batteryLevels[i]
+                (batteryLevels[i] - rangeLength * .3f) / 100
+            shadeColors[2 * i + 1] = batteryColors[i]
+            prev = batteryLevels[i]
         }
         shadeLevels[shadeLevels.size - 2] =
-            (BatteryDrawable.batteryLevels[BatteryDrawable.batteryLevels.size - 1] + (100 - BatteryDrawable.batteryLevels[BatteryDrawable.batteryLevels.size - 1]) * .3f) / 100
+            (batteryLevels[batteryLevels.size - 1] + (100 - batteryLevels[batteryLevels.size - 1]) * .3f) / 100
         shadeColors[shadeColors.size - 2] =
             Color.GREEN
         shadeLevels[shadeLevels.size - 1] =
@@ -357,7 +341,9 @@ class CircleBatteryDrawable(
         boltPaint.colorFilter = colorFilter
     }
 
-    @Deprecated("Deprecated in Java")
+    @Deprecated("Deprecated in Java",
+        ReplaceWith("PixelFormat.UNKNOWN", "android.graphics.PixelFormat")
+    )
     override fun getOpacity() = PixelFormat.UNKNOWN
 
     companion object {

@@ -4,7 +4,6 @@ import com.topjohnwu.superuser.Shell;
 
 import java.util.regex.Pattern;
 
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 public class miscSettings implements IXposedModPack {
@@ -37,15 +36,15 @@ public class miscSettings implements IXposedModPack {
             //startup jobs
             try {
                 updateSysUITuner();
-            }catch(Exception e){}
+            }catch(Exception ignored){}
             try {
                 updateGSansOverride();
-            } catch(Exception e){};
+            } catch(Exception ignored){}
         }
     }
 
     private void updateWifiCell() {
-        Boolean WifiCellEnabled = XPrefs.Xprefs.getBoolean("wifi_cell", false);
+        boolean WifiCellEnabled = XPrefs.Xprefs.getBoolean("wifi_cell", false);
 
         try {
             String currentTiles = Shell.su("settings get secure sysui_qs_tiles").exec().getOut().get(0);
@@ -87,7 +86,7 @@ public class miscSettings implements IXposedModPack {
     }
 
     private void updateSysUITuner() {
-        Boolean SysUITunerEnabled = XPrefs.Xprefs.getBoolean("sysui_tuner", false);
+        boolean SysUITunerEnabled = XPrefs.Xprefs.getBoolean("sysui_tuner", false);
         String mode = (SysUITunerEnabled) ? "enable" : "disable";
 
         try {
@@ -96,7 +95,7 @@ public class miscSettings implements IXposedModPack {
     }
 
     private void updateGSansOverride() {
-        Boolean GSansOverrideEnabled = XPrefs.Xprefs.getBoolean("gsans_override", false);
+        boolean GSansOverrideEnabled = XPrefs.Xprefs.getBoolean("gsans_override", false);
     
         try {
 

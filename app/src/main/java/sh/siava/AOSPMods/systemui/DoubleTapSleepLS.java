@@ -29,7 +29,7 @@ public class DoubleTapSleepLS implements IXposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
 		if(!lpparam.packageName.equals(listenPackage)) return;
 		
-		Class NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
+		Class<?> NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
 		
 		GestureDetector mLockscreenDoubleTapToSleep = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
 			@Override

@@ -48,10 +48,10 @@ public class QSHeaderManager implements IXposedModPack {
         }
     }
     
-    private static Context context;
+    private Context context;
     Object mBehindColors;
     
-    public static void setLightQSHeader(boolean state)
+    public void setLightQSHeader(boolean state)
     {
         if(lightQSHeaderEnabled != state) {
             lightQSHeaderEnabled = state;
@@ -273,7 +273,7 @@ public class QSHeaderManager implements IXposedModPack {
                 });
     }
     
-    private static void onStatChanged() throws Throwable {
+    private void onStatChanged() throws Throwable {
         if (context == null) return;
         Resources res = context.getResources();
         
@@ -319,7 +319,7 @@ public class QSHeaderManager implements IXposedModPack {
         }
     }
     
-    private static boolean getIsDark() {
+    private boolean getIsDark() {
         return (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) == Configuration.UI_MODE_NIGHT_YES;
     }
     

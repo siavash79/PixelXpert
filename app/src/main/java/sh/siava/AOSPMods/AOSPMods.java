@@ -35,7 +35,7 @@ import sh.siava.AOSPMods.systemui.UDFPSManager;
 
 public class AOSPMods implements IXposedHookLoadPackage{
 
-    public static ArrayList<Class> modPacks = new ArrayList<>();
+    public static ArrayList<Class<?>> modPacks = new ArrayList<>();
     public static ArrayList<IXposedModPack> runningMods = new ArrayList<>();
     public Context mContext = null;
     public static boolean isSecondProcess = false;
@@ -79,7 +79,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
             }
         });
  
-        for (Class mod : modPacks)
+        for (Class<?> mod : modPacks)
         {
             try {
                 IXposedModPack instance = ((IXposedModPack) mod.newInstance());

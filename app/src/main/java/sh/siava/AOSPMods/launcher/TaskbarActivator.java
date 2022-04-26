@@ -43,7 +43,7 @@ public class TaskbarActivator implements IXposedModPack {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		
-		Class info = XposedHelpers.findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
+		Class<?> info = XposedHelpers.findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
 		
 		
 		XposedBridge.hookAllMethods(info, "isTablet", new XC_MethodHook() {

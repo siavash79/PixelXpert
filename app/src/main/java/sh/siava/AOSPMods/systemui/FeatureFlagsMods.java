@@ -25,7 +25,7 @@ public class FeatureFlagsMods implements IXposedModPack {
 
         if(Build.VERSION.SDK_INT < 32) return; //Feature flags is newly introduced!
 
-        Class FeatureFlagsClass = XposedHelpers.findClass("com.android.systemui.flags.FeatureFlags", lpparam.classLoader);
+        Class<?> FeatureFlagsClass = XposedHelpers.findClass("com.android.systemui.flags.FeatureFlags", lpparam.classLoader);
 
         XposedHelpers.findAndHookMethod(FeatureFlagsClass, "isCombinedStatusBarSignalIconsEnabled", new XC_MethodHook() {
             @Override

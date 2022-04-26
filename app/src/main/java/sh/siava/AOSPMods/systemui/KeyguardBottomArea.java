@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.core.content.res.ResourcesCompat;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -18,9 +20,9 @@ public class KeyguardBottomArea implements IXposedModPack {
     public static boolean transparentBGcolor = false;
     public static String leftShortcut = "";
     public static String rightShortcut = "";
-
-    private static ImageView mWalletButton;
-    private static ImageView mControlsButton;
+    
+    private ImageView mWalletButton;
+    private ImageView mControlsButton;
     private Context mContext = null;
     private Object thisObject = null;
 
@@ -49,9 +51,9 @@ public class KeyguardBottomArea implements IXposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Class KeyguardbottomAreaViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
-        Class UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
-        Class CameraIntentsClass = XposedHelpers.findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
+        Class<?> KeyguardbottomAreaViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
+        Class<?> UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
+        Class<?> CameraIntentsClass = XposedHelpers.findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
 
         //convert wallet button to camera button
         XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
@@ -154,22 +156,13 @@ public class KeyguardBottomArea implements IXposedModPack {
         switch(type)
         {
             case "camera":
-                listener = new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        XposedHelpers.callMethod(thisObject, "launchCamera", "lockscreen_affordance");
-                    }
-                };
-                drawable = mContext.getResources().getDrawable(mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName()));
+                listener = v -> XposedHelpers.callMethod(thisObject, "launchCamera", "lockscreen_affordance");
+                drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName()), mContext.getTheme());
                 break;
             case "assistant":
-                listener = new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        XposedHelpers.callMethod(thisObject, "launchVoiceAssist");
-                    }
-                };
-                drawable = mContext.getResources().getDrawable(mContext.getResources().getIdentifier("ic_mic_26dp", "drawable", mContext.getPackageName()));
+                listener = v -> XposedHelpers.callMethod(thisObject, "launchVoiceAssist");
+                drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_mic_26dp", "drawable", mContext.getPackageName()), mContext.getTheme());
+                
                 break;
         }
         if(type.length() > 0) {

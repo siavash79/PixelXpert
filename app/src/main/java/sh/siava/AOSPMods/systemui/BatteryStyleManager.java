@@ -45,7 +45,6 @@ public class BatteryStyleManager implements IXposedModPack {
     private static int BatteryIconOpacity = 100;
     private static float[] batteryLevels = new float[]{20f, 40f};
     private static final ArrayList<Object> batteryViews = new ArrayList<>();
-    private Class<?> ThemedBatteryDrawable = null;
     
     public static void setIsFastCharging(boolean isFastCharging)
     {
@@ -65,12 +64,7 @@ public class BatteryStyleManager implements IXposedModPack {
         String BatteryStyleStr = XPrefs.Xprefs.getString("BatteryStyle", "0");
         scaleFactor = XPrefs.Xprefs.getInt("BatteryIconScaleFactor", 50)*2;
         int batteryStyle = Integer.parseInt(BatteryStyleStr);
-    
-        customBatteryEnabled = true;
-        if(batteryStyle == 0)
-        {
-            customBatteryEnabled = false;
-        }
+        customBatteryEnabled = batteryStyle != 0;
         if(batteryStyle == 99)
         {
             scaleFactor = 0;
@@ -80,7 +74,6 @@ public class BatteryStyleManager implements IXposedModPack {
         {
             if(Key.length > 0 && batteryStyle == 0)
             {
-                XposedBridge.log("restart sysui");
                 android.os.Process.killProcess(android.os.Process.myPid());
             }
             BatteryStyle = batteryStyle;
@@ -155,8 +148,6 @@ public class BatteryStyleManager implements IXposedModPack {
         {
             BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
         }
-        ThemedBatteryDrawable = XposedHelpers.findClass("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader);
-    
     
         //Android 12 June beta
         Method updatePercentTextMethod = XposedHelpers.findMethodExactIfExists(BatteryMeterViewClass, "updatePercentText");
@@ -266,10 +257,12 @@ public class BatteryStyleManager implements IXposedModPack {
             case 99:
                 mBatteryDrawable = new hiddenBatteryDrawable();
         }
-        mBatteryDrawable.setShowPercent(ShowPercent);
-        mBatteryDrawable.setMeterStyle(BatteryStyle);
-        mBatteryDrawable.setFastCharging(isFastCharging);
-        mBatteryDrawable.setAlpha(Math.round(BatteryIconOpacity*2.55f));
+        if(mBatteryDrawable != null) {
+            mBatteryDrawable.setShowPercent(ShowPercent);
+            mBatteryDrawable.setMeterStyle(BatteryStyle);
+            mBatteryDrawable.setFastCharging(isFastCharging);
+            mBatteryDrawable.setAlpha(Math.round(BatteryIconOpacity * 2.55f));
+        }
         return mBatteryDrawable;
     }
     

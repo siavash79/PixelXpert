@@ -7,8 +7,6 @@ import android.graphics.PixelFormat;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import sh.siava.AOSPMods.Utils.batteryStyles.BatteryDrawable;
-
 public class hiddenBatteryDrawable extends BatteryDrawable {
 	@Override
 	public void setShowPercent(boolean showPercent) {

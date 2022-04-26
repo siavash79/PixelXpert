@@ -56,7 +56,6 @@ public class QSQuickPullDown implements IXposedModPack {
 
                         boolean prevResult = (boolean) param.getResult();
                         param.setResult(prevResult || showQsOverride);
-                        return;
                     }
                 });
     }

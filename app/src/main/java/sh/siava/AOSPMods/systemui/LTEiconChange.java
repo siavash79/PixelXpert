@@ -10,7 +10,6 @@ import sh.siava.AOSPMods.XPrefs;
 
 public class LTEiconChange implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
-    public static boolean isEnabled = false;
     public static int SBLTEIcon = 0;
 
     private static final int DEFAULT = 0;

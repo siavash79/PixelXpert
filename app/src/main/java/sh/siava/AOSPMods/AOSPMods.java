@@ -19,6 +19,7 @@ import sh.siava.AOSPMods.systemui.CarrierTextManager;
 import sh.siava.AOSPMods.systemui.DoubleTapSleepLS;
 import sh.siava.AOSPMods.systemui.DoubleTaptoWake;
 import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
+import sh.siava.AOSPMods.systemui.KeyGuardPinScrambler;
 import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
 import sh.siava.AOSPMods.systemui.LTEiconChange;
 import sh.siava.AOSPMods.systemui.LockscreenAlbumArt;
@@ -65,6 +66,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(NotificationExpander.class);
         modPacks.add(TaskbarActivator.class);
         modPacks.add(LockscreenAlbumArt.class);
+        modPacks.add(KeyGuardPinScrambler.class);
     }
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {

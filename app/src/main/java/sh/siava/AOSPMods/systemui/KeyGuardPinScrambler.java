@@ -18,7 +18,7 @@ public class KeyGuardPinScrambler implements IXposedModPack {
 	
 	@Override
 	public void updatePrefs(String... Key) {
-		shufflePinEnabled = XPrefs.Xprefs.getBoolean("shufflePinEnabled", true);
+		shufflePinEnabled = XPrefs.Xprefs.getBoolean("shufflePinEnabled", false);
 	}
 	
 	@Override

@@ -4,5 +4,5 @@ import de.robv.android.xposed.IXposedHookLoadPackage;
 
 public interface IXposedModPack extends IXposedHookLoadPackage {
     void updatePrefs(String...Key);
-    String getListenPack();
+    boolean listensTo(String packageName);
 }

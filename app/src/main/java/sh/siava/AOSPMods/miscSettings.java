@@ -108,10 +108,8 @@ public class miscSettings implements IXposedModPack {
     }
 
     @Override
-    public String getListenPack() {
-        return "com.android.systemui";
-    }
-
+    public boolean listensTo(String packageName) { return packageName.equals("com.android.systemui"); }
+    
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         

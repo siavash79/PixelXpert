@@ -210,9 +210,8 @@ public class screenOffKeys implements IXposedModPack {
         }catch (Throwable e) {e.printStackTrace();}
         return "";
     }
-
+    
     @Override
-    public String getListenPack() {
-        return listenPackage;
-    }
+    public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
+    
 }

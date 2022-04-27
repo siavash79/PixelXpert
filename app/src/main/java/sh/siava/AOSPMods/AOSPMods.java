@@ -9,6 +9,7 @@ import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.android.over;
 import sh.siava.AOSPMods.android.screenOffKeys;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
@@ -67,6 +68,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(TaskbarActivator.class);
         modPacks.add(LockscreenAlbumArt.class);
         modPacks.add(KeyGuardPinScrambler.class);
+        modPacks.add(over.class);
     }
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
@@ -85,7 +87,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         {
             try {
                 IXposedModPack instance = ((IXposedModPack) mod.newInstance());
-                if(!instance.getListenPack().equals(lpparam.packageName)) continue;
+                if(!instance.listensTo(lpparam.packageName)) continue;
                 try {
                     instance.updatePrefs();
                 } catch(Throwable ignored){ }

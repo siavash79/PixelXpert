@@ -22,9 +22,7 @@ public class KeyGuardPinScrambler implements IXposedModPack {
 	}
 	
 	@Override
-	public String getListenPack() {
-		return listenPackage;
-	}
+	public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 	
 	List digits = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 	

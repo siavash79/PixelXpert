@@ -325,7 +325,5 @@ public class QSHeaderManager implements IXposedModPack {
     
     
     @Override
-    public String getListenPack() {
-        return listenPackage;
-    }
+    public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 }

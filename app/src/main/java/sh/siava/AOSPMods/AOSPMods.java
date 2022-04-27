@@ -7,9 +7,10 @@ import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.android.over;
+import sh.siava.AOSPMods.allApps.overScrollDisabler;
 import sh.siava.AOSPMods.android.screenOffKeys;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
@@ -41,8 +42,10 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public static ArrayList<IXposedModPack> runningMods = new ArrayList<>();
     public Context mContext = null;
     public static boolean isSecondProcess = false;
+    
     public AOSPMods()
     {
+        //region Mod list definition
         modPacks.add(StatusbarMods.class);
         modPacks.add(BackGestureManager.class);
         modPacks.add(BackToKill.class);
@@ -68,8 +71,10 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(TaskbarActivator.class);
         modPacks.add(LockscreenAlbumArt.class);
         modPacks.add(KeyGuardPinScrambler.class);
-        modPacks.add(over.class);
+        modPacks.add(overScrollDisabler.class);
+        //endregion
     }
+    
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         isSecondProcess =  lpparam.processName.contains(":");
@@ -103,6 +108,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
     private void setContext(Context context) {
         mContext = context;
+        XposedBridge.log(mContext.getPackageName());
         XPrefs.loadPrefs(mContext);
     }
 }

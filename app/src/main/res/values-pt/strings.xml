@@ -209,5 +209,6 @@
     <string name="battery_circle_filled">Círculo preenchido</string>
     <string name="BB_transit_colors">Cores entre o intervalo</string>
     <string name="shufflePin_title">Pin aleatório</string>
+    <string name="disable_overscroll">"Desativar o efeito elástico no final da navegação</string>
 
 </resources>

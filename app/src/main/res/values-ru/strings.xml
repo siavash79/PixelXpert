@@ -37,6 +37,7 @@
     <string name="assistant_shortcut">Ассистент</string>
     <string name="album_art_category">Параметры мультимедиа</string>
     <string name="album_art_title">Показывать обложки альбомов при воспроизведении медиафайлов</string>
+    <string name="shufflePin_title">Случайный PIN-код</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Двойное нажатие для перехода в спящий режим</string>
@@ -182,6 +183,7 @@
     <string name="so_vol_longpress_skip">Долгое нажатие клавиши громкости для пропуска музыки*</string>
     <string name="notifications_header">Параметры уведомлений</string>
     <string name="expand_notifications_icons_title">"Добавить кнопки развернуть/свернуть все</string>
+    <string name="disable_overscroll">"Отключить эффект упругости в конце прокрутки</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Принудительное использование шрифта Google Sans во всей системе</string>

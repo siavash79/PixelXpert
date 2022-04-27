@@ -17,27 +17,30 @@ public class XPrefs implements IXposedHookZygoteInit {
     public static XModuleResources modRes;
     public static SharedPreferences Xprefs;
     public static String MagiskRoot = "/data/adb/modules/AOSPMods";
+    private static Context mContext;
 
-    static SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything(key);
+    static SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything(mContext.getPackageName(), key);
 
-    public static void loadPrefs(Context mContext) {
-        Xprefs = new RemotePreferences(mContext, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
+    public static void loadPrefs(Context context) {
+        mContext = context;
+        Xprefs = new RemotePreferences(context, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
         XposedBridge.log("AOSPMods Version: " + BuildConfig.VERSION_NAME);
         XposedBridge.log("AOSPMods Records: " + Xprefs.getAll().keySet().size());
         Xprefs.registerOnSharedPreferenceChangeListener(listener);
-        loadEverything();
+        loadEverything(context.getPackageName());
     }
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
-
         MOD_PATH = startupParam.modulePath;
         modRes = XModuleResources.createInstance(XPrefs.MOD_PATH, null);
     }
 
-    public static void loadEverything(String...key)
+    public static void loadEverything(String packageName, String...key)
     {
-        Overlays.setAll();
+        if(packageName.equals("com.android.systemui")) {
+            Overlays.setAll();
+        }
         for(IXposedModPack thisMod : AOSPMods.runningMods)
         {
             thisMod.updatePrefs(key);

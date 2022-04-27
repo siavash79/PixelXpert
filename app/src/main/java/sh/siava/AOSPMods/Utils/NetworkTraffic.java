@@ -214,6 +214,7 @@ public class NetworkTraffic extends androidx.appcompat.widget.AppCompatTextView 
      */
     public NetworkTraffic(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        if(context == null) return;
         mContext = context;
         final Resources resources = getResources();
         setMode();

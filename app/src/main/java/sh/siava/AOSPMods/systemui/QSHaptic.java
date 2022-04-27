@@ -34,6 +34,7 @@ public class QSHaptic implements IXposedModPack {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 Context mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                if(mContext == null) return;
                 mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
                 if(mVibrator.hasVibrator())
                 {

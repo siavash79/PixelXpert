@@ -18,6 +18,7 @@ public class DoubleTapSleepLS implements IXposedModPack {
 	public static boolean doubleTapToSleepEnabled = false;
 	
 	private Context mContext = null;
+	private Object powerManager = null;
 	
 	public void updatePrefs(String...Key)
 	{
@@ -25,23 +26,14 @@ public class DoubleTapSleepLS implements IXposedModPack {
 		doubleTapToSleepEnabled = XPrefs.Xprefs.getBoolean("DoubleTapSleep", false);
 	}
 	
+	GestureDetector mLockscreenDoubleTapToSleep = null;
+	
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
 		if(!lpparam.packageName.equals(listenPackage)) return;
 		
 		Class<?> NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
 		
-		GestureDetector mLockscreenDoubleTapToSleep = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
-			@Override
-			public boolean onDoubleTap(MotionEvent e) {
-				
-				Object pm = mContext.getSystemService(Context.POWER_SERVICE);
-				if (pm != null) {
-					XposedHelpers.callMethod(pm, "goToSleep", SystemClock.uptimeMillis());
-				}
-				return true;
-			}
-		});
 		
 		XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader,
 				"createTouchHandler", new XC_MethodHook() {
@@ -61,7 +53,7 @@ public class DoubleTapSleepLS implements IXposedModPack {
 										int mBarState = (int) XposedHelpers.getObjectField(ThisNotificationPanel, "mBarState");
 										
 										if (!mPulsing && !mDozing
-												&& mBarState < 2) {
+												&& mBarState < 2 && mLockscreenDoubleTapToSleep != null) {
 											mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[1]);
 										}
 									}
@@ -76,6 +68,17 @@ public class DoubleTapSleepLS implements IXposedModPack {
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						Object mView = XposedHelpers.getObjectField(param.thisObject, "mView");
 						mContext = (Context) XposedHelpers.callMethod(mView, "getContext");
+						powerManager = mContext.getSystemService(Context.POWER_SERVICE);
+						
+						mLockscreenDoubleTapToSleep = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
+							@Override
+							public boolean onDoubleTap(MotionEvent e) {
+								if (powerManager != null) {
+									XposedHelpers.callMethod(powerManager, "goToSleep", SystemClock.uptimeMillis());
+								}
+								return true;
+							}
+						});
 					}
 				});
 		

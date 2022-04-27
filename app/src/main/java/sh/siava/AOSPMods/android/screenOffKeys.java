@@ -132,10 +132,8 @@ public class screenOffKeys implements IXposedModPack {
                 try
                 {
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    if (mContext == null)
-                    {
-                        return;
-                    }
+                    if (mContext == null) return;
+
                     mHandler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
                     audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
                     cameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);

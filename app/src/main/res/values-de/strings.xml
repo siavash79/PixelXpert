@@ -41,6 +41,7 @@
     <string name="assistant_shortcut">Assistent</string>
     <string name="album_art_category">Medieneinstellungen</string>
     <string name="album_art_title">Aktiviere Album Anzeige wenn Medien abgespielt werden</string>
+    <string name="shufflePin_title">Zufallsanordnung PIN</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doppelt Tippen zum Sperren</string>
@@ -190,6 +191,7 @@
     <string name="so_vol_longpress_skip">Lautstärke lange drücken um Titel zu überspringen*</string>
     <string name="notifications_header">Benachrichtigungseinstellungen</string>
     <string name="expand_notifications_icons_title">Alle ausklappen/einklappen aktivieren</string>
+    <string name="disable_overscroll">Deaktiviere elastischen Überscrolling Effekt</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Erzwinge Google Sans Schriftart systemweit</string>

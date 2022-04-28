@@ -36,6 +36,7 @@
     <string name="assistant_shortcut">Asistent</string>
     <string name="album_art_category">Opțiuni media</string>
     <string name="album_art_title">Activează coperta de album când se redă media</string>
+    <string name="shufflePin_title">Amestecare PIN</string>
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Apăsare dublă pentru a opri ecranul</string>
     <string name="double_tap_sleep_off">"Dubla atingere nu va opri afișajul"</string>
@@ -176,6 +177,7 @@
     <string name="so_vol_longpress_skip">Apăsare lungă Volum pentru a omite melodia*</string>
     <string name="notifications_header">Opțiuni notificări</string>
     <string name="expand_notifications_icons_title">Adaugă butoane extindere/restrânge toate</string>
+    <string name="disable_overscroll">Dezactivați efectul de derulare elastică</string>
     <!-- Theming section related -->
     <string name="gsans_override_title">Forțează sistemul de fonturi Google Sans în tot sistemul</string>
     <string name="theme_customization_font_title">Font pentru Titlu / Corp text</string>
@@ -198,7 +200,7 @@
     <string name="pull_down_left">Stânga</string>
     <string name="pull_down_right">Dreapta</string>
     <!-- Battery styles -->
-    <string name="battery_default">Implicit (necesită repornire pentru a aplica)</string>
+    <string name="battery_default">Implicit</string>
     <string name="battery_circle">Cerc</string>
     <string name="battery_dashed_circle">Cerc întrerupt</string>
     <string name="battery_circle_filled">Cerc umplut</string>

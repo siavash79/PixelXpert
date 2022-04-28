@@ -41,6 +41,7 @@
     <string name="assistant_shortcut">Asistente</string>
     <string name="album_art_category">Opciones de visualización de reproducción de música</string>
     <string name="album_art_title">Habilitar visualización de reproducción de música</string>
+	<string name="shufflePin_title">Pin Aleatorio</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doble toque para bloquear pantalla</string>
@@ -190,6 +191,7 @@
     <string name="so_vol_longpress_skip">Mantenga presionado botón del volumen para saltar pistas</string>
     <string name="notifications_header">Opciones de notificación</string>
     <string name="expand_notifications_icons_title">"Agregar expandir/contraer todos los botones</string>
+	<string name="disable_overscroll">"Deshabilitar el efecto de desplazamiento elástico</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Forzar la fuente Google Sans en todo el sistema</string>

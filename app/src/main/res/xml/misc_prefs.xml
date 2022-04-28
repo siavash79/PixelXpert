@@ -25,7 +25,7 @@
             android:defaultValue="false"
             android:key="disableOverScroll"
             android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
+            android:summaryOn="@string/overscroll_on_summary"
             android:title="@string/disable_overscroll" />
     </PreferenceCategory>
     <PreferenceCategory

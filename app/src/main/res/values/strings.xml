@@ -192,6 +192,7 @@
     <string name="notifications_header">Notifications options</string>
     <string name="expand_notifications_icons_title">"Add expand/collapse all buttons</string>
     <string name="disable_overscroll">"Disable elastic overscroll effect</string>
+    <string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for, in LSPosed</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Force Google Sans font system wide</string>

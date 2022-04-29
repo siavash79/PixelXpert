@@ -10,6 +10,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.allApps.overScrollDisabler;
 import sh.siava.AOSPMods.android.screenOffKeys;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
@@ -78,6 +79,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         isSecondProcess =  lpparam.processName.contains(":");
+        BatteryBarView.classLoader = lpparam.classLoader;
 
         //        Helpers.dumpClass("android.app.Instrumentation", lpparam);
     

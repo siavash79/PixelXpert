@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
+import android.telephony.ServiceState;
+import android.telephony.TelephonyCallback;
+import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.CharacterStyle;
@@ -15,8 +18,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.nfx.android.rangebarpreference.RangeBarHelper;
 
@@ -24,18 +30,23 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
-import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
+import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.Utils.NetworkTrafficSB;
+import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.XPrefs;
 
 public class StatusbarMods implements IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
+    
+    
+    private final serverStateCallback volteCallback = new serverStateCallback();
     
     public static final int CHARGING_FAST = 2;
 
@@ -47,7 +58,11 @@ public class StatusbarMods implements IXposedModPack {
     private static final int AM_PM_STYLE_NORMAL  = 0;
     private static final int AM_PM_STYLE_SMALL   = 1;
     private static final int AM_PM_STYLE_GONE    = 2;
-
+    
+    private static final int VOLTE_AVAILABLE = 2;
+    private static final int VOLTE_NOT_AVAILABLE = 1;
+    private static final int VOLTE_UNKNOWN = -1;
+    
     public static int clockPosition = POSITION_LEFT;
     public static int mAmPmStyle = AM_PM_STYLE_GONE;
     public static boolean mShowSeconds = false;
@@ -88,9 +103,12 @@ public class StatusbarMods implements IXposedModPack {
     private static boolean indicateCharging = false;
     private static boolean indicateFastCharging = false;
     private static boolean BBarTransitColors = false;
+    private static boolean VolteIconEnabled = true;
+    private final Executor volteExec = runnable -> {runnable.run(); updateVolte();};
     
     Object STB;
-
+    private ImageView VolteIcon = null;
+    
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -209,9 +227,9 @@ public class StatusbarMods implements IXposedModPack {
             }
         }
         //end clock settings
-
-        //clickable battery settings
-
+    
+        //volte
+        VolteIconEnabled = XPrefs.Xprefs.getBoolean("VolteIconEnabled", true);
     }
     
     private void refreshBatteryBar(BatteryBarView instance) {
@@ -383,7 +401,8 @@ public class StatusbarMods implements IXposedModPack {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         mContext = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
-
+                        
+                        
                         //View mNotificationIconAreaInner = (View) XposedHelpers.getObjectField(param.thisObject, "mNotificationIconAreaInner");
                         View mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
                         mClockParent = (ViewGroup) mClockView.getParent();
@@ -401,13 +420,18 @@ public class StatusbarMods implements IXposedModPack {
                             }catch(Throwable ignored){}
                         }
                         
+                        if(VolteIconEnabled)
+                        {
+                            initVolte(mContext);
+                        }
+                        
                         if(networkOnSBEnabled)
                         {
                             networkTrafficSB = (networkTrafficSB == null) ? new NetworkTrafficSB(mContext) : networkTrafficSB;
                             NetworkTrafficSB.setHideTreshold(networkTrafficTreshold);
                             placeNTSB();
                         }
-
+                        
                         //<Showing vibration icon in collapsed statusbar>
                         if(showVibrationIcon) {
                             setShowVibrationIcon();
@@ -458,6 +482,10 @@ public class StatusbarMods implements IXposedModPack {
 
                         if(mClockParent > 1) return; //We don't want colors of QS header. only statusbar
 
+                        if(VolteIcon != null)
+                        {
+                            VolteIcon.getDrawable().setTint(clockColor);
+                        }
                         clockColor = ((TextView) param.thisObject).getTextColors().getDefaultColor();
                         NetworkTrafficSB.setTint(clockColor);
                         if(BatteryBarView.hasInstance())
@@ -489,6 +517,23 @@ public class StatusbarMods implements IXposedModPack {
                     }
                 });
     }
+    
+    private static TelephonyManager telephonyManager = null;
+    private void initVolte(Context context) {
+        if(telephonyManager == null)
+        {
+            telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager.registerTelephonyCallback(volteExec, volteCallback);
+        }
+        VolteIcon = new ImageView(context);
+        VolteIcon.setImageDrawable(XPrefs.modRes.getDrawable(R.drawable.collapse_icon));
+        VolteIcon.getDrawable().setTint(clockColor);
+//            VolteIcon.setVisibility(View.VISIBLE);
+//        mSystemIconArea.addView(VolteIcon);
+        VolteIcon.setVisibility(View.VISIBLE);
+        VolteIcon.setLayoutParams(new LinearLayout.LayoutParams(65, 65));
+    }
+    
     private void setShowVibrationIcon()
     {
         try {
@@ -527,7 +572,7 @@ public class StatusbarMods implements IXposedModPack {
 
         try {
             LinearLayout.LayoutParams ntsbLayoutP;
-
+            
             switch (networkTrafficPosition) {
                 case POSITION_RIGHT:
                     mSystemIconArea.addView(networkTrafficSB, 0);
@@ -622,6 +667,52 @@ public class StatusbarMods implements IXposedModPack {
 
     }
     
+    private int lastVolteState = VOLTE_UNKNOWN;
+    private void updateVolte()
+    {
+        XposedBridge.log("updatevolte");
+        int newVolteState = getVolteState();
+        XposedBridge.log("state:"+ newVolteState);
+        if(lastVolteState != newVolteState)
+        {
+            lastVolteState = newVolteState;
+            switch(newVolteState)
+            {
+                case VOLTE_AVAILABLE:
+                    XposedBridge.log("call palce"+ newVolteState);
+    
+                    placeVolteIcon();
+                    break;
+                case VOLTE_NOT_AVAILABLE:
+                    try {
+                        ((LinearLayout) VolteIcon.getParent()).removeView(VolteIcon);
+                    }catch (Exception ignored){}
+                    break;
+            }
+        }
+    }
+    
+    private void placeVolteIcon() {
+        XposedBridge.log("adding icon");
+        mSystemIconArea.addView(VolteIcon);
+        VolteIcon.setLayoutParams(new LinearLayout.LayoutParams(65, 65));
+    
+        XposedBridge.log("vww witdth" + VolteIcon.getWidth());
+    }
+    
+    private static int getVolteState()
+    {
+        return (Boolean) XposedHelpers.callMethod(telephonyManager, "isVolteAvailable") ? VOLTE_AVAILABLE : VOLTE_NOT_AVAILABLE;
+    }
+    
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
+    
+    private class serverStateCallback extends TelephonyCallback implements
+            TelephonyCallback.ServiceStateListener{
+        @Override
+        public void onServiceStateChanged(@NonNull ServiceState serviceState) {
+            XposedBridge.log("servicestate");
+        }
+    }
 }

@@ -23,6 +23,7 @@ public class BatteryBarView extends FrameLayout {
 	private final boolean RTL;
 	private static float[] shadeLevels = new float[0];
 	private final ShapeDrawable mDrawable = new ShapeDrawable();
+	private final Context mContext;
 	FrameLayout maskLayout;
 	private boolean colorful = false;
 	private int alphaPct = 100;
@@ -48,6 +49,7 @@ public class BatteryBarView extends FrameLayout {
 	private static boolean indicateCharging = false;
 	private static boolean indicateFastCharging = false;
 	private static boolean transitColors = false;
+	public static ClassLoader classLoader = null;
 	
 	public static void setStaticColor(float[] batteryLevels, int[] batteryColors, boolean indicateCharging, int chargingColor, boolean indicateFastCharging, int fastChargingColor, boolean transitColors) {
 		BatteryBarView.transitColors = transitColors;
@@ -117,7 +119,7 @@ public class BatteryBarView extends FrameLayout {
 	
 	public BatteryBarView(Context context){
 		super(context);
-		
+		mContext = context;
 		instance = this;
 		this.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT));
 

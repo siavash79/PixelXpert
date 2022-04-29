@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -105,9 +106,11 @@ public class StatusbarMods implements IXposedModPack {
     private static boolean BBarTransitColors = false;
     private static boolean VolteIconEnabled = true;
     private final Executor volteExec = runnable -> {runnable.run(); updateVolte();};
+    Class<?> StatusBarIconHolderClass = null;
     
     Object STB;
-    private ImageView VolteIcon = null;
+    Object mStatusBarIconController;
+    private View mStatusBar;
     
     public void updatePrefs(String...Key)
     {
@@ -259,6 +262,7 @@ public class StatusbarMods implements IXposedModPack {
         Class<?> PhoneStatusBarViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
         Class<?> KeyGuardIndicationClass = XposedHelpers.findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
         Class<?> BatteryTrackerClass = XposedHelpers.findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
+        StatusBarIconHolderClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
         
         CollapsedStatusBarFragmentClass = XposedHelpers.findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 
@@ -273,7 +277,7 @@ public class StatusbarMods implements IXposedModPack {
                 KIC = param.thisObject;
             }
         });
-
+        
         XposedBridge.hookAllMethods(BatteryTrackerClass, "onRefreshBatteryInfo", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -401,7 +405,7 @@ public class StatusbarMods implements IXposedModPack {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         mContext = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
-                        
+                        mStatusBarIconController = XposedHelpers.getObjectField(param.thisObject, "mStatusBarIconController");
                         
                         //View mNotificationIconAreaInner = (View) XposedHelpers.getObjectField(param.thisObject, "mNotificationIconAreaInner");
                         View mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
@@ -409,8 +413,8 @@ public class StatusbarMods implements IXposedModPack {
                         mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
                         mSystemIconArea = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mSystemIconArea");
     
-                        View mStatusbar = (View) XposedHelpers.getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
-                        fullStatusbar = (FrameLayout) mStatusbar.getParent();
+                        mStatusBar = (View) XposedHelpers.getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
+                        fullStatusbar = (FrameLayout) mStatusBar.getParent();
                         
                         if(BBarEnabled)
                         {
@@ -482,10 +486,6 @@ public class StatusbarMods implements IXposedModPack {
 
                         if(mClockParent > 1) return; //We don't want colors of QS header. only statusbar
 
-                        if(VolteIcon != null)
-                        {
-                            VolteIcon.getDrawable().setTint(clockColor);
-                        }
                         clockColor = ((TextView) param.thisObject).getTextColors().getDefaultColor();
                         NetworkTrafficSB.setTint(clockColor);
                         if(BatteryBarView.hasInstance())
@@ -520,18 +520,14 @@ public class StatusbarMods implements IXposedModPack {
     
     private static TelephonyManager telephonyManager = null;
     private void initVolte(Context context) {
+        //CharSequence d = "volte";
+        //VolteHolder = XposedHelpers.callStaticMethod(StatusBarIconHolderClass, "fromResId", (Context) context, context.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", context.getPackageName()),d);
+        
         if(telephonyManager == null)
         {
             telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             telephonyManager.registerTelephonyCallback(volteExec, volteCallback);
         }
-        VolteIcon = new ImageView(context);
-        VolteIcon.setImageDrawable(XPrefs.modRes.getDrawable(R.drawable.collapse_icon));
-        VolteIcon.getDrawable().setTint(clockColor);
-//            VolteIcon.setVisibility(View.VISIBLE);
-//        mSystemIconArea.addView(VolteIcon);
-        VolteIcon.setVisibility(View.VISIBLE);
-        VolteIcon.setLayoutParams(new LinearLayout.LayoutParams(65, 65));
     }
     
     private void setShowVibrationIcon()
@@ -685,7 +681,12 @@ public class StatusbarMods implements IXposedModPack {
                     break;
                 case VOLTE_NOT_AVAILABLE:
                     try {
-                        ((LinearLayout) VolteIcon.getParent()).removeView(VolteIcon);
+                        mStatusBar.post(() -> XposedHelpers.callMethod(mStatusBarIconController, "removeIcon", "volte"));
+                        XposedBridge.log("making gone");
+//                        VolteIcon.setLayoutParams(new LinearLayout.LayoutParams(10, 10));
+//                        VolteIcon.setBackgroundColor(Color.RED);
+//                        VolteIcon.setVisibility(View.GONE);
+//                        ((LinearLayout) VolteIcon.getParent()).removeView(VolteIcon);
                     }catch (Exception ignored){}
                     break;
             }
@@ -694,10 +695,19 @@ public class StatusbarMods implements IXposedModPack {
     
     private void placeVolteIcon() {
         XposedBridge.log("adding icon");
-        mSystemIconArea.addView(VolteIcon);
-        VolteIcon.setLayoutParams(new LinearLayout.LayoutParams(65, 65));
+        mStatusBar.post(new Runnable() {
+            @Override
+            public void run() {
+                XposedHelpers.callMethod(mStatusBarIconController, "setIcon", "volte", mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName()), "volte");
+            }
+        });
     
-        XposedBridge.log("vww witdth" + VolteIcon.getWidth());
+     //   VolteIcon.setBackgroundColor(Color.GREEN);
+//
+//        VolteIcon.setVisibility(View.VISIBLE);
+//        VolteIcon.setLayoutParams(new LinearLayout.LayoutParams(65, 65));
+//        mSystemIconArea.addView(VolteIcon);
+//        XposedBridge.log("vww witdth" + VolteIcon.getWidth());
     }
     
     private static int getVolteState()

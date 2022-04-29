@@ -184,6 +184,7 @@
     <string name="notifications_header">Параметры уведомлений</string>
     <string name="expand_notifications_icons_title">"Добавить кнопки развернуть/свернуть все</string>
     <string name="disable_overscroll">"Отключить эффект упругости в конце прокрутки</string>
+    <string name="overscroll_on_summary">Важно: Вы ДОЛЖНЫ включить приложения, для которых Вы хотите отключить прокрутку, в LSPosed</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Принудительное использование шрифта Google Sans во всей системе</string>

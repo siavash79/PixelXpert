@@ -52,6 +52,7 @@
 
     <string name="lte_4g_icon_title">Значок LTE / 4G</string>
     <string name="combined_signal_icon_title">Комбинированные значки сигналов</string>
+    <string name="volte_icon_title">Показывать значок VoLTE, если он доступен</string>
     <string name="sb_vibration_switch_title">Показать значки Вибрации/Без звука</string>
     <string name="sbc_position_title">Расположение часов</string>
     <string name="sbc_ampm_style">Стиль AM/PM</string>
@@ -184,6 +185,7 @@
     <string name="notifications_header">Параметры уведомлений</string>
     <string name="expand_notifications_icons_title">"Добавить кнопки развернуть/свернуть все</string>
     <string name="disable_overscroll">"Отключить эффект упругости в конце прокрутки</string>
+    <string name="overscroll_on_summary">Важно: вы ДОЛЖНЫ включить приложения, для которых вы хотите отключить прокрутку, в LSPosed</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Принудительное использование шрифта Google Sans во всей системе</string>

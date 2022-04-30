@@ -585,6 +585,7 @@ public class StatusbarMods implements IXposedModPack {
             telephonyManager.unregisterTelephonyCallback(volteCallback);
             telephonyManager = null;
         }catch(Exception ignored){}
+        removeVolteIcon();
     }
     
     private class serverStateCallback extends TelephonyCallback implements
@@ -611,14 +612,18 @@ public class StatusbarMods implements IXposedModPack {
                     });
                     break;
                 case VOLTE_NOT_AVAILABLE:
-                    mStatusBar.post(() -> {
-                        try {
-                            XposedHelpers.callMethod(mStatusBarIconController, "removeIcon", "volte");
-                        } catch(Exception ignored){}
-                    });
+                    removeVolteIcon();
                     break;
             }
         }
+    }
+    
+    private void removeVolteIcon() {
+        mStatusBar.post(() -> {
+            try {
+                XposedHelpers.callMethod(mStatusBarIconController, "removeIcon", "volte");
+            } catch(Exception ignored){}
+        });
     }
     //endregion
     

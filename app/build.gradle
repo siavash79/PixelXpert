@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 31
-    buildToolsVersion '33.0.0 rc2'
+    buildToolsVersion '32.0.0'
 
     defaultConfig {
         applicationId "sh.siava.AOSPMods"
@@ -17,9 +17,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-    }
 
     buildTypes {
         release {
@@ -38,6 +35,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    lint {
+        checkReleaseBuilds false
+    }
 }
 
 dependencies {
@@ -48,9 +48,9 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.3.0'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'com.google.android.material:material:1.6.0-beta01'
+    implementation 'com.google.android.material:material:1.7.0-alpha01'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.compose.ui:ui-geometry:1.0.0-rc01'
+    implementation 'androidx.compose.ui:ui-geometry:1.2.0-alpha08'
     implementation 'com.github.topjohnwu.libsu:core:3.1.2'
     implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8'
     implementation 'com.jaredrummler:colorpicker:1.1.0'

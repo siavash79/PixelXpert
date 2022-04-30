@@ -4,37 +4,42 @@
     android:visibility="visible">
     <PreferenceCategory
         android:title="@string/statusbar_general_options">
-        <ListPreference
-            android:defaultValue="0"
-            android:entries="@array/lte4g_icon_names"
-            android:entryValues="@array/lte4g_icon_codes"
-            android:summary="%s"
-            android:key="LTE4GIconMod"
-            android:title="@string/lte_4g_icon_title" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="DoubleTapSleep"
             android:title="@string/double_tap_sleep_title"
             app:summaryOff="@string/double_tap_sleep_off"
             app:summaryOn="@string/double_tap_sleep_on" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="combinedSignalEnabled"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/combined_signal_icon_title" />
+
+        <Preference
+            app:fragment="sh.siava.AOSPMods.SettingsActivity$SBCFragment"
+            app:key="sbc_header"
+            app:title="@string/sbc_header" />
+
+        <Preference
+            app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBBFragment"
+            app:key="sbbb_header"
+            app:title="@string/sbbb_header" />
+
+        <Preference
+            app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBIconFragment"
+            app:key="sbbIcon_header"
+            app:title="@string/sbbIcon_header" />
+
         <SwitchPreference
             android:defaultValue="false"
             android:key="SBshowVibrationIcon"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
             android:title="@string/sb_vibration_switch_title" />
+
         <SwitchPreference
             android:defaultValue="false"
             android:key="UnreadMessagesNumberOverlay"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
             android:title="@string/unread_messages_title" />
+
         <ListPreference
             android:defaultValue="None"
             android:entries="@array/StatusBarHeightOverlayEx_names"
@@ -42,24 +47,35 @@
             android:summary="%s"
             android:key="StatusBarHeightOverlayEx"
             android:title="@string/status_bar_height" />
+
         <SwitchPreference
             android:defaultValue="false"
             android:key="FixSBLeftPadddingOverlay"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
             android:title="@string/fix_status_bar_padding" />
-        <Preference
-            app:fragment="sh.siava.AOSPMods.SettingsActivity$SBCFragment"
-            app:key="sbc_header"
-            app:title="@string/sbc_header" />
-        <Preference
-            app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBBFragment"
-            app:key="sbbb_header"
-            app:title="@string/sbbb_header" />
-        <Preference
-            app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBIconFragment"
-            app:key="sbbIcon_header"
-            app:title="@string/sbbIcon_header" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="combinedSignalEnabled"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/combined_signal_icon_title" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="VolteIconEnabled"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/volte_icon_title" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/lte4g_icon_names"
+            android:entryValues="@array/lte4g_icon_codes"
+            android:summary="%s"
+            android:key="LTE4GIconMod"
+            android:title="@string/lte_4g_icon_title" />
 
         <PreferenceCategory
             android:title="@string/ntsb_category_title" >

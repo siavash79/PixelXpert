@@ -117,7 +117,6 @@ public class BatteryBarView extends FrameLayout {
 	
 	public BatteryBarView(Context context){
 		super(context);
-		
 		instance = this;
 		this.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT));
 

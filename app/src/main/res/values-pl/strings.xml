@@ -41,6 +41,7 @@
     <string name="assistant_shortcut">Asystent</string>
     <string name="album_art_category">Opcje mediów</string>
     <string name="album_art_title">Włącz okładki albumów podczas odtwarzania multimediów</string>
+    <string name="shufflePin_title">Pomieszaj tytuł</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Kliknij dwukrotnie aby wyłączyć ekran</string>
@@ -53,8 +54,11 @@
     <string name="battery_icon_size_title">Rozmiar ikony baterii</string>
     <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Ukryty</string>
+    <string name="BIcon_Opacity_title">Nieprzezroczystość</string>
+    
     <string name="lte_4g_icon_title">Ikona LTE / 4G </string>
     <string name="combined_signal_icon_title">Połączone ikony sygnałów</string>
+    <string name="volte_icon_title">Pokaż ikonę VoLTE, gdy jest dostępna</string>
     <string name="sb_vibration_switch_title">Pokaż ikony wibracji/wyciszenia</string>
     <string name="sbc_position_title">Pozycja zegara</string>
     <string name="sbc_ampm_style">Styl AM/PM</string>
@@ -85,6 +89,7 @@
     <string name="status_bar_height_medium">Średni</string>
     <string name="fix_status_bar_padding">Popraw odstęp po lewej stronie</string>
      <string name="sbbb_header">Ustawienia paska baterii</string>
+    <string name="sbbIcon_header">Ustawienia ikony baterii</string>
     <string name="BB_enable_title">Włącz pasek baterii</string>
     <string name="BB_onlycharging_title">Tylko podczas ładowania</string>
     <string name="BB_move_SB_bottom_title">Na dole paska stanu</string>
@@ -187,6 +192,8 @@
     <string name="so_vol_longpress_skip">Przytrzymaj przycisk głośności, aby pominąć muzykę*</string>
     <string name="notifications_header">Opcje powiadomień</string>
     <string name="expand_notifications_icons_title">"Dodaj rozwiń/zwiń wszystkie przyciski</string>
+    <string name="disable_overscroll">"Wyłącz elastyczny efekt przewijania</string>
+    <string name="overscroll_on_summary">Ważne: MUSISZ włączyć aplikacje, dla których chcesz wyłączyć overscroll w LSPosed</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Wymuś używanie czcionek Google Sans w systemie</string>
@@ -215,6 +222,7 @@
     <string name="battery_default">Domyślny (wymaga ponownego uruchomienia, aby zastosować)</string>
     <string name="battery_circle">Koło</string>
     <string name="battery_dashed_circle">Przerywane koło</string>
+    <string name="battery_circle_filled">Wypełnione koło</string>
 
     <!-- Clock position -->
     <string name="clock_default">Lewa strona (domyślnie)</string>

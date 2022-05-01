@@ -15,6 +15,8 @@ jobs:
 
     # Runs a set of commands using the runners shell
       - name: Run a multi-line script
-        run: |
-          zip -r AOSPMods.zip MagiskMod.
+        run: cd MagiskMod
+        
+      - name: other
+        run: echo $(ls)
           

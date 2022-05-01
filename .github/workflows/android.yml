@@ -1,4 +1,4 @@
-name: Android CI
+name: Nightly APK Build
 
 on:
   schedule:

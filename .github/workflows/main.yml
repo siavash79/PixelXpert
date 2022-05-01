@@ -36,30 +36,22 @@ jobs:
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_PASSWORD }}
       env:
-          # override default build-tools version (29.0.3) -- optional
         BUILD_TOOLS_VERSION: "32.0.0"
 
-      # Example use of `signedReleaseFile` output -- not needed
     - uses: actions/upload-artifact@v2
       with:
         name: AOSPMods.apk
         path: ${{steps.sign_app.outputs.signedReleaseFile}}
-
-  zip:
-    needs: apkbuild
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@master
-
-      - name: Set Permissions
-        run: chmod +x .github/make_zip.sh
+      
+    - uses: actions/checkout@master
+    - name: Set Permissions
+      run: chmod +x .github/make_zip.sh
+    
+    - name: Run the zip script
+      run: .github/make_zip.sh
         
-      - name: Run the zip script
-        run: .github/make_zip.sh
-        
-      - name: upload
-        uses: actions/upload-artifact@v2
-        with: 
-          name: AOSPMods.zip
-          path: output
+    - name: Upload Zip
+      uses: actions/upload-artifact@v2
+      with: 
+        name: AOSPMods.zip
+        path: output

@@ -21,7 +21,7 @@ jobs:
       run: .github/bumpVersion.sh
 
     - name: somthing
-      run: cat build.gradle
+      run: cat app/build.gradle
       
     - name: other
       run: cat MagiskMod/module.prop

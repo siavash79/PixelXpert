@@ -1,8 +1,8 @@
 #!/bin/bash
 
-cd ..
-
 echo $(pwd)
+
+echo $(ls)
 
 NEWVERCODE=$(($(cat build.gradle | grep versionCode | tr -s ' ' |cut -d " " -f 3 | tr -d '\r')+1))
 NEWVERNAME=${GITHUB_REF_NAME/v/}

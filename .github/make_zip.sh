@@ -1,4 +1,5 @@
 #!/bin/bash
 
+mkdir output
 cd MagiskMod || exit;
-zip -r ../AOSPMods.zip *;
+zip -r ../output/AOSPMods.zip *;

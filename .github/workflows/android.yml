@@ -32,10 +32,9 @@ jobs:
         path: app/build/outputs/apk/debug
 
 
-    - name: Sign app APK
-      uses: r0adkll/sign-android-release@v1
-
-        # ID used to access action output
+    - uses: r0adkll/sign-android-release@v1
+      name: Sign app APK
+      # ID used to access action output
       id: sign_app
       with:
         releaseDirectory: app/build/outputs/apk/debug

@@ -22,7 +22,7 @@ jobs:
         cache: gradle
         
     - name: Grant permission shell scripts
-      run: chomod +x .github/*.sh
+      run: chmod +x .github/*.sh
       
     - name: Update Versions
       run: .github/bumpVersion.sh

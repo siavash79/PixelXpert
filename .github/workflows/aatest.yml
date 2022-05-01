@@ -5,7 +5,8 @@ name: testvrsion
 # Controls when the workflow will run
 on:
   push:
-    branches: [ master ]
+    tags: 
+      '*'
   
 jobs:
   build:

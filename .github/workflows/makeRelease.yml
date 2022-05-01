@@ -1,12 +1,12 @@
 # This is a basic workflow to help you get started with Actions
 
-name: ZipMake
+name: Make Release
 
 # Controls when the workflow will run
 on:
   push:
     tags: 
-      '*sdfasdf'
+      '*'
   
 jobs:
   build:
@@ -59,3 +59,23 @@ jobs:
       with: 
         name: AOSPMods.zip
         path: output
+        
+    - name: Make draft release
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: true
+        draft: true
+        files: |
+            AOSPMods.zip
+
+    - name: Commit version bump
+      uses: github-actions-x/commit@v2.9
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        push-branch: 'testpush'
+        commit-message: 'version bump'
+        force-add: 'true'
+        files: MagiskMod/module.prop app/build.gradle
+        name: GitHub
+        email: aospmods@siava.sh 

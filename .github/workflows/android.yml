@@ -31,6 +31,9 @@ jobs:
         name: AOSPMods.apk
         path: app/build/outputs/apk/debug
 
+  sign:        
+    runs-on: ubuntu-latest
+    steps:
       - uses: r0adkll/sign-android-release@v1
         name: Sign app APK
         # ID used to access action output

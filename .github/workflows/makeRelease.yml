@@ -70,8 +70,8 @@ jobs:
       uses: github-actions-x/commit@v2.9
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        push-branch: 'testpush' #will be replaced to master after test phase
-        commit-message: 'version bump'
+        push-branch: master
+        commit-message: 'Version update: Release'
         force-add: 'true'
         files: MagiskMod/module.prop app/build.gradle MagiskModuleUpdate.json
         name: GitHub

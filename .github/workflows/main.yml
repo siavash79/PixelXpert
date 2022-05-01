@@ -4,7 +4,9 @@ name: ZipMake
 
 # Controls when the workflow will run
 on:
-  push
+  push:
+    tags: 
+      '*'
   
 jobs:
   build:
@@ -18,6 +20,12 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
+        
+    - name: Grant permission shell scripts
+      run: chomod +x .github/*.sh
+      
+    - name: Update Versions
+      run: .github/bumpVersion.sh
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
@@ -42,10 +50,7 @@ jobs:
       with:
         name: AOSPMods.apk
         path: ${{steps.sign_app.outputs.signedReleaseFile}}
-      
-    - name: Set Permissions
-      run: chmod +x .github/make_zip.sh
-    
+          
     - name: Run the zip script
       run: .github/make_zip.sh
         

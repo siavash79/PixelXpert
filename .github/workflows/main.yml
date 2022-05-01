@@ -6,7 +6,7 @@ name: ZipMake
 on:
   push:
     tags: 
-      '*'
+      '*sdfasdf'
   
 jobs:
   build:

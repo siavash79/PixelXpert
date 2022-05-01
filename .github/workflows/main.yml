@@ -13,8 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-    # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Set Permissions
+        run: chmod +x .github/make_zip.sh
+        
+      - name: Run the zip script
         run: .github/make_zip.sh
         
       - name: upload

@@ -7,8 +7,7 @@ on:
   push
   
 jobs:
-  apkbuild:
-
+  buildAPK:
     runs-on: ubuntu-latest
 
     steps:
@@ -43,14 +42,19 @@ jobs:
         name: AOSPMods.apk
         path: ${{steps.sign_app.outputs.signedReleaseFile}}
       
-    - name: Set Permissions
-      run: chmod +x .github/make_zip.sh
+  makeMagisk:
+    needs: buildAPK
+    runs-on: ubuntu-latest
     
-    - name: Run the zip script
-      run: .github/make_zip.sh
+    steps:
+      - name: Set Permissions
+        run: chmod +x .github/make_zip.sh
+    
+      - name: Run the zip script
+        run: .github/make_zip.sh
         
-    - name: Upload Zip
-      uses: actions/upload-artifact@v2
-      with: 
-        name: AOSPMods.zip
-        path: output
+      - name: Upload Zip
+        uses: actions/upload-artifact@v2
+        with: 
+          name: AOSPMods.zip
+          path: output

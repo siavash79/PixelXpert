@@ -569,6 +569,8 @@ public class StatusbarMods implements IXposedModPack {
     
     //region volte related
     private void initVolte(Context context) {
+        if(context == null) return;
+        
         try {
             if (telephonyManager == null) {
                 Icon volteIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_volte);

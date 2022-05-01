@@ -68,6 +68,9 @@ public class DoubleTapSleepLS implements IXposedModPack {
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						Object mView = XposedHelpers.getObjectField(param.thisObject, "mView");
 						mContext = (Context) XposedHelpers.callMethod(mView, "getContext");
+						
+						if(mContext == null) return;
+						
 						powerManager = mContext.getSystemService(Context.POWER_SERVICE);
 						
 						mLockscreenDoubleTapToSleep = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {

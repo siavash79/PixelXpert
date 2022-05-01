@@ -1,3 +1,2 @@
 include ':app'
 rootProject.name = "AOSPMods"
-include ':QSTileOverlay'

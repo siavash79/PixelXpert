@@ -26,4 +26,4 @@ jobs:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: true
         files: |
-            build.gradle
+            app/build.gradle

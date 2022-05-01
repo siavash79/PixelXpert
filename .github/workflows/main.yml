@@ -23,4 +23,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with: 
           name: AOSPMods.zip
-          path: /AOSPMods.zip
+          path: output

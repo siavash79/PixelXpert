@@ -43,7 +43,6 @@ jobs:
         name: AOSPMods.apk
         path: ${{steps.sign_app.outputs.signedReleaseFile}}
       
-    - uses: actions/checkout@master
     - name: Set Permissions
       run: chmod +x .github/make_zip.sh
     

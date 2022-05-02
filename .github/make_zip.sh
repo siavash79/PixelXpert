@@ -1,6 +1,7 @@
 #!/bin/bash
 
 mkdir output
-cp app/build/outputs/apk/release/AOSPMods-signed.apk MagiskMod/system/priv-app/AOSPMods/AOSPMods.apk
 cd MagiskMod;
-zip -r ../output/AOSPMods.zip *;
+cp app/build/outputs/apk/release/AOSPMods-signed.apk MagiskMod/system/priv-app/AOSPMods/AOSPMods.apk
+FILENAME="AOSPMods-$GITHUB_REF_NAME".zip
+zip -r ../output/$FILENAME *;

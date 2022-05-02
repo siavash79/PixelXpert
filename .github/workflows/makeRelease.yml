@@ -64,7 +64,7 @@ jobs:
         prerelease: true
         draft: true
         files: |
-            output/AOSPMods.zip
+            output/AOSPMods-${{ env.GITHUB_REF_NAME }}.zip
 
     - name: Commit version bump
       uses: github-actions-x/commit@v2.9

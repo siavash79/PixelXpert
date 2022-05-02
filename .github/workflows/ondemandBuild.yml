@@ -26,14 +26,14 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew assembleRelease
+        run: ./gradlew
 
       - uses: r0adkll/sign-android-release@v1
         name: Sign app APK
 
         id: sign_app
         with:
-          releaseDirectory: app/build/outputs/apk/release
+          releaseDirectory: app/build/outputs/apk/debug
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -43,5 +43,5 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: AOSPMods.apk
+          name: AOSPMods-debug.apk
           path: ${{steps.sign_app.outputs.signedReleaseFile}}

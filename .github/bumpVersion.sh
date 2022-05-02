@@ -11,4 +11,4 @@ sed -i 's/versionCode=.*/versionCode='$NEWVERCODE'/' MagiskMod/module.prop
 
 sed -i 's/"version":.*/"version": "'$NEWVERNAME'",/' MagiskModuleUpdate.json
 sed -i 's/"versionCode":.*/"versionCode": '$NEWVERCODE',/' MagiskModuleUpdate.json
-sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods-'$GITHUB_REF_NAME'.zip",/' MagiskModuleUpdate.json
+sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods.zip",/' MagiskModuleUpdate.json

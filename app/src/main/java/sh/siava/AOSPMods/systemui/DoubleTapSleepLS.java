@@ -17,7 +17,7 @@ public class DoubleTapSleepLS implements IXposedModPack {
 	public static final String listenPackage = "com.android.systemui";
 	public static boolean doubleTapToSleepEnabled = false;
 	
-	private Context mContext = null;
+	private Context mContext;
 	private Object powerManager = null;
 	
 	public void updatePrefs(String...Key)
@@ -29,9 +29,10 @@ public class DoubleTapSleepLS implements IXposedModPack {
 	GestureDetector mLockscreenDoubleTapToSleep = null;
 	
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
 		if(!lpparam.packageName.equals(listenPackage)) return;
 		
+		mContext = context;
 		Class<?> NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
 		
 		
@@ -67,9 +68,6 @@ public class DoubleTapSleepLS implements IXposedModPack {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						Object mView = XposedHelpers.getObjectField(param.thisObject, "mView");
-						mContext = (Context) XposedHelpers.callMethod(mView, "getContext");
-						
-						if(mContext == null) return;
 						
 						powerManager = mContext.getSystemService(Context.POWER_SERVICE);
 						

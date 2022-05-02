@@ -14,7 +14,8 @@ public class UDFPSManager implements IXposedModPack {
     public static boolean transparentBG = false;
 
     public static String UDFPS_hide_key = "fingerprint_circle_hide";
-
+    private Context mContext;
+    
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -25,9 +26,10 @@ public class UDFPSManager implements IXposedModPack {
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+        mContext = context;
         Class<?> UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
 
 
@@ -56,7 +58,6 @@ public class UDFPSManager implements IXposedModPack {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if(!transparentBG) return;
-                        Context mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
                         Object mLockScreenFp = XposedHelpers.getObjectField(param.thisObject, "mLockScreenFp");
 

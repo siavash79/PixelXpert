@@ -85,25 +85,26 @@ public class AOSPMods implements IXposedHookLoadPackage{
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if (mContext == null) setContext((Context) param.args[2]);
+    
+                for (Class<?> mod : modPacks)
+                {
+                    try {
+                        IXposedModPack instance = ((IXposedModPack) mod.newInstance());
+                        if(!instance.listensTo(lpparam.packageName)) continue;
+                        try {
+                            instance.updatePrefs();
+                        } catch(Throwable ignored){ }
+                        instance.handleLoadPackage(lpparam, mContext);
+                        runningMods.add(instance);
+                    }
+                    catch (Throwable T)
+                    {
+                        T.printStackTrace();
+                    }
+                }
             }
         });
  
-        for (Class<?> mod : modPacks)
-        {
-            try {
-                IXposedModPack instance = ((IXposedModPack) mod.newInstance());
-                if(!instance.listensTo(lpparam.packageName)) continue;
-                try {
-                    instance.updatePrefs();
-                } catch(Throwable ignored){ }
-                instance.handleLoadPackage(lpparam);
-                runningMods.add(instance);
-            }
-            catch (Throwable T)
-            {
-                T.printStackTrace();
-            }
-        }
     }
 
     private void setContext(Context context) {
@@ -111,4 +112,5 @@ public class AOSPMods implements IXposedHookLoadPackage{
         XposedBridge.log(mContext.getPackageName());
         XPrefs.loadPrefs(mContext);
     }
+    
 }

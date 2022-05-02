@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.content.Context;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -31,7 +33,7 @@ public class CarrierTextManager implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         Class<?> CarrierTextManagerClass = XposedHelpers.findClass("com.android.keyguard.CarrierTextManager", lpparam.classLoader);

@@ -28,6 +28,7 @@ public class QSHeaderManager implements IXposedModPack {
     private static boolean brightnessThickTrackEnabled = false;
     
     private static final ArrayList<View> tiles = new ArrayList<>();
+    private Context mContext;
     
     public void updatePrefs(String...Key)
     {
@@ -48,7 +49,6 @@ public class QSHeaderManager implements IXposedModPack {
         }
     }
     
-    private Context context;
     Object mBehindColors;
     
     public void setLightQSHeader(boolean state)
@@ -63,10 +63,10 @@ public class QSHeaderManager implements IXposedModPack {
     }
     
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
         if(!lpparam.packageName.equals(listenPackage)) return;
         
-        
+        mContext = context;
         Class<?> QSTileViewImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
         Class<?> UtilsClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
         Class<?> OngoingPrivacyChipClass = XposedHelpers.findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
@@ -116,16 +116,15 @@ public class QSHeaderManager implements IXposedModPack {
                         
                         Object mScrimBehind = XposedHelpers.getObjectField(param.thisObject, "mScrimBehind");
                         
-                        context = (Context) XposedHelpers.callMethod(mScrimBehind, "getContext");
                         ColorStateList states = (ColorStateList) XposedHelpers.callStaticMethod(UtilsClass,
                                 "getColorAttr",
-                                context,
-                                context.getResources().getIdentifier("android:attr/colorSurfaceHeader", "attr", listenPackage));
+                                mContext,
+                                mContext.getResources().getIdentifier("android:attr/colorSurfaceHeader", "attr", listenPackage));
                         int surfaceBackground = states.getDefaultColor();
                         
                         ColorStateList accentStates = (ColorStateList) XposedHelpers.callStaticMethod(UtilsClass,
                                 "getColorAccent",
-                                context);
+                                mContext);
                         int accent = accentStates.getDefaultColor();
                         
                         XposedHelpers.callMethod(mBehindColors, "setMainColor", surfaceBackground);
@@ -143,10 +142,9 @@ public class QSHeaderManager implements IXposedModPack {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!lightQSHeaderEnabled) return;
-                        Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                        Resources res = context.getResources();
+                        Resources res = mContext.getResources();
                         
-                        int iconColor = context.getColor(res.getIdentifier("android:color/system_neutral1_900", "color", context.getPackageName()));
+                        int iconColor = mContext.getColor(res.getIdentifier("android:color/system_neutral1_900", "color", mContext.getPackageName()));
                         XposedHelpers.setObjectField(param.thisObject, "iconColor", iconColor);
                     }
                 });
@@ -154,14 +152,12 @@ public class QSHeaderManager implements IXposedModPack {
         XposedBridge.hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                //we need the context anyway
                 tiles.add((View) param.thisObject);
                 if(!lightQSHeaderEnabled) return;
                 
                 Object colorActive = XposedHelpers.callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
-                        context,
-                        context.getResources().getIdentifier("android:attr/colorAccent", "attr", "com.android.systemui"));
+                        mContext,
+                        mContext.getResources().getIdentifier("android:attr/colorAccent", "attr", "com.android.systemui"));
                 
                 XposedHelpers.setObjectField(param.thisObject, "colorActive", colorActive);
             }
@@ -274,8 +270,7 @@ public class QSHeaderManager implements IXposedModPack {
     }
     
     private void onStatChanged() throws Throwable {
-        if (context == null) return;
-        Resources res = context.getResources();
+        Resources res = mContext.getResources();
         
         boolean isDark = getIsDark();
         
@@ -298,11 +293,11 @@ public class QSHeaderManager implements IXposedModPack {
                 
                 int colorUnavailable = res.getColor(
                         res.getIdentifier("android:color/system_neutral1_10", "color", listenPackage),
-                        context.getTheme());
+                        mContext.getTheme());
                 
                 int colorInactive = res.getColor(
                         res.getIdentifier("android:color/system_accent1_10", "color", listenPackage),
-                        context.getTheme());
+                        mContext.getTheme());
                 
                 
                 for (View v : tiles) {
@@ -320,7 +315,7 @@ public class QSHeaderManager implements IXposedModPack {
     }
     
     private boolean getIsDark() {
-        return (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) == Configuration.UI_MODE_NIGHT_YES;
+        return (mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) == Configuration.UI_MODE_NIGHT_YES;
     }
     
     

@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods.launcher;
 
+import android.content.Context;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -39,7 +41,7 @@ public class TaskbarActivator implements IXposedModPack {
 	public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 	
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
 		
 		Class<?> info = XposedHelpers.findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
 		

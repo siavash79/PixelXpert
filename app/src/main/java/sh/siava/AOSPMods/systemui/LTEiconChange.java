@@ -23,7 +23,7 @@ public class LTEiconChange implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 

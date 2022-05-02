@@ -2,6 +2,7 @@
 
 package sh.siava.AOSPMods.systemui;
 
+import android.content.Context;
 import android.view.MotionEvent;
 
 import java.util.Timer;
@@ -27,9 +28,9 @@ public class DoubleTaptoWake implements IXposedModPack {
 
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
-
+    
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         Class<?> NotificationShadeWindowViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);

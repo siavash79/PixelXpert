@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods;
 
+import android.content.Context;
+
 import com.topjohnwu.superuser.Shell;
 
 import java.util.regex.Pattern;
@@ -111,7 +113,7 @@ public class miscSettings implements IXposedModPack {
     public boolean listensTo(String packageName) { return packageName.equals("com.android.systemui"); }
     
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
         
     }
 }

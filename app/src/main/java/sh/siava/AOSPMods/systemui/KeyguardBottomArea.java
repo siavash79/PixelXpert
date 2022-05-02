@@ -23,7 +23,7 @@ public class KeyguardBottomArea implements IXposedModPack {
     
     private ImageView mWalletButton;
     private ImageView mControlsButton;
-    private Context mContext = null;
+    private Context mContext;
     private Object thisObject = null;
 
     public void updatePrefs(String...Key)
@@ -48,7 +48,7 @@ public class KeyguardBottomArea implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         Class<?> KeyguardbottomAreaViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
@@ -62,7 +62,6 @@ public class KeyguardBottomArea implements IXposedModPack {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         mWalletButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mWalletButton");
                         mControlsButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mControlsButton");
-                        mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                         thisObject = param.thisObject;
 
                         if(leftShortcut.length() > 0)
@@ -133,7 +132,7 @@ public class KeyguardBottomArea implements IXposedModPack {
                 "getIntent", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if((!leftShortcut.equals("camera") && !rightShortcut.equals("camera")) || mContext == null) return;
+                        if((!leftShortcut.equals("camera") && !rightShortcut.equals("camera"))) return;
                         param.setResult(XposedHelpers.callStaticMethod(CameraIntentsClass, "getSecureCameraIntent", mContext));
                     }
                 });

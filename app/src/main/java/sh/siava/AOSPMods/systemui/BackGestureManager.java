@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.content.Context;
 import android.graphics.Point;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -26,7 +27,7 @@ public class BackGestureManager implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         XposedHelpers.findAndHookMethod("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader,

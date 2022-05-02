@@ -256,16 +256,17 @@ public class StatusbarMods implements IXposedModPack {
         //region volte
         VolteIconEnabled = XPrefs.Xprefs.getBoolean("VolteIconEnabled", false);
         if(VolteIconEnabled)
-            initVolte(mContext);
+            initVolte();
         else
             removeVolte();
         //endregion
     }
     
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
         
+        mContext = context;
         //region needed classes
         Class<?> ActivityStarterClass = XposedHelpers.findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
         Class<?> DependencyClass = XposedHelpers.findClass("com.android.systemui.Dependency", lpparam.classLoader);
@@ -431,7 +432,7 @@ public class StatusbarMods implements IXposedModPack {
                 "onViewCreated", View.class, Bundle.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        mContext = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
+
                         mStatusBarIconController = XposedHelpers.getObjectField(param.thisObject, "mStatusBarIconController");
                         
                         //View mNotificationIconAreaInner = (View) XposedHelpers.getObjectField(param.thisObject, "mNotificationIconAreaInner");
@@ -450,7 +451,7 @@ public class StatusbarMods implements IXposedModPack {
                         
                         if(VolteIconEnabled) //in case we got the config but context wasn't ready yet
                         {
-                            initVolte(mContext);
+                            initVolte();
                         }
                         
                         if(networkOnSBEnabled)
@@ -561,21 +562,20 @@ public class StatusbarMods implements IXposedModPack {
     
     private void placeBatteryBar() {
         try {
-            fullStatusbar.addView(BatteryBarView.getInstance(fullStatusbar.getContext()));
+            fullStatusbar.addView(BatteryBarView.getInstance(mContext));
             refreshBatteryBar(BatteryBarView.getInstance());
         }catch(Throwable ignored){}
     }
     //endregion
     
     //region volte related
-    private void initVolte(Context context) {
-        if(context == null) return;
+    private void initVolte() {
         
         try {
             if (telephonyManager == null) {
                 Icon volteIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_volte);
                 volteStatusbarIcon = StatusBarIcon.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, "volte");
-                telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+                telephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
                 telephonyManager.registerTelephonyCallback(volteExec, volteCallback);
             }
         }catch(Exception ignored){}

@@ -46,8 +46,10 @@ public class NotificationExpander implements IXposedModPack {
 	public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 	
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
 		if(!listenPackage.equals(lpparam.packageName) || !notificationExpandallHookEnabled) return;
+		
+		mContext = context;
 		
 		Class<?> NotificationEntryManagerClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.NotificationEntryManager", lpparam.classLoader);
 		Class<?> FooterViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.row.FooterView", lpparam.classLoader);
@@ -59,7 +61,6 @@ public class NotificationExpander implements IXposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				FooterView = (FrameLayout) param.thisObject;
-				mContext = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
 				
 				BtnLayout = new FrameLayout(mContext);
 				FrameLayout.LayoutParams BtnFrameParams = new FrameLayout.LayoutParams(Math.round(fh*2.5f), fh);

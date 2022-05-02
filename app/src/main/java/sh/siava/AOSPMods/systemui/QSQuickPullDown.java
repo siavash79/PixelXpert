@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.content.Context;
 import android.view.MotionEvent;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -23,7 +24,7 @@ public class QSQuickPullDown implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 

@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaMetadata;
 import android.os.AsyncTask;
@@ -27,7 +28,7 @@ public class LockscreenAlbumArt implements IXposedModPack {
 	public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 	
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
 		if(!lpparam.packageName.equals(listenPackage) || !albumArtLockScreenHookEnabled) return;
 		
 		Class<?> NotificationMediaManagerClass = XposedHelpers.findClass("com.android.systemui.statusbar.NotificationMediaManager", lpparam.classLoader);

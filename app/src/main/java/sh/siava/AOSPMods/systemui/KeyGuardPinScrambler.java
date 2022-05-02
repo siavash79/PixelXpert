@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.content.Context;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +29,7 @@ public class KeyGuardPinScrambler implements IXposedModPack {
 	List digits = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 	
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
 		if(!lpparam.packageName.equals(listenPackage)) return;
 		
 		Class<?> KeyguardPinBasedInputViewControllerClass = XposedHelpers.findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);

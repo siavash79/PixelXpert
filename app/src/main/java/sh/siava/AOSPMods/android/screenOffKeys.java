@@ -32,7 +32,7 @@ public class screenOffKeys implements IXposedModPack {
     private static boolean holdVolumeToSkip = false;
     private CameraManager cameraManager = null;
     private long wakeTime = 0;
-    private Context mContext = null;
+    private Context mContext;
     private AudioManager audioManager = null;
 //    private boolean isVolumeLongPress = false;
     private boolean isVolDown = false;
@@ -54,8 +54,10 @@ public class screenOffKeys implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
         if (!lpparam.packageName.equals(listenPackage)) return;
+        
+        mContext = context;
 
         Class<?> PhoneWindowManager;
         Method init;
@@ -131,9 +133,6 @@ public class screenOffKeys implements IXposedModPack {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 try
                 {
-                    mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    if (mContext == null) return;
-
                     mHandler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
                     audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
                     cameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
@@ -163,9 +162,7 @@ public class screenOffKeys implements IXposedModPack {
 
                     toggleFlash();
                     param.setResult(null);
-                    if(mContext != null) {
-                        XposedHelpers.callMethod(powerManager, "goToSleep", SystemClock.uptimeMillis());
-                    }
+                    XposedHelpers.callMethod(powerManager, "goToSleep", SystemClock.uptimeMillis());
                 }
                 catch (Throwable T){
                     T.printStackTrace();

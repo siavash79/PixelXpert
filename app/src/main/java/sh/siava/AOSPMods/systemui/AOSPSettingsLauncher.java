@@ -13,6 +13,7 @@ import sh.siava.AOSPMods.IXposedModPack;
 public class AOSPSettingsLauncher implements IXposedModPack {
     private static final String listenPackage = "com.android.systemui";
 
+    private Context mContext;
     private static Object activityStarter = null;
     @Override
     public void updatePrefs(String...Key) {
@@ -23,15 +24,16 @@ public class AOSPSettingsLauncher implements IXposedModPack {
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+        mContext = context;
+        
         Class<?> FooterActionsControllerClass = XposedHelpers.findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
 
         View.OnLongClickListener listener = v -> {
             try {
-                Context context = v.getContext();
-                Intent launchInent = context.getPackageManager().getLaunchIntentForPackage("sh.siava.AOSPMods");
+                Intent launchInent = mContext.getPackageManager().getLaunchIntentForPackage("sh.siava.AOSPMods");
                 XposedHelpers.callMethod(activityStarter, "startActivity", launchInent, true, null);
             }catch(Exception ignored){}
             return true;

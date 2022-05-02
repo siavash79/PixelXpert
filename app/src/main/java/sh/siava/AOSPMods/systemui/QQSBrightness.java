@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -24,6 +25,7 @@ public class QQSBrightness implements IXposedModPack {
     private View QQSbrightnessSliderView = null;
     private Object QS, QQS;
     private ViewGroup QSParent;
+    private Context mContext;
 
     private static boolean BrightnessHookEnabled = true;
     private static boolean QQSBrightnessEnabled = false;
@@ -82,10 +84,12 @@ public class QQSBrightness implements IXposedModPack {
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if(!BrightnessHookEnabled) //master switch
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+        if(!BrightnessHookEnabled || !listenPackage.equals(lpparam.packageName)) //master switch
             return;
 
+        mContext = context;
+        
         Class<?> QuickQSPanelClass = XposedHelpers.findClass("com.android.systemui.qs.QuickQSPanel", lpparam.classLoader);
         Class<?> QSPanelControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
         Class<?> BrightnessMirrorHandlerClass = XposedHelpers.findClass("com.android.systemui.settings.brightness.BrightnessMirrorHandler", lpparam.classLoader);
@@ -119,11 +123,9 @@ public class QQSBrightness implements IXposedModPack {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 QQS = param.thisObject;
                 if(BrightnessMirrorController == null) return;
-
-                Object context = XposedHelpers.callMethod(param.thisObject, "getContext");
-
+                
                 //Create new Slider
-                QQSBrightnessSliderController = XposedHelpers.callMethod(brightnessSliderFactory, "create", context, param.thisObject);
+                QQSBrightnessSliderController = XposedHelpers.callMethod(brightnessSliderFactory, "create", mContext, param.thisObject);
 
                 //Place it to QQS
                 QQSbrightnessSliderView = (View) XposedHelpers.callMethod(QQSBrightnessSliderController, "getRootView");

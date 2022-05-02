@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.content.Context;
 import android.view.View;
 
 import com.topjohnwu.superuser.Shell;
@@ -22,7 +23,7 @@ public class BackToKill implements IXposedModPack {
 
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 

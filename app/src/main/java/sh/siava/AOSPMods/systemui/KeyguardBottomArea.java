@@ -50,7 +50,9 @@ public class KeyguardBottomArea implements IXposedModPack {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
-
+        
+        mContext = context;
+        
         Class<?> KeyguardbottomAreaViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
         Class<?> UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
         Class<?> CameraIntentsClass = XposedHelpers.findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);

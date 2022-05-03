@@ -1,0 +1,56 @@
+name: Make Test Package
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        - with:
+            - ref: ${{ env.GITHUB_REF_NAME }}
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant permission shell scripts
+        run: chmod +x .github/*.sh
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app APK
+
+        id: sign_app
+        with:
+          releaseDirectory: app/build/outputs/apk/debug
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "32.0.0"
+
+      - uses: actions/upload-artifact@v2
+        name: Upload APK file
+        with:
+          name: AOSPMods.apk
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+
+      - name: Run the zip script
+        run: .github/make_zip.sh
+
+      - name: Upload Zip
+        uses: actions/upload-artifact@v2
+        with:
+          name: AOSPMods.zip
+          path: output

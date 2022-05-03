@@ -49,6 +49,7 @@
     <string name="BIcon_Opacity_title">Transparență</string>
     <string name="lte_4g_icon_title">Pictogramă LTE / 4G</string>
     <string name="combined_signal_icon_title">Combinare pictograme de semnal</string>
+    <string name="volte_icon_title">Afișare pictogramă VoLTE atunci când este disponibilă</string>
     <string name="sb_vibration_switch_title">Afișare pictograme vibrare/silențios</string>
     <string name="sbc_position_title">Poziția ceasului</string>
     <string name="sbc_ampm_style">Stil AM/PM</string>
@@ -177,7 +178,8 @@
     <string name="so_vol_longpress_skip">Apăsare lungă Volum pentru a omite melodia*</string>
     <string name="notifications_header">Opțiuni notificări</string>
     <string name="expand_notifications_icons_title">Adaugă butoane extindere/restrânge toate</string>
-    <string name="disable_overscroll">Dezactivați efectul de derulare elastică</string>
+    <string name="disable_overscroll">Dezactivare efect de derulare elastică</string>
+    <string name="overscroll_on_summary">Important: TREBUIE să activați aplicațiile pentru care doriți să dezactivați derularea elastică în LSPosed</string>
     <!-- Theming section related -->
     <string name="gsans_override_title">Forțează sistemul de fonturi Google Sans în tot sistemul</string>
     <string name="theme_customization_font_title">Font pentru Titlu / Corp text</string>

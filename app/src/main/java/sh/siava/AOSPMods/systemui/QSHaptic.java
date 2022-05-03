@@ -54,7 +54,7 @@ public class QSHaptic implements IXposedModPack {
         @Override
         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
             if(!QSHapticEnabled) return;
-            XposedHelpers.callMethod(mVibrator, "vibrate", 8);
+            XposedHelpers.callMethod(mVibrator, "vibrate", 50);
         }
     }
 

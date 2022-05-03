@@ -47,7 +47,7 @@ jobs:
           path: ${{steps.sign_app.outputs.signedReleaseFile}}
 
       - name: Run the zip script
-        run: .github/make_zip.sh
+        run: .github/make_debug_zip.sh
 
       - name: Upload Zip
         uses: actions/upload-artifact@v2

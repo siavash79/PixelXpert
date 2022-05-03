@@ -4,10 +4,18 @@
     <PreferenceCategory android:title="@string/theme_customization_font_title">
         <SwitchPreference
             android:defaultValue="false"
+            android:key="enableCustomFonts"
+            android:summaryOff="@string/restart_needed"
+            android:summaryOn="@string/restart_needed"
+            android:title="@string/font_overlays_enable_title" />
+
+        <SwitchPreference
+            android:defaultValue="false"
             android:key="gsans_override"
             android:summaryOff="@string/restart_needed"
             android:summaryOn="@string/restart_needed"
             android:title="@string/gsans_override_title" />
+
         <ListPreference
             android:defaultValue="None"
             android:entries="@array/FontsOverlayEx_names"

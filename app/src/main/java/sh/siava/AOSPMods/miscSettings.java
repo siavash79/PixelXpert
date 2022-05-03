@@ -26,8 +26,9 @@ public class miscSettings implements IXposedModPack {
                 case "wifi_cell":
                     updateWifiCell();
                     break;
+                case "enableCustomFonts":
                 case "gsans_override":
-                    updateGSansOverride();
+                    updateFontsInfrastructure();
                     break;
             }
         }
@@ -36,12 +37,8 @@ public class miscSettings implements IXposedModPack {
             if(AOSPMods.isSecondProcess) return;
     
             //startup jobs
-            try {
-                updateSysUITuner();
-            }catch(Exception ignored){}
-            try {
-                updateGSansOverride();
-            } catch(Exception ignored){}
+            updateSysUITuner();
+            updateFontsInfrastructure();
         }
     }
 
@@ -82,29 +79,34 @@ public class miscSettings implements IXposedModPack {
         }catch (Exception ignored){}
     }
 
-    private static String getPattern(String tile)
-    {
+    private static String getPattern(String tile) {
         return String.format("^(%s,)(.+)|(.+)(,%s)(,.+|$)",tile,tile);
     }
-
+    
     private void updateSysUITuner() {
-        boolean SysUITunerEnabled = XPrefs.Xprefs.getBoolean("sysui_tuner", false);
-        String mode = (SysUITunerEnabled) ? "enable" : "disable";
-
-        try {
+        try
+        {
+            boolean SysUITunerEnabled = XPrefs.Xprefs.getBoolean("sysui_tuner", false);
+            String mode = (SysUITunerEnabled) ? "enable" : "disable";
+            
             com.topjohnwu.superuser.Shell.su("pm " + mode + " com.android.systemui/.tuner.TunerActivity").exec();
         }catch(Exception ignored){}
     }
 
-    private void updateGSansOverride() {
-        boolean GSansOverrideEnabled = XPrefs.Xprefs.getBoolean("gsans_override", false);
-    
+    private void updateFontsInfrastructure() {
         try {
-
-            if (GSansOverrideEnabled){
-                com.topjohnwu.superuser.Shell.su(String.format("cp %s/data/fontz/GSans/*.ttf %s/system/fonts/ && cp %s/data/productz/etc/fonts_customization.xml.NEW %s/system/product/etc/fonts_customization.xml",XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
-            } else {
-                com.topjohnwu.superuser.Shell.su(String.format("rm -rf %s/system/fonts/*.ttf && cp %s/data/productz/etc/fonts_customization.xml.OLD %s/system/product/etc/fonts_customization.xml", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
+            boolean customFontsEnabled = XPrefs.Xprefs.getBoolean("enableCustomFonts", false);
+            boolean GSansOverrideEnabled = XPrefs.Xprefs.getBoolean("gsans_override", false);
+    
+            if (customFontsEnabled && GSansOverrideEnabled){
+                Shell.su(String.format("cp %s/data/fontz/GSans/*.ttf %s/system/fonts/ && cp %s/data/productz/etc/fonts_customization.xml.NEW %s/system/product/etc/fonts_customization.xml",XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
+            }
+            else if (customFontsEnabled) {
+                Shell.su(String.format("rm -rf %s/system/fonts/*.ttf && cp %s/data/productz/etc/fonts_customization.xml.OLD %s/system/product/etc/fonts_customization.xml && cp -r %s/data/productz/fonts/* %s/system/product/fonts/", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
+            }
+            else
+            {
+                Shell.su(String.format("rm -rf %s/system/fonts/*.ttf && rm -f %s/system/product/etc/fonts_customization.xml && rm -rf %s/system/product/fonts/*", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
             }
         }catch(Exception ignored){}
     }
@@ -113,7 +115,5 @@ public class miscSettings implements IXposedModPack {
     public boolean listensTo(String packageName) { return packageName.equals("com.android.systemui"); }
     
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
-        
-    }
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable { }
 }

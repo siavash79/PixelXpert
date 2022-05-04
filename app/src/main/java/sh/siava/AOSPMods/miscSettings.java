@@ -46,8 +46,8 @@ public class miscSettings implements IXposedModPack {
         boolean WifiCellEnabled = XPrefs.Xprefs.getBoolean("wifi_cell", false);
 
         try {
-            String currentTiles = Shell.su("settings get secure sysui_qs_tiles").exec().getOut().get(0);
-
+            String currentTiles = Shell.cmd("settings get secure sysui_qs_tiles").exec().getOut().get(0);
+    
             boolean hasWifi = Pattern.matches(getPattern("wifi"), currentTiles);
             boolean hasCell = Pattern.matches(getPattern("cell"), currentTiles);
             boolean hasInternet = Pattern.matches(getPattern("internet"), currentTiles);
@@ -75,7 +75,7 @@ public class miscSettings implements IXposedModPack {
                 }
             }
     
-            com.topjohnwu.superuser.Shell.su("settings put global settings_provider_model " + providerModel + "; settings put secure sysui_qs_tiles \"" + currentTiles + "\"").exec();
+            com.topjohnwu.superuser.Shell.cmd("settings put global settings_provider_model " + providerModel + "; settings put secure sysui_qs_tiles \"" + currentTiles + "\"").exec();
         }catch (Exception ignored){}
     }
 
@@ -89,7 +89,7 @@ public class miscSettings implements IXposedModPack {
             boolean SysUITunerEnabled = XPrefs.Xprefs.getBoolean("sysui_tuner", false);
             String mode = (SysUITunerEnabled) ? "enable" : "disable";
             
-            com.topjohnwu.superuser.Shell.su("pm " + mode + " com.android.systemui/.tuner.TunerActivity").exec();
+            com.topjohnwu.superuser.Shell.cmd("pm " + mode + " com.android.systemui/.tuner.TunerActivity").exec();
         }catch(Exception ignored){}
     }
 

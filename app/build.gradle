@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+    def libsuVersion = '5.0.0'
+
     compileOnly 'de.robv.android.xposed:api:82:sources'
     compileOnly 'de.robv.android.xposed:api:82'
 
@@ -51,7 +53,14 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.google.android.material:material:1.7.0-alpha01'
     implementation 'androidx.compose.ui:ui-geometry:1.2.0-alpha08'
-    implementation 'com.github.topjohnwu.libsu:core:3.1.2'
+
+    // The core module that provides APIs to a shell
+    implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
+    // Optional: APIs for creating root services. Depends on ":core"
+    implementation "com.github.topjohnwu.libsu:service:${libsuVersion}"
+    // Optional: Provides remote file system support
+    implementation "com.github.topjohnwu.libsu:nio:${libsuVersion}"
+
     implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8'
     implementation 'com.jaredrummler:colorpicker:1.1.0'
     implementation 'com.nfx.android:range-bar-preference:0.0.6'

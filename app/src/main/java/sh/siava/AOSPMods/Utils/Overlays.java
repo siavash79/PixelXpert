@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import androidx.preference.PreferenceManager;
 
 import java.lang.reflect.Field;
+import java.nio.channels.OverlappingFileLockException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,15 +18,21 @@ import sh.siava.AOSPMods.XPrefs;
 
 public class Overlays {
     public static Map<String, Object> Overlays = null;
-    
+    private static Overlays instance = null;
     static SharedPreferences prefs = null; //we load prefs from different sources depending on if it's from Xposed or App
     Resources resources;
-    boolean fromApp = false;
     
     public void initOverlays() //If called from UI OR Xposed
     {
-        Overlays = new HashMap<>();
+        instance = this;
         
+        Overlays = new HashMap<>();
+    
+        if(prefs == null)
+        {
+            prefs = XPrefs.Xprefs;
+        }
+    
         if(resources == null)
         { //so we're running from Xposed
             resources = XPrefs.modRes;
@@ -54,15 +61,6 @@ public class Overlays {
         new overlayStartupThread().start();
     }
     
-/*    public void initOverlays(Context context) //If called from UI
-    {
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        resources = context.getResources();
-        fromApp = true;
-        
-        initOverlays();
-    }*/
-    
     private void fillOverlays() { //filling overlay list from resources, using a bit of reflection :D
         
         Class<R.array> c = R.array.class;
@@ -86,23 +84,20 @@ public class Overlays {
         }
     }
     
-    public static void setAll() //make sure settings are applied to device
+    public static void setAll()
     {
         if(AOSPMods.isSecondProcess) return;
     
-        if(Overlays == null)
+        if(instance == null)
         {
             new Overlays().initOverlays();
             return;
         }
+        instance.setAllInternal();
+    }
     
-        if(prefs == null)
-        {
-            prefs = XPrefs.Xprefs;
-        }
-    
-        if(prefs == null || Overlays == null) return; // something not ready
-    
+    private void setAllInternal() //make sure settings are applied to device
+    {
         Helpers.getActiveOverlays(); //update the real active overlay list
     
         Map<String, ?> allPrefs = prefs.getAll();
@@ -137,9 +132,8 @@ public class Overlays {
             {
                 setAll();
                 try {
-                    Thread.sleep(45000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Thread.sleep(45000); //wait 45 seconds in case any other mod plays with us at system startup, and apply again in background
+                } catch (Exception ignored) {
                 }
             }
         }

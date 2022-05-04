@@ -4,10 +4,11 @@ on:
   workflow_dispatch
 
 jobs:
-  prepare:
+  build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Grab Source
       - uses: actions/checkout@v3
         with:
           ref: ${{ env.GITHUB_REF_NAME }}
@@ -25,13 +26,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-
-  build:
-    needs: prepare
-    runs-on: ubuntu-latest
-
-    steps:
-
       - name: Build with Gradle
         run: ./gradlew build
 
@@ -48,32 +42,14 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: "32.0.0"
 
-  uploadAPK:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-
       - uses: actions/upload-artifact@v2
         name: Upload APK file
         with:
           name: AOSPMods.apk
           path: ${{steps.sign_app.outputs.signedReleaseFile}}
 
-  MakeMagiskZip:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Run the zip script
         run: .github/make_debug_zip.sh
-
-
-  UploadZip:
-    needs: MakeMagiskZip
-    runs-on: ubuntu-latest
-
-    steps:
 
       - name: Upload Zip
         uses: actions/upload-artifact@v2

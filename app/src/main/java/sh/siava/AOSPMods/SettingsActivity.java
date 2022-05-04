@@ -3,7 +3,6 @@ package sh.siava.AOSPMods;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
@@ -154,7 +153,6 @@ public class SettingsActivity extends AppCompatActivity implements
                 boolean gSansOverride = sharedPreferences.getBoolean("gsans_override", false);
                 boolean FontsOverlayExEnabled = !sharedPreferences.getString("FontsOverlayEx", "None").equals("None");
         
-                Log.d("SIAPO", "font enabled:"+FontsOverlayExEnabled);
                 findPreference("gsans_override").setVisible(customFontsEnabled && !FontsOverlayExEnabled);
                 findPreference("FontsOverlayEx").setVisible(customFontsEnabled && !gSansOverride);
         
@@ -174,10 +172,20 @@ public class SettingsActivity extends AppCompatActivity implements
 
     public static class LockScreenFragment extends PreferenceFragmentCompat {
 
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> updateVisibility(sharedPreferences);
+        
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.lock_screen_prefs, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            updateVisibility(prefs);
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+        }
+        
+        private void updateVisibility(SharedPreferences sharedPreferences)
+        {
+            findPreference("carrierTextValue").setVisible(sharedPreferences.getBoolean("carrierTextMod", false));
         }
     }
     
@@ -316,17 +324,7 @@ public class SettingsActivity extends AppCompatActivity implements
             setPreferencesFromResource(R.xml.statusbar_clock_prefs, rootKey);
         }
     }
-
-    /* Let's disable this for the time being...
-    public static class ScreenOffFragment extends PreferenceFragmentCompat {
-
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.screen_off_prefs, rootKey);
-        }
-    }
-    */
-
+    
     public static class ThreeButtonNavFragment extends PreferenceFragmentCompat {
 
         @Override
@@ -337,134 +335,95 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     public static class StatusbarFragment extends PreferenceFragmentCompat {
-
-
+        
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> setVisibility(sharedPreferences);
+    
+        private void setVisibility(SharedPreferences sharedPreferences) {
+            try {
+                boolean networkOnSBEnabled = sharedPreferences.getBoolean("networkOnSBEnabled", false);
+                findPreference("networkTrafficTreshold").setVisible(networkOnSBEnabled);
+                findPreference("networkTrafficPosition").setVisible(networkOnSBEnabled);
+            }catch (Exception ignored){}
+        }
+    
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.statusbar_settings, rootKey);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            setVisibility(prefs);
+            prefs.registerOnSharedPreferenceChangeListener(listener);
         }
     }
 
     public static class QuicksettingsFragment extends PreferenceFragmentCompat {
-
-        Preference QSPulldownPercent;
-
+        
         SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                if (key.equals("QSPulldownPercent")) {
-                    updateQSPulldownPercent();
-                } else if (key.equals("QSPullodwnEnabled")) {
-                    updateQSPulldownEnabld();
-                } else if (key.equals("QSFooterMod")) {
-                    updateQSFooterMod();
-                } else if (key.equals("QSBrightnessDisabled")){
-                    updateQQSBrightness();
-                }
+                updateVisibililty(sharedPreferences);
             }
         };
     
-        private void updateQQSBrightness() {
+        private void updateVisibililty(SharedPreferences sharedPreferences) {
             try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-                boolean disabled = prefs.getBoolean("QSBrightnessDisabled", false);
-        
-                findPreference("QQSBrightnessEnabled").setEnabled(!disabled);
-            } catch(Exception e){}
-        }
+                boolean QSPullodwnEnabled = sharedPreferences.getBoolean("QSPullodwnEnabled", false);
     
-        private void updateQSFooterMod() {
-            try {
-
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-                boolean enabled = prefs.getBoolean("QSFooterMod", false);
-
-                findPreference("QSFooterText").setEnabled(enabled);
-            } catch(Exception e){}
+                findPreference("QSPulldownPercent").setVisible(QSPullodwnEnabled);
+                findPreference("QSPulldownSide").setVisible(QSPullodwnEnabled);
+                findPreference("QQSBrightnessEnabled").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
+                findPreference("QSFooterText").setVisible(sharedPreferences.getBoolean("QSFooterMod", false));
+                findPreference("QSPulldownPercent").setSummary(sharedPreferences.getInt("QSPulldownPercent", 25) + "%");
+                findPreference("dualToneQSEnabled").setVisible(sharedPreferences.getBoolean("LightQSPanel", false));
+    
+            }catch (Exception ignored){}
+        
         }
-
-        private void updateQSPulldownEnabld() {
-            try {
-
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-                boolean enabled = prefs.getBoolean("QSPullodwnEnabled", false);
-
-                findPreference("QSPulldownPercent").setEnabled(enabled);
-                findPreference("QSPulldownSide").setEnabled(enabled);
-            }catch(Exception e){}
-        }
-
-        private void updateQSPulldownPercent() {
-            try {
-
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-
-                int value = prefs.getInt("QSPulldownPercent", 25);
-                QSPulldownPercent.setSummary(value + "%");
-            }catch(Exception e){}
-        }
-
+        
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.quicksettings_prefs, rootKey);
-            QSPulldownPercent = findPreference("QSPulldownPercent");
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            updateVisibililty(prefs);
+            
             prefs.registerOnSharedPreferenceChangeListener(listener);
-            updateQSPulldownPercent();
-            updateQSPulldownEnabld();
-            updateQSFooterMod();
-            updateQQSBrightness();
         }
     }
 
     public static class GestureNavFragment extends PreferenceFragmentCompat {
 
-        Context context;
-        SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                updateBackGesture();
-                updateNavPill();
-            }
-        };
-
-        @Override
-        public void onAttach(Context context) {
-            super.onAttach(context);
-            this.context= context.createDeviceProtectedStorageContext();
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
+        
+        private void updateVisibility(SharedPreferences sharedPreferences)
+        {
+            try{
+                boolean HideNavbarOverlay = sharedPreferences.getBoolean("HideNavbarOverlay", false);
+    
+                findPreference("GesPillWidthModPos").setVisible(sharedPreferences.getBoolean("GesPillWidthMod", true));
+                findPreference("GesPillWidthModPos").setSummary(sharedPreferences.getInt("GesPillWidthModPos", 50)*2 + getString(R.string.pill_width_summary));
+    
+                findPreference("BackLeftHeight").setVisible(sharedPreferences.getBoolean("BackFromLeft", true));
+                findPreference("BackRightHeight").setVisible(sharedPreferences.getBoolean("BackFromRight", true));
+                findPreference("BackLeftHeight").setSummary(sharedPreferences.getInt("BackLeftHeight", 100) + "%");
+                findPreference("BackRightHeight").setSummary(sharedPreferences.getInt("BackRightHeight", 100) + "%");
+                
+                findPreference("nav_pill_width_cat").setVisible(!HideNavbarOverlay);
+                findPreference("nav_pill_height_cat").setVisible(!HideNavbarOverlay);
+                findPreference("nav_pill_color_cat").setVisible(!HideNavbarOverlay);
+                findPreference("nav_keyboard_height_cat").setVisible(!HideNavbarOverlay);
+                
+            }catch (Exception ignored){}
         }
-
-        private void updateNavPill() {
-            try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-                findPreference("GesPillWidthModPos").setEnabled(prefs.getBoolean("GesPillWidthMod", true));
-                findPreference("GesPillWidthModPos").setSummary(prefs.getInt("GesPillWidthModPos", 50)*2 + getString(R.string.pill_width_summary));
-            } catch(Exception e){}
-        }
-
-        private void updateBackGesture() {
-            try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-                findPreference("BackLeftHeight").setEnabled(prefs.getBoolean("BackFromLeft", true));
-                findPreference("BackRightHeight").setEnabled(prefs.getBoolean("BackFromRight", true));
-
-                findPreference("BackLeftHeight").setSummary(prefs.getInt("BackLeftHeight", 100) + "%");
-                findPreference("BackRightHeight").setSummary(prefs.getInt("BackRightHeight", 100) + "%");
-            } catch(Exception e){}
-        }
-
+        
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.gesture_nav_perfs, rootKey);
-
-            PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext()).registerOnSharedPreferenceChangeListener(listener);
-
-            updateBackGesture();
-            updateNavPill();
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            updateVisibility(prefs);
+    
+            prefs.registerOnSharedPreferenceChangeListener(listener);
         }
 
     }

@@ -28,7 +28,8 @@
             app:updatesContinuously="true"/>
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="@string/gesture_nav_pill_cat">
+        android:title="@string/gesture_nav_pill_cat"
+        app:key="nav_pill_width_cat">
         <SwitchPreference
             android:defaultValue="false"
             android:key="GesPillWidthMod"
@@ -41,7 +42,8 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/gesture_navbar_thickness_title"
-        app:summary="@string/sysui_restart_needed">
+        app:key="nav_pill_height_cat">
+    app:summary="@string/sysui_restart_needed">
         <ListPreference
             android:defaultValue="None"
             android:entries="@array/NBPThicknessOverlayEx_names"
@@ -52,7 +54,8 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/colorpill_title"
-        app:summary="@string/sysui_restart_needed">
+        app:summary="@string/sysui_restart_needed"
+        app:key="nav_pill_color_cat">
         <SwitchPreference
             android:defaultValue="false"
             android:key="ColorizeNavbarOverlay"
@@ -61,7 +64,8 @@
             app:summaryOff="@string/general_off"/>
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="@string/reducekeyboard_title">
+        android:title="@string/reducekeyboard_title"
+        app:key="nav_keyboard_height_cat">
         <SwitchPreference
             android:defaultValue="false"
             android:key="ReduceKeyboardSpaceOverlay"

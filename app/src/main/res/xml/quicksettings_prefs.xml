@@ -16,8 +16,7 @@
             android:key="dualToneQSEnabled"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
-            android:title="@string/light_dualtone_qs_title"
-            android:dependency="LightQSPanel"/>
+            android:title="@string/light_dualtone_qs_title" />
         <PreferenceCategory
             android:title="@string/quick_settings_tiles_category">
             <ListPreference

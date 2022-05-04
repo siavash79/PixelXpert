@@ -42,7 +42,7 @@ android {
 }
 
 dependencies {
-    def libsuVersion = '5.0.1'
+    def libsuVersion = '5.0.0'
 
     compileOnly 'de.robv.android.xposed:api:82:sources'
     compileOnly 'de.robv.android.xposed:api:82'

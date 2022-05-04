@@ -189,6 +189,7 @@
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Принудительное использование шрифта Google Sans во всей системе</string>
+    <string name="font_overlays_enable_title">Разрешить использование пользовательских шрифтов</string>
     <string name="theme_customization_font_title">Заголовок / Основной шрифт</string>
     <string name="icons_style_title">Стиль иконок</string>
     <string name="icon_shapes_title">Формы значков</string>

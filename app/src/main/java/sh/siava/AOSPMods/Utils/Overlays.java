@@ -129,10 +129,8 @@ public class Overlays {
             {
                 setAllInternal();
                 try {
-                    Thread.sleep(20000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                    Thread.sleep(20000);//wait some seconds in case any other mod plays with us at system startup, and apply again in background
+                } catch (Exception ignored) {}
             }
         }
     }

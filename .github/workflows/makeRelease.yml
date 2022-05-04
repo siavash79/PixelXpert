@@ -11,7 +11,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: set up JDK 11
+      name: Grab Source
+      
+    - name: Setup JDK 11
       uses: actions/setup-java@v3
       with:
         java-version: '11'
@@ -26,12 +28,12 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+      
     - name: Build with Gradle
       run: ./gradlew assembleRelease
 
     - uses: r0adkll/sign-android-release@v1
       name: Sign app APK
-
       id: sign_app
       with:
         releaseDirectory: app/build/outputs/apk/release

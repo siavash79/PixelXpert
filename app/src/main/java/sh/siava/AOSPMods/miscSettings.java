@@ -94,21 +94,20 @@ public class miscSettings implements IXposedModPack {
     }
 
     private void updateFontsInfrastructure() {
-        try {
             boolean customFontsEnabled = XPrefs.Xprefs.getBoolean("enableCustomFonts", false);
             boolean GSansOverrideEnabled = XPrefs.Xprefs.getBoolean("gsans_override", false);
-    
-            if (customFontsEnabled && GSansOverrideEnabled){
-                Shell.su(String.format("cp %s/data/fontz/GSans/*.ttf %s/system/fonts/ && cp %s/data/productz/etc/fonts_customization.xml.NEW %s/system/product/etc/fonts_customization.xml",XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
-            }
-            else if (customFontsEnabled) {
-                Shell.su(String.format("rm -rf %s/system/fonts/*.ttf && cp %s/data/productz/etc/fonts_customization.xml.OLD %s/system/product/etc/fonts_customization.xml && cp -r %s/data/productz/fonts/* %s/system/product/fonts/", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
-            }
-            else
-            {
-                Shell.su(String.format("rm -rf %s/system/fonts/*.ttf && rm -f %s/system/product/etc/fonts_customization.xml && rm -rf %s/system/product/fonts/*", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
-            }
-        }catch(Exception ignored){}
+            
+            new Thread(() -> {
+                try {
+                    if (customFontsEnabled && GSansOverrideEnabled) {
+                        Shell.cmd(String.format("cp %s/data/fontz/GSans/*.ttf %s/system/fonts/ && cp %s/data/productz/etc/fonts_customization.xml.NEW %s/system/product/etc/fonts_customization.xml", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
+                    } else if (customFontsEnabled) {
+                        Shell.cmd(String.format("rm -rf %s/system/fonts/*.ttf && cp %s/data/productz/etc/fonts_customization.xml.OLD %s/system/product/etc/fonts_customization.xml && cp -r %s/data/productz/fonts/* %s/system/product/fonts/", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
+                    } else {
+                        Shell.cmd(String.format("rm -rf %s/system/fonts/*.ttf && rm -f %s/system/product/etc/fonts_customization.xml && rm -rf %s/system/product/fonts/*", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
+                    }
+                }catch (Exception ignored){}
+            }).start();
     }
 
     @Override

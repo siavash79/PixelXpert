@@ -13,7 +13,7 @@ jobs:
         with:
           ref: ${{ env.GITHUB_REF_NAME }}
 
-      - name: set up JDK 11
+      - name: Setup JDK 11
         uses: actions/setup-java@v3
         with:
           java-version: '11'

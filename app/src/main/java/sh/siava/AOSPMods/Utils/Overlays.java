@@ -50,18 +50,18 @@ public class Overlays {
         Overlays.put("ColorizeNavbarOverlay", new overlayProp("com.android.systemui.overlay.colorpill", false));
         Overlays.put("ReduceKeyboardSpaceOverlay", new overlayProp("com.android.overlay.reducekeyboard", false));
         Overlays.put("BSThickTrackOverlay", new overlayProp("com.android.systemui.bstrack.overlay", false));
-        
-        setAll();
+ 
+        new overlayStartupThread().start();
     }
     
-    public void initOverlays(Context context) //If called from UI
+/*    public void initOverlays(Context context) //If called from UI
     {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         resources = context.getResources();
         fromApp = true;
         
         initOverlays();
-    }
+    }*/
     
     private void fillOverlays() { //filling overlay list from resources, using a bit of reflection :D
         
@@ -89,20 +89,24 @@ public class Overlays {
     public static void setAll() //make sure settings are applied to device
     {
         if(AOSPMods.isSecondProcess) return;
-        
-        if(Overlays == null) new Overlays().initOverlays();
-        
+    
+        if(Overlays == null)
+        {
+            new Overlays().initOverlays();
+            return;
+        }
+    
         if(prefs == null)
         {
             prefs = XPrefs.Xprefs;
         }
-        
+    
         if(prefs == null || Overlays == null) return; // something not ready
-        
+    
         Helpers.getActiveOverlays(); //update the real active overlay list
-        
+    
         Map<String, ?> allPrefs = prefs.getAll();
-        
+    
         for(String pref : allPrefs.keySet())
         {
             if(pref.endsWith("Overlay") && Overlays.containsKey(pref))
@@ -113,7 +117,7 @@ public class Overlays {
             else if(pref.endsWith("OverlayEx") && Overlays.containsKey(pref))
             {
                 String activeOverlay = prefs.getString(pref, "None");
-                
+            
                 overlayGroup thisGroup = (overlayGroup) Overlays.get(pref);
                 for (overlayProp thisProp : thisGroup.members) {
                     if(!thisProp.name.equals("None")) {
@@ -122,7 +126,25 @@ public class Overlays {
                 }
             }
         }
+    
     }
+    
+    class overlayStartupThread extends Thread {
+        @Override
+        public void run()
+        {
+            for(int i = 0; i < 2; i++)
+            {
+                setAll();
+                try {
+                    Thread.sleep(45000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
     
     class overlayProp
     {

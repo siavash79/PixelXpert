@@ -3,6 +3,7 @@ package sh.siava.AOSPMods;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
@@ -136,13 +137,39 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     public static class ThemingFragment extends PreferenceFragmentCompat {
-
+        
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> {
+            updateFontPrefs(sharedPreferences);
+        };
+    
+        private void updateFontPrefs(SharedPreferences sharedPreferences) {
+            try {
+        
+                boolean customFontsEnabled = sharedPreferences.getBoolean("enableCustomFonts", false);
+        
+                if (!customFontsEnabled) {
+                    sharedPreferences.edit().putString("FontsOverlayEx", "None").commit();
+                }
+        
+                boolean gSansOverride = sharedPreferences.getBoolean("gsans_override", false);
+                boolean FontsOverlayExEnabled = !sharedPreferences.getString("FontsOverlayEx", "None").equals("None");
+        
+                Log.d("SIAPO", "font enabled:"+FontsOverlayExEnabled);
+                findPreference("gsans_override").setVisible(customFontsEnabled && !FontsOverlayExEnabled);
+                findPreference("FontsOverlayEx").setVisible(customFontsEnabled && !gSansOverride);
+        
+            }catch (Exception ignored){}
+    
+        }
+    
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.theming_prefs, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            updateFontPrefs(prefs);
+            prefs.registerOnSharedPreferenceChangeListener(listener);
         }
-
     }
 
     public static class LockScreenFragment extends PreferenceFragmentCompat {

@@ -197,6 +197,7 @@
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Force Google Sans font system wide</string>
+    <string name="font_overlays_enable_title">Enable using custom fonts</string>
     <string name="theme_customization_font_title">Headline / Body font</string>
     <string name="icons_style_title">Icons Style</string>
     <string name="icon_shapes_title">Icon Shapes</string>

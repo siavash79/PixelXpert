@@ -24,7 +24,7 @@ public class SettingsActivity extends AppCompatActivity implements
     private static final String TITLE_TAG = "settingsActivityTitle";
 
     public void RestartSysUI(View view) {
-        Shell.su("killall com.android.systemui").submit();
+        Shell.cmd("killall com.android.systemui").submit();
     }
 
     public void backButtonEnabled(){

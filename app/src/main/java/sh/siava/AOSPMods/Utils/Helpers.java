@@ -46,7 +46,7 @@ public class Helpers {
 
     public static void getActiveOverlays(){
         List<String> result = new ArrayList<>();
-        List<String> lines = com.topjohnwu.superuser.Shell.su("cmd overlay list --user 0").exec().getOut();
+        List<String> lines = com.topjohnwu.superuser.Shell.cmd("cmd overlay list --user 0").exec().getOut();
         //List<String> lines = Shell.sh("cmd overlay list --user 0").exec().getOut();
         for(String thisLine : lines)
         {
@@ -104,7 +104,7 @@ public class Helpers {
         }
 
         try {
-            com.topjohnwu.superuser.Shell.su("cmd overlay " + mode + " --user 0 " + packname).exec();
+            com.topjohnwu.superuser.Shell.cmd("cmd overlay " + mode + " --user 0 " + packname).exec();
         }
         catch(Throwable t)
         {

@@ -49,8 +49,8 @@ public class miscSettings implements IXposedModPack {
         boolean WifiCellEnabled = XPrefs.Xprefs.getBoolean("wifi_cell", false);
 
         try {
-            String currentTiles = Shell.su("settings get secure sysui_qs_tiles").exec().getOut().get(0);
-
+            String currentTiles = Shell.cmd("settings get secure sysui_qs_tiles").exec().getOut().get(0);
+    
             boolean hasWifi = Pattern.matches(getPattern("wifi"), currentTiles);
             boolean hasCell = Pattern.matches(getPattern("cell"), currentTiles);
             boolean hasInternet = Pattern.matches(getPattern("internet"), currentTiles);
@@ -78,7 +78,7 @@ public class miscSettings implements IXposedModPack {
                 }
             }
     
-            com.topjohnwu.superuser.Shell.su("settings put global settings_provider_model " + providerModel + "; settings put secure sysui_qs_tiles \"" + currentTiles + "\"").exec();
+            com.topjohnwu.superuser.Shell.cmd("settings put global settings_provider_model " + providerModel + "; settings put secure sysui_qs_tiles \"" + currentTiles + "\"").exec();
         }catch (Exception ignored){}
     }
 
@@ -92,7 +92,7 @@ public class miscSettings implements IXposedModPack {
         String mode = (SysUITunerEnabled) ? "enable" : "disable";
 
         try {
-            com.topjohnwu.superuser.Shell.su("pm " + mode + " com.android.systemui/.tuner.TunerActivity").exec();
+            com.topjohnwu.superuser.Shell.cmd("pm " + mode + " com.android.systemui/.tuner.TunerActivity").exec();
         }catch(Exception ignored){}
     }
 
@@ -102,9 +102,9 @@ public class miscSettings implements IXposedModPack {
         try {
 
             if (GSansOverrideEnabled){
-                com.topjohnwu.superuser.Shell.su(String.format("cp %s/data/fontz/GSans/*.ttf %s/system/fonts/ && cp %s/data/productz/etc/fonts_customization.xml.NEW %s/system/product/etc/fonts_customization.xml",XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
+                com.topjohnwu.superuser.Shell.cmd(String.format("cp %s/data/fontz/GSans/*.ttf %s/system/fonts/ && cp %s/data/productz/etc/fonts_customization.xml.NEW %s/system/product/etc/fonts_customization.xml",XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
             } else {
-                com.topjohnwu.superuser.Shell.su(String.format("rm -rf %s/system/fonts/*.ttf && cp %s/data/productz/etc/fonts_customization.xml.OLD %s/system/product/etc/fonts_customization.xml", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
+                com.topjohnwu.superuser.Shell.cmd(String.format("rm -rf %s/system/fonts/*.ttf && cp %s/data/productz/etc/fonts_customization.xml.OLD %s/system/product/etc/fonts_customization.xml", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
             }
         }catch(Exception ignored){}
     }

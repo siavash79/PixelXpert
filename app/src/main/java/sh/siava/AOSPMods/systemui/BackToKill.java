@@ -32,7 +32,7 @@ public class BackToKill implements IXposedModPack {
         View.OnLongClickListener listener = v -> {
             if(!isEnabled) return true;
 
-            Shell.su("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
+            Shell.cmd("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
 
             return true;
         };

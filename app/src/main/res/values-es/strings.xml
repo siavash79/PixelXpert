@@ -41,7 +41,7 @@
     <string name="assistant_shortcut">Asistente</string>
     <string name="album_art_category">Opciones de visualización de reproducción de música</string>
     <string name="album_art_title">Habilitar visualización de reproducción de música</string>
-	<string name="shufflePin_title">Pin Aleatorio</string>
+	<string name="shufflePin_title">Pin aleatorio</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doble toque para bloquear pantalla</string>
@@ -59,6 +59,7 @@
     <string name="lte_4g_icon_title">Icono 4G / LTE</string>
     <string name="combined_signal_icon_title">Iconos de señal combinados</string>
     <string name="sb_vibration_switch_title">"Mostar los iconos vibrar/silencio"</string>
+	<string name="volte_icon_title">Mostrar icono VoLTE cuando este disponible</string>
     <string name="sbc_position_title">Posición del reloj</string>
     <string name="sbc_ampm_style">Estilo AM/PM</string>
     <string name="sbc_show_secs">Mostrar segundos</string>
@@ -196,6 +197,7 @@
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Forzar la fuente Google Sans en todo el sistema</string>
+	<string name="font_overlays_enable_title">Habilitar el uso de fuentes personalizadas</string>
     <string name="theme_customization_font_title">Fuente de título / cuerpo del texto</string>
     <string name="icons_style_title">Estilo de los iconos</string>
     <string name="icon_shapes_title">Forma de los iconos</string>

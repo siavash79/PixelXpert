@@ -35,7 +35,7 @@ public class miscSettings implements IXposedModPack {
         else
         {
             if(AOSPMods.isSecondProcess) return;
-    
+            
             //startup jobs
             updateSysUITuner();
             updateFontsInfrastructure();

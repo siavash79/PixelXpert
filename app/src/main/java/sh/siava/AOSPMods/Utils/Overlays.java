@@ -51,7 +51,7 @@ public class Overlays {
         Overlays.put("ReduceKeyboardSpaceOverlay", new overlayProp("com.android.overlay.reducekeyboard", false));
         Overlays.put("BSThickTrackOverlay", new overlayProp("com.android.systemui.bstrack.overlay", false));
  
-        new overlayStartupThread().run();
+        new overlayStartupThread().start();
     }
     
 /*    public void initOverlays(Context context) //If called from UI

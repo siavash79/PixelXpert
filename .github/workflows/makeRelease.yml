@@ -2,9 +2,9 @@ name: Make Release
 
 on:
   push:
-    tags:
+    tags: 
       '*'
-      
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -59,17 +59,15 @@ jobs:
         name: AOSPMods.zip
         path: output
         
-  -   name: Push new Release
-      uses: Hs1r1us/Release-AIO@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Make draft release
+      uses: "marvinpinto/action-automatic-releases@latest"
       with:
-        tag_name: 'inherit'
-        release_name: ${{ env.GITHUB_REF_NAME }}
-        body_path: .github/workfolowFiles/futureReleaseNotes.md
-        asset_files: 'output/AOSPMods.zip'
-        prerelease: 'true'
-    -
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: true
+        draft: true
+        files: |
+            output/AOSPMods.zip
+
     - name: Commit version bump
       uses: github-actions-x/commit@v2.9
       with:

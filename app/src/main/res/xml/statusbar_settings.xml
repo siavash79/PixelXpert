@@ -11,6 +11,15 @@
             app:summaryOff="@string/double_tap_sleep_off"
             app:summaryOn="@string/double_tap_sleep_on" />
 
+        <SeekBarPreference
+            android:layout_width="wrap_content"
+            android:defaultValue="50"
+            android:key="centerAreaFineTune"
+            android:max="70"
+            android:title="@string/sb_center_fine_tune"
+            app:min="30"
+            app:updatesContinuously="true"/>
+
         <Preference
             app:fragment="sh.siava.AOSPMods.SettingsActivity$SBCFragment"
             app:key="sbc_header"

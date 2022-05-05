@@ -72,6 +72,7 @@
         <entry key="app/src/main/res/xml/gesture_nav_perfs.xml" value="0.6904541241890639" />
         <entry key="app/src/main/res/xml/lock_screen_prefs.xml" value="0.3374094202898551" />
         <entry key="app/src/main/res/xml/nav_prefs.xml" value="0.3374094202898551" />
+        <entry key="app/src/main/res/xml/statusbar_clock_prefs.xml" value="0.29945328031809143" />
         <entry key="app/src/main/res/xml/theming_prefs.xml" value="0.4444444444444444" />
       </map>
     </option>

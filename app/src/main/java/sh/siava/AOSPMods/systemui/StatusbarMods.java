@@ -31,6 +31,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Executor;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -104,10 +106,13 @@ public class StatusbarMods implements IXposedModPack {
     private Context mContext;
     private Object mCollapsedStatusBarFragment = null;
     private ViewGroup mClockParent = null;
+    private View mNotificationIconAreaInner = null;
     private View mCenteredIconArea = null;
     private LinearLayout mSystemIconArea = null;
     public static int clockColor = 0;
     private FrameLayout fullStatusbar;
+//    private Object STB = null;
+    private int centerAreaFineTune = 50;
     //endregion
     
     //region volte
@@ -132,6 +137,9 @@ public class StatusbarMods implements IXposedModPack {
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
+        
+        centerAreaFineTune = XPrefs.Xprefs.getInt("centerAreaFineTune", 50);
+        tuneCenterArea();
         
         //region BatteryBar Settings
         BBarEnabled = XPrefs.Xprefs.getBoolean("BBarEnabled", false);
@@ -262,6 +270,18 @@ public class StatusbarMods implements IXposedModPack {
         //endregion
     }
     
+    //region general
+    private void tuneCenterArea() {
+        try {
+            int screenWidth = fullStatusbar.getMeasuredWidth();
+            int notificationWidth = (screenWidth * centerAreaFineTune / 100);
+            ((ViewGroup) mNotificationIconAreaInner.getParent().getParent().getParent()).getLayoutParams().width = notificationWidth;
+            mSystemIconArea.getLayoutParams().width = screenWidth - notificationWidth;
+            XposedBridge.log("noti"+ notificationWidth);
+        } catch (Exception e) { }
+    }
+    //endregion
+    
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
@@ -275,7 +295,7 @@ public class StatusbarMods implements IXposedModPack {
         Class<?> QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
         Class<?> QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
         Class<?> ClockClass = XposedHelpers.findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
-//        Class<?> PhoneStatusBarViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
+        Class<?> PhoneStatusBarViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
         Class<?> KeyGuardIndicationClass = XposedHelpers.findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
         Class<?> BatteryTrackerClass = XposedHelpers.findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
         StatusBarIcon = XposedHelpers.findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
@@ -321,14 +341,32 @@ public class StatusbarMods implements IXposedModPack {
                 mCollapsedStatusBarFragment = param.thisObject;
             }
         });
-/*
-        //getting statusbarview for further use
+
+/*        //getting statusbarview for further use
         XposedBridge.hookAllConstructors(PhoneStatusBarViewClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 STB = param.thisObject;
             }
         });*/
+        
+        //update statusbar
+        XposedBridge.hookAllMethods(PhoneStatusBarViewClass, "onConfigurationChanged", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                XposedBridge.log("portrait to land?");
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        tuneCenterArea();
+                        if(BatteryBarView.hasInstance())
+                        {
+                            BatteryBarView.getInstance().post(() -> refreshBatteryBar(BatteryBarView.getInstance()));
+                        }
+                    }
+                }, 200);
+            }
+        });
         
         //getting activitity starter for further use
         XposedBridge.hookAllConstructors(QuickStatusBarHeaderClass, new XC_MethodHook() {
@@ -435,7 +473,7 @@ public class StatusbarMods implements IXposedModPack {
 
                         mStatusBarIconController = XposedHelpers.getObjectField(param.thisObject, "mStatusBarIconController");
                         
-                        //View mNotificationIconAreaInner = (View) XposedHelpers.getObjectField(param.thisObject, "mNotificationIconAreaInner");
+                        mNotificationIconAreaInner = (View) XposedHelpers.getObjectField(param.thisObject, "mNotificationIconAreaInner");
                         View mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
                         mClockParent = (ViewGroup) mClockView.getParent();
                         mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
@@ -443,7 +481,9 @@ public class StatusbarMods implements IXposedModPack {
     
                         mStatusBar = (View) XposedHelpers.getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
                         fullStatusbar = (FrameLayout) mStatusBar.getParent();
-                        
+
+                        tuneCenterArea();
+
                         if(BBarEnabled) //in case we got the config but view wasn't ready yet
                         {
                             placeBatteryBar();
@@ -667,15 +707,15 @@ public class StatusbarMods implements IXposedModPack {
             switch (networkTrafficPosition) {
                 case POSITION_RIGHT:
                     mSystemIconArea.addView(networkTrafficSB, 0);
-                    networkTrafficSB.setPadding(40, 0, 5, 0);
+                    networkTrafficSB.setPadding(10, 0, 10, 0);
                     break;
                 case POSITION_LEFT:
                     mClockParent.addView(networkTrafficSB, 0);
-                    networkTrafficSB.setPadding(0, 0, 10, 0);
+                    networkTrafficSB.setPadding(10, 0, 10, 0);
                     break;
                 case POSITION_CENTER:
                     mClockParent.addView(networkTrafficSB);
-                    networkTrafficSB.setPadding(0, 0, 0, 0);
+                    networkTrafficSB.setPadding(10, 0, 10, 0);
                     break;
             }
             ntsbLayoutP = (LinearLayout.LayoutParams) networkTrafficSB.getLayoutParams();

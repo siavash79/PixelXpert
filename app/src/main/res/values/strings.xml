@@ -55,6 +55,7 @@
     <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Hidden</string>
     <string name="BIcon_Opacity_title">Opacity</string>
+    <string name="sb_center_fine_tune">Fine-tune center area</string>
 
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
     <string name="combined_signal_icon_title">Combined signal icons</string>

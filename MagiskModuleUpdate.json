@@ -2,5 +2,5 @@
     "version": "1.0.0-beta-02",
     "versionCode": 18,
     "zipUrl": "https://github.com/siavash79/AOSPMods/releases/download/1.0.0-beta-02/AOSPMods.zip",
-    "changelog": "https://github.com/siavash79/AOSPMods/releases/tag/v1.0.0-canary-013"
+    "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/master/MagiskChangelog.md"
 }

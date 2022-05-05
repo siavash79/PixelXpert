@@ -2,7 +2,8 @@ name: Make Release
 
 on:
   push:
-    tags: 
+    branch: master
+    tags:
       '*'
   
 jobs:

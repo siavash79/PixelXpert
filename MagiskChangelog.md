@@ -1,4 +1,4 @@
-**1.0.0-beta-01**
+**1.0.0-beta-02**
 - Customized fonts are now fully optional
 - Increase QS Haptic vibration strenght
 - UI improvements

@@ -210,5 +210,8 @@
     <string name="BB_transit_colors">Cores entre o intervalo</string>
     <string name="shufflePin_title">Pin aleatório</string>
     <string name="disable_overscroll">"Desativar o efeito elástico no final da navegação</string>
+    <string name="overscroll_on_summary">"Nota: Requer ativar as apps, para as quais pretende desativar o efeito elástico, no gestor da LSposed"</string>
+    <string name="volte_icon_title">Mostrar ícone VoLTE quando disponível</string>
+    <string name="font_overlays_enable_title">Ativar as fontes personalizadas</string>
 
 </resources>

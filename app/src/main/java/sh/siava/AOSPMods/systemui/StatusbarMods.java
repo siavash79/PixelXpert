@@ -473,8 +473,18 @@ public class StatusbarMods implements IXposedModPack {
                         mStatusBarIconController = XposedHelpers.getObjectField(param.thisObject, "mStatusBarIconController");
                         
                         mNotificationIconAreaInner = (View) XposedHelpers.getObjectField(param.thisObject, "mNotificationIconAreaInner");
-                        View mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
+                        View mClockView;
+                        try
+                        {
+                            mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
+    
+                        }
+                        catch (Exception e)
+                        {
+                            mClockView = new FrameLayout(mContext);
+                        }
                         mClockParent = (ViewGroup) mClockView.getParent();
+    
                         mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
                         mSystemIconArea = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mSystemIconArea");
     
@@ -509,7 +519,7 @@ public class StatusbarMods implements IXposedModPack {
                         //<modding clock>
                         XposedHelpers.setAdditionalInstanceField(mClockView, "mClockParent", 1);
 
-                        if(clockPosition == POSITION_LEFT) return;
+                        if(clockPosition == POSITION_LEFT || mClockParent == null) return;
 
                         ViewGroup targetArea = null;
 

@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -277,8 +278,7 @@ public class StatusbarMods implements IXposedModPack {
             int notificationWidth = (screenWidth * centerAreaFineTune / 100);
             ((ViewGroup) mNotificationIconAreaInner.getParent().getParent().getParent()).getLayoutParams().width = notificationWidth;
             mSystemIconArea.getLayoutParams().width = screenWidth - notificationWidth;
-            XposedBridge.log("noti"+ notificationWidth);
-        } catch (Exception e) { }
+        } catch (Exception ignored) { }
     }
     //endregion
     
@@ -354,7 +354,6 @@ public class StatusbarMods implements IXposedModPack {
         XposedBridge.hookAllMethods(PhoneStatusBarViewClass, "onConfigurationChanged", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                XposedBridge.log("portrait to land?");
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -421,7 +420,7 @@ public class StatusbarMods implements IXposedModPack {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 //Removing vibration icon from blocked icons in lockscreen
                 if(showVibrationIcon && (XposedHelpers.findFieldIfExists(KeyguardStatusBarViewControllerClass, "mBlockedIcons") != null)) { //Android 12 doesn't have such thing at all
-                    List<String> OldmBlockedIcons = (List<String>) XposedHelpers.getObjectField(param.thisObject, "mBlockedIcons");
+                    @SuppressWarnings("unchecked") List<String> OldmBlockedIcons = (List<String>) XposedHelpers.getObjectField(param.thisObject, "mBlockedIcons");
 
                     List<String> NewmBlockedIcons = new ArrayList<>();
                     for (String item : OldmBlockedIcons) {
@@ -614,6 +613,7 @@ public class StatusbarMods implements IXposedModPack {
         try {
             if (telephonyManager == null) {
                 Icon volteIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_volte);
+                //noinspection JavaReflectionMemberAccess
                 volteStatusbarIcon = StatusBarIcon.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, "volte");
                 telephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
                 telephonyManager.registerTelephonyCallback(volteExec, volteCallback);
@@ -673,7 +673,7 @@ public class StatusbarMods implements IXposedModPack {
     private void setShowVibrationIcon()
     {
         try {
-            List<String> mBlockedIcons = (List<String>) XposedHelpers.getObjectField(mCollapsedStatusBarFragment, "mBlockedIcons");
+            @SuppressWarnings("unchecked") List<String> mBlockedIcons = (List<String>) XposedHelpers.getObjectField(mCollapsedStatusBarFragment, "mBlockedIcons");
             Object mStatusBarIconController = XposedHelpers.getObjectField(mCollapsedStatusBarFragment, "mStatusBarIconController");
             Object mDarkIconManager = XposedHelpers.getObjectField(mCollapsedStatusBarFragment, "mDarkIconManager");
 
@@ -703,24 +703,21 @@ public class StatusbarMods implements IXposedModPack {
 
         try {
             LinearLayout.LayoutParams ntsbLayoutP;
-            
             switch (networkTrafficPosition) {
                 case POSITION_RIGHT:
                     mSystemIconArea.addView(networkTrafficSB, 0);
-                    networkTrafficSB.setPadding(10, 0, 10, 0);
                     break;
                 case POSITION_LEFT:
                     mClockParent.addView(networkTrafficSB, 0);
-                    networkTrafficSB.setPadding(10, 0, 10, 0);
                     break;
                 case POSITION_CENTER:
                     mClockParent.addView(networkTrafficSB);
-                    networkTrafficSB.setPadding(10, 0, 10, 0);
                     break;
             }
             ntsbLayoutP = (LinearLayout.LayoutParams) networkTrafficSB.getLayoutParams();
             ntsbLayoutP.gravity = Gravity.CENTER_VERTICAL;
             networkTrafficSB.setLayoutParams(ntsbLayoutP);
+            networkTrafficSB.setPadding(10, 0, 10, 0);
         }catch(Throwable ignored){}
     }
     //endregion
@@ -785,7 +782,7 @@ public class StatusbarMods implements IXposedModPack {
         try {
 
             //There's some format to work on
-            SimpleDateFormat df = new SimpleDateFormat(dateFormat);
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat(dateFormat);
             String result = df.format(calendar.getTime());
             if (!small) return result;
 

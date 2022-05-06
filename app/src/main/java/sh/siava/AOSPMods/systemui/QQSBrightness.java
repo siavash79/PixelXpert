@@ -22,7 +22,7 @@ public class QQSBrightness implements IXposedModPack {
     private Object QQSBrightnessSliderController = null;
     private View QSbrightnessSliderView = null;
     private Object BrightnessMirrorController = null;
-    private View QQSbrightnessSliderView = null;
+    private static View QQSbrightnessSliderView = null;
     private Object QS, QQS;
     private ViewGroup QSParent;
     private Context mContext;
@@ -54,6 +54,7 @@ public class QQSBrightness implements IXposedModPack {
         }
         else
         {
+            setQSVisibility();
             setQQSVisibility();
         }
     }
@@ -75,9 +76,9 @@ public class QQSBrightness implements IXposedModPack {
             if (QQSBrightnessEnabled) {
                 XposedHelpers.callMethod(QQS, "setBrightnessView", QQSbrightnessSliderView);
             } else {
-                ((FrameLayout) QQSbrightnessSliderView.getParent()).removeView(QQSbrightnessSliderView);
+                ((ViewGroup) QQSbrightnessSliderView.getParent()).removeView(QQSbrightnessSliderView);
             }
-        } catch(Exception ignored){}
+        } catch(Exception ignored){ ignored.printStackTrace();}
     }
 
     @Override

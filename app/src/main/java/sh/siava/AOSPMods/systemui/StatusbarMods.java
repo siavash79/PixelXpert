@@ -186,7 +186,7 @@ public class StatusbarMods implements IXposedModPack {
         if(newnetworkOnSBEnabled != networkOnSBEnabled)
         {
             networkOnSBEnabled = newnetworkOnSBEnabled;
-            if(networkTrafficSB == null && mContext != null)
+            if(networkTrafficSB == null)
             {
                 networkTrafficSB = new NetworkTrafficSB(mContext);
             }

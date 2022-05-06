@@ -500,7 +500,7 @@ public class StatusbarMods extends IXposedModPack {
                         {
                             mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
                         }
-                        catch (Exception e)
+                        catch (Throwable t)
                         { //PE Plus
                             XposedBridge.log("reached err 1");
                             Object mClockController = XposedHelpers.getObjectField(param.thisObject, "mClockController");
@@ -703,6 +703,7 @@ public class StatusbarMods extends IXposedModPack {
     }
     
     private void removeVolteIcon() {
+        if(mStatusBar == null) return; //probably it's too soon to have a statusbar
         mStatusBar.post(() -> {
             try {
                 XposedHelpers.callMethod(mStatusBarIconController, "removeIcon", "volte");

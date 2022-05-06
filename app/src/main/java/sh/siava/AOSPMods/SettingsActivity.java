@@ -373,6 +373,9 @@ public class SettingsActivity extends AppCompatActivity implements
     
                 findPreference("QSPulldownPercent").setVisible(QSPullodwnEnabled);
                 findPreference("QSPulldownSide").setVisible(QSPullodwnEnabled);
+                
+                findPreference("BSThickTrackOverlay").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
+                findPreference("BrightnessSlierOnBottom").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
                 findPreference("QQSBrightnessEnabled").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
                 findPreference("QSFooterText").setVisible(sharedPreferences.getBoolean("QSFooterMod", false));
                 findPreference("QSPulldownPercent").setSummary(sharedPreferences.getInt("QSPulldownPercent", 25) + "%");

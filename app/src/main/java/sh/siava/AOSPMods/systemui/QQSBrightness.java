@@ -3,7 +3,6 @@ package sh.siava.AOSPMods.systemui;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -27,6 +26,7 @@ public class QQSBrightness implements IXposedModPack {
     private ViewGroup QSParent;
     private Context mContext;
 
+    private static boolean BrightnessSlierOnBottom = false;
     private static boolean BrightnessHookEnabled = true;
     private static boolean QQSBrightnessEnabled = false;
     private static boolean QSBrightnessDisabled = false;
@@ -36,6 +36,7 @@ public class QQSBrightness implements IXposedModPack {
         BrightnessHookEnabled = XPrefs.Xprefs.getBoolean("BrightnessHookEnabled", true);
         QQSBrightnessEnabled = XPrefs.Xprefs.getBoolean("QQSBrightnessEnabled", false);
         QSBrightnessDisabled = XPrefs.Xprefs.getBoolean("QSBrightnessDisabled", false);
+        BrightnessSlierOnBottom = XPrefs.Xprefs.getBoolean("BrightnessSlierOnBottom", false);
 
         if(QSBrightnessDisabled) QQSBrightnessEnabled = false; //if there's no slider, then .......
 
@@ -44,26 +45,21 @@ public class QQSBrightness implements IXposedModPack {
             switch (Key[0])
             {
                 case "QQSBrightnessEnabled":
-                    setQQSVisibility();
-                    break;
                 case "QSBrightnessDisabled":
+                case "BrightnessSlierOnBottom":
                     setQSVisibility();
                     setQQSVisibility();
                     break;
             }
         }
-        else
-        {
-            setQSVisibility();
-            setQQSVisibility();
-        }
     }
     
     private void setQSVisibility() {
         try {
-            if (QSBrightnessDisabled) {
-                QSParent.removeView(QSbrightnessSliderView);
-            } else {
+            QSParent.removeView(QSbrightnessSliderView);
+        }catch (Exception ignored){}
+        try {
+            if (!QSBrightnessDisabled) {
                 Object mView = XposedHelpers.getObjectField(QS, "mView");
                 XposedHelpers.callMethod(mView, "setBrightnessView", QSbrightnessSliderView);
             }
@@ -78,7 +74,7 @@ public class QQSBrightness implements IXposedModPack {
             } else {
                 ((ViewGroup) QQSbrightnessSliderView.getParent()).removeView(QQSbrightnessSliderView);
             }
-        } catch(Exception ignored){ ignored.printStackTrace();}
+        } catch(Exception ignored){}
     }
 
     @Override
@@ -94,12 +90,36 @@ public class QQSBrightness implements IXposedModPack {
         Class<?> QuickQSPanelClass = XposedHelpers.findClass("com.android.systemui.qs.QuickQSPanel", lpparam.classLoader);
         Class<?> QSPanelControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
         Class<?> BrightnessMirrorHandlerClass = XposedHelpers.findClass("com.android.systemui.settings.brightness.BrightnessMirrorHandler", lpparam.classLoader);
-
+        Class<?> QSPanelClass = XposedHelpers.findClass("com.android.systemui.qs.QSPanel", lpparam.classLoader);
+        
         //Stealing info from Main QS
         XposedBridge.hookAllMethods(QSPanelControllerClass, "setBrightnessMirror", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 BrightnessMirrorController = param.args[0];
+            }
+        });
+        
+        XposedBridge.hookAllMethods(QSPanelClass, "setBrightnessView", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                if(!BrightnessSlierOnBottom) return;
+                
+                try {
+                    View v = (View) param.args[0];
+                    ViewGroup parent = (ViewGroup) v.getParent();
+                    parent.removeView(v);
+                    parent.addView(v, 1);
+                }
+                catch (Exception ignored){}
+            }
+        });
+        
+        XposedBridge.hookAllMethods(QSPanelClass, "initialize", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                setQSVisibility();
+                setQQSVisibility();
             }
         });
         

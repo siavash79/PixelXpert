@@ -300,15 +300,17 @@ public class QSHeaderManager implements IXposedModPack {
                         mContext.getTheme());
                 
                 
-                for (View v : tiles) {
-                    XposedHelpers.setObjectField(v, "colorInactive", colorInactive);
-                    XposedHelpers.setObjectField(v, "colorUnavailable", colorUnavailable);
-                    
-                    Object lastState = XposedHelpers.getObjectField(v, "lastState");
-                    Object o = XposedHelpers.callMethod(v, "getBackgroundColorForState", lastState);
-                    XposedHelpers.callMethod(v, "setColor", o);
-                    
-                }
+                try {
+                    for (View v : tiles) {
+                        XposedHelpers.setObjectField(v, "colorInactive", colorInactive);
+                        XposedHelpers.setObjectField(v, "colorUnavailable", colorUnavailable);
+        
+                        Object lastState = XposedHelpers.getObjectField(v, "lastState");
+                        Object o = XposedHelpers.callMethod(v, "getBackgroundColorForState", lastState);
+                        XposedHelpers.callMethod(v, "setColor", o);
+        
+                    }
+                }catch (Exception ignored){}
             });
             t.start();
         }

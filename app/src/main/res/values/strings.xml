@@ -131,6 +131,7 @@
     <string name="wifi_cell_off">Use single Internet Tile</string>
     <string name="QQS_brightness_category">Brightness slider options</string>
     <string name="QQS_brightness_title">Show brightness slider on QQS Panel</string>
+    <string name="QQS_brightness_bottom_title">Move brightness slider to the bottom</string>
     <string name="QS_brightness_disable_title">Hide brightness slider from Quick Settings</string>
     <string name="bs_thick_track">Use a thick track on brightness slider</string>
     <string name="quick_settings_tiles_category">QS Tiles Options</string>

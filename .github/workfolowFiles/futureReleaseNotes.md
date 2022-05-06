@@ -1,5 +1,7 @@
 **Changelog:**
-- 
+- Added option to fine tune statusbar center area
+- Added option to move brightness slider to the bottom
+- Bugfixes
 
 **Compatibility:**
 AOSP based Androids:

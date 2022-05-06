@@ -87,6 +87,12 @@
                 android:title="@string/QQS_brightness_title" />
             <SwitchPreference
                 android:defaultValue="false"
+                android:key="BrightnessSlierOnBottom"
+                android:summaryOff="@string/general_off"
+                android:summaryOn="@string/general_on"
+                android:title="@string/QQS_brightness_bottom_title" />
+            <SwitchPreference
+                android:defaultValue="false"
                 android:key="BSThickTrackOverlay"
                 android:title="@string/bs_thick_track"
                 app:summaryOn="@string/general_on"

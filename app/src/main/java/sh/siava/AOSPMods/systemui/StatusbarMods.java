@@ -153,7 +153,7 @@ public class StatusbarMods extends IXposedModPack {
         BBOpacity = XPrefs.Xprefs.getInt("BBOpacity" , 100);
         BBarHeight = XPrefs.Xprefs.getInt("BBarHeight" , 50);
         BBarTransitColors = XPrefs.Xprefs.getBoolean("BBarTransitColors", false);
-        XposedBridge.log("rrdd 1");
+        
         String jsonString = XPrefs.Xprefs.getString("batteryWarningRange", "");
         if(jsonString.length() > 0)
         {
@@ -165,7 +165,7 @@ public class StatusbarMods extends IXposedModPack {
         batteryColors = new int[]{
                 XPrefs.Xprefs.getInt("batteryCriticalColor", Color.RED),
                 XPrefs.Xprefs.getInt("batteryWarningColor", Color.YELLOW)};
-        XposedBridge.log("rrdd 2");
+        
     
         indicateFastCharging = XPrefs.Xprefs.getBoolean("indicateFastCharging", false);
         indicateCharging = XPrefs.Xprefs.getBoolean("indicateCharging", true);
@@ -183,29 +183,29 @@ public class StatusbarMods extends IXposedModPack {
             refreshBatteryBar(BatteryBarView.getInstance());
         }
         //endregion BatteryBar Settings
-        XposedBridge.log("rrdd 3");
+        
     
         //region network Traffic settings
         boolean newnetworkOnSBEnabled = XPrefs.Xprefs.getBoolean("networkOnSBEnabled", false);
-        XposedBridge.log("rrdd 88");
+        
 
         if(newnetworkOnSBEnabled != networkOnSBEnabled)
         {
             networkOnSBEnabled = newnetworkOnSBEnabled;
             if(networkTrafficSB == null)
             {
-                XposedBridge.log("rrdd 87");
+                
     
                 networkTrafficSB = new NetworkTrafficSB(mContext);
-                XposedBridge.log("rrdd 86");
+                
     
             }
             networkTrafficPosition = -1; //anyway we have to call placer method
         }
-        XposedBridge.log("rrdd 85");
+        
     
         int newnetworkTrafficPosition = Integer.parseInt(XPrefs.Xprefs.getString("networkTrafficPosition", "2"));
-        XposedBridge.log("rrdd 84");
+        
     
         if(newnetworkTrafficPosition != networkTrafficPosition)
         {
@@ -214,7 +214,7 @@ public class StatusbarMods extends IXposedModPack {
             placeNTSB();
         }
         String tresholdText = XPrefs.Xprefs.getString("networkTrafficTreshold", "10");
-        XposedBridge.log("rrdd 4");
+        
 
         try {
             networkTrafficTreshold = Math.round(Float.parseFloat(tresholdText));
@@ -235,19 +235,19 @@ public class StatusbarMods extends IXposedModPack {
             setShowVibrationIcon();
         }
         //endregion
-        XposedBridge.log("rrdd 5");
+        
 
         //region clock settings
         clockPosition = Integer.parseInt(XPrefs.Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
         mShowSeconds = XPrefs.Xprefs.getBoolean("SBCShowSeconds", false);
         mAmPmStyle = Integer.parseInt(XPrefs.Xprefs.getString("SBCAmPmStyle", String.valueOf(AM_PM_STYLE_GONE)));
-        XposedBridge.log("rrdd 99");
+        
 
         mDateFormatBefore = XPrefs.Xprefs.getString("DateFormatBeforeSBC", "");
         mDateFormatAfter = XPrefs.Xprefs.getString("DateFormatAfterSBC", "");
         mBeforeSmall = XPrefs.Xprefs.getBoolean("BeforeSBCSmall", true);
         mAfterSmall = XPrefs.Xprefs.getBoolean("AfterSBCSmall", true);
-        XposedBridge.log("rrdd 6");
+        
 
         if((mDateFormatBefore+mDateFormatAfter).trim().length() == 0) {
             int SBCDayOfWeekMode = Integer.parseInt(XPrefs.Xprefs.getString("SBCDayOfWeekMode", "0"));
@@ -280,7 +280,7 @@ public class StatusbarMods extends IXposedModPack {
             }
         }
         //endregion clock settings
-        XposedBridge.log("rrdd 7");
+        
     
         //region volte
         VolteIconEnabled = XPrefs.Xprefs.getBoolean("VolteIconEnabled", false);
@@ -289,7 +289,7 @@ public class StatusbarMods extends IXposedModPack {
         else
             removeVolte();
         //endregion
-        XposedBridge.log("rrdd 456");
+        
     }
     
     //region general
@@ -502,14 +502,14 @@ public class StatusbarMods extends IXposedModPack {
                         }
                         catch (Throwable t)
                         { //PE Plus
-                            XposedBridge.log("reached err 1");
+                            
                             Object mClockController = XposedHelpers.getObjectField(param.thisObject, "mClockController");
                             mClockView = (View) XposedHelpers.callMethod(mClockController, "getClock");
                         }
-                        XposedBridge.log("mclocview null:"+ (mClockView == null));
+                        
     
                         mClockParent = (ViewGroup) mClockView.getParent();
-                        XposedBridge.log("mclocparent null:"+ (mClockParent == null));
+                        
     
                         mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
                         mSystemIconArea = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mSystemIconArea");
@@ -523,7 +523,7 @@ public class StatusbarMods extends IXposedModPack {
                         {
                             placeBatteryBar();
                         }
-                        XposedBridge.log("reached 1");
+                        
                         if(VolteIconEnabled) //in case we got the config but context wasn't ready yet
                         {
                             initVolte();
@@ -535,23 +535,23 @@ public class StatusbarMods extends IXposedModPack {
                             NetworkTrafficSB.setHideTreshold(networkTrafficTreshold);
                             placeNTSB();
                         }
-                        XposedBridge.log("reached 4");
+                        
     
                         //<Showing vibration icon in collapsed statusbar>
                         if(showVibrationIcon) {
                             setShowVibrationIcon();
                         }
                         //</Showing vibration icon in collapsed statusbar>
-                        XposedBridge.log("reached 5");
+                        
 
                         //<modding clock>
                         XposedHelpers.setAdditionalInstanceField(mClockView, "mClockParent", 1);
-                        XposedBridge.log("reached 6");
-                        XposedBridge.log("clock pos"+ clockPosition);
+                        
+                        
                         if(clockPosition == POSITION_LEFT) return;
 
                         ViewGroup targetArea = null;
-                        XposedBridge.log("reached 2");
+                        
 
                         switch (clockPosition)
                         {
@@ -565,7 +565,7 @@ public class StatusbarMods extends IXposedModPack {
                         }
                         mClockParent.removeView(mClockView);
                         targetArea.addView(mClockView);
-                        XposedBridge.log("reached 3");
+                        
     
     
                     }
@@ -754,10 +754,10 @@ public class StatusbarMods extends IXposedModPack {
                     mClockParent.addView(networkTrafficSB, 0);
                     break;
                 case POSITION_CENTER:
-                    XposedBridge.log("rrdd 85");
+                    
     
                     mClockParent.addView(networkTrafficSB);
-                    XposedBridge.log("rrdd 84");
+                    
     
                     break;
             }

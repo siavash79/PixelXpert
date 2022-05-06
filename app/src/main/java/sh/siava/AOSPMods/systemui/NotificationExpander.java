@@ -17,19 +17,20 @@ import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.XPrefs;
 
-public class NotificationExpander implements IXposedModPack {
+public class NotificationExpander extends IXposedModPack {
 	public static final String listenPackage = "com.android.systemui";
 	
 	public static boolean notificationExpandallHookEnabled = true;
 	public static boolean notificationExpandallEnabled = false;
 
 	private static Object NotificationEntryManager;
-	private Context mContext;
 	private Button ExpandBtn, CollapseBtn;
 	private FrameLayout FooterView;
 	private FrameLayout BtnLayout;
 	private static int fh = 0;
 	private Object Scroller;
+	
+	public NotificationExpander(Context context) { super(context); }
 	
 	@Override
 	public void updatePrefs(String... Key) {
@@ -46,10 +47,8 @@ public class NotificationExpander implements IXposedModPack {
 	public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 	
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if(!listenPackage.equals(lpparam.packageName) || !notificationExpandallHookEnabled) return;
-		
-		mContext = context;
 		
 		Class<?> NotificationEntryManagerClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.NotificationEntryManager", lpparam.classLoader);
 		Class<?> FooterViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.notification.row.FooterView", lpparam.classLoader);

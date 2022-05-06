@@ -9,12 +9,15 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class QSQuickPullDown implements IXposedModPack {
+public class QSQuickPullDown extends IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static int pullDownSide = 1; // 1 is right, 2 is left
     public static boolean oneFingerPulldownEnabled = false;
     public static float statusbarPortion = 0.25f; // now set to 25% of the screen. it can be anything between 0 to 100%
-
+    
+    public QSQuickPullDown(Context context) { super(context); }
+    
+    @Override
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -24,7 +27,7 @@ public class QSQuickPullDown implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 

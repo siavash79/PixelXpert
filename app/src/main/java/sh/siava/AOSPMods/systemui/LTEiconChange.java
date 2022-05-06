@@ -8,14 +8,17 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class LTEiconChange implements IXposedModPack {
+public class LTEiconChange extends IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static int SBLTEIcon = 0;
 
     private static final int DEFAULT = 0;
     private static final int FORCE_LTE = 1;
     private static final int FORCE_4G = 2;
-
+    
+    public LTEiconChange(Context context) { super(context); }
+    
+    @Override
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -23,7 +26,7 @@ public class LTEiconChange implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 

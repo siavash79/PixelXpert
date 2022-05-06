@@ -25,7 +25,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class screenOffKeys implements IXposedModPack {
+public class screenOffKeys extends IXposedModPack {
     public static final String listenPackage = "android";
     private boolean torchOn = false;
     private static boolean replaceAssistantwithTorch = false;
@@ -44,7 +44,9 @@ public class screenOffKeys implements IXposedModPack {
             torchOn = enabled;
         }
     };
-
+    
+    public screenOffKeys(Context context) { super(context); }
+    
     @Override
     public void updatePrefs(String...Key) {
         holdVolumeToSkip = XPrefs.Xprefs.getBoolean("holdVolumeToSkip", false);
@@ -52,13 +54,13 @@ public class screenOffKeys implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if (!lpparam.packageName.equals(listenPackage)) return;
         
-        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        cameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
+        audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        cameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
         cameraManager.registerTorchCallback(torchCallback, new Handler());
-        powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        powerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         
         Class<?> PhoneWindowManager;
         Method powerLongPress;

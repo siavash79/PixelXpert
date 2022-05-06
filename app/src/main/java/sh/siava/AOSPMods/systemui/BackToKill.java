@@ -11,10 +11,13 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class BackToKill implements IXposedModPack {
+public class BackToKill extends IXposedModPack {
     private static final String listenPackage = "com.android.systemui";
     private static boolean isEnabled = false;
-
+    
+    public BackToKill(Context context) { super(context); }
+    
+    @Override
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -23,7 +26,7 @@ public class BackToKill implements IXposedModPack {
 
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 

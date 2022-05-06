@@ -9,12 +9,15 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class CarrierTextManager implements IXposedModPack {
+public class CarrierTextManager extends IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean isEnabled = false;
     public static String customText = "";
     private static Object mCarrierTextManager = null;
-
+    
+    public CarrierTextManager(Context context) { super(context); }
+    
+    @Override
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -33,7 +36,7 @@ public class CarrierTextManager implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         Class<?> CarrierTextManagerClass = XposedHelpers.findClass("com.android.keyguard.CarrierTextManager", lpparam.classLoader);

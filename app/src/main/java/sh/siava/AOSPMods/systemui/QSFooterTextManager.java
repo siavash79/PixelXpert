@@ -9,7 +9,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class QSFooterTextManager implements IXposedModPack {
+public class QSFooterTextManager extends IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean customQSFooterTextEnabled = false;
     public static String customText = "";
@@ -20,9 +20,11 @@ public class QSFooterTextManager implements IXposedModPack {
         customQSFooterTextEnabled = XPrefs.Xprefs.getBoolean("QSFooterMod", false);
         customText = XPrefs.Xprefs.getString("QSFooterText", "");
     }
-
+    
+    public QSFooterTextManager(Context context) { super(context); }
+    
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 

@@ -12,7 +12,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class QQSBrightness implements IXposedModPack {
+public class QQSBrightness extends IXposedModPack {
     private static final String listenPackage = "com.android.systemui";
 
     private Object mBrightnessMirrorHandlerController = null;
@@ -24,12 +24,15 @@ public class QQSBrightness implements IXposedModPack {
     private static View QQSbrightnessSliderView = null;
     private Object QS, QQS;
     private ViewGroup QSParent;
-    private Context mContext;
+
 
     private static boolean BrightnessSlierOnBottom = false;
     private static boolean BrightnessHookEnabled = true;
     private static boolean QQSBrightnessEnabled = false;
     private static boolean QSBrightnessDisabled = false;
+
+    public QQSBrightness(Context context) { super(context); }
+
     @Override
     public void updatePrefs(String... Key) {
 
@@ -81,11 +84,11 @@ public class QQSBrightness implements IXposedModPack {
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!BrightnessHookEnabled || !listenPackage.equals(lpparam.packageName)) //master switch
             return;
 
-        mContext = context;
+
         
         Class<?> QuickQSPanelClass = XposedHelpers.findClass("com.android.systemui.qs.QuickQSPanel", lpparam.classLoader);
         Class<?> QSPanelControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);

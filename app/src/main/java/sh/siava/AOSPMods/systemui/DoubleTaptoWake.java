@@ -14,13 +14,15 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class DoubleTaptoWake implements IXposedModPack {
+public class DoubleTaptoWake extends IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
     public static boolean doubleTapToWake = false;
 
     private static boolean mDoubleTap = false;
-
+    
+    public DoubleTaptoWake(Context context) { super(context); }
+    
     @Override
     public void updatePrefs(String...Key) {
         doubleTapToWake = XPrefs.Xprefs.getBoolean("doubleTapToWake", false);
@@ -30,7 +32,7 @@ public class DoubleTaptoWake implements IXposedModPack {
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
     
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         Class<?> NotificationShadeWindowViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);

@@ -20,7 +20,7 @@ import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.XPrefs;
 
-public class QSHeaderManager implements IXposedModPack {
+public class QSHeaderManager extends IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     
     private static boolean lightQSHeaderEnabled = false;
@@ -28,8 +28,10 @@ public class QSHeaderManager implements IXposedModPack {
     private static boolean brightnessThickTrackEnabled = false;
     
     private static final ArrayList<View> tiles = new ArrayList<>();
-    private Context mContext;
     
+    public QSHeaderManager(Context context) { super(context); }
+    
+    @Override
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -63,10 +65,10 @@ public class QSHeaderManager implements IXposedModPack {
     }
     
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
         
-        mContext = context;
+
         Class<?> QSTileViewImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
         Class<?> UtilsClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
         Class<?> OngoingPrivacyChipClass = XposedHelpers.findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);

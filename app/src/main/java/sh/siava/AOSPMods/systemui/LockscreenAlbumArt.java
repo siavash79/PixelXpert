@@ -12,11 +12,13 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class LockscreenAlbumArt implements IXposedModPack {
+public class LockscreenAlbumArt extends IXposedModPack {
 	public static final String listenPackage = "com.android.systemui";
 	
 	private static boolean albumArtLockScreenEnabled = false;
 	private static boolean albumArtLockScreenHookEnabled = true;
+	
+	public LockscreenAlbumArt(Context context) { super(context); }
 	
 	@Override
 	public void updatePrefs(String... Key) {
@@ -28,7 +30,7 @@ public class LockscreenAlbumArt implements IXposedModPack {
 	public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 	
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if(!lpparam.packageName.equals(listenPackage) || !albumArtLockScreenHookEnabled) return;
 		
 		Class<?> NotificationMediaManagerClass = XposedHelpers.findClass("com.android.systemui.statusbar.NotificationMediaManager", lpparam.classLoader);

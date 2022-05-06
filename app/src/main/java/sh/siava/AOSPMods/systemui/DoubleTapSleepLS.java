@@ -13,11 +13,12 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class DoubleTapSleepLS implements IXposedModPack {
+public class DoubleTapSleepLS extends IXposedModPack {
 	public static final String listenPackage = "com.android.systemui";
 	public static boolean doubleTapToSleepEnabled = false;
 	
-	private Context mContext;
+	public DoubleTapSleepLS(Context context) { super(context); }
+	
 	private Object powerManager = null;
 	
 	public void updatePrefs(String...Key)
@@ -29,12 +30,10 @@ public class DoubleTapSleepLS implements IXposedModPack {
 	GestureDetector mLockscreenDoubleTapToSleep = null;
 	
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
 		if(!lpparam.packageName.equals(listenPackage)) return;
 		
-		mContext = context;
 		Class<?> NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
-		
 		
 		XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader,
 				"createTouchHandler", new XC_MethodHook() {

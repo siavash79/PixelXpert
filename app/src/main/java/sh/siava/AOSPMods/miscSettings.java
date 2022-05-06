@@ -8,8 +8,13 @@ import java.util.regex.Pattern;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-public class miscSettings implements IXposedModPack {
-
+public class miscSettings extends IXposedModPack {
+    
+    public miscSettings(Context context)
+    {
+        super(context);
+    }
+    
     @Override
     public void updatePrefs(String...Key) {
         if(XPrefs.Xprefs == null) return; //it won't be null. but anyway...
@@ -114,5 +119,5 @@ public class miscSettings implements IXposedModPack {
     public boolean listensTo(String packageName) { return packageName.equals("com.android.systemui"); }
     
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable { }
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable { }
 }

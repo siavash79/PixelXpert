@@ -31,7 +31,7 @@ import sh.siava.AOSPMods.XPrefs;
 
 //TODO: unknown battery symbol / percent text beside icon / update shape upon request / other shapes / dual tone
 
-public class BatteryStyleManager implements IXposedModPack {
+public class BatteryStyleManager extends IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     
     public static boolean customBatteryEnabled = false;
@@ -45,7 +45,8 @@ public class BatteryStyleManager implements IXposedModPack {
     private static int BatteryIconOpacity = 100;
     private static float[] batteryLevels = new float[]{20f, 40f};
     private static final ArrayList<Object> batteryViews = new ArrayList<>();
-    private Context mContext;
+    
+    public BatteryStyleManager(Context context) { super(context); }
     
     public static void setIsFastCharging(boolean isFastCharging)
     {
@@ -133,10 +134,10 @@ public class BatteryStyleManager implements IXposedModPack {
     }
     
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        mContext = context;
+
         
         XposedHelpers.findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
             @Override

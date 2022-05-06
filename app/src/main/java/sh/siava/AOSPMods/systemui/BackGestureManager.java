@@ -9,13 +9,16 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class BackGestureManager implements IXposedModPack {
+public class BackGestureManager extends IXposedModPack {
     private static final String listenPackage = "com.android.systemui";
     public static float backGestureHeightFractionLeft = 1f; // % of screen height. can be anything between 0 to 1
     public static float backGestureHeightFractionRight = 1f; // % of screen height. can be anything between 0 to 1
     public static boolean leftEnabled = true;
     public static boolean rightEnabled = true;
-
+    
+    public BackGestureManager(Context context) { super(context); }
+    
+    @Override
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -27,7 +30,7 @@ public class BackGestureManager implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         XposedHelpers.findAndHookMethod("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader,

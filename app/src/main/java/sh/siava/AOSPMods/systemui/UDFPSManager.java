@@ -9,13 +9,15 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class UDFPSManager implements IXposedModPack {
+public class UDFPSManager extends IXposedModPack {
     private static final String listenPackage = "com.android.systemui";
     public static boolean transparentBG = false;
 
     public static String UDFPS_hide_key = "fingerprint_circle_hide";
-    private Context mContext;
     
+    public UDFPSManager(Context context) { super(context); }
+    
+    @Override
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -26,10 +28,10 @@ public class UDFPSManager implements IXposedModPack {
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        mContext = context;
+
         Class<?> UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
 
 

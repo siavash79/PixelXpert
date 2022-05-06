@@ -9,8 +9,10 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class overScrollDisabler implements IXposedModPack {
+public class overScrollDisabler extends IXposedModPack {
 	private static boolean disableOverScroll = false;
+	
+	public overScrollDisabler(Context context) { super(context); }
 	
 	@Override
 	public void updatePrefs(String... Key) {
@@ -21,7 +23,7 @@ public class overScrollDisabler implements IXposedModPack {
 	public boolean listensTo(String packageName) { return true; } //This mod is compatible with every package
 	
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 	
 		Class<?> ViewClass = XposedHelpers.findClass("android.view.View", lpparam.classLoader);
 		

@@ -12,13 +12,15 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class NavBarResizer implements IXposedModPack {
+public class NavBarResizer extends IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean isEnabled = false;
     public static float sizeFactor = 1f;
 
     private static Object mNavigationBarInflaterView = null;
-
+    
+    public NavBarResizer(Context context) { super(context); }
+    
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -41,7 +43,7 @@ public class NavBarResizer implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         Class<?> NavigationBarInflaterViewClass = XposedHelpers.findClass("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader);

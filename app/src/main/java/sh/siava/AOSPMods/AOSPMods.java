@@ -89,12 +89,12 @@ public class AOSPMods implements IXposedHookLoadPackage{
                 for (Class<?> mod : modPacks)
                 {
                     try {
-                        IXposedModPack instance = ((IXposedModPack) mod.newInstance());
+                        IXposedModPack instance = ((IXposedModPack) mod.getConstructor(Context.class).newInstance(mContext));
                         if(!instance.listensTo(lpparam.packageName)) continue;
                         try {
                             instance.updatePrefs();
                         } catch(Throwable ignored){ }
-                        instance.handleLoadPackage(lpparam, mContext);
+                        instance.handleLoadPackage(lpparam);
                         runningMods.add(instance);
                     }
                     catch (Throwable T)

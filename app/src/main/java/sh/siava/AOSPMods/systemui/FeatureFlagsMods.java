@@ -9,11 +9,14 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class FeatureFlagsMods implements IXposedModPack {
+public class FeatureFlagsMods extends IXposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
     public static boolean combinedSignalEnabled = false;
+    
+    public FeatureFlagsMods(Context context) { super(context); }
 
+    @Override
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -21,7 +24,7 @@ public class FeatureFlagsMods implements IXposedModPack {
     }
 
     @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         if(Build.VERSION.SDK_INT < 32) return; //Feature flags is newly introduced!

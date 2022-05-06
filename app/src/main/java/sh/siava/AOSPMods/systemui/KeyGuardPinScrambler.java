@@ -13,10 +13,12 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class KeyGuardPinScrambler implements IXposedModPack {
+public class KeyGuardPinScrambler extends IXposedModPack {
 	public static final String listenPackage = "com.android.systemui";
 	
 	private static boolean shufflePinEnabled = false;
+	
+	public KeyGuardPinScrambler(Context context) { super(context); }
 	
 	@Override
 	public void updatePrefs(String... Key) {
@@ -29,7 +31,7 @@ public class KeyGuardPinScrambler implements IXposedModPack {
 	List digits = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 	
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam, Context context) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if(!lpparam.packageName.equals(listenPackage)) return;
 		
 		Class<?> KeyguardPinBasedInputViewControllerClass = XposedHelpers.findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);

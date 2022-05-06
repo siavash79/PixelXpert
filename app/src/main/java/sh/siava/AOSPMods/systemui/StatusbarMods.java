@@ -477,12 +477,13 @@ public class StatusbarMods implements IXposedModPack {
                         try
                         {
                             mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
-    
                         }
                         catch (Exception e)
-                        {
-                            mClockView = new FrameLayout(mContext);
+                        { //PE Plus
+                            Object mClockController = XposedHelpers.getObjectField(param.thisObject, "mClockController");
+                            mClockView = (View) XposedHelpers.callMethod(mClockController, "getClock");
                         }
+    
                         mClockParent = (ViewGroup) mClockView.getParent();
     
                         mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");

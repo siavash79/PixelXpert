@@ -343,6 +343,8 @@ public class SettingsActivity extends AppCompatActivity implements
                 boolean networkOnSBEnabled = sharedPreferences.getBoolean("networkOnSBEnabled", false);
                 findPreference("networkTrafficTreshold").setVisible(networkOnSBEnabled);
                 findPreference("networkTrafficPosition").setVisible(networkOnSBEnabled);
+    
+                findPreference("centerAreaFineTune").setSummary((sharedPreferences.getInt("centerAreaFineTune", 50) - 50) + "%");
             }catch (Exception ignored){}
         }
     

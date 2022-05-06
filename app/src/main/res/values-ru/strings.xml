@@ -49,6 +49,7 @@
     <string name="battery_icon_size_title">Размер значка батареи</string>
     <string name="battery_hidden">Скрытый</string>
     <string name="BIcon_Opacity_title">Полупрозрачный</string>
+    <string name="sb_center_fine_tune">Настройка центральной зоны</string>
 
     <string name="lte_4g_icon_title">Значок LTE / 4G</string>
     <string name="combined_signal_icon_title">Комбинированные значки сигналов</string>

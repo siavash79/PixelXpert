@@ -5,10 +5,10 @@ import android.content.Context;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class LTEiconChange extends IXposedModPack {
+public class LTEiconChange extends XposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static int SBLTEIcon = 0;
 

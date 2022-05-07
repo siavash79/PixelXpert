@@ -6,10 +6,10 @@ import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class QSFooterTextManager extends IXposedModPack {
+public class QSFooterTextManager extends XposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean customQSFooterTextEnabled = false;
     public static String customText = "";

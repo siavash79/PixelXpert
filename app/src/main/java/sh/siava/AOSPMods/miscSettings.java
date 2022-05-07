@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-public class miscSettings extends IXposedModPack {
+public class miscSettings extends XposedModPack {
     
     public miscSettings(Context context)
     {

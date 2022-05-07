@@ -4,9 +4,9 @@ import android.content.Context;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-public abstract class IXposedModPack {
+public abstract class XposedModPack {
     protected Context mContext;
-    public IXposedModPack(Context context)
+    public XposedModPack(Context context)
     {
         mContext = context;
     }

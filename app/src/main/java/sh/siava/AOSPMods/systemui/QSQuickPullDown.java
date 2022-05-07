@@ -6,10 +6,10 @@ import android.view.MotionEvent;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class QSQuickPullDown extends IXposedModPack {
+public class QSQuickPullDown extends XposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static int pullDownSide = 1; // 1 is right, 2 is left
     public static boolean oneFingerPulldownEnabled = false;

@@ -16,11 +16,11 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.XPrefs;
 
-public class QSHeaderManager extends IXposedModPack {
+public class QSHeaderManager extends XposedModPack {
     public static final String listenPackage = "com.android.systemui";
     
     private static boolean lightQSHeaderEnabled = false;

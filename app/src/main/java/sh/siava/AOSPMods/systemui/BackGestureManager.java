@@ -6,10 +6,10 @@ import android.graphics.Point;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class BackGestureManager extends IXposedModPack {
+public class BackGestureManager extends XposedModPack {
     private static final String listenPackage = "com.android.systemui";
     public static float backGestureHeightFractionLeft = 1f; // % of screen height. can be anything between 0 to 1
     public static float backGestureHeightFractionRight = 1f; // % of screen height. can be anything between 0 to 1

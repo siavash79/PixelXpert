@@ -11,10 +11,10 @@ import java.util.TimerTask;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class DoubleTaptoWake extends IXposedModPack {
+public class DoubleTaptoWake extends XposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
     public static boolean doubleTapToWake = false;

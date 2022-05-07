@@ -8,9 +8,9 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.XposedModPack;
 
-public class AOSPSettingsLauncher extends IXposedModPack {
+public class AOSPSettingsLauncher extends XposedModPack {
     private static final String listenPackage = "com.android.systemui";
 
 

@@ -22,10 +22,10 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.IXposedModPack;
+import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class screenOffKeys extends IXposedModPack {
+public class screenOffKeys extends XposedModPack {
     public static final String listenPackage = "android";
     private boolean torchOn = false;
     private static boolean replaceAssistantwithTorch = false;

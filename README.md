@@ -80,16 +80,16 @@ apsun@github for remote-preferences
 @nijel8 for double-tap to wake
 
 **Translations:**
-ElTifo@Github Portuguese
-cracky5322@Github Chinese Traditional
-JohnsonRan@Github Chinese Simplified
-TireX228@Github Russian
-ygorigor@Github Romanian
-krystianokris@Github Polish
-HofaTheRipper@Github German
-acuicultor@Github Spanish
-tomaja18@Github Spanish
-n3rd3x3@Github Spanish
+@ElTifo Portuguese
+@cracky5322 Chinese Traditional
+@JohnsonRan Chinese Simplified
+@TireX228 Russian
+@ygorigor Romanian
+@krystianokris Polish
+@HofaTheRipper German
+@acuicultor Spanish
+@tomaja18 Spanish
+@n3rd3x3 Spanish
 
 **Brought to you by:**
 @siavash79 & @ElTifo

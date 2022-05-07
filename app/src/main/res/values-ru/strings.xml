@@ -176,9 +176,12 @@
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Отключить звука скриншота</string>
     <string name="so_power_longpress_torch_title">Долгое нажатие кнопки питания для включения фонарика*</string>
+    <string name="so_taptaptorch_title">Включать фонарик при выключенном экране</string>
+    <string name="so_taptaptorch_summary">Двойное нажатие для включения фонарика</string>
+
     <string name="framework_needed_caution_summary">Требуется активация System Framework в Lsposed. ИСПОЛЬЗУЙТЕ С ОСТОРОЖНОСТЬЮ</string>
     <string name="so_double_tap_wake_title">Двойное нажатие для пробуждения телефона</string>
-    <string name="so_double_tap_wake_summary">Отключение однократного нажатия для пробуждения</string>
+    <string name="so_double_tap_wake_summary">Отключение двойного нажатия для пробуждения</string>
     <string name="doze_header">Когда экран выключен…</string>
     <string name="custom_themed_icons_title">Пользовательские тематические иконки</string>
     <string name="custom_themed_icons_off">Пользовательские значки отключены</string>

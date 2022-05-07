@@ -17,9 +17,11 @@ import sh.siava.AOSPMods.Utils.System;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
-public class DoubleTaptoWake extends XposedModPack {
+public class ScreenOffActions extends XposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
+    private static final long HOLD_DURATION = 1000;
+    
     private static boolean doubleTapToWake = false;
     private static boolean holdScreenTorchEnabled = false;
     
@@ -28,7 +30,7 @@ public class DoubleTaptoWake extends XposedModPack {
     
     boolean turnedOnFlash = false;
     
-    public DoubleTaptoWake(Context context) { super(context); }
+    public ScreenOffActions(Context context) { super(context); }
     
     
     @Override
@@ -107,7 +109,7 @@ public class DoubleTaptoWake extends XposedModPack {
                                 
                                 if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
                                 {
-                                   if(!turnedOnFlash && !System.isScreenCovered() && !System.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > 500)
+                                   if(!turnedOnFlash && !System.isScreenCovered() && !System.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
                                    {
                                        System.ToggleFlash();
                                        turnedOnFlash = true;

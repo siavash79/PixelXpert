@@ -1,21 +1,18 @@
 package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
-import android.os.Vibrator;
 import android.view.View;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.Utils.System;
 import sh.siava.AOSPMods.XPrefs;
+import sh.siava.AOSPMods.XposedModPack;
 
 public class QSHaptic extends XposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean QSHapticEnabled = false;
-    public static boolean hasVibrator = false;
-    private static Vibrator mVibrator;
     
     public QSHaptic(Context context) { super(context); }
     
@@ -33,18 +30,7 @@ public class QSHaptic extends XposedModPack {
 
 
         Class<?> QSTileImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
-
-        XposedBridge.hookAllConstructors(QSTileImplClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-                if(mVibrator.hasVibrator())
-                {
-                   hasVibrator = true;
-                }
-            }
-        });
-
+        
         XposedHelpers.findAndHookMethod(QSTileImplClass,
                 "click", View.class , new vibrateFeedback());
 
@@ -56,7 +42,7 @@ public class QSHaptic extends XposedModPack {
         @Override
         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
             if(!QSHapticEnabled) return;
-            XposedHelpers.callMethod(mVibrator, "vibrate", 50);
+            System.vibrate(50);
         }
     }
 

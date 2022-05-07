@@ -12,7 +12,6 @@ import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyCallback;
-import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.CharacterStyle;
@@ -41,11 +40,12 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.BuildConfig;
-import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.Utils.System;
 import sh.siava.AOSPMods.Utils.NetworkTrafficSB;
 import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.XPrefs;
+import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 
@@ -127,7 +127,7 @@ public class StatusbarMods extends XposedModPack {
     private Object mStatusBarIconController;
     private Class<?> StatusBarIcon;
     private Object volteStatusbarIcon;
-    private static TelephonyManager telephonyManager = null;
+    private boolean telephonyCallbackRegistered = false;
     private int lastVolteState = VOLTE_UNKNOWN;
     private final serverStateCallback volteCallback = new serverStateCallback();
     //endregion
@@ -653,12 +653,12 @@ public class StatusbarMods extends XposedModPack {
     private void initVolte() {
         
         try {
-            if (telephonyManager == null) {
+            if (!telephonyCallbackRegistered) {
                 Icon volteIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_volte);
                 //noinspection JavaReflectionMemberAccess
                 volteStatusbarIcon = StatusBarIcon.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, "volte");
-                telephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-                telephonyManager.registerTelephonyCallback(volteExec, volteCallback);
+                System.TelephonyManager().registerTelephonyCallback(volteExec, volteCallback);
+                telephonyCallbackRegistered = true;
             }
         }catch(Exception ignored){}
     }
@@ -666,8 +666,8 @@ public class StatusbarMods extends XposedModPack {
     private void removeVolte() {
         try
         {
-            telephonyManager.unregisterTelephonyCallback(volteCallback);
-            telephonyManager = null;
+            System.TelephonyManager().unregisterTelephonyCallback(volteCallback);
+            telephonyCallbackRegistered = false;
         }catch(Exception ignored){}
         removeVolteIcon();
     }
@@ -682,7 +682,7 @@ public class StatusbarMods extends XposedModPack {
     
     private void updateVolte()
     {
-        int newVolteState = (Boolean) XposedHelpers.callMethod(telephonyManager, "isVolteAvailable") ? VOLTE_AVAILABLE : VOLTE_NOT_AVAILABLE;
+        int newVolteState = (Boolean) XposedHelpers.callMethod(System.TelephonyManager(), "isVolteAvailable") ? VOLTE_AVAILABLE : VOLTE_NOT_AVAILABLE;
         if(lastVolteState != newVolteState)
         {
             lastVolteState = newVolteState;
@@ -797,7 +797,7 @@ public class StatusbarMods extends XposedModPack {
             {
                 Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
                 builder.appendPath("time");
-                builder.appendPath(Long.toString(System.currentTimeMillis()));
+                builder.appendPath(Long.toString(java.lang.System.currentTimeMillis()));
                 Intent todayIntent = new Intent(Intent.ACTION_VIEW, builder.build());
                 XposedHelpers.callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", todayIntent,0);
             }

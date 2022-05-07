@@ -2,18 +2,10 @@ package sh.siava.AOSPMods.android;
 
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.CameraMetadata;
-import android.media.AudioManager;
 import android.os.Handler;
-import android.os.PowerManager;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
-
-import androidx.annotation.NonNull;
 
 import java.lang.reflect.Method;
 import java.util.Calendar;
@@ -22,28 +14,18 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.Utils.System;
 import sh.siava.AOSPMods.XPrefs;
+import sh.siava.AOSPMods.XposedModPack;
 
 public class screenOffKeys extends XposedModPack {
     public static final String listenPackage = "android";
-    private boolean torchOn = false;
     private static boolean replaceAssistantwithTorch = false;
     private static boolean holdVolumeToSkip = false;
-    private CameraManager cameraManager = null;
     private long wakeTime = 0;
-    private AudioManager audioManager = null;
 //    private boolean isVolumeLongPress = false;
     private boolean isVolDown = false;
-    private PowerManager powerManager = null;
 
-    CameraManager.TorchCallback torchCallback = new CameraManager.TorchCallback() {
-        @Override
-        public void onTorchModeChanged(@NonNull String cameraId, boolean enabled) {
-            super.onTorchModeChanged(cameraId, enabled);
-            torchOn = enabled;
-        }
-    };
     
     public screenOffKeys(Context context) { super(context); }
     
@@ -57,10 +39,6 @@ public class screenOffKeys extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if (!lpparam.packageName.equals(listenPackage)) return;
         
-        audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-        cameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
-        cameraManager.registerTorchCallback(torchCallback, new Handler());
-        powerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         
         Class<?> PhoneWindowManager;
         Method powerLongPress;
@@ -83,11 +61,11 @@ public class screenOffKeys extends XposedModPack {
             Intent keyIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
             KeyEvent keyEvent = new KeyEvent(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), KeyEvent.ACTION_DOWN, (isVolDown) ? KeyEvent.KEYCODE_MEDIA_PREVIOUS : KeyEvent.KEYCODE_MEDIA_NEXT, 0);
             keyIntent.putExtra(Intent.EXTRA_KEY_EVENT, keyEvent);
-            audioManager.dispatchMediaKeyEvent(keyEvent);
+            System.AudioManager().dispatchMediaKeyEvent(keyEvent);
 
             keyEvent = KeyEvent.changeAction(keyEvent, KeyEvent.ACTION_UP);
             keyIntent.putExtra(Intent.EXTRA_KEY_EVENT, keyEvent);
-            audioManager.dispatchMediaKeyEvent(keyEvent);
+            System.AudioManager().dispatchMediaKeyEvent(keyEvent);
         };
 
         XposedBridge.hookMethod(interceptKeyBeforeQueueing, new XC_MethodHook() {
@@ -108,7 +86,7 @@ public class screenOffKeys extends XposedModPack {
                             }
                             return;
                         case KeyEvent.ACTION_DOWN:
-                            if (!powerManager.isInteractive() && (Keycode == KeyEvent.KEYCODE_VOLUME_DOWN || Keycode == KeyEvent.KEYCODE_VOLUME_UP) && audioManager.isMusicActive()) {
+                            if (!System.PowerManager().isInteractive() && (Keycode == KeyEvent.KEYCODE_VOLUME_DOWN || Keycode == KeyEvent.KEYCODE_VOLUME_UP) && System.AudioManager().isMusicActive()) {
                                 isVolDown = (Keycode == KeyEvent.KEYCODE_VOLUME_DOWN);
                                 mHandler.postDelayed(mVolumeLongPress, ViewConfiguration.getLongPressTimeout());
                             }
@@ -145,9 +123,9 @@ public class screenOffKeys extends XposedModPack {
                         return;
                     }
 
-                    toggleFlash();
+                    System.ToggleFlash();
                     param.setResult(null);
-                    XposedHelpers.callMethod(powerManager, "goToSleep", SystemClock.uptimeMillis());
+                    XposedHelpers.callMethod(System.PowerManager(), "goToSleep", SystemClock.uptimeMillis());
                 }
                 catch (Throwable T){
                     T.printStackTrace();
@@ -156,40 +134,7 @@ public class screenOffKeys extends XposedModPack {
         });
     }
 
-    private void toggleFlash() {
-        try {
-            if(cameraManager == null)
-            {
-                return;
-            }
 
-            String flashID = getFlashID(cameraManager);
-            if(flashID.equals(""))
-            {
-                return;
-            }
-            
-            cameraManager.setTorchMode(flashID, !torchOn);
-        }
-        catch(Throwable T)
-        {
-            T.printStackTrace();
-        }
-    }
-
-    private String getFlashID(CameraManager c) throws CameraAccessException {
-        String[] ids = c.getCameraIdList();
-        try {
-            for (String id : ids) {
-                if (c.getCameraCharacteristics(id).get(CameraCharacteristics.LENS_FACING) == CameraMetadata.LENS_FACING_BACK) {
-                    if (c.getCameraCharacteristics(id).get(CameraCharacteristics.FLASH_INFO_AVAILABLE)) {
-                        return id;
-                    }
-                }
-            }
-        }catch (Throwable e) {e.printStackTrace();}
-        return "";
-    }
     
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }

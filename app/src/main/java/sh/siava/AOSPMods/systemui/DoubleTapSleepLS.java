@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
-import android.os.SystemClock;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,16 +9,15 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.Utils.System;
 import sh.siava.AOSPMods.XPrefs;
+import sh.siava.AOSPMods.XposedModPack;
 
 public class DoubleTapSleepLS extends XposedModPack {
 	public static final String listenPackage = "com.android.systemui";
 	public static boolean doubleTapToSleepEnabled = false;
 	
 	public DoubleTapSleepLS(Context context) { super(context); }
-	
-	private Object powerManager = null;
 	
 	public void updatePrefs(String...Key)
 	{
@@ -66,16 +64,10 @@ public class DoubleTapSleepLS extends XposedModPack {
 				new XC_MethodHook() {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						Object mView = XposedHelpers.getObjectField(param.thisObject, "mView");
-						
-						powerManager = mContext.getSystemService(Context.POWER_SERVICE);
-						
 						mLockscreenDoubleTapToSleep = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
 							@Override
 							public boolean onDoubleTap(MotionEvent e) {
-								if (powerManager != null) {
-									XposedHelpers.callMethod(powerManager, "goToSleep", SystemClock.uptimeMillis());
-								}
+								System.Sleep();
 								return true;
 							}
 						});

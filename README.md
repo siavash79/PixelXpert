@@ -71,25 +71,25 @@ These mods are designed based on AOSP source code. What does it mean? it means t
 - You can use AOSPMods app to configure the module
 
 **Credits / Thanks:**
-Android Team
-@topjohnwu for Magisk
-@rovo89 for Xposed
-Team LSPosed
-Team EvolutionX (Specially @kdrag0n). Most of the mods are based on their work
-apsun@github for remote-preferences
-@nijel8 for double-tap to wake
+- Android Team
+- @topjohnwu for Magisk
+- @rovo89 for Xposed
+- Team LSPosed
+- Team EvolutionX (Specially @kdrag0n). Most of the mods are based on their work
+- apsun@github for remote-preferences
+- @nijel8 for double-tap to wake
 
 **Translations:**
-@ElTifo Portuguese
-@cracky5322 Chinese Traditional
-@JohnsonRan Chinese Simplified
-@TireX228 Russian
-@ygorigor Romanian
-@krystianokris Polish
-@HofaTheRipper German
-@acuicultor Spanish
-@tomaja18 Spanish
-@n3rd3x3 Spanish
+- @ElTifo Portuguese
+- @cracky5322 Chinese Traditional
+- @JohnsonRan Chinese Simplified
+- @TireX228 Russian
+- @ygorigor Romanian
+- @krystianokris Polish
+- @HofaTheRipper German
+- @acuicultor Spanish
+- @tomaja18 Spanish
+- @n3rd3x3 Spanish
 
 **Brought to you by:**
 @siavash79 & @ElTifo

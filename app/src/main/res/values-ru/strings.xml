@@ -124,6 +124,7 @@
     <string name="wifi_cell_off">Использовать одну плитку интернета</string>
     <string name="QQS_brightness_category">Параметры ползунка яркости</string>
     <string name="QQS_brightness_title">Показывать ползунок яркости в полураскрытой панели быстрых настроек</string>
+    <string name="QQS_brightness_bottom_title">Переместить ползунок яркости в нижнюю часть быстрых настроек</string>
     <string name="QS_brightness_disable_title">Скрыть ползунок яркости из быстрых настроек</string>
     <string name="bs_thick_track">Использовать толстый ползунок яркости</string>
     <string name="quick_settings_tiles_category">Параметры быстрых настроек</string>

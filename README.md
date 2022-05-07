@@ -92,4 +92,4 @@ tomaja18@Github Spanish
 n3rd3x3@Github Spanish
 
 **Brought to you by:**
-@siavash79 & @Typhus_
+@siavash79 & @ElTifo

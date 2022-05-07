@@ -24,7 +24,8 @@ public class ScreenOffActions extends XposedModPack {
     
     private static boolean doubleTapToWake = false;
     private static boolean holdScreenTorchEnabled = false;
-    
+    private static int upCount = 0;
+
     private static boolean mDoubleTap = false;
     
     
@@ -107,9 +108,21 @@ public class ScreenOffActions extends XposedModPack {
                                 
                                 int action = ev.getActionMasked();
                                 
+                                if(action == MotionEvent.ACTION_UP)
+                                {
+                                    upCount++;
+                                    new Timer().schedule(new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            upCount = 0;
+                                        }
+                                    }, 2000);
+                                }
+                                XposedBridge.log("count" + upCount);
+                                
                                 if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
                                 {
-                                   if(!turnedOnFlash && !System.isScreenCovered() && !System.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
+                                   if(upCount == 2 && !turnedOnFlash && !System.isScreenCovered() && !System.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
                                    {
                                        System.ToggleFlash();
                                        turnedOnFlash = true;

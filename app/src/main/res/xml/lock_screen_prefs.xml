@@ -4,6 +4,11 @@
     android:visibility="visible">
     <SwitchPreference
         android:defaultValue="false"
+        android:key="holdScreenTorchEnabled"
+        android:title="@string/so_taptaptorch_title"
+        app:summary="@string/so_taptaptorch_summary" />
+    <SwitchPreference
+        android:defaultValue="false"
         android:key="@string/UDFPS_hide_key"
         android:summaryOff="@string/transparent_fingerprint_circle_off"
         android:title="@string/transparent_fingerprint_circle"

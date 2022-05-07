@@ -26,10 +26,10 @@ public class ScreenOffActions extends XposedModPack {
     private static boolean doubleTapToWake = false;
     private static boolean holdScreenTorchEnabled = false;
     private static int upCount = 0;
-
+    private static boolean turnedByTTT = false;
     private static boolean mDoubleTap = false;
     
-    boolean turnedOnFlash = false;
+    long flashOnEventTime = -1;
     
     public ScreenOffActions(Context context) { super(context); }
     
@@ -48,7 +48,7 @@ public class ScreenOffActions extends XposedModPack {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
-    
+        
         Class<?> NotificationShadeWindowViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);
         Class<?> DozeTriggersClass = XposedHelpers.findClass("com.android.systemui.doze.DozeTriggers", lpparam.classLoader);
 
@@ -79,6 +79,7 @@ public class ScreenOffActions extends XposedModPack {
 
                         Object mGestureDetector = XposedHelpers.getObjectField(param.thisObject, "mGestureDetector");
                         Object mListener = XposedHelpers.getObjectField(mGestureDetector, "mListener");
+                        Object mKeyguardStateController = XposedHelpers.getObjectField(param.thisObject, "mKeyguardStateController");
     
                         XposedHelpers.findAndHookMethod(mListener.getClass(),
                                 "onSingleTapConfirmed", MotionEvent.class, new XC_MethodHook() {
@@ -108,27 +109,30 @@ public class ScreenOffActions extends XposedModPack {
                                 
                                 int action = ev.getActionMasked();
                                 
-                                if(action == MotionEvent.ACTION_UP)
+                                if(action == MotionEvent.ACTION_UP && (boolean) XposedHelpers.callMethod(mKeyguardStateController, "isShowing"))
                                 {
                                     upCount++;
                                     new Timer().schedule(new TimerTask() {
                                         @Override
-                                        public void run() { upCount --; }
+                                        public void run() { if(upCount > 0) upCount --; }
                                     }, HOLD_DURATION * TAP_COUNT);
                                 }
                                 
                                 if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
                                 {
-                                   if((upCount > TAP_COUNT - 2) && !turnedOnFlash && !System.isScreenCovered() && !System.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
-                                   {
-                                       System.ToggleFlash();
-                                       turnedOnFlash = true;
-                                   }
+                                    if((upCount > TAP_COUNT - 2) && !System.isScreenCovered() && !System.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
+                                    {
+                                        flashOnEventTime = ev.getDownTime();
+                                        turnedByTTT = true;
+                                        XposedHelpers.callMethod(System.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
+                                        upCount = 0;
+                                        System.setFlash(true);
+                                    }
                                 }
-                                else if(turnedOnFlash && System.isFlashOn())
+                                else if(turnedByTTT)
                                 {
-                                    System.ToggleFlash();
-                                    turnedOnFlash = false;
+                                    turnedByTTT = false;
+                                    System.setFlash(false);
                                 }
                             }
                         });

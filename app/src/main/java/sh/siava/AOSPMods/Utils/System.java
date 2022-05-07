@@ -14,7 +14,8 @@ import android.media.AudioManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.SystemClock;
-import android.os.Vibrator;
+import android.os.VibrationEffect;
+import android.os.VibratorManager;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.NonNull;
@@ -26,10 +27,10 @@ public class System {
 	
 	Context mContext;
 	CameraManager mCameraManager;
-	Vibrator mVibrator;
+	VibratorManager mVibrationManager;
 	SensorManager mSensorManager;
 	boolean torchOn = false;
-	boolean hasVibrator = false;
+	boolean hasVibrator;
 	AudioManager mAudioManager;
 	PowerManager mPowerManager;
 	Sensor mProximitySensor;
@@ -62,6 +63,13 @@ public class System {
 		instance.toggleFlashInternal();
 	}
 	
+	public static void setFlash(boolean enabled)
+	{
+		if(instance == null) return;
+		instance.setFlashInternal(enabled);
+	}
+	
+	
 	public static AudioManager AudioManager()
 	{
 		if(instance == null) return null;
@@ -74,6 +82,7 @@ public class System {
 		return instance.mPowerManager;
 	}
 	
+	
 	public static TelephonyManager TelephonyManager()
 	{
 		if(instance == null) return null;
@@ -81,10 +90,10 @@ public class System {
 	}
 	
 	@SuppressLint("MissingPermission")
-	public static void vibrate(long duration)
+	public static void vibrate(VibrationEffect effect)
 	{
 		if(instance == null || !instance.hasVibrator) return;
-		instance.mVibrator.vibrate(duration);
+		instance.mVibrationManager.getDefaultVibrator().vibrate(effect);
 	}
 	
 	public static void Sleep()
@@ -101,7 +110,7 @@ public class System {
 		
 		mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
 		mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-		mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+		mVibrationManager = (VibratorManager) mContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
 		mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 		mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
 		mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
@@ -112,11 +121,11 @@ public class System {
 		mSensorManager.registerListener(proximityListener, mProximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
 		mCameraManager.registerTorchCallback(torchCallback, new Handler());
 		
-		hasVibrator = mVibrator.hasVibrator();
+		hasVibrator = mVibrationManager.getDefaultVibrator().hasVibrator();
 	}
 	
-	
-	private void toggleFlashInternal() {
+	private void setFlashInternal(boolean enabled)
+	{
 		try {
 			if(mCameraManager == null)
 			{
@@ -128,13 +137,12 @@ public class System {
 			{
 				return;
 			}
-			
-			mCameraManager.setTorchMode(flashID, !torchOn);
-		}
-		catch(Throwable T)
-		{
-			T.printStackTrace();
-		}
+			mCameraManager.setTorchMode(flashID, enabled);
+		}catch (Exception ignored){}
+	}
+	
+	private void toggleFlashInternal() {
+		setFlashInternal(!torchOn);
 	}
 	
 	private String getFlashID(CameraManager c) throws CameraAccessException {

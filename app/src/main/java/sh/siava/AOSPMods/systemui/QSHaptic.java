@@ -1,6 +1,7 @@
 package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
+import android.os.VibrationEffect;
 import android.view.View;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -42,7 +43,7 @@ public class QSHaptic extends XposedModPack {
         @Override
         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
             if(!QSHapticEnabled) return;
-            System.vibrate(50);
+            System.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
         }
     }
 

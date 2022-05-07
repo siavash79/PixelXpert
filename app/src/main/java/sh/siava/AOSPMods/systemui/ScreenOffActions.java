@@ -1,4 +1,4 @@
-//Credits go to nijel8 @XDA Thanks!
+//Credits of double tap to wake go to nijel8 @XDA Thanks!
 
 package sh.siava.AOSPMods.systemui;
 
@@ -20,14 +20,14 @@ import sh.siava.AOSPMods.XposedModPack;
 public class ScreenOffActions extends XposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
-    private static final long HOLD_DURATION = 1000;
+    private static final long HOLD_DURATION = 400;
+    private static final int TAP_COUNT = 2;
     
     private static boolean doubleTapToWake = false;
     private static boolean holdScreenTorchEnabled = false;
     private static int upCount = 0;
 
     private static boolean mDoubleTap = false;
-    
     
     boolean turnedOnFlash = false;
     
@@ -37,7 +37,7 @@ public class ScreenOffActions extends XposedModPack {
     @Override
     public void updatePrefs(String...Key) {
         doubleTapToWake = XPrefs.Xprefs.getBoolean("doubleTapToWake", false);
-        holdScreenTorchEnabled = XPrefs.Xprefs.getBoolean("holdScreenTorchEnabled", true); //TODO false
+        holdScreenTorchEnabled = XPrefs.Xprefs.getBoolean("holdScreenTorchEnabled", false);
     }
 
     @Override
@@ -52,8 +52,8 @@ public class ScreenOffActions extends XposedModPack {
         Class<?> NotificationShadeWindowViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);
         Class<?> DozeTriggersClass = XposedHelpers.findClass("com.android.systemui.doze.DozeTriggers", lpparam.classLoader);
 
-        XposedHelpers.findAndHookMethod(DozeTriggersClass,
-                "onSensor", int.class, float.class, float.class, float[].class, new XC_MethodHook() {
+        XposedBridge.hookAllMethods(DozeTriggersClass,
+                "onSensor", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if(!doubleTapToWake) return;
@@ -113,16 +113,13 @@ public class ScreenOffActions extends XposedModPack {
                                     upCount++;
                                     new Timer().schedule(new TimerTask() {
                                         @Override
-                                        public void run() {
-                                            upCount = 0;
-                                        }
-                                    }, 2000);
+                                        public void run() { upCount --; }
+                                    }, HOLD_DURATION * TAP_COUNT);
                                 }
-                                XposedBridge.log("count" + upCount);
                                 
                                 if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
                                 {
-                                   if(upCount == 2 && !turnedOnFlash && !System.isScreenCovered() && !System.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
+                                   if((upCount > TAP_COUNT - 2) && !turnedOnFlash && !System.isScreenCovered() && !System.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
                                    {
                                        System.ToggleFlash();
                                        turnedOnFlash = true;

@@ -12,7 +12,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.IXposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
-public class QQSBrightness extends IXposedModPack {
+public class BrightnessSlider extends IXposedModPack {
     private static final String listenPackage = "com.android.systemui";
 
     private Object mBrightnessMirrorHandlerController = null;
@@ -31,7 +31,7 @@ public class QQSBrightness extends IXposedModPack {
     private static boolean QQSBrightnessEnabled = false;
     private static boolean QSBrightnessDisabled = false;
 
-    public QQSBrightness(Context context) { super(context); }
+    public BrightnessSlider(Context context) { super(context); }
 
     @Override
     public void updatePrefs(String... Key) {

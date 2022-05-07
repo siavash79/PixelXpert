@@ -27,7 +27,7 @@ import sh.siava.AOSPMods.systemui.LTEiconChange;
 import sh.siava.AOSPMods.systemui.LockscreenAlbumArt;
 import sh.siava.AOSPMods.systemui.NavBarResizer;
 import sh.siava.AOSPMods.systemui.NotificationExpander;
-import sh.siava.AOSPMods.systemui.QQSBrightness;
+import sh.siava.AOSPMods.systemui.BrightnessSlider;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSHaptic;
 import sh.siava.AOSPMods.systemui.QSHeaderManager;
@@ -66,7 +66,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(DoubleTaptoWake.class);
         modPacks.add(AOSPSettingsLauncher.class);
         modPacks.add(miscSettings.class);
-        modPacks.add(QQSBrightness.class);
+        modPacks.add(BrightnessSlider.class);
         modPacks.add(NotificationExpander.class);
         modPacks.add(TaskbarActivator.class);
         modPacks.add(LockscreenAlbumArt.class);

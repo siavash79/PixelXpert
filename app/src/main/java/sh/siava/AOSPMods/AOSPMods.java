@@ -19,8 +19,7 @@ import sh.siava.AOSPMods.systemui.BackGestureManager;
 import sh.siava.AOSPMods.systemui.BackToKill;
 import sh.siava.AOSPMods.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.systemui.CarrierTextManager;
-import sh.siava.AOSPMods.systemui.DoubleTapSleepLS;
-import sh.siava.AOSPMods.systemui.ScreenOffActions;
+import sh.siava.AOSPMods.systemui.ScreenGestures;
 import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
 import sh.siava.AOSPMods.systemui.KeyGuardPinScrambler;
 import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
@@ -52,7 +51,6 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(BackToKill.class);
         modPacks.add(BatteryStyleManager.class);
         modPacks.add(CarrierTextManager.class);
-        modPacks.add(DoubleTapSleepLS.class);
         modPacks.add(FeatureFlagsMods.class);
         modPacks.add(KeyguardBottomArea.class);
         modPacks.add(LTEiconChange.class);
@@ -64,7 +62,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(ScreenshotController.class);
         modPacks.add(UDFPSManager.class);
         modPacks.add(screenOffKeys.class);
-        modPacks.add(ScreenOffActions.class);
+        modPacks.add(ScreenGestures.class);
         modPacks.add(AOSPSettingsLauncher.class);
         modPacks.add(miscSettings.class);
         modPacks.add(BrightnessSlider.class);

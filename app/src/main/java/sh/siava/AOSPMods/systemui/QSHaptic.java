@@ -7,7 +7,7 @@ import android.view.View;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Utils.System;
+import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
@@ -43,7 +43,7 @@ public class QSHaptic extends XposedModPack {
         @Override
         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
             if(!QSHapticEnabled) return;
-            System.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
+            SystemUtils.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
         }
     }
 

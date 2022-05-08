@@ -10,7 +10,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Utils.System;
+import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.allApps.overScrollDisabler;
 import sh.siava.AOSPMods.android.screenOffKeys;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
@@ -109,7 +109,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     private void setContext(Context context) {
         mContext = context;
         XposedBridge.log(mContext.getPackageName());
-        new System(context);
+        new SystemUtils(context);
         XPrefs.loadPrefs(mContext);
     }
     

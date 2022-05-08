@@ -12,6 +12,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -166,7 +167,10 @@ public class KeyguardBottomArea extends XposedModPack {
             case "assistant":
                 listener = v -> XposedHelpers.callMethod(thisObject, "launchVoiceAssist");
                 drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_mic_26dp", "drawable", mContext.getPackageName()), mContext.getTheme());
-                
+                break;
+            case "torch":
+                listener = v -> SystemUtils.ToggleFlash();
+                drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("@android:drawable/ic_qs_flashlight", "drawable", mContext.getPackageName()), mContext.getTheme());
                 break;
         }
         if(type.length() > 0) {

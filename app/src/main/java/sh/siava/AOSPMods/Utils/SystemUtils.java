@@ -22,8 +22,8 @@ import androidx.annotation.NonNull;
 
 import de.robv.android.xposed.XposedHelpers;
 
-public class System {
-	static System instance;
+public class SystemUtils {
+	static SystemUtils instance;
 	
 	Context mContext;
 	CameraManager mCameraManager;
@@ -103,7 +103,7 @@ public class System {
 		XposedHelpers.callMethod(instance.mPowerManager, "goToSleep", SystemClock.uptimeMillis());
 	}
 	
-	public System(Context context)
+	public SystemUtils(Context context)
 	{
 		mContext = context;
 		instance = this;

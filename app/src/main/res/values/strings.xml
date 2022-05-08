@@ -39,6 +39,7 @@
     <string name="LSrightShortcutTitle">Right shortcut</string>
     <string name="camera_shortcut">Camera</string>
     <string name="assistant_shortcut">Assistant</string>
+    <string name="torch_shortcut">Flashlight</string>
     <string name="album_art_category">Media options</string>
     <string name="album_art_title">Enable album art when playing media</string>
     <string name="shufflePin_title">Shuffle Pin</string>

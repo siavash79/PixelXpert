@@ -41,7 +41,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
-import sh.siava.AOSPMods.Utils.System;
+import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.Utils.NetworkTrafficSB;
 import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.XPrefs;
@@ -657,7 +657,7 @@ public class StatusbarMods extends XposedModPack {
                 Icon volteIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_volte);
                 //noinspection JavaReflectionMemberAccess
                 volteStatusbarIcon = StatusBarIcon.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, "volte");
-                System.TelephonyManager().registerTelephonyCallback(volteExec, volteCallback);
+                SystemUtils.TelephonyManager().registerTelephonyCallback(volteExec, volteCallback);
                 telephonyCallbackRegistered = true;
             }
         }catch(Exception ignored){}
@@ -666,7 +666,7 @@ public class StatusbarMods extends XposedModPack {
     private void removeVolte() {
         try
         {
-            System.TelephonyManager().unregisterTelephonyCallback(volteCallback);
+            SystemUtils.TelephonyManager().unregisterTelephonyCallback(volteCallback);
             telephonyCallbackRegistered = false;
         }catch(Exception ignored){}
         removeVolteIcon();
@@ -682,7 +682,7 @@ public class StatusbarMods extends XposedModPack {
     
     private void updateVolte()
     {
-        int newVolteState = (Boolean) XposedHelpers.callMethod(System.TelephonyManager(), "isVolteAvailable") ? VOLTE_AVAILABLE : VOLTE_NOT_AVAILABLE;
+        int newVolteState = (Boolean) XposedHelpers.callMethod(SystemUtils.TelephonyManager(), "isVolteAvailable") ? VOLTE_AVAILABLE : VOLTE_NOT_AVAILABLE;
         if(lastVolteState != newVolteState)
         {
             lastVolteState = newVolteState;

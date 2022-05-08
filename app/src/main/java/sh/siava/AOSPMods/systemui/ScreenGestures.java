@@ -15,7 +15,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Utils.System;
+import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
@@ -55,7 +55,7 @@ public class ScreenGestures extends XposedModPack {
         mLockscreenDoubleTapToSleep = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onDoubleTap(MotionEvent e) {
-                System.Sleep();
+                SystemUtils.Sleep();
                 return true;
             }
         });
@@ -123,7 +123,7 @@ public class ScreenGestures extends XposedModPack {
                                 if(doubleTap && action == MotionEvent.ACTION_UP)
                                 {
                                     if(doubleTapToSleepEnabled && !isDozing)
-                                        System.Sleep();
+                                        SystemUtils.Sleep();
                                     doubleTap = false;
                                 }
     
@@ -133,12 +133,12 @@ public class ScreenGestures extends XposedModPack {
                                     if(!holdScreenTorchEnabled) return;
                                     if((action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE))
                                     {
-                                        if(doubleTap && !System.isScreenCovered() && !System.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
+                                        if(doubleTap && !SystemUtils.isScreenCovered() && !SystemUtils.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
                                         {
                                             flashOnEventTime = ev.getDownTime();
                                             turnedByTTT = true;
-                                            XposedHelpers.callMethod(System.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
-                                            System.setFlash(true);
+                                            XposedHelpers.callMethod(SystemUtils.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
+                                            SystemUtils.setFlash(true);
                                         }
                                         if(turnedByTTT)
                                         {
@@ -148,7 +148,7 @@ public class ScreenGestures extends XposedModPack {
                                     else if(turnedByTTT)
                                     {
                                         turnedByTTT = false;
-                                        System.setFlash(false);
+                                        SystemUtils.setFlash(false);
                                     }
                                 }
                             }

@@ -1,6 +1,8 @@
 **Changelog:**
+- Added double-tap torch on lockscreen (and AOD)
 - Added option to fine tune statusbar center area
 - Added option to move brightness slider to the bottom
+- Added Flashlight lockscreen shortcut
 - Bugfixes
 
 **Compatibility:**

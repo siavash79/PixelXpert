@@ -14,7 +14,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Utils.System;
+import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
@@ -61,11 +61,11 @@ public class screenOffKeys extends XposedModPack {
             Intent keyIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
             KeyEvent keyEvent = new KeyEvent(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), KeyEvent.ACTION_DOWN, (isVolDown) ? KeyEvent.KEYCODE_MEDIA_PREVIOUS : KeyEvent.KEYCODE_MEDIA_NEXT, 0);
             keyIntent.putExtra(Intent.EXTRA_KEY_EVENT, keyEvent);
-            System.AudioManager().dispatchMediaKeyEvent(keyEvent);
+            SystemUtils.AudioManager().dispatchMediaKeyEvent(keyEvent);
 
             keyEvent = KeyEvent.changeAction(keyEvent, KeyEvent.ACTION_UP);
             keyIntent.putExtra(Intent.EXTRA_KEY_EVENT, keyEvent);
-            System.AudioManager().dispatchMediaKeyEvent(keyEvent);
+            SystemUtils.AudioManager().dispatchMediaKeyEvent(keyEvent);
         };
 
         XposedBridge.hookMethod(interceptKeyBeforeQueueing, new XC_MethodHook() {
@@ -86,7 +86,7 @@ public class screenOffKeys extends XposedModPack {
                             }
                             return;
                         case KeyEvent.ACTION_DOWN:
-                            if (!System.PowerManager().isInteractive() && (Keycode == KeyEvent.KEYCODE_VOLUME_DOWN || Keycode == KeyEvent.KEYCODE_VOLUME_UP) && System.AudioManager().isMusicActive()) {
+                            if (!SystemUtils.PowerManager().isInteractive() && (Keycode == KeyEvent.KEYCODE_VOLUME_DOWN || Keycode == KeyEvent.KEYCODE_VOLUME_UP) && SystemUtils.AudioManager().isMusicActive()) {
                                 isVolDown = (Keycode == KeyEvent.KEYCODE_VOLUME_DOWN);
                                 mHandler.postDelayed(mVolumeLongPress, ViewConfiguration.getLongPressTimeout());
                             }
@@ -123,9 +123,9 @@ public class screenOffKeys extends XposedModPack {
                         return;
                     }
 
-                    System.ToggleFlash();
+                    SystemUtils.ToggleFlash();
                     param.setResult(null);
-                    XposedHelpers.callMethod(System.PowerManager(), "goToSleep", SystemClock.uptimeMillis());
+                    XposedHelpers.callMethod(SystemUtils.PowerManager(), "goToSleep", SystemClock.uptimeMillis());
                 }
                 catch (Throwable T){
                     T.printStackTrace();

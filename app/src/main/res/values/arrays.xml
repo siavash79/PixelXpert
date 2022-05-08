@@ -4,12 +4,14 @@
         <item>@string/overlay_none_title</item>
         <item>@string/camera_shortcut</item>
         <item>@string/assistant_shortcut</item>
+        <item>@string/torch_shortcut</item>
     </array>
 
     <array name="lockScreenShortcut_values">
         <item>""</item>
         <item>camera</item>
         <item>assistant</item>
+        <item>torch</item>
     </array>
 
     <string-array name="qs_pulldown_side_names">

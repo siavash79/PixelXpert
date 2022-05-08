@@ -29,7 +29,7 @@ public class DoubleTapSleepLS extends XposedModPack {
 	
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-		if(!lpparam.packageName.equals(listenPackage)) return;
+		if(!lpparam.packageName.equals(listenPackage) || true) return;
 		
 		Class<?> NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
 		

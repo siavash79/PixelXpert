@@ -5,6 +5,7 @@ package sh.siava.AOSPMods.systemui;
 import android.content.Context;
 import android.os.SystemClock;
 import android.view.MotionEvent;
+import android.view.View;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,6 +24,8 @@ public class ScreenOffActions extends XposedModPack {
     private static final long HOLD_DURATION = 400;
     private static final int TAP_COUNT = 2;
     
+    public static boolean doubleTapToSleepEnabled = false;
+    
     private static boolean doubleTapToWake = false;
     private static boolean holdScreenTorchEnabled = false;
     private static int upCount = 0;
@@ -30,6 +33,7 @@ public class ScreenOffActions extends XposedModPack {
     private static boolean mDoubleTap = false;
     
     long flashOnEventTime = -1;
+    private Object NPVC;
     
     public ScreenOffActions(Context context) { super(context); }
     
@@ -38,6 +42,8 @@ public class ScreenOffActions extends XposedModPack {
     public void updatePrefs(String...Key) {
         doubleTapToWake = XPrefs.Xprefs.getBoolean("doubleTapToWake", false);
         holdScreenTorchEnabled = XPrefs.Xprefs.getBoolean("holdScreenTorchEnabled", false);
+        doubleTapToSleepEnabled = XPrefs.Xprefs.getBoolean("DoubleTapSleep", false);
+    
     }
 
     @Override
@@ -51,7 +57,15 @@ public class ScreenOffActions extends XposedModPack {
         
         Class<?> NotificationShadeWindowViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);
         Class<?> DozeTriggersClass = XposedHelpers.findClass("com.android.systemui.doze.DozeTriggers", lpparam.classLoader);
-
+        Class<?> NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
+    
+        XposedBridge.hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                NPVC = param.thisObject;
+            }
+        });
+    
         XposedBridge.hookAllMethods(DozeTriggersClass,
                 "onSensor", new XC_MethodHook() {
                     @Override
@@ -100,25 +114,56 @@ public class ScreenOffActions extends XposedModPack {
                                     }
                                 });
                         
+                        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader,
+                                "createTouchHandler", new XC_MethodHook() {
+                                    @Override
+                                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                        Object touchHandler = param.getResult();
+                                        Object ThisNotificationPanel = param.thisObject;
+                    
+                                        XposedHelpers.findAndHookMethod(touchHandler.getClass(),
+                                                "onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
+                                                    @Override
+                                                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                                        if(!doubleTapToSleepEnabled) return;
+                                    
+                                                        boolean mPulsing = (boolean) XposedHelpers.getObjectField(ThisNotificationPanel, "mPulsing");
+                                                        boolean mDozing = (boolean) XposedHelpers.getObjectField(ThisNotificationPanel, "mDozing");
+                                                        int mBarState = (int) XposedHelpers.getObjectField(ThisNotificationPanel, "mBarState");
+                                                        
+                                                        MotionEvent ev = (MotionEvent) param.args[0];
+                                                        
+                                                        XposedBridge.log("ac "+ ev.getActionMasked());
+                                                        
+                                                        if(ev.getActionMasked() == MotionEvent.ACTION_UP)
+                                                        {
+                                                            XposedBridge.log("received up");
+                                                        }
+                                    
+                                                        if (!mPulsing && !mDozing
+                                                                && mBarState < 2) {
+                                                            OnUpAction();
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                });
+    
+    
                         XposedBridge.hookAllMethods(mGestureDetector.getClass(), "onTouchEvent", new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                if(!holdScreenTorchEnabled) return;
-                                
                                 MotionEvent ev = (MotionEvent) param.args[0];
                                 
                                 int action = ev.getActionMasked();
                                 
-                                if(action == MotionEvent.ACTION_UP && (boolean) XposedHelpers.callMethod(mKeyguardStateController, "isShowing"))
+                                if(action == MotionEvent.ACTION_UP)
                                 {
-                                    upCount++;
-                                    new Timer().schedule(new TimerTask() {
-                                        @Override
-                                        public void run() { if(upCount > 0) upCount --; }
-                                    }, HOLD_DURATION * TAP_COUNT);
+                                    OnUpAction();
                                 }
                                 
-                                if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
+                                if(!holdScreenTorchEnabled) return;
+                                if((action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) && (boolean) XposedHelpers.callMethod(mKeyguardStateController, "isShowing"))
                                 {
                                     if((upCount > TAP_COUNT - 2) && !System.isScreenCovered() && !System.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
                                     {
@@ -138,5 +183,19 @@ public class ScreenOffActions extends XposedModPack {
                         });
                     }
                 });
+    }
+    
+    private void OnUpAction() {
+        upCount++;
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() { if(upCount > 0) upCount --; }
+        }, HOLD_DURATION * TAP_COUNT);
+        XposedBridge.log("up "+ upCount);
+        if(upCount >= 2 && doubleTapToSleepEnabled && !XposedHelpers.getBooleanField(NPVC, "mDozing"))
+        {
+            System.Sleep();
+            upCount = 0;
+        }
     }
 }

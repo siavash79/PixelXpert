@@ -35,6 +35,7 @@
     <string name="LSrightShortcutTitle">Правый ярлык</string>
     <string name="camera_shortcut">Камера</string>
     <string name="assistant_shortcut">Ассистент</string>
+    <string name="torch_shortcut">Фонарик</string>
     <string name="album_art_category">Параметры мультимедиа</string>
     <string name="album_art_title">Показывать обложки альбомов при воспроизведении медиафайлов</string>
     <string name="shufflePin_title">Случайный PIN-код</string>
@@ -177,7 +178,7 @@
     <string name="screenshot_sound_disable_title">Отключить звука скриншота</string>
     <string name="so_power_longpress_torch_title">Долгое нажатие кнопки питания для включения фонарика*</string>
     <string name="so_taptaptorch_title">Двойное нажатие для включения фонарика</string>
-    <string name="so_taptaptorch_summary">Двойное нажатие для быстрого включения фонарика - Если включено двойное нажатие для перехода в спящий режим, во избежание конфликтов предлагается медленное двойное нажатие для включения фонарика</string>
+    <string name="so_taptaptorch_summary">Двойное нажатие для быстрого включения фонарика</string>
 
     <string name="framework_needed_caution_summary">Требуется активация System Framework в Lsposed. ИСПОЛЬЗУЙТЕ С ОСТОРОЖНОСТЬЮ</string>
     <string name="so_double_tap_wake_title">Двойное нажатие для пробуждения телефона</string>

@@ -39,6 +39,7 @@
     <string name="LSrightShortcutTitle">Prawy skrót</string>
     <string name="camera_shortcut">Aparat</string>
     <string name="assistant_shortcut">Asystent</string>
+    <string name="torch_shortcut">Latarka</string>
     <string name="album_art_category">Opcje mediów</string>
     <string name="album_art_title">Włącz okładki albumów podczas odtwarzania multimediów</string>
     <string name="shufflePin_title">Pomieszaj tytuł</string>
@@ -55,6 +56,7 @@
     <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Ukryty</string>
     <string name="BIcon_Opacity_title">Nieprzezroczystość</string>
+    <string name="sb_center_fine_tune">Dostosuj obszar środkowy</string>
     
     <string name="lte_4g_icon_title">Ikona LTE / 4G </string>
     <string name="combined_signal_icon_title">Połączone ikony sygnałów</string>
@@ -130,6 +132,7 @@
     <string name="wifi_cell_off">Użyj ikony interetu</string>
     <string name="QQS_brightness_category">Opcje suwaka jasności</string>
     <string name="QQS_brightness_title">Pokaż suwak jasności na panelu QQS</string>
+    <string name="QQS_brightness_bottom_title">Przesuń suwak jasności w dół</string>
     <string name="QS_brightness_disable_title">Ukryj suwak jasności w szybkich ustawieniach</string>
     <string name="bs_thick_track">Pogrubienie ścieżki na suwaku jasności</string>
     <string name="quick_settings_tiles_category">Opcje ikon szybkich ustawień</string>
@@ -182,6 +185,9 @@
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Wyłącz dzwięk zrzutu ekranu</string>
     <string name="so_power_longpress_torch_title">Długie naciśnięcie włącza latarkę*</string>
+    <string name="so_taptaptorch_title">Włącz podwójne tapnięcie aby włączyć latarkę</string>
+    <string name="so_taptaptorch_summary">Kliknij dwukrotnie, a następnie przytrzymaj ekran blokady, aby szybko włączyć latarkę</string>
+    
     <string name="framework_needed_caution_summary">Wymaga aktywacji System Framework w Lsposed. UZYWAJ OSTROŻNIE</string>
     <string name="so_double_tap_wake_title">Kliknij dwukrotnie, aby wybudzić telefon</string>
     <string name="so_double_tap_wake_summary">Wyłącza jedno dotknięcie, aby wybudzić telefon</string>
@@ -197,6 +203,7 @@
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Wymuś używanie czcionek Google Sans w systemie</string>
+    <string name="font_overlays_enable_title">Włącz używanie niestandardowych czcionek</string>
     <string name="theme_customization_font_title">Czcionka główna</string>
     <string name="icons_style_title">Styl ikon</string>
     <string name="icon_shapes_title">Kształty ikon</string>

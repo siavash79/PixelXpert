@@ -39,6 +39,7 @@
     <string name="LSrightShortcutTitle">Acceso directo derecho</string>
     <string name="camera_shortcut">Cámara</string>
     <string name="assistant_shortcut">Asistente</string>
+	<string name="torch_shortcut">Linterna</string>
     <string name="album_art_category">Opciones de visualización de reproducción de música</string>
     <string name="album_art_title">Habilitar visualización de reproducción de música</string>
 	<string name="shufflePin_title">Pin aleatorio</string>
@@ -54,7 +55,8 @@
     <string name="battery_icon_size_title">Tamaño del icono de batería</string> 
     <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Oculta</string>
-	 <string name="BIcon_Opacity_title">Opacidad</string>
+	<string name="BIcon_Opacity_title">Opacidad</string>
+	<string name="sb_center_fine_tune">Afinar el área central</string>
 
     <string name="lte_4g_icon_title">Icono 4G / LTE</string>
     <string name="combined_signal_icon_title">Iconos de señal combinados</string>
@@ -130,6 +132,7 @@
     <string name="wifi_cell_off">Usar solo el atajo de Internet</string>
     <string name="QQS_brightness_category">Preferencias de la barra de brillo</string>
     <string name="QQS_brightness_title">Mostrar la barra de brillo en el panel de ajustes rápidos</string>
+	<string name="QQS_brightness_bottom_title">Mover barra de brillo a la parte de abajo</string>
     <string name="QS_brightness_disable_title">Ocultar la barra de brillo en el panel de ajustes rápidos</string>
     <string name="bs_thick_track">Usar una barra gruesa en la barra de brillo</string>
     <string name="quick_settings_tiles_category">Opciones de los botones de ajustes rápidos</string>
@@ -182,9 +185,13 @@
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Desactivar sonido de captura de pantalla</string>
     <string name="so_power_longpress_torch_title">"Linterna manteniendo presionado el botón de encendido/apagado*"</string>
+	<string name="so_taptaptorch_title">Habilitar linterna con doble toque</string>
+    <string name="so_taptaptorch_summary">Hacer doble toque y mantener la pantalla de bloqueo presionada para encender la linterna</string>
+	
     <string name="framework_needed_caution_summary">Requiere activar Framework en Lsposed. USAR CON CUIDADO</string>   
     <string name="so_double_tap_wake_title">Doble toque para despertar pantalla</string>
     <string name="so_double_tap_wake_summary">Usar doble toque en vez de un toque para encender la pantalla</string>
+	<string name="so_tap_proximity_wake_title">No despertar al tocar cuando la pantalla este cubierta</string>
     <string name="doze_header">"Mientras la pantalla está apagada..."</string>
     <string name="custom_themed_icons_title">Iconos tematizados personalizados</string>
     <string name="custom_themed_icons_off">Iconos personalizados inactivos</string>

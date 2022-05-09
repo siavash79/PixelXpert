@@ -59,7 +59,7 @@ jobs:
         name: AOSPMods.zip
         path: output
 
-    - name: Release the new binaries
+    - name: Release the binaries
       uses: Hs1r1us/Release-AIO@v1.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

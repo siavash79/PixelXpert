@@ -64,9 +64,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
+        body_path: '.github/workfolowFiles/futureReleaseNotes.md'
         tag_name: ${{ env.GITHUB_REF_NAME }}
         release_name: ${{ env.GITHUB_REF_NAME }}
-        body_path: '.github/workfolowFiles/futureReleaseNotes.md'
         prerelease: true
         draft: false
         asset_files: 'output/AOSPMods.zip'

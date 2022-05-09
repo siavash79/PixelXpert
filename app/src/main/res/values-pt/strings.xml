@@ -213,5 +213,11 @@
     <string name="overscroll_on_summary">"Nota: Requer ativar as apps, para as quais pretende desativar o efeito elástico, no gestor da LSposed"</string>
     <string name="volte_icon_title">Mostrar ícone VoLTE quando disponível</string>
     <string name="font_overlays_enable_title">Ativar as fontes personalizadas</string>
+    <string name="torch_shortcut">Lanterna</string>
+    <string name="sb_center_fine_tune">Ajustar área central</string>
+    <string name="QQS_brightness_bottom_title">Controlo de brilho no fundo do painel</string>
+    <string name="so_taptaptorch_title">Ativar toque duplo para lanterna</string>
+    <string name="so_taptaptorch_summary">Toque duplo e manter premido para lanterna no ecrã de bloqueio</string>
+    <string name="so_tap_proximity_wake_title">Não acordar o ecrã quando o mesmo estiver coberto</string>
 
 </resources>

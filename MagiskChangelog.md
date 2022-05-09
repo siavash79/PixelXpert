@@ -1,3 +1,11 @@
+**1.0.0-beta-03**
+- Added double-tap torch on lockscreen (and AOD)
+- Added option to fine-tune statusbar center area
+- Added option to move brightness slider to the bottom
+- Added Flashlight lockscreen shortcut
+- Added proximity screen-on protection (tap to wake)
+- Bugfixes
+
 **1.0.0-beta-02**
 - Customized fonts are now fully optional
 - Increase QS Haptic vibration strenght

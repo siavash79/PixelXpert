@@ -54,7 +54,8 @@
     <string name="battery_icon_size_title">Tamaño del icono de batería</string> 
     <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Oculta</string>
-	 <string name="BIcon_Opacity_title">Opacidad</string>
+	<string name="BIcon_Opacity_title">Opacidad</string>
+	<string name="sb_center_fine_tune">Afinar el área central</string>
 
     <string name="lte_4g_icon_title">Icono 4G / LTE</string>
     <string name="combined_signal_icon_title">Iconos de señal combinados</string>
@@ -130,6 +131,7 @@
     <string name="wifi_cell_off">Usar solo el atajo de Internet</string>
     <string name="QQS_brightness_category">Preferencias de la barra de brillo</string>
     <string name="QQS_brightness_title">Mostrar la barra de brillo en el panel de ajustes rápidos</string>
+	<string name="QQS_brightness_bottom_title">Mover barra de brillo a la parte de abajo</string>
     <string name="QS_brightness_disable_title">Ocultar la barra de brillo en el panel de ajustes rápidos</string>
     <string name="bs_thick_track">Usar una barra gruesa en la barra de brillo</string>
     <string name="quick_settings_tiles_category">Opciones de los botones de ajustes rápidos</string>

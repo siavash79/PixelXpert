@@ -69,7 +69,6 @@ public class SystemUtils {
 		instance.setFlashInternal(enabled);
 	}
 	
-	
 	public static AudioManager AudioManager()
 	{
 		if(instance == null) return null;
@@ -159,9 +158,8 @@ public class SystemUtils {
 		return "";
 	}
 	
-	
 	static class ProximityListener implements SensorEventListener {
-		public static boolean near = false;
+		private static boolean near = false;
 		@Override
 		public void onSensorChanged(SensorEvent sensorEvent) {
 			near = sensorEvent.values[0] == 0;

@@ -4,6 +4,7 @@ package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.os.VibrationEffect;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,18 +24,22 @@ public class ScreenGestures extends XposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
     private static final long HOLD_DURATION = 500;
-    
+
+    //settings
     public static boolean doubleTapToSleepEnabled = false;
-    
+    private static boolean enableProximityWake = false;
     private static boolean doubleTapToWake = false;
     private static boolean holdScreenTorchEnabled = false;
-    private static boolean turnedByTTT = false;
-    private static boolean mDoubleTap = false;
     
-    long flashOnEventTime = -1;
-    private boolean doubleTap;
-    GestureDetector mLockscreenDoubleTapToSleep;
-    private boolean isDozing;
+    
+    private static boolean turnedByTTT = false;
+    private static boolean mDoubleTap = false;  //double tap to wake when AOD off
+    
+    private boolean doubleTap; //doubl tap event for TTT
+
+    GestureDetector mLockscreenDoubleTapToSleep; //event callback for double tap to sleep detection of statusbar only
+    
+    private boolean isDozing; //determiner for wakeup or sleep decision
     
     public ScreenGestures(Context context) { super(context); }
     
@@ -43,6 +48,7 @@ public class ScreenGestures extends XposedModPack {
         doubleTapToWake = XPrefs.Xprefs.getBoolean("doubleTapToWake", false);
         holdScreenTorchEnabled = XPrefs.Xprefs.getBoolean("holdScreenTorchEnabled", false);
         doubleTapToSleepEnabled = XPrefs.Xprefs.getBoolean("DoubleTapSleep", false);
+        enableProximityWake = XPrefs.Xprefs.getBoolean("enableProximityWake", false);
     }
 
     @Override
@@ -51,7 +57,7 @@ public class ScreenGestures extends XposedModPack {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
-    
+        
         mLockscreenDoubleTapToSleep = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onDoubleTap(MotionEvent e) {
@@ -63,12 +69,14 @@ public class ScreenGestures extends XposedModPack {
         Class<?> NotificationShadeWindowViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);
         Class<?> DozeTriggersClass = XposedHelpers.findClass("com.android.systemui.doze.DozeTriggers", lpparam.classLoader);
         Class<?> NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
-    
-    
+        
+        //double tap detector for screen off AOD disabled sensor
         XposedBridge.hookAllMethods(DozeTriggersClass,
                 "onSensor", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if(proximityWakeDenied()) param.setResult(null);
+                        
                         if(!doubleTapToWake) return;
                         if (((int)param.args[0]) == 9) {
                             if (!mDoubleTap) {
@@ -78,6 +86,7 @@ public class ScreenGestures extends XposedModPack {
                         }
                     }
                 });
+        
         
         XposedHelpers.findAndHookMethod(NotificationShadeWindowViewControllerClass,
                 "setupExpandedStatusBar", new XC_MethodHook() {
@@ -89,15 +98,17 @@ public class ScreenGestures extends XposedModPack {
                         Object mKeyguardStateController = XposedHelpers.getObjectField(param.thisObject, "mKeyguardStateController");
                         Object mStatusBarStateController = XposedHelpers.getObjectField(param.thisObject, "mStatusBarStateController");
     
+                        //used in double tap to wake in AOD plan
                         XposedHelpers.findAndHookMethod(mListener.getClass(),
                                 "onSingleTapConfirmed", MotionEvent.class, new XC_MethodHook() {
                                     @Override
                                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                        if(!doubleTapToWake) return;
-                                        
-                                        param.setResult(false);
+                                        if(proximityWakeDenied() || doubleTapToWake)
+                                            param.setResult(false);
                                     }
                                 });
+                        
+                        //used in double tap detection in AOD
                         XposedHelpers.findAndHookMethod(mListener.getClass(),
                                 "onDoubleTap", MotionEvent.class, new XC_MethodHook() {
                                     @Override
@@ -111,9 +122,12 @@ public class ScreenGestures extends XposedModPack {
                                         }, HOLD_DURATION*2);
     
                                         isDozing = (boolean) XposedHelpers.callMethod(mStatusBarStateController, "isDozing");
+                                        
+                                        if(proximityWakeDenied()) param.setResult(false);
                                     }
                                 });
     
+                        //detect hold event for TTT
                         XposedBridge.hookAllMethods(mGestureDetector.getClass(), "onTouchEvent", new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -129,16 +143,15 @@ public class ScreenGestures extends XposedModPack {
     
                                 if((boolean) XposedHelpers.callMethod(mKeyguardStateController, "isShowing"))
                                 {
-    
                                     if(!holdScreenTorchEnabled) return;
                                     if((action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE))
                                     {
                                         if(doubleTap && !SystemUtils.isScreenCovered() && !SystemUtils.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
                                         {
-                                            flashOnEventTime = ev.getDownTime();
                                             turnedByTTT = true;
                                             XposedHelpers.callMethod(SystemUtils.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
                                             SystemUtils.setFlash(true);
+                                            SystemUtils.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_TICK));
                                         }
                                         if(turnedByTTT)
                                         {
@@ -163,6 +176,7 @@ public class ScreenGestures extends XposedModPack {
                         Object touchHandler = param.getResult();
                         Object ThisNotificationPanel = param.thisObject;
                     
+                        //touch detection of statusbar to forward to detector
                         XposedHelpers.findAndHookMethod(touchHandler.getClass(),
                                 "onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
                                     @Override
@@ -174,14 +188,18 @@ public class ScreenGestures extends XposedModPack {
                                         int mBarState = (int) XposedHelpers.getObjectField(ThisNotificationPanel, "mBarState");
                                     
                                         if (!mPulsing && !mDozing
-                                                && mBarState == 0 && mLockscreenDoubleTapToSleep != null) {
+                                                && mBarState == 0) {
                                             mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[1]);
                                         }
                                     }
                                 });
                     }
                 });
+    }
     
+    private boolean proximityWakeDenied()
+    {
+        return enableProximityWake && SystemUtils.isScreenCovered();
     }
     
     

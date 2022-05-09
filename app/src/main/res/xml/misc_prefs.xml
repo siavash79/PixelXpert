@@ -42,6 +42,12 @@
             app:summary="@string/framework_needed_caution_summary" />
         <SwitchPreference
             android:defaultValue="false"
+            android:key="enableProximityWake"
+            android:title="@string/so_tap_proximity_wake_title"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on" />
+        <SwitchPreference
+            android:defaultValue="false"
             android:key="doubleTapToWake"
             android:title="@string/so_double_tap_wake_title"
             app:summary="@string/so_double_tap_wake_summary" />

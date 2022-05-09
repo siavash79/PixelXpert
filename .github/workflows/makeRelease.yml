@@ -58,15 +58,18 @@ jobs:
       with: 
         name: AOSPMods.zip
         path: output
-        
-    - name: Make draft release
-      uses: "marvinpinto/action-automatic-releases@latest"
+
+    - name: Release the new binaries
+      uses: Hs1r1us/Release-AIO@v1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        tag_name: 'inherit'
+        release_name: ${{ env.GITHUB_REF_NAME }}
+        body_path: '.github/workfolowFiles/futureReleaseNotes.md'
         prerelease: true
-        draft: true
-        files: |
-            output/AOSPMods.zip
+        draft: false
+        asset_files: 'output/AOSPMods.zip'
 
     - name: Commit version bump
       uses: github-actions-x/commit@v2.9

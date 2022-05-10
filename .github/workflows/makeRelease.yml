@@ -66,7 +66,7 @@ jobs:
       with:
         tag_name: ${{ env.GITHUB_REF_NAME }}
         release_name: ${{ env.GITHUB_REF_NAME }}
-        body_path: '.github/workfolowFiles/futureReleaseNotes.md'
+        body_path: 'releaseNotes.md'
         prerelease: true
         draft: false
         asset_files: 'output/AOSPMods.zip'
@@ -78,6 +78,6 @@ jobs:
         push-branch: master
         commit-message: 'Version update: Release'
         force-add: 'true'
-        files: MagiskMod/module.prop app/build.gradle MagiskModuleUpdate.json
+        files: MagiskMod/module.prop app/build.gradle MagiskModuleUpdate.json MagiskChangelog.md
         name: GitHub
         email: aospmods@siava.sh

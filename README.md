@@ -1,3 +1,7 @@
+[![Latest Release](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Download&style=plastic)](https://github.com/siavash79/AOSPMods/releases/latest)
+![Total Downloads](https://img.shields.io/github/downloads/siavash79/aospmods/total?color=red&label=Total%20Downloads&style=plastic)
+
+
 ![Header Image](https://raw.githubusercontent.com/siavash79/AOSPMods/master/.github/AOSP_Mods_Header.png)
 
 This is a mixed Xposed+Magisk module, which is made to allow customizations that are not originally designed in AOSP (Android Open Source Project).

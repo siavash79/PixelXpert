@@ -64,8 +64,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ env.GITHUB_REF_NAME }}
-        release_name: ${{ env.GITHUB_REF_NAME }}
+        tag_name: ${{ github.ref }}
+        release_name: ${{ github.ref }}
         body_path: 'releaseNotes.md'
         prerelease: true
         draft: false

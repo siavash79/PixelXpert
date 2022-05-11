@@ -1,6 +1,6 @@
 {
-    "version": "1.0.0-beta-02",
-    "versionCode": 18,
-    "zipUrl": "https://github.com/siavash79/AOSPMods/releases/download/1.0.0-beta-02/AOSPMods.zip",
+    "version": "1.0.0-beta-03",
+    "versionCode": 19,
+    "zipUrl": "https://github.com/siavash79/AOSPMods/releases/download/v1.0.0-beta-03/AOSPMods.zip",
     "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/master/MagiskChangelog.md"
 }

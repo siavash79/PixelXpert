@@ -35,7 +35,8 @@ public class SystemUtils {
 	PowerManager mPowerManager;
 	Sensor mProximitySensor;
 	TelephonyManager mTelephonyManager;
-	
+	ProximityListener proximityListener = new ProximityListener();
+
 	CameraManager.TorchCallback torchCallback = new CameraManager.TorchCallback() {
 		@Override
 		public void onTorchModeChanged(@NonNull String cameraId, boolean enabled) {
@@ -43,9 +44,7 @@ public class SystemUtils {
 			torchOn = enabled;
 		}
 	};
-	
-	ProximityListener proximityListener = new ProximityListener();
-	
+
 	public static boolean isFlashOn()
 	{
 		if(instance == null) return false;
@@ -101,25 +100,60 @@ public class SystemUtils {
 		
 		XposedHelpers.callMethod(instance.mPowerManager, "goToSleep", SystemClock.uptimeMillis());
 	}
-	
+
+	public static void startProximity()
+	{
+		if(instance != null)
+		{
+			instance.startProximityInternal();
+		}
+	}
+
+	private void startProximityInternal()
+	{
+		try {
+			mSensorManager.registerListener(proximityListener, mProximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
+		}catch (Exception ignored){}
+	}
+
+	public static void stopProximity()
+	{
+		if(instance != null)
+		{
+			instance.stopProximityInternal();
+		}
+	}
+
+	private void stopProximityInternal()
+	{
+		try {
+			mSensorManager.unregisterListener(proximityListener);
+		} catch(Exception ignored){}
+		ProximityListener.near = false;
+	}
+
 	public SystemUtils(Context context)
 	{
 		mContext = context;
 		instance = this;
-		
+
+		//Camera and Flash
 		mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
-		mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-		mVibrationManager = (VibratorManager) mContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
+		mCameraManager.registerTorchCallback(torchCallback, new Handler());
+
+		//Audio
 		mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 		mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+
+		//Telephony
 		mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-		
-		
+
+		//Proximity
+		mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
 		mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-		
-		mSensorManager.registerListener(proximityListener, mProximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
-		mCameraManager.registerTorchCallback(torchCallback, new Handler());
-		
+
+		//Vibrator
+		mVibrationManager = (VibratorManager) mContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
 		hasVibrator = mVibrationManager.getDefaultVibrator().hasVibrator();
 	}
 	
@@ -169,5 +203,4 @@ public class SystemUtils {
 		public void onAccuracyChanged(Sensor sensor, int i) {
 		}
 	}
-	
 }

@@ -49,6 +49,15 @@ public class ScreenGestures extends XposedModPack {
         holdScreenTorchEnabled = XPrefs.Xprefs.getBoolean("holdScreenTorchEnabled", false);
         doubleTapToSleepEnabled = XPrefs.Xprefs.getBoolean("DoubleTapSleep", false);
         enableProximityWake = XPrefs.Xprefs.getBoolean("enableProximityWake", false);
+
+        if(enableProximityWake)
+        {
+            SystemUtils.startProximity();
+        }
+        else
+        {
+            SystemUtils.stopProximity();
+        }
     }
 
     @Override

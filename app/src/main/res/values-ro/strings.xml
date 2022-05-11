@@ -34,6 +34,7 @@
     <string name="LSrightShortcutTitle">Comanda rapidă din dreapta</string>
     <string name="camera_shortcut">Cameră</string>
     <string name="assistant_shortcut">Asistent</string>
+    <string name="torch_shortcut">Lanternă</string>
     <string name="album_art_category">Opțiuni media</string>
     <string name="album_art_title">Activează coperta de album când se redă media</string>
     <string name="shufflePin_title">Amestecare PIN</string>
@@ -47,6 +48,7 @@
     <string name="battery_icon_size_title">Dimensiune pictogramă baterie</string>
     <string name="battery_hidden">Ascunsă</string>
     <string name="BIcon_Opacity_title">Transparență</string>
+    <string name="sb_center_fine_tune">Reglează fin zona centrală</string>
     <string name="lte_4g_icon_title">Pictogramă LTE / 4G</string>
     <string name="combined_signal_icon_title">Combinare pictograme de semnal</string>
     <string name="volte_icon_title">Afișare pictogramă VoLTE atunci când este disponibilă</string>
@@ -119,6 +121,7 @@
     <string name="wifi_cell_off">Folosește o singură dală Internet</string>
     <string name="QQS_brightness_category">Opțiuni glisor luminozitate</string>
     <string name="QQS_brightness_title">Arată glisorul de luminozitate în panoul QS</string>
+    <string name="QQS_brightness_bottom_title">Mută glisorul de luminozitate în partea de jos</string>
     <string name="QS_brightness_disable_title">Ascunde glisorul de luminozitate din Setările Rapide</string>
     <string name="bs_thick_track">Utilizează o pistă groasă pe glisorul de luminozitate</string>
     <string name="quick_settings_tiles_category">Opțiuni dale QS</string>
@@ -168,9 +171,12 @@
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Dezactivare sunet captură ecran</string>
     <string name="so_power_longpress_torch_title">Apăsare lungă pe butonul de alimentare pentru lanternă*</string>
+    <string name="so_taptaptorch_title">Activează torța cu dublă apăsare</string>
+    <string name="so_taptaptorch_summary">Atinge de două ori apoi ține apăsat ecranul de blocare pentru o lanternă rapidă</string>
     <string name="framework_needed_caution_summary">Necesită activarea System Framework în Lsposed. UTILIZEAZĂ CU PRUDENȚĂ</string>
     <string name="so_double_tap_wake_title">Apăsare dublă pentru trezire telefon</string>
     <string name="so_double_tap_wake_summary">Dezactivează apăsarea unică pentru trezire</string>
+    <string name="so_tap_proximity_wake_title">Nu se trezește la atingere când ecranul este acoperit</string>
     <string name="doze_header">În timp ce ecranul este oprit…</string>
     <string name="custom_themed_icons_title">Pictograme personalizate</string>
     <string name="custom_themed_icons_off">Pictograme personalizate dezactivate</string>
@@ -182,6 +188,7 @@
     <string name="overscroll_on_summary">Important: TREBUIE să activați aplicațiile pentru care doriți să dezactivați derularea elastică în LSPosed</string>
     <!-- Theming section related -->
     <string name="gsans_override_title">Forțează sistemul de fonturi Google Sans în tot sistemul</string>
+    <string name="font_overlays_enable_title">Activează utilizarea fonturilor personalizate</string>
     <string name="theme_customization_font_title">Font pentru Titlu / Corp text</string>
     <string name="icons_style_title">Stil pictograme</string>
     <string name="icon_shapes_title">Forme pictograme</string>

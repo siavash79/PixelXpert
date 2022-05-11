@@ -112,6 +112,9 @@ public class SystemUtils {
 	private void startProximityInternal()
 	{
 		try {
+			//Proximity
+			mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
+			mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 			mSensorManager.registerListener(proximityListener, mProximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
 		}catch (Exception ignored){}
 	}
@@ -128,6 +131,8 @@ public class SystemUtils {
 	{
 		try {
 			mSensorManager.unregisterListener(proximityListener);
+			mProximitySensor = null;
+			mSensorManager = null;
 		} catch(Exception ignored){}
 		ProximityListener.near = false;
 	}
@@ -147,10 +152,6 @@ public class SystemUtils {
 
 		//Telephony
 		mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-
-		//Proximity
-		mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-		mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
 		//Vibrator
 		mVibrationManager = (VibratorManager) mContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);

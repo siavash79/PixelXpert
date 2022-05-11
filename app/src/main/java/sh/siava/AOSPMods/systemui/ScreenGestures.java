@@ -160,7 +160,7 @@ public class ScreenGestures extends XposedModPack {
                                             turnedByTTT = true;
                                             XposedHelpers.callMethod(SystemUtils.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
                                             SystemUtils.setFlash(true);
-                                            SystemUtils.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_TICK));
+                                            SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
                                         }
                                         if(turnedByTTT)
                                         {

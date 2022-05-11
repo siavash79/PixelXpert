@@ -11,7 +11,6 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.media.AudioManager;
-import android.os.Handler;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
@@ -19,36 +18,34 @@ import android.os.VibratorManager;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import org.jetbrains.annotations.Contract;
 
 import de.robv.android.xposed.XposedHelpers;
 
 public class SystemUtils {
+	@SuppressLint("StaticFieldLeak")
 	static SystemUtils instance;
 	
 	Context mContext;
 	CameraManager mCameraManager;
 	VibratorManager mVibrationManager;
 	SensorManager mSensorManager;
-	boolean torchOn = false;
-	boolean hasVibrator;
 	AudioManager mAudioManager;
 	PowerManager mPowerManager;
-	Sensor mProximitySensor;
 	TelephonyManager mTelephonyManager;
+
+	Sensor mProximitySensor;
 	ProximityListener proximityListener = new ProximityListener();
 
-	CameraManager.TorchCallback torchCallback = new CameraManager.TorchCallback() {
-		@Override
-		public void onTorchModeChanged(@NonNull String cameraId, boolean enabled) {
-			super.onTorchModeChanged(cameraId, enabled);
-			torchOn = enabled;
-		}
-	};
+	boolean hasVibrator;
 
-	public static boolean isFlashOn()
-	{
+	TorchCallback torchCallback = new TorchCallback();
+
+	public static boolean isFlashOn() {
 		if(instance == null) return false;
-		return instance.torchOn;
+		return TorchCallback.torchOn;
 	}
 	
 	public static boolean isScreenCovered()
@@ -56,61 +53,65 @@ public class SystemUtils {
 		return ProximityListener.near;
 	}
 	
-	public static void ToggleFlash()
-	{
+	public static void ToggleFlash() {
 		if(instance == null) return;
 		instance.toggleFlashInternal();
 	}
 	
-	public static void setFlash(boolean enabled)
-	{
+	public static void setFlash(boolean enabled) {
 		if(instance == null) return;
 		instance.setFlashInternal(enabled);
 	}
 	
-	public static AudioManager AudioManager()
-	{
+	@Nullable
+	@Contract(pure = true)
+	public static AudioManager AudioManager() {
 		if(instance == null) return null;
 		return instance.mAudioManager;
 	}
 	
-	public static PowerManager PowerManager()
-	{
+	@Nullable
+	@Contract(pure = true)
+	public static PowerManager PowerManager() {
 		if(instance == null) return null;
 		return instance.mPowerManager;
 	}
-	
-	
-	public static TelephonyManager TelephonyManager()
-	{
+
+	@Nullable
+	@Contract(pure = true)
+	public static TelephonyManager TelephonyManager() {
 		if(instance == null) return null;
 		return instance.mTelephonyManager;
 	}
 	
-	@SuppressLint("MissingPermission")
-	public static void vibrate(VibrationEffect effect)
-	{
-		if(instance == null || !instance.hasVibrator) return;
-		instance.mVibrationManager.getDefaultVibrator().vibrate(effect);
-	}
-	
-	public static void Sleep()
-	{
-		if(instance == null) return;
-		
-		XposedHelpers.callMethod(instance.mPowerManager, "goToSleep", SystemClock.uptimeMillis());
+	public static void vibrate(int effect) {
+		vibrate(VibrationEffect.createPredefined(effect));
 	}
 
-	public static void startProximity()
-	{
+	@SuppressLint("MissingPermission")
+	public static void vibrate(VibrationEffect effect) {
+		if(instance == null || !instance.hasVibrator) return;
+		try {
+			instance.mVibrationManager.getDefaultVibrator().vibrate(effect);
+		}catch (Exception ignored){}
+	}
+
+	public static void Sleep() {
+		if(instance == null) return;
+
+		try {
+			XposedHelpers.callMethod(instance.mPowerManager, "goToSleep", SystemClock.uptimeMillis());
+		} catch (Throwable ignored){}
+	}
+
+	public static void startProximity() {
 		if(instance != null)
 		{
 			instance.startProximityInternal();
 		}
 	}
 
-	private void startProximityInternal()
-	{
+	private void startProximityInternal() {
 		try {
 			//Proximity
 			mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
@@ -119,16 +120,14 @@ public class SystemUtils {
 		}catch (Exception ignored){}
 	}
 
-	public static void stopProximity()
-	{
+	public static void stopProximity() {
 		if(instance != null)
 		{
 			instance.stopProximityInternal();
 		}
 	}
 
-	private void stopProximityInternal()
-	{
+	private void stopProximityInternal() {
 		try {
 			mSensorManager.unregisterListener(proximityListener);
 			mProximitySensor = null;
@@ -137,14 +136,13 @@ public class SystemUtils {
 		ProximityListener.near = false;
 	}
 
-	public SystemUtils(Context context)
-	{
+	public SystemUtils(Context context) {
 		mContext = context;
 		instance = this;
 
 		//Camera and Flash
 		mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
-		mCameraManager.registerTorchCallback(torchCallback, new Handler());
+		mCameraManager.registerTorchCallback(torchCallback, null);
 
 		//Audio
 		mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
@@ -158,8 +156,7 @@ public class SystemUtils {
 		hasVibrator = mVibrationManager.getDefaultVibrator().hasVibrator();
 	}
 	
-	private void setFlashInternal(boolean enabled)
-	{
+	private void setFlashInternal(boolean enabled) {
 		try {
 			if(mCameraManager == null)
 			{
@@ -176,15 +173,15 @@ public class SystemUtils {
 	}
 	
 	private void toggleFlashInternal() {
-		setFlashInternal(!torchOn);
+		setFlashInternal(!TorchCallback.torchOn);
 	}
 	
-	private String getFlashID(CameraManager c) throws CameraAccessException {
-		String[] ids = c.getCameraIdList();
+	private String getFlashID(@NonNull CameraManager cameraManager) throws CameraAccessException {
+		String[] ids = cameraManager.getCameraIdList();
 		try {
 			for (String id : ids) {
-				if (c.getCameraCharacteristics(id).get(CameraCharacteristics.LENS_FACING) == CameraMetadata.LENS_FACING_BACK) {
-					if (c.getCameraCharacteristics(id).get(CameraCharacteristics.FLASH_INFO_AVAILABLE)) {
+				if (cameraManager.getCameraCharacteristics(id).get(CameraCharacteristics.LENS_FACING) == CameraMetadata.LENS_FACING_BACK) {
+					if (cameraManager.getCameraCharacteristics(id).get(CameraCharacteristics.FLASH_INFO_AVAILABLE)) {
 						return id;
 					}
 				}
@@ -196,12 +193,20 @@ public class SystemUtils {
 	static class ProximityListener implements SensorEventListener {
 		private static boolean near = false;
 		@Override
-		public void onSensorChanged(SensorEvent sensorEvent) {
+		public void onSensorChanged(@NonNull SensorEvent sensorEvent) {
 			near = sensorEvent.values[0] == 0;
 		}
-		
+
 		@Override
-		public void onAccuracyChanged(Sensor sensor, int i) {
+		public void onAccuracyChanged(Sensor sensor, int i) {}
+	}
+
+	static class TorchCallback extends CameraManager.TorchCallback {
+		static boolean torchOn = false;
+		@Override
+		public void onTorchModeChanged(@NonNull String cameraId, boolean enabled) {
+			super.onTorchModeChanged(cameraId, enabled);
+			torchOn = enabled;
 		}
 	}
 }

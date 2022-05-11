@@ -43,7 +43,7 @@ public class QSHaptic extends XposedModPack {
         @Override
         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
             if(!QSHapticEnabled) return;
-            SystemUtils.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
+            SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK);
         }
     }
 

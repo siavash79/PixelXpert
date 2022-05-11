@@ -2,10 +2,6 @@ package sh.siava.AOSPMods.Utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
@@ -24,21 +20,17 @@ import org.jetbrains.annotations.Contract;
 
 import de.robv.android.xposed.XposedHelpers;
 
-public class SystemUtils {
+public class SystemUtils{
 	@SuppressLint("StaticFieldLeak")
 	static SystemUtils instance;
-	
+
 	Context mContext;
 	CameraManager mCameraManager;
 	VibratorManager mVibrationManager;
-	SensorManager mSensorManager;
 	AudioManager mAudioManager;
 	PowerManager mPowerManager;
 	TelephonyManager mTelephonyManager;
-
-	Sensor mProximitySensor;
-	ProximityListener proximityListener = new ProximityListener();
-
+	
 	boolean hasVibrator;
 
 	TorchCallback torchCallback = new TorchCallback();
@@ -46,11 +38,6 @@ public class SystemUtils {
 	public static boolean isFlashOn() {
 		if(instance == null) return false;
 		return TorchCallback.torchOn;
-	}
-	
-	public static boolean isScreenCovered()
-	{
-		return ProximityListener.near;
 	}
 	
 	public static void ToggleFlash() {
@@ -104,53 +91,22 @@ public class SystemUtils {
 		} catch (Throwable ignored){}
 	}
 
-	public static void startProximity() {
-		if(instance != null)
-		{
-			instance.startProximityInternal();
-		}
-	}
-
-	private void startProximityInternal() {
-		try {
-			//Proximity
-			mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-			mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-			mSensorManager.registerListener(proximityListener, mProximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
-		}catch (Exception ignored){}
-	}
-
-	public static void stopProximity() {
-		if(instance != null)
-		{
-			instance.stopProximityInternal();
-		}
-	}
-
-	private void stopProximityInternal() {
-		try {
-			mSensorManager.unregisterListener(proximityListener);
-			mProximitySensor = null;
-			mSensorManager = null;
-		} catch(Exception ignored){}
-		ProximityListener.near = false;
-	}
-
 	public SystemUtils(Context context) {
 		mContext = context;
+		
 		instance = this;
-
+		
 		//Camera and Flash
 		mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
 		mCameraManager.registerTorchCallback(torchCallback, null);
-
+		
 		//Audio
 		mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 		mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-
+		
 		//Telephony
 		mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-
+		
 		//Vibrator
 		mVibrationManager = (VibratorManager) mContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
 		hasVibrator = mVibrationManager.getDefaultVibrator().hasVibrator();
@@ -190,17 +146,6 @@ public class SystemUtils {
 		return "";
 	}
 	
-	static class ProximityListener implements SensorEventListener {
-		private static boolean near = false;
-		@Override
-		public void onSensorChanged(@NonNull SensorEvent sensorEvent) {
-			near = sensorEvent.values[0] == 0;
-		}
-
-		@Override
-		public void onAccuracyChanged(Sensor sensor, int i) {}
-	}
-
 	static class TorchCallback extends CameraManager.TorchCallback {
 		static boolean torchOn = false;
 		@Override

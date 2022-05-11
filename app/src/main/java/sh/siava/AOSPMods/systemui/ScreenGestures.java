@@ -27,10 +27,8 @@ public class ScreenGestures extends XposedModPack {
 
     //settings
     public static boolean doubleTapToSleepEnabled = false;
-    private static boolean enableProximityWake = false;
     private static boolean doubleTapToWake = false;
     private static boolean holdScreenTorchEnabled = false;
-    
     
     private static boolean turnedByTTT = false;
     private static boolean mDoubleTap = false;  //double tap to wake when AOD off
@@ -48,16 +46,6 @@ public class ScreenGestures extends XposedModPack {
         doubleTapToWake = XPrefs.Xprefs.getBoolean("doubleTapToWake", false);
         holdScreenTorchEnabled = XPrefs.Xprefs.getBoolean("holdScreenTorchEnabled", false);
         doubleTapToSleepEnabled = XPrefs.Xprefs.getBoolean("DoubleTapSleep", false);
-        enableProximityWake = XPrefs.Xprefs.getBoolean("enableProximityWake", false);
-
-        if(enableProximityWake)
-        {
-            SystemUtils.startProximity();
-        }
-        else
-        {
-            SystemUtils.stopProximity();
-        }
     }
 
     @Override
@@ -84,8 +72,6 @@ public class ScreenGestures extends XposedModPack {
                 "onSensor", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(proximityWakeDenied()) param.setResult(null);
-                        
                         if(!doubleTapToWake) return;
                         if (((int)param.args[0]) == 9) {
                             if (!mDoubleTap) {
@@ -112,7 +98,7 @@ public class ScreenGestures extends XposedModPack {
                                 "onSingleTapConfirmed", MotionEvent.class, new XC_MethodHook() {
                                     @Override
                                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                        if(proximityWakeDenied() || doubleTapToWake)
+                                        if(doubleTapToWake)
                                             param.setResult(false);
                                     }
                                 });
@@ -131,8 +117,6 @@ public class ScreenGestures extends XposedModPack {
                                         }, HOLD_DURATION*2);
     
                                         isDozing = (boolean) XposedHelpers.callMethod(mStatusBarStateController, "isDozing");
-                                        
-                                        if(proximityWakeDenied()) param.setResult(false);
                                     }
                                 });
     
@@ -155,7 +139,7 @@ public class ScreenGestures extends XposedModPack {
                                     if(!holdScreenTorchEnabled) return;
                                     if((action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE))
                                     {
-                                        if(doubleTap && !SystemUtils.isScreenCovered() && !SystemUtils.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
+                                        if(doubleTap && !SystemUtils.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
                                         {
                                             turnedByTTT = true;
                                             XposedHelpers.callMethod(SystemUtils.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
@@ -205,11 +189,4 @@ public class ScreenGestures extends XposedModPack {
                     }
                 });
     }
-    
-    private boolean proximityWakeDenied()
-    {
-        return enableProximityWake && SystemUtils.isScreenCovered();
-    }
-    
-    
 }

@@ -1,6 +1,6 @@
-[![Latest Release](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Current&style=plastic)](https://github.com/siavash79/AOSPMods/releases/latest)
-![Total Downloads](https://img.shields.io/github/downloads/siavash79/aospmods/total?color=red&label=Total%20Downloads&style=plastic)
-![Lines of code](https://img.shields.io/tokei/lines/github/siavash79/AOSPMods?label=Lines%20of%20Code&style=plastic)
+[![Latest Release](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Current)](https://github.com/siavash79/AOSPMods/releases/latest)
+![Total Downloads](https://img.shields.io/github/downloads/siavash79/aospmods/total?color=red&label=Total%20Downloads)
+![Lines of code](https://img.shields.io/tokei/lines/github/siavash79/AOSPMods?label=Lines%20of%20Code)
 
 ![Header Image](https://raw.githubusercontent.com/siavash79/AOSPMods/master/.github/AOSP_Mods_Header.png)
 

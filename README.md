@@ -69,7 +69,7 @@ This module is designed based on AOSP source code. What does it mean? it means t
 - LSPosed (Zygisk Version)
 
 
-**How to install: (Make sure to read post #2 (FAQ) carefully before you proceed)**
+**How to install:**
 - Install the magisk module
 - Reboot (bootloops are not expected)
 - You can use AOSPMods app to configure the module

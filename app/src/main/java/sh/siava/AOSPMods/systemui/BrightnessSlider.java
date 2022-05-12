@@ -1,6 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,6 +14,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
+@SuppressWarnings("RedundantThrows")
 public class BrightnessSlider extends XposedModPack {
     private static final String listenPackage = "com.android.systemui";
 
@@ -21,6 +24,7 @@ public class BrightnessSlider extends XposedModPack {
     private Object QQSBrightnessSliderController = null;
     private View QSbrightnessSliderView = null;
     private Object BrightnessMirrorController = null;
+    @SuppressLint("StaticFieldLeak")
     private static View QQSbrightnessSliderView = null;
     private Object QS, QQS;
     private ViewGroup QSParent;
@@ -87,8 +91,6 @@ public class BrightnessSlider extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!BrightnessHookEnabled || !listenPackage.equals(lpparam.packageName)) //master switch
             return;
-
-
         
         Class<?> QuickQSPanelClass = XposedHelpers.findClass("com.android.systemui.qs.QuickQSPanel", lpparam.classLoader);
         Class<?> QSPanelControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
@@ -113,6 +115,7 @@ public class BrightnessSlider extends XposedModPack {
                     ViewGroup parent = (ViewGroup) v.getParent();
                     parent.removeView(v);
                     parent.addView(v, 1);
+                    setBottomSliderMargins(v);
                 }
                 catch (Exception ignored){}
             }
@@ -176,5 +179,18 @@ public class BrightnessSlider extends XposedModPack {
                 setQQSVisibility();
             }
         });
+    }
+    
+    //swapping top and bottom margins of slider
+    private void setBottomSliderMargins(View slider) {
+        if (slider != null) {
+            Resources res = mContext.getResources();
+            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) slider.getLayoutParams();
+            lp.topMargin = res.getDimensionPixelSize(
+                    res.getIdentifier("qs_brightness_margin_bottom", "dimen", mContext.getPackageName()));
+            lp.bottomMargin =  res.getDimensionPixelSize(
+                    res.getIdentifier("qs_brightness_margin_top", "dimen", mContext.getPackageName()));
+            slider.setLayoutParams(lp); //TODO: shall we really re-set it?
+        }
     }
 }

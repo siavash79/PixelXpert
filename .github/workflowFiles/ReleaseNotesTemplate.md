@@ -24,3 +24,4 @@ Technically, the module should automatically activate itself in Lsposed and get 
 @acuicultor		Spanish
 @tomaja18		Spanish
 @n3rd3x3		Spanish
+@TeaqariaWTF	Turkish

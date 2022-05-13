@@ -1,216 +1,216 @@
 <resources>
     <!--General strings-->
     <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
+    <string name="xposed_desc" translatable="false">Android 12+ AOSP tabanlı ROM'lar için özel özellikler</string>
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
-    <string name="error_not_activated">Please confirm if the module is activated on LSPosed Manager</string>
-    <string name="hide_default">Hide (Default)</string>
+    <string name="error_not_activated">Lütfen modülün LSPosed Manager'da etkinleştirildiğinden emin olun</string>
+    <string name="hide_default">Gizle (Default)</string>
     <string name="percent_of_default_size">% of default size</string>
     <string name="overlay_none_title">(Default)</string>
-    <string name="general_section">General options</string>
+    <string name="general_section">Genel seçenekler</string>
     <string name="general_on">On</string>
     <string name="general_off">Off</string>
-    <string name="sysui_restart_needed">Requires a SystemUI restart to apply</string>
-    <string name="restart_needed">Requires a restart to apply</string>
+    <string name="sysui_restart_needed">Değişikliklerin uygulanması için SystemUI'nin yeniden başlatılması gerekir</string>
+    <string name="restart_needed">Değişiklikleri uygulamak için yeniden başlatma gerektirir</string>
 
     <!--Category titles-->
-    <string name="lockscreen_header_title">Lock Screen</string>
+    <string name="lockscreen_header_title">Kilit Ekranı</string>
     <string name="statusbar_header">Status Bar</string>
     <string name="nav_header">Navigation bar</string>
     <string name="misc_header">Miscellaneous</string>
-    <string name="qs_panel_category_title">Quick Settings Panel</string>
-    <string name="theme_customization_category">Theming</string>
+    <string name="qs_panel_category_title">Hızlı Ayarlar Paneli</string>
+    <string name="theme_customization_category">Temalandırma</string>
 
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Hide under-display fingerprint circle</string>
-    <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
-    <string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
-    <string name="carrier_text_category">Carrier text</string>
-    <string name="configure_carrier_text">Configure carrier text</string>
-    <string name="carrier_text_mod_disabled">Carrier text unchanged</string>
-    <string name="carrier_text_mod_enabled">Custom carrier text</string>
-    <string name="carrier_text_value">Insert custom text</string>
+    <string name="transparent_fingerprint_circle">Ekran altı parmak izi dairesini gizle</string>
+    <string name="transparent_fingerprint_circle_off">Parmak izi simgesinin etrafındaki daire etkin</string>
+    <string name="transparent_fingerprint_circle_on">Parmak izi simgesinin etrafındaki daire gizlenecek</string>
+    <string name="carrier_text_category">Taşıyıcı metin</string>
+    <string name="configure_carrier_text">Taşıyıcı metnini yapılandır</string>
+    <string name="carrier_text_mod_disabled">Taşıyıcı metni değişmedi</string>
+    <string name="carrier_text_mod_enabled">Özel operatör metni</string>
+    <string name="carrier_text_value">Özel metin ekle</string>
     <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
-    <string name="keyguard_bottom_category">Bottom area shortcuts</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Hide circle around icons</string>
-    <string name="keyguard_bottom_force_camera_title">Show camera shortcut</string>
-    <string name="keyguard_left_shortcut">Show left shortcut on lock screen</string>
-    <string name="LSleftShortcutTitle">Left shortcut</string>
-    <string name="LSrightShortcutTitle">Right shortcut</string>
-    <string name="camera_shortcut">Camera</string>
-    <string name="assistant_shortcut">Assistant</string>
-    <string name="torch_shortcut">Flashlight</string>
-    <string name="album_art_category">Media options</string>
-    <string name="album_art_title">Enable album art when playing media</string>
-    <string name="shufflePin_title">Shuffle Pin</string>
+    <string name="keyguard_bottom_category">Alt alan kısayolları</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Simgelerin etrafındaki daireyi gizle</string>
+    <string name="keyguard_bottom_force_camera_title">Kamera kısayolunu göstert</string>
+    <string name="keyguard_left_shortcut">Kilit ekranında sol tarafta kısayolu göster</string>
+    <string name="LSleftShortcutTitle">Sol kısayol</string>
+    <string name="LSrightShortcutTitle">Sağ kısayol</string>
+    <string name="camera_shortcut">Kamera</string>
+    <string name="assistant_shortcut">Asistan</string>
+    <string name="torch_shortcut">El feneri</string>
+    <string name="album_art_category">Medya seçenekleri</string>
+    <string name="album_art_title">Medya oynatırken albüm resmini etkinleştir</string>
+    <string name="shufflePin_title">Karıştırma Pimi</string>
 
     <!--Status bar related-->
-    <string name="double_tap_sleep_title">Double tap to sleep</string>
-    <string name="double_tap_sleep_off">"Double tap won't turn off the display"</string>
-    <string name="double_tap_sleep_on">Double tap on status bar, or lock screen, turns the display off</string>
-    <string name="battery_style_title">Choose a battery style</string>
-    <string name="battery_show_percent_title">Show battery percentage</string>
-    <string name="battery_style_category_title">Battery style</string>
+    <string name="double_tap_sleep_title">Ekranı kapatmak için iki kez dokunun</string>
+    <string name="double_tap_sleep_off">"Çift dokunma ekranı kapatmıyor"</string>
+    <string name="double_tap_sleep_on">Durum çubuğuna veya kilit ekranına iki kez dokunun, ekranı kapatır</string>
+    <string name="battery_style_title">Bir pil stili seçin</string>
+    <string name="battery_show_percent_title">Pil yüzdesini göster</string>
+    <string name="battery_style_category_title">Pil stili</string>
     <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
-    <string name="battery_icon_size_title">Battery icon size</string>
+    <string name="battery_icon_size_title">Pil simgesi boyutu</string>
     <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
-    <string name="battery_hidden">Hidden</string>
-    <string name="BIcon_Opacity_title">Opacity</string>
-    <string name="sb_center_fine_tune">Fine-tune center area</string>
+    <string name="battery_hidden">Gizlenmiş</string>
+    <string name="BIcon_Opacity_title">Opaklık</string>
+    <string name="sb_center_fine_tune">İnce ayar merkez alanı</string>
 
-    <string name="lte_4g_icon_title">LTE / 4G Icon</string>
-    <string name="combined_signal_icon_title">Combined signal icons</string>
-    <string name="volte_icon_title">Show VoLTE icon when available</string>
-    <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
-    <string name="sbc_position_title">Clock position</string>
-    <string name="sbc_ampm_style">AM/PM Style</string>
-    <string name="sbc_show_secs">Show seconds</string>
-    <string name="sbc_date_cat">Date options</string>
-    <string name="sbc_day_of_week_options">Show day of week with clock</string>
-    <string name="sbc_advanced_cat">Advanced date (will supersede above setting!)</string>
-    <string name="sbc_advanced_sum">Please read Java date format documentation</string>
-    <string name="sbc_custom_date_before">Custom date format before clock</string>
-    <string name="sbc_date_small">Smaller size (70%)</string>
-    <string name="sbc_custom_date_after">Custom date format after clock</string>
-    <string name="sbc_header">Status bar clock customization</string>
-    <string name="sbc_may_take_one_minute">Takes effect on time update or SysUI restart</string>
+    <string name="lte_4g_icon_title">LTE / 4G Simgesi</string>
+    <string name="combined_signal_icon_title">Birleşik sinyal simgeleri</string>
+    <string name="volte_icon_title">Varsa VoLTE simgesini göster</string>
+    <string name="sb_vibration_switch_title">Titreşim/Sessiz simgelerini göster</string>
+    <string name="sbc_position_title">Saat konumu</string>
+    <string name="sbc_ampm_style">AM/PM Stili</string>
+    <string name="sbc_show_secs">Saniyeyi göster</string>
+    <string name="sbc_date_cat">Tarih seçeneği</string>
+    <string name="sbc_day_of_week_options">Haftanın gününü saatle birlikte göster</string>
+    <string name="sbc_advanced_cat">Gelişmiş tarih (yukarıdaki ayarın yerini alacaktır!)</string>
+    <string name="sbc_advanced_sum">Lütfen Java tarih formatı belgelerini okuyun</string>
+    <string name="sbc_custom_date_before">Saatten önce özel tarih formatı</string>
+    <string name="sbc_date_small">Daha küçük boyut (%70)</string>
+    <string name="sbc_custom_date_after">Saatten sonra özel tarih formatı</string>
+    <string name="sbc_header">Durum çubuğu saat özelleştirmesi</string>
+    <string name="sbc_may_take_one_minute">Zaman güncellemesinde veya SysUI yeniden başlatıldığında etkin olur</string>
     <string name="ntsb_far_left">Far Left</string>
-    <string name="ntsb_mid_left">Mid-Left</string>
-    <string name="ntsb_mid_right">Mid-Right</string>
-    <string name="ntsb_category_title">Network Monitor</string>
-    <string name="ntsb_enabled_title">Enable network monitor</string>
-    <string name="ntsb_position_title">Monitor Position</string>
-    <string name="ntsb_treshold_title">Auto-hide treshold</string>
-    <string name="ntsb_treshold_summary">"Hide if traffic is less than… (Kilobytes)"</string>
-    <string name="statusbar_general_options">Status Bar Options</string>
-    <string name="dual_tone_battery_title">Enable dual tone battery meter</string>
-    <string name="dual_tone_battery_on_summary">On (only works with portrait icon)</string>
-    <string name="unread_messages_title">Show number of unread messages</string>
-    <string name="status_bar_height">Status bar height</string>
-    <string name="status_bar_height_small">Small</string>
-    <string name="status_bar_height_medium">Medium</string>
+    <string name="ntsb_mid_left">Orta-Sol</string>
+    <string name="ntsb_mid_right">Orta-Sağ</string>
+    <string name="ntsb_category_title">Ağ İzleyicisi</string>
+    <string name="ntsb_enabled_title">Ağ izleyicisini etkinleştir</string>
+    <string name="ntsb_position_title">Monitör Konumu</string>
+    <string name="ntsb_treshold_title">Otomatik-gizle eşiği</string>
+    <string name="ntsb_treshold_summary">"Trafik azsa gizle… (Kilobytes)"</string>
+    <string name="statusbar_general_options">Status Bar Seçenekleri</string>
+    <string name="dual_tone_battery_title">Çift tonlu pil ölçeri etkinleştir</string>
+    <string name="dual_tone_battery_on_summary">Açık (yalnızca portre simgesiyle çalışır)</string>
+    <string name="unread_messages_title">Okunmamış mesajların sayısını göster</string>
+    <string name="status_bar_height">Durum çubuğu yüksekliği</string>
+    <string name="status_bar_height_small">Küçük</string>
+    <string name="status_bar_height_medium">Orta</string>
     <string name="fix_status_bar_padding">Correct left side padding</string>
-    <string name="sbbb_header">Battery bar settings</string>
-    <string name="sbbIcon_header">Battery icon settings</string>
-    <string name="BB_enable_title">Enable Battery Bar</string>
-    <string name="BB_onlycharging_title">Only during charging</string>
-    <string name="BB_move_SB_bottom_title">At bottom of Statusbar</string>
-    <string name="BB_colorful_title">Make it colorful</string>
-    <string name="BB_Opacity_title">Bar opacity</string>
-    <string name="BB_center_align_title">Center Aligned</string>
-    <string name="BB_Thickness_title">Bar thickness</string>
-    <string name="BB_indicate_charging">Indicate charging</string>
-    <string name="BB_indicate_fast_charging">Indicate fast charging</string>
-    <string name="BB_warning_level">Warning level range</string>
-    <string name="BB_warning_tip">Set both to 0 to disable level-based colors</string>
-    <string name="BB_batteryCriticalColor">Critical level color</string>
-    <string name="BB_batteryWarningColor">Warning level color</string>
-    <string name="BB_batteryChargingColor">Charging color</string>
-    <string name="BB_batteryFastChargingColor">Fast charging color</string>
-    <string name="BB_transit_colors">Shade colors between the range</string>
+    <string name="sbbb_header">Pil çubuğu ayarları</string>
+    <string name="sbbIcon_header">Pil simgesi ayarları</string>
+    <string name="BB_enable_title">Pil Çubuğunu Etkinleştir</string>
+    <string name="BB_onlycharging_title">Sadece şarj sırasında</string>
+    <string name="BB_move_SB_bottom_title">Durum Çubuğunun altında</string>
+    <string name="BB_colorful_title">Renkli yap</string>
+    <string name="BB_Opacity_title">Bar opaklığı</string>
+    <string name="BB_center_align_title">Ortaya Hizalanmış</string>
+    <string name="BB_Thickness_title">Bar kalınlığı</string>
+    <string name="BB_indicate_charging">Şarjı göster</string>
+    <string name="BB_indicate_fast_charging">Hızlı şarjı belirt</string>
+    <string name="BB_warning_level">Uyarı seviyesi aralığı</string>
+    <string name="BB_warning_tip">Düzey tabanlı renkleri devre dışı bırakmak için her ikisini de 0'a ayarlayın</string>
+    <string name="BB_batteryCriticalColor">Kritik seviye rengi</string>
+    <string name="BB_batteryWarningColor">Uyarı seviyesi rengi</string>
+    <string name="BB_batteryChargingColor">Şarj rengi</string>
+    <string name="BB_batteryFastChargingColor">Hızlı şarj rengi</string>
+    <string name="BB_transit_colors">Aralık arasındaki gölge renkleri</string>
 
     <!--Quick settings panel related-->
-    <string name="qs_mod_category_title">Build number on QS Panel footer</string>
-    <string name="qs_footer_mod_title">Modify build text number on QS panel</string>
+    <string name="qs_mod_category_title">QS Panel alt bilgisinde yapı numarası</string>
+    <string name="qs_footer_mod_title">QS panelinde yapı metin numarasını değiştirin</string>
     <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
-    <string name="qs_footer_text_summary">Leave it blank to remove the text completely</string>
-    <string name="qs_footer_text_desc">Turn the display off/on to apply</string>
-    <string name="light_qs_title">Light QS Panel during light theme</string>
-    <string name="light_dualtone_qs_title">Enable dual tone QS Panel</string>
-    <string name="qs_pulldown_size">Quick pull down width</string>
-    <string name="qs_pulldown_switch_title">Quick QS panel pull down from status bar</string>
-    <string name="qs_pulldown_side_title">Quick pull down side</string>
-    <string name="qs_pulldown_category">Quick settings pull down</string>
+    <string name="qs_footer_text_summary">Metni tamamen kaldırmak için boş bırakın</string>
+    <string name="qs_footer_text_desc">Uygulamak için ekranı kapatın/açın</string>
+    <string name="light_qs_title">Işık teması sırasında hafif QS Paneli</string>
+    <string name="light_dualtone_qs_title">Çift tonlu QS Panelini etkinleştir</string>
+    <string name="qs_pulldown_size">Hızlı aşağı çekme genişliği</string>
+    <string name="qs_pulldown_switch_title">Durum çubuğundan hızlı QS paneli aşağı çekme</string>
+    <string name="qs_pulldown_side_title">Hızlı çekme tarafı</string>
+    <string name="qs_pulldown_category">Hızlı ayarlar için aşağı çekin</string>
     <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
-    <string name="qs_rows_number">QS Rows number</string>
-    <string name="qs_general_options">Quick settings options</string>
-    <string name="qs_tiles_3_columns_title">Enable 3 QS Tiles columns</string>
-    <string name="qs_text_size_title">QS Tiles text size</string>
-    <string name="qs_text_size">Reduce QS Tiles text size</string>
-    <string name="wifi_cell_title">Internet Tile</string>
-    <string name="wifi_cell_on">Use Wifi and Data separate Tiles</string>
-    <string name="wifi_cell_off">Use single Internet Tile</string>
-    <string name="QQS_brightness_category">Brightness slider options</string>
-    <string name="QQS_brightness_title">Show brightness slider on QQS Panel</string>
-    <string name="QQS_brightness_bottom_title">Move brightness slider to the bottom</string>
-    <string name="QS_brightness_disable_title">Hide brightness slider from Quick Settings</string>
-    <string name="bs_thick_track">Use a thick track on brightness slider</string>
-    <string name="quick_settings_tiles_category">QS Tiles Options</string>
+    <string name="qs_rows_number">QS Satır numarası</string>
+    <string name="qs_general_options">Hızlı ayar seçenekleri</string>
+    <string name="qs_tiles_3_columns_title">3 QS Döşeme sütununu etkinleştir</string>
+    <string name="qs_text_size_title">QS Döşemelerinin metin boyutu</string>
+    <string name="qs_text_size">QS Döşemeleri metin boyutunu küçült</string>
+    <string name="wifi_cell_title">İnternet Kutucuğu</string>
+    <string name="wifi_cell_on">Wifi ve Mobil internet için ayrı Kutucukları kullanın</string>
+    <string name="wifi_cell_off">Tek İnternet Kutucuğu kullan</string>
+    <string name="QQS_brightness_category">Parlaklık kaydırıcı seçenekleri</string>
+    <string name="QQS_brightness_title">QQS Panelinde parlaklık kaydırıcısını göster</string>
+    <string name="QQS_brightness_bottom_title">Parlaklık kaydırıcısını en alta taşı</string>
+    <string name="QS_brightness_disable_title">Hızlı Ayarlar'dan parlaklık kaydırıcısını gizle</string>
+    <string name="bs_thick_track">Parlaklık kaydırıcısında kalın bir iz kullanın</string>
+    <string name="quick_settings_tiles_category">QS Tiles option</string>
     <string name="qs_tile_style_title">QS Tiles themes</string>
-    <string name="qstile_default">Default</string>
-    <string name="qstile_cookie">Cookie</string>
-    <string name="qstile_triangles">Triangle</string>
-    <string name="qstile_divided">Divided Circle</string>
-    <string name="qstile_attemptmountain">An attempt of a mountain</string>
-    <string name="qstile_squircle_trim">Squircle with trim</string>
+    <string name="qstile_default">Varsayılan</string>
+    <string name="qstile_cookie">Kurabiye</string>
+    <string name="qstile_triangles">Üçgen</string>
+    <string name="qstile_divided">Bölünmüş Daire</string>
+    <string name="qstile_attemptmountain">Bir dağ denemesi</string>
+    <string name="qstile_squircle_trim">Döşeme ile sincap</string>
     <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">Wavey</string>
+    <string name="qstile_wavey">Dalgalı</string>
     <string name="qstile_squaremedo">The Squaremedo</string>
-    <string name="qstile_dual_tone_circle">Dual-toned circle</string>
+    <string name="qstile_dual_tone_circle">Çift tonlu daire</string>
     <string name="qstile_circleoutline">Circle Outline</string>
     <string name="qstile_pokesign">Pokesign</string>
     <string name="qstile_cosmos">Shishu Cosmos</string>
     <string name="qstile_neonlike">Neon Light</string>
     <string name="qstile_circle_trim">Circle with trim</string>
-    <string name="qstile_dottedcircle">Dotted Circle</string>
+    <string name="qstile_dottedcircle">Noktalı Daire</string>
     <string name="qstile_inkdrop">Ink</string>
-    <string name="qstile_circle">Circle</string>
+    <string name="qstile_circle">Daire</string>
 
     <!--Navigation bar related-->
-    <string name="back_gesture_category_title">Configure back gesture</string>
-    <string name="back_from_left_title">Left side of the screen</string>
-    <string name="back_from_right_title">Right side of the screen</string>
-    <string name="back_height_title">Gesture height</string>
+    <string name="back_gesture_category_title">Geri hareketini yapılandır</string>
+    <string name="back_from_left_title">Ekranın sol tarafı</string>
+    <string name="back_from_right_title">Ekranın sağ tarafı</string>
+    <string name="back_height_title">Gesture yüksekliği</string>
     <string name="gesturenav_header">Gesture navigation</string>
-    <string name="gesture_nav_pill_cat">Navigation bar pill width</string>
-    <string name="gesture_nav_pill_mod_title">Modify NavBar pill width</string>
-    <string name="gesture_nav_pill_width_title">Width comparing to standard size</string>
-    <string name="threebutton_header_title">3-Button navigation</string>
+    <string name="gesture_nav_pill_cat">Gezinme çubuğu hap genişliği</string>
+    <string name="gesture_nav_pill_mod_title">NavBar hap genişliğini değiştirin</string>
+    <string name="gesture_nav_pill_width_title">Standart boyuta göre genişlik</string>
+    <string name="threebutton_header_title">3 Düğmeli gezinme</string>
     <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
-    <string name="hide_navbar_title">Hide navigation bar</string>
-    <string name="gesture_navbar_thickness_title">Navbar pill thickness</string>
-    <string name="gesture_navbar_thickness">Modify NavBar pill thickness</string>
-    <string name="gesture_navbar_thin">Thin</string>
-    <string name="gesture_navbar_thick">Thick</string>
-    <string name="gesture_navbar_thicker">Thicker</string>
+    <string name="hide_navbar_title">Gezinme çubuğunu gizle</string>
+    <string name="gesture_navbar_thickness_title">Navbar hap kalınlığı</string>
+    <string name="gesture_navbar_thickness">NavBar hap kalınlığını değiştirin</string>
+    <string name="gesture_navbar_thin">İnce</string>
+    <string name="gesture_navbar_thick">Kalın</string>
+    <string name="gesture_navbar_thicker">Daha kalın</string>
     <string name="colorpill_title">Colorize gestures pill</string>
     <string name="colorpill">Accent colored gestures pill</string>
-    <string name="reducekeyboard_title">Gestures keyboard space</string>
-    <string name="reducekeyboard">Reduce space on keyboard</string>
-    <string name="taskbar_status_title">Android Taskbar</string>
-    <string name="taskbar_force_enable_title">Force Enabled</string>
-    <string name="taskbar_force_disable_title">Force Disabled</string>
+    <string name="reducekeyboard_title">Hareketli klavye alanı</string>
+    <string name="reducekeyboard">Klavyedeki alanı azaltın</string>
+    <string name="taskbar_status_title">Android Görev Çubuğu</string>
+    <string name="taskbar_force_enable_title">Etkinleştirmeye Zorla</string>
+    <string name="taskbar_force_disable_title">Devre Dışı Bırakılmaya Zorla</string>
 
     <!--Miscellaneous section related-->
-    <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
-    <string name="so_power_longpress_torch_title">Long press Power to torch*</string>
-    <string name="so_taptaptorch_title">Enable Double-tap Torch</string>
-    <string name="so_taptaptorch_summary">Double tap then hold lockscreen for quick torch</string>
+    <string name="screenshot_sound_disable_title">Ekran görüntüsü sesini devre dışı bırak</string>
+    <string name="so_power_longpress_torch_title">Torch için Güç tuşuna uzun basın*</string>
+    <string name="so_taptaptorch_title">Çift Dokunma Torchunu Etkinleştir</string>
+    <string name="so_taptaptorch_summary">Hızlı el feneri için kilit ekranına iki kez dokunun ve basılı tutun</string>
 
-    <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
-    <string name="so_double_tap_wake_title">Double-tap to wake phone</string>
-    <string name="so_double_tap_wake_summary">Disables single-tap to wake</string>
-    <string name="so_tap_proximity_wake_title">Don\'t wake on touch when screen covered</string>
-    <string name="doze_header">While screen is off…</string>
-    <string name="custom_themed_icons_title">Custom themed icons</string>
-    <string name="custom_themed_icons_off">Custom icons disabled</string>
-    <string name="custom_themed_icons_on">Custom icons enabled</string>
-    <string name="so_vol_longpress_skip">Long press Volume to skip music*</string>
-    <string name="notifications_header">Notifications options</string>
-    <string name="expand_notifications_icons_title">"Add expand/collapse all buttons</string>
-    <string name="disable_overscroll">"Disable elastic overscroll effect</string>
-    <string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for, in LSPosed</string>
+    <string name="framework_needed_caution_summary">Lsposed'da System Framework'ün etkinleştirilmesi gerektirir.  DİKKATLE KULLANIN</string>
+    <string name="so_double_tap_wake_title">Telefonu uyandırmak için iki kez dokunun</string>
+    <string name="so_double_tap_wake_summary">Uyandırmak için tek dokunuşu devre dışı bırak</string>
+    <string name="so_tap_proximity_wake_title">Ekran kapalıyken dokunduğunuzda uyandırmayın</string>
+    <string name="doze_header">Ekran kapalıyken…</string>
+    <string name="custom_themed_icons_title">Özel temalı simgeler</string>
+    <string name="custom_themed_icons_off">Özel simgeler devre dışı bırakıldı</string>
+    <string name="custom_themed_icons_on">Özel simgeler etkinleştirildi</string>
+    <string name="so_vol_longpress_skip">Müziği atlamak için Ses arttırma tuşuna uzun basın*</string>
+    <string name="notifications_header">Bildirim seçenekleri</string>
+    <string name="expand_notifications_icons_title">"Tüm düğmeleri genişlet/daralt</string>
+    <string name="disable_overscroll">"Elastik aşırı kaydırma efektini devre dışı bırak</string>
+    <string name="overscroll_on_summary">Önemli: LSPosed'da aşırı kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
 
     <!-- Theming section related -->
-    <string name="gsans_override_title">Force Google Sans font system wide</string>
-    <string name="font_overlays_enable_title">Enable using custom fonts</string>
-    <string name="theme_customization_font_title">Headline / Body font</string>
-    <string name="icons_style_title">Icons Style</string>
-    <string name="icon_shapes_title">Icon Shapes</string>
-    <string name="signal_icons_theme_title">Signal Icons Theme</string>
-    <string name="dt_styles_category">Dark theme styles</string>
-    <string name="dt_styles">Choose a style</string>
+    <string name="gsans_override_title">Google Sans yazı tipi sistemini geniş tutmaya zorla</string>
+    <string name="font_overlays_enable_title">Özel yazı tiplerini kullanmayı etkinleştir</string>
+    <string name="theme_customization_font_title">Başlık / Gövde yazı tipi</string>
+    <string name="icons_style_title">Simgeler Stili</string>
+    <string name="icon_shapes_title">Simge Şekilleri</string>
+    <string name="signal_icons_theme_title">Sinyal Simgeleri Teması</string>
+    <string name="dt_styles_category">Karanlık tema stilleri</string>
+    <string name="dt_styles">Bir stil seçin</string>
     <string name="dt_black">Pitch black</string>
     <string name="dt_bakedgreen">Baked Green</string>
     <string name="dt_chocox">Choco X</string>
@@ -223,41 +223,41 @@
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
-    <string name="pull_down_left">Left</string>
-    <string name="pull_down_right">Right</string>
+    <string name="pull_down_left">Sol</string>
+    <string name="pull_down_right">Sağ</string>
 
     <!-- Battery styles -->
-    <string name="battery_default">Default</string>
-    <string name="battery_circle">Circle</string>
-    <string name="battery_dashed_circle">Dashed Circle</string>
-    <string name="battery_circle_filled">Filled Circle</string>
+    <string name="battery_default">Varsayılan</string>
+    <string name="battery_circle">Daire</string>
+    <string name="battery_dashed_circle">Kesikli Daire</string>
+    <string name="battery_circle_filled">Dolu Daire</string>
 
     <!-- Clock position -->
-    <string name="clock_default">Left (Default)</string>
-    <string name="clock_center">Center</string>
-    <string name="clock_right">Right</string>
+    <string name="clock_default">Sol (Varsayılan)</string>
+    <string name="clock_center">Merkez</string>
+    <string name="clock_right">Sağ</string>
 
     <!-- AM/PM style -->
     <string name="am_pm_default" translatable="false">@string/hide_default</string>
-    <string name="am_pm_normal">100% size of the clock</string>
-    <string name="am_pm_small">70% size of the clock</string>
+    <string name="am_pm_normal">Saatin Boyutu %100</string>
+    <string name="am_pm_small">Saatin Boyutu %70</string>
 
     <!-- Date position -->
     <string name="date_default" translatable="false">@string/hide_default</string>
-    <string name="date_before">Before Clock (100%)</string>
-    <string name="date_before_small">Before Clock (70%)</string>
-    <string name="date_after">After Clock (100%)</string>
-    <string name="date_after_small">After Clock (70%)</string>
+    <string name="date_before">Saatten Önce (%100)</string>
+    <string name="date_before_small">Saatten Önce (%70)</string>
+    <string name="date_after">Saatten Sonra (%100)</string>
+    <string name="date_after_small">Saat Sonrası (%70)</string>
 
     <!-- 4G | LTE -->
-    <string name="fourg_lte_default">System Default</string>
-    <string name="fourg_lte_lte">Force LTE icon</string>
-    <string name="fourg_lte_fourg">Force 4G icon</string>
+    <string name="fourg_lte_default">Sistem Varsayılanı</string>
+    <string name="fourg_lte_lte">LTE simgesini zorla</string>
+    <string name="fourg_lte_fourg">4G simgesini zorla</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">Force 2 rows</string>
-    <string name="qs_3_rows">Force 3 rows</string>
-    <string name="qs_4_rows">Force 4 rows</string>
-    <string name="qs_5_rows">Force 5 rows</string>
+    <string name="qs_2_rows">2 satırı zorla</string>
+    <string name="qs_3_rows">3 satırı zorla</string>
+    <string name="qs_4_rows">4 satırı zorla</string>
+    <string name="qs_5_rows">5 satırı zorla</string>
 
 </resources>

@@ -1,4 +1,4 @@
-[![Latest Release](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Current)](https://github.com/siavash79/AOSPMods/releases/latest)
+[![Latest Release](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Download)](https://github.com/siavash79/AOSPMods/releases/latest)
 ![Total Downloads](https://img.shields.io/github/downloads/siavash79/aospmods/total?color=red&label=Total%20Downloads)
 ![Lines of code](https://img.shields.io/tokei/lines/github/siavash79/AOSPMods?label=Lines%20of%20Code)
 

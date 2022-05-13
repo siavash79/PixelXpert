@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../.gradle/caches/transforms-3/ebf9602a58122bd2c6b0edc706f35ec5/transformed/jetified-storage-chooser-2.0.4.3/res/layout-v21/custom_storage_list.xml" value="0.3374094202898551" />
         <entry key="..\:/Software/Android_Tools/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/lock_screen_prefs.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/SystemUI/src/main/res/drawable/qs_security_footer_background.xml" value="0.11145833333333334" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/SystemUI/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.11145833333333334" />

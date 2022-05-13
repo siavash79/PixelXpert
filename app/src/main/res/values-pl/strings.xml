@@ -80,8 +80,8 @@
     <string name="ntsb_category_title">Monitor sieci</string>
     <string name="ntsb_enabled_title">Włącz monitor sieci</string>
     <string name="ntsb_position_title">Pozycja monitora sieci</string>
-    <string name="ntsb_treshold_title">Próg automatycznego ukrywania</string>
-    <string name="ntsb_treshold_summary">"Ukryj, jesli ruch jest mniejszy niż… (Kilobytes)"</string>
+    <string name="ntsb_threshold_title">Próg automatycznego ukrywania</string>
+    <string name="ntsb_threshold_summary">"Ukryj, jesli ruch jest mniejszy niż… (Kilobytes)"</string>
     <string name="statusbar_general_options">Opcje paska stanu</string>
     <string name="dual_tone_battery_title">Włącz dwutonowy miernik baterii</string>
     <string name="dual_tone_battery_on_summary">Włączony (Działa tylko z ikoną poziomą)</string>

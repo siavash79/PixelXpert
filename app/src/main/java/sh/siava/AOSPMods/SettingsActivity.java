@@ -303,7 +303,7 @@ public class SettingsActivity extends AppCompatActivity implements
         private void setVisibility(SharedPreferences sharedPreferences) {
             try {
                 boolean networkOnSBEnabled = sharedPreferences.getBoolean("networkOnSBEnabled", false);
-                findPreference("networkTrafficTreshold").setVisible(networkOnSBEnabled);
+                findPreference("networkTrafficThreshold").setVisible(networkOnSBEnabled);
                 findPreference("networkTrafficPosition").setVisible(networkOnSBEnabled);
     
                 findPreference("centerAreaFineTune").setSummary((sharedPreferences.getInt("centerAreaFineTune", 50) - 50) + "%");
@@ -374,7 +374,6 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("nav_pill_height_cat").setVisible(!HideNavbarOverlay);
                 findPreference("nav_pill_color_cat").setVisible(!HideNavbarOverlay);
                 findPreference("nav_keyboard_height_cat").setVisible(!HideNavbarOverlay);
-                
             }catch (Exception ignored){}
         }
         

@@ -80,8 +80,8 @@
     <string name="ntsb_category_title">Tráfico de red</string>
     <string name="ntsb_enabled_title">Activar monitor de tráfico de red</string>
     <string name="ntsb_position_title">Localización del monitor</string>
-    <string name="ntsb_treshold_title">Ocultar automaticamente</string>
-    <string name="ntsb_treshold_summary">"Ocultar si el tráfico es menor a… (Kilobytes)"</string>
+    <string name="ntsb_threshold_title">Ocultar automaticamente</string>
+    <string name="ntsb_threshold_summary">"Ocultar si el tráfico es menor a… (Kilobytes)"</string>
     <string name="statusbar_general_options">Preferencias de barra de estado</string>
     <string name="dual_tone_battery_title">Activar icono de tono dual</string>
     <string name="dual_tone_battery_on_summary">Activado (solo en modo horizontal)</string>

@@ -95,12 +95,12 @@
                 android:summaryOn="@string/general_on"
                 android:title="@string/ntsb_enabled_title" />
             <EditTextPreference
-                android:key="networkTrafficTreshold"
+                android:key="networkTrafficThreshold"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
-                android:title="@string/ntsb_treshold_title"
+                android:title="@string/ntsb_threshold_title"
                 app:defaultValue="10"
-                app:summary="@string/ntsb_treshold_summary" />
+                app:summary="@string/ntsb_threshold_summary" />
             <ListPreference
                 android:defaultValue="2"
                 android:entries="@array/network_sb_locations"

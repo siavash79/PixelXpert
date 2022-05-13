@@ -79,7 +79,7 @@ public class StatusbarMods extends XposedModPack {
     //region network traffic
     private static boolean networkOnSBEnabled = false;
     private static int networkTrafficPosition = POSITION_LEFT;
-    private static int networkTrafficTreshold = 10;
+    private static int networkTrafficThreshold = 10;
     private NetworkTrafficSB networkTrafficSB = null;
     //endregion
     
@@ -213,17 +213,17 @@ public class StatusbarMods extends XposedModPack {
             networkTrafficPosition = newnetworkTrafficPosition;
             placeNTSB();
         }
-        String tresholdText = XPrefs.Xprefs.getString("networkTrafficTreshold", "10");
+        String thresholdText = XPrefs.Xprefs.getString("networkTrafficThreshold", "10");
         
 
         try {
-            networkTrafficTreshold = Math.round(Float.parseFloat(tresholdText));
+            networkTrafficThreshold = Math.round(Float.parseFloat(thresholdText));
         }
         catch (Exception e) {
-            networkTrafficTreshold = 10;
+            networkTrafficThreshold = 10;
         }
         finally {
-            NetworkTrafficSB.setHideTreshold(networkTrafficTreshold);
+            NetworkTrafficSB.setHideThreshold(networkTrafficThreshold);
         }
         //endregion network settings
 
@@ -532,7 +532,7 @@ public class StatusbarMods extends XposedModPack {
                         if(networkOnSBEnabled)
                         {
                             networkTrafficSB = (networkTrafficSB == null) ? new NetworkTrafficSB(mContext) : networkTrafficSB;
-                            NetworkTrafficSB.setHideTreshold(networkTrafficTreshold);
+                            NetworkTrafficSB.setHideThreshold(networkTrafficThreshold);
                             placeNTSB();
                         }
                         

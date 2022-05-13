@@ -69,7 +69,7 @@ public class NetworkTrafficSB extends LinearLayout {
         }
     }
 
-    public static void setHideTreshold(int KBs)
+    public static void setHideThreshold(int KBs)
     {
         if(instance != null)
         {

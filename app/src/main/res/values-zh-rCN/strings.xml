@@ -68,8 +68,8 @@
     <string name="ntsb_category_title">流量指示</string>
     <string name="ntsb_enabled_title">开启流量指示器</string>
     <string name="ntsb_position_title">指示器位置</string>
-    <string name="ntsb_treshold_title">自动隐藏阈值</string>
-    <string name="ntsb_treshold_summary">"如果流量低于设定阈值(KB)，时隐藏</string>
+    <string name="ntsb_threshold_title">自动隐藏阈值</string>
+    <string name="ntsb_threshold_summary">"如果流量低于设定阈值(KB)，时隐藏</string>
     <string name="statusbar_general_options">状态栏选项</string>
     <string name="dual_tone_battery_title">双行电池图标</string>
     <string name="dual_tone_battery_on_summary">开启 (仅当纵向图标时生效)</string>

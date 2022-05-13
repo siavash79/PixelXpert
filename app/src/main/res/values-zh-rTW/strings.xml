@@ -60,8 +60,8 @@
     <string name="ntsb_category_title">網路監視器</string>
     <string name="ntsb_enabled_title">啟用網路監視器</string>
     <string name="ntsb_position_title">網路監視器位置</string>
-    <string name="ntsb_treshold_title">自動隱藏閾值</string>
-    <string name="ntsb_treshold_summary">「如果流量小於設定就隱藏...(Kilobytes)」</string>
+    <string name="ntsb_threshold_title">自動隱藏閾值</string>
+    <string name="ntsb_threshold_summary">「如果流量小於設定就隱藏...(Kilobytes)」</string>
     <string name="statusbar_general_options">狀態列選項</string>
     <string name="dual_tone_battery_title">啟用雙音電池表</string>
     <string name="dual_tone_battery_on_summary">開啟（僅適用於縱向圖示）</string>

@@ -34,7 +34,7 @@ public class KeyGuardPinScrambler extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if(!lpparam.packageName.equals(listenPackage)) return;
 		
-		Class<?> KeyguardPinBasedInputViewControllerClass = XposedHelpers.findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);
+		Class<?> NumPadKeyClass = XposedHelpers.findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);
 		Class<?> KeyguardAbsKeyInputViewControllerClass = XposedHelpers.findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
 		
 		Collections.shuffle(digits);
@@ -46,7 +46,7 @@ public class KeyGuardPinScrambler extends XposedModPack {
 			}
 		});
 		
-		XposedBridge.hookAllConstructors(KeyguardPinBasedInputViewControllerClass, new XC_MethodHook() {
+		XposedBridge.hookAllConstructors(NumPadKeyClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(!shufflePinEnabled) return;

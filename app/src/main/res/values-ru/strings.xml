@@ -74,8 +74,8 @@
     <string name="ntsb_category_title">Мониторинг сетевого трафика</string>
     <string name="ntsb_enabled_title">Включить мониторинг трафика</string>
     <string name="ntsb_position_title">Расположение мониторинга</string>
-    <string name="ntsb_treshold_title">Порог автоскрытия</string>
-    <string name="ntsb_treshold_summary">"Скрыть, если трафик меньше... (Килобайт)"</string>
+    <string name="ntsb_threshold_title">Порог автоскрытия</string>
+    <string name="ntsb_threshold_summary">"Скрыть, если трафик меньше... (Килобайт)"</string>
     <string name="statusbar_general_options">Параметры строки состояния</string>
     <string name="dual_tone_battery_title">Включить двухтонный измеритель заряда батареи</string>
     <string name="dual_tone_battery_on_summary">Вкл (работает только с портретным значком)</string>

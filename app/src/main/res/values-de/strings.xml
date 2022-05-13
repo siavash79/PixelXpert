@@ -77,8 +77,8 @@
     <string name="ntsb_category_title">Netzwerkanzeige</string>
     <string name="ntsb_enabled_title">Aktiviere Netzwerkanzeige</string>
     <string name="ntsb_position_title">Anzeige Position</string>
-    <string name="ntsb_treshold_title">Schwellenwert für automatisches Ausblenden</string>
-    <string name="ntsb_treshold_summary">"Verstecke wenn der Traffic unter… (Kilobytes)"</string>
+    <string name="ntsb_threshold_title">Schwellenwert für automatisches Ausblenden</string>
+    <string name="ntsb_threshold_summary">"Verstecke wenn der Traffic unter… (Kilobytes)"</string>
     <string name="statusbar_general_options">Statusleisten Optionen</string>
     <string name="dual_tone_battery_title">Aktivieren die Zweiton-Akkuanzeige</string>
     <string name="dual_tone_battery_on_summary">Ein (Funktioniert nur mit dem Portrait Symbol)</string>

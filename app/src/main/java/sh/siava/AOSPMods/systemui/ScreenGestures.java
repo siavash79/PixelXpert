@@ -38,6 +38,7 @@ public class ScreenGestures extends XposedModPack {
     GestureDetector mLockscreenDoubleTapToSleep; //event callback for double tap to sleep detection of statusbar only
     
     private boolean isDozing; //determiner for wakeup or sleep decision
+    private long lastButtonClick = 0;
     
     public ScreenGestures(Context context) { super(context); }
     
@@ -66,7 +67,15 @@ public class ScreenGestures extends XposedModPack {
         Class<?> NotificationShadeWindowViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);
         Class<?> DozeTriggersClass = XposedHelpers.findClass("com.android.systemui.doze.DozeTriggers", lpparam.classLoader);
         Class<?> NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
+        Class<?> NumPadKeyClass = XposedHelpers.findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);
         
+        XposedBridge.hookAllMethods(NumPadKeyClass, "userActivity", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                lastButtonClick = SystemClock.uptimeMillis();
+            }
+        });
+    
         //double tap detector for screen off AOD disabled sensor
         XposedBridge.hookAllMethods(DozeTriggersClass,
                 "onSensor", new XC_MethodHook() {
@@ -108,7 +117,12 @@ public class ScreenGestures extends XposedModPack {
                                 "onDoubleTap", MotionEvent.class, new XC_MethodHook() {
                                     @Override
                                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                        if(SystemClock.uptimeMillis() - lastButtonClick < 300)
+                                        {
+                                            return;
+                                        }
                                         doubleTap = true;
+                                        MotionEvent e = (MotionEvent) param.args[0];
                                         new Timer().schedule(new TimerTask() {
                                             @Override
                                             public void run() {
@@ -126,6 +140,8 @@ public class ScreenGestures extends XposedModPack {
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                                 MotionEvent ev = (MotionEvent) param.args[0];
                                 int action = ev.getActionMasked();
+                                
+                                XposedBridge.log("touch " + ev.getButtonState());
     
                                 if(doubleTap && action == MotionEvent.ACTION_UP)
                                 {

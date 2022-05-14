@@ -18,7 +18,9 @@ import androidx.annotation.Nullable;
 
 import org.jetbrains.annotations.Contract;
 
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import sh.siava.AOSPMods.BuildConfig;
 
 public class SystemUtils{
 	@SuppressLint("StaticFieldLeak")
@@ -97,35 +99,92 @@ public class SystemUtils{
 		instance = this;
 		
 		//Camera and Flash
-		mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
-		mCameraManager.registerTorchCallback(torchCallback, null);
-		
+		try {
+			mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
+			mCameraManager.registerTorchCallback(torchCallback, null);
+		}
+		catch(Throwable t)
+		{
+			if(BuildConfig.DEBUG)
+			{
+				XposedBridge.log("AOSPMods: Failed to Register flash callback");
+				t.printStackTrace();
+			}
+		}
+
 		//Audio
-		mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-		mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-		
+		try {
+			mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+		}
+		catch (Throwable t)
+		{
+			if(BuildConfig.DEBUG)
+			{
+				XposedBridge.log("AOSPMods Error getting audio manager");
+				t.printStackTrace();
+			}
+		}
+
+		//Power
+		try {
+			mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+		}
+		catch (Throwable t)
+		{
+			if(BuildConfig.DEBUG)
+			{
+				XposedBridge.log("AOSPMods Error getting power manager");
+				t.printStackTrace();
+			}
+		}
+
 		//Telephony
-		mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-		
+		try {
+			mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+		}
+		catch (Throwable t)
+		{
+			if(BuildConfig.DEBUG)
+			{
+				XposedBridge.log("AOSPMods Error getting telephoney manager");
+				t.printStackTrace();
+			}
+		}
+
+
 		//Vibrator
-		mVibrationManager = (VibratorManager) mContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
-		hasVibrator = mVibrationManager.getDefaultVibrator().hasVibrator();
+		try {
+			mVibrationManager = (VibratorManager) mContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
+			hasVibrator = mVibrationManager.getDefaultVibrator().hasVibrator();
+		}
+		catch (Throwable t)
+		{
+			if(BuildConfig.DEBUG)
+			{
+				XposedBridge.log("AOSPMods Error getting vibrator");
+				t.printStackTrace();
+			}
+		}
+
 	}
 	
 	private void setFlashInternal(boolean enabled) {
 		try {
-			if(mCameraManager == null)
-			{
-				return;
-			}
-			
 			String flashID = getFlashID(mCameraManager);
 			if(flashID.equals(""))
 			{
 				return;
 			}
 			mCameraManager.setTorchMode(flashID, enabled);
-		}catch (Exception ignored){}
+		}
+		catch (Throwable t)
+		{
+			if(BuildConfig.DEBUG)
+			{
+				XposedBridge.log("AOSPMods Error in setting flashlight");
+				t.printStackTrace();
+			}
+		}
 	}
 	
 	private void toggleFlashInternal() {
@@ -134,15 +193,13 @@ public class SystemUtils{
 	
 	private String getFlashID(@NonNull CameraManager cameraManager) throws CameraAccessException {
 		String[] ids = cameraManager.getCameraIdList();
-		try {
-			for (String id : ids) {
-				if (cameraManager.getCameraCharacteristics(id).get(CameraCharacteristics.LENS_FACING) == CameraMetadata.LENS_FACING_BACK) {
-					if (cameraManager.getCameraCharacteristics(id).get(CameraCharacteristics.FLASH_INFO_AVAILABLE)) {
-						return id;
-					}
+		for (String id : ids) {
+			if (cameraManager.getCameraCharacteristics(id).get(CameraCharacteristics.LENS_FACING) == CameraMetadata.LENS_FACING_BACK) {
+				if (cameraManager.getCameraCharacteristics(id).get(CameraCharacteristics.FLASH_INFO_AVAILABLE)) {
+					return id;
 				}
 			}
-		}catch (Throwable e) {e.printStackTrace();}
+		}
 		return "";
 	}
 	

@@ -1,16 +1,16 @@
 <resources>
     <!--General strings-->
     <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Android 12+ AOSP tabanlı ROM'lar için özel özellikler</string>
+    <string name="xposed_desc" translatable="false">Android 12+ AOSP tabanlı ROM\'lar için özel özellikler</string>
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
-    <string name="error_not_activated">Lütfen modülün LSPosed Manager'da etkinleştirildiğinden emin olun</string>
+    <string name="error_not_activated">Lütfen modülün LSPosed Manager\'da etkinleştirildiğinden emin olun</string>
     <string name="hide_default">Gizle (Default)</string>
     <string name="percent_of_default_size">% of default size</string>
     <string name="overlay_none_title">(Default)</string>
     <string name="general_section">Genel seçenekler</string>
     <string name="general_on">On</string>
     <string name="general_off">Off</string>
-    <string name="sysui_restart_needed">Değişikliklerin uygulanması için SystemUI'nin yeniden başlatılması gerekir</string>
+    <string name="sysui_restart_needed">Değişikliklerin uygulanması için SystemUI\'nin yeniden başlatılması gerekir</string>
     <string name="restart_needed">Değişiklikleri uygulamak için yeniden başlatma gerektirir</string>
 
     <!--Category titles-->
@@ -80,8 +80,8 @@
     <string name="ntsb_category_title">Ağ İzleyicisi</string>
     <string name="ntsb_enabled_title">Ağ izleyicisini etkinleştir</string>
     <string name="ntsb_position_title">Monitör Konumu</string>
-    <string name="ntsb_treshold_title">Otomatik-gizle eşiği</string>
-    <string name="ntsb_treshold_summary">"Trafik azsa gizle… (Kilobytes)"</string>
+    <string name="ntsb_threshold_title">Otomatik-gizle eşiği</string>
+    <string name="ntsb_threshold_summary">"Trafik azsa gizle… (Kilobytes)"</string>
     <string name="statusbar_general_options">Status Bar Seçenekleri</string>
     <string name="dual_tone_battery_title">Çift tonlu pil ölçeri etkinleştir</string>
     <string name="dual_tone_battery_on_summary">Açık (yalnızca portre simgesiyle çalışır)</string>
@@ -102,7 +102,7 @@
     <string name="BB_indicate_charging">Şarjı göster</string>
     <string name="BB_indicate_fast_charging">Hızlı şarjı belirt</string>
     <string name="BB_warning_level">Uyarı seviyesi aralığı</string>
-    <string name="BB_warning_tip">Düzey tabanlı renkleri devre dışı bırakmak için her ikisini de 0'a ayarlayın</string>
+    <string name="BB_warning_tip">Düzey tabanlı renkleri devre dışı bırakmak için her ikisini de 0\'a ayarlayın</string>
     <string name="BB_batteryCriticalColor">Kritik seviye rengi</string>
     <string name="BB_batteryWarningColor">Uyarı seviyesi rengi</string>
     <string name="BB_batteryChargingColor">Şarj rengi</string>
@@ -133,7 +133,7 @@
     <string name="QQS_brightness_category">Parlaklık kaydırıcı seçenekleri</string>
     <string name="QQS_brightness_title">QQS Panelinde parlaklık kaydırıcısını göster</string>
     <string name="QQS_brightness_bottom_title">Parlaklık kaydırıcısını en alta taşı</string>
-    <string name="QS_brightness_disable_title">Hızlı Ayarlar'dan parlaklık kaydırıcısını gizle</string>
+    <string name="QS_brightness_disable_title">Hızlı Ayarlar\'dan parlaklık kaydırıcısını gizle</string>
     <string name="bs_thick_track">Parlaklık kaydırıcısında kalın bir iz kullanın</string>
     <string name="quick_settings_tiles_category">QS Tiles option</string>
     <string name="qs_tile_style_title">QS Tiles themes</string>
@@ -188,7 +188,7 @@
     <string name="so_taptaptorch_title">Çift Dokunma Torchunu Etkinleştir</string>
     <string name="so_taptaptorch_summary">Hızlı el feneri için kilit ekranına iki kez dokunun ve basılı tutun</string>
 
-    <string name="framework_needed_caution_summary">Lsposed'da System Framework'ün etkinleştirilmesi gerektirir.  DİKKATLE KULLANIN</string>
+    <string name="framework_needed_caution_summary">Lsposed\'da System Framework\'ün etkinleştirilmesi gerektirir.  DİKKATLE KULLANIN</string>
     <string name="so_double_tap_wake_title">Telefonu uyandırmak için iki kez dokunun</string>
     <string name="so_double_tap_wake_summary">Uyandırmak için tek dokunuşu devre dışı bırak</string>
     <string name="so_tap_proximity_wake_title">Ekran kapalıyken dokunduğunuzda uyandırmayın</string>
@@ -200,7 +200,7 @@
     <string name="notifications_header">Bildirim seçenekleri</string>
     <string name="expand_notifications_icons_title">"Tüm düğmeleri genişlet/daralt</string>
     <string name="disable_overscroll">"Elastik aşırı kaydırma efektini devre dışı bırak</string>
-    <string name="overscroll_on_summary">Önemli: LSPosed'da aşırı kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
+    <string name="overscroll_on_summary">Önemli: LSPosed\'da aşırı kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Google Sans yazı tipi sistemini geniş tutmaya zorla</string>

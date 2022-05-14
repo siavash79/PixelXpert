@@ -34,7 +34,7 @@ public class ScreenGestures extends XposedModPack {
     private static boolean turnedByTTT = false;
     private static boolean mDoubleTap = false;  //double tap to wake when AOD off
     
-    private boolean doubleTap; //doubl tap event for TTT
+    private boolean doubleTap; //double tap event for TTT
 
     GestureDetector mLockscreenDoubleTapToSleep; //event callback for double tap to sleep detection of statusbar only
     
@@ -146,9 +146,7 @@ public class ScreenGestures extends XposedModPack {
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                                 MotionEvent ev = (MotionEvent) param.args[0];
                                 int action = ev.getActionMasked();
-                                
-                                XposedBridge.log("touch " + ev.getButtonState());
-    
+
                                 if(doubleTap && action == MotionEvent.ACTION_UP)
                                 {
                                     if(doubleTapToSleepEnabled && !isDozing)

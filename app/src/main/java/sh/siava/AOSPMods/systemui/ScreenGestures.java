@@ -20,6 +20,7 @@ import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
+@SuppressWarnings("RedundantThrows")
 public class ScreenGestures extends XposedModPack {
     public static final String listenPackage = "com.android.systemui";
 
@@ -86,6 +87,12 @@ public class ScreenGestures extends XposedModPack {
                             if (!mDoubleTap) {
                                 param.setResult(null);
                                 mDoubleTap = true;
+                                new Timer().schedule(new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        mDoubleTap = false;
+                                    }
+                                }, 400);
                             }
                         }
                     }
@@ -122,7 +129,6 @@ public class ScreenGestures extends XposedModPack {
                                             return;
                                         }
                                         doubleTap = true;
-                                        MotionEvent e = (MotionEvent) param.args[0];
                                         new Timer().schedule(new TimerTask() {
                                             @Override
                                             public void run() {

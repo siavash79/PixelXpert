@@ -94,13 +94,6 @@
                 android:summaryOff="@string/general_off"
                 android:summaryOn="@string/general_on"
                 android:title="@string/ntsb_enabled_title" />
-            <EditTextPreference
-                android:key="networkTrafficThreshold"
-                android:selectAllOnFocus="true"
-                android:singleLine="true"
-                android:title="@string/ntsb_threshold_title"
-                app:defaultValue="10"
-                app:summary="@string/ntsb_threshold_summary" />
             <ListPreference
                 android:defaultValue="2"
                 android:entries="@array/network_sb_locations"
@@ -108,6 +101,10 @@
                 android:summary="%s"
                 android:key="networkTrafficPosition"
                 android:title="@string/ntsb_position_title" />
+            <Preference
+                app:fragment="sh.siava.AOSPMods.SettingsActivity$networkFragment"
+                app:key="network_settings_header"
+                app:title="@string/network_settings_pref" />
         </PreferenceCategory>
     </PreferenceCategory>
 </PreferenceScreen>

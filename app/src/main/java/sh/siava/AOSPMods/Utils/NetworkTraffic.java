@@ -6,60 +6,108 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.net.Network;
 import android.net.TrafficStats;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.style.CharacterStyle;
 import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.text.DecimalFormat;
 
-/*
- *
- * Seeing how an Integer object in java requires at least 16 Bytes, it seemed awfully wasteful
- * to only use it for a single boolean. 32-bits is plenty of room for what we need it to do.
- *
- */
-public class NetworkTraffic extends androidx.appcompat.widget.AppCompatTextView {
+import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.XPrefs;
+import sh.siava.AOSPMods.systemui.StatusbarMods;
 
-    private static NetworkTraffic instance = null;
+@SuppressLint("ViewConstructor")
+public class NetworkTraffic extends LinearLayout {
     private static final int KB = 1024;
     private static final int MB = KB * KB;
     private static final int GB = MB * KB;
-    private static final String symbol = "/S";
+    private static final String symbol = "/s";
 
-    protected boolean mIsEnabled;
+    public static final int MODE_SHOW_RXTX = 0;
+    public static final int MODE_SHOW_RX = 1;
+    public static final int MODE_SHOW_TX = 2;
+    public static final int MODE_SHOW_TOTAL = 3;
+
+    //Same on all instances - default values needed in case not set by parents
+    private static int autoHideThreshold = 10*KB; // unit: Bytes/second
+    private static int indicatorMode = MODE_SHOW_RXTX;
+    private static boolean RXonTop = true; //if download is above upload
+    private static int refreshInterval = 1; //seconds
+    @ColorInt
+    private static int downloadColor = Color.GREEN;
+    @ColorInt
+    private static int uploadColor = Color.RED;
+    private static boolean colorTraffic = false;
+    private static int opacity = 100;
+    private static long lastParamUpdate = 0;
+
+    private static String unitDelimiter = " ";
+    private long lastInstanceParamUpdate = -1;
+
+    public static void setConstants(int refreshInterval, int autoHideThreshold, int indicatorMode, boolean RXonTop, boolean colorTraffic, int downloadColor, int uploadColor, int opacity)
+    {
+        NetworkTraffic.refreshInterval = refreshInterval;
+        NetworkTraffic.autoHideThreshold = autoHideThreshold*KB;
+        NetworkTraffic.indicatorMode = indicatorMode;
+        unitDelimiter = (indicatorMode == MODE_SHOW_RXTX) ? " " : "\n";
+        NetworkTraffic.RXonTop = RXonTop;
+        NetworkTraffic.colorTraffic = colorTraffic;
+        NetworkTraffic.downloadColor = downloadColor;
+        NetworkTraffic.uploadColor = uploadColor;
+        NetworkTraffic.opacity = opacity;
+
+        lastParamUpdate = SystemClock.elapsedRealtime();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private static NetworkTraffic SBInstance = null;
+    private static int SBTintColor;
+
+    @SuppressLint("StaticFieldLeak")
+    private static NetworkTraffic QSInstance = null;
+
+    private final LinearLayout iconLayout;
     protected boolean mAttached;
     private long totalRxBytes;
     private long totalTxBytes;
     private long lastUpdateTime;
-    protected int mAutoHideThreshold;
-    protected int mTintColor;
-    protected int mLocation;
-    private int mRefreshInterval = 1;
-    private int mIndicatorMode = 0;
-    private Context mContext;
+    private final Context mContext;
+    private final TextView mTextView;
 
     protected boolean mVisible = true;
-    private ConnectivityManager mConnectivityManager;
+    private final ConnectivityManager mConnectivityManager;
 
-    private Handler mTrafficHandler = new Handler() {
+    private final Handler mTrafficHandler = new Handler(Looper.myLooper()) {
         @Override
         public void handleMessage(Message msg) {
             long timeDelta = SystemClock.elapsedRealtime() - lastUpdateTime;
 
-            if (timeDelta < mRefreshInterval * 1000 * .95) {
+
+            if (timeDelta < refreshInterval * 1000L) {
                 if (msg.what != 1) {
                     // we just updated the view, nothing further to do
                     return;
@@ -77,28 +125,36 @@ public class NetworkTraffic extends androidx.appcompat.widget.AppCompatTextView 
             long rxData = newTotalRxBytes - totalRxBytes;
             long txData = newTotalTxBytes - totalTxBytes;
 
-            if (shouldHide(rxData, txData, timeDelta)) {
-                setText("");
-                setVisibility(View.GONE);
-                mVisible = false;
-            } else if (shouldShowUpload(rxData, txData, timeDelta)) {
-                // Show information for uplink if it's called for
 
-                SpannableStringBuilder output = new SpannableStringBuilder().append(formatOutput(timeDelta, rxData, symbol)).append("\n").append(formatOutput(timeDelta, txData, symbol));
 
-                // Update view if there's anything new to show
-                if (output != getText()) {
-                    setText(output);
+            if (shouldHide(rxData, txData, timeDelta))
+            {
+                hide();
+            }
+            else
+            {
+                SpannableStringBuilder output = null;
+                switch (indicatorMode)
+                {
+                    case MODE_SHOW_RXTX:
+                        SpannableStringBuilder RXOutput = formatOutput(timeDelta, rxData, (colorTraffic) ? downloadColor : null);
+
+                        SpannableStringBuilder TXOutput = formatOutput(timeDelta, txData, (colorTraffic) ? uploadColor : null);
+                        output = (RXonTop) ?
+                                RXOutput.append("\n").append(TXOutput):
+                                TXOutput.append("\n").append(RXOutput);
+                        break;
+                    case MODE_SHOW_TOTAL:
+                        output = formatOutput(timeDelta, rxData + txData, null);
+                        break;
+                    case MODE_SHOW_RX:
+                        output = formatOutput(timeDelta, rxData, (colorTraffic) ? downloadColor : null);
+                        break;
+                    case MODE_SHOW_TX:
+                        output = formatOutput(timeDelta, txData, (colorTraffic) ? uploadColor : null);
+                        break;
                 }
-                makeVisible();
-            } else {
-                // Add information for downlink if it's called for
-                CharSequence output = formatOutput(timeDelta, rxData, symbol);
-
-                // Update view if there's anything new to show
-                if (output != getText()) {
-                    setText(output);
-                }
+                mTextView.setText(output);
                 makeVisible();
             }
 
@@ -106,17 +162,16 @@ public class NetworkTraffic extends androidx.appcompat.widget.AppCompatTextView 
             totalRxBytes = newTotalRxBytes;
             totalTxBytes = newTotalTxBytes;
             clearHandlerCallbacks();
-            mTrafficHandler.postDelayed(mRunnable, mRefreshInterval * 1000);
+            mTrafficHandler.postDelayed(mRunnable, refreshInterval * 1000L);
         }
 
+        private SpannableStringBuilder formatOutput(long timeDelta, long data, @Nullable @ColorInt Integer textColor) {
+            long speed = (long)(data / (timeDelta / 1000F));
 
-        private SpannableStringBuilder formatOutput(long timeDelta, long data, String symbol) {
-            long speed = (long)(data / (timeDelta / 1024F));
-
-            return formatDecimal(speed);
+            return formatDecimal(speed, textColor);
         }
 
-        private SpannableStringBuilder formatDecimal(long speed) {
+        private SpannableStringBuilder formatDecimal(long speed, @Nullable @ColorInt Integer textColor) {
             DecimalFormat decimalFormat;
             String unit;
             String formatSpeed;
@@ -155,76 +210,140 @@ public class NetworkTraffic extends androidx.appcompat.widget.AppCompatTextView 
             spanSpeedString = new SpannableString(formatSpeed);
             spanSpeedString.setSpan(getSpeedRelativeSizeSpan(), 0, (formatSpeed).length(),
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if(textColor != null)
+            {
+                spanSpeedString.setSpan(new trafficStyle(textColor), 0 , (formatSpeed).length(),
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
 
             spanUnitString = new SpannableString(unit + symbol);
             spanUnitString.setSpan(getUnitRelativeSizeSpan(), 0, (unit + symbol).length(),
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            return new SpannableStringBuilder().append(spanSpeedString).append(" ").append(spanUnitString);
+            return new SpannableStringBuilder().append(spanSpeedString).append(unitDelimiter).append(spanUnitString);
         }
 
         private boolean shouldHide(long rxData, long txData, long timeDelta) {
-            long speedRxKB = (long)(rxData / (timeDelta / 1024f)) / KB;
-            long speedTxKB = (long)(txData / (timeDelta / 1024f)) / KB;
-            return !getConnectAvailable() ||
-                    (speedRxKB < mAutoHideThreshold &&
-                            speedTxKB < mAutoHideThreshold);
-        }
+            long speedRx = (long)(rxData / (timeDelta / 1000f));
+            long speedTx = (long)(txData / (timeDelta / 1000f));
 
-        private boolean shouldShowUpload(long rxData, long txData, long timeDelta) {
-            long speedRxKB = (long)(rxData / (timeDelta / 1024f)) / KB;
-            long speedTxKB = (long)(txData / (timeDelta / 1024f)) / KB;
-
-            if (mIndicatorMode == 0) {
-                return (speedTxKB > speedRxKB);
-            } else if (mIndicatorMode == 2) {
-                return true;
-            } else {
-                return false;
+            boolean lowSpeed = false;
+            switch (indicatorMode)
+            {
+                case MODE_SHOW_RXTX:
+                    lowSpeed = (speedRx < autoHideThreshold &&
+                            speedTx < autoHideThreshold);
+                    break;
+                case MODE_SHOW_RX:
+                    lowSpeed = speedRx < autoHideThreshold;
+                    break;
+                case MODE_SHOW_TX:
+                    lowSpeed = speedTx < autoHideThreshold;
+                    break;
+                case MODE_SHOW_TOTAL:
+                    lowSpeed = (speedRx + speedTx) < autoHideThreshold;
+                    break;
             }
+
+            return !getConnectAvailable() || lowSpeed;
         }
     };
 
-    protected boolean restoreViewQuickly() {
-        return getConnectAvailable() && mAutoHideThreshold == 0;
+    public static NetworkTraffic getInstance(Context context, boolean onStatusbar) {
+        NetworkTraffic instance = (onStatusbar) ? SBInstance : QSInstance;
+        if(instance == null)
+        {
+            new NetworkTraffic(context, onStatusbar);
+        }
+        return (onStatusbar) ? SBInstance : QSInstance;
+    }
+
+    private void hide() {
+        mTextView.setText("");
+        setVisibility(View.GONE);
+        mVisible = false;
     }
 
     protected void makeVisible() {
-        boolean show = mLocation == 1;
-        setVisibility(show ? View.VISIBLE
-                : View.GONE);
-        mVisible = show;
+        if(lastInstanceParamUpdate < lastParamUpdate)
+        {
+            this.setAlpha(2.55f*opacity);
+            setIndicatorMode();
+            mTextView.setGravity(Gravity.CENTER);
+            mTextView.setMaxLines(2);
+            setSpacingAndFonts();
+            updateTrafficDrawable();
+            lastInstanceParamUpdate = lastParamUpdate;
+        }
+        setVisibility(View.VISIBLE);
+        mVisible = true;
     }
 
-    /*
-     *  @hide
-     */
-    public NetworkTraffic(Context context) {
-        this(context, null);
+    private NetworkTraffic(Context context, boolean onStatusbar) {
+        this(context, null, onStatusbar);
     }
 
-    /*
-     *  @hide
-     */
-    public NetworkTraffic(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+    private NetworkTraffic(Context context, AttributeSet attrs, boolean onStatusbar) {
+        this(context, attrs, 0, onStatusbar);
     }
 
-    /*
-     *  @hide
-     */
-    public NetworkTraffic(Context context, AttributeSet attrs, int defStyle) {
+    private NetworkTraffic(Context context, AttributeSet attrs, int defStyle, boolean onStatusbar) {
         super(context, attrs, defStyle);
-        if(context == null) return;
         mContext = context;
-        final Resources resources = getResources();
-        setMode();
-        Handler mHandler = new Handler();
-        mConnectivityManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        update();
+        mTextView = new TextView(mContext);
+        iconLayout = new LinearLayout(mContext);
+        iconLayout.setOrientation(VERTICAL);
+        iconLayout.setGravity(Gravity.CENTER_VERTICAL);
+        iconLayout.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        this.addView(iconLayout);
+        this.addView(mTextView);
+        mConnectivityManager = SystemUtils.ConnectivityManager();
 
-        setSpacingAndFonts();
-        instance = this;
+        if(onStatusbar)
+        {
+            SBInstance = this;
+        }
+        else
+        {
+            QSInstance = this;
+        }
+
+        setSBTintColor(StatusbarMods.clockColor);
+    }
+
+    private void setIndicatorMode() {
+        Resources res = XPrefs.modRes;
+
+        TypedValue typedValue = new TypedValue();
+        mContext.getResources().getValue(mContext.getResources().getIdentifier("status_bar_icon_scale_factor", "dimen", mContext.getPackageName()), typedValue, true);
+        float iconScaleFactor = typedValue.getFloat() * .65f;
+
+        int Height = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("status_bar_battery_icon_height", "dimen", mContext.getPackageName()));
+        ImageView iconR = new ImageView(mContext);
+        iconR.setImageDrawable(ResourcesCompat.getDrawable(res, R.drawable.ic_chevron_down, mContext.getTheme()));
+        iconR.setLayoutParams(new LinearLayout.LayoutParams((int) (Height * iconScaleFactor), (int) (Height * iconScaleFactor)));
+
+        ImageView iconT = new ImageView(mContext);
+        iconT.setImageDrawable(ResourcesCompat.getDrawable(res, R.drawable.ic_chevron_up, mContext.getTheme()));
+        iconT.setLayoutParams(new LinearLayout.LayoutParams((int) (Height * iconScaleFactor), (int) (Height * iconScaleFactor)));
+
+        iconLayout.removeAllViews();
+        switch (indicatorMode)
+        {
+            case MODE_SHOW_RXTX:
+                iconLayout.addView(iconT);
+                iconLayout.addView(iconR, (RXonTop) ? 0 : 1);
+                break;
+            case MODE_SHOW_RX:
+                iconLayout.addView(iconR);
+                break;
+            case MODE_SHOW_TX:
+                iconLayout.addView(iconT);
+                break;
+        }
+        mTextView.setTextAlignment((indicatorMode == MODE_SHOW_RXTX) ? View.TEXT_ALIGNMENT_TEXT_END : View.TEXT_ALIGNMENT_CENTER);
+        int iconPadding = Math.round(Height * iconScaleFactor / 4);
+        iconR.setPadding(0, (RXonTop) ? 0 : iconPadding,0 , (RXonTop) ? iconPadding : 0);
+        iconT.setPadding(0, (RXonTop) ? iconPadding : 0,0 , (RXonTop) ? 0 : iconPadding);
     }
 
     @Override
@@ -237,18 +356,6 @@ public class NetworkTraffic extends androidx.appcompat.widget.AppCompatTextView 
             mContext.registerReceiver(mIntentReceiver, filter, null, getHandler());
         }
         update();
-    }
-
-    @Override
-    public void setVisibility(int visibility)
-    {
-        super.setVisibility(visibility);
-        LinearLayout parent = ((LinearLayout)this.getParent());
-        for(int i = 0; i< parent.getChildCount(); i++)
-        {
-            View v = parent.getChildAt(i);
-            if(!v.equals(this)) v.setVisibility(visibility);
-        }
     }
 
     @Override
@@ -269,12 +376,7 @@ public class NetworkTraffic extends androidx.appcompat.widget.AppCompatTextView 
         return new RelativeSizeSpan(0.70f);
     }
 
-    private Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-            mTrafficHandler.sendEmptyMessage(0);
-        }
-    };
+    private final Runnable mRunnable = () -> mTrafficHandler.sendEmptyMessage(0);
 
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
@@ -288,39 +390,18 @@ public class NetworkTraffic extends androidx.appcompat.widget.AppCompatTextView 
     };
 
     @SuppressLint("MissingPermission")
-    private boolean getConnectAvailable() {
-        NetworkInfo network = (mConnectivityManager != null) ? mConnectivityManager.getActiveNetworkInfo() : null;
+    private boolean getConnectAvailable()
+    {
+        Network network = (mConnectivityManager != null) ? mConnectivityManager.getActiveNetwork() : null;
         return network != null;
     }
 
-    protected void update() {
-        if (mIsEnabled) {
-            if (mAttached) {
-                totalRxBytes = TrafficStats.getTotalRxBytes();
-                lastUpdateTime = SystemClock.elapsedRealtime();
-                mTrafficHandler.sendEmptyMessage(1);
-            }
-            return;
-        } else {
-            clearHandlerCallbacks();
+    public void update() {
+        if (mAttached) {
+            totalRxBytes = TrafficStats.getTotalRxBytes();
+            lastUpdateTime = SystemClock.elapsedRealtime();
+            mTrafficHandler.sendEmptyMessage(1);
         }
-        setVisibility(View.GONE);
-        mVisible = false;
-    }
-
-    public void setMode() {
-        mIsEnabled = true;
-        mLocation = 1;
-        mIndicatorMode = 2;
-        mAutoHideThreshold = 10;
-        mRefreshInterval = 1;
-
-        setGravity(Gravity.CENTER);
-        setMaxLines(2);
-        setSpacingAndFonts();
-        updateTrafficDrawable();
-//        setVisibility(View.GONE);
-//        mVisible = false;
     }
 
     private void clearHandlerCallbacks() {
@@ -330,28 +411,43 @@ public class NetworkTraffic extends androidx.appcompat.widget.AppCompatTextView 
     }
 
     protected void updateTrafficDrawable() {
-
-        setTextColor(mTintColor);
-        setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        for(int i = 0; i < iconLayout.getChildCount(); i++)
+        {
+            try {
+                ((ImageView)iconLayout.getChildAt(i)).setColorFilter(SBTintColor);
+            } catch (Exception ignored){}
+        }
+        mTextView.setTextColor(SBTintColor);
+        mTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
     }
 
     protected void setSpacingAndFonts() {
         String txtFont = getResources().getString(getResources().getIdentifier("android:string/config_headlineFontFamily", "string", mContext.getOpPackageName()));
-        setTypeface(Typeface.create(txtFont, Typeface.BOLD));
-        setLineSpacing(0.85f, 0.85f);
-        setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
+        mTextView.setTypeface(Typeface.create(txtFont, Typeface.BOLD));
+        mTextView.setLineSpacing(0.85f, 0.85f);
+        mTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
     }
 
-    public void onDensityOrFontScaleChanged() {
-        setSpacingAndFonts();
-        update();
-    }
-
-    public void setTintColor(int color) {
-        if(mTintColor != color) {
-            mTintColor = color;
-            updateTrafficDrawable();
+    public static void setSBTintColor(int color) {
+        if(SBTintColor != color) {
+            SBTintColor = color;
+            if(SBInstance != null) {
+                SBInstance.updateTrafficDrawable();
+            }
         }
     }
 
+    public static class trafficStyle extends CharacterStyle
+    {
+        private final int textColor;
+        public trafficStyle(@ColorInt int textColor)
+        {
+            this.textColor = textColor;
+        }
+        @Override
+        public void updateDrawState(TextPaint textPaint) {
+            textPaint.setShadowLayer(textPaint.getTextSize()/17, 0, 0, Color.BLACK);
+            textPaint.setColor(textColor);
+        }
+    }
 }

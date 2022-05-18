@@ -7,6 +7,7 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.media.AudioManager;
+import android.net.ConnectivityManager;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
@@ -31,6 +32,7 @@ public class SystemUtils{
 	VibratorManager mVibrationManager;
 	AudioManager mAudioManager;
 	PowerManager mPowerManager;
+	ConnectivityManager mConnectivityManager;
 	TelephonyManager mTelephonyManager;
 	
 	boolean hasVibrator;
@@ -58,7 +60,15 @@ public class SystemUtils{
 		if(instance == null) return null;
 		return instance.mAudioManager;
 	}
-	
+
+	@Nullable
+	@Contract(pure = true)
+	public static ConnectivityManager ConnectivityManager()
+	{
+		if(instance == null) return null;
+		return instance.mConnectivityManager;
+	}
+
 	@Nullable
 	@Contract(pure = true)
 	public static PowerManager PowerManager() {
@@ -115,6 +125,20 @@ public class SystemUtils{
 		//Audio
 		try {
 			mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+		}
+		catch (Throwable t)
+		{
+			if(BuildConfig.DEBUG)
+			{
+				XposedBridge.log("AOSPMods Error getting audio manager");
+				t.printStackTrace();
+			}
+		}
+
+		//Connectivity
+		try
+		{
+			mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		}
 		catch (Throwable t)
 		{

@@ -225,7 +225,33 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     
     }
-    
+
+    public static class networkFragment extends PreferenceFragmentCompat {
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
+            setPreferencesFromResource(R.xml.sbqs_network_prefs, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            prefs.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> updateVisibility(prefs));
+            updateVisibility(prefs);
+        }
+
+        private void updateVisibility(SharedPreferences prefs) {
+            try {
+                findPreference("networkTrafficRXTop").setVisible(prefs.getString("networkTrafficMode", "0").equals("0"));
+                findPreference("networkTrafficColorful").setVisible(!prefs.getString("networkTrafficMode", "0").equals("3"));
+                boolean colorful = prefs.getBoolean("networkTrafficColorful", true);
+                findPreference("networkTrafficDLColor").setVisible(colorful);
+                findPreference("networkTrafficULColor").setVisible(colorful);
+                findPreference("networkTrafficInterval").setSummary(prefs.getInt("networkTrafficInterval", 1) + " second(s)");
+
+            }
+            catch(Exception ignored){}
+        }
+    }
+
+
     public static class SBBIconFragment extends PreferenceFragmentCompat {
         
         @Override
@@ -303,7 +329,7 @@ public class SettingsActivity extends AppCompatActivity implements
         private void setVisibility(SharedPreferences sharedPreferences) {
             try {
                 boolean networkOnSBEnabled = sharedPreferences.getBoolean("networkOnSBEnabled", false);
-                findPreference("networkTrafficThreshold").setVisible(networkOnSBEnabled);
+                findPreference("network_settings_header").setVisible(networkOnSBEnabled);
                 findPreference("networkTrafficPosition").setVisible(networkOnSBEnabled);
     
                 findPreference("centerAreaFineTune").setSummary((sharedPreferences.getInt("centerAreaFineTune", 50) - 50) + "%");

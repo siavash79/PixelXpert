@@ -42,12 +42,12 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.Utils.SystemUtils;
-import sh.siava.AOSPMods.Utils.NetworkTrafficSB;
+import sh.siava.AOSPMods.Utils.NetworkTraffic;
 import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
-@SuppressWarnings("RedundantThrows")
+@SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 
 public class StatusbarMods extends XposedModPack {
     private static final String listenPackage = "com.android.systemui";
@@ -80,7 +80,7 @@ public class StatusbarMods extends XposedModPack {
     private static boolean networkOnSBEnabled = false;
     private static int networkTrafficPosition = POSITION_LEFT;
     private static int networkTrafficThreshold = 10;
-    private NetworkTrafficSB networkTrafficSB = null;
+    private NetworkTraffic networkTraffic = null;
     //endregion
     
     //region battery bar
@@ -186,44 +186,39 @@ public class StatusbarMods extends XposedModPack {
         
     
         //region network Traffic settings
-        boolean newnetworkOnSBEnabled = XPrefs.Xprefs.getBoolean("networkOnSBEnabled", false);
-        
+        networkOnSBEnabled = XPrefs.Xprefs.getBoolean("networkOnSBEnabled", false);
+        String networkTrafficModeStr = XPrefs.Xprefs.getString("networkTrafficMode", "0");
+        int networkTrafficMode = Integer.parseInt(networkTrafficModeStr);
 
-        if(newnetworkOnSBEnabled != networkOnSBEnabled)
+        boolean networkTrafficRXTop = XPrefs.Xprefs.getBoolean("networkTrafficRXTop", true);
+        int networkTrafficDLColor = XPrefs.Xprefs.getInt("networkTrafficDLColor", Color.GREEN);
+        int networkTrafficULColor = XPrefs.Xprefs.getInt("networkTrafficULColor", Color.RED);
+        int networkTrafficOpacity = XPrefs.Xprefs.getInt("networkTrafficOpacity", 100);
+        int networkTrafficInterval = XPrefs.Xprefs.getInt("networkTrafficInterval", 1);
+        boolean networkTrafficColorful = XPrefs.Xprefs.getBoolean("networkTrafficColorful", false);
+
+        NetworkTraffic.setConstants(networkTrafficInterval, networkTrafficThreshold, networkTrafficMode, networkTrafficRXTop, networkTrafficColorful, networkTrafficDLColor, networkTrafficULColor, networkTrafficOpacity);
+
+        if(networkOnSBEnabled)
         {
-            networkOnSBEnabled = newnetworkOnSBEnabled;
-            if(networkTrafficSB == null)
-            {
-                
-    
-                networkTrafficSB = new NetworkTrafficSB(mContext);
-                
-    
-            }
+            networkTraffic = NetworkTraffic.getInstance(mContext, true);
             networkTrafficPosition = -1; //anyway we have to call placer method
-        }
-        
-    
-        int newnetworkTrafficPosition = Integer.parseInt(XPrefs.Xprefs.getString("networkTrafficPosition", "2"));
-        
-    
-        if(newnetworkTrafficPosition != networkTrafficPosition)
-        {
-            
-            networkTrafficPosition = newnetworkTrafficPosition;
-            placeNTSB();
-        }
-        String thresholdText = XPrefs.Xprefs.getString("networkTrafficThreshold", "10");
-        
+            int newnetworkTrafficPosition = Integer.parseInt(XPrefs.Xprefs.getString("networkTrafficPosition", "2"));
 
-        try {
-            networkTrafficThreshold = Math.round(Float.parseFloat(thresholdText));
-        }
-        catch (Exception e) {
-            networkTrafficThreshold = 10;
-        }
-        finally {
-            NetworkTrafficSB.setHideThreshold(networkTrafficThreshold);
+            String thresholdText = XPrefs.Xprefs.getString("networkTrafficThreshold", "10");
+
+            try {
+                networkTrafficThreshold = Math.round(Float.parseFloat(thresholdText));
+            }
+            catch (Exception e) {
+                networkTrafficThreshold = 10;
+            }
+            if(newnetworkTrafficPosition != networkTrafficPosition)
+            {
+                networkTrafficPosition = newnetworkTrafficPosition;
+                placeNTSB();
+            }
+            networkTraffic.update();
         }
         //endregion network settings
 
@@ -463,8 +458,8 @@ public class StatusbarMods extends XposedModPack {
                         {
                             BatteryBarView.getInstance().setVisible(false);
                         }
-                        if(networkTrafficSB != null) {
-                            networkTrafficSB.setVisibility(View.INVISIBLE);
+                        if(networkTraffic != null) {
+                            networkTraffic.setVisibility(View.INVISIBLE);
                         }
                     }
                 });
@@ -478,8 +473,8 @@ public class StatusbarMods extends XposedModPack {
                         {
                             BatteryBarView.getInstance().setVisible(true);
                         }
-                        if(networkTrafficSB != null) {
-                            networkTrafficSB.setVisibility(View.VISIBLE);
+                        if(networkTraffic != null) {
+                            networkTraffic.setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -531,11 +526,9 @@ public class StatusbarMods extends XposedModPack {
                         
                         if(networkOnSBEnabled)
                         {
-                            networkTrafficSB = (networkTrafficSB == null) ? new NetworkTrafficSB(mContext) : networkTrafficSB;
-                            NetworkTrafficSB.setHideThreshold(networkTrafficThreshold);
+                            networkTraffic = NetworkTraffic.getInstance(mContext, true);
                             placeNTSB();
                         }
-                        
     
                         //<Showing vibration icon in collapsed statusbar>
                         if(showVibrationIcon) {
@@ -618,7 +611,7 @@ public class StatusbarMods extends XposedModPack {
                         if(mClockParent > 1) return; //We don't want colors of QS header. only statusbar
 
                         clockColor = ((TextView) param.thisObject).getTextColors().getDefaultColor();
-                        NetworkTrafficSB.setTint(clockColor);
+                        NetworkTraffic.setSBTintColor(clockColor);
                         if(BatteryBarView.hasInstance())
                         {
                             refreshBatteryBar(BatteryBarView.getInstance());
@@ -733,38 +726,34 @@ public class StatusbarMods extends XposedModPack {
     
     //region network traffic related
     private void placeNTSB() {
-        if(networkTrafficSB == null)
+        if(networkTraffic == null)
         {
             return;
         }
         try
         {
-            ((ViewGroup) networkTrafficSB.getParent()).removeView(networkTrafficSB);
+            ((ViewGroup) networkTraffic.getParent()).removeView(networkTraffic);
         }
         catch(Exception ignored){}
         if(!networkOnSBEnabled) return;
 
         try {
-            LinearLayout.LayoutParams ntsbLayoutP;
+            FrameLayout.LayoutParams ntsbLayoutP;
             switch (networkTrafficPosition) {
                 case POSITION_RIGHT:
-                    mSystemIconArea.addView(networkTrafficSB, 0);
+                    mSystemIconArea.addView(networkTraffic, 0);
                     break;
                 case POSITION_LEFT:
-                    mClockParent.addView(networkTrafficSB, 0);
+                    mClockParent.addView(networkTraffic, 0);
                     break;
                 case POSITION_CENTER:
-                    
-    
-                    mClockParent.addView(networkTrafficSB);
-                    
-    
+                    mClockParent.addView(networkTraffic);
                     break;
             }
-            ntsbLayoutP = (LinearLayout.LayoutParams) networkTrafficSB.getLayoutParams();
+            ntsbLayoutP = (FrameLayout.LayoutParams) networkTraffic.getLayoutParams();
             ntsbLayoutP.gravity = Gravity.CENTER_VERTICAL;
-            networkTrafficSB.setLayoutParams(ntsbLayoutP);
-            networkTrafficSB.setPadding(10, 0, 10, 0);
+            networkTraffic.setLayoutParams(ntsbLayoutP);
+            networkTraffic.setPadding(10, 0, 10, 0);
         }catch(Throwable ignored){}
     }
     //endregion

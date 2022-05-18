@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../.gradle/caches/transforms-3/ebf9602a58122bd2c6b0edc706f35ec5/transformed/jetified-storage-chooser-2.0.4.3/res/layout-v21/custom_storage_list.xml" value="0.3374094202898551" />
         <entry key="..\:/Software/Android_Tools/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/lock_screen_prefs.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/SystemUI/src/main/res/drawable/qs_security_footer_background.xml" value="0.11145833333333334" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/SystemUI/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.11145833333333334" />
@@ -11,12 +10,15 @@
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/brightness_progress_full_drawable.xml" value="0.1109375" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/d.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/dd.xml" value="0.116" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/exapnd_icon.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/fingerprint_bg.xml" value="0.12" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/fingerprint_bg_transparent.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_arrow_back.xml" value="0.11145833333333334" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_brightness_full.xml" value="0.11145833333333334" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_brightness_low.xml" value="0.11145833333333334" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_brightness_medium.xml" value="0.11145833333333334" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_chevron_down.xml" value="0.111" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_chevron_up.xml" value="0.111" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_launcher_background.xml" value="0.11145833333333334" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.11145833333333334" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/drawable/ic_settings_lockscreen.xml" value="0.1" />
@@ -61,6 +63,7 @@
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/nav_prefs.xml" value="0.18" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/quicksettings_prefs.xml" value="0.22" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/root_preferences.xml" value="0.1" />
+        <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/sbqs_network_prefs.xml" value="0.22" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/screen_off_prefs.xml" value="0.22" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/statusbar_batterybar_prefs.xml" value="0.18" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/statusbar_clock_prefs.xml" value="0.2" />

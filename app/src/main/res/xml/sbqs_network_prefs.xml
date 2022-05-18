@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="0"
+        android:entries="@array/network_mode_names"
+        android:entryValues="@array/network_mode_codes"
+        android:summary="%s"
+        android:key="networkTrafficMode"
+        android:title="@string/network_mode_title" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="networkTrafficRXTop"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/network_download_top" />
+
+    <SeekBarPreference
+        android:defaultValue="1"
+        android:key="networkTrafficInterval"
+        android:max="5"
+        android:min="1"
+        app:min="1"
+        android:title="@string/network_interval_title" />
+
+    <EditTextPreference
+        android:key="networkTrafficThreshold"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/ntsb_threshold_title"
+        app:defaultValue="10"
+        app:summary="@string/ntsb_threshold_summary" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="networkTrafficColorful"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/network_colorful_title" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="-7617718"
+        android:key="networkTrafficDLColor"
+        android:title="@string/network_download_color_title" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="-351845"
+        android:key="networkTrafficULColor"
+        android:title="@string/network_upload_color_title" />
+
+    <SeekBarPreference
+        app:isPreferenceVisible="false"
+        android:defaultValue="100"
+        android:key="networkTrafficOpacity"
+        android:title="@string/network_opacity_title"
+        app:updatesContinuously="true" />
+
+</PreferenceScreen>

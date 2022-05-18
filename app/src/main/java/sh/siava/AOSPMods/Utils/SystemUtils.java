@@ -144,7 +144,7 @@ public class SystemUtils{
 		{
 			if(BuildConfig.DEBUG)
 			{
-				XposedBridge.log("AOSPMods Error getting audio manager");
+				XposedBridge.log("AOSPMods Error getting connection manager");
 				t.printStackTrace();
 			}
 		}

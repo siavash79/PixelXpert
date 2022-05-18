@@ -197,8 +197,6 @@ public class StatusbarMods extends XposedModPack {
         int networkTrafficInterval = XPrefs.Xprefs.getInt("networkTrafficInterval", 1);
         boolean networkTrafficColorful = XPrefs.Xprefs.getBoolean("networkTrafficColorful", false);
 
-        NetworkTraffic.setConstants(networkTrafficInterval, networkTrafficThreshold, networkTrafficMode, networkTrafficRXTop, networkTrafficColorful, networkTrafficDLColor, networkTrafficULColor, networkTrafficOpacity);
-
         if(networkOnSBEnabled)
         {
             networkTraffic = NetworkTraffic.getInstance(mContext, true);
@@ -216,10 +214,12 @@ public class StatusbarMods extends XposedModPack {
             if(newnetworkTrafficPosition != networkTrafficPosition)
             {
                 networkTrafficPosition = newnetworkTrafficPosition;
-                placeNTSB();
             }
+            NetworkTraffic.setConstants(networkTrafficInterval, networkTrafficThreshold, networkTrafficMode, networkTrafficRXTop, networkTrafficColorful, networkTrafficDLColor, networkTrafficULColor, networkTrafficOpacity);
+
             networkTraffic.update();
         }
+        placeNTSB();
         //endregion network settings
 
         //region vibration settings

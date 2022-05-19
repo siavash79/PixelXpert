@@ -66,6 +66,7 @@ public class NetworkTraffic extends LinearLayout {
     private static long lastParamUpdate = 0;
 
     private static String unitDelimiter = " ";
+    private final boolean isSBInstance;
     private long lastInstanceParamUpdate = -1;
 
     public static void setConstants(int refreshInterval, int autoHideThreshold, int indicatorMode, boolean RXonTop, boolean colorTraffic, int downloadColor, int uploadColor, int opacity)
@@ -89,6 +90,7 @@ public class NetworkTraffic extends LinearLayout {
 
     @SuppressLint("StaticFieldLeak")
     private static NetworkTraffic QSInstance = null;
+    private static int QSTintColor;
 
     private final LinearLayout iconLayout;
     protected boolean mAttached;
@@ -298,16 +300,17 @@ public class NetworkTraffic extends LinearLayout {
         this.addView(mTextView);
         mConnectivityManager = SystemUtils.ConnectivityManager();
 
+        isSBInstance = onStatusbar;
         if(onStatusbar)
         {
             SBInstance = this;
+            setTintColor(StatusbarMods.clockColor, true);
         }
         else
         {
             QSInstance = this;
         }
 
-        setSBTintColor(StatusbarMods.clockColor);
     }
 
     private void setIndicatorMode() {
@@ -411,13 +414,14 @@ public class NetworkTraffic extends LinearLayout {
     }
 
     protected void updateTrafficDrawable() {
+        int color = (isSBInstance) ? SBTintColor : QSTintColor;
         for(int i = 0; i < iconLayout.getChildCount(); i++)
         {
             try {
-                ((ImageView)iconLayout.getChildAt(i)).setColorFilter(SBTintColor);
+                ((ImageView)iconLayout.getChildAt(i)).setColorFilter(color);
             } catch (Exception ignored){}
         }
-        mTextView.setTextColor(SBTintColor);
+        mTextView.setTextColor(color);
         mTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
     }
 
@@ -428,11 +432,21 @@ public class NetworkTraffic extends LinearLayout {
         mTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
     }
 
-    public static void setSBTintColor(int color) {
-        if(SBTintColor != color) {
-            SBTintColor = color;
-            if(SBInstance != null) {
-                SBInstance.updateTrafficDrawable();
+    public static void setTintColor(int color, boolean isSBInstance) {
+        if((SBTintColor != color && isSBInstance) || (QSTintColor != color && !isSBInstance)) {
+            if(isSBInstance)
+            {
+                SBTintColor = color;
+                if(SBInstance != null) {
+                    SBInstance.updateTrafficDrawable();
+                }
+            }
+            else
+            {
+                QSTintColor = color;
+                if(QSInstance != null) {
+                    QSInstance.updateTrafficDrawable();
+                }
             }
         }
     }

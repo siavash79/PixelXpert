@@ -1,1 +1,3 @@
-- 
+- Added customization options to Network Monitor
+- Added Network monitor on Quick settings header
+- Bugfixes

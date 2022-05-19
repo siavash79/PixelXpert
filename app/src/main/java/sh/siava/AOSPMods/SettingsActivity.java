@@ -363,7 +363,9 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("QSFooterText").setVisible(sharedPreferences.getBoolean("QSFooterMod", false));
                 findPreference("QSPulldownPercent").setSummary(sharedPreferences.getInt("QSPulldownPercent", 25) + "%");
                 findPreference("dualToneQSEnabled").setVisible(sharedPreferences.getBoolean("LightQSPanel", false));
-    
+
+                findPreference("network_settings_header").setVisible(sharedPreferences.getBoolean("networkOnQSEnabled", false));
+
             }catch (Exception ignored){}
         
         }

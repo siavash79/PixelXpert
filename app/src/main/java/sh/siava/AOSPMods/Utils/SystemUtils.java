@@ -34,7 +34,6 @@ public class SystemUtils{
 	PowerManager mPowerManager;
 	ConnectivityManager mConnectivityManager;
 	TelephonyManager mTelephonyManager;
-	
 	boolean hasVibrator;
 
 	TorchCallback torchCallback = new TorchCallback();
@@ -107,7 +106,7 @@ public class SystemUtils{
 		mContext = context;
 		
 		instance = this;
-		
+
 		//Camera and Flash
 		try {
 			mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);

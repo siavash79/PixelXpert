@@ -304,32 +304,19 @@ public class StatusbarMods extends XposedModPack {
     }
 
     private void placeNTQS() {
-        XposedBridge.log("log 3");
-
-
         if(networkTrafficQS == null)
         {
-            XposedBridge.log("log 4");
-
             return;
         }
         try
         {
-            XposedBridge.log("log 5");
-
             ((ViewGroup) networkTrafficQS.getParent()).removeView(networkTrafficQS);
-            XposedBridge.log("log 6");
-
         }
         catch(Throwable ignored){}
         if(!networkOnQSEnabled) return;
-        XposedBridge.log("log 7");
-
-
 
         try {
             NTQSHolder.addView(networkTrafficQS);
-            XposedBridge.log("log 2");
         }
         catch (Throwable ignored){}
     }

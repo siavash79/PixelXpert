@@ -74,6 +74,7 @@
     <string name="sbc_custom_date_after">Formato de fecha personalizado despues del reloj</string>
     <string name="sbc_header">Personalizar el reloj</string>
     <string name="sbc_may_take_one_minute">Requiere actualización de la hora o reinicio de la interfaz de usuario</string>
+	<string name="network_settings_pref">Configuración del monitor de red...</string>
     <string name="ntsb_far_left">Lado izquierdo</string>
     <string name="ntsb_mid_left">Mitad a la izquierda</string>
     <string name="ntsb_mid_right">Mitad a la derecha</string>
@@ -82,6 +83,17 @@
     <string name="ntsb_position_title">Localización del monitor</string>
     <string name="ntsb_threshold_title">Ocultar automaticamente</string>
     <string name="ntsb_threshold_summary">"Ocultar si el tráfico es menor a… (Kilobytes)"</string>
+	<string name="network_mode_title">Estilo del monitor</string>
+    <string name="network_colorful_title">Hazlo colorido</string>
+    <string name="network_download_top">Velocidad de descarga arriba</string>
+    <string name="network_download_color_title">Color descarga</string>
+    <string name="network_upload_color_title">Color subida</string>
+    <string name="network_opacity_title">Opacidad</string>
+    <string name="network_interval_title">Intervalo de refresco (segundos)</string>
+    <string name="nt_mode_rxtx">Descarga &amp; Subida</string>
+    <string name="nt_mode_total">Descarga + subida (Combinado)</string>
+    <string name="nt_mode_rxonly">Solo descarga</string>
+    <string name="nt_mode_txonly">Solo subida</string>
     <string name="statusbar_general_options">Preferencias de barra de estado</string>
     <string name="dual_tone_battery_title">Activar icono de tono dual</string>
     <string name="dual_tone_battery_on_summary">Activado (solo en modo horizontal)</string>

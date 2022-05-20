@@ -75,7 +75,7 @@
     <string name="ntsb_enabled_title">Включить мониторинг трафика</string>
     <string name="ntsb_position_title">Расположение мониторинга</string>
     <string name="ntsb_threshold_title">Порог автоскрытия</string>
-    <string name="ntsb_threshold_summary">"Скрыть, если трафик меньше... (Килобайт)"</string>
+    <string name="ntsb_threshold_summary">"Скрыть, если трафик меньше... (Килобайтов)"</string>
     <string name="statusbar_general_options">Параметры строки состояния</string>
     <string name="dual_tone_battery_title">Включить двухтонный измеритель заряда батареи</string>
     <string name="dual_tone_battery_on_summary">Вкл (работает только с портретным значком)</string>
@@ -141,8 +141,8 @@
     <string name="qstile_squaremedo">Сквермедо</string>
     <string name="qstile_dual_tone_circle">Двухтонный круг</string>
     <string name="qstile_circleoutline">Очертание круга</string>
-    <string name="qstile_pokesign">Pokesign</string>
-    <string name="qstile_cosmos">Shishu Cosmos</string>
+    <string name="qstile_pokesign">Знак Покемона</string>
+    <string name="qstile_cosmos">Шишу Космос</string>
     <string name="qstile_neonlike">Неоновый свет</string>
     <string name="qstile_circle_trim">Круг с окантовкой</string>
     <string name="qstile_dottedcircle">Точечный круг</string>
@@ -168,9 +168,9 @@
     <string name="gesture_navbar_thicker">Толще</string>
     <string name="colorpill_title">Раскрасьте панель жестов</string>
     <string name="colorpill">Панель жестов с цветом акцента</string>
-    <string name="reducekeyboard_title">Пространство клавиатуры с жестами</string>
-    <string name="reducekeyboard">Уменьшить пространство на клавиатуре</string>
-    <string name="taskbar_status_title">Android Taskbar</string>
+    <string name="reducekeyboard_title">Пространство между клавиатуром и жестам</string>
+    <string name="reducekeyboard">Уменьшить пространство под клавиатуром</string>
+    <string name="taskbar_status_title">Андроид Панель Задач</string>
     <string name="taskbar_force_enable_title">Принудительно включен</string>
     <string name="taskbar_force_disable_title">Принудительно отключен</string>
 
@@ -204,14 +204,14 @@
     <string name="dt_styles_category">Стили темной темы</string>
     <string name="dt_styles">Выберите стиль</string>
     <string name="dt_black">Принудительно черный</string>
-    <string name="dt_bakedgreen">Baked Green</string>
-    <string name="dt_chocox">Choco X</string>
+    <string name="dt_bakedgreen">Запеченный зеленый</string>
+    <string name="dt_chocox">Шоколадный</string>
     <string name="dt_darkaubergine">Темно-баклажановый</string>
     <string name="dt_style">Темно-синий</string>
     <string name="dt_darkgray">Темно-зеленый</string>
-    <string name="dt_materialocean">Material Ocean</string>
+    <string name="dt_materialocean">Материал Океан</string>
     <string name="dt_night">Ночной</string>
-    <string name="dt_solarizeddark">Solarized Dark</string>
+    <string name="dt_solarizeddark">Солярно Темный</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

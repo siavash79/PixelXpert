@@ -1,3 +1,1 @@
-- Added customization options to Network Monitor
-- Added options to manage app settings
-- Bugfixes
+-

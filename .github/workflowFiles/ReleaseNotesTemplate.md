@@ -25,3 +25,4 @@ Technically, the module should automatically activate itself in Lsposed and get 
 @tomaja18		Spanish
 @n3rd3x3		Spanish
 @TeaqariaWTF	Turkish
+@EleoXDA Turkish, German, Russian

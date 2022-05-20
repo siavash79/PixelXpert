@@ -1,3 +1,7 @@
+**1.0.0-beta-04**
+- Added customization options to Network Monitor
+- Added options to manage app settings
+- Bugfixes
 **1.0.0-beta-03**
 - Added double-tap torch on lockscreen (and AOD)
 - Added option to fine-tune statusbar center area

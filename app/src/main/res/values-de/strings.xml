@@ -145,8 +145,8 @@
     <string name="qstile_dual_tone_circle">2-farbiger Kreis</string>
     <string name="qstile_circleoutline">Kreisförmige Außenlinie</string>
     <string name="qstile_pokesign">Pokesign</string>
-    <string name="qstile_cosmos">Shishu Cosmos</string>
-    <string name="qstile_neonlike">Neon Light</string>
+    <string name="qstile_cosmos">Shishu Kosmos</string>
+    <string name="qstile_neonlike">Neonlicht</string>
     <string name="qstile_circle_trim">Kreis mit einem Schnitt</string>
     <string name="qstile_dottedcircle">gepunkteter Kreis</string>
     <string name="qstile_inkdrop">Tinte</string>
@@ -209,7 +209,7 @@
     <string name="dt_darkgray">Dunkelgrau</string>
     <string name="dt_materialocean">Material Ocean</string>
     <string name="dt_night">Nacht</string>
-    <string name="dt_solarizeddark">Solarized Dark</string>
+    <string name="dt_solarizeddark">Solarisiertes Dunkel</string>
 	
     <!-- Arrays strings -->
     <!-- Quick pull down -->

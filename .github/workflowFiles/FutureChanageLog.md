@@ -1,3 +1,3 @@
 - Added customization options to Network Monitor
-- Added Network monitor on Quick settings header
+- Added options to manage app settings
 - Bugfixes

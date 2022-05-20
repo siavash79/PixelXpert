@@ -17,6 +17,8 @@ import android.telephony.TelephonyManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.topjohnwu.superuser.Shell;
+
 import org.jetbrains.annotations.Contract;
 
 import de.robv.android.xposed.XposedBridge;
@@ -37,6 +39,11 @@ public class SystemUtils{
 	boolean hasVibrator;
 
 	TorchCallback torchCallback = new TorchCallback();
+
+	public static void RestartSystemUI()
+	{
+		Shell.cmd("killall com.android.systemui").submit();
+	}
 
 	public static boolean isFlashOn() {
 		if(instance == null) return false;

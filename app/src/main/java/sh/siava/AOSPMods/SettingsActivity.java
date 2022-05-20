@@ -1,8 +1,12 @@
 package sh.siava.AOSPMods;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
@@ -13,16 +17,21 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import com.nfx.android.rangebarpreference.RangeBarHelper;
-import com.topjohnwu.superuser.Shell;
+
+import sh.siava.AOSPMods.Utils.PrefManager;
+import sh.siava.AOSPMods.Utils.SystemUtils;
 
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+
+    private static final int REQUEST_IMPORT = 7;
+    private static final int REQUEST_EXPORT = 9;
 
     Context DPContext;
     private static final String TITLE_TAG = "settingsActivityTitle";
 
     public void RestartSysUI(View view) {
-        Shell.cmd("killall com.android.systemui").submit();
+        SystemUtils.RestartSystemUI();
     }
 
     public void backButtonEnabled(){
@@ -37,6 +46,13 @@ public class SettingsActivity extends AppCompatActivity implements
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
     }
 
     @Override
@@ -108,6 +124,56 @@ public class SettingsActivity extends AppCompatActivity implements
         setTitle(pref.getTitle());
         backButtonEnabled();
         return true;
+    }
+
+    public void MenuClick(MenuItem item) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
+
+        switch (item.getItemId())
+        {
+            case R.id.menu_clearPrefs:
+                PrefManager.clearPrefs(prefs);
+                SystemUtils.RestartSystemUI();
+                break;
+            case R.id.menu_exportPrefs:
+                importExportSettings(true);
+                break;
+            case R.id.menu_importPrefs:
+                importExportSettings(false);
+                break;
+        }
+    }
+
+    private void importExportSettings(boolean export) {
+        Intent fileIntent = new Intent();
+        fileIntent.setAction(export ? Intent.ACTION_CREATE_DOCUMENT : Intent.ACTION_GET_CONTENT);
+        fileIntent.setType("*/*");
+        startActivityForResult(fileIntent, export ? REQUEST_EXPORT : REQUEST_IMPORT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(data == null) return; //user hit cancel. Nothing to do
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
+        switch (requestCode)
+        {
+            case REQUEST_IMPORT:
+                try {
+                    PrefManager.importPath(prefs,
+                            getContentResolver().openInputStream(data.getData()));
+                    SystemUtils.RestartSystemUI();
+                } catch (Exception ignored) {}
+                break;
+            case REQUEST_EXPORT:
+                try {
+                    PrefManager.exportPrefs(prefs,
+                            getContentResolver().openOutputStream(data.getData()));
+                } catch (Exception ignored) {}
+                break;
+        }
     }
 
     public static class HeaderFragment extends PreferenceFragmentCompat {

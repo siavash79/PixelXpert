@@ -5,8 +5,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -18,10 +16,9 @@ import java.util.Set;
 import sh.siava.AOSPMods.BuildConfig;
 
 public class PrefManager {
-	private static String TAG = "Pref Exporter";
-	
-	public static boolean exportPrefs(SharedPreferences preferences, final @NonNull String exportPath) throws IOException {
-		OutputStream outputStream = new FileOutputStream(exportPath, false);
+	private static final String TAG = "Pref Exporter";
+
+	public static boolean exportPrefs(SharedPreferences preferences, final @NonNull OutputStream outputStream) throws IOException {
 		ObjectOutputStream objectOutputStream = null;
 		try {
 			objectOutputStream = new ObjectOutputStream(outputStream);
@@ -37,10 +34,9 @@ public class PrefManager {
 		return true;
 	}
 	
-	public static boolean importPath(SharedPreferences sharedPreferences, final @NonNull String importPath) throws IOException {
-		InputStream inputStream = new FileInputStream(importPath);
+	public static boolean importPath(SharedPreferences sharedPreferences, final @NonNull InputStream inputStream) throws IOException {
 		ObjectInputStream objectInputStream = null;
-		Map<String, Object> map = null;
+		Map<String, Object> map;
 		try {
 			objectInputStream = new ObjectInputStream(inputStream);
 			map = (Map) objectInputStream.readObject();

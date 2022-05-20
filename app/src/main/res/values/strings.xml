@@ -272,4 +272,9 @@
     <string name="qs_4_rows">Force 4 rows</string>
     <string name="qs_5_rows">Force 5 rows</string>
 
+    <!-- Menu Items -->
+    <string name="menu_reset_defaults">Reset all settings</string>
+    <string name="menu_import_settings">Import settings from file...</string>
+    <string name="menu_export_settings">Export settings to file...</string>
+
 </resources>

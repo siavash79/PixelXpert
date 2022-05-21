@@ -74,6 +74,7 @@
     <string name="sbc_custom_date_after">Niestandardowy format daty po zegarze</string>
     <string name="sbc_header">Dostosowanie zegara na pasku stanu</string>
     <string name="sbc_may_take_one_minute">Włącza się po aktualizacji czasu lub ponownym uruchomieniu SysUI</string>
+    <string name="network_settings_pref">Ustawienia monitora sieciowego...</string>
     <string name="ntsb_far_left">Skrajnie w lewo</string>
     <string name="ntsb_mid_left">Środkowa lewa</string>
     <string name="ntsb_mid_right">Środkowy prawy</string>
@@ -82,6 +83,17 @@
     <string name="ntsb_position_title">Pozycja monitora sieci</string>
     <string name="ntsb_threshold_title">Próg automatycznego ukrywania</string>
     <string name="ntsb_threshold_summary">"Ukryj, jesli ruch jest mniejszy niż… (Kilobytes)"</string>
+    <string name="network_mode_title">Styl monitora</string>
+    <string name="network_colorful_title">W kolorze</string>
+    <string name="network_download_top">Szybkość pobierania na górze</string>
+    <string name="network_download_color_title">Kolor pobierania</string>
+    <string name="network_upload_color_title">Kolor wysyłania</string>
+    <string name="network_opacity_title">Nieprzezroczystość</string>
+    <string name="network_interval_title">Interwał odświeżania (sekundy)</string>
+    <string name="nt_mode_rxtx">Pobieranie &amp; wysyłanie </string>
+    <string name="nt_mode_total">Pobieranie + wysyłanie (Połączony)</string>
+    <string name="nt_mode_rxonly">Tylko pobieranie</string>
+    <string name="nt_mode_txonly">Tylko wysyłanie</string>
     <string name="statusbar_general_options">Opcje paska stanu</string>
     <string name="dual_tone_battery_title">Włącz dwutonowy miernik baterii</string>
     <string name="dual_tone_battery_on_summary">Włączony (Działa tylko z ikoną poziomą)</string>
@@ -260,4 +272,9 @@
     <string name="qs_4_rows">Wymuś 4 rzędy</string>
     <string name="qs_5_rows">Wymuś 5 rzędów</string>
     
+ <!-- Menu Items -->
+    <string name="menu_reset_defaults">Zresetuj wszystkie ustawienia</string>
+    <string name="menu_import_settings">Importuj ustawienia z pliku...</string>
+    <string name="menu_export_settings">Eksportuj ustawienia do pliku...</string>
+
 </resources>

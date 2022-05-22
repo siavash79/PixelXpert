@@ -219,5 +219,20 @@
     <string name="so_taptaptorch_title">Ativar toque duplo para lanterna</string>
     <string name="so_taptaptorch_summary">Toque duplo e manter premido para lanterna no ecrã de bloqueio</string>
     <string name="so_tap_proximity_wake_title">Não acordar o ecrã quando o mesmo estiver coberto</string>
+    <string name="network_settings_pref">Definições do monitor</string>
+    <string name="network_mode_title">Estilo do monitor</string>
+    <string name="network_colorful_title">Colorir</string>
+    <string name="network_download_top">Velocidade de download no topo</string>
+    <string name="network_download_color_title">Cor de download</string>
+    <string name="network_upload_color_title">Cor de upload</string>
+    <string name="network_opacity_title">Opacidade</string>
+    <string name="network_interval_title">Intervalo de atualização (segundos)</string>
+    <string name="nt_mode_rxtx">Download &amp; Upload</string>
+    <string name="nt_mode_total">Downlaod + Upload (Combinado)</string>
+    <string name="nt_mode_rxonly">Apenas download</string>
+    <string name="nt_mode_txonly">Apenas upload</string>
+    <string name="menu_reset_defaults">Restaurar todas as definições</string>
+    <string name="menu_import_settings">Importar definições</string>
+    <string name="menu_export_settings">Exportar definições</string>
 
 </resources>

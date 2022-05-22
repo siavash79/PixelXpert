@@ -67,7 +67,7 @@ jobs:
         tag_name: ${{ github.ref }}
         release_name: ${{ github.ref }}
         body_path: 'releaseNotes.md'
-        prerelease: true
+        prerelease: false
         draft: false
         asset_files: 'output/AOSPMods.zip'
 

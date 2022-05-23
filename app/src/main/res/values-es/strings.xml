@@ -271,5 +271,10 @@
     <string name="qs_3_rows">Forzar 3 lineas</string>
     <string name="qs_4_rows">Forzar 4 lineas</string>
     <string name="qs_5_rows">Forzar 5 lineas</string>
+
+    <!-- Menu Items -->
+    <string name="menu_reset_defaults">Restablecer todos los ajustes</string>
+    <string name="menu_import_settings">Importar configuraciones desde un archivo...</string>
+    <string name="menu_export_settings">Exportar configuración a archivo...</string>
     
 </resources>

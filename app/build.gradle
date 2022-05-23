@@ -17,7 +17,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-
     buildTypes {
         release {
             minifyEnabled false
@@ -39,6 +38,7 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+    namespace 'sh.siava.AOSPMods'
 }
 
 dependencies {
@@ -52,7 +52,7 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.google.android.material:material:1.7.0-alpha01'
-    implementation 'androidx.compose.ui:ui-geometry:1.2.0-beta01'
+    implementation 'androidx.compose.ui:ui-geometry:1.2.0-beta02'
 
     // The core module that provides APIs to a shell
     implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
@@ -64,6 +64,5 @@ dependencies {
     implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8'
     implementation 'com.jaredrummler:colorpicker:1.1.0'
     implementation 'com.nfx.android:range-bar-preference:0.0.6'
-
 }
 

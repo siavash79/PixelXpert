@@ -95,6 +95,8 @@ This module is designed based on AOSP source code. What does it mean? it means t
 - @tomaja18 Spanish
 - @n3rd3x3 Spanish
 - @TeaqariaWTF Turkish
+- @EleoXDA Turkish, German, Russian
+- @nmayorga092   Spanish
 
 **Brought to you by:**
 @siavash79 & @ElTifo

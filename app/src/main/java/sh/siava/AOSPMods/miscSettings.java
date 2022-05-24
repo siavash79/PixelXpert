@@ -116,7 +116,7 @@ public class miscSettings extends XposedModPack {
     }
 
     @Override
-    public boolean listensTo(String packageName) { return packageName.equals("com.android.systemui"); }
+    public boolean listensTo(String packageName) { return packageName.equals(AOSPMods.SYSTEM_Ui_PACKAGE); }
     
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable { }

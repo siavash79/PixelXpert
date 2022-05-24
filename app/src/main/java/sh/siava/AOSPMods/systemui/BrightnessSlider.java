@@ -11,12 +11,13 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 @SuppressWarnings("RedundantThrows")
 public class BrightnessSlider extends XposedModPack {
-    private static final String listenPackage = "com.android.systemui";
+    private static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
 
     private Object mBrightnessMirrorHandlerController = null;
     private Object brightnessSliderFactory = null;

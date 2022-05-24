@@ -16,12 +16,13 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.XPrefs;
 
 public class QSHeaderManager extends XposedModPack {
-    public static final String listenPackage = "com.android.systemui";
+    public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
     
     private static boolean lightQSHeaderEnabled = false;
     private static boolean dualToneQSEnabled = false;
@@ -159,7 +160,7 @@ public class QSHeaderManager extends XposedModPack {
                 
                 Object colorActive = XposedHelpers.callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
                         mContext,
-                        mContext.getResources().getIdentifier("android:attr/colorAccent", "attr", "com.android.systemui"));
+                        mContext.getResources().getIdentifier("android:attr/colorAccent", "attr", lpparam.packageName));
                 
                 XposedHelpers.setObjectField(param.thisObject, "colorActive", colorActive);
             }

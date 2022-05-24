@@ -16,13 +16,14 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class ScreenGestures extends XposedModPack {
-    public static final String listenPackage = "com.android.systemui";
+    public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
 
     private static final long HOLD_DURATION = 500;
 

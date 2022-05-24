@@ -38,7 +38,7 @@ public class XPrefs implements IXposedHookZygoteInit {
 
     public static void loadEverything(String packageName, String...key)
     {
-        if(packageName.equals("com.android.systemui")) {
+        if(packageName.equals(AOSPMods.SYSTEM_Ui_PACKAGE)) {
             Overlays.setAll();
         }
         for(XposedModPack thisMod : AOSPMods.runningMods)

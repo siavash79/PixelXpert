@@ -7,12 +7,13 @@ import android.view.View;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 public class QSHaptic extends XposedModPack {
-    public static final String listenPackage = "com.android.systemui";
+    public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
     public static boolean QSHapticEnabled = false;
     
     public QSHaptic(Context context) { super(context); }

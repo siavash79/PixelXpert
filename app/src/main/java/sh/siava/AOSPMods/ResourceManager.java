@@ -24,7 +24,7 @@ public class ResourceManager implements IXposedHookInitPackageResources, IXposed
 
         this.resparam = resparam;
         this.modRes = modRes;
-        if(resparam.packageName.startsWith("com.android.systemui")) {
+        if(resparam.packageName.startsWith(AOSPMods.SYSTEM_Ui_PACKAGE)) {
         }
     }
 

@@ -10,12 +10,12 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
+@SuppressWarnings("RedundantThrows")
 public class CarrierTextManager extends XposedModPack {
-    public static final String listenPackage = "com.android.systemui";
-    public static boolean isEnabled = false;
-    public static String customText = "";
+    private static final String listenPackage = "com.android.systemui";
+    private static boolean isEnabled = false;
+    private static String customText = "";
     private static Object carrierTextController;
-    private static Object carrierTextCallback;
 
     public CarrierTextManager(Context context) { super(context); }
     
@@ -30,9 +30,17 @@ public class CarrierTextManager extends XposedModPack {
         {
             isEnabled = newisEnabled;
             customText = newcustomText;
-            if(isEnabled && carrierTextController != null)
+            if(isEnabled)
             {
                 setCarrierText();
+            }
+            else
+            {
+                try {
+                    XposedHelpers.callMethod(
+                            XposedHelpers.getObjectField(carrierTextController, "mCarrierTextManager"),
+                            "updateCarrierText");
+                }catch (Throwable ignored){} //probably not initiated yet
             }
         }
     }
@@ -47,13 +55,14 @@ public class CarrierTextManager extends XposedModPack {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 carrierTextController = param.thisObject;
-                carrierTextCallback = XposedHelpers.getObjectField(carrierTextController, "mCarrierTextCallback");
+                Object carrierTextCallback = XposedHelpers.getObjectField(carrierTextController, "mCarrierTextCallback");
 
                 XposedBridge.hookAllMethods(carrierTextCallback.getClass(),
                         "updateCarrierInfo", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if(!isEnabled) return; //nothing to do
+
                         setCarrierText();
                         param.setResult(null);
                     }
@@ -63,12 +72,12 @@ public class CarrierTextManager extends XposedModPack {
     }
 
     private void setCarrierText() {
-        TextView mView = (TextView) XposedHelpers.getObjectField(carrierTextController, "mView");
-        mView.setText(customText);
+        try {
+            TextView mView = (TextView) XposedHelpers.getObjectField(carrierTextController, "mView");
+            mView.setText(customText);
+        } catch (Throwable ignored){} //probably not initiated yet
     }
 
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
-    
-    
 }

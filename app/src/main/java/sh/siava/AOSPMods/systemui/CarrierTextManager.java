@@ -1,6 +1,7 @@
 package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
+import android.widget.TextView;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -13,8 +14,9 @@ public class CarrierTextManager extends XposedModPack {
     public static final String listenPackage = "com.android.systemui";
     public static boolean isEnabled = false;
     public static String customText = "";
-    private static Object mCarrierTextManager = null;
-    
+    private static Object carrierTextController;
+    private static Object carrierTextCallback;
+
     public CarrierTextManager(Context context) { super(context); }
     
     @Override
@@ -28,9 +30,9 @@ public class CarrierTextManager extends XposedModPack {
         {
             isEnabled = newisEnabled;
             customText = newcustomText;
-            if(mCarrierTextManager != null)
+            if(isEnabled && carrierTextController != null)
             {
-                XposedHelpers.callMethod(mCarrierTextManager, "updateCarrierText");
+                setCarrierText();
             }
         }
     }
@@ -39,33 +41,32 @@ public class CarrierTextManager extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Class<?> CarrierTextManagerClass = XposedHelpers.findClass("com.android.keyguard.CarrierTextManager", lpparam.classLoader);
-        Class<?> CarrierTextCallbackInfo = XposedHelpers.findClass("com.android.keyguard.CarrierTextManager$CarrierTextCallbackInfo", lpparam.classLoader);
+        Class<?> CarrierTextControllerClass = XposedHelpers.findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
 
-        XposedBridge.hookAllConstructors(CarrierTextManagerClass, new XC_MethodHook() {
+        XposedBridge.hookAllConstructors(CarrierTextControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                mCarrierTextManager = param.thisObject;
+                carrierTextController = param.thisObject;
+                carrierTextCallback = XposedHelpers.getObjectField(carrierTextController, "mCarrierTextCallback");
+
+                XposedBridge.hookAllMethods(carrierTextCallback.getClass(),
+                        "updateCarrierInfo", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if(!isEnabled) return; //nothing to do
+                        setCarrierText();
+                        param.setResult(null);
+                    }
+                });
             }
         });
-
-        XposedBridge.hookAllConstructors(CarrierTextCallbackInfo, new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                if(isEnabled)
-                {
-                    XposedHelpers.setObjectField(param.thisObject, "carrierText", customText);
-                    XposedHelpers.setObjectField(param.thisObject, "listOfCarriers", new CharSequence[0]);
-                    XposedHelpers.setObjectField(param.thisObject, "anySimReady", true);
-                    XposedHelpers.setObjectField(param.thisObject, "subscriptionIds", new int[0]);
-                    XposedHelpers.setObjectField(param.thisObject, "airplaneMode", false);
-                    param.setResult(null);
-                }
-            }
-        });
-
     }
-    
+
+    private void setCarrierText() {
+        TextView mView = (TextView) XposedHelpers.getObjectField(carrierTextController, "mView");
+        mView.setText(customText);
+    }
+
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
     

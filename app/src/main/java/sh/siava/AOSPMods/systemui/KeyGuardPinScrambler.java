@@ -15,7 +15,7 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class KeyGuardPinScrambler extends XposedModPack {
-	public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 	
 	private static boolean shufflePinEnabled = false;
 	

@@ -116,7 +116,7 @@ public class miscSettings extends XposedModPack {
     }
 
     @Override
-    public boolean listensTo(String packageName) { return packageName.equals(AOSPMods.SYSTEM_Ui_PACKAGE); }
+    public boolean listensTo(String packageName) { return packageName.equals(AOSPMods.SYSTEM_UI_PACKAGE); }
     
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable { }

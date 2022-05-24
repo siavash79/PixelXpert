@@ -12,7 +12,7 @@ import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 
 public class AOSPSettingsLauncher extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
 
     private static Object activityStarter = null;

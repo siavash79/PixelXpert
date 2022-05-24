@@ -13,7 +13,7 @@ import sh.siava.AOSPMods.XPrefs;
 
 @SuppressWarnings("RedundantThrows")
 public class CarrierTextManager extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     private static boolean isEnabled = false;
     private static String customText = "";
     private static Object carrierTextController;

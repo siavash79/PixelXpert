@@ -23,7 +23,7 @@ import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class ScreenGestures extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
     private static final long HOLD_DURATION = 500;
 

@@ -12,7 +12,7 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class ScreenshotController extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     public static boolean disableScreenshotSound = false;
     
     public ScreenshotController(Context context) { super(context); }

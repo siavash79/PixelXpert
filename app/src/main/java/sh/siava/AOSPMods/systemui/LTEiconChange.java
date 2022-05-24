@@ -10,7 +10,7 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class LTEiconChange extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     public static int SBLTEIcon = 0;
 
     private static final int DEFAULT = 0;

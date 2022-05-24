@@ -11,7 +11,7 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class BackGestureManager extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     public static float backGestureHeightFractionLeft = 1f; // % of screen height. can be anything between 0 to 1
     public static float backGestureHeightFractionRight = 1f; // % of screen height. can be anything between 0 to 1
     public static boolean leftEnabled = true;

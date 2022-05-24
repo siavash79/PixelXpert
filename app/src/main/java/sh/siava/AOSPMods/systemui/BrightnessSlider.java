@@ -17,7 +17,7 @@ import sh.siava.AOSPMods.XPrefs;
 
 @SuppressWarnings("RedundantThrows")
 public class BrightnessSlider extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
     private Object mBrightnessMirrorHandlerController = null;
     private Object brightnessSliderFactory = null;

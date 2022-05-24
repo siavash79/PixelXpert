@@ -11,7 +11,7 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class UDFPSManager extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     public static boolean transparentBG = false;
 
     public static String UDFPS_hide_key = "fingerprint_circle_hide";

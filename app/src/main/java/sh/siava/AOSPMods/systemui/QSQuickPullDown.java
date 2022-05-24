@@ -11,7 +11,7 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class QSQuickPullDown extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     public static int pullDownSide = 1; // 1 is right, 2 is left
     public static boolean oneFingerPulldownEnabled = false;
     public static float statusbarPortion = 0.25f; // now set to 25% of the screen. it can be anything between 0 to 100%

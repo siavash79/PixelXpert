@@ -22,7 +22,7 @@ import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.XPrefs;
 
 public class QSHeaderManager extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     
     private static boolean lightQSHeaderEnabled = false;
     private static boolean dualToneQSEnabled = false;

@@ -42,7 +42,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public static ArrayList<XposedModPack> runningMods = new ArrayList<>();
     public Context mContext = null;
     public static boolean isSecondProcess = false;
-    public static final String SYSTEM_Ui_PACKAGE = "com.android.systemui";
+    public static final String SYSTEM_UI_PACKAGE = "com.android.systemui";
     
     public AOSPMods()
     {

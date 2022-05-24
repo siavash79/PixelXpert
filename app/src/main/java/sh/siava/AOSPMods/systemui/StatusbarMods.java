@@ -51,7 +51,7 @@ import sh.siava.AOSPMods.XposedModPack;
 @SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 
 public class StatusbarMods extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
     //region battery
     private static final int CHARGING_FAST = 2;

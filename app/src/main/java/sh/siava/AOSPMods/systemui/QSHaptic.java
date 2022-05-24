@@ -13,7 +13,7 @@ import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 public class QSHaptic extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     public static boolean QSHapticEnabled = false;
     
     public QSHaptic(Context context) { super(context); }

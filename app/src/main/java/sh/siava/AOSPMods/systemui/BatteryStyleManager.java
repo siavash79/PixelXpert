@@ -33,7 +33,7 @@ import sh.siava.AOSPMods.XPrefs;
 //TODO: unknown battery symbol / percent text beside icon / update shape upon request / other shapes / dual tone
 
 public class BatteryStyleManager extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     
     public static boolean customBatteryEnabled = false;
     

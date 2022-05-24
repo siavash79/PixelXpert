@@ -14,7 +14,7 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class LockscreenAlbumArt extends XposedModPack {
-	public static final String listenPackage = AOSPMods.SYSTEM_Ui_PACKAGE;
+	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 	
 	private static boolean albumArtLockScreenEnabled = false;
 	private static boolean albumArtLockScreenHookEnabled = true;

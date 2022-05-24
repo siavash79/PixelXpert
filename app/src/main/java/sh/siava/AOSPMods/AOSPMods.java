@@ -108,7 +108,6 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
     private void setContext(Context context) {
         mContext = context;
-        XposedBridge.log(mContext.getPackageName());
         new SystemUtils(context);
         XPrefs.loadPrefs(mContext);
     }

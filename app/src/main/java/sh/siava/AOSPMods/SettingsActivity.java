@@ -19,6 +19,7 @@ import androidx.preference.PreferenceManager;
 import com.nfx.android.rangebarpreference.RangeBarHelper;
 
 import sh.siava.AOSPMods.Utils.PrefManager;
+import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 
 public class SettingsActivity extends AppCompatActivity implements

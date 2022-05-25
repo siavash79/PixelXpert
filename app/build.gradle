@@ -61,8 +61,10 @@ dependencies {
     // Optional: Provides remote file system support
     implementation "com.github.topjohnwu.libsu:nio:${libsuVersion}"
 
-    implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8'
-    implementation 'com.jaredrummler:colorpicker:1.1.0'
-    implementation 'com.nfx.android:range-bar-preference:0.0.6'
+    implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8' //Remote Preferences for Xposed Module prefs
+    implementation 'com.jaredrummler:colorpicker:1.1.0' //Color Picker Component for UI
+    implementation 'com.nfx.android:range-bar-preference:0.0.6' //Range Bar Component for UI
+
+    implementation 'com.github.mfathi91:persian-date-time:4.2.1' //Persian Calendar
 }
 

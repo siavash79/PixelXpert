@@ -67,7 +67,10 @@ public class SettingsActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         backButtonDisabled();
-        Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER)); //access full filesystem
+
+        try {
+            Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER)); //access full filesystem
+        }catch (Exception ignored){}
 
         setContentView(R.layout.settings_activity);
 

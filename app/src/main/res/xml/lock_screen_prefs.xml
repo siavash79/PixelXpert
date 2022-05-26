@@ -68,7 +68,6 @@
             android:key="carrierTextValue"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:dialogLayout="@layout/string_formatter_manual"
             android:title="@string/carrier_text_value" />
     </PreferenceCategory>
 </PreferenceScreen>

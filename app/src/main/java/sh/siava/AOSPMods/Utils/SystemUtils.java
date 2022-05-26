@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.Utils;
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
 import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -37,8 +36,6 @@ public class SystemUtils{
 	PowerManager mPowerManager;
 	ConnectivityManager mConnectivityManager;
 	TelephonyManager mTelephonyManager;
-	AlarmManager mAlaramManager;
-	NetworkStats mNetworkStats;
 	boolean hasVibrator;
 
 	TorchCallback torchCallback = new TorchCallback();
@@ -57,26 +54,7 @@ public class SystemUtils{
 		if(instance == null) return;
 		instance.toggleFlashInternal();
 	}
-
-	public static void setNetworkStats(boolean enabled)
-	{
-		if(instance == null) return;
-		NetworkStats().setStatus(enabled);
-	}
-
-	public static NetworkStats NetworkStats()
-	{
-		if(instance == null) return null;
-		instance.initiateNetworkStats();
-		return instance.mNetworkStats;
-	}
-
-	private void initiateNetworkStats() {
-		if(mNetworkStats == null) {
-			mNetworkStats = new NetworkStats(mContext);
-		}
-	}
-
+	
 	public static void setFlash(boolean enabled) {
 		if(instance == null) return;
 		instance.setFlashInternal(enabled);
@@ -103,14 +81,6 @@ public class SystemUtils{
 		if(instance == null) return null;
 		return instance.mPowerManager;
 	}
-
-	@Nullable
-	@Contract(pure = true)
-	public static AlarmManager AlarmManager() {
-		if(instance == null) return null;
-		return instance.mAlaramManager;
-	}
-
 
 	@Nullable
 	@Contract(pure = true)
@@ -211,18 +181,6 @@ public class SystemUtils{
 			}
 		}
 
-		//Alarm
-		try {
-			mAlaramManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-		}
-		catch (Throwable t)
-		{
-			if(BuildConfig.DEBUG)
-			{
-				XposedBridge.log("AOSPMods Error getting alarm manager");
-				t.printStackTrace();
-			}
-		}
 
 		//Vibrator
 		try {
@@ -237,6 +195,7 @@ public class SystemUtils{
 				t.printStackTrace();
 			}
 		}
+
 	}
 	
 	private void setFlashInternal(boolean enabled) {

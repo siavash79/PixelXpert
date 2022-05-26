@@ -7,6 +7,7 @@ import com.topjohnwu.superuser.Shell;
 import java.util.regex.Pattern;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Utils.SystemUtils;
 
 public class miscSettings extends XposedModPack {
     
@@ -18,7 +19,9 @@ public class miscSettings extends XposedModPack {
     @Override
     public void updatePrefs(String...Key) {
         if(XPrefs.Xprefs == null) return; //it won't be null. but anyway...
-        
+
+        SystemUtils.setNetworkStats(XPrefs.Xprefs.getBoolean("NetworkStatsEnabled", false));
+
         if(Key.length > 0)
         {
             //we're not at startup

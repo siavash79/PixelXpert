@@ -70,6 +70,7 @@
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
                 android:title="@string/qs_footer_text_value"
+                android:dialogLayout="@layout/string_formatter_manual"
                 app:summary="@string/qs_footer_text_summary" />
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/QQS_brightness_category">

@@ -297,8 +297,6 @@ public class QSHeaderManager extends XposedModPack {
         Thread.sleep(50);
         
         if (lightQSHeaderEnabled && !isDark) {
-            XposedBridge.log("SIAPOSE state changed");
-            new Exception().printStackTrace();
 
             Helpers.setOverlay("QSLightThemeOverlay", !brightnessThickTrackEnabled, true);
             Helpers.setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, false);

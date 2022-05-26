@@ -76,7 +76,8 @@ public class QSHeaderManager extends XposedModPack {
         Class<?> FragmentClass = XposedHelpers.findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
         Class<?> ScrimControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
         Class<?> GradientColorsClass = XposedHelpers.findClass("com.android.internal.colorextraction.ColorExtractor.GradientColors", lpparam.classLoader);
-        
+        Class<?> StatusbarClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader);
+
         Method applyStateMethod = XposedHelpers.findMethodExactIfExists(ScrimControllerClass, "applyStateToAlpha");
         if(applyStateMethod == null)
         {
@@ -262,19 +263,32 @@ public class QSHeaderManager extends XposedModPack {
                 XposedHelpers.setObjectField(param.thisObject, "mConfigChanges", o);
             }
         });
-        
-        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader,
-                "updateTheme", new XC_MethodHook() {
+
+        XposedBridge.hookAllConstructors(StatusbarClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                Object mOnColorsChangedListener = XposedHelpers.getObjectField(param.thisObject, "mOnColorsChangedListener");
+                XposedBridge.hookAllMethods(mOnColorsChangedListener.getClass(), "onColorsChanged", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         onStatChanged();
                     }
                 });
+            }
+        });
+// does reapply the overlay excessively, and it's not needed. Let's handle color change only and get over it
+/*        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader,
+                "updateTheme", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        onStatChanged();
+                    }
+                });*/
     }
     
     private void onStatChanged() throws Throwable {
         Resources res = mContext.getResources();
-        
+
         boolean isDark = getIsDark();
         
         Helpers.setOverlay("QSLightThemeOverlay", false, true);
@@ -283,7 +297,9 @@ public class QSHeaderManager extends XposedModPack {
         Thread.sleep(50);
         
         if (lightQSHeaderEnabled && !isDark) {
-            
+            XposedBridge.log("SIAPOSE state changed");
+            new Exception().printStackTrace();
+
             Helpers.setOverlay("QSLightThemeOverlay", !brightnessThickTrackEnabled, true);
             Helpers.setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, false);
 
@@ -301,8 +317,7 @@ public class QSHeaderManager extends XposedModPack {
                 int colorInactive = res.getColor(
                         res.getIdentifier("android:color/system_accent1_10", "color", listenPackage),
                         mContext.getTheme());
-                
-                
+
                 try {
                     for (View v : tiles) {
                         XposedHelpers.setObjectField(v, "colorInactive", colorInactive);

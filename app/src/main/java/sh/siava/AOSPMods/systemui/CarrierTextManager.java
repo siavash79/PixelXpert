@@ -8,7 +8,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
@@ -18,10 +17,6 @@ public class CarrierTextManager extends XposedModPack {
     private static boolean isEnabled = false;
     private static String customText = "";
     private static Object carrierTextController;
-
-    private final StringFormatter stringFormatter = new StringFormatter();
-
-    private final StringFormatter.formattedStringCallback refreshCallback = this::setCarrierText;
 
     public CarrierTextManager(Context context) { super(context); }
     
@@ -55,8 +50,6 @@ public class CarrierTextManager extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        stringFormatter.registerDateCallback(refreshCallback);
-
         Class<?> CarrierTextControllerClass = XposedHelpers.findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
 
         XposedBridge.hookAllConstructors(CarrierTextControllerClass, new XC_MethodHook() {
@@ -82,7 +75,7 @@ public class CarrierTextManager extends XposedModPack {
     private void setCarrierText() {
         try {
             TextView mView = (TextView) XposedHelpers.getObjectField(carrierTextController, "mView");
-            mView.setText(stringFormatter.formatString(customText));
+            mView.setText(customText);
         } catch (Throwable ignored){} //probably not initiated yet
     }
 

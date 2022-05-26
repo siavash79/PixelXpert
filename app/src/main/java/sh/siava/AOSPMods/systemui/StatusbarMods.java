@@ -14,6 +14,7 @@ import android.telephony.ServiceState;
 import android.telephony.TelephonyCallback;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.style.CharacterStyle;
 import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
@@ -23,7 +24,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.nfx.android.rangebarpreference.RangeBarHelper;
 
@@ -63,7 +66,7 @@ public class StatusbarMods extends XposedModPack {
     private static final int POSITION_RIGHT = 2;
 
 //    private static final int AM_PM_STYLE_NORMAL  = 0;
-//    private static final int AM_PM_STYLE_SMALL   = 1;
+//    private static final intAM_PM_STYLE_SMALL   = 1;
     private static final int AM_PM_STYLE_GONE    = 2;
 
     private static int clockPosition = POSITION_LEFT;
@@ -71,6 +74,7 @@ public class StatusbarMods extends XposedModPack {
     private static boolean mShowSeconds = false;
     private static String mDateFormatBefore = "", mDateFormatAfter = "";
     private static boolean mBeforeSmall = true, mAfterSmall = true;
+    private Integer mBeforeClockColor = null, mAfterClockColor = null, mClockColor = null;
     //endregion
 
     //region vibration icon
@@ -259,6 +263,20 @@ public class StatusbarMods extends XposedModPack {
         mDateFormatAfter = XPrefs.Xprefs.getString("DateFormatAfterSBC", "");
         mBeforeSmall = XPrefs.Xprefs.getBoolean("BeforeSBCSmall", true);
         mAfterSmall = XPrefs.Xprefs.getBoolean("AfterSBCSmall", true);
+
+        if(XPrefs.Xprefs.getBoolean("SBCClockColorful", false))
+        {
+            mClockColor = XPrefs.Xprefs.getInt("SBCClockColor", Color.WHITE);
+            mBeforeClockColor = XPrefs.Xprefs.getInt("SBCBeforeClockColor", Color.WHITE);
+            mAfterClockColor = XPrefs.Xprefs.getInt("SBCAfterClockColor", Color.WHITE);
+        }
+        else
+        {
+            mClockColor
+                    = mBeforeClockColor
+                    = mAfterClockColor
+                    = null;
+        }
         
 
         if((mDateFormatBefore+mDateFormatAfter).trim().length() == 0) {
@@ -614,11 +632,7 @@ public class StatusbarMods extends XposedModPack {
                         XposedHelpers.setObjectField(param.thisObject, "mAmPmStyle", mAmPmStyle);
                         XposedHelpers.setObjectField(param.thisObject, "mShowSeconds", mShowSeconds);
                     }
-                });
-    
-        //clock mods
-        XposedHelpers.findAndHookMethod(ClockClass,
-                "getSmallTime", new XC_MethodHook() {
+
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         int mClockParent = 1;
@@ -632,9 +646,15 @@ public class StatusbarMods extends XposedModPack {
                         Calendar mCalendar = (Calendar) XposedHelpers.getObjectField(param.thisObject, "mCalendar");
                     
                         SpannableStringBuilder result = new SpannableStringBuilder();
-                        result.append(getFormattedDate(mDateFormatBefore, mCalendar, mBeforeSmall));
-                        result.append((CharSequence) param.getResult());
-                        result.append(getFormattedDate(mDateFormatAfter, mCalendar, mAfterSmall));
+                        result.append(getFormattedDate(mDateFormatBefore, mCalendar, mBeforeSmall, mBeforeClockColor)); //before clock
+                        SpannableStringBuilder clockText = SpannableStringBuilder.valueOf((CharSequence) param.getResult()); //THE clock
+                        if(mClockColor != null)
+                        {
+                            clockText.setSpan(new NetworkTraffic.trafficStyle(mClockColor), 0 , (clockText).length(),
+                                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        }
+                        result.append(clockText);
+                        result.append(getFormattedDate(mDateFormatAfter, mCalendar, mAfterSmall, mAfterClockColor)); //after clock
                         param.setResult(result);
                     }
                 });
@@ -865,7 +885,7 @@ public class StatusbarMods extends XposedModPack {
     //endregion
     
     //region clock and date related
-    private static CharSequence getFormattedDate(String dateFormat, Calendar calendar, boolean small)
+    private static CharSequence getFormattedDate(String dateFormat, Calendar calendar, boolean small, @Nullable @ColorInt Integer textColor)
     {
         if(dateFormat.length() == 0) return "";
         //If dateformat is illegal, at least don't break anything
@@ -880,6 +900,11 @@ public class StatusbarMods extends XposedModPack {
             SpannableStringBuilder formatted = new SpannableStringBuilder(result);
             CharacterStyle style = new RelativeSizeSpan(0.7f);
             formatted.setSpan(style, 0, result.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if(textColor != null)
+            {
+                formatted.setSpan(new NetworkTraffic.trafficStyle(textColor), 0 , (formatted).length(),
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
             return formatted;
         }
         catch(Exception e)

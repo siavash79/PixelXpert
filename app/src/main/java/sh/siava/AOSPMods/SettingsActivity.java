@@ -419,7 +419,19 @@ public class SettingsActivity extends AppCompatActivity implements
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.statusbar_clock_prefs, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+            updateVisibility(prefs);
         }
+
+        private void updateVisibility(SharedPreferences prefs) {
+            boolean colorfullEnabled = prefs.getBoolean("SBCClockColorful", false);
+            findPreference("SBCBeforeClockColor").setVisible(colorfullEnabled);
+            findPreference("SBCClockColor").setVisible(colorfullEnabled);
+            findPreference("SBCAfterClockColor").setVisible(colorfullEnabled);
+        }
+
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
     }
     
     public static class ThreeButtonNavFragment extends PreferenceFragmentCompat {

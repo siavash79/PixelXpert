@@ -56,4 +56,25 @@
                 android:title="@string/sbc_date_small" />
         </PreferenceCategory>
     </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/sbc_clock_color_category">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="SBCClockColorful"
+            android:summaryOn="@string/general_on"
+            android:summaryOff="@string/general_off"
+            android:title="@string/sbc_colorful_title" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:key="SBCBeforeClockColor"
+            android:title="@string/sbc_before_color" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:key="SBCClockColor"
+            android:title="@string/sbc_color" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:key="SBCAfterClockColor"
+            android:title="@string/sbc_after_color" />
+    </PreferenceCategory>
 </PreferenceScreen>

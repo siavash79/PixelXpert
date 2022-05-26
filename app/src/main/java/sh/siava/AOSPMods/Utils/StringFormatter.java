@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 
 import com.github.mfathi91.time.PersianDate;
 
+import java.awt.font.NumericShaper;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -160,7 +162,9 @@ public class StringFormatter {
                     )
             );
             hasDate = true;
-            return result;
+            char[] bytes = result.toCharArray();
+            NumericShaper.getShaper(NumericShaper.EASTERN_ARABIC).shape(bytes, 0, bytes.length); //Numbers to be shown in correct font
+            return String.copyValueOf(bytes);
         }catch (Exception e)
         {
             return "P"+format;

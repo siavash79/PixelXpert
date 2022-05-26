@@ -1,9 +1,13 @@
 package sh.siava.AOSPMods;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,7 +21,11 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import com.nfx.android.rangebarpreference.RangeBarHelper;
+import com.topjohnwu.superuser.Shell;
+import com.topjohnwu.superuser.ShellUtils;
+import com.topjohnwu.superuser.nio.FileSystemManager;
 
+import de.robv.android.xposed.XposedBridge;
 import sh.siava.AOSPMods.Utils.PrefManager;
 import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.Utils.SystemUtils;
@@ -53,6 +61,9 @@ public class SettingsActivity extends AppCompatActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
+        menu.findItem(R.id.menu_netstat_toggle).setChecked(
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext())
+                        .getBoolean("NetworkStatsEnabled", false));
         return true;
     }
 
@@ -63,7 +74,8 @@ public class SettingsActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         backButtonDisabled();
-        
+        Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER)); //access full filesystem
+
         setContentView(R.layout.settings_activity);
 
         if (savedInstanceState == null) {
@@ -127,7 +139,9 @@ public class SettingsActivity extends AppCompatActivity implements
         return true;
     }
 
-    public void MenuClick(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
 
         switch (item.getItemId())
@@ -142,7 +156,46 @@ public class SettingsActivity extends AppCompatActivity implements
             case R.id.menu_importPrefs:
                 importExportSettings(false);
                 break;
+            case R.id.menu_netstat_toggle:
+                item.setChecked(!item.isChecked());
+                prefs.edit().putBoolean("NetworkStatsEnabled", item.isChecked()).apply();
+//                RestartSysUI(null);
+                break;
+            case R.id.menu_netstat_clear:
+                clearNetstatClick();
+                break;
         }
+        return true;
+    }
+
+
+    private void clearNetstatClick() {
+        //showinng an alert of reboot before taking an action
+        new AlertDialog.Builder(this).setTitle(R.string.reboot_caution_title)
+                .setMessage(R.string.reboot_caution_text)
+                .setPositiveButton(R.string.reboot_caution_yes, (dialogInterface, i) -> {
+                    try {
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
+                        boolean currentStatus = prefs.getBoolean("NetworkStatsEnabled", false);
+
+                        prefs.edit().putBoolean("NetworkStatsEnabled", false).commit();
+                        Shell.cmd("rm -rf /data/user_de/0/com.android.systemui/netStats").exec();
+                        Thread.sleep(500);
+
+                        prefs.edit().putBoolean("NetworkStatsEnabled", true).commit();
+                        Thread.sleep(500);
+                        prefs.edit().putBoolean("NetworkStatsEnabled", currentStatus).apply();
+                    }
+                    catch  (Exception e){
+                        e.printStackTrace();
+                    }
+//
+//                    Shell.cmd("reboot").submit();
+                })
+                .setNegativeButton(R.string.reboot_caution_no, (dialogInterface, i) -> {/*nothing happens*/})
+                .setCancelable(true)
+                .create()
+                .show();
     }
 
     private void importExportSettings(boolean export) {

@@ -20,12 +20,7 @@ public class miscSettings extends XposedModPack {
     public void updatePrefs(String...Key) {
         if(XPrefs.Xprefs == null) return; //it won't be null. but anyway...
 
-        if(XPrefs.Xprefs.getBoolean("NetworkStatsEnabled", true))
-        {
-            try {
-                SystemUtils.enableNetworkStats();
-            }catch (Exception ignored){}
-        }
+        SystemUtils.setNetworkStats(XPrefs.Xprefs.getBoolean("NetworkStatsEnabled", false));
 
         if(Key.length > 0)
         {

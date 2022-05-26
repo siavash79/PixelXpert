@@ -14,10 +14,19 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.util.JsonReader;
 import android.util.JsonWriter;
+import android.util.Xml;
+
+import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,7 +54,6 @@ public class NetworkStats {
     private long todayCellRxBytes = 0, todayCellTxBytes = 0;
     private long cellRx = 0, cellTx = 0;
     private long totalCellRxBytes = 0, totalCellTxBytes = 0;
-
 
     private long todayRxBytes = 0, todayTxBytes = 0;
 
@@ -131,7 +139,34 @@ public class NetworkStats {
         }
     };
 
-    public void setEnabled()
+    BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action == null) return;
+            //noinspection deprecation
+            if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+                mTrafficHandler.sendEmptyMessage(0);
+            }
+        }
+    };
+
+    public void setStatus(boolean enabled)
+    {
+        if(enabled)
+        {
+            setEnabled();
+        }
+        else
+        {
+            setDisabled();
+        }
+        callbacks.forEach(callback -> callback.onStatChanged(this));
+
+    }
+
+
+    private void setEnabled()
     {
         if(enabled) return;
 
@@ -144,28 +179,34 @@ public class NetworkStats {
             return;
         }
 
+        totalRxBytes = TrafficStats.getTotalRxBytes(); //if we're at startup so it's almost zero
+        totalTxBytes = TrafficStats.getTotalTxBytes(); //if we're midway, then previous stats since boot worth nothing
+                                                        //because we don't know those data are since when
+        totalCellRxBytes = TrafficStats.getMobileRxBytes();
+        totalCellTxBytes = TrafficStats.getMobileTxBytes();
+
+        XposedBridge.log("try load");
         tryLoadData();
+        XposedBridge.log("end load");
 
         IntentFilter filter = new IntentFilter();
         //noinspection deprecation
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
 
-        BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-                if (action == null) return;
-                //noinspection deprecation
-                if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                    mTrafficHandler.sendEmptyMessage(0);
-                }
-            }
-        };
-
         mContext.registerReceiver(mIntentReceiver, filter, null, null);
         operationDate = Calendar.getInstance();
         scheduleDateChange();
         enabled = true;
+    }
+
+    private void setDisabled()
+    {
+        if(!enabled) return;
+        enabled = false;
+        try {
+            mContext.unregisterReceiver(mIntentReceiver);
+            clearHandlerCallbacks();
+        }catch (Exception e){}
     }
 
     private void scheduleDateChange()
@@ -215,33 +256,37 @@ public class NetworkStats {
 
             File dataFile = getDataFile();
             //noinspection ResultOfMethodCallIgnored
-            dataFile.createNewFile();
+            dataFile.delete();
 
-            JsonWriter jasonWriter = new JsonWriter(new FileWriter(dataFile));
+            FileWriter writer = new FileWriter(dataFile);
+            XmlSerializer s = Xml.newSerializer();
+            s.setOutput(writer);
+            s.startDocument("UTF-8", true);
 
-            jasonWriter.beginObject()
-                    .name("RXTotal")
-                    .value(todayRxBytes)
-                    .endObject();
+            s.startTag(null, "RXTotal");
+            s.text(String.valueOf(todayRxBytes));
+            s.endTag(null,"RXTotal");
 
-            jasonWriter.beginObject()
-                    .name("TXTotal")
-                    .value(todayTxBytes)
-                    .endObject();
+            s.startTag(null, "TXTotal");
+            s.text(String.valueOf(todayTxBytes));
+            s.endTag(null,"TXTotal");
 
-            jasonWriter.beginObject()
-                    .name("CellRX")
-                    .value(todayCellRxBytes)
-                    .endObject();
+            s.startTag(null, "CellRX");
+            s.text(String.valueOf(todayCellRxBytes));
+            s.endTag(null,"CellRX");
 
-            jasonWriter.beginObject()
-                    .name("CellTX")
-                    .value(todayCellTxBytes)
-                    .endObject();
+            s.startTag(null, "CellTX");
+            s.text(String.valueOf(todayCellTxBytes));
+            s.endTag(null,"CellTX");
 
-            jasonWriter.close();
+            s.endDocument();
+            s.flush();
+
+            writer.flush();
+            writer.close();
+
         }
-        catch (Exception ignored){}
+        catch (Throwable ignored){ignored.printStackTrace();}
     }
 
     private File getDataFile() {
@@ -271,31 +316,21 @@ public class NetworkStats {
 
     private void tryLoadData() {
         try {
-            File dataFile = getDataFile();
+            XmlPullParser p = Xml.newPullParser();
 
-            JsonReader jasonReader = new JsonReader(new FileReader(dataFile));
+            FileReader reader = new FileReader(getDataFile());
+            p.setInput(reader);
+            p.getEventType()
+            p.getAttributeValue(null, "RXTotal");
+            File dataFile = getDataFile()
+            todayRxBytes = json.getLong("RXTotal");
+            todayTxBytes = json.getLong("TXTotal");
+            todayCellRxBytes = json.getLong("CellRX");
+            todayCellTxBytes = json.getLong("CellTX");
 
-            while(jasonReader.hasNext())
-            {
-                long value = jasonReader.nextLong();
-                switch (jasonReader.nextName())
-                {
-                    case "RXTotal":
-                        todayRxBytes = value;
-                        break;
-                    case "TXTotal":
-                        todayTxBytes = value;
-                        break;
-                    case "CellRX":
-                        todayCellRxBytes = value;
-                        break;
-                    case "CellTX":
-                        todayCellTxBytes = value;
-                        break;
-                }
-            }
+            XposedBridge.log("rx " + json.get("RXTotal"));
         }
-        catch (Exception ignored){}
+        catch (Exception ignored){ignored.printStackTrace();}
     }
 
     private void clearHandlerCallbacks() {

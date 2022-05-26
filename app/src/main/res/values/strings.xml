@@ -273,8 +273,17 @@
     <string name="qs_5_rows">Force 5 rows</string>
 
     <!-- Menu Items -->
+    <string name="menu_settings_title">Import/Export</string>
     <string name="menu_reset_defaults">Reset all settings</string>
     <string name="menu_import_settings">Import settings from file...</string>
     <string name="menu_export_settings">Export settings to file...</string>
+    <string name="menu_netstat_title">Network Statistics</string>
+    <string name="menu_netstat_enable">Enable Statistics</string>
+    <string name="menu_netstat_clear">Reset statistics</string>
+
+    <string name="reboot_caution_title">Caution!</string>
+    <string name="reboot_caution_text">Your device will reboot immediately. Do you want to proceed?</string>
+    <string name="reboot_caution_yes">Continue</string>
+    <string name="reboot_caution_no">Maybe later</string>
 
 </resources>

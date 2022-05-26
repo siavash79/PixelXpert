@@ -58,10 +58,10 @@ public class SystemUtils{
 		instance.toggleFlashInternal();
 	}
 
-	public static void enableNetworkStats()
+	public static void setNetworkStats(boolean enabled)
 	{
 		if(instance == null) return;
-		NetworkStats().setEnabled();
+		NetworkStats().setStatus(enabled);
 	}
 
 	public static NetworkStats NetworkStats()

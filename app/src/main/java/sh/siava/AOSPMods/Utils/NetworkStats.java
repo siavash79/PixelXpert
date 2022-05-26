@@ -14,19 +14,10 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.util.JsonReader;
 import android.util.JsonWriter;
-import android.util.Xml;
-
-import org.json.JSONObject;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,7 +35,7 @@ public class NetworkStats {
     private long lastUpdateTime = 0;
     private static final long refreshInterval = 10; //seconds
     private static final long saveThreshold = 10 * MB;
-    private String statDataPath = "";
+    private final String statDataPath;
     private boolean enabled = false;
     private Calendar operationDate;
 
@@ -85,13 +76,7 @@ public class NetworkStats {
     private void resetStats() {
         operationDate = Calendar.getInstance();
 
-        todayCellRxBytes
-                = todayCellTxBytes
-                = todayRxBytes
-                = todayTxBytes
-                = rxData
-                = txData
-                = 0;
+        resetNumbers();
 
         try {
             //noinspection ResultOfMethodCallIgnored
@@ -100,6 +85,17 @@ public class NetworkStats {
             new File(statDataPath).mkdirs();
         }
         catch (Exception ignored){}
+    }
+
+    private void resetNumbers()
+    {
+        todayCellRxBytes
+                = todayCellTxBytes
+                = todayRxBytes
+                = todayTxBytes
+                = rxData
+                = txData
+                = 0;
     }
 
 
@@ -179,10 +175,12 @@ public class NetworkStats {
             return;
         }
 
+        resetNumbers();
+        lastSaveTime = SystemClock.elapsedRealtime();
+
         totalRxBytes = TrafficStats.getTotalRxBytes(); //if we're at startup so it's almost zero
         totalTxBytes = TrafficStats.getTotalTxBytes(); //if we're midway, then previous stats since boot worth nothing
-                                                        //because we don't know those data are since when
-        totalCellRxBytes = TrafficStats.getMobileRxBytes();
+        totalCellRxBytes = TrafficStats.getMobileRxBytes(); //because we don't know those data are since when
         totalCellTxBytes = TrafficStats.getMobileTxBytes();
 
         XposedBridge.log("try load");
@@ -206,7 +204,7 @@ public class NetworkStats {
         try {
             mContext.unregisterReceiver(mIntentReceiver);
             clearHandlerCallbacks();
-        }catch (Exception e){}
+        }catch (Exception ignored){}
     }
 
     private void scheduleDateChange()
@@ -255,38 +253,31 @@ public class NetworkStats {
             callbacks.forEach(callback -> callback.onStatChanged(this));
 
             File dataFile = getDataFile();
-            //noinspection ResultOfMethodCallIgnored
-            dataFile.delete();
 
             FileWriter writer = new FileWriter(dataFile);
-            XmlSerializer s = Xml.newSerializer();
-            s.setOutput(writer);
-            s.startDocument("UTF-8", true);
 
-            s.startTag(null, "RXTotal");
-            s.text(String.valueOf(todayRxBytes));
-            s.endTag(null,"RXTotal");
+            JsonWriter jasonWriter = new JsonWriter(writer);
 
-            s.startTag(null, "TXTotal");
-            s.text(String.valueOf(todayTxBytes));
-            s.endTag(null,"TXTotal");
+            jasonWriter.beginObject()
 
-            s.startTag(null, "CellRX");
-            s.text(String.valueOf(todayCellRxBytes));
-            s.endTag(null,"CellRX");
+                    .name("RXTotal")
+                    .value(todayRxBytes)
 
-            s.startTag(null, "CellTX");
-            s.text(String.valueOf(todayCellTxBytes));
-            s.endTag(null,"CellTX");
+                    .name("TXTotal")
+                    .value(todayTxBytes)
 
-            s.endDocument();
-            s.flush();
+                    .name("CellRX")
+                    .value(todayCellRxBytes)
 
-            writer.flush();
+                    .name("CellTX")
+                    .value(todayCellTxBytes)
+
+                    .endObject();
+
+            jasonWriter.close();
             writer.close();
-
         }
-        catch (Throwable ignored){ignored.printStackTrace();}
+        catch (Exception ignored){}
     }
 
     private File getDataFile() {
@@ -316,21 +307,33 @@ public class NetworkStats {
 
     private void tryLoadData() {
         try {
-            XmlPullParser p = Xml.newPullParser();
+            JsonReader jsonReader = new JsonReader(
+                    new FileReader(getDataFile()));
 
-            FileReader reader = new FileReader(getDataFile());
-            p.setInput(reader);
-            p.getEventType()
-            p.getAttributeValue(null, "RXTotal");
-            File dataFile = getDataFile()
-            todayRxBytes = json.getLong("RXTotal");
-            todayTxBytes = json.getLong("TXTotal");
-            todayCellRxBytes = json.getLong("CellRX");
-            todayCellTxBytes = json.getLong("CellTX");
+            jsonReader.beginObject();
+            while (jsonReader.hasNext())
+            {
+                String name = jsonReader.nextName();
+                long value = jsonReader.nextLong();
+                switch (name)
+                {
+                    case "RXTotal":
+                        todayRxBytes = value;
+                        break;
+                    case "TXTotal":
+                        todayTxBytes = value;
+                        break;
+                    case "CellRX":
+                        todayCellRxBytes = value;
+                        break;
+                    case "CellTX":
+                        todayCellTxBytes = value;
+                        break;
+                }
 
-            XposedBridge.log("rx " + json.get("RXTotal"));
+            }
         }
-        catch (Exception ignored){ignored.printStackTrace();}
+        catch (Exception ignored){}
     }
 
     private void clearHandlerCallbacks() {

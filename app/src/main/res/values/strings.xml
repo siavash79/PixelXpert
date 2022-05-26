@@ -91,7 +91,7 @@
     <string name="network_opacity_title">Opacity</string>
     <string name="network_interval_title">Refresh interval (seconds)</string>
     <string name="nt_mode_rxtx">Download &amp; Upload</string>
-    <string name="nt_mode_total">Downlaod + Upload (Combined)</string>
+    <string name="nt_mode_total">Download + Upload (Combined)</string>
     <string name="nt_mode_rxonly">Download only</string>
     <string name="nt_mode_txonly">Upload only</string>
     <string name="statusbar_general_options">Status Bar Options</string>
@@ -281,9 +281,11 @@
     <string name="menu_netstat_enable">Enable Statistics</string>
     <string name="menu_netstat_clear">Reset statistics</string>
 
-    <string name="reboot_caution_title">Caution!</string>
-    <string name="reboot_caution_text">Your device will reboot immediately. Do you want to proceed?</string>
-    <string name="reboot_caution_yes">Continue</string>
-    <string name="reboot_caution_no">Maybe later</string>
+    <string name="nestat_caution_title">Caution!</string>
+    <string name="nestat_caution_text">Your network stats will reset permanently. Proceed?</string>
+    <string name="netstat_caution_yes">Continue</string>
+    <string name="netstat_caution_no">Maybe later</string>
+
+    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G[format] : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P[format] : Persian date, based on format\nExample: $Pyyyy means: 1401\n\n$Nrx : Total Donwloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
 
 </resources>

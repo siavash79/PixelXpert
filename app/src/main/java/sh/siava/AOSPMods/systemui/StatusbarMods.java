@@ -894,17 +894,19 @@ public class StatusbarMods extends XposedModPack {
             //There's some format to work on
             @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat(dateFormat);
             String result = df.format(calendar.getTime());
-            if (!small) return result;
-
-            //small size requested
             SpannableStringBuilder formatted = new SpannableStringBuilder(result);
-            CharacterStyle style = new RelativeSizeSpan(0.7f);
-            formatted.setSpan(style, 0, result.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            if (small) {
+                //small size requested
+                CharacterStyle style = new RelativeSizeSpan(0.7f);
+                formatted.setSpan(style, 0, formatted.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
             if(textColor != null)
             {
                 formatted.setSpan(new NetworkTraffic.trafficStyle(textColor), 0 , (formatted).length(),
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
+
             return formatted;
         }
         catch(Exception e)

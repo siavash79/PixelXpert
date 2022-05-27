@@ -1,1 +1,2 @@
--
+- Bugfixes
+- First stable (on Pixel stock firmwares) version. Yay!

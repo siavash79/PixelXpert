@@ -2,7 +2,6 @@
 **Compatibility:**
 AOSP based Androids:
 12, 12.1 (12L), 13DP1
-13 DP2 & beta 1 (poorly compatible - not recommended)
 
 **If you're updating from previous versions:**
 Update your module via module update shortcut in Magisk

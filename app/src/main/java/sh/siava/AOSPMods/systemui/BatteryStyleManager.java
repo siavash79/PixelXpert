@@ -5,6 +5,7 @@ import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -75,22 +76,27 @@ public class BatteryStyleManager extends XposedModPack {
     
         if(BatteryStyle != batteryStyle)
         {
-            if(Key.length > 0 && batteryStyle == 0)
-            {
-                android.os.Process.killProcess(android.os.Process.myPid());
-            }
             BatteryStyle = batteryStyle;
             for(Object view : batteryViews) //distroy old drawables and make new ones :D
             {
-                BatteryDrawable newDrawable = getNewDrawable(mContext);
                 ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(view, "mBatteryIconView");
-                mBatteryIconView.setImageDrawable(newDrawable);
-                XposedHelpers.setAdditionalInstanceField(view,"mBatteryDrawable", newDrawable);
-    
                 boolean mCharging = (boolean) XposedHelpers.getObjectField(view, "mCharging");
                 int mLevel = (int) XposedHelpers.getObjectField(view, "mLevel");
-                newDrawable.setBatteryLevel(mLevel);
-                newDrawable.setCharging(mCharging);
+
+                if(customBatteryEnabled) {
+                    BatteryDrawable newDrawable = getNewDrawable(mContext);
+                    mBatteryIconView.setImageDrawable(newDrawable);
+                    XposedHelpers.setAdditionalInstanceField(view,"mBatteryDrawable", newDrawable);
+                    newDrawable.setBatteryLevel(mLevel);
+                    newDrawable.setCharging(mCharging);
+                }
+                else
+                {
+                    mBatteryIconView.setImageDrawable(
+                            (Drawable) XposedHelpers.getObjectField(
+                                    view,
+                                    "mDrawable"));
+                }
             }
         }
         
@@ -146,7 +152,7 @@ public class BatteryStyleManager extends XposedModPack {
             }
         });
 
-        Class<?> BatteryMeterViewClass = XposedHelpers.findClassIfExists("com.android.systemui.battery.BatteryIconOpacity", lpparam.classLoader);
+        Class<?> BatteryMeterViewClass = XposedHelpers.findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
 
         if(BatteryMeterViewClass == null)
         {

@@ -73,7 +73,6 @@
     <string name="sbc_date_small">Smaller size (70%)</string>
     <string name="sbc_custom_date_after">Custom date format after clock</string>
     <string name="sbc_header">Status bar clock customization</string>
-    <string name="sbc_may_take_one_minute">Takes effect on time update or SysUI restart</string>
     <string name="sbc_clock_color_category">Color options</string>
     <string name="sbc_colorful_title">Make it colorful</string>
     <string name="sbc_before_color">Text before clock</string>

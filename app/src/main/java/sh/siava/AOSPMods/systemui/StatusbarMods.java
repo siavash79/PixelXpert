@@ -138,6 +138,7 @@ public class StatusbarMods extends XposedModPack {
     private boolean telephonyCallbackRegistered = false;
     private int lastVolteState = VOLTE_UNKNOWN;
     private final serverStateCallback volteCallback = new serverStateCallback();
+    private View mClockView;
     //endregion
     
     public StatusbarMods(Context context) { super(context); }
@@ -254,6 +255,7 @@ public class StatusbarMods extends XposedModPack {
         
 
         //region clock settings
+
         clockPosition = Integer.parseInt(XPrefs.Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
         mShowSeconds = XPrefs.Xprefs.getBoolean("SBCShowSeconds", false);
         mAmPmStyle = Integer.parseInt(XPrefs.Xprefs.getString("SBCAmPmStyle", String.valueOf(AM_PM_STYLE_GONE)));
@@ -309,6 +311,11 @@ public class StatusbarMods extends XposedModPack {
                     break;
             }
         }
+
+        try {
+            placeClock();
+            XposedHelpers.callMethod(mClockView, "getSmallTime");
+        }catch(Throwable ignored){}
         //endregion clock settings
         
     
@@ -452,17 +459,6 @@ public class StatusbarMods extends XposedModPack {
             }
         });
 
-        //marking clock instance for recognition
-        XposedBridge.hookAllConstructors(QuickStatusBarHeaderControllerClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                XposedHelpers.setAdditionalInstanceField(
-                        XposedHelpers.getObjectField(param.thisObject, "mClockView"),
-                        "mClockParent",
-                        2);
-            }
-        });
-
         //marking clock instaces for recognition and setting click actions on some icons
         XposedHelpers.findAndHookMethod(QuickStatusBarHeaderClass,
                 "onFinishInflate", new XC_MethodHook() {
@@ -482,11 +478,6 @@ public class StatusbarMods extends XposedModPack {
                             XposedHelpers.callMethod(mDateView, "setOnClickListener", clickListener);
                             XposedHelpers.callMethod(mDateView, "setOnLongClickListener", clickListener);
                         }catch(Exception e) { return;}
-                        //to recognize clock's parent
-                        XposedHelpers.setAdditionalInstanceField(
-                                XposedHelpers.getObjectField(param.thisObject, "mClockView"),
-                                "mClockParent",
-                                3);
                     }
                 });
 
@@ -550,21 +541,17 @@ public class StatusbarMods extends XposedModPack {
                         
                         mNotificationIconAreaInner = (View) XposedHelpers.getObjectField(param.thisObject, "mNotificationIconAreaInner");
                         
-                        View mClockView;
                         try
                         {
                             mClockView = (View) XposedHelpers.getObjectField(param.thisObject, "mClockView");
                         }
                         catch (Throwable t)
                         { //PE Plus
-                            
                             Object mClockController = XposedHelpers.getObjectField(param.thisObject, "mClockController");
                             mClockView = (View) XposedHelpers.callMethod(mClockController, "getClock");
                         }
-                        
-    
+
                         mClockParent = (ViewGroup) mClockView.getParent();
-                        
     
                         mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
                         mSystemIconArea = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mSystemIconArea");
@@ -598,33 +585,12 @@ public class StatusbarMods extends XposedModPack {
                         
 
                         //<modding clock>
-                        XposedHelpers.setAdditionalInstanceField(mClockView, "mClockParent", 1);
-                        
-                        
-                        if(clockPosition == POSITION_LEFT) return;
-
-                        ViewGroup targetArea = null;
-                        
-
-                        switch (clockPosition)
-                        {
-                            case POSITION_CENTER:
-                                targetArea = (ViewGroup) mCenteredIconArea.getParent();
-                                break;
-                            case POSITION_RIGHT:
-                                mClockView.setPadding(20,0,0,0);
-                                targetArea = ((ViewGroup) mSystemIconArea.getParent());
-                                break;
-                        }
-                        mClockParent.removeView(mClockView);
-                        targetArea.addView(mClockView);
-                        
-    
-    
+                        placeClock();
                     }
                 });
 
         //clock mods
+
         XposedHelpers.findAndHookMethod(ClockClass,
                 "getSmallTime", new XC_MethodHook() {
                     @Override
@@ -635,16 +601,10 @@ public class StatusbarMods extends XposedModPack {
 
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        int mClockParent = 1;
-                        try {
-                            mClockParent = (int) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mClockParent");
-                        }
-                        catch(Exception ignored){}
-                    
-                        if(mClockParent > 1) return; //We don't want custom format in QS header. do we?
-                    
+                        if(param.thisObject != mClockView) return; //We don't want custom format in QS header. do we?
+
                         Calendar mCalendar = (Calendar) XposedHelpers.getObjectField(param.thisObject, "mCalendar");
-                    
+
                         SpannableStringBuilder result = new SpannableStringBuilder();
                         result.append(getFormattedDate(mDateFormatBefore, mCalendar, mBeforeSmall, mBeforeClockColor)); //before clock
                         SpannableStringBuilder clockText = SpannableStringBuilder.valueOf((CharSequence) param.getResult()); //THE clock
@@ -676,13 +636,7 @@ public class StatusbarMods extends XposedModPack {
                 "onDarkChanged", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        int mClockParent = 1;
-                        try {
-                            mClockParent = (int) XposedHelpers.getAdditionalInstanceField(param.thisObject, "mClockParent");
-                        }
-                        catch(Exception ignored){}
-
-                        if(mClockParent > 1) return; //We don't want colors of QS header. only statusbar
+                        if(param.thisObject != mClockView) return; //We don't want colors of QS header. only statusbar
 
                         clockColor = ((TextView) param.thisObject).getTextColors().getDefaultColor();
                         NetworkTraffic.setTintColor(clockColor, true);
@@ -693,7 +647,8 @@ public class StatusbarMods extends XposedModPack {
                     }
                 });
     }
-    
+
+
     //region battery bar related
     private void refreshBatteryBar(BatteryBarView instance) {
         BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor, BBarTransitColors);
@@ -885,6 +840,37 @@ public class StatusbarMods extends XposedModPack {
     //endregion
     
     //region clock and date related
+    private void placeClock() {
+        ViewGroup parent = (ViewGroup) mClockView.getParent();
+        ViewGroup targetArea = null;
+        Integer index = null;
+
+        switch (clockPosition)
+        {
+            case POSITION_LEFT:
+                targetArea = mClockParent;
+                index = 0;
+                mClockView.setPadding(0,0,20,0);
+                break;
+            case POSITION_CENTER:
+                targetArea = (ViewGroup) mCenteredIconArea.getParent();
+                mClockView.setPadding(20,0,20,0);
+                break;
+            case POSITION_RIGHT:
+                mClockView.setPadding(20,0,0,0);
+                targetArea = ((ViewGroup) mSystemIconArea.getParent());
+                break;
+        }
+        parent.removeView(mClockView);
+        if(index != null)
+        {
+            targetArea.addView(mClockView, index);
+        }
+        else {
+            targetArea.addView(mClockView);
+        }
+    }
+
     private static CharSequence getFormattedDate(String dateFormat, Calendar calendar, boolean small, @Nullable @ColorInt Integer textColor)
     {
         if(dateFormat.length() == 0) return "";

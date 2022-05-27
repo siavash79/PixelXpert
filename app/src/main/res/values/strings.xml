@@ -276,11 +276,17 @@
     <string name="qs_4_rows">Force 4 rows</string>
     <string name="qs_5_rows">Force 5 rows</string>
 
+    <!-- Lockscreen/Quick Settings Custom Text -->
+    <string name="custom_text_toggle">Show Data Usage in Custom Text</string>
+    <string name="network_interval_custom_text_title">Refresh interval (minutes)</string>
+
+
+
     <!-- Menu Items -->
     <string name="menu_settings_title">Import/Export</string>
     <string name="menu_reset_defaults">Reset all settings</string>
-    <string name="menu_import_settings">Import settings from file...</string>
-    <string name="menu_export_settings">Export settings to file...</string>
+    <string name="menu_import_settings">Import settings from file…</string>
+    <string name="menu_export_settings">Export settings to file…</string>
     <string name="menu_netstat_title">Network Statistics</string>
     <string name="menu_netstat_enable">Enable Statistics</string>
     <string name="menu_netstat_clear">Reset statistics</string>

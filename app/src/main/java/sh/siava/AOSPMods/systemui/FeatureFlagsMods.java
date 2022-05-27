@@ -21,7 +21,15 @@ public class FeatureFlagsMods extends XposedModPack {
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
-        combinedSignalEnabled = XPrefs.Xprefs.getBoolean("combinedSignalEnabled", false);
+        boolean newcombinedSignalEnabled = XPrefs.Xprefs.getBoolean("combinedSignalEnabled", false);
+
+        if(Key.length > 0 && newcombinedSignalEnabled != combinedSignalEnabled)
+        {
+            try {
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }catch(Exception ignored){}
+        }
+        combinedSignalEnabled = newcombinedSignalEnabled;
     }
 
     @Override

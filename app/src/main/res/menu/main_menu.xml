@@ -29,4 +29,7 @@
                 android:title="@string/menu_reset_defaults" />
         </menu>
     </item>
+    <item
+        android:id="@+id/menu_restartSysUI"
+        android:title="@string/menu_restartSysUI" />
 </menu>

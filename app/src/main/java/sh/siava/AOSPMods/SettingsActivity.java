@@ -160,6 +160,8 @@ public class SettingsActivity extends AppCompatActivity implements
             case R.id.menu_netstat_clear:
                 clearNetstatClick();
                 break;
+            case R.id.menu_restartSysUI:
+                SystemUtils.RestartSystemUI();
         }
         return true;
     }

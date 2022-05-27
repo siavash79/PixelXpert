@@ -45,6 +45,7 @@ public class NetworkStats {
     private long todayCellRxBytes = 0, todayCellTxBytes = 0;
     private long cellRx = 0, cellTx = 0;
     private long totalCellRxBytes = 0, totalCellTxBytes = 0;
+    private int saveInterval = 5; //minutes
 
     private long todayRxBytes = 0, todayTxBytes = 0;
 
@@ -57,6 +58,11 @@ public class NetworkStats {
         if(!callbacks.contains(callback)) {
             callbacks.add(callback);
         }
+    }
+
+    public boolean isEnabled()
+    {
+        return enabled;
     }
 
     @SuppressWarnings("unused")
@@ -85,6 +91,11 @@ public class NetworkStats {
             new File(statDataPath).mkdirs();
         }
         catch (Exception ignored){}
+    }
+
+    public void setSaveInterval(int intrval)
+    {
+        saveInterval = intrval;
     }
 
     private void resetNumbers()
@@ -121,7 +132,7 @@ public class NetworkStats {
             cellRx = newCellTotalRxBytes - totalCellRxBytes;
             cellTx = newCellTotalTxBytes - totalCellTxBytes;
 
-            if (rxData > saveThreshold || txData > saveThreshold || (SystemClock.elapsedRealtime() - lastSaveTime) > (5*MINUTE)) {
+            if (rxData > saveThreshold || txData > saveThreshold || (SystemClock.elapsedRealtime() - lastSaveTime) > (saveInterval * MINUTE)) {
                 saveTrafficData();
             }
 

@@ -1,12 +1,15 @@
 package sh.siava.AOSPMods;
 
 import android.content.Context;
+import android.graphics.Color;
 
 import com.topjohnwu.superuser.Shell;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 
 public class miscSettings extends XposedModPack {
@@ -20,7 +23,16 @@ public class miscSettings extends XposedModPack {
     public void updatePrefs(String...Key) {
         if(XPrefs.Xprefs == null) return; //it won't be null. but anyway...
 
-        SystemUtils.setNetworkStats(XPrefs.Xprefs.getBoolean("NetworkStatsEnabled", false));
+        //netstat settings
+        try {
+            Objects.requireNonNull(SystemUtils.NetworkStats()).setStatus(XPrefs.Xprefs.getBoolean("NetworkStatsEnabled", false));
+            Objects.requireNonNull(SystemUtils.NetworkStats()).setSaveInterval(XPrefs.Xprefs.getInt("netstatSaveInterval", 5));
+        }catch (Exception ignored){}
+
+        boolean netstatColorful = XPrefs.Xprefs.getBoolean("networkStatsColorful", false);
+        StringFormatter.RXColor = (netstatColorful) ? XPrefs.Xprefs.getInt("networkStatDLColor", Color.GREEN) : null;
+        StringFormatter.TXColor = (netstatColorful) ? XPrefs.Xprefs.getInt("networkStatULColor", Color.RED) : null;
+        StringFormatter.refreshAll();
 
         if(Key.length > 0)
         {

@@ -277,9 +277,9 @@
     <string name="qs_5_rows">Force 5 rows</string>
 
     <!-- Lockscreen/Quick Settings Custom Text -->
-    <string name="custom_text_toggle">Show Data Usage in Custom Text</string>
-    <string name="network_interval_custom_text_title">Refresh interval (minutes)</string>
-
+    <string name="netstat_enable_title">Collect network statistics</string>
+    <string name="network_interval_custom_text_title">Refresh interval</string>
+    <string name="minutes_word">minute(s)</string>
 
 
     <!-- Menu Items -->
@@ -289,7 +289,7 @@
     <string name="menu_export_settings">Export settings to file…</string>
     <string name="menu_netstat_title">Network Statistics</string>
     <string name="menu_netstat_enable">Enable Statistics</string>
-    <string name="menu_netstat_clear">Reset statistics</string>
+    <string name="menu_netstat_clear">Reset network statistics</string>
     <string name="menu_restartSysUI">Restart SystemUI</string>
     <string name="menu_updates">Updates...</string>
 
@@ -298,7 +298,11 @@
     <string name="netstat_caution_yes">Continue</string>
     <string name="netstat_caution_no">Maybe later</string>
 
+    <string name="monitoring_category_title">Monitoring options</string>
+    <string name="netstat_header">Network statistics settings</string>
+
     <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
+    <string name="update_fragment_label">updateFragment</string>
     <string name="update_channel_name">Updates</string>
     <string name="update_notification_title">Update downloaded</string>
     <string name="update_notification_text">Click here to install</string>
@@ -314,17 +318,8 @@
     <string name="reboot_word">Restart device now</string>
     <string name="update_checking">Checking ...</string>
     <string name="update_download_started">Downloading - Please tap on the notification once completed</string>
-
-    <string name="title_activity_update">updateActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">Updates</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
     <string name="update_word">Update</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_update">updateActivity</string>
 
 </resources>

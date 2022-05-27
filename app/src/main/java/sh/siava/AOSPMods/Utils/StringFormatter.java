@@ -25,13 +25,21 @@ import de.robv.android.xposed.XposedBridge;
 import sh.siava.AOSPMods.BuildConfig;
 
 public class StringFormatter {
+    private static final ArrayList<StringFormatter> instances = new ArrayList<>();
     private final ArrayList<formattedStringCallback> callbacks = new ArrayList<>();
     private boolean hasDate = false;
     private final NetworkStats.networkStatCallback networkStatCallback = stats -> callbacks.forEach(formattedStringCallback::onRefreshNeeded);
+    public static Integer RXColor, TXColor;
 
     public StringFormatter()
     {
+        instances.add(this);
         scheduleNextDateUpdate();
+    }
+
+    public static void refreshAll()
+    {
+        instances.forEach(StringFormatter::informCallbacks);
     }
 
     private void informCallbacks() {
@@ -111,16 +119,23 @@ public class StringFormatter {
 
     @SuppressWarnings("ConstantConditions")
     private CharSequence networkStatOf(String variable) {
+        if(!SystemUtils.NetworkStats().isEnabled())
+        {
+            return "N"+variable;
+        }
         long traffic = 0;
+        Integer textColor = null;
         variable = variable.toLowerCase();
         try {
             switch (variable) {
                 case "crx":
                 case "rx":
+                    textColor = RXColor;
                     traffic = SystemUtils.NetworkStats().getTodayDownloadBytes(variable.startsWith("c"));
                     break;
                 case "ctx":
                 case "tx":
+                    textColor = TXColor;
                     traffic = SystemUtils.NetworkStats().getTodayUploadBytes(variable.startsWith("c"));
                     break;
                 case "call":
@@ -130,7 +145,7 @@ public class StringFormatter {
                     break;
             }
             SystemUtils.NetworkStats().registerCallback(networkStatCallback);
-            return Helpers.getHumanizedBytes(traffic, .6f, "","", null);
+            return Helpers.getHumanizedBytes(traffic, .6f, "","", textColor);
         }
         catch (Exception e)
         {

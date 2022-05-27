@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_Updates"
         android:title="@string/menu_updates" />
-
-    <item
-        android:title="@string/menu_netstat_title">
-        <menu>
-            <item
-                android:id="@+id/menu_netstat_toggle"
-                android:checkable="true"
-                android:title="@string/menu_netstat_enable"
-                app:showAsAction="never" />
-            <item
-                android:id="@+id/menu_netstat_clear"
-                android:title="@string/menu_netstat_clear" />
-        </menu>
-    </item>
 
     <item
         android:title="@string/menu_settings_title">
@@ -33,6 +18,9 @@
                 android:title="@string/menu_reset_defaults" />
         </menu>
     </item>
+    <item
+        android:id="@+id/menu_netstat_clear"
+        android:title="@string/menu_netstat_clear" />
     <item
         android:id="@+id/menu_restartSysUI"
         android:title="@string/menu_restartSysUI" />

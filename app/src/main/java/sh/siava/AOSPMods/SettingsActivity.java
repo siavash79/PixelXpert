@@ -51,9 +51,6 @@ public class SettingsActivity extends AppCompatActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
-        menu.findItem(R.id.menu_netstat_toggle).setChecked(
-                PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext())
-                        .getBoolean("NetworkStatsEnabled", false));
         return true;
     }
 
@@ -158,9 +155,6 @@ public class SettingsActivity extends AppCompatActivity implements
             importExportSettings(true);
         } else if (itemID == R.id.menu_importPrefs) {
             importExportSettings(false);
-        } else if (itemID == R.id.menu_netstat_toggle) {
-            item.setChecked(!item.isChecked());
-            prefs.edit().putBoolean("NetworkStatsEnabled", item.isChecked()).apply();
         } else if (itemID == R.id.menu_netstat_clear) {
             clearNetstatClick();
         } else if (itemID == R.id.menu_restartSysUI) {
@@ -320,8 +314,14 @@ public class SettingsActivity extends AppCompatActivity implements
         private void updateVisibility(SharedPreferences prefs) {
             try {
                 String json = prefs.getString("batteryWarningRange", "");
-                boolean critZero = RangeBarHelper.getLowValueFromJsonString(json) == 0;
-                boolean warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
+                boolean critZero = false;
+                boolean warnZero = false;
+
+                if(!json.isEmpty())
+                {
+                    critZero = RangeBarHelper.getLowValueFromJsonString(json) == 0;
+                    warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
+                }
                 boolean bBarEnabled = prefs.getBoolean("BBarEnabled", false);
                 boolean isColorful = prefs.getBoolean("BBarColorful", false);
                 boolean transitColors = prefs.getBoolean("BBarTransitColors", false);
@@ -560,5 +560,37 @@ public class SettingsActivity extends AppCompatActivity implements
             prefs.registerOnSharedPreferenceChangeListener(listener);
         }
 
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public static class NetworkStatFragment extends PreferenceFragmentCompat {
+
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
+
+        private void updateVisibility(SharedPreferences sharedPreferences) {
+            try {
+                boolean netstatEnabled = sharedPreferences.getBoolean("NetworkStatsEnabled", false);
+                boolean networkTrafficColorful = sharedPreferences.getBoolean("networkStatsColorful", false);
+
+                findPreference("netstatSaveInterval").setSummary(String.format("%s %s", sharedPreferences.getInt("netstatSaveInterval", 5), getString(R.string.minutes_word)));
+
+                findPreference("networkStatsColorful").setVisible(netstatEnabled);
+                findPreference("netstatSaveInterval").setVisible(netstatEnabled);
+                findPreference("networkStatDLColor").setVisible(netstatEnabled && networkTrafficColorful);
+                findPreference("networkStatULColor").setVisible(netstatEnabled && networkTrafficColorful);
+
+            } catch (Exception ignored) {
+            }
+        }
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
+            setPreferencesFromResource(R.xml.lsqs_custom_text, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            updateVisibility(prefs);
+
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+        }
     }
 }

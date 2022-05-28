@@ -285,6 +285,7 @@
     <string name="menu_netstat_enable">Enable Statistics</string>
     <string name="menu_netstat_clear">Reset statistics</string>
     <string name="menu_restartSysUI">Restart SystemUI</string>
+    <string name="menu_updates">Updates...</string>
 
     <string name="nestat_caution_title">Caution!</string>
     <string name="nestat_caution_text">Your network stats will reset permanently. Proceed?</string>
@@ -292,5 +293,67 @@
     <string name="netstat_caution_no">Maybe later</string>
 
     <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
+    <string name="update_channel_name">Updates</string>
+    <string name="update_notification_title">Update downloaded</string>
+    <string name="update_notification_text">Click here to install</string>
+    <string name="reboot_notification_title">AOSPMods updated!</string>
+    <string name="reboot_notification_text">Changes will take effect after reboot</string>
+    <string name="update_flavor_title">Update channel</string>
+    <string name="stable_flavor">Stable</string>
+    <string name="canary_flavor">Canary</string>
+    <string name="currentVersionTitle">Installed version: </string>
+    <string name="lastestVersionTitle">Latest version: </string>
+    <string name="root_not_here">ROOT ACCESS NOT GRANTED!</string>
+    <string name="reboot_pending">Reboot pending</string>
+    <string name="update_checking">Checking ...</string>
+    <string name="update_download_started">Downloading - Please tap on the notification once completed</string>
+
+    <string name="title_activity_update">updateActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Updates</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
+    <string name="update_word">Update</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 </resources>

@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.Utils;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -39,6 +40,7 @@ public class SystemUtils{
 	TelephonyManager mTelephonyManager;
 	AlarmManager mAlaramManager;
 	NetworkStats mNetworkStats;
+	DownloadManager mDownloadManager = null;
 	boolean hasVibrator;
 
 	TorchCallback torchCallback = new TorchCallback();
@@ -117,6 +119,11 @@ public class SystemUtils{
 	public static TelephonyManager TelephonyManager() {
 		if(instance == null) return null;
 		return instance.mTelephonyManager;
+	}
+
+	public static DownloadManager DownloadManager() {
+		if(instance == null) return null;
+		return instance.getmDownloadManager();
 	}
 	
 	public static void vibrate(int effect) {
@@ -272,6 +279,14 @@ public class SystemUtils{
 			}
 		}
 		return "";
+	}
+
+	private DownloadManager getmDownloadManager()
+	{
+		if(mDownloadManager == null) {
+			mDownloadManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
+		}
+		return mDownloadManager;
 	}
 	
 	static class TorchCallback extends CameraManager.TorchCallback {

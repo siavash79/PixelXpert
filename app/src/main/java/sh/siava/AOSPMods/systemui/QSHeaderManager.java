@@ -40,10 +40,16 @@ public class QSHeaderManager extends XposedModPack {
     {
         if(XPrefs.Xprefs == null) return;
         
-        dualToneQSEnabled = XPrefs.Xprefs.getBoolean("dualToneQSEnabled", false);
+        boolean lightThemeEnabled = XPrefs.Xprefs.getBoolean("LightQSPanel", false);
+
+        boolean dualToneQSEnabled = false;
+        if(lightThemeEnabled)
+        {
+            dualToneQSEnabled = XPrefs.Xprefs.getBoolean("dualToneQSEnabled", false);
+        }
         Helpers.setOverlay("QSDualToneOverlay", dualToneQSEnabled, true);
         
-        setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
+        setLightQSHeader(lightThemeEnabled);
     
         boolean newbrightnessThickTrackEnabled = XPrefs.Xprefs.getBoolean("BSThickTrackOverlay", false);
         if(newbrightnessThickTrackEnabled != brightnessThickTrackEnabled)

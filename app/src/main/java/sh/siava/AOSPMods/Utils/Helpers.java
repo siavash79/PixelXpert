@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.Utils;
 
+import android.os.FileUtils;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -8,11 +9,17 @@ import android.text.style.RelativeSizeSpan;
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 
+import com.topjohnwu.superuser.Shell;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -183,6 +190,44 @@ public class Helpers {
         spanUnitString.setSpan(new RelativeSizeSpan(unitSizeFactor), 0, (unit + indicatorSymbol).length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return new SpannableStringBuilder().append(spanSizeString).append(unitSpearator).append(spanUnitString);
-
     }
+
+    public static boolean installDoubleZip(String DoubleZipped) //installs the zip magisk module. even if it's zipped inside another zip
+    {
+        try {
+            //copy it to somewhere under our control
+            File tempFile = File.createTempFile("doubleZ",".zip");
+            Shell.cmd(String.format("cp %s %s", DoubleZipped, tempFile.getAbsolutePath())).exec();
+
+            //unzip once, IF double zipped
+            ZipFile unzipper = new ZipFile(tempFile);
+            ZipEntry firstEntry = unzipper.entries().nextElement();
+
+            File unzippedFile = null;
+            if(!unzipper.entries().hasMoreElements())
+            {
+                unzippedFile = File.createTempFile("singleZ", "zip");
+                FileOutputStream unzipOutputStream = new FileOutputStream(unzippedFile);
+                FileUtils.copy(unzipper.getInputStream(firstEntry), unzipOutputStream);
+                unzipOutputStream.close();
+            }
+            else
+            {
+                unzippedFile = tempFile;
+            }
+
+            //install
+            Shell.cmd(String.format("magisk --install-module %s", unzippedFile.getAbsolutePath())).exec();
+
+            //cleanup
+            tempFile.delete();
+            unzippedFile.delete();
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

@@ -1,6 +1,9 @@
 package sh.siava.AOSPMods;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +11,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,22 +30,17 @@ public class SettingsActivity extends AppCompatActivity implements
 
     private static final int REQUEST_IMPORT = 7;
     private static final int REQUEST_EXPORT = 9;
-
-    Context DPContext;
     private static final String TITLE_TAG = "settingsActivityTitle";
+    Context DPContext;
 
-    public void RestartSysUI(View view) {
-        SystemUtils.RestartSystemUI();
-    }
-
-    public void backButtonEnabled(){
+    public void backButtonEnabled() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 
-    public void backButtonDisabled(){
+    public void backButtonDisabled() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
@@ -67,10 +64,12 @@ public class SettingsActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         backButtonDisabled();
+        createNotificationChannel();
 
         try {
             Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER)); //access full filesystem
-        }catch (Exception ignored){}
+        } catch (Exception ignored) {
+        }
 
         setContentView(R.layout.settings_activity);
 
@@ -91,11 +90,20 @@ public class SettingsActivity extends AppCompatActivity implements
         });
     }
 
+    private void createNotificationChannel() {
+        CharSequence name = getString(R.string.update_channel_name);
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+        NotificationChannel channel = new NotificationChannel("updates", name, importance);
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
+    }
+
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if (getTitle() == getString(R.string.title_activity_settings)){
-        backButtonDisabled();
+        if (getTitle() == getString(R.string.title_activity_settings)) {
+            backButtonDisabled();
         } else {
             backButtonEnabled();
         }
@@ -136,37 +144,35 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
 
-        switch (item.getItemId())
-        {
-            case R.id.menu_clearPrefs:
-                PrefManager.clearPrefs(prefs);
-                SystemUtils.RestartSystemUI();
-                break;
-            case R.id.menu_exportPrefs:
-                importExportSettings(true);
-                break;
-            case R.id.menu_importPrefs:
-                importExportSettings(false);
-                break;
-            case R.id.menu_netstat_toggle:
-                item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("NetworkStatsEnabled", item.isChecked()).apply();
-//                RestartSysUI(null);
-                break;
-            case R.id.menu_netstat_clear:
-                clearNetstatClick();
-                break;
-            case R.id.menu_restartSysUI:
-                SystemUtils.RestartSystemUI();
+        int itemID = item.getItemId();
+
+        if (itemID == android.R.id.home) {
+            onBackPressed();
+        } else if (itemID == R.id.menu_clearPrefs) {
+            PrefManager.clearPrefs(prefs);
+            SystemUtils.RestartSystemUI();
+        } else if (itemID == R.id.menu_exportPrefs) {
+            importExportSettings(true);
+        } else if (itemID == R.id.menu_importPrefs) {
+            importExportSettings(false);
+        } else if (itemID == R.id.menu_netstat_toggle) {
+            item.setChecked(!item.isChecked());
+            prefs.edit().putBoolean("NetworkStatsEnabled", item.isChecked()).apply();
+        } else if (itemID == R.id.menu_netstat_clear) {
+            clearNetstatClick();
+        } else if (itemID == R.id.menu_restartSysUI) {
+            SystemUtils.RestartSystemUI();
+        } else if (itemID == R.id.menu_Updates) {
+            startActivity(new Intent(this, UpdateActivity.class));
         }
         return true;
     }
 
 
+    @SuppressLint("ApplySharedPref")
     private void clearNetstatClick() {
         //showinng an alert before taking action
         new AlertDialog.Builder(this).setTitle(R.string.nestat_caution_title)
@@ -183,8 +189,8 @@ public class SettingsActivity extends AppCompatActivity implements
                         prefs.edit().putBoolean("NetworkStatsEnabled", true).commit();
                         Thread.sleep(100);
                         prefs.edit().putBoolean("NetworkStatsEnabled", currentStatus).apply();
+                    } catch (Exception ignored) {
                     }
-                    catch  (Exception ignored){}
                 })
                 .setNegativeButton(R.string.netstat_caution_no, (dialogInterface, i) -> {/*nothing happens*/})
                 .setCancelable(true)
@@ -203,23 +209,24 @@ public class SettingsActivity extends AppCompatActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(data == null) return; //user hit cancel. Nothing to do
+        if (data == null) return; //user hit cancel. Nothing to do
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
-        switch (requestCode)
-        {
+        switch (requestCode) {
             case REQUEST_IMPORT:
                 try {
                     PrefManager.importPath(prefs,
                             getContentResolver().openInputStream(data.getData()));
                     SystemUtils.RestartSystemUI();
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
                 break;
             case REQUEST_EXPORT:
                 try {
                     PrefManager.exportPrefs(prefs,
                             getContentResolver().openOutputStream(data.getData()));
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
                 break;
         }
     }
@@ -243,31 +250,32 @@ public class SettingsActivity extends AppCompatActivity implements
 
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static class ThemingFragment extends PreferenceFragmentCompat {
-        
-        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> {
-            updateFontPrefs(sharedPreferences);
-        };
-    
+
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> updateFontPrefs(sharedPreferences);
+
+        @SuppressLint("ApplySharedPref")
         private void updateFontPrefs(SharedPreferences sharedPreferences) {
             try {
-        
+
                 boolean customFontsEnabled = sharedPreferences.getBoolean("enableCustomFonts", false);
-        
+
                 if (!customFontsEnabled) {
                     sharedPreferences.edit().putString("FontsOverlayEx", "None").commit();
                 }
-        
+
                 boolean gSansOverride = sharedPreferences.getBoolean("gsans_override", false);
                 boolean FontsOverlayExEnabled = !sharedPreferences.getString("FontsOverlayEx", "None").equals("None");
-        
+
                 findPreference("gsans_override").setVisible(customFontsEnabled && !FontsOverlayExEnabled);
                 findPreference("FontsOverlayEx").setVisible(customFontsEnabled && !gSansOverride);
-        
-            }catch (Exception ignored){}
-    
+
+            } catch (Exception ignored) {
+            }
+
         }
-    
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
@@ -278,10 +286,11 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static class LockScreenFragment extends PreferenceFragmentCompat {
 
         SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> updateVisibility(sharedPreferences);
-        
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
@@ -290,15 +299,15 @@ public class SettingsActivity extends AppCompatActivity implements
             updateVisibility(prefs);
             prefs.registerOnSharedPreferenceChangeListener(listener);
         }
-        
-        private void updateVisibility(SharedPreferences sharedPreferences)
-        {
+
+        private void updateVisibility(SharedPreferences sharedPreferences) {
             findPreference("carrierTextValue").setVisible(sharedPreferences.getBoolean("carrierTextMod", false));
         }
     }
-    
+
+    @SuppressWarnings("ConstantConditions")
     public static class SBBBFragment extends PreferenceFragmentCompat {
-        
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
@@ -307,7 +316,7 @@ public class SettingsActivity extends AppCompatActivity implements
             prefs.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> updateVisibility(prefs));
             updateVisibility(prefs);
         }
-    
+
         private void updateVisibility(SharedPreferences prefs) {
             try {
                 String json = prefs.getString("batteryWarningRange", "");
@@ -316,12 +325,12 @@ public class SettingsActivity extends AppCompatActivity implements
                 boolean bBarEnabled = prefs.getBoolean("BBarEnabled", false);
                 boolean isColorful = prefs.getBoolean("BBarColorful", false);
                 boolean transitColors = prefs.getBoolean("BBarTransitColors", false);
-    
+
                 findPreference("batteryFastChargingColor").setVisible(prefs.getBoolean("indicateFastCharging", false) && bBarEnabled);
                 findPreference("batteryChargingColor").setVisible(prefs.getBoolean("indicateCharging", false) && bBarEnabled);
                 findPreference("batteryWarningColor").setVisible(!warnZero && bBarEnabled);
                 findPreference("batteryCriticalColor").setVisible((!critZero || transitColors) && bBarEnabled && findPreference("batteryWarningColor").isVisible());
-    
+
                 findPreference("BBarTransitColors").setVisible(bBarEnabled && !isColorful);
                 findPreference("BBOnlyWhileCharging").setVisible(bBarEnabled);
                 findPreference("BBOnBottom").setVisible(bBarEnabled);
@@ -334,12 +343,14 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("indicateCharging").setVisible(bBarEnabled);
                 findPreference("indicateFastCharging").setVisible(bBarEnabled);
                 findPreference("batteryWarningRange").setVisible(bBarEnabled);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            catch(Exception ignored){}
         }
-    
+
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static class networkFragment extends PreferenceFragmentCompat {
 
         @Override
@@ -360,14 +371,17 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("networkTrafficULColor").setVisible(colorful);
                 findPreference("networkTrafficInterval").setSummary(prefs.getInt("networkTrafficInterval", 1) + " second(s)");
 
+            } catch (Exception ignored) {
             }
-            catch(Exception ignored){}
         }
     }
 
 
+    @SuppressWarnings("ConstantConditions")
     public static class SBBIconFragment extends PreferenceFragmentCompat {
-        
+
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
@@ -377,37 +391,36 @@ public class SettingsActivity extends AppCompatActivity implements
             updateVisibility(prefs);
         }
 
-        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
-
         private void updateVisibility(SharedPreferences prefs) {
             try {
-                findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50)*2 + getString(R.string.battery_size_summary));
-                findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50)*2 + getString(R.string.battery_size_summary));
+                findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50) * 2 + getString(R.string.battery_size_summary));
+                findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50) * 2 + getString(R.string.battery_size_summary));
 
                 int style = Integer.parseInt(prefs.getString("BatteryStyle", "0"));
                 String json = prefs.getString("BIconbatteryWarningRange", "");
                 boolean critZero = RangeBarHelper.getLowValueFromJsonString(json) == 0;
                 boolean warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
                 boolean colorful = prefs.getBoolean("BIconColorful", false);
-                findPreference("DualToneBatteryOverlay").setVisible(style==0);
-                findPreference("BIconOpacity").setVisible(style>0 && style<99);
+                findPreference("DualToneBatteryOverlay").setVisible(style == 0);
+                findPreference("BIconOpacity").setVisible(style > 0 && style < 99);
                 findPreference("BIconOpacity").setSummary(prefs.getInt("BIconOpacity", 100) + "%");
-                findPreference("BatteryIconScaleFactor").setVisible(style<99);
+                findPreference("BatteryIconScaleFactor").setVisible(style < 99);
                 findPreference("BatteryShowPercent").setVisible(style == 1 || style == 2);
                 findPreference("BIconindicateCharging").setVisible(style == 3);
                 findPreference("batteryIconChargingColor").setVisible(style == 3 && prefs.getBoolean("BIconindicateCharging", false));
-                findPreference("BIconindicateFastCharging").setVisible(style>0 && style<99);
-                findPreference("batteryIconFastChargingColor").setVisible(style>0 && style<99 && prefs.getBoolean("BIconindicateFastCharging", false));
-                findPreference("BIconColorful").setVisible(style>0 && style<99 && !prefs.getBoolean("BIconTransitColors", false));
-                findPreference("BIconTransitColors").setVisible(style>0 && style<99 && !prefs.getBoolean("BIconColorful", false));
-                findPreference("BIconbatteryWarningRange").setVisible(style>0 && style<99);
-                findPreference("BIconbatteryCriticalColor").setVisible(style>0 && style<99 && (colorful || !critZero));
-                findPreference("BIconbatteryWarningColor").setVisible(style>0 && style<99 && (colorful || !warnZero));
-            } catch (Exception ignored){}
+                findPreference("BIconindicateFastCharging").setVisible(style > 0 && style < 99);
+                findPreference("batteryIconFastChargingColor").setVisible(style > 0 && style < 99 && prefs.getBoolean("BIconindicateFastCharging", false));
+                findPreference("BIconColorful").setVisible(style > 0 && style < 99 && !prefs.getBoolean("BIconTransitColors", false));
+                findPreference("BIconTransitColors").setVisible(style > 0 && style < 99 && !prefs.getBoolean("BIconColorful", false));
+                findPreference("BIconbatteryWarningRange").setVisible(style > 0 && style < 99);
+                findPreference("BIconbatteryCriticalColor").setVisible(style > 0 && style < 99 && (colorful || !critZero));
+                findPreference("BIconbatteryWarningColor").setVisible(style > 0 && style < 99 && (colorful || !warnZero));
+            } catch (Exception ignored) {
+            }
         }
     }
-    
-    
+
+
     public static class MiscFragment extends PreferenceFragmentCompat {
 
         @Override
@@ -418,7 +431,10 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static class SBCFragment extends PreferenceFragmentCompat {
+
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -435,10 +451,8 @@ public class SettingsActivity extends AppCompatActivity implements
             findPreference("SBCClockColor").setVisible(colorfullEnabled);
             findPreference("SBCAfterClockColor").setVisible(colorfullEnabled);
         }
-
-        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
     }
-    
+
     public static class ThreeButtonNavFragment extends PreferenceFragmentCompat {
 
         @Override
@@ -448,20 +462,22 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static class StatusbarFragment extends PreferenceFragmentCompat {
-        
+
         SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> setVisibility(sharedPreferences);
-    
+
         private void setVisibility(SharedPreferences sharedPreferences) {
             try {
                 boolean networkOnSBEnabled = sharedPreferences.getBoolean("networkOnSBEnabled", false);
                 findPreference("network_settings_header").setVisible(networkOnSBEnabled);
                 findPreference("networkTrafficPosition").setVisible(networkOnSBEnabled);
-    
+
                 findPreference("centerAreaFineTune").setSummary((sharedPreferences.getInt("centerAreaFineTune", 50) - 50) + "%");
-            }catch (Exception ignored){}
+            } catch (Exception ignored) {
+            }
         }
-    
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
@@ -472,17 +488,18 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static class QuicksettingsFragment extends PreferenceFragmentCompat {
-        
+
         SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibililty(sharedPreferences);
-    
+
         private void updateVisibililty(SharedPreferences sharedPreferences) {
             try {
                 boolean QSPullodwnEnabled = sharedPreferences.getBoolean("QSPullodwnEnabled", false);
-    
+
                 findPreference("QSPulldownPercent").setVisible(QSPullodwnEnabled);
                 findPreference("QSPulldownSide").setVisible(QSPullodwnEnabled);
-                
+
                 findPreference("BSThickTrackOverlay").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
                 findPreference("BrightnessSlierOnBottom").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
                 findPreference("QQSBrightnessEnabled").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
@@ -492,52 +509,54 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 findPreference("network_settings_header").setVisible(sharedPreferences.getBoolean("networkOnQSEnabled", false));
 
-            }catch (Exception ignored){}
-        
+            } catch (Exception ignored) {
+            }
+
         }
-        
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.quicksettings_prefs, rootKey);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
             updateVisibililty(prefs);
-            
+
             prefs.registerOnSharedPreferenceChangeListener(listener);
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static class GestureNavFragment extends PreferenceFragmentCompat {
 
         SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
-        
-        private void updateVisibility(SharedPreferences sharedPreferences)
-        {
-            try{
+
+        private void updateVisibility(SharedPreferences sharedPreferences) {
+            try {
                 boolean HideNavbarOverlay = sharedPreferences.getBoolean("HideNavbarOverlay", false);
-    
+
                 findPreference("GesPillWidthModPos").setVisible(sharedPreferences.getBoolean("GesPillWidthMod", true));
-                findPreference("GesPillWidthModPos").setSummary(sharedPreferences.getInt("GesPillWidthModPos", 50)*2 + getString(R.string.pill_width_summary));
-    
+                findPreference("GesPillWidthModPos").setSummary(sharedPreferences.getInt("GesPillWidthModPos", 50) * 2 + getString(R.string.pill_width_summary));
+
                 findPreference("BackLeftHeight").setVisible(sharedPreferences.getBoolean("BackFromLeft", true));
                 findPreference("BackRightHeight").setVisible(sharedPreferences.getBoolean("BackFromRight", true));
                 findPreference("BackLeftHeight").setSummary(sharedPreferences.getInt("BackLeftHeight", 100) + "%");
                 findPreference("BackRightHeight").setSummary(sharedPreferences.getInt("BackRightHeight", 100) + "%");
-                
+
                 findPreference("nav_pill_width_cat").setVisible(!HideNavbarOverlay);
                 findPreference("nav_pill_height_cat").setVisible(!HideNavbarOverlay);
                 findPreference("nav_pill_color_cat").setVisible(!HideNavbarOverlay);
                 findPreference("nav_keyboard_height_cat").setVisible(!HideNavbarOverlay);
-            }catch (Exception ignored){}
+            } catch (Exception ignored) {
+            }
         }
-        
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.gesture_nav_perfs, rootKey);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
             updateVisibility(prefs);
-    
+
             prefs.registerOnSharedPreferenceChangeListener(listener);
         }
 

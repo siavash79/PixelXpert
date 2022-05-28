@@ -5,14 +5,14 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 31
-    buildToolsVersion '32.1.0-rc1'
+    buildToolsVersion '32.0.0'
 
     defaultConfig {
         applicationId "sh.siava.AOSPMods"
         minSdkVersion 31
         targetSdk 32
-        versionCode 20
-        versionName "1.0.0-beta-04"
+        versionCode 22
+        versionName "canary-22"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,9 +39,20 @@ android {
         abortOnError false
     }
     namespace 'sh.siava.AOSPMods'
+    buildFeatures {
+        viewBinding true
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-fragment:2.3.5'
+    implementation 'androidx.navigation:navigation-ui:2.3.5'
     def libsuVersion = '5.0.1'
 
     compileOnly 'de.robv.android.xposed:api:82:sources'

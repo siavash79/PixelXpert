@@ -1,6 +1,7 @@
 package sh.siava.AOSPMods;
 
 import android.app.AlertDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import com.nfx.android.rangebarpreference.BuildConfig;
 import com.nfx.android.rangebarpreference.RangeBarHelper;
 import com.topjohnwu.superuser.Shell;
 
@@ -53,12 +56,23 @@ public class SettingsActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
         inflater.inflate(R.menu.main_menu, menu);
         menu.findItem(R.id.menu_netstat_toggle).setChecked(
-                PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext())
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()
+                                .createDeviceProtectedStorageContext())
                         .getBoolean("NetworkStatsEnabled", false));
         return true;
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

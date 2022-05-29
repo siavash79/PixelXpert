@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
@@ -64,6 +65,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
+        // Include NetworkStats in dropdown menu
         inflater.inflate(R.menu.main_menu, menu);
         menu.findItem(R.id.menu_netstat_toggle).setChecked(
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()

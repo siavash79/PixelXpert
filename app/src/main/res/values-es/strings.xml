@@ -73,7 +73,11 @@
     <string name="sbc_date_small">Tamaño más pequeño (70%)</string>
     <string name="sbc_custom_date_after">Formato de fecha personalizado despues del reloj</string>
     <string name="sbc_header">Personalizar el reloj</string>
-    <string name="sbc_may_take_one_minute">Requiere actualización de la hora o reinicio de la interfaz de usuario</string>
+    <string name="sbc_clock_color_category">Opciones de color</string>
+    <string name="sbc_colorful_title">Hacerlo colorido</string>
+    <string name="sbc_before_color">Texto antes del reloj</string>
+    <string name="sbc_color">Reloj</string>
+    <string name="sbc_after_color">Texto después del reloj</string>
 	<string name="network_settings_pref">Configuración del monitor de red...</string>
     <string name="ntsb_far_left">Lado izquierdo</string>
     <string name="ntsb_mid_left">Mitad a la izquierda</string>
@@ -273,8 +277,20 @@
     <string name="qs_5_rows">Forzar 5 lineas</string>
 
     <!-- Menu Items -->
+    <string name="menu_settings_title">Importar/Exportar</string>
     <string name="menu_reset_defaults">Restablecer todos los ajustes</string>
     <string name="menu_import_settings">Importar configuraciones desde un archivo...</string>
     <string name="menu_export_settings">Exportar configuración a archivo...</string>
+    <string name="menu_netstat_title">Estadísticas de la red</string>
+    <string name="menu_netstat_enable">Habilitar estadísticas</string>
+    <string name="menu_netstat_clear">Reiniciar las estadísticas</string>
+    <string name="menu_restartSysUI">Reiniciar SystemUI</string>
+
+    <string name="nestat_caution_title">Precaución!</string>
+    <string name="nestat_caution_text">Las estadísticas de su red se restablecerán de forma permanente. ¿Proceder?</string>
+    <string name="netstat_caution_yes">Continuar</string>
+    <string name="netstat_caution_no">Quizas mas tarde</string>
+
+    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
     
 </resources>

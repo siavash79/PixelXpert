@@ -291,6 +291,8 @@
     <string name="menu_netstat_title">Network Statistics</string>
     <string name="menu_netstat_enable">Enable Statistics</string>
     <string name="menu_netstat_clear">Reset statistics</string>
+    <string name="search_title">Search</string>
+
 
     <string name="nestat_caution_title">Caution!</string>
     <string name="nestat_caution_text">Your network stats will reset permanently. Proceed?</string>

@@ -281,8 +281,6 @@
     <string name="custom_text_toggle">Show Data Usage in Custom Text</string>
     <string name="network_interval_custom_text_title">Refresh interval (minutes)</string>
 
-
-
     <!-- Menu Items -->
     <string name="menu_settings_title">Import/Export</string>
     <string name="menu_reset_defaults">Reset all settings</string>
@@ -292,8 +290,7 @@
     <string name="menu_netstat_enable">Enable Statistics</string>
     <string name="menu_netstat_clear">Reset statistics</string>
     <string name="search_title">Search</string>
-    <string name="search_hint">Input search parameter/keyword</string>
-
+    <string name="search_hint">Search a keyword</string>
 
     <string name="nestat_caution_title">Caution!</string>
     <string name="nestat_caution_text">Your network stats will reset permanently. Proceed?</string>

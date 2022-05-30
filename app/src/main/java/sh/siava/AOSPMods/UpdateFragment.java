@@ -107,10 +107,16 @@ public class UpdateFragment extends Fragment {
         String pendingRebootString = (rebootPending) ? " - " + getString(R.string.reboot_pending) : "";
         ((TextView) view.findViewById(R.id.currentVersionValueID)).setText(String.format("%s (%s)%s", currentVersionName, currentVersionCode, pendingRebootString));
 
+        if(rebootPending)
+        {
+            binding.updateBtn.setEnabled(true);
+            binding.updateBtn.setText(R.string.reboot_word);
+        }
+
         binding.radioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
             canaryUpdate = ((RadioButton) radioGroup.findViewById(R.id.canaryID)).isChecked();
             ((TextView) view.findViewById(R.id.latestVersionValueID)).setText(R.string.update_checking);
-            binding.updateBtn.setEnabled(false);
+            binding.updateBtn.setEnabled(rebootPending || false);
 
             checkUpdates(result -> {
                 latestVersion = result;
@@ -126,17 +132,23 @@ public class UpdateFragment extends Fragment {
                         latestCode = (int) result.get("versionCode");
                         if(!canaryUpdate) enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
                     } catch (Exception ignored) {}
-                    enable = (enable || latestCode > currentVersionCode) && !downloadStarted;
+                    enable = rebootPending || ((enable || latestCode > currentVersionCode) && !downloadStarted);
                     view.findViewById(R.id.updateBtn).setEnabled(enable);
                 });
             });
         });
         binding.updateBtn.setOnClickListener(view1 -> {
-            //noinspection ConstantConditions
-            startDownload((String) latestVersion.get("zipUrl"), (int) latestVersion.get("versionCode"));
-            binding.updateBtn.setEnabled(false);
-            downloadStarted = true;
-            binding.updateBtn.setText(R.string.update_download_started);
+            if(rebootPending)
+            {
+                Shell.cmd("reboot").exec();
+            }
+            else {
+                //noinspection ConstantConditions
+                startDownload((String) latestVersion.get("zipUrl"), (int) latestVersion.get("versionCode"));
+                binding.updateBtn.setEnabled(false);
+                downloadStarted = true;
+                binding.updateBtn.setText(R.string.update_download_started);
+            }
         });
     }
 

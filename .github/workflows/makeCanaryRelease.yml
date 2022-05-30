@@ -3,7 +3,7 @@ name: Make Canary Release
 on:
   push:
     branches:
-      - 'updater'
+      - 'canary'
     paths:
       - '.github/makeNewCanary'
       
@@ -59,7 +59,7 @@ jobs:
       uses: github-actions-x/commit@v2.9
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        push-branch: 'updater'
+        push-branch: 'canary'
         commit-message: 'Version update: Release'
         force-add: 'true'
         files: MagiskMod/module.prop app/build.gradle latestVersion.json

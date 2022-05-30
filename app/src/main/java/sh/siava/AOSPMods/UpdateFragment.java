@@ -18,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.solver.widgets.Helper;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,7 @@ import java.util.Objects;
 
 import javax.security.auth.callback.Callback;
 
+import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.databinding.UpdateFragmentBinding;
 
 public class UpdateFragment extends Fragment {
@@ -74,6 +76,7 @@ public class UpdateFragment extends Fragment {
     private int currentVersionCode = -1;
     private String currentVersionName = "";
     private boolean rebootPending = false;
+    private boolean downloadStarted = false;
 
     @Override
     public View onCreateView(
@@ -105,7 +108,7 @@ public class UpdateFragment extends Fragment {
         ((TextView) view.findViewById(R.id.currentVersionValueID)).setText(String.format("%s (%s)%s", currentVersionName, currentVersionCode, pendingRebootString));
 
         binding.radioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
-            canaryUpdate = ((RadioButton) radioGroup.findViewById(R.id.stableID)).isChecked();
+            canaryUpdate = ((RadioButton) radioGroup.findViewById(R.id.canaryID)).isChecked();
             ((TextView) view.findViewById(R.id.latestVersionValueID)).setText(R.string.update_checking);
             binding.updateBtn.setEnabled(false);
 
@@ -121,9 +124,9 @@ public class UpdateFragment extends Fragment {
                     try {
                         //noinspection ConstantConditions
                         latestCode = (int) result.get("versionCode");
-                        if(!((String) result.get("version")).contains("-")) enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
+                        if(!canaryUpdate) enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
                     } catch (Exception ignored) {}
-                    enable = enable || latestCode > currentVersionCode;
+                    enable = (enable || latestCode > currentVersionCode) && !downloadStarted;
                     view.findViewById(R.id.updateBtn).setEnabled(enable);
                 });
             });
@@ -132,6 +135,7 @@ public class UpdateFragment extends Fragment {
             //noinspection ConstantConditions
             startDownload((String) latestVersion.get("zipUrl"), (int) latestVersion.get("versionCode"));
             binding.updateBtn.setEnabled(false);
+            downloadStarted = true;
             binding.updateBtn.setText(R.string.update_download_started);
         });
     }

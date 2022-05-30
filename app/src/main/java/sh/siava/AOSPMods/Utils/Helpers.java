@@ -18,7 +18,6 @@ import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import de.robv.android.xposed.XposedBridge;
@@ -142,7 +141,7 @@ public class Helpers {
         }
     }
 
-    public static SpannableStringBuilder getHumanizedBytes(long bytes, float unitSizeFactor, String unitSpearator, String indicatorSymbol, @Nullable @ColorInt Integer textColor)
+    public static SpannableStringBuilder getHumanizedBytes(long bytes, float unitSizeFactor, String unitSeparator, String indicatorSymbol, @Nullable @ColorInt Integer textColor)
     {
         DecimalFormat decimalFormat;
         CharSequence formattedData;
@@ -189,7 +188,7 @@ public class Helpers {
         spanUnitString = new SpannableString(unit + indicatorSymbol);
         spanUnitString.setSpan(new RelativeSizeSpan(unitSizeFactor), 0, (unit + indicatorSymbol).length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return new SpannableStringBuilder().append(spanSizeString).append(unitSpearator).append(spanUnitString);
+        return new SpannableStringBuilder().append(spanSizeString).append(unitSeparator).append(spanUnitString);
     }
 
     public static boolean installDoubleZip(String DoubleZipped) //installs the zip magisk module. even if it's zipped inside another zip
@@ -201,14 +200,13 @@ public class Helpers {
 
             //unzip once, IF double zipped
             ZipFile unzipper = new ZipFile(tempFile);
-            ZipEntry firstEntry = unzipper.entries().nextElement();
 
-            File unzippedFile = null;
-            if(!unzipper.entries().hasMoreElements())
+            File unzippedFile;
+            if(unzipper.stream().count() == 1)
             {
                 unzippedFile = File.createTempFile("singleZ", "zip");
                 FileOutputStream unzipOutputStream = new FileOutputStream(unzippedFile);
-                FileUtils.copy(unzipper.getInputStream(firstEntry), unzipOutputStream);
+                FileUtils.copy(unzipper.getInputStream(unzipper.entries().nextElement()), unzipOutputStream);
                 unzipOutputStream.close();
             }
             else
@@ -220,7 +218,9 @@ public class Helpers {
             Shell.cmd(String.format("magisk --install-module %s", unzippedFile.getAbsolutePath())).exec();
 
             //cleanup
+            //noinspection ResultOfMethodCallIgnored
             tempFile.delete();
+            //noinspection ResultOfMethodCallIgnored
             unzippedFile.delete();
             return true;
         }

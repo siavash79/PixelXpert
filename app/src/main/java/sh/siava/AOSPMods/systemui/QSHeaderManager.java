@@ -317,7 +317,8 @@ public class QSHeaderManager extends XposedModPack {
                 "updateTheme", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        new Timer().schedule(new QSLightColorCorrector(), 1500);
+                    if(! lightQSHeaderEnabled) return;
+                    new Timer().schedule(new QSLightColorCorrector(), 1500);
                     }
                 });
     }

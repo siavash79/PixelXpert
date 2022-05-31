@@ -11,8 +11,8 @@ android {
         applicationId "sh.siava.AOSPMods"
         minSdkVersion 31
         targetSdk 32
-        versionCode 29
-        versionName "canary-29"
+        versionCode 30
+        versionName "canary-30"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

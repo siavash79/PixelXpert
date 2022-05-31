@@ -73,7 +73,12 @@
     <string name="sbc_date_small">Daha küçük boyut (%70)</string>
     <string name="sbc_custom_date_after">Saatten sonra özel tarih formatı</string>
     <string name="sbc_header">Durum çubuğu saat özelleştirmesi</string>
-    <string name="sbc_may_take_one_minute">Zaman güncellemesinde veya SystemUI yeniden başlatıldığında etkin olur</string>
+    <string name="sbc_clock_color_category">Renk opsiyonları</string>
+    <string name="sbc_colorful_title">Renklendir</string>
+    <string name="sbc_before_color">Saatten önceki yazı</string>
+    <string name="sbc_color">Saat</string>
+    <string name="sbc_after_color">Saatten sonrakı yazı</string>
+    <string name="network_settings_pref">Ağ izleme ayarları...</string>
     <string name="ntsb_far_left">Tam Sol</string>
     <string name="ntsb_mid_left">Orta-Sol</string>
     <string name="ntsb_mid_right">Orta-Sağ</string>
@@ -82,6 +87,17 @@
     <string name="ntsb_position_title">Monitör Konumu</string>
     <string name="ntsb_threshold_title">Otomatik gizleme eşiği</string>
     <string name="ntsb_threshold_summary">"Trafik azsa gizle… (Kilobaytlar)"</string>
+    <string name="network_mode_title">İzleme stili</string>
+    <string name="network_colorful_title">Renklendir</string>
+    <string name="network_download_top">İndirme hızı yukarıda</string>
+    <string name="network_download_color_title">İndirme hızı rengi</string>
+    <string name="network_upload_color_title">Yükleme hızı rengi</string>
+    <string name="network_opacity_title">Opaklık</string>
+    <string name="network_interval_title">Yenileme aralığı (saniyeler)</string>
+    <string name="nt_mode_rxtx">İndirme &amp; Yükleme</string>
+    <string name="nt_mode_total">İndirme + Yükleme (Combined)</string>
+    <string name="nt_mode_rxonly">Sadece İndirme</string>
+    <string name="nt_mode_txonly">Sadece Yükleme</string>	
     <string name="statusbar_general_options">Durum Çubuğu Seçenekleri</string>
     <string name="dual_tone_battery_title">Çift tonlu pil ölçeri etkinleştir</string>
     <string name="dual_tone_battery_on_summary">Açık (yalnızca portre simgesiyle çalışır)</string>
@@ -260,4 +276,50 @@
     <string name="qs_4_rows">4 satırı zorla</string>
     <string name="qs_5_rows">5 satırı zorla</string>
 
+    <!-- Lockscreen/Quick Settings Custom Text -->
+    <string name="netstat_enable_title">Ağ istatistiklerini toplayın</string>
+    <string name="network_interval_custom_text_title">Yenileme aralığı</string>
+    <string name="minutes_word">dakika(lar)</string>
+
+
+    <!-- Menu Items -->
+    <string name="menu_settings_title">İçe Aktar/Dışa Aktar</string>
+    <string name="menu_reset_defaults">Tüm ayarları sıfırlayın</string>
+    <string name="menu_import_settings">Ayarları dosyadan aktar…</string>
+    <string name="menu_export_settings">Ayarları dosyaya aktar…</string>
+    <string name="menu_netstat_title">Ağ İstatistikleri</string>
+    <string name="menu_netstat_enable">İstatistikleri Etkinleştir</string>
+    <string name="menu_netstat_clear">Ağ istatistiklerini sıfırlayın</string>
+    <string name="menu_restartSysUI">SystemUI'yi yeniden başlatın</string>
+    <string name="menu_updates">Güncellemeler...</string>
+
+    <string name="nestat_caution_title">Dikkat!</string>
+    <string name="nestat_caution_text">Ağ istatistikleriniz kalıcı olarak sıfırlanacak. Devam edilsin mi?</string>
+    <string name="netstat_caution_yes">Devam</string>
+    <string name="netstat_caution_no">Belki daha sonra</string>
+
+    <string name="monitoring_category_title">İzleme seçenekleri</string>
+    <string name="netstat_header">Ağ istatistikleri ayarları</string>
+
+    <string name="string_formatter_manual_body">Girebileceğiniz normal metne ek olarak dinamik değişkenler de mevcuttur:\n\n$G\&lt;format\&gt; : Gürcü tarihi, formata göre. Biçim belgeleri için lütfen `Java Tarih Biçimi`ni okuyun\nÖrnek: $GMMM şu anlama gelir: Ocak (veya başka bir ay)\n\n$P&lt;format&gt; : Farsça tarih, biçime göre\nÖrnek: $Pyyyy şu anlama gelir: 1401\n\n$Nrx : Bugünkü Toplam İndirme Sayısı\n$Ntx: Bugünkü Toplam Yükleme Sayısı\n$Nall : Bugünün Toplam Trafiği\n\nEğer $N`i $Nc ile değiştirirseniz  , mobil veri istatistiklerine sahip olacaksınız (indirmeler için $Ncrx gibi)\n\nÖrnek:\n`$GEEEE Mobil Trafiği: $Ncall` şunları üretecek:\n`Salının Mobil Trafiği: 2GB`</string>
+    <string name="update_fragment_label">Güncelleme Parçası</string>
+    <string name="update_channel_name">Güncellemeler</string>
+    <string name="update_notification_title">Güncelleme indirildi</string>
+    <string name="update_notification_text">Güncellemeyi indirmek için tıkla</string>
+    <string name="reboot_notification_title">AOSPMods güncellendi!</string>
+    <string name="reboot_notification_text">Değişiklikler yeniden başlatma sonra geçerli olacak</string>
+    <string name="update_flavor_title">Kanalı güncelle</string>
+    <string name="stable_flavor">Stabil</string>
+    <string name="canary_flavor">Beta sürüm</string>
+    <string name="currentVersionTitle">Yüklenmiş versiyon: </string>
+    <string name="lastestVersionTitle">Son versiyon: </string>
+    <string name="root_not_here">ROOT ERİŞİMİ VERİLMEDİ!</string>
+    <string name="reboot_pending">Yeniden başlatma bekleniyor</string>
+    <string name="reboot_word">Cihazı şimdi yeniden başlatın</string>
+    <string name="update_checking">Kontrol ediliyor ...</string>
+    <string name="update_download_started">İndiriliyor - Lütfen tamamlandıktan sonra bildirime tıklayın</string>
+    <string name="update_word">Güncelleme</string>
+
+    <string name="title_activity_update">güncellemeAktivitesi</string>
+    
 </resources>

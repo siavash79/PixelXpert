@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.os.VibrationEffect;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 
@@ -66,6 +67,8 @@ public class screenOffKeys extends XposedModPack {
             keyEvent = KeyEvent.changeAction(keyEvent, KeyEvent.ACTION_UP);
             keyIntent.putExtra(Intent.EXTRA_KEY_EVENT, keyEvent);
             SystemUtils.AudioManager().dispatchMediaKeyEvent(keyEvent);
+
+            SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
         };
 
         XposedBridge.hookMethod(interceptKeyBeforeQueueing, new XC_MethodHook() {
@@ -124,6 +127,9 @@ public class screenOffKeys extends XposedModPack {
                     }
 
                     SystemUtils.ToggleFlash();
+
+                    SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
+                    
                     param.setResult(null);
                     XposedHelpers.callMethod(SystemUtils.PowerManager(), "goToSleep", SystemClock.uptimeMillis());
                 }

@@ -38,6 +38,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executor;
 
+import javax.security.auth.callback.Callback;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -45,8 +47,8 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
-import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.Utils.NetworkTraffic;
+import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
@@ -100,7 +102,7 @@ public class StatusbarMods extends XposedModPack {
     private static int BBarHeight = 10;
     private static float[] batteryLevels = new float[]{20f, 40f};
     private static int[] batteryColors = new int[]{Color.RED, Color.YELLOW};
-    private static int charingColor = Color.WHITE;
+    private static int chargingColor = Color.WHITE;
     private static int fastChargingColor = Color.WHITE;
     private static boolean indicateCharging = false;
     private static boolean indicateFastCharging = false;
@@ -108,6 +110,7 @@ public class StatusbarMods extends XposedModPack {
     //endregion
     
     //region general use
+    private static final ArrayList<ClockVisibilityCallback> clockVisibilityCallbacks = new ArrayList<>();
     private Object mActivityStarter;
     private Object KIC = null;
     private Object QSBH = null;
@@ -179,7 +182,7 @@ public class StatusbarMods extends XposedModPack {
         indicateFastCharging = XPrefs.Xprefs.getBoolean("indicateFastCharging", false);
         indicateCharging = XPrefs.Xprefs.getBoolean("indicateCharging", true);
     
-        charingColor = XPrefs.Xprefs.getInt("batteryChargingColor", Color.GREEN);
+        chargingColor = XPrefs.Xprefs.getInt("batteryChargingColor", Color.GREEN);
         fastChargingColor = XPrefs.Xprefs.getInt("batteryFastChargingColor", Color.BLUE);
         
         if(BBarEnabled)
@@ -369,7 +372,7 @@ public class StatusbarMods extends XposedModPack {
         Class<?> CollapsedStatusBarFragmentClass;
         Class<?> UtilsClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
         Class<?> KeyguardStatusBarViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
-        Class<?> QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
+//        Class<?> QuickStatusBarHeaderControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
         Class<?> QuickStatusBarHeaderClass = XposedHelpers.findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
         Class<?> ClockClass = XposedHelpers.findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
         Class<?> PhoneStatusBarViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
@@ -459,7 +462,7 @@ public class StatusbarMods extends XposedModPack {
             }
         });
 
-        //marking clock instaces for recognition and setting click actions on some icons
+        //marking clock instances for recognition and setting click actions on some icons
         XposedHelpers.findAndHookMethod(QuickStatusBarHeaderClass,
                 "onFinishInflate", new XC_MethodHook() {
                     @Override
@@ -477,7 +480,7 @@ public class StatusbarMods extends XposedModPack {
                             XposedHelpers.callMethod(mClockView, "setOnLongClickListener", clickListener);
                             XposedHelpers.callMethod(mDateView, "setOnClickListener", clickListener);
                             XposedHelpers.callMethod(mDateView, "setOnLongClickListener", clickListener);
-                        }catch(Exception e) { return;}
+                        }catch(Exception ignored) {}
                     }
                 });
 
@@ -501,16 +504,18 @@ public class StatusbarMods extends XposedModPack {
         });
 
         //understanding when to hide the battery bar and network traffic: when clock goes to hiding
-        XposedHelpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
-                "hideClock", boolean.class, new XC_MethodHook() {
+        XposedBridge.hookAllMethods(CollapsedStatusBarFragmentClass,
+                "hideClock", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(BatteryBarView.hasInstance())
+                        XposedBridge.log("hid hid");
+                        XposedBridge.log("" + clockVisibilityCallbacks.size());
+                        for(ClockVisibilityCallback c : clockVisibilityCallbacks)
                         {
-                            BatteryBarView.getInstance().setVisible(false);
-                        }
-                        if(networkTrafficSB != null) {
-                            networkTrafficSB.setVisibility(View.INVISIBLE);
+                            try
+                            {
+                                c.OnVisibilityChanged(false);
+                            } catch (Exception ignored){}
                         }
                     }
                 });
@@ -520,12 +525,11 @@ public class StatusbarMods extends XposedModPack {
                 "showClock", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(BatteryBarView.hasInstance())
+                        for(ClockVisibilityCallback c : clockVisibilityCallbacks)
                         {
-                            BatteryBarView.getInstance().setVisible(true);
-                        }
-                        if(networkTrafficSB != null) {
-                            networkTrafficSB.setVisibility(View.VISIBLE);
+                            try {
+                                c.OnVisibilityChanged(true);
+                            }catch (Exception ignored){}
                         }
                     }
                 });
@@ -651,7 +655,7 @@ public class StatusbarMods extends XposedModPack {
 
     //region battery bar related
     private void refreshBatteryBar(BatteryBarView instance) {
-        BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, charingColor, indicateFastCharging, fastChargingColor, BBarTransitColors);
+        BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, chargingColor, indicateFastCharging, fastChargingColor, BBarTransitColors);
         instance.setVisibility((BBarEnabled) ? View.VISIBLE : View.GONE);
         instance.setColorful(BBarColorful);
         instance.setOnlyWhileCharging(BBOnlyWhileCharging);
@@ -767,7 +771,7 @@ public class StatusbarMods extends XposedModPack {
         if(!networkOnSBEnabled) return;
 
         try {
-            FrameLayout.LayoutParams ntsbLayoutP;
+            LinearLayout.LayoutParams ntsbLayoutP;
             switch (networkTrafficPosition) {
                 case POSITION_RIGHT:
                     mSystemIconArea.addView(networkTrafficSB, 0);
@@ -779,11 +783,11 @@ public class StatusbarMods extends XposedModPack {
                     mClockParent.addView(networkTrafficSB);
                     break;
             }
-            ntsbLayoutP = (FrameLayout.LayoutParams) networkTrafficSB.getLayoutParams();
+            ntsbLayoutP = (LinearLayout.LayoutParams) networkTrafficSB.getLayoutParams();
             ntsbLayoutP.gravity = Gravity.CENTER_VERTICAL;
             networkTrafficSB.setLayoutParams(ntsbLayoutP);
-            networkTrafficSB.setPadding(10, 0, 10, 0);
-        }catch(Throwable ignored){}
+//            networkTrafficSB.setPadding(10, 0, 10, 0);
+        } catch(Throwable ignored){}
     }
     //endregion
 
@@ -902,6 +906,18 @@ public class StatusbarMods extends XposedModPack {
 
     }
     //endregion
-    
-    
+    //region callbacks
+    public static void registerClockVisibilityCallback(ClockVisibilityCallback callback){
+        clockVisibilityCallbacks.add(callback);
+    }
+
+    @SuppressWarnings("unused")
+    public static void unRegisterClockVisibilityCallback(ClockVisibilityCallback callback){
+        clockVisibilityCallbacks.remove(callback);
+    }
+
+    public interface ClockVisibilityCallback extends Callback {
+        void OnVisibilityChanged(boolean isVisible);
+    }
+    //endregion
 }

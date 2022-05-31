@@ -91,7 +91,7 @@ public class NetworkTraffic extends LinearLayout {
     private final Context mContext;
     private final TextView mTextView;
 
-    protected boolean mVisible = true;
+    private boolean mViewVisible = true, mTrafficVisible = false;
     private final ConnectivityManager mConnectivityManager;
 
     private final Handler mTrafficHandler = new Handler(Looper.myLooper()) {
@@ -122,7 +122,7 @@ public class NetworkTraffic extends LinearLayout {
 
             if (shouldHide(rxData, txData, timeDelta))
             {
-                hide();
+                hide(true);
             }
             else
             {
@@ -148,7 +148,7 @@ public class NetworkTraffic extends LinearLayout {
                         break;
                 }
                 mTextView.setText(output);
-                makeVisible();
+                makeVisible(true);
             }
 
             // Post delayed message to refresh in ~1000ms
@@ -199,13 +199,25 @@ public class NetworkTraffic extends LinearLayout {
         return (onStatusbar) ? SBInstance : QSInstance;
     }
 
-    private void hide() {
+    private void hide(boolean trafficRelated) {
+        if(!trafficRelated)
+        {
+            mViewVisible = false;
+        }
+        else
+        {
+            mTrafficVisible = false;
+        }
         mTextView.setText("");
         setVisibility(View.GONE);
-        mVisible = false;
     }
 
-    protected void makeVisible() {
+    protected void makeVisible(boolean trafficRelated) {
+        if(trafficRelated) mTrafficVisible = true;
+        else mViewVisible = true;
+
+        if(!mTrafficVisible || !mViewVisible) return;
+
         if(lastInstanceParamUpdate < lastParamUpdate)
         {
             this.setAlpha(2.55f*opacity);
@@ -217,7 +229,6 @@ public class NetworkTraffic extends LinearLayout {
             lastInstanceParamUpdate = lastParamUpdate;
         }
         setVisibility(View.VISIBLE);
-        mVisible = true;
     }
 
     private NetworkTraffic(Context context, boolean onStatusbar) {
@@ -240,6 +251,8 @@ public class NetworkTraffic extends LinearLayout {
         this.addView(mTextView);
         mConnectivityManager = SystemUtils.ConnectivityManager();
 
+        StatusbarMods.registerClockVisibilityCallback(visible -> {if (visible) makeVisible(false); else hide(false);} );
+
         isSBInstance = onStatusbar;
         if(onStatusbar)
         {
@@ -250,7 +263,6 @@ public class NetworkTraffic extends LinearLayout {
         {
             QSInstance = this;
         }
-
     }
 
     private void setIndicatorMode() {
@@ -289,6 +301,7 @@ public class NetworkTraffic extends LinearLayout {
         iconT.setPadding(0, (RXonTop) ? iconPadding : 0,0 , (RXonTop) ? 0 : iconPadding);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -314,6 +327,7 @@ public class NetworkTraffic extends LinearLayout {
     private final Runnable mRunnable = () -> mTrafficHandler.sendEmptyMessage(0);
 
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
+        @SuppressWarnings("deprecation")
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();

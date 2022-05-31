@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -184,11 +185,12 @@ public class BatteryStyleManager extends XposedModPack {
                     Context.class, AttributeSet.class, new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
                             ((View)param.thisObject).addOnAttachStateChangeListener(listener);
 
                             if (!customBatteryEnabled) return;
-                            
+
+                            ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
+
                             BatteryDrawable mBatteryDrawable = getNewDrawable(mContext);
                             XposedHelpers.setAdditionalInstanceField(param.thisObject, "mBatteryDrawable", mBatteryDrawable);
 
@@ -318,13 +320,11 @@ public class BatteryStyleManager extends XposedModPack {
         float iconScaleFactor = typedValue.getFloat() * (scaleFactor/100f);
 
         int batteryHeight = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
-        int batteryWidth = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
-        int marginBottom = res.getDimensionPixelSize(res.getIdentifier("battery_margin_bottom", "dimen", context.getPackageName()));
+        int batteryWidth = res.getDimensionPixelSize(res.getIdentifier((customBatteryEnabled) ? "status_bar_battery_icon_height" : "status_bar_battery_icon_width", "dimen", context.getPackageName()));
 
-        LinearLayout.LayoutParams scaledLayoutParams = new LinearLayout.LayoutParams(
-                (int) (batteryWidth * iconScaleFactor), (int) (batteryHeight * iconScaleFactor));
-
-        scaledLayoutParams.setMargins(0, 0, 0, marginBottom);
+        ViewGroup.LayoutParams scaledLayoutParams = mBatteryIconView.getLayoutParams();
+        scaledLayoutParams.height = (int) (batteryHeight * iconScaleFactor);
+        scaledLayoutParams.width = (int) (batteryWidth * iconScaleFactor);
 
         mBatteryIconView.setLayoutParams(scaledLayoutParams);
     }

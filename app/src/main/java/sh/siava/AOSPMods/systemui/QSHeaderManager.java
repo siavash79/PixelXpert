@@ -317,7 +317,6 @@ public class QSHeaderManager extends XposedModPack {
                 "updateTheme", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if(! lightQSHeaderEnabled) return;
                     new Timer().schedule(new QSLightColorCorrector(), 1500);
                     }
                 });
@@ -345,7 +344,7 @@ public class QSHeaderManager extends XposedModPack {
         @SuppressWarnings("rawtypes")
         @Override
         public void run() {
-            if(getIsDark()) return;
+            if(!lightQSHeaderEnabled || getIsDark()) return;
             Resources res = mContext.getResources();
 
             int colorUnavailable = res.getColor(

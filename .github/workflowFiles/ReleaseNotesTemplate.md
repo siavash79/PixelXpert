@@ -8,7 +8,7 @@ Update your module via module update shortcut in Magisk
 
 **To install, you will need to:**
 Install LSPosed Zygisk (https://t.me/LSPosedArchives)
-Install the zip file in Magisk
+Install the zip file in Magisk (You will be able to install canary builds once the stable version is installed, through in-app updater)
 Reboot
 Technically, the module should automatically activate itself in Lsposed and get its required root permissions. If didn't, please activate manually and reboot again
 

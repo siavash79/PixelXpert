@@ -3,7 +3,6 @@ name: Make Release
 on:
   push:
     tags: '*'
-    branches: 'stable'
 
 jobs:
   build:

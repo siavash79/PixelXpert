@@ -1,3 +1,8 @@
+**1.1.0**
+- Added in-app udpater (Stable & Canary flavors)
+- Added custom variables to QSHeader/Lockscreen text (dates & daily traffic by now)
+- Bugfixes
+
 **1.0.0**
 - Bugfixes
 - First stable (on Pixel stock firmwares) version. Yay!

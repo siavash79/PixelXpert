@@ -290,7 +290,7 @@
     <string name="menu_netstat_title">Ağ İstatistikleri</string>
     <string name="menu_netstat_enable">İstatistikleri Etkinleştir</string>
     <string name="menu_netstat_clear">Ağ istatistiklerini sıfırlayın</string>
-    <string name="menu_restartSysUI">SystemUI'yi yeniden başlatın</string>
+    <string name="menu_restartSysUI">SystemUI\'yi yeniden başlatın</string>
     <string name="menu_updates">Güncellemeler...</string>
 
     <string name="nestat_caution_title">Dikkat!</string>

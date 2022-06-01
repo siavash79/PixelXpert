@@ -41,7 +41,6 @@
     <string name="sbc_date_small">Tamanho mais pequeno (70%)</string>
     <string name="sbc_custom_date_after">Formato de data personalizado após o relógio</string>
     <string name="sbc_header">Personalizar o relógio</string>
-    <string name="sbc_may_take_one_minute">Requer atualização de tempo ou reinicar a IU</string>
     <string name="qs_haptic_switch_title">Vibrar ao tocar nos atalhos das QS</string>
     <string name="back_gesture_category_title">Personalizar gesto voltar</string>
     <string name="back_from_left_title">Lado esquerdo do ecrã</string>
@@ -266,8 +265,9 @@
     <string name="root_not_here">ACESSO ROOT EM FALTA!</string>
     <string name="reboot_pending">Reinicio pendente</string>
     <string name="reboot_word">Reinicar agora</string>
-    <string name="update_checking">A verificar...</string>
+    <string name="update_checking">A verificar…</string>
     <string name="update_download_started">A descarregar - Toque na notificação quando terminar</string>
     <string name="update_word">Atualizar</string>
+    <string name="string_formatter_manual_body">Para além de texto normal é também possível inserir variáveis dinâmicas:\n\n$G\&lt;format\&gt; : Data Gregoriana, com formatação. Para documentação relativa à formatação, por favor pesquise por `Java Date Format`\nExemplo: $GMMM corresponde a: Jan (ou qualquer outro)\n\n$P&lt;format&gt; : Data Persa, com formatação\nExemplo: $Pyyyy corresponde a: 1401\n\n$Nrx : Total de Downloads diário\n$Ntx: Total de Uploads diário\n$Nall : Total de tráfego diário\n\nSe substituir $N por $Nc estatísticas de dados móveis estarão disponíveis (como $Ncrx para os downloads)\n\nExemplo:\n`Tráfego dos dados móveis para $GEEEE: $Ncall` corresponderá a:\n`Tráfego dos dados móveis para Terça-feira: 2GB`</string>
 
 </resources>

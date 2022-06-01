@@ -5,11 +5,12 @@ import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.nfx.android.rangebarpreference.RangeBarHelper;
 
@@ -21,17 +22,15 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.Utils.batteryStyles.BatteryDrawable;
 import sh.siava.AOSPMods.Utils.batteryStyles.CircleBatteryDrawable;
 import sh.siava.AOSPMods.Utils.batteryStyles.CircleFilledBatteryDrawable;
 import sh.siava.AOSPMods.Utils.batteryStyles.hiddenBatteryDrawable;
 import sh.siava.AOSPMods.XPrefs;
+import sh.siava.AOSPMods.XposedModPack;
 
-
-//TODO: unknown battery symbol / percent text beside icon / update shape upon request / other shapes / dual tone
-
+@SuppressWarnings("RedundantThrows")
 public class BatteryStyleManager extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     
@@ -75,22 +74,27 @@ public class BatteryStyleManager extends XposedModPack {
     
         if(BatteryStyle != batteryStyle)
         {
-            if(Key.length > 0 && batteryStyle == 0)
-            {
-                android.os.Process.killProcess(android.os.Process.myPid());
-            }
             BatteryStyle = batteryStyle;
-            for(Object view : batteryViews) //distroy old drawables and make new ones :D
+            for(Object view : batteryViews) //destroy old drawables and make new ones :D
             {
-                BatteryDrawable newDrawable = getNewDrawable(mContext);
                 ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(view, "mBatteryIconView");
-                mBatteryIconView.setImageDrawable(newDrawable);
-                XposedHelpers.setAdditionalInstanceField(view,"mBatteryDrawable", newDrawable);
-    
                 boolean mCharging = (boolean) XposedHelpers.getObjectField(view, "mCharging");
                 int mLevel = (int) XposedHelpers.getObjectField(view, "mLevel");
-                newDrawable.setBatteryLevel(mLevel);
-                newDrawable.setCharging(mCharging);
+
+                if(customBatteryEnabled) {
+                    BatteryDrawable newDrawable = getNewDrawable(mContext);
+                    mBatteryIconView.setImageDrawable(newDrawable);
+                    XposedHelpers.setAdditionalInstanceField(view,"mBatteryDrawable", newDrawable);
+                    newDrawable.setBatteryLevel(mLevel);
+                    newDrawable.setCharging(mCharging);
+                }
+                else
+                {
+                    mBatteryIconView.setImageDrawable(
+                            (Drawable) XposedHelpers.getObjectField(
+                                    view,
+                                    "mDrawable"));
+                }
             }
         }
         
@@ -99,10 +103,10 @@ public class BatteryStyleManager extends XposedModPack {
         BatteryIconOpacity = XPrefs.Xprefs.getInt("BIconOpacity", 100);
         boolean BIconTransitColors = XPrefs.Xprefs.getBoolean("BIconTransitColors", false);
         boolean BIconColorful = XPrefs.Xprefs.getBoolean("BIconColorful", false);
-        boolean BIconindicateFastCharging = XPrefs.Xprefs.getBoolean("BIconindicateFastCharging", false);
+        boolean BIconIndicateFastCharging = XPrefs.Xprefs.getBoolean("BIconindicateFastCharging", false);
         int batteryIconFastChargingColor = XPrefs.Xprefs.getInt("batteryIconFastChargingColor", Color.BLUE);
         int batteryChargingColor = XPrefs.Xprefs.getInt("batteryIconChargingColor", Color.GREEN);
-        boolean BIconindicateCharging = XPrefs.Xprefs.getBoolean("BIconindicateCharging", false);
+        boolean BIconIndicateCharging = XPrefs.Xprefs.getBoolean("BIconindicateCharging", false);
     
         String jsonString = XPrefs.Xprefs.getString("BIconbatteryWarningRange", "");
         if(jsonString.length() > 0)
@@ -116,7 +120,7 @@ public class BatteryStyleManager extends XposedModPack {
                 XPrefs.Xprefs.getInt("BIconbatteryCriticalColor", Color.RED),
                 XPrefs.Xprefs.getInt("BIconbatteryWarningColor", Color.YELLOW)};
     
-        BatteryDrawable.setStaticColor(batteryLevels, batteryColors, BIconindicateCharging, batteryChargingColor, BIconindicateFastCharging, batteryIconFastChargingColor, BIconTransitColors, BIconColorful);
+        BatteryDrawable.setStaticColor(batteryLevels, batteryColors, BIconIndicateCharging, batteryChargingColor, BIconIndicateFastCharging, batteryIconFastChargingColor, BIconTransitColors, BIconColorful);
         
         refreshBatteryIcons();
     }
@@ -146,7 +150,7 @@ public class BatteryStyleManager extends XposedModPack {
             }
         });
 
-        Class<?> BatteryMeterViewClass = XposedHelpers.findClassIfExists("com.android.systemui.battery.BatteryIconOpacity", lpparam.classLoader);
+        Class<?> BatteryMeterViewClass = XposedHelpers.findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
 
         if(BatteryMeterViewClass == null)
         {
@@ -178,11 +182,12 @@ public class BatteryStyleManager extends XposedModPack {
                     Context.class, AttributeSet.class, new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
                             ((View)param.thisObject).addOnAttachStateChangeListener(listener);
 
                             if (!customBatteryEnabled) return;
-                            
+
+                            ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
+
                             BatteryDrawable mBatteryDrawable = getNewDrawable(mContext);
                             XposedHelpers.setAdditionalInstanceField(param.thisObject, "mBatteryDrawable", mBatteryDrawable);
 
@@ -312,13 +317,11 @@ public class BatteryStyleManager extends XposedModPack {
         float iconScaleFactor = typedValue.getFloat() * (scaleFactor/100f);
 
         int batteryHeight = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
-        int batteryWidth = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
-        int marginBottom = res.getDimensionPixelSize(res.getIdentifier("battery_margin_bottom", "dimen", context.getPackageName()));
+        int batteryWidth = res.getDimensionPixelSize(res.getIdentifier((customBatteryEnabled) ? "status_bar_battery_icon_height" : "status_bar_battery_icon_width", "dimen", context.getPackageName()));
 
-        LinearLayout.LayoutParams scaledLayoutParams = new LinearLayout.LayoutParams(
-                (int) (batteryWidth * iconScaleFactor), (int) (batteryHeight * iconScaleFactor));
-
-        scaledLayoutParams.setMargins(0, 0, 0, marginBottom);
+        ViewGroup.LayoutParams scaledLayoutParams = mBatteryIconView.getLayoutParams();
+        scaledLayoutParams.height = (int) (batteryHeight * iconScaleFactor);
+        scaledLayoutParams.width = (int) (batteryWidth * iconScaleFactor);
 
         mBatteryIconView.setLayoutParams(scaledLayoutParams);
     }

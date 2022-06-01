@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="NetworkStatsEnabled"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/netstat_enable_title" />
+
+    <SeekBarPreference
+        android:defaultValue="5"
+        android:key="netstatSaveInterval"
+        android:max="10"
+        android:min="1"
+        app:min="1"
+        app:updatesContinuously="true"
+        android:title="@string/network_interval_custom_text_title" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="networkStatsColorful"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/network_colorful_title" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="-7617718"
+        android:key="networkStatDLColor"
+        android:title="@string/network_download_color_title" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="-351845"
+        android:key="networkStatULColor"
+        android:title="@string/network_upload_color_title" />
+
+</PreferenceScreen>

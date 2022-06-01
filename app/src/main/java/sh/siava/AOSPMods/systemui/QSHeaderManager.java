@@ -19,6 +19,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.Helpers;
+import sh.siava.AOSPMods.Utils.Overlays;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
@@ -39,12 +40,11 @@ public class QSHeaderManager extends XposedModPack {
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
-        
+
         dualToneQSEnabled = XPrefs.Xprefs.getBoolean("dualToneQSEnabled", false);
         Helpers.setOverlay("QSDualToneOverlay", dualToneQSEnabled, true);
-        
+
         setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
-    
         boolean newbrightnessThickTrackEnabled = XPrefs.Xprefs.getBoolean("BSThickTrackOverlay", false);
         if(newbrightnessThickTrackEnabled != brightnessThickTrackEnabled)
         {
@@ -302,6 +302,7 @@ public class QSHeaderManager extends XposedModPack {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         applyOverlays();
+                        Overlays.setAll(true);  //reset all overlays
                     }
                 });
             }
@@ -311,7 +312,7 @@ public class QSHeaderManager extends XposedModPack {
                 "updateTheme", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        new Timer().schedule(new QSLightColorCorrector(), 1500);
+                    new Timer().schedule(new QSLightColorCorrector(), 1500);
                     }
                 });
     }
@@ -338,7 +339,7 @@ public class QSHeaderManager extends XposedModPack {
         @SuppressWarnings("rawtypes")
         @Override
         public void run() {
-            if(getIsDark()) return;
+            if(!lightQSHeaderEnabled || getIsDark()) return;
             Resources res = mContext.getResources();
 
             int colorUnavailable = res.getColor(

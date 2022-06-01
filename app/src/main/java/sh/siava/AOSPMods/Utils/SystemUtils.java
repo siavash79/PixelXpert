@@ -1,6 +1,8 @@
 package sh.siava.AOSPMods.Utils;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -36,6 +38,9 @@ public class SystemUtils{
 	PowerManager mPowerManager;
 	ConnectivityManager mConnectivityManager;
 	TelephonyManager mTelephonyManager;
+	AlarmManager mAlaramManager;
+	NetworkStats mNetworkStats;
+	DownloadManager mDownloadManager = null;
 	boolean hasVibrator;
 
 	TorchCallback torchCallback = new TorchCallback();
@@ -54,7 +59,20 @@ public class SystemUtils{
 		if(instance == null) return;
 		instance.toggleFlashInternal();
 	}
-	
+
+	public static NetworkStats NetworkStats()
+	{
+		if(instance == null) return null;
+		instance.initiateNetworkStats();
+		return instance.mNetworkStats;
+	}
+
+	private void initiateNetworkStats() {
+		if(mNetworkStats == null) {
+			mNetworkStats = new NetworkStats(mContext);
+		}
+	}
+
 	public static void setFlash(boolean enabled) {
 		if(instance == null) return;
 		instance.setFlashInternal(enabled);
@@ -84,9 +102,22 @@ public class SystemUtils{
 
 	@Nullable
 	@Contract(pure = true)
+	public static AlarmManager AlarmManager() {
+		if(instance == null) return null;
+		return instance.mAlaramManager;
+	}
+
+
+	@Nullable
+	@Contract(pure = true)
 	public static TelephonyManager TelephonyManager() {
 		if(instance == null) return null;
 		return instance.mTelephonyManager;
+	}
+
+	public static DownloadManager DownloadManager() {
+		if(instance == null) return null;
+		return instance.getmDownloadManager();
 	}
 	
 	public static void vibrate(int effect) {
@@ -181,6 +212,18 @@ public class SystemUtils{
 			}
 		}
 
+		//Alarm
+		try {
+			mAlaramManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+		}
+		catch (Throwable t)
+		{
+			if(BuildConfig.DEBUG)
+			{
+				XposedBridge.log("AOSPMods Error getting alarm manager");
+				t.printStackTrace();
+			}
+		}
 
 		//Vibrator
 		try {
@@ -195,7 +238,6 @@ public class SystemUtils{
 				t.printStackTrace();
 			}
 		}
-
 	}
 	
 	private void setFlashInternal(boolean enabled) {
@@ -231,6 +273,14 @@ public class SystemUtils{
 			}
 		}
 		return "";
+	}
+
+	private DownloadManager getmDownloadManager()
+	{
+		if(mDownloadManager == null) {
+			mDownloadManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
+		}
+		return mDownloadManager;
 	}
 	
 	static class TorchCallback extends CameraManager.TorchCallback {

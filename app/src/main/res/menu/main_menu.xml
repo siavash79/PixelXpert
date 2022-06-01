@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_Updates"
+        android:title="@string/menu_updates" />
 
     <item
-        android:id="@+id/menu_exportPrefs"
-        android:onClick="MenuClick"
-        android:title="@string/menu_export_settings" />
+        android:title="@string/menu_settings_title">
+        <menu>
+            <item
+                android:id="@+id/menu_exportPrefs"
+                android:title="@string/menu_export_settings" />
+            <item
+                android:id="@+id/menu_importPrefs"
+                android:title="@string/menu_import_settings" />
+            <item
+                android:id="@+id/menu_clearPrefs"
+                android:title="@string/menu_reset_defaults" />
+        </menu>
+    </item>
     <item
-        android:id="@+id/menu_importPrefs"
-        android:onClick="MenuClick"
-        android:title="@string/menu_import_settings" />
+        android:id="@+id/menu_netstat_clear"
+        android:title="@string/menu_netstat_clear" />
     <item
-        android:id="@+id/menu_clearPrefs"
-        android:onClick="MenuClick"
-        android:title="@string/menu_reset_defaults" />
+        android:id="@+id/menu_restartSysUI"
+        android:title="@string/menu_restartSysUI" />
 </menu>

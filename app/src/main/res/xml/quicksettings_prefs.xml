@@ -119,7 +119,7 @@
                 android:title="@string/qs_pulldown_side_title" />
         </PreferenceCategory>
     </PreferenceCategory>
-    <!--PreferenceCategory
+    <PreferenceCategory
         android:title="@string/ntsb_category_title" >
         <SwitchPreference
             android:defaultValue="false"
@@ -131,5 +131,5 @@
             app:fragment="sh.siava.AOSPMods.SettingsActivity$networkFragment"
             app:key="network_settings_header"
             app:title="@string/network_settings_pref" />
-    </PreferenceCategory-->
+    </PreferenceCategory>
 </PreferenceScreen>

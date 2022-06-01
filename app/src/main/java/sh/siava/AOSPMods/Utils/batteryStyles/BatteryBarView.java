@@ -18,6 +18,8 @@ import androidx.core.graphics.ColorUtils;
 
 import java.util.Locale;
 
+import sh.siava.AOSPMods.systemui.StatusbarMods;
+
 public class BatteryBarView extends FrameLayout {
 	private static int[] shadeColors;
 	private final boolean RTL;
@@ -139,6 +141,8 @@ public class BatteryBarView extends FrameLayout {
 		this.setClipChildren(true);
 		
 		RTL=(TextUtils.getLayoutDirectionFromLocale(Locale.getDefault())==LAYOUT_DIRECTION_RTL);
+
+		StatusbarMods.registerClockVisibilityCallback(this::setVisible);
 		
 		refreshLayout();
 	}

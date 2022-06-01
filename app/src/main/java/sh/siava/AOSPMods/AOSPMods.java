@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.Utils.SystemUtils;
@@ -23,7 +22,6 @@ import sh.siava.AOSPMods.systemui.ScreenGestures;
 import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
 import sh.siava.AOSPMods.systemui.KeyGuardPinScrambler;
 import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
-import sh.siava.AOSPMods.systemui.LTEiconChange;
 import sh.siava.AOSPMods.systemui.LockscreenAlbumArt;
 import sh.siava.AOSPMods.systemui.NavBarResizer;
 import sh.siava.AOSPMods.systemui.NotificationExpander;
@@ -54,7 +52,6 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(CarrierTextManager.class);
         modPacks.add(FeatureFlagsMods.class);
         modPacks.add(KeyguardBottomArea.class);
-        modPacks.add(LTEiconChange.class);
         modPacks.add(NavBarResizer.class);
         modPacks.add(QSFooterTextManager.class);
         modPacks.add(QSHaptic.class);

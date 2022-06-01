@@ -2,8 +2,8 @@ name: Make Release
 
 on:
   push:
-    tags: 
-      '*'
+    tags: '*'
+    branches: 'stable'
   
 jobs:
   build:
@@ -68,14 +68,14 @@ jobs:
         release_name: ${{ github.ref }}
         body_path: 'releaseNotes.md'
         prerelease: false
-        draft: false
+        draft: true
         asset_files: 'output/AOSPMods.zip'
 
     - name: Commit version bump
       uses: github-actions-x/commit@v2.9
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        push-branch: master
+        push-branch: 'stable'
         commit-message: 'Version update: Release'
         force-add: 'true'
         files: MagiskMod/module.prop app/build.gradle MagiskModuleUpdate.json MagiskChangelog.md

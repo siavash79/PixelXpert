@@ -508,8 +508,6 @@ public class StatusbarMods extends XposedModPack {
                 "hideClock", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        XposedBridge.log("hid hid");
-                        XposedBridge.log("" + clockVisibilityCallbacks.size());
                         for(ClockVisibilityCallback c : clockVisibilityCallbacks)
                         {
                             try

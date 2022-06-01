@@ -194,9 +194,7 @@ public class NetworkStats {
         totalCellRxBytes = TrafficStats.getMobileRxBytes(); //because we don't know those data are since when
         totalCellTxBytes = TrafficStats.getMobileTxBytes();
 
-        XposedBridge.log("try load");
         tryLoadData();
-        XposedBridge.log("end load");
 
         IntentFilter filter = new IntentFilter();
         //noinspection deprecation

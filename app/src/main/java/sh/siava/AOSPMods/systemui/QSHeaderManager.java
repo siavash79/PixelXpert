@@ -19,6 +19,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.Helpers;
+import sh.siava.AOSPMods.Utils.Overlays;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
@@ -301,6 +302,7 @@ public class QSHeaderManager extends XposedModPack {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         applyOverlays();
+                        Overlays.setAll(true);  //reset all overlays
                     }
                 });
             }

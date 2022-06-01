@@ -73,7 +73,7 @@ public class Overlays {
         }
     }
     
-    public static void setAll() //make sure settings are applied to device
+    public static void setAll(boolean force) //make sure settings are applied to device
     {
         if(AOSPMods.isSecondProcess) return;
     
@@ -82,10 +82,10 @@ public class Overlays {
             new Overlays().initOverlays();
             return;
         }
-        instance.setAllInternal();
+        instance.setAllInternal(force);
     }
     
-    private void setAllInternal()
+    private void setAllInternal(boolean force)
     {
         new Thread(() -> {
             if(prefs == null)
@@ -103,7 +103,7 @@ public class Overlays {
             {
                 if(pref.endsWith("Overlay") && Overlays.containsKey(pref))
                 {
-                    Helpers.setOverlay(pref, prefs.getBoolean(pref, false));
+                    Helpers.setOverlay(pref, prefs.getBoolean(pref, false), force);
                 }
                 //overlay groups, like themes of select one
                 else if(pref.endsWith("OverlayEx") && Overlays.containsKey(pref))
@@ -113,7 +113,7 @@ public class Overlays {
                     overlayGroup thisGroup = (overlayGroup) Overlays.get(pref);
                     for (overlayProp thisProp : thisGroup.members) {
                         if(!thisProp.name.equals("None")) {
-                            Helpers.setOverlay(thisProp.name, activeOverlay.equals(thisProp.name));
+                            Helpers.setOverlay(thisProp.name, activeOverlay.equals(thisProp.name), force);
                         }
                     }
                 }
@@ -127,7 +127,7 @@ public class Overlays {
         {
             for(int i = 0; i < 2; i++)
             {
-                setAllInternal();
+                setAllInternal(false);
                 try {
                     Thread.sleep(20000);//wait some seconds in case any other mod plays with us at system startup, and apply again in background
                 } catch (Exception ignored) {}

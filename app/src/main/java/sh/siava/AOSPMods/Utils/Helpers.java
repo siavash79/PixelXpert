@@ -78,12 +78,12 @@ public class Helpers {
         activeOverlays = result;
     }
 
-    public static void setOverlay(String Key, boolean enabled, boolean refresh) {
+    public static void setOverlay(String Key, boolean enabled, boolean refresh, boolean force) {
         if(refresh) getActiveOverlays();
-        setOverlay(Key, enabled);
+        setOverlay(Key, enabled, force);
     }
 
-    public static void setOverlay(String Key, boolean enabled) {
+    public static void setOverlay(String Key, boolean enabled, boolean force) {
         if(AOSPMods.isSecondProcess) return;
     
         if(activeOverlays == null) getActiveOverlays(); //make sure we have a list in hand
@@ -101,7 +101,7 @@ public class Helpers {
         else if(Key.endsWith("OverlayG")) //It's a group of overlays to work together as a team
         {
             try {
-                setOverlayGroup(Key, enabled);
+                setOverlayGroup(Key, enabled, force);
             }catch (Exception ignored){}
             return;
         }
@@ -117,7 +117,7 @@ public class Helpers {
 
         boolean wasEnabled = (activeOverlays.contains(packname));
 
-        if(enabled == wasEnabled)
+        if(enabled == wasEnabled && !force)
         {
             return; //nothing to do. We're already set
         }
@@ -131,13 +131,13 @@ public class Helpers {
         }
     }
 
-    private static void setOverlayGroup(String key, boolean enabled) {
+    private static void setOverlayGroup(String key, boolean enabled, boolean force) {
         Overlays.overlayGroup thisGroup = (Overlays.overlayGroup) Overlays.Overlays.get(key);
 
         //noinspection ConstantConditions
         for(Overlays.overlayProp thisProp : thisGroup.members)
         {
-            Helpers.setOverlay(thisProp.name, enabled);
+            Helpers.setOverlay(thisProp.name, enabled, force);
         }
     }
 

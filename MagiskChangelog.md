@@ -1,3 +1,7 @@
+**stable**
+- Bugfixes
+- First stable (on Pixel stock firmwares) version. Yay!
+
 **1.0.0**
 - Bugfixes
 - First stable (on Pixel stock firmwares) version. Yay!

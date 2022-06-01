@@ -11,8 +11,8 @@ android {
         applicationId "sh.siava.AOSPMods"
         minSdkVersion 31
         targetSdk 32
-        versionCode 21
-        versionName "1.0.0"
+        versionCode 22
+        versionName "stable"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

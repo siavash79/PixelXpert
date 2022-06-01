@@ -27,7 +27,6 @@ public class screenOffKeys extends XposedModPack {
 //    private boolean isVolumeLongPress = false;
     private boolean isVolDown = false;
 
-    
     public screenOffKeys(Context context) { super(context); }
     
     @Override
@@ -39,8 +38,7 @@ public class screenOffKeys extends XposedModPack {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if (!lpparam.packageName.equals(listenPackage)) return;
-        
-        
+
         Class<?> PhoneWindowManager;
         Method powerLongPress;
         Method startedWakingUp;
@@ -75,7 +73,6 @@ public class screenOffKeys extends XposedModPack {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 if(!holdVolumeToSkip) return;
-    
                 Handler mHandler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
                 
                 try {
@@ -92,6 +89,7 @@ public class screenOffKeys extends XposedModPack {
                             if (!SystemUtils.PowerManager().isInteractive() && (Keycode == KeyEvent.KEYCODE_VOLUME_DOWN || Keycode == KeyEvent.KEYCODE_VOLUME_UP) && SystemUtils.AudioManager().isMusicActive()) {
                                 isVolDown = (Keycode == KeyEvent.KEYCODE_VOLUME_DOWN);
                                 mHandler.postDelayed(mVolumeLongPress, ViewConfiguration.getLongPressTimeout());
+                                param.setResult(0);
                             }
                     }
                 }catch (Throwable e){e.printStackTrace();}
@@ -129,7 +127,7 @@ public class screenOffKeys extends XposedModPack {
                     SystemUtils.ToggleFlash();
 
                     SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
-                    
+
                     param.setResult(null);
                     XposedHelpers.callMethod(SystemUtils.PowerManager(), "goToSleep", SystemClock.uptimeMillis());
                 }
@@ -140,8 +138,6 @@ public class screenOffKeys extends XposedModPack {
         });
     }
 
-
-    
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
     

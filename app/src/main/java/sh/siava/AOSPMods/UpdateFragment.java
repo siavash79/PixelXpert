@@ -14,6 +14,7 @@ import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -126,14 +127,39 @@ public class UpdateFragment extends Fragment {
                             String.format("%s (%s)", result.get("version"),
                                     result.get("versionCode")));
                     int latestCode = 0;
+                    int BtnText = R.string.update_word;
                     boolean enable = false;
                     try {
                         //noinspection ConstantConditions
                         latestCode = (int) result.get("versionCode");
-                        if(!canaryUpdate) enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
+
+                        if(rebootPending)
+                        {
+                            enable = true;
+                            BtnText = R.string.reboot_word;
+                        }
+                        else if(!canaryUpdate) //stable selected
+                        {
+                            if(currentVersionName.contains("-")) //currently canary installed
+                            {
+                                BtnText = R.string.switch_branches;
+                            }
+                            else if(latestCode == currentVersionCode) //already up to date
+                            {
+                                BtnText = R.string.reinstall_word;
+                            }
+                            enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
+                        }
+                        else
+                        {
+                            if(latestCode > currentVersionCode)
+                            {
+                                enable = true;
+                            }
+                        }
                     } catch (Exception ignored) {}
-                    enable = rebootPending || ((enable || latestCode > currentVersionCode) && !downloadStarted);
                     view.findViewById(R.id.updateBtn).setEnabled(enable);
+                    ((Button) view.findViewById(R.id.updateBtn)).setText(BtnText);
                 });
             });
         });

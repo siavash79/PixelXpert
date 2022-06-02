@@ -1,3 +1,6 @@
+**1.1.1**
+- Fixed QS/Lockscreen custom variables not applied
+
 **1.1.0**
 - Added in-app udpater (Stable & Canary flavors)
 - Added custom variables to QSHeader/Lockscreen text (dates & daily traffic by now)

@@ -1,1 +1,1 @@
-- Fixed QS/Lockscreen custom variables not applied
+- Fixed light QS panel color glitches

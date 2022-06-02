@@ -166,7 +166,7 @@ public class UpdateFragment extends Fragment {
         binding.updateBtn.setOnClickListener(view1 -> {
             if(rebootPending)
             {
-                Shell.cmd("reboot").exec();
+                Shell.cmd("am start -a android.intent.action.REBOOT").exec();
             }
             else {
                 //noinspection ConstantConditions

@@ -15,12 +15,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.CharacterStyle;
-import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -34,8 +31,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
-import java.text.DecimalFormat;
-
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
@@ -43,8 +38,6 @@ import sh.siava.AOSPMods.systemui.StatusbarMods;
 @SuppressLint("ViewConstructor")
 public class NetworkTraffic extends LinearLayout {
     private static final int KB = 1024;
-    private static final int MB = KB * KB;
-    private static final int GB = MB * KB;
     private static final String symbol = "/s";
 
     public static final int MODE_SHOW_RXTX = 0;
@@ -65,7 +58,6 @@ public class NetworkTraffic extends LinearLayout {
     private static int opacity = 100;
     private static long lastParamUpdate = 0;
 
-    private static String unitDelimiter = " ";
     private final boolean isSBInstance;
     private long lastInstanceParamUpdate = -1;
 
@@ -74,7 +66,6 @@ public class NetworkTraffic extends LinearLayout {
         NetworkTraffic.refreshInterval = refreshInterval;
         NetworkTraffic.autoHideThreshold = autoHideThreshold*KB;
         NetworkTraffic.indicatorMode = indicatorMode;
-        unitDelimiter = (indicatorMode == MODE_SHOW_RXTX) ? " " : "\n";
         NetworkTraffic.RXonTop = RXonTop;
         NetworkTraffic.colorTraffic = colorTraffic;
         NetworkTraffic.downloadColor = downloadColor;
@@ -170,58 +161,7 @@ public class NetworkTraffic extends LinearLayout {
         private SpannableStringBuilder formatOutput(long timeDelta, long data, @Nullable @ColorInt Integer textColor) {
             long speed = (long)(data / (timeDelta / 1000F));
 
-            return formatDecimal(speed, textColor);
-        }
-
-        private SpannableStringBuilder formatDecimal(long speed, @Nullable @ColorInt Integer textColor) {
-            DecimalFormat decimalFormat;
-            String unit;
-            String formatSpeed;
-            SpannableString spanUnitString;
-            SpannableString spanSpeedString;
-
-            if (speed >= GB) {
-                unit = "GB";
-                decimalFormat = new DecimalFormat("0.00");
-                formatSpeed =  decimalFormat.format(speed / (float)GB);
-            } else if (speed >= 100 * MB) {
-                decimalFormat = new DecimalFormat("000");
-                unit = "MB";
-                formatSpeed =  decimalFormat.format(speed / (float)MB);
-            } else if (speed >= 10 * MB) {
-                decimalFormat = new DecimalFormat("00.0");
-                unit = "MB";
-                formatSpeed =  decimalFormat.format(speed / (float)MB);
-            } else if (speed >= MB) {
-                decimalFormat = new DecimalFormat("0.00");
-                unit = "MB";
-                formatSpeed =  decimalFormat.format(speed / (float)MB);
-            } else if (speed >= 100 * KB) {
-                decimalFormat = new DecimalFormat("000");
-                unit = "KB";
-                formatSpeed =  decimalFormat.format(speed / (float)KB);
-            } else if (speed >= 10 * KB) {
-                decimalFormat = new DecimalFormat("00.0");
-                unit = "KB";
-                formatSpeed =  decimalFormat.format(speed / (float)KB);
-            } else {
-                decimalFormat = new DecimalFormat("0.00");
-                unit = "KB";
-                formatSpeed = decimalFormat.format(speed / (float)KB);
-            }
-            spanSpeedString = new SpannableString(formatSpeed);
-            spanSpeedString.setSpan(getSpeedRelativeSizeSpan(), 0, (formatSpeed).length(),
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            if(textColor != null)
-            {
-                spanSpeedString.setSpan(new trafficStyle(textColor), 0 , (formatSpeed).length(),
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-
-            spanUnitString = new SpannableString(unit + symbol);
-            spanUnitString.setSpan(getUnitRelativeSizeSpan(), 0, (unit + symbol).length(),
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            return new SpannableStringBuilder().append(spanSpeedString).append(unitDelimiter).append(spanUnitString);
+            return Helpers.getHumanizedBytes(speed, .7f, (indicatorMode == MODE_SHOW_RXTX) ? " " : "\n" , symbol, textColor);
         }
 
         private boolean shouldHide(long rxData, long txData, long timeDelta) {
@@ -382,14 +322,6 @@ public class NetworkTraffic extends LinearLayout {
             mContext.unregisterReceiver(mIntentReceiver);
             mAttached = false;
         }
-    }
-
-    protected RelativeSizeSpan getSpeedRelativeSizeSpan() {
-        return new RelativeSizeSpan(1f);
-    }
-
-    protected RelativeSizeSpan getUnitRelativeSizeSpan() {
-        return new RelativeSizeSpan(0.70f);
     }
 
     private final Runnable mRunnable = () -> mTrafficHandler.sendEmptyMessage(0);

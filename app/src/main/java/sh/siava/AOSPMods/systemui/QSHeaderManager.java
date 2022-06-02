@@ -42,7 +42,7 @@ public class QSHeaderManager extends XposedModPack {
         if(XPrefs.Xprefs == null) return;
 
         dualToneQSEnabled = XPrefs.Xprefs.getBoolean("dualToneQSEnabled", false);
-        Helpers.setOverlay("QSDualToneOverlay", dualToneQSEnabled, true);
+        Helpers.setOverlay("QSDualToneOverlay", dualToneQSEnabled, true, false);
 
         setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
         boolean newbrightnessThickTrackEnabled = XPrefs.Xprefs.getBoolean("BSThickTrackOverlay", false);
@@ -320,15 +320,15 @@ public class QSHeaderManager extends XposedModPack {
     private void applyOverlays() throws Throwable {
         boolean isDark = getIsDark();
 
-        Helpers.setOverlay("QSLightThemeOverlay", false, true);
-        Helpers.setOverlay("QSLightThemeBSTOverlay", false, false);
+        Helpers.setOverlay("QSLightThemeOverlay", false, true, false);
+        Helpers.setOverlay("QSLightThemeBSTOverlay", false, false, false);
 
         Thread.sleep(50);
 
         if (lightQSHeaderEnabled && !isDark) {
 
-            Helpers.setOverlay("QSLightThemeOverlay", !brightnessThickTrackEnabled, true);
-            Helpers.setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, false);
+            Helpers.setOverlay("QSLightThemeOverlay", !brightnessThickTrackEnabled, true, false);
+            Helpers.setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, false, false);
 
             new Timer().schedule(new QSLightColorCorrector(), 1500);
         }

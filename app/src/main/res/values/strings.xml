@@ -316,7 +316,7 @@
     <string name="root_not_here">ROOT ACCESS NOT GRANTED!</string>
     <string name="reboot_pending">Reboot pending</string>
     <string name="reboot_word">Restart device now</string>
-    <string name="update_checking">Checking ...</string>
+    <string name="update_checking">Checking…</string>
     <string name="update_download_started">Downloading - Please tap on the notification once completed</string>
     <string name="update_word">Update</string>
     <string name="switch_branches">Switch branch</string>

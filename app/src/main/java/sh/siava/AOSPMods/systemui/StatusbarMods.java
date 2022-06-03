@@ -1,6 +1,5 @@
 package sh.siava.AOSPMods.systemui;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -30,7 +29,6 @@ import androidx.annotation.Nullable;
 
 import com.nfx.android.rangebarpreference.RangeBarHelper;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -48,6 +46,7 @@ import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.Utils.NetworkTraffic;
+import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.XPrefs;
@@ -74,7 +73,7 @@ public class StatusbarMods extends XposedModPack {
     private static int clockPosition = POSITION_LEFT;
     private static int mAmPmStyle = AM_PM_STYLE_GONE;
     private static boolean mShowSeconds = false;
-    private static String mDateFormatBefore = "", mDateFormatAfter = "";
+    private static String mStringFormatBefore = "", mStringFormatAfter = "";
     private static boolean mBeforeSmall = true, mAfterSmall = true;
     private Integer mBeforeClockColor = null, mAfterClockColor = null, mClockColor = null;
     //endregion
@@ -264,8 +263,8 @@ public class StatusbarMods extends XposedModPack {
         mAmPmStyle = Integer.parseInt(XPrefs.Xprefs.getString("SBCAmPmStyle", String.valueOf(AM_PM_STYLE_GONE)));
         
 
-        mDateFormatBefore = XPrefs.Xprefs.getString("DateFormatBeforeSBC", "");
-        mDateFormatAfter = XPrefs.Xprefs.getString("DateFormatAfterSBC", "");
+        mStringFormatBefore = XPrefs.Xprefs.getString("DateFormatBeforeSBC", "");
+        mStringFormatAfter = XPrefs.Xprefs.getString("DateFormatAfterSBC", "");
         mBeforeSmall = XPrefs.Xprefs.getBoolean("BeforeSBCSmall", true);
         mAfterSmall = XPrefs.Xprefs.getBoolean("AfterSBCSmall", true);
 
@@ -284,32 +283,32 @@ public class StatusbarMods extends XposedModPack {
         }
         
 
-        if((mDateFormatBefore+mDateFormatAfter).trim().length() == 0) {
+        if((mStringFormatBefore + mStringFormatAfter).trim().length() == 0) {
             int SBCDayOfWeekMode = Integer.parseInt(XPrefs.Xprefs.getString("SBCDayOfWeekMode", "0"));
 
             switch (SBCDayOfWeekMode)
             {
                 case 0:
-                    mDateFormatAfter = mDateFormatBefore = "";
+                    mStringFormatAfter = mStringFormatBefore = "";
                     break;
                 case 1:
-                    mDateFormatBefore = "EEE ";
-                    mDateFormatAfter = "";
+                    mStringFormatBefore = "$GEEE ";
+                    mStringFormatAfter = "";
                     mBeforeSmall = false;
                     break;
                 case 2:
-                    mDateFormatBefore = "EEE ";
-                    mDateFormatAfter = "";
+                    mStringFormatBefore = "$GEEE ";
+                    mStringFormatAfter = "";
                     mBeforeSmall = true;
                     break;
                 case 3:
-                    mDateFormatBefore = "";
-                    mDateFormatAfter = " EEE";
+                    mStringFormatBefore = "";
+                    mStringFormatAfter = " $GEEE";
                     mAfterSmall = false;
                     break;
                 case 4:
-                    mDateFormatBefore = "";
-                    mDateFormatAfter = " EEE";
+                    mStringFormatBefore = "";
+                    mStringFormatAfter = " $GEEE";
                     mAfterSmall = true;
                     break;
             }
@@ -608,7 +607,7 @@ public class StatusbarMods extends XposedModPack {
                         Calendar mCalendar = (Calendar) XposedHelpers.getObjectField(param.thisObject, "mCalendar");
 
                         SpannableStringBuilder result = new SpannableStringBuilder();
-                        result.append(getFormattedDate(mDateFormatBefore, mCalendar, mBeforeSmall, mBeforeClockColor)); //before clock
+                        result.append(getFormattedString(mStringFormatBefore, mCalendar, mBeforeSmall, mBeforeClockColor)); //before clock
                         SpannableStringBuilder clockText = SpannableStringBuilder.valueOf((CharSequence) param.getResult()); //THE clock
                         if(mClockColor != null)
                         {
@@ -616,7 +615,7 @@ public class StatusbarMods extends XposedModPack {
                                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         }
                         result.append(clockText);
-                        result.append(getFormattedDate(mDateFormatAfter, mCalendar, mAfterSmall, mAfterClockColor)); //after clock
+                        result.append(getFormattedString(mStringFormatAfter, mCalendar, mAfterSmall, mAfterClockColor)); //after clock
                         param.setResult(result);
                     }
                 });
@@ -873,35 +872,27 @@ public class StatusbarMods extends XposedModPack {
         }
     }
 
-    private static CharSequence getFormattedDate(String dateFormat, Calendar calendar, boolean small, @Nullable @ColorInt Integer textColor)
+    private final StringFormatter stringFormatter = new StringFormatter();
+    private CharSequence getFormattedString(String dateFormat, Calendar calendar, boolean small, @Nullable @ColorInt Integer textColor)
     {
         if(dateFormat.length() == 0) return "";
-        //If dateformat is illegal, at least don't break anything
-        try {
 
-            //There's some format to work on
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat(dateFormat);
-            String result = df.format(calendar.getTime());
-            SpannableStringBuilder formatted = new SpannableStringBuilder(result);
+        String result = stringFormatter.formatString(dateFormat).toString();
+        //There's some format to work on
+        SpannableStringBuilder formatted = new SpannableStringBuilder(result);
 
-            if (small) {
-                //small size requested
-                CharacterStyle style = new RelativeSizeSpan(0.7f);
-                formatted.setSpan(style, 0, formatted.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-            if(textColor != null)
-            {
-                formatted.setSpan(new NetworkTraffic.trafficStyle(textColor), 0 , (formatted).length(),
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-
-            return formatted;
+        if (small) {
+            //small size requested
+            CharacterStyle style = new RelativeSizeSpan(0.7f);
+            formatted.setSpan(style, 0, formatted.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
-        catch(Exception e)
+        if(textColor != null)
         {
-            return "";
+            formatted.setSpan(new NetworkTraffic.trafficStyle(textColor), 0 , (formatted).length(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
+        return formatted;
     }
     //endregion
     //region callbacks

@@ -67,11 +67,11 @@
     <string name="sbc_show_secs">Show seconds</string>
     <string name="sbc_date_cat">Date options</string>
     <string name="sbc_day_of_week_options">Show day of week with clock</string>
-    <string name="sbc_advanced_cat">Advanced date (will supersede above setting!)</string>
+    <string name="sbc_advanced_cat">Advanced (will supersede above setting!)</string>
     <string name="sbc_advanced_sum">Please read Java date format documentation</string>
-    <string name="sbc_custom_date_before">Custom date format before clock</string>
+    <string name="sbc_custom_date_before">Custom text before clock</string>
     <string name="sbc_date_small">Smaller size (70%)</string>
-    <string name="sbc_custom_date_after">Custom date format after clock</string>
+    <string name="sbc_custom_date_after">Custom text after clock</string>
     <string name="sbc_header">Status bar clock customization</string>
     <string name="sbc_clock_color_category">Color options</string>
     <string name="sbc_colorful_title">Make it colorful</string>

@@ -290,6 +290,7 @@
     <string name="menu_netstat_title">Network Statistics</string>
     <string name="menu_netstat_enable">Enable Statistics</string>
     <string name="menu_netstat_clear">Reset network statistics</string>
+    <string name="menu_restart">Reboot</string>
     <string name="menu_restartSysUI">Restart SystemUI</string>
     <string name="menu_updates">App Updates</string>
 

@@ -157,6 +157,8 @@ public class SettingsActivity extends AppCompatActivity implements
             importExportSettings(false);
         } else if (itemID == R.id.menu_netstat_clear) {
             clearNetstatClick();
+        } else if (itemID == R.id.menu_restart) {
+            SystemUtils.Restart();
         } else if (itemID == R.id.menu_restartSysUI) {
             SystemUtils.RestartSystemUI();
         } else if (itemID == R.id.menu_Updates) {

@@ -50,6 +50,11 @@ public class SystemUtils{
 		Shell.cmd("killall com.android.systemui").submit();
 	}
 
+	public static void Restart()
+	{
+		Shell.cmd("am start -a android.intent.action.REBOOT").submit();
+	}
+
 	public static boolean isFlashOn() {
 		if(instance == null) return false;
 		return TorchCallback.torchOn;

@@ -22,6 +22,9 @@
         android:id="@+id/menu_netstat_clear"
         android:title="@string/menu_netstat_clear" />
     <item
+        android:id="@+id/menu_restart"
+        android:title="@string/menu_restart" />
+    <item
         android:id="@+id/menu_restartSysUI"
         android:title="@string/menu_restartSysUI" />
 </menu>

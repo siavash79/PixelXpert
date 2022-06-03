@@ -45,6 +45,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.Utils.NetworkTraffic;
 import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.Utils.SystemUtils;
@@ -67,9 +68,10 @@ public class StatusbarMods extends XposedModPack {
     private static final int POSITION_RIGHT = 2;
 
 //    private static final int AM_PM_STYLE_NORMAL  = 0;
-//    private static final intAM_PM_STYLE_SMALL   = 1;
+//    private static final int AM_PM_STYLE_SMALL   = 1;
     private static final int AM_PM_STYLE_GONE    = 2;
 
+    private final int leftClockPadding, rightClockPadding;
     private static int clockPosition = POSITION_LEFT;
     private static int mAmPmStyle = AM_PM_STYLE_GONE;
     private static boolean mShowSeconds = false;
@@ -143,7 +145,12 @@ public class StatusbarMods extends XposedModPack {
     private View mClockView;
     //endregion
     
-    public StatusbarMods(Context context) { super(context); }
+    public StatusbarMods(Context context) {
+        super(context);
+        rightClockPadding = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("status_bar_clock_starting_padding", "dimen", mContext.getPackageName()));
+        leftClockPadding = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("status_bar_left_clock_end_padding", "dimen", mContext.getPackageName()));
+
+    }
     
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
@@ -851,14 +858,14 @@ public class StatusbarMods extends XposedModPack {
             case POSITION_LEFT:
                 targetArea = mClockParent;
                 index = 0;
-                mClockView.setPadding(0,0,20,0);
+                mClockView.setPadding(0,0,leftClockPadding,0);
                 break;
             case POSITION_CENTER:
                 targetArea = (ViewGroup) mCenteredIconArea.getParent();
-                mClockView.setPadding(20,0,20,0);
+                mClockView.setPadding(rightClockPadding,0,rightClockPadding,0);
                 break;
             case POSITION_RIGHT:
-                mClockView.setPadding(20,0,0,0);
+                mClockView.setPadding(rightClockPadding,0,0,0);
                 targetArea = ((ViewGroup) mSystemIconArea.getParent());
                 break;
         }

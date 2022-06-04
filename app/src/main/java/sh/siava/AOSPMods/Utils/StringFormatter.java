@@ -193,21 +193,6 @@ public class StringFormatter {
             return "P"+format;
         }
     }
-    
-    private CharSequence hebrewDateOf(String format) {
-        try {
-            @SuppressLint("SimpleDateFormat")
-            String result = new SimpleDateFormat(format).
-                    format(
-                            Calendar.getInstance().getTime()
-                    );
-            hasDate = true;
-            return result;
-        }catch (Exception e)
-        {
-            return "H"+format;
-        }
-    }
 
     public void registerCallback(@NonNull formattedStringCallback callback)
     {

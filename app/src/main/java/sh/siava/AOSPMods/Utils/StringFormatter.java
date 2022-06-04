@@ -8,7 +8,6 @@ import android.text.SpannableStringBuilder;
 import androidx.annotation.NonNull;
 
 import com.github.mfathi91.time.PersianDate;
-import com.github.mjradwin.net.sf.hebcal.HebrewDate.java;
 
 import java.util.Date;
 import java.util.ResourceBundle;

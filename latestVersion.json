@@ -1,6 +1,6 @@
 {
-    "version": "canary-38",
-    "versionCode": 38,
-    "zipUrl": "https://nightly.link/siavash79/AOSPMods/actions/runs/2439084341/AOSPMods.zip",
+    "version": "canary-39",
+    "versionCode": 39,
+    "zipUrl": "https://nightly.link/siavash79/AOSPMods/actions/runs/2440662003/AOSPMods.zip",
     "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/master/MagiskChangelog.md"
 }

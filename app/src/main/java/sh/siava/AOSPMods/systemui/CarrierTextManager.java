@@ -55,7 +55,7 @@ public class CarrierTextManager extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        stringFormatter.registerDateCallback(refreshCallback);
+        stringFormatter.registerCallback(refreshCallback);
 
         Class<?> CarrierTextControllerClass = XposedHelpers.findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
 

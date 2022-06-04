@@ -28,7 +28,7 @@ public class StringFormatter {
     private static final ArrayList<StringFormatter> instances = new ArrayList<>();
     private final ArrayList<formattedStringCallback> callbacks = new ArrayList<>();
     private boolean hasDate = false;
-    private final NetworkStats.networkStatCallback networkStatCallback = stats -> callbacks.forEach(formattedStringCallback::onRefreshNeeded);
+    private final NetworkStats.networkStatCallback networkStatCallback = stats -> informCallbacks();
     public static Integer RXColor, TXColor;
 
     public StringFormatter()
@@ -186,19 +186,19 @@ public class StringFormatter {
         }
     }
 
-    public void registerDateCallback(@NonNull formattedStringCallback callback)
+    public void registerCallback(@NonNull formattedStringCallback callback)
     {
         callbacks.add(callback);
     }
 
     @SuppressWarnings("unused")
-    public void unRegisterDateCallback(@NonNull formattedStringCallback callback)
+    public void unRegisterCallback(@NonNull formattedStringCallback callback)
     {
         callbacks.remove(callback);
     }
 
     @SuppressWarnings("unused")
-    public void resetDateCallbacks()
+    public void resetCallbacks()
     {
         callbacks.clear();
     }

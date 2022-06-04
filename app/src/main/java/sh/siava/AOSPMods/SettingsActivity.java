@@ -298,6 +298,8 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateVisibility(SharedPreferences sharedPreferences) {
             findPreference("carrierTextValue").setVisible(sharedPreferences.getBoolean("carrierTextMod", false));
+            findPreference("albumArtLockScreenBlurLevel").setSummary(sharedPreferences.getInt("albumArtLockScreenBlurLevel",0) + "%");
+            findPreference("albumArtLockScreenBlurLevel").setVisible(sharedPreferences.getBoolean("albumArtLockScreenEnabled",false));
         }
     }
 

@@ -26,10 +26,12 @@
     <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
     <string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
     <string name="carrier_text_category">Carrier text</string>
-    <string name="configure_carrier_text">Configure carrier text</string>
+    <string name="custom_text_category">Custom text on Lockscreen</string>
+    <string name="configure_carrier_text">Configure carrier text - Top of the screen</string>
     <string name="carrier_text_mod_disabled">Carrier text unchanged</string>
     <string name="carrier_text_mod_enabled">Custom carrier text</string>
-    <string name="carrier_text_value">Insert custom text</string>
+    <string name="carrier_text_value">Custom carrier text</string>
+    <string name="lockscreen_center_text_value">Clock area custom text</string>
     <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Bottom area shortcuts</string>
     <string name="keyguard_bottom_buttons_transparent_title">Hide circle around icons</string>
@@ -42,6 +44,7 @@
     <string name="torch_shortcut">Flashlight</string>
     <string name="album_art_category">Media options</string>
     <string name="album_art_title">Enable album art when playing media</string>
+    <string name="album_art_blur_text">Blur value</string>
     <string name="shufflePin_title">Shuffle Pin</string>
 
     <!--Status bar related-->

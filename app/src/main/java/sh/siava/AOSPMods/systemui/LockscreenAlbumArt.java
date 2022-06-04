@@ -22,24 +22,21 @@ public class LockscreenAlbumArt extends XposedModPack {
 	
 	private static boolean albumArtLockScreenEnabled = false;
 	private static boolean albumArtLockScreenHookEnabled = true;
-	private static boolean albumArtLockScreenBlurred = true;
-	private static float albumArtLockScreenBlurLevel = .1f; //50%
+	private static float albumArtLockScreenBlurLevel = 0f; //50%
 	private Object NMM;
 
 	public LockscreenAlbumArt(Context context) { super(context); }
 	
 	@Override
 	public void updatePrefs(String... Key) {
-		albumArtLockScreenEnabled = XPrefs.Xprefs.getBoolean("albumArtLockScreenEnabled", false);
+		albumArtLockScreenEnabled = XPrefs.Xprefs.getBoolean("albumArtLockScreenEnabled", true);
 		albumArtLockScreenHookEnabled = XPrefs.Xprefs.getBoolean("albumArtLockScreenHookEnabled", true);
-		albumArtLockScreenBlurred = XPrefs.Xprefs.getBoolean("albumArtLockScreenBlurred", false);
-		albumArtLockScreenBlurLevel = XPrefs.Xprefs.getInt("albumArtLockScreenBlurLevel", 10)/100f;
+		albumArtLockScreenBlurLevel = XPrefs.Xprefs.getInt("albumArtLockScreenBlurLevel", 0)/100f;
 
 		if(Key.length > 0)
 		{
 			switch (Key[0])
 			{
-				case "albumArtLockScreenBlurred":
 				case "albumArtLockScreenBlurLevel":
 					XposedHelpers.callMethod(NMM, "updateMediaMetaData", true, false);
 					break;
@@ -79,7 +76,7 @@ public class LockscreenAlbumArt extends XposedModPack {
 						artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
 					}
 				}
-				if(albumArtLockScreenBlurred) {
+				if(albumArtLockScreenBlurLevel > 0) {
 					artworkBitmap = new BlurBuilder().blur(mContext, artworkBitmap, albumArtLockScreenBlurLevel);
 				}
 				boolean metaDataChanged = (boolean) param.args[0];
@@ -99,22 +96,27 @@ public class LockscreenAlbumArt extends XposedModPack {
 	}
 	public class BlurBuilder {
 		public Bitmap blur(Context context, Bitmap image, float level) {
+			try {
+				Bitmap inputBitmap = Bitmap.createBitmap(image);
+				Bitmap outputBitmap = Bitmap.createBitmap(inputBitmap);
 
-			Bitmap inputBitmap = Bitmap.createBitmap(image);
-			Bitmap outputBitmap = Bitmap.createBitmap(inputBitmap);
+				level *= 24.999f; // % of value: 25 is Max
 
-			level *= 24.999f; // % to value. 25 is Max
+				RenderScript rs = RenderScript.create(context);
+				ScriptIntrinsicBlur theIntrinsic = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+				Allocation tmpIn = Allocation.createFromBitmap(rs, inputBitmap);
+				Allocation tmpOut = Allocation.createFromBitmap(rs, outputBitmap);
+				theIntrinsic.setRadius(level);
+				theIntrinsic.setInput(tmpIn);
+				theIntrinsic.forEach(tmpOut);
+				tmpOut.copyTo(outputBitmap);
 
-			RenderScript rs = RenderScript.create(context);
-			ScriptIntrinsicBlur theIntrinsic = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
-			Allocation tmpIn = Allocation.createFromBitmap(rs, inputBitmap);
-			Allocation tmpOut = Allocation.createFromBitmap(rs, outputBitmap);
-			theIntrinsic.setRadius(level);
-			theIntrinsic.setInput(tmpIn);
-			theIntrinsic.forEach(tmpOut);
-			tmpOut.copyTo(outputBitmap);
-
-			return outputBitmap;
+				return outputBitmap;
+			}
+			catch (Exception ignored)
+			{
+				return image;
+			}
 		}
 	}
 }

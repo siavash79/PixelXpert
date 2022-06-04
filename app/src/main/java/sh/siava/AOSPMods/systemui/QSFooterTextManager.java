@@ -36,7 +36,7 @@ public class QSFooterTextManager extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        stringFormatter.registerDateCallback(refreshCallback);
+        stringFormatter.registerCallback(refreshCallback);
 
         Class<?> QSFooterViewClass = XposedHelpers.findClass("com.android.systemui.qs.QSFooterView", lpparam.classLoader);
 

@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 
 import com.github.mfathi91.time.PersianDate;
 
+import java.util.Date;
+import java.util.ResourceBundle;
+
 import java.awt.font.NumericShaper;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -109,6 +112,10 @@ public class StringFormatter {
         else if(match.startsWith("G")) //G is reserved for "Georgian Calendar". Then goes normal Java dateformat, like $Gyyyy or $GEEE
         {
             return georgianDateOf(match.substring(1));
+        }
+        else if(match.startsWith("H")) //H is reserved for "Hebrew Calendar". Then goes normal Java dateformat, like $Hyyyy or $HEEE
+        {
+            return hebrewDateOf(match.substring(1));
         }
         if(match.startsWith("N"))
         {

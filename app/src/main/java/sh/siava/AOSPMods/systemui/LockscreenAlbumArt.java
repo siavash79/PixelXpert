@@ -4,6 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaMetadata;
 import android.os.AsyncTask;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -18,13 +22,29 @@ public class LockscreenAlbumArt extends XposedModPack {
 	
 	private static boolean albumArtLockScreenEnabled = false;
 	private static boolean albumArtLockScreenHookEnabled = true;
-	
+	private static boolean albumArtLockScreenBlurred = true;
+	private static float albumArtLockScreenBlurLevel = .1f; //50%
+	private Object NMM;
+
 	public LockscreenAlbumArt(Context context) { super(context); }
 	
 	@Override
 	public void updatePrefs(String... Key) {
 		albumArtLockScreenEnabled = XPrefs.Xprefs.getBoolean("albumArtLockScreenEnabled", false);
 		albumArtLockScreenHookEnabled = XPrefs.Xprefs.getBoolean("albumArtLockScreenHookEnabled", true);
+		albumArtLockScreenBlurred = XPrefs.Xprefs.getBoolean("albumArtLockScreenBlurred", false);
+		albumArtLockScreenBlurLevel = XPrefs.Xprefs.getInt("albumArtLockScreenBlurLevel", 10)/100f;
+
+		if(Key.length > 0)
+		{
+			switch (Key[0])
+			{
+				case "albumArtLockScreenBlurred":
+				case "albumArtLockScreenBlurLevel":
+					XposedHelpers.callMethod(NMM, "updateMediaMetaData", true, false);
+					break;
+			}
+		}
 	}
 	
 	@Override
@@ -35,7 +55,14 @@ public class LockscreenAlbumArt extends XposedModPack {
 		if(!lpparam.packageName.equals(listenPackage) || !albumArtLockScreenHookEnabled) return;
 		
 		Class<?> NotificationMediaManagerClass = XposedHelpers.findClass("com.android.systemui.statusbar.NotificationMediaManager", lpparam.classLoader);
-		
+
+		XposedBridge.hookAllConstructors(NotificationMediaManagerClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				NMM = param.thisObject;
+			}
+		});
+
 		XposedBridge.hookAllMethods(NotificationMediaManagerClass, "updateMediaMetaData", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -52,6 +79,9 @@ public class LockscreenAlbumArt extends XposedModPack {
 						artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
 					}
 				}
+				if(albumArtLockScreenBlurred) {
+					artworkBitmap = new BlurBuilder().blur(mContext, artworkBitmap, albumArtLockScreenBlurLevel);
+				}
 				boolean metaDataChanged = (boolean) param.args[0];
 				boolean allowEnterAnimation = (boolean) param.args[1];
 				android.util.ArraySet<AsyncTask> mProcessArtworkTasks = (android.util.ArraySet) XposedHelpers.getObjectField(param.thisObject, "mProcessArtworkTasks");
@@ -66,5 +96,25 @@ public class LockscreenAlbumArt extends XposedModPack {
 				param.setResult(null);
 			}
 		});
+	}
+	public class BlurBuilder {
+		public Bitmap blur(Context context, Bitmap image, float level) {
+
+			Bitmap inputBitmap = Bitmap.createBitmap(image);
+			Bitmap outputBitmap = Bitmap.createBitmap(inputBitmap);
+
+			level *= 24.999f; // % to value. 25 is Max
+
+			RenderScript rs = RenderScript.create(context);
+			ScriptIntrinsicBlur theIntrinsic = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+			Allocation tmpIn = Allocation.createFromBitmap(rs, inputBitmap);
+			Allocation tmpOut = Allocation.createFromBitmap(rs, outputBitmap);
+			theIntrinsic.setRadius(level);
+			theIntrinsic.setInput(tmpIn);
+			theIntrinsic.forEach(tmpOut);
+			tmpOut.copyTo(outputBitmap);
+
+			return outputBitmap;
+		}
 	}
 }

@@ -11,11 +11,15 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.util.ArraySet;
 import android.widget.ImageView;
 
+import com.google.android.renderscript.Toolkit;
+import com.google.android.renderscript.ToolkitKt;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
+import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
@@ -27,8 +31,12 @@ public class LockscreenAlbumArt extends XposedModPack {
 	private static boolean albumArtLockScreenHookEnabled = true;
 	private static float albumArtLockScreenBlurLevel = 0f; //50%
 	private Object NMM;
+	private static Toolkit renderToolkit;
 
-	public LockscreenAlbumArt(Context context) { super(context); }
+	public LockscreenAlbumArt(Context context) {
+		super(context);
+		if(renderToolkit == null) renderToolkit = Toolkit.INSTANCE;
+	}
 	
 	@Override
 	public void updatePrefs(String... Key) {
@@ -88,46 +96,25 @@ public class LockscreenAlbumArt extends XposedModPack {
 						mProcessArtworkTasks.clear();
 					}
 
-					XposedHelpers.callMethod(param.thisObject, "finishUpdateMediaMetaData", metaDataChanged, allowEnterAnimation, artworkBitmap);
+					if(artworkBitmap == null) return; //we're not interested anymore!
 
 					if(albumArtLockScreenBlurLevel > 0)
 					{
-						ImageView mBackdropBack = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBackdropBack");
-						artworkBitmap = new BlurBuilder().blur(mContext, artworkBitmap, albumArtLockScreenBlurLevel);
-						if(artworkBitmap != null) {
-							mBackdropBack.setImageBitmap(artworkBitmap);
-						}
+						artworkBitmap = renderToolkit.blur(artworkBitmap, Math.round(albumArtLockScreenBlurLevel*25f));
 					}
+
+					XposedHelpers.callMethod(param.thisObject, "finishUpdateMediaMetaData", metaDataChanged, allowEnterAnimation, artworkBitmap);
 					param.setResult(null);
 				}
-				catch (Throwable t){t.printStackTrace();}
+				catch (Throwable t){
+					if(BuildConfig.DEBUG)
+					{
+						XposedBridge.log("Start error dump");
+						t.printStackTrace();
+						XposedBridge.log("Start end error dump");
+					}
+				}
 			}
 		});
-	}
-	public static class BlurBuilder {
-		public Bitmap blur(Context context, Bitmap image, float level) {
-			try {
-				Bitmap inputBitmap = Bitmap.createBitmap(image);
-				Bitmap outputBitmap = Bitmap.createBitmap(inputBitmap);
-
-				level *= 24.999f; // % of value: 25 is Max
-
-				RenderScript rs = RenderScript.create(context);
-				ScriptIntrinsicBlur theIntrinsic = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
-				Allocation tmpIn = Allocation.createFromBitmap(rs, inputBitmap);
-				Allocation tmpOut = Allocation.createFromBitmap(rs, outputBitmap);
-				theIntrinsic.setRadius(level);
-				theIntrinsic.setInput(tmpIn);
-				theIntrinsic.forEach(tmpOut);
-				tmpOut.copyTo(outputBitmap);
-
-				return outputBitmap;
-			}
-			catch (Throwable ignored)
-			{
-				ignored.printStackTrace();
-				return null;
-			}
-		}
 	}
 }

@@ -1,2 +1,3 @@
-include ':app'
 rootProject.name = "AOSPMods"
+include ':app'
+include ':renderscript-toolkit'

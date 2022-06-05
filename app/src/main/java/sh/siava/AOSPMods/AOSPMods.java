@@ -33,7 +33,7 @@ import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.ScreenshotController;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
-import sh.siava.AOSPMods.systemui.keyguardCustomText;
+import sh.siava.AOSPMods.systemui.KeyguardCustomText;
 
 public class AOSPMods implements IXposedHookLoadPackage{
 
@@ -70,7 +70,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(LockscreenAlbumArt.class);
         modPacks.add(KeyGuardPinScrambler.class);
         modPacks.add(overScrollDisabler.class);
-        modPacks.add(keyguardCustomText.class);
+        modPacks.add(KeyguardCustomText.class);
         //endregion
     }
     

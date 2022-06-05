@@ -884,9 +884,8 @@ public class StatusbarMods extends XposedModPack {
     {
         if(dateFormat.length() == 0) return "";
 
-        String result = stringFormatter.formatString(dateFormat).toString();
         //There's some format to work on
-        SpannableStringBuilder formatted = new SpannableStringBuilder(result);
+        SpannableStringBuilder formatted = new SpannableStringBuilder(stringFormatter.formatString(dateFormat));
 
         if (small) {
             //small size requested

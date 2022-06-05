@@ -13,12 +13,12 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
-public class keyguardCustomText extends XposedModPack {
+@SuppressWarnings("RedundantThrows")
+public class KeyguardCustomText extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
     StringFormatter stringFormatter = new StringFormatter();
@@ -28,7 +28,7 @@ public class keyguardCustomText extends XposedModPack {
     private Object KGCS;
     private boolean mDozing = false;
 
-    public keyguardCustomText(Context context) {
+    public KeyguardCustomText(Context context) {
         super(context);
     }
 
@@ -78,7 +78,9 @@ public class keyguardCustomText extends XposedModPack {
                     KGMiddleCustomTextView.setMaxLines(2);
                     KGMiddleCustomTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     KGMiddleCustomTextView.setLetterSpacing(.03f);
+                    KGMiddleCustomTextView.setShadowLayer(1,1,1,Color.BLACK);
 
+//                    KGMiddleCustomTextView.setElevation(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, res.getDisplayMetrics()));
                     int padding = res.getDimensionPixelSize(
                             res.getIdentifier(
                                     "clock_padding_start",
@@ -100,7 +102,8 @@ public class keyguardCustomText extends XposedModPack {
     }
 
     private void setColor() {
-        int color = (mDozing) ? Color.WHITE : (int)XposedHelpers.callMethod(KGCS,"getCurrentTextColor");
+        boolean mSupportsDarkText = XposedHelpers.getBooleanField(KGCS, "mSupportsDarkText");
+        int color = (mDozing || !mSupportsDarkText) ? Color.WHITE : Color.BLACK;
 
         KGMiddleCustomTextView.setTextColor(color);
     }

@@ -1,9 +1,7 @@
 package sh.siava.AOSPMods.systemui;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.media.MediaMetadata;
 import android.os.AsyncTask;
 import android.renderscript.Allocation;
@@ -11,17 +9,15 @@ import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.util.ArraySet;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import jp.wasabeef.blurry.Blurry;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
+import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class LockscreenAlbumArt extends XposedModPack {

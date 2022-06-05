@@ -21,6 +21,10 @@ import sh.siava.AOSPMods.XposedModPack;
 public class KeyguardCustomText extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
+    private static boolean customCarrierTextEnabled = false;
+    private static String customCarrierText = "";
+    private static Object carrierTextController;
+
     StringFormatter stringFormatter = new StringFormatter();
     private TextView KGMiddleCustomTextView;
     private static String KGMiddleCustomText = "";
@@ -36,8 +40,32 @@ public class KeyguardCustomText extends XposedModPack {
     public void updatePrefs(String... Key) {
         KGMiddleCustomText = XPrefs.Xprefs.getString("KGMiddleCustomText", "");
 
-        if(Key.length > 0 && Key[0].equals("KGMiddleCustomText"))
-            setTheText();
+        customCarrierTextEnabled = XPrefs.Xprefs.getBoolean("carrierTextMod", false);
+        customCarrierText = XPrefs.Xprefs.getString("carrierTextValue", "");
+
+        if(Key.length > 0)
+        {
+            switch (Key[0])
+            {
+                case "KGMiddleCustomText":
+                    setMiddleText();
+                    break;
+                case "carrierTextMod":
+                    if(customCarrierTextEnabled)
+                    {
+                        setCarrierText();
+                    }
+                    else
+                    {
+                        try {
+                            XposedHelpers.callMethod(
+                                    XposedHelpers.getObjectField(carrierTextController, "mCarrierTextManager"),
+                                    "updateCarrierText");
+                        }catch (Throwable ignored){} //probably not initiated yet
+                    }
+                    break;
+            }
+        }
     }
 
     @Override
@@ -46,16 +74,38 @@ public class KeyguardCustomText extends XposedModPack {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
-
+        Class<?> CarrierTextControllerClass = XposedHelpers.findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
         Class<?> KeyguardSliceViewClass = XposedHelpers.findClass("com.android.keyguard.KeyguardSliceView$Row", lpparam.classLoader);
         Class<?> KeyguardClockSwitchClass = XposedHelpers.findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
-/*
+
+        /* might be useful later
         Class<?> AnimatableClockControllerClass = XposedHelpers.findClass("com.android.keyguard.AnimatableClockController", lpparam.classLoader);
         Class<?> KeyguardClockSwitchControllerClass = XposedHelpers.findClass("com.android.keyguard.KeyguardClockSwitchController", lpparam.classLoader);
         Class<?> DefaultClockControllerClass = XposedHelpers.findClass("com.android.keyguard.clock.DefaultClockController", lpparam.classLoader);
         Class<?> AvailableClocksClass = XposedHelpers.findClass("com.android.keyguard.clock.ClockManager$AvailableClocks", lpparam.classLoader);*/
 
+        stringFormatter.registerCallback(() -> { setMiddleText(); setCarrierText();});
+
         Resources res = mContext.getResources();
+
+        XposedBridge.hookAllConstructors(CarrierTextControllerClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                carrierTextController = param.thisObject;
+                Object carrierTextCallback = XposedHelpers.getObjectField(carrierTextController, "mCarrierTextCallback");
+
+                XposedBridge.hookAllMethods(carrierTextCallback.getClass(),
+                        "updateCarrierInfo", new XC_MethodHook() {
+                            @Override
+                            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                if(!customCarrierTextEnabled) return; //nothing to do
+
+                                setCarrierText();
+                                param.setResult(null);
+                            }
+                        });
+            }
+        });
 
         XposedBridge.hookAllMethods(KeyguardSliceViewClass, "setDarkAmount", new XC_MethodHook() {
             @Override
@@ -64,7 +114,7 @@ public class KeyguardCustomText extends XposedModPack {
                 if(mDozing != isDozing)
                 {
                     mDozing = isDozing;
-                    setColor();
+                    setMiddleColor();
                 }
             }
         });
@@ -80,7 +130,6 @@ public class KeyguardCustomText extends XposedModPack {
                     KGMiddleCustomTextView.setLetterSpacing(.03f);
                     KGMiddleCustomTextView.setShadowLayer(1,1,1,Color.BLACK);
 
-//                    KGMiddleCustomTextView.setElevation(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, res.getDisplayMetrics()));
                     int padding = res.getDimensionPixelSize(
                             res.getIdentifier(
                                     "clock_padding_start",
@@ -91,24 +140,29 @@ public class KeyguardCustomText extends XposedModPack {
 
                     mStatusArea = ((LinearLayout)XposedHelpers.getObjectField(param.thisObject,"mStatusArea"));
 
-                    stringFormatter.registerCallback(() -> setTheText());
-
-                    setTheText();
-                    setColor();
+                    setMiddleText();
+                    setMiddleColor();
                 }
                 catch (Exception ignored){}
             }
         });
     }
 
-    private void setColor() {
+    private void setMiddleColor() {
         boolean mSupportsDarkText = XposedHelpers.getBooleanField(KGCS, "mSupportsDarkText");
         int color = (mDozing || !mSupportsDarkText) ? Color.WHITE : Color.BLACK;
 
         KGMiddleCustomTextView.setTextColor(color);
     }
 
-    private void setTheText() {
+    private void setCarrierText() {
+        try {
+            TextView mView = (TextView) XposedHelpers.getObjectField(carrierTextController, "mView");
+            mView.setText(stringFormatter.formatString(customCarrierText));
+        } catch (Throwable ignored){} //probably not initiated yet
+    }
+
+    private void setMiddleText() {
         if(KGCS == null) return;
 
         if(KGMiddleCustomText.length() == 0)

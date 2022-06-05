@@ -17,7 +17,6 @@ import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.systemui.BackGestureManager;
 import sh.siava.AOSPMods.systemui.BackToKill;
 import sh.siava.AOSPMods.systemui.BatteryStyleManager;
-import sh.siava.AOSPMods.systemui.CarrierTextManager;
 import sh.siava.AOSPMods.systemui.ScreenGestures;
 import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
 import sh.siava.AOSPMods.systemui.KeyGuardPinScrambler;
@@ -50,7 +49,6 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(BackGestureManager.class);
         modPacks.add(BackToKill.class);
         modPacks.add(BatteryStyleManager.class);
-        modPacks.add(CarrierTextManager.class);
         modPacks.add(FeatureFlagsMods.class);
         modPacks.add(KeyguardBottomArea.class);
         modPacks.add(NavBarResizer.class);

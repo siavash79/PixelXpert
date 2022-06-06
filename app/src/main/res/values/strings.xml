@@ -281,7 +281,6 @@
     <string name="network_interval_custom_text_title">Refresh interval</string>
     <string name="minutes_word">minute(s)</string>
 
-
     <!-- Menu Items -->
     <string name="menu_settings_title">Import/Export</string>
     <string name="menu_reset_defaults">Reset all settings</string>

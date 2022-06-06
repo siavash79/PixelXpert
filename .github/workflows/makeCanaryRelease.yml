@@ -5,7 +5,7 @@ on:
     branches:
       - 'canary'
     paths:
-      - '.github/makeNewCanary'
+      - '.github/edit2MakeNewCanary'
       
 jobs:
   build:

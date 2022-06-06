@@ -271,4 +271,9 @@
     <string name="string_formatter_manual_body">Para além de texto normal é também possível inserir variáveis dinâmicas:\n\n$G\&lt;format\&gt; : Data Gregoriana, com formatação. Para documentação relativa à formatação, por favor pesquise por `Java Date Format`\nExemplo: $GMMM corresponde a: Jan (ou qualquer outro)\n\n$P&lt;format&gt; : Data Persa, com formatação\nExemplo: $Pyyyy corresponde a: 1401\n\n$Nrx : Total de Downloads diário\n$Ntx: Total de Uploads diário\n$Nall : Total de tráfego diário\n\nSe substituir $N por $Nc estatísticas de dados móveis estarão disponíveis (como $Ncrx para os downloads)\n\nExemplo:\n`Tráfego dos dados móveis para $GEEEE: $Ncall` corresponderá a:\n`Tráfego dos dados móveis para Terça-feira: 2GB`</string>
     <string name="menu_restart">Reiniciar</string>
     <string name="switch_branches">Alterar canal</string>
+    <string name="reinstall_word">Reinstalar</string>
+    <string name="custom_text_category">Texto personalizado no ecrã de bloqueio</string>
+    <string name="lockscreen_center_text_value">Texto personalizado no relógio</string>
+    <string name="album_art_blur_text">Intensidade da desfocagem</string>
+    <string name="album_art_grayscale">Escala de cinzentos</string>
 </resources>

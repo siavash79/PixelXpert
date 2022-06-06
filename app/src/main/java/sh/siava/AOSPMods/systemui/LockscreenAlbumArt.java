@@ -109,7 +109,6 @@ public class LockscreenAlbumArt extends XposedModPack {
 
 					if(artworkBitmap == null) return; //we're not interested anymore!
 
-					XposedBridge.log("level " + albumArtLockScreenBlurLevel);
 					if(albumArtLockScreenBlurLevel != LEVEL_BLUR_DISABLED)  // we shall never provide 0 to the blue method
 					{
 						artworkBitmap = renderToolkit.blur(artworkBitmap, Math.round(albumArtLockScreenBlurLevel));

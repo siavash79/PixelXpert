@@ -182,18 +182,14 @@
     <string name="back_from_right_title">Right side of the screen</string>
     <string name="back_height_title">Gesture height</string>
     <string name="gesturenav_header">Gesture navigation</string>
-    <string name="gesture_nav_pill_cat">Navigation bar pill width</string>
-    <string name="gesture_nav_pill_mod_title">Modify NavBar pill width</string>
+    <string name="gesture_nav_pill_cat">Navigation bar pill</string>
+    <string name="gesture_nav_pill_mod_title">Modify NavBar pill</string>
     <string name="gesture_nav_pill_width_title">Width comparing to standard size</string>
+    <string name="gesture_nav_pill_height_title">Height comparing to standard size</string>
     <string name="threebutton_header_title">3-Button navigation</string>
     <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Hide navigation bar</string>
-    <string name="gesture_navbar_thickness_title">Navbar pill thickness</string>
-    <string name="gesture_navbar_thickness">Modify NavBar pill thickness</string>
-    <string name="gesture_navbar_thin">Thin</string>
-    <string name="gesture_navbar_thick">Thick</string>
-    <string name="gesture_navbar_thicker">Thicker</string>
     <string name="colorpill_title">Colorize gestures pill</string>
     <string name="colorpill">Accent colored gestures pill</string>
     <string name="reducekeyboard_title">Gestures keyboard space</string>

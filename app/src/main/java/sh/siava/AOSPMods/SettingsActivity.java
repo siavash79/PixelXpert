@@ -538,16 +538,15 @@ public class SettingsActivity extends AppCompatActivity implements
             try {
                 boolean HideNavbarOverlay = sharedPreferences.getBoolean("HideNavbarOverlay", false);
 
-                findPreference("GesPillWidthModPos").setVisible(sharedPreferences.getBoolean("GesPillWidthMod", true));
                 findPreference("GesPillWidthModPos").setSummary(sharedPreferences.getInt("GesPillWidthModPos", 50) * 2 + getString(R.string.pill_width_summary));
+                findPreference("GesPillHeightFactor").setSummary(sharedPreferences.getInt("GesPillHeightFactor", 100) + getString(R.string.pill_width_summary));
 
                 findPreference("BackLeftHeight").setVisible(sharedPreferences.getBoolean("BackFromLeft", true));
                 findPreference("BackRightHeight").setVisible(sharedPreferences.getBoolean("BackFromRight", true));
                 findPreference("BackLeftHeight").setSummary(sharedPreferences.getInt("BackLeftHeight", 100) + "%");
                 findPreference("BackRightHeight").setSummary(sharedPreferences.getInt("BackRightHeight", 100) + "%");
 
-                findPreference("nav_pill_width_cat").setVisible(!HideNavbarOverlay);
-                findPreference("nav_pill_height_cat").setVisible(!HideNavbarOverlay);
+                findPreference("nav_pill_cat").setVisible(!HideNavbarOverlay);
                 findPreference("nav_pill_color_cat").setVisible(!HideNavbarOverlay);
                 findPreference("nav_keyboard_height_cat").setVisible(!HideNavbarOverlay);
             } catch (Exception ignored) {

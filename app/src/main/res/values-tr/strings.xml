@@ -26,11 +26,13 @@
     <string name="transparent_fingerprint_circle_off">Parmak izi simgesinin etrafındaki daire etkin</string>
     <string name="transparent_fingerprint_circle_on">Parmak izi simgesinin etrafındaki daire gizli</string>
     <string name="carrier_text_category">Operatör metni</string>
+    <string name="custom_text_category">Kilit ekranına özel metin yerleştirme</string>
     <string name="configure_carrier_text">Operatör metnini yapılandır</string>
     <string name="carrier_text_mod_disabled">Operatör metni değişmedi</string>
     <string name="carrier_text_mod_enabled">Özel operatör metni</string>
     <string name="carrier_text_value">Özel metin ekle</string>
-    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
+    <string name="lockscreen_center_text_value">Saat bölgesi özel metin</string>
+	<string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Alt alan kısayolları</string>
     <string name="keyguard_bottom_buttons_transparent_title">Simgelerin etrafındaki daireyi gizle</string>
     <string name="keyguard_bottom_force_camera_title">Kamera kısayolunu göstert</string>
@@ -42,6 +44,8 @@
     <string name="torch_shortcut">El feneri</string>
     <string name="album_art_category">Medya seçenekleri</string>
     <string name="album_art_title">Medya oynatırken albüm resmini etkinleştir</string>
+    <string name="album_art_blur_text">Bulanıklık derecesi</string>
+    <string name="album_art_grayscale">Renkleri grileştir</string>
     <string name="shufflePin_title">Pin Rakamlarını Karıştır</string>
 
     <!--Status bar related-->
@@ -181,15 +185,11 @@
     <string name="gesture_nav_pill_cat">Navigasyon çubuğu genişliği</string>
     <string name="gesture_nav_pill_mod_title">Navigasyon çubuğu genişliğini değiştirin</string>
     <string name="gesture_nav_pill_width_title">Standart boyuta göre genişlik</string>
-    <string name="threebutton_header_title">3 düğmeli gezinme</string>
+    <string name="gesture_nav_pill_height_title">Standart boyuta göre yükseklik</string>    
+	<string name="threebutton_header_title">3 düğmeli gezinme</string>
     <string name="back_longpress_kill_title">Geri butonunu uzun basılı tutarak uygulamayı öldür</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Navigasyon çubuğunu gizle</string>
-    <string name="gesture_navbar_thickness_title">Navigasyon çubuğu kalınlığı</string>
-    <string name="gesture_navbar_thickness">Navigasyon çubuğunun kalınlığını değiştir</string>
-    <string name="gesture_navbar_thin">İnce</string>
-    <string name="gesture_navbar_thick">Kalın</string>
-    <string name="gesture_navbar_thicker">Daha kalın</string>
     <string name="colorpill_title">Navigasyon çubuğunu renklendir</string>
     <string name="colorpill">Navigasyon çubuğunu vurgu rengine göre renklendir</string>
     <string name="reducekeyboard_title">Klavye altı jest hareket alanı</string>
@@ -290,6 +290,7 @@
     <string name="menu_netstat_title">Ağ İstatistikleri</string>
     <string name="menu_netstat_enable">İstatistikleri Etkinleştir</string>
     <string name="menu_netstat_clear">Ağ istatistiklerini sıfırlayın</string>
+    <string name="menu_restart">Yeniden başlat</string>
     <string name="menu_restartSysUI">SystemUI\'yi yeniden başlatın</string>
     <string name="menu_updates">Güncellemeler...</string>
 
@@ -319,6 +320,8 @@
     <string name="update_checking">Kontrol ediliyor ...</string>
     <string name="update_download_started">İndiriliyor - Lütfen tamamlandıktan sonra bildirime tıklayın</string>
     <string name="update_word">Güncelleme</string>
+    <string name="switch_branches">Dal değiştir</string>
+    <string name="reinstall_word">Yeniden indir ve yükle</string>
 
     <string name="title_activity_update">güncellemeAktivitesi</string>
     

@@ -26,10 +26,12 @@
     <string name="transparent_fingerprint_circle_off">Kreis um das Fingerabdrucksymbol wird angezeigt</string>
     <string name="transparent_fingerprint_circle_on">Kreis um das Fingerabdrucksymbol wird versteckt</string>
     <string name="carrier_text_category">Betreibertext</string>
+    <string name="custom_text_category">Benutzerdefinierter Text auf dem Sperrbildschirm</string>
     <string name="configure_carrier_text">Konfiguriere den Betreibertext</string>
     <string name="carrier_text_mod_disabled">Betreibertext unverändert</string>
     <string name="carrier_text_mod_enabled">Benutzerdefinierter Betreibertext</string>
     <string name="carrier_text_value">Benutzerdefinierten Text eingeben</string>
+    <string name="lockscreen_center_text_value">Benutzerdefinierter Text des Uhrenbereichs</string>
     <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Verknüpfungen im unterem Bereich</string>
     <string name="keyguard_bottom_buttons_transparent_title">Verstecke den Kreis um die Symbole</string>
@@ -42,6 +44,8 @@
     <string name="torch_shortcut">Fackel</string>
     <string name="album_art_category">Medieneinstellungen</string>
     <string name="album_art_title">Aktiviere Album Anzeige wenn Medien abgespielt werden</string>
+    <string name="album_art_blur_text">Unschärfewert</string>
+    <string name="album_art_grayscale">Graustufen</string>
     <string name="shufflePin_title">Zufallsanordnung PIN</string>
 
     <!--Status bar related-->
@@ -73,7 +77,7 @@
     <string name="sbc_date_small">Kleiner (70%)</string>
     <string name="sbc_custom_date_after">Benutzerdefiniertes Datumsformat nach der Uhr</string>
     <string name="sbc_header">Statusleisten Uhr Anpassung</string>
-	<string name="sbc_clock_color_category">Farboptionen</string>
+    <string name="sbc_clock_color_category">Farboptionen</string>
     <string name="sbc_colorful_title">Mach es bunt</string>
     <string name="sbc_before_color">Text vor der Uhr</string>
     <string name="sbc_color">Uhr</string>
@@ -87,7 +91,7 @@
     <string name="ntsb_position_title">Anzeige Position</string>
     <string name="ntsb_threshold_title">Schwellenwert für automatisches Ausblenden</string>
     <string name="ntsb_threshold_summary">"Verstecke wenn der Traffic unter… (Kilobytes)"</string>
-	<string name="network_mode_title">Überwachungsstil</string>
+    <string name="network_mode_title">Überwachungsstil</string>
     <string name="network_colorful_title">Mach es bunt</string>
     <string name="network_download_top">Download-Geschwindigkeit ganz oben</string>
     <string name="network_download_color_title">Farbe des Download-Textes</string>
@@ -181,15 +185,11 @@
     <string name="gesture_nav_pill_cat">Gestennavigationsleistenbreite</string>
     <string name="gesture_nav_pill_mod_title">Ändere die Navigationsleistenbreite</string>
     <string name="gesture_nav_pill_width_title">Breite im Vergleich zu der Standartbreite</string>
+    <string name="gesture_nav_pill_height_title">Höhe im Vergleich zu der Standartbreite</string>
     <string name="threebutton_header_title">3-Schaltflächen Navigation</string>
     <string name="back_longpress_kill_title">Zurück Taste lange drücken um die Anwendung im Vordergrund zu schließen</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Verstecke Gestennavigationsleiste</string>
-    <string name="gesture_navbar_thickness_title">Gestennavigationsleiste Stärke</string>
-    <string name="gesture_navbar_thickness">Ändere die Stärke der Gestennavigationsleiste</string>
-    <string name="gesture_navbar_thin">Dünn</string>
-    <string name="gesture_navbar_thick">Fett</string>
-    <string name="gesture_navbar_thicker">Fetter</string>
     <string name="colorpill_title">Gestennavigationsleistenfarbe</string>
     <string name="colorpill">Gestennavigationsleisten in Akzentfarbe</string>
     <string name="reducekeyboard_title">Tastatur Gestenbereich</string>
@@ -201,7 +201,7 @@
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Deaktiviere Screenshot Ton</string>
     <string name="so_power_longpress_torch_title">Einschalter lange drücken für Taschenlampe*</string>
-	<string name="so_taptaptorch_title">Aktivieren die Doppeltipp-Taschenlampe</string>
+    <string name="so_taptaptorch_title">Aktivieren die Doppeltipp-Taschenlampe</string>
     <string name="so_taptaptorch_summary">Doppeltippen auf die Sperrbildschirmanzeige und halten dann den Finger auf dem Sperrbildschirm, fur Fackel</string>
 
     <string name="framework_needed_caution_summary">Benötigt die Aktivierung des System Frameworks in LSposed. BENUTZE ES MIT VORSICHT</string>
@@ -275,5 +275,53 @@
     <string name="qs_3_rows">Erzwinge 3 Reihen</string>
     <string name="qs_4_rows">Erzwinge 4 Reihen</string>
     <string name="qs_5_rows">Erzwinge 5 Reihen</string>
+
+    <!-- Lockscreen/Quick Settings Custom Text -->
+    <string name="netstat_enable_title">Netzwerkstatistiken sammeln</string>
+    <string name="network_interval_custom_text_title">Aktualisierungsintervall</string>
+    <string name="minutes_word">Minute(n)</string>
+
+    <!-- Menu Items -->
+    <string name="menu_settings_title">Importieren/Exportieren</string>
+    <string name="menu_reset_defaults">Alle Einstellungen zurücksetzen</string>
+    <string name="menu_import_settings">Einstellungen aus Datei importieren…</string>
+    <string name="menu_export_settings">Einstellungen in Datei exportieren…</string>
+    <string name="menu_netstat_title">Netzwerkstatistik</string>
+    <string name="menu_netstat_enable">Statistik aktivieren</string>
+    <string name="menu_netstat_clear">Netzwerkstatistik zurücksetzen</string>
+    <string name="menu_restart">Neu starten</string>
+    <string name="menu_restartSysUI">SystemUI neustarten</string>
+    <string name="menu_updates">App-Updates</string>
+
+    <string name="nestat_caution_title">Achtung!</string>
+    <string name="nestat_caution_text">Ihre Netzwerkstatistiken werden dauerhaft zurückgesetzt. Fortfahren?</string>
+    <string name="netstat_caution_yes">Weiter</string>
+    <string name="netstat_caution_no">Vielleicht später</string>
+
+    <string name="monitoring_category_title">Überwachungsoptionen</string>
+    <string name="netstat_header">Netzwerkstatistikeinstellungen</string>
+
+    <string name="string_formatter_manual_body">Zusätzlich zum normalen Text, den Sie eingeben können, sind auch dynamische Variablen verfügbar:\n\n$G\&lt;format\&gt; : georgisches Datum, basierend auf dem Format. Für Formatdokumentation suchen Sie bitte nach `Java Date Format`\nBeispiel: $GMMM bedeutet: Jan (oder irgendein anderer)\n\n$P&lt;format&gt; : Persisches Datum, basierend auf dem Format\nBeispiel: $Pyyyy bedeutet: 1401\n\n$Nrx : Gesamtzahl der Downloads von heute\n$Ntx: Gesamtzahl der Uploads von heute\n$Nall : Gesamtzahl der Zugriffe von heute\n\nWenn Sie ersetzen $N mit $Nc erhalten Sie mobile Datenstatistiken (wie $Ncrx für Downloads)\n\nBeispiel:\n`Mobiler Traffic von $GEEEE: $Ncall` ergibt:\n`Mobiler Traffic von Dienstag: 2GB` </string>
+    <string name="update_fragment_label" translateable="false">@string/menu_updates</string>
+    <string name="update_channel_name">Aktualisierungen</string>
+    <string name="update_notification_title">Update heruntergeladen</string>
+    <string name="update_notification_text">Zum Installieren hier tippen</string>
+    <string name="reboot_notification_title">AOSPMods aktualisiert!</string>
+    <string name="reboot_notification_text">Änderungen werden nach dem Neustart wirksam</string>
+    <string name="update_flavor_title">Kanal aktualisieren</string>
+    <string name="stable_flavor">Stabil</string>
+    <string name="canary_flavor" translateable="false">Kanarienvogel</string>
+    <string name="currentVersionTitle">Installierte Version: </string>
+    <string name="lastestVersionTitle">Neueste Version: </string>
+    <string name="root_not_here">ROOT-ZUGRIFF NICHT GEWÄHRT!</string>
+    <string name="reboot_pending">Neustart ausstehend</string>
+    <string name="reboot_word">Gerät jetzt neu starten</string>
+    <string name="update_checking">Prüfe…</string>
+    <string name="update_download_started">Herunterladen – Bitte tippen Sie nach Abschluss auf die Benachrichtigung</string>
+    <string name="update_word">Aktualisieren</string>
+    <string name="switch_branches">Zweig wechseln</string>
+    <string name="reinstall_word">Neu installieren</string>
+
+    <string name="title_activity_update" translateable="false">updateActivity</string>
 
 </resources>

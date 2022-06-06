@@ -11,8 +11,11 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.util.ArraySet;
 import android.widget.ImageView;
 
+import com.google.android.renderscript.BlendingMode;
 import com.google.android.renderscript.Toolkit;
 import com.google.android.renderscript.ToolkitKt;
+
+import java.util.concurrent.ExecutionException;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -26,12 +29,14 @@ import sh.siava.AOSPMods.XposedModPack;
 @SuppressWarnings("RedundantThrows")
 public class LockscreenAlbumArt extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-	
+	private static final int LEVEL_BLUR_DISABLED = 0;
+
 	private static boolean albumArtLockScreenEnabled = false;
 	private static boolean albumArtLockScreenHookEnabled = true;
-	private static float albumArtLockScreenBlurLevel = 0f; //50%
+	private static int albumArtLockScreenBlurLevel = 0; // min=1 max=25 0=disabled
 	private Object NMM;
 	private static Toolkit renderToolkit;
+	private static boolean albumArtLockScreenGrayscale = false;
 
 	public LockscreenAlbumArt(Context context) {
 		super(context);
@@ -42,12 +47,18 @@ public class LockscreenAlbumArt extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		albumArtLockScreenEnabled = XPrefs.Xprefs.getBoolean("albumArtLockScreenEnabled", true);
 		albumArtLockScreenHookEnabled = XPrefs.Xprefs.getBoolean("albumArtLockScreenHookEnabled", true);
-		albumArtLockScreenBlurLevel = XPrefs.Xprefs.getInt("albumArtLockScreenBlurLevel", 0)/100f;
+		albumArtLockScreenBlurLevel = Math.round(XPrefs.Xprefs.getInt("albumArtLockScreenBlurLevel", 0)/4f);
+		albumArtLockScreenGrayscale = XPrefs.Xprefs.getBoolean("albumArtLockScreenGrayscale", false);
 
 		if(Key.length > 0)
 		{
-			if ("albumArtLockScreenBlurLevel".equals(Key[0])) {
-				XposedHelpers.callMethod(NMM, "updateMediaMetaData", true, false);
+			switch (Key[0]) {
+				case "albumArtLockScreenBlurLevel":
+				case "albumArtLockScreenGrayscale":
+					try {
+						XposedHelpers.callMethod(NMM, "updateMediaMetaData", true, false);
+					}catch (Exception ignored){}
+					break;
 			}
 		}
 	}
@@ -98,9 +109,14 @@ public class LockscreenAlbumArt extends XposedModPack {
 
 					if(artworkBitmap == null) return; //we're not interested anymore!
 
-					if(albumArtLockScreenBlurLevel > 0)
+					XposedBridge.log("level " + albumArtLockScreenBlurLevel);
+					if(albumArtLockScreenBlurLevel != LEVEL_BLUR_DISABLED)  // we shall never provide 0 to the blue method
 					{
-						artworkBitmap = renderToolkit.blur(artworkBitmap, Math.round(albumArtLockScreenBlurLevel*25f));
+						artworkBitmap = renderToolkit.blur(artworkBitmap, Math.round(albumArtLockScreenBlurLevel));
+					}
+					if(albumArtLockScreenGrayscale)
+					{
+						artworkBitmap = renderToolkit.colorMatrix(artworkBitmap, renderToolkit.getGreyScaleColorMatrix());
 					}
 
 					XposedHelpers.callMethod(param.thisObject, "finishUpdateMediaMetaData", metaDataChanged, allowEnterAnimation, artworkBitmap);

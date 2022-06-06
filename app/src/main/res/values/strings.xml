@@ -45,6 +45,7 @@
     <string name="album_art_category">Media options</string>
     <string name="album_art_title">Enable album art when playing media</string>
     <string name="album_art_blur_text">Blur value</string>
+    <string name="album_art_grayscale">Grayscale</string>
     <string name="shufflePin_title">Shuffle Pin</string>
 
     <!--Status bar related-->

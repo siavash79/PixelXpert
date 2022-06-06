@@ -73,7 +73,7 @@ public class QSHeaderManager extends XposedModPack {
         Class<?> QSTileViewImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
         Class<?> UtilsClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
         Class<?> OngoingPrivacyChipClass = XposedHelpers.findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
-        Class<?> FragmentClass = XposedHelpers.findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
+        Class<?> FragmentHostManagerClass = XposedHelpers.findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
         Class<?> ScrimControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
         Class<?> GradientColorsClass = XposedHelpers.findClass("com.android.internal.colorextraction.ColorExtractor.GradientColors", lpparam.classLoader);
         Class<?> StatusbarClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader);
@@ -284,7 +284,7 @@ public class QSHeaderManager extends XposedModPack {
             }
         }
         
-        XposedBridge.hookAllConstructors(FragmentClass, new XC_MethodHook() {
+        XposedBridge.hookAllConstructors(FragmentHostManagerClass, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 XposedHelpers.setObjectField(param.thisObject,

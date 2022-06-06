@@ -46,18 +46,6 @@
 
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="@string/gesture_navbar_thickness_title"
-        app:key="nav_pill_height_cat">
-    app:summary="@string/sysui_restart_needed">
-        <ListPreference
-            android:defaultValue="None"
-            android:entries="@array/NBPThicknessOverlayEx_names"
-            android:entryValues="@array/NBPThicknessOverlayEx"
-            android:summary="%s"
-            android:key="NBPThicknessOverlayEx"
-            android:title="@string/gesture_navbar_thickness" />
-    </PreferenceCategory>
-    <PreferenceCategory
         android:title="@string/colorpill_title"
         app:summary="@string/sysui_restart_needed"
         app:key="nav_pill_color_cat">

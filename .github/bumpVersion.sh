@@ -15,7 +15,7 @@ sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/nightly.link\/siavash79\/AOSPMods\/ac
 
 # module changelog
 echo "**$NEWVERNAME**" > newChangeLog.md
-cat .github/workflowFiles/changeLog.md >> newChangeLog.md
+cat changeLog.md >> newChangeLog.md
 echo >> newChangeLog.md
 cat CanaryChangelog.md >> newChangeLog.md
 mv  newChangeLog.md CanaryChangelog.md

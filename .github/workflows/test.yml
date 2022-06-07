@@ -15,10 +15,10 @@ jobs:
              
     - name: Grant permission shell scripts
       run: chmod +x .github/*.sh
-      
-      -name: Create Changelog
-       run: .github/extractChanges.sh
-       
+
+    - name: Create Changelog
+      run: .github/extractChanges.sh
+
     - name: Update Versions
       run: .github/bumpVersion.sh ${{ github.run_id }}
 

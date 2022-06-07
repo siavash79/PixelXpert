@@ -1,0 +1,34 @@
+name: Test changelog
+
+on:
+  workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      name: Grab Source
+      with:
+        submodules: recursive
+             
+    - name: Grant permission shell scripts
+      run: chmod +x .github/*.sh
+      
+      -name: Create Changelog
+       run: .github/extractChanges.sh
+       
+    - name: Update Versions
+      run: .github/bumpVersion.sh ${{ github.run_id }}
+
+    - name: Commit version bump
+      uses: github-actions-x/commit@v2.9
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        push-branch: 'canary'
+        commit-message: 'Version update: Release'
+        force-add: 'true'
+        files: CanaryChangelog.md
+        name: GitHub
+        email: aospmods@siava.sh

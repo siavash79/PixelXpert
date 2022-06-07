@@ -2,8 +2,7 @@
 
 IFS=$'\n'
 
-cd ..
-rm changeLog.md
+rm -f changeLog.md
 LASTUPDATE=$(git log -100 | grep -B 4 "Version update: Release" | grep "commit" -m 1 | cut -d " " -f 2)
 COMMITS=$(git rev-list $LASTUPDATE..HEAD)
 for COMMIT in $COMMITS

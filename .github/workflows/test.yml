@@ -19,7 +19,7 @@ jobs:
     - name: Create Changelog
       run: .github/extractChanges.sh > result.txt 2>&1
 
-    -name: Get run log
+    - name: Get run log
       run: cat result.txt
 
     - name: Update Versions

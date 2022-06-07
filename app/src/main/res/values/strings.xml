@@ -132,7 +132,7 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Build number on QS Panel footer</string>
     <string name="qs_footer_mod_title">Modify build text number on QS panel</string>
-    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
+    <string name="qs_footer_text_value" translatable="false">Enter Custom Text (Leave blank to remove completely)</string>
     <string name="qs_footer_text_summary">Leave it blank to remove the text completely</string>
     <string name="qs_footer_text_desc">Turn the display off/on to apply</string>
     <string name="light_qs_title">Light QS Panel during light theme</string>

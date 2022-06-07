@@ -17,7 +17,10 @@ jobs:
       run: chmod +x .github/*.sh
 
     - name: Create Changelog
-      run: .github/extractChanges.sh
+      run: .github/extractChanges.sh > result.txt 2>&1
+
+    -name: Get run log
+      run: cat result.txt
 
     - name: Update Versions
       run: .github/bumpVersion.sh ${{ github.run_id }}

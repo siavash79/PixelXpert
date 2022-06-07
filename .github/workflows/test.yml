@@ -27,7 +27,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         push-branch: 'canary'
-        commit-message: 'Version update: Release'
+        commit-message: 'test commit'
         force-add: 'true'
         files: CanaryChangelog.md
         name: GitHub

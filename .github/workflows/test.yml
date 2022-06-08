@@ -13,11 +13,8 @@ jobs:
       uses: mxschmitt/action-tmate@v3
     
     - name: Grab Source
-      run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git
-      
-    - name: Enter Repo
-      run: cd AOSPMods
-             
+      run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git .
+                   
     - name: Grant permission shell scripts
       run: chmod +x .github/*.sh
 

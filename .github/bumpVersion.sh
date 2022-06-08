@@ -14,8 +14,8 @@ sed -i 's/"versionCode":.*/"versionCode": '$NEWVERCODE',/' latestVersion.json
 sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/nightly.link\/siavash79\/AOSPMods\/actions\/runs\/'$1'\/AOSPMods.zip",/' latestVersion.json
 
 # module changelog
-echo "**$NEWVERNAME**" > newChangeLog.md
+echo "**$NEWVERNAME**  " > newChangeLog.md
 cat changeLog.md >> newChangeLog.md
-echo >> newChangeLog.md
+echo "  " >> newChangeLog.md
 cat CanaryChangelog.md >> newChangeLog.md
 mv  newChangeLog.md CanaryChangelog.md

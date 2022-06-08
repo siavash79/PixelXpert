@@ -203,7 +203,7 @@
     <string name="so_power_longpress_torch_title">Long press Power to torch*</string>
     <string name="so_taptaptorch_title">Enable Double-tap Torch</string>
     <string name="so_taptaptorch_summary">Double tap then hold lockscreen for quick torch</string>
-    <string name="so_fingerprint_sensor_enabled">Allow fingerprint sensor is the screen is off</string>
+    <string name="so_fingerprint_sensor_enabled">Allow fingerprint sensor if the screen is off</string>
 
     <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
     <string name="so_double_tap_wake_title">Double-tap to wake phone</string>

@@ -276,4 +276,6 @@
     <string name="lockscreen_center_text_value">Texto personalizado no relógio</string>
     <string name="album_art_blur_text">Intensidade da desfocagem</string>
     <string name="album_art_grayscale">Escala de cinzentos</string>
+    <string name="gesture_nav_pill_height_title">Espessura em comparação com a padrão</string>
+    <string name="so_fingerprint_sensor_enabled">Permitir sensor de impressão digital com o ecrã desligado</string>
 </resources>

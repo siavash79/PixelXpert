@@ -78,5 +78,7 @@ dependencies {
     implementation 'com.nfx.android:range-bar-preference:0.0.6' //Range Bar Component for UI
 
     implementation 'com.github.mfathi91:persian-date-time:4.2.1' //Persian Calendar
+
+    implementation 'us.feras.mdv:markdownview:1.1.0' //md file parser
 }
 

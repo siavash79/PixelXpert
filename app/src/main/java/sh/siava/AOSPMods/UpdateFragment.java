@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 
 import com.topjohnwu.superuser.Shell;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -36,8 +37,8 @@ import java.util.Objects;
 
 import javax.security.auth.callback.Callback;
 
-import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.databinding.UpdateFragmentBinding;
+import us.feras.mdv.MarkdownView;
 
 public class UpdateFragment extends Fragment {
     private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskModuleUpdate.json";
@@ -116,10 +117,13 @@ public class UpdateFragment extends Fragment {
         binding.radioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
             canaryUpdate = ((RadioButton) radioGroup.findViewById(R.id.canaryID)).isChecked();
             ((TextView) view.findViewById(R.id.latestVersionValueID)).setText(R.string.update_checking);
-            binding.updateBtn.setEnabled(rebootPending || false);
+            binding.updateBtn.setEnabled(rebootPending);
 
             checkUpdates(result -> {
                 latestVersion = result;
+
+                requireActivity().runOnUiThread(() -> ((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFile((String) result.get("changelog")));
+
                 //noinspection ConstantConditions
                 getActivity().runOnUiThread(() -> {
                     ((TextView) view.findViewById(R.id.latestVersionValueID)).setText(
@@ -127,6 +131,7 @@ public class UpdateFragment extends Fragment {
                                     result.get("versionCode")));
                     int latestCode = 0;
                     int BtnText = R.string.update_word;
+
                     boolean enable = false;
                     try {
                         //noinspection ConstantConditions
@@ -175,6 +180,10 @@ public class UpdateFragment extends Fragment {
                 binding.updateBtn.setText(R.string.update_download_started);
             }
         });
+    }
+
+    private void getChangelog(String URL, TaskDoneCallback callback) {
+        new ChangelogReceiver(URL, callback).start();
     }
 
     private void getCurrentVersion() {
@@ -249,6 +258,37 @@ public class UpdateFragment extends Fragment {
     public interface TaskDoneCallback extends Callback {
         void onFinished(HashMap<String, Object> result);
     }
+    private static class ChangelogReceiver extends Thread {
+        private final TaskDoneCallback mCallback;
+        private final String mURL;
+
+        private ChangelogReceiver(String URL, TaskDoneCallback callback) {
+            mURL = URL;
+            mCallback = callback;
+        }
+
+        @Override
+        public void run()
+        {
+            try {
+                URL changelogData = new URL(mURL);
+                InputStream s = changelogData.openStream();
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(s));
+
+                StringBuilder result = new StringBuilder();
+                String line;
+                while ((line = in.readLine()) != null) {
+                    result.append(line).append("\n");
+                }
+                HashMap<String, Object> returnVal = new HashMap<>();
+                returnVal.put("changelog", result.toString());
+
+                mCallback.onFinished(returnVal);
+            } catch (Exception ignored){}
+        }
+    }
+
 
     private class updateChecker extends Thread {
         private final TaskDoneCallback mCallback;

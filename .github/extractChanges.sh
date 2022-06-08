@@ -16,6 +16,6 @@
       for LINE in $COMMITMSGS
       do
         #save in the temp file to be used by next script
-        echo "- "${LINE##*CHANGELOG: } >> changeLog.md
+        echo "- "${LINE##*CHANGELOG: }"  " >> changeLog.md
       done
   done

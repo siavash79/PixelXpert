@@ -12,7 +12,7 @@ import sh.siava.AOSPMods.XposedModPack;
 
 public class FingerprintWhileDozing extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    private static boolean fingerprintWhileDozing = false;
+    private static boolean fingerprintWhileDozing = true;
 
     public FingerprintWhileDozing(Context context) {
         super(context);
@@ -20,7 +20,7 @@ public class FingerprintWhileDozing extends XposedModPack {
 
     @Override
     public void updatePrefs(String... Key) {
-        fingerprintWhileDozing = XPrefs.Xprefs.getBoolean("fingerprintWhileDozing", false);
+        fingerprintWhileDozing = XPrefs.Xprefs.getBoolean("fingerprintWhileDozing", true);
     }
 
     @Override
@@ -32,11 +32,19 @@ public class FingerprintWhileDozing extends XposedModPack {
 
         Class<?> KeyguardUpdateMonitorClass = XposedHelpers.findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
 
+        XposedBridge.hookAllConstructors(KeyguardUpdateMonitorClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                XposedBridge.log("init ok");
+            }
+        });
+
+
         XposedBridge.hookAllMethods(KeyguardUpdateMonitorClass,
                 "shouldListenForFingerprint", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!fingerprintWhileDozing) return;
+                        if(fingerprintWhileDozing) return;
                         boolean currentResult = (boolean) param.getResult();
                         XposedBridge.log("current: " + currentResult);
                         if(currentResult)

@@ -31,6 +31,10 @@
     <PreferenceCategory
         android:title="@string/doze_header">
         <SwitchPreference
+            android:defaultValue="true"
+            android:key="fingerprintWhileDozing"
+            android:title="@string/so_fingerprint_sensor_enabled" />
+        <SwitchPreference
             android:defaultValue="false"
             android:key="replaceAssistantwithTorch"
             android:title="@string/so_power_longpress_torch_title"

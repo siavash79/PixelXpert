@@ -16,11 +16,11 @@ sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/rele
 # module changelog
 echo "**$NEWVERNAME**" > newChangeLog.md
 cat .github/workflowFiles/FutureChanageLog.md >> newChangeLog.md
-echo >> newChangeLog.md
+echo "  " >> newChangeLog.md
 cat MagiskChangelog.md >> newChangeLog.md
 mv  newChangeLog.md MagiskChangelog.md
 
 # release notes
-echo "**Changelog:**" > releaseNotes.md
+echo "**Changelog:**  " > releaseNotes.md
 cat .github/workflowFiles/FutureChanageLog.md >> releaseNotes.md
 cat .github/workflowFiles/ReleaseNotesTemplate.md >> releaseNotes.md

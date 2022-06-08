@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+    
     - name: Grab Source
       run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git
       

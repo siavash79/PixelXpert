@@ -12,10 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
       name: Grab Source
-      with:
-        submodules: recursive
+      run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git .
       
     - name: Setup JDK 11
       uses: actions/setup-java@v3
@@ -26,7 +24,10 @@ jobs:
         
     - name: Grant permission shell scripts
       run: chmod +x .github/*.sh
-      
+
+    - name: Generate Changelog
+      run: .github/extractChanges.sh
+
     - name: Update Versions
       run: .github/bumpVersion.sh ${{ github.run_id }}
 

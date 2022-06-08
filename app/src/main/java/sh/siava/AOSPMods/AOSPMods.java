@@ -17,6 +17,7 @@ import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.systemui.BackGestureManager;
 import sh.siava.AOSPMods.systemui.BackToKill;
 import sh.siava.AOSPMods.systemui.BatteryStyleManager;
+import sh.siava.AOSPMods.systemui.FingerprintWhileDozing;
 import sh.siava.AOSPMods.systemui.ScreenGestures;
 import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
 import sh.siava.AOSPMods.systemui.KeyGuardPinScrambler;
@@ -69,6 +70,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(KeyGuardPinScrambler.class);
         modPacks.add(overScrollDisabler.class);
         modPacks.add(KeyguardCustomText.class);
+        modPacks.add(FingerprintWhileDozing.class);
         //endregion
     }
     

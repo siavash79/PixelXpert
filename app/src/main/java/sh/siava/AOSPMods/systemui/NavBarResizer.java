@@ -47,7 +47,7 @@ public class NavBarResizer extends XposedModPack {
             XposedHelpers.callMethod(mNavigationBarInflaterView, "clearViews");
             Object defaultLayout = XposedHelpers.callMethod(mNavigationBarInflaterView, "getDefaultLayout");
             XposedHelpers.callMethod(mNavigationBarInflaterView, "inflateLayout", defaultLayout);
-        }catch (Exception ignored){}
+        }catch (Throwable ignored){}
     }
 
     @Override

@@ -44,7 +44,6 @@ public class Overlays {
         Overlays.put("FixSBLeftPadddingOverlay", new overlayProp("com.android.systemui.sb_height_small", false));
         Overlays.put("QS3ColumnsOverlay", new overlayProp("com.android.systemui.qstiles3c", false));
         Overlays.put("QSSmallTextOverlay", new overlayProp("com.android.systemui.qstile.smalltext.overlay", false));
-        Overlays.put("ColorizeNavbarOverlay", new overlayProp("com.android.systemui.overlay.colorpill", false));
         Overlays.put("ReduceKeyboardSpaceOverlay", new overlayProp("com.android.overlay.reducekeyboard", false));
         Overlays.put("BSThickTrackOverlay", new overlayProp("com.android.systemui.bstrack.overlay", false));
 

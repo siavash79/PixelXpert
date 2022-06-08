@@ -15,10 +15,15 @@ import sh.siava.AOSPMods.XposedModPack;
 @SuppressWarnings("RedundantThrows")
 public class NavBarResizer extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+
+    private static int GesPillHeightFactor =100;
+    private static boolean navPillColorAccent = false;
     public static float widthFactor = 1f;
 
-    private static Object mNavigationBarInflaterView = null;
-    private static int GesPillHeightFactor =100;
+
+    private Object mNavigationBarInflaterView = null;
+    private Object NH = null;
+    private int mLightColor, mDarkColor; //original navbar colors
 
     public NavBarResizer(Context context) { super(context); }
     
@@ -28,6 +33,7 @@ public class NavBarResizer extends XposedModPack {
 
         widthFactor = XPrefs.Xprefs.getInt("GesPillWidthModPos", 50) * .02f;
         GesPillHeightFactor = XPrefs.Xprefs.getInt("GesPillHeightFactor", 100);
+        navPillColorAccent = XPrefs.Xprefs.getBoolean("navPillColorAccent", false);
 
         if(Key.length > 0)
         {
@@ -37,8 +43,19 @@ public class NavBarResizer extends XposedModPack {
                 case "GesPillHeightFactor":
                     refreshNavbar();
                     break;
+                case "navPillColorAccent":
+                    setColors();
             }
         }
+    }
+
+    private void setColors() {
+        try
+        {
+            XposedHelpers.setObjectField(NH, "mLightColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_200, mContext.getTheme()) : mLightColor);
+            XposedHelpers.setObjectField(NH, "mDarkColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_600, mContext.getTheme()) : mDarkColor);
+        }
+        catch (Throwable ignored){}
     }
 
     private void refreshNavbar() {
@@ -57,6 +74,22 @@ public class NavBarResizer extends XposedModPack {
         Class<?> NavigationBarInflaterViewClass = XposedHelpers.findClass("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader);
         Class<?> NavigationHandleClass = XposedHelpers.findClass("com.android.systemui.navigationbar.gestural.NavigationHandle", lpparam.classLoader);
 
+        XposedBridge.hookAllConstructors(NavigationHandleClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                NH = param.thisObject;
+
+                //Let's remember the original colors
+                mLightColor = XposedHelpers.getIntField(param.thisObject, "mLightColor");
+                mDarkColor = XposedHelpers.getIntField(param.thisObject, "mDarkColor");
+
+                if(navPillColorAccent)
+                {
+                    setColors();
+                }
+            }
+        });
+
         XposedBridge.hookAllMethods(NavigationHandleClass,
                 "onDraw", new XC_MethodHook() {
                     int mRadius = 0;
@@ -66,7 +99,6 @@ public class NavBarResizer extends XposedModPack {
                             mRadius = XposedHelpers.getIntField(param.thisObject, "mRadius");
                             XposedHelpers.setObjectField(param.thisObject, "mRadius", Math.round(mRadius * GesPillHeightFactor / 100f));
                         }
-//                        Paint mPaint = (Paint) XposedHelpers.getObjectField(param.thisObject, "mPaint");
                     }
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -104,6 +136,4 @@ public class NavBarResizer extends XposedModPack {
 
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
-
-
 }

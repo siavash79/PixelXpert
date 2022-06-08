@@ -8,19 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-      name: Grab Source
-      with:
-        submodules: recursive
+    - name: Grab Source
+      run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git
+      
+    - name: Enter Repo
+      run: cd AOSPMods
              
     - name: Grant permission shell scripts
       run: chmod +x .github/*.sh
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-
     - name: Create Changelog
-      run: .github/extractChanges.sh > result.txt 2>&1
+      run: .github/extractChanges.sh
 
     - name: Update Versions
       run: .github/bumpVersion.sh ${{ github.run_id }}

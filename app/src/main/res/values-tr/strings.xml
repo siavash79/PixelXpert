@@ -203,6 +203,7 @@
     <string name="so_power_longpress_torch_title">El feneri için güç tuşuna uzun basın*</string>
     <string name="so_taptaptorch_title">Çift Dokunmayla el fenerini Etkinleştir</string>
     <string name="so_taptaptorch_summary">Hızlı el feneri için kilit ekranına iki kez dokunun ve basılı tutun</string>
+    <string name="so_fingerprint_sensor_enabled">Ekran kapalı olduğunda parmak izi sensörünün çalışmasına izin ver</string>
 
     <string name="framework_needed_caution_summary">Lsposed\'da System Framework\'ün etkinleştirilmesi gerektirir. DİKKATLE KULLANIN</string>
     <string name="so_double_tap_wake_title">Telefonu uyandırmak için iki kez dokun</string>

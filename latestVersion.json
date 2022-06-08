@@ -2,5 +2,5 @@
     "version": "canary-44",
     "versionCode": 44,
     "zipUrl": "https://nightly.link/siavash79/AOSPMods/actions/runs/2448744819/AOSPMods.zip",
-    "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/master/MagiskChangelog.md"
+    "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/CanaryChangelog.md"
 }

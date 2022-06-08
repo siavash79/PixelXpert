@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      name: Grab Source
+    - name: Grab Source
       run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git .
       
     - name: Setup JDK 11

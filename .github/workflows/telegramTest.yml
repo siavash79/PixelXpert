@@ -23,6 +23,9 @@ jobs:
 
       - name: Generate Changelog
         run: .github/extractChanges.sh
+        
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Update Versions
         run: .github/bumpVersion.sh ${{ github.run_id }}

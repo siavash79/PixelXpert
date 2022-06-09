@@ -19,6 +19,6 @@
       do
         #save in the temp file to be used by next script
         echo "- "${LINE##*CHANGELOG: }"  " >> changeLog.md
-        echo -n "<br>- "${LINE##*CHANGELOG: } >> Tchangelog.htm
+        echo -n "%0A- "${LINE##*CHANGELOG: } >> Tchangelog.htm
       done
   done

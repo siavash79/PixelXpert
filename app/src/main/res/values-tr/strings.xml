@@ -32,7 +32,7 @@
     <string name="carrier_text_mod_enabled">Özel operatör metni</string>
     <string name="carrier_text_value">Özel metin ekle</string>
     <string name="lockscreen_center_text_value">Saat bölgesi özel metin</string>
-	<string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
+    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Alt alan kısayolları</string>
     <string name="keyguard_bottom_buttons_transparent_title">Simgelerin etrafındaki daireyi gizle</string>
     <string name="keyguard_bottom_force_camera_title">Kamera kısayolunu göstert</string>
@@ -186,7 +186,7 @@
     <string name="gesture_nav_pill_mod_title">Navigasyon çubuğu genişliğini değiştirin</string>
     <string name="gesture_nav_pill_width_title">Standart boyuta göre genişlik</string>
     <string name="gesture_nav_pill_height_title">Standart boyuta göre yükseklik</string>    
-	<string name="threebutton_header_title">3 düğmeli gezinme</string>
+    <string name="threebutton_header_title">3 düğmeli gezinme</string>
     <string name="back_longpress_kill_title">Geri butonunu uzun basılı tutarak uygulamayı öldür</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Navigasyon çubuğunu gizle</string>
@@ -203,6 +203,7 @@
     <string name="so_power_longpress_torch_title">El feneri için güç tuşuna uzun basın*</string>
     <string name="so_taptaptorch_title">Çift Dokunmayla el fenerini Etkinleştir</string>
     <string name="so_taptaptorch_summary">Hızlı el feneri için kilit ekranına iki kez dokunun ve basılı tutun</string>
+    <string name="so_fingerprint_sensor_enabled">Ekran kapalı olduğunda parmak izi sensörünün çalışmasına izin ver</string>
 
     <string name="framework_needed_caution_summary">Lsposed\'da System Framework\'ün etkinleştirilmesi gerektirir. DİKKATLE KULLANIN</string>
     <string name="so_double_tap_wake_title">Telefonu uyandırmak için iki kez dokun</string>
@@ -280,7 +281,6 @@
     <string name="netstat_enable_title">Ağ istatistiklerini toplayın</string>
     <string name="network_interval_custom_text_title">Yenileme aralığı</string>
     <string name="minutes_word">dakika(lar)</string>
-
 
     <!-- Menu Items -->
     <string name="menu_settings_title">İçe Aktar/Dışa Aktar</string>

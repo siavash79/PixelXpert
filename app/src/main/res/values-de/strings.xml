@@ -203,6 +203,7 @@
     <string name="so_power_longpress_torch_title">Einschalter lange drücken für Taschenlampe*</string>
     <string name="so_taptaptorch_title">Aktivieren die Doppeltipp-Taschenlampe</string>
     <string name="so_taptaptorch_summary">Doppeltippen auf die Sperrbildschirmanzeige und halten dann den Finger auf dem Sperrbildschirm, fur Fackel</string>
+    <string name="so_fingerprint_sensor_enabled">Fingerabdrucksensor zulassen, wenn der Bildschirm ausgeschaltet ist</string>
 
     <string name="framework_needed_caution_summary">Benötigt die Aktivierung des System Frameworks in LSposed. BENUTZE ES MIT VORSICHT</string>
     <string name="so_double_tap_wake_title">Doppelt Tippen zum Aufwecken des Telefons</string>

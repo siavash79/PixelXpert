@@ -14,7 +14,6 @@ import sh.siava.AOSPMods.allApps.overScrollDisabler;
 import sh.siava.AOSPMods.android.screenOffKeys;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
-import sh.siava.AOSPMods.systemui.BackGestureManager;
 import sh.siava.AOSPMods.systemui.BackToKill;
 import sh.siava.AOSPMods.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.systemui.FingerprintWhileDozing;
@@ -23,7 +22,7 @@ import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
 import sh.siava.AOSPMods.systemui.KeyGuardPinScrambler;
 import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
 import sh.siava.AOSPMods.systemui.LockscreenAlbumArt;
-import sh.siava.AOSPMods.systemui.NavBarResizer;
+import sh.siava.AOSPMods.systemui.GestureNavbarManager;
 import sh.siava.AOSPMods.systemui.NotificationExpander;
 import sh.siava.AOSPMods.systemui.BrightnessSlider;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
@@ -47,12 +46,11 @@ public class AOSPMods implements IXposedHookLoadPackage{
     {
         //region Mod list definition
         modPacks.add(StatusbarMods.class);
-        modPacks.add(BackGestureManager.class);
         modPacks.add(BackToKill.class);
         modPacks.add(BatteryStyleManager.class);
         modPacks.add(FeatureFlagsMods.class);
         modPacks.add(KeyguardBottomArea.class);
-        modPacks.add(NavBarResizer.class);
+        modPacks.add(GestureNavbarManager.class);
         modPacks.add(QSFooterTextManager.class);
         modPacks.add(QSHaptic.class);
         modPacks.add(QSHeaderManager.class);

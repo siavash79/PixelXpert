@@ -21,7 +21,7 @@ cat CanaryChangelog.md >> newChangeLog.md
 mv  newChangeLog.md CanaryChangelog.md
 
 echo "<b>$NEWVERNAME</b> released in canary channel<br><br>Changelog:</b>" > telegram.msg
-echo -n Tchangelog.htm >> telegram.msg
+cat Tchangelog.htm >> telegram.msg
 sed -i 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g' telegram.msg
 TMessage=$(cat telegram.msg)
 echo "TMessage=$TMessage" >> $GITHUB_ENV

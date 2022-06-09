@@ -20,9 +20,9 @@ echo "  " >> newChangeLog.md
 cat CanaryChangelog.md >> newChangeLog.md
 mv  newChangeLog.md CanaryChangelog.md
 
-echo "**$NEWVERNAME** released in canary channel  " > telegram.msg
+echo "*$NEWVERNAME* released in canary channel  " > telegram.msg
 echo "  " >> telegram.msg
-echo "**Changelog:**  " >> telegram.msg
+echo "*Changelog:*  " >> telegram.msg
 cat changeLog.md >> telegram.msg
 echo 'TMessage<<EOF' >> $GITHUB_ENV
 cat telegram.msg >> $GITHUB_ENV

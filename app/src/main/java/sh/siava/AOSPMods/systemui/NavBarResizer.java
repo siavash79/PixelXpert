@@ -1,8 +1,15 @@
 package sh.siava.AOSPMods.systemui;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.telecom.Call;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+
+import javax.security.auth.callback.Callback;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -22,7 +29,6 @@ public class NavBarResizer extends XposedModPack {
 
 
     private Object mNavigationBarInflaterView = null;
-    private Object NH = null;
     private int mLightColor, mDarkColor; //original navbar colors
 
     public NavBarResizer(Context context) { super(context); }
@@ -43,19 +49,8 @@ public class NavBarResizer extends XposedModPack {
                 case "GesPillHeightFactor":
                     refreshNavbar();
                     break;
-                case "navPillColorAccent":
-                    setColors();
             }
         }
-    }
-
-    private void setColors() {
-        try
-        {
-            XposedHelpers.setObjectField(NH, "mLightColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_200, mContext.getTheme()) : mLightColor);
-            XposedHelpers.setObjectField(NH, "mDarkColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_600, mContext.getTheme()) : mDarkColor);
-        }
-        catch (Throwable ignored){}
     }
 
     private void refreshNavbar() {
@@ -77,16 +72,17 @@ public class NavBarResizer extends XposedModPack {
         XposedBridge.hookAllConstructors(NavigationHandleClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                NH = param.thisObject;
-
                 //Let's remember the original colors
                 mLightColor = XposedHelpers.getIntField(param.thisObject, "mLightColor");
                 mDarkColor = XposedHelpers.getIntField(param.thisObject, "mDarkColor");
+            }
+        });
 
-                if(navPillColorAccent)
-                {
-                    setColors();
-                }
+        XposedBridge.hookAllMethods(NavigationHandleClass, "setDarkIntensity", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                XposedHelpers.setObjectField(param.thisObject, "mLightColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_200, mContext.getTheme()) : mLightColor);
+                XposedHelpers.setObjectField(param.thisObject, "mDarkColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_600, mContext.getTheme()) : mDarkColor);
             }
         });
 

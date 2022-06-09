@@ -30,6 +30,12 @@
     <PreferenceCategory
         android:title="@string/gesture_nav_pill_cat"
         app:key="nav_pill_cat">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="navPillColorAccent"
+            android:title="@string/colorpill"
+            app:summaryOn="@string/general_on"
+            app:summaryOff="@string/general_off"/>
         <SeekBarPreference
             android:defaultValue="50"
             android:key="GesPillWidthModPos"
@@ -44,17 +50,6 @@
             app:title="@string/gesture_nav_pill_height_title"
             app:updatesContinuously="true" />
 
-    </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/colorpill_title"
-        app:summary="@string/sysui_restart_needed"
-        app:key="nav_pill_color_cat">
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="navPillColorAccent"
-            android:title="@string/colorpill"
-            app:summaryOn="@string/general_on"
-            app:summaryOff="@string/general_off"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/reducekeyboard_title"

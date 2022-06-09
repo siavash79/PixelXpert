@@ -24,4 +24,6 @@ echo "**$NEWVERNAME** released in canary channel  " > telegram.msg
 echo "  " >> telegram.msg
 echo "**Changelog:**  " >> telegram.msg
 echo changeLog.md >> telegram.msg
-echo 'TMessage<<telegram.msg' >> $GITHUB_ENV
+TMessage=$(cat telegram.msg)
+FinalTMessage=${TMessage@Q}
+echo "TMessage=$FinalTMessage" >> $GITHUB_ENV

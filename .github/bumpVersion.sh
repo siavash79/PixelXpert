@@ -19,3 +19,8 @@ cat changeLog.md >> newChangeLog.md
 echo "  " >> newChangeLog.md
 cat CanaryChangelog.md >> newChangeLog.md
 mv  newChangeLog.md CanaryChangelog.md
+
+echo "**$NEWVERNAME** released in canary channel  " > telegram.msg
+echo "  " >> telegram.msg
+echo "**Changelog:**  " >> telegram.msg
+echo changeLog.md >> telegram.msg

@@ -29,3 +29,4 @@ jobs:
           to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ env.TMessage }}
+          format: html

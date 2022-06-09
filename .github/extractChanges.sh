@@ -2,7 +2,9 @@
 
   # reset the file - most likely not needd
   rm -f changeLog.md
+  rm -f Tchangelog.htm
   touch changeLog.md
+  touch Tchangelog.htm
 
   #find the last time we made a changelog
   LASTUPDATE=$(git log -100 | grep -B 4 "Version update: Release" | grep "commit" -m 1 | cut -d " " -f 2)
@@ -17,5 +19,6 @@
       do
         #save in the temp file to be used by next script
         echo "- "${LINE##*CHANGELOG: }"  " >> changeLog.md
+        echo -n "<br>- "${LINE##*CHANGELOG: } >> Tchangelog.htm
       done
   done

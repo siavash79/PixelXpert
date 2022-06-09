@@ -1,4 +1,4 @@
-name: Make Canary Release
+name: Test Telegram
 
 on:
   workflow_dispatch

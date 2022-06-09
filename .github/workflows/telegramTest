@@ -1,0 +1,20 @@
+name: Make Canary Release
+
+on:
+  workflow_dispatch
+      
+jobs:
+  send:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: send telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TEMPID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            this is a test message!
+            wow!
+            
+            let's see what happens

@@ -69,9 +69,6 @@ jobs:
         name: GitHub
         email: aospmods@siava.sh
         
-    - name: Get Telegram Message
-      run: echo "TMessage=$(cat telegram.msg)" >> $GITHUB_ENV
-
     - name: Inform Telegram
       uses: appleboy/telegram-action@master
       with:

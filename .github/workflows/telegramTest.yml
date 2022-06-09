@@ -8,6 +8,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Grab Source
+        run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git .
+
+      - name: Setup JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant permission shell scripts
+        run: chmod +x .github/*.sh
+
+      - name: Generate Changelog
+        run: .github/extractChanges.sh
+
+      - name: Update Versions
+        run: .github/bumpVersion.sh ${{ github.run_id }}
+
       - name: send telegram
         uses: appleboy/telegram-action@master
         with:

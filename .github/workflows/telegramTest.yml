@@ -28,5 +28,4 @@ jobs:
         with:
           to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            this is a test message!
+          message: ${{ env.TMessage }}

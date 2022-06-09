@@ -32,14 +32,6 @@ public class FingerprintWhileDozing extends XposedModPack {
 
         Class<?> KeyguardUpdateMonitorClass = XposedHelpers.findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
 
-        XposedBridge.hookAllConstructors(KeyguardUpdateMonitorClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                XposedBridge.log("init ok");
-            }
-        });
-
-
         XposedBridge.hookAllMethods(KeyguardUpdateMonitorClass,
                 "shouldListenForFingerprint", new XC_MethodHook() {
                     @Override

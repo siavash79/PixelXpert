@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.systemui;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaMetadata;
+import android.media.session.PlaybackState;
 import android.os.AsyncTask;
 import android.util.ArraySet;
 
@@ -82,7 +83,6 @@ public class LockscreenAlbumArt extends XposedModPack {
 
 					boolean metaDataChanged = (boolean) param.args[0];
 					boolean allowEnterAnimation = (boolean) param.args[1];
-
 					ArraySet<AsyncTask> mProcessArtworkTasks = (ArraySet) XposedHelpers.getObjectField(param.thisObject, "mProcessArtworkTasks");
 					if (metaDataChanged) {
 						if (mediaMetadata != null && !byPassEnabld) {
@@ -91,6 +91,7 @@ public class LockscreenAlbumArt extends XposedModPack {
 								artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
 							}
 						}
+
 						if(artworkBitmap != null)
 						{
 							if(albumArtLockScreenBlurLevel != LEVEL_BLUR_DISABLED)  // we shall never provide 0 to the blue method
@@ -108,8 +109,10 @@ public class LockscreenAlbumArt extends XposedModPack {
 						}
 						mProcessArtworkTasks.clear();
 					}
-
-					if(artworkBitmap == null) return; //we're not interested anymore!
+					if(mediaMetadata == null)
+					{
+						artworkBitmap = null;
+					}
 
 					XposedHelpers.callMethod(param.thisObject, "finishUpdateMediaMetaData", metaDataChanged, allowEnterAnimation, artworkBitmap);
 					param.setResult(null);

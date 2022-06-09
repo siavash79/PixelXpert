@@ -12,7 +12,7 @@ import sh.siava.AOSPMods.XPrefs;
 
 public class UDFPSManager extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    public static boolean transparentBG = false;
+    private static boolean transparentBG = false;
 
     public static String UDFPS_hide_key = "fingerprint_circle_hide";
     
@@ -22,7 +22,7 @@ public class UDFPSManager extends XposedModPack {
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
-        transparentBG = XPrefs.Xprefs.getBoolean(UDFPSManager.UDFPS_hide_key, false);
+        transparentBG = XPrefs.Xprefs.getBoolean(UDFPS_hide_key, false);
     }
 
     @Override

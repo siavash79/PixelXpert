@@ -18,10 +18,10 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class KeyguardBottomArea extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    public static boolean transparentBGcolor = false;
-    public static String leftShortcut = "";
-    public static String rightShortcut = "";
+    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+    private static boolean transparentBGcolor = false;
+    private static String leftShortcut = "";
+    private static String rightShortcut = "";
     
     private ImageView mWalletButton;
     private ImageView mControlsButton;
@@ -55,9 +55,7 @@ public class KeyguardBottomArea extends XposedModPack {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
-        
 
-        
         Class<?> KeyguardbottomAreaViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
         Class<?> UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
         Class<?> CameraIntentsClass = XposedHelpers.findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
@@ -185,7 +183,6 @@ public class KeyguardBottomArea extends XposedModPack {
             Button.setVisibility(View.GONE);
         }
     }
-
 
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }

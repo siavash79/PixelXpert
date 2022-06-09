@@ -15,7 +15,7 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class KeyGuardPinScrambler extends XposedModPack {
-	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+	private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 	
 	private static boolean shufflePinEnabled = false;
 	
@@ -43,6 +43,8 @@ public class KeyGuardPinScrambler extends XposedModPack {
 		XposedBridge.hookAllMethods(KeyguardAbsKeyInputViewControllerClass, "verifyPasswordAndUnlock", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(!shufflePinEnabled) return;
+
 				Collections.shuffle(digits);
 			}
 		});
@@ -58,6 +60,5 @@ public class KeyGuardPinScrambler extends XposedModPack {
 				XposedHelpers.callMethod(mDigitText, "setText", Integer.toString((int) digits.get(mDigit)));
 			}
 		});
-	
 	}
 }

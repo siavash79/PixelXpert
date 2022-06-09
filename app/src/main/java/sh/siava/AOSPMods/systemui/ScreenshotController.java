@@ -12,9 +12,12 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class ScreenshotController extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    public static boolean disableScreenshotSound = false;
-    
+    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+
+    private static final NothingPlayer nothingPlayer = new NothingPlayer();
+
+    private static boolean disableScreenshotSound = false;
+
     public ScreenshotController(Context context) { super(context); }
     
     @Override
@@ -28,7 +31,6 @@ public class ScreenshotController extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-
         Class<?> ScreenshotControllerClass = XposedHelpers.findClass("com.android.systemui.screenshot.ScreenshotController", lpparam.classLoader);
 
         XposedBridge.hookAllConstructors(ScreenshotControllerClass, new XC_MethodHook() {
@@ -37,7 +39,7 @@ public class ScreenshotController extends XposedModPack {
                 if(!disableScreenshotSound) return;
 
                 //We can't prevent methods from playing sound! So let's break the sound player :D
-                XposedHelpers.setObjectField(param.thisObject, "mCameraSound", new NothingPlayer());
+                XposedHelpers.setObjectField(param.thisObject, "mCameraSound", nothingPlayer);
             }
         });
     }

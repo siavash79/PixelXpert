@@ -4,18 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaMetadata;
 import android.os.AsyncTask;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
 import android.util.ArraySet;
-import android.widget.ImageView;
 
-import com.google.android.renderscript.BlendingMode;
 import com.google.android.renderscript.Toolkit;
-import com.google.android.renderscript.ToolkitKt;
-
-import java.util.concurrent.ExecutionException;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -37,6 +28,7 @@ public class LockscreenAlbumArt extends XposedModPack {
 	private Object NMM;
 	private static Toolkit renderToolkit;
 	private static boolean albumArtLockScreenGrayscale = false;
+	private Bitmap artworkBitmap = null;
 
 	public LockscreenAlbumArt(Context context) {
 		super(context);
@@ -85,22 +77,32 @@ public class LockscreenAlbumArt extends XposedModPack {
 				if(!albumArtLockScreenEnabled) return;
 				try {
 					MediaMetadata mediaMetadata = (MediaMetadata) XposedHelpers.callMethod(param.thisObject, "getMediaMetadata");
-					Bitmap artworkBitmap = null;
 					Object mKeyguardBypassController = XposedHelpers.getObjectField(param.thisObject, "mKeyguardBypassController");
 					boolean byPassEnabld = (boolean) XposedHelpers.callMethod(mKeyguardBypassController, "getBypassEnabled");
-
-					if (mediaMetadata != null && !byPassEnabld) {
-						artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
-						if (artworkBitmap == null) {
-							artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
-						}
-					}
 
 					boolean metaDataChanged = (boolean) param.args[0];
 					boolean allowEnterAnimation = (boolean) param.args[1];
 
 					ArraySet<AsyncTask> mProcessArtworkTasks = (ArraySet) XposedHelpers.getObjectField(param.thisObject, "mProcessArtworkTasks");
 					if (metaDataChanged) {
+						if (mediaMetadata != null && !byPassEnabld) {
+							artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
+							if (artworkBitmap == null) {
+								artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
+							}
+						}
+						if(artworkBitmap != null)
+						{
+							if(albumArtLockScreenBlurLevel != LEVEL_BLUR_DISABLED)  // we shall never provide 0 to the blue method
+							{
+								artworkBitmap = renderToolkit.blur(artworkBitmap, Math.round(albumArtLockScreenBlurLevel));
+							}
+							if(albumArtLockScreenGrayscale)
+							{
+								artworkBitmap = renderToolkit.colorMatrix(artworkBitmap, renderToolkit.getGreyScaleColorMatrix());
+							}
+						}
+
 						for (AsyncTask<?, ?, ?> task : mProcessArtworkTasks) {
 							task.cancel(true);
 						}
@@ -108,15 +110,6 @@ public class LockscreenAlbumArt extends XposedModPack {
 					}
 
 					if(artworkBitmap == null) return; //we're not interested anymore!
-
-					if(albumArtLockScreenBlurLevel != LEVEL_BLUR_DISABLED)  // we shall never provide 0 to the blue method
-					{
-						artworkBitmap = renderToolkit.blur(artworkBitmap, Math.round(albumArtLockScreenBlurLevel));
-					}
-					if(albumArtLockScreenGrayscale)
-					{
-						artworkBitmap = renderToolkit.colorMatrix(artworkBitmap, renderToolkit.getGreyScaleColorMatrix());
-					}
 
 					XposedHelpers.callMethod(param.thisObject, "finishUpdateMediaMetaData", metaDataChanged, allowEnterAnimation, artworkBitmap);
 					param.setResult(null);

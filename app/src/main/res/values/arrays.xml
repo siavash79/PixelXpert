@@ -142,18 +142,6 @@
         <item>com.android.systemui.qstiles5r</item>
     </string-array>
 
-    <string-array name="StatusBarHeightOverlayEx_names">
-        <item>@string/overlay_none_title</item>
-        <item>@string/status_bar_height_small</item>
-        <item>@string/status_bar_height_medium</item>
-    </string-array>
-
-    <string-array name="StatusBarHeightOverlayEx">
-        <item>None</item>
-        <item>com.android.sb_height_small</item>
-        <item>com.android.sb_height_medium</item>
-    </string-array>
-
     <string-array name="NBPThicknessOverlayEx">
         <item>None</item>
         <item>com.android.systemui.overlay.thinpill</item>

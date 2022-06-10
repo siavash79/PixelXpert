@@ -49,13 +49,14 @@
             android:summaryOn="@string/general_on"
             android:title="@string/unread_messages_title" />
 
-        <ListPreference
-            android:defaultValue="None"
-            android:entries="@array/StatusBarHeightOverlayEx_names"
-            android:entryValues="@array/StatusBarHeightOverlayEx"
-            android:summary="%s"
-            android:key="StatusBarHeightOverlayEx"
-            android:title="@string/status_bar_height" />
+        <SeekBarPreference
+            android:layout_width="wrap_content"
+            android:defaultValue="100"
+            android:key="statusbarHeightFactor"
+            android:max="200"
+            android:title="@string/status_bar_height"
+            app:min="50"
+            app:updatesContinuously="true"/>
 
         <SwitchPreference
             android:defaultValue="false"

@@ -7,10 +7,12 @@ import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.allApps.overScrollDisabler;
+import sh.siava.AOSPMods.android.StatusbarSize;
 import sh.siava.AOSPMods.android.screenOffKeys;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
@@ -41,6 +43,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public Context mContext = null;
     public static boolean isSecondProcess = false;
     public static final String SYSTEM_UI_PACKAGE = "com.android.systemui";
+    public static final String SYSTEM_FRAMEWORK_PACKAGE = "android";
     
     public AOSPMods()
     {
@@ -69,6 +72,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(overScrollDisabler.class);
         modPacks.add(KeyguardCustomText.class);
         modPacks.add(FingerprintWhileDozing.class);
+        modPacks.add(StatusbarSize.class);
         //endregion
     }
     
@@ -96,6 +100,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
                     }
                     catch (Throwable T)
                     {
+                        XposedBridge.log("Start Error Dump");
                         T.printStackTrace();
                     }
                 }

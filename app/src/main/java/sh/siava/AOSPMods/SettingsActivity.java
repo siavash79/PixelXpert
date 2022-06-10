@@ -501,10 +501,14 @@ public class SettingsActivity extends AppCompatActivity implements
     public static class QuicksettingsFragment extends PreferenceFragmentCompat {
 
         SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibililty(sharedPreferences);
+        private FrameLayout pullDownIndicator;
 
+        @SuppressLint("RtlHardcoded")
         private void updateVisibililty(SharedPreferences sharedPreferences) {
             try {
                 boolean QSPullodwnEnabled = sharedPreferences.getBoolean("QSPullodwnEnabled", false);
+
+                int displayWidth =  getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
 
                 findPreference("QSPulldownPercent").setVisible(QSPullodwnEnabled);
                 findPreference("QSPulldownSide").setVisible(QSPullodwnEnabled);
@@ -518,19 +522,47 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 findPreference("network_settings_header").setVisible(sharedPreferences.getBoolean("networkOnQSEnabled", false));
 
+                pullDownIndicator.setVisibility(findPreference("QSPulldownPercent").isVisible() ? View.VISIBLE : View.GONE);
+                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) pullDownIndicator.getLayoutParams();
+                lp.width = Math.round(sharedPreferences.getInt("QSPulldownPercent", 25) * displayWidth / 100f);
+                lp.gravity = Gravity.TOP | (Integer.parseInt(sharedPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
+                pullDownIndicator.setLayoutParams(lp);
+
             } catch (Exception ignored) {
             }
 
         }
 
         @Override
+        public void onDestroy()
+        {
+            ((ViewGroup)pullDownIndicator.getParent()).removeView(pullDownIndicator);
+            super.onDestroy();
+        }
+
+        @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            createPullDownIndicator();
+
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.quicksettings_prefs, rootKey);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
             updateVisibililty(prefs);
 
             prefs.registerOnSharedPreferenceChangeListener(listener);
+        }
+
+        private void createPullDownIndicator() {
+            pullDownIndicator = new FrameLayout(getContext());
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(0, 25);
+            lp.gravity = Gravity.TOP;
+
+            pullDownIndicator.setLayoutParams(lp);
+            pullDownIndicator.setBackgroundColor(Color.RED);
+            pullDownIndicator.setAlpha(.7f);
+            pullDownIndicator.setVisibility(View.VISIBLE);
+
+            ((ViewGroup)getActivity().getWindow().getDecorView().getRootView()).addView(pullDownIndicator);
         }
     }
 

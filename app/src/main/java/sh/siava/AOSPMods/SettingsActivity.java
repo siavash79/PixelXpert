@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
@@ -7,7 +8,6 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -190,8 +190,7 @@ public class SettingsActivity extends AppCompatActivity implements
                         prefs.edit().putBoolean("NetworkStatsEnabled", true).commit();
                         Thread.sleep(100);
                         prefs.edit().putBoolean("NetworkStatsEnabled", currentStatus).apply();
-                    } catch (Exception ignored) {
-                    }
+                    } catch (Exception ignored) {}
                 })
                 .setNegativeButton(R.string.netstat_caution_no, (dialogInterface, i) -> {/*nothing happens*/})
                 .setCancelable(true)
@@ -226,8 +225,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 try {
                     PrefManager.exportPrefs(prefs,
                             getContentResolver().openOutputStream(data.getData()));
-                } catch (Exception ignored) {
-                }
+                } catch (Exception ignored) {}
                 break;
         }
     }
@@ -272,8 +270,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("gsans_override").setVisible(customFontsEnabled && !FontsOverlayExEnabled);
                 findPreference("FontsOverlayEx").setVisible(customFontsEnabled && !gSansOverride);
 
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) {}
 
         }
 
@@ -352,9 +349,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("indicateCharging").setVisible(bBarEnabled);
                 findPreference("indicateFastCharging").setVisible(bBarEnabled);
                 findPreference("batteryWarningRange").setVisible(bBarEnabled);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            } catch (Exception ignore) {}
         }
 
     }
@@ -380,8 +375,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("networkTrafficULColor").setVisible(colorful);
                 findPreference("networkTrafficInterval").setSummary(prefs.getInt("networkTrafficInterval", 1) + " second(s)");
 
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) {}
         }
     }
 
@@ -410,6 +404,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 boolean critZero = RangeBarHelper.getLowValueFromJsonString(json) == 0;
                 boolean warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
                 boolean colorful = prefs.getBoolean("BIconColorful", false);
+
                 findPreference("DualToneBatteryOverlay").setVisible(style == 0);
                 findPreference("BIconOpacity").setVisible(style > 0 && style < 99);
                 findPreference("BIconOpacity").setSummary(prefs.getInt("BIconOpacity", 100) + "%");
@@ -424,8 +419,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("BIconbatteryWarningRange").setVisible(style > 0 && style < 99);
                 findPreference("BIconbatteryCriticalColor").setVisible(style > 0 && style < 99 && (colorful || !critZero));
                 findPreference("BIconbatteryWarningColor").setVisible(style > 0 && style < 99 && (colorful || !warnZero));
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) {}
         }
     }
 
@@ -483,8 +477,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("networkTrafficPosition").setVisible(networkOnSBEnabled);
 
                 findPreference("centerAreaFineTune").setSummary((sharedPreferences.getInt("centerAreaFineTune", 50) - 50) + "%");
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) {}
         }
 
         @Override
@@ -528,9 +521,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 lp.gravity = Gravity.TOP | (Integer.parseInt(sharedPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
                 pullDownIndicator.setLayoutParams(lp);
 
-            } catch (Exception ignored) {
-            }
-
+            } catch (Exception ignored) {}
         }
 
         @Override
@@ -558,7 +549,7 @@ public class SettingsActivity extends AppCompatActivity implements
             lp.gravity = Gravity.TOP;
 
             pullDownIndicator.setLayoutParams(lp);
-            pullDownIndicator.setBackgroundColor(Color.RED);
+            pullDownIndicator.setBackgroundColor(getContext().getColor(android.R.color.system_accent1_200));
             pullDownIndicator.setAlpha(.7f);
             pullDownIndicator.setVisibility(View.VISIBLE);
 
@@ -590,8 +581,8 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("nav_pill_cat").setVisible(!HideNavbarOverlay);
                 findPreference("nav_keyboard_height_cat").setVisible(!HideNavbarOverlay);
 
-                rightGestureIndicator.setVisibility(findPreference("BackRightHeight").isVisible() ? View.VISIBLE : View.GONE);
-                leftGestureIndicator.setVisibility(findPreference("BackLeftHeight").isVisible() ? View.VISIBLE : View.GONE);
+                setVisibility(rightGestureIndicator, findPreference("BackRightHeight").isVisible(), 400);
+                setVisibility(leftGestureIndicator, findPreference("BackLeftHeight").isVisible(), 400);
 
                 int edgeHeight = Math.round(displayHeight * sharedPreferences.getInt("BackRightHeight",100)/100f);
                 ViewGroup.LayoutParams lp = rightGestureIndicator.getLayoutParams();
@@ -631,12 +622,40 @@ public class SettingsActivity extends AppCompatActivity implements
             lp.gravity = gravity | Gravity.BOTTOM;
             lp.bottomMargin = navigationBarHeight;
             result.setLayoutParams(lp);
-            result.setBackgroundColor(Color.BLACK);
-            result.setAlpha(.5f);
-            result.setVisibility(View.VISIBLE);
 
+            result.setBackgroundColor(getContext().getColor(android.R.color.system_accent1_300));
+            result.setAlpha(.7f);
             ((ViewGroup)getActivity().getWindow().getDecorView().getRootView()).addView(result);
+            result.setVisibility(View.GONE);
             return result;
+        }
+
+        private void setVisibility(View v, boolean visible, long duration)
+        {
+            if((v.getVisibility() == View.VISIBLE) == visible) return;
+
+            float basicAlpha = v.getAlpha();
+            float destAlpha = (visible) ? 1f : 0f;
+
+             if (visible) v.setAlpha(0f);
+             v.setVisibility(View.VISIBLE);
+
+            v.animate().setDuration(duration).alpha(destAlpha).setListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator){}
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    if(!visible) v.setVisibility(View.GONE);
+                    v.setAlpha(basicAlpha);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animator) {}
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {}
+            }).start();
         }
 
         @Override

@@ -7,10 +7,15 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -532,11 +537,15 @@ public class SettingsActivity extends AppCompatActivity implements
     @SuppressWarnings("ConstantConditions")
     public static class GestureNavFragment extends PreferenceFragmentCompat {
 
+        FrameLayout leftGestureIndicator, rightGestureIndicator;
+
         SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
 
         private void updateVisibility(SharedPreferences sharedPreferences) {
             try {
                 boolean HideNavbarOverlay = sharedPreferences.getBoolean("HideNavbarOverlay", false);
+
+                int displayHeight =  getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().height();
 
                 findPreference("GesPillWidthModPos").setSummary(sharedPreferences.getInt("GesPillWidthModPos", 50) * 2 + getString(R.string.pill_width_summary));
                 findPreference("GesPillHeightFactor").setSummary(sharedPreferences.getInt("GesPillHeightFactor", 100) + getString(R.string.pill_width_summary));
@@ -547,20 +556,64 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("BackRightHeight").setSummary(sharedPreferences.getInt("BackRightHeight", 100) + "%");
 
                 findPreference("nav_pill_cat").setVisible(!HideNavbarOverlay);
-                findPreference("nav_pill_color_cat").setVisible(!HideNavbarOverlay);
                 findPreference("nav_keyboard_height_cat").setVisible(!HideNavbarOverlay);
-            } catch (Exception ignored) {
-            }
+
+                rightGestureIndicator.setVisibility(findPreference("BackRightHeight").isVisible() ? View.VISIBLE : View.GONE);
+                leftGestureIndicator.setVisibility(findPreference("BackLeftHeight").isVisible() ? View.VISIBLE : View.GONE);
+
+                int edgeHeight = Math.round(displayHeight * sharedPreferences.getInt("BackRightHeight",100)/100f);
+                ViewGroup.LayoutParams lp = rightGestureIndicator.getLayoutParams();
+                lp.height = edgeHeight;
+                rightGestureIndicator.setLayoutParams(lp);
+
+                edgeHeight = Math.round(displayHeight * sharedPreferences.getInt("BackLeftHeight",100)/100f);
+                lp = leftGestureIndicator.getLayoutParams();
+                lp.height = edgeHeight;
+                leftGestureIndicator.setLayoutParams(lp);
+            } catch (Exception ignored) {}
         }
 
+        @SuppressLint("RtlHardcoded")
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            rightGestureIndicator = prepareGestureView(Gravity.RIGHT);
+            leftGestureIndicator = prepareGestureView(Gravity.LEFT);
+
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.gesture_nav_perfs, rootKey);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
             updateVisibility(prefs);
 
             prefs.registerOnSharedPreferenceChangeListener(listener);
+        }
+
+        private FrameLayout prepareGestureView(int gravity) {
+            int navigationBarHeight = 0;
+            int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                navigationBarHeight = getContext().getResources().getDimensionPixelSize(resourceId);
+            }
+
+            FrameLayout result = new FrameLayout(getContext());
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(50, 0);
+            lp.gravity = gravity | Gravity.BOTTOM;
+            lp.bottomMargin = navigationBarHeight;
+            result.setLayoutParams(lp);
+            result.setBackgroundColor(Color.BLACK);
+            result.setAlpha(.5f);
+            result.setVisibility(View.VISIBLE);
+
+            ((ViewGroup)getActivity().getWindow().getDecorView().getRootView()).addView(result);
+            return result;
+        }
+
+        @Override
+        public void onDestroy()
+        {
+            ((ViewGroup) rightGestureIndicator.getParent()).removeView(rightGestureIndicator);
+            ((ViewGroup) leftGestureIndicator.getParent()).removeView(leftGestureIndicator);
+
+            super.onDestroy();
         }
 
     }

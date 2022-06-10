@@ -1,3 +1,6 @@
+**canary-49**  
+- re-visited statusbar height  
+  
 **canary-48**  
 - Added UI indicator for QS pull-down  
 - Added UI indicator for QS pull-down  

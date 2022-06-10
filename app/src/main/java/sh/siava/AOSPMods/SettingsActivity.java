@@ -476,6 +476,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("network_settings_header").setVisible(networkOnSBEnabled);
                 findPreference("networkTrafficPosition").setVisible(networkOnSBEnabled);
 
+                findPreference("statusbarHeightFactor").setSummary(sharedPreferences.getInt("statusbarHeightFactor", 100) + "%");
                 findPreference("centerAreaFineTune").setSummary((sharedPreferences.getInt("centerAreaFineTune", 50) - 50) + "%");
             } catch (Exception ignored) {}
         }

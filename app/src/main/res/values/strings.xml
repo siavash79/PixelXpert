@@ -106,7 +106,7 @@
     <string name="dual_tone_battery_title">Enable dual tone battery meter</string>
     <string name="dual_tone_battery_on_summary">On (only works with portrait icon)</string>
     <string name="unread_messages_title">Show number of unread messages</string>
-    <string name="status_bar_height">Status bar height</string>
+    <string name="status_bar_height">Status bar height (rotate screen to apply)</string>
     <string name="status_bar_height_small">Small</string>
     <string name="status_bar_height_medium">Medium</string>
     <string name="fix_status_bar_padding">Correct left side padding</string>
@@ -200,12 +200,11 @@
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
-    <string name="so_power_longpress_torch_title">Long press Power to torch*</string>
+    <string name="so_power_longpress_torch_title">Long press Power to torch</string>
     <string name="so_taptaptorch_title">Enable Double-tap Torch</string>
     <string name="so_taptaptorch_summary">Double tap then hold lockscreen for quick torch</string>
     <string name="so_fingerprint_sensor_enabled">Allow fingerprint sensor if the screen is off</string>
 
-    <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
     <string name="so_double_tap_wake_title">Double-tap to wake phone</string>
     <string name="so_double_tap_wake_summary">Disables single-tap to wake</string>
     <string name="so_tap_proximity_wake_title">Don\'t wake on touch when screen covered</string>
@@ -213,7 +212,7 @@
     <string name="custom_themed_icons_title">Custom themed icons</string>
     <string name="custom_themed_icons_off">Custom icons disabled</string>
     <string name="custom_themed_icons_on">Custom icons enabled</string>
-    <string name="so_vol_longpress_skip">Long press Volume to skip music*</string>
+    <string name="so_vol_longpress_skip">Long press Volume to skip music</string>
     <string name="notifications_header">Notifications options</string>
     <string name="expand_notifications_icons_title">"Add expand/collapse all buttons</string>
     <string name="disable_overscroll">"Disable elastic overscroll effect</string>

@@ -10,7 +10,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Submodules/renderscript-toolkit/renderscript-toolkit" />
+            <option value="$PROJECT_DIR$/Submodules/renderscript-intrinsics-replacement-toolkit/renderscript-toolkit" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

@@ -25,7 +25,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-public class Main implements IXposedHookZygoteInit, IXposedHookLoadPackage {
+public class QuickUnlock implements IXposedHookZygoteInit, IXposedHookLoadPackage {
 
     private static final File prefFile = new File("/data/user_de/0/sh.siava.AOSPMods/shared_prefs/sh.siava.AOSPMods_preferences.xml");
     private static XSharedPreferences pref;
@@ -179,23 +179,6 @@ public class Main implements IXposedHookZygoteInit, IXposedHookLoadPackage {
                     }
                 }
             });
-
-        } else if (param.packageName.equals("com.microsoft.office.outlook")) {
-            if (pref.getBoolean("trick_OutlookPolicy", false)) {
-                findAndHookMethod("com.acompli.accore.util.OutlookDevicePolicy", param.classLoader, "requiresDeviceManagement", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
-                        param.setResult(false);
-                    }
-                });
-
-                findAndHookMethod("com.acompli.accore.util.OutlookDevicePolicy", param.classLoader, "isPolicyApplied", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
-                        param.setResult(true);
-                    }
-                });
-            }
         }
     }
 

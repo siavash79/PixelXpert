@@ -128,7 +128,6 @@ public class KeyguardCustomText extends XposedModPack {
                     KGMiddleCustomTextView.setMaxLines(2);
                     KGMiddleCustomTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     KGMiddleCustomTextView.setLetterSpacing(.03f);
-                    KGMiddleCustomTextView.setShadowLayer(1,1,1,Color.BLACK);
 
                     int padding = res.getDimensionPixelSize(
                             res.getIdentifier(
@@ -152,6 +151,7 @@ public class KeyguardCustomText extends XposedModPack {
         boolean mSupportsDarkText = XposedHelpers.getBooleanField(KGCS, "mSupportsDarkText");
         int color = (mDozing || !mSupportsDarkText) ? Color.WHITE : Color.BLACK;
 
+        KGMiddleCustomTextView.setShadowLayer(1,1,1, color == Color.BLACK ? Color.TRANSPARENT: Color.BLACK); //shadow only for white color
         KGMiddleCustomTextView.setTextColor(color);
     }
 

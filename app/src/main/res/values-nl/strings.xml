@@ -1,76 +1,76 @@
 <resources>
     <!--General strings-->
     <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
-    <string name="error_not_activated">Please confirm if the module is activated on LSPosed Manager</string>
-    <string name="hide_default">Hide (Default)</string>
-    <string name="percent_of_default_size">% of default size</string>
-    <string name="overlay_none_title">(Default)</string>
-    <string name="general_section">General options</string>
-    <string name="general_on">On</string>
-    <string name="general_off">Off</string>
-    <string name="sysui_restart_needed">Requires a SystemUI restart to apply</string>
-    <string name="restart_needed">Requires a restart to apply</string>
+    <string name="xposed_desc" translatable="false">Aangepaste functies voor op Android 12+ AOSP gebaseerde ROM's</string>
+    <string name="title_activity_settings" translatable="false">@string/app_naam</string>
+    <string name="error_not_activated">Bevestig a.u.b. of de module is geactiveerd op LSPosed Manager</string>
+    <string name="hide_default">verberg (Standaard)</string>
+    <string name="percent_of_default_size">% van standaardgrootte</string>
+    <string name="overlay_none_title">(standaard)</string>
+    <string name="general_section">Algemene optie</string>
+    <string name="general_on">Aan</string>
+    <string name="general_off">Uit</string>
+    <string name="sysui_restart_needed">Vereist een herstart van SystemUI om toe te passen</string>
+    <string name="restart_needed">Vereist een herstart om toe te passen</string>
 
     <!--Category titles-->
-    <string name="lockscreen_header_title">Lock Screen</string>
+    <string name="lockscreen_header_title">Vergrendel scherm</string>
     <string name="statusbar_header">Status Bar</string>
-    <string name="nav_header">Navigation bar</string>
-    <string name="misc_header">Miscellaneous</string>
-    <string name="qs_panel_category_title">Quick Settings Panel</string>
-    <string name="theme_customization_category">Theming</string>
+    <string name="nav_header">Navigatie bar</string>
+    <string name="misc_header">Diversen</string>
+    <string name="qs_panel_category_title">Paneel Snelle instellingen</string>
+    <string name="theme_customization_category">Thema's</string>
 
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Hide under-display fingerprint circle</string>
-    <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
-    <string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
-    <string name="carrier_text_category">Carrier text</string>
-    <string name="custom_text_category">Custom text on Lockscreen</string>
-    <string name="configure_carrier_text">Configure carrier text - Top of the screen</string>
-    <string name="carrier_text_mod_disabled">Carrier text unchanged</string>
-    <string name="carrier_text_mod_enabled">Custom carrier text</string>
-    <string name="carrier_text_value">Custom carrier text</string>
-    <string name="lockscreen_center_text_value">Clock area custom text</string>
+    <string name="transparent_fingerprint_circle">Vingerafdrukcirkel onder het scherm verbergen</string>
+    <string name="transparent_fingerprint_circle_off">Cirkel rond vingerafdrukpictogram is actief</string>
+    <string name="transparent_fingerprint_circle_on">Cirkel rond vingerafdrukpictogram wordt verborgen</string>
+    <string name="carrier_text_category">Vervoerder tekst</string>
+    <string name="custom_text_category">Aangepaste tekst op Lockscreen</string>
+    <string name="configure_carrier_text">Dragertekst configureren - Bovenaan het scherm</string>
+    <string name="carrier_text_mod_disabled">Vervoerder tekst ongewijzigd</string>
+    <string name="carrier_text_mod_enabled">Aangepaste koerierstekst</string>
+    <string name="carrier_text_value">Aangepaste koerierstekst</string>
+    <string name="lockscreen_center_text_value">Aangepaste tekst klokgebied</string>
     <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
-    <string name="keyguard_bottom_category">Bottom area shortcuts</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Hide circle around icons</string>
-    <string name="keyguard_bottom_force_camera_title">Show camera shortcut</string>
+    <string name="keyguard_bottom_category">Sneltoetsen in het onderste gebied</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Verberg cirkel rond pictogrammen</string>
+    <string name="keyguard_bottom_force_camera_title">Camerasnelkoppeling weergeven</string>
     <string name="keyguard_left_shortcut">Show left shortcut on lock screen</string>
-    <string name="LSleftShortcutTitle">Left shortcut</string>
-    <string name="LSrightShortcutTitle">Right shortcut</string>
+    <string name="LSleftShortcutTitle">Snelkoppeling naar links</string>
+    <string name="LSrightShortcutTitle">Sneltoets rechts</string>
     <string name="camera_shortcut">Camera</string>
-    <string name="assistant_shortcut">Assistant</string>
-    <string name="torch_shortcut">Flashlight</string>
-    <string name="album_art_category">Media options</string>
-    <string name="album_art_title">Enable album art when playing media</string>
-    <string name="album_art_blur_text">Blur value</string>
-    <string name="album_art_grayscale">Grayscale</string>
-    <string name="shufflePin_title">Shuffle Pin</string>
+    <string name="assistant_shortcut">Assistent</string>
+    <string name="torch_shortcut">Zaklamp</string>
+    <string name="album_art_category">Media-opties</string>
+    <string name="album_art_title">Albumhoezen inschakelen bij het afspelen van media</string>
+    <string name="album_art_blur_text">Vervagingswaarde</string>
+    <string name="album_art_grayscale">grijswaarden</string>
+    <string name="shufflePin_title">Shuffle-pin</string>
 
     <!--Status bar related-->
-    <string name="double_tap_sleep_title">Double tap to sleep</string>
-    <string name="double_tap_sleep_off">"Double tap won't turn off the display"</string>
-    <string name="double_tap_sleep_on">Double tap on status bar, or lock screen, turns the display off</string>
-    <string name="battery_style_title">Choose a battery style</string>
-    <string name="battery_show_percent_title">Show battery percentage</string>
-    <string name="battery_style_category_title">Battery style</string>
+    <string name="double_tap_sleep_title">Dubbeltik om te slapen</string>
+    <string name="double_tap_sleep_off">"Dubbeltik schakelt het scherm niet uit"</string>
+    <string name="double_tap_sleep_on">Dubbeltik op de statusbalk of het vergrendelscherm om het scherm uit te schakelen</string>
+    <string name="battery_style_title">Kies een batterijstijl</string>
+    <string name="battery_show_percent_title">Toon batterijpercentage</string>
+    <string name="battery_style_category_title">Batterijstijl</string>
     <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
-    <string name="battery_icon_size_title">Battery icon size</string>
+    <string name="battery_icon_size_title">Grootte batterijpictogram</string>
     <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
-    <string name="battery_hidden">Hidden</string>
-    <string name="BIcon_Opacity_title">Opacity</string>
-    <string name="sb_center_fine_tune">Fine-tune center area</string>
+    <string name="battery_hidden">Verborgen</string>
+    <string name="BIcon_Opacity_title">dekking</string>
+    <string name="sb_center_fine_tune">Middengebied fijn afstellen</string>
 
-    <string name="lte_4g_icon_title">LTE / 4G Icon</string>
-    <string name="combined_signal_icon_title">Combined signal icons</string>
-    <string name="volte_icon_title">Show VoLTE icon when available</string>
-    <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
-    <string name="sbc_position_title">Clock position</string>
-    <string name="sbc_ampm_style">AM/PM Style</string>
-    <string name="sbc_show_secs">Show seconds</string>
-    <string name="sbc_date_cat">Date options</string>
-    <string name="sbc_day_of_week_options">Show day of week with clock</string>
+    <string name="lte_4g_icon_title">LTE / 4G Icoon</string>
+    <string name="combined_signal_icon_title">Gecombineerde signaalpictogrammen</string>
+    <string name="volte_icon_title">Toon VoLTE-pictogram indien beschikbaar</string>
+    <string name="sb_vibration_switch_title">Pictogrammen Trillen/Stil tonen</string>
+    <string name="sbc_position_title">Klok positie</string>
+    <string name="sbc_ampm_style">AM/PM Stijl</string>
+    <string name="sbc_show_secs">Toon secondes</string>
+    <string name="sbc_date_cat">Data optie</string>
+    <string name="sbc_day_of_week_options">Dag van de week weergeven met klok</string>
     <string name="sbc_advanced_cat">Advanced (will supersede above setting!)</string>
     <string name="sbc_advanced_sum">Please read Java date format documentation</string>
     <string name="sbc_custom_date_before">Custom text before clock</string>

@@ -1,3 +1,6 @@
+**canary-51**  
+- Added placement options for multi-row statusbar icons  
+  
 **canary-50**  
 - Added option for multi-row system icons in statusbar  
   

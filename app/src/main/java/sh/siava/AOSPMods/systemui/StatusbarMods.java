@@ -45,7 +45,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
-import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.Utils.NetworkTraffic;
 import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.Utils.SystemUtils;
@@ -160,7 +159,7 @@ public class StatusbarMods extends XposedModPack {
         
         centerAreaFineTune = XPrefs.Xprefs.getInt("centerAreaFineTune", 50);
         tuneCenterArea();
-        
+
         //region BatteryBar Settings
         BBarEnabled = XPrefs.Xprefs.getBoolean("BBarEnabled", false);
         BBarColorful = XPrefs.Xprefs.getBoolean("BBarColorful", false);
@@ -537,7 +536,6 @@ public class StatusbarMods extends XposedModPack {
                     }
                 });
 
-
         //modding clock, adding additional objects,
         XposedHelpers.findAndHookMethod(CollapsedStatusBarFragmentClass,
                 "onViewCreated", View.class, Bundle.class, new XC_MethodHook() {
@@ -545,7 +543,7 @@ public class StatusbarMods extends XposedModPack {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 
                         mStatusBarIconController = XposedHelpers.getObjectField(param.thisObject, "mStatusBarIconController");
-                        
+
                         mNotificationIconAreaInner = (View) XposedHelpers.getObjectField(param.thisObject, "mNotificationIconAreaInner");
                         
                         try
@@ -562,7 +560,7 @@ public class StatusbarMods extends XposedModPack {
     
                         mCenteredIconArea = (View) XposedHelpers.getObjectField(param.thisObject, "mCenteredIconArea");
                         mSystemIconArea = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mSystemIconArea");
-    
+
                         mStatusBar = (View) XposedHelpers.getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
                         fullStatusbar = (FrameLayout) mStatusBar.getParent();
 

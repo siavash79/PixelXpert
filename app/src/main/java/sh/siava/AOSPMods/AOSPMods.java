@@ -35,6 +35,7 @@ import sh.siava.AOSPMods.systemui.ScreenshotController;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
 import sh.siava.AOSPMods.systemui.KeyguardCustomText;
+import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
 
 public class AOSPMods implements IXposedHookLoadPackage{
 
@@ -73,6 +74,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(KeyguardCustomText.class);
         modPacks.add(FingerprintWhileDozing.class);
         modPacks.add(StatusbarSize.class);
+        modPacks.add(MultiStatusbarRows.class);
         //endregion
     }
     

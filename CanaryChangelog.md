@@ -1,3 +1,6 @@
+**canary-50**  
+- Added option for multi-row system icons in statusbar  
+  
 **canary-49**  
 - re-visited statusbar height  
   

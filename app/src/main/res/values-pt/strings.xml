@@ -278,4 +278,5 @@
     <string name="album_art_grayscale">Escala de cinzentos</string>
     <string name="gesture_nav_pill_height_title">Espessura em comparação com a padrão</string>
     <string name="so_fingerprint_sensor_enabled">Permitir sensor de impressão digital com o ecrã desligado</string>
+    <string name="qs_footer_text_value">Insira um texto personalizado (deixe em branco para remover o existente)</string>
 </resources>

@@ -478,6 +478,8 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 findPreference("statusbarHeightFactor").setSummary(sharedPreferences.getInt("statusbarHeightFactor", 100) + "%");
                 findPreference("centerAreaFineTune").setSummary((sharedPreferences.getInt("centerAreaFineTune", 50) - 50) + "%");
+
+                findPreference("systemIconSortPlan").setVisible(sharedPreferences.getBoolean("systemIconsMultiRow", false));
             } catch (Exception ignored) {}
         }
 

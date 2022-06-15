@@ -62,6 +62,9 @@
     <string name="BIcon_Opacity_title">Opacity</string>
     <string name="sb_center_fine_tune">Fine-tune center area</string>
     <string name="sb_multi_row_system_icons">Multi-row system icons (needs higher statusbar height)</string>
+    <string name="sb_icon_sort_mode">Icon placement method</string>
+    <string name="sort_clean">Sort in a grid</string>
+    <string name="sort_tight">Fit maximum items</string>
 
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
     <string name="combined_signal_icon_title">Combined signal icons</string>

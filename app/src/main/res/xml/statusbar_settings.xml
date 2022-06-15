@@ -65,6 +65,14 @@
             android:summaryOn="@string/general_on"
             android:title="@string/sb_multi_row_system_icons" />
 
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/sb_icon_sort_names"
+            android:entryValues="@array/sb_icon_sort_codes"
+            android:summary="%s"
+            android:key="systemIconSortPlan"
+            android:title="@string/sb_icon_sort_mode" />
+
         <SwitchPreference
             android:defaultValue="false"
             android:key="FixSBLeftPadddingOverlay"

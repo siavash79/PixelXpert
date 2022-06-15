@@ -33,6 +33,7 @@ public class MultiStatusbarRows extends XposedModPack {
             SystemUtils.RestartSystemUI();
         }
         systemIconsMultiRow = XPrefs.Xprefs.getBoolean("systemIconsMultiRow", false);
+        FlexStatusIconContainer.setSortPlan(Integer.parseInt(XPrefs.Xprefs.getString("systemIconSortPlan", String.valueOf(FlexStatusIconContainer.SORT_CLEAN))));
     }
 
     @Override

@@ -93,6 +93,16 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="sb_icon_sort_names">
+        <item>@string/sort_clean</item>
+        <item>@string/sort_tight</item>
+    </string-array>
+
+    <string-array name="sb_icon_sort_codes">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
     <string-array name="network_sb_locations">
         <item>@string/ntsb_far_left</item>
         <item>@string/ntsb_mid_left</item>

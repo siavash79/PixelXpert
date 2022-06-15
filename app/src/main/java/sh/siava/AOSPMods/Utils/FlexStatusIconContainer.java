@@ -29,6 +29,10 @@ public class FlexStatusIconContainer extends LinearLayout {
     public static final int STATE_DOT = 1;
     public static final int STATE_HIDDEN = 2;
 
+    public static final int SORT_CLEAN = 0;
+    public static final int SORT_TIGHT = 1;
+
+
     private static final String TAG = "StatusIconContainer";
     private static final boolean DEBUG_OVERFLOW = false;
     // Max 8 status icons including battery
@@ -47,6 +51,12 @@ public class FlexStatusIconContainer extends LinearLayout {
     private final List<Integer> mMaxWidths = new ArrayList<>(), mMaxHeights = new ArrayList<>();
     private int mTotalRows;
     private View mDotIcon = null;
+    private static int sortPlan = SORT_CLEAN;
+
+    public static void setSortPlan(int plan)
+    {
+        sortPlan = plan;
+    }
 
     public FlexStatusIconContainer(Context context, ClassLoader classLoader) {
         this(context, null, classLoader);
@@ -146,7 +156,7 @@ public class FlexStatusIconContainer extends LinearLayout {
             int totalWidthNeeded = paddings;
             int totalIconCapacity;
 
-            for(int i = getChildCount() -1; i >= 0; i--)
+            for(int i = getChildCount() - 1; i >= 0; i--)
             {
                 View icon = getChildAt(i);
 
@@ -187,7 +197,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 
                     int iconsPerRow = MAX_ROW_ICONS;
 
-                    if(mTotalRows == 1) {
+                    if(mTotalRows == 1 || sortPlan == SORT_TIGHT) {
                         totalWidthNeeded += iconWidth + mIconSpacing;
                     }
                     else
@@ -214,6 +224,7 @@ public class FlexStatusIconContainer extends LinearLayout {
                             i++;
                             mTotalRows++;
                             availableRows--;
+                            totalWidthNeeded = paddings;
                             break;
                         }
                         else
@@ -334,13 +345,18 @@ public class FlexStatusIconContainer extends LinearLayout {
     * Layout is happening from end -> start
     */
     private void calculateIconTranslations() {
+        XposedBridge.log("total row " + mTotalRows);
+        XposedBridge.log("underflow " + (mDotIcon != null));
+
         try {
+            XposedBridge.log("total icons " + mMeasureViews.size());
+
             int iconCount = mMeasureViews.size();
 
             float width = getWidth();
 
             int iconFixedWidth = 0;
-            if (mTotalRows > 1) {
+            if (mTotalRows > 1 && sortPlan == SORT_CLEAN) {
                 iconFixedWidth = mMaxWidths.get(iconCount - 1);
             }
 
@@ -364,7 +380,8 @@ public class FlexStatusIconContainer extends LinearLayout {
                 int iconWidth = (icon == mDotIcon) ? mIconDotFrameWidth : getViewTotalMeasuredWidth(icon);
 
                 if (mTotalRows > 1) {
-                    translationX -= iconFixedWidth;
+                    translationX -= (sortPlan == SORT_CLEAN) ? iconFixedWidth : iconWidth;
+
                     if (translationX < 0) {
                         currentRow++;
                         translationX = XEndPoint;
@@ -373,7 +390,9 @@ public class FlexStatusIconContainer extends LinearLayout {
                         continue;
                     }
 
-                    float iconTranslationX = translationX + ((iconFixedWidth - iconWidth) / 2f);
+                    float iconTranslationX =  sortPlan == SORT_CLEAN ?
+                            translationX + ((iconFixedWidth - iconWidth) / 2f) :
+                            translationX;
 
                     //icontop = topXline + (lineheight-iconheight)/2
                     int iconTranslationY = Math.round(rowTop + (mMaxHeights.get(iconCount - 1) - icon.getMeasuredHeight()) / 2f);

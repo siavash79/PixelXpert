@@ -1,3 +1,6 @@
+**canary-52**  
+- Fixed stausbar size reduction problem for devices with camera cutout  
+  
 **canary-51**  
 - Added placement options for multi-row statusbar icons  
   

@@ -5,6 +5,8 @@ import static de.robv.android.xposed.XposedBridge.*;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Insets;
+import android.graphics.Rect;
 import android.view.DisplayCutout;
 
 import java.util.ArrayList;
@@ -57,17 +59,24 @@ public class StatusbarSize extends XposedModPack {
         try
         {
             Class<?> SystemBarUtilsClass = findClass("com.android.internal.policy.SystemBarUtils", lpparam.classLoader);
-            Class<?> WmDisplayCutoutClass = findClass("com.android.server.wm.utils.WmDisplayCutout", lpparam.classLoader);
-            Class<?> DisplayCutoutClass = findClass("android.view.DisplayCutout", lpparam.classLoader);
 
-            Object NO_CUTOUT = getStaticObjectField(DisplayCutoutClass, "NO_CUTOUT");
-            hookAllMethods(WmDisplayCutoutClass, "getDisplayCutout", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if(sizeFactor >= 100) return;
-                    param.setResult(NO_CUTOUT);
-                }
-            });
+            try {
+                Class<?> WmDisplayCutoutClass = findClass("com.android.server.wm.utils.WmDisplayCutout", lpparam.classLoader);
+                Class<?> DisplayCutoutClass = findClass("android.view.DisplayCutout", lpparam.classLoader);
+
+
+                Object NO_CUTOUT = getStaticObjectField(DisplayCutoutClass, "NO_CUTOUT");
+                hookAllMethods(WmDisplayCutoutClass, "getDisplayCutout", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (sizeFactor >= 100 || param.getResult() != NO_CUTOUT) return;
+                        ((Rect) getObjectField(
+                                param.getResult(),
+                                "mSafeInsets")
+                        ).top = currentHeight;
+                    }
+                });
+            }catch (Throwable ignored){}
 
             XC_MethodHook resizedResultHook = new XC_MethodHook() {
                 @Override
@@ -82,7 +91,7 @@ public class StatusbarSize extends XposedModPack {
             try {
                 hookAllMethods(SystemBarUtilsClass, "getStatusBarHeightForRotation", resizedResultHook);
                 findAndHookMethod(SystemBarUtilsClass, "getStatusBarHeight", Resources.class, DisplayCutout.class, resizedResultHook);
-            }catch (Throwable ignored){log("siapo err"); ignored.printStackTrace();}
+            }catch (Throwable ignored){}
         } catch (Throwable ignored){}
     }
 }

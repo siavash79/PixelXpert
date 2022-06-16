@@ -1,3 +1,6 @@
+**canary-53**  
+- Fixed canary-52!  
+  
 **canary-52**  
 - Fixed stausbar size reduction problem for devices with camera cutout  
   

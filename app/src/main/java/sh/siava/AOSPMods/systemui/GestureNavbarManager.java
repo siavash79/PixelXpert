@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -81,9 +84,9 @@ public class GestureNavbarManager extends XposedModPack {
     private void refreshNavbar() {
         try
         {
-            XposedHelpers.callMethod(mNavigationBarInflaterView, "clearViews");
-            Object defaultLayout = XposedHelpers.callMethod(mNavigationBarInflaterView, "getDefaultLayout");
-            XposedHelpers.callMethod(mNavigationBarInflaterView, "inflateLayout", defaultLayout);
+            callMethod(mNavigationBarInflaterView, "clearViews");
+            Object defaultLayout = callMethod(mNavigationBarInflaterView, "getDefaultLayout");
+            callMethod(mNavigationBarInflaterView, "inflateLayout", defaultLayout);
         }catch (Throwable ignored){}
     }
     //endregion
@@ -92,16 +95,16 @@ public class GestureNavbarManager extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Class<?> NavigationBarInflaterViewClass = XposedHelpers.findClass("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader);
-        Class<?> NavigationHandleClass = XposedHelpers.findClass("com.android.systemui.navigationbar.gestural.NavigationHandle", lpparam.classLoader);
-        Class<?> EdgeBackGestureHandlerClass = XposedHelpers.findClass("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader);
+        Class<?> NavigationBarInflaterViewClass = findClass("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader);
+        Class<?> NavigationHandleClass = findClass("com.android.systemui.navigationbar.gestural.NavigationHandle", lpparam.classLoader);
+        Class<?> EdgeBackGestureHandlerClass = findClass("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader);
 
         //region Back gesture
-        XposedBridge.hookAllMethods(EdgeBackGestureHandlerClass,
+        hookAllMethods(EdgeBackGestureHandlerClass,
                 "isWithinInsets", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        Point mDisplaySize = (Point) XposedHelpers.getObjectField(param.thisObject, "mDisplaySize");
+                        Point mDisplaySize = (Point) getObjectField(param.thisObject, "mDisplaySize");
                         boolean isLeftSide = (int)(int) param.args[0] < (mDisplaySize.x/3);
                         if((isLeftSide && !leftEnabled)
                                 || (!isLeftSide && !rightEnabled))
@@ -116,7 +119,7 @@ public class GestureNavbarManager extends XposedModPack {
 
                         if (mEdgeHeight != 0
                                 && (int) param.args[1] < (mDisplaySize.y
-                                - (float) XposedHelpers.getObjectField(param.thisObject, "mBottomGestureHeight")
+                                - (float) getObjectField(param.thisObject, "mBottomGestureHeight")
                                 - mEdgeHeight)
                         ) {
                             param.setResult(false);
@@ -126,45 +129,45 @@ public class GestureNavbarManager extends XposedModPack {
         //endregion
 
         //region pill color
-        XposedBridge.hookAllConstructors(NavigationHandleClass, new XC_MethodHook() {
+        hookAllConstructors(NavigationHandleClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 //Let's remember the original colors
-                mLightColor = XposedHelpers.getIntField(param.thisObject, "mLightColor");
-                mDarkColor = XposedHelpers.getIntField(param.thisObject, "mDarkColor");
+                mLightColor = getIntField(param.thisObject, "mLightColor");
+                mDarkColor = getIntField(param.thisObject, "mDarkColor");
             }
         });
 
-        XposedBridge.hookAllMethods(NavigationHandleClass, "setDarkIntensity", new XC_MethodHook() {
+        hookAllMethods(NavigationHandleClass, "setDarkIntensity", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                XposedHelpers.setObjectField(param.thisObject, "mLightColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_200, mContext.getTheme()) : mLightColor);
-                XposedHelpers.setObjectField(param.thisObject, "mDarkColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_600, mContext.getTheme()) : mDarkColor);
+                setObjectField(param.thisObject, "mLightColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_200, mContext.getTheme()) : mLightColor);
+                setObjectField(param.thisObject, "mDarkColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_600, mContext.getTheme()) : mDarkColor);
             }
         });
         //endregion
 
         //region pill size
-        XposedBridge.hookAllMethods(NavigationHandleClass,
+        hookAllMethods(NavigationHandleClass,
                 "onDraw", new XC_MethodHook() {
                     int mRadius = 0;
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if(GesPillHeightFactor != 100) {
-                            mRadius = XposedHelpers.getIntField(param.thisObject, "mRadius");
-                            XposedHelpers.setObjectField(param.thisObject, "mRadius", Math.round(mRadius * GesPillHeightFactor / 100f));
+                            mRadius = getIntField(param.thisObject, "mRadius");
+                            setObjectField(param.thisObject, "mRadius", Math.round(mRadius * GesPillHeightFactor / 100f));
                         }
                     }
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(mRadius > 0) {
-                            XposedHelpers.setObjectField(param.thisObject, "mRadius", mRadius);
+                            setObjectField(param.thisObject, "mRadius", mRadius);
                         }
                     }
                 });
 
 
-        XposedBridge.hookAllConstructors(NavigationBarInflaterViewClass, new XC_MethodHook() {
+        hookAllConstructors(NavigationBarInflaterViewClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 mNavigationBarInflaterView = param.thisObject;
@@ -172,12 +175,12 @@ public class GestureNavbarManager extends XposedModPack {
             }
         });
 
-        XposedBridge.hookAllMethods(NavigationBarInflaterViewClass,
+        hookAllMethods(NavigationBarInflaterViewClass,
                 "createView", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(widthFactor != 1f) {
-                            String button = (String) XposedHelpers.callMethod(param.thisObject, "extractButton", param.args[0]);
+                            String button = (String) callMethod(param.thisObject, "extractButton", param.args[0]);
                             if (!button.equals("home_handle")) return;
 
                             View result = (View) param.getResult();

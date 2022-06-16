@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.Utils;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.DownloadManager;
@@ -141,7 +144,7 @@ public class SystemUtils{
 		if(instance == null) return;
 
 		try {
-			XposedHelpers.callMethod(instance.mPowerManager, "goToSleep", SystemClock.uptimeMillis());
+			callMethod(instance.mPowerManager, "goToSleep", SystemClock.uptimeMillis());
 		} catch (Throwable ignored){}
 	}
 
@@ -159,7 +162,7 @@ public class SystemUtils{
 		{
 			if(BuildConfig.DEBUG)
 			{
-				XposedBridge.log("AOSPMods: Failed to Register flash callback");
+				log("AOSPMods: Failed to Register flash callback");
 				t.printStackTrace();
 			}
 		}
@@ -172,7 +175,7 @@ public class SystemUtils{
 		{
 			if(BuildConfig.DEBUG)
 			{
-				XposedBridge.log("AOSPMods Error getting audio manager");
+				log("AOSPMods Error getting audio manager");
 				t.printStackTrace();
 			}
 		}
@@ -186,7 +189,7 @@ public class SystemUtils{
 		{
 			if(BuildConfig.DEBUG)
 			{
-				XposedBridge.log("AOSPMods Error getting connection manager");
+				log("AOSPMods Error getting connection manager");
 				t.printStackTrace();
 			}
 		}
@@ -199,7 +202,7 @@ public class SystemUtils{
 		{
 			if(BuildConfig.DEBUG)
 			{
-				XposedBridge.log("AOSPMods Error getting power manager");
+				log("AOSPMods Error getting power manager");
 				t.printStackTrace();
 			}
 		}
@@ -212,7 +215,7 @@ public class SystemUtils{
 		{
 			if(BuildConfig.DEBUG)
 			{
-				XposedBridge.log("AOSPMods Error getting telephoney manager");
+				log("AOSPMods Error getting telephoney manager");
 				t.printStackTrace();
 			}
 		}
@@ -225,7 +228,7 @@ public class SystemUtils{
 		{
 			if(BuildConfig.DEBUG)
 			{
-				XposedBridge.log("AOSPMods Error getting alarm manager");
+				log("AOSPMods Error getting alarm manager");
 				t.printStackTrace();
 			}
 		}
@@ -239,7 +242,7 @@ public class SystemUtils{
 		{
 			if(BuildConfig.DEBUG)
 			{
-				XposedBridge.log("AOSPMods Error getting vibrator");
+				log("AOSPMods Error getting vibrator");
 				t.printStackTrace();
 			}
 		}
@@ -258,7 +261,7 @@ public class SystemUtils{
 		{
 			if(BuildConfig.DEBUG)
 			{
-				XposedBridge.log("AOSPMods Error in setting flashlight");
+				log("AOSPMods Error in setting flashlight");
 				t.printStackTrace();
 			}
 		}

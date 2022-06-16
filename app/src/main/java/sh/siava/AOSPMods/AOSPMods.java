@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.app.Instrumentation;
 import android.content.Context;
 
@@ -84,7 +87,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
         //        Helpers.dumpClass("android.app.Instrumentation", lpparam);
     
-        XposedHelpers.findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
+        findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if (mContext == null) setContext((Context) param.args[2]);
@@ -102,7 +105,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
                     }
                     catch (Throwable T)
                     {
-                        XposedBridge.log("Start Error Dump");
+                        log("Start Error Dump");
                         T.printStackTrace();
                     }
                 }

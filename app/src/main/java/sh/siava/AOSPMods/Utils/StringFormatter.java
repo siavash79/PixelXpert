@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.Utils;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.graphics.Color;
@@ -76,7 +79,7 @@ public class StringFormatter {
         catch (Throwable t){
             if(BuildConfig.DEBUG)
             {
-                XposedBridge.log("Error setting formatted string update schedule");
+                log("Error setting formatted string update schedule");
                 t.printStackTrace();
             }
         }

@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.android;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.DisplayCutout;
@@ -53,7 +56,7 @@ public class StatusbarSize extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         try
         {
-            Class<?> SystemBarUtilsClass = XposedHelpers.findClass("com.android.internal.policy.SystemBarUtils", lpparam.classLoader);
+            Class<?> SystemBarUtilsClass = findClass("com.android.internal.policy.SystemBarUtils", lpparam.classLoader);
 
             XC_MethodHook resizedResultHook = new XC_MethodHook() {
                 @Override
@@ -66,8 +69,8 @@ public class StatusbarSize extends XposedModPack {
             };
 
             try {
-                XposedBridge.hookAllMethods(SystemBarUtilsClass, "getStatusBarHeightForRotation", resizedResultHook);
-                XposedHelpers.findAndHookMethod(SystemBarUtilsClass, "getStatusBarHeight", Resources.class, DisplayCutout.class, resizedResultHook);
+                hookAllMethods(SystemBarUtilsClass, "getStatusBarHeightForRotation", resizedResultHook);
+                findAndHookMethod(SystemBarUtilsClass, "getStatusBarHeight", Resources.class, DisplayCutout.class, resizedResultHook);
             }catch (Throwable ignored){}
         } catch (Throwable ignored){}
     }

@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -30,31 +33,31 @@ public class FingerprintWhileDozing extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Class<?> KeyguardUpdateMonitorClass = XposedHelpers.findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
+        Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
 
-        XposedBridge.hookAllMethods(KeyguardUpdateMonitorClass,
+        hookAllMethods(KeyguardUpdateMonitorClass,
                 "shouldListenForFingerprint", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(fingerprintWhileDozing) return;
                         boolean currentResult = (boolean) param.getResult();
-                        XposedBridge.log("current: " + currentResult);
+                        log("current: " + currentResult);
                         if(currentResult)
                         {
-                            boolean userDoesNotHaveTrust = !(boolean) XposedHelpers.callMethod(param.thisObject,
+                            boolean userDoesNotHaveTrust = !(boolean) callMethod(param.thisObject,
                                     "getUserHasTrust",
-                                    XposedHelpers.callMethod(param.thisObject, "getCurrentUser"));
+                                    callMethod(param.thisObject, "getCurrentUser"));
 
                             boolean shouldlisten2 =
-                                    (XposedHelpers.getBooleanField(param.thisObject,"mKeyguardIsVisible")
-                                        || XposedHelpers.getBooleanField(param.thisObject,"mBouncer")
-                                        || (boolean) XposedHelpers.callMethod(param.thisObject, "shouldListenForFingerprintAssistant")
-                                        || (XposedHelpers.getBooleanField(param.thisObject,"mKeyguardOccluded") && XposedHelpers.getBooleanField(param.thisObject,"mIsDreaming")))
-                                        && XposedHelpers.getBooleanField(param.thisObject,"mDeviceInteractive") && !XposedHelpers.getBooleanField(param.thisObject,"mGoingToSleep") && !XposedHelpers.getBooleanField(param.thisObject,"mKeyguardGoingAway")
-                                        || (XposedHelpers.getBooleanField(param.thisObject,"mKeyguardOccluded") && userDoesNotHaveTrust
-                                            && (XposedHelpers.getBooleanField(param.thisObject,"mOccludingAppRequestingFp") || (boolean)param.args[0]));
+                                    (getBooleanField(param.thisObject,"mKeyguardIsVisible")
+                                        || getBooleanField(param.thisObject,"mBouncer")
+                                        || (boolean) callMethod(param.thisObject, "shouldListenForFingerprintAssistant")
+                                        || (getBooleanField(param.thisObject,"mKeyguardOccluded") && getBooleanField(param.thisObject,"mIsDreaming")))
+                                        && getBooleanField(param.thisObject,"mDeviceInteractive") && !getBooleanField(param.thisObject,"mGoingToSleep") && !getBooleanField(param.thisObject,"mKeyguardGoingAway")
+                                        || (getBooleanField(param.thisObject,"mKeyguardOccluded") && userDoesNotHaveTrust
+                                            && (getBooleanField(param.thisObject,"mOccludingAppRequestingFp") || (boolean)param.args[0]));
 
-                            XposedBridge.log("should2: " + shouldlisten2);
+                            log("should2: " + shouldlisten2);
 
                             param.setResult(shouldlisten2);
                         }

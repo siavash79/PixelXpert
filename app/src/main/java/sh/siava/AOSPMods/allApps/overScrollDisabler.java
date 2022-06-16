@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.allApps;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.view.View;
 
@@ -26,13 +29,13 @@ public class overScrollDisabler extends XposedModPack {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 	
-		Class<?> ViewClass = XposedHelpers.findClass("android.view.View", lpparam.classLoader);
+		Class<?> ViewClass = findClass("android.view.View", lpparam.classLoader);
 		
-		XposedBridge.hookAllMethods(ViewClass, "setOverScrollMode", new XC_MethodHook() {
+		hookAllMethods(ViewClass, "setOverScrollMode", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if(!disableOverScroll) return;
-				XposedHelpers.setObjectField(param.thisObject, "mOverScrollMode", View.OVER_SCROLL_NEVER);
+				setObjectField(param.thisObject, "mOverScrollMode", View.OVER_SCROLL_NEVER);
 				param.setResult(null);
 			}
 		});

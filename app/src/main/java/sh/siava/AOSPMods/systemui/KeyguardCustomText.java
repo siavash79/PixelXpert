@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -58,8 +61,8 @@ public class KeyguardCustomText extends XposedModPack {
                     else
                     {
                         try {
-                            XposedHelpers.callMethod(
-                                    XposedHelpers.getObjectField(carrierTextController, "mCarrierTextManager"),
+                            callMethod(
+                                    getObjectField(carrierTextController, "mCarrierTextManager"),
                                     "updateCarrierText");
                         }catch (Throwable ignored){} //probably not initiated yet
                     }
@@ -74,27 +77,27 @@ public class KeyguardCustomText extends XposedModPack {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
-        Class<?> CarrierTextControllerClass = XposedHelpers.findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
-        Class<?> KeyguardSliceViewClass = XposedHelpers.findClass("com.android.keyguard.KeyguardSliceView$Row", lpparam.classLoader);
-        Class<?> KeyguardClockSwitchClass = XposedHelpers.findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
+        Class<?> CarrierTextControllerClass = findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
+        Class<?> KeyguardSliceViewClass = findClass("com.android.keyguard.KeyguardSliceView$Row", lpparam.classLoader);
+        Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
 
         /* might be useful later
-        Class<?> AnimatableClockControllerClass = XposedHelpers.findClass("com.android.keyguard.AnimatableClockController", lpparam.classLoader);
-        Class<?> KeyguardClockSwitchControllerClass = XposedHelpers.findClass("com.android.keyguard.KeyguardClockSwitchController", lpparam.classLoader);
-        Class<?> DefaultClockControllerClass = XposedHelpers.findClass("com.android.keyguard.clock.DefaultClockController", lpparam.classLoader);
-        Class<?> AvailableClocksClass = XposedHelpers.findClass("com.android.keyguard.clock.ClockManager$AvailableClocks", lpparam.classLoader);*/
+        Class<?> AnimatableClockControllerClass = findClass("com.android.keyguard.AnimatableClockController", lpparam.classLoader);
+        Class<?> KeyguardClockSwitchControllerClass = findClass("com.android.keyguard.KeyguardClockSwitchController", lpparam.classLoader);
+        Class<?> DefaultClockControllerClass = findClass("com.android.keyguard.clock.DefaultClockController", lpparam.classLoader);
+        Class<?> AvailableClocksClass = findClass("com.android.keyguard.clock.ClockManager$AvailableClocks", lpparam.classLoader);*/
 
         stringFormatter.registerCallback(() -> { setMiddleText(); setCarrierText();});
 
         Resources res = mContext.getResources();
 
-        XposedBridge.hookAllConstructors(CarrierTextControllerClass, new XC_MethodHook() {
+        hookAllConstructors(CarrierTextControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 carrierTextController = param.thisObject;
-                Object carrierTextCallback = XposedHelpers.getObjectField(carrierTextController, "mCarrierTextCallback");
+                Object carrierTextCallback = getObjectField(carrierTextController, "mCarrierTextCallback");
 
-                XposedBridge.hookAllMethods(carrierTextCallback.getClass(),
+                hookAllMethods(carrierTextCallback.getClass(),
                         "updateCarrierInfo", new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -107,7 +110,7 @@ public class KeyguardCustomText extends XposedModPack {
             }
         });
 
-        XposedBridge.hookAllMethods(KeyguardSliceViewClass, "setDarkAmount", new XC_MethodHook() {
+        hookAllMethods(KeyguardSliceViewClass, "setDarkAmount", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 boolean isDozing = ((float) param.args[0]) > .5f;
@@ -119,7 +122,7 @@ public class KeyguardCustomText extends XposedModPack {
             }
         });
 
-        XposedBridge.hookAllMethods(KeyguardClockSwitchClass, "onFinishInflate", new XC_MethodHook() {
+        hookAllMethods(KeyguardClockSwitchClass, "onFinishInflate", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 try {
@@ -137,7 +140,7 @@ public class KeyguardCustomText extends XposedModPack {
 
                     KGMiddleCustomTextView.setPadding(padding, 0, padding, 0);
 
-                    mStatusArea = ((LinearLayout)XposedHelpers.getObjectField(param.thisObject,"mStatusArea"));
+                    mStatusArea = ((LinearLayout)getObjectField(param.thisObject,"mStatusArea"));
 
                     setMiddleText();
                     setMiddleColor();
@@ -148,7 +151,7 @@ public class KeyguardCustomText extends XposedModPack {
     }
 
     private void setMiddleColor() {
-        boolean mSupportsDarkText = XposedHelpers.getBooleanField(KGCS, "mSupportsDarkText");
+        boolean mSupportsDarkText = getBooleanField(KGCS, "mSupportsDarkText");
         int color = (mDozing || !mSupportsDarkText) ? Color.WHITE : Color.BLACK;
 
         KGMiddleCustomTextView.setShadowLayer(1,1,1, color == Color.BLACK ? Color.TRANSPARENT: Color.BLACK); //shadow only for white color
@@ -157,7 +160,7 @@ public class KeyguardCustomText extends XposedModPack {
 
     private void setCarrierText() {
         try {
-            TextView mView = (TextView) XposedHelpers.getObjectField(carrierTextController, "mView");
+            TextView mView = (TextView) getObjectField(carrierTextController, "mView");
             mView.setText(stringFormatter.formatString(customCarrierText));
         } catch (Throwable ignored){} //probably not initiated yet
     }

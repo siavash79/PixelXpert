@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.widget.ImageView;
 
@@ -33,22 +36,22 @@ public class UDFPSManager extends XposedModPack {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 
-        Class<?> UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
+        Class<?> UtilClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
 
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
+        findAndHookMethod("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
                 "updateAlpha", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!transparentBG) return;
 
-                        ImageView mBgProtection = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBgProtection");
+                        ImageView mBgProtection = (ImageView) getObjectField(param.thisObject, "mBgProtection");
                         mBgProtection.setImageAlpha(0);
-//                        ImageView mLockScreenFp = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mLockScreenFp");
+//                        ImageView mLockScreenFp = (ImageView) getObjectField(param.thisObject, "mLockScreenFp");
                     }
                 });
 
-        XposedHelpers.findAndHookMethod("com.android.keyguard.LockIconView", lpparam.classLoader,
+        findAndHookMethod("com.android.keyguard.LockIconView", lpparam.classLoader,
                 "setUseBackground", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -56,21 +59,21 @@ public class UDFPSManager extends XposedModPack {
                         param.args[0] = false;
                     }
                 });
-        XposedHelpers.findAndHookMethod("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
+        findAndHookMethod("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
                 "updateColor", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if(!transparentBG) return;
 
-                        Object mLockScreenFp = XposedHelpers.getObjectField(param.thisObject, "mLockScreenFp");
+                        Object mLockScreenFp = getObjectField(param.thisObject, "mLockScreenFp");
 
 
-                        int mTextColorPrimary = (int) XposedHelpers.callStaticMethod(UtilClass, "getColorAttrDefaultColor", mContext,
+                        int mTextColorPrimary = (int) callStaticMethod(UtilClass, "getColorAttrDefaultColor", mContext,
                                 mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
 
-                        XposedHelpers.setObjectField(param.thisObject, "mTextColorPrimary", mTextColorPrimary);
+                        setObjectField(param.thisObject, "mTextColorPrimary", mTextColorPrimary);
 
-                        XposedHelpers.callMethod(mLockScreenFp, "invalidate");
+                        callMethod(mLockScreenFp, "invalidate");
                         param.setResult(null);
                     }
                 });

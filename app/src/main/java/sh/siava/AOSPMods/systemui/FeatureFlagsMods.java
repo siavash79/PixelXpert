@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.os.Build;
 
@@ -48,14 +51,14 @@ public class FeatureFlagsMods extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        XposedBridge.hookAllMethods(
-                XposedHelpers.findClass("com.android.settingslib.mobile.MobileMappings$Config", lpparam.classLoader),
+        hookAllMethods(
+                findClass("com.android.settingslib.mobile.MobileMappings$Config", lpparam.classLoader),
                 "readConfig", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(SBLTEIcon == SIGNAL_DEFAULT) return;
 
-                        XposedHelpers.setObjectField(param.getResult(),
+                        setObjectField(param.getResult(),
                                 "show4gForLte",
                                 SBLTEIcon == SIGNAL_FORCE_4G);
                     }
@@ -63,9 +66,9 @@ public class FeatureFlagsMods extends XposedModPack {
 
         if(Build.VERSION.SDK_INT < 32) return; //Feature flags is newly introduced!
 
-        Class<?> FeatureFlagsClass = XposedHelpers.findClass("com.android.systemui.flags.FeatureFlags", lpparam.classLoader);
+        Class<?> FeatureFlagsClass = findClass("com.android.systemui.flags.FeatureFlags", lpparam.classLoader);
 
-        XposedHelpers.findAndHookMethod(FeatureFlagsClass, "isCombinedStatusBarSignalIconsEnabled", new XC_MethodHook() {
+        findAndHookMethod(FeatureFlagsClass, "isCombinedStatusBarSignalIconsEnabled", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 param.setResult(combinedSignalEnabled);

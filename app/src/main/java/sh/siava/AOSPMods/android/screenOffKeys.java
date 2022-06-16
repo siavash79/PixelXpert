@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.android;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -48,10 +51,10 @@ public class screenOffKeys extends XposedModPack {
         Method interceptKeyBeforeQueueing;
 
         try {
-            PhoneWindowManager = XposedHelpers.findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
-            powerLongPress = XposedHelpers.findMethodExact(PhoneWindowManager, "powerLongPress", long.class);
-            startedWakingUp = XposedHelpers.findMethodExact(PhoneWindowManager, "startedWakingUp", int.class);
-            interceptKeyBeforeQueueing = XposedHelpers.findMethodExact(PhoneWindowManager, "interceptKeyBeforeQueueing", KeyEvent.class, int.class);
+            PhoneWindowManager = findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
+            powerLongPress = findMethodExact(PhoneWindowManager, "powerLongPress", long.class);
+            startedWakingUp = findMethodExact(PhoneWindowManager, "startedWakingUp", int.class);
+            interceptKeyBeforeQueueing = findMethodExact(PhoneWindowManager, "interceptKeyBeforeQueueing", KeyEvent.class, int.class);
 
             Runnable mVolumeLongPress = () -> {
                 try {
@@ -68,12 +71,12 @@ public class screenOffKeys extends XposedModPack {
                 } catch (Throwable ignored) {}
             };
 
-            XposedBridge.hookMethod(interceptKeyBeforeQueueing, new XC_MethodHook() {
+            hookMethod(interceptKeyBeforeQueueing, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (!holdVolumeToSkip) return;
                     try {
-                        Handler mHandler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
+                        Handler mHandler = (Handler) getObjectField(param.thisObject, "mHandler");
 
                         KeyEvent e = (KeyEvent) param.args[0];
                         int Keycode = e.getKeyCode();
@@ -95,7 +98,7 @@ public class screenOffKeys extends XposedModPack {
                 }
             });
 
-            XposedBridge.hookMethod(startedWakingUp, new XC_MethodHook() {
+            hookMethod(startedWakingUp, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (!replaceAssistantwithTorch) return;
@@ -108,14 +111,14 @@ public class screenOffKeys extends XposedModPack {
             });
 
 
-            XposedBridge.hookMethod(powerLongPress, new XC_MethodHook() {
+            hookMethod(powerLongPress, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (!replaceAssistantwithTorch) return;
                     if (Calendar.getInstance().getTimeInMillis() - wakeTime > 1000) return;
 
                     try {
-                        int behavior = (int) XposedHelpers.callMethod(param.thisObject, "getResolvedLongPressOnPowerBehavior");
+                        int behavior = (int) callMethod(param.thisObject, "getResolvedLongPressOnPowerBehavior");
 
                         if (behavior == 3) // this is a force shutdown event. never play with it (3=LONG_PRESS_POWER_SHUT_OFF_NO_CONFIRM)
                         {
@@ -127,7 +130,7 @@ public class screenOffKeys extends XposedModPack {
                         SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
 
                         param.setResult(null);
-                        XposedHelpers.callMethod(SystemUtils.PowerManager(), "goToSleep", SystemClock.uptimeMillis());
+                        callMethod(SystemUtils.PowerManager(), "goToSleep", SystemClock.uptimeMillis());
                     } catch (Throwable T) {
                         T.printStackTrace();
                     }

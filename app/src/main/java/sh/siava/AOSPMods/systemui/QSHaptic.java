@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.os.VibrationEffect;
 import android.view.View;
@@ -31,12 +34,12 @@ public class QSHaptic extends XposedModPack {
 
 
 
-        Class<?> QSTileImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
+        Class<?> QSTileImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
         
-        XposedHelpers.findAndHookMethod(QSTileImplClass,
+        findAndHookMethod(QSTileImplClass,
                 "click", View.class , new vibrateFeedback());
 
-        XposedHelpers.findAndHookMethod(QSTileImplClass,
+        findAndHookMethod(QSTileImplClass,
                 "longClick", View.class , new vibrateFeedback());
     }
 

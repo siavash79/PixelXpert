@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 
 import java.util.Arrays;
@@ -35,12 +38,12 @@ public class KeyGuardPinScrambler extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if(!lpparam.packageName.equals(listenPackage)) return;
 		
-		Class<?> NumPadKeyClass = XposedHelpers.findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);
-		Class<?> KeyguardAbsKeyInputViewControllerClass = XposedHelpers.findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
+		Class<?> NumPadKeyClass = findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);
+		Class<?> KeyguardAbsKeyInputViewControllerClass = findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
 		
 		Collections.shuffle(digits);
 		
-		XposedBridge.hookAllMethods(KeyguardAbsKeyInputViewControllerClass, "verifyPasswordAndUnlock", new XC_MethodHook() {
+		hookAllMethods(KeyguardAbsKeyInputViewControllerClass, "verifyPasswordAndUnlock", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(!shufflePinEnabled) return;
@@ -49,15 +52,15 @@ public class KeyGuardPinScrambler extends XposedModPack {
 			}
 		});
 		
-		XposedBridge.hookAllConstructors(NumPadKeyClass, new XC_MethodHook() {
+		hookAllConstructors(NumPadKeyClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(!shufflePinEnabled) return;
 				
-				int mDigit = XposedHelpers.getIntField(param.thisObject, "mDigit");
-				Object mDigitText = XposedHelpers.getObjectField(param.thisObject, "mDigitText");
-				XposedHelpers.setObjectField(param.thisObject, "mDigit", digits.get(mDigit));
-				XposedHelpers.callMethod(mDigitText, "setText", Integer.toString((int) digits.get(mDigit)));
+				int mDigit = getIntField(param.thisObject, "mDigit");
+				Object mDigitText = getObjectField(param.thisObject, "mDigitText");
+				setObjectField(param.thisObject, "mDigit", digits.get(mDigit));
+				callMethod(mDigitText, "setText", Integer.toString((int) digits.get(mDigit)));
 			}
 		});
 	}

@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaMetadata;
@@ -49,7 +52,7 @@ public class LockscreenAlbumArt extends XposedModPack {
 				case "albumArtLockScreenBlurLevel":
 				case "albumArtLockScreenGrayscale":
 					try {
-						XposedHelpers.callMethod(NMM, "updateMediaMetaData", true, false);
+						callMethod(NMM, "updateMediaMetaData", true, false);
 					}catch (Exception ignored){}
 					break;
 			}
@@ -63,27 +66,27 @@ public class LockscreenAlbumArt extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if(!lpparam.packageName.equals(listenPackage) || !albumArtLockScreenHookEnabled) return;
 		
-		Class<?> NotificationMediaManagerClass = XposedHelpers.findClass("com.android.systemui.statusbar.NotificationMediaManager", lpparam.classLoader);
+		Class<?> NotificationMediaManagerClass = findClass("com.android.systemui.statusbar.NotificationMediaManager", lpparam.classLoader);
 
-		XposedBridge.hookAllConstructors(NotificationMediaManagerClass, new XC_MethodHook() {
+		hookAllConstructors(NotificationMediaManagerClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				NMM = param.thisObject;
 			}
 		});
 
-		XposedBridge.hookAllMethods(NotificationMediaManagerClass, "updateMediaMetaData", new XC_MethodHook() {
+		hookAllMethods(NotificationMediaManagerClass, "updateMediaMetaData", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if(!albumArtLockScreenEnabled) return;
 				try {
-					MediaMetadata mediaMetadata = (MediaMetadata) XposedHelpers.callMethod(param.thisObject, "getMediaMetadata");
-					Object mKeyguardBypassController = XposedHelpers.getObjectField(param.thisObject, "mKeyguardBypassController");
-					boolean byPassEnabld = (boolean) XposedHelpers.callMethod(mKeyguardBypassController, "getBypassEnabled");
+					MediaMetadata mediaMetadata = (MediaMetadata) callMethod(param.thisObject, "getMediaMetadata");
+					Object mKeyguardBypassController = getObjectField(param.thisObject, "mKeyguardBypassController");
+					boolean byPassEnabld = (boolean) callMethod(mKeyguardBypassController, "getBypassEnabled");
 
 					boolean metaDataChanged = (boolean) param.args[0];
 					boolean allowEnterAnimation = (boolean) param.args[1];
-					ArraySet<AsyncTask> mProcessArtworkTasks = (ArraySet) XposedHelpers.getObjectField(param.thisObject, "mProcessArtworkTasks");
+					ArraySet<AsyncTask> mProcessArtworkTasks = (ArraySet) getObjectField(param.thisObject, "mProcessArtworkTasks");
 					if (metaDataChanged) {
 						if (mediaMetadata != null && !byPassEnabld) {
 							artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
@@ -114,15 +117,15 @@ public class LockscreenAlbumArt extends XposedModPack {
 						artworkBitmap = null;
 					}
 
-					XposedHelpers.callMethod(param.thisObject, "finishUpdateMediaMetaData", metaDataChanged, allowEnterAnimation, artworkBitmap);
+					callMethod(param.thisObject, "finishUpdateMediaMetaData", metaDataChanged, allowEnterAnimation, artworkBitmap);
 					param.setResult(null);
 				}
 				catch (Throwable t){
 					if(BuildConfig.DEBUG)
 					{
-						XposedBridge.log("Start error dump");
+						log("Start error dump");
 						t.printStackTrace();
-						XposedBridge.log("Start end error dump");
+						log("Start end error dump");
 					}
 				}
 			}

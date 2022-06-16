@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.view.MotionEvent;
 
@@ -37,19 +40,19 @@ public class QSQuickPullDown extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Class<?> NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
+        Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
 
-        XposedHelpers.findAndHookMethod(NotificationPanelViewControllerClass,
+        findAndHookMethod(NotificationPanelViewControllerClass,
                 "isOpenQsEvent", MotionEvent.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!oneFingerPulldownEnabled) return;
 
-                        int mBarState = (int) XposedHelpers.getObjectField(param.thisObject, "mBarState");
+                        int mBarState = (int) getObjectField(param.thisObject, "mBarState");
                         if(mBarState != STATUSBAR_MODE_SHADE) return;
 
-                        int w = (int) XposedHelpers.callMethod(
-                                XposedHelpers.getObjectField(param.thisObject, "mView"),
+                        int w = (int) callMethod(
+                                getObjectField(param.thisObject, "mView"),
                                 "getMeasuredWidth");
 
                         float x = ((MotionEvent) param.args[0]).getX();

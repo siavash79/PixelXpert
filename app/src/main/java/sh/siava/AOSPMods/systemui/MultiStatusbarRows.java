@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -43,10 +46,10 @@ public class MultiStatusbarRows extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-//        Class<?> CollapsedStatusBarFragmentClass = XposedHelpers.findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
-        Class<?> IconManagerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusBarIconController$IconManager", lpparam.classLoader);
+//        Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
+        Class<?> IconManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconController$IconManager", lpparam.classLoader);
 
-        XposedBridge.hookAllConstructors(IconManagerClass, new XC_MethodHook() {
+        hookAllConstructors(IconManagerClass, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 if(!systemIconsMultiRow) return;

@@ -1,6 +1,7 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -54,7 +55,7 @@ public class BatteryStyleManager extends XposedModPack {
         for(Object view : batteryViews)
         {
             try {
-                BatteryDrawable drawable = (BatteryDrawable) XposedHelpers.getAdditionalInstanceField(view, "mBatteryDrawable");
+                BatteryDrawable drawable = (BatteryDrawable) getAdditionalInstanceField(view, "mBatteryDrawable");
                 drawable.setFastCharging(isFastCharging);
             }catch(Throwable ignored){} //it's probably default battery. no action needed
         }
@@ -77,21 +78,21 @@ public class BatteryStyleManager extends XposedModPack {
             BatteryStyle = batteryStyle;
             for(Object view : batteryViews) //destroy old drawables and make new ones :D
             {
-                ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(view, "mBatteryIconView");
-                boolean mCharging = (boolean) XposedHelpers.getObjectField(view, "mCharging");
-                int mLevel = (int) XposedHelpers.getObjectField(view, "mLevel");
+                ImageView mBatteryIconView = (ImageView) getObjectField(view, "mBatteryIconView");
+                boolean mCharging = (boolean) getObjectField(view, "mCharging");
+                int mLevel = (int) getObjectField(view, "mLevel");
 
                 if(customBatteryEnabled) {
                     BatteryDrawable newDrawable = getNewDrawable(mContext);
                     mBatteryIconView.setImageDrawable(newDrawable);
-                    XposedHelpers.setAdditionalInstanceField(view,"mBatteryDrawable", newDrawable);
+                    setAdditionalInstanceField(view,"mBatteryDrawable", newDrawable);
                     newDrawable.setBatteryLevel(mLevel);
                     newDrawable.setCharging(mCharging);
                 }
                 else
                 {
                     mBatteryIconView.setImageDrawable(
-                            (Drawable) XposedHelpers.getObjectField(
+                            (Drawable) getObjectField(
                                     view,
                                     "mDrawable"));
                 }
@@ -127,10 +128,10 @@ public class BatteryStyleManager extends XposedModPack {
     
     private static void refreshBatteryIcons() {
         for (Object view : batteryViews) {
-            ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(view, "mBatteryIconView");
+            ImageView mBatteryIconView = (ImageView) getObjectField(view, "mBatteryIconView");
             scale(mBatteryIconView);
             try {
-                BatteryDrawable drawable = (BatteryDrawable) XposedHelpers.getAdditionalInstanceField(view, "mBatteryDrawable");
+                BatteryDrawable drawable = (BatteryDrawable) getAdditionalInstanceField(view, "mBatteryDrawable");
                 drawable.setShowPercent(ShowPercent);
                 drawable.setAlpha(Math.round(BatteryIconOpacity*2.55f));
                 drawable.refresh();
@@ -143,27 +144,27 @@ public class BatteryStyleManager extends XposedModPack {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         
-        XposedHelpers.findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
+        findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 frameColor = (int) param.args[1];
             }
         });
 
-        Class<?> BatteryMeterViewClass = XposedHelpers.findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
+        Class<?> BatteryMeterViewClass = findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
 
         if(BatteryMeterViewClass == null)
         {
-            BatteryMeterViewClass = XposedHelpers.findClass("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
+            BatteryMeterViewClass = findClass("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
         }
     
         //Android 12 June beta
-        Method updatePercentTextMethod = XposedHelpers.findMethodExactIfExists(BatteryMeterViewClass, "updatePercentText");
+        Method updatePercentTextMethod = findMethodExactIfExists(BatteryMeterViewClass, "updatePercentText");
         if(updatePercentTextMethod != null) {
-            XposedBridge.hookMethod(updatePercentTextMethod, new batteryUpdater());
+            hookMethod(updatePercentTextMethod, new batteryUpdater());
         }
         else {
-            XposedBridge.hookAllMethods(BatteryMeterViewClass, "onBatteryLevelChanged", new batteryUpdater());
+            hookAllMethods(BatteryMeterViewClass, "onBatteryLevelChanged", new batteryUpdater());
         }
     
         View.OnAttachStateChangeListener listener = new View.OnAttachStateChangeListener() {
@@ -178,7 +179,7 @@ public class BatteryStyleManager extends XposedModPack {
             }
         };
         
-        XposedHelpers.findAndHookConstructor(BatteryMeterViewClass,
+        findAndHookConstructor(BatteryMeterViewClass,
                     Context.class, AttributeSet.class, new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -186,24 +187,24 @@ public class BatteryStyleManager extends XposedModPack {
 
                             if (!customBatteryEnabled) return;
 
-                            ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
+                            ImageView mBatteryIconView = (ImageView) getObjectField(param.thisObject, "mBatteryIconView");
 
                             BatteryDrawable mBatteryDrawable = getNewDrawable(mContext);
-                            XposedHelpers.setAdditionalInstanceField(param.thisObject, "mBatteryDrawable", mBatteryDrawable);
+                            setAdditionalInstanceField(param.thisObject, "mBatteryDrawable", mBatteryDrawable);
 
                             mBatteryIconView.setImageDrawable(mBatteryDrawable);
-                            XposedHelpers.setObjectField(param.thisObject, "mBatteryIconView", mBatteryIconView);
+                            setObjectField(param.thisObject, "mBatteryIconView", mBatteryIconView);
                         }
                     });
 
 
-        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
+        findAndHookMethod(BatteryMeterViewClass,
                 "onBatteryUnknownStateChanged", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!customBatteryEnabled) return;
 
-                        ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
+                        ImageView mBatteryIconView = (ImageView) getObjectField(param.thisObject, "mBatteryIconView");
                         BatteryDrawable mBatteryDrawable = (BatteryDrawable) getAdditionalInstanceField(param.thisObject, "mBatteryDrawable");
 
                         mBatteryDrawable.setMeterStyle(BatteryStyle);
@@ -212,18 +213,18 @@ public class BatteryStyleManager extends XposedModPack {
                     }
                 });
 
-        Method scaleBatteryMeterViewsMethod = XposedHelpers.findMethodExactIfExists(BatteryMeterViewClass, "scaleBatteryMeterViews");
+        Method scaleBatteryMeterViewsMethod = findMethodExactIfExists(BatteryMeterViewClass, "scaleBatteryMeterViews");
 
         if(scaleBatteryMeterViewsMethod != null)
         {
-            XposedBridge.hookMethod(scaleBatteryMeterViewsMethod, new XC_MethodHook() {
+            hookMethod(scaleBatteryMeterViewsMethod, new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             scale(param);
                         }
                     });
 
-            XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
+            findAndHookMethod(BatteryMeterViewClass,
                     "onPowerSaveChanged", boolean.class, new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -239,7 +240,7 @@ public class BatteryStyleManager extends XposedModPack {
             scaleWithPercent = true;
         }
 
-        XposedHelpers.findAndHookMethod(BatteryMeterViewClass,
+        findAndHookMethod(BatteryMeterViewClass,
                 "updateColors", int.class, int.class, int.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -278,8 +279,8 @@ public class BatteryStyleManager extends XposedModPack {
     static class batteryUpdater extends XC_MethodHook {
         @Override
         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-            boolean mCharging = (boolean) XposedHelpers.getObjectField(param.thisObject, "mCharging");
-            int mLevel = (int) XposedHelpers.getObjectField(param.thisObject, "mLevel");
+            boolean mCharging = (boolean) getObjectField(param.thisObject, "mCharging");
+            int mLevel = (int) getObjectField(param.thisObject, "mLevel");
 
             //Feeding battery bar
             BatteryBarView.setStaticLevel(mLevel, mCharging);
@@ -297,7 +298,7 @@ public class BatteryStyleManager extends XposedModPack {
     }
     public static void scale(XC_MethodHook.MethodHookParam param)
     {
-        ImageView mBatteryIconView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mBatteryIconView");
+        ImageView mBatteryIconView = (ImageView) getObjectField(param.thisObject, "mBatteryIconView");
         scale(mBatteryIconView);
         param.setResult(null);
     }

@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.XModuleResources;
@@ -24,8 +27,8 @@ public class XPrefs implements IXposedHookZygoteInit {
     public static void loadPrefs(Context context) {
         mContext = context;
         Xprefs = new RemotePreferences(context, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
-        XposedBridge.log("AOSPMods Version: " + BuildConfig.VERSION_NAME);
-        XposedBridge.log("AOSPMods Records: " + Xprefs.getAll().keySet().size());
+        log("AOSPMods Version: " + BuildConfig.VERSION_NAME);
+        log("AOSPMods Records: " + Xprefs.getAll().keySet().size());
         Xprefs.registerOnSharedPreferenceChangeListener(listener);
         loadEverything(context.getPackageName());
     }

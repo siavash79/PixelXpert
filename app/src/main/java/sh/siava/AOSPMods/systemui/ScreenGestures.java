@@ -2,6 +2,9 @@
 
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
@@ -66,12 +69,12 @@ public class ScreenGestures extends XposedModPack {
             }
         });
     
-        Class<?> NotificationShadeWindowViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);
-        Class<?> DozeTriggersClass = XposedHelpers.findClass("com.android.systemui.doze.DozeTriggers", lpparam.classLoader);
-        Class<?> NotificationPanelViewControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
-        Class<?> NumPadKeyClass = XposedHelpers.findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);
+        Class<?> NotificationShadeWindowViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);
+        Class<?> DozeTriggersClass = findClass("com.android.systemui.doze.DozeTriggers", lpparam.classLoader);
+        Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
+        Class<?> NumPadKeyClass = findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);
         
-        XposedBridge.hookAllMethods(NumPadKeyClass, "userActivity", new XC_MethodHook() {
+        hookAllMethods(NumPadKeyClass, "userActivity", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 lastButtonClick = SystemClock.uptimeMillis();
@@ -79,7 +82,7 @@ public class ScreenGestures extends XposedModPack {
         });
     
         //double tap detector for screen off AOD disabled sensor
-        XposedBridge.hookAllMethods(DozeTriggersClass,
+        hookAllMethods(DozeTriggersClass,
                 "onSensor", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -100,18 +103,18 @@ public class ScreenGestures extends XposedModPack {
                 });
         
         
-        XposedHelpers.findAndHookMethod(NotificationShadeWindowViewControllerClass,
+        findAndHookMethod(NotificationShadeWindowViewControllerClass,
                 "setupExpandedStatusBar", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 
-                        Object mGestureDetector = XposedHelpers.getObjectField(param.thisObject, "mGestureDetector");
-                        Object mListener = XposedHelpers.getObjectField(mGestureDetector, "mListener");
-                        Object mKeyguardStateController = XposedHelpers.getObjectField(param.thisObject, "mKeyguardStateController");
-                        Object mStatusBarStateController = XposedHelpers.getObjectField(param.thisObject, "mStatusBarStateController");
+                        Object mGestureDetector = getObjectField(param.thisObject, "mGestureDetector");
+                        Object mListener = getObjectField(mGestureDetector, "mListener");
+                        Object mKeyguardStateController = getObjectField(param.thisObject, "mKeyguardStateController");
+                        Object mStatusBarStateController = getObjectField(param.thisObject, "mStatusBarStateController");
     
                         //used in double tap to wake in AOD plan
-                        XposedHelpers.findAndHookMethod(mListener.getClass(),
+                        findAndHookMethod(mListener.getClass(),
                                 "onSingleTapConfirmed", MotionEvent.class, new XC_MethodHook() {
                                     @Override
                                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -121,7 +124,7 @@ public class ScreenGestures extends XposedModPack {
                                 });
                         
                         //used in double tap detection in AOD
-                        XposedHelpers.findAndHookMethod(mListener.getClass(),
+                        findAndHookMethod(mListener.getClass(),
                                 "onDoubleTap", MotionEvent.class, new XC_MethodHook() {
                                     @Override
                                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -137,12 +140,12 @@ public class ScreenGestures extends XposedModPack {
                                             }
                                         }, HOLD_DURATION*2);
     
-                                        isDozing = (boolean) XposedHelpers.callMethod(mStatusBarStateController, "isDozing");
+                                        isDozing = (boolean) callMethod(mStatusBarStateController, "isDozing");
                                     }
                                 });
     
                         //detect hold event for TTT
-                        XposedBridge.hookAllMethods(mGestureDetector.getClass(), "onTouchEvent", new XC_MethodHook() {
+                        hookAllMethods(mGestureDetector.getClass(), "onTouchEvent", new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                                 MotionEvent ev = (MotionEvent) param.args[0];
@@ -155,7 +158,7 @@ public class ScreenGestures extends XposedModPack {
                                     doubleTap = false;
                                 }
     
-                                if((boolean) XposedHelpers.callMethod(mKeyguardStateController, "isShowing"))
+                                if((boolean) callMethod(mKeyguardStateController, "isShowing"))
                                 {
                                     if(!holdScreenTorchEnabled) return;
                                     if((action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE))
@@ -163,7 +166,7 @@ public class ScreenGestures extends XposedModPack {
                                         if(doubleTap && !SystemUtils.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION)
                                         {
                                             turnedByTTT = true;
-                                            XposedHelpers.callMethod(SystemUtils.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
+                                            callMethod(SystemUtils.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
                                             SystemUtils.setFlash(true);
                                             SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
                                         }
@@ -183,7 +186,7 @@ public class ScreenGestures extends XposedModPack {
                     }
                 });
         
-        XposedHelpers.findAndHookMethod(NotificationPanelViewControllerClass,
+        findAndHookMethod(NotificationPanelViewControllerClass,
                 "createTouchHandler", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -191,15 +194,15 @@ public class ScreenGestures extends XposedModPack {
                         Object ThisNotificationPanel = param.thisObject;
                     
                         //touch detection of statusbar to forward to detector
-                        XposedHelpers.findAndHookMethod(touchHandler.getClass(),
+                        findAndHookMethod(touchHandler.getClass(),
                                 "onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
                                     @Override
                                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                                         if (!doubleTapToSleepEnabled) return;
                                     
-                                        boolean mPulsing = (boolean) XposedHelpers.getObjectField(ThisNotificationPanel, "mPulsing");
-                                        boolean mDozing = (boolean) XposedHelpers.getObjectField(ThisNotificationPanel, "mDozing");
-                                        int mBarState = (int) XposedHelpers.getObjectField(ThisNotificationPanel, "mBarState");
+                                        boolean mPulsing = (boolean) getObjectField(ThisNotificationPanel, "mPulsing");
+                                        boolean mDozing = (boolean) getObjectField(ThisNotificationPanel, "mDozing");
+                                        int mBarState = (int) getObjectField(ThisNotificationPanel, "mBarState");
                                     
                                         if (!mPulsing && !mDozing
                                                 && mBarState == 0) {

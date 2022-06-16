@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.Utils;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -66,7 +69,7 @@ public class FlexStatusIconContainer extends LinearLayout {
         super(context, attrs);
 
         mClassloader = classLoader;
-        StatusIconStateClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusIconContainer$StatusIconState", mClassloader);
+        StatusIconStateClass = findClass("com.android.systemui.statusbar.phone.StatusIconContainer$StatusIconState", mClassloader);
 
         initDimens();
         setWillNotDraw(!DEBUG_OVERFLOW);
@@ -162,11 +165,11 @@ public class FlexStatusIconContainer extends LinearLayout {
 
                 boolean isBlocked = false;
                 try {
-                    isBlocked = (boolean)XposedHelpers.callMethod(icon,"isIconBlocked");
+                    isBlocked = (boolean)callMethod(icon,"isIconBlocked");
                 }catch (Throwable ignored){}
 
-                if ((boolean)XposedHelpers.callMethod(icon,"isIconVisible") && !isBlocked
-                        && !mIgnoredSlots.contains((String)XposedHelpers.callMethod(icon,"getSlot")))
+                if ((boolean)callMethod(icon,"isIconVisible") && !isBlocked
+                        && !mIgnoredSlots.contains((String)callMethod(icon,"getSlot")))
                 {
                     if(mDotIcon != null)
                     {
@@ -255,7 +258,7 @@ public class FlexStatusIconContainer extends LinearLayout {
                 setMeasuredDimension(totalWidthNeeded, MeasureSpec.getSize(heightMeasureSpec));
             }
         }catch (Throwable e){
-            XposedBridge.log("AOSPMODS Error");
+            log("AOSPMODS Error");
             e.printStackTrace();
             setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec));
         }
@@ -271,7 +274,7 @@ public class FlexStatusIconContainer extends LinearLayout {
             mDotIcon = child;
         }
         Object childState = getViewStateFromChild(child);
-        XposedHelpers.setObjectField(childState, "visibleState", state);
+        setObjectField(childState, "visibleState", state);
     }
 
     @Override
@@ -279,7 +282,7 @@ public class FlexStatusIconContainer extends LinearLayout {
         super.onViewAdded(child);
         try {
             Object vs = StatusIconStateClass.newInstance();
-            XposedHelpers.setObjectField(vs, "justAdded", true);
+            setObjectField(vs, "justAdded", true);
             child.setTag(
                     getResources().getIdentifier("status_bar_view_state_tag", "id", getContext().getPackageName()), vs);
         }catch (Throwable ignored){}
@@ -333,7 +336,7 @@ public class FlexStatusIconContainer extends LinearLayout {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
             try {
-                if (((String)(XposedHelpers.callMethod(child, "getSlot"))).equals(slot)) {
+                if (((String)(callMethod(child, "getSlot"))).equals(slot)) {
                     return child;
                 }
             }catch(Throwable ignored){}
@@ -345,11 +348,11 @@ public class FlexStatusIconContainer extends LinearLayout {
     * Layout is happening from end -> start
     */
     private void calculateIconTranslations() {
-        XposedBridge.log("total row " + mTotalRows);
-        XposedBridge.log("underflow " + (mDotIcon != null));
+        log("total row " + mTotalRows);
+        log("underflow " + (mDotIcon != null));
 
         try {
-            XposedBridge.log("total icons " + mMeasureViews.size());
+            log("total icons " + mMeasureViews.size());
 
             int iconCount = mMeasureViews.size();
 
@@ -397,16 +400,16 @@ public class FlexStatusIconContainer extends LinearLayout {
                     //icontop = topXline + (lineheight-iconheight)/2
                     int iconTranslationY = Math.round(rowTop + (mMaxHeights.get(iconCount - 1) - icon.getMeasuredHeight()) / 2f);
 
-                    XposedHelpers.setObjectField(childState, "xTranslation", iconTranslationX);
-                    XposedHelpers.setObjectField(childState, "yTranslation", iconTranslationY);
+                    setObjectField(childState, "xTranslation", iconTranslationX);
+                    setObjectField(childState, "yTranslation", iconTranslationY);
                 } else {
                     translationX -= iconWidth;
-                    XposedHelpers.setObjectField(childState, "xTranslation", translationX);
-                    XposedHelpers.setObjectField(childState, "yTranslation", rowTop);
+                    setObjectField(childState, "xTranslation", translationX);
+                    setObjectField(childState, "yTranslation", rowTop);
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log("AOSPMods Error");
+            log("AOSPMods Error");
             t.printStackTrace();
         }
     }
@@ -416,7 +419,7 @@ public class FlexStatusIconContainer extends LinearLayout {
             View child = getChildAt(i);
             Object vs = getViewStateFromChild(child);
             if (vs != null) {
-                XposedHelpers.callMethod(vs, "applyToView", child);
+                callMethod(vs, "applyToView", child);
             }
         }
     }
@@ -429,9 +432,9 @@ public class FlexStatusIconContainer extends LinearLayout {
                 continue;
             }
 
-            XposedHelpers.callMethod(vs, "initFrom",child);
-            XposedHelpers.setObjectField(vs, "alpha", 1.0f);
-            XposedHelpers.setObjectField(vs, "hidden", false);
+            callMethod(vs, "initFrom",child);
+            setObjectField(vs, "alpha", 1.0f);
+            setObjectField(vs, "hidden", false);
         }
     }
 

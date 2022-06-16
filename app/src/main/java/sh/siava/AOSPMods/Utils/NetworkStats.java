@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.Utils;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.content.BroadcastReceiver;
@@ -237,7 +240,7 @@ public class NetworkStats {
         {
             if(BuildConfig.DEBUG)
             {
-                XposedBridge.log("Error setting network reset schedule");
+                log("Error setting network reset schedule");
                 t.printStackTrace();
             }
         }

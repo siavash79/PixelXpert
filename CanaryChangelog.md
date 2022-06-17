@@ -1,3 +1,7 @@
+**canary-55**  
+- Added option to increase satatusbar notification icons limit  
+- Added option to set double row statusbar notification area  
+  
 **canary-54**  
 - Revert to canary-52  
   

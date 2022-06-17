@@ -1,3 +1,7 @@
+**canary-56**  
+- UI strings improvement (credits: @wrongway213)  
+- Fixed Notification Icon limit bug  
+  
 **canary-55**  
 - Added option to increase satatusbar notification icons limit  
 - Added option to set double row statusbar notification area  

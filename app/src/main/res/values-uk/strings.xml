@@ -1,0 +1,328 @@
+<resources>
+    <!--General strings-->
+    <string name="app_name" translatable="false">AOSP Mods</string>
+    <string name="xposed_desc" translatable="false">Користувацькі функції для прошивок базованих на Android 12+ AOSP</string>
+    <string name="title_activity_settings" translatable="false">@string/app_name</string>
+    <string name="error_not_activated">Будь ласка, перевірте, чи активований модуль в LSPosed Manager</string>
+    <string name="hide_default">Сховати (За замовчуванням)</string>
+    <string name="percent_of_default_size">% від звичайного розміру</string>
+    <string name="overlay_none_title">(За замовчуванням)</string>
+    <string name="general_section">Основні налаштування</string>
+    <string name="general_on">Увімк</string>
+    <string name="general_off">Вимк</string>
+    <string name="sysui_restart_needed">Потрібне перезавантаження Інтерфейсу системи для застосування</string>
+    <string name="restart_needed">Потрібне перезавантаження для застосування</string>
+
+    <!--Category titles-->
+    <string name="lockscreen_header_title">Екран блокування</string>
+    <string name="statusbar_header">Рядок стану</string>
+    <string name="nav_header">Панель навігації</string>
+    <string name="misc_header">Різне</string>
+    <string name="qs_panel_category_title">Панель швидких налаштувань</string>
+    <string name="theme_customization_category">Пофарбування</string>
+
+    <!--Lock screen related-->
+    <string name="transparent_fingerprint_circle">Сховати коло для відбитка пальця під дисплеєм</string>
+    <string name="transparent_fingerprint_circle_off">Коло біля значка відбитка пальця активне</string>
+    <string name="transparent_fingerprint_circle_on">Коло біля значка відбитка пальця буде сховано</string>
+    <string name="carrier_text_category">Текст носія</string>
+    <string name="custom_text_category">Користувацький текст на екрані блокування</string>
+    <string name="configure_carrier_text">Налаштування тексту носія - Зверху екрана</string>
+    <string name="carrier_text_mod_disabled">Текст носія не змінено</string>
+    <string name="carrier_text_mod_enabled">Користувацький текст носія</string>
+    <string name="carrier_text_value">Вставка користувацького тексту</string>
+    <string name="lockscreen_center_text_value">Користувацький текст в області годинника</string>
+    <string name="keyguard_bottom_category">Ярлики нижньої області</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Сховати коло біля значків</string>
+    <string name="keyguard_bottom_force_camera_title">Показати ярлик камери</string>
+    <string name="keyguard_left_shortcut">Показати лівий ярлик на екрані блокуівння</string>
+    <string name="LSleftShortcutTitle">Лівий ярлик</string>
+    <string name="LSrightShortcutTitle">Правий ярлик</string>
+    <string name="camera_shortcut">Камера</string>
+    <string name="assistant_shortcut">Асистент</string>
+    <string name="torch_shortcut">Ліхтарик</string>
+    <string name="album_art_category">Налаштування мультимедіа</string>
+    <string name="album_art_title">Увімкнути обкладинку альбому під час відтворення медіа</string>
+    <string name="album_art_blur_text">Значення розмиття</string>
+    <string name="album_art_grayscale">Відтінки сірого</string>
+    <string name="shufflePin_title">Перемішати ПІН-код</string>
+
+    <!--Status bar related-->
+    <string name="double_tap_sleep_title">Подвійне натискання для переходу в режим сну</string>
+    <string name="double_tap_sleep_off">"Подвійне натискання не вимикає дисплей"</string>
+    <string name="double_tap_sleep_on">Подвійне натискання на рядок стану або екран блокування вимикає дисплей</string>
+    <string name="battery_style_title">Оберіть стиль батареї</string>
+    <string name="battery_show_percent_title">Показати процент заряду батареї</string>
+    <string name="battery_style_category_title">Стиль батареї</string>
+    <string name="battery_icon_size_title">Розмір значка батареї</string>
+    <string name="battery_hidden">Схований</string>
+    <string name="BIcon_Opacity_title">Прозорість</string>
+    <string name="sb_center_fine_tune">Налаштування центральної зони</string>
+    <string name="sb_multi_row_system_icons">Багаторядкові системні значки (потрібна більша висота рядка стану)</string>
+    <string name="sb_icon_sort_mode">Спосіб розміщення значків</string>
+    <string name="sort_clean">Сортувати в сітці</string>
+    <string name="sort_tight">Вмістити максимум предметів</string>
+
+    <string name="lte_4g_icon_title">Значок LTE / 4G</string>
+    <string name="combined_signal_icon_title">Комбіновані значки сигналу</string>
+    <string name="volte_icon_title">Показати значок VoLTE коли це можливо</string>
+    <string name="sb_vibration_switch_title">Показати значки Вібрації/Без звуку</string>
+    <string name="sbc_position_title">Розташування годинника</string>
+    <string name="sbc_ampm_style">Стиль AM/PM</string>
+    <string name="sbc_show_secs">Показувати секунди</string>
+    <string name="sbc_date_cat">Налаштування дати</string>
+    <string name="sbc_day_of_week_options">Показувати день тижня з часом</string>
+    <string name="sbc_advanced_cat">Розширені налаштування дати (заміняє вищенаведене налаштування!)</string>
+    <string name="sbc_advanced_sum">Будь ласка, прочитайте документацію формату дати Java</string>
+    <string name="sbc_custom_date_before">Користувальницький формат дати перед годинником</string>
+    <string name="sbc_date_small">Менший розмір (70%)</string>
+    <string name="sbc_custom_date_after">Користувацький текст після годинника</string>
+    <string name="sbc_header">Налаштування годинника в рядку стану</string>
+    <string name="sbc_clock_color_category">Налаштування кольору</string>
+    <string name="sbc_colorful_title">Зробити його кольоровим</string>
+    <string name="sbc_before_color">Текст перед годинником</string>
+    <string name="sbc_color">Годинник</string>
+    <string name="sbc_after_color">Текст після годинника</string>
+    <string name="network_settings_pref">Налаштування мережевого монітора...</string>
+    <string name="ntsb_far_left">Далеко ліворуч</string>
+    <string name="ntsb_mid_left">Ліворуч посередині</string>
+    <string name="ntsb_mid_right">Праворуч посередині</string>
+    <string name="ntsb_category_title">Монітор мережі</string>
+    <string name="ntsb_enabled_title">Увімкнути монітор мережі</string>
+    <string name="ntsb_position_title">Позиція монітора</string>
+    <string name="ntsb_threshold_title">Автоматичне приховування порогу</string>
+    <string name="ntsb_threshold_summary">"Сховати якщо трафік менше ніж… (Кілобайти)"</string>
+    <string name="network_mode_title">Стиль монітору</string>
+    <string name="network_colorful_title">Зробити його кольоровим</string>
+    <string name="network_download_top">Швидкість завантаження зверху</string>
+    <string name="network_download_color_title">Колір завантаження</string>
+    <string name="network_upload_color_title">Колір відправлення</string>
+    <string name="network_opacity_title">Прозорість</string>
+    <string name="network_interval_title">Інтервал оновлення (секунди)</string>
+    <string name="nt_mode_rxtx">Завантаження &amp; Відправлення</string>
+    <string name="nt_mode_total">Завантаження + Відправлення (Разом)</string>
+    <string name="nt_mode_rxonly">Лише завантаження</string>
+    <string name="nt_mode_txonly">Лише відправлення</string>
+    <string name="statusbar_general_options">Налаштування рядка стану</string>
+    <string name="dual_tone_battery_title">Увімкнути двотональний індикатор заряду батареї</string>
+    <string name="dual_tone_battery_on_summary">Увімк (працює лише зі значком портретної орієнтації)</string>
+    <string name="unread_messages_title">Показати число непрочитаних повідомлень</string>
+    <string name="status_bar_height">Висота рядка стану (оберніть телефон, щоб застосувати)</string>
+    <string name="status_bar_height_small">Мала</string>
+    <string name="status_bar_height_medium">Середня</string>
+    <string name="fix_status_bar_padding">Поправити заповнення лівого боку</string>
+    <string name="sbbb_header">Налаштування рядку батареї</string>
+    <string name="sbbIcon_header">Налаштування значка батареї</string>
+    <string name="BB_enable_title">Увімкнути рядок батареї</string>
+    <string name="BB_onlycharging_title">Лише при заряджанні</string>
+    <string name="BB_move_SB_bottom_title">Знизу від рядку стану</string>
+    <string name="BB_colorful_title">Зробити його кольоровим</string>
+    <string name="BB_Opacity_title">Прозорість рядку</string>
+    <string name="BB_center_align_title">Вирівняно по центру</string>
+    <string name="BB_Thickness_title">Товщина рядку</string>
+    <string name="BB_indicate_charging">Позначати заряджання</string>
+    <string name="BB_indicate_fast_charging">Позначати швидке заряджання</string>
+    <string name="BB_warning_level">Діапазон попередження про заряд</string>
+    <string name="BB_warning_tip">Встановіть обидва на 0, щоб вимкнути кольори на основі рівнів</string>
+    <string name="BB_batteryCriticalColor">Колір критичного заряду</string>
+    <string name="BB_batteryWarningColor">Колір попередження про заряд</string>
+    <string name="BB_batteryChargingColor">Колір заряджання</string>
+    <string name="BB_batteryFastChargingColor">Колір швидкого заряджання</string>
+    <string name="BB_transit_colors">Кольори відтінків між діапазоном</string>
+
+    <!--Quick settings panel related-->
+    <string name="qs_mod_category_title">Номер збірки в нижньому колонтитулі панелі Швидких налаштувань</string>
+    <string name="qs_footer_mod_title">Змінити текст номеру збірки на панелі Швидких налаштувань</string>
+    <string name="qs_footer_text_value">Введіть свій текст (Залиште пустим, щоб повністю видалити)</string>
+    <string name="qs_footer_text_summary">Залиште його пустим щоб повністю видалити текст</string>
+    <string name="qs_footer_text_desc">Увімкніть/Вимкніть дисплей, щоб застосувати</string>
+    <string name="light_qs_title">Засвітити панель швидких налаштувань під час світлої теми</string>
+    <string name="light_dualtone_qs_title">Увімкнути двотональну панель QS</string>
+    <string name="qs_pulldown_size">Ширина Швидких налагтувань</string>
+    <string name="qs_pulldown_switch_title">Розкривний список панелі швидких налаштувань у рядку стану</string>
+    <string name="qs_pulldown_side_title">Потягніть вниз</string>
+    <string name="qs_pulldown_category">Випадаюча панель швидких налаштувань</string>
+    <string name="qs_haptic_switch_title">Вібрувати при натисканні на плитку Швидких налаштувань</string>
+    <string name="qs_rows_number">Номер рядків Швидких налаштувань</string>
+    <string name="qs_general_options">Опції Швидких налаштувань</string>
+    <string name="qs_tiles_3_columns_title">Увімкнути 3 колони плиток Швидких налаштувань</string>
+    <string name="qs_text_size_title">Розмір тексту плитки Швидких налаштувань</string>
+    <string name="qs_text_size">Зменшити розмір тексту плитки Швидких налаштувань</string>
+    <string name="wifi_cell_title">Плитка Інтернету</string>
+    <string name="wifi_cell_on">Використовувати окремі плитки Wi-Fi та мобільних даних</string>
+    <string name="wifi_cell_off">Використовувати одинарну плитку Інтернету</string>
+    <string name="QQS_brightness_category">Налаштування повзунка яскравості</string>
+    <string name="QQS_brightness_title">Показувати повзунок яскравості на панелі QQS</string>
+    <string name="QQS_brightness_bottom_title">Перемістити повзунок яскравості вниз</string>
+    <string name="QS_brightness_disable_title">Сховати повзунок яскравості з панелі Швидких налаштувань</string>
+    <string name="bs_thick_track">Використовувати товсту доріжку на повзунку яскравості</string>
+    <string name="quick_settings_tiles_category">Налаштування плиток Швидких налаштування</string>
+    <string name="qs_tile_style_title">Теми плиток Швидких налаштувань</string>
+    <string name="qstile_default">За замовчуванням</string>
+    <string name="qstile_cookie">Печиво</string>
+    <string name="qstile_triangles">Трикутник</string>
+    <string name="qstile_divided">Розділене коло</string>
+    <string name="qstile_attemptmountain">Спроба гори</string>
+    <string name="qstile_squircle_trim">"Білка" з вирізом</string>
+    <string name="qstile_ninja">Ніндзя</string>
+    <string name="qstile_wavey">Хвилясте</string>
+    <string name="qstile_squaremedo">Squaremedo</string>
+    <string name="qstile_dual_tone_circle">Двотональне коло</string>
+    <string name="qstile_circleoutline">Контурне коло</string>
+    <string name="qstile_pokesign">Pokesign</string>
+    <string name="qstile_cosmos">Космос Shishu</string>
+    <string name="qstile_neonlike">Неонове світло</string>
+    <string name="qstile_circle_trim">Коло з вирізом</string>
+    <string name="qstile_dottedcircle">Пунктирне коло</string>
+    <string name="qstile_inkdrop">Чорнильне</string>
+    <string name="qstile_circle">Коло</string>
+
+    <!--Navigation bar related-->
+    <string name="back_gesture_category_title">Налаштувати жест "Назад"</string>
+    <string name="back_from_left_title">Ліва сторона екрану</string>
+    <string name="back_from_right_title">Права сторона екрану</string>
+    <string name="back_height_title">Висота жесту</string>
+    <string name="gesturenav_header">Навігація жесту</string>
+    <string name="gesture_nav_pill_cat">Таблетка панелі навігації</string>
+    <string name="gesture_nav_pill_mod_title">Налаштувати таблетку пан. навігаії</string>
+    <string name="gesture_nav_pill_width_title">Ширина у порівнянні з оригінальним розміром</string>
+    <string name="gesture_nav_pill_height_title">Висота у порівнянні з оригінальним розміром</string>
+    <string name="threebutton_header_title">Навігація з трьома кнопками</string>
+    <string name="back_longpress_kill_title">Утримайте кнопку "Назад", щоб зупинити фоновий дотаток</string>
+    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
+    <string name="hide_navbar_title">Сховати панель навігації</string>
+    <string name="colorpill_title">Розфарбувати таблетку жестів</string>
+    <string name="colorpill">Колір акценту таблетки жестів</string>
+    <string name="reducekeyboard_title">Місце для жестів на клавіатурі</string>
+    <string name="reducekeyboard">Зменшити місце на клавіатурі</string>
+    <string name="taskbar_status_title">Панель завдань Android</string>
+    <string name="taskbar_force_enable_title">Примусово ввімкнено</string>
+    <string name="taskbar_force_disable_title">Примусово вимкнено</string>
+
+    <!--Miscellaneous section related-->
+    <string name="screenshot_sound_disable_title">Вимкнути звук знімку екрана</string>
+    <string name="so_power_longpress_torch_title">Утримайте кнопку живлення, щоб увімкнути Ліхтарик</string>
+    <string name="so_taptaptorch_title">Увімкнути Double-tap Torch</string>
+    <string name="so_taptaptorch_summary">Натисній двічі, щоб увімкнути ліхтарик</string>
+    <string name="so_fingerprint_sensor_enabled">Увімкнути відбиток пальця, коли екран вимкнено</string>
+
+    <string name="so_double_tap_wake_title">Торкніться двічі, щоб активувати</string>
+    <string name="so_double_tap_wake_summary">Вимикає "Торкніться, щоб активувати"</string>
+    <string name="so_tap_proximity_wake_title">Не активувати при дотику, коли екран накритий</string>
+    <string name="doze_header">Поки екран вимкнено…</string>
+    <string name="custom_themed_icons_title">Користувацькі теми для значків</string>
+    <string name="custom_themed_icons_off">Користувацькі значки вимкнено</string>
+    <string name="custom_themed_icons_on">Користувацькі значки увімкнено</string>
+    <string name="so_vol_longpress_skip">Утримуйте кнопку гучності, щоб пропустити музичний трек</string>
+    <string name="notifications_header">Налаштування сповіщень</string>
+    <string name="expand_notifications_icons_title">"Додати всі кнопки "розгорнути/згорнути"</string>
+    <string name="disable_overscroll">"Вимкнути еластичний ефект прокрутки</string>
+    <string name="overscroll_on_summary">Важливо: ОБОВ'ЯЗКОВО увімкніть програми, для яких ви хочете вимкнути прокрутку в LSPosed</string>
+
+    <!-- Theming section related -->
+    <string name="gsans_override_title">Примусово увімнути шрифт Google Sans по всій системі</string>
+    <string name="font_overlays_enable_title">Увімкнути використовуючи користувацькі шрифти</string>
+    <string name="theme_customization_font_title">Заголовок / Основний шрифт</string>
+    <string name="icons_style_title">Стиль значків</string>
+    <string name="icon_shapes_title">Фігури значків</string>
+    <string name="signal_icons_theme_title">Тема значків сигналу</string>
+    <string name="dt_styles_category">Стилі темної теми</string>
+    <string name="dt_styles">Оберіть стиль</string>
+    <string name="dt_black">Чорний як смола</string>
+    <string name="dt_bakedgreen">Запечений зелена</string>
+    <string name="dt_chocox">Choco X</string>
+    <string name="dt_darkaubergine">Темно-баклажанний</string>
+    <string name="dt_style">Темно-синій</string>
+    <string name="dt_darkgray">Темно-сірий</string>
+    <string name="dt_materialocean">Матеріально-океанний</string>
+    <string name="dt_night">Нічний</string>
+    <string name="dt_solarizeddark">Соляризовано-темний</string>
+
+    <!-- Arrays strings -->
+    <!-- Quick pull down -->
+    <string name="pull_down_left">Ліворуч</string>
+    <string name="pull_down_right">Праворуч</string>
+
+    <!-- Battery styles -->
+    <string name="battery_default">За замовчуванням</string>
+    <string name="battery_circle">Коло</string>
+    <string name="battery_dashed_circle">Пунктирне коло</string>
+    <string name="battery_circle_filled">Повне коло</string>
+
+    <!-- Clock position -->
+    <string name="clock_default">Ліворуч (За замовчуванням)</string>
+    <string name="clock_center">По центру</string>
+    <string name="clock_right">Праворуч</string>
+
+    <!-- AM/PM style -->
+    <string name="am_pm_default" translatable="false">@string/hide_default</string>
+    <string name="am_pm_normal">100% size of the clock</string>
+    <string name="am_pm_small">70% size of the clock</string>
+
+    <!-- Date position -->
+    <string name="date_default" translatable="false">@string/hide_default</string>
+    <string name="date_before">До годинника (100%)</string>
+    <string name="date_before_small">До годинника (70%)</string>
+    <string name="date_after">Після годинника (100%)</string>
+    <string name="date_after_small">Після годинника (70%)</string>
+
+    <!-- 4G | LTE -->
+    <string name="fourg_lte_default">За системою</string>
+    <string name="fourg_lte_lte">Примусити значок LTE</string>
+    <string name="fourg_lte_fourg">Примусити значок 4G</string>
+
+    <!-- QS Rows overlays -->
+    <string name="qs_2_rows">Примусити 2 рядки</string>
+    <string name="qs_3_rows">Примусити 3 рядки</string>
+    <string name="qs_4_rows">Примусити 4 рядки</string>
+    <string name="qs_5_rows">Примусити 5 рядки</string>
+
+    <!-- Lockscreen/Quick Settings Custom Text -->
+    <string name="netstat_enable_title">Збирати інформацію про мережу</string>
+    <string name="network_interval_custom_text_title">Інтервал оновлення</string>
+    <string name="minutes_word">хвилина(ин)</string>
+
+    <!-- Menu Items -->
+    <string name="menu_settings_title">Імпортувати/Експортувати</string>
+    <string name="menu_reset_defaults">Скинути всі налаштування</string>
+    <string name="menu_import_settings">Імпортувати налаштування з файлу…</string>
+    <string name="menu_export_settings">Експортувати налаштування settings до файлу…</string>
+    <string name="menu_netstat_title">Мережева статистика</string>
+    <string name="menu_netstat_enable">Увімкнути інформацію</string>
+    <string name="menu_netstat_clear">Скинути мережеву статистику</string>
+    <string name="menu_restart">Перезавантажити</string>
+    <string name="menu_restartSysUI">Перезавантажити Інтерфейс системи</string>
+    <string name="menu_updates">Оновлення програм</string>
+
+    <string name="nestat_caution_title">Увага!</string>
+    <string name="nestat_caution_text">Ваша мережева статистика буде назавжди скинута. Продовжити?</string>
+    <string name="netstat_caution_yes">Продовжити</string>
+    <string name="netstat_caution_no">Пізніше</string>
+
+    <string name="monitoring_category_title">Налаштування моніторингу</string>
+    <string name="netstat_header">Налаштування мережевої статистики</string>
+
+    <string name="string_formatter_manual_body">В додаток до звичайного тексту, який ви можете увести, динамічні змінні також доступні:\n\n$G\&lt;format\&gt; : Григоріанський календар, залежить від формату. Для документації про формат, будь ласка, пошукайте `Java Date Format`\nНаприелад: $GMMM означає: Січ (або будь-який інший)\n\n$P&lt;формат&gt; : Перський календар, залежить від формату\nНаприклад: $Pyyyy означає: 1401\n\n$Nrx : Загальна кількість завантажень за сьогодні\n$Ntx: Загальна кількість відправлень за сьогодні\n$Nall : Загальний трафік сьогодні\n\nЯкщо ви заміните $N на $Nc ви отримаєте статистику мобільної дати ($Ncrx для завантажень тощо)\n\nНаприклад:\n`Мобільний трафік $GEEEE: $Ncall` вироблятиме:\n`Мобільний трафік вівторка: 2 ГБ`</string>
+    <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
+    <string name="update_channel_name">Оновлення</string>
+    <string name="update_notification_title">Оновлення завантажено</string>
+    <string name="update_notification_text">Тицьніть сюди, щоб встановити</string>
+    <string name="reboot_notification_title">AOSPMods оновлено!</string>
+    <string name="reboot_notification_text">Зміни набудуть чинності після перезавантаження</string>
+    <string name="update_flavor_title">Канал оновлень</string>
+    <string name="stable_flavor">Стабільний</string>
+    <string name="canary_flavor" translatable="false">Canary</string>
+    <string name="currentVersionTitle">Встановлена версія: </string>
+    <string name="lastestVersionTitle">Остання версія: </string>
+    <string name="root_not_here">ROOT ДОСТУП НЕ НАДАНО!</string>
+    <string name="reboot_pending">Очікування перезавантаження</string>
+    <string name="reboot_word">Перезавантажити пристрій зараз</string>
+    <string name="update_checking">Перевірка…</string>
+    <string name="update_download_started">Завантаження - Будь ласка, тицьніть на повідомлення при заверженні</string>
+    <string name="update_word">Оновити</string>
+    <string name="switch_branches">Змінити гілку</string>
+    <string name="reinstall_word">Перевстановити</string>
+
+    <string name="title_activity_update" translatable="false">updateActivity</string>
+
+</resources>

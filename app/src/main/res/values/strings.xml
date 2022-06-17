@@ -155,7 +155,7 @@
     <string name="qs_text_size_title">Set text size for QS Tiles</string>
     <string name="qs_text_size">Reduce text size of QS Tiles</string>
     <string name="wifi_cell_title">Internet Tile</string>
-    <string name="wifi_cell_on">Use separate WiFi & Data tiles</string>
+    <string name="wifi_cell_on">Use separate WiFi &amp; Data tiles</string>
     <string name="wifi_cell_off">Use a single Internet tile</string>
     <string name="QQS_brightness_category">Brightness slider options</string>
     <string name="QQS_brightness_title">Show brightness slider on QQS Panel</string>

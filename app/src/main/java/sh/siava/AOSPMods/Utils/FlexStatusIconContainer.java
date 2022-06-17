@@ -354,7 +354,7 @@ public class FlexStatusIconContainer extends LinearLayout {
         try {
             log("total icons " + mMeasureViews.size());
 
-            int iconCount = mMeasureViews.size();
+            int iconCount = mMeasureViews.size() + ((mDotIcon != null) ? 1 : 0);
 
             float width = getWidth();
 
@@ -376,8 +376,8 @@ public class FlexStatusIconContainer extends LinearLayout {
                 rowTop = (getHeight() - (mTotalRows * mMaxHeights.get(iconCount - 1)) + (2 * mMaxHeights.get(iconCount - 1) * currentRow)) / 2f;
             }
 
-            for (int i = 0; i <= iconCount; i++) {
-                View icon = (i == iconCount) ? mDotIcon : mMeasureViews.get(i);
+            for (int i = 0; i < iconCount; i++) {
+                View icon = (i == iconCount - 1 && mDotIcon != null) ? mDotIcon : mMeasureViews.get(i);
                 Object childState = getViewStateFromChild(icon);
 
                 int iconWidth = (icon == mDotIcon) ? mIconDotFrameWidth : getViewTotalMeasuredWidth(icon);

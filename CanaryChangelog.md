@@ -1,4 +1,5 @@
 **canary-54**  
+- Revert to canary-52  
   
 **canary-53**  
 - Fixed canary-52!  

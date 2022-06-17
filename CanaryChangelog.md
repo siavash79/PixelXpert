@@ -1,3 +1,20 @@
+**canary-56**  
+- UI strings improvement (credits: @wrongway213)  
+- Fixed Notification Icon limit bug  
+  
+**canary-55**  
+- Added option to increase satatusbar notification icons limit  
+- Added option to set double row statusbar notification area  
+  
+**canary-54**  
+- Revert to canary-52  
+  
+**canary-53**  
+- Fixed canary-52!  
+  
+**canary-52**  
+- Fixed stausbar size reduction problem for devices with camera cutout  
+  
 **canary-51**  
 - Added placement options for multi-row statusbar icons  
   

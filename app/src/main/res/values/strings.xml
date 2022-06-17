@@ -62,9 +62,11 @@
     <string name="BIcon_Opacity_title">Opacity</string>
     <string name="sb_center_fine_tune">Fine-tune center area</string>
     <string name="sb_multi_row_system_icons">Multi-row system icons (needs higher statusbar height)</string>
+    <string name="sb_multi_row_category">Multiple row system icons</string>
     <string name="sb_icon_sort_mode">Icon placement method</string>
     <string name="sort_clean">Sort in a grid</string>
     <string name="sort_tight">Fit maximum items</string>
+    <string name="sb_notification_limit">Maximum notification icons (Default is 4)</string>
 
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
     <string name="combined_signal_icon_title">Combined signal icons</string>
@@ -88,6 +90,7 @@
     <string name="sbc_after_color">Text after clock</string>
     <string name="network_settings_pref">Network monitor settings...</string>
     <string name="ntsb_far_left">Far Left</string>
+    <string name="ntsb_far_left_extra">Far Left - Above notifications</string>
     <string name="ntsb_mid_left">Mid-Left</string>
     <string name="ntsb_mid_right">Mid-Right</string>
     <string name="ntsb_category_title">Network Monitor</string>
@@ -254,6 +257,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">Left (Default)</string>
+    <string name="clock_default_extra">Left - Above notifications</string>
     <string name="clock_center">Center</string>
     <string name="clock_right">Right</string>
 

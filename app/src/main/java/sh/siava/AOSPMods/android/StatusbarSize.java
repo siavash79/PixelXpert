@@ -57,17 +57,20 @@ public class StatusbarSize extends XposedModPack {
         try
         {
             Class<?> SystemBarUtilsClass = findClass("com.android.internal.policy.SystemBarUtils", lpparam.classLoader);
-            Class<?> WmDisplayCutoutClass = findClass("com.android.server.wm.utils.WmDisplayCutout", lpparam.classLoader);
-            Class<?> DisplayCutoutClass = findClass("android.view.DisplayCutout", lpparam.classLoader);
 
-            Object NO_CUTOUT = getStaticObjectField(DisplayCutoutClass, "NO_CUTOUT");
-            hookAllMethods(WmDisplayCutoutClass, "getDisplayCutout", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if(sizeFactor >= 100) return;
-                    param.setResult(NO_CUTOUT);
-                }
-            });
+            try {
+                Class<?> WmDisplayCutoutClass = findClass("com.android.server.wm.utils.WmDisplayCutout", lpparam.classLoader);
+                Class<?> DisplayCutoutClass = findClass("android.view.DisplayCutout", lpparam.classLoader);
+
+                Object NO_CUTOUT = getStaticObjectField(DisplayCutoutClass, "NO_CUTOUT");
+                hookAllMethods(WmDisplayCutoutClass, "getDisplayCutout", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (sizeFactor >= 100) return;
+                        param.setResult(NO_CUTOUT);
+                    }
+                });
+            }catch (Throwable ignored){}
 
             XC_MethodHook resizedResultHook = new XC_MethodHook() {
                 @Override

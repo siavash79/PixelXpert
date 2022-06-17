@@ -58,20 +58,12 @@
             app:min="50"
             app:updatesContinuously="true"/>
 
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="systemIconsMultiRow"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/sb_multi_row_system_icons" />
-
-        <ListPreference
-            android:defaultValue="0"
-            android:entries="@array/sb_icon_sort_names"
-            android:entryValues="@array/sb_icon_sort_codes"
-            android:summary="%s"
-            android:key="systemIconSortPlan"
-            android:title="@string/sb_icon_sort_mode" />
+        <EditTextPreference
+            android:key="NotificationIconLimit"
+            android:defaultValue="4"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/sb_notification_limit" />
 
         <SwitchPreference
             android:defaultValue="false"
@@ -101,6 +93,25 @@
             android:summary="%s"
             android:key="LTE4GIconMod"
             android:title="@string/lte_4g_icon_title" />
+
+        <PreferenceCategory
+            android:key="sb_multi_row"
+            android:title="@string/sb_multi_row_category" >
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="systemIconsMultiRow"
+                android:summaryOff="@string/general_off"
+                android:summaryOn="@string/general_on"
+                android:title="@string/sb_multi_row_system_icons" />
+
+            <ListPreference
+                android:defaultValue="0"
+                android:entries="@array/sb_icon_sort_names"
+                android:entryValues="@array/sb_icon_sort_codes"
+                android:summary="%s"
+                android:key="systemIconSortPlan"
+                android:title="@string/sb_icon_sort_mode" />
+        </PreferenceCategory>
 
         <PreferenceCategory
             android:title="@string/ntsb_category_title" >

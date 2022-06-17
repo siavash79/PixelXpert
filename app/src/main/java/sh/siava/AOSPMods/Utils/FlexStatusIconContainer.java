@@ -348,12 +348,7 @@ public class FlexStatusIconContainer extends LinearLayout {
     * Layout is happening from end -> start
     */
     private void calculateIconTranslations() {
-        log("total row " + mTotalRows);
-        log("underflow " + (mDotIcon != null));
-
         try {
-            log("total icons " + mMeasureViews.size());
-
             int iconCount = mMeasureViews.size() + ((mDotIcon != null) ? 1 : 0);
 
             float width = getWidth();

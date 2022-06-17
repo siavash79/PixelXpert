@@ -4,6 +4,7 @@ import static de.robv.android.xposed.XposedHelpers.*;
 import static de.robv.android.xposed.XposedBridge.*;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class MultiStatusbarRows extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
     private static boolean systemIconsMultiRow = false;
+    private Object ma;
 
     public MultiStatusbarRows(Context context) {
         super(context);
@@ -46,7 +48,7 @@ public class MultiStatusbarRows extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-//        Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
+        Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
         Class<?> IconManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconController$IconManager", lpparam.classLoader);
 
         hookAllConstructors(IconManagerClass, new XC_MethodHook() {

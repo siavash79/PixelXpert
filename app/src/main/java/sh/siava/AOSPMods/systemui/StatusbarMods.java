@@ -11,9 +11,7 @@ import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
-import static de.robv.android.xposed.XposedHelpers.setStaticIntField;
 
-import android.animation.LayoutTransition;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -58,6 +56,7 @@ import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.Utils.NetworkTraffic;
+import sh.siava.AOSPMods.Utils.NotificationIconContainerOverride;
 import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
@@ -134,7 +133,6 @@ public class StatusbarMods extends XposedModPack {
     private LinearLayout mSystemIconArea = null;
     public static int clockColor = 0;
     private FrameLayout fullStatusbar;
-    private Class<?> NotificationIconContainerClass;
     //    private Object STB = null;
     private int centerAreaFineTune = 50;
 
@@ -142,7 +140,6 @@ public class StatusbarMods extends XposedModPack {
     private FrameLayout mNotificationIconContainer;
     private LinearLayout mLeftVerticalSplitContainer;
     private LinearLayout mLeftExtraRowContainer;
-    private static int NotificationIconLimit = 4;
     //endregion
     
     //region volte
@@ -174,12 +171,7 @@ public class StatusbarMods extends XposedModPack {
     {
         if(XPrefs.Xprefs == null) return;
 
-        NotificationIconLimit = Integer.parseInt(XPrefs.Xprefs.getString("NotificationIconLimit", "4"));
-        try
-        {
-            setStaticIntField(NotificationIconContainerClass, "MAX_STATIC_ICONS", NotificationIconLimit);
-            setStaticIntField(NotificationIconContainerClass, "MAX_VISIBLE_ICONS_ON_LOCK", NotificationIconLimit);
-        }catch (Throwable ignored){}
+        NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(XPrefs.Xprefs.getString("NotificationIconLimit", "4"));
 
         centerAreaFineTune = XPrefs.Xprefs.getInt("centerAreaFineTune", 50);
         tuneCenterArea();
@@ -405,9 +397,10 @@ public class StatusbarMods extends XposedModPack {
         Class<?> PhoneStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
         Class<?> KeyGuardIndicationClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
         Class<?> BatteryTrackerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
-        NotificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
+        Class<?> notificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
         StatusBarIcon = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
-        
+        NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
+
         CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 
         if(CollapsedStatusBarFragmentClass == null)
@@ -423,18 +416,26 @@ public class StatusbarMods extends XposedModPack {
                 setNotificationVisibility();
             }
         };
-        hookAllMethods(NotificationIconContainerClass, "onViewAdded", mNotificationIconAreaContentCheck);
-        hookAllMethods(NotificationIconContainerClass, "onViewRemoved", mNotificationIconAreaContentCheck);
-        //endregion
+        hookAllMethods(notificationIconContainerClass, "onViewAdded", mNotificationIconAreaContentCheck);
+        hookAllMethods(notificationIconContainerClass, "onViewRemoved", mNotificationIconAreaContentCheck);
 
-        // needed to check fastcharging
-        hookAllConstructors(KeyGuardIndicationClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                KIC = param.thisObject;
-            }
-        });
-        
+        hookAllMethods(notificationIconContainerClass, "calculateIconTranslations", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            NotificationIconContainerOverride.calculateIconTranslations(param);
+                            param.setResult(null);
+                    }
+                });
+                //endregion
+
+                // needed to check fastcharging
+                hookAllConstructors(KeyGuardIndicationClass, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        KIC = param.thisObject;
+                    }
+                });
+
         //setting charing status for batterybar and batteryicon
         hookAllMethods(BatteryTrackerClass, "onRefreshBatteryInfo", new XC_MethodHook() {
             @Override

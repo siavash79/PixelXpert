@@ -101,6 +101,7 @@ This module is designed based on AOSP source code. What does it mean? it means t
 - @TeaqariaWTF Turkish
 - @EleoXDA Turkish, German, Russian
 - @nmayorga092   Spanish
+- @vitalitk Ukrainian
 
 **Brought to you by:**
 @siavash79 & @ElTifo

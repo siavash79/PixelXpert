@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -524,6 +526,12 @@ public class SettingsActivity extends AppCompatActivity implements
                 lp.gravity = Gravity.TOP | (Integer.parseInt(sharedPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
                 pullDownIndicator.setLayoutParams(lp);
 
+
+                int QSRowQty = sharedPreferences.getInt("QSRowQty", 0);
+                findPreference("QSRowQty").setSummary((QSRowQty == 0) ? getResources().getString(R.string.battery_default) : String.valueOf(QSRowQty));
+
+                int QSColQty = sharedPreferences.getInt("QSColQty", 0);
+                findPreference("QSColQty").setSummary((QSColQty == 0) ? getResources().getString(R.string.battery_default) : String.valueOf(QSColQty));
             } catch (Exception ignored) {}
         }
 

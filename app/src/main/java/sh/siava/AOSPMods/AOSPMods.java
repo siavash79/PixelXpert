@@ -22,6 +22,7 @@ import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.systemui.BackToKill;
 import sh.siava.AOSPMods.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.systemui.FingerprintWhileDozing;
+import sh.siava.AOSPMods.systemui.QSTileGrid;
 import sh.siava.AOSPMods.systemui.ScreenGestures;
 import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
 import sh.siava.AOSPMods.systemui.KeyGuardPinScrambler;
@@ -78,6 +79,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(FingerprintWhileDozing.class);
         modPacks.add(StatusbarSize.class);
         modPacks.add(MultiStatusbarRows.class);
+        modPacks.add(QSTileGrid.class);
         //endregion
     }
     

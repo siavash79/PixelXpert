@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.Utils;
 
+import static com.topjohnwu.superuser.Shell.cmd;
 import static de.robv.android.xposed.XposedHelpers.*;
 import static de.robv.android.xposed.XposedBridge.*;
 
@@ -7,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
@@ -50,12 +52,12 @@ public class SystemUtils{
 
 	public static void RestartSystemUI()
 	{
-		Shell.cmd("killall com.android.systemui").submit();
+		cmd("killall com.android.systemui").submit();
 	}
 
 	public static void Restart()
 	{
-		Shell.cmd("am start -a android.intent.action.REBOOT").submit();
+		cmd("am start -a android.intent.action.REBOOT").submit();
 	}
 
 	public static boolean isFlashOn() {
@@ -298,5 +300,22 @@ public class SystemUtils{
 			super.onTorchModeChanged(cameraId, enabled);
 			torchOn = enabled;
 		}
+	}
+	public static boolean isDarkMode()
+	{
+		if(instance == null) return false;
+		return instance.getIsDark();
+	}
+
+	private boolean getIsDark() {
+		return (mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) == Configuration.UI_MODE_NIGHT_YES;
+	}
+
+	public static void doubleToggleDarkMode() {
+		boolean isDark = isDarkMode();
+		new Thread(() -> {
+			cmd("cmd uimode night " + (isDark ? "no" : "yes")).exec();
+			cmd("cmd uimode night " + (isDark ? "yes" : "no")).exec();
+		}).start();
 	}
 }

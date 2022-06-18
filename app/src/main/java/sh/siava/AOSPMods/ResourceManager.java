@@ -1,16 +1,20 @@
 package sh.siava.AOSPMods;
 
+import android.content.res.Configuration;
 import android.content.res.XModuleResources;
 
 import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookZygoteInit;
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
+import de.robv.android.xposed.callbacks.XC_LayoutInflated;
 
 public class ResourceManager implements IXposedHookInitPackageResources, IXposedHookZygoteInit {
 
     private String MODULE_PATH;
-    private XC_InitPackageResources.InitPackageResourcesParam resparam;
-    private XModuleResources modRes;
+    public static XC_InitPackageResources.InitPackageResourcesParam SysUIresparam;
+    public static XModuleResources modRes;
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
@@ -22,10 +26,11 @@ public class ResourceManager implements IXposedHookInitPackageResources, IXposed
 
         XModuleResources modRes = XModuleResources.createInstance(MODULE_PATH, resparam.res);
 
-        this.resparam = resparam;
-        this.modRes = modRes;
-        if(resparam.packageName.startsWith(AOSPMods.SYSTEM_UI_PACKAGE)) {
+        if(resparam.packageName.equals(AOSPMods.SYSTEM_UI_PACKAGE)) {
+            this.SysUIresparam = resparam;
+            this.modRes = modRes;
         }
+
     }
 
 

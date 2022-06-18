@@ -105,9 +105,9 @@ public class NotificationIconContainerOverride {
             if (iconState != null) {
                 // Most of the time the icon isn't yet added when this is called but only happening
                 // later
-                float[] mAbsolutePosition = (float[]) getObjectField(thisObject, "mAbsolutePosition");
+                int[] mAbsolutePosition = (int[]) getObjectField(thisObject, "mAbsolutePosition");
                 setObjectField(iconState, "xTranslation", getFloatField(getObjectField(thisObject, "mIsolatedIconLocation"), "left") - mAbsolutePosition[0]
-                - (1 - (float)callMethod(getObjectField(thisObject, "mIsolatedIcon"), "getIconScale")) * (float)callMethod(getObjectField(thisObject, "mIsolatedIcon"), "getWidth") / 2.0f);
+                - (1 - (float)callMethod(getObjectField(thisObject, "mIsolatedIcon"), "getIconScale")) * (int)callMethod(getObjectField(thisObject, "mIsolatedIcon"), "getWidth") / 2.0f);
                 setObjectField(iconState, "visibleState", STATE_ICON);
             }
         }

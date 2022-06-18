@@ -12,6 +12,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -42,7 +43,6 @@ import androidx.annotation.Nullable;
 import com.nfx.android.rangebarpreference.RangeBarHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -411,15 +411,6 @@ public class StatusbarMods extends XposedModPack {
         //endregion
 
         //region multi row statusbar
-        XC_MethodHook mNotificationIconAreaContentCheck = new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                setNotificationVisibility();
-            }
-        };
-        hookAllMethods(notificationIconContainerClass, "onViewAdded", mNotificationIconAreaContentCheck);
-        hookAllMethods(notificationIconContainerClass, "onViewRemoved", mNotificationIconAreaContentCheck);
-
         hookAllMethods(notificationIconContainerClass, "calculateIconTranslations", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -694,17 +685,6 @@ public class StatusbarMods extends XposedModPack {
     }
 
     //region double row left area
-    private void setNotificationVisibility() {
-        try {
-            HashMap<?, ?> mIconStates = (HashMap<?, ?>) getObjectField(mNotificationIconContainer, "mIconStates");
-            boolean shouldShow = mIconStates.size() > 0;
-
-            mNotificationIconContainer.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
-            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mLeftExtraRowContainer.getLayoutParams();
-            lp.height = (shouldShow) ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT;
-        }catch (Throwable ignored){}
-    }
-
     private void makeLeftSplitArea() {
         mNotificationIconContainer = mNotificationIconAreaInner.findViewById(mContext.getResources().getIdentifier("notificationIcons", "id", mContext.getPackageName()));
 
@@ -717,28 +697,33 @@ public class StatusbarMods extends XposedModPack {
             if(mLeftVerticalSplitContainer.getParent() != null)
                 ((ViewGroup) mLeftVerticalSplitContainer.getParent()).removeView(mLeftVerticalSplitContainer);
         }
-        mLeftVerticalSplitContainer.setLayoutParams(mNotificationIconContainer.getLayoutParams());
         mLeftVerticalSplitContainer.setOrientation(LinearLayout.VERTICAL);
 
         mLeftExtraRowContainer = new LinearLayout(mContext);
-        mLeftExtraRowContainer.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-/*        LayoutTransition layoutTransition = new LayoutTransition();
+
+
+        LayoutTransition layoutTransition = new LayoutTransition();
         layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
-        layoutTransition.setDuration(1000);
-        mLeftExtraRowContainer.setLayoutTransition(layoutTransition);*/
+        layoutTransition.setDuration(200);
+        mLeftVerticalSplitContainer.setLayoutTransition(layoutTransition);
 
         ViewGroup parent = ((ViewGroup)mNotificationIconContainer.getParent());
         if(parent != null) {
             parent.removeView(mNotificationIconContainer);
         }
 
+        mLeftVerticalSplitContainer.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
+        mLeftExtraRowContainer.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,1));
+        mNotificationIconContainer.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1));
+
+//        mLeftVerticalSplitContainer.setBackgroundColor(Color.WHITE);
+//        mLeftExtraRowContainer.setBackgroundColor(Color.GREEN);
+//        mNotificationIconContainer.setBackgroundColor(Color.BLUE);
+
         mLeftVerticalSplitContainer.addView(mLeftExtraRowContainer);
         mLeftVerticalSplitContainer.addView(mNotificationIconContainer);
-
         mNotificationIconAreaInner.addView(mLeftVerticalSplitContainer);
-
-        setNotificationVisibility();
     }
     //end region
 

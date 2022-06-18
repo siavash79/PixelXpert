@@ -1,17 +1,18 @@
 package sh.siava.AOSPMods.launcher;
 
-import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
 
 import android.content.Context;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.XPrefs;
 
-public class TaskbarActivator extends XposedModPack
-{
+public class TaskbarActivator extends XposedModPack {
 	private static final String listenPackage = "com.google.android.apps.nexuslauncher";
 	
 	private static final int TASKBAR_DEFAULT = 0;
@@ -20,49 +21,42 @@ public class TaskbarActivator extends XposedModPack
 	
 	private static int taskbarMode = 0;
 	
-	public TaskbarActivator(Context context)
-	{
-		super(context);
-	}
+	public TaskbarActivator(Context context) { super(context); }
 	
 	@Override
-	public void updatePrefs(String... Key)
-	{
+	public void updatePrefs(String... Key) {
 		String taskbarModeStr = XPrefs.Xprefs.getString("taskBarMode", "0");
 		
 		if(Key.length > 0) {
 			try {
 				int newtaskbarMode = Integer.parseInt(taskbarModeStr);
-				if(newtaskbarMode != taskbarMode) {
+				if (newtaskbarMode != taskbarMode) {
 					taskbarMode = newtaskbarMode;
 					android.os.Process.killProcess(android.os.Process.myPid());
 				}
-			} catch(Exception ignored) {
+			} catch (Exception ignored) {
 			}
-		} else {
+		}
+		else
+		{
 			taskbarMode = Integer.parseInt(taskbarModeStr);
 		}
 	}
 	
 	@Override
-	public boolean listensTo(String packageName)
-	{
-		return listenPackage.equals(packageName);
-	}
+	public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 	
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable
-	{
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		
 		Class<?> info = findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
 		
 		
-		hookAllMethods(info, "isTablet", new XC_MethodHook()
-		{
+		hookAllMethods(info, "isTablet", new XC_MethodHook() {
 			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable
-			{
-				switch(taskbarMode) {
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				switch (taskbarMode)
+				{
 					case TASKBAR_OFF:
 						param.setResult(false);
 						break;

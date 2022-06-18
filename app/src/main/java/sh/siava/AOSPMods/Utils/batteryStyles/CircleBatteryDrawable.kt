@@ -44,7 +44,7 @@ class CircleBatteryDrawable(
     private val padding = Rect()
     private val frame = RectF()
     private val boltFrame = RectF()
-    private val pathEffect = DashPathEffect(floatArrayOf(3f, 2f), 0f)
+    private val pathEffect = DashPathEffect(floatArrayOf(3f,2f),0f)
 
     private var iconTint = Color.WHITE
     private var intrinsicWidth: Int
@@ -52,7 +52,7 @@ class CircleBatteryDrawable(
     private var height = 0
     private var width = 0
     private var isCharging = false
-    private var powerSaveColor: Int
+    private var powerSaveColor : Int
 
 
     private val BATTERY_STYLE_CIRCLE = 1
@@ -69,7 +69,8 @@ class CircleBatteryDrawable(
 
     override fun setFastCharging(isFastCharging: Boolean) {
         fastCharging = isFastCharging
-        if (!isFastCharging) {
+        if(!isFastCharging)
+        {
             charging = false
         }
         postInvalidate()
@@ -77,9 +78,10 @@ class CircleBatteryDrawable(
 
     private var charging: Boolean = false
 
-    override fun setCharging(isCharging: Boolean) {
+    override fun setCharging(isCharging : Boolean)
+    {
         charging = isCharging
-        if (!charging) fastCharging = false
+        if(!charging) fastCharging = false
         postInvalidate()
     }
 
@@ -127,8 +129,7 @@ class CircleBatteryDrawable(
         super.setBounds(left, top, right, bottom)
         updateSize()
     }
-
-    private var javaAlpha: Int = 255
+    private var javaAlpha : Int = 255
     override fun setAlpha(alpha: Int) {
         javaAlpha = alpha
     }
@@ -138,27 +139,15 @@ class CircleBatteryDrawable(
         height = bounds.bottom - padding.bottom - (bounds.top + padding.top)
         width = bounds.right - padding.right - (bounds.left + padding.left)
         warningTextPaint.textSize = height * 0.75f
-        intrinsicHeight = res.getDimensionPixelSize(
-            res.getIdentifier(
-                "battery_height",
-                "dimen",
-                context.packageName
-            )
-        )// res.getDimensionPixelSize(R.dimen.battery_height)
-        intrinsicWidth = res.getDimensionPixelSize(
-            res.getIdentifier(
-                "battery_height",
-                "dimen",
-                context.packageName
-            )
-        )//res.getDimensionPixelSize(R.dimen.battery_height)
+        intrinsicHeight = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", context.packageName))// res.getDimensionPixelSize(R.dimen.battery_height)
+        intrinsicWidth = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", context.packageName))//res.getDimensionPixelSize(R.dimen.battery_height)
     }
 
     override fun getPadding(padding: Rect): Boolean {
         if (this.padding.left == 0 &&
-            this.padding.top == 0 &&
-            this.padding.right == 0 &&
-            this.padding.bottom == 0
+                this.padding.top == 0 &&
+                this.padding.right == 0 &&
+                this.padding.bottom == 0
         ) {
             return super.getPadding(padding)
         }
@@ -212,27 +201,27 @@ class CircleBatteryDrawable(
             val br = frame.right - frame.width() / 4.0f
             val bb = frame.bottom - frame.height() / 5.6f
             if (boltFrame.left != bl ||
-                boltFrame.top != bt ||
-                boltFrame.right != br ||
-                boltFrame.bottom != bb
+                    boltFrame.top != bt ||
+                    boltFrame.right != br ||
+                    boltFrame.bottom != bb
             ) {
                 boltFrame[bl, bt, br] = bb
                 boltPath.reset()
                 boltPath.moveTo(
-                    boltFrame.left + boltPoints[0] * boltFrame.width(),
-                    boltFrame.top + boltPoints[1] * boltFrame.height()
+                        boltFrame.left + boltPoints[0] * boltFrame.width(),
+                        boltFrame.top + boltPoints[1] * boltFrame.height()
                 )
                 var i = 2
                 while (i < boltPoints.size) {
                     boltPath.lineTo(
-                        boltFrame.left + boltPoints[i] * boltFrame.width(),
-                        boltFrame.top + boltPoints[i + 1] * boltFrame.height()
+                            boltFrame.left + boltPoints[i] * boltFrame.width(),
+                            boltFrame.top + boltPoints[i + 1] * boltFrame.height()
                     )
                     i += 2
                 }
                 boltPath.lineTo(
-                    boltFrame.left + boltPoints[0] * boltFrame.width(),
-                    boltFrame.top + boltPoints[1] * boltFrame.height()
+                        boltFrame.left + boltPoints[0] * boltFrame.width(),
+                        boltFrame.top + boltPoints[1] * boltFrame.height()
                 )
             }
 
@@ -241,7 +230,7 @@ class CircleBatteryDrawable(
             c.drawPath(boltPath, boltPaint)
         }
         // draw thin gray ring first
-        framePaint.alpha = (80 * javaAlpha / 255f).roundToInt()
+        framePaint.alpha = (80*javaAlpha/255f).roundToInt()
         c.drawArc(frame, 270f, 360f, false, framePaint)
         // draw colored arc representing charge level
         if (batteryLevel > 0) {
@@ -259,10 +248,10 @@ class CircleBatteryDrawable(
             textPaint.textSize = height * 0.52f
             val textHeight = -textPaint.fontMetrics.ascent
             val pctText =
-                if (batteryLevel > criticalLevel)
-                    batteryLevel.toString()
-                else
-                    warningString
+                    if (batteryLevel > criticalLevel)
+                        batteryLevel.toString()
+                    else
+                        warningString
             val pctX = width * 0.5f
             val pctY = (height + textHeight) * 0.47f
             textPaint.alpha = javaAlpha
@@ -352,8 +341,7 @@ class CircleBatteryDrawable(
         boltPaint.colorFilter = colorFilter
     }
 
-    @Deprecated(
-        "Deprecated in Java",
+    @Deprecated("Deprecated in Java",
         ReplaceWith("PixelFormat.UNKNOWN", "android.graphics.PixelFormat")
     )
     override fun getOpacity() = PixelFormat.UNKNOWN
@@ -364,8 +352,8 @@ class CircleBatteryDrawable(
         private var lastUpdate: Long = -1
 
         private fun loadPoints(
-            res: Resources,
-            pointArrayRes: Int
+                res: Resources,
+                pointArrayRes: Int
         ): FloatArray {
             val pts = res.getIntArray(pointArrayRes)
             var maxX = 0
@@ -411,35 +399,16 @@ class CircleBatteryDrawable(
 
         boltPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         boltPoints =
-            loadPoints(
-                res,
-                res.getIdentifier("batterymeter_bolt_points", "array", context.packageName)
-            )// R.array.batterymeter_bolt_points)
+                loadPoints(res, res.getIdentifier("batterymeter_bolt_points", "array", context.packageName))// R.array.batterymeter_bolt_points)
         powerSaveColor = getColorStateListDefaultColor(
-            context,
-            res.getIdentifier(
-                "batterymeter_plus_color",
-                "color",
-                context.packageName
-            )//R.color.batterymeter_plus_color
+                context,
+                res.getIdentifier("batterymeter_plus_color", "color", context.packageName)//R.color.batterymeter_plus_color
         )
         powerSavePaint = Paint(Paint.ANTI_ALIAS_FLAG)
         powerSavePaint.color = powerSaveColor
         powerSavePaint.style = Paint.Style.STROKE
-        intrinsicWidth = res.getDimensionPixelSize(
-            res.getIdentifier(
-                "battery_height",
-                "dimen",
-                context.packageName
-            )
-        )//R.dimen.battery_width)
-        intrinsicHeight = res.getDimensionPixelSize(
-            res.getIdentifier(
-                "battery_height",
-                "dimen",
-                context.packageName
-            )
-        )//R.dimen.battery_height)
+        intrinsicWidth = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", context.packageName))//R.dimen.battery_width)
+        intrinsicHeight = res.getDimensionPixelSize(res.getIdentifier("battery_height", "dimen", context.packageName))//R.dimen.battery_height)
 
         dualTone = false//res.getBoolean(com.android.internal.R.bool.config_batterymeterDualTone)
     }

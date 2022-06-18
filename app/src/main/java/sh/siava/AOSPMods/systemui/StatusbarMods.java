@@ -78,6 +78,7 @@ public class StatusbarMods extends XposedModPack {
     private static final int POSITION_RIGHT = 2;
     private static final int POSITION_LEFT_EXTRA_LEVEL = 3;
 
+    private static final int AM_PM_STYLE_SMALL = 1;
     private static final int AM_PM_STYLE_GONE = 2;
 
     private final int leftClockPadding, rightClockPadding;
@@ -638,7 +639,7 @@ public class StatusbarMods extends XposedModPack {
                 "getSmallTime", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        setObjectField(param.thisObject, "mAmPmStyle", mAmPmStyle);
+                        setObjectField(param.thisObject, "mAmPmStyle", AM_PM_STYLE_GONE);
                         setObjectField(param.thisObject, "mShowSeconds", mShowSeconds);
                     }
 
@@ -655,6 +656,9 @@ public class StatusbarMods extends XposedModPack {
                                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         }
                         result.append(clockText);
+                        if(mAmPmStyle != AM_PM_STYLE_GONE) {
+                            result.append(getFormattedString("$Ga", mAmPmStyle == AM_PM_STYLE_SMALL, mClockColor));
+                        }
                         result.append(getFormattedString(mStringFormatAfter, mAfterSmall, mAfterClockColor)); //after clock
                         param.setResult(result);
                     }

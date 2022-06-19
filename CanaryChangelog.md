@@ -1,3 +1,7 @@
+**canary-57**  
+- improved setting number of QS rows/columns  
+- Added Ukrainian language (Credits: @vitalitk)  
+  
 **canary-56**  
 - UI strings improvement (credits: @wrongway213)  
 - Fixed Notification Icon limit bug  

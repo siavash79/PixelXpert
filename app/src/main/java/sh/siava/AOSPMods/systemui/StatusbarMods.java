@@ -55,6 +55,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.Utils.ShyLinearLayout;
 import sh.siava.AOSPMods.Utils.NetworkTraffic;
 import sh.siava.AOSPMods.Utils.NotificationIconContainerOverride;
 import sh.siava.AOSPMods.Utils.StringFormatter;
@@ -138,6 +139,7 @@ public class StatusbarMods extends XposedModPack {
     private int centerAreaFineTune = 50;
 
     private View mClockView;
+    @SuppressWarnings("FieldCanBeLocal")
     private FrameLayout mNotificationIconContainer;
     private LinearLayout mLeftVerticalSplitContainer;
     private LinearLayout mLeftExtraRowContainer;
@@ -699,9 +701,8 @@ public class StatusbarMods extends XposedModPack {
         }
         mLeftVerticalSplitContainer.setOrientation(LinearLayout.VERTICAL);
 
-        mLeftExtraRowContainer = new LinearLayout(mContext);
-
-
+        mLeftExtraRowContainer = new ShyLinearLayout(mContext);
+        mLeftExtraRowContainer.setVisibility(View.GONE); //Shy layout must be gone at initiation
 
         LayoutTransition layoutTransition = new LayoutTransition();
         layoutTransition.enableTransitionType(LayoutTransition.CHANGING);

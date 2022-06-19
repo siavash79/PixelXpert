@@ -57,7 +57,7 @@
     <string name="hide_default">Não mostrar (padrão)</string>
     <string name="pull_down_left">Esquerda</string>
     <string name="pull_down_right">Direita</string>
-    <string name="battery_default">Padrão (requer reiniciar)</string>
+    <string name="word_default">Padrão (requer reiniciar)</string>
     <string name="battery_circle">Círculo</string>
     <string name="battery_dashed_circle">Círculo pontilhado</string>
     <string name="clock_default">Esquerda (pdrão)</string>

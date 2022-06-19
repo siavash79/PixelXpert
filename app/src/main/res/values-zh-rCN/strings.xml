@@ -203,7 +203,7 @@
     <string name="pull_down_right">右侧</string>
 
     <!-- Battery styles -->
-    <string name="battery_default">默认 (重启后生效)</string>
+    <string name="word_default">默认 (重启后生效)</string>
     <string name="battery_circle">圆形</string>
     <string name="battery_dashed_circle">虚线圆</string>
 

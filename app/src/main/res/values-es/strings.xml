@@ -243,7 +243,7 @@
     <string name="pull_down_right">Derecha</string>
 
     <!-- Battery styles -->
-    <string name="battery_default">Por defecto</string>
+    <string name="word_default">Por defecto</string>
     <string name="battery_circle">Circular</string>
     <string name="battery_dashed_circle">Circular punteada</string>
 	<string name="battery_circle_filled">Cícrulo lleno</string>

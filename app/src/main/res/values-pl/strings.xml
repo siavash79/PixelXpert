@@ -239,7 +239,7 @@
     <string name="pull_down_right">Prawy</string>
 
     <!-- Battery styles -->
-    <string name="battery_default">Domyślny (wymaga ponownego uruchomienia, aby zastosować)</string>
+    <string name="word_default">Domyślny (wymaga ponownego uruchomienia, aby zastosować)</string>
     <string name="battery_circle">Koło</string>
     <string name="battery_dashed_circle">Przerywane koło</string>
     <string name="battery_circle_filled">Wypełnione koło</string>

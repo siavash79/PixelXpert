@@ -134,7 +134,7 @@
     <string name="pull_down_right">右邊</string>
 
     <!-- Battery styles -->
-    <string name="battery_default">預設 (需要重新啟動才能應用)</string>
+    <string name="word_default">預設 (需要重新啟動才能應用)</string>
     <string name="battery_circle">圓圈</string>
     <string name="battery_dashed_circle">虛線圓圈</string>
 

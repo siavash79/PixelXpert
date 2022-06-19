@@ -244,7 +244,7 @@
     <string name="pull_down_right">rechts</string>
 
     <!-- Battery styles -->
-    <string name="battery_default">Standart (Benötigt Neustart)</string>
+    <string name="word_default">Standart (Benötigt Neustart)</string>
     <string name="battery_circle">Kreis</string>
     <string name="battery_dashed_circle">gepunkteter Kreis</string>
     <string name="battery_circle_filled">ausgefüllter Kreis</string>

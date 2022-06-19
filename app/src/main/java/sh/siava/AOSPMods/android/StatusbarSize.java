@@ -69,17 +69,18 @@ public class StatusbarSize extends XposedModPack {
 
                         DisplayCutout displayCutout = (DisplayCutout)param.getResult();
 
-                        ((Rect[])getObjectField(
+                        Rect boundTop = ((Rect[])getObjectField(
                                 getObjectField(
                                         displayCutout,
                                         "mBounds"),
                                 "mRects")
-                        )[BOUNDS_POSITION_TOP].bottom = currentHeight;
+                        )[BOUNDS_POSITION_TOP];
+                        boundTop.bottom = Math.min(boundTop.bottom, currentHeight);
 
-                        ((Rect) getObjectField(
+                        Rect mSafeInsets = (Rect) getObjectField(
                                 displayCutout,
-                                "mSafeInsets")
-                        ).top = currentHeight;
+                                "mSafeInsets");
+                        mSafeInsets.top = Math.min(mSafeInsets.top, currentHeight);
                     }
                 });
             }catch (Throwable ignored){}

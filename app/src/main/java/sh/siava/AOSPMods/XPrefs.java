@@ -20,12 +20,12 @@ public class XPrefs implements IXposedHookZygoteInit {
     public static XModuleResources modRes;
     public static SharedPreferences Xprefs;
     public static String MagiskRoot = "/data/adb/modules/AOSPMods";
-    private static Context mContext;
+    private static String packageName;
 
-    static SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything(mContext.getPackageName(), key);
+    static SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything(packageName, key);
 
     public static void loadPrefs(Context context) {
-        mContext = context;
+        packageName = context.getPackageName();
         Xprefs = new RemotePreferences(context, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
         log("AOSPMods Version: " + BuildConfig.VERSION_NAME);
         log("AOSPMods Records: " + Xprefs.getAll().keySet().size());

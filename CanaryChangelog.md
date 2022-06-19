@@ -1,3 +1,7 @@
+**canary-59**  
+- Improved StatusbarSize - (hopefully) Final edit  
+- Added option to choose number of QQS tiles  
+  
 **canary-58**  
 - Fixed notification icons alignment bug  
   

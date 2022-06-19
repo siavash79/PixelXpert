@@ -31,22 +31,17 @@
     <PreferenceCategory
         android:title="@string/doze_header">
         <SwitchPreference
+            android:defaultValue="true"
+            android:key="fingerprintWhileDozing"
+            android:title="@string/so_fingerprint_sensor_enabled" />
+        <SwitchPreference
             android:defaultValue="false"
             android:key="replaceAssistantwithTorch"
-            android:title="@string/so_power_longpress_torch_title"
-            app:summary="@string/framework_needed_caution_summary" />
+            android:title="@string/so_power_longpress_torch_title" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="holdVolumeToSkip"
-            android:title="@string/so_vol_longpress_skip"
-            app:summary="@string/framework_needed_caution_summary" />
-        <!-- apparently already done by android team!
-        SwitchPreference
-            android:defaultValue="false"
-            android:key="enableProximityWake"
-            android:title="@string/so_tap_proximity_wake_title"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on" /-->
+            android:title="@string/so_vol_longpress_skip" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="doubleTapToWake"

@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.launcher;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -46,10 +49,10 @@ public class TaskbarActivator extends XposedModPack {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		
-		Class<?> info = XposedHelpers.findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
+		Class<?> info = findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
 		
 		
-		XposedBridge.hookAllMethods(info, "isTablet", new XC_MethodHook() {
+		hookAllMethods(info, "isTablet", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				switch (taskbarMode)

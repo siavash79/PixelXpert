@@ -1,2 +1,4 @@
-include ':app'
 rootProject.name = "AOSPMods"
+include ':app'
+include ':renderscript-toolkit'
+project(':renderscript-toolkit').projectDir = new File(rootDir, 'Submodules/renderscript-toolkit/renderscript-toolkit/')

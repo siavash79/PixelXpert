@@ -251,13 +251,12 @@ public class NetworkTraffic extends LinearLayout {
         this.addView(mTextView);
         mConnectivityManager = SystemUtils.ConnectivityManager();
 
-        StatusbarMods.registerClockVisibilityCallback(visible -> {if (visible) makeVisible(false); else hide(false);} );
-
         isSBInstance = onStatusbar;
         if(onStatusbar)
         {
             SBInstance = this;
             setTintColor(StatusbarMods.clockColor, true);
+            StatusbarMods.registerClockVisibilityCallback(visible -> {if (visible) makeVisible(false); else hide(false);} );
         }
         else
         {

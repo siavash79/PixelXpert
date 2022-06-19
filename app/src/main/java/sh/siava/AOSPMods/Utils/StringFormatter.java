@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.Utils;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.graphics.Color;
@@ -28,7 +31,7 @@ public class StringFormatter {
     private static final ArrayList<StringFormatter> instances = new ArrayList<>();
     private final ArrayList<formattedStringCallback> callbacks = new ArrayList<>();
     private boolean hasDate = false;
-    private final NetworkStats.networkStatCallback networkStatCallback = stats -> callbacks.forEach(formattedStringCallback::onRefreshNeeded);
+    private final NetworkStats.networkStatCallback networkStatCallback = stats -> informCallbacks();
     public static Integer RXColor, TXColor;
 
     public StringFormatter()
@@ -76,7 +79,7 @@ public class StringFormatter {
         catch (Throwable t){
             if(BuildConfig.DEBUG)
             {
-                XposedBridge.log("Error setting formatted string update schedule");
+                log("Error setting formatted string update schedule");
                 t.printStackTrace();
             }
         }
@@ -186,19 +189,19 @@ public class StringFormatter {
         }
     }
 
-    public void registerDateCallback(@NonNull formattedStringCallback callback)
+    public void registerCallback(@NonNull formattedStringCallback callback)
     {
         callbacks.add(callback);
     }
 
     @SuppressWarnings("unused")
-    public void unRegisterDateCallback(@NonNull formattedStringCallback callback)
+    public void unRegisterCallback(@NonNull formattedStringCallback callback)
     {
         callbacks.remove(callback);
     }
 
     @SuppressWarnings("unused")
-    public void resetDateCallbacks()
+    public void resetCallbacks()
     {
         callbacks.clear();
     }

@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.widget.TextView;
 
@@ -36,18 +39,18 @@ public class QSFooterTextManager extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        stringFormatter.registerDateCallback(refreshCallback);
+        stringFormatter.registerCallback(refreshCallback);
 
-        Class<?> QSFooterViewClass = XposedHelpers.findClass("com.android.systemui.qs.QSFooterView", lpparam.classLoader);
+        Class<?> QSFooterViewClass = findClass("com.android.systemui.qs.QSFooterView", lpparam.classLoader);
 
-        XposedBridge.hookAllConstructors(QSFooterViewClass, new XC_MethodHook() {
+        hookAllConstructors(QSFooterViewClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 QSFV = param.thisObject;
             }
         });
 
-        XposedBridge.hookAllMethods(QSFooterViewClass,
+        hookAllMethods(QSFooterViewClass,
                 "setBuildText", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -60,9 +63,9 @@ public class QSFooterTextManager extends XposedModPack {
     private void setQSFooterText() {
         try {
             if(customQSFooterTextEnabled) {
-                TextView mBuildText = (TextView) XposedHelpers.getObjectField(QSFV, "mBuildText");
+                TextView mBuildText = (TextView) getObjectField(QSFV, "mBuildText");
 
-                XposedHelpers.setObjectField(QSFV,
+                setObjectField(QSFV,
                         "mShouldShowBuildText",
                         customText.trim().length() > 0);
 
@@ -71,7 +74,7 @@ public class QSFooterTextManager extends XposedModPack {
             }
             else
             {
-                XposedHelpers.callMethod(QSFV,
+                callMethod(QSFV,
                         "setBuildText");
             }
         } catch (Throwable ignored){} //probably not initiated yet

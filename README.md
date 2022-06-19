@@ -2,6 +2,11 @@
 ![Total Downloads](https://img.shields.io/github/downloads/siavash79/aospmods/total?color=red&label=Total%20Downloads)
 
 ![Header Image](https://raw.githubusercontent.com/siavash79/AOSPMods/master/.github/AOSP_Mods_Header.png)
+<div align="center">
+  <a href="https://t.me/AOSPMods_Support">
+    <img src="https://img.shields.io/badge/Join-Telegram-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyNCAyNCIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtOS40MTcgMTUuMTgxLS4zOTcgNS41ODRjLjU2OCAwIC44MTQtLjI0NCAxLjEwOS0uNTM3bDIuNjYzLTIuNTQ1IDUuNTE4IDQuMDQxYzEuMDEyLjU2NCAxLjcyNS4yNjcgMS45OTgtLjkzMWwzLjYyMi0xNi45NzIuMDAxLS4wMDFjLjMyMS0xLjQ5Ni0uNTQxLTIuMDgxLTEuNTI3LTEuNzE0bC0yMS4yOSA4LjE1MWMtMS40NTMuNTY0LTEuNDMxIDEuMzc0LS4yNDcgMS43NDFsNS40NDMgMS42OTMgMTIuNjQzLTcuOTExYy41OTUtLjM5NCAxLjEzNi0uMTc2LjY5MS4yMTh6IiBmaWxsPSIjMDM5YmU1Ii8+PC9zdmc+"/>
+    </a>
+</div>
 
 This is a mixed Xposed+Magisk module, which is made to allow customizations that are not originally designed in AOSP (Android Open Source Project).
 
@@ -62,7 +67,7 @@ This module is designed based on AOSP source code. What does it mean? it means t
 - Android 13:         NOT Compatible
 
 
-**Prerequisits:**
+**Prerequisites:**
 - Compatible Roms (see above)
 - Device Rooted by Magisk 24.2+
 - LSPosed (Zygisk Version)
@@ -96,6 +101,7 @@ This module is designed based on AOSP source code. What does it mean? it means t
 - @TeaqariaWTF Turkish
 - @EleoXDA Turkish, German, Russian
 - @nmayorga092   Spanish
+- @vitalitk Ukrainian
 
 **Brought to you by:**
 @siavash79 & @ElTifo

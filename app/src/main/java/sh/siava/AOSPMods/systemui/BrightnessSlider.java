@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -68,8 +71,8 @@ public class BrightnessSlider extends XposedModPack {
         }catch (Exception ignored){}
         try {
             if (!QSBrightnessDisabled) {
-                Object mView = XposedHelpers.getObjectField(QS, "mView");
-                XposedHelpers.callMethod(mView, "setBrightnessView", QSbrightnessSliderView);
+                Object mView = getObjectField(QS, "mView");
+                callMethod(mView, "setBrightnessView", QSbrightnessSliderView);
             }
         } catch (Exception ignored){}
     }
@@ -78,7 +81,7 @@ public class BrightnessSlider extends XposedModPack {
         if (QQSbrightnessSliderView == null) return;
         try{
             if (QQSBrightnessEnabled) {
-                XposedHelpers.callMethod(QQS, "setBrightnessView", QQSbrightnessSliderView);
+                callMethod(QQS, "setBrightnessView", QQSbrightnessSliderView);
             } else {
                 ((ViewGroup) QQSbrightnessSliderView.getParent()).removeView(QQSbrightnessSliderView);
             }
@@ -93,20 +96,20 @@ public class BrightnessSlider extends XposedModPack {
         if(!BrightnessHookEnabled || !listenPackage.equals(lpparam.packageName)) //master switch
             return;
         
-        Class<?> QuickQSPanelClass = XposedHelpers.findClass("com.android.systemui.qs.QuickQSPanel", lpparam.classLoader);
-        Class<?> QSPanelControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
-        Class<?> BrightnessMirrorHandlerClass = XposedHelpers.findClass("com.android.systemui.settings.brightness.BrightnessMirrorHandler", lpparam.classLoader);
-        Class<?> QSPanelClass = XposedHelpers.findClass("com.android.systemui.qs.QSPanel", lpparam.classLoader);
+        Class<?> QuickQSPanelClass = findClass("com.android.systemui.qs.QuickQSPanel", lpparam.classLoader);
+        Class<?> QSPanelControllerClass = findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
+        Class<?> BrightnessMirrorHandlerClass = findClass("com.android.systemui.settings.brightness.BrightnessMirrorHandler", lpparam.classLoader);
+        Class<?> QSPanelClass = findClass("com.android.systemui.qs.QSPanel", lpparam.classLoader);
         
         //Stealing info from Main QS
-        XposedBridge.hookAllMethods(QSPanelControllerClass, "setBrightnessMirror", new XC_MethodHook() {
+        hookAllMethods(QSPanelControllerClass, "setBrightnessMirror", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 BrightnessMirrorController = param.args[0];
             }
         });
         
-        XposedBridge.hookAllMethods(QSPanelClass, "setBrightnessView", new XC_MethodHook() {
+        hookAllMethods(QSPanelClass, "setBrightnessView", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if(!BrightnessSlierOnBottom) return;
@@ -122,7 +125,7 @@ public class BrightnessSlider extends XposedModPack {
             }
         });
         
-        XposedBridge.hookAllMethods(QSPanelClass, "initialize", new XC_MethodHook() {
+        hookAllMethods(QSPanelClass, "initialize", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 setQSVisibility();
@@ -130,14 +133,14 @@ public class BrightnessSlider extends XposedModPack {
             }
         });
         
-        XposedBridge.hookAllConstructors(QSPanelControllerClass, new XC_MethodHook() {
+        hookAllConstructors(QSPanelControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 QS = param.thisObject;
                 brightnessControllerFactory = param.args[12];
                 brightnessSliderFactory = param.args[13];
-                Object mBrightnessSliderController = XposedHelpers.getObjectField(param.thisObject, "mBrightnessSliderController");
-                QSbrightnessSliderView = (View) XposedHelpers.callMethod(mBrightnessSliderController, "getRootView");
+                Object mBrightnessSliderController = getObjectField(param.thisObject, "mBrightnessSliderController");
+                QSbrightnessSliderView = (View) callMethod(mBrightnessSliderController, "getRootView");
                 QSParent = (ViewGroup) QSbrightnessSliderView.getParent();
     
                 setQSVisibility();
@@ -146,36 +149,36 @@ public class BrightnessSlider extends XposedModPack {
         //End Stealing info from Main QS
 
         //Making new Brightness Slider in QQS using stolen info
-        XposedBridge.hookAllConstructors(QuickQSPanelClass, new XC_MethodHook() {
+        hookAllConstructors(QuickQSPanelClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 QQS = param.thisObject;
                 if(BrightnessMirrorController == null) return;
                 
                 //Create new Slider
-                QQSBrightnessSliderController = XposedHelpers.callMethod(brightnessSliderFactory, "create", mContext, param.thisObject);
+                QQSBrightnessSliderController = callMethod(brightnessSliderFactory, "create", mContext, param.thisObject);
 
                 //Place it to QQS
-                QQSbrightnessSliderView = (View) XposedHelpers.callMethod(QQSBrightnessSliderController, "getRootView");
+                QQSbrightnessSliderView = (View) callMethod(QQSBrightnessSliderController, "getRootView");
 
                 //Creating controller and handler
                 Object mBrightnessController;
                 try {
-                    mBrightnessController = XposedHelpers.callMethod(brightnessControllerFactory, "create", QQSBrightnessSliderController);
+                    mBrightnessController = callMethod(brightnessControllerFactory, "create", QQSBrightnessSliderController);
                 }
                 catch(Throwable e) //some custom roms added icon into signature. like ArrowOS
                 {
-                    ImageView icon = (ImageView) XposedHelpers.callMethod(QQSBrightnessSliderController, "getIconView");
-                    mBrightnessController = XposedHelpers.callMethod(brightnessControllerFactory, "create", icon, QQSBrightnessSliderController);
+                    ImageView icon = (ImageView) callMethod(QQSBrightnessSliderController, "getIconView");
+                    mBrightnessController = callMethod(brightnessControllerFactory, "create", icon, QQSBrightnessSliderController);
                 }
                 mBrightnessMirrorHandlerController = BrightnessMirrorHandlerClass.getConstructors()[0].newInstance(mBrightnessController);
-                XposedHelpers.callMethod(mBrightnessMirrorHandlerController, "setController", BrightnessMirrorController);
+                callMethod(mBrightnessMirrorHandlerController, "setController", BrightnessMirrorController);
 
                 //initialization
-                XposedHelpers.callMethod(QQSBrightnessSliderController, "init");
-                XposedHelpers.callMethod(mBrightnessController, "registerCallbacks");
-                XposedHelpers.callMethod(mBrightnessController, "checkRestrictionAndSetEnabled");
-                XposedHelpers.callMethod(mBrightnessMirrorHandlerController, "onQsPanelAttached");
+                callMethod(QQSBrightnessSliderController, "init");
+                callMethod(mBrightnessController, "registerCallbacks");
+                callMethod(mBrightnessController, "checkRestrictionAndSetEnabled");
+                callMethod(mBrightnessMirrorHandlerController, "onQsPanelAttached");
                 
                 setQQSVisibility();
             }

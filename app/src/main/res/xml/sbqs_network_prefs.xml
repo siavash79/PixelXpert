@@ -23,7 +23,8 @@
         android:max="5"
         android:min="1"
         app:min="1"
-        android:title="@string/network_interval_title" />
+        android:title="@string/network_interval_title"
+        app:updatesContinuously="true" />
 
     <EditTextPreference
         android:key="networkTrafficThreshold"

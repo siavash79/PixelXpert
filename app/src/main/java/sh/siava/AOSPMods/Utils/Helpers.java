@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.Utils;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.os.FileUtils;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -35,33 +38,33 @@ public class Helpers {
 
     @SuppressWarnings("unused")
     public static void dumpClass(String className, XC_LoadPackage.LoadPackageParam lpparam){
-        Class<?> ourClass = XposedHelpers.findClassIfExists(className, lpparam.classLoader);
+        Class<?> ourClass = findClassIfExists(className, lpparam.classLoader);
         if(ourClass == null)
         {
-            XposedBridge.log("Class: " + className + " not found");
+            log("Class: " + className + " not found");
             return;
         }
         Method[] ms = ourClass.getDeclaredMethods();
-        XposedBridge.log("Class: " + className);
-        XposedBridge.log("Methods:");
+        log("Class: " + className);
+        log("Methods:");
 
         for(Method m : ms)
         {
-            XposedBridge.log(m.getName() + " - " + m.getReturnType() + " - " + m.getParameterCount());
+            log(m.getName() + " - " + m.getReturnType() + " - " + m.getParameterCount());
             Class<?>[] cs = m.getParameterTypes();
             for(Class<?> c: cs)
             {
-                XposedBridge.log("\t\t" + c.getTypeName());
+                log("\t\t" + c.getTypeName());
             }
         }
-        XposedBridge.log("Fields:");
+        log("Fields:");
 
         Field[] fs = ourClass.getDeclaredFields();
         for(Field f: fs)
         {
-            XposedBridge.log("\t\t" + f.getName() + "-" + f.getType().getName());
+            log("\t\t" + f.getName() + "-" + f.getType().getName());
         }
-        XposedBridge.log("End dump");
+        log("End dump");
     }
 
     public static void getActiveOverlays(){

@@ -32,19 +32,29 @@
                 android:summaryOff="@string/general_off"
                 android:summaryOn="@string/general_on"
                 android:title="@string/qs_haptic_switch_title" />
-            <ListPreference
-                android:defaultValue="None"
-                android:entries="@array/QSRowCountOverlayEx_names"
-                android:entryValues="@array/QSRowCountOverlayEx"
-                android:summary="%s"
-                android:key="QSRowCountOverlayEx"
-                android:title="@string/qs_rows_number" />
-            <SwitchPreference
-                android:defaultValue="false"
-                android:key="QS3ColumnsOverlay"
-                android:title="@string/qs_tiles_3_columns_title"
-                app:summaryOn="@string/general_on"
-                app:summaryOff="@string/general_off"/>
+            <SeekBarPreference
+                android:defaultValue="0"
+                android:max="8"
+                app:min="0"
+                android:key="QSRowQty"
+                app:title="@string/qs_rows_number"
+                app:updatesContinuously="true"/>
+            <SeekBarPreference
+                android:defaultValue="0"
+                android:max="4"
+                app:min="0"
+                android:key="QSColQty"
+                app:title="@string/qs_cols_number"
+                app:updatesContinuously="true"/>
+
+            <SeekBarPreference
+                android:defaultValue="4"
+                android:max="8"
+                app:min="2"
+                android:key="QQSTileQty"
+                app:title="@string/qqs_tiles_number"
+                app:updatesContinuously="true"/>
+
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="wifi_cell"

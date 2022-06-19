@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
@@ -70,22 +73,22 @@ public class QSHeaderManager extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Class<?> QSTileViewImplClass = XposedHelpers.findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
-        Class<?> UtilsClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
-        Class<?> OngoingPrivacyChipClass = XposedHelpers.findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
-        Class<?> FragmentClass = XposedHelpers.findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
-        Class<?> ScrimControllerClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
-        Class<?> GradientColorsClass = XposedHelpers.findClass("com.android.internal.colorextraction.ColorExtractor.GradientColors", lpparam.classLoader);
-        Class<?> StatusbarClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader);
-        Class<?> QSPanelControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
-        Class<?> QuickQSPanelControllerClass = XposedHelpers.findClass("com.android.systemui.qs.QuickQSPanelController", lpparam.classLoader);
-        Class<?> InterestingConfigChangesClass = XposedHelpers.findClass("com.android.settingslib.applications.InterestingConfigChanges", lpparam.classLoader);
+        Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
+        Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
+        Class<?> OngoingPrivacyChipClass = findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
+        Class<?> FragmentHostManagerClass = findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
+        Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
+        Class<?> GradientColorsClass = findClass("com.android.internal.colorextraction.ColorExtractor.GradientColors", lpparam.classLoader);
+        Class<?> StatusbarClass = findClass("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader);
+        Class<?> QSPanelControllerClass = findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
+        Class<?> QuickQSPanelControllerClass = findClass("com.android.systemui.qs.QuickQSPanelController", lpparam.classLoader);
+        Class<?> InterestingConfigChangesClass = findClass("com.android.settingslib.applications.InterestingConfigChanges", lpparam.classLoader);
 
 
-        Method applyStateMethod = XposedHelpers.findMethodExactIfExists(ScrimControllerClass, "applyStateToAlpha");
+        Method applyStateMethod = findMethodExactIfExists(ScrimControllerClass, "applyStateToAlpha");
         if(applyStateMethod == null)
         {
-            applyStateMethod = XposedHelpers.findMethodExact(ScrimControllerClass, "applyState");
+            applyStateMethod = findMethodExact(ScrimControllerClass, "applyState");
         }
         
         try {
@@ -93,7 +96,7 @@ public class QSHeaderManager extends XposedModPack {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        XposedBridge.hookAllMethods(ScrimControllerClass,
+        hookAllMethods(ScrimControllerClass,
                 "onUiModeChanged", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -101,7 +104,7 @@ public class QSHeaderManager extends XposedModPack {
                     }
                 });
 
-        XposedBridge.hookAllConstructors(QuickQSPanelControllerClass, new XC_MethodHook() {
+        hookAllConstructors(QuickQSPanelControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 QuickQSPanelController = param.thisObject;
@@ -109,58 +112,58 @@ public class QSHeaderManager extends XposedModPack {
         });
 
 
-        XposedBridge.hookAllConstructors(QSPanelControllerClass, new XC_MethodHook() {
+        hookAllConstructors(QSPanelControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 QSPanelController = param.thisObject;
             }
         });
 
-        XposedBridge.hookAllMethods(ScrimControllerClass,
+        hookAllMethods(ScrimControllerClass,
                 "updateScrims", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!dualToneQSEnabled) return;
                         
-                        Object mScrimBehind = XposedHelpers.getObjectField(param.thisObject, "mScrimBehind");
-                        boolean mBlankScreen = (boolean) XposedHelpers.getObjectField(param.thisObject, "mBlankScreen");
-                        float alpha = (float) XposedHelpers.callMethod(mScrimBehind, "getViewAlpha");
+                        Object mScrimBehind = getObjectField(param.thisObject, "mScrimBehind");
+                        boolean mBlankScreen = (boolean) getObjectField(param.thisObject, "mBlankScreen");
+                        float alpha = (float) callMethod(mScrimBehind, "getViewAlpha");
                         boolean animateBehindScrim =  alpha!= 0 && !mBlankScreen;
                         
-                        XposedHelpers.callMethod(mScrimBehind, "setColors", mBehindColors, animateBehindScrim);
+                        callMethod(mScrimBehind, "setColors", mBehindColors, animateBehindScrim);
                     }
                 });
         
-        XposedBridge.hookAllMethods(ScrimControllerClass,
+        hookAllMethods(ScrimControllerClass,
                 "updateThemeColors", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!dualToneQSEnabled) return;
                         
-//                        Object mScrimBehind = XposedHelpers.getObjectField(param.thisObject, "mScrimBehind");
+//                        Object mScrimBehind = getObjectField(param.thisObject, "mScrimBehind");
                         
-                        ColorStateList states = (ColorStateList) XposedHelpers.callStaticMethod(UtilsClass,
+                        ColorStateList states = (ColorStateList) callStaticMethod(UtilsClass,
                                 "getColorAttr",
                                 mContext,
                                 mContext.getResources().getIdentifier("android:attr/colorSurfaceHeader", "attr", listenPackage));
                         int surfaceBackground = states.getDefaultColor();
                         
-                        ColorStateList accentStates = (ColorStateList) XposedHelpers.callStaticMethod(UtilsClass,
+                        ColorStateList accentStates = (ColorStateList) callStaticMethod(UtilsClass,
                                 "getColorAccent",
                                 mContext);
                         int accent = accentStates.getDefaultColor();
                         
-                        XposedHelpers.callMethod(mBehindColors, "setMainColor", surfaceBackground);
-                        XposedHelpers.callMethod(mBehindColors, "setSecondaryColor", accent);
+                        callMethod(mBehindColors, "setMainColor", surfaceBackground);
+                        callMethod(mBehindColors, "setSecondaryColor", accent);
                         
-                        double contrast = ColorUtils.calculateContrast((int) XposedHelpers.callMethod(mBehindColors, "getMainColor"), Color.WHITE);
+                        double contrast = ColorUtils.calculateContrast((int) callMethod(mBehindColors, "getMainColor"), Color.WHITE);
                         
-                        XposedHelpers.callMethod(mBehindColors, "setSupportsDarkText", contrast > 4.5);
+                        callMethod(mBehindColors, "setSupportsDarkText", contrast > 4.5);
                     }
                 });
         
         
-        XposedHelpers.findAndHookMethod(OngoingPrivacyChipClass,
+        findAndHookMethod(OngoingPrivacyChipClass,
                 "updateResources", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -168,53 +171,53 @@ public class QSHeaderManager extends XposedModPack {
                         Resources res = mContext.getResources();
                         
                         int iconColor = mContext.getColor(res.getIdentifier("android:color/system_neutral1_900", "color", mContext.getPackageName()));
-                        XposedHelpers.setObjectField(param.thisObject, "iconColor", iconColor);
+                        setObjectField(param.thisObject, "iconColor", iconColor);
                     }
                 });
         
-        XposedBridge.hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
+        hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if(!lightQSHeaderEnabled) return;
                 
-                Object colorActive = XposedHelpers.callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+                Object colorActive = callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
                         mContext,
                         mContext.getResources().getIdentifier("android:attr/colorAccent", "attr", lpparam.packageName));
                 
-                XposedHelpers.setObjectField(param.thisObject, "colorActive", colorActive);
+                setObjectField(param.thisObject, "colorActive", colorActive);
             }
         });
         
-        XposedBridge.hookMethod(applyStateMethod, new XC_MethodHook() {
+        hookMethod(applyStateMethod, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if (!lightQSHeaderEnabled) return;
                 
-                boolean mClipsQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipsQsScrim");
+                boolean mClipsQsScrim = (boolean) getObjectField(param.thisObject, "mClipsQsScrim");
                 if (mClipsQsScrim) {
-                    XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
+                    setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
                 }
             }
         });
         
-        Class<?> ScrimStateEnum = XposedHelpers.findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
+        Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
         
         Object[] constants =  ScrimStateEnum.getEnumConstants();
         for (Object constant : constants) {
             String enumVal = constant.toString();
             switch (enumVal) {
                 case "KEYGUARD":
-                    XposedHelpers.findAndHookMethod(constant.getClass(),
+                    findAndHookMethod(constant.getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if (!lightQSHeaderEnabled) return;
                                     
-                                    boolean mClipQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipQsScrim");
+                                    boolean mClipQsScrim = (boolean) getObjectField(param.thisObject, "mClipQsScrim");
                                     if (mClipQsScrim) {
-                                        XposedHelpers.callMethod(param.thisObject,
+                                        callMethod(param.thisObject,
                                                 "updateScrimColor",
-                                                XposedHelpers.getObjectField(param.thisObject,
+                                                getObjectField(param.thisObject,
                                                         "mScrimBehind"),
                                                 1f,
                                                 Color.TRANSPARENT);
@@ -223,37 +226,37 @@ public class QSHeaderManager extends XposedModPack {
                             });
                     break;
                 case "BOUNCER":
-                    XposedHelpers.findAndHookMethod(constant.getClass(),
+                    findAndHookMethod(constant.getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if (!lightQSHeaderEnabled) return;
                                     
-                                    XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
+                                    setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
                                 }
                             });
                     break;
                 case "SHADE_LOCKED":
-                    XposedBridge.hookAllMethods(constant.getClass(),
+                    hookAllMethods(constant.getClass(),
                             "prepare", new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if (!lightQSHeaderEnabled) return;
                                     
-                                    XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
+                                    setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
                                     
-                                    boolean mClipQsScrim = (boolean) XposedHelpers.getObjectField(param.thisObject, "mClipQsScrim");
+                                    boolean mClipQsScrim = (boolean) getObjectField(param.thisObject, "mClipQsScrim");
                                     if (mClipQsScrim) {
-                                        XposedHelpers.callMethod(param.thisObject,
+                                        callMethod(param.thisObject,
                                                 "updateScrimColor",
-                                                XposedHelpers.getObjectField(param.thisObject,
+                                                getObjectField(param.thisObject,
                                                         "mScrimBehind"),
                                                 1f,
                                                 Color.TRANSPARENT);
                                     }
                                 }
                             });
-                    XposedBridge.hookAllMethods(constant.getClass(),
+                    hookAllMethods(constant.getClass(),
                             "getBehindTint", new XC_MethodHook() {
                                 @Override
                                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -264,17 +267,17 @@ public class QSHeaderManager extends XposedModPack {
                     break;
                 
                 case "UNLOCKED":
-                    XposedHelpers.findAndHookMethod(constant.getClass(),
+                    findAndHookMethod(constant.getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if (!lightQSHeaderEnabled) return;
                                     
-                                    XposedHelpers.setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
+                                    setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
                                     
-                                    XposedHelpers.callMethod(param.thisObject,
+                                    callMethod(param.thisObject,
                                             "updateScrimColor",
-                                            XposedHelpers.getObjectField(param.thisObject,
+                                            getObjectField(param.thisObject,
                                                     "mScrimBehind"),
                                             1f,
                                             Color.TRANSPARENT);
@@ -284,19 +287,19 @@ public class QSHeaderManager extends XposedModPack {
             }
         }
         
-        XposedBridge.hookAllConstructors(FragmentClass, new XC_MethodHook() {
+        hookAllConstructors(FragmentHostManagerClass, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                XposedHelpers.setObjectField(param.thisObject,
+                setObjectField(param.thisObject,
                         "mConfigChanges",
                         InterestingConfigChangesClass.getDeclaredConstructor(int.class).newInstance(0x40000000 | 0x0004 | 0x0100 | 0x80000000 | 0x0200));
             }
         });
 
-        XposedBridge.hookAllConstructors(StatusbarClass, new XC_MethodHook() {
+        hookAllConstructors(StatusbarClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                XposedBridge.hookAllMethods(XposedHelpers.getObjectField(param.thisObject,
+                hookAllMethods(getObjectField(param.thisObject,
                         "mOnColorsChangedListener").getClass(),
                         "onColorsChanged", new XC_MethodHook() {
                     @Override
@@ -308,7 +311,7 @@ public class QSHeaderManager extends XposedModPack {
             }
         });
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader,
+        findAndHookMethod("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader,
                 "updateTheme", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -351,9 +354,9 @@ public class QSHeaderManager extends XposedModPack {
                     mContext.getTheme());
 
             try {
-                ArrayList<?> mRecords = (ArrayList<?>) XposedHelpers.getObjectField(QSPanelController, "mRecords");
+                ArrayList<?> mRecords = (ArrayList<?>) getObjectField(QSPanelController, "mRecords");
                 //noinspection unchecked
-                mRecords.addAll((ArrayList) XposedHelpers.getObjectField(QuickQSPanelController, "mRecords"));
+                mRecords.addAll((ArrayList) getObjectField(QuickQSPanelController, "mRecords"));
                 mRecords.forEach((r) -> fixTileColor(r, colorInactive, colorUnavailable));
             }catch (Exception ignored){}
         }
@@ -361,15 +364,15 @@ public class QSHeaderManager extends XposedModPack {
 
     private void fixTileColor(Object tileRec, int colorInactive, int colorUnavailable)
     {
-        Object tile = XposedHelpers.getObjectField(tileRec, "tileView");
-        XposedHelpers.setObjectField(tile, "colorInactive", colorInactive);
-        XposedHelpers.setObjectField(tile, "colorUnavailable", colorUnavailable);
+        Object tile = getObjectField(tileRec, "tileView");
+        setObjectField(tile, "colorInactive", colorInactive);
+        setObjectField(tile, "colorUnavailable", colorUnavailable);
 
-        XposedHelpers.callMethod(tile,
+        callMethod(tile,
                 "setColor",
-                XposedHelpers.callMethod(tile,
+                callMethod(tile,
                         "getBackgroundColorForState",
-                        XposedHelpers.getObjectField(tile,
+                        getObjectField(tile,
                                 "lastState")));
     }
 

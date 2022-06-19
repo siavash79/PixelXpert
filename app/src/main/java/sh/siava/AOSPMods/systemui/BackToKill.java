@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.view.View;
 
@@ -31,7 +34,7 @@ public class BackToKill extends XposedModPack {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
 
-        Class<?> NavBarClass = XposedHelpers.findClass("com.android.systemui.navigationbar.NavigationBar", lpparam.classLoader);
+        Class<?> NavBarClass = findClass("com.android.systemui.navigationbar.NavigationBar", lpparam.classLoader);
 
         View.OnLongClickListener listener = v -> {
             if(!isEnabled) return true;
@@ -41,15 +44,15 @@ public class BackToKill extends XposedModPack {
             return true;
         };
 
-        XposedHelpers.findAndHookMethod(NavBarClass,
+        findAndHookMethod(NavBarClass,
                 "getView", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        Object mNavigationBarView = XposedHelpers.getObjectField(param.thisObject, "mNavigationBarView");
-                        Object backButton = XposedHelpers.callMethod(mNavigationBarView, "getBackButton");
+                        Object mNavigationBarView = getObjectField(param.thisObject, "mNavigationBarView");
+                        Object backButton = callMethod(mNavigationBarView, "getBackButton");
 
-                        XposedHelpers.callMethod(backButton, "setLongClickable", true);
-                        XposedHelpers.callMethod(backButton, "setOnLongClickListener", listener);
+                        callMethod(backButton, "setLongClickable", true);
+                        callMethod(backButton, "setOnLongClickListener", listener);
                     }
                 });
     }

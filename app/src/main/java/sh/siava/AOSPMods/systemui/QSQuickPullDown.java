@@ -1,9 +1,13 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.view.MotionEvent;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
@@ -11,10 +15,15 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class QSQuickPullDown extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    public static int pullDownSide = 1; // 1 is right, 2 is left
-    public static boolean oneFingerPulldownEnabled = false;
-    public static float statusbarPortion = 0.25f; // now set to 25% of the screen. it can be anything between 0 to 100%
+    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+
+    private static final int PULLDOWN_SIDE_RIGHT = 1;
+    private static final int PULLDOWN_SIDE_LEFT = 2;
+    private static final int STATUSBAR_MODE_SHADE = 0;
+
+    private static int pullDownSide = PULLDOWN_SIDE_RIGHT;
+    private static boolean oneFingerPulldownEnabled = false;
+    private static float statusbarPortion = 0.25f; // now set to 25% of the screen. it can be anything between 0 to 100%
     
     public QSQuickPullDown(Context context) { super(context); }
     
@@ -31,42 +40,33 @@ public class QSQuickPullDown extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+        Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
 
-        XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader,
+        findAndHookMethod(NotificationPanelViewControllerClass,
                 "isOpenQsEvent", MotionEvent.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!oneFingerPulldownEnabled) return;
-                        Object mView = XposedHelpers.getObjectField(param.thisObject, "mView");
-                        int w = (int) XposedHelpers.callMethod(mView, "getMeasuredWidth");
 
-                        MotionEvent event = (MotionEvent) param.args[0];
-                        float x = event.getX();
+                        int mBarState = (int) getObjectField(param.thisObject, "mBarState");
+                        if(mBarState != STATUSBAR_MODE_SHADE) return;
 
+                        int w = (int) callMethod(
+                                getObjectField(param.thisObject, "mView"),
+                                "getMeasuredWidth");
+
+                        float x = ((MotionEvent) param.args[0]).getX();
                         float region = w * statusbarPortion;
 
-                        boolean showQsOverride = false;
+                        boolean showQsOverride = (pullDownSide == PULLDOWN_SIDE_RIGHT) ?
+                                w - region < x :
+                                x < region;
 
-                        switch (pullDownSide) {
-                            case 1: // Right side pulldown
-                                showQsOverride = w - region < x;
-                                break;
-                            case 2: // Left side pulldown
-                                showQsOverride = x < region;
-                                break;
-                        }
-                        int mBarState = (int) XposedHelpers.getObjectField(param.thisObject, "mBarState");
-
-                        showQsOverride &= mBarState == 0; // Statusbar SHADE mode is 0
-
-                        boolean prevResult = (boolean) param.getResult();
-                        param.setResult(prevResult || showQsOverride);
-                    }
+                        param.setResult((boolean) param.getResult() || showQsOverride);
+                      }
                 });
     }
 
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
-
-
 }

@@ -42,12 +42,14 @@
 
     <string-array name="sbc_position_names">
         <item>@string/clock_default</item>
+        <item>@string/clock_default_extra</item>
         <item>@string/clock_center</item>
         <item>@string/clock_right</item>
     </string-array>
 
     <string-array name="sbc_position_codes">
         <item>0</item>
+        <item>3</item>
         <item>1</item>
         <item>2</item>
     </string-array>
@@ -93,8 +95,19 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="sb_icon_sort_names">
+        <item>@string/sort_clean</item>
+        <item>@string/sort_tight</item>
+    </string-array>
+
+    <string-array name="sb_icon_sort_codes">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
     <string-array name="network_sb_locations">
         <item>@string/ntsb_far_left</item>
+        <item>@string/ntsb_far_left_extra</item>
         <item>@string/ntsb_mid_left</item>
         <item>@string/ntsb_mid_right</item>
     </string-array>
@@ -123,42 +136,6 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
-    </string-array>
-
-
-    <string-array name="QSRowCountOverlayEx_names"> <!-- same is key, added _names -->
-        <item>@string/overlay_none_title</item> <!-- item None MUST be present in the list if user can disable them fully -->
-        <item>@string/qs_2_rows</item>
-        <item>@string/qs_3_rows</item>
-        <item>@string/qs_4_rows</item>
-        <item>@string/qs_5_rows</item>
-    </string-array>
-
-    <string-array name="QSRowCountOverlayEx">
-        <item>None</item> <!-- every group MUST have item None, so that we can disable the whole list-->
-        <item>com.android.systemui.qstiles2r</item>
-        <item>com.android.systemui.qstiles3r</item>
-        <item>com.android.systemui.qstiles4r</item>
-        <item>com.android.systemui.qstiles5r</item>
-    </string-array>
-
-    <string-array name="StatusBarHeightOverlayEx_names">
-        <item>@string/overlay_none_title</item>
-        <item>@string/status_bar_height_small</item>
-        <item>@string/status_bar_height_medium</item>
-    </string-array>
-
-    <string-array name="StatusBarHeightOverlayEx">
-        <item>None</item>
-        <item>com.android.sb_height_small</item>
-        <item>com.android.sb_height_medium</item>
-    </string-array>
-
-    <string-array name="NBPThicknessOverlayEx_names">
-        <item>@string/overlay_none_title</item>
-        <item>@string/gesture_navbar_thin</item>
-        <item>@string/gesture_navbar_thick</item>
-        <item>@string/gesture_navbar_thicker</item>
     </string-array>
 
     <string-array name="NBPThicknessOverlayEx">
@@ -318,7 +295,7 @@
         <item>Circular</item>
         <item>Filled</item>
         <item>Kai</item>
-        <item>OxigenOS</item>
+        <item>OxygenOS</item>
         <item>Rounded</item>
         <item>Sam</item>
         <item>Victor</item>

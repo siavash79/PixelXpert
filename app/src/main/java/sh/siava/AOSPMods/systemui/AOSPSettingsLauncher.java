@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -30,23 +33,23 @@ public class AOSPSettingsLauncher extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
         
-        Class<?> FooterActionsControllerClass = XposedHelpers.findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
+        Class<?> FooterActionsControllerClass = findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
 
         View.OnLongClickListener listener = v -> {
             try {
                 Intent launchInent = mContext.getPackageManager().getLaunchIntentForPackage("sh.siava.AOSPMods");
-                XposedHelpers.callMethod(activityStarter, "startActivity", launchInent, true, null);
+                callMethod(activityStarter, "startActivity", launchInent, true, null);
             }catch(Exception ignored){}
             return true;
         };
 
-        XposedBridge.hookAllMethods(FooterActionsControllerClass,
+        hookAllMethods(FooterActionsControllerClass,
                 "onViewAttached", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        Object settingsButton = XposedHelpers.getObjectField(param.thisObject, "settingsButton");
-                        activityStarter = XposedHelpers.getObjectField(param.thisObject, "activityStarter");
-                        XposedHelpers.callMethod(settingsButton, "setOnLongClickListener", listener);
+                        Object settingsButton = getObjectField(param.thisObject, "settingsButton");
+                        activityStarter = getObjectField(param.thisObject, "activityStarter");
+                        callMethod(settingsButton, "setOnLongClickListener", listener);
                     }
                 });
     }

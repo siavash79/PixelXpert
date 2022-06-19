@@ -3,7 +3,7 @@
     <string name="app_name" translatable="false">AOSP Mods</string>
     <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
-    <string name="error_not_activated">Please confirm if the module is activated on LSPosed Manager</string>
+    <string name="error_not_activated">Please confirm if the module is activated within LSPosed Manager</string>
     <string name="hide_default">Hide (Default)</string>
     <string name="percent_of_default_size">% of default size</string>
     <string name="overlay_none_title">(Default)</string>
@@ -26,10 +26,12 @@
     <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
     <string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
     <string name="carrier_text_category">Carrier text</string>
-    <string name="configure_carrier_text">Configure carrier text</string>
+    <string name="custom_text_category">Custom text on Lockscreen</string>
+    <string name="configure_carrier_text">Configure carrier text - Top of the screen</string>
     <string name="carrier_text_mod_disabled">Carrier text unchanged</string>
     <string name="carrier_text_mod_enabled">Custom carrier text</string>
-    <string name="carrier_text_value">Insert custom text</string>
+    <string name="carrier_text_value">Custom carrier text</string>
+    <string name="lockscreen_center_text_value">Clock area custom text</string>
     <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Bottom area shortcuts</string>
     <string name="keyguard_bottom_buttons_transparent_title">Hide circle around icons</string>
@@ -42,12 +44,14 @@
     <string name="torch_shortcut">Flashlight</string>
     <string name="album_art_category">Media options</string>
     <string name="album_art_title">Enable album art when playing media</string>
+    <string name="album_art_blur_text">Blur value</string>
+    <string name="album_art_grayscale">Grayscale</string>
     <string name="shufflePin_title">Shuffle Pin</string>
 
     <!--Status bar related-->
-    <string name="double_tap_sleep_title">Double tap to sleep</string>
-    <string name="double_tap_sleep_off">"Double tap won't turn off the display"</string>
-    <string name="double_tap_sleep_on">Double tap on status bar, or lock screen, turns the display off</string>
+    <string name="double_tap_sleep_title">Double-tap to sleep</string>
+    <string name="double_tap_sleep_off">"Double-tap won't turn off the display"</string>
+    <string name="double_tap_sleep_on">Double-tap on status bar or lock screen turns the display off</string>
     <string name="battery_style_title">Choose a battery style</string>
     <string name="battery_show_percent_title">Show battery percentage</string>
     <string name="battery_style_category_title">Battery style</string>
@@ -57,6 +61,12 @@
     <string name="battery_hidden">Hidden</string>
     <string name="BIcon_Opacity_title">Opacity</string>
     <string name="sb_center_fine_tune">Fine-tune center area</string>
+    <string name="sb_multi_row_system_icons">Multi-row system icons (needs higher statusbar height)</string>
+    <string name="sb_multi_row_category">Multiple row system icons</string>
+    <string name="sb_icon_sort_mode">Icon placement method</string>
+    <string name="sort_clean">Sort in a grid</string>
+    <string name="sort_tight">Fit maximum items</string>
+    <string name="sb_notification_limit">Maximum notification icons (Default is 4)</string>
 
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
     <string name="combined_signal_icon_title">Combined signal icons</string>
@@ -67,11 +77,11 @@
     <string name="sbc_show_secs">Show seconds</string>
     <string name="sbc_date_cat">Date options</string>
     <string name="sbc_day_of_week_options">Show day of week with clock</string>
-    <string name="sbc_advanced_cat">Advanced date (will supersede above setting!)</string>
+    <string name="sbc_advanced_cat">Advanced (will supersede above setting!)</string>
     <string name="sbc_advanced_sum">Please read Java date format documentation</string>
-    <string name="sbc_custom_date_before">Custom date format before clock</string>
+    <string name="sbc_custom_date_before">Custom text before clock</string>
     <string name="sbc_date_small">Smaller size (70%)</string>
-    <string name="sbc_custom_date_after">Custom date format after clock</string>
+    <string name="sbc_custom_date_after">Custom text after clock</string>
     <string name="sbc_header">Status bar clock customization</string>
     <string name="sbc_clock_color_category">Color options</string>
     <string name="sbc_colorful_title">Make it colorful</string>
@@ -80,6 +90,7 @@
     <string name="sbc_after_color">Text after clock</string>
     <string name="network_settings_pref">Network monitor settings...</string>
     <string name="ntsb_far_left">Far Left</string>
+    <string name="ntsb_far_left_extra">Far Left - Above notifications</string>
     <string name="ntsb_mid_left">Mid-Left</string>
     <string name="ntsb_mid_right">Mid-Right</string>
     <string name="ntsb_category_title">Network Monitor</string>
@@ -102,7 +113,7 @@
     <string name="dual_tone_battery_title">Enable dual tone battery meter</string>
     <string name="dual_tone_battery_on_summary">On (only works with portrait icon)</string>
     <string name="unread_messages_title">Show number of unread messages</string>
-    <string name="status_bar_height">Status bar height</string>
+    <string name="status_bar_height">Status bar height (rotate screen to apply)</string>
     <string name="status_bar_height_small">Small</string>
     <string name="status_bar_height_medium">Medium</string>
     <string name="fix_status_bar_padding">Correct left side padding</string>
@@ -123,46 +134,48 @@
     <string name="BB_batteryWarningColor">Warning level color</string>
     <string name="BB_batteryChargingColor">Charging color</string>
     <string name="BB_batteryFastChargingColor">Fast charging color</string>
-    <string name="BB_transit_colors">Shade colors between the range</string>
+    <string name="BB_transit_colors">Shade colors between this range</string>
 
     <!--Quick settings panel related-->
-    <string name="qs_mod_category_title">Build number on QS Panel footer</string>
-    <string name="qs_footer_mod_title">Modify build text number on QS panel</string>
-    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
-    <string name="qs_footer_text_summary">Leave it blank to remove the text completely</string>
+    <string name="qs_mod_category_title">Build number in QS Panel footer</string>
+    <string name="qs_footer_mod_title">Modify build text number in QS panel</string>
+    <string name="qs_footer_text_value">Enter custom text (Leave blank to remove completely)</string>
+    <string name="qs_footer_text_summary">Leave this blank to remove the text completely</string>
     <string name="qs_footer_text_desc">Turn the display off/on to apply</string>
-    <string name="light_qs_title">Light QS Panel during light theme</string>
+    <string name="light_qs_title">Apply light QS Panel when using light theme</string>
     <string name="light_dualtone_qs_title">Enable dual tone QS Panel</string>
     <string name="qs_pulldown_size">Quick pull down width</string>
     <string name="qs_pulldown_switch_title">Quick QS panel pull down from status bar</string>
     <string name="qs_pulldown_side_title">Quick pull down side</string>
     <string name="qs_pulldown_category">Quick settings pull down</string>
     <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
-    <string name="qs_rows_number">QS Rows number</string>
+    <string name="qs_rows_number">Number of QS rows</string>
+    <string name="qs_cols_number">Number of QS columns</string>
+    <string name="qqs_tiles_number">Maximum tiles in Quick QS (max 2 rows)</string>
     <string name="qs_general_options">Quick settings options</string>
-    <string name="qs_tiles_3_columns_title">Enable 3 QS Tiles columns</string>
-    <string name="qs_text_size_title">QS Tiles text size</string>
-    <string name="qs_text_size">Reduce QS Tiles text size</string>
+    <string name="qs_tiles_3_columns_title">Enable 3 columns for QS Tiles</string>
+    <string name="qs_text_size_title">Set text size for QS Tiles</string>
+    <string name="qs_text_size">Reduce text size of QS Tiles</string>
     <string name="wifi_cell_title">Internet Tile</string>
-    <string name="wifi_cell_on">Use Wifi and Data separate Tiles</string>
-    <string name="wifi_cell_off">Use single Internet Tile</string>
+    <string name="wifi_cell_on">Use separate WiFi &amp; Data tiles</string>
+    <string name="wifi_cell_off">Use a single Internet tile</string>
     <string name="QQS_brightness_category">Brightness slider options</string>
     <string name="QQS_brightness_title">Show brightness slider on QQS Panel</string>
     <string name="QQS_brightness_bottom_title">Move brightness slider to the bottom</string>
     <string name="QS_brightness_disable_title">Hide brightness slider from Quick Settings</string>
-    <string name="bs_thick_track">Use a thick track on brightness slider</string>
-    <string name="quick_settings_tiles_category">QS Tiles Options</string>
-    <string name="qs_tile_style_title">QS Tiles themes</string>
+    <string name="bs_thick_track">Use a thick track on the brightness slider</string>
+    <string name="quick_settings_tiles_category">QS Tile Options</string>
+    <string name="qs_tile_style_title">QS Tile themes</string>
     <string name="qstile_default">Default</string>
     <string name="qstile_cookie">Cookie</string>
     <string name="qstile_triangles">Triangle</string>
     <string name="qstile_divided">Divided Circle</string>
-    <string name="qstile_attemptmountain">An attempt of a mountain</string>
+    <string name="qstile_attemptmountain">An attempt at a mountain</string>
     <string name="qstile_squircle_trim">Squircle with trim</string>
     <string name="qstile_ninja">Ninja</string>
     <string name="qstile_wavey">Wavey</string>
     <string name="qstile_squaremedo">The Squaremedo</string>
-    <string name="qstile_dual_tone_circle">Dual-toned circle</string>
+    <string name="qstile_dual_tone_circle">Dual tone circle</string>
     <string name="qstile_circleoutline">Circle Outline</string>
     <string name="qstile_pokesign">Pokesign</string>
     <string name="qstile_cosmos">Shishu Cosmos</string>
@@ -178,33 +191,29 @@
     <string name="back_from_right_title">Right side of the screen</string>
     <string name="back_height_title">Gesture height</string>
     <string name="gesturenav_header">Gesture navigation</string>
-    <string name="gesture_nav_pill_cat">Navigation bar pill width</string>
-    <string name="gesture_nav_pill_mod_title">Modify NavBar pill width</string>
-    <string name="gesture_nav_pill_width_title">Width comparing to standard size</string>
+    <string name="gesture_nav_pill_cat">Navigation bar pill</string>
+    <string name="gesture_nav_pill_mod_title">Modify NavBar pill</string>
+    <string name="gesture_nav_pill_width_title">Width compared to standard size</string>
+    <string name="gesture_nav_pill_height_title">Heighth compared to standard size</string>
     <string name="threebutton_header_title">3-Button navigation</string>
     <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Hide navigation bar</string>
-    <string name="gesture_navbar_thickness_title">Navbar pill thickness</string>
-    <string name="gesture_navbar_thickness">Modify NavBar pill thickness</string>
-    <string name="gesture_navbar_thin">Thin</string>
-    <string name="gesture_navbar_thick">Thick</string>
-    <string name="gesture_navbar_thicker">Thicker</string>
-    <string name="colorpill_title">Colorize gestures pill</string>
-    <string name="colorpill">Accent colored gestures pill</string>
-    <string name="reducekeyboard_title">Gestures keyboard space</string>
-    <string name="reducekeyboard">Reduce space on keyboard</string>
+    <string name="colorpill_title">Colorize gesture pill</string>
+    <string name="colorpill">Accent colored gesture pill</string>
+    <string name="reducekeyboard_title">Keyboard space for gestures</string>
+    <string name="reducekeyboard">Reduce space on the keyboard</string>
     <string name="taskbar_status_title">Android Taskbar</string>
     <string name="taskbar_force_enable_title">Force Enabled</string>
     <string name="taskbar_force_disable_title">Force Disabled</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
-    <string name="so_power_longpress_torch_title">Long press Power to torch*</string>
-    <string name="so_taptaptorch_title">Enable Double-tap Torch</string>
-    <string name="so_taptaptorch_summary">Double tap then hold lockscreen for quick torch</string>
+    <string name="so_power_longpress_torch_title">Long press Power button for torch</string>
+    <string name="so_taptaptorch_title">Enable double-tap for lockscreen torch</string>
+    <string name="so_taptaptorch_summary">Double-tap and hold lockscreen for quick torch access</string>
+    <string name="so_fingerprint_sensor_enabled">Allow fingerprint sensor when the screen is off</string>
 
-    <string name="framework_needed_caution_summary">Requires activation of System Framework in Lsposed. USE WITH CAUTION</string>
     <string name="so_double_tap_wake_title">Double-tap to wake phone</string>
     <string name="so_double_tap_wake_summary">Disables single-tap to wake</string>
     <string name="so_tap_proximity_wake_title">Don\'t wake on touch when screen covered</string>
@@ -212,18 +221,18 @@
     <string name="custom_themed_icons_title">Custom themed icons</string>
     <string name="custom_themed_icons_off">Custom icons disabled</string>
     <string name="custom_themed_icons_on">Custom icons enabled</string>
-    <string name="so_vol_longpress_skip">Long press Volume to skip music*</string>
+    <string name="so_vol_longpress_skip">Long press Volume buttons to skip music</string>
     <string name="notifications_header">Notifications options</string>
     <string name="expand_notifications_icons_title">"Add expand/collapse all buttons</string>
     <string name="disable_overscroll">"Disable elastic overscroll effect</string>
-    <string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for, in LSPosed</string>
+    <string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for within LSPosed</string>
 
     <!-- Theming section related -->
-    <string name="gsans_override_title">Force Google Sans font system wide</string>
+    <string name="gsans_override_title">Force Google Sans font system-wide</string>
     <string name="font_overlays_enable_title">Enable using custom fonts</string>
     <string name="theme_customization_font_title">Headline / Body font</string>
-    <string name="icons_style_title">Icons Style</string>
-    <string name="icon_shapes_title">Icon Shapes</string>
+    <string name="icons_style_title">Icon Style</string>
+    <string name="icon_shapes_title">Icon Shape</string>
     <string name="signal_icons_theme_title">Signal Icons Theme</string>
     <string name="dt_styles_category">Dark theme styles</string>
     <string name="dt_styles">Choose a style</string>
@@ -250,6 +259,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">Left (Default)</string>
+    <string name="clock_default_extra">Left - Above notifications</string>
     <string name="clock_center">Center</string>
     <string name="clock_right">Right</string>
 
@@ -281,7 +291,6 @@
     <string name="network_interval_custom_text_title">Refresh interval</string>
     <string name="minutes_word">minute(s)</string>
 
-
     <!-- Menu Items -->
     <string name="menu_settings_title">Import/Export</string>
     <string name="menu_reset_defaults">Reset all settings</string>
@@ -290,6 +299,7 @@
     <string name="menu_netstat_title">Network Statistics</string>
     <string name="menu_netstat_enable">Enable Statistics</string>
     <string name="menu_netstat_clear">Reset network statistics</string>
+    <string name="menu_restart">Reboot</string>
     <string name="menu_restartSysUI">Restart SystemUI</string>
     <string name="menu_updates">App Updates</string>
 
@@ -305,9 +315,9 @@
     <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">Updates</string>
     <string name="update_notification_title">Update downloaded</string>
-    <string name="update_notification_text">Touch here to install</string>
+    <string name="update_notification_text">Tap here to install</string>
     <string name="reboot_notification_title">AOSPMods updated!</string>
-    <string name="reboot_notification_text">Changes will take effect after reboot</string>
+    <string name="reboot_notification_text">Changes will take effect after you reboot the device</string>
     <string name="update_flavor_title">Update channel</string>
     <string name="stable_flavor">Stable</string>
     <string name="canary_flavor" translatable="false">Canary</string>
@@ -316,9 +326,11 @@
     <string name="root_not_here">ROOT ACCESS NOT GRANTED!</string>
     <string name="reboot_pending">Reboot pending</string>
     <string name="reboot_word">Restart device now</string>
-    <string name="update_checking">Checking ...</string>
+    <string name="update_checking">Checking…</string>
     <string name="update_download_started">Downloading - Please tap on the notification once completed</string>
     <string name="update_word">Update</string>
+    <string name="switch_branches">Switch branch</string>
+    <string name="reinstall_word">Reinstall</string>
 
     <string name="title_activity_update" translatable="false">updateActivity</string>
 

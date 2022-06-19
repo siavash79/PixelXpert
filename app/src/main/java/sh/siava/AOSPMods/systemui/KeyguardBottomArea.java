@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedBridge.*;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -18,10 +21,10 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class KeyguardBottomArea extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    public static boolean transparentBGcolor = false;
-    public static String leftShortcut = "";
-    public static String rightShortcut = "";
+    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+    private static boolean transparentBGcolor = false;
+    private static String leftShortcut = "";
+    private static String rightShortcut = "";
     
     private ImageView mWalletButton;
     private ImageView mControlsButton;
@@ -55,20 +58,18 @@ public class KeyguardBottomArea extends XposedModPack {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
-        
 
-        
-        Class<?> KeyguardbottomAreaViewClass = XposedHelpers.findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
-        Class<?> UtilClass = XposedHelpers.findClass("com.android.settingslib.Utils", lpparam.classLoader);
-        Class<?> CameraIntentsClass = XposedHelpers.findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
+        Class<?> KeyguardbottomAreaViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
+        Class<?> UtilClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
+        Class<?> CameraIntentsClass = findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
 
         //convert wallet button to camera button
-        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
+        findAndHookMethod(KeyguardbottomAreaViewClass,
                 "onFinishInflate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        mWalletButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mWalletButton");
-                        mControlsButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mControlsButton");
+                        mWalletButton = (ImageView) getObjectField(param.thisObject, "mWalletButton");
+                        mControlsButton = (ImageView) getObjectField(param.thisObject, "mControlsButton");
                         thisObject = param.thisObject;
 
                         if(leftShortcut.length() > 0)
@@ -83,7 +84,7 @@ public class KeyguardBottomArea extends XposedModPack {
                 });
 
         //make sure system won't play with our button
-        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass.getName() + "$" + "WalletCardRetriever", lpparam.classLoader,
+        findAndHookMethod(KeyguardbottomAreaViewClass.getName() + "$" + "WalletCardRetriever", lpparam.classLoader,
                 "onWalletCardsRetrieved", "android.service.quickaccesswallet.GetWalletCardsResponse", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -93,7 +94,7 @@ public class KeyguardBottomArea extends XposedModPack {
                 });
 
         //make sure system won't play with our button
-        XposedBridge.hookAllMethods(KeyguardbottomAreaViewClass,
+        hookAllMethods(KeyguardbottomAreaViewClass,
                 "updateControlsVisibility", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -104,7 +105,7 @@ public class KeyguardBottomArea extends XposedModPack {
                 });
 
         //make sure system won't play with our button
-        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
+        findAndHookMethod(KeyguardbottomAreaViewClass,
                 "updateWalletVisibility", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -115,15 +116,15 @@ public class KeyguardBottomArea extends XposedModPack {
                 });
 
         //Transparent background
-        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass,
+        findAndHookMethod(KeyguardbottomAreaViewClass,
                 "updateAffordanceColors", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!transparentBGcolor) return;
-                        ImageView mWalletButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mWalletButton");
-                        ImageView mControlsButton = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mControlsButton");
+                        ImageView mWalletButton = (ImageView) getObjectField(param.thisObject, "mWalletButton");
+                        ImageView mControlsButton = (ImageView) getObjectField(param.thisObject, "mControlsButton");
 
-                        int mTextColorPrimary = (int) XposedHelpers.callStaticMethod(UtilClass, "getColorAttrDefaultColor", mContext,
+                        int mTextColorPrimary = (int) callStaticMethod(UtilClass, "getColorAttrDefaultColor", mContext,
                                 mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
 
                         mControlsButton.setBackgroundColor(Color.TRANSPARENT);
@@ -135,18 +136,18 @@ public class KeyguardBottomArea extends XposedModPack {
                 });
 
         //Set camera intent to be always secure when launchd from keyguard screen
-        XposedHelpers.findAndHookMethod(KeyguardbottomAreaViewClass.getName()+"$DefaultRightButton", lpparam.classLoader,
+        findAndHookMethod(KeyguardbottomAreaViewClass.getName()+"$DefaultRightButton", lpparam.classLoader,
                 "getIntent", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if((!leftShortcut.equals("camera") && !rightShortcut.equals("camera"))) return;
-                        param.setResult(XposedHelpers.callStaticMethod(CameraIntentsClass, "getSecureCameraIntent", mContext));
+                        param.setResult(callStaticMethod(CameraIntentsClass, "getSecureCameraIntent", mContext));
                     }
                 });
     }
 
     private void updateVisibility(ImageView Button, Object thisObject) {
-        boolean mDozing = (boolean) XposedHelpers.getObjectField(thisObject, "mDozing");
+        boolean mDozing = (boolean) getObjectField(thisObject, "mDozing");
 
         if (mDozing) // AOD is showing
         {
@@ -162,11 +163,11 @@ public class KeyguardBottomArea extends XposedModPack {
         switch(type)
         {
             case "camera":
-                listener = v -> XposedHelpers.callMethod(thisObject, "launchCamera", "lockscreen_affordance");
+                listener = v -> callMethod(thisObject, "launchCamera", "lockscreen_affordance");
                 drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName()), mContext.getTheme());
                 break;
             case "assistant":
-                listener = v -> XposedHelpers.callMethod(thisObject, "launchVoiceAssist");
+                listener = v -> callMethod(thisObject, "launchVoiceAssist");
                 drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_mic_26dp", "drawable", mContext.getPackageName()), mContext.getTheme());
                 break;
             case "torch":
@@ -185,7 +186,6 @@ public class KeyguardBottomArea extends XposedModPack {
             Button.setVisibility(View.GONE);
         }
     }
-
 
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }

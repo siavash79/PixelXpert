@@ -151,6 +151,7 @@
     <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
     <string name="qs_rows_number">Number of QS rows</string>
     <string name="qs_cols_number">Number of QS columns</string>
+    <string name="qqs_tiles_number">Maximum tiles in Quick QS (max 2 rows)</string>
     <string name="qs_general_options">Quick settings options</string>
     <string name="qs_tiles_3_columns_title">Enable 3 columns for QS Tiles</string>
     <string name="qs_text_size_title">Set text size for QS Tiles</string>

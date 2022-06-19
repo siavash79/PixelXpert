@@ -47,6 +47,14 @@
                 app:title="@string/qs_cols_number"
                 app:updatesContinuously="true"/>
 
+            <SeekBarPreference
+                android:defaultValue="4"
+                android:max="8"
+                app:min="2"
+                android:key="QQSTileQty"
+                app:title="@string/qqs_tiles_number"
+                app:updatesContinuously="true"/>
+
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="wifi_cell"

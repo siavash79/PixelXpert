@@ -532,6 +532,10 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 int QSColQty = sharedPreferences.getInt("QSColQty", 0);
                 findPreference("QSColQty").setSummary((QSColQty == 0) ? getResources().getString(R.string.battery_default) : String.valueOf(QSColQty));
+
+                int QQSTileQty = sharedPreferences.getInt("QQSTileQty", 4);
+                findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.battery_default) : String.valueOf(QQSTileQty));
+
             } catch (Exception ignored) {}
         }
 

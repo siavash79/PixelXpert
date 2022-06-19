@@ -1,37 +1,41 @@
 package sh.siava.AOSPMods.systemui;
 
-import static sh.siava.AOSPMods.ResourceManager.SysUIresparam;
+import static sh.siava.AOSPMods.ResourceManager.resparams;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 
+import de.robv.android.xposed.callbacks.XC_InitPackageResources;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.SystemUtils;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 public class QSTileGrid extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
     private boolean replaced = false;
-    private int originalRow = 0, originalCol = 0;
+    private int quick_settings_max_rows = 0, quick_settings_num_columns = 0, quick_qs_panel_max_tiles = 0;
     private static final int NOT_SET = 0;
+    private static final int QQS_NOT_SET = 4;
 
-    public static int QSRowQty = NOT_SET;
-    public static int QSColQty = NOT_SET;
+    private static int QSRowQty = NOT_SET;
+    private static int QSColQty = NOT_SET;
+    private static int QQSTileQty = QQS_NOT_SET;
 
     public QSTileGrid(Context context) { super(context); }
 
     @Override
     public void updatePrefs(String... Key) {
-        if(XPrefs.Xprefs == null) return;
+        if(Xprefs == null) return;
 
-        QSRowQty = XPrefs.Xprefs.getInt("QSRowQty", NOT_SET);
-        QSColQty = XPrefs.Xprefs.getInt("QSColQty", NOT_SET);
+        QSRowQty = Xprefs.getInt("QSRowQty", NOT_SET);
+        QSColQty = Xprefs.getInt("QSColQty", NOT_SET);
+        QQSTileQty = Xprefs.getInt("QQSTileQty", QQS_NOT_SET);
 
         setResources();
 
-        if(Key.length > 0 && (Key[0].equals("QSRowQty") || Key[0].equals("QSColQty")))
+        if(Key.length > 0 && (Key[0].equals("QSRowQty") || Key[0].equals("QSColQty") || Key[0].equals("QQSTileQty")))
         {
             SystemUtils.doubleToggleDarkMode();
         }
@@ -46,21 +50,30 @@ public class QSTileGrid extends XposedModPack {
 
     private void setResources()
     {
-        try {
-            if (originalRow == 0) {
-                SysUIresparam.res.setReplacement(SysUIresparam.res.getIdentifier("quick_qs_panel_max_tiles", "integer", SysUIresparam.res.getPackageName()), 10);
+        XC_InitPackageResources.InitPackageResourcesParam ourResparam = resparams.get(listenPackage);
 
-                originalCol = mContext.getResources().getInteger(mContext.getResources().getIdentifier("quick_settings_num_columns", "integer", mContext.getPackageName()));
-                originalRow = mContext.getResources().getInteger(mContext.getResources().getIdentifier("quick_settings_max_rows", "integer", mContext.getPackageName()));
+        if(ourResparam == null) return;
+
+        try {
+            if (quick_settings_max_rows == 0) {
+                quick_settings_num_columns = mContext.getResources().getInteger(mContext.getResources().getIdentifier("quick_settings_num_columns", "integer", mContext.getPackageName()));
+                quick_settings_max_rows = mContext.getResources().getInteger(mContext.getResources().getIdentifier("quick_settings_max_rows", "integer", mContext.getPackageName()));
+                quick_qs_panel_max_tiles = mContext.getResources().getInteger(mContext.getResources().getIdentifier("quick_qs_panel_max_tiles", "integer", mContext.getPackageName()));
+            }
+
+            if(replaced || QQSTileQty != QQS_NOT_SET)
+            {
+                ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_qs_panel_max_tiles", QQSTileQty == QQS_NOT_SET ? quick_qs_panel_max_tiles : QQSTileQty);
+                replaced = true;
             }
 
             if (replaced || QSColQty != NOT_SET) {
-                SysUIresparam.res.setReplacement(SysUIresparam.packageName, "integer", "quick_settings_num_columns", QSColQty == NOT_SET ? originalCol : QSColQty);
+                ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_settings_num_columns", QSColQty == NOT_SET ? quick_settings_num_columns : QSColQty);
                 replaced = true;
             }
 
             if (replaced || QSRowQty != NOT_SET) {
-                SysUIresparam.res.setReplacement(SysUIresparam.packageName, "integer", "quick_settings_max_rows", QSRowQty == NOT_SET ? originalRow : QSRowQty);
+                ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_settings_max_rows", QSRowQty == NOT_SET ? quick_settings_max_rows : QSRowQty);
                 replaced = true;
             }
         }catch (Throwable ignored){}

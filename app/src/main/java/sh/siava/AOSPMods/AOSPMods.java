@@ -40,6 +40,7 @@ import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
 import sh.siava.AOSPMods.systemui.KeyguardCustomText;
 import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
+import sh.siava.AOSPMods.systemui.easyUnlock;
 
 public class AOSPMods implements IXposedHookLoadPackage{
 
@@ -80,6 +81,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(StatusbarSize.class);
         modPacks.add(MultiStatusbarRows.class);
         modPacks.add(QSTileGrid.class);
+        modPacks.add(easyUnlock.class);
         //endregion
     }
     

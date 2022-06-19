@@ -19,6 +19,11 @@
         android:summaryOff="@string/general_off"
         android:title="@string/shufflePin_title"
         app:summaryOn="@string/general_on" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="easyUnlockEnabled"
+        android:title="@string/easy_unlock_title"
+        android:summary="@string/easy_unlock_sumamry" />
     <PreferenceCategory android:title="@string/keyguard_bottom_category">
         <SwitchPreference
             android:defaultValue="false"

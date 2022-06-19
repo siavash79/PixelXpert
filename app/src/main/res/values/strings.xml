@@ -47,6 +47,8 @@
     <string name="album_art_blur_text">Blur value</string>
     <string name="album_art_grayscale">Grayscale</string>
     <string name="shufflePin_title">Shuffle Pin</string>
+    <string name="easy_unlock_title">Easy unlock (Pin/Password)</string>
+    <string name="easy_unlock_sumamry">If didn\'t work for first time, try again</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Double-tap to sleep</string>

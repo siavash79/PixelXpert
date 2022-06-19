@@ -5,6 +5,7 @@ import static de.robv.android.xposed.XposedBridge.*;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Rect;
 import android.view.DisplayCutout;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import sh.siava.AOSPMods.XposedModPack;
 //We are playing in system framework. should be extra cautious..... many try-catchs, still not enough!
 public class StatusbarSize extends XposedModPack {
     private final List<String> listenPacks = new ArrayList<>();
+
+    private static final int BOUNDS_POSITION_TOP = 1;
 
     static int sizeFactor = 100; // % of normal
     static int currentHeight = 0;
@@ -56,18 +59,27 @@ public class StatusbarSize extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         try
         {
-            Class<?> SystemBarUtilsClass = findClass("com.android.internal.policy.SystemBarUtils", lpparam.classLoader);
-
             try {
                 Class<?> WmDisplayCutoutClass = findClass("com.android.server.wm.utils.WmDisplayCutout", lpparam.classLoader);
-                Class<?> DisplayCutoutClass = findClass("android.view.DisplayCutout", lpparam.classLoader);
 
-                Object NO_CUTOUT = getStaticObjectField(DisplayCutoutClass, "NO_CUTOUT");
                 hookAllMethods(WmDisplayCutoutClass, "getDisplayCutout", new XC_MethodHook() {
                     @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if (sizeFactor >= 100) return;
-                        param.setResult(NO_CUTOUT);
+
+                        DisplayCutout displayCutout = (DisplayCutout)param.getResult();
+
+                        ((Rect[])getObjectField(
+                                getObjectField(
+                                        displayCutout,
+                                        "mBounds"),
+                                "mRects")
+                        )[BOUNDS_POSITION_TOP].bottom = currentHeight;
+
+                        ((Rect) getObjectField(
+                                displayCutout,
+                                "mSafeInsets")
+                        ).top = currentHeight;
                     }
                 });
             }catch (Throwable ignored){}
@@ -83,9 +95,11 @@ public class StatusbarSize extends XposedModPack {
             };
 
             try {
-                hookAllMethods(SystemBarUtilsClass, "getStatusBarHeightForRotation", resizedResultHook);
+                Class<?> SystemBarUtilsClass = findClass("com.android.internal.policy.SystemBarUtils", lpparam.classLoader);
+
                 findAndHookMethod(SystemBarUtilsClass, "getStatusBarHeight", Resources.class, DisplayCutout.class, resizedResultHook);
-            }catch (Throwable ignored){log("siapo err"); ignored.printStackTrace();}
+                hookAllMethods(SystemBarUtilsClass, "getStatusBarHeightForRotation", resizedResultHook);
+            }catch (Throwable ignored){}
         } catch (Throwable ignored){}
     }
 }

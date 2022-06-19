@@ -17,8 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -478,7 +476,8 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("network_settings_header").setVisible(networkOnSBEnabled);
                 findPreference("networkTrafficPosition").setVisible(networkOnSBEnabled);
 
-                findPreference("statusbarHeightFactor").setSummary(sharedPreferences.getInt("statusbarHeightFactor", 100) + "%");
+                int statusbarHeightFactor = sharedPreferences.getInt("statusbarHeightFactor", 100);
+                findPreference("statusbarHeightFactor").setSummary(statusbarHeightFactor == 100 ? getResources().getString(R.string.word_default) : statusbarHeightFactor + "%");
                 findPreference("centerAreaFineTune").setSummary((sharedPreferences.getInt("centerAreaFineTune", 50) - 50) + "%");
 
                 findPreference("systemIconSortPlan").setVisible(sharedPreferences.getBoolean("systemIconsMultiRow", false));
@@ -528,13 +527,13 @@ public class SettingsActivity extends AppCompatActivity implements
 
 
                 int QSRowQty = sharedPreferences.getInt("QSRowQty", 0);
-                findPreference("QSRowQty").setSummary((QSRowQty == 0) ? getResources().getString(R.string.battery_default) : String.valueOf(QSRowQty));
+                findPreference("QSRowQty").setSummary((QSRowQty == 0) ? getResources().getString(R.string.word_default) : String.valueOf(QSRowQty));
 
                 int QSColQty = sharedPreferences.getInt("QSColQty", 0);
-                findPreference("QSColQty").setSummary((QSColQty == 0) ? getResources().getString(R.string.battery_default) : String.valueOf(QSColQty));
+                findPreference("QSColQty").setSummary((QSColQty == 0) ? getResources().getString(R.string.word_default) : String.valueOf(QSColQty));
 
                 int QQSTileQty = sharedPreferences.getInt("QQSTileQty", 4);
-                findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.battery_default) : String.valueOf(QQSTileQty));
+                findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQty));
 
             } catch (Exception ignored) {}
         }

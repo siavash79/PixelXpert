@@ -225,7 +225,7 @@
     <string name="pull_down_left">Stânga</string>
     <string name="pull_down_right">Dreapta</string>
     <!-- Battery styles -->
-    <string name="battery_default">Implicit</string>
+    <string name="word_default">Implicit</string>
     <string name="battery_circle">Cerc</string>
     <string name="battery_dashed_circle">Cerc întrerupt</string>
     <string name="battery_circle_filled">Cerc umplut</string>

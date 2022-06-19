@@ -1,3 +1,6 @@
+**canary-58**  
+- Fixed notification icons alignment bug  
+  
 **canary-57**  
 - improved setting number of QS rows/columns  
 - Added Ukrainian language (Credits: @vitalitk)  

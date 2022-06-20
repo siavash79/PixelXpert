@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.android;
 
 import static de.robv.android.xposed.XposedHelpers.*;
 import static de.robv.android.xposed.XposedBridge.*;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -27,8 +28,10 @@ public class StatusbarSize extends XposedModPack {
     private static final int BOUNDS_POSITION_TOP = 1;
 
     static int sizeFactor = 100; // % of normal
-    static int currentHeight = 0;
+    static boolean noCutoutEnabled = true;
+    int currentHeight = 0;
     boolean edited = false; //if we touched it once during this instance, we'll have to continue setting it even if it's the original value
+
 
     public StatusbarSize(Context context) {
         super(context);
@@ -38,9 +41,11 @@ public class StatusbarSize extends XposedModPack {
 
     @Override
     public void updatePrefs(String... Key) {
-        if(XPrefs.Xprefs == null) return;
+        if(Xprefs == null) return;
 
-        sizeFactor = XPrefs.Xprefs.getInt("statusbarHeightFactor", 100);
+        noCutoutEnabled = Xprefs.getBoolean("noCutoutEnabled", false);
+
+        sizeFactor = Xprefs.getInt("statusbarHeightFactor", 100);
         if(sizeFactor != 100 || edited)
             currentHeight = Math.round(
                     mContext.getResources().getDimensionPixelSize(
@@ -62,8 +67,19 @@ public class StatusbarSize extends XposedModPack {
         {
             try {
                 Class<?> WmDisplayCutoutClass = findClass("com.android.server.wm.utils.WmDisplayCutout", lpparam.classLoader);
+                Class<?> DisplayCutoutClass = findClass("android.view.DisplayCutout", lpparam.classLoader);
+
+                Object NO_CUTOUT = getStaticObjectField(DisplayCutoutClass, "NO_CUTOUT");
 
                 hookAllMethods(WmDisplayCutoutClass, "getDisplayCutout", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if(noCutoutEnabled)
+                        {
+                            param.setResult(NO_CUTOUT);
+                        }
+                    }
+
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if (sizeFactor >= 100 && !edited) return;

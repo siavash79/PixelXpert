@@ -15,6 +15,15 @@
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
             android:title="@string/screenshot_sound_disable_title" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="noCutoutEnabled"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/force_no_cutout" />
+
+
         <SwitchPreference
             android:defaultValue="false"
             android:key="sysui_tuner"

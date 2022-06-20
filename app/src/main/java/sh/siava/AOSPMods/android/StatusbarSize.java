@@ -28,6 +28,7 @@ public class StatusbarSize extends XposedModPack {
 
     static int sizeFactor = 100; // % of normal
     static int currentHeight = 0;
+    boolean edited = false; //if we touched it once during this instance, we'll have to continue setting it even if it's the original value
 
     public StatusbarSize(Context context) {
         super(context);
@@ -40,7 +41,7 @@ public class StatusbarSize extends XposedModPack {
         if(XPrefs.Xprefs == null) return;
 
         sizeFactor = XPrefs.Xprefs.getInt("statusbarHeightFactor", 100);
-        if(sizeFactor != 100)
+        if(sizeFactor != 100 || edited)
             currentHeight = Math.round(
                     mContext.getResources().getDimensionPixelSize(
                             mContext.getResources().getIdentifier(
@@ -65,7 +66,7 @@ public class StatusbarSize extends XposedModPack {
                 hookAllMethods(WmDisplayCutoutClass, "getDisplayCutout", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (sizeFactor >= 100) return;
+                        if (sizeFactor >= 100 && !edited) return;
 
                         DisplayCutout displayCutout = (DisplayCutout)param.getResult();
 
@@ -89,7 +90,8 @@ public class StatusbarSize extends XposedModPack {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     try {
-                        if(sizeFactor == 100) return;
+                        if(sizeFactor == 100 && !edited) return;
+                        edited = true;
                         param.setResult(currentHeight);
                     }catch (Throwable ignored){}
                 }

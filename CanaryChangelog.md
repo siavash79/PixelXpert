@@ -1,3 +1,6 @@
+**canary-60**  
+- Added Easy unlock option  
+  
 **canary-59**  
 - Improved StatusbarSize - (hopefully) Final edit  
 - Added option to choose number of QQS tiles  

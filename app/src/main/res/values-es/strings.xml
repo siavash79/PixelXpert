@@ -26,10 +26,12 @@
     <string name="transparent_fingerprint_circle_off">El círculo se activará</string>
     <string name="transparent_fingerprint_circle_on">El círculo se ocultará</string> 
     <string name="carrier_text_category">Texto del operador</string>
+    <string name="custom_text_category">Texto personalizado en la pantalla de bloqueo</string>
     <string name="configure_carrier_text">Personalizar texto del operador</string>
     <string name="carrier_text_mod_disabled">Texto por defecto</string>
     <string name="carrier_text_mod_enabled">Texto personalizado</string>
-    <string name="carrier_text_value">Insertar un texto personalizado</string> 
+    <string name="carrier_text_value">Insertar un texto personalizado</string>
+    <string name="lockscreen_center_text_value">Texto personalizado del área del reloj</string>
     <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Accesos directos en la parte inferior de la pantalla</string>
     <string name="keyguard_bottom_buttons_transparent_title">Ocultar círculo alrededor de los iconos</string>
@@ -42,7 +44,11 @@
 	<string name="torch_shortcut">Linterna</string>
     <string name="album_art_category">Opciones de visualización de reproducción de música</string>
     <string name="album_art_title">Habilitar visualización de reproducción de música</string>
+    <string name="album_art_blur_text">Valor de desenfoque</string>
+    <string name="album_art_grayscale">Escala de grises</string>
 	<string name="shufflePin_title">Pin aleatorio</string>
+    <string name="easy_unlock_title">Fácil desbloqueo (Pin/Contraseña)</string>
+    <string name="easy_unlock_sumamry">Si no funcionó la primera vez, intente nuevamente</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doble toque para bloquear pantalla</string>
@@ -57,11 +63,17 @@
     <string name="battery_hidden">Oculta</string>
 	<string name="BIcon_Opacity_title">Opacidad</string>
 	<string name="sb_center_fine_tune">Afinar el área central</string>
+    <string name="sb_multi_row_system_icons">Iconos de sistema de varias filas (necesita una altura de barra de estado más alta)</string>
+    <string name="sb_multi_row_category">Iconos de sistema de varias filas</string>
+    <string name="sb_icon_sort_mode">Método de colocación de iconos</string>
+    <string name="sort_clean">Ordenar en una cuadrícula</string>
+    <string name="sort_tight">Ajustar artículos máximos</string>
+    <string name="sb_notification_limit">Máximo de iconos de notificación (el valor predeterminado es 4)</string>
 
     <string name="lte_4g_icon_title">Icono 4G / LTE</string>
     <string name="combined_signal_icon_title">Iconos de señal combinados</string>
-    <string name="sb_vibration_switch_title">"Mostar los iconos vibrar/silencio"</string>
 	<string name="volte_icon_title">Mostrar icono VoLTE cuando este disponible</string>
+    <string name="sb_vibration_switch_title">"Mostar los iconos vibrar/silencio"</string>
     <string name="sbc_position_title">Posición del reloj</string>
     <string name="sbc_ampm_style">Estilo AM/PM</string>
     <string name="sbc_show_secs">Mostrar segundos</string>
@@ -79,7 +91,8 @@
     <string name="sbc_color">Reloj</string>
     <string name="sbc_after_color">Texto después del reloj</string>
 	<string name="network_settings_pref">Configuración del monitor de red...</string>
-    <string name="ntsb_far_left">Lado izquierdo</string>
+    <string name="ntsb_far_left">Extremo izquierdo</string>
+    <string name="ntsb_far_left_extra">Extremo izquierdo: arriba de las notificaciones</string>
     <string name="ntsb_mid_left">Mitad a la izquierda</string>
     <string name="ntsb_mid_right">Mitad a la derecha</string>
     <string name="ntsb_category_title">Tráfico de red</string>
@@ -139,6 +152,8 @@
     <string name="qs_pulldown_category">Deslizar rápido para abajo en ajustes rápidos</string>     
     <string name="qs_haptic_switch_title">Vibrar al tocar los ajustes rápidos</string>
     <string name="qs_rows_number">Número de lineas</string>
+    <string name="qs_cols_number">Número de columnas QS</string>
+    <string name="qqs_tiles_number">Número máximo de mosaicos en QS (máx. 2 filas)</string>
     <string name="qs_general_options">Preferencias de ajustes rápidos</string>
     <string name="qs_tiles_3_columns_title">Activar 3 columnas en los ajustes rápidos</string>
     <string name="qs_text_size_title">Tamaño del texto en los ajustes rápidos</string>
@@ -181,15 +196,11 @@
     <string name="gesture_nav_pill_cat">Altura de la barra de navegación</string>
     <string name="gesture_nav_pill_mod_title">Personalizar la altura de la barra</string>
     <string name="gesture_nav_pill_width_title">Altura en comparación con el tamaño estándar</string>
+    <string name="gesture_nav_pill_height_title">Altura en comparación con el tamaño estándar</string>
     <string name="threebutton_header_title">Navegación con 3 botones</string>
     <string name="back_longpress_kill_title">Mantener presionado el botón para cerrar aplicación</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Ocultar la barra de navegación</string>
-    <string name="gesture_navbar_thickness_title">Grosor de la barra de navegación por gestos</string>
-    <string name="gesture_navbar_thickness">Personalizar la barra de navegación</string>
-    <string name="gesture_navbar_thin">Fina</string>
-    <string name="gesture_navbar_thick">Gruesa</string>
-    <string name="gesture_navbar_thicker">Más gruesa</string>
     <string name="colorpill_title">Color de la barra de navegación por gestos</string>
     <string name="colorpill">Aplicar color de resaltado a la barra</string>
     <string name="reducekeyboard_title">Espacio de gestos en el teclado</string>
@@ -203,8 +214,8 @@
     <string name="so_power_longpress_torch_title">"Linterna manteniendo presionado el botón de encendido/apagado*"</string>
 	<string name="so_taptaptorch_title">Habilitar linterna con doble toque</string>
     <string name="so_taptaptorch_summary">Hacer doble toque y mantener la pantalla de bloqueo presionada para encender la linterna</string>
+    <string name="so_fingerprint_sensor_enabled">Permitir el sensor de huellas dactilares cuando la pantalla está apagada</string>
 	
-    <string name="framework_needed_caution_summary">Requiere activar Framework en Lsposed. USAR CON CUIDADO</string>   
     <string name="so_double_tap_wake_title">Doble toque para despertar pantalla</string>
     <string name="so_double_tap_wake_summary">Usar doble toque en vez de un toque para encender la pantalla</string>
 	<string name="so_tap_proximity_wake_title">No despertar al tocar cuando la pantalla este cubierta</string>
@@ -235,7 +246,7 @@
     <string name="dt_darkgray">Gris oscuro</string>
     <string name="dt_materialocean">Océanico Material</string>
     <string name="dt_night">Noche</string>
-    <string name="dt_solarizeddark">Solarizado</string>
+    <string name="dt_solarizeddark">Solarizado oscuro</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -250,6 +261,7 @@
  
     <!-- Clock position -->
     <string name="clock_default">Izquierda (por defecto)</string>
+    <string name="clock_default_extra">Izquierda: arriba de las notificaciones</string>
     <string name="clock_center">Centro</string>
     <string name="clock_right">Derecha</string>
 
@@ -280,7 +292,6 @@
     <string name="netstat_enable_title">Recopilar estadísticas de red</string>
     <string name="network_interval_custom_text_title">Intervalo de actualización</string>
     <string name="minutes_word">minuto(s)</string>
-
 
     <!-- Menu Items -->
     <string name="menu_settings_title">Importar/Exportar</string>

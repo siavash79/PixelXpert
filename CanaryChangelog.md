@@ -1,3 +1,6 @@
+**canary-61**  
+- Added option to ignore the screen cutout (Misc settings)  
+  
 **canary-60**  
 - Added Easy unlock option  
   

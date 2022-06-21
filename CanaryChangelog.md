@@ -1,4 +1,5 @@
 **canary-62**  
+- Fixing navbar pill going transparent in certain situations  
   
 **canary-61**  
 - Added option to ignore the screen cutout (Misc settings)  

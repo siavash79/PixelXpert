@@ -1,3 +1,5 @@
+**canary-62**  
+  
 **canary-61**  
 - Added option to ignore the screen cutout (Misc settings)  
   

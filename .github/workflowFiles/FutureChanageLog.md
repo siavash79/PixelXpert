@@ -13,5 +13,5 @@
 
 - Various bugfixes
 
-- Now avaialble in more languages  
+- Now available in more languages  
   

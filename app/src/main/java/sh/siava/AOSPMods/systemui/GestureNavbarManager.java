@@ -1,23 +1,20 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getIntField;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.graphics.Color;
 import android.graphics.Point;
-import android.telecom.Call;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-
-import javax.security.auth.callback.Callback;
-
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XPrefs;
@@ -42,12 +39,13 @@ public class GestureNavbarManager extends XposedModPack {
     //endregion
 
     //region pill color
+    private boolean colorReplaced = false;
     private static boolean navPillColorAccent = false;
-    private int mLightColor, mDarkColor; //original navbar colors
+    private static final int mLightColor = Color.parseColor("#EBffffff"), mDarkColor = Color.parseColor("#99000000"); //original navbar colors
     //endregion
 
     public GestureNavbarManager(Context context) { super(context); }
-    
+
     public void updatePrefs(String...Key)
     {
         if(XPrefs.Xprefs == null) return;
@@ -98,6 +96,7 @@ public class GestureNavbarManager extends XposedModPack {
         Class<?> NavigationBarInflaterViewClass = findClass("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader);
         Class<?> NavigationHandleClass = findClass("com.android.systemui.navigationbar.gestural.NavigationHandle", lpparam.classLoader);
         Class<?> EdgeBackGestureHandlerClass = findClass("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader);
+//      Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
 
         //region Back gesture
         hookAllMethods(EdgeBackGestureHandlerClass,
@@ -129,20 +128,32 @@ public class GestureNavbarManager extends XposedModPack {
         //endregion
 
         //region pill color
-        hookAllConstructors(NavigationHandleClass, new XC_MethodHook() {
+        //putting static color instead of getting it from system
+/*        hookAllConstructors(NavigationHandleClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                //Let's remember the original colors
-                mLightColor = getIntField(param.thisObject, "mLightColor");
-                mDarkColor = getIntField(param.thisObject, "mDarkColor");
+                Context context = (Context) param.args[0];
+                Resources res = context.getResources();
+
+                final int dualToneDarkTheme = (int) callStaticMethod(UtilsClass, "getThemeAttr", context, res.getIdentifier("darkIconTheme", "attr", context.getPackageName()));
+                final int dualToneLightTheme = (int) callStaticMethod(UtilsClass, "getThemeAttr", context, res.getIdentifier("lightIconTheme", "attr", context.getPackageName()));
+
+                Context lightContext = new ContextThemeWrapper(context, dualToneLightTheme);
+                Context darkContext = new ContextThemeWrapper(context, dualToneDarkTheme);
+
+                mLightColor = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", lightContext, res.getIdentifier("homeHandleColor", "attr", context.getPackageName()));
+                mDarkColor = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", darkContext, res.getIdentifier("homeHandleColor", "attr", context.getPackageName()));
             }
-        });
+        });*/
 
         hookAllMethods(NavigationHandleClass, "setDarkIntensity", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                setObjectField(param.thisObject, "mLightColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_200, mContext.getTheme()) : mLightColor);
-                setObjectField(param.thisObject, "mDarkColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_600, mContext.getTheme()) : mDarkColor);
+                if(navPillColorAccent || colorReplaced) {
+                    setObjectField(param.thisObject, "mLightColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_200, mContext.getTheme()) : mLightColor);
+                    setObjectField(param.thisObject, "mDarkColor", (navPillColorAccent) ? mContext.getResources().getColor(android.R.color.system_accent1_600, mContext.getTheme()) : mDarkColor);
+                    colorReplaced = true;
+                }
             }
         });
         //endregion

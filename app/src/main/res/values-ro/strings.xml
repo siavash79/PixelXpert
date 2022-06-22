@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--General strings-->
-    <string name="error_not_activated">Verifică dacă modulul este activat în LSPosed Manager</string>
+    <string name="error_not_activated">Confirmați dacă modulul este activat în cadrul managerului LSPosed</string>
     <string name="hide_default">Ascuns (implicit)</string>
     <string name="percent_of_default_size">% din dimensiunea implicită</string>
     <string name="overlay_none_title">(Implicit)</string>
@@ -22,10 +22,12 @@
     <string name="transparent_fingerprint_circle_off">Cercul în jurul pictogramei amprentei este activat</string>
     <string name="transparent_fingerprint_circle_on">Cercul din jurul imaginii amprentei va fi ascuns</string>
     <string name="carrier_text_category">Text furnizor</string>
-    <string name="configure_carrier_text">Configurează textul furnizorului</string>
+    <string name="custom_text_category">Text personalizat pe Ecranul de blocare</string>
+    <string name="configure_carrier_text">Configurarea textului furnizorului - Partea de sus a ecranului</string>
     <string name="carrier_text_mod_disabled">Textul furnizorului neschimbat</string>
     <string name="carrier_text_mod_enabled">Text personalizat furnizor</string>
-    <string name="carrier_text_value">Introdu un text personalizat</string>
+    <string name="carrier_text_value">Text personalizat furnizor</string>
+    <string name="lockscreen_center_text_value">Text personalizat pentru zona ceasului</string>
     <string name="keyguard_bottom_category">Comenzi rapide în zona de jos</string>
     <string name="keyguard_bottom_buttons_transparent_title">Ascunde cercul din jurul pictogramelor</string>
     <string name="keyguard_bottom_force_camera_title">Arată scurtătura cameră foto</string>
@@ -37,11 +39,15 @@
     <string name="torch_shortcut">Lanternă</string>
     <string name="album_art_category">Opțiuni media</string>
     <string name="album_art_title">Activează coperta de album când se redă media</string>
+    <string name="album_art_blur_text">Valoare estompare</string>
+    <string name="album_art_grayscale">Tonuri de gri</string>
     <string name="shufflePin_title">Amestecare PIN</string>
+    <string name="easy_unlock_title">Deblocare ușoară (Pin/Parolă)</string>
+    <string name="easy_unlock_sumamry">Dacă nu a funcționat pentru prima dată, încercați din nou</string>
     <!--Status bar related-->
-    <string name="double_tap_sleep_title">Apăsare dublă pentru a opri ecranul</string>
-    <string name="double_tap_sleep_off">"Dubla atingere nu va opri afișajul"</string>
-    <string name="double_tap_sleep_on">Atinge de două ori bara de stare sau ecranul de blocare pentru a opri ecranul</string>
+    <string name="double_tap_sleep_title">Dublă-atingere pentru oprire ecran</string>
+    <string name="double_tap_sleep_off">"Atingerea dublă nu va opri ecranul"</string>
+    <string name="double_tap_sleep_on">Atingeți de două ori bara de stare sau pe ecranul de blocare pentru a opri afișajul</string>
     <string name="battery_style_title">Alege un stil de baterie</string>
     <string name="battery_show_percent_title">Afișează procentajul bateriei</string>
     <string name="battery_style_category_title">Stil baterie</string>
@@ -49,6 +55,12 @@
     <string name="battery_hidden">Ascunsă</string>
     <string name="BIcon_Opacity_title">Transparență</string>
     <string name="sb_center_fine_tune">Reglează fin zona centrală</string>
+    <string name="sb_multi_row_system_icons">Pictograme de sistem cu mai multe rânduri (necesită înălțime mai mare a barei de stare)</string>
+    <string name="sb_multi_row_category">Pictograme de sistem cu mai multe rânduri</string>
+    <string name="sb_icon_sort_mode">Metoda de plasare pictograme</string>
+    <string name="sort_clean">Sortează într-o grilă</string>
+    <string name="sort_tight">Potrivire elemente maxime</string>
+    <string name="sb_notification_limit">Numărul maxim de pictograme de notificare (implicit este 4)</string>
     <string name="lte_4g_icon_title">Pictogramă LTE / 4G</string>
     <string name="combined_signal_icon_title">Combinare pictograme de semnal</string>
     <string name="volte_icon_title">Afișare pictogramă VoLTE atunci când este disponibilă</string>
@@ -71,6 +83,7 @@
     <string name="sbc_after_color">Text după ceas</string>
     <string name="network_settings_pref">Setări monitorizare rețea...</string>
     <string name="ntsb_far_left">Extrema stângă</string>
+    <string name="ntsb_far_left_extra">Extrema stângă - Deasupra notificărilor</string>
     <string name="ntsb_mid_left">Mijloc-Stânga</string>
     <string name="ntsb_mid_right">Mijloc-Dreapta</string>
     <string name="ntsb_category_title">Monitorizare rețea</string>
@@ -93,7 +106,7 @@
     <string name="dual_tone_battery_title">Activare baterie cu ton dual</string>
     <string name="dual_tone_battery_on_summary">Pornit (funcționează numai cu pictograma portret)</string>
     <string name="unread_messages_title">Arată numărul de mesaje necitite</string>
-    <string name="status_bar_height">Înălțimea barei de stare</string>
+    <string name="status_bar_height">Înălțimea barei de stare (rotiți ecranul pentru a aplica)</string>
     <string name="status_bar_height_small">Mică</string>
     <string name="status_bar_height_medium">Medie</string>
     <string name="fix_status_bar_padding">Corectare umplutură din partea stângă</string>
@@ -114,26 +127,29 @@
     <string name="BB_batteryWarningColor">Culoare nivel de avertizare</string>
     <string name="BB_batteryChargingColor">Culoare încărcare</string>
     <string name="BB_batteryFastChargingColor">Culoare de încărcare rapidă</string>
-    <string name="BB_transit_colors">Nuanță culori între game</string>
+    <string name="BB_transit_colors">Nuanță culori între aceste game</string>
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numărul versiunii în subsolul panoului setărilor rapide</string>
     <string name="qs_footer_mod_title">Modifică textul versiunii în panoul setărilor rapide</string>
+    <string name="qs_footer_text_value">Introduceți textul personalizat (Lăsați gol pentru a elimina complet)</string>
     <string name="qs_footer_text_summary">Lasă necompletat pentru a elimina textul complet</string>
     <string name="qs_footer_text_desc">Oprește afișajul pentru a aplica</string>
-    <string name="light_qs_title">Panou setări rapide deschis în timpul temei luminoase</string>
+    <string name="light_qs_title">Aplică panoul de setări rapide luminoase când se utilizează tema luminoasă</string>
     <string name="light_dualtone_qs_title">Activează panoul setărilor rapide cu ton dublu</string>
     <string name="qs_pulldown_size">Lățime tragere rapidă în jos</string>
     <string name="qs_pulldown_switch_title">Derulare în jos din bara de stare a panoului setărilor rapide</string>
     <string name="qs_pulldown_side_title">Poziție tragere rapidă în jos</string>
     <string name="qs_pulldown_category">Tragere în jos a setărilor rapide</string>
     <string name="qs_haptic_switch_title">Vibrează la apăsarea comutatorului QS</string>
-    <string name="qs_rows_number">Numărul rândurilor QS</string>
+    <string name="qs_rows_number">Numărul de rânduri QS</string>
+    <string name="qs_cols_number">Numărul de coloane QS</string>
+    <string name="qqs_tiles_number">Maximum dale în QS rapid (max 2 rânduri)</string>
     <string name="qs_general_options">Opțiuni setări rapide</string>
-    <string name="qs_tiles_3_columns_title">Activează 3 coloane QS</string>
-    <string name="qs_text_size_title">Dimensiunea textului dale QS</string>
-    <string name="qs_text_size">Reduce dimensiunea textului titlurilor QS</string>
+    <string name="qs_tiles_3_columns_title">Activează 3 coloane pentru dale QS</string>
+    <string name="qs_text_size_title">Setează dimensiunea textului pentru pictogramele QS</string>
+    <string name="qs_text_size">Reduce dimensiunea textului pentru pictogramele QS</string>
     <string name="wifi_cell_title">Dală Internet</string>
-    <string name="wifi_cell_on">Utilizează Wifi și Date separat</string>
+    <string name="wifi_cell_on">Utilizează plăci WiFi și date separate</string>
     <string name="wifi_cell_off">Folosește o singură dală Internet</string>
     <string name="QQS_brightness_category">Opțiuni glisor luminozitate</string>
     <string name="QQS_brightness_title">Arată glisorul de luminozitate în panoul QS</string>
@@ -166,30 +182,27 @@
     <string name="back_from_right_title">Partea dreaptă a ecranului</string>
     <string name="back_height_title">Înălțimea gestului</string>
     <string name="gesturenav_header">Navigare prin gesturi</string>
-    <string name="gesture_nav_pill_cat">Lățimea barei de navigare</string>
-    <string name="gesture_nav_pill_mod_title">Modifică lățimea barei de navigare</string>
+    <string name="gesture_nav_pill_cat">Bară de navigare</string>
+    <string name="gesture_nav_pill_mod_title">Modificare bară de navigare</string>
     <string name="gesture_nav_pill_width_title">Lățime comparată cu dimensiunea standard</string>
+    <string name="gesture_nav_pill_height_title">Înălțimea comparată cu dimensiunea standard</string>
     <string name="threebutton_header_title">Navigare cu 3 butoane</string>
     <string name="back_longpress_kill_title">Apăsare lungă Înapoi pentru a închide aplicația din prim-plan</string>
     <string name="hide_navbar_title">Ascunde bara de navigare</string>
-    <string name="gesture_navbar_thickness_title">Grosimea barei de navigare</string>
-    <string name="gesture_navbar_thickness">Modifică grosimea barei de navigare</string>
-    <string name="gesture_navbar_thin">Subțire</string>
-    <string name="gesture_navbar_thick">Groasă</string>
-    <string name="gesture_navbar_thicker">Mai groasă</string>
     <string name="colorpill_title">Colorează bara de navigare</string>
     <string name="colorpill">Bara de navigare nuanțată</string>
-    <string name="reducekeyboard_title">Spațiu tastatură</string>
+    <string name="reducekeyboard_title">Spațiu tastatură pentru gesturi</string>
     <string name="reducekeyboard">Reduce spațiul de sub tastatură</string>
     <string name="taskbar_status_title">Bara de activități Android</string>
     <string name="taskbar_force_enable_title">Activată forțat</string>
     <string name="taskbar_force_disable_title">Dezactivată forțat</string>
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Dezactivare sunet captură ecran</string>
-    <string name="so_power_longpress_torch_title">Apăsare lungă pe butonul de alimentare pentru lanternă*</string>
-    <string name="so_taptaptorch_title">Activează torța cu dublă apăsare</string>
-    <string name="so_taptaptorch_summary">Atinge de două ori apoi ține apăsat ecranul de blocare pentru o lanternă rapidă</string>
-    <string name="framework_needed_caution_summary">Necesită activarea System Framework în Lsposed. UTILIZEAZĂ CU PRUDENȚĂ</string>
+    <string name="force_no_cutout">Ignoră decuparea camerei</string>
+    <string name="so_power_longpress_torch_title">Apăsare lungă pe butonul de alimentare pentru lanternă</string>
+    <string name="so_taptaptorch_title">Activați atingerea dublă pentru lanternă pe ecranul de blocare</string>
+    <string name="so_taptaptorch_summary">Atingeți dublu și mențineți apăsat ecranul de blocare pentru acces rapid la lanternă</string>
+    <string name="so_fingerprint_sensor_enabled">Permite senzor de amprentă când ecranul este oprit</string>
     <string name="so_double_tap_wake_title">Apăsare dublă pentru trezire telefon</string>
     <string name="so_double_tap_wake_summary">Dezactivează apăsarea unică pentru trezire</string>
     <string name="so_tap_proximity_wake_title">Nu se trezește la atingere când ecranul este acoperit</string>
@@ -197,7 +210,7 @@
     <string name="custom_themed_icons_title">Pictograme personalizate</string>
     <string name="custom_themed_icons_off">Pictograme personalizate dezactivate</string>
     <string name="custom_themed_icons_on">Pictograme personalizate activate</string>
-    <string name="so_vol_longpress_skip">Apăsare lungă Volum pentru a omite melodia*</string>
+    <string name="so_vol_longpress_skip">Apăsare lungă butoane Volum pentru a omite melodia</string>
     <string name="notifications_header">Opțiuni notificări</string>
     <string name="expand_notifications_icons_title">Adaugă butoane extindere/restrânge toate</string>
     <string name="disable_overscroll">Dezactivare efect de derulare elastică</string>
@@ -206,8 +219,8 @@
     <string name="gsans_override_title">Forțează sistemul de fonturi Google Sans în tot sistemul</string>
     <string name="font_overlays_enable_title">Activează utilizarea fonturilor personalizate</string>
     <string name="theme_customization_font_title">Font pentru Titlu / Corp text</string>
-    <string name="icons_style_title">Stil pictograme</string>
-    <string name="icon_shapes_title">Forme pictograme</string>
+    <string name="icons_style_title">Stil pictogramă</string>
+    <string name="icon_shapes_title">Forma pictogramelor</string>
     <string name="signal_icons_theme_title">Tema pictogramelor de semnal</string>
     <string name="dt_styles_category">Stil temă întunecată</string>
     <string name="dt_styles">Alege un stil</string>
@@ -231,6 +244,7 @@
     <string name="battery_circle_filled">Cerc umplut</string>
     <!-- Clock position -->
     <string name="clock_default">Stânga (implicit)</string>
+    <string name="clock_default_extra">Stânga - Peste notificări</string>
     <string name="clock_center">Centru</string>
     <string name="clock_right">Dreapta</string>
     <!-- AM/PM style -->
@@ -276,7 +290,7 @@
     <string name="update_notification_title">Actualizare descărcată</string>
     <string name="update_notification_text">Atingeți aici pentru instalare</string>
     <string name="reboot_notification_title">AOSPMods actualizat!</string>
-    <string name="reboot_notification_text">Modificările vor avea efect după repornire</string>
+    <string name="reboot_notification_text">Modificările vor avea efect după repornirea dispozitivului</string>
     <string name="update_flavor_title">Canalul de actualizare</string>
     <string name="stable_flavor">Stabil</string>
     <string name="currentVersionTitle">Versiunea instalată: </string>

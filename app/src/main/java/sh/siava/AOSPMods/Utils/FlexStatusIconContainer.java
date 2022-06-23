@@ -208,15 +208,15 @@ public class FlexStatusIconContainer extends LinearLayout {
                         boolean reCheck;
                         do {
                             reCheck = false;
-                            iconsPerRow = Math.floorDiv(width - paddings, mMaxWidths.get(mMeasureViews.size()-1)+mIconSpacing);
-                            totalWidthNeeded = mMaxWidths.get(mMeasureViews.size()-1) * iconsPerRow;
+                            iconsPerRow = Math.floorDiv(width - paddings, mMaxWidths.get(mMeasureViews.size() - 1) + mIconSpacing);
+                            totalWidthNeeded = mMaxWidths.get(mMeasureViews.size() - 1) * iconsPerRow;
                             totalIconCapacity = iconsPerRow * mTotalPossiblRow - (mDotIcon == null ? 0 : 1);
 
                             if(mMeasureViews.size() > totalIconCapacity) {
                                 setChildVisibleState(mMeasureViews.remove(mMeasureViews.size() - 1), STATE_DOT);
                                 reCheck = true;
                             }
-                        }while(mMeasureViews.size() > totalIconCapacity || reCheck);
+                        } while (mMeasureViews.size() > 0 && (mMeasureViews.size() > totalIconCapacity || reCheck));
                     }
 
                     while((totalWidthNeeded-mIconSpacing) > width || mMeasureViews.size() > (iconsPerRow * mTotalRows))

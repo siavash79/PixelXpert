@@ -141,8 +141,8 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Build number in QS Panel footer</string>
     <string name="qs_footer_mod_title">Modify build text number in QS panel</string>
-    <string name="qs_footer_text_value">Enter custom text (Leave blank to remove completely)</string>
-    <string name="qs_footer_text_summary">Leave this blank to remove the text completely</string>
+    <string name="qs_footer_text_value">Enter custom text</string>
+    <string name="qs_footer_text_summary">Leave blank to remove completely</string>
     <string name="qs_footer_text_desc">Turn the display off/on to apply</string>
     <string name="light_qs_title">Apply light QS Panel when using light theme</string>
     <string name="light_dualtone_qs_title">Enable dual tone QS Panel</string>

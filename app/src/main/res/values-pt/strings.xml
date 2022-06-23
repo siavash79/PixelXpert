@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AOSP Mods</string>
     <string name="error_not_activated">Por favor, confirme que o módulo está ativado no gestor LSposed</string>
     <string name="lockscreen_header_title">Ecrã de bloqueio</string>
     <string name="statusbar_header">Barra de estado</string>
@@ -48,7 +47,7 @@
     <string name="back_height_title">Altura do gesto</string>
     <string name="gesturenav_header">Navegação por gestos</string>
     <string name="gesture_nav_pill_cat">Largura da barra de navegação</string>
-    <string name="gesture_nav_pill_mod_title">Personalizar a largura da barra</string>
+    <string name="gesture_nav_pill_mod_title">Personalizar barra de navegação</string>
     <string name="gesture_nav_pill_width_title">Largura em comparação com a padrão</string>
     <string name="sysui_restart_needed">Resquer reiniciar a IU do sistema</string>
     <string name="threebutton_header_title">Navegação com 3 botões</string>
@@ -82,7 +81,6 @@
     <string name="sb_vibration_switch_title">"Mostar os ícones vibrar/silêncio"</string>
     <string name="doze_header">"Enquanto o ecrã está desligado…"</string>
     <string name="so_power_longpress_torch_title">"Lanterna ao manter premido o botão ligar/desligar*"</string>
-    <string name="framework_needed_caution_summary">Requer ativar a Framework na Lsposed. USAR COM CUIDADO</string>
     <string name="battery_hidden">Escondida</string>
     <string name="hide_navbar_title">Esconder a barra de navegação</string>
     <string name="ntsb_far_left">Lado esquerdo</string>
@@ -121,11 +119,6 @@
     <string name="qs_tiles_3_columns_title">Ativar 3 colunas nas definições rápidas</string>
     <string name="qs_text_size_title">Tamanho do texto nos atalhos das definições rápidas</string>
     <string name="qs_text_size">Diminuir o tamanho do texto</string>
-    <string name="gesture_navbar_thickness_title">Espessura da barra de navegação</string>
-    <string name="gesture_navbar_thickness">Personalizar a espessura da barra</string>
-    <string name="gesture_navbar_thin">Fina</string>
-    <string name="gesture_navbar_thick">Espessa</string>
-    <string name="gesture_navbar_thicker">Mais espessa</string>
     <string name="colorpill_title">Colorir a barra de navegação</string>
     <string name="colorpill">Aplicar cor de destaque na barra</string>
     <string name="reducekeyboard_title">Espaço dos gestos no teclado</string>
@@ -278,5 +271,18 @@
     <string name="album_art_grayscale">Escala de cinzentos</string>
     <string name="gesture_nav_pill_height_title">Espessura em comparação com a padrão</string>
     <string name="so_fingerprint_sensor_enabled">Permitir sensor de impressão digital com o ecrã desligado</string>
-    <string name="qs_footer_text_value">Insira um texto personalizado (deixe em branco para remover o existente)</string>
+    <string name="qs_footer_text_value">Insira um texto personalizado</string>
+    <string name="easy_unlock_title">"Desbloquear fácil (Pin/Password)"</string>
+    <string name="easy_unlock_sumamry">Se não funcionar à primeira, tente novamente</string>
+    <string name="sb_multi_row_system_icons">"Várias linhas para ícones de sistema (requer barra de estado mais espessa)"</string>
+    <string name="sb_multi_row_category">Várias linhas para ícones de sistema</string>
+    <string name="sb_icon_sort_mode">Método de colocação dos ícones</string>
+    <string name="sort_clean">Ajustar em grelha</string>
+    <string name="sort_tight">Ajustar o maior número de itens</string>
+    <string name="sb_notification_limit">"Número máximo de ícones de notificação (4 é o padrão)"</string>
+    <string name="ntsb_far_left_extra">Mais à esquerda - Acima das notificações</string>
+    <string name="qs_cols_number">Número de colunas das QS</string>
+    <string name="qqs_tiles_number">"Número de atalhos na QQS (2 linhas máx.)"</string>
+    <string name="force_no_cutout">Ignorar o notch da câmera</string>
+    <string name="clock_default_extra">Esquerda - Acima das notificações</string>
 </resources>

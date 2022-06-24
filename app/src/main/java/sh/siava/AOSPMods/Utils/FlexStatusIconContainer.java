@@ -216,6 +216,8 @@ public class FlexStatusIconContainer extends LinearLayout {
                         } while (mMeasureViews.size() > 0 && (mMeasureViews.size() > totalIconCapacity || reCheck));
                     }
 
+                    if(iconsPerRow == 0) iconsPerRow = 1; //we show at least one icon in a row
+
                     while((totalWidthNeeded-mIconSpacing) > width || mMeasureViews.size() > (iconsPerRow * mTotalRows))
                     {
                         if (availableRows > 0)

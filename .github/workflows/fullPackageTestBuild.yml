@@ -8,10 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git .
         name: Grab source code
-        with:
-          ref: ${{ env.GITHUB_REF_NAME }}
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2

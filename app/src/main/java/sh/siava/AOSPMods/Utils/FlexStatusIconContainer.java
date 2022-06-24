@@ -1,7 +1,9 @@
 package sh.siava.AOSPMods.Utils;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,13 +21,8 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
-
 @SuppressLint("ViewConstructor")
-@SuppressWarnings("unused")
 public class FlexStatusIconContainer extends LinearLayout {
-    ClassLoader mClassloader;
     Class<?> StatusIconStateClass;
 
     public static final int STATE_ICON = 0;
@@ -35,8 +32,6 @@ public class FlexStatusIconContainer extends LinearLayout {
     public static final int SORT_CLEAN = 0;
     public static final int SORT_TIGHT = 1;
 
-
-    private static final String TAG = "StatusIconContainer";
     private static final boolean DEBUG_OVERFLOW = false;
     // Max 8 status icons including battery
     private static final int MAX_ROW_ICONS = 7;
@@ -55,6 +50,7 @@ public class FlexStatusIconContainer extends LinearLayout {
     private int mTotalRows;
     private View mDotIcon = null;
     private static int sortPlan = SORT_CLEAN;
+    private int mTagID;
 
     public static void setSortPlan(int plan)
     {
@@ -68,8 +64,7 @@ public class FlexStatusIconContainer extends LinearLayout {
     public FlexStatusIconContainer(Context context, AttributeSet attrs, ClassLoader classLoader) {
         super(context, attrs);
 
-        mClassloader = classLoader;
-        StatusIconStateClass = findClass("com.android.systemui.statusbar.phone.StatusIconContainer$StatusIconState", mClassloader);
+        StatusIconStateClass = findClass("com.android.systemui.statusbar.phone.StatusIconContainer$StatusIconState", classLoader);
 
         initDimens();
         setWillNotDraw(!DEBUG_OVERFLOW);
@@ -90,6 +85,8 @@ public class FlexStatusIconContainer extends LinearLayout {
 
     private void initDimens() {
         Resources res = getResources();
+
+        mTagID = res.getIdentifier("status_bar_view_state_tag", "id", getContext().getPackageName());
         // This is the same value that StatusBarIconView uses
         mIconDotFrameWidth = res.getDimensionPixelSize(
                 res.getIdentifier("status_bar_icon_size", "dimen", "android"));
@@ -151,9 +148,9 @@ public class FlexStatusIconContainer extends LinearLayout {
 
             final int height = MeasureSpec.getSize(heightMeasureSpec);
             int totalIconHeight = mIconSize;
-            int mTotalPossiblRow = height / totalIconHeight;
+            int mTotalPossibleRows = height / totalIconHeight;
 
-            int availableRows = mTotalPossiblRow - 1;
+            int availableRows = mTotalPossibleRows - 1;
             mTotalRows = 1;
             int paddings = getPaddingLeft() + getPaddingRight();
             int totalWidthNeeded = paddings;
@@ -210,7 +207,7 @@ public class FlexStatusIconContainer extends LinearLayout {
                             reCheck = false;
                             iconsPerRow = Math.floorDiv(width - paddings, mMaxWidths.get(mMeasureViews.size() - 1) + mIconSpacing);
                             totalWidthNeeded = mMaxWidths.get(mMeasureViews.size() - 1) * iconsPerRow;
-                            totalIconCapacity = iconsPerRow * mTotalPossiblRow - (mDotIcon == null ? 0 : 1);
+                            totalIconCapacity = iconsPerRow * mTotalPossibleRows - (mDotIcon == null ? 0 : 1);
 
                             if(mMeasureViews.size() > totalIconCapacity) {
                                 setChildVisibleState(mMeasureViews.remove(mMeasureViews.size() - 1), STATE_DOT);
@@ -283,16 +280,14 @@ public class FlexStatusIconContainer extends LinearLayout {
         try {
             Object vs = StatusIconStateClass.newInstance();
             setObjectField(vs, "justAdded", true);
-            child.setTag(
-                    getResources().getIdentifier("status_bar_view_state_tag", "id", getContext().getPackageName()), vs);
+            child.setTag(mTagID, vs);
         }catch (Throwable ignored){}
     }
 
     @Override
     public void onViewRemoved(View child) {
         super.onViewRemoved(child);
-        child.setTag(
-                getResources().getIdentifier("status_bar_view_state_tag", "id", getContext().getPackageName()), null);
+        child.setTag(mTagID, null);
     }
 
     public void addIgnoredSlot(String slotName) {
@@ -362,12 +357,14 @@ public class FlexStatusIconContainer extends LinearLayout {
             float translationX = XEndPoint;
 
             int currentRow = 0;
-//        toplineX = hight+paddingtop-paddingbottom-(totalrow*lineheight)+(2*lineheight*x)  /2	-> x=0.....n
 
             float rowTop;
             if (mMeasureViews.size() == 0 /*unlikely!*/) {
                 rowTop = (getHeight() - mIconDotFrameWidth) / 2f;
             } else {
+                /* keep this formula here
+                toplineX = height+paddingtop-paddingbottom-(totalrow*lineheight)+(2*lineheight*x)  /2	-> x=0.....n
+                */
                 rowTop = (getHeight() - (mTotalRows * mMaxHeights.get(iconCount - 1)) + (2 * mMaxHeights.get(iconCount - 1) * currentRow)) / 2f;
             }
 
@@ -392,7 +389,9 @@ public class FlexStatusIconContainer extends LinearLayout {
                             translationX + ((iconFixedWidth - iconWidth) / 2f) :
                             translationX;
 
-                    //icontop = topXline + (lineheight-iconheight)/2
+                    /* keep this formula here
+                    icontop = topXline + (lineheight-iconheight)/2
+                    */
                     int iconTranslationY = Math.round(rowTop + (mMaxHeights.get(iconCount - 1) - icon.getMeasuredHeight()) / 2f);
 
                     setObjectField(childState, "xTranslation", iconTranslationX);
@@ -403,6 +402,14 @@ public class FlexStatusIconContainer extends LinearLayout {
                     setObjectField(childState, "yTranslation", rowTop);
                 }
             }
+
+            //handing data to garbage collector, if applicable. we don't need them anyway
+            mMaxWidths.clear();
+            mMaxHeights.clear();
+            mMeasureViews.clear();
+            mDotIcon = null;
+            System.gc();
+
         } catch (Throwable t) {
             log("AOSPMods Error");
             t.printStackTrace();
@@ -434,8 +441,7 @@ public class FlexStatusIconContainer extends LinearLayout {
     }
 
     private @Nullable Object getViewStateFromChild(View child) {
-        return child.getTag(
-                getResources().getIdentifier("status_bar_view_state_tag", "id", getContext().getPackageName()));
+        return child.getTag(mTagID);
     }
 
     private static int getViewTotalMeasuredWidth(View child) {
@@ -446,9 +452,10 @@ public class FlexStatusIconContainer extends LinearLayout {
         return child.getMeasuredHeight() + child.getPaddingTop() + child.getPaddingBottom();
     }
 
+    /* not used
     private static int getViewTotalWidth(View child) {
         return child.getWidth() + child.getPaddingStart() + child.getPaddingEnd();
-    }
+    }*/
 
     @Override
     public boolean hasOverlappingRendering() {

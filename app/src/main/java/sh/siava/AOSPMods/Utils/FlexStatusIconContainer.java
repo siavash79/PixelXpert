@@ -216,8 +216,6 @@ public class FlexStatusIconContainer extends LinearLayout {
                         } while (mMeasureViews.size() > 0 && (mMeasureViews.size() > totalIconCapacity || reCheck));
                     }
 
-                    if(iconsPerRow == 0) iconsPerRow = 1; //we show at least one icon in a row
-
                     while((totalWidthNeeded-mIconSpacing) > width || mMeasureViews.size() > (iconsPerRow * mTotalRows))
                     {
                         if (availableRows > 0)
@@ -232,7 +230,7 @@ public class FlexStatusIconContainer extends LinearLayout {
                         else
                         {
                             totalWidthNeeded += mUnderflowWidth; //adding required space for dot
-                            while((totalWidthNeeded-mIconSpacing) > width)
+                            while((totalWidthNeeded-mIconSpacing) > width && mMeasureViews.size() > 0)
                             {
                                 iconWidth = getViewTotalMeasuredWidth(mMeasureViews.get(mMeasureViews.size()-1));
                                 setChildVisibleState(mMeasureViews.remove(mMeasureViews.size()-1), STATE_DOT);

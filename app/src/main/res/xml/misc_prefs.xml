@@ -23,6 +23,16 @@
             android:summaryOn="@string/general_on"
             android:title="@string/force_no_cutout" />
 
+        <SeekBarPreference
+            android:layout_width="wrap_content"
+            android:defaultValue="10"
+            android:key="volumeStps"
+            android:max="50"
+            android:title="@string/volume_button_step_title"
+            android:summary="@string/restart_needed"
+            app:min="10"
+            app:seekBarIncrement="5"
+            app:updatesContinuously="true"/>
 
         <SwitchPreference
             android:defaultValue="false"

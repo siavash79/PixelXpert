@@ -212,6 +212,7 @@
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
     <string name="force_no_cutout">Ignore the camera cutout</string>
+    <string name="volume_button_step_title">Volume steps (0 to 100%)</string>
 
     <string name="so_power_longpress_torch_title">Long press Power button for torch</string>
     <string name="so_taptaptorch_title">Enable double-tap for lockscreen torch</string>

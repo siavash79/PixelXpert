@@ -425,15 +425,28 @@ public class SettingsActivity extends AppCompatActivity implements
 
 
     public static class MiscFragment extends PreferenceFragmentCompat {
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.misc_prefs, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+            updateVisibility(prefs);
 
         }
-    }
 
+        private void updateVisibility(SharedPreferences prefs) {
+            try {
+                int volumeStps = prefs.getInt("volumeStps", 0);
+                findPreference("volumeStps").setSummary(volumeStps == 10
+                        ? getString(R.string.word_default)
+                        : String.valueOf(volumeStps));
+
+            } catch (Exception ignored){}
+        }
+    }
     @SuppressWarnings("ConstantConditions")
     public static class SBCFragment extends PreferenceFragmentCompat {
 

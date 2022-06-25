@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods;
 
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
+
 import android.content.Context;
 import android.graphics.Color;
 
@@ -21,17 +23,17 @@ public class miscSettings extends XposedModPack {
     
     @Override
     public void updatePrefs(String...Key) {
-        if(XPrefs.Xprefs == null) return; //it won't be null. but anyway...
+        if(Xprefs == null) return; //it won't be null. but anyway...
 
         //netstat settings
         try {
-            Objects.requireNonNull(SystemUtils.NetworkStats()).setStatus(XPrefs.Xprefs.getBoolean("NetworkStatsEnabled", false));
-            Objects.requireNonNull(SystemUtils.NetworkStats()).setSaveInterval(XPrefs.Xprefs.getInt("netstatSaveInterval", 5));
+            Objects.requireNonNull(SystemUtils.NetworkStats()).setStatus(Xprefs.getBoolean("NetworkStatsEnabled", false));
+            Objects.requireNonNull(SystemUtils.NetworkStats()).setSaveInterval(Xprefs.getInt("netstatSaveInterval", 5));
         }catch (Exception ignored){}
 
-        boolean netstatColorful = XPrefs.Xprefs.getBoolean("networkStatsColorful", false);
-        StringFormatter.RXColor = (netstatColorful) ? XPrefs.Xprefs.getInt("networkStatDLColor", Color.GREEN) : null;
-        StringFormatter.TXColor = (netstatColorful) ? XPrefs.Xprefs.getInt("networkStatULColor", Color.RED) : null;
+        boolean netstatColorful = Xprefs.getBoolean("networkStatsColorful", false);
+        StringFormatter.RXColor = (netstatColorful) ? Xprefs.getInt("networkStatDLColor", Color.GREEN) : null;
+        StringFormatter.TXColor = (netstatColorful) ? Xprefs.getInt("networkStatULColor", Color.RED) : null;
         StringFormatter.refreshAll();
 
         if(Key.length > 0)
@@ -50,6 +52,9 @@ public class miscSettings extends XposedModPack {
                 case "gsans_override":
                     updateFontsInfrastructure();
                     break;
+                case "volumeStps":
+                    setVolumeSteps();
+                    break;
             }
         }
         else
@@ -59,11 +64,23 @@ public class miscSettings extends XposedModPack {
             //startup jobs
             updateSysUITuner();
             updateFontsInfrastructure();
+
+            setVolumeSteps();
         }
     }
 
+    private void setVolumeSteps() {
+        int volumeStps = Xprefs.getInt("volumeStps", 0);
+        if(volumeStps <= 10)
+        {
+            Shell.cmd("rm -Rf " + XPrefs.MagiskRoot + "/system.prop").exec();
+            return;
+        }
+        Shell.cmd("echo ro.config.media_vol_steps=" + volumeStps + " > " + XPrefs.MagiskRoot + "/system.prop").exec();
+    }
+
     private void updateWifiCell() {
-        boolean WifiCellEnabled = XPrefs.Xprefs.getBoolean("wifi_cell", false);
+        boolean WifiCellEnabled = Xprefs.getBoolean("wifi_cell", false);
 
         try {
             String currentTiles = Shell.cmd("settings get secure sysui_qs_tiles").exec().getOut().get(0);
@@ -106,7 +123,7 @@ public class miscSettings extends XposedModPack {
     private void updateSysUITuner() {
         try
         {
-            boolean SysUITunerEnabled = XPrefs.Xprefs.getBoolean("sysui_tuner", false);
+            boolean SysUITunerEnabled = Xprefs.getBoolean("sysui_tuner", false);
             String mode = (SysUITunerEnabled) ? "enable" : "disable";
             
             com.topjohnwu.superuser.Shell.cmd("pm " + mode + " com.android.systemui/.tuner.TunerActivity").exec();
@@ -114,8 +131,8 @@ public class miscSettings extends XposedModPack {
     }
 
     private void updateFontsInfrastructure() {
-            boolean customFontsEnabled = XPrefs.Xprefs.getBoolean("enableCustomFonts", false);
-            boolean GSansOverrideEnabled = XPrefs.Xprefs.getBoolean("gsans_override", false);
+            boolean customFontsEnabled = Xprefs.getBoolean("enableCustomFonts", false);
+            boolean GSansOverrideEnabled = Xprefs.getBoolean("gsans_override", false);
             
             new Thread(() -> {
                 try {

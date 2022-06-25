@@ -1,3 +1,6 @@
+**canary-63**  
+- Added option to adjust media volume steps  
+  
 **canary-62**  
 - Fixing navbar pill going transparent in certain situations  
   

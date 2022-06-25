@@ -440,9 +440,11 @@ public class SettingsActivity extends AppCompatActivity implements
         private void updateVisibility(SharedPreferences prefs) {
             try {
                 int volumeStps = prefs.getInt("volumeStps", 0);
-                findPreference("volumeStps").setSummary(volumeStps == 10
-                        ? getString(R.string.word_default)
-                        : String.valueOf(volumeStps));
+                findPreference("volumeStps").setSummary(String.format("%s - (%s)",
+                        volumeStps == 10
+                                ? getString(R.string.word_default)
+                                : String.valueOf(volumeStps),
+                        getString(R.string.restart_needed)));
 
             } catch (Exception ignored){}
         }

@@ -147,7 +147,11 @@ public class FlexStatusIconContainer extends LinearLayout {
             int width = MeasureSpec.getSize(widthMeasureSpec);
             int height = MeasureSpec.getSize(heightMeasureSpec);
 
-            if(width == 0) return; //nothing to render. ignore
+            if(width == 0) //nothing to render. ignore
+            {
+                setDaultReponse(widthMeasureSpec, heightMeasureSpec);
+                return;
+            }
 
             int totalIconHeight = mIconSize;
             int mTotalPossibleRows = height / totalIconHeight;
@@ -259,8 +263,12 @@ public class FlexStatusIconContainer extends LinearLayout {
         }catch (Throwable e){
             log("AOSPMODS Error");
             e.printStackTrace();
-            setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec));
+            setDaultReponse(widthMeasureSpec, heightMeasureSpec);
         }
+    }
+
+    private void setDaultReponse(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec));
     }
 
     private void setChildVisibleState(View child, int state) {

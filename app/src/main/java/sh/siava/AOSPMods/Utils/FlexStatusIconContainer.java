@@ -149,7 +149,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 
             if(width == 0) //nothing to render. ignore
             {
-                setDaultReponse(widthMeasureSpec, heightMeasureSpec);
+                setDefaultResponse(widthMeasureSpec, heightMeasureSpec);
                 return;
             }
 
@@ -263,11 +263,11 @@ public class FlexStatusIconContainer extends LinearLayout {
         }catch (Throwable e){
             log("AOSPMODS Error");
             e.printStackTrace();
-            setDaultReponse(widthMeasureSpec, heightMeasureSpec);
+            setDefaultResponse(widthMeasureSpec, heightMeasureSpec);
         }
     }
 
-    private void setDaultReponse(int widthMeasureSpec, int heightMeasureSpec) {
+    private void setDefaultResponse(int widthMeasureSpec, int heightMeasureSpec) {
         setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec));
     }
 

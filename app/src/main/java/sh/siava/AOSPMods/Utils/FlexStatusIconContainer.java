@@ -145,8 +145,10 @@ public class FlexStatusIconContainer extends LinearLayout {
             mMaxHeights.clear();
             int mode = MeasureSpec.getMode(widthMeasureSpec);
             int width = MeasureSpec.getSize(widthMeasureSpec);
-
             final int height = MeasureSpec.getSize(heightMeasureSpec);
+
+            if(width == 0) return; //nothing to render. ignore
+
             int totalIconHeight = mIconSize;
             int mTotalPossibleRows = height / totalIconHeight;
 

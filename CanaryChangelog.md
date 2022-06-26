@@ -1,3 +1,6 @@
+**canary-64**  
+- Fix dual statusbar freeze in rare situations  
+  
 **canary-63**  
 - Added option to adjust media volume steps  
   

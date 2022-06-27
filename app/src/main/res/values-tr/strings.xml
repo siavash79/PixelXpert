@@ -47,6 +47,8 @@
     <string name="album_art_blur_text">Bulanıklık derecesi</string>
     <string name="album_art_grayscale">Renkleri grileştir</string>
     <string name="shufflePin_title">Pin Rakamlarını Karıştır</string>
+    <string name="easy_unlock_title">Hızlı kilit açma (Pin/Parola)</string>
+    <string name="easy_unlock_sumamry">İlk kez çalışmazsa bir daha deneyin</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Ekranı kapatmak için iki kez dokunun</string>
@@ -61,6 +63,12 @@
     <string name="battery_hidden">Gizlenmiş</string>
     <string name="BIcon_Opacity_title">Opaklık</string>
     <string name="sb_center_fine_tune">İnce ayar merkez alanı</string>
+    <string name="sb_multi_row_system_icons">Çok satırlı sistem simgeleri (daha yüksek durum çubuğu yüksekliği gerekir)</string>
+    <string name="sb_multi_row_category">Çok satırlı sistem simgeleri</string>
+    <string name="sb_icon_sort_mode">Simge yerleştirme yöntemi</string>
+    <string name="sort_clean">Ağ sistemine uygun sığdır</string>
+    <string name="sort_tight">Maksimum öğeyi sığdırs</string>
+    <string name="sb_notification_limit">Maksimum bildirim simgeleri (Varsayılan 4'tür)</string>
 
     <string name="lte_4g_icon_title">LTE / 4G Simgesi</string>
     <string name="combined_signal_icon_title">Birleşik sinyal simgeleri</string>
@@ -84,6 +92,7 @@
     <string name="sbc_after_color">Saatten sonrakı yazı</string>
     <string name="network_settings_pref">Ağ izleme ayarları...</string>
     <string name="ntsb_far_left">Tam Sol</string>
+    <string name="ntsb_far_left_extra">Tam sol - Bildirimlerin üstünde</string>
     <string name="ntsb_mid_left">Orta-Sol</string>
     <string name="ntsb_mid_right">Orta-Sağ</string>
     <string name="ntsb_category_title">Ağ İzleyicisi</string>
@@ -142,14 +151,15 @@
     <string name="qs_pulldown_side_title">Çabuk çekme tarafı</string>
     <string name="qs_pulldown_category">Hızlı ayarlar için aşağı çekin</string>
     <string name="qs_haptic_switch_title">Hızlı ayar butonuna tıklandığında titretme yap</string>
-    <string name="qs_rows_number">Hızlı ayar satır adeti</string>
-    <string name="qs_general_options">Hızlı ayar seçenekleri</string>
+    <string name="qs_rows_number">Hızlı ayar satır sayısı</string>
+    <string name="qs_cols_number">Hızlı ayar kolon sayısı</string>
+    <string name="qqs_tiles_number">Üst hızlı ayar panelinde maksimum kutucuk sayısı (en fazla 2 satır)</string><string name="qs_general_options">Hızlı ayar seçenekleri</string>
     <string name="qs_tiles_3_columns_title">3 hızlı ayar sütununu etkinleştir</string>
     <string name="qs_text_size_title">Hızlı ayar butonlarının metin boyutu</string>
     <string name="qs_text_size">Hızlı ayar butonlarının metin boyutunu küçült</string>
     <string name="wifi_cell_title">İnternet Kutucuğu</string>
     <string name="wifi_cell_on">WiFi ve Mobil internet için ayrı kutucukları kullan</string>
-    <string name="wifi_cell_off">Tek İnternet Kutucuğu kullan</string>
+    <string name="wifi_cell_off">Tek İnternet kutucuğu kullan</string>
     <string name="QQS_brightness_category">Parlaklık kaydırıcı seçenekleri</string>
     <string name="QQS_brightness_title">Üst hızlı ayar panelinde parlaklık kaydırıcısını göster</string>
     <string name="QQS_brightness_bottom_title">Parlaklık kaydırıcısını en alta taşı</string>

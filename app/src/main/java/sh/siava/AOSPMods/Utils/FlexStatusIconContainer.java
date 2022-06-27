@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -40,17 +41,18 @@ public class FlexStatusIconContainer extends LinearLayout {
     private int mUnderflowWidth;
     // Individual StatusBarIconViews draw their etc dots centered in this width
     private int mIconDotFrameWidth;
-    private boolean mShouldRestrictIcons = true;
     // So we can count and measure properly
     private final List<View> mMeasureViews = new ArrayList<>();
     // Any ignored icon will never be added as a child
     private final ArrayList<String> mIgnoredSlots = new ArrayList<>();
     private int mIconSize;
-    private final List<Integer> mMaxWidths = new ArrayList<>(), mMaxHeights = new ArrayList<>();
-    private int mTotalRows;
     private View mDotIcon = null;
     private static int sortPlan = SORT_CLEAN;
     private int mTagID;
+    private final SparseIntArray mColWidths = new SparseIntArray();
+    private final List<Integer> mIconWidths = new ArrayList<>();
+    private boolean mHasDot = false;
+    private int mRowCount;
 
     public static void setSortPlan(int plan)
     {
@@ -75,12 +77,12 @@ public class FlexStatusIconContainer extends LinearLayout {
         super.onFinishInflate();
     }
 
-    public void setShouldRestrictIcons(boolean should) {
-        mShouldRestrictIcons = should;
-    }
+    @SuppressWarnings("unused")
+    public void setShouldRestrictIcons(boolean should) {}
 
+    @SuppressWarnings("unused")
     public boolean isRestrictingIcons() {
-        return mShouldRestrictIcons;
+        return true;
     }
 
     private void initDimens() {
@@ -139,10 +141,12 @@ public class FlexStatusIconContainer extends LinearLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         try {
-            mDotIcon = null;
+            mColWidths.clear();
             mMeasureViews.clear();
-            mMaxWidths.clear();
-            mMaxHeights.clear();
+            mIconWidths.clear();
+            mDotIcon = null;
+            mHasDot = false;
+
             int mode = MeasureSpec.getMode(widthMeasureSpec);
             int width = MeasureSpec.getSize(widthMeasureSpec);
             int height = MeasureSpec.getSize(heightMeasureSpec);
@@ -156,109 +160,190 @@ public class FlexStatusIconContainer extends LinearLayout {
             int totalIconHeight = mIconSize;
             int mTotalPossibleRows = height / totalIconHeight;
 
-            int availableRows = mTotalPossibleRows - 1;
-            mTotalRows = 1;
             int paddings = getPaddingLeft() + getPaddingRight();
-            int totalWidthNeeded = paddings;
-            int totalIconCapacity;
+            int availableWidth = width - paddings;
 
-            for(int i = getChildCount() - 1; i >= 0; i--)
+            int totalWidth = 0;
+
+            switch (sortPlan)
             {
-                View icon = getChildAt(i);
+                case SORT_CLEAN:
+                    mRowCount = 0;
+                    mIconWidths.clear();
+                    int initialCapacity = mTotalPossibleRows * MAX_ROW_ICONS;
 
-                boolean isBlocked = false;
-                try {
-                    isBlocked = (boolean)callMethod(icon,"isIconBlocked");
-                }catch (Throwable ignored){}
+                    for(int i = getChildCount() - 1; i >= 0; i--) {
+                        View icon = getChildAt(i);
 
-                if ((boolean)callMethod(icon,"isIconVisible") && !isBlocked
-                        && !mIgnoredSlots.contains((String)callMethod(icon,"getSlot")))
-                {
-                    if(mDotIcon != null)
-                    {
-                        setChildVisibleState(icon, STATE_DOT);
-                        continue;
-                    }
-                    setChildVisibleState(icon, STATE_ICON);
+                        boolean isBlocked = false;
+                        try {
+                            isBlocked = (boolean) callMethod(icon, "isIconBlocked");
+                        } catch (Throwable ignored) {}
 
-                    int childWidthSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.UNSPECIFIED);
-                    measureChild(icon, childWidthSpec, heightMeasureSpec);
+                        if ((boolean) callMethod(icon, "isIconVisible") && !isBlocked
+                                && !mIgnoredSlots.contains((String) callMethod(icon, "getSlot"))) {   //icon should be considered!
 
-                    int iconWidth = getViewTotalMeasuredWidth(icon);
-                    int iconHeight = getViewTotalMeasuredHeight(icon);
+                            if(mIconWidths.size() <= initialCapacity) //enough widths recorded
+                            {
+                                //measuring child width
+                                int childWidthSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.UNSPECIFIED);
+                                measureChild(icon, childWidthSpec, heightMeasureSpec);
+                                int iconWidth = getViewTotalMeasuredWidth(icon);
 
-                    mMaxWidths.add(mMeasureViews.size() == 0 ?
-                            iconWidth
-                            : Math.max(
-                            mMaxWidths.get(mMeasureViews.size()-1),
-                            iconWidth));
-
-                    mMaxHeights.add(mMeasureViews.size() == 0 ?
-                            iconHeight
-                            : Math.max(
-                            mMaxHeights.get(mMeasureViews.size()-1),
-                            iconHeight));
-
-                    mMeasureViews.add(icon);
-
-                    int iconsPerRow = MAX_ROW_ICONS;
-
-                    if(mTotalRows == 1 || sortPlan == SORT_TIGHT) {
-                        totalWidthNeeded += iconWidth + mIconSpacing;
-                    }
-                    else
-                    {
-                        boolean reCheck;
-                        do {
-                            reCheck = false;
-                            iconsPerRow = Math.floorDiv(width - paddings, mMaxWidths.get(mMeasureViews.size() - 1) + mIconSpacing);
-                            totalWidthNeeded = mMaxWidths.get(mMeasureViews.size() - 1) * iconsPerRow;
-                            totalIconCapacity = iconsPerRow * mTotalPossibleRows - (mDotIcon == null ? 0 : 1);
-
-                            if(mMeasureViews.size() > totalIconCapacity) {
-                                setChildVisibleState(mMeasureViews.remove(mMeasureViews.size() - 1), STATE_DOT);
-                                reCheck = true;
+                                //adding width to list
+                                mIconWidths.add(iconWidth);
+                                mMeasureViews.add(icon);
                             }
-                        } while (mMeasureViews.size() > 0 && (mMeasureViews.size() > totalIconCapacity || reCheck));
-                    }
-
-                    while((totalWidthNeeded-mIconSpacing) > width || mMeasureViews.size() > (iconsPerRow * mTotalRows))
-                    {
-                        if (availableRows > 0)
-                        {
-                            mMeasureViews.remove(icon);
-                            i++;
-                            mTotalRows++;
-                            availableRows--;
-                            totalWidthNeeded = paddings;
-                            break;
+                            else
+                            {
+                                setChildVisibleState(icon, STATE_HIDDEN);
+                            }
                         }
                         else
                         {
-                            totalWidthNeeded += mUnderflowWidth; //adding required space for dot
-                            while((totalWidthNeeded-mIconSpacing) > width && mMeasureViews.size() > 0)
+                            setChildVisibleState(icon, STATE_HIDDEN);
+                        }
+                    }
+
+                    int iconsPerRow = Math.min(mIconWidths.size(), MAX_ROW_ICONS);
+
+                    //init the loop
+                    boolean success = false;
+                    mHasDot = false;
+
+                    //reduce iconsperrow until we find a winner
+                    for(; iconsPerRow > 0 && !success; iconsPerRow--)
+                    {
+                        int iconCapacity = iconsPerRow * mTotalPossibleRows - ((mHasDot) ? 1 : 0);
+
+                        if(mIconWidths.size() > iconCapacity)
+                        {
+                            if(!mHasDot)
                             {
-                                iconWidth = getViewTotalMeasuredWidth(mMeasureViews.get(mMeasureViews.size()-1));
-                                setChildVisibleState(mMeasureViews.remove(mMeasureViews.size()-1), STATE_DOT);
-                                totalWidthNeeded -= (iconWidth + mIconSpacing);
+                                mHasDot = true;
+                                iconCapacity--;
+                            }
+                            mIconWidths.subList(iconCapacity, mIconWidths.size()).clear();
+                        }
+                        mColWidths.clear();
+
+                        int colIndex = 0;
+                        totalWidth = (iconsPerRow - 1) * mIconSpacing;
+
+                        success = true;
+
+                        for(int i = 0; i < mIconWidths.size() + (mHasDot ? 1 : 0); i++, colIndex++)
+                        {
+                            if(colIndex == iconsPerRow)
+                            {
+                                colIndex = 0;
+                            }
+                            int currentWidth = i == mIconWidths.size()
+                                    ? mIconDotFrameWidth
+                                    : mIconWidths.get(i);
+
+                            totalWidth -= mColWidths.get(colIndex, 0);
+                            mColWidths.put(colIndex, Math.max(currentWidth, mColWidths.get(colIndex, 0)));
+                            totalWidth += mColWidths.get(colIndex, 0);
+
+                            if(totalWidth > availableWidth)
+                            {
+                                success = false;
+                                iconsPerRow = Math.min(i+1, iconsPerRow);
+                                break;
                             }
                         }
                     }
-                }
-                else
-                {
-                    setChildVisibleState(icon, STATE_HIDDEN);
-                }
+
+                    if(mHasDot)
+                    {
+                        mMeasureViews.subList(mIconWidths.size() + 1, mMeasureViews.size()).forEach(icon -> setChildVisibleState(icon, STATE_HIDDEN));
+                        setChildVisibleState(mMeasureViews.get(mIconWidths.size()), STATE_DOT);
+                        mMeasureViews.subList(mIconWidths.size(), mMeasureViews.size()).clear();
+                    }
+
+                    break;
+                case SORT_TIGHT:
+                    mRowCount = 1;
+                    int availableRows = mTotalPossibleRows - 1;
+                    int remainingWidth = availableWidth;
+                    int colIndex = 0;
+
+                    for(int i = getChildCount() - 1; i >= 0; i--) {
+                        View icon = getChildAt(i);
+
+                        boolean isBlocked = false;
+                        try {
+                            isBlocked = (boolean) callMethod(icon, "isIconBlocked");
+                        } catch (Throwable ignored) {}
+
+                        if ((boolean) callMethod(icon, "isIconVisible") && !isBlocked
+                                && !mIgnoredSlots.contains((String) callMethod(icon, "getSlot"))) {   //icon should be considered!
+
+                            if(mHasDot)
+                            {
+                                setChildVisibleState(icon, STATE_HIDDEN);
+                                continue;
+                            }
+
+                            int childWidthSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.UNSPECIFIED);
+                            measureChild(icon, childWidthSpec, heightMeasureSpec);
+                            int iconWidth = getViewTotalMeasuredWidth(icon);
+
+                            if(iconWidth > remainingWidth || colIndex >= MAX_ROW_ICONS) // row is full
+                            {
+                                if(availableRows > 0) { //we still have more rows to fill: prepare for it
+                                    colIndex = 0;
+                                    mRowCount++;
+                                    availableRows--;
+                                    i++;
+                                    totalWidth = Math.max(totalWidth, availableWidth - remainingWidth);
+                                    remainingWidth = availableWidth;
+                                }
+                                else //no more rows available. let's close the case with a dot
+                                {
+                                    if(mIconDotFrameWidth < remainingWidth || mMeasureViews.isEmpty())
+                                    {
+                                        setChildVisibleState(icon, STATE_DOT);
+                                    }
+                                    else
+                                    {
+                                        setChildVisibleState(icon, STATE_HIDDEN);
+
+                                        icon = mMeasureViews.get(mMeasureViews.size() - 1);
+                                        remainingWidth += icon.getMeasuredWidth();
+                                        setChildVisibleState(icon, STATE_DOT);
+                                        mMeasureViews.remove(icon);
+                                    }
+
+                                    remainingWidth -= mIconDotFrameWidth;
+                                    totalWidth = Math.max(totalWidth, availableWidth - remainingWidth);
+                                }
+                                //All lines calculate, to find....... THIS:
+                            }
+                            else
+                            {
+                                remainingWidth -= iconWidth + mIconSpacing;
+                                mMeasureViews.add(icon);
+                                totalWidth = Math.max(totalWidth, availableWidth - remainingWidth);
+                            }
+                        }
+                        else
+                        {
+                            setChildVisibleState(icon, STATE_HIDDEN);
+                        }
+                    }
+                    break;
             }
 
             if (mode == MeasureSpec.EXACTLY) {
                 setMeasuredDimension(width, MeasureSpec.getSize(heightMeasureSpec));
             } else {
-                if(totalWidthNeeded > width && mode == MeasureSpec.AT_MOST)
+                if(totalWidth > width && mode == MeasureSpec.AT_MOST)
                 {
-                    totalWidthNeeded = width;
+                    totalWidth = width;
                 }
-                setMeasuredDimension(totalWidthNeeded, MeasureSpec.getSize(heightMeasureSpec));
+                setMeasuredDimension(totalWidth, MeasureSpec.getSize(heightMeasureSpec));
             }
         }catch (Throwable e){
             log("AOSPMODS Error");
@@ -272,13 +357,10 @@ public class FlexStatusIconContainer extends LinearLayout {
     }
 
     private void setChildVisibleState(View child, int state) {
-        if (state == STATE_DOT)
+        if(state == STATE_DOT)
         {
-            if(mDotIcon != null)
-            {
-                setChildVisibleState(mDotIcon, STATE_HIDDEN);
-            }
             mDotIcon = child;
+            mHasDot = true;
         }
         Object childState = getViewStateFromChild(child);
         setObjectField(childState, "visibleState", state);
@@ -300,6 +382,7 @@ public class FlexStatusIconContainer extends LinearLayout {
         child.setTag(mTagID, null);
     }
 
+    @SuppressWarnings("unused")
     public void addIgnoredSlot(String slotName) {
         addIgnoredSlotInternal(slotName);
         requestLayout();
@@ -318,12 +401,14 @@ public class FlexStatusIconContainer extends LinearLayout {
         }
     }
 
+    @SuppressWarnings("unused")
     public void removeIgnoredSlot(String slotName) {
         mIgnoredSlots.remove(slotName);
 
         requestLayout();
     }
 
+    @SuppressWarnings("unused")
     public void removeIgnoredSlots(List<String> slots) {
         for (String slot : slots) {
             mIgnoredSlots.remove(slot);
@@ -332,11 +417,13 @@ public class FlexStatusIconContainer extends LinearLayout {
         requestLayout();
     }
 
+    @SuppressWarnings("unused")
     public void setIgnoredSlots(List<String> slots) {
         mIgnoredSlots.clear();
         addIgnoredSlots(slots);
     }
 
+    @SuppressWarnings("unused")
     public View getViewForSlot(String slot) {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
@@ -354,72 +441,91 @@ public class FlexStatusIconContainer extends LinearLayout {
     */
     private void calculateIconTranslations() {
         try {
-            int iconCount = mMeasureViews.size() + ((mDotIcon != null) ? 1 : 0);
+            int iconCount = mMeasureViews.size();
 
             float width = getWidth();
 
-            int iconFixedWidth = 0;
-            if (mTotalRows > 1 && sortPlan == SORT_CLEAN) {
-                iconFixedWidth = mMaxWidths.get(iconCount - 1);
+            if(width == 0)
+                return;
+
+            if(mRowCount == 0)
+            {
+                mRowCount = (int) Math.ceil((mIconWidths.size() + (mHasDot ? 1 : 0)) / (double)mColWidths.size());
             }
 
             final float XEndPoint = width - getPaddingEnd();
-            float translationX = XEndPoint;
-
+            float xPosition = XEndPoint;
             int currentRow = 0;
-
             float rowTop;
-            if (mMeasureViews.size() == 0 /*unlikely!*/) {
+
+            if (iconCount == 0 /*unlikely!*/) {
                 rowTop = (getHeight() - mIconDotFrameWidth) / 2f;
             } else {
                 /* keep this formula here
                 toplineX = height+paddingtop-paddingbottom-(totalrow*lineheight)+(2*lineheight*x)  /2	-> x=0.....n
                 */
-                rowTop = (getHeight() - (mTotalRows * mMaxHeights.get(iconCount - 1)) + (2 * mMaxHeights.get(iconCount - 1) * currentRow)) / 2f;
+                rowTop = (getHeight() - (mRowCount * mIconSize)) / 2f;
             }
 
-            for (int i = 0; i < iconCount; i++) {
-                View icon = (i == iconCount - 1 && mDotIcon != null) ? mDotIcon : mMeasureViews.get(i);
+            int colIndex = 0;
+            for(int i = 0; i < iconCount + (mHasDot ? 1 : 0); i++, colIndex++) {
+                View icon = (i < iconCount) ? mMeasureViews.get(i) : mDotIcon;
+
+                int iconWidth = (i < iconCount) ? icon.getWidth() : mIconDotFrameWidth;
                 Object childState = getViewStateFromChild(icon);
 
-                int iconWidth = (icon == mDotIcon) ? mIconDotFrameWidth : getViewTotalMeasuredWidth(icon);
+                float iconTranslationY = 0;
+                float iconTranslationX = 0;
 
-                if (mTotalRows > 1) {
-                    translationX -= (sortPlan == SORT_CLEAN) ? iconFixedWidth : iconWidth;
+                switch (sortPlan) {
+                    case SORT_CLEAN:
+                        if (colIndex == mColWidths.size()) {
+                            colIndex = 0;
+                            xPosition = XEndPoint;
+                            currentRow++;
+                            rowTop = (getHeight() - (mRowCount * mIconSize) + (2 * mIconSize * currentRow)) / 2f;
+                        }
 
-                    if (translationX < 0) {
-                        currentRow++;
-                        translationX = XEndPoint;
-                        i--;
-                        rowTop = (getHeight() + getPaddingTop() - getPaddingEnd() - (mTotalRows * mMaxHeights.get(iconCount - 1)) + (2 * mMaxHeights.get(iconCount - 1) * currentRow)) / 2f;
-                        continue;
-                    }
+                        if (i < iconCount) {
+                            setChildVisibleState(icon, STATE_ICON);
+                        }
 
-                    float iconTranslationX =  sortPlan == SORT_CLEAN ?
-                            translationX + ((iconFixedWidth - iconWidth) / 2f) :
-                            translationX;
+                        float shift = ((mColWidths.get(colIndex) - iconWidth) / 2f);
 
-                    /* keep this formula here
-                    icontop = topXline + (lineheight-iconheight)/2
-                    */
-                    int iconTranslationY = Math.round(rowTop + (mMaxHeights.get(iconCount - 1) - icon.getMeasuredHeight()) / 2f);
+                        iconTranslationX = xPosition - mColWidths.get(colIndex) + shift;
+                        xPosition -= mColWidths.get(colIndex) + mIconSpacing;
+                        iconTranslationY = Math.round(rowTop + (mIconSize - icon.getMeasuredHeight()) / 2f);
 
-                    setObjectField(childState, "xTranslation", iconTranslationX);
-                    setObjectField(childState, "yTranslation", iconTranslationY);
-                } else {
-                    translationX -= iconWidth;
-                    setObjectField(childState, "xTranslation", translationX);
-                    setObjectField(childState, "yTranslation", rowTop);
+                        break;
+                    case SORT_TIGHT:
+                        if (xPosition > iconWidth) {
+                            xPosition -= iconWidth;
+                            iconTranslationX = xPosition;
+
+                            setObjectField(childState, "xTranslation", xPosition);
+                        } else {
+                            currentRow++;
+                            i--;
+                            rowTop = (getHeight() - (mRowCount * mIconSize) + (2 * mIconSize * currentRow)) / 2f;
+                            xPosition = XEndPoint;
+                            continue;
+                        }
+                        iconTranslationY = Math.round(rowTop + (mIconSize - icon.getMeasuredHeight()) / 2f);
+
+                        break;
                 }
+                if (icon != mDotIcon) {
+                    setChildVisibleState(icon, STATE_ICON);
+                }
+                setObjectField(childState, "xTranslation", iconTranslationX);
+                setObjectField(childState, "yTranslation", iconTranslationY);
+
             }
 
             //handing data to garbage collector, if applicable. we don't need them anyway
-            mMaxWidths.clear();
-            mMaxHeights.clear();
             mMeasureViews.clear();
             mDotIcon = null;
             System.gc();
-
         } catch (Throwable t) {
             log("AOSPMods Error");
             t.printStackTrace();
@@ -458,6 +564,7 @@ public class FlexStatusIconContainer extends LinearLayout {
         return child.getMeasuredWidth() + child.getPaddingStart() + child.getPaddingEnd();
     }
 
+    @SuppressWarnings("unused")
     private static int getViewTotalMeasuredHeight(View child) {
         return child.getMeasuredHeight() + child.getPaddingTop() + child.getPaddingBottom();
     }

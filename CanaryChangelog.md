@@ -1,3 +1,7 @@
+**canary-65**  
+- Reworked multi row system icons  
+- Fix lockscreen AOD freeze in rare situations  
+  
 **canary-64**  
 - Fix dual statusbar freeze in rare situations  
   

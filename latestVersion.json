@@ -1,6 +1,6 @@
 {
-    "version": "canary-64",
-    "versionCode": 64,
-    "zipUrl": "https://nightly.link/siavash79/AOSPMods/actions/runs/2563705331/AOSPMods.zip",
+    "version": "canary-65",
+    "versionCode": 65,
+    "zipUrl": "https://nightly.link/siavash79/AOSPMods/actions/runs/2569165344/AOSPMods.zip",
     "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/CanaryChangelog.md"
 }

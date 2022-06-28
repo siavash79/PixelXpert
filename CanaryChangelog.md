@@ -1,3 +1,6 @@
+**canary-66**  
+- Reworked statusbar padding settings  
+  
 **canary-65**  
 - Reworked multi row system icons  
 - Fix lockscreen AOD freeze in rare situations  

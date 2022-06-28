@@ -65,12 +65,19 @@
             android:singleLine="true"
             android:title="@string/sb_notification_limit" />
 
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="FixSBLeftPadddingOverlay"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/fix_status_bar_padding" />
+        <com.nfx.android.rangebarpreference.RangeBarPreferenceCompat
+            android:key="statusbarPaddings"
+            android:title="@string/sb_padding_title"
+            android:summary="@string/sb_padding_summary"
+            app:rbp_measurementUnit="%"
+
+            app:rbp_tickInterval=".5"
+
+            app:rbp_tickStart="-.5"
+            app:rbp_tickEnd="100.5"
+
+            app:rbp_view_defaultLowValue="-.5"
+            app:rbp_view_defaultHighValue="100.5" />
 
         <SwitchPreference
             android:defaultValue="false"

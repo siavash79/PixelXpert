@@ -116,9 +116,8 @@
     <string name="dual_tone_battery_on_summary">On (only works with portrait icon)</string>
     <string name="unread_messages_title">Show number of unread messages</string>
     <string name="status_bar_height">Status bar height (rotate screen to apply)</string>
-    <string name="status_bar_height_small">Small</string>
-    <string name="status_bar_height_medium">Medium</string>
-    <string name="fix_status_bar_padding">Correct left side padding</string>
+    <string name="sb_padding_title">Statusbar Padding</string>
+    <string name="sb_padding_summary">Setting the values to min/max is equivalent to device Default</string>
     <string name="sbbb_header">Battery bar settings</string>
     <string name="sbbIcon_header">Battery icon settings</string>
     <string name="BB_enable_title">Enable Battery Bar</string>

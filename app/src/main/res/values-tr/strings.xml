@@ -153,7 +153,7 @@
     <string name="qs_haptic_switch_title">Hızlı ayar butonuna tıklandığında titretme yap</string>
     <string name="qs_rows_number">Hızlı ayar satır sayısı</string>
     <string name="qs_cols_number">Hızlı ayar kolon sayısı</string>
-    <string name="qqs_tiles_number">Üst hızlı ayar panelinde maksimum kutucuk sayısı (en fazla 2 satır)</string><string name="qs_general_options">Hızlı ayar seçenekleri</string>
+    <string name="qqs_tiles_number">Üst hızlı ayar panelinde maksimum kutucuk sayısı (en fazla 2 satır)</string>
     <string name="qs_general_options">Hızlı ayar seçenekleri</string>
     <string name="qs_tiles_3_columns_title">3 hızlı ayar sütununu etkinleştir</string>
     <string name="qs_text_size_title">Hızlı ayar butonlarının metin boyutu</string>

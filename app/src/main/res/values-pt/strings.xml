@@ -271,7 +271,6 @@
     <string name="album_art_grayscale">Escala de cinzentos</string>
     <string name="gesture_nav_pill_height_title">Espessura em comparação com a padrão</string>
     <string name="so_fingerprint_sensor_enabled">Permitir sensor de impressão digital com o ecrã desligado</string>
-    <string name="qs_footer_text_value">Insira um texto personalizado</string>
     <string name="easy_unlock_title">"Desbloquear fácil (Pin/Password)"</string>
     <string name="easy_unlock_sumamry">Se não funcionar à primeira, tente novamente</string>
     <string name="sb_multi_row_system_icons">"Várias linhas para ícones de sistema (requer barra de estado mais espessa)"</string>
@@ -285,4 +284,7 @@
     <string name="qqs_tiles_number">"Número de atalhos na QQS (2 linhas máx.)"</string>
     <string name="force_no_cutout">Ignorar o notch da câmera</string>
     <string name="clock_default_extra">Esquerda - Acima das notificações</string>
+    <string name="sb_padding_title">Espaçamento na barra de estado</string>
+    <string name="sb_padding_summary">Definir valores para min/máx equivale aos valores padrão</string>
+    <string name="volume_button_step_title">Níveis de volume (0 a 100%)</string>
 </resources>

@@ -212,12 +212,14 @@
 	
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Deaktiviere Screenshot Ton</string>
+    <string name="force_no_cutout">Kameraausschnitt ignorieren</string>
+    <string name="volume_button_step_title">Lautstärkeschritte (0 bis 100%)</string>		
+	
     <string name="so_power_longpress_torch_title">Einschalter lange drücken für Taschenlampe*</string>
     <string name="so_taptaptorch_title">Aktivieren die Doppeltipp-Taschenlampe</string>
     <string name="so_taptaptorch_summary">Doppeltippen auf die Sperrbildschirmanzeige und halten dann den Finger auf dem Sperrbildschirm, fur Fackel</string>
     <string name="so_fingerprint_sensor_enabled">Fingerabdrucksensor zulassen, wenn der Bildschirm ausgeschaltet ist</string>
 
-    <string name="framework_needed_caution_summary">Benötigt die Aktivierung des System Frameworks in LSposed. BENUTZE ES MIT VORSICHT</string>
     <string name="so_double_tap_wake_title">Doppelt Tippen zum Aufwecken des Telefons</string>
     <string name="so_double_tap_wake_summary">Deaktiviert einzelnes Tippen</string>
     <string name="so_tap_proximity_wake_title">Nicht bei Berührung aufwachen, wenn der Bildschirm abgedeckt ist</string>
@@ -263,6 +265,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">links (Standart)</string>
+    <string name="clock_default_extra">Links - Über Benachrichtigungen</string>
     <string name="clock_center">zentriert</string>
     <string name="clock_right">rechts</string>
 

@@ -1,5 +1,8 @@
 <resources>
     <!--General strings-->
+    <string name="app_name" translatable="false">AOSP Mods</string>
+    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
+    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Пожалуйста, проверьте, активирован ли модуль в LSPosed Manager</string>
     <string name="hide_default">Скрыть (по умолчанию)</string>
     <string name="percent_of_default_size">% от стандартного размера</string>
@@ -23,10 +26,13 @@
     <string name="transparent_fingerprint_circle_off">Круг вокруг значка отпечатка пальца активен</string>
     <string name="transparent_fingerprint_circle_on">Круг вокруг значка отпечатка пальца будет скрыт</string>
     <string name="carrier_text_category">Текст носителя</string>
+    <string name="custom_text_category">Пользовательский текст на экране блокировки</string>
     <string name="configure_carrier_text">Настройка текста носителя</string>
     <string name="carrier_text_mod_disabled">Текст носителя не изменен</string>
     <string name="carrier_text_mod_enabled">Пользовательский текст носителя</string>
     <string name="carrier_text_value">Вставка пользовательского текста</string>
+    <string name="lockscreen_center_text_value">Пользовательский текст области часов</string>
+    <string name="UDFPS_hide_key"translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Ярлыки нижней области</string>
     <string name="keyguard_bottom_buttons_transparent_title">Скрыть круг вокруг значков</string>
     <string name="keyguard_bottom_force_camera_title">Показать ярлык камеры</string>
@@ -38,7 +44,11 @@
     <string name="torch_shortcut">Фонарик</string>
     <string name="album_art_category">Параметры мультимедиа</string>
     <string name="album_art_title">Показывать обложки альбомов при воспроизведении медиафайлов</string>
+    <string name="album_art_blur_text">Значение размытия</string>
+    <string name="album_art_grayscale">Сделать Серым</string>
     <string name="shufflePin_title">Случайный PIN-код</string>
+    <string name="easy_unlock_title">Легкая разблокировка (пин-код/пароль)</string>
+    <string name="easy_unlock_sumamry">Если не получилось в первый раз, попробуйте еще раз</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Двойное нажатие для перехода в спящий режим</string>
@@ -47,10 +57,19 @@
     <string name="battery_style_title">Выберите стиль батареи</string>
     <string name="battery_show_percent_title">Показать процент заряда батареи</string>
     <string name="battery_style_category_title">Стиль батареи</string>
+    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Размер значка батареи</string>
+    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Скрытый</string>
     <string name="BIcon_Opacity_title">Полупрозрачный</string>
     <string name="sb_center_fine_tune">Настройка центральной зоны</string>
+    <string name="sb_multi_row_system_icons">Многострочные системные значки (требуется большая высота строки состояния)</string>
+    <string name="sb_multi_row_category">Многострочные системные значки</string>
+    <string name="sb_icon_sort_mode">Метод размещения значка</string>
+    <string name="sort_clean">Сортировать по сетке</string>
+    <string name="sort_tight">Поместить максимальное количество элементов</string>
+    <string name="sb_notification_limit">Максимальное количество значков уведомлений (по умолчанию – 4)</string>
+
 
     <string name="lte_4g_icon_title">Значок LTE / 4G</string>
     <string name="combined_signal_icon_title">Комбинированные значки сигналов</string>

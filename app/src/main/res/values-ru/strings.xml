@@ -70,7 +70,6 @@
     <string name="sort_tight">Поместить максимальное количество элементов</string>
     <string name="sb_notification_limit">Максимальное количество значков уведомлений (по умолчанию – 4)</string>
 
-
     <string name="lte_4g_icon_title">Значок LTE / 4G</string>
     <string name="combined_signal_icon_title">Комбинированные значки сигналов</string>
     <string name="volte_icon_title">Показывать значок VoLTE, если он доступен</string>
@@ -119,6 +118,7 @@
     <string name="status_bar_height">Высота строки состояния</string>
     <string name="sb_padding_title">Заполнение строки состояния</string>
     <string name="sb_padding_summary">Установка мин./макс. значений эквивалентна настройкам устройства по умолчанию</string>
+    
     <string name="sbbb_header">Настройка панели заряда батареи</string>
     <string name="sbbIcon_header">Настройка значка батареи</string>
     <string name="BB_enable_title">Включить панель заряда батареи</string>
@@ -141,6 +141,7 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Номер сборки в нижнем колонтитуле панели быстрых настроек</string>
     <string name="qs_footer_mod_title">Изменить номер текста сборки на панели быстрых настроек</string>
+    <string name="qs_footer_text_value">Введите собственный текст</string>
     <string name="qs_footer_text_summary">Оставьте его пустым, чтобы полностью удалить текст</string>
     <string name="qs_footer_text_desc">Выкл/вкл экран, чтобы применить</string>
     <string name="light_qs_title">Белая панель быстрых настроек при светлой теме</string>
@@ -150,7 +151,9 @@
     <string name="qs_pulldown_side_title">Сторона быстрого вытягивания</string>
     <string name="qs_pulldown_category">Вытягивание быстрых настроек</string>
     <string name="qs_haptic_switch_title">Вибрация при касании плиток быстрых настроек</string>
-    <string name="qs_rows_number">Количество рядов быстрых настроек</string>
+    <string name="qs_rows_number">Количество рядов быстрых настроек</string>    
+    <string name="qs_cols_number">Количество столбцов быстрых настроек</string>
+    <string name="qqs_tiles_number">Максимальное количество плиток в полуоткрытых быстрых настройках (максимум 2 строки)</string>
     <string name="qs_general_options">Параметры быстрых настроек</string>
     <string name="qs_tiles_3_columns_title">Включить 3 колонки с плитками быстрых настроек</string>
     <string name="qs_text_size_title">Размер текста плиток быстрых настроек</string>
@@ -192,15 +195,11 @@
     <string name="gesturenav_header">Навигация жестами</string>
     <string name="gesture_nav_pill_cat">Ширина панели жестов</string>
     <string name="gesture_nav_pill_mod_title">Изменение ширины панели жестов</string>
-    <string name="gesture_nav_pill_width_title">Ширина по сравнению со стандартным размером</string>
+    <string name="gesture_nav_pill_height_title">Высота по сравнению со стандартным размером</string>
     <string name="threebutton_header_title">Навигация с помощью трех кнопок</string>
     <string name="back_longpress_kill_title">Длительное нажатие кнопки "Назад", принудительно закрывает приложение</string>
+    <string name="pill_width_summary"translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Скрыть панель жестов</string>
-    <string name="gesture_navbar_thickness_title">Толщина панели жестов</string>
-    <string name="gesture_navbar_thickness">Изменение толщины панели жестов</string>
-    <string name="gesture_navbar_thin">Тонкая</string>
-    <string name="gesture_navbar_thick">Толстая</string>
-    <string name="gesture_navbar_thicker">Толще</string>
     <string name="colorpill_title">Раскрасьте панель жестов</string>
     <string name="colorpill">Панель жестов с цветом акцента</string>
     <string name="reducekeyboard_title">Пространство между клавиатуром и жестам</string>
@@ -211,9 +210,13 @@
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Отключить звука скриншота</string>
+    <string name="force_no_cutout">Игнорировать вырез камеры</string>
+    <string name="volume_button_step_title">Шаг громкости (от 0 до 100%)</string>
+    
     <string name="so_power_longpress_torch_title">Долгое нажатие кнопки питания для включения фонарика*</string>
     <string name="so_taptaptorch_title">Двойное нажатие для включения фонарика</string>
     <string name="so_taptaptorch_summary">Двойное нажатие для быстрого включения фонарика</string>
+    <string name="so_fingerprint_sensor_enabled">Разрешить датчик отпечатков пальцев при выключенном экране</string>
 
     <string name="framework_needed_caution_summary">Требуется активация System Framework в Lsposed. ИСПОЛЬЗУЙТЕ С ОСТОРОЖНОСТЬЮ</string>
     <string name="so_double_tap_wake_title">Двойное нажатие для пробуждения телефона</string>
@@ -261,6 +264,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">Слева (по умолчанию)</string>
+    <string name="clock_default_extra">Слева — над уведомлениями</string>
     <string name="clock_center">По центру</string>
     <string name="clock_right">Справа</string>
 
@@ -269,6 +273,7 @@
     <string name="am_pm_small">70% размер часов</string>
 
     <!-- Date position -->
+    <string name="date_default" translatable="false">@string/hide_default</string>
     <string name="date_before">До часов (100%)</string>
     <string name="date_before_small">До часов (70%)</string>
     <string name="date_after">После часов (100%)</string>

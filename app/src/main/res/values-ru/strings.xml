@@ -32,7 +32,7 @@
     <string name="carrier_text_mod_enabled">Пользовательский текст носителя</string>
     <string name="carrier_text_value">Вставка пользовательского текста</string>
     <string name="lockscreen_center_text_value">Пользовательский текст области часов</string>
-    <string name="UDFPS_hide_key"translatable="false">fingerprint_circle_hide</string>
+    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Ярлыки нижней области</string>
     <string name="keyguard_bottom_buttons_transparent_title">Скрыть круг вокруг значков</string>
     <string name="keyguard_bottom_force_camera_title">Показать ярлык камеры</string>
@@ -198,7 +198,7 @@
     <string name="gesture_nav_pill_height_title">Высота по сравнению со стандартным размером</string>
     <string name="threebutton_header_title">Навигация с помощью трех кнопок</string>
     <string name="back_longpress_kill_title">Длительное нажатие кнопки "Назад", принудительно закрывает приложение</string>
-    <string name="pill_width_summary"translatable="false">@string/percent_of_default_size</string>
+    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Скрыть панель жестов</string>
     <string name="colorpill_title">Раскрасьте панель жестов</string>
     <string name="colorpill">Панель жестов с цветом акцента</string>
@@ -315,7 +315,7 @@
     <string name="monitoring_category_title">Параметры мониторинга</string>
     <string name="netstat_header">Настройки сетевой статистики</string>
 
-    <string name="string_formatter_manual_body">Помимо обычного текста, который вы можете ввести, также доступны динамические переменные:\n\n$G\&lt;format\&gt; : грузинская дата в зависимости от формата. Документацию по формату можно найти в строке `Формат даты Java`\nПример: $GMMM означает: январь (или любой другой)\n\n$P&lt;format&gt; : дата на персидском языке, в зависимости от формата\nПример: $Pyyyy означает: 1401\n\n$Nrx : Всего загрузок за сегодня\n$Ntx: Всего загрузок за сегодня\n$Nall : Всего загрузок за сегодня\n\nЕсли заменить $N с $Nc вам будет предоставлена ​​статистика мобильных данных (например, $Ncrx для загрузок)\n\nПример:\n`Мобильный трафик $GEEEE: $Ncall` создаст:\n`Мобильный трафик вторника: 2 ГБ` </строка>
+    <string name="string_formatter_manual_body">Помимо обычного текста, который вы можете ввести, также доступны динамические переменные:\n\n$G\&lt;format\&gt; : григорианский дата в зависимости от формата. Документацию по формату можно найти в строке `Формат даты Java`\nПример: $GMMM означает: январь (или любой другой)\n\n$P&lt;format&gt; : дата на персидском языке, в зависимости от формата\nПример: $Pyyyy означает: 1401\n\n$Nrx : Всего загрузок за сегодня\n$Ntx: Всего загрузок за сегодня\n$Nall : Всего загрузок за сегодня\n\nЕсли заменить $N с $Nc вам будет предоставлена ​​статистика мобильных данных (например, $Ncrx для загрузок)\n\nПример:\n`Мобильный трафик $GEEEE: $Ncall` создаст:\n`Мобильный трафик вторника: 2 ГБ` </string>
     <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">Обновления</string>
     <string name="update_notification_title">Обновление загружено</string>
@@ -324,7 +324,7 @@
     <string name="reboot_notification_text">Изменения вступят в силу после перезагрузки устройства</string>
     <string name="update_flavor_title">Обновить канал</string>
     <string name="stable_flavor">Стабильный</string>
-    <string name="canary_flavor"translatable="false">Canary</string>
+    <string name="canary_flavor" translatable="false">Canary</string>
     <string name="currentVersionTitle">Установленная версия: </string>
     <string name="lastestVersionTitle">Последняя версия: </string>
     <string name="root_not_here">ДОСТУП ROOT НЕ ПРЕДОСТАВЛЕН!</string>
@@ -336,6 +336,6 @@
     <string name="switch_branches">Сменить ветку</string>
     <string name="reinstall_word">Переустановить</string>
 
-    <string name="title_activity_update"translatable="false">updateActivity</string>
+    <string name="title_activity_update" translatable="false">updateActivity</string>
 
 </resources>

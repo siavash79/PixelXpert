@@ -107,9 +107,8 @@
     <string name="dual_tone_battery_on_summary">Pornit (funcționează numai cu pictograma portret)</string>
     <string name="unread_messages_title">Arată numărul de mesaje necitite</string>
     <string name="status_bar_height">Înălțimea barei de stare (rotiți ecranul pentru a aplica)</string>
-    <string name="status_bar_height_small">Mică</string>
-    <string name="status_bar_height_medium">Medie</string>
-    <string name="fix_status_bar_padding">Corectare umplutură din partea stângă</string>
+    <string name="sb_padding_title">Umplutură bară de stare</string>
+    <string name="sb_padding_summary">Setarea valorilor la min/max este echivalentă cu valorile implicite ale dispozitivului</string>
     <string name="sbbb_header">Setări bară baterie</string>
     <string name="sbbIcon_header">Setări pictogramă baterie</string>
     <string name="BB_enable_title">Activare bară baterie</string>
@@ -131,8 +130,8 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numărul versiunii în subsolul panoului setărilor rapide</string>
     <string name="qs_footer_mod_title">Modifică textul versiunii în panoul setărilor rapide</string>
-    <string name="qs_footer_text_value">Introduceți textul personalizat (Lăsați gol pentru a elimina complet)</string>
-    <string name="qs_footer_text_summary">Lasă necompletat pentru a elimina textul complet</string>
+    <string name="qs_footer_text_value">Introdu un text personalizat</string>
+    <string name="qs_footer_text_summary">Lasă necompletat pentru a elimina complet</string>
     <string name="qs_footer_text_desc">Oprește afișajul pentru a aplica</string>
     <string name="light_qs_title">Aplică panoul de setări rapide luminoase când se utilizează tema luminoasă</string>
     <string name="light_dualtone_qs_title">Activează panoul setărilor rapide cu ton dublu</string>
@@ -199,6 +198,7 @@
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Dezactivare sunet captură ecran</string>
     <string name="force_no_cutout">Ignoră decuparea camerei</string>
+    <string name="volume_button_step_title">Pași volum (0 la 100%)</string>
     <string name="so_power_longpress_torch_title">Apăsare lungă pe butonul de alimentare pentru lanternă</string>
     <string name="so_taptaptorch_title">Activați atingerea dublă pentru lanternă pe ecranul de blocare</string>
     <string name="so_taptaptorch_summary">Atingeți dublu și mențineți apăsat ecranul de blocare pentru acces rapid la lanternă</string>

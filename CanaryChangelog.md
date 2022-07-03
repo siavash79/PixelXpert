@@ -1,3 +1,5 @@
+**canary-67**  
+  
 **canary-66**  
 - Reworked statusbar padding settings (REBUILD)  
   

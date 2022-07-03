@@ -41,9 +41,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.nfx.android.rangebarpreference.RangeBarHelper;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -63,6 +62,7 @@ import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 
@@ -112,7 +112,7 @@ public class StatusbarMods extends XposedModPack {
     private static boolean BBSetCentered;
     private static int BBOpacity = 100;
     private static int BBarHeight = 10;
-    private static float[] batteryLevels = new float[]{20f, 40f};
+    private static List<Float> batteryLevels = Arrays.asList(20f,40f);
     private static int[] batteryColors = new int[]{Color.RED, Color.YELLOW};
     private static int chargingColor = Color.WHITE;
     private static int fastChargingColor = Color.WHITE;
@@ -184,11 +184,11 @@ public class StatusbarMods extends XposedModPack {
         centerAreaFineTune = Xprefs.getInt("centerAreaFineTune", 50);
         tuneCenterArea();
 
-        String paddingJSON = Xprefs.getString("statusbarPaddings", "");
-        if(paddingJSON.length() > 0)
-        {
-            SBPaddingStart = RangeBarHelper.getLowValueFromJsonString(paddingJSON);
-            SBPaddingEnd = 100f - RangeBarHelper.getHighValueFromJsonString(paddingJSON);
+        List<Float> paddings = RangeSliderPreference.getValues(Xprefs, "statusbarPaddings", 0);
+
+        if(paddings.size() > 1) {
+            SBPaddingStart = paddings.get(0);
+            SBPaddingEnd = 100f - paddings.get(1);
         }
 
         //region BatteryBar Settings
@@ -200,15 +200,9 @@ public class StatusbarMods extends XposedModPack {
         BBOpacity = Xprefs.getInt("BBOpacity" , 100);
         BBarHeight = Xprefs.getInt("BBarHeight" , 50);
         BBarTransitColors = Xprefs.getBoolean("BBarTransitColors", false);
-        
-        String jsonString = Xprefs.getString("batteryWarningRange", "");
-        if(jsonString.length() > 0)
-        {
-            batteryLevels = new float[]{
-                    RangeBarHelper.getLowValueFromJsonString(jsonString),
-                    RangeBarHelper.getHighValueFromJsonString(jsonString)};
-        }
-    
+
+        batteryLevels = RangeSliderPreference.getValues(Xprefs, "batteryWarningRange", 0);
+
         batteryColors = new int[]{
                 Xprefs.getInt("batteryCriticalColor", Color.RED),
                 Xprefs.getInt("batteryWarningColor", Color.YELLOW)};

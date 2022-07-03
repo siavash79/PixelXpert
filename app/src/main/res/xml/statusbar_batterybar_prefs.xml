@@ -63,16 +63,15 @@
         android:key="batteryFastChargingColor"
         android:title="@string/BB_batteryFastChargingColor" />
 
-    <com.nfx.android.rangebarpreference.RangeBarPreferenceCompat
+    <sh.siava.rangesliderpreference.RangeSliderPreference
             android:key="batteryWarningRange"
             android:title="@string/BB_warning_level"
             android:summary="@string/BB_warning_tip"
-            app:rbp_measurementUnit="%"
-            app:rbp_tickStart="0"
-            app:rbp_tickEnd="100"
-            app:rbp_tickInterval="1"
-            app:rbp_view_defaultHighValue="15"
-            app:rbp_view_defaultLowValue="40" />
+            app:valueCount="2"
+            app:maxVal="100"
+            app:minVal="0"
+            app:tickInterval="1"
+            app:defaultValue="15,40" />
 
     <SwitchPreference
         android:defaultValue="false"

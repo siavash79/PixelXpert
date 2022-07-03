@@ -24,11 +24,13 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-import com.nfx.android.rangebarpreference.RangeBarHelper;
 import com.topjohnwu.superuser.Shell;
+
+import java.util.List;
 
 import sh.siava.AOSPMods.Utils.PrefManager;
 import sh.siava.AOSPMods.Utils.SystemUtils;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
@@ -319,14 +321,13 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateVisibility(SharedPreferences prefs) {
             try {
-                String json = prefs.getString("batteryWarningRange", "");
-                boolean critZero = false;
-                boolean warnZero = false;
+                boolean critZero = false, warnZero = false;
+                List<Float> BBarLevels = RangeSliderPreference.getValues(prefs, "batteryWarningRange", 0);
 
-                if(!json.isEmpty())
+                if(!BBarLevels.isEmpty())
                 {
-                    critZero = RangeBarHelper.getLowValueFromJsonString(json) == 0;
-                    warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
+                    critZero = BBarLevels.get(0) == 0;
+                    warnZero = BBarLevels.get(1) == 0;
                 }
                 boolean bBarEnabled = prefs.getBoolean("BBarEnabled", false);
                 boolean isColorful = prefs.getBoolean("BBarColorful", false);
@@ -400,9 +401,16 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50) * 2 + getString(R.string.battery_size_summary));
 
                 int style = Integer.parseInt(prefs.getString("BatteryStyle", "0"));
-                String json = prefs.getString("BIconbatteryWarningRange", "");
-                boolean critZero = RangeBarHelper.getLowValueFromJsonString(json) == 0;
-                boolean warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
+
+                boolean critZero = false, warnZero = false;
+                List<Float> BIconLevels = RangeSliderPreference.getValues(prefs, "BIconbatteryWarningRange", 0);
+
+                if(!BIconLevels.isEmpty())
+                {
+                    critZero = BIconLevels.get(0) == 0;
+                    warnZero = BIconLevels.get(1) == 0;
+                }
+
                 boolean colorful = prefs.getBoolean("BIconColorful", false);
 
                 findPreference("DualToneBatteryOverlay").setVisible(style == 0);

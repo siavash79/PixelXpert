@@ -65,19 +65,18 @@
             android:singleLine="true"
             android:title="@string/sb_notification_limit" />
 
-        <com.nfx.android.rangebarpreference.RangeBarPreferenceCompat
+        <sh.siava.rangesliderpreference.RangeSliderPreference
             android:key="statusbarPaddings"
             android:title="@string/sb_padding_title"
             android:summary="@string/sb_padding_summary"
-            app:rbp_measurementUnit="%"
 
-            app:rbp_tickInterval=".5"
+            app:tickInterval=".5"
 
-            app:rbp_tickStart="-.5"
-            app:rbp_tickEnd="100.5"
+            app:valueCount="2"
+            app:minVal="-.5"
+            app:maxVal="100.5"
 
-            app:rbp_view_defaultLowValue="-.5"
-            app:rbp_view_defaultHighValue="100.5" />
+            app:defaultValue="-.5,100.5" />
 
         <SwitchPreference
             android:defaultValue="false"

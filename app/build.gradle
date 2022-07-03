@@ -54,6 +54,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.4.2'
     implementation 'androidx.navigation:navigation-ui:2.4.2'
     implementation project(path: ':renderscript-toolkit')
+    implementation project(path: ':RangeSliderPrefrence')
     def libsuVersion = '5.0.1'
 
     compileOnly 'de.robv.android.xposed:api:82:sources'
@@ -75,7 +76,6 @@ dependencies {
 
     implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8' //Remote Preferences for Xposed Module prefs
     implementation 'com.jaredrummler:colorpicker:1.1.0' //Color Picker Component for UI
-    implementation 'com.nfx.android:range-bar-preference:0.0.6' //Range Bar Component for UI
 
     implementation 'com.github.mfathi91:persian-date-time:4.2.1' //Persian Calendar
 

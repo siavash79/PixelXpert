@@ -13,14 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.nfx.android.rangebarpreference.RangeBarHelper;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
@@ -30,6 +29,7 @@ import sh.siava.AOSPMods.Utils.batteryStyles.CircleFilledBatteryDrawable;
 import sh.siava.AOSPMods.Utils.batteryStyles.hiddenBatteryDrawable;
 import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class BatteryStyleManager extends XposedModPack {
@@ -44,7 +44,7 @@ public class BatteryStyleManager extends XposedModPack {
     public static boolean scaleWithPercent = false;
     private static boolean isFastCharging = false;
     private static int BatteryIconOpacity = 100;
-    private static float[] batteryLevels = new float[]{20f, 40f};
+    private static List<Float> batteryLevels = Arrays.asList(20f, 40f);
     private static final ArrayList<Object> batteryViews = new ArrayList<>();
     
     public BatteryStyleManager(Context context) { super(context); }
@@ -108,15 +108,9 @@ public class BatteryStyleManager extends XposedModPack {
         int batteryIconFastChargingColor = XPrefs.Xprefs.getInt("batteryIconFastChargingColor", Color.BLUE);
         int batteryChargingColor = XPrefs.Xprefs.getInt("batteryIconChargingColor", Color.GREEN);
         boolean BIconIndicateCharging = XPrefs.Xprefs.getBoolean("BIconindicateCharging", false);
-    
-        String jsonString = XPrefs.Xprefs.getString("BIconbatteryWarningRange", "");
-        if(jsonString.length() > 0)
-        {
-            batteryLevels = new float[]{
-                    RangeBarHelper.getLowValueFromJsonString(jsonString),
-                    RangeBarHelper.getHighValueFromJsonString(jsonString)};
-        }
-    
+
+        batteryLevels = RangeSliderPreference.getValues(XPrefs.Xprefs, "BIconbatteryWarningRange", 0);
+
         int[] batteryColors = new int[]{
                 XPrefs.Xprefs.getInt("BIconbatteryCriticalColor", Color.RED),
                 XPrefs.Xprefs.getInt("BIconbatteryWarningColor", Color.YELLOW)};

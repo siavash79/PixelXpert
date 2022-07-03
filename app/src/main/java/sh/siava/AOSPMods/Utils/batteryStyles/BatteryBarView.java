@@ -16,6 +16,8 @@ import android.widget.ImageView;
 
 import androidx.core.graphics.ColorUtils;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 import sh.siava.AOSPMods.systemui.StatusbarMods;
@@ -43,7 +45,7 @@ public class BatteryBarView extends FrameLayout {
 	private boolean onlyWhileCharging = false;
 	private boolean isEnabled = true;
 	private boolean isHidden = false;
-	private static float[] batteryLevels = new float[]{20f,40f};
+	private static List<Float> batteryLevels = Arrays.asList(20f,40f);
 	private static int[] batteryColors = new int[]{Color.RED, Color.YELLOW};
 	private static int chargingColor = Color.WHITE;
 	private static int fastChargingColor = Color.WHITE;
@@ -51,7 +53,7 @@ public class BatteryBarView extends FrameLayout {
 	private static boolean indicateFastCharging = false;
 	private static boolean transitColors = false;
 	
-	public static void setStaticColor(float[] batteryLevels, int[] batteryColors, boolean indicateCharging, int chargingColor, boolean indicateFastCharging, int fastChargingColor, boolean transitColors) {
+	public static void setStaticColor(List<Float> batteryLevels, int[] batteryColors, boolean indicateCharging, int chargingColor, boolean indicateFastCharging, int fastChargingColor, boolean transitColors) {
 		BatteryBarView.transitColors = transitColors;
 		BatteryBarView.batteryLevels = batteryLevels;
 		BatteryBarView.batteryColors = batteryColors;
@@ -197,12 +199,12 @@ public class BatteryBarView extends FrameLayout {
 			mPaint.setColor(chargingColor);
 		}
 		else if(!colorful || shadeColors == null) {                    //not charging color
-			for (int i = 0; i < batteryLevels.length; i++) {
-				if (batteryPCT <= batteryLevels[i]) {
+			for (int i = 0; i < batteryLevels.size(); i++) {
+				if (batteryPCT <= batteryLevels.get(i)) {
 					if(transitColors && i > 0)
 					{
-						float range = batteryLevels[i] - batteryLevels[i-1];
-						float currentPos = batteryPCT - batteryLevels[i-1];
+						float range = batteryLevels.get(i) - batteryLevels.get(i - 1);
+						float currentPos = batteryPCT - batteryLevels.get(i - 1);
 						float ratio = currentPos/range;
 						mPaint.setColor(ColorUtils.blendARGB(batteryColors[i-1], batteryColors[i], ratio));
 					}
@@ -226,24 +228,24 @@ public class BatteryBarView extends FrameLayout {
 	}
 	
 	private static void refreshShadeColors() {
-		if(batteryColors == null) return;
+		if(batteryColors == null || batteryLevels.isEmpty()) return;
 		
-		shadeColors = new int[batteryLevels.length*2+2];
+		shadeColors = new int[batteryLevels.size() *2+2];
 		shadeLevels = new float[shadeColors.length];
 		float prev = 0;
-		for(int i = 0; i < batteryLevels.length; i++)
+		for(int i = 0; i < batteryLevels.size(); i++)
 		{
-			float rangeLength = batteryLevels[i] - prev;
+			float rangeLength = batteryLevels.get(i) - prev;
 			shadeLevels[2*i]=(prev + rangeLength*.3f)/100;
 			shadeColors[2*i]=batteryColors[i];
 			
-			shadeLevels[2*i+1]=(batteryLevels[i] - rangeLength*.3f)/100;
+			shadeLevels[2*i+1]=(batteryLevels.get(i) - rangeLength*.3f)/100;
 			shadeColors[2*i+1]=batteryColors[i];
 			
-			prev = batteryLevels[i];
+			prev = batteryLevels.get(i);
 		}
 		
-		shadeLevels[shadeLevels.length-2] = (batteryLevels[batteryLevels.length-1]+(100-batteryLevels[batteryLevels.length-1])*.3f)/100;
+		shadeLevels[shadeLevels.length-2] = (batteryLevels.get(batteryLevels.size() - 1) +(100- batteryLevels.get(batteryLevels.size() - 1))*.3f)/100;
 		shadeColors[shadeColors.length-2] = Color.GREEN;
 		shadeLevels[shadeLevels.length-1] = 1f;
 		shadeColors[shadeColors.length-1] = Color.GREEN;

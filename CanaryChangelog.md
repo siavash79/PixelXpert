@@ -1,3 +1,6 @@
+**canary-68**  
+- Added a new double-thumb slider in UI  
+  
 **canary-67**  
   
 **canary-66**  

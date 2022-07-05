@@ -1,6 +1,6 @@
 [submodule "Submodules/renderscript-toolkit"]
 	path = Submodules/renderscript-toolkit
 	url = https://github.com/android/renderscript-intrinsics-replacement-toolkit.git
-[submodule "Submodules/RangeSliderPreference"]
-	path = Submodules/RangeSliderPreference
+[submodule "Submodules/RangeSliderPrefrence"]
+	path = Submodules/RangeSliderPrefrence
 	url = https://github.com/siavash79/rangesliderpreference.git

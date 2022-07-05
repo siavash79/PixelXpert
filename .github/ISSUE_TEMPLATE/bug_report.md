@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+*Please note: At the time being, only bug reports from Pixel Stock firmware, or Pixel Experience (normal edition) will be considered. Bug reports from other firmwares will only be taken into account if also reported from one of the supported roms.*
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 

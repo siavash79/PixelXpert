@@ -231,7 +231,7 @@
     <string name="sbc_before_color">Texto antes do relógio</string>
     <string name="sbc_color">Relógio</string>
     <string name="sbc_after_color">Texto depois do relógio</string>
-    <string name="menu_settings_title">Importar/Exportar</string>
+    <string name="menu_settings_title">"Importar/Exportar"</string>
     <string name="menu_netstat_title">Estatísticas de rede</string>
     <string name="menu_netstat_enable">Ativar estatísticas</string>
     <string name="menu_netstat_clear">Reiniciar estatísticas de rede</string>
@@ -242,7 +242,7 @@
     <string name="netstat_caution_no">Talvez mais tarde</string>
     <string name="netstat_enable_title">Captar estatísticas de rede</string>
     <string name="network_interval_custom_text_title">Intervalo de atualização</string>
-    <string name="minutes_word">minuto(s)</string>
+    <string name="minutes_word">"minuto(s)"</string>
     <string name="menu_updates">Atualizações da App</string>
     <string name="monitoring_category_title">Opções de monitorização</string>
     <string name="netstat_header">Definições das estatísticas de rede</string>
@@ -261,7 +261,7 @@
     <string name="update_checking">A verificar…</string>
     <string name="update_download_started">A descarregar - Toque na notificação quando terminar</string>
     <string name="update_word">Atualizar</string>
-    <string name="string_formatter_manual_body">Para além de texto normal é também possível inserir variáveis dinâmicas:\n\n$G\&lt;format\&gt; : Data Gregoriana, com formatação. Para documentação relativa à formatação, por favor pesquise por `Java Date Format`\nExemplo: $GMMM corresponde a: Jan (ou qualquer outro)\n\n$P&lt;format&gt; : Data Persa, com formatação\nExemplo: $Pyyyy corresponde a: 1401\n\n$Nrx : Total de Downloads diário\n$Ntx: Total de Uploads diário\n$Nall : Total de tráfego diário\n\nSe substituir $N por $Nc estatísticas de dados móveis estarão disponíveis (como $Ncrx para os downloads)\n\nExemplo:\n`Tráfego dos dados móveis para $GEEEE: $Ncall` corresponderá a:\n`Tráfego dos dados móveis para Terça-feira: 2GB`</string>
+    <string name="string_formatter_manual_body">"Para além de texto normal é também possível inserir variáveis dinâmicas:\n\n$G\&lt;format\&gt; : Data Gregoriana, com formatação. Para documentação relativa à formatação, por favor pesquise por `Java Date Format`\nExemplo: $GMMM corresponde a: Jan (ou qualquer outro)\n\n$P&lt;format&gt; : Data Persa, com formatação\nExemplo: $Pyyyy corresponde a: 1401\n\n$Nrx : Total de Downloads diário\n$Ntx: Total de Uploads diário\n$Nall : Total de tráfego diário\n\nSe substituir $N por $Nc estatísticas de dados móveis estarão disponíveis (como $Ncrx para os downloads)\n\nExemplo:\n`Tráfego dos dados móveis para $GEEEE: $Ncall` corresponderá a:\n`Tráfego dos dados móveis para Terça-feira: 2GB`"</string>
     <string name="menu_restart">Reiniciar</string>
     <string name="switch_branches">Alterar canal</string>
     <string name="reinstall_word">Reinstalar</string>
@@ -285,7 +285,7 @@
     <string name="force_no_cutout">Ignorar o notch da câmera</string>
     <string name="clock_default_extra">Esquerda - Acima das notificações</string>
     <string name="sb_padding_title">Espaçamento na barra de estado</string>
-    <string name="sb_padding_summary">Definir valores para min/máx equivale aos valores padrão</string>
+    <string name="sb_padding_summary">"Os valores min/máx são os padrão"</string>
     <string name="volume_button_step_title">Níveis de volume (0 a 100%)</string>
     <string name="allow_all_screen_rotations">Permitir rotação em todas as direções</string>
     <string name="allow_all_screen_rotations_summary">Irá ignorar o botão de rotação manual</string>

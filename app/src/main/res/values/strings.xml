@@ -210,6 +210,8 @@
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
+    <string name="allow_all_screen_rotations">Force-unlock all screen rotations</string>
+    <string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
     <string name="force_no_cutout">Ignore the camera cutout</string>
     <string name="volume_button_step_title">Volume steps (0 to 100%)</string>
 

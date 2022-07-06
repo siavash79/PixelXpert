@@ -17,6 +17,7 @@ import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.allApps.overScrollDisabler;
 import sh.siava.AOSPMods.android.StatusbarSize;
 import sh.siava.AOSPMods.android.screenOffKeys;
+import sh.siava.AOSPMods.android.screenRotation;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.systemui.BackToKill;
@@ -82,6 +83,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(MultiStatusbarRows.class);
         modPacks.add(QSTileGrid.class);
         modPacks.add(easyUnlock.class);
+        modPacks.add(screenRotation.class);
         //endregion
     }
     

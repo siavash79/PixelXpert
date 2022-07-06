@@ -1,3 +1,6 @@
+**canary-70**  
+- Fix app crash in certain device locales  
+  
 **canary-69**  
 - Added option for free screen rotations  
   

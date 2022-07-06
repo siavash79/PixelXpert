@@ -1,3 +1,6 @@
+**canary-69**  
+- Added option for free screen rotations  
+  
 **canary-68**  
 - Added a new double-thumb slider in UI  
   

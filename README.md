@@ -30,7 +30,7 @@ This is a mixed Xposed+Magisk module, which is made to allow customizations that
 - Double-tap to wake
 - Network Monitor
 - Statusbar Height
-- Statusbar Padding (for phones with left-corner camera)
+- Statusbar Padding
 - Quick Settings Row & Column numbers
 - Quick Settings tiles text size
 - Internet / Wifi + Cell Tiles
@@ -62,6 +62,8 @@ This is a mixed Xposed+Magisk module, which is made to allow customizations that
 - Easy unlock
 - Option to disable fingerprint sensor while the screen is off
 - Option to ignore the display cutout
+- Option to adjust media volume steps  
+- Option to allow upside-down rotation
 
 Of course, this is an ongoing work and the feature list will get longer through time
 

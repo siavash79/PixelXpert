@@ -56,7 +56,7 @@
     <string name="hide_default">Não mostrar (padrão)</string>
     <string name="pull_down_left">Esquerda</string>
     <string name="pull_down_right">Direita</string>
-    <string name="word_default">Padrão (requer reiniciar)</string>
+    <string name="word_default">Padrão</string>
     <string name="battery_circle">Círculo</string>
     <string name="battery_dashed_circle">Círculo pontilhado</string>
     <string name="clock_default">Esquerda (pdrão)</string>
@@ -157,7 +157,7 @@
     <string name="qstile_dual_tone_circle">Círculo de dois tons</string>
     <string name="qstile_squircle_trim">Quadrado Arredondado com gradiente</string>
     <string name="qstile_wavey">Ondulado</string>
-    <string name="qstile_pokesign">Signo Pokemon</string>
+    <string name="qstile_pokesign">Pokemon</string>
     <string name="qstile_ninja">Ninja</string>
     <string name="qstile_dottedcircle">Círculo Pontilhado</string>
     <string name="qstile_attemptmountain">Uma tentativa de uma montanha</string>
@@ -287,4 +287,7 @@
     <string name="sb_padding_title">Espaçamento na barra de estado</string>
     <string name="sb_padding_summary">Definir valores para min/máx equivale aos valores padrão</string>
     <string name="volume_button_step_title">Níveis de volume (0 a 100%)</string>
+    <string name="allow_all_screen_rotations">Permitir rotação em todas as direções</string>
+    <string name="allow_all_screen_rotations_summary">Irá ignorar o botão de rotação manual</string>
+    <string name="qs_footer_text_value">Inserir texto personalizado</string>
 </resources>

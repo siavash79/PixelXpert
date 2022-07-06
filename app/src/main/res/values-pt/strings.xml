@@ -113,9 +113,6 @@
     <string name="unread_messages_title">Mostrar nr. de mensagens não lidas</string>
     <string name="keyguard_left_shortcut">Mostrar atalho do lado esquerdo</string>
     <string name="status_bar_height">Altura da barra de estado</string>
-    <string name="status_bar_height_small">Pequena</string>
-    <string name="status_bar_height_medium">Média</string>
-    <string name="fix_status_bar_padding">Corrigir espaço do lado esquerdo</string>
     <string name="qs_tiles_3_columns_title">Ativar 3 colunas nas definições rápidas</string>
     <string name="qs_text_size_title">Tamanho do texto nos atalhos das definições rápidas</string>
     <string name="qs_text_size">Diminuir o tamanho do texto</string>

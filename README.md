@@ -88,12 +88,12 @@ This module is designed based on AOSP source code. What does it mean? it means t
 - You can use AOSPMods app to configure the module
 
 The module is released in 2 flavors, which download and update procedures are different:
-- Stable release:
-Manual Install/Update: through repository's Github release page (link below)
-Automated updates: through magisk manager, or through in-app updater
-- Canary release:
-Manual Install/Update: only through repository's Actions page
-Automated install/updates: only through in-app updater - updates will NOT appear in release section, and will NOT count against the module's download count
+- Stable release:  
+Manual Install/Update: through repository's Github release page (link below)  
+Automated updates: through magisk manager, or through in-app updater  
+- Canary release:  
+Manual Install/Update: only through repository's Actions page  
+Automated install/updates: only through in-app updater - updates will NOT appear in release section, and will NOT count against the module's download count  
 
 *No matter which flavor you're on, you can always switch to the other one with in-app updater
 

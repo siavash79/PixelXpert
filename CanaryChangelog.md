@@ -1,3 +1,6 @@
+**canary-71**  
+- Added call vibration indicators  
+  
 **canary-70**  
 - Fix app crash in certain device locales  
   

@@ -233,6 +233,11 @@
     <string name="disable_overscroll">"Disable elastic overscroll effect</string>
     <string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for within LSPosed</string>
 
+    <!-- Call section -->
+    <string name="call_category">Phone calls</string>
+    <string name="vibrate_on_call_active_title">Vibrate on outgoing call answered</string>
+    <string name="vibrate_on_call_drop_title">Vibrate when call disconnects</string>
+
     <!-- Theming section related -->
     <string name="gsans_override_title">Force Google Sans font system-wide</string>
     <string name="font_overlays_enable_title">Enable using custom fonts</string>

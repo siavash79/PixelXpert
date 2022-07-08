@@ -42,6 +42,7 @@ import sh.siava.AOSPMods.systemui.UDFPSManager;
 import sh.siava.AOSPMods.systemui.KeyguardCustomText;
 import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
 import sh.siava.AOSPMods.systemui.easyUnlock;
+import sh.siava.AOSPMods.telecom.CallVibrator;
 
 public class AOSPMods implements IXposedHookLoadPackage{
 
@@ -51,6 +52,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public static boolean isSecondProcess = false;
     public static final String SYSTEM_UI_PACKAGE = "com.android.systemui";
     public static final String SYSTEM_FRAMEWORK_PACKAGE = "android";
+    public static final String TELECOM_SERVER_PACKAGE = "com.android.server.telecom";
     
     public AOSPMods()
     {
@@ -84,6 +86,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(QSTileGrid.class);
         modPacks.add(easyUnlock.class);
         modPacks.add(screenRotation.class);
+        modPacks.add(CallVibrator.class);
         //endregion
     }
     

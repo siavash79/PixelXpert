@@ -84,6 +84,23 @@
             android:summaryOn="@string/general_on" />
     </PreferenceCategory>
     <PreferenceCategory
+        android:title="@string/call_category">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="vibrateOnAnswered"
+            android:title="@string/vibrate_on_call_active_title"
+            app:summaryOn="@string/general_on"
+            app:summaryOff="@string/general_off"/>
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="vibrateOnDrop"
+            android:title="@string/vibrate_on_call_drop_title"
+            app:summaryOn="@string/general_on"
+            app:summaryOff="@string/general_off"/>
+
+    </PreferenceCategory>
+    <PreferenceCategory
         android:title="@string/monitoring_category_title">
         <Preference
             app:fragment="sh.siava.AOSPMods.SettingsActivity$NetworkStatFragment"

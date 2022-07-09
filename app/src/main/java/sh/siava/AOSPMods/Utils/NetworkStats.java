@@ -184,7 +184,7 @@ public class NetworkStats {
             //noinspection ResultOfMethodCallIgnored
             new File(statDataPath).mkdirs();
         }
-        catch (Exception e)
+        catch (Exception ignored)
         {
             return;
         }

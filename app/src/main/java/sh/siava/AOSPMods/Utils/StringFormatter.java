@@ -150,7 +150,7 @@ public class StringFormatter {
             SystemUtils.NetworkStats().registerCallback(networkStatCallback);
             return Helpers.getHumanizedBytes(traffic, .6f, "","", textColor);
         }
-        catch (Exception e)
+        catch (Exception ignored)
         {
             return "N"+variable;
         }
@@ -165,7 +165,7 @@ public class StringFormatter {
                     );
             hasDate = true;
             return result;
-        }catch (Exception e)
+        }catch (Exception ignored)
         {
             return "G"+format;
         }
@@ -183,7 +183,7 @@ public class StringFormatter {
             char[] bytes = result.toCharArray();
             NumericShaper.getShaper(NumericShaper.EASTERN_ARABIC).shape(bytes, 0, bytes.length); //Numbers to be shown in correct font
             return String.copyValueOf(bytes);
-        }catch (Exception e)
+        }catch (Exception ignored)
         {
             return "P"+format;
         }

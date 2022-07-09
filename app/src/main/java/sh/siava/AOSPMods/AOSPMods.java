@@ -45,15 +45,17 @@ import sh.siava.AOSPMods.systemui.easyUnlock;
 import sh.siava.AOSPMods.telecom.CallVibrator;
 
 public class AOSPMods implements IXposedHookLoadPackage{
+    public static final String SYSTEM_UI_PACKAGE = "com.android.systemui";
+    public static final String SYSTEM_FRAMEWORK_PACKAGE = "android";
+    public static final String TELECOM_SERVER_PACKAGE = "com.android.server.telecom";
+    public static final String LAUNCHR_PACKAGE = "com.google.android.apps.nexuslauncher";
+
+    public static boolean isSecondProcess = false;
 
     public static ArrayList<Class<?>> modPacks = new ArrayList<>();
     public static ArrayList<XposedModPack> runningMods = new ArrayList<>();
     public Context mContext = null;
-    public static boolean isSecondProcess = false;
-    public static final String SYSTEM_UI_PACKAGE = "com.android.systemui";
-    public static final String SYSTEM_FRAMEWORK_PACKAGE = "android";
-    public static final String TELECOM_SERVER_PACKAGE = "com.android.server.telecom";
-    
+
     public AOSPMods()
     {
         //region Mod list definition
@@ -128,5 +130,4 @@ public class AOSPMods implements IXposedHookLoadPackage{
         new SystemUtils(context);
         XPrefs.loadPrefs(mContext);
     }
-    
 }

@@ -251,7 +251,7 @@ public class StatusbarMods extends XposedModPack {
             try {
                 networkTrafficThreshold = Math.round(Float.parseFloat(thresholdText));
             }
-            catch (Exception e) {
+            catch (Exception ignored) {
                 networkTrafficThreshold = 10;
             }
             if(newnetworkTrafficPosition != networkTrafficPosition)

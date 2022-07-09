@@ -202,7 +202,7 @@ public class UpdateFragment extends Fragment {
             } else {
                 throw new Exception();
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
             rebootPending = false;
             currentVersionName = BuildConfig.VERSION_NAME;
             currentVersionCode = BuildConfig.VERSION_CODE;

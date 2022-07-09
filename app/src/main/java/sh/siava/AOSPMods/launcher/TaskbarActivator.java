@@ -9,11 +9,12 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.XPrefs;
 
 public class TaskbarActivator extends XposedModPack {
-	private static final String listenPackage = "com.google.android.apps.nexuslauncher";
+	private static final String listenPackage = AOSPMods.LAUNCHR_PACKAGE;
 	
 	private static final int TASKBAR_DEFAULT = 0;
 	private static final int TASKBAR_ON = 1;

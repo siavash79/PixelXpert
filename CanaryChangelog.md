@@ -1,3 +1,6 @@
+**canary-74**  
+- Updater bug-fix  
+  
 **canary-73**  
 - Xposed-Only pack: bug and compatibility fix  
 - Xposed-Only pack: bug and compatibility fix  

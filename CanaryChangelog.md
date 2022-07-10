@@ -1,3 +1,7 @@
+**canary-73**  
+- Xposed-Only pack: bug and compatibility fix  
+- Xposed-Only pack: bug and compatibility fix  
+  
 **canary-72**  
 - New module type: Xposed Only  
   

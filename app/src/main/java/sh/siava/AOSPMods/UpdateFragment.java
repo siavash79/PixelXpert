@@ -42,7 +42,7 @@ import us.feras.mdv.MarkdownView;
 
 public class UpdateFragment extends Fragment {
     private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskModuleUpdate.json";
-    private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestCanary.json";
+    private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestVersion.json";
     DownloadManager downloadManager;
     long downloadID = 0; //from download manager
     boolean canaryUpdate = false;
@@ -183,14 +183,9 @@ public class UpdateFragment extends Fragment {
                 Shell.cmd("am start -a android.intent.action.REBOOT").exec();
             }
             else {
-                String zipURL;
-                try {
-                    zipURL = (installFullVersion) ? (String) latestVersion.get("zipUrl_Full") : (String) latestVersion.get("zipUrl_Xposed");
-                }
-                catch (Exception ignored)
-                {
-                    zipURL = (String) latestVersion.get("zipUrl");
-                }
+                String zipURL = (installFullVersion) ? (String) latestVersion.get("zipUrl_Full") : (String) latestVersion.get("zipUrl_Xposed");
+                if(zipURL == null) zipURL = (String) latestVersion.get("zipUrl");
+
                 startDownload(zipURL, (int) latestVersion.get("versionCode"));
                 binding.updateBtn.setEnabled(false);
                 downloadStarted = true;

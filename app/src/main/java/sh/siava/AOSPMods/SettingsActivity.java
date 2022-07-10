@@ -109,7 +109,7 @@ public class SettingsActivity extends AppCompatActivity implements
     public static int getVersionType() {
         int result;
         try {
-            result = Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", XPrefs.MagiskRoot)).exec().getOut().get(0));
+            result = Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", "/data/adb/modules/AOSPMods")).exec().getOut().get(0));
         }
         catch (Exception ignored){
             result = XPOSED_ONLY;
@@ -594,6 +594,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 int QQSTileQty = sharedPreferences.getInt("QQSTileQty", 4);
                 findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQty));
 
+                findPreference("QSTilesThemesOverlayEx").setVisible(showOverlays);
             } catch (Exception ignored) {}
         }
 

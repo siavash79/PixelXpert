@@ -120,9 +120,10 @@
         <entry key="..\:/Users/elbay/StudioProjects/AOSPMods_edit/app/src/main/res/xml/theming_prefs.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/drawable/collapse_icon.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/drawable/exapnd_icon.xml" value="0.4755" />
+        <entry key="app/src/main/res/layout/activity_update.xml" value="0.29945328031809143" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.3374094202898551" />
         <entry key="app/src/main/res/layout/switch_item.xml" value="0.3374094202898551" />
-        <entry key="app/src/main/res/layout/update_fragment.xml" value="0.4569486404833837" />
+        <entry key="app/src/main/res/layout/update_fragment.xml" value="0.5555555555555556" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.4171875" />
         <entry key="app/src/main/res/xml/gesture_nav_perfs.xml" value="0.6904541241890639" />
         <entry key="app/src/main/res/xml/lock_screen_prefs.xml" value="0.3374094202898551" />

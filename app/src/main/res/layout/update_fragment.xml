@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:minHeight="750dp"
         android:padding="16dp">
 
         <TextView
@@ -36,8 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/radioGroup1"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <RadioButton
@@ -59,7 +59,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/update_type_title"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/radioGroup1"
@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/currentVersionTitle"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/lastestVersionTitle"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +125,7 @@
             android:id="@+id/updateBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:enabled="false"
             android:text="@string/update_word"
             app:layout_constraintEnd_toEndOf="parent"
@@ -135,18 +135,18 @@
         <ScrollView
             android:id="@+id/scrollView3"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="330dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:fadeScrollbars="false"
             android:isScrollContainer="true"
             android:nestedScrollingEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/updateBtn">
 
             <LinearLayout
                 android:layout_width="match_parent"

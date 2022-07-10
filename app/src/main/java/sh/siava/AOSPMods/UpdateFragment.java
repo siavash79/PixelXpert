@@ -192,14 +192,8 @@ public class UpdateFragment extends Fragment {
             }
         });
 
-        if(currentVersionType == SettingsActivity.FULL_VERSION)
-        {
-            view.findViewById(R.id.fullTypeID).setSelected(true);
-        }
-        else
-        {
-            view.findViewById(R.id.XposedTypeID).setSelected(true);
-        }
+        ((RadioButton) view.findViewById(R.id.fullTypeID)).setChecked(currentVersionType == SettingsActivity.FULL_VERSION);
+        ((RadioButton) view.findViewById(R.id.XposedTypeID)).setChecked(currentVersionType != SettingsActivity.FULL_VERSION);
     }
 
 /*    private void getChangelog(String URL, TaskDoneCallback callback) {

@@ -195,7 +195,7 @@
     <string name="gesture_nav_pill_cat">Navigation bar pill</string>
     <string name="gesture_nav_pill_mod_title">Modify NavBar pill</string>
     <string name="gesture_nav_pill_width_title">Width compared to standard size</string>
-    <string name="gesture_nav_pill_height_title">Heighth compared to standard size</string>
+    <string name="gesture_nav_pill_height_title">Height compared to standard size</string>
     <string name="threebutton_header_title">3-Button navigation</string>
     <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
@@ -332,6 +332,9 @@
     <string name="update_flavor_title">Update channel</string>
     <string name="stable_flavor">Stable</string>
     <string name="canary_flavor" translatable="false">Canary</string>
+    <string name="update_type_title">Package Type</string>
+    <string name="full_type">Full</string>
+    <string name="xposed_type">Xposed Only</string>
     <string name="currentVersionTitle">Installed version: </string>
     <string name="lastestVersionTitle">Latest version: </string>
     <string name="root_not_here">ROOT ACCESS NOT GRANTED!</string>

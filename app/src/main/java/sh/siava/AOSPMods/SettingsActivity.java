@@ -35,10 +35,18 @@ import sh.siava.rangesliderpreference.RangeSliderPreference;
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
+    public static final int FULL_VERSION = 0;
+    public static final int XPOSED_ONLY = 1;
+
     private static final int REQUEST_IMPORT = 7;
     private static final int REQUEST_EXPORT = 9;
     private static final String TITLE_TAG = "settingsActivityTitle";
     Context DPContext;
+
+    @SuppressWarnings("FieldCanBeLocal")
+    public static int moduleType = XPOSED_ONLY;
+
+    public static boolean showOverlays, showFonts;
 
     public void backButtonEnabled() {
         ActionBar actionBar = getSupportActionBar();
@@ -72,8 +80,12 @@ public class SettingsActivity extends AppCompatActivity implements
 
         try {
             Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER)); //access full filesystem
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
+
+        moduleType = getVersionType();
+
+        showOverlays = moduleType == FULL_VERSION;
+        showFonts = moduleType == FULL_VERSION;
 
         setContentView(R.layout.settings_activity);
 
@@ -92,6 +104,17 @@ public class SettingsActivity extends AppCompatActivity implements
                 backButtonDisabled();
             }
         });
+    }
+
+    public static int getVersionType() {
+        int result;
+        try {
+            result = Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", XPrefs.MagiskRoot)).exec().getOut().get(0));
+        }
+        catch (Exception ignored){
+            result = XPOSED_ONLY;
+        }
+        return result;
     }
 
     private void createNotificationChannel() {
@@ -174,7 +197,6 @@ public class SettingsActivity extends AppCompatActivity implements
         return true;
     }
 
-
     @SuppressLint("ApplySharedPref")
     private void clearNetstatClick() {
         //showinng an alert before taking action
@@ -238,6 +260,13 @@ public class SettingsActivity extends AppCompatActivity implements
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.header_preferences, rootKey);
+
+            updateVisibility();
+        }
+
+        private void updateVisibility()
+        {
+            findPreference("theming_header").setVisible(showOverlays);
         }
     }
 
@@ -247,6 +276,12 @@ public class SettingsActivity extends AppCompatActivity implements
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.nav_prefs, rootKey);
+
+            updateVisibility();
+        }
+
+        private void updateVisibility() {
+            findPreference("HideNavbarOverlay").setVisible(showOverlays);
         }
 
     }
@@ -454,6 +489,7 @@ public class SettingsActivity extends AppCompatActivity implements
                                 : String.valueOf(volumeStps),
                         getString(R.string.restart_needed)));
 
+                findPreference("CustomThemedIconsOverlay").setVisible(showOverlays);
             } catch (Exception ignored){}
         }
     }
@@ -630,6 +666,8 @@ public class SettingsActivity extends AppCompatActivity implements
                 lp = leftGestureIndicator.getLayoutParams();
                 lp.height = edgeHeight;
                 leftGestureIndicator.setLayoutParams(lp);
+
+                findPreference("ReduceKeyboardSpaceOverlay").setVisible(showOverlays);
             } catch (Exception ignored) {}
         }
 

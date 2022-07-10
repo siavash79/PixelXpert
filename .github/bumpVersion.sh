@@ -11,7 +11,9 @@ sed -i 's/versionCode=.*/versionCode='$NEWVERCODE'/' MagiskMod/module.prop
 
 sed -i 's/"version":.*/"version": "'$NEWVERNAME'",/' latestVersion.json
 sed -i 's/"versionCode":.*/"versionCode": '$NEWVERCODE',/' latestVersion.json
-sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/nightly.link\/siavash79\/AOSPMods\/actions\/runs\/'$1'\/AOSPMods.zip",/' latestVersion.json
+sed -i 's/"zipUrl_Xposed":.*/"zipUrl_Xposed": "https:\/\/nightly.link\/siavash79\/AOSPMods\/actions\/runs\/'$1'\/AOSPMods_Xposed.zip",/' latestVersion.json
+sed -i 's/"zipUrl_Full":.*/"zipUrl_Full": "https:\/\/nightly.link\/siavash79\/AOSPMods\/actions\/runs\/'$1'\/AOSPMods_Full.zip",/' latestVersion.json
+sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/nightly.link\/siavash79\/AOSPMods\/actions\/runs\/'$1'\/AOSPMods_Full.zip",/' latestVersion.json
 
 # module changelog
 echo "**$NEWVERNAME**  " > newChangeLog.md

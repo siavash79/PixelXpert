@@ -56,6 +56,40 @@
         </RadioGroup>
 
         <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/update_type_title"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/radioGroup1"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+            <RadioButton
+                android:id="@+id/fullTypeID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/full_type" />
+
+            <RadioButton
+                android:id="@+id/XposedTypeID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/xposed_type" />
+        </RadioGroup>
+
+        <TextView
             android:id="@+id/currentVersionID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,7 +109,7 @@
             android:text="@string/lastestVersionTitle"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup1" />
 
         <TextView
             android:id="@+id/latestVersionValueID"
@@ -103,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="330dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:fadeScrollbars="false"

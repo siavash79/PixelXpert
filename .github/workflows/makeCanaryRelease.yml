@@ -52,12 +52,18 @@ jobs:
     - name: Run the zip script
       run: .github/make_zip.sh
         
-    - name: Upload Zip
+    - name: Upload Xposed Zip
       uses: actions/upload-artifact@v2
       with: 
-        name: AOSPMods.zip
+        name: AOSPMods_Xposed.zip AOSPMods_Full.zip
         path: output
- 
+
+    - name: Upload Full Zip
+      uses: actions/upload-artifact@v2
+      with:
+        name: AOSPMods_Full.zip
+        path: output
+
     - name: Commit version bump
       uses: github-actions-x/commit@v2.9
       with:

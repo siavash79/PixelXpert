@@ -41,7 +41,7 @@ import us.feras.mdv.MarkdownView;
 
 public class UpdateFragment extends Fragment {
     private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskModuleUpdate.json";
-    private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestVersion.json";
+    private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestCanary.json";
     DownloadManager downloadManager;
     long downloadID = 0; //from download manager
     boolean canaryUpdate = false;
@@ -157,7 +157,7 @@ public class UpdateFragment extends Fragment {
                         }
                         else
                         {
-                            if(latestCode > currentVersionCode)
+                            if(latestCode > currentVersionCode || (currentVersionType == SettingsActivity.FULL_VERSION) != installFullVersion)
                             {
                                 enable = true;
                             }
@@ -342,6 +342,7 @@ public class UpdateFragment extends Fragment {
                         case "zipUrl_Full":
                         case "version":
                         case "changelog":
+                        default:
                             versionInfo.put(name, jsonReader.nextString());
                             break;
                     }

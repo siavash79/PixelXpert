@@ -55,12 +55,12 @@ jobs:
     - name: Upload Xposed Zip
       uses: actions/upload-artifact@v2
       with: 
-        name: AOSPMods_Xposed.zip AOSPMods_Full.zip
-        path: output
+        name: AOSPMods_Xposed.zip
+        path: output/xposed
 
     - name: Upload Full Zip
       uses: actions/upload-artifact@v2
       with:
         name: AOSPMods_Full.zip
-        path: output
+        path: output/full
 

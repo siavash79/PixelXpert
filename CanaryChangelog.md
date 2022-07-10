@@ -1,3 +1,6 @@
+**canary-72**  
+- New module type: Xposed Only  
+  
 **canary-71**  
 - Added call vibration indicators  
   

@@ -64,21 +64,3 @@ jobs:
         name: AOSPMods_Full.zip
         path: output
 
-    - name: Commit version bump
-      uses: github-actions-x/commit@v2.9
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        push-branch: 'canary'
-        commit-message: 'Version update: Release'
-        force-add: 'true'
-        files: MagiskMod/module.prop app/build.gradle latestVersion.json CanaryChangelog.md
-        name: GitHub
-        email: aospmods@siava.sh
-        
-    - name: Inform Telegram
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ env.TMessage }}
-        format: markdown

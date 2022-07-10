@@ -203,7 +203,7 @@
     <string name="colorpill_title">Раскрасьте панель жестов</string>
     <string name="colorpill">Панель жестов с цветом акцента</string>
     <string name="reducekeyboard_title">Пространство между клавиатуром и жестам</string>
-    <string name="reducekeyboard">Уменьшить пространство под клавиатуром</string>
+    <string name="reducekeyboard">Уменьшить пространство под клавиатурой</string>
     <string name="taskbar_status_title">Андроид Панель Задач</string>
     <string name="taskbar_force_enable_title">Принудительно включен</string>
     <string name="taskbar_force_disable_title">Принудительно отключен</string>

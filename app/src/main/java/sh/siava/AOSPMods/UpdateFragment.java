@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,7 +42,7 @@ import us.feras.mdv.MarkdownView;
 
 public class UpdateFragment extends Fragment {
     private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskModuleUpdate.json";
-    private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestVersion.json";
+    private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestCanary.json";
     DownloadManager downloadManager;
     long downloadID = 0; //from download manager
     boolean canaryUpdate = false;
@@ -117,7 +118,7 @@ public class UpdateFragment extends Fragment {
             binding.updateBtn.setText(R.string.reboot_word);
         }
 
-        binding.radioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
+        RadioGroup.OnCheckedChangeListener onCheckChangedListener = (radioGroup, i) -> {
             canaryUpdate = ((RadioButton) radioGroup.findViewById(R.id.canaryID)).isChecked();
             ((TextView) view.findViewById(R.id.latestVersionValueID)).setText(R.string.update_checking);
             binding.updateBtn.setEnabled(rebootPending);
@@ -157,7 +158,7 @@ public class UpdateFragment extends Fragment {
                         }
                         else
                         {
-                            if(latestCode > currentVersionCode)
+                            if(latestCode > currentVersionCode || (currentVersionType == SettingsActivity.FULL_VERSION) != installFullVersion)
                             {
                                 enable = true;
                             }
@@ -167,9 +168,14 @@ public class UpdateFragment extends Fragment {
                     ((Button) view.findViewById(R.id.updateBtn)).setText(BtnText);
                 });
             });
-        });
+        };
 
-        binding.radioGroup1.setOnCheckedChangeListener((radioGroup, i) -> installFullVersion = ((RadioButton) radioGroup.findViewById(R.id.fullTypeID)).isChecked());
+        binding.updateChannelRadioGroup.setOnCheckedChangeListener(onCheckChangedListener);
+
+        binding.packageTypeRadioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
+            installFullVersion = ((RadioButton) radioGroup.findViewById(R.id.fullTypeID)).isChecked();
+            onCheckChangedListener.onCheckedChanged(view.findViewById(R.id.updateChannelRadioGroup), 0);
+        });
 
         binding.updateBtn.setOnClickListener(view1 -> {
             if(rebootPending)
@@ -342,6 +348,7 @@ public class UpdateFragment extends Fragment {
                         case "zipUrl_Full":
                         case "version":
                         case "changelog":
+                        default:
                             versionInfo.put(name, jsonReader.nextString());
                             break;
                     }

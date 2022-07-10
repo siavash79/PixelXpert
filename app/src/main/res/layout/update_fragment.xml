@@ -29,15 +29,15 @@
             android:layout_marginTop="16dp"
             android:text="@string/update_flavor_title"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/radioGroup"
+            app:layout_constraintStart_toStartOf="@+id/updateChannelRadioGroup"
             app:layout_constraintTop_toBottomOf="@+id/currentVersionID" />
 
         <RadioGroup
-            android:id="@+id/radioGroup"
+            android:id="@+id/updateChannelRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/radioGroup1"
+            app:layout_constraintStart_toStartOf="@+id/packageTypeRadioGroup"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <RadioButton
@@ -62,11 +62,11 @@
             android:layout_marginTop="8dp"
             android:text="@string/update_type_title"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/radioGroup1"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+            app:layout_constraintStart_toStartOf="@+id/packageTypeRadioGroup"
+            app:layout_constraintTop_toBottomOf="@+id/updateChannelRadioGroup" />
 
         <RadioGroup
-            android:id="@+id/radioGroup1"
+            android:id="@+id/packageTypeRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -109,7 +109,7 @@
             android:text="@string/lastestVersionTitle"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup1" />
+            app:layout_constraintTop_toBottomOf="@+id/packageTypeRadioGroup" />
 
         <TextView
             android:id="@+id/latestVersionValueID"

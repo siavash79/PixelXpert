@@ -1,6 +1,6 @@
-cp app\release\AOSPMods.apk MagiskMod\system\priv-app\AOSPMods
+cp app\release\AOSPMods.apk MagiskModBase\system\priv-app\AOSPMods
 
-cd MagiskMod
+cd MagiskModBase
 
 zip -r -9 -q ..\AOSPMods.zip *.*
 

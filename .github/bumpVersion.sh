@@ -6,8 +6,8 @@ NEWVERNAME="canary-$NEWVERCODE"
 sed -i 's/versionCode.*/versionCode '$NEWVERCODE'/' app/build.gradle
 sed -i 's/versionName.*/versionName "'$NEWVERNAME'"/' app/build.gradle
 
-sed -i 's/version=.*/version='$NEWVERNAME'/' MagiskMod/module.prop
-sed -i 's/versionCode=.*/versionCode='$NEWVERCODE'/' MagiskMod/module.prop
+sed -i 's/version=.*/version='$NEWVERNAME'/' MagiskModBase/module.prop
+sed -i 's/versionCode=.*/versionCode='$NEWVERCODE'/' MagiskModBase/module.prop
 
 sed -i 's/"version":.*/"version": "'$NEWVERNAME'",/' latestVersion.json
 sed -i 's/"versionCode":.*/"versionCode": '$NEWVERCODE',/' latestVersion.json

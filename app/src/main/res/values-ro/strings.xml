@@ -197,6 +197,8 @@
     <string name="taskbar_force_disable_title">Dezactivată forțat</string>
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Dezactivare sunet captură ecran</string>
+    <string name="allow_all_screen_rotations">Deblocare forțată a tuturor rotațiilor ecranului</string>
+    <string name="allow_all_screen_rotations_summary">Va ignora, de asemenea, butonul plutitor de rotație manuală</string>
     <string name="force_no_cutout">Ignoră decuparea camerei</string>
     <string name="volume_button_step_title">Pași volum (0 la 100%)</string>
     <string name="so_power_longpress_torch_title">Apăsare lungă pe butonul de alimentare pentru lanternă</string>
@@ -215,6 +217,10 @@
     <string name="expand_notifications_icons_title">Adaugă butoane extindere/restrânge toate</string>
     <string name="disable_overscroll">Dezactivare efect de derulare elastică</string>
     <string name="overscroll_on_summary">Important: TREBUIE să activați aplicațiile pentru care doriți să dezactivați derularea elastică în LSPosed</string>
+    <!-- Call section -->
+    <string name="call_category">Apeluri telefonice</string>
+    <string name="vibrate_on_call_active_title">Vibrează la răspunsul unui apel efectuat</string>
+    <string name="vibrate_on_call_drop_title">Vibrare la deconectare apel</string>
     <!-- Theming section related -->
     <string name="gsans_override_title">Forțează sistemul de fonturi Google Sans în tot sistemul</string>
     <string name="font_overlays_enable_title">Activează utilizarea fonturilor personalizate</string>
@@ -293,6 +299,9 @@
     <string name="reboot_notification_text">Modificările vor avea efect după repornirea dispozitivului</string>
     <string name="update_flavor_title">Canalul de actualizare</string>
     <string name="stable_flavor">Stabil</string>
+    <string name="update_type_title">Tip de pachet</string>
+    <string name="full_type">Complet</string>
+    <string name="xposed_type">Doar Xposed</string>
     <string name="currentVersionTitle">Versiunea instalată: </string>
     <string name="lastestVersionTitle">Ultima versiune: </string>
     <string name="root_not_here">ACCESUL ROOT NU ESTE ACORDAT!</string>

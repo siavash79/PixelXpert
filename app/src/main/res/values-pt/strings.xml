@@ -287,4 +287,10 @@
     <string name="allow_all_screen_rotations">Permitir rotação em todas as direções</string>
     <string name="allow_all_screen_rotations_summary">Irá ignorar o botão de rotação manual</string>
     <string name="qs_footer_text_value">Inserir texto personalizado</string>
+    <string name="call_category">Chamadas telefónicas</string>
+    <string name="vibrate_on_call_active_title">Vibrar ao atender chamad</string>
+    <string name="vibrate_on_call_drop_title">Vibrar ao terminar chamada</string>
+    <string name="update_type_title">Tipo de pacote</string>
+    <string name="full_type">Completo</string>
+    <string name="xposed_type">Apenas Xposed</string>
 </resources>

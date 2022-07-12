@@ -1,3 +1,6 @@
+**canary-75**  
+- Bugfixes  
+  
 **canary-74**  
 - Updater bug-fix  
   

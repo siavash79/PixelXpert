@@ -1,3 +1,6 @@
+**canary-76**  
+- Bugfixes  
+  
 **canary-75**  
 - Bugfixes  
   

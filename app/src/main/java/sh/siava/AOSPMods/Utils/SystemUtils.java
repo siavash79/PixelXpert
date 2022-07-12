@@ -24,12 +24,8 @@ import android.telephony.TelephonyManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.topjohnwu.superuser.Shell;
-
 import org.jetbrains.annotations.Contract;
 
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import sh.siava.AOSPMods.BuildConfig;
 
 public class SystemUtils{
@@ -92,7 +88,26 @@ public class SystemUtils{
 	@Contract(pure = true)
 	public static AudioManager AudioManager() {
 		if(instance == null) return null;
-		return instance.mAudioManager;
+		return instance.getAudioManager();
+	}
+
+	private AudioManager getAudioManager() { //we don't init audio manager unless it's requested by someone
+		if(mAudioManager == null)
+		{
+			//Audio
+			try {
+				mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+			}
+			catch (Throwable t)
+			{
+				if(BuildConfig.DEBUG)
+				{
+					log("AOSPMods Error getting audio manager");
+					t.printStackTrace();
+				}
+			}
+		}
+		return mAudioManager;
 	}
 
 	@Nullable
@@ -165,19 +180,6 @@ public class SystemUtils{
 			if(BuildConfig.DEBUG)
 			{
 				log("AOSPMods: Failed to Register flash callback");
-				t.printStackTrace();
-			}
-		}
-
-		//Audio
-		try {
-			mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-		}
-		catch (Throwable t)
-		{
-			if(BuildConfig.DEBUG)
-			{
-				log("AOSPMods Error getting audio manager");
 				t.printStackTrace();
 			}
 		}

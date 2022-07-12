@@ -42,7 +42,7 @@ import us.feras.mdv.MarkdownView;
 
 public class UpdateFragment extends Fragment {
     private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskModuleUpdate.json";
-    private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestVersion.json";
+    private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestCanary.json";
     DownloadManager downloadManager;
     long downloadID = 0; //from download manager
     boolean canaryUpdate = false;
@@ -193,8 +193,21 @@ public class UpdateFragment extends Fragment {
             }
         });
 
-        ((RadioButton) view.findViewById(R.id.fullTypeID)).setChecked(currentVersionType == SettingsActivity.FULL_VERSION);
-        ((RadioButton) view.findViewById(R.id.XposedTypeID)).setChecked(currentVersionType != SettingsActivity.FULL_VERSION);
+        if(currentVersionType == SettingsActivity.FULL_VERSION) {
+            ((RadioButton) view.findViewById(R.id.fullTypeID)).setChecked(true);
+        }
+        else {
+            ((RadioButton) view.findViewById(R.id.XposedTypeID)).setChecked(true);
+        }
+
+        if(currentVersionName.toLowerCase().contains("canary"))
+        {
+            ((RadioButton) view.findViewById(R.id.canaryID)).setChecked(true);
+        }
+        else
+        {
+            ((RadioButton) view.findViewById(R.id.stableID)).setChecked(true);
+        }
     }
 
 /*    private void getChangelog(String URL, TaskDoneCallback callback) {

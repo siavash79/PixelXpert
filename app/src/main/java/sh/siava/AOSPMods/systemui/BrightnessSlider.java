@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
@@ -26,13 +24,12 @@ public class BrightnessSlider extends XposedModPack {
     private Object brightnessSliderFactory = null;
     private Object brightnessControllerFactory = null;
     private Object QQSBrightnessSliderController = null;
-    private View QSbrightnessSliderView = null;
+    private View QSBrightnessSliderView = null;
     private Object BrightnessMirrorController = null;
     @SuppressLint("StaticFieldLeak")
-    private static View QQSbrightnessSliderView = null;
+    private static View QQSBrightnessSliderView = null;
     private Object QS, QQS;
     private ViewGroup QSParent;
-
 
     private static boolean BrightnessSlierOnBottom = false;
     private static boolean BrightnessHookEnabled = true;
@@ -67,23 +64,22 @@ public class BrightnessSlider extends XposedModPack {
     
     private void setQSVisibility() {
         try {
-            QSParent.removeView(QSbrightnessSliderView);
-        }catch (Exception ignored){}
-        try {
-            if (!QSBrightnessDisabled) {
+            if (QSBrightnessDisabled) {
+                QSParent.removeView(QSBrightnessSliderView);
+            } else {
                 Object mView = getObjectField(QS, "mView");
-                callMethod(mView, "setBrightnessView", QSbrightnessSliderView);
+                callMethod(mView, "setBrightnessView", QSBrightnessSliderView);
             }
-        } catch (Exception ignored){}
+        }catch (Exception ignored){}
     }
     
     private void setQQSVisibility() {
-        if (QQSbrightnessSliderView == null) return;
+        if (QQSBrightnessSliderView == null) return;
         try{
             if (QQSBrightnessEnabled) {
-                callMethod(QQS, "setBrightnessView", QQSbrightnessSliderView);
+                callMethod(QQS, "setBrightnessView", QQSBrightnessSliderView);
             } else {
-                ((ViewGroup) QQSbrightnessSliderView.getParent()).removeView(QQSbrightnessSliderView);
+                ((ViewGroup) QQSBrightnessSliderView.getParent()).removeView(QQSBrightnessSliderView);
             }
         } catch(Exception ignored){}
     }
@@ -140,8 +136,8 @@ public class BrightnessSlider extends XposedModPack {
                 brightnessControllerFactory = param.args[12];
                 brightnessSliderFactory = param.args[13];
                 Object mBrightnessSliderController = getObjectField(param.thisObject, "mBrightnessSliderController");
-                QSbrightnessSliderView = (View) callMethod(mBrightnessSliderController, "getRootView");
-                QSParent = (ViewGroup) QSbrightnessSliderView.getParent();
+                QSBrightnessSliderView = (View) callMethod(mBrightnessSliderController, "getRootView");
+                QSParent = (ViewGroup) QSBrightnessSliderView.getParent();
     
                 setQSVisibility();
             }
@@ -159,7 +155,7 @@ public class BrightnessSlider extends XposedModPack {
                 QQSBrightnessSliderController = callMethod(brightnessSliderFactory, "create", mContext, param.thisObject);
 
                 //Place it to QQS
-                QQSbrightnessSliderView = (View) callMethod(QQSBrightnessSliderController, "getRootView");
+                QQSBrightnessSliderView = (View) callMethod(QQSBrightnessSliderController, "getRootView");
 
                 //Creating controller and handler
                 Object mBrightnessController;

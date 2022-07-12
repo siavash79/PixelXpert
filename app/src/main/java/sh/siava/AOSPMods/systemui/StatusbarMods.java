@@ -360,7 +360,7 @@ public class StatusbarMods extends XposedModPack {
 
         if(Key.length > 0)
         {
-            switch (Key[0])
+            switch(Key[0])
             {
                 case "statusbarPaddings":
                     try {

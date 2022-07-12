@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.android;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
@@ -15,6 +14,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 
+@SuppressWarnings("RedundantThrows")
 public class screenRotation extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_FRAMEWORK_PACKAGE;
 

@@ -594,6 +594,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 int QQSTileQty = sharedPreferences.getInt("QQSTileQty", 4);
                 findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQty));
 
+                findPreference("BSThickTrackOverlay").setVisible(showOverlays);
                 findPreference("QSTilesThemesOverlayEx").setVisible(showOverlays);
             } catch (Exception ignored) {}
         }

@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 32
-    buildToolsVersion '32.0.0'
+    buildToolsVersion '33.0.0'
 
     defaultConfig {
         applicationId "sh.siava.AOSPMods"

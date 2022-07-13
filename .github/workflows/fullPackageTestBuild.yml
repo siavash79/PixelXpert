@@ -10,9 +10,6 @@ jobs:
     steps:
       - run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git .
         name: Grab source code
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
         
       - name: Setup JDK 11
         uses: actions/setup-java@v3

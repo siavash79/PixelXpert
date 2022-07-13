@@ -293,4 +293,6 @@
     <string name="update_type_title">Tipo de pacote</string>
     <string name="full_type">Completo</string>
     <string name="xposed_type">Apenas Xposed</string>
+    <string name="own_prefs_header">Definições da app</string>
+    <string name="language_title">Idioma</string>
 </resources>

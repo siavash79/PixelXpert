@@ -337,5 +337,8 @@
     <string name="reinstall_word">Переустановить</string>
 
     <string name="title_activity_update" translatable="false">updateActivity</string>
-
+    
+    <string name="own_prefs_header">Настройки AOSPMods</string>
+    <string name="language_title">Выберите язык</string>
+    
 </resources>

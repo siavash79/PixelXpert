@@ -348,4 +348,6 @@
 
     <string name="title_activity_update" translatable="false">updateActivity</string>
 
+    <string name="own_prefs_header">AOSPMods settings</string>
+    <string name="language_title">Language</string>
 </resources>

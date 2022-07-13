@@ -6,9 +6,14 @@ import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.LocaleList;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -26,7 +32,9 @@ import androidx.preference.PreferenceManager;
 
 import com.topjohnwu.superuser.Shell;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import sh.siava.AOSPMods.Utils.PrefManager;
 import sh.siava.AOSPMods.Utils.SystemUtils;
@@ -63,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
@@ -104,6 +112,24 @@ public class SettingsActivity extends AppCompatActivity implements
                 backButtonDisabled();
             }
         });
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(newBase.createDeviceProtectedStorageContext());
+
+        String localeCode = prefs.getString("appLanguage", "");
+        Locale locale = (localeCode.length() > 0) ? Locale.forLanguageTag(localeCode) : Locale.getDefault();
+
+        Resources res = newBase.getResources();
+        Configuration configuration = res.getConfiguration();
+
+        configuration.setLocale(locale);
+
+        LocaleList localeList = new LocaleList(locale);
+        LocaleList.setDefault(localeList);
+        configuration.setLocales(localeList);
+
+        super.attachBaseContext(newBase.createConfigurationContext(configuration));
     }
 
     public static int getVersionType() {
@@ -777,4 +803,30 @@ public class SettingsActivity extends AppCompatActivity implements
             prefs.registerOnSharedPreferenceChangeListener(listener);
         }
     }
+
+    @SuppressWarnings("ConstantConditions")
+    public static class OwnPrefsFragment extends PreferenceFragmentCompat {
+
+        SharedPreferences.OnSharedPreferenceChangeListener listener = this::onPrefChanged;
+
+        private void onPrefChanged(SharedPreferences sharedPreferences, String key) {
+            if(key.equals("appLanguage"))
+            {
+                sharedPreferences.edit().commit();
+                getActivity().finish();
+                startActivity(getActivity().getIntent());
+            }
+        }
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
+            setPreferencesFromResource(R.xml.own_prefs_header, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+
+
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+        }
+    }
+
 }

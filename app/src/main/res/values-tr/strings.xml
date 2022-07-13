@@ -349,4 +349,7 @@
 
     <string name="title_activity_update">güncellemeAktivitesi</string>
     
+    <string name="own_prefs_header">AOSPMods ayarları</string>
+    <string name="language_title">Dil seçimi</string>
+    
 </resources>

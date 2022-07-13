@@ -1,3 +1,7 @@
+**canary-77**  
+- Added option to choose app language  
+- Bugfixes  
+  
 **canary-76**  
 - Bugfixes  
   

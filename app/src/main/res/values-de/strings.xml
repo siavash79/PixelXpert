@@ -339,5 +339,8 @@
     <string name="reinstall_word">Neu installieren</string>
 
     <string name="title_activity_update" translateable="false">updateActivity</string>
+	
+	<string name="own_prefs_header">AOSPMods-Einstellungen</string>
+    <string name="language_title">Sprache auswählen</string>
 
 </resources>

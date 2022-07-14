@@ -48,7 +48,7 @@ public class StatusbarSize extends XposedModPack {
         allScreenRotations = Xprefs.getBoolean("allScreenRotations", false);
 
         sizeFactor = Xprefs.getInt("statusbarHeightFactor", 100);
-        if(sizeFactor != 100 || edited || allScreenRotations)
+        if(sizeFactor != 100 || edited || allScreenRotations || noCutoutEnabled)
             currentHeight = Math.round(
                     mContext.getResources().getDimensionPixelSize(
                             mContext.getResources().getIdentifier(

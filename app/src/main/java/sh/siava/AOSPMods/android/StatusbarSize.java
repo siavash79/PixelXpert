@@ -108,7 +108,7 @@ public class StatusbarSize extends XposedModPack {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     try {
-                        if(sizeFactor == 100 && !edited) return;
+                        if(sizeFactor == 100 && !edited && !allScreenRotations && !noCutoutEnabled) return;
                         edited = true;
                         param.setResult(currentHeight);
                     }catch (Throwable ignored){}

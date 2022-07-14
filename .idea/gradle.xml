@@ -10,12 +10,12 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Submodules/RangeSliderPreference" />
             <option value="$PROJECT_DIR$/Submodules/renderscript-toolkit/renderscript-toolkit" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
       </GradleProjectSettings>
     </option>
-    <option name="offlineMode" value="true" />
   </component>
 </project>

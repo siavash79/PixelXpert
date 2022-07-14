@@ -14,9 +14,9 @@ public class NotificationIconContainerOverride {
     public static final int STATE_DOT = 1;
     public static final int STATE_HIDDEN = 2;
 
-    private static int MAX_VISIBLE_ICONS_ON_LOCK = 5;
+    private static final int MAX_VISIBLE_ICONS_ON_LOCK = 5;
     public static int MAX_STATIC_ICONS = 4;
-    private static int MAX_DOTS = 1;
+    private static final int MAX_DOTS = 1;
 
     public static void calculateIconTranslations(XC_MethodHook.MethodHookParam param) {
         FrameLayout thisObject = (FrameLayout) param.thisObject;

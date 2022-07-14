@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,7 +26,6 @@ import androidx.fragment.app.Fragment;
 
 import com.topjohnwu.superuser.Shell;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -42,7 +42,7 @@ import us.feras.mdv.MarkdownView;
 
 public class UpdateFragment extends Fragment {
     private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskModuleUpdate.json";
-    private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestVersion.json";
+    private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestCanary.json";
     DownloadManager downloadManager;
     long downloadID = 0; //from download manager
     boolean canaryUpdate = false;
@@ -75,9 +75,11 @@ public class UpdateFragment extends Fragment {
     };
     private UpdateFragmentBinding binding;
     private int currentVersionCode = -1;
+    private int currentVersionType = SettingsActivity.XPOSED_ONLY;
     private String currentVersionName = "";
     private boolean rebootPending = false;
     private boolean downloadStarted = false;
+    private boolean installFullVersion = true;
 
     @Override
     public View onCreateView(
@@ -101,10 +103,12 @@ public class UpdateFragment extends Fragment {
 
         if (!Shell.getShell().isRoot()) {
             currentVersionName = getString(R.string.root_not_here);
+            currentVersionType = -1;
             currentVersionCode = 9999;
         } else {
             getCurrentVersion();
         }
+
         String pendingRebootString = (rebootPending) ? " - " + getString(R.string.reboot_pending) : "";
         ((TextView) view.findViewById(R.id.currentVersionValueID)).setText(String.format("%s (%s)%s", currentVersionName, currentVersionCode, pendingRebootString));
 
@@ -114,7 +118,7 @@ public class UpdateFragment extends Fragment {
             binding.updateBtn.setText(R.string.reboot_word);
         }
 
-        binding.radioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
+        RadioGroup.OnCheckedChangeListener onCheckChangedListener = (radioGroup, i) -> {
             canaryUpdate = ((RadioButton) radioGroup.findViewById(R.id.canaryID)).isChecked();
             ((TextView) view.findViewById(R.id.latestVersionValueID)).setText(R.string.update_checking);
             binding.updateBtn.setEnabled(rebootPending);
@@ -124,17 +128,15 @@ public class UpdateFragment extends Fragment {
 
                 requireActivity().runOnUiThread(() -> ((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFile((String) result.get("changelog")));
 
-                //noinspection ConstantConditions
                 getActivity().runOnUiThread(() -> {
                     ((TextView) view.findViewById(R.id.latestVersionValueID)).setText(
                             String.format("%s (%s)", result.get("version"),
                                     result.get("versionCode")));
-                    int latestCode = 0;
+                    int latestCode;
                     int BtnText = R.string.update_word;
 
                     boolean enable = false;
                     try {
-                        //noinspection ConstantConditions
                         latestCode = (int) result.get("versionCode");
 
                         if(rebootPending)
@@ -156,7 +158,7 @@ public class UpdateFragment extends Fragment {
                         }
                         else
                         {
-                            if(latestCode > currentVersionCode)
+                            if(latestCode > currentVersionCode || (currentVersionType == SettingsActivity.FULL_VERSION) != installFullVersion)
                             {
                                 enable = true;
                             }
@@ -166,28 +168,55 @@ public class UpdateFragment extends Fragment {
                     ((Button) view.findViewById(R.id.updateBtn)).setText(BtnText);
                 });
             });
+        };
+
+        binding.updateChannelRadioGroup.setOnCheckedChangeListener(onCheckChangedListener);
+
+        binding.packageTypeRadioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
+            installFullVersion = ((RadioButton) radioGroup.findViewById(R.id.fullTypeID)).isChecked();
+            onCheckChangedListener.onCheckedChanged(view.findViewById(R.id.updateChannelRadioGroup), 0);
         });
+
         binding.updateBtn.setOnClickListener(view1 -> {
             if(rebootPending)
             {
                 Shell.cmd("am start -a android.intent.action.REBOOT").exec();
             }
             else {
-                //noinspection ConstantConditions
-                startDownload((String) latestVersion.get("zipUrl"), (int) latestVersion.get("versionCode"));
+                String zipURL = (installFullVersion) ? (String) latestVersion.get("zipUrl_Full") : (String) latestVersion.get("zipUrl_Xposed");
+                if(zipURL == null) zipURL = (String) latestVersion.get("zipUrl");
+
+                startDownload(zipURL, (int) latestVersion.get("versionCode"));
                 binding.updateBtn.setEnabled(false);
                 downloadStarted = true;
                 binding.updateBtn.setText(R.string.update_download_started);
             }
         });
+
+        if(currentVersionType == SettingsActivity.FULL_VERSION) {
+            ((RadioButton) view.findViewById(R.id.fullTypeID)).setChecked(true);
+        }
+        else {
+            ((RadioButton) view.findViewById(R.id.XposedTypeID)).setChecked(true);
+        }
+
+        if(currentVersionName.toLowerCase().contains("canary"))
+        {
+            ((RadioButton) view.findViewById(R.id.canaryID)).setChecked(true);
+        }
+        else
+        {
+            ((RadioButton) view.findViewById(R.id.stableID)).setChecked(true);
+        }
     }
 
-    private void getChangelog(String URL, TaskDoneCallback callback) {
+/*    private void getChangelog(String URL, TaskDoneCallback callback) {
         new ChangelogReceiver(URL, callback).start();
-    }
+    }*/
 
     private void getCurrentVersion() {
         rebootPending = false;
+
         try {
             List<String> updateLines = Shell.cmd("cat /data/adb/modules_update/AOSPMods/module.prop | grep version").exec().getOut();
             if (updateLines.size() >= 2) {
@@ -198,14 +227,23 @@ public class UpdateFragment extends Fragment {
                         currentVersionName = line.substring(line.indexOf("=") + 1);
                     }
                 }
+                try {
+                    currentVersionType = Integer.parseInt(Shell.cmd("cat /data/adb/modules_update/AOSPMods/build.type").exec().getOut().get(0));
+                }
+                catch (Exception ignored)
+                {
+                    currentVersionType = SettingsActivity.XPOSED_ONLY;
+                }
                 rebootPending = true;
             } else {
                 throw new Exception();
             }
-        } catch (Exception e) {
+
+        } catch (Exception ignored) {
             rebootPending = false;
             currentVersionName = BuildConfig.VERSION_NAME;
             currentVersionCode = BuildConfig.VERSION_CODE;
+            currentVersionType = SettingsActivity.moduleType;
         }
     }
 
@@ -258,7 +296,7 @@ public class UpdateFragment extends Fragment {
     public interface TaskDoneCallback extends Callback {
         void onFinished(HashMap<String, Object> result);
     }
-    private static class ChangelogReceiver extends Thread {
+/*    private static class ChangelogReceiver extends Thread {
         private final TaskDoneCallback mCallback;
         private final String mURL;
 
@@ -288,7 +326,7 @@ public class UpdateFragment extends Fragment {
             } catch (Exception ignored){}
         }
     }
-
+*/
 
     private class updateChecker extends Thread {
         private final TaskDoneCallback mCallback;
@@ -314,8 +352,11 @@ public class UpdateFragment extends Fragment {
                             versionInfo.put(name, jsonReader.nextInt());
                             break;
                         case "zipUrl":
+                        case "zipUrl_Xposed":
+                        case "zipUrl_Full":
                         case "version":
                         case "changelog":
+                        default:
                             versionInfo.put(name, jsonReader.nextString());
                             break;
                     }

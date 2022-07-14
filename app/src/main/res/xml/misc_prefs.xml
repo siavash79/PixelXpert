@@ -18,11 +18,28 @@
 
         <SwitchPreference
             android:defaultValue="false"
+            android:key="allScreenRotations"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/allow_all_screen_rotations"
+            android:summary="@string/allow_all_screen_rotations_summary"/>
+
+        <SwitchPreference
+            android:defaultValue="false"
             android:key="noCutoutEnabled"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
             android:title="@string/force_no_cutout" />
 
+        <SeekBarPreference
+            android:layout_width="wrap_content"
+            android:defaultValue="10"
+            android:key="volumeStps"
+            android:max="50"
+            android:title="@string/volume_button_step_title"
+            app:min="10"
+            app:seekBarIncrement="5"
+            app:updatesContinuously="true"/>
 
         <SwitchPreference
             android:defaultValue="false"
@@ -65,6 +82,23 @@
             android:title="@string/expand_notifications_icons_title"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/call_category">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="vibrateOnAnswered"
+            android:title="@string/vibrate_on_call_active_title"
+            app:summaryOn="@string/general_on"
+            app:summaryOff="@string/general_off"/>
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="vibrateOnDrop"
+            android:title="@string/vibrate_on_call_drop_title"
+            app:summaryOn="@string/general_on"
+            app:summaryOff="@string/general_off"/>
+
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/monitoring_category_title">

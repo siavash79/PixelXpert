@@ -1,0 +1,84 @@
+name: Make Canary Release
+
+on:
+  push:
+    branches:
+      - 'canary'
+    paths:
+      - '.github/edit2MakeNewCanary'
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Grab Source
+      run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git .
+      
+    - name: Setup JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+        
+    - name: Grant permission shell scripts
+      run: chmod +x .github/*.sh
+
+    - name: Generate Changelog
+      run: .github/extractChanges.sh
+
+    - name: Update Versions
+      run: .github/bumpVersion.sh ${{ github.run_id }}
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew assembleRelease
+
+    - uses: r0adkll/sign-android-release@v1
+      name: Sign app APK
+      id: sign_app
+      with:
+        releaseDirectory: app/build/outputs/apk/release
+        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+        alias: ${{ secrets.ALIAS }}
+        keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+        keyPassword: ${{ secrets.KEY_PASSWORD }}
+      env:
+        BUILD_TOOLS_VERSION: "32.0.0"
+          
+    - name: Run the zip script
+      run: .github/make_zip.sh
+        
+    - name: Upload Xposed Zip
+      uses: actions/upload-artifact@v2
+      with: 
+        name: AOSPMods_Xposed.zip
+        path: output/xposed
+
+    - name: Upload Full Zip
+      uses: actions/upload-artifact@v2
+      with:
+        name: AOSPMods_Full.zip
+        path: output/full
+
+    - name: Commit version bump
+      uses: github-actions-x/commit@v2.9
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        push-branch: 'canary'
+        commit-message: 'Version update: Release'
+        force-add: 'true'
+        files: MagiskModBase/module.prop app/build.gradle latestVersion.json CanaryChangelog.md latestCanary.json
+        name: GitHub
+        email: aospmods@siava.sh
+
+    - name: Inform Telegram
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: ${{ env.TMessage }}
+        format: markdown

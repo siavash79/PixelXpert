@@ -57,23 +57,23 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	private static void refreshShadeColors() {
 		if(batteryColors == null) return;
 		
-		shadeColors = new int[batteryLevels.length*2+2];
+		shadeColors = new int[batteryLevels.size()*2+2];
 
 		shadeLevels = new float[shadeColors.length];
 		float prev = 0;
-		for(int i = 0; i < batteryLevels.length; i++)
+		for(int i = 0; i < batteryLevels.size(); i++)
 		{
-			float rangeLength = batteryLevels[i] - prev;
+			float rangeLength = batteryLevels.get(i) - prev;
 			shadeLevels[2*i]=(prev + rangeLength*.3f)/100;
 			shadeColors[2*i]=batteryColors[i];
 			
-			shadeLevels[2*i+1]=(batteryLevels[i] - rangeLength*.3f)/100;
+			shadeLevels[2*i+1]=(batteryLevels.get(i) - rangeLength*.3f)/100;
 			shadeColors[2*i+1]=batteryColors[i];
 			
-			prev = batteryLevels[i];
+			prev = batteryLevels.get(i);
 		}
 		
-		shadeLevels[shadeLevels.length-2] = (batteryLevels[batteryLevels.length-1]+(100-batteryLevels[batteryLevels.length-1])*.3f)/100;
+		shadeLevels[shadeLevels.length-2] = (batteryLevels.get(batteryLevels.size()-1)+(100-batteryLevels.get(batteryLevels.size()-1))*.3f)/100;
 		shadeColors[shadeColors.length-2] = Color.GREEN;
 		shadeLevels[shadeLevels.length-1] = 1f;
 		shadeColors[shadeColors.length-1] = Color.GREEN;
@@ -144,11 +144,11 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 		}
 		
 		if(!colorful || shadeColors == null) {
-			for (int i = 0; i < batteryLevels.length; i++) {
-				if (batteryLevel <= batteryLevels[i]) {
+			for (int i = 0; i < batteryLevels.size(); i++) {
+				if (batteryLevel <= batteryLevels.get(i)) {
 					if (transitColors && i > 0) {
-						float range = batteryLevels[i] - batteryLevels[i - 1];
-						float currentPos = batteryLevel - batteryLevels[i - 1];
+						float range = batteryLevels.get(i) - batteryLevels.get(i - 1);
+						float currentPos = batteryLevel - batteryLevels.get(i - 1);
 						float ratio = currentPos / range;
 						singleColor = ColorUtils.blendARGB(batteryColors[i - 1], batteryColors[i], ratio);
 					} else {

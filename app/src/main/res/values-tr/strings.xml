@@ -47,6 +47,8 @@
     <string name="album_art_blur_text">Bulanıklık derecesi</string>
     <string name="album_art_grayscale">Renkleri grileştir</string>
     <string name="shufflePin_title">Pin Rakamlarını Karıştır</string>
+    <string name="easy_unlock_title">Hızlı kilit açma (Pin/Parola)</string>
+    <string name="easy_unlock_sumamry">İlk kez çalışmazsa bir daha deneyin</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Ekranı kapatmak için iki kez dokunun</string>
@@ -61,6 +63,12 @@
     <string name="battery_hidden">Gizlenmiş</string>
     <string name="BIcon_Opacity_title">Opaklık</string>
     <string name="sb_center_fine_tune">İnce ayar merkez alanı</string>
+    <string name="sb_multi_row_system_icons">Çok satırlı sistem simgeleri (daha yüksek durum çubuğu yüksekliği gerekir)</string>
+    <string name="sb_multi_row_category">Çok satırlı sistem simgeleri</string>
+    <string name="sb_icon_sort_mode">Simge yerleştirme yöntemi</string>
+    <string name="sort_clean">Ağ sistemine uygun sığdır</string>
+    <string name="sort_tight">Maksimum öğeyi sığdırs</string>
+    <string name="sb_notification_limit">Maksimum bildirim simgeleri (Varsayılan 4\'tür)</string>
 
     <string name="lte_4g_icon_title">LTE / 4G Simgesi</string>
     <string name="combined_signal_icon_title">Birleşik sinyal simgeleri</string>
@@ -84,6 +92,7 @@
     <string name="sbc_after_color">Saatten sonrakı yazı</string>
     <string name="network_settings_pref">Ağ izleme ayarları...</string>
     <string name="ntsb_far_left">Tam Sol</string>
+    <string name="ntsb_far_left_extra">Tam sol - Bildirimlerin üstünde</string>
     <string name="ntsb_mid_left">Orta-Sol</string>
     <string name="ntsb_mid_right">Orta-Sağ</string>
     <string name="ntsb_category_title">Ağ İzleyicisi</string>
@@ -142,14 +151,16 @@
     <string name="qs_pulldown_side_title">Çabuk çekme tarafı</string>
     <string name="qs_pulldown_category">Hızlı ayarlar için aşağı çekin</string>
     <string name="qs_haptic_switch_title">Hızlı ayar butonuna tıklandığında titretme yap</string>
-    <string name="qs_rows_number">Hızlı ayar satır adeti</string>
+    <string name="qs_rows_number">Hızlı ayar satır sayısı</string>
+    <string name="qs_cols_number">Hızlı ayar kolon sayısı</string>
+    <string name="qqs_tiles_number">Üst hızlı ayar panelinde maksimum kutucuk sayısı (en fazla 2 satır)</string>
     <string name="qs_general_options">Hızlı ayar seçenekleri</string>
     <string name="qs_tiles_3_columns_title">3 hızlı ayar sütununu etkinleştir</string>
     <string name="qs_text_size_title">Hızlı ayar butonlarının metin boyutu</string>
     <string name="qs_text_size">Hızlı ayar butonlarının metin boyutunu küçült</string>
     <string name="wifi_cell_title">İnternet Kutucuğu</string>
     <string name="wifi_cell_on">WiFi ve Mobil internet için ayrı kutucukları kullan</string>
-    <string name="wifi_cell_off">Tek İnternet Kutucuğu kullan</string>
+    <string name="wifi_cell_off">Tek İnternet kutucuğu kullan</string>
     <string name="QQS_brightness_category">Parlaklık kaydırıcı seçenekleri</string>
     <string name="QQS_brightness_title">Üst hızlı ayar panelinde parlaklık kaydırıcısını göster</string>
     <string name="QQS_brightness_bottom_title">Parlaklık kaydırıcısını en alta taşı</string>
@@ -200,12 +211,16 @@
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Ekran görüntüsü sesini devre dışı bırak</string>
+    <string name="allow_all_screen_rotations">Tüm ekran dönüşmelerini etkinleştir</string>
+    <string name="allow_all_screen_rotations_summary">Yüzen manuel döndürme düğmesini de yok sayar</string>
+    <string name="force_no_cutout">Kamera kesimini yoksay</string>
+    <string name="volume_button_step_title">Ses ayarı adımları (%0\'dan %100\'e kadar)</string>
+
     <string name="so_power_longpress_torch_title">El feneri için güç tuşuna uzun basın*</string>
     <string name="so_taptaptorch_title">Çift Dokunmayla el fenerini Etkinleştir</string>
     <string name="so_taptaptorch_summary">Hızlı el feneri için kilit ekranına iki kez dokunun ve basılı tutun</string>
     <string name="so_fingerprint_sensor_enabled">Ekran kapalı olduğunda parmak izi sensörünün çalışmasına izin ver</string>
 
-    <string name="framework_needed_caution_summary">Lsposed\'da System Framework\'ün etkinleştirilmesi gerektirir. DİKKATLE KULLANIN</string>
     <string name="so_double_tap_wake_title">Telefonu uyandırmak için iki kez dokun</string>
     <string name="so_double_tap_wake_summary">Uyandırmak için tek dokunuşu devre dışı bırak</string>
     <string name="so_tap_proximity_wake_title">Ekran kapalıyken dokunduğunda uyandırma</string>
@@ -218,6 +233,11 @@
     <string name="expand_notifications_icons_title">"Tüm bildirimleri genişletme/daraltma butonu ekle</string>
     <string name="disable_overscroll">"Elastik aşırı kaydırma efektini devre dışı bırak</string>
     <string name="overscroll_on_summary">Önemli: LSPosed\'da aşırı kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
+    
+    <!-- Call section -->
+    <string name="call_category">Aramalar</string>
+    <string name="vibrate_on_call_active_title">Giden bir aramayı yanıtlarken titret</string>
+    <string name="vibrate_on_call_drop_title">Arama kesildiğinde/sonlandığında titret</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Google Sans yazı tipini sisteme yükle</string>
@@ -251,6 +271,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">Sol (Varsayılan)</string>
+    <string name="clock_default_extra">Sol - Bildirimlerin üstünde</string>
     <string name="clock_center">Merkez</string>
     <string name="clock_right">Sağ</string>
 
@@ -311,7 +332,10 @@
     <string name="reboot_notification_text">Değişiklikler yeniden başlatma sonra geçerli olacak</string>
     <string name="update_flavor_title">Kanalı güncelle</string>
     <string name="stable_flavor">Stabil</string>
-    <string name="canary_flavor">Beta sürüm</string>
+    <string name="canary_flavor" translatable="false">Canary</string>
+    <string name="update_type_title">Paket tipi</string>
+    <string name="full_type">Full paket</string>
+    <string name="xposed_type">Sadece Xposed</string>
     <string name="currentVersionTitle">Yüklenmiş versiyon: </string>
     <string name="lastestVersionTitle">Son versiyon: </string>
     <string name="root_not_here">ROOT ERİŞİMİ VERİLMEDİ!</string>
@@ -324,5 +348,8 @@
     <string name="reinstall_word">Yeniden indir ve yükle</string>
 
     <string name="title_activity_update">güncellemeAktivitesi</string>
+    
+    <string name="own_prefs_header">AOSPMods ayarları</string>
+    <string name="language_title">Dil seçimi</string>
     
 </resources>

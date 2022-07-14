@@ -74,16 +74,14 @@
         android:title="@string/BIcon_Opacity_title"
         app:updatesContinuously="true" />
 
-    <com.nfx.android.rangebarpreference.RangeBarPreferenceCompat
+    <sh.siava.rangesliderpreference.RangeSliderPreference
         android:key="BIconbatteryWarningRange"
         android:title="@string/BB_warning_level"
         android:summary="@string/BB_warning_tip"
-        app:rbp_measurementUnit="%"
-        app:rbp_tickStart="0"
-        app:rbp_tickEnd="100"
-        app:rbp_tickInterval="1"
-        app:rbp_view_defaultHighValue="15"
-        app:rbp_view_defaultLowValue="40" />
+        app:minVal="0"
+        app:maxVal="100"
+        app:tickInterval="1"
+        app:defaultValue="15,40" />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         android:defaultValue="-65536"

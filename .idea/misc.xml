@@ -73,12 +73,15 @@
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/sync_preferences.xml" value="0.1" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/theming_prefs.xml" value="0.18" />
         <entry key="..\:/Users/83018/AndroidStudioProjects/AOSPMods/app/src/main/res/xml/three_button_prefs.xml" value="0.2" />
+        <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/Submodules/RangeSliderPrefrence/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/Submodules/RangeSliderPrefrence/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.136" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/drawable/collapse_icon.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/drawable/exapnd_icon.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/drawable/ic_chevron_down.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/drawable/ic_chevron_up.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/drawable/ic_notification_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/drawable/ic_settings_lockscreen.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/layout/activity_update.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/layout/content_update.xml" value="0.22" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/layout/content_update2.xml" value="0.1" />
@@ -95,6 +98,7 @@
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/header_preferences.xml" value="0.2" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/lsqs_custom_text.xml" value="0.33" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/misc_prefs.xml" value="0.25" />
+        <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/own_prefs_header.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/range_screen.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/statusbar_settings.xml" value="0.22" />
         <entry key="..\:/Users/elbay/StudioProjects/AOSPMods_edit/app/src/main/res/layout/activity_update.xml" value="0.18541666666666667" />
@@ -123,6 +127,7 @@
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.4171875" />
         <entry key="app/src/main/res/xml/gesture_nav_perfs.xml" value="0.6904541241890639" />
         <entry key="app/src/main/res/xml/lock_screen_prefs.xml" value="0.3374094202898551" />
+        <entry key="app/src/main/res/xml/misc_prefs.xml" value="0.4444444444444444" />
         <entry key="app/src/main/res/xml/nav_prefs.xml" value="0.3374094202898551" />
         <entry key="app/src/main/res/xml/statusbar_batteryicon_prefs.xml" value="0.3374094202898551" />
         <entry key="app/src/main/res/xml/statusbar_clock_prefs.xml" value="0.29945328031809143" />

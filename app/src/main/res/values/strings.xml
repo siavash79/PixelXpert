@@ -116,9 +116,8 @@
     <string name="dual_tone_battery_on_summary">On (only works with portrait icon)</string>
     <string name="unread_messages_title">Show number of unread messages</string>
     <string name="status_bar_height">Status bar height (rotate screen to apply)</string>
-    <string name="status_bar_height_small">Small</string>
-    <string name="status_bar_height_medium">Medium</string>
-    <string name="fix_status_bar_padding">Correct left side padding</string>
+    <string name="sb_padding_title">Statusbar Padding</string>
+    <string name="sb_padding_summary">Setting the values to min/max is equivalent to device Default</string>
     <string name="sbbb_header">Battery bar settings</string>
     <string name="sbbIcon_header">Battery icon settings</string>
     <string name="BB_enable_title">Enable Battery Bar</string>
@@ -141,8 +140,8 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Build number in QS Panel footer</string>
     <string name="qs_footer_mod_title">Modify build text number in QS panel</string>
-    <string name="qs_footer_text_value">Enter custom text (Leave blank to remove completely)</string>
-    <string name="qs_footer_text_summary">Leave this blank to remove the text completely</string>
+    <string name="qs_footer_text_value">Enter custom text</string>
+    <string name="qs_footer_text_summary">Leave blank to remove completely</string>
     <string name="qs_footer_text_desc">Turn the display off/on to apply</string>
     <string name="light_qs_title">Apply light QS Panel when using light theme</string>
     <string name="light_dualtone_qs_title">Enable dual tone QS Panel</string>
@@ -196,7 +195,7 @@
     <string name="gesture_nav_pill_cat">Navigation bar pill</string>
     <string name="gesture_nav_pill_mod_title">Modify NavBar pill</string>
     <string name="gesture_nav_pill_width_title">Width compared to standard size</string>
-    <string name="gesture_nav_pill_height_title">Heighth compared to standard size</string>
+    <string name="gesture_nav_pill_height_title">Height compared to standard size</string>
     <string name="threebutton_header_title">3-Button navigation</string>
     <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
@@ -211,7 +210,10 @@
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
+    <string name="allow_all_screen_rotations">Force-unlock all screen rotations</string>
+    <string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
     <string name="force_no_cutout">Ignore the camera cutout</string>
+    <string name="volume_button_step_title">Volume steps (0 to 100%)</string>
 
     <string name="so_power_longpress_torch_title">Long press Power button for torch</string>
     <string name="so_taptaptorch_title">Enable double-tap for lockscreen torch</string>
@@ -230,6 +232,11 @@
     <string name="expand_notifications_icons_title">"Add expand/collapse all buttons</string>
     <string name="disable_overscroll">"Disable elastic overscroll effect</string>
     <string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for within LSPosed</string>
+
+    <!-- Call section -->
+    <string name="call_category">Phone calls</string>
+    <string name="vibrate_on_call_active_title">Vibrate on outgoing call answered</string>
+    <string name="vibrate_on_call_drop_title">Vibrate when call disconnects</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Force Google Sans font system-wide</string>
@@ -325,6 +332,9 @@
     <string name="update_flavor_title">Update channel</string>
     <string name="stable_flavor">Stable</string>
     <string name="canary_flavor" translatable="false">Canary</string>
+    <string name="update_type_title">Package Type</string>
+    <string name="full_type">Full</string>
+    <string name="xposed_type">Xposed Only</string>
     <string name="currentVersionTitle">Installed version: </string>
     <string name="lastestVersionTitle">Latest version: </string>
     <string name="root_not_here">ROOT ACCESS NOT GRANTED!</string>
@@ -338,4 +348,6 @@
 
     <string name="title_activity_update" translatable="false">updateActivity</string>
 
+    <string name="own_prefs_header">AOSPMods settings</string>
+    <string name="language_title">Language</string>
 </resources>

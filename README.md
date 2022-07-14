@@ -30,7 +30,7 @@ This is a mixed Xposed+Magisk module, which is made to allow customizations that
 - Double-tap to wake
 - Network Monitor
 - Statusbar Height
-- Statusbar Padding (for phones with left-corner camera)
+- Statusbar Padding
 - Quick Settings Row & Column numbers
 - Quick Settings tiles text size
 - Internet / Wifi + Cell Tiles
@@ -50,11 +50,20 @@ This is a mixed Xposed+Magisk module, which is made to allow customizations that
 - Longpress on settings icon (in QS) to launch AOSPMods manager
 - Expand/Collapse all notifications
 - Tablet taskbar (12.1+)
-- Music album art on lockscreen
+- Music album art on lockscreen (with blur / grayscale)
 - Dual-tone QS header
 - Pin code scramble for extra security
 - Disable over-scroll effect
 - VoLTE Icon
+- Double Tap Torch
+- Multi-row statusbar
+- Editable notification icon limit
+- Variable-supported text on lockscreen/AOD
+- Easy unlock
+- Option to disable fingerprint sensor while the screen is off
+- Option to ignore the display cutout
+- Option to adjust media volume steps  
+- Option to allow upside-down rotation
 
 Of course, this is an ongoing work and the feature list will get longer through time
 
@@ -77,6 +86,16 @@ This module is designed based on AOSP source code. What does it mean? it means t
 - Install the magisk module
 - Reboot (bootloops are not expected)
 - You can use AOSPMods app to configure the module
+
+The module is released in 2 flavors, which download and update procedures are different:
+- Stable release:  
+Manual Install/Update: through repository's Github release page (link below)  
+Automated updates: through magisk manager, or through in-app updater  
+- Canary release:  
+Manual Install/Update: only through repository's Actions page  
+Automated install/updates: only through in-app updater - updates will NOT appear in release section, and will NOT count against the module's download count  
+
+*No matter which flavor you're on, you can always switch to the other one with in-app updater
 
 **Credits / Thanks:**
 - Android Team

@@ -11,6 +11,7 @@ import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.animation.LayoutTransition;
 import android.content.Context;
@@ -40,9 +41,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.nfx.android.rangebarpreference.RangeBarHelper;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -55,14 +55,14 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
-import sh.siava.AOSPMods.Utils.ShyLinearLayout;
 import sh.siava.AOSPMods.Utils.NetworkTraffic;
 import sh.siava.AOSPMods.Utils.NotificationIconContainerOverride;
+import sh.siava.AOSPMods.Utils.ShyLinearLayout;
 import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 
@@ -112,7 +112,7 @@ public class StatusbarMods extends XposedModPack {
     private static boolean BBSetCentered;
     private static int BBOpacity = 100;
     private static int BBarHeight = 10;
-    private static float[] batteryLevels = new float[]{20f, 40f};
+    private static List<Float> batteryLevels = Arrays.asList(20f,40f);
     private static int[] batteryColors = new int[]{Color.RED, Color.YELLOW};
     private static int chargingColor = Color.WHITE;
     private static int fastChargingColor = Color.WHITE;
@@ -122,6 +122,7 @@ public class StatusbarMods extends XposedModPack {
     //endregion
     
     //region general use
+    private static final float PADDING_DEFAULT = -0.5f;
     private static final ArrayList<ClockVisibilityCallback> clockVisibilityCallbacks = new ArrayList<>();
     private Object mActivityStarter;
     private Object KIC = null;
@@ -143,6 +144,9 @@ public class StatusbarMods extends XposedModPack {
     private FrameLayout mNotificationIconContainer;
     private LinearLayout mLeftVerticalSplitContainer;
     private LinearLayout mLeftExtraRowContainer;
+    private static float SBPaddingStart = 0, SBPaddingEnd = 0;
+    private Object PSBV;
+
     //endregion
     
     //region volte
@@ -163,6 +167,7 @@ public class StatusbarMods extends XposedModPack {
     
     public StatusbarMods(Context context) {
         super(context);
+
         rightClockPadding = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("status_bar_clock_starting_padding", "dimen", mContext.getPackageName()));
         leftClockPadding = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("status_bar_left_clock_end_padding", "dimen", mContext.getPackageName()));
     }
@@ -172,41 +177,42 @@ public class StatusbarMods extends XposedModPack {
     
     public void updatePrefs(String...Key)
     {
-        if(XPrefs.Xprefs == null) return;
+        if(Xprefs == null) return;
 
-        NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(XPrefs.Xprefs.getString("NotificationIconLimit", "4"));
+        NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(Xprefs.getString("NotificationIconLimit", "4"));
 
-        centerAreaFineTune = XPrefs.Xprefs.getInt("centerAreaFineTune", 50);
+        centerAreaFineTune = Xprefs.getInt("centerAreaFineTune", 50);
         tuneCenterArea();
 
-        //region BatteryBar Settings
-        BBarEnabled = XPrefs.Xprefs.getBoolean("BBarEnabled", false);
-        BBarColorful = XPrefs.Xprefs.getBoolean("BBarColorful", false);
-        BBOnlyWhileCharging = XPrefs.Xprefs.getBoolean("BBOnlyWhileCharging", false);
-        BBOnBottom = XPrefs.Xprefs.getBoolean("BBOnBottom", false);
-        BBSetCentered = XPrefs.Xprefs.getBoolean("BBSetCentered", false);
-        BBOpacity = XPrefs.Xprefs.getInt("BBOpacity" , 100);
-        BBarHeight = XPrefs.Xprefs.getInt("BBarHeight" , 50);
-        BBarTransitColors = XPrefs.Xprefs.getBoolean("BBarTransitColors", false);
-        
-        String jsonString = XPrefs.Xprefs.getString("batteryWarningRange", "");
-        if(jsonString.length() > 0)
-        {
-            batteryLevels = new float[]{
-                    RangeBarHelper.getLowValueFromJsonString(jsonString),
-                    RangeBarHelper.getHighValueFromJsonString(jsonString)};
+        List<Float> paddings = RangeSliderPreference.getValues(Xprefs, "statusbarPaddings", 0);
+
+        if(paddings.size() > 1) {
+            SBPaddingStart = paddings.get(0);
+            SBPaddingEnd = 100f - paddings.get(1);
         }
-    
+
+        //region BatteryBar Settings
+        BBarEnabled = Xprefs.getBoolean("BBarEnabled", false);
+        BBarColorful = Xprefs.getBoolean("BBarColorful", false);
+        BBOnlyWhileCharging = Xprefs.getBoolean("BBOnlyWhileCharging", false);
+        BBOnBottom = Xprefs.getBoolean("BBOnBottom", false);
+        BBSetCentered = Xprefs.getBoolean("BBSetCentered", false);
+        BBOpacity = Xprefs.getInt("BBOpacity" , 100);
+        BBarHeight = Xprefs.getInt("BBarHeight" , 50);
+        BBarTransitColors = Xprefs.getBoolean("BBarTransitColors", false);
+
+        batteryLevels = RangeSliderPreference.getValues(Xprefs, "batteryWarningRange", 0);
+
         batteryColors = new int[]{
-                XPrefs.Xprefs.getInt("batteryCriticalColor", Color.RED),
-                XPrefs.Xprefs.getInt("batteryWarningColor", Color.YELLOW)};
+                Xprefs.getInt("batteryCriticalColor", Color.RED),
+                Xprefs.getInt("batteryWarningColor", Color.YELLOW)};
         
     
-        indicateFastCharging = XPrefs.Xprefs.getBoolean("indicateFastCharging", false);
-        indicateCharging = XPrefs.Xprefs.getBoolean("indicateCharging", true);
+        indicateFastCharging = Xprefs.getBoolean("indicateFastCharging", false);
+        indicateCharging = Xprefs.getBoolean("indicateCharging", true);
     
-        chargingColor = XPrefs.Xprefs.getInt("batteryChargingColor", Color.GREEN);
-        fastChargingColor = XPrefs.Xprefs.getInt("batteryFastChargingColor", Color.BLUE);
+        chargingColor = Xprefs.getInt("batteryChargingColor", Color.GREEN);
+        fastChargingColor = Xprefs.getInt("batteryFastChargingColor", Color.BLUE);
         
         if(BBarEnabled)
         {
@@ -221,31 +227,31 @@ public class StatusbarMods extends XposedModPack {
         
     
         //region network Traffic settings
-        networkOnSBEnabled = XPrefs.Xprefs.getBoolean("networkOnSBEnabled", false);
-        networkOnQSEnabled = XPrefs.Xprefs.getBoolean("networkOnQSEnabled", false);
-        String networkTrafficModeStr = XPrefs.Xprefs.getString("networkTrafficMode", "0");
+        networkOnSBEnabled = Xprefs.getBoolean("networkOnSBEnabled", false);
+        networkOnQSEnabled = Xprefs.getBoolean("networkOnQSEnabled", false);
+        String networkTrafficModeStr = Xprefs.getString("networkTrafficMode", "0");
         int networkTrafficMode = Integer.parseInt(networkTrafficModeStr);
 
-        boolean networkTrafficRXTop = XPrefs.Xprefs.getBoolean("networkTrafficRXTop", true);
-        int networkTrafficDLColor = XPrefs.Xprefs.getInt("networkTrafficDLColor", Color.GREEN);
-        int networkTrafficULColor = XPrefs.Xprefs.getInt("networkTrafficULColor", Color.RED);
-        int networkTrafficOpacity = XPrefs.Xprefs.getInt("networkTrafficOpacity", 100);
-        int networkTrafficInterval = XPrefs.Xprefs.getInt("networkTrafficInterval", 1);
-        boolean networkTrafficColorful = XPrefs.Xprefs.getBoolean("networkTrafficColorful", false);
+        boolean networkTrafficRXTop = Xprefs.getBoolean("networkTrafficRXTop", true);
+        int networkTrafficDLColor = Xprefs.getInt("networkTrafficDLColor", Color.GREEN);
+        int networkTrafficULColor = Xprefs.getInt("networkTrafficULColor", Color.RED);
+        int networkTrafficOpacity = Xprefs.getInt("networkTrafficOpacity", 100);
+        int networkTrafficInterval = Xprefs.getInt("networkTrafficInterval", 1);
+        boolean networkTrafficColorful = Xprefs.getBoolean("networkTrafficColorful", false);
 
 
         if(networkOnSBEnabled || networkOnQSEnabled)
         {
             networkTrafficPosition = -1; //anyway we have to call placer method
-            int newnetworkTrafficPosition = Integer.parseInt(XPrefs.Xprefs.getString("networkTrafficPosition", "2"));
+            int newnetworkTrafficPosition = Integer.parseInt(Xprefs.getString("networkTrafficPosition", "2"));
 
-            String thresholdText = XPrefs.Xprefs.getString("networkTrafficThreshold", "10");
+            String thresholdText = Xprefs.getString("networkTrafficThreshold", "10");
 
             int networkTrafficThreshold;
             try {
                 networkTrafficThreshold = Math.round(Float.parseFloat(thresholdText));
             }
-            catch (Exception e) {
+            catch (Exception ignored) {
                 networkTrafficThreshold = 10;
             }
             if(newnetworkTrafficPosition != networkTrafficPosition)
@@ -271,7 +277,7 @@ public class StatusbarMods extends XposedModPack {
         //endregion network settings
 
         //region vibration settings
-        boolean newshowVibrationIcon = XPrefs.Xprefs.getBoolean("SBshowVibrationIcon", false);
+        boolean newshowVibrationIcon = Xprefs.getBoolean("SBshowVibrationIcon", false);
         if(newshowVibrationIcon != showVibrationIcon)
         {
             showVibrationIcon = newshowVibrationIcon;
@@ -282,20 +288,20 @@ public class StatusbarMods extends XposedModPack {
 
         //region clock settings
 
-        clockPosition = Integer.parseInt(XPrefs.Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
-        mShowSeconds = XPrefs.Xprefs.getBoolean("SBCShowSeconds", false);
-        mAmPmStyle = Integer.parseInt(XPrefs.Xprefs.getString("SBCAmPmStyle", String.valueOf(AM_PM_STYLE_GONE)));
+        clockPosition = Integer.parseInt(Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
+        mShowSeconds = Xprefs.getBoolean("SBCShowSeconds", false);
+        mAmPmStyle = Integer.parseInt(Xprefs.getString("SBCAmPmStyle", String.valueOf(AM_PM_STYLE_GONE)));
 
-        mStringFormatBefore = XPrefs.Xprefs.getString("DateFormatBeforeSBC", "");
-        mStringFormatAfter = XPrefs.Xprefs.getString("DateFormatAfterSBC", "");
-        mBeforeSmall = XPrefs.Xprefs.getBoolean("BeforeSBCSmall", true);
-        mAfterSmall = XPrefs.Xprefs.getBoolean("AfterSBCSmall", true);
+        mStringFormatBefore = Xprefs.getString("DateFormatBeforeSBC", "");
+        mStringFormatAfter = Xprefs.getString("DateFormatAfterSBC", "");
+        mBeforeSmall = Xprefs.getBoolean("BeforeSBCSmall", true);
+        mAfterSmall = Xprefs.getBoolean("AfterSBCSmall", true);
 
-        if(XPrefs.Xprefs.getBoolean("SBCClockColorful", false))
+        if(Xprefs.getBoolean("SBCClockColorful", false))
         {
-            mClockColor = XPrefs.Xprefs.getInt("SBCClockColor", Color.WHITE);
-            mBeforeClockColor = XPrefs.Xprefs.getInt("SBCBeforeClockColor", Color.WHITE);
-            mAfterClockColor = XPrefs.Xprefs.getInt("SBCAfterClockColor", Color.WHITE);
+            mClockColor = Xprefs.getInt("SBCClockColor", Color.WHITE);
+            mBeforeClockColor = Xprefs.getInt("SBCBeforeClockColor", Color.WHITE);
+            mAfterClockColor = Xprefs.getInt("SBCAfterClockColor", Color.WHITE);
         }
         else
         {
@@ -307,7 +313,7 @@ public class StatusbarMods extends XposedModPack {
         
 
         if((mStringFormatBefore + mStringFormatAfter).trim().length() == 0) {
-            int SBCDayOfWeekMode = Integer.parseInt(XPrefs.Xprefs.getString("SBCDayOfWeekMode", "0"));
+            int SBCDayOfWeekMode = Integer.parseInt(Xprefs.getString("SBCDayOfWeekMode", "0"));
 
             switch (SBCDayOfWeekMode)
             {
@@ -345,13 +351,25 @@ public class StatusbarMods extends XposedModPack {
         
     
         //region volte
-        VolteIconEnabled = XPrefs.Xprefs.getBoolean("VolteIconEnabled", false);
+        VolteIconEnabled = Xprefs.getBoolean("VolteIconEnabled", false);
         if(VolteIconEnabled)
             initVolte();
         else
             removeVolte();
         //endregion
-        
+
+        if(Key.length > 0)
+        {
+            switch(Key[0])
+            {
+                case "statusbarPaddings":
+                    try {
+                        callMethod(PSBV, "updateStatusBarHeight");
+                    }catch (Throwable ignored){}
+                break;
+            }
+        }
+
     }
 
     private void placeNTQS() {
@@ -386,7 +404,6 @@ public class StatusbarMods extends XposedModPack {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
-        
 
         //region needed classes
         Class<?> ActivityStarterClass = findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
@@ -410,6 +427,36 @@ public class StatusbarMods extends XposedModPack {
         {
             CollapsedStatusBarFragmentClass = findClass("com.android.systemui.statusbar.phone.CollapsedStatusBarFragment", lpparam.classLoader);
         }
+        //endregion
+
+        //region SB Padding
+        hookAllConstructors(PhoneStatusBarViewClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                PSBV = param.thisObject;
+            }
+        });
+
+        hookAllMethods(PhoneStatusBarViewClass, "updateStatusBarHeight", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                View sbContentsView = ((View)param.thisObject).findViewById(mContext.getResources().getIdentifier("status_bar_contents", "id", listenPackage));
+                if(SBPaddingStart == PADDING_DEFAULT && SBPaddingEnd == PADDING_DEFAULT)
+                    return;
+
+                int screenWidth = mContext.getResources().getDisplayMetrics().widthPixels;
+
+                int paddingStart = SBPaddingStart == PADDING_DEFAULT
+                        ? sbContentsView.getPaddingStart()
+                        : Math.round(SBPaddingStart*screenWidth/100f);
+
+                int paddingEnd = SBPaddingEnd == PADDING_DEFAULT
+                        ? sbContentsView.getPaddingEnd()
+                        : Math.round(SBPaddingEnd*screenWidth/100f);
+
+                sbContentsView.setPaddingRelative(paddingStart, sbContentsView.getPaddingTop(), paddingEnd, sbContentsView.getPaddingBottom());
+            }
+        });
         //endregion
 
         //region multi row statusbar
@@ -456,14 +503,6 @@ public class StatusbarMods extends XposedModPack {
             }
         });
 
-/*        //getting statusbarview for further use
-        hookAllConstructors(PhoneStatusBarViewClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                STB = param.thisObject;
-            }
-        });*/
-        
         //update statusbar
         hookAllMethods(PhoneStatusBarViewClass, "onConfigurationChanged", new XC_MethodHook() {
             @Override

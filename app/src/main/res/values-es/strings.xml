@@ -116,10 +116,9 @@
     <string name="dual_tone_battery_on_summary">Activado (solo en modo horizontal)</string>
     <string name="unread_messages_title">Mostrar número de mensajes no leídos</string>
     <string name="status_bar_height">Anchura de barra de estado</string>
-    <string name="status_bar_height_small">Pequeña</string>
-    <string name="status_bar_height_medium">Media</string>
-    <string name="fix_status_bar_padding">Corregir espacio en el lado izquierdo</string>
-    <string name="sbbb_header">Barra de batería parámetros</string>
+    <string name="sb_padding_title">Padding de la barra de estado</string>
+    <string name="sb_padding_summary">Establecer los valores en min/max es equivalente al valor predeterminado del dispositivo</string>
+    <string name="sbbb_header">Configuración de la barra de batería</string>
 	<string name="sbbIcon_header">Ajustes de icono de batería</string>
     <string name="BB_enable_title">Activar barra de batería</string>
     <string name="BB_onlycharging_title">Solo mientras se carga</string>
@@ -211,6 +210,9 @@
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Desactivar sonido de captura de pantalla</string>
+    <string name="force_no_cutout">Ignora el recorte de la cámara</string>
+    <string name="volume_button_step_title">Pasos de volumen (0 a 100%)</string>
+
     <string name="so_power_longpress_torch_title">"Linterna manteniendo presionado el botón de encendido/apagado*"</string>
 	<string name="so_taptaptorch_title">Habilitar linterna con doble toque</string>
     <string name="so_taptaptorch_summary">Hacer doble toque y mantener la pantalla de bloqueo presionada para encender la linterna</string>

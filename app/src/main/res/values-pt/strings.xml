@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AOSP Mods</string>
     <string name="error_not_activated">Por favor, confirme que o módulo está ativado no gestor LSposed</string>
     <string name="lockscreen_header_title">Ecrã de bloqueio</string>
     <string name="statusbar_header">Barra de estado</string>
@@ -48,7 +47,7 @@
     <string name="back_height_title">Altura do gesto</string>
     <string name="gesturenav_header">Navegação por gestos</string>
     <string name="gesture_nav_pill_cat">Largura da barra de navegação</string>
-    <string name="gesture_nav_pill_mod_title">Personalizar a largura da barra</string>
+    <string name="gesture_nav_pill_mod_title">Personalizar barra de navegação</string>
     <string name="gesture_nav_pill_width_title">Largura em comparação com a padrão</string>
     <string name="sysui_restart_needed">Resquer reiniciar a IU do sistema</string>
     <string name="threebutton_header_title">Navegação com 3 botões</string>
@@ -57,7 +56,7 @@
     <string name="hide_default">Não mostrar (padrão)</string>
     <string name="pull_down_left">Esquerda</string>
     <string name="pull_down_right">Direita</string>
-    <string name="word_default">Padrão (requer reiniciar)</string>
+    <string name="word_default">Padrão</string>
     <string name="battery_circle">Círculo</string>
     <string name="battery_dashed_circle">Círculo pontilhado</string>
     <string name="clock_default">Esquerda (pdrão)</string>
@@ -82,7 +81,6 @@
     <string name="sb_vibration_switch_title">"Mostar os ícones vibrar/silêncio"</string>
     <string name="doze_header">"Enquanto o ecrã está desligado…"</string>
     <string name="so_power_longpress_torch_title">"Lanterna ao manter premido o botão ligar/desligar*"</string>
-    <string name="framework_needed_caution_summary">Requer ativar a Framework na Lsposed. USAR COM CUIDADO</string>
     <string name="battery_hidden">Escondida</string>
     <string name="hide_navbar_title">Esconder a barra de navegação</string>
     <string name="ntsb_far_left">Lado esquerdo</string>
@@ -115,17 +113,9 @@
     <string name="unread_messages_title">Mostrar nr. de mensagens não lidas</string>
     <string name="keyguard_left_shortcut">Mostrar atalho do lado esquerdo</string>
     <string name="status_bar_height">Altura da barra de estado</string>
-    <string name="status_bar_height_small">Pequena</string>
-    <string name="status_bar_height_medium">Média</string>
-    <string name="fix_status_bar_padding">Corrigir espaço do lado esquerdo</string>
     <string name="qs_tiles_3_columns_title">Ativar 3 colunas nas definições rápidas</string>
     <string name="qs_text_size_title">Tamanho do texto nos atalhos das definições rápidas</string>
     <string name="qs_text_size">Diminuir o tamanho do texto</string>
-    <string name="gesture_navbar_thickness_title">Espessura da barra de navegação</string>
-    <string name="gesture_navbar_thickness">Personalizar a espessura da barra</string>
-    <string name="gesture_navbar_thin">Fina</string>
-    <string name="gesture_navbar_thick">Espessa</string>
-    <string name="gesture_navbar_thicker">Mais espessa</string>
     <string name="colorpill_title">Colorir a barra de navegação</string>
     <string name="colorpill">Aplicar cor de destaque na barra</string>
     <string name="reducekeyboard_title">Espaço dos gestos no teclado</string>
@@ -164,7 +154,7 @@
     <string name="qstile_dual_tone_circle">Círculo de dois tons</string>
     <string name="qstile_squircle_trim">Quadrado Arredondado com gradiente</string>
     <string name="qstile_wavey">Ondulado</string>
-    <string name="qstile_pokesign">Signo Pokemon</string>
+    <string name="qstile_pokesign">Pokemon</string>
     <string name="qstile_ninja">Ninja</string>
     <string name="qstile_dottedcircle">Círculo Pontilhado</string>
     <string name="qstile_attemptmountain">Uma tentativa de uma montanha</string>
@@ -238,7 +228,7 @@
     <string name="sbc_before_color">Texto antes do relógio</string>
     <string name="sbc_color">Relógio</string>
     <string name="sbc_after_color">Texto depois do relógio</string>
-    <string name="menu_settings_title">Importar/Exportar</string>
+    <string name="menu_settings_title">"Importar/Exportar"</string>
     <string name="menu_netstat_title">Estatísticas de rede</string>
     <string name="menu_netstat_enable">Ativar estatísticas</string>
     <string name="menu_netstat_clear">Reiniciar estatísticas de rede</string>
@@ -249,7 +239,7 @@
     <string name="netstat_caution_no">Talvez mais tarde</string>
     <string name="netstat_enable_title">Captar estatísticas de rede</string>
     <string name="network_interval_custom_text_title">Intervalo de atualização</string>
-    <string name="minutes_word">minuto(s)</string>
+    <string name="minutes_word">"minuto(s)"</string>
     <string name="menu_updates">Atualizações da App</string>
     <string name="monitoring_category_title">Opções de monitorização</string>
     <string name="netstat_header">Definições das estatísticas de rede</string>
@@ -268,7 +258,7 @@
     <string name="update_checking">A verificar…</string>
     <string name="update_download_started">A descarregar - Toque na notificação quando terminar</string>
     <string name="update_word">Atualizar</string>
-    <string name="string_formatter_manual_body">Para além de texto normal é também possível inserir variáveis dinâmicas:\n\n$G\&lt;format\&gt; : Data Gregoriana, com formatação. Para documentação relativa à formatação, por favor pesquise por `Java Date Format`\nExemplo: $GMMM corresponde a: Jan (ou qualquer outro)\n\n$P&lt;format&gt; : Data Persa, com formatação\nExemplo: $Pyyyy corresponde a: 1401\n\n$Nrx : Total de Downloads diário\n$Ntx: Total de Uploads diário\n$Nall : Total de tráfego diário\n\nSe substituir $N por $Nc estatísticas de dados móveis estarão disponíveis (como $Ncrx para os downloads)\n\nExemplo:\n`Tráfego dos dados móveis para $GEEEE: $Ncall` corresponderá a:\n`Tráfego dos dados móveis para Terça-feira: 2GB`</string>
+    <string name="string_formatter_manual_body">"Para além de texto normal é também possível inserir variáveis dinâmicas:\n\n$G\&lt;format\&gt; : Data Gregoriana, com formatação. Para documentação relativa à formatação, por favor pesquise por `Java Date Format`\nExemplo: $GMMM corresponde a: Jan (ou qualquer outro)\n\n$P&lt;format&gt; : Data Persa, com formatação\nExemplo: $Pyyyy corresponde a: 1401\n\n$Nrx : Total de Downloads diário\n$Ntx: Total de Uploads diário\n$Nall : Total de tráfego diário\n\nSe substituir $N por $Nc estatísticas de dados móveis estarão disponíveis (como $Ncrx para os downloads)\n\nExemplo:\n`Tráfego dos dados móveis para $GEEEE: $Ncall` corresponderá a:\n`Tráfego dos dados móveis para Terça-feira: 2GB`"</string>
     <string name="menu_restart">Reiniciar</string>
     <string name="switch_branches">Alterar canal</string>
     <string name="reinstall_word">Reinstalar</string>
@@ -278,5 +268,31 @@
     <string name="album_art_grayscale">Escala de cinzentos</string>
     <string name="gesture_nav_pill_height_title">Espessura em comparação com a padrão</string>
     <string name="so_fingerprint_sensor_enabled">Permitir sensor de impressão digital com o ecrã desligado</string>
-    <string name="qs_footer_text_value">Insira um texto personalizado (deixe em branco para remover o existente)</string>
+    <string name="easy_unlock_title">"Desbloquear fácil (Pin/Password)"</string>
+    <string name="easy_unlock_sumamry">Se não funcionar à primeira, tente novamente</string>
+    <string name="sb_multi_row_system_icons">"Várias linhas para ícones de sistema (requer barra de estado mais espessa)"</string>
+    <string name="sb_multi_row_category">Várias linhas para ícones de sistema</string>
+    <string name="sb_icon_sort_mode">Método de colocação dos ícones</string>
+    <string name="sort_clean">Ajustar em grelha</string>
+    <string name="sort_tight">Ajustar o maior número de itens</string>
+    <string name="sb_notification_limit">"Número máximo de ícones de notificação (4 é o padrão)"</string>
+    <string name="ntsb_far_left_extra">Mais à esquerda - Acima das notificações</string>
+    <string name="qs_cols_number">Número de colunas das QS</string>
+    <string name="qqs_tiles_number">"Número de atalhos na QQS (2 linhas máx.)"</string>
+    <string name="force_no_cutout">Ignorar o notch da câmera</string>
+    <string name="clock_default_extra">Esquerda - Acima das notificações</string>
+    <string name="sb_padding_title">Espaçamento na barra de estado</string>
+    <string name="sb_padding_summary">"Os valores min/máx são os padrão"</string>
+    <string name="volume_button_step_title">Níveis de volume (0 a 100%)</string>
+    <string name="allow_all_screen_rotations">Permitir rotação em todas as direções</string>
+    <string name="allow_all_screen_rotations_summary">Irá ignorar o botão de rotação manual</string>
+    <string name="qs_footer_text_value">Inserir texto personalizado</string>
+    <string name="call_category">Chamadas telefónicas</string>
+    <string name="vibrate_on_call_active_title">Vibrar ao atender chamad</string>
+    <string name="vibrate_on_call_drop_title">Vibrar ao terminar chamada</string>
+    <string name="update_type_title">Tipo de pacote</string>
+    <string name="full_type">Completo</string>
+    <string name="xposed_type">Apenas Xposed</string>
+    <string name="own_prefs_header">Definições da app</string>
+    <string name="language_title">Idioma</string>
 </resources>

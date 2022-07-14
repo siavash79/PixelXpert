@@ -6,9 +6,14 @@ import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.LocaleList;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -24,19 +30,31 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-import com.nfx.android.rangebarpreference.RangeBarHelper;
 import com.topjohnwu.superuser.Shell;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import sh.siava.AOSPMods.Utils.PrefManager;
 import sh.siava.AOSPMods.Utils.SystemUtils;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class SettingsActivity extends AppCompatActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+
+    public static final int FULL_VERSION = 0;
+    public static final int XPOSED_ONLY = 1;
 
     private static final int REQUEST_IMPORT = 7;
     private static final int REQUEST_EXPORT = 9;
     private static final String TITLE_TAG = "settingsActivityTitle";
     Context DPContext;
+
+    @SuppressWarnings("FieldCanBeLocal")
+    public static int moduleType = XPOSED_ONLY;
+
+    public static boolean showOverlays, showFonts;
 
     public void backButtonEnabled() {
         ActionBar actionBar = getSupportActionBar();
@@ -53,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
@@ -70,8 +88,12 @@ public class SettingsActivity extends AppCompatActivity implements
 
         try {
             Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER)); //access full filesystem
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
+
+        moduleType = getVersionType();
+
+        showOverlays = moduleType == FULL_VERSION;
+        showFonts = moduleType == FULL_VERSION;
 
         setContentView(R.layout.settings_activity);
 
@@ -90,6 +112,40 @@ public class SettingsActivity extends AppCompatActivity implements
                 backButtonDisabled();
             }
         });
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(newBase.createDeviceProtectedStorageContext());
+
+        String localeCode = prefs.getString("appLanguage", "");
+
+        if(!localeCode.isEmpty()) {
+            Locale locale = Locale.forLanguageTag(localeCode);
+
+            Resources res = newBase.getResources();
+            Configuration configuration = res.getConfiguration();
+
+            configuration.setLocale(locale);
+
+            LocaleList localeList = new LocaleList(locale);
+            LocaleList.setDefault(localeList);
+            configuration.setLocales(localeList);
+
+            newBase = newBase.createConfigurationContext(configuration);
+        }
+
+        super.attachBaseContext(newBase);
+    }
+
+    public static int getVersionType() {
+        int result;
+        try {
+            result = Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", "/data/adb/modules/AOSPMods")).exec().getOut().get(0));
+        }
+        catch (Exception ignored){
+            result = XPOSED_ONLY;
+        }
+        return result;
     }
 
     private void createNotificationChannel() {
@@ -172,7 +228,6 @@ public class SettingsActivity extends AppCompatActivity implements
         return true;
     }
 
-
     @SuppressLint("ApplySharedPref")
     private void clearNetstatClick() {
         //showinng an alert before taking action
@@ -236,6 +291,13 @@ public class SettingsActivity extends AppCompatActivity implements
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.header_preferences, rootKey);
+
+            updateVisibility();
+        }
+
+        private void updateVisibility()
+        {
+            findPreference("theming_header").setVisible(showOverlays);
         }
     }
 
@@ -245,6 +307,12 @@ public class SettingsActivity extends AppCompatActivity implements
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.nav_prefs, rootKey);
+
+            updateVisibility();
+        }
+
+        private void updateVisibility() {
+            findPreference("HideNavbarOverlay").setVisible(showOverlays);
         }
 
     }
@@ -319,14 +387,13 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateVisibility(SharedPreferences prefs) {
             try {
-                String json = prefs.getString("batteryWarningRange", "");
-                boolean critZero = false;
-                boolean warnZero = false;
+                boolean critZero = false, warnZero = false;
+                List<Float> BBarLevels = RangeSliderPreference.getValues(prefs, "batteryWarningRange", 0);
 
-                if(!json.isEmpty())
+                if(!BBarLevels.isEmpty())
                 {
-                    critZero = RangeBarHelper.getLowValueFromJsonString(json) == 0;
-                    warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
+                    critZero = BBarLevels.get(0) == 0;
+                    warnZero = BBarLevels.get(1) == 0;
                 }
                 boolean bBarEnabled = prefs.getBoolean("BBarEnabled", false);
                 boolean isColorful = prefs.getBoolean("BBarColorful", false);
@@ -400,9 +467,16 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50) * 2 + getString(R.string.battery_size_summary));
 
                 int style = Integer.parseInt(prefs.getString("BatteryStyle", "0"));
-                String json = prefs.getString("BIconbatteryWarningRange", "");
-                boolean critZero = RangeBarHelper.getLowValueFromJsonString(json) == 0;
-                boolean warnZero = RangeBarHelper.getHighValueFromJsonString(json) == 0;
+
+                boolean critZero = false, warnZero = false;
+                List<Float> BIconLevels = RangeSliderPreference.getValues(prefs, "BIconbatteryWarningRange", 0);
+
+                if(!BIconLevels.isEmpty())
+                {
+                    critZero = BIconLevels.get(0) == 0;
+                    warnZero = BIconLevels.get(1) == 0;
+                }
+
                 boolean colorful = prefs.getBoolean("BIconColorful", false);
 
                 findPreference("DualToneBatteryOverlay").setVisible(style == 0);
@@ -425,15 +499,31 @@ public class SettingsActivity extends AppCompatActivity implements
 
 
     public static class MiscFragment extends PreferenceFragmentCompat {
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.misc_prefs, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+            updateVisibility(prefs);
 
         }
-    }
 
+        private void updateVisibility(SharedPreferences prefs) {
+            try {
+                int volumeStps = prefs.getInt("volumeStps", 0);
+                findPreference("volumeStps").setSummary(String.format("%s - (%s)",
+                        volumeStps == 10
+                                ? getString(R.string.word_default)
+                                : String.valueOf(volumeStps),
+                        getString(R.string.restart_needed)));
+
+                findPreference("CustomThemedIconsOverlay").setVisible(showOverlays);
+            } catch (Exception ignored){}
+        }
+    }
     @SuppressWarnings("ConstantConditions")
     public static class SBCFragment extends PreferenceFragmentCompat {
 
@@ -535,6 +625,8 @@ public class SettingsActivity extends AppCompatActivity implements
                 int QQSTileQty = sharedPreferences.getInt("QQSTileQty", 4);
                 findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQty));
 
+                findPreference("BSThickTrackOverlay").setVisible(showOverlays);
+                findPreference("QSTilesThemesOverlayEx").setVisible(showOverlays);
             } catch (Exception ignored) {}
         }
 
@@ -607,6 +699,8 @@ public class SettingsActivity extends AppCompatActivity implements
                 lp = leftGestureIndicator.getLayoutParams();
                 lp.height = edgeHeight;
                 leftGestureIndicator.setLayoutParams(lp);
+
+                findPreference("ReduceKeyboardSpaceOverlay").setVisible(showOverlays);
             } catch (Exception ignored) {}
         }
 
@@ -714,4 +808,30 @@ public class SettingsActivity extends AppCompatActivity implements
             prefs.registerOnSharedPreferenceChangeListener(listener);
         }
     }
+
+    @SuppressWarnings("ConstantConditions")
+    public static class OwnPrefsFragment extends PreferenceFragmentCompat {
+
+        SharedPreferences.OnSharedPreferenceChangeListener listener = this::onPrefChanged;
+
+        private void onPrefChanged(SharedPreferences sharedPreferences, String key) {
+            if(key.equals("appLanguage"))
+            {
+                try {
+                    getActivity().recreate();
+                }catch (Exception ignored){}
+            }
+        }
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            getPreferenceManager().setStorageDeviceProtected();
+            setPreferencesFromResource(R.xml.own_prefs_header, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+
+
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+        }
+    }
+
 }

@@ -17,6 +17,7 @@ import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.allApps.overScrollDisabler;
 import sh.siava.AOSPMods.android.StatusbarSize;
 import sh.siava.AOSPMods.android.screenOffKeys;
+import sh.siava.AOSPMods.android.screenRotation;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.systemui.BackToKill;
@@ -41,16 +42,20 @@ import sh.siava.AOSPMods.systemui.UDFPSManager;
 import sh.siava.AOSPMods.systemui.KeyguardCustomText;
 import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
 import sh.siava.AOSPMods.systemui.easyUnlock;
+import sh.siava.AOSPMods.telecom.CallVibrator;
 
 public class AOSPMods implements IXposedHookLoadPackage{
+    public static final String SYSTEM_UI_PACKAGE = "com.android.systemui";
+    public static final String SYSTEM_FRAMEWORK_PACKAGE = "android";
+    public static final String TELECOM_SERVER_PACKAGE = "com.android.server.telecom";
+    public static final String LAUNCHR_PACKAGE = "com.google.android.apps.nexuslauncher";
+
+    public static boolean isSecondProcess = false;
 
     public static ArrayList<Class<?>> modPacks = new ArrayList<>();
     public static ArrayList<XposedModPack> runningMods = new ArrayList<>();
     public Context mContext = null;
-    public static boolean isSecondProcess = false;
-    public static final String SYSTEM_UI_PACKAGE = "com.android.systemui";
-    public static final String SYSTEM_FRAMEWORK_PACKAGE = "android";
-    
+
     public AOSPMods()
     {
         //region Mod list definition
@@ -82,6 +87,8 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(MultiStatusbarRows.class);
         modPacks.add(QSTileGrid.class);
         modPacks.add(easyUnlock.class);
+        modPacks.add(screenRotation.class);
+        modPacks.add(CallVibrator.class);
         //endregion
     }
     
@@ -123,5 +130,4 @@ public class AOSPMods implements IXposedHookLoadPackage{
         new SystemUtils(context);
         XPrefs.loadPrefs(mContext);
     }
-    
 }

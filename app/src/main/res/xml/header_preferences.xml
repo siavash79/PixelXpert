@@ -35,6 +35,12 @@
         app:key="misc_header"
         app:title="@string/misc_header"
         app:icon="@drawable/ic_settings_miscellaneous" />
+
+    <Preference
+        app:fragment="sh.siava.AOSPMods.SettingsActivity$OwnPrefsFragment"
+        app:key="own_header"
+        app:title="@string/own_prefs_header"
+        app:icon="@drawable/ic_notification_foreground" />
     <!-- Let's remove this for the time being...
     <Preference
         app:fragment="sh.siava.AOSPMods.SettingsActivity$ScreenOffFragment"

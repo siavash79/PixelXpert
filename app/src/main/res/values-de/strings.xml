@@ -47,6 +47,9 @@
     <string name="album_art_blur_text">Unschärfewert</string>
     <string name="album_art_grayscale">Graustufen</string>
     <string name="shufflePin_title">Zufallsanordnung PIN</string>
+    <string name="easy_unlock_title">Einfaches Entsperren (Pin/Passwort)</string>
+    <string name="easy_unlock_sumamry">Wenn es beim ersten Mal nicht funktioniert hat, versuche es erneut</string>
+
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doppelt Tippen zum Sperren</string>
@@ -61,6 +64,13 @@
     <string name="battery_hidden">Versteckt</string>
     <string name="BIcon_Opacity_title">Sichtbarkeit</string>
     <string name="sb_center_fine_tune">Mittenbereich feinabstimmen</string>
+    <string name="sb_multi_row_system_icons">Mehrzeilige Systemsymbole (erfordert eine höhere Höhe der Statusleiste)</string>
+    <string name="sb_multi_row_category">Mehrzeilige Systemsymbole</string>
+    <string name="sb_icon_sort_mode">Icon-Platzierungsmethode</string>
+    <string name="sort_clean">In einem Raster sortieren</string>
+    <string name="sort_tight">Höchstzahl an Artikeln anpassen</string>
+    <string name="sb_notification_limit">Maximale Benachrichtigungssymbole (Standard ist 4)</string>
+
 
     <string name="lte_4g_icon_title">LTE / 4G Symbol</string>
     <string name="combined_signal_icon_title">Kombinierte Empfangssymbole</string>
@@ -84,6 +94,7 @@
     <string name="sbc_after_color">Text nach Uhr</string>
     <string name="network_settings_pref">Netzwerküberwachungseinstellungen...</string>
     <string name="ntsb_far_left">Ganz links</string>
+    <string name="ntsb_far_left_extra">Ganz links – über den Benachrichtigungen</string>
     <string name="ntsb_mid_left">Mitte links</string>
     <string name="ntsb_mid_right">Mitte rechts</string>
     <string name="ntsb_category_title">Netzwerkanzeige</string>
@@ -106,10 +117,9 @@
     <string name="dual_tone_battery_title">Aktivieren die Zweiton-Akkuanzeige</string>
     <string name="dual_tone_battery_on_summary">Ein (Funktioniert nur mit dem Portrait Symbol)</string>
     <string name="unread_messages_title">Zeige die Anzahl der ungelesenen Nachrichten</string>
-    <string name="status_bar_height">Statusleistenhöhe</string>
-    <string name="status_bar_height_small">Klein</string>
-    <string name="status_bar_height_medium">Mittel</string>
-    <string name="fix_status_bar_padding">Korrigiere den Abstand links</string>
+    <string name="status_bar_height">Höhe der Statusleiste (zum Anwenden Bildschirm drehen)</string>
+    <string name="sb_padding_title">Statusleistenauffüllung</string>
+    <string name="sb_padding_summary">Das Festlegen der Werte auf min/max entspricht dem Gerätestandard</string>
     <string name="sbbb_header">Akkuleisten Optionen...</string>
     <string name="sbbIcon_header">Akkusymbol Einstellungen</string>
     <string name="BB_enable_title">Aktiviere Akkuleiste</string>
@@ -143,6 +153,8 @@
     <string name="qs_pulldown_category">Schnelleinstellungen herunterziehen</string>
     <string name="qs_haptic_switch_title">Vibriere beim berühren eines Schnelleinstellungs Tab </string>
     <string name="qs_rows_number">Anzahl Reihen in den Schnelleinstellungen</string>
+    <string name="qs_cols_number">Anzahl der QS-Spalten</string>
+    <string name="qqs_tiles_number">Maximale Kacheln in Quick QS (max. 2 Zeilen)</string>
     <string name="qs_general_options">Schnelleinstellungs Optionen</string>
     <string name="qs_tiles_3_columns_title">Aktiviere 3 Spalten Schnelleinstellungen</string>
     <string name="qs_text_size_title">Schnelleinstellungselemente Schriftgröße</string>
@@ -200,12 +212,14 @@
 	
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Deaktiviere Screenshot Ton</string>
+    <string name="force_no_cutout">Kameraausschnitt ignorieren</string>
+    <string name="volume_button_step_title">Lautstärkeschritte (0 bis 100%)</string>		
+	
     <string name="so_power_longpress_torch_title">Einschalter lange drücken für Taschenlampe*</string>
     <string name="so_taptaptorch_title">Aktivieren die Doppeltipp-Taschenlampe</string>
     <string name="so_taptaptorch_summary">Doppeltippen auf die Sperrbildschirmanzeige und halten dann den Finger auf dem Sperrbildschirm, fur Fackel</string>
     <string name="so_fingerprint_sensor_enabled">Fingerabdrucksensor zulassen, wenn der Bildschirm ausgeschaltet ist</string>
 
-    <string name="framework_needed_caution_summary">Benötigt die Aktivierung des System Frameworks in LSposed. BENUTZE ES MIT VORSICHT</string>
     <string name="so_double_tap_wake_title">Doppelt Tippen zum Aufwecken des Telefons</string>
     <string name="so_double_tap_wake_summary">Deaktiviert einzelnes Tippen</string>
     <string name="so_tap_proximity_wake_title">Nicht bei Berührung aufwachen, wenn der Bildschirm abgedeckt ist</string>
@@ -251,6 +265,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">links (Standart)</string>
+    <string name="clock_default_extra">Links - Über Benachrichtigungen</string>
     <string name="clock_center">zentriert</string>
     <string name="clock_right">rechts</string>
 
@@ -324,5 +339,8 @@
     <string name="reinstall_word">Neu installieren</string>
 
     <string name="title_activity_update" translateable="false">updateActivity</string>
+	
+	<string name="own_prefs_header">AOSPMods-Einstellungen</string>
+    <string name="language_title">Sprache auswählen</string>
 
 </resources>

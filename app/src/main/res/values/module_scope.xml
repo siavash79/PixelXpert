@@ -4,5 +4,6 @@
         <item>com.android.systemui</item> <!-- systemUI -->
         <item>com.google.android.apps.nexuslauncher</item> <!-- Pixel Launcher - Taskbar -->
         <item>android</item>  <!-- System Framework -->
+        <item>com.android.phone</item> <!-- phone services -->
     </string-array>
 </resources>

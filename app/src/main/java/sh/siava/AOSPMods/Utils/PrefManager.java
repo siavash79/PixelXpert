@@ -40,7 +40,7 @@ public class PrefManager {
 		try {
 			objectInputStream = new ObjectInputStream(inputStream);
 			map = (Map) objectInputStream.readObject();
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (Exception e) {
 			Log.e(TAG, "Error deserializing preferences", BuildConfig.DEBUG ? e : null);
 			return false;
 		} finally {

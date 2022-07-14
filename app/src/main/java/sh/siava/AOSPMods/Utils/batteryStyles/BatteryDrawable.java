@@ -2,7 +2,9 @@ package sh.siava.AOSPMods.Utils.batteryStyles;
 
 import android.graphics.drawable.Drawable;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public abstract class BatteryDrawable extends Drawable {
 	
@@ -17,7 +19,7 @@ public abstract class BatteryDrawable extends Drawable {
 	
 	
 	public static boolean colorful;
-	public static float[] batteryLevels = new float[0];
+	public static List<Float> batteryLevels = new ArrayList<>();
 	public static int[] batteryColors;
 	public static boolean showCharging = false;
 	public static boolean showFastCharging = false;
@@ -27,7 +29,7 @@ public abstract class BatteryDrawable extends Drawable {
 	
 	public static long lastVarUpdate = -1;
 	
-	public static void setStaticColor(float[] batteryLevels, int[] batteryColors, boolean indicateCharging, int chargingColor, boolean indicateFastCharging, int fastChargingColor, boolean transitColors, boolean colorful) {
+	public static void setStaticColor(List<Float> batteryLevels, int[] batteryColors, boolean indicateCharging, int chargingColor, boolean indicateFastCharging, int fastChargingColor, boolean transitColors, boolean colorful) {
 		BatteryDrawable.batteryColors = batteryColors;
 		BatteryDrawable.batteryLevels = batteryLevels;
 		BatteryDrawable.showCharging = indicateCharging;

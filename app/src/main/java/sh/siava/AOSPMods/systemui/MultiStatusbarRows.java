@@ -4,15 +4,12 @@ import static de.robv.android.xposed.XposedHelpers.*;
 import static de.robv.android.xposed.XposedBridge.*;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.FlexStatusIconContainer;
@@ -25,7 +22,6 @@ public class MultiStatusbarRows extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
     private static boolean systemIconsMultiRow = false;
-    private Object ma;
 
     public MultiStatusbarRows(Context context) {
         super(context);
@@ -48,7 +44,6 @@ public class MultiStatusbarRows extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
-        Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
         Class<?> IconManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconController$IconManager", lpparam.classLoader);
 
         hookAllConstructors(IconManagerClass, new XC_MethodHook() {
@@ -59,7 +54,8 @@ public class MultiStatusbarRows extends XposedModPack {
                 try {
                     View linear = (View)param.args[0];
 
-                    mContext.getResources().getResourceName(((View)linear.getParent()).getId()); //helps getting exception if it's in QS
+                    String id = mContext.getResources().getResourceName(((View)linear.getParent().getParent()).getId()); //helps getting exception if it's in QS
+                    if(!id.contains("system_icon_area")) return;
 
                     FlexStatusIconContainer flex = new FlexStatusIconContainer(mContext, lpparam.classLoader);
                     flex.setPadding(linear.getPaddingLeft(), 0, linear.getPaddingRight(), 0);

@@ -1,3 +1,6 @@
+**canary-79**  
+- Buxfixes (Github 273-274)  
+  
 **canary-78**  
 - Translation improvement (Turkish, Russian, Portuguese, German)  
 - Language settings bugfixes  

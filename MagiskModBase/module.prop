@@ -5,4 +5,3 @@ versionCode=78
 author=Siavash79 + ElTifo
 description=Xposed based module for customizations on SystemUI on AOSP based roms. Supports Android 12+
 minMagisk=24200
-updateJson=https://raw.githubusercontent.com/siavash79/AOSPMods/master/MagiskModuleUpdate.json

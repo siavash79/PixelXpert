@@ -31,6 +31,7 @@ public class StatusbarSize extends XposedModPack {
     static boolean noCutoutEnabled = true;
     int currentHeight = 0;
     boolean edited = false; //if we touched it once during this instance, we'll have to continue setting it even if it's the original value
+    private static boolean allScreenRotations;
 
 
     public StatusbarSize(Context context) {
@@ -44,9 +45,10 @@ public class StatusbarSize extends XposedModPack {
         if(Xprefs == null) return;
 
         noCutoutEnabled = Xprefs.getBoolean("noCutoutEnabled", false);
+        allScreenRotations = Xprefs.getBoolean("allScreenRotations", false);
 
         sizeFactor = Xprefs.getInt("statusbarHeightFactor", 100);
-        if(sizeFactor != 100 || edited)
+        if(sizeFactor != 100 || edited || allScreenRotations)
             currentHeight = Math.round(
                     mContext.getResources().getDimensionPixelSize(
                             mContext.getResources().getIdentifier(

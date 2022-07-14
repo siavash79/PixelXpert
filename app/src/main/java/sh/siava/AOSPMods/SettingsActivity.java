@@ -118,18 +118,23 @@ public class SettingsActivity extends AppCompatActivity implements
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(newBase.createDeviceProtectedStorageContext());
 
         String localeCode = prefs.getString("appLanguage", "");
-        Locale locale = (localeCode.length() > 0) ? Locale.forLanguageTag(localeCode) : Locale.getDefault();
 
-        Resources res = newBase.getResources();
-        Configuration configuration = res.getConfiguration();
+        if(!localeCode.isEmpty()) {
+            Locale locale = Locale.forLanguageTag(localeCode);
 
-        configuration.setLocale(locale);
+            Resources res = newBase.getResources();
+            Configuration configuration = res.getConfiguration();
 
-        LocaleList localeList = new LocaleList(locale);
-        LocaleList.setDefault(localeList);
-        configuration.setLocales(localeList);
+            configuration.setLocale(locale);
 
-        super.attachBaseContext(newBase.createConfigurationContext(configuration));
+            LocaleList localeList = new LocaleList(locale);
+            LocaleList.setDefault(localeList);
+            configuration.setLocales(localeList);
+
+            newBase = newBase.createConfigurationContext(configuration);
+        }
+
+        super.attachBaseContext(newBase);
     }
 
     public static int getVersionType() {
@@ -812,9 +817,9 @@ public class SettingsActivity extends AppCompatActivity implements
         private void onPrefChanged(SharedPreferences sharedPreferences, String key) {
             if(key.equals("appLanguage"))
             {
-                sharedPreferences.edit().commit();
-                getActivity().finish();
-                startActivity(getActivity().getIntent());
+                try {
+                    getActivity().recreate();
+                }catch (Exception ignored){}
             }
         }
 

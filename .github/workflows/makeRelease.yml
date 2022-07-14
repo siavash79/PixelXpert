@@ -41,13 +41,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: "32.0.0"
-
-      - uses: actions/upload-artifact@v2
-        name: Upload APK file
-        with:
-          name: AOSPMods.apk
-          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+          BUILD_TOOLS_VERSION: "33.0.0"
 
       - name: Run the zip script
         run: .github/make_zip.sh
@@ -68,7 +62,7 @@ jobs:
           body_path: 'releaseNotes.md'
           prerelease: false
           draft: true
-          asset_files: 'output/AOSPMods.zip'
+          asset_files: 'output'
 
       - name: Commit version bump
         uses: github-actions-x/commit@v2.9
@@ -77,6 +71,14 @@ jobs:
           push-branch: 'stable'
           commit-message: 'Version update: Release'
           force-add: 'true'
-          files: MagiskMod/module.prop app/build.gradle MagiskModuleUpdate.json MagiskChangelog.md
+          files: MagiskModBase/module.prop MagiskModAddon/module.prop app/build.gradle MagiskModuleUpdate.json MagiskModuleUpdate_Full.json MagiskModuleUpdate_Xposed.json MagiskChangelog.md
           name: GitHub
           email: aospmods@siava.sh
+
+      - name: Inform Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: ${{ env.TMessage }}
+          format: markdown

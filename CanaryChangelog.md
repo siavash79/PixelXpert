@@ -1,3 +1,7 @@
+**canary-78**  
+- Translation improvement (Turkish, Russian, Portuguese, German)  
+- Language settings bugfixes  
+  
 **canary-77**  
 - Added option to choose app language  
 - Bugfixes  

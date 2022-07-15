@@ -22,10 +22,14 @@ sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/rele
 sed -i 's/"version":.*/"version": "'$NEWVERNAME'",/' MagiskModuleUpdate_Full.json
 sed -i 's/"versionCode":.*/"versionCode": '$NEWVERCODE',/' MagiskModuleUpdate_Full.json
 sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Full.zip",/' MagiskModuleUpdate_Full.json
+sed -i 's/"zipUrl_FUll":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Full.zip",/' MagiskModuleUpdate_Full.json
+sed -i 's/"zipUrl_Xposed":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Xposed.zip",/' MagiskModuleUpdate_Full.json
 
 sed -i 's/"version":.*/"version": "'$NEWVERNAME'",/' MagiskModuleUpdate_Xposed.json
 sed -i 's/"versionCode":.*/"versionCode": '$NEWVERCODE',/' MagiskModuleUpdate_Xposed.json
 sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Xposed.zip",/' MagiskModuleUpdate_Xposed.json
+sed -i 's/"zipUrl_FUll":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Full.zip",/' MagiskModuleUpdate_Xposed.json
+sed -i 's/"zipUrl_Xposed":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Xposed.zip",/' MagiskModuleUpdate_Xposed.json
 
 # module changelog
 echo "**$NEWVERNAME**" > newChangeLog.md

@@ -1,3 +1,6 @@
+**canary-81**  
+- Bugfix stable xposed channel update  
+  
 **canary-80**  
 - Bugfix stable xposed channel update  
   

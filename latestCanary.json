@@ -1,7 +1,0 @@
-{
-    "version": "canary-78",
-    "versionCode": 78,
-    "zipUrl_Xposed": "https://nightly.link/siavash79/AOSPMods/actions/runs/2670863567/AOSPMods_Xposed.zip",
-    "zipUrl_Full": "https://nightly.link/siavash79/AOSPMods/actions/runs/2670863567/AOSPMods_Full.zip",
-    "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/CanaryChangelog.md"
-}

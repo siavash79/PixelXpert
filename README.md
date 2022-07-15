@@ -1,5 +1,5 @@
 [![Latest Release](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Download)](https://github.com/siavash79/AOSPMods/releases/latest)
-![Total Downloads](https://img.shields.io/github/downloads/siavash79/aospmods/total?color=red&label=Total%20Downloads)
+![Downloads - Stable channel](https://img.shields.io/github/downloads/siavash79/aospmods/total?color=red&label=Total%20Downloads)
 
 ![Header Image](https://raw.githubusercontent.com/siavash79/AOSPMods/master/.github/AOSP_Mods_Header.png)
 <div align="center">

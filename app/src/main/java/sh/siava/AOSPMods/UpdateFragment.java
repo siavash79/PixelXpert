@@ -41,7 +41,7 @@ import sh.siava.AOSPMods.databinding.UpdateFragmentBinding;
 import us.feras.mdv.MarkdownView;
 
 public class UpdateFragment extends Fragment {
-    private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskModuleUpdate.json";
+    private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskModuleUpdate_Full.json";
     private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestCanary.json";
     DownloadManager downloadManager;
     long downloadID = 0; //from download manager

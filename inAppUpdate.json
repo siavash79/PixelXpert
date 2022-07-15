@@ -1,0 +1,7 @@
+{
+    "version": "1.3.0",
+    "versionCode": 79,
+    "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskChangelog.md",
+    "zipUrl_Full": "https://github.com/siavash79/AOSPMods/releases/download/v1.3.0/AOSPMods_Full.zip",
+    "zipUrl_Xposed": "https://github.com/siavash79/AOSPMods/releases/download/v1.3.0/AOSPMods_Xposed.zip"
+}

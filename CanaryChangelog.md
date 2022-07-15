@@ -1,3 +1,6 @@
+**canary-80**  
+- Bugfix stable xposed channel update  
+  
 **canary-79**  
 - Buxfixes (Github 273-274)  
   

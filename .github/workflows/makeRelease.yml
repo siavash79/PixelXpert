@@ -22,8 +22,8 @@ jobs:
       - name: Grant permission shell scripts
         run: chmod +x .github/*.sh
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Update Versions
         run: .github/bumpVersion.sh

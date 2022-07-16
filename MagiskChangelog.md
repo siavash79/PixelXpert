@@ -1,3 +1,6 @@
+**1.3.1**
+- Updater bugfix  
+    
 **1.3.0**
 - [Misc] Added option to adjust media volume steps (Misc)  
 - [App] UI improvements  

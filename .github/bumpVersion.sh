@@ -52,4 +52,5 @@ echo "*Changelog:*  " >> telegram.msg
 cat .github/workflowFiles/FutureChanageLog.md >> telegram.msg
 echo 'TMessage<<EOF' >> $GITHUB_ENV
 cat telegram.msg >> $GITHUB_ENV
+echo >> $GITHUB_ENV
 echo 'EOF' >> $GITHUB_ENV

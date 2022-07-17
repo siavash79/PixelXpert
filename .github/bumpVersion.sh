@@ -31,8 +31,8 @@ sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/rele
 #In-app updater
 sed -i 's/"version":.*/"version": "'$NEWVERNAME'",/' latestStable.json
 sed -i 's/"versionCode":.*/"versionCode": '$NEWVERCODE',/' latestStable.json
-sed -i 's/"zipUrl_FUll":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Full.zip",/' latestStable.json
-sed -i 's/"zipUrl_Xposed":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Xposed.zip",/' latestStable.json
+sed -i 's/"zipUrl_FUll":.*/"zipUrl_FUll": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Full.zip",/' latestStable.json
+sed -i 's/"zipUrl_Xposed":.*/"zipUrl_Xposed": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Xposed.zip",/' latestStable.json
 
 # module changelog
 echo "**$NEWVERNAME**" > newChangeLog.md

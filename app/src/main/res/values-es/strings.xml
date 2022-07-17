@@ -210,6 +210,8 @@
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Desactivar sonido de captura de pantalla</string>
+    <string name="allow_all_screen_rotations">Forzar el desbloqueo de todas las rotaciones de pantalla</string>
+    <string name="allow_all_screen_rotations_summary">También ignorará el botón flotante de rotación manual</string>
     <string name="force_no_cutout">Ignora el recorte de la cámara</string>
     <string name="volume_button_step_title">Pasos de volumen (0 a 100%)</string>
 
@@ -230,6 +232,11 @@
     <string name="expand_notifications_icons_title">"Agregar expandir/contraer todos los botones</string>
 	<string name="disable_overscroll">"Deshabilitar el efecto de desplazamiento elástico</string>
 	<string name="overscroll_on_summary">Importante: DEBE habilitar las aplicaciones para las que desea deshabilitar el desplazamiento excesivo, en LSPosed</string>
+
+    <!-- Call section -->
+    <string name="call_category">Llamadas telefónicas</string>
+    <string name="vibrate_on_call_active_title">Vibrar cuenado la llamada saliente es respondida</string>
+    <string name="vibrate_on_call_drop_title">Vibrar cuando se desconecta la llamada</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Forzar la fuente Google Sans en todo el sistema</string>
@@ -325,6 +332,9 @@
     <string name="update_flavor_title">Actualizar canal</string>
     <string name="stable_flavor">Estable</string>
     <string name="canary_flavor" translatable="false">Canary</string>
+    <string name="update_type_title">Tipo de paquete</string>
+    <string name="full_type">Completo</string>
+    <string name="xposed_type">Solo Xposed</string>
     <string name="currentVersionTitle">Versión instalada: </string>
     <string name="lastestVersionTitle">Ultima versión: </string>
     <string name="root_not_here">ACCESO ROOT NO OTORGADO!</string>
@@ -338,4 +348,6 @@
 
     <string name="title_activity_update" translatable="false">updateActivity</string>
     
+    <string name="own_prefs_header">Configuración de AOSPMods</string>
+    <string name="language_title">Idioma</string>
 </resources>

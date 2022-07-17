@@ -1,3 +1,6 @@
+**1.3.2**
+- [Statusbar] bugfixes  
+- [QS Panel] bugfixes  
 **1.3.1**
 - Updater bugfix  
     

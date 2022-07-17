@@ -1,3 +1,6 @@
+**canary-83**  
+- Fix multi-row statusbar on default height in landscape mode  
+  
 **canary-82**  
 - Fix QQS tile layout in landscape while playing music IF QS column count and QQS tile count is modified  
   

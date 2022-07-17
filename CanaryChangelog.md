@@ -1,3 +1,6 @@
+**canary-82**  
+- Fix QQS tile layout in landscape while playing music IF QS column count and QQS tile count is modified  
+  
 **canary-81**  
 - Bugfix stable xposed channel update  
   

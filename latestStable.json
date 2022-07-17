@@ -3,5 +3,5 @@
     "versionCode": 83,
     "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskChangelog.md",
     "zipUrl_Full": "https://github.com/siavash79/AOSPMods/releases/download/v1.3.1/AOSPMods_Full.zip",
-    "zipUrl": "https://github.com/siavash79/AOSPMods/releases/download/v1.3.2/AOSPMods_Xposed.zip",
+    "zip_Xposed": "https://github.com/siavash79/AOSPMods/releases/download/v1.3.2/AOSPMods_Xposed.zip",
 }

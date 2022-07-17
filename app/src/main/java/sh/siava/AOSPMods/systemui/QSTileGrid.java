@@ -1,16 +1,20 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.findClass;
 import static sh.siava.AOSPMods.ResourceManager.resparams;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.XposedModPack;
 
+@SuppressWarnings("RedundantThrows")
 public class QSTileGrid extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
@@ -40,10 +44,21 @@ public class QSTileGrid extends XposedModPack {
             SystemUtils.doubleToggleDarkMode();
         }
     }
-
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage)) return;
+
+        Class<?> TileLayoutClass = findClass("com.android.systemui.qs.TileLayout", lpparam.classLoader);
+
+        // when media is played, system reverts tile cols to default value of 2. handling it:
+        hookAllMethods(TileLayoutClass, "setMaxColumns", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                if(QSColQty != NOT_SET) {
+                    param.args[0] = QSColQty;
+                }
+            }
+        });
 
         setResources();
     }

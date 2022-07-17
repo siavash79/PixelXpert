@@ -1,2 +1,2 @@
-- Updater bugfix  
-  
+- [Statusbar] bugfixes  
+- [QS Panel] bugfixes

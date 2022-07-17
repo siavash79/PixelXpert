@@ -3,6 +3,8 @@ package sh.siava.AOSPMods.android;
 import static de.robv.android.xposed.XposedHelpers.*;
 import static de.robv.android.xposed.XposedBridge.*;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
+import static sh.siava.AOSPMods.systemui.StatusbarMods.POSITION_LEFT;
+import static sh.siava.AOSPMods.systemui.StatusbarMods.POSITION_LEFT_EXTRA_LEVEL;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -31,8 +33,7 @@ public class StatusbarSize extends XposedModPack {
     static boolean noCutoutEnabled = true;
     int currentHeight = 0;
     boolean edited = false; //if we touched it once during this instance, we'll have to continue setting it even if it's the original value
-    private static boolean allScreenRotations;
-
+    private boolean mForceApplyHeight = false;
 
     public StatusbarSize(Context context) {
         super(context);
@@ -45,10 +46,15 @@ public class StatusbarSize extends XposedModPack {
         if(Xprefs == null) return;
 
         noCutoutEnabled = Xprefs.getBoolean("noCutoutEnabled", false);
-        allScreenRotations = Xprefs.getBoolean("allScreenRotations", false);
+
+        mForceApplyHeight = Xprefs.getBoolean("allScreenRotations", false) //Particularly used for rotation Status bar
+                || noCutoutEnabled
+                || Xprefs.getBoolean("systemIconsMultiRow", false)
+                || Integer.parseInt(Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT))) == POSITION_LEFT_EXTRA_LEVEL
+                || (Xprefs.getBoolean("networkOnSBEnabled", false) && Integer.parseInt(Xprefs.getString("networkTrafficPosition", "2")) == POSITION_LEFT_EXTRA_LEVEL);
 
         sizeFactor = Xprefs.getInt("statusbarHeightFactor", 100);
-        if(sizeFactor != 100 || edited || allScreenRotations || noCutoutEnabled)
+        if(sizeFactor != 100 || edited || mForceApplyHeight)
             currentHeight = Math.round(
                     mContext.getResources().getDimensionPixelSize(
                             mContext.getResources().getIdentifier(
@@ -108,7 +114,7 @@ public class StatusbarSize extends XposedModPack {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     try {
-                        if(sizeFactor == 100 && !edited && !allScreenRotations && !noCutoutEnabled) return;
+                        if(sizeFactor == 100 && !edited && !mForceApplyHeight) return;
                         edited = true;
                         param.setResult(currentHeight);
                     }catch (Throwable ignored){}

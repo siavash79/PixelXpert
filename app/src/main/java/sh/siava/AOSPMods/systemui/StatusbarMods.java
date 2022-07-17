@@ -70,14 +70,14 @@ public class StatusbarMods extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
     //region battery
-    private static final int CHARGING_FAST = 2;
+    public static final int CHARGING_FAST = 2;
     //endregion
     
     //region Clock
-    private static final int POSITION_LEFT = 0;
-    private static final int POSITION_CENTER = 1;
-    private static final int POSITION_RIGHT = 2;
-    private static final int POSITION_LEFT_EXTRA_LEVEL = 3;
+    public static final int POSITION_LEFT = 0;
+    public static final int POSITION_CENTER = 1;
+    public static final int POSITION_RIGHT = 2;
+    public static final int POSITION_LEFT_EXTRA_LEVEL = 3;
 
     private static final int AM_PM_STYLE_SMALL = 1;
     private static final int AM_PM_STYLE_GONE = 2;

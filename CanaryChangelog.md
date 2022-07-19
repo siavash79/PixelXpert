@@ -1,3 +1,6 @@
+**canary-84**  
+- Added option to fully customize QS Tile font size  
+  
 **canary-83**  
 - Fix multi-row statusbar on default height in landscape mode  
   

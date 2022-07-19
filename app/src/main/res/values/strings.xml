@@ -153,6 +153,8 @@
     <string name="qs_rows_number">Number of QS rows</string>
     <string name="qs_cols_number">Number of QS columns</string>
     <string name="qqs_tiles_number">Maximum tiles in Quick QS (max 2 rows)</string>
+    <string name="qs_tile_label_size">QS Tile label size</string>
+    <string name="qs_tile_secondary_label_size">QS Tile label summary size</string>
     <string name="qs_general_options">Quick settings options</string>
     <string name="qs_tiles_3_columns_title">Enable 3 columns for QS Tiles</string>
     <string name="qs_text_size_title">Set text size for QS Tiles</string>
@@ -350,4 +352,5 @@
 
     <string name="own_prefs_header">AOSPMods settings</string>
     <string name="language_title">Language</string>
+    <string name="toggle_dark_apply">(Toggle dark theme to apply)</string>
 </resources>

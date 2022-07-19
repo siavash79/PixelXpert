@@ -41,7 +41,6 @@ public class Overlays {
         /*Deprecated shortcut...no longer makes sense
         Overlays.put("KeyguardLeftShortcutOverlay", new overlayProp("com.android.systemui.showleftshortcut", false));
          */
-        Overlays.put("QSSmallTextOverlay", new overlayProp("com.android.systemui.qstile.smalltext.overlay", false));
         Overlays.put("ReduceKeyboardSpaceOverlay", new overlayProp("com.android.overlay.reducekeyboard", false));
         Overlays.put("BSThickTrackOverlay", new overlayProp("com.android.systemui.bstrack.overlay", false));
 

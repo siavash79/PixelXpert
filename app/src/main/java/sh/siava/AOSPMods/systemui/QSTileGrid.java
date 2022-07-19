@@ -1,11 +1,14 @@
 package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.AOSPMods.ResourceManager.resparams;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
+import android.widget.TextView;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
@@ -13,6 +16,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class QSTileGrid extends XposedModPack {
@@ -27,6 +31,11 @@ public class QSTileGrid extends XposedModPack {
     private static int QSColQty = NOT_SET;
     private static int QQSTileQty = QQS_NOT_SET;
 
+    private static Float labelSize = null, secondaryLabelSize = null;
+    private static int labelSizeUnit = -1, secondaryLabelSizeUnit = -1;
+
+    private static float QSLabelScaleFactor = 1, QSSecondaryLabelScaleFactor = 1;
+
     public QSTileGrid(Context context) { super(context); }
 
     @Override
@@ -36,6 +45,11 @@ public class QSTileGrid extends XposedModPack {
         QSRowQty = Xprefs.getInt("QSRowQty", NOT_SET);
         QSColQty = Xprefs.getInt("QSColQty", NOT_SET);
         QQSTileQty = Xprefs.getInt("QQSTileQty", QQS_NOT_SET);
+
+        try {
+            QSLabelScaleFactor = (RangeSliderPreference.getValues(Xprefs, "QSLabelScaleFactor", 0).get(0)+100)/100f;
+            QSSecondaryLabelScaleFactor = (RangeSliderPreference.getValues(Xprefs, "QSSecondaryLabelScaleFactor", 0).get(0)+100)/100f;
+        }catch(Exception ignored){}
 
         setResources();
 
@@ -49,6 +63,36 @@ public class QSTileGrid extends XposedModPack {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         Class<?> TileLayoutClass = findClass("com.android.systemui.qs.TileLayout", lpparam.classLoader);
+        Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
+        Class<?> FontSizeUtilsClass = findClass("com.android.systemui.FontSizeUtils", lpparam.classLoader);
+
+        hookAllMethods(QSTileViewImplClass, "createAndAddLabels", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                callStaticMethod(FontSizeUtilsClass, "updateFontSize", getObjectField(param.thisObject, "label"), mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
+                callStaticMethod(FontSizeUtilsClass, "updateFontSize", getObjectField(param.thisObject, "secondaryLabel"), mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
+
+                if(labelSize == null) {
+                    TextView label = (TextView) getObjectField(param.thisObject, "label");
+                    TextView secondaryLabel = (TextView) getObjectField(param.thisObject, "secondaryLabel");
+
+                    labelSizeUnit = label.getTextSizeUnit();
+                    labelSize = label.getTextSize();
+
+                    secondaryLabelSizeUnit = secondaryLabel.getTextSizeUnit();
+                    secondaryLabelSize = secondaryLabel.getTextSize();
+                }
+
+                setLabelSizes(param);
+            }
+        });
+
+        hookAllMethods(QSTileViewImplClass, "updateResources", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                setLabelSizes(param);
+            }
+        });
 
         // when media is played, system reverts tile cols to default value of 2. handling it:
         hookAllMethods(TileLayoutClass, "setMaxColumns", new XC_MethodHook() {
@@ -61,6 +105,14 @@ public class QSTileGrid extends XposedModPack {
         });
 
         setResources();
+    }
+
+    private void setLabelSizes(XC_MethodHook.MethodHookParam param) {
+        TextView label = (TextView) getObjectField(param.thisObject, "label");
+        TextView secondaryLabel = (TextView) getObjectField(param.thisObject, "secondaryLabel");
+
+        label.setTextSize(labelSizeUnit, labelSize * QSLabelScaleFactor);
+        secondaryLabel.setTextSize(secondaryLabelSizeUnit, secondaryLabelSize * QSSecondaryLabelScaleFactor);
     }
 
     private void setResources()

@@ -6,15 +6,14 @@ import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.LocaleList;
-import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,9 +29,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.slider.LabelFormatter;
 import com.topjohnwu.superuser.Shell;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -586,6 +585,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
     @SuppressWarnings("ConstantConditions")
     public static class QuicksettingsFragment extends PreferenceFragmentCompat {
+        LabelFormatter formatter = value -> (value+100) + "%";
 
         SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibililty(sharedPreferences);
         private FrameLayout pullDownIndicator;
@@ -615,7 +615,6 @@ public class SettingsActivity extends AppCompatActivity implements
                 lp.gravity = Gravity.TOP | (Integer.parseInt(sharedPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
                 pullDownIndicator.setLayoutParams(lp);
 
-
                 int QSRowQty = sharedPreferences.getInt("QSRowQty", 0);
                 findPreference("QSRowQty").setSummary((QSRowQty == 0) ? getResources().getString(R.string.word_default) : String.valueOf(QSRowQty));
 
@@ -624,6 +623,17 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 int QQSTileQty = sharedPreferences.getInt("QQSTileQty", 4);
                 findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQty));
+
+                findPreference("QSLabelScaleFactor").setSummary((RangeSliderPreference.getValues(sharedPreferences, "QSLabelScaleFactor",0f).get(0)+100)+"% " + getString(R.string.toggle_dark_apply));
+                findPreference("QSSecondaryLabelScaleFactor").setSummary((RangeSliderPreference.getValues(sharedPreferences, "QSSecondaryLabelScaleFactor",0f).get(0)+100)+"% " + getString(R.string.toggle_dark_apply));
+
+                try {
+                    ((RangeSliderPreference)findPreference("QSLabelScaleFactor")).slider.setLabelFormatter(formatter);
+                }catch (Exception ignored){}
+                try {
+                    ((RangeSliderPreference)findPreference("QSSecondaryLabelScaleFactor")).slider.setLabelFormatter(formatter);
+                }catch (Exception ignored){}
+
 
                 findPreference("BSThickTrackOverlay").setVisible(showOverlays);
                 findPreference("QSTilesThemesOverlayEx").setVisible(showOverlays);

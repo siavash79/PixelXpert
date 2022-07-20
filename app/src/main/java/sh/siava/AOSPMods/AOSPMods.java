@@ -1,7 +1,7 @@
 package sh.siava.AOSPMods;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 import android.app.Instrumentation;
 import android.content.Context;
@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.allApps.overScrollDisabler;
@@ -22,28 +20,29 @@ import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.systemui.BackToKill;
 import sh.siava.AOSPMods.systemui.BatteryStyleManager;
-import sh.siava.AOSPMods.systemui.FingerprintWhileDozing;
-import sh.siava.AOSPMods.systemui.QSTileGrid;
-import sh.siava.AOSPMods.systemui.ScreenGestures;
+import sh.siava.AOSPMods.systemui.BrightnessSlider;
 import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
+import sh.siava.AOSPMods.systemui.FingerprintWhileDozing;
+import sh.siava.AOSPMods.systemui.GestureNavbarManager;
 import sh.siava.AOSPMods.systemui.KeyGuardPinScrambler;
 import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
+import sh.siava.AOSPMods.systemui.KeyguardCustomText;
 import sh.siava.AOSPMods.systemui.LockscreenAlbumArt;
-import sh.siava.AOSPMods.systemui.GestureNavbarManager;
+import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
 import sh.siava.AOSPMods.systemui.NotificationExpander;
-import sh.siava.AOSPMods.systemui.BrightnessSlider;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSHaptic;
 import sh.siava.AOSPMods.systemui.QSHeaderManager;
 import sh.siava.AOSPMods.systemui.QSQuickPullDown;
+import sh.siava.AOSPMods.systemui.QSTileGrid;
+import sh.siava.AOSPMods.systemui.ScreenGestures;
 import sh.siava.AOSPMods.systemui.ScreenshotController;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
-import sh.siava.AOSPMods.systemui.KeyguardCustomText;
-import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
 import sh.siava.AOSPMods.systemui.easyUnlock;
 import sh.siava.AOSPMods.telecom.CallVibrator;
 
+@SuppressWarnings("RedundantThrows")
 public class AOSPMods implements IXposedHookLoadPackage{
     public static final String SYSTEM_UI_PACKAGE = "com.android.systemui";
     public static final String SYSTEM_FRAMEWORK_PACKAGE = "android";

@@ -1,18 +1,17 @@
 package sh.siava.AOSPMods.launcher;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
-import sh.siava.AOSPMods.XPrefs;
 
+@SuppressWarnings("RedundantThrows")
 public class TaskbarActivator extends XposedModPack {
 	private static final String listenPackage = AOSPMods.LAUNCHR_PACKAGE;
 	
@@ -26,7 +25,7 @@ public class TaskbarActivator extends XposedModPack {
 	
 	@Override
 	public void updatePrefs(String... Key) {
-		String taskbarModeStr = XPrefs.Xprefs.getString("taskBarMode", "0");
+		String taskbarModeStr = Xprefs.getString("taskBarMode", "0");
 		
 		if(Key.length > 0) {
 			try {

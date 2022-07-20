@@ -1,19 +1,19 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.media.MediaActionSound;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
-import sh.siava.AOSPMods.XPrefs;
 
+@SuppressWarnings("RedundantThrows")
 public class ScreenshotController extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
@@ -26,8 +26,8 @@ public class ScreenshotController extends XposedModPack {
     @Override
     public void updatePrefs(String...Key)
     {
-        if(XPrefs.Xprefs == null) return;
-        disableScreenshotSound = XPrefs.Xprefs.getBoolean("disableScreenshotSound", false);
+        if(Xprefs == null) return;
+        disableScreenshotSound = Xprefs.getBoolean("disableScreenshotSound", false);
     }
 
     @Override

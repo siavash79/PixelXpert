@@ -1,7 +1,11 @@
 package sh.siava.AOSPMods.android;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookMethod;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findMethodExact;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,12 +19,9 @@ import java.lang.reflect.Method;
 import java.util.Calendar;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.SystemUtils;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -38,8 +39,8 @@ public class screenOffKeys extends XposedModPack {
 
     @Override
     public void updatePrefs(String... Key) {
-        holdVolumeToSkip = XPrefs.Xprefs.getBoolean("holdVolumeToSkip", false);
-        replaceAssistantwithTorch = XPrefs.Xprefs.getBoolean("replaceAssistantwithTorch", false);
+        holdVolumeToSkip = Xprefs.getBoolean("holdVolumeToSkip", false);
+        replaceAssistantwithTorch = Xprefs.getBoolean("replaceAssistantwithTorch", false);
     }
 
     @Override

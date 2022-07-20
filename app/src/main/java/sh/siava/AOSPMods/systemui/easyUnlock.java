@@ -1,7 +1,10 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
@@ -13,6 +16,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 
+@SuppressWarnings("RedundantThrows")
 public class easyUnlock extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
@@ -49,7 +53,7 @@ public class easyUnlock extends XposedModPack {
 
                         String methodName = param.thisObject.getClass().getName().contains("Password") ? "createPassword" : "createPin";
 
-                        Object password = callStaticMethod(LockscreenCredentialClass, methodName, (String) callMethod(getObjectField(param.thisObject, "mPasswordEntry"), "getText").toString());
+                        Object password = callStaticMethod(LockscreenCredentialClass, methodName, callMethod(getObjectField(param.thisObject, "mPasswordEntry"), "getText").toString());
 
                         boolean accepted = (boolean) callMethod(
                                 getObjectField(param.thisObject, "mLockPatternUtils"),

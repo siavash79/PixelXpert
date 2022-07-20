@@ -7,6 +7,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -17,7 +18,6 @@ import android.view.ViewGroup;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -48,18 +48,18 @@ public class GestureNavbarManager extends XposedModPack {
 
     public void updatePrefs(String...Key)
     {
-        if(XPrefs.Xprefs == null) return;
+        if(Xprefs == null) return;
 
         //region Back gesture
-        leftEnabled = XPrefs.Xprefs.getBoolean("BackFromLeft", true);
-        rightEnabled = XPrefs.Xprefs.getBoolean("BackFromRight", true);
-        backGestureHeightFractionLeft = XPrefs.Xprefs.getInt("BackLeftHeight", 100) / 100f;
-        backGestureHeightFractionRight = XPrefs.Xprefs.getInt("BackRightHeight", 100) / 100f;
+        leftEnabled = Xprefs.getBoolean("BackFromLeft", true);
+        rightEnabled = Xprefs.getBoolean("BackFromRight", true);
+        backGestureHeightFractionLeft = Xprefs.getInt("BackLeftHeight", 100) / 100f;
+        backGestureHeightFractionRight = Xprefs.getInt("BackRightHeight", 100) / 100f;
         //endregion
 
         //region pill size
-        widthFactor = XPrefs.Xprefs.getInt("GesPillWidthModPos", 50) * .02f;
-        GesPillHeightFactor = XPrefs.Xprefs.getInt("GesPillHeightFactor", 100);
+        widthFactor = Xprefs.getInt("GesPillWidthModPos", 50) * .02f;
+        GesPillHeightFactor = Xprefs.getInt("GesPillHeightFactor", 100);
 
         if(Key.length > 0)
         {
@@ -74,7 +74,7 @@ public class GestureNavbarManager extends XposedModPack {
         //endregion
 
         //region pill color
-        navPillColorAccent = XPrefs.Xprefs.getBoolean("navPillColorAccent", false);
+        navPillColorAccent = Xprefs.getBoolean("navPillColorAccent", false);
         //endregion
     }
 
@@ -104,7 +104,7 @@ public class GestureNavbarManager extends XposedModPack {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         Point mDisplaySize = (Point) getObjectField(param.thisObject, "mDisplaySize");
-                        boolean isLeftSide = (int)(int) param.args[0] < (mDisplaySize.x/3);
+                        boolean isLeftSide = (int) param.args[0] < (mDisplaySize.x/3);
                         if((isLeftSide && !leftEnabled)
                                 || (!isLeftSide && !rightEnabled))
                         {

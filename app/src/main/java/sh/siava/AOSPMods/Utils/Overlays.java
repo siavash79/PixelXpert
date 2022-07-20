@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods.Utils;
 
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
+
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
@@ -86,7 +88,7 @@ public class Overlays {
         new Thread(() -> {
             if(prefs == null)
             {
-                prefs = XPrefs.Xprefs;
+                prefs = Xprefs;
             }
 
             if(prefs == null) return; // something not ready

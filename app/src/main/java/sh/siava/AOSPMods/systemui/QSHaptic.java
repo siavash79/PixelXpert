@@ -1,18 +1,17 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.os.VibrationEffect;
 import android.view.View;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.SystemUtils;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 public class QSHaptic extends XposedModPack {
@@ -24,8 +23,8 @@ public class QSHaptic extends XposedModPack {
     @Override
     public void updatePrefs(String...Key)
     {
-        if(XPrefs.Xprefs == null) return;
-        QSHapticEnabled = XPrefs.Xprefs.getBoolean("QSHapticEnabled", false);
+        if(Xprefs == null) return;
+        QSHapticEnabled = Xprefs.getBoolean("QSHapticEnabled", false);
     }
 
     @Override

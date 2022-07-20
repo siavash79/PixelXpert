@@ -1,7 +1,11 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,7 +18,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
-import sh.siava.AOSPMods.XPrefs;
 
 @SuppressWarnings("RedundantThrows")
 public class BrightnessSlider extends XposedModPack {
@@ -41,10 +44,10 @@ public class BrightnessSlider extends XposedModPack {
     @Override
     public void updatePrefs(String... Key) {
 
-        BrightnessHookEnabled = XPrefs.Xprefs.getBoolean("BrightnessHookEnabled", true);
-        QQSBrightnessEnabled = XPrefs.Xprefs.getBoolean("QQSBrightnessEnabled", false);
-        QSBrightnessDisabled = XPrefs.Xprefs.getBoolean("QSBrightnessDisabled", false);
-        BrightnessSlierOnBottom = XPrefs.Xprefs.getBoolean("BrightnessSlierOnBottom", false);
+        BrightnessHookEnabled = Xprefs.getBoolean("BrightnessHookEnabled", true);
+        QQSBrightnessEnabled = Xprefs.getBoolean("QQSBrightnessEnabled", false);
+        QSBrightnessDisabled = Xprefs.getBoolean("QSBrightnessDisabled", false);
+        BrightnessSlierOnBottom = Xprefs.getBoolean("BrightnessSlierOnBottom", false);
 
         if(QSBrightnessDisabled) QQSBrightnessEnabled = false; //if there's no slider, then .......
 

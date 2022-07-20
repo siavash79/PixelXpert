@@ -1,7 +1,12 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,14 +17,12 @@ import android.widget.ImageView;
 import androidx.core.content.res.ResourcesCompat;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.XposedModPack;
-import sh.siava.AOSPMods.XPrefs;
 
+@SuppressWarnings("RedundantThrows")
 public class KeyguardBottomArea extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     private static boolean transparentBGcolor = false;
@@ -36,9 +39,9 @@ public class KeyguardBottomArea extends XposedModPack {
     @Override
     public void updatePrefs(String...Key)
     {
-        if(XPrefs.Xprefs == null) return;
-        leftShortcut = XPrefs.Xprefs.getString("leftKeyguardShortcut", "");
-        rightShortcut = XPrefs.Xprefs.getString("rightKeyguardShortcut", "");
+        if(Xprefs == null) return;
+        leftShortcut = Xprefs.getString("leftKeyguardShortcut", "");
+        rightShortcut = Xprefs.getString("rightKeyguardShortcut", "");
 
         if(Key.length > 0) {
             switch (Key[0]) {
@@ -52,7 +55,7 @@ public class KeyguardBottomArea extends XposedModPack {
                     break;
             }
         }
-        transparentBGcolor = XPrefs.Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
+        transparentBGcolor = Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
     }
 
     @Override

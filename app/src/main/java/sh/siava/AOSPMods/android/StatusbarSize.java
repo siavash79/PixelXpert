@@ -1,7 +1,10 @@
 package sh.siava.AOSPMods.android;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 import static sh.siava.AOSPMods.systemui.StatusbarMods.POSITION_LEFT;
 import static sh.siava.AOSPMods.systemui.StatusbarMods.POSITION_LEFT_EXTRA_LEVEL;
@@ -15,15 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 
 //We are playing in system framework. should be extra cautious..... many try-catchs, still not enough!
+@SuppressWarnings("RedundantThrows")
 public class StatusbarSize extends XposedModPack {
     private final List<String> listenPacks = new ArrayList<>();
 

@@ -1,7 +1,11 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -13,14 +17,13 @@ import android.widget.FrameLayout;
 import androidx.core.content.res.ResourcesCompat;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.XPrefs;
+import sh.siava.AOSPMods.XposedModPack;
 
+@SuppressWarnings("RedundantThrows")
 public class NotificationExpander extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 	
@@ -38,8 +41,8 @@ public class NotificationExpander extends XposedModPack {
 	
 	@Override
 	public void updatePrefs(String... Key) {
-		notificationExpandallEnabled = XPrefs.Xprefs.getBoolean("notificationExpandallEnabled", false);
-		notificationExpandallHookEnabled = XPrefs.Xprefs.getBoolean("notificationExpandallHookEnabled", true);
+		notificationExpandallEnabled = Xprefs.getBoolean("notificationExpandallEnabled", false);
+		notificationExpandallHookEnabled = Xprefs.getBoolean("notificationExpandallHookEnabled", true);
 
 		if(Key.length > 0 && Key[0].equals("notificationExpandallEnabled"))
 		{

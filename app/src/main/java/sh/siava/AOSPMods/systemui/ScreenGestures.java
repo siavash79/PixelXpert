@@ -2,8 +2,12 @@
 
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.os.SystemClock;
@@ -16,12 +20,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.SystemUtils;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -49,9 +50,9 @@ public class ScreenGestures extends XposedModPack {
     
     @Override
     public void updatePrefs(String...Key) {
-        doubleTapToWake = XPrefs.Xprefs.getBoolean("doubleTapToWake", false);
-        holdScreenTorchEnabled = XPrefs.Xprefs.getBoolean("holdScreenTorchEnabled", false);
-        doubleTapToSleepEnabled = XPrefs.Xprefs.getBoolean("DoubleTapSleep", false);
+        doubleTapToWake = Xprefs.getBoolean("doubleTapToWake", false);
+        holdScreenTorchEnabled = Xprefs.getBoolean("holdScreenTorchEnabled", false);
+        doubleTapToSleepEnabled = Xprefs.getBoolean("DoubleTapSleep", false);
     }
 
     @Override

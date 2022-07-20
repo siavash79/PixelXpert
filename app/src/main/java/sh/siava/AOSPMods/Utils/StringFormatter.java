@@ -1,11 +1,9 @@
 package sh.siava.AOSPMods.Utils;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.log;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
-import android.graphics.Color;
 import android.text.SpannableStringBuilder;
 
 import androidx.annotation.NonNull;
@@ -13,7 +11,6 @@ import androidx.annotation.NonNull;
 import com.github.mfathi91.time.PersianDate;
 
 import java.awt.font.NumericShaper;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -24,7 +21,6 @@ import java.util.regex.Pattern;
 
 import javax.security.auth.callback.Callback;
 
-import de.robv.android.xposed.XposedBridge;
 import sh.siava.AOSPMods.BuildConfig;
 
 public class StringFormatter {
@@ -97,7 +93,6 @@ public class StringFormatter {
         {
             String match = matcher.group(1);
 
-            //noinspection ConstantConditions
             int start = result.toString().indexOf("$"+match);
             result.replace(start, start+match.length()+1, valueOf(match));
         }

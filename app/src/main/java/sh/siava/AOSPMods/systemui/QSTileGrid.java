@@ -69,21 +69,24 @@ public class QSTileGrid extends XposedModPack {
         hookAllMethods(QSTileViewImplClass, "createAndAddLabels", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                callStaticMethod(FontSizeUtilsClass, "updateFontSize", getObjectField(param.thisObject, "label"), mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
-                callStaticMethod(FontSizeUtilsClass, "updateFontSize", getObjectField(param.thisObject, "secondaryLabel"), mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
+                try {
+                    if (labelSize == null) { //we need initial font sizes
+                        callStaticMethod(FontSizeUtilsClass, "updateFontSize", getObjectField(param.thisObject, "label"), mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
+                        callStaticMethod(FontSizeUtilsClass, "updateFontSize", getObjectField(param.thisObject, "secondaryLabel"), mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
 
-                if(labelSize == null) {
-                    TextView label = (TextView) getObjectField(param.thisObject, "label");
-                    TextView secondaryLabel = (TextView) getObjectField(param.thisObject, "secondaryLabel");
+                        TextView label = (TextView) getObjectField(param.thisObject, "label");
+                        TextView secondaryLabel = (TextView) getObjectField(param.thisObject, "secondaryLabel");
 
-                    labelSizeUnit = label.getTextSizeUnit();
-                    labelSize = label.getTextSize();
+                        labelSizeUnit = label.getTextSizeUnit();
+                        labelSize = label.getTextSize();
 
-                    secondaryLabelSizeUnit = secondaryLabel.getTextSizeUnit();
-                    secondaryLabelSize = secondaryLabel.getTextSize();
-                }
+                        secondaryLabelSizeUnit = secondaryLabel.getTextSizeUnit();
+                        secondaryLabelSize = secondaryLabel.getTextSize();
+                    }
 
-                setLabelSizes(param);
+                    setLabelSizes(param);
+
+                }catch(Throwable ignored){}
             }
         });
 
@@ -108,11 +111,16 @@ public class QSTileGrid extends XposedModPack {
     }
 
     private void setLabelSizes(XC_MethodHook.MethodHookParam param) {
-        TextView label = (TextView) getObjectField(param.thisObject, "label");
-        TextView secondaryLabel = (TextView) getObjectField(param.thisObject, "secondaryLabel");
+        try {
+            if(QSLabelScaleFactor != 1) {
+                ((TextView) getObjectField(param.thisObject, "label")).setTextSize(labelSizeUnit, labelSize * QSLabelScaleFactor);
+            }
 
-        label.setTextSize(labelSizeUnit, labelSize * QSLabelScaleFactor);
-        secondaryLabel.setTextSize(secondaryLabelSizeUnit, secondaryLabelSize * QSSecondaryLabelScaleFactor);
+            if(QSSecondaryLabelScaleFactor != 1) {
+                ((TextView) getObjectField(param.thisObject, "secondaryLabel")).setTextSize(secondaryLabelSizeUnit, secondaryLabelSize * QSSecondaryLabelScaleFactor);
+            }
+        }
+        catch(Throwable ignored){}
     }
 
     private void setResources()

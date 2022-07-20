@@ -1,16 +1,12 @@
 package sh.siava.AOSPMods;
 
-import android.content.res.Configuration;
 import android.content.res.XModuleResources;
 
 import java.util.HashMap;
 
 import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookZygoteInit;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
-import de.robv.android.xposed.callbacks.XC_LayoutInflated;
 
 public class ResourceManager implements IXposedHookInitPackageResources, IXposedHookZygoteInit {
 

@@ -1,24 +1,25 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaMetadata;
-import android.media.session.PlaybackState;
 import android.os.AsyncTask;
 import android.util.ArraySet;
 
 import com.google.android.renderscript.Toolkit;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -41,10 +42,10 @@ public class LockscreenAlbumArt extends XposedModPack {
 	
 	@Override
 	public void updatePrefs(String... Key) {
-		albumArtLockScreenEnabled = XPrefs.Xprefs.getBoolean("albumArtLockScreenEnabled", true);
-		albumArtLockScreenHookEnabled = XPrefs.Xprefs.getBoolean("albumArtLockScreenHookEnabled", true);
-		albumArtLockScreenBlurLevel = Math.round(XPrefs.Xprefs.getInt("albumArtLockScreenBlurLevel", 0)/4f);
-		albumArtLockScreenGrayscale = XPrefs.Xprefs.getBoolean("albumArtLockScreenGrayscale", false);
+		albumArtLockScreenEnabled = Xprefs.getBoolean("albumArtLockScreenEnabled", true);
+		albumArtLockScreenHookEnabled = Xprefs.getBoolean("albumArtLockScreenHookEnabled", true);
+		albumArtLockScreenBlurLevel = Math.round(Xprefs.getInt("albumArtLockScreenBlurLevel", 0)/4f);
+		albumArtLockScreenGrayscale = Xprefs.getBoolean("albumArtLockScreenGrayscale", false);
 
 		if(Key.length > 0)
 		{

@@ -19,7 +19,6 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Locale;
 
-import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.databinding.ActivityUpdateBinding;
 
 public class UpdateActivity extends AppCompatActivity {

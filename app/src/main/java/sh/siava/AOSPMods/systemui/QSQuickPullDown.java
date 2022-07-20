@@ -1,23 +1,25 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.view.MotionEvent;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
-import sh.siava.AOSPMods.XPrefs;
 
+@SuppressWarnings("RedundantThrows")
 public class QSQuickPullDown extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
     private static final int PULLDOWN_SIDE_RIGHT = 1;
+    @SuppressWarnings("unused")
     private static final int PULLDOWN_SIDE_LEFT = 2;
     private static final int STATUSBAR_MODE_SHADE = 0;
 
@@ -30,10 +32,10 @@ public class QSQuickPullDown extends XposedModPack {
     @Override
     public void updatePrefs(String...Key)
     {
-        if(XPrefs.Xprefs == null) return;
-        oneFingerPulldownEnabled = XPrefs.Xprefs.getBoolean("QSPullodwnEnabled", false);
-        statusbarPortion =  XPrefs.Xprefs.getInt("QSPulldownPercent", 25) / 100f;
-        pullDownSide = Integer.parseInt(XPrefs.Xprefs.getString("QSPulldownSide", "1"));
+        if(Xprefs == null) return;
+        oneFingerPulldownEnabled = Xprefs.getBoolean("QSPullodwnEnabled", false);
+        statusbarPortion =  Xprefs.getInt("QSPulldownPercent", 25) / 100f;
+        pullDownSide = Integer.parseInt(Xprefs.getString("QSPulldownSide", "1"));
     }
 
     @Override

@@ -1,11 +1,17 @@
 package sh.siava.AOSPMods.Utils;
 
-import de.robv.android.xposed.XC_MethodHook;
-
-import static de.robv.android.xposed.XposedHelpers.*;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.getBooleanField;
+import static de.robv.android.xposed.XposedHelpers.getFloatField;
+import static de.robv.android.xposed.XposedHelpers.getIntField;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.setFloatField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
 import android.view.View;
 import android.widget.FrameLayout;
+
+import de.robv.android.xposed.XC_MethodHook;
 
 public class NotificationIconContainerOverride {
     public static Class<?> StatusBarIconViewClass = null;

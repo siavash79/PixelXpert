@@ -1,8 +1,8 @@
 package sh.siava.AOSPMods.Utils;
 
 import static com.topjohnwu.superuser.Shell.cmd;
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;

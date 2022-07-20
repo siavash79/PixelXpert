@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.Utils;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.log;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -27,7 +26,6 @@ import java.util.Calendar;
 
 import javax.security.auth.callback.Callback;
 
-import de.robv.android.xposed.XposedBridge;
 import sh.siava.AOSPMods.BuildConfig;
 
 public class NetworkStats {

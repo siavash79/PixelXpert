@@ -1,34 +1,37 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.widget.TextView;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.XposedModPack;
-import sh.siava.AOSPMods.XPrefs;
 
+@SuppressWarnings("RedundantThrows")
 public class QSFooterTextManager extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     private static boolean customQSFooterTextEnabled = false;
     private static String customText = "";
     private Object QSFV;
-    private StringFormatter stringFormatter = new StringFormatter();
+    private final StringFormatter stringFormatter = new StringFormatter();
 
     private final StringFormatter.formattedStringCallback refreshCallback = this::setQSFooterText;
 
     public void updatePrefs(String...Key)
     {
-        if(XPrefs.Xprefs == null) return;
-        customQSFooterTextEnabled = XPrefs.Xprefs.getBoolean("QSFooterMod", false);
-        customText = XPrefs.Xprefs.getString("QSFooterText", "");
+        if(Xprefs == null) return;
+        customQSFooterTextEnabled = Xprefs.getBoolean("QSFooterMod", false);
+        customText = Xprefs.getString("QSFooterText", "");
 
         setQSFooterText();
     }

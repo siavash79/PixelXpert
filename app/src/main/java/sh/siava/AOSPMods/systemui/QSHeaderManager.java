@@ -1,7 +1,17 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.hookMethod;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findMethodExact;
+import static de.robv.android.xposed.XposedHelpers.findMethodExactIfExists;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -17,13 +27,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.Utils.Overlays;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -42,13 +49,13 @@ public class QSHeaderManager extends XposedModPack {
     @Override
     public void updatePrefs(String...Key)
     {
-        if(XPrefs.Xprefs == null) return;
+        if(Xprefs == null) return;
 
-        dualToneQSEnabled = XPrefs.Xprefs.getBoolean("dualToneQSEnabled", false);
+        dualToneQSEnabled = Xprefs.getBoolean("dualToneQSEnabled", false);
         Helpers.setOverlay("QSDualToneOverlay", dualToneQSEnabled, true, false);
 
-        setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
-        boolean newbrightnessThickTrackEnabled = XPrefs.Xprefs.getBoolean("BSThickTrackOverlay", false);
+        setLightQSHeader(Xprefs.getBoolean("LightQSPanel", false));
+        boolean newbrightnessThickTrackEnabled = Xprefs.getBoolean("BSThickTrackOverlay", false);
         if(newbrightnessThickTrackEnabled != brightnessThickTrackEnabled)
         {
             brightnessThickTrackEnabled = newbrightnessThickTrackEnabled;

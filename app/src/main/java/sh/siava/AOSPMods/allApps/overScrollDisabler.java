@@ -1,18 +1,18 @@
 package sh.siava.AOSPMods.allApps;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.view.View;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.XposedModPack;
-import sh.siava.AOSPMods.XPrefs;
 
+@SuppressWarnings("RedundantThrows")
 public class overScrollDisabler extends XposedModPack {
 	private static boolean disableOverScroll = false;
 	
@@ -20,7 +20,7 @@ public class overScrollDisabler extends XposedModPack {
 	
 	@Override
 	public void updatePrefs(String... Key) {
-		disableOverScroll = XPrefs.Xprefs.getBoolean("disableOverScroll", false);
+		disableOverScroll = Xprefs.getBoolean("disableOverScroll", false);
 	}
 	
 	@Override

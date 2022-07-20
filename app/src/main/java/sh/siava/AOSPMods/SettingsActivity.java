@@ -13,7 +13,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;

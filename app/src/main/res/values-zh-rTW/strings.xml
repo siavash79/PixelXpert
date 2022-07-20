@@ -53,7 +53,6 @@
     <string name="sbc_date_small">較小的尺寸 (70%)</string>
     <string name="sbc_custom_date_after">自定時鐘右側的格式</string>
     <string name="sbc_header">狀態列時鐘定製</string>
-    <string name="sbc_may_take_one_minute">在時間更新或 SystemUI 重啟時生效</string>
     <string name="ntsb_far_left">最左邊</string>
     <string name="ntsb_mid_left">中間偏左</string>
     <string name="ntsb_mid_right">中間偏右</string>
@@ -67,9 +66,6 @@
     <string name="dual_tone_battery_on_summary">開啟（僅適用於縱向圖示）</string>
     <string name="unread_messages_title">顯示未讀資訊的數量</string>
     <string name="status_bar_height">狀態列高度</string>
-    <string name="status_bar_height_small">小</string>
-    <string name="status_bar_height_medium">中</string>
-    <string name="fix_status_bar_padding">對準左側</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">QS 面板頁尾上的版本編號</string>
@@ -104,11 +100,6 @@
     <string name="threebutton_header_title">三鍵導航欄</string>
     <string name="back_longpress_kill_title">長按回車鍵可殺死前臺應用程式</string>
     <string name="hide_navbar_title">隱藏導航條</string>
-    <string name="gesture_navbar_thickness_title">導航欄的厚度</string>
-    <string name="gesture_navbar_thickness">修改導航條柱子的厚度</string>
-    <string name="gesture_navbar_thin">薄</string>
-    <string name="gesture_navbar_thick">厚</string>
-    <string name="gesture_navbar_thicker">更厚</string>
     <string name="colorpill_title">給手勢丸塗上顏色</string>
     <string name="colorpill">突出彩色手勢丸</string>
     <string name="reducekeyboard_title">手勢鍵盤空間</string>
@@ -117,7 +108,6 @@
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">禁用螢幕截圖的聲音</string>
     <string name="so_power_longpress_torch_title">長按電源開啟電筒</string>
-    <string name="framework_needed_caution_summary">需要在 LSPosed 啟用中勾選系統框架，請謹慎使用。</string>
     <string name="so_double_tap_wake_title">雙擊喚醒手機</string>
     <string name="so_double_tap_wake_summary">禁用單點喚醒</string>
     <string name="doze_header">當螢幕關閉時...</string>
@@ -159,7 +149,6 @@
     <string name="fourg_lte_fourg">强制使用 4G 图标</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">强制雙排</string>
     <string name="qs_3_rows">强制三排</string>
     <string name="qs_4_rows">强制四排</string>
     <string name="qs_5_rows">强制五排</string>

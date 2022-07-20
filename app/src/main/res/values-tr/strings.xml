@@ -32,7 +32,6 @@
     <string name="carrier_text_mod_enabled">Özel operatör metni</string>
     <string name="carrier_text_value">Özel metin ekle</string>
     <string name="lockscreen_center_text_value">Saat bölgesi özel metin</string>
-    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Alt alan kısayolları</string>
     <string name="keyguard_bottom_buttons_transparent_title">Simgelerin etrafındaki daireyi gizle</string>
     <string name="keyguard_bottom_force_camera_title">Kamera kısayolunu göstert</string>
@@ -116,9 +115,6 @@
     <string name="dual_tone_battery_on_summary">Açık (yalnızca portre simgesiyle çalışır)</string>
     <string name="unread_messages_title">Okunmamış mesajların sayısını göster</string>
     <string name="status_bar_height">Durum çubuğu yüksekliği</string>
-    <string name="status_bar_height_small">Küçük</string>
-    <string name="status_bar_height_medium">Orta</string>
-    <string name="fix_status_bar_padding">Sol taraftaki boşluğu düzenlemek</string>
     <string name="sbbb_header">Pil çubuğu ayarları</string>
     <string name="sbbIcon_header">Pil simgesi ayarları</string>
     <string name="BB_enable_title">Pil Çubuğunu Etkinleştir</string>
@@ -293,7 +289,6 @@
     <string name="fourg_lte_fourg">4G simgesini zorla</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">2 satırı zorla</string>
     <string name="qs_3_rows">3 satırı zorla</string>
     <string name="qs_4_rows">4 satırı zorla</string>
     <string name="qs_5_rows">5 satırı zorla</string>

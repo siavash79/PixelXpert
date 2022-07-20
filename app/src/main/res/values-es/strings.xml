@@ -32,7 +32,6 @@
     <string name="carrier_text_mod_enabled">Texto personalizado</string>
     <string name="carrier_text_value">Insertar un texto personalizado</string>
     <string name="lockscreen_center_text_value">Texto personalizado del área del reloj</string>
-    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Accesos directos en la parte inferior de la pantalla</string>
     <string name="keyguard_bottom_buttons_transparent_title">Ocultar círculo alrededor de los iconos</string>
     <string name="keyguard_bottom_force_camera_title">Mostrar atajo a la Camara</string>
@@ -292,7 +291,6 @@
     <string name="fourg_lte_fourg">Forzar 4G</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">Forzar 2 lineas</string>
     <string name="qs_3_rows">Forzar 3 lineas</string>
     <string name="qs_4_rows">Forzar 4 lineas</string>
     <string name="qs_5_rows">Forzar 5 lineas</string>

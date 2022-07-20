@@ -32,7 +32,6 @@
     <string name="carrier_text_mod_enabled">Custom carrier text</string>
     <string name="carrier_text_value">Custom carrier text</string>
     <string name="lockscreen_center_text_value">Clock area custom text</string>
-    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Bottom area shortcuts</string>
     <string name="keyguard_bottom_buttons_transparent_title">Hide circle around icons</string>
     <string name="keyguard_bottom_force_camera_title">Show camera shortcut</string>
@@ -255,7 +254,7 @@
     <string name="dt_darkaubergine">Dark Aubergine</string>
     <string name="dt_style">Dark Blue</string>
     <string name="dt_darkgray">Dark Grey</string>
-    <string name="dt_materialocean">Material Ocean</string>
+    <string name="dt_materialocean" translatable="false">Material Ocean</string>
     <string name="dt_night">Night</string>
     <string name="dt_solarizeddark">Solarized Dark</string>
 
@@ -294,7 +293,6 @@
     <string name="fourg_lte_fourg">Force 4G icon</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">Force 2 rows</string>
     <string name="qs_3_rows">Force 3 rows</string>
     <string name="qs_4_rows">Force 4 rows</string>
     <string name="qs_5_rows">Force 5 rows</string>

@@ -21,15 +21,13 @@ public class UDFPSManager extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     private static boolean transparentBG = false;
 
-    public static String UDFPS_hide_key = "fingerprint_circle_hide";
-    
     public UDFPSManager(Context context) { super(context); }
     
     @Override
     public void updatePrefs(String...Key)
     {
         if(Xprefs == null) return;
-        transparentBG = Xprefs.getBoolean(UDFPS_hide_key, false);
+        transparentBG = Xprefs.getBoolean("fingerprint_circle_hide", false);
     }
 
     @Override

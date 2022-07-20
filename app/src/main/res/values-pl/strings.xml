@@ -30,7 +30,6 @@
     <string name="carrier_text_mod_disabled">Nazwa operatora bez zmian</string>
     <string name="carrier_text_mod_enabled">Niestandardowa nazwa operatora</string>
     <string name="carrier_text_value">Wstaw własną nazwę</string>
-    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Skróty w dolnej części ekranu</string>
     <string name="keyguard_bottom_buttons_transparent_title">Ukryj okrąg pod ikoną</string>
     <string name="keyguard_bottom_force_camera_title">Pokaż skrót do aparatu</string>
@@ -73,7 +72,6 @@
     <string name="sbc_date_small">Mniejszy rozmiar (70%)</string>
     <string name="sbc_custom_date_after">Niestandardowy format daty po zegarze</string>
     <string name="sbc_header">Dostosowanie zegara na pasku stanu</string>
-    <string name="sbc_may_take_one_minute">Włącza się po aktualizacji czasu lub ponownym uruchomieniu SysUI</string>
     <string name="network_settings_pref">Ustawienia monitora sieciowego...</string>
     <string name="ntsb_far_left">Skrajnie w lewo</string>
     <string name="ntsb_mid_left">Środkowa lewa</string>
@@ -99,10 +97,7 @@
     <string name="dual_tone_battery_on_summary">Włączony (Działa tylko z ikoną poziomą)</string>
     <string name="unread_messages_title">Pokaż liczbę nieprzeczytanych wiadomości</string>
     <string name="status_bar_height">Wysokość paska stanu</string>
-    <string name="status_bar_height_small">Mały</string>
-    <string name="status_bar_height_medium">Średni</string>
-    <string name="fix_status_bar_padding">Popraw odstęp po lewej stronie</string>
-     <string name="sbbb_header">Ustawienia paska baterii</string>
+    <string name="sbbb_header">Ustawienia paska baterii</string>
     <string name="sbbIcon_header">Ustawienia ikony baterii</string>
     <string name="BB_enable_title">Włącz pasek baterii</string>
     <string name="BB_onlycharging_title">Tylko podczas ładowania</string>
@@ -181,11 +176,6 @@
     <string name="back_longpress_kill_title">Przytrzymanie klawisza wstecz zamyka aplikację na pierwszym planie</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Ukryj pasek nawigacji</string>
-    <string name="gesture_navbar_thickness_title">Grubość paska nawigacyji</string>
-    <string name="gesture_navbar_thickness">Zmodyfikuj grubość paska nawigacyji</string>
-    <string name="gesture_navbar_thin">Chudy</string>
-    <string name="gesture_navbar_thick">Gruby</string>
-    <string name="gesture_navbar_thicker">Grubszy</string>
     <string name="colorpill_title">Kolor paska nawigacji gestów</string>
     <string name="colorpill">Pasek nawigacyji w kolorze</string>
     <string name="reducekeyboard_title">Obszar gestów klawiatury</string>
@@ -199,8 +189,7 @@
     <string name="so_power_longpress_torch_title">Długie naciśnięcie włącza latarkę*</string>
     <string name="so_taptaptorch_title">Włącz podwójne tapnięcie aby włączyć latarkę</string>
     <string name="so_taptaptorch_summary">Kliknij dwukrotnie, a następnie przytrzymaj ekran blokady, aby szybko włączyć latarkę</string>
-    
-    <string name="framework_needed_caution_summary">Wymaga aktywacji System Framework w Lsposed. UZYWAJ OSTROŻNIE</string>
+
     <string name="so_double_tap_wake_title">Kliknij dwukrotnie, aby wybudzić telefon</string>
     <string name="so_double_tap_wake_summary">Wyłącza jedno dotknięcie, aby wybudzić telefon</string>
     <string name="so_tap_proximity_wake_title">Nie budź się po dotknięciu ekranu, gdy ekran jest zakryty</string>
@@ -267,7 +256,6 @@
     <string name="fourg_lte_fourg">Pokazuj ikonę 4G</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">Wymuś 2 rzędy</string>
     <string name="qs_3_rows">Wymuś 3 rzędy</string>
     <string name="qs_4_rows">Wymuś 4 rzędy</string>
     <string name="qs_5_rows">Wymuś 5 rzędów</string>

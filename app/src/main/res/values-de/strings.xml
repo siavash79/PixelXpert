@@ -32,7 +32,6 @@
     <string name="carrier_text_mod_enabled">Benutzerdefinierter Betreibertext</string>
     <string name="carrier_text_value">Benutzerdefinierten Text eingeben</string>
     <string name="lockscreen_center_text_value">Benutzerdefinierter Text des Uhrenbereichs</string>
-    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Verknüpfungen im unterem Bereich</string>
     <string name="keyguard_bottom_buttons_transparent_title">Verstecke den Kreis um die Symbole</string>
     <string name="keyguard_bottom_force_camera_title">Zeige Kamera Verknüpfung</string>
@@ -287,7 +286,6 @@
     <string name="fourg_lte_fourg">Erzwinge 4G Symbol</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">Erzwinge 2 Reihen</string>
     <string name="qs_3_rows">Erzwinge 3 Reihen</string>
     <string name="qs_4_rows">Erzwinge 4 Reihen</string>
     <string name="qs_5_rows">Erzwinge 5 Reihen</string>

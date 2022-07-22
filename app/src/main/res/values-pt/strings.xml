@@ -294,4 +294,7 @@
     <string name="xposed_type">Apenas Xposed</string>
     <string name="own_prefs_header">Definições da app</string>
     <string name="language_title">Idioma</string>
+    <string name="qs_tile_label_size">Tamanho do texto</string>
+    <string name="qs_tile_secondary_label_size">Tamanho do texto secundário</string>
+    <string name="toggle_dark_apply">"(ative o tema escuro para aplicar)"</string>
 </resources>

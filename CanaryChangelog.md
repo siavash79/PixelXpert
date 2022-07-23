@@ -1,4 +1,7 @@
 **canary-85**  
+- canary-85 - Rebuild  
+  
+**canary-85**  
 - Added Persian translation / translations update  
   
 **canary-84**  

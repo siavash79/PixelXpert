@@ -1,3 +1,6 @@
+**canary-85**  
+- Added Persian translation / translations update  
+  
 **canary-84**  
 - Added option to fully customize QS Tile font size  
   

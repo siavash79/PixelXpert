@@ -119,6 +119,7 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @EleoXDA Turkish, German, Russian
 - @nmayorga092   Spanish
 - @vitalitk Ukrainian
+- @siavash79 Persian
 
 **Brought to you by:**
 @siavash79 & @ElTifo

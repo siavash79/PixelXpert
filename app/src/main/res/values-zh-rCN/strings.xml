@@ -105,9 +105,7 @@
     <string name="qs_haptic_switch_title">点击按钮震动</string>
     <string name="qs_rows_number">磁贴面板行数</string>
     <string name="qs_general_options">磁贴面板选项</string>
-    <string name="qs_tiles_3_columns_title">三行磁贴</string>
     <string name="qs_text_size_title">磁贴文本大小</string>
-    <string name="qs_text_size">减小磁贴文本大小</string>
     <string name="wifi_cell_title">网络磁贴</string>
     <string name="wifi_cell_on">分离 WIFI 和数据磁贴</string>
     <string name="wifi_cell_off">合并 WIFI 和数据磁贴</string>
@@ -218,8 +216,5 @@
     <string name="fourg_lte_fourg">使用 4G 图标</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_3_rows">强制 3 行</string>
-    <string name="qs_4_rows">强制 4 行</string>
-    <string name="qs_5_rows">强制 5 行</string>
 
 </resources>

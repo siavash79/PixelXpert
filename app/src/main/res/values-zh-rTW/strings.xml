@@ -80,9 +80,7 @@
     <string name="qs_haptic_switch_title">點選 QS 方塊後震動</string>
     <string name="qs_rows_number">QS 行數</string>
     <string name="qs_general_options">快速設定選項</string>
-    <string name="qs_tiles_3_columns_title">啟用 3 個 QS 方塊列</string>
     <string name="qs_text_size_title">QS 方塊的文字大小</string>
-    <string name="qs_text_size">縮小 QS 方塊的文字大小</string>
     <string name="wifi_cell_title">網際網路方塊</string>
     <string name="wifi_cell_on">使用獨立的 Wifi 和網路方塊</string>
     <string name="wifi_cell_off">使用單一的網際網路方塊</string>
@@ -149,8 +147,5 @@
     <string name="fourg_lte_fourg">强制使用 4G 图标</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_3_rows">强制三排</string>
-    <string name="qs_4_rows">强制四排</string>
-    <string name="qs_5_rows">强制五排</string>
 
 </resources>

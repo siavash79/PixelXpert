@@ -131,9 +131,7 @@
     <string name="qs_haptic_switch_title">Wibracje przy dotknięciu panelu szybkich ustawień</string>
     <string name="qs_rows_number">Liczba wierszy szybkich ustawień</string>
     <string name="qs_general_options">Opcje szybkich ustawień</string>
-    <string name="qs_tiles_3_columns_title">Włącz 3 kolumny szybkich ustawienień</string>
     <string name="qs_text_size_title">Rozmiar czcionki elementów szybkich ustawianień</string>
-    <string name="qs_text_size">Zmniejsz rozmiar czcionki elementów szybkiego ustawiania</string>
     <string name="wifi_cell_title">Ikona internetu</string>
     <string name="wifi_cell_on">Użyj oddzielnych ikon Wi-Fi i danych</string>
     <string name="wifi_cell_off">Użyj ikony interetu</string>
@@ -192,7 +190,6 @@
 
     <string name="so_double_tap_wake_title">Kliknij dwukrotnie, aby wybudzić telefon</string>
     <string name="so_double_tap_wake_summary">Wyłącza jedno dotknięcie, aby wybudzić telefon</string>
-    <string name="so_tap_proximity_wake_title">Nie budź się po dotknięciu ekranu, gdy ekran jest zakryty</string>
     <string name="doze_header">Gdy ekran jest wyłączony…</string>
     <string name="custom_themed_icons_title">Niestandardowe ikony tematyczne</string>
     <string name="custom_themed_icons_off">Wyłączone niestandardowe ikony</string>
@@ -256,11 +253,8 @@
     <string name="fourg_lte_fourg">Pokazuj ikonę 4G</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_3_rows">Wymuś 3 rzędy</string>
-    <string name="qs_4_rows">Wymuś 4 rzędy</string>
-    <string name="qs_5_rows">Wymuś 5 rzędów</string>
-    
- <!-- Menu Items -->
+
+    <!-- Menu Items -->
     <string name="menu_reset_defaults">Zresetuj wszystkie ustawienia</string>
     <string name="menu_import_settings">Importuj ustawienia z pliku...</string>
     <string name="menu_export_settings">Eksportuj ustawienia do pliku...</string>

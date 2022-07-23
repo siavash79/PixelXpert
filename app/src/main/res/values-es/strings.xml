@@ -153,9 +153,7 @@
     <string name="qs_cols_number">Número de columnas QS</string>
     <string name="qqs_tiles_number">Número máximo de mosaicos en QS (máx. 2 filas)</string>
     <string name="qs_general_options">Preferencias de ajustes rápidos</string>
-    <string name="qs_tiles_3_columns_title">Activar 3 columnas en los ajustes rápidos</string>
     <string name="qs_text_size_title">Tamaño del texto en los ajustes rápidos</string>
-    <string name="qs_text_size">Disminuir el tamaño del texto</string>
     <string name="wifi_cell_title">Atajo de Internet</string>
     <string name="wifi_cell_on">Usar Wifi y Datos por separado</string>
     <string name="wifi_cell_off">Usar solo el atajo de Internet</string>
@@ -221,7 +219,6 @@
 	
     <string name="so_double_tap_wake_title">Doble toque para despertar pantalla</string>
     <string name="so_double_tap_wake_summary">Usar doble toque en vez de un toque para encender la pantalla</string>
-	<string name="so_tap_proximity_wake_title">No despertar al tocar cuando la pantalla este cubierta</string>
     <string name="doze_header">"Mientras la pantalla está apagada..."</string>
     <string name="custom_themed_icons_title">Iconos tematizados personalizados</string>
     <string name="custom_themed_icons_off">Iconos personalizados inactivos</string>
@@ -291,9 +288,6 @@
     <string name="fourg_lte_fourg">Forzar 4G</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_3_rows">Forzar 3 lineas</string>
-    <string name="qs_4_rows">Forzar 4 lineas</string>
-    <string name="qs_5_rows">Forzar 5 lineas</string>
 
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Recopilar estadísticas de red</string>

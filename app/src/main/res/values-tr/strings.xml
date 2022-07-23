@@ -151,9 +151,7 @@
     <string name="qs_cols_number">Hızlı ayar kolon sayısı</string>
     <string name="qqs_tiles_number">Üst hızlı ayar panelinde maksimum kutucuk sayısı (en fazla 2 satır)</string>
     <string name="qs_general_options">Hızlı ayar seçenekleri</string>
-    <string name="qs_tiles_3_columns_title">3 hızlı ayar sütununu etkinleştir</string>
     <string name="qs_text_size_title">Hızlı ayar butonlarının metin boyutu</string>
-    <string name="qs_text_size">Hızlı ayar butonlarının metin boyutunu küçült</string>
     <string name="wifi_cell_title">İnternet Kutucuğu</string>
     <string name="wifi_cell_on">WiFi ve Mobil internet için ayrı kutucukları kullan</string>
     <string name="wifi_cell_off">Tek İnternet kutucuğu kullan</string>
@@ -219,7 +217,6 @@
 
     <string name="so_double_tap_wake_title">Telefonu uyandırmak için iki kez dokun</string>
     <string name="so_double_tap_wake_summary">Uyandırmak için tek dokunuşu devre dışı bırak</string>
-    <string name="so_tap_proximity_wake_title">Ekran kapalıyken dokunduğunda uyandırma</string>
     <string name="doze_header">Ekran kapalıyken…</string>
     <string name="custom_themed_icons_title">Özel temalı simgeler</string>
     <string name="custom_themed_icons_off">Özel simgeler devre dışı bırakıldı</string>
@@ -289,9 +286,6 @@
     <string name="fourg_lte_fourg">4G simgesini zorla</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_3_rows">3 satırı zorla</string>
-    <string name="qs_4_rows">4 satırı zorla</string>
-    <string name="qs_5_rows">5 satırı zorla</string>
 
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Ağ istatistiklerini toplayın</string>

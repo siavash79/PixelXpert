@@ -95,9 +95,6 @@
     <string name="so_double_tap_wake_summary">Usar duplo toque ao invés de um toque para acender o ecrã</string>
     <string name="overlay_none_title">(Padrão)</string>
     <string name="qs_panel_category_title">Definições rápidas</string>
-    <string name="qs_3_rows">Forçar 3 linhas</string>
-    <string name="qs_4_rows">Forçar 4 linhas</string>
-    <string name="qs_5_rows">Forçar 5 linhas</string>
     <string name="qs_rows_number">Número de linhas</string>
     <string name="qs_general_options">Preferências das definições rápidas</string>
     <string name="statusbar_general_options">Preferências da barra de estado</string>
@@ -112,9 +109,7 @@
     <string name="unread_messages_title">Mostrar nr. de mensagens não lidas</string>
     <string name="keyguard_left_shortcut">Mostrar atalho do lado esquerdo</string>
     <string name="status_bar_height">Altura da barra de estado</string>
-    <string name="qs_tiles_3_columns_title">Ativar 3 colunas nas definições rápidas</string>
     <string name="qs_text_size_title">Tamanho do texto nos atalhos das definições rápidas</string>
-    <string name="qs_text_size">Diminuir o tamanho do texto</string>
     <string name="colorpill_title">Colorir a barra de navegação</string>
     <string name="colorpill">Aplicar cor de destaque na barra</string>
     <string name="reducekeyboard_title">Espaço dos gestos no teclado</string>
@@ -206,7 +201,6 @@
     <string name="QQS_brightness_bottom_title">Controlo de brilho no fundo do painel</string>
     <string name="so_taptaptorch_title">Ativar toque duplo para lanterna</string>
     <string name="so_taptaptorch_summary">Toque duplo e manter premido para lanterna no ecrã de bloqueio</string>
-    <string name="so_tap_proximity_wake_title">Não acordar o ecrã quando o mesmo estiver coberto</string>
     <string name="network_settings_pref">Definições do monitor</string>
     <string name="network_mode_title">Estilo do monitor</string>
     <string name="network_colorful_title">Colorir</string>

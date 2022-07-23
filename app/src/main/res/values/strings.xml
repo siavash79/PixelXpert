@@ -155,9 +155,7 @@
     <string name="qs_tile_label_size">QS Tile label size</string>
     <string name="qs_tile_secondary_label_size">QS Tile label summary size</string>
     <string name="qs_general_options">Quick settings options</string>
-    <string name="qs_tiles_3_columns_title">Enable 3 columns for QS Tiles</string>
     <string name="qs_text_size_title">Set text size for QS Tiles</string>
-    <string name="qs_text_size">Reduce text size of QS Tiles</string>
     <string name="wifi_cell_title">Internet Tile</string>
     <string name="wifi_cell_on">Use separate WiFi &amp; Data tiles</string>
     <string name="wifi_cell_off">Use a single Internet tile</string>
@@ -223,7 +221,6 @@
 
     <string name="so_double_tap_wake_title">Double-tap to wake phone</string>
     <string name="so_double_tap_wake_summary">Disables single-tap to wake</string>
-    <string name="so_tap_proximity_wake_title">Don\'t wake on touch when screen covered</string>
     <string name="doze_header">While screen is off…</string>
     <string name="custom_themed_icons_title">Custom themed icons</string>
     <string name="custom_themed_icons_off">Custom icons disabled</string>
@@ -293,9 +290,6 @@
     <string name="fourg_lte_fourg">Force 4G icon</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_3_rows">Force 3 rows</string>
-    <string name="qs_4_rows">Force 4 rows</string>
-    <string name="qs_5_rows">Force 5 rows</string>
 
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Collect network statistics</string>
@@ -322,7 +316,7 @@
     <string name="monitoring_category_title">Monitoring options</string>
     <string name="netstat_header">Network statistics settings</string>
 
-    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
+    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:  $G\\&lt;format\\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format` Example: $GMMM means: Jan (or any other)  $P&lt;format&gt; : Persian date, based on format Example: $Pyyyy means: 1401  $Nrx : Total Downloads of today $Ntx: Total Uploads of today $Nall : Total Traffic of today  If you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads)  Example: `Mobile Traffic of $GEEEE: $Ncall` will produce: `Mobile Traffic of Tuesday: 2GB`</string>
     <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">Updates</string>
     <string name="update_notification_title">Update downloaded</string>

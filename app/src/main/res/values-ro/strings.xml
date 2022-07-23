@@ -144,9 +144,7 @@
     <string name="qs_cols_number">Numărul de coloane QS</string>
     <string name="qqs_tiles_number">Maximum dale în QS rapid (max 2 rânduri)</string>
     <string name="qs_general_options">Opțiuni setări rapide</string>
-    <string name="qs_tiles_3_columns_title">Activează 3 coloane pentru dale QS</string>
     <string name="qs_text_size_title">Setează dimensiunea textului pentru pictogramele QS</string>
-    <string name="qs_text_size">Reduce dimensiunea textului pentru pictogramele QS</string>
     <string name="wifi_cell_title">Dală Internet</string>
     <string name="wifi_cell_on">Utilizează plăci WiFi și date separate</string>
     <string name="wifi_cell_off">Folosește o singură dală Internet</string>
@@ -207,7 +205,6 @@
     <string name="so_fingerprint_sensor_enabled">Permite senzor de amprentă când ecranul este oprit</string>
     <string name="so_double_tap_wake_title">Apăsare dublă pentru trezire telefon</string>
     <string name="so_double_tap_wake_summary">Dezactivează apăsarea unică pentru trezire</string>
-    <string name="so_tap_proximity_wake_title">Nu se trezește la atingere când ecranul este acoperit</string>
     <string name="doze_header">În timp ce ecranul este oprit…</string>
     <string name="custom_themed_icons_title">Pictograme personalizate</string>
     <string name="custom_themed_icons_off">Pictograme personalizate dezactivate</string>
@@ -266,9 +263,6 @@
     <string name="fourg_lte_lte">Forțează pictograma LTE</string>
     <string name="fourg_lte_fourg">Forțează pictograma 4G</string>
     <!-- QS Rows overlays -->
-    <string name="qs_3_rows">Forțează 3 rânduri</string>
-    <string name="qs_4_rows">Forțează 4 rânduri</string>
-    <string name="qs_5_rows">Forțează 5 rânduri</string>
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Colectare statistici de rețea</string>
     <string name="network_interval_custom_text_title">Interval de reîmprospătare</string>

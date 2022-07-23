@@ -154,9 +154,7 @@
     <string name="qs_cols_number">Количество столбцов быстрых настроек</string>
     <string name="qqs_tiles_number">Максимальное количество плиток в полуоткрытых быстрых настройках (максимум 2 строки)</string>
     <string name="qs_general_options">Параметры быстрых настроек</string>
-    <string name="qs_tiles_3_columns_title">Включить 3 колонки с плитками быстрых настроек</string>
     <string name="qs_text_size_title">Размер текста плиток быстрых настроек</string>
-    <string name="qs_text_size">Уменьшить размер текста плиток быстрых настроек</string>
     <string name="wifi_cell_title">Плитка интернета</string>
     <string name="wifi_cell_on">Использовать отдельные плитки для WiFi и мобильных данных</string>
     <string name="wifi_cell_off">Использовать одну плитку интернета</string>
@@ -219,7 +217,6 @@
 
     <string name="so_double_tap_wake_title">Двойное нажатие для пробуждения телефона</string>
     <string name="so_double_tap_wake_summary">Отключение однократного нажатия для пробуждения</string>
-    <string name="so_tap_proximity_wake_title">Не включать экран, когда телефон в кармане</string>
     <string name="doze_header">Когда экран выключен…</string>
     <string name="custom_themed_icons_title">Пользовательские тематические иконки</string>
     <string name="custom_themed_icons_off">Пользовательские значки отключены</string>
@@ -283,10 +280,7 @@
     <string name="fourg_lte_fourg">Принудительно значок 4G</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_3_rows">Принудительно 3 ряда</string>
-    <string name="qs_4_rows">Принудительно 4 ряда</string>
-    <string name="qs_5_rows">Принудительно 5 рядов</string>
-        
+
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Собирать сетевую статистику</string>
     <string name="network_interval_custom_text_title">Интервал обновления</string>

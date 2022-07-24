@@ -5,12 +5,15 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 import android.app.Instrumentation;
 import android.content.Context;
+import android.content.res.XResForwarder;
+import android.content.res.XResources;
 
 import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.allApps.overScrollDisabler;
 import sh.siava.AOSPMods.android.StatusbarSize;
@@ -58,8 +61,8 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public AOSPMods()
     {
         //region Mod list definition
-        modPacks.add(StatusbarMods.class);
         modPacks.add(BackToKill.class);
+        modPacks.add(StatusbarMods.class);
         modPacks.add(BatteryStyleManager.class);
         modPacks.add(FeatureFlagsMods.class);
         modPacks.add(KeyguardBottomArea.class);
@@ -95,8 +98,8 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         isSecondProcess =  lpparam.processName.contains(":");
 
-        //        Helpers.dumpClass("android.app.Instrumentation", lpparam);
-    
+        Helpers.dumpClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam);
+
         findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {

@@ -47,6 +47,7 @@ public class Helpers {
         }
         Method[] ms = ourClass.getDeclaredMethods();
         log("Class: " + className);
+        log("extends: " + ourClass.getSuperclass().getName());
         log("Methods:");
 
         for(Method m : ms)

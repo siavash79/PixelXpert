@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="lockScreenShortcut_values">
+        <item></item>
+        <item>Máy ảnh</item>
+        <item>Trợ lý</item>
+        <item>Đèn pin</item>
+    </string-array>
+    <string-array name="languages_names">
+        <item>Tiếng Trung Quốc (Giản thể)</item>
+        <item>Tiếng Trung Quốc (Phồn thể)</item>
+        <item>Tiếng Anh</item>
+        <item>Tiếng Đức</item>
+        <item>Tiếng Ba Lan</item>
+        <item>Tiếng Bồ Đào Nha</item>
+        <item>Tiếng Romani</item>
+        <item>Tiếng Nga</item>
+        <item>Tiếng Tây Ban Nha</item>
+        <item>Tiếng Thổ Nhĩ Kì</item>
+		<item>Tiếng Việt</item>
+    </string-array>
+    <string-array name="languages_values">
+        <item>zh-CN</item>
+        <item>zh-TW</item>
+        <item>en</item>
+        <item>de</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ro</item>
+        <item>ru</item>
+        <item>es</item>
+        <item>tr</item>
+		<item>vi</item>
+    </string-array>
+    <string-array name="SignalIconsOverlayEx">
+        <item>Mặc định</item>
+        <item>StrokeOverlayG</item>
+        <item>SneakyOverlayG</item>
+        <item>XperiaOverlayG</item>
+        <item>ZigZagOverlayG</item>
+        <item>WavyOverlayG</item>
+        <item>RoundOverlayG</item>
+        <item>InsideOverlayG</item>
+        <item>BarsOverlayG</item>
+    </string-array>
+    <string-array name="IconShapesOverlayEx">
+        <item>Mặc định</item>
+        <item>com.android.theme.icon.cylinder</item>
+        <item>com.android.theme.icon.leaf</item>
+        <item>com.android.theme.icon.heart</item>
+        <item>com.android.theme.icon.hexagon</item>
+        <item>com.android.theme.icon.mallow</item>
+        <item>com.android.theme.icon.pebble</item>
+        <item>com.android.theme.icon.roundedhexagon</item>
+        <item>com.android.theme.icon.roundedrect</item>
+        <item>com.android.theme.icon.square</item>
+        <item>com.android.theme.icon.squircle</item>
+        <item>com.android.theme.icon.taperedrect</item>
+        <item>com.android.theme.icon.teardrop</item>
+        <item>com.android.theme.icon.vessel</item>
+        <item>com.android.theme.icon.cloudy</item>
+        <item>com.android.theme.icon.flower</item>
+        <item>com.android.theme.icon.stretched</item>
+    </string-array>
+    <string-array name="IconPacksOverlayEx">
+        <item>Mặc định</item>
+        <item>AcherusOverlayG</item>
+        <item>CircularOverlayG</item>
+        <item>FilledOverlayG</item>
+        <item>KaiOverlayG</item>
+        <item>OxigenOSOverlayG</item>
+        <item>RoundedOverlayG</item>
+        <item>SamOverlayG</item>
+        <item>VictorOverlayG</item>
+        <item>OutlineOverlayG</item>
+        <item>com.android.theme.icon_pack.liv.android</item>
+    </string-array>
+    <string-array name="DTStylesOverlayEx">
+        <item>Mặc định</item>
+        <item>com.android.dark.bakedgreen</item>
+        <item>com.android.dark.chocox</item>
+        <item>com.android.dark.darkgrey</item>
+        <item>com.android.dark.materialocean</item>
+        <item>com.android.dark.pitchblack</item>
+        <item>com.android.dark.solarizeddark</item>
+        <item>com.android.dark.darkaubergine</item>
+        <item>com.android.dark.style</item>
+    </string-array>
+    <string-array name="FontsOverlayEx">
+        <item>Mặc định</item>
+        <item>org.protonaosp.theme.font.blenderpro</item>
+        <item>org.protonaosp.theme.font.euclid</item>
+        <item>org.protonaosp.theme.font.harmonysans</item>
+        <item>org.protonaosp.theme.font.googlesans.inter</item>
+        <item>org.protonaosp.theme.font.linottesource</item>
+        <item>com.android.theme.font.evolvesans</item>
+        <item>org.protonaosp.theme.font.manrope</item>
+        <item>org.protonaosp.theme.font.milanpro</item>
+        <item>org.protonaosp.theme.font.noto_sans</item>
+        <item>com.android.theme.font.notoserifsource</item>
+        <item>com.android.theme.font.opsans</item>
+        <item>com.android.theme.font.oneplusslate</item>
+        <item>org.protonaosp.theme.font.poppins</item>
+        <item>org.protonaosp.theme.font.recursive_casual</item>
+        <item>org.protonaosp.theme.font.recursive_linear</item>
+        <item>org.protonaosp.theme.font.roboto</item>
+        <item>com.android.theme.font.rosemarysource</item>
+        <item>org.protonaosp.theme.font.source_sans</item>
+        <item>org.protonaosp.theme.font.source_serif</item>
+        <item>com.android.theme.font.storopia</item>
+        <item>com.android.theme.font.simpleday</item>
+        <item>com.android.theme.font.lgsmartgothicsource</item>
+        <item>com.android.theme.font.nokiapure</item>
+        <item>com.android.theme.font.bariolsource</item>
+        <item>com.android.theme.font.comfortaa</item>
+        <item>com.android.theme.font.coolstorysource</item>
+        <item>com.android.theme.font.comicsans</item>
+        <item>com.android.theme.font.sonysketchsource</item>
+        <item>com.android.theme.font.amarantesource</item>
+        <item>com.android.theme.font.cocon</item>
+        <item>com.android.theme.font.fucek</item>
+        <item>com.android.theme.font.oduda</item>
+        <item>com.android.theme.font.lemonmilk</item>
+        <item>com.android.theme.font.aclonicasource</item>
+        <item>com.android.theme.font.fifa2018</item>
+        <item>com.android.theme.font.reemkufi</item>
+        <item>com.android.theme.font.exotwo</item>
+        <item>com.android.theme.font.samsungone</item>
+        <item>com.android.theme.font.nunito</item>
+        <item>com.android.theme.font.quando</item>
+        <item>com.android.theme.font.ubuntu</item>
+        <item>com.android.theme.font.antipastopro</item>
+        <item>com.android.theme.font.surfersource</item>
+        <item>com.android.theme.font.cagliostrosource</item>
+        <item>com.android.theme.font.grandhotel</item>
+        <item>com.android.theme.font.redressed</item>
+        <item>com.android.theme.font.jbmono</item>
+        <item>com.android.theme.font.rbserif</item>
+    </string-array>
+</resources>

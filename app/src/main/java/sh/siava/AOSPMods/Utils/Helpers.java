@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods.Utils;
 
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipFile;
 
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 
@@ -229,6 +232,25 @@ public class Helpers {
             e.printStackTrace();
             return false;
         }
+    }
+
+
+    public static void tryHookAllMethods(Class<?> clazz, String method, XC_MethodHook hook)
+    {
+        try {
+            hookAllMethods(clazz, method, hook);
+        }
+        catch(Throwable ignored)
+        {}
+    }
+
+    public static void tryHookAllConstructors(Class<?> clazz, XC_MethodHook hook)
+    {
+        try {
+            hookAllConstructors(clazz, hook);
+        }
+        catch(Throwable ignored)
+        {}
     }
 
 }

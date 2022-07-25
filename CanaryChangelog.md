@@ -1,3 +1,6 @@
+**canary-87**  
+- Android 13: Gesture Pill compatible  
+  
 **canary-86**  
 - Android 13 - Partially compatible (Xposed only package) - Notification area and QS remaining  
   

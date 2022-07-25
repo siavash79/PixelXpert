@@ -5,8 +5,9 @@ import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
-import static de.robv.android.xposed.XposedHelpers.getIntField;
+import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.Utils.Helpers.tryHookAllMethods;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
@@ -22,6 +23,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.launcher.TaskbarActivator;
 
 @SuppressWarnings("RedundantThrows")
 public class GestureNavbarManager extends XposedModPack {
@@ -36,7 +38,7 @@ public class GestureNavbarManager extends XposedModPack {
 
     //region pill size
     private static int GesPillHeightFactor =100;
-    public static float widthFactor = 1f;
+    private static float widthFactor = 1f;
 
     private Object mNavigationBarInflaterView = null;
     //endregion
@@ -63,6 +65,17 @@ public class GestureNavbarManager extends XposedModPack {
         //region pill size
         widthFactor = Xprefs.getInt("GesPillWidthModPos", 50) * .02f;
         GesPillHeightFactor = Xprefs.getInt("GesPillHeightFactor", 100);
+
+        int taskbarMode = TaskbarActivator.TASKBAR_DEFAULT;
+        String taskbarModeStr = Xprefs.getString("taskBarMode", "0");
+        try {
+            taskbarMode = Integer.parseInt(taskbarModeStr);
+        } catch (Exception ignored) {}
+
+        if(taskbarMode == TaskbarActivator.TASKBAR_ON)
+        {
+            widthFactor = 0f;
+        }
 
         if(Key.length > 0)
         {
@@ -101,6 +114,7 @@ public class GestureNavbarManager extends XposedModPack {
         Class<?> EdgeBackGestureHandlerClass = findClassIfExists("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader);
         Class<?> NavigationBarEdgePanelClass = findClassIfExists("com.android.systemui.navigationbar.gestural.NavigationBarEdgePanel", lpparam.classLoader);
 
+        //Android 13
         tryHookAllMethods(NavigationBarEdgePanelClass, "onMotionEvent", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -139,12 +153,34 @@ public class GestureNavbarManager extends XposedModPack {
 
         //region pill size
         hookAllMethods(NavigationHandleClass,
+                "setVertical", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if(widthFactor != 1f) {
+                            View result = (View) param.thisObject;
+                            ViewGroup.LayoutParams resultLayoutParams = result.getLayoutParams();
+                            int originalWidth;
+                            try {
+                                originalWidth = (int) getAdditionalInstanceField(param.thisObject, "originalWidth");
+                            }
+                            catch (Throwable ignored)
+                            {
+                                originalWidth = resultLayoutParams.width;
+                                setAdditionalInstanceField(param.thisObject, "originalWidth", originalWidth);
+                            }
+
+                            resultLayoutParams.width = Math.round(originalWidth * widthFactor);
+                        }
+                    }
+                });
+
+        hookAllMethods(NavigationHandleClass,
                 "onDraw", new XC_MethodHook() {
-                    int mRadius = 0;
+                    float mRadius = 0;
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if(GesPillHeightFactor != 100) {
-                            mRadius = getIntField(param.thisObject, "mRadius");
+                            mRadius = (float) getObjectField(param.thisObject, "mRadius");
                             setObjectField(param.thisObject, "mRadius", Math.round(mRadius * GesPillHeightFactor / 100f));
                         }
                     }

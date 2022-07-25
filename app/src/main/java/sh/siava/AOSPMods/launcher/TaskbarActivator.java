@@ -15,9 +15,9 @@ import sh.siava.AOSPMods.XposedModPack;
 public class TaskbarActivator extends XposedModPack {
 	private static final String listenPackage = AOSPMods.LAUNCHR_PACKAGE;
 	
-	private static final int TASKBAR_DEFAULT = 0;
-	private static final int TASKBAR_ON = 1;
-	private static final int TASKBAR_OFF = 2;
+	public static final int TASKBAR_DEFAULT = 0;
+	public static final int TASKBAR_ON = 1;
+	public static final int TASKBAR_OFF = 2;
 	
 	private static int taskbarMode = 0;
 	

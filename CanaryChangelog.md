@@ -1,3 +1,6 @@
+**canary-86**  
+- Android 13 - Partially compatible (Xposed only package) - Notification area and QS remaining  
+  
 **canary-85**  
 - canary-85 - Rebuild  
   

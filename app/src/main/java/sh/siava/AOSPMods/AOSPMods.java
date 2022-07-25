@@ -61,12 +61,13 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public AOSPMods()
     {
         //region Mod list definition
+
         modPacks.add(BackToKill.class);
-        modPacks.add(StatusbarMods.class);
-        modPacks.add(BatteryStyleManager.class);
+        modPacks.add(StatusbarMods.class); //13 OK
+        modPacks.add(BatteryStyleManager.class); //13 OK
         modPacks.add(FeatureFlagsMods.class);
         modPacks.add(KeyguardBottomArea.class);
-        modPacks.add(GestureNavbarManager.class);
+        modPacks.add(GestureNavbarManager.class); //13 Pill size remaining
         modPacks.add(QSFooterTextManager.class);
         modPacks.add(QSHaptic.class);
         modPacks.add(QSHeaderManager.class);

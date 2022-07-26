@@ -2,19 +2,24 @@ package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
 import androidx.core.content.res.ResourcesCompat;
+
+import java.util.Set;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -60,14 +65,14 @@ public class NotificationExpander extends XposedModPack {
 		Class<?> NotificationEntryManagerClass = findClass("com.android.systemui.statusbar.notification.NotificationEntryManager", lpparam.classLoader);
 		Class<?> FooterViewClass = findClass("com.android.systemui.statusbar.notification.row.FooterView", lpparam.classLoader);
 		Class<?> FooterViewButtonClass = findClass("com.android.systemui.statusbar.notification.row.FooterViewButton", lpparam.classLoader);
-		Class<?> NotificationStackScrollLayoutControllerClass = findClass("com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController", lpparam.classLoader);
-		
+		Class<?> NotificationStackScrollLayoutClass = findClass("com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout", lpparam.classLoader);
+
 		//Notification Footer, where shortcuts should live
 		hookAllMethods(FooterViewClass, "onFinishInflate", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				FooterView = (FrameLayout) param.thisObject;
-				
+
 				BtnLayout = new FrameLayout(mContext);
 				FrameLayout.LayoutParams BtnFrameParams = new FrameLayout.LayoutParams(Math.round(fh*2.5f), fh);
 				BtnFrameParams.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
@@ -114,7 +119,7 @@ public class NotificationExpander extends XposedModPack {
 		});
 		
 		//grab notification scroll page
-		hookAllConstructors(NotificationStackScrollLayoutControllerClass, new XC_MethodHook() {
+		hookAllConstructors(NotificationStackScrollLayoutClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				Scroller = param.thisObject;
@@ -125,16 +130,22 @@ public class NotificationExpander extends XposedModPack {
 	
 	private void updateFooterBtn()
 	{
-		Object mDismissButton = getObjectField(FooterView, "mDismissButton");
-		
-		int fh = (int) callMethod(mDismissButton, "getHeight");
-		
+		View mDismissButton;
+		try {
+			mDismissButton = (View) getObjectField(FooterView, "mManageButton"); //A13
+		}
+		catch(Throwable ignored)
+		{
+			mDismissButton = (View) getObjectField(FooterView, "mDismissButton"); //A12
+		}
+
+		int fh = mDismissButton.getLayoutParams().height;
+
 		if(fh > 0) { //sometimes it's zero. we don't need that
 			NotificationExpander.fh = fh;
 		}
-
 		int tc = (int) callMethod(mDismissButton, "getCurrentTextColor");
-		
+
 		Drawable expandArrows = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.exapnd_icon, mContext.getTheme());
 		expandArrows.setTint(tc);
 		ExpandBtn.setBackground(expandArrows);
@@ -151,7 +162,17 @@ public class NotificationExpander extends XposedModPack {
 		if(NotificationEntryManager == null) return;
 		
 		if(!expand) {
-			callMethod(Scroller, "resetScrollPosition");
+			if(android.os.Build.VERSION.SDK_INT == 33) { //A13
+				callMethod(
+						Scroller,
+						"setOwnScrollY",
+						/* pisition */0,
+						/* animate */ true);
+			}
+			else
+			{
+				callMethod(Scroller, "resetScrollPosition");
+			}
 		}
 		
 		android.util.ArraySet<?> entries = (android.util.ArraySet<?>) getObjectField(NotificationEntryManager, "mAllNotifications");

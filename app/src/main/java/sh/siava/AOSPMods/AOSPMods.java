@@ -61,13 +61,14 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public AOSPMods()
     {
         //region Mod list definition
+        modPacks.add(NotificationExpander.class);
 
         modPacks.add(BackToKill.class);
         modPacks.add(StatusbarMods.class); //13 OK
         modPacks.add(BatteryStyleManager.class); //13 OK
         modPacks.add(FeatureFlagsMods.class);
         modPacks.add(KeyguardBottomArea.class);
-        modPacks.add(GestureNavbarManager.class); //13 Pill size remaining
+        modPacks.add(GestureNavbarManager.class); //13 OK
         modPacks.add(QSFooterTextManager.class);
         modPacks.add(QSHaptic.class);
         modPacks.add(QSHeaderManager.class);
@@ -79,7 +80,6 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(AOSPSettingsLauncher.class);
         modPacks.add(miscSettings.class);
         modPacks.add(BrightnessSlider.class);
-        modPacks.add(NotificationExpander.class);
         modPacks.add(TaskbarActivator.class);
         modPacks.add(LockscreenAlbumArt.class);
         modPacks.add(KeyGuardPinScrambler.class);
@@ -99,7 +99,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         isSecondProcess =  lpparam.processName.contains(":");
 
-        Helpers.dumpClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam);
+        Helpers.dumpClass("androidx.concurrent.futures.CallbackToFutureAdapter$SafeFuture$1", lpparam);
 
         findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
             @Override

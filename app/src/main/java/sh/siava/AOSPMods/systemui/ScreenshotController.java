@@ -7,6 +7,7 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.media.MediaActionSound;
+import android.os.Build;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -41,8 +42,22 @@ public class ScreenshotController extends XposedModPack {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if(!disableScreenshotSound) return;
 
-                //We can't prevent methods from playing sound! So let's break the sound player :D
-                setObjectField(param.thisObject, "mCameraSound", nothingPlayer);
+                if(Build.VERSION.SDK_INT == 33) { //A13
+                    Class<?> CompleterClass = findClass("androidx.concurrent.futures.CallbackToFutureAdapter$Completer", lpparam.classLoader);
+                    Class<?> SafeFutureClass = findClass("androidx.concurrent.futures.CallbackToFutureAdapter$SafeFuture", lpparam.classLoader);
+
+                    //We can't prevent methods from playing sound! So let's break the sound player :D
+                    setObjectField(param.thisObject,
+                            "mCameraSound",
+                            SafeFutureClass
+                                    .getConstructors()[0]
+                                    .newInstance(CompleterClass.newInstance()));
+                }
+                else
+                { //A12
+                    //We can't prevent methods from playing sound! So let's break the sound player :D
+                    setObjectField(param.thisObject, "mCameraSound", nothingPlayer);
+                }
             }
         });
     }
@@ -60,5 +75,4 @@ public class ScreenshotController extends XposedModPack {
 
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
-
 }

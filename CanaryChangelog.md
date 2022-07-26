@@ -1,3 +1,6 @@
+**canary-88**  
+- Screenshot sound Android 13 compatible  
+  
 **canary-87**  
 - Android 13: Gesture Pill compatible  
   

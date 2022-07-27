@@ -117,7 +117,6 @@
     <string name="status_bar_height">Высота строки состояния</string>
     <string name="sb_padding_title">Заполнение строки состояния</string>
     <string name="sb_padding_summary">Установка мин./макс. значений эквивалентна настройкам устройства по умолчанию</string>
-    
     <string name="sbbb_header">Настройка панели заряда батареи</string>
     <string name="sbbIcon_header">Настройка значка батареи</string>
     <string name="BB_enable_title">Включить панель заряда батареи</string>
@@ -153,6 +152,8 @@
     <string name="qs_rows_number">Количество рядов быстрых настроек</string>    
     <string name="qs_cols_number">Количество столбцов быстрых настроек</string>
     <string name="qqs_tiles_number">Максимальное количество плиток в полуоткрытых быстрых настройках (максимум 2 строки)</string>
+    <string name="qs_tile_label_size">Размер текста плиток быстрых настроек</string>
+    <string name="qs_tile_secondary_label_size">Размер деталей плиток быстрых настроек</string>
     <string name="qs_general_options">Параметры быстрых настроек</string>
     <string name="qs_text_size_title">Размер текста плиток быстрых настроек</string>
     <string name="wifi_cell_title">Плитка интернета</string>
@@ -192,6 +193,7 @@
     <string name="gesturenav_header">Навигация жестами</string>
     <string name="gesture_nav_pill_cat">Ширина панели жестов</string>
     <string name="gesture_nav_pill_mod_title">Изменение ширины панели жестов</string>
+    <string name="gesture_nav_pill_width_title">Ширина по сравнению со стандартным размером</string>
     <string name="gesture_nav_pill_height_title">Высота по сравнению со стандартным размером</string>
     <string name="threebutton_header_title">Навигация с помощью трех кнопок</string>
     <string name="back_longpress_kill_title">Длительное нажатие кнопки "Назад", принудительно закрывает приложение</string>
@@ -207,6 +209,9 @@
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Отключить звука скриншота</string>
+    <string name="allow_all_screen_rotations">Разблокировать все повороты экрана</string>
+    <string name="allow_all_screen_rotations_summary">Также будет игнорировать плавающую кнопку ручного вращения</string>
+
     <string name="force_no_cutout">Игнорировать вырез камеры</string>
     <string name="volume_button_step_title">Шаг громкости (от 0 до 100%)</string>
     
@@ -226,6 +231,11 @@
     <string name="expand_notifications_icons_title">"Добавить кнопки развернуть/свернуть все</string>
     <string name="disable_overscroll">"Отключить эффект упругости в конце прокрутки</string>
     <string name="overscroll_on_summary">Важно: Вы ДОЛЖНЫ включить приложения, для которых Вы хотите отключить прокрутку, в LSPosed</string>
+    
+    <!-- Call section -->
+    <string name="call_category">Телефонные звонки</string>
+    <string name="vibrate_on_call_active_title">Вибрация при ответе на исходящий вызов</string>
+    <string name="vibrate_on_call_drop_title">Вибрация при отключении вызова</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Принудительное использование шрифта Google Sans во всей системе</string>
@@ -331,5 +341,5 @@
     
     <string name="own_prefs_header">Настройки AOSPMods</string>
     <string name="language_title">Выберите язык</string>
-    
+    <string name="toggle_dark_apply">(Переключиться на темную тему)</string>
 </resources>

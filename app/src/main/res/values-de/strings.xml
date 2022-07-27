@@ -154,6 +154,8 @@
     <string name="qs_rows_number">Anzahl Reihen in den Schnelleinstellungen</string>
     <string name="qs_cols_number">Anzahl der QS-Spalten</string>
     <string name="qqs_tiles_number">Maximale Kacheln in Quick QS (max. 2 Zeilen)</string>
+	<string name="qs_tile_label_size">QS-Kacheletikettengröße</string>
+    <string name="qs_tile_secondary_label_size">Zusammenfassungsgröße des QS Tile-Labels</string>
     <string name="qs_general_options">Schnelleinstellungs Optionen</string>
     <string name="qs_text_size_title">Schnelleinstellungselemente Schriftgröße</string>
     <string name="wifi_cell_title">Internet Element</string>
@@ -209,6 +211,8 @@
 	
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Deaktiviere Screenshot Ton</string>
+	<string name="allow_all_screen_rotations">Entsperre alle Bildschirmdrehungen</string>
+    <string name="allow_all_screen_rotations_summary">Ignoriert auch die schwebende Schaltfläche für die manuelle Drehung</string>
     <string name="force_no_cutout">Kameraausschnitt ignorieren</string>
     <string name="volume_button_step_title">Lautstärkeschritte (0 bis 100%)</string>		
 	
@@ -228,6 +232,11 @@
     <string name="expand_notifications_icons_title">Alle ausklappen/einklappen aktivieren</string>
     <string name="disable_overscroll">Deaktiviere elastischen Überscrolling Effekt</string>
     <string name="overscroll_on_summary">Wichtig: Sie MÜSSEN die Apps, für die Sie Overscroll deaktivieren möchten, in LSPosed aktivieren</string>
+	
+    <!-- Call section -->
+	<string name="call_category">Telefonanrufe</string>
+    <string name="vibrate_on_call_active_title">Vibrieren bei angenommenem abgehenden Anruf</string>
+    <string name="vibrate_on_call_drop_title">Vibrieren, wenn Anruf getrennt wird</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Erzwinge Google Sans Schriftart systemweit</string>
@@ -319,6 +328,9 @@
     <string name="update_flavor_title">Kanal aktualisieren</string>
     <string name="stable_flavor">Stabil</string>
     <string name="canary_flavor" translateable="false">Kanarienvogel</string>
+	<string name="update_type_title">Pakettyp</string>
+    <string name="full_type">Voll</string>
+    <string name="xposed_type">Nur Xposed</string>
     <string name="currentVersionTitle">Installierte Version: </string>
     <string name="lastestVersionTitle">Neueste Version: </string>
     <string name="root_not_here">ROOT-ZUGRIFF NICHT GEWÄHRT!</string>
@@ -334,5 +346,5 @@
 	
 	<string name="own_prefs_header">AOSPMods-Einstellungen</string>
     <string name="language_title">Sprache auswählen</string>
-
+	<string name="toggle_dark_apply">(Zum dunklen Design wechseln)</string>
 </resources>

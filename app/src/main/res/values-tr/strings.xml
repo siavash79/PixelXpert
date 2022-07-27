@@ -115,6 +115,8 @@
     <string name="dual_tone_battery_on_summary">Açık (yalnızca portre simgesiyle çalışır)</string>
     <string name="unread_messages_title">Okunmamış mesajların sayısını göster</string>
     <string name="status_bar_height">Durum çubuğu yüksekliği</string>
+    <string name="sb_padding_title">Durum Çubuğu Dolgusu</string>
+    <string name="sb_padding_summary">Değerleri min/maks olarak ayarlamak, cihaz varsayılanına eşdeğerdir</string>
     <string name="sbbb_header">Pil çubuğu ayarları</string>
     <string name="sbbIcon_header">Pil simgesi ayarları</string>
     <string name="BB_enable_title">Pil Çubuğunu Etkinleştir</string>
@@ -150,6 +152,8 @@
     <string name="qs_rows_number">Hızlı ayar satır sayısı</string>
     <string name="qs_cols_number">Hızlı ayar kolon sayısı</string>
     <string name="qqs_tiles_number">Üst hızlı ayar panelinde maksimum kutucuk sayısı (en fazla 2 satır)</string>
+    <string name="qs_tile_label_size">Hızlı ayar yazı büyüklüğü</string>
+    <string name="qs_tile_secondary_label_size">Hızlı ayar açıklama büyüklüğü</string>
     <string name="qs_general_options">Hızlı ayar seçenekleri</string>
     <string name="qs_text_size_title">Hızlı ayar butonlarının metin boyutu</string>
     <string name="wifi_cell_title">İnternet Kutucuğu</string>

@@ -143,6 +143,8 @@
     <string name="qs_rows_number">Numărul de rânduri QS</string>
     <string name="qs_cols_number">Numărul de coloane QS</string>
     <string name="qqs_tiles_number">Maximum dale în QS rapid (max 2 rânduri)</string>
+    <string name="qs_tile_label_size">Dimensiune etichetă dală QS</string>
+    <string name="qs_tile_secondary_label_size">Dimensiune sumar etichetă dală QS</string>
     <string name="qs_general_options">Opțiuni setări rapide</string>
     <string name="qs_text_size_title">Setează dimensiunea textului pentru pictogramele QS</string>
     <string name="wifi_cell_title">Dală Internet</string>
@@ -233,7 +235,6 @@
     <string name="dt_darkaubergine">Vânătă întunecată</string>
     <string name="dt_style">Albastru închis</string>
     <string name="dt_darkgray">Gri închis</string>
-    <string name="dt_materialocean">Ocean material</string>
     <string name="dt_night">Noapte</string>
     <string name="dt_solarizeddark">Întuneric solarizat</string>
     <!-- Arrays strings -->
@@ -284,7 +285,7 @@
     <string name="netstat_caution_no">Poate mai târziu</string>
     <string name="monitoring_category_title">Opțiuni monitorizare</string>
     <string name="netstat_header">Setări statistici de rețea</string>
-    <string name="string_formatter_manual_body">Pe lângă textul normal pe care îl puteți introduce, sunt disponibile și variabile dinamice:\n\n$G\&lt;format\&gt; : Georgian, bazat pe format. Pentru documentația de format, căutați `Java Date Format`\nExemplu: $GMMM înseamnă: Ian (sau oricare alta)\n\n$P&lt;format&gt; : Persian, bazat pe format\nExemplu: $Pyyyy înseamnă: 1401\n\n$Nrx : Descărcări totale astăzi\n$Ntx: Încărcări totale astăzi\n$Nall : Trafic total astăzi\n\nDacă înlocuiți $N cu $Nc vi se vor furniza statistici de date mobile (ca $Ncrx pentru descărcări)\n\nExemplu:\n`Trafic mobil de $GEEEE: $Ncall` va produce:\n`Trafic mobil de marți: 2GB`</string>
+    <string name="string_formatter_manual_body">În plus față de textul normal pe care îl puteți introduce, sunt disponibile, de asemenea, variabilele dinamice:  $G\\&lt;format\\&gt; : Dată georgiană, bazată pe format. Pentru documentația formatului, căutați `Java Date Format` Exemplu: $GMMM înseamnă: Ian (sau oricare alta)  $P&lt;format&gt; : Dată persană, bazat pe format. Exemplu: $Pyyyy înseamnă: 1401  $Nrx : Descărcări totale în ziua de azi, $Ntx: Total încărcări de astăzi $Nall : Trafic total de astăzi. Dacă înlocuiți $N cu $Nc veți fi obține statistici de date mobile (cum ar fi $Ncrx pentru descărcări): `Trafic mobil de $GEEEE: $Ncall` va produce: `Trafic mobil de marți: 2GB`</string>
     <string name="update_channel_name">Actualizări</string>
     <string name="update_notification_title">Actualizare descărcată</string>
     <string name="update_notification_text">Atingeți aici pentru instalare</string>
@@ -305,4 +306,7 @@
     <string name="update_word">Actualizare</string>
     <string name="switch_branches">Comutare ramură</string>
     <string name="reinstall_word">Reinstalare</string>
+    <string name="own_prefs_header">Setări AOSPMods</string>
+    <string name="language_title">Limbă</string>
+    <string name="toggle_dark_apply">(Comutați tema întunecată pentru a aplica)</string>
 </resources>

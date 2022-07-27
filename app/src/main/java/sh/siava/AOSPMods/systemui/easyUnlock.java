@@ -9,6 +9,7 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.view.View;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -45,7 +46,10 @@ public class easyUnlock extends XposedModPack {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if(!easyUnlockEnabled) return;
 
-                int passwordLen = (int) callMethod(callMethod(getObjectField(param.thisObject, "mPasswordEntry"), "getText"), "length");
+                int passwordLen = (Build.VERSION.SDK_INT == 33)
+                        ? (int) callMethod(getObjectField(getObjectField(param.thisObject, "mPasswordEntry"), "mText"), "length") //A13
+                        : (int) callMethod(callMethod(getObjectField(param.thisObject, "mPasswordEntry"), "getText"), "length"); //A12
+
                 if(passwordLen == expectedPassLen && passwordLen > lastPassLen)
                 {
                     new Thread(() -> {
@@ -53,7 +57,9 @@ public class easyUnlock extends XposedModPack {
 
                         String methodName = param.thisObject.getClass().getName().contains("Password") ? "createPassword" : "createPin";
 
-                        Object password = callStaticMethod(LockscreenCredentialClass, methodName, callMethod(getObjectField(param.thisObject, "mPasswordEntry"), "getText").toString());
+                        Object password = (Build.VERSION.SDK_INT == 33)
+                                ? callStaticMethod(LockscreenCredentialClass, methodName, getObjectField(getObjectField(param.thisObject, "mPasswordEntry"), "mText").toString()) //A13
+                                : callStaticMethod(LockscreenCredentialClass, methodName, callMethod(getObjectField(param.thisObject, "mPasswordEntry"), "getText").toString()); //A12
 
                         boolean accepted = (boolean) callMethod(
                                 getObjectField(param.thisObject, "mLockPatternUtils"),
@@ -66,8 +72,14 @@ public class easyUnlock extends XposedModPack {
                         {
                             View mView = (View) getObjectField(param.thisObject, "mView");
                             mView.post(() -> {
-                                callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "reportUnlockAttempt", userId, true /* sucessful */, 0 /* timeout */);
-                                callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", true /* sucessful */, userId);
+                                if(Build.VERSION.SDK_INT == 33) { //A13
+                                    callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */);
+                                }
+                                else
+                                { //A12
+                                    callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "reportUnlockAttempt", userId, true /* sucessful */, 0 /* timeout */);
+                                    callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", true /* sucessful */, userId);
+                                }
                             });
                         }
                     }).start();
@@ -82,7 +94,11 @@ public class easyUnlock extends XposedModPack {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if(!easyUnlockEnabled) return;
 
-                if((boolean)param.args[1] /* successful? */)
+                boolean succesful = (Build.VERSION.SDK_INT == 33)
+                        ? (boolean) param.args[2] //A13
+                        : (boolean) param.args[1]; //A12
+
+                if(succesful)
                 {
                     expectedPassLen = lastPassLen;
                     Xprefs.edit().putInt("expectedPassLen", expectedPassLen).commit();

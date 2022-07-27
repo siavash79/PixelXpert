@@ -75,9 +75,9 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(BrightnessSlider.class);
         modPacks.add(LockscreenAlbumArt.class);
         modPacks.add(QSTileGrid.class);
-        modPacks.add(easyUnlock.class);
         modPacks.add(miscSettings.class); //13 OK except for internet tile
         modPacks.add(KeyguardCustomText.class); //13 OK except for carrier text
+        modPacks.add(easyUnlock.class); //13 OK
         modPacks.add(MultiStatusbarRows.class); //13 OK
         modPacks.add(StatusbarMods.class); //13 OK
         modPacks.add(BatteryStyleManager.class); //13 OK
@@ -99,7 +99,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         isSecondProcess =  lpparam.processName.contains(":");
 
-        Helpers.dumpClass("androidx.concurrent.futures.CallbackToFutureAdapter$SafeFuture$1", lpparam);
+        //Helpers.dumpClass("com.android.keyguard.KeyguardSecurityContainerController$2", lpparam);
 
         findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
             @Override

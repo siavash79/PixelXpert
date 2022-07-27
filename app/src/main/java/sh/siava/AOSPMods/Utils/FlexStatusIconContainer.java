@@ -335,6 +335,7 @@ public class FlexStatusIconContainer extends LinearLayout {
                     }
                     break;
             }
+            totalWidth += paddings;
 
             if (mode == MeasureSpec.EXACTLY) {
                 setMeasuredDimension(width, MeasureSpec.getSize(heightMeasureSpec));

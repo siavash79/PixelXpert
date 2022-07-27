@@ -61,37 +61,37 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public AOSPMods()
     {
         //region Mod list definition
-        modPacks.add(NotificationExpander.class);
 
+        modPacks.add(NotificationExpander.class);
         modPacks.add(BackToKill.class);
-        modPacks.add(StatusbarMods.class); //13 OK
-        modPacks.add(BatteryStyleManager.class); //13 OK
         modPacks.add(FeatureFlagsMods.class);
         modPacks.add(KeyguardBottomArea.class);
-        modPacks.add(GestureNavbarManager.class); //13 OK
-        modPacks.add(QSFooterTextManager.class);
         modPacks.add(QSHaptic.class);
         modPacks.add(QSHeaderManager.class);
         modPacks.add(QSQuickPullDown.class);
-        modPacks.add(ScreenshotController.class);
         modPacks.add(UDFPSManager.class);
-        modPacks.add(screenOffKeys.class);
         modPacks.add(ScreenGestures.class);
         modPacks.add(AOSPSettingsLauncher.class);
-        modPacks.add(miscSettings.class);
         modPacks.add(BrightnessSlider.class);
-        modPacks.add(TaskbarActivator.class);
         modPacks.add(LockscreenAlbumArt.class);
-        modPacks.add(KeyGuardPinScrambler.class);
-        modPacks.add(overScrollDisabler.class);
-        modPacks.add(KeyguardCustomText.class);
-        modPacks.add(FingerprintWhileDozing.class);
-        modPacks.add(StatusbarSize.class);
-        modPacks.add(MultiStatusbarRows.class);
         modPacks.add(QSTileGrid.class);
         modPacks.add(easyUnlock.class);
-        modPacks.add(screenRotation.class);
-        modPacks.add(CallVibrator.class);
+        modPacks.add(miscSettings.class); //13 OK except for internet tile
+        modPacks.add(KeyguardCustomText.class); //13 OK except for carrier text
+        modPacks.add(MultiStatusbarRows.class); //13 OK
+        modPacks.add(StatusbarMods.class); //13 OK
+        modPacks.add(BatteryStyleManager.class); //13 OK
+        modPacks.add(GestureNavbarManager.class); //13 OK
+        modPacks.add(QSFooterTextManager.class); //13 OK
+        modPacks.add(ScreenshotController.class); //13 OK
+        modPacks.add(screenOffKeys.class); //13 OK
+        modPacks.add(TaskbarActivator.class); //13 OK
+        modPacks.add(KeyGuardPinScrambler.class); //13 OK
+        modPacks.add(overScrollDisabler.class); //13 OK
+        modPacks.add(FingerprintWhileDozing.class); //13 OK
+        modPacks.add(StatusbarSize.class); //13 OK
+        modPacks.add(screenRotation.class); //13 OK
+        modPacks.add(CallVibrator.class); //13 OK
         //endregion
     }
     

@@ -15,6 +15,7 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,7 +131,7 @@ public class GestureNavbarManager extends XposedModPack {
                 "isWithinInsets", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(notWithinInsets((float) param.args[0], (float) param.args[1], (Point) getObjectField(param.thisObject, "mDisplaySize"), (float) getObjectField(param.thisObject, "mBottomGestureHeight")))
+                        if(notWithinInsets(((Integer)param.args[0]).floatValue(), ((Integer)param.args[1]).floatValue(), (Point) getObjectField(param.thisObject, "mDisplaySize"), (float) getObjectField(param.thisObject, "mBottomGestureHeight")))
                         {
                             param.setResult(false);
                         }
@@ -176,18 +177,21 @@ public class GestureNavbarManager extends XposedModPack {
 
         hookAllMethods(NavigationHandleClass,
                 "onDraw", new XC_MethodHook() {
-                    float mRadius = 0;
+                    int mRadius = 0;
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if(GesPillHeightFactor != 100) {
-                            mRadius = (float) getObjectField(param.thisObject, "mRadius");
+                            mRadius = (Build.VERSION.SDK_INT == 33)
+                                    ? Math.round((float) getObjectField(param.thisObject, "mRadius")) //A13
+                                    : (int) getObjectField(param.thisObject, "mRadius"); //A12
+
                             setObjectField(param.thisObject, "mRadius", Math.round(mRadius * GesPillHeightFactor / 100f));
                         }
                     }
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(mRadius > 0) {
-                            setObjectField(param.thisObject, "mRadius", mRadius);
+                            setObjectField(param.thisObject, "mRadius", Math.round(mRadius));
                         }
                     }
                 });

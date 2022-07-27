@@ -1,3 +1,7 @@
+**canary-89**  
+- Fixed Multi-row statusbar A13 bugs  
+- Fix gesture pill height A12 bug  
+  
 **canary-88**  
 - Screenshot sound Android 13 compatible  
   

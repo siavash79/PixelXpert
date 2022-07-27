@@ -1,7 +1,7 @@
 id=AOSPMods
 name=AOSP Mods
-version=canary-89
-versionCode=89
+version=canary-90
+versionCode=90
 author=Siavash79 + ElTifo
 description=Xposed based module for customizations on SystemUI on AOSP based roms. Supports Android 12+
 minMagisk=24200

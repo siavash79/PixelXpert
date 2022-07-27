@@ -1,3 +1,6 @@
+**canary-90**  
+- Android 13: Easy unlock compatible  
+  
 **canary-89**  
 - Fixed Multi-row statusbar A13 bugs  
 - Fix gesture pill height A12 bug  

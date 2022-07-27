@@ -344,5 +344,5 @@
     
     <string name="own_prefs_header">AOSPMods ayarları</string>
     <string name="language_title">Dil seçimi</string>
-    
+    <string name="toggle_dark_apply">(Koyu temaya geç)</string>
 </resources>

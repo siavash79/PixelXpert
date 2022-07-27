@@ -499,7 +499,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 
                         break;
                     case SORT_TIGHT:
-                        if (xPosition > iconWidth) {
+                        if (xPosition >= iconWidth) {
                             xPosition -= iconWidth;
                             iconTranslationX = xPosition;
 

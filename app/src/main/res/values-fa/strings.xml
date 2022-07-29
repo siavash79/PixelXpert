@@ -241,7 +241,6 @@
     <string name="monitoring_category_title">گزینه های نظارت</string>
     <string name="netstat_header">تنظیمات آمار شبکه</string>
 
-    <string name="string_formatter_manual_body">علاوه بر متن معمولی که می توانید وارد کنید، متغیرهای پویا نیز در دسترس هستند:  $G\\&lt;format\\&gt; : تاریخ گرجی، بر اساس قالب. برای مستندات فرمت، لطفاً «فرمت تاریخ جاوا» را جستجو کنید مثال: $GMMM به معنی: Jan (یا هر دیگری)  $P&lt;format&gt; : تاریخ فارسی، بر اساس قالب مثال: $Pyyyy یعنی: 1401  $Nrx: مجموع بارگیری‌های امروز $Ntx: مجموع بارگذاری‌های امروز $Nall: کل ترافیک امروز  اگر $N را با $Nc جایگزین کنید، آمار داده‌های تلفن همراه (مانند $Ncrx) در اختیار شما قرار می‌گیرد برای دانلود)  مثال: \'Traffic Mobile of $GEEEEE: $Ncall\' تولید خواهد کرد: \'Traffic Mobile of Tuesday: 2GB`</string>
     <string name="update_channel_name">به روز رسانی ها</string>
     <string name="update_notification_title">به روز رسانی دانلود شد</string>
     <string name="update_notification_text">برای نصب اینجا ضربه بزنید</string>

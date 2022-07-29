@@ -152,6 +152,8 @@
     <string name="qs_rows_number">Número de lineas</string>
     <string name="qs_cols_number">Número de columnas QS</string>
     <string name="qqs_tiles_number">Número máximo de mosaicos en QS (máx. 2 filas)</string>
+    <string name="qs_tile_label_size">Tamaño de etiqueta de mosaico QS</string>
+    <string name="qs_tile_secondary_label_size">Tamaño de resumen de etiqueta de mosaico QS</string>
     <string name="qs_general_options">Preferencias de ajustes rápidos</string>
     <string name="qs_text_size_title">Tamaño del texto en los ajustes rápidos</string>
     <string name="wifi_cell_title">Atajo de Internet</string>
@@ -342,4 +344,5 @@
     
     <string name="own_prefs_header">Configuración de AOSPMods</string>
     <string name="language_title">Idioma</string>
+    <string name="toggle_dark_apply">(Alternar tema oscuro para aplicar)</string>
 </resources>

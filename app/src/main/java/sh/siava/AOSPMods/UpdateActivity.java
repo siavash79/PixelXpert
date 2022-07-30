@@ -19,12 +19,19 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Locale;
 
+import sh.siava.AOSPMods.Utils.ModuleFolderOperations;
 import sh.siava.AOSPMods.databinding.ActivityUpdateBinding;
 
 public class UpdateActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
+    @SuppressWarnings("FieldCanBeLocal")
     private ActivityUpdateBinding binding;
+
+    public static final String MOD_NAME = "AOSPMods";
+    public static final String MAGISK_UPDATE_DIR = "/data/adb/modules_update";
+    public static final String MAGISK_MODULES_DIR = "/data/adb/modules";
+    private static final String updateRoot = String.format("%s/%s", MAGISK_UPDATE_DIR, MOD_NAME);
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -54,6 +61,7 @@ public class UpdateActivity extends AppCompatActivity {
             String downloadPath = getIntent().getStringExtra("filePath");
 
             installDoubleZip(downloadPath);
+            applyPrefsToUpdate();
         }
         binding = ActivityUpdateBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -65,12 +73,21 @@ public class UpdateActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
     }
 
+    private void applyPrefsToUpdate() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(createDeviceProtectedStorageContext());
+
+        int volumeStps = prefs.getInt("volumeStps", 0);
+        boolean customFontsEnabled = prefs.getBoolean("enableCustomFonts", false);
+        boolean GSansOverrideEnabled = prefs.getBoolean("gsans_override", false);
+
+        ModuleFolderOperations.applyVolumeSteps(volumeStps, updateRoot);
+        ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, updateRoot);
+    }
+
     @Override
     public void onNewIntent(Intent i)
     {
         super.onNewIntent(i);
-
-
     }
 
     @Override

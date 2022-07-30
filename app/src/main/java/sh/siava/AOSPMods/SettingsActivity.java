@@ -166,7 +166,7 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         // Save current activity title so we can set it again after a configuration change
         outState.putCharSequence(TITLE_TAG, getTitle());
@@ -181,7 +181,7 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
+    public boolean onPreferenceStartFragment(@NonNull PreferenceFragmentCompat caller, Preference pref) {
         // Instantiate the new Fragment
         final Bundle args = pref.getExtras();
         final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
@@ -709,7 +709,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 lp.height = edgeHeight;
                 leftGestureIndicator.setLayoutParams(lp);
 
-                findPreference("ReduceKeyboardSpaceOverlay").setVisible(showOverlays);
+                findPreference("nav_keyboard_height_cat").setVisible(showOverlays);
             } catch (Exception ignored) {}
         }
 
@@ -747,6 +747,7 @@ public class SettingsActivity extends AppCompatActivity implements
             return result;
         }
 
+        @SuppressWarnings("SameParameterValue")
         private void setVisibility(View v, boolean visible, long duration)
         {
             if((v.getVisibility() == View.VISIBLE) == visible) return;

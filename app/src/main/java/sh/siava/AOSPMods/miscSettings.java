@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.Utils.ModuleFolderOperations;
 import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 
@@ -71,12 +72,8 @@ public class miscSettings extends XposedModPack {
 
     private void setVolumeSteps() {
         int volumeStps = Xprefs.getInt("volumeStps", 0);
-        if(volumeStps <= 10)
-        {
-            Shell.cmd("rm -Rf " + XPrefs.MagiskRoot + "/system.prop").exec();
-            return;
-        }
-        Shell.cmd("echo ro.config.media_vol_steps=" + volumeStps + " > " + XPrefs.MagiskRoot + "/system.prop").exec();
+
+        ModuleFolderOperations.applyVolumeSteps(volumeStps, XPrefs.MagiskRoot);
     }
 
     private void updateWifiCell() {
@@ -131,20 +128,10 @@ public class miscSettings extends XposedModPack {
     }
 
     private void updateFontsInfrastructure() {
-            boolean customFontsEnabled = Xprefs.getBoolean("enableCustomFonts", false);
-            boolean GSansOverrideEnabled = Xprefs.getBoolean("gsans_override", false);
-            
-            new Thread(() -> {
-                try {
-                    if (customFontsEnabled && GSansOverrideEnabled) {
-                        Shell.cmd(String.format("cp %s/data/fontz/GSans/*.ttf %s/system/fonts/ && cp %s/data/productz/etc/fonts_customization.xml.NEW %s/system/product/etc/fonts_customization.xml", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
-                    } else if (customFontsEnabled) {
-                        Shell.cmd(String.format("rm -rf %s/system/fonts/*.ttf && cp %s/data/productz/etc/fonts_customization.xml.OLD %s/system/product/etc/fonts_customization.xml && cp -r %s/data/productz/fonts/* %s/system/product/fonts/", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
-                    } else {
-                        Shell.cmd(String.format("rm -rf %s/system/fonts/*.ttf && rm -f %s/system/product/etc/fonts_customization.xml && rm -rf %s/system/product/fonts/*", XPrefs.MagiskRoot, XPrefs.MagiskRoot, XPrefs.MagiskRoot)).exec();
-                    }
-                }catch (Exception ignored){}
-            }).start();
+        boolean customFontsEnabled = Xprefs.getBoolean("enableCustomFonts", false);
+        boolean GSansOverrideEnabled = Xprefs.getBoolean("gsans_override", false);
+
+        ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, XPrefs.MagiskRoot);
     }
 
     @Override

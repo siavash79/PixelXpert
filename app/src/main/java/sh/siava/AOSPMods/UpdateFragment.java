@@ -48,6 +48,9 @@ public class UpdateFragment extends Fragment {
     boolean canaryUpdate = false;
     HashMap<String, Object> latestVersion = null;
     private String downloadedFilePath;
+    private static final String updateDir = String.format("%s/%s", UpdateActivity.MAGISK_UPDATE_DIR, UpdateActivity.MOD_NAME);
+    private static final String moduleDir = String.format("%s/%s", UpdateActivity.MAGISK_MODULES_DIR, UpdateActivity.MOD_NAME);
+
     BroadcastReceiver downloadCompletionReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -218,7 +221,7 @@ public class UpdateFragment extends Fragment {
         rebootPending = false;
 
         try {
-            List<String> updateLines = Shell.cmd("cat /data/adb/modules_update/AOSPMods/module.prop | grep version").exec().getOut();
+            List<String> updateLines = Shell.cmd(String.format("cat %s/module.prop | grep version", updateDir)).exec().getOut();
             if (updateLines.size() >= 2) {
                 for (String line : updateLines) {
                     if (line.toLowerCase().contains("code")) {
@@ -228,7 +231,7 @@ public class UpdateFragment extends Fragment {
                     }
                 }
                 try {
-                    currentVersionType = Integer.parseInt(Shell.cmd("cat /data/adb/modules_update/AOSPMods/build.type").exec().getOut().get(0));
+                    currentVersionType = Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", moduleDir)).exec().getOut().get(0));
                 }
                 catch (Exception ignored)
                 {
@@ -238,7 +241,6 @@ public class UpdateFragment extends Fragment {
             } else {
                 throw new Exception();
             }
-
         } catch (Exception ignored) {
             rebootPending = false;
             currentVersionName = BuildConfig.VERSION_NAME;

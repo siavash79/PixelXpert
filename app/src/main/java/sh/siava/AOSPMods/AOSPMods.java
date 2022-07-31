@@ -5,8 +5,6 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 import android.app.Instrumentation;
 import android.content.Context;
-import android.content.res.XResForwarder;
-import android.content.res.XResources;
 
 import java.util.ArrayList;
 
@@ -60,23 +58,23 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
     public AOSPMods()
     {
-        //region Mod list definition
 
+        //region Mod list definition
         modPacks.add(NotificationExpander.class);
         modPacks.add(BackToKill.class);
         modPacks.add(FeatureFlagsMods.class);
-        modPacks.add(KeyguardBottomArea.class);
         modPacks.add(QSHaptic.class);
         modPacks.add(QSHeaderManager.class);
         modPacks.add(QSQuickPullDown.class);
-        modPacks.add(UDFPSManager.class);
-        modPacks.add(ScreenGestures.class);
         modPacks.add(AOSPSettingsLauncher.class);
         modPacks.add(BrightnessSlider.class);
         modPacks.add(LockscreenAlbumArt.class);
         modPacks.add(QSTileGrid.class);
+        modPacks.add(ScreenGestures.class);
         modPacks.add(miscSettings.class); //13 OK except for internet tile
         modPacks.add(KeyguardCustomText.class); //13 OK except for carrier text
+        modPacks.add(KeyguardBottomArea.class); //13 OK
+        modPacks.add(UDFPSManager.class); //13 OK
         modPacks.add(easyUnlock.class); //13 OK
         modPacks.add(MultiStatusbarRows.class); //13 OK
         modPacks.add(StatusbarMods.class); //13 OK
@@ -99,8 +97,10 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         isSecondProcess =  lpparam.processName.contains(":");
 
-        //Helpers.dumpClass("com.android.keyguard.KeyguardSecurityContainerController$2", lpparam);
-
+/*        log("------------");
+        Helpers.dumpClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam);
+        log("------------");
+*/
         findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {

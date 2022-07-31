@@ -9,8 +9,11 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -64,7 +67,6 @@ public class KeyguardBottomArea extends XposedModPack {
 
         Class<?> KeyguardbottomAreaViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
         Class<?> UtilClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
-        Class<?> CameraIntentsClass = findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
 
         //convert wallet button to camera button
         findAndHookMethod(KeyguardbottomAreaViewClass,
@@ -144,9 +146,19 @@ public class KeyguardBottomArea extends XposedModPack {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if((!leftShortcut.equals("camera") && !rightShortcut.equals("camera"))) return;
-                        param.setResult(callStaticMethod(CameraIntentsClass, "getSecureCameraIntent", mContext));
+                        param.setResult(getCameraIntent(mContext));
                     }
                 });
+    }
+
+    private Intent getCameraIntent(Context context)
+    {
+        Resources res = context.getResources();
+
+        Intent cameraIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE);
+        cameraIntent.setPackage(res.getString(res.getIdentifier("config_cameraGesturePackage", "string", context.getPackageName())));
+
+        return cameraIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
     }
 
     private void updateVisibility(ImageView Button, Object thisObject) {

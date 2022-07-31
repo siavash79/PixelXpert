@@ -1,14 +1,15 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
-import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
+import android.os.Build;
 import android.widget.ImageView;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -37,11 +38,11 @@ public class UDFPSManager extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+        Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
+        Class<?> UdfpsKeyguardViewClass = findClass("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader);
+        Class<?> LockIconViewClass = findClass("com.android.keyguard.LockIconView", lpparam.classLoader);
 
-        Class<?> UtilClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
-
-
-        findAndHookMethod("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
+        hookAllMethods(UdfpsKeyguardViewClass,
                 "updateAlpha", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -53,15 +54,29 @@ public class UDFPSManager extends XposedModPack {
                     }
                 });
 
-        findAndHookMethod("com.android.keyguard.LockIconView", lpparam.classLoader,
-                "setUseBackground", boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!transparentBG) return;
-                        param.args[0] = false;
-                    }
-                });
-        findAndHookMethod("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader,
+        if(Build.VERSION.SDK_INT == 33)
+        { //A13
+            hookAllMethods(LockIconViewClass,
+                    "updateIcon", new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            setObjectField(param.thisObject, "mUseBackground", false);
+                        }
+                    });
+        }
+        else
+        { //A12
+            hookAllMethods(LockIconViewClass,
+                    "setUseBackground", new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if(!transparentBG) return;
+                            param.args[0] = false;
+                        }
+                    });
+        }
+
+        hookAllMethods(UdfpsKeyguardViewClass,
                 "updateColor", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -69,8 +84,7 @@ public class UDFPSManager extends XposedModPack {
 
                         Object mLockScreenFp = getObjectField(param.thisObject, "mLockScreenFp");
 
-
-                        int mTextColorPrimary = (int) callStaticMethod(UtilClass, "getColorAttrDefaultColor", mContext,
+                        int mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", mContext,
                                 mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
 
                         setObjectField(param.thisObject, "mTextColorPrimary", mTextColorPrimary);

@@ -1,3 +1,6 @@
+**canary-93**  
+- Android 13: lockscreen shortcuts: compatible  
+  
 **canary-92**  
 - Android 13: [Transparent under display fingerprint sensor] compatible  
   

@@ -1,3 +1,6 @@
+**canary-92**  
+- Android 13: [Transparent under display fingerprint sensor] compatible  
+  
 **canary-91**  
 - Fonts/volume steps will not need an extra reboot IF module is updated through in-app updater  
   

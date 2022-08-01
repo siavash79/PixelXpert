@@ -1,3 +1,6 @@
+**canary-94**  
+- Android 13: Dropping support for full package type  
+  
 **canary-93**  
 - Android 13: lockscreen shortcuts: compatible  
   

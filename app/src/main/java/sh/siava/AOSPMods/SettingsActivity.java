@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.view.Gravity;
@@ -136,14 +137,14 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     public static int getVersionType() {
-        int result;
+        if(Build.VERSION.SDK_INT == 33) //Full version on Android 13 is not accepted
+            return XPOSED_ONLY;
         try {
-            result = Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", "/data/adb/modules/AOSPMods")).exec().getOut().get(0));
+            return Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", "/data/adb/modules/AOSPMods")).exec().getOut().get(0));
         }
         catch (Exception ignored){
-            result = XPOSED_ONLY;
+            return XPOSED_ONLY;
         }
-        return result;
     }
 
     private void createNotificationChannel() {
@@ -569,6 +570,8 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("centerAreaFineTune").setSummary((sharedPreferences.getInt("centerAreaFineTune", 50) - 50) + "%");
 
                 findPreference("systemIconSortPlan").setVisible(sharedPreferences.getBoolean("systemIconsMultiRow", false));
+
+                findPreference("UnreadMessagesNumberOverlay").setVisible(showOverlays);
             } catch (Exception ignored) {}
         }
 

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.JsonReader;
@@ -211,6 +212,10 @@ public class UpdateFragment extends Fragment {
         {
             ((RadioButton) view.findViewById(R.id.stableID)).setChecked(true);
         }
+        if(Build.VERSION.SDK_INT == 33) //Android 13: We don't support full version
+        {
+            ((RadioButton) view.findViewById(R.id.fullTypeID)).setEnabled(false);
+        }
     }
 
 /*    private void getChangelog(String URL, TaskDoneCallback callback) {
@@ -231,7 +236,13 @@ public class UpdateFragment extends Fragment {
                     }
                 }
                 try {
-                    currentVersionType = Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", moduleDir)).exec().getOut().get(0));
+                    if(Build.VERSION.SDK_INT == 33) //Android 13: We don't support full version
+                    {
+                        currentVersionType = SettingsActivity.XPOSED_ONLY;
+                    }
+                    else {
+                        currentVersionType = Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", moduleDir)).exec().getOut().get(0));
+                    }
                 }
                 catch (Exception ignored)
                 {

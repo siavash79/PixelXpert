@@ -36,6 +36,7 @@
         <item>Russian</item>
         <item>Spanish</item>
         <item>Turkish</item>
+        <item>Vietnamese</item>
     </string-array>
 
     <string-array name="languages_values">
@@ -50,6 +51,7 @@
         <item>ru</item>
         <item>es</item>
         <item>tr</item>
+        <item>vi</item>
     </string-array>
 
 

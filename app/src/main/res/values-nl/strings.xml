@@ -1,7 +1,7 @@
 <resources>
     <!--General strings-->
     <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Aangepaste functies voor op Android 12+ AOSP gebaseerde ROM's</string>
+    <string name="xposed_desc" translatable="false">Aangepaste functies voor op Android 12+ AOSP gebaseerde ROM\'s</string>
     <string name="title_activity_settings" translatable="false">@string/app_naam</string>
     <string name="error_not_activated">Bevestig a.u.b. of de module is geactiveerd op LSPosed Manager</string>
     <string name="hide_default">verberg (Standaard)</string>
@@ -19,7 +19,7 @@
     <string name="nav_header">Navigatie bar</string>
     <string name="misc_header">Diversen</string>
     <string name="qs_panel_category_title">Paneel Snelle instellingen</string>
-    <string name="theme_customization_category">Thema's</string>
+    <string name="theme_customization_category">Thema\'s</string>
 
     <!--Lock screen related-->
     <string name="transparent_fingerprint_circle">Vingerafdrukcirkel onder het scherm verbergen</string>
@@ -82,7 +82,7 @@
     <string name="sbc_before_color">Tekst voor klok</string>
     <string name="sbc_color">Klok</string>
     <string name="sbc_after_color">Tekst na klok</string>
-    <string name="network_settings_pref">Instellingen netwerkmonitor...</string>
+    <string name="network_settings_pref">Instellingen netwerkmonitor…</string>
     <string name="ntsb_far_left">Helemaal links</string>
     <string name="ntsb_mid_left">Midden-Links</string>
     <string name="ntsb_mid_right">Midden-Rechts</string>
@@ -90,7 +90,7 @@
     <string name="ntsb_enabled_title">Netwerkmonitor inschakelen</string>
     <string name="ntsb_position_title">Monitorpositie</string>
     <string name="ntsb_threshold_title">Drempel automatisch verbergen</string>
-    <string name="ntsb_threshold_summary">"Verbergen als het verkeer minder is dan... (Kilobytes)"</string>
+    <string name="ntsb_threshold_summary">"Verbergen als het verkeer minder is dan… (Kilobytes)"</string>
     <string name="network_mode_title">Monitorstijl</string>
     <string name="network_colorful_title">Maak het kleurrijk</string>
     <string name="network_download_top">Downloadsnelheid bovenaan</string>
@@ -156,7 +156,7 @@
     <string name="QS_brightness_disable_title">Schuifregelaar voor helderheid verbergen in Snelle instellingen</string>
     <string name="bs_thick_track">zie een dik nummer op de schuifregelaar voor helderheid</string>
     <string name="quick_settings_tiles_category">Opties voor QS-tegels</string>
-    <string name="qs_tile_style_title">QS Tiles-thema's</string>
+    <string name="qs_tile_style_title">QS Tiles-thema\'s</string>
     <string name="qstile_default">Standaard</string>
     <string name="qstile_cookie">Koekje</string>
     <string name="qstile_triangles">Driehoek</string>
@@ -212,7 +212,7 @@
     <string name="so_double_tap_wake_title">Dubbeltik om de telefoon uit de slaapstand te halen</string>
     <string name="so_double_tap_wake_summary">Schakelt een enkele tik uit om te wekken</string>
     <string name="so_tap_proximity_wake_title">Niet wakker worden bij aanraking wanneer het scherm bedekt is</string>
-    <string name="doze_header">Terwijl het scherm is uitgeschakeld...</string>
+    <string name="doze_header">Terwijl het scherm is uitgeschakeld…</string>
     <string name="custom_themed_icons_title">Aangepaste thema-pictogrammen</string>
     <string name="custom_themed_icons_off">Aangepaste pictogrammen uitgeschakeld</string>
     <string name="custom_themed_icons_on">Aangepaste pictogrammen ingeschakeld</string>
@@ -289,7 +289,7 @@
     <!-- Menu Items -->
     <string name="menu_settings_title">Importeren/Exporteren</string>
     <string name="menu_reset_defaults">Alle instellingen resetten</string>
-    <string name="menu_import_settings">Instellingen importeren uit bestand...</string>
+    <string name="menu_import_settings">Instellingen importeren uit bestand…</string>
     <string name="menu_export_settings">Instellingen exporteren naar bestand…</string>
     <string name="menu_netstat_title">Netwerkstatistieken</string>
     <string name="menu_netstat_enable">Statistieken inschakelen</string>

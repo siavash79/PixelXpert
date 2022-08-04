@@ -1,7 +1,5 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="title_activity_settings" translatable="false">@string/app_naam</string>
     <string name="error_not_activated">Bevestig a.u.b. of de module is geactiveerd op LSPosed Manager</string>
     <string name="hide_default">verberg (Standaard)</string>
     <string name="percent_of_default_size">% van standaardgrootte</string>
@@ -53,9 +51,7 @@
     <string name="battery_style_title">Kies een batterijstijl</string>
     <string name="battery_show_percent_title">Toon batterijpercentage</string>
     <string name="battery_style_category_title">Batterijstijl</string>
-    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Grootte batterijpictogram</string>
-    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Verborgen</string>
     <string name="BIcon_Opacity_title">dekking</string>
     <string name="sb_center_fine_tune">Middengebied fijn afstellen</string>
@@ -179,7 +175,6 @@
     <string name="gesture_nav_pill_width_title">Breedte vergeleken met standaard maat</string>
     <string name="threebutton_header_title">3-knops navigatie</string>
     <string name="back_longpress_kill_title">Druk lang op terug om de voorgrond-app te beëindigen</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Navigatiebalk verbergen</string>
     <string name="colorpill_title">Gebarenpil inkleuren</string>
     <string name="colorpill">Accent gekleurde gebaren pil</string>
@@ -241,12 +236,10 @@
     <string name="clock_right">Rechts</string>
 
     <!-- AM/PM style -->
-    <string name="am_pm_default" translatable="false">@string/verberg standaard</string>
     <string name="am_pm_normal">100% grootte van de klok</string>
     <string name="am_pm_small">70% grootte van de klok</string>
 
     <!-- Date position -->
-    <string name="date_default" translatable="false">@string/verberg standaard</string>
     <string name="date_before">Voor de klok (100%)</string>
     <string name="date_before_small">Voor de klok (70%)</string>
     <string name="date_after">Na klok (100%)</string>
@@ -303,7 +296,5 @@
     <string name="update_word">Update</string>
     <string name="switch_branches">Van tak wisselen</string>
     <string name="reinstall_word">Opnieuw installeren</string>
-
-    <string name="title_activity_update" translatable="false">updateActiviteit</string>
 
 </resources>

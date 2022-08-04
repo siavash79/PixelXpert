@@ -1,3 +1,6 @@
+**canary-95**  
+- Dutch and Vietnamese translation  
+  
 **canary-94**  
 - Android 13: Dropping support for full package type  
   

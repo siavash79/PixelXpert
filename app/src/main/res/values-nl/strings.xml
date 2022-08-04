@@ -31,7 +31,6 @@
     <string name="carrier_text_mod_enabled">Aangepaste koerierstekst</string>
     <string name="carrier_text_value">Aangepaste koerierstekst</string>
     <string name="lockscreen_center_text_value">Aangepaste tekst klokgebied</string>
-    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Sneltoetsen in het onderste gebied</string>
     <string name="keyguard_bottom_buttons_transparent_title">Verberg cirkel rond pictogrammen</string>
     <string name="keyguard_bottom_force_camera_title">Camerasnelkoppeling weergeven</string>
@@ -106,9 +105,6 @@
     <string name="dual_tone_battery_on_summary">Aan (werkt alleen met portretpictogram)</string>
     <string name="unread_messages_title">Aantal ongelezen berichten weergeven</string>
     <string name="status_bar_height">Hoogte statusbalk</string>
-    <string name="status_bar_height_small">Klein</string>
-    <string name="status_bar_height_medium">Medium</string>
-    <string name="fix_status_bar_padding">Correcte opvulling aan de linkerkant</string>
     <string name="sbbb_header">Instellingen batterijbalk</string>
     <string name="sbbIcon_header">Instellingen batterijpictogram</string>
     <string name="BB_enable_title">Batterijbalk inschakelen</string>
@@ -142,9 +138,7 @@
     <string name="qs_haptic_switch_title">Trillen op QS tegelkraan</string>
     <string name="qs_rows_number">QS Rijen nummer</string>
     <string name="qs_general_options">Opties voor snelle instellingen</string>
-    <string name="qs_tiles_3_columns_title">Schakel 3 QS Tiles-kolommen in</string>
     <string name="qs_text_size_title">QS Tegels tekstgrootte</string>
-    <string name="qs_text_size">Tekstgrootte QS Tiles verkleinen</string>
     <string name="wifi_cell_title">Internettegel</string>
     <string name="wifi_cell_on">Gebruik wifi en data aparte tegels</string>
     <string name="wifi_cell_off">Gebruik enkele internettegel</string>
@@ -187,11 +181,6 @@
     <string name="back_longpress_kill_title">Druk lang op terug om de voorgrond-app te beëindigen</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Navigatiebalk verbergen</string>
-    <string name="gesture_navbar_thickness_title">Navbar pil dikte</string>
-    <string name="gesture_navbar_thickness">NavBar-pildikte wijzigen</string>
-    <string name="gesture_navbar_thin">Dun</string>
-    <string name="gesture_navbar_thick">Dik</string>
-    <string name="gesture_navbar_thicker">Dikker</string>
     <string name="colorpill_title">Gebarenpil inkleuren</string>
     <string name="colorpill">Accent gekleurde gebaren pil</string>
     <string name="reducekeyboard_title">Gebaren toetsenbordruimte</string>
@@ -206,10 +195,8 @@
     <string name="so_taptaptorch_title">Dubbeltik op Torch inschakelen</string>
     <string name="so_taptaptorch_summary">Dubbeltik en houd vervolgens lockscreen vast voor een snelle zaklamp</string>
 
-    <string name="framework_needed_caution_summary">Vereist activering van System Framework in Lsposed. VOORZICHTIG GEBRUIKEN</string>
     <string name="so_double_tap_wake_title">Dubbeltik om de telefoon uit de slaapstand te halen</string>
     <string name="so_double_tap_wake_summary">Schakelt een enkele tik uit om te wekken</string>
-    <string name="so_tap_proximity_wake_title">Niet wakker worden bij aanraking wanneer het scherm bedekt is</string>
     <string name="doze_header">Terwijl het scherm is uitgeschakeld…</string>
     <string name="custom_themed_icons_title">Aangepaste thema-pictogrammen</string>
     <string name="custom_themed_icons_off">Aangepaste pictogrammen uitgeschakeld</string>
@@ -244,7 +231,6 @@
     <string name="pull_down_right">Rechts</string>
 
     <!-- Battery styles -->
-    <string name="battery_default">Standaard</string>
     <string name="battery_circle">Cirkel</string>
     <string name="battery_dashed_circle">Gestreepte cirkel</string>
     <string name="battery_circle_filled">Gevulde cirkel</string>
@@ -272,10 +258,6 @@
     <string name="fourg_lte_fourg">4G-pictogram forceren</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">Forceer 2 rijen</string>
-    <string name="qs_3_rows">Forceer 3 rijen</string>
-    <string name="qs_4_rows">Forceer 4 rijen</string>
-    <string name="qs_5_rows">Forceer 5 rijen</string>
 
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Verzamel netwerkstatistieken</string>

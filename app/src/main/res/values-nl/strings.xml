@@ -36,7 +36,7 @@
     <string name="keyguard_bottom_category">Sneltoetsen in het onderste gebied</string>
     <string name="keyguard_bottom_buttons_transparent_title">Verberg cirkel rond pictogrammen</string>
     <string name="keyguard_bottom_force_camera_title">Camerasnelkoppeling weergeven</string>
-    <string name="keyguard_left_shortcut">Show left shortcut on lock screen</string>
+    <string name="keyguard_left_shortcut">Linker snelkoppeling op vergrendelscherm weergeven</string>
     <string name="LSleftShortcutTitle">Snelkoppeling naar links</string>
     <string name="LSrightShortcutTitle">Sneltoets rechts</string>
     <string name="camera_shortcut">Camera</string>
@@ -132,7 +132,7 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Build-nummer op QS Panel-voettekst</string>
     <string name="qs_footer_mod_title">Wijzig het nummer van de buildtekst op het QS-paneel</string>
-    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
+    <string name="qs_footer_text_value" translatable="false">@string/carrier_tekstwaarde</string>
     <string name="qs_footer_text_summary">Laat het leeg om de tekst volledig te verwijderen</string>
     <string name="qs_footer_text_desc">Zet het scherm aan/uit om toe te passen</string>
     <string name="light_qs_title">Licht QS-paneel tijdens lichtthema</string>
@@ -156,7 +156,7 @@
     <string name="QS_brightness_disable_title">Schuifregelaar voor helderheid verbergen in Snelle instellingen</string>
     <string name="bs_thick_track">zie een dik nummer op de schuifregelaar voor helderheid</string>
     <string name="quick_settings_tiles_category">Opties voor QS-tegels</string>
-    <string name="qs_tile_style_title">QS Tiles-thema's</string>
+    <string name="qs_tile_style_title">QS Tegels-thema's</string>
     <string name="qstile_default">Standaard</string>
     <string name="qstile_cookie">Koekje</string>
     <string name="qstile_triangles">Driehoek</string>
@@ -187,7 +187,7 @@
     <string name="gesture_nav_pill_width_title">Breedte vergeleken met standaard maat</string>
     <string name="threebutton_header_title">3-knops navigatie</string>
     <string name="back_longpress_kill_title">Druk lang op terug om de voorgrond-app te beëindigen</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
+    <string name="pill_width_summary" translatable="false">@string/percentage_van_standaard_grootte</string>
     <string name="hide_navbar_title">Navigatiebalk verbergen</string>
     <string name="gesture_navbar_thickness_title">Navbar pil dikte</string>
     <string name="gesture_navbar_thickness">NavBar-pildikte wijzigen</string>
@@ -306,7 +306,7 @@
     <string name="monitoring_category_title">Bewakingsopties</string>
     <string name="netstat_header">Instellingen voor netwerkstatistieken</string>
 
-    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
+    <string name="string_formatter_manual_body">Naast de normale tekst die u kunt invoeren, zijn er ook dynamische variabelen beschikbaar:\n\n$G\&lt;format\&gt; : Gregoriaanse datum, gebaseerd op formaat. Zoek voor formaatdocumentatie `Java Date Formaat`\Voorbeeld: $GMMM betekent: Jan (of een ander)\n\n$P&lt;format&gt; : Perzische datum, gebaseerd op formaat\Voorbeeld: $Pyyyy betekent: 1401\n\n$Nrx : Totale Downloads van vandaag\n$Ntx: Total Uploads van vandaag\n$Nall : Total Verkeer van vandaag\n\nIf je vervangt  $N met $Nc u krijgt mobiele datastatistieken (zoals $Ncrx voor downloads)\n\nVoorbeeld:\n`Mobiel verkeer van $GEEEE: $Ncall` zal produceren:\n`Mobiel verkeer van dinsdag: 2GB`</string>
     <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">Updates</string>
     <string name="update_notification_title">Update gedownload</string>

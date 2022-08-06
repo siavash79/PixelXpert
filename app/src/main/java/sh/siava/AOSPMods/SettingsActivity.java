@@ -723,7 +723,7 @@ public class SettingsActivity extends AppCompatActivity implements
             leftGestureIndicator = prepareGestureView(Gravity.LEFT);
 
             getPreferenceManager().setStorageDeviceProtected();
-            setPreferencesFromResource(R.xml.gesture_nav_perfs, rootKey);
+            setPreferencesFromResource(R.xml.gesture_nav_prefs, rootKey);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
             updateVisibility(prefs);
 

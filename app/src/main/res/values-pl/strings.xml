@@ -1,8 +1,5 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Niestandardowe funkcje oparte na systemie Android 12+ AOSP</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Potwierdż, czy moduł jest aktywowany w LSPosed Manager</string>
     <string name="hide_default">Ukryj (Domyślne)</string>
     <string name="percent_of_default_size">% o domyślnym rozmiarze</string>

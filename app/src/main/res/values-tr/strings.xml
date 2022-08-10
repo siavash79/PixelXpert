@@ -1,8 +1,5 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Android 12+ AOSP tabanlı ROM\'lar için özellikler</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Lütfen modülün LSPosed Manager\'da etkinleştirildiğinden emin olun</string>
     <string name="hide_default">Gizle (Varsayılan)</string>
     <string name="percent_of_default_size">% of default size</string>

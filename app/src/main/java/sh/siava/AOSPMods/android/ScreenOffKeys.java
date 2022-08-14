@@ -21,11 +21,11 @@ import java.util.Calendar;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.Utils.SystemUtils;
+import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
-public class screenOffKeys extends XposedModPack {
+public class ScreenOffKeys extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_FRAMEWORK_PACKAGE;
     private static boolean replaceAssistantwithTorch = false;
     private static boolean holdVolumeToSkip = false;
@@ -33,7 +33,7 @@ public class screenOffKeys extends XposedModPack {
     //    private boolean isVolumeLongPress = false;
     private boolean isVolDown = false;
 
-    public screenOffKeys(Context context) {
+    public ScreenOffKeys(Context context) {
         super(context);
     }
 

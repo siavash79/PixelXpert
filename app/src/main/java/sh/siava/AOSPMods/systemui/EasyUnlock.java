@@ -18,7 +18,7 @@ import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
-public class easyUnlock extends XposedModPack {
+public class EasyUnlock extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
     private int expectedPassLen = -1;
@@ -26,7 +26,7 @@ public class easyUnlock extends XposedModPack {
 
     private int lastPassLen = 0;
 
-    public easyUnlock(Context context) {super(context);}
+    public EasyUnlock(Context context) {super(context);}
 
     @Override
     public void updatePrefs(String... Key) {

@@ -11,8 +11,8 @@ import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
-import static sh.siava.AOSPMods.Utils.Helpers.tryHookAllConstructors;
-import static sh.siava.AOSPMods.Utils.Helpers.tryHookAllMethods;
+import static sh.siava.AOSPMods.utils.Helpers.tryHookAllConstructors;
+import static sh.siava.AOSPMods.utils.Helpers.tryHookAllMethods;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
@@ -30,11 +30,11 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
-import sh.siava.AOSPMods.Utils.batteryStyles.BatteryDrawable;
-import sh.siava.AOSPMods.Utils.batteryStyles.CircleBatteryDrawable;
-import sh.siava.AOSPMods.Utils.batteryStyles.CircleFilledBatteryDrawable;
-import sh.siava.AOSPMods.Utils.batteryStyles.hiddenBatteryDrawable;
+import sh.siava.AOSPMods.utils.batteryStyles.BatteryBarView;
+import sh.siava.AOSPMods.utils.batteryStyles.BatteryDrawable;
+import sh.siava.AOSPMods.utils.batteryStyles.CircleBatteryDrawable;
+import sh.siava.AOSPMods.utils.batteryStyles.CircleFilledBatteryDrawable;
+import sh.siava.AOSPMods.utils.batteryStyles.HiddenBatteryDrawable;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
@@ -318,7 +318,7 @@ public class BatteryStyleManager extends XposedModPack {
                 mBatteryDrawable = new CircleFilledBatteryDrawable(context, frameColor);
                 break;
             case 99:
-                mBatteryDrawable = new hiddenBatteryDrawable();
+                mBatteryDrawable = new HiddenBatteryDrawable();
         }
         if(mBatteryDrawable != null) {
             mBatteryDrawable.setShowPercent(ShowPercent);

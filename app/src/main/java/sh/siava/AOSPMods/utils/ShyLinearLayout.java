@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.Utils;
+package sh.siava.AOSPMods.utils;
 
 import android.content.Context;
 import android.util.AttributeSet;

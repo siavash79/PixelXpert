@@ -13,10 +13,10 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
-public class overScrollDisabler extends XposedModPack {
+public class OverScrollDisabler extends XposedModPack {
 	private static boolean disableOverScroll = false;
 	
-	public overScrollDisabler(Context context) { super(context); }
+	public OverScrollDisabler(Context context) { super(context); }
 	
 	@Override
 	public void updatePrefs(String... Key) {

@@ -55,12 +55,12 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
-import sh.siava.AOSPMods.Utils.NetworkTraffic;
-import sh.siava.AOSPMods.Utils.NotificationIconContainerOverride;
-import sh.siava.AOSPMods.Utils.ShyLinearLayout;
-import sh.siava.AOSPMods.Utils.StringFormatter;
-import sh.siava.AOSPMods.Utils.SystemUtils;
-import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
+import sh.siava.AOSPMods.utils.NetworkTraffic;
+import sh.siava.AOSPMods.utils.NotificationIconContainerOverride;
+import sh.siava.AOSPMods.utils.ShyLinearLayout;
+import sh.siava.AOSPMods.utils.StringFormatter;
+import sh.siava.AOSPMods.utils.SystemUtils;
+import sh.siava.AOSPMods.utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 

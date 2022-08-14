@@ -35,8 +35,8 @@ import com.topjohnwu.superuser.Shell;
 import java.util.List;
 import java.util.Locale;
 
-import sh.siava.AOSPMods.Utils.PrefManager;
-import sh.siava.AOSPMods.Utils.SystemUtils;
+import sh.siava.AOSPMods.utils.PrefManager;
+import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class SettingsActivity extends AppCompatActivity implements

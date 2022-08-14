@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.Utils.batteryStyles;
+package sh.siava.AOSPMods.utils.batteryStyles;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -29,8 +29,8 @@ import java.util.TimerTask;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.Utils.Helpers;
-import sh.siava.AOSPMods.Utils.Overlays;
+import sh.siava.AOSPMods.utils.Helpers;
+import sh.siava.AOSPMods.utils.Overlays;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")

@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.Utils.batteryStyles;
+package sh.siava.AOSPMods.utils.batteryStyles;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -7,7 +7,7 @@ import android.graphics.PixelFormat;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class hiddenBatteryDrawable extends BatteryDrawable {
+public class HiddenBatteryDrawable extends BatteryDrawable {
 	@Override
 	public void setShowPercent(boolean showPercent) {
 	

@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Utils.SystemUtils;
-import sh.siava.AOSPMods.allApps.overScrollDisabler;
+import sh.siava.AOSPMods.utils.SystemUtils;
+import sh.siava.AOSPMods.allApps.OverScrollDisabler;
 import sh.siava.AOSPMods.android.StatusbarSize;
-import sh.siava.AOSPMods.android.screenOffKeys;
-import sh.siava.AOSPMods.android.screenRotation;
+import sh.siava.AOSPMods.android.ScreenOffKeys;
+import sh.siava.AOSPMods.android.ScreenRotation;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.systemui.BackToKill;
@@ -39,7 +39,7 @@ import sh.siava.AOSPMods.systemui.ScreenGestures;
 import sh.siava.AOSPMods.systemui.ScreenshotController;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
-import sh.siava.AOSPMods.systemui.easyUnlock;
+import sh.siava.AOSPMods.systemui.EasyUnlock;
 import sh.siava.AOSPMods.systemui.FlashLightLevel;
 import sh.siava.AOSPMods.telecom.CallVibrator;
 
@@ -75,20 +75,20 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(KeyguardCustomText.class); //13 OK except for carrier text
         modPacks.add(KeyguardBottomArea.class); //13 OK
         modPacks.add(UDFPSManager.class); //13 OK
-        modPacks.add(easyUnlock.class); //13 OK
+        modPacks.add(EasyUnlock.class); //13 OK
         modPacks.add(MultiStatusbarRows.class); //13 OK
         modPacks.add(StatusbarMods.class); //13 OK
         modPacks.add(BatteryStyleManager.class); //13 OK
         modPacks.add(GestureNavbarManager.class); //13 OK
         modPacks.add(QSFooterTextManager.class); //13 OK
         modPacks.add(ScreenshotController.class); //13 OK
-        modPacks.add(screenOffKeys.class); //13 OK
+        modPacks.add(ScreenOffKeys.class); //13 OK
         modPacks.add(TaskbarActivator.class); //13 OK
         modPacks.add(KeyGuardPinScrambler.class); //13 OK
-        modPacks.add(overScrollDisabler.class); //13 OK
+        modPacks.add(OverScrollDisabler.class); //13 OK
         modPacks.add(FingerprintWhileDozing.class); //13 OK
         modPacks.add(StatusbarSize.class); //13 OK
-        modPacks.add(screenRotation.class); //13 OK
+        modPacks.add(ScreenRotation.class); //13 OK
         modPacks.add(CallVibrator.class); //13 OK
         modPacks.add(FlashLightLevel.class);
         //endregion

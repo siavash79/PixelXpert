@@ -15,14 +15,14 @@ import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
-public class screenRotation extends XposedModPack {
+public class ScreenRotation extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_FRAMEWORK_PACKAGE;
 
     private static final int USER_ROTATION_LOCKED = 1;
 
     private static boolean allScreenRotations = false;
 
-    public screenRotation(Context context) {
+    public ScreenRotation(Context context) {
         super(context);
     }
 

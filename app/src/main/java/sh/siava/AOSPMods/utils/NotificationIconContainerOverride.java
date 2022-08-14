@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.Utils;
+package sh.siava.AOSPMods.utils;
 
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;

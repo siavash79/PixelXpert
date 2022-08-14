@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.Utils;
+package sh.siava.AOSPMods.utils;
 
 import com.crossbowffs.remotepreferences.RemotePreferenceFile;
 import com.crossbowffs.remotepreferences.RemotePreferenceProvider;

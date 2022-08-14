@@ -639,6 +639,8 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 findPreference("BSThickTrackOverlay").setVisible(showOverlays);
                 findPreference("QSTilesThemesOverlayEx").setVisible(showOverlays);
+
+                findPreference("leveledFlashTile").setVisible(Build.VERSION.SDK_INT >= 33);
             } catch (Exception ignored) {}
         }
 

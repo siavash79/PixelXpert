@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.Utils;
 import static com.topjohnwu.superuser.Shell.cmd;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -15,6 +16,7 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
@@ -39,10 +41,11 @@ public class SystemUtils{
 	PowerManager mPowerManager;
 	ConnectivityManager mConnectivityManager;
 	TelephonyManager mTelephonyManager;
-	AlarmManager mAlaramManager;
+	AlarmManager mAlarmManager;
 	NetworkStats mNetworkStats;
 	DownloadManager mDownloadManager = null;
 	boolean hasVibrator;
+	int maxFlashLevel = -1;
 
 	TorchCallback torchCallback = new TorchCallback();
 
@@ -77,6 +80,11 @@ public class SystemUtils{
 		if(mNetworkStats == null) {
 			mNetworkStats = new NetworkStats(mContext);
 		}
+	}
+	public static void setFlash(boolean enabled, float pct)
+	{
+		if(instance == null) return;
+		instance.setFlashInternal(enabled, pct);
 	}
 
 	public static void setFlash(boolean enabled) {
@@ -129,7 +137,7 @@ public class SystemUtils{
 	@Contract(pure = true)
 	public static AlarmManager AlarmManager() {
 		if(instance == null) return null;
-		return instance.mAlaramManager;
+		return instance.mAlarmManager;
 	}
 
 
@@ -142,7 +150,7 @@ public class SystemUtils{
 
 	public static DownloadManager DownloadManager() {
 		if(instance == null) return null;
-		return instance.getmDownloadManager();
+		return instance.getDownloadManager();
 	}
 	
 	public static void vibrate(int effect) {
@@ -219,14 +227,14 @@ public class SystemUtils{
 		{
 			if(BuildConfig.DEBUG)
 			{
-				log("AOSPMods Error getting telephoney manager");
+				log("AOSPMods Error getting telephony manager");
 				t.printStackTrace();
 			}
 		}
 
 		//Alarm
 		try {
-			mAlaramManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+			mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
 		}
 		catch (Throwable t)
 		{
@@ -251,15 +259,76 @@ public class SystemUtils{
 			}
 		}
 	}
-	
 	private void setFlashInternal(boolean enabled) {
+		try {
+			String flashID = getFlashID(mCameraManager);
+			if(flashID.equals("")) {
+				return;
+			}
+
+			mCameraManager.setTorchMode(flashID, enabled);
+		}
+		catch (Throwable t)
+		{
+			if(BuildConfig.DEBUG)
+			{
+				log("AOSPMods Error in setting flashlight");
+				t.printStackTrace();
+			}
+		}
+	}
+	public static boolean supportsFlashLevels()
+	{
+		if(instance == null) return false;
+		return instance.supportsFlashLevelsInternal();
+	}
+
+	private boolean supportsFlashLevelsInternal() {
+		try {
+			String flashID = getFlashID(mCameraManager);
+			if (flashID.equals("")) {
+				return false;
+			}
+			if (Build.VERSION.SDK_INT >= 33 && maxFlashLevel == -1) {
+				@SuppressWarnings("unchecked")
+				CameraCharacteristics.Key<Integer> FLASH_INFO_STRENGTH_MAXIMUM_LEVEL = (CameraCharacteristics.Key<Integer>) getStaticObjectField(CameraCharacteristics.class, "FLASH_INFO_STRENGTH_MAXIMUM_LEVEL");
+				maxFlashLevel = mCameraManager.getCameraCharacteristics(flashID).get(FLASH_INFO_STRENGTH_MAXIMUM_LEVEL);
+			}
+			return maxFlashLevel > 1;
+		}catch(Throwable ignored)
+		{
+			return false;
+		}
+	}
+
+	private void setFlashInternal(boolean enabled, float pct) {
 		try {
 			String flashID = getFlashID(mCameraManager);
 			if(flashID.equals(""))
 			{
 				return;
 			}
-			mCameraManager.setTorchMode(flashID, enabled);
+			if(Build.VERSION.SDK_INT >= 33 && maxFlashLevel == -1)
+			{
+				@SuppressWarnings("unchecked")
+				CameraCharacteristics.Key<Integer> FLASH_INFO_STRENGTH_MAXIMUM_LEVEL = (CameraCharacteristics.Key<Integer>) getStaticObjectField(CameraCharacteristics.class, "FLASH_INFO_STRENGTH_MAXIMUM_LEVEL");
+				maxFlashLevel = mCameraManager.getCameraCharacteristics(flashID).get(FLASH_INFO_STRENGTH_MAXIMUM_LEVEL);
+			}
+			if(enabled)
+			{
+				if(maxFlashLevel > 1) //good news. we can set levels
+				{
+					callMethod(mCameraManager, "turnOnTorchWithStrengthLevel", flashID, Math.round(pct*maxFlashLevel));
+				}
+				else //flash doesn't support levels: go normal
+				{
+					setFlashInternal(true);
+				}
+			}
+			else
+			{
+				mCameraManager.setTorchMode(flashID, false);
+			}
 		}
 		catch (Throwable t)
 		{
@@ -287,7 +356,7 @@ public class SystemUtils{
 		return "";
 	}
 
-	private DownloadManager getmDownloadManager()
+	private DownloadManager getDownloadManager()
 	{
 		if(mDownloadManager == null) {
 			mDownloadManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);

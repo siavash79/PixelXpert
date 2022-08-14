@@ -27,11 +27,11 @@ import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
-public class flashLightLevel extends XposedModPack {
+public class FlashLightLevel extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     private static boolean leveledFlashTile = false;
 
-    public flashLightLevel(Context context) {
+    public FlashLightLevel(Context context) {
         super(context);
     }
 
@@ -103,7 +103,7 @@ public class flashLightLevel extends XposedModPack {
                                     {
                                         view.getParent().requestDisallowInterceptTouchEvent(true);
                                         moved = true;
-                                        currentPct[0] = Math.max(0.1f, Math.min(newPct, 1));
+                                        currentPct[0] = Math.max(0.01f, Math.min(newPct, 1));
                                         handleFlashLightClick(false, currentPct[0]);
                                         TextView label = (TextView) getObjectField(thisView, "label");
                                         label.setText(

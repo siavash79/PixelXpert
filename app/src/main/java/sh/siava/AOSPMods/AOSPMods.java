@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.Utils.Helpers;
 import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.allApps.overScrollDisabler;
 import sh.siava.AOSPMods.android.StatusbarSize;
@@ -41,7 +40,7 @@ import sh.siava.AOSPMods.systemui.ScreenshotController;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
 import sh.siava.AOSPMods.systemui.easyUnlock;
-import sh.siava.AOSPMods.systemui.flashLightLevel;
+import sh.siava.AOSPMods.systemui.FlashLightLevel;
 import sh.siava.AOSPMods.telecom.CallVibrator;
 
 @SuppressWarnings("RedundantThrows")
@@ -91,7 +90,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(StatusbarSize.class); //13 OK
         modPacks.add(screenRotation.class); //13 OK
         modPacks.add(CallVibrator.class); //13 OK
-        modPacks.add(flashLightLevel.class);
+        modPacks.add(FlashLightLevel.class);
         //endregion
     }
     

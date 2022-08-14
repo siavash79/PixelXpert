@@ -318,7 +318,7 @@ public class SystemUtils{
 			{
 				if(maxFlashLevel > 1) //good news. we can set levels
 				{
-					callMethod(mCameraManager, "turnOnTorchWithStrengthLevel", flashID, Math.round(pct*maxFlashLevel));
+					callMethod(mCameraManager, "turnOnTorchWithStrengthLevel", flashID, Math.max(Math.round(pct*maxFlashLevel), 1));
 				}
 				else //flash doesn't support levels: go normal
 				{

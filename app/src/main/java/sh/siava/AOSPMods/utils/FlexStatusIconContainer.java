@@ -85,6 +85,7 @@ public class FlexStatusIconContainer extends LinearLayout {
         return true;
     }
 
+    @SuppressLint("DiscouragedApi")
     private void initDimens() {
         Resources res = getResources();
 

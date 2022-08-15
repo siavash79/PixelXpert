@@ -18,6 +18,7 @@ import sh.siava.AOSPMods.BuildConfig;
 public class PrefManager {
 	private static final String TAG = "Pref Exporter";
 
+	@SuppressWarnings("UnusedReturnValue")
 	public static boolean exportPrefs(SharedPreferences preferences, final @NonNull OutputStream outputStream) throws IOException {
 		ObjectOutputStream objectOutputStream = null;
 		try {
@@ -28,18 +29,21 @@ public class PrefManager {
 			Log.e(TAG, "Error serializing preferences", BuildConfig.DEBUG ? e : null);
 			return false;
 		} finally {
-			objectOutputStream.close();
+			if (objectOutputStream != null) {
+				objectOutputStream.close();
+			}
 			outputStream.close();
 		}
 		return true;
 	}
 	
+	@SuppressWarnings("UnusedReturnValue")
 	public static boolean importPath(SharedPreferences sharedPreferences, final @NonNull InputStream inputStream) throws IOException {
 		ObjectInputStream objectInputStream = null;
 		Map<String, Object> map;
 		try {
 			objectInputStream = new ObjectInputStream(inputStream);
-			map = (Map) objectInputStream.readObject();
+			map = (Map<String, Object>) objectInputStream.readObject();
 		} catch (Exception e) {
 			Log.e(TAG, "Error deserializing preferences", BuildConfig.DEBUG ? e : null);
 			return false;

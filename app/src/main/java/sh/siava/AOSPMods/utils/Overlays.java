@@ -109,6 +109,7 @@ public class Overlays {
                     String activeOverlay = prefs.getString(pref, "None");
         
                     overlayGroup thisGroup = (overlayGroup) Overlays.get(pref);
+                    //noinspection ConstantConditions
                     for (overlayProp thisProp : thisGroup.members) {
                         if(!thisProp.name.equals("None")) {
                             Helpers.setOverlay(thisProp.name, activeOverlay.equals(thisProp.name), force);

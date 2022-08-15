@@ -23,9 +23,8 @@ import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.utils.SystemUtils;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
 public class FlashLightLevel extends XposedModPack {
@@ -60,7 +59,7 @@ public class FlashLightLevel extends XposedModPack {
                     return;
                 }
 
-//              View levelLayout = getLevelLayout(param.thisObject);
+                //View levelLayout = getLevelLayout(param.thisObject);
 
                 Object state = param.args[0];
                 if(getObjectField(state, "spec").equals("flashlight"))
@@ -94,11 +93,11 @@ public class FlashLightLevel extends XposedModPack {
                             {
                                 case MotionEvent.ACTION_DOWN:{
                                     initX = motionEvent.getX();
-                                    initPct = (initX - view.getLeft()) / view.getWidth();
+                                    initPct = initX / view.getWidth();
                                     return true;
                                 }
                                 case MotionEvent.ACTION_MOVE:{
-                                    float newPct = (motionEvent.getX() - view.getLeft()) / view.getWidth();
+                                    float newPct = motionEvent.getX() / view.getWidth();
                                     float deltaPct = Math.abs(newPct - initPct);
                                     if(deltaPct > .03f)
                                     {

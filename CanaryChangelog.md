@@ -1,3 +1,6 @@
+**canary-99**  
+- Fixed flashlight level adjustment issues  
+  
 **canary-98**  
 - OOPS!  
   

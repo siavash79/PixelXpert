@@ -39,7 +39,6 @@ public class FlashLightLevel extends XposedModPack {
     @Override
     public void updatePrefs(String... Key) {
         leveledFlashTile = Xprefs.getBoolean("leveledFlashTile", false);
-        SystemUtils.isFlashLevelGlobal = Xprefs.getBoolean("isFlashLevelGlobal", false) && leveledFlashTile;
     }
 
     @Override

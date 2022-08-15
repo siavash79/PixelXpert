@@ -48,8 +48,6 @@ public class SystemUtils{
 	boolean hasVibrator;
 	int maxFlashLevel = -1;
 
-	public static boolean isFlashLevelGlobal = false;
-
 	TorchCallback torchCallback = new TorchCallback();
 
 	public static void RestartSystemUI()
@@ -269,7 +267,8 @@ public class SystemUtils{
 				return;
 			}
 			if(enabled
-					&& isFlashLevelGlobal
+					&& XPrefs.Xprefs.getBoolean("leveledFlashTile", false)
+					&& XPrefs.Xprefs.getBoolean("isFlashLevelGlobal", false)
 					&& supportsFlashLevelsInternal())
 			{
 				float currentPct = XPrefs.Xprefs.getFloat("flashPCT", 0.5f);

@@ -29,6 +29,7 @@ import androidx.annotation.Nullable;
 import org.jetbrains.annotations.Contract;
 
 import sh.siava.AOSPMods.BuildConfig;
+import sh.siava.AOSPMods.XPrefs;
 
 public class SystemUtils{
 	@SuppressLint("StaticFieldLeak")
@@ -46,6 +47,8 @@ public class SystemUtils{
 	DownloadManager mDownloadManager = null;
 	boolean hasVibrator;
 	int maxFlashLevel = -1;
+
+	public static boolean isFlashLevelGlobal = false;
 
 	TorchCallback torchCallback = new TorchCallback();
 
@@ -265,6 +268,14 @@ public class SystemUtils{
 			if(flashID.equals("")) {
 				return;
 			}
+			if(enabled
+					&& isFlashLevelGlobal
+					&& supportsFlashLevelsInternal())
+			{
+				float currentPct = XPrefs.Xprefs.getFloat("flashPCT", 0.5f);
+				setFlashInternal(true, currentPct);
+				return;
+			}
 
 			mCameraManager.setTorchMode(flashID, enabled);
 		}
@@ -277,6 +288,7 @@ public class SystemUtils{
 			}
 		}
 	}
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean supportsFlashLevels()
 	{
 		if(instance == null) return false;

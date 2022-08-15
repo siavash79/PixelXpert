@@ -7,6 +7,7 @@ import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -37,7 +38,8 @@ public class FlashLightLevel extends XposedModPack {
 
     @Override
     public void updatePrefs(String... Key) {
-        leveledFlashTile = XPrefs.Xprefs.getBoolean("leveledFlashTile", true);
+        leveledFlashTile = Xprefs.getBoolean("leveledFlashTile", false);
+        SystemUtils.isFlashLevelGlobal = Xprefs.getBoolean("isFlashLevelGlobal", false) && leveledFlashTile;
     }
 
     @Override
@@ -65,7 +67,7 @@ public class FlashLightLevel extends XposedModPack {
                 if(getObjectField(state, "spec").equals("flashlight"))
                 {
                     Resources res = mContext.getResources();
-                    final float[] currentPct = {XPrefs.Xprefs.getFloat("flashPCT", 1)};
+                    final float[] currentPct = {Xprefs.getFloat("flashPCT", 0.5f)};
 
                     setObjectField(state, "label",
                             String.format("%s - %s%%",
@@ -121,7 +123,7 @@ public class FlashLightLevel extends XposedModPack {
                                 case MotionEvent.ACTION_UP:{
                                     if (moved) {
                                         moved = false;
-                                        XPrefs.Xprefs.edit().putFloat("flashPCT", currentPct[0]).apply();
+                                        Xprefs.edit().putFloat("flashPCT", currentPct[0]).apply();
                                     }
                                     else
                                     {

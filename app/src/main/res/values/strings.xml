@@ -143,6 +143,7 @@
     <string name="qs_footer_text_summary">Leave blank to remove completely</string>
     <string name="qs_footer_text_desc">Turn the display off/on to apply</string>
     <string name="qs_leveled_flashlight_title">Brightness level Flashlight tile</string>
+    <string name="qs_flashlight_level_global_title">Apply flashlight level globally</string>
     <string name="qs_leveled_flashlight_summary">Required supported hardware</string>
     <string name="light_qs_title">Apply light QS Panel when using light theme</string>
     <string name="light_dualtone_qs_title">Enable dual tone QS Panel</string>

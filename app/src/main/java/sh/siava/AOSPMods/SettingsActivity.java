@@ -641,6 +641,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("QSTilesThemesOverlayEx").setVisible(showOverlays);
 
                 findPreference("leveledFlashTile").setVisible(Build.VERSION.SDK_INT >= 33);
+                findPreference("isFlashLevelGlobal").setVisible(findPreference("leveledFlashTile").isVisible() && sharedPreferences.getBoolean("leveledFlashTile", false));
             } catch (Exception ignored) {}
         }
 

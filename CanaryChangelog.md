@@ -1,3 +1,6 @@
+**canary-98**  
+- OOPS!  
+  
 **canary-97**  
 - Added option to set flashlight levels globally  
   

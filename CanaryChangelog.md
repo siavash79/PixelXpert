@@ -1,3 +1,6 @@
+**canary-97**  
+- Added option to set flashlight levels globally  
+  
 **canary-96**  
 - Added brightness level on flashlight tile (Only Android 13, Only supported Hardware (Pixel 6 series))  
   

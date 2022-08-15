@@ -1,3 +1,6 @@
+**canary-101**  
+- canary-99: Rebuilt  
+  
 **canary-99**  
 - Fixed flashlight level adjustment issues  
   

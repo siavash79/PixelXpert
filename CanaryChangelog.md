@@ -1,3 +1,7 @@
+**canary-103**  
+- A13: Fixed QS Quick pulldown  
+- A13: Fixed custom carrier text  
+  
 **canary-102**  
 - A13: Fixed doubletap to wake, Doubl tap to sleep (keyguard), double tap to torch  
 - A13: Fixed settings icon longpress manager app launcher  

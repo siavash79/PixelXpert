@@ -1,3 +1,7 @@
+**canary-102**  
+- A13: Fixed doubletap to wake, Doubl tap to sleep (keyguard), double tap to torch  
+- A13: Fixed settings icon longpress manager app launcher  
+  
 **canary-101**  
 - canary-99: Rebuilt  
   

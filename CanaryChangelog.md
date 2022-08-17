@@ -1,3 +1,6 @@
+**canary-104**  
+- A13: Fixed LightQS theme + Dual tone QS Theme (A12 Users: don't install this)  
+  
 **canary-103**  
 - A13: Fixed QS Quick pulldown  
 - A13: Fixed custom carrier text  

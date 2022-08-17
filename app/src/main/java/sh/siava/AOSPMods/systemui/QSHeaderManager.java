@@ -9,6 +9,8 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findMethodExact;
 import static de.robv.android.xposed.XposedHelpers.findMethodExactIfExists;
+import static de.robv.android.xposed.XposedHelpers.getFloatField;
+import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
@@ -18,6 +20,8 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 
 import androidx.core.graphics.ColorUtils;
 
@@ -29,14 +33,14 @@ import java.util.TimerTask;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
+import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.Helpers;
 import sh.siava.AOSPMods.utils.Overlays;
-import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class QSHeaderManager extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    
+
     private static boolean lightQSHeaderEnabled = false;
     private static boolean dualToneQSEnabled = false;
     private static boolean brightnessThickTrackEnabled = false;
@@ -69,49 +73,102 @@ public class QSHeaderManager extends XposedModPack {
     {
         if(lightQSHeaderEnabled != state) {
             lightQSHeaderEnabled = state;
-            
+
             try {
                 applyOverlays();
             } catch (Throwable ignored) {}
         }
     }
-    
+
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
         Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
-        Class<?> OngoingPrivacyChipClass = findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
+
         Class<?> FragmentHostManagerClass = findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
         Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
-        Class<?> GradientColorsClass = findClass("com.android.internal.colorextraction.ColorExtractor.GradientColors", lpparam.classLoader);
-        Class<?> StatusbarClass = findClass("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader);
+        Class<?> GradientColorsClass = findClass("com.android.internal.colorextraction.ColorExtractor$GradientColors", lpparam.classLoader);
+
         Class<?> QSPanelControllerClass = findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
         Class<?> QuickQSPanelControllerClass = findClass("com.android.systemui.qs.QuickQSPanelController", lpparam.classLoader);
         Class<?> InterestingConfigChangesClass = findClass("com.android.settingslib.applications.InterestingConfigChanges", lpparam.classLoader);
+        Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
 
+        if(Build.VERSION.SDK_INT == 33)
+        {
+            Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
+
+            findAndHookMethod(CentralSurfacesImplClass,
+                    "updateTheme", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            applyOverlays();
+                            new Timer().schedule(new QSLightColorCorrector(), 1500);
+                        }
+                    });
+        }
+        else
+        {
+            Class<?> StatusbarClass = findClass("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader);
+            Class<?> OngoingPrivacyChipClass = findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
+
+            hookAllConstructors(StatusbarClass, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    hookAllMethods(getObjectField(param.thisObject,
+                                    "mOnColorsChangedListener").getClass(),
+                            "onColorsChanged", new XC_MethodHook() {
+                                @Override
+                                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                    applyOverlays();
+                                    Overlays.setAll(true);  //reset all overlays
+                                }
+                            });
+                }
+            });
+
+            findAndHookMethod(StatusbarClass,
+                    "updateTheme", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            new Timer().schedule(new QSLightColorCorrector(), 1500);
+                        }
+                    });
+
+            findAndHookMethod(OngoingPrivacyChipClass,
+                    "updateResources", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if(!lightQSHeaderEnabled) return;
+                            Resources res = mContext.getResources();
+
+                            int iconColor = mContext.getColor(res.getIdentifier("android:color/system_neutral1_900", "color", mContext.getPackageName()));
+                            setObjectField(param.thisObject, "iconColor", iconColor);
+                        }
+                    });
+        }
 
         Method applyStateMethod = findMethodExactIfExists(ScrimControllerClass, "applyStateToAlpha");
         if(applyStateMethod == null)
         {
             applyStateMethod = findMethodExact(ScrimControllerClass, "applyState");
         }
-        
+
         try {
             mBehindColors = GradientColorsClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) {}
+
         hookAllMethods(ScrimControllerClass,
-                "onUiModeChanged", new XC_MethodHook() {
+                "onThemeChanged", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         mBehindColors = GradientColorsClass.newInstance();
                     }
                 });
 
-        hookAllConstructors(QuickQSPanelControllerClass, new XC_MethodHook() {
+        hookAllMethods(QuickQSPanelControllerClass, "onInit", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 QuickQSPanelController = param.thisObject;
@@ -131,84 +188,68 @@ public class QSHeaderManager extends XposedModPack {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!dualToneQSEnabled) return;
-                        
+
                         Object mScrimBehind = getObjectField(param.thisObject, "mScrimBehind");
                         boolean mBlankScreen = (boolean) getObjectField(param.thisObject, "mBlankScreen");
-                        float alpha = (float) callMethod(mScrimBehind, "getViewAlpha");
+                        float alpha = getFloatField(mScrimBehind, "mViewAlpha");
                         boolean animateBehindScrim =  alpha!= 0 && !mBlankScreen;
-                        
+
                         callMethod(mScrimBehind, "setColors", mBehindColors, animateBehindScrim);
                     }
                 });
-        
+
         hookAllMethods(ScrimControllerClass,
                 "updateThemeColors", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(!dualToneQSEnabled) return;
-                        
+
 //                        Object mScrimBehind = getObjectField(param.thisObject, "mScrimBehind");
-                        
+
                         ColorStateList states = (ColorStateList) callStaticMethod(UtilsClass,
                                 "getColorAttr",
                                 mContext,
                                 mContext.getResources().getIdentifier("android:attr/colorSurfaceHeader", "attr", listenPackage));
                         int surfaceBackground = states.getDefaultColor();
-                        
-                        ColorStateList accentStates = (ColorStateList) callStaticMethod(UtilsClass,
-                                "getColorAccent",
-                                mContext);
+
+                        ColorStateList accentStates = (ColorStateList) callStaticMethod(UtilsClass, "getColorAttr", mContext, mContext.getResources().getIdentifier("colorAccent", "attr", "android"));
                         int accent = accentStates.getDefaultColor();
-                        
+
                         callMethod(mBehindColors, "setMainColor", surfaceBackground);
                         callMethod(mBehindColors, "setSecondaryColor", accent);
-                        
+
                         double contrast = ColorUtils.calculateContrast((int) callMethod(mBehindColors, "getMainColor"), Color.WHITE);
-                        
+
                         callMethod(mBehindColors, "setSupportsDarkText", contrast > 4.5);
                     }
                 });
-        
-        
-        findAndHookMethod(OngoingPrivacyChipClass,
-                "updateResources", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!lightQSHeaderEnabled) return;
-                        Resources res = mContext.getResources();
-                        
-                        int iconColor = mContext.getColor(res.getIdentifier("android:color/system_neutral1_900", "color", mContext.getPackageName()));
-                        setObjectField(param.thisObject, "iconColor", iconColor);
-                    }
-                });
-        
+
+
         hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if(!lightQSHeaderEnabled) return;
-                
+
                 Object colorActive = callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
                         mContext,
                         mContext.getResources().getIdentifier("android:attr/colorAccent", "attr", lpparam.packageName));
-                
+
                 setObjectField(param.thisObject, "colorActive", colorActive);
             }
         });
-        
+
         hookMethod(applyStateMethod, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if (!lightQSHeaderEnabled) return;
-                
+
                 boolean mClipsQsScrim = (boolean) getObjectField(param.thisObject, "mClipsQsScrim");
                 if (mClipsQsScrim) {
                     setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
                 }
             }
         });
-        
-        Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
-        
+
         Object[] constants =  ScrimStateEnum.getEnumConstants();
         for (Object constant : constants) {
             String enumVal = constant.toString();
@@ -219,15 +260,17 @@ public class QSHeaderManager extends XposedModPack {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if (!lightQSHeaderEnabled) return;
-                                    
                                     boolean mClipQsScrim = (boolean) getObjectField(param.thisObject, "mClipQsScrim");
                                     if (mClipQsScrim) {
-                                        callMethod(param.thisObject,
-                                                "updateScrimColor",
-                                                getObjectField(param.thisObject,
-                                                        "mScrimBehind"),
-                                                1f,
-                                                Color.TRANSPARENT);
+                                        Object mScrimBehind = getObjectField(param.thisObject,"mScrimBehind");
+                                        int mTintColor = getIntField(mScrimBehind, "mTintColor");
+                                        if(mTintColor != Color.TRANSPARENT)
+                                        {
+                                            setObjectField(mScrimBehind, "mTintColor", Color.TRANSPARENT);
+                                            callMethod(mScrimBehind, "updateColorWithTint", false);
+                                        }
+
+                                        callMethod(mScrimBehind, "setViewAlpha", 1f);
                                     }
                                 }
                             });
@@ -238,7 +281,7 @@ public class QSHeaderManager extends XposedModPack {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if (!lightQSHeaderEnabled) return;
-                                    
+
                                     setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
                                 }
                             });
@@ -249,17 +292,19 @@ public class QSHeaderManager extends XposedModPack {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if (!lightQSHeaderEnabled) return;
-                                    
+
                                     setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
-                                    
                                     boolean mClipQsScrim = (boolean) getObjectField(param.thisObject, "mClipQsScrim");
                                     if (mClipQsScrim) {
-                                        callMethod(param.thisObject,
-                                                "updateScrimColor",
-                                                getObjectField(param.thisObject,
-                                                        "mScrimBehind"),
-                                                1f,
-                                                Color.TRANSPARENT);
+                                        Object mScrimBehind = getObjectField(param.thisObject,"mScrimBehind");
+                                        int mTintColor = getIntField(mScrimBehind, "mTintColor");
+                                        if(mTintColor != Color.TRANSPARENT)
+                                        {
+                                            setObjectField(mScrimBehind, "mTintColor", Color.TRANSPARENT);
+                                            callMethod(mScrimBehind, "updateColorWithTint", false);
+                                        }
+
+                                        callMethod(mScrimBehind, "setViewAlpha", 1f);
                                     }
                                 }
                             });
@@ -272,28 +317,30 @@ public class QSHeaderManager extends XposedModPack {
                                 }
                             });
                     break;
-                
+
                 case "UNLOCKED":
                     findAndHookMethod(constant.getClass(),
                             "prepare", ScrimStateEnum, new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if (!lightQSHeaderEnabled) return;
-                                    
+
                                     setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
-                                    
-                                    callMethod(param.thisObject,
-                                            "updateScrimColor",
-                                            getObjectField(param.thisObject,
-                                                    "mScrimBehind"),
-                                            1f,
-                                            Color.TRANSPARENT);
+
+                                    Object mScrimBehind = getObjectField(param.thisObject,"mScrimBehind");
+                                    int mTintColor = getIntField(mScrimBehind, "mTintColor");
+                                    if(mTintColor != Color.TRANSPARENT)
+                                    {
+                                        setObjectField(mScrimBehind, "mTintColor", Color.TRANSPARENT);
+                                        callMethod(mScrimBehind, "updateColorWithTint", false);
+                                    }
+                                    callMethod(mScrimBehind, "setViewAlpha", 1f);
                                 }
                             });
                     break;
             }
         }
-        
+
         hookAllConstructors(FragmentHostManagerClass, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -303,28 +350,6 @@ public class QSHeaderManager extends XposedModPack {
             }
         });
 
-        hookAllConstructors(StatusbarClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                hookAllMethods(getObjectField(param.thisObject,
-                        "mOnColorsChangedListener").getClass(),
-                        "onColorsChanged", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        applyOverlays();
-                        Overlays.setAll(true);  //reset all overlays
-                    }
-                });
-            }
-        });
-
-        findAndHookMethod("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader,
-                "updateTheme", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    new Timer().schedule(new QSLightColorCorrector(), 1500);
-                    }
-                });
     }
 
     private void applyOverlays() throws Throwable {
@@ -365,7 +390,7 @@ public class QSHeaderManager extends XposedModPack {
                 //noinspection unchecked
                 mRecords.addAll((ArrayList) getObjectField(QuickQSPanelController, "mRecords"));
                 mRecords.forEach((r) -> fixTileColor(r, colorInactive, colorUnavailable));
-            }catch (Exception ignored){}
+            }catch (Throwable ignored){}
         }
     }
 
@@ -375,12 +400,15 @@ public class QSHeaderManager extends XposedModPack {
         setObjectField(tile, "colorInactive", colorInactive);
         setObjectField(tile, "colorUnavailable", colorUnavailable);
 
-        callMethod(tile,
-                "setColor",
-                callMethod(tile,
-                        "getBackgroundColorForState",
-                        getObjectField(tile,
-                                "lastState")));
+        try {
+            Drawable colorBackgroundDrawable = (Drawable) getObjectField(tile, "colorBackgroundDrawable");
+            int color = (Integer) callMethod(tile,
+                    "getBackgroundColorForState",
+                    getObjectField(tile,
+                            "lastState"));
+            colorBackgroundDrawable.mutate().setTint(color);
+            setObjectField(tile,"paintColor", color);
+        }catch (Throwable ignored){}
     }
 
     private boolean getIsDark() {

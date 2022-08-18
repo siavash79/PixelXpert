@@ -24,6 +24,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+import androidx.annotation.ColorInt;
 import androidx.core.graphics.ColorUtils;
 
 import java.lang.reflect.Method;
@@ -48,9 +49,16 @@ public class QSHeaderManager extends XposedModPack {
 
     private Object mBehindColors;
     private static Object QSPanelController = null, QuickQSPanelController = null;
-    private boolean wasDark = false;
+    private boolean wasDark;
+    private Class<?> UtilsClass = null;
+    private Integer colorInactive = null;
+    private int colorUnavailable;
 
-    public QSHeaderManager(Context context) { super(context); }
+    public QSHeaderManager(Context context) {
+        super(context);
+        wasDark = getIsDark();
+        log("was dark: " + wasDark);
+    }
 
     @Override
     public void updatePrefs(String...Key)
@@ -87,7 +95,7 @@ public class QSHeaderManager extends XposedModPack {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
         Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
-        Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
+        UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
         Class<?> FragmentHostManagerClass = findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
         Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
         Class<?> GradientColorsClass = findClass("com.android.internal.colorextraction.ColorExtractor$GradientColors", lpparam.classLoader);
@@ -98,18 +106,59 @@ public class QSHeaderManager extends XposedModPack {
 
         if(Build.VERSION.SDK_INT == 33)
         {
+            Class<?> QSIconViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSIconViewImpl", lpparam.classLoader);
             Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
+
+            hookAllMethods(QSTileViewImplClass, "getLabelColorForState", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    int state = (int) param.args[0];
+
+                    if(!lightQSHeaderEnabled || wasDark || state < 2) return;
+                    param.setResult(Color.WHITE);
+                }
+            });
+
+            hookAllMethods(QSTileViewImplClass, "getBackgroundColorForState", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if(!lightQSHeaderEnabled || wasDark) return;
+                    if(colorInactive == null)
+                    {
+                        calculateColors();
+                    }
+                    int state = (int) param.args[0];
+                    switch (state)
+                    {
+                        case 0: //Unavailable
+                            param.setResult(colorUnavailable);
+                            break;
+                        case 1: //inactive
+                            param.setResult(colorInactive);
+                            break;
+                    }
+                }
+            });
+
+            hookAllMethods(QSIconViewImplClass, "getIconColorForState", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if(!wasDark && lightQSHeaderEnabled && ((int)param.args[1]) == 2)
+                    {
+                        param.setResult(Color.WHITE);
+                    }
+                }
+            });
 
             findAndHookMethod(CentralSurfacesImplClass,
                     "updateTheme", new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                             applyOverlays();
-                            new Timer().schedule(new QSLightColorCorrector(), 1500);
                         }
                     });
         }
-        else
+        else //SDK 31,32
         {
             Class<?> StatusbarClass = findClass("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader);
             Class<?> OngoingPrivacyChipClass = findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
@@ -358,6 +407,8 @@ public class QSHeaderManager extends XposedModPack {
         if(isDark == wasDark) return;
         wasDark = isDark;
 
+        calculateColors();
+
         Helpers.setOverlay("QSLightThemeOverlay", false, true, false);
         Helpers.setOverlay("QSLightThemeBSTOverlay", false, false, false);
 
@@ -368,8 +419,17 @@ public class QSHeaderManager extends XposedModPack {
             Helpers.setOverlay("QSLightThemeOverlay", !brightnessThickTrackEnabled, true, false);
             Helpers.setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, false, false);
 
-            new Timer().schedule(new QSLightColorCorrector(), 1500);
+//            new Timer().schedule(new QSLightColorCorrector(), 1500);
         }
+    }
+
+    private void calculateColors() {
+        Resources res = mContext.getResources();
+        colorInactive = res.getColor(
+                res.getIdentifier("android:color/system_accent1_10", "color", listenPackage),
+                mContext.getTheme());
+
+        colorUnavailable = applyAlpha(0.3f, colorInactive);
     }
 
     class QSLightColorCorrector extends TimerTask {
@@ -380,13 +440,11 @@ public class QSHeaderManager extends XposedModPack {
             if(!lightQSHeaderEnabled || getIsDark()) return;
             Resources res = mContext.getResources();
 
-            int colorUnavailable = res.getColor(
-                    res.getIdentifier("android:color/system_neutral1_10", "color", listenPackage),
-                    mContext.getTheme());
-
-            int colorInactive = res.getColor(
+            colorInactive = res.getColor(
                     res.getIdentifier("android:color/system_accent1_10", "color", listenPackage),
                     mContext.getTheme());
+
+            colorUnavailable = applyAlpha(0.3f, colorInactive);
 
             try {
                 ArrayList<?> mRecords = (ArrayList<?>) getObjectField(QSPanelController, "mRecords");
@@ -405,10 +463,10 @@ public class QSHeaderManager extends XposedModPack {
 
         try {
             Drawable colorBackgroundDrawable = (Drawable) getObjectField(tile, "colorBackgroundDrawable");
-            int color = (Integer) callMethod(tile,
+            Object lastState = getObjectField(tile,"lastState");
+            int color = (int) callMethod(tile,
                     "getBackgroundColorForState",
-                    getObjectField(tile,
-                            "lastState"));
+                    lastState);
             colorBackgroundDrawable.mutate().setTint(color);
             setObjectField(tile,"paintColor", color);
         }catch (Throwable ignored){}
@@ -416,6 +474,13 @@ public class QSHeaderManager extends XposedModPack {
 
     private boolean getIsDark() {
         return (mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    @ColorInt
+    public static int applyAlpha(float alpha, int inputColor) {
+        alpha *= Color.alpha(inputColor);
+        return Color.argb((int) (alpha), Color.red(inputColor), Color.green(inputColor),
+                Color.blue(inputColor));
     }
 
     @Override

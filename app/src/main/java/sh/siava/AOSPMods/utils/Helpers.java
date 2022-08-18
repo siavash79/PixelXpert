@@ -38,8 +38,8 @@ public class Helpers {
     public static List<String> activeOverlays = null;
 
     @SuppressWarnings("unused")
-    public static void dumpClass(String className, XC_LoadPackage.LoadPackageParam lpparam){
-        Class<?> ourClass = findClassIfExists(className, lpparam.classLoader);
+    public static void dumpClass(String className, ClassLoader classLoader){
+        Class<?> ourClass = findClassIfExists(className, classLoader);
         if(ourClass == null)
         {
             log("Class: " + className + " not found");

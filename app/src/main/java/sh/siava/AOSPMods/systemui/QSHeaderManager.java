@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.systemui;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.hookMethod;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -47,6 +48,7 @@ public class QSHeaderManager extends XposedModPack {
 
     private Object mBehindColors;
     private static Object QSPanelController = null, QuickQSPanelController = null;
+    private boolean wasDark = false;
 
     public QSHeaderManager(Context context) { super(context); }
 
@@ -86,11 +88,9 @@ public class QSHeaderManager extends XposedModPack {
 
         Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
         Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
-
         Class<?> FragmentHostManagerClass = findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
         Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
         Class<?> GradientColorsClass = findClass("com.android.internal.colorextraction.ColorExtractor$GradientColors", lpparam.classLoader);
-
         Class<?> QSPanelControllerClass = findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
         Class<?> QuickQSPanelControllerClass = findClass("com.android.systemui.qs.QuickQSPanelController", lpparam.classLoader);
         Class<?> InterestingConfigChangesClass = findClass("com.android.settingslib.applications.InterestingConfigChanges", lpparam.classLoader);
@@ -354,6 +354,9 @@ public class QSHeaderManager extends XposedModPack {
 
     private void applyOverlays() throws Throwable {
         boolean isDark = getIsDark();
+
+        if(isDark == wasDark) return;
+        wasDark = isDark;
 
         Helpers.setOverlay("QSLightThemeOverlay", false, true, false);
         Helpers.setOverlay("QSLightThemeBSTOverlay", false, false, false);

@@ -137,8 +137,6 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     public static int getVersionType() {
-        if(Build.VERSION.SDK_INT == 33) //Full version on Android 13 is not accepted
-            return XPOSED_ONLY;
         try {
             return Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", "/data/adb/modules/AOSPMods")).exec().getOut().get(0));
         }

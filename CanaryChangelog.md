@@ -1,3 +1,7 @@
+**canary-106**  
+- A13: Fixed Light QS theme tile colors (A12 Users: don't install this)  
+- A13: QS Light Theme: performance improvement (A12 users: Don't install this)  
+  
 **canary-105**  
 - A13: Fixed DTS conflict with pin codes (A12 Users: don't install this)  
   

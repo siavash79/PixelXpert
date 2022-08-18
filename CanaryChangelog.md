@@ -1,3 +1,6 @@
+**canary-107**  
+- A13: Unlocking full version support (experimental) (A12 users: don't install this)  
+  
 **canary-106**  
 - A13: Fixed Light QS theme tile colors (A12 Users: don't install this)  
 - A13: QS Light Theme: performance improvement (A12 users: Don't install this)  

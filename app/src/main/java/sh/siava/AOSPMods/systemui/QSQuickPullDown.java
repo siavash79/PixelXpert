@@ -69,11 +69,11 @@ public class QSQuickPullDown extends XposedModPack {
                             float x = event.getX();
                             float region = w * statusbarPortion;
 
-                            boolean showQsOverride = (pullDownSide == PULLDOWN_SIDE_RIGHT)
+                            boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
                                     ? w - region < x
                                     : x < region;
 
-                            if (showQsOverride) {
+                            if (pullDownApproved) {
                                 callMethod(param.thisObject, "expandWithQs");
                             }
                         }

@@ -805,7 +805,12 @@ public class StatusbarMods extends XposedModPack {
     
     private void placeBatteryBar() {
         try {
-            fullStatusbar.addView(BatteryBarView.getInstance(mContext));
+            BatteryBarView batteryBarView = BatteryBarView.getInstance(mContext);
+            try
+            {
+                ((ViewGroup)batteryBarView.getParent()).removeView(batteryBarView);
+            }catch (Throwable ignored){}
+            fullStatusbar.addView(batteryBarView);
             refreshBatteryBar(BatteryBarView.getInstance());
         }catch(Throwable ignored){}
     }

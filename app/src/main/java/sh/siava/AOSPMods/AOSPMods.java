@@ -5,12 +5,14 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 import android.app.Instrumentation;
 import android.content.Context;
+import android.content.res.Configuration;
 
 import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.utils.Helpers;
 import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.AOSPMods.allApps.OverScrollDisabler;
 import sh.siava.AOSPMods.android.StatusbarSize;
@@ -48,7 +50,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public static final String SYSTEM_UI_PACKAGE = "com.android.systemui";
     public static final String SYSTEM_FRAMEWORK_PACKAGE = "android";
     public static final String TELECOM_SERVER_PACKAGE = "com.android.server.telecom";
-    public static final String LAUNCHR_PACKAGE = "com.google.android.apps.nexuslauncher";
+    public static final String LAUNCHER_PACKAGE = "com.google.android.apps.nexuslauncher";
 
     public static boolean isSecondProcess = false;
 
@@ -58,21 +60,22 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
     public AOSPMods()
     {
+//        modPacks.add(StatusbarMods.class); //13 OK
 
         //region Mod list definition
         modPacks.add(NotificationExpander.class);
         modPacks.add(BackToKill.class);
-        modPacks.add(FeatureFlagsMods.class);
-        modPacks.add(QSHaptic.class);
-        modPacks.add(QSHeaderManager.class);
-        modPacks.add(QSQuickPullDown.class);
-        modPacks.add(AOSPSettingsLauncher.class);
         modPacks.add(BrightnessSlider.class);
-        modPacks.add(LockscreenAlbumArt.class);
         modPacks.add(QSTileGrid.class);
-        modPacks.add(ScreenGestures.class);
+        modPacks.add(FeatureFlagsMods.class); //13 OK
+        modPacks.add(QSHaptic.class); //13 OK
+        modPacks.add(LockscreenAlbumArt.class); //13 not planned
+        modPacks.add(QSHeaderManager.class); //13 OK
+        modPacks.add(ScreenGestures.class); //13 OK
         modPacks.add(miscSettings.class); //13 OK except for internet tile
-        modPacks.add(KeyguardCustomText.class); //13 OK except for carrier text
+        modPacks.add(AOSPSettingsLauncher.class); //13 OK
+        modPacks.add(QSQuickPullDown.class); //13 OK
+        modPacks.add(KeyguardCustomText.class); //13 OK
         modPacks.add(KeyguardBottomArea.class); //13 OK
         modPacks.add(UDFPSManager.class); //13 OK
         modPacks.add(EasyUnlock.class); //13 OK
@@ -90,7 +93,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(StatusbarSize.class); //13 OK
         modPacks.add(ScreenRotation.class); //13 OK
         modPacks.add(CallVibrator.class); //13 OK
-        modPacks.add(FlashLightLevel.class);
+        modPacks.add(FlashLightLevel.class); //13 based
         //endregion
     }
     
@@ -98,10 +101,12 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         isSecondProcess =  lpparam.processName.contains(":");
 
-/*        log("------------");
-        Helpers.dumpClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam);
-        log("------------");
-*/
+        if(lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && false) {
+            log("------------");
+            Helpers.dumpClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
+            log("------------");
+        }
+
         findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {

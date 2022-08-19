@@ -3,7 +3,6 @@ package sh.siava.AOSPMods.systemui;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.hookMethod;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -57,7 +56,6 @@ public class QSHeaderManager extends XposedModPack {
     public QSHeaderManager(Context context) {
         super(context);
         wasDark = getIsDark();
-        log("was dark: " + wasDark);
     }
 
     @Override

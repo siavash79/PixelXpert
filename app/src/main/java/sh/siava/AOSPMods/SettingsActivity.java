@@ -364,6 +364,7 @@ public class SettingsActivity extends AppCompatActivity implements
         }
 
         private void updateVisibility(SharedPreferences sharedPreferences) {
+            findPreference("album_art_category").setVisible(Build.VERSION.SDK_INT < 33);
             findPreference("carrierTextValue").setVisible(sharedPreferences.getBoolean("carrierTextMod", false));
             findPreference("albumArtLockScreenBlurLevel").setSummary(sharedPreferences.getInt("albumArtLockScreenBlurLevel",0) + "%");
             findPreference("albumArtLockScreenBlurLevel").setVisible(sharedPreferences.getBoolean("albumArtLockScreenEnabled",false));
@@ -476,7 +477,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 boolean colorful = prefs.getBoolean("BIconColorful", false);
 
-                findPreference("DualToneBatteryOverlay").setVisible(style == 0);
+                findPreference("DualToneBatteryOverlay").setVisible(style == 0 && showOverlays);
                 findPreference("BIconOpacity").setVisible(style > 0 && style < 99);
                 findPreference("BIconOpacity").setSummary(prefs.getInt("BIconOpacity", 100) + "%");
                 findPreference("BatteryIconScaleFactor").setVisible(style < 99);

@@ -126,7 +126,7 @@ public class BatteryBarView extends FrameLayout {
 
 		batteryPCT = initialLevel;
 		isCharging = initialCharging;
-		
+
 		mDrawable.setShape(new RectShape());
 		this.setSingleColorTone(singleColorTone);
 		this.setAlphaPct(alphaPct);
@@ -148,7 +148,7 @@ public class BatteryBarView extends FrameLayout {
 		
 		refreshLayout();
 	}
-	
+
 	@Override
 	public void setLayoutDirection(int direction)
 	{

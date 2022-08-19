@@ -93,6 +93,7 @@ public class BatteryStyleManager extends XposedModPack {
                     setAdditionalInstanceField(view,"mBatteryDrawable", newDrawable);
                     newDrawable.setBatteryLevel(mLevel);
                     newDrawable.setCharging(mCharging);
+                    BatteryBarView.setStaticLevel(mLevel, mCharging);
                 }
                 else
                 {

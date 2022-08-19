@@ -159,6 +159,7 @@ public class ScreenGestures extends XposedModPack {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
                             MotionEvent ev = (MotionEvent) param1.args[0];
+
                             int action = ev.getActionMasked();
 
                             if(doubleTap && action == MotionEvent.ACTION_UP)
@@ -196,32 +197,29 @@ public class ScreenGestures extends XposedModPack {
             }
         });
 
-        // SDK 31 - Won't hook since method is removed
-        findAndHookMethod(NotificationPanelViewControllerClass,
-                "createTouchHandler", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        Object touchHandler = param.getResult();
-                        Object ThisNotificationPanel = param.thisObject;
+        hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                Object mTouchHandler = NotificationPanelViewControllerClass.getField("mTouchHandler").get(param.thisObject);
+                Object ThisNotificationPanel = param.thisObject;
 
-                        //touch detection of statusbar to forward to detector
-                        findAndHookMethod(touchHandler.getClass(),
-                                "onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
-                                    @Override
-                                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                        if (!doubleTapToSleepEnabled) return;
+                findAndHookMethod(mTouchHandler.getClass(),
+                        "onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
+                            @Override
+                            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                if (!doubleTapToSleepEnabled) return;
 
-                                        boolean mPulsing = (boolean) getObjectField(ThisNotificationPanel, "mPulsing");
-                                        boolean mDozing = (boolean) getObjectField(ThisNotificationPanel, "mDozing");
-                                        int mBarState = (int) getObjectField(ThisNotificationPanel, "mBarState");
+                                boolean mPulsing = (boolean) getObjectField(ThisNotificationPanel, "mPulsing");
+                                boolean mDozing = (boolean) getObjectField(ThisNotificationPanel, "mDozing");
+                                int mBarState = (int) getObjectField(ThisNotificationPanel, "mBarState");
 
-                                        if (!mPulsing && !mDozing
-                                                && mBarState == 0) {
-                                            mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[1]);
-                                        }
-                                    }
-                                });
-                    }
-                });
+                                if (!mPulsing && !mDozing
+                                        && mBarState == 0) {
+                                    mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[1]);
+                                }
+                            }
+                        });
+            }
+        });
     }
 }

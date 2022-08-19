@@ -1,3 +1,6 @@
+**canary-109**  
+- A13: Fixed statusbar notification count limits (A12 Users: don't install this)  
+  
 **canary-108**  
 - A13: Double tap to sleep (statusbar) (A12 Users: don't install this)  
   

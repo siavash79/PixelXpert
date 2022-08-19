@@ -1,3 +1,6 @@
+**canary-108**  
+- A13: Double tap to sleep (statusbar) (A12 Users: don't install this)  
+  
 **canary-107**  
 - A13: Unlocking full version support (experimental) (A12 users: don't install this)  
   

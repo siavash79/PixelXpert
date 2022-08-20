@@ -1,8 +1,5 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Niestandardowe funkcje oparte na systemie Android 12+ AOSP</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Potwierdż, czy moduł jest aktywowany w LSPosed Manager</string>
     <string name="hide_default">Ukryj (Domyślne)</string>
     <string name="percent_of_default_size">% o domyślnym rozmiarze</string>
@@ -50,9 +47,7 @@
     <string name="battery_style_title">Wybierz styl baterii</string>
     <string name="battery_show_percent_title">Pokaż procent baterii</string>
     <string name="battery_style_category_title">Styl baterii</string>
-    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Rozmiar ikony baterii</string>
-    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Ukryty</string>
     <string name="BIcon_Opacity_title">Nieprzezroczystość</string>
     <string name="sb_center_fine_tune">Dostosuj obszar środkowy</string>
@@ -72,7 +67,7 @@
     <string name="sbc_date_small">Mniejszy rozmiar (70%)</string>
     <string name="sbc_custom_date_after">Niestandardowy format daty po zegarze</string>
     <string name="sbc_header">Dostosowanie zegara na pasku stanu</string>
-    <string name="network_settings_pref">Ustawienia monitora sieciowego...</string>
+    <string name="network_settings_pref">Ustawienia monitora sieciowego…</string>
     <string name="ntsb_far_left">Skrajnie w lewo</string>
     <string name="ntsb_mid_left">Środkowa lewa</string>
     <string name="ntsb_mid_right">Środkowy prawy</string>
@@ -119,7 +114,6 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numer kompilacji w stopce panelu QS</string>
     <string name="qs_footer_mod_title">Zmień numer wersji w szybkich ustawieniach</string>
-    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
     <string name="qs_footer_text_summary">Pozostaw puste miejsce, aby całkowicie usunąć tekst</string>
     <string name="qs_footer_text_desc">Wyłącz/włącz wyswietlacz, aby zastosowac zmiany</string>
     <string name="light_qs_title">Jasny panel szybkich ustawien podczas jasnego motywu</string>
@@ -172,7 +166,6 @@
     <string name="gesture_nav_pill_width_title">Szerokość w porównaniu ze standardowym rozmiarem</string>
     <string name="threebutton_header_title">3-przyciskowa nawigacja</string>
     <string name="back_longpress_kill_title">Przytrzymanie klawisza wstecz zamyka aplikację na pierwszym planie</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Ukryj pasek nawigacji</string>
     <string name="colorpill_title">Kolor paska nawigacji gestów</string>
     <string name="colorpill">Pasek nawigacyji w kolorze</string>
@@ -215,7 +208,6 @@
     <string name="dt_darkaubergine">Ciemny Bakłażan</string>
     <string name="dt_style">Ciemny niebieski</string>
     <string name="dt_darkgray">Ciemno szary</string>
-    <string name="dt_materialocean">Material Ocean</string>
     <string name="dt_night">Noc</string>
     <string name="dt_solarizeddark">Solarized Dark</string>
 
@@ -236,12 +228,10 @@
     <string name="clock_right">Prawa strona</string>
 
     <!-- AM/PM style -->
-    <string name="am_pm_default" translatable="false">@string/hide_default</string>
     <string name="am_pm_normal">100% rozmiaru zegara</string>
     <string name="am_pm_small">70% rozmiaru zegara</string>
 
     <!-- Date position -->
-    <string name="date_default" translatable="false">@string/hide_default</string>
     <string name="date_before">Przed zegarem (100%)</string>
     <string name="date_before_small">Przed zegarem (70%)</string>
     <string name="date_after">Po zegarze (100%)</string>
@@ -256,7 +246,7 @@
 
     <!-- Menu Items -->
     <string name="menu_reset_defaults">Zresetuj wszystkie ustawienia</string>
-    <string name="menu_import_settings">Importuj ustawienia z pliku...</string>
-    <string name="menu_export_settings">Eksportuj ustawienia do pliku...</string>
+    <string name="menu_import_settings">Importuj ustawienia z pliku…</string>
+    <string name="menu_export_settings">Eksportuj ustawienia do pliku…</string>
 
 </resources>

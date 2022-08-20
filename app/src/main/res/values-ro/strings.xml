@@ -81,7 +81,7 @@
     <string name="sbc_before_color">Text înainte de ceas</string>
     <string name="sbc_color">Ceas</string>
     <string name="sbc_after_color">Text după ceas</string>
-    <string name="network_settings_pref">Setări monitorizare rețea...</string>
+    <string name="network_settings_pref">Setări monitorizare rețea…</string>
     <string name="ntsb_far_left">Extrema stângă</string>
     <string name="ntsb_far_left_extra">Extrema stângă - Deasupra notificărilor</string>
     <string name="ntsb_mid_left">Mijloc-Stânga</string>
@@ -130,7 +130,6 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numărul versiunii în subsolul panoului setărilor rapide</string>
     <string name="qs_footer_mod_title">Modifică textul versiunii în panoul setărilor rapide</string>
-    <string name="qs_footer_text_value">Introdu un text personalizat</string>
     <string name="qs_footer_text_summary">Lasă necompletat pentru a elimina complet</string>
     <string name="qs_footer_text_desc">Oprește afișajul pentru a aplica</string>
     <string name="light_qs_title">Aplică panoul de setări rapide luminoase când se utilizează tema luminoasă</string>

@@ -7,7 +7,6 @@
     <string name="allow_all_screen_rotations">Buộc mở khóa tất cả các chiều xoay của màn hình</string>
     <string name="am_pm_normal">Bằng kích thước của đồng hồ</string>
     <string name="am_pm_small">Nhỏ hơn kích thước của đồng hồ</string>
-    <string name="app_name">AOSPMods</string>
     <string name="assistant_shortcut">Trợ lý</string>
     <string name="back_from_left_title">Bên trái của màn hình</string>
     <string name="back_from_right_title">Bên phải của màn hình</string>
@@ -25,7 +24,6 @@
     <string name="bs_thick_track">Sử dụng một rãnh dày trên thanh trượt độ sáng</string>
     <string name="call_category">Cuộc gọi</string>
     <string name="camera_shortcut">Máy ảnh</string>
-    <string name="canary_flavor">Thử nghiệm</string>
     <string name="carrier_text_mod_enabled">Văn bản nhà cung cấp dịch vụ tùy chỉnh</string>
     <string name="carrier_text_value">Văn bản nhà cung cấp dịch vụ tùy chỉnh</string>
     <string name="clock_center">Trung tâm</string>
@@ -35,11 +33,6 @@
     <string name="colorpill">Thanh điều hướng có màu nhấn</string>
     <string name="combined_signal_icon_title">Biểu tượng tín hiệu kết hợp</string>
     <string name="configure_carrier_text">Định cấu hình văn bản của nhà cung cấp dịch vụ - Đầu màn hình</string>
-    <string name="cpv_custom">Tuỳ chỉnh</string>
-    <string name="cpv_default_title">Chọn màu</string>
-    <string name="cpv_presets">Cài đặt trước</string>
-    <string name="cpv_select">Chọn</string>
-    <string name="cpv_transparency">Trong suốt</string>
     <string name="currentVersionTitle">Phiên bản đã cài đặt:</string>
     <string name="custom_text_category">Văn bản tùy chỉnh trên Màn hình khóa</string>
     <string name="custom_themed_icons_off">Các biểu tượng tùy chỉnh đã bị vô hiệu hóa</string>
@@ -60,9 +53,7 @@
     <string name="dual_tone_battery_title">Bật biểu tượng pin hai tông màu</string>
     <string name="easy_unlock_sumamry">"Nếu lần đầu tiên không hoạt động, hãy thử lại"</string>
     <string name="easy_unlock_title">Mở khoá nhanh</string>
-    <string name="expand_button_title">Tuỳ chỉnh</string>
     <string name="expand_notifications_icons_title">Thêm nút Mở rộng/Thu gọn tất cả thông báo</string>
-    <string name="exposed_dropdown_menu_content_description">Hiển thị menu thả xuống</string>
     <string name="font_overlays_enable_title">Cho phép sử dụng phông chữ tùy chỉnh</string>
     <string name="force_no_cutout">Bỏ qua phần cắt máy ảnh (với các thiết bị có màn hình đục lỗ)</string>
     <string name="fourg_lte_default">Mặc định hệ thống</string>
@@ -105,11 +96,6 @@
     <string name="minutes_word">phút(s)</string>
     <string name="misc_header">Tuỳ chỉnh khác</string>
     <string name="monitoring_category_title">Các tùy chọn giám sát mạng</string>
-    <string name="mtrl_badge_numberless_content_description">Thông báo mới</string>
-    <string name="mtrl_chip_close_icon_content_description">Xoá %1$s</string>
-    <string name="mtrl_exceed_max_badge_number_content_description">Hơn %1$d thông báo mới</string>
-    <string name="mtrl_picker_a11y_next_month">Đổi sang tháng sau</string>
-    <string name="mtrl_picker_a11y_prev_month">Đổi thành tháng trước</string>
     <string name="nav_header">Thanh điều hướng</string>
     <string name="netstat_enable_title">Thu thập số liệu thống kê mạng</string>
     <string name="netstat_header">Cài đặt thống kê mạng</string>
@@ -148,7 +134,6 @@
     <string name="qs_footer_mod_title">Tuỳ chỉnh số bản dựng trong chân trang Bảng cài đặt nhanh</string>
     <string name="qs_footer_text_desc">Tắt/Bật màn hình để áp dụng</string>
     <string name="qs_footer_text_summary">Để trống để xóa hoàn toàn</string>
-    <string name="qs_footer_text_value">Nhập văn bản tùy chỉnh</string>
     <string name="qs_general_options">Tùy chỉnh ô cài đặt nhanh</string>
     <string name="qs_haptic_switch_title">Rung khi chạm vào ô cài đặt nhanh</string>
     <string name="qs_mod_category_title">Số bản dựng trong chân trang Bảng cài đặt nhanh</string>
@@ -156,7 +141,6 @@
     <string name="qs_pulldown_category">Kéo xuống nhanh</string>
     <string name="qs_pulldown_switch_title">Kéo xuống nhanh bảng cài đặt từ thanh trạng thái</string>
     <string name="qs_rows_number">Số hàng bảng cài đặt nhanh</string>
-    <string name="qs_text_size">Giảm kích thước văn bản của ô cài đặt nhanh</string>
     <string name="qs_tile_style_title">Chủ đề ô cài đặt nhanh</string>
     <string name="qstile_default">Mặc định</string>
     <string name="quick_settings_tiles_category">Tuỳ chỉnh ô cài đặt nhanh</string>
@@ -227,7 +211,6 @@
     <string name="update_checking">Đang kiểm tra…</string>
     <string name="update_download_started">Đang tải xuống - Vui lòng nhấn vào thông báo sau khi hoàn tất</string>
     <string name="update_flavor_title">Kênh cập nhật</string>
-    <string name="update_fragment_label">@string/menu_updates</string>
     <string name="update_notification_text">Nhấn vào đây để cài đặt</string>
     <string name="update_notification_title">Đã tải xuống cập nhật</string>
     <string name="update_type_title">Loại gói</string>
@@ -239,6 +222,5 @@
     <string name="wifi_cell_off">Sử dụng một ô biểu tượng mạng duy nhất</string>
     <string name="wifi_cell_title">Ô biểu tượng mạng</string>
     <string name="word_default">Mặc định</string>
-    <string name="xposed_desc">Các tính năng tùy chỉnh cho ROM dựa trên Android 12+ AOSP</string>
     <string name="xposed_type">Chỉ Xposed</string>
 </resources>

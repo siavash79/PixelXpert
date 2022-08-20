@@ -169,7 +169,6 @@
     <string name="dt_darkaubergine">Beringela</string>
     <string name="dt_style">Azul</string>
     <string name="dt_darkgray">Cinzento</string>
-    <string name="dt_materialocean">Oceano</string>
     <string name="dt_night">Noite</string>
     <string name="dt_solarizeddark">Solarizado</string>
     <string name="notifications_header">Opções das notificações</string>
@@ -279,7 +278,6 @@
     <string name="volume_button_step_title">Níveis de volume (0 a 100%)</string>
     <string name="allow_all_screen_rotations">Permitir rotação em todas as direções</string>
     <string name="allow_all_screen_rotations_summary">Irá ignorar o botão de rotação manual</string>
-    <string name="qs_footer_text_value">Inserir texto personalizado</string>
     <string name="call_category">Chamadas telefónicas</string>
     <string name="vibrate_on_call_active_title">Vibrar ao atender chamad</string>
     <string name="vibrate_on_call_drop_title">Vibrar ao terminar chamada</string>

@@ -1,8 +1,5 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Пожалуйста, проверьте, активирован ли модуль в LSPosed Manager</string>
     <string name="hide_default">Скрыть (по умолчанию)</string>
     <string name="percent_of_default_size">% от стандартного размера</string>
@@ -56,9 +53,7 @@
     <string name="battery_style_title">Выберите стиль батареи</string>
     <string name="battery_show_percent_title">Показать процент заряда батареи</string>
     <string name="battery_style_category_title">Стиль батареи</string>
-    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Размер значка батареи</string>
-    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Скрытый</string>
     <string name="BIcon_Opacity_title">Полупрозрачный</string>
     <string name="sb_center_fine_tune">Настройка центральной зоны</string>
@@ -89,7 +84,7 @@
     <string name="sbc_before_color">Текст перед часами</string>
     <string name="sbc_color">Часы</string>
     <string name="sbc_after_color">Текст после часов</string>
-    <string name="network_settings_pref">Настройки сетевого монитора...</string>
+    <string name="network_settings_pref">Настройки сетевого монитора…</string>
     <string name="ntsb_far_left">С левого края</string>
     <string name="ntsb_far_left_extra">Крайний левый — над уведомлениями</string>
     <string name="ntsb_mid_left">По середине слева</string>
@@ -98,7 +93,7 @@
     <string name="ntsb_enabled_title">Включить мониторинг трафика</string>
     <string name="ntsb_position_title">Расположение мониторинга</string>
     <string name="ntsb_threshold_title">Порог автоскрытия</string>
-    <string name="ntsb_threshold_summary">"Скрыть, если трафик меньше... (Килобайтов)"</string>
+    <string name="ntsb_threshold_summary">"Скрыть, если трафик меньше… (Килобайтов)"</string>
     <string name="network_mode_title">Стиль монитора</string>
     <string name="network_colorful_title">Сделать красочным</string>
     <string name="network_download_top">Скорость загрузки выше</string>
@@ -139,7 +134,6 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Номер сборки в нижнем колонтитуле панели быстрых настроек</string>
     <string name="qs_footer_mod_title">Изменить номер текста сборки на панели быстрых настроек</string>
-    <string name="qs_footer_text_value">Введите собственный текст</string>
     <string name="qs_footer_text_summary">Оставьте его пустым, чтобы полностью удалить текст</string>
     <string name="qs_footer_text_desc">Выкл/вкл экран, чтобы применить</string>
     <string name="light_qs_title">Белая панель быстрых настроек при светлой теме</string>
@@ -197,7 +191,6 @@
     <string name="gesture_nav_pill_height_title">Высота по сравнению со стандартным размером</string>
     <string name="threebutton_header_title">Навигация с помощью трех кнопок</string>
     <string name="back_longpress_kill_title">Длительное нажатие кнопки "Назад", принудительно закрывает приложение</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Скрыть панель жестов</string>
     <string name="colorpill_title">Раскрасьте панель жестов</string>
     <string name="colorpill">Панель жестов с цветом акцента</string>
@@ -252,7 +245,6 @@
     <string name="dt_darkaubergine">Темно-баклажановый</string>
     <string name="dt_style">Темно-синий</string>
     <string name="dt_darkgray">Темно-зеленый</string>
-    <string name="dt_materialocean">Материал Океан</string>
     <string name="dt_night">Ночной</string>
     <string name="dt_solarizeddark">Солярно Темный</string>
 
@@ -278,7 +270,6 @@
     <string name="am_pm_small">70% размер часов</string>
 
     <!-- Date position -->
-    <string name="date_default" translatable="false">@string/hide_default</string>
     <string name="date_before">До часов (100%)</string>
     <string name="date_before_small">До часов (70%)</string>
     <string name="date_after">После часов (100%)</string>
@@ -317,7 +308,6 @@
     <string name="netstat_header">Настройки сетевой статистики</string>
 
     <string name="string_formatter_manual_body">Помимо обычного текста, который вы можете ввести, также доступны динамические переменные:\n\n$G\&lt;format\&gt; : григорианский дата в зависимости от формата. Документацию по формату можно найти в строке `Формат даты Java`\nПример: $GMMM означает: январь (или любой другой)\n\n$P&lt;format&gt; : дата на персидском языке, в зависимости от формата\nПример: $Pyyyy означает: 1401\n\n$Nrx : Всего загрузок за сегодня\n$Ntx: Всего загрузок за сегодня\n$Nall : Всего загрузок за сегодня\n\nЕсли заменить $N с $Nc вам будет предоставлена ​​статистика мобильных данных (например, $Ncrx для загрузок)\n\nПример:\n`Мобильный трафик $GEEEE: $Ncall` создаст:\n`Мобильный трафик вторника: 2 ГБ` </string>
-    <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">Обновления</string>
     <string name="update_notification_title">Обновление загружено</string>
     <string name="update_notification_text">Нажмите здесь, чтобы установить</string>
@@ -325,7 +315,6 @@
     <string name="reboot_notification_text">Изменения вступят в силу после перезагрузки устройства</string>
     <string name="update_flavor_title">Обновить канал</string>
     <string name="stable_flavor">Стабильный</string>
-    <string name="canary_flavor" translatable="false">Canary</string>
     <string name="currentVersionTitle">Установленная версия: </string>
     <string name="lastestVersionTitle">Последняя версия: </string>
     <string name="root_not_here">ДОСТУП ROOT НЕ ПРЕДОСТАВЛЕН!</string>
@@ -337,8 +326,6 @@
     <string name="switch_branches">Сменить ветку</string>
     <string name="reinstall_word">Переустановить</string>
 
-    <string name="title_activity_update" translatable="false">updateActivity</string>
-    
     <string name="own_prefs_header">Настройки AOSPMods</string>
     <string name="language_title">Выберите язык</string>
     <string name="toggle_dark_apply">(Переключиться на темную тему)</string>

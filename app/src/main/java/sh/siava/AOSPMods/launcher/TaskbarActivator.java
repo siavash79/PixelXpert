@@ -13,7 +13,7 @@ import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class TaskbarActivator extends XposedModPack {
-	private static final String listenPackage = AOSPMods.LAUNCHR_PACKAGE;
+	private static final String listenPackage = AOSPMods.LAUNCHER_PACKAGE;
 	
 	public static final int TASKBAR_DEFAULT = 0;
 	public static final int TASKBAR_ON = 1;

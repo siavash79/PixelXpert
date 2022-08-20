@@ -7,6 +7,7 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.View;
 
 import com.topjohnwu.superuser.Shell;
@@ -60,6 +61,6 @@ public class BackToKill extends XposedModPack {
     }
 
     @Override
-    public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
+    public boolean listensTo(String packageName) { return listenPackage.equals(packageName) && Build.VERSION.SDK_INT < 33; }
 
 }

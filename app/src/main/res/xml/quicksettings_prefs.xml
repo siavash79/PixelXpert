@@ -32,6 +32,18 @@
                 android:summaryOff="@string/general_off"
                 android:summaryOn="@string/general_on"
                 android:title="@string/qs_haptic_switch_title" />
+
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="leveledFlashTile"
+                android:summary="@string/qs_leveled_flashlight_summary"
+                android:title="@string/qs_leveled_flashlight_title" />
+
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="isFlashLevelGlobal"
+                android:title="@string/qs_flashlight_level_global_title" />
+
             <SeekBarPreference
                 android:defaultValue="0"
                 android:max="8"

@@ -1,3 +1,8 @@
+**canary-110**  
+- A13: Goodbye LockscreenAlbumArt (A12 Users: don't install this)  
+- A13: Fixed combined signal icons (A12 Users: don't install this)  
+- Fixed batterybar activation issues  
+  
 **canary-109**  
 - A13: Fixed statusbar notification count limits (A12 Users: don't install this)  
   

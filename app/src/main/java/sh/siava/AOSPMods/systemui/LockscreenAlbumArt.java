@@ -12,7 +12,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaMetadata;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.util.ArraySet;
 
 import com.google.android.renderscript.Toolkit;
@@ -62,7 +61,7 @@ public class LockscreenAlbumArt extends XposedModPack {
 	}
 	
 	@Override
-	public boolean listensTo(String packageName) { return listenPackage.equals(packageName) && Build.VERSION.SDK_INT < 33;}
+	public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 	
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {

@@ -1,8 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
-import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
@@ -67,36 +67,15 @@ public class FeatureFlagsMods extends XposedModPack {
                 });
 
         if(Build.VERSION.SDK_INT < 32) return; //Feature flags is newly introduced!
-        switch (Build.VERSION.SDK_INT)
-        {
-            case 31: //Feature flags is newly introduced!
-                return;
-            case 32: //A12.1
-                Class<?> FeatureFlagsClass = findClass("com.android.systemui.flags.FeatureFlags", lpparam.classLoader);
 
-                hookAllMethods(FeatureFlagsClass, "isCombinedStatusBarSignalIconsEnabled", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        param.setResult(combinedSignalEnabled);
-                    }
-                });
-                break;
-            case 33: //A13
-                Class<?> FlagsClass = findClass("com.android.systemui.flags.Flags", lpparam.classLoader);
-                Class<?> FeatureFlagsReleaseClass = findClass("com.android.systemui.flags.FeatureFlagsRelease", lpparam.classLoader);
+        Class<?> FeatureFlagsClass = findClass("com.android.systemui.flags.FeatureFlags", lpparam.classLoader);
 
-                Object COMBINED_STATUS_BAR_SIGNAL_ICONS = getStaticObjectField(FlagsClass, "COMBINED_STATUS_BAR_SIGNAL_ICONS");
-                hookAllMethods(FeatureFlagsReleaseClass, "isEnabled", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(param.args[0].equals(COMBINED_STATUS_BAR_SIGNAL_ICONS))
-                        {
-                            param.setResult(combinedSignalEnabled);
-                        }
-                    }
-                });
-                break;
-        }
+        findAndHookMethod(FeatureFlagsClass, "isCombinedStatusBarSignalIconsEnabled", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                param.setResult(combinedSignalEnabled);
+            }
+        });
     }
 
     @Override

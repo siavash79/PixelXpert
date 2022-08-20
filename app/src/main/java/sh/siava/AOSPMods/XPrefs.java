@@ -9,7 +9,7 @@ import android.content.res.XModuleResources;
 import com.crossbowffs.remotepreferences.RemotePreferences;
 
 import de.robv.android.xposed.IXposedHookZygoteInit;
-import sh.siava.AOSPMods.utils.Overlays;
+import sh.siava.AOSPMods.Utils.Overlays;
 
 
 public class XPrefs implements IXposedHookZygoteInit {

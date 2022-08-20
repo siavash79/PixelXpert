@@ -118,6 +118,15 @@ public class ScreenGestures extends XposedModPack {
                     }).start();
                 }
             });
+
+            hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    Object mTouchHandler = NotificationPanelViewControllerClass.getField("mTouchHandler").get(param.thisObject);
+                    hookTouchHandler(param, mTouchHandler);
+                }
+            });
+
         }
         else {
             findAndHookMethod(NotificationShadeWindowViewControllerClass,
@@ -127,31 +136,38 @@ public class ScreenGestures extends XposedModPack {
                             setHooks(param);
                         }
                     });
+
+            findAndHookMethod(NotificationPanelViewControllerClass,
+                    "createTouchHandler", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            Object touchHandler = param.getResult();
+                            hookTouchHandler(param, touchHandler);
+                        }
+                    });
         }
-        hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                Object mTouchHandler = NotificationPanelViewControllerClass.getField("mTouchHandler").get(param.thisObject);
-                Object ThisNotificationPanel = param.thisObject;
+    }
 
-                findAndHookMethod(mTouchHandler.getClass(),
-                        "onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
-                            @Override
-                            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                if (!doubleTapToSleepEnabled) return;
+    private void hookTouchHandler(XC_MethodHook.MethodHookParam param, Object mTouchHandler)
+    {
+        Object ThisNotificationPanel = param.thisObject;
 
-                                boolean mPulsing = (boolean) getObjectField(ThisNotificationPanel, "mPulsing");
-                                boolean mDozing = (boolean) getObjectField(ThisNotificationPanel, "mDozing");
-                                int mBarState = (int) getObjectField(ThisNotificationPanel, "mBarState");
+        findAndHookMethod(mTouchHandler.getClass(),
+                "onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (!doubleTapToSleepEnabled) return;
 
-                                if (!mPulsing && !mDozing
-                                        && mBarState == 0) {
-                                    mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[1]);
-                                }
-                            }
-                        });
-            }
-        });
+                        boolean mPulsing = (boolean) getObjectField(ThisNotificationPanel, "mPulsing");
+                        boolean mDozing = (boolean) getObjectField(ThisNotificationPanel, "mDozing");
+                        int mBarState = (int) getObjectField(ThisNotificationPanel, "mBarState");
+
+                        if (!mPulsing && !mDozing
+                                && mBarState == 0) {
+                            mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[1]);
+                        }
+                    }
+                });
     }
 
     private void setHooks(XC_MethodHook.MethodHookParam param)

@@ -1,5 +1,5 @@
 **canary-113**  
-- Android 12 and 13 users test/bugreport version  
+- Android 12 and 13 users test/bugreport version (Android 12 users: you can optionally try this)
   
 **canary-112**  
 - A13: No more compatibility work in hand  

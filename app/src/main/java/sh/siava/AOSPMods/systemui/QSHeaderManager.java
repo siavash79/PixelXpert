@@ -37,6 +37,7 @@ import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.Helpers;
 import sh.siava.AOSPMods.utils.Overlays;
+import sh.siava.AOSPMods.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
 public class QSHeaderManager extends XposedModPack {
@@ -63,17 +64,19 @@ public class QSHeaderManager extends XposedModPack {
     {
         if(Xprefs == null) return;
 
-        dualToneQSEnabled = Xprefs.getBoolean("dualToneQSEnabled", false);
-        Helpers.setOverlay("QSDualToneOverlay", dualToneQSEnabled, true, false);
-
-        setLightQSHeader(Xprefs.getBoolean("LightQSPanel", false));
-        boolean newbrightnessThickTrackEnabled = Xprefs.getBoolean("BSThickTrackOverlay", false);
-        if(newbrightnessThickTrackEnabled != brightnessThickTrackEnabled)
+        if(Key.length > 0)
         {
-            brightnessThickTrackEnabled = newbrightnessThickTrackEnabled;
-            try {
-                applyOverlays();
-            } catch (Throwable ignored){}
+            dualToneQSEnabled = Xprefs.getBoolean("dualToneQSEnabled", false);
+            brightnessThickTrackEnabled = Xprefs.getBoolean("BSThickTrackOverlay", false);
+
+            switch(Key[0])
+            {
+                case "dualToneQSEnabled":
+                case "LightQSPanel":
+                case "BSThickTrackOverlay":
+                    Helpers.setOverlay("QSDualToneOverlay", dualToneQSEnabled, true, false);
+                    setLightQSHeader(Xprefs.getBoolean("LightQSPanel", false));
+            }
         }
     }
 
@@ -85,6 +88,7 @@ public class QSHeaderManager extends XposedModPack {
             try {
                 applyOverlays();
             } catch (Throwable ignored) {}
+            SystemUtils.doubleToggleDarkMode();
         }
     }
 

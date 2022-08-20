@@ -397,6 +397,9 @@ public class SystemUtils{
 		boolean isDark = isDarkMode();
 		new Thread(() -> {
 			cmd("cmd uimode night " + (isDark ? "no" : "yes")).exec();
+			try {
+				Thread.sleep(1000);
+			} catch (Exception ignored) {}
 			cmd("cmd uimode night " + (isDark ? "yes" : "no")).exec();
 		}).start();
 	}

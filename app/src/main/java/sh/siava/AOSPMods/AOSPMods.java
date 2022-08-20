@@ -64,10 +64,10 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
         //region Mod list definition
         modPacks.add(NotificationExpander.class);
-        modPacks.add(BackToKill.class);
-        modPacks.add(BrightnessSlider.class);
         modPacks.add(QSTileGrid.class);
+        modPacks.add(BrightnessSlider.class); //13 OK
         modPacks.add(FeatureFlagsMods.class); //13 OK
+        modPacks.add(BackToKill.class); //13 not planned//13 OK
         modPacks.add(QSHaptic.class); //13 OK
         modPacks.add(LockscreenAlbumArt.class); //13 not planned
         modPacks.add(QSHeaderManager.class); //13 OK
@@ -101,9 +101,9 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         isSecondProcess =  lpparam.processName.contains(":");
 
-        if(lpparam.packageName.equals(SYSTEM_UI_PACKAGE)) {
+        if(lpparam.packageName.equals(SYSTEM_UI_PACKAGE) || false) {
             log("------------");
-            Helpers.dumpClass("com.android.systemui.FontSizeUtils", lpparam.classLoader);
+            Helpers.dumpClass("com.android.systemui.navigationbar.NavigationBar", lpparam.classLoader);
             log("------------");
         }
 

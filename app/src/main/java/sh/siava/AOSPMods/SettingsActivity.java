@@ -310,6 +310,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateVisibility() {
             findPreference("HideNavbarOverlay").setVisible(showOverlays);
+            findPreference("threebutton_header").setVisible(Build.VERSION.SDK_INT < 33);
         }
 
     }

@@ -1,3 +1,7 @@
+**canary-111**  
+- A13: Fixed QS Tile text sizes  
+- A13: Fixed BrightnessSlider options (QQS brightness removed till further notice)  
+  
 **canary-110**  
 - A13: Goodbye LockscreenAlbumArt (A12 Users: don't install this)  
 - A13: Fixed combined signal icons (A12 Users: don't install this)  

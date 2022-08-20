@@ -288,5 +288,37 @@
     <string name="update_download_started">Downloaden - Tik op de melding zodra deze is voltooid</string>
     <string name="update_word">Update</string>
     <string name="switch_branches">Van tak wisselen</string>
+    <string name="easy_unlock_title">Eenvoudig ontgrendelen (pin/wachtwoord)</string>
+    <string name="easy_unlock_sumamry">Als het de eerste keer niet werkte, probeer het dan opnieuw</string>
+    <string name="sb_multi_row_system_icons">Systeempictogrammen met meerdere rijen (vereist een hogere statusbalkhoogte)</string>
+    <string name="sb_multi_row_category">Systeempictogrammen met meerdere rijen</string>
+    <string name="sb_icon_sort_mode">Methode voor het plaatsen van pictogrammen</string>
+    <string name="sort_clean">Sorteren in een raster</string>
+    <string name="sort_tight">Maximaal aantal items passen</string>
+    <string name="sb_notification_limit">Maximale meldingspictogrammen (standaard is 4)</string>
+    <string name="ntsb_far_left_extra">Uiterst links - Boven meldingen</string>
+    <string name="sb_padding_title">Statusbalk opvulling</string>
+    <string name="sb_padding_summary">Het instellen van de waarden op min/max is gelijk aan apparaat Standaard</string>
+    <string name="qs_cols_number">Aantal QS-kolommen</string>
+    <string name="qqs_tiles_number">Maximum aantal tegels in Quick QS (max. 2 rijen)</string>
+    <string name="qs_tile_label_size">QS Tegellabelformaat</string>
+    <string name="qs_tile_secondary_label_size">QS Tegellabel overzichtsgrootte</string>
+    <string name="gesture_nav_pill_height_title">Hoogte vergeleken met standaard maat</string>
+    <string name="allow_all_screen_rotations">Ontgrendel alle schermrotaties geforceerd</string>
+    <string name="allow_all_screen_rotations_summary">Zal ook de zwevende knop voor handmatige rotatie negeren</string>
+    <string name="force_no_cutout">Negeer de camera-uitsparing</string>
+    <string name="volume_button_step_title">Volumestappen (0 tot 100%)</string>
+    <string name="so_fingerprint_sensor_enabled">Vingerafdruksensor toestaan wanneer het scherm is uitgeschakeld</string>
+    <string name="call_category">Telefoongesprekken</string>
+    <string name="vibrate_on_call_active_title">Trillen bij beantwoord uitgaande oproep</string>
+    <string name="vibrate_on_call_drop_title">Trillen wanneer gesprek wordt verbroken</string>
+    <string name="word_default">Standaard</string>
+    <string name="clock_default_extra">Links - Boven meldingen</string>
+    <string name="update_type_title">Pakkettype</string>
+    <string name="full_type">Vol</string>
+    <string name="xposed_type">Alleen Xposed</string>
+    <string name="own_prefs_header">AOSPMods-instellingen</string>
+    <string name="language_title">Taal</string>
+    <string name="toggle_dark_apply">(Toggle donker thema om toe te passen)</string>
 
 </resources>

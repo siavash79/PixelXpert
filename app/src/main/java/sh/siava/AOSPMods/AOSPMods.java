@@ -5,19 +5,18 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 import android.app.Instrumentation;
 import android.content.Context;
-import android.content.res.Configuration;
 
 import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.utils.Helpers;
-import sh.siava.AOSPMods.utils.SystemUtils;
-import sh.siava.AOSPMods.allApps.OverScrollDisabler;
+import sh.siava.AOSPMods.Utils.Helpers;
+import sh.siava.AOSPMods.Utils.SystemUtils;
+import sh.siava.AOSPMods.allApps.overScrollDisabler;
 import sh.siava.AOSPMods.android.StatusbarSize;
-import sh.siava.AOSPMods.android.ScreenOffKeys;
-import sh.siava.AOSPMods.android.ScreenRotation;
+import sh.siava.AOSPMods.android.screenOffKeys;
+import sh.siava.AOSPMods.android.screenRotation;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.systemui.BackToKill;
@@ -41,8 +40,7 @@ import sh.siava.AOSPMods.systemui.ScreenGestures;
 import sh.siava.AOSPMods.systemui.ScreenshotController;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
-import sh.siava.AOSPMods.systemui.EasyUnlock;
-import sh.siava.AOSPMods.systemui.FlashLightLevel;
+import sh.siava.AOSPMods.systemui.easyUnlock;
 import sh.siava.AOSPMods.telecom.CallVibrator;
 
 @SuppressWarnings("RedundantThrows")
@@ -50,7 +48,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public static final String SYSTEM_UI_PACKAGE = "com.android.systemui";
     public static final String SYSTEM_FRAMEWORK_PACKAGE = "android";
     public static final String TELECOM_SERVER_PACKAGE = "com.android.server.telecom";
-    public static final String LAUNCHER_PACKAGE = "com.google.android.apps.nexuslauncher";
+    public static final String LAUNCHR_PACKAGE = "com.google.android.apps.nexuslauncher";
 
     public static boolean isSecondProcess = false;
 
@@ -60,40 +58,38 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
     public AOSPMods()
     {
-//        modPacks.add(StatusbarMods.class); //13 OK
 
         //region Mod list definition
         modPacks.add(NotificationExpander.class);
+        modPacks.add(BackToKill.class);
+        modPacks.add(FeatureFlagsMods.class);
+        modPacks.add(QSHaptic.class);
+        modPacks.add(QSHeaderManager.class);
+        modPacks.add(QSQuickPullDown.class);
+        modPacks.add(AOSPSettingsLauncher.class);
+        modPacks.add(BrightnessSlider.class);
+        modPacks.add(LockscreenAlbumArt.class);
         modPacks.add(QSTileGrid.class);
-        modPacks.add(BrightnessSlider.class); //13 OK
-        modPacks.add(FeatureFlagsMods.class); //13 OK
-        modPacks.add(BackToKill.class); //13 not planned//13 OK
-        modPacks.add(QSHaptic.class); //13 OK
-        modPacks.add(LockscreenAlbumArt.class); //13 not planned
-        modPacks.add(QSHeaderManager.class); //13 OK
-        modPacks.add(ScreenGestures.class); //13 OK
+        modPacks.add(ScreenGestures.class);
         modPacks.add(miscSettings.class); //13 OK except for internet tile
-        modPacks.add(AOSPSettingsLauncher.class); //13 OK
-        modPacks.add(QSQuickPullDown.class); //13 OK
-        modPacks.add(KeyguardCustomText.class); //13 OK
+        modPacks.add(KeyguardCustomText.class); //13 OK except for carrier text
         modPacks.add(KeyguardBottomArea.class); //13 OK
         modPacks.add(UDFPSManager.class); //13 OK
-        modPacks.add(EasyUnlock.class); //13 OK
+        modPacks.add(easyUnlock.class); //13 OK
         modPacks.add(MultiStatusbarRows.class); //13 OK
         modPacks.add(StatusbarMods.class); //13 OK
         modPacks.add(BatteryStyleManager.class); //13 OK
         modPacks.add(GestureNavbarManager.class); //13 OK
         modPacks.add(QSFooterTextManager.class); //13 OK
         modPacks.add(ScreenshotController.class); //13 OK
-        modPacks.add(ScreenOffKeys.class); //13 OK
+        modPacks.add(screenOffKeys.class); //13 OK
         modPacks.add(TaskbarActivator.class); //13 OK
         modPacks.add(KeyGuardPinScrambler.class); //13 OK
-        modPacks.add(OverScrollDisabler.class); //13 OK
+        modPacks.add(overScrollDisabler.class); //13 OK
         modPacks.add(FingerprintWhileDozing.class); //13 OK
         modPacks.add(StatusbarSize.class); //13 OK
-        modPacks.add(ScreenRotation.class); //13 OK
+        modPacks.add(screenRotation.class); //13 OK
         modPacks.add(CallVibrator.class); //13 OK
-        modPacks.add(FlashLightLevel.class); //13 based
         //endregion
     }
     
@@ -101,12 +97,10 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         isSecondProcess =  lpparam.processName.contains(":");
 
-        if(lpparam.packageName.equals(SYSTEM_UI_PACKAGE) || false) {
-            log("------------");
-            Helpers.dumpClass("com.android.systemui.navigationbar.NavigationBar", lpparam.classLoader);
-            log("------------");
-        }
-
+/*        log("------------");
+        Helpers.dumpClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam);
+        log("------------");
+*/
         findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {

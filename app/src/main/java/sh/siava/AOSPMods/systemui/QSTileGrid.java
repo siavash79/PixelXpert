@@ -1,6 +1,5 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -9,14 +8,13 @@ import static sh.siava.AOSPMods.ResourceManager.resparams;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
-import android.os.Build;
 import android.widget.TextView;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.utils.SystemUtils;
+import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
@@ -68,35 +66,13 @@ public class QSTileGrid extends XposedModPack {
         Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
         Class<?> FontSizeUtilsClass = findClass("com.android.systemui.FontSizeUtils", lpparam.classLoader);
 
-        hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
+        hookAllMethods(QSTileViewImplClass, "createAndAddLabels", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 try {
                     if (labelSize == null) { //we need initial font sizes
-
-                        if(Build.VERSION.SDK_INT == 33) {
-                            callStaticMethod(FontSizeUtilsClass,
-                                    "updateFontSize",
-                                    mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
-                                    getObjectField(param.thisObject, "label"));
-
-                            callStaticMethod(FontSizeUtilsClass,
-                                    "updateFontSize",
-                                    mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
-                                    getObjectField(param.thisObject, "secondaryLabel"));
-                        }
-                        else
-                        {
-                            callStaticMethod(FontSizeUtilsClass,
-                                    "updateFontSize",
-                                    getObjectField(param.thisObject, "label"),
-                                    mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
-
-                            callStaticMethod(FontSizeUtilsClass,
-                                    "updateFontSize",
-                                    getObjectField(param.thisObject, "secondaryLabel"),
-                                    mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
-                        }
+                        callStaticMethod(FontSizeUtilsClass, "updateFontSize", getObjectField(param.thisObject, "label"), mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
+                        callStaticMethod(FontSizeUtilsClass, "updateFontSize", getObjectField(param.thisObject, "secondaryLabel"), mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
 
                         TextView label = (TextView) getObjectField(param.thisObject, "label");
                         TextView secondaryLabel = (TextView) getObjectField(param.thisObject, "secondaryLabel");

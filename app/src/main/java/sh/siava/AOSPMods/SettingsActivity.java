@@ -35,8 +35,8 @@ import com.topjohnwu.superuser.Shell;
 import java.util.List;
 import java.util.Locale;
 
-import sh.siava.AOSPMods.utils.PrefManager;
-import sh.siava.AOSPMods.utils.SystemUtils;
+import sh.siava.AOSPMods.Utils.PrefManager;
+import sh.siava.AOSPMods.Utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class SettingsActivity extends AppCompatActivity implements
@@ -137,6 +137,8 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     public static int getVersionType() {
+        if(Build.VERSION.SDK_INT == 33) //Full version on Android 13 is not accepted
+            return XPOSED_ONLY;
         try {
             return Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", "/data/adb/modules/AOSPMods")).exec().getOut().get(0));
         }
@@ -310,7 +312,6 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateVisibility() {
             findPreference("HideNavbarOverlay").setVisible(showOverlays);
-            findPreference("threebutton_header").setVisible(Build.VERSION.SDK_INT < 33);
         }
 
     }
@@ -365,7 +366,6 @@ public class SettingsActivity extends AppCompatActivity implements
         }
 
         private void updateVisibility(SharedPreferences sharedPreferences) {
-            findPreference("album_art_category").setVisible(Build.VERSION.SDK_INT < 33);
             findPreference("carrierTextValue").setVisible(sharedPreferences.getBoolean("carrierTextMod", false));
             findPreference("albumArtLockScreenBlurLevel").setSummary(sharedPreferences.getInt("albumArtLockScreenBlurLevel",0) + "%");
             findPreference("albumArtLockScreenBlurLevel").setVisible(sharedPreferences.getBoolean("albumArtLockScreenEnabled",false));
@@ -478,7 +478,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 boolean colorful = prefs.getBoolean("BIconColorful", false);
 
-                findPreference("DualToneBatteryOverlay").setVisible(style == 0 && showOverlays);
+                findPreference("DualToneBatteryOverlay").setVisible(style == 0);
                 findPreference("BIconOpacity").setVisible(style > 0 && style < 99);
                 findPreference("BIconOpacity").setSummary(prefs.getInt("BIconOpacity", 100) + "%");
                 findPreference("BatteryIconScaleFactor").setVisible(style < 99);
@@ -604,7 +604,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 findPreference("BSThickTrackOverlay").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
                 findPreference("BrightnessSlierOnBottom").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
-                findPreference("QQSBrightnessEnabled").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false) && Build.VERSION.SDK_INT < 33);
+                findPreference("QQSBrightnessEnabled").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
                 findPreference("QSFooterText").setVisible(sharedPreferences.getBoolean("QSFooterMod", false));
                 findPreference("QSPulldownPercent").setSummary(sharedPreferences.getInt("QSPulldownPercent", 25) + "%");
                 findPreference("dualToneQSEnabled").setVisible(sharedPreferences.getBoolean("LightQSPanel", false));
@@ -639,11 +639,6 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 findPreference("BSThickTrackOverlay").setVisible(showOverlays);
                 findPreference("QSTilesThemesOverlayEx").setVisible(showOverlays);
-
-                findPreference("leveledFlashTile").setVisible(Build.VERSION.SDK_INT >= 33);
-                findPreference("isFlashLevelGlobal").setVisible(findPreference("leveledFlashTile").isVisible() && sharedPreferences.getBoolean("leveledFlashTile", false));
-
-                findPreference("wifi_cell").setVisible(Build.VERSION.SDK_INT < 33);
             } catch (Exception ignored) {}
         }
 
@@ -728,7 +723,7 @@ public class SettingsActivity extends AppCompatActivity implements
             leftGestureIndicator = prepareGestureView(Gravity.LEFT);
 
             getPreferenceManager().setStorageDeviceProtected();
-            setPreferencesFromResource(R.xml.gesture_nav_prefs, rootKey);
+            setPreferencesFromResource(R.xml.gesture_nav_perfs, rootKey);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
             updateVisibility(prefs);
 

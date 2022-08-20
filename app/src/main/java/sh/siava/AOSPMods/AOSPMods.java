@@ -63,8 +63,8 @@ public class AOSPMods implements IXposedHookLoadPackage{
 //        modPacks.add(StatusbarMods.class); //13 OK
 
         //region Mod list definition
-        modPacks.add(NotificationExpander.class);
-        modPacks.add(QSTileGrid.class);
+        modPacks.add(NotificationExpander.class); //13 OK
+        modPacks.add(QSTileGrid.class); //
         modPacks.add(BrightnessSlider.class); //13 OK
         modPacks.add(FeatureFlagsMods.class); //13 OK
         modPacks.add(BackToKill.class); //13 not planned//13 OK
@@ -101,7 +101,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         isSecondProcess =  lpparam.processName.contains(":");
 
-        if(lpparam.packageName.equals(SYSTEM_UI_PACKAGE) || false) {
+        if(lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && false) {
             log("------------");
             Helpers.dumpClass("com.android.systemui.navigationbar.NavigationBar", lpparam.classLoader);
             log("------------");

@@ -329,4 +329,6 @@
     <string name="own_prefs_header">Настройки AOSPMods</string>
     <string name="language_title">Выберите язык</string>
     <string name="toggle_dark_apply">(Переключиться на темную тему)</string>
+    <string name="full_type">Целaя упаковка</string>
+    <string name="xposed_type">Только Xposed</string>
 </resources>

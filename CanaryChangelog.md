@@ -1,3 +1,6 @@
+**canary-114**  
+- A13: Fixed Brightness slider placement bugs  
+  
 **canary-113**  
 - Android 12 and 13 users test/bugreport version (Android 12 users: you can optionally try this)
   

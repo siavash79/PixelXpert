@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -18,8 +19,8 @@ import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
+import sh.siava.AOSPMods.Utils.StringFormatter;
 import sh.siava.AOSPMods.XposedModPack;
-import sh.siava.AOSPMods.utils.StringFormatter;
 
 @SuppressWarnings("RedundantThrows")
 public class KeyguardCustomText extends XposedModPack {
@@ -54,7 +55,6 @@ public class KeyguardCustomText extends XposedModPack {
                 case "KGMiddleCustomText":
                     setMiddleText();
                     break;
-                case "carrierTextValue":
                 case "carrierTextMod":
                     if(customCarrierTextEnabled)
                     {
@@ -93,23 +93,24 @@ public class KeyguardCustomText extends XposedModPack {
 
         Resources res = mContext.getResources();
 
-        hookAllMethods(CarrierTextControllerClass, "onInit", new XC_MethodHook() {
+        hookAllConstructors(CarrierTextControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-
                 carrierTextController = param.thisObject;
                 Object carrierTextCallback = getObjectField(carrierTextController, "mCarrierTextCallback");
+
                 hookAllMethods(carrierTextCallback.getClass(),
                         "updateCarrierInfo", new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                                 if(!customCarrierTextEnabled) return; //nothing to do
+
                                 setCarrierText();
                                 param.setResult(null);
                             }
                         });
             }
-        }).size();
+        });
 
         hookAllMethods(KeyguardSliceViewClass, "setDarkAmount", new XC_MethodHook() {
             @Override

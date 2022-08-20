@@ -4,20 +4,15 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
-import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
-import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -36,8 +31,8 @@ public class BrightnessSlider extends XposedModPack {
     private Object BrightnessMirrorController = null;
     @SuppressLint("StaticFieldLeak")
     private static View QQSBrightnessSliderView = null;
-    private Object QSController;
-    private ViewGroup QSParent, QQS;
+    private Object QS, QQS;
+    private ViewGroup QSParent;
 
     private static boolean BrightnessSlierOnBottom = false;
     private static boolean BrightnessHookEnabled = true;
@@ -75,42 +70,17 @@ public class BrightnessSlider extends XposedModPack {
             if (QSBrightnessDisabled) {
                 QSParent.removeView(QSBrightnessSliderView);
             } else {
-                setBrightnessView(
-                        (ViewGroup) getObjectField(QSController, "mView"),
-                        QSBrightnessSliderView);
+                Object mView = getObjectField(QS, "mView");
+                callMethod(mView, "setBrightnessView", QSBrightnessSliderView);
             }
         }catch (Exception ignored){}
-    }
-
-    private void setBrightnessView(ViewGroup o, @NonNull View view) { //Classloader can't find the method by reflection
-        View mBrightnessView = (View) getObjectField(o,"mBrightnessView");
-        if (mBrightnessView != null) {
-            o.removeView(mBrightnessView);
-            setObjectField(o, "mMovableContentStartIndex", getIntField(o, "mMovableContentStartIndex") - 1);
-        }
-
-        o.addView(view, BrightnessSlierOnBottom
-                ? 1
-                : 0);
-
-        setObjectField(o, "mBrightnessView", view);
-
-        if(BrightnessSlierOnBottom)
-        {
-            setBottomSliderMargins(view);
-        }
-        else {
-            callMethod(o, "setBrightnessViewMargin");
-        }
-
-        setObjectField(o, "mMovableContentStartIndex", getIntField(o, "mMovableContentStartIndex") + 1);
     }
     
     private void setQQSVisibility() {
         if (QQSBrightnessSliderView == null) return;
         try{
             if (QQSBrightnessEnabled) {
-                setBrightnessView(QQS, QQSBrightnessSliderView);
+                callMethod(QQS, "setBrightnessView", QQSBrightnessSliderView);
             } else {
                 ((ViewGroup) QQSBrightnessSliderView.getParent()).removeView(QQSBrightnessSliderView);
             }
@@ -129,15 +99,8 @@ public class BrightnessSlider extends XposedModPack {
         Class<?> QSPanelControllerClass = findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
         Class<?> BrightnessMirrorHandlerClass = findClass("com.android.systemui.settings.brightness.BrightnessMirrorHandler", lpparam.classLoader);
         Class<?> QSPanelClass = findClass("com.android.systemui.qs.QSPanel", lpparam.classLoader);
-        Class<?> BrightnessControllerClass = findClass("com.android.systemui.settings.brightness.BrightnessController", lpparam.classLoader);
-
+        
         //Stealing info from Main QS
-        hookAllConstructors(BrightnessControllerClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-            }
-        });
-
         hookAllMethods(QSPanelControllerClass, "setBrightnessMirror", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -149,6 +112,7 @@ public class BrightnessSlider extends XposedModPack {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if(!BrightnessSlierOnBottom) return;
+                
                 try {
                     View v = (View) param.args[0];
                     ViewGroup parent = (ViewGroup) v.getParent();
@@ -171,16 +135,11 @@ public class BrightnessSlider extends XposedModPack {
         hookAllConstructors(QSPanelControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                int indexCorrection = (Build.VERSION.SDK_INT == 33)
-                        ? -1
-                        : 0;
-
-                QSController = param.thisObject;
-                brightnessControllerFactory = param.args[12 + indexCorrection];
-                brightnessSliderFactory = param.args[13 + indexCorrection];
-
+                QS = param.thisObject;
+                brightnessControllerFactory = param.args[12];
+                brightnessSliderFactory = param.args[13];
                 Object mBrightnessSliderController = getObjectField(param.thisObject, "mBrightnessSliderController");
-                QSBrightnessSliderView = (View) getObjectField(mBrightnessSliderController, "mView");
+                QSBrightnessSliderView = (View) callMethod(mBrightnessSliderController, "getRootView");
                 QSParent = (ViewGroup) QSBrightnessSliderView.getParent();
     
                 setQSVisibility();
@@ -192,9 +151,9 @@ public class BrightnessSlider extends XposedModPack {
         hookAllConstructors(QuickQSPanelClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                QQS = (ViewGroup) param.thisObject;
+                QQS = param.thisObject;
                 if(BrightnessMirrorController == null) return;
-
+                
                 //Create new Slider
                 QQSBrightnessSliderController = callMethod(brightnessSliderFactory, "create", mContext, param.thisObject);
 
@@ -219,7 +178,7 @@ public class BrightnessSlider extends XposedModPack {
                 callMethod(mBrightnessController, "registerCallbacks");
                 callMethod(mBrightnessController, "checkRestrictionAndSetEnabled");
                 callMethod(mBrightnessMirrorHandlerController, "onQsPanelAttached");
-
+                
                 setQQSVisibility();
             }
         });

@@ -1,3 +1,6 @@
+**canary-113**  
+- Android 12 and 13 users test/bugreport version  
+  
 **canary-112**  
 - A13: No more compatibility work in hand  
 - A13: Fixed Notification expander  

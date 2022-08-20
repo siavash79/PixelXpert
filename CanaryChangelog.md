@@ -1,3 +1,9 @@
+**canary-112**  
+- A13: No more compatibility work in hand  
+- A13: Fixed Notification expander  
+- A13: Removed support for 3button navigation mods  
+- A13: Separate Wifi/Cell tile option removed  
+  
 **canary-111**  
 - A13: Fixed QS Tile text sizes  
 - A13: Fixed BrightnessSlider options (QQS brightness removed till further notice)  

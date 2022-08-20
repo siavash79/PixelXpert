@@ -22,7 +22,7 @@ import androidx.core.content.res.ResourcesCompat;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.Utils.SystemUtils;
+import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")

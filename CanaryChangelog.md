@@ -1,4 +1,5 @@
 **canary-117**  
+- Version 2 - Release Candidate 1  
   
 **canary-116**  
 - QS Light Theme improvement  

@@ -1,3 +1,6 @@
+**canary-116**  
+- QS Light Theme improvement  
+  
 **canary-115**  
 - A13: Improved QS Light theme settings reaction  
   

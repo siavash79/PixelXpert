@@ -3,7 +3,6 @@ package sh.siava.AOSPMods.systemui;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.hookMethod;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -171,6 +170,8 @@ public class QSHeaderManager extends XposedModPack {
             hookAllConstructors(StatusbarClass, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    applyOverlays(true);
+
                     hookAllMethods(getObjectField(param.thisObject,
                                     "mOnColorsChangedListener").getClass(),
                             "onColorsChanged", new XC_MethodHook() {
@@ -410,7 +411,6 @@ public class QSHeaderManager extends XposedModPack {
         boolean isDark = getIsDark();
 
         if(isDark == wasDark && !force) return;
-        log("doing it");
         wasDark = isDark;
 
         calculateColors();

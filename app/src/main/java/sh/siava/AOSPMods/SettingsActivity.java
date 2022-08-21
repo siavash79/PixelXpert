@@ -602,7 +602,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("QSPulldownPercent").setVisible(QSPullodwnEnabled);
                 findPreference("QSPulldownSide").setVisible(QSPullodwnEnabled);
 
-                findPreference("BSThickTrackOverlay").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
+                findPreference("BSThickTrackOverlay").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false) && showOverlays);
                 findPreference("BrightnessSlierOnBottom").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
                 findPreference("QQSBrightnessEnabled").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false) && Build.VERSION.SDK_INT < 33);
                 findPreference("QSFooterText").setVisible(sharedPreferences.getBoolean("QSFooterMod", false));
@@ -636,8 +636,10 @@ public class SettingsActivity extends AppCompatActivity implements
                     ((RangeSliderPreference)findPreference("QSSecondaryLabelScaleFactor")).slider.setLabelFormatter(formatter);
                 }catch (Exception ignored){}
 
-
-                findPreference("BSThickTrackOverlay").setVisible(showOverlays);
+                if(!showOverlays && sharedPreferences.getBoolean("BSThickTrackOverlay", false))
+                {
+                    sharedPreferences.edit().putBoolean("BSThickTrackOverlay", false).apply();
+                }
                 findPreference("QSTilesThemesOverlayEx").setVisible(showOverlays);
 
                 findPreference("leveledFlashTile").setVisible(Build.VERSION.SDK_INT >= 33);

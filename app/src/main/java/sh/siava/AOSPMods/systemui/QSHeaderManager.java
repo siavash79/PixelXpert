@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.systemui;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.hookMethod;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -72,7 +73,7 @@ public class QSHeaderManager extends XposedModPack {
         {
             brightnessThickTrackEnabled = newbrightnessThickTrackEnabled;
             try {
-                applyOverlays();
+                applyOverlays(true);
             } catch (Throwable ignored){}
         }
     }
@@ -83,7 +84,7 @@ public class QSHeaderManager extends XposedModPack {
             lightQSHeaderEnabled = state;
 
             try {
-                applyOverlays();
+                applyOverlays(true);
             } catch (Throwable ignored) {}
         }
     }
@@ -107,6 +108,12 @@ public class QSHeaderManager extends XposedModPack {
             Class<?> QSIconViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSIconViewImpl", lpparam.classLoader);
             Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
 
+            hookAllConstructors(CentralSurfacesImplClass, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    applyOverlays(true);
+                }
+            });
             hookAllMethods(QSTileViewImplClass, "getLabelColorForState", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -152,7 +159,7 @@ public class QSHeaderManager extends XposedModPack {
                     "updateTheme", new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            applyOverlays();
+                            applyOverlays(false);
                         }
                     });
         }
@@ -169,7 +176,7 @@ public class QSHeaderManager extends XposedModPack {
                             "onColorsChanged", new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                                    applyOverlays();
+                                    applyOverlays(true);
                                     Overlays.setAll(true);  //reset all overlays
                                 }
                             });
@@ -399,10 +406,11 @@ public class QSHeaderManager extends XposedModPack {
 
     }
 
-    private void applyOverlays() throws Throwable {
+    private void applyOverlays(boolean force) throws Throwable {
         boolean isDark = getIsDark();
 
-        if(isDark == wasDark) return;
+        if(isDark == wasDark && !force) return;
+        log("doing it");
         wasDark = isDark;
 
         calculateColors();

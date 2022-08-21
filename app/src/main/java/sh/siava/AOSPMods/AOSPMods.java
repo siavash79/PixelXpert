@@ -5,7 +5,6 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 import android.app.Instrumentation;
 import android.content.Context;
-import android.content.res.Configuration;
 
 import java.util.ArrayList;
 
@@ -34,7 +33,7 @@ import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
 import sh.siava.AOSPMods.systemui.NotificationExpander;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSHaptic;
-import sh.siava.AOSPMods.systemui.QSHeaderManager;
+import sh.siava.AOSPMods.systemui.QSThemeManager;
 import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.QSTileGrid;
 import sh.siava.AOSPMods.systemui.ScreenGestures;
@@ -70,7 +69,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(BackToKill.class); //13 not planned//13 OK
         modPacks.add(QSHaptic.class); //13 OK
         modPacks.add(LockscreenAlbumArt.class); //13 not planned
-        modPacks.add(QSHeaderManager.class); //13 OK
+        modPacks.add(QSThemeManager.class); //13 OK
         modPacks.add(ScreenGestures.class); //13 OK
         modPacks.add(miscSettings.class); //13 OK except for internet tile
         modPacks.add(AOSPSettingsLauncher.class); //13 OK

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.systemui.QSThemeManager_12;
 import sh.siava.AOSPMods.utils.Helpers;
 import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.AOSPMods.allApps.OverScrollDisabler;
@@ -69,7 +70,8 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(BackToKill.class); //13 not planned//13 OK
         modPacks.add(QSHaptic.class); //13 OK
         modPacks.add(LockscreenAlbumArt.class); //13 not planned
-        modPacks.add(QSThemeManager.class); //13 OK
+        modPacks.add(QSThemeManager.class); //A13 LightQSTheme
+        modPacks.add(QSThemeManager_12.class); //A12 LightQSTheme
         modPacks.add(ScreenGestures.class); //13 OK
         modPacks.add(miscSettings.class); //13 OK except for internet tile
         modPacks.add(AOSPSettingsLauncher.class); //13 OK

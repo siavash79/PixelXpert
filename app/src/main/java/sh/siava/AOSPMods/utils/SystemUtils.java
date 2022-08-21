@@ -393,14 +393,23 @@ public class SystemUtils{
 		return (mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) == Configuration.UI_MODE_NIGHT_YES;
 	}
 
+	static boolean darkSwitching = false;
 	public static void doubleToggleDarkMode() {
 		boolean isDark = isDarkMode();
 		new Thread(() -> {
-			cmd("cmd uimode night " + (isDark ? "no" : "yes")).exec();
 			try {
+				while (darkSwitching) {
+					Thread.currentThread().wait(100);
+				}
+				darkSwitching = true;
+
+				cmd("cmd uimode night " + (isDark ? "no" : "yes")).exec();
 				Thread.sleep(1000);
-			} catch (Exception ignored) {}
-			cmd("cmd uimode night " + (isDark ? "yes" : "no")).exec();
+				cmd("cmd uimode night " + (isDark ? "yes" : "no")).exec();
+
+				Thread.sleep(500);
+				darkSwitching = false;
+			}catch(Exception ignored){}
 		}).start();
 	}
 }

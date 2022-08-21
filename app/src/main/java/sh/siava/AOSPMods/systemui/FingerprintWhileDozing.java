@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
@@ -43,7 +42,6 @@ public class FingerprintWhileDozing extends XposedModPack {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if(fingerprintWhileDozing) return;
                         boolean currentResult = (boolean) param.getResult();
-                        log("current: " + currentResult);
                         if(currentResult)
                         {
                             boolean userDoesNotHaveTrust = !(boolean) callMethod(param.thisObject,
@@ -58,8 +56,6 @@ public class FingerprintWhileDozing extends XposedModPack {
                                         && getBooleanField(param.thisObject,"mDeviceInteractive") && !getBooleanField(param.thisObject,"mGoingToSleep") && !getBooleanField(param.thisObject,"mKeyguardGoingAway")
                                         || (getBooleanField(param.thisObject,"mKeyguardOccluded") && userDoesNotHaveTrust
                                             && (getBooleanField(param.thisObject,"mOccludingAppRequestingFp") || (boolean)param.args[0]));
-
-                            log("should2: " + shouldlisten2);
 
                             param.setResult(shouldlisten2);
                         }

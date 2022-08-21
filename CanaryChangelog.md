@@ -1,3 +1,6 @@
+**canary-115**  
+- A13: Improved QS Light theme settings reaction  
+  
 **canary-114**  
 - A13: Fixed Brightness slider placement bugs  
   

@@ -42,20 +42,20 @@ public class UDFPSManager extends XposedModPack {
         Class<?> UdfpsKeyguardViewClass = findClass("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader);
         Class<?> LockIconViewClass = findClass("com.android.keyguard.LockIconView", lpparam.classLoader);
 
-        hookAllMethods(UdfpsKeyguardViewClass,
-                "updateAlpha", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!transparentBG) return;
 
-                        ImageView mBgProtection = (ImageView) getObjectField(param.thisObject, "mBgProtection");
-                        mBgProtection.setImageAlpha(0);
-//                        ImageView mLockScreenFp = (ImageView) getObjectField(param.thisObject, "mLockScreenFp");
-                    }
-                });
+        XC_MethodHook FPCircleTransparenter = new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                if(!transparentBG) return;
 
+                ImageView mBgProtection = (ImageView) getObjectField(param.thisObject, "mBgProtection");
+                mBgProtection.setImageAlpha(0);
+            }
+        };
         if(Build.VERSION.SDK_INT == 33)
         { //A13
+            hookAllMethods(UdfpsKeyguardViewClass, "updateBurnInOffsets", FPCircleTransparenter);
+
             hookAllMethods(LockIconViewClass,
                     "updateIcon", new XC_MethodHook() {
                         @Override
@@ -66,6 +66,8 @@ public class UDFPSManager extends XposedModPack {
         }
         else
         { //A12
+            hookAllMethods(UdfpsKeyguardViewClass, "updateAlpha", FPCircleTransparenter);
+
             hookAllMethods(LockIconViewClass,
                     "setUseBackground", new XC_MethodHook() {
                         @Override

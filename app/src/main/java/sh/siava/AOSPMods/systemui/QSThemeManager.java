@@ -4,7 +4,6 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
-import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
@@ -102,7 +101,7 @@ public class QSThemeManager extends XposedModPack {
         hookAllConstructors(FooterActionsControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if(!wasDark) {
+                if (!wasDark) {
                     Resources res = mContext.getResources();
                     ViewGroup view = (ViewGroup) param.args[0];
 
@@ -195,7 +194,7 @@ public class QSThemeManager extends XposedModPack {
             }
         });
 
-        findAndHookMethod(CentralSurfacesImplClass,
+        hookAllMethods(CentralSurfacesImplClass,
                 "updateTheme", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -206,14 +205,6 @@ public class QSThemeManager extends XposedModPack {
         try {
             mBehindColors = GradientColorsClass.newInstance();
         } catch (Exception ignored) {}
-
-        hookAllMethods(ScrimControllerClass,
-                "onThemeChanged", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        mBehindColors = GradientColorsClass.newInstance();
-                    }
-                });
 
         hookAllMethods(QuickQSPanelControllerClass, "onInit", new XC_MethodHook() {
             @Override
@@ -299,8 +290,8 @@ public class QSThemeManager extends XposedModPack {
             String enumVal = constant.toString();
             switch (enumVal) {
                 case "KEYGUARD":
-                    findAndHookMethod(constant.getClass(),
-                            "prepare", ScrimStateEnum, new XC_MethodHook() {
+                    hookAllMethods(constant.getClass(),
+                            "prepare", new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if (!lightQSHeaderEnabled) return;
@@ -320,8 +311,8 @@ public class QSThemeManager extends XposedModPack {
                             });
                     break;
                 case "BOUNCER":
-                    findAndHookMethod(constant.getClass(),
-                            "prepare", ScrimStateEnum, new XC_MethodHook() {
+                    hookAllMethods(constant.getClass(),
+                            "prepare", new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if (!lightQSHeaderEnabled) return;
@@ -363,18 +354,17 @@ public class QSThemeManager extends XposedModPack {
                     break;
 
                 case "UNLOCKED":
-                    findAndHookMethod(constant.getClass(),
-                            "prepare", ScrimStateEnum, new XC_MethodHook() {
+                    hookAllMethods(constant.getClass(),
+                            "prepare", new XC_MethodHook() {
                                 @Override
                                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                     if (!lightQSHeaderEnabled) return;
 
                                     setObjectField(param.thisObject, "mBehindTint", Color.TRANSPARENT);
 
-                                    Object mScrimBehind = getObjectField(param.thisObject,"mScrimBehind");
+                                    Object mScrimBehind = getObjectField(param.thisObject, "mScrimBehind");
                                     int mTintColor = getIntField(mScrimBehind, "mTintColor");
-                                    if(mTintColor != Color.TRANSPARENT)
-                                    {
+                                    if (mTintColor != Color.TRANSPARENT) {
                                         setObjectField(mScrimBehind, "mTintColor", Color.TRANSPARENT);
                                         callMethod(mScrimBehind, "updateColorWithTint", false);
                                     }

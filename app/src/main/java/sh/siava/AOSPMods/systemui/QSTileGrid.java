@@ -16,8 +16,8 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
@@ -68,6 +68,13 @@ public class QSTileGrid extends XposedModPack {
         Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
         Class<?> FontSizeUtilsClass = findClass("com.android.systemui.FontSizeUtils", lpparam.classLoader);
 
+        hookAllMethods(QSTileViewImplClass, "onLayout", new XC_MethodHook() { //dimension is hard-coded in the layout file. can reset anytime without prior notice. So we set them at layout stage
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                setLabelSizes(param);
+            }
+        });
+
         hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -107,17 +114,7 @@ public class QSTileGrid extends XposedModPack {
                         secondaryLabelSizeUnit = secondaryLabel.getTextSizeUnit();
                         secondaryLabelSize = secondaryLabel.getTextSize();
                     }
-
-                    setLabelSizes(param);
-
                 }catch(Throwable ignored){}
-            }
-        });
-
-        hookAllMethods(QSTileViewImplClass, "updateResources", new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                setLabelSizes(param);
             }
         });
 

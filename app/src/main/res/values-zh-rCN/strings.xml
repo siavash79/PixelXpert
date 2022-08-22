@@ -61,7 +61,6 @@
     <string name="sbc_date_small">较小的尺寸 (70%)</string>
     <string name="sbc_custom_date_after">自定义时钟右侧格式</string>
     <string name="sbc_header">状态栏时钟定制</string>
-    <string name="sbc_may_take_one_minute">将在时间更新或重启系统界面后生效</string>
     <string name="ntsb_far_left">最左</string>
     <string name="ntsb_mid_left">中间偏左</string>
     <string name="ntsb_mid_right">中间偏右</string>
@@ -75,9 +74,6 @@
     <string name="dual_tone_battery_on_summary">开启 (仅当纵向图标时生效)</string>
     <string name="unread_messages_title">通知计数</string>
     <string name="status_bar_height">状态高度</string>
-    <string name="status_bar_height_small">小</string>
-    <string name="status_bar_height_medium">中</string>
-    <string name="fix_status_bar_padding">纠正时钟左侧空白</string>
     <string name="sbbb_header">电池条设置</string>
     <string name="BB_enable_title">启用电池条</string>
     <string name="BB_onlycharging_title">仅充电时</string>
@@ -109,9 +105,7 @@
     <string name="qs_haptic_switch_title">点击按钮震动</string>
     <string name="qs_rows_number">磁贴面板行数</string>
     <string name="qs_general_options">磁贴面板选项</string>
-    <string name="qs_tiles_3_columns_title">三行磁贴</string>
     <string name="qs_text_size_title">磁贴文本大小</string>
-    <string name="qs_text_size">减小磁贴文本大小</string>
     <string name="wifi_cell_title">网络磁贴</string>
     <string name="wifi_cell_on">分离 WIFI 和数据磁贴</string>
     <string name="wifi_cell_off">合并 WIFI 和数据磁贴</string>
@@ -152,11 +146,6 @@
     <string name="threebutton_header_title">三按钮导航</string>
     <string name="back_longpress_kill_title">长按返回键杀死前台应用</string>
     <string name="hide_navbar_title">隐藏小白条</string>
-    <string name="gesture_navbar_thickness_title">小白条厚度</string>
-    <string name="gesture_navbar_thickness">修改厚度</string>
-    <string name="gesture_navbar_thin">细</string>
-    <string name="gesture_navbar_thick">粗</string>
-    <string name="gesture_navbar_thicker">较粗</string>
     <string name="colorpill_title">小白条颜色</string>
     <string name="colorpill">小白条强调色</string>
     <string name="reducekeyboard_title">键盘空间</string>
@@ -168,7 +157,6 @@
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">关闭截图提示音</string>
     <string name="so_power_longpress_torch_title">长按电源开启手电筒</string>
-    <string name="framework_needed_caution_summary">需要在 LSPosed 作用域中勾选系统框架以生效，谨慎使用！</string>
     <string name="so_double_tap_wake_title">双击亮屏</string>
     <string name="so_double_tap_wake_summary">将禁用单击唤醒</string>
     <string name="doze_header">锁屏时</string>
@@ -193,7 +181,6 @@
     <string name="dt_darkaubergine">深紫色</string>
     <string name="dt_style">深蓝色</string>
     <string name="dt_darkgray">深灰色</string>
-    <string name="dt_materialocean">海蓝色</string>
     <string name="dt_night">深色</string>
     <string name="dt_solarizeddark">焦黑色</string>
 
@@ -228,9 +215,5 @@
     <string name="fourg_lte_fourg">使用 4G 图标</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">强制 2 行</string>
-    <string name="qs_3_rows">强制 3 行</string>
-    <string name="qs_4_rows">强制 4 行</string>
-    <string name="qs_5_rows">强制 5 行</string>
 
 </resources>

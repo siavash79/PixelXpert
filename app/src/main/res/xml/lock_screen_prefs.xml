@@ -9,7 +9,7 @@
         app:summary="@string/so_taptaptorch_summary" />
     <SwitchPreference
         android:defaultValue="false"
-        android:key="@string/UDFPS_hide_key"
+        android:key="fingerprint_circle_hide"
         android:summaryOff="@string/transparent_fingerprint_circle_off"
         android:title="@string/transparent_fingerprint_circle"
         app:summaryOn="@string/transparent_fingerprint_circle_on" />
@@ -54,7 +54,7 @@
             android:title="@string/keyguard_left_shortcut" />
         -->
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/album_art_category">
+    <PreferenceCategory android:title="@string/album_art_category" android:key="album_art_category">
         <SwitchPreference
             android:defaultValue="false"
             android:key="albumArtLockScreenEnabled"

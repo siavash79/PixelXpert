@@ -1,19 +1,22 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.View;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
+import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.XposedModPack;
 
+@SuppressWarnings("RedundantThrows")
 public class AOSPSettingsLauncher extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
@@ -37,7 +40,7 @@ public class AOSPSettingsLauncher extends XposedModPack {
 
         View.OnLongClickListener listener = v -> {
             try {
-                Intent launchInent = mContext.getPackageManager().getLaunchIntentForPackage("sh.siava.AOSPMods");
+                Intent launchInent = mContext.getPackageManager().getLaunchIntentForPackage(BuildConfig.APPLICATION_ID);
                 callMethod(activityStarter, "startActivity", launchInent, true, null);
             }catch(Exception ignored){}
             return true;
@@ -47,7 +50,14 @@ public class AOSPSettingsLauncher extends XposedModPack {
                 "onViewAttached", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        Object settingsButton = getObjectField(param.thisObject, "settingsButton");
+                        Object settingsButton;
+                        if(Build.VERSION.SDK_INT == 33) { //A13
+                            settingsButton = getObjectField(param.thisObject, "settingsButtonContainer");
+                        }
+                        else //SDK 31, 32
+                        {
+                            settingsButton = getObjectField(param.thisObject, "settingsButton");
+                        }
                         activityStarter = getObjectField(param.thisObject, "activityStarter");
                         callMethod(settingsButton, "setOnLongClickListener", listener);
                     }

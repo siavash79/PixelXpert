@@ -32,6 +32,18 @@
                 android:summaryOff="@string/general_off"
                 android:summaryOn="@string/general_on"
                 android:title="@string/qs_haptic_switch_title" />
+
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="leveledFlashTile"
+                android:summary="@string/qs_leveled_flashlight_summary"
+                android:title="@string/qs_leveled_flashlight_title" />
+
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="isFlashLevelGlobal"
+                android:title="@string/qs_flashlight_level_global_title" />
+
             <SeekBarPreference
                 android:defaultValue="0"
                 android:max="8"
@@ -61,12 +73,25 @@
                 android:summaryOff="@string/wifi_cell_off"
                 android:summaryOn="@string/wifi_cell_on"
                 android:title="@string/wifi_cell_title" />
-            <SwitchPreference
-                android:defaultValue="false"
-                android:key="QSSmallTextOverlay"
-                android:title="@string/qs_text_size"
-                app:summaryOn="@string/general_on"
-                app:summaryOff="@string/general_off"/>
+
+            <sh.siava.rangesliderpreference.RangeSliderPreference
+                app:maxVal="50"
+                app:minVal="-50"
+                app:defaultValue="0"
+                app:tickInterval="5"
+                android:key="QSLabelScaleFactor"
+                app:title="@string/qs_tile_label_size"
+                app:updatesContinuously="true"/>
+
+            <sh.siava.rangesliderpreference.RangeSliderPreference
+                app:maxVal="50"
+                app:minVal="-50"
+                app:defaultValue="0"
+                app:tickInterval="5"
+                android:key="QSSecondaryLabelScaleFactor"
+                app:title="@string/qs_tile_secondary_label_size"
+                app:updatesContinuously="true"/>
+
         </PreferenceCategory>
         <PreferenceCategory
             android:title="@string/qs_mod_category_title"

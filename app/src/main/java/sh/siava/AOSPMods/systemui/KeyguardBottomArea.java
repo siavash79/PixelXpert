@@ -1,25 +1,31 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.core.content.res.ResourcesCompat;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.Utils.SystemUtils;
+import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.AOSPMods.XposedModPack;
-import sh.siava.AOSPMods.XPrefs;
 
+@SuppressWarnings("RedundantThrows")
 public class KeyguardBottomArea extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     private static boolean transparentBGcolor = false;
@@ -36,9 +42,9 @@ public class KeyguardBottomArea extends XposedModPack {
     @Override
     public void updatePrefs(String...Key)
     {
-        if(XPrefs.Xprefs == null) return;
-        leftShortcut = XPrefs.Xprefs.getString("leftKeyguardShortcut", "");
-        rightShortcut = XPrefs.Xprefs.getString("rightKeyguardShortcut", "");
+        if(Xprefs == null) return;
+        leftShortcut = Xprefs.getString("leftKeyguardShortcut", "");
+        rightShortcut = Xprefs.getString("rightKeyguardShortcut", "");
 
         if(Key.length > 0) {
             switch (Key[0]) {
@@ -52,7 +58,7 @@ public class KeyguardBottomArea extends XposedModPack {
                     break;
             }
         }
-        transparentBGcolor = XPrefs.Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
+        transparentBGcolor = Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
     }
 
     @Override
@@ -61,7 +67,6 @@ public class KeyguardBottomArea extends XposedModPack {
 
         Class<?> KeyguardbottomAreaViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
         Class<?> UtilClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
-        Class<?> CameraIntentsClass = findClass("com.android.systemui.camera.CameraIntents", lpparam.classLoader);
 
         //convert wallet button to camera button
         findAndHookMethod(KeyguardbottomAreaViewClass,
@@ -141,9 +146,19 @@ public class KeyguardBottomArea extends XposedModPack {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if((!leftShortcut.equals("camera") && !rightShortcut.equals("camera"))) return;
-                        param.setResult(callStaticMethod(CameraIntentsClass, "getSecureCameraIntent", mContext));
+                        param.setResult(getCameraIntent(mContext));
                     }
                 });
+    }
+
+    private Intent getCameraIntent(Context context)
+    {
+        Resources res = context.getResources();
+
+        Intent cameraIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE);
+        cameraIntent.setPackage(res.getString(res.getIdentifier("config_cameraGesturePackage", "string", context.getPackageName())));
+
+        return cameraIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
     }
 
     private void updateVisibility(ImageView Button, Object thisObject) {

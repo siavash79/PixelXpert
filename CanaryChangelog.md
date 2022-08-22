@@ -1,3 +1,133 @@
+**canary-118**  
+- V2.0.0-RC2  
+  
+**canary-117**  
+- Version 2 - Release Candidate 1  
+  
+**canary-116**  
+- QS Light Theme improvement  
+  
+**canary-115**  
+- A13: Improved QS Light theme settings reaction  
+  
+**canary-114**  
+- A13: Fixed Brightness slider placement bugs  
+  
+**canary-113**  
+- Android 12 and 13 users test/bugreport version (Android 12 users: you can optionally try this)
+  
+**canary-112**  
+- A13: No more compatibility work in hand  
+- A13: Fixed Notification expander  
+- A13: Removed support for 3button navigation mods  
+- A13: Separate Wifi/Cell tile option removed  
+  
+**canary-111**  
+- A13: Fixed QS Tile text sizes  
+- A13: Fixed BrightnessSlider options (QQS brightness removed till further notice)  
+  
+**canary-110**  
+- A13: Goodbye LockscreenAlbumArt (A12 Users: don't install this)  
+- A13: Fixed combined signal icons (A12 Users: don't install this)  
+- Fixed batterybar activation issues  
+  
+**canary-109**  
+- A13: Fixed statusbar notification count limits (A12 Users: don't install this)  
+  
+**canary-108**  
+- A13: Double tap to sleep (statusbar) (A12 Users: don't install this)  
+  
+**canary-107**  
+- A13: Unlocking full version support (experimental) (A12 users: don't install this)  
+  
+**canary-106**  
+- A13: Fixed Light QS theme tile colors (A12 Users: don't install this)  
+- A13: QS Light Theme: performance improvement (A12 users: Don't install this)  
+  
+**canary-105**  
+- A13: Fixed DTS conflict with pin codes (A12 Users: don't install this)  
+  
+**canary-104**  
+- A13: Fixed LightQS theme + Dual tone QS Theme (A12 Users: don't install this)  
+  
+**canary-103**  
+- A13: Fixed QS Quick pulldown  
+- A13: Fixed custom carrier text  
+  
+**canary-102**  
+- A13: Fixed doubletap to wake, Doubl tap to sleep (keyguard), double tap to torch  
+- A13: Fixed settings icon longpress manager app launcher  
+  
+**canary-101**  
+- canary-99: Rebuilt  
+  
+**canary-99**  
+- Fixed flashlight level adjustment issues  
+  
+**canary-98**  
+- OOPS!  
+  
+**canary-97**  
+- Added option to set flashlight levels globally  
+  
+**canary-96**  
+- Added brightness level on flashlight tile (Only Android 13, Only supported Hardware (Pixel 6 series))  
+  
+**canary-95**  
+- Dutch and Vietnamese translation  
+  
+**canary-94**  
+- Android 13: Dropping support for full package type  
+  
+**canary-93**  
+- Android 13: lockscreen shortcuts: compatible  
+  
+**canary-92**  
+- Android 13: [Transparent under display fingerprint sensor] compatible  
+  
+**canary-91**  
+- Fonts/volume steps will not need an extra reboot IF module is updated through in-app updater  
+  
+**canary-90**  
+- Android 13: Easy unlock compatible  
+  
+**canary-89**  
+- Fixed Multi-row statusbar A13 bugs  
+- Fix gesture pill height A12 bug  
+  
+**canary-88**  
+- Screenshot sound Android 13 compatible  
+  
+**canary-87**  
+- Android 13: Gesture Pill compatible  
+  
+**canary-86**  
+- Android 13 - Partially compatible (Xposed only package) - Notification area and QS remaining  
+  
+**canary-85**  
+- canary-85 - Rebuild  
+  
+**canary-85**  
+- Added Persian translation / translations update  
+  
+**canary-84**  
+- Added option to fully customize QS Tile font size  
+  
+**canary-83**  
+- Fix multi-row statusbar on default height in landscape mode  
+  
+**canary-82**  
+- Fix QQS tile layout in landscape while playing music IF QS column count and QQS tile count is modified  
+  
+**canary-81**  
+- Bugfix stable xposed channel update  
+  
+**canary-80**  
+- Bugfix stable xposed channel update  
+  
+**canary-79**  
+- Buxfixes (Github 273-274)  
+  
 **canary-78**  
 - Translation improvement (Turkish, Russian, Portuguese, German)  
 - Language settings bugfixes  

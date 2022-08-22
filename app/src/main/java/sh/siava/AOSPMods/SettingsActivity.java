@@ -6,14 +6,13 @@ import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.LocaleList;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,14 +29,14 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.slider.LabelFormatter;
 import com.topjohnwu.superuser.Shell;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import sh.siava.AOSPMods.Utils.PrefManager;
-import sh.siava.AOSPMods.Utils.SystemUtils;
+import sh.siava.AOSPMods.utils.PrefManager;
+import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class SettingsActivity extends AppCompatActivity implements
@@ -138,14 +137,12 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     public static int getVersionType() {
-        int result;
         try {
-            result = Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", "/data/adb/modules/AOSPMods")).exec().getOut().get(0));
+            return Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", "/data/adb/modules/AOSPMods")).exec().getOut().get(0));
         }
         catch (Exception ignored){
-            result = XPOSED_ONLY;
+            return XPOSED_ONLY;
         }
-        return result;
     }
 
     private void createNotificationChannel() {
@@ -168,7 +165,7 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         // Save current activity title so we can set it again after a configuration change
         outState.putCharSequence(TITLE_TAG, getTitle());
@@ -183,7 +180,7 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
+    public boolean onPreferenceStartFragment(@NonNull PreferenceFragmentCompat caller, Preference pref) {
         // Instantiate the new Fragment
         final Bundle args = pref.getExtras();
         final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
@@ -313,6 +310,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateVisibility() {
             findPreference("HideNavbarOverlay").setVisible(showOverlays);
+            findPreference("threebutton_header").setVisible(Build.VERSION.SDK_INT < 33);
         }
 
     }
@@ -367,6 +365,7 @@ public class SettingsActivity extends AppCompatActivity implements
         }
 
         private void updateVisibility(SharedPreferences sharedPreferences) {
+            findPreference("album_art_category").setVisible(Build.VERSION.SDK_INT < 33);
             findPreference("carrierTextValue").setVisible(sharedPreferences.getBoolean("carrierTextMod", false));
             findPreference("albumArtLockScreenBlurLevel").setSummary(sharedPreferences.getInt("albumArtLockScreenBlurLevel",0) + "%");
             findPreference("albumArtLockScreenBlurLevel").setVisible(sharedPreferences.getBoolean("albumArtLockScreenEnabled",false));
@@ -479,7 +478,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
                 boolean colorful = prefs.getBoolean("BIconColorful", false);
 
-                findPreference("DualToneBatteryOverlay").setVisible(style == 0);
+                findPreference("DualToneBatteryOverlay").setVisible(style == 0 && showOverlays);
                 findPreference("BIconOpacity").setVisible(style > 0 && style < 99);
                 findPreference("BIconOpacity").setSummary(prefs.getInt("BIconOpacity", 100) + "%");
                 findPreference("BatteryIconScaleFactor").setVisible(style < 99);
@@ -571,6 +570,8 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("centerAreaFineTune").setSummary((sharedPreferences.getInt("centerAreaFineTune", 50) - 50) + "%");
 
                 findPreference("systemIconSortPlan").setVisible(sharedPreferences.getBoolean("systemIconsMultiRow", false));
+
+                findPreference("UnreadMessagesNumberOverlay").setVisible(showOverlays);
             } catch (Exception ignored) {}
         }
 
@@ -586,6 +587,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
     @SuppressWarnings("ConstantConditions")
     public static class QuicksettingsFragment extends PreferenceFragmentCompat {
+        LabelFormatter formatter = value -> (value+100) + "%";
 
         SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibililty(sharedPreferences);
         private FrameLayout pullDownIndicator;
@@ -600,9 +602,9 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("QSPulldownPercent").setVisible(QSPullodwnEnabled);
                 findPreference("QSPulldownSide").setVisible(QSPullodwnEnabled);
 
-                findPreference("BSThickTrackOverlay").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
+                findPreference("BSThickTrackOverlay").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false) && showOverlays);
                 findPreference("BrightnessSlierOnBottom").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
-                findPreference("QQSBrightnessEnabled").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
+                findPreference("QQSBrightnessEnabled").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false) && Build.VERSION.SDK_INT < 33);
                 findPreference("QSFooterText").setVisible(sharedPreferences.getBoolean("QSFooterMod", false));
                 findPreference("QSPulldownPercent").setSummary(sharedPreferences.getInt("QSPulldownPercent", 25) + "%");
                 findPreference("dualToneQSEnabled").setVisible(sharedPreferences.getBoolean("LightQSPanel", false));
@@ -615,7 +617,6 @@ public class SettingsActivity extends AppCompatActivity implements
                 lp.gravity = Gravity.TOP | (Integer.parseInt(sharedPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
                 pullDownIndicator.setLayoutParams(lp);
 
-
                 int QSRowQty = sharedPreferences.getInt("QSRowQty", 0);
                 findPreference("QSRowQty").setSummary((QSRowQty == 0) ? getResources().getString(R.string.word_default) : String.valueOf(QSRowQty));
 
@@ -625,8 +626,26 @@ public class SettingsActivity extends AppCompatActivity implements
                 int QQSTileQty = sharedPreferences.getInt("QQSTileQty", 4);
                 findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQty));
 
-                findPreference("BSThickTrackOverlay").setVisible(showOverlays);
+                findPreference("QSLabelScaleFactor").setSummary((RangeSliderPreference.getValues(sharedPreferences, "QSLabelScaleFactor",0f).get(0)+100)+"% " + getString(R.string.toggle_dark_apply));
+                findPreference("QSSecondaryLabelScaleFactor").setSummary((RangeSliderPreference.getValues(sharedPreferences, "QSSecondaryLabelScaleFactor",0f).get(0)+100)+"% " + getString(R.string.toggle_dark_apply));
+
+                try {
+                    ((RangeSliderPreference)findPreference("QSLabelScaleFactor")).slider.setLabelFormatter(formatter);
+                }catch (Exception ignored){}
+                try {
+                    ((RangeSliderPreference)findPreference("QSSecondaryLabelScaleFactor")).slider.setLabelFormatter(formatter);
+                }catch (Exception ignored){}
+
+                if(!showOverlays && sharedPreferences.getBoolean("BSThickTrackOverlay", false))
+                {
+                    sharedPreferences.edit().putBoolean("BSThickTrackOverlay", false).apply();
+                }
                 findPreference("QSTilesThemesOverlayEx").setVisible(showOverlays);
+
+                findPreference("leveledFlashTile").setVisible(Build.VERSION.SDK_INT >= 33);
+                findPreference("isFlashLevelGlobal").setVisible(findPreference("leveledFlashTile").isVisible() && sharedPreferences.getBoolean("leveledFlashTile", false));
+
+                findPreference("wifi_cell").setVisible(Build.VERSION.SDK_INT < 33);
             } catch (Exception ignored) {}
         }
 
@@ -700,7 +719,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 lp.height = edgeHeight;
                 leftGestureIndicator.setLayoutParams(lp);
 
-                findPreference("ReduceKeyboardSpaceOverlay").setVisible(showOverlays);
+                findPreference("nav_keyboard_height_cat").setVisible(showOverlays);
             } catch (Exception ignored) {}
         }
 
@@ -711,7 +730,7 @@ public class SettingsActivity extends AppCompatActivity implements
             leftGestureIndicator = prepareGestureView(Gravity.LEFT);
 
             getPreferenceManager().setStorageDeviceProtected();
-            setPreferencesFromResource(R.xml.gesture_nav_perfs, rootKey);
+            setPreferencesFromResource(R.xml.gesture_nav_prefs, rootKey);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
             updateVisibility(prefs);
 
@@ -738,6 +757,7 @@ public class SettingsActivity extends AppCompatActivity implements
             return result;
         }
 
+        @SuppressWarnings("SameParameterValue")
         private void setVisibility(View v, boolean visible, long duration)
         {
             if((v.getVisibility() == View.VISIBLE) == visible) return;

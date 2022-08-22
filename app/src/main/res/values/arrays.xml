@@ -27,27 +27,33 @@
     <string-array name="languages_names">
         <item>Chinese (China)</item>
         <item>Chinese (Taiwan)</item>
+        <item>Dutch</item>
         <item>English</item>
         <item>German</item>
+        <item>Persian</item>
         <item>Polish</item>
         <item>Portuguese</item>
         <item>Romanian</item>
         <item>Russian</item>
         <item>Spanish</item>
         <item>Turkish</item>
+        <item>Vietnamese</item>
     </string-array>
 
     <string-array name="languages_values">
         <item>zh-CN</item>
         <item>zh-TW</item>
+        <item>nl</item>
         <item>en</item>
         <item>de</item>
+        <item>fa</item>
         <item>pl</item>
         <item>pt</item>
         <item>ro</item>
         <item>ru</item>
         <item>es</item>
         <item>tr</item>
+        <item>vi</item>
     </string-array>
 
 

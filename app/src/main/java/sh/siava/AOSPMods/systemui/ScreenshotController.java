@@ -1,19 +1,20 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.media.MediaActionSound;
+import android.os.Build;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
-import sh.siava.AOSPMods.XPrefs;
 
+@SuppressWarnings("RedundantThrows")
 public class ScreenshotController extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
@@ -26,8 +27,8 @@ public class ScreenshotController extends XposedModPack {
     @Override
     public void updatePrefs(String...Key)
     {
-        if(XPrefs.Xprefs == null) return;
-        disableScreenshotSound = XPrefs.Xprefs.getBoolean("disableScreenshotSound", false);
+        if(Xprefs == null) return;
+        disableScreenshotSound = Xprefs.getBoolean("disableScreenshotSound", false);
     }
 
     @Override
@@ -41,8 +42,22 @@ public class ScreenshotController extends XposedModPack {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if(!disableScreenshotSound) return;
 
-                //We can't prevent methods from playing sound! So let's break the sound player :D
-                setObjectField(param.thisObject, "mCameraSound", nothingPlayer);
+                if(Build.VERSION.SDK_INT == 33) { //A13
+                    Class<?> CompleterClass = findClass("androidx.concurrent.futures.CallbackToFutureAdapter$Completer", lpparam.classLoader);
+                    Class<?> SafeFutureClass = findClass("androidx.concurrent.futures.CallbackToFutureAdapter$SafeFuture", lpparam.classLoader);
+
+                    //We can't prevent methods from playing sound! So let's break the sound player :D
+                    setObjectField(param.thisObject,
+                            "mCameraSound",
+                            SafeFutureClass
+                                    .getConstructors()[0]
+                                    .newInstance(CompleterClass.newInstance()));
+                }
+                else
+                { //A12
+                    //We can't prevent methods from playing sound! So let's break the sound player :D
+                    setObjectField(param.thisObject, "mCameraSound", nothingPlayer);
+                }
             }
         });
     }
@@ -60,5 +75,4 @@ public class ScreenshotController extends XposedModPack {
 
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
-
 }

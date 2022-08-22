@@ -1,12 +1,9 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Bitte kontrolliere, ob das Modul im LSPosed Manager aktiviert ist!</string>
-    <string name="hide_default">Verstecken (Standart)</string>
-    <string name="percent_of_default_size">% von der Standart Größe</string>
-    <string name="overlay_none_title">(Standart)</string>
+    <string name="hide_default">Verstecken (Standard)</string>
+    <string name="percent_of_default_size">% von der Standard Größe</string>
+    <string name="overlay_none_title">(Standard)</string>
     <string name="general_section">Allgemeine Optionen</string>
     <string name="general_on">Ein</string>
     <string name="general_off">Aus</string>
@@ -32,7 +29,6 @@
     <string name="carrier_text_mod_enabled">Benutzerdefinierter Betreibertext</string>
     <string name="carrier_text_value">Benutzerdefinierten Text eingeben</string>
     <string name="lockscreen_center_text_value">Benutzerdefinierter Text des Uhrenbereichs</string>
-    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Verknüpfungen im unterem Bereich</string>
     <string name="keyguard_bottom_buttons_transparent_title">Verstecke den Kreis um die Symbole</string>
     <string name="keyguard_bottom_force_camera_title">Zeige Kamera Verknüpfung</string>
@@ -58,9 +54,7 @@
     <string name="battery_style_title">Wähle den Akku Stil</string>
     <string name="battery_show_percent_title">Zeige die Akkuprozente</string>
     <string name="battery_style_category_title">Akku Stil</string>
-    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Akkusymbolgröße</string>
-    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Versteckt</string>
     <string name="BIcon_Opacity_title">Sichtbarkeit</string>
     <string name="sb_center_fine_tune">Mittenbereich feinabstimmen</string>
@@ -92,7 +86,7 @@
     <string name="sbc_before_color">Text vor der Uhr</string>
     <string name="sbc_color">Uhr</string>
     <string name="sbc_after_color">Text nach Uhr</string>
-    <string name="network_settings_pref">Netzwerküberwachungseinstellungen...</string>
+    <string name="network_settings_pref">Netzwerküberwachungseinstellungen…</string>
     <string name="ntsb_far_left">Ganz links</string>
     <string name="ntsb_far_left_extra">Ganz links – über den Benachrichtigungen</string>
     <string name="ntsb_mid_left">Mitte links</string>
@@ -120,7 +114,7 @@
     <string name="status_bar_height">Höhe der Statusleiste (zum Anwenden Bildschirm drehen)</string>
     <string name="sb_padding_title">Statusleistenauffüllung</string>
     <string name="sb_padding_summary">Das Festlegen der Werte auf min/max entspricht dem Gerätestandard</string>
-    <string name="sbbb_header">Akkuleisten Optionen...</string>
+    <string name="sbbb_header">Akkuleisten Optionen…</string>
     <string name="sbbIcon_header">Akkusymbol Einstellungen</string>
     <string name="BB_enable_title">Aktiviere Akkuleiste</string>
     <string name="BB_onlycharging_title">Nur während dem Laden</string>
@@ -142,7 +136,6 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Versionsnummer in der Schnelleinstellungs Fußzeile</string>
     <string name="qs_footer_mod_title">Ändere die Versionsnummer in den Schnelleinstellungen</string>
-    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
     <string name="qs_footer_text_summary">Leer lassen um den Text zu entfernen</string>
     <string name="qs_footer_text_desc">Schalte das Display Ein/Aus um zu aktivieren</string>
     <string name="light_qs_title">Helle Schnelleinstellungen während hellem Thema (könnte fehlerhaft sein)</string>
@@ -155,12 +148,12 @@
     <string name="qs_rows_number">Anzahl Reihen in den Schnelleinstellungen</string>
     <string name="qs_cols_number">Anzahl der QS-Spalten</string>
     <string name="qqs_tiles_number">Maximale Kacheln in Quick QS (max. 2 Zeilen)</string>
+	<string name="qs_tile_label_size">QS-Kacheletikettengröße</string>
+    <string name="qs_tile_secondary_label_size">Zusammenfassungsgröße des QS Tile-Labels</string>
     <string name="qs_general_options">Schnelleinstellungs Optionen</string>
-    <string name="qs_tiles_3_columns_title">Aktiviere 3 Spalten Schnelleinstellungen</string>
     <string name="qs_text_size_title">Schnelleinstellungselemente Schriftgröße</string>
-    <string name="qs_text_size">Schriftgröße der Schnelleinstellungselemente verkleinern</string>
     <string name="wifi_cell_title">Internet Element</string>
-    <string name="wifi_cell_on">Benutze seperate Elemente für Wifi und Daten</string>
+    <string name="wifi_cell_on">Benutze getrennte Elemente für Wifi und Daten</string>
     <string name="wifi_cell_off">Benutze einzelnes Internet Element</string>
     <string name="QQS_brightness_category">Helligkeitsregler Optionen</string>
     <string name="QQS_brightness_title">Zeige Helligkeitsregler in eingeklappten Schnelleinstellungen</string>
@@ -169,7 +162,7 @@
     <string name="bs_thick_track">Benutze eine dicke Spur für den Helligkeitsregler</string>
     <string name="quick_settings_tiles_category">Schnelleinstellungsverknüpfingsoptionen</string>
     <string name="qs_tile_style_title">Schnelleinstellungsstile</string>
-    <string name="qstile_default">Standart</string>
+    <string name="qstile_default">Standard</string>
     <string name="qstile_cookie">Keks</string>
     <string name="qstile_triangles">Dreieck</string>
     <string name="qstile_divided">Geteilter Kreis</string>
@@ -200,7 +193,6 @@
     <string name="gesture_nav_pill_height_title">Höhe im Vergleich zu der Standartbreite</string>
     <string name="threebutton_header_title">3-Schaltflächen Navigation</string>
     <string name="back_longpress_kill_title">Zurück Taste lange drücken um die Anwendung im Vordergrund zu schließen</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Verstecke Gestennavigationsleiste</string>
     <string name="colorpill_title">Gestennavigationsleistenfarbe</string>
     <string name="colorpill">Gestennavigationsleisten in Akzentfarbe</string>
@@ -212,6 +204,8 @@
 	
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Deaktiviere Screenshot Ton</string>
+	<string name="allow_all_screen_rotations">Entsperre alle Bildschirmdrehungen</string>
+    <string name="allow_all_screen_rotations_summary">Ignoriert auch die schwebende Schaltfläche für die manuelle Drehung</string>
     <string name="force_no_cutout">Kameraausschnitt ignorieren</string>
     <string name="volume_button_step_title">Lautstärkeschritte (0 bis 100%)</string>		
 	
@@ -222,7 +216,6 @@
 
     <string name="so_double_tap_wake_title">Doppelt Tippen zum Aufwecken des Telefons</string>
     <string name="so_double_tap_wake_summary">Deaktiviert einzelnes Tippen</string>
-    <string name="so_tap_proximity_wake_title">Nicht bei Berührung aufwachen, wenn der Bildschirm abgedeckt ist</string>
     <string name="doze_header">Während der Bildschirm aus ist…</string>
     <string name="custom_themed_icons_title">Benutzerdefiniertes Symbolthema</string>
     <string name="custom_themed_icons_off">Benutzerdefinierte Symbole deaktiviert</string>
@@ -232,6 +225,11 @@
     <string name="expand_notifications_icons_title">Alle ausklappen/einklappen aktivieren</string>
     <string name="disable_overscroll">Deaktiviere elastischen Überscrolling Effekt</string>
     <string name="overscroll_on_summary">Wichtig: Sie MÜSSEN die Apps, für die Sie Overscroll deaktivieren möchten, in LSPosed aktivieren</string>
+	
+    <!-- Call section -->
+	<string name="call_category">Telefonanrufe</string>
+    <string name="vibrate_on_call_active_title">Vibrieren bei angenommenem abgehenden Anruf</string>
+    <string name="vibrate_on_call_drop_title">Vibrieren, wenn Anruf getrennt wird</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Erzwinge Google Sans Schriftart systemweit</string>
@@ -248,7 +246,6 @@
     <string name="dt_darkaubergine">Dunkle Aubergine</string>
     <string name="dt_style">Dunkelblau</string>
     <string name="dt_darkgray">Dunkelgrau</string>
-    <string name="dt_materialocean">Material Ocean</string>
     <string name="dt_night">Nacht</string>
     <string name="dt_solarizeddark">Solarisiertes Dunkel</string>
 	
@@ -258,24 +255,22 @@
     <string name="pull_down_right">rechts</string>
 
     <!-- Battery styles -->
-    <string name="word_default">Standart (Benötigt Neustart)</string>
+    <string name="word_default">Standard (Benötigt Neustart)</string>
     <string name="battery_circle">Kreis</string>
     <string name="battery_dashed_circle">gepunkteter Kreis</string>
     <string name="battery_circle_filled">ausgefüllter Kreis</string>
 
     <!-- Clock position -->
-    <string name="clock_default">links (Standart)</string>
+    <string name="clock_default">links (Standard)</string>
     <string name="clock_default_extra">Links - Über Benachrichtigungen</string>
     <string name="clock_center">zentriert</string>
     <string name="clock_right">rechts</string>
 
     <!-- AM/PM style -->
-    <string name="am_pm_default" translatable="false">@string/hide_default</string>
     <string name="am_pm_normal">100% Größe der Uhr</string>
     <string name="am_pm_small">70% Größe der Uhr</string>
 
     <!-- Date position -->
-    <string name="date_default" translatable="false">@string/hide_default</string>
     <string name="date_before">Vor der Uhr (100%)</string>
     <string name="date_before_small">Vor der Uhr (70%)</string>
     <string name="date_after">Nach der Uhr (100%)</string>
@@ -287,10 +282,6 @@
     <string name="fourg_lte_fourg">Erzwinge 4G Symbol</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">Erzwinge 2 Reihen</string>
-    <string name="qs_3_rows">Erzwinge 3 Reihen</string>
-    <string name="qs_4_rows">Erzwinge 4 Reihen</string>
-    <string name="qs_5_rows">Erzwinge 5 Reihen</string>
 
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Netzwerkstatistiken sammeln</string>
@@ -318,7 +309,6 @@
     <string name="netstat_header">Netzwerkstatistikeinstellungen</string>
 
     <string name="string_formatter_manual_body">Zusätzlich zum normalen Text, den Sie eingeben können, sind auch dynamische Variablen verfügbar:\n\n$G\&lt;format\&gt; : georgisches Datum, basierend auf dem Format. Für Formatdokumentation suchen Sie bitte nach `Java Date Format`\nBeispiel: $GMMM bedeutet: Jan (oder irgendein anderer)\n\n$P&lt;format&gt; : Persisches Datum, basierend auf dem Format\nBeispiel: $Pyyyy bedeutet: 1401\n\n$Nrx : Gesamtzahl der Downloads von heute\n$Ntx: Gesamtzahl der Uploads von heute\n$Nall : Gesamtzahl der Zugriffe von heute\n\nWenn Sie ersetzen $N mit $Nc erhalten Sie mobile Datenstatistiken (wie $Ncrx für Downloads)\n\nBeispiel:\n`Mobiler Traffic von $GEEEE: $Ncall` ergibt:\n`Mobiler Traffic von Dienstag: 2GB` </string>
-    <string name="update_fragment_label" translateable="false">@string/menu_updates</string>
     <string name="update_channel_name">Aktualisierungen</string>
     <string name="update_notification_title">Update heruntergeladen</string>
     <string name="update_notification_text">Zum Installieren hier tippen</string>
@@ -326,7 +316,9 @@
     <string name="reboot_notification_text">Änderungen werden nach dem Neustart wirksam</string>
     <string name="update_flavor_title">Kanal aktualisieren</string>
     <string name="stable_flavor">Stabil</string>
-    <string name="canary_flavor" translateable="false">Kanarienvogel</string>
+    <string name="update_type_title">Pakettyp</string>
+    <string name="full_type">Voll</string>
+    <string name="xposed_type">Nur Xposed</string>
     <string name="currentVersionTitle">Installierte Version: </string>
     <string name="lastestVersionTitle">Neueste Version: </string>
     <string name="root_not_here">ROOT-ZUGRIFF NICHT GEWÄHRT!</string>
@@ -338,9 +330,7 @@
     <string name="switch_branches">Zweig wechseln</string>
     <string name="reinstall_word">Neu installieren</string>
 
-    <string name="title_activity_update" translateable="false">updateActivity</string>
-	
-	<string name="own_prefs_header">AOSPMods-Einstellungen</string>
+    <string name="own_prefs_header">AOSPMods-Einstellungen</string>
     <string name="language_title">Sprache auswählen</string>
-
+	<string name="toggle_dark_apply">(Zum dunklen Design wechseln)</string>
 </resources>

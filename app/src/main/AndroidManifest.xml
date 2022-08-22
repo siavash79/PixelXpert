@@ -36,7 +36,7 @@
         </activity>
 
         <provider
-            android:name=".Utils.RemotePrefProvider"
+            android:name=".utils.RemotePrefProvider"
             android:authorities="sh.siava.AOSPMods"
             android:directBootAware="true"
             android:exported="true"

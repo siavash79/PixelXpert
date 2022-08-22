@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.log;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,8 +9,7 @@ import android.content.res.XModuleResources;
 import com.crossbowffs.remotepreferences.RemotePreferences;
 
 import de.robv.android.xposed.IXposedHookZygoteInit;
-import de.robv.android.xposed.XposedBridge;
-import sh.siava.AOSPMods.Utils.Overlays;
+import sh.siava.AOSPMods.utils.Overlays;
 
 
 public class XPrefs implements IXposedHookZygoteInit {

@@ -22,7 +22,7 @@
     <string name="theme_customization_category">Theming</string>
 
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Hide under-display fingerprint circle</string>
+    <string name="transparent_fingerprint_circle">Remove under-display fingerprint background circle</string>
     <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
     <string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
     <string name="carrier_text_category">Carrier text</string>
@@ -32,9 +32,8 @@
     <string name="carrier_text_mod_enabled">Custom carrier text</string>
     <string name="carrier_text_value">Custom carrier text</string>
     <string name="lockscreen_center_text_value">Clock area custom text</string>
-    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Bottom area shortcuts</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Hide circle around icons</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Remove circle around icons</string>
     <string name="keyguard_bottom_force_camera_title">Show camera shortcut</string>
     <string name="keyguard_left_shortcut">Show left shortcut on lock screen</string>
     <string name="LSleftShortcutTitle">Left shortcut</string>
@@ -143,6 +142,9 @@
     <string name="qs_footer_text_value">Enter custom text</string>
     <string name="qs_footer_text_summary">Leave blank to remove completely</string>
     <string name="qs_footer_text_desc">Turn the display off/on to apply</string>
+    <string name="qs_leveled_flashlight_title">Brightness-leveled Flashlight tile</string>
+    <string name="qs_flashlight_level_global_title">Apply flashlight level globally</string>
+    <string name="qs_leveled_flashlight_summary">Requires supported hardware</string>
     <string name="light_qs_title">Apply light QS Panel when using light theme</string>
     <string name="light_dualtone_qs_title">Enable dual tone QS Panel</string>
     <string name="qs_pulldown_size">Quick pull down width</string>
@@ -153,10 +155,10 @@
     <string name="qs_rows_number">Number of QS rows</string>
     <string name="qs_cols_number">Number of QS columns</string>
     <string name="qqs_tiles_number">Maximum tiles in Quick QS (max 2 rows)</string>
+    <string name="qs_tile_label_size">QS Tile label size</string>
+    <string name="qs_tile_secondary_label_size">QS Tile label summary size</string>
     <string name="qs_general_options">Quick settings options</string>
-    <string name="qs_tiles_3_columns_title">Enable 3 columns for QS Tiles</string>
     <string name="qs_text_size_title">Set text size for QS Tiles</string>
-    <string name="qs_text_size">Reduce text size of QS Tiles</string>
     <string name="wifi_cell_title">Internet Tile</string>
     <string name="wifi_cell_on">Use separate WiFi &amp; Data tiles</string>
     <string name="wifi_cell_off">Use a single Internet tile</string>
@@ -222,7 +224,6 @@
 
     <string name="so_double_tap_wake_title">Double-tap to wake phone</string>
     <string name="so_double_tap_wake_summary">Disables single-tap to wake</string>
-    <string name="so_tap_proximity_wake_title">Don\'t wake on touch when screen covered</string>
     <string name="doze_header">While screen is off…</string>
     <string name="custom_themed_icons_title">Custom themed icons</string>
     <string name="custom_themed_icons_off">Custom icons disabled</string>
@@ -253,7 +254,7 @@
     <string name="dt_darkaubergine">Dark Aubergine</string>
     <string name="dt_style">Dark Blue</string>
     <string name="dt_darkgray">Dark Grey</string>
-    <string name="dt_materialocean">Material Ocean</string>
+    <string name="dt_materialocean" translatable="false">Material Ocean</string>
     <string name="dt_night">Night</string>
     <string name="dt_solarizeddark">Solarized Dark</string>
 
@@ -292,10 +293,6 @@
     <string name="fourg_lte_fourg">Force 4G icon</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">Force 2 rows</string>
-    <string name="qs_3_rows">Force 3 rows</string>
-    <string name="qs_4_rows">Force 4 rows</string>
-    <string name="qs_5_rows">Force 5 rows</string>
 
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Collect network statistics</string>
@@ -350,4 +347,5 @@
 
     <string name="own_prefs_header">AOSPMods settings</string>
     <string name="language_title">Language</string>
+    <string name="toggle_dark_apply">(Toggle dark theme to apply)</string>
 </resources>

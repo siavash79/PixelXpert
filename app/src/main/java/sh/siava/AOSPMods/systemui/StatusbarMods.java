@@ -55,13 +55,13 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
-import sh.siava.AOSPMods.Utils.NetworkTraffic;
-import sh.siava.AOSPMods.Utils.NotificationIconContainerOverride;
-import sh.siava.AOSPMods.Utils.ShyLinearLayout;
-import sh.siava.AOSPMods.Utils.StringFormatter;
-import sh.siava.AOSPMods.Utils.SystemUtils;
-import sh.siava.AOSPMods.Utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.utils.NetworkTraffic;
+import sh.siava.AOSPMods.utils.NotificationIconContainerOverride;
+import sh.siava.AOSPMods.utils.ShyLinearLayout;
+import sh.siava.AOSPMods.utils.StringFormatter;
+import sh.siava.AOSPMods.utils.SystemUtils;
+import sh.siava.AOSPMods.utils.batteryStyles.BatteryBarView;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings({"RedundantThrows", "ConstantConditions"})
@@ -167,7 +167,7 @@ public class StatusbarMods extends XposedModPack {
     
     public StatusbarMods(Context context) {
         super(context);
-
+        //TODO: find from resources
         rightClockPadding = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("status_bar_clock_starting_padding", "dimen", mContext.getPackageName()));
         leftClockPadding = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("status_bar_left_clock_end_padding", "dimen", mContext.getPackageName()));
     }
@@ -179,7 +179,9 @@ public class StatusbarMods extends XposedModPack {
     {
         if(Xprefs == null) return;
 
-        NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(Xprefs.getString("NotificationIconLimit", "4"));
+        try {
+            NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(Xprefs.getString("NotificationIconLimit", "4").trim());
+        }catch (Throwable ignored){}
 
         centerAreaFineTune = Xprefs.getInt("centerAreaFineTune", 50);
         tuneCenterArea();
@@ -417,7 +419,7 @@ public class StatusbarMods extends XposedModPack {
         Class<?> PhoneStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
         Class<?> KeyGuardIndicationClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
         Class<?> BatteryTrackerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
-        Class<?> notificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
+        Class<?> NotificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
         StatusBarIcon = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
         NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 
@@ -441,6 +443,7 @@ public class StatusbarMods extends XposedModPack {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 View sbContentsView = ((View)param.thisObject).findViewById(mContext.getResources().getIdentifier("status_bar_contents", "id", listenPackage));
+
                 if(SBPaddingStart == PADDING_DEFAULT && SBPaddingEnd == PADDING_DEFAULT)
                     return;
 
@@ -460,14 +463,22 @@ public class StatusbarMods extends XposedModPack {
         //endregion
 
         //region multi row statusbar
-        hookAllMethods(notificationIconContainerClass, "calculateIconTranslations", new XC_MethodHook() {
+        hookAllMethods(NotificationIconContainerClass, "calculateIconTranslations", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             NotificationIconContainerOverride.calculateIconTranslations(param);
                             param.setResult(null);
                     }
                 });
-                //endregion
+        hookAllMethods(NotificationIconContainerClass, "calculateIconXTranslations", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                NotificationIconContainerOverride.calculateIconXTranslations(param);
+                param.setResult(null);
+            }
+        });
+
+        //endregion
 
                 // needed to check fastcharging
                 hookAllConstructors(KeyGuardIndicationClass, new XC_MethodHook() {
@@ -592,10 +603,12 @@ public class StatusbarMods extends XposedModPack {
                 });
 
         //restoring batterybar and network traffic: when clock goes back to life
-        findAndHookMethod(CollapsedStatusBarFragmentClass,
-                "showClock", boolean.class, new XC_MethodHook() {
+        hookAllMethods(CollapsedStatusBarFragmentClass,
+                "animateShow", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        Object mClockView = getObjectField(param.thisObject, "mClockView");
+                        if(param.args[0] != mClockView) return;
                         for(ClockVisibilityCallback c : clockVisibilityCallbacks)
                         {
                             try {
@@ -627,11 +640,20 @@ public class StatusbarMods extends XposedModPack {
 
                         mClockParent = (ViewGroup) mClockView.getParent();
 
-                        mCenteredIconArea = (View) getObjectField(param.thisObject, "mCenteredIconArea");
                         mSystemIconArea = (LinearLayout) getObjectField(param.thisObject, "mSystemIconArea");
 
                         mStatusBar = (View) getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
                         fullStatusbar = (FrameLayout) mStatusBar.getParent();
+
+                        try {
+                            mCenteredIconArea = (View) ((View) getObjectField(param.thisObject, "mCenteredIconArea")).getParent();
+                        }
+                        catch(Throwable ignored)
+                        {
+                            mCenteredIconArea = new LinearLayout(mContext);
+                            mCenteredIconArea.setLayoutParams(new LinearLayout.LayoutParams(-2,-1));
+                            ((ViewGroup)mSystemIconArea.getParent()).addView(mCenteredIconArea,2);
+                        }
 
                         makeLeftSplitArea();
 
@@ -783,7 +805,12 @@ public class StatusbarMods extends XposedModPack {
     
     private void placeBatteryBar() {
         try {
-            fullStatusbar.addView(BatteryBarView.getInstance(mContext));
+            BatteryBarView batteryBarView = BatteryBarView.getInstance(mContext);
+            try
+            {
+                ((ViewGroup)batteryBarView.getParent()).removeView(batteryBarView);
+            }catch (Throwable ignored){}
+            fullStatusbar.addView(batteryBarView);
             refreshBatteryBar(BatteryBarView.getInstance());
         }catch(Throwable ignored){}
     }
@@ -982,7 +1009,7 @@ public class StatusbarMods extends XposedModPack {
                 mClockView.setPadding(0, 0, leftClockPadding, 0);
                 break;
             case POSITION_CENTER:
-                targetArea = (ViewGroup) mCenteredIconArea.getParent();
+                targetArea = (ViewGroup) mCenteredIconArea;
                 mClockView.setPadding(rightClockPadding,0,rightClockPadding,0);
                 break;
             case POSITION_RIGHT:

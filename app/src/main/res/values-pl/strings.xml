@@ -1,8 +1,5 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Niestandardowe funkcje oparte na systemie Android 12+ AOSP</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Potwierdż, czy moduł jest aktywowany w LSPosed Manager</string>
     <string name="hide_default">Ukryj (Domyślne)</string>
     <string name="percent_of_default_size">% o domyślnym rozmiarze</string>
@@ -30,7 +27,6 @@
     <string name="carrier_text_mod_disabled">Nazwa operatora bez zmian</string>
     <string name="carrier_text_mod_enabled">Niestandardowa nazwa operatora</string>
     <string name="carrier_text_value">Wstaw własną nazwę</string>
-    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Skróty w dolnej części ekranu</string>
     <string name="keyguard_bottom_buttons_transparent_title">Ukryj okrąg pod ikoną</string>
     <string name="keyguard_bottom_force_camera_title">Pokaż skrót do aparatu</string>
@@ -51,9 +47,7 @@
     <string name="battery_style_title">Wybierz styl baterii</string>
     <string name="battery_show_percent_title">Pokaż procent baterii</string>
     <string name="battery_style_category_title">Styl baterii</string>
-    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Rozmiar ikony baterii</string>
-    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Ukryty</string>
     <string name="BIcon_Opacity_title">Nieprzezroczystość</string>
     <string name="sb_center_fine_tune">Dostosuj obszar środkowy</string>
@@ -73,8 +67,7 @@
     <string name="sbc_date_small">Mniejszy rozmiar (70%)</string>
     <string name="sbc_custom_date_after">Niestandardowy format daty po zegarze</string>
     <string name="sbc_header">Dostosowanie zegara na pasku stanu</string>
-    <string name="sbc_may_take_one_minute">Włącza się po aktualizacji czasu lub ponownym uruchomieniu SysUI</string>
-    <string name="network_settings_pref">Ustawienia monitora sieciowego...</string>
+    <string name="network_settings_pref">Ustawienia monitora sieciowego…</string>
     <string name="ntsb_far_left">Skrajnie w lewo</string>
     <string name="ntsb_mid_left">Środkowa lewa</string>
     <string name="ntsb_mid_right">Środkowy prawy</string>
@@ -99,10 +92,7 @@
     <string name="dual_tone_battery_on_summary">Włączony (Działa tylko z ikoną poziomą)</string>
     <string name="unread_messages_title">Pokaż liczbę nieprzeczytanych wiadomości</string>
     <string name="status_bar_height">Wysokość paska stanu</string>
-    <string name="status_bar_height_small">Mały</string>
-    <string name="status_bar_height_medium">Średni</string>
-    <string name="fix_status_bar_padding">Popraw odstęp po lewej stronie</string>
-     <string name="sbbb_header">Ustawienia paska baterii</string>
+    <string name="sbbb_header">Ustawienia paska baterii</string>
     <string name="sbbIcon_header">Ustawienia ikony baterii</string>
     <string name="BB_enable_title">Włącz pasek baterii</string>
     <string name="BB_onlycharging_title">Tylko podczas ładowania</string>
@@ -124,7 +114,6 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numer kompilacji w stopce panelu QS</string>
     <string name="qs_footer_mod_title">Zmień numer wersji w szybkich ustawieniach</string>
-    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
     <string name="qs_footer_text_summary">Pozostaw puste miejsce, aby całkowicie usunąć tekst</string>
     <string name="qs_footer_text_desc">Wyłącz/włącz wyswietlacz, aby zastosowac zmiany</string>
     <string name="light_qs_title">Jasny panel szybkich ustawien podczas jasnego motywu</string>
@@ -136,9 +125,7 @@
     <string name="qs_haptic_switch_title">Wibracje przy dotknięciu panelu szybkich ustawień</string>
     <string name="qs_rows_number">Liczba wierszy szybkich ustawień</string>
     <string name="qs_general_options">Opcje szybkich ustawień</string>
-    <string name="qs_tiles_3_columns_title">Włącz 3 kolumny szybkich ustawienień</string>
     <string name="qs_text_size_title">Rozmiar czcionki elementów szybkich ustawianień</string>
-    <string name="qs_text_size">Zmniejsz rozmiar czcionki elementów szybkiego ustawiania</string>
     <string name="wifi_cell_title">Ikona internetu</string>
     <string name="wifi_cell_on">Użyj oddzielnych ikon Wi-Fi i danych</string>
     <string name="wifi_cell_off">Użyj ikony interetu</string>
@@ -179,13 +166,7 @@
     <string name="gesture_nav_pill_width_title">Szerokość w porównaniu ze standardowym rozmiarem</string>
     <string name="threebutton_header_title">3-przyciskowa nawigacja</string>
     <string name="back_longpress_kill_title">Przytrzymanie klawisza wstecz zamyka aplikację na pierwszym planie</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Ukryj pasek nawigacji</string>
-    <string name="gesture_navbar_thickness_title">Grubość paska nawigacyji</string>
-    <string name="gesture_navbar_thickness">Zmodyfikuj grubość paska nawigacyji</string>
-    <string name="gesture_navbar_thin">Chudy</string>
-    <string name="gesture_navbar_thick">Gruby</string>
-    <string name="gesture_navbar_thicker">Grubszy</string>
     <string name="colorpill_title">Kolor paska nawigacji gestów</string>
     <string name="colorpill">Pasek nawigacyji w kolorze</string>
     <string name="reducekeyboard_title">Obszar gestów klawiatury</string>
@@ -199,11 +180,9 @@
     <string name="so_power_longpress_torch_title">Długie naciśnięcie włącza latarkę*</string>
     <string name="so_taptaptorch_title">Włącz podwójne tapnięcie aby włączyć latarkę</string>
     <string name="so_taptaptorch_summary">Kliknij dwukrotnie, a następnie przytrzymaj ekran blokady, aby szybko włączyć latarkę</string>
-    
-    <string name="framework_needed_caution_summary">Wymaga aktywacji System Framework w Lsposed. UZYWAJ OSTROŻNIE</string>
+
     <string name="so_double_tap_wake_title">Kliknij dwukrotnie, aby wybudzić telefon</string>
     <string name="so_double_tap_wake_summary">Wyłącza jedno dotknięcie, aby wybudzić telefon</string>
-    <string name="so_tap_proximity_wake_title">Nie budź się po dotknięciu ekranu, gdy ekran jest zakryty</string>
     <string name="doze_header">Gdy ekran jest wyłączony…</string>
     <string name="custom_themed_icons_title">Niestandardowe ikony tematyczne</string>
     <string name="custom_themed_icons_off">Wyłączone niestandardowe ikony</string>
@@ -229,7 +208,6 @@
     <string name="dt_darkaubergine">Ciemny Bakłażan</string>
     <string name="dt_style">Ciemny niebieski</string>
     <string name="dt_darkgray">Ciemno szary</string>
-    <string name="dt_materialocean">Material Ocean</string>
     <string name="dt_night">Noc</string>
     <string name="dt_solarizeddark">Solarized Dark</string>
 
@@ -250,12 +228,10 @@
     <string name="clock_right">Prawa strona</string>
 
     <!-- AM/PM style -->
-    <string name="am_pm_default" translatable="false">@string/hide_default</string>
     <string name="am_pm_normal">100% rozmiaru zegara</string>
     <string name="am_pm_small">70% rozmiaru zegara</string>
 
     <!-- Date position -->
-    <string name="date_default" translatable="false">@string/hide_default</string>
     <string name="date_before">Przed zegarem (100%)</string>
     <string name="date_before_small">Przed zegarem (70%)</string>
     <string name="date_after">Po zegarze (100%)</string>
@@ -267,14 +243,10 @@
     <string name="fourg_lte_fourg">Pokazuj ikonę 4G</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">Wymuś 2 rzędy</string>
-    <string name="qs_3_rows">Wymuś 3 rzędy</string>
-    <string name="qs_4_rows">Wymuś 4 rzędy</string>
-    <string name="qs_5_rows">Wymuś 5 rzędów</string>
-    
- <!-- Menu Items -->
+
+    <!-- Menu Items -->
     <string name="menu_reset_defaults">Zresetuj wszystkie ustawienia</string>
-    <string name="menu_import_settings">Importuj ustawienia z pliku...</string>
-    <string name="menu_export_settings">Eksportuj ustawienia do pliku...</string>
+    <string name="menu_import_settings">Importuj ustawienia z pliku…</string>
+    <string name="menu_export_settings">Eksportuj ustawienia do pliku…</string>
 
 </resources>

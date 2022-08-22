@@ -81,7 +81,7 @@
     <string name="sbc_before_color">Text înainte de ceas</string>
     <string name="sbc_color">Ceas</string>
     <string name="sbc_after_color">Text după ceas</string>
-    <string name="network_settings_pref">Setări monitorizare rețea...</string>
+    <string name="network_settings_pref">Setări monitorizare rețea…</string>
     <string name="ntsb_far_left">Extrema stângă</string>
     <string name="ntsb_far_left_extra">Extrema stângă - Deasupra notificărilor</string>
     <string name="ntsb_mid_left">Mijloc-Stânga</string>
@@ -130,7 +130,6 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numărul versiunii în subsolul panoului setărilor rapide</string>
     <string name="qs_footer_mod_title">Modifică textul versiunii în panoul setărilor rapide</string>
-    <string name="qs_footer_text_value">Introdu un text personalizat</string>
     <string name="qs_footer_text_summary">Lasă necompletat pentru a elimina complet</string>
     <string name="qs_footer_text_desc">Oprește afișajul pentru a aplica</string>
     <string name="light_qs_title">Aplică panoul de setări rapide luminoase când se utilizează tema luminoasă</string>
@@ -143,10 +142,10 @@
     <string name="qs_rows_number">Numărul de rânduri QS</string>
     <string name="qs_cols_number">Numărul de coloane QS</string>
     <string name="qqs_tiles_number">Maximum dale în QS rapid (max 2 rânduri)</string>
+    <string name="qs_tile_label_size">Dimensiune etichetă dală QS</string>
+    <string name="qs_tile_secondary_label_size">Dimensiune sumar etichetă dală QS</string>
     <string name="qs_general_options">Opțiuni setări rapide</string>
-    <string name="qs_tiles_3_columns_title">Activează 3 coloane pentru dale QS</string>
     <string name="qs_text_size_title">Setează dimensiunea textului pentru pictogramele QS</string>
-    <string name="qs_text_size">Reduce dimensiunea textului pentru pictogramele QS</string>
     <string name="wifi_cell_title">Dală Internet</string>
     <string name="wifi_cell_on">Utilizează plăci WiFi și date separate</string>
     <string name="wifi_cell_off">Folosește o singură dală Internet</string>
@@ -207,7 +206,6 @@
     <string name="so_fingerprint_sensor_enabled">Permite senzor de amprentă când ecranul este oprit</string>
     <string name="so_double_tap_wake_title">Apăsare dublă pentru trezire telefon</string>
     <string name="so_double_tap_wake_summary">Dezactivează apăsarea unică pentru trezire</string>
-    <string name="so_tap_proximity_wake_title">Nu se trezește la atingere când ecranul este acoperit</string>
     <string name="doze_header">În timp ce ecranul este oprit…</string>
     <string name="custom_themed_icons_title">Pictograme personalizate</string>
     <string name="custom_themed_icons_off">Pictograme personalizate dezactivate</string>
@@ -236,7 +234,6 @@
     <string name="dt_darkaubergine">Vânătă întunecată</string>
     <string name="dt_style">Albastru închis</string>
     <string name="dt_darkgray">Gri închis</string>
-    <string name="dt_materialocean">Ocean material</string>
     <string name="dt_night">Noapte</string>
     <string name="dt_solarizeddark">Întuneric solarizat</string>
     <!-- Arrays strings -->
@@ -266,10 +263,6 @@
     <string name="fourg_lte_lte">Forțează pictograma LTE</string>
     <string name="fourg_lte_fourg">Forțează pictograma 4G</string>
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">Forțează 2 rânduri</string>
-    <string name="qs_3_rows">Forțează 3 rânduri</string>
-    <string name="qs_4_rows">Forțează 4 rânduri</string>
-    <string name="qs_5_rows">Forțează 5 rânduri</string>
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Colectare statistici de rețea</string>
     <string name="network_interval_custom_text_title">Interval de reîmprospătare</string>
@@ -291,7 +284,7 @@
     <string name="netstat_caution_no">Poate mai târziu</string>
     <string name="monitoring_category_title">Opțiuni monitorizare</string>
     <string name="netstat_header">Setări statistici de rețea</string>
-    <string name="string_formatter_manual_body">Pe lângă textul normal pe care îl puteți introduce, sunt disponibile și variabile dinamice:\n\n$G\&lt;format\&gt; : Georgian, bazat pe format. Pentru documentația de format, căutați `Java Date Format`\nExemplu: $GMMM înseamnă: Ian (sau oricare alta)\n\n$P&lt;format&gt; : Persian, bazat pe format\nExemplu: $Pyyyy înseamnă: 1401\n\n$Nrx : Descărcări totale astăzi\n$Ntx: Încărcări totale astăzi\n$Nall : Trafic total astăzi\n\nDacă înlocuiți $N cu $Nc vi se vor furniza statistici de date mobile (ca $Ncrx pentru descărcări)\n\nExemplu:\n`Trafic mobil de $GEEEE: $Ncall` va produce:\n`Trafic mobil de marți: 2GB`</string>
+    <string name="string_formatter_manual_body">În plus față de textul normal pe care îl puteți introduce, sunt disponibile, de asemenea, variabilele dinamice:  $G\\&lt;format\\&gt; : Dată georgiană, bazată pe format. Pentru documentația formatului, căutați `Java Date Format` Exemplu: $GMMM înseamnă: Ian (sau oricare alta)  $P&lt;format&gt; : Dată persană, bazat pe format. Exemplu: $Pyyyy înseamnă: 1401  $Nrx : Descărcări totale în ziua de azi, $Ntx: Total încărcări de astăzi $Nall : Trafic total de astăzi. Dacă înlocuiți $N cu $Nc veți fi obține statistici de date mobile (cum ar fi $Ncrx pentru descărcări): `Trafic mobil de $GEEEE: $Ncall` va produce: `Trafic mobil de marți: 2GB`</string>
     <string name="update_channel_name">Actualizări</string>
     <string name="update_notification_title">Actualizare descărcată</string>
     <string name="update_notification_text">Atingeți aici pentru instalare</string>
@@ -312,4 +305,7 @@
     <string name="update_word">Actualizare</string>
     <string name="switch_branches">Comutare ramură</string>
     <string name="reinstall_word">Reinstalare</string>
+    <string name="own_prefs_header">Setări AOSPMods</string>
+    <string name="language_title">Limbă</string>
+    <string name="toggle_dark_apply">(Comutați tema întunecată pentru a aplica)</string>
 </resources>

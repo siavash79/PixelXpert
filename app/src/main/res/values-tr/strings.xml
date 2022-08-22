@@ -1,8 +1,5 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Android 12+ AOSP tabanlı ROM\'lar için özellikler</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Lütfen modülün LSPosed Manager\'da etkinleştirildiğinden emin olun</string>
     <string name="hide_default">Gizle (Varsayılan)</string>
     <string name="percent_of_default_size">% of default size</string>
@@ -32,7 +29,6 @@
     <string name="carrier_text_mod_enabled">Özel operatör metni</string>
     <string name="carrier_text_value">Özel metin ekle</string>
     <string name="lockscreen_center_text_value">Saat bölgesi özel metin</string>
-    <string name="UDFPS_hide_key" translatable="false">fingerprint_circle_hide</string>
     <string name="keyguard_bottom_category">Alt alan kısayolları</string>
     <string name="keyguard_bottom_buttons_transparent_title">Simgelerin etrafındaki daireyi gizle</string>
     <string name="keyguard_bottom_force_camera_title">Kamera kısayolunu göstert</string>
@@ -57,9 +53,7 @@
     <string name="battery_style_title">Bir pil stili seçin</string>
     <string name="battery_show_percent_title">Pil yüzdesini göster</string>
     <string name="battery_style_category_title">Pil stili</string>
-    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Pil simgesi boyutu</string>
-    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Gizlenmiş</string>
     <string name="BIcon_Opacity_title">Opaklık</string>
     <string name="sb_center_fine_tune">İnce ayar merkez alanı</string>
@@ -90,7 +84,7 @@
     <string name="sbc_before_color">Saatten önceki yazı</string>
     <string name="sbc_color">Saat</string>
     <string name="sbc_after_color">Saatten sonrakı yazı</string>
-    <string name="network_settings_pref">Ağ izleme ayarları...</string>
+    <string name="network_settings_pref">Ağ izleme ayarları…</string>
     <string name="ntsb_far_left">Tam Sol</string>
     <string name="ntsb_far_left_extra">Tam sol - Bildirimlerin üstünde</string>
     <string name="ntsb_mid_left">Orta-Sol</string>
@@ -116,9 +110,8 @@
     <string name="dual_tone_battery_on_summary">Açık (yalnızca portre simgesiyle çalışır)</string>
     <string name="unread_messages_title">Okunmamış mesajların sayısını göster</string>
     <string name="status_bar_height">Durum çubuğu yüksekliği</string>
-    <string name="status_bar_height_small">Küçük</string>
-    <string name="status_bar_height_medium">Orta</string>
-    <string name="fix_status_bar_padding">Sol taraftaki boşluğu düzenlemek</string>
+    <string name="sb_padding_title">Durum Çubuğu Dolgusu</string>
+    <string name="sb_padding_summary">Değerleri min/maks olarak ayarlamak, cihaz varsayılanına eşdeğerdir</string>
     <string name="sbbb_header">Pil çubuğu ayarları</string>
     <string name="sbbIcon_header">Pil simgesi ayarları</string>
     <string name="BB_enable_title">Pil Çubuğunu Etkinleştir</string>
@@ -141,7 +134,6 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Hızlı ayarlar panel alt bilgisinde yapı numarası</string>
     <string name="qs_footer_mod_title">Hızlı ayarlar panelinde yapı metin numarasını değiştirin</string>
-    <string name="qs_footer_text_value" translatable="false">@string/carrier_text_value</string>
     <string name="qs_footer_text_summary">Metni tamamen kaldırmak için boş bırakın</string>
     <string name="qs_footer_text_desc">Uygulamak için ekranı kapatın/açın</string>
     <string name="light_qs_title">Aydınlık mod sırasında aydın hızlı ayarlar paneli</string>
@@ -154,10 +146,10 @@
     <string name="qs_rows_number">Hızlı ayar satır sayısı</string>
     <string name="qs_cols_number">Hızlı ayar kolon sayısı</string>
     <string name="qqs_tiles_number">Üst hızlı ayar panelinde maksimum kutucuk sayısı (en fazla 2 satır)</string>
+    <string name="qs_tile_label_size">Hızlı ayar yazı büyüklüğü</string>
+    <string name="qs_tile_secondary_label_size">Hızlı ayar açıklama büyüklüğü</string>
     <string name="qs_general_options">Hızlı ayar seçenekleri</string>
-    <string name="qs_tiles_3_columns_title">3 hızlı ayar sütununu etkinleştir</string>
     <string name="qs_text_size_title">Hızlı ayar butonlarının metin boyutu</string>
-    <string name="qs_text_size">Hızlı ayar butonlarının metin boyutunu küçült</string>
     <string name="wifi_cell_title">İnternet Kutucuğu</string>
     <string name="wifi_cell_on">WiFi ve Mobil internet için ayrı kutucukları kullan</string>
     <string name="wifi_cell_off">Tek İnternet kutucuğu kullan</string>
@@ -199,7 +191,6 @@
     <string name="gesture_nav_pill_height_title">Standart boyuta göre yükseklik</string>    
     <string name="threebutton_header_title">3 düğmeli gezinme</string>
     <string name="back_longpress_kill_title">Geri butonunu uzun basılı tutarak uygulamayı öldür</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Navigasyon çubuğunu gizle</string>
     <string name="colorpill_title">Navigasyon çubuğunu renklendir</string>
     <string name="colorpill">Navigasyon çubuğunu vurgu rengine göre renklendir</string>
@@ -223,7 +214,6 @@
 
     <string name="so_double_tap_wake_title">Telefonu uyandırmak için iki kez dokun</string>
     <string name="so_double_tap_wake_summary">Uyandırmak için tek dokunuşu devre dışı bırak</string>
-    <string name="so_tap_proximity_wake_title">Ekran kapalıyken dokunduğunda uyandırma</string>
     <string name="doze_header">Ekran kapalıyken…</string>
     <string name="custom_themed_icons_title">Özel temalı simgeler</string>
     <string name="custom_themed_icons_off">Özel simgeler devre dışı bırakıldı</string>
@@ -254,7 +244,6 @@
     <string name="dt_darkaubergine">Koyu Patlıcan</string>
     <string name="dt_style">Lacivert</string>
     <string name="dt_darkgray">Koyu Gri</string>
-    <string name="dt_materialocean">Materyal Okyanüs</string>
     <string name="dt_night">Gece</string>
     <string name="dt_solarizeddark">Solarize Karanlık</string>
 
@@ -276,12 +265,10 @@
     <string name="clock_right">Sağ</string>
 
     <!-- AM/PM style -->
-    <string name="am_pm_default" translatable="false">@string/hide_default</string>
     <string name="am_pm_normal">Saatin Boyutunun %100\'ü</string>
     <string name="am_pm_small">Saatin Boyutunun %70\'i</string>
 
     <!-- Date position -->
-    <string name="date_default" translatable="false">@string/hide_default</string>
     <string name="date_before">Saatten Önce (%100)</string>
     <string name="date_before_small">Saatten Önce (%70)</string>
     <string name="date_after">Saatten Sonra (%100)</string>
@@ -293,10 +280,6 @@
     <string name="fourg_lte_fourg">4G simgesini zorla</string>
 
     <!-- QS Rows overlays -->
-    <string name="qs_2_rows">2 satırı zorla</string>
-    <string name="qs_3_rows">3 satırı zorla</string>
-    <string name="qs_4_rows">4 satırı zorla</string>
-    <string name="qs_5_rows">5 satırı zorla</string>
 
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Ağ istatistiklerini toplayın</string>
@@ -313,7 +296,7 @@
     <string name="menu_netstat_clear">Ağ istatistiklerini sıfırlayın</string>
     <string name="menu_restart">Yeniden başlat</string>
     <string name="menu_restartSysUI">SystemUI\'yi yeniden başlatın</string>
-    <string name="menu_updates">Güncellemeler...</string>
+    <string name="menu_updates">Güncellemeler…</string>
 
     <string name="nestat_caution_title">Dikkat!</string>
     <string name="nestat_caution_text">Ağ istatistikleriniz kalıcı olarak sıfırlanacak. Devam edilsin mi?</string>
@@ -324,7 +307,6 @@
     <string name="netstat_header">Ağ istatistikleri ayarları</string>
 
     <string name="string_formatter_manual_body">Girebileceğiniz normal metne ek olarak dinamik değişkenler de mevcuttur:\n\n$G\&lt;format\&gt; : Gürcü tarihi, formata göre. Biçim belgeleri için lütfen `Java Tarih Biçimi`ni okuyun\nÖrnek: $GMMM şu anlama gelir: Ocak (veya başka bir ay)\n\n$P&lt;format&gt; : Farsça tarih, biçime göre\nÖrnek: $Pyyyy şu anlama gelir: 1401\n\n$Nrx : Bugünkü Toplam İndirme Sayısı\n$Ntx: Bugünkü Toplam Yükleme Sayısı\n$Nall : Bugünün Toplam Trafiği\n\nEğer $N`i $Nc ile değiştirirseniz  , mobil veri istatistiklerine sahip olacaksınız (indirmeler için $Ncrx gibi)\n\nÖrnek:\n`$GEEEE Mobil Trafiği: $Ncall` şunları üretecek:\n`Salının Mobil Trafiği: 2GB`</string>
-    <string name="update_fragment_label">Güncelleme Parçası</string>
     <string name="update_channel_name">Güncellemeler</string>
     <string name="update_notification_title">Güncelleme indirildi</string>
     <string name="update_notification_text">Güncellemeyi indirmek için tıkla</string>
@@ -332,7 +314,6 @@
     <string name="reboot_notification_text">Değişiklikler yeniden başlatma sonra geçerli olacak</string>
     <string name="update_flavor_title">Kanalı güncelle</string>
     <string name="stable_flavor">Stabil</string>
-    <string name="canary_flavor" translatable="false">Canary</string>
     <string name="update_type_title">Paket tipi</string>
     <string name="full_type">Full paket</string>
     <string name="xposed_type">Sadece Xposed</string>
@@ -341,15 +322,13 @@
     <string name="root_not_here">ROOT ERİŞİMİ VERİLMEDİ!</string>
     <string name="reboot_pending">Yeniden başlatma bekleniyor</string>
     <string name="reboot_word">Cihazı şimdi yeniden başlatın</string>
-    <string name="update_checking">Kontrol ediliyor ...</string>
+    <string name="update_checking">Kontrol ediliyor …</string>
     <string name="update_download_started">İndiriliyor - Lütfen tamamlandıktan sonra bildirime tıklayın</string>
     <string name="update_word">Güncelleme</string>
     <string name="switch_branches">Dal değiştir</string>
     <string name="reinstall_word">Yeniden indir ve yükle</string>
 
-    <string name="title_activity_update">güncellemeAktivitesi</string>
-    
     <string name="own_prefs_header">AOSPMods ayarları</string>
     <string name="language_title">Dil seçimi</string>
-    
+    <string name="toggle_dark_apply">(Koyu temaya geç)</string>
 </resources>

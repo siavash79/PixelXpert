@@ -1,23 +1,25 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.os.Build;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
-import sh.siava.AOSPMods.XPrefs;
 
+@SuppressWarnings("RedundantThrows")
 public class FeatureFlagsMods extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
     private static final int SIGNAL_DEFAULT = 0;
+    @SuppressWarnings("unused")
     private static final int SIGNAL_FORCE_LTE = 1;
     private static final int SIGNAL_FORCE_4G = 2;
 
@@ -30,8 +32,8 @@ public class FeatureFlagsMods extends XposedModPack {
     @Override
     public void updatePrefs(String...Key)
     {
-        if(XPrefs.Xprefs == null) return;
-        boolean newcombinedSignalEnabled = XPrefs.Xprefs.getBoolean("combinedSignalEnabled", false);
+        if(Xprefs == null) return;
+        boolean newcombinedSignalEnabled = Xprefs.getBoolean("combinedSignalEnabled", false);
 
         if(Key.length > 0 && newcombinedSignalEnabled != combinedSignalEnabled)
         {
@@ -41,7 +43,7 @@ public class FeatureFlagsMods extends XposedModPack {
         }
         combinedSignalEnabled = newcombinedSignalEnabled;
 
-        SBLTEIcon = Integer.parseInt(XPrefs.Xprefs.getString(
+        SBLTEIcon = Integer.parseInt(Xprefs.getString(
                 "LTE4GIconMod",
                 String.valueOf(SIGNAL_DEFAULT)));
 
@@ -65,15 +67,36 @@ public class FeatureFlagsMods extends XposedModPack {
                 });
 
         if(Build.VERSION.SDK_INT < 32) return; //Feature flags is newly introduced!
+        switch (Build.VERSION.SDK_INT)
+        {
+            case 31: //Feature flags is newly introduced!
+                return;
+            case 32: //A12.1
+                Class<?> FeatureFlagsClass = findClass("com.android.systemui.flags.FeatureFlags", lpparam.classLoader);
 
-        Class<?> FeatureFlagsClass = findClass("com.android.systemui.flags.FeatureFlags", lpparam.classLoader);
+                hookAllMethods(FeatureFlagsClass, "isCombinedStatusBarSignalIconsEnabled", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        param.setResult(combinedSignalEnabled);
+                    }
+                });
+                break;
+            case 33: //A13
+                Class<?> FlagsClass = findClass("com.android.systemui.flags.Flags", lpparam.classLoader);
+                Class<?> FeatureFlagsReleaseClass = findClass("com.android.systemui.flags.FeatureFlagsRelease", lpparam.classLoader);
 
-        findAndHookMethod(FeatureFlagsClass, "isCombinedStatusBarSignalIconsEnabled", new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                param.setResult(combinedSignalEnabled);
-            }
-        });
+                Object COMBINED_STATUS_BAR_SIGNAL_ICONS = getStaticObjectField(FlagsClass, "COMBINED_STATUS_BAR_SIGNAL_ICONS");
+                hookAllMethods(FeatureFlagsReleaseClass, "isEnabled", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if(param.args[0].equals(COMBINED_STATUS_BAR_SIGNAL_ICONS))
+                        {
+                            param.setResult(combinedSignalEnabled);
+                        }
+                    }
+                });
+                break;
+        }
     }
 
     @Override

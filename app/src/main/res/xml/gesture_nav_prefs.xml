@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:visibility="visible">
+    <PreferenceCategory android:title="@string/back_gesture_category_title">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="BackFromLeft"
+            android:title="@string/back_from_left_title" />
+        <SeekBarPreference
+            android:layout_width="wrap_content"
+            android:defaultValue="100"
+            android:key="BackLeftHeight"
+            android:max="100"
+            android:title="@string/back_height_title"
+            app:min="10"
+            app:updatesContinuously="true"/>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="BackFromRight"
+            android:title="@string/back_from_right_title" />
+        <SeekBarPreference
+            android:defaultValue="100"
+            android:key="BackRightHeight"
+            android:max="100"
+            android:title="@string/back_height_title"
+            app:min="10"
+            app:updatesContinuously="true"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/gesture_nav_pill_cat"
+        app:key="nav_pill_cat">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="navPillColorAccent"
+            android:title="@string/colorpill"
+            app:summaryOn="@string/general_on"
+            app:summaryOff="@string/general_off"/>
+        <SeekBarPreference
+            android:defaultValue="50"
+            android:key="GesPillWidthModPos"
+            app:title="@string/gesture_nav_pill_width_title"
+            app:updatesContinuously="true" />
+        <SeekBarPreference
+            android:defaultValue="100"
+            android:max="300"
+            app:min="50"
+            app:seekBarIncrement="10"
+            android:key="GesPillHeightFactor"
+            app:title="@string/gesture_nav_pill_height_title"
+            app:updatesContinuously="true" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/reducekeyboard_title"
+        app:key="nav_keyboard_height_cat">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="ReduceKeyboardSpaceOverlay"
+            android:title="@string/reducekeyboard"
+            app:summaryOn="@string/general_on"
+            app:summaryOff="@string/general_off"/>
+    </PreferenceCategory>
+</PreferenceScreen>

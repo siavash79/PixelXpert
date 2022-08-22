@@ -1,7 +1,11 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getBooleanField;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -12,13 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.Utils.StringFormatter;
-import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.utils.StringFormatter;
 
 @SuppressWarnings("RedundantThrows")
 public class KeyguardCustomText extends XposedModPack {
@@ -41,10 +42,10 @@ public class KeyguardCustomText extends XposedModPack {
 
     @Override
     public void updatePrefs(String... Key) {
-        KGMiddleCustomText = XPrefs.Xprefs.getString("KGMiddleCustomText", "");
+        KGMiddleCustomText = Xprefs.getString("KGMiddleCustomText", "");
 
-        customCarrierTextEnabled = XPrefs.Xprefs.getBoolean("carrierTextMod", false);
-        customCarrierText = XPrefs.Xprefs.getString("carrierTextValue", "");
+        customCarrierTextEnabled = Xprefs.getBoolean("carrierTextMod", false);
+        customCarrierText = Xprefs.getString("carrierTextValue", "");
 
         if(Key.length > 0)
         {
@@ -53,6 +54,7 @@ public class KeyguardCustomText extends XposedModPack {
                 case "KGMiddleCustomText":
                     setMiddleText();
                     break;
+                case "carrierTextValue":
                 case "carrierTextMod":
                     if(customCarrierTextEnabled)
                     {
@@ -91,24 +93,23 @@ public class KeyguardCustomText extends XposedModPack {
 
         Resources res = mContext.getResources();
 
-        hookAllConstructors(CarrierTextControllerClass, new XC_MethodHook() {
+        hookAllMethods(CarrierTextControllerClass, "onInit", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+
                 carrierTextController = param.thisObject;
                 Object carrierTextCallback = getObjectField(carrierTextController, "mCarrierTextCallback");
-
                 hookAllMethods(carrierTextCallback.getClass(),
                         "updateCarrierInfo", new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                                 if(!customCarrierTextEnabled) return; //nothing to do
-
                                 setCarrierText();
                                 param.setResult(null);
                             }
                         });
             }
-        });
+        }).size();
 
         hookAllMethods(KeyguardSliceViewClass, "setDarkAmount", new XC_MethodHook() {
             @Override

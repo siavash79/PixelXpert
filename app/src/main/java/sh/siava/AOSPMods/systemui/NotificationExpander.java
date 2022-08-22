@@ -1,10 +1,17 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -12,15 +19,16 @@ import android.widget.FrameLayout;
 
 import androidx.core.content.res.ResourcesCompat;
 
+import java.util.Collection;
+
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.XPrefs;
+import sh.siava.AOSPMods.XposedModPack;
 
+@SuppressWarnings("RedundantThrows")
 public class NotificationExpander extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 	
@@ -33,13 +41,14 @@ public class NotificationExpander extends XposedModPack {
 	private FrameLayout BtnLayout;
 	private static int fh = 0;
 	private Object Scroller;
-	
+	private Object NotifCollection = null;
+
 	public NotificationExpander(Context context) { super(context); }
 	
 	@Override
 	public void updatePrefs(String... Key) {
-		notificationExpandallEnabled = XPrefs.Xprefs.getBoolean("notificationExpandallEnabled", false);
-		notificationExpandallHookEnabled = XPrefs.Xprefs.getBoolean("notificationExpandallHookEnabled", true);
+		notificationExpandallEnabled = Xprefs.getBoolean("notificationExpandallEnabled", false);
+		notificationExpandallHookEnabled = Xprefs.getBoolean("notificationExpandallHookEnabled", true);
 
 		if(Key.length > 0 && Key[0].equals("notificationExpandallEnabled"))
 		{
@@ -57,14 +66,15 @@ public class NotificationExpander extends XposedModPack {
 		Class<?> NotificationEntryManagerClass = findClass("com.android.systemui.statusbar.notification.NotificationEntryManager", lpparam.classLoader);
 		Class<?> FooterViewClass = findClass("com.android.systemui.statusbar.notification.row.FooterView", lpparam.classLoader);
 		Class<?> FooterViewButtonClass = findClass("com.android.systemui.statusbar.notification.row.FooterViewButton", lpparam.classLoader);
-		Class<?> NotificationStackScrollLayoutControllerClass = findClass("com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController", lpparam.classLoader);
-		
+		Class<?> NotificationStackScrollLayoutClass = findClass("com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout", lpparam.classLoader);
+		Class<?> NotifCollectionClass = findClassIfExists("com.android.systemui.statusbar.notification.collection.NotifCollection", lpparam.classLoader);
+
 		//Notification Footer, where shortcuts should live
 		hookAllMethods(FooterViewClass, "onFinishInflate", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				FooterView = (FrameLayout) param.thisObject;
-				
+
 				BtnLayout = new FrameLayout(mContext);
 				FrameLayout.LayoutParams BtnFrameParams = new FrameLayout.LayoutParams(Math.round(fh*2.5f), fh);
 				BtnFrameParams.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
@@ -103,6 +113,16 @@ public class NotificationExpander extends XposedModPack {
 		
 		
 		//grab notification container manager
+		if(NotifCollectionClass != null)
+		{
+			hookAllConstructors(NotifCollectionClass, new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					NotifCollection = param.thisObject;
+				}
+			});
+		}
+
 		hookAllConstructors(NotificationEntryManagerClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -111,7 +131,7 @@ public class NotificationExpander extends XposedModPack {
 		});
 		
 		//grab notification scroll page
-		hookAllConstructors(NotificationStackScrollLayoutControllerClass, new XC_MethodHook() {
+		hookAllConstructors(NotificationStackScrollLayoutClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				Scroller = param.thisObject;
@@ -122,16 +142,22 @@ public class NotificationExpander extends XposedModPack {
 	
 	private void updateFooterBtn()
 	{
-		Object mDismissButton = getObjectField(FooterView, "mDismissButton");
-		
-		int fh = (int) callMethod(mDismissButton, "getHeight");
-		
+		View mDismissButton;
+		try {
+			mDismissButton = (View) getObjectField(FooterView, "mManageButton"); //A13
+		}
+		catch(Throwable ignored)
+		{
+			mDismissButton = (View) getObjectField(FooterView, "mDismissButton"); //A12
+		}
+
+		int fh = mDismissButton.getLayoutParams().height;
+
 		if(fh > 0) { //sometimes it's zero. we don't need that
 			NotificationExpander.fh = fh;
 		}
-
 		int tc = (int) callMethod(mDismissButton, "getCurrentTextColor");
-		
+
 		Drawable expandArrows = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.exapnd_icon, mContext.getTheme());
 		expandArrows.setTint(tc);
 		ExpandBtn.setBackground(expandArrows);
@@ -145,17 +171,45 @@ public class NotificationExpander extends XposedModPack {
 	
 	public void expandAll(boolean expand)
 	{
-		if(NotificationEntryManager == null) return;
+		if(Build.VERSION.SDK_INT == 33 && NotifCollection == null) return;
+		else if(Build.VERSION.SDK_INT < 33 && NotificationEntryManager == null) return;
 		
 		if(!expand) {
-			callMethod(Scroller, "resetScrollPosition");
+			if(android.os.Build.VERSION.SDK_INT == 33) { //A13
+				callMethod(
+						Scroller,
+						"setOwnScrollY",
+						/* pisition */0,
+						/* animate */ true);
+			}
+			else
+			{
+				callMethod(Scroller, "resetScrollPosition");
+			}
 		}
-		
-		android.util.ArraySet<?> entries = (android.util.ArraySet<?>) getObjectField(NotificationEntryManager, "mAllNotifications");
-		
-		for(Object entry : entries.toArray())
+
+		Collection<Object> entries;
+		if(Build.VERSION.SDK_INT == 33)
 		{
-			callMethod(entry, "setUserExpanded", expand, expand);
+			//noinspection unchecked
+			entries = (Collection<Object>) getObjectField(NotifCollection, "mReadOnlyNotificationSet");
+			for(Object entry : entries.toArray())
+			{
+				Object row = getObjectField(entry, "row");
+				if(row != null) {
+					callMethod(row, "setUserExpanded", expand, expand);
+				}
+			}
 		}
+		else
+		{
+			//noinspection unchecked
+			entries = (android.util.ArraySet<Object>) getObjectField(NotificationEntryManager, "mAllNotifications");
+			for(Object entry : entries.toArray())
+			{
+				callMethod(entry, "setUserExpanded", expand, expand);
+			}
+		}
+		
 	}
 }

@@ -1,7 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedHelpers.*;
-import static de.robv.android.xposed.XposedBridge.*;
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -12,9 +13,8 @@ import android.widget.LinearLayout;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.Utils.FlexStatusIconContainer;
-import sh.siava.AOSPMods.Utils.SystemUtils;
-import sh.siava.AOSPMods.XPrefs;
+import sh.siava.AOSPMods.utils.FlexStatusIconContainer;
+import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -33,8 +33,8 @@ public class MultiStatusbarRows extends XposedModPack {
         {
             SystemUtils.RestartSystemUI();
         }
-        systemIconsMultiRow = XPrefs.Xprefs.getBoolean("systemIconsMultiRow", false);
-        FlexStatusIconContainer.setSortPlan(Integer.parseInt(XPrefs.Xprefs.getString("systemIconSortPlan", String.valueOf(FlexStatusIconContainer.SORT_CLEAN))));
+        systemIconsMultiRow = Xprefs.getBoolean("systemIconsMultiRow", false);
+        FlexStatusIconContainer.setSortPlan(Integer.parseInt(Xprefs.getString("systemIconSortPlan", String.valueOf(FlexStatusIconContainer.SORT_CLEAN))));
     }
 
     @Override

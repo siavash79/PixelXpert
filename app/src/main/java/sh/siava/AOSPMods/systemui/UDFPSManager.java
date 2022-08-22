@@ -90,6 +90,8 @@ public class UDFPSManager extends XposedModPack {
 
                         Object mLockScreenFp = getObjectField(param.thisObject, "mLockScreenFp");
 
+                        if(mLockScreenFp == null) return;
+
                         int mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", mContext,
                                 mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
 

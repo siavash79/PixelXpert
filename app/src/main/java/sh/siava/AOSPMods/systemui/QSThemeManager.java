@@ -15,7 +15,17 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
+import android.graphics.Paint;
+import android.graphics.PathEffect;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RippleDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +53,7 @@ public class QSThemeManager extends XposedModPack {
     private Class<?> UtilsClass = null;
     private Integer colorInactive = null;
     private int colorUnavailable;
+    private final Drawable lightFooterShape = makeFooterShape();
 
     public QSThemeManager(Context context) {
         super(context);
@@ -124,15 +135,11 @@ public class QSThemeManager extends XposedModPack {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if(!wasDark)
                 {
-                    View mRootView = (View) getObjectField(param.thisObject, "mRootView");
-                    mRootView.findViewById(
-                                    mContext.getResources()
-                                            .getIdentifier(
-                                                    "fgs_number_container",
-                                                    "id",
-                                                    mContext.getPackageName()))
+                    ((View)getObjectField(param.thisObject, "mNumberContainer"))
                             .getBackground()
                             .setTint(colorInactive);
+                    ((View)getObjectField(param.thisObject, "mTextContainer"))
+                            .setBackground(lightFooterShape.getConstantState().newDrawable().mutate()); //original has to be copied to new object otherwise will get affected by view changes
                 }
             }
         });
@@ -142,7 +149,7 @@ public class QSThemeManager extends XposedModPack {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if(!wasDark)
                 {
-                    ((View) getObjectField(param.thisObject, "mView")).getBackground().setTint(colorInactive);
+                    ((View) getObjectField(param.thisObject, "mView")).setBackground(lightFooterShape.getConstantState().newDrawable().mutate());
                 }
             }
         });
@@ -414,7 +421,7 @@ public class QSThemeManager extends XposedModPack {
 
         colorUnavailable = applyAlpha(0.3f, colorInactive);
 
-
+        lightFooterShape.setTint(colorInactive);
     }
 
     private boolean getIsDark() {
@@ -427,6 +434,19 @@ public class QSThemeManager extends XposedModPack {
         return Color.argb((int) (alpha), Color.red(inputColor), Color.green(inputColor),
                 Color.blue(inputColor));
     }
+
+    private Drawable makeFooterShape() {
+        int radius = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("qs_security_footer_corner_radius", "dimen", mContext.getPackageName()));
+        float[] radiusF = new float[8];
+        for(int i = 0; i < 8; i++)
+        {
+            radiusF[i] = radius;
+        }
+        final ShapeDrawable result = new ShapeDrawable(new RoundRectShape(radiusF, null, null));
+        result.getPaint().setStyle(Paint.Style.FILL);
+        return result;
+    }
+
 
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName) && Build.VERSION.SDK_INT == 33; }

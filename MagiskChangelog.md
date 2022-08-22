@@ -1,4 +1,4 @@
-**2.0.0**
+**2.0.0**  
 - We're now fully compatible with Android 13   
 - Added option to better QS font size customization   
 - Added option to adjust flashlight level (Android 13 only)    

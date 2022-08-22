@@ -44,6 +44,11 @@
                 android:key="isFlashLevelGlobal"
                 android:title="@string/qs_flashlight_level_global_title" />
 
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="QRTileInactiveColor"
+                android:title="@string/qs_qr_tile_inactive_title" />
+
             <SeekBarPreference
                 android:defaultValue="0"
                 android:max="8"

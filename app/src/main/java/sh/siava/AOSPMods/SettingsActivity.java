@@ -646,6 +646,8 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("isFlashLevelGlobal").setVisible(findPreference("leveledFlashTile").isVisible() && sharedPreferences.getBoolean("leveledFlashTile", false));
 
                 findPreference("wifi_cell").setVisible(Build.VERSION.SDK_INT < 33);
+
+                findPreference("QRTileInactiveColor").setVisible(Build.VERSION.SDK_INT >= 33);
             } catch (Exception ignored) {}
         }
 

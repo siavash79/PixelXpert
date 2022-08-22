@@ -1,10 +1,13 @@
 package sh.siava.AOSPMods.systemui;
 
+import static android.service.quicksettings.Tile.STATE_ACTIVE;
+import static android.service.quicksettings.Tile.STATE_INACTIVE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.ResourceManager.resparams;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
@@ -37,6 +40,7 @@ public class QSTileGrid extends XposedModPack {
     private static int labelSizeUnit = -1, secondaryLabelSizeUnit = -1;
 
     private static float QSLabelScaleFactor = 1, QSSecondaryLabelScaleFactor = 1;
+    private static boolean QRTileInactiveColor = false;
 
     public QSTileGrid(Context context) { super(context); }
 
@@ -47,6 +51,8 @@ public class QSTileGrid extends XposedModPack {
         QSRowQty = Xprefs.getInt("QSRowQty", NOT_SET);
         QSColQty = Xprefs.getInt("QSColQty", NOT_SET);
         QQSTileQty = Xprefs.getInt("QQSTileQty", QQS_NOT_SET);
+
+        QRTileInactiveColor = Xprefs.getBoolean("QRTileInactiveColor", false);
 
         try {
             QSLabelScaleFactor = (RangeSliderPreference.getValues(Xprefs, "QSLabelScaleFactor", 0).get(0)+100)/100f;
@@ -79,6 +85,20 @@ public class QSTileGrid extends XposedModPack {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 try {
+                    Class<?> QRCodeScannerTileClass = findClass("com.android.systemui.qs.tiles.QRCodeScannerTile", lpparam.classLoader);
+
+                    hookAllMethods(QRCodeScannerTileClass, "handleUpdateState", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if(!QRTileInactiveColor) return;
+
+                            if(getObjectField(param.args[0], "state").equals(STATE_ACTIVE))
+                            {
+                                setObjectField(param.args[0], "state", STATE_INACTIVE);
+                            }
+                        }
+                    });
+
                     if (labelSize == null) { //we need initial font sizes
 
                         if(Build.VERSION.SDK_INT == 33) {
@@ -91,6 +111,8 @@ public class QSTileGrid extends XposedModPack {
                                     "updateFontSize",
                                     mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
                                     getObjectField(param.thisObject, "secondaryLabel"));
+
+
                         }
                         else
                         {

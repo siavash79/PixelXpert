@@ -1,3 +1,6 @@
+**canary-118**  
+- V2.0.0-RC2  
+  
 **canary-117**  
 - Version 2 - Release Candidate 1  
   

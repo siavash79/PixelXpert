@@ -22,7 +22,7 @@
     <string name="theme_customization_category">Theming</string>
 
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Hide under-display fingerprint circle</string>
+    <string name="transparent_fingerprint_circle">Remove under-display fingerprint background circle</string>
     <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
     <string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
     <string name="carrier_text_category">Carrier text</string>
@@ -33,7 +33,7 @@
     <string name="carrier_text_value">Custom carrier text</string>
     <string name="lockscreen_center_text_value">Clock area custom text</string>
     <string name="keyguard_bottom_category">Bottom area shortcuts</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Hide circle around icons</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Remove circle around icons</string>
     <string name="keyguard_bottom_force_camera_title">Show camera shortcut</string>
     <string name="keyguard_left_shortcut">Show left shortcut on lock screen</string>
     <string name="LSleftShortcutTitle">Left shortcut</string>

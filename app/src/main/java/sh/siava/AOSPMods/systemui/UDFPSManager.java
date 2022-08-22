@@ -48,13 +48,17 @@ public class UDFPSManager extends XposedModPack {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 if(!transparentBG) return;
 
-                ImageView mBgProtection = (ImageView) getObjectField(param.thisObject, "mBgProtection");
-                mBgProtection.setImageAlpha(0);
+                try {
+                    ImageView mBgProtection = (ImageView) getObjectField(param.thisObject, "mBgProtection");
+                    mBgProtection.setImageAlpha(0);
+                } catch(Throwable ignored){} //if (!mFullyInflated) A13
             }
         };
         if(Build.VERSION.SDK_INT == 33)
         { //A13
             hookAllMethods(UdfpsKeyguardViewClass, "updateBurnInOffsets", FPCircleTransparenter);
+            hookAllMethods(UdfpsKeyguardViewClass, "onFinishInflate", FPCircleTransparenter);
+
 
             hookAllMethods(LockIconViewClass,
                     "updateIcon", new XC_MethodHook() {

@@ -126,7 +126,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
                     }
                     catch (Throwable T)
                     {
-                        log("Start Error Dump");
+                        log("Start Error Dump - Occurred in " + mod.getName());
                         T.printStackTrace();
                     }
                 }

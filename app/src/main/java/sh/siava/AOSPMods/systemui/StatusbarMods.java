@@ -82,7 +82,7 @@ public class StatusbarMods extends XposedModPack {
     private static final int AM_PM_STYLE_SMALL = 1;
     private static final int AM_PM_STYLE_GONE = 2;
 
-    private final int leftClockPadding, rightClockPadding;
+    private int leftClockPadding = 0, rightClockPadding = 0;
     private static int clockPosition = POSITION_LEFT;
     private static int mAmPmStyle = AM_PM_STYLE_GONE;
     private static boolean mShowSeconds = false;
@@ -167,7 +167,8 @@ public class StatusbarMods extends XposedModPack {
     
     public StatusbarMods(Context context) {
         super(context);
-        //TODO: find from resources
+        if(!listensTo(context.getPackageName())) return;
+
         rightClockPadding = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("status_bar_clock_starting_padding", "dimen", mContext.getPackageName()));
         leftClockPadding = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("status_bar_left_clock_end_padding", "dimen", mContext.getPackageName()));
     }

@@ -104,7 +104,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
         if(lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && false) {
             log("------------");
-            Helpers.dumpClass("com.android.systemui.navigationbar.NavigationBar", lpparam.classLoader);
+            Helpers.dumpClass("com.android.systemui.settings.brightness.BrightnessController", lpparam.classLoader);
             log("------------");
         }
 

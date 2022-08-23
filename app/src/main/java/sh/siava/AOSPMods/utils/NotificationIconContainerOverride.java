@@ -220,7 +220,7 @@ public class NotificationIconContainerOverride {
                 // later
                 setObjectField(iconState, "visibleState", STATE_ICON);
                 setObjectField(iconState, "xTranslation", getIntField(getObjectField(thisObject, "mIsolatedIconLocation"),"left") - ((int[])getObjectField(thisObject, "mAbsolutePosition"))[0]
-                        - (1 - (int)callMethod(getObjectField(thisObject, "mIsolatedIcon"), "getIconScale")) * (int)callMethod(mIsolatedIcon, "getWidth") / 2.0f);
+                        - (1 - getFloatField(getObjectField(thisObject, "mIsolatedIcon"), "mIconScale")) * (int)callMethod(mIsolatedIcon, "getWidth") / 2.0f);
             }
         }
     }

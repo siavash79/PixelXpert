@@ -1,3 +1,8 @@
+**2.0.1**  
+- Bugfixes for Android 12 users   
+- QQS Brightness slider is back for Android 13   
+   
+  
 **2.0.0**  
 - We're now fully compatible with Android 13   
 - Added option to better QS font size customization   

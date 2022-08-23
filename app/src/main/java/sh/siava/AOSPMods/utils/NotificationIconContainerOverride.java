@@ -20,9 +20,9 @@ public class NotificationIconContainerOverride {
     public static final int STATE_DOT = 1;
     public static final int STATE_HIDDEN = 2;
 
-    private static final int MAX_VISIBLE_ICONS_ON_LOCK = 5;
+    public static int MAX_VISIBLE_ICONS_ON_LOCK = 5;
     public static int MAX_STATIC_ICONS = 4;
-    private static final int MAX_ICONS_ON_AOD = 3;
+    public static int MAX_ICONS_ON_AOD = 3;
     private static final int MAX_DOTS = 1;
     private static final int NO_VALUE = Integer.MIN_VALUE;
 

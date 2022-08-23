@@ -56,6 +56,12 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/doze_header">
+        <EditTextPreference
+            android:key="NotificationAODIconLimit"
+            android:defaultValue="3"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/sb_notification_limit" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="fingerprintWhileDozing"

@@ -180,8 +180,16 @@ public class StatusbarMods extends XposedModPack {
         if(Xprefs == null) return;
 
         try {
-            NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(Xprefs.getString("NotificationIconLimit", "4").trim());
-        }catch (Throwable ignored){}
+            NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(Xprefs.getString("NotificationIconLimit", "").trim());
+        }catch (Throwable ignored){
+            NotificationIconContainerOverride.MAX_STATIC_ICONS = 4;
+        }
+
+        try {
+            NotificationIconContainerOverride.MAX_ICONS_ON_AOD = Integer.parseInt(Xprefs.getString("NotificationAODIconLimit", "").trim());
+        }catch (Throwable ignored){
+            NotificationIconContainerOverride.MAX_ICONS_ON_AOD = 3;
+        }
 
         centerAreaFineTune = Xprefs.getInt("centerAreaFineTune", 50);
         tuneCenterArea();

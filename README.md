@@ -70,9 +70,8 @@ This module is designed based on AOSP source code. What does it mean? it means t
 
 - Android 12:         Compatible
 - Android 12.1 (12L): Compatible
-- Andriod 12.1 beta:  Compatible
-- Android 13:         NOT Compatible
-
+- Android 13:         Compatible
+   
 
 **Prerequisites:**
 - Compatible Roms (see above)
@@ -120,6 +119,8 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @nmayorga092   Spanish
 - @vitalitk Ukrainian
 - @siavash79 Persian
+- @abalam1980 Dutch
+- @trinhloivn Vietnamese
 
 **Brought to you by:**
 @siavash79 & @ElTifo

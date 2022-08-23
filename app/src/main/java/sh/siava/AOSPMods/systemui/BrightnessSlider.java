@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.systemui;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
@@ -12,20 +13,26 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
+import android.util.ArrayMap;
+import android.util.ArraySet;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 
-@SuppressWarnings("RedundantThrows")
+@SuppressWarnings({"RedundantThrows", "unchecked", "rawtypes"})
 public class BrightnessSlider extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
@@ -44,6 +51,9 @@ public class BrightnessSlider extends XposedModPack {
     private final ArrayList<Integer> collectedFields = new ArrayList<>();
     private Object mBrightnessController;
     private Object mBrightnessMirrorHandler;
+    private View QQSBrightnessSliderView;
+    static Class<?> BrightnessControllerClass = null;
+    static Class<?> DejankUtilsClass = null;
 
     public BrightnessSlider(Context context) { super(context); }
 
@@ -88,29 +98,6 @@ public class BrightnessSlider extends XposedModPack {
     @Override
     public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 
-    private void makeQQSBrightness(Class<?> BrightnessMirrorHandlerClass) throws Throwable {
-        ViewGroup quickQSPanel = (ViewGroup) getObjectField(QQSPC, "mView");
-
-        Object mBrightnessSliderController = callMethod(brightnessSliderFactory, "create", mContext, quickQSPanel);
-
-        View QQSBrightnessSliderView = (View) getObjectField(mBrightnessSliderController, "mView");
-        setBrightnessView(quickQSPanel, QQSBrightnessSliderView, true);
-
-        //mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mBroadcastDispatcher"),getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
-        mBrightnessController = callMethod(brightnessControllerFactory, "create", mBrightnessSliderController);
-
-        mBrightnessMirrorHandler = BrightnessMirrorHandlerClass.getConstructors()[0].newInstance(mBrightnessController);
-
-        callMethod(mBrightnessController, "checkRestrictionAndSetEnabled");
-
-        callMethod(mTunerService, "addTunable", quickQSPanel, QS_SHOW_BRIGHTNESS);
-        callMethod(mBrightnessMirrorHandler, "onQsPanelAttached");
-        callMethod(mBrightnessController, "registerCallbacks");
-        callMethod(mBrightnessMirrorHandler, "setController", mBrightnessMirrorController);
-        callMethod(mBrightnessSliderController, "init");
-    }
-
-
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!BrightnessHookEnabled || !listenPackage.equals(lpparam.packageName)) //master switch
@@ -121,6 +108,10 @@ public class BrightnessSlider extends XposedModPack {
         Class<?> QuickQSPanelControllerClass = findClass("com.android.systemui.qs.QuickQSPanelController", lpparam.classLoader);
         Class<?> QSPanelControllerBaseClass = findClass("com.android.systemui.qs.QSPanelControllerBase", lpparam.classLoader);
         Class<?> CentralSurfacesImplClass = findClassIfExists("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
+        Class<?> StatusBarClass = findClassIfExists("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader);
+        DejankUtilsClass = findClass("com.android.systemui.DejankUtils", lpparam.classLoader);
+
+        BrightnessControllerClass = findClass("com.android.systemui.settings.brightness.BrightnessController", lpparam.classLoader);
 
         if(CentralSurfacesImplClass != null)
         {
@@ -130,13 +121,23 @@ public class BrightnessSlider extends XposedModPack {
                     new Thread(() -> {
                         try {
                             while (mBrightnessMirrorController == null) {
-                                Thread.currentThread().wait(500);
+                                //noinspection BusyWait
+                                Thread.sleep(500);
                                 mBrightnessMirrorController = getObjectField(param.thisObject, "mBrightnessMirrorController");
                             }
                             dataCollected(2, BrightnessMirrorHandlerClass);
-                        } catch (Throwable ignored) {
-                        }
+                        } catch (Throwable ignored) {}
                     }).start();
+                }
+            });
+        }
+        else
+        {
+            hookAllMethods(StatusBarClass, "makeStatusBarView", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    mBrightnessMirrorController = getObjectField(param.thisObject, "mBrightnessMirrorController");
+                    dataCollected(2, BrightnessMirrorHandlerClass);
                 }
             });
         }
@@ -156,15 +157,15 @@ public class BrightnessSlider extends XposedModPack {
 
                 int indexCorrection = (Build.VERSION.SDK_INT == 33)
                         ? 0
-                        : 1;
+                        : 1; //A12
 
                 brightnessControllerFactory = param.args[11 + indexCorrection];
                 brightnessSliderFactory = param.args[12 + indexCorrection];
                 mTunerService = getObjectField(param.thisObject, "mTunerService");
 
                 dataCollected(0, BrightnessMirrorHandlerClass);
-                Object mView = getObjectField(param.thisObject,"mView");
-                setBrightnessView((ViewGroup) mView, (View) getObjectField(mView, "mBrightnessView"), false);
+
+                setQSVisibility();
             }
         });
 
@@ -228,6 +229,7 @@ public class BrightnessSlider extends XposedModPack {
 
     private void setBrightnessView(ViewGroup o, @NonNull View view, boolean isQQS) { //Classloader can't find the method by reflection
         View mBrightnessView = (View) getObjectField(o,"mBrightnessView");
+
         if (mBrightnessView != null) {
             o.removeView(mBrightnessView);
             setObjectField(o, "mMovableContentStartIndex", getIntField(o, "mMovableContentStartIndex") - 1);
@@ -268,10 +270,8 @@ public class BrightnessSlider extends XposedModPack {
     private void setQQSVisibility() {
         if(mBrightnessMirrorHandler == null) return; //Brightness slider isn't made
         ViewGroup QuickQSPanel = (ViewGroup) getObjectField(QQSPC, "mView");
-        View QQSBrightnessSliderView = (View) getObjectField(QuickQSPanel, "mBrightnessView");
 
         if(QuickQSPanel == null || QQSBrightnessSliderView == null) return;
-
         QuickQSPanel.post(() -> {
             try {
                 if (QQSBrightnessEnabled) {
@@ -281,5 +281,82 @@ public class BrightnessSlider extends XposedModPack {
                 }
             } catch (Exception ignored) {}
         });
+    }
+
+    private void makeQQSBrightness(Class<?> BrightnessMirrorHandlerClass) throws Throwable {
+        ViewGroup quickQSPanel = (ViewGroup) getObjectField(QQSPC, "mView");
+
+        Object mBrightnessSliderController = callMethod(brightnessSliderFactory, "create", mContext, quickQSPanel);
+
+        QQSBrightnessSliderView = (View) getObjectField(mBrightnessSliderController, "mView");
+
+        mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mBroadcastDispatcher"),getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
+        //mBrightnessController = callMethod(brightnessControllerFactory, "create", mBrightnessSliderController);
+
+        mBrightnessMirrorHandler = BrightnessMirrorHandlerClass.getConstructors()[0].newInstance(mBrightnessController);
+
+        addTunable(mTunerService, quickQSPanel, QS_SHOW_BRIGHTNESS);
+        setController(mBrightnessMirrorHandler, mBrightnessMirrorController);
+        registerCallbacks(mBrightnessController);
+        callMethod(mBrightnessSliderController, "init");
+
+//        callMethod(mBrightnessController, "checkRestrictionAndSetEnabled"); //apparently not needed
+
+        onQsPanelAttached(mBrightnessMirrorHandler);
+
+        setQQSVisibility();
+    }
+
+    private static void onQsPanelAttached(Object mBrightnessMirrorHandler)
+    {
+        Object mirrorController = getObjectField(mBrightnessMirrorHandler, "mirrorController");
+        if(mirrorController != null)
+        {
+            callMethod(mirrorController, "addCallback", getObjectField(mBrightnessMirrorHandler, "brightnessMirrorListener"));
+        }
+    }
+
+    private static void registerCallbacks(Object mBrightnessController)
+    {
+        callMethod(getObjectField(mBrightnessController, "mBackgroundHandler"), "post", getObjectField(mBrightnessController, "mStartListeningRunnable"));
+    }
+
+    private static void setController(Object mirrorHandler, Object controller) {
+        Object mirrorController = getObjectField(mirrorHandler, "mirrorController");
+        if(mirrorController != null) {
+            callMethod(mirrorController, "removeCallback", getObjectField(mirrorHandler, "brightnessMirrorListener"));
+        }
+        setObjectField(mirrorHandler, "mirrorController", controller);
+        if(controller != null) {
+            Object listener = getObjectField(mirrorHandler, "brightnessMirrorListener"); //BrightnessMirrorController#Addcalback
+            if(listener != null)
+            {
+                @SuppressWarnings("rawtypes") ArraySet mBrightnessMirrorListeners = (ArraySet) getObjectField(controller, "mBrightnessMirrorListeners");
+                //noinspection unchecked
+                mBrightnessMirrorListeners.add(listener);
+            }
+            callMethod(getObjectField(mirrorHandler, "brightnessController"), "setMirror", controller);
+        }
+    }
+
+    private void addTunable(Object service, Object tunable, @SuppressWarnings("SameParameterValue") String key) {
+        ConcurrentHashMap<String, Set<Object>> mTunableLookup = (ConcurrentHashMap<String, Set<Object>>) getObjectField(service, "mTunableLookup");
+        if (!mTunableLookup.containsKey(key)) {
+            mTunableLookup.put(key, new ArraySet());
+        }
+        mTunableLookup.get(key).add(tunable);
+
+        Uri uri = Settings.Secure.getUriFor(key);
+
+        ArrayMap<Uri, String> mListeningUris = (ArrayMap<Uri, String>) getObjectField(service, "mListeningUris");
+        if (!mListeningUris.containsKey(uri)) {
+            mListeningUris.put(uri, key);
+            callMethod(getObjectField(service, "mContentResolver"), "registerContentObserver", uri, false, getObjectField(service, "mObserver"), getObjectField(service, "mCurrentUser"));
+        }
+        // Send the first state.
+        Runnable runnable = () -> callStaticMethod(Settings.Secure.class,
+                "getStringForUser", getObjectField(service, "mContentResolver"), key, getObjectField(service, "mCurrentUser"));
+        String value = (String) callStaticMethod(DejankUtilsClass, "whitelistIpcs", runnable);
+        callMethod(tunable, "onTuningChanged", key, value);
     }
 }

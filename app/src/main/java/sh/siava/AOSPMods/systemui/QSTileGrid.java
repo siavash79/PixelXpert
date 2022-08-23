@@ -6,6 +6,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.ResourceManager.resparams;
@@ -81,26 +82,26 @@ public class QSTileGrid extends XposedModPack {
             }
         });
 
+        Class<?> QRCodeScannerTileClass = findClassIfExists("com.android.systemui.qs.tiles.QRCodeScannerTile", lpparam.classLoader);
+
+        if(QRCodeScannerTileClass != null) {
+            hookAllMethods(QRCodeScannerTileClass, "handleUpdateState", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!QRTileInactiveColor) return;
+
+                    if (getObjectField(param.args[0], "state").equals(STATE_ACTIVE)) {
+                        setObjectField(param.args[0], "state", STATE_INACTIVE);
+                    }
+                }
+            });
+        }
+
         hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 try {
-                    Class<?> QRCodeScannerTileClass = findClass("com.android.systemui.qs.tiles.QRCodeScannerTile", lpparam.classLoader);
-
-                    hookAllMethods(QRCodeScannerTileClass, "handleUpdateState", new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            if(!QRTileInactiveColor) return;
-
-                            if(getObjectField(param.args[0], "state").equals(STATE_ACTIVE))
-                            {
-                                setObjectField(param.args[0], "state", STATE_INACTIVE);
-                            }
-                        }
-                    });
-
                     if (labelSize == null) { //we need initial font sizes
-
                         if(Build.VERSION.SDK_INT == 33) {
                             callStaticMethod(FontSizeUtilsClass,
                                     "updateFontSize",

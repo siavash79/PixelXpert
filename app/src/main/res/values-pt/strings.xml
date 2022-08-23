@@ -289,4 +289,9 @@
     <string name="qs_tile_label_size">Tamanho do texto</string>
     <string name="qs_tile_secondary_label_size">Tamanho do texto secundário</string>
     <string name="toggle_dark_apply">"(ative o tema escuro para aplicar)"</string>
+    <string name="qs_leveled_flashlight_summary">Requer hardware compatível</string>
+    <string name="qs_leveled_flashlight_title">Atalho da lanterna com controlo de brilho</string>
+    <string name="qs_footer_text_value">Inserir texto personalizado</string>
+    <string name="qs_flashlight_level_global_title">Aplicar nível da lanterna globalmente</string>
+    <string name="qs_qr_tile_inactive_title">Inverter cores do atalho QR</string>
 </resources>

@@ -1,3 +1,6 @@
+**canary-122**  
+- Fixed FC bug  
+  
 **canary-121**  
 - Added option to (un)dim lockscreen wallpaper  
 - Added option to modify notification icons on AOD  

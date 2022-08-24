@@ -636,8 +636,20 @@ public class SettingsActivity extends AppCompatActivity implements
                 int QQSTileQty = sharedPreferences.getInt("QQSTileQty", 4);
                 findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQty));
 
-                findPreference("QSLabelScaleFactor").setSummary((RangeSliderPreference.getValues(sharedPreferences, "QSLabelScaleFactor",0f).get(0)+100)+"% " + getString(R.string.toggle_dark_apply));
-                findPreference("QSSecondaryLabelScaleFactor").setSummary((RangeSliderPreference.getValues(sharedPreferences, "QSSecondaryLabelScaleFactor",0f).get(0)+100)+"% " + getString(R.string.toggle_dark_apply));
+                float QSLabelScaleFactor = 0;
+                try
+                {
+                    QSLabelScaleFactor = RangeSliderPreference.getValues(sharedPreferences, "QSLabelScaleFactor",0f).get(0);
+                }catch (Exception ignored){}
+                findPreference("QSLabelScaleFactor").setSummary((QSLabelScaleFactor+100)+"% " + getString(R.string.toggle_dark_apply));
+
+                float QSSecondaryLabelScaleFactor = 0;
+                try
+                {
+                    QSSecondaryLabelScaleFactor = RangeSliderPreference.getValues(sharedPreferences, "QSSecondaryLabelScaleFactor",0f).get(0);
+                }catch (Exception ignored){}
+
+                findPreference("QSSecondaryLabelScaleFactor").setSummary((QSSecondaryLabelScaleFactor+100)+"% " + getString(R.string.toggle_dark_apply));
 
                 try {
                     ((RangeSliderPreference)findPreference("QSLabelScaleFactor")).slider.setLabelFormatter(formatter);

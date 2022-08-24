@@ -370,7 +370,10 @@ public class SettingsActivity extends AppCompatActivity implements
             findPreference("albumArtLockScreenBlurLevel").setSummary(sharedPreferences.getInt("albumArtLockScreenBlurLevel",0) + "%");
             findPreference("albumArtLockScreenBlurLevel").setVisible(sharedPreferences.getBoolean("albumArtLockScreenEnabled",false));
 
-            float KeyGuardDimAmount = RangeSliderPreference.getValues(sharedPreferences, "KeyGuardDimAmount", -1).get(0);
+            float KeyGuardDimAmount = -1;
+            try {
+                KeyGuardDimAmount = RangeSliderPreference.getValues(sharedPreferences, "KeyGuardDimAmount", -1).get(0);
+            }catch (Exception ignored){}
             findPreference("KeyGuardDimAmount").setSummary(
                     KeyGuardDimAmount < 0
                             ? getString(R.string.word_default)

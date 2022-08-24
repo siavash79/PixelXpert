@@ -25,7 +25,9 @@ public class KeyguardDimmer extends XposedModPack {
     {
         if(Xprefs == null) return;
 
-        KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0)/100f;
+        try {
+            KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
+        }catch (Throwable ignored){}
     }
 
     @Override

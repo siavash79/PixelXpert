@@ -1,3 +1,7 @@
+**canary-121**  
+- Added option to (un)dim lockscreen wallpaper  
+- Added option to modify notification icons on AOD  
+  
 **canary-118**  
 - V2.0.0-RC2  
   

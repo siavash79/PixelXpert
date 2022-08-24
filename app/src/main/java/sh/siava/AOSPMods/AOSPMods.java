@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.systemui.KeyguardDimmer;
 import sh.siava.AOSPMods.systemui.QSThemeManager_12;
 import sh.siava.AOSPMods.utils.Helpers;
 import sh.siava.AOSPMods.utils.SystemUtils;
@@ -95,6 +96,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(ScreenRotation.class); //13 OK
         modPacks.add(CallVibrator.class); //13 OK
         modPacks.add(FlashLightLevel.class); //13 based
+        modPacks.add(KeyguardDimmer.class);
         //endregion
     }
     
@@ -104,7 +106,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
         if(lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && false) {
             log("------------");
-            Helpers.dumpClass("com.android.systemui.settings.brightness.BrightnessController", lpparam.classLoader);
+            Helpers.dumpClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
             log("------------");
         }
 

@@ -32,6 +32,7 @@
     <string name="carrier_text_mod_enabled">Custom carrier text</string>
     <string name="carrier_text_value">Custom carrier text</string>
     <string name="lockscreen_center_text_value">Clock area custom text</string>
+    <string name="keyguard_dim_amount_title">Keyguard wallpaper dim</string>
     <string name="keyguard_bottom_category">Bottom area shortcuts</string>
     <string name="keyguard_bottom_buttons_transparent_title">Remove circle around icons</string>
     <string name="keyguard_bottom_force_camera_title">Show camera shortcut</string>

@@ -369,6 +369,13 @@ public class SettingsActivity extends AppCompatActivity implements
             findPreference("carrierTextValue").setVisible(sharedPreferences.getBoolean("carrierTextMod", false));
             findPreference("albumArtLockScreenBlurLevel").setSummary(sharedPreferences.getInt("albumArtLockScreenBlurLevel",0) + "%");
             findPreference("albumArtLockScreenBlurLevel").setVisible(sharedPreferences.getBoolean("albumArtLockScreenEnabled",false));
+
+            float KeyGuardDimAmount = RangeSliderPreference.getValues(sharedPreferences, "KeyGuardDimAmount", -1).get(0);
+            findPreference("KeyGuardDimAmount").setSummary(
+                    KeyGuardDimAmount < 0
+                            ? getString(R.string.word_default)
+                            : KeyGuardDimAmount + "%");
+
         }
     }
 

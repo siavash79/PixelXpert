@@ -1,3 +1,6 @@
+**canary-123**  
+- Fixed brightness slider colors in light QS theme  
+  
 **canary-122**  
 - Fixed FC bug  
   

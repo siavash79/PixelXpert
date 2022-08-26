@@ -12,6 +12,7 @@
     <string name="netstat_caution_yes">Tiếp tục</string>
     <string name="netstat_caution_no">Để sau</string>
     <string name="keyguard_dim_amount_title">Độ mờ hình nền trên màn hình khoá</string>
+    <string name="gsans_override_title">Phông chữ Google Sans trên toàn hệ thống</string>
     <string name="album_art_blur_text">Giá trị làm mờ</string>
     <string name="album_art_category">Tùy chọn đa phương tiện</string>
     <string name="album_art_grayscale">Thang độ xám</string>

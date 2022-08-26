@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="qs_leveled_flashlight_title">Ô chỉnh mức đèn pin</string>
+    <string name="qs_flashlight_level_global_title">Áp dụng mức đèn pin mặc định</string>
+    <string name="qs_qr_tile_inactive_title">Đảo ngược màu ô quét QR</string>
+    <string name="qs_leveled_flashlight_summary">Yêu cầu phần cứng được hỗ trợ</string>
+    <string name="qs_tile_label_size">Kích thước văn bản tiêu đề ô cài đặt nhanh</string>
+    <string name="qs_tile_secondary_label_size">Kích thước văn bản ô cài đặt nhanh</string>
+    <string name="toggle_dark_apply">(Chuyển đổi chủ đề tối để áp dụng)</string>
+    <string name="nestat_caution_title">Cảnh báo!</string>
+    <string name="nestat_caution_text">Số liệu thống kê mạng của bạn sẽ được đặt lại. Tiếp tục?</string>
+    <string name="netstat_caution_yes">Tiếp tục</string>
+    <string name="netstat_caution_no">Để sau</string>
     <string name="album_art_blur_text">Giá trị làm mờ</string>
     <string name="album_art_category">Tùy chọn đa phương tiện</string>
     <string name="album_art_grayscale">Thang độ xám</string>

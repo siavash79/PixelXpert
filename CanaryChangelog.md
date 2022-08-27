@@ -1,3 +1,13 @@
+**canary-124**  
+- Fix SystemUI FCs on some icon packs  
+- Fix thick brightness slider color on light theme  
+  
+**canary-123**  
+- Fixed brightness slider colors in light QS theme  
+  
+**canary-122**  
+- Fixed FC bug  
+  
 **canary-121**  
 - Added option to (un)dim lockscreen wallpaper  
 - Added option to modify notification icons on AOD  

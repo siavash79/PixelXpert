@@ -333,4 +333,10 @@
     <string name="own_prefs_header">AOSPMods-Einstellungen</string>
     <string name="language_title">Sprache auswählen</string>
 	<string name="toggle_dark_apply">(Zum dunklen Design wechseln)</string>
+    <string name="keyguard_dim_amount_title">Dim Level des Lockscreen-Hintergrunds</string>
+    <string name="qs_footer_text_value">Benutzerdefinierten Text</string>
+    <string name="qs_leveled_flashlight_title">Geebnetes Taschenlampenplättchen</string>
+    <string name="qs_flashlight_level_global_title">Wenden die Taschenlampenstufe global an</string>
+    <string name="qs_qr_tile_inactive_title">QR-Scan-Kachelfarbe umkehren</string>
+    <string name="qs_leveled_flashlight_summary">Erfordert unterstützte Hardware</string>
 </resources>

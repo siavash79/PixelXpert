@@ -1,3 +1,8 @@
+**canary-125**  
+- A13-Added flashlight brightness control graphics  
+- Battery style compatibility with PE+  
+- Fixed more FC bugs  
+  
 **canary-124**  
 - Fix SystemUI FCs on some icon packs  
 - Fix thick brightness slider color on light theme  

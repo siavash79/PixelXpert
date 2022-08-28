@@ -331,4 +331,11 @@
     <string name="toggle_dark_apply">(Переключиться на темную тему)</string>
     <string name="full_type">Целaя упаковка</string>
     <string name="xposed_type">Только Xposed</string>
+    <string name="keyguard_dim_amount_title">Уровень затемнения обоев экрана блокировки</string>
+    <string name="qs_footer_text_value">Личный текст</string>
+    <string name="update_type_title">Тип приложения</string>
+    <string name="qs_leveled_flashlight_title">Плитка «Постепенный фонарик»</string>
+    <string name="qs_flashlight_level_global_title">Применить уровень фонарика глобально</string>
+    <string name="qs_qr_tile_inactive_title">Инвертировать цвет плитки QR-скана</string>
+    <string name="qs_leveled_flashlight_summary">Требуется поддерживаемое оборудование</string>
 </resources>

@@ -331,4 +331,10 @@
     <string name="own_prefs_header">AOSPMods ayarları</string>
     <string name="language_title">Dil seçimi</string>
     <string name="toggle_dark_apply">(Koyu temaya geç)</string>
+    <string name="keyguard_dim_amount_title">Kilit ekranı duvar kağıdının loş seviyesi</string>
+    <string name="qs_footer_text_value">Özel metin girin</string>
+    <string name="qs_leveled_flashlight_title">"Kademeli El Feneri "</string>
+    <string name="qs_flashlight_level_global_title">El feneri seviyesini global olarak uygula</string>
+    <string name="qs_qr_tile_inactive_title">QR-Tarama döşeme rengini ters çevir</string>
+    <string name="qs_leveled_flashlight_summary">Desteklenen donanım gerektirir</string>
 </resources>

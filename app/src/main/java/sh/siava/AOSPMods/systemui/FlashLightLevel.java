@@ -1,24 +1,32 @@
 package sh.siava.AOSPMods.systemui;
 
+import static android.service.quicksettings.Tile.STATE_ACTIVE;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
-import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
-import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -30,14 +38,19 @@ import sh.siava.AOSPMods.utils.SystemUtils;
 public class FlashLightLevel extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
     private static boolean leveledFlashTile = false;
+    private float currentPct = .5f;
+    private static boolean lightQSHeaderEnabled = false;
+    Drawable flashPercentageDrawable = new flashPercentageShape();
 
     public FlashLightLevel(Context context) {
         super(context);
+        flashPercentageDrawable.setAlpha(64);
     }
 
     @Override
     public void updatePrefs(String... Key) {
         leveledFlashTile = Xprefs.getBoolean("leveledFlashTile", false);
+        lightQSHeaderEnabled = Xprefs.getBoolean("LightQSPanel", false);
     }
 
     @Override
@@ -47,25 +60,20 @@ public class FlashLightLevel extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage) || Build.VERSION.SDK_INT < 33) return; //Only SDK 33 and above
 
+
         Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
 
         hookAllMethods(QSTileViewImplClass, "handleStateChanged", new XC_MethodHook() {
             @SuppressLint("DiscouragedApi")
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                if(!SystemUtils.supportsFlashLevels() || !leveledFlashTile)
-                {
- //                 cleanUp(param.thisObject);
-                    return;
-                }
-
-                //View levelLayout = getLevelLayout(param.thisObject);
+                if(!SystemUtils.supportsFlashLevels() || !leveledFlashTile) return;
 
                 Object state = param.args[0];
                 if(getObjectField(state, "spec").equals("flashlight"))
                 {
                     Resources res = mContext.getResources();
-                    final float[] currentPct = {Xprefs.getFloat("flashPCT", 0.5f)};
+                    currentPct = Xprefs.getFloat("flashPCT", 0.5f);
 
                     setObjectField(state, "label",
                             String.format("%s - %s%%",
@@ -73,7 +81,7 @@ public class FlashLightLevel extends XposedModPack {
                                             res.getIdentifier(
                                                     "quick_settings_flashlight_label",
                                                     "string", mContext.getPackageName())),
-                                    Math.round(currentPct[0] *100f)
+                                    Math.round(currentPct *100f)
                             )
                     );
                     View thisView = (View) param.thisObject;
@@ -103,8 +111,8 @@ public class FlashLightLevel extends XposedModPack {
                                     {
                                         view.getParent().requestDisallowInterceptTouchEvent(true);
                                         moved = true;
-                                        currentPct[0] = Math.max(0.01f, Math.min(newPct, 1));
-                                        handleFlashLightClick(false, currentPct[0]);
+                                        currentPct = Math.max(0.01f, Math.min(newPct, 1));
+                                        handleFlashLightClick(false, currentPct);
                                         TextView label = (TextView) getObjectField(thisView, "label");
                                         label.setText(
                                                 String.format("%s - %s%%",
@@ -112,7 +120,7 @@ public class FlashLightLevel extends XposedModPack {
                                                                 res.getIdentifier(
                                                                         "quick_settings_flashlight_label",
                                                                         "string", mContext.getPackageName())),
-                                                        Math.round(currentPct[0] *100f)
+                                                        Math.round(currentPct *100f)
                                                 )
                                         );
                                     }
@@ -121,11 +129,11 @@ public class FlashLightLevel extends XposedModPack {
                                 case MotionEvent.ACTION_UP:{
                                     if (moved) {
                                         moved = false;
-                                        Xprefs.edit().putFloat("flashPCT", currentPct[0]).apply();
+                                        Xprefs.edit().putFloat("flashPCT", currentPct).apply();
                                     }
                                     else
                                     {
-                                        handleFlashLightClick(true, currentPct[0]);
+                                        handleFlashLightClick(true, currentPct);
                                     }
                                     return true;
                                 }
@@ -135,39 +143,27 @@ public class FlashLightLevel extends XposedModPack {
                     });
                 }
             }
+
+            @Override
+            protected void afterHookedMethod(MethodHookParam param)
+            {
+                if(!leveledFlashTile || !SystemUtils.supportsFlashLevels()) return;
+
+                Object state = param.args[0];
+                if(getObjectField(state, "spec").equals("flashlight"))
+                {
+                    LinearLayout tileView = (LinearLayout) param.thisObject;
+
+                    flashPercentageDrawable.setTint(
+                            (SystemUtils.isDarkMode() || !lightQSHeaderEnabled) && !getObjectField(state, "state").equals(STATE_ACTIVE)
+                                ? Color.WHITE
+                                : Color.BLACK);
+
+                    LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), flashPercentageDrawable});
+                    tileView.setBackground(layerDrawable);
+                }
+            }
         });
-
-    }
-
-    private View getLevelLayout(Object thisObject) {
-        LinearLayout levelLayout = (LinearLayout) getAdditionalInstanceField(thisObject, "levelLayout");
-        if(levelLayout == null)
-        {
-            levelLayout = new LinearLayout(mContext);
-            levelLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            LinearLayout l1 = new LinearLayout(mContext);
-            l1.setLayoutParams(new LinearLayout.LayoutParams(-1,-1,1));
-            l1.setAlpha(.5f);
-            l1.setBackgroundColor(Color.RED);
-            levelLayout.addView(l1);
-
-            LinearLayout l2 = new LinearLayout(mContext);
-            l2.setLayoutParams(new LinearLayout.LayoutParams(-1,-1,1));
-            l2.setAlpha(0);
-            levelLayout.addView(l2);
-
-            setAdditionalInstanceField(thisObject, "levelLayout", levelLayout);
-            callMethod(thisObject, "addView", levelLayout);
-        }
-        return levelLayout;
-    }
-
-    private void cleanUp(Object thisObject) {
-        View levelLayout = (View) getAdditionalInstanceField(thisObject, "levelLayout");
-        if(levelLayout != null) {
-            ((ViewGroup) levelLayout.getParent()).removeView(levelLayout);
-            setAdditionalInstanceField(thisObject, "levelLayout", null);
-        }
     }
 
     private void handleFlashLightClick(boolean toggle, float pct) {
@@ -187,6 +183,59 @@ public class FlashLightLevel extends XposedModPack {
         else
         {
             SystemUtils.setFlash(false);
+        }
+    }
+
+    private class flashPercentageShape extends Drawable
+    {
+        final Drawable shape;
+
+        @SuppressLint("UseCompatLoadingForDrawables")
+        private flashPercentageShape()
+        {
+            shape = mContext.getDrawable(mContext.getResources().getIdentifier("qs_tile_background_shape", "drawable", mContext.getPackageName()));
+        }
+
+        @Override
+        public void setBounds(Rect bounds)
+        {
+            shape.setBounds(bounds);
+        }
+
+        @Override
+        public void setBounds(int a, int b, int c, int d)
+        {
+            shape.setBounds(a,b,c,d);
+        }
+
+        @Override
+        public void draw(@NonNull Canvas canvas) {
+            Bitmap bitmap = Bitmap.createBitmap(Math.round(shape.getBounds().width() * currentPct), shape.getBounds().height(), Bitmap.Config.ARGB_8888);
+            Canvas tempCanvas = new Canvas(bitmap);
+            shape.draw(tempCanvas);
+
+            canvas.drawBitmap(bitmap, 0, 0, new Paint());
+        }
+
+        @Override
+        public void setAlpha(int i) {
+            shape.setAlpha(i);
+        }
+
+        @Override
+        public void setColorFilter(@Nullable ColorFilter colorFilter) {
+            shape.setColorFilter(colorFilter);
+        }
+
+        @Override
+        public int getOpacity() {
+            return PixelFormat.UNKNOWN;
+        }
+
+        @Override
+        public void setTint(int t)
+        {
+            shape.setTint(t);
         }
     }
 }

@@ -56,7 +56,11 @@
         <item>vi</item>
     </string-array>
 
-
+    <string-array name="three_button_nav_buttons">
+        <item>back</item>
+        <item>home</item>
+        <item>recent</item>
+    </string-array>
 
     <string-array name="battery_style_names">
         <item>@string/word_default</item>

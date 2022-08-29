@@ -310,7 +310,6 @@ public class SettingsActivity extends AppCompatActivity implements
 
         private void updateVisibility() {
             findPreference("HideNavbarOverlay").setVisible(showOverlays);
-            findPreference("threebutton_header").setVisible(Build.VERSION.SDK_INT < 33);
         }
 
     }
@@ -561,7 +560,26 @@ public class SettingsActivity extends AppCompatActivity implements
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.three_button_prefs, rootKey);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+            updateVisibility(prefs);
+
         }
+
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
+
+        private void updateVisibility(SharedPreferences prefs) {
+            try {
+                boolean ThreeButtonLayoutMod = prefs.getBoolean("ThreeButtonLayoutMod", false);
+                findPreference("ThreeButtonLeft").setVisible(ThreeButtonLayoutMod);
+                findPreference("ThreeButtonCenter").setVisible(ThreeButtonLayoutMod);
+                findPreference("ThreeButtonRight").setVisible(ThreeButtonLayoutMod);
+
+                findPreference("BackLongPressKill").setVisible(Build.VERSION.SDK_INT < 33);
+            }
+            catch (Exception ignored){}
+        }
+
     }
 
     @SuppressWarnings("ConstantConditions")

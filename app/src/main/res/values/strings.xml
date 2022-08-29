@@ -202,6 +202,10 @@
     <string name="gesture_nav_pill_height_title">Height compared to standard size</string>
     <string name="threebutton_header_title">3-Button navigation</string>
     <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
+    <string name="modify_3button_title">Modify the buttons order</string>
+    <string name="three_button_left_title">Left button</string>
+    <string name="three_button_center_title">Center button</string>
+    <string name="three_button_right_title">Right button</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Hide navigation bar</string>
     <string name="colorpill_title">Colorize gesture pill</string>

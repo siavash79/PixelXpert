@@ -6,4 +6,41 @@
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
         android:title="@string/back_longpress_kill_title" />
+
+    <PreferenceCategory
+        android:title="@string/modify_3button_title"
+        android:summary="@string/sysui_restart_needed">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="ThreeButtonLayoutMod"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/modify_3button_title" />
+
+        <ListPreference
+            android:defaultValue="back"
+            android:entries="@array/three_button_nav_buttons"
+            android:entryValues="@array/three_button_nav_buttons"
+            android:summary="%s"
+            android:key="ThreeButtonLeft"
+            android:title="@string/three_button_left_title" />
+
+        <ListPreference
+            android:defaultValue="home"
+            android:entries="@array/three_button_nav_buttons"
+            android:entryValues="@array/three_button_nav_buttons"
+            android:summary="%s"
+            android:key="ThreeButtonCenter"
+            android:title="@string/three_button_center_title" />
+
+        <ListPreference
+            android:defaultValue="recent"
+            android:entries="@array/three_button_nav_buttons"
+            android:entryValues="@array/three_button_nav_buttons"
+            android:summary="%s"
+            android:key="ThreeButtonRight"
+            android:title="@string/three_button_right_title" />
+
+    </PreferenceCategory>
 </PreferenceScreen>

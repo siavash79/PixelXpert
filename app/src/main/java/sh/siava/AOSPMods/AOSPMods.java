@@ -21,7 +21,7 @@ import sh.siava.AOSPMods.android.ScreenOffKeys;
 import sh.siava.AOSPMods.android.ScreenRotation;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
-import sh.siava.AOSPMods.systemui.BackToKill;
+import sh.siava.AOSPMods.systemui.ThreeButtonNavMods;
 import sh.siava.AOSPMods.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.systemui.BrightnessSlider;
 import sh.siava.AOSPMods.systemui.FeatureFlagsMods;
@@ -68,7 +68,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(QSTileGrid.class); //
         modPacks.add(BrightnessSlider.class); //13 OK
         modPacks.add(FeatureFlagsMods.class); //13 OK
-        modPacks.add(BackToKill.class); //13 not planned//13 OK
+        modPacks.add(ThreeButtonNavMods.class); //13 not planned//13 OK
         modPacks.add(QSHaptic.class); //13 OK
         modPacks.add(LockscreenAlbumArt.class); //13 not planned
         modPacks.add(QSThemeManager.class); //A13 LightQSTheme

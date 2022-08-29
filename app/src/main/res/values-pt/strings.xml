@@ -295,4 +295,8 @@
     <string name="qs_flashlight_level_global_title">Aplicar nível da lanterna globalmente</string>
     <string name="qs_qr_tile_inactive_title">Inverter cores do atalho QR</string>
     <string name="keyguard_dim_amount_title">Escurecer imagem de fundo no ecrã de bloqueio</string>
+    <string name="modify_3button_title">Alterar ordem dos botões</string>
+    <string name="three_button_left_title">Botão da esquerda</string>
+    <string name="three_button_center_title">Botão central</string>
+    <string name="three_button_right_title">Botão da direita</string>
 </resources>

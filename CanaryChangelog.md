@@ -1,3 +1,6 @@
+**canary-126**  
+- Added option to modify 3-button navigation order  
+  
 **canary-125**  
 - A13-Added flashlight brightness control graphics  
 - Battery style compatibility with PE+  

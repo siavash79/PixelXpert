@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="lockScreenShortcut_values">
+        <item></item>
+        <item>Máy ảnh</item>
+        <item>Trợ lý</item>
+        <item>Đèn pin</item>
+    </string-array>
+    <string-array name="three_button_nav_buttons">
+        <item>Trở về</item>
+        <item>Màn hình chính</item>
+        <item>Đa nhiệm</item>
+    </string-array>
+</resources>

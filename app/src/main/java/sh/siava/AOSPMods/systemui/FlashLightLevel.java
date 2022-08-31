@@ -40,11 +40,10 @@ public class FlashLightLevel extends XposedModPack {
     private static boolean leveledFlashTile = false;
     private float currentPct = .5f;
     private static boolean lightQSHeaderEnabled = false;
-    Drawable flashPercentageDrawable = new flashPercentageShape();
+    Drawable flashPercentageDrawable = null;
 
     public FlashLightLevel(Context context) {
         super(context);
-        flashPercentageDrawable.setAlpha(64);
     }
 
     @Override
@@ -60,6 +59,8 @@ public class FlashLightLevel extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if(!lpparam.packageName.equals(listenPackage) || Build.VERSION.SDK_INT < 33) return; //Only SDK 33 and above
 
+        flashPercentageDrawable = new flashPercentageShape();
+        flashPercentageDrawable.setAlpha(64);
 
         Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
 

@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -61,8 +60,6 @@ public class ThreeButtonNavMods extends XposedModPack {
                         .replace("XCenterX", ThreeButtonCenter)
                         .replace("XLeftX", ThreeButtonLeft)
                         .replace("XRightX", ThreeButtonRight);
-                log("layout 2 " + param.args[0]);
-
             }
         });
 

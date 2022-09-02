@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="modify_3button_title">Đổi thứ tự phím điều hướng</string>
+    <string name="three_button_left_title">Phím bên trái</string>
+    <string name="three_button_center_title">Phím trung tâm</string>
+    <string name="three_button_right_title">Phím bên phải</string>
     <string name="switch_branches">Đổi kênh cập nhật</string>
     <string name="qs_leveled_flashlight_title">Ô chỉnh mức đèn pin</string>
     <string name="qs_flashlight_level_global_title">Áp dụng mức đèn pin mặc định</string>

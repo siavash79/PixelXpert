@@ -227,7 +227,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
     @SuppressLint("ApplySharedPref")
     private void clearNetstatClick() {
-        //showinng an alert before taking action
+        //showing an alert before taking action
         new AlertDialog.Builder(this).setTitle(R.string.nestat_caution_title)
                 .setMessage(R.string.nestat_caution_text)
                 .setPositiveButton(R.string.netstat_caution_yes, (dialogInterface, i) -> {
@@ -282,6 +282,7 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static class HeaderFragment extends PreferenceFragmentCompat {
 
         @Override
@@ -298,6 +299,7 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static class NavFragment extends PreferenceFragmentCompat {
 
         @Override
@@ -506,6 +508,7 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
 
+    @SuppressWarnings("ConstantConditions")
     public static class MiscFragment extends PreferenceFragmentCompat {
         SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
 
@@ -554,6 +557,7 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static class ThreeButtonNavFragment extends PreferenceFragmentCompat {
 
         @Override
@@ -614,7 +618,7 @@ public class SettingsActivity extends AppCompatActivity implements
     }
 
     @SuppressWarnings("ConstantConditions")
-    public static class QuicksettingsFragment extends PreferenceFragmentCompat {
+    public static class QuickSettingsFragment extends PreferenceFragmentCompat {
         LabelFormatter formatter = value -> (value+100) + "%";
 
         SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibililty(sharedPreferences);
@@ -727,7 +731,8 @@ public class SettingsActivity extends AppCompatActivity implements
     @SuppressWarnings("ConstantConditions")
     public static class GestureNavFragment extends PreferenceFragmentCompat {
 
-        FrameLayout leftGestureIndicator, rightGestureIndicator;
+        FrameLayout leftBackGestureIndicator, rightBackGestureIndicator;
+        FrameLayout leftSwipeGestureIndicator, rightSwipeGestureIndicator;
 
         SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
 
@@ -736,6 +741,7 @@ public class SettingsActivity extends AppCompatActivity implements
                 boolean HideNavbarOverlay = sharedPreferences.getBoolean("HideNavbarOverlay", false);
 
                 int displayHeight =  getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().height();
+                int displayWidth =  getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
 
                 findPreference("GesPillWidthModPos").setSummary(sharedPreferences.getInt("GesPillWidthModPos", 50) * 2 + getString(R.string.pill_width_summary));
                 findPreference("GesPillHeightFactor").setSummary(sharedPreferences.getInt("GesPillHeightFactor", 100) + getString(R.string.pill_width_summary));
@@ -745,21 +751,55 @@ public class SettingsActivity extends AppCompatActivity implements
                 findPreference("BackLeftHeight").setSummary(sharedPreferences.getInt("BackLeftHeight", 100) + "%");
                 findPreference("BackRightHeight").setSummary(sharedPreferences.getInt("BackRightHeight", 100) + "%");
 
+                findPreference("leftSwipeUpPercentage").setVisible(!sharedPreferences.getString("leftSwipeUpAction", "-1").equals("-1"));
+                findPreference("rightSwipeUpPercentage").setVisible(!sharedPreferences.getString("rightSwipeUpAction", "-1").equals("-1"));
+
+                float leftSwipeUpPercentage = 25f;
+                try {
+                    leftSwipeUpPercentage = RangeSliderPreference.getValues(sharedPreferences, "leftSwipeUpPercentage", 25).get(0);
+                }catch (Exception ignored){}
+                findPreference("leftSwipeUpPercentage").setSummary(leftSwipeUpPercentage + "%");
+
+                float rightSwipeUpPercentage = 25f;
+                try {
+                    rightSwipeUpPercentage = RangeSliderPreference.getValues(sharedPreferences, "rightSwipeUpPercentage", 25).get(0);
+                }catch (Exception ignored){}
+                findPreference("rightSwipeUpPercentage").setSummary(rightSwipeUpPercentage + "%");
+
+                float swipeUpPercentage = 20f;
+                try {
+                    swipeUpPercentage = RangeSliderPreference.getValues(sharedPreferences, "swipeUpPercentage", 20).get(0);
+                }catch (Exception ignored){}
+                findPreference("swipeUpPercentage").setSummary(swipeUpPercentage + "%");
+
+                int edgeWidth = Math.round(displayWidth * leftSwipeUpPercentage/100f);
+                ViewGroup.LayoutParams lp = leftSwipeGestureIndicator.getLayoutParams();
+                lp.width = edgeWidth;
+                leftSwipeGestureIndicator.setLayoutParams(lp);
+
+                edgeWidth = Math.round(displayWidth * rightSwipeUpPercentage/100f);
+                lp = rightSwipeGestureIndicator.getLayoutParams();
+                lp.width = edgeWidth;
+                rightSwipeGestureIndicator.setLayoutParams(lp);
+
+                setVisibility(rightSwipeGestureIndicator, findPreference("rightSwipeUpPercentage").isVisible(), 400);
+                setVisibility(leftSwipeGestureIndicator, findPreference("leftSwipeUpPercentage").isVisible(), 400);
+
                 findPreference("nav_pill_cat").setVisible(!HideNavbarOverlay);
                 findPreference("nav_keyboard_height_cat").setVisible(!HideNavbarOverlay);
 
-                setVisibility(rightGestureIndicator, findPreference("BackRightHeight").isVisible(), 400);
-                setVisibility(leftGestureIndicator, findPreference("BackLeftHeight").isVisible(), 400);
+                setVisibility(rightBackGestureIndicator, findPreference("BackRightHeight").isVisible(), 400);
+                setVisibility(leftBackGestureIndicator, findPreference("BackLeftHeight").isVisible(), 400);
 
                 int edgeHeight = Math.round(displayHeight * sharedPreferences.getInt("BackRightHeight",100)/100f);
-                ViewGroup.LayoutParams lp = rightGestureIndicator.getLayoutParams();
+                lp = rightBackGestureIndicator.getLayoutParams();
                 lp.height = edgeHeight;
-                rightGestureIndicator.setLayoutParams(lp);
+                rightBackGestureIndicator.setLayoutParams(lp);
 
                 edgeHeight = Math.round(displayHeight * sharedPreferences.getInt("BackLeftHeight",100)/100f);
-                lp = leftGestureIndicator.getLayoutParams();
+                lp = leftBackGestureIndicator.getLayoutParams();
                 lp.height = edgeHeight;
-                leftGestureIndicator.setLayoutParams(lp);
+                leftBackGestureIndicator.setLayoutParams(lp);
 
                 findPreference("nav_keyboard_height_cat").setVisible(showOverlays);
             } catch (Exception ignored) {}
@@ -768,8 +808,11 @@ public class SettingsActivity extends AppCompatActivity implements
         @SuppressLint("RtlHardcoded")
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            rightGestureIndicator = prepareGestureView(Gravity.RIGHT);
-            leftGestureIndicator = prepareGestureView(Gravity.LEFT);
+            rightBackGestureIndicator = prepareBackGestureView(Gravity.RIGHT);
+            leftBackGestureIndicator = prepareBackGestureView(Gravity.LEFT);
+
+            rightSwipeGestureIndicator = prepareSwipeGestureView(Gravity.RIGHT);
+            leftSwipeGestureIndicator = prepareSwipeGestureView(Gravity.LEFT);
 
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.gesture_nav_prefs, rootKey);
@@ -779,7 +822,27 @@ public class SettingsActivity extends AppCompatActivity implements
             prefs.registerOnSharedPreferenceChangeListener(listener);
         }
 
-        private FrameLayout prepareGestureView(int gravity) {
+        private FrameLayout prepareSwipeGestureView(int gravity) {
+            int navigationBarHeight = 0;
+            int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                navigationBarHeight = getContext().getResources().getDimensionPixelSize(resourceId);
+            }
+
+            FrameLayout result = new FrameLayout(getContext());
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(0, navigationBarHeight);
+            lp.gravity = gravity | Gravity.BOTTOM;
+            lp.bottomMargin = 0;
+            result.setLayoutParams(lp);
+
+            result.setBackgroundColor(getContext().getColor(android.R.color.system_accent1_300));
+            result.setAlpha(.7f);
+            ((ViewGroup)getActivity().getWindow().getDecorView().getRootView()).addView(result);
+            result.setVisibility(View.GONE);
+            return result;
+        }
+
+        private FrameLayout prepareBackGestureView(int gravity) {
             int navigationBarHeight = 0;
             int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
             if (resourceId > 0) {
@@ -831,12 +894,14 @@ public class SettingsActivity extends AppCompatActivity implements
         @Override
         public void onDestroy()
         {
-            ((ViewGroup) rightGestureIndicator.getParent()).removeView(rightGestureIndicator);
-            ((ViewGroup) leftGestureIndicator.getParent()).removeView(leftGestureIndicator);
+            ((ViewGroup) rightBackGestureIndicator.getParent()).removeView(rightBackGestureIndicator);
+            ((ViewGroup) leftBackGestureIndicator.getParent()).removeView(leftBackGestureIndicator);
+
+            ((ViewGroup) rightSwipeGestureIndicator.getParent()).removeView(rightSwipeGestureIndicator);
+            ((ViewGroup) leftSwipeGestureIndicator.getParent()).removeView(leftSwipeGestureIndicator);
 
             super.onDestroy();
         }
-
     }
 
     @SuppressWarnings("ConstantConditions")

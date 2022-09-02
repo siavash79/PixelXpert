@@ -1,3 +1,6 @@
+**canary-127**  
+- Added extra gestures on navigationbar  
+  
 **canary-126**  
 - Added option to modify 3-button navigation order  
   

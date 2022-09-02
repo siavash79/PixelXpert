@@ -1,7 +1,4 @@
 **canary-127**  
-- canary-127: Rebuild  
-  
-**canary-127**  
 - Added extra gestures on navigationbar  
   
 **canary-126**  

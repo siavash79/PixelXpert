@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="gesture_nav_extra_cat">Cử chỉ bổ sung cho thanh điều hướng</string>
+    <string name="gesture_nav_long_swipe_fc_title">Vuốt lên trên để tắt ứng dụng nền</string>
+    <string name="gesture_nav_left_swipe_up_title">Vuốt lên từ bên trái thanh điều hướng</string>
+    <string name="gesture_nav_right_swipe_up_title">Vuốt lên từ bên phải thanh điều hướng</string>
+    <string name="gesture_nav_left_swipe_up_perecent">Chiều rộng vùng vuốt lên bên trái (%)</string>
+    <string name="gesture_nav_right_swipe_up_perecent">Chiều rộng vùng vuốt lên bên phải (%)</string>
+    <string name="gesture_nav_two_finger_title">Vuốt lên bằng hai ngón tay</string>
+    <string name="gesture_nav_swipe_up_height">Chiều cao vuốt lên tối thiểu</string>
+    <string name="none">Trống</string>
+    <string name="screenshot">Chụp màn hình</string>
+    <string name="back">Quay lại</string>
+    <string name="kill_forground_app">Tắt ứng dụng nền</string>
+    <string name="toggle_notification">Mở bảng thông báo</string>
+    <string name="toggle_one_handed">Mở chế độ một tay</string>
     <string name="modify_3button_title">Đổi thứ tự phím điều hướng</string>
     <string name="three_button_left_title">Phím bên trái</string>
     <string name="three_button_center_title">Phím trung tâm</string>

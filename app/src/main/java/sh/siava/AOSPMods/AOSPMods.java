@@ -62,6 +62,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
     public Context mContext = null;
 
     public static final String ACTION_SCREENSHOT = "sh.siava.AOSPMods.ACTION_SCREENSHOT";
+    public static final String ACTION_BACK = "sh.siava.AOSPMods.ACTION_BACK";
 
     public AOSPMods()
     {

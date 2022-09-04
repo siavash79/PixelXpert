@@ -33,8 +33,13 @@ public class FrameworkBroadcastReceiver extends XposedModPack {
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
-                if(intent.getAction().equals(AOSPMods.ACTION_SCREENSHOT)) {
+                String action = intent.getAction();
+                if(action.equals(AOSPMods.ACTION_SCREENSHOT)) {
                     callMethod(windowMan, "handleScreenShot", 1, 1);
+                }
+                else if (action.equals(AOSPMods.ACTION_BACK))
+                {
+                    callMethod(windowMan, "backKeyPress");
                 }
             }catch (Throwable ignored){}
         }
@@ -49,6 +54,7 @@ public class FrameworkBroadcastReceiver extends XposedModPack {
         if(!broadcastRegistered) {
             broadcastRegistered = true;
             intentFilter.addAction(AOSPMods.ACTION_SCREENSHOT);
+            intentFilter.addAction(AOSPMods.ACTION_BACK);
             mContext.registerReceiver(broadcastReceiver, intentFilter);
         }
 

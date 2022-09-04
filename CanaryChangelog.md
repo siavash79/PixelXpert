@@ -1,3 +1,6 @@
+**canary-128**  
+- fixed app UI & swipe gesture bugs  
+  
 **canary-127**  
 - Added extra gestures on navigationbar  
   

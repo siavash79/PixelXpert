@@ -1,3 +1,6 @@
+**canary-129**  
+- 128 rebuild  
+  
 **canary-128**  
 - fixed app UI & swipe gesture bugs  
   

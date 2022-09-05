@@ -1,3 +1,6 @@
+**canary-130**  
+- New gesture action: introducing INSECURE screenshot (screenshots security-enabled content)  
+  
 **canary-129**  
 - 128 rebuild  
   

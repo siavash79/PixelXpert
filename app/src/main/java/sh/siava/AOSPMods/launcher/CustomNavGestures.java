@@ -2,7 +2,6 @@ package sh.siava.AOSPMods.launcher;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
@@ -36,6 +35,7 @@ public class CustomNavGestures extends XposedModPack {
 	private static final int ACTION_KILL_APP = 3;
 	private static final int ACTION_NOTIFICATION = 4;
 	private static final int ACTION_ONE_HANDED = 5;
+	private static final int ACTION_INSECURE_SCREENSHOT = 6;
 
 	private boolean twoFingerActive = false;
 	private boolean FCHandled = false;
@@ -43,6 +43,7 @@ public class CustomNavGestures extends XposedModPack {
 	private int displayW = -1 , displayH = -1;
 	private static float swipeUpPercentage = 0.2f;
 
+	@SuppressWarnings("FieldCanBeLocal")
 	private boolean isLandscape = false;
 	private float mSwipeUpThreshold = 0;
 	private float mLongThreshold = 0;
@@ -50,7 +51,6 @@ public class CustomNavGestures extends XposedModPack {
 	private boolean isLeftSwipe = false, isRightSwipe = false;
 	private Object mSystemUIProxy = null;
 	private static int leftSwipeUpAction = NO_ACTION, rightSwipeUpAction = NO_ACTION, twoFingerSwipeUpAction = NO_ACTION;
-	private boolean isOverViewListener = false;
 
 	public CustomNavGestures(Context context) { super(context); }
 	
@@ -110,101 +110,112 @@ public class CustomNavGestures extends XposedModPack {
 			}
 		});
 
-		XC_MethodHook navGestureHook = new XC_MethodHook() {
+		hookAllMethods(OtherActivityInputConsumerClass, "onMotionEvent", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				MotionEvent e = (MotionEvent) param.args[0];
+				onMotionEvent(param, false);
+			}
+		});
 
-				isOverViewListener = param.thisObject.getClass().getName().endsWith("OverviewInputConsumer");
+		hookAllMethods(OverviewInputConsumerClass, "onMotionEvent", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				onMotionEvent(param, true);
+			}
+		});
+	}
 
-				boolean mPassedWindowMoveSlop = isOverViewListener //if it's overview page (read: home page) we don't need this. true is good
-						|| getBooleanField(param.thisObject, "mPassedWindowMoveSlop"); //checking if they've swiped long enough to cancel touch for app
+	private void onMotionEvent(XC_MethodHook.MethodHookParam param, boolean isOverViewListener)
+	{
+		MotionEvent e = (MotionEvent) param.args[0];
 
-				int action = e.getActionMasked();
-				int pointers = e.getPointerCount();
+		boolean mPassedWindowMoveSlop = isOverViewListener //if it's overview page (read: home page) we don't need this. true is good
+				|| getBooleanField(param.thisObject, "mPassedWindowMoveSlop"); //checking if they've swiped long enough to cancel touch for app
 
-				if(action == MotionEvent.ACTION_DOWN ) //Let's get ready
-				{
-/*					isLeftSwipe = false;
-					isRightSwipe = false;
-					twoFingerActive = false;*/
+		int action = e.getActionMasked();
+		int pointers = e.getPointerCount();
 
-					if(isOverViewListener && getBooleanField(param.thisObject, "mStartingInActivityBounds"))
-					{
-						return;
-					}
+		if(action == MotionEvent.ACTION_DOWN ) //Let's get ready
+		{
+			FCHandled = false;
+			isLeftSwipe = false;
+			isRightSwipe = false;
+			twoFingerActive = false;
 
-					mSwipeUpThreshold = e.getY() * (1f - swipeUpPercentage);
-					mLongThreshold = e.getY() / 10f;
+			if(isOverViewListener
+					&& getBooleanField(param.thisObject, "mStartingInActivityBounds"))
+			{
+				return;
+			}
 
-					isLandscape = e.getY() < displayW; //launcher rotation can be always 0. So....
-					int currentW = isLandscape ? displayH : displayW;
+			mSwipeUpThreshold = e.getY() * (1f - swipeUpPercentage);
+			mLongThreshold = e.getY() / 10f;
 
-					if (pointers == 1) {
-						if (leftSwipeUpAction != NO_ACTION && e.getX() < currentW * leftSwipeUpPercentage) {
-							isLeftSwipe = true;
-						} else if (rightSwipeUpAction != NO_ACTION && e.getX() > currentW * (1f - rightSwipeUpPercentage)) {
-							isRightSwipe = true;
-						}
-					}
-				}
+			isLandscape = e.getY() < displayW; //launcher rotation can be always 0. So....
+			int currentW = isLandscape ? displayH : displayW;
 
-				if (twoFingerSwipeUpAction != NO_ACTION && pointers == 2 && !twoFingerActive) { //must be outside down. usually down is one finger
-					twoFingerActive = true;
-					isLeftSwipe = isRightSwipe = false;
-				}
-
-				if (mPassedWindowMoveSlop && (isLeftSwipe || isRightSwipe || twoFingerActive)) { //shouldn't reach the main code anymore
-					param.setResult(null);
-				}
-
-				if(pointers == 1)
-				{
-					boolean FCAllowed = !(isLeftSwipe || isRightSwipe);
-
-					if(FCAllowed && FCLongSwipeEnabled && e.getY() < mLongThreshold) { //swiped up too much
-						if(!FCHandled) {
-							setObjectField(param.thisObject, "mActivePointerId", MotionEvent.INVALID_POINTER_ID);
-							setObjectField(param.thisObject, "mPassedWindowMoveSlop", false);
-							FCHandled = true;
-							runAction(ACTION_KILL_APP);
-						}
-					}
-				}
-
-				if(action == MotionEvent.ACTION_UP && (isLeftSwipe || isRightSwipe || twoFingerActive))
-				{
-					if(twoFingerActive || isLeftSwipe || isRightSwipe)
-					{
-						if(!isOverViewListener) {
-							callMethod(param.thisObject, "forceCancelGesture", e);
-						}
-
-						if(e.getY() < mSwipeUpThreshold)
-						{
-							if(isRightSwipe)
-							{
-								runAction(rightSwipeUpAction);
-							}
-							else if (isLeftSwipe)
-							{
-								runAction(leftSwipeUpAction);
-							}
-							else if (twoFingerActive)
-							{
-								runAction(twoFingerSwipeUpAction);
-							}
-						}
-					}
-					isLeftSwipe = false;
-					isRightSwipe = false;
-					twoFingerActive = false;
-					FCHandled = false;
+			if (pointers == 1) {
+				if (leftSwipeUpAction != NO_ACTION
+						&& e.getX() < currentW * leftSwipeUpPercentage) {
+					isLeftSwipe = true;
+				} else if (rightSwipeUpAction != NO_ACTION
+						&& e.getX() > currentW * (1f - rightSwipeUpPercentage)) {
+					isRightSwipe = true;
 				}
 			}
-		};
-		hookAllMethods(OtherActivityInputConsumerClass, "onMotionEvent", navGestureHook);
-		hookAllMethods(OverviewInputConsumerClass, "onMotionEvent", navGestureHook);
+		}
+
+		if (twoFingerSwipeUpAction != NO_ACTION
+				&& pointers == 2
+				&& !twoFingerActive) { //must be outside down. usually down is one finger
+			twoFingerActive = true;
+			isLeftSwipe = isRightSwipe = false;
+		}
+
+		if (mPassedWindowMoveSlop
+				&& (isLeftSwipe || isRightSwipe || twoFingerActive)) { //shouldn't reach the main code anymore
+			param.setResult(null);
+		}
+
+		if(pointers == 1)
+		{
+			boolean FCAllowed = !(isLeftSwipe || isRightSwipe);
+
+			if(FCAllowed
+					&& FCLongSwipeEnabled
+					&& e.getY() < mLongThreshold
+					&& !FCHandled
+					&& !isOverViewListener) { //swiped up too much
+				setObjectField(param.thisObject, "mActivePointerId", MotionEvent.INVALID_POINTER_ID);
+				setObjectField(param.thisObject, "mPassedWindowMoveSlop", false);
+				FCHandled = true;
+				runAction(ACTION_KILL_APP);
+			}
+		}
+
+		if(action == MotionEvent.ACTION_UP
+				&& (isLeftSwipe || isRightSwipe || twoFingerActive))
+		{
+			if(!isOverViewListener) {
+				callMethod(param.thisObject, "forceCancelGesture", e);
+			}
+
+			if(e.getY() < mSwipeUpThreshold)
+			{
+				if(isRightSwipe)
+				{
+					runAction(rightSwipeUpAction);
+				}
+				else if (isLeftSwipe)
+				{
+					runAction(leftSwipeUpAction);
+				}
+				else if (twoFingerActive)
+				{
+					runAction(twoFingerSwipeUpAction);
+				}
+			}
+		}
 	}
 
 	private void runAction(int action) {
@@ -225,7 +236,15 @@ public class CustomNavGestures extends XposedModPack {
 			case ACTION_ONE_HANDED:
 				startOneHandedMode();
 				break;
+			case ACTION_INSECURE_SCREENSHOT:
+				takeInsecureScreenshot();
 		}
+	}
+
+	private void takeInsecureScreenshot() {
+		Intent broadcast = new Intent();
+		broadcast.setAction(AOSPMods.ACTION_INSECURE_SCREENSHOT);
+		mContext.sendBroadcast(broadcast);
 	}
 
 	private void killForeground() {
@@ -235,9 +254,7 @@ public class CustomNavGestures extends XposedModPack {
 
 	private void goBack()
 	{
-		log("going back");
 		callMethod(mSystemUIProxy, "onBackPressed");
-		log("gone back");
 	}
 
 	private void startOneHandedMode()

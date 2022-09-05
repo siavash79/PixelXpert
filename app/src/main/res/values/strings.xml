@@ -370,5 +370,6 @@
     <string name="kill_forground_app">Kill foreground app</string>
     <string name="toggle_notification">Toggle notification panel</string>
     <string name="toggle_one_handed">Toggle one handed mode</string>
+    <string name="insecure_screenshot">Insecure screenshot</string>
 
 </resources>

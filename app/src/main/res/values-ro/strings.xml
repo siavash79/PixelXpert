@@ -28,8 +28,9 @@
     <string name="carrier_text_mod_enabled">Text personalizat furnizor</string>
     <string name="carrier_text_value">Text personalizat furnizor</string>
     <string name="lockscreen_center_text_value">Text personalizat pentru zona ceasului</string>
+    <string name="keyguard_dim_amount_title">Diminuare fundal ecran blocare</string>
     <string name="keyguard_bottom_category">Comenzi rapide în zona de jos</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Ascunde cercul din jurul pictogramelor</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Elimină cercul din jurul pictogramelor</string>
     <string name="keyguard_bottom_force_camera_title">Arată scurtătura cameră foto</string>
     <string name="keyguard_left_shortcut">Arată scurtătură din stânga pe ecranul de blocare</string>
     <string name="LSleftShortcutTitle">Comanda rapidă din stânga</string>
@@ -60,7 +61,7 @@
     <string name="sb_icon_sort_mode">Metoda de plasare pictograme</string>
     <string name="sort_clean">Sortează într-o grilă</string>
     <string name="sort_tight">Potrivire elemente maxime</string>
-    <string name="sb_notification_limit">Numărul maxim de pictograme de notificare (implicit este 4)</string>
+    <string name="sb_notification_limit">Pictograme de notificare maxime (Lăsați necompletat pentru implicit)</string>
     <string name="lte_4g_icon_title">Pictogramă LTE / 4G</string>
     <string name="combined_signal_icon_title">Combinare pictograme de semnal</string>
     <string name="volte_icon_title">Afișare pictogramă VoLTE atunci când este disponibilă</string>
@@ -81,7 +82,7 @@
     <string name="sbc_before_color">Text înainte de ceas</string>
     <string name="sbc_color">Ceas</string>
     <string name="sbc_after_color">Text după ceas</string>
-    <string name="network_settings_pref">Setări monitorizare rețea…</string>
+    <string name="network_settings_pref">Setări monitorizare rețea...</string>
     <string name="ntsb_far_left">Extrema stângă</string>
     <string name="ntsb_far_left_extra">Extrema stângă - Deasupra notificărilor</string>
     <string name="ntsb_mid_left">Mijloc-Stânga</string>
@@ -130,8 +131,13 @@
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numărul versiunii în subsolul panoului setărilor rapide</string>
     <string name="qs_footer_mod_title">Modifică textul versiunii în panoul setărilor rapide</string>
+    <string name="qs_footer_text_value">Introdu un text personalizat</string>
     <string name="qs_footer_text_summary">Lasă necompletat pentru a elimina complet</string>
     <string name="qs_footer_text_desc">Oprește afișajul pentru a aplica</string>
+    <string name="qs_leveled_flashlight_title">Lanternă cu nivel de luminozitate</string>
+    <string name="qs_flashlight_level_global_title">Aplică nivelul lanternei global</string>
+    <string name="qs_qr_tile_inactive_title">Inversează culoarea dalei QR-Scan</string>
+    <string name="qs_leveled_flashlight_summary">Necesită hardware suportat</string>
     <string name="light_qs_title">Aplică panoul de setări rapide luminoase când se utilizează tema luminoasă</string>
     <string name="light_dualtone_qs_title">Activează panoul setărilor rapide cu ton dublu</string>
     <string name="qs_pulldown_size">Lățime tragere rapidă în jos</string>
@@ -186,6 +192,10 @@
     <string name="gesture_nav_pill_height_title">Înălțimea comparată cu dimensiunea standard</string>
     <string name="threebutton_header_title">Navigare cu 3 butoane</string>
     <string name="back_longpress_kill_title">Apăsare lungă Înapoi pentru a închide aplicația din prim-plan</string>
+    <string name="modify_3button_title">Modifică ordinea butoanelor</string>
+    <string name="three_button_left_title">Butonul din stânga</string>
+    <string name="three_button_center_title">Butonul de mijloc</string>
+    <string name="three_button_right_title">Butonul din dreapta</string>
     <string name="hide_navbar_title">Ascunde bara de navigare</string>
     <string name="colorpill_title">Colorează bara de navigare</string>
     <string name="colorpill">Bara de navigare nuanțată</string>
@@ -308,4 +318,19 @@
     <string name="own_prefs_header">Setări AOSPMods</string>
     <string name="language_title">Limbă</string>
     <string name="toggle_dark_apply">(Comutați tema întunecată pentru a aplica)</string>
+    <string name="gesture_nav_extra_cat">Gesturi suplimentare din bara de navigare</string>
+    <string name="gesture_nav_long_swipe_fc_title">Glisați în partea de sus a ecranului pentru a închide aplicația din prim-plan</string>
+    <string name="gesture_nav_left_swipe_up_title">Glisare în sus din stânga barei de navigare</string>
+    <string name="gesture_nav_right_swipe_up_title">Glisare în sus din dreapta barei de navigare</string>
+    <string name="gesture_nav_left_swipe_up_perecent">Lățimea zonei din stânga glisare în sus (%)</string>
+    <string name="gesture_nav_right_swipe_up_perecent">Lățimea zonei din dreapta glisare în sus (%)</string>
+    <string name="gesture_nav_two_finger_title">Acțiune de glisare în sus cu două degete</string>
+    <string name="gesture_nav_swipe_up_height">Înălțimea minimă a declanșatorului la acțiunea de glisare în sus</string>
+    <string name="none">Nimic</string>
+    <string name="screenshot">Captură de ecran</string>
+    <string name="back">Înapoi</string>
+    <string name="kill_forground_app">Închide aplicația din prim-plan</string>
+    <string name="toggle_notification">Comută panoul de notificări</string>
+    <string name="toggle_one_handed">Comută modul cu o mână</string>
+    <string name="insecure_screenshot">Captură de ecran nesigură</string>
 </resources>

@@ -37,18 +37,22 @@ public class CustomNavGestures extends XposedModPack {
 	private static final int ACTION_ONE_HANDED = 5;
 	private static final int ACTION_INSECURE_SCREENSHOT = 6;
 
-	private boolean twoFingerActive = false;
+	private static final int SWIPE_NONE = 0;
+	private static final int SWIPE_LEFT = 1;
+	private static final int SWIPE_RIGHT = 2;
+	private static final int SWIPE_TWO_FINGER = 3;
+
 	private boolean FCHandled = false;
 	private float leftSwipeUpPercentage = 0.25f, rightSwipeUpPercentage = 0.25f;
 	private int displayW = -1 , displayH = -1;
 	private static float swipeUpPercentage = 0.2f;
+	private int swipeType = SWIPE_NONE;
 
 	@SuppressWarnings("FieldCanBeLocal")
 	private boolean isLandscape = false;
 	private float mSwipeUpThreshold = 0;
 	private float mLongThreshold = 0;
 	private static boolean FCLongSwipeEnabled = false;
-	private boolean isLeftSwipe = false, isRightSwipe = false;
 	private Object mSystemUIProxy = null;
 	private static int leftSwipeUpAction = NO_ACTION, rightSwipeUpAction = NO_ACTION, twoFingerSwipeUpAction = NO_ACTION;
 
@@ -138,9 +142,7 @@ public class CustomNavGestures extends XposedModPack {
 		if(action == MotionEvent.ACTION_DOWN ) //Let's get ready
 		{
 			FCHandled = false;
-			isLeftSwipe = false;
-			isRightSwipe = false;
-			twoFingerActive = false;
+			swipeType = SWIPE_NONE;
 
 			if(isOverViewListener
 					&& getBooleanField(param.thisObject, "mStartingInActivityBounds"))
@@ -157,29 +159,28 @@ public class CustomNavGestures extends XposedModPack {
 			if (pointers == 1) {
 				if (leftSwipeUpAction != NO_ACTION
 						&& e.getX() < currentW * leftSwipeUpPercentage) {
-					isLeftSwipe = true;
+					swipeType = SWIPE_LEFT;
 				} else if (rightSwipeUpAction != NO_ACTION
 						&& e.getX() > currentW * (1f - rightSwipeUpPercentage)) {
-					isRightSwipe = true;
+					swipeType = SWIPE_RIGHT;
 				}
 			}
 		}
 
 		if (twoFingerSwipeUpAction != NO_ACTION
 				&& pointers == 2
-				&& !twoFingerActive) { //must be outside down. usually down is one finger
-			twoFingerActive = true;
-			isLeftSwipe = isRightSwipe = false;
+				&& swipeType != SWIPE_TWO_FINGER) { //must be outside down. usually down is one finger
+			swipeType = SWIPE_TWO_FINGER;
 		}
 
 		if (mPassedWindowMoveSlop
-				&& (isLeftSwipe || isRightSwipe || twoFingerActive)) { //shouldn't reach the main code anymore
+				&& swipeType != SWIPE_NONE) { //shouldn't reach the main code anymore
 			param.setResult(null);
 		}
 
 		if(pointers == 1)
 		{
-			boolean FCAllowed = !(isLeftSwipe || isRightSwipe);
+			boolean FCAllowed = swipeType != SWIPE_NONE;
 
 			if(FCAllowed
 					&& FCLongSwipeEnabled
@@ -194,7 +195,7 @@ public class CustomNavGestures extends XposedModPack {
 		}
 
 		if(action == MotionEvent.ACTION_UP
-				&& (isLeftSwipe || isRightSwipe || twoFingerActive))
+				&& swipeType != SWIPE_NONE)
 		{
 			if(!isOverViewListener) {
 				callMethod(param.thisObject, "forceCancelGesture", e);
@@ -202,18 +203,19 @@ public class CustomNavGestures extends XposedModPack {
 
 			if(e.getY() < mSwipeUpThreshold)
 			{
-				if(isRightSwipe)
+				switch (swipeType)
 				{
-					runAction(rightSwipeUpAction);
+					case SWIPE_LEFT:
+						runAction(leftSwipeUpAction);
+						break;
+					case SWIPE_RIGHT:
+						runAction(rightSwipeUpAction);
+						break;
+					case SWIPE_TWO_FINGER:
+						runAction(twoFingerSwipeUpAction);
+						break;
 				}
-				else if (isLeftSwipe)
-				{
-					runAction(leftSwipeUpAction);
-				}
-				else if (twoFingerActive)
-				{
-					runAction(twoFingerSwipeUpAction);
-				}
+				swipeType = SWIPE_NONE;
 			}
 		}
 	}

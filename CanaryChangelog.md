@@ -1,3 +1,6 @@
+**canary-131**  
+- Added VolDown+Power insecure screenshot option (Misc)  
+  
 **canary-130**  
 - New gesture action: introducing INSECURE screenshot (screenshots security-enabled content)  
   

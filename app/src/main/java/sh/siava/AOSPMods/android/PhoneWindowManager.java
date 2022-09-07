@@ -1,9 +1,12 @@
 package sh.siava.AOSPMods.android;
 
+import static android.view.KeyEvent.KEYCODE_POWER;
+import static android.view.KeyEvent.KEYCODE_VOLUME_DOWN;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -18,13 +21,16 @@ import android.hardware.HardwareBuffer;
 import android.os.Bundle;
 import android.view.Display;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
-public class FrameworkBroadcastReceiver extends XposedModPack {
+public class PhoneWindowManager extends XposedModPack {
     public static final String listenPackage = AOSPMods.SYSTEM_FRAMEWORK_PACKAGE;
 
     private static final String KEY_BUFFER = "bitmap_util_buffer";
@@ -36,13 +42,16 @@ public class FrameworkBroadcastReceiver extends XposedModPack {
     private Display mDefaultDisplay;
     private Object mDefaultDisplayPolicy;
     private Object mHandler;
+    private boolean ScreenshotChordInsecure;
+    private final ArrayList<Object> screenshotChords = new ArrayList<>();
 
-    public FrameworkBroadcastReceiver(Context context) {
+    public PhoneWindowManager(Context context) {
         super(context);
     }
 
     @Override
     public void updatePrefs(String... Key) {
+        ScreenshotChordInsecure = Xprefs.getBoolean("ScreenshotChordInsecure", false);
     }
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -72,6 +81,8 @@ public class FrameworkBroadcastReceiver extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if (!lpparam.packageName.equals(listenPackage)) return;
 
+        Collections.addAll(screenshotChords, KEYCODE_POWER, KEYCODE_VOLUME_DOWN);
+
         if(!broadcastRegistered) {
             broadcastRegistered = true;
             intentFilter.addAction(AOSPMods.ACTION_SCREENSHOT);
@@ -87,11 +98,33 @@ public class FrameworkBroadcastReceiver extends XposedModPack {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     windowMan = param.thisObject;
+
+                    //Apparently some stuff init before Xposed. Will have to find and hack them...
+                    Object mKeyCombinationManager = getObjectField(param.thisObject, "mKeyCombinationManager");
+                    ArrayList<?> mRules = (ArrayList<?>) getObjectField(mKeyCombinationManager, "mRules");
+                    for(Object mRule : mRules)
+                    {
+                        if(screenshotChords.contains(getObjectField(mRule, "mKeyCode1"))
+                            && screenshotChords.contains(getObjectField(mRule, "mKeyCode2")))
+                        {
+                            hookAllMethods(mRule.getClass(), "execute", new XC_MethodHook() {
+                                @Override
+                                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                    if(ScreenshotChordInsecure) {
+                                        try {
+                                            takeInsecureScreenshot();
+                                            param.setResult(null);
+                                        } catch(Throwable ignored){}
+                                    }
+                                }
+                            });
+                            break;
+                        }
+                    }
                 }
             });
 
-        } catch (Throwable t) {
-            t.printStackTrace();
+        } catch (Throwable ignored) {
         }
     }
 

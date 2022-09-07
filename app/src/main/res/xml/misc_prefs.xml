@@ -18,6 +18,14 @@
 
         <SwitchPreference
             android:defaultValue="false"
+            android:key="ScreenshotChordInsecure"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/screenshot_chord_insecure" />
+
+
+        <SwitchPreference
+            android:defaultValue="false"
             android:key="allScreenRotations"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"

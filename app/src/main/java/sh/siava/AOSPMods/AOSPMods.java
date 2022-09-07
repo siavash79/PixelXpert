@@ -12,7 +12,7 @@ import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.allApps.OverScrollDisabler;
-import sh.siava.AOSPMods.android.FrameworkBroadcastReceiver;
+import sh.siava.AOSPMods.android.PhoneWindowManager;
 import sh.siava.AOSPMods.android.ScreenOffKeys;
 import sh.siava.AOSPMods.android.ScreenRotation;
 import sh.siava.AOSPMods.android.StatusbarSize;
@@ -104,7 +104,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(FlashLightLevel.class); //13 based
         modPacks.add(KeyguardDimmer.class);
         modPacks.add(CustomNavGestures.class);
-        modPacks.add(FrameworkBroadcastReceiver.class);
+        modPacks.add(PhoneWindowManager.class);
         //endregion
     }
     
@@ -114,7 +114,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
         if(lpparam.packageName.equals(SYSTEM_FRAMEWORK_PACKAGE) && false) {
             log("------------");
-            Helpers.dumpClass("com.android.server.display.DisplayManagerService", lpparam.classLoader);
+            Helpers.dumpClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
             log("------------");
         }
 

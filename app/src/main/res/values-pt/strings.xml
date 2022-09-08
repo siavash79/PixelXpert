@@ -314,4 +314,5 @@
     <string name="toggle_notification">Invocar painel de notificações</string>
     <string name="toggle_one_handed">Ativar modo para uma mão</string>
     <string name="insecure_screenshot">Captura de ecã inseguro</string>
+    <string name="screenshot_chord_insecure">"Baixar vol.+Ligar/desligar para captura insegura"</string>
 </resources>

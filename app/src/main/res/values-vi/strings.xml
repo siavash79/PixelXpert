@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="insecure_screenshot">Chụp ảnh màn hình các ứng dụng không cho phép</string>
+    <string name="screenshot_chord_insecure">Giảm âm lượng + Nguồn (Chụp ảnh màn hình các ứng dụng không cho phép)</string>
     <string name="gesture_nav_extra_cat">Cử chỉ bổ sung cho thanh điều hướng</string>
     <string name="gesture_nav_long_swipe_fc_title">Vuốt lên trên để tắt ứng dụng nền</string>
     <string name="gesture_nav_left_swipe_up_title">Vuốt lên từ bên trái thanh điều hướng</string>

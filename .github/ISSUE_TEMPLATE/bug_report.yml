@@ -26,7 +26,7 @@ body:
     attributes:
       label: Expected bahavior
       description: A clear and concise description of what you expected to happen.
-  - type: input
+  - type: textarea
     attributes:
       label: Your device setup (IMPORTANT*)
       description: |
@@ -38,6 +38,14 @@ body:
         - List of your magisk modules and versions (if possible, screenshots)
         - Your LSposed version
         - List of your LSposed modules and versions (if possible, screenshots)
+      placeholder: |
+        - Google Pixel 6 Stock Firmware August Security Patch ...
+        - Android 13 Stable version
+        - August Security Patch 
+        - Magisk v25.1 Stable
+        - AOSPMods 2.1.0 and LSposed 1.8.3
+        - LSposed 1.8.3
+        - Only AOSPMods 2.1.0
   - type: textarea
     attributes:
       label: Logs

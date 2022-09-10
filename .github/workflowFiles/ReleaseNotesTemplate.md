@@ -1,13 +1,13 @@
   
 **Compatibility:**  
 AOSP based Androids:  
-12, 12.1 (12L) and 13  
+12, 12.1 (12L) and 13 (Not compatible with 13QPR1)  
   
 **If you're updating from previous versions:**  
 Update your module via module update shortcut in Magisk, or use the built-in updater located in 3-dot menu of the app   
 
 **To install, you will need to:**  
-Install LSPosed Zygisk (https://t.me/LSPosedArchives)  
+Install LSPosed Zygisk (https://github.com/LSPosed/LSPosed/releases)  
 Install the zip file in Magisk (You will be able to install canary builds once the stable version is installed, through in-app updater)  
 Reboot  
 Technically, the module should automatically activate itself in Lsposed and get its required root permissions. If didn't, please activate manually and reboot again  

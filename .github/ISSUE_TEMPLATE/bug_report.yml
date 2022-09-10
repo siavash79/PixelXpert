@@ -9,6 +9,7 @@ body:
   - type: input
     attributes:
       label: Describe the issue
+      description: If possible also share screenshots with labels where you see/observe the issue.
     validations:
       required: true
 
@@ -25,11 +26,28 @@ body:
     attributes:
       label: Expected bahavior
       description: A clear and concise description of what you expected to happen.
+  - type: input
+    attributes:
+      label: Your device setup (IMPORTANT*)
+      description: 
+        - Your device manufacturer and model name
+        - Android version
+        - Security update date (if it's a custom ROM, then its name and date of release)
+        - Your magisk version
+        - List of apps that have been granted root access (if possible, screenshots)
+        - List of your magisk modules and versions (if possible, screenshots)
+        - Your LSposed version
+        - List of your LSposed modules and versions (if possible, screenshots)
   - type: textarea
     attributes:
-      label: Logs and Screenshots
+      label: Logs
       description: |
         Please attach LSposed Module log if you are able to. (Open LSPosed, go to module logs, press save button and attach to this bug report)
-        Please attach screenshots if applicable
+        To give clear logs, before extracting LSposed logs, follow these steps:
+        - Disable all magisk modules other than AOSPMods and LSposed
+        - Disable all LSposed modules other than AOSPMods
+        - Disable all theming apps (e.g. Substratum, Repainter and etc)
+        - Restart and replicate the issue
+        - After that extract LSposed logs.
     validations:
       required: false

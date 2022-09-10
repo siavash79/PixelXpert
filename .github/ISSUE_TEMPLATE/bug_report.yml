@@ -47,8 +47,8 @@ body:
         - AOSPMods 2.1.0 and LSposed 1.8.3
         - LSposed 1.8.3
         - Only AOSPMods 2.1.0
-      validations:
-        required: true
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Logs

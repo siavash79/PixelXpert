@@ -29,14 +29,15 @@ body:
   - type: input
     attributes:
       label: Your device setup (IMPORTANT*)
-      description: 1) Your device manufacturer and model name
-        2) Android version
-        3) Security update date (if it's a custom ROM, then its name and date of release)
-        4) Your magisk version
-        5) List of apps that have been granted root access (if possible, screenshots)
-        6) List of your magisk modules and versions (if possible, screenshots)
-        7) Your LSposed version
-        8) List of your LSposed modules and versions (if possible, screenshots)
+      description: |
+        - Your device manufacturer and model name
+        - Android version
+        - Security update date (if it's a custom ROM, then its name and date of release)
+        - Your magisk version
+        - List of apps that have been granted root access (if possible, screenshots)
+        - List of your magisk modules and versions (if possible, screenshots)
+        - Your LSposed version
+        - List of your LSposed modules and versions (if possible, screenshots)
   - type: textarea
     attributes:
       label: Logs

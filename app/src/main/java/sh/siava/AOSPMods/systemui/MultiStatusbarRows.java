@@ -31,7 +31,10 @@ public class MultiStatusbarRows extends XposedModPack {
     public void updatePrefs(String... Key) {
         if(Key.length > 0 && Key[0].equals("systemIconsMultiRow"))
         {
-            SystemUtils.RestartSystemUI();
+            boolean newsystemIconsMultiRow = Xprefs.getBoolean("systemIconsMultiRow", false);
+            if(newsystemIconsMultiRow != systemIconsMultiRow) {
+                SystemUtils.RestartSystemUI();
+            }
         }
         systemIconsMultiRow = Xprefs.getBoolean("systemIconsMultiRow", false);
         FlexStatusIconContainer.setSortPlan(Integer.parseInt(Xprefs.getString("systemIconSortPlan", String.valueOf(FlexStatusIconContainer.SORT_CLEAN))));

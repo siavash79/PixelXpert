@@ -13,6 +13,17 @@
         android:summaryOff="@string/transparent_fingerprint_circle_off"
         android:title="@string/transparent_fingerprint_circle"
         app:summaryOn="@string/transparent_fingerprint_circle_on" />
+    <sh.siava.rangesliderpreference.RangeSliderPreference
+        android:key="KeyGuardDimAmount"
+        android:title="@string/keyguard_dim_amount_title"
+
+        app:tickInterval="1"
+        app:valueCount="1"
+        app:minVal="-1"
+        app:maxVal="100"
+
+        app:defaultValue="-1" />
+
     <SwitchPreference
         android:defaultValue="false"
         android:key="shufflePinEnabled"

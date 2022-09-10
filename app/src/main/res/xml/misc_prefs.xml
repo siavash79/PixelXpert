@@ -18,6 +18,14 @@
 
         <SwitchPreference
             android:defaultValue="false"
+            android:key="ScreenshotChordInsecure"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/screenshot_chord_insecure" />
+
+
+        <SwitchPreference
+            android:defaultValue="false"
             android:key="allScreenRotations"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
@@ -56,6 +64,12 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/doze_header">
+        <EditTextPreference
+            android:key="NotificationAODIconLimit"
+            android:defaultValue="3"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/sb_notification_limit" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="fingerprintWhileDozing"

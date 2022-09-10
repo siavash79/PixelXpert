@@ -7,7 +7,7 @@
         app:icon="@drawable/ic_settings_statusbar" />
 
     <Preference
-        app:fragment="sh.siava.AOSPMods.SettingsActivity$QuicksettingsFragment"
+        app:fragment="sh.siava.AOSPMods.SettingsActivity$QuickSettingsFragment"
         app:key="quicksettings_header"
         app:title="@string/qs_panel_category_title"
         app:icon="@drawable/ic_settings_quicksettings" />

@@ -56,7 +56,31 @@
         <item>vi</item>
     </string-array>
 
+    <string-array name="three_button_nav_buttons">
+        <item>back</item>
+        <item>home</item>
+        <item>recent</item>
+    </string-array>
 
+    <string-array name="custom_action_titles">
+        <item>@string/none</item>
+        <item>@string/screenshot</item>
+        <item>@string/insecure_screenshot</item>
+        <!--item>@string/back</item-->
+        <item>@string/kill_forground_app</item>
+        <item>@string/toggle_notification</item>
+        <item>@string/toggle_one_handed</item>
+    </string-array>
+
+    <string-array name="custom_action_codes">
+        <item>-1</item>
+        <item>1</item>
+        <item>6</item>
+        <!--item>2</item-->
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 
     <string-array name="battery_style_names">
         <item>@string/word_default</item>

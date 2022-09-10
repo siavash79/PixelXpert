@@ -95,6 +95,7 @@
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/menu/main_menu.xml" value="0.25" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/mipmap-anydpi-v31/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/mipmap-anydpi-v31/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/gesture_nav_prefs.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/header_preferences.xml" value="0.2" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/lock_screen_prefs.xml" value="0.30676552363299353" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/lsqs_custom_text.xml" value="0.33" />
@@ -102,6 +103,7 @@
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/own_prefs_header.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/range_screen.xml" value="0.1" />
         <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/statusbar_settings.xml" value="0.22" />
+        <entry key="..\:/Users/83018/Documents/GitHub/AOSPMods/app/src/main/res/xml/three_button_prefs.xml" value="0.25" />
         <entry key="..\:/Users/elbay/StudioProjects/AOSPMods_edit/app/src/main/res/layout/activity_update.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/elbay/StudioProjects/AOSPMods_edit/app/src/main/res/layout/content_update.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/elbay/StudioProjects/AOSPMods_edit/app/src/main/res/layout/settings_activity.xml" value="0.18541666666666667" />

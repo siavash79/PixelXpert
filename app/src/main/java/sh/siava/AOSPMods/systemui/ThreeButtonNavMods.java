@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -18,17 +19,24 @@ import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
-public class BackToKill extends XposedModPack {
+public class ThreeButtonNavMods extends XposedModPack {
     private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    private static boolean isEnabled = false;
-    
-    public BackToKill(Context context) { super(context); }
+    private static boolean BackLongPressKill = false;
+    private boolean ThreeButtonLayoutMod = false;
+    private static String ThreeButtonCenter, ThreeButtonRight, ThreeButtonLeft;
+
+    public ThreeButtonNavMods(Context context) { super(context); }
     
     @Override
     public void updatePrefs(String...Key)
     {
         if(Xprefs == null) return;
-        isEnabled = Xprefs.getBoolean("BackLongPressKill", false);
+        BackLongPressKill = Xprefs.getBoolean("BackLongPressKill", false);
+        ThreeButtonLayoutMod = Xprefs.getBoolean("ThreeButtonLayoutMod", false);
+
+        ThreeButtonLeft = Xprefs.getString("ThreeButtonLeft", "back");
+        ThreeButtonCenter = Xprefs.getString("ThreeButtonCenter", "home");
+        ThreeButtonRight = Xprefs.getString("ThreeButtonRight", "recent");
     }
 
 
@@ -36,11 +44,31 @@ public class BackToKill extends XposedModPack {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
         if(!lpparam.packageName.equals(listenPackage)) return;
 
+        Class<?> NavigationBarInflaterViewClass = findClass("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader);
+
+        hookAllMethods(NavigationBarInflaterViewClass, "inflateLayout", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                if(!ThreeButtonLayoutMod || !((String)param.args[0]).contains("recent")) return;
+
+                String layout = ((String) param.args[0])
+                        .replace("home", "XCenterX")
+                        .replace("back", "XLeftX")
+                        .replace("recent", "XRightX");
+
+                param.args[0] = layout
+                        .replace("XCenterX", ThreeButtonCenter)
+                        .replace("XLeftX", ThreeButtonLeft)
+                        .replace("XRightX", ThreeButtonRight);
+            }
+        });
+
+        if(Build.VERSION.SDK_INT >= 33) return;
 
         Class<?> NavBarClass = findClass("com.android.systemui.navigationbar.NavigationBar", lpparam.classLoader);
 
         View.OnLongClickListener listener = v -> {
-            if(!isEnabled) return true;
+            if(!BackLongPressKill) return true;
 
             Shell.cmd("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
 
@@ -61,6 +89,6 @@ public class BackToKill extends XposedModPack {
     }
 
     @Override
-    public boolean listensTo(String packageName) { return listenPackage.equals(packageName) && Build.VERSION.SDK_INT < 33; }
+    public boolean listensTo(String packageName) { return listenPackage.equals(packageName);}
 
 }

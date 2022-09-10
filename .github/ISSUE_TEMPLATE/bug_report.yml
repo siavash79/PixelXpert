@@ -1,0 +1,35 @@
+name: Bug report
+description: Create a report to help us improve  
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Please note: At the time being, only bug reports from Pixel Stock firmware, or Pixel Experience will be considered. Bug reports from other firmwares will only be taken into account if also reported from one of the supported roms.**  
+  - type: input
+    attributes:
+      label: Describe the issue
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to ...
+        2. Click ...
+        3. Scroll ...
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Expected bahavior
+      description: A clear and concise description of what you expected to happen.
+  - type: textarea
+    attributes:
+      label: Logs and Screenshots
+      description: |
+        Please attach LSposed Module log if you are able to. (Open LSPosed, go to module logs, press save button and attach to this bug report)
+        Please attach screenshots if applicable
+    validations:
+      required: false

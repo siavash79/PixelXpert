@@ -294,4 +294,25 @@
     <string name="qs_footer_text_value">Inserir texto personalizado</string>
     <string name="qs_flashlight_level_global_title">Aplicar nível da lanterna globalmente</string>
     <string name="qs_qr_tile_inactive_title">Inverter cores do atalho QR</string>
+    <string name="keyguard_dim_amount_title">Escurecer imagem de fundo no ecrã de bloqueio</string>
+    <string name="modify_3button_title">Alterar ordem dos botões</string>
+    <string name="three_button_left_title">Botão da esquerda</string>
+    <string name="three_button_center_title">Botão central</string>
+    <string name="three_button_right_title">Botão da direita</string>
+    <string name="gesture_nav_extra_cat">Gestos extra na barra de navegação</string>
+    <string name="gesture_nav_long_swipe_fc_title">Arrastar até ao topo do ecrã para terminar app em segundo plano</string>
+    <string name="gesture_nav_left_swipe_up_title">Arrastar para cima desde o lado esquerdo da barra</string>
+    <string name="gesture_nav_right_swipe_up_title">Arrastar para cima desde o lado direito da barra</string>
+    <string name="gesture_nav_left_swipe_up_perecent">Largura da área de ação desde o lado esquerdo (%)</string>
+    <string name="gesture_nav_right_swipe_up_perecent">Largura da área de ação desde o lado direito (%)</string>
+    <string name="gesture_nav_two_finger_title">Ação ao deslizar para cima com dois dedos</string>
+    <string name="gesture_nav_swipe_up_height">Altura mínima para as ações de deslizar para cima</string>
+    <string name="none">Nenhuma</string>
+    <string name="screenshot">Captura de ecrã</string>
+    <string name="back">Voltar</string>
+    <string name="kill_forground_app">Terminar app em segundo plano</string>
+    <string name="toggle_notification">Invocar painel de notificações</string>
+    <string name="toggle_one_handed">Ativar modo para uma mão</string>
+    <string name="insecure_screenshot">Captura de ecã inseguro</string>
+    <string name="screenshot_chord_insecure">"Baixar vol.+Ligar/desligar para captura insegura"</string>
 </resources>

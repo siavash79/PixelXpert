@@ -38,7 +38,6 @@ public class LockscreenAlbumArt extends XposedModPack {
 
 	public LockscreenAlbumArt(Context context) {
 		super(context);
-		if(renderToolkit == null) renderToolkit = Toolkit.INSTANCE;
 	}
 	
 	@Override
@@ -81,16 +80,19 @@ public class LockscreenAlbumArt extends XposedModPack {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if(!albumArtLockScreenEnabled) return;
+
+				if(renderToolkit == null) renderToolkit = Toolkit.INSTANCE;
+
 				try {
 					MediaMetadata mediaMetadata = (MediaMetadata) callMethod(param.thisObject, "getMediaMetadata");
 					Object mKeyguardBypassController = getObjectField(param.thisObject, "mKeyguardBypassController");
-					boolean byPassEnabld = (boolean) callMethod(mKeyguardBypassController, "getBypassEnabled");
+					boolean byPassEnabled = (boolean) callMethod(mKeyguardBypassController, "getBypassEnabled");
 
 					boolean metaDataChanged = (boolean) param.args[0];
 					boolean allowEnterAnimation = (boolean) param.args[1];
 					ArraySet<AsyncTask> mProcessArtworkTasks = (ArraySet) getObjectField(param.thisObject, "mProcessArtworkTasks");
 					if (metaDataChanged) {
-						if (mediaMetadata != null && !byPassEnabld) {
+						if (mediaMetadata != null && !byPassEnabled) {
 							artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
 							if (artworkBitmap == null) {
 								artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
@@ -127,7 +129,7 @@ public class LockscreenAlbumArt extends XposedModPack {
 					{
 						log("Start error dump");
 						t.printStackTrace();
-						log("Start end error dump");
+						log("End error dump");
 					}
 				}
 			}

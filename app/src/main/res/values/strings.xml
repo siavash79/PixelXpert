@@ -11,7 +11,7 @@
     <string name="general_on">On</string>
     <string name="general_off">Off</string>
     <string name="sysui_restart_needed">Requires a SystemUI restart to apply</string>
-    <string name="restart_needed">Requires a restart to apply</string>
+    <string name="restart_needed">Requires a reboot to apply</string>
 
     <!--Category titles-->
     <string name="lockscreen_header_title">Lock Screen</string>
@@ -22,7 +22,7 @@
     <string name="theme_customization_category">Theming</string>
 
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Remove under-display fingerprint background circle</string>
+    <string name="transparent_fingerprint_circle">Remove background circle from under-display fingerprint</string>
     <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
     <string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
     <string name="carrier_text_category">Carrier text</string>
@@ -32,6 +32,7 @@
     <string name="carrier_text_mod_enabled">Custom carrier text</string>
     <string name="carrier_text_value">Custom carrier text</string>
     <string name="lockscreen_center_text_value">Clock area custom text</string>
+    <string name="keyguard_dim_amount_title">Keyguard wallpaper dim</string>
     <string name="keyguard_bottom_category">Bottom area shortcuts</string>
     <string name="keyguard_bottom_buttons_transparent_title">Remove circle around icons</string>
     <string name="keyguard_bottom_force_camera_title">Show camera shortcut</string>
@@ -47,7 +48,7 @@
     <string name="album_art_grayscale">Grayscale</string>
     <string name="shufflePin_title">Shuffle Pin</string>
     <string name="easy_unlock_title">Easy unlock (Pin/Password)</string>
-    <string name="easy_unlock_sumamry">If didn\'t work for first time, try again</string>
+    <string name="easy_unlock_sumamry">If it didn\'t work the first time, try again</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Double-tap to sleep</string>
@@ -62,12 +63,12 @@
     <string name="battery_hidden">Hidden</string>
     <string name="BIcon_Opacity_title">Opacity</string>
     <string name="sb_center_fine_tune">Fine-tune center area</string>
-    <string name="sb_multi_row_system_icons">Multi-row system icons (needs higher statusbar height)</string>
-    <string name="sb_multi_row_category">Multiple row system icons</string>
+    <string name="sb_multi_row_system_icons">Multi-row system icons (needs raised statusbar height)</string>
+    <string name="sb_multi_row_category">Multiple rows of system icons</string>
     <string name="sb_icon_sort_mode">Icon placement method</string>
     <string name="sort_clean">Sort in a grid</string>
     <string name="sort_tight">Fit maximum items</string>
-    <string name="sb_notification_limit">Maximum notification icons (Default is 4)</string>
+    <string name="sb_notification_limit">Maximum number of notification icons (Leave blank for Default)</string>
 
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
     <string name="combined_signal_icon_title">Combined signal icons</string>
@@ -115,13 +116,13 @@
     <string name="dual_tone_battery_on_summary">On (only works with portrait icon)</string>
     <string name="unread_messages_title">Show number of unread messages</string>
     <string name="status_bar_height">Status bar height (rotate screen to apply)</string>
-    <string name="sb_padding_title">Statusbar Padding</string>
+    <string name="sb_padding_title">Status bar Padding</string>
     <string name="sb_padding_summary">Setting the values to min/max is equivalent to device Default</string>
     <string name="sbbb_header">Battery bar settings</string>
     <string name="sbbIcon_header">Battery icon settings</string>
     <string name="BB_enable_title">Enable Battery Bar</string>
     <string name="BB_onlycharging_title">Only during charging</string>
-    <string name="BB_move_SB_bottom_title">At bottom of Statusbar</string>
+    <string name="BB_move_SB_bottom_title">At bottom of Status bar</string>
     <string name="BB_colorful_title">Make it colorful</string>
     <string name="BB_Opacity_title">Bar opacity</string>
     <string name="BB_center_align_title">Center Aligned</string>
@@ -148,10 +149,10 @@
     <string name="qs_leveled_flashlight_summary">Requires supported hardware</string>
     <string name="light_qs_title">Apply light QS Panel when using light theme</string>
     <string name="light_dualtone_qs_title">Enable dual tone QS Panel</string>
-    <string name="qs_pulldown_size">Quick pull down width</string>
-    <string name="qs_pulldown_switch_title">Quick QS panel pull down from status bar</string>
-    <string name="qs_pulldown_side_title">Quick pull down side</string>
-    <string name="qs_pulldown_category">Quick settings pull down</string>
+    <string name="qs_pulldown_size">Quick pull-down width</string>
+    <string name="qs_pulldown_switch_title">Quick QS panel pull-down from status bar</string>
+    <string name="qs_pulldown_side_title">Quick pull-down side</string>
+    <string name="qs_pulldown_category">Quick settings pull-down</string>
     <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
     <string name="qs_rows_number">Number of QS rows</string>
     <string name="qs_cols_number">Number of QS columns</string>
@@ -201,6 +202,10 @@
     <string name="gesture_nav_pill_height_title">Height compared to standard size</string>
     <string name="threebutton_header_title">3-Button navigation</string>
     <string name="back_longpress_kill_title">Long press back to kill foreground app</string>
+    <string name="modify_3button_title">Modify the buttons order</string>
+    <string name="three_button_left_title">Left button</string>
+    <string name="three_button_center_title">Center button</string>
+    <string name="three_button_right_title">Right button</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Hide navigation bar</string>
     <string name="colorpill_title">Colorize gesture pill</string>
@@ -337,7 +342,7 @@
     <string name="lastestVersionTitle">Latest version: </string>
     <string name="root_not_here">ROOT ACCESS NOT GRANTED!</string>
     <string name="reboot_pending">Reboot pending</string>
-    <string name="reboot_word">Restart device now</string>
+    <string name="reboot_word">Reboot device now</string>
     <string name="update_checking">Checking…</string>
     <string name="update_download_started">Downloading - Please tap on the notification once completed</string>
     <string name="update_word">Update</string>
@@ -349,4 +354,23 @@
     <string name="own_prefs_header">AOSPMods settings</string>
     <string name="language_title">Language</string>
     <string name="toggle_dark_apply">(Toggle dark theme to apply)</string>
+
+    <string name="gesture_nav_extra_cat">Extra navigation bar gestures</string>
+    <string name="gesture_nav_long_swipe_fc_title">Swipe to top of screen to kill foreground app</string>
+    <string name="gesture_nav_left_swipe_up_title">Swipe up action from left of Navbar</string>
+    <string name="gesture_nav_right_swipe_up_title">Swipe up action from right of Navbar</string>
+    <string name="gesture_nav_left_swipe_up_perecent">Left swipe-up area width (%)</string>
+    <string name="gesture_nav_right_swipe_up_perecent">Right swipe-up area width (%)</string>
+    <string name="gesture_nav_two_finger_title">Two-finger swipe-up action</string>
+    <string name="gesture_nav_swipe_up_height">Swipe-up actions minimum trigger height</string>
+
+    <string name="none">None</string>
+    <string name="screenshot">Screenshot</string>
+    <string name="back">Back</string>
+    <string name="kill_forground_app">Kill foreground app</string>
+    <string name="toggle_notification">Toggle notification panel</string>
+    <string name="toggle_one_handed">Toggle one handed mode</string>
+    <string name="insecure_screenshot">Insecure screenshot</string>
+    <string name="screenshot_chord_insecure">VolDown+Power insecure screenshot</string>
+
 </resources>

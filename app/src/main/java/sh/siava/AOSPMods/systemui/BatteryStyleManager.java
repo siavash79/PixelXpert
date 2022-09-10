@@ -4,6 +4,7 @@
 package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findAndHookConstructor;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
@@ -97,10 +98,19 @@ public class BatteryStyleManager extends XposedModPack {
                 }
                 else
                 {
-                    mBatteryIconView.setImageDrawable(
-                            (Drawable) getObjectField(
-                                    view,
-                                    "mDrawable"));
+                    try {
+                        mBatteryIconView.setImageDrawable(
+                                (Drawable) getObjectField(
+                                        view,
+                                        "mDrawable"));
+                    }
+                    catch (Throwable ignored)
+                    { //PE+ !
+                        mBatteryIconView.setImageDrawable(
+                                (Drawable) getObjectField(
+                                        view,
+                                        "mThemedDrawable"));
+                    }
                 }
             }
         }
@@ -172,6 +182,13 @@ public class BatteryStyleManager extends XposedModPack {
 
                     mBatteryDrawable.setCharging(mCharging);
                     mBatteryDrawable.setBatteryLevel(mLevel);
+                }
+            });
+
+            hookAllMethods(BatteryMeterViewClass, "updateDrawable", new XC_MethodHook() { //PE+
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if(customBatteryEnabled) param.setResult(null);
                 }
             });
 

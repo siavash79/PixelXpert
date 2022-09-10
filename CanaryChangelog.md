@@ -1,3 +1,40 @@
+**canary-131**  
+- Added VolDown+Power insecure screenshot option (Misc)  
+  
+**canary-130**  
+- New gesture action: introducing INSECURE screenshot (screenshots security-enabled content)  
+  
+**canary-129**  
+- 128 rebuild  
+  
+**canary-128**  
+- fixed app UI & swipe gesture bugs  
+  
+**canary-127**  
+- Added extra gestures on navigationbar  
+  
+**canary-126**  
+- Added option to modify 3-button navigation order  
+  
+**canary-125**  
+- A13-Added flashlight brightness control graphics  
+- Battery style compatibility with PE+  
+- Fixed more FC bugs  
+  
+**canary-124**  
+- Fix SystemUI FCs on some icon packs  
+- Fix thick brightness slider color on light theme  
+  
+**canary-123**  
+- Fixed brightness slider colors in light QS theme  
+  
+**canary-122**  
+- Fixed FC bug  
+  
+**canary-121**  
+- Added option to (un)dim lockscreen wallpaper  
+- Added option to modify notification icons on AOD  
+  
 **canary-118**  
 - V2.0.0-RC2  
   

@@ -133,7 +133,7 @@ public class NetworkStats {
             cellRx = newCellTotalRxBytes - totalCellRxBytes;
             cellTx = newCellTotalTxBytes - totalCellTxBytes;
 
-            if (rxData > saveThreshold || txData > saveThreshold || (SystemClock.elapsedRealtime() - lastSaveTime) > (saveInterval * MINUTE)) {
+            if (rxData+txData > saveThreshold || (SystemClock.elapsedRealtime() - lastSaveTime) > (saveInterval * MINUTE)) {
                 saveTrafficData();
             }
 

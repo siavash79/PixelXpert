@@ -20,6 +20,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
@@ -290,8 +291,14 @@ public class BrightnessSlider extends XposedModPack {
 
         QQSBrightnessSliderView = (View) getObjectField(mBrightnessSliderController, "mView");
 
-        mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mBroadcastDispatcher"),getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
-        //mBrightnessController = callMethod(brightnessControllerFactory, "create", mBrightnessSliderController);
+        try {
+            mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mBroadcastDispatcher"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
+            //mBrightnessController = callMethod(brightnessControllerFactory, "create", mBrightnessSliderController);
+        }catch (Throwable t) //some custom roms added icon into signature. like ArrowOS
+        {
+            ImageView icon = (ImageView) callMethod(mBrightnessSliderController, "getIconView");
+            mBrightnessController = callMethod(brightnessControllerFactory, "create", icon, mBrightnessSliderController);
+        }
 
         mBrightnessMirrorHandler = BrightnessMirrorHandlerClass.getConstructors()[0].newInstance(mBrightnessController);
 

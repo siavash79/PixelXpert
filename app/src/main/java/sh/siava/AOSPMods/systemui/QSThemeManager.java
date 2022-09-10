@@ -15,16 +15,10 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
 import android.graphics.Paint;
-import android.graphics.PathEffect;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Build;
 import android.view.View;
@@ -53,10 +47,13 @@ public class QSThemeManager extends XposedModPack {
     private Class<?> UtilsClass = null;
     private Integer colorInactive = null;
     private int colorUnavailable;
-    private final Drawable lightFooterShape = makeFooterShape();
+    private Drawable lightFooterShape = null;
 
     public QSThemeManager(Context context) {
         super(context);
+        if(!listensTo(context.getPackageName())) return;
+
+        lightFooterShape = makeFooterShape();
         wasDark = getIsDark();
     }
 

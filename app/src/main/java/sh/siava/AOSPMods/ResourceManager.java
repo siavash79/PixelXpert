@@ -23,9 +23,9 @@ public class ResourceManager implements IXposedHookInitPackageResources, IXposed
     public void handleInitPackageResources(XC_InitPackageResources.InitPackageResourcesParam resparam) throws Throwable {
 
 //        XModuleResources modRes = XModuleResources.createInstance(MODULE_PATH, resparam.res);
-
-        resparams.put(resparam.packageName, resparam);
-
+        try {
+            resparams.put(resparam.packageName, resparam);
+        }catch (Throwable ignored){}
     }
 
 

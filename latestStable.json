@@ -1,7 +1,7 @@
 {
-    "version": "2.0.1",
-    "versionCode": 120,
+    "version": "2.1.0",
+    "versionCode": 131,
     "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskChangelog.md",
-    "zipUrl_Full": "https://github.com/siavash79/AOSPMods/releases/download/v2.0.1/AOSPMods_Full.zip",
-    "zipUrl_Xposed": "https://github.com/siavash79/AOSPMods/releases/download/v2.0.1/AOSPMods_Xposed.zip"
+    "zipUrl_Full": "https://github.com/siavash79/AOSPMods/releases/download/v2.1.0/AOSPMods_Full.zip",
+    "zipUrl_Xposed": "https://github.com/siavash79/AOSPMods/releases/download/v2.1.0/AOSPMods_Xposed.zip"
 }

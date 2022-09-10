@@ -7,3 +7,10 @@ body:
       value: |
         *Please note: At the time being, only bug reports from Pixel Stock firmware, or Pixel Experience will be considered. Bug reports from other firmwares will only be taken into account if also reported from one of the supported roms.*
 
+- type: textarea
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. 
+        2. 
+        3. 

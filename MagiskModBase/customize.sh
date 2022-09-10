@@ -39,6 +39,7 @@ grantRootPkg(){
 #grant root access to required apps
 grantRootApps(){
 	grantRootPkg "com.android.systemui"
+	grantRootPkg "com.google.android.apps.nexuslauncher"
 	grantRootPkg $PKGNAME
 }
 
@@ -53,7 +54,7 @@ activateModuleLSPD()
 	OLDMID=$(echo $SQLREUSLT | xargs)
 
 
-	if [ $(($OLDMID+0)) > 0 ]; then
+	if [ $(($OLDMID+0)) -gt 0 ]; then
 		CMD="select mid from modules where mid = $OLDMID and apk_path like \"$PKGPATH\" and enabled = 1;" && runSQL
 		REALMID=$(echo $SQLREUSLT | xargs)
 		

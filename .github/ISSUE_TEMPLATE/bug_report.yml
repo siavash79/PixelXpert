@@ -28,7 +28,7 @@ body:
       description: A clear and concise description of what you expected to happen.
   - type: textarea
     attributes:
-      label: Your device setup (IMPORTANT*)
+      label: Your device setup (Please take some time to give correct information here)
       description: |
         - Your device manufacturer and model name
         - Android version
@@ -47,6 +47,8 @@ body:
         - AOSPMods 2.1.0 and LSposed 1.8.3
         - LSposed 1.8.3
         - Only AOSPMods 2.1.0
+      validations:
+        required: true
   - type: textarea
     attributes:
       label: Logs

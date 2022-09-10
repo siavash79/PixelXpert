@@ -43,6 +43,7 @@ body:
         - Android 13 Stable version
         - August Security Patch 
         - Magisk v25.1 Stable
+        - AOSPMods 2.1.0, BetterInternetTiles, [SharedUID] SystemUI, [SharedUID] Termux
         - AOSPMods 2.1.0 and LSposed 1.8.3
         - LSposed 1.8.3
         - Only AOSPMods 2.1.0

@@ -109,6 +109,8 @@ public class QSThemeManager extends XposedModPack {
         hookAllConstructors(FooterActionsControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                if(!lightQSHeaderEnabled) return;
+
                 if (!wasDark) {
                     Resources res = mContext.getResources();
                     ViewGroup view = (ViewGroup) param.args[0];
@@ -209,19 +211,6 @@ public class QSThemeManager extends XposedModPack {
         try {
             mBehindColors = GradientColorsClass.newInstance();
         } catch (Exception ignored) {}
-
-        hookAllMethods(QuickQSPanelControllerClass, "onInit", new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-            }
-        });
-
-
-        hookAllConstructors(QSPanelControllerClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-            }
-        });
 
         hookAllMethods(ScrimControllerClass,
                 "updateScrims", new XC_MethodHook() {

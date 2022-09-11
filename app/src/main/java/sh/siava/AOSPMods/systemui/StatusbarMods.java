@@ -616,7 +616,14 @@ public class StatusbarMods extends XposedModPack {
                 "animateShow", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        Object mClockView = getObjectField(param.thisObject, "mClockView");
+                        Object mClockView;
+                        try {
+                            mClockView = getObjectField(param.thisObject, "mClockView");
+                        }
+                        catch (Throwable ignored)
+                        { //PE+
+                            mClockView = callMethod(getObjectField(param.thisObject, "mClockController"), "getClock");
+                        }
                         if(param.args[0] != mClockView) return;
                         for(ClockVisibilityCallback c : clockVisibilityCallbacks)
                         {
@@ -962,7 +969,6 @@ public class StatusbarMods extends XposedModPack {
             Object mDateView = getObjectField(parent, "mDateView");
             Object mClockView = getObjectField(parent, "mClockView");
             boolean mExpanded = (boolean) getObjectField(parent, "mExpanded");
-
 
             if(v.equals(mBatteryRemainingIcon))
             {

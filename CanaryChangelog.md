@@ -1,3 +1,6 @@
+**canary-132**  
+- Misc bugfixes  
+  
 **canary-131**  
 - Added VolDown+Power insecure screenshot option (Misc)  
   

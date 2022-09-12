@@ -1,3 +1,6 @@
+**canary-133**  
+- Added option to change display resolution  
+  
 **canary-132**  
 - Misc bugfixes  
   

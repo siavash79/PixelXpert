@@ -532,7 +532,27 @@ public class SettingsActivity extends AppCompatActivity implements
                         getString(R.string.restart_needed)));
 
                 findPreference("CustomThemedIconsOverlay").setVisible(showOverlays);
-            } catch (Exception ignored){}
+
+                float displayOverride = 100;
+                try
+                {
+                    displayOverride = RangeSliderPreference.getValues(prefs, "displayOverride",100f).get(0);
+                } catch (Exception ignored){}
+                double increasedArea = Math.round(Math.abs(Math.pow(displayOverride, 2)/100 - 100));
+
+                findPreference("displayOverride").setSummary(String.format("%s \n (%s)",
+                        displayOverride == 100
+                                ? getString(R.string.word_default)
+                                : String.format("%s%% - %s%% %s",
+                                    displayOverride,
+                                    increasedArea,
+                                    displayOverride > 100
+                                            ? getString(R.string.more_area)
+                                            : getString(R.string.less_area)),
+                                    getString(R.string.sysui_restart_needed)));
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
     @SuppressWarnings("ConstantConditions")

@@ -1,3 +1,6 @@
+**canary-134**  
+- Added Wifi name variable into dynamic texts Shout out to: hyproman@Github  
+  
 **canary-133**  
 - Added option to change display resolution  
   

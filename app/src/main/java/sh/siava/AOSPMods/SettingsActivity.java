@@ -544,8 +544,8 @@ public class SettingsActivity extends AppCompatActivity implements
                         displayOverride == 100
                                 ? getString(R.string.word_default)
                                 : String.format("%s%% - %s%% %s",
-                                    displayOverride,
-                                    increasedArea,
+                                displayOverride,
+                                increasedArea,
                                     displayOverride > 100
                                             ? getString(R.string.more_area)
                                             : getString(R.string.less_area)),

@@ -9,7 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.TrafficStats;
+import android.net.TransportInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -23,6 +28,8 @@ import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
+
 
 import javax.security.auth.callback.Callback;
 
@@ -52,6 +59,8 @@ public class NetworkStats {
 
     private long rxData, txData;
     private long lastSaveTime;
+
+    private String wifiSsidName = "";
 
     @SuppressWarnings("unused")
     public void registerCallback(networkStatCallback callback)
@@ -83,7 +92,7 @@ public class NetworkStats {
     private void resetStats() {
         operationDate = Calendar.getInstance();
 
-        resetNumbers();
+        resetData();
 
         try {
             //noinspection ResultOfMethodCallIgnored
@@ -99,7 +108,7 @@ public class NetworkStats {
         saveInterval = intrval;
     }
 
-    private void resetNumbers()
+    private void resetData()
     {
         todayCellRxBytes
                 = todayCellTxBytes
@@ -108,6 +117,7 @@ public class NetworkStats {
                 = rxData
                 = txData
                 = 0;
+        wifiSsidName = "";
     }
 
 
@@ -133,8 +143,20 @@ public class NetworkStats {
             cellRx = newCellTotalRxBytes - totalCellRxBytes;
             cellTx = newCellTotalTxBytes - totalCellTxBytes;
 
+            String curSsid = fetchCurrentWifiSSID();
+            boolean ssidChanged = !Objects.equals(wifiSsidName, curSsid);
+            if (ssidChanged) {
+                wifiSsidName = curSsid;
+            }
+            boolean savedTraffic = false;
             if (rxData+txData > saveThreshold || (SystemClock.elapsedRealtime() - lastSaveTime) > (saveInterval * MINUTE)) {
                 saveTrafficData();
+                savedTraffic = true;
+            }
+
+            // Make sure we notify on SSID change where we didn't write out traffic data
+            if (!savedTraffic && ssidChanged) {
+                informCallbacks();
             }
 
             // Post delayed message to refresh in ~1000ms
@@ -169,8 +191,7 @@ public class NetworkStats {
         {
             setDisabled();
         }
-        callbacks.forEach(callback -> callback.onStatChanged(this));
-
+        informCallbacks();
     }
 
 
@@ -187,7 +208,7 @@ public class NetworkStats {
             return;
         }
 
-        resetNumbers();
+        resetData();
         lastSaveTime = SystemClock.elapsedRealtime();
 
         totalRxBytes = TrafficStats.getTotalRxBytes(); //if we're at startup so it's almost zero
@@ -244,6 +265,10 @@ public class NetworkStats {
         }
     }
 
+    private void informCallbacks() {
+        callbacks.forEach(callback -> callback.onStatChanged(this));
+    }
+
     private void saveTrafficData() {
         lastSaveTime = SystemClock.elapsedRealtime();
         todayRxBytes += rxData;
@@ -259,8 +284,7 @@ public class NetworkStats {
                 return;
             }
 
-            //inform callbacks
-            callbacks.forEach(callback -> callback.onStatChanged(this));
+            informCallbacks();
 
             File dataFile = getDataFile();
 
@@ -315,6 +339,10 @@ public class NetworkStats {
         return (cellDataOnly) ? todayCellTxBytes : todayTxBytes;
     }
 
+    public String getSSIDName() {
+        return wifiSsidName;
+    }
+
     private void tryLoadData() {
         try {
             JsonReader jsonReader = new JsonReader(
@@ -344,6 +372,19 @@ public class NetworkStats {
             }
         }
         catch (Exception ignored){}
+    }
+
+    private String fetchCurrentWifiSSID() {
+        WifiInfo info = mContext.getSystemService(WifiManager.class).getConnectionInfo();
+        String ssid = "";
+        String theSsid = info.getSSID();
+        if (theSsid.startsWith("\"") && theSsid.endsWith("\"")) {
+            theSsid = theSsid.substring(1, theSsid.length() - 1);
+        }
+        if (!WifiManager.UNKNOWN_SSID.equals(theSsid)) {
+            ssid = theSsid;
+        }
+        return ssid;
     }
 
     private void clearHandlerCallbacks() {

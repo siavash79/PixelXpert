@@ -1,3 +1,6 @@
+**canary-135**  
+- Added option to hide privacy indicators (Statusbar)  
+  
 **canary-134**  
 - Added Wifi name variable into dynamic texts Shout out to: hyproman@Github  
   

@@ -92,6 +92,13 @@
             android:summaryOn="@string/general_on"
             android:title="@string/volte_icon_title" />
 
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="HidePrivacyChip"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/hide_privacychip_title" />
+
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/lte4g_icon_names"

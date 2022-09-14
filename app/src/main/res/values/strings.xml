@@ -75,6 +75,7 @@
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
     <string name="combined_signal_icon_title">Combined signal icons</string>
     <string name="volte_icon_title">Show VoLTE icon when available</string>
+    <string name="hide_privacychip_title">Hide privacy indicators\n(Camera, Mic)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
     <string name="sbc_position_title">Clock position</string>
     <string name="sbc_ampm_style">AM/PM Style</string>

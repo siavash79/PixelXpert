@@ -120,6 +120,10 @@ public class StatusbarMods extends XposedModPack {
     private static boolean indicateFastCharging = false;
     private static boolean BBarTransitColors = false;
     //endregion
+
+    //region privacy chip
+    private static boolean HidePrivacyChip = false;
+    //endregion
     
     //region general use
     private static final float PADDING_DEFAULT = -0.5f;
@@ -179,6 +183,8 @@ public class StatusbarMods extends XposedModPack {
     public void updatePrefs(String...Key)
     {
         if(Xprefs == null) return;
+
+        HidePrivacyChip = Xprefs.getBoolean("HidePrivacyChip", false);
 
         try {
             NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(Xprefs.getString("NotificationIconLimit", "").trim());
@@ -431,6 +437,26 @@ public class StatusbarMods extends XposedModPack {
         Class<?> NotificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
         StatusBarIcon = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
         NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
+
+        //region privacy chip
+        Class<?> SystemEventCoordinatorClass = findClassIfExists("com.android.systemui.statusbar.events.SystemEventCoordinator", lpparam.classLoader);
+
+        if(SystemEventCoordinatorClass != null) {
+            hookAllConstructors(SystemEventCoordinatorClass, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    hookAllMethods(getObjectField(param.thisObject, "privacyStateListener").getClass(), "onPrivacyItemsChanged", new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if(HidePrivacyChip) {
+                                param.setResult(null);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        //endregion
 
         CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 

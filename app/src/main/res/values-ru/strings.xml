@@ -75,6 +75,7 @@
     <string name="lte_4g_icon_title">Значок LTE / 4G</string>
     <string name="combined_signal_icon_title">Комбинированные значки сигналов</string>
     <string name="volte_icon_title">Показывать значок VoLTE, если он доступен</string>
+    <string name="hide_privacychip_title">Скрыть индикаторы приватности\(Камера, Микрофон)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">Показать значки Вибрации/Без звука</string>
     <string name="sbc_position_title">Расположение часов</string>
     <string name="sbc_ampm_style">Стиль AM/PM</string>

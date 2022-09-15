@@ -1,14 +1,19 @@
 <resources>
     <!--General strings-->
+    <string name="app_name" translatable="false">AOSP Mods</string>
+    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
+    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Пожалуйста, проверьте, активирован ли модуль в LSPosed Manager</string>
     <string name="hide_default">Скрыть (по умолчанию)</string>
     <string name="percent_of_default_size">% от стандартного размера</string>
     <string name="overlay_none_title">(по умолчанию)</string>
-    <string name="general_section">Основные параметры</string>
+    <string name="general_section">General options</string>
     <string name="general_on">Вкл</string>
     <string name="general_off">Выкл</string>
     <string name="sysui_restart_needed">Требуется перезагрузка SystemUI для применения</string>
     <string name="restart_needed">Требуется перезагрузка для применения</string>
+    <string name="more_area">больше места</string>
+    <string name="less_area">меньше места</string>
 
     <!--Category titles-->
     <string name="lockscreen_header_title">Экран блокировки</string>
@@ -16,19 +21,20 @@
     <string name="nav_header">Панель навигации</string>
     <string name="misc_header">Разное</string>
     <string name="qs_panel_category_title">Панель быстрых настроек</string>
-    <string name="theme_customization_category">Покраска</string>
+    <string name="theme_customization_category">Иконки и стили</string>
 
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Скрыть круг для отпечатков пальцев под дисплеем </string>
+    <string name="transparent_fingerprint_circle">Скрыть круг для отпечатков пальцев под дисплеем</string>
     <string name="transparent_fingerprint_circle_off">Круг вокруг значка отпечатка пальца активен</string>
     <string name="transparent_fingerprint_circle_on">Круг вокруг значка отпечатка пальца будет скрыт</string>
-    <string name="carrier_text_category">Текст носителя</string>
-    <string name="custom_text_category">Пользовательский текст на экране блокировки</string>
-    <string name="configure_carrier_text">Настройка текста носителя</string>
-    <string name="carrier_text_mod_disabled">Текст носителя не изменен</string>
-    <string name="carrier_text_mod_enabled">Пользовательский текст носителя</string>
-    <string name="carrier_text_value">Вставка пользовательского текста</string>
-    <string name="lockscreen_center_text_value">Пользовательский текст области часов</string>
+    <string name="carrier_text_category">Свой текст</string>
+    <string name="custom_text_category">Свой текст на экран блокировки</string>
+    <string name="configure_carrier_text">Настройка своего текста</string>
+    <string name="carrier_text_mod_disabled">Свой текст не установлен</string>
+    <string name="carrier_text_mod_enabled">Свой текст установлен</string>
+    <string name="carrier_text_value">Редактирование своего текста</string>
+    <string name="lockscreen_center_text_value">Свой текст в области часов</string>
+    <string name="keyguard_dim_amount_title">Keyguard wallpaper dim</string>
     <string name="keyguard_bottom_category">Ярлыки нижней области</string>
     <string name="keyguard_bottom_buttons_transparent_title">Скрыть круг вокруг значков</string>
     <string name="keyguard_bottom_force_camera_title">Показать ярлык камеры</string>
@@ -41,7 +47,7 @@
     <string name="album_art_category">Параметры мультимедиа</string>
     <string name="album_art_title">Показывать обложки альбомов при воспроизведении медиафайлов</string>
     <string name="album_art_blur_text">Значение размытия</string>
-    <string name="album_art_grayscale">Сделать Серым</string>
+    <string name="album_art_grayscale">Сделать серым</string>
     <string name="shufflePin_title">Случайный PIN-код</string>
     <string name="easy_unlock_title">Легкая разблокировка (пин-код/пароль)</string>
     <string name="easy_unlock_sumamry">Если не получилось в первый раз, попробуйте еще раз</string>
@@ -53,7 +59,9 @@
     <string name="battery_style_title">Выберите стиль батареи</string>
     <string name="battery_show_percent_title">Показать процент заряда батареи</string>
     <string name="battery_style_category_title">Стиль батареи</string>
+    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Размер значка батареи</string>
+    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Скрытый</string>
     <string name="BIcon_Opacity_title">Полупрозрачный</string>
     <string name="sb_center_fine_tune">Настройка центральной зоны</string>
@@ -67,6 +75,7 @@
     <string name="lte_4g_icon_title">Значок LTE / 4G</string>
     <string name="combined_signal_icon_title">Комбинированные значки сигналов</string>
     <string name="volte_icon_title">Показывать значок VoLTE, если он доступен</string>
+    <string name="hide_privacychip_title">Скрыть индикаторы приватности\(Камера, Микрофон)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">Показать значки Вибрации/Без звука</string>
     <string name="sbc_position_title">Расположение часов</string>
     <string name="sbc_ampm_style">Стиль AM/PM</string>
@@ -80,36 +89,36 @@
     <string name="sbc_custom_date_after">Пользовательский формат даты после часов</string>
     <string name="sbc_header">Настройка часов в строке состояния</string>
     <string name="sbc_clock_color_category">Параметры цвета</string>
-    <string name="sbc_colorful_title">Сделать красочным</string>
+    <string name="sbc_colorful_title">Сделать цветными</string>
     <string name="sbc_before_color">Текст перед часами</string>
     <string name="sbc_color">Часы</string>
     <string name="sbc_after_color">Текст после часов</string>
     <string name="network_settings_pref">Настройки сетевого монитора…</string>
-    <string name="ntsb_far_left">С левого края</string>
-    <string name="ntsb_far_left_extra">Крайний левый — над уведомлениями</string>
-    <string name="ntsb_mid_left">По середине слева</string>
-    <string name="ntsb_mid_right">По середине справа</string>
+    <string name="ntsb_far_left">Слева</string>
+    <string name="ntsb_far_left_extra">Слева - над уведомленими</string>
+    <string name="ntsb_mid_left">По середине</string>
+    <string name="ntsb_mid_right">Справа</string>
     <string name="ntsb_category_title">Мониторинг сетевого трафика</string>
     <string name="ntsb_enabled_title">Включить мониторинг трафика</string>
     <string name="ntsb_position_title">Расположение мониторинга</string>
     <string name="ntsb_threshold_title">Порог автоскрытия</string>
     <string name="ntsb_threshold_summary">"Скрыть, если трафик меньше… (Килобайтов)"</string>
     <string name="network_mode_title">Стиль монитора</string>
-    <string name="network_colorful_title">Сделать красочным</string>
-    <string name="network_download_top">Скорость загрузки выше</string>
+    <string name="network_colorful_title">Сделать цветным</string>
+    <string name="network_download_top">Скорость загрузки сверху</string>
     <string name="network_download_color_title">Цвет загрузки</string>
-    <string name="network_upload_color_title">Цвет передачи</string>
+    <string name="network_upload_color_title">Цвет отдачи</string>
     <string name="network_opacity_title">Непрозрачность</string>
     <string name="network_interval_title">Интервал обновления (в секундах)</string>
-    <string name="nt_mode_rxtx">Загрузка &amp; Передача</string>
-    <string name="nt_mode_total">Загрузка + Передача (комбинированная)</string>
-    <string name="nt_mode_rxonly">Только Загрузка</string>
-    <string name="nt_mode_txonly">Только Передача</string>
+    <string name="nt_mode_rxtx">Загрузка &amp; Отдача</string>
+    <string name="nt_mode_total">Загрузка + Отдача (комбинированная)</string>
+    <string name="nt_mode_rxonly">Только загрузка</string>
+    <string name="nt_mode_txonly">Только отдача</string>
     <string name="statusbar_general_options">Параметры строки состояния</string>
     <string name="dual_tone_battery_title">Включить двухтонный измеритель заряда батареи</string>
     <string name="dual_tone_battery_on_summary">Вкл (работает только с портретным значком)</string>
     <string name="unread_messages_title">Показать количество непрочитанных сообщений</string>
-    <string name="status_bar_height">Высота строки состояния</string>
+    <string name="status_bar_height">Высота строки состояния (повернуть экран для применения)</string>
     <string name="sb_padding_title">Заполнение строки состояния</string>
     <string name="sb_padding_summary">Установка мин./макс. значений эквивалентна настройкам устройства по умолчанию</string>
     <string name="sbbb_header">Настройка панели заряда батареи</string>
@@ -117,8 +126,8 @@
     <string name="BB_enable_title">Включить панель заряда батареи</string>
     <string name="BB_onlycharging_title">Только во время зарядки</string>
     <string name="BB_move_SB_bottom_title">В нижней части строки состояния</string>
-    <string name="BB_colorful_title">Сделайте его красочным</string>
-    <string name="BB_Opacity_title">Полупрозрачность строки</string>
+    <string name="BB_colorful_title">Сделайте его цветным</string>
+    <string name="BB_Opacity_title">Прозрачность строки</string>
     <string name="BB_center_align_title">Выравнивание по центру</string>
     <string name="BB_Thickness_title">Толщина строки</string>
     <string name="BB_indicate_charging">Индикатор зарядки</string>
@@ -132,10 +141,15 @@
     <string name="BB_transit_colors">Цвета оттенков между диапазоном</string>
 
     <!--Quick settings panel related-->
-    <string name="qs_mod_category_title">Номер сборки в нижнем колонтитуле панели быстрых настроек</string>
-    <string name="qs_footer_mod_title">Изменить номер текста сборки на панели быстрых настроек</string>
-    <string name="qs_footer_text_summary">Оставьте его пустым, чтобы полностью удалить текст</string>
+    <string name="qs_mod_category_title">Номер сборки в панели быстрых настроек</string>
+    <string name="qs_footer_mod_title">Изменить номер текста сборки в панели быстрых настроек</string>
+    <string name="qs_footer_text_value">Ввести свой текст</string>
+    <string name="qs_footer_text_summary">Оставьте пустым, чтобы полностью удалить текст</string>
     <string name="qs_footer_text_desc">Выкл/вкл экран, чтобы применить</string>
+    <string name="qs_leveled_flashlight_title">Плитка фонарика с уровнем яркости</string>
+    <string name="qs_flashlight_level_global_title">Применить уровень яркости глобально</string>
+    <string name="qs_qr_tile_inactive_title">Инвертировать цвет плитки QR-сканера</string>
+    <string name="qs_leveled_flashlight_summary">Требуется поддерживаемое оборудование</string>
     <string name="light_qs_title">Белая панель быстрых настроек при светлой теме</string>
     <string name="light_dualtone_qs_title">Включить двухтонную панель быстрых настроек</string>
     <string name="qs_pulldown_size">Ширина быстрого вытягивания</string>
@@ -143,9 +157,9 @@
     <string name="qs_pulldown_side_title">Сторона быстрого вытягивания</string>
     <string name="qs_pulldown_category">Вытягивание быстрых настроек</string>
     <string name="qs_haptic_switch_title">Вибрация при касании плиток быстрых настроек</string>
-    <string name="qs_rows_number">Количество рядов быстрых настроек</string>    
+    <string name="qs_rows_number">Количество рядов быстрых настроек</string>
     <string name="qs_cols_number">Количество столбцов быстрых настроек</string>
-    <string name="qqs_tiles_number">Максимальное количество плиток в полуоткрытых быстрых настройках (максимум 2 строки)</string>
+    <string name="qqs_tiles_number">Максимальное количество плиток в полураскрытых быстрых настройках (максимум 2 строки)</string>
     <string name="qs_tile_label_size">Размер текста плиток быстрых настроек</string>
     <string name="qs_tile_secondary_label_size">Размер деталей плиток быстрых настроек</string>
     <string name="qs_general_options">Параметры быстрых настроек</string>
@@ -171,7 +185,7 @@
     <string name="qstile_squaremedo">Сквермедо</string>
     <string name="qstile_dual_tone_circle">Двухтонный круг</string>
     <string name="qstile_circleoutline">Очертание круга</string>
-    <string name="qstile_pokesign">Знак Покемона</string>
+    <string name="qstile_pokesign">Знак Покебола</string>
     <string name="qstile_cosmos">Шишу Космос</string>
     <string name="qstile_neonlike">Неоновый свет</string>
     <string name="qstile_circle_trim">Круг с окантовкой</string>
@@ -191,27 +205,32 @@
     <string name="gesture_nav_pill_height_title">Высота по сравнению со стандартным размером</string>
     <string name="threebutton_header_title">Навигация с помощью трех кнопок</string>
     <string name="back_longpress_kill_title">Длительное нажатие кнопки "Назад", принудительно закрывает приложение</string>
+    <string name="modify_3button_title">Изменить порядок кнопок</string>
+    <string name="three_button_left_title">Левая кнопка</string>
+    <string name="three_button_center_title">Центральная кнопка</string>
+    <string name="three_button_right_title">Правая кнопка</string>
+    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Скрыть панель жестов</string>
-    <string name="colorpill_title">Раскрасьте панель жестов</string>
-    <string name="colorpill">Панель жестов с цветом акцента</string>
-    <string name="reducekeyboard_title">Пространство между клавиатуром и жестам</string>
+    <string name="colorpill_title">Раскрасить панель жестов</string>
+    <string name="colorpill">Панель жестов с акцентом темы</string>
+    <string name="reducekeyboard_title">Пространство между клавиатурой и жестами</string>
     <string name="reducekeyboard">Уменьшить пространство под клавиатурой</string>
-    <string name="taskbar_status_title">Андроид Панель Задач</string>
-    <string name="taskbar_force_enable_title">Принудительно включен</string>
-    <string name="taskbar_force_disable_title">Принудительно отключен</string>
+    <string name="taskbar_status_title">Панель задач андроида</string>
+    <string name="taskbar_force_enable_title">Принудительно включена</string>
+    <string name="taskbar_force_disable_title">Принудительно отключена</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Отключить звука скриншота</string>
     <string name="allow_all_screen_rotations">Разблокировать все повороты экрана</string>
-    <string name="allow_all_screen_rotations_summary">Также будет игнорировать плавающую кнопку ручного вращения</string>
-
+    <string name="allow_all_screen_rotations_summary">Будет игнорировать плавающую кнопку ручного вращения</string>
     <string name="force_no_cutout">Игнорировать вырез камеры</string>
     <string name="volume_button_step_title">Шаг громкости (от 0 до 100%)</string>
-    
-    <string name="so_power_longpress_torch_title">Долгое нажатие кнопки питания для включения фонарика*</string>
+    <string name="display_resolution_title">Разрешение диплея</string>
+
+    <string name="so_power_longpress_torch_title">Долгое нажатие кнопки питания для включения фонарика</string>
     <string name="so_taptaptorch_title">Двойное нажатие для включения фонарика</string>
     <string name="so_taptaptorch_summary">Двойное нажатие для быстрого включения фонарика</string>
-    <string name="so_fingerprint_sensor_enabled">Разрешить датчик отпечатков пальцев при выключенном экране</string>
+    <string name="so_fingerprint_sensor_enabled">Датчик отпечатков пальцев работает при выключенном экране</string>
 
     <string name="so_double_tap_wake_title">Двойное нажатие для пробуждения телефона</string>
     <string name="so_double_tap_wake_summary">Отключение однократного нажатия для пробуждения</string>
@@ -219,12 +238,12 @@
     <string name="custom_themed_icons_title">Пользовательские тематические иконки</string>
     <string name="custom_themed_icons_off">Пользовательские значки отключены</string>
     <string name="custom_themed_icons_on">Пользовательские значки включены</string>
-    <string name="so_vol_longpress_skip">Долгое нажатие клавиши громкости для пропуска музыки*</string>
+    <string name="so_vol_longpress_skip">Долгое нажатие клавишь громкости для переключения треков</string>
     <string name="notifications_header">Параметры уведомлений</string>
-    <string name="expand_notifications_icons_title">"Добавить кнопки развернуть/свернуть все</string>
-    <string name="disable_overscroll">"Отключить эффект упругости в конце прокрутки</string>
+    <string name="expand_notifications_icons_title">Добавить кнопки развернуть/свернуть все</string>
+    <string name="disable_overscroll">Отключить эффект упругости в конце прокрутки</string>
     <string name="overscroll_on_summary">Важно: Вы ДОЛЖНЫ включить приложения, для которых Вы хотите отключить прокрутку, в LSPosed</string>
-    
+
     <!-- Call section -->
     <string name="call_category">Телефонные звонки</string>
     <string name="vibrate_on_call_active_title">Вибрация при ответе на исходящий вызов</string>
@@ -239,12 +258,13 @@
     <string name="signal_icons_theme_title">Тема иконок сигнала</string>
     <string name="dt_styles_category">Стили темной темы</string>
     <string name="dt_styles">Выберите стиль</string>
-    <string name="dt_black">Принудительно черный</string>
+    <string name="dt_black">Полностью черный</string>
     <string name="dt_bakedgreen">Запеченный зеленый</string>
     <string name="dt_chocox">Шоколадный</string>
     <string name="dt_darkaubergine">Темно-баклажановый</string>
     <string name="dt_style">Темно-синий</string>
-    <string name="dt_darkgray">Темно-зеленый</string>
+    <string name="dt_darkgray">Темно-серый</string>
+    <string name="dt_materialocean" translatable="false">Material Ocean</string>
     <string name="dt_night">Ночной</string>
     <string name="dt_solarizeddark">Солярно Темный</string>
 
@@ -266,10 +286,12 @@
     <string name="clock_right">Справа</string>
 
     <!-- AM/PM style -->
-    <string name="am_pm_normal">100% размер часов</string>
-    <string name="am_pm_small">70% размер часов</string>
+    <string name="am_pm_default" translatable="false">@string/hide_default</string>
+    <string name="am_pm_normal">100% размера часов</string>
+    <string name="am_pm_small">70% размера часов</string>
 
     <!-- Date position -->
+    <string name="date_default" translatable="false">@string/hide_default</string>
     <string name="date_before">До часов (100%)</string>
     <string name="date_before_small">До часов (70%)</string>
     <string name="date_after">После часов (100%)</string>
@@ -286,18 +308,18 @@
     <string name="netstat_enable_title">Собирать сетевую статистику</string>
     <string name="network_interval_custom_text_title">Интервал обновления</string>
     <string name="minutes_word">минут</string>
-    
+
     <!-- Menu Items -->
     <string name="menu_settings_title">Импорт/Экспорт</string>
     <string name="menu_reset_defaults">Сбросить все настройки</string>
     <string name="menu_import_settings">Импортировать настройки из файла…</string>
-    <string name="menu_export_settings">Экспортировать настройки в файл…</string>
+    <string name="menu_export_settings">EЭкспортировать настройки в файл…</string>
     <string name="menu_netstat_title">Статистика сети</string>
     <string name="menu_netstat_enable">Включить статистику</string>
     <string name="menu_netstat_clear">Сбросить статистику сети</string>
     <string name="menu_restart">Перезагрузка</string>
     <string name="menu_restartSysUI">Перезапустить SystemUI</string>
-    <string name="menu_updates">Обновления приложений</string>
+    <string name="menu_updates">Обновление приложения</string>
 
     <string name="nestat_caution_title">Внимание!</string>
     <string name="nestat_caution_text">Ваша сетевая статистика будет сброшена навсегда. Продолжить?</string>
@@ -307,14 +329,19 @@
     <string name="monitoring_category_title">Параметры мониторинга</string>
     <string name="netstat_header">Настройки сетевой статистики</string>
 
-    <string name="string_formatter_manual_body">Помимо обычного текста, который вы можете ввести, также доступны динамические переменные:\n\n$G\&lt;format\&gt; : григорианский дата в зависимости от формата. Документацию по формату можно найти в строке `Формат даты Java`\nПример: $GMMM означает: январь (или любой другой)\n\n$P&lt;format&gt; : дата на персидском языке, в зависимости от формата\nПример: $Pyyyy означает: 1401\n\n$Nrx : Всего загрузок за сегодня\n$Ntx: Всего загрузок за сегодня\n$Nall : Всего загрузок за сегодня\n\nЕсли заменить $N с $Nc вам будет предоставлена ​​статистика мобильных данных (например, $Ncrx для загрузок)\n\nПример:\n`Мобильный трафик $GEEEE: $Ncall` создаст:\n`Мобильный трафик вторника: 2 ГБ` </string>
+    <string name="string_formatter_manual_body">Помимо обычного текста, который вы можете ввести, также доступны динамические переменные:\n\n$G\&lt;format\&gt; : григорианский дата в зависимости от формата. Документацию по формату можно найти в строке `Формат даты Java`\nПример: $GMMM означает: январь (или любой другой)\n\n$P&lt;format&gt; : дата на персидском языке, в зависимости от формата\nПример: $Pyyyy означает: 1401\n\n$Nrx : Всего загрузок за сегодня\n$Ntx: Всего загрузок за сегодня\n$Nall : Всего загрузок за сегодня\n\nЕсли заменить $N с $Nc вам будет предоставлена ​​статистика мобильных данных (например, $Ncrx для загрузок)\n\nПример:\n`Мобильный трафик $GEEEE: $Ncall` создаст:\n`Мобильный трафик вторника: 2 ГБ`</string>
+    <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">Обновления</string>
     <string name="update_notification_title">Обновление загружено</string>
     <string name="update_notification_text">Нажмите здесь, чтобы установить</string>
-    <string name="reboot_notification_title">AOSPMods обновлены!</string>
+    <string name="reboot_notification_title">AOSPMods обновлен!</string>
     <string name="reboot_notification_text">Изменения вступят в силу после перезагрузки устройства</string>
-    <string name="update_flavor_title">Обновить канал</string>
+    <string name="update_flavor_title">Канал обновлений</string>
     <string name="stable_flavor">Стабильный</string>
+    <string name="canary_flavor" translatable="false">Canary</string>
+    <string name="update_type_title">Тип модуля</string>
+    <string name="full_type">Полный</string>
+    <string name="xposed_type">Только Xposed</string>
     <string name="currentVersionTitle">Установленная версия: </string>
     <string name="lastestVersionTitle">Последняя версия: </string>
     <string name="root_not_here">ДОСТУП ROOT НЕ ПРЕДОСТАВЛЕН!</string>
@@ -323,19 +350,31 @@
     <string name="update_checking">Проверка…</string>
     <string name="update_download_started">Загрузка: нажмите на уведомление после завершения</string>
     <string name="update_word">Обновить</string>
-    <string name="switch_branches">Сменить ветку</string>
+    <string name="switch_branches">Сменить канал</string>
     <string name="reinstall_word">Переустановить</string>
+
+    <string name="title_activity_update" translatable="false">updateActivity</string>
 
     <string name="own_prefs_header">Настройки AOSPMods</string>
     <string name="language_title">Выберите язык</string>
     <string name="toggle_dark_apply">(Переключиться на темную тему)</string>
-    <string name="full_type">Целaя упаковка</string>
-    <string name="xposed_type">Только Xposed</string>
-    <string name="keyguard_dim_amount_title">Уровень затемнения обоев экрана блокировки</string>
-    <string name="qs_footer_text_value">Личный текст</string>
-    <string name="update_type_title">Тип приложения</string>
-    <string name="qs_leveled_flashlight_title">Плитка «Постепенный фонарик»</string>
-    <string name="qs_flashlight_level_global_title">Применить уровень фонарика глобально</string>
-    <string name="qs_qr_tile_inactive_title">Инвертировать цвет плитки QR-скана</string>
-    <string name="qs_leveled_flashlight_summary">Требуется поддерживаемое оборудование</string>
+
+    <string name="gesture_nav_extra_cat">Дополнительные жесты</string>
+    <string name="gesture_nav_long_swipe_fc_title">Проведите вверх по экрану, чтобы закрыть приложение</string>
+    <string name="gesture_nav_left_swipe_up_title">Свайп вверх слева в панели жестов</string>
+    <string name="gesture_nav_right_swipe_up_title">Свайп вверх справа в панели жестов</string>
+    <string name="gesture_nav_left_swipe_up_perecent">Ширина свайпа слева (%)</string>
+    <string name="gesture_nav_right_swipe_up_perecent">Ширина свайпа справа (%)</string>
+    <string name="gesture_nav_two_finger_title">Свайп вверх двумя пальцами</string>
+    <string name="gesture_nav_swipe_up_height">Минимальная высота активации свайпа</string>
+
+    <string name="none">Ничего</string>
+    <string name="screenshot">Скриншот</string>
+    <string name="back">Назад</string>
+    <string name="kill_forground_app">Закрыть приложение</string>
+    <string name="toggle_notification">Открыть панель уведомлений</string>
+    <string name="toggle_one_handed">Переключение режима управления одной рукой</string>
+    <string name="insecure_screenshot">Небезопасный скриншот</string>
+    <string name="screenshot_chord_insecure">Гр.вверх+кн.питания небезопасный скриншот</string>
+
 </resources>

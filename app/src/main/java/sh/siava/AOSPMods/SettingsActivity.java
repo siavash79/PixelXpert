@@ -301,17 +301,22 @@ public class SettingsActivity extends AppCompatActivity implements
 
     @SuppressWarnings("ConstantConditions")
     public static class NavFragment extends PreferenceFragmentCompat {
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> updateVisibility(sharedPreferences);
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.nav_prefs, rootKey);
-
-            updateVisibility();
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+            updateVisibility(prefs);
         }
 
-        private void updateVisibility() {
+        private void updateVisibility(SharedPreferences prefs) {
             findPreference("HideNavbarOverlay").setVisible(showOverlays);
+
+            int taskBarMode = Integer.parseInt(prefs.getString("taskBarMode", "0"));
+            findPreference("TaskbarAsRecents").setVisible(taskBarMode == 1);
         }
 
     }

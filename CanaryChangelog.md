@@ -1,3 +1,6 @@
+**canary-136**  
+- Added option to convert the taskbar to "recents bar"  
+  
 **canary-135**  
 - Added option to hide privacy indicators (Statusbar)  
   

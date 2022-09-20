@@ -195,32 +195,9 @@
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Skonfiguruj gest powrotu</string>
-    <string name="back_from_left_title">Lewa strona ekranu</string>
-    <string name="back_from_right_title">Prawa strona ekranu</string>
-    <string name="back_height_title">Wysokość gestu</string>
-    <string name="gesturenav_header">Nawigacja gestami</string>
-    <string name="gesture_nav_pill_cat">Pigułka paska nawigacyjnego</string>
-    <string name="gesture_nav_pill_mod_title">Zmodyfikuj pigułkę paska nawigacyjnego</string>
-    <string name="gesture_nav_pill_width_title">Szerokość w porównaniu do rozmiaru standardowego</string>
-    <string name="gesture_nav_pill_height_title">Wysokość w porównaniu do rozmiaru standardowego</string>
-    <string name="threebutton_header_title">3-przyciskowa nawigacja</string>
-    <string name="back_longpress_kill_title">Naciśnij i przytrzymaj, aby zabić aplikację na pierwszym planie</string>
-    <string name="modify_3button_title">Zmodyfikuj kolejność przycisków</string>
-    <string name="three_button_left_title">Lewy przycisk</string>
-    <string name="three_button_center_title">Środkowy przycisk</string>
-    <string name="three_button_right_title">Prawy przycisk</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
-    <string name="hide_navbar_title">Ukryj pasek nawigacyjny</string>
-    <string name="colorpill_title">Koloruj pigułkę gestów</string>
-    <string name="colorpill">Pigułka z akcentem w kolorze gestów</string>
-    <string name="reducekeyboard_title">Miejsce na klawiaturę dla gestów</string>
-    <string name="reducekeyboard">Zmniejsz miejsce na klawiaturze</string>
-    <string name="taskbar_status_title">Pasek zadań Androida</string>
-    <string name="taskbar_force_enable_title">Wymuś włączone</string>
-    <string name="taskbar_force_disable_title">Wymuszanie wyłączone</string>
+
 
     <!--Miscellaneous section related-->
-    <string name="back_gesture_category_title">Skonfiguruj gest powrotu</string>
     <string name="back_from_left_title">Lewa strona ekranu</string>
     <string name="back_from_right_title">Prawa strona ekranu</string>
     <string name="back_height_title">Wysokość gestu</string>

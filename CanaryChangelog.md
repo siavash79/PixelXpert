@@ -1,3 +1,6 @@
+**canary-137**  
+- improvements on recents bar  
+  
 **canary-136**  
 - Added option to convert the taskbar to "recents bar"  
   

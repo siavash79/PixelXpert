@@ -318,4 +318,6 @@
     <string name="more_area">Aumentar área</string>
     <string name="less_area">Diminuir área</string>
     <string name="display_resolution_title">Resolução do ecrã</string>
+    <string name="hide_privacychip_title">Esconder indicadores de privacidade</string>
+    <string name="taskbar_as_recents_title">Converter barra de tarefas para apps recentes</string>
 </resources>

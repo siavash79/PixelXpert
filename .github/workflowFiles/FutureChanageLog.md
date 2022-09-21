@@ -1,6 +1,6 @@
-- Added option to (un)dim lockscreen wallpaper (Lockscreen)  
-- Added option to modify 3-button navigation order (Navigation bar)  
-- Added extra gestures on navigationbar (Navigation bar)  
-- Added VolDown+Power insecure screenshot option (Misc)  
-- Bugfixes  
+- Added option to change the display resolution (Misc)  
+- Added Wifi name variable in dynamic texts (Shout out to: hyproman@Github)  
+- Added option to hide privacy indicators (Statusbar)  
+- Added option to convert the taskbar to "Recents bar" (Navigation)  
+- Misc bugfixes  
   

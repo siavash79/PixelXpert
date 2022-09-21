@@ -1,3 +1,10 @@
+**2.2.0**  
+- Added option to change the display resolution (Misc)  
+- Added Wifi name variable in dynamic texts (Shout out to: hyproman@Github)  
+- Added option to hide privacy indicators (Statusbar)  
+- Added option to convert the taskbar to "Recents bar" (Navigation)  
+- Misc bugfixes  
+    
 **2.1.0**  
 - Added option to (un)dim lockscreen wallpaper (Lockscreen)  
 - Added option to modify 3-button navigation order (Navigation bar)  

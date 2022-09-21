@@ -1,3 +1,6 @@
+**canary-138**  
+- improvements on recents bar  
+  
 **canary-137**  
 - improvements on recents bar  
   

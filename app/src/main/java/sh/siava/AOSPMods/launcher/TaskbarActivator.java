@@ -125,7 +125,7 @@ public class TaskbarActivator extends XposedModPack {
 		hookAllMethods(RecentTasksListClass, "onRecentTasksChanged", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(!TaskbarAsRecents || refreshing) return;
+				if(!TaskbarAsRecents || refreshing || TaskBarView == null) return;
 
 				new Thread(() -> {
 					refreshing = true;
@@ -137,8 +137,6 @@ public class TaskbarActivator extends XposedModPack {
 							try
 							{
 								Object mSysUiProxy = getObjectField(param.thisObject, "mSysUiProxy");
-
-								if(TaskBarView == null) return;
 
 								ArrayList<?> recentTaskList = (ArrayList<?>) callMethod(mSysUiProxy, "getRecentTasks", numShownHotseatIcons+1, UID);
 								recentTaskList.removeIf(r -> getBooleanField(getObjectField(r, "mTaskInfo1"), "isFocused"));

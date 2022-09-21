@@ -1,3 +1,24 @@
+**canary-138**  
+- improvements on recents bar  
+  
+**canary-137**  
+- improvements on recents bar  
+  
+**canary-136**  
+- Added option to convert the taskbar to "recents bar"  
+  
+**canary-135**  
+- Added option to hide privacy indicators (Statusbar)  
+  
+**canary-134**  
+- Added Wifi name variable into dynamic texts Shout out to: hyproman@Github  
+  
+**canary-133**  
+- Added option to change display resolution  
+  
+**canary-132**  
+- Misc bugfixes  
+  
 **canary-131**  
 - Added VolDown+Power insecure screenshot option (Misc)  
   

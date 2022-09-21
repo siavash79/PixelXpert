@@ -301,17 +301,22 @@ public class SettingsActivity extends AppCompatActivity implements
 
     @SuppressWarnings("ConstantConditions")
     public static class NavFragment extends PreferenceFragmentCompat {
+        SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> updateVisibility(sharedPreferences);
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             getPreferenceManager().setStorageDeviceProtected();
             setPreferencesFromResource(R.xml.nav_prefs, rootKey);
-
-            updateVisibility();
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+            prefs.registerOnSharedPreferenceChangeListener(listener);
+            updateVisibility(prefs);
         }
 
-        private void updateVisibility() {
+        private void updateVisibility(SharedPreferences prefs) {
             findPreference("HideNavbarOverlay").setVisible(showOverlays);
+
+            int taskBarMode = Integer.parseInt(prefs.getString("taskBarMode", "0"));
+            findPreference("TaskbarAsRecents").setVisible(taskBarMode == 1);
         }
 
     }
@@ -532,7 +537,27 @@ public class SettingsActivity extends AppCompatActivity implements
                         getString(R.string.restart_needed)));
 
                 findPreference("CustomThemedIconsOverlay").setVisible(showOverlays);
-            } catch (Exception ignored){}
+
+                float displayOverride = 100;
+                try
+                {
+                    displayOverride = RangeSliderPreference.getValues(prefs, "displayOverride",100f).get(0);
+                } catch (Exception ignored){}
+                double increasedArea = Math.round(Math.abs(Math.pow(displayOverride, 2)/100 - 100));
+
+                findPreference("displayOverride").setSummary(String.format("%s \n (%s)",
+                        displayOverride == 100
+                                ? getString(R.string.word_default)
+                                : String.format("%s%% - %s%% %s",
+                                String.valueOf(displayOverride),
+                                String.valueOf(increasedArea),
+                                    displayOverride > 100
+                                            ? getString(R.string.more_area)
+                                            : getString(R.string.less_area)),
+                                    getString(R.string.sysui_restart_needed)));
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
     @SuppressWarnings("ConstantConditions")

@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.launcher;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
@@ -180,7 +181,7 @@ public class CustomNavGestures extends XposedModPack {
 
 		if(pointers == 1)
 		{
-			boolean FCAllowed = swipeType != SWIPE_NONE;
+			boolean FCAllowed = swipeType == SWIPE_NONE;
 
 			if(FCAllowed
 					&& FCLongSwipeEnabled

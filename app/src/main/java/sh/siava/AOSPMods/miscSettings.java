@@ -14,6 +14,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.utils.ModuleFolderOperations;
 import sh.siava.AOSPMods.utils.StringFormatter;
 import sh.siava.AOSPMods.utils.SystemUtils;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class miscSettings extends XposedModPack {
     
@@ -63,11 +64,31 @@ public class miscSettings extends XposedModPack {
             if(AOSPMods.isSecondProcess) return;
             
             //startup jobs
+            setDisplayOverride();
+
             updateSysUITuner();
             updateFontsInfrastructure();
 
             setVolumeSteps();
         }
+    }
+
+    private void setDisplayOverride() {
+        float displayOverride = 1f;
+        try
+        {
+            displayOverride = RangeSliderPreference.getValues(Xprefs, "displayOverride",100f).get(0) / 100f;
+        }catch (Exception ignored){}
+
+        String sizeResult = Shell.cmd("wm size").exec().getOut().get(0);
+        String[] physicalSizes = sizeResult.replace("Physical size: ", "").split("x");
+        int w = Integer.parseInt(physicalSizes[0]);
+        int h = Integer.parseInt(physicalSizes[1]);
+
+        int overrideW = Math.round(w * displayOverride);
+        int overrideH = Math.round(h * displayOverride);
+
+        Shell.cmd(String.format("wm size %sx%s", overrideW, overrideH)).submit();
     }
 
     private void setVolumeSteps() {

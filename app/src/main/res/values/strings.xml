@@ -12,6 +12,8 @@
     <string name="general_off">Off</string>
     <string name="sysui_restart_needed">Requires a SystemUI restart to apply</string>
     <string name="restart_needed">Requires a reboot to apply</string>
+    <string name="more_area">more area</string>
+    <string name="less_area">less area</string>
 
     <!--Category titles-->
     <string name="lockscreen_header_title">Lock Screen</string>
@@ -73,6 +75,7 @@
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
     <string name="combined_signal_icon_title">Combined signal icons</string>
     <string name="volte_icon_title">Show VoLTE icon when available</string>
+    <string name="hide_privacychip_title">Hide privacy indicators\n(Camera, Mic)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
     <string name="sbc_position_title">Clock position</string>
     <string name="sbc_ampm_style">AM/PM Style</string>
@@ -172,23 +175,23 @@
     <string name="quick_settings_tiles_category">QS Tile Options</string>
     <string name="qs_tile_style_title">QS Tile themes</string>
     <string name="qstile_default">Default</string>
-    <string name="qstile_cookie">Cookie</string>
-    <string name="qstile_triangles">Triangle</string>
-    <string name="qstile_divided">Divided Circle</string>
-    <string name="qstile_attemptmountain">An attempt at a mountain</string>
-    <string name="qstile_squircle_trim">Squircle with trim</string>
-    <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">Wavey</string>
-    <string name="qstile_squaremedo">The Squaremedo</string>
-    <string name="qstile_dual_tone_circle">Dual tone circle</string>
-    <string name="qstile_circleoutline">Circle Outline</string>
-    <string name="qstile_pokesign">Pokesign</string>
-    <string name="qstile_cosmos">Shishu Cosmos</string>
-    <string name="qstile_neonlike">Neon Light</string>
-    <string name="qstile_circle_trim">Circle with trim</string>
-    <string name="qstile_dottedcircle">Dotted Circle</string>
-    <string name="qstile_inkdrop">Ink</string>
-    <string name="qstile_circle">Circle</string>
+    <string name="qstile_cookie" translatable="false">Cookie</string>
+    <string name="qstile_triangles" translatable="false">Triangle</string>
+    <string name="qstile_divided" translatable="false">Divided Circle</string>
+    <string name="qstile_attemptmountain" translatable="false">An attempt at a mountain</string>
+    <string name="qstile_squircle_trim" translatable="false">Squircle with trim</string>
+    <string name="qstile_ninja" translatable="false">Ninja</string>
+    <string name="qstile_wavey" translatable="false">Wavey</string>
+    <string name="qstile_squaremedo" translatable="false">The Squaremedo</string>
+    <string name="qstile_dual_tone_circle" translatable="false">Dual tone circle</string>
+    <string name="qstile_circleoutline" translatable="false">Circle Outline</string>
+    <string name="qstile_pokesign" translatable="false">Pokesign</string>
+    <string name="qstile_cosmos" translatable="false">Shishu Cosmos</string>
+    <string name="qstile_neonlike" translatable="false">Neon Light</string>
+    <string name="qstile_circle_trim" translatable="false">Circle with trim</string>
+    <string name="qstile_dottedcircle" translatable="false">Dotted Circle</string>
+    <string name="qstile_inkdrop" translatable="false">Ink</string>
+    <string name="qstile_circle" translatable="false">Circle</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configure back gesture</string>
@@ -208,6 +211,7 @@
     <string name="three_button_right_title">Right button</string>
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Hide navigation bar</string>
+    <string name="taskbar_as_recents_title">Convert Taskbar to recents bar</string>
     <string name="colorpill_title">Colorize gesture pill</string>
     <string name="colorpill">Accent colored gesture pill</string>
     <string name="reducekeyboard_title">Keyboard space for gestures</string>
@@ -222,6 +226,7 @@
     <string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
     <string name="force_no_cutout">Ignore the camera cutout</string>
     <string name="volume_button_step_title">Volume steps (0 to 100%)</string>
+    <string name="display_resolution_title">Display resolution</string>
 
     <string name="so_power_longpress_torch_title">Long press Power button for torch</string>
     <string name="so_taptaptorch_title">Enable double-tap for lockscreen torch</string>
@@ -254,15 +259,15 @@
     <string name="signal_icons_theme_title">Signal Icons Theme</string>
     <string name="dt_styles_category">Dark theme styles</string>
     <string name="dt_styles">Choose a style</string>
-    <string name="dt_black">Pitch black</string>
-    <string name="dt_bakedgreen">Baked Green</string>
-    <string name="dt_chocox">Choco X</string>
-    <string name="dt_darkaubergine">Dark Aubergine</string>
-    <string name="dt_style">Dark Blue</string>
-    <string name="dt_darkgray">Dark Grey</string>
+    <string name="dt_black" translatable="false">Pitch black</string>
+    <string name="dt_bakedgreen" translatable="false">Baked Green</string>
+    <string name="dt_chocox" translatable="false">Choco X</string>
+    <string name="dt_darkaubergine" translatable="false">Dark Aubergine</string>
+    <string name="dt_style" translatable="false">Dark Blue</string>
+    <string name="dt_darkgray" translatable="false">Dark Grey</string>
     <string name="dt_materialocean" translatable="false">Material Ocean</string>
-    <string name="dt_night">Night</string>
-    <string name="dt_solarizeddark">Solarized Dark</string>
+    <string name="dt_night" translatable="false">Night</string>
+    <string name="dt_solarizeddark" translatable="false">Solarized Dark</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -325,7 +330,7 @@
     <string name="monitoring_category_title">Monitoring options</string>
     <string name="netstat_header">Network statistics settings</string>
 
-    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
+    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n$Nssid : WiFi SSID name (if applicable)\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads; excludes $Nssid)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
     <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">Updates</string>
     <string name="update_notification_title">Update downloaded</string>

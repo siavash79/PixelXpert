@@ -124,6 +124,7 @@ public class StringFormatter {
         long traffic = 0;
         Integer textColor = null;
         variable = variable.toLowerCase();
+        CharSequence transformed = null;
         try {
             switch (variable) {
                 case "crx":
@@ -141,9 +142,15 @@ public class StringFormatter {
                     traffic = SystemUtils.NetworkStats().getTodayDownloadBytes(variable.startsWith("c"))
                             + SystemUtils.NetworkStats().getTodayUploadBytes(variable.startsWith("c"));
                     break;
+                case "ssid":
+                    transformed = SystemUtils.NetworkStats().getSSIDName();
+                    break;
             }
             SystemUtils.NetworkStats().registerCallback(networkStatCallback);
-            return Helpers.getHumanizedBytes(traffic, .6f, "","", textColor);
+            if (transformed == null) {
+                transformed = Helpers.getHumanizedBytes(traffic, .6f, "","", textColor);
+            }
+            return transformed;
         }
         catch (Exception ignored)
         {

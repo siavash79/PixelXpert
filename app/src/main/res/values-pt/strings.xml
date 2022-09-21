@@ -315,4 +315,7 @@
     <string name="toggle_one_handed">Ativar modo para uma mão</string>
     <string name="insecure_screenshot">Captura de ecã inseguro</string>
     <string name="screenshot_chord_insecure">"Baixar vol.+Ligar/desligar para captura insegura"</string>
+    <string name="more_area">Aumentar área</string>
+    <string name="less_area">Diminuir área</string>
+    <string name="display_resolution_title">Resolução do ecrã</string>
 </resources>

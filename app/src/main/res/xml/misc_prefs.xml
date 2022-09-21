@@ -39,6 +39,18 @@
             android:summaryOn="@string/general_on"
             android:title="@string/force_no_cutout" />
 
+        <sh.siava.rangesliderpreference.RangeSliderPreference
+            android:key="displayOverride"
+            android:title="@string/display_resolution_title"
+
+            app:tickInterval="5"
+
+            app:valueCount="1"
+            app:minVal="50"
+            app:maxVal="200"
+
+            app:defaultValue="100" />
+
         <SeekBarPreference
             android:layout_width="wrap_content"
             android:defaultValue="10"

@@ -96,8 +96,12 @@ public class TaskbarActivator extends XposedModPack {
 
 		View.OnClickListener listener = view -> {
 			try {
-				int id = ((TaskInfo) getAdditionalInstanceField(view.getTag(), "taskInfo")).taskId;
-				callMethod(getStaticObjectField(ActivityManagerWrapperClass, "sInstance"), "startActivityFromRecents", id, null);
+				int id = (int) getAdditionalInstanceField(view.getTag(), "taskId");
+				callMethod(
+						getStaticObjectField(ActivityManagerWrapperClass, "sInstance"),
+						"startActivityFromRecents",
+						id,
+						null);
 			}catch (Throwable ignored){}
 		};
 
@@ -125,7 +129,10 @@ public class TaskbarActivator extends XposedModPack {
 		hookAllMethods(RecentTasksListClass, "onRecentTasksChanged", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(!TaskbarAsRecents || refreshing || TaskBarView == null) return;
+				if(!TaskbarAsRecents
+						|| refreshing
+						|| TaskBarView == null)
+					return;
 
 				new Thread(() -> {
 					refreshing = true;
@@ -138,25 +145,53 @@ public class TaskbarActivator extends XposedModPack {
 							{
 								Object mSysUiProxy = getObjectField(param.thisObject, "mSysUiProxy");
 
-								ArrayList<?> recentTaskList = (ArrayList<?>) callMethod(mSysUiProxy, "getRecentTasks", numShownHotseatIcons+1, UID);
-								recentTaskList.removeIf(r -> getBooleanField(getObjectField(r, "mTaskInfo1"), "isFocused"));
+								ArrayList<?> recentTaskList = (ArrayList<?>) callMethod(
+										mSysUiProxy,
+										"getRecentTasks",
+										numShownHotseatIcons+1,
+										UID);
 
-								if(recentTaskList.size() > numShownHotseatIcons) recentTaskList.remove(recentTaskList.size()-1);
+								recentTaskList.removeIf(r ->
+										getBooleanField(
+												getObjectField(r, "mTaskInfo1"),
+												"isFocused")
+								);
 
-								Object[] itemInfos = (Object[]) Array.newInstance(ItemInfoClass, Math.min(numShownHotseatIcons, recentTaskList.size()));
+								if(recentTaskList.size() > numShownHotseatIcons)
+									recentTaskList.remove(recentTaskList.size() - 1);
+
+								Object[] itemInfos = (Object[]) Array.newInstance(
+										ItemInfoClass,
+										Math.min(numShownHotseatIcons, recentTaskList.size()));
+
 								for(int i = 0; i < itemInfos.length; i++)
 								{
 									TaskInfo taskInfo = (TaskInfo) getObjectField(recentTaskList.get(i), "mTaskInfo1");
 
-									itemInfos[i] =  AppInfoClass.getConstructor(ComponentName.class, CharSequence.class, UserHandle.class, Intent.class).newInstance((ComponentName)getObjectField(taskInfo, "realActivity"), "", UserHandle.getUserHandleForUid(getIntField(taskInfo, "userId")), (Intent) getObjectField(taskInfo, "baseIntent"));
-									setAdditionalInstanceField(itemInfos[i], "taskInfo", taskInfo);
+									itemInfos[i] =  AppInfoClass.getConstructor(ComponentName.class, CharSequence.class, UserHandle.class, Intent.class)
+											.newInstance(
+													(ComponentName)getObjectField(taskInfo, "realActivity"),
+													"",
+													UserHandle.getUserHandleForUid(getIntField(taskInfo, "userId")),
+													(Intent) getObjectField(taskInfo, "baseIntent"));
+
+									setAdditionalInstanceField(itemInfos[i], "taskId", taskInfo.taskId);
 								}
+
 								callMethod(TaskBarView, "updateHotseatItems", new Object[]{itemInfos});
 
 								for(int i = 0; i < itemInfos.length; i++)
 								{
 									View iconView = TaskBarView.getChildAt(i);
-									setAdditionalInstanceField(iconView, "taskInfo", getAdditionalInstanceField(itemInfos[itemInfos.length-i-1], "taskInfo"));
+
+									try
+									{
+										if(getAdditionalInstanceField(iconView,"taskId")
+												.equals(getAdditionalInstanceField(itemInfos[itemInfos.length-i-1], "taskId")))
+											continue;
+									}catch (Throwable ignored){}
+
+									setAdditionalInstanceField(iconView, "taskId", getAdditionalInstanceField(itemInfos[itemInfos.length-i-1], "taskId"));
 									callMethod(iconView, "applyFromApplicationInfo", itemInfos[itemInfos.length-i-1]);
 									iconView.setOnClickListener(listener);
 								}

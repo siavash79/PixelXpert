@@ -82,7 +82,7 @@
     <string name="sbc_before_color">Text înainte de ceas</string>
     <string name="sbc_color">Ceas</string>
     <string name="sbc_after_color">Text după ceas</string>
-    <string name="network_settings_pref">Setări monitorizare rețea...</string>
+    <string name="network_settings_pref">Setări monitorizare rețea…</string>
     <string name="ntsb_far_left">Extrema stângă</string>
     <string name="ntsb_far_left_extra">Extrema stângă - Deasupra notificărilor</string>
     <string name="ntsb_mid_left">Mijloc-Stânga</string>
@@ -163,23 +163,6 @@
     <string name="quick_settings_tiles_category">Opțiuni dale QS</string>
     <string name="qs_tile_style_title">Teme dale QS</string>
     <string name="qstile_default">Implicit</string>
-    <string name="qstile_cookie">Fursec</string>
-    <string name="qstile_triangles">Triunghi</string>
-    <string name="qstile_divided">Cerc divizat</string>
-    <string name="qstile_attemptmountain">O încercare de munte</string>
-    <string name="qstile_squircle_trim">Cerc tăiat</string>
-    <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">Ondulat</string>
-    <string name="qstile_squaremedo">Squaremedo</string>
-    <string name="qstile_dual_tone_circle">Cerc cu tonuri duale</string>
-    <string name="qstile_circleoutline">Cerc conturat</string>
-    <string name="qstile_pokesign">Pokesign</string>
-    <string name="qstile_cosmos">Shishu Cosmos</string>
-    <string name="qstile_neonlike">Lumină Neon</string>
-    <string name="qstile_circle_trim">Cerc tăiat</string>
-    <string name="qstile_dottedcircle">Cerc punctat</string>
-    <string name="qstile_inkdrop">Cerneală</string>
-    <string name="qstile_circle">Cerc</string>
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configurare gest înapoi</string>
     <string name="back_from_left_title">Partea stângă a ecranului</string>
@@ -238,14 +221,6 @@
     <string name="signal_icons_theme_title">Tema pictogramelor de semnal</string>
     <string name="dt_styles_category">Stil temă întunecată</string>
     <string name="dt_styles">Alege un stil</string>
-    <string name="dt_black">Negru complet</string>
-    <string name="dt_bakedgreen">Verde copt</string>
-    <string name="dt_chocox">Choco X</string>
-    <string name="dt_darkaubergine">Vânătă întunecată</string>
-    <string name="dt_style">Albastru închis</string>
-    <string name="dt_darkgray">Gri închis</string>
-    <string name="dt_night">Noapte</string>
-    <string name="dt_solarizeddark">Întuneric solarizat</string>
     <!-- Arrays strings -->
     <!-- Quick pull down -->
     <string name="pull_down_left">Stânga</string>

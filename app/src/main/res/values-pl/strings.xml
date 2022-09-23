@@ -1,8 +1,5 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Potwierdź, czy moduł jest aktywowany w LSPosed Manager</string>
     <string name="hide_default">Ukryj (domyślnie)</string>
     <string name="percent_of_default_size">%domyślnego rozmiaru</string>
@@ -59,9 +56,7 @@
     <string name="battery_style_title">Wybierz styl baterii</string>
     <string name="battery_show_percent_title">Pokaż procent baterii</string>
     <string name="battery_style_category_title">Styl baterii</string>
-    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Rozmiar ikony baterii</string>
-    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Ukryty</string>
     <string name="BIcon_Opacity_title">Nieprzezroczystość</string>
     <string name="sb_center_fine_tune">Dostrój obszar środkowy</string>
@@ -93,7 +88,7 @@
     <string name="sbc_before_color">Tekst przed zegarem</string>
     <string name="sbc_color">Zegar</string>
     <string name="sbc_after_color">Tekst po zegarze</string>
-    <string name="network_settings_pref">Ustawienia monitora sieci...</string>
+    <string name="network_settings_pref">Ustawienia monitora sieci…</string>
     <string name="ntsb_far_left">Daleko w lewo</string>
     <string name="ntsb_far_left_extra">Daleko po lewej – powyżej powiadomień</string>
     <string name="ntsb_mid_left">Środkowa lewa</string>
@@ -175,23 +170,6 @@
     <string name="quick_settings_tiles_category">Opcje płytek QS</string>
     <string name="qs_tile_style_title">Motywy QS Tile</string>
     <string name="qstile_default">Domyślna</string>
-    <string name="qstile_cookie">Ciastko</string>
-    <string name="qstile_triangles">Trójkąt</string>
-    <string name="qstile_divided">Podzielone koło</string>
-    <string name="qstile_attemptmountain">Próba zdobycia góry</string>
-    <string name="qstile_squircle_trim">Wiewiórka z wykończeniem</string>
-    <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">Wavey</string>
-    <string name="qstile_squaremedo">Squaremedo</string>
-    <string name="qstile_dual_tone_circle">Koło dwutonowe</string>
-    <string name="qstile_circleoutline">Zarys koła</string>
-    <string name="qstile_pokesign">Pokesign</string>
-    <string name="qstile_cosmos">Kosmos Shishu</string>
-    <string name="qstile_neonlike">Światło neonowe</string>
-    <string name="qstile_circle_trim">Koło z wykończeniem</string>
-    <string name="qstile_dottedcircle">Kropkowane kółko</string>
-    <string name="qstile_inkdrop">Atrament</string>
-    <string name="qstile_circle">Koło</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Skonfiguruj gest powrotu</string>
@@ -212,7 +190,6 @@
     <string name="three_button_left_title">Lewy przycisk</string>
     <string name="three_button_center_title">Środkowy przycisk</string>
     <string name="three_button_right_title">Prawy przycisk</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Ukryj pasek nawigacyjny</string>
     <string name="colorpill_title">Koloruj pigułkę gestów</string>
     <string name="colorpill">Pigułka z akcentem w kolorze gestów</string>
@@ -261,14 +238,6 @@
     <string name="signal_icons_theme_title">Motyw ikon sygnału</string>
     <string name="dt_styles_category">Ciemne style motywów</string>
     <string name="dt_styles">Wybierz styl</string>
-    <string name="dt_black">Czarna smoła</string>
-    <string name="dt_bakedgreen">Pieczony Zielony</string>
-    <string name="dt_chocox">Czekolada X</string>
-    <string name="dt_darkaubergine">Ciemny Bakłażan</string>
-    <string name="dt_style">Ciemny niebieski</string>
-    <string name="dt_darkgray">Ciemno szary</string>
-    <string name="dt_night">Noc</string>
-    <string name="dt_solarizeddark">Solarized Dark</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -329,7 +298,6 @@
     <string name="netstat_header">Ustawienia statystyk sieci</string>
 
     <string name="string_formatter_manual_body">Oprócz zwykłego tekstu, który można wprowadzić, dostępne są również zmienne dynamiczne:\n\n$G\&lt;format\&gt; : data gruzińska, na podstawie formatu. Aby uzyskać dokumentację formatu, wyszukaj `Java Date Format`\nPrzykład: $GMMM oznacza: Jan (lub dowolny inny)\n\n$P&lt;format&gt; : Data perska na podstawie formatu\nPrzykład: $Pyyyy oznacza: 1401\n\n$Nrx : Łączna liczba pobrań dzisiaj\n$Ntx: Łączna liczba przesłanych dzisiaj\n$Nall : Łączny ruch dzisiaj\n$Nssid : Nazwa SSID Wi-Fi (jeśli dotyczy)\n\nJeśli zastąpisz $N $Nc otrzymasz statystyki danych mobilnych (takie jak $Ncrx dla pobierania; z wyłączeniem $Nssid)\n\nPrzykład:\n`Ruch mobilny $GEEEE: $Ncall` wygeneruje:\n`Ruch mobilny we wtorek: 2GB`</string>
-    <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">Aktualizacje</string>
     <string name="update_notification_title">Pobrano aktualizację</string>
     <string name="update_notification_text">Kliknij tutaj, aby zainstalować</string>
@@ -337,7 +305,6 @@
     <string name="reboot_notification_text">Zmiany zaczną obowiązywać po ponownym uruchomieniu urządzenia</string>
     <string name="update_flavor_title">Zaktualizuj kanał</string>
     <string name="stable_flavor">Stabilny</string>
-    <string name="canary_flavor" translatable="false">Canary</string>
     <string name="update_type_title">typ przesyłki</string>
     <string name="full_type">Pełny</string>
     <string name="xposed_type">Tylko Xposed</string>
@@ -351,8 +318,6 @@
     <string name="update_word">Aktualizacja</string>
     <string name="switch_branches">Przełącz gałąź</string>
     <string name="reinstall_word">Zainstaluj ponownie</string>
-
-    <string name="title_activity_update" translatable="false">updateActivity</string>
 
     <string name="own_prefs_header">Ustawienia AOSPMods</string>
     <string name="language_title">Język</string>

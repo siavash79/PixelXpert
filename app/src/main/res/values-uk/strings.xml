@@ -217,7 +217,7 @@
     <string name="notifications_header">Налаштування сповіщень</string>
     <string name="expand_notifications_icons_title">"Додати всі кнопки "розгорнути/згорнути"</string>
     <string name="disable_overscroll">"Вимкнути еластичний ефект прокрутки</string>
-    <string name="overscroll_on_summary">Важливо: ОБОВ'ЯЗКОВО увімкніть програми, для яких ви хочете вимкнути прокрутку в LSPosed</string>
+    <string name="overscroll_on_summary">Важливо: ОБОВ\'ЯЗКОВО увімкніть програми, для яких ви хочете вимкнути прокрутку в LSPosed</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Примусово увімнути шрифт Google Sans по всій системі</string>

@@ -1,3 +1,6 @@
+**canary-140**  
+- Added - missing - Ukrainian language support  
+  
 **canary-139**  
 - Fixed QS footer colors when 1. on light theme and 2.QS light is disabled  
   

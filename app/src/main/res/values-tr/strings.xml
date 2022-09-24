@@ -161,23 +161,6 @@
     <string name="quick_settings_tiles_category">Hızlı Ayar Opsiyonları</string>
     <string name="qs_tile_style_title">Hızlı Ayar Temaları</string>
     <string name="qstile_default">Varsayılan</string>
-    <string name="qstile_cookie">Kurabiye</string>
-    <string name="qstile_triangles">Üçgen</string>
-    <string name="qstile_divided">Bölünmüş Daire</string>
-    <string name="qstile_attemptmountain">Bir dağ denemesi</string>
-    <string name="qstile_squircle_trim">Döşeme ile sincap</string>
-    <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">Dalgalı</string>
-    <string name="qstile_squaremedo">The Squaremedo</string>
-    <string name="qstile_dual_tone_circle">Çift tonlu daire</string>
-    <string name="qstile_circleoutline">Daire Anahatı</string>
-    <string name="qstile_pokesign">Pokemon simgesi</string>
-    <string name="qstile_cosmos">Shishu Kosmos</string>
-    <string name="qstile_neonlike">Neon Işığı</string>
-    <string name="qstile_circle_trim">Kesitli daire</string>
-    <string name="qstile_dottedcircle">Noktalı Daire</string>
-    <string name="qstile_inkdrop">Mürekkep</string>
-    <string name="qstile_circle">Daire</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Geri hareketini yapılandır</string>
@@ -238,14 +221,6 @@
     <string name="signal_icons_theme_title">Sinyal Simgeleri Teması</string>
     <string name="dt_styles_category">Karanlık tema stilleri</string>
     <string name="dt_styles">Bir stil seçin</string>
-    <string name="dt_black">Simsiyah</string>
-    <string name="dt_bakedgreen">Yeşilimsi</string>
-    <string name="dt_chocox">Çikolata</string>
-    <string name="dt_darkaubergine">Koyu Patlıcan</string>
-    <string name="dt_style">Lacivert</string>
-    <string name="dt_darkgray">Koyu Gri</string>
-    <string name="dt_night">Gece</string>
-    <string name="dt_solarizeddark">Solarize Karanlık</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

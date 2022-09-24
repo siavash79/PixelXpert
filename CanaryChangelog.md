@@ -1,3 +1,6 @@
+**canary-139**  
+- Fixed QS footer colors when 1. on light theme and 2.QS light is disabled  
+  
 **canary-138**  
 - improvements on recents bar  
   

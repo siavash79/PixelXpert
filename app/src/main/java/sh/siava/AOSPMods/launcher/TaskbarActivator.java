@@ -10,6 +10,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.app.TaskInfo;
@@ -28,6 +29,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class TaskbarActivator extends XposedModPack {
@@ -36,7 +38,7 @@ public class TaskbarActivator extends XposedModPack {
 	public static final int TASKBAR_DEFAULT = 0;
 	public static final int TASKBAR_ON = 1;
 	public static final int TASKBAR_OFF = 2;
-	
+
 	private static int taskbarMode = 0;
 	private ViewGroup TaskBarView = null;
 	private static int numShownHotseatIcons = 0;
@@ -44,6 +46,7 @@ public class TaskbarActivator extends XposedModPack {
 	private Object recentTasksList;
 	private boolean TaskbarAsRecents = false;
 	private boolean refreshing = false;
+	private static float taskbarHeightOverride = 1f;
 
 	public TaskbarActivator(Context context) { super(context); }
 	
@@ -66,16 +69,22 @@ public class TaskbarActivator extends XposedModPack {
 					} catch (Exception ignored) {}
 					break;
 				case "TaskbarAsRecents":
+				case "taskbarHeightOverride":
 					android.os.Process.killProcess(android.os.Process.myPid());
 					break;
 			}
 		}
 		else
 		{
+			try
+			{
+				taskbarHeightOverride = RangeSliderPreference.getValues(Xprefs, "taskbarHeightOverride", 100f).get(0) / 100f;
+			}catch (Throwable ignored){}
+
 			taskbarMode = Integer.parseInt(taskbarModeStr);
 		}
 	}
-	
+
 	@Override
 	public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
 	
@@ -108,6 +117,11 @@ public class TaskbarActivator extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				numShownHotseatIcons = getIntField(param.thisObject, "numShownHotseatIcons");
+
+				if(taskbarHeightOverride != 1f)
+				{
+					setObjectField(param.thisObject, "taskbarSize", Math.round(getIntField(param.thisObject, "taskbarSize") * taskbarHeightOverride));
+				}
 			}
 		});
 
@@ -206,7 +220,7 @@ public class TaskbarActivator extends XposedModPack {
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if(!TaskbarAsRecents) return;
 
-				if(TaskBarView.getChildCount() == 0)
+				if(TaskBarView.getChildCount() == 0 && recentTasksList != null)
 				{
 					callMethod(recentTasksList, "onRecentTasksChanged");
 				}

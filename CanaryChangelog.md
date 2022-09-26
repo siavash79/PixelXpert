@@ -1,3 +1,6 @@
+**canary-141**  
+- Added option to modify the taskbar height  
+  
 **canary-140**  
 - Added - missing - Ukrainian language support  
   

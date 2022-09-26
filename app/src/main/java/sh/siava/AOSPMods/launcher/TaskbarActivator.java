@@ -41,7 +41,6 @@ public class TaskbarActivator extends XposedModPack {
 	private ViewGroup TaskBarView = null;
 	private static int numShownHotseatIcons = 0;
 	private int UID = 0;
-	private boolean initDone = false;
 	private Object recentTasksList;
 	private boolean TaskbarAsRecents = false;
 	private boolean refreshing = false;
@@ -207,9 +206,8 @@ public class TaskbarActivator extends XposedModPack {
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if(!TaskbarAsRecents) return;
 
-				if(!initDone)
+				if(TaskBarView.getChildCount() == 0)
 				{
-					initDone = true;
 					callMethod(recentTasksList, "onRecentTasksChanged");
 				}
 				param.setResult(null);

@@ -71,7 +71,7 @@
     <string name="lte_4g_icon_title">LTE / 4G Symbol</string>
     <string name="combined_signal_icon_title">Kombinierte Empfangssymbole</string>
     <string name="volte_icon_title">VoLTE-Symbol anzeigen, wenn verfügbar</string>
-    <string name="hide_privacychip_title">Datenschutzindikatoren ausblenden\\n(Kamera, Mikrofon)</string>
+    <string name="hide_privacychip_title">Datenschutzindikatoren ausblenden\n(Kamera, Mikrofon)</string>
     <string name="sb_vibration_switch_title">Zeige Vibration/Lautlos Symbole</string>
     <string name="sbc_position_title">Uhr Position</string>
     <string name="sbc_ampm_style">AM/PM Stil</string>

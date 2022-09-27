@@ -40,6 +40,19 @@
             android:title="@string/force_no_cutout" />
 
         <sh.siava.rangesliderpreference.RangeSliderPreference
+            android:key="BrightnessRange"
+            android:title="@string/brightness_range_title"
+            android:summary="@string/brightness_range_not_linear"
+
+            app:tickInterval=".01"
+
+            app:valueCount="2"
+            app:minVal="0"
+            app:maxVal="100"
+
+            app:defaultValue="0,100" />
+
+        <sh.siava.rangesliderpreference.RangeSliderPreference
             android:key="displayOverride"
             android:title="@string/display_resolution_title"
 

@@ -235,8 +235,6 @@
     <string name="signal_icons_theme_title">Тема иконок сигнала</string>
     <string name="dt_styles_category">Стили темной темы</string>
     <string name="dt_styles">Выберите стиль</string>
-    <string name="dt_night">Ночной</string>
-    <string name="dt_solarizeddark">Солярно Темный</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

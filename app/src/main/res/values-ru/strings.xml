@@ -188,6 +188,7 @@
     <string name="three_button_center_title">Центральная кнопка</string>
     <string name="three_button_right_title">Правая кнопка</string>
     <string name="hide_navbar_title">Скрыть панель жестов</string>
+    <string name="taskbar_height_title">Высота панели задач</string>
     <string name="colorpill_title">Раскрасить панель жестов</string>
     <string name="colorpill">Панель жестов с акцентом темы</string>
     <string name="reducekeyboard_title">Пространство между клавиатурой и жестами</string>
@@ -204,6 +205,8 @@
     <string name="volume_button_step_title">Шаг громкости (от 0 до 100%)</string>
     <string name="display_resolution_title">Разрешение диплея</string>
 
+    <string name="brightness_range_title">Пределы яркости дисплея</string>
+    <string name="brightness_range_not_linear">Этот диапазон НЕ является линейным: иногда небольшая разница приводит к значительным изменениям.</string>
     <string name="so_power_longpress_torch_title">Долгое нажатие кнопки питания для включения фонарика</string>
     <string name="so_taptaptorch_title">Двойное нажатие для включения фонарика</string>
     <string name="so_taptaptorch_summary">Двойное нажатие для быстрого включения фонарика</string>

@@ -1,3 +1,6 @@
+**canary-142**  
+- Added option to modify the display brightness limits (Misc)  
+  
 **canary-141**  
 - Added option to modify the taskbar height  
   

@@ -1,3 +1,6 @@
+**canary-143**  
+- Fixed app UI's slider bug  
+  
 **canary-142**  
 - Added option to modify the display brightness limits (Misc)  
   

@@ -15,7 +15,7 @@
     <string name="less_area">daha az</string>
     <string name="lockscreen_header_title">Kilit Ekranı</string>
     <string name="statusbar_header">Durum Çubuğu</string>
-    <string name="nav_header">Navigasyon Çubuğu</string>
+    <string name="nav_header">Gezinme Çubuğu</string>
     <string name="misc_header">Muhtelif</string>
     <string name="qs_panel_category_title">Hızlı Ayarlar Paneli</string>
     <string name="theme_customization_category">Temalandırma</string>
@@ -171,8 +171,8 @@
     <string name="back_from_right_title">Ekranın sağ tarafı</string>
     <string name="back_height_title">Jest hareketi yüksekliği</string>
     <string name="gesturenav_header">Jest hareketi navigasyonu</string>
-    <string name="gesture_nav_pill_cat">Navigasyon çubuğu genişliği</string>
-    <string name="gesture_nav_pill_mod_title">Navigasyon çubuğu genişliğini değiştirin</string>
+    <string name="gesture_nav_pill_cat">Gezinme Çubuğu genişliği</string>
+    <string name="gesture_nav_pill_mod_title">Gezinme Çubuğu genişliğini değiştirin</string>
     <string name="gesture_nav_pill_width_title">Standart boyuta göre genişlik</string>
     <string name="gesture_nav_pill_height_title">Standart boyuta göre yükseklik</string>    
     <string name="threebutton_header_title">3 düğmeli gezinme</string>
@@ -181,10 +181,10 @@
     <string name="three_button_left_title">Sol düğme</string>
     <string name="three_button_center_title">Orta düğme</string>
     <string name="three_button_right_title">Sağ düğme</string>
-    <string name="hide_navbar_title">Navigasyon çubuğunu gizle</string>
+    <string name="hide_navbar_title">Gezinme çubuğunu gizle</string>
     <string name="taskbar_height_title">Görev Çubuğu yüksekliği</string>
-    <string name="colorpill_title">Navigasyon çubuğunu renklendir</string>
-    <string name="colorpill">Navigasyon çubuğunu vurgu rengine göre renklendir</string>
+    <string name="colorpill_title">Gezinme Çubuğunu renklendir</string>
+    <string name="colorpill">Gezinme Çubuğunu vurgu rengine göre renklendir</string>
     <string name="reducekeyboard_title">Klavye altı jest hareket alanı</string>
     <string name="reducekeyboard">Klavyede altı alanı azaltın</string>
     <string name="taskbar_status_title">Android Görev Çubuğu</string>
@@ -323,10 +323,10 @@
     <string name="qs_flashlight_level_global_title">El feneri seviyesini global olarak uygula</string>
     <string name="qs_qr_tile_inactive_title">QR-Tarama döşeme rengini ters çevir</string>
     <string name="qs_leveled_flashlight_summary">Desteklenen donanım gerektirir</string>
-    <string name="gesture_nav_extra_cat">Ekstra Navbar hareketleri</string>
+    <string name="gesture_nav_extra_cat">Ekstra Gezinme Çubuğu hareketleri</string>
     <string name="gesture_nav_long_swipe_fc_title">Uygulamayı kapatmak için ekranın üstüne doğru kaydırın</string>
-    <string name="gesture_nav_left_swipe_up_title">Navbarın solundan yukarı kaydırma</string>
-    <string name="gesture_nav_right_swipe_up_title">Navbarın sağından yukarı kaydırma</string>
+    <string name="gesture_nav_left_swipe_up_title">Gezinme Çubuğunun solundan yukarı kaydırma</string>
+    <string name="gesture_nav_right_swipe_up_title">Gezinme Çubuğunun sağından yukarı kaydırma</string>
     <string name="gesture_nav_left_swipe_up_perecent">Soldan yukarı kaydırma alan genişliği</string>
     <string name="gesture_nav_right_swipe_up_perecent">Sağdan yukarı kaydırma alan genişliği</string>
     <string name="gesture_nav_two_finger_title">İki barmakla yukarı kaydırma jesti</string>

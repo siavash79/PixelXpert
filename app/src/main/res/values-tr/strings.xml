@@ -2,7 +2,7 @@
     <!--General strings-->
     <string name="error_not_activated">Lütfen modülün LSPosed Manager\'da etkinleştirildiğinden emin olun</string>
     <string name="hide_default">Gizle (Varsayılan)</string>
-    <string name="percent_of_default_size">% of default size</string>
+    <string name="percent_of_default_size">Varsayılan boyut</string>
     <string name="overlay_none_title">(Varsayılan)</string>
     <string name="general_section">Genel seçenekler</string>
     <string name="general_on">Açık</string>

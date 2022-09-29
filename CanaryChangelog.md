@@ -1,3 +1,18 @@
+**canary-143**  
+- Fixed app UI's slider bug  
+  
+**canary-142**  
+- Added option to modify the display brightness limits (Misc)  
+  
+**canary-141**  
+- Added option to modify the taskbar height  
+  
+**canary-140**  
+- Added - missing - Ukrainian language support  
+  
+**canary-139**  
+- Fixed QS footer colors when 1. on light theme and 2.QS light is disabled  
+  
 **canary-138**  
 - improvements on recents bar  
   

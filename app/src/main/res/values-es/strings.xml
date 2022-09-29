@@ -161,23 +161,6 @@
     <string name="quick_settings_tiles_category">Opciones de los botones de ajustes rápidos</string>
     <string name="qs_tile_style_title">Temas de los botones de ajustes rápidos</string>
     <string name="qstile_default"> Por defecto</string>
-    <string name="qstile_cookie">Galleta</string>
-    <string name="qstile_triangles">Triángulo</string>
-    <string name="qstile_divided">Círculo dividida</string>
-    <string name="qstile_attemptmountain">Montaña</string>
-    <string name="qstile_squircle_trim">Circulo cuadrado con ribete</string>
-    <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">Onda</string>
-    <string name="qstile_squaremedo">El Squaremedo</string>
-    <string name="qstile_dual_tone_circle">Circulo de doble tono</string>
-    <string name="qstile_circleoutline">Circulo con contorno</string>
-    <string name="qstile_pokesign">Símbolo de Pokémon</string>
-    <string name="qstile_cosmos">Cosmos de Shishu</string>
-    <string name="qstile_neonlike">Luz de neón</string>
-    <string name="qstile_circle_trim">Circulo con ribete</string>
-    <string name="qstile_dottedcircle">Circulo punteado</string>
-    <string name="qstile_inkdrop">Gota de tinta</string>
-    <string name="qstile_circle">Circulo</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Personalizar gesto atrás</string>
@@ -238,14 +221,6 @@
     <string name="signal_icons_theme_title">Tema de los iconos de red</string>
     <string name="dt_styles_category">Estilos de tema oscuro</string>
     <string name="dt_styles">Seleccione un estilo</string>
-    <string name="dt_black">Oscuridad total</string>
-    <string name="dt_bakedgreen">Verde oscuro</string>
-    <string name="dt_chocox">Choco X</string>
-    <string name="dt_darkaubergine">Berenjena oscuro</string>
-    <string name="dt_style">Azul oscuro</string>
-    <string name="dt_darkgray">Gris oscuro</string>
-    <string name="dt_night">Noche</string>
-    <string name="dt_solarizeddark">Solarizado oscuro</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

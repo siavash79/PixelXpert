@@ -11,6 +11,8 @@
     <string name="restart_needed">Benötigt einen Neustart zum aktivieren</string>
 
     <!--Category titles-->
+    <string name="more_area">mehr Fläche</string>
+    <string name="less_area">weniger Fläche</string>
     <string name="lockscreen_header_title">Sperrbildschirm</string>
     <string name="statusbar_header">Statusleiste</string>
     <string name="nav_header">Navigationsleiste</string>
@@ -69,6 +71,7 @@
     <string name="lte_4g_icon_title">LTE / 4G Symbol</string>
     <string name="combined_signal_icon_title">Kombinierte Empfangssymbole</string>
     <string name="volte_icon_title">VoLTE-Symbol anzeigen, wenn verfügbar</string>
+    <string name="hide_privacychip_title">Datenschutzindikatoren ausblenden\n(Kamera, Mikrofon)</string>
     <string name="sb_vibration_switch_title">Zeige Vibration/Lautlos Symbole</string>
     <string name="sbc_position_title">Uhr Position</string>
     <string name="sbc_ampm_style">AM/PM Stil</string>
@@ -163,24 +166,7 @@
     <string name="quick_settings_tiles_category">Schnelleinstellungsverknüpfingsoptionen</string>
     <string name="qs_tile_style_title">Schnelleinstellungsstile</string>
     <string name="qstile_default">Standard</string>
-    <string name="qstile_cookie">Keks</string>
-    <string name="qstile_triangles">Dreieck</string>
-    <string name="qstile_divided">Geteilter Kreis</string>
-    <string name="qstile_attemptmountain">Ein Versuch eines Berges</string>
-    <string name="qstile_squircle_trim">Squircle mit einem Schnitt</string>
-    <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">Wellig</string>
-    <string name="qstile_squaremedo">The Squaremedo</string>
-    <string name="qstile_dual_tone_circle">2-farbiger Kreis</string>
-    <string name="qstile_circleoutline">Kreisförmige Außenlinie</string>
-    <string name="qstile_pokesign">Pokesign</string>
-    <string name="qstile_cosmos">Shishu Kosmos</string>
-    <string name="qstile_neonlike">Neonlicht</string>
-    <string name="qstile_circle_trim">Kreis mit einem Schnitt</string>
-    <string name="qstile_dottedcircle">gepunkteter Kreis</string>
-    <string name="qstile_inkdrop">Tinte</string>
-    <string name="qstile_circle">Kreis</string>
-	
+
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Anpassen der Zurück-Geste</string>
     <string name="back_from_left_title">linker Bildschirmrand</string>
@@ -193,7 +179,12 @@
     <string name="gesture_nav_pill_height_title">Höhe im Vergleich zu der Standartbreite</string>
     <string name="threebutton_header_title">3-Schaltflächen Navigation</string>
     <string name="back_longpress_kill_title">Zurück Taste lange drücken um die Anwendung im Vordergrund zu schließen</string>
+    <string name="modify_3button_title">Ändern Sie die Reihenfolge der Schaltflächen</string>
+    <string name="three_button_left_title">Linker Knopf</string>
+    <string name="three_button_center_title">Mittler Knopf</string>
+    <string name="three_button_right_title">Rechter Knopf</string>
     <string name="hide_navbar_title">Verstecke Gestennavigationsleiste</string>
+    <string name="taskbar_height_title">Höhe der Taskleiste</string>
     <string name="colorpill_title">Gestennavigationsleistenfarbe</string>
     <string name="colorpill">Gestennavigationsleisten in Akzentfarbe</string>
     <string name="reducekeyboard_title">Tastatur Gestenbereich</string>
@@ -207,8 +198,11 @@
 	<string name="allow_all_screen_rotations">Entsperre alle Bildschirmdrehungen</string>
     <string name="allow_all_screen_rotations_summary">Ignoriert auch die schwebende Schaltfläche für die manuelle Drehung</string>
     <string name="force_no_cutout">Kameraausschnitt ignorieren</string>
-    <string name="volume_button_step_title">Lautstärkeschritte (0 bis 100%)</string>		
-	
+    <string name="volume_button_step_title">Lautstärkeschritte (0 bis 100%)</string>
+
+    <string name="display_resolution_title">Bildschirmauflösung</string>
+    <string name="brightness_range_title">Helligkeitsgrenzen anzeigen</string>
+    <string name="brightness_range_not_linear">Dieser Bereich ist NICHT linear: Manchmal führt ein kleiner Unterschied zu erheblichen Veränderungen</string>
     <string name="so_power_longpress_torch_title">Einschalter lange drücken für Taschenlampe*</string>
     <string name="so_taptaptorch_title">Aktivieren die Doppeltipp-Taschenlampe</string>
     <string name="so_taptaptorch_summary">Doppeltippen auf die Sperrbildschirmanzeige und halten dann den Finger auf dem Sperrbildschirm, fur Fackel</string>
@@ -240,15 +234,7 @@
     <string name="signal_icons_theme_title">Empfangssymbolstile</string>
     <string name="dt_styles_category">Dunkelmodus Stile</string>
     <string name="dt_styles">Wähle einen Stil</string>
-    <string name="dt_black">Pechschwarz</string>
-    <string name="dt_bakedgreen">Gebackenes Grün</string>
-    <string name="dt_chocox">Choco X</string>
-    <string name="dt_darkaubergine">Dunkle Aubergine</string>
-    <string name="dt_style">Dunkelblau</string>
-    <string name="dt_darkgray">Dunkelgrau</string>
-    <string name="dt_night">Nacht</string>
-    <string name="dt_solarizeddark">Solarisiertes Dunkel</string>
-	
+
     <!-- Arrays strings -->
     <!-- Quick pull down -->
     <string name="pull_down_left">links</string>
@@ -339,4 +325,21 @@
     <string name="qs_flashlight_level_global_title">Wenden die Taschenlampenstufe global an</string>
     <string name="qs_qr_tile_inactive_title">QR-Scan-Kachelfarbe umkehren</string>
     <string name="qs_leveled_flashlight_summary">Erfordert unterstützte Hardware</string>
+    <string name="gesture_nav_extra_cat">Zusätzliche Gesten für die Navigationsleiste</string>
+    <string name="gesture_nav_long_swipe_fc_title">Streichen Sie zum oberen Bildschirmrand, um die Vordergrund-App zu beenden</string>
+    <string name="gesture_nav_left_swipe_up_title">Aktion von links in der Navbar nach oben wischen</string>
+    <string name="gesture_nav_right_swipe_up_title">Aktion von rechts in der Navbar nach oben wischen</string>
+    <string name="gesture_nav_left_swipe_up_perecent">Breite des linken Swipe-up-Bereichs (%)</string>
+    <string name="gesture_nav_right_swipe_up_perecent">Breite des rechten Swipe-up-Bereichs (%)</string>
+    <string name="gesture_nav_two_finger_title">Wischen mit zwei Fingern nach oben</string>
+    <string name="gesture_nav_swipe_up_height">Swipe-up-Aktionen minimale Triggerhöhe</string>
+    <string name="none">Keiner</string>
+    <string name="screenshot">Bildschirmfoto</string>
+    <string name="back">Zürück</string>
+    <string name="kill_forground_app">Vordergrund-App beenden</string>
+    <string name="toggle_notification">Benachrichtigungsfeld umschalten</string>
+    <string name="toggle_one_handed">Einhandmodus umschalten</string>
+    <string name="insecure_screenshot">Unsicherer Screenshot</string>
+    <string name="screenshot_chord_insecure">VolDown+Power unsicherer Screenshot</string>
+    <string name="taskbar_as_recents_title">Konvertieren Sie die Taskleiste in die Recents-Leiste</string>
 </resources>

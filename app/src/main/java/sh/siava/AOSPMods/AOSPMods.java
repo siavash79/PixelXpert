@@ -12,6 +12,7 @@ import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.allApps.OverScrollDisabler;
+import sh.siava.AOSPMods.android.BrightnessRange;
 import sh.siava.AOSPMods.android.PhoneWindowManager;
 import sh.siava.AOSPMods.android.ScreenOffKeys;
 import sh.siava.AOSPMods.android.ScreenRotation;
@@ -105,6 +106,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
         modPacks.add(KeyguardDimmer.class);
         modPacks.add(CustomNavGestures.class);
         modPacks.add(PhoneWindowManager.class);
+        modPacks.add(BrightnessRange.class);
         //endregion
     }
     
@@ -114,7 +116,7 @@ public class AOSPMods implements IXposedHookLoadPackage{
 
         if(lpparam.packageName.equals(SYSTEM_FRAMEWORK_PACKAGE) && false) {
             log("------------");
-            Helpers.dumpClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
+            Helpers.dumpClass("com.android.server.display.DisplayPowerController", lpparam.classLoader);
             log("------------");
         }
 

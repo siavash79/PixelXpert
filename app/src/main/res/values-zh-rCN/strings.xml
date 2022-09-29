@@ -116,23 +116,6 @@
     <string name="quick_settings_tiles_category">磁贴选项</string>
     <string name="qs_tile_style_title">磁贴主题</string>
     <string name="qstile_default">默认</string>
-    <string name="qstile_cookie">曲奇</string>
-    <string name="qstile_triangles">三角形</string>
-    <string name="qstile_divided">半圆形</string>
-    <string name="qstile_attemptmountain">山脉形</string>
-    <string name="qstile_squircle_trim">带边框的圆角方形</string>
-    <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">波纹</string>
-    <string name="qstile_squaremedo">The Squaremedo</string>
-    <string name="qstile_dual_tone_circle">双色圆形</string>
-    <string name="qstile_circleoutline">圆形轮廓</string>
-    <string name="qstile_pokesign">半圆口袋</string>
-    <string name="qstile_cosmos">宇宙星光</string>
-    <string name="qstile_neonlike">霓虹灯</string>
-    <string name="qstile_circle_trim">带边框的圆形</string>
-    <string name="qstile_dottedcircle">点状圆形</string>
-    <string name="qstile_inkdrop">墨水边框</string>
-    <string name="qstile_circle">圆形</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">配置返回手势</string>
@@ -175,14 +158,6 @@
     <string name="signal_icons_theme_title">信号图标主题</string>
     <string name="dt_styles_category">深色主题样式</string>
     <string name="dt_styles">选择样式</string>
-    <string name="dt_black">纯黑</string>
-    <string name="dt_bakedgreen">黄绿色</string>
-    <string name="dt_chocox">巧克力色</string>
-    <string name="dt_darkaubergine">深紫色</string>
-    <string name="dt_style">深蓝色</string>
-    <string name="dt_darkgray">深灰色</string>
-    <string name="dt_night">深色</string>
-    <string name="dt_solarizeddark">焦黑色</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

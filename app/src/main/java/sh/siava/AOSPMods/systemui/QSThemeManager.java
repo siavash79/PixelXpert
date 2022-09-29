@@ -109,9 +109,7 @@ public class QSThemeManager extends XposedModPack {
         hookAllConstructors(FooterActionsControllerClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if(!lightQSHeaderEnabled) return;
-
-                if (!wasDark) {
+                if (!wasDark && lightQSHeaderEnabled) {
                     Resources res = mContext.getResources();
                     ViewGroup view = (ViewGroup) param.args[0];
 
@@ -132,7 +130,7 @@ public class QSThemeManager extends XposedModPack {
         hookAllConstructors(QSFgsManagerFooterClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if(!wasDark)
+                if(!wasDark && lightQSHeaderEnabled)
                 {
                     ((View)getObjectField(param.thisObject, "mNumberContainer"))
                             .getBackground()
@@ -146,7 +144,7 @@ public class QSThemeManager extends XposedModPack {
         hookAllConstructors(QSSecurityFooterClass, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if(!wasDark)
+                if(!wasDark && lightQSHeaderEnabled)
                 {
                     ((View) getObjectField(param.thisObject, "mView")).setBackground(lightFooterShape.getConstantState().newDrawable().mutate());
                 }

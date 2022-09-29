@@ -49,7 +49,7 @@
     <string name="gesture_nav_pill_cat">Largura da barra de navegação</string>
     <string name="gesture_nav_pill_mod_title">Personalizar barra de navegação</string>
     <string name="gesture_nav_pill_width_title">Largura em comparação com a padrão</string>
-    <string name="sysui_restart_needed">Resquer reiniciar a IU do sistema</string>
+    <string name="sysui_restart_needed">Requer reiniciar a IU do sistema</string>
     <string name="threebutton_header_title">Navegação com 3 botões</string>
     <string name="back_longpress_kill_title">Manter pressionado o botão voltar para terminar app</string>
     <string name="screenshot_sound_disable_title">Desativar som da captura de ecrã</string>
@@ -295,4 +295,7 @@
     <string name="display_resolution_title">Resolução do ecrã</string>
     <string name="hide_privacychip_title">Esconder indicadores de privacidade</string>
     <string name="taskbar_as_recents_title">Converter barra de tarefas para apps recentes</string>
+    <string name="taskbar_height_title">Altura da barra de tarefas</string>
+    <string name="brightness_range_title">Limites do brilho do ecrã</string>
+    <string name="brightness_range_not_linear">Este intervalo NÃO é linear: Por vezes, uma pequena diferença leva a mudanças consideráveis.</string>
 </resources>

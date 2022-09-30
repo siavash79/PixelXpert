@@ -36,7 +36,7 @@ public class PrefManager {
 		}
 		return true;
 	}
-	
+
 	@SuppressWarnings("UnusedReturnValue")
 	public static boolean importPath(SharedPreferences sharedPreferences, final @NonNull InputStream inputStream) throws IOException {
 		ObjectInputStream objectInputStream = null;
@@ -51,20 +51,20 @@ public class PrefManager {
 			objectInputStream.close();
 			inputStream.close();
 		}
-		
+
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		editor.clear();
-		
+
 		for (Map.Entry<String, Object> e : map.entrySet()) {
 			// Unfortunately, the editor only provides typed setters
 			if (e.getValue() instanceof Boolean) {
-				editor.putBoolean(e.getKey(), (Boolean)e.getValue());
+				editor.putBoolean(e.getKey(), (Boolean) e.getValue());
 			} else if (e.getValue() instanceof String) {
-				editor.putString(e.getKey(), (String)e.getValue());
+				editor.putString(e.getKey(), (String) e.getValue());
 			} else if (e.getValue() instanceof Integer) {
-				editor.putInt(e.getKey(), (int)e.getValue());
+				editor.putInt(e.getKey(), (int) e.getValue());
 			} else if (e.getValue() instanceof Float) {
-				editor.putFloat(e.getKey(), (float)e.getValue());
+				editor.putFloat(e.getKey(), (float) e.getValue());
 			} else if (e.getValue() instanceof Long) {
 				editor.putLong(e.getKey(), (Long) e.getValue());
 			} else if (e.getValue() instanceof Set) {
@@ -75,9 +75,8 @@ public class PrefManager {
 		}
 		return editor.commit();
 	}
-	
-	public static void clearPrefs(SharedPreferences preferences)
-	{
+
+	public static void clearPrefs(SharedPreferences preferences) {
 		preferences.edit().clear().commit();
 	}
 }

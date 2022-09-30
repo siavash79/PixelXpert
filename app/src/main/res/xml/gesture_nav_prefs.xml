@@ -14,7 +14,7 @@
             android:max="100"
             android:title="@string/back_height_title"
             app:min="10"
-            app:updatesContinuously="true"/>
+            app:updatesContinuously="true" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="BackFromRight"
@@ -25,17 +25,16 @@
             android:max="100"
             android:title="@string/back_height_title"
             app:min="10"
-            app:updatesContinuously="true"/>
+            app:updatesContinuously="true" />
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/gesture_nav_extra_cat">
+    <PreferenceCategory android:title="@string/gesture_nav_extra_cat">
         <SwitchPreference
             android:defaultValue="false"
             android:key="FCLongSwipeEnabled"
             android:title="@string/gesture_nav_long_swipe_fc_title"
             app:summaryOn="@string/general_on"
-            app:summaryOff="@string/general_off"/>
+            app:summaryOff="@string/general_off" />
 
         <ListPreference
             android:defaultValue="-1"
@@ -105,7 +104,7 @@
             android:key="navPillColorAccent"
             android:title="@string/colorpill"
             app:summaryOn="@string/general_on"
-            app:summaryOff="@string/general_off"/>
+            app:summaryOff="@string/general_off" />
         <SeekBarPreference
             android:defaultValue="50"
             android:key="GesPillWidthModPos"
@@ -129,6 +128,6 @@
             android:key="ReduceKeyboardSpaceOverlay"
             android:title="@string/reducekeyboard"
             app:summaryOn="@string/general_on"
-            app:summaryOff="@string/general_off"/>
+            app:summaryOff="@string/general_off" />
     </PreferenceCategory>
 </PreferenceScreen>

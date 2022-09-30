@@ -2,8 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:visibility="visible">
-    <PreferenceCategory
-        android:title="@string/statusbar_general_options">
+    <PreferenceCategory android:title="@string/statusbar_general_options">
         <SwitchPreference
             android:defaultValue="false"
             android:key="DoubleTapSleep"
@@ -18,7 +17,7 @@
             android:max="70"
             android:title="@string/sb_center_fine_tune"
             app:min="30"
-            app:updatesContinuously="true"/>
+            app:updatesContinuously="true" />
 
         <Preference
             app:fragment="sh.siava.AOSPMods.SettingsActivity$SBCFragment"
@@ -56,7 +55,7 @@
             android:max="200"
             android:title="@string/status_bar_height"
             app:min="50"
-            app:updatesContinuously="true"/>
+            app:updatesContinuously="true" />
 
         <EditTextPreference
             android:key="NotificationIconLimit"
@@ -109,7 +108,7 @@
 
         <PreferenceCategory
             android:key="sb_multi_row"
-            android:title="@string/sb_multi_row_category" >
+            android:title="@string/sb_multi_row_category">
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="systemIconsMultiRow"
@@ -126,8 +125,7 @@
                 android:title="@string/sb_icon_sort_mode" />
         </PreferenceCategory>
 
-        <PreferenceCategory
-            android:title="@string/ntsb_category_title" >
+        <PreferenceCategory android:title="@string/ntsb_category_title">
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="networkOnSBEnabled"

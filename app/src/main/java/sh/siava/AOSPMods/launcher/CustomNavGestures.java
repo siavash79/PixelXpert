@@ -45,7 +45,7 @@ public class CustomNavGestures extends XposedModPack {
 
 	private boolean FCHandled = false;
 	private float leftSwipeUpPercentage = 0.25f, rightSwipeUpPercentage = 0.25f;
-	private int displayW = -1 , displayH = -1;
+	private int displayW = -1, displayH = -1;
 	private static float swipeUpPercentage = 0.2f;
 	private int swipeType = SWIPE_NONE;
 
@@ -57,44 +57,42 @@ public class CustomNavGestures extends XposedModPack {
 	private Object mSystemUIProxy = null;
 	private static int leftSwipeUpAction = NO_ACTION, rightSwipeUpAction = NO_ACTION, twoFingerSwipeUpAction = NO_ACTION;
 
-	public CustomNavGestures(Context context) { super(context); }
-	
+	public CustomNavGestures(Context context) {
+		super(context);
+	}
+
 	@Override
 	public void updatePrefs(String... Key) {
 		FCLongSwipeEnabled = Xprefs.getBoolean("FCLongSwipeEnabled", false);
 		leftSwipeUpAction = readAction(Xprefs, "leftSwipeUpAction");
 		rightSwipeUpAction = readAction(Xprefs, "rightSwipeUpAction");
 		twoFingerSwipeUpAction = readAction(Xprefs, "twoFingerSwipeUpAction");
-		leftSwipeUpPercentage = readRangeSlider(Xprefs, "leftSwipeUpPercentage", 25f)/100f;
-		rightSwipeUpPercentage = readRangeSlider(Xprefs, "rightSwipeUpPercentage", 25f)/100f;
-		swipeUpPercentage = readRangeSlider(Xprefs, "swipeUpPercentage", 20f)/100f;
+		leftSwipeUpPercentage = readRangeSlider(Xprefs, "leftSwipeUpPercentage", 25f) / 100f;
+		rightSwipeUpPercentage = readRangeSlider(Xprefs, "rightSwipeUpPercentage", 25f) / 100f;
+		swipeUpPercentage = readRangeSlider(Xprefs, "swipeUpPercentage", 20f) / 100f;
 	}
 
 	private float readRangeSlider(SharedPreferences xprefs, String prefName, @SuppressWarnings("SameParameterValue") float defaultVal) {
-		try
-		{
+		try {
 			return RangeSliderPreference.getValues(xprefs, prefName, 25f).get(0);
-		}
-		catch (Exception ignored)
-		{
+		} catch (Exception ignored) {
 			return defaultVal;
 		}
 	}
 
 	private static int readAction(SharedPreferences xprefs, String prefName) {
-		try
-		{
+		try {
 			return Integer.parseInt(xprefs.getString(prefName, "").trim());
-		}
-		catch (Exception ignored)
-		{
+		} catch (Exception ignored) {
 			return NO_ACTION;
 		}
 	}
 
 	@Override
-	public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
-	
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName);
+	}
+
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
@@ -130,8 +128,7 @@ public class CustomNavGestures extends XposedModPack {
 		});
 	}
 
-	private void onMotionEvent(XC_MethodHook.MethodHookParam param, boolean isOverViewListener)
-	{
+	private void onMotionEvent(XC_MethodHook.MethodHookParam param, boolean isOverViewListener) {
 		MotionEvent e = (MotionEvent) param.args[0];
 
 		boolean mPassedWindowMoveSlop = isOverViewListener //if it's overview page (read: home page) we don't need this. true is good
@@ -140,14 +137,13 @@ public class CustomNavGestures extends XposedModPack {
 		int action = e.getActionMasked();
 		int pointers = e.getPointerCount();
 
-		if(action == MotionEvent.ACTION_DOWN ) //Let's get ready
+		if (action == MotionEvent.ACTION_DOWN) //Let's get ready
 		{
 			FCHandled = false;
 			swipeType = SWIPE_NONE;
 
-			if(isOverViewListener
-					&& getBooleanField(param.thisObject, "mStartingInActivityBounds"))
-			{
+			if (isOverViewListener
+					&& getBooleanField(param.thisObject, "mStartingInActivityBounds")) {
 				return;
 			}
 
@@ -179,11 +175,10 @@ public class CustomNavGestures extends XposedModPack {
 			param.setResult(null);
 		}
 
-		if(pointers == 1)
-		{
+		if (pointers == 1) {
 			boolean FCAllowed = swipeType == SWIPE_NONE;
 
-			if(FCAllowed
+			if (FCAllowed
 					&& FCLongSwipeEnabled
 					&& e.getY() < mLongThreshold
 					&& !FCHandled
@@ -195,17 +190,14 @@ public class CustomNavGestures extends XposedModPack {
 			}
 		}
 
-		if(action == MotionEvent.ACTION_UP
-				&& swipeType != SWIPE_NONE)
-		{
-			if(!isOverViewListener) {
+		if (action == MotionEvent.ACTION_UP
+				&& swipeType != SWIPE_NONE) {
+			if (!isOverViewListener) {
 				callMethod(param.thisObject, "forceCancelGesture", e);
 			}
 
-			if(e.getY() < mSwipeUpThreshold)
-			{
-				switch (swipeType)
-				{
+			if (e.getY() < mSwipeUpThreshold) {
+				switch (swipeType) {
 					case SWIPE_LEFT:
 						runAction(leftSwipeUpAction);
 						break;
@@ -222,8 +214,7 @@ public class CustomNavGestures extends XposedModPack {
 	}
 
 	private void runAction(int action) {
-		switch (action)
-		{
+		switch (action) {
 			case ACTION_BACK:
 				goBack();
 				break;
@@ -255,23 +246,19 @@ public class CustomNavGestures extends XposedModPack {
 		Shell.cmd("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
 	}
 
-	private void goBack()
-	{
+	private void goBack() {
 		callMethod(mSystemUIProxy, "onBackPressed");
 	}
 
-	private void startOneHandedMode()
-	{
+	private void startOneHandedMode() {
 		callMethod(getObjectField(mSystemUIProxy, "mOneHanded"), "startOneHanded");
 	}
 
-	private void toggleNotification()
-	{
+	private void toggleNotification() {
 		callMethod(mSystemUIProxy, "toggleNotificationPanel");
 	}
 
-	private void takeScreenshot()
-	{
+	private void takeScreenshot() {
 		Intent broadcast = new Intent();
 		broadcast.setAction(AOSPMods.ACTION_SCREENSHOT);
 		mContext.sendBroadcast(broadcast);

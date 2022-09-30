@@ -17,8 +17,7 @@
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
             android:title="@string/light_dualtone_qs_title" />
-        <PreferenceCategory
-            android:title="@string/quick_settings_tiles_category">
+        <PreferenceCategory android:title="@string/quick_settings_tiles_category">
             <ListPreference
                 android:defaultValue="None"
                 android:entries="@array/QSTilesThemesOverlayEx_names"
@@ -55,14 +54,14 @@
                 app:min="0"
                 android:key="QSRowQty"
                 app:title="@string/qs_rows_number"
-                app:updatesContinuously="true"/>
+                app:updatesContinuously="true" />
             <SeekBarPreference
                 android:defaultValue="0"
                 android:max="4"
                 app:min="0"
                 android:key="QSColQty"
                 app:title="@string/qs_cols_number"
-                app:updatesContinuously="true"/>
+                app:updatesContinuously="true" />
 
             <SeekBarPreference
                 android:defaultValue="4"
@@ -70,7 +69,7 @@
                 app:min="2"
                 android:key="QQSTileQty"
                 app:title="@string/qqs_tiles_number"
-                app:updatesContinuously="true"/>
+                app:updatesContinuously="true" />
 
             <SwitchPreference
                 android:defaultValue="false"
@@ -86,7 +85,7 @@
                 app:tickInterval="5"
                 android:key="QSLabelScaleFactor"
                 app:title="@string/qs_tile_label_size"
-                app:updatesContinuously="true"/>
+                app:updatesContinuously="true" />
 
             <sh.siava.rangesliderpreference.RangeSliderPreference
                 app:maxVal="50"
@@ -95,7 +94,7 @@
                 app:tickInterval="5"
                 android:key="QSSecondaryLabelScaleFactor"
                 app:title="@string/qs_tile_secondary_label_size"
-                app:updatesContinuously="true"/>
+                app:updatesContinuously="true" />
 
         </PreferenceCategory>
         <PreferenceCategory
@@ -137,7 +136,7 @@
                 android:key="BSThickTrackOverlay"
                 android:title="@string/bs_thick_track"
                 app:summaryOn="@string/general_on"
-                app:summaryOff="@string/general_off"/>
+                app:summaryOff="@string/general_off" />
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/qs_pulldown_category">
             <SwitchPreference
@@ -150,7 +149,7 @@
                 android:defaultValue="25"
                 android:key="QSPulldownPercent"
                 app:title="@string/qs_pulldown_size"
-                app:updatesContinuously="true"/>
+                app:updatesContinuously="true" />
             <ListPreference
                 android:defaultValue="1"
                 android:entries="@array/qs_pulldown_side_names"
@@ -160,8 +159,7 @@
                 android:title="@string/qs_pulldown_side_title" />
         </PreferenceCategory>
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/ntsb_category_title" >
+    <PreferenceCategory android:title="@string/ntsb_category_title">
         <SwitchPreference
             android:defaultValue="false"
             android:key="networkOnQSEnabled"

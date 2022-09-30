@@ -16,63 +16,68 @@ import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class ScreenshotController extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+	private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
-    private static final NothingPlayer nothingPlayer = new NothingPlayer();
+	private static final NothingPlayer nothingPlayer = new NothingPlayer();
 
-    private static boolean disableScreenshotSound = false;
+	private static boolean disableScreenshotSound = false;
 
-    public ScreenshotController(Context context) { super(context); }
-    
-    @Override
-    public void updatePrefs(String...Key)
-    {
-        if(Xprefs == null) return;
-        disableScreenshotSound = Xprefs.getBoolean("disableScreenshotSound", false);
-    }
+	public ScreenshotController(Context context) {
+		super(context);
+	}
 
-    @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if(!lpparam.packageName.equals(listenPackage)) return;
+	@Override
+	public void updatePrefs(String... Key) {
+		if (Xprefs == null) return;
+		disableScreenshotSound = Xprefs.getBoolean("disableScreenshotSound", false);
+	}
 
-        Class<?> ScreenshotControllerClass = findClass("com.android.systemui.screenshot.ScreenshotController", lpparam.classLoader);
+	@Override
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+		if (!lpparam.packageName.equals(listenPackage)) return;
 
-        hookAllConstructors(ScreenshotControllerClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if(!disableScreenshotSound) return;
+		Class<?> ScreenshotControllerClass = findClass("com.android.systemui.screenshot.ScreenshotController", lpparam.classLoader);
 
-                if(Build.VERSION.SDK_INT == 33) { //A13
-                    Class<?> CompleterClass = findClass("androidx.concurrent.futures.CallbackToFutureAdapter$Completer", lpparam.classLoader);
-                    Class<?> SafeFutureClass = findClass("androidx.concurrent.futures.CallbackToFutureAdapter$SafeFuture", lpparam.classLoader);
+		hookAllConstructors(ScreenshotControllerClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if (!disableScreenshotSound) return;
 
-                    //We can't prevent methods from playing sound! So let's break the sound player :D
-                    setObjectField(param.thisObject,
-                            "mCameraSound",
-                            SafeFutureClass
-                                    .getConstructors()[0]
-                                    .newInstance(CompleterClass.newInstance()));
-                }
-                else
-                { //A12
-                    //We can't prevent methods from playing sound! So let's break the sound player :D
-                    setObjectField(param.thisObject, "mCameraSound", nothingPlayer);
-                }
-            }
-        });
-    }
+				if (Build.VERSION.SDK_INT == 33) { //A13
+					Class<?> CompleterClass = findClass("androidx.concurrent.futures.CallbackToFutureAdapter$Completer", lpparam.classLoader);
+					Class<?> SafeFutureClass = findClass("androidx.concurrent.futures.CallbackToFutureAdapter$SafeFuture", lpparam.classLoader);
 
-    //A Media player that does nothing at all
-    static class NothingPlayer extends MediaActionSound
-    {
-        @Override
-        public void play(int o) {}
-        @Override
-        public void load(int o) {}
-        @Override
-        public void release(){}
-    }
+					//We can't prevent methods from playing sound! So let's break the sound player :D
+					setObjectField(param.thisObject,
+							"mCameraSound",
+							SafeFutureClass
+									.getConstructors()[0]
+									.newInstance(CompleterClass.newInstance()));
+				} else { //A12
+					//We can't prevent methods from playing sound! So let's break the sound player :D
+					setObjectField(param.thisObject, "mCameraSound", nothingPlayer);
+				}
+			}
+		});
+	}
 
-    @Override
-    public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
+	//A Media player that does nothing at all
+	static class NothingPlayer extends MediaActionSound {
+		@Override
+		public void play(int o) {
+		}
+
+		@Override
+		public void load(int o) {
+		}
+
+		@Override
+		public void release() {
+		}
+	}
+
+	@Override
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName);
+	}
 }

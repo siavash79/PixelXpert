@@ -4,8 +4,7 @@
         android:id="@+id/menu_Updates"
         android:title="@string/menu_updates" />
 
-    <item
-        android:title="@string/menu_settings_title">
+    <item android:title="@string/menu_settings_title">
         <menu>
             <item
                 android:id="@+id/menu_exportPrefs"

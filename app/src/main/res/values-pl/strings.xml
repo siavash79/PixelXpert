@@ -134,7 +134,7 @@
     <string name="BB_batteryChargingColor">Kolor ładowania</string>
     <string name="BB_batteryFastChargingColor">Kolor szybkiego ładowania</string>
     <string name="BB_transit_colors">Odcień kolorów między tym zakresem</string>
-    
+
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numer kompilacji w stopce panelu QS</string>
     <string name="qs_footer_mod_title">Zmodyfikuj numer tekstu kompilacji w panelu QS</string>
@@ -199,7 +199,7 @@
     <string name="taskbar_force_enable_title">Wymuś włączone</string>
     <string name="taskbar_force_disable_title">Wymuszanie wyłączone</string>
 
-    
+
     <string name="screenshot_sound_disable_title">Wyłącz dźwięk zrzutu ekranu</string>
     <string name="allow_all_screen_rotations">Wymuś odblokowanie wszystkich obrotów ekranu</string>
     <string name="allow_all_screen_rotations_summary">Zignoruje również pływający przycisk ręcznego obracania</string>
@@ -224,11 +224,11 @@
     <string name="disable_overscroll">„Wyłącz efekt elastycznego przewijania</string>
     <string name="overscroll_on_summary">Ważne: MUSISZ włączyć aplikacje, dla których chcesz wyłączyć overscroll w ramach LSPosed</string>
 
-    
+
     <string name="call_category">Rozmowy telefoniczne</string>
     <string name="vibrate_on_call_active_title">Wibracje przy odebraniu połączenia wychodzącego</string>
     <string name="vibrate_on_call_drop_title">Wibracje po rozłączeniu połączenia</string>
-    
+
     <!-- Theming section related -->
     <string name="gsans_override_title">Wymuś używanie czcionek Google Sans w systemie</string>
     <string name="font_overlays_enable_title">Włącz używanie niestandardowych czcionek</string>
@@ -271,7 +271,7 @@
     <string name="fourg_lte_fourg">Pokazuj ikonę 4G</string>
 
     <!-- QS Rows overlays -->
-    
+
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Zbieraj statystyki sieciowe</string>
     <string name="network_interval_custom_text_title">Częstotliwość odświeżania</string>
@@ -340,5 +340,5 @@
     <string name="toggle_one_handed">Przełącz tryb jednoręczny</string>
     <string name="insecure_screenshot">Niezabezpieczony zrzut ekranu</string>
     <string name="screenshot_chord_insecure">Niebezpieczny zrzut ekranu VolDown Power</string>
-    
+
 </resources>

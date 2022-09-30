@@ -19,70 +19,72 @@ import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class QSFooterTextManager extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    private static boolean customQSFooterTextEnabled = false;
-    private static String customText = "";
-    private Object QSFV;
-    private final StringFormatter stringFormatter = new StringFormatter();
+	private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+	private static boolean customQSFooterTextEnabled = false;
+	private static String customText = "";
+	private Object QSFV;
+	private final StringFormatter stringFormatter = new StringFormatter();
 
-    private final StringFormatter.formattedStringCallback refreshCallback = this::setQSFooterText;
+	private final StringFormatter.formattedStringCallback refreshCallback = this::setQSFooterText;
 
-    public void updatePrefs(String...Key)
-    {
-        if(Xprefs == null) return;
-        customQSFooterTextEnabled = Xprefs.getBoolean("QSFooterMod", false);
-        customText = Xprefs.getString("QSFooterText", "");
+	public void updatePrefs(String... Key) {
+		if (Xprefs == null) return;
+		customQSFooterTextEnabled = Xprefs.getBoolean("QSFooterMod", false);
+		customText = Xprefs.getString("QSFooterText", "");
 
-        setQSFooterText();
-    }
-    
-    public QSFooterTextManager(Context context) { super(context); }
-    
-    @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if(!lpparam.packageName.equals(listenPackage)) return;
+		setQSFooterText();
+	}
 
-        stringFormatter.registerCallback(refreshCallback);
+	public QSFooterTextManager(Context context) {
+		super(context);
+	}
 
-        Class<?> QSFooterViewClass = findClass("com.android.systemui.qs.QSFooterView", lpparam.classLoader);
+	@Override
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+		if (!lpparam.packageName.equals(listenPackage)) return;
 
-        hookAllConstructors(QSFooterViewClass, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                QSFV = param.thisObject;
-            }
-        });
+		stringFormatter.registerCallback(refreshCallback);
 
-        hookAllMethods(QSFooterViewClass,
-                "setBuildText", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!customQSFooterTextEnabled) return;
-                        setQSFooterText();
-                    }
-                });
-    }
+		Class<?> QSFooterViewClass = findClass("com.android.systemui.qs.QSFooterView", lpparam.classLoader);
 
-    private void setQSFooterText() {
-        try {
-            if(customQSFooterTextEnabled) {
-                TextView mBuildText = (TextView) getObjectField(QSFV, "mBuildText");
+		hookAllConstructors(QSFooterViewClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				QSFV = param.thisObject;
+			}
+		});
 
-                setObjectField(QSFV,
-                        "mShouldShowBuildText",
-                        customText.trim().length() > 0);
+		hookAllMethods(QSFooterViewClass,
+				"setBuildText", new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						if (!customQSFooterTextEnabled) return;
+						setQSFooterText();
+					}
+				});
+	}
 
-                mBuildText.setText(stringFormatter.formatString(customText));
-                mBuildText.setSelected(true);
-            }
-            else
-            {
-                callMethod(QSFV,
-                        "setBuildText");
-            }
-        } catch (Throwable ignored){} //probably not initiated yet
-    }
+	private void setQSFooterText() {
+		try {
+			if (customQSFooterTextEnabled) {
+				TextView mBuildText = (TextView) getObjectField(QSFV, "mBuildText");
 
-    @Override
-    public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
+				setObjectField(QSFV,
+						"mShouldShowBuildText",
+						customText.trim().length() > 0);
+
+				mBuildText.setText(stringFormatter.formatString(customText));
+				mBuildText.setSelected(true);
+			} else {
+				callMethod(QSFV,
+						"setBuildText");
+			}
+		} catch (Throwable ignored) {
+		} //probably not initiated yet
+	}
+
+	@Override
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName);
+	}
 }

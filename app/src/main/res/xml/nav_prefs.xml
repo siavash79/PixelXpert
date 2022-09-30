@@ -36,6 +36,6 @@
         app:tickInterval="10"
         android:key="taskbarHeightOverride"
         app:title="@string/taskbar_height_title"
-        app:updatesContinuously="false"/>
+        app:updatesContinuously="false" />
 
 </PreferenceScreen>

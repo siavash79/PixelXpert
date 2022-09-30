@@ -24,76 +24,75 @@ import sh.siava.AOSPMods.databinding.ActivityUpdateBinding;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
-    @SuppressWarnings("FieldCanBeLocal")
-    private ActivityUpdateBinding binding;
+	private AppBarConfiguration appBarConfiguration;
+	@SuppressWarnings("FieldCanBeLocal")
+	private ActivityUpdateBinding binding;
 
-    public static final String MOD_NAME = "AOSPMods";
-    public static final String MAGISK_UPDATE_DIR = "/data/adb/modules_update";
-    public static final String MAGISK_MODULES_DIR = "/data/adb/modules";
-    private static final String updateRoot = String.format("%s/%s", MAGISK_UPDATE_DIR, MOD_NAME);
+	public static final String MOD_NAME = "AOSPMods";
+	public static final String MAGISK_UPDATE_DIR = "/data/adb/modules_update";
+	public static final String MAGISK_MODULES_DIR = "/data/adb/modules";
+	private static final String updateRoot = String.format("%s/%s", MAGISK_UPDATE_DIR, MOD_NAME);
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(newBase.createDeviceProtectedStorageContext());
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(newBase.createDeviceProtectedStorageContext());
 
-        String localeCode = prefs.getString("appLanguage", "");
-        Locale locale = (localeCode.length() > 0) ? Locale.forLanguageTag(localeCode) : Locale.getDefault();
+		String localeCode = prefs.getString("appLanguage", "");
+		Locale locale = (localeCode.length() > 0) ? Locale.forLanguageTag(localeCode) : Locale.getDefault();
 
-        Resources res = newBase.getResources();
-        Configuration configuration = res.getConfiguration();
+		Resources res = newBase.getResources();
+		Configuration configuration = res.getConfiguration();
 
-        configuration.setLocale(locale);
+		configuration.setLocale(locale);
 
-        LocaleList localeList = new LocaleList(locale);
-        LocaleList.setDefault(localeList);
-        configuration.setLocales(localeList);
+		LocaleList localeList = new LocaleList(locale);
+		LocaleList.setDefault(localeList);
+		configuration.setLocales(localeList);
 
-        super.attachBaseContext(newBase.createConfigurationContext(configuration));
-    }
+		super.attachBaseContext(newBase.createConfigurationContext(configuration));
+	}
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-        if(getIntent().getBooleanExtra("updateTapped", false)) {
+		if (getIntent().getBooleanExtra("updateTapped", false)) {
 
-            String downloadPath = getIntent().getStringExtra("filePath");
+			String downloadPath = getIntent().getStringExtra("filePath");
 
-            installDoubleZip(downloadPath);
-            applyPrefsToUpdate();
-        }
-        binding = ActivityUpdateBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+			installDoubleZip(downloadPath);
+			applyPrefsToUpdate();
+		}
+		binding = ActivityUpdateBinding.inflate(getLayoutInflater());
+		setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.toolbar);
+		setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_update);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-    }
+		NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_update);
+		appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+		NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+	}
 
-    private void applyPrefsToUpdate() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(createDeviceProtectedStorageContext());
+	private void applyPrefsToUpdate() {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(createDeviceProtectedStorageContext());
 
-        int volumeStps = prefs.getInt("volumeStps", 0);
-        boolean customFontsEnabled = prefs.getBoolean("enableCustomFonts", false);
-        boolean GSansOverrideEnabled = prefs.getBoolean("gsans_override", false);
+		int volumeStps = prefs.getInt("volumeStps", 0);
+		boolean customFontsEnabled = prefs.getBoolean("enableCustomFonts", false);
+		boolean GSansOverrideEnabled = prefs.getBoolean("gsans_override", false);
 
-        ModuleFolderOperations.applyVolumeSteps(volumeStps, updateRoot);
-        ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, updateRoot);
-    }
+		ModuleFolderOperations.applyVolumeSteps(volumeStps, updateRoot);
+		ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, updateRoot);
+	}
 
-    @Override
-    public void onNewIntent(Intent i)
-    {
-        super.onNewIntent(i);
-    }
+	@Override
+	public void onNewIntent(Intent i) {
+		super.onNewIntent(i);
+	}
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_update);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
+	@Override
+	public boolean onSupportNavigateUp() {
+		NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_update);
+		return NavigationUI.navigateUp(navController, appBarConfiguration)
+				|| super.onSupportNavigateUp();
+	}
 }

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
-        android:title="@string/general_section">
+    <PreferenceCategory android:title="@string/general_section">
         <SwitchPreference
             android:defaultValue="false"
             android:key="CustomThemedIconsOverlay"
             android:title="@string/custom_themed_icons_title"
             app:summaryOn="@string/custom_themed_icons_on"
-            app:summaryOff="@string/custom_themed_icons_off"/>
+            app:summaryOff="@string/custom_themed_icons_off" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="disableScreenshotSound"
@@ -30,7 +29,7 @@
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
             android:title="@string/allow_all_screen_rotations"
-            android:summary="@string/allow_all_screen_rotations_summary"/>
+            android:summary="@string/allow_all_screen_rotations_summary" />
 
         <SwitchPreference
             android:defaultValue="false"
@@ -72,7 +71,7 @@
             android:title="@string/volume_button_step_title"
             app:min="10"
             app:seekBarIncrement="5"
-            app:updatesContinuously="true"/>
+            app:updatesContinuously="true" />
 
         <SwitchPreference
             android:defaultValue="false"
@@ -87,8 +86,7 @@
             android:summaryOn="@string/overscroll_on_summary"
             android:title="@string/disable_overscroll" />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/doze_header">
+    <PreferenceCategory android:title="@string/doze_header">
         <EditTextPreference
             android:key="NotificationAODIconLimit"
             android:defaultValue="3"
@@ -113,8 +111,7 @@
             android:title="@string/so_double_tap_wake_title"
             app:summary="@string/so_double_tap_wake_summary" />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/notifications_header">
+    <PreferenceCategory android:title="@string/notifications_header">
         <SwitchPreference
             android:defaultValue="false"
             android:key="notificationExpandallEnabled"
@@ -122,25 +119,23 @@
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on" />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/call_category">
+    <PreferenceCategory android:title="@string/call_category">
         <SwitchPreference
             android:defaultValue="false"
             android:key="vibrateOnAnswered"
             android:title="@string/vibrate_on_call_active_title"
             app:summaryOn="@string/general_on"
-            app:summaryOff="@string/general_off"/>
+            app:summaryOff="@string/general_off" />
 
         <SwitchPreference
             android:defaultValue="false"
             android:key="vibrateOnDrop"
             android:title="@string/vibrate_on_call_drop_title"
             app:summaryOn="@string/general_on"
-            app:summaryOff="@string/general_off"/>
+            app:summaryOff="@string/general_off" />
 
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/monitoring_category_title">
+    <PreferenceCategory android:title="@string/monitoring_category_title">
         <Preference
             app:fragment="sh.siava.AOSPMods.SettingsActivity$NetworkStatFragment"
             app:key="netstat_header"

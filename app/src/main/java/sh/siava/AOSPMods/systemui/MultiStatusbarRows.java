@@ -19,65 +19,67 @@ import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class MultiStatusbarRows extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+	private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
-    private static boolean systemIconsMultiRow = false;
+	private static boolean systemIconsMultiRow = false;
 
-    public MultiStatusbarRows(Context context) {
-        super(context);
-    }
+	public MultiStatusbarRows(Context context) {
+		super(context);
+	}
 
-    @Override
-    public void updatePrefs(String... Key) {
-        if(Key.length > 0 && Key[0].equals("systemIconsMultiRow"))
-        {
-            boolean newsystemIconsMultiRow = Xprefs.getBoolean("systemIconsMultiRow", false);
-            if(newsystemIconsMultiRow != systemIconsMultiRow) {
-                SystemUtils.RestartSystemUI();
-            }
-        }
-        systemIconsMultiRow = Xprefs.getBoolean("systemIconsMultiRow", false);
-        FlexStatusIconContainer.setSortPlan(Integer.parseInt(Xprefs.getString("systemIconSortPlan", String.valueOf(FlexStatusIconContainer.SORT_CLEAN))));
-    }
+	@Override
+	public void updatePrefs(String... Key) {
+		if (Key.length > 0 && Key[0].equals("systemIconsMultiRow")) {
+			boolean newsystemIconsMultiRow = Xprefs.getBoolean("systemIconsMultiRow", false);
+			if (newsystemIconsMultiRow != systemIconsMultiRow) {
+				SystemUtils.RestartSystemUI();
+			}
+		}
+		systemIconsMultiRow = Xprefs.getBoolean("systemIconsMultiRow", false);
+		FlexStatusIconContainer.setSortPlan(Integer.parseInt(Xprefs.getString("systemIconSortPlan", String.valueOf(FlexStatusIconContainer.SORT_CLEAN))));
+	}
 
-    @Override
-    public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
+	@Override
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName);
+	}
 
-    @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if(!lpparam.packageName.equals(listenPackage)) return;
+	@Override
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+		if (!lpparam.packageName.equals(listenPackage)) return;
 
-        Class<?> IconManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconController$IconManager", lpparam.classLoader);
+		Class<?> IconManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconController$IconManager", lpparam.classLoader);
 
-        hookAllConstructors(IconManagerClass, new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                if(!systemIconsMultiRow) return;
+		hookAllConstructors(IconManagerClass, new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if (!systemIconsMultiRow) return;
 
-                try {
-                    View linear = (View)param.args[0];
+				try {
+					View linear = (View) param.args[0];
 
-                    String id = mContext.getResources().getResourceName(((View)linear.getParent().getParent()).getId()); //helps getting exception if it's in QS
-                    if(!id.contains("system_icon_area")) return;
+					String id = mContext.getResources().getResourceName(((View) linear.getParent().getParent()).getId()); //helps getting exception if it's in QS
+					if (!id.contains("system_icon_area")) return;
 
-                    FlexStatusIconContainer flex = new FlexStatusIconContainer(mContext, lpparam.classLoader);
-                    flex.setPadding(linear.getPaddingLeft(), 0, linear.getPaddingRight(), 0);
+					FlexStatusIconContainer flex = new FlexStatusIconContainer(mContext, lpparam.classLoader);
+					flex.setPadding(linear.getPaddingLeft(), 0, linear.getPaddingRight(), 0);
 
-                    LinearLayout.LayoutParams flexParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,1);
-                    flex.setLayoutParams(flexParams);
+					LinearLayout.LayoutParams flexParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+					flex.setLayoutParams(flexParams);
 
-                    flex.setForegroundGravity(Gravity.CENTER_VERTICAL | Gravity.END);
+					flex.setForegroundGravity(Gravity.CENTER_VERTICAL | Gravity.END);
 
-                    ViewGroup parent = (ViewGroup)linear.getParent();
-                    int index = parent.indexOfChild(linear);
-                    parent.addView(flex, index);
-                    linear.setVisibility(View.GONE); //remove will crash the system
-                    param.args[0] = flex;
+					ViewGroup parent = (ViewGroup) linear.getParent();
+					int index = parent.indexOfChild(linear);
+					parent.addView(flex, index);
+					linear.setVisibility(View.GONE); //remove will crash the system
+					param.args[0] = flex;
 
-                }catch (Throwable ignored){}
-            }
-        });
-    }
+				} catch (Throwable ignored) {
+				}
+			}
+		});
+	}
 
 }
 

@@ -15,42 +15,46 @@ import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class KeyguardDimmer extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    public static float KeyGuardDimAmount = -1f;
+	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+	public static float KeyGuardDimAmount = -1f;
 
-    public KeyguardDimmer(Context context) { super(context); }
-    
-    @Override
-    public void updatePrefs(String...Key)
-    {
-        if(Xprefs == null) return;
+	public KeyguardDimmer(Context context) {
+		super(context);
+	}
 
-        try {
-            KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
-        }catch (Throwable ignored){}
-    }
+	@Override
+	public void updatePrefs(String... Key) {
+		if (Xprefs == null) return;
 
-    @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if(!lpparam.packageName.equals(listenPackage)) return;
+		try {
+			KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
+		} catch (Throwable ignored) {
+		}
+	}
 
-        Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
-        Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
+	@Override
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+		if (!lpparam.packageName.equals(listenPackage)) return;
 
-        hookAllMethods(ScrimControllerClass, "scheduleUpdate", new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                if(KeyGuardDimAmount < 0 || KeyGuardDimAmount > 1) return;
+		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
+		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
 
-                setObjectField(param.thisObject, "mScrimBehindAlphaKeyguard", KeyGuardDimAmount);
-                Object[] constants =  ScrimStateEnum.getEnumConstants();
-                for (Object constant : constants) {
-                    setObjectField(constant, "mScrimBehindAlphaKeyguard", KeyGuardDimAmount);
-                }
-            }
-        });
-    }
+		hookAllMethods(ScrimControllerClass, "scheduleUpdate", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if (KeyGuardDimAmount < 0 || KeyGuardDimAmount > 1) return;
 
-    @Override
-    public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
+				setObjectField(param.thisObject, "mScrimBehindAlphaKeyguard", KeyGuardDimAmount);
+				Object[] constants = ScrimStateEnum.getEnumConstants();
+				for (Object constant : constants) {
+					setObjectField(constant, "mScrimBehindAlphaKeyguard", KeyGuardDimAmount);
+				}
+			}
+		});
+	}
+
+	@Override
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName);
+	}
 }

@@ -13,16 +13,16 @@
             android:name=".UpdateActivity"
             android:exported="false"
             android:label="@string/title_activity_update"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".updateActivity"
             android:exported="false"
             android:label="@string/title_activity_update"
             android:theme="@style/AppTheme">
-        <intent-filter>
-            <action android:name="android.intent.action.RUN" />
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.RUN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity

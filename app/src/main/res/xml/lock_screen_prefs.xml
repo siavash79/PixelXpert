@@ -48,7 +48,7 @@
             android:entryValues="@array/lockScreenShortcut_values"
             android:key="leftKeyguardShortcut"
             android:title="@string/LSleftShortcutTitle"
-            app:summary="%s"/>
+            app:summary="%s" />
         <ListPreference
             android:defaultValue=""
             android:entries="@array/lockScreenShortcut_names"
@@ -65,7 +65,9 @@
             android:title="@string/keyguard_left_shortcut" />
         -->
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/album_art_category" android:key="album_art_category">
+    <PreferenceCategory
+        android:title="@string/album_art_category"
+        android:key="album_art_category">
         <SwitchPreference
             android:defaultValue="false"
             android:key="albumArtLockScreenEnabled"
@@ -79,7 +81,7 @@
             android:max="100"
             android:title="@string/album_art_blur_text"
             app:min="0"
-            app:updatesContinuously="true"/>
+            app:updatesContinuously="true" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="albumArtLockScreenGrayscale"

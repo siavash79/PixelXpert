@@ -17,8 +17,8 @@
     <string name="statusbar_header">Statusleiste</string>
     <string name="nav_header">Navigationsleiste</string>
     <string name="misc_header">Verschiedenes</string>
-    <string name="qs_panel_category_title">Schnelleinstellungen</string> 
-    <string name="theme_customization_category">Theme Einstellungen</string>   
+    <string name="qs_panel_category_title">Schnelleinstellungen</string>
+    <string name="theme_customization_category">Theme Einstellungen</string>
 
     <!--Lock screen related-->
     <string name="transparent_fingerprint_circle">Verstecke den Kreis um das Fingerabdrucksymbol</string>
@@ -135,7 +135,7 @@
     <string name="BB_batteryChargingColor">Farbe beim Laden</string>
     <string name="BB_batteryFastChargingColor">Farbe beim Schnelladen</string>
     <string name="BB_transit_colors">Schattierungsfarben zwischen den Bereichen</string>
-	
+
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Versionsnummer in der Schnelleinstellungs Fußzeile</string>
     <string name="qs_footer_mod_title">Ändere die Versionsnummer in den Schnelleinstellungen</string>
@@ -151,7 +151,7 @@
     <string name="qs_rows_number">Anzahl Reihen in den Schnelleinstellungen</string>
     <string name="qs_cols_number">Anzahl der QS-Spalten</string>
     <string name="qqs_tiles_number">Maximale Kacheln in Quick QS (max. 2 Zeilen)</string>
-	<string name="qs_tile_label_size">QS-Kacheletikettengröße</string>
+    <string name="qs_tile_label_size">QS-Kacheletikettengröße</string>
     <string name="qs_tile_secondary_label_size">Zusammenfassungsgröße des QS Tile-Labels</string>
     <string name="qs_general_options">Schnelleinstellungs Optionen</string>
     <string name="qs_text_size_title">Schnelleinstellungselemente Schriftgröße</string>
@@ -192,10 +192,10 @@
     <string name="taskbar_status_title">Android Taskleiste</string>
     <string name="taskbar_force_enable_title">erzwinge Ein</string>
     <string name="taskbar_force_disable_title">erzwinge Aus</string>
-	
+
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Deaktiviere Screenshot Ton</string>
-	<string name="allow_all_screen_rotations">Entsperre alle Bildschirmdrehungen</string>
+    <string name="allow_all_screen_rotations">Entsperre alle Bildschirmdrehungen</string>
     <string name="allow_all_screen_rotations_summary">Ignoriert auch die schwebende Schaltfläche für die manuelle Drehung</string>
     <string name="force_no_cutout">Kameraausschnitt ignorieren</string>
     <string name="volume_button_step_title">Lautstärkeschritte (0 bis 100%)</string>
@@ -219,9 +219,9 @@
     <string name="expand_notifications_icons_title">Alle ausklappen/einklappen aktivieren</string>
     <string name="disable_overscroll">Deaktiviere elastischen Überscrolling Effekt</string>
     <string name="overscroll_on_summary">Wichtig: Sie MÜSSEN die Apps, für die Sie Overscroll deaktivieren möchten, in LSPosed aktivieren</string>
-	
+
     <!-- Call section -->
-	<string name="call_category">Telefonanrufe</string>
+    <string name="call_category">Telefonanrufe</string>
     <string name="vibrate_on_call_active_title">Vibrieren bei angenommenem abgehenden Anruf</string>
     <string name="vibrate_on_call_drop_title">Vibrieren, wenn Anruf getrennt wird</string>
 
@@ -318,7 +318,7 @@
 
     <string name="own_prefs_header">AOSPMods-Einstellungen</string>
     <string name="language_title">Sprache auswählen</string>
-	<string name="toggle_dark_apply">(Zum dunklen Design wechseln)</string>
+    <string name="toggle_dark_apply">(Zum dunklen Design wechseln)</string>
     <string name="keyguard_dim_amount_title">Dim Level des Lockscreen-Hintergrunds</string>
     <string name="qs_footer_text_value">Benutzerdefinierten Text</string>
     <string name="qs_leveled_flashlight_title">Graduelle Taschenlampenplättchen</string>

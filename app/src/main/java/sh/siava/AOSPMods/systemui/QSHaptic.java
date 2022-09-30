@@ -14,36 +14,39 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.SystemUtils;
 
 public class QSHaptic extends XposedModPack {
-    public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    public static boolean QSHapticEnabled = false;
-    
-    public QSHaptic(Context context) { super(context); }
-    
-    @Override
-    public void updatePrefs(String...Key)
-    {
-        if(Xprefs == null) return;
-        QSHapticEnabled = Xprefs.getBoolean("QSHapticEnabled", false);
-    }
+	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+	public static boolean QSHapticEnabled = false;
 
-    @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if(!lpparam.packageName.equals(listenPackage)) return;
+	public QSHaptic(Context context) {
+		super(context);
+	}
 
-        Class<?> QSTileImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
+	@Override
+	public void updatePrefs(String... Key) {
+		if (Xprefs == null) return;
+		QSHapticEnabled = Xprefs.getBoolean("QSHapticEnabled", false);
+	}
 
-        XC_MethodHook vibrateCallback = new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if(!QSHapticEnabled) return;
-                SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK);
-            }
-        };
+	@Override
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+		if (!lpparam.packageName.equals(listenPackage)) return;
 
-        hookAllMethods(QSTileImplClass,"click", vibrateCallback);
-        hookAllMethods(QSTileImplClass,"longClick", vibrateCallback);
-    }
+		Class<?> QSTileImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
 
-    @Override
-    public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
+		XC_MethodHook vibrateCallback = new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if (!QSHapticEnabled) return;
+				SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK);
+			}
+		};
+
+		hookAllMethods(QSTileImplClass, "click", vibrateCallback);
+		hookAllMethods(QSTileImplClass, "longClick", vibrateCallback);
+	}
+
+	@Override
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName);
+	}
 }

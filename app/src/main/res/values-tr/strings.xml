@@ -107,7 +107,7 @@
     <string name="nt_mode_rxtx">İndirme &amp; Yükleme</string>
     <string name="nt_mode_total">İndirme + Yükleme (Combined)</string>
     <string name="nt_mode_rxonly">Sadece İndirme</string>
-    <string name="nt_mode_txonly">Sadece Yükleme</string>	
+    <string name="nt_mode_txonly">Sadece Yükleme</string>
     <string name="statusbar_general_options">Durum Çubuğu Seçenekleri</string>
     <string name="dual_tone_battery_title">Çift tonlu pil ölçeri etkinleştir</string>
     <string name="dual_tone_battery_on_summary">Açık (yalnızca portre simgesiyle çalışır)</string>
@@ -174,7 +174,7 @@
     <string name="gesture_nav_pill_cat">Gezinme Çubuğu genişliği</string>
     <string name="gesture_nav_pill_mod_title">Gezinme Çubuğu genişliğini değiştirin</string>
     <string name="gesture_nav_pill_width_title">Standart boyuta göre genişlik</string>
-    <string name="gesture_nav_pill_height_title">Standart boyuta göre yükseklik</string>    
+    <string name="gesture_nav_pill_height_title">Standart boyuta göre yükseklik</string>
     <string name="threebutton_header_title">3 düğmeli gezinme</string>
     <string name="back_longpress_kill_title">Geri butonunu uzun basılı tutarak uygulamayı öldür</string>
     <string name="modify_3button_title">Düğme sırasını değiştirin</string>
@@ -217,7 +217,7 @@
     <string name="expand_notifications_icons_title">"Tüm bildirimleri genişletme/daraltma butonu ekle</string>
     <string name="disable_overscroll">"Elastik aşırı kaydırma efektini devre dışı bırak</string>
     <string name="overscroll_on_summary">Önemli: LSPosed\'da aşırı kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
-    
+
     <!-- Call section -->
     <string name="call_category">Aramalar</string>
     <string name="vibrate_on_call_active_title">Giden bir aramayı yanıtlarken titret</string>

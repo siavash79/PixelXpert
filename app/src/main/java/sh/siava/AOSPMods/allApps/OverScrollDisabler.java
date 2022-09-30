@@ -15,26 +15,30 @@ import sh.siava.AOSPMods.XposedModPack;
 @SuppressWarnings("RedundantThrows")
 public class OverScrollDisabler extends XposedModPack {
 	private static boolean disableOverScroll = false;
-	
-	public OverScrollDisabler(Context context) { super(context); }
-	
+
+	public OverScrollDisabler(Context context) {
+		super(context);
+	}
+
 	@Override
 	public void updatePrefs(String... Key) {
 		disableOverScroll = Xprefs.getBoolean("disableOverScroll", false);
 	}
-	
+
 	@Override
-	public boolean listensTo(String packageName) { return true; } //This mod is compatible with every package
-	
+	public boolean listensTo(String packageName) {
+		return true;
+	} //This mod is compatible with every package
+
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-	
+
 		Class<?> ViewClass = findClass("android.view.View", lpparam.classLoader);
-		
+
 		hookAllMethods(ViewClass, "setOverScrollMode", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(!disableOverScroll) return;
+				if (!disableOverScroll) return;
 				setObjectField(param.thisObject, "mOverScrollMode", View.OVER_SCROLL_NEVER);
 				param.setResult(null);
 			}

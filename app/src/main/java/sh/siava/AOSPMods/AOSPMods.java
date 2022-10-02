@@ -2,6 +2,7 @@ package sh.siava.AOSPMods;
 
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
 
 import android.app.Instrumentation;
 import android.content.Context;
@@ -67,8 +68,6 @@ public class AOSPMods implements IXposedHookLoadPackage {
 	public static final String ACTION_BACK = "sh.siava.AOSPMods.ACTION_BACK";
 
 	public AOSPMods() {
-//        modPacks.add(StatusbarMods.class); //13 OK
-
 		//region Mod list definition
 		modPacks.add(NotificationExpander.class); //13 OK
 		modPacks.add(QSTileGrid.class); //

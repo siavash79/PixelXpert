@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="brightness_range_not_linear">CHÚ Ý: Một sự thay đổi nhỏ dẫn đến những thay đổi khác biệt đáng kể</string>
+    <string name="brightness_range_title">Giới hạn độ sáng màn hình</string>
+    <string name="display_resolution_title">Độ phân giải màn hình</string>
+    <string name="hide_privacychip_title">Ẩn chỉ báo quyền riêng tư\n(Camera, Mic)</string>
+    <string name="less_area">ít diện tích</string>
+    <string name="more_area">thêm diện tích</string>
+    <string name="taskbar_height_title">Chiều cao thanh tác vụ</string>
     <string name="insecure_screenshot">Chụp ảnh màn hình các ứng dụng không cho phép</string>
     <string name="screenshot_chord_insecure">Giảm âm lượng + Nguồn (Chụp ảnh màn hình các ứng dụng không cho phép)</string>
     <string name="gesture_nav_extra_cat">Cử chỉ bổ sung cho thanh điều hướng</string>

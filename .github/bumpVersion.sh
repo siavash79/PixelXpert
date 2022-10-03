@@ -3,8 +3,8 @@
 NEWVERCODE=$(($(cat app/build.gradle | grep versionCode= | tr -s ' ' | cut -d " " -f 3 | tr -d '\r')+1))
 NEWVERNAME="canary-$NEWVERCODE"
 
-sed -i 's/versionCode.*/versionCode='$NEWVERCODE'/' app/build.gradle
-sed -i 's/versionName.*/versionName="'$NEWVERNAME'"/' app/build.gradle
+sed -i 's/versionCode.*/versionCode '$NEWVERCODE'/' app/build.gradle
+sed -i 's/versionName.*/versionName "'$NEWVERNAME'"/' app/build.gradle
 
 sed -i 's/version=.*/version='$NEWVERNAME'/' MagiskModBase/module.prop
 sed -i 's/versionCode=.*/versionCode='$NEWVERCODE'/' MagiskModBase/module.prop

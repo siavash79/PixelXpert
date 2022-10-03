@@ -13,7 +13,7 @@ android {
 		minSdkVersion 31
 		targetSdk 33
 		versionCode 143
-		versionName "canary-1"
+		versionName "canary-143"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}

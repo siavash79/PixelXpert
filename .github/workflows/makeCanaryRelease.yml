@@ -27,7 +27,7 @@ jobs:
 
     - name: Generate Changelog
       run: .github/extractChanges.sh
-      
+
     - name: Update Versions
       run: .github/bumpVersion.sh ${{ github.run_id }}
 

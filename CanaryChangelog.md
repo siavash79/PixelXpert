@@ -1,3 +1,6 @@
+**canary-1**  
+- Added option to skip lockscreen to security input when waking up (Lockscreen)  
+  
 **canary-143**  
 - Fixed app UI's slider bug  
   

@@ -1,6 +1,4 @@
 **canary-144**  
-  
-**canary-1**  
 - Added option to skip lockscreen to security input when waking up (Lockscreen)  
   
 **canary-143**  

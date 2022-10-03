@@ -49,6 +49,7 @@
     <string name="album_art_blur_text">Blur value</string>
     <string name="album_art_grayscale">Grayscale</string>
     <string name="shufflePin_title">Shuffle Pin</string>
+    <string name="wakeup_to_security_title">Show sucurity input on device wake</string>
     <string name="easy_unlock_title">Easy unlock (Pin/Password)</string>
     <string name="easy_unlock_sumamry">If it didn\'t work the first time, try again</string>
 

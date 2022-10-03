@@ -1,6 +1,7 @@
 package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -25,6 +26,7 @@ public class EasyUnlock extends XposedModPack {
 	private boolean easyUnlockEnabled = false;
 
 	private int lastPassLen = 0;
+	private static boolean WakeUpToSecurityInput = false;
 
 	public EasyUnlock(Context context) {
 		super(context);
@@ -34,6 +36,7 @@ public class EasyUnlock extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		easyUnlockEnabled = Xprefs.getBoolean("easyUnlockEnabled", false);
 		expectedPassLen = Xprefs.getInt("expectedPassLen", -1);
+		WakeUpToSecurityInput = Xprefs.getBoolean("WakeUpToSecurityInput", false);
 	}
 
 	@Override
@@ -42,6 +45,19 @@ public class EasyUnlock extends XposedModPack {
 
 		Class<?> KeyguardAbsKeyInputViewControllerClass = findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
 		Class<?> LockscreenCredentialClass = findClass("com.android.internal.widget.LockscreenCredential", lpparam.classLoader);
+		Class<?> StatusBarKeyguardViewManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager", lpparam.classLoader);
+		Class<?> d = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
+
+		hookAllMethods(StatusBarKeyguardViewManagerClass, "onDozingChanged", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+
+				if(WakeUpToSecurityInput && param.args[0].equals(false) && (!(boolean)callMethod(getObjectField(param.thisObject, "mKeyguardStateController"), "canDismissLockScreen"))) //waking up
+				{
+					callMethod(getObjectField(param.thisObject, "mBouncer"), "show", true, true);
+				}
+			}
+		});
 
 		hookAllMethods(KeyguardAbsKeyInputViewControllerClass, "onUserInput", new XC_MethodHook() {
 			@Override

@@ -1,12 +1,6 @@
 **canary-146**  
 - Added option to change Taskbar's corner curves (Navigation)  
   
-**canary-146**  
-- Added option to change Taskbar's corner curves (Navigation)  
-  
-**canary-146**  
-- Added option to change Taskbar's corner curves (Navigation)  
-  
 **canary-145**  
 - Fixed update page FC bug  
   

@@ -1,0 +1,34 @@
+name: Send Telegram Test
+
+on:
+  push:
+    branches:
+      - 'canary'
+    paths:
+      - '.github/edit2MakeNewCanary1'
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Grab Source
+      run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git .
+
+    - name: Inform Telegram 2
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: test1
+        format: markdown
+        document: LICENSE
+
+    - name: Inform Telegram
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: test2
+        format: markdown
+        document: LICENSE, latestCanary.json

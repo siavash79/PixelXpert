@@ -75,15 +75,6 @@ jobs:
         name: GitHub
         email: aospmods@siava.sh
 
-    - name: Inform Telegram 2
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ env.TMessage }}
-        format: markdown
-        document: AOSPMods_Full.zip
-
     - name: Inform Telegram
       uses: appleboy/telegram-action@master
       with:
@@ -91,8 +82,7 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: ${{ env.TMessage }}
         format: markdown
-        document: AOSPMods_Full.zip, AOSPMods_Xposed.zip
 
     - name: Send Files to Telegram
-      run: | 
-        curl -v "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMediaGroup?chat_id=${{ secrets.AOSPMODS_CHANNEL_ID }}&media=%5B%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FXposed%22%7D%2C%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FFull%22%7D%5D" -F Xposed="@AOSPMods_Xposed.zip" -F Full="@AOSPMods_Full.zip"
+      run: |
+        curl -v "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMediaGroup?chat_id=@${{ secrets.AOSPMODS_CHANNEL_ID }}&media=%5B%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FXposed%22%7D%2C%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FFull%22%7D%5D" -F Xposed="@outout/xposed/AOSPMods_Xposed.zip" -F Full="@outout/full/AOSPMods_Full.zip"

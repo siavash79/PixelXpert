@@ -1,4 +1,5 @@
 **canary-145**  
+- Fixed update page FC bug  
   
 **canary-144**  
 - Added option to skip lockscreen to security input when waking up (Lockscreen)  

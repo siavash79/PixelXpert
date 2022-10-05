@@ -3,8 +3,8 @@ buildscript {
 	ext.kotlin_version = '1.7.0'
 	repositories {
 		google()
-		maven { url 'https://jitpack.io' }
 		mavenCentral()
+		maven { url 'https://jitpack.io' }
 		maven { url 'https://mvnrepository.com' }
 	}
 	dependencies {
@@ -19,8 +19,8 @@ buildscript {
 allprojects {
 	repositories {
 		google()
-		maven { url 'https://jitpack.io' }
 		mavenCentral()
+		maven { url 'https://jitpack.io' }
 		maven { url 'https://mvnrepository.com' }
 	}
 }

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.JsonReader;
@@ -38,8 +37,9 @@ import java.util.Objects;
 
 import javax.security.auth.callback.Callback;
 
+import br.tiagohm.markdownview.MarkdownView;
 import sh.siava.AOSPMods.databinding.UpdateFragmentBinding;
-import us.feras.mdv.MarkdownView;
+
 
 public class UpdateFragment extends Fragment {
 	private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/latestStable.json";
@@ -82,7 +82,7 @@ public class UpdateFragment extends Fragment {
 	private int currentVersionType = SettingsActivity.XPOSED_ONLY;
 	private String currentVersionName = "";
 	private boolean rebootPending = false;
-	private boolean downloadStarted = false;
+//	private boolean downloadStarted = false;
 	private boolean installFullVersion = true;
 
 	@Override
@@ -129,9 +129,14 @@ public class UpdateFragment extends Fragment {
 			checkUpdates(result -> {
 				latestVersion = result;
 
-				requireActivity().runOnUiThread(() -> ((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFile((String) result.get("changelog")));
+				requireActivity().runOnUiThread(() -> {
+					try {
+						((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFromUrl((String) result.get("changelog"));
+					}
+					catch (Throwable ignored){}
+				});
 
-				getActivity().runOnUiThread(() -> {
+				requireActivity().runOnUiThread(() -> {
 					((TextView) view.findViewById(R.id.latestVersionValueID)).setText(
 							String.format("%s (%s)", result.get("version"),
 									result.get("versionCode")));
@@ -184,7 +189,7 @@ public class UpdateFragment extends Fragment {
 
 				startDownload(zipURL, (int) latestVersion.get("versionCode"));
 				binding.updateBtn.setEnabled(false);
-				downloadStarted = true;
+//				downloadStarted = true;
 				binding.updateBtn.setText(R.string.update_download_started);
 			}
 		});

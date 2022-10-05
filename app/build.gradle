@@ -55,9 +55,6 @@ dependencies {
 	compileOnly files('lib/api-82.jar')
 	compileOnly files('lib/api-82-sources.jar')
 
-	//Markdown formatter
-	implementation files('lib/markdownview-1.1.0.aar')
-
 	implementation project(path: ':renderscript-toolkit')
 	implementation project(path: ':RangeSliderPreference')
 
@@ -84,4 +81,7 @@ dependencies {
 	//Remote Preferences for Xposed Module prefs
 	implementation 'com.jaredrummler:colorpicker:1.1.0' //Color Picker Component for UI
 	implementation 'com.github.mfathi91:persian-date-time:4.2.1' //Persian Calendar
+
+	implementation 'com.github.tiagohm.MarkdownView:library:0.19.0' //Markdown reader
+
 }

@@ -320,6 +320,7 @@ public class SettingsActivity extends AppCompatActivity implements
 			int taskBarMode = Integer.parseInt(prefs.getString("taskBarMode", "0"));
 			findPreference("TaskbarAsRecents").setVisible(taskBarMode == 1);
 			findPreference("taskbarHeightOverride").setVisible(taskBarMode == 1);
+			findPreference("TaskbarRadiusOverride").setVisible(taskBarMode == 1);
 
 			float taskbarHeightOverride = 100f;
 			try {

@@ -38,4 +38,13 @@
         app:title="@string/taskbar_height_title"
         app:updatesContinuously="false" />
 
+    <sh.siava.rangesliderpreference.RangeSliderPreference
+        app:maxVal="2"
+        app:minVal="0"
+        app:defaultValue="1"
+        app:tickInterval=".1"
+        android:key="TaskbarRadiusOverride"
+        app:title="@string/taskbar_radius_title"
+        app:updatesContinuously="false" />
+
 </PreferenceScreen>

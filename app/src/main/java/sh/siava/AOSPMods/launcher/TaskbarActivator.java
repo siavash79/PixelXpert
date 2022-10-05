@@ -47,6 +47,7 @@ public class TaskbarActivator extends XposedModPack {
 	private boolean TaskbarAsRecents = false;
 	private boolean refreshing = false;
 	private static float taskbarHeightOverride = 1f;
+	private float TaskbarRadiusOverride = 1f;
 
 	public TaskbarActivator(Context context) {
 		super(context);
@@ -72,10 +73,16 @@ public class TaskbarActivator extends XposedModPack {
 					break;
 				case "TaskbarAsRecents":
 				case "taskbarHeightOverride":
+				case "TaskbarRadiusOverride":
 					android.os.Process.killProcess(android.os.Process.myPid());
 					break;
 			}
 		} else {
+			try
+			{
+				TaskbarRadiusOverride = RangeSliderPreference.getValues(Xprefs, "TaskbarRadiusOverride", 1f).get(0);
+			}catch (Throwable ignored){}
+
 			try {
 				taskbarHeightOverride = RangeSliderPreference.getValues(Xprefs, "taskbarHeightOverride", 100f).get(0) / 100f;
 			} catch (Throwable ignored) {
@@ -101,7 +108,26 @@ public class TaskbarActivator extends XposedModPack {
 		Class<?> TaskbarModelCallbacksClass = findClass("com.android.launcher3.taskbar.TaskbarModelCallbacks", lpparam.classLoader);
 		Class<?> DeviceProfileClass = findClass("com.android.launcher3.DeviceProfile", lpparam.classLoader);
 		Class<?> ActivityManagerWrapperClass = findClass("com.android.systemui.shared.system.ActivityManagerWrapper", lpparam.classLoader);
+		Class<?> TaskbarActivityContextClass = findClass("com.android.launcher3.taskbar.TaskbarActivityContext", lpparam.classLoader);
 
+		//region taskbar corner radius
+		XC_MethodHook cornerRadiusHook = new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(TaskbarRadiusOverride != 1f) {
+					param.setResult(
+							Math.round(
+									(int) param.getResult() * TaskbarRadiusOverride
+							));
+				}
+			}
+		};
+
+		hookAllMethods(TaskbarActivityContextClass, "getLeftCornerRadius", cornerRadiusHook);
+		hookAllMethods(TaskbarActivityContextClass, "getRightCornerRadius", cornerRadiusHook);
+		//endregion
+
+		//region recentbar
 		UID = (int) callMethod(Process.myUserHandle(), "getIdentifier");
 
 		View.OnClickListener listener = view -> {
@@ -227,7 +253,9 @@ public class TaskbarActivator extends XposedModPack {
 				param.setResult(null);
 			}
 		});
+		//endregion
 
+		//region taskbar activator
 		hookAllMethods(info, "isTablet", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -243,5 +271,6 @@ public class TaskbarActivator extends XposedModPack {
 				}
 			}
 		});
+		//endregion
 	}
 }

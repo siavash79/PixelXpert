@@ -1,3 +1,6 @@
+**canary-147**  
+- Fixed recents bar not showing work profile app badges  
+  
 **canary-146**  
 - Added option to change Taskbar's corner curves (Navigation)  
   

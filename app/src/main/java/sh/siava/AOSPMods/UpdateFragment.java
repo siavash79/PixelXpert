@@ -103,7 +103,8 @@ public class UpdateFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		Shell.cmd("echo").exec(); //will ask root if not granted yet
+		//Android 13 requires notification permission to be granted or it won't allow it
+		Shell.cmd("pm grant sh.siava.AOSPMods android.permission.POST_NOTIFICATIONS").exec(); //will ask root if not granted yet
 
 		if (!Shell.getShell().isRoot()) {
 			currentVersionName = getString(R.string.root_not_here);

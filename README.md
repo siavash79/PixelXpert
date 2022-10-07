@@ -51,7 +51,7 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @topjohnwu for Magisk
 - @rovo89 for Xposed
 - Team LSPosed
-- Team EvolutionX (Specially @kdrag0n). Some of the mods are based on their work
+- Team EvolutionX (Specially @kdrag0n). Some of the mods are inspired from their work
 - apsun@github for remote-preferences
 - @nijel8 for double-tap to wake
 

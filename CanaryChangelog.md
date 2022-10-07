@@ -1,3 +1,7 @@
+**canary-148**  
+- Fixed: battery icon warning/critical level slider not showing correctly  
+- Fixed: update installation notification did not show up  
+  
 **canary-147**  
 - Fixed recents bar not showing work profile app badges  
   

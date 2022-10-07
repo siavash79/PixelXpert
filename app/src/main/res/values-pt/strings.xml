@@ -298,4 +298,6 @@
     <string name="taskbar_height_title">Altura da barra de tarefas</string>
     <string name="brightness_range_title">Limites do brilho do ecrã</string>
     <string name="brightness_range_not_linear">Este intervalo NÃO é linear: Por vezes, uma pequena diferença leva a mudanças consideráveis.</string>
+	<string name="wakeup_to_security_title">Mostrar ativação de segurança ao acordar</string>
+    <string name="taskbar_radius_title">Curva dos cantos na barra de tarefas</string>
 </resources>

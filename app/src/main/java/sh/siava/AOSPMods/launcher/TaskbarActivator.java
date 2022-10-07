@@ -208,11 +208,12 @@ public class TaskbarActivator extends XposedModPack {
 							for (int i = 0; i < itemInfos.length; i++) {
 								TaskInfo taskInfo = (TaskInfo) getObjectField(recentTaskList.get(i), "mTaskInfo1");
 
+								//noinspection RedundantCast,JavaReflectionMemberAccess
 								itemInfos[i] = AppInfoClass.getConstructor(ComponentName.class, CharSequence.class, UserHandle.class, Intent.class)
 										.newInstance(
 												(ComponentName) getObjectField(taskInfo, "realActivity"),
 												"",
-												UserHandle.getUserHandleForUid(getIntField(taskInfo, "userId")),
+												UserHandle.class.getConstructor(int.class).newInstance(getIntField(taskInfo, "userId")),
 												(Intent) getObjectField(taskInfo, "baseIntent"));
 
 								setAdditionalInstanceField(itemInfos[i], "taskId", taskInfo.taskId);

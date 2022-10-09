@@ -55,7 +55,7 @@
             android:defaultValue="None"
             android:entries="@array/DTStylesOverlayEx_names"
             android:entryValues="@array/DTStylesOverlayEx"
-            android:summary="%s"
+            android:summary="@string/caution_unstable"
             android:key="DTStylesOverlayEx"
             android:title="@string/dt_styles" />
     </PreferenceCategory>

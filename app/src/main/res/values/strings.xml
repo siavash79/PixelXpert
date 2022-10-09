@@ -264,6 +264,7 @@
     <string name="signal_icons_theme_title">Signal Icons Theme</string>
     <string name="dt_styles_category">Dark theme styles</string>
     <string name="dt_styles">Choose a style</string>
+    <string name="caution_unstable">Caution: This option might be unstable for some users.</string>
     <string name="dt_black" translatable="false">Pitch black</string>
     <string name="dt_bakedgreen" translatable="false">Baked Green</string>
     <string name="dt_chocox" translatable="false">Choco X</string>

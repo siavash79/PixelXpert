@@ -2,7 +2,6 @@ package sh.siava.AOSPMods;
 
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
-import static de.robv.android.xposed.XposedHelpers.findClass;
 
 import android.app.Instrumentation;
 import android.content.Context;
@@ -36,7 +35,6 @@ import sh.siava.AOSPMods.systemui.LockscreenAlbumArt;
 import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
 import sh.siava.AOSPMods.systemui.NotificationExpander;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
-import sh.siava.AOSPMods.systemui.QSHaptic;
 import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.QSThemeManager;
 import sh.siava.AOSPMods.systemui.QSThemeManager_12;
@@ -74,7 +72,6 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(BrightnessSlider.class); //13 OK
 		modPacks.add(FeatureFlagsMods.class); //13 OK
 		modPacks.add(ThreeButtonNavMods.class); //13 not planned//13 OK
-		modPacks.add(QSHaptic.class); //13 OK
 		modPacks.add(LockscreenAlbumArt.class); //13 not planned
 		modPacks.add(QSThemeManager.class); //A13 LightQSTheme
 		modPacks.add(QSThemeManager_12.class); //A12 LightQSTheme

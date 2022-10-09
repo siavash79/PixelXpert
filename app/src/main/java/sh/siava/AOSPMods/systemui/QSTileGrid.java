@@ -14,6 +14,7 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.VibrationEffect;
 import android.widget.TextView;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -43,6 +44,8 @@ public class QSTileGrid extends XposedModPack {
 	private static float QSLabelScaleFactor = 1, QSSecondaryLabelScaleFactor = 1;
 	private static boolean QRTileInactiveColor = false;
 
+	private static boolean QSHapticEnabled = false;
+
 	public QSTileGrid(Context context) {
 		super(context);
 	}
@@ -50,6 +53,8 @@ public class QSTileGrid extends XposedModPack {
 	@Override
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
+
+		QSHapticEnabled = Xprefs.getBoolean("QSHapticEnabled", false);
 
 		QSRowQty = Xprefs.getInt("QSRowQty", NOT_SET);
 		QSColQty = Xprefs.getInt("QSColQty", NOT_SET);
@@ -77,6 +82,17 @@ public class QSTileGrid extends XposedModPack {
 		Class<?> TileLayoutClass = findClass("com.android.systemui.qs.TileLayout", lpparam.classLoader);
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
 		Class<?> FontSizeUtilsClass = findClass("com.android.systemui.FontSizeUtils", lpparam.classLoader);
+		Class<?> QSTileImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
+
+		XC_MethodHook vibrateCallback = new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if (QSHapticEnabled) SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK);
+			}
+		};
+
+		hookAllMethods(QSTileImplClass, "click", vibrateCallback);
+		hookAllMethods(QSTileImplClass, "longClick", vibrateCallback);
 
 		hookAllMethods(QSTileViewImplClass, "onLayout", new XC_MethodHook() { //dimension is hard-coded in the layout file. can reset anytime without prior notice. So we set them at layout stage
 			@Override

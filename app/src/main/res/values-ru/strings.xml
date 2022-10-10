@@ -329,8 +329,8 @@
     <string name="gesture_nav_long_swipe_fc_title">Проведите вверх по экрану, чтобы закрыть приложение</string>
     <string name="gesture_nav_left_swipe_up_title">Свайп вверх слева в панели жестов</string>
     <string name="gesture_nav_right_swipe_up_title">Свайп вверх справа в панели жестов</string>
-    <string name="gesture_nav_left_swipe_up_perecent">Ширина свайпа слева (%)</string>
-    <string name="gesture_nav_right_swipe_up_perecent">Ширина свайпа справа (%)</string>
+    <string name="gesture_nav_left_swipe_up_percent">Ширина свайпа слева (%)</string>
+    <string name="gesture_nav_right_swipe_up_percent">Ширина свайпа справа (%)</string>
     <string name="gesture_nav_two_finger_title">Свайп вверх двумя пальцами</string>
     <string name="gesture_nav_swipe_up_height">Минимальная высота активации свайпа</string>
 

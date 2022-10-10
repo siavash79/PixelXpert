@@ -329,8 +329,8 @@
     <string name="gesture_nav_long_swipe_fc_title">Streichen Sie zum oberen Bildschirmrand, um die Vordergrund-App zu beenden</string>
     <string name="gesture_nav_left_swipe_up_title">Aktion von links in der Navbar nach oben wischen</string>
     <string name="gesture_nav_right_swipe_up_title">Aktion von rechts in der Navbar nach oben wischen</string>
-    <string name="gesture_nav_left_swipe_up_perecent">Breite des linken Swipe-up-Bereichs (%)</string>
-    <string name="gesture_nav_right_swipe_up_perecent">Breite des rechten Swipe-up-Bereichs (%)</string>
+    <string name="gesture_nav_left_swipe_up_percent">Breite des linken Swipe-up-Bereichs (%)</string>
+    <string name="gesture_nav_right_swipe_up_percent">Breite des rechten Swipe-up-Bereichs (%)</string>
     <string name="gesture_nav_two_finger_title">Wischen mit zwei Fingern nach oben</string>
     <string name="gesture_nav_swipe_up_height">Swipe-up-Aktionen minimale Triggerhöhe</string>
     <string name="none">Keiner</string>

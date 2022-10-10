@@ -300,4 +300,5 @@
     <string name="brightness_range_not_linear">Este intervalo NÃO é linear: Por vezes, uma pequena diferença leva a mudanças consideráveis.</string>
 	<string name="wakeup_to_security_title">Mostrar ativação de segurança ao acordar</string>
     <string name="taskbar_radius_title">Curva dos cantos na barra de tarefas</string>
+	<string name="caution_unstable">Cuidado: Esta opção poderá ser instável para alguns.</string>
 </resources>

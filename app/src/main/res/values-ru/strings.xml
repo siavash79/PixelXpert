@@ -342,5 +342,8 @@
     <string name="toggle_one_handed">Переключение режима управления одной рукой</string>
     <string name="insecure_screenshot">Небезопасный скриншот</string>
     <string name="screenshot_chord_insecure">Разрешить скриншот в защищенном приложении (гр.вверх+кн.питания)</string>
+    <string name="taskbar_as_recents_title">Превращать панель задач в список запущенных приложений</string>
+    <string name="taskbar_radius_title">Угловой угол панели задач</string>
+    <string name="caution_unstable">Внимание: эта опция может быть нестабильной для некоторых пользователей.</string>
 
 </resources>

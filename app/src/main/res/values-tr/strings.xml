@@ -340,4 +340,7 @@
     <string name="insecure_screenshot">Güvenliksiz ekran görüntüsü</string>
     <string name="screenshot_chord_insecure">Sesi kısma butonu + Güç — güvensiz ekran görüntüsü</string>
     <string name="taskbar_as_recents_title">Görev Çubuğunu son kullanılan uygulamalar çubuğuna dönüştür</string>
+    <string name="wakeup_to_security_title">Cihaz uyanır uyanmaz ekran kilidini açmak</string>
+    <string name="taskbar_radius_title">Görev çubuğu köşe eğriliği</string>
+    <string name="caution_unstable">Dikkat: Bu seçenek bazı cihazları dengesiz  yapabilir</string>
 </resources>

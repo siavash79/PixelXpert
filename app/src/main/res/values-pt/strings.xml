@@ -278,8 +278,8 @@
     <string name="gesture_nav_long_swipe_fc_title">Arrastar até ao topo do ecrã para terminar app em segundo plano</string>
     <string name="gesture_nav_left_swipe_up_title">Arrastar para cima desde o lado esquerdo da barra</string>
     <string name="gesture_nav_right_swipe_up_title">Arrastar para cima desde o lado direito da barra</string>
-    <string name="gesture_nav_left_swipe_up_perecent">Largura da área de ação desde o lado esquerdo (%)</string>
-    <string name="gesture_nav_right_swipe_up_perecent">Largura da área de ação desde o lado direito (%)</string>
+    <string name="gesture_nav_left_swipe_up_percent">Largura da área de ação desde o lado esquerdo (%)</string>
+    <string name="gesture_nav_right_swipe_up_percent">Largura da área de ação desde o lado direito (%)</string>
     <string name="gesture_nav_two_finger_title">Ação ao deslizar para cima com dois dedos</string>
     <string name="gesture_nav_swipe_up_height">Altura mínima para as ações de deslizar para cima</string>
     <string name="none">Nenhuma</string>
@@ -300,4 +300,5 @@
     <string name="brightness_range_not_linear">Este intervalo NÃO é linear: Por vezes, uma pequena diferença leva a mudanças consideráveis.</string>
 	<string name="wakeup_to_security_title">Mostrar ativação de segurança ao acordar</string>
     <string name="taskbar_radius_title">Curva dos cantos na barra de tarefas</string>
+	<string name="caution_unstable">Cuidado: Esta opção poderá ser instável para alguns.</string>
 </resources>

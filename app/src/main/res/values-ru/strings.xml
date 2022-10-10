@@ -21,7 +21,7 @@
     <string name="theme_customization_category">Иконки и стили</string>
 
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Скрыть круг для отпечатков пальцев под дисплеем</string>
+    <string name="transparent_fingerprint_circle">Скрыть фон под индикатором отпечатков пальцев</string>
     <string name="transparent_fingerprint_circle_off">Круг вокруг значка отпечатка пальца активен</string>
     <string name="transparent_fingerprint_circle_on">Круг вокруг значка отпечатка пальца будет скрыт</string>
     <string name="carrier_text_category">Свой текст</string>
@@ -31,9 +31,9 @@
     <string name="carrier_text_mod_enabled">Свой текст установлен</string>
     <string name="carrier_text_value">Редактирование своего текста</string>
     <string name="lockscreen_center_text_value">Свой текст в области часов</string>
-    <string name="keyguard_dim_amount_title">Keyguard wallpaper dim</string>
+    <string name="keyguard_dim_amount_title">Затемнение обоев экрана блокировки</string>
     <string name="keyguard_bottom_category">Ярлыки нижней области</string>
-    <string name="keyguard_bottom_buttons_transparent_title">Скрыть круг вокруг значков</string>
+    <string name="keyguard_bottom_buttons_transparent_title">Скрыть фон под ярлыками</string>
     <string name="keyguard_bottom_force_camera_title">Показать ярлык камеры</string>
     <string name="keyguard_left_shortcut">Показывать левый ярлык на экране блокировки</string>
     <string name="LSleftShortcutTitle">Левый ярлык</string>
@@ -48,6 +48,7 @@
     <string name="shufflePin_title">Случайный PIN-код</string>
     <string name="easy_unlock_title">Легкая разблокировка (пин-код/пароль)</string>
     <string name="easy_unlock_sumamry">Если не получилось в первый раз, попробуйте еще раз</string>
+    <string name="wakeup_to_security_title">Сразу перейти к вводу пароля на экране блокировки</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Двойное нажатие для перехода в спящий режим</string>
@@ -97,7 +98,7 @@
     <string name="ntsb_enabled_title">Включить мониторинг трафика</string>
     <string name="ntsb_position_title">Расположение мониторинга</string>
     <string name="ntsb_threshold_title">Порог автоскрытия</string>
-    <string name="ntsb_threshold_summary">"Скрыть, если трафик меньше… (Килобайтов)"</string>
+    <string name="ntsb_threshold_summary">"Скрыть, если трафик меньше… (Килобайт)"</string>
     <string name="network_mode_title">Стиль монитора</string>
     <string name="network_colorful_title">Сделать цветным</string>
     <string name="network_download_top">Скорость загрузки сверху</string>
@@ -137,7 +138,7 @@
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Номер сборки в панели быстрых настроек</string>
-    <string name="qs_footer_mod_title">Изменить номер текста сборки в панели быстрых настроек</string>
+    <string name="qs_footer_mod_title">Изменить текст номера сборки в панели быстрых настроек</string>
     <string name="qs_footer_text_value">Ввести свой текст</string>
     <string name="qs_footer_text_summary">Оставьте пустым, чтобы полностью удалить текст</string>
     <string name="qs_footer_text_desc">Выкл/вкл экран, чтобы применить</string>
@@ -282,7 +283,7 @@
     <string name="menu_settings_title">Импорт/Экспорт</string>
     <string name="menu_reset_defaults">Сбросить все настройки</string>
     <string name="menu_import_settings">Импортировать настройки из файла…</string>
-    <string name="menu_export_settings">EЭкспортировать настройки в файл…</string>
+    <string name="menu_export_settings">Экспортировать настройки в файл…</string>
     <string name="menu_netstat_title">Статистика сети</string>
     <string name="menu_netstat_enable">Включить статистику</string>
     <string name="menu_netstat_clear">Сбросить статистику сети</string>
@@ -340,6 +341,6 @@
     <string name="toggle_notification">Открыть панель уведомлений</string>
     <string name="toggle_one_handed">Переключение режима управления одной рукой</string>
     <string name="insecure_screenshot">Небезопасный скриншот</string>
-    <string name="screenshot_chord_insecure">Гр.вверх+кн.питания небезопасный скриншот</string>
+    <string name="screenshot_chord_insecure">Разрешить скриншот в защищенном приложении (гр.вверх+кн.питания)</string>
 
 </resources>

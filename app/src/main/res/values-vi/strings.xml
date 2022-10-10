@@ -14,8 +14,8 @@
     <string name="gesture_nav_long_swipe_fc_title">Vuốt lên trên để tắt ứng dụng nền</string>
     <string name="gesture_nav_left_swipe_up_title">Vuốt lên từ bên trái thanh điều hướng</string>
     <string name="gesture_nav_right_swipe_up_title">Vuốt lên từ bên phải thanh điều hướng</string>
-    <string name="gesture_nav_left_swipe_up_perecent">Chiều rộng vùng vuốt lên bên trái (%)</string>
-    <string name="gesture_nav_right_swipe_up_perecent">Chiều rộng vùng vuốt lên bên phải (%)</string>
+    <string name="gesture_nav_left_swipe_up_percent">Chiều rộng vùng vuốt lên bên trái (%)</string>
+    <string name="gesture_nav_right_swipe_up_percent">Chiều rộng vùng vuốt lên bên phải (%)</string>
     <string name="gesture_nav_two_finger_title">Vuốt lên bằng hai ngón tay</string>
     <string name="gesture_nav_swipe_up_height">Chiều cao vuốt lên tối thiểu</string>
     <string name="none">Trống</string>

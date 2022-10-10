@@ -327,8 +327,8 @@
     <string name="gesture_nav_long_swipe_fc_title">Uygulamayı kapatmak için ekranın üstüne doğru kaydırın</string>
     <string name="gesture_nav_left_swipe_up_title">Gezinme Çubuğunun solundan yukarı kaydırma</string>
     <string name="gesture_nav_right_swipe_up_title">Gezinme Çubuğunun sağından yukarı kaydırma</string>
-    <string name="gesture_nav_left_swipe_up_perecent">Soldan yukarı kaydırma alan genişliği</string>
-    <string name="gesture_nav_right_swipe_up_perecent">Sağdan yukarı kaydırma alan genişliği</string>
+    <string name="gesture_nav_left_swipe_up_percent">Soldan yukarı kaydırma alan genişliği</string>
+    <string name="gesture_nav_right_swipe_up_percent">Sağdan yukarı kaydırma alan genişliği</string>
     <string name="gesture_nav_two_finger_title">İki barmakla yukarı kaydırma jesti</string>
     <string name="gesture_nav_swipe_up_height">Minimal yukarı kaydırma alanı</string>
     <string name="none">Hiçbiri</string>

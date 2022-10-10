@@ -307,8 +307,8 @@
     <string name="gesture_nav_long_swipe_fc_title">Glisați în partea de sus a ecranului pentru a închide aplicația din prim-plan</string>
     <string name="gesture_nav_left_swipe_up_title">Glisare în sus din stânga barei de navigare</string>
     <string name="gesture_nav_right_swipe_up_title">Glisare în sus din dreapta barei de navigare</string>
-    <string name="gesture_nav_left_swipe_up_perecent">Lățimea zonei din stânga glisare în sus (%)</string>
-    <string name="gesture_nav_right_swipe_up_perecent">Lățimea zonei din dreapta glisare în sus (%)</string>
+    <string name="gesture_nav_left_swipe_up_percent">Lățimea zonei din stânga glisare în sus (%)</string>
+    <string name="gesture_nav_right_swipe_up_percent">Lățimea zonei din dreapta glisare în sus (%)</string>
     <string name="gesture_nav_two_finger_title">Acțiune de glisare în sus cu două degete</string>
     <string name="gesture_nav_swipe_up_height">Înălțimea minimă a declanșatorului la acțiunea de glisare în sus</string>
     <string name="none">Nimic</string>

@@ -370,8 +370,8 @@
     <string name="gesture_nav_long_swipe_fc_title">Swipe to top of screen to kill foreground app</string>
     <string name="gesture_nav_left_swipe_up_title">Swipe up action from left of Navbar</string>
     <string name="gesture_nav_right_swipe_up_title">Swipe up action from right of Navbar</string>
-    <string name="gesture_nav_left_swipe_up_perecent">Left swipe-up area width (%)</string>
-    <string name="gesture_nav_right_swipe_up_perecent">Right swipe-up area width (%)</string>
+    <string name="gesture_nav_left_swipe_up_percent">Left swipe-up area width (%)</string>
+    <string name="gesture_nav_right_swipe_up_percent">Right swipe-up area width (%)</string>
     <string name="gesture_nav_two_finger_title">Two-finger swipe-up action</string>
     <string name="gesture_nav_swipe_up_height">Swipe-up actions minimum trigger height</string>
 

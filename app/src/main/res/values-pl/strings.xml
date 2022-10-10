@@ -327,8 +327,8 @@
     <string name="gesture_nav_long_swipe_fc_title">Przesuń palcem w górę ekranu, aby zabić aplikację na pierwszym planie</string>
     <string name="gesture_nav_left_swipe_up_title">Przesuń w górę akcję z lewej strony paska nawigacyjnego</string>
     <string name="gesture_nav_right_swipe_up_title">Przesuń w górę akcję z prawej strony paska nawigacyjnego</string>
-    <string name="gesture_nav_left_swipe_up_perecent">Szerokość obszaru przesuwania w lewo (%)</string>
-    <string name="gesture_nav_right_swipe_up_perecent">Szerokość obszaru przesuwania w prawo (%)</string>
+    <string name="gesture_nav_left_swipe_up_percent">Szerokość obszaru przesuwania w lewo (%)</string>
+    <string name="gesture_nav_right_swipe_up_percent">Szerokość obszaru przesuwania w prawo (%)</string>
     <string name="gesture_nav_two_finger_title">Przesunięcie dwoma palcami w górę</string>
     <string name="gesture_nav_swipe_up_height">Minimalna wysokość wyzwalania akcji przesuwania</string>
 

@@ -38,6 +38,13 @@
             android:summaryOn="@string/general_on"
             android:title="@string/force_no_cutout" />
 
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="RecentClearAllReposition"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/clear_all_reposition_title" />
+
         <sh.siava.rangesliderpreference.RangeSliderPreference
             android:key="BrightnessRange"
             android:title="@string/brightness_range_title"

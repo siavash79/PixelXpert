@@ -17,6 +17,7 @@ import sh.siava.AOSPMods.android.PhoneWindowManager;
 import sh.siava.AOSPMods.android.ScreenOffKeys;
 import sh.siava.AOSPMods.android.ScreenRotation;
 import sh.siava.AOSPMods.android.StatusbarSize;
+import sh.siava.AOSPMods.launcher.ClearAllButtonMod;
 import sh.siava.AOSPMods.launcher.CustomNavGestures;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.systemui.AOSPSettingsLauncher;
@@ -102,6 +103,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(CustomNavGestures.class);
 		modPacks.add(PhoneWindowManager.class);
 		modPacks.add(BrightnessRange.class);
+		modPacks.add(ClearAllButtonMod.class);
 		//endregion
 	}
 
@@ -109,9 +111,9 @@ public class AOSPMods implements IXposedHookLoadPackage {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		isSecondProcess = lpparam.processName.contains(":");
 
-		if (lpparam.packageName.equals(SYSTEM_FRAMEWORK_PACKAGE) && false) {
+		if (lpparam.packageName.equals(LAUNCHER_PACKAGE) && false) {
 			log("------------");
-			Helpers.dumpClass("com.android.server.display.DisplayPowerController", lpparam.classLoader);
+			Helpers.dumpClass("com.android.quickstep.fallback.FallbackRecentsView", lpparam.classLoader);
 			log("------------");
 		}
 

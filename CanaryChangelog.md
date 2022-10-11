@@ -1,3 +1,6 @@
+**canary-149**  
+- Added option to add ClearAll button to bottom of recents page  
+  
 **canary-148**  
 - Fixed: battery icon warning/critical level slider not showing correctly  
 - Fixed: update installation notification did not show up  

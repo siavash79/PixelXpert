@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.core.content.res.ResourcesCompat;
@@ -36,8 +37,8 @@ public class ClearAllButtonMod extends XposedModPack {
 	private static final String listenPackage = AOSPMods.LAUNCHER_PACKAGE;
 
 	private Object recentView;
-	private FrameLayout clearAllButton;
 	private static boolean RecentClearAllReposition = false;
+	private ImageView clearAllIcon;
 
 	public ClearAllButtonMod(Context context) {
 		super(context);
@@ -79,7 +80,8 @@ public class ClearAllButtonMod extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(!RecentClearAllReposition) return;
 
-				clearAllButton.getBackground().setTintList(getThemedColor(mContext));
+				clearAllIcon.getDrawable().setTintList(getThemedColor(mContext));
+				//clearAllButton.getBackground().setTintList(getThemedColor(mContext));
 			}
 		});
 
@@ -88,10 +90,13 @@ public class ClearAllButtonMod extends XposedModPack {
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if(!RecentClearAllReposition) return;
 
-				clearAllButton = new FrameLayout(mContext);
-				clearAllButton.setBackground(ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_clear_all, mContext.getTheme()));
+				FrameLayout clearAllButton = new FrameLayout(mContext);
 
-				clearAllButton.getBackground().setTintList(getThemedColor(mContext));
+				clearAllIcon = new ImageView(mContext);
+				clearAllIcon.setImageDrawable(ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_clear_all, mContext.getTheme()));
+				clearAllButton.addView(clearAllIcon);
+
+				clearAllIcon.getDrawable().setTintList(getThemedColor(mContext));
 
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -99,7 +104,9 @@ public class ClearAllButtonMod extends XposedModPack {
 				LinearLayout buttonsLayout =  ((View)param.thisObject).findViewById(mContext.getResources().getIdentifier("action_buttons", "id", mContext.getOpPackageName()));
 
 				buttonsLayout.setVerticalGravity(Gravity.CENTER_VERTICAL);
-				params.rightMargin = params.leftMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, Resources.getSystem().getDisplayMetrics());
+				int margins = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, Resources.getSystem().getDisplayMetrics());
+
+				params.rightMargin = params.leftMargin = margins;
 
 				clearAllButton.setLayoutParams(params);
 				clearAllButton.setOnClickListener(v -> {
@@ -111,6 +118,7 @@ public class ClearAllButtonMod extends XposedModPack {
 					}
 				});
 
+				clearAllButton.setPadding(margins/2,0,margins/2,0);
 				buttonsLayout.addView(clearAllButton, buttonsLayout.getChildCount() - 2);
 			}
 		});

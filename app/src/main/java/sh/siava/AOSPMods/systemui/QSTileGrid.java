@@ -13,6 +13,7 @@ import static sh.siava.AOSPMods.ResourceManager.resparams;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.view.Gravity;
@@ -60,6 +61,11 @@ public class QSTileGrid extends XposedModPack {
 		if (Xprefs == null) return;
 
 		VerticalQSTile = Xprefs.getBoolean("VerticalQSTile", false);
+
+		if(Key.length > 0 && Key[0].equals("VerticalQSTile"))
+		{
+			SystemUtils.doubleToggleDarkMode();
+		}
 
 		QSHapticEnabled = Xprefs.getBoolean("QSHapticEnabled", false);
 
@@ -127,7 +133,7 @@ public class QSTileGrid extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(VerticalQSTile)
-					fixPadding((LinearLayout) param.thisObject);
+					fixPaddingVerticalLayout((LinearLayout) param.thisObject);
 			}
 		});
 
@@ -141,8 +147,10 @@ public class QSTileGrid extends XposedModPack {
 						thisQSTileView.setGravity(Gravity.CENTER);
 						thisQSTileView.setOrientation(LinearLayout.VERTICAL);
 
-						((TextView) getObjectField(param.thisObject, "label")).setGravity(Gravity.CENTER_HORIZONTAL);
-						((TextView) getObjectField(param.thisObject, "secondaryLabel")).setGravity(Gravity.CENTER_HORIZONTAL);
+						((TextView) getObjectField(param.thisObject, "label"))
+								.setGravity(Gravity.CENTER_HORIZONTAL);
+						((TextView) getObjectField(param.thisObject, "secondaryLabel"))
+								.setGravity(Gravity.CENTER_HORIZONTAL);
 
 						LinearLayout horizontalLinearLayout = new LinearLayout(mContext);
 						horizontalLinearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -153,7 +161,8 @@ public class QSTileGrid extends XposedModPack {
 
 						thisQSTileView.removeView((View) getObjectField(param.thisObject, "sideView"));
 
-						fixPadding(thisQSTileView);
+						fixPaddingVerticalLayout(thisQSTileView);
+
 						thisQSTileView.addView(horizontalLinearLayout);
 					}
 
@@ -209,13 +218,22 @@ public class QSTileGrid extends XposedModPack {
 		setResources();
 	}
 
-	private void fixPadding(LinearLayout parent) {
-		int padding = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("qs_tile_padding", "dimen", mContext.getPackageName()));
+	private void fixPaddingVerticalLayout(LinearLayout parent) {
+		Resources res = mContext.getResources();
+
+		int padding = res.getDimensionPixelSize(
+				res.getIdentifier(
+						"qs_tile_padding",
+						"dimen",
+						mContext.getPackageName()
+				)
+		);
 
 		parent.setPadding(padding,padding,padding,padding);
 
 		((LinearLayout.LayoutParams) ((LinearLayout) getObjectField(parent, "labelContainer"))
-				.getLayoutParams()).setMarginStart(0);
+				.getLayoutParams())
+				.setMarginStart(0);
 	}
 
 	private void setLabelSizes(XC_MethodHook.MethodHookParam param) {

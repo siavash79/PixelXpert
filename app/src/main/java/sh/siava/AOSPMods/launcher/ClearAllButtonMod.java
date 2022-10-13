@@ -2,7 +2,6 @@ package sh.siava.AOSPMods.launcher;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findMethodBestMatch;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
@@ -71,7 +70,6 @@ public class ClearAllButtonMod extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				recentView = param.thisObject;
-				log(recentView.getClass().getName());
 			}
 		});
 

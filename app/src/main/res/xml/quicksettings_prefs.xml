@@ -48,6 +48,11 @@
                 android:key="QRTileInactiveColor"
                 android:title="@string/qs_qr_tile_inactive_title" />
 
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="VerticalQSTile"
+                android:title="@string/qs_tile_vertical_title" />
+
             <SeekBarPreference
                 android:defaultValue="0"
                 android:max="8"

@@ -1,3 +1,6 @@
+**canary-150**  
+- Added option to move QS Tile icon to the top (Quick Settings)  
+  
 **canary-149**  
 - Added option to add ClearAll button to bottom of recents page  
   

@@ -1,6 +1,6 @@
 {
-    "version": "2.2.0",
-    "versionCode": 138,
-    "zipUrl": "https://github.com/siavash79/AOSPMods/releases/download/v2.2.0/AOSPMods_Xposed.zip",
+    "version": "2.3.0",
+    "versionCode": 151,
+    "zipUrl": "https://github.com/siavash79/AOSPMods/releases/download/v2.3.0/AOSPMods_Xposed.zip",
     "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/MagiskChangelog.md"
 }

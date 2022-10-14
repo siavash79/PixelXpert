@@ -1,3 +1,6 @@
+**canary-152**  
+- Separate Wifi/Cell QS tiles for A13  
+  
 **canary-151**  
 - Fixed text alignment on vertical QS tile setup  
   

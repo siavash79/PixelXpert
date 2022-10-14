@@ -1,3 +1,6 @@
+**canary-151**  
+- Fixed text alignment on vertical QS tile setup  
+  
 **canary-150**  
 - Added option to move QS Tile icon to the top (Quick Settings)  
   

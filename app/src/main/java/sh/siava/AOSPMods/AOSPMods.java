@@ -111,9 +111,9 @@ public class AOSPMods implements IXposedHookLoadPackage {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		isSecondProcess = lpparam.processName.contains(":");
 
-		if (lpparam.packageName.equals(LAUNCHER_PACKAGE) && false) {
+		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && false) {
 			log("------------");
-			Helpers.dumpClass("com.android.quickstep.fallback.FallbackRecentsView", lpparam.classLoader);
+			Helpers.dumpClass("com.android.systemui.qs.tileimpl.QSFactoryImpl", lpparam.classLoader);
 			log("------------");
 		}
 

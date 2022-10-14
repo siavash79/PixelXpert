@@ -18,7 +18,7 @@ Currently, AOSP Mods offers customizations on different aspects of system framew
 - Screen properties
 
 **Compatibility:**
-This module is designed based on AOSP source code. What does it mean? it means that it's expected to work on Roms (Firmwares) which are built based on fairly unmodified Android source code. This means, mainly, Pixel Phones (3, 4, 4a, 5, 5a, 6), and any other Roms that haven't heavily modified the original Android codes. Our feedbacks show that AOSPMods is compatible with Pixel stock Roms and Pixel Experience (normal edition). The mod can also be installed on ArrowOS, Pixel Experience (Plus Edition), ProtonAOSP and LineageOS with *some* broken features.
+This module is designed based on AOSP source code. What does it mean? it means that it's expected to work on Roms (Firmwares) which are built based on fairly unmodified Android source code. This means, mainly, Pixel Phones (3, 4, 4a, 5, 5a, 6, 6a, 7), and any other Roms that haven't heavily modified the original Android codes. Our feedbacks show that AOSPMods is compatible with Pixel stock Roms and Pixel Experience (normal edition). The mod can also be installed on ArrowOS, Pixel Experience (Plus Edition), ProtonAOSP and LineageOS with *some* broken features.
 
 - Android 12:         Compatible
 - Android 12.1 (12L): Compatible

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="taskbar_radius_title">Đường cong góc của thanh tác vụ</string>
+    <string name="qs_tile_vertical_title">Di chuyển các biểu tượng ô lên đầu</string>
+    <string name="clear_all_reposition_title">Thêm nút xóa tất cả vào cuối trang gần đây</string>
     <string name="wakeup_to_security_title">Nhập mật khẩu ngay khi màn hình bật</string>
     <string name="brightness_range_not_linear">CHÚ Ý: Một sự thay đổi nhỏ dẫn đến những thay đổi khác biệt đáng kể</string>
     <string name="brightness_range_title">Giới hạn độ sáng màn hình</string>

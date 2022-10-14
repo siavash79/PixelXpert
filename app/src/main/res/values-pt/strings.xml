@@ -302,4 +302,5 @@
     <string name="taskbar_radius_title">Curva dos cantos na barra de tarefas</string>
 	<string name="caution_unstable">Cuidado: Esta opção poderá ser instável para alguns.</string>
 	<string name="clear_all_reposition_title">Mostrar botão limpar tudo na parte inferior das apps recentes</string>
+	<string name="qs_tile_vertical_title">Mover ícones dos atalhos para o topo</string>
 </resources>

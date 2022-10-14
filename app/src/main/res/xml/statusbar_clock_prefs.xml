@@ -18,8 +18,7 @@
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
         android:title="@string/sbc_show_secs" />
-    <PreferenceCategory
-        android:title="@string/sbc_date_cat">
+    <PreferenceCategory android:title="@string/sbc_date_cat">
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/sbc_day_week_names"
@@ -27,8 +26,7 @@
             android:summary="%s"
             android:key="SBCDayOfWeekMode"
             android:title="@string/sbc_day_of_week_options" />
-        <PreferenceCategory
-            android:title="@string/sbc_advanced_cat">
+        <PreferenceCategory android:title="@string/sbc_advanced_cat">
             <EditTextPreference
                 android:defaultValue=""
                 android:key="DateFormatBeforeSBC"
@@ -53,8 +51,7 @@
                 android:title="@string/sbc_date_small" />
         </PreferenceCategory>
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/sbc_clock_color_category">
+    <PreferenceCategory android:title="@string/sbc_clock_color_category">
         <SwitchPreference
             android:defaultValue="false"
             android:key="SBCClockColorful"

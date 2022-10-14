@@ -2,7 +2,7 @@
     <!--General strings-->
     <string name="error_not_activated">Lütfen modülün LSPosed Manager\'da etkinleştirildiğinden emin olun</string>
     <string name="hide_default">Gizle (Varsayılan)</string>
-    <string name="percent_of_default_size">% of default size</string>
+    <string name="percent_of_default_size">Varsayılan boyut</string>
     <string name="overlay_none_title">(Varsayılan)</string>
     <string name="general_section">Genel seçenekler</string>
     <string name="general_on">Açık</string>
@@ -11,9 +11,11 @@
     <string name="restart_needed">Değişiklikleri uygulamak için SystemUI\'i yeniden başlatmanız gerekir</string>
 
     <!--Category titles-->
+    <string name="more_area">daha fazla</string>
+    <string name="less_area">daha az</string>
     <string name="lockscreen_header_title">Kilit Ekranı</string>
     <string name="statusbar_header">Durum Çubuğu</string>
-    <string name="nav_header">Navigasyon Çubuğu</string>
+    <string name="nav_header">Gezinme Çubuğu</string>
     <string name="misc_header">Muhtelif</string>
     <string name="qs_panel_category_title">Hızlı Ayarlar Paneli</string>
     <string name="theme_customization_category">Temalandırma</string>
@@ -67,6 +69,7 @@
     <string name="lte_4g_icon_title">LTE / 4G Simgesi</string>
     <string name="combined_signal_icon_title">Birleşik sinyal simgeleri</string>
     <string name="volte_icon_title">Varsa VoLTE simgesini göster</string>
+    <string name="hide_privacychip_title">Gizlilik göstergelerini gizle\n(Kamera, Mikrofon)</string>
     <string name="sb_vibration_switch_title">Titreşim/Sessiz simgelerini göster</string>
     <string name="sbc_position_title">Saat konumu</string>
     <string name="sbc_ampm_style">AM/PM Stili</string>
@@ -104,7 +107,7 @@
     <string name="nt_mode_rxtx">İndirme &amp; Yükleme</string>
     <string name="nt_mode_total">İndirme + Yükleme (Combined)</string>
     <string name="nt_mode_rxonly">Sadece İndirme</string>
-    <string name="nt_mode_txonly">Sadece Yükleme</string>	
+    <string name="nt_mode_txonly">Sadece Yükleme</string>
     <string name="statusbar_general_options">Durum Çubuğu Seçenekleri</string>
     <string name="dual_tone_battery_title">Çift tonlu pil ölçeri etkinleştir</string>
     <string name="dual_tone_battery_on_summary">Açık (yalnızca portre simgesiyle çalışır)</string>
@@ -161,23 +164,6 @@
     <string name="quick_settings_tiles_category">Hızlı Ayar Opsiyonları</string>
     <string name="qs_tile_style_title">Hızlı Ayar Temaları</string>
     <string name="qstile_default">Varsayılan</string>
-    <string name="qstile_cookie">Kurabiye</string>
-    <string name="qstile_triangles">Üçgen</string>
-    <string name="qstile_divided">Bölünmüş Daire</string>
-    <string name="qstile_attemptmountain">Bir dağ denemesi</string>
-    <string name="qstile_squircle_trim">Döşeme ile sincap</string>
-    <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">Dalgalı</string>
-    <string name="qstile_squaremedo">The Squaremedo</string>
-    <string name="qstile_dual_tone_circle">Çift tonlu daire</string>
-    <string name="qstile_circleoutline">Daire Anahatı</string>
-    <string name="qstile_pokesign">Pokemon simgesi</string>
-    <string name="qstile_cosmos">Shishu Kosmos</string>
-    <string name="qstile_neonlike">Neon Işığı</string>
-    <string name="qstile_circle_trim">Kesitli daire</string>
-    <string name="qstile_dottedcircle">Noktalı Daire</string>
-    <string name="qstile_inkdrop">Mürekkep</string>
-    <string name="qstile_circle">Daire</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Geri hareketini yapılandır</string>
@@ -185,15 +171,20 @@
     <string name="back_from_right_title">Ekranın sağ tarafı</string>
     <string name="back_height_title">Jest hareketi yüksekliği</string>
     <string name="gesturenav_header">Jest hareketi navigasyonu</string>
-    <string name="gesture_nav_pill_cat">Navigasyon çubuğu genişliği</string>
-    <string name="gesture_nav_pill_mod_title">Navigasyon çubuğu genişliğini değiştirin</string>
+    <string name="gesture_nav_pill_cat">Gezinme Çubuğu genişliği</string>
+    <string name="gesture_nav_pill_mod_title">Gezinme Çubuğu genişliğini değiştirin</string>
     <string name="gesture_nav_pill_width_title">Standart boyuta göre genişlik</string>
-    <string name="gesture_nav_pill_height_title">Standart boyuta göre yükseklik</string>    
+    <string name="gesture_nav_pill_height_title">Standart boyuta göre yükseklik</string>
     <string name="threebutton_header_title">3 düğmeli gezinme</string>
     <string name="back_longpress_kill_title">Geri butonunu uzun basılı tutarak uygulamayı öldür</string>
-    <string name="hide_navbar_title">Navigasyon çubuğunu gizle</string>
-    <string name="colorpill_title">Navigasyon çubuğunu renklendir</string>
-    <string name="colorpill">Navigasyon çubuğunu vurgu rengine göre renklendir</string>
+    <string name="modify_3button_title">Düğme sırasını değiştirin</string>
+    <string name="three_button_left_title">Sol düğme</string>
+    <string name="three_button_center_title">Orta düğme</string>
+    <string name="three_button_right_title">Sağ düğme</string>
+    <string name="hide_navbar_title">Gezinme çubuğunu gizle</string>
+    <string name="taskbar_height_title">Görev Çubuğu yüksekliği</string>
+    <string name="colorpill_title">Gezinme Çubuğunu renklendir</string>
+    <string name="colorpill">Gezinme Çubuğunu vurgu rengine göre renklendir</string>
     <string name="reducekeyboard_title">Klavye altı jest hareket alanı</string>
     <string name="reducekeyboard">Klavyede altı alanı azaltın</string>
     <string name="taskbar_status_title">Android Görev Çubuğu</string>
@@ -207,6 +198,9 @@
     <string name="force_no_cutout">Kamera kesimini yoksay</string>
     <string name="volume_button_step_title">Ses ayarı adımları (%0\'dan %100\'e kadar)</string>
 
+    <string name="display_resolution_title">Ekran çözünürlüğü</string>
+    <string name="brightness_range_title">Ekran parlaklık limitleri</string>
+    <string name="brightness_range_not_linear">Bu aralık doğrusal DEĞİLdir: Bazen küçük bir fark önemli değişikliklere yol açar</string>
     <string name="so_power_longpress_torch_title">El feneri için güç tuşuna uzun basın*</string>
     <string name="so_taptaptorch_title">Çift Dokunmayla el fenerini Etkinleştir</string>
     <string name="so_taptaptorch_summary">Hızlı el feneri için kilit ekranına iki kez dokunun ve basılı tutun</string>
@@ -223,7 +217,7 @@
     <string name="expand_notifications_icons_title">"Tüm bildirimleri genişletme/daraltma butonu ekle</string>
     <string name="disable_overscroll">"Elastik aşırı kaydırma efektini devre dışı bırak</string>
     <string name="overscroll_on_summary">Önemli: LSPosed\'da aşırı kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
-    
+
     <!-- Call section -->
     <string name="call_category">Aramalar</string>
     <string name="vibrate_on_call_active_title">Giden bir aramayı yanıtlarken titret</string>
@@ -238,14 +232,6 @@
     <string name="signal_icons_theme_title">Sinyal Simgeleri Teması</string>
     <string name="dt_styles_category">Karanlık tema stilleri</string>
     <string name="dt_styles">Bir stil seçin</string>
-    <string name="dt_black">Simsiyah</string>
-    <string name="dt_bakedgreen">Yeşilimsi</string>
-    <string name="dt_chocox">Çikolata</string>
-    <string name="dt_darkaubergine">Koyu Patlıcan</string>
-    <string name="dt_style">Lacivert</string>
-    <string name="dt_darkgray">Koyu Gri</string>
-    <string name="dt_night">Gece</string>
-    <string name="dt_solarizeddark">Solarize Karanlık</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -337,4 +323,24 @@
     <string name="qs_flashlight_level_global_title">El feneri seviyesini global olarak uygula</string>
     <string name="qs_qr_tile_inactive_title">QR-Tarama döşeme rengini ters çevir</string>
     <string name="qs_leveled_flashlight_summary">Desteklenen donanım gerektirir</string>
+    <string name="gesture_nav_extra_cat">Ekstra Gezinme Çubuğu hareketleri</string>
+    <string name="gesture_nav_long_swipe_fc_title">Uygulamayı kapatmak için ekranın üstüne doğru kaydırın</string>
+    <string name="gesture_nav_left_swipe_up_title">Gezinme Çubuğunun solundan yukarı kaydırma</string>
+    <string name="gesture_nav_right_swipe_up_title">Gezinme Çubuğunun sağından yukarı kaydırma</string>
+    <string name="gesture_nav_left_swipe_up_percent">Soldan yukarı kaydırma alan genişliği</string>
+    <string name="gesture_nav_right_swipe_up_percent">Sağdan yukarı kaydırma alan genişliği</string>
+    <string name="gesture_nav_two_finger_title">İki barmakla yukarı kaydırma jesti</string>
+    <string name="gesture_nav_swipe_up_height">Minimal yukarı kaydırma alanı</string>
+    <string name="none">Hiçbiri</string>
+    <string name="screenshot">Ekran görüntüsü</string>
+    <string name="back">Geri</string>
+    <string name="kill_forground_app">Uygulamayı kapat</string>
+    <string name="toggle_notification">Bildirim panelini aç/kapat</string>
+    <string name="toggle_one_handed">Tek el modunu aç/kapat</string>
+    <string name="insecure_screenshot">Güvenliksiz ekran görüntüsü</string>
+    <string name="screenshot_chord_insecure">Sesi kısma butonu + Güç — güvensiz ekran görüntüsü</string>
+    <string name="taskbar_as_recents_title">Görev Çubuğunu son kullanılan uygulamalar çubuğuna dönüştür</string>
+    <string name="wakeup_to_security_title">Cihaz uyanır uyanmaz ekran kilidini göstermek</string>
+    <string name="taskbar_radius_title">Görev çubuğu köşe eğriliği</string>
+    <string name="caution_unstable">Dikkat: Bu seçenek bazı cihazları dengesiz  yapabilir</string>
 </resources>

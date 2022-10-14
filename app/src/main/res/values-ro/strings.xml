@@ -9,7 +9,9 @@
     <string name="general_on">Pornit</string>
     <string name="general_off">Oprit</string>
     <string name="sysui_restart_needed">Necesită repornirea interfeței sistemului pentru a fi aplicată</string>
-    <string name="restart_needed">Necesită o repornire a dispozitivului pentru a fi aplicată</string>
+    <string name="restart_needed">Necesită o repornire pentru a aplica</string>
+    <string name="more_area">mai multă suprafață</string>
+    <string name="less_area">zonă mai mică</string>
     <!--Category titles-->
     <string name="lockscreen_header_title">Ecran de blocare</string>
     <string name="statusbar_header">Bară de stare</string>
@@ -18,7 +20,7 @@
     <string name="qs_panel_category_title">Panoul Setări Rapide</string>
     <string name="theme_customization_category">Tematică</string>
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Ascunde cercul de amprentă sub-afișare</string>
+    <string name="transparent_fingerprint_circle">Elimină cercul de fundal a amprentei de sub afișaj</string>
     <string name="transparent_fingerprint_circle_off">Cercul în jurul pictogramei amprentei este activat</string>
     <string name="transparent_fingerprint_circle_on">Cercul din jurul imaginii amprentei va fi ascuns</string>
     <string name="carrier_text_category">Text furnizor</string>
@@ -43,6 +45,7 @@
     <string name="album_art_blur_text">Valoare estompare</string>
     <string name="album_art_grayscale">Tonuri de gri</string>
     <string name="shufflePin_title">Amestecare PIN</string>
+    <string name="wakeup_to_security_title">Afișează introducerea de securitate la activarea dispozitivului</string>
     <string name="easy_unlock_title">Deblocare ușoară (Pin/Parolă)</string>
     <string name="easy_unlock_sumamry">Dacă nu a funcționat pentru prima dată, încercați din nou</string>
     <!--Status bar related-->
@@ -57,14 +60,16 @@
     <string name="BIcon_Opacity_title">Transparență</string>
     <string name="sb_center_fine_tune">Reglează fin zona centrală</string>
     <string name="sb_multi_row_system_icons">Pictograme de sistem cu mai multe rânduri (necesită înălțime mai mare a barei de stare)</string>
-    <string name="sb_multi_row_category">Pictograme de sistem cu mai multe rânduri</string>
+    <string name="sb_multi_row_category">Mai multe rânduri de pictograme de sistem</string>
     <string name="sb_icon_sort_mode">Metoda de plasare pictograme</string>
     <string name="sort_clean">Sortează într-o grilă</string>
     <string name="sort_tight">Potrivire elemente maxime</string>
-    <string name="sb_notification_limit">Pictograme de notificare maxime (Lăsați necompletat pentru implicit)</string>
+    <string name="sb_notification_limit">Numărul maxim de pictograme de notificare (Lasă gol pentru implicit)</string>
     <string name="lte_4g_icon_title">Pictogramă LTE / 4G</string>
     <string name="combined_signal_icon_title">Combinare pictograme de semnal</string>
     <string name="volte_icon_title">Afișare pictogramă VoLTE atunci când este disponibilă</string>
+    <string name="hide_privacychip_title">Ascunde indicatorii de confidențialitate\n(Camera, Mic)</string>
+    <!-- \n means next line-->
     <string name="sb_vibration_switch_title">Afișare pictograme vibrare/silențios</string>
     <string name="sbc_position_title">Poziția ceasului</string>
     <string name="sbc_ampm_style">Stil AM/PM</string>
@@ -108,7 +113,7 @@
     <string name="dual_tone_battery_on_summary">Pornit (funcționează numai cu pictograma portret)</string>
     <string name="unread_messages_title">Arată numărul de mesaje necitite</string>
     <string name="status_bar_height">Înălțimea barei de stare (rotiți ecranul pentru a aplica)</string>
-    <string name="sb_padding_title">Umplutură bară de stare</string>
+    <string name="sb_padding_title">Umplere bară de stare</string>
     <string name="sb_padding_summary">Setarea valorilor la min/max este echivalentă cu valorile implicite ale dispozitivului</string>
     <string name="sbbb_header">Setări bară baterie</string>
     <string name="sbbIcon_header">Setări pictogramă baterie</string>
@@ -140,8 +145,8 @@
     <string name="qs_leveled_flashlight_summary">Necesită hardware suportat</string>
     <string name="light_qs_title">Aplică panoul de setări rapide luminoase când se utilizează tema luminoasă</string>
     <string name="light_dualtone_qs_title">Activează panoul setărilor rapide cu ton dublu</string>
-    <string name="qs_pulldown_size">Lățime tragere rapidă în jos</string>
-    <string name="qs_pulldown_switch_title">Derulare în jos din bara de stare a panoului setărilor rapide</string>
+    <string name="qs_pulldown_size">Lățime tragere rapidă</string>
+    <string name="qs_pulldown_switch_title">Panou setări rapide la tragere în jos a barei de stare</string>
     <string name="qs_pulldown_side_title">Poziție tragere rapidă în jos</string>
     <string name="qs_pulldown_category">Tragere în jos a setărilor rapide</string>
     <string name="qs_haptic_switch_title">Vibrează la apăsarea comutatorului QS</string>
@@ -163,23 +168,6 @@
     <string name="quick_settings_tiles_category">Opțiuni dale QS</string>
     <string name="qs_tile_style_title">Teme dale QS</string>
     <string name="qstile_default">Implicit</string>
-    <string name="qstile_cookie">Fursec</string>
-    <string name="qstile_triangles">Triunghi</string>
-    <string name="qstile_divided">Cerc divizat</string>
-    <string name="qstile_attemptmountain">O încercare de munte</string>
-    <string name="qstile_squircle_trim">Cerc tăiat</string>
-    <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">Ondulat</string>
-    <string name="qstile_squaremedo">Squaremedo</string>
-    <string name="qstile_dual_tone_circle">Cerc cu tonuri duale</string>
-    <string name="qstile_circleoutline">Cerc conturat</string>
-    <string name="qstile_pokesign">Pokesign</string>
-    <string name="qstile_cosmos">Shishu Cosmos</string>
-    <string name="qstile_neonlike">Lumină Neon</string>
-    <string name="qstile_circle_trim">Cerc tăiat</string>
-    <string name="qstile_dottedcircle">Cerc punctat</string>
-    <string name="qstile_inkdrop">Cerneală</string>
-    <string name="qstile_circle">Cerc</string>
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configurare gest înapoi</string>
     <string name="back_from_left_title">Partea stângă a ecranului</string>
@@ -197,6 +185,8 @@
     <string name="three_button_center_title">Butonul de mijloc</string>
     <string name="three_button_right_title">Butonul din dreapta</string>
     <string name="hide_navbar_title">Ascunde bara de navigare</string>
+    <string name="taskbar_as_recents_title">Convertește bara de activități în bara de recente</string>
+    <string name="taskbar_height_title">Înălțime bară de activități</string>
     <string name="colorpill_title">Colorează bara de navigare</string>
     <string name="colorpill">Bara de navigare nuanțată</string>
     <string name="reducekeyboard_title">Spațiu tastatură pentru gesturi</string>
@@ -210,6 +200,9 @@
     <string name="allow_all_screen_rotations_summary">Va ignora, de asemenea, butonul plutitor de rotație manuală</string>
     <string name="force_no_cutout">Ignoră decuparea camerei</string>
     <string name="volume_button_step_title">Pași volum (0 la 100%)</string>
+    <string name="display_resolution_title">Rezoluție afișaj</string>
+    <string name="brightness_range_title">Limitele luminozității</string>
+    <string name="brightness_range_not_linear">Acest interval NU este liniar: Uneori o diferență mică duce la schimbări considerabile</string>
     <string name="so_power_longpress_torch_title">Apăsare lungă pe butonul de alimentare pentru lanternă</string>
     <string name="so_taptaptorch_title">Activați atingerea dublă pentru lanternă pe ecranul de blocare</string>
     <string name="so_taptaptorch_summary">Atingeți dublu și mențineți apăsat ecranul de blocare pentru acces rapid la lanternă</string>
@@ -238,14 +231,6 @@
     <string name="signal_icons_theme_title">Tema pictogramelor de semnal</string>
     <string name="dt_styles_category">Stil temă întunecată</string>
     <string name="dt_styles">Alege un stil</string>
-    <string name="dt_black">Negru complet</string>
-    <string name="dt_bakedgreen">Verde copt</string>
-    <string name="dt_chocox">Choco X</string>
-    <string name="dt_darkaubergine">Vânătă întunecată</string>
-    <string name="dt_style">Albastru închis</string>
-    <string name="dt_darkgray">Gri închis</string>
-    <string name="dt_night">Noapte</string>
-    <string name="dt_solarizeddark">Întuneric solarizat</string>
     <!-- Arrays strings -->
     <!-- Quick pull down -->
     <string name="pull_down_left">Stânga</string>
@@ -294,7 +279,7 @@
     <string name="netstat_caution_no">Poate mai târziu</string>
     <string name="monitoring_category_title">Opțiuni monitorizare</string>
     <string name="netstat_header">Setări statistici de rețea</string>
-    <string name="string_formatter_manual_body">În plus față de textul normal pe care îl puteți introduce, sunt disponibile, de asemenea, variabilele dinamice:  $G\\&lt;format\\&gt; : Dată georgiană, bazată pe format. Pentru documentația formatului, căutați `Java Date Format` Exemplu: $GMMM înseamnă: Ian (sau oricare alta)  $P&lt;format&gt; : Dată persană, bazat pe format. Exemplu: $Pyyyy înseamnă: 1401  $Nrx : Descărcări totale în ziua de azi, $Ntx: Total încărcări de astăzi $Nall : Trafic total de astăzi. Dacă înlocuiți $N cu $Nc veți fi obține statistici de date mobile (cum ar fi $Ncrx pentru descărcări): `Trafic mobil de $GEEEE: $Ncall` va produce: `Trafic mobil de marți: 2GB`</string>
+    <string name="string_formatter_manual_body">În plus față de textul normal pe care îl puteți introduce, variabilele dinamice sunt, de asemenea, disponibile:\n\n$G\&lt;format\&gt; : dată georgiană, bazată pe format. Pentru formatul documentației, vă rugăm să căutaţi `Java Date Format`\nExemplu: $GMMM înseamnă: Ian (sau oricare altele)\n\n$P&lt;format&gt; : Dată persană, pe baza formatului\nExemplu: $Pyyyy înseamnă: 1401\n\n$Nrx : Descărcări totale în prezent\n$Ntx: Total încărcări astăzi\n$Nall : Trafic total astăzi\n$Nssid : Nume WiFi SSID (dacă este cazul)\n\nDacă înlocuiți $N cu $Nc , veți primi statistici de date mobile (cum ar fi $Ncrx pentru descărcări; exclude $Nssid)\n\nExemplu:\n`Trafic mobil $GEEEE: $Ncall` va produce:\n`Trafic mobil de marți: 2GB`</string>
     <string name="update_channel_name">Actualizări</string>
     <string name="update_notification_title">Actualizare descărcată</string>
     <string name="update_notification_text">Atingeți aici pentru instalare</string>
@@ -318,12 +303,12 @@
     <string name="own_prefs_header">Setări AOSPMods</string>
     <string name="language_title">Limbă</string>
     <string name="toggle_dark_apply">(Comutați tema întunecată pentru a aplica)</string>
-    <string name="gesture_nav_extra_cat">Gesturi suplimentare din bara de navigare</string>
+    <string name="gesture_nav_extra_cat">Gesturi suplimentare bară de navigare</string>
     <string name="gesture_nav_long_swipe_fc_title">Glisați în partea de sus a ecranului pentru a închide aplicația din prim-plan</string>
     <string name="gesture_nav_left_swipe_up_title">Glisare în sus din stânga barei de navigare</string>
     <string name="gesture_nav_right_swipe_up_title">Glisare în sus din dreapta barei de navigare</string>
-    <string name="gesture_nav_left_swipe_up_perecent">Lățimea zonei din stânga glisare în sus (%)</string>
-    <string name="gesture_nav_right_swipe_up_perecent">Lățimea zonei din dreapta glisare în sus (%)</string>
+    <string name="gesture_nav_left_swipe_up_percent">Lățimea zonei din stânga glisare în sus (%)</string>
+    <string name="gesture_nav_right_swipe_up_percent">Lățimea zonei din dreapta glisare în sus (%)</string>
     <string name="gesture_nav_two_finger_title">Acțiune de glisare în sus cu două degete</string>
     <string name="gesture_nav_swipe_up_height">Înălțimea minimă a declanșatorului la acțiunea de glisare în sus</string>
     <string name="none">Nimic</string>
@@ -333,4 +318,5 @@
     <string name="toggle_notification">Comută panoul de notificări</string>
     <string name="toggle_one_handed">Comută modul cu o mână</string>
     <string name="insecure_screenshot">Captură de ecran nesigură</string>
+    <string name="screenshot_chord_insecure">Captură de ecran nesigură VolDown+Power</string>
 </resources>

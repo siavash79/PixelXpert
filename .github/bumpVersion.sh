@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NEWVERCODE=$(($(cat app/build.gradle | grep versionCode | tr -s ' ' | cut -d " " -f 3 | tr -d '\r')+1))
+NEWVERCODE=$(($(cat app/build.gradle | grep versionCode | tr -s ' ' | cut -d " " -f 2 | tr -d '\r')+1))
 NEWVERNAME=${GITHUB_REF_NAME/v/}
 
 #Prepare gradle script for build

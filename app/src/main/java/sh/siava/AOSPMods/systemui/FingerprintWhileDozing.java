@@ -15,51 +15,52 @@ import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class FingerprintWhileDozing extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    private static boolean fingerprintWhileDozing = true;
+	private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+	private static boolean fingerprintWhileDozing = true;
 
-    public FingerprintWhileDozing(Context context) {
-        super(context);
-    }
+	public FingerprintWhileDozing(Context context) {
+		super(context);
+	}
 
-    @Override
-    public void updatePrefs(String... Key) {
-        fingerprintWhileDozing = Xprefs.getBoolean("fingerprintWhileDozing", true);
-    }
+	@Override
+	public void updatePrefs(String... Key) {
+		fingerprintWhileDozing = Xprefs.getBoolean("fingerprintWhileDozing", true);
+	}
 
-    @Override
-    public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
+	@Override
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName);
+	}
 
-    @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if(!lpparam.packageName.equals(listenPackage)) return;
+	@Override
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+		if (!lpparam.packageName.equals(listenPackage)) return;
 
-        Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
+		Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
 
-        hookAllMethods(KeyguardUpdateMonitorClass,
-                "shouldListenForFingerprint", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if(fingerprintWhileDozing) return;
-                        boolean currentResult = (boolean) param.getResult();
-                        if(currentResult)
-                        {
-                            boolean userDoesNotHaveTrust = !(boolean) callMethod(param.thisObject,
-                                    "getUserHasTrust",
-                                    callMethod(param.thisObject, "getCurrentUser"));
+		hookAllMethods(KeyguardUpdateMonitorClass,
+				"shouldListenForFingerprint", new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						if (fingerprintWhileDozing) return;
+						boolean currentResult = (boolean) param.getResult();
+						if (currentResult) {
+							boolean userDoesNotHaveTrust = !(boolean) callMethod(param.thisObject,
+									"getUserHasTrust",
+									callMethod(param.thisObject, "getCurrentUser"));
 
-                            boolean shouldlisten2 =
-                                    (getBooleanField(param.thisObject,"mKeyguardIsVisible")
-                                        || getBooleanField(param.thisObject,"mBouncer")
-                                        || (boolean) callMethod(param.thisObject, "shouldListenForFingerprintAssistant")
-                                        || (getBooleanField(param.thisObject,"mKeyguardOccluded") && getBooleanField(param.thisObject,"mIsDreaming")))
-                                        && getBooleanField(param.thisObject,"mDeviceInteractive") && !getBooleanField(param.thisObject,"mGoingToSleep") && !getBooleanField(param.thisObject,"mKeyguardGoingAway")
-                                        || (getBooleanField(param.thisObject,"mKeyguardOccluded") && userDoesNotHaveTrust
-                                            && (getBooleanField(param.thisObject,"mOccludingAppRequestingFp") || (boolean)param.args[0]));
+							boolean shouldlisten2 =
+									(getBooleanField(param.thisObject, "mKeyguardIsVisible")
+											|| getBooleanField(param.thisObject, "mBouncer")
+											|| (boolean) callMethod(param.thisObject, "shouldListenForFingerprintAssistant")
+											|| (getBooleanField(param.thisObject, "mKeyguardOccluded") && getBooleanField(param.thisObject, "mIsDreaming")))
+											&& getBooleanField(param.thisObject, "mDeviceInteractive") && !getBooleanField(param.thisObject, "mGoingToSleep") && !getBooleanField(param.thisObject, "mKeyguardGoingAway")
+											|| (getBooleanField(param.thisObject, "mKeyguardOccluded") && userDoesNotHaveTrust
+											&& (getBooleanField(param.thisObject, "mOccludingAppRequestingFp") || (boolean) param.args[0]));
 
-                            param.setResult(shouldlisten2);
-                        }
-                    }
-                });
-    }
+							param.setResult(shouldlisten2);
+						}
+					}
+				});
+	}
 }

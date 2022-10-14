@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2021 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +15,6 @@
   -->
 <!-- Please see secondary_text_material_light.xml -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_enabled="false"
-        android:alpha="?android:attr/disabledAlpha"
-        android:color="@color/ui_fg_secondary"/>
-    <item android:color="@color/ui_fg_secondary"/>
+    <item android:state_enabled="false" android:alpha="?android:attr/disabledAlpha" android:color="@color/ui_fg_secondary" />
+    <item android:color="@color/ui_fg_secondary" />
 </selector>

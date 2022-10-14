@@ -39,34 +39,36 @@ public class LockscreenAlbumArt extends XposedModPack {
 	public LockscreenAlbumArt(Context context) {
 		super(context);
 	}
-	
+
 	@Override
 	public void updatePrefs(String... Key) {
 		albumArtLockScreenEnabled = Xprefs.getBoolean("albumArtLockScreenEnabled", true);
 		albumArtLockScreenHookEnabled = Xprefs.getBoolean("albumArtLockScreenHookEnabled", true);
-		albumArtLockScreenBlurLevel = Math.round(Xprefs.getInt("albumArtLockScreenBlurLevel", 0)/4f);
+		albumArtLockScreenBlurLevel = Math.round(Xprefs.getInt("albumArtLockScreenBlurLevel", 0) / 4f);
 		albumArtLockScreenGrayscale = Xprefs.getBoolean("albumArtLockScreenGrayscale", false);
 
-		if(Key.length > 0)
-		{
+		if (Key.length > 0) {
 			switch (Key[0]) {
 				case "albumArtLockScreenBlurLevel":
 				case "albumArtLockScreenGrayscale":
 					try {
 						callMethod(NMM, "updateMediaMetaData", true, false);
-					}catch (Exception ignored){}
+					} catch (Exception ignored) {
+					}
 					break;
 			}
 		}
 	}
-	
+
 	@Override
-	public boolean listensTo(String packageName) { return listenPackage.equals(packageName) && Build.VERSION.SDK_INT < 33;}
-	
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName) && Build.VERSION.SDK_INT < 33;
+	}
+
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if(!lpparam.packageName.equals(listenPackage) || !albumArtLockScreenHookEnabled) return;
-		
+		if (!lpparam.packageName.equals(listenPackage) || !albumArtLockScreenHookEnabled) return;
+
 		Class<?> NotificationMediaManagerClass = findClass("com.android.systemui.statusbar.NotificationMediaManager", lpparam.classLoader);
 
 		hookAllConstructors(NotificationMediaManagerClass, new XC_MethodHook() {
@@ -79,9 +81,9 @@ public class LockscreenAlbumArt extends XposedModPack {
 		hookAllMethods(NotificationMediaManagerClass, "updateMediaMetaData", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(!albumArtLockScreenEnabled) return;
+				if (!albumArtLockScreenEnabled) return;
 
-				if(renderToolkit == null) renderToolkit = Toolkit.INSTANCE;
+				if (renderToolkit == null) renderToolkit = Toolkit.INSTANCE;
 
 				try {
 					MediaMetadata mediaMetadata = (MediaMetadata) callMethod(param.thisObject, "getMediaMetadata");
@@ -99,14 +101,12 @@ public class LockscreenAlbumArt extends XposedModPack {
 							}
 						}
 
-						if(artworkBitmap != null)
-						{
-							if(albumArtLockScreenBlurLevel != LEVEL_BLUR_DISABLED)  // we shall never provide 0 to the blue method
+						if (artworkBitmap != null) {
+							if (albumArtLockScreenBlurLevel != LEVEL_BLUR_DISABLED)  // we shall never provide 0 to the blue method
 							{
 								artworkBitmap = renderToolkit.blur(artworkBitmap, Math.round(albumArtLockScreenBlurLevel));
 							}
-							if(albumArtLockScreenGrayscale)
-							{
+							if (albumArtLockScreenGrayscale) {
 								artworkBitmap = renderToolkit.colorMatrix(artworkBitmap, renderToolkit.getGreyScaleColorMatrix());
 							}
 						}
@@ -116,17 +116,14 @@ public class LockscreenAlbumArt extends XposedModPack {
 						}
 						mProcessArtworkTasks.clear();
 					}
-					if(mediaMetadata == null)
-					{
+					if (mediaMetadata == null) {
 						artworkBitmap = null;
 					}
 
 					callMethod(param.thisObject, "finishUpdateMediaMetaData", metaDataChanged, allowEnterAnimation, artworkBitmap);
 					param.setResult(null);
-				}
-				catch (Throwable t){
-					if(BuildConfig.DEBUG)
-					{
+				} catch (Throwable t) {
+					if (BuildConfig.DEBUG) {
 						log("Start error dump");
 						t.printStackTrace();
 						log("End error dump");

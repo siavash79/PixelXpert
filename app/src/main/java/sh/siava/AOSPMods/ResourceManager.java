@@ -10,23 +10,24 @@ import de.robv.android.xposed.callbacks.XC_InitPackageResources;
 
 public class ResourceManager implements IXposedHookInitPackageResources, IXposedHookZygoteInit {
 
-    private String MODULE_PATH;
-    public final static HashMap<String, XC_InitPackageResources.InitPackageResourcesParam> resparams = new HashMap<>();
-    public static XModuleResources modRes;
+	private String MODULE_PATH;
+	public final static HashMap<String, XC_InitPackageResources.InitPackageResourcesParam> resparams = new HashMap<>();
+	public static XModuleResources modRes;
 
-    @Override
-    public void initZygote(StartupParam startupParam) throws Throwable {
-        MODULE_PATH = startupParam.modulePath;
-    }
+	@Override
+	public void initZygote(StartupParam startupParam) throws Throwable {
+		MODULE_PATH = startupParam.modulePath;
+	}
 
-    @Override
-    public void handleInitPackageResources(XC_InitPackageResources.InitPackageResourcesParam resparam) throws Throwable {
+	@Override
+	public void handleInitPackageResources(XC_InitPackageResources.InitPackageResourcesParam resparam) throws Throwable {
 
 //        XModuleResources modRes = XModuleResources.createInstance(MODULE_PATH, resparam.res);
-        try {
-            resparams.put(resparam.packageName, resparam);
-        }catch (Throwable ignored){}
-    }
+		try {
+			resparams.put(resparam.packageName, resparam);
+		} catch (Throwable ignored) {
+		}
+	}
 
 
 }

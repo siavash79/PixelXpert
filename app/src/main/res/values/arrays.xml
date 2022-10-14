@@ -37,6 +37,7 @@
         <item>Russian</item>
         <item>Spanish</item>
         <item>Turkish</item>
+        <item>Ukrainian</item>
         <item>Vietnamese</item>
     </string-array>
 
@@ -53,6 +54,7 @@
         <item>ru</item>
         <item>es</item>
         <item>tr</item>
+        <item>uk</item>
         <item>vi</item>
     </string-array>
 

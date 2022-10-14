@@ -49,6 +49,7 @@
     <string name="album_art_blur_text">Blur value</string>
     <string name="album_art_grayscale">Grayscale</string>
     <string name="shufflePin_title">Shuffle Pin</string>
+    <string name="wakeup_to_security_title">Show security input on device wake</string>
     <string name="easy_unlock_title">Easy unlock (Pin/Password)</string>
     <string name="easy_unlock_sumamry">If it didn\'t work the first time, try again</string>
 
@@ -149,6 +150,7 @@
     <string name="qs_leveled_flashlight_title">Brightness-leveled Flashlight tile</string>
     <string name="qs_flashlight_level_global_title">Apply flashlight level globally</string>
     <string name="qs_qr_tile_inactive_title">Invert QR-Scan tile color</string>
+    <string name="qs_tile_vertical_title">Move tile icons to the top</string>
     <string name="qs_leveled_flashlight_summary">Requires supported hardware</string>
     <string name="light_qs_title">Apply light QS Panel when using light theme</string>
     <string name="light_dualtone_qs_title">Enable dual tone QS Panel</string>
@@ -212,6 +214,8 @@
     <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Hide navigation bar</string>
     <string name="taskbar_as_recents_title">Convert Taskbar to recents bar</string>
+    <string name="taskbar_height_title">Taskbar height</string>
+    <string name="taskbar_radius_title">Taskbar corner curve</string>
     <string name="colorpill_title">Colorize gesture pill</string>
     <string name="colorpill">Accent colored gesture pill</string>
     <string name="reducekeyboard_title">Keyboard space for gestures</string>
@@ -225,8 +229,11 @@
     <string name="allow_all_screen_rotations">Force-unlock all screen rotations</string>
     <string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
     <string name="force_no_cutout">Ignore the camera cutout</string>
+    <string name="clear_all_reposition_title">Add clear-all button to bottom of recents page</string>
     <string name="volume_button_step_title">Volume steps (0 to 100%)</string>
     <string name="display_resolution_title">Display resolution</string>
+    <string name="brightness_range_title">Display brightness limits</string>
+    <string name="brightness_range_not_linear">This range is NOT linear: Sometimes a small difference leads to considerable changes</string>
 
     <string name="so_power_longpress_torch_title">Long press Power button for torch</string>
     <string name="so_taptaptorch_title">Enable double-tap for lockscreen torch</string>
@@ -259,6 +266,7 @@
     <string name="signal_icons_theme_title">Signal Icons Theme</string>
     <string name="dt_styles_category">Dark theme styles</string>
     <string name="dt_styles">Choose a style</string>
+    <string name="caution_unstable">Caution: This option might be unstable for some users.</string>
     <string name="dt_black" translatable="false">Pitch black</string>
     <string name="dt_bakedgreen" translatable="false">Baked Green</string>
     <string name="dt_chocox" translatable="false">Choco X</string>
@@ -364,8 +372,8 @@
     <string name="gesture_nav_long_swipe_fc_title">Swipe to top of screen to kill foreground app</string>
     <string name="gesture_nav_left_swipe_up_title">Swipe up action from left of Navbar</string>
     <string name="gesture_nav_right_swipe_up_title">Swipe up action from right of Navbar</string>
-    <string name="gesture_nav_left_swipe_up_perecent">Left swipe-up area width (%)</string>
-    <string name="gesture_nav_right_swipe_up_perecent">Right swipe-up area width (%)</string>
+    <string name="gesture_nav_left_swipe_up_percent">Left swipe-up area width (%)</string>
+    <string name="gesture_nav_right_swipe_up_percent">Right swipe-up area width (%)</string>
     <string name="gesture_nav_two_finger_title">Two-finger swipe-up action</string>
     <string name="gesture_nav_swipe_up_height">Swipe-up actions minimum trigger height</string>
 

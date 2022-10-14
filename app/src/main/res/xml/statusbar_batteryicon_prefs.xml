@@ -81,6 +81,7 @@
         app:minVal="0"
         app:maxVal="100"
         app:tickInterval="1"
+        app:valueCount="2"
         app:defaultValue="15,40" />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat

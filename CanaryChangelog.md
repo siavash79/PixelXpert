@@ -1,3 +1,43 @@
+**canary-151**  
+- Fixed text alignment on vertical QS tile setup  
+  
+**canary-150**  
+- Added option to move QS Tile icon to the top (Quick Settings)  
+  
+**canary-149**  
+- Added option to add ClearAll button to bottom of recents page  
+  
+**canary-148**  
+- Fixed: battery icon warning/critical level slider not showing correctly  
+- Fixed: update installation notification did not show up  
+  
+**canary-147**  
+- Fixed recents bar not showing work profile app badges  
+  
+**canary-146**  
+- Added option to change Taskbar's corner curves (Navigation)  
+  
+**canary-145**  
+- Fixed update page FC bug  
+  
+**canary-144**  
+- Added option to skip lockscreen to security input when waking up (Lockscreen)  
+  
+**canary-143**  
+- Fixed app UI's slider bug  
+  
+**canary-142**  
+- Added option to modify the display brightness limits (Misc)  
+  
+**canary-141**  
+- Added option to modify the taskbar height  
+  
+**canary-140**  
+- Added - missing - Ukrainian language support  
+  
+**canary-139**  
+- Fixed QS footer colors when 1. on light theme and 2.QS light is disabled  
+  
 **canary-138**  
 - improvements on recents bar  
   

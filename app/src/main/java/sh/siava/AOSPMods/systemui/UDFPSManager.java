@@ -19,87 +19,88 @@ import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class UDFPSManager extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-    private static boolean transparentBG = false;
+	private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+	private static boolean transparentBG = false;
 
-    public UDFPSManager(Context context) { super(context); }
-    
-    @Override
-    public void updatePrefs(String...Key)
-    {
-        if(Xprefs == null) return;
-        transparentBG = Xprefs.getBoolean("fingerprint_circle_hide", false);
-    }
+	public UDFPSManager(Context context) {
+		super(context);
+	}
 
-    @Override
-    public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
+	@Override
+	public void updatePrefs(String... Key) {
+		if (Xprefs == null) return;
+		transparentBG = Xprefs.getBoolean("fingerprint_circle_hide", false);
+	}
 
-    @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-        if(!lpparam.packageName.equals(listenPackage)) return;
+	@Override
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName);
+	}
 
-        Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
-        Class<?> UdfpsKeyguardViewClass = findClass("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader);
-        Class<?> LockIconViewClass = findClass("com.android.keyguard.LockIconView", lpparam.classLoader);
+	@Override
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+		if (!lpparam.packageName.equals(listenPackage)) return;
 
-
-        XC_MethodHook FPCircleTransparenter = new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if(!transparentBG) return;
-
-                try {
-                    ImageView mBgProtection = (ImageView) getObjectField(param.thisObject, "mBgProtection");
-                    mBgProtection.setImageAlpha(0);
-                } catch(Throwable ignored){} //if (!mFullyInflated) A13
-            }
-        };
-        if(Build.VERSION.SDK_INT == 33)
-        { //A13
-            hookAllMethods(UdfpsKeyguardViewClass, "updateBurnInOffsets", FPCircleTransparenter);
-            hookAllMethods(UdfpsKeyguardViewClass, "onFinishInflate", FPCircleTransparenter);
+		Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
+		Class<?> UdfpsKeyguardViewClass = findClass("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader);
+		Class<?> LockIconViewClass = findClass("com.android.keyguard.LockIconView", lpparam.classLoader);
 
 
-            hookAllMethods(LockIconViewClass,
-                    "updateIcon", new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            setObjectField(param.thisObject, "mUseBackground", false);
-                        }
-                    });
-        }
-        else
-        { //A12
-            hookAllMethods(UdfpsKeyguardViewClass, "updateAlpha", FPCircleTransparenter);
+		XC_MethodHook FPCircleTransparenter = new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if (!transparentBG) return;
 
-            hookAllMethods(LockIconViewClass,
-                    "setUseBackground", new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            if(!transparentBG) return;
-                            param.args[0] = false;
-                        }
-                    });
-        }
+				try {
+					ImageView mBgProtection = (ImageView) getObjectField(param.thisObject, "mBgProtection");
+					mBgProtection.setImageAlpha(0);
+				} catch (Throwable ignored) {
+				} //if (!mFullyInflated) A13
+			}
+		};
+		if (Build.VERSION.SDK_INT == 33) { //A13
+			hookAllMethods(UdfpsKeyguardViewClass, "updateBurnInOffsets", FPCircleTransparenter);
+			hookAllMethods(UdfpsKeyguardViewClass, "onFinishInflate", FPCircleTransparenter);
 
-        hookAllMethods(UdfpsKeyguardViewClass,
-                "updateColor", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if(!transparentBG) return;
 
-                        Object mLockScreenFp = getObjectField(param.thisObject, "mLockScreenFp");
+			hookAllMethods(LockIconViewClass,
+					"updateIcon", new XC_MethodHook() {
+						@Override
+						protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+							setObjectField(param.thisObject, "mUseBackground", false);
+						}
+					});
+		} else { //A12
+			hookAllMethods(UdfpsKeyguardViewClass, "updateAlpha", FPCircleTransparenter);
 
-                        if(mLockScreenFp == null) return;
+			hookAllMethods(LockIconViewClass,
+					"setUseBackground", new XC_MethodHook() {
+						@Override
+						protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+							if (!transparentBG) return;
+							param.args[0] = false;
+						}
+					});
+		}
 
-                        int mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", mContext,
-                                mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
+		hookAllMethods(UdfpsKeyguardViewClass,
+				"updateColor", new XC_MethodHook() {
+					@Override
+					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+						if (!transparentBG) return;
 
-                        setObjectField(param.thisObject, "mTextColorPrimary", mTextColorPrimary);
+						Object mLockScreenFp = getObjectField(param.thisObject, "mLockScreenFp");
 
-                        callMethod(mLockScreenFp, "invalidate");
-                        param.setResult(null);
-                    }
-                });
-    }
+						if (mLockScreenFp == null) return;
+
+						int mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", mContext,
+								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
+
+						setObjectField(param.thisObject, "mTextColorPrimary", mTextColorPrimary);
+
+						callMethod(mLockScreenFp, "invalidate");
+						param.setResult(null);
+					}
+				});
+	}
 }

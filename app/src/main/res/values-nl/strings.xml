@@ -142,23 +142,6 @@
     <string name="quick_settings_tiles_category">Opties voor QS-tegels</string>
     <string name="qs_tile_style_title">QS Tiles-thema\'s</string>
     <string name="qstile_default">Standaard</string>
-    <string name="qstile_cookie">Koekje</string>
-    <string name="qstile_triangles">Driehoek</string>
-    <string name="qstile_divided">Verdeelde cirkel</string>
-    <string name="qstile_attemptmountain">Een poging van een berg</string>
-    <string name="qstile_squircle_trim">Eekhoorn met trim</string>
-    <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">Wavey</string>
-    <string name="qstile_squaremedo">Het pleinmedo</string>
-    <string name="qstile_dual_tone_circle">Tweekleurige cirkel</string>
-    <string name="qstile_circleoutline">Cirkel overzicht</string>
-    <string name="qstile_pokesign">Poké-teken</string>
-    <string name="qstile_cosmos">Shishu Kosmos</string>
-    <string name="qstile_neonlike">Neon licht</string>
-    <string name="qstile_circle_trim">Cirkel met trim</string>
-    <string name="qstile_dottedcircle">Gestippelde cirkel</string>
-    <string name="qstile_inkdrop">Inkt</string>
-    <string name="qstile_circle">Cirkel</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Teruggebaar configureren</string>
@@ -206,14 +189,6 @@
     <string name="signal_icons_theme_title">Signaalpictogrammen Thema</string>
     <string name="dt_styles_category">Donkere themastijlen</string>
     <string name="dt_styles">Kies een stijl</string>
-    <string name="dt_black">Pitzwart</string>
-    <string name="dt_bakedgreen">Gebakken Groen</string>
-    <string name="dt_chocox">Chocolade X</string>
-    <string name="dt_darkaubergine">Donkere Aubergine</string>
-    <string name="dt_style">Donkerblauw</string>
-    <string name="dt_darkgray">Donker grijs</string>
-    <string name="dt_night">Nacht</string>
-    <string name="dt_solarizeddark">gesolariseerd donker</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

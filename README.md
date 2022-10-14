@@ -8,62 +8,14 @@
 
 This is a mixed Xposed+Magisk module, which is made to allow customizations that are not originally designed in AOSP (Android Open Source Project).
 
-**(Current) Features:**
-- Back gesture customization
-- (3-Button navigation) Hold back to kill app
-- Hide navigation bar
-- Light QS Theme
-- Vibrate on QS tile tap
-- One-Finger QS panel pulldown
-- Customize 4G/LTE icon
-- Combined signal Icons
-- Double-tap to sleep
-- Customization on Battery icon style and size
-- Configure build number text in QS footer
-- Hide fingerprint circle (Pixel 6)
-- Lockscreen shortcut customization
-- Configure carrier text in lock screen
-- Disable screenshot sound
-- Power button long-press to toggle Torch
-- Double-tap to wake
-- Network Monitor
-- Statusbar Height
-- Statusbar Padding
-- Quick Settings Row & Column numbers
-- Quick Settings tiles text size
-- Internet / Wifi + Cell Tiles
-- Navbar pill thickness
-- Navbar pill theme
-- Keyboard height
-- Icon shapes
-- Statusbar Icon styles
-- Fonts
-- Themed Icons
-- SystemUI Tuner
-- Brightness Slider in Quick QS
-- Battery Bar
-- Volume Longpress to skip music
-- QS Tiles Styles
-- Dark Theme Styles
-- Longpress on settings icon (in QS) to launch AOSPMods manager
-- Expand/Collapse all notifications
-- Tablet taskbar (12.1+)
-- Music album art on lockscreen (with blur / grayscale)
-- Dual-tone QS header
-- Pin code scramble for extra security
-- Disable over-scroll effect
-- VoLTE Icon
-- Double Tap Torch
-- Multi-row statusbar
-- Editable notification icon limit
-- Variable-supported text on lockscreen/AOD
-- Easy unlock
-- Option to disable fingerprint sensor while the screen is off
-- Option to ignore the display cutout
-- Option to adjust media volume steps  
-- Option to allow upside-down rotation
-
-Of course, this is an ongoing work and the feature list will get longer through time
+**Features:**
+Currently, AOSP Mods offers customizations on different aspects of system framework and SystemUI, including:
+- Status bar
+- Lock screen
+- Notifications
+- Quick Settings panel
+- Gestural Navigations
+- Screen properties
 
 **Compatibility:**
 This module is designed based on AOSP source code. What does it mean? it means that it's expected to work on Roms (Firmwares) which are built based on fairly unmodified Android source code. This means, mainly, Pixel Phones (3, 4, 4a, 5, 5a, 6), and any other Roms that haven't heavily modified the original Android codes. Our feedbacks show that AOSPMods is compatible with Pixel stock Roms and Pixel Experience (normal edition). The mod can also be installed on ArrowOS, Pixel Experience (Plus Edition), ProtonAOSP and LineageOS with *some* broken features.
@@ -81,7 +33,7 @@ This module is designed based on AOSP source code. What does it mean? it means t
 
 **How to install:**
 - Install the magisk module
-- Reboot (bootloops are not expected)
+- Reboot (bootloops are not expected, but user should always be prepared for the worst)
 - You can use AOSPMods app to configure the module
 
 The module is released in 2 flavors, which download and update procedures are different:
@@ -99,7 +51,7 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @topjohnwu for Magisk
 - @rovo89 for Xposed
 - Team LSPosed
-- Team EvolutionX (Specially @kdrag0n). Most of the mods are based on their work
+- Team EvolutionX (Specially @kdrag0n). Some of the mods are inspired from their work
 - apsun@github for remote-preferences
 - @nijel8 for double-tap to wake
 

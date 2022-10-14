@@ -1,113 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:visibility="visible">
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="holdScreenTorchEnabled"
-        android:title="@string/so_taptaptorch_title"
-        app:summary="@string/so_taptaptorch_summary" />
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="fingerprint_circle_hide"
-        android:summaryOff="@string/transparent_fingerprint_circle_off"
-        android:title="@string/transparent_fingerprint_circle"
-        app:summaryOn="@string/transparent_fingerprint_circle_on" />
-    <sh.siava.rangesliderpreference.RangeSliderPreference
-        android:key="KeyGuardDimAmount"
-        android:title="@string/keyguard_dim_amount_title"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:visibility="visible">
+	<SwitchPreference
+		android:defaultValue="false"
+		android:key="holdScreenTorchEnabled"
+		android:title="@string/so_taptaptorch_title"
+		app:summary="@string/so_taptaptorch_summary" />
+	<SwitchPreference
+		android:defaultValue="false"
+		android:key="fingerprint_circle_hide"
+		android:summaryOff="@string/transparent_fingerprint_circle_off"
+		android:title="@string/transparent_fingerprint_circle"
+		app:summaryOn="@string/transparent_fingerprint_circle_on" />
+	<sh.siava.rangesliderpreference.RangeSliderPreference
+		android:key="KeyGuardDimAmount"
+		android:title="@string/keyguard_dim_amount_title"
 
-        app:tickInterval="1"
-        app:valueCount="1"
-        app:minVal="-1"
-        app:maxVal="100"
+		app:tickInterval="1"
+		app:valueCount="1"
+		app:minVal="-1"
+		app:maxVal="100"
 
-        app:defaultValue="-1" />
+		app:defaultValue="-1" />
+	<SwitchPreference
+		android:defaultValue="false"
+		android:key="WakeUpToSecurityInput"
+		android:summaryOff="@string/general_off"
+		android:title="@string/wakeup_to_security_title"
+		app:summaryOn="@string/general_on" />
+	<SwitchPreference
+		android:defaultValue="false"
+		android:key="shufflePinEnabled"
+		android:summaryOff="@string/general_off"
+		android:title="@string/shufflePin_title"
+		app:summaryOn="@string/general_on" />
+	<SwitchPreference
+		android:defaultValue="false"
+		android:key="easyUnlockEnabled"
+		android:title="@string/easy_unlock_title"
+		android:summary="@string/easy_unlock_sumamry" />
+	<PreferenceCategory android:title="@string/keyguard_bottom_category">
+		<SwitchPreference
+			android:defaultValue="false"
+			android:key="KeyguardBottomButtonsTransparent"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/keyguard_bottom_buttons_transparent_title" />
+		<ListPreference
+			android:defaultValue=""
+			android:entries="@array/lockScreenShortcut_names"
+			android:entryValues="@array/lockScreenShortcut_values"
+			android:key="leftKeyguardShortcut"
+			android:title="@string/LSleftShortcutTitle"
+			app:summary="%s" />
+		<ListPreference
+			android:defaultValue=""
+			android:entries="@array/lockScreenShortcut_names"
+			android:entryValues="@array/lockScreenShortcut_values"
+			android:key="rightKeyguardShortcut"
+			android:title="@string/LSrightShortcutTitle"
+			app:summary="%s" />
+		<!-- Deprecated shortcut...no longer makes sense
+		<SwitchPreference
+			android:defaultValue="false"
+			android:key="KeyguardLeftShortcutOverlay"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/keyguard_left_shortcut" />
+		-->
+	</PreferenceCategory>
+	<PreferenceCategory
+		android:title="@string/album_art_category"
+		android:key="album_art_category">
+		<SwitchPreference
+			android:defaultValue="false"
+			android:key="albumArtLockScreenEnabled"
+			android:title="@string/album_art_title"
+			app:summaryOff="@string/general_off"
+			app:summaryOn="@string/general_on" />
+		<SeekBarPreference
+			android:layout_width="wrap_content"
+			android:defaultValue="0"
+			android:key="albumArtLockScreenBlurLevel"
+			android:max="100"
+			android:title="@string/album_art_blur_text"
+			app:min="0"
+			app:updatesContinuously="true" />
+		<SwitchPreference
+			android:defaultValue="false"
+			android:key="albumArtLockScreenGrayscale"
+			android:title="@string/album_art_grayscale"
+			app:summaryOff="@string/general_off"
+			app:summaryOn="@string/general_on" />
 
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="shufflePinEnabled"
-        android:summaryOff="@string/general_off"
-        android:title="@string/shufflePin_title"
-        app:summaryOn="@string/general_on" />
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="easyUnlockEnabled"
-        android:title="@string/easy_unlock_title"
-        android:summary="@string/easy_unlock_sumamry" />
-    <PreferenceCategory android:title="@string/keyguard_bottom_category">
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="KeyguardBottomButtonsTransparent"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/keyguard_bottom_buttons_transparent_title" />
-        <ListPreference
-            android:defaultValue=""
-            android:entries="@array/lockScreenShortcut_names"
-            android:entryValues="@array/lockScreenShortcut_values"
-            android:key="leftKeyguardShortcut"
-            android:title="@string/LSleftShortcutTitle"
-            app:summary="%s"/>
-        <ListPreference
-            android:defaultValue=""
-            android:entries="@array/lockScreenShortcut_names"
-            android:entryValues="@array/lockScreenShortcut_values"
-            android:key="rightKeyguardShortcut"
-            android:title="@string/LSrightShortcutTitle"
-            app:summary="%s" />
-        <!-- Deprecated shortcut...no longer makes sense
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="KeyguardLeftShortcutOverlay"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/keyguard_left_shortcut" />
-        -->
-    </PreferenceCategory>
-    <PreferenceCategory android:title="@string/album_art_category" android:key="album_art_category">
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="albumArtLockScreenEnabled"
-            android:title="@string/album_art_title"
-            app:summaryOff="@string/general_off"
-            app:summaryOn="@string/general_on" />
-        <SeekBarPreference
-            android:layout_width="wrap_content"
-            android:defaultValue="0"
-            android:key="albumArtLockScreenBlurLevel"
-            android:max="100"
-            android:title="@string/album_art_blur_text"
-            app:min="0"
-            app:updatesContinuously="true"/>
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="albumArtLockScreenGrayscale"
-            android:title="@string/album_art_grayscale"
-            app:summaryOff="@string/general_off"
-            app:summaryOn="@string/general_on" />
 
+	</PreferenceCategory>
+	<PreferenceCategory android:title="@string/custom_text_category">
+		<SwitchPreference
+			android:defaultValue="false"
+			android:key="carrierTextMod"
+			android:title="@string/configure_carrier_text"
+			app:summaryOff="@string/carrier_text_mod_disabled"
+			app:summaryOn="@string/carrier_text_mod_enabled" />
+		<EditTextPreference
+			android:key="carrierTextValue"
+			android:selectAllOnFocus="true"
+			android:singleLine="true"
+			android:dialogLayout="@layout/string_formatter_manual"
+			android:title="@string/carrier_text_value" />
+		<EditTextPreference
+			android:key="KGMiddleCustomText"
+			android:selectAllOnFocus="true"
+			android:singleLine="false"
+			android:dialogLayout="@layout/string_formatter_manual"
+			android:title="@string/lockscreen_center_text_value" />
 
-    </PreferenceCategory>
-    <PreferenceCategory android:title="@string/custom_text_category">
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="carrierTextMod"
-            android:title="@string/configure_carrier_text"
-            app:summaryOff="@string/carrier_text_mod_disabled"
-            app:summaryOn="@string/carrier_text_mod_enabled" />
-        <EditTextPreference
-            android:key="carrierTextValue"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:dialogLayout="@layout/string_formatter_manual"
-            android:title="@string/carrier_text_value" />
-        <EditTextPreference
-            android:key="KGMiddleCustomText"
-            android:selectAllOnFocus="true"
-            android:singleLine="false"
-            android:dialogLayout="@layout/string_formatter_manual"
-            android:title="@string/lockscreen_center_text_value" />
-
-    </PreferenceCategory>
+	</PreferenceCategory>
 </PreferenceScreen>

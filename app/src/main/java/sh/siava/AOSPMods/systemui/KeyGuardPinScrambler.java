@@ -23,44 +23,48 @@ import sh.siava.AOSPMods.XposedModPack;
 @SuppressWarnings("RedundantThrows")
 public class KeyGuardPinScrambler extends XposedModPack {
 	private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-	
+
 	private static boolean shufflePinEnabled = false;
-	
-	public KeyGuardPinScrambler(Context context) { super(context); }
-	
+
+	public KeyGuardPinScrambler(Context context) {
+		super(context);
+	}
+
 	@Override
 	public void updatePrefs(String... Key) {
 		shufflePinEnabled = Xprefs.getBoolean("shufflePinEnabled", false);
 	}
-	
+
 	@Override
-	public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
-	
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName);
+	}
+
 	List<Integer> digits = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
-	
+
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if(!lpparam.packageName.equals(listenPackage)) return;
-		
+		if (!lpparam.packageName.equals(listenPackage)) return;
+
 		Class<?> NumPadKeyClass = findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);
 		Class<?> KeyguardAbsKeyInputViewControllerClass = findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
-		
+
 		Collections.shuffle(digits);
-		
+
 		hookAllMethods(KeyguardAbsKeyInputViewControllerClass, "onViewAttached", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(!shufflePinEnabled) return;
+				if (!shufflePinEnabled) return;
 
 				Collections.shuffle(digits);
 			}
 		});
-		
+
 		hookAllConstructors(NumPadKeyClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(!shufflePinEnabled) return;
-				
+				if (!shufflePinEnabled) return;
+
 				int mDigit = getIntField(param.thisObject, "mDigit");
 				Object mDigitText = getObjectField(param.thisObject, "mDigitText");
 				setObjectField(param.thisObject, "mDigit", digits.get(mDigit));

@@ -1,83 +1,87 @@
 //file:noinspection SpellCheckingInspection
 plugins {
-    id 'com.android.application'
+	id 'com.android.application'
 }
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 32
-    buildToolsVersion '33.0.0'
+	compileSdkVersion 33
+	buildToolsVersion '33.0.0'
 
-    defaultConfig {
-        applicationId "sh.siava.AOSPMods"
-        minSdkVersion 31
-        targetSdk 32
-        versionCode 138
-        versionName "2.2.0"
+	defaultConfig {
+		applicationId "sh.siava.AOSPMods"
+		minSdkVersion 31
+		targetSdk 33
+		versionCode 151
+		versionName "canary-151"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
+		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+	}
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
-        }
-    }
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
-            outputFileName = new File("AOSPMods.apk")
-        }
-    }
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			signingConfig signingConfigs.debug
+		}
+	}
+	applicationVariants.all { variant ->
+		variant.outputs.all { output ->
+			outputFileName = new File("AOSPMods.apk")
+		}
+	}
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    lint {
-        checkReleaseBuilds false
-        abortOnError false
-    }
-    namespace 'sh.siava.AOSPMods'
-    buildFeatures {
-        viewBinding true
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+	lint {
+		checkReleaseBuilds false
+		abortOnError false
+	}
+	namespace 'sh.siava.AOSPMods'
+	buildFeatures {
+		viewBinding true
+	}
+	kotlinOptions {
+		jvmTarget = '1.8'
+	}
 }
 
 dependencies {
-    def libsuVersion = '5.0.1'
+	def libsuVersion = '5.0.3'
 
-    compileOnly 'de.robv.android.xposed:api:82:sources'
-    compileOnly 'de.robv.android.xposed:api:82'
+	//Xposed api
+	compileOnly files('lib/api-82.jar')
+	compileOnly files('lib/api-82-sources.jar')
 
-    implementation project(path: ':renderscript-toolkit')
-    implementation project(path: ':RangeSliderPreference')
+	implementation project(path: ':renderscript-toolkit')
+	implementation project(path: ':RangeSliderPreference')
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'androidx.annotation:annotation:1.4.0'
-    implementation 'androidx.preference:preference-ktx:1.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.compose.ui:ui-geometry:1.2.1'
+	implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+	implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+	implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+	implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+	implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+	implementation 'androidx.appcompat:appcompat:1.5.1'
+	implementation 'androidx.annotation:annotation:1.5.0'
+	implementation 'androidx.preference:preference-ktx:1.2.0'
+	implementation 'androidx.recyclerview:recyclerview:1.2.1'
+	implementation 'com.google.android.material:material:1.6.1'
+	implementation 'androidx.compose.ui:ui-geometry:1.2.1'
 
-    // The core module that provides APIs to a shell
-    implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
-    // Optional: APIs for creating root services. Depends on ":core"
-    implementation "com.github.topjohnwu.libsu:service:${libsuVersion}"
-    // Optional: Provides remote file system support
-    implementation "com.github.topjohnwu.libsu:nio:${libsuVersion}"
+	// The core module that provides APIs to a shell
+	implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
+	// Optional: APIs for creating root services. Depends on ":core"
+	implementation "com.github.topjohnwu.libsu:service:${libsuVersion}"
+	// Optional: Provides remote file system support
+	implementation "com.github.topjohnwu.libsu:nio:${libsuVersion}"
 
-    implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8' //Remote Preferences for Xposed Module prefs
-    implementation 'com.jaredrummler:colorpicker:1.1.0' //Color Picker Component for UI
-    implementation 'com.github.mfathi91:persian-date-time:4.2.1' //Persian Calendar
-    implementation 'us.feras.mdv:markdownview:1.1.0' //md file parser
+	implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8'
+	//Remote Preferences for Xposed Module prefs
+	implementation 'com.jaredrummler:colorpicker:1.1.0' //Color Picker Component for UI
+	implementation 'com.github.mfathi91:persian-date-time:4.2.1' //Persian Calendar
+
+	implementation 'com.github.tiagohm.MarkdownView:library:0.19.0' //Markdown reader
+
 }

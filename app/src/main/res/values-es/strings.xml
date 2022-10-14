@@ -21,7 +21,7 @@
     <!--Lock screen related-->
     <string name="transparent_fingerprint_circle">Ocultar círculo del icono de la huella digital</string>
     <string name="transparent_fingerprint_circle_off">El círculo se activará</string>
-    <string name="transparent_fingerprint_circle_on">El círculo se ocultará</string> 
+    <string name="transparent_fingerprint_circle_on">El círculo se ocultará</string>
     <string name="carrier_text_category">Texto del operador</string>
     <string name="custom_text_category">Texto personalizado en la pantalla de bloqueo</string>
     <string name="configure_carrier_text">Personalizar texto del operador</string>
@@ -37,12 +37,12 @@
     <string name="LSrightShortcutTitle">Acceso directo derecho</string>
     <string name="camera_shortcut">Cámara</string>
     <string name="assistant_shortcut">Asistente</string>
-	<string name="torch_shortcut">Linterna</string>
+    <string name="torch_shortcut">Linterna</string>
     <string name="album_art_category">Opciones de visualización de reproducción de música</string>
     <string name="album_art_title">Habilitar visualización de reproducción de música</string>
     <string name="album_art_blur_text">Valor de desenfoque</string>
     <string name="album_art_grayscale">Escala de grises</string>
-	<string name="shufflePin_title">Pin aleatorio</string>
+    <string name="shufflePin_title">Pin aleatorio</string>
     <string name="easy_unlock_title">Fácil desbloqueo (Pin/Contraseña)</string>
     <string name="easy_unlock_sumamry">Si no funcionó la primera vez, intente nuevamente</string>
 
@@ -55,8 +55,8 @@
     <string name="battery_style_category_title">Estilo de batería</string>
     <string name="battery_icon_size_title">Tamaño del icono de batería</string>
     <string name="battery_hidden">Oculta</string>
-	<string name="BIcon_Opacity_title">Opacidad</string>
-	<string name="sb_center_fine_tune">Afinar el área central</string>
+    <string name="BIcon_Opacity_title">Opacidad</string>
+    <string name="sb_center_fine_tune">Afinar el área central</string>
     <string name="sb_multi_row_system_icons">Iconos de sistema de varias filas (necesita una altura de barra de estado más alta)</string>
     <string name="sb_multi_row_category">Iconos de sistema de varias filas</string>
     <string name="sb_icon_sort_mode">Método de colocación de iconos</string>
@@ -66,7 +66,7 @@
 
     <string name="lte_4g_icon_title">Icono 4G / LTE</string>
     <string name="combined_signal_icon_title">Iconos de señal combinados</string>
-	<string name="volte_icon_title">Mostrar icono VoLTE cuando este disponible</string>
+    <string name="volte_icon_title">Mostrar icono VoLTE cuando este disponible</string>
     <string name="sb_vibration_switch_title">"Mostar los iconos vibrar/silencio"</string>
     <string name="sbc_position_title">Posición del reloj</string>
     <string name="sbc_ampm_style">Estilo AM/PM</string>
@@ -84,7 +84,7 @@
     <string name="sbc_before_color">Texto antes del reloj</string>
     <string name="sbc_color">Reloj</string>
     <string name="sbc_after_color">Texto después del reloj</string>
-	<string name="network_settings_pref">Configuración del monitor de red…</string>
+    <string name="network_settings_pref">Configuración del monitor de red…</string>
     <string name="ntsb_far_left">Extremo izquierdo</string>
     <string name="ntsb_far_left_extra">Extremo izquierdo: arriba de las notificaciones</string>
     <string name="ntsb_mid_left">Mitad a la izquierda</string>
@@ -94,7 +94,7 @@
     <string name="ntsb_position_title">Localización del monitor</string>
     <string name="ntsb_threshold_title">Ocultar automaticamente</string>
     <string name="ntsb_threshold_summary">"Ocultar si el tráfico es menor a… (Kilobytes)"</string>
-	<string name="network_mode_title">Estilo del monitor</string>
+    <string name="network_mode_title">Estilo del monitor</string>
     <string name="network_colorful_title">Hazlo colorido</string>
     <string name="network_download_top">Velocidad de descarga arriba</string>
     <string name="network_download_color_title">Color descarga</string>
@@ -113,7 +113,7 @@
     <string name="sb_padding_title">Padding de la barra de estado</string>
     <string name="sb_padding_summary">Establecer los valores en min/max es equivalente al valor predeterminado del dispositivo</string>
     <string name="sbbb_header">Configuración de la barra de batería</string>
-	<string name="sbbIcon_header">Ajustes de icono de batería</string>
+    <string name="sbbIcon_header">Ajustes de icono de batería</string>
     <string name="BB_enable_title">Activar barra de batería</string>
     <string name="BB_onlycharging_title">Solo mientras se carga</string>
     <string name="BB_move_SB_bottom_title">En la parte inferior de barra de estado</string>
@@ -137,11 +137,11 @@
     <string name="qs_footer_text_summary">Dejar en blanco para eliminar el texto</string>
     <string name="qs_footer_text_desc">Requiere apagar/encender la pantalla</string>
     <string name="light_qs_title">Panel de ajustes rápidos claro</string>
-	<string name="light_dualtone_qs_title">Activar tono dual en ajustes rápidos</string>
+    <string name="light_dualtone_qs_title">Activar tono dual en ajustes rápidos</string>
     <string name="qs_pulldown_size">Distancia para deslizamiento rápido de ajustes rápidos</string>
     <string name="qs_pulldown_switch_title">Deslize rápido para abajo desde la barra de estado</string>
     <string name="qs_pulldown_side_title">Lado por donde deslizar</string>
-    <string name="qs_pulldown_category">Deslizar rápido para abajo en ajustes rápidos</string>     
+    <string name="qs_pulldown_category">Deslizar rápido para abajo en ajustes rápidos</string>
     <string name="qs_haptic_switch_title">Vibrar al tocar los ajustes rápidos</string>
     <string name="qs_rows_number">Número de lineas</string>
     <string name="qs_cols_number">Número de columnas QS</string>
@@ -155,29 +155,12 @@
     <string name="wifi_cell_off">Usar solo el atajo de Internet</string>
     <string name="QQS_brightness_category">Preferencias de la barra de brillo</string>
     <string name="QQS_brightness_title">Mostrar la barra de brillo en el panel de ajustes rápidos</string>
-	<string name="QQS_brightness_bottom_title">Mover barra de brillo a la parte de abajo</string>
+    <string name="QQS_brightness_bottom_title">Mover barra de brillo a la parte de abajo</string>
     <string name="QS_brightness_disable_title">Ocultar la barra de brillo en el panel de ajustes rápidos</string>
     <string name="bs_thick_track">Usar una barra gruesa en la barra de brillo</string>
     <string name="quick_settings_tiles_category">Opciones de los botones de ajustes rápidos</string>
     <string name="qs_tile_style_title">Temas de los botones de ajustes rápidos</string>
     <string name="qstile_default"> Por defecto</string>
-    <string name="qstile_cookie">Galleta</string>
-    <string name="qstile_triangles">Triángulo</string>
-    <string name="qstile_divided">Círculo dividida</string>
-    <string name="qstile_attemptmountain">Montaña</string>
-    <string name="qstile_squircle_trim">Circulo cuadrado con ribete</string>
-    <string name="qstile_ninja">Ninja</string>
-    <string name="qstile_wavey">Onda</string>
-    <string name="qstile_squaremedo">El Squaremedo</string>
-    <string name="qstile_dual_tone_circle">Circulo de doble tono</string>
-    <string name="qstile_circleoutline">Circulo con contorno</string>
-    <string name="qstile_pokesign">Símbolo de Pokémon</string>
-    <string name="qstile_cosmos">Cosmos de Shishu</string>
-    <string name="qstile_neonlike">Luz de neón</string>
-    <string name="qstile_circle_trim">Circulo con ribete</string>
-    <string name="qstile_dottedcircle">Circulo punteado</string>
-    <string name="qstile_inkdrop">Gota de tinta</string>
-    <string name="qstile_circle">Circulo</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Personalizar gesto atrás</string>
@@ -208,10 +191,10 @@
     <string name="volume_button_step_title">Pasos de volumen (0 a 100%)</string>
 
     <string name="so_power_longpress_torch_title">"Linterna manteniendo presionado el botón de encendido/apagado*"</string>
-	<string name="so_taptaptorch_title">Habilitar linterna con doble toque</string>
+    <string name="so_taptaptorch_title">Habilitar linterna con doble toque</string>
     <string name="so_taptaptorch_summary">Hacer doble toque y mantener la pantalla de bloqueo presionada para encender la linterna</string>
     <string name="so_fingerprint_sensor_enabled">Permitir el sensor de huellas dactilares cuando la pantalla está apagada</string>
-	
+
     <string name="so_double_tap_wake_title">Doble toque para despertar pantalla</string>
     <string name="so_double_tap_wake_summary">Usar doble toque en vez de un toque para encender la pantalla</string>
     <string name="doze_header">"Mientras la pantalla está apagada…"</string>
@@ -221,8 +204,8 @@
     <string name="so_vol_longpress_skip">Mantenga presionado botón del volumen para saltar pistas</string>
     <string name="notifications_header">Opciones de notificación</string>
     <string name="expand_notifications_icons_title">"Agregar expandir/contraer todos los botones</string>
-	<string name="disable_overscroll">"Deshabilitar el efecto de desplazamiento elástico</string>
-	<string name="overscroll_on_summary">Importante: DEBE habilitar las aplicaciones para las que desea deshabilitar el desplazamiento excesivo, en LSPosed</string>
+    <string name="disable_overscroll">"Deshabilitar el efecto de desplazamiento elástico</string>
+    <string name="overscroll_on_summary">Importante: DEBE habilitar las aplicaciones para las que desea deshabilitar el desplazamiento excesivo, en LSPosed</string>
 
     <!-- Call section -->
     <string name="call_category">Llamadas telefónicas</string>
@@ -231,21 +214,13 @@
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Forzar la fuente Google Sans en todo el sistema</string>
-	<string name="font_overlays_enable_title">Habilitar el uso de fuentes personalizadas</string>
+    <string name="font_overlays_enable_title">Habilitar el uso de fuentes personalizadas</string>
     <string name="theme_customization_font_title">Fuente de título / cuerpo del texto</string>
     <string name="icons_style_title">Estilo de los iconos</string>
     <string name="icon_shapes_title">Forma de los iconos</string>
     <string name="signal_icons_theme_title">Tema de los iconos de red</string>
     <string name="dt_styles_category">Estilos de tema oscuro</string>
     <string name="dt_styles">Seleccione un estilo</string>
-    <string name="dt_black">Oscuridad total</string>
-    <string name="dt_bakedgreen">Verde oscuro</string>
-    <string name="dt_chocox">Choco X</string>
-    <string name="dt_darkaubergine">Berenjena oscuro</string>
-    <string name="dt_style">Azul oscuro</string>
-    <string name="dt_darkgray">Gris oscuro</string>
-    <string name="dt_night">Noche</string>
-    <string name="dt_solarizeddark">Solarizado oscuro</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -256,8 +231,8 @@
     <string name="word_default">Por defecto</string>
     <string name="battery_circle">Circular</string>
     <string name="battery_dashed_circle">Circular punteada</string>
-	<string name="battery_circle_filled">Cícrulo lleno</string>
- 
+    <string name="battery_circle_filled">Cícrulo lleno</string>
+
     <!-- Clock position -->
     <string name="clock_default">Izquierda (por defecto)</string>
     <string name="clock_default_extra">Izquierda: arriba de las notificaciones</string>
@@ -267,7 +242,7 @@
     <!-- AM/PM style -->
     <string name="am_pm_normal">Igual al tamaño del reloj</string>
     <string name="am_pm_small">70% del tamaño del reloj</string>
- 
+
     <!-- Date position -->
     <string name="date_before">Antes del reloj (100%)</string>
     <string name="date_before_small">Antes del reloj (70%)</string>

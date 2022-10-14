@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright (C) 2017 The Android Open Source Project
     Copyright (C) 2017 ABC rom
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,9 +18,9 @@
     android:viewportHeight="16">
     <path
         android:fillColor="#000000"
-        android:pathData="M3.5,1.2l-3.6,0.0 3.5,5.3 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 3.5,-5.3z"/>
+        android:pathData="M3.5,1.2l-3.6,0.0 3.5,5.3 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 3.5,-5.3z" />
     <path
         android:fillColor="#000000"
-        android:pathData="M3.5,14.8l3.5,0.0 -3.5,-5.3 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 -3.5,5.3z"/>
+        android:pathData="M3.5,14.8l3.5,0.0 -3.5,-5.3 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 -3.5,5.3z" />
 
 </vector>

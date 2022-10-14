@@ -18,49 +18,54 @@ import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class AOSPSettingsLauncher extends XposedModPack {
-    private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+	private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
 
-    private static Object activityStarter = null;
-    
-    public AOSPSettingsLauncher(Context context) { super(context); }
-    
-    
-    @Override
-    public void updatePrefs(String...Key) { }
+	private static Object activityStarter = null;
 
-    @Override
-    public boolean listensTo(String packageName) { return listenPackage.equals(packageName); }
+	public AOSPSettingsLauncher(Context context) {
+		super(context);
+	}
 
-    @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if(!lpparam.packageName.equals(listenPackage)) return;
-        
-        Class<?> FooterActionsControllerClass = findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
 
-        View.OnLongClickListener listener = v -> {
-            try {
-                Intent launchInent = mContext.getPackageManager().getLaunchIntentForPackage(BuildConfig.APPLICATION_ID);
-                callMethod(activityStarter, "startActivity", launchInent, true, null);
-            }catch(Exception ignored){}
-            return true;
-        };
+	@Override
+	public void updatePrefs(String... Key) {
+	}
 
-        hookAllMethods(FooterActionsControllerClass,
-                "onViewAttached", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        Object settingsButton;
-                        if(Build.VERSION.SDK_INT == 33) { //A13
-                            settingsButton = getObjectField(param.thisObject, "settingsButtonContainer");
-                        }
-                        else //SDK 31, 32
-                        {
-                            settingsButton = getObjectField(param.thisObject, "settingsButton");
-                        }
-                        activityStarter = getObjectField(param.thisObject, "activityStarter");
-                        callMethod(settingsButton, "setOnLongClickListener", listener);
-                    }
-                });
-    }
+	@Override
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName);
+	}
+
+	@Override
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+		if (!lpparam.packageName.equals(listenPackage)) return;
+
+		Class<?> FooterActionsControllerClass = findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
+
+		View.OnLongClickListener listener = v -> {
+			try {
+				Intent launchInent = mContext.getPackageManager().getLaunchIntentForPackage(BuildConfig.APPLICATION_ID);
+				callMethod(activityStarter, "startActivity", launchInent, true, null);
+			} catch (Exception ignored) {
+			}
+			return true;
+		};
+
+		hookAllMethods(FooterActionsControllerClass,
+				"onViewAttached", new XC_MethodHook() {
+					@Override
+					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+						Object settingsButton;
+						if (Build.VERSION.SDK_INT == 33) { //A13
+							settingsButton = getObjectField(param.thisObject, "settingsButtonContainer");
+						} else //SDK 31, 32
+						{
+							settingsButton = getObjectField(param.thisObject, "settingsButton");
+						}
+						activityStarter = getObjectField(param.thisObject, "activityStarter");
+						callMethod(settingsButton, "setOnLongClickListener", listener);
+					}
+				});
+	}
 }

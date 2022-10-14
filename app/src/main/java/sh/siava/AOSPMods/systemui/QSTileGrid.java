@@ -129,7 +129,7 @@ public class QSTileGrid extends XposedModPack {
 			});
 		}
 
-		hookAllMethods(QSTileViewImplClass, "updateResources", new XC_MethodHook() {
+		hookAllMethods(QSTileViewImplClass, "onConfigurationChanged", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(VerticalQSTile)
@@ -158,6 +158,8 @@ public class QSTileGrid extends XposedModPack {
 						LinearLayout labelContainer = (LinearLayout) getObjectField(param.thisObject, "labelContainer");
 						thisQSTileView.removeView(labelContainer);
 						horizontalLinearLayout.addView(labelContainer);
+
+						labelContainer.setGravity(Gravity.CENTER_HORIZONTAL);
 
 						thisQSTileView.removeView((View) getObjectField(param.thisObject, "sideView"));
 

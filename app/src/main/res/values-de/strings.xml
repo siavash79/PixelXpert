@@ -345,4 +345,6 @@
     <string name="wakeup_to_security_title">Pineingabe anzeigen, sobald das Gerät erwacht</string>
     <string name="taskbar_radius_title">Taskleisten-Eckenradius</string>
     <string name="caution_unstable">Achtung! Diese Option kann für einige Benutzer instabil sein.</string>
+	<string name="qs_tile_vertical_title">Kachelsymbole nach oben verschieben</string>
+    <string name="clear_all_reposition_title">Fügen Sie \'alles löschen\' unten auf die Recents-Leiste</string>
 </resources>

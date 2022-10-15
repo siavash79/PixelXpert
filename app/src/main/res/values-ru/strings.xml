@@ -345,5 +345,7 @@
     <string name="taskbar_as_recents_title">Превращать панель задач в список запущенных приложений</string>
     <string name="taskbar_radius_title">Угловой угол панели задач</string>
     <string name="caution_unstable">Внимание: эта опция может быть нестабильной для некоторых пользователей.</string>
+    <string name="qs_tile_vertical_title">Переместить значки наверх</string>
+    <string name="clear_all_reposition_title">Добавить кнопку для очистки приложений внизу панель задач</string>
 
 </resources>

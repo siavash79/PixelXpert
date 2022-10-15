@@ -343,4 +343,6 @@
     <string name="wakeup_to_security_title">Cihaz uyanır uyanmaz ekran kilidini göstermek</string>
     <string name="taskbar_radius_title">Görev çubuğu köşe eğriliği</string>
     <string name="caution_unstable">Dikkat: Bu seçenek bazı cihazları dengesiz  yapabilir</string>
+    <string name="qs_tile_vertical_title">Hızlı ayar panelinde simgeleri üste at</string>
+    <string name="clear_all_reposition_title">Kullanılan uygulamalar\'ın altına uyguları silme butonu eklemek</string>
 </resources>

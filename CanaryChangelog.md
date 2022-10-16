@@ -1,3 +1,6 @@
+**canary-153**  
+- [Potential] Fixed white QS Header clock in certain situations  
+  
 **canary-152**  
 - Separate Wifi/Cell QS tiles for A13  
   

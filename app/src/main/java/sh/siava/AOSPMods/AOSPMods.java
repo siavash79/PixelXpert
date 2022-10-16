@@ -113,7 +113,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 
 		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && false) {
 			log("------------");
-			Helpers.dumpClass("com.android.systemui.qs.tileimpl.QSFactoryImpl", lpparam.classLoader);
+			Helpers.dumpClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 			log("------------");
 		}
 

@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -24,6 +25,7 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.core.graphics.ColorUtils;
@@ -33,6 +35,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.Helpers;
+import sh.siava.AOSPMods.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
 public class QSThemeManager extends XposedModPack {
@@ -48,6 +51,7 @@ public class QSThemeManager extends XposedModPack {
 	private Integer colorInactive = null;
 	private int colorUnavailable;
 	private Drawable lightFooterShape = null;
+	private Object mClockViewQSHeader;
 
 	public QSThemeManager(Context context) {
 		super(context);
@@ -95,8 +99,8 @@ public class QSThemeManager extends XposedModPack {
 		Class<?> FragmentHostManagerClass = findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
 		Class<?> GradientColorsClass = findClass("com.android.internal.colorextraction.ColorExtractor$GradientColors", lpparam.classLoader);
-		Class<?> QSPanelControllerClass = findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
-		Class<?> QuickQSPanelControllerClass = findClass("com.android.systemui.qs.QuickQSPanelController", lpparam.classLoader);
+//		Class<?> QSPanelControllerClass = findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
+//		Class<?> QuickQSPanelControllerClass = findClass("com.android.systemui.qs.QuickQSPanelController", lpparam.classLoader);
 		Class<?> InterestingConfigChangesClass = findClass("com.android.settingslib.applications.InterestingConfigChanges", lpparam.classLoader);
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
 		Class<?> QSIconViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSIconViewImpl", lpparam.classLoader);
@@ -104,6 +108,27 @@ public class QSThemeManager extends XposedModPack {
 		Class<?> QSSecurityFooterClass = findClass("com.android.systemui.qs.QSSecurityFooter", lpparam.classLoader);
 		Class<?> QSFgsManagerFooterClass = findClass("com.android.systemui.qs.QSFgsManagerFooter", lpparam.classLoader);
 		Class<?> FooterActionsControllerClass = findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
+		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
+		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
+
+		//While QS Clock bug
+		hookAllMethods(QuickStatusBarHeaderClass, "onFinishInflate", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				mClockViewQSHeader = getObjectField(param.thisObject, "mClockView");
+			}
+		});
+
+		//While QS Clock bug
+		hookAllMethods(ClockClass, "onColorsChanged", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(lightQSHeaderEnabled && !SystemUtils.isDarkMode())
+				{
+					((TextView)mClockViewQSHeader).setTextColor(Color.BLACK);
+				}
+			}
+		});
 
 		hookAllConstructors(FooterActionsControllerClass, new XC_MethodHook() {
 			@Override

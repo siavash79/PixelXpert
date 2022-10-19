@@ -1,3 +1,6 @@
+**canary-155**  
+- Added option to enable light/dark theme on Power Menu  
+  
 **canary-154**  
 - A13: Added option to remove "all apps" icon from taskbar  
   

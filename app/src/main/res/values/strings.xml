@@ -277,6 +277,9 @@
     <string name="dt_materialocean" translatable="false">Material Ocean</string>
     <string name="dt_night" translatable="false">Night</string>
     <string name="dt_solarizeddark" translatable="false">Solarized Dark</string>
+    <string name="power_menu_overlays_section">Power Menu Themes</string>
+    <string name="power_menu_overlays_title">Enable light/dark themes on power menu</string>
+    <string name="power_menu_overlays_summary_on">This option also enables some cool new icons system wide</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

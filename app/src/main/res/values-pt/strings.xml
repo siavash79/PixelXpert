@@ -304,4 +304,7 @@
 	<string name="clear_all_reposition_title">Mostrar botão limpar tudo na parte inferior das apps recentes</string>
 	<string name="qs_tile_vertical_title">Mover ícones dos atalhos para o topo</string>
 	<string name="taskbar_hide_allapps_title">Esconder ícone todas apps</string>
+	<string name="power_menu_overlays_section">Tema do painel ligar/desligar</string>
+    <string name="power_menu_overlays_title">Ativar tema claro/escuro no painel</string>
+    <string name="power_menu_overlays_summary_on">Esta opção também altera outros ícones no sistema</string>
 </resources>

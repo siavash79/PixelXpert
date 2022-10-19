@@ -55,6 +55,9 @@ public class miscSettings extends XposedModPack {
 				case "volumeStps":
 					setVolumeSteps();
 					break;
+				case "enablePowerMenuTheme":
+					updatePowerMenuOverlays();
+					break;
 			}
 		} else {
 			if (AOSPMods.isSecondProcess) return;
@@ -150,6 +153,12 @@ public class miscSettings extends XposedModPack {
 		boolean GSansOverrideEnabled = Xprefs.getBoolean("gsans_override", false);
 
 		ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, XPrefs.MagiskRoot);
+	}
+
+	private void updatePowerMenuOverlays() {
+		boolean PowerMenuOverlayEnabled = Xprefs.getBoolean("enablePowerMenuTheme", false);
+
+		ModuleFolderOperations.applyPowerMenuOverlay(PowerMenuOverlayEnabled, XPrefs.MagiskRoot);
 	}
 
 	@Override

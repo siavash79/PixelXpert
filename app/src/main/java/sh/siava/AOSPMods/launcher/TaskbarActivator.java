@@ -49,6 +49,8 @@ public class TaskbarActivator extends XposedModPack {
 	private static float taskbarHeightOverride = 1f;
 	private float TaskbarRadiusOverride = 1f;
 
+	private static boolean TaskbarHideAllAppsIcon = false;
+
 	public TaskbarActivator(Context context) {
 		super(context);
 	}
@@ -56,8 +58,6 @@ public class TaskbarActivator extends XposedModPack {
 	@Override
 	public void updatePrefs(String... Key) {
 		String taskbarModeStr = Xprefs.getString("taskBarMode", "0");
-
-		TaskbarAsRecents = Xprefs.getBoolean("TaskbarAsRecents", false);
 
 		if (Key.length > 0) {
 			switch (Key[0]) {
@@ -74,10 +74,14 @@ public class TaskbarActivator extends XposedModPack {
 				case "TaskbarAsRecents":
 				case "taskbarHeightOverride":
 				case "TaskbarRadiusOverride":
+				case "TaskbarHideAllAppsIcon":
 					android.os.Process.killProcess(android.os.Process.myPid());
 					break;
 			}
 		} else {
+			TaskbarAsRecents = Xprefs.getBoolean("TaskbarAsRecents", false);
+			TaskbarHideAllAppsIcon = Xprefs.getBoolean("TaskbarHideAllAppsIcon", false);
+
 			try
 			{
 				TaskbarRadiusOverride = RangeSliderPreference.getValues(Xprefs, "TaskbarRadiusOverride", 1f).get(0);
@@ -145,7 +149,10 @@ public class TaskbarActivator extends XposedModPack {
 		hookAllConstructors(DeviceProfileClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				numShownHotseatIcons = getIntField(param.thisObject, "numShownHotseatIcons");
+				numShownHotseatIcons = getIntField(param.thisObject, "numShownHotseatIcons") +
+						(TaskbarHideAllAppsIcon
+							? 1
+							: 0);
 
 				if (taskbarHeightOverride != 1f) {
 					setObjectField(param.thisObject, "taskbarSize", Math.round(getIntField(param.thisObject, "taskbarSize") * taskbarHeightOverride));
@@ -157,6 +164,9 @@ public class TaskbarActivator extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				TaskBarView = (ViewGroup) param.thisObject;
+
+				if(TaskbarHideAllAppsIcon)
+					setObjectField(TaskBarView, "mAllAppsButton", null);
 			}
 		});
 
@@ -208,7 +218,7 @@ public class TaskbarActivator extends XposedModPack {
 							for (int i = 0; i < itemInfos.length; i++) {
 								TaskInfo taskInfo = (TaskInfo) getObjectField(recentTaskList.get(i), "mTaskInfo1");
 
-								//noinspection RedundantCast,JavaReflectionMemberAccess
+								//noinspection JavaReflectionMemberAccess
 								itemInfos[i] = AppInfoClass.getConstructor(ComponentName.class, CharSequence.class, UserHandle.class, Intent.class)
 										.newInstance(
 												(ComponentName) getObjectField(taskInfo, "realActivity"),

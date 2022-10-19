@@ -1,3 +1,6 @@
+**canary-154**  
+- A13: Added option to remove "all apps" icon from taskbar  
+  
 **canary-153**  
 - [Potential] Fixed white QS Header clock in certain situations  
   

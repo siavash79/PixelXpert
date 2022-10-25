@@ -230,7 +230,7 @@
     <string name="allow_all_screen_rotations">Force-unlock all screen rotations</string>
     <string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
     <string name="force_no_cutout">Ignore the camera cutout</string>
-    <string name="clear_all_reposition_title">Add clear-all button to bottom of recents page</string>
+    <string name="clear_all_reposition_title">Add an accessible clear-all button to recents page</string>
     <string name="volume_button_step_title">Volume steps (0 to 100%)</string>
     <string name="display_resolution_title">Display resolution</string>
     <string name="brightness_range_title">Display brightness limits</string>

@@ -1,3 +1,6 @@
+**canary-156**  
+- Relocated "clear all" button to the right of recents page (fixed incompatibility with some device languages)  
+  
 **canary-155**  
 - Added option to enable light/dark theme on Power Menu  
   

@@ -4,6 +4,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
+import static sh.siava.AOSPMods.utils.Helpers.findAndDumpClass;
 
 import android.content.Context;
 
@@ -36,8 +37,8 @@ public class KeyguardDimmer extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
-		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
+		Class<?> ScrimControllerClass = findAndDumpClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
+		Class<?> ScrimStateEnum = findAndDumpClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
 
 		hookAllMethods(ScrimControllerClass, "scheduleUpdate", new XC_MethodHook() {
 			@Override

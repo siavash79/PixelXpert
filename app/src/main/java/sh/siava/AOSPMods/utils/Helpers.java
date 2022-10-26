@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.utils;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 
 import android.os.FileUtils;
@@ -12,6 +13,7 @@ import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.topjohnwu.superuser.Shell;
@@ -28,6 +30,7 @@ import java.util.zip.ZipFile;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
+import sh.siava.AOSPMods.BuildConfig;
 
 @SuppressWarnings("CommentedOutCode")
 public class Helpers {
@@ -37,6 +40,22 @@ public class Helpers {
 
 	public static List<String> activeOverlays = null;
 
+	@NonNull
+	public static Class<?> findAndDumpClass(String className, ClassLoader classLoader)
+	{
+		if(BuildConfig.DEBUG)
+			dumpClass(className, classLoader);
+		return findClass(className, classLoader);
+	}
+	
+	@Nullable
+	public static Class<?> findClassIfExists(String className, ClassLoader classLoader)
+	{
+		if(BuildConfig.DEBUG)
+			dumpClass(className, classLoader);
+		return findClassIfExists(className, classLoader);
+	}
+	
 	@SuppressWarnings("unused")
 	public static void dumpClass(String className, ClassLoader classLoader) {
 		Class<?> ourClass = findClassIfExists(className, classLoader);

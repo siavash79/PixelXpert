@@ -569,6 +569,12 @@ public class StatusbarMods extends XposedModPack {
 				"onFinishInflate", new XC_MethodHook() {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						//Getting QS text color for Network traffic
+						int fillColor = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+								mContext,
+								mContext.getResources().getIdentifier("@android:attr/textColorPrimary", "attr", mContext.getPackageName()));
+						NetworkTraffic.setTintColor(fillColor, false);
+
 						//Clickable icons
 						Object mBatteryRemainingIcon = getObjectField(param.thisObject, "mBatteryRemainingIcon");
 						Object mDateView = getObjectField(param.thisObject, "mDateView");
@@ -732,18 +738,6 @@ public class StatusbarMods extends XposedModPack {
 						}
 						result.append(getFormattedString(mStringFormatAfter, mAfterSmall, mAfterClockColor)); //after clock
 						param.setResult(result);
-					}
-				});
-
-		//Getting QS text color for Network traffic
-		hookAllMethods(QuickStatusBarHeaderClass,
-				"onAttach", new XC_MethodHook() {
-					@Override
-					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						int fillColor = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
-								mContext,
-								mContext.getResources().getIdentifier("@android:attr/textColorPrimary", "attr", mContext.getPackageName()));
-						NetworkTraffic.setTintColor(fillColor, false);
 					}
 				});
 

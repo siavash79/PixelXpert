@@ -1,3 +1,6 @@
+**canary-157**  
+- (A13 Latest patch) Fixed network traffic appearance on QS header  
+  
 **canary-156**  
 - Relocated "clear all" button to the right of recents page (fixed incompatibility with some device languages)  
   

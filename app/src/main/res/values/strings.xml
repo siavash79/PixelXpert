@@ -111,6 +111,7 @@
     <string name="network_upload_color_title">Upload color</string>
     <string name="network_opacity_title">Opacity</string>
     <string name="network_interval_title">Refresh interval (seconds)</string>
+    <string name="network_show_icons_title">Show traffic direction icons</string>
     <string name="nt_mode_rxtx">Download &amp; Upload</string>
     <string name="nt_mode_total">Download + Upload (Combined)</string>
     <string name="nt_mode_rxonly">Download only</string>

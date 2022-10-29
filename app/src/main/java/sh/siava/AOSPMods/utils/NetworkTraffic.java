@@ -50,6 +50,8 @@ public class NetworkTraffic extends LinearLayout {
 	private static int indicatorMode = MODE_SHOW_RXTX;
 	private static boolean RXonTop = true; //if download is above upload
 	private static int refreshInterval = 1; //seconds
+	private static boolean showIcons = true;
+
 	@ColorInt
 	private static int downloadColor = Color.GREEN;
 	@ColorInt
@@ -61,7 +63,7 @@ public class NetworkTraffic extends LinearLayout {
 	private final boolean isSBInstance;
 	private long lastInstanceParamUpdate = -1;
 
-	public static void setConstants(int refreshInterval, int autoHideThreshold, int indicatorMode, boolean RXonTop, boolean colorTraffic, int downloadColor, int uploadColor, int opacity) {
+	public static void setConstants(int refreshInterval, int autoHideThreshold, int indicatorMode, boolean RXonTop, boolean colorTraffic, int downloadColor, int uploadColor, int opacity, boolean showIcons) {
 		NetworkTraffic.refreshInterval = refreshInterval;
 		NetworkTraffic.autoHideThreshold = autoHideThreshold * KB;
 		NetworkTraffic.indicatorMode = indicatorMode;
@@ -70,6 +72,7 @@ public class NetworkTraffic extends LinearLayout {
 		NetworkTraffic.downloadColor = downloadColor;
 		NetworkTraffic.uploadColor = uploadColor;
 		NetworkTraffic.opacity = opacity;
+		NetworkTraffic.showIcons = showIcons;
 
 		lastParamUpdate = SystemClock.elapsedRealtime();
 	}
@@ -269,17 +272,19 @@ public class NetworkTraffic extends LinearLayout {
 		iconT.setLayoutParams(new LinearLayout.LayoutParams((int) (Height * iconScaleFactor), (int) (Height * iconScaleFactor)));
 
 		iconLayout.removeAllViews();
-		switch (indicatorMode) {
-			case MODE_SHOW_RXTX:
-				iconLayout.addView(iconT);
-				iconLayout.addView(iconR, (RXonTop) ? 0 : 1);
-				break;
-			case MODE_SHOW_RX:
-				iconLayout.addView(iconR);
-				break;
-			case MODE_SHOW_TX:
-				iconLayout.addView(iconT);
-				break;
+		if(showIcons) {
+			switch (indicatorMode) {
+				case MODE_SHOW_RXTX:
+					iconLayout.addView(iconT);
+					iconLayout.addView(iconR, (RXonTop) ? 0 : 1);
+					break;
+				case MODE_SHOW_RX:
+					iconLayout.addView(iconR);
+					break;
+				case MODE_SHOW_TX:
+					iconLayout.addView(iconT);
+					break;
+			}
 		}
 		mTextView.setTextAlignment((indicatorMode == MODE_SHOW_RXTX) ? View.TEXT_ALIGNMENT_TEXT_END : View.TEXT_ALIGNMENT_CENTER);
 		int iconPadding = Math.round(Height * iconScaleFactor / 4);

@@ -254,7 +254,7 @@ public class StatusbarMods extends XposedModPack {
 		int networkTrafficOpacity = Xprefs.getInt("networkTrafficOpacity", 100);
 		int networkTrafficInterval = Xprefs.getInt("networkTrafficInterval", 1);
 		boolean networkTrafficColorful = Xprefs.getBoolean("networkTrafficColorful", false);
-
+		boolean networkTrafficShowIcons = Xprefs.getBoolean("networkTrafficShowIcons", true);
 
 		if (networkOnSBEnabled || networkOnQSEnabled) {
 			networkTrafficPosition = -1; //anyway we have to call placer method
@@ -271,7 +271,7 @@ public class StatusbarMods extends XposedModPack {
 			if (newnetworkTrafficPosition != networkTrafficPosition) {
 				networkTrafficPosition = newnetworkTrafficPosition;
 			}
-			NetworkTraffic.setConstants(networkTrafficInterval, networkTrafficThreshold, networkTrafficMode, networkTrafficRXTop, networkTrafficColorful, networkTrafficDLColor, networkTrafficULColor, networkTrafficOpacity);
+			NetworkTraffic.setConstants(networkTrafficInterval, networkTrafficThreshold, networkTrafficMode, networkTrafficRXTop, networkTrafficColorful, networkTrafficDLColor, networkTrafficULColor, networkTrafficOpacity, networkTrafficShowIcons);
 
 		}
 		if (networkOnSBEnabled) {

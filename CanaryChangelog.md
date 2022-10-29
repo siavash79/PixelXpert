@@ -1,3 +1,6 @@
+**canary-158**  
+- Added option to hide network traffic arrows  
+  
 **canary-157**  
 - (A13 Latest patch) Fixed network traffic appearance on QS header  
   

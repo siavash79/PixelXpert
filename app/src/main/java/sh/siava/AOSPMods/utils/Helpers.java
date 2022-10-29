@@ -28,9 +28,7 @@ import java.util.List;
 import java.util.zip.ZipFile;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
-import sh.siava.AOSPMods.BuildConfig;
 
 @SuppressWarnings("CommentedOutCode")
 public class Helpers {
@@ -43,16 +41,13 @@ public class Helpers {
 	@NonNull
 	public static Class<?> findAndDumpClass(String className, ClassLoader classLoader)
 	{
-		if(BuildConfig.DEBUG)
-			dumpClass(className, classLoader);
+		dumpClass(className, classLoader);
 		return findClass(className, classLoader);
 	}
-	
-	@Nullable
-	public static Class<?> findClassIfExists(String className, ClassLoader classLoader)
+
+	public static Class<?> findAndDumpClassIfExists(String className, ClassLoader classLoader)
 	{
-		if(BuildConfig.DEBUG)
-			dumpClass(className, classLoader);
+		dumpClass(className, classLoader);
 		return findClassIfExists(className, classLoader);
 	}
 	

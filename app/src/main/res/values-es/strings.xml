@@ -1,6 +1,9 @@
 <resources>
     <!--General strings-->
-    <string name="error_not_activated">Por favor, confirme que el módulo está activado en el gestor LSposed</string>
+    <string name="app_name" translatable="false">AOSP Mods</string>
+    <string name="xposed_desc" translatable="false">Funciones personalizadas para ROM basadas en Android 12+ AOSP</string>
+    <string name="title_activity_settings" translatable="false">@string/app_name</string>
+    <string name="error_not_activated">Confirme si el módulo está activado dentro de LSPosed Manager</string>																																																																										
     <string name="hide_default">No mostrar (por defecto)</string>
     <string name="percent_of_default_size">% del tamaño por defecto</string>
     <string name="overlay_none_title">(Por defecto)</string>
@@ -9,7 +12,8 @@
     <string name="general_off">Desactivado</string>
     <string name="sysui_restart_needed">Requiere reiniciar UI del sistema</string>
     <string name="restart_needed">Requiere reiniciar</string>
-
+	<string name="more_area">más área</string>
+    <string name="less_area">menos área</string>										   
     <!--Category titles-->
     <string name="lockscreen_header_title">Pantalla de bloqueo</string>
     <string name="statusbar_header">Barra de estado</string>
@@ -29,6 +33,7 @@
     <string name="carrier_text_mod_enabled">Texto personalizado</string>
     <string name="carrier_text_value">Insertar un texto personalizado</string>
     <string name="lockscreen_center_text_value">Texto personalizado del área del reloj</string>
+    <string name="keyguard_dim_amount_title">Fondo atenuado en teclado de bloqueo</string>																			
     <string name="keyguard_bottom_category">Accesos directos en la parte inferior de la pantalla</string>
     <string name="keyguard_bottom_buttons_transparent_title">Ocultar círculo alrededor de los iconos</string>
     <string name="keyguard_bottom_force_camera_title">Mostrar atajo a la Camara</string>
@@ -43,6 +48,7 @@
     <string name="album_art_blur_text">Valor de desenfoque</string>
     <string name="album_art_grayscale">Escala de grises</string>
     <string name="shufflePin_title">Pin aleatorio</string>
+	<string name="wakeup_to_security_title">Mostrar entrada de seguridad al activar el dispositivo</string>																				   
     <string name="easy_unlock_title">Fácil desbloqueo (Pin/Contraseña)</string>
     <string name="easy_unlock_sumamry">Si no funcionó la primera vez, intente nuevamente</string>
 
@@ -53,7 +59,9 @@
     <string name="battery_style_title">Escoger un estilo de batería</string>
     <string name="battery_show_percent_title">Mostrar porcentaje</string>
     <string name="battery_style_category_title">Estilo de batería</string>
+    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>																									   
     <string name="battery_icon_size_title">Tamaño del icono de batería</string>
+    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>																								 
     <string name="battery_hidden">Oculta</string>
     <string name="BIcon_Opacity_title">Opacidad</string>
     <string name="sb_center_fine_tune">Afinar el área central</string>
@@ -67,6 +75,7 @@
     <string name="lte_4g_icon_title">Icono 4G / LTE</string>
     <string name="combined_signal_icon_title">Iconos de señal combinados</string>
     <string name="volte_icon_title">Mostrar icono VoLTE cuando este disponible</string>
+	<string name="hide_privacychip_title">Ocultar indicadores de privacidad\n(Cámara, Micrófono)</string><!-- \n means next line-->																											   
     <string name="sb_vibration_switch_title">"Mostar los iconos vibrar/silencio"</string>
     <string name="sbc_position_title">Posición del reloj</string>
     <string name="sbc_ampm_style">Estilo AM/PM</string>
@@ -101,6 +110,7 @@
     <string name="network_upload_color_title">Color subida</string>
     <string name="network_opacity_title">Opacidad</string>
     <string name="network_interval_title">Intervalo de refresco (segundos)</string>
+	<string name="network_show_icons_title">Mostrar iconos de actividad de tráfico</string>																		 
     <string name="nt_mode_rxtx">Descarga &amp; Subida</string>
     <string name="nt_mode_total">Descarga + subida (Combinado)</string>
     <string name="nt_mode_rxonly">Solo descarga</string>
@@ -135,7 +145,13 @@
     <string name="qs_mod_category_title">Número de compilación en el panel de ajustes rápidos</string>
     <string name="qs_footer_mod_title">Personalizar el número de compilación</string>
     <string name="qs_footer_text_summary">Dejar en blanco para eliminar el texto</string>
+	<string name="qs_footer_text_summary">Dejar en blanco para eliminar completamente</string>																			   
     <string name="qs_footer_text_desc">Requiere apagar/encender la pantalla</string>
+    <string name="qs_leveled_flashlight_title">Mosaico de linterna con nivel de brillo</string>
+    <string name="qs_flashlight_level_global_title">Aplicar nivel de linterna globalmente</string>
+    <string name="qs_qr_tile_inactive_title">Invertir el color del mosaico QR-Scan</string>
+    <string name="qs_tile_vertical_title">Mover iconos de mosaico a la parte superior</string>
+    <string name="qs_leveled_flashlight_summary">Requiere hardware compatible</string>																						 																					 
     <string name="light_qs_title">Panel de ajustes rápidos claro</string>
     <string name="light_dualtone_qs_title">Activar tono dual en ajustes rápidos</string>
     <string name="qs_pulldown_size">Distancia para deslizamiento rápido de ajustes rápidos</string>
@@ -155,12 +171,30 @@
     <string name="wifi_cell_off">Usar solo el atajo de Internet</string>
     <string name="QQS_brightness_category">Preferencias de la barra de brillo</string>
     <string name="QQS_brightness_title">Mostrar la barra de brillo en el panel de ajustes rápidos</string>
+	<string name="QQS_brightness_bottom_title">Mover la barra de brillo abajo</string>																						
     <string name="QQS_brightness_bottom_title">Mover barra de brillo a la parte de abajo</string>
-    <string name="QS_brightness_disable_title">Ocultar la barra de brillo en el panel de ajustes rápidos</string>
-    <string name="bs_thick_track">Usar una barra gruesa en la barra de brillo</string>
-    <string name="quick_settings_tiles_category">Opciones de los botones de ajustes rápidos</string>
-    <string name="qs_tile_style_title">Temas de los botones de ajustes rápidos</string>
-    <string name="qstile_default"> Por defecto</string>
+	<string name="bs_thick_track">Usar barra gruesa en la barra de brillo</string>
+    <string name="quick_settings_tiles_category">Opciones de mosaico QS</string>
+    <string name="qs_tile_style_title">Temas de mosaico QS</string>
+    <string name="qstile_default">Por defecto</string>
+    <string name="qstile_cookie" translatable="false">Cookie</string>
+    <string name="qstile_triangles" translatable="false">Triangle</string>
+    <string name="qstile_divided" translatable="false">Divided Circle</string>
+    <string name="qstile_attemptmountain" translatable="false">An attempt at a mountain</string>
+    <string name="qstile_squircle_trim" translatable="false">Squircle with trim</string>
+    <string name="qstile_ninja" translatable="false">Ninja</string>
+    <string name="qstile_wavey" translatable="false">Wavey</string>
+    <string name="qstile_squaremedo" translatable="false">The Squaremedo</string>
+    <string name="qstile_dual_tone_circle" translatable="false">Dual tone circle</string>
+    <string name="qstile_circleoutline" translatable="false">Circle Outline</string>
+    <string name="qstile_pokesign" translatable="false">Pokesign</string>
+    <string name="qstile_cosmos" translatable="false">Shishu Cosmos</string>
+    <string name="qstile_neonlike" translatable="false">Neon Light</string>
+    <string name="qstile_circle_trim" translatable="false">Circle with trim</string>
+    <string name="qstile_dottedcircle" translatable="false">Dotted Circle</string>																 
+    <string name="qstile_inkdrop" translatable="false">Ink</string>
+    <string name="qstile_circle" translatable="false">Circle</string>															   
+
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Personalizar gesto atrás</string>
@@ -174,40 +208,68 @@
     <string name="gesture_nav_pill_height_title">Altura en comparación con el tamaño estándar</string>
     <string name="threebutton_header_title">Navegación con 3 botones</string>
     <string name="back_longpress_kill_title">Mantener presionado el botón para cerrar aplicación</string>
-    <string name="hide_navbar_title">Ocultar la barra de navegación</string>
-    <string name="colorpill_title">Color de la barra de navegación por gestos</string>
-    <string name="colorpill">Aplicar color de resaltado a la barra</string>
-    <string name="reducekeyboard_title">Espacio de gestos en el teclado</string>
+    <string name="modify_3button_title">Modificar el orden de los botones</string>
+    <string name="three_button_left_title">Botón izquierdo</string>
+    <string name="three_button_center_title">Botón central</string>
+    <string name="three_button_right_title">Botón derecho</string>
+    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
+    <string name="hide_navbar_title">Ocultar barra de navegación</string>
+    <string name="taskbar_as_recents_title">Convertir barra de tareas en barra de recientes</string>
+    <string name="taskbar_height_title">Altura de la barra de tareas</string>
+    <string name="taskbar_radius_title">Curva de la esquina de la barra de tareas</string>
+    <string name="colorpill_title">Colorear píldora de gestos</string>
+    <string name="colorpill">Color del acento en la píldora de gestos</string>																							   
     <string name="reducekeyboard">Reducir el espacio en el teclado</string>
+    <string name="reducekeyboard">Reducir el espacio en el teclado</string>																   
     <string name="taskbar_status_title">Barra de tareas de Android</string>
     <string name="taskbar_force_enable_title">Forzar activada</string>
     <string name="taskbar_force_disable_title">Forzar desactivada</string>
+    <string name="taskbar_hide_allapps_title">Ocultar el icono de todas las aplicaciones</strin																	 
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Desactivar sonido de captura de pantalla</string>
     <string name="allow_all_screen_rotations">Forzar el desbloqueo de todas las rotaciones de pantalla</string>
     <string name="allow_all_screen_rotations_summary">También ignorará el botón flotante de rotación manual</string>
     <string name="force_no_cutout">Ignora el recorte de la cámara</string>
+    <string name="clear_all_reposition_title">Agregar un botón de borrar todo en aplicaciones recientes</string>																									 
     <string name="volume_button_step_title">Pasos de volumen (0 a 100%)</string>
-
-    <string name="so_power_longpress_torch_title">"Linterna manteniendo presionado el botón de encendido/apagado*"</string>
-    <string name="so_taptaptorch_title">Habilitar linterna con doble toque</string>
-    <string name="so_taptaptorch_summary">Hacer doble toque y mantener la pantalla de bloqueo presionada para encender la linterna</string>
-    <string name="so_fingerprint_sensor_enabled">Permitir el sensor de huellas dactilares cuando la pantalla está apagada</string>
-
-    <string name="so_double_tap_wake_title">Doble toque para despertar pantalla</string>
-    <string name="so_double_tap_wake_summary">Usar doble toque en vez de un toque para encender la pantalla</string>
-    <string name="doze_header">"Mientras la pantalla está apagada…"</string>
-    <string name="custom_themed_icons_title">Iconos tematizados personalizados</string>
-    <string name="custom_themed_icons_off">Iconos personalizados inactivos</string>
-    <string name="custom_themed_icons_on">Iconos personalizados activos</string>
-    <string name="so_vol_longpress_skip">Mantenga presionado botón del volumen para saltar pistas</string>
-    <string name="notifications_header">Opciones de notificación</string>
+    <string name="display_resolution_title">Resolución de pantalla</string>
+    <string name="brightness_range_title">Límites de brillo de la pantalla</string>
+    <string name="brightness_range_not_linear">Este rango NO es lineal: A veces una pequeña diferencia conduce a cambios considerables</string>																   
+    <string name="so_power_longpress_torch_title">Mantenga presionado el botón de encendido para la linterna</string>
+    <string name="so_taptaptorch_title">Habilitar doble toque para la linterna en pantalla de bloqueo</string>
+    <string name="so_taptaptorch_summary">Toque dos veces y mantenga presionada la pantalla de bloqueo para acceder rápidamente a la linterna</string>
+    <string name="so_fingerprint_sensor_enabled">Permitir el sensor de huellas dactilares cuando la pantalla está apagada</string>																		 
+    <string name="so_double_tap_wake_title">Toca dos veces para activar el teléfono</string>
+    <string name="so_double_tap_wake_summary">Desactiva un solo toque para despertar</string>
+    <string name="doze_header">Mientras la pantalla está apagada...</string>
+    <string name="custom_themed_icons_title">Iconos temáticos personalizados</string>
+    <string name="custom_themed_icons_off">Iconos personalizados deshabilitados</string>
+    <string name="custom_themed_icons_on">Iconos personalizados habilitados</string>
+    <string name="so_vol_longpress_skip">Mantenga presionados los botones de volumen para saltar música</string>
+    <string name="notifications_header">Opciones de notificaciones</string>
     <string name="expand_notifications_icons_title">"Agregar expandir/contraer todos los botones</string>
     <string name="disable_overscroll">"Deshabilitar el efecto de desplazamiento elástico</string>
-    <string name="overscroll_on_summary">Importante: DEBE habilitar las aplicaciones para las que desea deshabilitar el desplazamiento excesivo, en LSPosed</string>
-
-    <!-- Call section -->
+    <string name="overscroll_on_summary">Importante: DEBE habilitar las aplicaciones para las que desea deshabilitar el desplazamiento excesivo dentro de LSPosed</string>
+ 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   <!-- Call section -->
     <string name="call_category">Llamadas telefónicas</string>
     <string name="vibrate_on_call_active_title">Vibrar cuenado la llamada saliente es respondida</string>
     <string name="vibrate_on_call_drop_title">Vibrar cuando se desconecta la llamada</string>
@@ -219,9 +281,21 @@
     <string name="icons_style_title">Estilo de los iconos</string>
     <string name="icon_shapes_title">Forma de los iconos</string>
     <string name="signal_icons_theme_title">Tema de los iconos de red</string>
+    <string name="dt_styles_category">Estilos de tema oscuro</string>															
     <string name="dt_styles_category">Estilos de tema oscuro</string>
-    <string name="dt_styles">Seleccione un estilo</string>
-
+    <string name="caution_unstable">Precaución: esta opción puede ser inestable para algunos usuarios.</string>
+    <string name="dt_black" translatable="false">Pitch black</string>																							   
+    <string name="dt_bakedgreen" translatable="false">Baked Green</string>
+    <string name="dt_chocox" translatable="false">Choco X</string>
+    <string name="dt_darkaubergine" translatable="false">Dark Aubergine</string>
+    <string name="dt_style" translatable="false">Dark Blue</string>
+    <string name="dt_darkgray" translatable="false">Dark Grey</string>
+    <string name="dt_materialocean" translatable="false">Material Ocean</string>
+    <string name="dt_night" translatable="false">Night</string>
+    <string name="dt_solarizeddark" translatable="false">Solarized Dark</string>
+    <string name="power_menu_overlays_section">Temas del menú de encendido</string>
+    <string name="power_menu_overlays_title">Habilitar temas claros/oscuros en el menú de encendido</string>
+    <string name="power_menu_overlays_summary_on">Esta opción también habilita algunos iconos nuevos y geniales en todo el sistema.</string>
     <!-- Arrays strings -->
     <!-- Quick pull down -->
     <string name="pull_down_left">Izquierda</string>
@@ -240,10 +314,12 @@
     <string name="clock_right">Derecha</string>
 
     <!-- AM/PM style -->
-    <string name="am_pm_normal">Igual al tamaño del reloj</string>
+    <string name="am_pm_default" translatable="false">@string/hide_default</string>
+    <string name="am_pm_normal">100% del tamaño del reloj</string>													   
     <string name="am_pm_small">70% del tamaño del reloj</string>
 
     <!-- Date position -->
+    <string name="date_default" translatable="false">@string/hide_default</string>																			  
     <string name="date_before">Antes del reloj (100%)</string>
     <string name="date_before_small">Antes del reloj (70%)</string>
     <string name="date_after">Después del reloj (100%)</string>
@@ -251,8 +327,8 @@
 
     <!-- 4G | LTE -->
     <string name="fourg_lte_default">Predeterminado por el sistema</string>
-    <string name="fourg_lte_lte">Forzar LTE</string>
-    <string name="fourg_lte_fourg">Forzar 4G</string>
+    <string name="fourg_lte_lte">Forzar icono LTE</string>
+    <string name="fourg_lte_fourg">Forzar icono 4G</string>
 
     <!-- QS Rows overlays -->
 
@@ -272,16 +348,15 @@
     <string name="menu_restart">Reiniciar</string>
     <string name="menu_restartSysUI">Reiniciar SystemUI</string>
     <string name="menu_updates">Actualizaciones de la aplicación</string>
-
     <string name="nestat_caution_title">Precaución!</string>
     <string name="nestat_caution_text">Las estadísticas de su red se restablecerán de forma permanente. ¿Proceder?</string>
     <string name="netstat_caution_yes">Continuar</string>
     <string name="netstat_caution_no">Quizas mas tarde</string>
 
     <string name="monitoring_category_title">Opciones de monitoreo</string>
-    <string name="netstat_header">Configuración de estadísticas de red</string>
-
-    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n$Nssid : WiFi SSID name (if applicable)\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads; excludes $Nssid)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
+    <string name="netstat_header">Configuración de estadísticas de red</string>															  									   
+    <string name="string_formatter_manual_body">Además del texto normal, puede introducir, variables dinámicas disponibles:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato. Para obtener documentación sobre el formato, busque `Java Date Format`\nExample: $GMMM means: Jan (O cualquier otro)\n\n$P&lt;format&gt; : Fecha persa, según el formato\nExample: $Pyyyy means: 1401\n\n$Nrx : Descargas totales de hoy\n$Ntx: Subidas totales de hoy\n$Nall : Tráfico total de hoy\n$Nssid : Nombre SSID WiFi (si es aplicable)\n\nIf tu reemplaza $N con $Nc se le proporcionarán estadísticas de datos móviles (like $Ncrx for downloads; excludes $Nssid)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
+    <string name="update_fragment_label" translatable="false">@string/menu_updates</string>																					   
     <string name="update_channel_name">Actualizaciones</string>
     <string name="update_notification_title">Actualización descargada</string>
     <string name="update_notification_text">Toque aquí para instalar</string>
@@ -289,6 +364,7 @@
     <string name="reboot_notification_text">Los cambios surtirán efecto después de reiniciar</string>
     <string name="update_flavor_title">Actualizar canal</string>
     <string name="stable_flavor">Estable</string>
+    <string name="canary_flavor" translatable="false">Canary</string>																 
     <string name="update_type_title">Tipo de paquete</string>
     <string name="full_type">Completo</string>
     <string name="xposed_type">Solo Xposed</string>
@@ -303,7 +379,54 @@
     <string name="switch_branches">Cambiar rama</string>
     <string name="reinstall_word">Reinstalar</string>
 
+	<string name="title_activity_update" translatable="false">updateActivity</string>
+																				 
+
+
+	
+
+
+
+
+
+
+
+
+
+
     <string name="own_prefs_header">Configuración de AOSPMods</string>
     <string name="language_title">Idioma</string>
     <string name="toggle_dark_apply">(Alternar tema oscuro para aplicar)</string>
+	
+    <string name="gesture_nav_extra_cat">Gestos adicionales de la barra de navegaciónstring>
+    <string name="gesture_nav_long_swipe_fc_title">Deslice hacia la parte superior de la pantalla para eliminar la aplicación en primer plano</string>
+    <string name="gesture_nav_left_swipe_up_title">Acción de deslizar hacia arriba desde la izquierda de la barra de navegación</string>
+    <string name="gesture_nav_right_swipe_up_title">Acción de deslizar hacia arriba desde la derecha de la barra de navegación</string>
+    <string name="gesture_nav_left_swipe_up_percent">Ancho del área de deslizamiento hacia arriba a la izquierda (%)</string>
+    <string name="gesture_nav_right_swipe_up_percent">Ancho del área de deslizamiento hacia la derecha (%)</string>
+    <string name="gesture_nav_two_finger_title">Acción de deslizar hacia arriba con dos dedos</string>
+    <string name="gesture_nav_swipe_up_height">Altura mínima de activación de las acciones de deslizar hacia arriba</string>
+
+
+    <string name="none">Ninguno</string>
+    <string name="screenshot">Captura de pantalla</string>
+    <string name="back">Atrás</string>
+	
+	
+	
+    <string name="kill_forground_app">Matar aplicación en primer plano</string>
+    <string name="toggle_notification">Alternar panel de notificaciones</string>
+    <string name="toggle_one_handed">Cambiar el modo de una mano</string>
+    <string name="insecure_screenshot">Captura de pantalla sin restricciones</string>
+    <string name="screenshot_chord_insecure">Captura de pantalla sin restricciones de VolDown+Power</string>
+
+
+
+
+
+
+
+
+
+
 </resources>

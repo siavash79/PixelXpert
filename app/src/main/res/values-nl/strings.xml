@@ -117,7 +117,7 @@
     <string name="BB_transit_colors">Schaduwkleuren tussen het bereik</string>
 
     <!--Quick settings panel related-->
-    <string name="qs_mod_category_title">Build-nummer op QS Panel-voettekst</string>
+    <string name="qs_mod_category_title">Build-nummer op QS-Paneel voettekst</string>
     <string name="qs_footer_mod_title">Wijzig het nummer van de buildtekst op het QS-paneel</string>
     <string name="qs_footer_text_summary">Laat het leeg om de tekst volledig te verwijderen</string>
     <string name="qs_footer_text_desc">Zet het scherm aan/uit om toe te passen</string>
@@ -140,7 +140,7 @@
     <string name="QS_brightness_disable_title">Schuifregelaar voor helderheid verbergen in Snelle instellingen</string>
     <string name="bs_thick_track">zie een dik nummer op de schuifregelaar voor helderheid</string>
     <string name="quick_settings_tiles_category">Opties voor QS-tegels</string>
-    <string name="qs_tile_style_title">QS Tiles-thema\'s</string>
+    <string name="qs_tile_style_title">QS-Tegels thema\'s</string>
     <string name="qstile_default">Standaard</string>
 
     <!--Navigation bar related-->
@@ -296,7 +296,7 @@
     <string name="language_title">Taal</string>
     <string name="toggle_dark_apply">(Toggle donker thema om toe te passen)</string>
     <string name="reinstall_word">Opnieuw installeren</string>
-    <string name="fourg_lte_default">Systeemfout</string>
+    <string name="fourg_lte_default">Systeem standaard</string>
     <string name="qs_qr_tile_inactive_title">Kleur QR-Scan-tegel omkeren</string>
     <string name="qs_footer_text_value">Aangepaste tekst invoeren</string>
     <string name="BIcon_Opacity_title">Dekking</string>

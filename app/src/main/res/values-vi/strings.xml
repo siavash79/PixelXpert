@@ -58,7 +58,7 @@
     <string name="display_resolution_title">Độ phân giải màn hình</string>
     <string name="double_tap_sleep_off">"Đang tắt"</string>
     <string name="double_tap_sleep_on">Đang bật</string>
-    <string name="double_tap_sleep_title">Chạm hai lần để tắt màn hình/n(Thanh trạng thái,màn hình khoá)</string>
+    <string name="double_tap_sleep_title">Chạm hai lần để tắt màn hình\n(Thanh trạng thái,màn hình khoá)</string>
     <string name="doze_header">Khi màn hình tắt…</string>
     <string name="dt_styles">Chọn một kiểu</string>
     <string name="dt_styles_category">Các kiểu chủ đề tối</string>

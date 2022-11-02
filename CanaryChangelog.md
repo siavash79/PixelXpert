@@ -1,3 +1,6 @@
+**canary-160**  
+- Added option to configure heads-up notification duration  
+  
 **canary-159**  
 - Separated double tap sleep of lockscreen and statusbar / Disabled double tap to sleep on QS panel  
   

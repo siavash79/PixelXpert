@@ -1,7 +1,7 @@
 {
-    "version": "canary-159",
-    "versionCode": 159,
-    "zipUrl_Xposed": "https://nightly.link/siavash79/AOSPMods/actions/runs/3377158176/AOSPMods_Xposed.zip",
-    "zipUrl_Full": "https://nightly.link/siavash79/AOSPMods/actions/runs/3377158176/AOSPMods_Full.zip",
+    "version": "canary-160",
+    "versionCode": 160,
+    "zipUrl_Xposed": "https://nightly.link/siavash79/AOSPMods/actions/runs/3379898175/AOSPMods_Xposed.zip",
+    "zipUrl_Full": "https://nightly.link/siavash79/AOSPMods/actions/runs/3379898175/AOSPMods_Full.zip",
     "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/CanaryChangelog.md"
 }

@@ -1,3 +1,6 @@
+**canary-159**  
+- Separated double tap sleep of lockscreen and statusbar / Disabled double tap to sleep on QS panel  
+  
 **canary-158**  
 - Added option to hide network traffic arrows  
   

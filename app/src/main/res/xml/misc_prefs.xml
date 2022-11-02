@@ -125,6 +125,18 @@
             android:title="@string/expand_notifications_icons_title"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on" />
+
+        <sh.siava.rangesliderpreference.RangeSliderPreference
+            android:key="HeadupAutoDismissNotificationDecay"
+            android:title="@string/heads_up_notification_duration"
+
+            app:tickInterval="500"
+
+            app:valueCount="1"
+            app:minVal="1000"
+            app:maxVal="10000"
+
+            app:defaultValue="5000" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/call_category">
         <SwitchPreference

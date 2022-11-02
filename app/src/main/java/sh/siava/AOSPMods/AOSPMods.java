@@ -35,6 +35,7 @@ import sh.siava.AOSPMods.systemui.KeyguardDimmer;
 import sh.siava.AOSPMods.systemui.LockscreenAlbumArt;
 import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
 import sh.siava.AOSPMods.systemui.NotificationExpander;
+import sh.siava.AOSPMods.systemui.NotificationManager;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.QSThemeManager;
@@ -104,6 +105,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(PhoneWindowManager.class);
 		modPacks.add(BrightnessRange.class);
 		modPacks.add(ClearAllButtonMod.class);
+		modPacks.add(NotificationManager.class);
 		//endregion
 	}
 

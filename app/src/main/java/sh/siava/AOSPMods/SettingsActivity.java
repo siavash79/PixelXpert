@@ -562,6 +562,14 @@ public class SettingsActivity extends AppCompatActivity implements
 					displayOverride = RangeSliderPreference.getValues(prefs, "displayOverride", 100f).get(0);
 				} catch (Exception ignored) {
 				}
+
+				float headsupDecayMillis = 5000;
+				try {
+					headsupDecayMillis = RangeSliderPreference.getValues(prefs, "HeadupAutoDismissNotificationDecay", -1).get(0);
+				} catch (Exception ignored) {
+				}
+				findPreference("HeadupAutoDismissNotificationDecay").setSummary(((int)headsupDecayMillis) + " " + getString(R.string.milliseconds));
+
 				double increasedArea = Math.round(Math.abs(Math.pow(displayOverride, 2) / 100 - 100));
 
 				findPreference("displayOverride").setSummary(String.format("%s \n (%s)",

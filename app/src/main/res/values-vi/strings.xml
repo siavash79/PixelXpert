@@ -43,7 +43,7 @@
     <string name="clock_default_extra">Trái - Phía trên thông báo</string>
     <string name="clock_right">Phải</string>
     <string name="colorpill">Thanh điều hướng có màu nhấn</string>
-    <string name="combined_signal_icon_title">Biểu tượng tín hiệu kết hợp</string>
+    <string name="combined_signal_icon_title">Biểu tượng tín hiệu kết hợp\n(Wifi,Dữ liệu mạng di động)</string>
     <string name="configure_carrier_text">Định cấu hình văn bản của nhà cung cấp dịch vụ - Đầu màn hình</string>
     <string name="currentVersionTitle">Phiên bản đã cài đặt:</string>
     <string name="custom_text_category">Văn bản tùy chỉnh trên Màn hình khóa</string>
@@ -58,7 +58,7 @@
     <string name="display_resolution_title">Độ phân giải màn hình</string>
     <string name="double_tap_sleep_off">"Đang tắt"</string>
     <string name="double_tap_sleep_on">Đang bật</string>
-    <string name="double_tap_sleep_title">Chạm hai lần để tắt màn hình/n(Thanh trạng thái,màn hình khoá)</string>
+    <string name="double_tap_sleep_title">Chạm hai lần để tắt màn hình\n(Thanh trạng thái,màn hình khoá)</string>
     <string name="doze_header">Khi màn hình tắt…</string>
     <string name="dt_styles">Chọn một kiểu</string>
     <string name="dt_styles_category">Các kiểu chủ đề tối</string>
@@ -273,7 +273,7 @@
     <string name="volume_button_step_title">Tăng mức âm lượng (0 đến 100%)</string>
     <string name="wakeup_to_security_title">Nhập mật khẩu ngay khi màn hình bật</string>
     <string name="wifi_cell_off">Sử dụng một ô biểu tượng mạng duy nhất</string>
-    <string name="wifi_cell_title">Ô biểu tượng mạng</string>
+    <string name="wifi_cell_title">Ô biểu tượng mạng kết hợp\n(Wifi,Dữ liệu mạng di động)</string>
     <string name="word_default">Mặc định</string>
     <string name="xposed_type">Chỉ Xposed</string>
 </resources>

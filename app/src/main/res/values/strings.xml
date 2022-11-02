@@ -55,8 +55,6 @@
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Double-tap to sleep</string>
-    <string name="double_tap_sleep_off">"Double-tap won't turn off the display"</string>
-    <string name="double_tap_sleep_on">Double-tap on status bar or lock screen turns the display off</string>
     <string name="battery_style_title">Choose a battery style</string>
     <string name="battery_show_percent_title">Show battery percentage</string>
     <string name="battery_style_category_title">Battery style</string>

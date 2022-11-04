@@ -1,3 +1,6 @@
+**canary-161**  
+- (Full Version) Fixed font customization. May not be recognizable to everyone  
+  
 **canary-160**  
 - Added option to configure heads-up notification duration  
   

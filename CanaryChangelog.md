@@ -1,3 +1,7 @@
+**canary-162**  
+- (Navbar gestures) Added sleep action  
+- Added adjust volume on volume button short press while the screen is off and Volume button long press is enabled  
+  
 **canary-161**  
 - (Full Version) Fixed font customization. May not be recognizable to everyone  
   

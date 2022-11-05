@@ -2,7 +2,6 @@ package sh.siava.AOSPMods.launcher;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
@@ -37,6 +36,7 @@ public class CustomNavGestures extends XposedModPack {
 	private static final int ACTION_NOTIFICATION = 4;
 	private static final int ACTION_ONE_HANDED = 5;
 	private static final int ACTION_INSECURE_SCREENSHOT = 6;
+	private static final int ACTION_SLEEP = 7;
 
 	private static final int SWIPE_NONE = 0;
 	private static final int SWIPE_LEFT = 1;
@@ -232,7 +232,17 @@ public class CustomNavGestures extends XposedModPack {
 				break;
 			case ACTION_INSECURE_SCREENSHOT:
 				takeInsecureScreenshot();
+				break;
+			case ACTION_SLEEP:
+				goToSleep();
+				break;
 		}
+	}
+
+	private void goToSleep() {
+		Intent broadcast = new Intent();
+		broadcast.setAction(AOSPMods.ACTION_SLEEP);
+		mContext.sendBroadcast(broadcast);
 	}
 
 	private void takeInsecureScreenshot() {

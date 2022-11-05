@@ -72,6 +72,7 @@
         <item>@string/kill_forground_app</item>
         <item>@string/toggle_notification</item>
         <item>@string/toggle_one_handed</item>
+        <item>@string/sleep</item>
     </string-array>
 
     <string-array name="custom_action_codes">
@@ -82,6 +83,7 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+        <item>7</item>
     </string-array>
 
     <string-array name="battery_style_names">

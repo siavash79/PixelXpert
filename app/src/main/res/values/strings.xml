@@ -390,5 +390,6 @@
     <string name="toggle_one_handed">Toggle one handed mode</string>
     <string name="insecure_screenshot">Unrestricted screenshot</string>
     <string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string>
+    <string name="sleep">Sleep</string>
 
 </resources>

@@ -66,6 +66,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 	public static final String ACTION_SCREENSHOT = "sh.siava.AOSPMods.ACTION_SCREENSHOT";
 	public static final String ACTION_INSECURE_SCREENSHOT = "sh.siava.AOSPMods.ACTION_INSECURE_SCREENSHOT";
 	public static final String ACTION_BACK = "sh.siava.AOSPMods.ACTION_BACK";
+	public static final String ACTION_SLEEP = "sh.siava.AOSPMods.ACTION_SLEEP";
 
 	public AOSPMods() {
 		//region Mod list definition

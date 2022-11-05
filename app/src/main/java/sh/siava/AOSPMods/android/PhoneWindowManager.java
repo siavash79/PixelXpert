@@ -28,6 +28,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
 public class PhoneWindowManager extends XposedModPack {
@@ -69,6 +70,9 @@ public class PhoneWindowManager extends XposedModPack {
 					case AOSPMods.ACTION_BACK:
 						callMethod(windowMan, "backKeyPress");
 						break;
+					case AOSPMods.ACTION_SLEEP:
+						SystemUtils.Sleep();
+						break;
 				}
 			} catch (Throwable ignored) {
 			}
@@ -88,6 +92,7 @@ public class PhoneWindowManager extends XposedModPack {
 			intentFilter.addAction(AOSPMods.ACTION_SCREENSHOT);
 			intentFilter.addAction(AOSPMods.ACTION_BACK);
 			intentFilter.addAction(AOSPMods.ACTION_INSECURE_SCREENSHOT);
+			intentFilter.addAction(AOSPMods.ACTION_SLEEP);
 			mContext.registerReceiver(broadcastReceiver, intentFilter);
 		}
 

@@ -11,7 +11,7 @@
     <string name="album_art_category">Tùy chọn đa phương tiện</string>
     <string name="album_art_grayscale">Thang độ xám</string>
     <string name="album_art_title">Bật ảnh bìa album khi phát đa phương tiện</string>
-    <string name="allow_all_screen_rotations">Buộc mở khóa tất cả các chiều xoay của màn hình</string>
+    <string name="allow_all_screen_rotations">Mở khóa tất cả các chiều xoay của màn hình</string>
     <string name="am_pm_normal">Bằng kích thước của đồng hồ</string>
     <string name="am_pm_small">Nhỏ hơn kích thước của đồng hồ</string>
     <string name="assistant_shortcut">Trợ lý</string>
@@ -36,8 +36,8 @@
     <string name="carrier_text_mod_disabled">Văn bản của nhà cung cấp dịch vụ chưa thay đổi</string>
     <string name="carrier_text_mod_enabled">Văn bản nhà cung cấp dịch vụ tùy chỉnh</string>
     <string name="carrier_text_value">Văn bản nhà cung cấp dịch vụ tùy chỉnh</string>
-    <string name="caution_unstable">Chú ý: Tùy chọn này có thể không ổn định đối với một số người dùng</string>
-    <string name="clear_all_reposition_title">Thêm nút xóa tất cả vào cuối trang gần đây</string>
+    <string name="caution_unstable">Chú ý: Tùy chọn này có thể không ổn định đối với một số thiết bị</string>
+    <string name="clear_all_reposition_title">Thêm nút "Xóa tất cả" vào cuối trang ứng dụng gần đây</string>
     <string name="clock_center">Trung tâm</string>
     <string name="clock_default">Trái (Mặc định)</string>
     <string name="clock_default_extra">Trái - Phía trên thông báo</string>
@@ -58,7 +58,7 @@
     <string name="display_resolution_title">Độ phân giải màn hình</string>
     <string name="double_tap_sleep_off">"Đang tắt"</string>
     <string name="double_tap_sleep_on">Đang bật</string>
-    <string name="double_tap_sleep_title">Chạm hai lần để tắt màn hình\n(Thanh trạng thái,màn hình khoá)</string>
+    <string name="double_tap_sleep_title">Chạm hai lần để tắt màn hình</string>
     <string name="doze_header">Khi màn hình tắt…</string>
     <string name="dt_styles">Chọn một kiểu</string>
     <string name="dt_styles_category">Các kiểu chủ đề tối</string>
@@ -67,7 +67,7 @@
     <string name="easy_unlock_sumamry">"Nếu lần đầu tiên không hoạt động, hãy thử lại"</string>
     <string name="easy_unlock_title">Mở khoá nhanh</string>
     <string name="expand_notifications_icons_title">Thêm nút Mở rộng/Thu gọn tất cả thông báo</string>
-    <string name="font_overlays_enable_title">Cho phép sử dụng phông chữ tùy chỉnh</string>
+    <string name="font_overlays_enable_title">Dùng phông chữ tùy chỉnh</string>
     <string name="force_no_cutout">Bỏ qua phần cắt máy ảnh (với các thiết bị có màn hình đục lỗ)</string>
     <string name="fourg_lte_default">Mặc định hệ thống</string>
     <string name="fourg_lte_fourg">Biểu tượng 4G</string>
@@ -79,7 +79,7 @@
     <string name="gesture_nav_extra_cat">Cử chỉ bổ sung cho thanh điều hướng</string>
     <string name="gesture_nav_left_swipe_up_percent">Chiều rộng vùng vuốt lên bên trái (%)</string>
     <string name="gesture_nav_left_swipe_up_title">Vuốt lên từ bên trái thanh điều hướng</string>
-    <string name="gesture_nav_long_swipe_fc_title">Vuốt lên trên để tắt ứng dụng nền</string>
+    <string name="gesture_nav_long_swipe_fc_title">Vuốt lên trên để tắt ứng dụng</string>
     <string name="gesture_nav_pill_cat">Thanh điều hướng</string>
     <string name="gesture_nav_pill_height_title">Chiều cao so với kích thước tiêu chuẩn</string>
     <string name="gesture_nav_pill_width_title">Chiều rộng so với kích thước tiêu chuẩn</string>
@@ -89,6 +89,7 @@
     <string name="gesture_nav_two_finger_title">Vuốt lên bằng hai ngón tay</string>
     <string name="gesturenav_header">Điều hướng bằng cử chỉ</string>
     <string name="gsans_override_title">Phông chữ Google Sans trên toàn hệ thống</string>
+    <string name="heads_up_notification_duration">Thời gian hiển thị thông báo</string>
     <string name="hide_default">Ẩn (Mặc định)</string>
     <string name="hide_navbar_title">Ẩn thanh điều hướng</string>
     <string name="hide_privacychip_title">Ẩn chỉ báo quyền riêng tư\n(Máy ảnh, chỉ báo quyền truy cập...)</string>
@@ -99,7 +100,7 @@
     <string name="keyguard_bottom_category">Các phím tắt khu vực dưới màn hình</string>
     <string name="keyguard_dim_amount_title">Độ mờ hình nền trên màn hình khoá</string>
     <string name="keyguard_left_shortcut">Hiển thị lối tắt bên trái trên màn hình khóa</string>
-    <string name="kill_forground_app">Tắt ứng dụng nền</string>
+    <string name="kill_forground_app">Buộc dừng ứng dụng</string>
     <string name="language_title">Ngôn ngữ</string>
     <string name="lastestVersionTitle">Phiên bản mới nhất:</string>
     <string name="less_area">ít diện tích</string>
@@ -160,7 +161,7 @@
     <string name="percent_of_default_size">% kích thước mặc định</string>
     <string name="power_menu_overlays_section">Chủ đề Menu nguồn</string>
     <string name="power_menu_overlays_summary_on">Tùy chọn này cũng cho phép một số biểu tượng thú vị mới trên toàn hệ thống</string>
-    <string name="power_menu_overlays_title">Bật chủ đề sáng/tối trên Menu nguồn</string>
+    <string name="power_menu_overlays_title">Bật chủ đề Sáng/Tối trên Menu nguồn</string>
     <string name="qqs_tiles_number">Tối đa số ô trong bảng cài đặt nhanh (tối đa 2 hàng)</string>
     <string name="qs_cols_number">Số cột bảng cài đặt nhanh</string>
     <string name="qs_flashlight_level_global_title">Áp dụng mức đèn pin mặc định</string>
@@ -223,13 +224,14 @@
     <string name="screenshot_sound_disable_title">Tắt âm thanh ảnh chụp màn hình</string>
     <string name="shufflePin_title">Xáo trộn mã pin</string>
     <string name="signal_icons_theme_title">Chủ đề biểu tượng tín hiệu</string>
+    <string name="sleep">Tắt màn hình</string>
     <string name="so_double_tap_wake_summary">Tắt nhấn một lần nhấn để đánh thức</string>
     <string name="so_double_tap_wake_title">Nhấn đúp để đánh thức</string>
     <string name="so_fingerprint_sensor_enabled">Cho phép sử dụng cảm biến vân tay khi màn hình tắt</string>
-    <string name="so_power_longpress_torch_title">Nhấn và giữ nút nguồn để sử dụng đèn pin</string>
-    <string name="so_taptaptorch_summary">Nhấn đúp và giữ trên màn hình khóa để sử dụng đèn pin nhanh chóng</string>
+    <string name="so_power_longpress_torch_title">Nhấn và giữ nút nguồn để sử dụng đèn pin khi màn hình tắt</string>
+    <string name="so_taptaptorch_summary">Nhấn đúp và giữ trên màn hình khóa để sử dụng đèn pin nhanh</string>
     <string name="so_taptaptorch_title">Bật nhấn đúp để sử dụng đèn pin trên màn hình khóa</string>
-    <string name="so_vol_longpress_skip">Nhấn và giữ các nút âm lượng để bỏ qua nhạc</string>
+    <string name="so_vol_longpress_skip">Nhấn và giữ phím âm lượng để "+Chuyển tiếp/-Phát lại" bài hát</string>
     <string name="sort_clean">Sắp xếp theo lưới</string>
     <string name="sort_tight">Phù hợp với tối đa các biểu tượng</string>
     <string name="stable_flavor">Ổn định</string>

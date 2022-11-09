@@ -307,4 +307,8 @@
 	<string name="power_menu_overlays_section">Tema do painel ligar/desligar</string>
     <string name="power_menu_overlays_title">Ativar tema claro/escuro no painel</string>
     <string name="power_menu_overlays_summary_on">Esta opção também altera outros ícones no sistema</string>
+	<string name="network_show_icons_title">Mostar setas de tráfego</string>
+    <string name="heads_up_notification_duration">Duração das notificações no topo</string>
+    <string name="milliseconds">Milissegundos</string>
+    <string name="sleep">Desligar ecrã</string>
 </resources>

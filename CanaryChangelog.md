@@ -1,3 +1,6 @@
+**canary-163**  
+- Fixed easy unlock for 2211+ build stock pixel roms  
+  
 **canary-162**  
 - (Navbar gestures) Added sleep action  
 - Added adjust volume on volume button short press while the screen is off and Volume button long press is enabled  

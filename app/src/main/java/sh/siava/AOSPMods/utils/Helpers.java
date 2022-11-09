@@ -52,14 +52,19 @@ public class Helpers {
 	}
 	
 	@SuppressWarnings("unused")
-	public static void dumpClass(String className, ClassLoader classLoader) {
+	public static void dumpClass(String className, ClassLoader classLoader)
+	{
 		Class<?> ourClass = findClassIfExists(className, classLoader);
 		if (ourClass == null) {
 			log("Class: " + className + " not found");
 			return;
 		}
+		dumpClass(ourClass);
+	}
+
+	public static void dumpClass(Class<?> ourClass) {
 		Method[] ms = ourClass.getDeclaredMethods();
-		log("Class: " + className);
+		log("Class: " + ourClass.getName());
 		log("extends: " + ourClass.getSuperclass().getName());
 		log("Methods:");
 

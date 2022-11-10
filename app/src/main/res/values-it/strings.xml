@@ -46,6 +46,7 @@
     <string name="album_art_blur_text">Valore sfocatura</string>
     <string name="album_art_grayscale">Scala di grigi</string>
     <string name="shufflePin_title">Mischia numeri pin</string>
+    <string name="wakeup_to_security_title">Mostra l\'input di sicurezza alla riattivazione del dispositivo</string>
     <string name="easy_unlock_title">Sblocco facilitato (Pin/Password)</string>
     <string name="easy_unlock_summary">Se non funziona la prima volta, riprova</string>
 
@@ -144,6 +145,7 @@
     <string name="qs_leveled_flashlight_title">Luminosità tile torcia in base ad intensità</string>
     <string name="qs_flashlight_level_global_title">Applica livello torcia globalmente</string>
     <string name="qs_qr_tile_inactive_title">Inverti colore tile Scanner-QR</string>
+    <string name="qs_tile_vertical_title">Sposta le icone dei tile in alto</string>
     <string name="qs_leveled_flashlight_summary">Richiede hardware supportato</string>
     <string name="light_qs_title">Applica pannello QS chiaro quando si utilizza il tema chiaro</string>
     <string name="light_dualtone_qs_title">Abilita pannello QS dual tone</string>
@@ -189,6 +191,8 @@
     <string name="three_button_right_title">Pulsante destro</string>
     <string name="hide_navbar_title">Nascondi navbar</string>
     <string name="taskbar_as_recents_title">Converti taskbar in barra app recenti</string>
+    <string name="taskbar_height_title">Altezza taskbar</string>
+    <string name="taskbar_radius_title">Angolo curvatura taskbar</string>
     <string name="colorpill_title">Colora pillola</string>
     <string name="colorpill">Pillola con colore accento</string>
     <string name="reducekeyboard_title">Spazio della tastiera per i gesti</string>
@@ -202,8 +206,11 @@
     <string name="allow_all_screen_rotations">Sblocca forzatamente tutte le rotazioni dello schermo</string>
     <string name="allow_all_screen_rotations_summary">Ignorerà anche il fab per rotazione manuale</string>
     <string name="force_no_cutout">Ignora foro fotocamera</string>
+    <string name="clear_all_reposition_title">Aggiungi il pulsante rimuovi tutto in fondo alla pagina app recenti</string>
     <string name="volume_button_step_title">Step volume (0 - 100%)</string>
     <string name="display_resolution_title">Risoluzione display</string>
+    <string name="brightness_range_title">Limiti luminosità display</string>
+    <string name="brightness_range_not_linear">Questo range NON è lineare: a volte una piccola differenza porta a notevoli cambiamenti</string>
 
     <string name="so_power_longpress_torch_title">Premi a lungo il pulsante di accensione per attivare la torcia</string>
     <string name="so_taptaptorch_title">Abilita il doppio tap per la torcia nella schermata di blocco</string>
@@ -236,6 +243,7 @@
     <string name="signal_icons_theme_title">Tema icone segnale</string>
     <string name="dt_styles_category">Stili tema scuro</string>
     <string name="dt_styles">Scegli uno stile</string>
+    <string name="caution_unstable">Attenzione: questa opzione potrebbe essere instabile per alcuni utenti.</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -329,7 +337,7 @@
     <string name="gesture_nav_left_swipe_up_percent">Larghezza area swipe-up sinistra (%)</string>
     <string name="gesture_nav_right_swipe_up_percent">Larghezza area swipe-up destra (%)</string>
     <string name="gesture_nav_two_finger_title">Azione swipe-up con due dita</string>
-    <string name="gesture_nav_swipe_up_height">altezza minima trigger azioni swipe-up</string>
+    <string name="gesture_nav_swipe_up_height">Altezza minima trigger azioni swipe-up</string>
 
     <string name="none">Nessuno</string>
     <string name="screenshot">Screenshot</string>

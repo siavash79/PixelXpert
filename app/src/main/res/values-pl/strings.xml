@@ -47,7 +47,7 @@
     <string name="album_art_grayscale">Skala szarości</string>
     <string name="shufflePin_title">Pomieszaj pin</string>
     <string name="easy_unlock_title">Łatwe odblokowanie (kod PIN/hasło)</string>
-    <string name="easy_unlock_sumamry">Jeśli to nie zadziałało za pierwszym razem, spróbuj ponownie</string>
+    <string name="easy_unlock_summary">Jeśli to nie zadziałało za pierwszym razem, spróbuj ponownie</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Kliknij dwukrotnie, by wyłączyc</string>

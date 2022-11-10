@@ -47,7 +47,7 @@
     <string name="album_art_grayscale">Scala di grigi</string>
     <string name="shufflePin_title">Mischia numeri pin</string>
     <string name="easy_unlock_title">Sblocco facilitato (Pin/Password)</string>
-    <string name="easy_unlock_sumamry">Se non funziona la prima volta, riprova</string>
+    <string name="easy_unlock_summary">Se non funziona la prima volta, riprova</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doppio tocco per spegnere</string>

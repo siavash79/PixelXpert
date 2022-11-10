@@ -97,7 +97,7 @@
     <string name="dt_styles_category">Các kiểu chủ đề tối</string>
     <string name="dual_tone_battery_on_summary">Bật (chỉ hoạt động với biểu tượng dọc)</string>
     <string name="dual_tone_battery_title">Bật biểu tượng pin hai tông màu</string>
-    <string name="easy_unlock_sumamry">"Nếu lần đầu tiên không hoạt động, hãy thử lại"</string>
+    <string name="easy_unlock_summary">"Nếu lần đầu tiên không hoạt động, hãy thử lại"</string>
     <string name="easy_unlock_title">Mở khoá nhanh</string>
     <string name="expand_notifications_icons_title">Thêm nút Mở rộng/Thu gọn tất cả thông báo</string>
     <string name="font_overlays_enable_title">Cho phép sử dụng phông chữ tùy chỉnh</string>

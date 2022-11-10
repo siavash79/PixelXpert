@@ -44,7 +44,7 @@
     <string name="album_art_grayscale">Escala de grises</string>
     <string name="shufflePin_title">Pin aleatorio</string>
     <string name="easy_unlock_title">Fácil desbloqueo (Pin/Contraseña)</string>
-    <string name="easy_unlock_sumamry">Si no funcionó la primera vez, intente nuevamente</string>
+    <string name="easy_unlock_summary">Si no funcionó la primera vez, intente nuevamente</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doble toque para bloquear pantalla</string>

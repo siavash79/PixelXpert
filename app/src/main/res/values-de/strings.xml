@@ -51,8 +51,6 @@
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doppelt Tippen zum Sperren</string>
-    <string name="double_tap_sleep_off">"Doppelt Tippen schaltet das Display nicht aus"</string>
-    <string name="double_tap_sleep_on">Doppelt Tippen auf die Statusleiste oder den Sperrbildschirm schaltet das Display aus</string>
     <string name="battery_style_title">Wähle den Akku Stil</string>
     <string name="battery_show_percent_title">Zeige die Akkuprozente</string>
     <string name="battery_style_category_title">Akku Stil</string>
@@ -347,4 +345,12 @@
     <string name="caution_unstable">Achtung! Diese Option kann für einige Benutzer instabil sein.</string>
 	<string name="qs_tile_vertical_title">Kachelsymbole nach oben verschieben</string>
     <string name="clear_all_reposition_title">Fügen Sie \'alles löschen\' unten auf die Recents-Leiste</string>
+	<string name="heads_up_notification_duration">Dauer der Heads-up-Benachrichtigung</string>
+    <string name="milliseconds">Millisekunden</string>
+    <string name="network_show_icons_title">Richtungssymbole für die Internet-Download-Geschwindigkeit anzeigen</string>
+    <string name="power_menu_overlays_section">Power-Menü-Themen</string>
+    <string name="power_menu_overlays_summary_on">Mit dieser Option werden auch einige coole neue Icons systemweit aktiviert</string>
+    <string name="power_menu_overlays_title">Helle/dunkle Themen für das Power-Menü aktivieren</string>
+    <string name="sleep">Gerät in den Ruhezustand versetzen</string>
+    <string name="taskbar_hide_allapps_title">Symbol für alle Anwendungen ausblenden</string>
 </resources>

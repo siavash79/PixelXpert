@@ -47,7 +47,7 @@
     <string name="shufflePin_title">Amestecare PIN</string>
     <string name="wakeup_to_security_title">Afișează introducerea de securitate la activarea dispozitivului</string>
     <string name="easy_unlock_title">Deblocare ușoară (Pin/Parolă)</string>
-    <string name="easy_unlock_sumamry">Dacă nu a funcționat pentru prima dată, încercați din nou</string>
+    <string name="easy_unlock_summary">Dacă nu a funcționat pentru prima dată, încercați din nou</string>
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Dublă-atingere pentru oprire ecran</string>
     <string name="double_tap_sleep_off">"Atingerea dublă nu va opri ecranul"</string>

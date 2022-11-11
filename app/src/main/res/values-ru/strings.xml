@@ -52,8 +52,6 @@
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Двойное нажатие для перехода в спящий режим</string>
-    <string name="double_tap_sleep_off">"Двойное нажатие не выключает экран"</string>
-    <string name="double_tap_sleep_on">Двойное нажатие на строке состояния или экране блокировки выключает экран</string>
     <string name="battery_style_title">Выберите стиль батареи</string>
     <string name="battery_show_percent_title">Показать процент заряда батареи</string>
     <string name="battery_style_category_title">Стиль батареи</string>
@@ -347,5 +345,13 @@
     <string name="caution_unstable">Внимание: эта опция может быть нестабильной для некоторых пользователей.</string>
     <string name="qs_tile_vertical_title">Переместить значки наверх</string>
     <string name="clear_all_reposition_title">Добавить кнопку для очистки приложений внизу панель задач</string>
+	<string name="heads_up_notification_duration">Длительность уведомления о предупреждениях</string>
+    <string name="milliseconds">Миллисекунды</string>
+    <string name="network_show_icons_title">"Показывать значки направления скорости загрузки интернета "</string>
+    <string name="power_menu_overlays_section">"Темы меню питания "</string>
+    <string name="power_menu_overlays_summary_on">Эта опция также включает несколько новых классных иконок по всей системе</string>
+    <string name="power_menu_overlays_title">Включить светлые/темные темы в меню питания</string>
+    <string name="sleep">Режим сна</string>
+    <string name="taskbar_hide_allapps_title">Скрыть значок всех приложений</string>
 
 </resources>

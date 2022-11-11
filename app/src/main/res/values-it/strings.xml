@@ -21,7 +21,7 @@
     <string name="theme_customization_category">Temi</string>
 
     <!--Lock screen related-->
-    <string name="transparent_fingerprint_circle">Rimuovi il background dall\'icona del sensore d'impronte sotto il display</string>
+    <string name="transparent_fingerprint_circle">Rimuovi il background dall\'icona del sensore d\'impronte sotto il display</string>
     <string name="transparent_fingerprint_circle_off">Background icona sensore d\'impronte disattivo</string>
     <string name="transparent_fingerprint_circle_on">Background icona sensore d\'impronte attivo</string>
     <string name="carrier_text_category">Testo operatore</string>

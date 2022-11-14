@@ -1,3 +1,6 @@
+**canary-165**  
+- Fix heads-up notification duration fail to apply  
+  
 **canary-164**  
 - Added Italian translation, thanks to xxz3@github  
   

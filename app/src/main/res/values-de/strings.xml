@@ -46,13 +46,11 @@
     <string name="album_art_grayscale">Graustufen</string>
     <string name="shufflePin_title">Zufallsanordnung PIN</string>
     <string name="easy_unlock_title">Einfaches Entsperren (Pin/Passwort)</string>
-    <string name="easy_unlock_sumamry">Wenn es beim ersten Mal nicht funktioniert hat, versuche es erneut</string>
+    <string name="easy_unlock_summary">Wenn es beim ersten Mal nicht funktioniert hat, versuche es erneut</string>
 
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doppelt Tippen zum Sperren</string>
-    <string name="double_tap_sleep_off">"Doppelt Tippen schaltet das Display nicht aus"</string>
-    <string name="double_tap_sleep_on">Doppelt Tippen auf die Statusleiste oder den Sperrbildschirm schaltet das Display aus</string>
     <string name="battery_style_title">Wähle den Akku Stil</string>
     <string name="battery_show_percent_title">Zeige die Akkuprozente</string>
     <string name="battery_style_category_title">Akku Stil</string>
@@ -294,7 +292,7 @@
     <string name="monitoring_category_title">Überwachungsoptionen</string>
     <string name="netstat_header">Netzwerkstatistikeinstellungen</string>
 
-    <string name="string_formatter_manual_body">Zusätzlich zum normalen Text, den Sie eingeben können, sind auch dynamische Variablen verfügbar:\n\n$G\&lt;format\&gt; : georgisches Datum, basierend auf dem Format. Für Formatdokumentation suchen Sie bitte nach `Java Date Format`\nBeispiel: $GMMM bedeutet: Jan (oder irgendein anderer)\n\n$P&lt;format&gt; : Persisches Datum, basierend auf dem Format\nBeispiel: $Pyyyy bedeutet: 1401\n\n$Nrx : Gesamtzahl der Downloads von heute\n$Ntx: Gesamtzahl der Uploads von heute\n$Nall : Gesamtzahl der Zugriffe von heute\n\nWenn Sie ersetzen $N mit $Nc erhalten Sie mobile Datenstatistiken (wie $Ncrx für Downloads)\n\nBeispiel:\n`Mobiler Traffic von $GEEEE: $Ncall` ergibt:\n`Mobiler Traffic von Dienstag: 2GB` </string>
+    <string name="string_formatter_manual_body">Zusätzlich zum normalen Text, den Sie eingeben können, sind auch dynamische Variablen verfügbar:\n\n$G\&lt;format\&gt; : georgisches Datum, basierend auf dem Format. Für Formatdokumentation suchen Sie bitte nach `Java Date Format`\nBeispiel: $GMMM bedeutet: Jan (oder irgendein anderer)\n\n$P&lt;format&gt; : Persisches Datum, basierend auf dem Format\nBeispiel: $Pyyyy bedeutet: 1401\n\nUm die Internetnutzung von unten zu aktivieren, müssen Sie zum Menü „Verschiedenes“, „Netzwerkstatistikeinstellungen“ und zur Option „Netzwerkstatistik sammeln aktivieren“ gehen\n\n$Nrx : Gesamtzahl der Downloads von heute\n$Ntx: Gesamtzahl der Uploads von heute\n$Nall : Gesamtzahl der Zugriffe von heute\n\nWenn Sie ersetzen $N mit $Nc erhalten Sie mobile Datenstatistiken (wie $Ncrx für Downloads)\n\nBeispiel:\n`Mobiler Traffic von $GEEEE: $Ncall` ergibt:\n`Mobiler Traffic von Dienstag: 2GB` </string>
     <string name="update_channel_name">Aktualisierungen</string>
     <string name="update_notification_title">Update heruntergeladen</string>
     <string name="update_notification_text">Zum Installieren hier tippen</string>
@@ -345,4 +343,14 @@
     <string name="wakeup_to_security_title">Pineingabe anzeigen, sobald das Gerät erwacht</string>
     <string name="taskbar_radius_title">Taskleisten-Eckenradius</string>
     <string name="caution_unstable">Achtung! Diese Option kann für einige Benutzer instabil sein.</string>
+	<string name="qs_tile_vertical_title">Kachelsymbole nach oben verschieben</string>
+    <string name="clear_all_reposition_title">Fügen Sie \'alles löschen\' unten auf die Recents-Leiste</string>
+	<string name="heads_up_notification_duration">Dauer der Heads-up-Benachrichtigung</string>
+    <string name="milliseconds">Millisekunden</string>
+    <string name="network_show_icons_title">Richtungssymbole für die Internet-Download-Geschwindigkeit anzeigen</string>
+    <string name="power_menu_overlays_section">Power-Menü-Themen</string>
+    <string name="power_menu_overlays_summary_on">Mit dieser Option werden auch einige coole neue Icons systemweit aktiviert</string>
+    <string name="power_menu_overlays_title">Helle/dunkle Themen für das Power-Menü aktivieren</string>
+    <string name="sleep">Gerät in den Ruhezustand versetzen</string>
+    <string name="taskbar_hide_allapps_title">Symbol für alle Anwendungen ausblenden</string>
 </resources>

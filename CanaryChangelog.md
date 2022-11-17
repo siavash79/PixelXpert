@@ -1,3 +1,46 @@
+**canary-165**  
+- Fix heads-up notification duration fail to apply  
+  
+**canary-164**  
+- Added Italian translation, thanks to xxz3@github  
+  
+**canary-163**  
+- Fixed easy unlock for 2211+ build stock pixel roms  
+  
+**canary-162**  
+- (Navbar gestures) Added sleep action  
+- Added adjust volume on volume button short press while the screen is off and Volume button long press is enabled  
+  
+**canary-161**  
+- (Full Version) Fixed font customization. May not be recognizable to everyone  
+  
+**canary-160**  
+- Added option to configure heads-up notification duration  
+  
+**canary-159**  
+- Separated double tap sleep of lockscreen and statusbar / Disabled double tap to sleep on QS panel  
+  
+**canary-158**  
+- Added option to hide network traffic arrows  
+  
+**canary-157**  
+- (A13 Latest patch) Fixed network traffic appearance on QS header  
+  
+**canary-156**  
+- Relocated "clear all" button to the right of recents page (fixed incompatibility with some device languages)  
+  
+**canary-155**  
+- Added option to enable light/dark theme on Power Menu  
+  
+**canary-154**  
+- A13: Added option to remove "all apps" icon from taskbar  
+  
+**canary-153**  
+- [Potential] Fixed white QS Header clock in certain situations  
+  
+**canary-152**  
+- Separate Wifi/Cell QS tiles for A13  
+  
 **canary-151**  
 - Fixed text alignment on vertical QS tile setup  
   

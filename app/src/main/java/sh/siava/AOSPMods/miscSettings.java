@@ -55,6 +55,9 @@ public class miscSettings extends XposedModPack {
 				case "volumeStps":
 					setVolumeSteps();
 					break;
+				case "enablePowerMenuTheme":
+					updatePowerMenuOverlays();
+					break;
 			}
 		} else {
 			if (AOSPMods.isSecondProcess) return;
@@ -99,8 +102,8 @@ public class miscSettings extends XposedModPack {
 		try {
 			String currentTiles = Shell.cmd("settings get secure sysui_qs_tiles").exec().getOut().get(0);
 
-			boolean hasWifi = Pattern.matches(getPattern("wifi"), currentTiles);
-			boolean hasCell = Pattern.matches(getPattern("cell"), currentTiles);
+			boolean hasWifi = Pattern.matches(getPattern("wifi_AOSPMods"), currentTiles);
+			boolean hasCell = Pattern.matches(getPattern("cell_AOSPMods"), currentTiles);
 			boolean hasInternet = Pattern.matches(getPattern("internet"), currentTiles);
 
 			boolean providerModel;
@@ -108,18 +111,18 @@ public class miscSettings extends XposedModPack {
 			if (WifiCellEnabled) {
 				providerModel = false;
 				if (!hasCell) {
-					currentTiles = String.format("cell,%s", currentTiles);
+					currentTiles = String.format("cell_AOSPMods,%s", currentTiles);
 				}
 				if (!hasWifi) {
-					currentTiles = String.format("wifi,%s", currentTiles);
+					currentTiles = String.format("wifi_AOSPMods,%s", currentTiles);
 				}
 				currentTiles = currentTiles.replaceAll(getPattern("internet"), "$2$3$5"); //remove intrnet
 
 			} else {
 				providerModel = true;
 
-				currentTiles = currentTiles.replaceAll(getPattern("cell"), "$2$3$5"); //remove cell
-				currentTiles = currentTiles.replaceAll(getPattern("wifi"), "$2$3$5"); //remove wifi
+				currentTiles = currentTiles.replaceAll(getPattern("cell_AOSPMods"), "$2$3$5"); //remove cell
+				currentTiles = currentTiles.replaceAll(getPattern("wifi_AOSPMods"), "$2$3$5"); //remove wifi
 
 				if (!hasInternet) {
 					currentTiles = "internet," + currentTiles;
@@ -150,6 +153,12 @@ public class miscSettings extends XposedModPack {
 		boolean GSansOverrideEnabled = Xprefs.getBoolean("gsans_override", false);
 
 		ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, XPrefs.MagiskRoot);
+	}
+
+	private void updatePowerMenuOverlays() {
+		boolean PowerMenuOverlayEnabled = Xprefs.getBoolean("enablePowerMenuTheme", false);
+
+		ModuleFolderOperations.applyPowerMenuOverlay(PowerMenuOverlayEnabled, XPrefs.MagiskRoot);
 	}
 
 	@Override

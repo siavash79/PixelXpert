@@ -51,12 +51,10 @@
     <string name="shufflePin_title">Shuffle Pin</string>
     <string name="wakeup_to_security_title">Show security input on device wake</string>
     <string name="easy_unlock_title">Easy unlock (Pin/Password)</string>
-    <string name="easy_unlock_sumamry">If it didn\'t work the first time, try again</string>
+    <string name="easy_unlock_summary">If it didn\'t work the first time, try again</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Double-tap to sleep</string>
-    <string name="double_tap_sleep_off">"Double-tap won't turn off the display"</string>
-    <string name="double_tap_sleep_on">Double-tap on status bar or lock screen turns the display off</string>
     <string name="battery_style_title">Choose a battery style</string>
     <string name="battery_show_percent_title">Show battery percentage</string>
     <string name="battery_style_category_title">Battery style</string>
@@ -111,6 +109,7 @@
     <string name="network_upload_color_title">Upload color</string>
     <string name="network_opacity_title">Opacity</string>
     <string name="network_interval_title">Refresh interval (seconds)</string>
+    <string name="network_show_icons_title">Show traffic direction icons</string>
     <string name="nt_mode_rxtx">Download &amp; Upload</string>
     <string name="nt_mode_total">Download + Upload (Combined)</string>
     <string name="nt_mode_rxonly">Download only</string>
@@ -223,13 +222,14 @@
     <string name="taskbar_status_title">Android Taskbar</string>
     <string name="taskbar_force_enable_title">Force Enabled</string>
     <string name="taskbar_force_disable_title">Force Disabled</string>
+    <string name="taskbar_hide_allapps_title">Hide all apps icon</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
     <string name="allow_all_screen_rotations">Force-unlock all screen rotations</string>
     <string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
     <string name="force_no_cutout">Ignore the camera cutout</string>
-    <string name="clear_all_reposition_title">Add clear-all button to bottom of recents page</string>
+    <string name="clear_all_reposition_title">Add an accessible clear-all button to recents page</string>
     <string name="volume_button_step_title">Volume steps (0 to 100%)</string>
     <string name="display_resolution_title">Display resolution</string>
     <string name="brightness_range_title">Display brightness limits</string>
@@ -249,8 +249,10 @@
     <string name="so_vol_longpress_skip">Long press Volume buttons to skip music</string>
     <string name="notifications_header">Notifications options</string>
     <string name="expand_notifications_icons_title">"Add expand/collapse all buttons</string>
+    <string name="heads_up_notification_duration">Heads-up notification duration</string>
     <string name="disable_overscroll">"Disable elastic overscroll effect</string>
     <string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for within LSPosed</string>
+    <string name="milliseconds">Milliseconds</string>
 
     <!-- Call section -->
     <string name="call_category">Phone calls</string>
@@ -276,6 +278,9 @@
     <string name="dt_materialocean" translatable="false">Material Ocean</string>
     <string name="dt_night" translatable="false">Night</string>
     <string name="dt_solarizeddark" translatable="false">Solarized Dark</string>
+    <string name="power_menu_overlays_section">Power Menu Themes</string>
+    <string name="power_menu_overlays_title">Enable light/dark themes on power menu</string>
+    <string name="power_menu_overlays_summary_on">This option also enables some cool new icons system wide</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -338,7 +343,7 @@
     <string name="monitoring_category_title">Monitoring options</string>
     <string name="netstat_header">Network statistics settings</string>
 
-    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n$Nssid : WiFi SSID name (if applicable)\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads; excludes $Nssid)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
+    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\nTo enable internet usage from below, you need to go to Miscellaneous menu, Network Statistics Settings, and Enable Collect network statistics option\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n$Nssid : WiFi SSID name (if applicable)\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads; excludes $Nssid)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
     <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">Updates</string>
     <string name="update_notification_title">Update downloaded</string>
@@ -383,7 +388,8 @@
     <string name="kill_forground_app">Kill foreground app</string>
     <string name="toggle_notification">Toggle notification panel</string>
     <string name="toggle_one_handed">Toggle one handed mode</string>
-    <string name="insecure_screenshot">Insecure screenshot</string>
-    <string name="screenshot_chord_insecure">VolDown+Power insecure screenshot</string>
+    <string name="insecure_screenshot">Unrestricted screenshot</string>
+    <string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string>
+    <string name="sleep">Sleep</string>
 
 </resources>

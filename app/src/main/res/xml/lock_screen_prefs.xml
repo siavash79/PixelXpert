@@ -4,6 +4,13 @@
 	android:visibility="visible">
 	<SwitchPreference
 		android:defaultValue="false"
+		android:key="DoubleTapSleepLockscreen"
+		android:title="@string/double_tap_sleep_title"
+		app:summaryOff="@string/general_off"
+		app:summaryOn="@string/general_on" />
+
+	<SwitchPreference
+		android:defaultValue="false"
 		android:key="holdScreenTorchEnabled"
 		android:title="@string/so_taptaptorch_title"
 		app:summary="@string/so_taptaptorch_summary" />
@@ -39,7 +46,7 @@
 		android:defaultValue="false"
 		android:key="easyUnlockEnabled"
 		android:title="@string/easy_unlock_title"
-		android:summary="@string/easy_unlock_sumamry" />
+		android:summary="@string/easy_unlock_summary" />
 	<PreferenceCategory android:title="@string/keyguard_bottom_category">
 		<SwitchPreference
 			android:defaultValue="false"

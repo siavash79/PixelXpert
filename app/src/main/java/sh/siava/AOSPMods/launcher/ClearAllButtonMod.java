@@ -6,7 +6,6 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findMethodBestMatch;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.core.content.res.ResourcesCompat;
 
@@ -79,7 +77,6 @@ public class ClearAllButtonMod extends XposedModPack {
 				if(!RecentClearAllReposition) return;
 
 				clearAllIcon.getDrawable().setTintList(getThemedColor(mContext));
-				//clearAllButton.getBackground().setTintList(getThemedColor(mContext));
 			}
 		});
 
@@ -92,19 +89,14 @@ public class ClearAllButtonMod extends XposedModPack {
 
 				clearAllIcon = new ImageView(mContext);
 				clearAllIcon.setImageDrawable(ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_clear_all, mContext.getTheme()));
-				clearAllButton.addView(clearAllIcon);
-
 				clearAllIcon.getDrawable().setTintList(getThemedColor(mContext));
+				clearAllButton.addView(clearAllIcon);
 
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-				@SuppressLint("DiscouragedApi")
-				LinearLayout buttonsLayout =  ((View)param.thisObject).findViewById(mContext.getResources().getIdentifier("action_buttons", "id", mContext.getOpPackageName()));
+				params.rightMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, Resources.getSystem().getDisplayMetrics());
 
-				buttonsLayout.setVerticalGravity(Gravity.CENTER_VERTICAL);
-				int margins = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, Resources.getSystem().getDisplayMetrics());
-
-				params.rightMargin = params.leftMargin = margins;
+				params.gravity = Gravity.END | Gravity.CENTER_VERTICAL;
 
 				clearAllButton.setLayoutParams(params);
 				clearAllButton.setOnClickListener(v -> {
@@ -116,8 +108,10 @@ public class ClearAllButtonMod extends XposedModPack {
 					}
 				});
 
-				clearAllButton.setPadding(margins/2,0,margins/2,0);
-				buttonsLayout.addView(clearAllButton, buttonsLayout.getChildCount() - 2);
+//				clearAllButton.setPadding(margins/2,0,margins/2,0);
+				FrameLayout parent = (FrameLayout)param.thisObject;
+				parent.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT; //resize to whole screen
+				parent.addView(clearAllButton);
 			}
 		});
 	}

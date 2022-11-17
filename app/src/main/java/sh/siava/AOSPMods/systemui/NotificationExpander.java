@@ -157,11 +157,11 @@ public class NotificationExpander extends XposedModPack {
 		}
 		int tc = (int) callMethod(mDismissButton, "getCurrentTextColor");
 
-		Drawable expandArrows = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.exapnd_icon, mContext.getTheme());
+		Drawable expandArrows = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_expand, mContext.getTheme());
 		expandArrows.setTint(tc);
 		ExpandBtn.setBackground(expandArrows);
 
-		Drawable collapseArrows = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.collapse_icon, mContext.getTheme());
+		Drawable collapseArrows = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_collapse, mContext.getTheme());
 		collapseArrows.setTint(tc);
 		CollapseBtn.setBackground(collapseArrows);
 

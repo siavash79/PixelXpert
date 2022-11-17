@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -46,7 +45,6 @@ public class EasyUnlock extends XposedModPack {
 		Class<?> KeyguardAbsKeyInputViewControllerClass = findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
 		Class<?> LockscreenCredentialClass = findClass("com.android.internal.widget.LockscreenCredential", lpparam.classLoader);
 		Class<?> StatusBarKeyguardViewManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager", lpparam.classLoader);
-		Class<?> d = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
 
 		hookAllMethods(StatusBarKeyguardViewManagerClass, "onDozingChanged", new XC_MethodHook() {
 			@Override
@@ -89,7 +87,14 @@ public class EasyUnlock extends XposedModPack {
 							View mView = (View) getObjectField(param.thisObject, "mView");
 							mView.post(() -> {
 								if (Build.VERSION.SDK_INT == 33) { //A13
-									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */);
+									try
+									{ //New(er) signature
+										callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */, getObjectField(param.thisObject, "mSecurityMode"));
+									}
+									catch (Throwable ignored)
+									{ //Previous signature
+										callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */);
+									}
 								} else { //A12
 									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "reportUnlockAttempt", userId, true /* sucessful */, 0 /* timeout */);
 									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", true /* sucessful */, userId);

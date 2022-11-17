@@ -96,6 +96,23 @@ public class QSTileGrid extends XposedModPack {
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
 		Class<?> FontSizeUtilsClass = findClass("com.android.systemui.FontSizeUtils", lpparam.classLoader);
 		Class<?> QSTileImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
+		Class<?> QSFactoryImplClass = findClass("com.android.systemui.qs.tileimpl.QSFactoryImpl", lpparam.classLoader);
+
+		//used to enable dual wifi/cell tiles for 13. Also works with 12
+		hookAllMethods(QSFactoryImplClass, "createTileInternal", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(param.args[0].equals("wifi_AOSPMods"))
+				{
+					param.args[0] = "wifi";
+				}
+				if(param.args[0].equals("cell_AOSPMods"))
+				{
+					param.args[0] = "cell";
+				}
+			}
+		});
+
 
 		XC_MethodHook vibrateCallback = new XC_MethodHook() {
 			@Override

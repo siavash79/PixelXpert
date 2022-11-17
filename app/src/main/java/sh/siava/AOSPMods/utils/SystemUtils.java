@@ -17,6 +17,8 @@ import android.hardware.camera2.CameraMetadata;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
@@ -28,12 +30,17 @@ import androidx.annotation.Nullable;
 
 import org.jetbrains.annotations.Contract;
 
+import java.util.ArrayList;
+
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.XPrefs;
 
 public class SystemUtils {
+	private static final int THREAD_PRIORITY_BACKGROUND = 10;
+
 	@SuppressLint("StaticFieldLeak")
 	static SystemUtils instance;
+	private Handler mHandler = null;
 
 	Context mContext;
 	CameraManager mCameraManager;
@@ -47,6 +54,8 @@ public class SystemUtils {
 	DownloadManager mDownloadManager = null;
 	boolean hasVibrator;
 	int maxFlashLevel = -1;
+
+	ArrayList<FlashlighLevelListener> flashlighLevelListeners = new ArrayList<>();
 
 	TorchCallback torchCallback = new TorchCallback();
 
@@ -104,7 +113,6 @@ public class SystemUtils {
 				mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 			} catch (Throwable t) {
 				if (BuildConfig.DEBUG) {
-					log("AOSPMods Error getting audio manager");
 					t.printStackTrace();
 				}
 			}
@@ -175,11 +183,14 @@ public class SystemUtils {
 
 		//Camera and Flash
 		try {
+			HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
+			thread.start();
+			mHandler = new Handler(thread.getLooper());
 			mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
-			mCameraManager.registerTorchCallback(torchCallback, null);
+
+			mCameraManager.registerTorchCallback(torchCallback, mHandler);
 		} catch (Throwable t) {
 			if (BuildConfig.DEBUG) {
-				log("AOSPMods: Failed to Register flash callback");
 				t.printStackTrace();
 			}
 		}
@@ -233,6 +244,19 @@ public class SystemUtils {
 				log("AOSPMods Error getting vibrator");
 				t.printStackTrace();
 			}
+		}
+	}
+
+	public static void registerFlashlighLevelListener(FlashlighLevelListener listener)
+	{
+		instance.flashlighLevelListeners.add(listener);
+	}
+
+	public static void setFlashlightLevel(int level)
+	{
+		for(FlashlighLevelListener listener : instance.flashlighLevelListeners)
+		{
+			listener.onLevelChanged(level);
 		}
 	}
 
@@ -375,5 +399,10 @@ public class SystemUtils {
 			} catch (Exception ignored) {
 			}
 		}).start();
+	}
+
+	public interface FlashlighLevelListener
+	{
+		public void onLevelChanged(int level);
 	}
 }

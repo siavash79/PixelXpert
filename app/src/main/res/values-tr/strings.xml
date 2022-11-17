@@ -46,12 +46,10 @@
     <string name="album_art_grayscale">Renkleri grileştir</string>
     <string name="shufflePin_title">Pin Rakamlarını Karıştır</string>
     <string name="easy_unlock_title">Hızlı kilit açma (Pin/Parola)</string>
-    <string name="easy_unlock_sumamry">İlk kez çalışmazsa bir daha deneyin</string>
+    <string name="easy_unlock_summary">İlk kez çalışmazsa bir daha deneyin</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Ekranı kapatmak için iki kez dokunun</string>
-    <string name="double_tap_sleep_off">"Çift dokunma ekranı kapatmayacak"</string>
-    <string name="double_tap_sleep_on">Durum çubuğuna veya kilit ekranına iki kez dokunduğunda ekran kapanır</string>
     <string name="battery_style_title">Bir pil stili seçin</string>
     <string name="battery_show_percent_title">Pil yüzdesini göster</string>
     <string name="battery_style_category_title">Pil stili</string>
@@ -292,7 +290,7 @@
     <string name="monitoring_category_title">İzleme seçenekleri</string>
     <string name="netstat_header">Ağ istatistikleri ayarları</string>
 
-    <string name="string_formatter_manual_body">Girebileceğiniz normal metne ek olarak dinamik değişkenler de mevcuttur:\n\n$G\&lt;format\&gt; : Gürcü tarihi, formata göre. Biçim belgeleri için lütfen `Java Tarih Biçimi`ni okuyun\nÖrnek: $GMMM şu anlama gelir: Ocak (veya başka bir ay)\n\n$P&lt;format&gt; : Farsça tarih, biçime göre\nÖrnek: $Pyyyy şu anlama gelir: 1401\n\n$Nrx : Bugünkü Toplam İndirme Sayısı\n$Ntx: Bugünkü Toplam Yükleme Sayısı\n$Nall : Bugünün Toplam Trafiği\n\nEğer $N`i $Nc ile değiştirirseniz  , mobil veri istatistiklerine sahip olacaksınız (indirmeler için $Ncrx gibi)\n\nÖrnek:\n`$GEEEE Mobil Trafiği: $Ncall` şunları üretecek:\n`Salının Mobil Trafiği: 2GB`</string>
+    <string name="string_formatter_manual_body">Girebileceğiniz normal metne ek olarak dinamik değişkenler de mevcuttur:\n\n$G\&lt;format\&gt; : Gürcü tarihi, formata göre. Biçim belgeleri için lütfen `Java Tarih Biçimi`ni okuyun\nÖrnek: $GMMM şu anlama gelir: Ocak (veya başka bir ay)\n\n$P&lt;format&gt; : Farsça tarih, biçime göre\nÖrnek: $Pyyyy şu anlama gelir: 1401\n\nAşağıdakı internet kullanımını etkinleştirmek için, Muhtelif/Ağ İstatistikleri Ayarları menüsünden Ağ istatistiklerini toplamayı etkinleştir seçeneğini aktif etmeniz gerekir\n\n$Nrx : Bugünkü Toplam İndirme Sayısı\n$Ntx: Bugünkü Toplam Yükleme Sayısı\n$Nall : Bugünün Toplam Trafiği\n\nEğer $N`i $Nc ile değiştirirseniz  , mobil veri istatistiklerine sahip olacaksınız (indirmeler için $Ncrx gibi)\n\nÖrnek:\n`$GEEEE Mobil Trafiği: $Ncall` şunları üretecek:\n`Salının Mobil Trafiği: 2GB`</string>
     <string name="update_channel_name">Güncellemeler</string>
     <string name="update_notification_title">Güncelleme indirildi</string>
     <string name="update_notification_text">Güncellemeyi indirmek için tıkla</string>
@@ -343,4 +341,14 @@
     <string name="wakeup_to_security_title">Cihaz uyanır uyanmaz ekran kilidini göstermek</string>
     <string name="taskbar_radius_title">Görev çubuğu köşe eğriliği</string>
     <string name="caution_unstable">Dikkat: Bu seçenek bazı cihazları dengesiz  yapabilir</string>
+    <string name="qs_tile_vertical_title">Hızlı ayar panelinde simgeleri üste at</string>
+    <string name="clear_all_reposition_title">Kullanılan uygulamalar\'ın altına uyguları silme butonu eklemek</string>
+	<string name="heads_up_notification_duration">Heads-up bildirim süresi</string>
+    <string name="milliseconds">Millisaniyeler</string>
+    <string name="network_show_icons_title">İnternet indirme hızı yön simgelerini göster</string>
+    <string name="power_menu_overlays_section">Power Menü Temaları</string>
+    <string name="power_menu_overlays_summary_on">Bu seçenek sistem genelinde bazı harika yeni simgeleri etkinleştirir</string>
+    <string name="power_menu_overlays_title">Power menüsünde açık/koyu temaları etkinleştirin</string>
+    <string name="sleep">Uyku modu</string>
+    <string name="taskbar_hide_allapps_title">Tüm uygulamalar simgesini gizle</string>
 </resources>

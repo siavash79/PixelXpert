@@ -9,6 +9,7 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
@@ -87,6 +88,7 @@ public class ScreenOffKeys extends XposedModPack {
 						switch (e.getAction()) {
 							case KeyEvent.ACTION_UP:
 								if (mHandler.hasCallbacks(mVolumeLongPress)) {
+									SystemUtils.AudioManager().adjustStreamVolume(AudioManager.STREAM_MUSIC, Keycode == KeyEvent.KEYCODE_VOLUME_DOWN ? AudioManager.ADJUST_LOWER : AudioManager.ADJUST_RAISE, 0);
 									mHandler.removeCallbacks(mVolumeLongPress);
 								}
 								return;

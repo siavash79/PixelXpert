@@ -47,13 +47,11 @@
     <string name="album_art_grayscale">Сделать серым</string>
     <string name="shufflePin_title">Случайный PIN-код</string>
     <string name="easy_unlock_title">Легкая разблокировка (пин-код/пароль)</string>
-    <string name="easy_unlock_sumamry">Если не получилось в первый раз, попробуйте еще раз</string>
+    <string name="easy_unlock_summary">Если не получилось в первый раз, попробуйте еще раз</string>
     <string name="wakeup_to_security_title">Сразу перейти к вводу пароля на экране блокировки</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Двойное нажатие для перехода в спящий режим</string>
-    <string name="double_tap_sleep_off">"Двойное нажатие не выключает экран"</string>
-    <string name="double_tap_sleep_on">Двойное нажатие на строке состояния или экране блокировки выключает экран</string>
     <string name="battery_style_title">Выберите стиль батареи</string>
     <string name="battery_show_percent_title">Показать процент заряда батареи</string>
     <string name="battery_style_category_title">Стиль батареи</string>
@@ -299,7 +297,7 @@
     <string name="monitoring_category_title">Параметры мониторинга</string>
     <string name="netstat_header">Настройки сетевой статистики</string>
 
-    <string name="string_formatter_manual_body">Помимо обычного текста, который вы можете ввести, также доступны динамические переменные:\n\n$G\&lt;format\&gt; : григорианский дата в зависимости от формата. Документацию по формату можно найти в строке `Формат даты Java`\nПример: $GMMM означает: январь (или любой другой)\n\n$P&lt;format&gt; : дата на персидском языке, в зависимости от формата\nПример: $Pyyyy означает: 1401\n\n$Nrx : Всего загрузок за сегодня\n$Ntx: Всего загрузок за сегодня\n$Nall : Всего загрузок за сегодня\n\nЕсли заменить $N с $Nc вам будет предоставлена ​​статистика мобильных данных (например, $Ncrx для загрузок)\n\nПример:\n`Мобильный трафик $GEEEE: $Ncall` создаст:\n`Мобильный трафик вторника: 2 ГБ`</string>
+    <string name="string_formatter_manual_body">Помимо обычного текста, который вы можете ввести, также доступны динамические переменные:\n\n$G\&lt;format\&gt; : григорианский дата в зависимости от формата. Документацию по формату можно найти в строке `Формат даты Java`\nПример: $GMMM означает: январь (или любой другой)\n\n$P&lt;format&gt; : дата на персидском языке, в зависимости от формата\nПример: $Pyyyy означает: 1401\n\nЧтобы включить статистику использования Интернета, необходимо включить параметр включить сбор сетевой статистики в меню Разное/Настройки сетевой статистики.\n\n$Nrx : Всего загрузок за сегодня\n$Ntx: Всего загрузок за сегодня\n$Nall : Всего загрузок за сегодня\n\nЕсли заменить $N с $Nc вам будет предоставлена ​​статистика мобильных данных (например, $Ncrx для загрузок)\n\nПример:\n`Мобильный трафик $GEEEE: $Ncall` создаст:\n`Мобильный трафик вторника: 2 ГБ`</string>
     <string name="update_channel_name">Обновления</string>
     <string name="update_notification_title">Обновление загружено</string>
     <string name="update_notification_text">Нажмите здесь, чтобы установить</string>
@@ -345,5 +343,15 @@
     <string name="taskbar_as_recents_title">Превращать панель задач в список запущенных приложений</string>
     <string name="taskbar_radius_title">Угловой угол панели задач</string>
     <string name="caution_unstable">Внимание: эта опция может быть нестабильной для некоторых пользователей.</string>
+    <string name="qs_tile_vertical_title">Переместить значки наверх</string>
+    <string name="clear_all_reposition_title">Добавить кнопку для очистки приложений внизу панель задач</string>
+	<string name="heads_up_notification_duration">Длительность уведомления о предупреждениях</string>
+    <string name="milliseconds">Миллисекунды</string>
+    <string name="network_show_icons_title">"Показывать значки направления скорости загрузки интернета "</string>
+    <string name="power_menu_overlays_section">"Темы меню питания "</string>
+    <string name="power_menu_overlays_summary_on">Эта опция также включает несколько новых классных иконок по всей системе</string>
+    <string name="power_menu_overlays_title">Включить светлые/темные темы в меню питания</string>
+    <string name="sleep">Режим сна</string>
+    <string name="taskbar_hide_allapps_title">Скрыть значок всех приложений</string>
 
 </resources>

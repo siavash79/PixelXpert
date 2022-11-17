@@ -4,6 +4,7 @@ package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -32,9 +33,11 @@ public class ScreenGestures extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
 	private static final long HOLD_DURATION = 500;
+	private static final int SHADE = 0; //frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/StatusBarState.java - screen unlocked - pulsing means screen is locked - shade locked means (Q)QS is open on lockscreen
 
 	//settings
-	public static boolean doubleTapToSleepEnabled = false;
+	public static boolean doubleTapToSleepStatusbarEnabled = false;
+	private static boolean doubleTapToSleepLockscreenEnabled = false;
 	private static boolean doubleTapToWake = false;
 	private static boolean holdScreenTorchEnabled = false;
 
@@ -56,7 +59,8 @@ public class ScreenGestures extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		doubleTapToWake = Xprefs.getBoolean("doubleTapToWake", false);
 		holdScreenTorchEnabled = Xprefs.getBoolean("holdScreenTorchEnabled", false);
-		doubleTapToSleepEnabled = Xprefs.getBoolean("DoubleTapSleep", false);
+		doubleTapToSleepStatusbarEnabled = Xprefs.getBoolean("DoubleTapSleep", false);
+		doubleTapToSleepLockscreenEnabled = Xprefs.getBoolean("DoubleTapSleepLockscreen", false);
 	}
 
 	@Override
@@ -158,14 +162,13 @@ public class ScreenGestures extends XposedModPack {
 				"onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (!doubleTapToSleepEnabled) return;
+						if (!doubleTapToSleepStatusbarEnabled) return;
 
-						boolean mPulsing = (boolean) getObjectField(ThisNotificationPanel, "mPulsing");
-						boolean mDozing = (boolean) getObjectField(ThisNotificationPanel, "mDozing");
-						int mBarState = (int) getObjectField(ThisNotificationPanel, "mBarState");
-
-						if (!mPulsing && !mDozing
-								&& mBarState == 0) {
+						//double tap to sleep, statusbar only
+						if (!(boolean) getObjectField(ThisNotificationPanel, "mPulsing")
+								&& !(boolean) getObjectField(ThisNotificationPanel, "mDozing")
+								&& (int) getObjectField(ThisNotificationPanel, "mBarState") == SHADE
+								&& (boolean) callMethod(ThisNotificationPanel, "isFullyCollapsed")) {
 							mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[1]);
 						}
 					}
@@ -213,35 +216,38 @@ public class ScreenGestures extends XposedModPack {
 					}
 				});
 
-		//detect hold event for TTT
+		//detect hold event for TTT and DTS on lockscreen
 		hookAllMethods(mGestureDetector.getClass(), "onTouchEvent", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
+				if(!(boolean) callMethod(mStatusBarKeyguardViewManager, "isShowing"))
+				{
+					return;
+				}
 				MotionEvent ev = (MotionEvent) param1.args[0];
 
 				int action = ev.getActionMasked();
 
 				if (doubleTap && action == MotionEvent.ACTION_UP) {
-					if (doubleTapToSleepEnabled && !isDozing)
+					if (doubleTapToSleepLockscreenEnabled && !isDozing)
 						SystemUtils.Sleep();
 					doubleTap = false;
 				}
-				if ((boolean) callMethod(mStatusBarKeyguardViewManager, "isShowing")) {
-					if (!holdScreenTorchEnabled) return;
-					if ((action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)) {
-						if (doubleTap && !SystemUtils.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION) {
-							turnedByTTT = true;
-							callMethod(SystemUtils.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
-							SystemUtils.setFlash(true);
-							SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
-						}
-						if (turnedByTTT) {
-							ev.setAction(MotionEvent.ACTION_DOWN);
-						}
-					} else if (turnedByTTT) {
-						turnedByTTT = false;
-						SystemUtils.setFlash(false);
+
+				if (!holdScreenTorchEnabled) return;
+				if ((action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)) {
+					if (doubleTap && !SystemUtils.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION) {
+						turnedByTTT = true;
+						callMethod(SystemUtils.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
+						SystemUtils.setFlash(true);
+						SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
 					}
+					if (turnedByTTT) {
+						ev.setAction(MotionEvent.ACTION_DOWN);
+					}
+				} else if (turnedByTTT) {
+					turnedByTTT = false;
+					SystemUtils.setFlash(false);
 				}
 			}
 		});

@@ -321,6 +321,7 @@ public class SettingsActivity extends AppCompatActivity implements
 			findPreference("TaskbarAsRecents").setVisible(taskBarMode == 1);
 			findPreference("taskbarHeightOverride").setVisible(taskBarMode == 1);
 			findPreference("TaskbarRadiusOverride").setVisible(taskBarMode == 1);
+			findPreference("TaskbarHideAllAppsIcon").setVisible(taskBarMode == 1 && Build.VERSION.SDK_INT >= 33);
 
 			float taskbarHeightOverride = 100f;
 			try {
@@ -561,6 +562,14 @@ public class SettingsActivity extends AppCompatActivity implements
 					displayOverride = RangeSliderPreference.getValues(prefs, "displayOverride", 100f).get(0);
 				} catch (Exception ignored) {
 				}
+
+				float headsupDecayMillis = 5000;
+				try {
+					headsupDecayMillis = RangeSliderPreference.getValues(prefs, "HeadupAutoDismissNotificationDecay", -1).get(0);
+				} catch (Exception ignored) {
+				}
+				findPreference("HeadupAutoDismissNotificationDecay").setSummary(((int)headsupDecayMillis) + " " + getString(R.string.milliseconds));
+
 				double increasedArea = Math.round(Math.abs(Math.pow(displayOverride, 2) / 100 - 100));
 
 				findPreference("displayOverride").setSummary(String.format("%s \n (%s)",
@@ -734,8 +743,6 @@ public class SettingsActivity extends AppCompatActivity implements
 
 				findPreference("leveledFlashTile").setVisible(Build.VERSION.SDK_INT >= 33);
 				findPreference("isFlashLevelGlobal").setVisible(findPreference("leveledFlashTile").isVisible() && sharedPreferences.getBoolean("leveledFlashTile", false));
-
-				findPreference("wifi_cell").setVisible(Build.VERSION.SDK_INT < 33);
 
 				findPreference("QRTileInactiveColor").setVisible(Build.VERSION.SDK_INT >= 33);
 			} catch (Exception ignored) {

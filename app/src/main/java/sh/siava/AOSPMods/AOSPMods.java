@@ -35,6 +35,7 @@ import sh.siava.AOSPMods.systemui.KeyguardDimmer;
 import sh.siava.AOSPMods.systemui.LockscreenAlbumArt;
 import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
 import sh.siava.AOSPMods.systemui.NotificationExpander;
+import sh.siava.AOSPMods.systemui.NotificationManager;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.QSThemeManager;
@@ -65,6 +66,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 	public static final String ACTION_SCREENSHOT = "sh.siava.AOSPMods.ACTION_SCREENSHOT";
 	public static final String ACTION_INSECURE_SCREENSHOT = "sh.siava.AOSPMods.ACTION_INSECURE_SCREENSHOT";
 	public static final String ACTION_BACK = "sh.siava.AOSPMods.ACTION_BACK";
+	public static final String ACTION_SLEEP = "sh.siava.AOSPMods.ACTION_SLEEP";
 
 	public AOSPMods() {
 		//region Mod list definition
@@ -104,6 +106,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(PhoneWindowManager.class);
 		modPacks.add(BrightnessRange.class);
 		modPacks.add(ClearAllButtonMod.class);
+		modPacks.add(NotificationManager.class);
 		//endregion
 	}
 
@@ -111,9 +114,9 @@ public class AOSPMods implements IXposedHookLoadPackage {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		isSecondProcess = lpparam.processName.contains(":");
 
-		if (lpparam.packageName.equals(LAUNCHER_PACKAGE) && false) {
+		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && false) {
 			log("------------");
-			Helpers.dumpClass("com.android.quickstep.fallback.FallbackRecentsView", lpparam.classLoader);
+			Helpers.dumpClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 			log("------------");
 		}
 

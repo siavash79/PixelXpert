@@ -12,8 +12,8 @@ android {
 		applicationId "sh.siava.AOSPMods"
 		minSdkVersion 31
 		targetSdk 33
-		versionCode 151
-		versionName "2.3.0"
+		versionCode 165
+		versionName "canary-165"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
@@ -59,16 +59,16 @@ dependencies {
 	implementation project(path: ':RangeSliderPreference')
 
 	implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-	implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-	implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
-	implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-	implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+	implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+	implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+	implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+	implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 	implementation 'androidx.appcompat:appcompat:1.5.1'
 	implementation 'androidx.annotation:annotation:1.5.0'
 	implementation 'androidx.preference:preference-ktx:1.2.0'
 	implementation 'androidx.recyclerview:recyclerview:1.2.1'
-	implementation 'com.google.android.material:material:1.6.1'
-	implementation 'androidx.compose.ui:ui-geometry:1.2.1'
+	implementation 'com.google.android.material:material:1.7.0'
+	implementation 'androidx.compose.ui:ui-geometry:1.3.0'
 
 	// The core module that provides APIs to a shell
 	implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"

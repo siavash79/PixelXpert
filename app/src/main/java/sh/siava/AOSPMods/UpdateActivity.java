@@ -79,9 +79,11 @@ public class UpdateActivity extends AppCompatActivity {
 		int volumeStps = prefs.getInt("volumeStps", 0);
 		boolean customFontsEnabled = prefs.getBoolean("enableCustomFonts", false);
 		boolean GSansOverrideEnabled = prefs.getBoolean("gsans_override", false);
+		boolean PowerMenuOverlayEnabled = prefs.getBoolean("enablePowerMenuTheme", false);
 
 		ModuleFolderOperations.applyVolumeSteps(volumeStps, updateRoot);
 		ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, updateRoot);
+		ModuleFolderOperations.applyPowerMenuOverlay(PowerMenuOverlayEnabled, updateRoot);
 	}
 
 	@Override

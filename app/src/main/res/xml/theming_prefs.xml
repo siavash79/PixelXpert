@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/power_menu_overlays_section">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="enablePowerMenuTheme"
+            android:summaryOff="@string/restart_needed"
+            android:summaryOn="@string/power_menu_overlays_summary_on"
+            android:title="@string/power_menu_overlays_title" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/theme_customization_font_title">
         <SwitchPreference
             android:defaultValue="false"

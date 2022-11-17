@@ -1,7 +1,7 @@
   
 **Compatibility:**  
 AOSP based Androids:  
-12, 12.1 (12L) and 13 (Not compatible with 13QPR1)  
+12, 12.1 (12L) and 13 (Not compatible with 13QPRx)  
   
 **If you're updating from previous versions:**  
 Update your module via module update shortcut in Magisk, or use the built-in updater located in 3-dot menu of the app   
@@ -29,4 +29,5 @@ Technically, the module should automatically activate itself in Lsposed and get 
 - @vitalitk Ukrainian   
 - @siavash79 Persian   
 - @abalam1980 Dutch   
-- @trinhloivn Vietnamese   
+- @trinhloivn Vietnamese  
+- @xxz3 Italian  

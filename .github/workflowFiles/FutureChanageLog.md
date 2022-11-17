@@ -1,8 +1,14 @@
-- Added: Option to modify the taskbar height and corner curves (Navigation)
-- Added: Option to modify the display brightness limits (Misc)
-- Added: Option to directly show security input after phone wake (Lockscreen)
-- Added: Option to add "Clear All" button to the bottom to recents page (Misc)
-- Added: Option to move the QS tile icons to the top (Quick Settings)
-- Added: Ukrainian language
-- Several bugfixes  
+Added:
+- Option to hide network traffic arrows (Statusbar)
+- Separate Wifi/Cell QS tiles for A13 (Quick Settings)
+- Option to enable light/dark theme on Power Menu (Theming)
+- Option to remove "all apps" icon from taskbar (Navigation)
+- Sleep action (Navbar gestures)
+- Option to configure heads-up notification duration (Misc)
+- Italian translation (by @xxz3)
+
+Changed:
+- Separated double tap sleep of lockscreen and statusbar / Disabled double tap to sleep on QS panel
+
+... And bugfixes  
   

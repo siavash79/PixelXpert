@@ -98,7 +98,7 @@ if [ $(ls $LSPDDBPATH) = $LSPDDBPATH ]; then
 	ui_print 'Please Reboot your device to activate'
 	ui_print '(Activation of additional fonts may take one more reboot)'
 else
-	ui_print 'Lspsed not found!!'
+	ui_print 'Lsposed not found!!'
 	ui_print 'This module will not work without Lsposed'
 	ui_print 'Please:'
 	ui_print '- Insall Lsposed'

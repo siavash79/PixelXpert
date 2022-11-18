@@ -46,7 +46,7 @@
     <string name="album_art_grayscale">Renkleri grileştir</string>
     <string name="shufflePin_title">Pin Rakamlarını Karıştır</string>
     <string name="easy_unlock_title">Hızlı kilit açma (Pin/Parola)</string>
-    <string name="easy_unlock_sumamry">İlk kez çalışmazsa bir daha deneyin</string>
+    <string name="easy_unlock_summary">İlk kez çalışmazsa bir daha deneyin</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Ekranı kapatmak için iki kez dokunun</string>

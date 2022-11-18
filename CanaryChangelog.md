@@ -1,3 +1,9 @@
+**canary-165**  
+- Fix heads-up notification duration fail to apply  
+  
+**canary-164**  
+- Added Italian translation, thanks to xxz3@github  
+  
 **canary-163**  
 - Fixed easy unlock for 2211+ build stock pixel roms  
   

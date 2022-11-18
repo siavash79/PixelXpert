@@ -3,8 +3,9 @@ package sh.siava.AOSPMods.systemui;
 import static android.service.quicksettings.Tile.STATE_ACTIVE;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
-import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
@@ -75,71 +76,77 @@ public class FlashLightLevel extends XposedModPack {
 
 				Object state = param.args[0];
 				if (getObjectField(state, "spec").equals("flashlight")) {
-					Resources res = mContext.getResources();
-					currentPct = Xprefs.getFloat("flashPCT", 0.5f);
+					SystemUtils.FlashlighLevelListener listener = (SystemUtils.FlashlighLevelListener) getAdditionalInstanceField(param.thisObject, "flashlightLevelListener");
 
-					setObjectField(state, "label",
-							String.format("%s - %s%%",
+					if(listener == null)
+					{
+						View thisView = (View) param.thisObject;
+
+						listener = level -> {
+							Resources res = mContext.getResources();
+
+							TextView label = (TextView) getObjectField(thisView, "label");
+
+							String newLabel = String.format("%s - %s%%",
 									res.getText(
 											res.getIdentifier(
 													"quick_settings_flashlight_label",
 													"string", mContext.getPackageName())),
-									Math.round(currentPct * 100f)
-							)
-					);
-					View thisView = (View) param.thisObject;
+									level
+							);
 
-					thisView.setOnTouchListener(new View.OnTouchListener() {
-						float initX = 0;
-						float initPct = 0;
-						boolean moved = false;
+							label.setText(newLabel);
+						};
 
-						@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
-						@Override
-						public boolean onTouch(View view, MotionEvent motionEvent) {
-							if (!SystemUtils.supportsFlashLevels() || !leveledFlashTile)
-								return false;
+						setAdditionalInstanceField(param.thisObject, "flashlightLevelListener", listener);
 
-							switch (motionEvent.getAction()) {
-								case MotionEvent.ACTION_DOWN: {
-									initX = motionEvent.getX();
-									initPct = initX / view.getWidth();
-									return true;
-								}
-								case MotionEvent.ACTION_MOVE: {
-									float newPct = motionEvent.getX() / view.getWidth();
-									float deltaPct = Math.abs(newPct - initPct);
-									if (deltaPct > .03f) {
-										view.getParent().requestDisallowInterceptTouchEvent(true);
-										moved = true;
-										currentPct = Math.max(0.01f, Math.min(newPct, 1));
-										handleFlashLightClick(false, currentPct);
-										TextView label = (TextView) getObjectField(thisView, "label");
-										label.setText(
-												String.format("%s - %s%%",
-														res.getText(
-																res.getIdentifier(
-																		"quick_settings_flashlight_label",
-																		"string", mContext.getPackageName())),
-														Math.round(currentPct * 100f)
-												)
-										);
+						SystemUtils.registerFlashlighLevelListener(listener);
+
+						currentPct = Xprefs.getFloat("flashPCT", 0.5f);
+
+						thisView.setOnTouchListener(new View.OnTouchListener() {
+							float initX = 0;
+							float initPct = 0;
+							boolean moved = false;
+
+							@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
+							@Override
+							public boolean onTouch(View view, MotionEvent motionEvent) {
+								if (!SystemUtils.supportsFlashLevels() || !leveledFlashTile)
+									return false;
+
+								switch (motionEvent.getAction()) {
+									case MotionEvent.ACTION_DOWN: {
+										initX = motionEvent.getX();
+										initPct = initX / view.getWidth();
+										return true;
 									}
-									return true;
-								}
-								case MotionEvent.ACTION_UP: {
-									if (moved) {
-										moved = false;
-										Xprefs.edit().putFloat("flashPCT", currentPct).apply();
-									} else {
-										handleFlashLightClick(true, currentPct);
+									case MotionEvent.ACTION_MOVE: {
+										float newPct = motionEvent.getX() / view.getWidth();
+										float deltaPct = Math.abs(newPct - initPct);
+										if (deltaPct > .03f) {
+											view.getParent().requestDisallowInterceptTouchEvent(true);
+											moved = true;
+											currentPct = Math.max(0.01f, Math.min(newPct, 1));
+											handleFlashLightClick(false, currentPct);
+											SystemUtils.setFlashlightLevel(Math.round(currentPct*100f));
+										}
+										return true;
 									}
-									return true;
+									case MotionEvent.ACTION_UP: {
+										if (moved) {
+											moved = false;
+											Xprefs.edit().putFloat("flashPCT", currentPct).apply();
+										} else {
+											handleFlashLightClick(true, currentPct);
+										}
+										return true;
+									}
 								}
+								return true;
 							}
-							return true;
-						}
-					});
+						});
+					}
 				}
 			}
 
@@ -150,6 +157,10 @@ public class FlashLightLevel extends XposedModPack {
 				Object state = param.args[0];
 				if (getObjectField(state, "spec").equals("flashlight")) {
 					LinearLayout tileView = (LinearLayout) param.thisObject;
+
+					currentPct = Xprefs.getFloat("flashPCT", 0.5f);
+
+					SystemUtils.setFlashlightLevel(Math.round(currentPct*100f));
 
 					flashPercentageDrawable.setTint(
 							(SystemUtils.isDarkMode() || !lightQSHeaderEnabled) && !getObjectField(state, "state").equals(STATE_ACTIVE)
@@ -182,7 +193,7 @@ public class FlashLightLevel extends XposedModPack {
 	private class flashPercentageShape extends Drawable {
 		final Drawable shape;
 
-		@SuppressLint("UseCompatLoadingForDrawables")
+		@SuppressLint({"UseCompatLoadingForDrawables", "DiscouragedApi"})
 		private flashPercentageShape() {
 			shape = mContext.getDrawable(mContext.getResources().getIdentifier("qs_tile_background_shape", "drawable", mContext.getPackageName()));
 		}

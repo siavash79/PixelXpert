@@ -47,7 +47,7 @@
     <string name="album_art_grayscale">Сделать серым</string>
     <string name="shufflePin_title">Случайный PIN-код</string>
     <string name="easy_unlock_title">Легкая разблокировка (пин-код/пароль)</string>
-    <string name="easy_unlock_sumamry">Если не получилось в первый раз, попробуйте еще раз</string>
+    <string name="easy_unlock_summary">Если не получилось в первый раз, попробуйте еще раз</string>
     <string name="wakeup_to_security_title">Сразу перейти к вводу пароля на экране блокировки</string>
 
     <!--Status bar related-->

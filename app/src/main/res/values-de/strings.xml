@@ -46,7 +46,7 @@
     <string name="album_art_grayscale">Graustufen</string>
     <string name="shufflePin_title">Zufallsanordnung PIN</string>
     <string name="easy_unlock_title">Einfaches Entsperren (Pin/Passwort)</string>
-    <string name="easy_unlock_sumamry">Wenn es beim ersten Mal nicht funktioniert hat, versuche es erneut</string>
+    <string name="easy_unlock_summary">Wenn es beim ersten Mal nicht funktioniert hat, versuche es erneut</string>
 
 
     <!--Status bar related-->

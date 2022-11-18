@@ -30,7 +30,7 @@ grantRootUID(){
 #grant root access to given package name 
 grantRootPkg(){ 
 	echo "- 	Granting root access to $1..." 
-	UID=$(pm list packages -U $1 --user 0 | grep ":$1 " | awk -F 'uid:' '{ print $2 }') 
+	UID=$(pm list packages -U $1 --user 0 | grep ":$1 " | awk -F 'uid:' '{ print $2 }' | cut -d ',' -f 1)
  
 	grantRootUID $UID $1 
 } 

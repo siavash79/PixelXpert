@@ -42,7 +42,7 @@
     <string name="album_art_blur_text">مقدار تاری</string>
     <string name="album_art_grayscale">سیاه سفید</string>
     <string name="easy_unlock_title">باز کردن قفل بدون دکمه ورود</string>
-    <string name="easy_unlock_sumamry">اگر برای اولین بار کار نکرد، دوباره امتحان کنید</string>
+    <string name="easy_unlock_summary">اگر برای اولین بار کار نکرد، دوباره امتحان کنید</string>
 
 
     <string name="double_tap_sleep_off">دو ضربه صفحه را خاموش نمی کند</string>

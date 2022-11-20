@@ -30,8 +30,7 @@ import sh.siava.AOSPMods.systemui.FlashLightLevel;
 import sh.siava.AOSPMods.systemui.GestureNavbarManager;
 import sh.siava.AOSPMods.systemui.KeyGuardPinScrambler;
 import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
-import sh.siava.AOSPMods.systemui.KeyguardCustomText;
-import sh.siava.AOSPMods.systemui.KeyguardDimmer;
+import sh.siava.AOSPMods.systemui.KeyguardMods;
 import sh.siava.AOSPMods.systemui.LockscreenAlbumArt;
 import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
 import sh.siava.AOSPMods.systemui.NotificationExpander;
@@ -82,7 +81,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(miscSettings.class); //13 OK except for internet tile
 		modPacks.add(AOSPSettingsLauncher.class); //13 OK
 		modPacks.add(QSQuickPullDown.class); //13 OK
-		modPacks.add(KeyguardCustomText.class); //13 OK
+		modPacks.add(KeyguardMods.class); //13 OK
 		modPacks.add(KeyguardBottomArea.class); //13 OK
 		modPacks.add(UDFPSManager.class); //13 OK
 		modPacks.add(EasyUnlock.class); //13 OK
@@ -101,7 +100,6 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(ScreenRotation.class); //13 OK
 		modPacks.add(CallVibrator.class); //13 OK
 		modPacks.add(FlashLightLevel.class); //13 based
-		modPacks.add(KeyguardDimmer.class);
 		modPacks.add(CustomNavGestures.class);
 		modPacks.add(PhoneWindowManager.class);
 		modPacks.add(BrightnessRange.class);

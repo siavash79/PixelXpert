@@ -5,6 +5,7 @@ import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
@@ -20,9 +21,10 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.StringFormatter;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
-public class KeyguardCustomText extends XposedModPack {
+public class KeyguardMods extends XposedModPack {
 	private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
 	private static boolean customCarrierTextEnabled = false;
@@ -36,7 +38,11 @@ public class KeyguardCustomText extends XposedModPack {
 	private Object KGCS;
 	private boolean mDozing = false;
 
-	public KeyguardCustomText(Context context) {
+	//region keyguardDimmer
+	public static float KeyGuardDimAmount = -1f;
+	//endregion
+
+	public KeyguardMods(Context context) {
 		super(context);
 	}
 
@@ -46,6 +52,11 @@ public class KeyguardCustomText extends XposedModPack {
 
 		customCarrierTextEnabled = Xprefs.getBoolean("carrierTextMod", false);
 		customCarrierText = Xprefs.getString("carrierTextValue", "");
+
+		try {
+			KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
+		} catch (Throwable ignored) {
+		}
 
 		if (Key.length > 0) {
 			switch (Key[0]) {
@@ -81,11 +92,31 @@ public class KeyguardCustomText extends XposedModPack {
 		Class<?> KeyguardSliceViewClass = findClass("com.android.keyguard.KeyguardSliceView$Row", lpparam.classLoader);
 		Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
 
+		//region keyguardDimmer
+		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
+		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
+		//endregion
+
         /* might be useful later
         Class<?> AnimatableClockControllerClass = findClass("com.android.keyguard.AnimatableClockController", lpparam.classLoader);
         Class<?> KeyguardClockSwitchControllerClass = findClass("com.android.keyguard.KeyguardClockSwitchController", lpparam.classLoader);
         Class<?> DefaultClockControllerClass = findClass("com.android.keyguard.clock.DefaultClockController", lpparam.classLoader);
         Class<?> AvailableClocksClass = findClass("com.android.keyguard.clock.ClockManager$AvailableClocks", lpparam.classLoader);*/
+
+		//region keyguardDimmer
+		hookAllMethods(ScrimControllerClass, "scheduleUpdate", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if (KeyGuardDimAmount < 0 || KeyGuardDimAmount > 1) return;
+
+				setObjectField(param.thisObject, "mScrimBehindAlphaKeyguard", KeyGuardDimAmount);
+				Object[] constants = ScrimStateEnum.getEnumConstants();
+				for (Object constant : constants) {
+					setObjectField(constant, "mScrimBehindAlphaKeyguard", KeyGuardDimAmount);
+				}
+			}
+		});
+		//endregion
 
 		stringFormatter.registerCallback(() -> {
 			setMiddleText();

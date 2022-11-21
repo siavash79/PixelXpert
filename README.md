@@ -75,5 +75,9 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @trinhloivn Vietnamese
 - @xxz3 Italian
 
+**Icon design:**
+JstormZx@Telegram
+RKBDI@Telegram
+
 **Brought to you by:**
 @siavash79 & @ElTifo

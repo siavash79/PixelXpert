@@ -1,3 +1,7 @@
+**canary-167**  
+- Introducing the new app icon  
+- Introducing the new app icon  
+  
 **canary-165**  
 - Fix heads-up notification duration fail to apply  
   

@@ -12,6 +12,6 @@
 
     <!-- Launcher icon -->
     <color name="launcher_fg">@android:color/system_accent1_100</color>
-    <color name="launcher_bg">@android:color/system_neutral2_800</color>
+    <color name="launcher_bg">@android:color/background_dark</color>
 
 </resources>

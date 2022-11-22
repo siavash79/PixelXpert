@@ -1,3 +1,6 @@
+**canary-168**  
+- (Experimental) Fix battery icon not indicating charge status in some situations  
+  
 **canary-167**  
 - Introducing the new app icon  
   

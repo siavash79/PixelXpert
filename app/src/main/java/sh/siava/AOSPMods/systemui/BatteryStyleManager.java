@@ -15,6 +15,7 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 import static sh.siava.AOSPMods.utils.Helpers.tryHookAllMethods;
 
@@ -55,6 +56,7 @@ public class BatteryStyleManager extends XposedModPack {
 	private static boolean isFastCharging = false;
 	private static int BatteryIconOpacity = 100;
 	private static final ArrayList<Object> batteryViews = new ArrayList<>();
+	private Object BatteryController;
 
 	public BatteryStyleManager(Context context) {
 		super(context);
@@ -226,6 +228,13 @@ public class BatteryStyleManager extends XposedModPack {
 					});
 		}
 
+		hookAllConstructors(BatteryControllerImplClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				BatteryController = param.thisObject;
+			}
+		});
+
 		hookAllMethods(BatteryControllerImplClass, "fireBatteryUnknownStateChanged", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -292,6 +301,9 @@ public class BatteryStyleManager extends XposedModPack {
 				setAdditionalInstanceField(param.thisObject, "mBatteryDrawable", mBatteryDrawable);
 
 				mBatteryIconView.setImageDrawable(mBatteryDrawable);
+				setObjectField(param.thisObject, "mBatteryIconView", mBatteryIconView);
+
+				callMethod(BatteryController, "fireBatteryLevelChanged"); //force refresh icons during systemui start
 			}
 		});
 

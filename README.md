@@ -4,7 +4,7 @@
 [![XDA URL](https://img.shields.io/twitter/url?label=XDA%20Developers&logo=XDA-Developers&style=social&url=https%3A%2F%2Fsh-ort.app%2F1fjst)](https://sh-ort.app/1fjst)
 [![Telegram URL](https://img.shields.io/twitter/url?label=Telegram&logo=telegram&style=social&url=https%3A%2F%2Ft.me%2FAOSPMods_Support)](https://t.me/AOSPMods_Support)
 
-![Header Image](https://raw.githubusercontent.com/siavash79/AOSPMods/master/.github/AOSP_Mods_Header.png)
+![Header Image](https://github.com/siavash79/AOSPMods/blob/canary/.github/AOSPMods_Banner_1280.jpg?raw=true)
 
 This is a mixed Xposed+Magisk module, which is made to allow customizations that are not originally designed in AOSP (Android Open Source Project).
 
@@ -75,9 +75,9 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @trinhloivn Vietnamese
 - @xxz3 Italian  
 
-**Icon design:**  
-- JstormZx@Telegram  
-- RKBDI@Telegram  
+**Graphic design:**  
+- JstormZx@Telegram (Icon and Banner) 
+- RKBDI@Telegram  (Icon)
 
 **Brought to you by:**
 @siavash79 & @ElTifo

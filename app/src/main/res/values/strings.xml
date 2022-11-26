@@ -73,6 +73,8 @@
 
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
     <string name="combined_signal_icon_title">Combined signal icons</string>
+    <string name="hide_roaming_title">Hide mobile roaming indicators</string>
+    <string name="caution_mobile_costs">CAUTION - Not knowing that you\'re roaming can increase your mobile costs</string>
     <string name="volte_icon_title">Show VoLTE icon when available</string>
     <string name="hide_privacychip_title">Hide privacy indicators\n(Camera, Mic)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>

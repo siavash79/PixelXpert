@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
@@ -26,6 +27,7 @@ public class FeatureFlagsMods extends XposedModPack {
 	public static int SBLTEIcon = SIGNAL_DEFAULT;
 
 	public static boolean combinedSignalEnabled = false;
+	private static boolean HideRoamingState = false;
 
 	public FeatureFlagsMods(Context context) {
 		super(context);
@@ -35,6 +37,8 @@ public class FeatureFlagsMods extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
 		boolean newcombinedSignalEnabled = Xprefs.getBoolean("combinedSignalEnabled", false);
+
+		HideRoamingState = Xprefs.getBoolean("HideRoamingState", false);
 
 		if (Key.length > 0 && newcombinedSignalEnabled != combinedSignalEnabled) {
 			try {
@@ -53,6 +57,22 @@ public class FeatureFlagsMods extends XposedModPack {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
+
+		Class<?> MobileSignalController = findClass("com.android.systemui.statusbar.connectivity.MobileSignalController", lpparam.classLoader);
+
+		hookAllMethods(MobileSignalController, "notifyListeners", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(HideRoamingState) {
+					setObjectField(
+							getObjectField(
+									param.thisObject,
+									"mCurrentState"),
+							"roaming",
+							false);
+				}
+			}
+		});
 
 		hookAllMethods(
 				findClass("com.android.settingslib.mobile.MobileMappings$Config", lpparam.classLoader),

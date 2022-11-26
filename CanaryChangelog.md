@@ -1,3 +1,6 @@
+**canary-170**  
+- Added option to hide roaming from statusbar  
+  
 **canary-169**  
 - Fixed battery icon not appearing after systemui restart  
   

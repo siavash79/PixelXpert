@@ -47,6 +47,14 @@
 		android:key="easyUnlockEnabled"
 		android:title="@string/easy_unlock_title"
 		android:summary="@string/easy_unlock_summary" />
+
+	<SwitchPreference
+		android:defaultValue="false"
+		android:key="ShowChargingInfo"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/charging_info_title" />
+
 	<PreferenceCategory android:title="@string/keyguard_bottom_category">
 		<SwitchPreference
 			android:defaultValue="false"

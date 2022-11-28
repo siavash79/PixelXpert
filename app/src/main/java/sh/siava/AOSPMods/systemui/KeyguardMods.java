@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -8,7 +9,9 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.TypedValue;
@@ -26,6 +29,18 @@ import sh.siava.rangesliderpreference.RangeSliderPreference;
 @SuppressWarnings("RedundantThrows")
 public class KeyguardMods extends XposedModPack {
 	private static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
+
+	//region keyguard charging data
+	public static final String EXTRA_MAX_CHARGING_CURRENT = "max_charging_current";
+	public static final String EXTRA_MAX_CHARGING_VOLTAGE = "max_charging_voltage";
+	public static final String EXTRA_TEMPERATURE = "temperature";
+
+	private float max_charging_current = 0;
+	private float max_charging_voltage = 0;
+	private float temperature = 0;
+
+	private static boolean ShowChargingInfo = false;
+	//endregion
 
 	private static boolean customCarrierTextEnabled = false;
 	private static String customCarrierText = "";
@@ -52,6 +67,8 @@ public class KeyguardMods extends XposedModPack {
 
 		customCarrierTextEnabled = Xprefs.getBoolean("carrierTextMod", false);
 		customCarrierText = Xprefs.getString("carrierTextValue", "");
+
+		ShowChargingInfo = Xprefs.getBoolean("ShowChargingInfo", false);
 
 		try {
 			KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
@@ -91,6 +108,31 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> CarrierTextControllerClass = findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
 		Class<?> KeyguardSliceViewClass = findClass("com.android.keyguard.KeyguardSliceView$Row", lpparam.classLoader);
 		Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
+		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpparam.classLoader);
+		Class<?> KeyguardIndicationControllerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
+
+		//region keyguard battery info
+		hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(ShowChargingInfo) {
+					String result = (String) param.getResult();
+					param.setResult(String.format("%s\n%sW (%sV, %sA) • %sºC", result, max_charging_current * max_charging_voltage, max_charging_voltage, max_charging_current, temperature));
+				}
+			}
+		});
+
+		hookAllConstructors(BatteryStatusClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				Intent batteryInfoIntent = (Intent) param.args[0];
+
+				max_charging_current = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_CURRENT, 0) / 1000000f;
+				max_charging_voltage = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_VOLTAGE, 0) / 1000000f;
+				temperature = batteryInfoIntent.getIntExtra(EXTRA_TEMPERATURE, 0) / 10f;
+			}
+		});
+		//endregion
 
 		//region keyguardDimmer
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
@@ -164,7 +206,7 @@ public class KeyguardMods extends XposedModPack {
 					KGMiddleCustomTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 					KGMiddleCustomTextView.setLetterSpacing(.03f);
 
-					int padding = res.getDimensionPixelSize(
+					@SuppressLint("DiscouragedApi") int padding = res.getDimensionPixelSize(
 							res.getIdentifier(
 									"clock_padding_start",
 									"dimen",

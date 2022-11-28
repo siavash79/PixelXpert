@@ -1,3 +1,6 @@
+**canary-171**  
+- Added option to show charging info on lockscreen  
+  
 **canary-170**  
 - Added option to hide roaming from statusbar  
   

@@ -53,6 +53,7 @@
     <string name="easy_unlock_title">Easy unlock (Pin/Password)</string>
     <string name="easy_unlock_summary">If it didn\'t work the first time, try again</string>
     <string name="charging_info_title">Charging information on lockscreen</string>
+    <string name="imperial_units_title">Use imperial units</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Double-tap to sleep</string>

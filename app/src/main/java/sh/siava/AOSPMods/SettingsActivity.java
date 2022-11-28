@@ -403,6 +403,8 @@ public class SettingsActivity extends AppCompatActivity implements
 							? getString(R.string.word_default)
 							: KeyGuardDimAmount + "%");
 
+			findPreference("TemperatureUnitF").setVisible(sharedPreferences.getBoolean("ShowChargingInfo", false));
+
 		}
 	}
 

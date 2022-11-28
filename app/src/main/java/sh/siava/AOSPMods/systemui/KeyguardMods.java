@@ -55,6 +55,7 @@ public class KeyguardMods extends XposedModPack {
 
 	//region keyguardDimmer
 	public static float KeyGuardDimAmount = -1f;
+	private static boolean TemperatureUnitF = false;
 	//endregion
 
 	public KeyguardMods(Context context) {
@@ -69,6 +70,7 @@ public class KeyguardMods extends XposedModPack {
 		customCarrierText = Xprefs.getString("carrierTextValue", "");
 
 		ShowChargingInfo = Xprefs.getBoolean("ShowChargingInfo", false);
+		TemperatureUnitF = Xprefs.getBoolean("TemperatureUnitF", false);
 
 		try {
 			KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
@@ -118,10 +120,12 @@ public class KeyguardMods extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(ShowChargingInfo) {
 					String result = (String) param.getResult();
-					max_charging_current /= 1000000f;
-					max_charging_voltage /= 1000000f;
 
-					param.setResult(String.format("%s\n%.1fW (%.1fV, %.1fA) • %.0fºC", result, max_charging_current * max_charging_voltage, max_charging_voltage, max_charging_current, temperature / 10f));
+					Float shownTemperature = (TemperatureUnitF)
+							? (temperature*1.8f) + 32f
+							: temperature;
+
+					param.setResult(String.format("%s\n%.1fW (%.1fV, %.1fA) • %.0fº%s", result, max_charging_current * max_charging_voltage, max_charging_voltage, max_charging_current, shownTemperature, TemperatureUnitF ? "F" : "C"));
 				}
 			}
 		});
@@ -131,9 +135,9 @@ public class KeyguardMods extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				Intent batteryInfoIntent = (Intent) param.args[0];
 
-				max_charging_current = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_CURRENT, 0);
-				max_charging_voltage = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_VOLTAGE, 0);
-				temperature = batteryInfoIntent.getIntExtra(EXTRA_TEMPERATURE, 0);
+				max_charging_current = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_CURRENT, 0) / 1000000f;
+				max_charging_voltage = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_VOLTAGE, 0) / 1000000f;
+				temperature = batteryInfoIntent.getIntExtra(EXTRA_TEMPERATURE, 0) / 10f;
 			}
 		});
 		//endregion

@@ -118,7 +118,10 @@ public class KeyguardMods extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(ShowChargingInfo) {
 					String result = (String) param.getResult();
-					param.setResult(String.format("%s\n%.1fW (%.1fV, %.1fA) • %.0fºC", result, max_charging_current * max_charging_voltage, max_charging_voltage, max_charging_current, temperature));
+					max_charging_current /= 1000000f;
+					max_charging_voltage /= 1000000f;
+
+					param.setResult(String.format("%s\n%.1fW (%.1fV, %.1fA) • %.0fºC", result, max_charging_current * max_charging_voltage, max_charging_voltage, max_charging_current, temperature / 10f));
 				}
 			}
 		});
@@ -128,9 +131,9 @@ public class KeyguardMods extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				Intent batteryInfoIntent = (Intent) param.args[0];
 
-				max_charging_current = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_CURRENT, 0) / 1000000f;
-				max_charging_voltage = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_VOLTAGE, 0) / 1000000f;
-				temperature = batteryInfoIntent.getIntExtra(EXTRA_TEMPERATURE, 0) / 10f;
+				max_charging_current = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_CURRENT, 0);
+				max_charging_voltage = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_VOLTAGE, 0);
+				temperature = batteryInfoIntent.getIntExtra(EXTRA_TEMPERATURE, 0);
 			}
 		});
 		//endregion

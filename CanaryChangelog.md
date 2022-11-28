@@ -1,3 +1,6 @@
+**canary-172**  
+- Fixed number formatting for charging info  
+  
 **canary-171**  
 - Added option to show charging info on lockscreen  
   

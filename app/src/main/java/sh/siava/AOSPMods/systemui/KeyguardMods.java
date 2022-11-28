@@ -113,11 +113,12 @@ public class KeyguardMods extends XposedModPack {
 
 		//region keyguard battery info
 		hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", new XC_MethodHook() {
+			@SuppressLint("DefaultLocale")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(ShowChargingInfo) {
 					String result = (String) param.getResult();
-					param.setResult(String.format("%s\n%sW (%sV, %sA) • %sºC", result, max_charging_current * max_charging_voltage, max_charging_voltage, max_charging_current, temperature));
+					param.setResult(String.format("%s\n%.1fW (%.1fV, %.1fA) • %.0fºC", result, max_charging_current * max_charging_voltage, max_charging_voltage, max_charging_current, temperature));
 				}
 			}
 		});

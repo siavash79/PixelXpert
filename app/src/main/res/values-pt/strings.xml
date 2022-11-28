@@ -311,4 +311,8 @@
     <string name="heads_up_notification_duration">Duração das notificações no topo</string>
     <string name="milliseconds">Milissegundos</string>
     <string name="sleep">Desligar ecrã</string>
+	<string name="charging_info_title">Informação de carregamento no ecrã de bloqueio</string>
+    <string name="imperial_units_title">Usar unidades imperiais</string>
+    <string name="hide_roaming_title">Esconder indicador de roaming</string>
+    <string name="caution_mobile_costs">ATENÇÃO - Não saber que está em roaming poderá aumentar os seus custos</string>
 </resources>

@@ -14,8 +14,6 @@
     <string name="carrier_text_mod_enabled">Texto personalizado</string>
     <string name="carrier_text_value">Insira um texto personalizado</string>
     <string name="double_tap_sleep_title">Duplo toque para desligar</string>
-    <string name="double_tap_sleep_off">O duplo toque não desliga o ecrã</string>
-    <string name="double_tap_sleep_on">Duplo toque no ecrã de bloqueio, ou barra de estado, desliga o ecrã</string>
     <string name="qs_mod_category_title">Número de compilação no painel das definições rápidas</string>
     <string name="qs_footer_mod_title">Personalizar o número de compilação</string>
     <string name="qs_footer_text_summary">Deixe em branco para remover o texto</string>
@@ -34,7 +32,7 @@
     <string name="sbc_show_secs">Mostrar segundos</string>
     <string name="sbc_date_cat">Opções da data</string>
     <string name="sbc_day_of_week_options">Mostrar data junto ao relógio</string>
-    <string name="sbc_advanced_cat">Opções avançadas da data (srobepõe-se à opção acima)</string>
+    <string name="sbc_advanced_cat">Opções avançadas da data (sobrepõe-se à opção acima)</string>
     <string name="sbc_advanced_sum">Leia a documentação do formato de data Java</string>
     <string name="sbc_custom_date_before">Formato de data personalizado antes do relógio</string>
     <string name="sbc_date_small">Tamanho mais pequeno (70%)</string>
@@ -59,7 +57,7 @@
     <string name="word_default">Padrão</string>
     <string name="battery_circle">Círculo</string>
     <string name="battery_dashed_circle">Círculo pontilhado</string>
-    <string name="clock_default">Esquerda (pdrão)</string>
+    <string name="clock_default">Esquerda (padrão)</string>
     <string name="clock_center">Centro</string>
     <string name="clock_right">Direita</string>
     <string name="am_pm_normal">Igual ao tamanho do relógio</string>
@@ -115,7 +113,7 @@
     <string name="reducekeyboard_title">Espaço dos gestos no teclado</string>
     <string name="reducekeyboard">Reduzir o espaço no teclado</string>
     <string name="wifi_cell_title">Atalho da Internet</string>
-    <string name="wifi_cell_on">Usar Wifi e Dados em separado</string>
+    <string name="wifi_cell_on">Usar WiFi e Dados em separado</string>
     <string name="wifi_cell_off">Usar apenas o atalho Internet</string>
     <string name="theme_customization_category">Temas</string>
     <string name="gsans_override_title">Forçar a fonte Google Sans em todo o sistema</string>
@@ -128,7 +126,7 @@
     <string name="LSrightShortcutTitle">Atalho direito</string>
     <string name="camera_shortcut">Câmara</string>
     <string name="assistant_shortcut">Assistente</string>
-    <string name="so_vol_longpress_skip">Mater premido para mudar de faixa</string>
+    <string name="so_vol_longpress_skip">Manter premido para mudar de faixa</string>
     <string name="sbbb_header">Opções da barra de bateria</string>
     <string name="BB_enable_title">Ativar barra de bateria</string>
     <string name="BB_onlycharging_title">Apenas ao carregar</string>
@@ -147,7 +145,7 @@
     <string name="dt_styles_category">Estilos do tema escuro</string>
     <string name="dt_styles">Escolha um estilo</string>
     <string name="notifications_header">Opções das notificações</string>
-    <string name="expand_notifications_icons_title">"Mostar botões expandir/encolher tudo</string>
+    <string name="expand_notifications_icons_title">"Mostrar botões expandir/encolher tudo</string>
     <string name="taskbar_status_title">Barra de tarefas Android</string>
     <string name="taskbar_force_enable_title">Forçar ativar</string>
     <string name="taskbar_force_disable_title">Forçar desativar</string>
@@ -246,7 +244,7 @@
     <string name="ntsb_far_left_extra">Mais à esquerda - Acima das notificações</string>
     <string name="qs_cols_number">Número de colunas das QS</string>
     <string name="qqs_tiles_number">"Número de atalhos na QQS (2 linhas máx.)"</string>
-    <string name="force_no_cutout">Ignorar o notch da câmera</string>
+    <string name="force_no_cutout">Ignorar o notch da câmara</string>
     <string name="clock_default_extra">Esquerda - Acima das notificações</string>
     <string name="sb_padding_title">Espaçamento na barra de estado</string>
     <string name="sb_padding_summary">"Os valores min/máx são os padrão"</string>
@@ -254,7 +252,7 @@
     <string name="allow_all_screen_rotations">Permitir rotação em todas as direções</string>
     <string name="allow_all_screen_rotations_summary">Irá ignorar o botão de rotação manual</string>
     <string name="call_category">Chamadas telefónicas</string>
-    <string name="vibrate_on_call_active_title">Vibrar ao atender chamad</string>
+    <string name="vibrate_on_call_active_title">Vibrar ao atender chamada</string>
     <string name="vibrate_on_call_drop_title">Vibrar ao terminar chamada</string>
     <string name="update_type_title">Tipo de pacote</string>
     <string name="full_type">Completo</string>
@@ -307,7 +305,7 @@
 	<string name="power_menu_overlays_section">Tema do painel ligar/desligar</string>
     <string name="power_menu_overlays_title">Ativar tema claro/escuro no painel</string>
     <string name="power_menu_overlays_summary_on">Esta opção também altera outros ícones no sistema</string>
-	<string name="network_show_icons_title">Mostar setas de tráfego</string>
+	<string name="network_show_icons_title">Mostrar setas de tráfego</string>
     <string name="heads_up_notification_duration">Duração das notificações no topo</string>
     <string name="milliseconds">Milissegundos</string>
     <string name="sleep">Desligar ecrã</string>

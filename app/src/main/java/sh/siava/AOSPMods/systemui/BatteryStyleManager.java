@@ -255,7 +255,10 @@ public class BatteryStyleManager extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				int level = (int) getIntField(param.thisObject, "mLevel");
-				boolean charging = getBooleanField(param.thisObject, "mPluggedIn") || getBooleanField(param.thisObject, "mCharging");
+				boolean charging = getBooleanField(param.thisObject, "mPluggedIn")
+						|| getBooleanField(param.thisObject, "mCharging")
+						|| getBooleanField(param.thisObject, "mWirelessCharging");
+
 				boolean powerSave = getBooleanField(param.thisObject, "mPowerSave");
 
 				//Feeding battery bar

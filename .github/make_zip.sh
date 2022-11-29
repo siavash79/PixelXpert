@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir -p output/full output/xposed
-cp app/build/outputs/apk/release/AOSPMods-signed.apk MagiskModBase/system/priv-app/AOSPMods/AOSPMods.apk
+cp app/build/outputs/apk/release/AOSPMods.apk MagiskModBase/system/priv-app/AOSPMods/AOSPMods.apk
 cd MagiskModBase;
 LITE_FILENAME="AOSPMods_Xposed.zip"
 FULL_FILENAME="AOSPMods_Full.zip"

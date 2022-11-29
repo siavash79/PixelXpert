@@ -1,3 +1,6 @@
+**canary-173**  
+- Added Fahrenheit unit for temperature  
+  
 **canary-172**  
 - Fixed number formatting for charging info  
   

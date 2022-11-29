@@ -49,7 +49,9 @@
     <string name="wakeup_to_security_title">Mostra l\'input di sicurezza alla riattivazione del dispositivo</string>
     <string name="easy_unlock_title">Sblocco facilitato (Pin/Password)</string>
     <string name="easy_unlock_summary">Se non funziona la prima volta, riprova</string>
-
+    <string name="charging_info_title">Informazioni di ricarica sulla schermata di blocco</string>
+    <string name="imperial_units_title">Sistema di unità imperiali</string>
+    
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doppio tocco per spegnere</string>
     <string name="double_tap_sleep_off">"Doppio tocco non spegne lo schermo"</string>
@@ -70,6 +72,8 @@
 
     <string name="lte_4g_icon_title">Icona LTE / 4G</string>
     <string name="combined_signal_icon_title">Icone di segnale combinate</string>
+    <string name="hide_roaming_title">Nascondi indicatori roaming rete mobile</string>
+    <string name="caution_mobile_costs">ATTENZIONE - Non sapere di essere in roaming potrebbe aumentare i costi della rete</string>
     <string name="volte_icon_title">Mostra icona VoLTE quando disponibile</string>
     <string name="hide_privacychip_title">Nascondi indicatore privacy \n(Fotocamera, Mic)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">Mostra icone Vibrazione/Silenzioso</string>

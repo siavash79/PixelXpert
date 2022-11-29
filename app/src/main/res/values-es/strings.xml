@@ -52,6 +52,8 @@
 	<string name="wakeup_to_security_title">Mostrar entrada de seguridad al activar el dispositivo</string>
 	<string name="easy_unlock_title">Fácil desbloqueo (Pin/Contraseña)</string>
 	<string name="easy_unlock_summary">Si no funcionó la primera vez, intente nuevamente</string>
+	<string name="charging_info_title">Información de carga en la pantalla de bloqueo</string>
+	<string name="imperial_units_title">Usar unidades imperiales</string>
 	
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Doble toque para bloquear pantalla</string>
@@ -73,6 +75,8 @@
 	
 	<string name="lte_4g_icon_title">Icono 4G / LTE</string>
 	<string name="combined_signal_icon_title">Iconos de señal combinados</string>
+	<string name="hide_roaming_title">Ocultar indicadores de roaming</string>
+    <string name="caution_mobile_costs">PRECAUCIÓN - No saber que estás en roaming puede aumentar el coste de la tarifa</string>
 	<string name="volte_icon_title">Mostrar icono VoLTE cuando este disponible</string>
 	<string name="hide_privacychip_title">Ocultar indicadores de privacidad\n(Cámara, Micrófono)</string><!-- \n means next line-->
 	<string name="sb_vibration_switch_title">"Mostar los iconos vibrar/silencio"</string>

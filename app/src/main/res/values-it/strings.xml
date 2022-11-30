@@ -54,7 +54,7 @@
     
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doppio tocco per spegnere</string>
-    <string name="double_tap_sleep_off">"Doppio tocco non spegne lo schermo"</string>
+    <string name="double_tap_sleep_off">Doppio tocco non spegne lo schermo</string>
     <string name="double_tap_sleep_on">Doppio tocco sulla Status Bar o schermata di blocco spegne lo schermo</string>
     <string name="battery_style_title">Stile batteria</string>
     <string name="battery_show_percent_title">Mostra percentuale batteria</string>
@@ -102,7 +102,7 @@
     <string name="ntsb_enabled_title">Abilita monitor di rete</string>
     <string name="ntsb_position_title">Posizione monitor</string>
     <string name="ntsb_threshold_title">Soglia nascondimento automatico</string>
-    <string name="ntsb_threshold_summary">"Nascondi se il traffico è inferiore a… (Kilobytes)"</string>
+    <string name="ntsb_threshold_summary">Nascondi se il traffico è inferiore a… (Kilobytes)</string>
     <string name="network_mode_title">Stile monitor</string>
     <string name="network_colorful_title">Colorato</string>
     <string name="network_download_top">Velocità download in cima</string>
@@ -231,9 +231,9 @@
     <string name="custom_themed_icons_on">Icone personalizzate abilitate</string>
     <string name="so_vol_longpress_skip">Premi a lungo i pulsanti volume per saltare traccia</string>
     <string name="notifications_header">Opzioni di notifica</string>
-    <string name="expand_notifications_icons_title">"Aggiungi pulsante espandi/comprimi tutte</string>
+    <string name="expand_notifications_icons_title">Aggiungi pulsante espandi/comprimi tutte</string>
     <string name="heads_up_notification_duration">Durata notifica heads-up</string>
-    <string name="disable_overscroll">"Disattiva l\'effetto di overscroll elastico</string>
+    <string name="disable_overscroll">Disattiva l\'effetto di overscroll elastico</string>
     <string name="overscroll_on_summary">Importante: DEVI abilitare le app per le quali desideri disabilitare l\'overscroll all\'interno di LSPosed</string>
     <string name="milliseconds">Milliseconds</string>
 

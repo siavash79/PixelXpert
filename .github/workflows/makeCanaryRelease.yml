@@ -6,14 +6,16 @@ on:
       - 'canary'
     paths:
       - '.github/edit2MakeNewCanary'
-      
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch: 
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Grab Source
-      run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git .
+      run: git clone --recurse-submodules https://github.com/TOBY19k/QSMods .
       
     - name: Setup JDK 11
       uses: actions/setup-java@v3
@@ -37,18 +39,6 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew assembleRelease
 
-    - uses: r0adkll/sign-android-release@v1
-      name: Sign app APK
-      id: sign_app
-      with:
-        releaseDirectory: app/build/outputs/apk/release
-        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-        alias: ${{ secrets.ALIAS }}
-        keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-        keyPassword: ${{ secrets.KEY_PASSWORD }}
-      env:
-        BUILD_TOOLS_VERSION: "33.0.0"
-          
     - name: Run the zip script
       run: .github/make_zip.sh
 
@@ -70,26 +60,3 @@ jobs:
       with:
         name: AOSPMods_Full.zip
         path: tmp/full
-
-    - name: Commit version bump
-      uses: github-actions-x/commit@v2.9
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        push-branch: 'canary'
-        commit-message: 'Version update: Release'
-        force-add: 'true'
-        files: MagiskModBase/module.prop app/build.gradle latestVersion.json CanaryChangelog.md latestCanary.json
-        name: GitHub
-        email: aospmods@siava.sh
-
-    - name: Inform Telegram
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ env.TMessage }}
-        format: markdown
-
-    - name: Send Files to Telegram
-      run: |
-        curl -v "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMediaGroup?chat_id=${{ secrets.AOSPMODS_CHANNEL_ID }}&media=%5B%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FXposed%22%7D%2C%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FFull%22%7D%5D" -F Xposed="@output/xposed/AOSPMods_Xposed.zip" -F Full="@output/full/AOSPMods_Full.zip"

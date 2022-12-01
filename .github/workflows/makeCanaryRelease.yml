@@ -15,8 +15,7 @@ jobs:
 
     steps:
     - name: Grab Source
-      run: git clone --recurse-submodules https://github.com/TOBY19k/QSMods .
-      
+      run: git clone --recurse-submodules https://github.com/rchieQT/AOSPMods
     - name: Setup JDK 11
       uses: actions/setup-java@v3
       with:

@@ -9,13 +9,9 @@
 This is a mixed Xposed+Magisk module, which is made to allow customizations that are not originally designed in AOSP (Android Open Source Project).
 
 **Features:**
-Currently, AOSP Mods offers customizations on different aspects of system framework and SystemUI, including:
-- Status bar
-- Lock screen
-- Notifications
+Currently, QS Mods offers customizations on different aspects of system framework and SystemUI, including:
+
 - Quick Settings panel
-- Gestural Navigations
-- Screen properties
 
 **Compatibility:**
 This module is designed based on AOSP source code. What does it mean? it means that it's expected to work on Roms (Firmwares) which are built based on fairly unmodified Android source code. This means, mainly, Pixel Phones (3, 4, 4a, 5, 5a, 6, 6a, 7), and any other Roms that haven't heavily modified the original Android codes. Our feedbacks show that AOSPMods is compatible with Pixel stock Roms and Pixel Experience (normal edition). The mod can also be installed on ArrowOS, Pixel Experience (Plus Edition), ProtonAOSP and LineageOS with *some* broken features.

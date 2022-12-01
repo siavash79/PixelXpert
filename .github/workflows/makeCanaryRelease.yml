@@ -6,15 +6,9 @@ on:
       - 'canary'
     paths:
       - '.github/edit2MakeNewCanary'
-    # Allows you to run this workflow manually from the Actions tab
-    workflow_dispatch: 
-       # Inputs the workflow accepts.
-       inputs:
-         name:
-           # Friendly description to be shown in the UI instead of 'name'
-           description: 'Make Canary Release'
-           # Input has to be provided for the workflow to run
-           required: true 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch: 
+
 jobs:
   build:
     runs-on: ubuntu-latest

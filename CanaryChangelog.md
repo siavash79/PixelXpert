@@ -1,3 +1,6 @@
+**canary-175**  
+- Added option to hide the user avatar from lockscreen  
+  
 **canary-174**  
 - Fixed pin entry not shuffling after correct entry  
   

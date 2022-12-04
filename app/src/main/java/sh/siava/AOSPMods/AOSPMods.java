@@ -29,7 +29,6 @@ import sh.siava.AOSPMods.systemui.FingerprintWhileDozing;
 import sh.siava.AOSPMods.systemui.FlashLightLevel;
 import sh.siava.AOSPMods.systemui.GestureNavbarManager;
 import sh.siava.AOSPMods.systemui.KeyGuardPinScrambler;
-import sh.siava.AOSPMods.systemui.KeyguardBottomArea;
 import sh.siava.AOSPMods.systemui.KeyguardMods;
 import sh.siava.AOSPMods.systemui.LockscreenAlbumArt;
 import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
@@ -82,7 +81,6 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(AOSPSettingsLauncher.class); //13 OK
 		modPacks.add(QSQuickPullDown.class); //13 OK
 		modPacks.add(KeyguardMods.class); //13 OK
-		modPacks.add(KeyguardBottomArea.class); //13 OK
 		modPacks.add(UDFPSManager.class); //13 OK
 		modPacks.add(EasyUnlock.class); //13 OK
 		modPacks.add(MultiStatusbarRows.class); //13 OK

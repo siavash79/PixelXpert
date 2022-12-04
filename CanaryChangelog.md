@@ -1,3 +1,12 @@
+**canary-176**  
+- Fixed pin entry not shuffling after correct entry when easy unlock is enabled  
+  
+**canary-175**  
+- Added option to hide the user avatar from lockscreen  
+  
+**canary-174**  
+- Fixed pin entry not shuffling after correct entry  
+  
 **canary-173**  
 - Added Fahrenheit unit for temperature  
   

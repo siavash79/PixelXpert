@@ -8,7 +8,6 @@
     <color name="ui_fg_disabled">@android:color/system_neutral1_400</color>
     <color name="ui_fg_secondary">@android:color/system_neutral2_600</color> <!-- A12 B2: 700 -->
     <color name="ui_accent">@android:color/system_accent1_600</color>
-    <color name="ui_accent2">@android:color/system_accent1_200</color>
     <color name="ui_statusbar">@android:color/system_accent1_600</color>
     <color name="ui_actionbar">@android:color/system_neutral1_10</color>
 

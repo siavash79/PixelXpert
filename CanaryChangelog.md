@@ -1,3 +1,6 @@
+**canary-174**  
+- Fixed pin entry not shuffling after correct entry  
+  
 **canary-173**  
 - Added Fahrenheit unit for temperature  
   

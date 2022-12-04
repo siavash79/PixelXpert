@@ -78,6 +78,10 @@ public class KeyguardMods extends XposedModPack {
 	private Object thisObject = null;
 	//endregion
 
+	//region hide user avatar
+	private boolean HideLockScreenUserAvatar = false;
+	//endregion
+
 	public KeyguardMods(Context context) {
 		super(context);
 	}
@@ -91,6 +95,8 @@ public class KeyguardMods extends XposedModPack {
 
 		ShowChargingInfo = Xprefs.getBoolean("ShowChargingInfo", false);
 		TemperatureUnitF = Xprefs.getBoolean("TemperatureUnitF", false);
+
+		HideLockScreenUserAvatar = Xprefs.getBoolean("HideLockScreenUserAvatar", false);
 
 		try {
 			KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
@@ -150,6 +156,20 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> UtilClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
+		Class<?> KeyguardStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarView", lpparam.classLoader);
+
+		//region hide user avatar
+		hookAllMethods(KeyguardStatusBarViewClass, "updateVisibilities", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				View mMultiUserAvatar = (View) getObjectField(param.thisObject, "mMultiUserAvatar");
+				boolean mIsUserSwitcherEnabled = getBooleanField(param.thisObject, "mIsUserSwitcherEnabled");
+				mMultiUserAvatar.setVisibility(!HideLockScreenUserAvatar && mIsUserSwitcherEnabled
+						? View.VISIBLE
+						: View.GONE);
+			}
+		});
+		//endregion
 
 		//region keyguard bottom area shortcuts and transparency
 		//convert wallet button to camera button

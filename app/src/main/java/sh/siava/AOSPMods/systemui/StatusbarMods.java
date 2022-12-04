@@ -14,6 +14,7 @@ import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.animation.LayoutTransition;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -169,6 +170,7 @@ public class StatusbarMods extends XposedModPack {
 	private final serverStateCallback volteCallback = new serverStateCallback();
 	//endregion
 
+	@SuppressLint("DiscouragedApi")
 	public StatusbarMods(Context context) {
 		super(context);
 		if (!listensTo(context.getPackageName())) return;
@@ -366,6 +368,7 @@ public class StatusbarMods extends XposedModPack {
 		//endregion
 
 		if (Key.length > 0) {
+			//noinspection SwitchStatementWithTooFewBranches
 			switch (Key[0]) {
 				case "statusbarPaddings":
 					try {
@@ -464,7 +467,7 @@ public class StatusbarMods extends XposedModPack {
 		hookAllMethods(PhoneStatusBarViewClass, "updateStatusBarHeight", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				View sbContentsView = ((View) param.thisObject).findViewById(mContext.getResources().getIdentifier("status_bar_contents", "id", listenPackage));
+				@SuppressLint("DiscouragedApi") View sbContentsView = ((View) param.thisObject).findViewById(mContext.getResources().getIdentifier("status_bar_contents", "id", listenPackage));
 
 				if (SBPaddingStart == PADDING_DEFAULT && SBPaddingEnd == PADDING_DEFAULT)
 					return;
@@ -570,7 +573,7 @@ public class StatusbarMods extends XposedModPack {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						//Getting QS text color for Network traffic
-						int fillColor = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+						@SuppressLint("DiscouragedApi") int fillColor = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
 								mContext,
 								mContext.getResources().getIdentifier("@android:attr/textColorPrimary", "attr", mContext.getPackageName()));
 						NetworkTraffic.setTintColor(fillColor, false);
@@ -759,6 +762,7 @@ public class StatusbarMods extends XposedModPack {
 	}
 
 	//region double row left area
+	@SuppressLint("DiscouragedApi")
 	private void makeLeftSplitArea() {
 		mNotificationIconContainer = mNotificationIconAreaInner.findViewById(mContext.getResources().getIdentifier("notificationIcons", "id", mContext.getPackageName()));
 

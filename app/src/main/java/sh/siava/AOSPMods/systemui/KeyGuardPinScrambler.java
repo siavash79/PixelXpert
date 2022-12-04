@@ -51,14 +51,17 @@ public class KeyGuardPinScrambler extends XposedModPack {
 
 		Collections.shuffle(digits);
 
-		hookAllMethods(KeyguardAbsKeyInputViewControllerClass, "onViewAttached", new XC_MethodHook() {
+		XC_MethodHook shuffleHook = new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!shufflePinEnabled) return;
 
 				Collections.shuffle(digits);
 			}
-		});
+		};
+
+		hookAllMethods(KeyguardAbsKeyInputViewControllerClass, "verifyPasswordAndUnlock", shuffleHook);
+		hookAllMethods(KeyguardAbsKeyInputViewControllerClass, "onViewAttached", shuffleHook);
 
 		hookAllConstructors(NumPadKeyClass, new XC_MethodHook() {
 			@Override

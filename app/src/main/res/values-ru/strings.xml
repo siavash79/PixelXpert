@@ -96,7 +96,7 @@
     <string name="ntsb_enabled_title">Включить мониторинг трафика</string>
     <string name="ntsb_position_title">Расположение мониторинга</string>
     <string name="ntsb_threshold_title">Порог автоскрытия</string>
-    <string name="ntsb_threshold_summary">"Скрыть, если трафик меньше… (Килобайт)"</string>
+    <string name="ntsb_threshold_summary">Скрыть, если трафик меньше… (Килобайт)</string>
     <string name="network_mode_title">Стиль монитора</string>
     <string name="network_colorful_title">Сделать цветным</string>
     <string name="network_download_top">Скорость загрузки сверху</string>
@@ -347,11 +347,16 @@
     <string name="clear_all_reposition_title">Добавить кнопку для очистки приложений внизу панель задач</string>
 	<string name="heads_up_notification_duration">Длительность уведомления о предупреждениях</string>
     <string name="milliseconds">Миллисекунды</string>
-    <string name="network_show_icons_title">"Показывать значки направления скорости загрузки интернета "</string>
-    <string name="power_menu_overlays_section">"Темы меню питания "</string>
+    <string name="network_show_icons_title">Показывать значки направления скорости загрузки интернета</string>
+    <string name="power_menu_overlays_section">Темы меню питания</string>
     <string name="power_menu_overlays_summary_on">Эта опция также включает несколько новых классных иконок по всей системе</string>
     <string name="power_menu_overlays_title">Включить светлые/темные темы в меню питания</string>
     <string name="sleep">Режим сна</string>
     <string name="taskbar_hide_allapps_title">Скрыть значок всех приложений</string>
+    <string name="charging_info_title">Информация о зарядке на экране блокировки</string>
+    <string name="imperial_units_title">Использовать британские единицы измерения</string>
+    <string name="hide_roaming_title">Скрыть индикаторы мобильного роуминга</string>
+    <string name="caution_mobile_costs">ВНИМАНИЕ! Незнание того, что вы находитесь в роуминге, может увеличить ваши расходы на мобильную связь.</string>
+    <string name="hide_avatar_title">Удалить аватар пользователя (многопользовательский режим)</string>
 
 </resources>

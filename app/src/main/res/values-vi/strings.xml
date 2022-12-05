@@ -56,8 +56,6 @@
     <string name="date_before_small">Trước đồng hồ (kích cỡ nhỏ hơn)</string>
     <string name="disable_overscroll">Tắt hiệu ứng cuộn</string>
     <string name="display_resolution_title">Độ phân giải màn hình</string>
-    <string name="double_tap_sleep_off">"Đang tắt"</string>
-    <string name="double_tap_sleep_on">Đang bật</string>
     <string name="double_tap_sleep_title">Chạm hai lần để tắt màn hình</string>
     <string name="doze_header">Khi màn hình tắt…</string>
     <string name="dt_styles">Chọn một kiểu</string>
@@ -92,7 +90,7 @@
     <string name="heads_up_notification_duration">Thời gian hiển thị thông báo</string>
     <string name="hide_default">Ẩn (Mặc định)</string>
     <string name="hide_navbar_title">Ẩn thanh điều hướng</string>
-    <string name="hide_privacychip_title">Ẩn chỉ báo quyền riêng tư\n(Máy ảnh, chỉ báo quyền truy cập...)</string>
+    <string name="hide_privacychip_title">Ẩn chỉ báo quyền riêng tư\n(Máy ảnh, chỉ báo quyền truy cập…)</string>
     <string name="icon_shapes_title">Hình dạng biểu tượng</string>
     <string name="icons_style_title">Phong cách biểu tượng</string>
     <string name="insecure_screenshot">Chụp ảnh màn hình các ứng dụng không cho phép</string>

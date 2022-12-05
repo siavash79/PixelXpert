@@ -96,7 +96,7 @@
     <string name="ntsb_enabled_title">Aktiviere Netzwerkanzeige</string>
     <string name="ntsb_position_title">Anzeige Position</string>
     <string name="ntsb_threshold_title">Schwellenwert für automatisches Ausblenden</string>
-    <string name="ntsb_threshold_summary">"Verstecke wenn der Traffic unter… (Kilobytes)"</string>
+    <string name="ntsb_threshold_summary">Verstecke wenn der Traffic unter… (Kilobytes)</string>
     <string name="network_mode_title">Überwachungsstil</string>
     <string name="network_colorful_title">Mach es bunt</string>
     <string name="network_download_top">Download-Geschwindigkeit ganz oben</string>
@@ -353,4 +353,9 @@
     <string name="power_menu_overlays_title">Helle/dunkle Themen für das Power-Menü aktivieren</string>
     <string name="sleep">Gerät in den Ruhezustand versetzen</string>
     <string name="taskbar_hide_allapps_title">Symbol für alle Anwendungen ausblenden</string>
+    <string name="charging_info_title">Ladeinformationen auf dem Sperrbildschirm</string>
+    <string name="imperial_units_title">Verwenden imperiale Einheiten</string>
+    <string name="hide_roaming_title">Mobile Roaming-Anzeigen ausblenden</string>
+    <string name="caution_mobile_costs">VORSICHT - Wenn Sie nicht wissen, dass Sie Roaming verwenden, können Ihre Mobilfunkkosten steigen</string>
+    <string name="hide_avatar_title">Benutzer-Avatar entfernen (Mehrbenutzermodus)</string>
 </resources>

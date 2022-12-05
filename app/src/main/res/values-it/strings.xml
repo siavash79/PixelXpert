@@ -54,8 +54,6 @@
     
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doppio tocco per spegnere</string>
-    <string name="double_tap_sleep_off">Doppio tocco non spegne lo schermo</string>
-    <string name="double_tap_sleep_on">Doppio tocco sulla Status Bar o schermata di blocco spegne lo schermo</string>
     <string name="battery_style_title">Stile batteria</string>
     <string name="battery_show_percent_title">Mostra percentuale batteria</string>
     <string name="battery_style_category_title">Stile indicatore batteria</string>
@@ -213,7 +211,7 @@
     <string name="allow_all_screen_rotations_summary">Ignorerà anche il pulsante per rotazione manuale</string>
     <string name="force_no_cutout">Ignora foro fotocamera</string>
     <string name="clear_all_reposition_title">Aggiungi il pulsante cancella tutto sulla schermata app recenti</string>
-    <string name="volume_button_step_title">Step volume (0 - 100%)</string>
+    <string name="volume_button_step_title">Step volume (0 – 100%)</string>
     <string name="display_resolution_title">Risoluzione display</string>
     <string name="brightness_range_title">Limiti luminosità display</string>
     <string name="brightness_range_not_linear">Questo range NON è lineare: a volte una piccola differenza porta a notevoli cambiamenti</string>

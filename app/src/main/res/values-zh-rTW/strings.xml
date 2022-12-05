@@ -32,8 +32,6 @@
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">雙擊睡眠</string>
-    <string name="double_tap_sleep_off">「雙擊睡眠不會關閉螢幕」</string>
-    <string name="double_tap_sleep_on">在狀態列或鎖定狀態下點兩下，就會關閉螢幕</string>
     <string name="battery_style_title">選擇一種電池風格</string>
     <string name="battery_show_percent_title">顯示電池百分比</string>
     <string name="battery_style_category_title">電池樣式</string>
@@ -60,7 +58,7 @@
     <string name="ntsb_enabled_title">啟用網路監視器</string>
     <string name="ntsb_position_title">網路監視器位置</string>
     <string name="ntsb_threshold_title">自動隱藏閾值</string>
-    <string name="ntsb_threshold_summary">「如果流量小於設定就隱藏...(Kilobytes)」</string>
+    <string name="ntsb_threshold_summary">「如果流量小於設定就隱藏…(Kilobytes)」</string>
     <string name="statusbar_general_options">狀態列選項</string>
     <string name="dual_tone_battery_title">啟用雙音電池表</string>
     <string name="dual_tone_battery_on_summary">開啟（僅適用於縱向圖示）</string>
@@ -108,7 +106,7 @@
     <string name="so_power_longpress_torch_title">長按電源開啟電筒</string>
     <string name="so_double_tap_wake_title">雙擊喚醒手機</string>
     <string name="so_double_tap_wake_summary">禁用單點喚醒</string>
-    <string name="doze_header">當螢幕關閉時...</string>
+    <string name="doze_header">當螢幕關閉時…</string>
     <string name="custom_themed_icons_title">自定義的主題圖示</string>
     <string name="custom_themed_icons_off">自定義圖示被禁用</string>
     <string name="custom_themed_icons_on">啟用自定義圖示</string>

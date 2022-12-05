@@ -85,7 +85,7 @@
     <string name="sbc_before_color">Text înainte de ceas</string>
     <string name="sbc_color">Ceas</string>
     <string name="sbc_after_color">Text după ceas</string>
-    <string name="network_settings_pref">Setări monitorizare rețea...</string>
+    <string name="network_settings_pref">Setări monitorizare rețea…</string>
     <string name="ntsb_far_left">Extrema stângă</string>
     <string name="ntsb_far_left_extra">Extrema stângă - Deasupra notificărilor</string>
     <string name="ntsb_mid_left">Mijloc-Stânga</string>
@@ -94,7 +94,7 @@
     <string name="ntsb_enabled_title">Activează monitorizarea rețelei</string>
     <string name="ntsb_position_title">Poziție monitorizare</string>
     <string name="ntsb_threshold_title">Prag de ascundere automată</string>
-    <string name="ntsb_threshold_summary">"Ascunde dacă traficul este mai mic de… (Kilobytes)"</string>
+    <string name="ntsb_threshold_summary">Ascunde dacă traficul este mai mic de… (Kilobytes)</string>
     <string name="network_mode_title">Stil monitorizare</string>
     <string name="network_colorful_title">Colorare</string>
     <string name="network_download_top">Viteză de descărcare sus</string>

@@ -45,8 +45,6 @@
     <string name="easy_unlock_summary">اگر برای اولین بار کار نکرد، دوباره امتحان کنید</string>
 
 
-    <string name="double_tap_sleep_off">دو ضربه صفحه را خاموش نمی کند</string>
-    <string name="double_tap_sleep_on">دو ضربه روی نوار وضعیت یا صفحه قفل، صفحه را خاموش می کند</string>
     <string name="battery_style_title">شکل باتری</string>
     <string name="battery_show_percent_title">نمایش درصد باتری</string>
     <string name="battery_style_category_title">شکل باتری</string>
@@ -86,7 +84,7 @@
     <string name="ntsb_category_title">مانیتور شبکه</string>
     <string name="ntsb_enabled_title">استفاده از مانیتور شبکه</string>
     <string name="ntsb_position_title">موقعیت مانیتور</string>
-    <string name="ntsb_threshold_summary">"اگر ترافیک کمتر از… (کیلوبایت) باشد پنهان شود"</string>
+    <string name="ntsb_threshold_summary">اگر ترافیک کمتر از… (کیلوبایت) باشد پنهان شود</string>
     <string name="network_mode_title">شکل مانیتور</string>
     <string name="network_colorful_title">رنگارنگش کن</string>
     <string name="network_download_top">اول سرعت دانلود</string>
@@ -128,7 +126,7 @@
     <string name="qs_haptic_switch_title">لرزش در هنگام انتخاب تنظیمات سریع</string>
     <string name="qs_rows_number">تعداد ردیفهای تنظیمات سریع</string>
     <string name="qs_cols_number">تعداد ستونهای تنظیمات سریع</string>
-    <string name="qqs_tiles_number">" حداکثر آیتمهای تنظیمات سریع در QQS (حداکثر 2 ردیف)"</string>
+    <string name="qqs_tiles_number">حداکثر آیتمهای تنظیمات سریع در QQS (حداکثر 2 ردیف)</string>
     <string name="qs_tile_label_size">اندازه فونت تنظیمات سریع</string>
     <string name="qs_tile_secondary_label_size">اندازه فونت زیر نویس تنظیمات سریع</string>
     <string name="qs_general_options">گزینه های تنظیمات سریع</string>
@@ -289,7 +287,7 @@
     <string name="taskbar_force_disable_title">غیر فعال باشد</string>
     <string name="force_no_cutout">فرض کن صفحه نمایش بریدگی دوربین ندارد</string>
     <string name="so_taptaptorch_title">استفاده از امکان کنترل چراغ قوه با دوضربه در صفحه قفل</string>
-    <string name="overscroll_on_summary">"مهم: هر برنامه که این امکان مورد نیاز است باید در LSposed اضافه شود "</string>
+    <string name="overscroll_on_summary">مهم: هر برنامه که این امکان مورد نیاز است باید در LSposed اضافه شود</string>
     <string name="minutes_word">دقیقه</string>
     <string name="menu_settings_title">ذخیره/بازیابی</string>
     <string name="menu_restartSysUI">راه اندازی مجدد SystemUI</string>
@@ -300,7 +298,7 @@
     <string name="more_area">مساحت بیشتر</string>
     <string name="less_area">مساحت کمتر</string>
     <string name="keyguard_dim_amount_title">تیرگی تصویر در صفحه قفل</string>
-    <string name="hide_privacychip_title">" حذف نشانگرهای استفاده از دوربین و میکروفون"</string>
+    <string name="hide_privacychip_title">حذف نشانگرهای استفاده از دوربین و میکروفون</string>
     <string name="qs_footer_text_value">متن مورد نظر را وارد کنید</string>
     <string name="qs_flashlight_level_global_title">درجه نور چراغ قوه همه جا اعمال گردد</string>
     <string name="qs_qr_tile_inactive_title">رنگ کلید اسکن بارکد معکوس شود</string>
@@ -332,7 +330,7 @@
     <string name="gesture_nav_left_swipe_up_percent">پهنای حساس به کشیدن به بالا - چپ</string>
     <string name="gesture_nav_right_swipe_up_title">کشیدن بالا از سمت راست پایین</string>
     <string name="gesture_nav_left_swipe_up_title">کشیدن بالا از سمت چپ پایین</string>
-    <string name="gesture_nav_long_swipe_fc_title">"بستن برنامه با کشیدن بالا از پایین تا بالای صفحه "</string>
+    <string name="gesture_nav_long_swipe_fc_title">بستن برنامه با کشیدن بالا از پایین تا بالای صفحه</string>
     <string name="gesture_nav_extra_cat">حرکات از پایین صفحه</string>
     <string name="brightness_range_not_linear">این محدوده خطی نیست: بعضی اوقات باید آزمون و خطا کنید</string>
     <string name="brightness_range_title">محدوده مجاز نور صفحه</string>

@@ -46,7 +46,15 @@ public class QSQuickPullDown extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
+		Class<?> NotificationPanelViewControllerClass;
+		try
+		{ //A13 R18
+			NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
+		}
+		catch (Throwable ignored)
+		{
+			NotificationPanelViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
+		}
 
 		if (Build.VERSION.SDK_INT == 33) { //A13
 			hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {

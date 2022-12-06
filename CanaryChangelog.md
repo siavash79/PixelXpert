@@ -1,7 +1,6 @@
 **canary-177**  
 - Fixed QS Quick pulldown on 13 R18  
 - Fixed UDFPS color on 13 R18  
-- Fixed pin entry not shuffling after correct entry when easy unlock is enabled  
   
 **canary-176**  
 - Fixed pin entry not shuffling after correct entry when easy unlock is enabled  

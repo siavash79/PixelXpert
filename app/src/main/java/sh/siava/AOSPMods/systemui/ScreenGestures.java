@@ -4,7 +4,6 @@ package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -17,7 +16,6 @@ import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -173,21 +171,23 @@ public class ScreenGestures extends XposedModPack {
 	private void hookTouchHandler(XC_MethodHook.MethodHookParam param, Object mTouchHandler) {
 		Object ThisNotificationPanel = param.thisObject;
 
-		findAndHookMethod(mTouchHandler.getClass(),
-				"onTouch", View.class, MotionEvent.class, new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (!doubleTapToSleepStatusbarEnabled) return;
+		XC_MethodHook touchHook = new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if (!doubleTapToSleepStatusbarEnabled) return;
 
-						//double tap to sleep, statusbar only
-						if (!(boolean) getObjectField(ThisNotificationPanel, "mPulsing")
-								&& !(boolean) getObjectField(ThisNotificationPanel, "mDozing")
-								&& (int) getObjectField(ThisNotificationPanel, "mBarState") == SHADE
-								&& (boolean) callMethod(ThisNotificationPanel, "isFullyCollapsed")) {
-							mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[1]);
-						}
-					}
-				});
+				//double tap to sleep, statusbar only
+				if (!(boolean) getObjectField(ThisNotificationPanel, "mPulsing")
+						&& !(boolean) getObjectField(ThisNotificationPanel, "mDozing")
+						&& (int) getObjectField(ThisNotificationPanel, "mBarState") == SHADE
+						&& (boolean) callMethod(ThisNotificationPanel, "isFullyCollapsed")) {
+					mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[param.args.length-1]);
+				}
+			}
+		};
+
+		hookAllMethods(mTouchHandler.getClass(), "handleTouchEvent", touchHook); //A13 R18
+		hookAllMethods(mTouchHandler.getClass(), "onTouch", touchHook); //older
 	}
 
 	private void setHooks(XC_MethodHook.MethodHookParam param) {

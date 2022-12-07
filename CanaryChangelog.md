@@ -1,3 +1,6 @@
+**canary-179**  
+- Fixed Statusbar double tap to sleep on 13 R18  
+  
 **canary-178**  
 - Fixed lockscreen double tap actions on 13 R18  
   

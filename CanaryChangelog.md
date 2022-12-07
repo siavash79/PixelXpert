@@ -1,3 +1,6 @@
+**canary-178**  
+- Fixed lockscreen double tap actions on 13 R18  
+  
 **canary-177**  
 - Fixed QS Quick pulldown on 13 R18  
 - Fixed UDFPS color on 13 R18  

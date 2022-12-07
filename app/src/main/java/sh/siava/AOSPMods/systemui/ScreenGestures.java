@@ -80,9 +80,19 @@ public class ScreenGestures extends XposedModPack {
 			}
 		});
 
-		Class<?> NotificationShadeWindowViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);
+		Class<?> NotificationShadeWindowViewControllerClass;
+		Class<?> NotificationPanelViewControllerClass;
+		try
+		{ //A13 R18
+			NotificationShadeWindowViewControllerClass = findClass("com.android.systemui.shade.NotificationShadeWindowViewController", lpparam.classLoader);
+			NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
+		}
+		catch (Throwable ignored)
+		{ //Older
+			NotificationShadeWindowViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);
+			NotificationPanelViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
+		}
 		Class<?> DozeTriggersClass = findClass("com.android.systemui.doze.DozeTriggers", lpparam.classLoader);
-		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
 		Class<?> KeyguardAbsKeyInputViewControllerClass = findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
 
 		hookAllMethods(KeyguardAbsKeyInputViewControllerClass, "onUserInput", new XC_MethodHook() {
@@ -127,10 +137,15 @@ public class ScreenGestures extends XposedModPack {
 				}
 			});
 
+			Class<?> finalNotificationPanelViewControllerClass = NotificationPanelViewControllerClass;
 			hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-					Object mTouchHandler = NotificationPanelViewControllerClass.getField("mTouchHandler").get(param.thisObject);
+					Object mTouchHandler = finalNotificationPanelViewControllerClass.getField("mStatusBarViewTouchEventHandler").get(param.thisObject);
+					if(mTouchHandler == null)
+					{
+						mTouchHandler = finalNotificationPanelViewControllerClass.getField("mTouchHandler").get(param.thisObject);
+					}
 					hookTouchHandler(param, mTouchHandler);
 				}
 			});
@@ -176,7 +191,11 @@ public class ScreenGestures extends XposedModPack {
 	}
 
 	private void setHooks(XC_MethodHook.MethodHookParam param) {
-		Object mGestureDetector = getObjectField(param.thisObject, "mGestureDetector");
+		Object mGestureDetector = getObjectField(param.thisObject, "mPulsingWakeupGestureHandler");//A13 R18
+		if(mGestureDetector == null)
+		{
+			mGestureDetector = getObjectField(param.thisObject, "mGestureDetector"); //older
+		}
 		Object mListener = getObjectField(mGestureDetector, "mListener");
 
 		Object mStatusBarKeyguardViewManager = getObjectField(param.thisObject,
@@ -187,34 +206,36 @@ public class ScreenGestures extends XposedModPack {
 		Object mStatusBarStateController = getObjectField(param.thisObject, "mStatusBarStateController");
 
 		//used in double tap to wake in AOD plan
-		findAndHookMethod(mListener.getClass(),
-				"onSingleTapConfirmed", MotionEvent.class, new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
-						if (doubleTapToWake)
-							param1.setResult(false);
-					}
-				});
+		XC_MethodHook singleTapHook = new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
+				if (doubleTapToWake)
+					param1.setResult(false);
+			}
+		};
+		hookAllMethods(mListener.getClass(), "onSingleTapUp", singleTapHook); //A13 R18
+		hookAllMethods(mListener.getClass(), "onSingleTapConfirmed", singleTapHook); //older
 
 		//used in double tap detection in AOD
-		findAndHookMethod(mListener.getClass(),
-				"onDoubleTap", MotionEvent.class, new XC_MethodHook() {
+		XC_MethodHook doubleTapHook = new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
+				if (SystemClock.uptimeMillis() - lastButtonClick < 300) {
+					return;
+				}
+				doubleTap = true;
+				new Timer().schedule(new TimerTask() {
 					@Override
-					protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
-						if (SystemClock.uptimeMillis() - lastButtonClick < 300) {
-							return;
-						}
-						doubleTap = true;
-						new Timer().schedule(new TimerTask() {
-							@Override
-							public void run() {
-								doubleTap = false;
-							}
-						}, HOLD_DURATION * 2);
-
-						isDozing = (boolean) callMethod(mStatusBarStateController, "isDozing");
+					public void run() {
+						doubleTap = false;
 					}
-				});
+				}, HOLD_DURATION * 2);
+
+				isDozing = (boolean) callMethod(mStatusBarStateController, "isDozing");
+			}
+		};
+		hookAllMethods(mListener.getClass(), "onDoubleTapEvent", doubleTapHook); //A13 R18
+		hookAllMethods(mListener.getClass(), "onDoubleTap", doubleTapHook); //older
 
 		//detect hold event for TTT and DTS on lockscreen
 		hookAllMethods(mGestureDetector.getClass(), "onTouchEvent", new XC_MethodHook() {

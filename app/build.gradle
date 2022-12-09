@@ -55,7 +55,6 @@ dependencies {
 	compileOnly files('lib/api-82.jar')
 	compileOnly files('lib/api-82-sources.jar')
 
-	implementation project(path: ':renderscript-toolkit')
 	implementation project(path: ':RangeSliderPreference')
 
 	implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

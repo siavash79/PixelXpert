@@ -31,14 +31,12 @@ import sh.siava.AOSPMods.systemui.FlashLightLevel;
 import sh.siava.AOSPMods.systemui.GestureNavbarManager;
 import sh.siava.AOSPMods.systemui.KeyGuardPinScrambler;
 import sh.siava.AOSPMods.systemui.KeyguardMods;
-import sh.siava.AOSPMods.systemui.LockscreenAlbumArt;
 import sh.siava.AOSPMods.systemui.MultiStatusbarRows;
 import sh.siava.AOSPMods.systemui.NotificationExpander;
 import sh.siava.AOSPMods.systemui.NotificationManager;
 import sh.siava.AOSPMods.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.QSThemeManager;
-import sh.siava.AOSPMods.systemui.QSThemeManager_12;
 import sh.siava.AOSPMods.systemui.QSTileGrid;
 import sh.siava.AOSPMods.systemui.ScreenGestures;
 import sh.siava.AOSPMods.systemui.ScreenshotController;
@@ -74,9 +72,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(BrightnessSlider.class); //13 OK
 		modPacks.add(FeatureFlagsMods.class); //13 OK
 		modPacks.add(ThreeButtonNavMods.class); //13 not planned//13 OK
-		modPacks.add(LockscreenAlbumArt.class); //13 not planned
 		modPacks.add(QSThemeManager.class); //A13 LightQSTheme
-		modPacks.add(QSThemeManager_12.class); //A12 LightQSTheme
 		modPacks.add(ScreenGestures.class); //13 OK
 		modPacks.add(miscSettings.class); //13 OK except for internet tile
 		modPacks.add(AOSPSettingsLauncher.class); //13 OK

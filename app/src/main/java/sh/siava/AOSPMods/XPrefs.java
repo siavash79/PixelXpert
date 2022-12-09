@@ -22,13 +22,13 @@ public class XPrefs implements IXposedHookZygoteInit {
 
 	static SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything(packageName, key);
 
-	public static void loadPrefs(Context context) {
+	public static void init(Context context)
+	{
 		packageName = context.getPackageName();
 		Xprefs = new RemotePreferences(context, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
 		log("AOSPMods Version: " + BuildConfig.VERSION_NAME);
 		log("AOSPMods Records: " + Xprefs.getAll().keySet().size());
 		Xprefs.registerOnSharedPreferenceChangeListener(listener);
-		loadEverything(context.getPackageName());
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package sh.siava.AOSPMods;
 
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 
 import android.app.Instrumentation;
 import android.content.Context;
@@ -110,9 +111,15 @@ public class AOSPMods implements IXposedHookLoadPackage {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		isSecondProcess = lpparam.processName.contains(":");
 
-		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && false) {
+		//If example class isn't found, user is using an older version. Don't load the module at all
+		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE)) {
+			Class<?> A33R18Example = findClassIfExists("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
+			if (A33R18Example == null) return;
+		}
+
+		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && BuildConfig.DEBUG) {
 			log("------------");
-			Helpers.dumpClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
+			Helpers.dumpClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
 			log("------------");
 		}
 

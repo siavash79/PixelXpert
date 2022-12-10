@@ -9,6 +9,7 @@ import static de.robv.android.xposed.XposedHelpers.setFloatField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -27,7 +28,7 @@ public class NotificationIconContainerOverride {
 	private static final int NO_VALUE = Integer.MIN_VALUE;
 
 	public static void calculateIconTranslations(XC_MethodHook.MethodHookParam param) { //A12
-		FrameLayout thisObject = (FrameLayout) param.thisObject;
+		ViewGroup thisObject = (ViewGroup) param.thisObject;
 
 		Object mIconStates = getObjectField(thisObject, "mIconStates");
 
@@ -126,7 +127,7 @@ public class NotificationIconContainerOverride {
 	}
 
 	public static void calculateIconXTranslations(XC_MethodHook.MethodHookParam param) { //A13
-		FrameLayout thisObject = (FrameLayout) param.thisObject;
+		ViewGroup thisObject = (ViewGroup) param.thisObject;
 
 		Object mIconStates = getObjectField(thisObject, "mIconStates");
 

@@ -132,7 +132,7 @@ public class StatusbarMods extends XposedModPack {
 	private Object mActivityStarter;
 	private Object KIC = null;
 	private Object QSBH = null;
-	private View mStatusBar;
+	private ViewGroup mStatusBar;
 
 	private Object mCollapsedStatusBarFragment = null;
 	private ViewGroup mClockParent = null;
@@ -146,7 +146,7 @@ public class StatusbarMods extends XposedModPack {
 
 	private View mClockView;
 	@SuppressWarnings("FieldCanBeLocal")
-	private FrameLayout mNotificationIconContainer;
+	private ViewGroup mNotificationIconContainer;
 	private LinearLayout mLeftVerticalSplitContainer;
 	private LinearLayout mLeftExtraRowContainer;
 	private static float SBPaddingStart = 0, SBPaddingEnd = 0;
@@ -416,7 +416,6 @@ public class StatusbarMods extends XposedModPack {
 		//region needed classes
 		Class<?> ActivityStarterClass = findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
 		Class<?> DependencyClass = findClass("com.android.systemui.Dependency", lpparam.classLoader);
-		Class<?> CollapsedStatusBarFragmentClass;
 		Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
 		Class<?> KeyguardStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
 //        Class<?> QuickStatusBarHeaderControllerClass = findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
@@ -428,6 +427,8 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> NotificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
 		StatusBarIcon = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
+		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
+		//endregion
 
 		//region privacy chip
 		Class<?> SystemEventCoordinatorClass = findClassIfExists("com.android.systemui.statusbar.events.SystemEventCoordinator", lpparam.classLoader);
@@ -446,13 +447,6 @@ public class StatusbarMods extends XposedModPack {
 					});
 				}
 			});
-		}
-		//endregion
-
-		CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
-
-		if (CollapsedStatusBarFragmentClass == null) {
-			CollapsedStatusBarFragmentClass = findClass("com.android.systemui.statusbar.phone.CollapsedStatusBarFragment", lpparam.classLoader);
 		}
 		//endregion
 
@@ -570,12 +564,23 @@ public class StatusbarMods extends XposedModPack {
 		//marking clock instances for recognition and setting click actions on some icons
 		findAndHookMethod(QuickStatusBarHeaderClass,
 				"onFinishInflate", new XC_MethodHook() {
+					@SuppressLint("DiscouragedApi")
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						//Getting QS text color for Network traffic
-						@SuppressLint("DiscouragedApi") int fillColor = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
-								mContext,
-								mContext.getResources().getIdentifier("@android:attr/textColorPrimary", "attr", mContext.getPackageName()));
+						int fillColor;
+						try
+						{
+							fillColor = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+									mContext.getResources().getIdentifier("@android:attr/textColorPrimary", "attr", mContext.getPackageName()),
+									mContext);
+						}
+						catch (Throwable ignored)
+						{
+							fillColor = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+									mContext,
+									mContext.getResources().getIdentifier("@android:attr/textColorPrimary", "attr", mContext.getPackageName()));
+						}
 						NetworkTraffic.setTintColor(fillColor, false);
 
 						//Clickable icons
@@ -653,6 +658,7 @@ public class StatusbarMods extends XposedModPack {
 		//modding clock, adding additional objects,
 		findAndHookMethod(CollapsedStatusBarFragmentClass,
 				"onViewCreated", View.class, Bundle.class, new XC_MethodHook() {
+					@SuppressLint("DiscouragedApi")
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 
@@ -669,17 +675,20 @@ public class StatusbarMods extends XposedModPack {
 
 						mClockParent = (ViewGroup) mClockView.getParent();
 
-						mSystemIconArea = (LinearLayout) getObjectField(param.thisObject, "mSystemIconArea");
+						mStatusBar = (ViewGroup) getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
 
-						mStatusBar = (View) getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
+						mSystemIconArea = mStatusBar.findViewById(mContext.getResources().getIdentifier("statusIcons", "id", mContext.getPackageName()));
+
 						fullStatusbar = (FrameLayout) mStatusBar.getParent();
 
 						try {
 							mCenteredIconArea = (View) ((View) getObjectField(param.thisObject, "mCenteredIconArea")).getParent();
 						} catch (Throwable ignored) {
 							mCenteredIconArea = new LinearLayout(mContext);
-							mCenteredIconArea.setLayoutParams(new LinearLayout.LayoutParams(-2, -1));
-							((ViewGroup) mSystemIconArea.getParent()).addView(mCenteredIconArea, 2);
+							FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+							lp.gravity = Gravity.CENTER;
+							mCenteredIconArea.setLayoutParams(lp);
+							mStatusBar.addView(mCenteredIconArea);
 						}
 
 						makeLeftSplitArea();
@@ -706,7 +715,6 @@ public class StatusbarMods extends XposedModPack {
 							setShowVibrationIcon();
 						}
 						//</Showing vibration icon in collapsed statusbar>
-
 
 						//<modding clock>
 						placeClock();
@@ -764,8 +772,8 @@ public class StatusbarMods extends XposedModPack {
 	//region double row left area
 	@SuppressLint("DiscouragedApi")
 	private void makeLeftSplitArea() {
+//		if (true) return;
 		mNotificationIconContainer = mNotificationIconAreaInner.findViewById(mContext.getResources().getIdentifier("notificationIcons", "id", mContext.getPackageName()));
-
 		if (mLeftVerticalSplitContainer == null) {
 			mLeftVerticalSplitContainer = new LinearLayout(mContext);
 		} else {
@@ -798,7 +806,7 @@ public class StatusbarMods extends XposedModPack {
 
 		mLeftVerticalSplitContainer.addView(mLeftExtraRowContainer);
 		mLeftVerticalSplitContainer.addView(mNotificationIconContainer);
-		mNotificationIconAreaInner.addView(mLeftVerticalSplitContainer);
+		parent.addView(mLeftVerticalSplitContainer);
 	}
 	//end region
 
@@ -927,7 +935,7 @@ public class StatusbarMods extends XposedModPack {
 			LinearLayout.LayoutParams ntsbLayoutP;
 			switch (networkTrafficPosition) {
 				case POSITION_RIGHT:
-					mSystemIconArea.addView(networkTrafficSB, 0);
+					((ViewGroup)mSystemIconArea.getParent()).addView(networkTrafficSB, 0);
 					networkTrafficSB.setPadding(rightClockPadding, 0, leftClockPadding, 0);
 					break;
 				case POSITION_LEFT:

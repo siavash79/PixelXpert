@@ -1,3 +1,6 @@
+**canary-181**  
+- Fixed multi row system icons on statusbar for A13 R18  
+  
 **canary-180**  
 - Fixed statusbar mods for A13 R18  
 - Added built-in boot/load loop protector  

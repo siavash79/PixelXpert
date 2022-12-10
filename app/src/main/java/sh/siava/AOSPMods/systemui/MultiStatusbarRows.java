@@ -1,6 +1,7 @@
 package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
@@ -59,7 +60,7 @@ public class MultiStatusbarRows extends XposedModPack {
 					View linear = (View) param.args[0];
 
 					String id = mContext.getResources().getResourceName(((View) linear.getParent().getParent()).getId()); //helps getting exception if it's in QS
-					if (!id.contains("system_icon_area")) return;
+					if (!id.contains("status_bar_end_side_content")) return;
 
 					FlexStatusIconContainer flex = new FlexStatusIconContainer(mContext, lpparam.classLoader);
 					flex.setPadding(linear.getPaddingLeft(), 0, linear.getPaddingRight(), 0);

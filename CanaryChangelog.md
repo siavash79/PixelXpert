@@ -1,3 +1,7 @@
+**canary-180**  
+- Fixed statusbar mods for A13 R18  
+- Added built-in boot/load loop protector  
+  
 **canary-179**  
 - Fixed Statusbar double tap to sleep on 13 R18  
   

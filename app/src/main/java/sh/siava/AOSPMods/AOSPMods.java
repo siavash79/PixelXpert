@@ -42,7 +42,7 @@ import sh.siava.AOSPMods.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.systemui.QSThemeManager;
 import sh.siava.AOSPMods.systemui.QSTileGrid;
 import sh.siava.AOSPMods.systemui.ScreenGestures;
-import sh.siava.AOSPMods.systemui.ScreenshotController;
+import sh.siava.AOSPMods.systemui.ScreenshotMuter;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.ThreeButtonNavMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
@@ -88,7 +88,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(BatteryStyleManager.class); //13 OK
 		modPacks.add(GestureNavbarManager.class); //13 OK
 		modPacks.add(QSFooterTextManager.class); //13 OK
-		modPacks.add(ScreenshotController.class); //13 OK
+		modPacks.add(ScreenshotMuter.class); //13 OK
 		modPacks.add(ScreenOffKeys.class); //13 OK
 		modPacks.add(TaskbarActivator.class); //13 OK
 		modPacks.add(KeyGuardPinScrambler.class); //13 OK

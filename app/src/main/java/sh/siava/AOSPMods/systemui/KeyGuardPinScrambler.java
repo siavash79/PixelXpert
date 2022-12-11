@@ -8,7 +8,6 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
-import static sh.siava.AOSPMods.utils.Helpers.findAndDumpClass;
 
 import android.content.Context;
 
@@ -48,7 +47,7 @@ public class KeyGuardPinScrambler extends XposedModPack {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
 		Class<?> NumPadKeyClass = findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);
-		Class<?> KeyguardAbsKeyInputViewControllerClass = findAndDumpClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
+		Class<?> KeyguardAbsKeyInputViewControllerClass = findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
 
 		Collections.shuffle(digits);
 

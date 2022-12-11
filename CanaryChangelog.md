@@ -1,3 +1,6 @@
+**canary-182**  
+- Fixed screenshot ANR/FC on A13 R18  
+  
 **canary-181**  
 - Fixed multi row system icons on statusbar for A13 R18  
   

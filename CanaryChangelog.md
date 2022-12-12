@@ -1,3 +1,6 @@
+**canary-183**  
+- Fixed lockscreen mods on A13 R18 (lockscreen shortcut mods removed until further notice)  
+  
 **canary-182**  
 - Fixed screenshot ANR/FC on A13 R18  
   

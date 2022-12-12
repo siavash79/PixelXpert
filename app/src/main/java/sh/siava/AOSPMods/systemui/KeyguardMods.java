@@ -1,7 +1,9 @@
 package sh.siava.AOSPMods.systemui;
 
+import static android.view.View.GONE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -10,12 +12,16 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
+import static sh.siava.AOSPMods.utils.Helpers.dumpClass;
+import static sh.siava.AOSPMods.utils.Helpers.findAndDumpClass;
 
 import android.annotation.SuppressLint;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.provider.MediaStore;
 import android.util.TypedValue;
@@ -25,10 +31,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowCollector;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.StringFormatter;
@@ -60,7 +76,9 @@ public class KeyguardMods extends XposedModPack {
 	private static String KGMiddleCustomText = "";
 	LinearLayout mStatusArea = null;
 	private Object KGCS;
+	private Object mColorExtractor;
 	private boolean mDozing = false;
+	private boolean mSupportsDarkText = false;
 
 	//region keyguardDimmer
 	public static float KeyGuardDimAmount = -1f;
@@ -148,15 +166,24 @@ public class KeyguardMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
 		Class<?> CarrierTextControllerClass = findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
-		Class<?> KeyguardSliceViewClass = findClass("com.android.keyguard.KeyguardSliceView$Row", lpparam.classLoader);
+//		Class<?> KeyguardSliceViewClass = findClass("com.android.keyguard.KeyguardSliceView", lpparam.classLoader);
 		Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
 		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpparam.classLoader);
 		Class<?> KeyguardIndicationControllerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
-		Class<?> KeyguardbottomAreaViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
+		Class<?> KeyguardBottomAreaViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
 		Class<?> UtilClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
 		Class<?> KeyguardStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarView", lpparam.classLoader);
+		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
+
+		//needed to extract wallpaper colors and capabilities. This is a SysUIColorExtractor
+		hookAllConstructors(CentralSurfacesImplClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				mColorExtractor = getObjectField(param.thisObject, "mColorExtractor");
+			}
+		});
 
 		//region hide user avatar
 		hookAllMethods(KeyguardStatusBarViewClass, "updateVisibilities", new XC_MethodHook() {
@@ -166,17 +193,20 @@ public class KeyguardMods extends XposedModPack {
 				boolean mIsUserSwitcherEnabled = getBooleanField(param.thisObject, "mIsUserSwitcherEnabled");
 				mMultiUserAvatar.setVisibility(!HideLockScreenUserAvatar && mIsUserSwitcherEnabled
 						? View.VISIBLE
-						: View.GONE);
+						: GONE);
 			}
 		});
 		//endregion
 
+/*disabled until futher notice
 		//region keyguard bottom area shortcuts and transparency
 		//convert wallet button to camera button
-		findAndHookMethod(KeyguardbottomAreaViewClass,
+		hookAllMethods(KeyguardBottomAreaViewClass,
 				"onFinishInflate", new XC_MethodHook() {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						if(true) return;
+
 						mWalletButton = (ImageView) getObjectField(param.thisObject, "mWalletButton");
 						mControlsButton = (ImageView) getObjectField(param.thisObject, "mControlsButton");
 						thisObject = param.thisObject;
@@ -191,7 +221,7 @@ public class KeyguardMods extends XposedModPack {
 				});
 
 		//make sure system won't play with our button
-		findAndHookMethod(KeyguardbottomAreaViewClass.getName() + "$" + "WalletCardRetriever", lpparam.classLoader,
+		findAndHookMethod(KeyguardBottomAreaViewClass.getName() + "$" + "WalletCardRetriever", lpparam.classLoader,
 				"onWalletCardsRetrieved", "android.service.quickaccesswallet.GetWalletCardsResponse", new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -201,7 +231,7 @@ public class KeyguardMods extends XposedModPack {
 				});
 
 		//make sure system won't play with our button
-		hookAllMethods(KeyguardbottomAreaViewClass,
+		hookAllMethods(KeyguardBottomAreaViewClass,
 				"updateControlsVisibility", new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -212,7 +242,7 @@ public class KeyguardMods extends XposedModPack {
 				});
 
 		//make sure system won't play with our button
-		findAndHookMethod(KeyguardbottomAreaViewClass,
+		findAndHookMethod(KeyguardBottomAreaViewClass,
 				"updateWalletVisibility", new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -223,7 +253,7 @@ public class KeyguardMods extends XposedModPack {
 				});
 
 		//Transparent background
-		findAndHookMethod(KeyguardbottomAreaViewClass,
+		findAndHookMethod(KeyguardBottomAreaViewClass,
 				"updateAffordanceColors", new XC_MethodHook() {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -243,7 +273,7 @@ public class KeyguardMods extends XposedModPack {
 				});
 
 		//Set camera intent to be always secure when launchd from keyguard screen
-		findAndHookMethod(KeyguardbottomAreaViewClass.getName() + "$DefaultRightButton", lpparam.classLoader,
+		findAndHookMethod(KeyguardBottomAreaViewClass.getName() + "$DefaultRightButton", lpparam.classLoader,
 				"getIntent", new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -253,7 +283,7 @@ public class KeyguardMods extends XposedModPack {
 					}
 				});
 		//endregion
-
+*/
 		//region keyguard battery info
 		hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", new XC_MethodHook() {
 			@SuppressLint("DefaultLocale")
@@ -298,7 +328,7 @@ public class KeyguardMods extends XposedModPack {
         /* might be useful later
         Class<?> AnimatableClockControllerClass = findClass("com.android.keyguard.AnimatableClockController", lpparam.classLoader);
         Class<?> KeyguardClockSwitchControllerClass = findClass("com.android.keyguard.KeyguardClockSwitchController", lpparam.classLoader);
-        Class<?> DefaultClockControllerClass = findClass("com.android.keyguard.clock.DefaultClockController", lpparam.classLoader);
+
         Class<?> AvailableClocksClass = findClass("com.android.keyguard.clock.ClockManager$AvailableClocks", lpparam.classLoader);*/
 
 		//region keyguardDimmer
@@ -341,12 +371,12 @@ public class KeyguardMods extends XposedModPack {
 			}
 		}).size();
 
-		hookAllMethods(KeyguardSliceViewClass, "setDarkAmount", new XC_MethodHook() {
+		//a way to know when the device goes to AOD/dozing
+		hookAllMethods(KeyguardIndicationControllerClass, "updateDeviceEntryIndication", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				boolean isDozing = ((float) param.args[0]) > .5f;
-				if (mDozing != isDozing) {
-					mDozing = isDozing;
+				if (mDozing != (boolean) getObjectField(param.thisObject, "mDozing")) {
+					mDozing = !mDozing;
 					setMiddleColor();
 				}
 			}
@@ -396,7 +426,7 @@ public class KeyguardMods extends XposedModPack {
 
 		if (mDozing) // AOD is showing
 		{
-			Button.setVisibility(View.GONE);
+			Button.setVisibility(GONE);
 		} else {
 			Button.setVisibility(View.VISIBLE);
 		}
@@ -426,13 +456,16 @@ public class KeyguardMods extends XposedModPack {
 			Button.setClickable(true);
 			Button.setVisibility(View.VISIBLE);
 		} else {
-			Button.setVisibility(View.GONE);
+			Button.setVisibility(GONE);
 		}
 	}
 	//endregion
 
 	private void setMiddleColor() {
-		boolean mSupportsDarkText = getBooleanField(KGCS, "mSupportsDarkText");
+		if(mColorExtractor != null) {
+			Object colors = callMethod(mColorExtractor, "getColors", WallpaperManager.FLAG_LOCK);
+			mSupportsDarkText = (boolean) callMethod(colors, "supportsDarkText");
+		}
 		int color = (mDozing || !mSupportsDarkText) ? Color.WHITE : Color.BLACK;
 
 		KGMiddleCustomTextView.setShadowLayer(1, 1, 1, color == Color.BLACK ? Color.TRANSPARENT : Color.BLACK); //shadow only for white color

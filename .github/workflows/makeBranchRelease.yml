@@ -1,0 +1,85 @@
+name: Make Release
+
+on:
+  push:
+    branches: 'v2.4.x'
+    tags: '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Grab Source
+        run: git clone --branch v2.4.x --single-branch --recurse-submodules https://github.com/siavash79/AOSPMods.git .
+
+      - name: Setup JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant permission shell scripts
+        run: chmod +x .github/*.sh
+
+      - name: Update Versions
+        run: .github/bumpVersion.sh
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew assembleRelease
+
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app APK
+        id: sign_app
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "33.0.0"
+
+      - name: Run the zip script
+        run: .github/make_zip.sh
+
+      - name: Upload Zip
+        uses: actions/upload-artifact@v2
+        with:
+          name: AOSPMods.zip
+          path: output
+
+      - name: Release the binaries
+        uses: Hs1r1us/Release-AIO@v1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          body_path: 'releaseNotes.md'
+          prerelease: false
+          draft: true
+          asset_files: 'output'
+
+      - name: Commit version bump
+        uses: github-actions-x/commit@v2.9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'stable'
+          commit-message: 'Version update: Release'
+          force-add: 'true'
+          files: MagiskModBase/module.prop MagiskModAddon/module.prop app/build.gradle
+          name: GitHub
+          email: aospmods@siava.sh
+
+      - name: Inform Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: ${{ env.TMessage }}
+          format: markdown

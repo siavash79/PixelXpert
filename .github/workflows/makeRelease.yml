@@ -2,6 +2,7 @@ name: Make Release
 
 on:
   push:
+    branches: 'stable'
     tags: '*'
 
 jobs:

@@ -40,6 +40,7 @@ public class SystemUtils {
 
 	@SuppressLint("StaticFieldLeak")
 	static SystemUtils instance;
+	private final boolean mCameraListenerEnabled;
 	private Handler mHandler = null;
 
 	Context mContext;
@@ -176,25 +177,27 @@ public class SystemUtils {
 		}
 	}
 
-	public SystemUtils(Context context) {
+	public SystemUtils(Context context, boolean enableCameraListener) {
 		mContext = context;
+		mCameraListenerEnabled = enableCameraListener;
 
 		instance = this;
 
 		//Camera and Flash
-		try {
-			HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
-			thread.start();
-			mHandler = new Handler(thread.getLooper());
-			mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
+		if(mCameraListenerEnabled) {
+			try {
+				HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
+				thread.start();
+				mHandler = new Handler(thread.getLooper());
+				mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
 
-			mCameraManager.registerTorchCallback(torchCallback, mHandler);
-		} catch (Throwable t) {
-			if (BuildConfig.DEBUG) {
-				t.printStackTrace();
+				mCameraManager.registerTorchCallback(torchCallback, mHandler);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					t.printStackTrace();
+				}
 			}
 		}
-
 		//Connectivity
 		try {
 			mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -261,6 +264,8 @@ public class SystemUtils {
 	}
 
 	private void setFlashInternal(boolean enabled) {
+		if(!mCameraListenerEnabled) return;
+
 		try {
 			String flashID = getFlashID(mCameraManager);
 			if (flashID.equals("")) {
@@ -291,6 +296,8 @@ public class SystemUtils {
 	}
 
 	private boolean supportsFlashLevelsInternal() {
+		if(!mCameraListenerEnabled) return false;
+
 		try {
 			String flashID = getFlashID(mCameraManager);
 			if (flashID.equals("")) {
@@ -308,6 +315,8 @@ public class SystemUtils {
 	}
 
 	private void setFlashInternal(boolean enabled, float pct) {
+		if(!mCameraListenerEnabled) return;
+
 		try {
 			String flashID = getFlashID(mCameraManager);
 			if (flashID.equals("")) {

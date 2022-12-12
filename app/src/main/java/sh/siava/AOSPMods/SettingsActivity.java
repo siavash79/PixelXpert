@@ -388,10 +388,7 @@ public class SettingsActivity extends AppCompatActivity implements
 		}
 
 		private void updateVisibility(SharedPreferences sharedPreferences) {
-			findPreference("album_art_category").setVisible(Build.VERSION.SDK_INT < 33);
 			findPreference("carrierTextValue").setVisible(sharedPreferences.getBoolean("carrierTextMod", false));
-			findPreference("albumArtLockScreenBlurLevel").setSummary(sharedPreferences.getInt("albumArtLockScreenBlurLevel", 0) + "%");
-			findPreference("albumArtLockScreenBlurLevel").setVisible(sharedPreferences.getBoolean("albumArtLockScreenEnabled", false));
 
 			float KeyGuardDimAmount = -1;
 			try {

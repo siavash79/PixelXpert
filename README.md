@@ -1,3 +1,4 @@
+For Pixel Stock Andrdoid 12 and 13 (Up to Nov 2022 - AOSP 13R18): 
 [![Latest Release for A12 & A13 up to Nov 2022](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Download)](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)  
 
 [![Latest Release](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Download)](https://github.com/siavash79/AOSPMods/releases/latest)

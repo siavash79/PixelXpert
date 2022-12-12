@@ -1,3 +1,6 @@
+**canary-184**  
+- Fixed lockscreen mods on A13 R18  
+  
 **canary-183**  
 - Fixed lockscreen mods on A13 R18 (lockscreen shortcut mods removed until further notice)  
   

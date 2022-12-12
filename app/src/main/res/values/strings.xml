@@ -376,6 +376,7 @@
 
     <string name="own_prefs_header">AOSPMods settings</string>
     <string name="language_title">Language</string>
+    <string name="camera_manager_master_title">Enable flashlight mods (Disable this if your phone doesn\'t support them)</string>
     <string name="toggle_dark_apply">(Toggle dark theme to apply)</string>
 
     <string name="gesture_nav_extra_cat">Extra navigation bar gestures</string>

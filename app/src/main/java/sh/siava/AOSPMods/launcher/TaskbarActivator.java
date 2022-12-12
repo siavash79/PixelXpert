@@ -11,7 +11,6 @@ import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
-import static sh.siava.AOSPMods.utils.Helpers.dumpClass;
 
 import android.app.TaskInfo;
 import android.content.ComponentName;
@@ -170,7 +169,6 @@ public class TaskbarActivator extends XposedModPack {
 			}
 		});
 
-		dumpClass(RecentTasksListClass);
 		hookAllConstructors(RecentTasksListClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {

@@ -2,8 +2,7 @@ name: Make Release
 
 on:
   push:
-    branches: 'v2.4.x'
-    tags: '*'
+    tags: v2.4.*
 
 jobs:
   build:

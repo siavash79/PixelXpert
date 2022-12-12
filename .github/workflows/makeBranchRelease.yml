@@ -68,7 +68,7 @@ jobs:
         uses: github-actions-x/commit@v2.9
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          push-branch: 'stable'
+          push-branch: 'v2.4.x'
           commit-message: 'Version update: Release'
           force-add: 'true'
           files: MagiskModBase/module.prop MagiskModAddon/module.prop app/build.gradle

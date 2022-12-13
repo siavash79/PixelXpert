@@ -1,3 +1,6 @@
+**canary-186**  
+- Fixed NotificationExpander for 13 R18  
+  
 **canary-185**  
 - Fixed recent apps taskbar on A13 R18  
   

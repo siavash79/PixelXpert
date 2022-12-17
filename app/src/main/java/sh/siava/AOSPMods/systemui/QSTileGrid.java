@@ -12,9 +12,9 @@ import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.ResourceManager.resparams;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.VibrationEffect;
 import android.view.Gravity;
 import android.view.View;
@@ -155,6 +155,7 @@ public class QSTileGrid extends XposedModPack {
 		});
 
 		hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				try {
@@ -226,7 +227,7 @@ public class QSTileGrid extends XposedModPack {
 	private void fixPaddingVerticalLayout(LinearLayout parent) {
 		Resources res = mContext.getResources();
 
-		int padding = res.getDimensionPixelSize(
+		@SuppressLint("DiscouragedApi") int padding = res.getDimensionPixelSize(
 				res.getIdentifier(
 						"qs_tile_padding",
 						"dimen",
@@ -254,6 +255,7 @@ public class QSTileGrid extends XposedModPack {
 		}
 	}
 
+	@SuppressLint("DiscouragedApi")
 	private void setResources() {
 		XC_InitPackageResources.InitPackageResourcesParam ourResparam = resparams.get(listenPackage);
 

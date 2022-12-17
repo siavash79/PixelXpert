@@ -7,7 +7,6 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.view.View;
 
 import de.robv.android.xposed.XC_MethodHook;

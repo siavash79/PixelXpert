@@ -254,7 +254,7 @@ public class BatteryStyleManager extends XposedModPack {
 		XC_MethodHook batteryDataRefreshHook = new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				int level = (int) getIntField(param.thisObject, "mLevel");
+				int level = getIntField(param.thisObject, "mLevel");
 				boolean charging = getBooleanField(param.thisObject, "mPluggedIn")
 						|| getBooleanField(param.thisObject, "mCharging")
 						|| getBooleanField(param.thisObject, "mWirelessCharging");

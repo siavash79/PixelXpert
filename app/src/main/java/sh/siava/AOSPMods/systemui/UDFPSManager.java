@@ -10,7 +10,6 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
 import android.widget.ImageView;
 
 import de.robv.android.xposed.XC_MethodHook;

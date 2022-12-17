@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
@@ -14,9 +13,9 @@ import android.widget.LinearLayout;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
+import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.FlexStatusIconContainer;
 import sh.siava.AOSPMods.utils.SystemUtils;
-import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class MultiStatusbarRows extends XposedModPack {

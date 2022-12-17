@@ -56,13 +56,8 @@ public class AOSPSettingsLauncher extends XposedModPack {
 				"onViewAttached", new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						Object settingsButton;
-						if (Build.VERSION.SDK_INT == 33) { //A13
-							settingsButton = getObjectField(param.thisObject, "settingsButtonContainer");
-						} else //SDK 31, 32
-						{
-							settingsButton = getObjectField(param.thisObject, "settingsButton");
-						}
+						Object settingsButton = getObjectField(param.thisObject, "settingsButtonContainer");
+
 						activityStarter = getObjectField(param.thisObject, "activityStarter");
 						callMethod(settingsButton, "setOnLongClickListener", listener);
 					}

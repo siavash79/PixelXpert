@@ -177,9 +177,7 @@ public class GestureNavbarManager extends XposedModPack {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 						if (GesPillHeightFactor != 100) {
-							mRadius = (Build.VERSION.SDK_INT == 33)
-									? Math.round((float) getObjectField(param.thisObject, "mRadius")) //A13
-									: (int) getObjectField(param.thisObject, "mRadius"); //A12
+							mRadius = Math.round((float) getObjectField(param.thisObject, "mRadius"));
 
 							setObjectField(param.thisObject, "mRadius", Math.round(mRadius * GesPillHeightFactor / 100f));
 						}

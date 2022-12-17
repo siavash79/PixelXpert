@@ -142,7 +142,6 @@ public class StatusbarMods extends XposedModPack {
 	public static int clockColor = 0;
 	private FrameLayout fullStatusbar;
 	//    private Object STB = null;
-	private int centerAreaFineTune = 50;
 
 	private View mClockView;
 	@SuppressWarnings("FieldCanBeLocal")
@@ -200,9 +199,6 @@ public class StatusbarMods extends XposedModPack {
 		} catch (Throwable ignored) {
 			NotificationIconContainerOverride.MAX_ICONS_ON_AOD = 3;
 		}
-
-		centerAreaFineTune = Xprefs.getInt("centerAreaFineTune", 50);
-		tuneCenterArea();
 
 		List<Float> paddings = RangeSliderPreference.getValues(Xprefs, "statusbarPaddings", 0);
 
@@ -397,18 +393,6 @@ public class StatusbarMods extends XposedModPack {
 		}
 	}
 
-	//region general
-	private void tuneCenterArea() {
-		try {
-			int screenWidth = fullStatusbar.getMeasuredWidth();
-			int notificationWidth = (screenWidth * centerAreaFineTune / 100);
-			((ViewGroup) mNotificationIconAreaInner.getParent().getParent().getParent()).getLayoutParams().width = notificationWidth;
-			mSystemIconArea.getLayoutParams().width = screenWidth - notificationWidth;
-		} catch (Exception ignored) {
-		}
-	}
-	//endregion
-
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
@@ -537,7 +521,6 @@ public class StatusbarMods extends XposedModPack {
 				new Timer().schedule(new TimerTask() {
 					@Override
 					public void run() {
-						tuneCenterArea();
 						if (BatteryBarView.hasInstance()) {
 							BatteryBarView.getInstance().post(() -> refreshBatteryBar(BatteryBarView.getInstance()));
 						}
@@ -692,8 +675,6 @@ public class StatusbarMods extends XposedModPack {
 						}
 
 						makeLeftSplitArea();
-
-						tuneCenterArea();
 
 						if (BBarEnabled) //in case we got the config but view wasn't ready yet
 						{

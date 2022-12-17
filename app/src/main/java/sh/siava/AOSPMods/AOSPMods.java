@@ -118,7 +118,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 
 		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && BuildConfig.DEBUG) {
 			log("------------");
-			Helpers.dumpClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
+			Helpers.dumpClass("com.android.systemui.statusbar.notification.collection.NotifCollection", lpparam.classLoader);
 			log("------------");
 		}
 

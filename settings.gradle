@@ -1,7 +1,5 @@
 rootProject.name = "AOSPMods"
 include ':app'
-include ':renderscript-toolkit'
 include ':RangeSliderPreference'
 
-project(':renderscript-toolkit').projectDir = new File(rootDir, 'Submodules/renderscript-toolkit/renderscript-toolkit/')
 project(':RangeSliderPreference').projectDir = new File(rootDir, 'Submodules/RangeSliderPreference/')

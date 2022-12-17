@@ -26,7 +26,6 @@ public class FeatureFlagsMods extends XposedModPack {
 
 	public static int SBLTEIcon = SIGNAL_DEFAULT;
 
-	public static boolean combinedSignalEnabled = false;
 	private static boolean HideRoamingState = false;
 
 	public FeatureFlagsMods(Context context) {
@@ -36,22 +35,11 @@ public class FeatureFlagsMods extends XposedModPack {
 	@Override
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
-		boolean newcombinedSignalEnabled = Xprefs.getBoolean("combinedSignalEnabled", false);
-
 		HideRoamingState = Xprefs.getBoolean("HideRoamingState", false);
-
-		if (Key.length > 0 && newcombinedSignalEnabled != combinedSignalEnabled) {
-			try {
-				android.os.Process.killProcess(android.os.Process.myPid());
-			} catch (Exception ignored) {
-			}
-		}
-		combinedSignalEnabled = newcombinedSignalEnabled;
 
 		SBLTEIcon = Integer.parseInt(Xprefs.getString(
 				"LTE4GIconMod",
 				String.valueOf(SIGNAL_DEFAULT)));
-
 	}
 
 	@Override
@@ -86,36 +74,6 @@ public class FeatureFlagsMods extends XposedModPack {
 								SBLTEIcon == SIGNAL_FORCE_4G);
 					}
 				});
-
-		if (Build.VERSION.SDK_INT < 32) return; //Feature flags is newly introduced!
-		switch (Build.VERSION.SDK_INT) {
-			case 31: //Feature flags is newly introduced!
-				return;
-			case 32: //A12.1
-				Class<?> FeatureFlagsClass = findClass("com.android.systemui.flags.FeatureFlags", lpparam.classLoader);
-
-				hookAllMethods(FeatureFlagsClass, "isCombinedStatusBarSignalIconsEnabled", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						param.setResult(combinedSignalEnabled);
-					}
-				});
-				break;
-			case 33: //A13
-				Class<?> FlagsClass = findClass("com.android.systemui.flags.Flags", lpparam.classLoader);
-				Class<?> FeatureFlagsReleaseClass = findClass("com.android.systemui.flags.FeatureFlagsRelease", lpparam.classLoader);
-
-				Object COMBINED_STATUS_BAR_SIGNAL_ICONS = getStaticObjectField(FlagsClass, "COMBINED_STATUS_BAR_SIGNAL_ICONS");
-				hookAllMethods(FeatureFlagsReleaseClass, "isEnabled", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (param.args[0].equals(COMBINED_STATUS_BAR_SIGNAL_ICONS)) {
-							param.setResult(combinedSignalEnabled);
-						}
-					}
-				});
-				break;
-		}
 	}
 
 	@Override

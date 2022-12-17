@@ -186,29 +186,15 @@ public class QSTileGrid extends XposedModPack {
 					}
 
 					if (labelSize == null) { //we need initial font sizes
-						if (Build.VERSION.SDK_INT == 33) {
-							callStaticMethod(FontSizeUtilsClass,
-									"updateFontSize",
-									mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
-									getObjectField(param.thisObject, "label"));
+						callStaticMethod(FontSizeUtilsClass,
+								"updateFontSize",
+								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
+								getObjectField(param.thisObject, "label"));
 
-							callStaticMethod(FontSizeUtilsClass,
-									"updateFontSize",
-									mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
-									getObjectField(param.thisObject, "secondaryLabel"));
-
-
-						} else {
-							callStaticMethod(FontSizeUtilsClass,
-									"updateFontSize",
-									getObjectField(param.thisObject, "label"),
-									mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
-
-							callStaticMethod(FontSizeUtilsClass,
-									"updateFontSize",
-									getObjectField(param.thisObject, "secondaryLabel"),
-									mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
-						}
+						callStaticMethod(FontSizeUtilsClass,
+								"updateFontSize",
+								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
+								getObjectField(param.thisObject, "secondaryLabel"));
 
 						TextView label = (TextView) getObjectField(param.thisObject, "label");
 						TextView secondaryLabel = (TextView) getObjectField(param.thisObject, "secondaryLabel");

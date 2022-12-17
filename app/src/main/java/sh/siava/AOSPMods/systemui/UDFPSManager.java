@@ -59,30 +59,18 @@ public class UDFPSManager extends XposedModPack {
 				} //if (!mFullyInflated) A13
 			}
 		};
-		if (Build.VERSION.SDK_INT == 33) { //A13
-			hookAllMethods(UdfpsKeyguardViewClass, "updateBurnInOffsets", FPCircleTransparenter);
-			hookAllMethods(UdfpsKeyguardViewClass, "onFinishInflate", FPCircleTransparenter);
+
+		hookAllMethods(UdfpsKeyguardViewClass, "updateBurnInOffsets", FPCircleTransparenter);
+		hookAllMethods(UdfpsKeyguardViewClass, "onFinishInflate", FPCircleTransparenter);
 
 
-			hookAllMethods(LockIconViewClass,
-					"updateIcon", new XC_MethodHook() {
-						@Override
-						protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-							setObjectField(param.thisObject, "mUseBackground", false);
-						}
-					});
-		} else { //A12
-			hookAllMethods(UdfpsKeyguardViewClass, "updateAlpha", FPCircleTransparenter);
-
-			hookAllMethods(LockIconViewClass,
-					"setUseBackground", new XC_MethodHook() {
-						@Override
-						protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-							if (!transparentBG) return;
-							param.args[0] = false;
-						}
-					});
-		}
+		hookAllMethods(LockIconViewClass,
+				"updateIcon", new XC_MethodHook() {
+					@Override
+					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+						setObjectField(param.thisObject, "mUseBackground", false);
+					}
+				});
 
 		hookAllMethods(UdfpsKeyguardViewClass,
 				"updateColor", new XC_MethodHook() {

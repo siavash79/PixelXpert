@@ -451,6 +451,6 @@ public class QSThemeManager extends XposedModPack {
 
 	@Override
 	public boolean listensTo(String packageName) {
-		return listenPackage.equals(packageName) && Build.VERSION.SDK_INT == 33;
+		return listenPackage.equals(packageName);
 	}
 }

@@ -121,51 +121,31 @@ public class ScreenGestures extends XposedModPack {
 					}
 				});
 
-		if (Build.VERSION.SDK_INT == 33) {
-			hookAllConstructors(NotificationShadeWindowViewControllerClass, new XC_MethodHook() {
-				@Override
-				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-					new Thread(() -> {
-						try {
-							Thread.sleep(5000); //for some reason lsposed doesn't find methods in the class. so we'll hook to constructor and wait a bit!
-						} catch (Exception ignored) {
-						}
-						setHooks(param);
-					}).start();
-				}
-			});
-
-			Class<?> finalNotificationPanelViewControllerClass = NotificationPanelViewControllerClass;
-			hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
-				@Override
-				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-					Object mTouchHandler = finalNotificationPanelViewControllerClass.getField("mStatusBarViewTouchEventHandler").get(param.thisObject);
-					if(mTouchHandler == null)
-					{
-						mTouchHandler = finalNotificationPanelViewControllerClass.getField("mTouchHandler").get(param.thisObject);
+		hookAllConstructors(NotificationShadeWindowViewControllerClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				new Thread(() -> {
+					try {
+						Thread.sleep(5000); //for some reason lsposed doesn't find methods in the class. so we'll hook to constructor and wait a bit!
+					} catch (Exception ignored) {
 					}
-					hookTouchHandler(param, mTouchHandler);
+					setHooks(param);
+				}).start();
+			}
+		});
+
+		Class<?> finalNotificationPanelViewControllerClass = NotificationPanelViewControllerClass;
+		hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				Object mTouchHandler = finalNotificationPanelViewControllerClass.getField("mStatusBarViewTouchEventHandler").get(param.thisObject);
+				if(mTouchHandler == null)
+				{
+					mTouchHandler = finalNotificationPanelViewControllerClass.getField("mTouchHandler").get(param.thisObject);
 				}
-			});
-
-		} else {
-			findAndHookMethod(NotificationShadeWindowViewControllerClass,
-					"setupExpandedStatusBar", new XC_MethodHook() {
-						@Override
-						protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-							setHooks(param);
-						}
-					});
-
-			findAndHookMethod(NotificationPanelViewControllerClass,
-					"createTouchHandler", new XC_MethodHook() {
-						@Override
-						protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-							Object touchHandler = param.getResult();
-							hookTouchHandler(param, touchHandler);
-						}
-					});
-		}
+				hookTouchHandler(param, mTouchHandler);
+			}
+		});
 	}
 
 	private void hookTouchHandler(XC_MethodHook.MethodHookParam param, Object mTouchHandler) {
@@ -198,10 +178,7 @@ public class ScreenGestures extends XposedModPack {
 		}
 		Object mListener = getObjectField(mGestureDetector, "mListener");
 
-		Object mStatusBarKeyguardViewManager = getObjectField(param.thisObject,
-				(Build.VERSION.SDK_INT == 33)
-						? "mStatusBarKeyguardViewManager" //A13
-						: "mKeyguardStateController"); // SDK 31, 32
+		Object mStatusBarKeyguardViewManager = getObjectField(param.thisObject,"mStatusBarKeyguardViewManager");
 
 		Object mStatusBarStateController = getObjectField(param.thisObject, "mStatusBarStateController");
 

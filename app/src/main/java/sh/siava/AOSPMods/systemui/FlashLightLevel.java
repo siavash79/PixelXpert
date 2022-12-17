@@ -60,8 +60,7 @@ public class FlashLightLevel extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage) || Build.VERSION.SDK_INT < 33)
-			return; //Only SDK 33 and above
+		if (!lpparam.packageName.equals(listenPackage)) return;
 
 		flashPercentageDrawable = new flashPercentageShape();
 		flashPercentageDrawable.setAlpha(64);

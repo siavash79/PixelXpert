@@ -303,7 +303,7 @@ public class SystemUtils {
 			if (flashID.equals("")) {
 				return false;
 			}
-			if (Build.VERSION.SDK_INT >= 33 && maxFlashLevel == -1) {
+			if (maxFlashLevel == -1) {
 				@SuppressWarnings("unchecked")
 				CameraCharacteristics.Key<Integer> FLASH_INFO_STRENGTH_MAXIMUM_LEVEL = (CameraCharacteristics.Key<Integer>) getStaticObjectField(CameraCharacteristics.class, "FLASH_INFO_STRENGTH_MAXIMUM_LEVEL");
 				maxFlashLevel = mCameraManager.getCameraCharacteristics(flashID).get(FLASH_INFO_STRENGTH_MAXIMUM_LEVEL);
@@ -322,7 +322,7 @@ public class SystemUtils {
 			if (flashID.equals("")) {
 				return;
 			}
-			if (Build.VERSION.SDK_INT >= 33 && maxFlashLevel == -1) {
+			if (maxFlashLevel == -1) {
 				@SuppressWarnings("unchecked")
 				CameraCharacteristics.Key<Integer> FLASH_INFO_STRENGTH_MAXIMUM_LEVEL = (CameraCharacteristics.Key<Integer>) getStaticObjectField(CameraCharacteristics.class, "FLASH_INFO_STRENGTH_MAXIMUM_LEVEL");
 				maxFlashLevel = mCameraManager.getCameraCharacteristics(flashID).get(FLASH_INFO_STRENGTH_MAXIMUM_LEVEL);

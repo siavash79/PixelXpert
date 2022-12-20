@@ -1,3 +1,6 @@
+**canary-187**  
+- Fixed layout glitches on notification area - A13 R18  
+  
 **canary-186**  
 - Fixed NotificationExpander for 13 R18  
   

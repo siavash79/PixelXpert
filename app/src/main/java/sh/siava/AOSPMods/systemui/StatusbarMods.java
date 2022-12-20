@@ -1,5 +1,8 @@
 package sh.siava.AOSPMods.systemui;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static android.widget.LinearLayout.VERTICAL;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
@@ -41,6 +44,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -136,7 +140,6 @@ public class StatusbarMods extends XposedModPack {
 
 	private Object mCollapsedStatusBarFragment = null;
 	private ViewGroup mClockParent = null;
-	private ViewGroup mNotificationIconAreaInner = null;
 	private View mCenteredIconArea = null;
 	private LinearLayout mSystemIconArea = null;
 	public static int clockColor = 0;
@@ -145,7 +148,7 @@ public class StatusbarMods extends XposedModPack {
 
 	private View mClockView;
 	@SuppressWarnings("FieldCanBeLocal")
-	private ViewGroup mNotificationIconContainer;
+	LinearLayout mNotificationContainerContainer;
 	private LinearLayout mLeftVerticalSplitContainer;
 	private LinearLayout mLeftExtraRowContainer;
 	private static float SBPaddingStart = 0, SBPaddingEnd = 0;
@@ -647,8 +650,6 @@ public class StatusbarMods extends XposedModPack {
 
 						mStatusBarIconController = getObjectField(param.thisObject, "mStatusBarIconController");
 
-						mNotificationIconAreaInner = (ViewGroup) getObjectField(param.thisObject, "mNotificationIconAreaInner");
-
 						try {
 							mClockView = (View) getObjectField(param.thisObject, "mClockView");
 						} catch (Throwable t) { //PE Plus
@@ -753,8 +754,10 @@ public class StatusbarMods extends XposedModPack {
 	//region double row left area
 	@SuppressLint("DiscouragedApi")
 	private void makeLeftSplitArea() {
-//		if (true) return;
-		mNotificationIconContainer = mNotificationIconAreaInner.findViewById(mContext.getResources().getIdentifier("notificationIcons", "id", mContext.getPackageName()));
+		ViewGroup mNotificationIconContainer = mStatusBar.findViewById(mContext.getResources().getIdentifier("notificationIcons", "id", mContext.getPackageName()));
+
+		mNotificationContainerContainer = new LinearLayout(mContext);
+
 		if (mLeftVerticalSplitContainer == null) {
 			mLeftVerticalSplitContainer = new LinearLayout(mContext);
 		} else {
@@ -762,39 +765,55 @@ public class StatusbarMods extends XposedModPack {
 			if (mLeftVerticalSplitContainer.getParent() != null)
 				((ViewGroup) mLeftVerticalSplitContainer.getParent()).removeView(mLeftVerticalSplitContainer);
 		}
-		mLeftVerticalSplitContainer.setOrientation(LinearLayout.VERTICAL);
 
-		mLeftExtraRowContainer = new ShyLinearLayout(mContext);
-		mLeftExtraRowContainer.setVisibility(View.GONE); //Shy layout must be gone at initiation
+		mLeftVerticalSplitContainer.setOrientation(VERTICAL);
+		mLeftVerticalSplitContainer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+		mLeftVerticalSplitContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setLeftSplitContainerHeights());
 
 		LayoutTransition layoutTransition = new LayoutTransition();
 		layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
 		layoutTransition.setDuration(200);
 		mLeftVerticalSplitContainer.setLayoutTransition(layoutTransition);
 
-		ViewGroup parent = ((ViewGroup) mNotificationIconContainer.getParent());
-		if (parent != null) {
-			parent.removeView(mNotificationIconContainer);
-		}
+		mLeftExtraRowContainer = new ShyLinearLayout(mContext);
+		mLeftVerticalSplitContainer.addView(mLeftExtraRowContainer, 0);
 
-		mLeftVerticalSplitContainer.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-		mLeftExtraRowContainer.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-		mNotificationIconContainer.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+		ViewGroup parent = (ViewGroup) mNotificationIconContainer.getParent();
 
-//        mLeftVerticalSplitContainer.setBackgroundColor(Color.WHITE);
-//        mLeftExtraRowContainer.setBackgroundColor(Color.GREEN);
-//        mNotificationIconContainer.setBackgroundColor(Color.BLUE);
+		parent.addView(mLeftVerticalSplitContainer, parent.indexOfChild(mNotificationIconContainer));
+		parent.removeView(mNotificationIconContainer);
+		mLeftVerticalSplitContainer.addView(mNotificationContainerContainer);
+		mNotificationContainerContainer.addView(mNotificationIconContainer);
 
-		mLeftVerticalSplitContainer.addView(mLeftExtraRowContainer);
-		mLeftVerticalSplitContainer.addView(mNotificationIconContainer);
-		parent.addView(mLeftVerticalSplitContainer);
+		mNotificationIconContainer.setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
+			@Override
+			public void onChildViewAdded(View parent, View child) {
+				mNotificationContainerContainer.setVisibility(VISIBLE);
+				setLeftSplitContainerHeights();
+			}
+
+			@Override
+			public void onChildViewRemoved(View parent, View child) {
+				if(mNotificationIconContainer.getChildCount() == 0)
+				{
+					mNotificationContainerContainer.setVisibility(GONE);
+					setLeftSplitContainerHeights();
+				}
+			}
+		});
+	}
+
+	private void setLeftSplitContainerHeights() {
+		mLeftVerticalSplitContainer.getLayoutParams().height = mStatusBar.getMeasuredHeight();
+		mNotificationContainerContainer.getLayoutParams().height = (mLeftExtraRowContainer.getVisibility() == VISIBLE) ?  mStatusBar.getMeasuredHeight() / 2 : mStatusBar.getMeasuredHeight();
+		mLeftExtraRowContainer.getLayoutParams().height = (mNotificationContainerContainer.getVisibility() == VISIBLE) ? mStatusBar.getMeasuredHeight() / 2 : mStatusBar.getMeasuredHeight();
 	}
 	//end region
 
 	//region battery bar related
 	private void refreshBatteryBar(BatteryBarView instance) {
 		BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, chargingColor, indicateFastCharging, fastChargingColor, BBarTransitColors);
-		instance.setVisibility((BBarEnabled) ? View.VISIBLE : View.GONE);
+		instance.setVisibility((BBarEnabled) ? VISIBLE : GONE);
 		instance.setColorful(BBarColorful);
 		instance.setOnlyWhileCharging(BBOnlyWhileCharging);
 		instance.setOnTop(!BBOnBottom);
@@ -924,7 +943,7 @@ public class StatusbarMods extends XposedModPack {
 					networkTrafficSB.setPadding(0, 0, leftClockPadding, 0);
 					break;
 				case POSITION_LEFT_EXTRA_LEVEL:
-					mLeftExtraRowContainer.addView(networkTrafficSB, 0);
+					mLeftExtraRowContainer.addView(networkTrafficSB, mLeftExtraRowContainer.getChildCount());
 					networkTrafficSB.setPadding(0, 0, leftClockPadding, 0);
 					break;
 				case POSITION_CENTER:
@@ -1001,6 +1020,7 @@ public class StatusbarMods extends XposedModPack {
 				break;
 			case POSITION_LEFT_EXTRA_LEVEL:
 				targetArea = mLeftExtraRowContainer;
+				index = 0;
 				mClockView.setPadding(0, 0, leftClockPadding, 0);
 				break;
 			case POSITION_CENTER:

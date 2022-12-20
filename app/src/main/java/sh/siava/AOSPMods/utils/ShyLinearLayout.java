@@ -3,14 +3,17 @@ package sh.siava.AOSPMods.utils;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 
 public class ShyLinearLayout extends LinearLayout {
 
 	public ShyLinearLayout(Context context) {
 		super(context);
+		setVisibility(GONE);
 	}
 
 	public ShyLinearLayout(Context context, @Nullable AttributeSet attrs) {
@@ -19,11 +22,7 @@ public class ShyLinearLayout extends LinearLayout {
 
 	public ShyLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-	}
-
-	@SuppressWarnings("unused")
-	public ShyLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-		super(context, attrs, defStyleAttr, defStyleRes);
+		setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,1));
 	}
 
 	@Override

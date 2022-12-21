@@ -242,7 +242,7 @@ public class NetworkTraffic extends FrameLayout {
 		iconLayout.setGravity(Gravity.CENTER_VERTICAL);
 		iconLayout.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
 		LinearLayout contentLayout = new LinearLayout(mContext);
-		contentLayout.setLayoutParams(new FrameLayout.LayoutParams(-1,-2, Gravity.CENTER_VERTICAL));
+		contentLayout.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL));
 		this.addView(contentLayout);
 		contentLayout.addView(iconLayout);
 		contentLayout.addView(mTextView);

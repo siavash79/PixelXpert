@@ -139,7 +139,7 @@ public class StatusbarMods extends XposedModPack {
 	private ViewGroup mStatusBar;
 
 	private Object mCollapsedStatusBarFragment = null;
-	private ViewGroup mClockParent = null;
+	private ViewGroup mStatusbarStartSide = null;
 	private View mCenteredIconArea = null;
 	private LinearLayout mSystemIconArea = null;
 	public static int clockColor = 0;
@@ -657,9 +657,11 @@ public class StatusbarMods extends XposedModPack {
 							mClockView = (View) callMethod(mClockController, "getClock");
 						}
 
-						mClockParent = (ViewGroup) mClockView.getParent();
-
 						mStatusBar = (ViewGroup) getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
+
+						mStatusBar.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setHeights());
+
+						mStatusbarStartSide = mStatusBar.findViewById(mContext.getResources().getIdentifier("status_bar_start_side_except_heads_up", "id", mContext.getPackageName()));
 
 						mSystemIconArea = mStatusBar.findViewById(mContext.getResources().getIdentifier("statusIcons", "id", mContext.getPackageName()));
 
@@ -768,7 +770,7 @@ public class StatusbarMods extends XposedModPack {
 
 		mLeftVerticalSplitContainer.setOrientation(VERTICAL);
 		mLeftVerticalSplitContainer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-		mLeftVerticalSplitContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setLeftSplitContainerHeights());
+		mLeftVerticalSplitContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setHeights());
 
 		LayoutTransition layoutTransition = new LayoutTransition();
 		layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
@@ -789,7 +791,7 @@ public class StatusbarMods extends XposedModPack {
 			@Override
 			public void onChildViewAdded(View parent, View child) {
 				mNotificationContainerContainer.setVisibility(VISIBLE);
-				setLeftSplitContainerHeights();
+				setHeights();
 			}
 
 			@Override
@@ -797,16 +799,17 @@ public class StatusbarMods extends XposedModPack {
 				if(mNotificationIconContainer.getChildCount() == 0)
 				{
 					mNotificationContainerContainer.setVisibility(GONE);
-					setLeftSplitContainerHeights();
+					setHeights();
 				}
 			}
 		});
 	}
 
-	private void setLeftSplitContainerHeights() {
+	private void setHeights() {
 		mLeftVerticalSplitContainer.getLayoutParams().height = mStatusBar.getMeasuredHeight();
 		mNotificationContainerContainer.getLayoutParams().height = (mLeftExtraRowContainer.getVisibility() == VISIBLE) ?  mStatusBar.getMeasuredHeight() / 2 : mStatusBar.getMeasuredHeight();
 		mLeftExtraRowContainer.getLayoutParams().height = (mNotificationContainerContainer.getVisibility() == VISIBLE) ? mStatusBar.getMeasuredHeight() / 2 : mStatusBar.getMeasuredHeight();
+		networkTrafficSB.getLayoutParams().height = (networkTrafficPosition == POSITION_LEFT_EXTRA_LEVEL) ? mStatusBar.getMeasuredHeight()/2 : mStatusBar.getMeasuredHeight();
 	}
 	//end region
 
@@ -939,7 +942,7 @@ public class StatusbarMods extends XposedModPack {
 					networkTrafficSB.setPadding(rightClockPadding, 0, leftClockPadding, 0);
 					break;
 				case POSITION_LEFT:
-					mClockParent.addView(networkTrafficSB, 0);
+					mStatusbarStartSide.addView(networkTrafficSB, 1);
 					networkTrafficSB.setPadding(0, 0, leftClockPadding, 0);
 					break;
 				case POSITION_LEFT_EXTRA_LEVEL:
@@ -947,7 +950,7 @@ public class StatusbarMods extends XposedModPack {
 					networkTrafficSB.setPadding(0, 0, leftClockPadding, 0);
 					break;
 				case POSITION_CENTER:
-					mClockParent.addView(networkTrafficSB);
+					mStatusbarStartSide.addView(networkTrafficSB);
 					networkTrafficSB.setPadding(rightClockPadding, 0, leftClockPadding, 0);
 					break;
 			}
@@ -1014,7 +1017,7 @@ public class StatusbarMods extends XposedModPack {
 
 		switch (clockPosition) {
 			case POSITION_LEFT:
-				targetArea = mClockParent;
+				targetArea = mStatusbarStartSide;
 				index = 0;
 				mClockView.setPadding(0, 0, leftClockPadding, 0);
 				break;

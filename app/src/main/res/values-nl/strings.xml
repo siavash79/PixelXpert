@@ -44,8 +44,6 @@
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Dubbeltik om te slapen</string>
-    <string name="double_tap_sleep_off">"Dubbeltik schakelt het scherm niet uit"</string>
-    <string name="double_tap_sleep_on">Dubbeltik op de statusbalk of het vergrendelscherm om het scherm uit te schakelen</string>
     <string name="battery_style_title">Kies een batterijstijl</string>
     <string name="battery_show_percent_title">Toon batterijpercentage</string>
     <string name="battery_style_category_title">Batterijstijl</string>
@@ -80,7 +78,7 @@
     <string name="ntsb_enabled_title">Netwerkmonitor inschakelen</string>
     <string name="ntsb_position_title">Monitorpositie</string>
     <string name="ntsb_threshold_title">Drempel automatisch verbergen</string>
-    <string name="ntsb_threshold_summary">"Verbergen als het verkeer minder is dan… (Kilobytes)"</string>
+    <string name="ntsb_threshold_summary">Verbergen als het verkeer minder is dan… (Kilobytes)</string>
     <string name="network_mode_title">Monitorstijl</string>
     <string name="network_colorful_title">Maak het kleurrijk</string>
     <string name="network_download_top">Downloadsnelheid bovenaan</string>
@@ -176,8 +174,8 @@
     <string name="custom_themed_icons_on">Aangepaste pictogrammen ingeschakeld</string>
     <string name="so_vol_longpress_skip">Druk lang op Volume om muziek over te slaan*</string>
     <string name="notifications_header">Opties voor meldingen</string>
-    <string name="expand_notifications_icons_title">"Alle knoppen uitvouwen/samenvouwen toevoegen</string>
-    <string name="disable_overscroll">"Elastisch overscroll-effect uitschakelen"</string>
+    <string name="expand_notifications_icons_title">Alle knoppen uitvouwen/samenvouwen toevoegen</string>
+    <string name="disable_overscroll">Elastisch overscroll-effect uitschakelen</string>
     <string name="overscroll_on_summary">Belangrijk: je MOET de apps inschakelen waarvoor je overscroll wilt uitschakelen, in LSPosed</string>
 
     <!-- Theming section related -->

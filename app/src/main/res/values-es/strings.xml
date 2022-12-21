@@ -1,8 +1,5 @@
 <resources>
 	<!--General strings-->
-	<string name="app_name" translatable="false">AOSP Mods</string>
-	<string name="xposed_desc" translatable="false">Funciones personalizadas para ROM basadas en Android 12+ AOSP</string>
-	<string name="title_activity_settings" translatable="false">@string/app_name</string>
 	<string name="error_not_activated">Confirme si el módulo está activado dentro de LSPosed Manager</string>
 	<string name="hide_default">No mostrar (por defecto)</string>
 	<string name="percent_of_default_size">% del tamaño por defecto</string>
@@ -60,9 +57,7 @@
 	<string name="battery_style_title">Escoger un estilo de batería</string>
 	<string name="battery_show_percent_title">Mostrar porcentaje</string>
 	<string name="battery_style_category_title">Estilo de batería</string>
-	<string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
 	<string name="battery_icon_size_title">Tamaño del icono de batería</string>
-	<string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
 	<string name="battery_hidden">Oculta</string>
 	<string name="BIcon_Opacity_title">Opacidad</string>
 	<string name="sb_center_fine_tune">Afinar el área central</string>
@@ -79,7 +74,7 @@
     <string name="caution_mobile_costs">PRECAUCIÓN - No saber que estás en roaming puede aumentar el coste de la tarifa</string>
 	<string name="volte_icon_title">Mostrar icono VoLTE cuando este disponible</string>
 	<string name="hide_privacychip_title">Ocultar indicadores de privacidad\n(Cámara, Micrófono)</string><!-- \n means next line-->
-	<string name="sb_vibration_switch_title">"Mostar los iconos vibrar/silencio"</string>
+	<string name="sb_vibration_switch_title">Mostar los iconos vibrar/silencio</string>
 	<string name="sbc_position_title">Posición del reloj</string>
 	<string name="sbc_ampm_style">Estilo AM/PM</string>
 	<string name="sbc_show_secs">Mostrar segundos</string>
@@ -105,7 +100,7 @@
 	<string name="ntsb_enabled_title">Activar monitor de tráfico de red</string>
 	<string name="ntsb_position_title">Localización del monitor</string>
 	<string name="ntsb_threshold_title">Ocultar automaticamente</string>
-	<string name="ntsb_threshold_summary">"Ocultar si el tráfico es menor a… (Kilobytes)"</string>
+	<string name="ntsb_threshold_summary">Ocultar si el tráfico es menor a… (Kilobytes)</string>
 	<string name="network_mode_title">Estilo del monitor</string>
 	<string name="network_colorful_title">Hazlo colorido</string>
 	<string name="network_download_top">Velocidad de descarga arriba</string>
@@ -180,25 +175,8 @@
 	<string name="quick_settings_tiles_category">Opciones de mosaico QS</string>
 	<string name="qs_tile_style_title">Temas de mosaico QS</string>
 	<string name="qstile_default">Por defecto</string>
-	<string name="qstile_cookie" translatable="false">Cookie</string>
-	<string name="qstile_triangles" translatable="false">Triangle</string>
-	<string name="qstile_divided" translatable="false">Divided Circle</string>
-	<string name="qstile_attemptmountain" translatable="false">An attempt at a mountain</string>
-	<string name="qstile_squircle_trim" translatable="false">Squircle with trim</string>
-	<string name="qstile_ninja" translatable="false">Ninja</string>
-	<string name="qstile_wavey" translatable="false">Wavey</string>
-	<string name="qstile_squaremedo" translatable="false">The Squaremedo</string>
-	<string name="qstile_dual_tone_circle" translatable="false">Dual tone circle</string>
-	<string name="qstile_circleoutline" translatable="false">Circle Outline</string>
-	<string name="qstile_pokesign" translatable="false">Pokesign</string>
-	<string name="qstile_cosmos" translatable="false">Shishu Cosmos</string>
-	<string name="qstile_neonlike" translatable="false">Neon Light</string>
-	<string name="qstile_circle_trim" translatable="false">Circle with trim</string>
-	<string name="qstile_dottedcircle" translatable="false">Dotted Circle</string>
-	<string name="qstile_inkdrop" translatable="false">Ink</string>
-	<string name="qstile_circle" translatable="false">Circle</string>
 
-    <!--Navigation bar related-->
+	<!--Navigation bar related-->
 	<string name="back_gesture_category_title">Personalizar gesto atrás</string>
 	<string name="back_from_left_title">Lado izquierdo de la pantalla</string>
 	<string name="back_from_right_title">Lado derecho de la pantalla</string>
@@ -214,7 +192,6 @@
 	<string name="three_button_left_title">Botón izquierdo</string>
 	<string name="three_button_center_title">Botón central</string>
 	<string name="three_button_right_title">Botón derecho</string>
-	<string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
 	<string name="hide_navbar_title">Ocultar barra de navegación</string>
 	<string name="taskbar_as_recents_title">Convertir barra de tareas en barra de recientes</string>
 	<string name="taskbar_height_title">Altura de la barra de tareas</string>
@@ -246,15 +223,15 @@
 	
 	<string name="so_double_tap_wake_title">Toca dos veces para activar el teléfono</string>
 	<string name="so_double_tap_wake_summary">Desactiva un solo toque para despertar</string>
-	<string name="doze_header">Mientras la pantalla está apagada...</string>
+	<string name="doze_header">Mientras la pantalla está apagada…</string>
 	<string name="custom_themed_icons_title">Iconos temáticos personalizados</string>
 	<string name="custom_themed_icons_off">Iconos personalizados deshabilitados</string>
 	<string name="custom_themed_icons_on">Iconos personalizados habilitados</string>
 	<string name="so_vol_longpress_skip">Mantenga presionados los botones de volumen para saltar música</string>
 	<string name="notifications_header">Opciones de notificaciones</string>
-	<string name="expand_notifications_icons_title">"Agregar expandir/contraer todos los botones</string>
+	<string name="expand_notifications_icons_title">Agregar expandir/contraer todos los botones</string>
 	<string name="heads_up_notification_duration">Duración de la notificación Heads-up</string>
-	<string name="disable_overscroll">"Deshabilitar el efecto de desplazamiento elástico</string>
+	<string name="disable_overscroll">Deshabilitar el efecto de desplazamiento elástico</string>
 	<string name="overscroll_on_summary">Importante: DEBE habilitar las aplicaciones para las que desea deshabilitar el desplazamiento excesivo dentro de LSPosed</string>
 	<string name="milliseconds">Milisegundos</string>
 	
@@ -273,15 +250,6 @@
 	<string name="dt_styles_category">Estilos de tema oscuro</string>
 	<string name="dt_styles">Selecciona un estilo</string>
 	<string name="caution_unstable">Precaución: esta opción puede ser inestable para algunos usuarios.</string>
-	<string name="dt_black" translatable="false">Pitch black</string>
-	<string name="dt_bakedgreen" translatable="false">Baked Green</string>
-	<string name="dt_chocox" translatable="false">Choco X</string>
-	<string name="dt_darkaubergine" translatable="false">Dark Aubergine</string>
-	<string name="dt_style" translatable="false">Dark Blue</string>
-	<string name="dt_darkgray" translatable="false">Dark Grey</string>
-	<string name="dt_materialocean" translatable="false">Material Ocean</string>
-	<string name="dt_night" translatable="false">Night</string>
-	<string name="dt_solarizeddark" translatable="false">Solarized Dark</string>
 	<string name="power_menu_overlays_section">Temas del menú de encendido</string>
 	<string name="power_menu_overlays_title">Habilitar temas claros/oscuros en el menú de encendido</string>
 	<string name="power_menu_overlays_summary_on">Esta opción también habilita algunos iconos nuevos y geniales en todo el sistema.</string>
@@ -304,12 +272,10 @@
 	<string name="clock_right">Derecha</string>
 
 	<!-- AM/PM style -->
-	<string name="am_pm_default" translatable="false">@string/hide_default</string>
 	<string name="am_pm_normal">100% del tamaño del reloj</string>
 	<string name="am_pm_small">70% del tamaño del reloj</string>
 
 	<!-- Date position -->
-	<string name="date_default" translatable="false">@string/hide_default</string>
 	<string name="date_before">Antes del reloj (100%)</string>
 	<string name="date_before_small">Antes del reloj (70%)</string>
 	<string name="date_after">Después del reloj (100%)</string>
@@ -348,7 +314,6 @@
 	<string name="netstat_header">Configuración de estadísticas de red</string>
 	
 	<string name="string_formatter_manual_body">Además del texto normal, puede introducir, variables dinámicas disponibles:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato. Para obtener documentación sobre el formato, busque `Java Date Format`\nExample: $GMMM means: Jan (O cualquier otro)\n\n$P&lt;format&gt; : Fecha persa, según el formato\nExample: $Pyyyy means: 1401\n\n$Nrx : Descargas totales de hoy\n$Ntx: Subidas totales de hoy\n$Nall : Tráfico total de hoy\n$Nssid : Nombre SSID WiFi (si es aplicable)\n\nIf tu reemplaza $N con $Nc se le proporcionarán estadísticas de datos móviles (like $Ncrx for downloads; excludes $Nssid)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
-	<string name="update_fragment_label" translatable="false">@string/menu_updates</string>
 	<string name="update_channel_name">Actualizaciones</string>
 	<string name="update_notification_title">Actualización descargada</string>
 	<string name="update_notification_text">Toque aquí para instalar</string>
@@ -356,7 +321,6 @@
 	<string name="reboot_notification_text">Los cambios surtirán efecto después de reiniciar</string>
 	<string name="update_flavor_title">Actualizar canal</string>
 	<string name="stable_flavor">Estable</string>
-	<string name="canary_flavor" translatable="false">Canary</string>
 	<string name="update_type_title">Tipo de paquete</string>
 	<string name="full_type">Completo</string>
 	<string name="xposed_type">Solo Xposed</string>
@@ -371,8 +335,6 @@
 	<string name="switch_branches">Cambiar rama</string>
 	<string name="reinstall_word">Reinstalar</string>
 
-	<string name="title_activity_update" translatable="false">updateActivity</string>
-	
 	<string name="own_prefs_header">Configuración de AOSPMods</string>
 	<string name="language_title">Idioma</string>
 	<string name="toggle_dark_apply">(Alternar tema oscuro para aplicar)</string>

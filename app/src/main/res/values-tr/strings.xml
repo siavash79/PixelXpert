@@ -13,7 +13,7 @@
     <!--Category titles-->
     <string name="more_area">daha fazla</string>
     <string name="less_area">daha az</string>
-    <string name="lockscreen_header_title">Kilit Ekranı</string>
+    <string name="lockscreen_header_title">Kilit Ekranı yazısı</string>
     <string name="statusbar_header">Durum Çubuğu</string>
     <string name="nav_header">Gezinme Çubuğu</string>
     <string name="misc_header">Muhtelif</string>
@@ -94,7 +94,7 @@
     <string name="ntsb_enabled_title">Ağ izleyicisini etkinleştir</string>
     <string name="ntsb_position_title">Monitör Konumu</string>
     <string name="ntsb_threshold_title">Otomatik gizleme eşiği</string>
-    <string name="ntsb_threshold_summary">"Trafik azsa gizle… (Kilobaytlar)"</string>
+    <string name="ntsb_threshold_summary">Trafik azsa gizle… (Kilobaytlar)</string>
     <string name="network_mode_title">İzleme stili</string>
     <string name="network_colorful_title">Renklendir</string>
     <string name="network_download_top">İndirme hızı yukarıda</string>
@@ -212,8 +212,8 @@
     <string name="custom_themed_icons_on">Özel simgeler etkinleştirildi</string>
     <string name="so_vol_longpress_skip">Müziği atlamak için Ses arttırma tuşuna uzun basın*</string>
     <string name="notifications_header">Bildirim seçenekleri</string>
-    <string name="expand_notifications_icons_title">"Tüm bildirimleri genişletme/daraltma butonu ekle</string>
-    <string name="disable_overscroll">"Elastik aşırı kaydırma efektini devre dışı bırak</string>
+    <string name="expand_notifications_icons_title">Tüm bildirimleri genişletme/daraltma butonu ekle</string>
+    <string name="disable_overscroll">Elastik aşırı kaydırma efektini devre dışı bırak</string>
     <string name="overscroll_on_summary">Önemli: LSPosed\'da aşırı kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
 
     <!-- Call section -->
@@ -317,7 +317,7 @@
     <string name="toggle_dark_apply">(Koyu temaya geç)</string>
     <string name="keyguard_dim_amount_title">Kilit ekranı duvar kağıdının loş seviyesi</string>
     <string name="qs_footer_text_value">Özel metin girin</string>
-    <string name="qs_leveled_flashlight_title">"Kademeli El Feneri "</string>
+    <string name="qs_leveled_flashlight_title">Kademeli El Feneri</string>
     <string name="qs_flashlight_level_global_title">El feneri seviyesini global olarak uygula</string>
     <string name="qs_qr_tile_inactive_title">QR-Tarama döşeme rengini ters çevir</string>
     <string name="qs_leveled_flashlight_summary">Desteklenen donanım gerektirir</string>
@@ -351,4 +351,9 @@
     <string name="power_menu_overlays_title">Power menüsünde açık/koyu temaları etkinleştirin</string>
     <string name="sleep">Uyku modu</string>
     <string name="taskbar_hide_allapps_title">Tüm uygulamalar simgesini gizle</string>
+    <string name="charging_info_title">Kilit ekranında şarj bilgisi</string>
+    <string name="imperial_units_title">İngiliz ölçü birimini kullan</string>
+    <string name="hide_roaming_title">Dolaşım (R) indikatörünü gösterme</string>
+    <string name="caution_mobile_costs">DİKKAT - dolaşım kullandığını bilmemek mobil ödemeni arttırabilir</string>
+    <string name="hide_avatar_title">Çoklu kullanıcı rejiminde kilit ekranındakı kullanıcı resmini kaldır</string>
 </resources>

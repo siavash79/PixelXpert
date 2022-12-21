@@ -469,13 +469,6 @@ public class StatusbarMods extends XposedModPack {
 		//endregion
 
 		//region multi row statusbar
-		hookAllMethods(NotificationIconContainerClass, "calculateIconTranslations", new XC_MethodHook() {
-			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				NotificationIconContainerOverride.calculateIconTranslations(param);
-				param.setResult(null);
-			}
-		});
 		hookAllMethods(NotificationIconContainerClass, "calculateIconXTranslations", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

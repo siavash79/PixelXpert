@@ -1,3 +1,6 @@
+**canary-188**  
+- Fixed statusbar network monitor layout glitches  
+  
 **canary-187**  
 - Fixed layout glitches on notification area - A13 R18  
   

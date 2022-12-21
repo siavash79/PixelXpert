@@ -1,3 +1,6 @@
+**canary-190**  
+- Fixed system crash when network monitor is disabled  
+  
 **canary-189**  
 - Fixed ClearAllButton constantly shown in pixel launcher  
   

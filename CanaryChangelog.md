@@ -1,3 +1,6 @@
+**canary-189**  
+- Fixed ClearAllButton constantly shown in pixel launcher  
+  
 **canary-188**  
 - Fixed statusbar network monitor layout glitches  
   

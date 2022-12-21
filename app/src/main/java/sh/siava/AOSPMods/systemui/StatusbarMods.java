@@ -802,7 +802,9 @@ public class StatusbarMods extends XposedModPack {
 		mLeftVerticalSplitContainer.getLayoutParams().height = mStatusBar.getMeasuredHeight();
 		mNotificationContainerContainer.getLayoutParams().height = (mLeftExtraRowContainer.getVisibility() == VISIBLE) ?  mStatusBar.getMeasuredHeight() / 2 : mStatusBar.getMeasuredHeight();
 		mLeftExtraRowContainer.getLayoutParams().height = (mNotificationContainerContainer.getVisibility() == VISIBLE) ? mStatusBar.getMeasuredHeight() / 2 : mStatusBar.getMeasuredHeight();
-		networkTrafficSB.getLayoutParams().height = (networkTrafficPosition == POSITION_LEFT_EXTRA_LEVEL) ? mStatusBar.getMeasuredHeight()/2 : mStatusBar.getMeasuredHeight();
+		if (networkOnSBEnabled) {
+			networkTrafficSB.getLayoutParams().height = (networkTrafficPosition == POSITION_LEFT_EXTRA_LEVEL) ? mStatusBar.getMeasuredHeight()/2 : mStatusBar.getMeasuredHeight();
+		}	
 	}
 	//end region
 

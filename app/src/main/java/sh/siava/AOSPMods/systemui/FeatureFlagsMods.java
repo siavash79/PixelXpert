@@ -17,6 +17,9 @@ import sh.siava.AOSPMods.XposedModPack;
 public class FeatureFlagsMods extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
+	public static final String CLIPBOARD_OVERLAY_SHOW_ACTIONS = "clipboard_overlay_show_actions";
+	public static final String NAMESPACE_SYSTEMUI = "systemui";
+
 	private static final int SIGNAL_DEFAULT = 0;
 	@SuppressWarnings("unused")
 	private static final int SIGNAL_FORCE_LTE = 1;
@@ -25,6 +28,7 @@ public class FeatureFlagsMods extends XposedModPack {
 	public static int SBLTEIcon = SIGNAL_DEFAULT;
 
 	private static boolean HideRoamingState = false;
+	private static boolean EnableClipboardSmartActions = false;
 
 	public FeatureFlagsMods(Context context) {
 		super(context);
@@ -38,6 +42,8 @@ public class FeatureFlagsMods extends XposedModPack {
 		SBLTEIcon = Integer.parseInt(Xprefs.getString(
 				"LTE4GIconMod",
 				String.valueOf(SIGNAL_DEFAULT)));
+
+		EnableClipboardSmartActions = Xprefs.getBoolean("EnableClipboardSmartActions", false);
 	}
 
 	@Override
@@ -45,6 +51,17 @@ public class FeatureFlagsMods extends XposedModPack {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
 		Class<?> MobileSignalController = findClass("com.android.systemui.statusbar.connectivity.MobileSignalController", lpparam.classLoader);
+		Class<?> DeviceConfigClass = findClass("android.provider.DeviceConfig", lpparam.classLoader);
+
+		hookAllMethods(DeviceConfigClass, "getBoolean", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(param.args[0].equals(NAMESPACE_SYSTEMUI) && param.args[1].equals(CLIPBOARD_OVERLAY_SHOW_ACTIONS))
+				{
+					param.setResult(EnableClipboardSmartActions);
+				}
+			}
+		});
 
 		hookAllMethods(MobileSignalController, "notifyListeners", new XC_MethodHook() {
 			@Override

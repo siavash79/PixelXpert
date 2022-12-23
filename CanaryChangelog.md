@@ -1,3 +1,6 @@
+**canary-191**  
+- Added option to enable clipboard overlay smart actions (Misc)  
+  
 **canary-190**  
 - Fixed system crash when network monitor is disabled  
   

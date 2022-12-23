@@ -1,3 +1,6 @@
+**canary-192**  
+- (Potential) Fixed maximum statusbar notifications  
+  
 **canary-191**  
 - Added option to enable clipboard overlay smart actions (Misc)  
   

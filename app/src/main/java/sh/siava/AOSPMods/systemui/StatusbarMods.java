@@ -415,6 +415,7 @@ public class StatusbarMods extends XposedModPack {
 		StatusBarIcon = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
+//		Method setMeasuredDimensionMethod = findMethodExact(View.class, "setMeasuredDimension", int.class, int.class);
 		//endregion
 
 		//region privacy chip
@@ -469,6 +470,18 @@ public class StatusbarMods extends XposedModPack {
 		//endregion
 
 		//region multi row statusbar
+		//bypassing the max icon limit during measurement
+		hookAllMethods(NotificationIconContainerClass, "onMeasure", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				setObjectField(param.thisObject, "mIsStaticLayout", false);
+			}
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				setObjectField(param.thisObject, "mIsStaticLayout", true);
+			}
+		});
+
 		hookAllMethods(NotificationIconContainerClass, "calculateIconXTranslations", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

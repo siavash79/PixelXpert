@@ -17,7 +17,6 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
-import static sh.siava.AOSPMods.utils.Helpers.tryHookAllMethods;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -163,70 +162,6 @@ public class BatteryStyleManager extends XposedModPack {
 		Class<?> BatteryControllerImplClass = findClass("com.android.systemui.statusbar.policy.BatteryControllerImpl", lpparam.classLoader);
 //		Class<?> BatteryMeterViewControllerClass = findClassIfExists("com.android.systemui.battery.BatteryMeterViewController", lpparam.classLoader);
 		Class<?> BatteryMeterViewClass = findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
-		if (BatteryMeterViewClass == null) {
-			// This Android 12.0 - we hook to old methods
-			BatteryMeterViewClass = findClassIfExists("com.android.systemui.BatteryMeterView", lpparam.classLoader);
-
-			tryHookAllMethods(BatteryMeterViewClass, "onBatteryLevelChanged", new XC_MethodHook() {
-				@Override
-				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-					boolean mCharging = (boolean) getObjectField(param.thisObject, "mCharging");
-					int mLevel = (int) getObjectField(param.thisObject, "mLevel");
-
-					//Feeding battery bar
-					BatteryBarView.setStaticLevel(mLevel, mCharging);
-
-					if (!customBatteryEnabled) return;
-
-					BatteryDrawable mBatteryDrawable = (BatteryDrawable) getAdditionalInstanceField(param.thisObject, "mBatteryDrawable");
-					if (mBatteryDrawable == null) return;
-
-					mBatteryDrawable.setCharging(mCharging);
-					mBatteryDrawable.setBatteryLevel(mLevel);
-				}
-			});
-
-			hookAllMethods(BatteryMeterViewClass, "updateDrawable", new XC_MethodHook() { //PE+
-				@Override
-				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if (customBatteryEnabled) param.setResult(null);
-				}
-			});
-
-			findAndHookMethod(BatteryMeterViewClass,
-					"onBatteryUnknownStateChanged", boolean.class, new XC_MethodHook() {
-						@Override
-						protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-							if (!customBatteryEnabled) return;
-
-							ImageView mBatteryIconView = (ImageView) getObjectField(param.thisObject, "mBatteryIconView");
-							BatteryDrawable mBatteryDrawable = (BatteryDrawable) getAdditionalInstanceField(param.thisObject, "mBatteryDrawable");
-
-							mBatteryDrawable.setMeterStyle(BatteryStyle);
-
-							mBatteryIconView.setImageDrawable(mBatteryDrawable);
-						}
-					});
-
-			tryHookAllMethods(BatteryMeterViewClass, "scaleBatteryMeterViews", new XC_MethodHook() {
-				@Override
-				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					scale(param.thisObject);
-					param.setResult(null);
-				}
-			});
-
-			findAndHookMethod(BatteryMeterViewClass,
-					"onPowerSaveChanged", boolean.class, new XC_MethodHook() {
-						@Override
-						protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-							if (!customBatteryEnabled) return;
-
-							BatteryDrawable mBatteryDrawable = (BatteryDrawable) getAdditionalInstanceField(param.thisObject, "mBatteryDrawable");
-							mBatteryDrawable.setPowerSaveEnabled((boolean) param.args[0]);
-						}
-					});
-		}
 
 		hookAllConstructors(BatteryControllerImplClass, new XC_MethodHook() {
 			@Override
@@ -246,10 +181,8 @@ public class BatteryStyleManager extends XposedModPack {
 					mBatteryDrawable.setMeterStyle(BatteryStyle);
 					callMethod(view, "setImageDrawable", mBatteryDrawable);
 				}
-
 			}
 		});
-
 
 		XC_MethodHook batteryDataRefreshHook = new XC_MethodHook() {
 			@Override

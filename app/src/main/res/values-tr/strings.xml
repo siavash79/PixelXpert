@@ -356,4 +356,6 @@
     <string name="hide_roaming_title">Dolaşım (R) indikatörünü gösterme</string>
     <string name="caution_mobile_costs">DİKKAT - dolaşım kullandığını bilmemek mobil ödemeni arttırabilir</string>
     <string name="hide_avatar_title">Çoklu kullanıcı rejiminde kilit ekranındakı kullanıcı resmini kaldır</string>
+    <string name="camera_manager_master_title">El feneri modlarını etkinleştir (cihazınız desteklemiyorsa inaktive edin)</string>
+    <string name="clipboard_smart_actions_title">Panoda akıllı seçenekler</string>
 </resources>

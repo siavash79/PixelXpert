@@ -708,6 +708,9 @@ public class StatusbarMods extends XposedModPack {
 
 						//<modding clock>
 						placeClock();
+
+						mNotificationContainerContainer.setVisibility(GONE);
+						setHeights();
 					}
 				});
 

@@ -1,3 +1,6 @@
+**canary-193**  
+- Fixed QS light theme on A13 R18  
+  
 **canary-192**  
 - (Potential) Fixed maximum statusbar notifications  
   

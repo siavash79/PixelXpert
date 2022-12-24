@@ -2,7 +2,6 @@ package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -12,6 +11,7 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
@@ -21,9 +21,9 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
-import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,6 +41,10 @@ import sh.siava.AOSPMods.utils.SystemUtils;
 public class QSThemeManager extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
+	public static final int STATE_UNAVAILABLE = 0;
+	public static final int STATE_INACTIVE = 1;
+	public static final int STATE_ACTIVE = 2;
+
 	private static boolean lightQSHeaderEnabled = false;
 	private static boolean dualToneQSEnabled = false;
 	private static boolean brightnessThickTrackEnabled = false;
@@ -50,6 +54,7 @@ public class QSThemeManager extends XposedModPack {
 	private Class<?> UtilsClass = null;
 	private Integer colorInactive = null;
 	private int colorUnavailable;
+	private int colorActive;
 	private Drawable lightFooterShape = null;
 	private Object mClockViewQSHeader;
 
@@ -111,7 +116,37 @@ public class QSThemeManager extends XposedModPack {
 		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 
-		//While QS Clock bug
+		hookAllMethods(QSIconViewImplClass, "updateIcon", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(lightQSHeaderEnabled
+						&& !getIsDark()
+						&& getIntField(param.args[1], "state") == STATE_ACTIVE)
+				{
+					((ImageView) param.args[0])
+							.setImageTintList(
+									ColorStateList
+											.valueOf(colorInactive));
+				}
+			}
+		});
+
+		hookAllMethods(QSIconViewImplClass, "setIcon", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if (lightQSHeaderEnabled
+						&& !getIsDark())
+				{
+					if (param.args[0] instanceof ImageView
+							&& getIntField(param.args[1], "state") == STATE_ACTIVE)
+					{
+						setObjectField(param.thisObject, "mTint", colorInactive);
+					}
+				}
+			}
+		});
+
+		//White QS Clock bug
 		hookAllMethods(QuickStatusBarHeaderClass, "onFinishInflate", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -131,6 +166,7 @@ public class QSThemeManager extends XposedModPack {
 		});
 
 		hookAllConstructors(FooterActionsControllerClass, new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!wasDark && lightQSHeaderEnabled) {
@@ -198,11 +234,14 @@ public class QSThemeManager extends XposedModPack {
 				}
 				int state = (int) param.args[0];
 				switch (state) {
-					case 0: //Unavailable
+					case STATE_UNAVAILABLE:
 						param.setResult(colorUnavailable);
 						break;
-					case 1: //inactive
+					case STATE_INACTIVE:
 						param.setResult(colorInactive);
+						break;
+					case STATE_ACTIVE:
+						param.setResult(colorActive);
 						break;
 				}
 			}
@@ -253,13 +292,13 @@ public class QSThemeManager extends XposedModPack {
 
 //                        Object mScrimBehind = getObjectField(param.thisObject, "mScrimBehind");
 
-						ColorStateList states = (ColorStateList) callStaticMethod(UtilsClass,
+						@SuppressLint("DiscouragedApi") ColorStateList states = (ColorStateList) callStaticMethod(UtilsClass,
 								"getColorAttr",
-								mContext,
-								mContext.getResources().getIdentifier("android:attr/colorSurfaceHeader", "attr", listenPackage));
+								mContext.getResources().getIdentifier("android:attr/colorSurfaceHeader", "attr", listenPackage),
+								mContext);
 						int surfaceBackground = states.getDefaultColor();
 
-						ColorStateList accentStates = (ColorStateList) callStaticMethod(UtilsClass, "getColorAttr", mContext, mContext.getResources().getIdentifier("colorAccent", "attr", "android"));
+						@SuppressLint("DiscouragedApi") ColorStateList accentStates = (ColorStateList) callStaticMethod(UtilsClass, "getColorAttr", mContext.getResources().getIdentifier("colorAccent", "attr", "android"), mContext);
 						int accent = accentStates.getDefaultColor();
 
 						callMethod(mBehindColors, "setMainColor", surfaceBackground);
@@ -276,9 +315,9 @@ public class QSThemeManager extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!lightQSHeaderEnabled) return;
 
-				Object colorActive = callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
-						mContext,
-						mContext.getResources().getIdentifier("android:attr/colorAccent", "attr", lpparam.packageName));
+				@SuppressLint("DiscouragedApi") Object colorActive = callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+						mContext.getResources().getIdentifier("android:attr/colorAccent", "attr", lpparam.packageName),
+						mContext);
 
 				setObjectField(param.thisObject, "colorActive", colorActive);
 			}
@@ -415,8 +454,13 @@ public class QSThemeManager extends XposedModPack {
 		}
 	}
 
+	@SuppressLint("DiscouragedApi")
 	private void calculateColors() {
 		Resources res = mContext.getResources();
+		colorActive = res.getColor(
+				res.getIdentifier("android:color/system_accent1_600", "color", listenPackage),
+				mContext.getTheme());
+
 		colorInactive = res.getColor(
 				res.getIdentifier("android:color/system_accent1_10", "color", listenPackage),
 				mContext.getTheme());
@@ -438,7 +482,7 @@ public class QSThemeManager extends XposedModPack {
 	}
 
 	private Drawable makeFooterShape() {
-		int radius = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("qs_security_footer_corner_radius", "dimen", mContext.getPackageName()));
+		@SuppressLint("DiscouragedApi") int radius = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("qs_security_footer_corner_radius", "dimen", mContext.getPackageName()));
 		float[] radiusF = new float[8];
 		for (int i = 0; i < 8; i++) {
 			radiusF[i] = radius;
@@ -447,7 +491,6 @@ public class QSThemeManager extends XposedModPack {
 		result.getPaint().setStyle(Paint.Style.FILL);
 		return result;
 	}
-
 
 	@Override
 	public boolean listensTo(String packageName) {

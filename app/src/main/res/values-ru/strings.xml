@@ -358,5 +358,7 @@
     <string name="hide_roaming_title">Скрыть индикаторы мобильного роуминга</string>
     <string name="caution_mobile_costs">ВНИМАНИЕ! Незнание того, что вы находитесь в роуминге, может увеличить ваши расходы на мобильную связь.</string>
     <string name="hide_avatar_title">Удалить аватар пользователя (многопользовательский режим)</string>
+	<string name="camera_manager_master_title">Включить модификации фонарика (Отключите, если устройство не поддерживает)</string>
+    <string name="clipboard_smart_actions_title">Дополнительные действия в буфере обмена</string>
 
 </resources>

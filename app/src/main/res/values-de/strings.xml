@@ -358,4 +358,6 @@
     <string name="hide_roaming_title">Mobile Roaming-Anzeigen ausblenden</string>
     <string name="caution_mobile_costs">VORSICHT - Wenn Sie nicht wissen, dass Sie Roaming verwenden, können Ihre Mobilfunkkosten steigen</string>
     <string name="hide_avatar_title">Benutzer-Avatar entfernen (Mehrbenutzermodus)</string>
+    <string name="clipboard_smart_actions_title">Smart-Aktionen in der Zwischenablage</string>
+    <string name="camera_manager_master_title">Taschenlampenmodifikationen aktivieren (Deaktivieren, wenn das Gerät es nicht unterstützt)</string>
 </resources>

@@ -1,3 +1,6 @@
+**canary-195**  
+- Fixed leveled flashlight tile not vibrating on tap  
+  
 **canary-194**  
 - Fixed QS tile color on light theme  
 - Fixed startup wrong clock position  

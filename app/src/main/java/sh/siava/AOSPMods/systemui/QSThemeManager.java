@@ -284,6 +284,13 @@ public class QSThemeManager extends XposedModPack {
 					}
 				});
 
+		hookAllMethods(ScrimControllerClass, "updateThemeColors", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				calculateColors();
+			}
+		});
+
 		hookAllMethods(ScrimControllerClass,
 				"updateThemeColors", new XC_MethodHook() {
 					@Override
@@ -310,7 +317,7 @@ public class QSThemeManager extends XposedModPack {
 					}
 				});
 
-		hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
+/*		hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!lightQSHeaderEnabled) return;
@@ -321,7 +328,7 @@ public class QSThemeManager extends XposedModPack {
 
 				setObjectField(param.thisObject, "colorActive", colorActive);
 			}
-		});
+		});*/
 
 		hookAllMethods(ScrimControllerClass, "applyState", new XC_MethodHook() {
 			@Override

@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.systemui;
 
 import static android.service.quicksettings.Tile.STATE_ACTIVE;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
@@ -137,6 +138,7 @@ public class FlashLightLevel extends XposedModPack {
 											Xprefs.edit().putFloat("flashPCT", currentPct).apply();
 										} else {
 											handleFlashLightClick(true, currentPct);
+											callMethod(param.thisObject, "click");
 										}
 										return true;
 									}
@@ -208,6 +210,10 @@ public class FlashLightLevel extends XposedModPack {
 
 		@Override
 		public void draw(@NonNull Canvas canvas) {
+			if(shape.getBounds().height() == 0)
+			{
+				return;
+			}
 			Bitmap bitmap = Bitmap.createBitmap(Math.round(shape.getBounds().width() * currentPct), shape.getBounds().height(), Bitmap.Config.ARGB_8888);
 			Canvas tempCanvas = new Canvas(bitmap);
 			shape.draw(tempCanvas);

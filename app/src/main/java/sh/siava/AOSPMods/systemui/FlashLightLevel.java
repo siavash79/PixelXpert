@@ -2,7 +2,6 @@ package sh.siava.AOSPMods.systemui;
 
 import static android.service.quicksettings.Tile.STATE_ACTIVE;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
@@ -177,19 +176,7 @@ public class FlashLightLevel extends XposedModPack {
 	}
 
 	private void handleFlashLightClick(boolean toggle, float pct) {
-		boolean currState = SystemUtils.isFlashOn();
-
-		if (!toggle && !currState) return; //nothing to do
-
-		if (toggle) {
-			currState = !currState;
-		}
-
-		if (currState) {
-			SystemUtils.setFlash(true, pct);
-		} else {
-			SystemUtils.setFlash(false);
-		}
+		SystemUtils.setFlash(toggle ^ SystemUtils.isFlashOn(), pct);
 	}
 
 	private class flashPercentageShape extends Drawable {

@@ -8,6 +8,7 @@ import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
+import static sh.siava.AOSPMods.systemui.QSTileGrid.QSHapticEnabled;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.VibrationEffect;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -138,7 +140,7 @@ public class FlashLightLevel extends XposedModPack {
 											Xprefs.edit().putFloat("flashPCT", currentPct).apply();
 										} else {
 											handleFlashLightClick(true, currentPct);
-											callMethod(param.thisObject, "click");
+											if (QSHapticEnabled) SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK);
 										}
 										return true;
 									}

@@ -49,7 +49,7 @@ public class QSTileGrid extends XposedModPack {
 	private static float QSLabelScaleFactor = 1, QSSecondaryLabelScaleFactor = 1;
 	private static boolean QRTileInactiveColor = false;
 
-	private static boolean QSHapticEnabled = false;
+	protected static boolean QSHapticEnabled = false;
 	private static boolean VerticalQSTile = false;
 
 	public QSTileGrid(Context context) {

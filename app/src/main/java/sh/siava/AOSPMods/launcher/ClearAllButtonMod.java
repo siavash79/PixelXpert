@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.launcher;
 
+import static android.view.View.GONE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -36,6 +37,7 @@ public class ClearAllButtonMod extends XposedModPack {
 	private Object recentView;
 	private static boolean RecentClearAllReposition = false;
 	private ImageView clearAllIcon;
+	private FrameLayout clearAllButton;
 
 	public ClearAllButtonMod(Context context) {
 		super(context);
@@ -80,12 +82,19 @@ public class ClearAllButtonMod extends XposedModPack {
 			}
 		});
 
+		hookAllMethods(RecentsViewClass, "setVisibility", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				clearAllButton.setVisibility((Integer) param.args[0]);
+			}
+		});
+
 		hookAllMethods(OverviewActionsViewClass, "onFinishInflate", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if(!RecentClearAllReposition) return;
 
-				FrameLayout clearAllButton = new FrameLayout(mContext);
+				clearAllButton = new FrameLayout(mContext);
 
 				clearAllIcon = new ImageView(mContext);
 				clearAllIcon.setImageDrawable(ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_clear_all, mContext.getTheme()));
@@ -112,6 +121,8 @@ public class ClearAllButtonMod extends XposedModPack {
 				FrameLayout parent = (FrameLayout)param.thisObject;
 				parent.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT; //resize to whole screen
 				parent.addView(clearAllButton);
+				clearAllButton.setVisibility(GONE);
+
 			}
 		});
 	}

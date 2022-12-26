@@ -12,9 +12,9 @@ import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.ResourceManager.resparams;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.VibrationEffect;
 import android.view.Gravity;
 import android.view.View;
@@ -49,7 +49,7 @@ public class QSTileGrid extends XposedModPack {
 	private static float QSLabelScaleFactor = 1, QSSecondaryLabelScaleFactor = 1;
 	private static boolean QRTileInactiveColor = false;
 
-	private static boolean QSHapticEnabled = false;
+	protected static boolean QSHapticEnabled = false;
 	private static boolean VerticalQSTile = false;
 
 	public QSTileGrid(Context context) {
@@ -155,6 +155,7 @@ public class QSTileGrid extends XposedModPack {
 		});
 
 		hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				try {
@@ -186,29 +187,15 @@ public class QSTileGrid extends XposedModPack {
 					}
 
 					if (labelSize == null) { //we need initial font sizes
-						if (Build.VERSION.SDK_INT == 33) {
-							callStaticMethod(FontSizeUtilsClass,
-									"updateFontSize",
-									mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
-									getObjectField(param.thisObject, "label"));
+						callStaticMethod(FontSizeUtilsClass,
+								"updateFontSize",
+								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
+								getObjectField(param.thisObject, "label"));
 
-							callStaticMethod(FontSizeUtilsClass,
-									"updateFontSize",
-									mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
-									getObjectField(param.thisObject, "secondaryLabel"));
-
-
-						} else {
-							callStaticMethod(FontSizeUtilsClass,
-									"updateFontSize",
-									getObjectField(param.thisObject, "label"),
-									mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
-
-							callStaticMethod(FontSizeUtilsClass,
-									"updateFontSize",
-									getObjectField(param.thisObject, "secondaryLabel"),
-									mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
-						}
+						callStaticMethod(FontSizeUtilsClass,
+								"updateFontSize",
+								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
+								getObjectField(param.thisObject, "secondaryLabel"));
 
 						TextView label = (TextView) getObjectField(param.thisObject, "label");
 						TextView secondaryLabel = (TextView) getObjectField(param.thisObject, "secondaryLabel");
@@ -240,7 +227,7 @@ public class QSTileGrid extends XposedModPack {
 	private void fixPaddingVerticalLayout(LinearLayout parent) {
 		Resources res = mContext.getResources();
 
-		int padding = res.getDimensionPixelSize(
+		@SuppressLint("DiscouragedApi") int padding = res.getDimensionPixelSize(
 				res.getIdentifier(
 						"qs_tile_padding",
 						"dimen",
@@ -268,6 +255,7 @@ public class QSTileGrid extends XposedModPack {
 		}
 	}
 
+	@SuppressLint("DiscouragedApi")
 	private void setResources() {
 		XC_InitPackageResources.InitPackageResourcesParam ourResparam = resparams.get(listenPackage);
 

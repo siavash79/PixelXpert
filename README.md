@@ -1,10 +1,12 @@
+For Pixel Stock Android 12 and 13 (Up to Nov 2022 - AOSP 13R8): [![Latest Release for A12 & A13 up to Nov 2022](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Download)](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)  
+
 [![Latest Release](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Download)](https://github.com/siavash79/AOSPMods/releases/latest)
 ![Downloads - Stable channel](https://img.shields.io/github/downloads/siavash79/aospmods/total?color=red&label=Downloads%20-%20Stable%20Channel)
 
 [![XDA URL](https://img.shields.io/twitter/url?label=XDA%20Developers&logo=XDA-Developers&style=social&url=https%3A%2F%2Fsh-ort.app%2F1fjst)](https://sh-ort.app/1fjst)
 [![Telegram URL](https://img.shields.io/twitter/url?label=Telegram&logo=telegram&style=social&url=https%3A%2F%2Ft.me%2FAOSPMods_Support)](https://t.me/AOSPMods_Support)
 
-![Header Image](https://raw.githubusercontent.com/siavash79/AOSPMods/master/.github/AOSP_Mods_Header.png)
+![Header Image](https://github.com/siavash79/AOSPMods/blob/canary/.github/AOSPMods_Banner_1280.jpg?raw=true)
 
 This is a mixed Xposed+Magisk module, which is made to allow customizations that are not originally designed in AOSP (Android Open Source Project).
 
@@ -73,7 +75,11 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @siavash79 Persian
 - @abalam1980 Dutch
 - @trinhloivn Vietnamese
-- @xxz3 Italian
+- @xxz3 Italian  
+
+**Graphic design:**  
+- JstormZx@Telegram (Icon and Banner) 
+- RKBDI@Telegram  (Icon)
 
 **Brought to you by:**
 @siavash79 & @ElTifo

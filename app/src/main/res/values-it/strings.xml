@@ -49,11 +49,11 @@
     <string name="wakeup_to_security_title">Mostra l\'input di sicurezza alla riattivazione del dispositivo</string>
     <string name="easy_unlock_title">Sblocco facilitato (Pin/Password)</string>
     <string name="easy_unlock_summary">Se non funziona la prima volta, riprova</string>
-
+    <string name="charging_info_title">Informazioni di ricarica sulla schermata di blocco</string>
+    <string name="imperial_units_title">Sistema di unità imperiali</string>
+    
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doppio tocco per spegnere</string>
-    <string name="double_tap_sleep_off">"Doppio tocco non spegne lo schermo"</string>
-    <string name="double_tap_sleep_on">Doppio tocco sulla Status Bar o schermata di blocco spegne lo schermo</string>
     <string name="battery_style_title">Stile batteria</string>
     <string name="battery_show_percent_title">Mostra percentuale batteria</string>
     <string name="battery_style_category_title">Stile indicatore batteria</string>
@@ -70,6 +70,8 @@
 
     <string name="lte_4g_icon_title">Icona LTE / 4G</string>
     <string name="combined_signal_icon_title">Icone di segnale combinate</string>
+    <string name="hide_roaming_title">Nascondi indicatori roaming rete mobile</string>
+    <string name="caution_mobile_costs">ATTENZIONE - Non sapere di essere in roaming potrebbe aumentare i costi della rete</string>
     <string name="volte_icon_title">Mostra icona VoLTE quando disponibile</string>
     <string name="hide_privacychip_title">Nascondi indicatore privacy \n(Fotocamera, Mic)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">Mostra icone Vibrazione/Silenzioso</string>
@@ -98,7 +100,7 @@
     <string name="ntsb_enabled_title">Abilita monitor di rete</string>
     <string name="ntsb_position_title">Posizione monitor</string>
     <string name="ntsb_threshold_title">Soglia nascondimento automatico</string>
-    <string name="ntsb_threshold_summary">"Nascondi se il traffico è inferiore a… (Kilobytes)"</string>
+    <string name="ntsb_threshold_summary">Nascondi se il traffico è inferiore a… (Kilobytes)</string>
     <string name="network_mode_title">Stile monitor</string>
     <string name="network_colorful_title">Colorato</string>
     <string name="network_download_top">Velocità download in cima</string>
@@ -209,7 +211,7 @@
     <string name="allow_all_screen_rotations_summary">Ignorerà anche il pulsante per rotazione manuale</string>
     <string name="force_no_cutout">Ignora foro fotocamera</string>
     <string name="clear_all_reposition_title">Aggiungi il pulsante cancella tutto sulla schermata app recenti</string>
-    <string name="volume_button_step_title">Step volume (0 - 100%)</string>
+    <string name="volume_button_step_title">Step volume (0 – 100%)</string>
     <string name="display_resolution_title">Risoluzione display</string>
     <string name="brightness_range_title">Limiti luminosità display</string>
     <string name="brightness_range_not_linear">Questo range NON è lineare: a volte una piccola differenza porta a notevoli cambiamenti</string>
@@ -227,9 +229,9 @@
     <string name="custom_themed_icons_on">Icone personalizzate abilitate</string>
     <string name="so_vol_longpress_skip">Premi a lungo i pulsanti volume per saltare traccia</string>
     <string name="notifications_header">Opzioni di notifica</string>
-    <string name="expand_notifications_icons_title">"Aggiungi pulsante espandi/comprimi tutte</string>
+    <string name="expand_notifications_icons_title">Aggiungi pulsante espandi/comprimi tutte</string>
     <string name="heads_up_notification_duration">Durata notifica heads-up</string>
-    <string name="disable_overscroll">"Disattiva l\'effetto di overscroll elastico</string>
+    <string name="disable_overscroll">Disattiva l\'effetto di overscroll elastico</string>
     <string name="overscroll_on_summary">Importante: DEVI abilitare le app per le quali desideri disabilitare l\'overscroll all\'interno di LSPosed</string>
     <string name="milliseconds">Milliseconds</string>
 

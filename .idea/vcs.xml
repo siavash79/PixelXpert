@@ -3,6 +3,5 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Submodules/RangeSliderPreference" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Submodules/renderscript-toolkit" vcs="Git" />
   </component>
 </project>

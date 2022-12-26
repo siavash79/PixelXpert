@@ -13,9 +13,9 @@ import android.widget.LinearLayout;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
+import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.FlexStatusIconContainer;
 import sh.siava.AOSPMods.utils.SystemUtils;
-import sh.siava.AOSPMods.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class MultiStatusbarRows extends XposedModPack {
@@ -59,7 +59,7 @@ public class MultiStatusbarRows extends XposedModPack {
 					View linear = (View) param.args[0];
 
 					String id = mContext.getResources().getResourceName(((View) linear.getParent().getParent()).getId()); //helps getting exception if it's in QS
-					if (!id.contains("system_icon_area")) return;
+					if (!id.contains("status_bar_end_side_content")) return;
 
 					FlexStatusIconContainer flex = new FlexStatusIconContainer(mContext, lpparam.classLoader);
 					flex.setPadding(linear.getPaddingLeft(), 0, linear.getPaddingRight(), 0);

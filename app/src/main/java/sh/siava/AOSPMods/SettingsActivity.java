@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.view.Gravity;
@@ -315,24 +314,27 @@ public class SettingsActivity extends AppCompatActivity implements
 		}
 
 		private void updateVisibility(SharedPreferences prefs) {
-			findPreference("HideNavbarOverlay").setVisible(showOverlays);
-
-			int taskBarMode = Integer.parseInt(prefs.getString("taskBarMode", "0"));
-			findPreference("TaskbarAsRecents").setVisible(taskBarMode == 1);
-			findPreference("taskbarHeightOverride").setVisible(taskBarMode == 1);
-			findPreference("TaskbarRadiusOverride").setVisible(taskBarMode == 1);
-			findPreference("TaskbarHideAllAppsIcon").setVisible(taskBarMode == 1 && Build.VERSION.SDK_INT >= 33);
-
-			float taskbarHeightOverride = 100f;
 			try {
-				taskbarHeightOverride = RangeSliderPreference.getValues(prefs, "taskbarHeightOverride", 100f).get(0);
-			} catch (Throwable ignored) {
-			}
-			findPreference("taskbarHeightOverride").setSummary(
-					taskbarHeightOverride != 100f
-							? taskbarHeightOverride + "%"
-							: getString(R.string.word_default)
-			);
+				findPreference("HideNavbarOverlay").setVisible(showOverlays);
+
+				int taskBarMode = Integer.parseInt(prefs.getString("taskBarMode", "0"));
+				findPreference("TaskbarAsRecents").setVisible(taskBarMode == 1);
+				findPreference("taskbarHeightOverride").setVisible(taskBarMode == 1);
+				findPreference("TaskbarRadiusOverride").setVisible(taskBarMode == 1);
+				findPreference("TaskbarHideAllAppsIcon").setVisible(taskBarMode == 1);
+
+				float taskbarHeightOverride = 100f;
+				try {
+					taskbarHeightOverride = RangeSliderPreference.getValues(prefs, "taskbarHeightOverride", 100f).get(0);
+				} catch (Throwable ignored) {
+				}
+				findPreference("taskbarHeightOverride").setSummary(
+						taskbarHeightOverride != 100f
+								? taskbarHeightOverride + "%"
+								: getString(R.string.word_default)
+				);
+
+			}catch (Throwable ignored){}
 		}
 
 	}
@@ -388,21 +390,22 @@ public class SettingsActivity extends AppCompatActivity implements
 		}
 
 		private void updateVisibility(SharedPreferences sharedPreferences) {
-			findPreference("album_art_category").setVisible(Build.VERSION.SDK_INT < 33);
-			findPreference("carrierTextValue").setVisible(sharedPreferences.getBoolean("carrierTextMod", false));
-			findPreference("albumArtLockScreenBlurLevel").setSummary(sharedPreferences.getInt("albumArtLockScreenBlurLevel", 0) + "%");
-			findPreference("albumArtLockScreenBlurLevel").setVisible(sharedPreferences.getBoolean("albumArtLockScreenEnabled", false));
-
-			float KeyGuardDimAmount = -1;
 			try {
-				KeyGuardDimAmount = RangeSliderPreference.getValues(sharedPreferences, "KeyGuardDimAmount", -1).get(0);
-			} catch (Exception ignored) {
-			}
-			findPreference("KeyGuardDimAmount").setSummary(
-					KeyGuardDimAmount < 0
-							? getString(R.string.word_default)
-							: KeyGuardDimAmount + "%");
+				findPreference("carrierTextValue").setVisible(sharedPreferences.getBoolean("carrierTextMod", false));
 
+				float KeyGuardDimAmount = -1;
+				try {
+					KeyGuardDimAmount = RangeSliderPreference.getValues(sharedPreferences, "KeyGuardDimAmount", -1).get(0);
+				} catch (Exception ignored) {
+				}
+				findPreference("KeyGuardDimAmount").setSummary(
+						KeyGuardDimAmount < 0
+								? getString(R.string.word_default)
+								: KeyGuardDimAmount + "%");
+
+				findPreference("TemperatureUnitF").setVisible(sharedPreferences.getBoolean("ShowChargingInfo", false));
+			}
+			catch (Throwable ignored){}
 		}
 	}
 
@@ -631,8 +634,6 @@ public class SettingsActivity extends AppCompatActivity implements
 				findPreference("ThreeButtonLeft").setVisible(ThreeButtonLayoutMod);
 				findPreference("ThreeButtonCenter").setVisible(ThreeButtonLayoutMod);
 				findPreference("ThreeButtonRight").setVisible(ThreeButtonLayoutMod);
-
-				findPreference("BackLongPressKill").setVisible(Build.VERSION.SDK_INT < 33);
 			} catch (Exception ignored) {
 			}
 		}
@@ -741,10 +742,7 @@ public class SettingsActivity extends AppCompatActivity implements
 				}
 				findPreference("QSTilesThemesOverlayEx").setVisible(showOverlays);
 
-				findPreference("leveledFlashTile").setVisible(Build.VERSION.SDK_INT >= 33);
 				findPreference("isFlashLevelGlobal").setVisible(findPreference("leveledFlashTile").isVisible() && sharedPreferences.getBoolean("leveledFlashTile", false));
-
-				findPreference("QRTileInactiveColor").setVisible(Build.VERSION.SDK_INT >= 33);
 			} catch (Exception ignored) {
 			}
 		}

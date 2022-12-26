@@ -7,7 +7,6 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.view.View;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -56,13 +55,8 @@ public class AOSPSettingsLauncher extends XposedModPack {
 				"onViewAttached", new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						Object settingsButton;
-						if (Build.VERSION.SDK_INT == 33) { //A13
-							settingsButton = getObjectField(param.thisObject, "settingsButtonContainer");
-						} else //SDK 31, 32
-						{
-							settingsButton = getObjectField(param.thisObject, "settingsButton");
-						}
+						Object settingsButton = getObjectField(param.thisObject, "settingsButtonContainer");
+
 						activityStarter = getObjectField(param.thisObject, "activityStarter");
 						callMethod(settingsButton, "setOnLongClickListener", listener);
 					}

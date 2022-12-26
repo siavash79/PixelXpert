@@ -9,13 +9,12 @@ import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
-import static sh.siava.AOSPMods.utils.Helpers.tryHookAllMethods;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
+import static sh.siava.AOSPMods.utils.Helpers.tryHookAllMethods;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -177,9 +176,7 @@ public class GestureNavbarManager extends XposedModPack {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 						if (GesPillHeightFactor != 100) {
-							mRadius = (Build.VERSION.SDK_INT == 33)
-									? Math.round((float) getObjectField(param.thisObject, "mRadius")) //A13
-									: (int) getObjectField(param.thisObject, "mRadius"); //A12
+							mRadius = Math.round((float) getObjectField(param.thisObject, "mRadius"));
 
 							setObjectField(param.thisObject, "mRadius", Math.round(mRadius * GesPillHeightFactor / 100f));
 						}

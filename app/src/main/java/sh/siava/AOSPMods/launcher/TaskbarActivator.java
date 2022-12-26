@@ -5,7 +5,6 @@ import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
-import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
@@ -184,11 +183,10 @@ public class TaskbarActivator extends XposedModPack {
 						|| refreshing
 						|| TaskBarView == null)
 					return;
-
 				new Thread(() -> {
 					refreshing = true;
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(100);
 					} catch (Throwable ignored) {
 					}
 
@@ -203,9 +201,10 @@ public class TaskbarActivator extends XposedModPack {
 									UID);
 
 							recentTaskList.removeIf(r ->
-									getBooleanField(
-											getObjectField(r, "mTaskInfo1"),
-											"isFocused")
+									(boolean) getObjectField(
+											((Object[]) getObjectField(r, "mTasks"))[0],
+											"isFocused"
+									)
 							);
 
 							if (recentTaskList.size() > numShownHotseatIcons)
@@ -216,9 +215,9 @@ public class TaskbarActivator extends XposedModPack {
 									Math.min(numShownHotseatIcons, recentTaskList.size()));
 
 							for (int i = 0; i < itemInfos.length; i++) {
-								TaskInfo taskInfo = (TaskInfo) getObjectField(recentTaskList.get(i), "mTaskInfo1");
+								TaskInfo taskInfo = (TaskInfo) ((Object[]) getObjectField(recentTaskList.get(i), "mTasks"))[0];
 
-								//noinspection JavaReflectionMemberAccess
+								//noinspection JavaReflectionMemberAccess,RedundantCast
 								itemInfos[i] = AppInfoClass.getConstructor(ComponentName.class, CharSequence.class, UserHandle.class, Intent.class)
 										.newInstance(
 												(ComponentName) getObjectField(taskInfo, "realActivity"),
@@ -284,4 +283,5 @@ public class TaskbarActivator extends XposedModPack {
 		});
 		//endregion
 	}
+
 }

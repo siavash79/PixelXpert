@@ -24,6 +24,7 @@
     <string name="theme_customization_category">Theming</string>
 
     <!--Lock screen related-->
+    <string name="hide_avatar_title">Remove user avatar (multi user mode)</string>
     <string name="transparent_fingerprint_circle">Remove background circle from under-display fingerprint</string>
     <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
     <string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
@@ -52,6 +53,8 @@
     <string name="wakeup_to_security_title">Show security input on device wake</string>
     <string name="easy_unlock_title">Easy unlock (Pin/Password)</string>
     <string name="easy_unlock_summary">If it didn\'t work the first time, try again</string>
+    <string name="charging_info_title">Charging information on lockscreen</string>
+    <string name="imperial_units_title">Use imperial units</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Double-tap to sleep</string>
@@ -73,6 +76,8 @@
 
     <string name="lte_4g_icon_title">LTE / 4G Icon</string>
     <string name="combined_signal_icon_title">Combined signal icons</string>
+    <string name="hide_roaming_title">Hide mobile roaming indicators</string>
+    <string name="caution_mobile_costs">CAUTION - Not knowing that you\'re roaming can increase your mobile costs</string>
     <string name="volte_icon_title">Show VoLTE icon when available</string>
     <string name="hide_privacychip_title">Hide privacy indicators\n(Camera, Mic)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
@@ -101,7 +106,7 @@
     <string name="ntsb_enabled_title">Enable network monitor</string>
     <string name="ntsb_position_title">Monitor Position</string>
     <string name="ntsb_threshold_title">Auto-hide threshold</string>
-    <string name="ntsb_threshold_summary">"Hide if traffic is less than… (Kilobytes)"</string>
+    <string name="ntsb_threshold_summary">Hide if traffic is less than… (Kilobytes)</string>
     <string name="network_mode_title">Monitor style</string>
     <string name="network_colorful_title">Make it colorful</string>
     <string name="network_download_top">Download speed on top</string>
@@ -226,6 +231,7 @@
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
+    <string name="clipboard_smart_actions_title">Smart actions on clipboard overlay</string>
     <string name="allow_all_screen_rotations">Force-unlock all screen rotations</string>
     <string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
     <string name="force_no_cutout">Ignore the camera cutout</string>
@@ -248,9 +254,9 @@
     <string name="custom_themed_icons_on">Custom icons enabled</string>
     <string name="so_vol_longpress_skip">Long press Volume buttons to skip music</string>
     <string name="notifications_header">Notifications options</string>
-    <string name="expand_notifications_icons_title">"Add expand/collapse all buttons</string>
+    <string name="expand_notifications_icons_title">Add expand/collapse all buttons</string>
     <string name="heads_up_notification_duration">Heads-up notification duration</string>
-    <string name="disable_overscroll">"Disable elastic overscroll effect</string>
+    <string name="disable_overscroll">Disable elastic overscroll effect</string>
     <string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for within LSPosed</string>
     <string name="milliseconds">Milliseconds</string>
 
@@ -371,6 +377,7 @@
 
     <string name="own_prefs_header">AOSPMods settings</string>
     <string name="language_title">Language</string>
+    <string name="camera_manager_master_title">Enable flashlight mods (Disable this if your phone doesn\'t support them)</string>
     <string name="toggle_dark_apply">(Toggle dark theme to apply)</string>
 
     <string name="gesture_nav_extra_cat">Extra navigation bar gestures</string>

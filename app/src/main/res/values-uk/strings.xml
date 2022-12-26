@@ -46,8 +46,6 @@
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Подвійне натискання для переходу в режим сну</string>
-    <string name="double_tap_sleep_off">"Подвійне натискання не вимикає дисплей"</string>
-    <string name="double_tap_sleep_on">Подвійне натискання на рядок стану або екран блокування вимикає дисплей</string>
     <string name="battery_style_title">Оберіть стиль батареї</string>
     <string name="battery_show_percent_title">Показати процент заряду батареї</string>
     <string name="battery_style_category_title">Стиль батареї</string>
@@ -88,7 +86,7 @@
     <string name="ntsb_enabled_title">Увімкнути монітор мережі</string>
     <string name="ntsb_position_title">Позиція монітора</string>
     <string name="ntsb_threshold_title">Автоматичне приховування порогу</string>
-    <string name="ntsb_threshold_summary">"Сховати якщо трафік менше ніж… (Кілобайти)"</string>
+    <string name="ntsb_threshold_summary">Сховати якщо трафік менше ніж… (Кілобайти)</string>
     <string name="network_mode_title">Стиль монітору</string>
     <string name="network_colorful_title">Зробити його кольоровим</string>
     <string name="network_download_top">Швидкість завантаження зверху</string>
@@ -153,7 +151,7 @@
     <string name="qstile_default">За замовчуванням</string>
 
     <!--Navigation bar related-->
-    <string name="back_gesture_category_title">Налаштувати жест "Назад"</string>
+    <string name="back_gesture_category_title">Налаштувати жест "Назад</string>
     <string name="back_from_left_title">Ліва сторона екрану</string>
     <string name="back_from_right_title">Права сторона екрану</string>
     <string name="back_height_title">Висота жесту</string>
@@ -181,15 +179,15 @@
     <string name="so_fingerprint_sensor_enabled">Увімкнути відбиток пальця, коли екран вимкнено</string>
 
     <string name="so_double_tap_wake_title">Торкніться двічі, щоб активувати</string>
-    <string name="so_double_tap_wake_summary">Вимикає "Торкніться, щоб активувати"</string>
+    <string name="so_double_tap_wake_summary">Вимикає "Торкніться, щоб активувати</string>
     <string name="doze_header">Поки екран вимкнено…</string>
     <string name="custom_themed_icons_title">Користувацькі теми для значків</string>
     <string name="custom_themed_icons_off">Користувацькі значки вимкнено</string>
     <string name="custom_themed_icons_on">Користувацькі значки увімкнено</string>
     <string name="so_vol_longpress_skip">Утримуйте кнопку гучності, щоб пропустити музичний трек</string>
     <string name="notifications_header">Налаштування сповіщень</string>
-    <string name="expand_notifications_icons_title">"Додати всі кнопки "розгорнути/згорнути"</string>
-    <string name="disable_overscroll">"Вимкнути еластичний ефект прокрутки</string>
+    <string name="expand_notifications_icons_title">Додати всі кнопки "розгорнути/згорнути</string>
+    <string name="disable_overscroll">Вимкнути еластичний ефект прокрутки</string>
     <string name="overscroll_on_summary">Важливо: ОБОВ\'ЯЗКОВО увімкніть програми, для яких ви хочете вимкнути прокрутку в LSPosed</string>
 
     <!-- Theming section related -->

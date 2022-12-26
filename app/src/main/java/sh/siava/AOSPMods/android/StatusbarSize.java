@@ -9,6 +9,7 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 import static sh.siava.AOSPMods.systemui.StatusbarMods.POSITION_LEFT;
 import static sh.siava.AOSPMods.systemui.StatusbarMods.POSITION_LEFT_EXTRA_LEVEL;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -42,6 +43,7 @@ public class StatusbarSize extends XposedModPack {
 		listenPacks.add(AOSPMods.SYSTEM_UI_PACKAGE);
 	}
 
+	@SuppressLint({"DiscouragedApi", "InternalInsetResource"})
 	@Override
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
@@ -127,7 +129,7 @@ public class StatusbarSize extends XposedModPack {
 			try {
 				Class<?> SystemBarUtilsClass = findClass("com.android.internal.policy.SystemBarUtils", lpparam.classLoader);
 
-				findAndHookMethod(SystemBarUtilsClass, "getStatusBarHeight", Resources.class, DisplayCutout.class, resizedResultHook);
+				hookAllMethods(SystemBarUtilsClass, "getStatusBarHeight", resizedResultHook);
 				hookAllMethods(SystemBarUtilsClass, "getStatusBarHeightForRotation", resizedResultHook);
 			} catch (Throwable ignored) {
 			}

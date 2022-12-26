@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods.utils;
 
+import static android.widget.LinearLayout.VERTICAL;
+
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,6 +25,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,7 +39,7 @@ import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 
 @SuppressLint("ViewConstructor")
-public class NetworkTraffic extends LinearLayout {
+public class NetworkTraffic extends FrameLayout {
 	private static final int KB = 1024;
 	private static final String symbol = "/s";
 
@@ -238,8 +241,11 @@ public class NetworkTraffic extends LinearLayout {
 		iconLayout.setOrientation(VERTICAL);
 		iconLayout.setGravity(Gravity.CENTER_VERTICAL);
 		iconLayout.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-		this.addView(iconLayout);
-		this.addView(mTextView);
+		LinearLayout contentLayout = new LinearLayout(mContext);
+		contentLayout.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL));
+		this.addView(contentLayout);
+		contentLayout.addView(iconLayout);
+		contentLayout.addView(mTextView);
 		mConnectivityManager = SystemUtils.ConnectivityManager();
 
 		isSBInstance = onStatusbar;

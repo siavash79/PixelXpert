@@ -1,3 +1,96 @@
+**canary-196**  
+- Minor fixes  
+  
+**canary-195**  
+- Fixed leveled flashlight tile not vibrating on tap  
+  
+**canary-194**  
+- Fixed QS tile color on light theme  
+- Fixed startup wrong clock position  
+  
+**canary-193**  
+- Fixed QS light theme on A13 R18  
+  
+**canary-192**  
+- (Potential) Fixed maximum statusbar notifications  
+  
+**canary-191**  
+- Added option to enable clipboard overlay smart actions (Misc)  
+  
+**canary-190**  
+- Fixed system crash when network monitor is disabled  
+  
+**canary-189**  
+- Fixed ClearAllButton constantly shown in pixel launcher  
+  
+**canary-188**  
+- Fixed statusbar network monitor layout glitches  
+  
+**canary-187**  
+- Fixed layout glitches on notification area - A13 R18  
+  
+**canary-186**  
+- Fixed NotificationExpander for 13 R18  
+  
+**canary-185**  
+- Fixed recent apps taskbar on A13 R18  
+  
+**canary-184**  
+- Fixed lockscreen mods on A13 R18  
+  
+**canary-183**  
+- Fixed lockscreen mods on A13 R18 (lockscreen shortcut mods removed until further notice)  
+  
+**canary-182**  
+- Fixed screenshot ANR/FC on A13 R18  
+  
+**canary-181**  
+- Fixed multi row system icons on statusbar for A13 R18  
+  
+**canary-180**  
+- Fixed statusbar mods for A13 R18  
+- Added built-in boot/load loop protector  
+  
+**canary-179**  
+- Fixed Statusbar double tap to sleep on 13 R18  
+  
+**canary-178**  
+- Fixed lockscreen double tap actions on 13 R18  
+  
+**canary-177**  
+- Fixed QS Quick pulldown on 13 R18  
+- Fixed UDFPS color on 13 R18  
+  
+**canary-176**  
+- Fixed pin entry not shuffling after correct entry when easy unlock is enabled  
+  
+**canary-175**  
+- Added option to hide the user avatar from lockscreen  
+  
+**canary-174**  
+- Fixed pin entry not shuffling after correct entry  
+  
+**canary-173**  
+- Added Fahrenheit unit for temperature  
+  
+**canary-172**  
+- Fixed number formatting for charging info  
+  
+**canary-171**  
+- Added option to show charging info on lockscreen  
+  
+**canary-170**  
+- Added option to hide roaming from statusbar  
+  
+**canary-169**  
+- Fixed battery icon not appearing after systemui restart  
+  
+**canary-168**  
+- (Experimental) Fix battery icon not indicating charge status in some situations  
+  
+**canary-167**  
+- Introducing the new app icon  
+  
 **canary-165**  
 - Fix heads-up notification duration fail to apply  
   

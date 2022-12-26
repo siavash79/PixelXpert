@@ -11,10 +11,10 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -154,12 +154,8 @@ public class BrightnessSlider extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				QSPanelController = param.thisObject;
 
-				int indexCorrection = (Build.VERSION.SDK_INT == 33)
-						? 0
-						: 1; //A12
-
-				brightnessControllerFactory = param.args[11 + indexCorrection];
-				brightnessSliderFactory = param.args[12 + indexCorrection];
+				brightnessControllerFactory = param.args[11];
+				brightnessSliderFactory = param.args[12];
 				mTunerService = getObjectField(param.thisObject, "mTunerService");
 
 				dataCollected(0, BrightnessMirrorHandlerClass);
@@ -212,9 +208,9 @@ public class BrightnessSlider extends XposedModPack {
 		if (slider != null) {
 			Resources res = mContext.getResources();
 			ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) slider.getLayoutParams();
-			int top = res.getDimensionPixelSize(
+			@SuppressLint("DiscouragedApi") int top = res.getDimensionPixelSize(
 					res.getIdentifier("qs_brightness_margin_top", "dimen", mContext.getPackageName()));
-			int bottom = res.getDimensionPixelSize(
+			@SuppressLint("DiscouragedApi") int bottom = res.getDimensionPixelSize(
 					res.getIdentifier("qs_brightness_margin_bottom", "dimen", mContext.getPackageName()));
 
 			lp.topMargin = (BrightnessSliderOnBottom)

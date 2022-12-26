@@ -8,8 +8,8 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
 import android.widget.ImageView;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -58,33 +58,22 @@ public class UDFPSManager extends XposedModPack {
 				} //if (!mFullyInflated) A13
 			}
 		};
-		if (Build.VERSION.SDK_INT == 33) { //A13
-			hookAllMethods(UdfpsKeyguardViewClass, "updateBurnInOffsets", FPCircleTransparenter);
-			hookAllMethods(UdfpsKeyguardViewClass, "onFinishInflate", FPCircleTransparenter);
+
+		hookAllMethods(UdfpsKeyguardViewClass, "updateBurnInOffsets", FPCircleTransparenter);
+		hookAllMethods(UdfpsKeyguardViewClass, "onFinishInflate", FPCircleTransparenter);
 
 
-			hookAllMethods(LockIconViewClass,
-					"updateIcon", new XC_MethodHook() {
-						@Override
-						protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-							setObjectField(param.thisObject, "mUseBackground", false);
-						}
-					});
-		} else { //A12
-			hookAllMethods(UdfpsKeyguardViewClass, "updateAlpha", FPCircleTransparenter);
-
-			hookAllMethods(LockIconViewClass,
-					"setUseBackground", new XC_MethodHook() {
-						@Override
-						protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-							if (!transparentBG) return;
-							param.args[0] = false;
-						}
-					});
-		}
+		hookAllMethods(LockIconViewClass,
+				"updateIcon", new XC_MethodHook() {
+					@Override
+					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+						setObjectField(param.thisObject, "mUseBackground", false);
+					}
+				});
 
 		hookAllMethods(UdfpsKeyguardViewClass,
 				"updateColor", new XC_MethodHook() {
+					@SuppressLint("DiscouragedApi")
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 						if (!transparentBG) return;
@@ -93,8 +82,16 @@ public class UDFPSManager extends XposedModPack {
 
 						if (mLockScreenFp == null) return;
 
-						int mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", mContext,
-								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
+						int mTextColorPrimary;
+						try { //13 R18 Pixel: int,context!!
+							mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+									mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
+						}
+						catch (Throwable ignored) //prior ones: context, int
+						{
+							mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", mContext,
+									mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
+						}
 
 						setObjectField(param.thisObject, "mTextColorPrimary", mTextColorPrimary);
 

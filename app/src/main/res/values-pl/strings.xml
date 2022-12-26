@@ -51,8 +51,6 @@
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Kliknij dwukrotnie, by wyłączyc</string>
-    <string name="double_tap_sleep_off">„Dwukrotne dotknięcie nie spowoduje wyłączenia wyświetlacza”</string>
-    <string name="double_tap_sleep_on">Dwukrotne dotknięcie paska stanu lub ekranu blokady wyłącza wyświetlacz</string>
     <string name="battery_style_title">Wybierz styl baterii</string>
     <string name="battery_show_percent_title">Pokaż procent baterii</string>
     <string name="battery_style_category_title">Styl baterii</string>
@@ -97,7 +95,7 @@
     <string name="ntsb_enabled_title">Włącz monitor sieci</string>
     <string name="ntsb_position_title">Pozycja monitora</string>
     <string name="ntsb_threshold_title">Próg automatycznego ukrywania</string>
-    <string name="ntsb_threshold_summary">„Ukryj, jeśli ruch jest mniejszy niż… (kilobajty)”</string>
+    <string name="ntsb_threshold_summary">Ukryj, jeśli ruch jest mniejszy niż… (kilobajty)</string>
     <string name="network_mode_title">Styl monitora</string>
     <string name="network_colorful_title">Niech to będzie kolorowe</string>
     <string name="network_download_top">Szybkość pobierania na górze</string>
@@ -220,8 +218,8 @@
     <string name="custom_themed_icons_on">Włączone ikony niestandardowe</string>
     <string name="so_vol_longpress_skip">Długie naciśnięcie przycisków głośności, aby pominąć muzykę</string>
     <string name="notifications_header">Opcje powiadomień</string>
-    <string name="expand_notifications_icons_title">"Dodaj rozwiń/zwiń wszystkie przyciski</string>
-    <string name="disable_overscroll">„Wyłącz efekt elastycznego przewijania</string>
+    <string name="expand_notifications_icons_title">Dodaj rozwiń/zwiń wszystkie przyciski</string>
+    <string name="disable_overscroll">Wyłącz efekt elastycznego przewijania</string>
     <string name="overscroll_on_summary">Ważne: MUSISZ włączyć aplikacje, dla których chcesz wyłączyć overscroll w ramach LSPosed</string>
 
 

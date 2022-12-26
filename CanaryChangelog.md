@@ -1,3 +1,6 @@
+**canary-196**  
+- Minor fixes  
+  
 **canary-195**  
 - Fixed leveled flashlight tile not vibrating on tap  
   

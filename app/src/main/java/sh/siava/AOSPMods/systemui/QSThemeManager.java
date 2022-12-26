@@ -154,7 +154,7 @@ public class QSThemeManager extends XposedModPack {
 			}
 		});
 
-		//While QS Clock bug
+		//White QS Clock bug
 		hookAllMethods(ClockClass, "onColorsChanged", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -316,19 +316,6 @@ public class QSThemeManager extends XposedModPack {
 						callMethod(mBehindColors, "setSupportsDarkText", contrast > 4.5);
 					}
 				});
-
-/*		hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!lightQSHeaderEnabled) return;
-
-				@SuppressLint("DiscouragedApi") Object colorActive = callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
-						mContext.getResources().getIdentifier("android:attr/colorAccent", "attr", lpparam.packageName),
-						mContext);
-
-				setObjectField(param.thisObject, "colorActive", colorActive);
-			}
-		});*/
 
 		hookAllMethods(ScrimControllerClass, "applyState", new XC_MethodHook() {
 			@Override

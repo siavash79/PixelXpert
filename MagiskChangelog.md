@@ -1,4 +1,4 @@
-**.2.5.0**  
+**2.5.0**  
 Added:  
 - Option to hide mobile roaming indicator (Statusbar)  
 - Option to show charging information on lockscreen (Lockscreen)  

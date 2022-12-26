@@ -1,7 +1,8 @@
-  
+### NOT COMPATIBLE WITH Android 13 Nov 2022 (AOSP 13 R8) or earlier. Earlier versions shall use AOSPMods v2.4.x
+
 **Compatibility:**  
 AOSP based Androids:  
-12, 12.1 (12L) and 13 (Not compatible with 13QPRx)  
+13 R18 and later (Pixel stock firmware 13, Dec 2022 stable version and later)  
   
 **If you're updating from previous versions:**  
 Update your module via module update shortcut in Magisk, or use the built-in updater located in 3-dot menu of the app   

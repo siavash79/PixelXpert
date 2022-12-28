@@ -1,5 +1,7 @@
-For Pixel Stock Android 12 and 13 (Up to Nov 2022 - AOSP 13R8): [![Latest Release for A12 & A13 up to Nov 2022](https://img.shields.io/badge/Download-v2.4.1-blue)](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)  
+### For Pixel Stock Android 12 and 13 (Up to Nov 2022 - AOSP 13R8):  
+[![Latest Release for A12 & A13 up to Nov 2022](https://img.shields.io/badge/Download-v2.4.1-blue)](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)  
 
+### For Pixel Stock Android 13 (starting with Dec 2022 security patch):  
 [![Latest Release](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Download)](https://github.com/siavash79/AOSPMods/releases/latest)
 ![Downloads - Stable channel](https://img.shields.io/github/downloads/siavash79/aospmods/total?color=red&label=Downloads%20-%20Stable%20Channel)
 
@@ -8,7 +10,7 @@ For Pixel Stock Android 12 and 13 (Up to Nov 2022 - AOSP 13R8): [![Latest Releas
 
 ![Header Image](https://github.com/siavash79/AOSPMods/blob/canary/.github/AOSPMods_Banner_1280.jpg?raw=true)
 
-This is a mixed Xposed+Magisk module, which is made to allow customizations that are not originally designed in AOSP (Android Open Source Project).
+This is a mixed Xposed+Magisk module, which is made to allow customizations that are not originally designed in AOSP (Android Open Source Project). Please read thorough below before reaching to download links
 
 **Features:**
 Currently, AOSP Mods offers customizations on different aspects of system framework and SystemUI, including:
@@ -20,27 +22,29 @@ Currently, AOSP Mods offers customizations on different aspects of system framew
 - Screen properties
 
 **Compatibility:**
-This module is designed based on AOSP source code. What does it mean? it means that it's expected to work on Roms (Firmwares) which are built based on fairly unmodified Android source code. This means, mainly, Pixel Phones (3, 4, 4a, 5, 5a, 6, 6a, 7), and any other Roms that haven't heavily modified the original Android codes. Our feedbacks show that AOSPMods is compatible with Pixel stock Roms and Pixel Experience (normal edition). The mod can also be installed on ArrowOS, Pixel Experience (Plus Edition), ProtonAOSP and LineageOS with *some* broken features.
+This module is designed based on AOSP source code. What does it mean? it means that it's expected to work on Roms (Firmwares) which are built based on fairly unmodified Android source code. This means, mainly, Pixel Phones (3, 4, 4a, 5, 5a, 6, 6a, 7), and any other Roms that haven't heavily modified the original Android codes. Our feedbacks show that AOSPMods is compatible with Pixel stock Roms and Pixel Experience (normal edition). The mod can also be installed on ArrowOS, Pixel Experience (Plus Edition), ProtonAOSP, LineageOS and etc with *some* broken features.
 
-- Android 12:         Compatible
-- Android 12.1 (12L): Compatible
-- Android 13:         Compatible
+- Android 12/12.1:   [final version: v2.4.1](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)
+- Android 13 stable (up until November 2022 firmware):   [final version: v.2.4.1](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)
+- Android 13 stable (starting from December 2022 firmware): [starting with v.2.5](https://github.com/siavash79/AOSPMods/releases/tag/v2.5.0) and all the canary versions afterwards
+- Android 13 beta QPR2: Not compatible until source code is out
    
 
 **Prerequisites:**
-- Compatible Roms (see above)
-- Device Rooted by Magisk 24.2+
-- LSPosed (Zygisk Version)
+- Compatible ROM (see above)
+- Device Rooted with Magisk 24.2+
+- LSPosed (Zygisk Version preferred)
 
 
 **How to install:**
-- Install the magisk module
-- Reboot (bootloops are not expected, but user should always be prepared for the worst)
-- You can use AOSPMods app to configure the module
+- Download the stable magisk module according to your firmware as mentioned above 
+- Install in magisk
+- Reboot (no bootloops are expected)
+- Open AOSPMods app and apply changes
 
-The module is released in 2 flavors, which download and update procedures are different:
+The module is released in 2 flavors, with different download and update procedures:
 - Stable release:  
-Manual Install/Update: through repository's Github release page (link below)  
+Manual Install/Update: through repository's Github release page (link below) AND through in-app updater  
 Automated updates: through magisk manager, or through in-app updater  
 - Canary release:  
 Manual Install/Update: only through repository's Actions page  

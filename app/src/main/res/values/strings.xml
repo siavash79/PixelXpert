@@ -80,7 +80,7 @@
     <string name="caution_mobile_costs">CAUTION - Not knowing that you\'re roaming can increase your mobile costs</string>
     <string name="volte_icon_title">Show VoLTE icon when available</string>
     <string name="hide_privacychip_title">Hide privacy indicators\n(Camera, Mic)</string><!-- \n means next line-->
-    <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
+    <string name="sb_vibration_switch_title">Show Vibrate icon</string>
     <string name="sbc_position_title">Clock position</string>
     <string name="sbc_ampm_style">AM/PM Style</string>
     <string name="sbc_show_secs">Show seconds</string>

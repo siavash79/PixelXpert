@@ -313,4 +313,7 @@
     <string name="imperial_units_title">Usar unidades imperiais</string>
     <string name="hide_roaming_title">Esconder indicador de roaming</string>
     <string name="caution_mobile_costs">ATENÇÃO - Não saber que está em roaming poderá aumentar os seus custos</string>
+	<string name="hide_avatar_title">Remover avatar do utilizador (modo multi-utilizador)</string>
+	<string name="clipboard_smart_actions_title">Ações rápidas na área de transferência</string>
+    <string name="camera_manager_master_title">Ativar mods da lanterna (desative caso o seu dispositivo não suporte)</string>
 </resources>

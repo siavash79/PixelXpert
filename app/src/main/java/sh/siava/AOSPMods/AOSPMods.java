@@ -70,34 +70,34 @@ public class AOSPMods implements IXposedHookLoadPackage {
 
 	public AOSPMods() {
 		//region Mod list definition
-		modPacks.add(NotificationExpander.class); //13 OK
-		modPacks.add(QSTileGrid.class); //
-		modPacks.add(BrightnessSlider.class); //13 OK
-		modPacks.add(FeatureFlagsMods.class); //13 OK
-		modPacks.add(ThreeButtonNavMods.class); //13 not planned//13 OK
-		modPacks.add(QSThemeManager.class); //A13 LightQSTheme
-		modPacks.add(ScreenGestures.class); //13 OK
-		modPacks.add(miscSettings.class); //13 OK except for internet tile
-		modPacks.add(AOSPSettingsLauncher.class); //13 OK
-		modPacks.add(QSQuickPullDown.class); //13 OK
-		modPacks.add(KeyguardMods.class); //13 OK
-		modPacks.add(UDFPSManager.class); //13 OK
-		modPacks.add(EasyUnlock.class); //13 OK
-		modPacks.add(MultiStatusbarRows.class); //13 OK
-		modPacks.add(StatusbarMods.class); //13 OK
-		modPacks.add(BatteryStyleManager.class); //13 OK
-		modPacks.add(GestureNavbarManager.class); //13 OK
-		modPacks.add(QSFooterTextManager.class); //13 OK
-		modPacks.add(ScreenshotMuter.class); //13 OK
-		modPacks.add(ScreenOffKeys.class); //13 OK
-		modPacks.add(TaskbarActivator.class); //13 OK
-		modPacks.add(KeyGuardPinScrambler.class); //13 OK
-		modPacks.add(OverScrollDisabler.class); //13 OK
-		modPacks.add(FingerprintWhileDozing.class); //13 OK
-		modPacks.add(StatusbarSize.class); //13 OK
-		modPacks.add(ScreenRotation.class); //13 OK
-		modPacks.add(CallVibrator.class); //13 OK
-		modPacks.add(FlashLightLevel.class); //13 based
+		modPacks.add(NotificationExpander.class);
+		modPacks.add(QSTileGrid.class);
+		modPacks.add(BrightnessSlider.class);
+		modPacks.add(FeatureFlagsMods.class);
+		modPacks.add(ThreeButtonNavMods.class);
+		modPacks.add(QSThemeManager.class);
+		modPacks.add(ScreenGestures.class);
+		modPacks.add(miscSettings.class);
+		modPacks.add(AOSPSettingsLauncher.class);
+		modPacks.add(QSQuickPullDown.class);
+		modPacks.add(KeyguardMods.class);
+		modPacks.add(UDFPSManager.class);
+		modPacks.add(EasyUnlock.class);
+		modPacks.add(MultiStatusbarRows.class); 
+		modPacks.add(StatusbarMods.class); 
+		modPacks.add(BatteryStyleManager.class); 
+		modPacks.add(GestureNavbarManager.class); 
+		modPacks.add(QSFooterTextManager.class); 
+		modPacks.add(ScreenshotMuter.class); 
+		modPacks.add(ScreenOffKeys.class); 
+		modPacks.add(TaskbarActivator.class); 
+		modPacks.add(KeyGuardPinScrambler.class); 
+		modPacks.add(OverScrollDisabler.class); 
+		modPacks.add(FingerprintWhileDozing.class); 
+		modPacks.add(StatusbarSize.class); 
+		modPacks.add(ScreenRotation.class); 
+		modPacks.add(CallVibrator.class); 
+		modPacks.add(FlashLightLevel.class);
 		modPacks.add(CustomNavGestures.class);
 		modPacks.add(PhoneWindowManager.class);
 		modPacks.add(BrightnessRange.class);

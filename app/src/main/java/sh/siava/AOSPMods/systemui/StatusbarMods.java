@@ -15,6 +15,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
+import static sh.siava.AOSPMods.utils.SettingsLibUtils.getColorAttrDefaultColor;
 
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
@@ -63,6 +64,7 @@ import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.NetworkTraffic;
 import sh.siava.AOSPMods.utils.NotificationIconContainerOverride;
+import sh.siava.AOSPMods.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.utils.ShyLinearLayout;
 import sh.siava.AOSPMods.utils.StringFormatter;
 import sh.siava.AOSPMods.utils.SystemUtils;
@@ -403,7 +405,6 @@ public class StatusbarMods extends XposedModPack {
 		//region needed classes
 		Class<?> ActivityStarterClass = findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
 		Class<?> DependencyClass = findClass("com.android.systemui.Dependency", lpparam.classLoader);
-		Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
 		Class<?> KeyguardStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
 //        Class<?> QuickStatusBarHeaderControllerClass = findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
 		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
@@ -415,6 +416,7 @@ public class StatusbarMods extends XposedModPack {
 		StatusBarIcon = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
+		SettingsLibUtils.init(lpparam.classLoader);
 //		Method setMeasuredDimensionMethod = findMethodExact(View.class, "setMeasuredDimension", int.class, int.class);
 		//endregion
 
@@ -560,19 +562,10 @@ public class StatusbarMods extends XposedModPack {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						//Getting QS text color for Network traffic
-						int fillColor;
-						try
-						{
-							fillColor = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+						int fillColor = getColorAttrDefaultColor(
 									mContext.getResources().getIdentifier("@android:attr/textColorPrimary", "attr", mContext.getPackageName()),
 									mContext);
-						}
-						catch (Throwable ignored)
-						{
-							fillColor = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
-									mContext,
-									mContext.getResources().getIdentifier("@android:attr/textColorPrimary", "attr", mContext.getPackageName()));
-						}
+
 						NetworkTraffic.setTintColor(fillColor, false);
 
 						//Clickable icons

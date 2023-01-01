@@ -7,12 +7,13 @@ import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.hookMethod;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
-import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
+import static sh.siava.AOSPMods.utils.SettingsLibUtils.getColorAttr;
+import static sh.siava.AOSPMods.utils.SettingsLibUtils.getColorAttrDefaultColor;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
@@ -39,6 +40,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.utils.StringFormatter;
 import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -152,7 +154,6 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
 		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpparam.classLoader);
 		Class<?> KeyguardIndicationControllerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
-		Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
 		Class<?> KeyguardStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarView", lpparam.classLoader);
@@ -160,6 +161,7 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> KeyguardBottomAreaViewBinderClass = findClass("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpparam.classLoader);
 		Class<?> AssistManager = findClass("com.android.systemui.assist.AssistManager", lpparam.classLoader);
 		Class<?> CameraGestureHelperClass = findClass("com.android.systemui.camera.CameraGestureHelper", lpparam.classLoader);
+		SettingsLibUtils.init(lpparam.classLoader);
 
 		hookAllConstructors(CameraGestureHelperClass, new XC_MethodHook() {
 			@Override
@@ -233,7 +235,7 @@ public class KeyguardMods extends XposedModPack {
 					}
 
 					if(transparentBGcolor) {
-						@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+						@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = getColorAttrDefaultColor(
 								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
 
 						try {
@@ -244,10 +246,10 @@ public class KeyguardMods extends XposedModPack {
 					else
 					{
 						log("converted");
-						@SuppressLint("DiscouragedApi") int mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+						@SuppressLint("DiscouragedApi") int mTextColorPrimary = getColorAttrDefaultColor(
 								mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
 
-						@SuppressLint("DiscouragedApi") ColorStateList colorSurface = (ColorStateList) callStaticMethod(UtilsClass, "getColorAttr",
+						@SuppressLint("DiscouragedApi") ColorStateList colorSurface = getColorAttr(
 								mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
 
 						v.getDrawable().setTint(mTextColorPrimary);

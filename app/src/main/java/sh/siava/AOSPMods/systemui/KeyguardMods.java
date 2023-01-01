@@ -1,29 +1,28 @@
 package sh.siava.AOSPMods.systemui;
 
 import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedBridge.hookMethod;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
-import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
-import static sh.siava.AOSPMods.utils.Helpers.dumpClass;
-import static sh.siava.AOSPMods.utils.Helpers.findAndDumpClass;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
 import android.app.WallpaperManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.provider.MediaStore;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,20 +30,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.lang.reflect.Method;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import kotlin.Unit;
-import kotlin.coroutines.Continuation;
-import kotlinx.coroutines.flow.Flow;
-import kotlinx.coroutines.flow.FlowCollector;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.StringFormatter;
@@ -86,14 +77,13 @@ public class KeyguardMods extends XposedModPack {
 	//endregion
 
 	//region keyguard bottom area shortcuts and transparency
+	private Object KeyguardBottomAreaView;
+	private Method startActivityAsUserMethod;
+	private Object mAssistUtils;
+	private Object CameraGestureHelper;
 	private static boolean transparentBGcolor = false;
 	private static String leftShortcut = "";
 	private static String rightShortcut = "";
-
-	private ImageView mWalletButton;
-	private ImageView mControlsButton;
-
-	private Object thisObject = null;
 	//endregion
 
 	//region hide user avatar
@@ -129,14 +119,6 @@ public class KeyguardMods extends XposedModPack {
 
 		if (Key.length > 0) {
 			switch (Key[0]) {
-				case "leftKeyguardShortcut":
-					if (thisObject != null)
-						convertShortcut(mControlsButton, leftShortcut, thisObject);
-					break;
-				case "rightKeyguardShortcut":
-					if (thisObject != null)
-						convertShortcut(mWalletButton, rightShortcut, thisObject);
-					break;
 				case "KGMiddleCustomText":
 					setMiddleText();
 					break;
@@ -166,16 +148,31 @@ public class KeyguardMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
 		Class<?> CarrierTextControllerClass = findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
-//		Class<?> KeyguardSliceViewClass = findClass("com.android.keyguard.KeyguardSliceView", lpparam.classLoader);
 		Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
 		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpparam.classLoader);
 		Class<?> KeyguardIndicationControllerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
-		Class<?> KeyguardBottomAreaViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
-		Class<?> UtilClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
+		Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
 		Class<?> KeyguardStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarView", lpparam.classLoader);
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
+		Class<?> KeyguardBottomAreaViewBinderClass = findClass("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpparam.classLoader);
+		Class<?> AssistManager = findClass("com.android.systemui.assist.AssistManager", lpparam.classLoader);
+		Class<?> CameraGestureHelperClass = findClass("com.android.systemui.camera.CameraGestureHelper", lpparam.classLoader);
+
+		hookAllConstructors(CameraGestureHelperClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				CameraGestureHelper = param.thisObject;
+			}
+		});
+
+		hookAllConstructors(AssistManager, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				mAssistUtils = getObjectField(param.thisObject, "mAssistUtils");
+			}
+		});
 
 		//needed to extract wallpaper colors and capabilities. This is a SysUIColorExtractor
 		hookAllConstructors(CentralSurfacesImplClass, new XC_MethodHook() {
@@ -192,98 +189,74 @@ public class KeyguardMods extends XposedModPack {
 				View mMultiUserAvatar = (View) getObjectField(param.thisObject, "mMultiUserAvatar");
 				boolean mIsUserSwitcherEnabled = getBooleanField(param.thisObject, "mIsUserSwitcherEnabled");
 				mMultiUserAvatar.setVisibility(!HideLockScreenUserAvatar && mIsUserSwitcherEnabled
-						? View.VISIBLE
+						? VISIBLE
 						: GONE);
 			}
 		});
 		//endregion
 
-/*disabled until futher notice
 		//region keyguard bottom area shortcuts and transparency
-		//convert wallet button to camera button
-		hookAllMethods(KeyguardBottomAreaViewClass,
-				"onFinishInflate", new XC_MethodHook() {
-					@Override
-					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						if(true) return;
+		hookAllMethods(KeyguardBottomAreaViewBinderClass, "bind", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				KeyguardBottomAreaView = param.args[0];
+			}
+		});
 
-						mWalletButton = (ImageView) getObjectField(param.thisObject, "mWalletButton");
-						mControlsButton = (ImageView) getObjectField(param.thisObject, "mControlsButton");
-						thisObject = param.thisObject;
+		Method updateMethod = null;
+		Method[] methodss = KeyguardBottomAreaViewBinderClass.getMethods();
+		for(Method m : methodss)
+		{
+			if(m.getName().contains("updateButton"))
+			{
+				updateMethod = m;
+				break;
+			}
+		}
+		if(updateMethod != null)
+		{
+			hookMethod(updateMethod, new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					ImageView v = (ImageView) param.args[0];
 
-						if (leftShortcut.length() > 0) {
-							convertShortcut(mControlsButton, leftShortcut, param.thisObject);
-						}
-						if (rightShortcut.length() > 0) {
-							convertShortcut(mWalletButton, rightShortcut, param.thisObject);
-						}
+					String shortcutID = mContext.getResources().getResourceName(v.getId());
+
+					if(shortcutID.contains("start") && leftShortcut.length() > 0)
+					{
+						convertShortcut(v, leftShortcut);
 					}
-				});
-
-		//make sure system won't play with our button
-		findAndHookMethod(KeyguardBottomAreaViewClass.getName() + "$" + "WalletCardRetriever", lpparam.classLoader,
-				"onWalletCardsRetrieved", "android.service.quickaccesswallet.GetWalletCardsResponse", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (rightShortcut.length() == 0) return;
-						param.setResult(null);
+					else if(shortcutID.contains("end") && rightShortcut.length() > 0)
+					{
+						convertShortcut(v, rightShortcut);
 					}
-				});
 
-		//make sure system won't play with our button
-		hookAllMethods(KeyguardBottomAreaViewClass,
-				"updateControlsVisibility", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (leftShortcut.length() == 0 || mControlsButton == null) return;
-						updateVisibility(mControlsButton, param.thisObject);
-						param.setResult(null);
+					if(transparentBGcolor) {
+						@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
+
+						try {
+							v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
+							v.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+						} catch (Throwable ignored) {}
 					}
-				});
+					else
+					{
+						@SuppressLint("DiscouragedApi") int mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
+								mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
 
-		//make sure system won't play with our button
-		findAndHookMethod(KeyguardBottomAreaViewClass,
-				"updateWalletVisibility", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (rightShortcut.length() == 0 || mWalletButton == null) return;
-						updateVisibility(mWalletButton, param.thisObject);
-						param.setResult(null);
+						@SuppressLint("DiscouragedApi") ColorStateList colorSurface = (ColorStateList) callStaticMethod(UtilsClass, "getColorAttr",
+								mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
+
+						v.getDrawable().setTint(mTextColorPrimary);
+
+						v.setBackgroundTintList(colorSurface);
 					}
-				});
-
-		//Transparent background
-		findAndHookMethod(KeyguardBottomAreaViewClass,
-				"updateAffordanceColors", new XC_MethodHook() {
-					@Override
-					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						if (!transparentBGcolor) return;
-						ImageView mWalletButton = (ImageView) getObjectField(param.thisObject, "mWalletButton");
-						ImageView mControlsButton = (ImageView) getObjectField(param.thisObject, "mControlsButton");
-
-						@SuppressLint("DiscouragedApi") int mTextColorPrimary = (int) callStaticMethod(UtilClass, "getColorAttrDefaultColor", mContext,
-								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
-
-						mControlsButton.setBackgroundColor(Color.TRANSPARENT);
-						mControlsButton.setColorFilter(mTextColorPrimary);
-
-						mWalletButton.setBackgroundColor(Color.TRANSPARENT);
-						mWalletButton.setColorFilter(mTextColorPrimary);
-					}
-				});
-
-		//Set camera intent to be always secure when launchd from keyguard screen
-		findAndHookMethod(KeyguardBottomAreaViewClass.getName() + "$DefaultRightButton", lpparam.classLoader,
-				"getIntent", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if ((!leftShortcut.equals("camera") && !rightShortcut.equals("camera")))
-							return;
-						param.setResult(getCameraIntent(mContext));
-					}
-				});
+				}
+			});
+		}
 		//endregion
-*/
+
 		//region keyguard battery info
 		hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", new XC_MethodHook() {
 			@SuppressLint("DefaultLocale")
@@ -324,12 +297,6 @@ public class KeyguardMods extends XposedModPack {
 			}
 		});
 		//endregion
-
-        /* might be useful later
-        Class<?> AnimatableClockControllerClass = findClass("com.android.keyguard.AnimatableClockController", lpparam.classLoader);
-        Class<?> KeyguardClockSwitchControllerClass = findClass("com.android.keyguard.KeyguardClockSwitchController", lpparam.classLoader);
-
-        Class<?> AvailableClocksClass = findClass("com.android.keyguard.clock.ClockManager$AvailableClocks", lpparam.classLoader);*/
 
 		//region keyguardDimmer
 		hookAllMethods(ScrimControllerClass, "scheduleUpdate", new XC_MethodHook() {
@@ -378,6 +345,7 @@ public class KeyguardMods extends XposedModPack {
 				if (mDozing != (boolean) getObjectField(param.thisObject, "mDozing")) {
 					mDozing = !mDozing;
 					setMiddleColor();
+					setShortcutVisibility();
 				}
 			}
 		});
@@ -412,37 +380,35 @@ public class KeyguardMods extends XposedModPack {
 
 	//region keyguard bottom area shortcuts and transparency
 	@SuppressLint("DiscouragedApi")
-	private Intent getCameraIntent(Context context) {
-		Resources res = context.getResources();
+	private void setShortcutVisibility() {
+		int visibility = mDozing ? GONE : VISIBLE;
 
-		Intent cameraIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE);
-		cameraIntent.setPackage(res.getString(res.getIdentifier("config_cameraGesturePackage", "string", context.getPackageName())));
+		Resources res = mContext.getResources();
 
-		return cameraIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-	}
+		((View) KeyguardBottomAreaView)
+				.findViewById(res.getIdentifier("start_button",
+						"id",
+						mContext.getPackageName()))
+				.setVisibility(visibility);
 
-	private void updateVisibility(ImageView Button, Object thisObject) {
-		boolean mDozing = (boolean) getObjectField(thisObject, "mDozing");
-
-		if (mDozing) // AOD is showing
-		{
-			Button.setVisibility(GONE);
-		} else {
-			Button.setVisibility(View.VISIBLE);
-		}
+		((View) KeyguardBottomAreaView)
+				.findViewById(res.getIdentifier("end_button",
+						"id",
+						mContext.getPackageName()))
+				.setVisibility(visibility);
 	}
 
 	@SuppressLint("DiscouragedApi")
-	private void convertShortcut(ImageView Button, String type, Object thisObject) {
+	private void convertShortcut(ImageView Button, String type) {
 		View.OnClickListener listener = null;
 		Drawable drawable = null;
 		switch (type) {
 			case "camera":
-				listener = v -> callMethod(thisObject, "launchCamera", "lockscreen_affordance");
+				listener = v -> launchCamera();
 				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
 			case "assistant":
-				listener = v -> callMethod(thisObject, "launchVoiceAssist");
+				listener = v -> callMethod(mAssistUtils, "launchVoiceAssistFromKeyguard");
 				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_mic_26dp", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
 			case "torch":
@@ -454,10 +420,44 @@ public class KeyguardMods extends XposedModPack {
 			Button.setImageDrawable(drawable);
 			Button.setOnClickListener(listener);
 			Button.setClickable(true);
-			Button.setVisibility(View.VISIBLE);
+			Button.setVisibility(VISIBLE);
 		} else {
 			Button.setVisibility(GONE);
 		}
+	}
+
+	private void launchCamera() {
+		Intent cameraIntent = (Intent) callMethod(CameraGestureHelper, "getStartCameraIntent");
+
+		try {
+			if(cameraIntent.getAction().toLowerCase().contains("secure")) {
+				Object activityTaskManager = getObjectField(CameraGestureHelper, "activityTaskManager");
+
+				if(startActivityAsUserMethod == null)
+				{
+					Method[] methods = activityTaskManager.getClass().getMethods();
+					for(Method m : methods)
+					{
+						if(m.getName().equals("startActivityAsUser"))
+						{
+							startActivityAsUserMethod = m;
+							break;
+						}
+					}
+				}
+
+				ActivityOptions activityOptions = ActivityOptions.makeBasic();
+				callMethod(activityOptions, "setDisallowEnterPictureInPictureWhileLaunching", true);
+
+				startActivityAsUserMethod.invoke(activityTaskManager, null, mContext.getPackageName(), mContext.getAttributionTag(), cameraIntent, cameraIntent.resolveTypeIfNeeded((ContentResolver) getObjectField(CameraGestureHelper, "contentResolver")), null, null, 0, Intent.FLAG_ACTIVITY_NEW_TASK, null, activityOptions.toBundle(), 0/*callMethod(getStaticObjectField(UserHandle.class, "CURRENT"), "getIdentifier")*/);
+			}
+			else
+			{
+				callMethod(getObjectField(CameraGestureHelper, "activityStarter"), "startActivity", cameraIntent, true);
+			}
+		}
+		catch (Throwable ignored)
+		{}
 	}
 	//endregion
 

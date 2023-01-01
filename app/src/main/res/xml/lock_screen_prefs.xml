@@ -70,8 +70,7 @@
 		android:summaryOn="@string/general_on"
 		android:title="@string/imperial_units_title" />
 
-	<!--disabled until further notice-->
-	<!--PreferenceCategory android:title="@string/keyguard_bottom_category">
+	<PreferenceCategory android:title="@string/keyguard_bottom_category">
 		<SwitchPreference
 			android:defaultValue="false"
 			android:key="KeyguardBottomButtonsTransparent"
@@ -92,7 +91,7 @@
 			android:key="rightKeyguardShortcut"
 			android:title="@string/LSrightShortcutTitle"
 			app:summary="%s" />
-	</PreferenceCategory-->
+	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/custom_text_category">
 		<SwitchPreference
 			android:defaultValue="false"

@@ -232,8 +232,7 @@ public class QSThemeManager extends XposedModPack {
 				if (colorInactive == null) {
 					calculateColors();
 				}
-				int state = (int) param.args[0];
-				switch (state) {
+				switch ((int) param.args[0]) { //state
 					case STATE_UNAVAILABLE:
 						param.setResult(colorUnavailable);
 						break;

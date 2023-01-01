@@ -5,6 +5,7 @@ import static android.view.View.VISIBLE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.hookMethod;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -204,8 +205,8 @@ public class KeyguardMods extends XposedModPack {
 		});
 
 		Method updateMethod = null;
-		Method[] methodss = KeyguardBottomAreaViewBinderClass.getMethods();
-		for(Method m : methodss)
+		Method[] methods = KeyguardBottomAreaViewBinderClass.getMethods();
+		for(Method m : methods)
 		{
 			if(m.getName().contains("updateButton"))
 			{
@@ -242,6 +243,7 @@ public class KeyguardMods extends XposedModPack {
 					}
 					else
 					{
+						log("converted");
 						@SuppressLint("DiscouragedApi") int mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
 								mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
 
@@ -385,17 +387,21 @@ public class KeyguardMods extends XposedModPack {
 
 		Resources res = mContext.getResources();
 
-		((View) KeyguardBottomAreaView)
-				.findViewById(res.getIdentifier("start_button",
-						"id",
-						mContext.getPackageName()))
-				.setVisibility(visibility);
+		if(leftShortcut.length() > 0) {
+			((View) KeyguardBottomAreaView)
+					.findViewById(res.getIdentifier("start_button",
+							"id",
+							mContext.getPackageName()))
+					.setVisibility(visibility);
+		}
 
-		((View) KeyguardBottomAreaView)
-				.findViewById(res.getIdentifier("end_button",
-						"id",
-						mContext.getPackageName()))
-				.setVisibility(visibility);
+		if(rightShortcut.length() > 0) {
+			((View) KeyguardBottomAreaView)
+					.findViewById(res.getIdentifier("end_button",
+							"id",
+							mContext.getPackageName()))
+					.setVisibility(visibility);
+		}
 	}
 
 	@SuppressLint("DiscouragedApi")

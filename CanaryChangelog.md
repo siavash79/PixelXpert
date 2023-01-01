@@ -1,3 +1,6 @@
+**canary-199**  
+- Misc fixes  
+  
 **canary-198**  
 - lockscreen shortcuts touch-ups  
   

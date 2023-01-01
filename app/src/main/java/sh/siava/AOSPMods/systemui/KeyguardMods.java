@@ -5,7 +5,6 @@ import static android.view.View.VISIBLE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.hookMethod;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
@@ -16,9 +15,7 @@ import static sh.siava.AOSPMods.utils.SettingsLibUtils.getColorAttr;
 import static sh.siava.AOSPMods.utils.SettingsLibUtils.getColorAttrDefaultColor;
 
 import android.annotation.SuppressLint;
-import android.app.ActivityOptions;
 import android.app.WallpaperManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -80,10 +77,9 @@ public class KeyguardMods extends XposedModPack {
 	//endregion
 
 	//region keyguard bottom area shortcuts and transparency
+	private Object NotificationPanelViewController;
 	private Object KeyguardBottomAreaView;
-	private Method startActivityAsUserMethod;
 	private Object mAssistUtils;
-	private Object CameraGestureHelper;
 	private static boolean transparentBGcolor = false;
 	private static String leftShortcut = "";
 	private static String rightShortcut = "";
@@ -160,13 +156,13 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
 		Class<?> KeyguardBottomAreaViewBinderClass = findClass("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpparam.classLoader);
 		Class<?> AssistManager = findClass("com.android.systemui.assist.AssistManager", lpparam.classLoader);
-		Class<?> CameraGestureHelperClass = findClass("com.android.systemui.camera.CameraGestureHelper", lpparam.classLoader);
+		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader); //used to launch camera
 		SettingsLibUtils.init(lpparam.classLoader);
 
-		hookAllConstructors(CameraGestureHelperClass, new XC_MethodHook() {
+		hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				CameraGestureHelper = param.thisObject;
+				NotificationPanelViewController = param.thisObject;
 			}
 		});
 
@@ -223,39 +219,37 @@ public class KeyguardMods extends XposedModPack {
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					ImageView v = (ImageView) param.args[0];
 
-					String shortcutID = mContext.getResources().getResourceName(v.getId());
+					try {
+						String shortcutID = mContext.getResources().getResourceName(v.getId());
 
-					if(shortcutID.contains("start") && leftShortcut.length() > 0)
-					{
-						convertShortcut(v, leftShortcut);
+						if (shortcutID.contains("start") && leftShortcut.length() > 0) {
+							convertShortcut(v, leftShortcut);
+						} else if (shortcutID.contains("end") && rightShortcut.length() > 0) {
+							convertShortcut(v, rightShortcut);
+						}
+
+						if (transparentBGcolor) {
+							@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = getColorAttrDefaultColor(
+									mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
+
+							try {
+								v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
+								v.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+							} catch (Throwable ignored) {
+							}
+						} else {
+							@SuppressLint("DiscouragedApi") int mTextColorPrimary = getColorAttrDefaultColor(
+									mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
+
+							@SuppressLint("DiscouragedApi") ColorStateList colorSurface = getColorAttr(
+									mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
+
+							v.getDrawable().setTint(mTextColorPrimary);
+
+							v.setBackgroundTintList(colorSurface);
+						}
 					}
-					else if(shortcutID.contains("end") && rightShortcut.length() > 0)
-					{
-						convertShortcut(v, rightShortcut);
-					}
-
-					if(transparentBGcolor) {
-						@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = getColorAttrDefaultColor(
-								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
-
-						try {
-							v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
-							v.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
-						} catch (Throwable ignored) {}
-					}
-					else
-					{
-						log("converted");
-						@SuppressLint("DiscouragedApi") int mTextColorPrimary = getColorAttrDefaultColor(
-								mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
-
-						@SuppressLint("DiscouragedApi") ColorStateList colorSurface = getColorAttr(
-								mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
-
-						v.getDrawable().setTint(mTextColorPrimary);
-
-						v.setBackgroundTintList(colorSurface);
-					}
+					catch (Throwable ignored){}
 				}
 			});
 		}
@@ -435,37 +429,9 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	private void launchCamera() {
-		Intent cameraIntent = (Intent) callMethod(CameraGestureHelper, "getStartCameraIntent");
-
-		try {
-			if(cameraIntent.getAction().toLowerCase().contains("secure")) {
-				Object activityTaskManager = getObjectField(CameraGestureHelper, "activityTaskManager");
-
-				if(startActivityAsUserMethod == null)
-				{
-					Method[] methods = activityTaskManager.getClass().getMethods();
-					for(Method m : methods)
-					{
-						if(m.getName().equals("startActivityAsUser"))
-						{
-							startActivityAsUserMethod = m;
-							break;
-						}
-					}
-				}
-
-				ActivityOptions activityOptions = ActivityOptions.makeBasic();
-				callMethod(activityOptions, "setDisallowEnterPictureInPictureWhileLaunching", true);
-
-				startActivityAsUserMethod.invoke(activityTaskManager, null, mContext.getPackageName(), mContext.getAttributionTag(), cameraIntent, cameraIntent.resolveTypeIfNeeded((ContentResolver) getObjectField(CameraGestureHelper, "contentResolver")), null, null, 0, Intent.FLAG_ACTIVITY_NEW_TASK, null, activityOptions.toBundle(), 0/*callMethod(getStaticObjectField(UserHandle.class, "CURRENT"), "getIdentifier")*/);
-			}
-			else
-			{
-				callMethod(getObjectField(CameraGestureHelper, "activityStarter"), "startActivity", cameraIntent, true);
-			}
+		if(NotificationPanelViewController != null) {
+			callMethod(NotificationPanelViewController, "launchCamera", 0);
 		}
-		catch (Throwable ignored)
-		{}
 	}
 	//endregion
 

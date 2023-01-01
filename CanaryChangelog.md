@@ -1,3 +1,6 @@
+**canary-198**  
+- lockscreen shortcuts touch-ups  
+  
 **canary-197**  
 - (re)Added lockscreen shortcut mods  
   

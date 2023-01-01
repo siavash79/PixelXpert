@@ -1,3 +1,6 @@
+**canary-197**  
+- (re)Added lockscreen shortcut mods  
+  
 **canary-196**  
 - Minor fixes  
   

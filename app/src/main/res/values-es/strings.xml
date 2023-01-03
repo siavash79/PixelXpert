@@ -1,8 +1,5 @@
 <resources>
 	<!--General strings-->
-	<string name="app_name">AOSP Mods</string>
-	<string name="xposed_desc">Custom features for Android 12+ AOSP based ROMs</string>
-	<string name="title_activity_settings">@string/app_name</string>
 	<string name="error_not_activated">Confirme si el módulo está activado dentro de LSPosed Manager</string>
 	<string name="hide_default">No mostrar (por defecto)</string>
 	<string name="percent_of_default_size">% del tamaño por defecto</string>
@@ -61,9 +58,7 @@
 	<string name="battery_style_title">Escoger un estilo de batería</string>
 	<string name="battery_show_percent_title">Mostrar porcentaje</string>
 	<string name="battery_style_category_title">Estilo de batería</string>
-	<string name="battery_style_category_summary">@string/qs_footer_text_desc</string>
 	<string name="battery_icon_size_title">Tamaño del icono de batería</string>
-	<string name="battery_size_summary">@string/percent_of_default_size</string>
 	<string name="battery_hidden">Oculta</string>
 	<string name="BIcon_Opacity_title">Opacidad</string>
 	<string name="sb_center_fine_tune">Afinar el área central</string>
@@ -181,23 +176,6 @@
 	<string name="quick_settings_tiles_category">Opciones de mosaico QS</string>
 	<string name="qs_tile_style_title">Temas de mosaico QS</string>
 	<string name="qstile_default">Por defecto</string>
-	<string name="qstile_cookie">Cookie</string>
-	<string name="qstile_triangles">Triangle</string>
-	<string name="qstile_divided">Divided Circle</string>
-	<string name="qstile_attemptmountain">An attempt at a mountain</string>
-	<string name="qstile_squircle_trim">Squircle with trim</string>
-	<string name="qstile_ninja">Ninja</string>
-	<string name="qstile_wavey">Wavey</string>
-	<string name="qstile_squaremedo">The Squaremedo</string>
-	<string name="qstile_dual_tone_circle">Dual tone circle</string>
-	<string name="qstile_circleoutline">Circle Outline</string>
-	<string name="qstile_pokesign">Pokesign</string>
-	<string name="qstile_cosmos">Shishu Cosmos</string>
-	<string name="qstile_neonlike">Neon Light</string>
-	<string name="qstile_circle_trim">Circle with trim</string>
-	<string name="qstile_dottedcircle">Dotted Circle</string>
-	<string name="qstile_inkdrop">Ink</string>
-	<string name="qstile_circle">Circle</string>
 
 	<!--Navigation bar related-->
 	<string name="back_gesture_category_title">Personalizar gesto atrás</string>
@@ -215,7 +193,6 @@
 	<string name="three_button_left_title">Botón izquierdo</string>
 	<string name="three_button_center_title">Botón central</string>
 	<string name="three_button_right_title">Botón derecho</string>
-	<string name="pill_width_summary">@string/percent_of_default_size</string>
 	<string name="hide_navbar_title">Ocultar barra de navegación</string>
 	<string name="taskbar_as_recents_title">Convertir barra de tareas en barra de recientes</string>
 	<string name="taskbar_height_title">Altura de la barra de tareas</string>
@@ -275,15 +252,6 @@
 	<string name="dt_styles_category">Estilos de tema oscuro</string>
 	<string name="dt_styles">Selecciona un estilo</string>
 	<string name="caution_unstable">Precaución: esta opción puede ser inestable para algunos usuarios.</string>
-	<string name="dt_black">Pitch black</string>
-	<string name="dt_bakedgreen">Baked Green</string>
-	<string name="dt_chocox">Choco X</string>
-	<string name="dt_darkaubergine">Dark Aubergine</string>
-	<string name="dt_style">Dark Blue</string>
-	<string name="dt_darkgray">Dark Grey</string>
-	<string name="dt_materialocean">Material Ocean</string>
-	<string name="dt_night">Night</string>
-	<string name="dt_solarizeddark">Solarized Dark</string>
 	<string name="power_menu_overlays_section">Temas del menú de encendido</string>
 	<string name="power_menu_overlays_title">Habilitar temas claros/oscuros en el menú de encendido</string>
 	<string name="power_menu_overlays_summary_on">Esta opción también habilita algunos iconos nuevos y geniales en todo el sistema.</string>
@@ -306,12 +274,10 @@
 	<string name="clock_right">Derecha</string>
 
 	<!-- AM/PM style -->
-	<string name="am_pm_default">@string/hide_default</string>
 	<string name="am_pm_normal">100% del tamaño del reloj</string>
 	<string name="am_pm_small">70% del tamaño del reloj</string>
 
 	<!-- Date position -->
-	<string name="date_default">@string/hide_default</string>
 	<string name="date_before">Antes del reloj (100%)</string>
 	<string name="date_before_small">Antes del reloj (70%)</string>
 	<string name="date_after">Después del reloj (100%)</string>
@@ -350,7 +316,6 @@
 	<string name="netstat_header">Configuración de estadísticas de red</string>
 	
 	<string name="string_formatter_manual_body">Además del texto normal, puede introducir, variables dinámicas disponibles:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato. Para obtener documentación sobre el formato, busque `Java Date Format`\nExample: $GMMM means: Jan (O cualquier otro)\n\n$P&lt;format&gt; : Fecha persa, según el formato\nExample: $Pyyyy means: 1401\n\n$Nrx : Descargas totales de hoy\n$Ntx: Subidas totales de hoy\n$Nall : Tráfico total de hoy\n$Nssid : Nombre SSID WiFi (si es aplicable)\n\nIf tu reemplaza $N con $Nc se le proporcionarán estadísticas de datos móviles (like $Ncrx for downloads; excludes $Nssid)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
-	<string name="update_fragment_label">@string/menu_updates</string>
 	<string name="update_channel_name">Actualizaciones</string>
 	<string name="update_notification_title">Actualización descargada</string>
 	<string name="update_notification_text">Toque aquí para instalar</string>
@@ -358,7 +323,6 @@
 	<string name="reboot_notification_text">Los cambios surtirán efecto después de reiniciar</string>
 	<string name="update_flavor_title">Actualizar canal</string>
 	<string name="stable_flavor">Estable</string>
-	<string name="canary_flavor">Canary</string>
 	<string name="update_type_title">Tipo de paquete</string>
 	<string name="full_type">Completo</string>
 	<string name="xposed_type">Solo Xposed</string>
@@ -373,9 +337,7 @@
 	<string name="switch_branches">Cambiar rama</string>
 	<string name="reinstall_word">Reinstalar</string>
 	
-	<string name="title_activity_update">updateActivity</string>
-
-	<string name="own_prefs_header">Configuración de AOSPMods</string>
+		<string name="own_prefs_header">Configuración de AOSPMods</string>
 	<string name="language_title">Idioma</string>
 	<string name="camera_manager_master_title">Habilitar mods de linterna (Deshabilitar esto si su teléfono no los admite)</string>
 	<string name="toggle_dark_apply">(Alternar tema oscuro para aplicar)</string>

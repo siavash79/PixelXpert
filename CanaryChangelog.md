@@ -1,3 +1,6 @@
+**canary-201**  
+- fixed brightness slider margins when located at bottom  
+  
 **canary-200**  
 - Misc Fixes  
   

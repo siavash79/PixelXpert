@@ -21,6 +21,7 @@
 	<string name="theme_customization_category">Temas</string>
 	
 	<!--Lock screen related-->
+	<string name="hide_avatar_title">Eliminar avatar de usuario (modo multiusuario)</string>
 	<string name="transparent_fingerprint_circle">Ocultar círculo del icono de la huella digital</string>
 	<string name="transparent_fingerprint_circle_off">El círculo se activará</string>
 	<string name="transparent_fingerprint_circle_on">El círculo se ocultará</string>
@@ -74,7 +75,7 @@
     <string name="caution_mobile_costs">PRECAUCIÓN - No saber que estás en roaming puede aumentar el coste de la tarifa</string>
 	<string name="volte_icon_title">Mostrar icono VoLTE cuando este disponible</string>
 	<string name="hide_privacychip_title">Ocultar indicadores de privacidad\n(Cámara, Micrófono)</string><!-- \n means next line-->
-	<string name="sb_vibration_switch_title">Mostar los iconos vibrar/silencio</string>
+	<string name="sb_vibration_switch_title">Mostrar los iconos vibrar/silencio</string>
 	<string name="sbc_position_title">Posición del reloj</string>
 	<string name="sbc_ampm_style">Estilo AM/PM</string>
 	<string name="sbc_show_secs">Mostrar segundos</string>
@@ -207,6 +208,7 @@
 
 	<!--Miscellaneous section related-->
 	<string name="screenshot_sound_disable_title">Desactivar sonido de captura de pantalla</string>
+	<string name="clipboard_smart_actions_title">Acciones inteligentes en la superposición del portapapeles</string>
 	<string name="allow_all_screen_rotations">Forzar el desbloqueo de todas las rotaciones de pantalla</string>
 	<string name="allow_all_screen_rotations_summary">También ignorará el botón flotante de rotación manual</string>
 	<string name="force_no_cutout">Ignora el recorte de la cámara</string>
@@ -334,9 +336,10 @@
 	<string name="update_word">Actualizar</string>
 	<string name="switch_branches">Cambiar rama</string>
 	<string name="reinstall_word">Reinstalar</string>
-
-	<string name="own_prefs_header">Configuración de AOSPMods</string>
+	
+		<string name="own_prefs_header">Configuración de AOSPMods</string>
 	<string name="language_title">Idioma</string>
+	<string name="camera_manager_master_title">Habilitar mods de linterna (Deshabilitar esto si su teléfono no los admite)</string>
 	<string name="toggle_dark_apply">(Alternar tema oscuro para aplicar)</string>
 
 	<string name="gesture_nav_extra_cat">Gestos adicionales de la barra de navegación</string>
@@ -356,5 +359,6 @@
 	<string name="toggle_one_handed">Cambiar el modo de una mano</string>
 	<string name="insecure_screenshot">Captura de pantalla sin restricciones</string>
 	<string name="screenshot_chord_insecure">Captura de pantalla sin restricciones de VolDown+Power</string>
+	<string name="sleep">Dormir</string>
 
 </resources>

@@ -40,6 +40,7 @@
         <item>Turkish</item>
         <item>Ukrainian</item>
         <item>Vietnamese</item>
+        <item>Hebrew</item>
     </string-array>
 
     <string-array name="languages_values">
@@ -58,6 +59,7 @@
         <item>tr</item>
         <item>uk</item>
         <item>vi</item>
+        <item>iw</item>
     </string-array>
 
     <string-array name="three_button_nav_buttons">

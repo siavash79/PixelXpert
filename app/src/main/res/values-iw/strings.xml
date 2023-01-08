@@ -1,8 +1,5 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">אנא אשר אם המודול מופעל בתוך LSPosed Manager</string>
     <string name="hide_default">הסתר (ברירת מחדל)</string>
     <string name="percent_of_default_size">% מגודל ברירת המחדל</string>
@@ -58,9 +55,7 @@
     <string name="battery_style_title">בחר סגנון סוללה</string>
     <string name="battery_show_percent_title">הצג אחוזי סוללה</string>
     <string name="battery_style_category_title">סגנון סוללה</string>
-    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">גודל סמל הסוללה</string>
-    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">מוּסתָר</string>
     <string name="BIcon_Opacity_title">אֲטִימוּת</string>
     <string name="sb_center_fine_tune">כוונן את אזור המרכז</string>
@@ -93,7 +88,7 @@
     <string name="sbc_before_color">טקסט לפני השעון</string>
     <string name="sbc_color">שָׁעוֹן</string>
     <string name="sbc_after_color">טקסט אחרי שעון</string>
-    <string name="network_settings_pref">הגדרות צג רשת...</string>
+    <string name="network_settings_pref">הגדרות צג רשת…</string>
     <string name="ntsb_far_left">שמאל קיצוני</string>
     <string name="ntsb_far_left_extra">רחוק משמאל - הודעות מעל</string>
     <string name="ntsb_mid_left">אמצע שמאל</string>
@@ -102,7 +97,7 @@
     <string name="ntsb_enabled_title">אפשר צג רשת</string>
     <string name="ntsb_position_title">מיקום צג</string>
     <string name="ntsb_threshold_title">סף הסתרה אוטומטי</string>
-    <string name="ntsb_threshold_summary">הסתר אם התנועה קטנה מ... (קילובייט)</string>
+    <string name="ntsb_threshold_summary">הסתר אם התנועה קטנה מ… (קילובייט)</string>
     <string name="network_mode_title">סגנון מוניטור</string>
     <string name="network_colorful_title">תעשה את זה צבעוני</string>
     <string name="network_download_top">מהירות הורדה למעלה</string>
@@ -176,23 +171,6 @@
     <string name="quick_settings_tiles_category">אפשרויות אריחי QS</string>
     <string name="qs_tile_style_title">ערכות נושא של אריחי QS</string>
     <string name="qstile_default">בְּרִירַת מֶחדָל</string>
-    <string name="qstile_cookie" translatable="false">Cookie</string>
-    <string name="qstile_triangles" translatable="false">Triangle</string>
-    <string name="qstile_divided" translatable="false">Divided Circle</string>
-    <string name="qstile_attemptmountain" translatable="false">An attempt at a mountain</string>
-    <string name="qstile_squircle_trim" translatable="false">Squircle with trim</string>
-    <string name="qstile_ninja" translatable="false">Ninja</string>
-    <string name="qstile_wavey" translatable="false">Wavey</string>
-    <string name="qstile_squaremedo" translatable="false">The Squaremedo</string>
-    <string name="qstile_dual_tone_circle" translatable="false">Dual tone circle</string>
-    <string name="qstile_circleoutline" translatable="false">Circle Outline</string>
-    <string name="qstile_pokesign" translatable="false">Pokesign</string>
-    <string name="qstile_cosmos" translatable="false">Shishu Cosmos</string>
-    <string name="qstile_neonlike" translatable="false">Neon Light</string>
-    <string name="qstile_circle_trim" translatable="false">Circle with trim</string>
-    <string name="qstile_dottedcircle" translatable="false">Dotted Circle</string>
-    <string name="qstile_inkdrop" translatable="false">Ink</string>
-    <string name="qstile_circle" translatable="false">Circle</string>
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">קביעת תצורה של מחוות חזרה</string>
     <string name="back_from_left_title">הצד השמאלי של המסך</string>
@@ -209,7 +187,6 @@
     <string name="three_button_left_title">כפתור שמאל</string>
     <string name="three_button_center_title">כפתור מרכז</string>
     <string name="three_button_right_title">כפתור ימני</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">הסתר את סרגל הניווט</string>
     <string name="taskbar_as_recents_title">המר את שורת המשימות לשורת האחרונה</string>
     <string name="taskbar_height_title">גובה שורת המשימות</string>
@@ -228,7 +205,7 @@
     <string name="allow_all_screen_rotations">ביטול נעילה בכוח של כל סיבובי המסך</string>
     <string name="allow_all_screen_rotations_summary">יתעלם גם כפתור צף מסיבוב ידני</string>
     <string name="force_no_cutout">התעלם מגזרת המצלמה</string>
-    <string name="clear_all_reposition_title">הוסף לחצן 'ניקוי הכל', נגיש לעמוד האחרון</string>
+    <string name="clear_all_reposition_title">הוסף לחצן \'ניקוי הכל\', נגיש לעמוד האחרון</string>
     <string name="volume_button_step_title">צעדי עוצמת הקול (0 עד 100%)</string>
     <string name="display_resolution_title">הרזולוציה של המסך</string>
     <string name="brightness_range_title">מגבלות בהירות התצוגה</string>
@@ -239,7 +216,7 @@
     <string name="so_fingerprint_sensor_enabled">אפשר חיישן טביעת אצבע כשהמסך כבוי</string>
     <string name="so_double_tap_wake_title">הקש פעמיים כדי להעיר את הטלפון</string>
     <string name="so_double_tap_wake_summary">משבית הקשה אחת כדי להעיר</string>
-    <string name="doze_header">בזמן שהמסך כבוי...</string>
+    <string name="doze_header">בזמן שהמסך כבוי…</string>
     <string name="custom_themed_icons_title">סמלים מותאמים אישית</string>
     <string name="custom_themed_icons_off">סמלים מותאמים אישית מושבתים</string>
     <string name="custom_themed_icons_on">סמלים מותאמים אישית מופעלים</string>
@@ -260,19 +237,10 @@
     <string name="theme_customization_font_title">כותרת / גופן גוף</string>
     <string name="icons_style_title">סגנון סמל</string>
     <string name="icon_shapes_title">צורת סמל</string>
-    <string name="signal_icons_theme_title">ערכת הנושא 'סמלי אותות'</string>
+    <string name="signal_icons_theme_title">ערכת הנושא \'סמלי אותות'</string>
     <string name="dt_styles_category">סגנונות ערכת נושא כהים</string>
     <string name="dt_styles">בחר סגנון</string>
     <string name="caution_unstable">אזהרה: אפשרות זו עלולה להיות לא יציבה עבור משתמשים מסוימים.</string>
-    <string name="dt_black" translatable="false">חושך מוחלט</string>
-    <string name="dt_bakedgreen" translatable="false">ירוק אפוי</string>
-    <string name="dt_chocox" translatable="false">שוקו X</string>
-    <string name="dt_darkaubergine" translatable="false">חציל כהה</string>
-    <string name="dt_style" translatable="false">כחול כהה</string>
-    <string name="dt_darkgray" translatable="false">אפור כהה</string>
-    <string name="dt_materialocean" translatable="false">אוקיינוס חומרי</string>
-    <string name="dt_night" translatable="false">לילה</string>
-    <string name="dt_solarizeddark" translatable="false">כהה סולארית</string>
     <string name="power_menu_overlays_section">ערכות נושא של תפריט צריכת חשמל</string>
     <string name="power_menu_overlays_title">הפעלת ערכות נושא בהירות/כהות בתפריט צריכת החשמל</string>
     <string name="power_menu_overlays_summary_on">אפשרות זו מאפשרת גם כמה אייקונים חדשים ומגניבים במערכת רחבה</string>
@@ -291,11 +259,9 @@
     <string name="clock_center">מֶרְכָּז</string>
     <string name="clock_right">ימין</string>
     <!-- AM/PM style -->
-    <string name="am_pm_default" translatable="false">@string/hide_default</string>
     <string name="am_pm_normal">100% גודל השעון</string>
     <string name="am_pm_small">70% גודל של השעון</string>
     <!-- Date position -->
-    <string name="date_default" translatable="false">@string/hide_default</string>
     <string name="date_before">לפני השעון (100%)</string>
     <string name="date_before_small">לפני השעון (70%)</string>
     <string name="date_after">אחרי שעון (100%)</string>
@@ -312,8 +278,8 @@
     <!-- Menu Items -->
     <string name="menu_settings_title">יְבוּא/יְצוּא</string>
     <string name="menu_reset_defaults">אפס את כל ההגדרות</string>
-    <string name="menu_import_settings">ייבוא הגדרות מהקובץ...</string>
-    <string name="menu_export_settings">ייצוא הגדרות לקובץ...</string>
+    <string name="menu_import_settings">ייבוא הגדרות מהקובץ…</string>
+    <string name="menu_export_settings">ייצוא הגדרות לקובץ…</string>
     <string name="menu_netstat_title">סטטיסטיקת רשת</string>
     <string name="menu_netstat_enable">הפעל סטטיסטיקה</string>
     <string name="menu_netstat_clear">אפס את הנתונים הסטטיסטיים של הרשת</string>
@@ -326,8 +292,7 @@
     <string name="netstat_caution_no">אולי אחר כך</string>
     <string name="monitoring_category_title">אפשרויות ניטור</string>
     <string name="netstat_header">הגדרות סטטיסטיקות רשת</string>
-    <string name="string_formatter_manual_body"><format> :תאריך גרוזיני, מבוסס על פורמט.  לתיעוד פורמט, חפש דוגמה לפורמט תאריך ב-Java: $GMMM means: ינואר (או כל אחר) $P<format>: תאריך פרסי, מבוסס על פורמט דוגמה: $Pyyyy means: 1401 כדי לאפשר שימוש באינטרנט מלמטה, עליך לעבור לתפריט שונות, הגדרות סטטיסטיקת רשת ואפשרות איסוף סטטיסטיקות רשת. $Nrx: סך כל ההורדות של היום $Ntx: סך ההעלאות של היום $Nall: סך התנועה של היום $Nssid :  שם WIFİ SSID (אם רלוונטי) אם תחליף $N with $Nc תסופק לך נתונים סטטיסטיים לנייד (like $Ncrx  להורדות ; אינו כולל  $Nssid) Example: תנועה ניידת של $GEEEE: $Ncall' יפיק : `תנועה ניידת של יום שלישי: 2GB</string>
-    <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
+    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\nTo enable internet usage from below, you need to go to Miscellaneous menu, Network Statistics Settings, and Enable Collect network statistics option\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n$Nssid : WiFi SSID name (if applicable)\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads; excludes $Nssid)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
     <string name="update_channel_name">עדכונים</string>
     <string name="update_notification_title">העדכון הורד</string>
     <string name="update_notification_text">הקש כאן כדי להתקין</string>
@@ -335,7 +300,6 @@
     <string name="reboot_notification_text">השינויים ייכנסו לתוקף לאחר אתחול המכשיר</string>
     <string name="update_flavor_title">עדכן ערוץ</string>
     <string name="stable_flavor">יַצִיב</string>
-    <string name="canary_flavor" translatable="false">Canary</string>
     <string name="update_type_title">סוג האריזה</string>
     <string name="full_type">מלא</string>
     <string name="xposed_type">Xposed בלבד</string>
@@ -344,12 +308,11 @@
     <string name="root_not_here">גישת שורש לא ניתנת!</string>
     <string name="reboot_pending">אתחול מחדש בהמתנה</string>
     <string name="reboot_word">הפעל מחדש את המכשיר כעת</string>
-    <string name="update_checking">בודק...</string>
+    <string name="update_checking">בודק…</string>
     <string name="update_download_started">הורדה - אנא הקש על ההודעה לאחר השלמתה</string>
     <string name="update_word">עדכון</string>
     <string name="switch_branches">החלף סניף</string>
     <string name="reinstall_word">התקן מחדש</string>
-    <string name="title_activity_update" translatable="false">updateActivity</string>
     <string name="own_prefs_header">הגדרות AOSPMods</string>
     <string name="language_title">שפה</string>
     <string name="camera_manager_master_title">אפשר אופני פנס (השבת את זה אם הטלפון שלך לא תומך בהם)</string>

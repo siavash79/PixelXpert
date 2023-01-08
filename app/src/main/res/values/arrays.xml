@@ -375,7 +375,7 @@
         <item>CircularOverlayG</item>
         <item>FilledOverlayG</item>
         <item>KaiOverlayG</item>
-        <item>OxigenOSOverlayG</item>
+        <item>OxygenOSOverlayG</item>
         <item>RoundedOverlayG</item>
         <item>SamOverlayG</item>
         <item>VictorOverlayG</item>
@@ -412,7 +412,7 @@
         <item>com.android.theme.icon_pack.kai.themepicker</item>
     </string-array>
 
-    <string-array name="OxigenOSOverlayG">
+    <string-array name="OxygenOSOverlayG">
         <item>com.android.theme.icon_pack.oos.android</item>
         <item>com.android.theme.icon_pack.oos.systemui</item>
         <item>com.android.theme.icon_pack.oos.settings</item>

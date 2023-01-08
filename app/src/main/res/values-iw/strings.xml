@@ -328,7 +328,7 @@
     <string name="none">ללא</string>
     <string name="screenshot">צילום מסך</string>
     <string name="back">חזור</string>
-    <string name="kill_forground_app">הרוג אפליקציית חזית</string>
+    <string name="kill_foreground_app">הרוג אפליקציית חזית</string>
     <string name="toggle_notification">החלף את חלונית ההתראות</string>
     <string name="toggle_one_handed">החלף מצב ביד אחת</string>
     <string name="insecure_screenshot">צילום מסך ללא הגבלה</string>

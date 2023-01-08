@@ -283,7 +283,7 @@
     <string name="none">Nenhuma</string>
     <string name="screenshot">Captura de ecrã</string>
     <string name="back">Voltar</string>
-    <string name="kill_forground_app">Terminar app em segundo plano</string>
+    <string name="kill_foreground_app">Terminar app em segundo plano</string>
     <string name="toggle_notification">Invocar painel de notificações</string>
     <string name="toggle_one_handed">Ativar modo para uma mão</string>
     <string name="insecure_screenshot">Captura de ecã inseguro</string>

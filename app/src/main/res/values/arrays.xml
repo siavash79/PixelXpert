@@ -73,7 +73,7 @@
         <item>@string/screenshot</item>
         <item>@string/insecure_screenshot</item>
         <!--item>@string/back</item-->
-        <item>@string/kill_forground_app</item>
+        <item>@string/kill_foreground_app</item>
         <item>@string/toggle_notification</item>
         <item>@string/toggle_one_handed</item>
         <item>@string/sleep</item>

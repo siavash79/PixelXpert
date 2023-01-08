@@ -354,7 +354,7 @@
 	<string name="none">Ninguno</string>
 	<string name="screenshot">Captura de pantalla</string>
 	<string name="back">Atrás</string>
-	<string name="kill_forground_app">Matar aplicación en primer plano</string>
+	<string name="kill_foreground_app">Matar aplicación en primer plano</string>
 	<string name="toggle_notification">Alternar panel de notificaciones</string>
 	<string name="toggle_one_handed">Cambiar el modo de una mano</string>
 	<string name="insecure_screenshot">Captura de pantalla sin restricciones</string>

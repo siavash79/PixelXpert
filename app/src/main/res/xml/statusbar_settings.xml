@@ -114,7 +114,7 @@
 
         <PreferenceCategory
             android:key="sb_multi_row"
-            android:title="@string/sb_multi_row_category">
+            android:title="@string/sb_double_row_category">
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="systemIconsMultiRow"
@@ -129,6 +129,13 @@
                 android:summary="%s"
                 android:key="systemIconSortPlan"
                 android:title="@string/sb_icon_sort_mode" />
+
+            <SwitchPreference
+                android:defaultValue="false"
+                android:key="notificationAreaMultiRow"
+                android:summaryOff="@string/general_off"
+                android:summaryOn="@string/general_on"
+                android:title="@string/sb_multi_row_notification_icons" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/ntsb_category_title">

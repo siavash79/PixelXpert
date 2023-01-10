@@ -653,13 +653,11 @@ public class SettingsActivity extends AppCompatActivity implements
 
 				int statusbarHeightFactor = sharedPreferences.getInt("statusbarHeightFactor", 100);
 				findPreference("statusbarHeightFactor").setSummary(statusbarHeightFactor == 100 ? getResources().getString(R.string.word_default) : statusbarHeightFactor + "%");
-				findPreference("centerAreaFineTune").setSummary((sharedPreferences.getInt("centerAreaFineTune", 50) - 50) + "%");
 
 				findPreference("systemIconSortPlan").setVisible(sharedPreferences.getBoolean("systemIconsMultiRow", false));
 
 				findPreference("UnreadMessagesNumberOverlay").setVisible(showOverlays);
-			} catch (Exception ignored) {
-			}
+			} catch (Exception ignored) {}
 		}
 
 		@Override

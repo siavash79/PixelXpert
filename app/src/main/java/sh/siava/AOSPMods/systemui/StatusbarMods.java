@@ -139,6 +139,7 @@ public class StatusbarMods extends XposedModPack {
 	private Object KIC = null;
 	private Object QSBH = null;
 	private ViewGroup mStatusBar;
+	private static boolean notificationAreaMultiRow = false;
 
 	private Object mCollapsedStatusBarFragment = null;
 	private ViewGroup mStatusbarStartSide = null;
@@ -150,6 +151,7 @@ public class StatusbarMods extends XposedModPack {
 
 	private View mClockView;
 	@SuppressWarnings("FieldCanBeLocal")
+	private ViewGroup mNotificationIconContainer = null;
 	LinearLayout mNotificationContainerContainer;
 	private LinearLayout mLeftVerticalSplitContainer;
 	private LinearLayout mLeftExtraRowContainer;
@@ -192,6 +194,14 @@ public class StatusbarMods extends XposedModPack {
 		if (Xprefs == null) return;
 
 		HidePrivacyChip = Xprefs.getBoolean("HidePrivacyChip", false);
+
+		if (Key.length > 0 && Key[0].equals("notificationAreaMultiRow")) { //WHY we check the old value? because if prefs is empty it will fill it up and count an unwanted change
+			boolean newnotificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
+			if (newnotificationAreaMultiRow != notificationAreaMultiRow) {
+				SystemUtils.RestartSystemUI();
+			}
+		}
+		notificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
 
 		try {
 			NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(Xprefs.getString("NotificationIconLimit", "").trim());
@@ -260,8 +270,12 @@ public class StatusbarMods extends XposedModPack {
 		boolean networkTrafficShowIcons = Xprefs.getBoolean("networkTrafficShowIcons", true);
 
 		if (networkOnSBEnabled || networkOnQSEnabled) {
-			networkTrafficPosition = -1; //anyway we have to call placer method
-			int newnetworkTrafficPosition = Integer.parseInt(Xprefs.getString("networkTrafficPosition", "2"));
+			networkTrafficPosition = Integer.parseInt(Xprefs.getString("networkTrafficPosition", String.valueOf(POSITION_RIGHT)));
+			if(networkTrafficPosition == POSITION_LEFT_EXTRA_LEVEL)
+			{
+				Xprefs.edit().putString("networkTrafficPosition", String.valueOf(POSITION_LEFT)).apply();
+				networkTrafficPosition = POSITION_LEFT;
+			}
 
 			String thresholdText = Xprefs.getString("networkTrafficThreshold", "10");
 
@@ -270,9 +284,6 @@ public class StatusbarMods extends XposedModPack {
 				networkTrafficThreshold = Math.round(Float.parseFloat(thresholdText));
 			} catch (Exception ignored) {
 				networkTrafficThreshold = 10;
-			}
-			if (newnetworkTrafficPosition != networkTrafficPosition) {
-				networkTrafficPosition = newnetworkTrafficPosition;
 			}
 			NetworkTraffic.setConstants(networkTrafficInterval, networkTrafficThreshold, networkTrafficMode, networkTrafficRXTop, networkTrafficColorful, networkTrafficDLColor, networkTrafficULColor, networkTrafficOpacity, networkTrafficShowIcons);
 
@@ -302,6 +313,12 @@ public class StatusbarMods extends XposedModPack {
 		//region clock settings
 
 		clockPosition = Integer.parseInt(Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
+		if(clockPosition == POSITION_LEFT_EXTRA_LEVEL)
+		{
+			Xprefs.edit().putString("SBClockLoc", String.valueOf(POSITION_LEFT)).apply();
+			clockPosition = POSITION_LEFT;
+		}
+
 		mShowSeconds = Xprefs.getBoolean("SBCShowSeconds", false);
 		mAmPmStyle = Integer.parseInt(Xprefs.getString("SBCAmPmStyle", String.valueOf(AM_PM_STYLE_GONE)));
 
@@ -374,8 +391,7 @@ public class StatusbarMods extends XposedModPack {
 				case "statusbarPaddings":
 					try {
 						callMethod(PSBV, "updateStatusBarHeight");
-					} catch (Throwable ignored) {
-					}
+					} catch (Throwable ignored) {}
 					break;
 			}
 		}
@@ -702,7 +718,11 @@ public class StatusbarMods extends XposedModPack {
 						//<modding clock>
 						placeClock();
 
-						mNotificationContainerContainer.setVisibility(GONE);
+						if(mNotificationIconContainer.getChildCount() == 0)
+						{
+							mNotificationContainerContainer.setVisibility(GONE);
+							setHeights();
+						}
 						setHeights();
 					}
 				});
@@ -758,7 +778,7 @@ public class StatusbarMods extends XposedModPack {
 	//region double row left area
 	@SuppressLint("DiscouragedApi")
 	private void makeLeftSplitArea() {
-		ViewGroup mNotificationIconContainer = mStatusBar.findViewById(mContext.getResources().getIdentifier("notificationIcons", "id", mContext.getPackageName()));
+		mNotificationIconContainer = mStatusBar.findViewById(mContext.getResources().getIdentifier("notificationIcons", "id", mContext.getPackageName()));
 
 		mNotificationContainerContainer = new LinearLayout(mContext);
 
@@ -812,7 +832,7 @@ public class StatusbarMods extends XposedModPack {
 		mNotificationContainerContainer.getLayoutParams().height = (mLeftExtraRowContainer.getVisibility() == VISIBLE) ?  mStatusBar.getMeasuredHeight() / 2 : mStatusBar.getMeasuredHeight();
 		mLeftExtraRowContainer.getLayoutParams().height = (mNotificationContainerContainer.getVisibility() == VISIBLE) ? mStatusBar.getMeasuredHeight() / 2 : mStatusBar.getMeasuredHeight();
 		if (networkOnSBEnabled) {
-			networkTrafficSB.getLayoutParams().height = (networkTrafficPosition == POSITION_LEFT_EXTRA_LEVEL) ? mStatusBar.getMeasuredHeight()/2 : mStatusBar.getMeasuredHeight();
+			networkTrafficSB.getLayoutParams().height = (networkTrafficPosition == POSITION_LEFT && notificationAreaMultiRow) ? mStatusBar.getMeasuredHeight()/2 : mStatusBar.getMeasuredHeight();
 		}	
 	}
 	//end region
@@ -946,11 +966,14 @@ public class StatusbarMods extends XposedModPack {
 					networkTrafficSB.setPadding(rightClockPadding, 0, leftClockPadding, 0);
 					break;
 				case POSITION_LEFT:
-					mStatusbarStartSide.addView(networkTrafficSB, 1);
-					networkTrafficSB.setPadding(0, 0, leftClockPadding, 0);
-					break;
-				case POSITION_LEFT_EXTRA_LEVEL:
-					mLeftExtraRowContainer.addView(networkTrafficSB, mLeftExtraRowContainer.getChildCount());
+					if(notificationAreaMultiRow)
+					{
+						mLeftExtraRowContainer.addView(networkTrafficSB, mLeftExtraRowContainer.getChildCount());
+					}
+					else
+					{
+						mStatusbarStartSide.addView(networkTrafficSB, 1);
+					}
 					networkTrafficSB.setPadding(0, 0, leftClockPadding, 0);
 					break;
 				case POSITION_CENTER:
@@ -1021,12 +1044,14 @@ public class StatusbarMods extends XposedModPack {
 
 		switch (clockPosition) {
 			case POSITION_LEFT:
-				targetArea = mStatusbarStartSide;
-				index = 0;
-				mClockView.setPadding(0, 0, leftClockPadding, 0);
-				break;
-			case POSITION_LEFT_EXTRA_LEVEL:
-				targetArea = mLeftExtraRowContainer;
+				if(notificationAreaMultiRow)
+				{
+					targetArea = mLeftExtraRowContainer;
+				}
+				else
+				{
+					targetArea = mStatusbarStartSide;
+				}
 				index = 0;
 				mClockView.setPadding(0, 0, leftClockPadding, 0);
 				break;

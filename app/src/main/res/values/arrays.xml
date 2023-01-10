@@ -106,14 +106,12 @@
 
     <string-array name="sbc_position_names">
         <item>@string/clock_default</item>
-        <item>@string/clock_default_extra</item>
         <item>@string/clock_center</item>
         <item>@string/clock_right</item>
     </string-array>
 
     <string-array name="sbc_position_codes">
         <item>0</item>
-        <item>3</item>
         <item>1</item>
         <item>2</item>
     </string-array>
@@ -171,7 +169,6 @@
 
     <string-array name="network_sb_locations">
         <item>@string/ntsb_far_left</item>
-        <item>@string/ntsb_far_left_extra</item>
         <item>@string/ntsb_mid_left</item>
         <item>@string/ntsb_mid_right</item>
     </string-array>

@@ -1,3 +1,6 @@
+**canary-202**  
+- Preferences: migrated clock and network monitor DSB location to notification area multi row option  
+  
 **canary-201**  
 - fixed brightness slider margins when located at bottom  
   

@@ -335,7 +335,7 @@
     <string name="none">Ничего</string>
     <string name="screenshot">Скриншот</string>
     <string name="back">Назад</string>
-    <string name="kill_forground_app">Закрыть приложение</string>
+    <string name="kill_foreground_app">Закрыть приложение</string>
     <string name="toggle_notification">Открыть панель уведомлений</string>
     <string name="toggle_one_handed">Переключение режима управления одной рукой</string>
     <string name="insecure_screenshot">Небезопасный скриншот</string>

@@ -330,7 +330,7 @@
     <string name="none">Nimic</string>
     <string name="screenshot">Captură de ecran</string>
     <string name="back">Înapoi</string>
-    <string name="kill_forground_app">Închide aplicația din prim-plan</string>
+    <string name="kill_foreground_app">Închide aplicația din prim-plan</string>
     <string name="toggle_notification">Comută panoul de notificări</string>
     <string name="toggle_one_handed">Comută modul cu o mână</string>
     <string name="insecure_screenshot">Captură ecran nerestricționată</string>

@@ -351,7 +351,7 @@
     <string name="none">Nessuno</string>
     <string name="screenshot">Screenshot</string>
     <string name="back">Indietro</string>
-    <string name="kill_forground_app">Termina app primo piano</string>
+    <string name="kill_foreground_app">Termina app primo piano</string>
     <string name="toggle_notification">Attiva/disattiva pannello notifiche</string>
     <string name="toggle_one_handed">Attiva/disattiva modalità a una mano</string>
     <string name="insecure_screenshot">Screenshot su schermate protette</string>

@@ -332,7 +332,7 @@
     <string name="none">Hiçbiri</string>
     <string name="screenshot">Ekran görüntüsü</string>
     <string name="back">Geri</string>
-    <string name="kill_forground_app">Uygulamayı kapat</string>
+    <string name="kill_foreground_app">Uygulamayı kapat</string>
     <string name="toggle_notification">Bildirim panelini aç/kapat</string>
     <string name="toggle_one_handed">Tek el modunu aç/kapat</string>
     <string name="insecure_screenshot">Güvenliksiz ekran görüntüsü</string>

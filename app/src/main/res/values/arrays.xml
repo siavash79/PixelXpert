@@ -40,6 +40,7 @@
         <item>Turkish</item>
         <item>Ukrainian</item>
         <item>Vietnamese</item>
+        <item>Hebrew</item>
     </string-array>
 
     <string-array name="languages_values">
@@ -58,6 +59,7 @@
         <item>tr</item>
         <item>uk</item>
         <item>vi</item>
+        <item>iw</item>
     </string-array>
 
     <string-array name="three_button_nav_buttons">
@@ -71,7 +73,7 @@
         <item>@string/screenshot</item>
         <item>@string/insecure_screenshot</item>
         <!--item>@string/back</item-->
-        <item>@string/kill_forground_app</item>
+        <item>@string/kill_foreground_app</item>
         <item>@string/toggle_notification</item>
         <item>@string/toggle_one_handed</item>
         <item>@string/sleep</item>
@@ -370,7 +372,7 @@
         <item>CircularOverlayG</item>
         <item>FilledOverlayG</item>
         <item>KaiOverlayG</item>
-        <item>OxigenOSOverlayG</item>
+        <item>OxygenOSOverlayG</item>
         <item>RoundedOverlayG</item>
         <item>SamOverlayG</item>
         <item>VictorOverlayG</item>
@@ -407,7 +409,7 @@
         <item>com.android.theme.icon_pack.kai.themepicker</item>
     </string-array>
 
-    <string-array name="OxigenOSOverlayG">
+    <string-array name="OxygenOSOverlayG">
         <item>com.android.theme.icon_pack.oos.android</item>
         <item>com.android.theme.icon_pack.oos.systemui</item>
         <item>com.android.theme.icon_pack.oos.settings</item>

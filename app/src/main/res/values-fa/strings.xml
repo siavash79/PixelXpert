@@ -320,7 +320,7 @@
     <string name="insecure_screenshot">اسکرین شات بدون محدودیت امنیتی</string>
     <string name="toggle_one_handed">خاموش/روشن کردن حالت یکدستی</string>
     <string name="toggle_notification">باز/بسته کردن صفحه اعلانات</string>
-    <string name="kill_forground_app">بستن برنامه جاری</string>
+    <string name="kill_foreground_app">بستن برنامه جاری</string>
     <string name="back">برگشت</string>
     <string name="screenshot">اسکرین شات</string>
     <string name="none">هیچ</string>

@@ -98,7 +98,7 @@
     <string name="keyguard_bottom_category">Các phím tắt khu vực dưới màn hình</string>
     <string name="keyguard_dim_amount_title">Độ mờ hình nền trên màn hình khoá</string>
     <string name="keyguard_left_shortcut">Hiển thị lối tắt bên trái trên màn hình khóa</string>
-    <string name="kill_forground_app">Buộc dừng ứng dụng</string>
+    <string name="kill_foreground_app">Buộc dừng ứng dụng</string>
     <string name="language_title">Ngôn ngữ</string>
     <string name="lastestVersionTitle">Phiên bản mới nhất:</string>
     <string name="less_area">ít diện tích</string>

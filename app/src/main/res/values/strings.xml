@@ -391,7 +391,7 @@
     <string name="none">None</string>
     <string name="screenshot">Screenshot</string>
     <string name="back">Back</string>
-    <string name="kill_forground_app">Kill foreground app</string>
+    <string name="kill_foreground_app">Kill foreground app</string>
     <string name="toggle_notification">Toggle notification panel</string>
     <string name="toggle_one_handed">Toggle one handed mode</string>
     <string name="insecure_screenshot">Unrestricted screenshot</string>

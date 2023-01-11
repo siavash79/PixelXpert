@@ -30,6 +30,7 @@
         <item>Dutch</item>
         <item>English</item>
         <item>German</item>
+        <item>Hebrew</item>
         <item>Italian</item>
         <item>Persian</item>
         <item>Polish</item>
@@ -40,7 +41,6 @@
         <item>Turkish</item>
         <item>Ukrainian</item>
         <item>Vietnamese</item>
-        <item>Hebrew</item>
     </string-array>
 
     <string-array name="languages_values">
@@ -49,6 +49,7 @@
         <item>nl</item>
         <item>en</item>
         <item>de</item>
+        <item>iw</item>
         <item>it</item>
         <item>fa</item>
         <item>pl</item>
@@ -59,7 +60,6 @@
         <item>tr</item>
         <item>uk</item>
         <item>vi</item>
-        <item>iw</item>
     </string-array>
 
     <string-array name="three_button_nav_buttons">

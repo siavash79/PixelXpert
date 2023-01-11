@@ -237,7 +237,7 @@
     <string name="theme_customization_font_title">כותרת / גופן גוף</string>
     <string name="icons_style_title">סגנון סמל</string>
     <string name="icon_shapes_title">צורת סמל</string>
-    <string name="signal_icons_theme_title">ערכת הנושא \'סמלי אותות'</string>
+    <string name="signal_icons_theme_title">ערכת הנושא \'סמלי אותות\'</string>
     <string name="dt_styles_category">סגנונות ערכת נושא כהים</string>
     <string name="dt_styles">בחר סגנון</string>
     <string name="caution_unstable">אזהרה: אפשרות זו עלולה להיות לא יציבה עבור משתמשים מסוימים.</string>

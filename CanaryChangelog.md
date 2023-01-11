@@ -1,3 +1,7 @@
+**canary-203**  
+- Add Hebrew translations by zz842  
+- Fixed notification icons alignment on some devices  
+  
 **canary-202**  
 - Preferences: migrated clock and network monitor DSB location to notification area multi row option  
   

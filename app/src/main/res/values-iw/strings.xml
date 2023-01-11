@@ -51,7 +51,7 @@
     <string name="charging_info_title">מידע על טעינה במסך הנעילה</string>
     <string name="imperial_units_title">השתמש ביחידות אימפריאליות</string>
     <!--Status bar related-->
-    <string name="double_tap_sleep_title">הקש פעמיים כדי לישון</string>
+    <string name="double_tap_sleep_title">הקש פעמיים כדי לכבות את המסך</string>
     <string name="battery_style_title">בחר סגנון סוללה</string>
     <string name="battery_show_percent_title">הצג אחוזי סוללה</string>
     <string name="battery_style_category_title">סגנון סוללה</string>
@@ -59,7 +59,7 @@
     <string name="battery_hidden">מוּסתָר</string>
     <string name="BIcon_Opacity_title">אֲטִימוּת</string>
     <string name="sb_center_fine_tune">כוונן את אזור המרכז</string>
-    <string name="sb_multi_row_system_icons">סמלי מערכת מרובות שורות (צריך גובה שורת מצב מוגדל)</string>
+    <string name="sb_multi_row_system_icons">סמלי הודעות מרובות שורות (צריך להגדיל את גובה שורת המצב)</string>
     <string name="sb_multi_row_category">מספר שורות של סמלי מערכת</string>
     <string name="sb_icon_sort_mode">שיטת מיקום אייקונים</string>
     <string name="sort_clean">מיון ברשת</string>
@@ -82,7 +82,7 @@
     <string name="sbc_custom_date_before">טקסט מותאם אישית לפני השעון</string>
     <string name="sbc_date_small">גודל קטן יותר (70%)</string>
     <string name="sbc_custom_date_after">טקסט מותאם אישית אחרי שעון</string>
-    <string name="sbc_header">התאמה אישית של שעון שורת המצב</string>
+    <string name="sbc_header">התאמה אישית של השעון בשורת המצב</string>
     <string name="sbc_clock_color_category">אפשרויות צבע</string>
     <string name="sbc_colorful_title">תעשה את זה צבעוני</string>
     <string name="sbc_before_color">טקסט לפני השעון</string>
@@ -142,14 +142,14 @@
     <string name="qs_footer_text_summary">השאר ריק כדי להסיר לחלוטין</string>
     <string name="qs_footer_text_desc">כבה/הפעל את התצוגה כדי להחיל</string>
     <string name="qs_leveled_flashlight_title">אריח פנס ברמת בהירות</string>
-    <string name="qs_flashlight_level_global_title">החל את רמת הפנס ברחבי העולם</string>
+    <string name="qs_flashlight_level_global_title">החל את חוזק הפנס בכל הטלפון בהתאם לחוזק הפנס בפאנל QS</string>
     <string name="qs_qr_tile_inactive_title">הפוך את צבע אריחי QR-Scan</string>
     <string name="qs_tile_vertical_title">הזז את סמלי האריחים למעלה</string>
     <string name="qs_leveled_flashlight_summary">דורש חומרה נתמכת</string>
     <string name="light_qs_title">החל את לוח QS קל בעת שימוש בערכת נושא קלה</string>
     <string name="light_dualtone_qs_title">אפשר QS Panel עם גוונים כפולים</string>
     <string name="qs_pulldown_size">רוחב משיכה מהיר</string>
-    <string name="qs_pulldown_switch_title">נפתח לוח QS מהיר משורת המצב</string>
+    <string name="qs_pulldown_switch_title">פתיחת מהירה של QS משורת המצב</string>
     <string name="qs_pulldown_side_title">צד נפתח מהיר</string>
     <string name="qs_pulldown_category">הגדרות מהירות נפתחות</string>
     <string name="qs_haptic_switch_title">רטט בהקשה על אריח QS</string>
@@ -211,8 +211,8 @@
     <string name="brightness_range_title">מגבלות בהירות התצוגה</string>
     <string name="brightness_range_not_linear">טווח זה אינו ליניארי: לפעמים הבדל קטן מוביל לשינויים ניכרים</string>
     <string name="so_power_longpress_torch_title">לחץ לחיצה ארוכה על כפתור ההפעלה עבור לפיד</string>
-    <string name="so_taptaptorch_title">אפשר הקשה כפולה ללפיד מסך נעילה</string>
-    <string name="so_taptaptorch_summary">הקש פעמיים והחזק את מסך הנעילה לגישה מהירה לפיד</string>
+    <string name="so_taptaptorch_title">הדלק פנס בלחיצה כפולה במסך הנעילה</string>
+    <string name="so_taptaptorch_summary">הקש פעמיים והחזק את מסך הנעילה, להפעלה מהירה של הפנס</string>
     <string name="so_fingerprint_sensor_enabled">אפשר חיישן טביעת אצבע כשהמסך כבוי</string>
     <string name="so_double_tap_wake_title">הקש פעמיים כדי להעיר את הטלפון</string>
     <string name="so_double_tap_wake_summary">משבית הקשה אחת כדי להעיר</string>
@@ -268,7 +268,7 @@
     <string name="date_after_small">אחרי שעון (70%)</string>
     <!-- 4G | LTE -->
     <string name="fourg_lte_default">ברירת מחדל של המערכת</string>
-    <string name="fourg_lte_lte">Force an LTE symbol</string>
+    <string name="fourg_lte_lte">כפה סמל LTE</string>
     <string name="fourg_lte_fourg">כפה סמל 4G</string>
     <!-- QS Rows overlays -->
     <!-- Lockscreen/Quick Settings Custom Text -->
@@ -315,7 +315,7 @@
     <string name="reinstall_word">התקן מחדש</string>
     <string name="own_prefs_header">הגדרות AOSPMods</string>
     <string name="language_title">שפה</string>
-    <string name="camera_manager_master_title">אפשר אופני פנס (השבת את זה אם הטלפון שלך לא תומך בהם)</string>
+    <string name="camera_manager_master_title">אפשר הגדרות פנס (השבת את זה אם הטלפון שלך לא תומך בזה)</string>
     <string name="toggle_dark_apply">(החלף ערכת נושא כהה ליישום)</string>
     <string name="gesture_nav_extra_cat">מחוות סרגל ניווט נוספות</string>
     <string name="gesture_nav_long_swipe_fc_title">החלק לראש המסך כדי להרוג את אפליקציית החזית</string>

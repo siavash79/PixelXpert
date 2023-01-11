@@ -21,6 +21,7 @@ import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
@@ -828,12 +829,16 @@ public class StatusbarMods extends XposedModPack {
 	}
 
 	private void setHeights() {
-		mLeftVerticalSplitContainer.getLayoutParams().height = mStatusBar.getMeasuredHeight();
-		mNotificationContainerContainer.getLayoutParams().height = (mLeftExtraRowContainer.getVisibility() == VISIBLE) ?  mStatusBar.getMeasuredHeight() / 2 : mStatusBar.getMeasuredHeight();
-		mLeftExtraRowContainer.getLayoutParams().height = (mNotificationContainerContainer.getVisibility() == VISIBLE) ? mStatusBar.getMeasuredHeight() / 2 : mStatusBar.getMeasuredHeight();
+		Resources res = mContext.getResources();
+		@SuppressLint("DiscouragedApi") int statusbarHeight = mStatusBar.getLayoutParams().height - res.getDimensionPixelSize(res.getIdentifier("status_bar_padding_top", "dimen", mContext.getPackageName()));
+
+		mLeftVerticalSplitContainer.getLayoutParams().height = statusbarHeight;
+
+		mNotificationContainerContainer.getLayoutParams().height = statusbarHeight / ((mLeftExtraRowContainer.getVisibility() == VISIBLE) ?  2 : 1);
+		mLeftExtraRowContainer.getLayoutParams().height =  statusbarHeight / ((mNotificationContainerContainer.getVisibility() == VISIBLE) ? 2 : 1);
 		if (networkOnSBEnabled) {
-			networkTrafficSB.getLayoutParams().height = (networkTrafficPosition == POSITION_LEFT && notificationAreaMultiRow) ? mStatusBar.getMeasuredHeight()/2 : mStatusBar.getMeasuredHeight();
-		}	
+			networkTrafficSB.getLayoutParams().height = statusbarHeight / ((networkTrafficPosition == POSITION_LEFT && notificationAreaMultiRow) ?  2 : 1);
+		}
 	}
 	//end region
 
@@ -984,7 +989,6 @@ public class StatusbarMods extends XposedModPack {
 			ntsbLayoutP = (LinearLayout.LayoutParams) networkTrafficSB.getLayoutParams();
 			ntsbLayoutP.gravity = Gravity.CENTER_VERTICAL;
 			networkTrafficSB.setLayoutParams(ntsbLayoutP);
-//            networkTrafficSB.setPadding(10, 0, 10, 0);
 		} catch (Throwable ignored) {
 		}
 	}

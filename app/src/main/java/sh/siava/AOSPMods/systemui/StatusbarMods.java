@@ -2,6 +2,8 @@ package sh.siava.AOSPMods.systemui;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.widget.LinearLayout.VERTICAL;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
@@ -563,7 +565,7 @@ public class StatusbarMods extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				QSBH = param.thisObject;
 				NTQSHolder = new FrameLayout(mContext);
-				FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
 				lp.gravity = Gravity.CENTER_HORIZONTAL;
 				NTQSHolder.setLayoutParams(lp);
 				((FrameLayout) QSBH).addView(NTQSHolder);
@@ -687,7 +689,7 @@ public class StatusbarMods extends XposedModPack {
 							mCenteredIconArea = (View) ((View) getObjectField(param.thisObject, "mCenteredIconArea")).getParent();
 						} catch (Throwable ignored) {
 							mCenteredIconArea = new LinearLayout(mContext);
-							FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+							FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(WRAP_CONTENT, MATCH_PARENT);
 							lp.gravity = Gravity.CENTER;
 							mCenteredIconArea.setLayoutParams(lp);
 							mStatusBar.addView(mCenteredIconArea);
@@ -722,7 +724,6 @@ public class StatusbarMods extends XposedModPack {
 						if(mNotificationIconContainer.getChildCount() == 0)
 						{
 							mNotificationContainerContainer.setVisibility(GONE);
-							setHeights();
 						}
 						setHeights();
 					}
@@ -792,7 +793,7 @@ public class StatusbarMods extends XposedModPack {
 		}
 
 		mLeftVerticalSplitContainer.setOrientation(VERTICAL);
-		mLeftVerticalSplitContainer.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+		mLeftVerticalSplitContainer.setLayoutParams(new LinearLayoutCompat.LayoutParams(MATCH_PARENT, MATCH_PARENT));
 		mLeftVerticalSplitContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setHeights());
 
 		LayoutTransition layoutTransition = new LayoutTransition();
@@ -826,16 +827,18 @@ public class StatusbarMods extends XposedModPack {
 				}
 			}
 		});
+
+		((View)mStatusbarStartSide.getParent()).getLayoutParams().height = MATCH_PARENT;
+		mStatusbarStartSide.getLayoutParams().height = MATCH_PARENT;
+		mLeftVerticalSplitContainer.getLayoutParams().height = MATCH_PARENT;
 	}
 
 	private void setHeights() {
 		Resources res = mContext.getResources();
 		@SuppressLint("DiscouragedApi") int statusbarHeight = mStatusBar.getLayoutParams().height - res.getDimensionPixelSize(res.getIdentifier("status_bar_padding_top", "dimen", mContext.getPackageName()));
 
-		mLeftVerticalSplitContainer.getLayoutParams().height = statusbarHeight;
-
-		mNotificationContainerContainer.getLayoutParams().height = statusbarHeight / ((mLeftExtraRowContainer.getVisibility() == VISIBLE) ?  2 : 1);
-		mLeftExtraRowContainer.getLayoutParams().height =  statusbarHeight / ((mNotificationContainerContainer.getVisibility() == VISIBLE) ? 2 : 1);
+		mNotificationContainerContainer.getLayoutParams().height = (mLeftExtraRowContainer.getVisibility() == VISIBLE) ? statusbarHeight / 2 : MATCH_PARENT;
+		mLeftExtraRowContainer.getLayoutParams().height = ((mNotificationContainerContainer.getVisibility() == VISIBLE) ? statusbarHeight / 2 : MATCH_PARENT);
 		if (networkOnSBEnabled) {
 			networkTrafficSB.getLayoutParams().height = statusbarHeight / ((networkTrafficPosition == POSITION_LEFT && notificationAreaMultiRow) ?  2 : 1);
 		}
@@ -1051,12 +1054,13 @@ public class StatusbarMods extends XposedModPack {
 				if(notificationAreaMultiRow)
 				{
 					targetArea = mLeftExtraRowContainer;
+					index = 0;
 				}
 				else
 				{
 					targetArea = mStatusbarStartSide;
+					index = 1;
 				}
-				index = 0;
 				mClockView.setPadding(0, 0, leftClockPadding, 0);
 				break;
 			case POSITION_CENTER:

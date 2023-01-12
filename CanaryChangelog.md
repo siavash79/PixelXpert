@@ -1,3 +1,6 @@
+**canary-204**  
+- Fixed(?) statusbar clock position after screen rotate  
+  
 **canary-203**  
 - Add Hebrew translations by zz842  
 - Fixed notification icons alignment on some devices  

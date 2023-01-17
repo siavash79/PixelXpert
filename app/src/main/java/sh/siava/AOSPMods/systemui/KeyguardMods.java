@@ -31,11 +31,15 @@ import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
 
+import com.topjohnwu.superuser.Shell;
+
 import java.lang.reflect.Method;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
+import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.utils.StringFormatter;
@@ -78,6 +82,8 @@ public class KeyguardMods extends XposedModPack {
 
 	//region keyguard bottom area shortcuts and transparency
 	private Object NotificationPanelViewController;
+//	private Object QRScannerController;
+//	private Object ActivityStarter;
 	private Object KeyguardBottomAreaView;
 	private Object mAssistUtils;
 	private static boolean transparentBGcolor = false;
@@ -157,7 +163,24 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> KeyguardBottomAreaViewBinderClass = findClass("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpparam.classLoader);
 		Class<?> AssistManager = findClass("com.android.systemui.assist.AssistManager", lpparam.classLoader);
 		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader); //used to launch camera
+//		Class<?> QRCodeScannerControllerClass = findClass("com.android.systemui.qrcodescanner.controller.QRCodeScannerController", lpparam.classLoader);
+//		Class<?> ActivityStarterDelegateClass = findClass("com.android.systemui.ActivityStarterDelegate", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
+
+/*		hookAllConstructors(ActivityStarterDelegateClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				ActivityStarter = param.thisObject;
+				log("gotcha");
+			}
+		});*/
+/*		hookAllConstructors(QRCodeScannerControllerClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				QRScannerController = param.thisObject;
+				dumpClass(d);
+			}
+		});*/
 
 		hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
 			@Override
@@ -405,6 +428,10 @@ public class KeyguardMods extends XposedModPack {
 		View.OnClickListener listener = null;
 		Drawable drawable = null;
 		switch (type) {
+			case "tvremote":
+				listener = v -> launchTVRemote();
+				drawable = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_remote, mContext.getTheme());
+				break;
 			case "camera":
 				listener = v -> launchCamera();
 				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName()), mContext.getTheme());
@@ -426,6 +453,10 @@ public class KeyguardMods extends XposedModPack {
 		} else {
 			Button.setVisibility(GONE);
 		}
+	}
+
+	private void launchTVRemote() {
+		Shell.cmd("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity").exec();
 	}
 
 	private void launchCamera() {

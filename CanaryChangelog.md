@@ -1,3 +1,6 @@
+**canary-205**  
+- Added TV remote to lockscreen shortcuts  
+  
 **canary-204**  
 - Fixed(?) statusbar clock position after screen rotate  
   

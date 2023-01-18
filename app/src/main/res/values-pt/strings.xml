@@ -317,5 +317,6 @@
 	<string name="clipboard_smart_actions_title">Ações rápidas na área de transferência</string>
     <string name="camera_manager_master_title">Ativar mods da lanterna (desative caso o seu dispositivo não suporte)</string>
 	<string name="sb_double_row_category">Opções da barra de estado mais espessa</string>
-    <string name="sb_multi_row_notification_icons">Várias linhas para ícones das notificações (requer barra de estado mais espessa)</string>
+	<string name="tv_remote_shortcut">Comando da TV</string>
+	<string name="sb_multi_row_notification_icons">Várias linhas para ícones das notificações (requer barra de estado mais espessa)</string>
 </resources>

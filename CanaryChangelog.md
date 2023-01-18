@@ -1,3 +1,7 @@
+**canary-206**  
+- Added option to set different QS Tile numbers in portrait/landscape  
+- Fixed statusbar size reverting to default in rare cases  
+  
 **canary-205**  
 - Added TV remote to lockscreen shortcuts  
   

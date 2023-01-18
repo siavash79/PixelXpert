@@ -156,6 +156,7 @@
     <string name="qs_flashlight_level_global_title">Apply flashlight level globally</string>
     <string name="qs_qr_tile_inactive_title">Invert QR-Scan tile color</string>
     <string name="qs_tile_vertical_title">Move tile icons to the top</string>
+    <string name="qs_tile_qty_title">Quick settings tile count settings</string>
     <string name="qs_leveled_flashlight_summary">Requires supported hardware</string>
     <string name="light_qs_title">Apply light QS Panel when using light theme</string>
     <string name="light_dualtone_qs_title">Enable dual tone QS Panel</string>
@@ -164,6 +165,9 @@
     <string name="qs_pulldown_side_title">Quick pull-down side</string>
     <string name="qs_pulldown_category">Quick settings pull-down</string>
     <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
+    <string name="qs_tile_qty_portrait">In portrait orientation</string>
+    <string name="qs_tile_qty_landscape">In landscape orientation</string>
+
     <string name="qs_rows_number">Number of QS rows</string>
     <string name="qs_cols_number">Number of QS columns</string>
     <string name="qqs_tiles_number">Maximum tiles in Quick QS (max 2 rows)</string>

@@ -21,12 +21,14 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+import androidx.preference.SeekBarPreference;
 
 import com.google.android.material.slider.LabelFormatter;
 import com.topjohnwu.superuser.Shell;
@@ -670,6 +672,48 @@ public class SettingsActivity extends AppCompatActivity implements
 		}
 	}
 
+	public static class QSTileQtyFragment extends PreferenceFragmentCompat {
+		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibililty(sharedPreferences);
+
+		private void updateVisibililty(SharedPreferences sharedPreferences) {
+			try {
+				int QSRowQty = sharedPreferences.getInt("QSRowQty", 0);
+				findPreference("QSRowQty").setSummary((QSRowQty == 0) ? getResources().getString(R.string.word_default) : String.valueOf(QSRowQty));
+
+				int QSColQty = sharedPreferences.getInt("QSColQty", 1);
+				findPreference("QSColQty").setSummary((QSColQty == 1) ? getResources().getString(R.string.word_default) : String.valueOf(QSColQty));
+
+				int QQSTileQty = sharedPreferences.getInt("QQSTileQty", 4);
+				findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQty));
+
+				int QSRowQtyL = sharedPreferences.getInt("QSRowQtyL", 0);
+				findPreference("QSRowQtyL").setSummary((QSRowQtyL == 0) ? getResources().getString(R.string.word_default) : String.valueOf(QSRowQtyL));
+
+				((SeekBarPreference) findPreference("QSColQtyL")).setMax(QSColQty);
+
+				if (sharedPreferences.getInt("QSColQtyL", 1) > QSColQty) {
+					sharedPreferences.edit().putInt("QSColQtyL", QSColQty).apply();
+				}
+				int QSColQtyL = sharedPreferences.getInt("QSColQtyL", 1);
+				findPreference("QSColQtyL").setSummary((QSColQtyL == 1) ? getResources().getString(R.string.word_default) : String.valueOf(QSColQtyL));
+
+				int QQSTileQtyL = sharedPreferences.getInt("QQSTileQtyL", 4);
+				findPreference("QQSTileQtyL").setSummary((QQSTileQtyL == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQtyL));
+			}
+			catch (Throwable ignored){}
+		}
+
+		@Override
+		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+			getPreferenceManager().setStorageDeviceProtected();
+			setPreferencesFromResource(R.xml.qs_tile_qty_prefs, rootKey);
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			updateVisibililty(prefs);
+
+			prefs.registerOnSharedPreferenceChangeListener(listener);
+		}
+	}
+
 	@SuppressWarnings("ConstantConditions")
 	public static class QuickSettingsFragment extends PreferenceFragmentCompat {
 		LabelFormatter formatter = value -> (value + 100) + "%";
@@ -701,15 +745,6 @@ public class SettingsActivity extends AppCompatActivity implements
 				lp.width = Math.round(sharedPreferences.getInt("QSPulldownPercent", 25) * displayWidth / 100f);
 				lp.gravity = Gravity.TOP | (Integer.parseInt(sharedPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
 				pullDownIndicator.setLayoutParams(lp);
-
-				int QSRowQty = sharedPreferences.getInt("QSRowQty", 0);
-				findPreference("QSRowQty").setSummary((QSRowQty == 0) ? getResources().getString(R.string.word_default) : String.valueOf(QSRowQty));
-
-				int QSColQty = sharedPreferences.getInt("QSColQty", 0);
-				findPreference("QSColQty").setSummary((QSColQty == 0) ? getResources().getString(R.string.word_default) : String.valueOf(QSColQty));
-
-				int QQSTileQty = sharedPreferences.getInt("QQSTileQty", 4);
-				findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQty));
 
 				float QSLabelScaleFactor = 0;
 				try {

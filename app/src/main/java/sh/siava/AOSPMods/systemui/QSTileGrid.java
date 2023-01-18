@@ -14,6 +14,7 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.VibrationEffect;
 import android.view.Gravity;
@@ -35,13 +36,20 @@ public class QSTileGrid extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
 	private boolean replaced = false;
-	private int quick_settings_max_rows = 0, quick_settings_num_columns = 0, quick_qs_panel_max_tiles = 0;
+	private int quick_settings_max_rows_l = 0, quick_settings_num_columns_l = 0, quick_qs_panel_max_tiles_l = 0;
+	private int quick_settings_max_rows_p = 0, quick_settings_num_columns_p = 0, quick_qs_panel_max_tiles_p = 0;
+
 	private static final int NOT_SET = 0;
+	private static final int QS_COL_NOT_SET = 1;
 	private static final int QQS_NOT_SET = 4;
 
 	private static int QSRowQty = NOT_SET;
-	private static int QSColQty = NOT_SET;
+	private static int QSColQty = QS_COL_NOT_SET;
 	private static int QQSTileQty = QQS_NOT_SET;
+
+	private static int QSRowQtyL = NOT_SET;
+	private static int QSColQtyL = QS_COL_NOT_SET;
+	private static int QQSTileQtyL = QQS_NOT_SET;
 
 	private static Float labelSize = null, secondaryLabelSize = null;
 	private static int labelSizeUnit = -1, secondaryLabelSizeUnit = -1;
@@ -70,8 +78,14 @@ public class QSTileGrid extends XposedModPack {
 		QSHapticEnabled = Xprefs.getBoolean("QSHapticEnabled", false);
 
 		QSRowQty = Xprefs.getInt("QSRowQty", NOT_SET);
-		QSColQty = Xprefs.getInt("QSColQty", NOT_SET);
+		QSColQty = Xprefs.getInt("QSColQty", QS_COL_NOT_SET);
+		if(QSColQty < QS_COL_NOT_SET) QSColQty = QS_COL_NOT_SET;
 		QQSTileQty = Xprefs.getInt("QQSTileQty", QQS_NOT_SET);
+
+		QSRowQtyL = Xprefs.getInt("QSRowQtyL", NOT_SET);
+		QSColQtyL = Xprefs.getInt("QSColQtyL", QS_COL_NOT_SET);
+		if(QSColQtyL < QS_COL_NOT_SET) QSColQtyL = QS_COL_NOT_SET;
+		QQSTileQtyL = Xprefs.getInt("QQSTileQtyL", QQS_NOT_SET);
 
 		QRTileInactiveColor = Xprefs.getBoolean("QRTileInactiveColor", false);
 
@@ -81,9 +95,9 @@ public class QSTileGrid extends XposedModPack {
 		} catch (Exception ignored) {
 		}
 
-		setResources();
+		setResources(mContext.getResources().getConfiguration());
 
-		if (Key.length > 0 && (Key[0].equals("QSRowQty") || Key[0].equals("QSColQty") || Key[0].equals("QQSTileQty"))) {
+		if (Key.length > 0 && (Key[0].equals("QSRowQty") || Key[0].equals("QSColQty") || Key[0].equals("QQSTileQty") || Key[0].equals("QSRowQtyL") || Key[0].equals("QSColQtyL") || Key[0].equals("QQSTileQtyL"))) {
 			SystemUtils.doubleToggleDarkMode();
 		}
 	}
@@ -97,8 +111,16 @@ public class QSTileGrid extends XposedModPack {
 		Class<?> FontSizeUtilsClass = findClass("com.android.systemui.FontSizeUtils", lpparam.classLoader);
 		Class<?> QSTileImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
 		Class<?> QSFactoryImplClass = findClass("com.android.systemui.qs.tileimpl.QSFactoryImpl", lpparam.classLoader);
+		Class<?> SystemUIApplicationClass = findClass("com.android.systemui.SystemUIApplication", lpparam.classLoader);
 
-		//used to enable dual wifi/cell tiles for 13. Also works with 12
+		hookAllMethods(SystemUIApplicationClass, "onConfigurationChanged", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				setResources((Configuration) param.args[0]); //rotation detection
+			}
+		});
+
+		//used to enable dual wifi/cell tiles for 13
 		hookAllMethods(QSFactoryImplClass, "createTileInternal", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -215,13 +237,19 @@ public class QSTileGrid extends XposedModPack {
 		hookAllMethods(TileLayoutClass, "setMaxColumns", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if (QSColQty != NOT_SET) {
+				Context context = (Context) getObjectField(param.thisObject, "mContext");
+				boolean isLandscape = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+				if (!isLandscape && QSColQty != QS_COL_NOT_SET) {
 					param.args[0] = QSColQty;
+				}
+				else if (isLandscape && QSColQtyL != QS_COL_NOT_SET)
+				{
+					param.args[0] = QSColQtyL;
 				}
 			}
 		});
 
-		setResources();
+		setResources(mContext.getResources().getConfiguration());
 	}
 
 	private void fixPaddingVerticalLayout(LinearLayout parent) {
@@ -256,30 +284,67 @@ public class QSTileGrid extends XposedModPack {
 	}
 
 	@SuppressLint("DiscouragedApi")
-	private void setResources() {
+	private void setResources(Configuration conf) {
+//		if(true) return;
 		XC_InitPackageResources.InitPackageResourcesParam ourResparam = resparams.get(listenPackage);
+
+		boolean isLandscape = conf.orientation == Configuration.ORIENTATION_LANDSCAPE;
+		Context context = mContext.createConfigurationContext(conf);
 
 		if (ourResparam == null) return;
 
 		try {
-			if (quick_settings_max_rows == 0) {
-				quick_settings_num_columns = mContext.getResources().getInteger(mContext.getResources().getIdentifier("quick_settings_num_columns", "integer", mContext.getPackageName()));
-				quick_settings_max_rows = mContext.getResources().getInteger(mContext.getResources().getIdentifier("quick_settings_max_rows", "integer", mContext.getPackageName()));
-				quick_qs_panel_max_tiles = mContext.getResources().getInteger(mContext.getResources().getIdentifier("quick_qs_panel_max_tiles", "integer", mContext.getPackageName()));
+			if (quick_settings_max_rows_l == 0) {
+				conf.orientation = Configuration.ORIENTATION_LANDSCAPE;
+				Context landscapeContext = mContext.createConfigurationContext(conf);
+				quick_settings_num_columns_l = landscapeContext.getResources().getInteger(landscapeContext.getResources().getIdentifier("quick_settings_num_columns", "integer", landscapeContext.getPackageName()));
+				quick_settings_max_rows_l = landscapeContext.getResources().getInteger(landscapeContext.getResources().getIdentifier("quick_settings_max_rows", "integer", landscapeContext.getPackageName()));
+				quick_qs_panel_max_tiles_l = landscapeContext.getResources().getInteger(landscapeContext.getResources().getIdentifier("quick_qs_panel_max_tiles", "integer", landscapeContext.getPackageName()));
+
+				conf.orientation = Configuration.ORIENTATION_PORTRAIT;
+				Context portraitContext = mContext.createConfigurationContext(conf);
+				quick_settings_num_columns_p = portraitContext.getResources().getInteger(portraitContext.getResources().getIdentifier("quick_settings_num_columns", "integer", portraitContext.getPackageName()));
+				quick_settings_max_rows_p = portraitContext.getResources().getInteger(portraitContext.getResources().getIdentifier("quick_settings_max_rows", "integer", portraitContext.getPackageName()));
+				quick_qs_panel_max_tiles_p = portraitContext.getResources().getInteger(portraitContext.getResources().getIdentifier("quick_qs_panel_max_tiles", "integer", portraitContext.getPackageName()));
+
+				if(isLandscape)
+				{
+					conf.orientation = Configuration.ORIENTATION_LANDSCAPE;
+				}
 			}
 
-			if (replaced || QQSTileQty != QQS_NOT_SET) {
-				ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_qs_panel_max_tiles", QQSTileQty == QQS_NOT_SET ? quick_qs_panel_max_tiles : QQSTileQty);
+			if (replaced || QQSTileQty != QQS_NOT_SET || QQSTileQtyL != QQS_NOT_SET) {
+				if(isLandscape) {
+					ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_qs_panel_max_tiles", QQSTileQtyL == QQS_NOT_SET ? quick_qs_panel_max_tiles_l : QQSTileQtyL);
+				}
+				else
+				{
+					ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_qs_panel_max_tiles", QQSTileQty == QQS_NOT_SET ? quick_qs_panel_max_tiles_p : QQSTileQty);
+				}
 				replaced = true;
 			}
 
-			if (replaced || QSColQty != NOT_SET) {
-				ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_settings_num_columns", QSColQty == NOT_SET ? quick_settings_num_columns : QSColQty);
+			if (replaced || QSColQty != QS_COL_NOT_SET || QSColQtyL != QS_COL_NOT_SET) {
+				if(isLandscape)
+				{
+					ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_settings_num_columns", QSColQtyL == QS_COL_NOT_SET ? quick_settings_num_columns_l : QSColQtyL);
+				}
+				else
+				{
+					ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_settings_num_columns", QSColQty == QS_COL_NOT_SET ? quick_settings_num_columns_p : QSColQty);
+				}
 				replaced = true;
 			}
 
-			if (replaced || QSRowQty != NOT_SET) {
-				ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_settings_max_rows", QSRowQty == NOT_SET ? quick_settings_max_rows : QSRowQty);
+			if (replaced || QSRowQty != NOT_SET || QSRowQtyL != NOT_SET) {
+				if(isLandscape)
+				{
+					ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_settings_max_rows", QSRowQtyL == NOT_SET ? quick_settings_max_rows_l : QSRowQtyL);
+				}
+				else
+				{
+					ourResparam.res.setReplacement(ourResparam.packageName, "integer", "quick_settings_max_rows", QSRowQty == NOT_SET ? quick_settings_max_rows_p : QSRowQty);
+				}
 				replaced = true;
 			}
 		} catch (Throwable ignored) {

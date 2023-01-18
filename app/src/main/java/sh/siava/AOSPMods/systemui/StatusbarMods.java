@@ -392,9 +392,7 @@ public class StatusbarMods extends XposedModPack {
 			//noinspection SwitchStatementWithTooFewBranches
 			switch (Key[0]) {
 				case "statusbarPaddings":
-					try {
-						callMethod(PSBV, "updateStatusBarHeight");
-					} catch (Throwable ignored) {}
+					updateStatusbarHeight();
 					break;
 			}
 		}
@@ -677,7 +675,9 @@ public class StatusbarMods extends XposedModPack {
 
 						mStatusBar = (ViewGroup) getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
 
-						mStatusBar.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setHeights());
+						mStatusBar.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+							setHeights();
+						});
 
 						mStatusbarStartSide = mStatusBar.findViewById(mContext.getResources().getIdentifier("status_bar_start_side_except_heads_up", "id", mContext.getPackageName()));
 
@@ -775,6 +775,12 @@ public class StatusbarMods extends XposedModPack {
 						}
 					}
 				});
+	}
+
+	private void updateStatusbarHeight() {
+		try {
+			callMethod(PSBV, "updateStatusBarHeight");
+		} catch (Throwable ignored) {}
 	}
 
 	//region double row left area

@@ -8,6 +8,7 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.view.DisplayCutout;
 
@@ -52,16 +53,23 @@ public class StatusbarSize extends XposedModPack {
 				|| Xprefs.getBoolean("notificationAreaMultiRow", false);
 
 		sizeFactor = Xprefs.getInt("statusbarHeightFactor", 100);
-		if (sizeFactor != 100 || edited || mForceApplyHeight)
+		if (sizeFactor != 100 || edited || mForceApplyHeight) {
+			Configuration conf = new Configuration();
+			conf.updateFrom(mContext.getResources().getConfiguration());
+
+			conf.orientation = Configuration.ORIENTATION_PORTRAIT;
+			Context portraitContext = mContext.createConfigurationContext(conf);
+
 			currentHeight = Math.round(
-					mContext.getResources().getDimensionPixelSize(
-							mContext.getResources().getIdentifier(
+					portraitContext.getResources().getDimensionPixelSize(
+							portraitContext.getResources().getIdentifier(
 									"status_bar_height",
 									"dimen",
 									"android")
 					)
 							* sizeFactor
 							/ 100f);
+		}
 	}
 
 	@Override

@@ -93,6 +93,8 @@
     <string name="so_double_tap_wake_summary">Usar duplo toque ao invés de um toque para acender o ecrã</string>
     <string name="overlay_none_title">(Padrão)</string>
     <string name="qs_panel_category_title">Definições rápidas</string>
+	<string name="qs_tile_qty_portrait">Em modo retrato</string>
+    <string name="qs_tile_qty_landscape">Em modo paisagem</string>
     <string name="qs_rows_number">Número de linhas</string>
     <string name="qs_general_options">Preferências das definições rápidas</string>
     <string name="statusbar_general_options">Preferências da barra de estado</string>
@@ -262,6 +264,7 @@
     <string name="qs_tile_label_size">Tamanho do texto</string>
     <string name="qs_tile_secondary_label_size">Tamanho do texto secundário</string>
     <string name="toggle_dark_apply">(ative o tema escuro para aplicar)</string>
+    <string name="qs_tile_qty_title">Definições do número de atalhos</string>
     <string name="qs_leveled_flashlight_summary">Requer hardware compatível</string>
     <string name="qs_leveled_flashlight_title">Atalho da lanterna com controlo de brilho</string>
     <string name="qs_footer_text_value">Inserir texto personalizado</string>

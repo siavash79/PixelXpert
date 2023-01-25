@@ -1,3 +1,11 @@
+**2.6.0**  
+Added:  
+- Lockscreen shortcut mods  
+- Hebrew translation  
+- Option to set different QS tile setup in portrait/landscape  
+  
+... And bugfixes  
+    
 **2.5.0**  
 Added:  
 - Option to hide mobile roaming indicator (Statusbar)  

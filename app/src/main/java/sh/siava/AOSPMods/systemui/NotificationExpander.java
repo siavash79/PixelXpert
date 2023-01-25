@@ -132,12 +132,7 @@ public class NotificationExpander extends XposedModPack {
 
 
 	private void updateFooterBtn() {
-		View mDismissButton;
-		try {
-			mDismissButton = (View) getObjectField(FooterView, "mManageButton"); //A13
-		} catch (Throwable ignored) {
-			mDismissButton = (View) getObjectField(FooterView, "mDismissButton"); //A12
-		}
+		View mDismissButton = (View) getObjectField(FooterView, "mManageButton"); //A13
 
 		int fh = mDismissButton.getLayoutParams().height;
 

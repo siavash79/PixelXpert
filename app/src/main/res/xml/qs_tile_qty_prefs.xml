@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<PreferenceCategory
+		android:title="@string/qs_tile_qty_portrait">
+
+		<SeekBarPreference
+			android:defaultValue="0"
+			android:max="8"
+			app:min="0"
+			android:key="QSRowQty"
+			app:title="@string/qs_rows_number"
+			app:updatesContinuously="true" />
+		<SeekBarPreference
+			android:defaultValue="0"
+			android:max="4"
+			app:min="1"
+			android:key="QSColQty"
+			app:title="@string/qs_cols_number"
+			app:updatesContinuously="true" />
+
+		<SeekBarPreference
+			android:defaultValue="4"
+			android:max="8"
+			app:min="2"
+			android:key="QQSTileQty"
+			app:title="@string/qqs_tiles_number"
+			app:updatesContinuously="true" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:title="@string/qs_tile_qty_landscape">
+		<SeekBarPreference
+			android:defaultValue="0"
+			android:max="8"
+			app:min="0"
+			android:key="QSRowQtyL"
+			app:title="@string/qs_rows_number"
+			app:updatesContinuously="true" />
+		<SeekBarPreference
+			android:defaultValue="0"
+			android:max="4"
+			app:min="1"
+			android:key="QSColQtyL"
+			app:title="@string/qs_cols_number"
+			app:updatesContinuously="true" />
+
+		<SeekBarPreference
+			android:defaultValue="4"
+			android:max="8"
+			app:min="2"
+			android:key="QQSTileQtyL"
+			app:title="@string/qqs_tiles_number"
+			app:updatesContinuously="true" />
+	</PreferenceCategory>
+
+</PreferenceScreen>

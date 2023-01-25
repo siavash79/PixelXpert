@@ -1,3 +1,38 @@
+**canary-207**  
+- Added option to set longpress actions for lockscreen shortcuts  
+  
+**canary-206**  
+- Added option to set different QS Tile numbers in portrait/landscape  
+- Fixed statusbar size reverting to default in rare cases  
+  
+**canary-205**  
+- Added TV remote to lockscreen shortcuts  
+  
+**canary-204**  
+- Fixed(?) statusbar clock position after screen rotate  
+  
+**canary-203**  
+- Add Hebrew translations by zz842  
+- Fixed notification icons alignment on some devices  
+  
+**canary-202**  
+- Preferences: migrated clock and network monitor DSB location to notification area multi row option  
+  
+**canary-201**  
+- fixed brightness slider margins when located at bottom  
+  
+**canary-200**  
+- Misc Fixes  
+  
+**canary-199**  
+- Misc fixes  
+  
+**canary-198**  
+- lockscreen shortcuts touch-ups  
+  
+**canary-197**  
+- (re)Added lockscreen shortcut mods  
+  
 **canary-196**  
 - Minor fixes  
   

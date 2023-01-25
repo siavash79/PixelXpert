@@ -1,29 +1,27 @@
 package sh.siava.AOSPMods.systemui;
 
 import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedBridge.hookMethod;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
-import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
-import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
-import static sh.siava.AOSPMods.utils.Helpers.dumpClass;
-import static sh.siava.AOSPMods.utils.Helpers.findAndDumpClass;
+import static sh.siava.AOSPMods.utils.SettingsLibUtils.getColorAttr;
+import static sh.siava.AOSPMods.utils.SettingsLibUtils.getColorAttrDefaultColor;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.provider.MediaStore;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,22 +29,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import com.topjohnwu.superuser.Shell;
+
+import java.lang.reflect.Method;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import kotlin.Unit;
-import kotlin.coroutines.Continuation;
-import kotlinx.coroutines.flow.Flow;
-import kotlinx.coroutines.flow.FlowCollector;
 import sh.siava.AOSPMods.AOSPMods;
+import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.XPrefs;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.utils.StringFormatter;
 import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -59,6 +54,11 @@ public class KeyguardMods extends XposedModPack {
 	public static final String EXTRA_MAX_CHARGING_CURRENT = "max_charging_current";
 	public static final String EXTRA_MAX_CHARGING_VOLTAGE = "max_charging_voltage";
 	public static final String EXTRA_TEMPERATURE = "temperature";
+
+	public static final String SHORTCUT_TV_REMOTE = "tvremote";
+	public static final String SHORTCUT_CAMERA = "camera";
+	public static final String SHORTCUT_ASSISTANT = "assistant";
+	public static final String SHORTCUT_TORCH = "torch";
 
 	private float max_charging_current = 0;
 	private float max_charging_voltage = 0;
@@ -86,14 +86,16 @@ public class KeyguardMods extends XposedModPack {
 	//endregion
 
 	//region keyguard bottom area shortcuts and transparency
+	private Object NotificationPanelViewController;
+//	private Object QRScannerController;
+//	private Object ActivityStarter;
+	private Object KeyguardBottomAreaView;
+	private Object mAssistUtils;
 	private static boolean transparentBGcolor = false;
-	private static String leftShortcut = "";
-	private static String rightShortcut = "";
-
-	private ImageView mWalletButton;
-	private ImageView mControlsButton;
-
-	private Object thisObject = null;
+	private static String leftShortcutClick = "";
+	private static String rightShortcutClick = "";
+	private static String leftShortcutLongClick = "";
+	private static String rightShortcutLongClick = "";
 	//endregion
 
 	//region hide user avatar
@@ -121,22 +123,17 @@ public class KeyguardMods extends XposedModPack {
 		} catch (Throwable ignored) {
 		}
 
-		leftShortcut = Xprefs.getString("leftKeyguardShortcut", "");
-		rightShortcut = Xprefs.getString("rightKeyguardShortcut", "");
+		leftShortcutClick = Xprefs.getString("leftKeyguardShortcut", "");
+		rightShortcutClick = Xprefs.getString("rightKeyguardShortcut", "");
+
+		leftShortcutLongClick = Xprefs.getString("leftKeyguardShortcutLongClick", "");
+		rightShortcutLongClick = Xprefs.getString("rightKeyguardShortcutLongClick", "");
 
 		transparentBGcolor = Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
 
 
 		if (Key.length > 0) {
 			switch (Key[0]) {
-				case "leftKeyguardShortcut":
-					if (thisObject != null)
-						convertShortcut(mControlsButton, leftShortcut, thisObject);
-					break;
-				case "rightKeyguardShortcut":
-					if (thisObject != null)
-						convertShortcut(mWalletButton, rightShortcut, thisObject);
-					break;
 				case "KGMiddleCustomText":
 					setMiddleText();
 					break;
@@ -166,16 +163,48 @@ public class KeyguardMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
 		Class<?> CarrierTextControllerClass = findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
-//		Class<?> KeyguardSliceViewClass = findClass("com.android.keyguard.KeyguardSliceView", lpparam.classLoader);
 		Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
 		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpparam.classLoader);
 		Class<?> KeyguardIndicationControllerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
-		Class<?> KeyguardBottomAreaViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardBottomAreaView", lpparam.classLoader);
-		Class<?> UtilClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
 		Class<?> KeyguardStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarView", lpparam.classLoader);
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
+		Class<?> KeyguardBottomAreaViewBinderClass = findClass("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpparam.classLoader);
+		Class<?> AssistManager = findClass("com.android.systemui.assist.AssistManager", lpparam.classLoader);
+		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader); //used to launch camera
+//		Class<?> QRCodeScannerControllerClass = findClass("com.android.systemui.qrcodescanner.controller.QRCodeScannerController", lpparam.classLoader);
+//		Class<?> ActivityStarterDelegateClass = findClass("com.android.systemui.ActivityStarterDelegate", lpparam.classLoader);
+		SettingsLibUtils.init(lpparam.classLoader);
+
+/*		hookAllConstructors(ActivityStarterDelegateClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				ActivityStarter = param.thisObject;
+				log("gotcha");
+			}
+		});*/
+/*		hookAllConstructors(QRCodeScannerControllerClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				QRScannerController = param.thisObject;
+				dumpClass(d);
+			}
+		});*/
+
+		hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				NotificationPanelViewController = param.thisObject;
+			}
+		});
+
+		hookAllConstructors(AssistManager, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				mAssistUtils = getObjectField(param.thisObject, "mAssistUtils");
+			}
+		});
 
 		//needed to extract wallpaper colors and capabilities. This is a SysUIColorExtractor
 		hookAllConstructors(CentralSurfacesImplClass, new XC_MethodHook() {
@@ -192,98 +221,81 @@ public class KeyguardMods extends XposedModPack {
 				View mMultiUserAvatar = (View) getObjectField(param.thisObject, "mMultiUserAvatar");
 				boolean mIsUserSwitcherEnabled = getBooleanField(param.thisObject, "mIsUserSwitcherEnabled");
 				mMultiUserAvatar.setVisibility(!HideLockScreenUserAvatar && mIsUserSwitcherEnabled
-						? View.VISIBLE
+						? VISIBLE
 						: GONE);
 			}
 		});
 		//endregion
 
-/*disabled until futher notice
 		//region keyguard bottom area shortcuts and transparency
-		//convert wallet button to camera button
-		hookAllMethods(KeyguardBottomAreaViewClass,
-				"onFinishInflate", new XC_MethodHook() {
-					@Override
-					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						if(true) return;
+		hookAllMethods(KeyguardBottomAreaViewBinderClass, "bind", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				KeyguardBottomAreaView = param.args[0];
+			}
+		});
 
-						mWalletButton = (ImageView) getObjectField(param.thisObject, "mWalletButton");
-						mControlsButton = (ImageView) getObjectField(param.thisObject, "mControlsButton");
-						thisObject = param.thisObject;
+		Method updateMethod = null;
+		Method[] methods = KeyguardBottomAreaViewBinderClass.getMethods();
+		for(Method m : methods)
+		{
+			if(m.getName().contains("updateButton"))
+			{
+				updateMethod = m;
+				break;
+			}
+		}
+		if(updateMethod != null)
+		{
+			hookMethod(updateMethod, new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					ImageView v = (ImageView) param.args[0];
 
-						if (leftShortcut.length() > 0) {
-							convertShortcut(mControlsButton, leftShortcut, param.thisObject);
+					try {
+						String shortcutID = mContext.getResources().getResourceName(v.getId());
+
+						if (shortcutID.contains("start")) {
+							convertShortcut(v, leftShortcutClick);
+							if(isShortcutSet(v))
+							{
+								setLongPress(v, leftShortcutLongClick);
+							}
+						} else if (shortcutID.contains("end")) {
+							convertShortcut(v, rightShortcutClick);
+							if(isShortcutSet(v))
+							{
+								setLongPress(v, rightShortcutLongClick);
+							}
 						}
-						if (rightShortcut.length() > 0) {
-							convertShortcut(mWalletButton, rightShortcut, param.thisObject);
+
+						if (transparentBGcolor) {
+							@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = getColorAttrDefaultColor(
+									mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
+
+							try {
+								v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
+								v.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+							} catch (Throwable ignored) {
+							}
+						} else {
+							@SuppressLint("DiscouragedApi") int mTextColorPrimary = getColorAttrDefaultColor(
+									mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
+
+							@SuppressLint("DiscouragedApi") ColorStateList colorSurface = getColorAttr(
+									mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
+
+							v.getDrawable().setTint(mTextColorPrimary);
+
+							v.setBackgroundTintList(colorSurface);
 						}
 					}
-				});
-
-		//make sure system won't play with our button
-		findAndHookMethod(KeyguardBottomAreaViewClass.getName() + "$" + "WalletCardRetriever", lpparam.classLoader,
-				"onWalletCardsRetrieved", "android.service.quickaccesswallet.GetWalletCardsResponse", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (rightShortcut.length() == 0) return;
-						param.setResult(null);
-					}
-				});
-
-		//make sure system won't play with our button
-		hookAllMethods(KeyguardBottomAreaViewClass,
-				"updateControlsVisibility", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (leftShortcut.length() == 0 || mControlsButton == null) return;
-						updateVisibility(mControlsButton, param.thisObject);
-						param.setResult(null);
-					}
-				});
-
-		//make sure system won't play with our button
-		findAndHookMethod(KeyguardBottomAreaViewClass,
-				"updateWalletVisibility", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (rightShortcut.length() == 0 || mWalletButton == null) return;
-						updateVisibility(mWalletButton, param.thisObject);
-						param.setResult(null);
-					}
-				});
-
-		//Transparent background
-		findAndHookMethod(KeyguardBottomAreaViewClass,
-				"updateAffordanceColors", new XC_MethodHook() {
-					@Override
-					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						if (!transparentBGcolor) return;
-						ImageView mWalletButton = (ImageView) getObjectField(param.thisObject, "mWalletButton");
-						ImageView mControlsButton = (ImageView) getObjectField(param.thisObject, "mControlsButton");
-
-						@SuppressLint("DiscouragedApi") int mTextColorPrimary = (int) callStaticMethod(UtilClass, "getColorAttrDefaultColor", mContext,
-								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
-
-						mControlsButton.setBackgroundColor(Color.TRANSPARENT);
-						mControlsButton.setColorFilter(mTextColorPrimary);
-
-						mWalletButton.setBackgroundColor(Color.TRANSPARENT);
-						mWalletButton.setColorFilter(mTextColorPrimary);
-					}
-				});
-
-		//Set camera intent to be always secure when launchd from keyguard screen
-		findAndHookMethod(KeyguardBottomAreaViewClass.getName() + "$DefaultRightButton", lpparam.classLoader,
-				"getIntent", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if ((!leftShortcut.equals("camera") && !rightShortcut.equals("camera")))
-							return;
-						param.setResult(getCameraIntent(mContext));
-					}
-				});
+					catch (Throwable ignored){}
+				}
+			});
+		}
 		//endregion
-*/
+
 		//region keyguard battery info
 		hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", new XC_MethodHook() {
 			@SuppressLint("DefaultLocale")
@@ -324,12 +336,6 @@ public class KeyguardMods extends XposedModPack {
 			}
 		});
 		//endregion
-
-        /* might be useful later
-        Class<?> AnimatableClockControllerClass = findClass("com.android.keyguard.AnimatableClockController", lpparam.classLoader);
-        Class<?> KeyguardClockSwitchControllerClass = findClass("com.android.keyguard.KeyguardClockSwitchController", lpparam.classLoader);
-
-        Class<?> AvailableClocksClass = findClass("com.android.keyguard.clock.ClockManager$AvailableClocks", lpparam.classLoader);*/
 
 		//region keyguardDimmer
 		hookAllMethods(ScrimControllerClass, "scheduleUpdate", new XC_MethodHook() {
@@ -378,6 +384,7 @@ public class KeyguardMods extends XposedModPack {
 				if (mDozing != (boolean) getObjectField(param.thisObject, "mDozing")) {
 					mDozing = !mDozing;
 					setMiddleColor();
+					setShortcutVisibility();
 				}
 			}
 		});
@@ -410,53 +417,104 @@ public class KeyguardMods extends XposedModPack {
 		});
 	}
 
-	//region keyguard bottom area shortcuts and transparency
-	@SuppressLint("DiscouragedApi")
-	private Intent getCameraIntent(Context context) {
-		Resources res = context.getResources();
-
-		Intent cameraIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE);
-		cameraIntent.setPackage(res.getString(res.getIdentifier("config_cameraGesturePackage", "string", context.getPackageName())));
-
-		return cameraIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+	private void setLongPress(ImageView button, String type) {
+		if(type.length() == 0)
+		{
+			button.setLongClickable(false);
+			return;
+		}
+		button.setOnLongClickListener(v -> {
+			launchAction(type);
+			return true;
+		});
 	}
 
-	private void updateVisibility(ImageView Button, Object thisObject) {
-		boolean mDozing = (boolean) getObjectField(thisObject, "mDozing");
+	private boolean isShortcutSet(ImageView v) {
+		Object info = getObjectField(v, "mListenerInfo");
+		return info != null && getObjectField(info, "mOnClickListener") != null;
+	}
 
-		if (mDozing) // AOD is showing
-		{
-			Button.setVisibility(GONE);
-		} else {
-			Button.setVisibility(View.VISIBLE);
+	//region keyguard bottom area shortcuts and transparency
+	@SuppressLint("DiscouragedApi")
+	private void setShortcutVisibility() {
+		int visibility = mDozing ? GONE : VISIBLE;
+
+		Resources res = mContext.getResources();
+
+		if(leftShortcutClick.length() > 0) {
+			((View) KeyguardBottomAreaView)
+					.findViewById(res.getIdentifier("start_button",
+							"id",
+							mContext.getPackageName()))
+					.setVisibility(visibility);
+		}
+
+		if(rightShortcutClick.length() > 0) {
+			((View) KeyguardBottomAreaView)
+					.findViewById(res.getIdentifier("end_button",
+							"id",
+							mContext.getPackageName()))
+					.setVisibility(visibility);
 		}
 	}
 
 	@SuppressLint("DiscouragedApi")
-	private void convertShortcut(ImageView Button, String type, Object thisObject) {
-		View.OnClickListener listener = null;
+	private void convertShortcut(ImageView button, String type) {
+		if(type.length() == 0) return;
+
 		Drawable drawable = null;
 		switch (type) {
-			case "camera":
-				listener = v -> callMethod(thisObject, "launchCamera", "lockscreen_affordance");
+			case SHORTCUT_TV_REMOTE:
+				drawable = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_remote, mContext.getTheme());
+				break;
+			case SHORTCUT_CAMERA:
 				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
-			case "assistant":
-				listener = v -> callMethod(thisObject, "launchVoiceAssist");
+			case SHORTCUT_ASSISTANT:
 				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_mic_26dp", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
-			case "torch":
-				listener = v -> SystemUtils.ToggleFlash();
+			case SHORTCUT_TORCH:
 				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("@android:drawable/ic_qs_flashlight", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
 		}
-		if (type.length() > 0) {
-			Button.setImageDrawable(drawable);
-			Button.setOnClickListener(listener);
-			Button.setClickable(true);
-			Button.setVisibility(View.VISIBLE);
-		} else {
-			Button.setVisibility(GONE);
+
+		button.setOnClickListener(v -> launchAction(type));
+		button.setImageDrawable(drawable);
+		button.setVisibility(VISIBLE);
+	}
+
+	private void launchAction(String type) {
+		switch (type) {
+			case SHORTCUT_TV_REMOTE:
+				launchTVRemote();
+				break;
+			case SHORTCUT_CAMERA:
+				launchCamera();
+				break;
+			case SHORTCUT_ASSISTANT:
+				launchAssistant();
+				break;
+			case SHORTCUT_TORCH:
+				toggleFlash();
+				break;
+		}
+	}
+
+	private void toggleFlash() {
+		SystemUtils.ToggleFlash();
+	}
+
+	private void launchAssistant() {
+		callMethod(mAssistUtils, "launchVoiceAssistFromKeyguard");
+	}
+
+	private void launchTVRemote() {
+		Shell.cmd("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity").exec();
+	}
+
+	private void launchCamera() {
+		if(NotificationPanelViewController != null) {
+			callMethod(NotificationPanelViewController, "launchCamera", 0);
 		}
 	}
 	//endregion

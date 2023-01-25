@@ -2,11 +2,11 @@ package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
-import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
+import static sh.siava.AOSPMods.utils.SettingsLibUtils.getColorAttrDefaultColor;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,6 +16,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.utils.SettingsLibUtils;
 
 @SuppressWarnings("RedundantThrows")
 public class UDFPSManager extends XposedModPack {
@@ -41,7 +42,7 @@ public class UDFPSManager extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		Class<?> UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
+		SettingsLibUtils.init(lpparam.classLoader);
 		Class<?> UdfpsKeyguardViewClass = findClass("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader);
 		Class<?> LockIconViewClass = findClass("com.android.keyguard.LockIconView", lpparam.classLoader);
 
@@ -82,16 +83,9 @@ public class UDFPSManager extends XposedModPack {
 
 						if (mLockScreenFp == null) return;
 
-						int mTextColorPrimary;
-						try { //13 R18 Pixel: int,context!!
-							mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor",
-									mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
-						}
-						catch (Throwable ignored) //prior ones: context, int
-						{
-							mTextColorPrimary = (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", mContext,
-									mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
-						}
+						int mTextColorPrimary = getColorAttrDefaultColor(
+								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
+
 
 						setObjectField(param.thisObject, "mTextColorPrimary", mTextColorPrimary);
 

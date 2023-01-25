@@ -3,13 +3,13 @@ package sh.siava.AOSPMods.systemui;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
-import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
+import static sh.siava.AOSPMods.utils.SettingsLibUtils.getColorAttr;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -35,6 +35,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.Helpers;
+import sh.siava.AOSPMods.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
@@ -51,7 +52,6 @@ public class QSThemeManager extends XposedModPack {
 
 	private Object mBehindColors;
 	private boolean wasDark;
-	private Class<?> UtilsClass = null;
 	private Integer colorInactive = null;
 	private int colorUnavailable;
 	private int colorActive;
@@ -100,7 +100,6 @@ public class QSThemeManager extends XposedModPack {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
-		UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
 		Class<?> FragmentHostManagerClass = findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
 		Class<?> GradientColorsClass = findClass("com.android.internal.colorextraction.ColorExtractor$GradientColors", lpparam.classLoader);
@@ -115,6 +114,7 @@ public class QSThemeManager extends XposedModPack {
 		Class<?> FooterActionsControllerClass = findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
 		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
+		SettingsLibUtils.init(lpparam.classLoader);
 
 		hookAllMethods(QSIconViewImplClass, "updateIcon", new XC_MethodHook() {
 			@Override
@@ -232,8 +232,7 @@ public class QSThemeManager extends XposedModPack {
 				if (colorInactive == null) {
 					calculateColors();
 				}
-				int state = (int) param.args[0];
-				switch (state) {
+				switch ((int) param.args[0]) { //state
 					case STATE_UNAVAILABLE:
 						param.setResult(colorUnavailable);
 						break;
@@ -299,13 +298,13 @@ public class QSThemeManager extends XposedModPack {
 
 //                        Object mScrimBehind = getObjectField(param.thisObject, "mScrimBehind");
 
-						@SuppressLint("DiscouragedApi") ColorStateList states = (ColorStateList) callStaticMethod(UtilsClass,
-								"getColorAttr",
-								mContext.getResources().getIdentifier("android:attr/colorSurfaceHeader", "attr", listenPackage),
-								mContext);
+						@SuppressLint("DiscouragedApi")
+						ColorStateList states = getColorAttr(mContext.getResources().getIdentifier("android:attr/colorSurfaceHeader", "attr", listenPackage), mContext);
+
 						int surfaceBackground = states.getDefaultColor();
 
-						@SuppressLint("DiscouragedApi") ColorStateList accentStates = (ColorStateList) callStaticMethod(UtilsClass, "getColorAttr", mContext.getResources().getIdentifier("colorAccent", "attr", "android"), mContext);
+						@SuppressLint("DiscouragedApi")
+						ColorStateList accentStates = getColorAttr(mContext.getResources().getIdentifier("colorAccent", "attr", "android"), mContext);
 						int accent = accentStates.getDefaultColor();
 
 						callMethod(mBehindColors, "setMainColor", surfaceBackground);

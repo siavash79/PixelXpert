@@ -109,37 +109,35 @@ public class BrightnessSlider extends XposedModPack {
 		Class<?> QuickQSPanelControllerClass = findClass("com.android.systemui.qs.QuickQSPanelController", lpparam.classLoader);
 		Class<?> QSPanelControllerBaseClass = findClass("com.android.systemui.qs.QSPanelControllerBase", lpparam.classLoader);
 		Class<?> CentralSurfacesImplClass = findClassIfExists("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
-		Class<?> StatusBarClass = findClassIfExists("com.android.systemui.statusbar.phone.StatusBar", lpparam.classLoader);
+		Class<?> QSPanelClass = findClass("com.android.systemui.qs.QSPanel", lpparam.classLoader);
+
 		DejankUtilsClass = findClass("com.android.systemui.DejankUtils", lpparam.classLoader);
 
 		BrightnessControllerClass = findClass("com.android.systemui.settings.brightness.BrightnessController", lpparam.classLoader);
 
-		if (CentralSurfacesImplClass != null) {
-			hookAllConstructors(CentralSurfacesImplClass, new XC_MethodHook() {
-				@Override
-				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-					new Thread(() -> {
-						try {
-							while (mBrightnessMirrorController == null) {
-								//noinspection BusyWait
-								Thread.sleep(500);
-								mBrightnessMirrorController = getObjectField(param.thisObject, "mBrightnessMirrorController");
-							}
-							dataCollected(2, BrightnessMirrorHandlerClass);
-						} catch (Throwable ignored) {
+		hookAllConstructors(CentralSurfacesImplClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				new Thread(() -> {
+					try {
+						while (mBrightnessMirrorController == null) {
+							//noinspection BusyWait
+							Thread.sleep(500);
+							mBrightnessMirrorController = getObjectField(param.thisObject, "mBrightnessMirrorController");
 						}
-					}).start();
-				}
-			});
-		} else {
-			hookAllMethods(StatusBarClass, "makeStatusBarView", new XC_MethodHook() {
-				@Override
-				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-					mBrightnessMirrorController = getObjectField(param.thisObject, "mBrightnessMirrorController");
-					dataCollected(2, BrightnessMirrorHandlerClass);
-				}
-			});
-		}
+						dataCollected(2, BrightnessMirrorHandlerClass);
+					} catch (Throwable ignored) {
+					}
+				}).start();
+			}
+		});
+
+		hookAllMethods(QSPanelClass, "setBrightnessViewMargin", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				setSliderMargins((View) getObjectField(param.thisObject, "mBrightnessView"));
+			}
+		});
 
 		hookAllMethods(QSPanelControllerBaseClass, "setTiles", new XC_MethodHook() {
 			@Override

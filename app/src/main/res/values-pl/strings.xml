@@ -333,7 +333,7 @@
     <string name="none">Nic</string>
     <string name="screenshot">Zrzut ekranu</string>
     <string name="back">Z powrotem</string>
-    <string name="kill_forground_app">Zabij aplikację na pierwszym planie</string>
+    <string name="kill_foreground_app">Zabij aplikację na pierwszym planie</string>
     <string name="toggle_notification">Przełącz panel powiadomień</string>
     <string name="toggle_one_handed">Przełącz tryb jednoręczny</string>
     <string name="insecure_screenshot">Niezabezpieczony zrzut ekranu</string>

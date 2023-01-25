@@ -85,6 +85,8 @@ public class ClearAllButtonMod extends XposedModPack {
 		hookAllMethods(RecentsViewClass, "setVisibility", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(clearAllButton == null) return;
+
 				clearAllButton.setVisibility((Integer) param.args[0]);
 			}
 		});

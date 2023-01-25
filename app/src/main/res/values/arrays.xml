@@ -5,6 +5,7 @@
         <item>@string/camera_shortcut</item>
         <item>@string/assistant_shortcut</item>
         <item>@string/torch_shortcut</item>
+        <item>@string/tv_remote_shortcut</item>
     </array>
 
     <array name="lockScreenShortcut_values">
@@ -12,6 +13,7 @@
         <item>camera</item>
         <item>assistant</item>
         <item>torch</item>
+        <item>tvremote</item>
     </array>
 
     <string-array name="qs_pulldown_side_names">
@@ -30,6 +32,7 @@
         <item>Dutch</item>
         <item>English</item>
         <item>German</item>
+        <item>Hebrew</item>
         <item>Italian</item>
         <item>Persian</item>
         <item>Polish</item>
@@ -48,6 +51,7 @@
         <item>nl</item>
         <item>en</item>
         <item>de</item>
+        <item>iw</item>
         <item>it</item>
         <item>fa</item>
         <item>pl</item>
@@ -71,7 +75,7 @@
         <item>@string/screenshot</item>
         <item>@string/insecure_screenshot</item>
         <!--item>@string/back</item-->
-        <item>@string/kill_forground_app</item>
+        <item>@string/kill_foreground_app</item>
         <item>@string/toggle_notification</item>
         <item>@string/toggle_one_handed</item>
         <item>@string/sleep</item>
@@ -106,14 +110,12 @@
 
     <string-array name="sbc_position_names">
         <item>@string/clock_default</item>
-        <item>@string/clock_default_extra</item>
         <item>@string/clock_center</item>
         <item>@string/clock_right</item>
     </string-array>
 
     <string-array name="sbc_position_codes">
         <item>0</item>
-        <item>3</item>
         <item>1</item>
         <item>2</item>
     </string-array>
@@ -171,7 +173,6 @@
 
     <string-array name="network_sb_locations">
         <item>@string/ntsb_far_left</item>
-        <item>@string/ntsb_far_left_extra</item>
         <item>@string/ntsb_mid_left</item>
         <item>@string/ntsb_mid_right</item>
     </string-array>
@@ -373,7 +374,7 @@
         <item>CircularOverlayG</item>
         <item>FilledOverlayG</item>
         <item>KaiOverlayG</item>
-        <item>OxigenOSOverlayG</item>
+        <item>OxygenOSOverlayG</item>
         <item>RoundedOverlayG</item>
         <item>SamOverlayG</item>
         <item>VictorOverlayG</item>
@@ -410,7 +411,7 @@
         <item>com.android.theme.icon_pack.kai.themepicker</item>
     </string-array>
 
-    <string-array name="OxigenOSOverlayG">
+    <string-array name="OxygenOSOverlayG">
         <item>com.android.theme.icon_pack.oos.android</item>
         <item>com.android.theme.icon_pack.oos.systemui</item>
         <item>com.android.theme.icon_pack.oos.settings</item>

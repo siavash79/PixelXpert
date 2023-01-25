@@ -20,6 +20,7 @@
     <string name="qs_panel_category_title">Panoul Setări Rapide</string>
     <string name="theme_customization_category">Tematică</string>
     <!--Lock screen related-->
+    <string name="hide_avatar_title">Eliminare avatar utilizator (mod utilizatori multipli)</string>
     <string name="transparent_fingerprint_circle">Elimină cercul de fundal a amprentei de sub afișaj</string>
     <string name="transparent_fingerprint_circle_off">Cercul în jurul pictogramei amprentei este activat</string>
     <string name="transparent_fingerprint_circle_on">Cercul din jurul imaginii amprentei va fi ascuns</string>
@@ -48,6 +49,8 @@
     <string name="wakeup_to_security_title">Afișează introducerea de securitate la activarea dispozitivului</string>
     <string name="easy_unlock_title">Deblocare ușoară (Pin/Parolă)</string>
     <string name="easy_unlock_summary">Dacă nu a funcționat pentru prima dată, încercați din nou</string>
+    <string name="charging_info_title">Informații despre încărcare pe ecranul de blocare</string>
+    <string name="imperial_units_title">Utilizează unități imperiale</string>
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Dublă-atingere pentru oprire ecran</string>
     <string name="battery_style_title">Alege un stil de baterie</string>
@@ -65,6 +68,8 @@
     <string name="sb_notification_limit">Numărul maxim de pictograme de notificare (Lasă gol pentru implicit)</string>
     <string name="lte_4g_icon_title">Pictogramă LTE / 4G</string>
     <string name="combined_signal_icon_title">Combinare pictograme de semnal</string>
+    <string name="hide_roaming_title">Ascundere indicator de roaming</string>
+    <string name="caution_mobile_costs">ATENȚIE - Necunoașterea că sunteți în roaming poate crește costurile mobile</string>
     <string name="volte_icon_title">Afișare pictogramă VoLTE atunci când este disponibilă</string>
     <string name="hide_privacychip_title">Ascunde indicatorii de confidențialitate\n(Camera, Mic)</string>
     <!-- \n means next line-->
@@ -198,6 +203,7 @@
     <string name="taskbar_hide_allapps_title">Pictograma Ascunde toate aplicațiile</string>
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Dezactivare sunet captură ecran</string>
+    <string name="clipboard_smart_actions_title">Acțiuni inteligente pe suprapunerea clipboard-ului</string>
     <string name="allow_all_screen_rotations">Deblocare forțată a tuturor rotațiilor ecranului</string>
     <string name="allow_all_screen_rotations_summary">Va ignora, de asemenea, butonul plutitor de rotație manuală</string>
     <string name="force_no_cutout">Ignoră decuparea camerei</string>
@@ -311,6 +317,7 @@
     <string name="reinstall_word">Reinstalare</string>
     <string name="own_prefs_header">Setări AOSPMods</string>
     <string name="language_title">Limbă</string>
+    <string name="camera_manager_master_title">Activare moduri lanternă (Dezactivează dacă telefonul nu le suportă)</string>
     <string name="toggle_dark_apply">(Comutați tema întunecată pentru a aplica)</string>
     <string name="gesture_nav_extra_cat">Gesturi suplimentare bară de navigare</string>
     <string name="gesture_nav_long_swipe_fc_title">Glisați în partea de sus a ecranului pentru a închide aplicația din prim-plan</string>
@@ -323,7 +330,7 @@
     <string name="none">Nimic</string>
     <string name="screenshot">Captură de ecran</string>
     <string name="back">Înapoi</string>
-    <string name="kill_forground_app">Închide aplicația din prim-plan</string>
+    <string name="kill_foreground_app">Închide aplicația din prim-plan</string>
     <string name="toggle_notification">Comută panoul de notificări</string>
     <string name="toggle_one_handed">Comută modul cu o mână</string>
     <string name="insecure_screenshot">Captură ecran nerestricționată</string>

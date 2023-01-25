@@ -1,17 +1,14 @@
 package sh.siava.AOSPMods.android;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
-import static sh.siava.AOSPMods.systemui.StatusbarMods.POSITION_LEFT;
-import static sh.siava.AOSPMods.systemui.StatusbarMods.POSITION_LEFT_EXTRA_LEVEL;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.view.DisplayCutout;
 
@@ -53,20 +50,26 @@ public class StatusbarSize extends XposedModPack {
 		mForceApplyHeight = Xprefs.getBoolean("allScreenRotations", false) //Particularly used for rotation Status bar
 				|| noCutoutEnabled
 				|| Xprefs.getBoolean("systemIconsMultiRow", false)
-				|| Integer.parseInt(Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT))) == POSITION_LEFT_EXTRA_LEVEL
-				|| (Xprefs.getBoolean("networkOnSBEnabled", false) && Integer.parseInt(Xprefs.getString("networkTrafficPosition", "2")) == POSITION_LEFT_EXTRA_LEVEL);
+				|| Xprefs.getBoolean("notificationAreaMultiRow", false);
 
 		sizeFactor = Xprefs.getInt("statusbarHeightFactor", 100);
-		if (sizeFactor != 100 || edited || mForceApplyHeight)
+		if (sizeFactor != 100 || edited || mForceApplyHeight) {
+			Configuration conf = new Configuration();
+			conf.updateFrom(mContext.getResources().getConfiguration());
+
+			conf.orientation = Configuration.ORIENTATION_PORTRAIT;
+			Context portraitContext = mContext.createConfigurationContext(conf);
+
 			currentHeight = Math.round(
-					mContext.getResources().getDimensionPixelSize(
-							mContext.getResources().getIdentifier(
+					portraitContext.getResources().getDimensionPixelSize(
+							portraitContext.getResources().getIdentifier(
 									"status_bar_height",
 									"dimen",
 									"android")
 					)
 							* sizeFactor
 							/ 100f);
+		}
 	}
 
 	@Override

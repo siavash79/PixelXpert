@@ -51,7 +51,7 @@ public class FingerprintWhileDozing extends XposedModPack {
 
 							boolean shouldlisten2 =
 									(getBooleanField(param.thisObject, "mKeyguardIsVisible")
-											|| getBooleanField(param.thisObject, "mBouncer")
+											|| getBooleanField(param.thisObject, "mBouncerIsOrWillBeShowing")
 											|| (boolean) callMethod(param.thisObject, "shouldListenForFingerprintAssistant")
 											|| (getBooleanField(param.thisObject, "mKeyguardOccluded") && getBooleanField(param.thisObject, "mIsDreaming")))
 											&& getBooleanField(param.thisObject, "mDeviceInteractive") && !getBooleanField(param.thisObject, "mGoingToSleep") && !getBooleanField(param.thisObject, "mKeyguardGoingAway")

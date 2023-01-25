@@ -42,9 +42,12 @@
     <string name="keyguard_left_shortcut">Show left shortcut on lock screen</string>
     <string name="LSleftShortcutTitle">Left shortcut</string>
     <string name="LSrightShortcutTitle">Right shortcut</string>
+    <string name="LSleftLongClickShortcutTitle">Left shortcut (Long press)</string>
+    <string name="LSrightLongClickShortcutTitle">Right shortcut (Long press)</string>
     <string name="camera_shortcut">Camera</string>
     <string name="assistant_shortcut">Assistant</string>
     <string name="torch_shortcut">Flashlight</string>
+    <string name="tv_remote_shortcut">TV Remote</string>
     <string name="album_art_category">Media options</string>
     <string name="album_art_title">Enable album art when playing media</string>
     <string name="album_art_blur_text">Blur value</string>
@@ -68,7 +71,8 @@
     <string name="BIcon_Opacity_title">Opacity</string>
     <string name="sb_center_fine_tune">Fine-tune center area</string>
     <string name="sb_multi_row_system_icons">Multi-row system icons (needs raised statusbar height)</string>
-    <string name="sb_multi_row_category">Multiple rows of system icons</string>
+    <string name="sb_multi_row_notification_icons">Multi-row notification icons (needs raised statusbar height)</string>
+    <string name="sb_double_row_category">Double Statusbar rows</string>
     <string name="sb_icon_sort_mode">Icon placement method</string>
     <string name="sort_clean">Sort in a grid</string>
     <string name="sort_tight">Fit maximum items</string>
@@ -80,7 +84,7 @@
     <string name="caution_mobile_costs">CAUTION - Not knowing that you\'re roaming can increase your mobile costs</string>
     <string name="volte_icon_title">Show VoLTE icon when available</string>
     <string name="hide_privacychip_title">Hide privacy indicators\n(Camera, Mic)</string><!-- \n means next line-->
-    <string name="sb_vibration_switch_title">Show Vibrate/Silent icons</string>
+    <string name="sb_vibration_switch_title">Show Vibrate icon</string>
     <string name="sbc_position_title">Clock position</string>
     <string name="sbc_ampm_style">AM/PM Style</string>
     <string name="sbc_show_secs">Show seconds</string>
@@ -99,7 +103,6 @@
     <string name="sbc_after_color">Text after clock</string>
     <string name="network_settings_pref">Network monitor settings...</string>
     <string name="ntsb_far_left">Far Left</string>
-    <string name="ntsb_far_left_extra">Far Left - Above notifications</string>
     <string name="ntsb_mid_left">Mid-Left</string>
     <string name="ntsb_mid_right">Mid-Right</string>
     <string name="ntsb_category_title">Network Monitor</string>
@@ -155,6 +158,7 @@
     <string name="qs_flashlight_level_global_title">Apply flashlight level globally</string>
     <string name="qs_qr_tile_inactive_title">Invert QR-Scan tile color</string>
     <string name="qs_tile_vertical_title">Move tile icons to the top</string>
+    <string name="qs_tile_qty_title">Quick settings tile count settings</string>
     <string name="qs_leveled_flashlight_summary">Requires supported hardware</string>
     <string name="light_qs_title">Apply light QS Panel when using light theme</string>
     <string name="light_dualtone_qs_title">Enable dual tone QS Panel</string>
@@ -163,6 +167,9 @@
     <string name="qs_pulldown_side_title">Quick pull-down side</string>
     <string name="qs_pulldown_category">Quick settings pull-down</string>
     <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
+    <string name="qs_tile_qty_portrait">In portrait orientation</string>
+    <string name="qs_tile_qty_landscape">In landscape orientation</string>
+
     <string name="qs_rows_number">Number of QS rows</string>
     <string name="qs_cols_number">Number of QS columns</string>
     <string name="qqs_tiles_number">Maximum tiles in Quick QS (max 2 rows)</string>
@@ -301,7 +308,6 @@
 
     <!-- Clock position -->
     <string name="clock_default">Left (Default)</string>
-    <string name="clock_default_extra">Left - Above notifications</string>
     <string name="clock_center">Center</string>
     <string name="clock_right">Right</string>
 
@@ -392,7 +398,7 @@
     <string name="none">None</string>
     <string name="screenshot">Screenshot</string>
     <string name="back">Back</string>
-    <string name="kill_forground_app">Kill foreground app</string>
+    <string name="kill_foreground_app">Kill foreground app</string>
     <string name="toggle_notification">Toggle notification panel</string>
     <string name="toggle_one_handed">Toggle one handed mode</string>
     <string name="insecure_screenshot">Unrestricted screenshot</string>

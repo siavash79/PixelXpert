@@ -334,7 +334,7 @@
     <string name="none">Keiner</string>
     <string name="screenshot">Bildschirmfoto</string>
     <string name="back">Zürück</string>
-    <string name="kill_forground_app">Vordergrund-App beenden</string>
+    <string name="kill_foreground_app">Vordergrund-App beenden</string>
     <string name="toggle_notification">Benachrichtigungsfeld umschalten</string>
     <string name="toggle_one_handed">Einhandmodus umschalten</string>
     <string name="insecure_screenshot">Unsicherer Screenshot</string>

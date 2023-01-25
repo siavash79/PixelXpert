@@ -93,6 +93,8 @@
     <string name="so_double_tap_wake_summary">Usar duplo toque ao invés de um toque para acender o ecrã</string>
     <string name="overlay_none_title">(Padrão)</string>
     <string name="qs_panel_category_title">Definições rápidas</string>
+	<string name="qs_tile_qty_portrait">Em modo retrato</string>
+    <string name="qs_tile_qty_landscape">Em modo paisagem</string>
     <string name="qs_rows_number">Número de linhas</string>
     <string name="qs_general_options">Preferências das definições rápidas</string>
     <string name="statusbar_general_options">Preferências da barra de estado</string>
@@ -262,6 +264,7 @@
     <string name="qs_tile_label_size">Tamanho do texto</string>
     <string name="qs_tile_secondary_label_size">Tamanho do texto secundário</string>
     <string name="toggle_dark_apply">(ative o tema escuro para aplicar)</string>
+    <string name="qs_tile_qty_title">Definições do número de atalhos</string>
     <string name="qs_leveled_flashlight_summary">Requer hardware compatível</string>
     <string name="qs_leveled_flashlight_title">Atalho da lanterna com controlo de brilho</string>
     <string name="qs_footer_text_value">Inserir texto personalizado</string>
@@ -283,7 +286,7 @@
     <string name="none">Nenhuma</string>
     <string name="screenshot">Captura de ecrã</string>
     <string name="back">Voltar</string>
-    <string name="kill_forground_app">Terminar app em segundo plano</string>
+    <string name="kill_foreground_app">Terminar app em segundo plano</string>
     <string name="toggle_notification">Invocar painel de notificações</string>
     <string name="toggle_one_handed">Ativar modo para uma mão</string>
     <string name="insecure_screenshot">Captura de ecã inseguro</string>
@@ -313,4 +316,10 @@
     <string name="imperial_units_title">Usar unidades imperiais</string>
     <string name="hide_roaming_title">Esconder indicador de roaming</string>
     <string name="caution_mobile_costs">ATENÇÃO - Não saber que está em roaming poderá aumentar os seus custos</string>
+	<string name="hide_avatar_title">Remover avatar do utilizador (modo multi-utilizador)</string>
+	<string name="clipboard_smart_actions_title">Ações rápidas na área de transferência</string>
+    <string name="camera_manager_master_title">Ativar mods da lanterna (desative caso o seu dispositivo não suporte)</string>
+	<string name="sb_double_row_category">Opções da barra de estado mais espessa</string>
+	<string name="tv_remote_shortcut">Comando da TV</string>
+	<string name="sb_multi_row_notification_icons">Várias linhas para ícones das notificações (requer barra de estado mais espessa)</string>
 </resources>

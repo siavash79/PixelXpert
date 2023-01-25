@@ -53,35 +53,17 @@
                 android:key="VerticalQSTile"
                 android:title="@string/qs_tile_vertical_title" />
 
-            <SeekBarPreference
-                android:defaultValue="0"
-                android:max="8"
-                app:min="0"
-                android:key="QSRowQty"
-                app:title="@string/qs_rows_number"
-                app:updatesContinuously="true" />
-            <SeekBarPreference
-                android:defaultValue="0"
-                android:max="4"
-                app:min="0"
-                android:key="QSColQty"
-                app:title="@string/qs_cols_number"
-                app:updatesContinuously="true" />
-
-            <SeekBarPreference
-                android:defaultValue="4"
-                android:max="8"
-                app:min="2"
-                android:key="QQSTileQty"
-                app:title="@string/qqs_tiles_number"
-                app:updatesContinuously="true" />
-
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="wifi_cell"
                 android:summaryOff="@string/wifi_cell_off"
                 android:summaryOn="@string/wifi_cell_on"
                 android:title="@string/wifi_cell_title" />
+
+            <Preference
+                app:fragment="sh.siava.AOSPMods.SettingsActivity$QSTileQtyFragment"
+                app:key="qs_tile_qty"
+                app:title="@string/qs_tile_qty_title" />
 
             <sh.siava.rangesliderpreference.RangeSliderPreference
                 app:maxVal="50"

@@ -4,8 +4,8 @@
     <string name="error_not_activated">Please confirm if the module is activated within LSPosed Manager</string>
     <string name="hide_default">Hide (Default)</string>
     <string name="percent_of_default_size">クールバー のデフォルト・サイズ</string>
-    <string name="overlay_none_title">(Default)</string>
-    <string name="general_section">General options</string>
+    <string name="overlay_none_title">(デフォルト)</string>
+    <string name="general_section">設定</string>
     <string name="general_on">On</string>
     <string name="general_off">Off</string>
     <string name="sysui_restart_needed">Requires a SystemUI restart to apply</string>

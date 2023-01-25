@@ -1,5 +1,3 @@
-### NOT COMPATIBLE WITH Android 13 Nov 2022 (AOSP 13 R8) or earlier. Earlier versions shall use AOSPMods v2.4.x
-
 **Compatibility:**  
 AOSP based Androids:  
 13 R18 and later (Pixel stock firmware 13, Dec 2022 stable version and later)  
@@ -32,3 +30,4 @@ Technically, the module should automatically activate itself in Lsposed and get 
 - @abalam1980 Dutch   
 - @trinhloivn Vietnamese  
 - @xxz3 Italian  
+- zz842@Telegram Hebrew  

@@ -42,6 +42,8 @@
     <string name="keyguard_left_shortcut">Show left shortcut on lock screen</string>
     <string name="LSleftShortcutTitle">Left shortcut</string>
     <string name="LSrightShortcutTitle">Right shortcut</string>
+    <string name="LSleftLongClickShortcutTitle">Left shortcut (Long press)</string>
+    <string name="LSrightLongClickShortcutTitle">Right shortcut (Long press)</string>
     <string name="camera_shortcut">Camera</string>
     <string name="assistant_shortcut">Assistant</string>
     <string name="torch_shortcut">Flashlight</string>

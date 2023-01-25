@@ -55,6 +55,11 @@ public class KeyguardMods extends XposedModPack {
 	public static final String EXTRA_MAX_CHARGING_VOLTAGE = "max_charging_voltage";
 	public static final String EXTRA_TEMPERATURE = "temperature";
 
+	public static final String SHORTCUT_TV_REMOTE = "tvremote";
+	public static final String SHORTCUT_CAMERA = "camera";
+	public static final String SHORTCUT_ASSISTANT = "assistant";
+	public static final String SHORTCUT_TORCH = "torch";
+
 	private float max_charging_current = 0;
 	private float max_charging_voltage = 0;
 	private float temperature = 0;
@@ -87,8 +92,10 @@ public class KeyguardMods extends XposedModPack {
 	private Object KeyguardBottomAreaView;
 	private Object mAssistUtils;
 	private static boolean transparentBGcolor = false;
-	private static String leftShortcut = "";
-	private static String rightShortcut = "";
+	private static String leftShortcutClick = "";
+	private static String rightShortcutClick = "";
+	private static String leftShortcutLongClick = "";
+	private static String rightShortcutLongClick = "";
 	//endregion
 
 	//region hide user avatar
@@ -116,8 +123,11 @@ public class KeyguardMods extends XposedModPack {
 		} catch (Throwable ignored) {
 		}
 
-		leftShortcut = Xprefs.getString("leftKeyguardShortcut", "");
-		rightShortcut = Xprefs.getString("rightKeyguardShortcut", "");
+		leftShortcutClick = Xprefs.getString("leftKeyguardShortcut", "");
+		rightShortcutClick = Xprefs.getString("rightKeyguardShortcut", "");
+
+		leftShortcutLongClick = Xprefs.getString("leftKeyguardShortcutLongClick", "");
+		rightShortcutLongClick = Xprefs.getString("rightKeyguardShortcutLongClick", "");
 
 		transparentBGcolor = Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
 
@@ -245,10 +255,22 @@ public class KeyguardMods extends XposedModPack {
 					try {
 						String shortcutID = mContext.getResources().getResourceName(v.getId());
 
-						if (shortcutID.contains("start") && leftShortcut.length() > 0) {
-							convertShortcut(v, leftShortcut);
-						} else if (shortcutID.contains("end") && rightShortcut.length() > 0) {
-							convertShortcut(v, rightShortcut);
+						if (shortcutID.contains("start")) {
+							if(leftShortcutClick.length() > 0) {
+								convertShortcut(v, leftShortcutClick);
+							}
+							if(isShortcutSet(v))
+							{
+								setLongPress(v, leftShortcutLongClick);
+							}
+						} else if (shortcutID.contains("end")) {
+							if(rightShortcutClick.length() > 0) {
+								convertShortcut(v, rightShortcutClick);
+							}
+							if(isShortcutSet(v) && rightShortcutLongClick.length() >0)
+							{
+								setLongPress(v, rightShortcutLongClick);
+							}
 						}
 
 						if (transparentBGcolor) {
@@ -399,6 +421,23 @@ public class KeyguardMods extends XposedModPack {
 		});
 	}
 
+	private void setLongPress(ImageView button, String type) {
+		if(type.length() == 0)
+		{
+			button.setLongClickable(false);
+			return;
+		}
+		button.setOnLongClickListener(v -> {
+			launchAction(type);
+			return true;
+		});
+	}
+
+	private boolean isShortcutSet(ImageView v) {
+		Object info = getObjectField(v, "mListenerInfo");
+		return info != null && getObjectField(info, "mOnClickListener") != null;
+	}
+
 	//region keyguard bottom area shortcuts and transparency
 	@SuppressLint("DiscouragedApi")
 	private void setShortcutVisibility() {
@@ -406,7 +445,7 @@ public class KeyguardMods extends XposedModPack {
 
 		Resources res = mContext.getResources();
 
-		if(leftShortcut.length() > 0) {
+		if(leftShortcutClick.length() > 0) {
 			((View) KeyguardBottomAreaView)
 					.findViewById(res.getIdentifier("start_button",
 							"id",
@@ -414,7 +453,7 @@ public class KeyguardMods extends XposedModPack {
 					.setVisibility(visibility);
 		}
 
-		if(rightShortcut.length() > 0) {
+		if(rightShortcutClick.length() > 0) {
 			((View) KeyguardBottomAreaView)
 					.findViewById(res.getIdentifier("end_button",
 							"id",
@@ -424,35 +463,54 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	@SuppressLint("DiscouragedApi")
-	private void convertShortcut(ImageView Button, String type) {
-		View.OnClickListener listener = null;
+	private void convertShortcut(ImageView button, String type) {
 		Drawable drawable = null;
 		switch (type) {
-			case "tvremote":
-				listener = v -> launchTVRemote();
+			case SHORTCUT_TV_REMOTE:
 				drawable = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_remote, mContext.getTheme());
 				break;
-			case "camera":
-				listener = v -> launchCamera();
+			case SHORTCUT_CAMERA:
 				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
-			case "assistant":
-				listener = v -> callMethod(mAssistUtils, "launchVoiceAssistFromKeyguard");
+			case SHORTCUT_ASSISTANT:
 				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_mic_26dp", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
-			case "torch":
-				listener = v -> SystemUtils.ToggleFlash();
+			case SHORTCUT_TORCH:
 				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("@android:drawable/ic_qs_flashlight", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
 		}
 		if (type.length() > 0) {
-			Button.setImageDrawable(drawable);
-			Button.setOnClickListener(listener);
-			Button.setClickable(true);
-			Button.setVisibility(VISIBLE);
+			button.setImageDrawable(drawable);
+			button.setOnClickListener(v -> launchAction(type));
+			button.setVisibility(VISIBLE);
 		} else {
-			Button.setVisibility(GONE);
+			button.setVisibility(GONE);
 		}
+	}
+
+	private void launchAction(String type) {
+		switch (type) {
+			case SHORTCUT_TV_REMOTE:
+				launchTVRemote();
+				break;
+			case SHORTCUT_CAMERA:
+				launchCamera();
+				break;
+			case SHORTCUT_ASSISTANT:
+				launchAssistant();
+				break;
+			case SHORTCUT_TORCH:
+				toggleFlash();
+				break;
+		}
+	}
+
+	private void toggleFlash() {
+		SystemUtils.ToggleFlash();
+	}
+
+	private void launchAssistant() {
+		callMethod(mAssistUtils, "launchVoiceAssistFromKeyguard");
 	}
 
 	private void launchTVRemote() {

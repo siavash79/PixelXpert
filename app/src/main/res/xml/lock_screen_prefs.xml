@@ -88,8 +88,22 @@
 			android:defaultValue=""
 			android:entries="@array/lockScreenShortcut_names"
 			android:entryValues="@array/lockScreenShortcut_values"
+			android:key="leftKeyguardShortcutLongClick"
+			android:title="@string/LSleftLongClickShortcutTitle"
+			app:summary="%s" />
+		<ListPreference
+			android:defaultValue=""
+			android:entries="@array/lockScreenShortcut_names"
+			android:entryValues="@array/lockScreenShortcut_values"
 			android:key="rightKeyguardShortcut"
 			android:title="@string/LSrightShortcutTitle"
+			app:summary="%s" />
+		<ListPreference
+			android:defaultValue=""
+			android:entries="@array/lockScreenShortcut_names"
+			android:entryValues="@array/lockScreenShortcut_values"
+			android:key="rightKeyguardShortcutLongClick"
+			android:title="@string/LSrightLongClickShortcutTitle"
 			app:summary="%s" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/custom_text_category">

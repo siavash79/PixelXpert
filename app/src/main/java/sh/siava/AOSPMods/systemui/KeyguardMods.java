@@ -256,18 +256,14 @@ public class KeyguardMods extends XposedModPack {
 						String shortcutID = mContext.getResources().getResourceName(v.getId());
 
 						if (shortcutID.contains("start")) {
-							if(leftShortcutClick.length() > 0) {
-								convertShortcut(v, leftShortcutClick);
-							}
+							convertShortcut(v, leftShortcutClick);
 							if(isShortcutSet(v))
 							{
 								setLongPress(v, leftShortcutLongClick);
 							}
 						} else if (shortcutID.contains("end")) {
-							if(rightShortcutClick.length() > 0) {
-								convertShortcut(v, rightShortcutClick);
-							}
-							if(isShortcutSet(v) && rightShortcutLongClick.length() >0)
+							convertShortcut(v, rightShortcutClick);
+							if(isShortcutSet(v))
 							{
 								setLongPress(v, rightShortcutLongClick);
 							}
@@ -464,6 +460,8 @@ public class KeyguardMods extends XposedModPack {
 
 	@SuppressLint("DiscouragedApi")
 	private void convertShortcut(ImageView button, String type) {
+		if(type.length() == 0) return;
+
 		Drawable drawable = null;
 		switch (type) {
 			case SHORTCUT_TV_REMOTE:
@@ -479,13 +477,10 @@ public class KeyguardMods extends XposedModPack {
 				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("@android:drawable/ic_qs_flashlight", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
 		}
-		if (type.length() > 0) {
-			button.setImageDrawable(drawable);
-			button.setOnClickListener(v -> launchAction(type));
-			button.setVisibility(VISIBLE);
-		} else {
-			button.setVisibility(GONE);
-		}
+
+		button.setOnClickListener(v -> launchAction(type));
+		button.setImageDrawable(drawable);
+		button.setVisibility(VISIBLE);
 	}
 
 	private void launchAction(String type) {

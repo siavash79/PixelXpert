@@ -3,7 +3,7 @@
     <!--General strings-->
     <string name="error_not_activated">Please confirm if the module is activated within LSPosed Manager</string>
     <string name="hide_default">Hide (Default)</string>
-    <string name="percent_of_default_size">% of default size</string>
+    <string name="percent_of_default_size">クールバー のデフォルト・サイズ</string>
     <string name="overlay_none_title">(Default)</string>
     <string name="general_section">General options</string>
     <string name="general_on">On</string>

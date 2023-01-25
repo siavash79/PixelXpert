@@ -1,3 +1,6 @@
+**canary-207**  
+- Added option to set longpress actions for lockscreen shortcuts  
+  
 **canary-206**  
 - Added option to set different QS Tile numbers in portrait/landscape  
 - Fixed statusbar size reverting to default in rare cases  

@@ -8,8 +8,8 @@
     <string name="general_section">設定</string>
     <string name="general_on">On</string>
     <string name="general_off">Off</string>
-    <string name="sysui_restart_needed">Requires a SystemUI restart to apply</string>
-    <string name="restart_needed">Requires a reboot to apply</string>
+    <string name="sysui_restart_needed">適用するにはシステム Ui の再起動が必要です</string>
+    <string name="restart_needed">適用するために再起動が必要です</string>
     <string name="more_area">more area</string>
     <string name="less_area">less area</string>
     <!--Category titles-->

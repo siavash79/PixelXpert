@@ -126,6 +126,8 @@
     <string name="signal_icons_theme_title">Tema dos ícones de rede</string>
     <string name="LSleftShortcutTitle">Atalho esquerdo</string>
     <string name="LSrightShortcutTitle">Atalho direito</string>
+	<string name="LSleftLongClickShortcutTitle">Atalho esquerdo (manter pressionado)</string>
+    <string name="LSrightLongClickShortcutTitle">Atalho direito (manter pressionado)</string>
     <string name="camera_shortcut">Câmara</string>
     <string name="assistant_shortcut">Assistente</string>
     <string name="so_vol_longpress_skip">Manter premido para mudar de faixa</string>

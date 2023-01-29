@@ -31,6 +31,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.SeekBarPreference;
 
 import com.google.android.material.slider.LabelFormatter;
+import com.startapp.sdk.adsbase.StartAppAd;
 import com.topjohnwu.superuser.Shell;
 
 import java.util.List;
@@ -113,6 +114,9 @@ public class SettingsActivity extends AppCompatActivity implements
 				backButtonDisabled();
 			}
 		});
+
+		StartAppAd.disableSplash();
+//		StartAppSDK.setTestAdsEnabled(true);
 	}
 
 	@Override

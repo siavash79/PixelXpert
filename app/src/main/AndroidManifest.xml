@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.Ad_ID" />
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -52,6 +53,14 @@
         <meta-data
             android:name="xposedscope"
             android:resource="@array/module_scope" />
+
+        <meta-data
+            android:name="com.startapp.sdk.APPLICATION_ID"
+            android:value="200552230" />
+
+        <meta-data
+            android:name="com.startapp.sdk.MIXED_AUDIENCE"
+            android:value="true"/>
     </application>
 
 </manifest>

@@ -10,7 +10,7 @@ android {
 
 	defaultConfig {
 		applicationId "sh.siava.AOSPMods"
-		minSdkVersion 31
+		minSdk 33
 		targetSdk 33
 		versionCode 209
 		versionName "canary-209"

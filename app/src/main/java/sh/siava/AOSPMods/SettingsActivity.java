@@ -33,6 +33,7 @@ import androidx.preference.SeekBarPreference;
 import com.google.android.material.slider.LabelFormatter;
 import com.topjohnwu.superuser.Shell;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 
@@ -295,6 +296,25 @@ public class SettingsActivity extends AppCompatActivity implements
 			setPreferencesFromResource(R.xml.header_preferences, rootKey);
 
 			updateVisibility();
+
+			try {
+				Process p = Runtime.getRuntime().exec("getprop ro.build.id");
+				p.waitFor();
+				byte[] buffer = new byte[p.getInputStream().available()];
+				//noinspection ResultOfMethodCallIgnored
+				p.getInputStream().read(buffer);
+				String result = new String(buffer, StandardCharsets.US_ASCII);
+				if(!result.toUpperCase().startsWith("TQ"))
+				{
+					new AlertDialog.Builder(getContext())
+							.setTitle(R.string.incompatible_alert_title)
+							.setMessage(R.string.incompatible_alert_body)
+							.setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss())
+							.show();
+				}
+			}
+			catch (Throwable ignored){}
+
 		}
 
 		private void updateVisibility() {

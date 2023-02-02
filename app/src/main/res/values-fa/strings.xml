@@ -294,7 +294,6 @@
     <string name="incompatible_alert_title">ناسازگار</string>
     <string name="incompatible_alert_body">این برنامه برای سیستم عامل فعلی شما ساخته نشده است. ممکن است برخی (یا حتی همه) امکانات این برنامه به طور صحیح کار نکند.\\n\\nلطفاً گزارش اشکال نفرمایید</string>
     <string name="incompatible_alert_ok_btn">فهمیدم</string>
-    <string name="incompatible_alert_ok_btn">فه</string>
     <string name="menu_settings_title">ذخیره/بازیابی</string>
     <string name="menu_restartSysUI">راه اندازی مجدد SystemUI</string>
     <string name="allow_all_screen_rotations">باز کردن چرخش صفحه به تمام جهات</string>

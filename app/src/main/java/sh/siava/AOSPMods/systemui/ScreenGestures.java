@@ -169,12 +169,9 @@ public class ScreenGestures extends XposedModPack {
 	}
 
 	private void setHooks(XC_MethodHook.MethodHookParam param) {
-		Object mGestureDetector = getObjectField(param.thisObject, "mPulsingWakeupGestureHandler");//A13 R18
-		if(mGestureDetector == null)
-		{
-			mGestureDetector = getObjectField(param.thisObject, "mGestureDetector"); //older
-		}
-		Object mListener = getObjectField(mGestureDetector, "mListener");
+		Object mPulsingWakeupGestureHandler = getObjectField(param.thisObject, "mPulsingWakeupGestureHandler");//A13 R18
+
+		Object mListener = getObjectField(mPulsingWakeupGestureHandler, "mListener");
 
 		Object mStatusBarKeyguardViewManager = getObjectField(param.thisObject,"mStatusBarKeyguardViewManager");
 
@@ -213,7 +210,7 @@ public class ScreenGestures extends XposedModPack {
 		hookAllMethods(mListener.getClass(), "onDoubleTap", doubleTapHook); //older
 
 		//detect hold event for TTT and DTS on lockscreen
-		hookAllMethods(mGestureDetector.getClass(), "onTouchEvent", new XC_MethodHook() {
+		hookAllMethods(mPulsingWakeupGestureHandler.getClass(), "onTouchEvent", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
 				if(!(boolean) callMethod(mStatusBarKeyguardViewManager, "isShowing"))
@@ -237,15 +234,35 @@ public class ScreenGestures extends XposedModPack {
 						callMethod(SystemUtils.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
 						SystemUtils.setFlash(true);
 						SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
+
+						new Thread(() -> { //if keyguard is dismissed for any reason (face or udfps touch), then:
+							while(turnedByTTT)
+							{
+								try
+								{
+									//noinspection BusyWait
+									Thread.sleep(200);
+									if(!(boolean) callMethod(mStatusBarKeyguardViewManager, "isShowing"))
+									{
+										turnOffTTT();
+									}
+								}
+								catch (Throwable ignored){}
+							}
+						}).start();
 					}
 					if (turnedByTTT) {
 						ev.setAction(MotionEvent.ACTION_DOWN);
 					}
 				} else if (turnedByTTT) {
-					turnedByTTT = false;
-					SystemUtils.setFlash(false);
+					turnOffTTT();
 				}
 			}
 		});
+	}
+
+	private void turnOffTTT() {
+		turnedByTTT = false;
+		SystemUtils.setFlash(false);
 	}
 }

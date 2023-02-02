@@ -59,6 +59,7 @@ public class KeyguardMods extends XposedModPack {
 	public static final String SHORTCUT_CAMERA = "camera";
 	public static final String SHORTCUT_ASSISTANT = "assistant";
 	public static final String SHORTCUT_TORCH = "torch";
+	public static final String SHORTCUT_ZEN = "zen";
 
 	private float max_charging_current = 0;
 	private float max_charging_voltage = 0;
@@ -86,6 +87,10 @@ public class KeyguardMods extends XposedModPack {
 	//endregion
 
 	//region keyguard bottom area shortcuts and transparency
+	public static final int ZEN_MODE_OFF = 0;
+	public static final int ZEN_MODE_IMPORTANT_INTERRUPTIONS = 1;
+
+	private Object ZenController;
 	private Object NotificationPanelViewController;
 //	private Object QRScannerController;
 //	private Object ActivityStarter;
@@ -175,6 +180,7 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader); //used to launch camera
 //		Class<?> QRCodeScannerControllerClass = findClass("com.android.systemui.qrcodescanner.controller.QRCodeScannerController", lpparam.classLoader);
 //		Class<?> ActivityStarterDelegateClass = findClass("com.android.systemui.ActivityStarterDelegate", lpparam.classLoader);
+		Class<?> ZenModeControllerImplClass = findClass("com.android.systemui.statusbar.policy.ZenModeControllerImpl", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
 
 /*		hookAllConstructors(ActivityStarterDelegateClass, new XC_MethodHook() {
@@ -191,6 +197,13 @@ public class KeyguardMods extends XposedModPack {
 				dumpClass(d);
 			}
 		});*/
+
+		hookAllConstructors(ZenModeControllerImplClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				ZenController = param.thisObject;
+			}
+		});
 
 		hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
 			@Override
@@ -476,6 +489,9 @@ public class KeyguardMods extends XposedModPack {
 			case SHORTCUT_TORCH:
 				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("@android:drawable/ic_qs_flashlight", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
+			case SHORTCUT_ZEN:
+				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("@android:drawable/ic_zen_24dp", "drawable", mContext.getPackageName()), mContext.getTheme());
+				break;
 		}
 
 		button.setOnClickListener(v -> launchAction(type));
@@ -497,6 +513,9 @@ public class KeyguardMods extends XposedModPack {
 			case SHORTCUT_TORCH:
 				toggleFlash();
 				break;
+			case SHORTCUT_ZEN:
+				toggleZen();
+				break;
 		}
 	}
 
@@ -504,6 +523,16 @@ public class KeyguardMods extends XposedModPack {
 		SystemUtils.ToggleFlash();
 	}
 
+	private void toggleZen()
+	{
+		if(ZenController == null) return;
+
+		int zenMode = (int) callMethod(ZenController, "getZen");
+
+		int newZenMode = (zenMode == ZEN_MODE_OFF) ? ZEN_MODE_IMPORTANT_INTERRUPTIONS : ZEN_MODE_OFF;
+
+		callMethod(ZenController, "setZen", newZenMode, null, "lockscreen Shortcut");
+	}
 	private void launchAssistant() {
 		callMethod(mAssistUtils, "launchVoiceAssistFromKeyguard");
 	}

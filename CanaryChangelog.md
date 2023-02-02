@@ -1,3 +1,12 @@
+**canary-210**  
+- lockscreen shortcuts: Added Do not disturb  
+  
+**canary-209**  
+- added incompatibility message  
+  
+**canary-208**  
+- Double-tap torch: fixed flash not turning off in some situations  
+  
 **canary-207**  
 - Added option to set longpress actions for lockscreen shortcuts  
   

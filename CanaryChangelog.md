@@ -1,3 +1,6 @@
+**canary-210**  
+- lockscreen shortcuts: Added Do not disturb  
+  
 **canary-209**  
 - added incompatibility message  
   

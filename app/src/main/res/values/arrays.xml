@@ -6,6 +6,7 @@
         <item>@string/assistant_shortcut</item>
         <item>@string/torch_shortcut</item>
         <item>@string/tv_remote_shortcut</item>
+        <item>@string/dnd_shortcut</item>
     </array>
 
     <array name="lockScreenShortcut_values">
@@ -14,6 +15,7 @@
         <item>assistant</item>
         <item>torch</item>
         <item>tvremote</item>
+        <item>zen</item>
     </array>
 
     <string-array name="qs_pulldown_side_names">

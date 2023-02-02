@@ -48,6 +48,7 @@
     <string name="assistant_shortcut">Assistant</string>
     <string name="torch_shortcut">Flashlight</string>
     <string name="tv_remote_shortcut">TV Remote</string>
+    <string name="dnd_shortcut">Do Not Disturb</string>
     <string name="album_art_category">Media options</string>
     <string name="album_art_title">Enable album art when playing media</string>
     <string name="album_art_blur_text">Blur value</string>

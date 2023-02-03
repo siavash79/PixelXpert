@@ -6,6 +6,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
@@ -213,7 +214,7 @@ public class ScreenGestures extends XposedModPack {
 		hookAllMethods(mPulsingWakeupGestureHandler.getClass(), "onTouchEvent", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
-				if(!(boolean) callMethod(mStatusBarKeyguardViewManager, "isShowing"))
+				if(!getBooleanField(mStatusBarKeyguardViewManager, "mLastShowing"))
 				{
 					return;
 				}
@@ -242,7 +243,7 @@ public class ScreenGestures extends XposedModPack {
 								{
 									//noinspection BusyWait
 									Thread.sleep(200);
-									if(!(boolean) callMethod(mStatusBarKeyguardViewManager, "isShowing"))
+									if(!getBooleanField(mStatusBarKeyguardViewManager, "mLastShowing"))
 									{
 										turnOffTTT();
 									}

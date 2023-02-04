@@ -4,6 +4,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
@@ -46,38 +47,75 @@ public class QSQuickPullDown extends XposedModPack {
 
 		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
 
-		hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				Object mStatusBarViewTouchEventHandler = getObjectField(param.thisObject, "mStatusBarViewTouchEventHandler");
+		if(findFieldIfExists(NotificationPanelViewControllerClass, "mStatusBarViewTouchEventHandler") != null) {
+			hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					Object mStatusBarViewTouchEventHandler = getObjectField(param.thisObject, "mStatusBarViewTouchEventHandler");
 
-				hookAllMethods(mStatusBarViewTouchEventHandler.getClass(), "handleTouchEvent", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
-						MotionEvent event = (MotionEvent) param1.args[0];
-						if (!oneFingerPulldownEnabled) return;
+					hookAllMethods(mStatusBarViewTouchEventHandler.getClass(), "handleTouchEvent", new XC_MethodHook() {
+						@Override
+						protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
+							MotionEvent event = (MotionEvent) param1.args[0];
+							if (!oneFingerPulldownEnabled) return;
 
-						int mBarState = (int) getObjectField(param.thisObject, "mBarState");
-						if (mBarState != STATUSBAR_MODE_SHADE) return;
+							int mBarState = (int) getObjectField(param.thisObject, "mBarState");
+							if (mBarState != STATUSBAR_MODE_SHADE) return;
 
-						int w = (int) callMethod(
-								getObjectField(param.thisObject, "mView"),
-								"getMeasuredWidth");
+							int w = (int) callMethod(
+									getObjectField(param.thisObject, "mView"),
+									"getMeasuredWidth");
 
-						float x = event.getX();
-						float region = w * statusbarPortion;
+							float x = event.getX();
+							float region = w * statusbarPortion;
 
-						boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
-								? w - region < x
-								: x < region;
+							boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
+									? w - region < x
+									: x < region;
 
-						if (pullDownApproved) {
-							callMethod(param.thisObject, "expandWithQs");
+							if (pullDownApproved) {
+								callMethod(param.thisObject, "expandWithQs");
+							}
 						}
-					}
-				});
-			}
-		});
+					});
+				}
+			});
+		}
+		else
+		{
+			hookAllMethods(NotificationPanelViewControllerClass, "createTouchHandler", new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					hookAllMethods(param.getResult().getClass(), "onTouch", new XC_MethodHook() {
+						@Override
+						protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
+							MotionEvent event = (MotionEvent) param1.args[1];
+							if (!oneFingerPulldownEnabled) return;
+
+							if (!(boolean) getObjectField(param.thisObject, "mPulsing")
+									&& !(boolean) getObjectField(param.thisObject, "mDozing")
+									&& (int) getObjectField(param.thisObject, "mBarState") == STATUSBAR_MODE_SHADE
+									&& (boolean) callMethod(param.thisObject, "isFullyCollapsed")) {
+								int w = (int) callMethod(
+										getObjectField(param.thisObject, "mView"),
+										"getMeasuredWidth");
+
+								float x = event.getX();
+								float region = w * statusbarPortion;
+
+								boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
+										? w - region < x
+										: x < region;
+
+								if (pullDownApproved) {
+									callMethod(param.thisObject, "expandWithQs");
+								}
+							}
+						}
+					});
+				}
+			});
+		}
 	}
 
 	@Override

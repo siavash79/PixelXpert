@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.utils;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
 import android.annotation.SuppressLint;
@@ -54,6 +55,10 @@ public class FlexStatusIconContainer extends LinearLayout {
 	private boolean mHasDot = false;
 	private int mRowCount;
 
+	private final String stateAlphaField;
+	private final String stateXTranslationField;
+	private final String stateYTranslationField;
+
 	public static void setSortPlan(int plan) {
 		sortPlan = plan;
 	}
@@ -66,6 +71,21 @@ public class FlexStatusIconContainer extends LinearLayout {
 		super(context, attrs);
 
 		StatusIconStateClass = findClass("com.android.systemui.statusbar.phone.StatusIconContainer$StatusIconState", classLoader);
+		Class<?> ViewStateClass = findClass("com.android.systemui.statusbar.notification.stack.ViewState", classLoader);
+
+		if(findFieldIfExists(ViewStateClass, "mAlpha") == null)
+		{ // 13 QPR1
+			stateAlphaField = "alpha";
+			stateXTranslationField = "xTranslation";
+			stateYTranslationField = "yTranslation";
+		}
+		else
+		{ // 13 QPR2
+			stateAlphaField = "mAlpha";
+			stateXTranslationField = "mXTranslation";
+			stateYTranslationField = "mYTranslation";
+
+		}
 
 		initDimens();
 		setWillNotDraw(!DEBUG_OVERFLOW);
@@ -328,7 +348,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 				setMeasuredDimension(totalWidth, MeasureSpec.getSize(heightMeasureSpec));
 			}
 		} catch (Throwable e) {
-			log("AOSPMODS Error");
+			log("AOSPMODS Error - Flex Statusbar Container");
 			e.printStackTrace();
 			setDefaultResponse(widthMeasureSpec, heightMeasureSpec);
 		}
@@ -484,7 +504,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 							xPosition -= iconWidth;
 							iconTranslationX = xPosition;
 
-							setObjectField(childState, "xTranslation", xPosition);
+							setObjectField(childState, stateXTranslationField, xPosition);
 						} else {
 							currentRow++;
 							i--;
@@ -499,8 +519,8 @@ public class FlexStatusIconContainer extends LinearLayout {
 				if (icon != mDotIcon) {
 					setChildVisibleState(icon, STATE_ICON);
 				}
-				setObjectField(childState, "xTranslation", iconTranslationX);
-				setObjectField(childState, "yTranslation", iconTranslationY);
+				setObjectField(childState, stateXTranslationField, iconTranslationX);
+				setObjectField(childState, stateYTranslationField, iconTranslationY);
 
 			}
 
@@ -509,7 +529,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 			mDotIcon = null;
 			System.gc();
 		} catch (Throwable t) {
-			log("AOSPMods Error");
+			log("AOSPMODS Error - Flex Statusbar Container");
 			t.printStackTrace();
 		}
 	}
@@ -533,7 +553,9 @@ public class FlexStatusIconContainer extends LinearLayout {
 			}
 
 			callMethod(vs, "initFrom", child);
-			setObjectField(vs, "alpha", 1.0f);
+
+			setObjectField(vs, stateAlphaField, 1.0f);
+
 			setObjectField(vs, "hidden", false);
 		}
 	}

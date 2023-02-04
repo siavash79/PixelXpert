@@ -77,18 +77,8 @@ public class ScreenGestures extends XposedModPack {
 			}
 		});
 
-		Class<?> NotificationShadeWindowViewControllerClass;
-		Class<?> NotificationPanelViewControllerClass;
-		try
-		{ //A13 R18
-			NotificationShadeWindowViewControllerClass = findClass("com.android.systemui.shade.NotificationShadeWindowViewController", lpparam.classLoader);
-			NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
-		}
-		catch (Throwable ignored)
-		{ //Older
-			NotificationShadeWindowViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationShadeWindowViewController", lpparam.classLoader);
-			NotificationPanelViewControllerClass = findClass("com.android.systemui.statusbar.phone.NotificationPanelViewController", lpparam.classLoader);
-		}
+		Class<?> NotificationShadeWindowViewControllerClass = findClass("com.android.systemui.shade.NotificationShadeWindowViewController", lpparam.classLoader);
+		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
 		Class<?> DozeTriggersClass = findClass("com.android.systemui.doze.DozeTriggers", lpparam.classLoader);
 		Class<?> KeyguardAbsKeyInputViewControllerClass = findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
 
@@ -133,23 +123,27 @@ public class ScreenGestures extends XposedModPack {
 			}
 		});
 
-		Class<?> finalNotificationPanelViewControllerClass = NotificationPanelViewControllerClass;
 		hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				Object mTouchHandler = finalNotificationPanelViewControllerClass.getField("mStatusBarViewTouchEventHandler").get(param.thisObject);
-				if(mTouchHandler == null)
+				try
 				{
-					mTouchHandler = finalNotificationPanelViewControllerClass.getField("mTouchHandler").get(param.thisObject);
+					hookTouchHandler(param.thisObject, getObjectField(param.thisObject, "mStatusBarViewTouchEventHandler"));
 				}
-				hookTouchHandler(param, mTouchHandler);
+				catch (Throwable ignored) {}
+			}
+		});
+
+
+	hookAllMethods(NotificationPanelViewControllerClass, "createTouchHandler", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam NotificationPanelViewController) throws Throwable {
+				hookTouchHandler(NotificationPanelViewController.thisObject, NotificationPanelViewController.getResult());
 			}
 		});
 	}
 
-	private void hookTouchHandler(XC_MethodHook.MethodHookParam param, Object mTouchHandler) {
-		Object ThisNotificationPanel = param.thisObject;
-
+	private void hookTouchHandler(Object ThisNotificationPanel, Object mTouchHandler) {
 		XC_MethodHook touchHook = new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -160,13 +154,13 @@ public class ScreenGestures extends XposedModPack {
 						&& !(boolean) getObjectField(ThisNotificationPanel, "mDozing")
 						&& (int) getObjectField(ThisNotificationPanel, "mBarState") == SHADE
 						&& (boolean) callMethod(ThisNotificationPanel, "isFullyCollapsed")) {
-					mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[param.args.length-1]);
+					mLockscreenDoubleTapToSleep.onTouchEvent((MotionEvent) param.args[param.args.length - 1]);
 				}
 			}
 		};
 
+		hookAllMethods(mTouchHandler.getClass(), "onTouch", touchHook); //13 QPR2
 		hookAllMethods(mTouchHandler.getClass(), "handleTouchEvent", touchHook); //A13 R18
-		hookAllMethods(mTouchHandler.getClass(), "onTouch", touchHook); //older
 	}
 
 	private void setHooks(XC_MethodHook.MethodHookParam param) {

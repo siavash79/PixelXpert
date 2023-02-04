@@ -1,3 +1,9 @@
+**canary-211**  
+- QPR2: fixed double statusbar (right side)  
+- QPR2: QS quick pulldown  
+- QPR2: fixed double tap to sleep  
+- QPR2: Fixed double-tap torch compatibility  
+  
 **canary-210**  
 - lockscreen shortcuts: Added Do not disturb  
   

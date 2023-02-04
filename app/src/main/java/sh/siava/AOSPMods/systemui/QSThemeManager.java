@@ -215,34 +215,21 @@ public class QSThemeManager extends XposedModPack {
 				applyOverlays(true);
 			}
 		});
-		hookAllMethods(QSTileViewImplClass, "getLabelColorForState", new XC_MethodHook() {
-			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				int state = (int) param.args[0];
 
-				if (!lightQSHeaderEnabled || wasDark || state < 2) return;
-				param.setResult(Color.WHITE);
-			}
-		});
-
-		hookAllMethods(QSTileViewImplClass, "getBackgroundColorForState", new XC_MethodHook() {
+		hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() {
 			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!lightQSHeaderEnabled || wasDark) return;
+
 				if (colorInactive == null) {
 					calculateColors();
 				}
-				switch ((int) param.args[0]) { //state
-					case STATE_UNAVAILABLE:
-						param.setResult(colorUnavailable);
-						break;
-					case STATE_INACTIVE:
-						param.setResult(colorInactive);
-						break;
-					case STATE_ACTIVE:
-						param.setResult(colorActive);
-						break;
-				}
+
+				setObjectField(param.thisObject, "colorActive", colorActive);
+				setObjectField(param.thisObject, "colorInactive", colorInactive);
+				setObjectField(param.thisObject, "colorUnavailable", colorUnavailable);
+
+				setObjectField(param.thisObject, "colorLabelActive", Color.WHITE);
 			}
 		});
 

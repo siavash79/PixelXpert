@@ -208,7 +208,7 @@ public class ScreenGestures extends XposedModPack {
 		hookAllMethods(mPulsingWakeupGestureHandler.getClass(), "onTouchEvent", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
-				if(!getBooleanField(mStatusBarKeyguardViewManager, "mLastShowing"))
+				if(!keyguardShowing(mStatusBarKeyguardViewManager))
 				{
 					return;
 				}
@@ -237,7 +237,7 @@ public class ScreenGestures extends XposedModPack {
 								{
 									//noinspection BusyWait
 									Thread.sleep(200);
-									if(!getBooleanField(mStatusBarKeyguardViewManager, "mLastShowing"))
+									if(!keyguardShowing(mStatusBarKeyguardViewManager))
 									{
 										turnOffTTT();
 									}
@@ -254,6 +254,17 @@ public class ScreenGestures extends XposedModPack {
 				}
 			}
 		});
+	}
+
+	private boolean keyguardShowing(Object mStatusBarKeyguardViewManager) {
+		try
+		{
+			return (boolean) callMethod(mStatusBarKeyguardViewManager, "isShowing");
+		}
+		catch (Throwable ignored)
+		{
+			return getBooleanField(mStatusBarKeyguardViewManager, "mLastShowing");
+		}
 	}
 
 	private void turnOffTTT() {

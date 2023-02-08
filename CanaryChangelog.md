@@ -1,3 +1,10 @@
+**canary-212**  
+- Fixed fast 2-tap on quick settings while in lockscreen sending device to sleep  
+- Fixed batterybar and network monitor still showing on lockscreen  
+- QPR2 - Fixed lockscreen camera shortcut  
+- QPR2 - Fixed QS light theme  
+- QPR2 - Fixed QS settings longpress AOSPMods launcher  
+  
 **canary-211**  
 - QPR2: fixed double statusbar (right side)  
 - QPR2: QS quick pulldown  

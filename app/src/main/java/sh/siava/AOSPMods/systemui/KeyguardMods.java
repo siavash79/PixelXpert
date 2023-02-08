@@ -91,7 +91,7 @@ public class KeyguardMods extends XposedModPack {
 	public static final int ZEN_MODE_IMPORTANT_INTERRUPTIONS = 1;
 
 	private Object ZenController;
-	private Object NotificationPanelViewController;
+	private Object CommandQueue;
 //	private Object QRScannerController;
 //	private Object ActivityStarter;
 	private Object KeyguardBottomAreaView;
@@ -177,24 +177,32 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
 		Class<?> KeyguardBottomAreaViewBinderClass = findClass("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpparam.classLoader);
 		Class<?> AssistManager = findClass("com.android.systemui.assist.AssistManager", lpparam.classLoader);
-		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader); //used to launch camera
+//		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader); //used to launch camera
 //		Class<?> QRCodeScannerControllerClass = findClass("com.android.systemui.qrcodescanner.controller.QRCodeScannerController", lpparam.classLoader);
 //		Class<?> ActivityStarterDelegateClass = findClass("com.android.systemui.ActivityStarterDelegate", lpparam.classLoader);
 		Class<?> ZenModeControllerImplClass = findClass("com.android.systemui.statusbar.policy.ZenModeControllerImpl", lpparam.classLoader);
+//		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpparam.classLoader);
+		Class<?> CommandQueueClass = findClass("com.android.systemui.statusbar.CommandQueue", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
 
-/*		hookAllConstructors(ActivityStarterDelegateClass, new XC_MethodHook() {
+		hookAllConstructors(CommandQueueClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				ActivityStarter = param.thisObject;
-				log("gotcha");
+				CommandQueue = param.thisObject;
 			}
-		});*/
-/*		hookAllConstructors(QRCodeScannerControllerClass, new XC_MethodHook() {
+		});
+
+/*		hookAllConstructors(FooterActionsInteractorImplClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				ActivityStarter = getObjectField(param.thisObject, "activityStarter");
+			}
+		});
+
+		hookAllConstructors(QRCodeScannerControllerClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				QRScannerController = param.thisObject;
-				dumpClass(d);
 			}
 		});*/
 
@@ -202,13 +210,6 @@ public class KeyguardMods extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				ZenController = param.thisObject;
-			}
-		});
-
-		hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				NotificationPanelViewController = param.thisObject;
 			}
 		});
 
@@ -542,8 +543,9 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	private void launchCamera() {
-		if(NotificationPanelViewController != null) {
-			callMethod(NotificationPanelViewController, "launchCamera", 0);
+		if(CommandQueue != null)
+		{
+			callMethod(CommandQueue, "onCameraLaunchGestureDetected", 0);
 		}
 	}
 	//endregion

@@ -197,6 +197,8 @@
     <string name="sbc_before_color">Texto antes do relógio</string>
     <string name="sbc_color">Relógio</string>
     <string name="sbc_after_color">Texto depois do relógio</string>
+	<string name="incompatible_alert_title">Incompatível</string>
+    <string name="incompatible_alert_ok_btn">Compreendo</string>
     <string name="menu_settings_title">Importar/Exportar</string>
     <string name="menu_netstat_title">Estatísticas de rede</string>
     <string name="menu_netstat_enable">Ativar estatísticas</string>
@@ -314,7 +316,8 @@
     <string name="heads_up_notification_duration">Duração das notificações no topo</string>
     <string name="milliseconds">Milissegundos</string>
     <string name="sleep">Desligar ecrã</string>
-	<string name="charging_info_title">Informação de carregamento no ecrã de bloqueio</string>
+    <string name="dnd_shortcut">Não incomodar</string>
+    <string name="charging_info_title">Informação de carregamento no ecrã de bloqueio</string>
     <string name="imperial_units_title">Usar unidades imperiais</string>
     <string name="hide_roaming_title">Esconder indicador de roaming</string>
     <string name="caution_mobile_costs">ATENÇÃO - Não saber que está em roaming poderá aumentar os seus custos</string>
@@ -324,4 +327,5 @@
 	<string name="sb_double_row_category">Opções da barra de estado mais espessa</string>
 	<string name="tv_remote_shortcut">Comando da TV</string>
 	<string name="sb_multi_row_notification_icons">Várias linhas para ícones das notificações (requer barra de estado mais espessa)</string>
+    <string name="incompatible_alert_body">Este módulo não foi desenhado para ser utilizado com a ROM presente no dispositivo. Pode utilizar o módulo mas algumas, ou todas, as funcionalidades poderão não funcionar como pretendido.\n\nAssim, e por isso, por favor, não reporte bugs.</string>
 </resources>

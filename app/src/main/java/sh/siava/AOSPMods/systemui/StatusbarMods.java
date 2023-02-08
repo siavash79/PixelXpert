@@ -920,8 +920,7 @@ public class StatusbarMods extends XposedModPack {
 					mStatusBar.post(() -> {
 						try {
 							callMethod(mStatusBarIconController, "setIcon", "volte", volteStatusbarIcon);
-						} catch (Exception ignored) {
-						}
+						} catch (Exception ignored) {}
 					});
 					break;
 				case VOLTE_NOT_AVAILABLE:
@@ -936,7 +935,7 @@ public class StatusbarMods extends XposedModPack {
 		mStatusBar.post(() -> {
 			try {
 				callMethod(mStatusBarIconController, "removeIcon", "volte");
-			} catch (Exception ignored) {
+			} catch (Throwable ignored) {
 			}
 		});
 	}

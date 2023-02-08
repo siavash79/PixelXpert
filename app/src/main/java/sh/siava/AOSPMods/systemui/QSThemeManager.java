@@ -23,6 +23,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -109,12 +110,124 @@ public class QSThemeManager extends XposedModPack {
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
 		Class<?> QSIconViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSIconViewImpl", lpparam.classLoader);
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
-		Class<?> QSSecurityFooterClass = findClass("com.android.systemui.qs.QSSecurityFooter", lpparam.classLoader);
-		Class<?> QSFgsManagerFooterClass = findClass("com.android.systemui.qs.QSFgsManagerFooter", lpparam.classLoader);
-		Class<?> FooterActionsControllerClass = findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
 		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
+
+		try { //QPR1
+			Class<?> QSSecurityFooterClass = findClass("com.android.systemui.qs.QSSecurityFooter", lpparam.classLoader);
+			Class<?> QSFgsManagerFooterClass = findClass("com.android.systemui.qs.QSFgsManagerFooter", lpparam.classLoader);
+			Class<?> FooterActionsControllerClass = findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
+
+			hookAllConstructors(QSFgsManagerFooterClass, new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if (!wasDark && lightQSHeaderEnabled) {
+						((View) getObjectField(param.thisObject, "mNumberContainer"))
+								.getBackground()
+								.setTint(colorInactive);
+						((View) getObjectField(param.thisObject, "mTextContainer"))
+								.setBackground(lightFooterShape.getConstantState().newDrawable().mutate()); //original has to be copied to new object otherwise will get affected by view changes
+					}
+				}
+			});
+
+			hookAllConstructors(QSSecurityFooterClass, new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if (!wasDark && lightQSHeaderEnabled) {
+						((View) getObjectField(param.thisObject, "mView")).setBackground(lightFooterShape.getConstantState().newDrawable().mutate());
+					}
+				}
+			});
+
+			hookAllConstructors(FooterActionsControllerClass, new XC_MethodHook() {
+				@SuppressLint("DiscouragedApi")
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if (!wasDark && lightQSHeaderEnabled) {
+						Resources res = mContext.getResources();
+						ViewGroup view = (ViewGroup) param.args[0];
+
+						view.findViewById(res.getIdentifier("multi_user_switch", "id", mContext.getPackageName())).getBackground().setTint(colorInactive);
+
+						View settings_button_container = view.findViewById(res.getIdentifier("settings_button_container", "id", mContext.getPackageName()));
+						settings_button_container.getBackground().setTint(colorInactive);
+
+						((LinearLayout.LayoutParams)
+								((ViewGroup) settings_button_container
+										.getParent()
+								).getLayoutParams()
+						).setMarginEnd(0);
+					}
+				}
+			});
+
+		}catch (Throwable ignored){ //QPR2
+			Class<?> LargeScreenShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpparam.classLoader);
+			Class<?> QSContainerImplClass = findClass("com.android.systemui.qs.QSContainerImpl", lpparam.classLoader);
+
+			hookAllMethods(LargeScreenShadeHeaderControllerClass, "onInit", new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					View mView = (View) getObjectField(param.thisObject, "mView");
+					Object iconManager = getObjectField(param.thisObject, "iconManager");
+					Object batteryIcon = getObjectField(param.thisObject, "batteryIcon");
+					Object configurationControllerListener = getObjectField(param.thisObject, "configurationControllerListener");
+					hookAllMethods(configurationControllerListener.getClass(), "onConfigChanged", new XC_MethodHook() {
+						@SuppressLint("DiscouragedApi")
+						@Override
+						protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+							int textColor = SettingsLibUtils.getColorAttrDefaultColor(android.R.attr.textColorPrimary, mContext);
+
+							((TextView) mView.findViewById(mContext.getResources().getIdentifier("clock", "id", mContext.getPackageName()))).setTextColor(textColor);
+							((TextView) mView.findViewById(mContext.getResources().getIdentifier("date", "id", mContext.getPackageName()))).setTextColor(textColor);
+
+							callMethod(iconManager, "setTint", textColor);
+
+							for(int i = 1; i <= 3; i ++) {
+								String id = String.format("carrier%s", i);
+
+								((TextView) getObjectField(mView.findViewById(mContext.getResources().getIdentifier(id, "id", mContext.getPackageName())), "mCarrierText")).setTextColor(textColor);
+								((ImageView) getObjectField(mView.findViewById(mContext.getResources().getIdentifier(id, "id", mContext.getPackageName())), "mMobileSignal")).setImageTintList(ColorStateList.valueOf(textColor));
+								((ImageView) getObjectField(mView.findViewById(mContext.getResources().getIdentifier(id, "id", mContext.getPackageName())), "mMobileRoaming")).setImageTintList(ColorStateList.valueOf(textColor));
+							}
+
+							callMethod(batteryIcon, "updateColors", textColor, textColor, textColor);
+						}
+					});
+				}
+			});
+
+			hookAllMethods(QSContainerImplClass, "updateResources", new XC_MethodHook() {
+				@SuppressLint("DiscouragedApi")
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if (!wasDark && lightQSHeaderEnabled) {
+						Resources res = mContext.getResources();
+						ViewGroup view = (ViewGroup) param.thisObject;
+
+						View settings_button_container = view.findViewById(res.getIdentifier("settings_button_container", "id", mContext.getPackageName()));
+						settings_button_container.getBackground().setTint(colorInactive);
+
+						ImageView icon = settings_button_container.findViewById(res.getIdentifier("icon", "id", mContext.getPackageName()));
+						icon.setImageTintList(ColorStateList.valueOf(Color.BLACK));
+
+						((FrameLayout.LayoutParams)
+								((ViewGroup) settings_button_container
+										.getParent()
+								).getLayoutParams()
+						).setMarginEnd(0);
+
+						ViewGroup parent = (ViewGroup) settings_button_container.getParent();
+						for(int i = 0; i < 3; i++) //Security + Foreground services containers
+						{
+							parent.getChildAt(i).setBackground(lightFooterShape.getConstantState().newDrawable().mutate());
+						}
+					}
+				}
+			});
+		}
 
 		hookAllMethods(QSIconViewImplClass, "updateIcon", new XC_MethodHook() {
 			@Override
@@ -161,50 +274,6 @@ public class QSThemeManager extends XposedModPack {
 				if(lightQSHeaderEnabled && !SystemUtils.isDarkMode())
 				{
 					((TextView)mClockViewQSHeader).setTextColor(Color.BLACK);
-				}
-			}
-		});
-
-		hookAllConstructors(FooterActionsControllerClass, new XC_MethodHook() {
-			@SuppressLint("DiscouragedApi")
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!wasDark && lightQSHeaderEnabled) {
-					Resources res = mContext.getResources();
-					ViewGroup view = (ViewGroup) param.args[0];
-
-					view.findViewById(res.getIdentifier("multi_user_switch", "id", mContext.getPackageName())).getBackground().setTint(colorInactive);
-
-					View settings_button_container = view.findViewById(res.getIdentifier("settings_button_container", "id", mContext.getPackageName()));
-					settings_button_container.getBackground().setTint(colorInactive);
-
-					((LinearLayout.LayoutParams)
-							((ViewGroup) settings_button_container
-									.getParent()
-							).getLayoutParams()
-					).setMarginEnd(0);
-				}
-			}
-		});
-
-		hookAllConstructors(QSFgsManagerFooterClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!wasDark && lightQSHeaderEnabled) {
-					((View) getObjectField(param.thisObject, "mNumberContainer"))
-							.getBackground()
-							.setTint(colorInactive);
-					((View) getObjectField(param.thisObject, "mTextContainer"))
-							.setBackground(lightFooterShape.getConstantState().newDrawable().mutate()); //original has to be copied to new object otherwise will get affected by view changes
-				}
-			}
-		});
-
-		hookAllConstructors(QSSecurityFooterClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!wasDark && lightQSHeaderEnabled) {
-					((View) getObjectField(param.thisObject, "mView")).setBackground(lightFooterShape.getConstantState().newDrawable().mutate());
 				}
 			}
 		});

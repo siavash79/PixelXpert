@@ -588,14 +588,14 @@ public class StatusbarMods extends XposedModPack {
 						//Clickable icons
 						Object mBatteryRemainingIcon = getObjectField(param.thisObject, "mBatteryRemainingIcon");
 						Object mDateView = getObjectField(param.thisObject, "mDateView");
-						Object mClockView = getObjectField(param.thisObject, "mClockView");
+						Object mClockViewQS = getObjectField(param.thisObject, "mClockView");
 
 						ClickListener clickListener = new ClickListener(param.thisObject);
 
 						try {
 							callMethod(mBatteryRemainingIcon, "setOnClickListener", clickListener);
-							callMethod(mClockView, "setOnClickListener", clickListener);
-							callMethod(mClockView, "setOnLongClickListener", clickListener);
+							callMethod(mClockViewQS, "setOnClickListener", clickListener);
+							callMethod(mClockViewQS, "setOnLongClickListener", clickListener);
 							callMethod(mDateView, "setOnClickListener", clickListener);
 							callMethod(mDateView, "setOnLongClickListener", clickListener);
 						} catch (Exception ignored) {
@@ -622,31 +622,11 @@ public class StatusbarMods extends XposedModPack {
 			}
 		});
 
-		//understanding when to hide the battery bar and network traffic: when clock goes to hiding
-		hookAllMethods(CollapsedStatusBarFragmentClass,
-				"hideClock", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						for (ClockVisibilityCallback c : clockVisibilityCallbacks) {
-							try {
-								c.OnVisibilityChanged(false);
-							} catch (Exception ignored) {
-							}
-						}
-					}
-				});
-
 		//restoring batterybar and network traffic: when clock goes back to life
 		hookAllMethods(CollapsedStatusBarFragmentClass,
 				"animateShow", new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						Object mClockView;
-						try {
-							mClockView = getObjectField(param.thisObject, "mClockView");
-						} catch (Throwable ignored) { //PE+
-							mClockView = callMethod(getObjectField(param.thisObject, "mClockController"), "getClock");
-						}
 						if (param.args[0] != mClockView) return;
 						for (ClockVisibilityCallback c : clockVisibilityCallbacks) {
 							try {
@@ -654,6 +634,21 @@ public class StatusbarMods extends XposedModPack {
 							} catch (Exception ignored) {
 							}
 						}
+					}
+				});
+
+		hookAllMethods(CollapsedStatusBarFragmentClass,
+				"animateHiddenState", new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						if (param.args[0] != mClockView) return;
+						for (ClockVisibilityCallback c : clockVisibilityCallbacks) {
+							try {
+								c.OnVisibilityChanged(false);
+							} catch (Exception ignored) {
+							}
+						}
+
 					}
 				});
 
@@ -675,9 +670,7 @@ public class StatusbarMods extends XposedModPack {
 
 						mStatusBar = (ViewGroup) getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
 
-						mStatusBar.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
-							setHeights();
-						});
+						mStatusBar.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setHeights());
 
 						mStatusbarStartSide = mStatusBar.findViewById(mContext.getResources().getIdentifier("status_bar_start_side_except_heads_up", "id", mContext.getPackageName()));
 

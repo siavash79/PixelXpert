@@ -1,3 +1,6 @@
+**canary-213**  
+- Fixed double tap detection for 13 QPR1 that was broken since 212  
+  
 **canary-212**  
 - Fixed fast 2-tap on quick settings while in lockscreen sending device to sleep  
 - Fixed batterybar and network monitor still showing on lockscreen  

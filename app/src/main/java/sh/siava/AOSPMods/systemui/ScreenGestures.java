@@ -118,6 +118,7 @@ public class ScreenGestures extends XposedModPack {
 		hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				NotificationPanelViewController = param.thisObject;
 				try
 				{
 					hookTouchHandler(getObjectField(param.thisObject, "mStatusBarViewTouchEventHandler"));
@@ -174,6 +175,7 @@ public class ScreenGestures extends XposedModPack {
 			}
 		};
 		hookAllMethods(mListener.getClass(), "onSingleTapUp", singleTapHook); //A13 R18
+		hookAllMethods(mListener.getClass(), "onSingleTapConfirmed", singleTapHook); //older
 
 		//used in double tap detection in AOD
 		XC_MethodHook doubleTapHook = new XC_MethodHook() {
@@ -194,6 +196,7 @@ public class ScreenGestures extends XposedModPack {
 			}
 		};
 		hookAllMethods(mListener.getClass(), "onDoubleTapEvent", doubleTapHook); //A13 R18
+		hookAllMethods(mListener.getClass(), "onDoubleTap", doubleTapHook); //older
 
 		//detect hold event for TTT and DTS on lockscreen
 		hookAllMethods(mPulsingWakeupGestureHandler.getClass(), "onTouchEvent", new XC_MethodHook() {

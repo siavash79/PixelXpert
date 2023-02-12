@@ -1,3 +1,7 @@
+**canary-214**  
+- Added Japanese translation  
+- QPR2: Fixed click/longclick actions on QS clock/date/battery  
+  
 **canary-213**  
 - Fixed double tap detection for 13 QPR1 that was broken since 212  
   

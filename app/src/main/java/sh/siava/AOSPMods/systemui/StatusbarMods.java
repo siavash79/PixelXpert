@@ -572,8 +572,10 @@ public class StatusbarMods extends XposedModPack {
 			}
 		});
 
+		final ClickListener clickListener = new ClickListener();
+
 		//marking clock instances for recognition and setting click actions on some icons
-		findAndHookMethod(QuickStatusBarHeaderClass,
+		hookAllMethods(QuickStatusBarHeaderClass,
 				"onFinishInflate", new XC_MethodHook() {
 					@SuppressLint("DiscouragedApi")
 					@Override
@@ -590,18 +592,35 @@ public class StatusbarMods extends XposedModPack {
 						Object mDateView = getObjectField(param.thisObject, "mDateView");
 						Object mClockViewQS = getObjectField(param.thisObject, "mClockView");
 
-						ClickListener clickListener = new ClickListener(param.thisObject);
-
 						try {
 							callMethod(mBatteryRemainingIcon, "setOnClickListener", clickListener);
 							callMethod(mClockViewQS, "setOnClickListener", clickListener);
 							callMethod(mClockViewQS, "setOnLongClickListener", clickListener);
 							callMethod(mDateView, "setOnClickListener", clickListener);
 							callMethod(mDateView, "setOnLongClickListener", clickListener);
-						} catch (Exception ignored) {
-						}
+						} catch (Exception ignored) {}
 					}
 				});
+
+		try
+		{
+			Class<?> LargeScreenShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpparam.classLoader);
+
+			hookAllMethods(LargeScreenShadeHeaderControllerClass, "onInit", new XC_MethodHook() {
+				@SuppressLint("DiscouragedApi")
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					View mView = (View) getObjectField(param.thisObject, "mView");
+
+					mView.findViewById(mContext.getResources().getIdentifier("clock", "id", mContext.getPackageName())).setOnClickListener(clickListener);
+					mView.findViewById(mContext.getResources().getIdentifier("clock", "id", mContext.getPackageName())).setOnLongClickListener(clickListener);
+					mView.findViewById(mContext.getResources().getIdentifier("date", "id", mContext.getPackageName())).setOnClickListener(clickListener);
+					mView.findViewById(mContext.getResources().getIdentifier("batteryRemainingIcon", "id", mContext.getPackageName())).setOnClickListener(clickListener);
+				}
+			});
+
+		}
+		catch (Throwable ignored){}
 
 		//show/hide vibration icon from system icons
 		hookAllConstructors(KeyguardStatusBarViewControllerClass, new XC_MethodHook() {
@@ -997,43 +1016,39 @@ public class StatusbarMods extends XposedModPack {
 
 	//region icon tap related
 	class ClickListener implements View.OnClickListener, View.OnLongClickListener {
-		Object parent;
-
-		public ClickListener(Object parent) {
-			this.parent = parent;
-		}
+		public ClickListener() {}
 
 		@Override
 		public void onClick(View v) {
-			Object mBatteryRemainingIcon = getObjectField(parent, "mBatteryRemainingIcon");
-			Object mDateView = getObjectField(parent, "mDateView");
-			Object mClockView = getObjectField(parent, "mClockView");
-			boolean mExpanded = (boolean) getObjectField(parent, "mExpanded");
+			String name = mContext.getResources().getResourceName(v.getId());
 
-			if (v.equals(mBatteryRemainingIcon)) {
-				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(Intent.ACTION_POWER_USAGE_SUMMARY), 0);
-			} else if (mExpanded && v.equals(mClockView)) {
+			if(name.endsWith("clock"))
+			{
 				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(AlarmClock.ACTION_SHOW_ALARMS), 0);
-			} else if (v == mDateView || (v == mClockView && !mExpanded)) {
+			}
+			else if (name.endsWith("date"))
+			{
 				Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
 				builder.appendPath("time");
 				builder.appendPath(Long.toString(java.lang.System.currentTimeMillis()));
 				Intent todayIntent = new Intent(Intent.ACTION_VIEW, builder.build());
 				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", todayIntent, 0);
 			}
+			else if (name.endsWith("batteryRemainingIcon")) {
+				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(Intent.ACTION_POWER_USAGE_SUMMARY), 0);
+			}
 		}
 
 		@Override
 		public boolean onLongClick(View v) {
-			Object mDateView = getObjectField(parent, "mDateView");
-			Object mClockView = getObjectField(parent, "mClockView");
+			String name = mContext.getResources().getResourceName(v.getId());
 
-			if (v == mClockView || v == mDateView) {
+			if(name.endsWith("clock") || name.endsWith("date"))
+			{
 				Intent mIntent = new Intent(Intent.ACTION_MAIN);
 				mIntent.setClassName("com.android.settings",
 						"com.android.settings.Settings$DateTimeSettingsActivity");
 				callMethod(mActivityStarter, "startActivity", mIntent, true /* dismissShade */);
-//                mVibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
 				return true;
 			}
 			return false;

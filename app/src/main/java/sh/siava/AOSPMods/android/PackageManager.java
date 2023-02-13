@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.android;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 import static sh.siava.AOSPMods.utils.Helpers.dumpClass;
@@ -15,6 +16,8 @@ import sh.siava.AOSPMods.XposedModPack;
 
 public class PackageManager extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_FRAMEWORK_PACKAGE;
+
+	public static final int PERMISSION = 4;
 
 	private static boolean PM_AllowMismatchedSignature = false;
 	private static boolean PM_AllowDowngrade = false;
@@ -48,7 +51,7 @@ public class PackageManager extends XposedModPack {
 			hookAllMethods(SigningDetailsClass, "checkCapability", new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if(PM_AllowMismatchedSignature) {
+					if(PM_AllowMismatchedSignature && !param.args[1].equals(PERMISSION)) {
 						param.setResult(true);
 					}
 				}
@@ -57,18 +60,30 @@ public class PackageManager extends XposedModPack {
 			hookAllMethods(PackageManagerServiceUtilsClass, "verifySignatures", new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if(PM_AllowMismatchedSignature) {
-						param.setResult(true);
+					try {
+						if(PM_AllowMismatchedSignature &&
+								callMethod(
+										callMethod(param.args[0], "getSigningDetails"),
+										"getSignatures"
+								) != null) {
+							param.setResult(true);
+						}
 					}
+					catch (Throwable ignored){}
 				}
 			});
 
 			hookAllMethods(InstallPackageHelperClass, "doesSignatureMatchForPermissions", new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if(PM_AllowMismatchedSignature) {
-						param.setResult(true);
+					try {
+						if(PM_AllowMismatchedSignature
+								&& callMethod(param.args[1], "getPackageName")
+								.equals(param.args[0])) {
+							param.setResult(true);
+						}
 					}
+					catch (Throwable ignored){}
 				}
 			});
 		}

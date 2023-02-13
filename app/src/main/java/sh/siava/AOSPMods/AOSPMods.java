@@ -17,6 +17,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.allApps.OverScrollDisabler;
 import sh.siava.AOSPMods.android.BrightnessRange;
+import sh.siava.AOSPMods.android.PackageManager;
 import sh.siava.AOSPMods.android.PhoneWindowManager;
 import sh.siava.AOSPMods.android.ScreenOffKeys;
 import sh.siava.AOSPMods.android.ScreenRotation;
@@ -103,6 +104,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(BrightnessRange.class);
 		modPacks.add(ClearAllButtonMod.class);
 		modPacks.add(NotificationManager.class);
+		modPacks.add(PackageManager.class);
 		//endregion
 	}
 
@@ -116,7 +118,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 			if (A33R18Example == null) return;
 		}
 
-		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && BuildConfig.DEBUG) {
+		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && BuildConfig.DEBUG && false) {
 			log("------------");
 			Helpers.dumpClass("com.android.systemui.statusbar.notification.collection.NotifCollection", lpparam.classLoader);
 			log("------------");

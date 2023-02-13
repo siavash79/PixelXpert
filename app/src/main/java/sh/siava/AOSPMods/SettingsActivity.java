@@ -613,6 +613,22 @@ public class SettingsActivity extends AppCompatActivity implements
 		}
 	}
 
+	public static class PackageManagerFragment extends PreferenceFragmentCompat {
+		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
+
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+			getPreferenceManager().setStorageDeviceProtected();
+			setPreferencesFromResource(R.xml.packagemanger_prefs, rootKey);
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			prefs.registerOnSharedPreferenceChangeListener(listener);
+			updateVisibility(prefs);
+
+		}
+
+		private void updateVisibility(SharedPreferences prefs) {}
+	}
+
 	@SuppressWarnings("ConstantConditions")
 	public static class SBCFragment extends PreferenceFragmentCompat {
 

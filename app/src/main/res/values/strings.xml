@@ -22,6 +22,7 @@
     <string name="misc_header">Miscellaneous</string>
     <string name="qs_panel_category_title">Quick Settings Panel</string>
     <string name="theme_customization_category">Theming</string>
+    <string name="pm_header">Package Manager</string>
 
     <!--Lock screen related-->
     <string name="hide_avatar_title">Remove user avatar (multi user mode)</string>
@@ -236,6 +237,10 @@
     <string name="taskbar_force_enable_title">Force Enabled</string>
     <string name="taskbar_force_disable_title">Force Disabled</string>
     <string name="taskbar_hide_allapps_title">Hide all apps icon</string>
+
+    <!-- Package manager -->
+    <string name="pm_bypass_signature_title">Bypass package signature check</string>
+    <string name="pm_allow_downgrade_title">Allow app downgrade</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>

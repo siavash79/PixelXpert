@@ -1,3 +1,6 @@
+**canary-215**  
+- Added PackageManager mods - options to allow package downgrade/signature bypass  
+  
 **canary-214**  
 - Added Japanese translation  
 - QPR2: Fixed click/longclick actions on QS clock/date/battery  

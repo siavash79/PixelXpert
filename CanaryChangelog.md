@@ -1,3 +1,6 @@
+**canary-216**  
+- Fixed PackageManager mod soft-reboot for new app installs  
+  
 **canary-215**  
 - Added PackageManager mods - options to allow package downgrade/signature bypass  
   

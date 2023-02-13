@@ -50,7 +50,9 @@
     <string name="sysui_restart_needed">Requer reiniciar a IU do sistema</string>
     <string name="threebutton_header_title">Navegação com 3 botões</string>
     <string name="back_longpress_kill_title">Manter pressionado o botão voltar para terminar app</string>
-    <string name="screenshot_sound_disable_title">Desativar som da captura de ecrã</string>
+    <string name="pm_bypass_signature_title">Ignorar a assinatura das aplicações</string>
+    <string name="pm_allow_downgrade_title">Permitir o downgrade das apps</string>
+	<string name="screenshot_sound_disable_title">Desativar som da captura de ecrã</string>
     <string name="hide_default">Não mostrar (padrão)</string>
     <string name="pull_down_left">Esquerda</string>
     <string name="pull_down_right">Direita</string>
@@ -321,7 +323,8 @@
     <string name="imperial_units_title">Usar unidades imperiais</string>
     <string name="hide_roaming_title">Esconder indicador de roaming</string>
     <string name="caution_mobile_costs">ATENÇÃO - Não saber que está em roaming poderá aumentar os seus custos</string>
-	<string name="hide_avatar_title">Remover avatar do utilizador (modo multi-utilizador)</string>
+    <string name="pm_header">Gestor de apps</string>
+    <string name="hide_avatar_title">Remover avatar do utilizador (modo multi-utilizador)</string>
 	<string name="clipboard_smart_actions_title">Ações rápidas na área de transferência</string>
     <string name="camera_manager_master_title">Ativar mods da lanterna (desative caso o seu dispositivo não suporte)</string>
 	<string name="sb_double_row_category">Opções da barra de estado mais espessa</string>

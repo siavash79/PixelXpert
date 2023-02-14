@@ -1,3 +1,6 @@
+**canary-217**  
+- pixel launcher: dynamically themed AOSPMods icon  
+  
 **canary-216**  
 - Fixed PackageManager mod soft-reboot for new app installs  
   

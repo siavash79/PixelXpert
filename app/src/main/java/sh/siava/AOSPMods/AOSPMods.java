@@ -22,6 +22,7 @@ import sh.siava.AOSPMods.android.PhoneWindowManager;
 import sh.siava.AOSPMods.android.ScreenOffKeys;
 import sh.siava.AOSPMods.android.ScreenRotation;
 import sh.siava.AOSPMods.android.StatusbarSize;
+import sh.siava.AOSPMods.launcher.AOSPModsIconUpdater;
 import sh.siava.AOSPMods.launcher.ClearAllButtonMod;
 import sh.siava.AOSPMods.launcher.CustomNavGestures;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
@@ -105,6 +106,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(ClearAllButtonMod.class);
 		modPacks.add(NotificationManager.class);
 		modPacks.add(PackageManager.class);
+		modPacks.add(AOSPModsIconUpdater.class);
 		//endregion
 	}
 

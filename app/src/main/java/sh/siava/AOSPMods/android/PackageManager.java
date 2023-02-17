@@ -78,8 +78,8 @@ public class PackageManager extends XposedModPack {
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 					try {
 						if(PM_AllowMismatchedSignature
-								&& callMethod(param.args[1], "getPackageName")
-								.equals(param.args[0])) {
+								&& callMethod(param.args[1], "getPackageName").equals(param.args[0])
+								&& ((String)callMethod(param.args[1], "getBaseApkPath")).startsWith("/data")) {
 							param.setResult(true);
 						}
 					}

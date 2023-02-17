@@ -1,3 +1,7 @@
+**canary-218**  
+- fixed possible app crash in certain conditions  
+- PackageManager signature check: only for user apps  
+  
 **canary-217**  
 - pixel launcher: dynamically themed AOSPMods icon  
   

@@ -8,7 +8,10 @@ import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -16,7 +19,6 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.PowerManager;
@@ -57,6 +59,7 @@ public class SystemUtils {
 	int maxFlashLevel = -1;
 
 	ArrayList<FlashlighLevelListener> flashlighLevelListeners = new ArrayList<>();
+	ArrayList<VolumeChangeListener> volumeChangeListeners = new ArrayList<>();
 
 	TorchCallback torchCallback = new TorchCallback();
 
@@ -183,6 +186,20 @@ public class SystemUtils {
 
 		instance = this;
 
+		BroadcastReceiver volChangeReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				for(VolumeChangeListener listener : volumeChangeListeners)
+				{
+					listener.onVolumeChanged();
+				}
+			}
+		};
+
+		IntentFilter volumeFilter = new IntentFilter();
+		volumeFilter.addAction("android.media.VOLUME_CHANGED_ACTION");
+		mContext.registerReceiver(volChangeReceiver, volumeFilter);
+
 		//Camera and Flash
 		if(mCameraListenerEnabled) {
 			try {
@@ -253,6 +270,11 @@ public class SystemUtils {
 	public static void registerFlashlighLevelListener(FlashlighLevelListener listener)
 	{
 		instance.flashlighLevelListeners.add(listener);
+	}
+
+	public static void registerVolumeChangeListener(VolumeChangeListener listener)
+	{
+		instance.volumeChangeListeners.add(listener);
 	}
 
 	public static void setFlashlightLevel(int level)
@@ -412,6 +434,11 @@ public class SystemUtils {
 
 	public interface FlashlighLevelListener
 	{
-		public void onLevelChanged(int level);
+		void onLevelChanged(int level);
+	}
+
+	public interface VolumeChangeListener
+	{
+		void onVolumeChanged();
 	}
 }

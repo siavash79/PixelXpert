@@ -1,3 +1,6 @@
+**canary-219**  
+- Added media volume QS tile  
+  
 **canary-218**  
 - fixed possible app crash in certain conditions  
 - PackageManager signature check: only for user apps  

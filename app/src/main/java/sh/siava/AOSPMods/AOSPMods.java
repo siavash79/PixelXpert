@@ -48,6 +48,7 @@ import sh.siava.AOSPMods.systemui.ScreenshotMuter;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.ThreeButtonNavMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
+import sh.siava.AOSPMods.systemui.VolumeTile;
 import sh.siava.AOSPMods.telecom.CallVibrator;
 import sh.siava.AOSPMods.utils.Helpers;
 import sh.siava.AOSPMods.utils.SystemUtils;
@@ -107,6 +108,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(NotificationManager.class);
 		modPacks.add(PackageManager.class);
 		modPacks.add(AOSPModsIconUpdater.class);
+		modPacks.add(VolumeTile.class);
 		//endregion
 	}
 

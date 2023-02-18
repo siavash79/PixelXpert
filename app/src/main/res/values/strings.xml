@@ -207,6 +207,7 @@
     <string name="qstile_dottedcircle" translatable="false">Dotted Circle</string>
     <string name="qstile_inkdrop" translatable="false">Ink</string>
     <string name="qstile_circle" translatable="false">Circle</string>
+    <string name="qs_volume_unmute_title">Volume tile unmute value</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configure back gesture</string>

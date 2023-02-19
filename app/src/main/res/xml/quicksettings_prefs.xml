@@ -139,7 +139,12 @@
                 android:summaryOff="@string/general_off"
                 android:summaryOn="@string/general_on"
                 android:title="@string/qs_pulldown_switch_title" />
-ccc            <ListPreference
+            <SeekBarPreference
+                android:defaultValue="25"
+                android:key="QSPulldownPercent"
+                app:title="@string/qs_pulldown_size"
+                app:updatesContinuously="true" />
+            <ListPreference
                 android:defaultValue="1"
                 android:entries="@array/qs_pulldown_side_names"
                 android:entryValues="@array/qs_pulldown_side_left"

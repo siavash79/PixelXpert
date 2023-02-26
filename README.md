@@ -42,7 +42,7 @@ This module is designed based on AOSP source code. What does it mean? it means t
 - Reboot (no bootloops are expected)
 - Open AOSPMods app and apply changes
 
-**Variants:**
+**Variants:**  
 Apart from modification on system elements, AOSPMods also includes a number of system overlays to modify fonts, system icons and colors.
 However, for those who are not interested on such overlays, we have added an Xposed-only package which, as the name says, only includes the system modification, without such system overlays.
 

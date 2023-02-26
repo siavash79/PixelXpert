@@ -42,13 +42,16 @@ This module is designed based on AOSP source code. What does it mean? it means t
 - Reboot (no bootloops are expected)
 - Open AOSPMods app and apply changes
 
-The module has 2 different types: 
-- Xposed
-- Full version
+**Variants:**
+Apart from modification on system elements, AOSPMods also includes a number of system overlays to modify fonts, system icons and colors.
+However, for those who are not interested on such overlays, we have added an Xposed-only package which, as the name says, only includes the system modification, without such system overlays.
 
-Both of them require magisk and LSposed/riru, but difference is xposed version contains only mods that use xposed methods, whereas full version also contains overlays. If you don't use fonts and themes/icons, you can use Xposed version, which is much lighter than the full version. Xposed version can also be useful for those who have compatibility issues with the overlays.
+<ins>Xposed Package:</ins> Includes only Xposed-based modification and has a rather smaller file-size. This is the one that module developers also use
+<ins>Full Package:</ins> Includes everything present in Xposed package, plus additional system overlay options.
 
-
+You can choose either package, and install the chosen one on your device  
+  
+  
 The module is also released in 2 flavors with different download and update procedures.
 - Stable release:  
 Manual Install/Update: through repository's Github release page (link below) AND through in-app updater  

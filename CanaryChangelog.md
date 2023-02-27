@@ -1,3 +1,6 @@
+**canary-220**  
+- (Experimental) Fixed flashlight mods causing crash on some roms.  
+  
 **canary-219**  
 - Added media volume QS tile  
   

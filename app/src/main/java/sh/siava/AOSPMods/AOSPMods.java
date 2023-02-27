@@ -142,7 +142,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 						return;
 					}
 
-					new SystemUtils(mContext, lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && !isSecondProcess);
+					new SystemUtils(mContext, (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) || lpparam.packageName.equals(SYSTEM_FRAMEWORK_PACKAGE)) && !isSecondProcess);
 					XPrefs.loadEverything(mContext.getPackageName());
 				}
 

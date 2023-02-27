@@ -1,3 +1,6 @@
+**canary-221**  
+- Fixed long press for torch  
+  
 **canary-220**  
 - (Experimental) Fixed flashlight mods causing crash on some roms.  
   

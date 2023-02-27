@@ -202,18 +202,21 @@ public class SystemUtils {
 
 		//Camera and Flash
 		if(mCameraListenerEnabled) {
-			try {
-				HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
-				thread.start();
-				mHandler = new Handler(thread.getLooper());
-				mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
+			new Thread(() -> {
+				try {
+					Thread.sleep(15000); //Waiting for systemUI to fully load
+					HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
+					thread.start();
+					mHandler = new Handler(thread.getLooper());
+					mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
 
-				mCameraManager.registerTorchCallback(torchCallback, mHandler);
-			} catch (Throwable t) {
-				if (BuildConfig.DEBUG) {
-					t.printStackTrace();
+					mCameraManager.registerTorchCallback(torchCallback, mHandler);
+				} catch (Throwable t) {
+					if (BuildConfig.DEBUG) {
+						t.printStackTrace();
+					}
 				}
-			}
+			}).start();
 		}
 		//Connectivity
 		try {
@@ -286,7 +289,7 @@ public class SystemUtils {
 	}
 
 	private void setFlashInternal(boolean enabled) {
-		if(!mCameraListenerEnabled) return;
+		if(mCameraManager == null) return;
 
 		try {
 			String flashID = getFlashID(mCameraManager);
@@ -318,7 +321,7 @@ public class SystemUtils {
 	}
 
 	private boolean supportsFlashLevelsInternal() {
-		if(!mCameraListenerEnabled) return false;
+		if(mCameraManager == null) return false;
 
 		try {
 			String flashID = getFlashID(mCameraManager);
@@ -337,7 +340,7 @@ public class SystemUtils {
 	}
 
 	private void setFlashInternal(boolean enabled, float pct) {
-		if(!mCameraListenerEnabled) return;
+		if(mCameraManager == null) return;
 
 		try {
 			String flashID = getFlashID(mCameraManager);

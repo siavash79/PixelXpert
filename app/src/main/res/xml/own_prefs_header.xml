@@ -7,11 +7,11 @@
         android:key="appLanguage"
         android:title="@string/language_title" />
 
-    <SwitchPreference
+    <!--SwitchPreference
         android:defaultValue="true"
         android:key="EnableCameraManager"
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
-        android:title="@string/camera_manager_master_title" />
+        android:title="@string/camera_manager_master_title" /-->
 
 </PreferenceScreen>

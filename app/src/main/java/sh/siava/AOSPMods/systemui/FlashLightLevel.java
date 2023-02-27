@@ -199,15 +199,14 @@ public class FlashLightLevel extends XposedModPack {
 
 		@Override
 		public void draw(@NonNull Canvas canvas) {
-			if(shape.getBounds().height() == 0)
-			{
-				return;
-			}
-			Bitmap bitmap = Bitmap.createBitmap(Math.round(shape.getBounds().width() * currentPct), shape.getBounds().height(), Bitmap.Config.ARGB_8888);
-			Canvas tempCanvas = new Canvas(bitmap);
-			shape.draw(tempCanvas);
+			try {
+				Bitmap bitmap = Bitmap.createBitmap(Math.round(shape.getBounds().width() * currentPct), shape.getBounds().height(), Bitmap.Config.ARGB_8888);
+				Canvas tempCanvas = new Canvas(bitmap);
+				shape.draw(tempCanvas);
 
-			canvas.drawBitmap(bitmap, 0, 0, new Paint());
+				canvas.drawBitmap(bitmap, 0, 0, new Paint());
+			}
+			catch (Throwable ignored){}
 		}
 
 		@Override

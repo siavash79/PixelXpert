@@ -63,7 +63,7 @@ public class FlashLightLevel extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		flashPercentageDrawable = new flashPercentageShape();
+		flashPercentageDrawable = new PercentageShape();
 		flashPercentageDrawable.setAlpha(64);
 
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
@@ -179,11 +179,11 @@ public class FlashLightLevel extends XposedModPack {
 		SystemUtils.setFlash(toggle ^ SystemUtils.isFlashOn(), pct);
 	}
 
-	private class flashPercentageShape extends Drawable {
+	private class PercentageShape extends Drawable {
 		final Drawable shape;
 
 		@SuppressLint({"UseCompatLoadingForDrawables", "DiscouragedApi"})
-		private flashPercentageShape() {
+		private PercentageShape() {
 			shape = mContext.getDrawable(mContext.getResources().getIdentifier("qs_tile_background_shape", "drawable", mContext.getPackageName()));
 		}
 

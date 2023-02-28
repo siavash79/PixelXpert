@@ -70,7 +70,7 @@ public class VolumeTile extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		volumePercentageDrawable = new flashPercentageShape();
+		volumePercentageDrawable = new PercentageShape();
 		volumePercentageDrawable.setAlpha(64);
 
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
@@ -220,11 +220,11 @@ public class VolumeTile extends XposedModPack {
 		return Math.round(100f * (currentVol - minVol) / (maxVol - minVol));
 	}
 
-	private class flashPercentageShape extends Drawable {
+	private class PercentageShape extends Drawable {
 		final Drawable shape;
 
 		@SuppressLint({"UseCompatLoadingForDrawables", "DiscouragedApi"})
-		private flashPercentageShape() {
+		private PercentageShape() {
 			shape = mContext.getDrawable(mContext.getResources().getIdentifier("qs_tile_background_shape", "drawable", mContext.getPackageName()));
 		}
 
@@ -240,15 +240,14 @@ public class VolumeTile extends XposedModPack {
 
 		@Override
 		public void draw(@NonNull Canvas canvas) {
-			if(shape.getBounds().height() == 0 || currentPct == 0)
-			{
-				return;
-			}
-			Bitmap bitmap = Bitmap.createBitmap(Math.round(shape.getBounds().width() * currentPct / 100f), shape.getBounds().height(), Bitmap.Config.ARGB_8888);
-			Canvas tempCanvas = new Canvas(bitmap);
-			shape.draw(tempCanvas);
+			try {
+				Bitmap bitmap = Bitmap.createBitmap(Math.round(shape.getBounds().width() * currentPct / 100f), shape.getBounds().height(), Bitmap.Config.ARGB_8888);
+				Canvas tempCanvas = new Canvas(bitmap);
+				shape.draw(tempCanvas);
 
-			canvas.drawBitmap(bitmap, 0, 0, new Paint());
+				canvas.drawBitmap(bitmap, 0, 0, new Paint());
+			}
+			catch (Throwable ignored){}
 		}
 
 		@Override

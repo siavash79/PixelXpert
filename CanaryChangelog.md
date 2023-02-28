@@ -1,3 +1,6 @@
+**canary-223**  
+- Fixed QS panel text color issues when switching dark theme  
+  
 **canary-222**  
 - Fixed hold power flashlight  
   

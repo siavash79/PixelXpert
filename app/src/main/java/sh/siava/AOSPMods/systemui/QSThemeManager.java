@@ -178,6 +178,8 @@ public class QSThemeManager extends XposedModPack {
 						@SuppressLint("DiscouragedApi")
 						@Override
 						protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+							if (!lightQSHeaderEnabled) return;
+
 							int textColor = SettingsLibUtils.getColorAttrDefaultColor(android.R.attr.textColorPrimary, mContext);
 
 							((TextView) mView.findViewById(mContext.getResources().getIdentifier("clock", "id", mContext.getPackageName()))).setTextColor(textColor);

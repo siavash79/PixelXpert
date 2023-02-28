@@ -42,7 +42,6 @@ public class SystemUtils {
 
 	@SuppressLint("StaticFieldLeak")
 	static SystemUtils instance;
-	private final boolean mCameraListenerEnabled;
 	private Handler mHandler = null;
 
 	Context mContext;
@@ -180,9 +179,8 @@ public class SystemUtils {
 		}
 	}
 
-	public SystemUtils(Context context, boolean enableCameraListener) {
+	public SystemUtils(Context context) {
 		mContext = context;
-		mCameraListenerEnabled = enableCameraListener;
 
 		instance = this;
 
@@ -200,24 +198,6 @@ public class SystemUtils {
 		volumeFilter.addAction("android.media.VOLUME_CHANGED_ACTION");
 		mContext.registerReceiver(volChangeReceiver, volumeFilter);
 
-		//Camera and Flash
-		if(mCameraListenerEnabled) {
-			new Thread(() -> {
-				try {
-					Thread.sleep(15000); //Waiting for systemUI to fully load
-					HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
-					thread.start();
-					mHandler = new Handler(thread.getLooper());
-					mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
-
-					mCameraManager.registerTorchCallback(torchCallback, mHandler);
-				} catch (Throwable t) {
-					if (BuildConfig.DEBUG) {
-						t.printStackTrace();
-					}
-				}
-			}).start();
-		}
 		//Connectivity
 		try {
 			mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -289,7 +269,10 @@ public class SystemUtils {
 	}
 
 	private void setFlashInternal(boolean enabled) {
-		if(mCameraManager == null) return;
+		if(cantInitCamera())
+		{
+			return;
+		}
 
 		try {
 			String flashID = getFlashID(mCameraManager);
@@ -314,6 +297,26 @@ public class SystemUtils {
 		}
 	}
 
+	private boolean cantInitCamera() {
+		if(mCameraManager != null) return false;
+
+		try {
+			HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
+			thread.start();
+			mHandler = new Handler(thread.getLooper());
+			mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
+
+			mCameraManager.registerTorchCallback(torchCallback, mHandler);
+			return false;
+		} catch (Throwable t) {
+			mCameraManager = null;
+			if (BuildConfig.DEBUG) {
+				t.printStackTrace();
+			}
+			return true;
+		}
+	}
+
 	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean supportsFlashLevels() {
 		if (instance == null) return false;
@@ -321,7 +324,10 @@ public class SystemUtils {
 	}
 
 	private boolean supportsFlashLevelsInternal() {
-		if(mCameraManager == null) return false;
+		if(cantInitCamera())
+		{
+			return false;
+		}
 
 		try {
 			String flashID = getFlashID(mCameraManager);
@@ -340,7 +346,10 @@ public class SystemUtils {
 	}
 
 	private void setFlashInternal(boolean enabled, float pct) {
-		if(mCameraManager == null) return;
+		if(cantInitCamera())
+		{
+			return;
+		}
 
 		try {
 			String flashID = getFlashID(mCameraManager);

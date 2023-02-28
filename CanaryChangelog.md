@@ -1,3 +1,6 @@
+**canary-222**  
+- Fixed hold power flashlight  
+  
 **canary-221**  
 - Fixed long press for torch  
   

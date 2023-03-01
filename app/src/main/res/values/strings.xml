@@ -242,6 +242,7 @@
     <!-- Package manager -->
     <string name="pm_bypass_signature_title">Bypass package signature check</string>
     <string name="pm_allow_downgrade_title">Allow app downgrade</string>
+    <string name="auto_off_five_minutes">Enabled for the next 5 minutes</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>

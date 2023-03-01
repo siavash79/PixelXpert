@@ -9,6 +9,9 @@ import static sh.siava.AOSPMods.utils.Helpers.dumpClass;
 
 import android.content.Context;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
@@ -16,6 +19,10 @@ import sh.siava.AOSPMods.XposedModPack;
 
 public class PackageManager extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_FRAMEWORK_PACKAGE;
+
+	private static final int AUTO_DISABLE_MINUTES = 5;
+	private static final String ALLOW_SIGNATURE_PREF = "PM_AllowMismatchedSignature";
+	private static final String ALLOW_DOWNGRADE_PREF = "PM_AllowDowngrade";
 
 	public static final int PERMISSION = 4;
 
@@ -26,8 +33,30 @@ public class PackageManager extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		PM_AllowMismatchedSignature = Xprefs.getBoolean("PM_AllowMismatchedSignature", false);
-		PM_AllowDowngrade = Xprefs.getBoolean("PM_AllowDowngrade", false);
+		PM_AllowMismatchedSignature = Xprefs.getBoolean(ALLOW_SIGNATURE_PREF, false);
+		PM_AllowDowngrade = Xprefs.getBoolean(ALLOW_DOWNGRADE_PREF, false);
+
+		if(PM_AllowDowngrade || PM_AllowMismatchedSignature) {
+			if (Key.length == 0) {
+				disablePMMods();
+			}
+			else if (Key[0].equals(ALLOW_SIGNATURE_PREF) || Key[0].equals(ALLOW_DOWNGRADE_PREF)){
+				new Timer().schedule(new TimerTask() {
+					@Override
+					public void run() {
+						disablePMMods();
+					}
+				},
+						AUTO_DISABLE_MINUTES * 60000);
+			}
+		}
+	}
+
+	private void disablePMMods() {
+		Xprefs.edit()
+				.putBoolean(ALLOW_SIGNATURE_PREF, false)
+				.putBoolean(ALLOW_DOWNGRADE_PREF, false)
+				.apply();
 	}
 
 	@Override

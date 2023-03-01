@@ -1,3 +1,6 @@
+**canary-224**  
+- Package Manager mods auto-disable after 5 minutes (and upon restart)  
+  
 **canary-223**  
 - Fixed QS panel text color issues when switching dark theme  
   

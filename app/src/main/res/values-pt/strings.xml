@@ -52,6 +52,7 @@
     <string name="back_longpress_kill_title">Manter pressionado o botão voltar para terminar app</string>
     <string name="pm_bypass_signature_title">Ignorar a assinatura das aplicações</string>
     <string name="pm_allow_downgrade_title">Permitir o downgrade das apps</string>
+	<string name="auto_off_five_minutes">Ativado pelos próximos 5 minutos</string>
 	<string name="screenshot_sound_disable_title">Desativar som da captura de ecrã</string>
     <string name="hide_default">Não mostrar (padrão)</string>
     <string name="pull_down_left">Esquerda</string>

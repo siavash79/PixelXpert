@@ -444,6 +444,11 @@ public class SystemUtils {
 		}).start();
 	}
 
+	public static void killSelf()
+	{
+		android.os.Process.killProcess(android.os.Process.myPid());
+	}
+
 	public interface FlashlighLevelListener
 	{
 		void onLevelChanged(int level);

@@ -44,6 +44,7 @@ import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
@@ -82,7 +83,7 @@ public class TaskbarActivator extends XposedModPack {
 						int newtaskbarMode = Integer.parseInt(taskbarModeStr);
 						if (newtaskbarMode != taskbarMode) {
 							taskbarMode = newtaskbarMode;
-							android.os.Process.killProcess(android.os.Process.myPid());
+							SystemUtils.killSelf();
 						}
 					} catch (Exception ignored) {
 					}
@@ -91,7 +92,7 @@ public class TaskbarActivator extends XposedModPack {
 				case "taskbarHeightOverride":
 				case "TaskbarRadiusOverride":
 				case "TaskbarHideAllAppsIcon":
-					android.os.Process.killProcess(android.os.Process.myPid());
+					SystemUtils.killSelf();
 					break;
 			}
 		} else {

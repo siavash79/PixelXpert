@@ -305,7 +305,7 @@ public class SettingsActivity extends AppCompatActivity implements
 				//noinspection ResultOfMethodCallIgnored
 				p.getInputStream().read(buffer);
 				String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
-				if(!Pattern.matches("^T[A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number
+				if(!Pattern.matches("^T[A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
 				{
 					new AlertDialog.Builder(getContext())
 							.setTitle(R.string.incompatible_alert_title)
@@ -771,7 +771,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
 				findPreference("BSThickTrackOverlay").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false) && showOverlays);
 				findPreference("BrightnessSlierOnBottom").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
-				findPreference("QQSBrightnessEnabled").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
+				findPreference("QQSBrightnessEnabled").setVisible(sharedPreferences.getBoolean("QQSBrightnessSupported", true) && !sharedPreferences.getBoolean("QSBrightnessDisabled", false));
 				findPreference("QSFooterText").setVisible(sharedPreferences.getBoolean("QSFooterMod", false));
 				findPreference("QSPulldownPercent").setSummary(sharedPreferences.getInt("QSPulldownPercent", 25) + "%");
 				findPreference("dualToneQSEnabled").setVisible(sharedPreferences.getBoolean("LightQSPanel", false));

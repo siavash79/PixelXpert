@@ -36,6 +36,7 @@ import com.topjohnwu.superuser.Shell;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import sh.siava.AOSPMods.utils.PrefManager;
 import sh.siava.AOSPMods.utils.SystemUtils;
@@ -303,8 +304,8 @@ public class SettingsActivity extends AppCompatActivity implements
 				byte[] buffer = new byte[p.getInputStream().available()];
 				//noinspection ResultOfMethodCallIgnored
 				p.getInputStream().read(buffer);
-				String result = new String(buffer, StandardCharsets.US_ASCII);
-				if(!result.toUpperCase().startsWith("TQ"))
+				String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
+				if(!Pattern.matches("^T[A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number
 				{
 					new AlertDialog.Builder(getContext())
 							.setTitle(R.string.incompatible_alert_title)
@@ -313,7 +314,8 @@ public class SettingsActivity extends AppCompatActivity implements
 							.show();
 				}
 			}
-			catch (Throwable ignored){}
+			catch (Throwable ignored){
+			}
 
 		}
 

@@ -1,11 +1,15 @@
 package sh.siava.AOSPMods.systemui;
 
+import static android.media.AudioManager.STREAM_MUSIC;
 import static android.service.quicksettings.Tile.STATE_ACTIVE;
+import static android.service.quicksettings.Tile.STATE_INACTIVE;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 import static sh.siava.AOSPMods.systemui.QSTileGrid.QSHapticEnabled;
 
@@ -37,21 +41,24 @@ import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
-public class FlashLightLevel extends XposedModPack {
+public class VolumeTile extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
-	private static boolean leveledFlashTile = false;
-	private float currentPct = .5f;
-	private static boolean lightQSHeaderEnabled = false;
-	Drawable flashPercentageDrawable = null;
+	private static final String TARGET_SPEC = "custom(sh.siava.AOSPMods/.utils.VolumeTileService)";
 
-	public FlashLightLevel(Context context) {
+	private int currentPct = 50;
+	private static int unMuteVolumePCT = 50;
+	private static boolean lightQSHeaderEnabled = false;
+	Drawable volumePercentageDrawable = null;
+	private Object lastState;
+
+	public VolumeTile(Context context) {
 		super(context);
 	}
 
 	@Override
 	public void updatePrefs(String... Key) {
-		leveledFlashTile = Xprefs.getBoolean("leveledFlashTile", false);
 		lightQSHeaderEnabled = Xprefs.getBoolean("LightQSPanel", false);
+		unMuteVolumePCT = Xprefs.getInt("UnMuteVolumePCT", 50);
 	}
 
 	@Override
@@ -63,8 +70,8 @@ public class FlashLightLevel extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		flashPercentageDrawable = new PercentageShape();
-		flashPercentageDrawable.setAlpha(64);
+		volumePercentageDrawable = new PercentageShape();
+		volumePercentageDrawable.setAlpha(64);
 
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
 
@@ -72,37 +79,21 @@ public class FlashLightLevel extends XposedModPack {
 			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if (!SystemUtils.supportsFlashLevels() || !leveledFlashTile) return;
-
 				Object state = param.args[0];
-				if (getObjectField(state, "spec").equals("flashlight")) {
-					SystemUtils.FlashlighLevelListener listener = (SystemUtils.FlashlighLevelListener) getAdditionalInstanceField(param.thisObject, "flashlightLevelListener");
+				if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
+					SystemUtils.VolumeChangeListener listener = (SystemUtils.VolumeChangeListener) getAdditionalInstanceField(param.thisObject, "volumeChangeListener");
 
 					if(listener == null)
 					{
 						View thisView = (View) param.thisObject;
 
-						listener = level -> {
-							Resources res = mContext.getResources();
+						listener = () -> updateVolume(thisView);
 
-							TextView label = (TextView) getObjectField(thisView, "label");
+						setAdditionalInstanceField(param.thisObject, "volumeChangeListener", listener);
 
-							String newLabel = String.format("%s - %s%%",
-									res.getText(
-											res.getIdentifier(
-													"quick_settings_flashlight_label",
-													"string", mContext.getPackageName())),
-									level
-							);
+						SystemUtils.registerVolumeChangeListener(listener);
 
-							label.setText(newLabel);
-						};
-
-						setAdditionalInstanceField(param.thisObject, "flashlightLevelListener", listener);
-
-						SystemUtils.registerFlashlighLevelListener(listener);
-
-						currentPct = Xprefs.getFloat("flashPCT", 0.5f);
+						currentPct = getCurrentVolumePercent();
 
 						thisView.setOnTouchListener(new View.OnTouchListener() {
 							float initX = 0;
@@ -112,9 +103,6 @@ public class FlashLightLevel extends XposedModPack {
 							@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
 							@Override
 							public boolean onTouch(View view, MotionEvent motionEvent) {
-								if (!SystemUtils.supportsFlashLevels() || !leveledFlashTile)
-									return false;
-
 								switch (motionEvent.getAction()) {
 									case MotionEvent.ACTION_DOWN: {
 										initX = motionEvent.getX();
@@ -127,19 +115,17 @@ public class FlashLightLevel extends XposedModPack {
 										if (deltaPct > .03f) {
 											view.getParent().requestDisallowInterceptTouchEvent(true);
 											moved = true;
-											currentPct = Math.max(0.01f, Math.min(newPct, 1));
-											handleFlashLightClick(false, currentPct);
-											SystemUtils.setFlashlightLevel(Math.round(currentPct*100f));
+											currentPct = Math.round(Math.max(Math.min(newPct, 1), 0) * 100f);
+											changeVolume(currentPct);
 										}
 										return true;
 									}
 									case MotionEvent.ACTION_UP: {
 										if (moved) {
 											moved = false;
-											Xprefs.edit().putFloat("flashPCT", currentPct).apply();
 										} else {
-											handleFlashLightClick(true, currentPct);
 											if (QSHapticEnabled) SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK);
+											toggleMute();
 										}
 										return true;
 									}
@@ -153,30 +139,85 @@ public class FlashLightLevel extends XposedModPack {
 
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) {
-				if (!leveledFlashTile || !SystemUtils.supportsFlashLevels()) return;
-
 				Object state = param.args[0];
-				if (getObjectField(state, "spec").equals("flashlight")) {
+				if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
+					lastState = state;
 					LinearLayout tileView = (LinearLayout) param.thisObject;
 
-					currentPct = Xprefs.getFloat("flashPCT", 0.5f);
+					currentPct = getCurrentVolumePercent();
 
-					SystemUtils.setFlashlightLevel(Math.round(currentPct*100f));
-
-					flashPercentageDrawable.setTint(
+					volumePercentageDrawable.setTint(
 							(SystemUtils.isDarkMode() || !lightQSHeaderEnabled) && !getObjectField(state, "state").equals(STATE_ACTIVE)
 									? Color.WHITE
 									: Color.BLACK);
 
-					LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), flashPercentageDrawable});
+					LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), volumePercentageDrawable});
 					tileView.setBackground(layerDrawable);
+					updateVolume((View) param.thisObject);
 				}
 			}
 		});
 	}
 
-	private void handleFlashLightClick(boolean toggle, float pct) {
-		SystemUtils.setFlash(toggle ^ SystemUtils.isFlashOn(), pct);
+	private void toggleMute() {
+		if(currentPct > 0)
+		{
+			changeVolume(0);
+		}
+		else
+		{
+			changeVolume(unMuteVolumePCT);
+		}
+	}
+
+	private void updateVolume(View thisView) {
+		Resources res = mContext.getResources();
+
+		currentPct = getCurrentVolumePercent();
+
+		TextView label = (TextView) getObjectField(thisView, "label");
+
+		@SuppressLint("DiscouragedApi")
+		String newLabel = String.format("%s - %s%%",
+				res.getText(
+						res.getIdentifier(
+								"media_output_dialog_accessibility_seekbar",
+								"string", mContext.getPackageName())),
+				currentPct
+		);
+
+		label.setText(newLabel);
+
+		boolean wasActive = getObjectField(thisView, "lastState").equals(STATE_ACTIVE);
+		boolean shouldBeActive = currentPct > 0;
+
+		if(wasActive != shouldBeActive)
+		{
+			setObjectField(lastState, "state", shouldBeActive ? STATE_ACTIVE :STATE_INACTIVE);
+			callMethod(thisView, "onStateChanged", lastState);
+		}
+
+	}
+
+	private void changeVolume(int currentPct) {
+		if(SystemUtils.AudioManager() == null) return;
+
+		int minVol = SystemUtils.AudioManager().getStreamMinVolume(STREAM_MUSIC);
+		int maxVol = SystemUtils.AudioManager().getStreamMaxVolume(STREAM_MUSIC);
+		int nextVolume = Math.round((maxVol - minVol) * currentPct / 100f) + minVol;
+
+		SystemUtils.AudioManager().setStreamVolume(STREAM_MUSIC, nextVolume, 0);
+
+	}
+
+	private int getCurrentVolumePercent() {
+		if(SystemUtils.AudioManager() == null) return 0;
+
+		int currentVol = SystemUtils.AudioManager().getStreamVolume(STREAM_MUSIC);
+		int minVol = SystemUtils.AudioManager().getStreamMinVolume(STREAM_MUSIC);
+		int maxVol = SystemUtils.AudioManager().getStreamMaxVolume(STREAM_MUSIC);
+
+		return Math.round(100f * (currentVol - minVol) / (maxVol - minVol));
 	}
 
 	private class PercentageShape extends Drawable {
@@ -200,7 +241,7 @@ public class FlashLightLevel extends XposedModPack {
 		@Override
 		public void draw(@NonNull Canvas canvas) {
 			try {
-				Bitmap bitmap = Bitmap.createBitmap(Math.round(shape.getBounds().width() * currentPct), shape.getBounds().height(), Bitmap.Config.ARGB_8888);
+				Bitmap bitmap = Bitmap.createBitmap(Math.round(shape.getBounds().width() * currentPct / 100f), shape.getBounds().height(), Bitmap.Config.ARGB_8888);
 				Canvas tempCanvas = new Canvas(bitmap);
 				shape.draw(tempCanvas);
 

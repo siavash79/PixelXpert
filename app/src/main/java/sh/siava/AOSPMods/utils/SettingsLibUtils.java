@@ -26,6 +26,13 @@ public class SettingsLibUtils {
 	{
 		if(UtilsClass == null) return 0;
 
-		return (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", resID, context);
+		try
+		{ //13 QPR2
+			return (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", context, resID, 0);
+		}
+		catch (Throwable ignored)
+		{ //13 QPR1
+			return (int) callStaticMethod(UtilsClass, "getColorAttrDefaultColor", resID, context);
+		}
 	}
 }

@@ -1,3 +1,66 @@
+**canary-225**  
+- Removed QQS Brightness option on QPR2 roms  
+  
+**canary-224**  
+- Package Manager mods auto-disable after 5 minutes (and upon restart)  
+  
+**canary-223**  
+- Fixed QS panel text color issues when switching dark theme  
+  
+**canary-222**  
+- Fixed hold power flashlight  
+  
+**canary-221**  
+- Fixed long press for torch  
+  
+**canary-220**  
+- (Experimental) Fixed flashlight mods causing crash on some roms.  
+  
+**canary-219**  
+- Added media volume QS tile  
+  
+**canary-218**  
+- fixed possible app crash in certain conditions  
+- PackageManager signature check: only for user apps  
+  
+**canary-217**  
+- pixel launcher: dynamically themed AOSPMods icon  
+  
+**canary-216**  
+- Fixed PackageManager mod soft-reboot for new app installs  
+  
+**canary-215**  
+- Added PackageManager mods - options to allow package downgrade/signature bypass  
+  
+**canary-214**  
+- Added Japanese translation  
+- QPR2: Fixed click/longclick actions on QS clock/date/battery  
+  
+**canary-213**  
+- Fixed double tap detection for 13 QPR1 that was broken since 212  
+  
+**canary-212**  
+- Fixed fast 2-tap on quick settings while in lockscreen sending device to sleep  
+- Fixed batterybar and network monitor still showing on lockscreen  
+- QPR2 - Fixed lockscreen camera shortcut  
+- QPR2 - Fixed QS light theme  
+- QPR2 - Fixed QS settings longpress AOSPMods launcher  
+  
+**canary-211**  
+- QPR2: fixed double statusbar (right side)  
+- QPR2: QS quick pulldown  
+- QPR2: fixed double tap to sleep  
+- QPR2: Fixed double-tap torch compatibility  
+  
+**canary-210**  
+- lockscreen shortcuts: Added Do not disturb  
+  
+**canary-209**  
+- added incompatibility message  
+  
+**canary-208**  
+- Double-tap torch: fixed flash not turning off in some situations  
+  
 **canary-207**  
 - Added option to set longpress actions for lockscreen shortcuts  
   

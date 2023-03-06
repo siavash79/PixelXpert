@@ -36,6 +36,17 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".utils.VolumeTileService"
+            android:label="Media Volume"
+            android:icon="@drawable/ic_volume"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.service.quicksettings.action.QS_TILE" />
+        </intent-filter>
+    </service>
+
         <provider
             android:name=".utils.RemotePrefProvider"
             android:authorities="sh.siava.AOSPMods"

@@ -32,6 +32,13 @@
                 android:summaryOn="@string/general_on"
                 android:title="@string/qs_haptic_switch_title" />
 
+            <SeekBarPreference
+                android:defaultValue="50"
+                android:key="UnMuteVolumePCT"
+                app:title="@string/qs_volume_unmute_title"
+                app:updatesContinuously="true" />
+
+
             <SwitchPreference
                 android:defaultValue="false"
                 android:key="leveledFlashTile"

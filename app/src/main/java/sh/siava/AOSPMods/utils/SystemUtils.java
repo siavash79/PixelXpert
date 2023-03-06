@@ -8,7 +8,10 @@ import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -16,7 +19,6 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.PowerManager;
@@ -27,6 +29,8 @@ import android.telephony.TelephonyManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.topjohnwu.superuser.Shell;
 
 import org.jetbrains.annotations.Contract;
 
@@ -40,7 +44,6 @@ public class SystemUtils {
 
 	@SuppressLint("StaticFieldLeak")
 	static SystemUtils instance;
-	private final boolean mCameraListenerEnabled;
 	private Handler mHandler = null;
 
 	Context mContext;
@@ -57,6 +60,7 @@ public class SystemUtils {
 	int maxFlashLevel = -1;
 
 	ArrayList<FlashlighLevelListener> flashlighLevelListeners = new ArrayList<>();
+	ArrayList<VolumeChangeListener> volumeChangeListeners = new ArrayList<>();
 
 	TorchCallback torchCallback = new TorchCallback();
 
@@ -177,27 +181,25 @@ public class SystemUtils {
 		}
 	}
 
-	public SystemUtils(Context context, boolean enableCameraListener) {
+	public SystemUtils(Context context) {
 		mContext = context;
-		mCameraListenerEnabled = enableCameraListener;
 
 		instance = this;
 
-		//Camera and Flash
-		if(mCameraListenerEnabled) {
-			try {
-				HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
-				thread.start();
-				mHandler = new Handler(thread.getLooper());
-				mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
-
-				mCameraManager.registerTorchCallback(torchCallback, mHandler);
-			} catch (Throwable t) {
-				if (BuildConfig.DEBUG) {
-					t.printStackTrace();
+		BroadcastReceiver volChangeReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				for(VolumeChangeListener listener : volumeChangeListeners)
+				{
+					listener.onVolumeChanged();
 				}
 			}
-		}
+		};
+
+		IntentFilter volumeFilter = new IntentFilter();
+		volumeFilter.addAction("android.media.VOLUME_CHANGED_ACTION");
+		mContext.registerReceiver(volChangeReceiver, volumeFilter);
+
 		//Connectivity
 		try {
 			mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -255,6 +257,11 @@ public class SystemUtils {
 		instance.flashlighLevelListeners.add(listener);
 	}
 
+	public static void registerVolumeChangeListener(VolumeChangeListener listener)
+	{
+		instance.volumeChangeListeners.add(listener);
+	}
+
 	public static void setFlashlightLevel(int level)
 	{
 		for(FlashlighLevelListener listener : instance.flashlighLevelListeners)
@@ -264,7 +271,10 @@ public class SystemUtils {
 	}
 
 	private void setFlashInternal(boolean enabled) {
-		if(!mCameraListenerEnabled) return;
+		if(cantInitCamera())
+		{
+			return;
+		}
 
 		try {
 			String flashID = getFlashID(mCameraManager);
@@ -289,6 +299,26 @@ public class SystemUtils {
 		}
 	}
 
+	private boolean cantInitCamera() {
+		if(mCameraManager != null) return false;
+
+		try {
+			HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
+			thread.start();
+			mHandler = new Handler(thread.getLooper());
+			mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
+
+			mCameraManager.registerTorchCallback(torchCallback, mHandler);
+			return false;
+		} catch (Throwable t) {
+			mCameraManager = null;
+			if (BuildConfig.DEBUG) {
+				t.printStackTrace();
+			}
+			return true;
+		}
+	}
+
 	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean supportsFlashLevels() {
 		if (instance == null) return false;
@@ -296,7 +326,10 @@ public class SystemUtils {
 	}
 
 	private boolean supportsFlashLevelsInternal() {
-		if(!mCameraListenerEnabled) return false;
+		if(cantInitCamera())
+		{
+			return false;
+		}
 
 		try {
 			String flashID = getFlashID(mCameraManager);
@@ -315,7 +348,10 @@ public class SystemUtils {
 	}
 
 	private void setFlashInternal(boolean enabled, float pct) {
-		if(!mCameraListenerEnabled) return;
+		if(cantInitCamera())
+		{
+			return;
+		}
 
 		try {
 			String flashID = getFlashID(mCameraManager);
@@ -410,8 +446,22 @@ public class SystemUtils {
 		}).start();
 	}
 
+	public static void killSelf()
+	{
+		android.os.Process.killProcess(android.os.Process.myPid());
+	}
+	public static void killForegroundApp()
+	{
+		Shell.cmd("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
+	}
+
 	public interface FlashlighLevelListener
 	{
-		public void onLevelChanged(int level);
+		void onLevelChanged(int level);
+	}
+
+	public interface VolumeChangeListener
+	{
+		void onVolumeChanged();
 	}
 }

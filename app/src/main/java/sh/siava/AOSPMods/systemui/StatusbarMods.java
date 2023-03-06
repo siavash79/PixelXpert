@@ -572,8 +572,10 @@ public class StatusbarMods extends XposedModPack {
 			}
 		});
 
+		final ClickListener clickListener = new ClickListener();
+
 		//marking clock instances for recognition and setting click actions on some icons
-		findAndHookMethod(QuickStatusBarHeaderClass,
+		hookAllMethods(QuickStatusBarHeaderClass,
 				"onFinishInflate", new XC_MethodHook() {
 					@SuppressLint("DiscouragedApi")
 					@Override
@@ -588,20 +590,37 @@ public class StatusbarMods extends XposedModPack {
 						//Clickable icons
 						Object mBatteryRemainingIcon = getObjectField(param.thisObject, "mBatteryRemainingIcon");
 						Object mDateView = getObjectField(param.thisObject, "mDateView");
-						Object mClockView = getObjectField(param.thisObject, "mClockView");
-
-						ClickListener clickListener = new ClickListener(param.thisObject);
+						Object mClockViewQS = getObjectField(param.thisObject, "mClockView");
 
 						try {
 							callMethod(mBatteryRemainingIcon, "setOnClickListener", clickListener);
-							callMethod(mClockView, "setOnClickListener", clickListener);
-							callMethod(mClockView, "setOnLongClickListener", clickListener);
+							callMethod(mClockViewQS, "setOnClickListener", clickListener);
+							callMethod(mClockViewQS, "setOnLongClickListener", clickListener);
 							callMethod(mDateView, "setOnClickListener", clickListener);
 							callMethod(mDateView, "setOnLongClickListener", clickListener);
-						} catch (Exception ignored) {
-						}
+						} catch (Exception ignored) {}
 					}
 				});
+
+		try
+		{
+			Class<?> LargeScreenShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpparam.classLoader);
+
+			hookAllMethods(LargeScreenShadeHeaderControllerClass, "onInit", new XC_MethodHook() {
+				@SuppressLint("DiscouragedApi")
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					View mView = (View) getObjectField(param.thisObject, "mView");
+
+					mView.findViewById(mContext.getResources().getIdentifier("clock", "id", mContext.getPackageName())).setOnClickListener(clickListener);
+					mView.findViewById(mContext.getResources().getIdentifier("clock", "id", mContext.getPackageName())).setOnLongClickListener(clickListener);
+					mView.findViewById(mContext.getResources().getIdentifier("date", "id", mContext.getPackageName())).setOnClickListener(clickListener);
+					mView.findViewById(mContext.getResources().getIdentifier("batteryRemainingIcon", "id", mContext.getPackageName())).setOnClickListener(clickListener);
+				}
+			});
+
+		}
+		catch (Throwable ignored){}
 
 		//show/hide vibration icon from system icons
 		hookAllConstructors(KeyguardStatusBarViewControllerClass, new XC_MethodHook() {
@@ -622,31 +641,11 @@ public class StatusbarMods extends XposedModPack {
 			}
 		});
 
-		//understanding when to hide the battery bar and network traffic: when clock goes to hiding
-		hookAllMethods(CollapsedStatusBarFragmentClass,
-				"hideClock", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						for (ClockVisibilityCallback c : clockVisibilityCallbacks) {
-							try {
-								c.OnVisibilityChanged(false);
-							} catch (Exception ignored) {
-							}
-						}
-					}
-				});
-
 		//restoring batterybar and network traffic: when clock goes back to life
 		hookAllMethods(CollapsedStatusBarFragmentClass,
 				"animateShow", new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						Object mClockView;
-						try {
-							mClockView = getObjectField(param.thisObject, "mClockView");
-						} catch (Throwable ignored) { //PE+
-							mClockView = callMethod(getObjectField(param.thisObject, "mClockController"), "getClock");
-						}
 						if (param.args[0] != mClockView) return;
 						for (ClockVisibilityCallback c : clockVisibilityCallbacks) {
 							try {
@@ -654,6 +653,21 @@ public class StatusbarMods extends XposedModPack {
 							} catch (Exception ignored) {
 							}
 						}
+					}
+				});
+
+		hookAllMethods(CollapsedStatusBarFragmentClass,
+				"animateHiddenState", new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						if (param.args[0] != mClockView) return;
+						for (ClockVisibilityCallback c : clockVisibilityCallbacks) {
+							try {
+								c.OnVisibilityChanged(false);
+							} catch (Exception ignored) {
+							}
+						}
+
 					}
 				});
 
@@ -675,9 +689,7 @@ public class StatusbarMods extends XposedModPack {
 
 						mStatusBar = (ViewGroup) getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
 
-						mStatusBar.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
-							setHeights();
-						});
+						mStatusBar.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setHeights());
 
 						mStatusbarStartSide = mStatusBar.findViewById(mContext.getResources().getIdentifier("status_bar_start_side_except_heads_up", "id", mContext.getPackageName()));
 
@@ -920,8 +932,7 @@ public class StatusbarMods extends XposedModPack {
 					mStatusBar.post(() -> {
 						try {
 							callMethod(mStatusBarIconController, "setIcon", "volte", volteStatusbarIcon);
-						} catch (Exception ignored) {
-						}
+						} catch (Exception ignored) {}
 					});
 					break;
 				case VOLTE_NOT_AVAILABLE:
@@ -936,7 +947,7 @@ public class StatusbarMods extends XposedModPack {
 		mStatusBar.post(() -> {
 			try {
 				callMethod(mStatusBarIconController, "removeIcon", "volte");
-			} catch (Exception ignored) {
+			} catch (Throwable ignored) {
 			}
 		});
 	}
@@ -1005,43 +1016,39 @@ public class StatusbarMods extends XposedModPack {
 
 	//region icon tap related
 	class ClickListener implements View.OnClickListener, View.OnLongClickListener {
-		Object parent;
-
-		public ClickListener(Object parent) {
-			this.parent = parent;
-		}
+		public ClickListener() {}
 
 		@Override
 		public void onClick(View v) {
-			Object mBatteryRemainingIcon = getObjectField(parent, "mBatteryRemainingIcon");
-			Object mDateView = getObjectField(parent, "mDateView");
-			Object mClockView = getObjectField(parent, "mClockView");
-			boolean mExpanded = (boolean) getObjectField(parent, "mExpanded");
+			String name = mContext.getResources().getResourceName(v.getId());
 
-			if (v.equals(mBatteryRemainingIcon)) {
-				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(Intent.ACTION_POWER_USAGE_SUMMARY), 0);
-			} else if (mExpanded && v.equals(mClockView)) {
+			if(name.endsWith("clock"))
+			{
 				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(AlarmClock.ACTION_SHOW_ALARMS), 0);
-			} else if (v == mDateView || (v == mClockView && !mExpanded)) {
+			}
+			else if (name.endsWith("date"))
+			{
 				Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
 				builder.appendPath("time");
 				builder.appendPath(Long.toString(java.lang.System.currentTimeMillis()));
 				Intent todayIntent = new Intent(Intent.ACTION_VIEW, builder.build());
 				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", todayIntent, 0);
 			}
+			else if (name.endsWith("batteryRemainingIcon")) {
+				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(Intent.ACTION_POWER_USAGE_SUMMARY), 0);
+			}
 		}
 
 		@Override
 		public boolean onLongClick(View v) {
-			Object mDateView = getObjectField(parent, "mDateView");
-			Object mClockView = getObjectField(parent, "mClockView");
+			String name = mContext.getResources().getResourceName(v.getId());
 
-			if (v == mClockView || v == mDateView) {
+			if(name.endsWith("clock") || name.endsWith("date"))
+			{
 				Intent mIntent = new Intent(Intent.ACTION_MAIN);
 				mIntent.setClassName("com.android.settings",
 						"com.android.settings.Settings$DateTimeSettingsActivity");
 				callMethod(mActivityStarter, "startActivity", mIntent, true /* dismissShade */);
-//                mVibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
 				return true;
 			}
 			return false;

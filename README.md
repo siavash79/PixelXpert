@@ -42,7 +42,17 @@ This module is designed based on AOSP source code. What does it mean? it means t
 - Reboot (no bootloops are expected)
 - Open AOSPMods app and apply changes
 
-The module is released in 2 flavors, with different download and update procedures:
+**Variants:**  
+Apart from modification on system elements, AOSPMods also includes a number of system overlays to modify fonts, system icons and colors.
+However, for those who are not interested on such overlays, we have added an Xposed-only package which, as the name says, only includes the system modification, without such system overlays.
+
+<ins>Xposed Package:</ins> Includes only Xposed-based modification and has a rather smaller file-size. This is the one that module developers also use
+<ins>Full Package:</ins> Includes everything present in Xposed package, plus additional system overlay options.
+
+You can choose either package, and install the chosen one on your device  
+  
+  
+The module is also released in 2 flavors with different download and update procedures.
 - Stable release:  
 Manual Install/Update: through repository's Github release page (link below) AND through in-app updater  
 Automated updates: through magisk manager, or through in-app updater  
@@ -81,6 +91,8 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @trinhloivn Vietnamese
 - @xxz3 Italian
 - zz842@Telegram Hebrew
+- @Katsuyuki-Karasawa Japanese
+- @potatosalad775 Korean
 
 **Graphic design:**  
 - JstormZx@Telegram (Icon and Banner) 

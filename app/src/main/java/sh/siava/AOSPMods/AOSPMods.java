@@ -17,10 +17,12 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.allApps.OverScrollDisabler;
 import sh.siava.AOSPMods.android.BrightnessRange;
+import sh.siava.AOSPMods.android.PackageManager;
 import sh.siava.AOSPMods.android.PhoneWindowManager;
 import sh.siava.AOSPMods.android.ScreenOffKeys;
 import sh.siava.AOSPMods.android.ScreenRotation;
 import sh.siava.AOSPMods.android.StatusbarSize;
+import sh.siava.AOSPMods.launcher.AOSPModsIconUpdater;
 import sh.siava.AOSPMods.launcher.ClearAllButtonMod;
 import sh.siava.AOSPMods.launcher.CustomNavGestures;
 import sh.siava.AOSPMods.launcher.TaskbarActivator;
@@ -46,6 +48,7 @@ import sh.siava.AOSPMods.systemui.ScreenshotMuter;
 import sh.siava.AOSPMods.systemui.StatusbarMods;
 import sh.siava.AOSPMods.systemui.ThreeButtonNavMods;
 import sh.siava.AOSPMods.systemui.UDFPSManager;
+import sh.siava.AOSPMods.systemui.VolumeTile;
 import sh.siava.AOSPMods.telecom.CallVibrator;
 import sh.siava.AOSPMods.utils.Helpers;
 import sh.siava.AOSPMods.utils.SystemUtils;
@@ -103,6 +106,9 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(BrightnessRange.class);
 		modPacks.add(ClearAllButtonMod.class);
 		modPacks.add(NotificationManager.class);
+		modPacks.add(PackageManager.class);
+		modPacks.add(AOSPModsIconUpdater.class);
+		modPacks.add(VolumeTile.class);
 		//endregion
 	}
 
@@ -116,7 +122,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 			if (A33R18Example == null) return;
 		}
 
-		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && BuildConfig.DEBUG) {
+		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && BuildConfig.DEBUG && false) {
 			log("------------");
 			Helpers.dumpClass("com.android.systemui.statusbar.notification.collection.NotifCollection", lpparam.classLoader);
 			log("------------");
@@ -136,7 +142,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 						return;
 					}
 
-					new SystemUtils(mContext, Xprefs.getBoolean("EnableCameraManager", true));
+					new SystemUtils(mContext);
 					XPrefs.loadEverything(mContext.getPackageName());
 				}
 

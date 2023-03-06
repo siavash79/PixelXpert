@@ -61,6 +61,7 @@
 
     <string name="lte_4g_icon_title">نماد LTE /4G</string>
     <string name="combined_signal_icon_title">نمادهای سیگنال ترکیبی</string>
+    <string name="caution_mobile_costs">توجه: عدم اطلاع از اینکه در حالت رومینگ هستید ممکن است هزینه موبایل سنگینی برای شما داشته باشد</string>
     <string name="volte_icon_title">نمایش نماد VoLTE</string>
     <string name="sb_vibration_switch_title">نمایش نمادهای لرزش/بی صدا</string>
     <string name="sbc_position_title">موقعیت ساعت</string>
@@ -174,6 +175,7 @@
     <string name="disable_overscroll">غیر فعال کردن حالت الاستیک اسکرول صفحه</string>
 
 
+    <string name="milliseconds">هزارم ثانیه</string>
     <string name="call_category">تماس های تلفنی</string>
     <string name="vibrate_on_call_active_title">لرزش در زمان پاسخ تماس خروجی</string>
     <string name="vibrate_on_call_drop_title">لرزش در زمان قطع تماس</string>
@@ -289,10 +291,14 @@
     <string name="so_taptaptorch_title">استفاده از امکان کنترل چراغ قوه با دوضربه در صفحه قفل</string>
     <string name="overscroll_on_summary">مهم: هر برنامه که این امکان مورد نیاز است باید در LSposed اضافه شود</string>
     <string name="minutes_word">دقیقه</string>
+    <string name="incompatible_alert_title">ناسازگار</string>
+    <string name="incompatible_alert_body">این برنامه برای سیستم عامل فعلی شما ساخته نشده است. ممکن است برخی (یا حتی همه) امکانات این برنامه به طور صحیح کار نکند.\\n\\nلطفاً گزارش اشکال نفرمایید</string>
+    <string name="incompatible_alert_ok_btn">فهمیدم</string>
     <string name="menu_settings_title">ذخیره/بازیابی</string>
     <string name="menu_restartSysUI">راه اندازی مجدد SystemUI</string>
     <string name="allow_all_screen_rotations">باز کردن چرخش صفحه به تمام جهات</string>
-    <string name="toggle_dark_apply">(برای اعمال، یک بار رنگ صفحه را تیره/روشن کنید)</string>
+	<string name="camera_manager_master_title">دستکاری چراغ قوه فعال باشد (اگر با سیستم عامل شما سازگار نیست خاموش کنید)</string>
+	<string name="toggle_dark_apply">(برای اعمال، یک بار رنگ صفحه را تیره/روشن کنید)</string>
     <string name="qs_leveled_flashlight_summary">در صورتی که سخت افزار گوشی پشتیبانی کند</string>
     <string name="qs_leveled_flashlight_title">تنظیم نور چراغ قوه از روی دکمه</string>
     <string name="more_area">مساحت بیشتر</string>

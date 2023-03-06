@@ -1,6 +1,9 @@
 package sh.siava.AOSPMods.utils;
 
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
@@ -27,6 +30,8 @@ public class NotificationIconContainerOverride {
 	public static void calculateIconXTranslations(XC_MethodHook.MethodHookParam param) { //A13
 		ViewGroup thisObject = (ViewGroup) param.thisObject;
 
+		String xTranslationField = null;
+
 		Object mIconStates = getObjectField(thisObject, "mIconStates");
 
 		float translationX = (float) callMethod(thisObject, "getActualPaddingStart");
@@ -40,11 +45,17 @@ public class NotificationIconContainerOverride {
 		for (int i = 0; i < childCount; i++) {
 			View view = thisObject.getChildAt(i);
 			Object iconState = callMethod(mIconStates, "get", view);
+
+			if(xTranslationField == null)  //A13 QPR1 - QPR2 compatibility check
+			{
+				xTranslationField = (findFieldIfExists(iconState.getClass().getSuperclass(), "mXTranslation") == null) ? "xTranslation" : "mXTranslation";
+			}
+
 			if (getFloatField(iconState, "iconAppearAmount") == 1.0f) {
-				// We only modify the xTranslation if it's fully inside of the container
+				// We only modify the mXTranslation if it's fully inside of the container
 				// since during the transition to the shelf, the translations are controlled
 				// from the outside
-				setObjectField(iconState, "xTranslation", translationX);
+				setObjectField(iconState, xTranslationField, translationX);
 			}
 			if (getObjectField(thisObject, "mFirstVisibleIconState") == null) {
 				setObjectField(thisObject, "mFirstVisibleIconState", iconState);
@@ -72,22 +83,24 @@ public class NotificationIconContainerOverride {
 			}
 			translationX += getFloatField(iconState, "iconAppearAmount") * view.getWidth() * drawingScale;
 		}
-		setObjectField(thisObject, "mNumDots", 0);
+		int mNumDots = 0;
+//		setObjectField(thisObject, "mNumDots", 0);
 		if (firstOverflowIndex != -1) {
 			translationX = getFloatField(thisObject, "mVisualOverflowStart");
 			for (int i = firstOverflowIndex; i < childCount; i++) {
 				View view = thisObject.getChildAt(i);
 				Object iconState = callMethod(mIconStates, "get", view);
 				int dotWidth = getIntField(thisObject, "mStaticDotDiameter") + getIntField(thisObject, "mDotPadding");
-				setObjectField(iconState, "xTranslation", translationX);
-				if (getIntField(thisObject, "mNumDots") < MAX_DOTS) {
-					if (getIntField(thisObject, "mNumDots") == 0 && getFloatField(iconState, "iconAppearAmount") < 0.8f) {
+				setObjectField(iconState, xTranslationField, translationX);
+				if (mNumDots < MAX_DOTS) {
+					if (mNumDots == 0 && getFloatField(iconState, "iconAppearAmount") < 0.8f) {
 						setObjectField(iconState, "visibleState", STATE_ICON);
 					} else {
 						setObjectField(iconState, "visibleState", STATE_DOT);
-						setObjectField(thisObject, "mNumDots", getIntField(thisObject, "mNumDots") + 1);
+						mNumDots++;
+						//setObjectField(thisObject, "mNumDots", getIntField(thisObject, "mNumDots") + 1);
 					}
-					translationX += (getIntField(thisObject, "mNumDots") == MAX_DOTS ? MAX_DOTS * dotWidth : dotWidth)
+					translationX += (mNumDots == MAX_DOTS ? MAX_DOTS * dotWidth : dotWidth)
 							* getFloatField(iconState, "iconAppearAmount");
 					try {
 						setObjectField(thisObject, "mLastVisibleIconState", iconState);
@@ -110,7 +123,7 @@ public class NotificationIconContainerOverride {
 			for (int i = 0; i < childCount; i++) {
 				View view = thisObject.getChildAt(i);
 				Object iconState = callMethod(mIconStates, "get", view);
-				setObjectField(iconState, "xTranslation", thisObject.getWidth() - getIntField(iconState, "xTranslation") - view.getWidth());
+				setObjectField(iconState, xTranslationField, thisObject.getWidth() - getIntField(iconState, xTranslationField) - view.getWidth());
 			}
 		}
 		Object mIsolatedIcon = getObjectField(thisObject, "mIsolatedIcon");
@@ -120,7 +133,7 @@ public class NotificationIconContainerOverride {
 				// Most of the time the icon isn't yet added when this is called but only happening
 				// later
 				setObjectField(iconState, "visibleState", STATE_ICON);
-				setObjectField(iconState, "xTranslation", getIntField(getObjectField(thisObject, "mIsolatedIconLocation"), "left") - ((int[]) getObjectField(thisObject, "mAbsolutePosition"))[0]
+				setObjectField(iconState, xTranslationField, getIntField(getObjectField(thisObject, "mIsolatedIconLocation"), "left") - ((int[]) getObjectField(thisObject, "mAbsolutePosition"))[0]
 						- (1 - getFloatField(getObjectField(thisObject, "mIsolatedIcon"), "mIconScale")) * (int) callMethod(mIsolatedIcon, "getWidth") / 2.0f);
 			}
 		}

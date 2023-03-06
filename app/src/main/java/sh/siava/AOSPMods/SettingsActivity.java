@@ -33,8 +33,10 @@ import androidx.preference.SeekBarPreference;
 import com.google.android.material.slider.LabelFormatter;
 import com.topjohnwu.superuser.Shell;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import sh.siava.AOSPMods.utils.PrefManager;
 import sh.siava.AOSPMods.utils.SystemUtils;
@@ -295,6 +297,26 @@ public class SettingsActivity extends AppCompatActivity implements
 			setPreferencesFromResource(R.xml.header_preferences, rootKey);
 
 			updateVisibility();
+
+			try {
+				Process p = Runtime.getRuntime().exec("getprop ro.build.id");
+				p.waitFor();
+				byte[] buffer = new byte[p.getInputStream().available()];
+				//noinspection ResultOfMethodCallIgnored
+				p.getInputStream().read(buffer);
+				String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
+				if(!Pattern.matches("^T[A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
+				{
+					new AlertDialog.Builder(getContext())
+							.setTitle(R.string.incompatible_alert_title)
+							.setMessage(R.string.incompatible_alert_body)
+							.setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss())
+							.show();
+				}
+			}
+			catch (Throwable ignored){
+			}
+
 		}
 
 		private void updateVisibility() {
@@ -593,6 +615,22 @@ public class SettingsActivity extends AppCompatActivity implements
 		}
 	}
 
+	public static class PackageManagerFragment extends PreferenceFragmentCompat {
+		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
+
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+			getPreferenceManager().setStorageDeviceProtected();
+			setPreferencesFromResource(R.xml.packagemanger_prefs, rootKey);
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			prefs.registerOnSharedPreferenceChangeListener(listener);
+			updateVisibility(prefs);
+
+		}
+
+		private void updateVisibility(SharedPreferences prefs) {}
+	}
+
 	@SuppressWarnings("ConstantConditions")
 	public static class SBCFragment extends PreferenceFragmentCompat {
 
@@ -733,7 +771,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
 				findPreference("BSThickTrackOverlay").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false) && showOverlays);
 				findPreference("BrightnessSlierOnBottom").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
-				findPreference("QQSBrightnessEnabled").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
+				findPreference("QQSBrightnessEnabled").setVisible(sharedPreferences.getBoolean("QQSBrightnessSupported", true) && !sharedPreferences.getBoolean("QSBrightnessDisabled", false));
 				findPreference("QSFooterText").setVisible(sharedPreferences.getBoolean("QSFooterMod", false));
 				findPreference("QSPulldownPercent").setSummary(sharedPreferences.getInt("QSPulldownPercent", 25) + "%");
 				findPreference("dualToneQSEnabled").setVisible(sharedPreferences.getBoolean("LightQSPanel", false));

@@ -23,6 +23,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
@@ -253,7 +254,7 @@ public class CustomNavGestures extends XposedModPack {
 
 	private void killForeground() {
 		Toast.makeText(mContext, "App Killed", Toast.LENGTH_SHORT).show();
-		Shell.cmd("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
+		SystemUtils.killForegroundApp();
 	}
 
 	private void goBack() {

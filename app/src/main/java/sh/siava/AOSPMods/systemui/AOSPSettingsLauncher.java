@@ -1,10 +1,12 @@
 package sh.siava.AOSPMods.systemui;
 
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -40,26 +42,35 @@ public class AOSPSettingsLauncher extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		Class<?> FooterActionsControllerClass = findClass("com.android.systemui.qs.FooterActionsController", lpparam.classLoader);
+		Class<?> QSFragmentClass = findClass("com.android.systemui.qs.QSFragment", lpparam.classLoader);
+		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpparam.classLoader);
 
 		View.OnLongClickListener listener = v -> {
 			try {
-				Intent launchInent = mContext.getPackageManager().getLaunchIntentForPackage(BuildConfig.APPLICATION_ID);
-				callMethod(activityStarter, "startActivity", launchInent, true, null);
+				Intent launchIntent = mContext.getPackageManager().getLaunchIntentForPackage(BuildConfig.APPLICATION_ID);
+				callMethod(activityStarter, "startActivity", launchIntent, true, null);
 			} catch (Exception ignored) {
 			}
 			return true;
 		};
 
-		hookAllMethods(FooterActionsControllerClass,
-				"onViewAttached", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						Object settingsButton = getObjectField(param.thisObject, "settingsButtonContainer");
+		hookAllConstructors(FooterActionsInteractorImplClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				activityStarter = getObjectField(param.thisObject, "activityStarter");
+			}
+		});
 
-						activityStarter = getObjectField(param.thisObject, "activityStarter");
-						callMethod(settingsButton, "setOnLongClickListener", listener);
-					}
-				});
+		hookAllMethods(QSFragmentClass, "onViewCreated", new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				View QSView = (View) param.args[0];
+
+				QSView.findViewById(mContext.getResources()
+						.getIdentifier("settings_button_container", "id", mContext.getPackageName()))
+						.setOnLongClickListener(listener);
+			}
+		});
 	}
 }

@@ -22,6 +22,7 @@
     <string name="misc_header">Miscellaneous</string>
     <string name="qs_panel_category_title">Quick Settings Panel</string>
     <string name="theme_customization_category">Theming</string>
+    <string name="pm_header">Package Manager</string>
 
     <!--Lock screen related-->
     <string name="hide_avatar_title">Remove user avatar (multi user mode)</string>
@@ -48,6 +49,7 @@
     <string name="assistant_shortcut">Assistant</string>
     <string name="torch_shortcut">Flashlight</string>
     <string name="tv_remote_shortcut">TV Remote</string>
+    <string name="dnd_shortcut">Do Not Disturb</string>
     <string name="album_art_category">Media options</string>
     <string name="album_art_title">Enable album art when playing media</string>
     <string name="album_art_blur_text">Blur value</string>
@@ -205,6 +207,7 @@
     <string name="qstile_dottedcircle" translatable="false">Dotted Circle</string>
     <string name="qstile_inkdrop" translatable="false">Ink</string>
     <string name="qstile_circle" translatable="false">Circle</string>
+    <string name="qs_volume_unmute_title">Volume tile unmute value</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configure back gesture</string>
@@ -235,6 +238,11 @@
     <string name="taskbar_force_enable_title">Force Enabled</string>
     <string name="taskbar_force_disable_title">Force Disabled</string>
     <string name="taskbar_hide_allapps_title">Hide all apps icon</string>
+
+    <!-- Package manager -->
+    <string name="pm_bypass_signature_title">Bypass package signature check</string>
+    <string name="pm_allow_downgrade_title">Allow app downgrade</string>
+    <string name="auto_off_five_minutes">Enabled for the next 5 minutes</string>
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
@@ -335,6 +343,11 @@
     <string name="network_interval_custom_text_title">Refresh interval</string>
     <string name="minutes_word">minute(s)</string>
 
+    <!-- Incompatibility Alert -->
+    <string name="incompatible_alert_title">Incompatible</string>
+    <string name="incompatible_alert_body">Your current ROM is not the direct target of this module. You may continue to use it, but some (or all) options might not work as intended\n\nPlease do not report bugs</string>
+    <string name="incompatible_alert_ok_btn">I understand</string>
+    
     <!-- Menu Items -->
     <string name="menu_settings_title">Import/Export</string>
     <string name="menu_reset_defaults">Reset all settings</string>

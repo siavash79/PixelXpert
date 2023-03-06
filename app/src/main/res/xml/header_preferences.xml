@@ -34,7 +34,13 @@
         app:fragment="sh.siava.AOSPMods.SettingsActivity$MiscFragment"
         app:key="misc_header"
         app:title="@string/misc_header"
-        app:icon="@drawable/ic_settings_miscellaneous" />
+        app:icon="@drawable/ic_misc" />
+
+    <Preference
+        app:fragment="sh.siava.AOSPMods.SettingsActivity$PackageManagerFragment"
+        app:key="pm_header"
+        app:title="@string/pm_header"
+        app:icon="@drawable/ic_package_manager" />
 
     <Preference
         app:fragment="sh.siava.AOSPMods.SettingsActivity$OwnPrefsFragment"

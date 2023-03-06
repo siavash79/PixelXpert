@@ -44,6 +44,7 @@ public class BrightnessSlider extends XposedModPack {
 	private static boolean BrightnessHookEnabled = true;
 	private static boolean QQSBrightnessEnabled = false;
 	private static boolean QSBrightnessDisabled = false;
+	private static boolean QQSBrightnessSupported = true;
 	private Object QQSPC;
 	private static final String QS_SHOW_BRIGHTNESS = "qs_show_brightness";
 	private Object mBrightnessMirrorController;
@@ -67,8 +68,7 @@ public class BrightnessSlider extends XposedModPack {
 		if (collectedFields.size() == 3) {
 			try {
 				makeQQSBrightness(BrightnessMirrorHandlerClass);
-			} catch (Throwable ignored) {
-			}
+			} catch (Throwable ignored) {}
 		}
 	}
 
@@ -79,6 +79,7 @@ public class BrightnessSlider extends XposedModPack {
 		QQSBrightnessEnabled = Xprefs.getBoolean("QQSBrightnessEnabled", false);
 		QSBrightnessDisabled = Xprefs.getBoolean("QSBrightnessDisabled", false);
 		BrightnessSliderOnBottom = Xprefs.getBoolean("BrightnessSlierOnBottom", false);
+		QQSBrightnessSupported = Xprefs.getBoolean("QQSBrightnessSupported", true);
 
 		if (QSBrightnessDisabled) QQSBrightnessEnabled = false; //if there's no slider, then .......
 
@@ -290,12 +291,26 @@ public class BrightnessSlider extends XposedModPack {
 		QQSBrightnessSliderView = (View) getObjectField(mBrightnessSliderController, "mView");
 
 		try {
-			mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mBroadcastDispatcher"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
-			//mBrightnessController = callMethod(brightnessControllerFactory, "create", mBrightnessSliderController);
-		} catch (Throwable t) //some custom roms added icon into signature. like ArrowOS
+			try {
+				mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mBroadcastDispatcher"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
+				//mBrightnessController = callMethod(brightnessControllerFactory, "create", mBrightnessSliderController);
+			} catch (Throwable t) //some custom roms added icon into signature. like ArrowOS
+			{
+				ImageView icon = (ImageView) callMethod(mBrightnessSliderController, "getIconView");
+				mBrightnessController = callMethod(brightnessControllerFactory, "create", icon, mBrightnessSliderController);
+			}
+
+			if(!QQSBrightnessSupported) {
+				Xprefs.edit().putBoolean("QQSBrightnessSupported", true).apply();
+			}
+		}
+		catch (Throwable ignored)
 		{
-			ImageView icon = (ImageView) callMethod(mBrightnessSliderController, "getIconView");
-			mBrightnessController = callMethod(brightnessControllerFactory, "create", icon, mBrightnessSliderController);
+			if(QQSBrightnessSupported) {
+				Xprefs.edit().putBoolean("QQSBrightnessSupported", false).apply();
+			}
+
+			return; //We're facing a QPR2+ rom
 		}
 
 		mBrightnessMirrorHandler = BrightnessMirrorHandlerClass.getConstructors()[0].newInstance(mBrightnessController);

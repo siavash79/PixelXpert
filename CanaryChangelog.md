@@ -1,3 +1,6 @@
+**canary-225**  
+- Removed QQS Brightness option on QPR2 roms  
+  
 **canary-224**  
 - Package Manager mods auto-disable after 5 minutes (and upon restart)  
   

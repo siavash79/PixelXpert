@@ -1,6 +1,8 @@
 package sh.siava.AOSPMods;
 
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
+import static sh.siava.AOSPMods.utils.Helpers.addItemToCommaStringIfNotPresent;
+import static sh.siava.AOSPMods.utils.Helpers.removeItemFromCommaString;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,6 +13,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.utils.Helpers;
 import sh.siava.AOSPMods.utils.ModuleFolderOperations;
 import sh.siava.AOSPMods.utils.StringFormatter;
 import sh.siava.AOSPMods.utils.SystemUtils;
@@ -102,40 +105,26 @@ public class miscSettings extends XposedModPack {
 		try {
 			String currentTiles = Shell.cmd("settings get secure sysui_qs_tiles").exec().getOut().get(0);
 
-			boolean hasWifi = Pattern.matches(getPattern("wifi_AOSPMods"), currentTiles);
-			boolean hasCell = Pattern.matches(getPattern("cell_AOSPMods"), currentTiles);
-			boolean hasInternet = Pattern.matches(getPattern("internet"), currentTiles);
-
 			boolean providerModel;
 
 			if (WifiCellEnabled) {
 				providerModel = false;
-				if (!hasCell) {
-					currentTiles = String.format("cell_AOSPMods,%s", currentTiles);
-				}
-				if (!hasWifi) {
-					currentTiles = String.format("wifi_AOSPMods,%s", currentTiles);
-				}
-				currentTiles = currentTiles.replaceAll(getPattern("internet"), "$2$3$5"); //remove intrnet
+				currentTiles = addItemToCommaStringIfNotPresent(currentTiles, "cell_AOSPMods");
+				currentTiles = addItemToCommaStringIfNotPresent(currentTiles, "wifi_AOSPMods");
 
+				currentTiles = removeItemFromCommaString(currentTiles, "internet");
 			} else {
 				providerModel = true;
 
-				currentTiles = currentTiles.replaceAll(getPattern("cell_AOSPMods"), "$2$3$5"); //remove cell
-				currentTiles = currentTiles.replaceAll(getPattern("wifi_AOSPMods"), "$2$3$5"); //remove wifi
+				currentTiles = removeItemFromCommaString(currentTiles, "cell_AOSPMods");
+				currentTiles = removeItemFromCommaString(currentTiles, "wifi_AOSPMods");
 
-				if (!hasInternet) {
-					currentTiles = "internet," + currentTiles;
-				}
+				currentTiles = addItemToCommaStringIfNotPresent(currentTiles, "internet");
 			}
 
 			com.topjohnwu.superuser.Shell.cmd("settings put global settings_provider_model " + providerModel + "; settings put secure sysui_qs_tiles \"" + currentTiles + "\"").exec();
 		} catch (Exception ignored) {
 		}
-	}
-
-	private static String getPattern(String tile) {
-		return String.format("^(%s,)(.+)|(.+)(,%s)(,.+|$)", tile, tile);
 	}
 
 	private void updateSysUITuner() {

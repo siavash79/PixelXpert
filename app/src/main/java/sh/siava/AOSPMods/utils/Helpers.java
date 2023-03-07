@@ -6,6 +6,7 @@ import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 
+import android.content.res.loader.AssetsProvider;
 import android.os.FileUtils;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -25,6 +26,7 @@ import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.zip.ZipFile;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -250,5 +252,21 @@ public class Helpers {
 		} catch (Throwable ignored) {
 		}
 	}
+
+	public static String removeItemFromCommaString(String string, String key)
+	{
+		return string.replaceAll(getCommaSearchPattern(key), "$2$3$5");
+	}
+
+	public static String addItemToCommaStringIfNotPresent(String string, String key)
+	{
+		if(!Pattern.matches(getCommaSearchPattern(key), string)) return string;
+
+		return String.format("%s%s%s", key, (string.length() > 0) ? "," : "", string);
+	}
+	private static String getCommaSearchPattern(String tile) {
+		return String.format("^(%s,)(.+)|(.+)(,%s)(,.+|$)", tile, tile);
+	}
+
 
 }

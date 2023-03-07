@@ -19,8 +19,10 @@
     <string name="misc_header">Varie</string>
     <string name="qs_panel_category_title">Pannello Quick Settings</string>
     <string name="theme_customization_category">Temi</string>
+    <string name="pm_header">Gestore pacchetti</string>
 
     <!--Lock screen related-->
+    <string name="hide_avatar_title">Rimuovi avatar utente (modalità multiutente)</string>
     <string name="transparent_fingerprint_circle">Rimuovi il background dall\'icona del sensore d\'impronte sotto il display</string>
     <string name="transparent_fingerprint_circle_off">Background icona sensore d\'impronte attivo</string>
     <string name="transparent_fingerprint_circle_on">Background icona sensore d\'impronte disattivo</string>
@@ -36,11 +38,15 @@
     <string name="keyguard_bottom_buttons_transparent_title">Rimuovi background icone</string>
     <string name="keyguard_bottom_force_camera_title">Mostra scorciatoia fotocamera</string>
     <string name="keyguard_left_shortcut">Mostra scorciatoia di sinistra su blocco schermo</string>
-    <string name="LSleftShortcutTitle">Scorciatoia di sinistra</string>
-    <string name="LSrightShortcutTitle">Scorciatoia di destra</string>
+    <string name="LSleftShortcutTitle">Scorciatoia sinistra</string>
+    <string name="LSrightShortcutTitle">Scorciatoia destra</string>
+    <string name="LSleftLongClickShortcutTitle">Scorciatoia sinistra (Pressione prolungata)</string>
+    <string name="LSrightLongClickShortcutTitle">Scorciatoia destra (Pressione prolungata)</string>
     <string name="camera_shortcut">Fotocamera</string>
     <string name="assistant_shortcut">Assistant</string>
     <string name="torch_shortcut">Torcia</string>
+    <string name="tv_remote_shortcut">Telecomando TV</string>
+    <string name="dnd_shortcut">Non disturbare</string>
     <string name="album_art_category">Opzioni multimedia</string>
     <string name="album_art_title">Abilita copertina album durante riproduzione</string>
     <string name="album_art_blur_text">Valore sfocatura</string>
@@ -63,6 +69,7 @@
     <string name="sb_center_fine_tune">Perfeziona posizione centrale</string>
     <string name="sb_multi_row_system_icons">Icone di sistema multi riga (necessita aumento altezza Status Bar)</string>
     <string name="sb_multi_row_category">Righe multiple icone di sistema</string>
+    <string name="sb_double_row_category">Status Bar su due righe</string>
     <string name="sb_icon_sort_mode">Metodo posizionamento icone</string>
     <string name="sort_clean">Ordina in griglia</string>
     <string name="sort_tight">Adatta il massimo degli elementi</string>
@@ -93,7 +100,6 @@
     <string name="sbc_after_color">Testo dopo l\'orologio</string>
     <string name="network_settings_pref">Impostazioni monitor di rete…</string>
     <string name="ntsb_far_left">Estrema sinistra</string>
-    <string name="ntsb_far_left_extra">Estrema sinistra - Al di sopra delle notifiche</string>
     <string name="ntsb_mid_left">Centro-sinistra</string>
     <string name="ntsb_mid_right">Centro-destra</string>
     <string name="ntsb_category_title">Monitor di rete</string>
@@ -149,6 +155,7 @@
     <string name="qs_flashlight_level_global_title">Applica livello torcia globalmente</string>
     <string name="qs_qr_tile_inactive_title">Inverti colore tile Scanner-QR</string>
     <string name="qs_tile_vertical_title">Sposta le icone dei tile in alto</string>
+    <string name="qs_tile_qty_title">Impostazioni numero QS Tile</string>
     <string name="qs_leveled_flashlight_summary">Richiede hardware supportato</string>
     <string name="light_qs_title">Applica pannello QS chiaro quando si utilizza il tema chiaro</string>
     <string name="light_dualtone_qs_title">Abilita pannello QS dual tone</string>
@@ -157,6 +164,8 @@
     <string name="qs_pulldown_side_title">Lato quick pull-down</string>
     <string name="qs_pulldown_category">Quick settings pull-down</string>
     <string name="qs_haptic_switch_title">Vibra al tocco del QS tile</string>
+    <string name="qs_tile_qty_portrait">In orientamento verticale</string>
+    <string name="qs_tile_qty_landscape">In orientamento orizzontale</string>
     <string name="qs_rows_number">Numero di righe QS</string>
     <string name="qs_cols_number">Numero di colonne QS</string>
     <string name="qqs_tiles_number">N. massimo tiles nel Quick QS (max 2 righe)</string>
@@ -175,6 +184,7 @@
     <string name="quick_settings_tiles_category">Opzioni QS Tile</string>
     <string name="qs_tile_style_title">Temi QS Tile</string>
     <string name="qstile_default">Default</string>
+    <string name="qs_volume_unmute_title">Valore riattivazione suono tile volume</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configura gesture indietro</string>
@@ -205,8 +215,14 @@
     <string name="taskbar_force_disable_title">Forza disabilitata</string>
     <string name="taskbar_hide_allapps_title">Icona nascondi tutte le app</string>
 
+    <!-- Package manager -->
+    <string name="pm_bypass_signature_title">Ignora controllo firma pacchetto</string>
+    <string name="pm_allow_downgrade_title">Consenti downgrade applicazione</string>
+    <string name="auto_off_five_minutes">Abilitato per i prossimi 5 minuti</string>
+
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disattiva suono screenshot</string>
+    <string name="clipboard_smart_actions_title">Smart actions su overlay clipboard</string>
     <string name="allow_all_screen_rotations">Sblocca forzatamente tutte le rotazioni dello schermo</string>
     <string name="allow_all_screen_rotations_summary">Ignorerà anche il pulsante per rotazione manuale</string>
     <string name="force_no_cutout">Ignora foro fotocamera</string>
@@ -267,7 +283,6 @@
 
     <!-- Clock position -->
     <string name="clock_default">Sinistra (Default)</string>
-    <string name="clock_default_extra">Sinistra - Al di sopra delle notifiche</string>
     <string name="clock_center">Centro</string>
     <string name="clock_right">Destra</string>
 
@@ -292,6 +307,11 @@
     <string name="netstat_enable_title">Raccogli statistiche di rete</string>
     <string name="network_interval_custom_text_title">Intervallo di aggiornamento</string>
     <string name="minutes_word">minuto(i)</string>
+
+    <!-- Incompatibility Alert -->
+    <string name="incompatible_alert_title">Incompatibile</string>
+    <string name="incompatible_alert_body">La tua ROM non è il target diretto di questo modulo. Puoi continuare a usarlo, ma alcune (o tutte) le opzioni potrebbero non funzionare come previsto\n\nSi prega di non segnalare bug</string>
+    <string name="incompatible_alert_ok_btn">Ho capito</string>
 
     <!-- Menu Items -->
     <string name="menu_settings_title">Importa/Esporta</string>
@@ -337,6 +357,7 @@
 
     <string name="own_prefs_header">Impostazioni AOSPMods</string>
     <string name="language_title">Lingua</string>
+    <string name="camera_manager_master_title">Abilita mods torcia (Disabilita questa opzione se il tuo telefono non le supporta)</string>
     <string name="toggle_dark_apply">(Attiva/disattiva tema scuro per applicare)</string>
 
     <string name="gesture_nav_extra_cat">Extra gestures NavBar</string>

@@ -60,7 +60,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 	public static final String TELECOM_SERVER_PACKAGE = "com.android.server.telecom";
 	public static final String LAUNCHER_PACKAGE = "com.google.android.apps.nexuslauncher";
 
-	public static boolean isSecondProcess = false;
+	public static boolean isChildProcess = false;
 
 	public static ArrayList<Class<?>> modPacks = new ArrayList<>();
 	public static ArrayList<XposedModPack> runningMods = new ArrayList<>();
@@ -114,7 +114,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		isSecondProcess = lpparam.processName.contains(":");
+		isChildProcess = lpparam.processName.contains(":");
 
 		//If example class isn't found, user is using an older version. Don't load the module at all
 		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE)) {

@@ -14,6 +14,7 @@ import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 import static sh.siava.AOSPMods.XPrefs.modRes;
 
+import android.annotation.SuppressLint;
 import android.app.TaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
@@ -182,6 +183,7 @@ public class TaskbarActivator extends XposedModPack {
 		};
 
 		hookAllConstructors(DeviceProfileClass, new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(taskbarMode == TASKBAR_DEFAULT) return;

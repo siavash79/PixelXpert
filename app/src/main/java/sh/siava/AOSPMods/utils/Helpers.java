@@ -6,7 +6,6 @@ import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 
-import android.content.res.loader.AssetsProvider;
 import android.os.FileUtils;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -104,7 +103,7 @@ public class Helpers {
 	}
 
 	public static void setOverlay(String Key, boolean enabled, boolean force) {
-		if (AOSPMods.isSecondProcess) return;
+		if (AOSPMods.isChildProcess) return;
 
 		if (activeOverlays == null) getActiveOverlays(); //make sure we have a list in hand
 

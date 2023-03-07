@@ -10,10 +10,8 @@ import android.graphics.Color;
 import com.topjohnwu.superuser.Shell;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.utils.Helpers;
 import sh.siava.AOSPMods.utils.ModuleFolderOperations;
 import sh.siava.AOSPMods.utils.StringFormatter;
 import sh.siava.AOSPMods.utils.SystemUtils;
@@ -63,7 +61,7 @@ public class miscSettings extends XposedModPack {
 					break;
 			}
 		} else {
-			if (AOSPMods.isSecondProcess) return;
+			if (AOSPMods.isChildProcess) return;
 
 			//startup jobs
 			setDisplayOverride();

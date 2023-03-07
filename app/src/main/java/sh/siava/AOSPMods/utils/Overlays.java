@@ -73,7 +73,7 @@ public class Overlays {
 
 	public static void setAll(boolean force) //make sure settings are applied to device
 	{
-		if (AOSPMods.isSecondProcess) return;
+		if (AOSPMods.isChildProcess) return;
 
 		if (instance == null) {
 			new Overlays().initOverlays();

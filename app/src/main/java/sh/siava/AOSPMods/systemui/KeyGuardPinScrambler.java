@@ -37,7 +37,7 @@ public class KeyGuardPinScrambler extends XposedModPack {
 
 	@Override
 	public boolean listensTo(String packageName) {
-		return listenPackage.equals(packageName);
+		return listenPackage.equals(packageName) && !AOSPMods.isChildProcess;
 	}
 
 	List<Integer> digits = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);

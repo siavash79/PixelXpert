@@ -7,6 +7,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.widget.LinearLayout.VERTICAL;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -199,7 +200,7 @@ public class StatusbarMods extends XposedModPack {
 
 	@Override
 	public boolean listensTo(String packageName) {
-		return listenPackage.equals(packageName);
+		return listenPackage.equals(packageName) && !AOSPMods.isChildProcess;
 	}
 
 	public void updatePrefs(String... Key) {
@@ -1176,13 +1177,17 @@ public class StatusbarMods extends XposedModPack {
 	//region combined signal icons
 	private void wifiVisibleChanged()
 	{
-		setObjectField(StatusBarSignalPolicy, "mHideMobile", mWifiVisble && CombineSignalIcons);
+		try
+		{
+			setObjectField(StatusBarSignalPolicy, "mHideMobile", mWifiVisble && CombineSignalIcons);
 
-		SparseArray<?> mMobileSignalControllers = (SparseArray<?>) getObjectField(NetworkController, "mMobileSignalControllers");
+			SparseArray<?> mMobileSignalControllers = (SparseArray<?>) getObjectField(NetworkController, "mMobileSignalControllers");
 
-		for(int i = 0; i < mMobileSignalControllers.size(); i++) {
-			callMethod(mMobileSignalControllers.get(mMobileSignalControllers.keyAt(i)), "notifyListeners", StatusBarSignalPolicy);
+			for (int i = 0; i < mMobileSignalControllers.size(); i++) {
+				callMethod(mMobileSignalControllers.get(mMobileSignalControllers.keyAt(i)), "notifyListeners", StatusBarSignalPolicy);
+			}
 		}
+		catch (Throwable ignored){}
 	}
 	//endregion
 }

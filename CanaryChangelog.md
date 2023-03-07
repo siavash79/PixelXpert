@@ -1,3 +1,6 @@
+**canary-226**  
+- Missing the old "combined signal icons"? don't!  
+  
 **canary-225**  
 - Removed QQS Brightness option on QPR2 roms  
   

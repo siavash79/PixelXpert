@@ -1,3 +1,7 @@
+**canary-228**  
+- Screenshot delay reduced substantially  
+- Fixed screenshot crash in canary 227  
+  
 **canary-227**  
 - Taskbar no longer triggers tablet UI on pixel launcher (Idea from AndrewCPU@github)  
   

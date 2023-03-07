@@ -13,6 +13,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
+import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
@@ -38,6 +39,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.CharacterStyle;
 import android.text.style.RelativeSizeSpan;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -179,6 +181,13 @@ public class StatusbarMods extends XposedModPack {
 	private final serverStateCallback volteCallback = new serverStateCallback();
 	//endregion
 
+	//region combined signal icons
+	private Object NetworkController;
+	private boolean mWifiVisble = false;
+	private Object StatusBarSignalPolicy;
+	private static boolean CombineSignalIcons = false;
+	//endregion
+
 	@SuppressLint("DiscouragedApi")
 	public StatusbarMods(Context context) {
 		super(context);
@@ -197,6 +206,9 @@ public class StatusbarMods extends XposedModPack {
 		if (Xprefs == null) return;
 
 		HidePrivacyChip = Xprefs.getBoolean("HidePrivacyChip", false);
+
+		CombineSignalIcons = Xprefs.getBoolean("combinedSignalEnabled", false);
+		wifiVisibleChanged();
 
 		if (Key.length > 0 && Key[0].equals("notificationAreaMultiRow")) { //WHY we check the old value? because if prefs is empty it will fill it up and count an unwanted change
 			boolean newnotificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
@@ -433,8 +445,39 @@ public class StatusbarMods extends XposedModPack {
 		StatusBarIcon = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
+		Class<?> StatusBarSignalPolicyClass = findClass("com.android.systemui.statusbar.phone.StatusBarSignalPolicy", lpparam.classLoader);
+		Class<?> NetworkControllerImplClass = findClass("com.android.systemui.statusbar.connectivity.NetworkControllerImpl", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
 //		Method setMeasuredDimensionMethod = findMethodExact(View.class, "setMeasuredDimension", int.class, int.class);
+		//endregion
+
+		//region combined signal icons
+		hookAllConstructors(NetworkControllerImplClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				NetworkController = param.thisObject;
+			}
+		});
+
+		hookAllConstructors(StatusBarSignalPolicyClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				StatusBarSignalPolicy = param.thisObject;
+			}
+		});
+		hookAllMethods(StatusBarSignalPolicyClass, "setWifiIndicators", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				boolean wifiVisible = getBooleanField(getObjectField(param.args[0], "statusIcon"), "visible");
+				if(wifiVisible != mWifiVisble)
+				{
+					mWifiVisble = wifiVisible;
+					if(CombineSignalIcons) {
+						wifiVisibleChanged();
+					}
+				}
+			}
+		});
 		//endregion
 
 		//region privacy chip
@@ -1127,6 +1170,19 @@ public class StatusbarMods extends XposedModPack {
 
 	public interface ClockVisibilityCallback extends Callback {
 		void OnVisibilityChanged(boolean isVisible);
+	}
+	//endregion
+
+	//region combined signal icons
+	private void wifiVisibleChanged()
+	{
+		setObjectField(StatusBarSignalPolicy, "mHideMobile", mWifiVisble && CombineSignalIcons);
+
+		SparseArray<?> mMobileSignalControllers = (SparseArray<?>) getObjectField(NetworkController, "mMobileSignalControllers");
+
+		for(int i = 0; i < mMobileSignalControllers.size(); i++) {
+			callMethod(mMobileSignalControllers.get(mMobileSignalControllers.keyAt(i)), "notifyListeners", StatusBarSignalPolicy);
+		}
 	}
 	//endregion
 }

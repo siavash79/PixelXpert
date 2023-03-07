@@ -189,7 +189,6 @@ public class TaskbarActivator extends XposedModPack {
 				boolean taskbarEnabled = taskbarMode == TASKBAR_ON;
 
 				setObjectField(param.thisObject, "isTaskbarPresent", taskbarEnabled);
-				setObjectField(param.thisObject, "isTaskbarPresentInApps", taskbarEnabled);
 
 				if(taskbarEnabled)
 				{

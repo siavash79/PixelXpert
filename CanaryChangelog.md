@@ -1,3 +1,6 @@
+**canary-227**  
+- Taskbar no longer triggers tablet UI on pixel launcher (Idea from AndrewCPU@github)  
+  
 **canary-226**  
 - Missing the old "combined signal icons"? don't!  
   

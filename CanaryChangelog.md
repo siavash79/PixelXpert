@@ -1,3 +1,7 @@
+**canary-229**  
+- gestural navigation: improved back gesture  
+- Improved QS light theme tile color application  
+  
 **canary-228**  
 - Screenshot delay reduced substantially  
 - Fixed screenshot crash in canary 227  

@@ -134,6 +134,15 @@ public class TaskbarActivator extends XposedModPack {
 		Class<?> TaskbarActivityContextClass = findClass("com.android.launcher3.taskbar.TaskbarActivityContext", lpparam.classLoader);
 		Class<?> LauncherModelClass = findClass("com.android.launcher3.LauncherModel", lpparam.classLoader);
 		Class<?> BaseDraggingActivityClass = findClass("com.android.launcher3.BaseDraggingActivity", lpparam.classLoader);
+		//Transient taskbar. kept disabled until further notice
+/*		Class<?> DisplayControllerClass = findClass("com.android.launcher3.util.DisplayController", lpparam.classLoader);
+
+		hookAllMethods(DisplayControllerClass, "isTransientTaskbar", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				param.setResult(true);
+			}
+		});*/
 
 		hookAllMethods(BaseDraggingActivityClass, "onResume", new XC_MethodHook() {
 			@Override

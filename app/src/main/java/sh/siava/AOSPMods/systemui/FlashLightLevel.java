@@ -21,6 +21,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.view.MotionEvent;
 import android.view.View;
@@ -139,7 +140,7 @@ public class FlashLightLevel extends XposedModPack {
 											Xprefs.edit().putFloat("flashPCT", currentPct).apply();
 										} else {
 											handleFlashLightClick(true, currentPct);
-											if (QSHapticEnabled) SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK);
+											if (QSHapticEnabled) SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK, VibrationAttributes.USAGE_TOUCH);
 										}
 										return true;
 									}

@@ -25,6 +25,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.view.MotionEvent;
 import android.view.View;
@@ -124,7 +125,7 @@ public class VolumeTile extends XposedModPack {
 										if (moved) {
 											moved = false;
 										} else {
-											if (QSHapticEnabled) SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK);
+											if (QSHapticEnabled) SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK, VibrationAttributes.USAGE_TOUCH);
 											toggleMute();
 										}
 										return true;

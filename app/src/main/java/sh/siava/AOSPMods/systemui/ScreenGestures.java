@@ -12,6 +12,7 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -222,7 +223,7 @@ public class ScreenGestures extends XposedModPack {
 						turnedByTTT = true;
 						callMethod(SystemUtils.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
 						SystemUtils.setFlash(true);
-						SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
+						SystemUtils.vibrate(VibrationEffect.EFFECT_TICK, VibrationAttributes.USAGE_ACCESSIBILITY);
 
 						new Thread(() -> { //if keyguard is dismissed for any reason (face or udfps touch), then:
 							while(turnedByTTT)

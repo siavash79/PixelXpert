@@ -16,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.view.Gravity;
 import android.view.View;
@@ -139,7 +140,7 @@ public class QSTileGrid extends XposedModPack {
 		XC_MethodHook vibrateCallback = new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (QSHapticEnabled) SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK);
+				if (QSHapticEnabled) SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK, VibrationAttributes.USAGE_TOUCH);
 			}
 		};
 

@@ -29,7 +29,7 @@
                 android:defaultValue="false"
                 android:key="QSHapticEnabled"
                 android:summaryOff="@string/general_off"
-                android:summaryOn="@string/general_on"
+                android:summaryOn="@string/vibration_type_touch"
                 android:title="@string/qs_haptic_switch_title" />
 
             <SeekBarPreference

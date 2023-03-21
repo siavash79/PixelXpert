@@ -150,14 +150,14 @@
             android:defaultValue="false"
             android:key="vibrateOnAnswered"
             android:title="@string/vibrate_on_call_active_title"
-            app:summaryOn="@string/general_on"
+            app:summaryOn="@string/vibration_type_notification"
             app:summaryOff="@string/general_off" />
 
         <SwitchPreference
             android:defaultValue="false"
             android:key="vibrateOnDrop"
             android:title="@string/vibrate_on_call_drop_title"
-            app:summaryOn="@string/general_on"
+            app:summaryOn="@string/vibration_type_notification"
             app:summaryOff="@string/general_off" />
 
     </PreferenceCategory>

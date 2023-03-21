@@ -6,6 +6,7 @@ import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -57,13 +58,13 @@ public class CallVibrator extends XposedModPack {
 								&& newState == 5 /* ACTIVE */
 								&& SystemClock.uptimeMillis() - lastActiveVibration > 5000L /* Don't vibrate on concurrent method calls */) {
 							lastActiveVibration = SystemClock.uptimeMillis();
-							SystemUtils.vibrate(vibrationEffect);
+							SystemUtils.vibrate(vibrationEffect, VibrationAttributes.USAGE_NOTIFICATION);
 						} else if (vibrateOnDrop
 								&& oldState == 5 /* ACTIVE */
 								&& newState == 7 /* DISCONNECTED */
 								&& SystemClock.uptimeMillis() - lastDropVibration > 5000L) {
 							lastDropVibration = SystemClock.uptimeMillis();
-							SystemUtils.vibrate(vibrationEffect);
+							SystemUtils.vibrate(vibrationEffect, VibrationAttributes.USAGE_NOTIFICATION);
 						}
 					} catch (Throwable ignored) {
 					}

@@ -169,6 +169,7 @@
     <string name="qs_pulldown_side_title">Quick pull-down side</string>
     <string name="qs_pulldown_category">Quick settings pull-down</string>
     <string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
+    <string name="vibration_type_touch">Intensity defined by system touch vibration settings</string>
     <string name="qs_tile_qty_portrait">In portrait orientation</string>
     <string name="qs_tile_qty_landscape">In landscape orientation</string>
 
@@ -279,6 +280,8 @@
     <string name="call_category">Phone calls</string>
     <string name="vibrate_on_call_active_title">Vibrate on outgoing call answered</string>
     <string name="vibrate_on_call_drop_title">Vibrate when call disconnects</string>
+    <string name="vibration_type_notification">Intensity defined by system notification vibration settings</string>
+
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Force Google Sans font system-wide</string>

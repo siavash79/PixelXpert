@@ -1,3 +1,6 @@
+**canary-230**  
+- Vibrations don't rely on "media" vibration settings anymore: Shifted to notification, touch and accessibility vibration settings  
+  
 **canary-229**  
 - gestural navigation: improved back gesture  
 - Improved QS light theme tile color application  

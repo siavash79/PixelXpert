@@ -291,13 +291,19 @@ public class BrightnessSlider extends XposedModPack {
 		QQSBrightnessSliderView = (View) getObjectField(mBrightnessSliderController, "mView");
 
 		try {
-			try {
-				mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mBroadcastDispatcher"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
-				//mBrightnessController = callMethod(brightnessControllerFactory, "create", mBrightnessSliderController);
-			} catch (Throwable t) //some custom roms added icon into signature. like ArrowOS
+			try { //13 QPR2
+				mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mUserTracker"),getObjectField(brightnessControllerFactory, "mMainExecutor"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
+			} catch (Throwable t)
 			{
-				ImageView icon = (ImageView) callMethod(mBrightnessSliderController, "getIconView");
-				mBrightnessController = callMethod(brightnessControllerFactory, "create", icon, mBrightnessSliderController);
+				try
+				{ //13 QPR1
+					mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mBroadcastDispatcher"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
+				}
+				catch (Throwable tt) //some custom roms added icon into signature. like ArrowOS
+				{
+					ImageView icon = (ImageView) callMethod(mBrightnessSliderController, "getIconView");
+					mBrightnessController = callMethod(brightnessControllerFactory, "create", icon, mBrightnessSliderController);
+				}
 			}
 
 			if(!QQSBrightnessSupported) {
@@ -310,7 +316,7 @@ public class BrightnessSlider extends XposedModPack {
 				Xprefs.edit().putBoolean("QQSBrightnessSupported", false).apply();
 			}
 
-			return; //We're facing a QPR2+ rom
+			return; //We couldn't make a controller
 		}
 
 		mBrightnessMirrorHandler = BrightnessMirrorHandlerClass.getConstructors()[0].newInstance(mBrightnessController);

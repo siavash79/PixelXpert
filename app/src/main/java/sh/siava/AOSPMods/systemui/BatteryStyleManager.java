@@ -200,11 +200,13 @@ public class BatteryStyleManager extends XposedModPack {
 				if (!customBatteryEnabled) return;
 				for(Object view : batteryViews)
 				{
-					BatteryDrawable drawable = (BatteryDrawable) getAdditionalInstanceField(view, "mBatteryDrawable");
-					drawable.setBatteryLevel(level);
-					drawable.setCharging(charging);
-					drawable.setPowerSaveEnabled(powerSave);
-					scale(view);
+					((View) view).post(() -> { //we might be running this outside the UI thread
+						BatteryDrawable drawable = (BatteryDrawable) getAdditionalInstanceField(view, "mBatteryDrawable");
+						drawable.setBatteryLevel(level);
+						drawable.setCharging(charging);
+						drawable.setPowerSaveEnabled(powerSave);
+						scale(view);
+					});
 				}
 			}
 		};
@@ -216,6 +218,13 @@ public class BatteryStyleManager extends XposedModPack {
 			@Override
 			public void onViewAttachedToWindow(View v) {
 				batteryViews.add(v);
+				new Thread(() -> { //force refresh icons during systemui start - wait for the views to settle their properties
+					try
+					{
+						Thread.sleep(500);
+						callMethod(BatteryController, "fireBatteryLevelChanged");
+					}catch (Throwable ignored) {}
+				}).start();
 			}
 
 			@Override

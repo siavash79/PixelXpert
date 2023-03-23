@@ -265,7 +265,7 @@ public class Helpers {
 
 	public static String addItemToCommaStringIfNotPresent(String string, String key)
 	{
-		if(!Pattern.matches(getCommaSearchPattern(key), string)) return string;
+		if(Pattern.matches(getCommaSearchPattern(key), string)) return string;
 
 		return String.format("%s%s%s", key, (string.length() > 0) ? "," : "", string);
 	}

@@ -34,6 +34,7 @@ public class GestureNavbarManager extends XposedModPack {
 	private static float backGestureHeightFractionRight = 1f; // % of screen height. can be anything between 0 to 1
 	private static boolean leftEnabled = true;
 	private static boolean rightEnabled = true;
+	float initialBackX = 0;
 	//endregion
 
 	//region pill size
@@ -118,7 +119,12 @@ public class GestureNavbarManager extends XposedModPack {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				MotionEvent event = (MotionEvent) param.args[0];
-				if (notWithinInsets(event.getX(), event.getY(), (Point) getObjectField(param.thisObject, "mDisplaySize"), 0)) {
+				if(event.getAction() == MotionEvent.ACTION_DOWN)
+				{
+					initialBackX = event.getX();
+				}
+				if (notWithinInsets(initialBackX, event.getY(), (Point) getObjectField(param.thisObject, "mDisplaySize"), 0)) {
+					//event.setAction(MotionEvent.ACTION_CANCEL);
 					param.setResult(null);
 				}
 			}
@@ -239,6 +245,6 @@ public class GestureNavbarManager extends XposedModPack {
 
 	@Override
 	public boolean listensTo(String packageName) {
-		return listenPackage.equals(packageName);
+		return listenPackage.equals(packageName) && !AOSPMods.isChildProcess;
 	}
 }

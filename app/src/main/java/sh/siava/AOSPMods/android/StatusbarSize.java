@@ -74,7 +74,7 @@ public class StatusbarSize extends XposedModPack {
 
 	@Override
 	public boolean listensTo(String packageName) {
-		return listenPacks.contains(packageName);
+		return listenPacks.contains(packageName) && !AOSPMods.isChildProcess;
 	}
 
 	@Override

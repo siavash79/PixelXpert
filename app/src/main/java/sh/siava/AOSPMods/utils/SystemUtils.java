@@ -23,6 +23,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.os.VibratorManager;
 import android.telephony.TelephonyManager;
@@ -159,15 +160,21 @@ public class SystemUtils {
 		return instance.getDownloadManager();
 	}
 
-	public static void vibrate(int effect) {
-		vibrate(VibrationEffect.createPredefined(effect));
+	public static void vibrate(int effect, @Nullable Integer vibrationUsage) {
+		vibrate(VibrationEffect.createPredefined(effect), vibrationUsage);
 	}
 
 	@SuppressLint("MissingPermission")
-	public static void vibrate(VibrationEffect effect) {
+	public static void vibrate(VibrationEffect effect, @Nullable Integer vibrationUsage) {
 		if (instance == null || !instance.hasVibrator) return;
 		try {
-			instance.mVibrationManager.getDefaultVibrator().vibrate(effect);
+			if(vibrationUsage != null) {
+				instance.mVibrationManager.getDefaultVibrator().vibrate(effect, VibrationAttributes.createForUsage(vibrationUsage));
+			}
+			else
+			{
+				instance.mVibrationManager.getDefaultVibrator().vibrate(effect);
+			}
 		} catch (Exception ignored) {
 		}
 	}

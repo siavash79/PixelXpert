@@ -345,7 +345,7 @@ public class SettingsActivity extends AppCompatActivity implements
 				findPreference("TaskbarAsRecents").setVisible(taskBarMode == 1);
 				findPreference("taskbarHeightOverride").setVisible(taskBarMode == 1);
 				findPreference("TaskbarRadiusOverride").setVisible(taskBarMode == 1);
-				findPreference("TaskbarHideAllAppsIcon").setVisible(taskBarMode == 1);
+//				findPreference("TaskbarHideAllAppsIcon").setVisible(taskBarMode == 1);
 
 				float taskbarHeightOverride = 100f;
 				try {

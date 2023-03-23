@@ -14,10 +14,12 @@ import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 import static sh.siava.AOSPMods.XPrefs.modRes;
 
+import android.annotation.SuppressLint;
 import android.app.TaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -97,7 +99,7 @@ public class TaskbarActivator extends XposedModPack {
 			}
 		} else {
 			TaskbarAsRecents = Xprefs.getBoolean("TaskbarAsRecents", false);
-			TaskbarHideAllAppsIcon = Xprefs.getBoolean("TaskbarHideAllAppsIcon", false);
+			TaskbarHideAllAppsIcon = true;//Xprefs.getBoolean("TaskbarHideAllAppsIcon", false);
 
 			try
 			{
@@ -132,6 +134,15 @@ public class TaskbarActivator extends XposedModPack {
 		Class<?> TaskbarActivityContextClass = findClass("com.android.launcher3.taskbar.TaskbarActivityContext", lpparam.classLoader);
 		Class<?> LauncherModelClass = findClass("com.android.launcher3.LauncherModel", lpparam.classLoader);
 		Class<?> BaseDraggingActivityClass = findClass("com.android.launcher3.BaseDraggingActivity", lpparam.classLoader);
+		//Transient taskbar. kept disabled until further notice
+/*		Class<?> DisplayControllerClass = findClass("com.android.launcher3.util.DisplayController", lpparam.classLoader);
+
+		hookAllMethods(DisplayControllerClass, "isTransientTaskbar", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				param.setResult(true);
+			}
+		});*/
 
 		hookAllMethods(BaseDraggingActivityClass, "onResume", new XC_MethodHook() {
 			@Override
@@ -181,15 +192,30 @@ public class TaskbarActivator extends XposedModPack {
 		};
 
 		hookAllConstructors(DeviceProfileClass, new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				numShownHotseatIcons = getIntField(param.thisObject, "numShownHotseatIcons") +
-						(TaskbarHideAllAppsIcon
-							? 1
-							: 0);
+				if(taskbarMode == TASKBAR_DEFAULT) return;
 
-				if (taskbarHeightOverride != 1f) {
-					setObjectField(param.thisObject, "taskbarSize", Math.round(getIntField(param.thisObject, "taskbarSize") * taskbarHeightOverride));
+				boolean taskbarEnabled = taskbarMode == TASKBAR_ON;
+
+				setObjectField(param.thisObject, "isTaskbarPresent", taskbarEnabled);
+
+				if(taskbarEnabled)
+				{
+					numShownHotseatIcons = getIntField(param.thisObject, "numShownHotseatIcons") +
+							(TaskbarHideAllAppsIcon
+									? 1
+									: 0);
+
+					Resources res = mContext.getResources();
+
+					setObjectField(param.thisObject, "taskbarSize", res.getDimensionPixelSize(res.getIdentifier("taskbar_size", "dimen", mContext.getPackageName())));
+					setObjectField(param.thisObject, "stashedTaskbarSize", res.getDimensionPixelSize(res.getIdentifier("taskbar_stashed_size", "dimen", mContext.getPackageName())));
+
+					if (taskbarHeightOverride != 1f) {
+						setObjectField(param.thisObject, "taskbarSize", Math.round(getIntField(param.thisObject, "taskbarSize") * taskbarHeightOverride));
+					}
 				}
 			}
 		});
@@ -296,24 +322,6 @@ public class TaskbarActivator extends XposedModPack {
 					callMethod(recentTasksList, "onRecentTasksChanged");
 				}
 				param.setResult(null);
-			}
-		});
-		//endregion
-
-		//region taskbar activator
-		hookAllMethods(info, "isTablet", new XC_MethodHook() {
-			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				switch (taskbarMode) {
-					case TASKBAR_OFF:
-						param.setResult(false);
-						break;
-					case TASKBAR_ON:
-						param.setResult(true);
-						break;
-					case TASKBAR_DEFAULT:
-						break;
-				}
 			}
 		});
 		//endregion

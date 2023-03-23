@@ -1,3 +1,24 @@
+**canary-231**  
+- Added QQS BrightnessSlider for A13-QPR2  
+- Fixed wifi & mobile data tiles not appearing on QS  
+  
+**canary-230**  
+- Vibrations don't rely on "media" vibration settings anymore: Shifted to notification, touch and accessibility vibration settings  
+  
+**canary-229**  
+- gestural navigation: improved back gesture  
+- Improved QS light theme tile color application  
+  
+**canary-228**  
+- Screenshot delay reduced substantially  
+- Fixed screenshot crash in canary 227  
+  
+**canary-227**  
+- Taskbar no longer triggers tablet UI on pixel launcher (Idea from AndrewCPU@github)  
+  
+**canary-226**  
+- Missing the old "combined signal icons"? don't!  
+  
 **canary-225**  
 - Removed QQS Brightness option on QPR2 roms  
   

@@ -22,12 +22,12 @@
         android:key="taskBarMode"
         android:title="@string/taskbar_status_title" />
 
-    <SwitchPreference
+    <!--SwitchPreference
         android:defaultValue="false"
         android:key="TaskbarHideAllAppsIcon"
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
-        android:title="@string/taskbar_hide_allapps_title" />
+        android:title="@string/taskbar_hide_allapps_title" /-->
 
     <SwitchPreference
         android:defaultValue="false"

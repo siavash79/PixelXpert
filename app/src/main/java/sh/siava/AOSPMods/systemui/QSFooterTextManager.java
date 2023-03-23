@@ -85,6 +85,6 @@ public class QSFooterTextManager extends XposedModPack {
 
 	@Override
 	public boolean listensTo(String packageName) {
-		return listenPackage.equals(packageName);
+		return listenPackage.equals(packageName) && !AOSPMods.isChildProcess;
 	}
 }

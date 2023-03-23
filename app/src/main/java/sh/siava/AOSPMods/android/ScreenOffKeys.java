@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
@@ -70,7 +71,7 @@ public class ScreenOffKeys extends XposedModPack {
 					keyIntent.putExtra(Intent.EXTRA_KEY_EVENT, keyEvent);
 					SystemUtils.AudioManager().dispatchMediaKeyEvent(keyEvent);
 
-					SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
+					SystemUtils.vibrate(VibrationEffect.EFFECT_TICK, VibrationAttributes.USAGE_ACCESSIBILITY);
 				} catch (Throwable ignored) {
 				}
 			};
@@ -133,7 +134,7 @@ public class ScreenOffKeys extends XposedModPack {
 
 						SystemUtils.ToggleFlash();
 
-						SystemUtils.vibrate(VibrationEffect.EFFECT_TICK);
+						SystemUtils.vibrate(VibrationEffect.EFFECT_TICK, VibrationAttributes.USAGE_ACCESSIBILITY);
 
 						param.setResult(null);
 						callMethod(SystemUtils.PowerManager(), "goToSleep", SystemClock.uptimeMillis());

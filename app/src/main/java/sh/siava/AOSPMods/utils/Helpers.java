@@ -25,6 +25,7 @@ import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.zip.ZipFile;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -66,6 +67,12 @@ public class Helpers {
 		Method[] ms = ourClass.getDeclaredMethods();
 		log("Class: " + ourClass.getName());
 		log("extends: " + ourClass.getSuperclass().getName());
+		log("Subclasses:");
+		Class<?>[] scs = ourClass.getClasses();
+		for(Class <?> c : scs)
+		{
+			log(c.getName());
+		}
 		log("Methods:");
 
 		for (Method m : ms) {
@@ -102,7 +109,7 @@ public class Helpers {
 	}
 
 	public static void setOverlay(String Key, boolean enabled, boolean force) {
-		if (AOSPMods.isSecondProcess) return;
+		if (AOSPMods.isChildProcess) return;
 
 		if (activeOverlays == null) getActiveOverlays(); //make sure we have a list in hand
 
@@ -250,5 +257,21 @@ public class Helpers {
 		} catch (Throwable ignored) {
 		}
 	}
+
+	public static String removeItemFromCommaString(String string, String key)
+	{
+		return string.replaceAll(getCommaSearchPattern(key), "$2$3$5");
+	}
+
+	public static String addItemToCommaStringIfNotPresent(String string, String key)
+	{
+		if(Pattern.matches(getCommaSearchPattern(key), string)) return string;
+
+		return String.format("%s%s%s", key, (string.length() > 0) ? "," : "", string);
+	}
+	private static String getCommaSearchPattern(String tile) {
+		return String.format("^(%s,)(.+)|(.+)(,%s)(,.+|$)", tile, tile);
+	}
+
 
 }

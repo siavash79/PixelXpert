@@ -43,8 +43,6 @@ import sh.siava.AOSPMods.utils.SystemUtils;
 public class QSThemeManager extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_UI_PACKAGE;
 
-	public static final int STATE_UNAVAILABLE = 0;
-	public static final int STATE_INACTIVE = 1;
 	public static final int STATE_ACTIVE = 2;
 
 	private static boolean lightQSHeaderEnabled = false;
@@ -104,7 +102,7 @@ public class QSThemeManager extends XposedModPack {
 		Class<?> FragmentHostManagerClass = findClass("com.android.systemui.fragments.FragmentHostManager", lpparam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
 		Class<?> GradientColorsClass = findClass("com.android.internal.colorextraction.ColorExtractor$GradientColors", lpparam.classLoader);
-//		Class<?> QSPanelControllerClass = findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
+		Class<?> QSPanelControllerClass = findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
 //		Class<?> QuickQSPanelControllerClass = findClass("com.android.systemui.qs.QuickQSPanelController", lpparam.classLoader);
 		Class<?> InterestingConfigChangesClass = findClass("com.android.settingslib.applications.InterestingConfigChanges", lpparam.classLoader);
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
@@ -113,6 +111,13 @@ public class QSThemeManager extends XposedModPack {
 		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
+
+		hookAllConstructors(QSPanelControllerClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				calculateColors();
+			}
+		});
 
 		try { //QPR1
 			Class<?> QSSecurityFooterClass = findClass("com.android.systemui.qs.QSSecurityFooter", lpparam.classLoader);
@@ -291,10 +296,6 @@ public class QSThemeManager extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!lightQSHeaderEnabled || wasDark) return;
-
-				if (colorInactive == null) {
-					calculateColors();
-				}
 
 				setObjectField(param.thisObject, "colorActive", colorActive);
 				setObjectField(param.thisObject, "colorInactive", colorInactive);
@@ -507,6 +508,8 @@ public class QSThemeManager extends XposedModPack {
 
 	@SuppressLint("DiscouragedApi")
 	private void calculateColors() {
+		if (!lightQSHeaderEnabled || wasDark) return;
+
 		Resources res = mContext.getResources();
 		colorActive = res.getColor(
 				res.getIdentifier("android:color/system_accent1_600", "color", listenPackage),
@@ -545,6 +548,6 @@ public class QSThemeManager extends XposedModPack {
 
 	@Override
 	public boolean listensTo(String packageName) {
-		return listenPackage.equals(packageName);
+		return listenPackage.equals(packageName) && !AOSPMods.isChildProcess;
 	}
 }

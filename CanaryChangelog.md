@@ -1,3 +1,7 @@
+**canary-231**  
+- Added QQS BrightnessSlider for A13-QPR2  
+- Fixed wifi & mobile data tiles not appearing on QS  
+  
 **canary-230**  
 - Vibrations don't rely on "media" vibration settings anymore: Shifted to notification, touch and accessibility vibration settings  
   

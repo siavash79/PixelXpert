@@ -57,6 +57,8 @@ public class BrightnessSlider extends XposedModPack {
 	static Class<?> BrightnessControllerClass = null;
 	static Class<?> DejankUtilsClass = null;
 
+	private boolean duringSliderPlacement = false;
+
 	public BrightnessSlider(Context context) {
 		super(context);
 	}
@@ -111,6 +113,15 @@ public class BrightnessSlider extends XposedModPack {
 		Class<?> QSPanelControllerBaseClass = findClass("com.android.systemui.qs.QSPanelControllerBase", lpparam.classLoader);
 		Class<?> CentralSurfacesImplClass = findClassIfExists("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
 		Class<?> QSPanelClass = findClass("com.android.systemui.qs.QSPanel", lpparam.classLoader);
+		Class<?> BrightnessSliderControllerClass = findClass("com.android.systemui.settings.brightness.BrightnessSliderController", lpparam.classLoader);
+
+		hookAllMethods(BrightnessSliderControllerClass, "onViewDetached", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(duringSliderPlacement) //we're re-locating the slider. Don't remove the listeners
+					param.setResult(null);
+			}
+		});
 
 		DejankUtilsClass = findClass("com.android.systemui.DejankUtils", lpparam.classLoader);
 
@@ -224,6 +235,7 @@ public class BrightnessSlider extends XposedModPack {
 
 	private void setBrightnessView(ViewGroup o, @NonNull View view, boolean isQQS) { //Classloader can't find the method by reflection
 		View mBrightnessView = (View) getObjectField(o, "mBrightnessView");
+		duringSliderPlacement = true;
 
 		if (mBrightnessView != null) {
 			o.removeView(mBrightnessView);
@@ -236,8 +248,8 @@ public class BrightnessSlider extends XposedModPack {
 
 		o.addView(view, BrightnessSliderOnBottom
 				? isQQS
-				? 2
-				: 1
+					? 2
+					: 1
 				: 0);
 
 		setObjectField(o, "mBrightnessView", view);
@@ -245,6 +257,7 @@ public class BrightnessSlider extends XposedModPack {
 		setSliderMargins(view);
 
 		setObjectField(o, "mMovableContentStartIndex", getIntField(o, "mMovableContentStartIndex") + 1);
+		duringSliderPlacement = false;
 	}
 
 	private void setQSVisibility() {

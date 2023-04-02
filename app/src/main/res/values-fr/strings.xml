@@ -103,7 +103,7 @@
     <string name="sbc_before_color">Texte avant l’horloge</string>
     <string name="sbc_color">Horloge</string>
     <string name="sbc_after_color">Texte après l’horloge</string>
-    <string name="network_settings_pref">Préférences du moniteur réseau...</string>
+    <string name="network_settings_pref">Préférences du moniteur réseau…</string>
     <string name="ntsb_far_left">Tout à gauche</string>
     <string name="ntsb_mid_left">Milieu gauche</string>
     <string name="ntsb_mid_right">Milieu droit</string>
@@ -111,7 +111,7 @@
     <string name="ntsb_enabled_title">Activer le moniteur réseau</string>
     <string name="ntsb_position_title">Position du moniteur</string>
     <string name="ntsb_threshold_title">Seuil de masquage</string>
-    <string name="ntsb_threshold_summary">Cacher si le trafic est plus bas que... (en kilo-octets)</string>
+    <string name="ntsb_threshold_summary">Cacher si le trafic est plus bas que… (en kilo-octets)</string>
     <string name="network_mode_title">Style du moniteur</string>
     <string name="network_colorful_title">Rendre coloré</string>
     <string name="network_download_top">Vitesse de téléchargement au dessus</string>
@@ -264,7 +264,7 @@
 
     <string name="so_double_tap_wake_title">Appuyer deux fois pour allumer l’écran</string>
     <string name="so_double_tap_wake_summary">Désactive l’appuie simple pour réveiller</string>
-    <string name="doze_header">Quand l’écran est éteint...</string>
+    <string name="doze_header">Quand l’écran est éteint…</string>
     <string name="custom_themed_icons_title">Icônes personnalisés</string>
     <string name="custom_themed_icons_off">Icônes personnalisés désactivés</string>
     <string name="custom_themed_icons_on">Icônes personnalisés activés</string>
@@ -354,8 +354,8 @@
     <!-- Menu Items -->
     <string name="menu_settings_title">Importer/exporter</string>
     <string name="menu_reset_defaults">Réinitialiser tous les paramètres</string>
-    <string name="menu_import_settings">Importer des paramètres depuis un fichier...</string>
-    <string name="menu_export_settings">Exporter des paramètres vers un fichier...</string>
+    <string name="menu_import_settings">Importer des paramètres depuis un fichier…</string>
+    <string name="menu_export_settings">Exporter des paramètres vers un fichier…</string>
     <string name="menu_netstat_title">Statistiques réseau</string>
     <string name="menu_netstat_enable">Activer les statistiques</string>
     <string name="menu_netstat_clear">Réinitialiser les statistiques</string>
@@ -388,8 +388,8 @@
     <string name="lastestVersionTitle">Dernière version : </string>
     <string name="root_not_here">Accès root non accordé !</string>
     <string name="reboot_pending">En attente de redémarrage</string>
-    <string name="reboot_word">Redémarrer maintenant...</string>
-    <string name="update_checking">Vérification...</string>
+    <string name="reboot_word">Redémarrer maintenant…</string>
+    <string name="update_checking">Vérification…</string>
     <string name="update_download_started">En téléchargement… Merci de cliquer la notification quand elle apparaît</string>
     <string name="update_word">Mettre à jour</string>
     <string name="switch_branches">Changer de branche</string>

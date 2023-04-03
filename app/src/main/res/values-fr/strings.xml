@@ -1,8 +1,5 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Merci de confirmer que le module est activé dans LSPosed Manager</string>
     <string name="hide_default">Cacher (par défaut)</string>
     <string name="percent_of_default_size">% de la taille par défaut</string>
@@ -66,9 +63,7 @@
     <string name="battery_style_title">Choisir un style de batterie</string>
     <string name="battery_show_percent_title">Montrer le pourcentage de la batterie</string>
     <string name="battery_style_category_title">Style de batterie</string>
-    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Taille de l’icône de batterie</string>
-    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">Cachée</string>
     <string name="BIcon_Opacity_title">Opacité</string>
     <string name="sb_center_fine_tune">Ajuster la zone centrale</string>
@@ -191,23 +186,6 @@
     <string name="quick_settings_tiles_category">Préférences de la fenêtre de configuration rapide</string>
     <string name="qs_tile_style_title">Style de la fenêtre de configuration rapide</string>
     <string name="qstile_default">Valeur par défaut</string>
-    <string name="qstile_cookie" translatable="false">Cookie</string>
-    <string name="qstile_triangles" translatable="false">Triangle</string>
-    <string name="qstile_divided" translatable="false">Divided Circle</string>
-    <string name="qstile_attemptmountain" translatable="false">An attempt at a mountain</string>
-    <string name="qstile_squircle_trim" translatable="false">Squircle with trim</string>
-    <string name="qstile_ninja" translatable="false">Ninja</string>
-    <string name="qstile_wavey" translatable="false">Wavey</string>
-    <string name="qstile_squaremedo" translatable="false">The Squaremedo</string>
-    <string name="qstile_dual_tone_circle" translatable="false">Dual tone circle</string>
-    <string name="qstile_circleoutline" translatable="false">Circle Outline</string>
-    <string name="qstile_pokesign" translatable="false">Pokesign</string>
-    <string name="qstile_cosmos" translatable="false">Shishu Cosmos</string>
-    <string name="qstile_neonlike" translatable="false">Neon Light</string>
-    <string name="qstile_circle_trim" translatable="false">Circle with trim</string>
-    <string name="qstile_dottedcircle" translatable="false">Dotted Circle</string>
-    <string name="qstile_inkdrop" translatable="false">Ink</string>
-    <string name="qstile_circle" translatable="false">Circle</string>
     <string name="qs_volume_unmute_title">Valeur de réactivation du bloc de volume</string>
 
     <!--Navigation bar related-->
@@ -226,7 +204,6 @@
     <string name="three_button_left_title">Bouton gauche</string>
     <string name="three_button_center_title">Bouton central</string>
     <string name="three_button_right_title">Bouton droit</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">Cacher la barre de navigation</string>
     <string name="taskbar_as_recents_title">Transformer la TaskBar en applications récentes</string>
     <string name="taskbar_height_title">Hauteur de la TaskBar</string>
@@ -293,15 +270,6 @@
     <string name="dt_styles_category">Styles du thème sombre</string>
     <string name="dt_styles">Choisir un style</string>
     <string name="caution_unstable">Attention : cette option peut être instable pour certains utilisateurs.</string>
-    <string name="dt_black" translatable="false">Pitch black</string>
-    <string name="dt_bakedgreen" translatable="false">Baked Green</string>
-    <string name="dt_chocox" translatable="false">Choco X</string>
-    <string name="dt_darkaubergine" translatable="false">Dark Aubergine</string>
-    <string name="dt_style" translatable="false">Dark Blue</string>
-    <string name="dt_darkgray" translatable="false">Dark Grey</string>
-    <string name="dt_materialocean" translatable="false">Material Ocean</string>
-    <string name="dt_night" translatable="false">Night</string>
-    <string name="dt_solarizeddark" translatable="false">Solarized Dark</string>
     <string name="power_menu_overlays_section">Style du menu marche/arrêt</string>
     <string name="power_menu_overlays_title">Activer le thème clair/sombre dans le menu marche/arrêt</string>
     <string name="power_menu_overlays_summary_on">Cette option active aussi des nouvelles icônes super chouettes dans tout l’OS</string>
@@ -319,16 +287,13 @@
 
     <!-- Clock position -->
     <string name="clock_default">Gauche (par défaut)</string>
-    <string name="clock_center">Centre</string>
     <string name="clock_right">Droit</string>
 
     <!-- AM/PM style -->
-    <string name="am_pm_default" translatable="false">@string/hide_default</string>
     <string name="am_pm_normal">Même taille que l’horloge</string>
     <string name="am_pm_small">70% de la taille de l’horloge</string>
 
     <!-- Date position -->
-    <string name="date_default" translatable="false">@string/hide_default</string>
     <string name="date_before">Avant l’horloge (100%)</string>
     <string name="date_before_small">Après l’horloge (70%)</string>
     <string name="date_after">Après l’horloge (100%)</string>
@@ -372,7 +337,6 @@
     <string name="netstat_header">Préférences des statistiques réseau</string>
 
     <string name="string_formatter_manual_body">En plus du texte, des variables dynamiques sont à votre disposition :\n\n$G\&lt;format\&gt; : Date du calendrier géorgien, selon le format. Pour la documentation sur le formattage, merci de chercher `Java Date Format`\nExemple : $GMMM donne : Jan (ou autre)\n\n$P&lt;format&gt; : Date du calendrier perse, selon le format.\nExemple : $Pyyyy donne : 1401\n\nPour activer l’utilisation d’Internet depuis ci-dessous, vous devez aller activer l’option Divers > Statistiques réseau > Activer les statistiques\n\n$Nrx : Total des téléchargements d’aujourd’hui\n$Ntx: Total des uploads d’aujourd’hui\n$Nall : Trafic total d’aujourd’hui\n$Nssid : Nom du SSID du Wi-Fi (si disponible)\n\nEn remplaçant $N par $Nc, vous aurez les statistiques des données mobiles (par exemple $Ncrx pour les téléchargements, sauf pour $Nssid)\n\nExemple :\n`Utilisation des données de $GEEEE : $Ncall` donnera :\n`Utilisation des données de mardi : 2 Go`</string>
-    <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">Mises à jour</string>
     <string name="update_notification_title">Mise à jour téléchargée</string>
     <string name="update_notification_text">Installer</string>
@@ -380,7 +344,6 @@
     <string name="reboot_notification_text">La mise à jour sera active après le prochain redémarrage de l’appareil</string>
     <string name="update_flavor_title">Canal de mise à jour</string>
     <string name="stable_flavor">Stable</string>
-    <string name="canary_flavor" translatable="false">Canary</string>
     <string name="update_type_title">Type</string>
     <string name="full_type">Complet</string>
     <string name="xposed_type">Xposed seulement</string>
@@ -394,8 +357,6 @@
     <string name="update_word">Mettre à jour</string>
     <string name="switch_branches">Changer de branche</string>
     <string name="reinstall_word">Réinstaller</string>
-
-    <string name="title_activity_update" translatable="false">updateActivity</string>
 
     <string name="own_prefs_header">Paramètre d’AOSPMods</string>
     <string name="language_title">Langues</string>

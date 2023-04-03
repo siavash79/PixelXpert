@@ -1,8 +1,5 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
-    <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">LSPosed Manager에서 모듈이 활성화되었는지 확인해주세요</string>
     <string name="hide_default">숨김 (기본값)</string>
     <string name="percent_of_default_size">% (기본값 대비)</string>
@@ -66,9 +63,7 @@
     <string name="battery_style_title">배터리 아이콘 설정</string>
     <string name="battery_show_percent_title">배터리 퍼센트 표시</string>
     <string name="battery_style_category_title">배터리 스타일</string>
-    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">배터리 아이콘 크기</string>
-    <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">숨김</string>
     <string name="BIcon_Opacity_title">투명도</string>
     <string name="sb_center_fine_tune">중심부 미세 조정</string>
@@ -190,23 +185,6 @@
     <string name="quick_settings_tiles_category">빠른 설정 타일 설정</string>
     <string name="qs_tile_style_title">빠른 설정 타일 테마</string>
     <string name="qstile_default">기본</string>
-    <string name="qstile_cookie" translatable="false">Cookie</string>
-    <string name="qstile_triangles" translatable="false">Triangle</string>
-    <string name="qstile_divided" translatable="false">Divided Circle</string>
-    <string name="qstile_attemptmountain" translatable="false">An attempt at a mountain</string>
-    <string name="qstile_squircle_trim" translatable="false">Squircle with trim</string>
-    <string name="qstile_ninja" translatable="false">Ninja</string>
-    <string name="qstile_wavey" translatable="false">Wavey</string>
-    <string name="qstile_squaremedo" translatable="false">The Squaremedo</string>
-    <string name="qstile_dual_tone_circle" translatable="false">Dual tone circle</string>
-    <string name="qstile_circleoutline" translatable="false">Circle Outline</string>
-    <string name="qstile_pokesign" translatable="false">Pokesign</string>
-    <string name="qstile_cosmos" translatable="false">Shishu Cosmos</string>
-    <string name="qstile_neonlike" translatable="false">Neon Light</string>
-    <string name="qstile_circle_trim" translatable="false">Circle with trim</string>
-    <string name="qstile_dottedcircle" translatable="false">Dotted Circle</string>
-    <string name="qstile_inkdrop" translatable="false">Ink</string>
-    <string name="qstile_circle" translatable="false">Circle</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">뒤로 가기 제스쳐 설정</string>
@@ -224,7 +202,6 @@
     <string name="three_button_left_title">왼쪽 버튼</string>
     <string name="three_button_center_title">가운데 버튼</string>
     <string name="three_button_right_title">오른쪽 버튼</string>
-    <string name="pill_width_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="hide_navbar_title">네비게이션 바 숨기기</string>
     <string name="taskbar_as_recents_title">태스크 바를 최근 앱 바로 바꾸기</string>
     <string name="taskbar_height_title">태스크 바 높이</string>
@@ -288,15 +265,6 @@
     <string name="dt_styles_category">다크 테마 스타일</string>
     <string name="dt_styles">스타일을 선택하세요</string>
     <string name="caution_unstable">주의: 일부 사용자에게 해당 설정은 불안정할 수 있습니다.</string>
-    <string name="dt_black" translatable="false">Pitch black</string>
-    <string name="dt_bakedgreen" translatable="false">Baked Green</string>
-    <string name="dt_chocox" translatable="false">Choco X</string>
-    <string name="dt_darkaubergine" translatable="false">Dark Aubergine</string>
-    <string name="dt_style" translatable="false">Dark Blue</string>
-    <string name="dt_darkgray" translatable="false">Dark Grey</string>
-    <string name="dt_materialocean" translatable="false">Material Ocean</string>
-    <string name="dt_night" translatable="false">Night</string>
-    <string name="dt_solarizeddark" translatable="false">Solarized Dark</string>
     <string name="power_menu_overlays_section">전원 메뉴 테마</string>
     <string name="power_menu_overlays_title">전원 메뉴 라이트/다크 테마 활성화</string>
     <string name="power_menu_overlays_summary_on">해당 옵션은 시스템 전체에 멋진 새 아이콘을 덤으로 활성화하기도 합니다</string>
@@ -314,16 +282,13 @@
 
     <!-- Clock position -->
     <string name="clock_default">왼쪽 (기본)</string>
-    <string name="clock_center">가운데</string>
     <string name="clock_right">오른쪽</string>
 
     <!-- AM/PM style -->
-    <string name="am_pm_default" translatable="false">@string/hide_default</string>
     <string name="am_pm_normal">시계 크기의 100%</string>
     <string name="am_pm_small">시계 크기의 70%</string>
 
     <!-- Date position -->
-    <string name="date_default" translatable="false">@string/hide_default</string>
     <string name="date_before">시계 앞 (100%)</string>
     <string name="date_before_small">시계 앞 (70%)</string>
     <string name="date_after">시계 뒤 (100%)</string>
@@ -367,7 +332,6 @@
     <string name="netstat_header">네트워크 기록 설정</string>
 
     <string name="string_formatter_manual_body">일반적인 문장 이외에도, 동적 변수 또한 사용이 가능합니다:\n\n$G\&lt;format\&gt; : 그레고리안 날짜를 주어진 format에 따라 출력합니다. 포맷에 대한 자세한 정보가 필요하다면, `Java 날짜 포맷`을 검색해보세요\n예시: $GMMM 은: Jan 과 같이 영문자 3글자로 월을 표시합니다\n\n$P&lt;format&gt; : 페르시안 날짜를 주어진 format에 따라 출력합니다\n예시: $Pyyyy 는: 1401 이 표시될 수 있습니다\n\n인터넷 사용량을 표시하고자 한다면, 기타 설정 메뉴의, 네트워크 기록 설정으로 이동하여, 네트워크 기록 수집을 활성화하세요\n\n$Nrx : 오늘의 다운로드 총량\n$Ntx: 오늘의 업로드 총량\n$Nall : 오늘의 트래픽 총량\n$Nssid : WiFi SSID 이름 (표시 가능한 경우)\n\n$N 을 $Nc 로 대치할 경우, 모바일 데이터 사용기록에 따른 정보가 제공됩니다 (예로, 모바일 데이터 다운로드 총량은 $Ncrx 로 접근이 가능합니다; $Nssid 제외)\n\n예시:\n`$GEEEE 의 데이터 사용량: $Ncall` 표현식은:\n`Tuesday 의 데이터 사용량: 2GB`를 출력합니다</string>
-    <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">업데이트</string>
     <string name="update_notification_title">업데이트 다운로드됨</string>
     <string name="update_notification_text">여기를 눌러 설치하세요</string>
@@ -375,7 +339,6 @@
     <string name="reboot_notification_text">변경된 사항들은 기기를 다시 시작하면 적용됩니다</string>
     <string name="update_flavor_title">업데이트 채널</string>
     <string name="stable_flavor">Stable</string>
-    <string name="canary_flavor" translatable="false">Canary</string>
     <string name="update_type_title">패키지 타입</string>
     <string name="full_type">Full</string>
     <string name="xposed_type">Xposed Only</string>
@@ -389,8 +352,6 @@
     <string name="update_word">업데이트</string>
     <string name="switch_branches">branch 전환하기</string>
     <string name="reinstall_word">재설치</string>
-
-    <string name="title_activity_update" translatable="false">updateActivity</string>
 
     <string name="own_prefs_header">AOSPMods 설정</string>
     <string name="language_title">언어</string>

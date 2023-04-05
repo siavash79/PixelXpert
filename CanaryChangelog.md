@@ -1,3 +1,7 @@
+**canary-232**  
+- Fixed brightness slider's animation  
+- Fixed custom battery icon randomly not appearing immediately after restart  
+  
 **canary-231**  
 - Added QQS BrightnessSlider for A13-QPR2  
 - Fixed wifi & mobile data tiles not appearing on QS  

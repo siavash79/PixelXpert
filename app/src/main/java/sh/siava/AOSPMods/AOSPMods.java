@@ -139,6 +139,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 
 					if(bootLooped(mContext.getPackageName()))
 					{
+						log(String.format("AOSPMods: Possible bootloop in %s. Will not load for now", mContext.getPackageName()));
 						return;
 					}
 
@@ -183,7 +184,6 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		}
 		else if(strikeCount >= 3)
 		{
-			log(String.format("AOSPMods: Possible bootloop in %s. Will not load for now", packageName));
 			return true;
 		}
 		else

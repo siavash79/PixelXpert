@@ -93,6 +93,7 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - zz842@Telegram Hebrew
 - @Katsuyuki-Karasawa Japanese
 - @potatosalad775 Korean
+- @hcosserat French
 
 **Graphic design:**  
 - JstormZx@Telegram (Icon and Banner) 

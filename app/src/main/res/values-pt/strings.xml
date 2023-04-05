@@ -96,6 +96,7 @@
     <string name="so_double_tap_wake_summary">Usar duplo toque ao invés de um toque para acender o ecrã</string>
     <string name="overlay_none_title">(Padrão)</string>
     <string name="qs_panel_category_title">Definições rápidas</string>
+	<string name="vibration_type_touch">Intensidade definida pelas definições de vibração de toque do sistema</string>
 	<string name="qs_tile_qty_portrait">Em modo retrato</string>
     <string name="qs_tile_qty_landscape">Em modo paisagem</string>
     <string name="qs_rows_number">Número de linhas</string>
@@ -121,6 +122,7 @@
     <string name="wifi_cell_on">Usar WiFi e Dados em separado</string>
     <string name="wifi_cell_off">Usar apenas o atalho Internet</string>
     <string name="theme_customization_category">Temas</string>
+    <string name="vibration_type_notification">Intensidade definida pelas definições de vibração de notificação do sistema</string>
     <string name="gsans_override_title">Forçar a fonte Google Sans em todo o sistema</string>
     <string name="theme_customization_font_title">Fonte do título / corpo do texto</string>
     <string name="icons_style_title">Estilo dos Ícones</string>

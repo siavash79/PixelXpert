@@ -256,7 +256,6 @@
     <!-- Clock position -->
     <string name="clock_default">שמאל (ברירת מחדל)</string>
     <string name="clock_default_extra">שמאל - הודעות מעל</string>
-    <string name="clock_center">מֶרְכָּז</string>
     <string name="clock_right">ימין</string>
     <!-- AM/PM style -->
     <string name="am_pm_normal">100% גודל השעון</string>

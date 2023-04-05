@@ -61,8 +61,7 @@
     <string name="battery_circle">Círculo</string>
     <string name="battery_dashed_circle">Círculo pontilhado</string>
     <string name="clock_default">Esquerda (padrão)</string>
-    <string name="clock_center">Centro</string>
-    <string name="clock_right">Direita</string>
+	<string name="clock_right">Direita</string>
     <string name="am_pm_normal">Igual ao tamanho do relógio</string>
     <string name="am_pm_small">70% do tamanho do relógio</string>
     <string name="date_before">Antes do relógio (100%)</string>

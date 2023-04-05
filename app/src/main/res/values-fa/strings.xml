@@ -200,8 +200,7 @@
 
     <string name="clock_default">چپ (پیش‌فرض)</string>
     <string name="clock_default_extra">سمت چپ - بالای اعلان ها</string>
-    <string name="clock_center">مرکز</string>
-    <string name="clock_right">راست</string>
+	<string name="clock_right">راست</string>
 
 
     <string name="am_pm_normal">اندازه 100% ساعت</string>

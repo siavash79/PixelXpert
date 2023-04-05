@@ -283,8 +283,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">Sinistra (Default)</string>
-    <string name="clock_center">Centro</string>
-    <string name="clock_right">Destra</string>
+	<string name="clock_right">Destra</string>
 
     <!-- AM/PM style -->
     <string name="am_pm_normal">100% della dimensione dell\'orologio</string>

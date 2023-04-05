@@ -38,8 +38,7 @@
     <string name="carrier_text_value">Văn bản nhà cung cấp dịch vụ tùy chỉnh</string>
     <string name="caution_unstable">Chú ý: Tùy chọn này có thể không ổn định đối với một số thiết bị</string>
     <string name="clear_all_reposition_title">Thêm nút "Xóa tất cả" vào cuối trang ứng dụng gần đây</string>
-    <string name="clock_center">Trung tâm</string>
-    <string name="clock_default">Trái (Mặc định)</string>
+	<string name="clock_default">Trái (Mặc định)</string>
     <string name="clock_default_extra">Trái - Phía trên thông báo</string>
     <string name="clock_right">Phải</string>
     <string name="colorpill">Thanh điều hướng có màu nhấn</string>

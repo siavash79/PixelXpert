@@ -200,8 +200,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">Links (Standaard)</string>
-    <string name="clock_center">Centrum</string>
-    <string name="clock_right">Rechts</string>
+	<string name="clock_right">Rechts</string>
 
     <!-- AM/PM style -->
     <string name="am_pm_normal">100% grootte van de klok</string>

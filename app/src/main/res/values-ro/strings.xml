@@ -258,8 +258,7 @@
     <!-- Clock position -->
     <string name="clock_default">Stânga (implicit)</string>
     <string name="clock_default_extra">Stânga - Peste notificări</string>
-    <string name="clock_center">Centru</string>
-    <string name="clock_right">Dreapta</string>
+	<string name="clock_right">Dreapta</string>
     <!-- AM/PM style -->
     <string name="am_pm_normal">Mărimea 100% a ceasului</string>
     <string name="am_pm_small">Mărimea 70% a ceasului</string>

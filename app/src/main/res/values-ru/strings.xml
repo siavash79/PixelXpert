@@ -252,8 +252,7 @@
     <!-- Clock position -->
     <string name="clock_default">Слева (по умолчанию)</string>
     <string name="clock_default_extra">Слева — над уведомлениями</string>
-    <string name="clock_center">По центру</string>
-    <string name="clock_right">Справа</string>
+	<string name="clock_right">Справа</string>
 
     <!-- AM/PM style -->
     <string name="am_pm_normal">70% размера часов</string>
@@ -360,5 +359,24 @@
     <string name="hide_avatar_title">Удалить аватар пользователя (многопользовательский режим)</string>
 	<string name="camera_manager_master_title">Включить модификации фонарика (Отключите, если устройство не поддерживает)</string>
     <string name="clipboard_smart_actions_title">Дополнительные действия в буфере обмена</string>
+	<string name="pm_header">Менеджер пакетов</string>
+    <string name="LSleftLongClickShortcutTitle">Левый ярлык (длительное нажатие)</string>
+    <string name="LSrightLongClickShortcutTitle">Правый ярлык (длительное нажатие)</string>
+    <string name="tv_remote_shortcut">Пульт дистанционного управления телевизором</string>
+    <string name="dnd_shortcut">Не беспокоить</string>
+    <string name="sb_multi_row_notification_icons">Многорядные значки уведомлений (требуется увеличение высоты статусбара)</string>
+    <string name="sb_double_row_category">Двойные строки панели состояния</string>
+    <string name="qs_tile_qty_title">Настройки быстрых настроек счетчик плиток</string>
+    <string name="qs_tile_qty_portrait">"В портретной ориентации "</string>
+    <string name="qs_tile_qty_landscape">В горизонтальной ориентации</string>
+    <string name="pm_bypass_signature_title">Обход проверки подписи пакета</string>
+    <string name="pm_allow_downgrade_title">Разрешить понижение версии приложения</string>
+    <string name="incompatible_alert_title">Несовместимый</string>
+    <string name="incompatible_alert_body">"Ваше текущее ПЗУ не совместимо с этим модулем. Вы можете продолжать использовать его, но некоторые (или все) опции могут работать не так, как задумано.\\n\\nПожалуйста, не сообщайте об ошибках "</string>
+    <string name="incompatible_alert_ok_btn">Я понимаю</string>
+    <string name="qs_volume_unmute_title">Величина отключения плитки громкости</string>
+    <string name="auto_off_five_minutes">Включено на следующие 5 минут</string>
+    <string name="vibration_type_touch">Интенсивность определяется системными настройками вибрации при касании</string>
+    <string name="vibration_type_notification">Интенсивность определяется системными настройками вибрации уведомлений</string>
 
 </resources>

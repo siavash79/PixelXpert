@@ -214,13 +214,15 @@ public class BrightnessSlider extends XposedModPack {
 	}
 
 	//swapping top and bottom margins of slider
+	@SuppressLint("DiscouragedApi")
 	private void setSliderMargins(View slider) {
 		if (slider != null) {
 			Resources res = mContext.getResources();
 			ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) slider.getLayoutParams();
-			@SuppressLint("DiscouragedApi") int top = res.getDimensionPixelSize(
+
+			int top = res.getDimensionPixelSize(
 					res.getIdentifier("qs_brightness_margin_top", "dimen", mContext.getPackageName()));
-			@SuppressLint("DiscouragedApi") int bottom = res.getDimensionPixelSize(
+			int bottom = res.getDimensionPixelSize(
 					res.getIdentifier("qs_brightness_margin_bottom", "dimen", mContext.getPackageName()));
 
 			lp.topMargin = (BrightnessSliderOnBottom)
@@ -233,30 +235,30 @@ public class BrightnessSlider extends XposedModPack {
 		}
 	}
 
-	private void setBrightnessView(ViewGroup o, @NonNull View view, boolean isQQS) { //Classloader can't find the method by reflection
-		View mBrightnessView = (View) getObjectField(o, "mBrightnessView");
+	private void setBrightnessView(ViewGroup QSPanelView, @NonNull View brightnessView, boolean isQQS) { //Classloader can't find the method by reflection
+		View mBrightnessView = (View) getObjectField(QSPanelView, "mBrightnessView");
 		duringSliderPlacement = true;
 
 		if (mBrightnessView != null) {
-			o.removeView(mBrightnessView);
-			setObjectField(o, "mMovableContentStartIndex", getIntField(o, "mMovableContentStartIndex") - 1);
+			QSPanelView.removeView(mBrightnessView);
+			setObjectField(QSPanelView, "mMovableContentStartIndex", getIntField(QSPanelView, "mMovableContentStartIndex") - 1);
 		}
 		try {
-			((ViewGroup) view.getParent()).removeView(view);
+			((ViewGroup) brightnessView.getParent()).removeView(brightnessView);
 		} catch (Throwable ignored) {
 		}
 
-		o.addView(view, BrightnessSliderOnBottom
+		QSPanelView.addView(brightnessView, BrightnessSliderOnBottom
 				? isQQS
 					? 2
 					: 1
 				: 0);
 
-		setObjectField(o, "mBrightnessView", view);
+		setObjectField(QSPanelView, "mBrightnessView", brightnessView);
 
-		setSliderMargins(view);
+		setSliderMargins(brightnessView);
 
-		setObjectField(o, "mMovableContentStartIndex", getIntField(o, "mMovableContentStartIndex") + 1);
+		setObjectField(QSPanelView, "mMovableContentStartIndex", getIntField(QSPanelView, "mMovableContentStartIndex") + 1);
 		duringSliderPlacement = false;
 	}
 
@@ -312,7 +314,7 @@ public class BrightnessSlider extends XposedModPack {
 				{ //13 QPR1
 					mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mBroadcastDispatcher"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
 				}
-				catch (Throwable tt) //some custom roms added icon into signature. like ArrowOS
+				catch (Throwable ignored) //some custom roms added icon into signature. like ArrowOS
 				{
 					ImageView icon = (ImageView) callMethod(mBrightnessSliderController, "getIconView");
 					mBrightnessController = callMethod(brightnessControllerFactory, "create", icon, mBrightnessSliderController);

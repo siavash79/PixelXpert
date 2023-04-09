@@ -53,7 +53,6 @@
     <string name="BIcon_Opacity_title">شفافیت</string>
     <string name="sb_center_fine_tune">تنظیم دقیق مرکز نوار وضعیت</string>
     <string name="sb_multi_row_system_icons">نمادهای سیستم چند ردیفه (به ارتفاع مناسب نوار وضعیت نیاز دارد)</string>
-    <string name="sb_multi_row_category">نمادهای سیستم چند ردیفی</string>
     <string name="sb_icon_sort_mode">روش قرار دادن آیکون</string>
     <string name="sort_clean">منظم</string>
     <string name="sort_tight">استفاده حداکثری از فضا</string>
@@ -79,7 +78,6 @@
     <string name="sbc_color">ساعت</string>
     <string name="sbc_after_color">متن بعد از ساعت</string>
     <string name="network_settings_pref">تنظیمات مانیتور شبکه …</string>
-    <string name="ntsb_far_left_extra">سمت چپ - بالای اعلان ها</string>
     <string name="ntsb_mid_left">وسط چپ</string>
     <string name="ntsb_mid_right">وسط راست</string>
     <string name="ntsb_category_title">مانیتور شبکه</string>
@@ -199,7 +197,7 @@
 
 
     <string name="clock_default">چپ (پیش‌فرض)</string>
-    <string name="clock_default_extra">سمت چپ - بالای اعلان ها</string>
+	<string name="clock_center">مرکز</string>
 	<string name="clock_right">راست</string>
 
 

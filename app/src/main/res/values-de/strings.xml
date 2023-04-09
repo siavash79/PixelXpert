@@ -59,7 +59,6 @@
     <string name="BIcon_Opacity_title">Sichtbarkeit</string>
     <string name="sb_center_fine_tune">Mittenbereich feinabstimmen</string>
     <string name="sb_multi_row_system_icons">Mehrzeilige Systemsymbole (erfordert eine höhere Höhe der Statusleiste)</string>
-    <string name="sb_multi_row_category">Mehrzeilige Systemsymbole</string>
     <string name="sb_icon_sort_mode">Icon-Platzierungsmethode</string>
     <string name="sort_clean">In einem Raster sortieren</string>
     <string name="sort_tight">Höchstzahl an Artikeln anpassen</string>
@@ -89,7 +88,6 @@
     <string name="sbc_after_color">Text nach Uhr</string>
     <string name="network_settings_pref">Netzwerküberwachungseinstellungen…</string>
     <string name="ntsb_far_left">Ganz links</string>
-    <string name="ntsb_far_left_extra">Ganz links – über den Benachrichtigungen</string>
     <string name="ntsb_mid_left">Mitte links</string>
     <string name="ntsb_mid_right">Mitte rechts</string>
     <string name="ntsb_category_title">Netzwerkanzeige</string>
@@ -246,7 +244,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">links (Standard)</string>
-    <string name="clock_default_extra">Links - Über Benachrichtigungen</string>
+	<string name="clock_center">zentriert</string>
 	<string name="clock_right">rechts</string>
 
     <!-- AM/PM style -->

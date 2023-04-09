@@ -39,8 +39,8 @@
     <string name="caution_unstable">Chú ý: Tùy chọn này có thể không ổn định đối với một số thiết bị</string>
     <string name="clear_all_reposition_title">Thêm nút "Xóa tất cả" vào cuối trang ứng dụng gần đây</string>
 	<string name="clock_default">Trái (Mặc định)</string>
-    <string name="clock_default_extra">Trái - Phía trên thông báo</string>
-    <string name="clock_right">Phải</string>
+	<string name="clock_center">Trung tâm</string>
+	<string name="clock_right">Phải</string>
     <string name="colorpill">Thanh điều hướng có màu nhấn</string>
     <string name="combined_signal_icon_title">Biểu tượng tín hiệu kết hợp\n(Wifi,Dữ liệu mạng di động)</string>
     <string name="configure_carrier_text">Định cấu hình văn bản của nhà cung cấp dịch vụ - Đầu màn hình</string>
@@ -146,7 +146,6 @@
     <string name="ntsb_category_title">Tốc độ mạng</string>
     <string name="ntsb_enabled_title">Hiển thị tốc độ mạng</string>
     <string name="ntsb_far_left">Trái</string>
-    <string name="ntsb_far_left_extra">Trái - trên Thông báo</string>
     <string name="ntsb_mid_left">Giữa trái</string>
     <string name="ntsb_mid_right">Giữa phải</string>
     <string name="ntsb_position_title">Vị trí</string>
@@ -193,7 +192,6 @@
     <string name="root_not_here">TRUY CẬP ROOT KHÔNG ĐƯỢC CHO PHÉP!</string>
     <string name="sb_center_fine_tune">Vị trí khu vực trung tâm thanh trạng thái</string>
     <string name="sb_icon_sort_mode">Phương pháp đặt biểu tượng</string>
-    <string name="sb_multi_row_category">Biểu tượng hệ thống nhiều hàng</string>
     <string name="sb_multi_row_system_icons">Biểu tượng hệ thống nhiều hàng (cần chiều cao thanh trạng thái nhiều hơn)</string>
     <string name="sb_notification_limit">Số biểu tượng thông báo tối đa (Mặc định là 4)</string>
     <string name="sb_padding_summary">Tuỳ chỉnh giá trị tương ứng với thiết bị của bạn</string>

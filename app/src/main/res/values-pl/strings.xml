@@ -59,7 +59,6 @@
     <string name="BIcon_Opacity_title">Nieprzezroczystość</string>
     <string name="sb_center_fine_tune">Dostrój obszar środkowy</string>
     <string name="sb_multi_row_system_icons">Ikony systemu wielorzędowego (wymaga podwyższonej wysokości paska stanu)</string>
-    <string name="sb_multi_row_category">Wiele rzędów ikon systemowych</string>
     <string name="sb_icon_sort_mode">Metoda umieszczania ikon</string>
     <string name="sort_clean">Sortuj w siatce</string>
     <string name="sort_tight">Dopasuj maksymalną liczbę przedmiotów</string>
@@ -88,7 +87,6 @@
     <string name="sbc_after_color">Tekst po zegarze</string>
     <string name="network_settings_pref">Ustawienia monitora sieci…</string>
     <string name="ntsb_far_left">Daleko w lewo</string>
-    <string name="ntsb_far_left_extra">Daleko po lewej – powyżej powiadomień</string>
     <string name="ntsb_mid_left">Środkowa lewa</string>
     <string name="ntsb_mid_right">Środkowy prawy</string>
     <string name="ntsb_category_title">Monitor sieci</string>
@@ -250,6 +248,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">Lewa strona (domyślnie)</string>
+	<string name="clock_center">Środek</string>
 	<string name="clock_right">Prawa strona</string>
 
     <!-- AM/PM style -->

@@ -60,7 +60,6 @@
     <string name="BIcon_Opacity_title">Полупрозрачный</string>
     <string name="sb_center_fine_tune">Настройка центральной зоны</string>
     <string name="sb_multi_row_system_icons">Многострочные системные значки (требуется большая высота строки состояния)</string>
-    <string name="sb_multi_row_category">Многострочные системные значки</string>
     <string name="sb_icon_sort_mode">Метод размещения значка</string>
     <string name="sort_clean">Сортировать по сетке</string>
     <string name="sort_tight">Поместить максимальное количество элементов</string>
@@ -89,7 +88,6 @@
     <string name="sbc_after_color">Текст после часов</string>
     <string name="network_settings_pref">Настройки сетевого монитора…</string>
     <string name="ntsb_far_left">Слева</string>
-    <string name="ntsb_far_left_extra">Слева - над уведомленими</string>
     <string name="ntsb_mid_left">По середине</string>
     <string name="ntsb_mid_right">Справа</string>
     <string name="ntsb_category_title">Мониторинг сетевого трафика</string>
@@ -251,7 +249,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">Слева (по умолчанию)</string>
-    <string name="clock_default_extra">Слева — над уведомлениями</string>
+	<string name="clock_center">По центру</string>
 	<string name="clock_right">Справа</string>
 
     <!-- AM/PM style -->

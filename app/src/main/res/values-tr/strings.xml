@@ -58,7 +58,6 @@
     <string name="BIcon_Opacity_title">Opaklık</string>
     <string name="sb_center_fine_tune">İnce ayar merkez alanı</string>
     <string name="sb_multi_row_system_icons">Çok satırlı sistem simgeleri (daha yüksek durum çubuğu yüksekliği gerekir)</string>
-    <string name="sb_multi_row_category">Çok satırlı sistem simgeleri</string>
     <string name="sb_icon_sort_mode">Simge yerleştirme yöntemi</string>
     <string name="sort_clean">Ağ sistemine uygun sığdır</string>
     <string name="sort_tight">Maksimum öğeyi sığdırs</string>
@@ -87,7 +86,6 @@
     <string name="sbc_after_color">Saatten sonrakı yazı</string>
     <string name="network_settings_pref">Ağ izleme ayarları…</string>
     <string name="ntsb_far_left">Tam Sol</string>
-    <string name="ntsb_far_left_extra">Tam sol - Bildirimlerin üstünde</string>
     <string name="ntsb_mid_left">Orta-Sol</string>
     <string name="ntsb_mid_right">Orta-Sağ</string>
     <string name="ntsb_category_title">Ağ İzleyicisi</string>
@@ -244,8 +242,8 @@
 
     <!-- Clock position -->
     <string name="clock_default">Sol (Varsayılan)</string>
-    <string name="clock_default_extra">Sol - Bildirimlerin üstünde</string>
-	<string name="clock_right">Sağ</string>
+    <string name="clock_center">Merkez</string>
+    <string name="clock_right">Sağ</string>
 
     <!-- AM/PM style -->
     <string name="am_pm_normal">Saatin Boyutunun %100\'ü</string>

@@ -287,7 +287,8 @@
 
     <!-- Clock position -->
     <string name="clock_default">Gauche (par défaut)</string>
-    <string name="clock_right">Droit</string>
+	<string name="clock_center">Centre</string>
+	<string name="clock_right">Droit</string>
 
     <!-- AM/PM style -->
     <string name="am_pm_normal">Même taille que l’horloge</string>

@@ -61,6 +61,7 @@
     <string name="battery_circle">Círculo</string>
     <string name="battery_dashed_circle">Círculo pontilhado</string>
     <string name="clock_default">Esquerda (padrão)</string>
+	<string name="clock_center">Centro</string>
 	<string name="clock_right">Direita</string>
     <string name="am_pm_normal">Igual ao tamanho do relógio</string>
     <string name="am_pm_small">70% do tamanho do relógio</string>
@@ -247,16 +248,13 @@
     <string name="easy_unlock_summary">Se não funcionar à primeira, tente novamente</string>
     <string name="sb_multi_row_system_icons">Várias linhas para ícones de sistema (requer barra de estado mais espessa)</string>
 	<string name="qs_volume_unmute_title">Valor para desligar o mute no atalho de volume</string>
-	<string name="sb_multi_row_category">Várias linhas para ícones de sistema</string>
     <string name="sb_icon_sort_mode">Método de colocação dos ícones</string>
     <string name="sort_clean">Ajustar em grelha</string>
     <string name="sort_tight">Ajustar o maior número de itens</string>
     <string name="sb_notification_limit">Número máximo de ícones de notificação (4 é o padrão)</string>
-    <string name="ntsb_far_left_extra">Mais à esquerda - Acima das notificações</string>
     <string name="qs_cols_number">Número de colunas das QS</string>
     <string name="qqs_tiles_number">Número de atalhos na QQS (2 linhas máx.)</string>
     <string name="force_no_cutout">Ignorar o notch da câmara</string>
-    <string name="clock_default_extra">Esquerda - Acima das notificações</string>
     <string name="sb_padding_title">Espaçamento na barra de estado</string>
     <string name="sb_padding_summary">Os valores min/máx são os padrão</string>
     <string name="volume_button_step_title">Níveis de volume (0 a 100%)</string>

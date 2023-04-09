@@ -263,6 +263,7 @@
     <string name="battery_circle_filled">塗り潰しの円</string>
     <!-- Clock position -->
     <string name="clock_default">左 (既定)</string>
+	<string name="clock_center">中央</string>
 	<string name="clock_right">右</string>
     <!-- AM/PM style -->
     <string name="am_pm_normal">100% size of the clock</string>

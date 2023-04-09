@@ -68,7 +68,6 @@
     <string name="BIcon_Opacity_title">Opacità</string>
     <string name="sb_center_fine_tune">Perfeziona posizione centrale</string>
     <string name="sb_multi_row_system_icons">Icone di sistema multi riga (necessita aumento altezza Status Bar)</string>
-    <string name="sb_multi_row_category">Righe multiple icone di sistema</string>
     <string name="sb_double_row_category">Status Bar su due righe</string>
     <string name="sb_icon_sort_mode">Metodo posizionamento icone</string>
     <string name="sort_clean">Ordina in griglia</string>
@@ -283,6 +282,7 @@
 
     <!-- Clock position -->
     <string name="clock_default">Sinistra (Default)</string>
+	<string name="clock_center">Centro</string>
 	<string name="clock_right">Destra</string>
 
     <!-- AM/PM style -->

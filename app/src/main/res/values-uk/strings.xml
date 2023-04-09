@@ -212,8 +212,8 @@
 
     <!-- Clock position -->
     <string name="clock_default">Ліворуч (За замовчуванням)</string>
-    <string name="clock_center">По центру</string>
-    <string name="clock_right">Праворуч</string>
+	<string name="clock_center">По центру</string>
+	<string name="clock_right">Праворуч</string>
 
     <!-- AM/PM style -->
     <string name="am_pm_normal">100% size of the clock</string>

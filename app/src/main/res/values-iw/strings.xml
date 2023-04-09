@@ -60,7 +60,6 @@
     <string name="BIcon_Opacity_title">אֲטִימוּת</string>
     <string name="sb_center_fine_tune">כוונן את אזור המרכז</string>
     <string name="sb_multi_row_system_icons">סמלי הודעות מרובות שורות (צריך להגדיל את גובה שורת המצב)</string>
-    <string name="sb_multi_row_category">מספר שורות של סמלי מערכת</string>
     <string name="sb_icon_sort_mode">שיטת מיקום אייקונים</string>
     <string name="sort_clean">מיון ברשת</string>
     <string name="sort_tight">התאם מקסימום פריטים</string>
@@ -90,7 +89,6 @@
     <string name="sbc_after_color">טקסט אחרי שעון</string>
     <string name="network_settings_pref">הגדרות צג רשת…</string>
     <string name="ntsb_far_left">שמאל קיצוני</string>
-    <string name="ntsb_far_left_extra">רחוק משמאל - הודעות מעל</string>
     <string name="ntsb_mid_left">אמצע שמאל</string>
     <string name="ntsb_mid_right">אמצע ימין</string>
     <string name="ntsb_category_title">צג רשת</string>
@@ -255,9 +253,8 @@
     <string name="battery_circle_filled">מעגל מלא</string>
     <!-- Clock position -->
     <string name="clock_default">שמאל (ברירת מחדל)</string>
-    <string name="clock_default_extra">שמאל - הודעות מעל</string>
-    <string name="clock_center">מֶרְכָּז</string>
-    <string name="clock_right">ימין</string>
+	<string name="clock_center">מֶרְכָּז</string>
+	<string name="clock_right">ימין</string>
     <!-- AM/PM style -->
     <string name="am_pm_normal">100% גודל השעון</string>
     <string name="am_pm_small">70% גודל של השעון</string>

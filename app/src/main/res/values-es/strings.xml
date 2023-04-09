@@ -35,7 +35,7 @@
 	<string name="keyguard_dim_amount_title">Fondo atenuado en teclado de bloqueo</string>
 	<string name="keyguard_bottom_category">Accesos directos en la parte inferior de la pantalla</string>
 	<string name="keyguard_bottom_buttons_transparent_title">Ocultar círculo alrededor de los iconos</string>
-	<string name="keyguard_bottom_force_camera_title">Mostrar atajo a la Camara</string>
+	<string name="keyguard_bottom_force_camera_title">Mostrar atajo a la Cámara</string>
 	<string name="keyguard_left_shortcut">Mostrar atajo en el lado izquierdo</string>
 	<string name="LSleftShortcutTitle">Acceso directo izquierda</string>
 	<string name="LSrightShortcutTitle">Acceso directo derecho</string>
@@ -63,7 +63,6 @@
 	<string name="BIcon_Opacity_title">Opacidad</string>
 	<string name="sb_center_fine_tune">Afinar el área central</string>
 	<string name="sb_multi_row_system_icons">Iconos de sistema de varias filas (necesita una altura de barra de estado más alta)</string>
-	<string name="sb_multi_row_category">Iconos de sistema de varias filas</string>
 	<string name="sb_icon_sort_mode">Método de colocación de iconos</string>
 	<string name="sort_clean">Ordenar en una cuadrícula</string>
 	<string name="sort_tight">Ajustar artículos máximos</string>
@@ -85,7 +84,7 @@
 	<string name="sbc_advanced_sum">Lea la documentación del formato de fecha de Java</string>
 	<string name="sbc_custom_date_before">Formato de fecha personalizado antes del reloj</string>
 	<string name="sbc_date_small">Tamaño más pequeño (70%)</string>
-	<string name="sbc_custom_date_after">Formato de fecha personalizado despues del reloj</string>
+	<string name="sbc_custom_date_after">Formato de fecha personalizado después del reloj</string>
 	<string name="sbc_header">Personalizar el reloj</string>
 	<string name="sbc_clock_color_category">Opciones de color</string>
 	<string name="sbc_colorful_title">Hacerlo colorido</string>
@@ -94,7 +93,6 @@
 	<string name="sbc_after_color">Texto después del reloj</string>
 	<string name="network_settings_pref">Configuración del monitor de red…</string>
 	<string name="ntsb_far_left">Extremo izquierdo</string>
-	<string name="ntsb_far_left_extra">Extremo izquierdo: arriba de las notificaciones</string>
 	<string name="ntsb_mid_left">Mitad a la izquierda</string>
 	<string name="ntsb_mid_right">Mitad a la derecha</string>
 	<string name="ntsb_category_title">Tráfico de red</string>
@@ -158,7 +156,7 @@
 	<string name="qs_pulldown_side_title">Lado por donde deslizar</string>
 	<string name="qs_pulldown_category">Deslizar rápido para abajo en ajustes rápidos</string>
 	<string name="qs_haptic_switch_title">Vibrar al tocar los ajustes rápidos</string>
-	<string name="qs_rows_number">Número de lineas</string>
+	<string name="qs_rows_number">Número de líneas</string>
 	<string name="qs_cols_number">Número de columnas QS</string>
 	<string name="qqs_tiles_number">Número máximo de mosaicos en QS (máx. 2 filas)</string>
 	<string name="qs_tile_label_size">Tamaño de etiqueta de mosaico QS</string>
@@ -269,8 +267,6 @@
 
 	<!-- Clock position -->
 	<string name="clock_default">Izquierda (por defecto)</string>
-	<string name="clock_default_extra">Izquierda: arriba de las notificaciones</string>
-	<string name="clock_center">Centro</string>
 	<string name="clock_right">Derecha</string>
 
 	<!-- AM/PM style -->
@@ -310,7 +306,7 @@
 	<string name="nestat_caution_title">Precaución!</string>
 	<string name="nestat_caution_text">Las estadísticas de su red se restablecerán de forma permanente. ¿Proceder?</string>
 	<string name="netstat_caution_yes">Continuar</string>
-	<string name="netstat_caution_no">Quizas mas tarde</string>
+	<string name="netstat_caution_no">Quizás mas tarde</string>
 
 	<string name="monitoring_category_title">Opciones de monitoreo</string>
 	<string name="netstat_header">Configuración de estadísticas de red</string>

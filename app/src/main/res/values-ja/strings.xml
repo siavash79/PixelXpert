@@ -94,7 +94,7 @@
     <string name="sbc_before_color">時計の前にテキストを表示</string>
     <string name="sbc_color">時計</string>
     <string name="sbc_after_color">時計の後にテキストを表示</string>
-    <string name="network_settings_pref">ネットワークモニターの設定...</string>
+    <string name="network_settings_pref">ネットワークモニターの設定…</string>
     <string name="ntsb_far_left">左</string>
     <string name="ntsb_mid_left">左中央</string>
     <string name="ntsb_mid_right">右中央</string>
@@ -263,8 +263,8 @@
     <string name="battery_circle_filled">塗り潰しの円</string>
     <!-- Clock position -->
     <string name="clock_default">左 (既定)</string>
-    <string name="clock_center">中央</string>
-    <string name="clock_right">右</string>
+	<string name="clock_center">中央</string>
+	<string name="clock_right">右</string>
     <!-- AM/PM style -->
     <string name="am_pm_normal">100% size of the clock</string>
     <string name="am_pm_small">70% size of the clock</string>

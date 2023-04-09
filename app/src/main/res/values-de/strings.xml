@@ -59,7 +59,6 @@
     <string name="BIcon_Opacity_title">Sichtbarkeit</string>
     <string name="sb_center_fine_tune">Mittenbereich feinabstimmen</string>
     <string name="sb_multi_row_system_icons">Mehrzeilige Systemsymbole (erfordert eine höhere Höhe der Statusleiste)</string>
-    <string name="sb_multi_row_category">Mehrzeilige Systemsymbole</string>
     <string name="sb_icon_sort_mode">Icon-Platzierungsmethode</string>
     <string name="sort_clean">In einem Raster sortieren</string>
     <string name="sort_tight">Höchstzahl an Artikeln anpassen</string>
@@ -89,7 +88,6 @@
     <string name="sbc_after_color">Text nach Uhr</string>
     <string name="network_settings_pref">Netzwerküberwachungseinstellungen…</string>
     <string name="ntsb_far_left">Ganz links</string>
-    <string name="ntsb_far_left_extra">Ganz links – über den Benachrichtigungen</string>
     <string name="ntsb_mid_left">Mitte links</string>
     <string name="ntsb_mid_right">Mitte rechts</string>
     <string name="ntsb_category_title">Netzwerkanzeige</string>
@@ -246,9 +244,8 @@
 
     <!-- Clock position -->
     <string name="clock_default">links (Standard)</string>
-    <string name="clock_default_extra">Links - Über Benachrichtigungen</string>
-    <string name="clock_center">zentriert</string>
-    <string name="clock_right">rechts</string>
+	<string name="clock_center">zentriert</string>
+	<string name="clock_right">rechts</string>
 
     <!-- AM/PM style -->
     <string name="am_pm_normal">100% Größe der Uhr</string>
@@ -360,4 +357,23 @@
     <string name="hide_avatar_title">Benutzer-Avatar entfernen (Mehrbenutzermodus)</string>
     <string name="clipboard_smart_actions_title">Smart-Aktionen in der Zwischenablage</string>
     <string name="camera_manager_master_title">Taschenlampenmodifikationen aktivieren (Deaktivieren, wenn das Gerät es nicht unterstützt)</string>
+	<string name="pm_header">Anwendungpaketmanager</string>
+	<string name="LSleftLongClickShortcutTitle">Linkes Shortcut (lang drücken)</string>
+    <string name="LSrightLongClickShortcutTitle">Rechte Shortcut (Langer Druck)</string>
+    <string name="tv_remote_shortcut">TV-Fernbedienung</string>
+    <string name="dnd_shortcut">Bitte nicht stören</string>
+    <string name="sb_multi_row_notification_icons">Mehrreihige Benachrichtigungssymbole (höhere Statusleiste erforderlich)</string>
+    <string name="sb_double_row_category">Doppelte Statusleistenzeilen</string>
+    <string name="qs_tile_qty_title">Schnelleinstellungen Kachelanzahl Einstellungen</string>
+    <string name="qs_tile_qty_portrait">Im Hochformat</string>
+    <string name="qs_tile_qty_landscape">Im Querformat</string>
+    <string name="pm_bypass_signature_title">Umgehen der Paketsignaturprüfung</string>
+    <string name="pm_allow_downgrade_title">Downgrade von Anwendungen zulassen</string>
+    <string name="incompatible_alert_title">Inkompatibel</string>
+    <string name="incompatible_alert_body">"Ihr aktuelles ROM ist nicht das direkte Ziel dieses Moduls. Sie können es weiterhin verwenden, aber einige (oder alle) Optionen funktionieren möglicherweise nicht wie vorgesehen\\n\\nBitte melden Sie keine Bugs "</string>
+    <string name="incompatible_alert_ok_btn">"Ich habe verstanden "</string>
+    <string name="qs_volume_unmute_title">Lautstärke Kachel Wert aufheben</string>
+    <string name="auto_off_five_minutes">Aktiviert für die nächsten 5 Minuten</string>
+	<string name="vibration_type_touch">"Intensität wird durch die Systemeinstellungen für die Berührungsvibration bestimmt "</string>
+    <string name="vibration_type_notification">Intensität wird durch die Vibrationseinstellungen für die Systembenachrichtigung festgelegt</string>
 </resources>

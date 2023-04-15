@@ -631,26 +631,32 @@ public class StatusbarMods extends XposedModPack {
 
 						NetworkTraffic.setTintColor(fillColor, false);
 
-						//Clickable icons
-						Object mBatteryRemainingIcon = getObjectField(param.thisObject, "mBatteryRemainingIcon");
-						Object mDateView = getObjectField(param.thisObject, "mDateView");
-						Object mClockViewQS = getObjectField(param.thisObject, "mClockView");
-
 						try {
+							//Clickable icons
+							Object mBatteryRemainingIcon = getObjectField(param.thisObject, "mBatteryRemainingIcon");
+							Object mDateView = getObjectField(param.thisObject, "mDateView");
+							Object mClockViewQS = getObjectField(param.thisObject, "mClockView");
+
 							callMethod(mBatteryRemainingIcon, "setOnClickListener", clickListener);
 							callMethod(mClockViewQS, "setOnClickListener", clickListener);
 							callMethod(mClockViewQS, "setOnLongClickListener", clickListener);
 							callMethod(mDateView, "setOnClickListener", clickListener);
 							callMethod(mDateView, "setOnLongClickListener", clickListener);
-						} catch (Exception ignored) {}
+						} catch (Throwable ignored) {}
 					}
 				});
 
 		try
 		{
-			Class<?> LargeScreenShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpparam.classLoader);
+			//QPR3
+			Class<?> ShadeHeaderControllerClass = findClassIfExists("com.android.systemui.shade.ShadeHeaderController", lpparam.classLoader);
 
-			hookAllMethods(LargeScreenShadeHeaderControllerClass, "onInit", new XC_MethodHook() {
+			if(ShadeHeaderControllerClass == null) //QPR2
+			{
+				ShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpparam.classLoader);
+			}
+
+			hookAllMethods(ShadeHeaderControllerClass, "onInit", new XC_MethodHook() {
 				@SuppressLint("DiscouragedApi")
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {

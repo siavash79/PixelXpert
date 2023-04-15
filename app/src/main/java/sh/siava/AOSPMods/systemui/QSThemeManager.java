@@ -4,6 +4,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
@@ -168,11 +169,17 @@ public class QSThemeManager extends XposedModPack {
 				}
 			});
 
-		}catch (Throwable ignored){ //QPR2
-			Class<?> LargeScreenShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpparam.classLoader);
+		}catch (Throwable ignored){ //QPR2&3
+			//QPR3
+			Class<?> ShadeHeaderControllerClass = findClassIfExists("com.android.systemui.shade.ShadeHeaderController", lpparam.classLoader);
+			if(ShadeHeaderControllerClass == null) //QPR2
+			{
+				ShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpparam.classLoader);
+			}
+
 			Class<?> QSContainerImplClass = findClass("com.android.systemui.qs.QSContainerImpl", lpparam.classLoader);
 
-			hookAllMethods(LargeScreenShadeHeaderControllerClass, "onInit", new XC_MethodHook() {
+			hookAllMethods(ShadeHeaderControllerClass, "onInit", new XC_MethodHook() {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					View mView = (View) getObjectField(param.thisObject, "mView");

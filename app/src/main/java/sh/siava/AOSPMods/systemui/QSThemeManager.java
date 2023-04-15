@@ -275,9 +275,13 @@ public class QSThemeManager extends XposedModPack {
 
 		//White QS Clock bug
 		hookAllMethods(QuickStatusBarHeaderClass, "onFinishInflate", new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				mClockViewQSHeader = getObjectField(param.thisObject, "mClockView");
+				View thisView = (View) param.thisObject;
+				Resources res = mContext.getResources();
+
+				mClockViewQSHeader = thisView.findViewById(res.getIdentifier("clock", "id", mContext.getPackageName()));
 			}
 		});
 

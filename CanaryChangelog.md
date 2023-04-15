@@ -1,3 +1,7 @@
+**canary-233**  
+- 13QPR3: Fixed QS header shortcuts  
+- 13QPR3: Fixed light QS theme  
+  
 **canary-232**  
 - Fixed brightness slider's animation  
 - Fixed custom battery icon randomly not appearing immediately after restart  

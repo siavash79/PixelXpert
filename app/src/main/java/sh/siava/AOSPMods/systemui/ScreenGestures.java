@@ -178,11 +178,24 @@ public class ScreenGestures extends XposedModPack {
 		hookAllMethods(mListener.getClass(), "onSingleTapUp", singleTapHook); //A13 R18
 		hookAllMethods(mListener.getClass(), "onSingleTapConfirmed", singleTapHook); //older
 
+
 		//used in double tap detection in AOD
 		XC_MethodHook doubleTapHook = new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
-				if (getBooleanField(NotificationPanelViewController, "mQsExpanded") || getBooleanField(NotificationPanelViewController, "mBouncerShowing")) {
+
+				boolean isQSExpanded;
+				try { //13QPR3
+					isQSExpanded = getBooleanField(
+							getObjectField(NotificationPanelViewController, "mQsController"),
+							"mExpanded");
+				}
+				catch (Throwable ignored)
+				{
+					isQSExpanded = getBooleanField(NotificationPanelViewController, "mQsExpanded"); //13QPR2,1
+				}
+
+				if (isQSExpanded || getBooleanField(NotificationPanelViewController, "mBouncerShowing")) {
 					return;
 				}
 				doubleTap = true;

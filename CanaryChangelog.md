@@ -1,3 +1,9 @@
+**canary-234**  
+- 13QPR3: Fixed taskbar  
+- 13QPR3: Fixed QS quick pulldown  
+- 13QPR3: Fixed statusbar double tap sleep  
+- 13QPR3: Fixed double tap actions on lockscreen  
+  
 **canary-233**  
 - 13QPR3: Fixed QS header shortcuts  
 - 13QPR3: Fixed light QS theme  

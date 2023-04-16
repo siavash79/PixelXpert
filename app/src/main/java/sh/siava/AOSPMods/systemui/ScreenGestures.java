@@ -82,6 +82,12 @@ public class ScreenGestures extends XposedModPack {
 		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
 		Class<?> DozeTriggersClass = findClass("com.android.systemui.doze.DozeTriggers", lpparam.classLoader);
 
+		Class<?> PhoneStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarViewController", lpparam.classLoader);
+
+		try { //13 QPR3
+			hookTouchHandler(PhoneStatusBarViewControllerClass);
+		}catch (Throwable ignored){}
+
 		//double tap detector for screen off AOD disabled sensor
 		hookAllMethods(DozeTriggersClass,
 				"onSensor", new XC_MethodHook() {
@@ -122,7 +128,7 @@ public class ScreenGestures extends XposedModPack {
 				NotificationPanelViewController = param.thisObject;
 				try
 				{
-					hookTouchHandler(getObjectField(param.thisObject, "mStatusBarViewTouchEventHandler"));
+					hookTouchHandler(getObjectField(param.thisObject, "mStatusBarViewTouchEventHandler").getClass());
 				}
 				catch (Throwable ignored) {}
 			}
@@ -133,12 +139,12 @@ public class ScreenGestures extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				NotificationPanelViewController = param.thisObject;
-				hookTouchHandler(param.getResult());
+				hookTouchHandler(param.getResult().getClass());
 			}
 		});
 	}
 
-	private void hookTouchHandler(Object mTouchHandler) {
+	private void hookTouchHandler(Class<?> TouchHanlderClass) {
 		XC_MethodHook touchHook = new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -154,8 +160,8 @@ public class ScreenGestures extends XposedModPack {
 			}
 		};
 
-		hookAllMethods(mTouchHandler.getClass(), "onTouch", touchHook); //13 QPR2
-		hookAllMethods(mTouchHandler.getClass(), "handleTouchEvent", touchHook); //A13 R18
+		hookAllMethods(TouchHanlderClass, "onTouch", touchHook); //13 QPR2
+		hookAllMethods(TouchHanlderClass, "handleTouchEvent", touchHook); //A13 R18
 	}
 
 	private void setHooks(XC_MethodHook.MethodHookParam param) {

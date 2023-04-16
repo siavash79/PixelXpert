@@ -1,3 +1,6 @@
+**canary-235**  
+- 13QPR3: Fixed QQS brightness slider  
+  
 **canary-234**  
 - 13QPR3: Fixed taskbar  
 - 13QPR3: Fixed QS quick pulldown  

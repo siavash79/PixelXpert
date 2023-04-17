@@ -40,8 +40,8 @@
     <string name="keyguard_left_shortcut">锁屏显示左划快捷方式</string>
     <string name="LSleftShortcutTitle">左侧</string>
     <string name="LSrightShortcutTitle">右侧</string>
-    <string name="LSleftLongClickShortcutTitle">左侧快捷方式(长按)</string>
-    <string name="LSrightLongClickShortcutTitle">右侧快捷方式(长按)</string>
+    <string name="LSleftLongClickShortcutTitle">左侧(长按)</string>
+    <string name="LSrightLongClickShortcutTitle">右侧(长按)</string>
     <string name="camera_shortcut">相机</string>
     <string name="assistant_shortcut">语音助手</string>
     <string name="torch_shortcut">手电筒</string>
@@ -54,7 +54,7 @@
     <string name="album_art_blur_text">模糊值</string>
     <string name="album_art_grayscale">灰度值</string>
     <string name="shufflePin_title">打乱密码盘</string>
-    <string name="wakeup_to_security_title">在设备唤醒时安全输入</string>
+    <string name="wakeup_to_security_title">在设备唤醒时要求安全输入</string>
     <string name="easy_unlock_title">简易解锁 (Pin/密码)</string>
     <string name="easy_unlock_summary">如果第一次未生效，请重试</string>
     <string name="charging_info_title">锁屏显示充电信息</string>
@@ -77,7 +77,7 @@
     <string name="lte_4g_icon_title">LTE / 4G 图标</string>
     <string name="combined_signal_icon_title">合并信号图标</string>
     <string name="hide_roaming_title">隐藏漫游指示图标</string>
-    <string name="caution_mobile_costs">注意 - 不知情下漫游会增加你的移动费用</string>
+    <string name="caution_mobile_costs">注意 - 不知情下漫游会增加你的流量费用</string>
     <string name="volte_icon_title">在可用时显示VoLTE图标</string>
     <string name="hide_privacychip_title">隐藏隐私指示器</string>
     <string name="sb_vibration_switch_title">显示 震动 / 静音 图标</string>
@@ -156,7 +156,7 @@
     <string name="qs_tile_vertical_title">将磁贴图标移至顶部</string>
     <string name="qs_tile_qty_title">磁贴面板数量设定</string>
     <string name="qs_leveled_flashlight_summary">需要硬件支持</string>
-    <string name="light_qs_title">浅色主题下使用浅色磁贴面板(可能会出现问题)</string>
+    <string name="light_qs_title">浅色主题下使用浅色磁贴面板 (可能会出现问题)</string>
     <string name="light_dualtone_qs_title">启用双色磁贴面板</string>
     <string name="qs_pulldown_size">快速下拉磁贴面板</string>
     <string name="qs_pulldown_switch_title">快速下拉磁贴面板</string>
@@ -186,7 +186,7 @@
     <string name="qstile_default">默认</string>
 
     <!--Navigation bar related-->
-    <string name="qs_volume_unmute_title">音量磁贴关闭静音音量</string>
+    <string name="qs_volume_unmute_title">音量磁贴取消静音时音量</string>
     <string name="back_gesture_category_title">配置返回手势</string>
     <string name="back_from_left_title">屏幕左侧</string>
     <string name="back_from_right_title">屏幕右侧</string>
@@ -249,10 +249,10 @@
     <string name="overscroll_on_summary">重要：你必须在LSPosed作用域中勾选你要禁用的app</string>
     <string name="milliseconds">毫秒</string>
     <string name="call_category">电话</string>
-    <string name="vibrate_on_call_active_title">外拨被接通时震动</string>
+    <string name="vibrate_on_call_active_title">去电被接通时震动</string>
     <string name="vibrate_on_call_drop_title">结束通话时震动</string>
     <string name="vibration_type_notification">强度由系统通知振动设置定义</string>
-    <string name="gsans_override_title">系统范围内强制使用 Google Sans</string>
+    <string name="gsans_override_title">系统级强制使用 Google Sans</string>
     <string name="font_overlays_enable_title">启用自定义字体</string>
     <string name="theme_customization_font_title">标题 /  正文字体</string>
     <string name="icons_style_title">图标样式</string>
@@ -266,7 +266,7 @@
     <string name="caution_unstable">注意: 该功能对部分用户不稳定</string>
     <string name="power_menu_overlays_section">电源菜单主题</string>
     <string name="power_menu_overlays_title">在电源菜单启用浅色/深色主题</string>
-    <string name="power_menu_overlays_summary_on">将一同启用一些系统级的新图标</string>
+    <string name="power_menu_overlays_summary_on">将同时系统级启用一些新图标</string>
     <string name="pull_down_left">左侧</string>
     <string name="pull_down_right">右侧</string>
 

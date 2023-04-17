@@ -77,7 +77,7 @@
     <string name="lte_4g_icon_title">LTE / 4G 图标</string>
     <string name="combined_signal_icon_title">合并信号图标</string>
     <string name="hide_roaming_title">隐藏漫游指示图标</string>
-    <string name="caution_mobile_costs">注意 - 不知道你在漫游会增加你的移动费用</string>
+    <string name="caution_mobile_costs">注意 - 不知情下漫游会增加你的移动费用</string>
     <string name="volte_icon_title">在可用时显示VoLTE图标</string>
     <string name="hide_privacychip_title">隐藏隐私指示器</string>
     <string name="sb_vibration_switch_title">显示 震动 / 静音 图标</string>
@@ -124,7 +124,7 @@
     <string name="unread_messages_title">通知计数</string>
     <string name="status_bar_height">状态高度</string>
     <string name="sb_padding_title">状态栏区域</string>
-    <string name="sb_padding_summary">将值设为 最小/最大 等同于设备默认</string>
+    <string name="sb_padding_summary">设为 最小/最大 为设备默认值</string>
     <string name="sbbb_header">电池条设置</string>
     <string name="sbbIcon_header">电池图标设置</string>
     <string name="BB_enable_title">启用电池条</string>
@@ -132,7 +132,7 @@
     <string name="BB_move_SB_bottom_title">状态栏下方</string>
     <string name="BB_colorful_title">着色</string>
     <string name="BB_Opacity_title">不透明度</string>
-    <string name="BB_center_align_title">剧中对齐</string>
+    <string name="BB_center_align_title">居中对齐</string>
     <string name="BB_Thickness_title">粗细度</string>
     <string name="BB_indicate_charging">充电显示</string>
     <string name="BB_indicate_fast_charging">快充显示</string>
@@ -223,7 +223,7 @@
     <string name="clipboard_smart_actions_title">剪贴板的快捷选项</string>
     <string name="allow_all_screen_rotations">解除全屏幕旋转</string>
     <string name="allow_all_screen_rotations_summary">将同时无视手动旋转悬浮钮</string>
-    <string name="force_no_cutout">无视镜头开孔</string>
+    <string name="force_no_cutout">无视屏幕开孔</string>
     <string name="clear_all_reposition_title">在最近任务 添加 清除所有 按钮</string>
     <string name="volume_button_step_title">音量步进 (0到100%)</string>
     <string name="display_resolution_title">显示分辨率</string>

@@ -317,6 +317,7 @@
     <string name="netstat_caution_no">也许以后</string>
     <string name="monitoring_category_title">监控选项</string>
     <string name="netstat_header">网络统计设置</string>
+     <string name="string_formatter_manual_body">除了普通文字,动态变量也可以被使用:\n\n$G\&lt;格式\&gt; : 地理位置日期,依照格式,关于格式文档,请搜索`Java Date Format`\n例如: $GMMM 显示为: 1月 (或其他)\n\n$P&lt;格式&gt; : 波斯日期,依照格式\n例如: $Pyyyy 显示为: 1401\n\n为了启用下方的网络统计信息, 你需要在 其他 菜单的 网络统计设置 里开启 启用统计\n\n$Nrx : 今日总下载流量\n$Ntx: 今日总上传流量\n$Nall : 今日总流量\n$Nssid : WiFi SSID(如果可用)\n\n如果你替换 $N 为 $Nc 将显示移动流量的数据(比如 $Ncrx 为移动流量的下载; 除了 $Nssid)\n\n例子:\n` $GEEEE流量用量: $Ncall` 将显示:\n`星期二流量用量: 2GB`</string>
     <string name="update_channel_name">更新</string>
     <string name="update_notification_title">已下载更新</string>
     <string name="update_notification_text">点此安装</string>

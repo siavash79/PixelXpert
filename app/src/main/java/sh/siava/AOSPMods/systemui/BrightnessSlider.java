@@ -325,6 +325,7 @@ public class BrightnessSlider extends XposedModPack {
 	}
 
 	private boolean makeBrightnessController(Object mBrightnessSliderController) {
+		mBrightnessController = null;
 		try
 		{ //13 QPR3
 			mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mUserTracker"),getObjectField(brightnessControllerFactory, "mDisplayTracker"), getObjectField(brightnessControllerFactory, "mMainExecutor"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));

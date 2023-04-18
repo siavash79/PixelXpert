@@ -1,3 +1,8 @@
+**canary-236**  
+- 13QPR3: Fixed easy-unlock  
+- Fixed QQS brightness slider, broken in canary 235  
+- 13QPR1, 13QPR2: Fixed QS Quick pulldown, broken in canary 235  
+  
 **canary-235**  
 - 13QPR3: Fixed QQS brightness slider  
   

@@ -60,7 +60,11 @@ public class QSQuickPullDown extends XposedModPack {
 		XC_MethodHook statusbarTouchHook = new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				MotionEvent event = (MotionEvent) param.args[0];
+				MotionEvent event =
+						param.args[0] instanceof MotionEvent
+								? (MotionEvent) param.args[0]
+								: (MotionEvent) param.args[1];
+
 				if (!oneFingerPulldownEnabled) return;
 
 				int mBarState = (int) getObjectField(NotificationPanelViewController, "mBarState");

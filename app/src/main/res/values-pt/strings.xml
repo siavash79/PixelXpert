@@ -14,12 +14,12 @@
     <string name="carrier_text_mod_enabled">Texto personalizado</string>
     <string name="carrier_text_value">Insira um texto personalizado</string>
     <string name="double_tap_sleep_title">Duplo toque para desligar</string>
-    <string name="qs_mod_category_title">Número de compilação no painel das definições rápidas</string>
+    <string name="qs_mod_category_title">Número de compilação no painel das DR</string>
     <string name="qs_footer_mod_title">Personalizar o número de compilação</string>
     <string name="qs_footer_text_summary">Deixe em branco para remover o texto</string>
     <string name="qs_footer_text_desc">Requer desligar/ligar o ecrã</string>
-    <string name="light_qs_title">Ativar painel das QS claro</string>
-    <string name="light_dualtone_qs_title">Painel das QS com dois tons</string>
+    <string name="light_qs_title">Ativar painel das DR claro</string>
+    <string name="light_dualtone_qs_title">Painel das DR com dois tons</string>
     <string name="qs_pulldown_size">Largura da ação deslize rápido para baixo</string>
     <string name="qs_pulldown_switch_title">Deslize rápido para baixo desde a barra de estado</string>
     <string name="qs_pulldown_side_title">Lado por onde deslizar</string>
@@ -38,7 +38,7 @@
     <string name="sbc_date_small">Tamanho mais pequeno (70%)</string>
     <string name="sbc_custom_date_after">Formato de data personalizado após o relógio</string>
     <string name="sbc_header">Personalizar o relógio</string>
-    <string name="qs_haptic_switch_title">Vibrar ao tocar nos atalhos das QS</string>
+    <string name="qs_haptic_switch_title">Vibrar ao tocar nos atalhos das DR</string>
     <string name="back_gesture_category_title">Personalizar gesto voltar</string>
     <string name="back_from_left_title">Lado esquerdo do ecrã</string>
     <string name="back_from_right_title">Lado direito do ecrã</string>
@@ -95,12 +95,12 @@
     <string name="so_double_tap_wake_title">Duplo toque para acender</string>
     <string name="so_double_tap_wake_summary">Usar duplo toque ao invés de um toque para acender o ecrã</string>
     <string name="overlay_none_title">(Padrão)</string>
-    <string name="qs_panel_category_title">Definições rápidas</string>
+    <string name="qs_panel_category_title">Definições Rápidas</string>
 	<string name="vibration_type_touch">Intensidade definida pelas definições de vibração de toque do sistema</string>
 	<string name="qs_tile_qty_portrait">Em modo retrato</string>
     <string name="qs_tile_qty_landscape">Em modo paisagem</string>
     <string name="qs_rows_number">Número de linhas</string>
-    <string name="qs_general_options">Preferências das definições rápidas</string>
+    <string name="qs_general_options">Preferências das DR</string>
     <string name="statusbar_general_options">Preferências da barra de estado</string>
     <string name="general_section">Opções genéricas</string>
     <string name="custom_themed_icons_title">Ícones temáticos personalizados</string>
@@ -108,12 +108,12 @@
     <string name="custom_themed_icons_on">Ícones personalizados ativos</string>
     <string name="general_on">Ativado</string>
     <string name="general_off">Desativado</string>
-    <string name="dual_tone_battery_title">Ativar ícone de dons tons</string>
+    <string name="dual_tone_battery_title">Ativar ícone de dois tons</string>
     <string name="dual_tone_battery_on_summary">Ativado (apenas para o ícone em retrato)</string>
     <string name="unread_messages_title">Mostrar nr. de mensagens não lidas</string>
     <string name="keyguard_left_shortcut">Mostrar atalho do lado esquerdo</string>
     <string name="status_bar_height">Altura da barra de estado</string>
-    <string name="qs_text_size_title">Tamanho do texto nos atalhos das definições rápidas</string>
+    <string name="qs_text_size_title">Tamanho do texto nos atalhos das DR</string>
     <string name="colorpill_title">Colorir a barra de navegação</string>
     <string name="colorpill">Aplicar cor de destaque na barra</string>
     <string name="reducekeyboard_title">Espaço dos gestos no teclado</string>
@@ -144,7 +144,7 @@
     <string name="BB_Opacity_title">Opacidade da barra</string>
     <string name="BB_center_align_title">Alinhada ao centro</string>
     <string name="BB_Thickness_title">Espessura da barra</string>
-    <string name="QQS_brightness_title">Controlo de brilho no painel das QQS</string>
+    <string name="QQS_brightness_title">Controlo de brilho no painel rápido das DR</string>
     <string name="QS_brightness_disable_title">Esconder o controlo de brilho</string>
     <string name="QQS_brightness_category">Opções do controlo de brilho</string>
     <string name="bs_thick_track">Trilho do controle de brilho espesso</string>
@@ -252,9 +252,9 @@
     <string name="sort_clean">Ajustar em grelha</string>
     <string name="sort_tight">Ajustar o maior número de itens</string>
     <string name="sb_notification_limit">Número máximo de ícones de notificação (4 é o padrão)</string>
-    <string name="qs_cols_number">Número de colunas das QS</string>
-    <string name="qqs_tiles_number">Número de atalhos na QQS (2 linhas máx.)</string>
-    <string name="force_no_cutout">Ignorar o notch da câmara</string>
+    <string name="qs_cols_number">Número de colunas das DR</string>
+    <string name="qqs_tiles_number">Número de atalhos no painel rápido das DR (2 linhas máx.)</string>
+    <string name="force_no_cutout">Ignorar o <i>notch</i> da câmara</string>
     <string name="sb_padding_title">Espaçamento na barra de estado</string>
     <string name="sb_padding_summary">Os valores min/máx são os padrão</string>
     <string name="volume_button_step_title">Níveis de volume (0 a 100%)</string>
@@ -332,4 +332,6 @@
 	<string name="tv_remote_shortcut">Comando da TV</string>
 	<string name="sb_multi_row_notification_icons">Várias linhas para ícones das notificações (requer barra de estado mais espessa)</string>
     <string name="incompatible_alert_body">Este módulo não foi desenhado para ser utilizado com a ROM presente no dispositivo. Pode utilizar o módulo mas algumas, ou todas, as funcionalidades poderão não funcionar como pretendido.\n\nAssim, e por isso, por favor, não reporte bugs.</string>
+    <string name="xposed_desc">Funcionalidades personalizadas para ROMs Android 12+ baseadas no AOSP</string>
+    <string name="app_themed_icon_title">Ativar ícone temático alternativo da app AOSP Mods</string>
 </resources>

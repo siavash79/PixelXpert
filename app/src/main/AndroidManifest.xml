@@ -6,10 +6,10 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".UpdateActivity"
             android:exported="false"
@@ -29,12 +29,35 @@
         <activity
             android:name=".SettingsActivity"
             android:exported="true"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity-alias
+            android:name=".SettingsActivityNormalIcon"
+            android:targetActivity=".SettingsActivity"
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:exported="true"
             android:label="@string/title_activity_settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".SettingsActivityAlternateIcon"
+            android:targetActivity=".SettingsActivity"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_themed"
+            android:exported="true"
+            android:label="@string/title_activity_settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
         <service
             android:name=".utils.VolumeTileService"

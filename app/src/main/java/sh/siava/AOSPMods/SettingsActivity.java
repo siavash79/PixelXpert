@@ -1,13 +1,19 @@
 package sh.siava.AOSPMods;
 
+import static sh.siava.AOSPMods.XPrefs.Xprefs;
+
 import android.animation.Animator;
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -1075,6 +1081,65 @@ public class SettingsActivity extends AppCompatActivity implements
 				} catch (Exception ignored) {
 				}
 			}
+
+			if (key.equals("AlternativeThemedAppIcon")) {
+				try {
+					boolean AlternativeThemedAppIconEnabled = sharedPreferences.getBoolean("AlternativeThemedAppIcon", false);
+
+					// Get the PackageManager
+					PackageManager packageManager = getActivity().getPackageManager();
+
+					if (AlternativeThemedAppIconEnabled) {
+						// Disable default app icon component
+						packageManager.setComponentEnabledSetting(
+								new ComponentName("sh.siava.AOSPMods", "sh.siava.AOSPMods.SettingsActivityNormalIcon"),
+								PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+								PackageManager.DONT_KILL_APP
+						);
+
+						// Enable themed app icon component
+						packageManager.setComponentEnabledSetting(
+								new ComponentName("sh.siava.AOSPMods", "sh.siava.AOSPMods.SettingsActivityAlternateIcon"),
+								PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+								PackageManager.DONT_KILL_APP
+						);
+
+						// Restart the app to apply the new app icon
+						Intent intent = getActivity().getPackageManager()
+								.getLaunchIntentForPackage(getActivity().getPackageName());
+						PendingIntent pendingIntent = PendingIntent.getActivity(
+								getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+						AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+						manager.set(AlarmManager.RTC, System.currentTimeMillis() + 1, pendingIntent);
+						System.exit(0);
+					}
+					else {
+						// Enable default app icon component
+						packageManager.setComponentEnabledSetting(
+								new ComponentName("sh.siava.AOSPMods", "sh.siava.AOSPMods.SettingsActivityNormalIcon"),
+								PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+								PackageManager.DONT_KILL_APP
+						);
+
+						// Disable themed app icon component
+						packageManager.setComponentEnabledSetting(
+								new ComponentName("sh.siava.AOSPMods", "sh.siava.AOSPMods.SettingsActivityAlternateIcon"),
+								PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+								PackageManager.DONT_KILL_APP
+						);
+
+						// Restart the app to apply the new app icon
+						Intent intent = getActivity().getPackageManager()
+								.getLaunchIntentForPackage(getActivity().getPackageName());
+						PendingIntent pendingIntent = PendingIntent.getActivity(
+								getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+						AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+						manager.set(AlarmManager.RTC, System.currentTimeMillis() + 1, pendingIntent);
+						System.exit(0);
+					}
+				} catch (Exception ignored) {
+				}
+			}
 		}
 
 		@Override
@@ -1087,5 +1152,4 @@ public class SettingsActivity extends AppCompatActivity implements
 			prefs.registerOnSharedPreferenceChangeListener(listener);
 		}
 	}
-
 }

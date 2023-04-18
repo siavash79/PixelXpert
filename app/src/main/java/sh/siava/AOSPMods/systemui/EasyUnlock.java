@@ -82,11 +82,17 @@ public class EasyUnlock extends XposedModPack {
 							View mView = (View) getObjectField(param.thisObject, "mView");
 							mView.post(() -> {
 								try
-								{ //New(er) signature
+								{ //13 QPR3
+									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, getObjectField(param.thisObject, "mSecurityMode"));
+									return;
+								}catch (Throwable ignored){}
+
+								try
+								{ //Pre 13QPR3
 									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */, getObjectField(param.thisObject, "mSecurityMode"));
 								}
 								catch (Throwable ignored)
-								{ //Previous signature
+								{ //PRE-Pre 13QPR3
 									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */);
 								}
 							});

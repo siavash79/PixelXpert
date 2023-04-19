@@ -5,6 +5,7 @@ import static android.view.KeyEvent.KEYCODE_VOLUME_DOWN;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
@@ -13,6 +14,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.graphics.ColorSpace;
 import android.graphics.Insets;
 import android.graphics.ParcelableColorSpace;
@@ -21,6 +23,7 @@ import android.hardware.HardwareBuffer;
 import android.os.Bundle;
 import android.view.Display;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -34,6 +37,8 @@ import sh.siava.AOSPMods.utils.SystemUtils;
 public class PhoneWindowManager extends XposedModPack {
 	public static final String listenPackage = AOSPMods.SYSTEM_FRAMEWORK_PACKAGE;
 
+	private static final int TAKE_SCREENSHOT_PROVIDED_IMAGE = 3;
+
 	private static final String KEY_BUFFER = "bitmap_util_buffer";
 	private static final String KEY_COLOR_SPACE = "bitmap_util_color_space";
 
@@ -45,6 +50,7 @@ public class PhoneWindowManager extends XposedModPack {
 	private Object mHandler;
 	private boolean ScreenshotChordInsecure;
 	private final ArrayList<Object> screenshotChords = new ArrayList<>();
+	private Class<?> ScreenshotRequestClass;
 
 	public PhoneWindowManager(Context context) {
 		super(context);
@@ -65,7 +71,14 @@ public class PhoneWindowManager extends XposedModPack {
 						takeInsecureScreenshot();
 						break;
 					case AOSPMods.ACTION_SCREENSHOT:
-						callMethod(windowMan, "handleScreenShot", 1, 1);
+						try
+						{
+							callMethod(windowMan, "handleScreenShot", 1); //13 QPR3
+						}
+						catch(Throwable ignored)
+						{
+							callMethod(windowMan, "handleScreenShot", 1, 1); //pre 13 QPR3
+						}
 						break;
 					case AOSPMods.ACTION_BACK:
 						callMethod(windowMan, "backKeyPress");
@@ -74,8 +87,7 @@ public class PhoneWindowManager extends XposedModPack {
 						SystemUtils.Sleep();
 						break;
 				}
-			} catch (Throwable ignored) {
-			}
+			} catch (Throwable ignored) {}
 		}
 	};
 
@@ -98,7 +110,7 @@ public class PhoneWindowManager extends XposedModPack {
 
 		try {
 			Class<?> PhoneWindowManagerClass = findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
-
+			ScreenshotRequestClass = findClassIfExists("com.android.internal.util.ScreenshotRequest", lpparam.classLoader); //13 QPR3
 			hookAllMethods(PhoneWindowManagerClass, "enableScreen", new XC_MethodHook() {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -128,8 +140,7 @@ public class PhoneWindowManager extends XposedModPack {
 				}
 			});
 
-		} catch (Throwable ignored) {
-		}
+		} catch (Throwable ignored) {}
 	}
 
 	private void takeInsecureScreenshot() {
@@ -139,14 +150,60 @@ public class PhoneWindowManager extends XposedModPack {
 
 		Object SCBuffer = callMethod(mDisplayManagerInternal, "systemScreenshot", mDefaultDisplay.getDisplayId());
 
-		HardwareBuffer mHardwareBuffer = (HardwareBuffer) getObjectField(SCBuffer, "mHardwareBuffer");
-		ParcelableColorSpace colorSpace = new ParcelableColorSpace((ColorSpace) getObjectField(SCBuffer, "mColorSpace"));
+		if(ScreenshotRequestClass != null)
+		{
+			Bitmap screenshotBitmap = (Bitmap) callMethod(SCBuffer, "asBitmap");
 
-		Bundle bundle = new Bundle();
-		bundle.putParcelable(KEY_BUFFER, mHardwareBuffer);
-		bundle.putParcelable(KEY_COLOR_SPACE, colorSpace);
+			Object screenshotRequest = null;
+			try {
+				for(Constructor<?> constructor: ScreenshotRequestClass.getDeclaredConstructors())
+				{
+					if(constructor.getParameterCount() == 8)
+					{
+						screenshotRequest = constructor.newInstance(
+								TAKE_SCREENSHOT_PROVIDED_IMAGE /* type */,
+								0 /* source. 0 is global actions */,
+								new ComponentName("", ""), 1 /* task id*/ ,
+								0 /* user id */,
+								screenshotBitmap,
+								new Rect(0, 0, screenshotBitmap.getWidth(), screenshotBitmap.getHeight()),
+								Insets.of(0, 0, 0, 0));
+					}
+				}
+			}
+			catch (Throwable ignored){}
 
-		callMethod(getObjectField(mDefaultDisplayPolicy, "mScreenshotHelper"), "provideScreenshot", bundle, new Rect(0, 0, mHardwareBuffer.getWidth(), mHardwareBuffer.getHeight()), Insets.of(0, 0, 0, 0), 1, 1, new ComponentName("", ""), 0, mHandler, null);
+			if(screenshotRequest != null)
+			{
+				callMethod(getObjectField(mDefaultDisplayPolicy, "mScreenshotHelper"),
+						"takeScreenshot",
+						screenshotRequest,
+						mHandler,
+						null);
+			}
+		}
+		else
+		{
+			HardwareBuffer mHardwareBuffer = (HardwareBuffer) getObjectField(SCBuffer, "mHardwareBuffer");
+
+			ParcelableColorSpace colorSpace = new ParcelableColorSpace((ColorSpace) getObjectField(SCBuffer, "mColorSpace"));
+
+			Bundle bundle = new Bundle();
+			bundle.putParcelable(KEY_BUFFER, mHardwareBuffer);
+			bundle.putParcelable(KEY_COLOR_SPACE, colorSpace);
+
+			callMethod(getObjectField(mDefaultDisplayPolicy, "mScreenshotHelper"),
+					"provideScreenshot",
+					bundle,
+					new Rect(0, 0, mHardwareBuffer.getWidth(), mHardwareBuffer.getHeight()),
+					Insets.of(0, 0, 0, 0),
+					1,
+					1,
+					new ComponentName("", ""),
+					0,
+					mHandler,
+					null);
+		}
 	}
 
 	private void initVars() {

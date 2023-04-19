@@ -1,3 +1,7 @@
+**canary-237**  
+- Added option to change app icon to "always themed"  
+- 13QPR3: Fixed screenshot mods  
+  
 **canary-236**  
 - 13QPR3: Fixed easy-unlock  
 - Fixed QQS brightness slider, broken in canary 235  

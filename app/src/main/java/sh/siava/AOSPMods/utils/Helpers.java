@@ -20,6 +20,7 @@ import com.topjohnwu.superuser.Shell;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
@@ -74,6 +75,16 @@ public class Helpers {
 			log(c.getName());
 		}
 		log("Methods:");
+
+		Constructor<?>[] cons = ourClass.getDeclaredConstructors();
+		for (Constructor<?> m : cons) {
+			log(m.getName() + " - " + " - " + m.getParameterCount());
+			Class<?>[] cs = m.getParameterTypes();
+			for (Class<?> c : cs) {
+				log("\t\t" + c.getTypeName());
+			}
+		}
+
 
 		for (Method m : ms) {
 			log(m.getName() + " - " + m.getReturnType() + " - " + m.getParameterCount());

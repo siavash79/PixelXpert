@@ -1086,60 +1086,35 @@ public class SettingsActivity extends AppCompatActivity implements
 				try {
 					boolean AlternativeThemedAppIconEnabled = sharedPreferences.getBoolean("AlternativeThemedAppIcon", false);
 
-					// Get the PackageManager
-					PackageManager packageManager = getActivity().getPackageManager();
-
-					if (AlternativeThemedAppIconEnabled) {
-						// Disable default app icon component
-						packageManager.setComponentEnabledSetting(
-								new ComponentName("sh.siava.AOSPMods", "sh.siava.AOSPMods.SettingsActivityNormalIcon"),
-								PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-								PackageManager.DONT_KILL_APP
-						);
-
-						// Enable themed app icon component
-						packageManager.setComponentEnabledSetting(
-								new ComponentName("sh.siava.AOSPMods", "sh.siava.AOSPMods.SettingsActivityAlternateIcon"),
-								PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-								PackageManager.DONT_KILL_APP
-						);
-
-						// Restart the app to apply the new app icon
-						Intent intent = getActivity().getPackageManager()
-								.getLaunchIntentForPackage(getActivity().getPackageName());
-						PendingIntent pendingIntent = PendingIntent.getActivity(
-								getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-						AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-						manager.set(AlarmManager.RTC, System.currentTimeMillis() + 1, pendingIntent);
-						System.exit(0);
-					}
-					else {
-						// Enable default app icon component
-						packageManager.setComponentEnabledSetting(
-								new ComponentName("sh.siava.AOSPMods", "sh.siava.AOSPMods.SettingsActivityNormalIcon"),
-								PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-								PackageManager.DONT_KILL_APP
-						);
-
-						// Disable themed app icon component
-						packageManager.setComponentEnabledSetting(
-								new ComponentName("sh.siava.AOSPMods", "sh.siava.AOSPMods.SettingsActivityAlternateIcon"),
-								PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-								PackageManager.DONT_KILL_APP
-						);
-
-						// Restart the app to apply the new app icon
-						Intent intent = getActivity().getPackageManager()
-								.getLaunchIntentForPackage(getActivity().getPackageName());
-						PendingIntent pendingIntent = PendingIntent.getActivity(
-								getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-						AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-						manager.set(AlarmManager.RTC, System.currentTimeMillis() + 1, pendingIntent);
-						System.exit(0);
-					}
-				} catch (Exception ignored) {
-				}
+					setAlternativeAppIcon(AlternativeThemedAppIconEnabled);
+				} catch (Exception ignored) {}
 			}
+		}
+
+		private void setAlternativeAppIcon(boolean alternativeThemedAppIconEnabled) {
+			PackageManager packageManager = getActivity().getPackageManager();
+
+			packageManager.setComponentEnabledSetting(
+					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".SettingsActivityNormalIcon"),
+					alternativeThemedAppIconEnabled ? PackageManager.COMPONENT_ENABLED_STATE_DISABLED : PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+					PackageManager.DONT_KILL_APP
+			);
+
+			// Enable themed app icon component
+			packageManager.setComponentEnabledSetting(
+					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".SettingsActivityAlternateIcon"),
+					alternativeThemedAppIconEnabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+					PackageManager.DONT_KILL_APP
+			);
+
+			// Restart the app to apply the new app icon
+			Intent intent = getActivity().getPackageManager()
+					.getLaunchIntentForPackage(getActivity().getPackageName());
+			PendingIntent pendingIntent = PendingIntent.getActivity(
+					getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+			AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+			manager.set(AlarmManager.RTC, System.currentTimeMillis() + 1, pendingIntent);
+			System.exit(0);
 		}
 
 		@Override

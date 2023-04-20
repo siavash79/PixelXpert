@@ -23,9 +23,9 @@
     <!--Lock screen related-->
     <string name="pm_header">包管理器</string>
     <string name="hide_avatar_title">隐藏用户头像(多用户模式)</string>
-	<string name="transparent_fingerprint_circle">隐藏屏下指纹圆圈</string>
-    <string name="transparent_fingerprint_circle_off">显示指纹图标周围圆圈</string>
-    <string name="transparent_fingerprint_circle_on">隐藏指纹图标周围圆圈</string>
+	<string name="transparent_fingerprint_circle">隐藏屏下指纹背景圆</string>
+    <string name="transparent_fingerprint_circle_off">指纹图标背景被启用</string>
+    <string name="transparent_fingerprint_circle_on">指纹图标背景被隐藏</string>
     <string name="carrier_text_category">运营商文本</string>
     <string name="custom_text_category">自定义锁屏文本</string>
     <string name="configure_carrier_text">配置运营商文本</string>
@@ -78,7 +78,7 @@
     <string name="combined_signal_icon_title">合并信号图标</string>
     <string name="hide_roaming_title">隐藏漫游指示图标</string>
     <string name="caution_mobile_costs">注意 - 不知情下漫游会增加你的流量费用</string>
-    <string name="volte_icon_title">在可用时显示VoLTE图标</string>
+    <string name="volte_icon_title">在可用时显示 VoLTE 图标</string>
     <string name="hide_privacychip_title">隐藏隐私指示器</string>
     <string name="sb_vibration_switch_title">显示 震动 / 静音 图标</string>
     <string name="sbc_position_title">时钟位置</string>
@@ -105,7 +105,7 @@
     <string name="ntsb_enabled_title">开启流量指示器</string>
     <string name="ntsb_position_title">指示器位置</string>
     <string name="ntsb_threshold_title">自动隐藏阈值</string>
-    <string name="ntsb_threshold_summary">如果流量低于设定阈值(KB)，时隐藏</string>
+    <string name="ntsb_threshold_summary">流量低于设定阈值时隐藏 (KB)</string>
     <string name="network_mode_title">指示器样式</string>
     <string name="network_colorful_title">着色</string>
     <string name="network_download_top">下载速度在上方</string>
@@ -123,8 +123,8 @@
     <string name="dual_tone_battery_on_summary">开启 (仅当纵向图标时生效)</string>
     <string name="unread_messages_title">通知计数</string>
     <string name="status_bar_height">状态高度</string>
-    <string name="sb_padding_title">状态栏区域</string>
-    <string name="sb_padding_summary">设为 最小/最大 为设备默认值</string>
+    <string name="sb_padding_title">状态栏内边距</string>
+    <string name="sb_padding_summary">最小 / 最大 等同于设备默认值</string>
     <string name="sbbb_header">电池条设置</string>
     <string name="sbbIcon_header">电池图标设置</string>
     <string name="BB_enable_title">启用电池条</string>
@@ -137,7 +137,7 @@
     <string name="BB_indicate_charging">充电显示</string>
     <string name="BB_indicate_fast_charging">快充显示</string>
     <string name="BB_warning_level">警告值</string>
-    <string name="BB_warning_tip">两值都设为 0 来禁用基于电量的颜色</string>
+    <string name="BB_warning_tip">均设为 0 以禁用基于电量的颜色</string>
     <string name="BB_batteryCriticalColor">临界值颜色</string>
     <string name="BB_batteryWarningColor">警告值颜色</string>
     <string name="BB_batteryChargingColor">充电颜色</string>
@@ -224,8 +224,8 @@
     <string name="allow_all_screen_rotations">解除全屏幕旋转</string>
     <string name="allow_all_screen_rotations_summary">将同时无视手动旋转悬浮钮</string>
     <string name="force_no_cutout">无视屏幕开孔</string>
-    <string name="clear_all_reposition_title">在最近任务 添加 清除所有 按钮</string>
-    <string name="volume_button_step_title">音量步进 (0到100%)</string>
+    <string name="clear_all_reposition_title">在最近任务中添加易访问的 清除所有 按钮</string>
+    <string name="volume_button_step_title">音量步进 (0至100%)</string>
     <string name="display_resolution_title">显示分辨率</string>
     <string name="brightness_range_title">显示亮度限制</string>
     <string name="brightness_range_not_linear">这个范围不是线性的,有时一个小的差异会导致相当大的变化</string>
@@ -246,7 +246,7 @@
     <!-- Theming section related -->
     <string name="heads_up_notification_duration">浮动通知持续时间</string>
     <string name="disable_overscroll">禁用过度滚动效果</string>
-    <string name="overscroll_on_summary">重要：你必须在LSPosed作用域中勾选你要禁用的app</string>
+    <string name="overscroll_on_summary">重要:你必须在 LSPosed 作用域中勾选你要禁用的app</string>
     <string name="milliseconds">毫秒</string>
     <string name="call_category">电话</string>
     <string name="vibrate_on_call_active_title">去电被接通时震动</string>
@@ -299,7 +299,7 @@
     <string name="network_interval_custom_text_title">刷新间隔</string>
     <string name="minutes_word">分钟</string>
     <string name="incompatible_alert_title">不兼容</string>
-    <string name="incompatible_alert_body">你当前的ROM不是该模组的直接目标,你可以继续使用它，但一些(或所有)选项可能不会预期工作</string>
+    <string name="incompatible_alert_body">你当前的 ROM 不是该模组的直接目标,你可以继续使用它,但一些(或所有)功能可能不会预期工作</string>
     <string name="incompatible_alert_ok_btn">我已知晓</string>
     <string name="menu_settings_title">导入/导出</string>
     <string name="menu_reset_defaults">重置所有设置</string>
@@ -309,7 +309,7 @@
     <string name="menu_netstat_enable">启用统计</string>
     <string name="menu_netstat_clear">重置网络统计</string>
     <string name="menu_restart">重启</string>
-    <string name="menu_restartSysUI">重启SystemUI</string>
+    <string name="menu_restartSysUI">重启 SystemUI</string>
     <string name="menu_updates">App更新</string>
     <string name="nestat_caution_title">注意!</string>
     <string name="nestat_caution_text">您的网络统计数据将永久重置,确认?</string>
@@ -330,7 +330,7 @@
     <string name="xposed_type">仅Xposed</string>
     <string name="currentVersionTitle">已安装版本:</string>
     <string name="lastestVersionTitle">最新版本:</string>
-    <string name="root_not_here">未获得ROOT权限!</string>
+    <string name="root_not_here">"未获得 ROOT 权限! "</string>
     <string name="reboot_pending">稍后重启</string>
     <string name="reboot_word">现在重启</string>
     <string name="update_checking">正在检查...</string>
@@ -357,7 +357,7 @@
     <string name="toggle_notification">启用通知栏面板</string>
     <string name="toggle_one_handed">启用单手模式</string>
     <string name="insecure_screenshot">无限制截图</string>
-    <string name="screenshot_chord_insecure">音量减+电源键无限制截图</string>
+    <string name="screenshot_chord_insecure">音量减+电源键时截图不受限</string>
     <string name="sleep">睡眠</string>
 
     <!-- QS Rows overlays -->

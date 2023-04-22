@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ListPreference
+    <sh.siava.AOSPMods.ui.MaterialListPreference
         android:defaultValue="0"
         android:entries="@array/battery_style_names"
         android:entryValues="@array/battery_style_codes"
@@ -10,27 +10,27 @@
         android:key="BatteryStyle"
         android:title="@string/battery_style_title" />
 
-    <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="DualToneBatteryOverlay"
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/dual_tone_battery_on_summary"
         android:title="@string/dual_tone_battery_title" />
 
-    <SeekBarPreference
+    <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
         android:defaultValue="50"
         android:key="BatteryIconScaleFactor"
         android:title="@string/battery_icon_size_title"
         app:updatesContinuously="true" />
 
-    <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="BatteryShowPercent"
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
         android:title="@string/battery_show_percent_title" />
 
-    <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="BIconindicateCharging"
         android:summaryOff="@string/general_off"
@@ -42,7 +42,7 @@
         android:key="batteryIconChargingColor"
         android:title="@string/BB_batteryChargingColor" />
 
-    <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="BIconindicateFastCharging"
         android:summaryOff="@string/general_off"
@@ -54,21 +54,21 @@
         android:key="batteryIconFastChargingColor"
         android:title="@string/BB_batteryFastChargingColor" />
 
-    <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="BIconColorful"
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
         android:title="@string/BB_colorful_title" />
 
-    <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="BIconTransitColors"
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
         android:title="@string/BB_transit_colors" />
 
-    <SeekBarPreference
+    <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
         android:defaultValue="100"
         android:key="BIconOpacity"
         android:title="@string/BIcon_Opacity_title"

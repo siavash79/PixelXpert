@@ -2,12 +2,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:visibility="visible">
-    <PreferenceCategory android:title="@string/back_gesture_category_title">
-        <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/back_gesture_category_title">
+        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="true"
             android:key="BackFromLeft"
             android:title="@string/back_from_left_title" />
-        <SeekBarPreference
+        <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
             android:layout_width="wrap_content"
             android:defaultValue="100"
             android:key="BackLeftHeight"
@@ -15,28 +15,28 @@
             android:title="@string/back_height_title"
             app:min="10"
             app:updatesContinuously="true" />
-        <SwitchPreference
+        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="true"
             android:key="BackFromRight"
             android:title="@string/back_from_right_title" />
-        <SeekBarPreference
+        <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
             android:defaultValue="100"
             android:key="BackRightHeight"
             android:max="100"
             android:title="@string/back_height_title"
             app:min="10"
             app:updatesContinuously="true" />
-    </PreferenceCategory>
+    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/gesture_nav_extra_cat">
-        <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/gesture_nav_extra_cat">
+        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="false"
             android:key="FCLongSwipeEnabled"
             android:title="@string/gesture_nav_long_swipe_fc_title"
             app:summaryOn="@string/general_on"
             app:summaryOff="@string/general_off" />
 
-        <ListPreference
+        <sh.siava.AOSPMods.ui.MaterialListPreference
             android:defaultValue="-1"
             android:entries="@array/custom_action_titles"
             android:entryValues="@array/custom_action_codes"
@@ -55,7 +55,7 @@
 
             app:defaultValue="25" />
 
-        <ListPreference
+        <sh.siava.AOSPMods.ui.MaterialListPreference
             android:defaultValue="-1"
             android:entries="@array/custom_action_titles"
             android:entryValues="@array/custom_action_codes"
@@ -74,7 +74,7 @@
 
             app:defaultValue="25" />
 
-        <ListPreference
+        <sh.siava.AOSPMods.ui.MaterialListPreference
             android:defaultValue="None"
             android:entries="@array/custom_action_titles"
             android:entryValues="@array/custom_action_codes"
@@ -94,23 +94,23 @@
 
             app:defaultValue="20" />
 
-    </PreferenceCategory>
+    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
-    <PreferenceCategory
+    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory
         android:title="@string/gesture_nav_pill_cat"
         app:key="nav_pill_cat">
-        <SwitchPreference
+        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="false"
             android:key="navPillColorAccent"
             android:title="@string/colorpill"
             app:summaryOn="@string/general_on"
             app:summaryOff="@string/general_off" />
-        <SeekBarPreference
+        <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
             android:defaultValue="50"
             android:key="GesPillWidthModPos"
             app:title="@string/gesture_nav_pill_width_title"
             app:updatesContinuously="true" />
-        <SeekBarPreference
+        <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
             android:defaultValue="100"
             android:max="300"
             app:min="50"
@@ -119,15 +119,15 @@
             app:title="@string/gesture_nav_pill_height_title"
             app:updatesContinuously="true" />
 
-    </PreferenceCategory>
-    <PreferenceCategory
+    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory
         android:title="@string/reducekeyboard_title"
         app:key="nav_keyboard_height_cat">
-        <SwitchPreference
+        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="false"
             android:key="ReduceKeyboardSpaceOverlay"
             android:title="@string/reducekeyboard"
             app:summaryOn="@string/general_on"
             app:summaryOff="@string/general_off" />
-    </PreferenceCategory>
+    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

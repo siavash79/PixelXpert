@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListPreference
+    <sh.siava.AOSPMods.ui.MaterialListPreference
         android:entries="@array/languages_names"
         android:entryValues="@array/languages_values"
         android:summary="%s"
         android:key="appLanguage"
         android:title="@string/language_title" />
 
-    <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="AlternativeThemedAppIcon"
         android:summaryOff="@string/general_off"

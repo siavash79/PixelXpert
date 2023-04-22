@@ -1,11 +1,22 @@
 <resources>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="AppTheme.AOSPMods" parent="Theme.Material3.DayNight">
+        <item name="alertDialogTheme">@style/AppTheme.Dialog</item>
+        <item name="colorPrimary">@color/ui_accent</item>
+        <item name="materialAlertDialogTheme">@style/AppTheme.Dialog</item>
+        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary</item>
+        <item name="textAppearanceListItem">@style/TextAppearance.App.ListItem.Title</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+        <item name="android:statusBarColor">@color/color_accent_0_10_overlay</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/ui_bg</item>
+        <item name="android:colorBackground">@color/ui_bg</item>
+        <item name="fontFamily">@font/google_sans_text_400</item>
+        <item name="collapsingToolbarLayoutStyle">@style/Widget.CollapsingToolbar</item>
+        <item name="android:windowSplashScreenBackground">@color/ui_bg</item>
+        <item name="seekBarStyle">@style/Material3.SeekBar</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

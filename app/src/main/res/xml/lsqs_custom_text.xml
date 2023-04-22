@@ -2,14 +2,14 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="NetworkStatsEnabled"
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
         android:title="@string/netstat_enable_title" />
 
-    <SeekBarPreference
+    <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
         android:defaultValue="5"
         android:key="netstatSaveInterval"
         android:max="10"
@@ -18,7 +18,7 @@
         app:updatesContinuously="true"
         android:title="@string/network_interval_custom_text_title" />
 
-    <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="networkStatsColorful"
         android:summaryOff="@string/general_off"

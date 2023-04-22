@@ -1,164 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".UpdateFragment">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".UpdateFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:minHeight="750dp"
-        android:padding="16dp">
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:minHeight="750dp"
+		android:padding="16dp">
 
-        <TextView
-            android:id="@+id/currentVersionValueID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/currentVersionTitle"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/currentVersionID"
-            app:layout_constraintTop_toTopOf="@+id/currentVersionID" />
+		<TextView
+			android:id="@+id/currentVersionValueID"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:text="@string/currentVersionTitle"
+			android:textStyle="bold"
+			app:layout_constraintStart_toEndOf="@+id/currentVersionID"
+			app:layout_constraintTop_toTopOf="@+id/currentVersionID" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/update_flavor_title"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/updateChannelRadioGroup"
-            app:layout_constraintTop_toBottomOf="@+id/currentVersionID" />
+		<TextView
+			android:id="@+id/textView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:text="@string/update_flavor_title"
+			android:textStyle="bold"
+			app:layout_constraintStart_toStartOf="@+id/updateChannelRadioGroup"
+			app:layout_constraintTop_toBottomOf="@+id/currentVersionID" />
 
-        <RadioGroup
-            android:id="@+id/updateChannelRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/packageTypeRadioGroup"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
+		<RadioGroup
+			android:id="@+id/updateChannelRadioGroup"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			app:layout_constraintStart_toStartOf="@+id/packageTypeRadioGroup"
+			app:layout_constraintTop_toBottomOf="@+id/textView">
 
-            <RadioButton
-                android:id="@+id/stableID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/stable_flavor" />
+			<RadioButton
+				android:id="@+id/stableID"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="@string/stable_flavor" />
 
-            <RadioButton
-                android:id="@+id/canaryID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/canary_flavor" />
-        </RadioGroup>
+			<RadioButton
+				android:id="@+id/canaryID"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="@string/canary_flavor" />
+		</RadioGroup>
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/update_type_title"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/packageTypeRadioGroup"
-            app:layout_constraintTop_toBottomOf="@+id/updateChannelRadioGroup" />
+		<TextView
+			android:id="@+id/textView3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:text="@string/update_type_title"
+			android:textStyle="bold"
+			app:layout_constraintStart_toStartOf="@+id/packageTypeRadioGroup"
+			app:layout_constraintTop_toBottomOf="@+id/updateChannelRadioGroup" />
 
-        <RadioGroup
-            android:id="@+id/packageTypeRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3">
+		<RadioGroup
+			android:id="@+id/packageTypeRadioGroup"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-            <RadioButton
-                android:id="@+id/fullTypeID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/full_type" />
+			<RadioButton
+				android:id="@+id/fullTypeID"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="@string/full_type" />
 
-            <RadioButton
-                android:id="@+id/XposedTypeID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/xposed_type" />
-        </RadioGroup>
+			<RadioButton
+				android:id="@+id/XposedTypeID"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="@string/xposed_type" />
+		</RadioGroup>
 
-        <TextView
-            android:id="@+id/currentVersionID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/currentVersionTitle"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+		<TextView
+			android:id="@+id/currentVersionID"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="32dp"
+			android:layout_marginTop="8dp"
+			android:text="@string/currentVersionTitle"
+			android:textStyle="bold"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/latestVersionTitleID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/lastestVersionTitle"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/packageTypeRadioGroup" />
+		<TextView
+			android:id="@+id/latestVersionTitleID"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="32dp"
+			android:layout_marginTop="8dp"
+			android:text="@string/lastestVersionTitle"
+			android:textStyle="bold"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/packageTypeRadioGroup" />
 
-        <TextView
-            android:id="@+id/latestVersionValueID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="..."
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/latestVersionTitleID"
-            app:layout_constraintTop_toTopOf="@+id/latestVersionTitleID" />
+		<TextView
+			android:id="@+id/latestVersionValueID"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:text="..."
+			android:textStyle="bold"
+			app:layout_constraintStart_toEndOf="@+id/latestVersionTitleID"
+			app:layout_constraintTop_toTopOf="@+id/latestVersionTitleID" />
 
-        <Button
-            android:id="@+id/updateBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:enabled="false"
-            android:text="@string/update_word"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/latestVersionTitleID" />
+		<Button
+			android:id="@+id/updateBtn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:enabled="false"
+			android:text="@string/update_word"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/latestVersionTitleID" />
 
-        <ScrollView
-            android:id="@+id/scrollView3"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:fadeScrollbars="false"
-            android:isScrollContainer="true"
-            android:nestedScrollingEnabled="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/updateBtn">
+		<ScrollView
+			android:id="@+id/scrollView3"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="8dp"
+			android:layout_marginEnd="16dp"
+			android:layout_marginBottom="8dp"
+			android:fadeScrollbars="false"
+			android:isScrollContainer="true"
+			android:nestedScrollingEnabled="true"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/updateBtn">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
 
-                <br.tiagohm.markdownview.MarkdownView
-                    android:id="@+id/changelogView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-        </ScrollView>
+				<br.tiagohm.markdownview.MarkdownView
+					android:id="@+id/changelogView"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" />
+			</LinearLayout>
+		</ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

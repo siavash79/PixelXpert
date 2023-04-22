@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<ListPreference
+	<sh.siava.AOSPMods.ui.MaterialListPreference
 		android:defaultValue="0"
 		android:entries="@array/network_mode_names"
 		android:entryValues="@array/network_mode_codes"
@@ -10,21 +10,21 @@
 		android:key="networkTrafficMode"
 		android:title="@string/network_mode_title" />
 
-	<SwitchPreference
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="true"
 		android:key="networkTrafficRXTop"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
 		android:title="@string/network_download_top" />
 
-	<SwitchPreference
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="true"
 		android:key="networkTrafficShowIcons"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
 		android:title="@string/network_show_icons_title" />
 
-	<SeekBarPreference
+	<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
 		android:defaultValue="1"
 		android:key="networkTrafficInterval"
 		android:max="5"
@@ -33,7 +33,7 @@
 		android:title="@string/network_interval_title"
 		app:updatesContinuously="true" />
 
-	<EditTextPreference
+	<sh.siava.AOSPMods.ui.MaterialEditTextPreference
 		android:key="networkTrafficThreshold"
 		android:selectAllOnFocus="true"
 		android:singleLine="true"
@@ -41,7 +41,7 @@
 		app:defaultValue="10"
 		app:summary="@string/ntsb_threshold_summary" />
 
-	<SwitchPreference
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="networkTrafficColorful"
 		android:summaryOff="@string/general_off"
@@ -58,7 +58,7 @@
 		android:key="networkTrafficULColor"
 		android:title="@string/network_upload_color_title" />
 
-	<SeekBarPreference
+	<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
 		app:isPreferenceVisible="false"
 		android:defaultValue="100"
 		android:key="networkTrafficOpacity"

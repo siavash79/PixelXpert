@@ -1,74 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListPreference
-        android:defaultValue="0"
-        android:entries="@array/sbc_position_names"
-        android:entryValues="@array/sbc_position_codes"
-        android:key="SBClockLoc"
-        android:title="@string/sbc_position_title" />
-    <ListPreference
-        android:defaultValue="2"
-        android:entries="@array/sbc_ampm_style_names"
-        android:entryValues="@array/sbc_ampm_style_codes"
-        android:key="SBCAmPmStyle"
-        android:title="@string/sbc_ampm_style" />
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="SBCShowSeconds"
-        android:summaryOff="@string/general_off"
-        android:summaryOn="@string/general_on"
-        android:title="@string/sbc_show_secs" />
-    <PreferenceCategory android:title="@string/sbc_date_cat">
-        <ListPreference
-            android:defaultValue="0"
-            android:entries="@array/sbc_day_week_names"
-            android:entryValues="@array/sbc_day_week_codes"
-            android:summary="%s"
-            android:key="SBCDayOfWeekMode"
-            android:title="@string/sbc_day_of_week_options" />
-        <PreferenceCategory android:title="@string/sbc_advanced_cat">
-            <EditTextPreference
-                android:defaultValue=""
-                android:key="DateFormatBeforeSBC"
-                android:selectAllOnFocus="true"
-                android:singleLine="true"
-                android:dialogLayout="@layout/string_formatter_manual"
-                android:title="@string/sbc_custom_date_before" />
-            <SwitchPreference
-                android:defaultValue="true"
-                android:key="BeforeSBCSmall"
-                android:title="@string/sbc_date_small" />
-            <EditTextPreference
-                android:defaultValue=""
-                android:key="DateFormatAfterSBC"
-                android:selectAllOnFocus="true"
-                android:singleLine="true"
-                android:dialogLayout="@layout/string_formatter_manual"
-                android:title="@string/sbc_custom_date_after" />
-            <SwitchPreference
-                android:defaultValue="true"
-                android:key="AfterSBCSmall"
-                android:title="@string/sbc_date_small" />
-        </PreferenceCategory>
-    </PreferenceCategory>
-    <PreferenceCategory android:title="@string/sbc_clock_color_category">
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="SBCClockColorful"
-            android:summaryOn="@string/general_on"
-            android:summaryOff="@string/general_off"
-            android:title="@string/sbc_colorful_title" />
+	<sh.siava.AOSPMods.ui.MaterialListPreference
+		android:defaultValue="0"
+		android:entries="@array/sbc_position_names"
+		android:entryValues="@array/sbc_position_codes"
+		android:key="SBClockLoc"
+		android:title="@string/sbc_position_title" />
+	<sh.siava.AOSPMods.ui.MaterialListPreference
+		android:defaultValue="2"
+		android:entries="@array/sbc_ampm_style_names"
+		android:entryValues="@array/sbc_ampm_style_codes"
+		android:key="SBCAmPmStyle"
+		android:title="@string/sbc_ampm_style" />
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="SBCShowSeconds"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/sbc_show_secs" />
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/sbc_date_cat">
+		<sh.siava.AOSPMods.ui.MaterialListPreference
+			android:defaultValue="0"
+			android:entries="@array/sbc_day_week_names"
+			android:entryValues="@array/sbc_day_week_codes"
+			android:key="SBCDayOfWeekMode"
+			android:summary="%s"
+			android:title="@string/sbc_day_of_week_options" />
+		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/sbc_advanced_cat">
+			<sh.siava.AOSPMods.ui.MaterialEditTextPreference
+				android:defaultValue=""
+				android:dialogLayout="@layout/string_formatter_manual"
+				android:key="DateFormatBeforeSBC"
+				android:selectAllOnFocus="true"
+				android:singleLine="true"
+				android:title="@string/sbc_custom_date_before" />
+			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+				android:defaultValue="true"
+				android:key="BeforeSBCSmall"
+				android:summaryOff="@string/general_off"
+				android:summaryOn="@string/general_on"
+				android:title="@string/sbc_date_small" />
+			<sh.siava.AOSPMods.ui.MaterialEditTextPreference
+				android:defaultValue=""
+				android:dialogLayout="@layout/string_formatter_manual"
+				android:key="DateFormatAfterSBC"
+				android:selectAllOnFocus="true"
+				android:singleLine="true"
+				android:title="@string/sbc_custom_date_after" />
+			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+				android:defaultValue="true"
+				android:key="AfterSBCSmall"
+				android:summaryOff="@string/general_off"
+				android:summaryOn="@string/general_on"
+				android:title="@string/sbc_date_small" />
+		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/sbc_clock_color_category">
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="SBCClockColorful"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/sbc_colorful_title" />
 
-        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-            android:key="SBCBeforeClockColor"
-            android:title="@string/sbc_before_color" />
+		<com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+			android:key="SBCBeforeClockColor"
+			android:title="@string/sbc_before_color" />
 
-        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-            android:key="SBCClockColor"
-            android:title="@string/sbc_color" />
+		<com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+			android:key="SBCClockColor"
+			android:title="@string/sbc_color" />
 
-        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-            android:key="SBCAfterClockColor"
-            android:title="@string/sbc_after_color" />
-    </PreferenceCategory>
+		<com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+			android:key="SBCAfterClockColor"
+			android:title="@string/sbc_after_color" />
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

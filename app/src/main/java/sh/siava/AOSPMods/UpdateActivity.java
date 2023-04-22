@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.LocaleList;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,9 +19,10 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
 import java.util.Locale;
+import java.util.Objects;
 
-import sh.siava.AOSPMods.utils.ModuleFolderOperations;
 import sh.siava.AOSPMods.databinding.ActivityUpdateBinding;
+import sh.siava.AOSPMods.utils.ModuleFolderOperations;
 
 public class UpdateActivity extends AppCompatActivity {
 
@@ -66,7 +68,8 @@ public class UpdateActivity extends AppCompatActivity {
 		binding = ActivityUpdateBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
 
-		setSupportActionBar(binding.toolbar);
+		Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.color_surface_overlay));
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_update);
 		appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
@@ -94,7 +97,7 @@ public class UpdateActivity extends AppCompatActivity {
 	@Override
 	public boolean onSupportNavigateUp() {
 		NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_update);
-		return NavigationUI.navigateUp(navController, appBarConfiguration)
-				|| super.onSupportNavigateUp();
+		onBackPressed();
+		return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
 	}
 }

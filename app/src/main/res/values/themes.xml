@@ -4,6 +4,7 @@
 		<item name="alertDialogTheme">@style/AppTheme.Dialog</item>
 		<item name="colorPrimary">@color/ui_accent</item>
 		<item name="colorOnPrimary">@android:color/system_accent1_10</item>
+		<item name="colorPrimaryContainer">@android:color/system_accent1_10</item>
 		<item name="materialAlertDialogTheme">@style/AppTheme.Dialog</item>
 		<item name="android:textColor">@color/text_color_primary</item>
 		<item name="android:textColorPrimary">@color/text_color_primary</item>

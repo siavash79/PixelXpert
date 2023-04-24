@@ -52,7 +52,7 @@
             android:summaryOn="@string/general_on"
             android:title="@string/clear_all_reposition_title" />
 
-        <sh.siava.rangesliderpreference.RangeSliderPreference
+        <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
             android:key="BrightnessRange"
             android:title="@string/brightness_range_title"
             android:summary="@string/brightness_range_not_linear"
@@ -65,7 +65,7 @@
 
             app:defaultValue="0,100" />
 
-        <sh.siava.rangesliderpreference.RangeSliderPreference
+        <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
             android:key="displayOverride"
             android:title="@string/display_resolution_title"
 
@@ -133,7 +133,7 @@
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on" />
 
-        <sh.siava.rangesliderpreference.RangeSliderPreference
+        <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
             android:key="HeadupAutoDismissNotificationDecay"
             android:title="@string/heads_up_notification_duration"
 

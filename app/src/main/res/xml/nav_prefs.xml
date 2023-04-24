@@ -36,7 +36,7 @@
         android:summaryOn="@string/general_on"
         android:title="@string/taskbar_as_recents_title" />
 
-    <sh.siava.rangesliderpreference.RangeSliderPreference
+    <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
         app:maxVal="300"
         app:minVal="50"
         app:defaultValue="100"
@@ -45,7 +45,7 @@
         app:title="@string/taskbar_height_title"
         app:updatesContinuously="false" />
 
-    <sh.siava.rangesliderpreference.RangeSliderPreference
+    <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
         app:maxVal="2"
         app:minVal="0"
         app:defaultValue="1"

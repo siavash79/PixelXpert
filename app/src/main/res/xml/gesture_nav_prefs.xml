@@ -43,7 +43,7 @@
             android:summary="%s"
             android:key="leftSwipeUpAction"
             android:title="@string/gesture_nav_left_swipe_up_title" />
-        <sh.siava.rangesliderpreference.RangeSliderPreference
+        <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
             android:key="leftSwipeUpPercentage"
             android:title="@string/gesture_nav_left_swipe_up_percent"
 
@@ -62,7 +62,7 @@
             android:summary="%s"
             android:key="rightSwipeUpAction"
             android:title="@string/gesture_nav_right_swipe_up_title" />
-        <sh.siava.rangesliderpreference.RangeSliderPreference
+        <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
             android:key="rightSwipeUpPercentage"
             android:title="@string/gesture_nav_right_swipe_up_percent"
 
@@ -82,7 +82,7 @@
             android:key="twoFingerSwipeUpAction"
             android:title="@string/gesture_nav_two_finger_title" />
 
-        <sh.siava.rangesliderpreference.RangeSliderPreference
+        <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
             android:key="swipeUpPercentage"
             android:title="@string/gesture_nav_swipe_up_height"
 

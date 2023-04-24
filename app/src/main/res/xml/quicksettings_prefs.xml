@@ -78,7 +78,7 @@
 				app:key="qs_tile_qty"
 				app:title="@string/qs_tile_qty_title" />
 
-			<sh.siava.rangesliderpreference.RangeSliderPreference
+			<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
 				android:key="QSLabelScaleFactor"
 				app:defaultValue="0"
 				app:maxVal="50"
@@ -87,7 +87,7 @@
 				app:title="@string/qs_tile_label_size"
 				app:updatesContinuously="true" />
 
-			<sh.siava.rangesliderpreference.RangeSliderPreference
+			<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
 				android:key="QSSecondaryLabelScaleFactor"
 				app:defaultValue="0"
 				app:maxVal="50"

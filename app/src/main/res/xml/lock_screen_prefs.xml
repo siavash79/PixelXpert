@@ -34,7 +34,7 @@
 			app:summaryOff="@string/general_off"
 			app:summaryOn="@string/general_on" />
 
-		<sh.siava.rangesliderpreference.RangeSliderPreference
+		<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
 			android:key="KeyGuardDimAmount"
 			android:title="@string/keyguard_dim_amount_title"
 			app:defaultValue="-1"

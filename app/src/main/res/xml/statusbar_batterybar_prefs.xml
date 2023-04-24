@@ -63,7 +63,7 @@
         android:key="batteryFastChargingColor"
         android:title="@string/BB_batteryFastChargingColor" />
 
-    <sh.siava.rangesliderpreference.RangeSliderPreference
+    <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
         android:key="batteryWarningRange"
         android:title="@string/BB_warning_level"
         android:summary="@string/BB_warning_tip"

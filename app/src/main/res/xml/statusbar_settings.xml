@@ -64,7 +64,7 @@
             android:singleLine="true"
             android:title="@string/sb_notification_limit" />
 
-        <sh.siava.rangesliderpreference.RangeSliderPreference
+        <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
             android:key="statusbarPaddings"
             android:title="@string/sb_padding_title"
             android:summary="@string/sb_padding_summary"

@@ -74,7 +74,7 @@
         android:title="@string/BIcon_Opacity_title"
         app:updatesContinuously="true" />
 
-    <sh.siava.rangesliderpreference.RangeSliderPreference
+    <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
         android:key="BIconbatteryWarningRange"
         android:title="@string/BB_warning_level"
         android:summary="@string/BB_warning_tip"

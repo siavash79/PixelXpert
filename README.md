@@ -75,6 +75,7 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @ElTifo Portuguese
 - @cracky5322 Chinese Traditional
 - @JohnsonRan Chinese Simplified
+- @huajijam Chinese Simplified
 - @TireX228 Russian
 - @ygorigor Romanian
 - @krystianokris Polish

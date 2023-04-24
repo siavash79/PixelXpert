@@ -26,6 +26,7 @@
     <string name="pm_header">Package Manager</string>
 
     <!--Lock screen related-->
+    <string name="ls_general_options">Lock screen options</string>
     <string name="hide_avatar_title">Remove user avatar (multi user mode)</string>
     <string name="transparent_fingerprint_circle">Remove background circle from under-display fingerprint</string>
     <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>

@@ -1,20 +1,20 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <Preference
+    <sh.siava.AOSPMods.ui.MaterialPreference
         app:fragment="sh.siava.AOSPMods.SettingsActivity$GestureNavFragment"
         app:key="gesturenav_header"
         app:title="@string/gesturenav_header" />
-    <Preference
+    <sh.siava.AOSPMods.ui.MaterialPreference
         app:fragment="sh.siava.AOSPMods.SettingsActivity$ThreeButtonNavFragment"
         app:key="threebutton_header"
         app:title="@string/threebutton_header_title" />
-    <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="HideNavbarOverlay"
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"
         android:title="@string/hide_navbar_title" />
-    <ListPreference
+    <sh.siava.AOSPMods.ui.MaterialListPreference
         android:defaultValue="0"
         android:entries="@array/taskbar_option_names"
         android:entryValues="@array/taskbar_option_value"
@@ -29,7 +29,7 @@
         android:summaryOn="@string/general_on"
         android:title="@string/taskbar_hide_allapps_title" /-->
 
-    <SwitchPreference
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="TaskbarAsRecents"
         android:summaryOff="@string/general_off"

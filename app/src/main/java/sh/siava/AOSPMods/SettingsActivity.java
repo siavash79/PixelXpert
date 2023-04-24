@@ -1,7 +1,5 @@
 package sh.siava.AOSPMods;
 
-import static sh.siava.AOSPMods.XPrefs.Xprefs;
-
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -30,7 +28,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -42,14 +43,14 @@ import com.topjohnwu.superuser.Shell;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import sh.siava.AOSPMods.utils.PrefManager;
 import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
-public class SettingsActivity extends AppCompatActivity implements
-		PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
 	public static final int FULL_VERSION = 0;
 	public static final int XPOSED_ONLY = 1;
@@ -107,10 +108,10 @@ public class SettingsActivity extends AppCompatActivity implements
 		setContentView(R.layout.settings_activity);
 
 		if (savedInstanceState == null) {
-			getSupportFragmentManager()
-					.beginTransaction()
-					.replace(R.id.settings, new HeaderFragment())
-					.commit();
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+			fragmentTransaction.setCustomAnimations(R.anim.fragment_fade_in, R.anim.fragment_fade_out, R.anim.fragment_fade_in, R.anim.fragment_fade_out);
+			fragmentTransaction.replace(R.id.settings, new HeaderFragment()).commit();
 		} else {
 			setTitle(savedInstanceState.getCharSequence(TITLE_TAG));
 		}
@@ -121,6 +122,8 @@ public class SettingsActivity extends AppCompatActivity implements
 				backButtonDisabled();
 			}
 		});
+
+		Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.color_surface_overlay));
 	}
 
 	@Override
@@ -193,16 +196,14 @@ public class SettingsActivity extends AppCompatActivity implements
 	public boolean onPreferenceStartFragment(@NonNull PreferenceFragmentCompat caller, Preference pref) {
 		// Instantiate the new Fragment
 		final Bundle args = pref.getExtras();
-		final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
-				getClassLoader(),
-				pref.getFragment());
+		final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(getClassLoader(), pref.getFragment());
 		fragment.setArguments(args);
 		fragment.setTargetFragment(caller, 0);
 		// Replace the existing Fragment with the new Fragment
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.settings, fragment)
-				.addToBackStack(null)
-				.commit();
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.setCustomAnimations(R.anim.fragment_fade_in, R.anim.fragment_fade_out, R.anim.fragment_fade_in, R.anim.fragment_fade_out);
+		fragmentTransaction.replace(R.id.settings, fragment).addToBackStack(null).commit();
 		setTitle(pref.getTitle());
 		backButtonEnabled();
 		return true;
@@ -238,27 +239,21 @@ public class SettingsActivity extends AppCompatActivity implements
 	@SuppressLint("ApplySharedPref")
 	private void clearNetstatClick() {
 		//showing an alert before taking action
-		new AlertDialog.Builder(this).setTitle(R.string.nestat_caution_title)
-				.setMessage(R.string.nestat_caution_text)
-				.setPositiveButton(R.string.netstat_caution_yes, (dialogInterface, i) -> {
-					try {
-						SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
-						boolean currentStatus = prefs.getBoolean("NetworkStatsEnabled", false);
+		new AlertDialog.Builder(this).setTitle(R.string.nestat_caution_title).setMessage(R.string.nestat_caution_text).setPositiveButton(R.string.netstat_caution_yes, (dialogInterface, i) -> {
+			try {
+				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
+				boolean currentStatus = prefs.getBoolean("NetworkStatsEnabled", false);
 
-						prefs.edit().putBoolean("NetworkStatsEnabled", false).commit();
-						Shell.cmd("rm -rf /data/user_de/0/com.android.systemui/netStats").exec();
-						Thread.sleep(100);
+				prefs.edit().putBoolean("NetworkStatsEnabled", false).commit();
+				Shell.cmd("rm -rf /data/user_de/0/com.android.systemui/netStats").exec();
+				Thread.sleep(100);
 
-						prefs.edit().putBoolean("NetworkStatsEnabled", true).commit();
-						Thread.sleep(100);
-						prefs.edit().putBoolean("NetworkStatsEnabled", currentStatus).apply();
-					} catch (Exception ignored) {
-					}
-				})
-				.setNegativeButton(R.string.netstat_caution_no, (dialogInterface, i) -> {/*nothing happens*/})
-				.setCancelable(true)
-				.create()
-				.show();
+				prefs.edit().putBoolean("NetworkStatsEnabled", true).commit();
+				Thread.sleep(100);
+				prefs.edit().putBoolean("NetworkStatsEnabled", currentStatus).apply();
+			} catch (Exception ignored) {
+			}
+		}).setNegativeButton(R.string.netstat_caution_no, (dialogInterface, i) -> {/*nothing happens*/}).setCancelable(true).create().show();
 	}
 
 	private void importExportSettings(boolean export) {
@@ -278,16 +273,14 @@ public class SettingsActivity extends AppCompatActivity implements
 		switch (requestCode) {
 			case REQUEST_IMPORT:
 				try {
-					PrefManager.importPath(prefs,
-							getContentResolver().openInputStream(data.getData()));
+					PrefManager.importPath(prefs, getContentResolver().openInputStream(data.getData()));
 					SystemUtils.RestartSystemUI();
 				} catch (Exception ignored) {
 				}
 				break;
 			case REQUEST_EXPORT:
 				try {
-					PrefManager.exportPrefs(prefs,
-							getContentResolver().openOutputStream(data.getData()));
+					PrefManager.exportPrefs(prefs, getContentResolver().openOutputStream(data.getData()));
 				} catch (Exception ignored) {
 				}
 				break;
@@ -311,22 +304,23 @@ public class SettingsActivity extends AppCompatActivity implements
 				//noinspection ResultOfMethodCallIgnored
 				p.getInputStream().read(buffer);
 				String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
-				if(!Pattern.matches("^T[A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
+				if (!Pattern.matches("^T[A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
 				{
-					new AlertDialog.Builder(getContext())
-							.setTitle(R.string.incompatible_alert_title)
-							.setMessage(R.string.incompatible_alert_body)
-							.setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss())
-							.show();
+					new AlertDialog.Builder(getContext()).setTitle(R.string.incompatible_alert_title).setMessage(R.string.incompatible_alert_body).setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss()).show();
 				}
-			}
-			catch (Throwable ignored){
+			} catch (Throwable ignored) {
 			}
 
 		}
 
 		private void updateVisibility() {
 			findPreference("theming_header").setVisible(showOverlays);
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.app_name));
 		}
 	}
 
@@ -358,13 +352,16 @@ public class SettingsActivity extends AppCompatActivity implements
 					taskbarHeightOverride = RangeSliderPreference.getValues(prefs, "taskbarHeightOverride", 100f).get(0);
 				} catch (Throwable ignored) {
 				}
-				findPreference("taskbarHeightOverride").setSummary(
-						taskbarHeightOverride != 100f
-								? taskbarHeightOverride + "%"
-								: getString(R.string.word_default)
-				);
+				findPreference("taskbarHeightOverride").setSummary(taskbarHeightOverride != 100f ? taskbarHeightOverride + "%" : getString(R.string.word_default));
 
-			}catch (Throwable ignored){}
+			} catch (Throwable ignored) {
+			}
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.nav_header));
 		}
 
 	}
@@ -403,6 +400,12 @@ public class SettingsActivity extends AppCompatActivity implements
 			updateFontPrefs(prefs);
 			prefs.registerOnSharedPreferenceChangeListener(listener);
 		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.qs_tile_style_title));
+		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -428,14 +431,17 @@ public class SettingsActivity extends AppCompatActivity implements
 					KeyGuardDimAmount = RangeSliderPreference.getValues(sharedPreferences, "KeyGuardDimAmount", -1).get(0);
 				} catch (Exception ignored) {
 				}
-				findPreference("KeyGuardDimAmount").setSummary(
-						KeyGuardDimAmount < 0
-								? getString(R.string.word_default)
-								: KeyGuardDimAmount + "%");
+				findPreference("KeyGuardDimAmount").setSummary(KeyGuardDimAmount < 0 ? getString(R.string.word_default) : KeyGuardDimAmount + "%");
 
 				findPreference("TemperatureUnitF").setVisible(sharedPreferences.getBoolean("ShowChargingInfo", false));
+			} catch (Throwable ignored) {
 			}
-			catch (Throwable ignored){}
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.lockscreen_header_title));
 		}
 	}
 
@@ -485,6 +491,12 @@ public class SettingsActivity extends AppCompatActivity implements
 			}
 		}
 
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.sbbb_header));
+		}
+
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -510,6 +522,12 @@ public class SettingsActivity extends AppCompatActivity implements
 
 			} catch (Exception ignored) {
 			}
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.ntsb_category_title));
 		}
 	}
 
@@ -562,6 +580,12 @@ public class SettingsActivity extends AppCompatActivity implements
 			} catch (Exception ignored) {
 			}
 		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.sbbIcon_header));
+		}
 	}
 
 
@@ -582,11 +606,7 @@ public class SettingsActivity extends AppCompatActivity implements
 		private void updateVisibility(SharedPreferences prefs) {
 			try {
 				int volumeStps = prefs.getInt("volumeStps", 0);
-				findPreference("volumeStps").setSummary(String.format("%s - (%s)",
-						volumeStps == 10
-								? getString(R.string.word_default)
-								: String.valueOf(volumeStps),
-						getString(R.string.restart_needed)));
+				findPreference("volumeStps").setSummary(String.format("%s - (%s)", volumeStps == 10 ? getString(R.string.word_default) : String.valueOf(volumeStps), getString(R.string.restart_needed)));
 
 				findPreference("CustomThemedIconsOverlay").setVisible(showOverlays);
 
@@ -601,23 +621,20 @@ public class SettingsActivity extends AppCompatActivity implements
 					headsupDecayMillis = RangeSliderPreference.getValues(prefs, "HeadupAutoDismissNotificationDecay", -1).get(0);
 				} catch (Exception ignored) {
 				}
-				findPreference("HeadupAutoDismissNotificationDecay").setSummary(((int)headsupDecayMillis) + " " + getString(R.string.milliseconds));
+				findPreference("HeadupAutoDismissNotificationDecay").setSummary(((int) headsupDecayMillis) + " " + getString(R.string.milliseconds));
 
 				double increasedArea = Math.round(Math.abs(Math.pow(displayOverride, 2) / 100 - 100));
 
-				findPreference("displayOverride").setSummary(String.format("%s \n (%s)",
-						displayOverride == 100
-								? getString(R.string.word_default)
-								: String.format("%s%% - %s%% %s",
-								String.valueOf(displayOverride),
-								String.valueOf(increasedArea),
-								displayOverride > 100
-										? getString(R.string.more_area)
-										: getString(R.string.less_area)),
-						getString(R.string.sysui_restart_needed)));
+				findPreference("displayOverride").setSummary(String.format("%s \n (%s)", displayOverride == 100 ? getString(R.string.word_default) : String.format("%s%% - %s%% %s", String.valueOf(displayOverride), String.valueOf(increasedArea), displayOverride > 100 ? getString(R.string.more_area) : getString(R.string.less_area)), getString(R.string.sysui_restart_needed)));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.misc_header));
 		}
 	}
 
@@ -634,7 +651,14 @@ public class SettingsActivity extends AppCompatActivity implements
 
 		}
 
-		private void updateVisibility(SharedPreferences prefs) {}
+		private void updateVisibility(SharedPreferences prefs) {
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.pm_header));
+		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -656,6 +680,12 @@ public class SettingsActivity extends AppCompatActivity implements
 			findPreference("SBCBeforeClockColor").setVisible(colorfullEnabled);
 			findPreference("SBCClockColor").setVisible(colorfullEnabled);
 			findPreference("SBCAfterClockColor").setVisible(colorfullEnabled);
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.sbc_header));
 		}
 	}
 
@@ -684,6 +714,12 @@ public class SettingsActivity extends AppCompatActivity implements
 			}
 		}
 
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.threebutton_header_title));
+		}
+
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -703,7 +739,8 @@ public class SettingsActivity extends AppCompatActivity implements
 				findPreference("systemIconSortPlan").setVisible(sharedPreferences.getBoolean("systemIconsMultiRow", false));
 
 				findPreference("UnreadMessagesNumberOverlay").setVisible(showOverlays);
-			} catch (Exception ignored) {}
+			} catch (Exception ignored) {
+			}
 		}
 
 		@Override
@@ -713,6 +750,12 @@ public class SettingsActivity extends AppCompatActivity implements
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			setVisibility(prefs);
 			prefs.registerOnSharedPreferenceChangeListener(listener);
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.statusbar_header));
 		}
 	}
 
@@ -743,8 +786,8 @@ public class SettingsActivity extends AppCompatActivity implements
 
 				int QQSTileQtyL = sharedPreferences.getInt("QQSTileQtyL", 4);
 				findPreference("QQSTileQtyL").setSummary((QQSTileQtyL == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQtyL));
+			} catch (Throwable ignored) {
 			}
-			catch (Throwable ignored){}
 		}
 
 		@Override
@@ -755,6 +798,12 @@ public class SettingsActivity extends AppCompatActivity implements
 			updateVisibililty(prefs);
 
 			prefs.registerOnSharedPreferenceChangeListener(listener);
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.qs_tile_qty_title));
 		}
 	}
 
@@ -853,6 +902,12 @@ public class SettingsActivity extends AppCompatActivity implements
 			pullDownIndicator.setVisibility(View.VISIBLE);
 
 			((ViewGroup) getActivity().getWindow().getDecorView().getRootView()).addView(pullDownIndicator);
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.qs_panel_category_title));
 		}
 	}
 
@@ -1035,6 +1090,12 @@ public class SettingsActivity extends AppCompatActivity implements
 
 			super.onDestroy();
 		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.gesturenav_header));
+		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -1067,6 +1128,12 @@ public class SettingsActivity extends AppCompatActivity implements
 
 			prefs.registerOnSharedPreferenceChangeListener(listener);
 		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.netstat_header));
+		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -1087,7 +1154,8 @@ public class SettingsActivity extends AppCompatActivity implements
 					boolean AlternativeThemedAppIconEnabled = sharedPreferences.getBoolean("AlternativeThemedAppIcon", false);
 
 					setAlternativeAppIcon(AlternativeThemedAppIconEnabled);
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 			}
 		}
 
@@ -1125,6 +1193,12 @@ public class SettingsActivity extends AppCompatActivity implements
 
 
 			prefs.registerOnSharedPreferenceChangeListener(listener);
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.own_prefs_header));
 		}
 	}
 }

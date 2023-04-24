@@ -1,70 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.Material3.DynamicColors.DayNight">
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:windowContentTransitions">true</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@color/ui_statusbar</item>
+	<style name="AppTheme.AppBarOverlay" parent="Theme.Material3.Dark" />
 
-        <item name="alertDialogTheme">@style/AppTheme.Dialog</item>
+	<style name="AppTheme.PopupOverlay" parent="Theme.Material3.Light" />
 
-        <item name="actionBarTheme">@style/AppTheme.ActionBar</item>
+	<style name="AppTheme.AOSPMods.NoActionBar">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
 
-        <item name="android:colorBackground">@color/ui_bg</item>
-        <item name="colorBackgroundFloating">@color/ui_bg</item>
-        <item name="colorSurface">@color/ui_bg_surface</item>
-        <item name="colorPrimarySurface">@color/ui_bg_toolbar</item>
+	<style name="TextAppearance.App.ListItem.Title" parent="TextAppearance.AppCompat.Subhead">
+		<item name="android:textSize">19sp</item> <!-- A12 B2: 20sp -->
+	</style>
 
-        <item name="colorPrimary">@color/ui_accent</item>
-        <item name="colorPrimaryVariant">@color/ui_accent</item>
-        <item name="colorOnPrimary">@color/ui_fg</item>
+	<style name="AppTheme.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+		<item name="android:dialogCornerRadius">32dp</item>
+		<item name="android:backgroundDimAmount">0.60</item>
+		<item name="android:textColor">@color/text_color_primary</item>
+		<item name="android:textColorPrimary">@color/text_color_primary</item>
+		<item name="android:textColorSecondary">@color/text_color_secondary</item>
+		<item name="colorPrimary">@color/ui_accent</item>
+		<item name="colorPrimaryVariant">@color/ui_accent</item>
+		<item name="colorOnPrimary">@color/ui_fg</item>
+		<item name="colorSecondary">@color/ui_accent</item>
+		<item name="colorSecondaryVariant">@color/ui_accent</item>
+		<item name="colorOnSecondary">@color/ui_fg</item>
+		<item name="colorAccent">@color/ui_accent</item>
+		<item name="colorBackgroundFloating">@color/ui_bg</item>
+		<item name="colorSurface">@color/ui_surface</item>
+		<item name="colorPrimarySurface">@color/ui_primary_surface</item>
+	</style>
 
-        <item name="colorSecondary">@color/ui_accent</item>
-        <item name="colorSecondaryVariant">@color/ui_accent</item>
-        <item name="colorOnSecondary">@color/ui_fg</item>
+	<style name="Toolbar.TextAppearanceHeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+		<item name="fontFamily">@font/google_sans_text_500</item>
+	</style>
 
-        <item name="android:textColor">@color/text_color_primary</item>
-        <item name="android:textColorPrimary">@color/text_color_primary</item>
-        <item name="android:textColorSecondary">@color/text_color_secondary</item>
+	<style name="Toolbar.TextAppearanceHeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+		<item name="fontFamily">@font/google_sans_text_400</item>
+	</style>
 
-        <item name="textAppearanceListItem">@style/TextAppearance.App.ListItem.Title</item>
+	<style name="Widget.CollapsingToolbar" parent="Widget.Material3.CollapsingToolbar">
+		<item name="contentScrim">@drawable/color_surface_overlay</item>
+	</style>
 
-    </style>
+	<style name="Dialog.MaterialAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
+		<item name="shapeAppearanceOverlay">@style/MaterialAlertDialog.Rounded</item>
+	</style>
 
-    <style name="AppTheme.ActionBar" parent="">
-        <item name="colorSurface">@color/ui_actionbar</item>
+	<style name="MaterialAlertDialog.Rounded" parent="">
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSize">@dimen/ui_container_radius</item>
+	</style>
 
-    </style>
-
-    <style name="TextAppearance.App.ListItem.Title" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:textSize">19sp</item> <!-- A12 B2: 20sp -->
-    </style>
-
-    <style name="AppTheme.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-
-        <item name="android:dialogCornerRadius">32dp</item>
-        <item name="android:backgroundDimAmount">0.60</item>
-
-        <item name="android:colorBackground">@color/ui_bg</item>
-        <item name="android:textColor">@color/text_color_primary</item>
-        <item name="android:textColorPrimary">@color/text_color_primary</item>
-        <item name="android:textColorSecondary">@color/text_color_secondary</item>
-
-        <item name="colorBackgroundFloating">@color/ui_bg</item>
-        <item name="colorSurface">@color/ui_bg_surface</item>
-        <item name="colorPrimarySurface">@color/ui_bg_toolbar</item>
-
-        <item name="colorPrimary">@color/ui_accent</item>
-        <item name="colorPrimaryVariant">@color/ui_accent</item>
-        <item name="colorOnPrimary">@color/ui_fg</item>
-
-        <item name="colorSecondary">@color/ui_accent</item>
-        <item name="colorSecondaryVariant">@color/ui_accent</item>
-        <item name="colorOnSecondary">@color/ui_fg</item>
-
-        <item name="colorAccent">@color/ui_accent</item>
-
-    </style>
+	<style name="Material3.SeekBar" parent="Widget.AppCompat.SeekBar">
+		<item name="android:progressBackgroundTint">@color/color_accent_0_80_overlay</item>
+		<item name="android:progressTint">@color/ui_accent</item>
+		<item name="android:thumbTint">@null</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:background">@null</item>
+		<item name="android:hapticFeedbackEnabled">true</item>
+		<item name="android:splitTrack">false</item>
+		<item name="android:thumb">@drawable/seek_thumb</item>
+		<item name="android:track">@drawable/seek_track</item>
+	</style>
 
 </resources>

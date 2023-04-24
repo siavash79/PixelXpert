@@ -2,129 +2,150 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:visibility="visible">
-	<SwitchPreference
-		android:defaultValue="false"
-		android:key="DoubleTapSleepLockscreen"
-		android:title="@string/double_tap_sleep_title"
-		app:summaryOff="@string/general_off"
-		app:summaryOn="@string/general_on" />
 
-	<SwitchPreference
-		android:defaultValue="false"
-		android:key="holdScreenTorchEnabled"
-		android:title="@string/so_taptaptorch_title"
-		app:summary="@string/so_taptaptorch_summary" />
-	<SwitchPreference
-		android:defaultValue="false"
-		android:key="fingerprint_circle_hide"
-		android:summaryOff="@string/transparent_fingerprint_circle_off"
-		android:title="@string/transparent_fingerprint_circle"
-		app:summaryOn="@string/transparent_fingerprint_circle_on" />
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:layout="@layout/custom_preference_category"
+		android:title="@string/ls_general_options">
 
-	<SwitchPreference
-		android:defaultValue="false"
-		android:key="HideLockScreenUserAvatar"
-		android:title="@string/hide_avatar_title"
-		app:summaryOff="@string/general_off"
-		app:summaryOn="@string/general_on" />
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="DoubleTapSleepLockscreen"
+			android:title="@string/double_tap_sleep_title"
+			app:summaryOff="@string/general_off"
+			app:summaryOn="@string/general_on" />
 
-	<sh.siava.rangesliderpreference.RangeSliderPreference
-		android:key="KeyGuardDimAmount"
-		android:title="@string/keyguard_dim_amount_title"
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="holdScreenTorchEnabled"
+			android:title="@string/so_taptaptorch_title"
+			app:summary="@string/so_taptaptorch_summary" />
 
-		app:tickInterval="1"
-		app:valueCount="1"
-		app:minVal="-1"
-		app:maxVal="100"
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="fingerprint_circle_hide"
+			android:summaryOff="@string/transparent_fingerprint_circle_off"
+			android:title="@string/transparent_fingerprint_circle"
+			app:summaryOn="@string/transparent_fingerprint_circle_on" />
 
-		app:defaultValue="-1" />
-	<SwitchPreference
-		android:defaultValue="false"
-		android:key="WakeUpToSecurityInput"
-		android:summaryOff="@string/general_off"
-		android:title="@string/wakeup_to_security_title"
-		app:summaryOn="@string/general_on" />
-	<SwitchPreference
-		android:defaultValue="false"
-		android:key="shufflePinEnabled"
-		android:summaryOff="@string/general_off"
-		android:title="@string/shufflePin_title"
-		app:summaryOn="@string/general_on" />
-	<SwitchPreference
-		android:defaultValue="false"
-		android:key="easyUnlockEnabled"
-		android:title="@string/easy_unlock_title"
-		android:summary="@string/easy_unlock_summary" />
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="HideLockScreenUserAvatar"
+			android:title="@string/hide_avatar_title"
+			app:summaryOff="@string/general_off"
+			app:summaryOn="@string/general_on" />
 
-	<SwitchPreference
-		android:defaultValue="false"
-		android:key="ShowChargingInfo"
-		android:summaryOff="@string/general_off"
-		android:summaryOn="@string/general_on"
-		android:title="@string/charging_info_title" />
+		<sh.siava.rangesliderpreference.RangeSliderPreference
+			android:key="KeyGuardDimAmount"
+			android:title="@string/keyguard_dim_amount_title"
+			app:defaultValue="-1"
+			app:maxVal="100"
+			app:minVal="-1"
+			app:tickInterval="1"
+			app:valueCount="1" />
 
-	<SwitchPreference
-		android:defaultValue="false"
-		android:key="TemperatureUnitF"
-		android:summaryOff="@string/general_off"
-		android:summaryOn="@string/general_on"
-		android:title="@string/imperial_units_title" />
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="WakeUpToSecurityInput"
+			android:summaryOff="@string/general_off"
+			android:title="@string/wakeup_to_security_title"
+			app:summaryOn="@string/general_on" />
 
-	<PreferenceCategory android:title="@string/keyguard_bottom_category">
-		<SwitchPreference
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="shufflePinEnabled"
+			android:summaryOff="@string/general_off"
+			android:title="@string/shufflePin_title"
+			app:summaryOn="@string/general_on" />
+
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="easyUnlockEnabled"
+			android:summary="@string/easy_unlock_summary"
+			android:title="@string/easy_unlock_title" />
+
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="ShowChargingInfo"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/charging_info_title" />
+
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="TemperatureUnitF"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/imperial_units_title" />
+
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:layout="@layout/custom_preference_category"
+		android:title="@string/keyguard_bottom_category">
+
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="KeyguardBottomButtonsTransparent"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
 			android:title="@string/keyguard_bottom_buttons_transparent_title" />
-		<ListPreference
+
+		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue=""
 			android:entries="@array/lockScreenShortcut_names"
 			android:entryValues="@array/lockScreenShortcut_values"
 			android:key="leftKeyguardShortcut"
 			android:title="@string/LSleftShortcutTitle"
 			app:summary="%s" />
-		<ListPreference
+
+		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue=""
 			android:entries="@array/lockScreenShortcut_names"
 			android:entryValues="@array/lockScreenShortcut_values"
 			android:key="leftKeyguardShortcutLongClick"
 			android:title="@string/LSleftLongClickShortcutTitle"
 			app:summary="%s" />
-		<ListPreference
+
+		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue=""
 			android:entries="@array/lockScreenShortcut_names"
 			android:entryValues="@array/lockScreenShortcut_values"
 			android:key="rightKeyguardShortcut"
 			android:title="@string/LSrightShortcutTitle"
 			app:summary="%s" />
-		<ListPreference
+
+		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue=""
 			android:entries="@array/lockScreenShortcut_names"
 			android:entryValues="@array/lockScreenShortcut_values"
 			android:key="rightKeyguardShortcutLongClick"
 			android:title="@string/LSrightLongClickShortcutTitle"
 			app:summary="%s" />
-	</PreferenceCategory>
-	<PreferenceCategory android:title="@string/custom_text_category">
-		<SwitchPreference
+
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:layout="@layout/custom_preference_category"
+		android:title="@string/custom_text_category">
+
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="carrierTextMod"
 			android:title="@string/configure_carrier_text"
 			app:summaryOff="@string/carrier_text_mod_disabled"
 			app:summaryOn="@string/carrier_text_mod_enabled" />
-		<EditTextPreference
+		<sh.siava.AOSPMods.ui.MaterialEditTextPreference
+			android:dialogLayout="@layout/string_formatter_manual"
 			android:key="carrierTextValue"
 			android:selectAllOnFocus="true"
 			android:singleLine="true"
-			android:dialogLayout="@layout/string_formatter_manual"
 			android:title="@string/carrier_text_value" />
-		<EditTextPreference
+		<sh.siava.AOSPMods.ui.MaterialEditTextPreference
+			android:dialogLayout="@layout/string_formatter_manual"
 			android:key="KGMiddleCustomText"
 			android:selectAllOnFocus="true"
 			android:singleLine="false"
-			android:dialogLayout="@layout/string_formatter_manual"
 			android:title="@string/lockscreen_center_text_value" />
 
-	</PreferenceCategory>
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

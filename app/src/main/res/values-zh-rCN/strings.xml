@@ -1,5 +1,7 @@
 <resources>
     <!--General strings-->
+    <string name="app_themed_icon_title">启用替代的 AOSP Mods 主题应用图标</string>
+    <string name="xposed_desc">基于 Android 12+ AOSP 的 ROM 的自定义功能</string>
     <string name="error_not_activated">请确认该模块是否在 LSPosed 管理器上被激活。</string>
     <string name="hide_default">隐藏 (默认)</string>
     <string name="percent_of_default_size">% 默认</string>
@@ -18,11 +20,12 @@
     <string name="nav_header">导航栏</string>
     <string name="misc_header">杂项</string>
     <string name="qs_panel_category_title">磁贴面板</string>
-    <string name="theme_customization_category">主题化</string>
+    <string name="theme_customization_category">主题</string>
 
     <!--Lock screen related-->
     <string name="pm_header">包管理器</string>
-    <string name="hide_avatar_title">隐藏用户头像(多用户模式)</string>
+    <string name="ls_general_options">锁屏选项</string>
+    <string name="hide_avatar_title">隐藏用户头像 (多用户模式)</string>
 	<string name="transparent_fingerprint_circle">隐藏屏下指纹背景圆</string>
     <string name="transparent_fingerprint_circle_off">指纹图标背景被启用</string>
     <string name="transparent_fingerprint_circle_on">指纹图标背景被隐藏</string>
@@ -45,7 +48,7 @@
     <string name="camera_shortcut">相机</string>
     <string name="assistant_shortcut">语音助手</string>
     <string name="torch_shortcut">手电筒</string>
-    <string name="tv_remote_shortcut">TV遥控器</string>
+    <string name="tv_remote_shortcut">TV 遥控器</string>
     <string name="dnd_shortcut">勿扰模式</string>
     <string name="album_art_category">媒体选项</string>
     <string name="album_art_title">播放媒体时显示专辑封面</string>
@@ -86,7 +89,7 @@
     <string name="sbc_show_secs">显示秒数</string>
     <string name="sbc_date_cat">日期选项</string>
     <string name="sbc_day_of_week_options">显示日期</string>
-    <string name="sbc_advanced_cat">日期进阶选项（将取代上方设置！）</string>
+    <string name="sbc_advanced_cat">日期进阶选项 (将取代上方设置!)</string>
     <string name="sbc_advanced_sum">请阅读 Java 日期格式文档</string>
     <string name="sbc_custom_date_before">自定义时钟左侧格式</string>
     <string name="sbc_date_small">较小的尺寸 (70%)</string>
@@ -97,12 +100,12 @@
     <string name="sbc_before_color">时间前文字</string>
     <string name="sbc_color">时间</string>
     <string name="sbc_after_color">时间后文字</string>
-    <string name="network_settings_pref">流量指示器设置</string>
+    <string name="network_settings_pref">网络流量指示器设置</string>
     <string name="ntsb_far_left">最左</string>
     <string name="ntsb_mid_left">中间偏左</string>
     <string name="ntsb_mid_right">中间偏右</string>
     <string name="ntsb_category_title">流量指示</string>
-    <string name="ntsb_enabled_title">开启流量指示器</string>
+    <string name="ntsb_enabled_title">开启网络流量指示器</string>
     <string name="ntsb_position_title">指示器位置</string>
     <string name="ntsb_threshold_title">自动隐藏阈值</string>
     <string name="ntsb_threshold_summary">流量低于设定阈值时隐藏 (KB)</string>
@@ -113,9 +116,9 @@
     <string name="network_upload_color_title">上传颜色</string>
     <string name="network_opacity_title">不透明度</string>
     <string name="network_interval_title">刷新时间 (秒)</string>
-    <string name="network_show_icons_title">显示流量方向图标</string>
+    <string name="network_show_icons_title">显示上下行图标</string>
     <string name="nt_mode_rxtx">下载 &amp; 上传</string>
-    <string name="nt_mode_total">下载 +上传 (合并)</string>
+    <string name="nt_mode_total">下载 + 上传 (合并)</string>
     <string name="nt_mode_rxonly">仅下载</string>
     <string name="nt_mode_txonly">仅上传</string>
     <string name="statusbar_general_options">状态栏选项</string>
@@ -150,7 +153,7 @@
     <string name="qs_footer_text_value">输入自定义文本</string>
     <string name="qs_footer_text_summary">留空以移除</string>
     <string name="qs_footer_text_desc">关闭并打开屏幕后生效</string>
-    <string name="qs_leveled_flashlight_title">亮度可调手电筒磁贴</string>
+    <string name="qs_leveled_flashlight_title">亮度可调的手电筒磁贴</string>
     <string name="qs_flashlight_level_global_title">全局应用手电筒亮度</string>
     <string name="qs_qr_tile_inactive_title">反色扫码磁贴颜色</string>
     <string name="qs_tile_vertical_title">将磁贴图标移至顶部</string>
@@ -221,7 +224,7 @@
     <string name="auto_off_five_minutes">在接下来的五分钟内保持开启</string>
     <string name="screenshot_sound_disable_title">关闭截图提示音</string>
     <string name="clipboard_smart_actions_title">剪贴板的快捷选项</string>
-    <string name="allow_all_screen_rotations">解除全屏幕旋转</string>
+    <string name="allow_all_screen_rotations">强制解锁屏幕旋转</string>
     <string name="allow_all_screen_rotations_summary">将同时无视手动旋转悬浮钮</string>
     <string name="force_no_cutout">无视屏幕开孔</string>
     <string name="clear_all_reposition_title">在最近任务中添加易访问的 清除所有 按钮</string>
@@ -310,7 +313,7 @@
     <string name="menu_netstat_clear">重置网络统计</string>
     <string name="menu_restart">重启</string>
     <string name="menu_restartSysUI">重启 SystemUI</string>
-    <string name="menu_updates">App更新</string>
+    <string name="menu_updates">App 更新</string>
     <string name="nestat_caution_title">注意!</string>
     <string name="nestat_caution_text">您的网络统计数据将永久重置,确认?</string>
     <string name="netstat_caution_yes">继续</string>
@@ -321,7 +324,7 @@
     <string name="update_channel_name">更新</string>
     <string name="update_notification_title">已下载更新</string>
     <string name="update_notification_text">点此安装</string>
-    <string name="reboot_notification_title">AOSP Mods已更新</string>
+    <string name="reboot_notification_title">AOSP Mods 已更新</string>
     <string name="reboot_notification_text">更改将在重启设备后生效</string>
     <string name="update_flavor_title">更新通道</string>
     <string name="stable_flavor">稳定版</string>
@@ -338,12 +341,12 @@
     <string name="update_word">更新</string>
     <string name="switch_branches">更换分支</string>
     <string name="reinstall_word">重新安装</string>
-    <string name="own_prefs_header">AOSP Mods设置</string>
+    <string name="own_prefs_header">AOSP Mods 设置</string>
     <string name="language_title">语言</string>
     <string name="camera_manager_master_title">启用手电筒Mods (如果你的设备不支持请禁用)</string>
     <string name="toggle_dark_apply">(切换深色模式以应用)</string>
     <string name="gesture_nav_extra_cat">更多导航栏手势</string>
-    <string name="gesture_nav_long_swipe_fc_title">上滑至屏幕顶部以杀死前台APP</string>
+    <string name="gesture_nav_long_swipe_fc_title">上滑至屏幕顶部杀死前台APP</string>
     <string name="gesture_nav_left_swipe_up_title">左侧导航栏上滑动作</string>
     <string name="gesture_nav_right_swipe_up_title">右侧导航栏上滑动作</string>
     <string name="gesture_nav_left_swipe_up_percent">左侧上滑区域 (%)</string>
@@ -357,7 +360,7 @@
     <string name="toggle_notification">启用通知栏面板</string>
     <string name="toggle_one_handed">启用单手模式</string>
     <string name="insecure_screenshot">无限制截图</string>
-    <string name="screenshot_chord_insecure">音量减+电源键时截图不受限</string>
+    <string name="screenshot_chord_insecure">音量减+电源键截图不受限</string>
     <string name="sleep">睡眠</string>
 
     <!-- QS Rows overlays -->

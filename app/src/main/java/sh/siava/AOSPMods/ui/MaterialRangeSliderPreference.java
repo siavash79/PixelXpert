@@ -13,6 +13,7 @@ public class MaterialRangeSliderPreference extends RangeSliderPreference {
 
 	public MaterialRangeSliderPreference(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		initResource();
 	}
 	@Override
 	public void onBindViewHolder(@NonNull PreferenceViewHolder holder)

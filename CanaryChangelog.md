@@ -1,3 +1,6 @@
+**canary-238**  
+- Refreshed UI based on material 3! Shout out to Iconify dev Mahmud0808@Github for "personally" applying iconify UI to AOSPMods  
+  
 **canary-237**  
 - Added option to change app icon to "always themed"  
 - 13QPR3: Fixed screenshot mods  

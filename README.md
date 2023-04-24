@@ -95,6 +95,9 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @potatosalad775 Korean
 - @hcosserat French
 
+**UI design:**  
+- @Mahmud0808  
+
 **Graphic design:**  
 - JstormZx@Telegram (Icon and Banner) 
 - RKBDI@Telegram  (Icon)

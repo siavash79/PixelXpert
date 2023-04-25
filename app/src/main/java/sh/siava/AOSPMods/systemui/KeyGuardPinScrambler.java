@@ -1,6 +1,5 @@
 package sh.siava.AOSPMods.systemui;
 
-import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -46,30 +45,31 @@ public class KeyGuardPinScrambler extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		Class<?> NumPadKeyClass = findClass("com.android.keyguard.NumPadKey", lpparam.classLoader);
-		Class<?> KeyguardAbsKeyInputViewControllerClass = findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
+		Class<?> KeyguardPinBasedInputViewClass = findClass("com.android.keyguard.KeyguardPinBasedInputView", lpparam.classLoader);
 
-		Collections.shuffle(digits);
-
-		hookAllMethods(KeyguardAbsKeyInputViewControllerClass, "onUserInput",  new XC_MethodHook() {
+		XC_MethodHook pinShuffleHook = new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!shufflePinEnabled) return;
 
 				Collections.shuffle(digits);
-			}
-		});
 
-		hookAllConstructors(NumPadKeyClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!shufflePinEnabled) return;
+				Object[] mButtons = (Object[]) getObjectField(param.thisObject, "mButtons");
 
-				int mDigit = getIntField(param.thisObject, "mDigit");
-				Object mDigitText = getObjectField(param.thisObject, "mDigitText");
-				setObjectField(param.thisObject, "mDigit", digits.get(mDigit));
-				callMethod(mDigitText, "setText", Integer.toString(digits.get(mDigit)));
+				for(Object button : mButtons)
+				{
+					int mDigit = getIntField(button, "mDigit");
+					setObjectField(button, "mDigit", digits.get(mDigit));
+
+					callMethod(
+							getObjectField(button, "mDigitText"),
+							"setText",
+							Integer.toString(digits.get(mDigit)));
+				}
 			}
-		});
+		};
+
+		hookAllMethods(KeyguardPinBasedInputViewClass, "onFinishInflate", pinShuffleHook);
+		hookAllMethods(KeyguardPinBasedInputViewClass, "resetPasswordText",  pinShuffleHook);
 	}
 }

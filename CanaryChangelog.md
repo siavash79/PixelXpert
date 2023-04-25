@@ -1,3 +1,7 @@
+**canary-239**  
+- Fixed lockscreen carrier text hiding when not supposed to  
+- 13QPR3: Fixed hiding ongoing privacy chips  
+  
 **canary-238**  
 - Refreshed UI based on material 3! Shout out to Iconify dev Mahmud0808@Github for "personally" applying iconify UI to AOSPMods  
   

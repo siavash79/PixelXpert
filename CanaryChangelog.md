@@ -1,3 +1,8 @@
+**canary-240**  
+- 13QPR3: Fixed VoLTE icon appearance  
+- Changed keyguard pin shuffle behavior  
+- Fixed QS pulldown bug appeared a few canaries ago  
+  
 **canary-239**  
 - Fixed lockscreen carrier text hiding when not supposed to  
 - 13QPR3: Fixed hiding ongoing privacy chips  

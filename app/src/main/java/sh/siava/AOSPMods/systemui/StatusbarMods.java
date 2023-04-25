@@ -7,7 +7,6 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.widget.LinearLayout.VERTICAL;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -482,6 +481,18 @@ public class StatusbarMods extends XposedModPack {
 		//endregion
 
 		//region privacy chip
+		//13 QPR3
+		Class<?> OngoingPrivacyChipClass = findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
+
+		hookAllMethods(OngoingPrivacyChipClass, "setPrivacyList", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(HidePrivacyChip)
+					param.setResult(null);
+			}
+		});
+
+		//pre 13 QPR3
 		Class<?> SystemEventCoordinatorClass = findClassIfExists("com.android.systemui.statusbar.events.SystemEventCoordinator", lpparam.classLoader);
 
 		if (SystemEventCoordinatorClass != null) {

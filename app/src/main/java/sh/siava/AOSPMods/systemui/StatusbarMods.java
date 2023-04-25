@@ -174,8 +174,9 @@ public class StatusbarMods extends XposedModPack {
 	private final Executor volteExec = Runnable::run;
 
 	private Object mStatusBarIconController;
-	private Class<?> StatusBarIcon;
-	private Object volteStatusbarIcon;
+	private Class<?> StatusBarIconClass;
+	private Class<?> StatusBarIconHolderClass;
+	private Object volteStatusbarIconHolder;
 	private boolean telephonyCallbackRegistered = false;
 	private int lastVolteState = VOLTE_UNKNOWN;
 	private final serverStateCallback volteCallback = new serverStateCallback();
@@ -442,11 +443,12 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> KeyGuardIndicationClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
 		Class<?> BatteryTrackerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
 		Class<?> NotificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
-		StatusBarIcon = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 		Class<?> StatusBarSignalPolicyClass = findClass("com.android.systemui.statusbar.phone.StatusBarSignalPolicy", lpparam.classLoader);
 		Class<?> NetworkControllerImplClass = findClass("com.android.systemui.statusbar.connectivity.NetworkControllerImpl", lpparam.classLoader);
+		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
+		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
 //		Method setMeasuredDimensionMethod = findMethodExact(View.class, "setMeasuredDimension", int.class, int.class);
 		//endregion
@@ -959,7 +961,9 @@ public class StatusbarMods extends XposedModPack {
 			if (!telephonyCallbackRegistered) {
 				Icon volteIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_volte);
 				//noinspection JavaReflectionMemberAccess
-				volteStatusbarIcon = StatusBarIcon.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, "volte");
+				Object volteStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, "volte");
+				volteStatusbarIconHolder = StatusBarIconHolderClass.newInstance();
+				setObjectField(volteStatusbarIconHolder, "mIcon", volteStatusbarIcon);
 				SystemUtils.TelephonyManager().registerTelephonyCallback(volteExec, volteCallback);
 				telephonyCallbackRegistered = true;
 			}
@@ -992,7 +996,7 @@ public class StatusbarMods extends XposedModPack {
 				case VOLTE_AVAILABLE:
 					mStatusBar.post(() -> {
 						try {
-							callMethod(mStatusBarIconController, "setIcon", "volte", volteStatusbarIcon);
+							callMethod(mStatusBarIconController, "setIcon", "volte", volteStatusbarIconHolder);
 						} catch (Exception ignored) {}
 					});
 					break;

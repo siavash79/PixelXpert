@@ -48,65 +48,115 @@ public class QSQuickPullDown extends XposedModPack {
 
 		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
 
-		hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				NotificationPanelViewController = param.thisObject;
-			}
-		});
-
-		Class<?> PhoneStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarViewController", lpparam.classLoader);
-
-		XC_MethodHook statusbarTouchHook = new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				MotionEvent event =
-						param.args[0] instanceof MotionEvent
-								? (MotionEvent) param.args[0]
-								: (MotionEvent) param.args[1];
-
-				if (!oneFingerPulldownEnabled) return;
-
-				int mBarState = (int) getObjectField(NotificationPanelViewController, "mBarState");
-				if (mBarState != STATUSBAR_MODE_SHADE) return;
-
-				int w = (int) callMethod(
-						getObjectField(NotificationPanelViewController, "mView"),
-						"getMeasuredWidth");
-
-				float x = event.getX();
-				float region = w * statusbarPortion;
-
-				boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
-						? w - region < x
-						: x < region;
-
-				if (pullDownApproved) {
-					callMethod(NotificationPanelViewController, "expandWithQs");
-				}
-			}
-		};
-
-		hookAllMethods(PhoneStatusBarViewControllerClass, "onTouch", statusbarTouchHook); //13QPR3
-
-		if(findFieldIfExists(NotificationPanelViewControllerClass, "mStatusBarViewTouchEventHandler") != null) { //13QPR2
+		if(findFieldIfExists(NotificationPanelViewControllerClass, "mStatusBarViewTouchEventHandler") != null) { //13 QPR1
 			hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					Object mStatusBarViewTouchEventHandler = getObjectField(param.thisObject, "mStatusBarViewTouchEventHandler");
 
-					hookAllMethods(mStatusBarViewTouchEventHandler.getClass(), "handleTouchEvent", statusbarTouchHook);
+					hookAllMethods(mStatusBarViewTouchEventHandler.getClass(), "handleTouchEvent", new XC_MethodHook() {
+						@Override
+						protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
+							MotionEvent event = (MotionEvent) param1.args[0];
+							if (!oneFingerPulldownEnabled) return;
+
+							int mBarState = (int) getObjectField(param.thisObject, "mBarState");
+							if (mBarState != STATUSBAR_MODE_SHADE) return;
+
+							int w = (int) callMethod(
+									getObjectField(param.thisObject, "mView"),
+									"getMeasuredWidth");
+
+							float x = event.getX();
+							float region = w * statusbarPortion;
+
+							boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
+									? w - region < x
+									: x < region;
+
+							if (pullDownApproved) {
+								callMethod(param.thisObject, "expandWithQs");
+							}
+						}
+					});
 				}
 			});
 		}
 		else
 		{
-			hookAllMethods(NotificationPanelViewControllerClass, "createTouchHandler", new XC_MethodHook() { //13QPR1
+			if(hookAllMethods(NotificationPanelViewControllerClass, "createTouchHandler", new XC_MethodHook() { //13 QPR2
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-					hookAllMethods(param.getResult().getClass(), "onTouch", statusbarTouchHook);
+					hookAllMethods(param.getResult().getClass(), "onTouch", new XC_MethodHook() {
+						@Override
+						protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
+							MotionEvent event = (MotionEvent) param1.args[1];
+							if (!oneFingerPulldownEnabled) return;
+
+							if (!(boolean) getObjectField(param.thisObject, "mPulsing")
+									&& !(boolean) getObjectField(param.thisObject, "mDozing")
+									&& (int) getObjectField(param.thisObject, "mBarState") == STATUSBAR_MODE_SHADE
+									&& (boolean) callMethod(param.thisObject, "isFullyCollapsed")) {
+								int w = (int) callMethod(
+										getObjectField(param.thisObject, "mView"),
+										"getMeasuredWidth");
+
+								float x = event.getX();
+								float region = w * statusbarPortion;
+
+								boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
+										? w - region < x
+										: x < region;
+
+								if (pullDownApproved) {
+									callMethod(param.thisObject, "expandWithQs");
+								}
+							}
+						}
+					});
 				}
-			});
+			}).size() == 0)
+			{ //13 QPR3
+				Class<?> PhoneStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarViewController", lpparam.classLoader);
+
+				hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						NotificationPanelViewController = param.thisObject;
+					}
+				});
+				XC_MethodHook statusbarTouchHook = new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						if (!oneFingerPulldownEnabled) return;
+
+						MotionEvent event =
+								param.args[0] instanceof MotionEvent
+										? (MotionEvent) param.args[0]
+										: (MotionEvent) param.args[1];
+
+						int mBarState = (int) getObjectField(NotificationPanelViewController, "mBarState");
+						if (mBarState != STATUSBAR_MODE_SHADE) return;
+
+						int w = (int) callMethod(
+								getObjectField(NotificationPanelViewController, "mView"),
+								"getMeasuredWidth");
+
+						float x = event.getX();
+						float region = w * statusbarPortion;
+
+						boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
+								? w - region < x
+								: x < region;
+
+						if (pullDownApproved) {
+							callMethod(NotificationPanelViewController, "expandWithQs");
+						}
+					}
+				};
+
+				hookAllMethods(PhoneStatusBarViewControllerClass, "onTouch", statusbarTouchHook);
+			}
 		}
 	}
 

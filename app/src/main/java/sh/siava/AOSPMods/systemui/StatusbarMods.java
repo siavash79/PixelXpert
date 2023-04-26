@@ -395,17 +395,18 @@ public class StatusbarMods extends XposedModPack {
 
 		//region volte
 		VolteIconEnabled = Xprefs.getBoolean("VolteIconEnabled", false);
-		if (VolteIconEnabled)
-			initVolte();
-		else
-			removeVolte();
 		//endregion
 
 		if (Key.length > 0) {
-			//noinspection SwitchStatementWithTooFewBranches
 			switch (Key[0]) {
 				case "statusbarPaddings":
 					updateStatusbarHeight();
+					break;
+				case "VolteIconEnabled":
+					if (VolteIconEnabled)
+						initVolte();
+					else
+						removeVolte();
 					break;
 			}
 		}
@@ -956,7 +957,6 @@ public class StatusbarMods extends XposedModPack {
 
 	//region volte related
 	private void initVolte() {
-
 		try {
 			if (!telephonyCallbackRegistered) {
 				Icon volteIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_volte);
@@ -969,6 +969,8 @@ public class StatusbarMods extends XposedModPack {
 			}
 		} catch (Exception ignored) {
 		}
+
+		updateVolte(true);
 	}
 
 	private void removeVolte() {
@@ -984,13 +986,13 @@ public class StatusbarMods extends XposedModPack {
 			TelephonyCallback.ServiceStateListener {
 		@Override
 		public void onServiceStateChanged(@NonNull ServiceState serviceState) {
-			updateVolte();
+			updateVolte(false);
 		}
 	}
 
-	private void updateVolte() {
+	private void updateVolte(boolean force) {
 		int newVolteState = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isVolteAvailable") ? VOLTE_AVAILABLE : VOLTE_NOT_AVAILABLE;
-		if (lastVolteState != newVolteState) {
+		if (lastVolteState != newVolteState || force) {
 			lastVolteState = newVolteState;
 			switch (newVolteState) {
 				case VOLTE_AVAILABLE:
@@ -1011,9 +1013,8 @@ public class StatusbarMods extends XposedModPack {
 		if (mStatusBar == null) return; //probably it's too soon to have a statusbar
 		mStatusBar.post(() -> {
 			try {
-				callMethod(mStatusBarIconController, "removeIcon", "volte");
-			} catch (Throwable ignored) {
-			}
+				callMethod(mStatusBarIconController, "removeAllIconsForSlot", "volte");
+			} catch (Throwable ignored) {}
 		});
 	}
 	//endregion

@@ -1,3 +1,9 @@
+**canary-241**  
+- 13QPR3Beta3: Fixed hiding privacy chips  
+- 13QPR3: Fixed taskbar size  
+- Fixed VoLTE icon appearance glitches  
+- Fixed VoLTE icon appearance glitches  
+  
 **canary-240**  
 - 13QPR3: Fixed VoLTE icon appearance  
 - Changed keyguard pin shuffle behavior  

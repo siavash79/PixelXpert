@@ -448,6 +448,7 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 		Class<?> StatusBarSignalPolicyClass = findClass("com.android.systemui.statusbar.phone.StatusBarSignalPolicy", lpparam.classLoader);
 		Class<?> NetworkControllerImplClass = findClass("com.android.systemui.statusbar.connectivity.NetworkControllerImpl", lpparam.classLoader);
+		Class<?> PrivacyItemControllerClass = findClass("com.android.systemui.privacy.PrivacyItemController", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
@@ -484,35 +485,18 @@ public class StatusbarMods extends XposedModPack {
 		//endregion
 
 		//region privacy chip
-		//13 QPR3
-		Class<?> OngoingPrivacyChipClass = findClass("com.android.systemui.privacy.OngoingPrivacyChip", lpparam.classLoader);
-
-		hookAllMethods(OngoingPrivacyChipClass, "setPrivacyList", new XC_MethodHook() {
+		hookAllConstructors(PrivacyItemControllerClass, new XC_MethodHook() {
 			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(HidePrivacyChip)
-					param.setResult(null);
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				hookAllMethods(getObjectField(param.thisObject, "notifyChanges").getClass(), "run", new XC_MethodHook() {
+					@Override
+					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+						if(HidePrivacyChip)
+							param.setResult(null);
+					}
+				});
 			}
 		});
-
-		//pre 13 QPR3
-		Class<?> SystemEventCoordinatorClass = findClassIfExists("com.android.systemui.statusbar.events.SystemEventCoordinator", lpparam.classLoader);
-
-		if (SystemEventCoordinatorClass != null) {
-			hookAllConstructors(SystemEventCoordinatorClass, new XC_MethodHook() {
-				@Override
-				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-					hookAllMethods(getObjectField(param.thisObject, "privacyStateListener").getClass(), "onPrivacyItemsChanged", new XC_MethodHook() {
-						@Override
-						protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-							if (HidePrivacyChip) {
-								param.setResult(null);
-							}
-						}
-					});
-				}
-			});
-		}
 		//endregion
 
 		//region SB Padding

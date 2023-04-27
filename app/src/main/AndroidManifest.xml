@@ -13,11 +13,13 @@
         <activity
             android:name=".UpdateActivity"
             android:exported="false"
-            android:label="@string/title_activity_update" />
+            android:label="@string/title_activity_update"
+            android:parentActivityName=".SettingsActivity"/>
         <activity
             android:name=".updateActivity"
             android:exported="false"
-            android:label="@string/title_activity_update">
+            android:label="@string/title_activity_update"
+            android:parentActivityName=".SettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.RUN" />
                 <category android:name="android.intent.category.DEFAULT" />

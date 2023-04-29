@@ -95,6 +95,7 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @Katsuyuki-Karasawa Japanese
 - @potatosalad775 Korean
 - @hcosserat French
+- @deepanshpandey Hindi
 
 **UI design:**  
 - @Mahmud0808  

@@ -5,7 +5,7 @@
 	<string name="percent_of_default_size">% डिफ़ॉल्ट आकार का</string>
 	<string name="overlay_none_title">(डिफ़ॉल्ट)</string>
 	<string name="general_section">आम विकल्प</string>
-	<string name="general_on">चालू </string>
+	<string name="general_on">चालू</string>
 	<string name="general_off">बंद</string>
 	<string name="sysui_restart_needed">लागू करने के लिए SystemUI पुनरारंभ की आवश्यकता है</string>
 	<string name="restart_needed">लागू करने के लिए रीबूट की आवश्यकता है</string>
@@ -139,10 +139,10 @@
 	<string name="light_qs_title">लाइट थीम के दौरान हल्की त्‍वरित सेटिंग (छोटी गाड़ी हो सकती है)</string>
 	<string name="light_dualtone_qs_title">डुअल टोन त्‍वरित सेटिंग सक्षम करें</string>
 	<string name="qs_pulldown_size">त्वरित पुल डाउन आकार</string>
-	<string name="qs_pulldown_switch_title">स्टेटस बार से त्वरित सेटिंग मेनू को तुरंत नीचे खींचें </string>
+	<string name="qs_pulldown_switch_title">स्टेटस बार से त्वरित सेटिंग मेनू को तुरंत नीचे खींचें</string>
 	<string name="qs_pulldown_side_title">त्वरित पुल डाउन साइड</string>
 	<string name="qs_pulldown_category">त्वरित सेटिंग्स को नीचे खींचें</string>
-	<string name="qs_haptic_switch_title">त्वरित सेटिंग टैब को छूने पर कंपन होता है </string>
+	<string name="qs_haptic_switch_title">त्वरित सेटिंग टैब को छूने पर कंपन होता है</string>
 	<string name="qs_rows_number">त्वरित सेटिंग्स में पंक्तियों की संख्या</string>
 	<string name="qs_cols_number">QS कॉलम की संख्या</string>
 	<string name="qqs_tiles_number">त्वरित QS में अधिकतम टाइलें (अधिकतम 2 पंक्तियां)</string>
@@ -193,13 +193,14 @@
 	<string name="allow_all_screen_rotations">स्क्रीन के सभी घुमावों को अनलॉक करें</string>
 	<string name="allow_all_screen_rotations_summary">मैन्युअल रोटेशन फ़्लोटिंग बटन को भी अनदेखा करता है</string>
 	<string name="force_no_cutout">कैमरा कटआउट पर ध्यान न दें</string>
-	<string name="volume_button_step_title"> वॉल्यूम चरण (0 से 100%) </string>
+	<string name="volume_button_step_title">वॉल्यूम चरण (0 से 100%)</string>
 
+	<string name="display_resolution_title">स्क्रीन रेजोल्यूशन</string>
 	<string name="brightness_range_title">चमक रेंज दिखाएं</string>
 	<string name="brightness_range_not_linear">यह श्रेणी रैखिक नहीं है: कभी-कभी एक छोटा सा अंतर बड़ा अंतर पैदा कर देता है</string>
 	<string name="so_power_longpress_torch_title">टॉर्च के लिए पावर बटन को देर तक दबाएं*</string>
 	<string name="so_taptaptorch_title">डबल-टैप फ्लैशलाइट सक्रिय करें</string>
-	<string name = "so_taptaptorch_summary"> लॉक स्क्रीन इंडिकेटर को डबल-टैप करें और फिर टॉर्च के लिए अपनी उंगली को लॉक स्क्रीन पर रखें</string>
+	<string name="so_taptaptorch_summary">लॉक स्क्रीन इंडिकेटर को डबल-टैप करें और फिर टॉर्च के लिए अपनी उंगली को लॉक स्क्रीन पर रखें</string>
 	<string name="so_fingerprint_sensor_enabled">स्‍क्रीन बंद होने पर फ़िंगरप्रिंट सेंसर की अनुमति दें</string>
 
 	<string name="so_double_tap_wake_title">फ़ोन चालू करने के लिए दो बार टैप करें</string>
@@ -210,7 +211,7 @@
 	<string name="custom_themed_icons_on">कस्टम थीम वाले आइकन सक्षम हैं</string>
 	<string name="so_vol_longpress_skip">ट्रैक्स को छोड़ने के लिए वॉल्यूम को देर तक दबाएं*</string>
 	<string name="notifications_header">सूचना सेटिंग</string>
-	<string name="expand_notifications_icons_title">सभी को विस्तृत/संक्षिप्त करें</string> सक्षम करें
+	<string name="expand_notifications_icons_title">सभी को विस्तृत/संक्षिप्त करें</string>सक्षम करें
 	<string name="disable_overscroll">इलास्टिक ओवरस्क्रॉलिंग प्रभाव अक्षम करें</string>
 	<string name="overscroll_on_summary">महत्वपूर्ण: आप उन ऐप्स को अवश्य सक्षम करें जिनके लिए आप LSPosed में ओवरस्क्रॉल अक्षम करना चाहते हैं</string>
 
@@ -220,10 +221,11 @@
 	<string name="vibrate_on_call_drop_title">Vibrieren, wenn Anruf getrennt wird</string>
 
 	<!-- Theming section related -->
-	<string name = "gsans_override_title"> Google Sans फ़ॉन्ट सिस्टम को फ़ोर्स करें </string>
+	<string name="gsans_override_title">Google Sans फ़ॉन्ट सिस्टम को फ़ोर्स करें</string>
 	<string name="font_overlays_enable_title">कस्टम फ़ॉन्ट का उपयोग सक्षम करें</string>
 	<string name="theme_customization_font_title">ओवर/मेन फॉन्ट</string>
 	<string name="icons_style_title">प्रतीक शैली</string>
+	<string name="icon_shapes_title">चिह्न का आकार</string>
 	<string name="signal_icons_theme_title">रिसेप्शन आइकॉन स्टाइल्स</string>
 	<string name="dt_styles_category">डार्क मोड स्टाइल्स</string>
 	<string name="dt_styles">कोई शैली चुनें</string>
@@ -241,7 +243,7 @@
 	<!-- Clock position -->
 	<string name="clock_default">बाएं (डिफ़ॉल्ट)</string>
 	<string name="clock_center">केंद्रित</string>
-	<string name = "clock_right"> दाएँ </string>
+	<string name="clock_right">दाएँ</string>
 
 	<!-- AM/PM style -->
 	<string name="am_pm_normal">100% घड़ी का आकार</string>
@@ -285,7 +287,7 @@
 	<string name="monitoring_category_title">निगरानी विकल्प</string>
 	<string name="netstat_header">नेटवर्क सांख्यिकी सेटिंग</string>
 
-	<string name="string_formatter_manual_body">आपके द्वारा दर्ज किए जा सकने वाले सामान्य पाठ के अतिरिक्त, गतिशील चर भी उपलब्ध हैं:\n\n$G\&lt;format\&gt; : जॉर्जियाई तारीख प्रारूप के आधार पर। प्रारूप प्रलेखन के लिए, कृपया `जावा तिथि प्रारूप` खोजें\nउदाहरण: $GMMM साधन: जनवरी (या कोई अन्य)\n\n$P&lt;format&gt; : प्रारूप के आधार पर फारसी तिथि\nउदाहरण: $Pyyyy साधन: 1401\n\nUm नीचे से इंटरनेट उपयोग को सक्षम करने के लिए आपको "विविध", "नेटवर्क सांख्यिकी सेटिंग" मेनू पर जाना होगा और "नेटवर्क सांख्यिकी संग्रह सक्षम करें" विकल्प पर जाएं\n\n$Nrx : आज डाउनलोड की कुल संख्या\n$Ntx: आज से अपलोड की कुल संख्या\n$Nall : आज हिट की कुल संख्या\n\nयदि आप प्रतिस्थापित करते हैं $N साथ $Nc मोबाइल डेटा आँकड़े प्राप्त करें (जैसे$Ncrx डाउनलोड के लिए)\n\nउदाहरण:\n`से मोबाइल यातायात $GEEEE: $Ncall` परिणाम:\n`मंगलवार से मोबाइल ट्रैफिक: 2GB` </string>
+	<string name="string_formatter_manual_body">आपके द्वारा दर्ज किए जा सकने वाले सामान्य पाठ के अतिरिक्त, गतिशील चर भी उपलब्ध हैं:\n\n$G\&lt;format\&gt; : जॉर्जियाई तारीख प्रारूप के आधार पर। प्रारूप प्रलेखन के लिए, कृपया `जावा तिथि प्रारूप` खोजें\nउदाहरण: $GMMM साधन: जनवरी (या कोई अन्य)\n\n$P&lt;format&gt; : प्रारूप के आधार पर फारसी तिथि\nउदाहरण: $Pyyyy साधन: 1401\n\nUm नीचे से इंटरनेट उपयोग को सक्षम करने के लिए आपको "विविध", "नेटवर्क सांख्यिकी सेटिंग" मेनू पर जाना होगा और "नेटवर्क सांख्यिकी संग्रह सक्षम करें" विकल्प पर जाएं\n\n$Nrx : आज डाउनलोड की कुल संख्या\n$Ntx: आज से अपलोड की कुल संख्या\n$Nall : आज हिट की कुल संख्या\n\nयदि आप प्रतिस्थापित करते हैं $N साथ $Nc मोबाइल डेटा आँकड़े प्राप्त करें (जैसे$Ncrx डाउनलोड के लिए)\n\nउदाहरण:\n`से मोबाइल यातायात $GEEEE: $Ncall` परिणाम:\n`मंगलवार से मोबाइल ट्रैफिक: 2GB`</string>
 	<string name="update_channel_name">अपडेट्स</string>
 	<string name="update_notification_title">अपडेट डाउनलोड हो गया</string>
 	<string name="update_notification_text">इंस्टॉल करने के लिए यहां टैप करें</string>
@@ -296,18 +298,18 @@
 	<string name="update_type_title">पैकेज का प्रकार</string>
 	<string name="full_type">पूर्ण</string>
 	<string name="xposed_type">केवल एक्सपोज़ किया गया</string>
-	<string name="currentVersionTitle">स्थापित संस्करण: </string>
-	<string name="lastestVersionTitle">नवीनतम संस्करण: </string>
+	<string name="currentVersionTitle">स्थापित संस्करण:</string>
+	<string name="lastestVersionTitle">नवीनतम संस्करण:</string>
 	<string name="root_not_here">रूट पहुंच प्रदान नहीं की गई!</string>
 	<string name="reboot_pending">रीबूट लंबित है</string>
 	<string name="reboot_word">डिवाइस को अभी रीबूट करें</string>
-	<string name = "update_checking"> जांच की जा रही है…</string>
+	<string name="update_checking">जांच की जा रही है…</string>
 	<string name="update_download_started">डाउनलोड करें - पूरा होने पर कृपया नोटिफिकेशन पर टैप करें</string>
 	<string name="update_word">अपडेट करें</string>
 	<string name="switch_branches">स्विच ब्रांच</string>
 	<string name="reinstall_word">पुनर्स्थापित करें</string>
 
-	<string name = "own_prefs_header">AOSPMods सेटिंग </string>
+	<string name="own_prefs_header">AOSPMods सेटिंग</string>
 	<string name="language_title">भाषा चुनें</string>
 	<string name="toggle_dark_apply">(गहरे रंग वाली थीम पर स्विच करें)</string>
 	<string name="keyguard_dim_amount_title">लॉकस्क्रीन पृष्ठभूमि मंद स्तर</string>
@@ -339,31 +341,33 @@
 	<string name="qs_tile_vertical_title">टाइल आइकन ऊपर ले जाएं</string>
 	<string name="clear_all_reposition_title">हालिया बार के नीचे \'सभी साफ़ करें\' पेस्ट करें</string>
 	<string name="heads_up_notification_duration">अग्रणी अधिसूचना अवधि</string>
-	<string name = "milliseconds"> मिलीसेकंड </string>
+	<string name="milliseconds">मिलीसेकंड</string>
 	<string name="network_show_icons_title">इंटरनेट डाउनलोड गति दिशात्मक आइकन दिखाएं</string>
 	<string name="power_menu_overlays_section">पावर मेनू थीम्स</string>
 	<string name="power_menu_overlays_summary_on">यह विकल्प पूरे सिस्टम में कुछ शानदार नए आइकन भी सक्षम करता है</string>
 	<string name="power_menu_overlays_title">पावर मेन्यू के लिए हल्की/गहरी थीम सक्षम करें</string>
 	<string name="sleep">डिवाइस को स्लीप मोड में रखें</string>
 	<string name="taskbar_hide_allapps_title">सभी एप्लिकेशन के लिए आइकन छिपाएं</string>
+	<string name="charging_info_title">लॉक स्क्रीन पर चार्जिंग जानकारी</string>
 	<string name="imperial_units_title">शाही इकाइयों का प्रयोग करें</string>
 	<string name="hide_roaming_title">मोबाइल रोमिंग विज्ञापन छुपाएं</string>
 	<string name="caution_mobile_costs">चेतावनी - अगर आपको पता नहीं है कि आप रोमिंग में हैं, तो आपकी मोबाइल लागत बढ़ सकती है</string>
 	<string name="hide_avatar_title">उपयोगकर्ता अवतार हटाएं (बहु-उपयोगकर्ता मोड)</string>
 	<string name="clipboard_smart_actions_title">क्लिपबोर्ड स्मार्ट क्रियाएं</string>
-	<string name = "camera_manager_master_title"> फ्लैशलाइट मोड सक्षम करें (यदि डिवाइस इसका समर्थन नहीं करता है तो अक्षम करें)</string>
+	<string name="camera_manager_master_title">फ्लैशलाइट मोड सक्षम करें (यदि डिवाइस इसका समर्थन नहीं करता है तो अक्षम करें)</string>
 	<string name="pm_header">एप्लिकेशन पैकेज मैनेजर</string>
 	<string name="LSleftLongClickShortcutTitle">बायां शॉर्टकट (लॉन्ग प्रेस)</string>
 	<string name="LSrightLongClickShortcutTitle">दायां शॉर्टकट (लंबा क्लिक)</string>
 	<string name="tv_remote_shortcut">टीवी रिमोट कंट्रोल</string>
 	<string name="dnd_shortcut">परेशान न करें</string>
-	<string name = "sb_multi_row_notification_icons"> बहु-पंक्ति अधिसूचना आइकन (उच्च स्थिति बार आवश्यक)</string>
+	<string name="sb_multi_row_notification_icons">बहु-पंक्ति अधिसूचना आइकन (उच्च स्थिति बार आवश्यक)</string>
 	<string name="sb_double_row_category">डुप्लिकेट स्थिति बार पंक्तियां</string>
 	<string name="qs_tile_qty_title">त्वरित सेटिंग टाइल गणना सेटिंग</string>
 	<string name="qs_tile_qty_portrait">पोर्ट्रेट में</string>
 	<string name="qs_tile_qty_landscape">लैंडस्केप</string>
 	<string name="pm_bypass_signature_title">पैकेज सिग्नेचर चेक को बायपास करना</string>
 	<string name="pm_allow_downgrade_title">अनुप्रयोगों को डाउनग्रेड करने की अनुमति दें</string>
+	<string name="incompatible_alert_title">असंगत</string>
 	<string name="incompatible_alert_body">"आपका वर्तमान ROM इस मॉड्यूल का प्रत्यक्ष लक्ष्य नहीं है। आप इसका उपयोग करना जारी रख सकते हैं, लेकिन कुछ (या सभी) विकल्प अपेक्षित रूप से काम नहीं कर सकते हैं\\n\\nकृपया बग की रिपोर्ट न करें"</string>
 	<string name="incompatible_alert_ok_btn">"मैं समझता हूं"</string>
 	<string name="qs_volume_unmute_title">वॉल्यूम टाइल मान अनम्यूट करें</string>

@@ -122,13 +122,13 @@
 				android:summaryOn="@string/general_on"
 				android:title="@string/QS_brightness_disable_title" />
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
-				android:defaultValue="false"
+				android:defaultValue="true"
 				android:key="QQSBrightnessEnabled"
 				android:summaryOff="@string/general_off"
 				android:summaryOn="@string/general_on"
 				android:title="@string/QQS_brightness_title" />
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
-				android:defaultValue="false"
+				android:defaultValue="true"
 				android:key="BrightnessSlierOnBottom"
 				android:summaryOff="@string/general_off"
 				android:summaryOn="@string/general_on"

@@ -1,3 +1,7 @@
+**canary-242**  
+- 13QPR3: QS quick pulldown now responds to swipe down only  
+- 13QPR3: Fixed showing security input on device wake  
+  
 **canary-241**  
 - 13QPR3Beta3: Fixed hiding privacy chips  
 - 13QPR3: Fixed taskbar size  

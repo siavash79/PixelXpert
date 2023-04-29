@@ -193,9 +193,8 @@
 	<string name="allow_all_screen_rotations">स्क्रीन के सभी घुमावों को अनलॉक करें</string>
 	<string name="allow_all_screen_rotations_summary">मैन्युअल रोटेशन फ़्लोटिंग बटन को भी अनदेखा करता है</string>
 	<string name="force_no_cutout">कैमरा कटआउट पर ध्यान न दें</string>
-	<string name = "volume_button_step_title"> वॉल्यूम चरण (0 से 100%) </string>
+	<string name="volume_button_step_title"> वॉल्यूम चरण (0 से 100%) </string>
 
-	<string name = "display_resolution_title"> स्क्रीन रेजोल्यूशन </ string>
 	<string name="brightness_range_title">चमक रेंज दिखाएं</string>
 	<string name="brightness_range_not_linear">यह श्रेणी रैखिक नहीं है: कभी-कभी एक छोटा सा अंतर बड़ा अंतर पैदा कर देता है</string>
 	<string name="so_power_longpress_torch_title">टॉर्च के लिए पावर बटन को देर तक दबाएं*</string>
@@ -225,7 +224,6 @@
 	<string name="font_overlays_enable_title">कस्टम फ़ॉन्ट का उपयोग सक्षम करें</string>
 	<string name="theme_customization_font_title">ओवर/मेन फॉन्ट</string>
 	<string name="icons_style_title">प्रतीक शैली</string>
-	<string name = "icon_shapes_title"> चिह्न का आकार </ string>
 	<string name="signal_icons_theme_title">रिसेप्शन आइकॉन स्टाइल्स</string>
 	<string name="dt_styles_category">डार्क मोड स्टाइल्स</string>
 	<string name="dt_styles">कोई शैली चुनें</string>
@@ -238,7 +236,6 @@
 	<!-- Battery styles -->
 	<string name="word_default">डिफ़ॉल्ट (पुनः आरंभ करने की आवश्यकता है)</string>
 	<string name="battery_circle">मंडली</string>
-	<string name = "battery_dashed_circle"> बिंदीदार वृत्त </ string>
 	<string name="battery_circle_filled">भरा हुआ घेरा</string>
 
 	<!-- Clock position -->
@@ -349,7 +346,6 @@
 	<string name="power_menu_overlays_title">पावर मेन्यू के लिए हल्की/गहरी थीम सक्षम करें</string>
 	<string name="sleep">डिवाइस को स्लीप मोड में रखें</string>
 	<string name="taskbar_hide_allapps_title">सभी एप्लिकेशन के लिए आइकन छिपाएं</string>
-	<string name = "charging_info_title"> लॉक स्क्रीन पर चार्जिंग जानकारी </ string>
 	<string name="imperial_units_title">शाही इकाइयों का प्रयोग करें</string>
 	<string name="hide_roaming_title">मोबाइल रोमिंग विज्ञापन छुपाएं</string>
 	<string name="caution_mobile_costs">चेतावनी - अगर आपको पता नहीं है कि आप रोमिंग में हैं, तो आपकी मोबाइल लागत बढ़ सकती है</string>
@@ -368,7 +364,6 @@
 	<string name="qs_tile_qty_landscape">लैंडस्केप</string>
 	<string name="pm_bypass_signature_title">पैकेज सिग्नेचर चेक को बायपास करना</string>
 	<string name="pm_allow_downgrade_title">अनुप्रयोगों को डाउनग्रेड करने की अनुमति दें</string>
-	<string name = "incompatible_alert_title"> असंगत </ string>
 	<string name="incompatible_alert_body">"आपका वर्तमान ROM इस मॉड्यूल का प्रत्यक्ष लक्ष्य नहीं है। आप इसका उपयोग करना जारी रख सकते हैं, लेकिन कुछ (या सभी) विकल्प अपेक्षित रूप से काम नहीं कर सकते हैं\\n\\nकृपया बग की रिपोर्ट न करें"</string>
 	<string name="incompatible_alert_ok_btn">"मैं समझता हूं"</string>
 	<string name="qs_volume_unmute_title">वॉल्यूम टाइल मान अनम्यूट करें</string>

@@ -44,7 +44,7 @@ public class BrightnessSlider extends XposedModPack {
 	private static boolean BrightnessHookEnabled = true;
 	private static boolean QQSBrightnessEnabled = false;
 	private static boolean QSBrightnessDisabled = false;
-	private static boolean QQSBrightnessSupported = true;
+	private static boolean QQSBrightnessSupported = false;
 	private Object QQSPC;
 	private static final String QS_SHOW_BRIGHTNESS = "qs_show_brightness";
 	private Object mBrightnessMirrorController;

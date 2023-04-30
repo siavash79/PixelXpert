@@ -256,7 +256,7 @@
     <string name="vibration_type_notification">強度由系統通知振動設定定義</string>
     <string name="gsans_override_title">系統級強制使用 Google Sans</string>
     <string name="font_overlays_enable_title">啟用自訂字型</string>
-    <string name="theme_customization_font_title">標題/ 正文字型</string>
+    <string name="theme_customization_font_title">標題/正文字型</string>
     <string name="icons_style_title">圖示樣式</string>
     <string name="icon_shapes_title">圖示形狀</string>
     <string name="signal_icons_theme_title">訊號圖示主題</string>

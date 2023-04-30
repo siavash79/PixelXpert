@@ -1,5 +1,6 @@
 <resources>
     <!--General strings-->
+    <string name="app_themed_icon_title">啟用替代的 AOSP Mods 主題應用圖示</string>
     <string name="error_not_activated">請確認該模組是否在 LSPosed 上被啟用。</string>
     <string name="hide_default">隱藏 (預設)</string>
     <string name="percent_of_default_size">% 預設</string>
@@ -17,10 +18,11 @@
     <string name="statusbar_header">狀態列</string>
     <string name="nav_header">導航欄</string>
     <string name="misc_header">雜項</string>
-    <string name="qs_panel_category_title">磁貼面板</string>
+    <string name="qs_panel_category_title">方塊面板</string>
     <string name="theme_customization_category">主題化</string>
 
     <!--Lock screen related-->
+    <string name="ls_general_options">自定鎖定畫面</string>
     <string name="pm_header">包管理器</string>
     <string name="hide_avatar_title">隱藏使用者頭像(多使用者模式)</string>
 	<string name="transparent_fingerprint_circle">隱藏螢幕下指紋背景圓</string>
@@ -73,16 +75,16 @@
     <string name="sb_icon_sort_mode">替換圖示方式</string>
     <string name="sort_clean">在網格中排序</string>
     <string name="sort_tight">最大專案數</string>
-    <string name="sb_notification_limit">最大通知圖示數量 (留空以預設)</string>
-    <string name="lte_4g_icon_title">LTE / 4G 圖示</string>
+    <string name="sb_notification_limit">最大通知圖示數量 (留空預設)</string>
+    <string name="lte_4g_icon_title">LTE/4G 圖示</string>
     <string name="combined_signal_icon_title">合併訊號圖示</string>
     <string name="hide_roaming_title">隱藏漫遊指示圖示</string>
     <string name="caution_mobile_costs">注意 - 不知情下漫遊會增加你的流量費用</string>
     <string name="volte_icon_title">在可用時顯示 VoLTE 圖示</string>
     <string name="hide_privacychip_title">隱藏隱私提示</string>
-    <string name="sb_vibration_switch_title">顯示 震動 / 靜音 圖示</string>
+    <string name="sb_vibration_switch_title">顯示「震動/靜音」圖示</string>
     <string name="sbc_position_title">時鐘位置</string>
-    <string name="sbc_ampm_style">AM / PM 樣式</string>
+    <string name="sbc_ampm_style">AM/PM 樣式</string>
     <string name="sbc_show_secs">顯示秒數</string>
     <string name="sbc_date_cat">日期選項</string>
     <string name="sbc_day_of_week_options">顯示日期</string>
@@ -91,7 +93,7 @@
     <string name="sbc_custom_date_before">自訂時鐘左側格式</string>
     <string name="sbc_date_small">較小的尺寸 (70%)</string>
     <string name="sbc_custom_date_after">自訂時鐘右側格式</string>
-    <string name="sbc_header">狀態列時鐘定製</string>
+    <string name="sbc_header">自定狀態列時鐘</string>
     <string name="sbc_clock_color_category">顏色選項</string>
     <string name="sbc_colorful_title">著色</string>
     <string name="sbc_before_color">時間前文字</string>
@@ -118,13 +120,13 @@
     <string name="nt_mode_total">下載 +上傳 (合併)</string>
     <string name="nt_mode_rxonly">僅下載</string>
     <string name="nt_mode_txonly">僅上傳</string>
-    <string name="statusbar_general_options">狀態列選項</string>
+    <string name="statusbar_general_options">自定狀態列</string>
     <string name="dual_tone_battery_title">雙行電池圖示</string>
     <string name="dual_tone_battery_on_summary">開啟 (僅當縱向圖示時生效)</string>
     <string name="unread_messages_title">通知計數</string>
     <string name="status_bar_height">狀態高度</string>
     <string name="sb_padding_title">狀態列內邊距</string>
-    <string name="sb_padding_summary">最小 / 最大 等同於裝置預設值</string>
+    <string name="sb_padding_summary">最小/最大 等同於裝置預設值</string>
     <string name="sbbb_header">電池條設定</string>
     <string name="sbbIcon_header">電池圖示設定</string>
     <string name="BB_enable_title">啟用電池條</string>
@@ -145,48 +147,48 @@
     <string name="BB_transit_colors">陰影顏色</string>
 
     <!--Quick settings panel related-->
-    <string name="qs_mod_category_title">下拉磁貼面板底部版本號</string>
+    <string name="qs_mod_category_title">下拉方塊面板底部版本號</string>
     <string name="qs_footer_mod_title">修改版本號文字</string>
     <string name="qs_footer_text_value">輸入自訂文字</string>
     <string name="qs_footer_text_summary">留空以移除</string>
     <string name="qs_footer_text_desc">關閉並開啟屏幕後生效</string>
-    <string name="qs_leveled_flashlight_title">亮度可調手電筒磁貼</string>
+    <string name="qs_leveled_flashlight_title">亮度可調手電筒方塊</string>
     <string name="qs_flashlight_level_global_title">全域性應用手電筒亮度</string>
-    <string name="qs_qr_tile_inactive_title">反色掃碼磁貼顏色</string>
-    <string name="qs_tile_vertical_title">將磁貼圖示移至頂部</string>
-    <string name="qs_tile_qty_title">磁貼面板數量設定</string>
+    <string name="qs_qr_tile_inactive_title">反色掃碼方塊顏色</string>
+    <string name="qs_tile_vertical_title">將方塊圖示移至頂部</string>
+    <string name="qs_tile_qty_title">方塊面板數量設定</string>
     <string name="qs_leveled_flashlight_summary">需要硬體支援</string>
-    <string name="light_qs_title">淺色主題下使用淺色磁貼面板 (可能會出現問題)</string>
-    <string name="light_dualtone_qs_title">啟用雙色磁貼面板</string>
-    <string name="qs_pulldown_size">快速下拉磁貼面板</string>
-    <string name="qs_pulldown_switch_title">快速下拉磁貼面板</string>
+    <string name="light_qs_title">淺色主題下使用淺色方塊面板 (可能會出現問題)</string>
+    <string name="light_dualtone_qs_title">啟用雙色方塊面板</string>
+    <string name="qs_pulldown_size">快速下拉方塊面板</string>
+    <string name="qs_pulldown_switch_title">快速下拉方塊面板</string>
     <string name="qs_pulldown_side_title">快速下拉寬度</string>
-    <string name="qs_pulldown_category">磁貼面板下拉</string>
+    <string name="qs_pulldown_category">方塊面板下拉</string>
     <string name="qs_haptic_switch_title">點選按鈕震動</string>
     <string name="vibration_type_touch">強度由系統觸控振動設定定義</string>
     <string name="qs_tile_qty_portrait">豎屏時</string>
     <string name="qs_tile_qty_landscape">橫屏時</string>
-    <string name="qs_rows_number">磁貼面板行數</string>
-    <string name="qs_cols_number">磁貼面板列數</string>
-    <string name="qqs_tiles_number">磁貼面板最大磁貼數量 (最大2行)</string>
-    <string name="qs_tile_label_size">磁貼標籤大小</string>
-    <string name="qs_tile_secondary_label_size">磁貼標籤內容大小</string>
-    <string name="qs_general_options">磁貼面板選項</string>
-    <string name="qs_text_size_title">磁貼文字大小</string>
-    <string name="wifi_cell_title">網路磁貼</string>
-    <string name="wifi_cell_on">分離 WIFI 和資料磁貼</string>
-    <string name="wifi_cell_off">合併 WIFI 和資料磁貼</string>
+    <string name="qs_rows_number">方塊面板行數</string>
+    <string name="qs_cols_number">方塊面板列數</string>
+    <string name="qqs_tiles_number">方塊面板最大方塊數量 (最大2行)</string>
+    <string name="qs_tile_label_size">方塊標籤大小</string>
+    <string name="qs_tile_secondary_label_size">方塊標籤內容大小</string>
+    <string name="qs_general_options">自定方塊面板</string>
+    <string name="qs_text_size_title">方塊文字大小</string>
+    <string name="wifi_cell_title">網路方塊</string>
+    <string name="wifi_cell_on">分離 WIFI 和資料方塊</string>
+    <string name="wifi_cell_off">合併 WIFI 和資料方塊</string>
     <string name="QQS_brightness_category">亮度滑塊選項</string>
-    <string name="QQS_brightness_title">在下拉磁貼面板顯示</string>
+    <string name="QQS_brightness_title">在下拉方塊面板顯示</string>
     <string name="QQS_brightness_bottom_title">將亮度條移動到底部</string>
-    <string name="QS_brightness_disable_title">在磁貼面板中隱藏</string>
+    <string name="QS_brightness_disable_title">在方塊面板中隱藏</string>
     <string name="bs_thick_track">使用較粗的亮度滑塊</string>
-    <string name="quick_settings_tiles_category">磁貼選項</string>
-    <string name="qs_tile_style_title">磁貼主題</string>
+    <string name="quick_settings_tiles_category">方塊選項</string>
+    <string name="qs_tile_style_title">方塊主題</string>
     <string name="qstile_default">預設</string>
 
     <!--Navigation bar related-->
-    <string name="qs_volume_unmute_title">音量磁貼取消靜音時音量</string>
+    <string name="qs_volume_unmute_title">音量方塊取消靜音時音量</string>
     <string name="back_gesture_category_title">設定返回手勢</string>
     <string name="back_from_left_title">螢幕左側</string>
     <string name="back_from_right_title">螢幕右側</string>
@@ -196,7 +198,7 @@
     <string name="gesture_nav_pill_mod_title">修改寬度</string>
     <string name="gesture_nav_pill_width_title">對比標準大小的寬度</string>
     <string name="gesture_nav_pill_height_title">對比標準大小的高度</string>
-    <string name="threebutton_header_title">三按鈕導航</string>
+    <string name="threebutton_header_title">3 個虛擬導航鍵</string>
     <string name="back_longpress_kill_title">長按返回鍵殺死前臺應用</string>
     <string name="modify_3button_title">更改按鈕順序</string>
     <string name="three_button_left_title">左按鈕</string>
@@ -224,7 +226,7 @@
     <string name="allow_all_screen_rotations">解除全螢幕旋轉</string>
     <string name="allow_all_screen_rotations_summary">將同時無視手動旋轉懸浮鈕</string>
     <string name="force_no_cutout">無視螢幕開孔</string>
-    <string name="clear_all_reposition_title">在最近任務中新增易訪問的 清除所有 按鈕</string>
+    <string name="clear_all_reposition_title">在最近任務中新增易訪問的「清除所有」按鈕</string>
     <string name="volume_button_step_title">音量步進 (0至100%)</string>
     <string name="display_resolution_title">顯示解析度</string>
     <string name="brightness_range_title">顯示亮度限制</string>
@@ -241,7 +243,7 @@
     <string name="custom_themed_icons_on">自訂圖示已啟用</string>
     <string name="so_vol_longpress_skip">長按音量鍵跳過歌曲</string>
     <string name="notifications_header">通知選項</string>
-    <string name="expand_notifications_icons_title">新增展開 / 摺疊所有按鈕</string>
+    <string name="expand_notifications_icons_title">新增展開/摺疊所有按鈕</string>
 
     <!-- Theming section related -->
     <string name="heads_up_notification_duration">浮動通知持續時間</string>
@@ -254,7 +256,7 @@
     <string name="vibration_type_notification">強度由系統通知振動設定定義</string>
     <string name="gsans_override_title">系統級強制使用 Google Sans</string>
     <string name="font_overlays_enable_title">啟用自訂字型</string>
-    <string name="theme_customization_font_title">標題 /  正文字型</string>
+    <string name="theme_customization_font_title">標題/ 正文字型</string>
     <string name="icons_style_title">圖示樣式</string>
     <string name="icon_shapes_title">圖示形狀</string>
     <string name="signal_icons_theme_title">訊號圖示主題</string>

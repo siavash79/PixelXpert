@@ -264,7 +264,7 @@ public class BatteryBarView extends FrameLayout {
 		initialLevel = level;
 		initialCharging = charging;
 		if (instance != null) {
-			instance.setBatteryLevel(level, charging);
+			instance.post(() -> instance.setBatteryLevel(level, charging));
 		}
 	}
 

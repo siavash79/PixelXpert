@@ -7,7 +7,6 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.widget.LinearLayout.VERTICAL;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -175,8 +174,9 @@ public class StatusbarMods extends XposedModPack {
 	private final Executor volteExec = Runnable::run;
 
 	private Object mStatusBarIconController;
-	private Class<?> StatusBarIcon;
-	private Object volteStatusbarIcon;
+	private Class<?> StatusBarIconClass;
+	private Class<?> StatusBarIconHolderClass;
+	private Object volteStatusbarIconHolder;
 	private boolean telephonyCallbackRegistered = false;
 	private int lastVolteState = VOLTE_UNKNOWN;
 	private final serverStateCallback volteCallback = new serverStateCallback();
@@ -395,17 +395,18 @@ public class StatusbarMods extends XposedModPack {
 
 		//region volte
 		VolteIconEnabled = Xprefs.getBoolean("VolteIconEnabled", false);
-		if (VolteIconEnabled)
-			initVolte();
-		else
-			removeVolte();
 		//endregion
 
 		if (Key.length > 0) {
-			//noinspection SwitchStatementWithTooFewBranches
 			switch (Key[0]) {
 				case "statusbarPaddings":
 					updateStatusbarHeight();
+					break;
+				case "VolteIconEnabled":
+					if (VolteIconEnabled)
+						initVolte();
+					else
+						removeVolte();
 					break;
 			}
 		}
@@ -443,11 +444,13 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> KeyGuardIndicationClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
 		Class<?> BatteryTrackerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
 		Class<?> NotificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
-		StatusBarIcon = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 		Class<?> StatusBarSignalPolicyClass = findClass("com.android.systemui.statusbar.phone.StatusBarSignalPolicy", lpparam.classLoader);
 		Class<?> NetworkControllerImplClass = findClass("com.android.systemui.statusbar.connectivity.NetworkControllerImpl", lpparam.classLoader);
+		Class<?> PrivacyItemControllerClass = findClass("com.android.systemui.privacy.PrivacyItemController", lpparam.classLoader);
+		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
+		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
 //		Method setMeasuredDimensionMethod = findMethodExact(View.class, "setMeasuredDimension", int.class, int.class);
 		//endregion
@@ -482,23 +485,18 @@ public class StatusbarMods extends XposedModPack {
 		//endregion
 
 		//region privacy chip
-		Class<?> SystemEventCoordinatorClass = findClassIfExists("com.android.systemui.statusbar.events.SystemEventCoordinator", lpparam.classLoader);
-
-		if (SystemEventCoordinatorClass != null) {
-			hookAllConstructors(SystemEventCoordinatorClass, new XC_MethodHook() {
-				@Override
-				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-					hookAllMethods(getObjectField(param.thisObject, "privacyStateListener").getClass(), "onPrivacyItemsChanged", new XC_MethodHook() {
-						@Override
-						protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-							if (HidePrivacyChip) {
-								param.setResult(null);
-							}
-						}
-					});
-				}
-			});
-		}
+		hookAllConstructors(PrivacyItemControllerClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				hookAllMethods(getObjectField(param.thisObject, "notifyChanges").getClass(), "run", new XC_MethodHook() {
+					@Override
+					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+						if(HidePrivacyChip)
+							param.setResult(null);
+					}
+				});
+			}
+		});
 		//endregion
 
 		//region SB Padding
@@ -631,26 +629,32 @@ public class StatusbarMods extends XposedModPack {
 
 						NetworkTraffic.setTintColor(fillColor, false);
 
-						//Clickable icons
-						Object mBatteryRemainingIcon = getObjectField(param.thisObject, "mBatteryRemainingIcon");
-						Object mDateView = getObjectField(param.thisObject, "mDateView");
-						Object mClockViewQS = getObjectField(param.thisObject, "mClockView");
-
 						try {
+							//Clickable icons
+							Object mBatteryRemainingIcon = getObjectField(param.thisObject, "mBatteryRemainingIcon");
+							Object mDateView = getObjectField(param.thisObject, "mDateView");
+							Object mClockViewQS = getObjectField(param.thisObject, "mClockView");
+
 							callMethod(mBatteryRemainingIcon, "setOnClickListener", clickListener);
 							callMethod(mClockViewQS, "setOnClickListener", clickListener);
 							callMethod(mClockViewQS, "setOnLongClickListener", clickListener);
 							callMethod(mDateView, "setOnClickListener", clickListener);
 							callMethod(mDateView, "setOnLongClickListener", clickListener);
-						} catch (Exception ignored) {}
+						} catch (Throwable ignored) {}
 					}
 				});
 
 		try
 		{
-			Class<?> LargeScreenShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpparam.classLoader);
+			//QPR3
+			Class<?> ShadeHeaderControllerClass = findClassIfExists("com.android.systemui.shade.ShadeHeaderController", lpparam.classLoader);
 
-			hookAllMethods(LargeScreenShadeHeaderControllerClass, "onInit", new XC_MethodHook() {
+			if(ShadeHeaderControllerClass == null) //QPR2
+			{
+				ShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpparam.classLoader);
+			}
+
+			hookAllMethods(ShadeHeaderControllerClass, "onInit", new XC_MethodHook() {
 				@SuppressLint("DiscouragedApi")
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -937,17 +941,20 @@ public class StatusbarMods extends XposedModPack {
 
 	//region volte related
 	private void initVolte() {
-
 		try {
 			if (!telephonyCallbackRegistered) {
 				Icon volteIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_volte);
 				//noinspection JavaReflectionMemberAccess
-				volteStatusbarIcon = StatusBarIcon.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, "volte");
+				Object volteStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, "volte");
+				volteStatusbarIconHolder = StatusBarIconHolderClass.newInstance();
+				setObjectField(volteStatusbarIconHolder, "mIcon", volteStatusbarIcon);
 				SystemUtils.TelephonyManager().registerTelephonyCallback(volteExec, volteCallback);
 				telephonyCallbackRegistered = true;
 			}
 		} catch (Exception ignored) {
 		}
+
+		updateVolte(true);
 	}
 
 	private void removeVolte() {
@@ -963,19 +970,19 @@ public class StatusbarMods extends XposedModPack {
 			TelephonyCallback.ServiceStateListener {
 		@Override
 		public void onServiceStateChanged(@NonNull ServiceState serviceState) {
-			updateVolte();
+			updateVolte(false);
 		}
 	}
 
-	private void updateVolte() {
+	private void updateVolte(boolean force) {
 		int newVolteState = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isVolteAvailable") ? VOLTE_AVAILABLE : VOLTE_NOT_AVAILABLE;
-		if (lastVolteState != newVolteState) {
+		if (lastVolteState != newVolteState || force) {
 			lastVolteState = newVolteState;
 			switch (newVolteState) {
 				case VOLTE_AVAILABLE:
 					mStatusBar.post(() -> {
 						try {
-							callMethod(mStatusBarIconController, "setIcon", "volte", volteStatusbarIcon);
+							callMethod(mStatusBarIconController, "setIcon", "volte", volteStatusbarIconHolder);
 						} catch (Exception ignored) {}
 					});
 					break;
@@ -990,9 +997,8 @@ public class StatusbarMods extends XposedModPack {
 		if (mStatusBar == null) return; //probably it's too soon to have a statusbar
 		mStatusBar.post(() -> {
 			try {
-				callMethod(mStatusBarIconController, "removeIcon", "volte");
-			} catch (Throwable ignored) {
-			}
+				callMethod(mStatusBarIconController, "removeAllIconsForSlot", "volte");
+			} catch (Throwable ignored) {}
 		});
 	}
 	//endregion

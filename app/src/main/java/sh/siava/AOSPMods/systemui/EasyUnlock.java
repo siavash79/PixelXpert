@@ -4,6 +4,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
@@ -45,13 +46,21 @@ public class EasyUnlock extends XposedModPack {
 		Class<?> LockscreenCredentialClass = findClass("com.android.internal.widget.LockscreenCredential", lpparam.classLoader);
 		Class<?> StatusBarKeyguardViewManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager", lpparam.classLoader);
 
+		boolean pre13QPR3 = findFieldIfExists(StatusBarKeyguardViewManagerClass, "mBouncer") != null;
+
 		hookAllMethods(StatusBarKeyguardViewManagerClass, "onDozingChanged", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 
 				if(WakeUpToSecurityInput && param.args[0].equals(false) && (!(boolean)callMethod(getObjectField(param.thisObject, "mKeyguardStateController"), "canDismissLockScreen"))) //waking up
 				{
-					callMethod(getObjectField(param.thisObject, "mBouncer"), "show", true, true);
+					if(pre13QPR3) {
+						callMethod(getObjectField(param.thisObject, "mBouncer"), "show", true, true);
+					}
+					else
+					{
+						callMethod(param.thisObject, "showPrimaryBouncer", true);
+					}
 				}
 			}
 		});
@@ -82,11 +91,17 @@ public class EasyUnlock extends XposedModPack {
 							View mView = (View) getObjectField(param.thisObject, "mView");
 							mView.post(() -> {
 								try
-								{ //New(er) signature
+								{ //13 QPR3
+									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, getObjectField(param.thisObject, "mSecurityMode"));
+									return;
+								}catch (Throwable ignored){}
+
+								try
+								{ //Pre 13QPR3
 									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */, getObjectField(param.thisObject, "mSecurityMode"));
 								}
 								catch (Throwable ignored)
-								{ //Previous signature
+								{ //PRE-Pre 13QPR3
 									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */);
 								}
 							});

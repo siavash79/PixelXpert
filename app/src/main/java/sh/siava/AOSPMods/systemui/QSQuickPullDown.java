@@ -9,7 +9,10 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
 import android.content.Context;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
+
+import androidx.annotation.NonNull;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -28,6 +31,9 @@ public class QSQuickPullDown extends XposedModPack {
 	private static int pullDownSide = PULLDOWN_SIDE_RIGHT;
 	private static boolean oneFingerPulldownEnabled = false;
 	private static float statusbarPortion = 0.25f; // now set to 25% of the screen. it can be anything between 0 to 100%
+	private Object NotificationPanelViewController;
+
+	GestureDetector gestureDetector;
 
 	public QSQuickPullDown(Context context) {
 		super(context);
@@ -41,13 +47,64 @@ public class QSQuickPullDown extends XposedModPack {
 		pullDownSide = Integer.parseInt(Xprefs.getString("QSPulldownSide", "1"));
 	}
 
+	GestureDetector.OnGestureListener listener = new GestureDetector.OnGestureListener() {
+		@Override
+		public boolean onDown(@NonNull MotionEvent e) {
+			return false;
+		}
+
+		@Override
+		public void onShowPress(@NonNull MotionEvent e) {
+
+		}
+
+		@Override
+		public boolean onSingleTapUp(@NonNull MotionEvent e) {
+			return false;
+		}
+
+		@Override
+		public boolean onScroll(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
+			return false;
+		}
+
+		@Override
+		public void onLongPress(@NonNull MotionEvent e) {}
+
+		@Override
+		public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
+			if(velocityY > 500)
+			{
+				int mBarState = (int) getObjectField(NotificationPanelViewController, "mBarState");
+				if (mBarState != STATUSBAR_MODE_SHADE) return false;
+
+				int w = (int) callMethod(
+						getObjectField(NotificationPanelViewController, "mView"),
+						"getMeasuredWidth");
+
+				float x = e1.getX();
+				float region = w * statusbarPortion;
+
+				boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
+						? w - region < x
+						: x < region;
+
+				if (pullDownApproved) {
+					callMethod(NotificationPanelViewController, "expandWithQs");
+					return true;
+				}
+			}
+			return false;
+		}
+	};
+
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
 		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
 
-		if(findFieldIfExists(NotificationPanelViewControllerClass, "mStatusBarViewTouchEventHandler") != null) {
+		if(findFieldIfExists(NotificationPanelViewControllerClass, "mStatusBarViewTouchEventHandler") != null) { //13 QPR1
 			hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -83,7 +140,7 @@ public class QSQuickPullDown extends XposedModPack {
 		}
 		else
 		{
-			hookAllMethods(NotificationPanelViewControllerClass, "createTouchHandler", new XC_MethodHook() {
+			if(hookAllMethods(NotificationPanelViewControllerClass, "createTouchHandler", new XC_MethodHook() { //13 QPR2
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					hookAllMethods(param.getResult().getClass(), "onTouch", new XC_MethodHook() {
@@ -114,7 +171,35 @@ public class QSQuickPullDown extends XposedModPack {
 						}
 					});
 				}
-			});
+			}).size() == 0)
+			{ //13 QPR3
+				gestureDetector = new GestureDetector(mContext, listener);
+
+				Class<?> PhoneStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarViewController", lpparam.classLoader);
+
+				hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						NotificationPanelViewController = param.thisObject;
+					}
+				});
+				XC_MethodHook statusbarTouchHook = new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						if (!oneFingerPulldownEnabled) return;
+
+						MotionEvent event =
+								param.args[0] instanceof MotionEvent
+										? (MotionEvent) param.args[0]
+										: (MotionEvent) param.args[1];
+
+						gestureDetector.onTouchEvent(event);
+
+					}
+				};
+
+				hookAllMethods(PhoneStatusBarViewControllerClass, "onTouch", statusbarTouchHook);
+			}
 		}
 	}
 

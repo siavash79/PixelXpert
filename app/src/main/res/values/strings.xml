@@ -1,7 +1,8 @@
 <resources>
     <!--General strings-->
     <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="xposed_desc" translatable="false">Custom features for Android 12+ AOSP based ROMs</string>
+    <string name="app_themed_icon_title">Enable alternative AOSP Mods themed app icon</string>
+    <string name="xposed_desc">Custom features for Android 12+ AOSP based ROMs</string>
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="error_not_activated">Please confirm if the module is activated within LSPosed Manager</string>
     <string name="hide_default">Hide (Default)</string>
@@ -25,6 +26,7 @@
     <string name="pm_header">Package Manager</string>
 
     <!--Lock screen related-->
+    <string name="ls_general_options">Lock screen options</string>
     <string name="hide_avatar_title">Remove user avatar (multi user mode)</string>
     <string name="transparent_fingerprint_circle">Remove background circle from under-display fingerprint</string>
     <string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>

@@ -1,57 +1,68 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Preference
-        app:fragment="sh.siava.AOSPMods.SettingsActivity$StatusbarFragment"
-        app:key="statusbar_header"
-        app:title="@string/statusbar_header"
-        app:icon="@drawable/ic_settings_statusbar" />
+	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+		android:layout="@layout/custom_preference"
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$StatusbarFragment"
+		app:icon="@drawable/ic_settings_statusbar"
+		app:key="statusbar_header"
+		app:title="@string/statusbar_header" />
 
-    <Preference
-        app:fragment="sh.siava.AOSPMods.SettingsActivity$QuickSettingsFragment"
-        app:key="quicksettings_header"
-        app:title="@string/qs_panel_category_title"
-        app:icon="@drawable/ic_settings_quicksettings" />
+	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+		android:layout="@layout/custom_preference"
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$QuickSettingsFragment"
+		app:icon="@drawable/ic_settings_quicksettings"
+		app:key="quicksettings_header"
+		app:title="@string/qs_panel_category_title" />
 
-    <Preference
-        app:fragment="sh.siava.AOSPMods.SettingsActivity$ThemingFragment"
-        app:key="theming_header"
-        app:title="@string/theme_customization_category"
-        app:icon="@drawable/ic_settings_themes" />
+	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+		android:layout="@layout/custom_preference"
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$ThemingFragment"
+		app:icon="@drawable/ic_settings_themes"
+		app:key="theming_header"
+		app:title="@string/theme_customization_category" />
 
-    <Preference
-        app:fragment="sh.siava.AOSPMods.SettingsActivity$LockScreenFragment"
-        app:key="lockscreen_header"
-        app:title="@string/lockscreen_header_title"
-        app:icon="@drawable/ic_settings_lockscreen" />
+	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+		android:layout="@layout/custom_preference"
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$LockScreenFragment"
+		app:icon="@drawable/ic_settings_lockscreen"
+		app:key="lockscreen_header"
+		app:title="@string/lockscreen_header_title" />
 
-    <Preference
-        app:fragment="sh.siava.AOSPMods.SettingsActivity$NavFragment"
-        app:key="nav_header"
-        app:title="@string/nav_header"
-        app:icon="@drawable/ic_settings_navigation" />
+	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+		android:layout="@layout/custom_preference"
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$NavFragment"
+		app:icon="@drawable/ic_settings_navigation"
+		app:key="nav_header"
+		app:title="@string/nav_header" />
 
-    <Preference
-        app:fragment="sh.siava.AOSPMods.SettingsActivity$MiscFragment"
-        app:key="misc_header"
-        app:title="@string/misc_header"
-        app:icon="@drawable/ic_misc" />
+	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+		android:layout="@layout/custom_preference"
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$MiscFragment"
+		app:icon="@drawable/ic_settings_misc"
+		app:key="misc_header"
+		app:title="@string/misc_header" />
 
-    <Preference
-        app:fragment="sh.siava.AOSPMods.SettingsActivity$PackageManagerFragment"
-        app:key="pm_header"
-        app:title="@string/pm_header"
-        app:icon="@drawable/ic_package_manager" />
+	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+		android:layout="@layout/custom_preference"
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$PackageManagerFragment"
+		app:icon="@drawable/ic_settings_package_manager"
+		app:key="pm_header"
+		app:title="@string/pm_header" />
 
-    <Preference
-        app:fragment="sh.siava.AOSPMods.SettingsActivity$OwnPrefsFragment"
-        app:key="own_header"
-        app:title="@string/own_prefs_header"
-        app:icon="@drawable/ic_notification_foreground" />
-    <!-- Let's remove this for the time being...
-    <Preference
-        app:fragment="sh.siava.AOSPMods.SettingsActivity$ScreenOffFragment"
-        app:key="doze_header"
-        app:title="@string/doze_header"
-        app:icon="@drawable/ic_settings_lockscreen" />
-    -->
+	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+		android:layout="@layout/custom_preference"
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$OwnPrefsFragment"
+		app:icon="@drawable/ic_settings_aospmods"
+		app:key="own_header"
+		app:title="@string/own_prefs_header" />
+
+	<!-- Let's remove this for the time being...
+	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+		android:layout="@layout/custom_preference"
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$ScreenOffFragment"
+		app:key="doze_header"
+		app:title="@string/doze_header"
+		app:icon="@drawable/ic_settings_lockscreen" />
+	-->
 </PreferenceScreen>

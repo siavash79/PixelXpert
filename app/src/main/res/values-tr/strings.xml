@@ -58,7 +58,6 @@
     <string name="BIcon_Opacity_title">Opaklık</string>
     <string name="sb_center_fine_tune">İnce ayar merkez alanı</string>
     <string name="sb_multi_row_system_icons">Çok satırlı sistem simgeleri (daha yüksek durum çubuğu yüksekliği gerekir)</string>
-    <string name="sb_multi_row_category">Çok satırlı sistem simgeleri</string>
     <string name="sb_icon_sort_mode">Simge yerleştirme yöntemi</string>
     <string name="sort_clean">Ağ sistemine uygun sığdır</string>
     <string name="sort_tight">Maksimum öğeyi sığdırs</string>
@@ -87,7 +86,6 @@
     <string name="sbc_after_color">Saatten sonrakı yazı</string>
     <string name="network_settings_pref">Ağ izleme ayarları…</string>
     <string name="ntsb_far_left">Tam Sol</string>
-    <string name="ntsb_far_left_extra">Tam sol - Bildirimlerin üstünde</string>
     <string name="ntsb_mid_left">Orta-Sol</string>
     <string name="ntsb_mid_right">Orta-Sağ</string>
     <string name="ntsb_category_title">Ağ İzleyicisi</string>
@@ -244,7 +242,6 @@
 
     <!-- Clock position -->
     <string name="clock_default">Sol (Varsayılan)</string>
-    <string name="clock_default_extra">Sol - Bildirimlerin üstünde</string>
     <string name="clock_center">Merkez</string>
     <string name="clock_right">Sağ</string>
 
@@ -358,4 +355,23 @@
     <string name="hide_avatar_title">Çoklu kullanıcı rejiminde kilit ekranındakı kullanıcı resmini kaldır</string>
     <string name="camera_manager_master_title">El feneri modlarını etkinleştir (cihazınız desteklemiyorsa inaktive edin)</string>
     <string name="clipboard_smart_actions_title">Panoda akıllı seçenekler</string>
+	<string name="pm_header">Paket Yöneticisi</string>
+    <string name="LSleftLongClickShortcutTitle">Sol kısayol (Uzun tıklayın)</string>
+    <string name="LSrightLongClickShortcutTitle">Sağ kısayol (Uzun tıklayın)</string>
+    <string name="tv_remote_shortcut">TV Kumandası</string>
+    <string name="dnd_shortcut">Rahatsız Etmeyin</string>
+    <string name="sb_multi_row_notification_icons">Çok satırlı bildirim simgeleri (durum çubuğu yüksekliğinin artırılması gerekir)</string>
+    <string name="sb_double_row_category">Çift Durum Çubuğu satırları</string>
+	<string name="qs_tile_qty_title">Hızlı ayarlar simge sayısı ayarları</string>
+    <string name="qs_tile_qty_portrait">Dikey yönde</string>
+    <string name="qs_tile_qty_landscape">Yatay yönde</string>
+    <string name="pm_bypass_signature_title">Paket imza kontrolünü atlayın</string>
+    <string name="pm_allow_downgrade_title">Uygulama sürüm düşürmeye izin ver</string>
+    <string name="incompatible_alert_title">Uyumsuz</string>
+    <string name="incompatible_alert_body">Mevcut ROM\'unuz bu modül ile uyumlu değildir. Kullanmaya devam edebilirsiniz, ancak bazı (veya tüm) seçenekler amaçlandığı gibi çalışmayabilir.\\n\\nLütfen hata bildirmeyin</string>
+    <string name="incompatible_alert_ok_btn">Anlıyorum.</string>
+    <string name="qs_volume_unmute_title">Ses simgesinin sessizden sesliye geçme değeri</string>
+    <string name="auto_off_five_minutes">Önümüzdeki 5 dakika için etkin</string>
+    <string name="vibration_type_touch">Sistem dokunmatik titreşim ayarları tarafından tanımlanan yoğunluk</string>
+    <string name="vibration_type_notification">Sistem bildirim titreşim ayarları tarafından tanımlanan yoğunluk</string>
 </resources>

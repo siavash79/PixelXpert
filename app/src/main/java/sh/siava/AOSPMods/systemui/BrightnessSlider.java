@@ -305,33 +305,9 @@ public class BrightnessSlider extends XposedModPack {
 
 		QQSBrightnessSliderView = (View) getObjectField(mBrightnessSliderController, "mView");
 
-		try {
-			try { //13 QPR2
-				mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mUserTracker"),getObjectField(brightnessControllerFactory, "mMainExecutor"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
-			} catch (Throwable t)
-			{
-				try
-				{ //13 QPR1
-					mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mBroadcastDispatcher"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
-				}
-				catch (Throwable ignored) //some custom roms added icon into signature. like ArrowOS
-				{
-					ImageView icon = (ImageView) callMethod(mBrightnessSliderController, "getIconView");
-					mBrightnessController = callMethod(brightnessControllerFactory, "create", icon, mBrightnessSliderController);
-				}
-			}
-
-			if(!QQSBrightnessSupported) {
-				Xprefs.edit().putBoolean("QQSBrightnessSupported", true).apply();
-			}
-		}
-		catch (Throwable ignored)
+		if(!makeBrightnessController(mBrightnessSliderController))
 		{
-			if(QQSBrightnessSupported) {
-				Xprefs.edit().putBoolean("QQSBrightnessSupported", false).apply();
-			}
-
-			return; //We couldn't make a controller
+			return;
 		}
 
 		mBrightnessMirrorHandler = BrightnessMirrorHandlerClass.getConstructors()[0].newInstance(mBrightnessController);
@@ -346,6 +322,46 @@ public class BrightnessSlider extends XposedModPack {
 		onQsPanelAttached(mBrightnessMirrorHandler);
 
 		setQQSVisibility();
+	}
+
+	private boolean makeBrightnessController(Object mBrightnessSliderController) {
+		mBrightnessController = null;
+		try
+		{ //13 QPR3
+			mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mUserTracker"),getObjectField(brightnessControllerFactory, "mDisplayTracker"), getObjectField(brightnessControllerFactory, "mMainExecutor"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
+		} catch (Throwable ignored){}
+
+		if(mBrightnessController == null) {
+			try { //13 QPR2
+				mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mUserTracker"), getObjectField(brightnessControllerFactory, "mMainExecutor"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
+			} catch (Throwable ignored) {}
+		}
+		if(mBrightnessController == null) {
+			try { //13 QPR1
+				mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mBroadcastDispatcher"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
+			} catch (Throwable ignored) {}
+		}
+
+		if(mBrightnessController == null) {
+			try { //some custom roms added icon into signature. like ArrowOS
+				ImageView icon = (ImageView) callMethod(mBrightnessSliderController, "getIconView");
+				mBrightnessController = callMethod(brightnessControllerFactory, "create", icon, mBrightnessSliderController);
+			} catch (Throwable ignored) {}
+		}
+
+		if(mBrightnessController != null) {
+			if (!QQSBrightnessSupported) {
+				Xprefs.edit().putBoolean("QQSBrightnessSupported", true).apply();
+			}
+			return true;
+		}
+		else
+		{
+			if(QQSBrightnessSupported) {
+				Xprefs.edit().putBoolean("QQSBrightnessSupported", false).apply();
+			}
+			return false;
+		}
 	}
 
 	private static void onQsPanelAttached(Object mBrightnessMirrorHandler) {

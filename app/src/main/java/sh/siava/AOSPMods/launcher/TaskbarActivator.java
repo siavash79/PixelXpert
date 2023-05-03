@@ -2,9 +2,9 @@ package sh.siava.AOSPMods.launcher;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
@@ -12,7 +12,6 @@ import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
-import static sh.siava.AOSPMods.XPrefs.modRes;
 
 import android.annotation.SuppressLint;
 import android.app.TaskInfo;
@@ -20,22 +19,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PixelFormat;
-import android.graphics.drawable.AdaptiveIconDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableContainer;
-import android.os.Build;
 import android.os.Process;
 import android.os.UserHandle;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.os.BuildCompat;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -44,7 +31,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.BuildConfig;
-import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.XposedModPack;
 import sh.siava.AOSPMods.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -123,7 +109,7 @@ public class TaskbarActivator extends XposedModPack {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
-		Class<?> info = findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
+//		Class<?> info = findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
 		Class<?> RecentTasksListClass = findClass("com.android.quickstep.RecentTasksList", lpparam.classLoader);
 		Class<?> AppInfoClass = findClass("com.android.launcher3.model.data.AppInfo", lpparam.classLoader);
 		Class<?> TaskbarViewClass = findClass("com.android.launcher3.taskbar.TaskbarView", lpparam.classLoader);
@@ -135,14 +121,14 @@ public class TaskbarActivator extends XposedModPack {
 		Class<?> LauncherModelClass = findClass("com.android.launcher3.LauncherModel", lpparam.classLoader);
 		Class<?> BaseDraggingActivityClass = findClass("com.android.launcher3.BaseDraggingActivity", lpparam.classLoader);
 		//Transient taskbar. kept disabled until further notice
-/*		Class<?> DisplayControllerClass = findClass("com.android.launcher3.util.DisplayController", lpparam.classLoader);
+		Class<?> DisplayControllerClass = findClass("com.android.launcher3.util.DisplayController", lpparam.classLoader);
 
 		hookAllMethods(DisplayControllerClass, "isTransientTaskbar", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				param.setResult(true);
+				param.setResult(false);
 			}
-		});*/
+		});
 
 		hookAllMethods(BaseDraggingActivityClass, "onResume", new XC_MethodHook() {
 			@Override
@@ -191,6 +177,14 @@ public class TaskbarActivator extends XposedModPack {
 			}
 		};
 
+		String taskbarHeightField = findFieldIfExists(DeviceProfileClass, "taskbarSize") != null
+				? "taskbarSize" //pre 13 QPR3
+				: "taskbarHeight"; //13 QPR3
+
+		String stashedTaskbarHeightField = findFieldIfExists(DeviceProfileClass, "stashedTaskbarSize") != null
+				? "stashedTaskbarSize" //pre 13 QPR3
+				: "stashedTaskbarHeight"; //13 QPR3
+
 		hookAllConstructors(DeviceProfileClass, new XC_MethodHook() {
 			@SuppressLint("DiscouragedApi")
 			@Override
@@ -210,11 +204,11 @@ public class TaskbarActivator extends XposedModPack {
 
 					Resources res = mContext.getResources();
 
-					setObjectField(param.thisObject, "taskbarSize", res.getDimensionPixelSize(res.getIdentifier("taskbar_size", "dimen", mContext.getPackageName())));
-					setObjectField(param.thisObject, "stashedTaskbarSize", res.getDimensionPixelSize(res.getIdentifier("taskbar_stashed_size", "dimen", mContext.getPackageName())));
+					setObjectField(param.thisObject, taskbarHeightField, res.getDimensionPixelSize(res.getIdentifier("taskbar_size", "dimen", mContext.getPackageName())));
+					setObjectField(param.thisObject, stashedTaskbarHeightField, res.getDimensionPixelSize(res.getIdentifier("taskbar_stashed_size", "dimen", mContext.getPackageName())));
 
 					if (taskbarHeightOverride != 1f) {
-						setObjectField(param.thisObject, "taskbarSize", Math.round(getIntField(param.thisObject, "taskbarSize") * taskbarHeightOverride));
+						setObjectField(param.thisObject, taskbarHeightField, Math.round(getIntField(param.thisObject, taskbarHeightField) * taskbarHeightOverride));
 					}
 				}
 			}
@@ -278,7 +272,7 @@ public class TaskbarActivator extends XposedModPack {
 							for (int i = 0; i < itemInfos.length; i++) {
 								TaskInfo taskInfo = (TaskInfo) ((Object[]) getObjectField(recentTaskList.get(i), "mTasks"))[0];
 
-								//noinspection JavaReflectionMemberAccess,RedundantCast
+								// noinspection JavaReflectionMemberAccess
 								itemInfos[i] = AppInfoClass.getConstructor(ComponentName.class, CharSequence.class, UserHandle.class, Intent.class)
 										.newInstance(
 												(ComponentName) getObjectField(taskInfo, "realActivity"),

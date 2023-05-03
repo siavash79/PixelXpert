@@ -132,6 +132,8 @@ public class NotificationExpander extends XposedModPack {
 
 
 	private void updateFooterBtn() {
+		if(FooterView == null) return; //Footer not inflated yet
+
 		View mDismissButton = (View) getObjectField(FooterView, "mManageButton"); //A13
 
 		int fh = mDismissButton.getLayoutParams().height;

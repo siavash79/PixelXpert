@@ -75,6 +75,7 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @ElTifo Portuguese
 - @cracky5322 Chinese Traditional
 - @JohnsonRan Chinese Simplified
+- @huajijam Chinese Simplified
 - @TireX228 Russian
 - @ygorigor Romanian
 - @krystianokris Polish
@@ -94,6 +95,10 @@ Automated install/updates: only through in-app updater - updates will NOT appear
 - @Katsuyuki-Karasawa Japanese
 - @potatosalad775 Korean
 - @hcosserat French
+- @deepanshpandey Hindi
+
+**UI design:**  
+- @Mahmud0808  
 
 **Graphic design:**  
 - JstormZx@Telegram (Icon and Banner) 

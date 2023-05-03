@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="ui_container_radius">24dp</dimen>
+	<dimen name="ui_container_margin_side">16dp</dimen>
+</resources>

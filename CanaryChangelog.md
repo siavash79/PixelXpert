@@ -1,3 +1,47 @@
+**canary-242**  
+- 13QPR3: QS quick pulldown now responds to swipe down only  
+- 13QPR3: Fixed showing security input on device wake  
+  
+**canary-241**  
+- 13QPR3Beta3: Fixed hiding privacy chips  
+- 13QPR3: Fixed taskbar size  
+- Fixed VoLTE icon appearance glitches  
+- Fixed VoLTE icon appearance glitches  
+  
+**canary-240**  
+- 13QPR3: Fixed VoLTE icon appearance  
+- Changed keyguard pin shuffle behavior  
+- Fixed QS pulldown bug appeared a few canaries ago  
+  
+**canary-239**  
+- Fixed lockscreen carrier text hiding when not supposed to  
+- 13QPR3: Fixed hiding ongoing privacy chips  
+  
+**canary-238**  
+- Refreshed UI based on material 3! Shout out to Iconify dev Mahmud0808@Github for "personally" applying iconify UI to AOSPMods  
+  
+**canary-237**  
+- Added option to change app icon to "always themed"  
+- 13QPR3: Fixed screenshot mods  
+  
+**canary-236**  
+- 13QPR3: Fixed easy-unlock  
+- Fixed QQS brightness slider, broken in canary 235  
+- 13QPR1, 13QPR2: Fixed QS Quick pulldown, broken in canary 235  
+  
+**canary-235**  
+- 13QPR3: Fixed QQS brightness slider  
+  
+**canary-234**  
+- 13QPR3: Fixed taskbar  
+- 13QPR3: Fixed QS quick pulldown  
+- 13QPR3: Fixed statusbar double tap sleep  
+- 13QPR3: Fixed double tap actions on lockscreen  
+  
+**canary-233**  
+- 13QPR3: Fixed QS header shortcuts  
+- 13QPR3: Fixed light QS theme  
+  
 **canary-232**  
 - Fixed brightness slider's animation  
 - Fixed custom battery icon randomly not appearing immediately after restart  

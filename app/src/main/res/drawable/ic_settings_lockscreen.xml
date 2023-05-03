@@ -1,25 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-    Copyright (C) 2019-2020 The Evolution X Project
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-         http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="24.0"
-    android:viewportHeight="24.0"
-    android:tint="@color/launcher_fg">
-    <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M10,16 L14,16 C14.55,16,15,15.55,15,15 L15,12 C15,11.45,14.55,11,14,11 L14,10 C14,8.89,13.1,8,12,8 C10.89,8,10,8.9,10,10 L10,11 C9.45,11,9,11.45,9,12 L9,15 C9,15.55,9.45,16,10,16 Z M10.8,10 C10.8,9.34,11.34,8.8,12,8.8 S13.2,9.34,13.2,10 L13.2,11 L10.8,11 L10.8,10 Z M17,1 L7,1 C5.9,1,5,1.9,5,3 L5,21 C5,22.1,5.9,23,7,23 L17,23 C18.1,23,19,22.1,19,21 L19,3 C19,1.9,18.1,1,17,1 Z M17,19 L7,19 L7,5 L17,5 L17,19 Z" />
+	android:width="24.0dp"
+	android:height="24.0dp"
+	android:viewportWidth="24.0"
+	android:viewportHeight="24.0">
+	<path
+		android:fillColor="#FF000000"
+		android:fillType="nonZero"
+		android:pathData="M15.00,11.00L21.00,11.00A1.00 1.00 0 0 1 22.00,12.00L22.00,16.00A1.00 1.00 0 0 1 21.00,17.00L15.00,17.00A1.00 1.00 0 0 1 14.00,16.00L14.00,12.00A1.00 1.00 0 0 1 15.00,11.00zM16.50,11.00L16.50,10.00C16.50,8.00,19.50,8.00,19.50,10.00L19.50,11.00M21.00,11.00L21.00,10.00C21.00,6.25,15.00,6.25,15.00,10.00L15.00,11.00"
+		android:strokeLineCap="square"
+		android:strokeLineJoin="miter" />
+	<path
+		android:fillColor="#66000000"
+		android:fillType="nonZero"
+		android:pathData="M18.00,20.00C18.00,20.50,17.50,21.00,17.00,21.00L7.00,21.00C6.50,21.00,6.00,20.50,6.00,20.00L6.00,4.00C6.00,3.50,6.50,3.00,7.00,3.00L17.00,3.00C17.50,3.00,18.00,3.50,18.00,4.00L18.00,5.00L17.00,5.00C15.00,5.50,13.25,7.00,13.00,9.75C12.50,10.25,12.00,10.75,12.00,12.00L12.00,16.00C12.00,18.00,13.00,19.00,14.81,19.00L18.00,19.00L18.00,20.00z"
+		android:strokeLineCap="square"
+		android:strokeLineJoin="miter" />
+	<path
+		android:fillColor="#00000000"
+		android:fillType="nonZero"
+		android:pathData="M18.00,20.00C18.00,20.50,17.50,21.00,17.00,21.00L7.00,21.00C6.50,21.00,6.00,20.50,6.00,20.00L6.00,4.00C6.00,3.50,6.50,3.00,7.00,3.00L17.00,3.00C17.50,3.00,18.00,3.50,18.00,4.00"
+		android:strokeWidth="2.112"
+		android:strokeColor="#FF000000"
+		android:strokeLineCap="square"
+		android:strokeLineJoin="miter" />
 </vector>

@@ -34,3 +34,5 @@ Technically, the module should automatically activate itself in Lsposed and get 
 - @Katsuyuki-Karasawa Japanese  
 - @potatosalad775 Korean  
 - @hcosserat French  
+- @deepanshpandey Hindi  
+  

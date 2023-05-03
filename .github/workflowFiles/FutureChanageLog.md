@@ -1,7 +1,7 @@
-Compatible with Android 13 QPR2 (March 2023 feature drop)  
+Compatible with Android 13 QPR1, 2 & 3 releases (Android 13 feature drops)  
     
-- Fixed brightness sliders' animation  
-- Fixed battery icon not appearing after startup in certain conditions  
-- Added French translation  
+- Refreshed app user interface (Thanks to @Mahmud0808)  
+- Fully compatible with A13 QPR3  
+- Added Hindi translation  
   
-  
+... And bugfixes  

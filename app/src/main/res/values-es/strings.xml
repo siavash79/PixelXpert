@@ -1,5 +1,7 @@
 <resources>
 	<!--General strings-->
+	<string name="app_themed_icon_title">Habilitar icono temático alternativo para AOSP mods</string>
+	<string name="xposed_desc">Funciones personalizadas para ROM basadas en Android 12+ AOSP</string>
 	<string name="error_not_activated">Confirme si el módulo está activado dentro de LSPosed Manager</string>
 	<string name="hide_default">No mostrar (por defecto)</string>
 	<string name="percent_of_default_size">% del tamaño por defecto</string>
@@ -19,8 +21,10 @@
 	<string name="misc_header">Miscelaneo</string>
 	<string name="qs_panel_category_title">Ajustes rápidos</string>
 	<string name="theme_customization_category">Temas</string>
+	<string name="pm_header">Gestor de paquetes</strin>
 	
 	<!--Lock screen related-->
+	<string name="ls_general_options">Opciones de pantalla de bloqueo</string>
 	<string name="hide_avatar_title">Eliminar avatar de usuario (modo multiusuario)</string>
 	<string name="transparent_fingerprint_circle">Ocultar círculo del icono de la huella digital</string>
 	<string name="transparent_fingerprint_circle_off">El círculo se activará</string>
@@ -62,7 +66,9 @@
 	<string name="battery_hidden">Oculta</string>
 	<string name="BIcon_Opacity_title">Opacidad</string>
 	<string name="sb_center_fine_tune">Afinar el área central</string>
-	<string name="sb_multi_row_system_icons">Iconos de sistema de varias filas (necesita una altura de barra de estado más alta)</string>
+	<string name="sb_multi_row_system_icons">Iconos de sistema de varias filas (necesita una altura elevada de la barra de estado)</string>
+	<string name="sb_multi_row_notification_icons">Iconos de notificación de varias filas (necesita una altura elevada de la barra de estado)</string>
+	<string name="sb_double_row_category">Fila doble en barra de estado</string>
 	<string name="sb_icon_sort_mode">Método de colocación de iconos</string>
 	<string name="sort_clean">Ordenar en una cuadrícula</string>
 	<string name="sort_tight">Ajustar artículos máximos</string>
@@ -203,6 +209,11 @@
 	<string name="taskbar_force_enable_title">Forzar activada</string>
 	<string name="taskbar_force_disable_title">Forzar desactivada</string>
 	<string name="taskbar_hide_allapps_title">Ocultar el icono de todas las aplicaciones</string>
+	
+	<!-- Package manager -->
+    <string name="pm_bypass_signature_title">Pasar por alto la verificación de la firma del paquete</string>
+    <string name="pm_allow_downgrade_title">Permitir degradar la aplicación</string>
+    <string name="auto_off_five_minutes">Habilitado durante los próximos 5 minutos</string>
 
 	<!--Miscellaneous section related-->
 	<string name="screenshot_sound_disable_title">Desactivar sonido de captura de pantalla</string>
@@ -239,6 +250,7 @@
 	<string name="call_category">Llamadas telefónicas</string>
 	<string name="vibrate_on_call_active_title">Vibrar cuenado la llamada saliente es respondida</string>
 	<string name="vibrate_on_call_drop_title">Vibrar cuando se desconecta la llamada</string>
+	<string name="vibration_type_notification">Intensidad definida por la configuración de vibración de notificación del sistema</string>
 
 	<!-- Theming section related -->
 	<string name="gsans_override_title">Forzar la fuente Google Sans en todo el sistema</string>
@@ -267,6 +279,7 @@
 
 	<!-- Clock position -->
 	<string name="clock_default">Izquierda (por defecto)</string>
+	<string name="clock_center">Centro</string>
 	<string name="clock_right">Derecha</string>
 
 	<!-- AM/PM style -->
@@ -290,6 +303,11 @@
 	<string name="netstat_enable_title">Recopilar estadísticas de red</string>
 	<string name="network_interval_custom_text_title">Intervalo de actualización</string>
 	<string name="minutes_word">minuto(s)</string>
+	
+	<!-- Incompatibility Alert -->
+    <string name="incompatible_alert_title">Incompatible</string>
+    <string name="incompatible_alert_body">Su ROM actual no es el objetivo directo de este módulo. Puede continuar usándolo, pero es posible que algunas (o todas) las opciones no funcionen según lo previsto.\n\nNo informe errores</string>
+    <string name="incompatible_alert_ok_btn">Entiendo</string>
 
 	<!-- Menu Items -->
 	<string name="menu_settings_title">Importar/Exportar</string>
@@ -333,7 +351,7 @@
 	<string name="switch_branches">Cambiar rama</string>
 	<string name="reinstall_word">Reinstalar</string>
 	
-		<string name="own_prefs_header">Configuración de AOSPMods</string>
+	<string name="own_prefs_header">Configuración de AOSPMods</string>
 	<string name="language_title">Idioma</string>
 	<string name="camera_manager_master_title">Habilitar mods de linterna (Deshabilitar esto si su teléfono no los admite)</string>
 	<string name="toggle_dark_apply">(Alternar tema oscuro para aplicar)</string>

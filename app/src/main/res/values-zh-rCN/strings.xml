@@ -13,8 +13,8 @@
     <string name="restart_needed">重新启动系统以生效</string>
 
     <!--Category titles-->
-    <string name="more_area">区域更大</string>
-    <string name="less_area">区域更小</string>
+    <string name="more_area">显示区域更大</string>
+    <string name="less_area">显示区域更小</string>
     <string name="lockscreen_header_title">锁屏</string>
     <string name="statusbar_header">状态栏</string>
     <string name="nav_header">导航栏</string>
@@ -40,7 +40,7 @@
     <string name="keyguard_bottom_category">底部快捷方式</string>
     <string name="keyguard_bottom_buttons_transparent_title">隐藏图标周围圆圈</string>
     <string name="keyguard_bottom_force_camera_title">显示相机快捷方式</string>
-    <string name="keyguard_left_shortcut">锁屏显示左划快捷方式</string>
+    <string name="keyguard_left_shortcut">锁屏显示左侧快捷方式</string>
     <string name="LSleftShortcutTitle">左侧</string>
     <string name="LSrightShortcutTitle">右侧</string>
     <string name="LSleftLongClickShortcutTitle">左侧(长按)</string>
@@ -111,7 +111,7 @@
     <string name="ntsb_threshold_summary">流量低于设定阈值时隐藏 (KB)</string>
     <string name="network_mode_title">指示器样式</string>
     <string name="network_colorful_title">着色</string>
-    <string name="network_download_top">下载速度在上方</string>
+    <string name="network_download_top">下载速度在上</string>
     <string name="network_download_color_title">下载颜色</string>
     <string name="network_upload_color_title">上传颜色</string>
     <string name="network_opacity_title">不透明度</string>
@@ -136,7 +136,7 @@
     <string name="BB_colorful_title">着色</string>
     <string name="BB_Opacity_title">不透明度</string>
     <string name="BB_center_align_title">居中对齐</string>
-    <string name="BB_Thickness_title">粗细</string>
+    <string name="BB_Thickness_title">厚度</string>
     <string name="BB_indicate_charging">充电显示</string>
     <string name="BB_indicate_fast_charging">快充显示</string>
     <string name="BB_warning_level">电量警告</string>
@@ -328,8 +328,8 @@
     <string name="reboot_notification_text">更改将在重启设备后生效</string>
     <string name="update_flavor_title">更新通道</string>
     <string name="stable_flavor">稳定版</string>
-    <string name="update_type_title">包类型</string>
-    <string name="full_type">完整</string>
+    <string name="update_type_title">更新包类型</string>
+    <string name="full_type">完整包</string>
     <string name="xposed_type">仅Xposed</string>
     <string name="currentVersionTitle">已安装版本:</string>
     <string name="lastestVersionTitle">最新版本:</string>
@@ -352,7 +352,7 @@
     <string name="gesture_nav_left_swipe_up_percent">左侧上滑区域 (%)</string>
     <string name="gesture_nav_right_swipe_up_percent">右侧上滑区域 (%)</string>
     <string name="gesture_nav_two_finger_title">双指上滑动作</string>
-    <string name="gesture_nav_swipe_up_height">上滑动作最低触发高度</string>
+    <string name="gesture_nav_swipe_up_height">上滑动作触发最低高度</string>
     <string name="none">无</string>
     <string name="screenshot">截图</string>
     <string name="back">返回</string>

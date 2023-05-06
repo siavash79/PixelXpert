@@ -57,7 +57,7 @@
     <string name="album_art_blur_text">模糊值</string>
     <string name="album_art_grayscale">灰度值</string>
     <string name="shufflePin_title">打乱密码盘</string>
-    <string name="wakeup_to_security_title">在设备唤醒时要求安全输入</string>
+    <string name="wakeup_to_security_title">设备唤醒时显示密码输入界面</string>
     <string name="easy_unlock_title">简易解锁 (Pin/密码)</string>
     <string name="easy_unlock_summary">如果第一次未生效，请重试</string>
     <string name="charging_info_title">锁屏显示充电信息</string>

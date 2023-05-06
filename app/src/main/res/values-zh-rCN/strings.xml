@@ -31,10 +31,10 @@
     <string name="transparent_fingerprint_circle_on">指纹图标背景被隐藏</string>
     <string name="carrier_text_category">运营商文本</string>
     <string name="custom_text_category">自定义锁屏文本</string>
-    <string name="configure_carrier_text">配置运营商文本</string>
+    <string name="configure_carrier_text">设置运营商文本</string>
     <string name="carrier_text_mod_disabled">未修改运营商文本</string>
     <string name="carrier_text_mod_enabled">自定义运营商文本</string>
-    <string name="carrier_text_value">插入自定义文本</string>
+    <string name="carrier_text_value">自定义运营商文本</string>
     <string name="lockscreen_center_text_value">自定义时钟区文本</string>
     <string name="keyguard_dim_amount_title">锁屏壁纸亮度</string>
     <string name="keyguard_bottom_category">底部快捷方式</string>
@@ -63,27 +63,27 @@
     <string name="charging_info_title">锁屏显示充电信息</string>
     <string name="imperial_units_title">使用英制单位</string>
     <string name="double_tap_sleep_title">双击息屏</string>
-    <string name="battery_style_title">选择电池样式</string>
+    <string name="battery_style_title">选择电池图标样式</string>
     <string name="battery_show_percent_title">显示电量百分比</string>
     <string name="battery_style_category_title">电池样式</string>
-    <string name="battery_icon_size_title">电池图标样式</string>
+    <string name="battery_icon_size_title">电池图标大小</string>
     <string name="battery_hidden">隐藏</string>
     <string name="BIcon_Opacity_title">不透明度</string>
     <string name="sb_center_fine_tune">微调中心区域</string>
-    <string name="sb_multi_row_system_icons">多行系统图标 (需要增加状态栏高度)</string>
+    <string name="sb_multi_row_system_icons">多行状态图标 (需要增加状态栏高度)</string>
     <string name="sb_multi_row_notification_icons">多行通知图标 (需要增加状态栏高度)</string>
     <string name="sb_double_row_category">双行状态栏</string>
-    <string name="sb_icon_sort_mode">替换图标方式</string>
-    <string name="sort_clean">在网格中排序</string>
-    <string name="sort_tight">最大项目数</string>
+    <string name="sb_icon_sort_mode">排列图标方式</string>
+    <string name="sort_clean">在网格中排列</string>
+    <string name="sort_tight">最大图标数量</string>
     <string name="sb_notification_limit">最大通知图标数量 (留空以默认)</string>
     <string name="lte_4g_icon_title">LTE / 4G 图标</string>
     <string name="combined_signal_icon_title">合并信号图标</string>
     <string name="hide_roaming_title">隐藏漫游指示图标</string>
     <string name="caution_mobile_costs">注意 - 不知情下漫游会增加你的流量费用</string>
-    <string name="volte_icon_title">在可用时显示 VoLTE 图标</string>
+    <string name="volte_icon_title">可用时显示 VoLTE 图标</string>
     <string name="hide_privacychip_title">隐藏隐私指示器</string>
-    <string name="sb_vibration_switch_title">显示 震动 / 静音 图标</string>
+    <string name="sb_vibration_switch_title">显示 震动 图标</string>
     <string name="sbc_position_title">时钟位置</string>
     <string name="sbc_ampm_style">AM / PM 样式</string>
     <string name="sbc_show_secs">显示秒数</string>
@@ -100,12 +100,12 @@
     <string name="sbc_before_color">时间前文字</string>
     <string name="sbc_color">时间</string>
     <string name="sbc_after_color">时间后文字</string>
-    <string name="network_settings_pref">网络流量指示器设置</string>
+    <string name="network_settings_pref">流量指示器设置</string>
     <string name="ntsb_far_left">最左</string>
     <string name="ntsb_mid_left">中间偏左</string>
     <string name="ntsb_mid_right">中间偏右</string>
-    <string name="ntsb_category_title">流量指示</string>
-    <string name="ntsb_enabled_title">开启网络流量指示器</string>
+    <string name="ntsb_category_title">流量指示器</string>
+    <string name="ntsb_enabled_title">开启流量指示器</string>
     <string name="ntsb_position_title">指示器位置</string>
     <string name="ntsb_threshold_title">自动隐藏阈值</string>
     <string name="ntsb_threshold_summary">流量低于设定阈值时隐藏 (KB)</string>
@@ -122,9 +122,9 @@
     <string name="nt_mode_rxonly">仅下载</string>
     <string name="nt_mode_txonly">仅上传</string>
     <string name="statusbar_general_options">状态栏选项</string>
-    <string name="dual_tone_battery_title">双行电池图标</string>
+    <string name="dual_tone_battery_title">双色电池图标</string>
     <string name="dual_tone_battery_on_summary">开启 (仅当纵向图标时生效)</string>
-    <string name="unread_messages_title">通知计数</string>
+    <string name="unread_messages_title">显示未读通知数量</string>
     <string name="status_bar_height">状态高度</string>
     <string name="sb_padding_title">状态栏内边距</string>
     <string name="sb_padding_summary">最小 / 最大 等同于设备默认值</string>
@@ -136,16 +136,16 @@
     <string name="BB_colorful_title">着色</string>
     <string name="BB_Opacity_title">不透明度</string>
     <string name="BB_center_align_title">居中对齐</string>
-    <string name="BB_Thickness_title">粗细度</string>
+    <string name="BB_Thickness_title">粗细</string>
     <string name="BB_indicate_charging">充电显示</string>
     <string name="BB_indicate_fast_charging">快充显示</string>
-    <string name="BB_warning_level">警告值</string>
-    <string name="BB_warning_tip">均设为 0 以禁用基于电量的颜色</string>
+    <string name="BB_warning_level">电量警告</string>
+    <string name="BB_warning_tip">均设为 0 将禁用基于电量的颜色变化</string>
     <string name="BB_batteryCriticalColor">临界值颜色</string>
-    <string name="BB_batteryWarningColor">警告值颜色</string>
+    <string name="BB_batteryWarningColor">警告颜色</string>
     <string name="BB_batteryChargingColor">充电颜色</string>
     <string name="BB_batteryFastChargingColor">快充颜色</string>
-    <string name="BB_transit_colors">阴影颜色</string>
+    <string name="BB_transit_colors">颜色渐变</string>
 
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">下拉磁贴面板底部版本号</string>
@@ -223,11 +223,11 @@
     <string name="pm_allow_downgrade_title">允许应用降级</string>
     <string name="auto_off_five_minutes">在接下来的五分钟内保持开启</string>
     <string name="screenshot_sound_disable_title">关闭截图提示音</string>
-    <string name="clipboard_smart_actions_title">剪贴板的快捷选项</string>
+    <string name="clipboard_smart_actions_title">剪贴板快捷选项</string>
     <string name="allow_all_screen_rotations">强制解锁屏幕旋转</string>
     <string name="allow_all_screen_rotations_summary">将同时无视手动旋转悬浮钮</string>
     <string name="force_no_cutout">无视屏幕开孔</string>
-    <string name="clear_all_reposition_title">在最近任务中添加易访问的 清除所有 按钮</string>
+    <string name="clear_all_reposition_title">最近任务右侧添加 清除所有 按钮</string>
     <string name="volume_button_step_title">音量步进 (0至100%)</string>
     <string name="display_resolution_title">显示分辨率</string>
     <string name="brightness_range_title">显示亮度限制</string>
@@ -247,17 +247,17 @@
     <string name="expand_notifications_icons_title">添加展开 / 折叠所有按钮</string>
 
     <!-- Theming section related -->
-    <string name="heads_up_notification_duration">浮动通知持续时间</string>
+    <string name="heads_up_notification_duration">通知浮动持续时间</string>
     <string name="disable_overscroll">禁用过度滚动效果</string>
     <string name="overscroll_on_summary">重要:你必须在 LSPosed 作用域中勾选你要禁用的app</string>
     <string name="milliseconds">毫秒</string>
-    <string name="call_category">电话</string>
+    <string name="call_category">通话</string>
     <string name="vibrate_on_call_active_title">去电被接通时震动</string>
     <string name="vibrate_on_call_drop_title">结束通话时震动</string>
     <string name="vibration_type_notification">强度由系统通知振动设置定义</string>
     <string name="gsans_override_title">系统级强制使用 Google Sans</string>
     <string name="font_overlays_enable_title">启用自定义字体</string>
-    <string name="theme_customization_font_title">标题 /  正文字体</string>
+    <string name="theme_customization_font_title">标题 / 正文字体</string>
     <string name="icons_style_title">图标样式</string>
     <string name="icon_shapes_title">图标形状</string>
     <string name="signal_icons_theme_title">信号图标主题</string>
@@ -268,13 +268,13 @@
     <!-- Quick pull down -->
     <string name="caution_unstable">注意: 该功能对部分用户不稳定</string>
     <string name="power_menu_overlays_section">电源菜单主题</string>
-    <string name="power_menu_overlays_title">在电源菜单启用浅色/深色主题</string>
+    <string name="power_menu_overlays_title">在电源菜单启用浅色 / 深色主题</string>
     <string name="power_menu_overlays_summary_on">将同时系统级启用一些新图标</string>
     <string name="pull_down_left">左侧</string>
     <string name="pull_down_right">右侧</string>
 
     <!-- Battery styles -->
-    <string name="word_default">默认 (重启后生效)</string>
+    <string name="word_default">默认</string>
     <string name="battery_circle">圆形</string>
     <string name="battery_dashed_circle">虚线圆</string>
 
@@ -298,7 +298,7 @@
     <string name="fourg_lte_default">系统默认</string>
     <string name="fourg_lte_lte">使用 LTE 图标</string>
     <string name="fourg_lte_fourg">使用 4G 图标</string>
-    <string name="netstat_enable_title">收集网络统计数据</string>
+    <string name="netstat_enable_title">采集网络统计数据</string>
     <string name="network_interval_custom_text_title">刷新间隔</string>
     <string name="minutes_word">分钟</string>
     <string name="incompatible_alert_title">不兼容</string>
@@ -320,7 +320,7 @@
     <string name="netstat_caution_no">也许以后</string>
     <string name="monitoring_category_title">监控选项</string>
     <string name="netstat_header">网络统计设置</string>
-     <string name="string_formatter_manual_body">除了普通文字,动态变量也可以被使用:\n\n$G\&lt;格式\&gt; : 地理位置日期,依照格式,关于格式文档,请搜索`Java Date Format`\n例如: $GMMM 显示为: 1月 (或其他)\n\n$P&lt;格式&gt; : 波斯日期,依照格式\n例如: $Pyyyy 显示为: 1401\n\n为了启用下方的网络统计信息, 你需要在 其他 菜单的 网络统计设置 里开启 启用统计\n\n$Nrx : 今日总下载流量\n$Ntx: 今日总上传流量\n$Nall : 今日总流量\n$Nssid : WiFi SSID(如果可用)\n\n如果你替换 $N 为 $Nc 将显示移动流量的数据(比如 $Ncrx 为移动流量的下载; 除了 $Nssid)\n\n例子:\n` $GEEEE流量用量: $Ncall` 将显示:\n`星期二流量用量: 2GB`</string>
+    <string name="string_formatter_manual_body">除了普通文字,动态变量也可以被使用:\n\n$G\&lt;格式\&gt; : 地理位置日期,依照格式,关于格式文档,请搜索`Java Date Format`\n例如: $GMMM 显示为: 1月 (或其他)\n\n$P&lt;格式&gt; : 波斯日期,依照格式\n例如: $Pyyyy 显示为: 1401\n\n为了启用下方的网络统计信息, 你需要在 其他 菜单的 网络统计设置 里开启 启用统计\n\n$Nrx : 今日总下载流量\n$Ntx: 今日总上传流量\n$Nall : 今日总流量\n$Nssid : WiFi SSID(如果可用)\n\n如果你替换 $N 为 $Nc 将显示移动流量的数据(比如 $Ncrx 为移动流量的下载; 除了 $Nssid)\n\n例子:\n` $GEEEE流量用量: $Ncall` 将显示:\n`星期二流量用量: 2GB`</string>
     <string name="update_channel_name">更新</string>
     <string name="update_notification_title">已下载更新</string>
     <string name="update_notification_text">点此安装</string>
@@ -333,7 +333,7 @@
     <string name="xposed_type">仅Xposed</string>
     <string name="currentVersionTitle">已安装版本:</string>
     <string name="lastestVersionTitle">最新版本:</string>
-    <string name="root_not_here">"未获得 ROOT 权限! "</string>
+    <string name="root_not_here">未获得 ROOT 权限!</string>
     <string name="reboot_pending">稍后重启</string>
     <string name="reboot_word">现在重启</string>
     <string name="update_checking">正在检查...</string>
@@ -360,7 +360,7 @@
     <string name="toggle_notification">启用通知栏面板</string>
     <string name="toggle_one_handed">启用单手模式</string>
     <string name="insecure_screenshot">无限制截图</string>
-    <string name="screenshot_chord_insecure">音量减+电源键截图不受限</string>
+    <string name="screenshot_chord_insecure">音量减 + 电源键截图不受限</string>
     <string name="sleep">睡眠</string>
 
     <!-- QS Rows overlays -->

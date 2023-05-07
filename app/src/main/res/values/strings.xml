@@ -352,7 +352,7 @@
     <string name="incompatible_alert_title">Incompatible</string>
     <string name="incompatible_alert_body">Your current ROM is not the direct target of this module. You may continue to use it, but some (or all) options might not work as intended\n\nPlease do not report bugs</string>
     <string name="incompatible_alert_ok_btn">I understand</string>
-    
+
     <!-- Menu Items -->
     <string name="menu_settings_title">Import/Export</string>
     <string name="menu_reset_defaults">Reset all settings</string>

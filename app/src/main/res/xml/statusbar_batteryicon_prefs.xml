@@ -61,13 +61,6 @@
         android:summaryOn="@string/general_on"
         android:title="@string/BB_colorful_title" />
 
-    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-        android:defaultValue="false"
-        android:key="BIconTransitColors"
-        android:summaryOff="@string/general_off"
-        android:summaryOn="@string/general_on"
-        android:title="@string/BB_transit_colors" />
-
     <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
         android:defaultValue="100"
         android:key="BIconOpacity"
@@ -83,6 +76,13 @@
         app:tickInterval="1"
         app:valueCount="2"
         app:defaultValue="15,40" />
+
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
+        android:defaultValue="false"
+        android:key="BIconTransitColors"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/BB_transit_colors" />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         android:defaultValue="-65536"

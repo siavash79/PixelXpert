@@ -39,7 +39,7 @@ public class HiddenBatteryDrawable extends BatteryDrawable {
 	}
 
 	@Override
-	public void setPowerSaveEnabled(boolean isPowerSaving) {
+	public void setPowerSaving(boolean isPowerSaving) {
 
 	}
 

@@ -204,7 +204,7 @@ public class BatteryStyleManager extends XposedModPack {
 						BatteryDrawable drawable = (BatteryDrawable) getAdditionalInstanceField(view, "mBatteryDrawable");
 						drawable.setBatteryLevel(level);
 						drawable.setCharging(charging);
-						drawable.setPowerSaveEnabled(powerSave);
+						drawable.setPowerSaving(powerSave);
 						scale(view);
 					});
 				}

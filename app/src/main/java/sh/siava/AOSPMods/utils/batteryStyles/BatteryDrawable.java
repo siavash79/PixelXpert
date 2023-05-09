@@ -20,7 +20,7 @@ public abstract class BatteryDrawable extends Drawable {
 
 	public abstract void setColors(int fgColor, int bgColor, int singleToneColor);
 
-	public abstract void setPowerSaveEnabled(boolean isPowerSaving);
+	public abstract void setPowerSaving(boolean isPowerSaving);
 
 	public abstract void refresh();
 

@@ -1,3 +1,7 @@
+**canary-243**  
+- A14: Fixed battery icons  
+- Added Hindi translation  
+  
 **canary-242**  
 - 13QPR3: QS quick pulldown now responds to swipe down only  
 - 13QPR3: Fixed showing security input on device wake  

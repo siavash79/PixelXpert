@@ -21,7 +21,7 @@
 	<string name="misc_header">Miscelaneo</string>
 	<string name="qs_panel_category_title">Ajustes rápidos</string>
 	<string name="theme_customization_category">Temas</string>
-	<string name="pm_header">Gestor de paquetes</strin>
+	<string name="pm_header">Gestor de paquetes</string>
 	
 	<!--Lock screen related-->
 	<string name="ls_general_options">Opciones de pantalla de bloqueo</string>

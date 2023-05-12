@@ -4,8 +4,6 @@ import static android.graphics.Color.WHITE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -15,10 +13,11 @@ import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.Shader;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
+
+import sh.siava.AOSPMods.utils.SettingsLibUtils;
 
 public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	private static final int INTRINSIC_DIMENSION = 45;
@@ -39,11 +38,7 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	@SuppressLint("DiscouragedApi")
 	public CircleFilledBatteryDrawable(Context context) {
 
-		Resources res = context.getResources();
-		//noinspection SpellCheckingInspection
-		mPowerSaveColor = getColorStateListDefaultColor(
-				context,
-				res.getIdentifier("batterymeter_plus_color", "color", context.getPackageName()));
+		mPowerSaveColor = SettingsLibUtils.getColorAttrDefaultColor(android.R.attr.colorError, context);
 	}
 
 	public CircleFilledBatteryDrawable(Context context, int frameColor) {
@@ -229,11 +224,5 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	@Override
 	public void refresh() {
 		invalidateSelf();
-	}
-
-	@ColorInt
-	private static int getColorStateListDefaultColor(Context context, int resId)
-	{
-		return context.getResources().getColorStateList(resId, context.getTheme()).getDefaultColor();
 	}
 }

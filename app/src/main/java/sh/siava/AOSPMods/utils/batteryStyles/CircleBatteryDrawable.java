@@ -22,11 +22,13 @@ import android.graphics.RectF;
 import android.graphics.SweepGradient;
 import android.graphics.Typeface;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 import androidx.core.graphics.PathParser;
+
+import sh.siava.AOSPMods.utils.AlphaRefreshedPaint;
+import sh.siava.AOSPMods.utils.SettingsLibUtils;
 
 public class CircleBatteryDrawable extends BatteryDrawable
 {
@@ -37,6 +39,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	private static final int CIRCLE_DIAMETER = 45; //relative to dash effect size. Size doesn't matter as finally it gets scaled by parent
 	private static final PathEffect DASH_PATH_EFFECT = new DashPathEffect(new float[]{3f, 2f}, 0f);
 	private final Context mContext;
+	private final int mPowerSaveColor;
 	private boolean mIsFastCharging = false;
 	private boolean mIsCharging = false;
 	private boolean mIsPowerSaving = false;
@@ -45,23 +48,20 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	private int mDiameter;
 	private final RectF mFrame = new RectF();
 	private int mFGColor = WHITE;
-	private final Paint mTextPaint = new Paint(ANTI_ALIAS_FLAG);
-	private final Paint mFramePaint = new Paint(ANTI_ALIAS_FLAG);
-	private final Paint mBatteryPaint = new Paint(ANTI_ALIAS_FLAG);
-	private final Paint mWarningTextPaint = new Paint(ANTI_ALIAS_FLAG);
-	private final Paint mBoltPaint = new Paint(ANTI_ALIAS_FLAG);
-	private final Paint mPowerSavePaint = new Paint(ANTI_ALIAS_FLAG);
+	private final Paint mTextPaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
+	private final Paint mFramePaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
+	private final Paint mBatteryPaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
+	private final Paint mWarningTextPaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
+	private final Paint mBoltPaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
 	private int[] mShadeColors;
 	private float[] mShadeLevels;
 	private long mLastUpdate;
-	private int mAlpha = 255;
 	private Path mBoltPath;
 
 	@SuppressLint("DiscouragedApi")
 	public CircleBatteryDrawable(Context context, int frameColor)
 	{
 		mContext = context;
-		Resources res = mContext.getResources();
 
 		mFramePaint.setDither(true);
 		mFramePaint.setStyle(STROKE);
@@ -75,13 +75,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mBatteryPaint.setDither(true);
 		mBatteryPaint.setStyle(STROKE);
 
-		int mPowerSaveColor = getColorStateListDefaultColor(mContext, res.getIdentifier(
-				"batterymeter_plus_color",
-				"color",
-				mContext.getPackageName()));
-
-		mPowerSavePaint.setColor(mPowerSaveColor);
-		mPowerSavePaint.setStyle(STROKE);
+		mPowerSaveColor = SettingsLibUtils.getColorAttrDefaultColor(android.R.attr.colorError, context);
 
 		setColors(frameColor, frameColor, frameColor);
 
@@ -98,7 +92,6 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	public void setMeterStyle(int batteryStyle) {
 		mFramePaint.setPathEffect(batteryStyle == BATTERY_STYLE_DOTTED_CIRCLE ? DASH_PATH_EFFECT : null);
 		mBatteryPaint.setPathEffect(batteryStyle == BATTERY_STYLE_DOTTED_CIRCLE ? DASH_PATH_EFFECT : null);
-		mPowerSavePaint.setPathEffect(batteryStyle == BATTERY_STYLE_DOTTED_CIRCLE ? DASH_PATH_EFFECT : null);
 
 		postInvalidate();
 	}
@@ -146,7 +139,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mFramePaint.setColor(bgColor);
 		mTextPaint.setColor(mFGColor);
 
-		setAlpha(mAlpha); //invalidate included here - alpha shall be re-applied after color change
+		postInvalidate();
 	}
 
 	@Override
@@ -200,8 +193,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 			refreshShadeColors();
 		}
 
-		if(!mIsPowerSaving)
-			setLevelBasedColors(mBatteryPaint, mFrame.centerX(), mFrame.centerY());
+		setLevelBasedColors(mBatteryPaint, mFrame.centerX(), mFrame.centerY());
 
 		if(mIsCharging)
 		{
@@ -212,10 +204,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 		if(mBatteryLevel > 0)
 		{
-			canvas.drawArc(mFrame, 270f, 3.6f * mBatteryLevel, false,
-					(!mIsCharging && mIsPowerSaving)
-						? mPowerSavePaint
-						: mBatteryPaint);
+			canvas.drawArc(mFrame, 270f, 3.6f * mBatteryLevel, false, mBatteryPaint);
 		}
 
 		if(!mIsCharging && mBatteryLevel < 100 && mShowPercentage)
@@ -233,7 +222,11 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	{
 		paint.setShader(null);
 
-		if(mIsFastCharging && showFastCharging && mBatteryLevel < 100)
+		if(mIsPowerSaving)
+		{
+			paint.setColor(mPowerSaveColor);
+			return;
+		} else if(mIsFastCharging && showFastCharging && mBatteryLevel < 100)
 		{
 			paint.setColor(fastChargingColor);
 			return;
@@ -274,19 +267,15 @@ public class CircleBatteryDrawable extends BatteryDrawable
 			shader.setLocalMatrix(shaderMatrix);
 			paint.setShader(shader);
 		}
-
-		mBatteryPaint.setAlpha(mAlpha);
 	}
 
 	@Override
 	public void setAlpha(int alpha) {
-		mAlpha = alpha;
-
 		mFramePaint.setAlpha(Math.round(70 * alpha / 255f));
 
 		mBoltPaint.setAlpha(alpha);
-		mPowerSavePaint.setAlpha(alpha);
 		mTextPaint.setAlpha(alpha);
+		mBatteryPaint.setAlpha(alpha);
 
 		postInvalidate();
 	}
@@ -303,7 +292,6 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		float strokeWidth = mDiameter / 6.5f;
 		mFramePaint.setStrokeWidth(strokeWidth);
 		mBatteryPaint.setStrokeWidth(strokeWidth);
-		mPowerSavePaint.setStrokeWidth(strokeWidth);
 
 		mTextPaint.setTextSize(mDiameter * 0.52f);
 
@@ -366,10 +354,5 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	public int getIntrinsicWidth()
 	{
 		return CIRCLE_DIAMETER;
-	}
-
-	@ColorInt
-	private static int getColorStateListDefaultColor(Context context, int resId){
-		return context.getResources().getColorStateList(resId, context.getTheme()).getDefaultColor();
 	}
 }

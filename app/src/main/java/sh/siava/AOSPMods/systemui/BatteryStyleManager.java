@@ -35,6 +35,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
 import sh.siava.AOSPMods.XposedModPack;
+import sh.siava.AOSPMods.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.utils.batteryStyles.BatteryBarView;
 import sh.siava.AOSPMods.utils.batteryStyles.BatteryDrawable;
 import sh.siava.AOSPMods.utils.batteryStyles.CircleBatteryDrawable;
@@ -151,6 +152,8 @@ public class BatteryStyleManager extends XposedModPack {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
 		if (!lpparam.packageName.equals(listenPackage)) return;
+
+		SettingsLibUtils.init(lpparam.classLoader); //used battery styles
 
 		findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
 			@Override

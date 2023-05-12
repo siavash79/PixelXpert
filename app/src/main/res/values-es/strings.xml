@@ -43,6 +43,8 @@
 	<string name="keyguard_left_shortcut">Mostrar atajo en el lado izquierdo</string>
 	<string name="LSleftShortcutTitle">Acceso directo izquierda</string>
 	<string name="LSrightShortcutTitle">Acceso directo derecho</string>
+	<string name="LSleftLongClickShortcutTitle">Acceso directo izquierda (pulsación larga)</string>
+	<string name="LSrightLongClickShortcutTitle">Acceso directo derecho (pulsación larga)</string>
 	<string name="camera_shortcut">Cámara</string>
 	<string name="assistant_shortcut">Asistente</string>
 	<string name="torch_shortcut">Linterna</string>

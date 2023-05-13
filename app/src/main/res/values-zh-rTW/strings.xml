@@ -1,6 +1,7 @@
 <resources>
     <!--General strings-->
     <string name="app_themed_icon_title">啟用替代的 AOSP Mods 主題應用圖示</string>
+    <string name="xposed_desc">基於 Android 12+ AOSP ROM 的自定義功能</string>
     <string name="error_not_activated">請確認該模組是否在 LSPosed 上被啟用。</string>
     <string name="hide_default">隱藏 (預設)</string>
     <string name="percent_of_default_size">% 預設</string>
@@ -10,16 +11,17 @@
     <string name="general_off">已關閉</string>
     <string name="sysui_restart_needed">重啟系統介面以生效</string>
     <string name="restart_needed">重新啟動系統以生效</string>
-
-    <!--Category titles-->
     <string name="more_area">顯示區域更大</string>
     <string name="less_area">顯示區域更小</string>
+
+    <!--Category titles-->
     <string name="lockscreen_header_title">鎖定畫面</string>
     <string name="statusbar_header">狀態列</string>
     <string name="nav_header">導航欄</string>
     <string name="misc_header">雜項</string>
     <string name="qs_panel_category_title">方塊面板</string>
     <string name="theme_customization_category">主題化</string>
+    <string name="pm_header">包管理器</string>
     <string name="hotspot_header">行動熱點</string>
 
     <!-- Hotspot settings-->
@@ -29,7 +31,6 @@
 
     <!--Lock screen related-->
     <string name="ls_general_options">自定鎖定畫面</string>
-    <string name="pm_header">包管理器</string>
     <string name="hide_avatar_title">隱藏使用者頭像(多使用者模式)</string>
 	<string name="transparent_fingerprint_circle">隱藏螢幕下指紋背景圓</string>
     <string name="transparent_fingerprint_circle_off">指紋圖示背景被啟用</string>

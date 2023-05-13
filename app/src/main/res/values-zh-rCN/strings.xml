@@ -22,6 +22,12 @@
     <string name="qs_panel_category_title">磁贴面板</string>
     <string name="theme_customization_category">主题</string>
     <string name="pm_header">包管理器</string>
+    <string name="hotspot_header">热点</string>
+
+    <!-- Hotspot settings-->
+    <string name="hotspot_hide_ssid_title">隐藏 SSID</string>
+    <string name="hotspot_inactivity_timeout_title">不活跃关闭时间</string>
+    <string name="hotspot_max_client_title">最大连接数</string>
 
     <!--Lock screen related-->
     <string name="ls_general_options">锁屏选项</string>

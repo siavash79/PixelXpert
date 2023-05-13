@@ -1,7 +1,7 @@
 <resources>
     <!--General strings-->
     <string name="app_themed_icon_title">启用替代的 AOSP Mods 主题应用图标</string>
-    <string name="xposed_desc">基于 Android 12+ AOSP 的 ROM 的自定义功能</string>
+    <string name="xposed_desc">基于 Android 12+ AOSP ROM 的自定义功能</string>
     <string name="error_not_activated">请确认该模块是否在 LSPosed 管理器上被激活</string>
     <string name="hide_default">隐藏 (默认)</string>
     <string name="percent_of_default_size">% 默认</string>

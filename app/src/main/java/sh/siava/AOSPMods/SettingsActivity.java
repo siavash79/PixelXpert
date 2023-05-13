@@ -722,7 +722,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		@Override
 		public void onResume() {
 			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.pm_header));
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.hotspot_header));
 		}
 	}
 

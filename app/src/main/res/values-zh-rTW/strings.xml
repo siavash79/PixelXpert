@@ -20,6 +20,12 @@
     <string name="misc_header">雜項</string>
     <string name="qs_panel_category_title">方塊面板</string>
     <string name="theme_customization_category">主題化</string>
+    <string name="hotspot_header">行動熱點</string>
+
+    <!-- Hotspot settings-->
+    <string name="hotspot_hide_ssid_title">隱藏 SSID</string>
+    <string name="hotspot_inactivity_timeout_title">自動關閉時間</string>
+    <string name="hotspot_max_client_title">最大接入數</string>
 
     <!--Lock screen related-->
     <string name="ls_general_options">自定鎖定畫面</string>

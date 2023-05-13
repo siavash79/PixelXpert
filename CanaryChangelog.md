@@ -1,3 +1,7 @@
+**canary-244**  
+- Added portable hotspot mods  
+- A14 beta 2: fixed battery icons  
+  
 **canary-243**  
 - A14: Fixed battery icons  
 - Added Hindi translation  

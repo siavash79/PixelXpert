@@ -326,7 +326,6 @@
     <string name="reboot_notification_text">更改將在重啟裝置後生效</string>
     <string name="update_flavor_title">更新通道</string>
     <string name="stable_flavor">穩定版</string>
-    <string name="update_type_title">包型別</string>
     <string name="update_type_title">更新包型別</string>
     <string name="full_type">完整包</string>
     <string name="currentVersionTitle">已安裝版本:</string>

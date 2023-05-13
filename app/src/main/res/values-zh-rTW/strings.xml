@@ -32,7 +32,7 @@
     <!--Lock screen related-->
     <string name="ls_general_options">自定鎖定畫面</string>
     <string name="hide_avatar_title">隱藏使用者頭像(多使用者模式)</string>
-	<string name="transparent_fingerprint_circle">隱藏螢幕下指紋背景圓</string>
+    <string name="transparent_fingerprint_circle">隱藏螢幕下指紋背景圓</string>
     <string name="transparent_fingerprint_circle_off">指紋圖示背景被啟用</string>
     <string name="transparent_fingerprint_circle_on">指紋圖示背景被隱藏</string>
     <string name="carrier_text_category">電信商名稱</string>
@@ -287,8 +287,8 @@
     <!-- Clock position -->
     <string name="battery_circle_filled">實心圓</string>
     <string name="clock_default">左側 (預設)</string>
-	<string name="clock_center">中間</string>
-	<string name="clock_right">右側</string>
+    <string name="clock_center">中間</string>
+    <string name="clock_right">右側</string>
 
     <!-- AM/PM style -->
     <string name="am_pm_normal">100%</string>
@@ -304,12 +304,20 @@
     <string name="fourg_lte_default">系統預設</string>
     <string name="fourg_lte_lte">使用 LTE 圖示</string>
     <string name="fourg_lte_fourg">使用 4G 圖示</string>
+
+    <!-- QS Rows overlays -->
+
+    <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">採集網路統計資料</string>
     <string name="network_interval_custom_text_title">重新整理間隔</string>
     <string name="minutes_word">分鐘</string>
+
+    <!-- Incompatibility Alert -->
     <string name="incompatible_alert_title">不相容</string>
     <string name="incompatible_alert_body">你當前的 ROM 不是該模組的直接目標,你可以繼續使用它,但一些(或所有)功能可能不會預期工作</string>
     <string name="incompatible_alert_ok_btn">我已知曉</string>
+
+    <!-- Menu Items -->
     <string name="menu_settings_title">匯入/匯出</string>
     <string name="menu_reset_defaults">重置所有設定</string>
     <string name="menu_import_settings">從檔案中匯入設定</string>
@@ -320,12 +328,15 @@
     <string name="menu_restart">重啟</string>
     <string name="menu_restartSysUI">重啟 SystemUI</string>
     <string name="menu_updates">App 更新</string>
+
     <string name="nestat_caution_title">注意!</string>
     <string name="nestat_caution_text">您的網路統計資料將永久重置,確認?</string>
     <string name="netstat_caution_yes">繼續</string>
     <string name="netstat_caution_no">也許以後</string>
+
     <string name="monitoring_category_title">監控選項</string>
     <string name="netstat_header">網路統計設定</string>
+
     <string name="string_formatter_manual_body">除了普通文字,動態變數也可以被使用:\n\n$G\&lt;格式\&gt; : 地理位置日期,依照格式,關於格式文件,請搜尋`Java Date Format`\n例如: $GMMM 顯示為: 1月 (或其他)\n\n$P&lt;格式&gt; : 波斯日期,依照格式\n例如: $Pyyyy 顯示為: 1401\n\n為了啟用下方的網路統計資訊, 你需要在 其他 選單的 網路統計設定 裡開啟 啟用統計\n\n$Nrx : 今日總下載流量\n$Ntx: 今日總上傳流量\n$Nall : 今日總流量\n$Nssid : WiFi SSID(如果可用)\n\n如果你替換 $N 為 $Nc 將顯示移動流量的資料(比如 $Ncrx 為移動流量的下載; 除了 $Nssid)\n\n例子:\n` $GEEEE流量用量: $Ncall` 將顯示:\n`星期二流量用量: 2GB`</string>    <string name="update_channel_name">更新</string>
     <string name="update_notification_title">已下載更新</string>
     <string name="update_notification_text">點此安裝</string>
@@ -335,9 +346,10 @@
     <string name="stable_flavor">穩定版</string>
     <string name="update_type_title">更新包型別</string>
     <string name="full_type">完整包</string>
+    <string name="xposed_type">僅Xposed</string>
     <string name="currentVersionTitle">已安裝版本:</string>
     <string name="lastestVersionTitle">最新版本:</string>
-    <string name="root_not_here">"未獲得 ROOT 授權!"</string>
+    <string name="root_not_here">未獲得 ROOT 授權!</string>
     <string name="reboot_pending">稍後重啟</string>
     <string name="reboot_word">現在重啟</string>
     <string name="update_checking">正在檢查...</string>
@@ -345,10 +357,12 @@
     <string name="update_word">更新</string>
     <string name="switch_branches">更換分支</string>
     <string name="reinstall_word">重新安裝</string>
+
     <string name="own_prefs_header">AOSP Mods 設定</string>
     <string name="language_title">語言</string>
     <string name="camera_manager_master_title">啟用手電筒Mods (如果你的裝置不支援請禁用)</string>
     <string name="toggle_dark_apply">(切換深色模式以應用)</string>
+
     <string name="gesture_nav_extra_cat">更多導航欄手勢</string>
     <string name="gesture_nav_long_swipe_fc_title">上滑至螢幕頂部以殺死前臺APP</string>
     <string name="gesture_nav_left_swipe_up_title">左側導航欄上滑動作</string>
@@ -357,6 +371,7 @@
     <string name="gesture_nav_right_swipe_up_percent">右側上滑區域 (%)</string>
     <string name="gesture_nav_two_finger_title">雙指上滑動作</string>
     <string name="gesture_nav_swipe_up_height">上滑動作觸發最低高度</string>
+
     <string name="none">無</string>
     <string name="screenshot">截圖</string>
     <string name="back">返回</string>
@@ -366,7 +381,5 @@
     <string name="insecure_screenshot">無限制截圖</string>
     <string name="screenshot_chord_insecure">音量減 + 電源鍵強制截圖</string>
     <string name="sleep">睡眠</string>
-
-    <!-- QS Rows overlays -->
 
 </resources>

@@ -370,7 +370,7 @@
     <string name="own_prefs_header">AOSP Mods 设置</string>
     <string name="language_title">语言</string>
     <string name="camera_manager_master_title">启用手电筒Mods (如果你的设备不支持请禁用)</string>
-    <string name="toggle_dark_apply">(切换深色模式以生效)</string>
+    <string name="toggle_dark_apply">(切换深色模式以应用)</string>
 
     <string name="gesture_nav_extra_cat">更多导航栏手势</string>
     <string name="gesture_nav_long_swipe_fc_title">上滑至屏幕顶部杀死前台APP</string>
@@ -388,7 +388,7 @@
     <string name="toggle_notification">打开通知面板</string>
     <string name="toggle_one_handed">打开单手模式</string>
     <string name="insecure_screenshot">无限制截图</string>
-    <string name="screenshot_chord_insecure">音量减 + 电源键截图不受限</string>
+    <string name="screenshot_chord_insecure">音量减 + 电源键强制截图</string>
     <string name="sleep">睡眠</string>
 
 </resources>

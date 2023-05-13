@@ -14,6 +14,8 @@ import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;
 
+import java.util.Arrays;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.AOSPMods;
@@ -32,9 +34,7 @@ public class QSQuickPullDown extends XposedModPack {
 	private static boolean oneFingerPulldownEnabled = false;
 	private static float statusbarPortion = 0.25f; // now set to 25% of the screen. it can be anything between 0 to 100%
 	private Object NotificationPanelViewController;
-
-	GestureDetector gestureDetector;
-
+	private String QSExpandMethodName;
 	public QSQuickPullDown(Context context) {
 		super(context);
 	}
@@ -46,57 +46,6 @@ public class QSQuickPullDown extends XposedModPack {
 		statusbarPortion = Xprefs.getInt("QSPulldownPercent", 25) / 100f;
 		pullDownSide = Integer.parseInt(Xprefs.getString("QSPulldownSide", "1"));
 	}
-
-	GestureDetector.OnGestureListener listener = new GestureDetector.OnGestureListener() {
-		@Override
-		public boolean onDown(@NonNull MotionEvent e) {
-			return false;
-		}
-
-		@Override
-		public void onShowPress(@NonNull MotionEvent e) {
-
-		}
-
-		@Override
-		public boolean onSingleTapUp(@NonNull MotionEvent e) {
-			return false;
-		}
-
-		@Override
-		public boolean onScroll(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
-			return false;
-		}
-
-		@Override
-		public void onLongPress(@NonNull MotionEvent e) {}
-
-		@Override
-		public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
-			if(velocityY > 500)
-			{
-				int mBarState = (int) getObjectField(NotificationPanelViewController, "mBarState");
-				if (mBarState != STATUSBAR_MODE_SHADE) return false;
-
-				int w = (int) callMethod(
-						getObjectField(NotificationPanelViewController, "mView"),
-						"getMeasuredWidth");
-
-				float x = e1.getX();
-				float region = w * statusbarPortion;
-
-				boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
-						? w - region < x
-						: x < region;
-
-				if (pullDownApproved) {
-					callMethod(NotificationPanelViewController, "expandWithQs");
-					return true;
-				}
-			}
-			return false;
-		}
-	};
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
@@ -172,10 +121,64 @@ public class QSQuickPullDown extends XposedModPack {
 					});
 				}
 			}).size() == 0)
-			{ //13 QPR3
-				gestureDetector = new GestureDetector(mContext, listener);
+			{ //13 QPR3 - 14
+				GestureDetector gestureDetector = new GestureDetector(mContext, new GestureDetector.OnGestureListener() {
+					@Override
+					public boolean onDown(@NonNull MotionEvent e) {
+						return false;
+					}
+
+					@Override
+					public void onShowPress(@NonNull MotionEvent e) {
+
+					}
+
+					@Override
+					public boolean onSingleTapUp(@NonNull MotionEvent e) {
+						return false;
+					}
+
+					@Override
+					public boolean onScroll(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
+						return false;
+					}
+
+					@Override
+					public void onLongPress(@NonNull MotionEvent e) {}
+
+					@Override
+					public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
+						if(velocityY > 500)
+						{
+							int mBarState = (int) getObjectField(NotificationPanelViewController, "mBarState");
+							if (mBarState != STATUSBAR_MODE_SHADE) return false;
+
+							int w = (int) callMethod(
+									getObjectField(NotificationPanelViewController, "mView"),
+									"getMeasuredWidth");
+
+							float x = e1.getX();
+							float region = w * statusbarPortion;
+
+							boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
+									? w - region < x
+									: x < region;
+
+							if (pullDownApproved) {
+								callMethod(NotificationPanelViewController, QSExpandMethodName);
+								return true;
+							}
+						}
+						return false;
+					}
+				});
 
 				Class<?> PhoneStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarViewController", lpparam.classLoader);
+
+				QSExpandMethodName = Arrays.stream(NotificationPanelViewControllerClass.getMethods())
+						.anyMatch(m -> m.getName().equals("expandToQs"))
+						? "expandToQs" //A14
+						: "expandWithQs"; //A13
 
 				hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
 					@Override

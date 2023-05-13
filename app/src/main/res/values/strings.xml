@@ -24,6 +24,12 @@
     <string name="qs_panel_category_title">Quick Settings Panel</string>
     <string name="theme_customization_category">Theming</string>
     <string name="pm_header">Package Manager</string>
+    <string name="hotspot_header">Portable Hotspot</string>
+
+    <!-- Hotspot settings-->
+    <string name="hotspot_hide_ssid_title">Hide SSID</string>
+    <string name="hotspot_inactivity_timeout_title">Inactivity timeout</string>
+    <string name="hotspot_max_client_title">Maximum clients</string>
 
     <!--Lock screen related-->
     <string name="ls_general_options">Lock screen options</string>

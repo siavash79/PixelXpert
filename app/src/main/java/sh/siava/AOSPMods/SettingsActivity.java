@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods;
 
+import static java.lang.Math.round;
+
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -41,6 +43,7 @@ import com.google.android.material.slider.LabelFormatter;
 import com.topjohnwu.superuser.Shell;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -672,6 +675,57 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			requireActivity().setTitle(requireActivity().getResources().getString(R.string.pm_header));
 		}
 	}
+
+	public static class HotSpotFragment extends PreferenceFragmentCompat {
+		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
+
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+			getPreferenceManager().setStorageDeviceProtected();
+			setPreferencesFromResource(R.xml.hotspot_prefs, rootKey);
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			prefs.registerOnSharedPreferenceChangeListener(listener);
+			updateVisibility(prefs);
+
+		}
+
+		@SuppressLint("DefaultLocale")
+		private void updateVisibility(SharedPreferences prefs) {
+			long timeout = 0;
+			try
+			{
+				timeout = (long) (RangeSliderPreference.getValues(prefs, "hotSpotTimeoutSecs", 0).get(0) * 1L);
+			}
+			catch (Throwable ignored){}
+
+			int clients = 0;
+			try
+			{
+				clients = round(RangeSliderPreference.getValues(prefs, "hotSpotMaxClients", 0).get(0));
+			}
+			catch (Throwable ignored){}
+			Duration d = Duration.ofSeconds(timeout);
+
+			findPreference("hotSpotTimeoutSecs")
+					.setSummary(
+							timeout > 0
+									? String.format("%d %s", timeout/60, getString(R.string.minutes_word))
+									: getString(R.string.word_default));
+
+			findPreference("hotSpotMaxClients")
+					.setSummary(
+							clients > 0
+									? String.valueOf(clients)
+									: getString(R.string.word_default));
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.pm_header));
+		}
+	}
+
 
 	@SuppressWarnings("ConstantConditions")
 	public static class SBCFragment extends PreferenceFragmentCompat {

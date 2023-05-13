@@ -45,6 +45,13 @@
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$HotSpotFragment"
+		app:icon="@drawable/ic_settings_wifi_hotspot"
+		app:key="own_header"
+		app:title="@string/hotspot_header" />
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+		android:layout="@layout/custom_preference"
 		app:fragment="sh.siava.AOSPMods.SettingsActivity$PackageManagerFragment"
 		app:icon="@drawable/ic_settings_package_manager"
 		app:key="pm_header"

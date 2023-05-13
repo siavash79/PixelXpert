@@ -17,6 +17,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.allApps.OverScrollDisabler;
 import sh.siava.AOSPMods.android.BrightnessRange;
+import sh.siava.AOSPMods.android.HotSpotController;
 import sh.siava.AOSPMods.android.PackageManager;
 import sh.siava.AOSPMods.android.PhoneWindowManager;
 import sh.siava.AOSPMods.android.ScreenOffKeys;
@@ -109,6 +110,7 @@ public class AOSPMods implements IXposedHookLoadPackage {
 		modPacks.add(PackageManager.class);
 		modPacks.add(AOSPModsIconUpdater.class);
 		modPacks.add(VolumeTile.class);
+		modPacks.add(HotSpotController.class);
 		//endregion
 	}
 

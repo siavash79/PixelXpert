@@ -22,7 +22,7 @@
     <string name="qs_panel_category_title">方塊面板</string>
     <string name="theme_customization_category">主題化</string>
     <string name="pm_header">包管理器</string>
-    <string name="hotspot_header">行動熱點</string>
+    <string name="hotspot_header">無線基地台</string>
 
     <!-- Hotspot settings-->
     <string name="hotspot_hide_ssid_title">隱藏 SSID</string>

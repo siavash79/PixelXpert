@@ -691,32 +691,35 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 		@SuppressLint("DefaultLocale")
 		private void updateVisibility(SharedPreferences prefs) {
-			long timeout = 0;
-			try
-			{
-				timeout = (long) (RangeSliderPreference.getValues(prefs, "hotSpotTimeoutSecs", 0).get(0) * 1L);
+			try {
+				long timeout = 0;
+				try
+				{
+					timeout = (long) (RangeSliderPreference.getValues(prefs, "hotSpotTimeoutSecs", 0).get(0) * 1L);
+				}
+				catch (Throwable ignored){}
+
+				int clients = 0;
+				try
+				{
+					clients = round(RangeSliderPreference.getValues(prefs, "hotSpotMaxClients", 0).get(0));
+				}
+				catch (Throwable ignored){}
+				Duration d = Duration.ofSeconds(timeout);
+
+				findPreference("hotSpotTimeoutSecs")
+						.setSummary(
+								timeout > 0
+										? String.format("%d %s", timeout/60, getString(R.string.minutes_word))
+										: getString(R.string.word_default));
+
+				findPreference("hotSpotMaxClients")
+						.setSummary(
+								clients > 0
+										? String.valueOf(clients)
+										: getString(R.string.word_default));
 			}
 			catch (Throwable ignored){}
-
-			int clients = 0;
-			try
-			{
-				clients = round(RangeSliderPreference.getValues(prefs, "hotSpotMaxClients", 0).get(0));
-			}
-			catch (Throwable ignored){}
-			Duration d = Duration.ofSeconds(timeout);
-
-			findPreference("hotSpotTimeoutSecs")
-					.setSummary(
-							timeout > 0
-									? String.format("%d %s", timeout/60, getString(R.string.minutes_word))
-									: getString(R.string.word_default));
-
-			findPreference("hotSpotMaxClients")
-					.setSummary(
-							clients > 0
-									? String.valueOf(clients)
-									: getString(R.string.word_default));
 		}
 
 		@Override

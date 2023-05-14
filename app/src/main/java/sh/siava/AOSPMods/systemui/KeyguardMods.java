@@ -101,6 +101,7 @@ public class KeyguardMods extends XposedModPack {
 	private static String rightShortcutClick = "";
 	private static String leftShortcutLongClick = "";
 	private static String rightShortcutLongClick = "";
+	private int cameraResID = 0;
 	//endregion
 
 	//region hide user avatar
@@ -479,22 +480,34 @@ public class KeyguardMods extends XposedModPack {
 	private void convertShortcut(ImageView button, String type) {
 		if(type.length() == 0) return;
 
+		Resources res = mContext.getResources();
+
+		if(cameraResID == 0)
+		{
+			cameraResID = res.getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName()); //13
+
+			if(cameraResID == 0)
+			{
+				cameraResID = res.getIdentifier("ic_camera", "drawable", mContext.getPackageName()); //14
+			}
+		}
+
 		Drawable drawable = null;
 		switch (type) {
 			case SHORTCUT_TV_REMOTE:
 				drawable = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_remote, mContext.getTheme());
 				break;
 			case SHORTCUT_CAMERA:
-				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_camera_alt_24dp", "drawable", mContext.getPackageName()), mContext.getTheme());
+				drawable = ResourcesCompat.getDrawable(res, cameraResID, mContext.getTheme());
 				break;
 			case SHORTCUT_ASSISTANT:
-				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("ic_mic_26dp", "drawable", mContext.getPackageName()), mContext.getTheme());
+				drawable = ResourcesCompat.getDrawable(res, res.getIdentifier("ic_mic_26dp", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
 			case SHORTCUT_TORCH:
-				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("@android:drawable/ic_qs_flashlight", "drawable", mContext.getPackageName()), mContext.getTheme());
+				drawable = ResourcesCompat.getDrawable(res, res.getIdentifier("@android:drawable/ic_qs_flashlight", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
 			case SHORTCUT_ZEN:
-				drawable = ResourcesCompat.getDrawable(mContext.getResources(), mContext.getResources().getIdentifier("@android:drawable/ic_zen_24dp", "drawable", mContext.getPackageName()), mContext.getTheme());
+				drawable = ResourcesCompat.getDrawable(res, res.getIdentifier("@android:drawable/ic_zen_24dp", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
 		}
 

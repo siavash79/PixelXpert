@@ -490,9 +490,15 @@ public class StatusbarMods extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				hookAllMethods(getObjectField(param.thisObject, "notifyChanges").getClass(), "run", new XC_MethodHook() {
 					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
 						if(HidePrivacyChip)
-							param.setResult(null);
+						{
+							try { //It's sometimes a readonly collection
+								((List<?>) getObjectField(param.thisObject, "privacyList"))
+										.clear();
+							}
+							catch (Throwable ignored){}
+						}
 					}
 				});
 			}

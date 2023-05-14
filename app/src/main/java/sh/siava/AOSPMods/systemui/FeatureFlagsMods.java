@@ -2,7 +2,6 @@ package sh.siava.AOSPMods.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
-import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.XPrefs.Xprefs;
 
@@ -27,7 +26,6 @@ public class FeatureFlagsMods extends XposedModPack {
 
 	public static int SBLTEIcon = SIGNAL_DEFAULT;
 
-	private static boolean HideRoamingState = false;
 	private static boolean EnableClipboardSmartActions = false;
 
 	public FeatureFlagsMods(Context context) {
@@ -37,7 +35,6 @@ public class FeatureFlagsMods extends XposedModPack {
 	@Override
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
-		HideRoamingState = Xprefs.getBoolean("HideRoamingState", false);
 
 		SBLTEIcon = Integer.parseInt(Xprefs.getString(
 				"LTE4GIconMod",
@@ -50,7 +47,6 @@ public class FeatureFlagsMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		Class<?> MobileSignalController = findClass("com.android.systemui.statusbar.connectivity.MobileSignalController", lpparam.classLoader);
 		Class<?> DeviceConfigClass = findClass("android.provider.DeviceConfig", lpparam.classLoader);
 
 		hookAllMethods(DeviceConfigClass, "getBoolean", new XC_MethodHook() {
@@ -59,20 +55,6 @@ public class FeatureFlagsMods extends XposedModPack {
 				if(param.args[0].equals(NAMESPACE_SYSTEMUI) && param.args[1].equals(CLIPBOARD_OVERLAY_SHOW_ACTIONS))
 				{
 					param.setResult(EnableClipboardSmartActions);
-				}
-			}
-		});
-
-		hookAllMethods(MobileSignalController, "notifyListeners", new XC_MethodHook() {
-			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(HideRoamingState) {
-					setObjectField(
-							getObjectField(
-									param.thisObject,
-									"mCurrentState"),
-							"roaming",
-							false);
 				}
 			}
 		});

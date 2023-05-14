@@ -187,6 +187,7 @@ public class StatusbarMods extends XposedModPack {
 	private boolean mWifiVisble = false;
 	private Object StatusBarSignalPolicy;
 	private static boolean CombineSignalIcons = false;
+	private static boolean HideRoamingState = false;
 	//endregion
 
 	@SuppressLint("DiscouragedApi")
@@ -207,6 +208,8 @@ public class StatusbarMods extends XposedModPack {
 		if (Xprefs == null) return;
 
 		HidePrivacyChip = Xprefs.getBoolean("HidePrivacyChip", false);
+
+		HideRoamingState = Xprefs.getBoolean("HideRoamingState", false);
 
 		CombineSignalIcons = Xprefs.getBoolean("combinedSignalEnabled", false);
 		wifiVisibleChanged();
@@ -841,6 +844,14 @@ public class StatusbarMods extends XposedModPack {
 						}
 					}
 				});
+
+		hookAllMethods(ServiceState.class, "getRoaming", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(HideRoamingState)
+					param.setResult(false);
+			}
+		});
 	}
 
 	private void updateStatusbarHeight() {

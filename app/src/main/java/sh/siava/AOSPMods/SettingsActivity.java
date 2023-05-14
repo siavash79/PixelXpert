@@ -263,6 +263,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		Intent fileIntent = new Intent();
 		fileIntent.setAction(export ? Intent.ACTION_CREATE_DOCUMENT : Intent.ACTION_GET_CONTENT);
 		fileIntent.setType("*/*");
+		fileIntent.putExtra(Intent.EXTRA_TITLE, "AOSPMods_Config" + ".bin");
 		startActivityForResult(fileIntent, export ? REQUEST_EXPORT : REQUEST_IMPORT);
 	}
 

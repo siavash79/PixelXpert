@@ -1,3 +1,9 @@
+**canary-245**  
+- A14: Fixed camera lockscreen shortcut  
+- A14: fixed hiding roaming indicators  
+- A14: Fixed hiding the privacy indicators  
+- A14: Fixed quick QS pulldown  
+  
 **canary-244**  
 - Added portable hotspot mods  
 - A14 beta 2: fixed battery icons  

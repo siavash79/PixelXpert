@@ -162,6 +162,7 @@
 	<string name="qs_flashlight_level_global_title">Aplicar nivel de linterna globalmente</string>
 	<string name="qs_qr_tile_inactive_title">Invertir el color del mosaico QR-Scan</string>
 	<string name="qs_tile_vertical_title">Mover iconos de mosaico a la parte superior</string>
+	<string name="qs_tile_qty_title">Configuración de recuento de mosaicos en configuración rápida</string>
 	<string name="qs_leveled_flashlight_summary">Requiere hardware compatible</string>
 	<string name="light_qs_title">Panel de ajustes rápidos claro</string>
 	<string name="light_dualtone_qs_title">Activar tono dual en ajustes rápidos</string>
@@ -170,6 +171,10 @@
 	<string name="qs_pulldown_side_title">Lado por donde deslizar</string>
 	<string name="qs_pulldown_category">Deslizar rápido para abajo en ajustes rápidos</string>
 	<string name="qs_haptic_switch_title">Vibrar al tocar los ajustes rápidos</string>
+	<string name="vibration_type_touch">Intensidad definida por la configuración de vibración táctil del sistema</string>
+    <string name="qs_tile_qty_portrait">En orientación vertical</string>
+    <string name="qs_tile_qty_landscape">En orientación apaisada</string>
+	
 	<string name="qs_rows_number">Número de líneas</string>
 	<string name="qs_cols_number">Número de columnas QS</string>
 	<string name="qqs_tiles_number">Número máximo de mosaicos en QS (máx. 2 filas)</string>

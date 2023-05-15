@@ -334,5 +334,9 @@
     <string name="incompatible_alert_body">Este módulo não foi desenhado para ser utilizado com a ROM presente no dispositivo. Pode utilizar o módulo mas algumas, ou todas, as funcionalidades poderão não funcionar como pretendido.\n\nAssim, e por isso, por favor, não reporte bugs.</string>
     <string name="xposed_desc">Funcionalidades personalizadas para ROMs Android 12+ baseadas no AOSP</string>
     <string name="app_themed_icon_title">Ativar ícone temático alternativo da app AOSP Mods</string>
-	<string name="ls_general_options">Opções do ecrã de bloqueio</string>
+	<string name="hotspot_header">PA Móvel</string>
+    <string name="hotspot_hide_ssid_title">Esconder SSID</string>
+    <string name="hotspot_inactivity_timeout_title">Tempo limite de inatividade</string>
+    <string name="hotspot_max_client_title">Nr. máximo de clientes</string>
+    <string name="ls_general_options">Opções do ecrã de bloqueio</string>
 </resources>

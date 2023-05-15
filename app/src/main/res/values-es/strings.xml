@@ -22,6 +22,12 @@
 	<string name="qs_panel_category_title">Ajustes rápidos</string>
 	<string name="theme_customization_category">Temas</string>
 	<string name="pm_header">Gestor de paquetes</string>
+	<string name="hotspot_header">Punto de acceso portátil</string>
+
+    <!-- Hotspot settings-->
+    <string name="hotspot_hide_ssid_title">Ocultar SSID</string>
+    <string name="hotspot_inactivity_timeout_title">Tiempo de inactividad</string>
+    <string name="hotspot_max_client_title">Clientes máximos</string>
 	
 	<!--Lock screen related-->
 	<string name="ls_general_options">Opciones de pantalla de bloqueo</string>

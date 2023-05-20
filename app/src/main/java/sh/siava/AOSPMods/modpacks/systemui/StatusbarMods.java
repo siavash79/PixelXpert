@@ -182,6 +182,19 @@ public class StatusbarMods extends XposedModPack {
 	private final serverStateCallback volteCallback = new serverStateCallback();
 	//endregion
 
+	//region vowifi
+	private static final int VOWIFI_AVAILABLE = 2;
+	private static final int VOWIFI_NOT_AVAILABLE = 1;
+	private static final int VOWIFI_UNKNOWN = -1;
+
+	private static boolean VowifiIconEnabled = false;
+	private final Executor vowifiExec = Runnable::run;
+
+	private Object vowifiStatusbarIconHolder;
+	private int lastVowifiState = VOWIFI_UNKNOWN;
+	private final serverStateCallback vowifiCallback = new serverStateCallback();
+	//endregion
+
 	//region combined signal icons
 	private Object NetworkController;
 	private boolean mWifiVisble = false;
@@ -400,6 +413,10 @@ public class StatusbarMods extends XposedModPack {
 		VolteIconEnabled = XPrefs.Xprefs.getBoolean("VolteIconEnabled", false);
 		//endregion
 
+		//region vowifi
+		VowifiIconEnabled = Xprefs.getBoolean("VowifiIconEnabled", false);
+		//endregion
+
 		if (Key.length > 0) {
 			switch (Key[0]) {
 				case "statusbarPaddings":
@@ -410,6 +427,12 @@ public class StatusbarMods extends XposedModPack {
 						initVolte();
 					else
 						removeVolte();
+					break;
+				case "VowifiIconEnabled":
+					if (VowifiIconEnabled)
+						initVowifi();
+					else
+						removeVowifi();
 					break;
 			}
 		}
@@ -776,6 +799,11 @@ public class StatusbarMods extends XposedModPack {
 							initVolte();
 						}
 
+						if (VowifiIconEnabled) //in case we got the config but context wasn't ready yet
+						{
+							initVowifi();
+						}
+
 						if (networkOnSBEnabled) {
 							networkTrafficSB = NetworkTraffic.getInstance(mContext, true);
 							placeNTSB();
@@ -988,6 +1016,7 @@ public class StatusbarMods extends XposedModPack {
 		@Override
 		public void onServiceStateChanged(@NonNull ServiceState serviceState) {
 			updateVolte(false);
+			updateVowifi(false);
 		}
 	}
 
@@ -1015,6 +1044,62 @@ public class StatusbarMods extends XposedModPack {
 		mStatusBar.post(() -> {
 			try {
 				callMethod(mStatusBarIconController, "removeAllIconsForSlot", "volte");
+			} catch (Throwable ignored) {}
+		});
+	}
+	//endregion
+
+	//region vowifi related
+	private void initVowifi() {
+		try {
+			if (!telephonyCallbackRegistered) {
+				Icon vowifiIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_vowifi);
+				//noinspection JavaReflectionMemberAccess
+				Object vowifiStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, vowifiIcon, 0, 0, "vowifi");
+				vowifiStatusbarIconHolder = StatusBarIconHolderClass.newInstance();
+				setObjectField(vowifiStatusbarIconHolder, "mIcon", vowifiStatusbarIcon);
+				SystemUtils.TelephonyManager().registerTelephonyCallback(vowifiExec, vowifiCallback);
+				telephonyCallbackRegistered = true;
+			}
+		} catch (Exception ignored) {
+		}
+
+		updateVowifi(true);
+	}
+
+	private void removeVowifi() {
+		try {
+			SystemUtils.TelephonyManager().unregisterTelephonyCallback(vowifiCallback);
+			telephonyCallbackRegistered = false;
+		} catch (Exception ignored) {
+		}
+		removeVowifiIcon();
+	}
+
+	private void updateVowifi(boolean force) {
+		int newVowifiState = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isWifiCallingAvailable") ? VOWIFI_AVAILABLE : VOWIFI_NOT_AVAILABLE;
+		if (lastVowifiState != newVowifiState || force) {
+			lastVowifiState = newVowifiState;
+			switch (newVowifiState) {
+				case VOWIFI_AVAILABLE:
+					mStatusBar.post(() -> {
+						try {
+							callMethod(mStatusBarIconController, "setIcon", "vowifi", vowifiStatusbarIconHolder);
+						} catch (Exception ignored) {}
+					});
+					break;
+				case VOWIFI_NOT_AVAILABLE:
+					removeVowifiIcon();
+					break;
+			}
+		}
+	}
+
+	private void removeVowifiIcon() {
+		if (mStatusBar == null) return; //probably it's too soon to have a statusbar
+		mStatusBar.post(() -> {
+			try {
+				callMethod(mStatusBarIconController, "removeAllIconsForSlot", "vowifi");
 			} catch (Throwable ignored) {}
 		});
 	}

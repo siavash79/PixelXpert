@@ -50,7 +50,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 import sh.siava.AOSPMods.utils.PrefManager;
-import sh.siava.AOSPMods.utils.SystemUtils;
+import sh.siava.AOSPMods.utils.AppUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
@@ -222,7 +222,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			onBackPressed();
 		} else if (itemID == R.id.menu_clearPrefs) {
 			PrefManager.clearPrefs(prefs);
-			SystemUtils.RestartSystemUI();
+			AppUtils.RestartSystemUI();
 		} else if (itemID == R.id.menu_exportPrefs) {
 			importExportSettings(true);
 		} else if (itemID == R.id.menu_importPrefs) {
@@ -230,9 +230,9 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		} else if (itemID == R.id.menu_netstat_clear) {
 			clearNetstatClick();
 		} else if (itemID == R.id.menu_restart) {
-			SystemUtils.Restart();
+			AppUtils.Restart();
 		} else if (itemID == R.id.menu_restartSysUI) {
-			SystemUtils.RestartSystemUI();
+			AppUtils.RestartSystemUI();
 		} else if (itemID == R.id.menu_Updates) {
 			startActivity(new Intent(this, UpdateActivity.class));
 		}
@@ -278,7 +278,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			case REQUEST_IMPORT:
 				try {
 					PrefManager.importPath(prefs, getContentResolver().openInputStream(data.getData()));
-					SystemUtils.RestartSystemUI();
+					AppUtils.RestartSystemUI();
 				} catch (Exception ignored) {
 				}
 				break;

@@ -1,6 +1,6 @@
 package sh.siava.AOSPMods;
 
-import static sh.siava.AOSPMods.utils.Helpers.installDoubleZip;
+import static sh.siava.AOSPMods.utils.AppUtils.installDoubleZip;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +22,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 import sh.siava.AOSPMods.databinding.ActivityUpdateBinding;
-import sh.siava.AOSPMods.utils.ModuleFolderOperations;
+import sh.siava.AOSPMods.modpacks.utils.ModuleFolderOperations;
 
 public class UpdateActivity extends AppCompatActivity {
 

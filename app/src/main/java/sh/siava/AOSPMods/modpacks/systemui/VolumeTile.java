@@ -82,7 +82,7 @@ public class VolumeTile extends XposedModPack {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				Object state = param.args[0];
-				if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
+				if (TARGET_SPEC.equals(getObjectField(state, "spec"))) {
 					SystemUtils.VolumeChangeListener listener = (SystemUtils.VolumeChangeListener) getAdditionalInstanceField(param.thisObject, "volumeChangeListener");
 
 					if(listener == null)
@@ -142,7 +142,7 @@ public class VolumeTile extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) {
 				Object state = param.args[0];
-				if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
+				if (TARGET_SPEC.equals(getObjectField(state, "spec"))) {
 					lastState = state;
 					LinearLayout tileView = (LinearLayout) param.thisObject;
 

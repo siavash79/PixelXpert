@@ -169,10 +169,6 @@ public class StatusbarMods extends XposedModPack {
 	private static final String VO_LTE_SLOT = "volte";
 	private static final String VO_WIFI_SLOT = "vowifi";
 
-	private static final int VO_DATA_AVAILABLE = 2;
-	private static final int VO_DATA_NOT_AVAILABLE = 1;
-	private static final int VO_DATA_UNKNOWN = -1;
-
 	private static boolean VolteIconEnabled = false;
 	private final Executor voDataExec = Runnable::run;
 
@@ -181,14 +177,13 @@ public class StatusbarMods extends XposedModPack {
 	private Class<?> StatusBarIconHolderClass;
 	private Object volteStatusbarIconHolder;
 	private boolean telephonyCallbackRegistered = false;
-	private int lastVolteState = VO_DATA_UNKNOWN;
+	private boolean lastVolteAvailable = false;
 	private final serverStateCallback voDataCallback = new serverStateCallback();
 	//endregion
 
 	private static boolean VowifiIconEnabled = false;
 	private Object vowifiStatusbarIconHolder;
-	private int lastVowifiState = VO_DATA_UNKNOWN;
-	private final serverStateCallback vowifiCallback = new serverStateCallback();
+	private boolean lastVowifiAvailable = false;
 	//endregion
 
 	//region combined signal icons
@@ -1017,38 +1012,37 @@ public class StatusbarMods extends XposedModPack {
 	}
 
 	private void updateVoData(boolean force) {
-		int newVowifiState = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isWifiCallingAvailable") ? VO_DATA_AVAILABLE : VO_DATA_NOT_AVAILABLE;
-		int newVolteState = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isVolteAvailable") ? VO_DATA_AVAILABLE : VO_DATA_NOT_AVAILABLE;
+		boolean voWifiAvailable = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isWifiCallingAvailable");
+		boolean volteStateAvailable = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isVolteAvailable");
 
-		if (lastVolteState != newVolteState || force) {
-			lastVolteState = newVolteState;
-			switch (newVolteState) {
-				case VO_DATA_AVAILABLE:
-					mStatusBar.post(() -> {
-						try {
-							callMethod(mStatusBarIconController, "setIcon", VO_LTE_SLOT, volteStatusbarIconHolder);
-						} catch (Exception ignored) {}
-					});
-					break;
-				case VO_DATA_NOT_AVAILABLE:
-					removeSBIconSlot(VO_LTE_SLOT);
-					break;
+		if (lastVolteAvailable != volteStateAvailable || force) {
+			lastVolteAvailable = volteStateAvailable;
+			if (volteStateAvailable) {
+				mStatusBar.post(() -> {
+					try {
+						callMethod(mStatusBarIconController, "setIcon", VO_LTE_SLOT, volteStatusbarIconHolder);
+					} catch (Exception ignored) {
+					}
+				});
+			}
+			else {
+				removeSBIconSlot(VO_LTE_SLOT);
 			}
 		}
 
-		if (lastVowifiState != newVowifiState || force) {
-			lastVowifiState = newVowifiState;
-			switch (newVowifiState) {
-				case VO_DATA_AVAILABLE:
-					mStatusBar.post(() -> {
-						try {
-							callMethod(mStatusBarIconController, "setIcon", VO_WIFI_SLOT, vowifiStatusbarIconHolder);
-						} catch (Exception ignored) {}
-					});
-					break;
-				case VO_DATA_NOT_AVAILABLE:
-					removeSBIconSlot(VO_WIFI_SLOT);
-					break;
+		if (lastVowifiAvailable != voWifiAvailable || force) {
+			lastVowifiAvailable = voWifiAvailable;
+			if (voWifiAvailable) {
+				mStatusBar.post(() -> {
+					try {
+						callMethod(mStatusBarIconController, "setIcon", VO_WIFI_SLOT, vowifiStatusbarIconHolder);
+					} catch (Exception ignored) {
+					}
+				});
+			}
+			else
+			{
+				removeSBIconSlot(VO_WIFI_SLOT);
 			}
 		}
 	}

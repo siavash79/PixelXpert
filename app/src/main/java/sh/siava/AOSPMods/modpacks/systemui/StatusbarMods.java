@@ -17,6 +17,7 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
@@ -65,7 +66,6 @@ import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
-import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.NetworkTraffic;
 import sh.siava.AOSPMods.modpacks.utils.NotificationIconContainerOverride;
@@ -165,33 +165,29 @@ public class StatusbarMods extends XposedModPack {
 
 	//endregion
 
-	//region volte
-	private static final int VOLTE_AVAILABLE = 2;
-	private static final int VOLTE_NOT_AVAILABLE = 1;
-	private static final int VOLTE_UNKNOWN = -1;
+	//region vo_data
+	private static final String VO_LTE_SLOT = "volte";
+	private static final String VO_WIFI_SLOT = "vowifi";
+
+	private static final int VO_DATA_AVAILABLE = 2;
+	private static final int VO_DATA_NOT_AVAILABLE = 1;
+	private static final int VO_DATA_UNKNOWN = -1;
 
 	private static boolean VolteIconEnabled = false;
-	private final Executor volteExec = Runnable::run;
+	private final Executor voDataExec = Runnable::run;
 
 	private Object mStatusBarIconController;
 	private Class<?> StatusBarIconClass;
 	private Class<?> StatusBarIconHolderClass;
 	private Object volteStatusbarIconHolder;
 	private boolean telephonyCallbackRegistered = false;
-	private int lastVolteState = VOLTE_UNKNOWN;
-	private final serverStateCallback volteCallback = new serverStateCallback();
+	private int lastVolteState = VO_DATA_UNKNOWN;
+	private final serverStateCallback voDataCallback = new serverStateCallback();
 	//endregion
 
-	//region vowifi
-	private static final int VOWIFI_AVAILABLE = 2;
-	private static final int VOWIFI_NOT_AVAILABLE = 1;
-	private static final int VOWIFI_UNKNOWN = -1;
-
 	private static boolean VowifiIconEnabled = false;
-	private final Executor vowifiExec = Runnable::run;
-
 	private Object vowifiStatusbarIconHolder;
-	private int lastVowifiState = VOWIFI_UNKNOWN;
+	private int lastVowifiState = VO_DATA_UNKNOWN;
 	private final serverStateCallback vowifiCallback = new serverStateCallback();
 	//endregion
 
@@ -218,36 +214,36 @@ public class StatusbarMods extends XposedModPack {
 	}
 
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
+		if (Xprefs == null) return;
 
-		HidePrivacyChip = XPrefs.Xprefs.getBoolean("HidePrivacyChip", false);
+		HidePrivacyChip = Xprefs.getBoolean("HidePrivacyChip", false);
 
-		HideRoamingState = XPrefs.Xprefs.getBoolean("HideRoamingState", false);
+		HideRoamingState = Xprefs.getBoolean("HideRoamingState", false);
 
-		CombineSignalIcons = XPrefs.Xprefs.getBoolean("combinedSignalEnabled", false);
+		CombineSignalIcons = Xprefs.getBoolean("combinedSignalEnabled", false);
 		wifiVisibleChanged();
 
 		if (Key.length > 0 && Key[0].equals("notificationAreaMultiRow")) { //WHY we check the old value? because if prefs is empty it will fill it up and count an unwanted change
-			boolean newnotificationAreaMultiRow = XPrefs.Xprefs.getBoolean("notificationAreaMultiRow", false);
+			boolean newnotificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
 			if (newnotificationAreaMultiRow != notificationAreaMultiRow) {
 				SystemUtils.RestartSystemUI();
 			}
 		}
-		notificationAreaMultiRow = XPrefs.Xprefs.getBoolean("notificationAreaMultiRow", false);
+		notificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
 
 		try {
-			NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(XPrefs.Xprefs.getString("NotificationIconLimit", "").trim());
+			NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(Xprefs.getString("NotificationIconLimit", "").trim());
 		} catch (Throwable ignored) {
 			NotificationIconContainerOverride.MAX_STATIC_ICONS = 4;
 		}
 
 		try {
-			NotificationIconContainerOverride.MAX_ICONS_ON_AOD = Integer.parseInt(XPrefs.Xprefs.getString("NotificationAODIconLimit", "").trim());
+			NotificationIconContainerOverride.MAX_ICONS_ON_AOD = Integer.parseInt(Xprefs.getString("NotificationAODIconLimit", "").trim());
 		} catch (Throwable ignored) {
 			NotificationIconContainerOverride.MAX_ICONS_ON_AOD = 3;
 		}
 
-		List<Float> paddings = RangeSliderPreference.getValues(XPrefs.Xprefs, "statusbarPaddings", 0);
+		List<Float> paddings = RangeSliderPreference.getValues(Xprefs, "statusbarPaddings", 0);
 
 		if (paddings.size() > 1) {
 			SBPaddingStart = paddings.get(0);
@@ -255,27 +251,27 @@ public class StatusbarMods extends XposedModPack {
 		}
 
 		//region BatteryBar Settings
-		BBarEnabled = XPrefs.Xprefs.getBoolean("BBarEnabled", false);
-		BBarColorful = XPrefs.Xprefs.getBoolean("BBarColorful", false);
-		BBOnlyWhileCharging = XPrefs.Xprefs.getBoolean("BBOnlyWhileCharging", false);
-		BBOnBottom = XPrefs.Xprefs.getBoolean("BBOnBottom", false);
-		BBSetCentered = XPrefs.Xprefs.getBoolean("BBSetCentered", false);
-		BBOpacity = XPrefs.Xprefs.getInt("BBOpacity", 100);
-		BBarHeight = XPrefs.Xprefs.getInt("BBarHeight", 50);
-		BBarTransitColors = XPrefs.Xprefs.getBoolean("BBarTransitColors", false);
+		BBarEnabled = Xprefs.getBoolean("BBarEnabled", false);
+		BBarColorful = Xprefs.getBoolean("BBarColorful", false);
+		BBOnlyWhileCharging = Xprefs.getBoolean("BBOnlyWhileCharging", false);
+		BBOnBottom = Xprefs.getBoolean("BBOnBottom", false);
+		BBSetCentered = Xprefs.getBoolean("BBSetCentered", false);
+		BBOpacity = Xprefs.getInt("BBOpacity", 100);
+		BBarHeight = Xprefs.getInt("BBarHeight", 50);
+		BBarTransitColors = Xprefs.getBoolean("BBarTransitColors", false);
 
-		batteryLevels = RangeSliderPreference.getValues(XPrefs.Xprefs, "batteryWarningRange", 0);
+		batteryLevels = RangeSliderPreference.getValues(Xprefs, "batteryWarningRange", 0);
 
 		batteryColors = new int[]{
-				XPrefs.Xprefs.getInt("batteryCriticalColor", Color.RED),
-				XPrefs.Xprefs.getInt("batteryWarningColor", Color.YELLOW)};
+				Xprefs.getInt("batteryCriticalColor", Color.RED),
+				Xprefs.getInt("batteryWarningColor", Color.YELLOW)};
 
 
-		indicateFastCharging = XPrefs.Xprefs.getBoolean("indicateFastCharging", false);
-		indicateCharging = XPrefs.Xprefs.getBoolean("indicateCharging", true);
+		indicateFastCharging = Xprefs.getBoolean("indicateFastCharging", false);
+		indicateCharging = Xprefs.getBoolean("indicateCharging", true);
 
-		chargingColor = XPrefs.Xprefs.getInt("batteryChargingColor", Color.GREEN);
-		fastChargingColor = XPrefs.Xprefs.getInt("batteryFastChargingColor", Color.BLUE);
+		chargingColor = Xprefs.getInt("batteryChargingColor", Color.GREEN);
+		fastChargingColor = Xprefs.getInt("batteryFastChargingColor", Color.BLUE);
 
 		if (BBarEnabled) {
 			placeBatteryBar();
@@ -288,28 +284,28 @@ public class StatusbarMods extends XposedModPack {
 
 
 		//region network Traffic settings
-		networkOnSBEnabled = XPrefs.Xprefs.getBoolean("networkOnSBEnabled", false);
-		networkOnQSEnabled = XPrefs.Xprefs.getBoolean("networkOnQSEnabled", false);
-		String networkTrafficModeStr = XPrefs.Xprefs.getString("networkTrafficMode", "0");
+		networkOnSBEnabled = Xprefs.getBoolean("networkOnSBEnabled", false);
+		networkOnQSEnabled = Xprefs.getBoolean("networkOnQSEnabled", false);
+		String networkTrafficModeStr = Xprefs.getString("networkTrafficMode", "0");
 		int networkTrafficMode = Integer.parseInt(networkTrafficModeStr);
 
-		boolean networkTrafficRXTop = XPrefs.Xprefs.getBoolean("networkTrafficRXTop", true);
-		int networkTrafficDLColor = XPrefs.Xprefs.getInt("networkTrafficDLColor", Color.GREEN);
-		int networkTrafficULColor = XPrefs.Xprefs.getInt("networkTrafficULColor", Color.RED);
-		int networkTrafficOpacity = XPrefs.Xprefs.getInt("networkTrafficOpacity", 100);
-		int networkTrafficInterval = XPrefs.Xprefs.getInt("networkTrafficInterval", 1);
-		boolean networkTrafficColorful = XPrefs.Xprefs.getBoolean("networkTrafficColorful", false);
-		boolean networkTrafficShowIcons = XPrefs.Xprefs.getBoolean("networkTrafficShowIcons", true);
+		boolean networkTrafficRXTop = Xprefs.getBoolean("networkTrafficRXTop", true);
+		int networkTrafficDLColor = Xprefs.getInt("networkTrafficDLColor", Color.GREEN);
+		int networkTrafficULColor = Xprefs.getInt("networkTrafficULColor", Color.RED);
+		int networkTrafficOpacity = Xprefs.getInt("networkTrafficOpacity", 100);
+		int networkTrafficInterval = Xprefs.getInt("networkTrafficInterval", 1);
+		boolean networkTrafficColorful = Xprefs.getBoolean("networkTrafficColorful", false);
+		boolean networkTrafficShowIcons = Xprefs.getBoolean("networkTrafficShowIcons", true);
 
 		if (networkOnSBEnabled || networkOnQSEnabled) {
-			networkTrafficPosition = Integer.parseInt(XPrefs.Xprefs.getString("networkTrafficPosition", String.valueOf(POSITION_RIGHT)));
+			networkTrafficPosition = Integer.parseInt(Xprefs.getString("networkTrafficPosition", String.valueOf(POSITION_RIGHT)));
 			if(networkTrafficPosition == POSITION_LEFT_EXTRA_LEVEL)
 			{
-				XPrefs.Xprefs.edit().putString("networkTrafficPosition", String.valueOf(POSITION_LEFT)).apply();
+				Xprefs.edit().putString("networkTrafficPosition", String.valueOf(POSITION_LEFT)).apply();
 				networkTrafficPosition = POSITION_LEFT;
 			}
 
-			String thresholdText = XPrefs.Xprefs.getString("networkTrafficThreshold", "10");
+			String thresholdText = Xprefs.getString("networkTrafficThreshold", "10");
 
 			int networkTrafficThreshold;
 			try {
@@ -334,7 +330,7 @@ public class StatusbarMods extends XposedModPack {
 		//endregion network settings
 
 		//region vibration settings
-		boolean newshowVibrationIcon = XPrefs.Xprefs.getBoolean("SBshowVibrationIcon", false);
+		boolean newshowVibrationIcon = Xprefs.getBoolean("SBshowVibrationIcon", false);
 		if (newshowVibrationIcon != showVibrationIcon) {
 			showVibrationIcon = newshowVibrationIcon;
 			setShowVibrationIcon();
@@ -344,25 +340,25 @@ public class StatusbarMods extends XposedModPack {
 
 		//region clock settings
 
-		clockPosition = Integer.parseInt(XPrefs.Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
+		clockPosition = Integer.parseInt(Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
 		if(clockPosition == POSITION_LEFT_EXTRA_LEVEL)
 		{
-			XPrefs.Xprefs.edit().putString("SBClockLoc", String.valueOf(POSITION_LEFT)).apply();
+			Xprefs.edit().putString("SBClockLoc", String.valueOf(POSITION_LEFT)).apply();
 			clockPosition = POSITION_LEFT;
 		}
 
-		mShowSeconds = XPrefs.Xprefs.getBoolean("SBCShowSeconds", false);
-		mAmPmStyle = Integer.parseInt(XPrefs.Xprefs.getString("SBCAmPmStyle", String.valueOf(AM_PM_STYLE_GONE)));
+		mShowSeconds = Xprefs.getBoolean("SBCShowSeconds", false);
+		mAmPmStyle = Integer.parseInt(Xprefs.getString("SBCAmPmStyle", String.valueOf(AM_PM_STYLE_GONE)));
 
-		mStringFormatBefore = XPrefs.Xprefs.getString("DateFormatBeforeSBC", "");
-		mStringFormatAfter = XPrefs.Xprefs.getString("DateFormatAfterSBC", "");
-		mBeforeSmall = XPrefs.Xprefs.getBoolean("BeforeSBCSmall", true);
-		mAfterSmall = XPrefs.Xprefs.getBoolean("AfterSBCSmall", true);
+		mStringFormatBefore = Xprefs.getString("DateFormatBeforeSBC", "");
+		mStringFormatAfter = Xprefs.getString("DateFormatAfterSBC", "");
+		mBeforeSmall = Xprefs.getBoolean("BeforeSBCSmall", true);
+		mAfterSmall = Xprefs.getBoolean("AfterSBCSmall", true);
 
-		if (XPrefs.Xprefs.getBoolean("SBCClockColorful", false)) {
-			mClockColor = XPrefs.Xprefs.getInt("SBCClockColor", Color.WHITE);
-			mBeforeClockColor = XPrefs.Xprefs.getInt("SBCBeforeClockColor", Color.WHITE);
-			mAfterClockColor = XPrefs.Xprefs.getInt("SBCAfterClockColor", Color.WHITE);
+		if (Xprefs.getBoolean("SBCClockColorful", false)) {
+			mClockColor = Xprefs.getInt("SBCClockColor", Color.WHITE);
+			mBeforeClockColor = Xprefs.getInt("SBCBeforeClockColor", Color.WHITE);
+			mAfterClockColor = Xprefs.getInt("SBCAfterClockColor", Color.WHITE);
 		} else {
 			mClockColor
 					= mBeforeClockColor
@@ -372,7 +368,7 @@ public class StatusbarMods extends XposedModPack {
 
 
 		if ((mStringFormatBefore + mStringFormatAfter).trim().length() == 0) {
-			int SBCDayOfWeekMode = Integer.parseInt(XPrefs.Xprefs.getString("SBCDayOfWeekMode", "0"));
+			int SBCDayOfWeekMode = Integer.parseInt(Xprefs.getString("SBCDayOfWeekMode", "0"));
 
 			switch (SBCDayOfWeekMode) {
 				case 0:
@@ -409,13 +405,11 @@ public class StatusbarMods extends XposedModPack {
 		//endregion clock settings
 
 
-		//region volte
-		VolteIconEnabled = XPrefs.Xprefs.getBoolean("VolteIconEnabled", false);
-		//endregion
-
-		//region vowifi
+		//region vo_data
+		VolteIconEnabled = Xprefs.getBoolean("VolteIconEnabled", false);
 		VowifiIconEnabled = Xprefs.getBoolean("VowifiIconEnabled", false);
 		//endregion
+
 
 		if (Key.length > 0) {
 			switch (Key[0]) {
@@ -423,16 +417,15 @@ public class StatusbarMods extends XposedModPack {
 					updateStatusbarHeight();
 					break;
 				case "VolteIconEnabled":
-					if (VolteIconEnabled)
-						initVolte();
-					else
-						removeVolte();
-					break;
 				case "VowifiIconEnabled":
-					if (VowifiIconEnabled)
-						initVowifi();
+					if (VolteIconEnabled || VowifiIconEnabled) {
+						initVoData();
+
+						if(!VolteIconEnabled) removeSBIconSlot(VO_LTE_SLOT);
+						if(!VowifiIconEnabled) removeSBIconSlot(VO_WIFI_SLOT);
+					}
 					else
-						removeVowifi();
+						removeVoDataCallback();
 					break;
 			}
 		}
@@ -794,14 +787,9 @@ public class StatusbarMods extends XposedModPack {
 							placeBatteryBar();
 						}
 
-						if (VolteIconEnabled) //in case we got the config but context wasn't ready yet
+						if (VolteIconEnabled || VowifiIconEnabled) //in case we got the config but context wasn't ready yet
 						{
-							initVolte();
-						}
-
-						if (VowifiIconEnabled) //in case we got the config but context wasn't ready yet
-						{
-							initVowifi();
+							initVoData();
 						}
 
 						if (networkOnSBEnabled) {
@@ -984,122 +972,92 @@ public class StatusbarMods extends XposedModPack {
 	}
 	//endregion
 
-	//region volte related
-	private void initVolte() {
+	//region vo_data related
+	private void initVoData() {
 		try {
 			if (!telephonyCallbackRegistered) {
+
 				Icon volteIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_volte);
 				//noinspection JavaReflectionMemberAccess
-				Object volteStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, "volte");
+				Object volteStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, VO_LTE_SLOT);
 				volteStatusbarIconHolder = StatusBarIconHolderClass.newInstance();
 				setObjectField(volteStatusbarIconHolder, "mIcon", volteStatusbarIcon);
-				SystemUtils.TelephonyManager().registerTelephonyCallback(volteExec, volteCallback);
+
+				Icon vowifiIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_vowifi);
+				//noinspection JavaReflectionMemberAccess
+				Object vowifiStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, vowifiIcon, 0, 0, VO_WIFI_SLOT);
+				vowifiStatusbarIconHolder = StatusBarIconHolderClass.newInstance();
+				setObjectField(vowifiStatusbarIconHolder, "mIcon", vowifiStatusbarIcon);
+
+				SystemUtils.TelephonyManager().registerTelephonyCallback(voDataExec, voDataCallback);
 				telephonyCallbackRegistered = true;
 			}
 		} catch (Exception ignored) {
 		}
 
-		updateVolte(true);
+		updateVoData(true);
 	}
 
-	private void removeVolte() {
+	private void removeVoDataCallback() {
 		try {
-			SystemUtils.TelephonyManager().unregisterTelephonyCallback(volteCallback);
+			SystemUtils.TelephonyManager().unregisterTelephonyCallback(voDataCallback);
 			telephonyCallbackRegistered = false;
 		} catch (Exception ignored) {
 		}
-		removeVolteIcon();
+		removeSBIconSlot(VO_LTE_SLOT);
+		removeSBIconSlot(VO_WIFI_SLOT);
 	}
 
 	private class serverStateCallback extends TelephonyCallback implements
 			TelephonyCallback.ServiceStateListener {
 		@Override
 		public void onServiceStateChanged(@NonNull ServiceState serviceState) {
-			updateVolte(false);
-			updateVowifi(false);
+			updateVoData(false);
 		}
 	}
 
-	private void updateVolte(boolean force) {
-		int newVolteState = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isVolteAvailable") ? VOLTE_AVAILABLE : VOLTE_NOT_AVAILABLE;
+	private void updateVoData(boolean force) {
+		int newVowifiState = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isWifiCallingAvailable") ? VO_DATA_AVAILABLE : VO_DATA_NOT_AVAILABLE;
+		int newVolteState = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isVolteAvailable") ? VO_DATA_AVAILABLE : VO_DATA_NOT_AVAILABLE;
+
 		if (lastVolteState != newVolteState || force) {
 			lastVolteState = newVolteState;
 			switch (newVolteState) {
-				case VOLTE_AVAILABLE:
+				case VO_DATA_AVAILABLE:
 					mStatusBar.post(() -> {
 						try {
-							callMethod(mStatusBarIconController, "setIcon", "volte", volteStatusbarIconHolder);
+							callMethod(mStatusBarIconController, "setIcon", VO_LTE_SLOT, volteStatusbarIconHolder);
 						} catch (Exception ignored) {}
 					});
 					break;
-				case VOLTE_NOT_AVAILABLE:
-					removeVolteIcon();
+				case VO_DATA_NOT_AVAILABLE:
+					removeSBIconSlot(VO_LTE_SLOT);
 					break;
 			}
 		}
-	}
 
-	private void removeVolteIcon() {
-		if (mStatusBar == null) return; //probably it's too soon to have a statusbar
-		mStatusBar.post(() -> {
-			try {
-				callMethod(mStatusBarIconController, "removeAllIconsForSlot", "volte");
-			} catch (Throwable ignored) {}
-		});
-	}
-	//endregion
-
-	//region vowifi related
-	private void initVowifi() {
-		try {
-			if (!telephonyCallbackRegistered) {
-				Icon vowifiIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_vowifi);
-				//noinspection JavaReflectionMemberAccess
-				Object vowifiStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, vowifiIcon, 0, 0, "vowifi");
-				vowifiStatusbarIconHolder = StatusBarIconHolderClass.newInstance();
-				setObjectField(vowifiStatusbarIconHolder, "mIcon", vowifiStatusbarIcon);
-				SystemUtils.TelephonyManager().registerTelephonyCallback(vowifiExec, vowifiCallback);
-				telephonyCallbackRegistered = true;
-			}
-		} catch (Exception ignored) {
-		}
-
-		updateVowifi(true);
-	}
-
-	private void removeVowifi() {
-		try {
-			SystemUtils.TelephonyManager().unregisterTelephonyCallback(vowifiCallback);
-			telephonyCallbackRegistered = false;
-		} catch (Exception ignored) {
-		}
-		removeVowifiIcon();
-	}
-
-	private void updateVowifi(boolean force) {
-		int newVowifiState = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isWifiCallingAvailable") ? VOWIFI_AVAILABLE : VOWIFI_NOT_AVAILABLE;
 		if (lastVowifiState != newVowifiState || force) {
 			lastVowifiState = newVowifiState;
 			switch (newVowifiState) {
-				case VOWIFI_AVAILABLE:
+				case VO_DATA_AVAILABLE:
 					mStatusBar.post(() -> {
 						try {
-							callMethod(mStatusBarIconController, "setIcon", "vowifi", vowifiStatusbarIconHolder);
+							callMethod(mStatusBarIconController, "setIcon", VO_WIFI_SLOT, vowifiStatusbarIconHolder);
 						} catch (Exception ignored) {}
 					});
 					break;
-				case VOWIFI_NOT_AVAILABLE:
-					removeVowifiIcon();
+				case VO_DATA_NOT_AVAILABLE:
+					removeSBIconSlot(VO_WIFI_SLOT);
 					break;
 			}
 		}
 	}
 
-	private void removeVowifiIcon() {
+	private void removeSBIconSlot(String slot) {
 		if (mStatusBar == null) return; //probably it's too soon to have a statusbar
 		mStatusBar.post(() -> {
 			try {
-				callMethod(mStatusBarIconController, "removeAllIconsForSlot", "vowifi");
+				callMethod(mStatusBarIconController, "removeAllIconsForSlot", slot);
 			} catch (Throwable ignored) {}
 		});
 	}

@@ -99,6 +99,13 @@
 
         <sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="false"
+            android:key="VowifiIconEnabled"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/vowifi_icon_title" />
+
+        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
+            android:defaultValue="false"
             android:key="HidePrivacyChip"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"

@@ -81,86 +81,87 @@ public class VolumeTile extends XposedModPack {
 			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(param.args[0] == null) return;
+				try {
+					Object state = param.args[0];
+					if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
+						SystemUtils.VolumeChangeListener listener = (SystemUtils.VolumeChangeListener) getAdditionalInstanceField(param.thisObject, "volumeChangeListener");
 
-				Object state = param.args[0];
-				if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
-					SystemUtils.VolumeChangeListener listener = (SystemUtils.VolumeChangeListener) getAdditionalInstanceField(param.thisObject, "volumeChangeListener");
+						if (listener == null) {
+							View thisView = (View) param.thisObject;
 
-					if(listener == null)
-					{
-						View thisView = (View) param.thisObject;
+							listener = () -> updateVolume(thisView);
 
-						listener = () -> updateVolume(thisView);
+							setAdditionalInstanceField(param.thisObject, "volumeChangeListener", listener);
 
-						setAdditionalInstanceField(param.thisObject, "volumeChangeListener", listener);
+							SystemUtils.registerVolumeChangeListener(listener);
 
-						SystemUtils.registerVolumeChangeListener(listener);
+							currentPct = getCurrentVolumePercent();
 
-						currentPct = getCurrentVolumePercent();
+							thisView.setOnTouchListener(new View.OnTouchListener() {
+								float initX = 0;
+								float initPct = 0;
+								boolean moved = false;
 
-						thisView.setOnTouchListener(new View.OnTouchListener() {
-							float initX = 0;
-							float initPct = 0;
-							boolean moved = false;
-
-							@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
-							@Override
-							public boolean onTouch(View view, MotionEvent motionEvent) {
-								switch (motionEvent.getAction()) {
-									case MotionEvent.ACTION_DOWN: {
-										initX = motionEvent.getX();
-										initPct = initX / view.getWidth();
-										return true;
-									}
-									case MotionEvent.ACTION_MOVE: {
-										float newPct = motionEvent.getX() / view.getWidth();
-										float deltaPct = Math.abs(newPct - initPct);
-										if (deltaPct > .03f) {
-											view.getParent().requestDisallowInterceptTouchEvent(true);
-											moved = true;
-											currentPct = Math.round(Math.max(Math.min(newPct, 1), 0) * 100f);
-											changeVolume(currentPct);
+								@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
+								@Override
+								public boolean onTouch(View view, MotionEvent motionEvent) {
+									switch (motionEvent.getAction()) {
+										case MotionEvent.ACTION_DOWN: {
+											initX = motionEvent.getX();
+											initPct = initX / view.getWidth();
+											return true;
 										}
-										return true;
-									}
-									case MotionEvent.ACTION_UP: {
-										if (moved) {
-											moved = false;
-										} else {
-											if (QSHapticEnabled) SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK, VibrationAttributes.USAGE_TOUCH);
-											toggleMute();
+										case MotionEvent.ACTION_MOVE: {
+											float newPct = motionEvent.getX() / view.getWidth();
+											float deltaPct = Math.abs(newPct - initPct);
+											if (deltaPct > .03f) {
+												view.getParent().requestDisallowInterceptTouchEvent(true);
+												moved = true;
+												currentPct = Math.round(Math.max(Math.min(newPct, 1), 0) * 100f);
+												changeVolume(currentPct);
+											}
+											return true;
 										}
-										return true;
+										case MotionEvent.ACTION_UP: {
+											if (moved) {
+												moved = false;
+											} else {
+												if (QSHapticEnabled)
+													SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK, VibrationAttributes.USAGE_TOUCH);
+												toggleMute();
+											}
+											return true;
+										}
 									}
+									return true;
 								}
-								return true;
-							}
-						});
+							});
+						}
 					}
 				}
+				catch (Throwable ignored){}
 			}
 
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) {
-				if(param.args[0] == null) return;
+				try {
+					Object state = param.args[0];
+					if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
+						lastState = state;
+						LinearLayout tileView = (LinearLayout) param.thisObject;
 
-				Object state = param.args[0];
-				if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
-					lastState = state;
-					LinearLayout tileView = (LinearLayout) param.thisObject;
+						currentPct = getCurrentVolumePercent();
 
-					currentPct = getCurrentVolumePercent();
+						volumePercentageDrawable.setTint(
+								(SystemUtils.isDarkMode() || !lightQSHeaderEnabled) && !getObjectField(state, "state").equals(STATE_ACTIVE)
+										? Color.WHITE
+										: Color.BLACK);
 
-					volumePercentageDrawable.setTint(
-							(SystemUtils.isDarkMode() || !lightQSHeaderEnabled) && !getObjectField(state, "state").equals(STATE_ACTIVE)
-									? Color.WHITE
-									: Color.BLACK);
-
-					LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), volumePercentageDrawable});
-					tileView.setBackground(layerDrawable);
-					updateVolume((View) param.thisObject);
-				}
+						LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), volumePercentageDrawable});
+						tileView.setBackground(layerDrawable);
+						updateVolume((View) param.thisObject);
+					}
+				}catch (Throwable ignored){}
 			}
 		});
 	}

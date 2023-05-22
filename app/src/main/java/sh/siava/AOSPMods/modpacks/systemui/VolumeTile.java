@@ -81,6 +81,8 @@ public class VolumeTile extends XposedModPack {
 			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(param.args[0] == null) return;
+
 				Object state = param.args[0];
 				if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
 					SystemUtils.VolumeChangeListener listener = (SystemUtils.VolumeChangeListener) getAdditionalInstanceField(param.thisObject, "volumeChangeListener");
@@ -141,6 +143,8 @@ public class VolumeTile extends XposedModPack {
 
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) {
+				if(param.args[0] == null) return;
+
 				Object state = param.args[0];
 				if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
 					lastState = state;

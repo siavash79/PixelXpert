@@ -73,7 +73,7 @@ public class FlashLightLevel extends XposedModPack {
 			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if (!SystemUtils.supportsFlashLevels() || !leveledFlashTile) return;
+				if (!SystemUtils.supportsFlashLevels() || !leveledFlashTile || param.args[0] == null) return;
 
 				Object state = param.args[0];
 				if (getObjectField(state, "spec").equals("flashlight")) {
@@ -154,7 +154,7 @@ public class FlashLightLevel extends XposedModPack {
 
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) {
-				if (!leveledFlashTile || !SystemUtils.supportsFlashLevels()) return;
+				if (!leveledFlashTile || !SystemUtils.supportsFlashLevels() || param.args[0] == null) return;
 
 				Object state = param.args[0];
 				if (getObjectField(state, "spec").equals("flashlight")) {

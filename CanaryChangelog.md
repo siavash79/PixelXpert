@@ -1,3 +1,6 @@
+**canary-246**  
+- Added VoWiFi icon to StatusbarMods. Thanks to @huajijam for code contribution  
+  
 **canary-245**  
 - A14: Fixed camera lockscreen shortcut  
 - A14: fixed hiding roaming indicators  

@@ -1,11 +1,13 @@
 package sh.siava.AOSPMods.modpacks.systemui;
 
+import static android.view.MotionEvent.ACTION_DOWN;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
+import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
@@ -36,6 +38,8 @@ public class GestureNavbarManager extends XposedModPack {
 	private static boolean leftEnabled = true;
 	private static boolean rightEnabled = true;
 	float initialBackX = 0;
+
+	Object EdgeBackGestureHandler;
 	//endregion
 
 	//region pill size
@@ -114,13 +118,42 @@ public class GestureNavbarManager extends XposedModPack {
 		Class<?> NavigationHandleClass = findClass("com.android.systemui.navigationbar.gestural.NavigationHandle", lpparam.classLoader);
 		Class<?> EdgeBackGestureHandlerClass = findClassIfExists("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader);
 		Class<?> NavigationBarEdgePanelClass = findClassIfExists("com.android.systemui.navigationbar.gestural.NavigationBarEdgePanel", lpparam.classLoader);
+		Class<?> BackPanelControllerClass = findClass("com.android.systemui.navigationbar.gestural.BackPanelController", lpparam.classLoader);
+
+		//region back gesture
+		//A14
+		hookAllConstructors(EdgeBackGestureHandlerClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				EdgeBackGestureHandler = param.thisObject;
+			}
+		});
+
+		hookAllMethods(BackPanelControllerClass, "onMotionEvent", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				MotionEvent ev = (MotionEvent) param.args[0];
+
+				if(ev.getActionMasked() == ACTION_DOWN) //down action is enough. once gesture is refused it won't accept further actions
+				{
+					if(notWithinInsets(ev.getX(),
+							ev.getY(),
+							(Point) getObjectField(EdgeBackGestureHandler, "mDisplaySize"),
+							getFloatField(EdgeBackGestureHandler, "mBottomGestureHeight")))
+					{
+						setObjectField(EdgeBackGestureHandler, "mAllowGesture", false); //act like the gesture was not good enough
+						param.setResult(null); //and stop the current method too
+					}
+				}
+			}
+		});
 
 		//Android 13
 		Helpers.tryHookAllMethods(NavigationBarEdgePanelClass, "onMotionEvent", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				MotionEvent event = (MotionEvent) param.args[0];
-				if(event.getAction() == MotionEvent.ACTION_DOWN)
+				if(event.getAction() == ACTION_DOWN)
 				{
 					initialBackX = event.getX();
 				}
@@ -130,16 +163,6 @@ public class GestureNavbarManager extends XposedModPack {
 				}
 			}
 		});
-		//region Back gesture
-		hookAllMethods(EdgeBackGestureHandlerClass,
-				"isWithinInsets", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (notWithinInsets(((Integer) param.args[0]).floatValue(), ((Integer) param.args[1]).floatValue(), (Point) getObjectField(param.thisObject, "mDisplaySize"), (float) getObjectField(param.thisObject, "mBottomGestureHeight"))) {
-							param.setResult(false);
-						}
-					}
-				});
 		//endregion
 
 		//region pill color

@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -82,7 +84,7 @@ public class UpdateFragment extends Fragment {
 	private int currentVersionType = SettingsActivity.XPOSED_ONLY;
 	private String currentVersionName = "";
 	private boolean rebootPending = false;
-//	private boolean downloadStarted = false;
+	//	private boolean downloadStarted = false;
 	private boolean installFullVersion = true;
 
 	@Override
@@ -92,7 +94,6 @@ public class UpdateFragment extends Fragment {
 
 		//noinspection ConstantConditions
 		downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
-
 
 		//finally
 		binding = UpdateFragmentBinding.inflate(inflater, container, false);
@@ -128,50 +129,56 @@ public class UpdateFragment extends Fragment {
 			binding.updateBtn.setEnabled(rebootPending);
 
 			checkUpdates(result -> {
-				latestVersion = result;
+				try {
 
-				requireActivity().runOnUiThread(() -> {
-					try {
-						((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFromUrl((String) result.get("changelog"));
-					}
-					catch (Throwable ignored){}
-				});
 
-				requireActivity().runOnUiThread(() -> {
-					((TextView) view.findViewById(R.id.latestVersionValueID)).setText(
-							String.format("%s (%s)", result.get("version"),
-									result.get("versionCode")));
-					int latestCode;
-					int BtnText = R.string.update_word;
+					latestVersion = result;
 
-					boolean enable = false;
-					try {
-						latestCode = (int) result.get("versionCode");
-
-						if (rebootPending) {
-							enable = true;
-							BtnText = R.string.reboot_word;
-						} else if (!canaryUpdate) //stable selected
-						{
-							if (currentVersionName.contains("-")) //currently canary installed
-							{
-								BtnText = R.string.switch_branches;
-							} else if (latestCode == currentVersionCode) //already up to date
-							{
-								BtnText = R.string.reinstall_word;
-							}
-							enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
-						} else {
-							if (latestCode > currentVersionCode || (currentVersionType == SettingsActivity.FULL_VERSION) != installFullVersion) {
-								enable = true;
-							}
+					requireActivity().runOnUiThread(() -> {
+						try {
+							((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFromUrl((String) result.get("changelog"));
+						} catch (Throwable ignored) {
 						}
-					} catch (Exception ignored) {
-					}
-					view.findViewById(R.id.updateBtn).setEnabled(enable);
-					((Button) view.findViewById(R.id.updateBtn)).setText(BtnText);
-				});
+					});
+
+					requireActivity().runOnUiThread(() -> {
+						((TextView) view.findViewById(R.id.latestVersionValueID)).setText(
+								String.format("%s (%s)", result.get("version"),
+										result.get("versionCode")));
+						int latestCode;
+						int BtnText = R.string.update_word;
+
+						boolean enable = false;
+						try {
+							latestCode = (int) result.get("versionCode");
+
+							if (rebootPending) {
+								enable = true;
+								BtnText = R.string.reboot_word;
+							} else if (!canaryUpdate) //stable selected
+							{
+								if (currentVersionName.contains("-")) //currently canary installed
+								{
+									BtnText = R.string.switch_branches;
+								} else if (latestCode == currentVersionCode) //already up to date
+								{
+									BtnText = R.string.reinstall_word;
+								}
+								enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
+							} else {
+								if (latestCode > currentVersionCode || (currentVersionType == SettingsActivity.FULL_VERSION) != installFullVersion) {
+									enable = true;
+								}
+							}
+						} catch (Exception ignored) {
+						}
+						view.findViewById(R.id.updateBtn).setEnabled(enable);
+						((Button) view.findViewById(R.id.updateBtn)).setText(BtnText);
+					});
+				} catch (Throwable ignored) {
+				}
 			});
+
 		};
 
 		binding.updateChannelRadioGroup.setOnCheckedChangeListener(onCheckChangedListener);
@@ -285,7 +292,9 @@ public class UpdateFragment extends Fragment {
 				.setContentIntent(pendingIntent)
 				.setAutoCancel(true);
 
-		NotificationManagerCompat.from(getContext()).notify(1, builder.build());
+		if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+			NotificationManagerCompat.from(getContext()).notify(1, builder.build());
+		}
 	}
 
 	public interface TaskDoneCallback extends Callback {

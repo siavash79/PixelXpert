@@ -9,7 +9,7 @@
 	android:gravity="center_vertical"
 	android:minHeight="?android:attr/listPreferredItemHeight"
 	android:orientation="horizontal"
-	android:paddingStart="70dp"
+	android:paddingStart="38dp"
 	android:paddingTop="16dp"
 	android:paddingEnd="16dp"
 	android:paddingBottom="16dp">
@@ -49,8 +49,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
-		android:layout_marginStart="16dp"
-		android:layout_marginEnd="6dp"
+		android:layout_marginStart="24dp"
+		android:layout_marginEnd="16dp"
 		android:orientation="vertical" />
 
 </LinearLayout>

@@ -87,6 +87,7 @@
 	<string name="hide_roaming_title">Ocultar indicadores de roaming</string>
     <string name="caution_mobile_costs">PRECAUCIÓN - No saber que estás en roaming puede aumentar el coste de la tarifa</string>
 	<string name="volte_icon_title">Mostrar icono VoLTE cuando este disponible</string>
+	<string name="vowifi_icon_title">Mostrar icono Vowifi cuando este disponible</string>
 	<string name="hide_privacychip_title">Ocultar indicadores de privacidad\n(Cámara, Micrófono)</string><!-- \n means next line-->
 	<string name="sb_vibration_switch_title">Mostrar los iconos vibrar/silencio</string>
 	<string name="sbc_position_title">Posición del reloj</string>

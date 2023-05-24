@@ -1,3 +1,6 @@
+**canary-248**  
+- A14: Fixed QQS BrightnessSlider  
+  
 **canary-247**  
 - A14: Fixed unrestricted screenshot  
 - A14: fixed back gesture mods  

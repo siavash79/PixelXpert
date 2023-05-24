@@ -1,3 +1,7 @@
+**canary-247**  
+- A14: Fixed unrestricted screenshot  
+- A14: fixed back gesture mods  
+  
 **canary-246**  
 - Added VoWiFi icon to StatusbarMods. Thanks to @huajijam for code contribution  
   

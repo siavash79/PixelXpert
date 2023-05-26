@@ -1,3 +1,6 @@
+**canary-250**  
+- Fixed updater, broken since canary-248 (If you are on canary 248 or 249, you will have to update to canary-250+ manually)  
+  
 **canary-249**  
 - Added option to disable the unlock hint animation (Lockscreen)  
 - QS light theme optimizations  

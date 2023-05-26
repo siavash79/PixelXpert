@@ -1,12 +1,12 @@
 package sh.siava.AOSPMods;
 
+import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,7 +21,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -55,8 +54,12 @@ public class UpdateFragment extends Fragment {
 	private static final String moduleDir = String.format("%s/%s", UpdateActivity.MAGISK_MODULES_DIR, UpdateActivity.MOD_NAME);
 
 	BroadcastReceiver downloadCompletionReceiver = new BroadcastReceiver() {
+		@SuppressLint("MissingPermission")
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			if(getContext() != null)
+				getContext().unregisterReceiver(downloadCompletionReceiver);
+
 			try {
 				if (Objects.equals(intent.getAction(), DownloadManager.ACTION_DOWNLOAD_COMPLETE) && intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == downloadID) {
 					Cursor downloadData = downloadManager.query(
@@ -68,13 +71,28 @@ public class UpdateFragment extends Fragment {
 
 					int uriColIndex = downloadData.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
 
-					if (uriColIndex > 0) {
+					File downloadedFile = new File(URI.create(downloadData.getString(uriColIndex)));
+
+					if(downloadedFile.exists())
+					{
 						downloadedFilePath = new File(URI.create(downloadData.getString(uriColIndex))).getAbsolutePath();
 
 						notifyInstall();
 					}
+					else
+					{
+						throw new Exception();
+					}
 				}
 			} catch (Exception e) {
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "updates")
+						.setSmallIcon(R.drawable.ic_notification_foreground)
+						.setContentTitle(getContext().getText(R.string.download_failed))
+						.setContentText(getContext().getText(R.string.try_again_later))
+						.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+				NotificationManagerCompat.from(getContext()).notify(2, builder.build());
+
 				e.printStackTrace();
 			}
 		}
@@ -84,7 +102,7 @@ public class UpdateFragment extends Fragment {
 	private int currentVersionType = SettingsActivity.XPOSED_ONLY;
 	private String currentVersionName = "";
 	private boolean rebootPending = false;
-	//	private boolean downloadStarted = false;
+//	private boolean downloadStarted = false;
 	private boolean installFullVersion = true;
 
 	@Override
@@ -94,6 +112,7 @@ public class UpdateFragment extends Fragment {
 
 		//noinspection ConstantConditions
 		downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+
 
 		//finally
 		binding = UpdateFragmentBinding.inflate(inflater, container, false);
@@ -129,56 +148,50 @@ public class UpdateFragment extends Fragment {
 			binding.updateBtn.setEnabled(rebootPending);
 
 			checkUpdates(result -> {
-				try {
+				latestVersion = result;
 
+				requireActivity().runOnUiThread(() -> {
+					try {
+						((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFromUrl((String) result.get("changelog"));
+					}
+					catch (Throwable ignored){}
+				});
 
-					latestVersion = result;
+				requireActivity().runOnUiThread(() -> {
+					((TextView) view.findViewById(R.id.latestVersionValueID)).setText(
+							String.format("%s (%s)", result.get("version"),
+									result.get("versionCode")));
+					int latestCode;
+					int BtnText = R.string.update_word;
 
-					requireActivity().runOnUiThread(() -> {
-						try {
-							((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFromUrl((String) result.get("changelog"));
-						} catch (Throwable ignored) {
-						}
-					});
+					boolean enable = false;
+					try {
+						latestCode = (int) result.get("versionCode");
 
-					requireActivity().runOnUiThread(() -> {
-						((TextView) view.findViewById(R.id.latestVersionValueID)).setText(
-								String.format("%s (%s)", result.get("version"),
-										result.get("versionCode")));
-						int latestCode;
-						int BtnText = R.string.update_word;
-
-						boolean enable = false;
-						try {
-							latestCode = (int) result.get("versionCode");
-
-							if (rebootPending) {
-								enable = true;
-								BtnText = R.string.reboot_word;
-							} else if (!canaryUpdate) //stable selected
+						if (rebootPending) {
+							enable = true;
+							BtnText = R.string.reboot_word;
+						} else if (!canaryUpdate) //stable selected
+						{
+							if (currentVersionName.contains("-")) //currently canary installed
 							{
-								if (currentVersionName.contains("-")) //currently canary installed
-								{
-									BtnText = R.string.switch_branches;
-								} else if (latestCode == currentVersionCode) //already up to date
-								{
-									BtnText = R.string.reinstall_word;
-								}
-								enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
-							} else {
-								if (latestCode > currentVersionCode || (currentVersionType == SettingsActivity.FULL_VERSION) != installFullVersion) {
-									enable = true;
-								}
+								BtnText = R.string.switch_branches;
+							} else if (latestCode == currentVersionCode) //already up to date
+							{
+								BtnText = R.string.reinstall_word;
 							}
-						} catch (Exception ignored) {
+							enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
+						} else {
+							if (latestCode > currentVersionCode || (currentVersionType == SettingsActivity.FULL_VERSION) != installFullVersion) {
+								enable = true;
+							}
 						}
-						view.findViewById(R.id.updateBtn).setEnabled(enable);
-						((Button) view.findViewById(R.id.updateBtn)).setText(BtnText);
-					});
-				} catch (Throwable ignored) {
-				}
+					} catch (Exception ignored) {
+					}
+					view.findViewById(R.id.updateBtn).setEnabled(enable);
+					((Button) view.findViewById(R.id.updateBtn)).setText(BtnText);
+				});
 			});
-
 		};
 
 		binding.updateChannelRadioGroup.setOnCheckedChangeListener(onCheckChangedListener);
@@ -254,7 +267,6 @@ public class UpdateFragment extends Fragment {
 	}
 
 	public void startDownload(String zipURL, int versionNumber) {
-
 		IntentFilter filters = new IntentFilter();
 		filters.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
 		filters.addAction(DownloadManager.ACTION_NOTIFICATION_CLICKED);
@@ -274,6 +286,7 @@ public class UpdateFragment extends Fragment {
 		binding = null;
 	}
 
+	@SuppressLint("MissingPermission")
 	public void notifyInstall() {
 		Intent notificationIntent = new Intent(getContext(), UpdateActivity.class);
 		notificationIntent.setAction(Intent.ACTION_RUN);
@@ -292,9 +305,7 @@ public class UpdateFragment extends Fragment {
 				.setContentIntent(pendingIntent)
 				.setAutoCancel(true);
 
-		if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-			NotificationManagerCompat.from(getContext()).notify(1, builder.build());
-		}
+		NotificationManagerCompat.from(getContext()).notify(1, builder.build());
 	}
 
 	public interface TaskDoneCallback extends Callback {

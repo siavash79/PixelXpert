@@ -386,6 +386,8 @@
     <string name="update_channel_name">Updates</string>
     <string name="update_notification_title">Update downloaded</string>
     <string name="update_notification_text">Tap here to install</string>
+    <string name="download_failed">Failed to download the update</string>
+    <string name="try_again_later">Please try again later</string>
     <string name="reboot_notification_title">AOSPMods updated!</string>
     <string name="reboot_notification_text">Changes will take effect after you reboot the device</string>
     <string name="update_flavor_title">Update channel</string>

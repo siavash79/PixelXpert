@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.modpacks.systemui;
 import static android.media.AudioManager.STREAM_MUSIC;
 import static android.service.quicksettings.Tile.STATE_ACTIVE;
 import static android.service.quicksettings.Tile.STATE_INACTIVE;
+import static android.view.View.GONE;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -11,6 +12,7 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.modpacks.systemui.QSTileGrid.QSHapticEnabled;
+import static sh.siava.AOSPMods.modpacks.utils.Helpers.dumpClass;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -160,6 +162,10 @@ public class VolumeTile extends XposedModPack {
 						LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), volumePercentageDrawable});
 						tileView.setBackground(layerDrawable);
 						updateVolume((View) param.thisObject);
+
+						//We don't need the chevron icon on the right side
+						((View) getObjectField(param.thisObject, "chevronView"))
+								.setVisibility(GONE);
 					}
 				}catch (Throwable ignored){}
 			}

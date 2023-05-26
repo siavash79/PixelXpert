@@ -193,6 +193,8 @@ public class VolumeTile extends XposedModPack {
 				currentPct
 		);
 
+		if(newLabel.equals(label.getText().toString())) return;
+
 		label.setText(newLabel);
 
 		boolean wasActive = getObjectField(thisView, "lastState").equals(STATE_ACTIVE);

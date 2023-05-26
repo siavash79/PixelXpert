@@ -10,6 +10,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
@@ -79,6 +80,8 @@ public class KeyguardMods extends XposedModPack {
 	private boolean mDozing = false;
 	private boolean mSupportsDarkText = false;
 
+	private static boolean DisableUnlockHintAnimation = false;
+
 	//region keyguardDimmer
 	public static float KeyGuardDimAmount = -1f;
 	private static boolean TemperatureUnitF = false;
@@ -112,28 +115,30 @@ public class KeyguardMods extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		KGMiddleCustomText = XPrefs.Xprefs.getString("KGMiddleCustomText", "");
+		DisableUnlockHintAnimation = Xprefs.getBoolean("DisableUnlockHintAnimation", false);
 
-		customCarrierTextEnabled = XPrefs.Xprefs.getBoolean("carrierTextMod", false);
-		customCarrierText = XPrefs.Xprefs.getString("carrierTextValue", "");
+		KGMiddleCustomText = Xprefs.getString("KGMiddleCustomText", "");
 
-		ShowChargingInfo = XPrefs.Xprefs.getBoolean("ShowChargingInfo", false);
-		TemperatureUnitF = XPrefs.Xprefs.getBoolean("TemperatureUnitF", false);
+		customCarrierTextEnabled = Xprefs.getBoolean("carrierTextMod", false);
+		customCarrierText = Xprefs.getString("carrierTextValue", "");
 
-		HideLockScreenUserAvatar = XPrefs.Xprefs.getBoolean("HideLockScreenUserAvatar", false);
+		ShowChargingInfo = Xprefs.getBoolean("ShowChargingInfo", false);
+		TemperatureUnitF = Xprefs.getBoolean("TemperatureUnitF", false);
+
+		HideLockScreenUserAvatar = Xprefs.getBoolean("HideLockScreenUserAvatar", false);
 
 		try {
-			KeyGuardDimAmount = RangeSliderPreference.getValues(XPrefs.Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
+			KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
 		} catch (Throwable ignored) {
 		}
 
-		leftShortcutClick = XPrefs.Xprefs.getString("leftKeyguardShortcut", "");
-		rightShortcutClick = XPrefs.Xprefs.getString("rightKeyguardShortcut", "");
+		leftShortcutClick = Xprefs.getString("leftKeyguardShortcut", "");
+		rightShortcutClick = Xprefs.getString("rightKeyguardShortcut", "");
 
-		leftShortcutLongClick = XPrefs.Xprefs.getString("leftKeyguardShortcutLongClick", "");
-		rightShortcutLongClick = XPrefs.Xprefs.getString("rightKeyguardShortcutLongClick", "");
+		leftShortcutLongClick = Xprefs.getString("leftKeyguardShortcutLongClick", "");
+		rightShortcutLongClick = Xprefs.getString("rightKeyguardShortcutLongClick", "");
 
-		transparentBGcolor = XPrefs.Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
+		transparentBGcolor = Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
 
 
 		if (Key.length > 0) {
@@ -176,7 +181,7 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
 		Class<?> KeyguardBottomAreaViewBinderClass = findClass("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpparam.classLoader);
 		Class<?> AssistManager = findClass("com.android.systemui.assist.AssistManager", lpparam.classLoader);
-//		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader); //used to launch camera
+		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader); //used to launch camera
 //		Class<?> QRCodeScannerControllerClass = findClass("com.android.systemui.qrcodescanner.controller.QRCodeScannerController", lpparam.classLoader);
 //		Class<?> ActivityStarterDelegateClass = findClass("com.android.systemui.ActivityStarterDelegate", lpparam.classLoader);
 		Class<?> ZenModeControllerImplClass = findClass("com.android.systemui.statusbar.policy.ZenModeControllerImpl", lpparam.classLoader);
@@ -190,6 +195,14 @@ public class KeyguardMods extends XposedModPack {
 				CommandQueue = param.thisObject;
 			}
 		});
+
+		hookAllMethods(NotificationPanelViewControllerClass, "startUnlockHintAnimation", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(DisableUnlockHintAnimation) param.setResult(null);
+			}
+		});
+
 
 /*		hookAllConstructors(FooterActionsInteractorImplClass, new XC_MethodHook() {
 			@Override

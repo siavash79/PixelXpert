@@ -339,5 +339,8 @@
     <string name="hotspot_hide_ssid_title">Esconder SSID</string>
     <string name="hotspot_inactivity_timeout_title">Tempo limite de inatividade</string>
     <string name="hotspot_max_client_title">Nr. máximo de clientes</string>
-    <string name="ls_general_options">Opções do ecrã de bloqueio</string>
+	<string name="disable_unlock_hint_title">Desativar animação da dica de desbloqueio</string>
+	<string name="ls_general_options">Opções do ecrã de bloqueio</string>
+	<string name="download_failed">Falha ao descarregar atualização</string>
+    <string name="try_again_later">Por favor tente novamente mais tarde</string>
 </resources>

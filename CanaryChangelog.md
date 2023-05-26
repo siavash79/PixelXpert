@@ -1,3 +1,7 @@
+**canary-249**  
+- Added option to disable the unlock hint animation (Lockscreen)  
+- QS light theme optimizations  
+  
 **canary-248**  
 - A14: Fixed QQS BrightnessSlider  
   

@@ -12,7 +12,7 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.modpacks.systemui.QSTileGrid.QSHapticEnabled;
-import static sh.siava.AOSPMods.modpacks.utils.Helpers.dumpClass;
+import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.AudioManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -36,6 +36,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.Constants;
@@ -44,7 +46,7 @@ import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 
-@SuppressWarnings("RedundantThrows")
+@SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 public class VolumeTile extends XposedModPack {
 	public static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 	private static final String TARGET_SPEC = "custom(sh.siava.AOSPMods/.utils.VolumeTileService)";
@@ -53,8 +55,8 @@ public class VolumeTile extends XposedModPack {
 	private static int unMuteVolumePCT = 50;
 	private static boolean lightQSHeaderEnabled = false;
 	Drawable volumePercentageDrawable = null;
-	private Object lastState;
-
+	private static int minVol = -1;
+	private static int maxVol = -1;
 	public VolumeTile(Context context) {
 		super(context);
 	}
@@ -72,104 +74,132 @@ public class VolumeTile extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+		if (!lpparam.packageName.equals(listenPackage) || AudioManager() == null) return;
+
+		minVol = AudioManager().getStreamMinVolume(STREAM_MUSIC);
+		maxVol = AudioManager().getStreamMaxVolume(STREAM_MUSIC);
 
 		volumePercentageDrawable = new PercentageShape();
 		volumePercentageDrawable.setAlpha(64);
 
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
+		Class<?> QSPanelControllerBaseClass = findClass("com.android.systemui.qs.QSPanelControllerBase", lpparam.classLoader);
+		Class<?> QSTileImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
+
+		hookAllMethods(QSTileImplClass, "removeCallback", new XC_MethodHook() { //removing dead tiles from callbacks
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				SystemUtils.VolumeChangeListener volumeChangeListener = (SystemUtils.VolumeChangeListener) getAdditionalInstanceField(param.thisObject, "volumeChangeListener");
+
+				if(volumeChangeListener != null)
+					SystemUtils.unregisterVolumeChangeListener(volumeChangeListener);
+			}
+		});
+
+		hookAllMethods(QSPanelControllerBaseClass, "setTiles", new XC_MethodHook() { //finding and setting up volume tiles
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				((ArrayList<?>) getObjectField(param.thisObject, "mRecords")).forEach(record ->
+				{
+					Object tile = getObjectField(record, "tile");
+
+					if (TARGET_SPEC.equals((String) getObjectField(tile, "mTileSpec"))) {
+						View tileView = (View) getObjectField(record, "tileView");
+
+						setAdditionalInstanceField(tileView, "mParentTile", tile);
+
+						SystemUtils.VolumeChangeListener listener = () -> handleVolumeChanged(tileView);
+
+						setAdditionalInstanceField(tile, "volumeChangeListener", listener);
+
+						SystemUtils.registerVolumeChangeListener(listener);
+						tileView.setOnTouchListener(new View.OnTouchListener() {
+							float initX = 0;
+							float initPct = 0;
+							boolean moved = false;
+
+							@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
+							@Override
+							public boolean onTouch(View view, MotionEvent motionEvent) {
+								switch (motionEvent.getAction()) {
+									case MotionEvent.ACTION_DOWN: {
+										initX = motionEvent.getX();
+										initPct = initX / view.getWidth();
+										return true;
+									}
+									case MotionEvent.ACTION_MOVE: {
+										float newPct = motionEvent.getX() / view.getWidth();
+										float deltaPct = Math.abs(newPct - initPct);
+										if (deltaPct > .03f) {
+											view.getParent().requestDisallowInterceptTouchEvent(true);
+											moved = true;
+											currentPct = Math.round(Math.max(Math.min(newPct, 1), 0) * 100f);
+											changeVolume(currentPct);
+										}
+										return true;
+									}
+									case MotionEvent.ACTION_UP: {
+										if (moved) {
+											moved = false;
+										} else {
+											if (QSHapticEnabled)
+												SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK, VibrationAttributes.USAGE_TOUCH);
+											toggleMute();
+										}
+										return true;
+									}
+								}
+								return true;
+							}
+						});
+
+						handleVolumeChanged(tileView);
+					}
+				});
+			}
+		});
 
 		hookAllMethods(QSTileViewImplClass, "handleStateChanged", new XC_MethodHook() {
-			@SuppressLint("DiscouragedApi")
-			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				try {
-					Object state = param.args[0];
-					if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
-						SystemUtils.VolumeChangeListener listener = (SystemUtils.VolumeChangeListener) getAdditionalInstanceField(param.thisObject, "volumeChangeListener");
-
-						if (listener == null) {
-							View thisView = (View) param.thisObject;
-
-							listener = () -> updateVolume(thisView);
-
-							setAdditionalInstanceField(param.thisObject, "volumeChangeListener", listener);
-
-							SystemUtils.registerVolumeChangeListener(listener);
-
-							currentPct = getCurrentVolumePercent();
-
-							thisView.setOnTouchListener(new View.OnTouchListener() {
-								float initX = 0;
-								float initPct = 0;
-								boolean moved = false;
-
-								@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
-								@Override
-								public boolean onTouch(View view, MotionEvent motionEvent) {
-									switch (motionEvent.getAction()) {
-										case MotionEvent.ACTION_DOWN: {
-											initX = motionEvent.getX();
-											initPct = initX / view.getWidth();
-											return true;
-										}
-										case MotionEvent.ACTION_MOVE: {
-											float newPct = motionEvent.getX() / view.getWidth();
-											float deltaPct = Math.abs(newPct - initPct);
-											if (deltaPct > .03f) {
-												view.getParent().requestDisallowInterceptTouchEvent(true);
-												moved = true;
-												currentPct = Math.round(Math.max(Math.min(newPct, 1), 0) * 100f);
-												changeVolume(currentPct);
-											}
-											return true;
-										}
-										case MotionEvent.ACTION_UP: {
-											if (moved) {
-												moved = false;
-											} else {
-												if (QSHapticEnabled)
-													SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK, VibrationAttributes.USAGE_TOUCH);
-												toggleMute();
-											}
-											return true;
-										}
-									}
-									return true;
-								}
-							});
-						}
-					}
-				}
-				catch (Throwable ignored){}
-			}
-
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) {
 				try {
 					Object state = param.args[0];
-					if (getObjectField(state, "spec").equals(TARGET_SPEC)) {
-						lastState = state;
-						LinearLayout tileView = (LinearLayout) param.thisObject;
 
-						currentPct = getCurrentVolumePercent();
-
-						volumePercentageDrawable.setTint(
-								(SystemUtils.isDarkMode() || !lightQSHeaderEnabled) && !getObjectField(state, "state").equals(STATE_ACTIVE)
-										? Color.WHITE
-										: Color.BLACK);
-
-						LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), volumePercentageDrawable});
-						tileView.setBackground(layerDrawable);
-						updateVolume((View) param.thisObject);
-
-						//We don't need the chevron icon on the right side
-						((View) getObjectField(param.thisObject, "chevronView"))
-								.setVisibility(GONE);
+					if (getAdditionalInstanceField(param.thisObject, "mParentTile") != null) {
+						updateTileView((LinearLayout) param.thisObject, (int)getObjectField(state, "state"));
 					}
 				}catch (Throwable ignored){}
 			}
 		});
+	}
+
+	private void updateTileView(LinearLayout tileView, int state) {
+		Resources res = mContext.getResources();
+
+		volumePercentageDrawable.setTint(
+				(SystemUtils.isDarkMode() || !lightQSHeaderEnabled) && state != STATE_ACTIVE
+						? Color.WHITE
+						: Color.BLACK);
+
+		LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), volumePercentageDrawable});
+		tileView.setBackground(layerDrawable);
+
+		TextView label = (TextView) getObjectField(tileView, "label");
+
+		@SuppressLint("DiscouragedApi")
+		String newLabel = String.format("%s - %s%%",
+				res.getText(
+						res.getIdentifier(
+								"media_output_dialog_accessibility_seekbar",
+								"string", mContext.getPackageName())),
+				currentPct
+		);
+
+		label.setText(newLabel);
+
+		//We don't need the chevron icon on the right side
+		((View) getObjectField(tileView, "chevronView"))
+				.setVisibility(GONE);
 	}
 
 	private void toggleMute() {
@@ -183,54 +213,33 @@ public class VolumeTile extends XposedModPack {
 		}
 	}
 
-	private void updateVolume(View thisView) {
-		Resources res = mContext.getResources();
+	private void handleVolumeChanged(View thisView) {
+		Object parentTile = getAdditionalInstanceField(thisView, "mParentTile");
 
 		currentPct = getCurrentVolumePercent();
 
-		TextView label = (TextView) getObjectField(thisView, "label");
+		Object mTile = getObjectField(parentTile, "mTile");
 
-		@SuppressLint("DiscouragedApi")
-		String newLabel = String.format("%s - %s%%",
-				res.getText(
-						res.getIdentifier(
-								"media_output_dialog_accessibility_seekbar",
-								"string", mContext.getPackageName())),
-				currentPct
-		);
+		int currentState = (int) getObjectField(mTile, "mState");
+		int newState = currentPct > 0 ? STATE_ACTIVE : STATE_INACTIVE;
 
-		if(newLabel.equals(label.getText().toString())) return;
-
-		label.setText(newLabel);
-
-		boolean wasActive = getObjectField(thisView, "lastState").equals(STATE_ACTIVE);
-		boolean shouldBeActive = currentPct > 0;
-
-		if(wasActive != shouldBeActive)
+		if(currentState != newState)
 		{
-			setObjectField(lastState, "state", shouldBeActive ? STATE_ACTIVE :STATE_INACTIVE);
-			callMethod(thisView, "onStateChanged", lastState);
+			setObjectField(mTile, "mState", newState);
+			callMethod(parentTile, "refreshState");
 		}
-
+		updateTileView((LinearLayout) thisView, newState);
 	}
 
 	private void changeVolume(int currentPct) {
-		if(SystemUtils.AudioManager() == null) return;
-
-		int minVol = SystemUtils.AudioManager().getStreamMinVolume(STREAM_MUSIC);
-		int maxVol = SystemUtils.AudioManager().getStreamMaxVolume(STREAM_MUSIC);
-		int nextVolume = Math.round((maxVol - minVol) * currentPct / 100f) + minVol;
-
-		SystemUtils.AudioManager().setStreamVolume(STREAM_MUSIC, nextVolume, 0);
-
+		AudioManager().setStreamVolume(
+				STREAM_MUSIC,
+				Math.round((maxVol - minVol) * currentPct / 100f) + minVol,
+				0 /* don't show UI */);
 	}
 
 	private int getCurrentVolumePercent() {
-		if(SystemUtils.AudioManager() == null) return 0;
-
-		int currentVol = SystemUtils.AudioManager().getStreamVolume(STREAM_MUSIC);
-		int minVol = SystemUtils.AudioManager().getStreamMinVolume(STREAM_MUSIC);
-		int maxVol = SystemUtils.AudioManager().getStreamMaxVolume(STREAM_MUSIC);
+		int currentVol = AudioManager().getStreamVolume(STREAM_MUSIC);
 
 		return Math.round(100f * (currentVol - minVol) / (maxVol - minVol));
 	}

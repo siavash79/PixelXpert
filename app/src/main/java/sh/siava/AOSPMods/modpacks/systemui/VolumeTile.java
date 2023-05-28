@@ -1,13 +1,17 @@
 package sh.siava.AOSPMods.modpacks.systemui;
 
-import static android.graphics.Bitmap.*;
+import static android.graphics.Bitmap.Config;
+import static android.graphics.Bitmap.createBitmap;
 import static android.media.AudioManager.STREAM_MUSIC;
 import static android.os.VibrationAttributes.USAGE_TOUCH;
 import static android.os.VibrationEffect.EFFECT_CLICK;
 import static android.service.quicksettings.Tile.STATE_ACTIVE;
 import static android.service.quicksettings.Tile.STATE_INACTIVE;
 import static android.view.View.GONE;
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.round;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -16,10 +20,11 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.modpacks.systemui.QSTileGrid.QSHapticEnabled;
-import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.*;
 import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.AudioManager;
 import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.isDarkMode;
+import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.registerVolumeChangeListener;
 import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.unregisterVolumeChangeListener;
+import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.vibrate;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -33,8 +38,6 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.VibrationAttributes;
-import android.os.VibrationEffect;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -51,7 +54,6 @@ import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
-import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils.VolumeChangeListener;
 
 @SuppressWarnings({"RedundantThrows", "ConstantConditions"})

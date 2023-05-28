@@ -1,9 +1,13 @@
 package sh.siava.AOSPMods.modpacks.systemui;
 
+import static android.graphics.Bitmap.*;
 import static android.media.AudioManager.STREAM_MUSIC;
+import static android.os.VibrationAttributes.USAGE_TOUCH;
+import static android.os.VibrationEffect.EFFECT_CLICK;
 import static android.service.quicksettings.Tile.STATE_ACTIVE;
 import static android.service.quicksettings.Tile.STATE_INACTIVE;
 import static android.view.View.GONE;
+import static java.lang.Math.*;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -12,7 +16,10 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.modpacks.systemui.QSTileGrid.QSHapticEnabled;
+import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.*;
 import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.AudioManager;
+import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.isDarkMode;
+import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.unregisterVolumeChangeListener;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -45,6 +52,7 @@ import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
+import sh.siava.AOSPMods.modpacks.utils.SystemUtils.VolumeChangeListener;
 
 @SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 public class VolumeTile extends XposedModPack {
@@ -89,10 +97,10 @@ public class VolumeTile extends XposedModPack {
 		hookAllMethods(QSTileImplClass, "removeCallback", new XC_MethodHook() { //removing dead tiles from callbacks
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				SystemUtils.VolumeChangeListener volumeChangeListener = (SystemUtils.VolumeChangeListener) getAdditionalInstanceField(param.thisObject, "volumeChangeListener");
+				VolumeChangeListener volumeChangeListener = (VolumeChangeListener) getAdditionalInstanceField(param.thisObject, "volumeChangeListener");
 
 				if(volumeChangeListener != null)
-					SystemUtils.unregisterVolumeChangeListener(volumeChangeListener);
+					unregisterVolumeChangeListener(volumeChangeListener);
 			}
 		});
 
@@ -106,52 +114,7 @@ public class VolumeTile extends XposedModPack {
 					if (TARGET_SPEC.equals((String) getObjectField(tile, "mTileSpec"))) {
 						View tileView = (View) getObjectField(record, "tileView");
 
-						setAdditionalInstanceField(tileView, "mParentTile", tile);
-
-						SystemUtils.VolumeChangeListener listener = () -> handleVolumeChanged(tileView);
-
-						setAdditionalInstanceField(tile, "volumeChangeListener", listener);
-
-						SystemUtils.registerVolumeChangeListener(listener);
-						tileView.setOnTouchListener(new View.OnTouchListener() {
-							float initX = 0;
-							float initPct = 0;
-							boolean moved = false;
-
-							@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
-							@Override
-							public boolean onTouch(View view, MotionEvent motionEvent) {
-								switch (motionEvent.getAction()) {
-									case MotionEvent.ACTION_DOWN: {
-										initX = motionEvent.getX();
-										initPct = initX / view.getWidth();
-										return true;
-									}
-									case MotionEvent.ACTION_MOVE: {
-										float newPct = motionEvent.getX() / view.getWidth();
-										float deltaPct = Math.abs(newPct - initPct);
-										if (deltaPct > .03f) {
-											view.getParent().requestDisallowInterceptTouchEvent(true);
-											moved = true;
-											currentPct = Math.round(Math.max(Math.min(newPct, 1), 0) * 100f);
-											changeVolume(currentPct);
-										}
-										return true;
-									}
-									case MotionEvent.ACTION_UP: {
-										if (moved) {
-											moved = false;
-										} else {
-											if (QSHapticEnabled)
-												SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK, VibrationAttributes.USAGE_TOUCH);
-											toggleMute();
-										}
-										return true;
-									}
-								}
-								return true;
-							}
-						});
+						setupTile(tile, tileView);
 
 						handleVolumeChanged(tileView);
 					}
@@ -163,12 +126,68 @@ public class VolumeTile extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) {
 				try {
-					Object state = param.args[0];
-
 					if (getAdditionalInstanceField(param.thisObject, "mParentTile") != null) {
-						updateTileView((LinearLayout) param.thisObject, (int)getObjectField(state, "state"));
+						updateTileView((LinearLayout) param.thisObject, (int)getObjectField(param.args[0] /* QSTile.State */, "state"));
 					}
 				}catch (Throwable ignored){}
+			}
+		});
+	}
+
+	private void setupTile(Object tile, View tileView) {
+		setAdditionalInstanceField(tileView, "mParentTile", tile);
+
+		setVolumeChangeListener(tile, tileView);
+
+		setTouchListener(tileView);
+	}
+
+	private void setVolumeChangeListener(Object tile, View tileView) {
+		VolumeChangeListener listener = () -> handleVolumeChanged(tileView);
+
+		setAdditionalInstanceField(tile, "volumeChangeListener", listener);
+
+		registerVolumeChangeListener(listener);
+	}
+
+	private void setTouchListener(View tileView) {
+		tileView.setOnTouchListener(new View.OnTouchListener() {
+			float initX = 0;
+			float initPct = 0;
+			boolean moved = false;
+
+			@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
+			@Override
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				switch (motionEvent.getAction()) {
+					case MotionEvent.ACTION_DOWN: {
+						initX = motionEvent.getX();
+						initPct = initX / view.getWidth();
+						return true;
+					}
+					case MotionEvent.ACTION_MOVE: {
+						float newPct = motionEvent.getX() / view.getWidth();
+						float deltaPct = abs(newPct - initPct);
+						if (deltaPct > .03f) {
+							view.getParent().requestDisallowInterceptTouchEvent(true);
+							moved = true;
+							currentPct = round(max(min(newPct, 1), 0) * 100f);
+							changeVolume(currentPct);
+						}
+						return true;
+					}
+					case MotionEvent.ACTION_UP: {
+						if (moved) {
+							moved = false;
+						} else {
+							if (QSHapticEnabled)
+								vibrate(EFFECT_CLICK, USAGE_TOUCH);
+							toggleMute();
+						}
+						return true;
+					}
+				}
+				return true;
 			}
 		});
 	}
@@ -177,7 +196,7 @@ public class VolumeTile extends XposedModPack {
 		Resources res = mContext.getResources();
 
 		volumePercentageDrawable.setTint(
-				(SystemUtils.isDarkMode() || !lightQSHeaderEnabled) && state != STATE_ACTIVE
+				(isDarkMode() || !lightQSHeaderEnabled) && state != STATE_ACTIVE
 						? Color.WHITE
 						: Color.BLACK);
 
@@ -214,34 +233,36 @@ public class VolumeTile extends XposedModPack {
 	}
 
 	private void handleVolumeChanged(View thisView) {
-		Object parentTile = getAdditionalInstanceField(thisView, "mParentTile");
+		new Thread(() -> {
+			Object parentTile = getAdditionalInstanceField(thisView, "mParentTile");
 
-		currentPct = getCurrentVolumePercent();
+			currentPct = getCurrentVolumePercent();
 
-		Object mTile = getObjectField(parentTile, "mTile");
+			Object mTile = getObjectField(parentTile, "mTile");
 
-		int currentState = (int) getObjectField(mTile, "mState");
-		int newState = currentPct > 0 ? STATE_ACTIVE : STATE_INACTIVE;
+			int currentState = (int) getObjectField(mTile, "mState");
+			int newState = currentPct > 0 ? STATE_ACTIVE : STATE_INACTIVE;
 
-		if(currentState != newState)
-		{
-			setObjectField(mTile, "mState", newState);
-			callMethod(parentTile, "refreshState");
-		}
-		updateTileView((LinearLayout) thisView, newState);
+			if(currentState != newState)
+			{
+				setObjectField(mTile, "mState", newState);
+				callMethod(parentTile, "refreshState");
+			}
+			thisView.post(() -> updateTileView((LinearLayout) thisView, newState));
+		}).start();
 	}
 
 	private void changeVolume(int currentPct) {
 		AudioManager().setStreamVolume(
 				STREAM_MUSIC,
-				Math.round((maxVol - minVol) * currentPct / 100f) + minVol,
+				round((maxVol - minVol) * currentPct / 100f) + minVol,
 				0 /* don't show UI */);
 	}
 
 	private int getCurrentVolumePercent() {
 		int currentVol = AudioManager().getStreamVolume(STREAM_MUSIC);
 
-		return Math.round(100f * (currentVol - minVol) / (maxVol - minVol));
+		return round(100f * (currentVol - minVol) / (maxVol - minVol));
 	}
 
 	private class PercentageShape extends Drawable {
@@ -265,7 +286,7 @@ public class VolumeTile extends XposedModPack {
 		@Override
 		public void draw(@NonNull Canvas canvas) {
 			try {
-				Bitmap bitmap = Bitmap.createBitmap(Math.round(shape.getBounds().width() * currentPct / 100f), shape.getBounds().height(), Bitmap.Config.ARGB_8888);
+				Bitmap bitmap = createBitmap(round(shape.getBounds().width() * currentPct / 100f), shape.getBounds().height(), Config.ARGB_8888);
 				Canvas tempCanvas = new Canvas(bitmap);
 				shape.draw(tempCanvas);
 

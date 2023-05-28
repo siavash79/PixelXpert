@@ -13,6 +13,7 @@ import sh.siava.AOSPMods.modpacks.android.StatusbarSize;
 import sh.siava.AOSPMods.modpacks.launcher.AOSPModsIconUpdater;
 import sh.siava.AOSPMods.modpacks.launcher.ClearAllButtonMod;
 import sh.siava.AOSPMods.modpacks.launcher.CustomNavGestures;
+import sh.siava.AOSPMods.modpacks.launcher.FeatureFlags;
 import sh.siava.AOSPMods.modpacks.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.modpacks.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.modpacks.systemui.BatteryStyleManager;
@@ -83,6 +84,7 @@ public class ModPacks {
 		modPacks.add(AOSPModsIconUpdater.class);
 		modPacks.add(VolumeTile.class);
 		modPacks.add(HotSpotController.class);
+		modPacks.add(FeatureFlags.class);
 
 		return modPacks;
 	}

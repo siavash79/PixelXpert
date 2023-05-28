@@ -1,3 +1,6 @@
+**canary-251**  
+- A14 only: Added option to auto-generate themed icons (shout out to Mishaal Rahman for sharing the details)  
+  
 **canary-250**  
 - Fixed updater, broken since canary-248 (If you are on canary 248 or 249, you will have to update to canary-250+ manually)  
   

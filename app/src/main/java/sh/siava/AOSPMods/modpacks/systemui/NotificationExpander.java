@@ -22,6 +22,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.Constants;
+import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
@@ -143,11 +144,11 @@ public class NotificationExpander extends XposedModPack {
 		}
 		int tc = (int) callMethod(mDismissButton, "getCurrentTextColor");
 
-		Drawable expandArrows = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_expand, mContext.getTheme());
+		Drawable expandArrows = ResourcesCompat.getDrawable(ResourceManager.modRes, R.drawable.ic_expand, mContext.getTheme());
 		expandArrows.setTint(tc);
 		ExpandBtn.setBackground(expandArrows);
 
-		Drawable collapseArrows = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_collapse, mContext.getTheme());
+		Drawable collapseArrows = ResourcesCompat.getDrawable(ResourceManager.modRes, R.drawable.ic_collapse, mContext.getTheme());
 		collapseArrows.setTint(tc);
 		CollapseBtn.setBackground(collapseArrows);
 

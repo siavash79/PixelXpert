@@ -37,6 +37,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.Constants;
+import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
@@ -506,7 +507,7 @@ public class KeyguardMods extends XposedModPack {
 		Drawable drawable = null;
 		switch (type) {
 			case SHORTCUT_TV_REMOTE:
-				drawable = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_remote, mContext.getTheme());
+				drawable = ResourcesCompat.getDrawable(ResourceManager.modRes, R.drawable.ic_remote, mContext.getTheme());
 				break;
 			case SHORTCUT_CAMERA:
 				drawable = ResourcesCompat.getDrawable(res, cameraResID, mContext.getTheme());

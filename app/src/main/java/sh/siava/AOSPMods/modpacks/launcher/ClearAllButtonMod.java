@@ -25,6 +25,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.Constants;
+import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
@@ -98,7 +99,7 @@ public class ClearAllButtonMod extends XposedModPack {
 				clearAllButton = new FrameLayout(mContext);
 
 				clearAllIcon = new ImageView(mContext);
-				clearAllIcon.setImageDrawable(ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_clear_all, mContext.getTheme()));
+				clearAllIcon.setImageDrawable(ResourcesCompat.getDrawable(ResourceManager.modRes, R.drawable.ic_clear_all, mContext.getTheme()));
 				clearAllIcon.getDrawable().setTintList(getThemedColor(mContext));
 				clearAllButton.addView(clearAllIcon);
 

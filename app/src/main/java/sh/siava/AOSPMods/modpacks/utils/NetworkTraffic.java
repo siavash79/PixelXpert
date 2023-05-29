@@ -35,6 +35,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
 import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.systemui.StatusbarMods;
 
@@ -262,7 +263,7 @@ public class NetworkTraffic extends FrameLayout {
 	}
 
 	private void setIndicatorMode() {
-		Resources res = XPrefs.modRes;
+		Resources res = ResourceManager.modRes;
 
 		TypedValue typedValue = new TypedValue();
 		mContext.getResources().getValue(mContext.getResources().getIdentifier("status_bar_icon_scale_factor", "dimen", mContext.getPackageName()), typedValue, true);

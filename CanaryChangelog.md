@@ -1,3 +1,6 @@
+**canary-252**  
+- A14 only: App cloning enabled (available under settings/apps/cloned apps) (shout out to Mishaal Rahman for sharing the details)  
+  
 **canary-251**  
 - A14 only: Added option to auto-generate themed icons (shout out to Mishaal Rahman for sharing the details)  
   

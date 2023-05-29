@@ -5,5 +5,6 @@
         <item>com.google.android.apps.nexuslauncher</item> <!-- Pixel Launcher - Taskbar -->
         <item>android</item>  <!-- System Framework -->
         <item>com.android.phone</item> <!-- phone services -->
+        <item>com.android.settings</item> <!-- settings app -->
     </string-array>
 </resources>

@@ -15,6 +15,7 @@ import sh.siava.AOSPMods.modpacks.launcher.ClearAllButtonMod;
 import sh.siava.AOSPMods.modpacks.launcher.CustomNavGestures;
 import sh.siava.AOSPMods.modpacks.launcher.FeatureFlags;
 import sh.siava.AOSPMods.modpacks.launcher.TaskbarActivator;
+import sh.siava.AOSPMods.modpacks.settings.AppCloneEnabler;
 import sh.siava.AOSPMods.modpacks.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.modpacks.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.modpacks.systemui.BrightnessSlider;
@@ -85,6 +86,7 @@ public class ModPacks {
 		modPacks.add(VolumeTile.class);
 		modPacks.add(HotSpotController.class);
 		modPacks.add(FeatureFlags.class);
+		modPacks.add(AppCloneEnabler.class);
 
 		return modPacks;
 	}

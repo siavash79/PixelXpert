@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.modpacks.launcher;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
@@ -37,10 +36,16 @@ public class FeatureFlags extends XposedModPack {
 		try {
 			Class<?> FeatureFlags = findClass("com.android.launcher3.config.FeatureFlags", lpparam.classLoader);
 
+			hookAllMethods(FeatureFlags.getField("ENABLE_APP_CLONING_CHANGES_IN_LAUNCHER").getType(), "get", new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+						param.setResult(true);
+				}
+			});
+
 			hookAllMethods(FeatureFlags.getField("ENABLE_FORCED_MONO_ICON").getType(), "get", new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					log("asked");
 					if (ForceThemedLauncherIcons)
 						param.setResult(true);
 				}

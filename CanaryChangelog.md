@@ -1,3 +1,7 @@
+**canary-253**  
+- lockscreen shortcuts: Added QR code scanner  
+- fixed custom lockscreen shortcuts not hiding on AOD  
+  
 **canary-252**  
 - A14 only: App cloning enabled (available under settings/apps/cloned apps) (shout out to Mishaal Rahman for sharing the details)  
   

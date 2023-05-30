@@ -39,7 +39,6 @@ import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
-import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.modpacks.utils.StringFormatter;
@@ -525,7 +524,10 @@ public class KeyguardMods extends XposedModPack {
 
 		button.setOnClickListener(v -> launchAction(type));
 		button.setImageDrawable(drawable);
-		button.setVisibility(VISIBLE);
+
+		button.setVisibility(mDozing
+				? GONE
+				: VISIBLE);
 	}
 
 	private void launchAction(String type) {

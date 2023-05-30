@@ -2,7 +2,6 @@ package sh.siava.AOSPMods.modpacks.settings;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
@@ -10,18 +9,15 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.view.View;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.Constants;
-import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 
-@SuppressWarnings("RedundantThrows")
+@SuppressWarnings({"RedundantThrows", "deprecation"})
 public class AppCloneEnabler extends XposedModPack {
 	private static final String listenPackage = Constants.SETTINGS_PACKAGE;
 
@@ -47,12 +43,13 @@ public class AppCloneEnabler extends XposedModPack {
 		Class<?> AppStateClonedAppsBridgeClass = findClass("com.android.settings.applications.AppStateClonedAppsBridge", lpparam.classLoader);
 
 		hookAllConstructors(AppStateClonedAppsBridgeClass, new XC_MethodHook() {
+			@SuppressLint("QueryPermissionsNeeded")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				ArrayList<String> packageList = new ArrayList<>();
 				PackageManager pm = mContext.getPackageManager();
 
-				for(PackageInfo installedPackage : pm.getInstalledPackages(PackageManager.GET_ACTIVITIES))
+				for(@SuppressWarnings("SingleStatementInBlock") PackageInfo installedPackage : pm.getInstalledPackages(PackageManager.GET_ACTIVITIES))
 				{
 					if(installedPackage.packageName != null && installedPackage.packageName.length() > 0)
 					{

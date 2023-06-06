@@ -18,7 +18,6 @@ import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 
 import java.lang.reflect.Method;
-import java.util.Calendar;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -113,7 +112,7 @@ public class ScreenOffKeys extends XposedModPack {
 					int r = (int) param.args[param.args.length-1];
 
 					if (r == 1) {
-						wakeTime = Calendar.getInstance().getTimeInMillis();
+						wakeTime = SystemClock.uptimeMillis();
 					}
 				}
 			});
@@ -122,8 +121,9 @@ public class ScreenOffKeys extends XposedModPack {
 			hookMethod(powerLongPressMethod, new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if (!replaceAssistantwithTorch) return;
-					if (Calendar.getInstance().getTimeInMillis() - wakeTime > 1000) return;
+					if (!replaceAssistantwithTorch
+							|| SystemClock.uptimeMillis() - wakeTime > 1000)
+						return;
 
 					try {
 						if ((int) callMethod(param.thisObject, "getResolvedLongPressOnPowerBehavior")

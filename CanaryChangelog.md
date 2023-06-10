@@ -1,3 +1,8 @@
+**canary-254**  
+- A14B3: Fixed lockscreen mods - Part 1  
+- A14B3: Fixed Statusbar mods  
+- A14: Fixed screen-off button mods  
+  
 **canary-253**  
 - lockscreen shortcuts: Added QR code scanner  
 - fixed custom lockscreen shortcuts not hiding on AOD  

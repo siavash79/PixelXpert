@@ -324,15 +324,15 @@ public class KeyguardMods extends XposedModPack {
 		//endregion
 
 		//region keyguard battery info
-		hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", new XC_MethodHook() {
+		XC_MethodHook powerIndicationHook = new XC_MethodHook() {
 			@SuppressLint("DefaultLocale")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(ShowChargingInfo) {
+				if (ShowChargingInfo) {
 					String result = (String) param.getResult();
 
 					Float shownTemperature = (TemperatureUnitF)
-							? (temperature*1.8f) + 32f
+							? (temperature * 1.8f) + 32f
 							: temperature;
 
 					param.setResult(
@@ -348,7 +348,16 @@ public class KeyguardMods extends XposedModPack {
 											: "C"));
 				}
 			}
-		});
+		};
+
+		try { //A14
+			Class<?> KeyguardIndicationControllerGoogleClass = findClass("com.google.android.systemui.statusbar.KeyguardIndicationControllerGoogle", lpparam.classLoader);
+			hookAllMethods(KeyguardIndicationControllerGoogleClass, "computePowerIndication", powerIndicationHook);
+		}
+		catch (Throwable ignored)
+		{ //A13 and maybe 14 custom
+			hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", powerIndicationHook);
+		}
 
 		hookAllConstructors(BatteryStatusClass, new XC_MethodHook() {
 			@Override

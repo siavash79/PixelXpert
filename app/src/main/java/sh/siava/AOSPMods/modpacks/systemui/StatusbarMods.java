@@ -14,7 +14,6 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
-import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
@@ -28,6 +27,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
 import android.os.UserHandle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
@@ -93,7 +93,7 @@ public class StatusbarMods extends XposedModPack {
 
 	private static final int AM_PM_STYLE_SMALL = 1;
 	private static final int AM_PM_STYLE_GONE = 2;
-
+	private static final int MSG_BATTERY_UPDATE = 302;
 	private int leftClockPadding = 0, rightClockPadding = 0;
 	private static int clockPosition = POSITION_LEFT;
 	private static int mAmPmStyle = AM_PM_STYLE_GONE;
@@ -141,7 +141,6 @@ public class StatusbarMods extends XposedModPack {
 	private static final float PADDING_DEFAULT = -0.5f;
 	private static final ArrayList<ClockVisibilityCallback> clockVisibilityCallbacks = new ArrayList<>();
 	private Object mActivityStarter;
-	private Object KIC = null;
 	private Object QSBH = null;
 	private ViewGroup mStatusBar;
 	private static boolean notificationAreaMultiRow = false;
@@ -455,17 +454,17 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 		Class<?> PhoneStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
-		Class<?> KeyGuardIndicationClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
-		Class<?> BatteryTrackerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
 		Class<?> NotificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
 		NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 		Class<?> StatusBarSignalPolicyClass = findClass("com.android.systemui.statusbar.phone.StatusBarSignalPolicy", lpparam.classLoader);
 		Class<?> NetworkControllerImplClass = findClass("com.android.systemui.statusbar.connectivity.NetworkControllerImpl", lpparam.classLoader);
 		Class<?> PrivacyItemControllerClass = findClass("com.android.systemui.privacy.PrivacyItemController", lpparam.classLoader);
+		Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
+
 //		Method setMeasuredDimensionMethod = findMethodExact(View.class, "setMeasuredDimension", int.class, int.class);
 		//endregion
 
@@ -573,29 +572,32 @@ public class StatusbarMods extends XposedModPack {
 
 		//endregion
 
-		// needed to check fastcharging
-		hookAllConstructors(KeyGuardIndicationClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				KIC = param.thisObject;
-			}
-		});
-
 		//setting charing status for batterybar and batteryicon
-		hookAllMethods(BatteryTrackerClass, "onRefreshBatteryInfo", new XC_MethodHook() {
+
+		hookAllConstructors(KeyguardUpdateMonitorClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				int mChargingSpeed = getIntField(KIC, "mChargingSpeed");
-				if (mChargingSpeed == CHARGING_FAST) {
-					BatteryBarView.setIsFastCharging(true);
-					BatteryStyleManager.setIsFastCharging(true);
-				} else {
-					BatteryBarView.setIsFastCharging(false);
-					BatteryStyleManager.setIsFastCharging(false);
-				}
+				Object handler = getObjectField(param.thisObject, "mHandler");
+
+				hookAllMethods(handler.getClass(), "handleMessage", new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						Message msg = (Message) param.args[0];
+						if(msg.what == MSG_BATTERY_UPDATE)
+						{
+							int mChargingSpeed = (int) callMethod(msg.obj, "getChargingSpeed", mContext);
+							if (mChargingSpeed == CHARGING_FAST) {
+								BatteryBarView.setIsFastCharging(true);
+								BatteryStyleManager.setIsFastCharging(true);
+							} else {
+								BatteryBarView.setIsFastCharging(false);
+								BatteryStyleManager.setIsFastCharging(false);
+							}
+						}
+					}
+				});
 			}
 		});
-
 		//getting statusbar class for further use
 		hookAllConstructors(CollapsedStatusBarFragmentClass, new XC_MethodHook() {
 			@Override

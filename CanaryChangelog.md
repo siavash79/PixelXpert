@@ -1,3 +1,6 @@
+**canary-255**  
+- A14B3: Fixed forced themed icons  
+  
 **canary-254**  
 - A14B3: Fixed lockscreen mods - Part 1  
 - A14B3: Fixed Statusbar mods  

@@ -1,7 +1,11 @@
 package sh.siava.AOSPMods.modpacks.launcher;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getIntField;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
@@ -35,6 +39,24 @@ public class FeatureFlags extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		try {
 			Class<?> FeatureFlags = findClass("com.android.launcher3.config.FeatureFlags", lpparam.classLoader);
+			Class<?> LauncherIconsClass = findClass("com.android.launcher3.icons.LauncherIcons", lpparam.classLoader);
+
+			hookAllMethods(LauncherIconsClass, "getMonochromeDrawable", new XC_MethodHook() {  //flag doesn't work on A14B3 for some reason
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					if(!ForceThemedLauncherIcons) return;
+
+					Object mMonochromeIconFactory = getObjectField(param.thisObject, "mMonochromeIconFactory");
+					if(mMonochromeIconFactory == null)
+					{
+						Class<?> MonochromeIconFactoryClass = findClass("com.android.launcher3.icons.MonochromeIconFactory", lpparam.classLoader);
+						int mIconBitmapSize = getIntField(param.thisObject, "mIconBitmapSize");
+						mMonochromeIconFactory = MonochromeIconFactoryClass.getConstructors()[0].newInstance(mIconBitmapSize);
+						setObjectField(param.thisObject, "mMonochromeIconFactory", mMonochromeIconFactory);
+					}
+					param.setResult(callMethod(mMonochromeIconFactory, "wrap", param.args[0]));
+				}
+			});
 
 			hookAllMethods(FeatureFlags.getField("ENABLE_APP_CLONING_CHANGES_IN_LAUNCHER").getType(), "get", new XC_MethodHook() {
 				@Override

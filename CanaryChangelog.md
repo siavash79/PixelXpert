@@ -1,3 +1,6 @@
+**canary-256**  
+- A14B3: Fixed forced themed icons behavior  
+  
 **canary-255**  
 - A14B3: Fixed forced themed icons  
   

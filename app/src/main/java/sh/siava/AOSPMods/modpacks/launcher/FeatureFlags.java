@@ -9,6 +9,7 @@ import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
+import android.graphics.drawable.AdaptiveIconDrawable;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -46,15 +47,23 @@ public class FeatureFlags extends XposedModPack {
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 					if(!ForceThemedLauncherIcons) return;
 
-					Object mMonochromeIconFactory = getObjectField(param.thisObject, "mMonochromeIconFactory");
-					if(mMonochromeIconFactory == null)
+					try
 					{
-						Class<?> MonochromeIconFactoryClass = findClass("com.android.launcher3.icons.MonochromeIconFactory", lpparam.classLoader);
-						int mIconBitmapSize = getIntField(param.thisObject, "mIconBitmapSize");
-						mMonochromeIconFactory = MonochromeIconFactoryClass.getConstructors()[0].newInstance(mIconBitmapSize);
-						setObjectField(param.thisObject, "mMonochromeIconFactory", mMonochromeIconFactory);
+						if(!(param.args[0] instanceof AdaptiveIconDrawable) || ((AdaptiveIconDrawable) param.args[0]).getMonochrome() == null)
+						{
+							//at this point it's clear that we don't have a monochrome icon
+							Object mMonochromeIconFactory = getObjectField(param.thisObject, "mMonochromeIconFactory");
+							if(mMonochromeIconFactory == null)
+							{
+								Class<?> MonochromeIconFactoryClass = findClass("com.android.launcher3.icons.MonochromeIconFactory", lpparam.classLoader);
+								int mIconBitmapSize = getIntField(param.thisObject, "mIconBitmapSize");
+								mMonochromeIconFactory = MonochromeIconFactoryClass.getConstructors()[0].newInstance(mIconBitmapSize);
+								setObjectField(param.thisObject, "mMonochromeIconFactory", mMonochromeIconFactory);
+							}
+							param.setResult(callMethod(mMonochromeIconFactory, "wrap", param.args[0]));
+						}
 					}
-					param.setResult(callMethod(mMonochromeIconFactory, "wrap", param.args[0]));
+					catch (Throwable ignored){}
 				}
 			});
 
@@ -65,13 +74,13 @@ public class FeatureFlags extends XposedModPack {
 				}
 			});
 
-			hookAllMethods(FeatureFlags.getField("ENABLE_FORCED_MONO_ICON").getType(), "get", new XC_MethodHook() {
+/*			hookAllMethods(FeatureFlags.getField("ENABLE_FORCED_MONO_ICON").getType(), "get", new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 					if (ForceThemedLauncherIcons)
 						param.setResult(true);
 				}
-			});
+			});*/
 		}
 		catch (Throwable ignored){} //Android 13
 	}

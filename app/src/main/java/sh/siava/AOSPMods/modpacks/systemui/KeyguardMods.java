@@ -20,6 +20,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -264,35 +265,32 @@ public class KeyguardMods extends XposedModPack {
 
 		Method updateMethod = null;
 		Method[] methods = KeyguardBottomAreaViewBinderClass.getMethods();
-		for(Method m : methods)
-		{
-			if(m.getName().contains("updateButton"))
-			{
+		for (Method m : methods) {
+			if (m.getName().contains("updateButton")) {
 				updateMethod = m;
 				break;
 			}
 		}
-		if(updateMethod != null)
-		{
+		if (updateMethod != null) {
 			hookMethod(updateMethod, new XC_MethodHook() {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					ImageView v = (ImageView) param.args[0];
 
 					try {
-						String shortcutID = mContext.getResources().getResourceName(v.getId());
+						if(Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { //feature deprecated for Android 14
+							String shortcutID = mContext.getResources().getResourceName(v.getId());
 
-						if (shortcutID.contains("start")) {
-							convertShortcut(v, leftShortcutClick);
-							if(isShortcutSet(v))
-							{
-								setLongPress(v, leftShortcutLongClick);
-							}
-						} else if (shortcutID.contains("end")) {
-							convertShortcut(v, rightShortcutClick);
-							if(isShortcutSet(v))
-							{
-								setLongPress(v, rightShortcutLongClick);
+							if (shortcutID.contains("start")) {
+								convertShortcut(v, leftShortcutClick);
+								if (isShortcutSet(v)) {
+									setLongPress(v, leftShortcutLongClick);
+								}
+							} else if (shortcutID.contains("end")) {
+								convertShortcut(v, rightShortcutClick);
+								if (isShortcutSet(v)) {
+									setLongPress(v, rightShortcutLongClick);
+								}
 							}
 						}
 
@@ -316,11 +314,12 @@ public class KeyguardMods extends XposedModPack {
 
 							v.setBackgroundTintList(colorSurface);
 						}
+					} catch (Throwable ignored) {
 					}
-					catch (Throwable ignored){}
 				}
 			});
 		}
+
 		//endregion
 
 		//region keyguard battery info

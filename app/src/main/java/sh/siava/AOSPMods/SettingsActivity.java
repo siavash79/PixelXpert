@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.view.Gravity;
@@ -438,6 +439,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				findPreference("KeyGuardDimAmount").setSummary(KeyGuardDimAmount < 0 ? getString(R.string.word_default) : KeyGuardDimAmount + "%");
 
 				findPreference("TemperatureUnitF").setVisible(sharedPreferences.getBoolean("ShowChargingInfo", false));
+
+				boolean lockScreenShortcutModsVisible = Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
+
+				findPreference("leftKeyguardShortcut").setVisible(lockScreenShortcutModsVisible);
+				findPreference("leftKeyguardShortcutLongClick").setVisible(lockScreenShortcutModsVisible);
+				findPreference("rightKeyguardShortcut").setVisible(lockScreenShortcutModsVisible);
+				findPreference("rightKeyguardShortcutLongClick").setVisible(lockScreenShortcutModsVisible);
 			} catch (Throwable ignored) {
 			}
 		}
@@ -1249,7 +1257,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			Intent intent = getActivity().getPackageManager()
 					.getLaunchIntentForPackage(getActivity().getPackageName());
 			PendingIntent pendingIntent = PendingIntent.getActivity(
-					getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+					getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 			AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 			manager.set(AlarmManager.RTC, System.currentTimeMillis() + 1, pendingIntent);
 			System.exit(0);

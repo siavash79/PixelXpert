@@ -12,10 +12,10 @@ jobs:
       - name: Grab Source
         run: git clone --branch stable --single-branch --recurse-submodules https://github.com/siavash79/AOSPMods.git .
 
-      - name: Setup JDK 11
+      - name: Setup JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
           cache: gradle
 
@@ -61,7 +61,7 @@ jobs:
           release_name: ${{ github.ref }}
           body_path: 'releaseNotes.md'
           prerelease: false
-          draft: true
+          draft: false
           asset_files: 'output'
 
       - name: Commit version bump

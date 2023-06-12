@@ -1,5 +1,7 @@
 <resources>
     <!--General strings-->
+	<string name="app_themed_icon_title">הפעל סמל אפליקציה חלופי עם ערכות נושא של AOSP Mods</string>
+    <string name="xposed_desc">תכונות מותאמות אישית עבור אנדרואיד 12+ ROMs מבוססי AOSP</string>
     <string name="error_not_activated">אנא אשר אם המודול מופעל בתוך LSPosed Manager</string>
     <string name="hide_default">הסתר (ברירת מחדל)</string>
     <string name="percent_of_default_size">% מגודל ברירת המחדל</string>
@@ -19,6 +21,11 @@
     <string name="qs_panel_category_title">לוח הגדרות מהירות</string>
     <string name="theme_customization_category">עיצוב</string>
     <!--Lock screen related-->
+    <string name="pm_header">מנהל חבילה</string>
+    <string name="hotspot_header">נקודה חמה ניידת</string>
+    <string name="hotspot_hide_ssid_title">הסתר SSID</string>
+    <string name="hotspot_inactivity_timeout_title">זמן קצוב לחוסר פעילות</string>
+    <string name="ls_general_options">אפשרויות מסך נעילה</string>
     <string name="hide_avatar_title">הסרת דמות משתמש (מצב ריבוי משתמשים)</string>
     <string name="transparent_fingerprint_circle">הסר את עיגול הרקע מטביעת האצבע מתחת לתצוגה</string>
     <string name="transparent_fingerprint_circle_off">מעגל סביב סמל טביעת האצבע פעיל</string>
@@ -37,9 +44,13 @@
     <string name="keyguard_left_shortcut">הצג את קיצור הדרך השמאלי במסך הנעילה</string>
     <string name="LSleftShortcutTitle">קיצור דרך שמאלה</string>
     <string name="LSrightShortcutTitle">קיצור דרך ימינה</string>
+    <string name="LSleftLongClickShortcutTitle">קיצור דרך שמאל (לחיצה ארוכה)</string>
+    <string name="LSrightLongClickShortcutTitle">קיצור דרך ימין (לחיצה ארוכה)</string>
     <string name="camera_shortcut">מַצלֵמָה</string>
     <string name="assistant_shortcut">Assistant</string>
     <string name="torch_shortcut">פנס</string>
+    <string name="tv_remote_shortcut">שלט טלוויזיה</string>
+    <string name="dnd_shortcut">נא לא להפריע</string>
     <string name="album_art_category">אפשרויות מדיה</string>
     <string name="album_art_title">הפעל את תמונת האלבום בעת הפעלת מדיה</string>
     <string name="album_art_blur_text">ערך הטשטוש</string>
@@ -60,6 +71,8 @@
     <string name="BIcon_Opacity_title">אֲטִימוּת</string>
     <string name="sb_center_fine_tune">כוונן את אזור המרכז</string>
     <string name="sb_multi_row_system_icons">סמלי הודעות מרובות שורות (צריך להגדיל את גובה שורת המצב)</string>
+    <string name="sb_multi_row_notification_icons">סמלי הודעות מרובות שורות (צריך להגדיל את גובה שורת המצב)</string>
+    <string name="sb_double_row_category">שורת מצב כפולה</string>
     <string name="sb_icon_sort_mode">שיטת מיקום אייקונים</string>
     <string name="sort_clean">מיון ברשת</string>
     <string name="sort_tight">התאם מקסימום פריטים</string>
@@ -69,6 +82,7 @@
     <string name="hide_roaming_title">הסתר מחווני נדידה ניידים</string>
     <string name="caution_mobile_costs">זהירות - אי ידיעה שאתה נודד יכול להגדיל את עלויות הנייד שלך</string>
     <string name="volte_icon_title">הצג את סמל VoLTE כאשר זמין</string>
+    <string name="vowifi_icon_title">הצג את סמל VoWiFi כאשר זמין</string>
     <string name="hide_privacychip_title">הסתר מחווני פרטיות\n(מצלמה, מיקרופון)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">הצג סמל רטט</string>
     <string name="sbc_position_title">מצב שעון</string>
@@ -198,6 +212,9 @@
     <string name="taskbar_force_disable_title">כפה מושבת</string>
     <string name="taskbar_hide_allapps_title">הסתר את סמל כל האפליקציות</string>
     <!--Miscellaneous section related-->
+    <string name="pm_bypass_signature_title">עוקף את בדיקת חתימת החבילה</string>
+    <string name="pm_allow_downgrade_title">אפשר שדרוג לאחור של האפליקציה</string>
+    <string name="auto_off_five_minutes">מופעל למשך 5 הדקות הבאות</string>
     <string name="screenshot_sound_disable_title">השבת את צליל צילום המסך</string>
     <string name="clipboard_smart_actions_title">פעולות חכמות בשכבת-על של הלוח</string>
     <string name="allow_all_screen_rotations">ביטול נעילה בכוח של כל סיבובי המסך</string>
@@ -230,6 +247,7 @@
     <string name="vibrate_on_call_active_title">רטט בשיחה יוצאת שנענתה</string>
     <string name="vibrate_on_call_drop_title">רטט כאשר השיחה מתנתקת</string>
     <!-- Theming section related -->
+    <string name="vibration_type_notification">עוצמה המוגדרת על-ידי הגדרות רטט של הודעת מערכת</string>
     <string name="gsans_override_title">כפה על Google Sans גופן בכל המערכת</string>
     <string name="font_overlays_enable_title">הפעלה באמצעות גופנים מותאמים אישית</string>
     <string name="theme_customization_font_title">כותרת / גופן גוף</string>
@@ -273,6 +291,7 @@
     <string name="network_interval_custom_text_title">מרווח רענון</string>
     <string name="minutes_word">דַקָה(s)</string>
     <!-- Menu Items -->
+    <string name="incompatible_alert_ok_btn">אני מבין</string>
     <string name="menu_settings_title">יְבוּא/יְצוּא</string>
     <string name="menu_reset_defaults">אפס את כל ההגדרות</string>
     <string name="menu_import_settings">ייבוא הגדרות מהקובץ…</string>

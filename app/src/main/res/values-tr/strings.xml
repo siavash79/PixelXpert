@@ -1,5 +1,7 @@
 <resources>
     <!--General strings-->
+	<string name="app_themed_icon_title">Alternatif AOSP Modları temalı uygulama simgesini etkinleştirAlternatif AOSPMods temalı uygulama simgesini etkinleştir</string>
+    <string name="xposed_desc">Android 12+ AOSP tabanlı ROM\'lar için özel özellikler</string>
     <string name="error_not_activated">Lütfen modülün LSPosed Manager\'da etkinleştirildiğinden emin olun</string>
     <string name="hide_default">Gizle (Varsayılan)</string>
     <string name="percent_of_default_size">Varsayılan boyut</string>
@@ -66,6 +68,7 @@
     <string name="lte_4g_icon_title">LTE / 4G Simgesi</string>
     <string name="combined_signal_icon_title">Birleşik sinyal simgeleri</string>
     <string name="volte_icon_title">Varsa VoLTE simgesini göster</string>
+    <string name="vowifi_icon_title">"Kullanılabilir olduğunda VoWiFi simgesini göster "</string>
     <string name="hide_privacychip_title">Gizlilik göstergelerini gizle\n(Kamera, Mikrofon)</string>
     <string name="sb_vibration_switch_title">Titreşim/Sessiz simgelerini göster</string>
     <string name="sbc_position_title">Saat konumu</string>
@@ -291,6 +294,7 @@
     <string name="update_channel_name">Güncellemeler</string>
     <string name="update_notification_title">Güncelleme indirildi</string>
     <string name="update_notification_text">Güncellemeyi indirmek için tıkla</string>
+    <string name="download_failed">"Güncelleme indirilemedi "</string>
     <string name="reboot_notification_title">AOSPMods güncellendi!</string>
     <string name="reboot_notification_text">Değişiklikler yeniden başlatma sonra geçerli olacak</string>
     <string name="update_flavor_title">Kanalı güncelle</string>
@@ -352,6 +356,12 @@
     <string name="imperial_units_title">İngiliz ölçü birimini kullan</string>
     <string name="hide_roaming_title">Dolaşım (R) indikatörünü gösterme</string>
     <string name="caution_mobile_costs">DİKKAT - dolaşım kullandığını bilmemek mobil ödemeni arttırabilir</string>
+    <string name="hotspot_header">Taşınabilir Hotspot</string>
+    <string name="hotspot_hide_ssid_title">SSID\'yi Gizle</string>
+    <string name="hotspot_inactivity_timeout_title">"Hareketsizlik süresi bitimi "</string>
+    <string name="hotspot_max_client_title">Maksimum alıcılar</string>
+    <string name="disable_unlock_hint_title">"Kilit açma ipucu animasyonunu kapatın "</string>
+    <string name="ls_general_options">"Kilit ekranı seçenekleri "</string>
     <string name="hide_avatar_title">Çoklu kullanıcı rejiminde kilit ekranındakı kullanıcı resmini kaldır</string>
     <string name="camera_manager_master_title">El feneri modlarını etkinleştir (cihazınız desteklemiyorsa inaktive edin)</string>
     <string name="clipboard_smart_actions_title">Panoda akıllı seçenekler</string>

@@ -1,5 +1,8 @@
 <resources>
     <!--General strings-->
+    <string name="app_themed_icon_title">"Aktivierung alternativer AOSP Mods thematisierter App-Symbole "</string>
+    <string name="xposed_desc">"Benutzerdefinierte Funktionen für Android 12+ AOSP-basierte ROMs "</string>
+    <string name="volume_tile_title">Medien Lautstärke</string>
     <string name="error_not_activated">Bitte kontrolliere, ob das Modul im LSPosed Manager aktiviert ist!</string>
     <string name="hide_default">Verstecken (Standard)</string>
     <string name="percent_of_default_size">% von der Standard Größe</string>
@@ -68,6 +71,7 @@
     <string name="lte_4g_icon_title">LTE / 4G Symbol</string>
     <string name="combined_signal_icon_title">Kombinierte Empfangssymbole</string>
     <string name="volte_icon_title">VoLTE-Symbol anzeigen, wenn verfügbar</string>
+    <string name="vowifi_icon_title">"VoWiFi-Symbol anzeigen, wenn verfügbar "</string>
     <string name="hide_privacychip_title">Datenschutzindikatoren ausblenden\n(Kamera, Mikrofon)</string>
     <string name="sb_vibration_switch_title">Zeige Vibration/Lautlos Symbole</string>
     <string name="sbc_position_title">Uhr Position</string>
@@ -293,6 +297,8 @@
     <string name="update_channel_name">Aktualisierungen</string>
     <string name="update_notification_title">Update heruntergeladen</string>
     <string name="update_notification_text">Zum Installieren hier tippen</string>
+    <string name="download_failed">"Download des Updates fehlgeschlagen "</string>
+    <string name="try_again_later">"Bitte später erneut versuchen "</string>
     <string name="reboot_notification_title">AOSPMods aktualisiert!</string>
     <string name="reboot_notification_text">Änderungen werden nach dem Neustart wirksam</string>
     <string name="update_flavor_title">Kanal aktualisieren</string>
@@ -354,6 +360,12 @@
     <string name="imperial_units_title">Verwenden imperiale Einheiten</string>
     <string name="hide_roaming_title">Mobile Roaming-Anzeigen ausblenden</string>
     <string name="caution_mobile_costs">VORSICHT - Wenn Sie nicht wissen, dass Sie Roaming verwenden, können Ihre Mobilfunkkosten steigen</string>
+    <string name="hotspot_header">"Tragbarer Hotspot "</string>
+    <string name="hotspot_hide_ssid_title">"SSID verstecken "</string>
+    <string name="hotspot_inactivity_timeout_title">"Zeitüberschreitung bei Inaktivität "</string>
+    <string name="hotspot_max_client_title">"Maximale Anzahl von Clients "</string>
+    <string name="disable_unlock_hint_title">"Optionen für den Sperrbildschirm "</string>
+    <string name="ls_general_options">Optionen für den Sperrbildschirm</string>
     <string name="hide_avatar_title">Benutzer-Avatar entfernen (Mehrbenutzermodus)</string>
     <string name="clipboard_smart_actions_title">Smart-Aktionen in der Zwischenablage</string>
     <string name="camera_manager_master_title">Taschenlampenmodifikationen aktivieren (Deaktivieren, wenn das Gerät es nicht unterstützt)</string>

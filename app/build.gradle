@@ -5,15 +5,15 @@ plugins {
 apply plugin: 'kotlin-android'
 
 android {
-	compileSdkVersion 33
-	buildToolsVersion '33.0.0'
+	compileSdk 34
+	buildToolsVersion '34.0.0'
 
 	defaultConfig {
 		applicationId "sh.siava.AOSPMods"
 		minSdk 33
-		targetSdk 33
-		versionCode 242
-		versionName "2.8.0"
+		targetSdk 34
+		versionCode 258
+		versionName "canary-258"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
@@ -32,8 +32,8 @@ android {
 	}
 
 	compileOptions {
-		sourceCompatibility JavaVersion.VERSION_1_8
-		targetCompatibility JavaVersion.VERSION_1_8
+		sourceCompatibility JavaVersion.VERSION_1_9
+		targetCompatibility JavaVersion.VERSION_1_9
 	}
 	lint {
 		checkReleaseBuilds false
@@ -49,7 +49,7 @@ android {
 }
 
 dependencies {
-	def libsuVersion = '5.0.3'
+	def libsuVersion = '5.0.5'
 
 	//Xposed api
 	compileOnly files('lib/api-82.jar')
@@ -62,12 +62,12 @@ dependencies {
 	implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 	implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
 	implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-	implementation 'androidx.appcompat:appcompat:1.6.0'
-	implementation 'androidx.annotation:annotation:1.5.0'
+	implementation 'androidx.appcompat:appcompat:1.6.1'
+	implementation 'androidx.annotation:annotation:1.6.0'
 	implementation 'androidx.preference:preference-ktx:1.2.0'
-	implementation 'androidx.recyclerview:recyclerview:1.2.1'
-	implementation 'com.google.android.material:material:1.8.0'
-	implementation 'androidx.compose.ui:ui-geometry:1.3.3'
+	implementation 'androidx.recyclerview:recyclerview:1.3.0'
+	implementation 'com.google.android.material:material:1.9.0'
+	implementation 'androidx.compose.ui:ui-geometry:1.4.3'
 
 	// The core module that provides APIs to a shell
 	implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"

@@ -4,6 +4,7 @@
     <string name="app_themed_icon_title">Enable alternative AOSP Mods themed app icon</string>
     <string name="xposed_desc">Custom features for Android 12+ AOSP based ROMs</string>
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
+    <string name="volume_tile_title">Media Volume</string>
     <string name="error_not_activated">Please confirm if the module is activated within LSPosed Manager</string>
     <string name="hide_default">Hide (Default)</string>
     <string name="percent_of_default_size">% of default size</string>
@@ -24,8 +25,15 @@
     <string name="qs_panel_category_title">Quick Settings Panel</string>
     <string name="theme_customization_category">Theming</string>
     <string name="pm_header">Package Manager</string>
+    <string name="hotspot_header">Portable Hotspot</string>
+
+    <!-- Hotspot settings-->
+    <string name="hotspot_hide_ssid_title">Hide SSID</string>
+    <string name="hotspot_inactivity_timeout_title">Inactivity timeout</string>
+    <string name="hotspot_max_client_title">Maximum clients</string>
 
     <!--Lock screen related-->
+    <string name="disable_unlock_hint_title">Disable the unlock hint animation</string>
     <string name="ls_general_options">Lock screen options</string>
     <string name="hide_avatar_title">Remove user avatar (multi user mode)</string>
     <string name="transparent_fingerprint_circle">Remove background circle from under-display fingerprint</string>
@@ -52,6 +60,7 @@
     <string name="torch_shortcut">Flashlight</string>
     <string name="tv_remote_shortcut">TV Remote</string>
     <string name="dnd_shortcut">Do Not Disturb</string>
+    <string name="qr_scanner_shortcut">QR code scanner</string>
     <string name="album_art_category">Media options</string>
     <string name="album_art_title">Enable album art when playing media</string>
     <string name="album_art_blur_text">Blur value</string>
@@ -87,6 +96,7 @@
     <string name="hide_roaming_title">Hide mobile roaming indicators</string>
     <string name="caution_mobile_costs">CAUTION - Not knowing that you\'re roaming can increase your mobile costs</string>
     <string name="volte_icon_title">Show VoLTE icon when available</string>
+    <string name="vowifi_icon_title">Show VoWiFi icon when available</string>
     <string name="hide_privacychip_title">Hide privacy indicators\n(Camera, Mic)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">Show Vibrate icon</string>
     <string name="sbc_position_title">Clock position</string>
@@ -254,6 +264,8 @@
     <string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
     <string name="force_no_cutout">Ignore the camera cutout</string>
     <string name="clear_all_reposition_title">Add an accessible clear-all button to recents page</string>
+    <string name="force_themed_icons_title">Auto-generate missing themed icons (Android 14 - Pixel launcher only)</string>
+    <string name="reapply_themed_config">Re-enable themed icons to apply</string>
     <string name="volume_button_step_title">Volume steps (0 to 100%)</string>
     <string name="display_resolution_title">Display resolution</string>
     <string name="brightness_range_title">Display brightness limits</string>
@@ -352,7 +364,7 @@
     <string name="incompatible_alert_title">Incompatible</string>
     <string name="incompatible_alert_body">Your current ROM is not the direct target of this module. You may continue to use it, but some (or all) options might not work as intended\n\nPlease do not report bugs</string>
     <string name="incompatible_alert_ok_btn">I understand</string>
-    
+
     <!-- Menu Items -->
     <string name="menu_settings_title">Import/Export</string>
     <string name="menu_reset_defaults">Reset all settings</string>
@@ -378,6 +390,8 @@
     <string name="update_channel_name">Updates</string>
     <string name="update_notification_title">Update downloaded</string>
     <string name="update_notification_text">Tap here to install</string>
+    <string name="download_failed">Failed to download the update</string>
+    <string name="try_again_later">Please try again later</string>
     <string name="reboot_notification_title">AOSPMods updated!</string>
     <string name="reboot_notification_text">Changes will take effect after you reboot the device</string>
     <string name="update_flavor_title">Update channel</string>

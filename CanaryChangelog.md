@@ -1,3 +1,64 @@
+**canary-258**  
+- Fixed call chip placement if multi-row statusbar enabled  
+  
+**canary-257**  
+- [app] Removed incompatibility warning for A14  
+- A14: Fixed show security input on device wake  
+- [app] fixed QS section  
+- A14 Beta 3+: removed lockscreen shortcuts - probably permanently  
+  
+**canary-256**  
+- A14B3: Fixed forced themed icons behavior  
+  
+**canary-255**  
+- A14B3: Fixed forced themed icons  
+  
+**canary-254**  
+- A14B3: Fixed lockscreen mods - Part 1  
+- A14B3: Fixed Statusbar mods  
+- A14: Fixed screen-off button mods  
+  
+**canary-253**  
+- lockscreen shortcuts: Added QR code scanner  
+- fixed custom lockscreen shortcuts not hiding on AOD  
+  
+**canary-252**  
+- A14 only: App cloning enabled (available under settings/apps/cloned apps) (shout out to Mishaal Rahman for sharing the details)  
+  
+**canary-251**  
+- A14 only: Added option to auto-generate themed icons (shout out to Mishaal Rahman for sharing the details)  
+  
+**canary-250**  
+- Fixed updater, broken since canary-248 (If you are on canary 248 or 249, you will have to update to canary-250+ manually)  
+  
+**canary-249**  
+- Added option to disable the unlock hint animation (Lockscreen)  
+- QS light theme optimizations  
+  
+**canary-248**  
+- A14: Fixed QQS BrightnessSlider  
+  
+**canary-247**  
+- A14: Fixed unrestricted screenshot  
+- A14: fixed back gesture mods  
+  
+**canary-246**  
+- Added VoWiFi icon to StatusbarMods. Thanks to @huajijam for code contribution  
+  
+**canary-245**  
+- A14: Fixed camera lockscreen shortcut  
+- A14: fixed hiding roaming indicators  
+- A14: Fixed hiding the privacy indicators  
+- A14: Fixed quick QS pulldown  
+  
+**canary-244**  
+- Added portable hotspot mods  
+- A14 beta 2: fixed battery icons  
+  
+**canary-243**  
+- A14: Fixed battery icons  
+- Added Hindi translation  
+  
 **canary-242**  
 - 13QPR3: QS quick pulldown now responds to swipe down only  
 - 13QPR3: Fixed showing security input on device wake  

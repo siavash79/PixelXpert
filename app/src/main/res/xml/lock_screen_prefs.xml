@@ -29,6 +29,13 @@
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
+			android:key="DisableUnlockHintAnimation"
+			android:summaryOff="@string/general_off"
+			android:title="@string/disable_unlock_hint_title"
+			app:summaryOn="@string/general_on" />
+
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
 			android:key="HideLockScreenUserAvatar"
 			android:title="@string/hide_avatar_title"
 			app:summaryOff="@string/general_off"

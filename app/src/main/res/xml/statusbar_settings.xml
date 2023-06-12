@@ -34,12 +34,12 @@
             app:key="sbbIcon_header"
             app:title="@string/sbbIcon_header" />
 
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
+        <!--sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="false"
             android:key="SBshowVibrationIcon"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
-            android:title="@string/sb_vibration_switch_title" />
+            android:title="@string/sb_vibration_switch_title" /-->
 
         <sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="false"
@@ -96,6 +96,13 @@
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
             android:title="@string/volte_icon_title" />
+
+        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
+            android:defaultValue="false"
+            android:key="VowifiIconEnabled"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/vowifi_icon_title" />
 
         <sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="false"

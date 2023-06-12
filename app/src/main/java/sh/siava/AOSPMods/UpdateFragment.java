@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods;
 
+import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -53,8 +54,12 @@ public class UpdateFragment extends Fragment {
 	private static final String moduleDir = String.format("%s/%s", UpdateActivity.MAGISK_MODULES_DIR, UpdateActivity.MOD_NAME);
 
 	BroadcastReceiver downloadCompletionReceiver = new BroadcastReceiver() {
+		@SuppressLint("MissingPermission")
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			if(getContext() != null)
+				getContext().unregisterReceiver(downloadCompletionReceiver);
+
 			try {
 				if (Objects.equals(intent.getAction(), DownloadManager.ACTION_DOWNLOAD_COMPLETE) && intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == downloadID) {
 					Cursor downloadData = downloadManager.query(
@@ -66,13 +71,28 @@ public class UpdateFragment extends Fragment {
 
 					int uriColIndex = downloadData.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
 
-					if (uriColIndex > 0) {
+					File downloadedFile = new File(URI.create(downloadData.getString(uriColIndex)));
+
+					if(downloadedFile.exists())
+					{
 						downloadedFilePath = new File(URI.create(downloadData.getString(uriColIndex))).getAbsolutePath();
 
 						notifyInstall();
 					}
+					else
+					{
+						throw new Exception();
+					}
 				}
 			} catch (Exception e) {
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "updates")
+						.setSmallIcon(R.drawable.ic_notification_foreground)
+						.setContentTitle(getContext().getText(R.string.download_failed))
+						.setContentText(getContext().getText(R.string.try_again_later))
+						.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+				NotificationManagerCompat.from(getContext()).notify(2, builder.build());
+
 				e.printStackTrace();
 			}
 		}
@@ -247,7 +267,6 @@ public class UpdateFragment extends Fragment {
 	}
 
 	public void startDownload(String zipURL, int versionNumber) {
-
 		IntentFilter filters = new IntentFilter();
 		filters.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
 		filters.addAction(DownloadManager.ACTION_NOTIFICATION_CLICKED);
@@ -267,6 +286,7 @@ public class UpdateFragment extends Fragment {
 		binding = null;
 	}
 
+	@SuppressLint("MissingPermission")
 	public void notifyInstall() {
 		Intent notificationIntent = new Intent(getContext(), UpdateActivity.class);
 		notificationIntent.setAction(Intent.ACTION_RUN);

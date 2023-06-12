@@ -1,5 +1,8 @@
 <resources>
     <!--General strings-->
+	<string name="app_themed_icon_title">"Включение альтернативной иконки AOSPMods "</string>
+    <string name="xposed_desc">Дополнительные функции для ОС Android 12+ ПЗУ на базе AOSP</string>
+    <string name="volume_tile_title">"Громкость мультимедиа "</string>
     <string name="error_not_activated">Пожалуйста, проверьте, активирован ли модуль в LSPosed Manager</string>
     <string name="hide_default">Скрыть (по умолчанию)</string>
     <string name="percent_of_default_size">% от стандартного размера</string>
@@ -68,6 +71,7 @@
     <string name="lte_4g_icon_title">Значок LTE / 4G</string>
     <string name="combined_signal_icon_title">Комбинированные значки сигналов</string>
     <string name="volte_icon_title">Показывать значок VoLTE, если он доступен</string>
+    <string name="vowifi_icon_title">"Показывать значок VoWiFi, когда он доступен "</string>
     <string name="hide_privacychip_title">Скрыть индикаторы приватности\(Камера, Микрофон)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">Показать значки Вибрации/Без звука</string>
     <string name="sbc_position_title">Расположение часов</string>
@@ -298,6 +302,8 @@
     <string name="update_channel_name">Обновления</string>
     <string name="update_notification_title">Обновление загружено</string>
     <string name="update_notification_text">Нажмите здесь, чтобы установить</string>
+    <string name="download_failed">"Не удалось загрузить обновление "</string>
+    <string name="try_again_later">"Пожалуйста, повторите попытку позже "</string>
     <string name="reboot_notification_title">AOSPMods обновлен!</string>
     <string name="reboot_notification_text">Изменения вступят в силу после перезагрузки устройства</string>
     <string name="update_flavor_title">Канал обновлений</string>
@@ -354,6 +360,12 @@
     <string name="imperial_units_title">Использовать британские единицы измерения</string>
     <string name="hide_roaming_title">Скрыть индикаторы мобильного роуминга</string>
     <string name="caution_mobile_costs">ВНИМАНИЕ! Незнание того, что вы находитесь в роуминге, может увеличить ваши расходы на мобильную связь.</string>
+    <string name="hotspot_header">"Портативная точка доступа "</string>
+    <string name="hotspot_hide_ssid_title">"Скрыть SSID "</string>
+    <string name="hotspot_inactivity_timeout_title">"Таймаут бездействия "</string>
+    <string name="hotspot_max_client_title">"Максимальное количество клиентов "</string>
+    <string name="disable_unlock_hint_title">"Отключить анимацию подсказки разблокировки "</string>
+    <string name="ls_general_options">"Опции экрана блокировки "</string>
     <string name="hide_avatar_title">Удалить аватар пользователя (многопользовательский режим)</string>
 	<string name="camera_manager_master_title">Включить модификации фонарика (Отключите, если устройство не поддерживает)</string>
     <string name="clipboard_smart_actions_title">Дополнительные действия в буфере обмена</string>

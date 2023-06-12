@@ -47,6 +47,12 @@
 
         <sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="false"
+            android:key="ForceThemedLauncherIcons"
+            android:summary="@string/reapply_themed_config"
+            android:title="@string/force_themed_icons_title" />
+
+        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
+            android:defaultValue="false"
             android:key="RecentClearAllReposition"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"

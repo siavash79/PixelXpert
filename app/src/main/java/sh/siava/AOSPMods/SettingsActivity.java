@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods;
 
+import static java.lang.Math.round;
+
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -14,6 +16,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.view.Gravity;
@@ -41,13 +44,14 @@ import com.google.android.material.slider.LabelFormatter;
 import com.topjohnwu.superuser.Shell;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 import sh.siava.AOSPMods.utils.PrefManager;
-import sh.siava.AOSPMods.utils.SystemUtils;
+import sh.siava.AOSPMods.utils.AppUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
@@ -219,7 +223,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			onBackPressed();
 		} else if (itemID == R.id.menu_clearPrefs) {
 			PrefManager.clearPrefs(prefs);
-			SystemUtils.RestartSystemUI();
+			AppUtils.RestartSystemUI();
 		} else if (itemID == R.id.menu_exportPrefs) {
 			importExportSettings(true);
 		} else if (itemID == R.id.menu_importPrefs) {
@@ -227,9 +231,9 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		} else if (itemID == R.id.menu_netstat_clear) {
 			clearNetstatClick();
 		} else if (itemID == R.id.menu_restart) {
-			SystemUtils.Restart();
+			AppUtils.Restart();
 		} else if (itemID == R.id.menu_restartSysUI) {
-			SystemUtils.RestartSystemUI();
+			AppUtils.RestartSystemUI();
 		} else if (itemID == R.id.menu_Updates) {
 			startActivity(new Intent(this, UpdateActivity.class));
 		}
@@ -260,6 +264,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		Intent fileIntent = new Intent();
 		fileIntent.setAction(export ? Intent.ACTION_CREATE_DOCUMENT : Intent.ACTION_GET_CONTENT);
 		fileIntent.setType("*/*");
+		fileIntent.putExtra(Intent.EXTRA_TITLE, "AOSPMods_Config" + ".bin");
 		startActivityForResult(fileIntent, export ? REQUEST_EXPORT : REQUEST_IMPORT);
 	}
 
@@ -274,7 +279,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			case REQUEST_IMPORT:
 				try {
 					PrefManager.importPath(prefs, getContentResolver().openInputStream(data.getData()));
-					SystemUtils.RestartSystemUI();
+					AppUtils.RestartSystemUI();
 				} catch (Exception ignored) {
 				}
 				break;
@@ -304,7 +309,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				//noinspection ResultOfMethodCallIgnored
 				p.getInputStream().read(buffer);
 				String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
-				if (!Pattern.matches("^T[A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
+				if (!Pattern.matches("^[T|U][A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
 				{
 					new AlertDialog.Builder(getContext()).setTitle(R.string.incompatible_alert_title).setMessage(R.string.incompatible_alert_body).setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss()).show();
 				}
@@ -434,6 +439,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				findPreference("KeyGuardDimAmount").setSummary(KeyGuardDimAmount < 0 ? getString(R.string.word_default) : KeyGuardDimAmount + "%");
 
 				findPreference("TemperatureUnitF").setVisible(sharedPreferences.getBoolean("ShowChargingInfo", false));
+
+				boolean lockScreenShortcutModsVisible = Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
+
+				findPreference("leftKeyguardShortcut").setVisible(lockScreenShortcutModsVisible);
+				findPreference("leftKeyguardShortcutLongClick").setVisible(lockScreenShortcutModsVisible);
+				findPreference("rightKeyguardShortcut").setVisible(lockScreenShortcutModsVisible);
+				findPreference("rightKeyguardShortcutLongClick").setVisible(lockScreenShortcutModsVisible);
 			} catch (Throwable ignored) {
 			}
 		}
@@ -475,10 +487,17 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				findPreference("batteryWarningColor").setVisible(!warnZero && bBarEnabled);
 				findPreference("batteryCriticalColor").setVisible((!critZero || transitColors) && bBarEnabled && findPreference("batteryWarningColor").isVisible());
 
-				findPreference("BBarTransitColors").setVisible(bBarEnabled && !isColorful);
+				findPreference("BBarTransitColors").setEnabled(bBarEnabled && !isColorful);
+				findPreference("BBarColorful").setEnabled(bBarEnabled);
+
+				findPreference("BBarTransitColors").setVisible(bBarEnabled);
+				findPreference("BBarColorful").setVisible(bBarEnabled);
+
+				findPreference("BBarTransitColors").setEnabled(!isColorful);
+				findPreference("BBarColorful").setEnabled(!transitColors);
+
 				findPreference("BBOnlyWhileCharging").setVisible(bBarEnabled);
 				findPreference("BBOnBottom").setVisible(bBarEnabled);
-				findPreference("BBarColorful").setVisible(bBarEnabled);
 				findPreference("BBOpacity").setVisible(bBarEnabled);
 				findPreference("BBOpacity").setSummary(prefs.getInt("BBOpacity", 100) + "%");
 				findPreference("BBarHeight").setVisible(bBarEnabled);
@@ -572,8 +591,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				findPreference("batteryIconChargingColor").setVisible(style == 3 && prefs.getBoolean("BIconindicateCharging", false));
 				findPreference("BIconindicateFastCharging").setVisible(style > 0 && style < 99);
 				findPreference("batteryIconFastChargingColor").setVisible(style > 0 && style < 99 && prefs.getBoolean("BIconindicateFastCharging", false));
-				findPreference("BIconColorful").setVisible(style > 0 && style < 99 && !prefs.getBoolean("BIconTransitColors", false));
-				findPreference("BIconTransitColors").setVisible(style > 0 && style < 99 && !prefs.getBoolean("BIconColorful", false));
+
+				findPreference("BIconColorful").setVisible(style > 0 && style < 99);
+				findPreference("BIconTransitColors").setVisible(style > 0 && style < 99);
+
+				findPreference("BIconColorful").setEnabled(!prefs.getBoolean("BIconTransitColors", false));
+				findPreference("BIconTransitColors").setEnabled(!prefs.getBoolean("BIconColorful", false));
+
 				findPreference("BIconbatteryWarningRange").setVisible(style > 0 && style < 99);
 				findPreference("BIconbatteryCriticalColor").setVisible(style > 0 && style < 99 && (colorful || !critZero));
 				findPreference("BIconbatteryWarningColor").setVisible(style > 0 && style < 99 && (colorful || !warnZero));
@@ -660,6 +684,60 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			requireActivity().setTitle(requireActivity().getResources().getString(R.string.pm_header));
 		}
 	}
+
+	public static class HotSpotFragment extends PreferenceFragmentCompat {
+		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
+
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+			getPreferenceManager().setStorageDeviceProtected();
+			setPreferencesFromResource(R.xml.hotspot_prefs, rootKey);
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			prefs.registerOnSharedPreferenceChangeListener(listener);
+			updateVisibility(prefs);
+
+		}
+
+		@SuppressLint("DefaultLocale")
+		private void updateVisibility(SharedPreferences prefs) {
+			try {
+				long timeout = 0;
+				try
+				{
+					timeout = (long) (RangeSliderPreference.getValues(prefs, "hotSpotTimeoutSecs", 0).get(0) * 1L);
+				}
+				catch (Throwable ignored){}
+
+				int clients = 0;
+				try
+				{
+					clients = round(RangeSliderPreference.getValues(prefs, "hotSpotMaxClients", 0).get(0));
+				}
+				catch (Throwable ignored){}
+				Duration d = Duration.ofSeconds(timeout);
+
+				findPreference("hotSpotTimeoutSecs")
+						.setSummary(
+								timeout > 0
+										? String.format("%d %s", timeout/60, getString(R.string.minutes_word))
+										: getString(R.string.word_default));
+
+				findPreference("hotSpotMaxClients")
+						.setSummary(
+								clients > 0
+										? String.valueOf(clients)
+										: getString(R.string.word_default));
+			}
+			catch (Throwable ignored){}
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.hotspot_header));
+		}
+	}
+
 
 	@SuppressWarnings("ConstantConditions")
 	public static class SBCFragment extends PreferenceFragmentCompat {
@@ -829,7 +907,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				findPreference("QQSBrightnessEnabled").setVisible(sharedPreferences.getBoolean("QQSBrightnessSupported", true) && !sharedPreferences.getBoolean("QSBrightnessDisabled", false));
 				findPreference("QSFooterText").setVisible(sharedPreferences.getBoolean("QSFooterMod", false));
 				findPreference("QSPulldownPercent").setSummary(sharedPreferences.getInt("QSPulldownPercent", 25) + "%");
-				findPreference("dualToneQSEnabled").setVisible(sharedPreferences.getBoolean("LightQSPanel", false));
 
 				findPreference("network_settings_header").setVisible(sharedPreferences.getBoolean("networkOnQSEnabled", false));
 
@@ -1179,7 +1256,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			Intent intent = getActivity().getPackageManager()
 					.getLaunchIntentForPackage(getActivity().getPackageName());
 			PendingIntent pendingIntent = PendingIntent.getActivity(
-					getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+					getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 			AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 			manager.set(AlarmManager.RTC, System.currentTimeMillis() + 1, pendingIntent);
 			System.exit(0);

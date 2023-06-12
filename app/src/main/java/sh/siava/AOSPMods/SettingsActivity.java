@@ -650,6 +650,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				double increasedArea = Math.round(Math.abs(Math.pow(displayOverride, 2) / 100 - 100));
 
 				findPreference("displayOverride").setSummary(String.format("%s \n (%s)", displayOverride == 100 ? getString(R.string.word_default) : String.format("%s%% - %s%% %s", String.valueOf(displayOverride), String.valueOf(increasedArea), displayOverride > 100 ? getString(R.string.more_area) : getString(R.string.less_area)), getString(R.string.sysui_restart_needed)));
+
+				findPreference("ForceThemedLauncherIcons").setVisible(Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

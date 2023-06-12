@@ -1,3 +1,9 @@
+**canary-257**  
+- [app] Removed incompatibility warning for A14  
+- A14: Fixed show security input on device wake  
+- [app] fixed QS section  
+- A14 Beta 3+: removed lockscreen shortcuts - probably permanently  
+  
 **canary-256**  
 - A14B3: Fixed forced themed icons behavior  
   

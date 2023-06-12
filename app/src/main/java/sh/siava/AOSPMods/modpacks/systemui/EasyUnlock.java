@@ -5,6 +5,7 @@ import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
+import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 
 import android.annotation.SuppressLint;
@@ -52,8 +53,7 @@ public class EasyUnlock extends XposedModPack {
 		hookAllMethods(StatusBarKeyguardViewManagerClass, "onDozingChanged", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-
-				if(WakeUpToSecurityInput && param.args[0].equals(false) && (!(boolean)callMethod(getObjectField(param.thisObject, "mKeyguardStateController"), "canDismissLockScreen"))) //waking up
+				if(WakeUpToSecurityInput && param.args[0].equals(false) && (!getBooleanField(getObjectField(param.thisObject, "mKeyguardStateController"), "mCanDismissLockScreen")))//waking up
 				{
 					if(pre13QPR3) {
 						callMethod(getObjectField(param.thisObject, "mBouncer"), "show", true, true);

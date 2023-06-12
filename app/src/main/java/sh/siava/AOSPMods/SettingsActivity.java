@@ -309,7 +309,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				//noinspection ResultOfMethodCallIgnored
 				p.getInputStream().read(buffer);
 				String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
-				if (!Pattern.matches("^T[A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
+				if (!Pattern.matches("^[T|U][A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
 				{
 					new AlertDialog.Builder(getContext()).setTitle(R.string.incompatible_alert_title).setMessage(R.string.incompatible_alert_body).setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss()).show();
 				}

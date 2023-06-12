@@ -905,8 +905,14 @@ public class StatusbarMods extends XposedModPack {
 		parent.addView(mLeftVerticalSplitContainer, parent.indexOfChild(mNotificationIconContainer));
 		parent.removeView(mNotificationIconContainer);
 		mLeftVerticalSplitContainer.addView(mNotificationContainerContainer);
+
+		View ongoingCallChipView = mStatusBar.findViewById(mContext.getResources().getIdentifier("ongoing_call_chip", "id", mContext.getPackageName()));
+		((ViewGroup)ongoingCallChipView.getParent()).removeView(ongoingCallChipView);
+
+		mNotificationContainerContainer.addView(ongoingCallChipView);
 		mNotificationContainerContainer.addView(mNotificationIconContainer);
 
+		((LinearLayout.LayoutParams) mNotificationIconContainer.getLayoutParams()).weight = 100;
 		mNotificationIconContainer.setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
 			@Override
 			public void onChildViewAdded(View parent, View child) {

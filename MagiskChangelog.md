@@ -19,7 +19,8 @@ Compatible with Android 13 QPR1, 2 & 3 releases (Android 13 feature drops)
 - Fully compatible with A13 QPR3  
 - Added Hindi translation  
   
-... And bugfixes    
+... And bugfixes  
+  
 **2.7.2**  
 Compatible with Android 13 QPR2 (March 2023 feature drop)  
     

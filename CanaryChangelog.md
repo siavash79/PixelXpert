@@ -1,3 +1,6 @@
+**canary-258**  
+- Fixed call chip placement if multi-row statusbar enabled  
+  
 **canary-257**  
 - [app] Removed incompatibility warning for A14  
 - A14: Fixed show security input on device wake  

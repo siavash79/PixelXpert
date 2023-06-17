@@ -9,6 +9,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,7 +29,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
-import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -68,32 +68,32 @@ public class QSTileGrid extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
+		if (Xprefs == null) return;
 
-		VerticalQSTile = XPrefs.Xprefs.getBoolean("VerticalQSTile", false);
+		VerticalQSTile = Xprefs.getBoolean("VerticalQSTile", false);
 
 		if(Key.length > 0 && Key[0].equals("VerticalQSTile"))
 		{
 			SystemUtils.doubleToggleDarkMode();
 		}
 
-		QSHapticEnabled = XPrefs.Xprefs.getBoolean("QSHapticEnabled", false);
+		QSHapticEnabled = Xprefs.getBoolean("QSHapticEnabled", false);
 
-		QSRowQty = XPrefs.Xprefs.getInt("QSRowQty", NOT_SET);
-		QSColQty = XPrefs.Xprefs.getInt("QSColQty", QS_COL_NOT_SET);
+		QSRowQty = Xprefs.getInt("QSRowQty", NOT_SET);
+		QSColQty = Xprefs.getInt("QSColQty", QS_COL_NOT_SET);
 		if(QSColQty < QS_COL_NOT_SET) QSColQty = QS_COL_NOT_SET;
-		QQSTileQty = XPrefs.Xprefs.getInt("QQSTileQty", QQS_NOT_SET);
+		QQSTileQty = Xprefs.getInt("QQSTileQty", QQS_NOT_SET);
 
-		QSRowQtyL = XPrefs.Xprefs.getInt("QSRowQtyL", NOT_SET);
-		QSColQtyL = XPrefs.Xprefs.getInt("QSColQtyL", QS_COL_NOT_SET);
+		QSRowQtyL = Xprefs.getInt("QSRowQtyL", NOT_SET);
+		QSColQtyL = Xprefs.getInt("QSColQtyL", QS_COL_NOT_SET);
 		if(QSColQtyL < QS_COL_NOT_SET) QSColQtyL = QS_COL_NOT_SET;
-		QQSTileQtyL = XPrefs.Xprefs.getInt("QQSTileQtyL", QQS_NOT_SET);
+		QQSTileQtyL = Xprefs.getInt("QQSTileQtyL", QQS_NOT_SET);
 
-		QRTileInactiveColor = XPrefs.Xprefs.getBoolean("QRTileInactiveColor", false);
+		QRTileInactiveColor = Xprefs.getBoolean("QRTileInactiveColor", false);
 
 		try {
-			QSLabelScaleFactor = (RangeSliderPreference.getValues(XPrefs.Xprefs, "QSLabelScaleFactor", 0).get(0) + 100) / 100f;
-			QSSecondaryLabelScaleFactor = (RangeSliderPreference.getValues(XPrefs.Xprefs, "QSSecondaryLabelScaleFactor", 0).get(0) + 100) / 100f;
+			QSLabelScaleFactor = (RangeSliderPreference.getValues(Xprefs, "QSLabelScaleFactor", 0).get(0) + 100) / 100f;
+			QSSecondaryLabelScaleFactor = (RangeSliderPreference.getValues(Xprefs, "QSSecondaryLabelScaleFactor", 0).get(0) + 100) / 100f;
 		} catch (Exception ignored) {
 		}
 
@@ -115,6 +115,15 @@ public class QSTileGrid extends XposedModPack {
 		Class<?> QSFactoryImplClass = findClass("com.android.systemui.qs.tileimpl.QSFactoryImpl", lpparam.classLoader);
 		Class<?> SystemUIApplicationClass = findClass("com.android.systemui.SystemUIApplication", lpparam.classLoader);
 
+		try {
+			if(findClassIfExists("com.android.systemui.qs.tiles.WifiTile", lpparam.classLoader) == null)
+				Xprefs
+						.edit()
+						.putBoolean("InternetTileModEnabled", false)
+						.apply();
+		}
+		catch (Throwable ignored){}
+
 		hookAllMethods(SystemUIApplicationClass, "onConfigurationChanged", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -123,7 +132,7 @@ public class QSTileGrid extends XposedModPack {
 		});
 
 		//used to enable dual wifi/cell tiles for 13
-		hookAllMethods(QSFactoryImplClass, "createTileInternal", new XC_MethodHook() {
+		hookAllMethods(QSFactoryImplClass, "createTile", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if(param.args[0].equals("wifi_AOSPMods"))
@@ -291,7 +300,7 @@ public class QSTileGrid extends XposedModPack {
 		XC_InitPackageResources.InitPackageResourcesParam ourResparam = ResourceManager.resparams.get(listenPackage);
 
 		boolean isLandscape = conf.orientation == Configuration.ORIENTATION_LANDSCAPE;
-		Context context = mContext.createConfigurationContext(conf);
+//		Context context = mContext.createConfigurationContext(conf);
 
 		if (ourResparam == null) return;
 

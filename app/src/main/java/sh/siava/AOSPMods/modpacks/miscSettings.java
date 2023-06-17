@@ -98,7 +98,8 @@ public class miscSettings extends XposedModPack {
 	}
 
 	private void updateWifiCell() {
-		boolean WifiCellEnabled = Xprefs.getBoolean("wifi_cell", false);
+		boolean WifiCellEnabled = Xprefs.getBoolean("wifi_cell", false)
+				&& Xprefs.getBoolean("InternetTileModEnabled", true);
 
 		try {
 			String currentTiles = Shell.cmd("settings get secure sysui_qs_tiles").exec().getOut().get(0);

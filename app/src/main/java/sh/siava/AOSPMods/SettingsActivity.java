@@ -901,6 +901,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 				int displayWidth = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
 
+				findPreference("wifi_cell").setVisible(sharedPreferences.getBoolean("InternetTileModEnabled", true));
+
 				findPreference("QSPulldownPercent").setVisible(QSPullodwnEnabled);
 				findPreference("QSPulldownSide").setVisible(QSPullodwnEnabled);
 

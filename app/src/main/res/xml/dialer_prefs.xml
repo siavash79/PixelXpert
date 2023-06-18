@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="vibrateOnAnswered"
+		android:title="@string/vibrate_on_call_active_title"
+		app:summaryOn="@string/vibration_type_notification"
+		app:summaryOff="@string/general_off" />
+
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="vibrateOnDrop"
+		android:title="@string/vibrate_on_call_drop_title"
+		app:summaryOn="@string/vibration_type_notification"
+		app:summaryOff="@string/general_off" />
+
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="DialerRemoveRecordMessage"
+		android:title="@string/dialer_mute_record_message_title"
+		app:summaryOn="@string/dialer_mute_record_message_summary"
+		app:summaryOff="@string/general_off" />
+</PreferenceScreen>

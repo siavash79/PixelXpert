@@ -1218,6 +1218,34 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 	}
 
 	@SuppressWarnings("ConstantConditions")
+	public static class DialerFragment extends PreferenceFragmentCompat {
+
+		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
+
+		private void updateVisibility(SharedPreferences sharedPreferences) {
+			try {
+			} catch (Exception ignored) {
+			}
+		}
+
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+			getPreferenceManager().setStorageDeviceProtected();
+			setPreferencesFromResource(R.xml.dialer_prefs, rootKey);
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			updateVisibility(prefs);
+
+			prefs.registerOnSharedPreferenceChangeListener(listener);
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.dialer_header));
+		}
+	}
+
+	@SuppressWarnings("ConstantConditions")
 	public static class OwnPrefsFragment extends PreferenceFragmentCompat {
 
 		SharedPreferences.OnSharedPreferenceChangeListener listener = this::onPrefChanged;

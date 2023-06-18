@@ -21,6 +21,7 @@
     <string name="lockscreen_header_title">Lock Screen</string>
     <string name="statusbar_header">Status Bar</string>
     <string name="nav_header">Navigation bar</string>
+    <string name="dialer_header">Phone &amp; Telecom</string>
     <string name="misc_header">Miscellaneous</string>
     <string name="qs_panel_category_title">Quick Settings Panel</string>
     <string name="theme_customization_category">Theming</string>
@@ -295,7 +296,8 @@
     <string name="vibrate_on_call_active_title">Vibrate on outgoing call answered</string>
     <string name="vibrate_on_call_drop_title">Vibrate when call disconnects</string>
     <string name="vibration_type_notification">Intensity defined by system notification vibration settings</string>
-
+    <string name="dialer_mute_record_message_title">Remove call recording announcement</string>
+    <string name="dialer_mute_record_message_summary">Only applies to Google phone app with call recording enabled</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Force Google Sans font system-wide</string>

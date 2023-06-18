@@ -11,5 +11,5 @@ public final class Constants {
 	public static final String TELECOM_SERVER_PACKAGE = "com.android.server.telecom";
 	public static final String LAUNCHER_PACKAGE = "com.google.android.apps.nexuslauncher";
 	public static final String SETTINGS_PACKAGE = "com.android.settings";
-
+	public static final String DIALER_PACKAGE = "com.google.android.dialer";
 }

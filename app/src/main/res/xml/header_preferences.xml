@@ -33,15 +33,15 @@
 		android:layout="@layout/custom_preference"
 		app:fragment="sh.siava.AOSPMods.SettingsActivity$NavFragment"
 		app:icon="@drawable/ic_settings_navigation"
-		app:key="nav_header"
+		app:key="misc_header"
 		app:title="@string/nav_header" />
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$MiscFragment"
-		app:icon="@drawable/ic_settings_misc"
-		app:key="misc_header"
-		app:title="@string/misc_header" />
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$DialerFragment"
+		app:icon="@drawable/ic_phone"
+		app:key="dialer_header"
+		app:title="@string/dialer_header" />
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
@@ -56,6 +56,13 @@
 		app:icon="@drawable/ic_settings_package_manager"
 		app:key="pm_header"
 		app:title="@string/pm_header" />
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+		android:layout="@layout/custom_preference"
+		app:fragment="sh.siava.AOSPMods.SettingsActivity$MiscFragment"
+		app:icon="@drawable/ic_settings_misc"
+		app:key="misc_header"
+		app:title="@string/misc_header" />
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"

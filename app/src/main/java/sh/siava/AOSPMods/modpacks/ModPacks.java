@@ -10,6 +10,7 @@ import sh.siava.AOSPMods.modpacks.android.PhoneWindowManager;
 import sh.siava.AOSPMods.modpacks.android.ScreenOffKeys;
 import sh.siava.AOSPMods.modpacks.android.ScreenRotation;
 import sh.siava.AOSPMods.modpacks.android.StatusbarSize;
+import sh.siava.AOSPMods.modpacks.dialer.RecordingMessage;
 import sh.siava.AOSPMods.modpacks.launcher.AOSPModsIconUpdater;
 import sh.siava.AOSPMods.modpacks.launcher.ClearAllButtonMod;
 import sh.siava.AOSPMods.modpacks.launcher.CustomNavGestures;
@@ -87,6 +88,7 @@ public class ModPacks {
 		modPacks.add(HotSpotController.class);
 		modPacks.add(FeatureFlags.class);
 		modPacks.add(AppCloneEnabler.class);
+		modPacks.add(RecordingMessage.class);
 
 		return modPacks;
 	}

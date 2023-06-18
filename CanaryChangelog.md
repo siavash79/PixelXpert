@@ -1,3 +1,7 @@
+**canary-259**  
+- Added option to mute the call recording announcement from Google phone  
+- removed separate wifi/cell tile switch if device doesn't support it  
+  
 **canary-258**  
 - Fixed call chip placement if multi-row statusbar enabled  
   

@@ -58,6 +58,10 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	private long mLastUpdate;
 	private Path mBoltPath;
 
+	private int mLastBoltAlpha = 255;
+	private int mBoltFadeDirection = 1;
+	private float mAlphaPct;
+
 	@SuppressLint("DiscouragedApi")
 	public CircleBatteryDrawable(Context context, int frameColor)
 	{
@@ -85,7 +89,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	@Override
 	public void setShowPercent(boolean showPercent) {
 		mShowPercentage = showPercent;
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@Override
@@ -93,7 +97,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mFramePaint.setPathEffect(batteryStyle == BATTERY_STYLE_DOTTED_CIRCLE ? DASH_PATH_EFFECT : null);
 		mBatteryPaint.setPathEffect(batteryStyle == BATTERY_STYLE_DOTTED_CIRCLE ? DASH_PATH_EFFECT : null);
 
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@Override
@@ -101,13 +105,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mIsFastCharging = isFastCharging;
 		if(isFastCharging) mIsCharging = true;
 
-		postInvalidate();
-	}
-
-	private void postInvalidate()
-	{
-		unscheduleSelf(this::invalidateSelf);
-		scheduleSelf(this::invalidateSelf, 0);
+		invalidateSelf();
 	}
 
 	@Override
@@ -115,13 +113,13 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mIsCharging = isCharging;
 		if(!isCharging) mIsFastCharging = false;
 
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@Override
 	public void setBatteryLevel(int level) {
 		mBatteryLevel = level;
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@Override
@@ -139,19 +137,19 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mFramePaint.setColor(bgColor);
 		mTextPaint.setColor(mFGColor);
 
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@Override
 	public void setPowerSaving(boolean isPowerSaving) {
 		mIsPowerSaving = isPowerSaving;
 
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@Override
 	public void refresh() {
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	private void refreshShadeColors()
@@ -197,7 +195,27 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 		if(mIsCharging)
 		{
+			if(mLastBoltAlpha < 50 || mLastBoltAlpha > 245)
+				mBoltFadeDirection *= -1;
+
+			mLastBoltAlpha = mLastBoltAlpha + (mBoltFadeDirection * 10);
+
+			mBoltPaint.setAlpha(Math.round(mLastBoltAlpha * mAlphaPct));
+
 			canvas.drawPath(mBoltPath, mBoltPaint);
+
+			new Thread(() -> {
+				try
+				{
+					if(mLastBoltAlpha > 250)
+						Thread.sleep(300);
+					else
+						Thread.sleep(100);
+
+					invalidateSelf();
+				}
+				catch (Throwable ignored){}
+			}).start();
 		}
 
 		canvas.drawArc(mFrame, 270f, 360f, false, mFramePaint);
@@ -271,13 +289,14 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 	@Override
 	public void setAlpha(int alpha) {
+		mAlphaPct = alpha/255f;
+
 		mFramePaint.setAlpha(Math.round(70 * alpha / 255f));
 
-		mBoltPaint.setAlpha(alpha);
 		mTextPaint.setAlpha(alpha);
 		mBatteryPaint.setAlpha(alpha);
 
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@SuppressLint("DiscouragedApi")

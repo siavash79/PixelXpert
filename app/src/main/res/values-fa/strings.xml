@@ -15,11 +15,20 @@
     <string name="lockscreen_header_title">صفحه قفل</string>
     <string name="statusbar_header">نوار وضعیت</string>
     <string name="nav_header">نوار ناوبری</string>
+    <string name="dialer_header">تماس و تلفن</string>
     <string name="misc_header">متفرقه</string>
     <string name="qs_panel_category_title">پنل تنظیمات سریع</string>
     <string name="theme_customization_category">ظواهر</string>
 
 
+    <string name="pm_header">مدیریت نرم افزار</string>
+    <string name="hotspot_header">نقطه اتصال</string>
+    <string name="hotspot_hide_ssid_title">نام مخفی باشد</string>
+    <string name="hotspot_inactivity_timeout_title">مدت زمان غیر فعال بود</string>
+    <string name="hotspot_max_client_title">حداکثر تعداد کاربران</string>
+    <string name="disable_unlock_hint_title">حذف انیمیشن راهنمایی باز کردن قفل</string>
+    <string name="ls_general_options">تنظیمات قفل صفحه</string>
+    <string name="hide_avatar_title">حذف نمایه کاربر (حالت چند کاربره)</string>
     <string name="transparent_fingerprint_circle">پنهان کردن دایره اثر انگشت زیر نمایشگر</string>
     <string name="transparent_fingerprint_circle_off">دایره اطراف نماد اثر انگشت فعال است</string>
     <string name="transparent_fingerprint_circle_on">دایره اطراف نماد اثر انگشت پنهان شد</string>
@@ -34,9 +43,14 @@
     <string name="keyguard_left_shortcut">نمایش میانبر سمت چپ در صفحه قفل</string>
     <string name="LSleftShortcutTitle">میانبر سمت چپ</string>
     <string name="LSrightShortcutTitle">میانبر سمت راست</string>
+    <string name="LSleftLongClickShortcutTitle">میانبر چپ (طولانی)</string>
+    <string name="LSrightLongClickShortcutTitle">میانبر راست (طولانی)</string>
     <string name="camera_shortcut">دوربین</string>
     <string name="assistant_shortcut">دستیار صوتی</string>
     <string name="torch_shortcut">چراغ قوه</string>
+    <string name="tv_remote_shortcut">ریموت تلویزیون</string>
+    <string name="dnd_shortcut">مزاحم نشوید</string>
+    <string name="qr_scanner_shortcut">اسکن بارکد دو بعدی</string>
     <string name="album_art_category">تنظیمات موزیک</string>
     <string name="album_art_title">نمایش تصویر موزیک روی صفحه قفل</string>
     <string name="album_art_blur_text">مقدار تاری</string>
@@ -153,6 +167,7 @@
     <string name="taskbar_force_enable_title">فعال باشد</string>
 
 
+    <string name="auto_off_five_minutes">موقتا فعال شد</string>
     <string name="screenshot_sound_disable_title">غیرفعال کردن صدای اسکرین شات</string>
     <string name="allow_all_screen_rotations_summary">همچنین دکمه شناور چرخش دستی را نادیده می گیرد</string>
     <string name="volume_button_step_title">مراحل صدای موزیک (0 تا 100%)</string>
@@ -179,6 +194,8 @@
     <string name="vibrate_on_call_drop_title">لرزش در زمان قطع تماس</string>
 
 
+    <string name="dialer_mute_record_message_title">حذف پیام ضبط مکالمه</string>
+    <string name="dialer_mute_record_message_summary">فقط برای تلفن گوگل که امکان ضبط را فراهم کرده باشد</string>
     <string name="gsans_override_title">اجباری کردن فونت Google Sans در کل سیستم</string>
     <string name="font_overlays_enable_title">فعال سازی امکان تغییر فونتها</string>
     <string name="theme_customization_font_title">عنوان /فونت بدنه</string>
@@ -240,6 +257,8 @@
     <string name="update_channel_name">به روز رسانی ها</string>
     <string name="update_notification_title">به روز رسانی دانلود شد</string>
     <string name="update_notification_text">برای نصب اینجا ضربه بزنید</string>
+	<string name="download_failed">نسخه جدید دریافت نشد</string>
+	<string name="try_again_later">بعدا دوباره امتحان کنید</string>
     <string name="reboot_notification_title">AOSPMods به روز شد!</string>
     <string name="reboot_notification_text">پس از راه‌اندازی مجدد دستگاه، تغییرات اعمال می‌شوند</string>
     <string name="update_flavor_title">نوع نسخه</string>
@@ -260,10 +279,13 @@
 
     <string name="own_prefs_header">تنظیمات AOSPMods</string>
     <string name="language_title">زبان</string>
+    <string name="volume_tile_title">صدای موسیقی</string>
     <string name="error_not_activated">لطفا کنترل کنید که ماژول در Lsposed فعال شده باشد</string>
     <string name="carrier_text_category">نام اپراتور</string>
     <string name="carrier_text_mod_disabled">نام اپراتور بدون تغییر</string>
     <string name="shufflePin_title">جابجایی اعداد رمز</string>
+    <string name="charging_info_title">نمایش اطلاعات شارژ روی صفحه قفل</string>
+    <string name="imperial_units_title">استفاده از واحدهای آمریکایی</string>
     <string name="double_tap_sleep_title">خاموشی صفحه با دو ضربه</string>
     <string name="sbc_clock_color_category">تنظیمات رنگ</string>
     <string name="ntsb_far_left">سمت چپ</string>
@@ -339,6 +361,7 @@
     <string name="brightness_range_title">محدوده مجاز نور صفحه</string>
     <string name="sbc_advanced_sum">لطفاَ راهنمای Java Date Format را مطالعه کنید</string>
     <string name="taskbar_height_title">ارتفاع نوار برنامه</string>
+    <string name="sleep">خاموش</string>
     <!-- Generated by Automatic String Resource Translation -->
     <!--          https://asrt.gluege.boerde.de             -->
 </resources>

@@ -22,6 +22,8 @@ public abstract class BatteryDrawable extends Drawable {
 
 	public abstract void setPowerSaving(boolean isPowerSaving);
 
+	public abstract void setChargingAnimationEnabled(boolean enabled);
+
 	public abstract void refresh();
 
 

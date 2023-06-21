@@ -31,6 +31,13 @@
         android:title="@string/battery_show_percent_title" />
 
     <sh.siava.AOSPMods.ui.MaterialSwitchPreference
+        android:defaultValue="true"
+        android:key="BatteryChargingAnimationEnabled"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/battery_show_charging_animation_title" />
+
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
         android:key="BIconindicateCharging"
         android:summaryOff="@string/general_off"

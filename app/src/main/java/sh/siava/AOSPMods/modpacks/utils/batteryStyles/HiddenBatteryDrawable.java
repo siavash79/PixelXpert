@@ -44,6 +44,11 @@ public class HiddenBatteryDrawable extends BatteryDrawable {
 	}
 
 	@Override
+	public void setChargingAnimationEnabled(boolean enabled) {
+
+	}
+
+	@Override
 	public void refresh() {
 
 	}

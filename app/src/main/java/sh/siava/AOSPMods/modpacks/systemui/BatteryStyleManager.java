@@ -16,6 +16,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -56,6 +57,7 @@ public class BatteryStyleManager extends XposedModPack {
 	public static int scaleFactor = 100;
 	private static boolean isFastCharging = false;
 	private static int BatteryIconOpacity = 100;
+	private static boolean BatteryChargingAnimationEnabled = true;
 	private static final ArrayList<Object> batteryViews = new ArrayList<>();
 	private Object BatteryController;
 
@@ -75,9 +77,9 @@ public class BatteryStyleManager extends XposedModPack {
 	}
 
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
-		String BatteryStyleStr = XPrefs.Xprefs.getString("BatteryStyle", "0");
-		scaleFactor = XPrefs.Xprefs.getInt("BatteryIconScaleFactor", 50) * 2;
+		if (Xprefs == null) return;
+		String BatteryStyleStr = Xprefs.getString("BatteryStyle", "0");
+		scaleFactor = Xprefs.getInt("BatteryIconScaleFactor", 50) * 2;
 		int batteryStyle = Integer.parseInt(BatteryStyleStr);
 		customBatteryEnabled = batteryStyle != 0;
 		if (batteryStyle == 99) {
@@ -115,21 +117,22 @@ public class BatteryStyleManager extends XposedModPack {
 			}
 		}
 
-		ShowPercent = XPrefs.Xprefs.getBoolean("BatteryShowPercent", false);
+		ShowPercent = Xprefs.getBoolean("BatteryShowPercent", false);
+		BatteryChargingAnimationEnabled = Xprefs.getBoolean("BatteryChargingAnimationEnabled", true);
 
-		BatteryIconOpacity = XPrefs.Xprefs.getInt("BIconOpacity", 100);
-		boolean BIconTransitColors = XPrefs.Xprefs.getBoolean("BIconTransitColors", false);
-		boolean BIconColorful = XPrefs.Xprefs.getBoolean("BIconColorful", false);
-		boolean BIconIndicateFastCharging = XPrefs.Xprefs.getBoolean("BIconindicateFastCharging", false);
-		int batteryIconFastChargingColor = XPrefs.Xprefs.getInt("batteryIconFastChargingColor", Color.BLUE);
-		int batteryChargingColor = XPrefs.Xprefs.getInt("batteryIconChargingColor", Color.GREEN);
-		boolean BIconIndicateCharging = XPrefs.Xprefs.getBoolean("BIconindicateCharging", false);
+		BatteryIconOpacity = Xprefs.getInt("BIconOpacity", 100);
+		boolean BIconTransitColors = Xprefs.getBoolean("BIconTransitColors", false);
+		boolean BIconColorful = Xprefs.getBoolean("BIconColorful", false);
+		boolean BIconIndicateFastCharging = Xprefs.getBoolean("BIconindicateFastCharging", false);
+		int batteryIconFastChargingColor = Xprefs.getInt("batteryIconFastChargingColor", Color.BLUE);
+		int batteryChargingColor = Xprefs.getInt("batteryIconChargingColor", Color.GREEN);
+		boolean BIconIndicateCharging = Xprefs.getBoolean("BIconindicateCharging", false);
 
-		List<Float> batteryLevels = RangeSliderPreference.getValues(XPrefs.Xprefs, "BIconbatteryWarningRange", 0);
+		List<Float> batteryLevels = RangeSliderPreference.getValues(Xprefs, "BIconbatteryWarningRange", 0);
 
 		int[] batteryColors = new int[]{
-				XPrefs.Xprefs.getInt("BIconbatteryCriticalColor", Color.RED),
-				XPrefs.Xprefs.getInt("BIconbatteryWarningColor", Color.YELLOW)};
+				Xprefs.getInt("BIconbatteryCriticalColor", Color.RED),
+				Xprefs.getInt("BIconbatteryWarningColor", Color.YELLOW)};
 
 		BatteryDrawable.setStaticColor(batteryLevels, batteryColors, BIconIndicateCharging, batteryChargingColor, BIconIndicateFastCharging, batteryIconFastChargingColor, BIconTransitColors, BIconColorful);
 
@@ -144,6 +147,7 @@ public class BatteryStyleManager extends XposedModPack {
 				BatteryDrawable drawable = (BatteryDrawable) getAdditionalInstanceField(view, "mBatteryDrawable");
 				drawable.setShowPercent(ShowPercent);
 				drawable.setAlpha(Math.round(BatteryIconOpacity * 2.55f));
+				drawable.setChargingAnimationEnabled(BatteryChargingAnimationEnabled);
 				drawable.refresh();
 			} catch (Throwable ignored) {
 			} //it's probably the default battery. no action needed

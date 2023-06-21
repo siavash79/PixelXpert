@@ -77,6 +77,7 @@
     <string name="double_tap_sleep_title">Double-tap to sleep</string>
     <string name="battery_style_title">Choose a battery style</string>
     <string name="battery_show_percent_title">Show battery percentage</string>
+    <string name="battery_show_charging_animation_title">Show charging animation</string>
     <string name="battery_style_category_title">Battery style</string>
     <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Battery icon size</string>

@@ -594,6 +594,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 				findPreference("BIconColorful").setVisible(style > 0 && style < 99);
 				findPreference("BIconTransitColors").setVisible(style > 0 && style < 99);
+				findPreference("BatteryChargingAnimationEnabled").setVisible(style > 0 && style < 99);
 
 				findPreference("BIconColorful").setEnabled(!prefs.getBoolean("BIconTransitColors", false));
 				findPreference("BIconTransitColors").setEnabled(!prefs.getBoolean("BIconColorful", false));

@@ -1,7 +1,5 @@
 **canary-260**  
 - Battery icons: added optional charging animation  
-- Circle battery drawable: added charging animation  
-- Circle battery drawable: added charging animation  
   
 **canary-259**  
 - Added option to mute the call recording announcement from Google phone  

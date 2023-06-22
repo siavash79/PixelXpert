@@ -13,6 +13,7 @@
 		<item name="colorOnSecondary">@color/black</item>
 
 		<!-- App theme -->
+		<item name="colorAccent">@color/ui_accent</item>
 		<item name="alertDialogTheme">@style/AppTheme.Dialog</item>
 		<item name="materialAlertDialogTheme">@style/AppTheme.Dialog</item>
 		<item name="android:textColor">@color/text_color_primary</item>
@@ -30,22 +31,22 @@
 		<item name="seekBarStyle">@style/Material3.SeekBar</item>
 
 		<!-- Material3 attributes (needed if parent="Theme.MaterialComponents"). -->
-		<item name="colorPrimaryInverse">@color/colorPrimaryDark</item>
-		<item name="colorPrimaryContainer">@color/colorPrimaryContainerLight</item>
-		<item name="colorOnPrimaryContainer">@color/colorOnPrimaryContainerLight</item>
-		<item name="colorSecondaryContainer">@color/colorSecondaryContainerLight</item>
-		<item name="colorOnSecondaryContainer">@color/colorOnSecondaryContainerLight</item>
-		<item name="colorTertiary">@color/colorTertiaryLight</item>
-		<item name="colorOnTertiary">@color/colorOnTertiaryLight</item>
-		<item name="colorTertiaryContainer">@color/colorTertiaryContainerLight</item>
-		<item name="colorOnTertiaryContainer">@color/colorOnTertiaryContainerLight</item>
-		<item name="colorSurfaceVariant">@color/colorSurfaceVariantLight</item>
-		<item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariantLight</item>
-		<item name="colorSurfaceInverse">@color/colorSurfaceDark</item>
-		<item name="colorOnSurfaceInverse">@color/colorOnSurfaceDark</item>
-		<item name="colorOutline">@color/colorOutlineLight</item>
-		<item name="colorErrorContainer">@color/colorErrorContainerLight</item>
-		<item name="colorOnErrorContainer">@color/colorOnErrorContainerLight</item>
+		<item name="colorPrimaryInverse">@color/colorPrimaryLight</item>
+		<item name="colorPrimaryContainer">@color/colorPrimaryContainerDark</item>
+		<item name="colorOnPrimaryContainer">@color/colorOnPrimaryContainerDark</item>
+		<item name="colorSecondaryContainer">@color/colorSecondaryContainerDark</item>
+		<item name="colorOnSecondaryContainer">@color/colorOnSecondaryContainerDark</item>
+		<item name="colorTertiary">@color/colorTertiaryDark</item>
+		<item name="colorOnTertiary">@color/colorOnTertiaryDark</item>
+		<item name="colorTertiaryContainer">@color/colorTertiaryContainerDark</item>
+		<item name="colorOnTertiaryContainer">@color/colorOnTertiaryContainerDark</item>
+		<item name="colorSurfaceVariant">@color/colorSurfaceVariantDark</item>
+		<item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariantDark</item>
+		<item name="colorSurfaceInverse">@color/colorSurfaceLight</item>
+		<item name="colorOnSurfaceInverse">@color/colorOnSurfaceLight</item>
+		<item name="colorOutline">@color/colorOutlineDark</item>
+		<item name="colorErrorContainer">@color/colorErrorContainerDark</item>
+		<item name="colorOnErrorContainer">@color/colorOnErrorContainerDark</item>
 		<item name="textAppearanceDisplayLarge">@style/TextAppearance.Material3.DisplayLarge</item>
 		<item name="textAppearanceDisplayMedium">@style/TextAppearance.Material3.DisplayMedium
 		</item>

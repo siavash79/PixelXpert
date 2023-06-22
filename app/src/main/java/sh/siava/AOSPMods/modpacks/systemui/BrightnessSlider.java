@@ -59,6 +59,7 @@ public class BrightnessSlider extends XposedModPack {
 	static Class<?> DejankUtilsClass = null;
 
 	private boolean duringSliderPlacement = false;
+	private Object QQSBrightnessSliderController;
 
 	public BrightnessSlider(Context context) {
 		super(context);
@@ -70,7 +71,7 @@ public class BrightnessSlider extends XposedModPack {
 		}
 		if (collectedFields.size() == 3) {
 			try {
-				makeQQSBrightness(BrightnessMirrorHandlerClass);
+				createQQSBrightness(BrightnessMirrorHandlerClass);
 			} catch (Throwable ignored) {}
 		}
 	}
@@ -115,6 +116,19 @@ public class BrightnessSlider extends XposedModPack {
 		Class<?> CentralSurfacesImplClass = findClassIfExists("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
 		Class<?> QSPanelClass = findClass("com.android.systemui.qs.QSPanel", lpparam.classLoader);
 		Class<?> BrightnessSliderControllerClass = findClass("com.android.systemui.settings.brightness.BrightnessSliderController", lpparam.classLoader);
+		Class<?> BrightnessSliderViewClass = findClass("com.android.systemui.settings.brightness.BrightnessSliderView", lpparam.classLoader);
+		DejankUtilsClass = findClass("com.android.systemui.DejankUtils", lpparam.classLoader);
+		BrightnessControllerClass = findClass("com.android.systemui.settings.brightness.BrightnessController", lpparam.classLoader);
+
+		hookAllMethods(BrightnessSliderViewClass, "dispatchTouchEvent", new XC_MethodHook() { //responding to QQS slider touch event
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(param.thisObject.equals(QQSBrightnessSliderView))
+				{
+					callMethod(QQSBrightnessSliderController, "mirrorTouchEvent", param.args[0]);
+				}
+			}
+		});
 
 		hookAllMethods(BrightnessSliderControllerClass, "onViewDetached", new XC_MethodHook() {
 			@Override
@@ -123,10 +137,6 @@ public class BrightnessSlider extends XposedModPack {
 					param.setResult(null);
 			}
 		});
-
-		DejankUtilsClass = findClass("com.android.systemui.DejankUtils", lpparam.classLoader);
-
-		BrightnessControllerClass = findClass("com.android.systemui.settings.brightness.BrightnessController", lpparam.classLoader);
 
 		hookAllConstructors(CentralSurfacesImplClass, new XC_MethodHook() {
 			@Override
@@ -299,14 +309,14 @@ public class BrightnessSlider extends XposedModPack {
 		});
 	}
 
-	private void makeQQSBrightness(Class<?> BrightnessMirrorHandlerClass) throws Throwable {
+	private void createQQSBrightness(Class<?> BrightnessMirrorHandlerClass) throws Throwable {
 		ViewGroup quickQSPanel = (ViewGroup) getObjectField(QQSPC, "mView");
 
-		Object mBrightnessSliderController = callMethod(brightnessSliderFactory, "create", mContext, quickQSPanel);
+		QQSBrightnessSliderController = callMethod(brightnessSliderFactory, "create", mContext, quickQSPanel);
 
-		QQSBrightnessSliderView = (View) getObjectField(mBrightnessSliderController, "mView");
+		QQSBrightnessSliderView = (View) getObjectField(QQSBrightnessSliderController, "mView");
 
-		if(!makeBrightnessController(mBrightnessSliderController))
+		if(!makeBrightnessController(QQSBrightnessSliderController))
 		{
 			return;
 		}
@@ -316,7 +326,7 @@ public class BrightnessSlider extends XposedModPack {
 		addTunable(mTunerService, quickQSPanel, QS_SHOW_BRIGHTNESS);
 		setController(mBrightnessMirrorHandler, mBrightnessMirrorController);
 		registerCallbacks(mBrightnessController);
-		callMethod(mBrightnessSliderController, "init");
+		callMethod(QQSBrightnessSliderController, "init");
 
 //        callMethod(mBrightnessController, "checkRestrictionAndSetEnabled"); //apparently not needed
 
@@ -376,20 +386,38 @@ public class BrightnessSlider extends XposedModPack {
 		callMethod(getObjectField(mBrightnessController, "mBackgroundHandler"), "post", getObjectField(mBrightnessController, "mStartListeningRunnable"));
 	}
 
-	private static void setController(Object mirrorHandler, Object controller) {
-		Object mirrorController = getObjectField(mirrorHandler, "mirrorController");
-		if (mirrorController != null) {
-			callMethod(mirrorController, "removeCallback", getObjectField(mirrorHandler, "brightnessMirrorListener"));
+	private static void setController(Object mirrorHandler, Object mirrorController) {
+		Object currentMirrorController = getObjectField(mirrorHandler, "mirrorController");
+		if (currentMirrorController != null) {
+			callMethod(currentMirrorController, "removeCallback", getObjectField(mirrorHandler, "brightnessMirrorListener"));
 		}
-		setObjectField(mirrorHandler, "mirrorController", controller);
-		if (controller != null) {
+		setObjectField(mirrorHandler, "mirrorController", mirrorController);
+		if (mirrorController != null) {
 			Object listener = getObjectField(mirrorHandler, "brightnessMirrorListener"); //BrightnessMirrorController#Addcalback
 			if (listener != null) {
-				@SuppressWarnings("rawtypes") ArraySet mBrightnessMirrorListeners = (ArraySet) getObjectField(controller, "mBrightnessMirrorListeners");
+				@SuppressWarnings("rawtypes") ArraySet mBrightnessMirrorListeners = (ArraySet) getObjectField(mirrorController, "mBrightnessMirrorListeners");
 				//noinspection unchecked
 				mBrightnessMirrorListeners.add(listener);
 			}
-			callMethod(getObjectField(mirrorHandler, "brightnessController"), "setMirror", controller);
+//			callMethod(getObjectField(mirrorHandler, "brightnessController"), "setMirror", mirrorController); //R8 removed - using custom method below
+			setMirror(getObjectField(mirrorHandler, "brightnessController"), mirrorController);
+		}
+	}
+
+	private static void setMirror(Object brightnessController, Object mirrorController) //Brightness controller#setMirror
+	{
+		Object brightnessSliderController = getObjectField(brightnessController, "mControl");
+		setObjectField(brightnessSliderController, "mMirrorController", mirrorController);
+		Object toggleSlider = getObjectField(mirrorController, "mToggleSliderController");
+
+		setObjectField(brightnessSliderController, "mMirror", toggleSlider);
+
+		if(toggleSlider != null)
+		{
+			Object mView = getObjectField(toggleSlider, "mView");
+			Object slider = getObjectField(mView, "mSlider");
+			callMethod(toggleSlider, "setMax", callMethod(slider, "getMax"));
+			callMethod(toggleSlider, "setValue", callMethod(slider, "getProgress"));
 		}
 	}
 

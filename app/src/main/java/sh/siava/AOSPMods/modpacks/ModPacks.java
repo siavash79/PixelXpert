@@ -10,10 +10,13 @@ import sh.siava.AOSPMods.modpacks.android.PhoneWindowManager;
 import sh.siava.AOSPMods.modpacks.android.ScreenOffKeys;
 import sh.siava.AOSPMods.modpacks.android.ScreenRotation;
 import sh.siava.AOSPMods.modpacks.android.StatusbarSize;
+import sh.siava.AOSPMods.modpacks.dialer.RecordingMessage;
 import sh.siava.AOSPMods.modpacks.launcher.AOSPModsIconUpdater;
 import sh.siava.AOSPMods.modpacks.launcher.ClearAllButtonMod;
 import sh.siava.AOSPMods.modpacks.launcher.CustomNavGestures;
+import sh.siava.AOSPMods.modpacks.launcher.FeatureFlags;
 import sh.siava.AOSPMods.modpacks.launcher.TaskbarActivator;
+import sh.siava.AOSPMods.modpacks.settings.AppCloneEnabler;
 import sh.siava.AOSPMods.modpacks.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.modpacks.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.modpacks.systemui.BrightnessSlider;
@@ -46,6 +49,7 @@ public class ModPacks {
 	{
 		ArrayList<Class> modPacks = new ArrayList<>();
 
+		//SystemUI
 		modPacks.add(NotificationExpander.class);
 		modPacks.add(QSTileGrid.class);
 		modPacks.add(BrightnessSlider.class);
@@ -65,24 +69,33 @@ public class ModPacks {
 		modPacks.add(GestureNavbarManager.class);
 		modPacks.add(QSFooterTextManager.class);
 		modPacks.add(ScreenshotMuter.class);
-		modPacks.add(ScreenOffKeys.class);
-		modPacks.add(TaskbarActivator.class);
 		modPacks.add(KeyGuardPinScrambler.class);
-		modPacks.add(OverScrollDisabler.class);
 		modPacks.add(FingerprintWhileDozing.class);
 		modPacks.add(StatusbarSize.class);
-		modPacks.add(ScreenRotation.class);
-		modPacks.add(CallVibrator.class);
 		modPacks.add(FlashLightLevel.class);
 		modPacks.add(CustomNavGestures.class);
-		modPacks.add(PhoneWindowManager.class);
-		modPacks.add(BrightnessRange.class);
-		modPacks.add(ClearAllButtonMod.class);
 		modPacks.add(NotificationManager.class);
-		modPacks.add(PackageManager.class);
-		modPacks.add(AOSPModsIconUpdater.class);
 		modPacks.add(VolumeTile.class);
+		//Telecom
+		modPacks.add(CallVibrator.class);
+		//Framework
+		modPacks.add(PackageManager.class);
+		modPacks.add(BrightnessRange.class);
+		modPacks.add(PhoneWindowManager.class);
+		modPacks.add(ScreenRotation.class);
+		modPacks.add(ScreenOffKeys.class);
 		modPacks.add(HotSpotController.class);
+		//Launcher
+		modPacks.add(TaskbarActivator.class);
+		modPacks.add(ClearAllButtonMod.class);
+		modPacks.add(AOSPModsIconUpdater.class);
+		modPacks.add(FeatureFlags.class);
+		//Settings
+		modPacks.add(AppCloneEnabler.class);
+		//Dialer
+		modPacks.add(RecordingMessage.class);
+		//All Apps
+		modPacks.add(OverScrollDisabler.class);
 
 		return modPacks;
 	}

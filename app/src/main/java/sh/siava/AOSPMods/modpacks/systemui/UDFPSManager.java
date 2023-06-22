@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.modpacks.systemui;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
@@ -43,7 +44,11 @@ public class UDFPSManager extends XposedModPack {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
 		SettingsLibUtils.init(lpparam.classLoader);
-		Class<?> UdfpsKeyguardViewClass = findClass("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader);
+		Class<?> UdfpsKeyguardViewClass = findClassIfExists("com.android.systemui.biometrics.UdfpsKeyguardViewLegacy", lpparam.classLoader); //A4B3
+		if(UdfpsKeyguardViewClass == null)
+		{ //A13
+			UdfpsKeyguardViewClass = findClassIfExists("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader);
+		}
 		Class<?> LockIconViewClass = findClass("com.android.keyguard.LockIconView", lpparam.classLoader);
 
 

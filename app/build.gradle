@@ -5,15 +5,15 @@ plugins {
 apply plugin: 'kotlin-android'
 
 android {
-	compileSdkVersion 33
-	buildToolsVersion '33.0.0'
+	compileSdk 34
+	buildToolsVersion '34.0.0'
 
 	defaultConfig {
 		applicationId "sh.siava.AOSPMods"
 		minSdk 33
-		targetSdk 33
-		versionCode 246
-		versionName "canary-246"
+		targetSdk 34
+		versionCode 260
+		versionName "canary-260"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
@@ -58,10 +58,10 @@ dependencies {
 	implementation project(path: ':RangeSliderPreference')
 
 	implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-	implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-	implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-	implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-	implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+	implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+	implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
+	implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+	implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
 	implementation 'androidx.appcompat:appcompat:1.6.1'
 	implementation 'androidx.annotation:annotation:1.6.0'
 	implementation 'androidx.preference:preference-ktx:1.2.0'

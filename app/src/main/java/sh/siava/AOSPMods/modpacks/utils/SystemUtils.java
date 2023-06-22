@@ -45,8 +45,6 @@ public class SystemUtils {
 
 	@SuppressLint("StaticFieldLeak")
 	static SystemUtils instance;
-	private Handler mHandler = null;
-
 	Context mContext;
 	CameraManager mCameraManager;
 	VibratorManager mVibrationManager;
@@ -269,6 +267,11 @@ public class SystemUtils {
 		instance.volumeChangeListeners.add(listener);
 	}
 
+	public static void unregisterVolumeChangeListener(VolumeChangeListener listener)
+	{
+		instance.volumeChangeListeners.remove(listener);
+	}
+
 	public static void setFlashlightLevel(int level)
 	{
 		for(FlashlighLevelListener listener : instance.flashlighLevelListeners)
@@ -312,7 +315,7 @@ public class SystemUtils {
 		try {
 			HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
 			thread.start();
-			mHandler = new Handler(thread.getLooper());
+			Handler mHandler = new Handler(thread.getLooper());
 			mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
 
 			mCameraManager.registerTorchCallback(torchCallback, mHandler);

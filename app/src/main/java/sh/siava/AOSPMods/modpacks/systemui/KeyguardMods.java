@@ -10,6 +10,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
@@ -19,6 +20,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +38,8 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.Constants;
+import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
-import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.modpacks.utils.StringFormatter;
@@ -58,6 +60,7 @@ public class KeyguardMods extends XposedModPack {
 	public static final String SHORTCUT_ASSISTANT = "assistant";
 	public static final String SHORTCUT_TORCH = "torch";
 	public static final String SHORTCUT_ZEN = "zen";
+	public static final String SHORTCUT_QR_SCANNER = "qrscanner";
 
 	private float max_charging_current = 0;
 	private float max_charging_voltage = 0;
@@ -79,6 +82,8 @@ public class KeyguardMods extends XposedModPack {
 	private boolean mDozing = false;
 	private boolean mSupportsDarkText = false;
 
+	private static boolean DisableUnlockHintAnimation = false;
+
 	//region keyguardDimmer
 	public static float KeyGuardDimAmount = -1f;
 	private static boolean TemperatureUnitF = false;
@@ -90,8 +95,8 @@ public class KeyguardMods extends XposedModPack {
 
 	private Object ZenController;
 	private Object CommandQueue;
-//	private Object QRScannerController;
-//	private Object ActivityStarter;
+	private Object QRScannerController;
+	private Object ActivityStarter;
 	private Object KeyguardBottomAreaView;
 	private Object mAssistUtils;
 	private static boolean transparentBGcolor = false;
@@ -112,28 +117,30 @@ public class KeyguardMods extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		KGMiddleCustomText = XPrefs.Xprefs.getString("KGMiddleCustomText", "");
+		DisableUnlockHintAnimation = Xprefs.getBoolean("DisableUnlockHintAnimation", false);
 
-		customCarrierTextEnabled = XPrefs.Xprefs.getBoolean("carrierTextMod", false);
-		customCarrierText = XPrefs.Xprefs.getString("carrierTextValue", "");
+		KGMiddleCustomText = Xprefs.getString("KGMiddleCustomText", "");
 
-		ShowChargingInfo = XPrefs.Xprefs.getBoolean("ShowChargingInfo", false);
-		TemperatureUnitF = XPrefs.Xprefs.getBoolean("TemperatureUnitF", false);
+		customCarrierTextEnabled = Xprefs.getBoolean("carrierTextMod", false);
+		customCarrierText = Xprefs.getString("carrierTextValue", "");
 
-		HideLockScreenUserAvatar = XPrefs.Xprefs.getBoolean("HideLockScreenUserAvatar", false);
+		ShowChargingInfo = Xprefs.getBoolean("ShowChargingInfo", false);
+		TemperatureUnitF = Xprefs.getBoolean("TemperatureUnitF", false);
+
+		HideLockScreenUserAvatar = Xprefs.getBoolean("HideLockScreenUserAvatar", false);
 
 		try {
-			KeyGuardDimAmount = RangeSliderPreference.getValues(XPrefs.Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
+			KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
 		} catch (Throwable ignored) {
 		}
 
-		leftShortcutClick = XPrefs.Xprefs.getString("leftKeyguardShortcut", "");
-		rightShortcutClick = XPrefs.Xprefs.getString("rightKeyguardShortcut", "");
+		leftShortcutClick = Xprefs.getString("leftKeyguardShortcut", "");
+		rightShortcutClick = Xprefs.getString("rightKeyguardShortcut", "");
 
-		leftShortcutLongClick = XPrefs.Xprefs.getString("leftKeyguardShortcutLongClick", "");
-		rightShortcutLongClick = XPrefs.Xprefs.getString("rightKeyguardShortcutLongClick", "");
+		leftShortcutLongClick = Xprefs.getString("leftKeyguardShortcutLongClick", "");
+		rightShortcutLongClick = Xprefs.getString("rightKeyguardShortcutLongClick", "");
 
-		transparentBGcolor = XPrefs.Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
+		transparentBGcolor = Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
 
 
 		if (Key.length > 0) {
@@ -176,11 +183,11 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
 		Class<?> KeyguardBottomAreaViewBinderClass = findClass("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpparam.classLoader);
 		Class<?> AssistManager = findClass("com.android.systemui.assist.AssistManager", lpparam.classLoader);
-//		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader); //used to launch camera
-//		Class<?> QRCodeScannerControllerClass = findClass("com.android.systemui.qrcodescanner.controller.QRCodeScannerController", lpparam.classLoader);
+		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader); //used to launch camera
+		Class<?> QRCodeScannerControllerClass = findClass("com.android.systemui.qrcodescanner.controller.QRCodeScannerController", lpparam.classLoader);
 //		Class<?> ActivityStarterDelegateClass = findClass("com.android.systemui.ActivityStarterDelegate", lpparam.classLoader);
 		Class<?> ZenModeControllerImplClass = findClass("com.android.systemui.statusbar.policy.ZenModeControllerImpl", lpparam.classLoader);
-//		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpparam.classLoader);
+		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpparam.classLoader);
 		Class<?> CommandQueueClass = findClass("com.android.systemui.statusbar.CommandQueue", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
 
@@ -191,7 +198,15 @@ public class KeyguardMods extends XposedModPack {
 			}
 		});
 
-/*		hookAllConstructors(FooterActionsInteractorImplClass, new XC_MethodHook() {
+		hookAllMethods(NotificationPanelViewControllerClass, "startUnlockHintAnimation", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(DisableUnlockHintAnimation) param.setResult(null);
+			}
+		});
+
+
+		hookAllConstructors(FooterActionsInteractorImplClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				ActivityStarter = getObjectField(param.thisObject, "activityStarter");
@@ -203,7 +218,7 @@ public class KeyguardMods extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				QRScannerController = param.thisObject;
 			}
-		});*/
+		});
 
 		hookAllConstructors(ZenModeControllerImplClass, new XC_MethodHook() {
 			@Override
@@ -250,35 +265,32 @@ public class KeyguardMods extends XposedModPack {
 
 		Method updateMethod = null;
 		Method[] methods = KeyguardBottomAreaViewBinderClass.getMethods();
-		for(Method m : methods)
-		{
-			if(m.getName().contains("updateButton"))
-			{
+		for (Method m : methods) {
+			if (m.getName().contains("updateButton")) {
 				updateMethod = m;
 				break;
 			}
 		}
-		if(updateMethod != null)
-		{
+		if (updateMethod != null) {
 			hookMethod(updateMethod, new XC_MethodHook() {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					ImageView v = (ImageView) param.args[0];
 
 					try {
-						String shortcutID = mContext.getResources().getResourceName(v.getId());
+						if(Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { //feature deprecated for Android 14
+							String shortcutID = mContext.getResources().getResourceName(v.getId());
 
-						if (shortcutID.contains("start")) {
-							convertShortcut(v, leftShortcutClick);
-							if(isShortcutSet(v))
-							{
-								setLongPress(v, leftShortcutLongClick);
-							}
-						} else if (shortcutID.contains("end")) {
-							convertShortcut(v, rightShortcutClick);
-							if(isShortcutSet(v))
-							{
-								setLongPress(v, rightShortcutLongClick);
+							if (shortcutID.contains("start")) {
+								convertShortcut(v, leftShortcutClick);
+								if (isShortcutSet(v)) {
+									setLongPress(v, leftShortcutLongClick);
+								}
+							} else if (shortcutID.contains("end")) {
+								convertShortcut(v, rightShortcutClick);
+								if (isShortcutSet(v)) {
+									setLongPress(v, rightShortcutLongClick);
+								}
 							}
 						}
 
@@ -302,23 +314,24 @@ public class KeyguardMods extends XposedModPack {
 
 							v.setBackgroundTintList(colorSurface);
 						}
+					} catch (Throwable ignored) {
 					}
-					catch (Throwable ignored){}
 				}
 			});
 		}
+
 		//endregion
 
 		//region keyguard battery info
-		hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", new XC_MethodHook() {
+		XC_MethodHook powerIndicationHook = new XC_MethodHook() {
 			@SuppressLint("DefaultLocale")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(ShowChargingInfo) {
+				if (ShowChargingInfo) {
 					String result = (String) param.getResult();
 
 					Float shownTemperature = (TemperatureUnitF)
-							? (temperature*1.8f) + 32f
+							? (temperature * 1.8f) + 32f
 							: temperature;
 
 					param.setResult(
@@ -334,7 +347,16 @@ public class KeyguardMods extends XposedModPack {
 											: "C"));
 				}
 			}
-		});
+		};
+
+		try { //A14
+			Class<?> KeyguardIndicationControllerGoogleClass = findClass("com.google.android.systemui.statusbar.KeyguardIndicationControllerGoogle", lpparam.classLoader);
+			hookAllMethods(KeyguardIndicationControllerGoogleClass, "computePowerIndication", powerIndicationHook);
+		}
+		catch (Throwable ignored)
+		{ //A13 and maybe 14 custom
+			hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", powerIndicationHook);
+		}
 
 		hookAllConstructors(BatteryStatusClass, new XC_MethodHook() {
 			@Override
@@ -493,7 +515,7 @@ public class KeyguardMods extends XposedModPack {
 		Drawable drawable = null;
 		switch (type) {
 			case SHORTCUT_TV_REMOTE:
-				drawable = ResourcesCompat.getDrawable(XPrefs.modRes, R.drawable.ic_remote, mContext.getTheme());
+				drawable = ResourcesCompat.getDrawable(ResourceManager.modRes, R.drawable.ic_remote, mContext.getTheme());
 				break;
 			case SHORTCUT_CAMERA:
 				drawable = ResourcesCompat.getDrawable(res, cameraResID, mContext.getTheme());
@@ -507,11 +529,17 @@ public class KeyguardMods extends XposedModPack {
 			case SHORTCUT_ZEN:
 				drawable = ResourcesCompat.getDrawable(res, res.getIdentifier("@android:drawable/ic_zen_24dp", "drawable", mContext.getPackageName()), mContext.getTheme());
 				break;
+			case SHORTCUT_QR_SCANNER:
+				drawable = ResourcesCompat.getDrawable(res, res.getIdentifier("ic_qr_code_scanner", "drawable", mContext.getPackageName()), mContext.getTheme());
+				break;
 		}
 
 		button.setOnClickListener(v -> launchAction(type));
 		button.setImageDrawable(drawable);
-		button.setVisibility(VISIBLE);
+
+		button.setVisibility(mDozing
+				? GONE
+				: VISIBLE);
 	}
 
 	private void launchAction(String type) {
@@ -531,6 +559,12 @@ public class KeyguardMods extends XposedModPack {
 			case SHORTCUT_ZEN:
 				toggleZen();
 				break;
+			case SHORTCUT_QR_SCANNER:
+				try {
+					callMethod(ActivityStarter, "startActivity", getObjectField(QRScannerController, "mIntent"), true);
+					break;
+				}
+				catch (Throwable ignored){}
 		}
 	}
 

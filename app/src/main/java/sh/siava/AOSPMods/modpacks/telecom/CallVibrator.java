@@ -1,11 +1,11 @@
 package sh.siava.AOSPMods.modpacks.telecom;
 
+import static android.os.SystemClock.uptimeMillis;
+import static android.os.VibrationAttributes.USAGE_NOTIFICATION;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 
 import android.content.Context;
-import android.os.SystemClock;
-import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -18,6 +18,10 @@ import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 @SuppressWarnings("RedundantThrows")
 public class CallVibrator extends XposedModPack {
 	private static final String listenPackage = Constants.TELECOM_SERVER_PACKAGE;
+
+	public static final int DIALING = 3;
+	public static final int ACTIVE = 5;
+	public static final int DISCONNECTED = 7;
 
 	private static final VibrationEffect vibrationEffect = VibrationEffect.createWaveform(new long[]{0, 100, 100, 100}, -1); //100ms on, 100 off, 100 again. don't repeat
 	private static long lastActiveVibration = 0, lastDropVibration = 0;
@@ -54,17 +58,17 @@ public class CallVibrator extends XposedModPack {
 						int newState = (int) param.args[2];
 
 						if (vibrateOnAnswered
-								&& oldState == 3 /* Dialing */
-								&& newState == 5 /* ACTIVE */
-								&& SystemClock.uptimeMillis() - lastActiveVibration > 5000L /* Don't vibrate on concurrent method calls */) {
-							lastActiveVibration = SystemClock.uptimeMillis();
-							SystemUtils.vibrate(vibrationEffect, VibrationAttributes.USAGE_NOTIFICATION);
+								&& oldState == DIALING
+								&& newState == ACTIVE
+								&& uptimeMillis() - lastActiveVibration > 5000L /* Don't vibrate on concurrent method calls */) {
+							lastActiveVibration = uptimeMillis();
+							SystemUtils.vibrate(vibrationEffect, USAGE_NOTIFICATION);
 						} else if (vibrateOnDrop
-								&& oldState == 5 /* ACTIVE */
-								&& newState == 7 /* DISCONNECTED */
-								&& SystemClock.uptimeMillis() - lastDropVibration > 5000L) {
-							lastDropVibration = SystemClock.uptimeMillis();
-							SystemUtils.vibrate(vibrationEffect, VibrationAttributes.USAGE_NOTIFICATION);
+								&& oldState == ACTIVE
+								&& newState == DISCONNECTED
+								&& uptimeMillis() - lastDropVibration > 5000L) {
+							lastDropVibration = uptimeMillis();
+							SystemUtils.vibrate(vibrationEffect, USAGE_NOTIFICATION);
 						}
 					} catch (Throwable ignored) {
 					}

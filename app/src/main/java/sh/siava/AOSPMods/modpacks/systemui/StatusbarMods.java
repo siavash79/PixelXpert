@@ -14,7 +14,6 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
-import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
@@ -28,6 +27,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
 import android.os.UserHandle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
@@ -93,7 +93,7 @@ public class StatusbarMods extends XposedModPack {
 
 	private static final int AM_PM_STYLE_SMALL = 1;
 	private static final int AM_PM_STYLE_GONE = 2;
-
+	private static final int MSG_BATTERY_UPDATE = 302;
 	private int leftClockPadding = 0, rightClockPadding = 0;
 	private static int clockPosition = POSITION_LEFT;
 	private static int mAmPmStyle = AM_PM_STYLE_GONE;
@@ -141,7 +141,6 @@ public class StatusbarMods extends XposedModPack {
 	private static final float PADDING_DEFAULT = -0.5f;
 	private static final ArrayList<ClockVisibilityCallback> clockVisibilityCallbacks = new ArrayList<>();
 	private Object mActivityStarter;
-	private Object KIC = null;
 	private Object QSBH = null;
 	private ViewGroup mStatusBar;
 	private static boolean notificationAreaMultiRow = false;
@@ -169,10 +168,6 @@ public class StatusbarMods extends XposedModPack {
 	private static final String VO_LTE_SLOT = "volte";
 	private static final String VO_WIFI_SLOT = "vowifi";
 
-	private static final int VO_DATA_AVAILABLE = 2;
-	private static final int VO_DATA_NOT_AVAILABLE = 1;
-	private static final int VO_DATA_UNKNOWN = -1;
-
 	private static boolean VolteIconEnabled = false;
 	private final Executor voDataExec = Runnable::run;
 
@@ -181,14 +176,13 @@ public class StatusbarMods extends XposedModPack {
 	private Class<?> StatusBarIconHolderClass;
 	private Object volteStatusbarIconHolder;
 	private boolean telephonyCallbackRegistered = false;
-	private int lastVolteState = VO_DATA_UNKNOWN;
+	private boolean lastVolteAvailable = false;
 	private final serverStateCallback voDataCallback = new serverStateCallback();
 	//endregion
 
 	private static boolean VowifiIconEnabled = false;
 	private Object vowifiStatusbarIconHolder;
-	private int lastVowifiState = VO_DATA_UNKNOWN;
-	private final serverStateCallback vowifiCallback = new serverStateCallback();
+	private boolean lastVowifiAvailable = false;
 	//endregion
 
 	//region combined signal icons
@@ -460,17 +454,17 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 		Class<?> PhoneStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
-		Class<?> KeyGuardIndicationClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
-		Class<?> BatteryTrackerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController$BaseKeyguardCallback", lpparam.classLoader);
 		Class<?> NotificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
 		NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 		Class<?> StatusBarSignalPolicyClass = findClass("com.android.systemui.statusbar.phone.StatusBarSignalPolicy", lpparam.classLoader);
 		Class<?> NetworkControllerImplClass = findClass("com.android.systemui.statusbar.connectivity.NetworkControllerImpl", lpparam.classLoader);
 		Class<?> PrivacyItemControllerClass = findClass("com.android.systemui.privacy.PrivacyItemController", lpparam.classLoader);
+		Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
+
 //		Method setMeasuredDimensionMethod = findMethodExact(View.class, "setMeasuredDimension", int.class, int.class);
 		//endregion
 
@@ -578,29 +572,32 @@ public class StatusbarMods extends XposedModPack {
 
 		//endregion
 
-		// needed to check fastcharging
-		hookAllConstructors(KeyGuardIndicationClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				KIC = param.thisObject;
-			}
-		});
-
 		//setting charing status for batterybar and batteryicon
-		hookAllMethods(BatteryTrackerClass, "onRefreshBatteryInfo", new XC_MethodHook() {
+
+		hookAllConstructors(KeyguardUpdateMonitorClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				int mChargingSpeed = getIntField(KIC, "mChargingSpeed");
-				if (mChargingSpeed == CHARGING_FAST) {
-					BatteryBarView.setIsFastCharging(true);
-					BatteryStyleManager.setIsFastCharging(true);
-				} else {
-					BatteryBarView.setIsFastCharging(false);
-					BatteryStyleManager.setIsFastCharging(false);
-				}
+				Object handler = getObjectField(param.thisObject, "mHandler");
+
+				hookAllMethods(handler.getClass(), "handleMessage", new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						Message msg = (Message) param.args[0];
+						if(msg.what == MSG_BATTERY_UPDATE)
+						{
+							int mChargingSpeed = (int) callMethod(msg.obj, "getChargingSpeed", mContext);
+							if (mChargingSpeed == CHARGING_FAST) {
+								BatteryBarView.setIsFastCharging(true);
+								BatteryStyleManager.setIsFastCharging(true);
+							} else {
+								BatteryBarView.setIsFastCharging(false);
+								BatteryStyleManager.setIsFastCharging(false);
+							}
+						}
+					}
+				});
 			}
 		});
-
 		//getting statusbar class for further use
 		hookAllConstructors(CollapsedStatusBarFragmentClass, new XC_MethodHook() {
 			@Override
@@ -908,8 +905,14 @@ public class StatusbarMods extends XposedModPack {
 		parent.addView(mLeftVerticalSplitContainer, parent.indexOfChild(mNotificationIconContainer));
 		parent.removeView(mNotificationIconContainer);
 		mLeftVerticalSplitContainer.addView(mNotificationContainerContainer);
+
+		View ongoingCallChipView = mStatusBar.findViewById(mContext.getResources().getIdentifier("ongoing_call_chip", "id", mContext.getPackageName()));
+		((ViewGroup)ongoingCallChipView.getParent()).removeView(ongoingCallChipView);
+
+		mNotificationContainerContainer.addView(ongoingCallChipView);
 		mNotificationContainerContainer.addView(mNotificationIconContainer);
 
+		((LinearLayout.LayoutParams) mNotificationIconContainer.getLayoutParams()).weight = 100;
 		mNotificationIconContainer.setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
 			@Override
 			public void onChildViewAdded(View parent, View child) {
@@ -1017,38 +1020,37 @@ public class StatusbarMods extends XposedModPack {
 	}
 
 	private void updateVoData(boolean force) {
-		int newVowifiState = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isWifiCallingAvailable") ? VO_DATA_AVAILABLE : VO_DATA_NOT_AVAILABLE;
-		int newVolteState = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isVolteAvailable") ? VO_DATA_AVAILABLE : VO_DATA_NOT_AVAILABLE;
+		boolean voWifiAvailable = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isWifiCallingAvailable");
+		boolean volteStateAvailable = (Boolean) callMethod(SystemUtils.TelephonyManager(), "isVolteAvailable");
 
-		if (lastVolteState != newVolteState || force) {
-			lastVolteState = newVolteState;
-			switch (newVolteState) {
-				case VO_DATA_AVAILABLE:
-					mStatusBar.post(() -> {
-						try {
-							callMethod(mStatusBarIconController, "setIcon", VO_LTE_SLOT, volteStatusbarIconHolder);
-						} catch (Exception ignored) {}
-					});
-					break;
-				case VO_DATA_NOT_AVAILABLE:
-					removeSBIconSlot(VO_LTE_SLOT);
-					break;
+		if (lastVolteAvailable != volteStateAvailable || force) {
+			lastVolteAvailable = volteStateAvailable;
+			if (volteStateAvailable) {
+				mStatusBar.post(() -> {
+					try {
+						callMethod(mStatusBarIconController, "setIcon", VO_LTE_SLOT, volteStatusbarIconHolder);
+					} catch (Exception ignored) {
+					}
+				});
+			}
+			else {
+				removeSBIconSlot(VO_LTE_SLOT);
 			}
 		}
 
-		if (lastVowifiState != newVowifiState || force) {
-			lastVowifiState = newVowifiState;
-			switch (newVowifiState) {
-				case VO_DATA_AVAILABLE:
-					mStatusBar.post(() -> {
-						try {
-							callMethod(mStatusBarIconController, "setIcon", VO_WIFI_SLOT, vowifiStatusbarIconHolder);
-						} catch (Exception ignored) {}
-					});
-					break;
-				case VO_DATA_NOT_AVAILABLE:
-					removeSBIconSlot(VO_WIFI_SLOT);
-					break;
+		if (lastVowifiAvailable != voWifiAvailable || force) {
+			lastVowifiAvailable = voWifiAvailable;
+			if (voWifiAvailable) {
+				mStatusBar.post(() -> {
+					try {
+						callMethod(mStatusBarIconController, "setIcon", VO_WIFI_SLOT, vowifiStatusbarIconHolder);
+					} catch (Exception ignored) {
+					}
+				});
+			}
+			else
+			{
+				removeSBIconSlot(VO_WIFI_SLOT);
 			}
 		}
 	}

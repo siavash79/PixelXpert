@@ -75,103 +75,108 @@ public class FlashLightLevel extends XposedModPack {
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if (!SystemUtils.supportsFlashLevels() || !leveledFlashTile) return;
 
-				Object state = param.args[0];
-				if (getObjectField(state, "spec").equals("flashlight")) {
-					SystemUtils.FlashlighLevelListener listener = (SystemUtils.FlashlighLevelListener) getAdditionalInstanceField(param.thisObject, "flashlightLevelListener");
+				try {
+					Object state = param.args[0];
+					if (getObjectField(state, "spec").equals("flashlight")) {
+						SystemUtils.FlashlighLevelListener listener = (SystemUtils.FlashlighLevelListener) getAdditionalInstanceField(param.thisObject, "flashlightLevelListener");
 
-					if(listener == null)
-					{
-						View thisView = (View) param.thisObject;
+						if (listener == null) {
+							View thisView = (View) param.thisObject;
 
-						listener = level -> {
-							Resources res = mContext.getResources();
+							listener = level -> {
+								Resources res = mContext.getResources();
 
-							TextView label = (TextView) getObjectField(thisView, "label");
+								TextView label = (TextView) getObjectField(thisView, "label");
 
-							String newLabel = String.format("%s - %s%%",
-									res.getText(
-											res.getIdentifier(
-													"quick_settings_flashlight_label",
-													"string", mContext.getPackageName())),
-									level
-							);
+								String newLabel = String.format("%s - %s%%",
+										res.getText(
+												res.getIdentifier(
+														"quick_settings_flashlight_label",
+														"string", mContext.getPackageName())),
+										level
+								);
 
-							label.setText(newLabel);
-						};
+								label.setText(newLabel);
+							};
 
-						setAdditionalInstanceField(param.thisObject, "flashlightLevelListener", listener);
+							setAdditionalInstanceField(param.thisObject, "flashlightLevelListener", listener);
 
-						SystemUtils.registerFlashlighLevelListener(listener);
+							SystemUtils.registerFlashlighLevelListener(listener);
 
-						currentPct = XPrefs.Xprefs.getFloat("flashPCT", 0.5f);
+							currentPct = XPrefs.Xprefs.getFloat("flashPCT", 0.5f);
 
-						thisView.setOnTouchListener(new View.OnTouchListener() {
-							float initX = 0;
-							float initPct = 0;
-							boolean moved = false;
+							thisView.setOnTouchListener(new View.OnTouchListener() {
+								float initX = 0;
+								float initPct = 0;
+								boolean moved = false;
 
-							@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
-							@Override
-							public boolean onTouch(View view, MotionEvent motionEvent) {
-								if (!SystemUtils.supportsFlashLevels() || !leveledFlashTile)
-									return false;
+								@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
+								@Override
+								public boolean onTouch(View view, MotionEvent motionEvent) {
+									if (!SystemUtils.supportsFlashLevels() || !leveledFlashTile)
+										return false;
 
-								switch (motionEvent.getAction()) {
-									case MotionEvent.ACTION_DOWN: {
-										initX = motionEvent.getX();
-										initPct = initX / view.getWidth();
-										return true;
-									}
-									case MotionEvent.ACTION_MOVE: {
-										float newPct = motionEvent.getX() / view.getWidth();
-										float deltaPct = Math.abs(newPct - initPct);
-										if (deltaPct > .03f) {
-											view.getParent().requestDisallowInterceptTouchEvent(true);
-											moved = true;
-											currentPct = Math.max(0.01f, Math.min(newPct, 1));
-											handleFlashLightClick(false, currentPct);
-											SystemUtils.setFlashlightLevel(Math.round(currentPct*100f));
+									switch (motionEvent.getAction()) {
+										case MotionEvent.ACTION_DOWN: {
+											initX = motionEvent.getX();
+											initPct = initX / view.getWidth();
+											return true;
 										}
-										return true;
-									}
-									case MotionEvent.ACTION_UP: {
-										if (moved) {
-											moved = false;
-											XPrefs.Xprefs.edit().putFloat("flashPCT", currentPct).apply();
-										} else {
-											handleFlashLightClick(true, currentPct);
-											if (QSTileGrid.QSHapticEnabled) SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK, VibrationAttributes.USAGE_TOUCH);
+										case MotionEvent.ACTION_MOVE: {
+											float newPct = motionEvent.getX() / view.getWidth();
+											float deltaPct = Math.abs(newPct - initPct);
+											if (deltaPct > .03f) {
+												view.getParent().requestDisallowInterceptTouchEvent(true);
+												moved = true;
+												currentPct = Math.max(0.01f, Math.min(newPct, 1));
+												handleFlashLightClick(false, currentPct);
+												SystemUtils.setFlashlightLevel(Math.round(currentPct * 100f));
+											}
+											return true;
 										}
-										return true;
+										case MotionEvent.ACTION_UP: {
+											if (moved) {
+												moved = false;
+												XPrefs.Xprefs.edit().putFloat("flashPCT", currentPct).apply();
+											} else {
+												handleFlashLightClick(true, currentPct);
+												if (QSTileGrid.QSHapticEnabled)
+													SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK, VibrationAttributes.USAGE_TOUCH);
+											}
+											return true;
+										}
 									}
+									return true;
 								}
-								return true;
-							}
-						});
+							});
+						}
 					}
 				}
+				catch (Throwable ignored){}
 			}
 
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) {
 				if (!leveledFlashTile || !SystemUtils.supportsFlashLevels()) return;
 
-				Object state = param.args[0];
-				if (getObjectField(state, "spec").equals("flashlight")) {
-					LinearLayout tileView = (LinearLayout) param.thisObject;
+				try {
+					Object state = param.args[0];
+					if (getObjectField(state, "spec").equals("flashlight")) {
+						LinearLayout tileView = (LinearLayout) param.thisObject;
 
-					currentPct = XPrefs.Xprefs.getFloat("flashPCT", 0.5f);
+						currentPct = XPrefs.Xprefs.getFloat("flashPCT", 0.5f);
 
-					SystemUtils.setFlashlightLevel(Math.round(currentPct*100f));
+						SystemUtils.setFlashlightLevel(Math.round(currentPct * 100f));
 
-					flashPercentageDrawable.setTint(
-							(SystemUtils.isDarkMode() || !lightQSHeaderEnabled) && !getObjectField(state, "state").equals(STATE_ACTIVE)
-									? Color.WHITE
-									: Color.BLACK);
+						flashPercentageDrawable.setTint(
+								(SystemUtils.isDarkMode() || !lightQSHeaderEnabled) && !getObjectField(state, "state").equals(STATE_ACTIVE)
+										? Color.WHITE
+										: Color.BLACK);
 
-					LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), flashPercentageDrawable});
-					tileView.setBackground(layerDrawable);
-				}
+						LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), flashPercentageDrawable});
+						tileView.setBackground(layerDrawable);
+					}
+				}catch (Throwable ignored){}
 			}
 		});
 	}

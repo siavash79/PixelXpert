@@ -1,8 +1,11 @@
 package sh.siava.AOSPMods.modpacks;
 
+import static android.content.Context.CONTEXT_IGNORE_SECURITY;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
+import static sh.siava.AOSPMods.BuildConfig.APPLICATION_ID;
+import static sh.siava.AOSPMods.BuildConfig.DEBUG;
 import static sh.siava.AOSPMods.modpacks.Constants.SYSTEM_UI_PACKAGE;
 import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
@@ -15,7 +18,6 @@ import java.util.Calendar;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.modpacks.utils.Helpers;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 
@@ -38,7 +40,7 @@ public class XPLauncher {
 			if (A33R18Example == null) return;
 		}
 
-		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && BuildConfig.DEBUG && false) {
+		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && DEBUG && false) {
 			log("------------");
 			Helpers.dumpClass("com.android.systemui.statusbar.notification.collection.NotifCollection", lpparam.classLoader);
 			log("------------");
@@ -52,6 +54,9 @@ public class XPLauncher {
 					mContext = (Context) param.args[2];
 
 					XPrefs.init(mContext);
+
+					ResourceManager.modRes = mContext.createPackageContext(APPLICATION_ID, CONTEXT_IGNORE_SECURITY)
+							.getResources();
 
 					if(bootLooped(mContext.getPackageName()))
 					{

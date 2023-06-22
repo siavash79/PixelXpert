@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.view.Gravity;
@@ -308,7 +309,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				//noinspection ResultOfMethodCallIgnored
 				p.getInputStream().read(buffer);
 				String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
-				if (!Pattern.matches("^T[A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
+				if (!Pattern.matches("^[T|U][A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
 				{
 					new AlertDialog.Builder(getContext()).setTitle(R.string.incompatible_alert_title).setMessage(R.string.incompatible_alert_body).setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss()).show();
 				}
@@ -438,6 +439,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				findPreference("KeyGuardDimAmount").setSummary(KeyGuardDimAmount < 0 ? getString(R.string.word_default) : KeyGuardDimAmount + "%");
 
 				findPreference("TemperatureUnitF").setVisible(sharedPreferences.getBoolean("ShowChargingInfo", false));
+
+				boolean lockScreenShortcutModsVisible = Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
+
+				findPreference("leftKeyguardShortcut").setVisible(lockScreenShortcutModsVisible);
+				findPreference("leftKeyguardShortcutLongClick").setVisible(lockScreenShortcutModsVisible);
+				findPreference("rightKeyguardShortcut").setVisible(lockScreenShortcutModsVisible);
+				findPreference("rightKeyguardShortcutLongClick").setVisible(lockScreenShortcutModsVisible);
 			} catch (Throwable ignored) {
 			}
 		}
@@ -586,6 +594,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 				findPreference("BIconColorful").setVisible(style > 0 && style < 99);
 				findPreference("BIconTransitColors").setVisible(style > 0 && style < 99);
+				findPreference("BatteryChargingAnimationEnabled").setVisible(style > 0 && style < 99);
 
 				findPreference("BIconColorful").setEnabled(!prefs.getBoolean("BIconTransitColors", false));
 				findPreference("BIconTransitColors").setEnabled(!prefs.getBoolean("BIconColorful", false));
@@ -642,6 +651,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				double increasedArea = Math.round(Math.abs(Math.pow(displayOverride, 2) / 100 - 100));
 
 				findPreference("displayOverride").setSummary(String.format("%s \n (%s)", displayOverride == 100 ? getString(R.string.word_default) : String.format("%s%% - %s%% %s", String.valueOf(displayOverride), String.valueOf(increasedArea), displayOverride > 100 ? getString(R.string.more_area) : getString(R.string.less_area)), getString(R.string.sysui_restart_needed)));
+
+				findPreference("ForceThemedLauncherIcons").setVisible(Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -891,6 +902,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 				int displayWidth = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
 
+				findPreference("wifi_cell").setVisible(sharedPreferences.getBoolean("InternetTileModEnabled", true));
+
 				findPreference("QSPulldownPercent").setVisible(QSPullodwnEnabled);
 				findPreference("QSPulldownSide").setVisible(QSPullodwnEnabled);
 
@@ -899,7 +912,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				findPreference("QQSBrightnessEnabled").setVisible(sharedPreferences.getBoolean("QQSBrightnessSupported", true) && !sharedPreferences.getBoolean("QSBrightnessDisabled", false));
 				findPreference("QSFooterText").setVisible(sharedPreferences.getBoolean("QSFooterMod", false));
 				findPreference("QSPulldownPercent").setSummary(sharedPreferences.getInt("QSPulldownPercent", 25) + "%");
-				findPreference("dualToneQSEnabled").setVisible(sharedPreferences.getBoolean("LightQSPanel", false));
 
 				findPreference("network_settings_header").setVisible(sharedPreferences.getBoolean("networkOnQSEnabled", false));
 
@@ -1207,6 +1219,34 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 	}
 
 	@SuppressWarnings("ConstantConditions")
+	public static class DialerFragment extends PreferenceFragmentCompat {
+
+		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
+
+		private void updateVisibility(SharedPreferences sharedPreferences) {
+			try {
+			} catch (Exception ignored) {
+			}
+		}
+
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+			getPreferenceManager().setStorageDeviceProtected();
+			setPreferencesFromResource(R.xml.dialer_prefs, rootKey);
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			updateVisibility(prefs);
+
+			prefs.registerOnSharedPreferenceChangeListener(listener);
+		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			requireActivity().setTitle(requireActivity().getResources().getString(R.string.dialer_header));
+		}
+	}
+
+	@SuppressWarnings("ConstantConditions")
 	public static class OwnPrefsFragment extends PreferenceFragmentCompat {
 
 		SharedPreferences.OnSharedPreferenceChangeListener listener = this::onPrefChanged;
@@ -1249,7 +1289,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			Intent intent = getActivity().getPackageManager()
 					.getLaunchIntentForPackage(getActivity().getPackageName());
 			PendingIntent pendingIntent = PendingIntent.getActivity(
-					getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+					getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 			AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 			manager.set(AlarmManager.RTC, System.currentTimeMillis() + 1, pendingIntent);
 			System.exit(0);

@@ -47,6 +47,12 @@
 
         <sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="false"
+            android:key="ForceThemedLauncherIcons"
+            android:summary="@string/reapply_themed_config"
+            android:title="@string/force_themed_icons_title" />
+
+        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
+            android:defaultValue="false"
             android:key="RecentClearAllReposition"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
@@ -144,22 +150,6 @@
             app:maxVal="10000"
 
             app:defaultValue="5000" />
-    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/call_category">
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="vibrateOnAnswered"
-            android:title="@string/vibrate_on_call_active_title"
-            app:summaryOn="@string/vibration_type_notification"
-            app:summaryOff="@string/general_off" />
-
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="vibrateOnDrop"
-            android:title="@string/vibrate_on_call_drop_title"
-            app:summaryOn="@string/vibration_type_notification"
-            app:summaryOff="@string/general_off" />
-
     </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
     <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/monitoring_category_title">
         <sh.siava.AOSPMods.ui.MaterialPreference

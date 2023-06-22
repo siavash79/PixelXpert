@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.modpacks.android;
 
+import static android.content.Context.RECEIVER_EXPORTED;
 import static android.view.KeyEvent.KEYCODE_POWER;
 import static android.view.KeyEvent.KEYCODE_VOLUME_DOWN;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
@@ -8,6 +9,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -93,6 +95,7 @@ public class PhoneWindowManager extends XposedModPack {
 
 	IntentFilter intentFilter = new IntentFilter();
 
+	@SuppressLint("WrongConstant")
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
@@ -105,7 +108,7 @@ public class PhoneWindowManager extends XposedModPack {
 			intentFilter.addAction(Constants.ACTION_BACK);
 			intentFilter.addAction(Constants.ACTION_INSECURE_SCREENSHOT);
 			intentFilter.addAction(Constants.ACTION_SLEEP);
-			mContext.registerReceiver(broadcastReceiver, intentFilter);
+			mContext.registerReceiver(broadcastReceiver, intentFilter, RECEIVER_EXPORTED); //for Android 14, receiver flag is mandatory
 		}
 
 		try {

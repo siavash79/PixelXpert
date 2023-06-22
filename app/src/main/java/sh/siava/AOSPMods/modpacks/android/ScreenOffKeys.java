@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.modpacks.android;
 
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.hookMethod;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -17,7 +18,6 @@ import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 
 import java.lang.reflect.Method;
-import java.util.Calendar;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -29,6 +29,7 @@ import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 @SuppressWarnings("RedundantThrows")
 public class ScreenOffKeys extends XposedModPack {
 	public static final String listenPackage = Constants.SYSTEM_FRAMEWORK_PACKAGE;
+	public static final int LONG_PRESS_POWER_SHUT_OFF_NO_CONFIRM = 3;
 	private static boolean replaceAssistantwithTorch = false;
 	private static boolean holdVolumeToSkip = false;
 	private long wakeTime = 0;
@@ -49,16 +50,15 @@ public class ScreenOffKeys extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		Class<?> PhoneWindowManager;
-		Method powerLongPress;
-		Method startedWakingUp;
-		Method interceptKeyBeforeQueueing;
+		Class<?> PhoneWindowManagerClass;
+		Method powerLongPressMethod;
+		Method interceptKeyBeforeQueueingMethod;
 
 		try {
-			PhoneWindowManager = findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
-			powerLongPress = findMethodExact(PhoneWindowManager, "powerLongPress", long.class);
-			startedWakingUp = findMethodExact(PhoneWindowManager, "startedWakingUp", int.class);
-			interceptKeyBeforeQueueing = findMethodExact(PhoneWindowManager, "interceptKeyBeforeQueueing", KeyEvent.class, int.class);
+			PhoneWindowManagerClass = findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
+
+			powerLongPressMethod = findMethodExact(PhoneWindowManagerClass, "powerLongPress", long.class);
+			interceptKeyBeforeQueueingMethod = findMethodExact(PhoneWindowManagerClass, "interceptKeyBeforeQueueing", KeyEvent.class, int.class);
 
 			Runnable mVolumeLongPress = () -> {
 				try {
@@ -76,7 +76,7 @@ public class ScreenOffKeys extends XposedModPack {
 				}
 			};
 
-			hookMethod(interceptKeyBeforeQueueing, new XC_MethodHook() {
+			hookMethod(interceptKeyBeforeQueueingMethod, new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 					if (!holdVolumeToSkip) return;
@@ -105,29 +105,29 @@ public class ScreenOffKeys extends XposedModPack {
 				}
 			});
 
-			hookMethod(startedWakingUp, new XC_MethodHook() {
+			hookAllMethods(PhoneWindowManagerClass, "startedWakingUp", new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 					if (!replaceAssistantwithTorch) return;
-					int r = (int) param.args[0];
+					int r = (int) param.args[param.args.length-1];
 
 					if (r == 1) {
-						wakeTime = Calendar.getInstance().getTimeInMillis();
+						wakeTime = SystemClock.uptimeMillis();
 					}
 				}
 			});
 
 
-			hookMethod(powerLongPress, new XC_MethodHook() {
+			hookMethod(powerLongPressMethod, new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if (!replaceAssistantwithTorch) return;
-					if (Calendar.getInstance().getTimeInMillis() - wakeTime > 1000) return;
+					if (!replaceAssistantwithTorch
+							|| SystemClock.uptimeMillis() - wakeTime > 1000)
+						return;
 
 					try {
-						int behavior = (int) callMethod(param.thisObject, "getResolvedLongPressOnPowerBehavior");
-
-						if (behavior == 3) // this is a force shutdown event. never play with it (3=LONG_PRESS_POWER_SHUT_OFF_NO_CONFIRM)
+						if ((int) callMethod(param.thisObject, "getResolvedLongPressOnPowerBehavior")
+								== LONG_PRESS_POWER_SHUT_OFF_NO_CONFIRM) // this is a force shutdown event. never play with it
 						{
 							return;
 						}

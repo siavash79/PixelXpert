@@ -1,6 +1,6 @@
 package sh.siava.AOSPMods.modpacks;
 
-import android.content.res.XModuleResources;
+import android.content.res.Resources;
 
 import java.util.HashMap;
 
@@ -8,11 +8,13 @@ import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources;
 
+@SuppressWarnings("RedundantThrows")
 public class ResourceManager implements IXposedHookInitPackageResources, IXposedHookZygoteInit {
 
+	@SuppressWarnings({"FieldCanBeLocal", "unused"})
 	private String MODULE_PATH;
 	public final static HashMap<String, XC_InitPackageResources.InitPackageResourcesParam> resparams = new HashMap<>();
-	public static XModuleResources modRes;
+	public static Resources modRes;
 
 	@Override
 	public void initZygote(StartupParam startupParam) throws Throwable {
@@ -20,12 +22,8 @@ public class ResourceManager implements IXposedHookInitPackageResources, IXposed
 	}
 
 	@Override
-	public void handleInitPackageResources(XC_InitPackageResources.InitPackageResourcesParam resparam) throws Throwable {
-
-//        XModuleResources modRes = XModuleResources.createInstance(MODULE_PATH, resparam.res);
-		try {
-			resparams.put(resparam.packageName, resparam);
-		} catch (Throwable ignored) {
-		}
+	public void handleInitPackageResources(XC_InitPackageResources.InitPackageResourcesParam resparam) throws Throwable
+	{
+		resparams.put(resparam.packageName, resparam);
 	}
 }

@@ -4,6 +4,7 @@
     <string name="app_themed_icon_title">Enable alternative AOSP Mods themed app icon</string>
     <string name="xposed_desc">Custom features for Android 12+ AOSP based ROMs</string>
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
+    <string name="volume_tile_title">Media Volume</string>
     <string name="error_not_activated">Please confirm if the module is activated within LSPosed Manager</string>
     <string name="hide_default">Hide (Default)</string>
     <string name="percent_of_default_size">% of default size</string>
@@ -20,6 +21,7 @@
     <string name="lockscreen_header_title">Lock Screen</string>
     <string name="statusbar_header">Status Bar</string>
     <string name="nav_header">Navigation bar</string>
+    <string name="dialer_header">Phone &amp; Dialer</string>
     <string name="misc_header">Miscellaneous</string>
     <string name="qs_panel_category_title">Quick Settings Panel</string>
     <string name="theme_customization_category">Theming</string>
@@ -32,6 +34,7 @@
     <string name="hotspot_max_client_title">Maximum clients</string>
 
     <!--Lock screen related-->
+    <string name="disable_unlock_hint_title">Disable the unlock hint animation</string>
     <string name="ls_general_options">Lock screen options</string>
     <string name="hide_avatar_title">Remove user avatar (multi user mode)</string>
     <string name="transparent_fingerprint_circle">Remove background circle from under-display fingerprint</string>
@@ -58,6 +61,7 @@
     <string name="torch_shortcut">Flashlight</string>
     <string name="tv_remote_shortcut">TV Remote</string>
     <string name="dnd_shortcut">Do Not Disturb</string>
+    <string name="qr_scanner_shortcut">QR code scanner</string>
     <string name="album_art_category">Media options</string>
     <string name="album_art_title">Enable album art when playing media</string>
     <string name="album_art_blur_text">Blur value</string>
@@ -73,6 +77,7 @@
     <string name="double_tap_sleep_title">Double-tap to sleep</string>
     <string name="battery_style_title">Choose a battery style</string>
     <string name="battery_show_percent_title">Show battery percentage</string>
+    <string name="battery_show_charging_animation_title">Show charging animation</string>
     <string name="battery_style_category_title">Battery style</string>
     <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
     <string name="battery_icon_size_title">Battery icon size</string>
@@ -261,6 +266,8 @@
     <string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
     <string name="force_no_cutout">Ignore the camera cutout</string>
     <string name="clear_all_reposition_title">Add an accessible clear-all button to recents page</string>
+    <string name="force_themed_icons_title">Auto-generate missing themed icons (Android 14 - Pixel launcher only)</string>
+    <string name="reapply_themed_config">Re-enable themed icons to apply</string>
     <string name="volume_button_step_title">Volume steps (0 to 100%)</string>
     <string name="display_resolution_title">Display resolution</string>
     <string name="brightness_range_title">Display brightness limits</string>
@@ -290,7 +297,8 @@
     <string name="vibrate_on_call_active_title">Vibrate on outgoing call answered</string>
     <string name="vibrate_on_call_drop_title">Vibrate when call disconnects</string>
     <string name="vibration_type_notification">Intensity defined by system notification vibration settings</string>
-
+    <string name="dialer_mute_record_message_title">Remove call recording announcement</string>
+    <string name="dialer_mute_record_message_summary">Only applies to Google phone app with call recording enabled</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Force Google Sans font system-wide</string>
@@ -385,6 +393,8 @@
     <string name="update_channel_name">Updates</string>
     <string name="update_notification_title">Update downloaded</string>
     <string name="update_notification_text">Tap here to install</string>
+    <string name="download_failed">Failed to download the update</string>
+    <string name="try_again_later">Please try again later</string>
     <string name="reboot_notification_title">AOSPMods updated!</string>
     <string name="reboot_notification_text">Changes will take effect after you reboot the device</string>
     <string name="update_flavor_title">Update channel</string>

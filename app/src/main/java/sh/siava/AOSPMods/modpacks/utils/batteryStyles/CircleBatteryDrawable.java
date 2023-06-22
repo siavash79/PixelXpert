@@ -6,6 +6,10 @@ import static android.graphics.Paint.Align.CENTER;
 import static android.graphics.Paint.Style.STROKE;
 import static android.graphics.Typeface.BOLD;
 
+import static java.lang.Math.round;
+import static de.robv.android.xposed.XposedBridge.log;
+
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -26,6 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 import androidx.core.graphics.PathParser;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import sh.siava.AOSPMods.modpacks.utils.AlphaRefreshedPaint;
 import sh.siava.AOSPMods.modpacks.utils.SettingsLibUtils;
@@ -44,6 +49,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	private boolean mIsCharging = false;
 	private boolean mIsPowerSaving = false;
 	private boolean mShowPercentage = false;
+	private boolean mChargingAnimationEnabled = true;
 	private int mBatteryLevel;
 	private int mDiameter;
 	private final RectF mFrame = new RectF();
@@ -53,10 +59,12 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	private final Paint mBatteryPaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
 	private final Paint mWarningTextPaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
 	private final Paint mBoltPaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
+	private final ValueAnimator mBoltAlphaAnimator;
 	private int[] mShadeColors;
 	private float[] mShadeLevels;
 	private long mLastUpdate;
 	private Path mBoltPath;
+	private float mAlphaPct;
 
 	@SuppressLint("DiscouragedApi")
 	public CircleBatteryDrawable(Context context, int frameColor)
@@ -80,12 +88,21 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		setColors(frameColor, frameColor, frameColor);
 
 		setMeterStyle(BATTERY_STYLE_CIRCLE);
+
+		mBoltAlphaAnimator = ValueAnimator.ofInt(255, 45);
+
+		mBoltAlphaAnimator.setDuration(2000);
+		mBoltAlphaAnimator.setInterpolator(new FastOutSlowInInterpolator());
+		mBoltAlphaAnimator.setRepeatMode(ValueAnimator.REVERSE);
+		mBoltAlphaAnimator.setRepeatCount(ValueAnimator.INFINITE);
+
+		mBoltAlphaAnimator.addUpdateListener(valueAnimator -> invalidateSelf());
 	}
 
 	@Override
 	public void setShowPercent(boolean showPercent) {
 		mShowPercentage = showPercent;
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@Override
@@ -93,7 +110,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mFramePaint.setPathEffect(batteryStyle == BATTERY_STYLE_DOTTED_CIRCLE ? DASH_PATH_EFFECT : null);
 		mBatteryPaint.setPathEffect(batteryStyle == BATTERY_STYLE_DOTTED_CIRCLE ? DASH_PATH_EFFECT : null);
 
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@Override
@@ -101,13 +118,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mIsFastCharging = isFastCharging;
 		if(isFastCharging) mIsCharging = true;
 
-		postInvalidate();
-	}
-
-	private void postInvalidate()
-	{
-		unscheduleSelf(this::invalidateSelf);
-		scheduleSelf(this::invalidateSelf, 0);
+		invalidateSelf();
 	}
 
 	@Override
@@ -115,13 +126,13 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mIsCharging = isCharging;
 		if(!isCharging) mIsFastCharging = false;
 
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@Override
 	public void setBatteryLevel(int level) {
 		mBatteryLevel = level;
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@Override
@@ -139,19 +150,26 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mFramePaint.setColor(bgColor);
 		mTextPaint.setColor(mFGColor);
 
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@Override
 	public void setPowerSaving(boolean isPowerSaving) {
 		mIsPowerSaving = isPowerSaving;
 
-		postInvalidate();
+		invalidateSelf();
+	}
+
+	@Override
+	public void setChargingAnimationEnabled(boolean enabled) {
+		mChargingAnimationEnabled = enabled;
+
+		invalidateSelf();
 	}
 
 	@Override
 	public void refresh() {
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	private void refreshShadeColors()
@@ -174,6 +192,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 			mShadeLevels[pointer + 1] = (batteryLevels.get(i) - rangeLength * 0.3f) / 100;
 			mShadeColors[pointer + 1] = batteryColors[i];
 			lastPCT = batteryLevels.get(i);
+
 		}
 
 		mShadeLevels[mShadeLevels.length - 2] = (batteryLevels.get(batteryLevels.size() - 1) + (100 - batteryLevels.get(batteryLevels.size() - 1) * 0.3f)) / 100;
@@ -185,7 +204,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 	@Override
 	public void draw(@NonNull Canvas canvas) {
-		if(mBatteryLevel == -1 || mDiameter == 0) return;
+		if(mBatteryLevel < 0 || mDiameter == 0) return;
 
 		if (mLastUpdate != lastVarUpdate)
 		{
@@ -195,10 +214,19 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 		setLevelBasedColors(mBatteryPaint, mFrame.centerX(), mFrame.centerY());
 
-		if(mIsCharging)
+		if(mIsCharging && mBatteryLevel < 100)
 		{
+			if(!mBoltAlphaAnimator.isStarted() && mChargingAnimationEnabled)
+				mBoltAlphaAnimator.start();
+
+			mBoltPaint.setAlpha(mChargingAnimationEnabled
+					? round((int) mBoltAlphaAnimator.getAnimatedValue() * mAlphaPct)
+					: round(mAlphaPct*255));
+
 			canvas.drawPath(mBoltPath, mBoltPaint);
 		}
+		else if (mBoltAlphaAnimator.isStarted())
+			mBoltAlphaAnimator.end();
 
 		canvas.drawArc(mFrame, 270f, 360f, false, mFramePaint);
 
@@ -271,13 +299,14 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 	@Override
 	public void setAlpha(int alpha) {
-		mFramePaint.setAlpha(Math.round(70 * alpha / 255f));
+		mAlphaPct = alpha/255f;
 
-		mBoltPaint.setAlpha(alpha);
+		mFramePaint.setAlpha(round(70 * alpha / 255f));
+
 		mTextPaint.setAlpha(alpha);
 		mBatteryPaint.setAlpha(alpha);
 
-		postInvalidate();
+		invalidateSelf();
 	}
 
 	@SuppressLint("DiscouragedApi")
@@ -355,4 +384,5 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	{
 		return CIRCLE_DIAMETER;
 	}
+
 }

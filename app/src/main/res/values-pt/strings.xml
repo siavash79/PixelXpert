@@ -301,7 +301,8 @@
     <string name="more_area">Aumentar área</string>
     <string name="less_area">Diminuir área</string>
     <string name="display_resolution_title">Resolução do ecrã</string>
-    <string name="hide_privacychip_title">Esconder indicadores de privacidade</string>
+	<string name="vowifi_icon_title">Mostrar ícone VoWiFi quando disponível</string>
+	<string name="hide_privacychip_title">Esconder indicadores de privacidade</string>
     <string name="taskbar_as_recents_title">Converter barra de tarefas para apps recentes</string>
     <string name="taskbar_height_title">Altura da barra de tarefas</string>
     <string name="brightness_range_title">Limites do brilho do ecrã</string>
@@ -338,5 +339,8 @@
     <string name="hotspot_hide_ssid_title">Esconder SSID</string>
     <string name="hotspot_inactivity_timeout_title">Tempo limite de inatividade</string>
     <string name="hotspot_max_client_title">Nr. máximo de clientes</string>
-    <string name="ls_general_options">Opções do ecrã de bloqueio</string>
+	<string name="disable_unlock_hint_title">Desativar animação da dica de desbloqueio</string>
+	<string name="ls_general_options">Opções do ecrã de bloqueio</string>
+	<string name="download_failed">Falha ao descarregar atualização</string>
+    <string name="try_again_later">Por favor tente novamente mais tarde</string>
 </resources>

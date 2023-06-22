@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 
@@ -22,7 +23,7 @@ public class Overlays {
 	public void initOverlays() //If called from UI OR Xposed
 	{
 		if (resources == null) { //so we're running from Xposed
-			resources = XPrefs.modRes;
+			resources = ResourceManager.modRes;
 		}
 
 		Overlays = new HashMap<>();

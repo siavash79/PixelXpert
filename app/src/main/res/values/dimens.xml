@@ -2,4 +2,6 @@
 <resources>
 	<dimen name="ui_container_radius">24dp</dimen>
 	<dimen name="ui_container_margin_side">16dp</dimen>
+	<dimen name="cpv_color_preference_normal">32dp</dimen>
+	<dimen name="cpv_color_preference_large">44dp</dimen>
 </resources>

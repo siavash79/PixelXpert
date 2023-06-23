@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:state_enabled="false">
+		<clip>
+			<shape android:shape="rectangle">
+				<size android:height="4.0dip" />
+				<corners android:radius="24.0dip" />
+				<solid android:color="?android:colorControlNormal" />
+			</shape>
+		</clip>
+	</item>
+	<item android:state_pressed="true">
+		<clip>
+			<shape android:shape="rectangle">
+				<size android:height="4.0dip" />
+				<corners android:radius="24.0dip" />
+				<solid android:color="?android:colorControlNormal" />
+			</shape>
+		</clip>
+	</item>
+	<item>
+		<clip>
+			<shape android:shape="rectangle">
+				<size android:height="4.0dip" />
+				<corners android:radius="24.0dip" />
+				<solid android:color="?android:colorControlNormal" />
+			</shape>
+		</clip>
+	</item>
+</layer-list>

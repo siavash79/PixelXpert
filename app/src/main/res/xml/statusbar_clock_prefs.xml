@@ -63,15 +63,15 @@
 			android:summaryOn="@string/general_on"
 			android:title="@string/sbc_colorful_title" />
 
-		<com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+		<sh.siava.AOSPMods.ui.MaterialColorPreference
 			android:key="SBCBeforeClockColor"
 			android:title="@string/sbc_before_color" />
 
-		<com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+		<sh.siava.AOSPMods.ui.MaterialColorPreference
 			android:key="SBCClockColor"
 			android:title="@string/sbc_color" />
 
-		<com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+		<sh.siava.AOSPMods.ui.MaterialColorPreference
 			android:key="SBCAfterClockColor"
 			android:title="@string/sbc_after_color" />
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>

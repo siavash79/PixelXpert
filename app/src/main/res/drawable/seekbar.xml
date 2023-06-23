@@ -4,6 +4,6 @@
 		android:id="@android:id/background"
 		android:drawable="@drawable/seek_track" />
 	<item android:id="@android:id/progress">
-		<clip android:drawable="@null" />
+		<clip android:drawable="@drawable/seek_progress" />
 	</item>
 </layer-list>

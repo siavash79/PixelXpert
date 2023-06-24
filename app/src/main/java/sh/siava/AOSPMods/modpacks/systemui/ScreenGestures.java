@@ -2,6 +2,12 @@
 
 package sh.siava.AOSPMods.modpacks.systemui;
 
+import static android.os.SystemClock.uptimeMillis;
+import static android.os.VibrationAttributes.USAGE_ACCESSIBILITY;
+import static android.os.VibrationEffect.EFFECT_TICK;
+import static android.view.MotionEvent.ACTION_DOWN;
+import static android.view.MotionEvent.ACTION_MOVE;
+import static android.view.MotionEvent.ACTION_UP;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
@@ -10,9 +16,6 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 
 import android.content.Context;
-import android.os.SystemClock;
-import android.os.VibrationAttributes;
-import android.os.VibrationEffect;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
@@ -94,8 +97,7 @@ public class ScreenGestures extends XposedModPack {
 				"onSensor", new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (!doubleTapToWake) return;
-						if (((int) param.args[0]) == 9) {
+						if (doubleTapToWake && ((int) param.args[0]) == 9) {
 							if (!mDoubleTap) {
 								param.setResult(null);
 								mDoubleTap = true;
@@ -231,19 +233,19 @@ public class ScreenGestures extends XposedModPack {
 
 				int action = ev.getActionMasked();
 
-				if (doubleTap && action == MotionEvent.ACTION_UP) {
+				if (doubleTap && action == ACTION_UP) {
 					if (doubleTapToSleepLockscreenEnabled && !isDozing)
 						SystemUtils.Sleep();
 					doubleTap = false;
 				}
 
 				if (!holdScreenTorchEnabled) return;
-				if ((action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)) {
-					if (doubleTap && !SystemUtils.isFlashOn() && SystemClock.uptimeMillis() - ev.getDownTime() > HOLD_DURATION) {
+				if ((action == ACTION_DOWN || action == ACTION_MOVE)) {
+					if (doubleTap && !SystemUtils.isFlashOn() && uptimeMillis() - ev.getDownTime() > HOLD_DURATION) {
 						turnedByTTT = true;
-						callMethod(SystemUtils.PowerManager(), "wakeUp", SystemClock.uptimeMillis());
+						callMethod(SystemUtils.PowerManager(), "wakeUp", uptimeMillis());
 						SystemUtils.setFlash(true);
-						SystemUtils.vibrate(VibrationEffect.EFFECT_TICK, VibrationAttributes.USAGE_ACCESSIBILITY);
+						SystemUtils.vibrate(EFFECT_TICK, USAGE_ACCESSIBILITY);
 
 						new Thread(() -> { //if keyguard is dismissed for any reason (face or udfps touch), then:
 							while(turnedByTTT)
@@ -262,7 +264,7 @@ public class ScreenGestures extends XposedModPack {
 						}).start();
 					}
 					if (turnedByTTT) {
-						ev.setAction(MotionEvent.ACTION_DOWN);
+						ev.setAction(ACTION_DOWN);
 					}
 				} else if (turnedByTTT) {
 					turnOffTTT();

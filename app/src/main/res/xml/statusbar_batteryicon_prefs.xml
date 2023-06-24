@@ -44,7 +44,7 @@
         android:summaryOn="@string/general_on"
         android:title="@string/BB_indicate_charging" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+    <sh.siava.AOSPMods.ui.MaterialColorPreference
         android:defaultValue="-16711936"
         android:key="batteryIconChargingColor"
         android:title="@string/BB_batteryChargingColor" />
@@ -56,7 +56,7 @@
         android:summaryOn="@string/general_on"
         android:title="@string/BB_indicate_fast_charging" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+    <sh.siava.AOSPMods.ui.MaterialColorPreference
         android:defaultValue="-16776961"
         android:key="batteryIconFastChargingColor"
         android:title="@string/BB_batteryFastChargingColor" />
@@ -91,12 +91,12 @@
         android:summaryOn="@string/general_on"
         android:title="@string/BB_transit_colors" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+    <sh.siava.AOSPMods.ui.MaterialColorPreference
         android:defaultValue="-65536"
         android:key="BIconbatteryCriticalColor"
         android:title="@string/BB_batteryCriticalColor" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+    <sh.siava.AOSPMods.ui.MaterialColorPreference
         android:defaultValue="-256"
         android:key="BIconbatteryWarningColor"
         android:title="@string/BB_batteryWarningColor" />

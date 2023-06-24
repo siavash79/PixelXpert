@@ -48,12 +48,12 @@
 		android:summaryOn="@string/general_on"
 		android:title="@string/network_colorful_title" />
 
-	<com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+	<sh.siava.AOSPMods.ui.MaterialColorPreference
 		android:defaultValue="-7617718"
 		android:key="networkTrafficDLColor"
 		android:title="@string/network_download_color_title" />
 
-	<com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+	<sh.siava.AOSPMods.ui.MaterialColorPreference
 		android:defaultValue="-351845"
 		android:key="networkTrafficULColor"
 		android:title="@string/network_upload_color_title" />

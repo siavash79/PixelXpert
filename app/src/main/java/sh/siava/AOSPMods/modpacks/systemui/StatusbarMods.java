@@ -20,6 +20,7 @@ import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -31,6 +32,7 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
+import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyCallback;
 import android.text.Spannable;
@@ -38,7 +40,6 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.CharacterStyle;
 import android.text.style.RelativeSizeSpan;
-import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executor;
@@ -186,11 +188,11 @@ public class StatusbarMods extends XposedModPack {
 	//endregion
 
 	//region combined signal icons
-	private Object NetworkController;
 	private boolean mWifiVisble = false;
-	private Object StatusBarSignalPolicy;
 	private static boolean CombineSignalIcons = false;
 	private static boolean HideRoamingState = false;
+	private Object mTunerService;
+	public static final String ICON_HIDE_LIST = "icon_blacklist";
 	//endregion
 
 	@SuppressLint("DiscouragedApi")
@@ -458,30 +460,22 @@ public class StatusbarMods extends XposedModPack {
 		NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 		Class<?> StatusBarSignalPolicyClass = findClass("com.android.systemui.statusbar.phone.StatusBarSignalPolicy", lpparam.classLoader);
-		Class<?> NetworkControllerImplClass = findClass("com.android.systemui.statusbar.connectivity.NetworkControllerImpl", lpparam.classLoader);
 		Class<?> PrivacyItemControllerClass = findClass("com.android.systemui.privacy.PrivacyItemController", lpparam.classLoader);
 		Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
+		Class<?> TunerServiceImplClass = findClass("com.android.systemui.tuner.TunerServiceImpl", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
-
-//		Method setMeasuredDimensionMethod = findMethodExact(View.class, "setMeasuredDimension", int.class, int.class);
 		//endregion
 
 		//region combined signal icons
-		hookAllConstructors(NetworkControllerImplClass, new XC_MethodHook() {
+		hookAllConstructors(TunerServiceImplClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				NetworkController = param.thisObject;
+				mTunerService = param.thisObject;
 			}
 		});
 
-		hookAllConstructors(StatusBarSignalPolicyClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				StatusBarSignalPolicy = param.thisObject;
-			}
-		});
 		hookAllMethods(StatusBarSignalPolicyClass, "setWifiIndicators", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -1245,17 +1239,23 @@ public class StatusbarMods extends XposedModPack {
 	//region combined signal icons
 	private void wifiVisibleChanged()
 	{
-		try
+		//inspired from from TunerServiceImpl#reloadAll
+		String hideListString = Settings.Secure.getString(
+				(ContentResolver) getObjectField(mTunerService, "mContentResolver")
+				, ICON_HIDE_LIST);
+
+		if(mWifiVisble
+				&& CombineSignalIcons
+				&& !hideListString.contains("mobile"))
+			hideListString = hideListString + ",mobile";
+
+		@SuppressWarnings("unchecked")
+		Set<Object> tunables = (Set<Object>) callMethod(getObjectField(mTunerService, "mTunableLookup"), "get", ICON_HIDE_LIST);
+
+		for (Object tunable : tunables)
 		{
-			setObjectField(StatusBarSignalPolicy, "mHideMobile", mWifiVisble && CombineSignalIcons);
-
-			SparseArray<?> mMobileSignalControllers = (SparseArray<?>) getObjectField(NetworkController, "mMobileSignalControllers");
-
-			for (int i = 0; i < mMobileSignalControllers.size(); i++) {
-				callMethod(mMobileSignalControllers.get(mMobileSignalControllers.keyAt(i)), "notifyListeners", StatusBarSignalPolicy);
-			}
+			callMethod(tunable, "onTuningChanged", ICON_HIDE_LIST, hideListString);
 		}
-		catch (Throwable ignored){}
 	}
 	//endregion
 }

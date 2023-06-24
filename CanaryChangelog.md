@@ -1,3 +1,6 @@
+**canary-261**  
+- A14: fixed charging chip background color when Light QS enabled  
+  
 **canary-260**  
 - Battery icons: added optional charging animation  
   

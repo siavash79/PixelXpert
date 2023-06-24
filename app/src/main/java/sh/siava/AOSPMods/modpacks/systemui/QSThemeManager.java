@@ -109,6 +109,20 @@ public class QSThemeManager extends XposedModPack {
 		Class<?> BrightnessSliderViewClass = findClass("com.android.systemui.settings.brightness.BrightnessSliderView", lpparam.classLoader);
 		SettingsLibUtils.init(lpparam.classLoader);
 
+		try {
+			Class<?> BatteryStatusChipClass = findClass("com.android.systemui.statusbar.BatteryStatusChip", lpparam.classLoader);
+			hookAllMethods(BatteryStatusChipClass, "updateResources", new XC_MethodHook() { //background color of 14's charging chip. Fix for light QS theme situation
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if (lightQSHeaderEnabled && !isDark)
+						((LinearLayout) getObjectField(param.thisObject, "roundedContainer"))
+								.getBackground()
+								.setTint(colorActive);
+				}
+			});
+		}
+		catch (Throwable ignored){} //Android 13 or something
+
 		hookAllMethods(BrightnessSliderViewClass, "onFinishInflate", new XC_MethodHook() { //setting brightness slider background to gray
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {

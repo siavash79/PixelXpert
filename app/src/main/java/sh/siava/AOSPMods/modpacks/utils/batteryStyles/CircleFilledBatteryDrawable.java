@@ -48,7 +48,7 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 
 		mPowerSaveColor = SettingsLibUtils.getColorAttrDefaultColor(android.R.attr.colorError, context);
 
-		mLevelAlphaAnimator = ValueAnimator.ofInt(255, 45);
+		mLevelAlphaAnimator = ValueAnimator.ofInt(255, 255, 255, 45);
 
 		mLevelAlphaAnimator.setDuration(2000);
 		mLevelAlphaAnimator.setInterpolator(new FastOutSlowInInterpolator());

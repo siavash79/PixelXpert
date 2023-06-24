@@ -89,7 +89,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 		setMeterStyle(BATTERY_STYLE_CIRCLE);
 
-		mBoltAlphaAnimator = ValueAnimator.ofInt(255, 45);
+		mBoltAlphaAnimator = ValueAnimator.ofInt(255, 255, 255, 45);
 
 		mBoltAlphaAnimator.setDuration(2000);
 		mBoltAlphaAnimator.setInterpolator(new FastOutSlowInInterpolator());

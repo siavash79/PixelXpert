@@ -16,12 +16,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.security.auth.callback.Callback;
 
 import sh.siava.AOSPMods.BuildConfig;
+import sh.siava.AOSPMods.modpacks.systemui.ThermalProvider;
 
 public class StringFormatter {
 	private static final ArrayList<StringFormatter> instances = new ArrayList<>();
@@ -77,7 +80,7 @@ public class StringFormatter {
 	public CharSequence formatString(String input) {
 		SpannableStringBuilder result = new SpannableStringBuilder(input);
 		hasDate = false;
-		Pattern pattern = Pattern.compile("\\$([a-zA-Z]+)"); //variables start with $ and continue with characters, until they don't!
+		Pattern pattern = Pattern.compile("\\$(([tT][a-zA-Z][0-9]*)|([a-zA-Z]+))"); //variables start with $ and continue with characters, until they don't!
 
 		//We'll locate each variable and replace it with a value, if possible
 		Matcher matcher = pattern.matcher(input);
@@ -85,6 +88,7 @@ public class StringFormatter {
 			String match = matcher.group(1);
 
 			int start = result.toString().indexOf("$" + match);
+			//noinspection ConstantConditions
 			result.replace(start, start + match.length() + 1, valueOf(match));
 		}
 		return result;
@@ -94,12 +98,17 @@ public class StringFormatter {
 		if (match.startsWith("P")) //P is reserved for "Persian Calendar". Then goes normal Java dateformat, like $Pdd or $Pyyyy
 		{
 			return persianDateOf(match.substring(1));
-		} else if (match.startsWith("G")) //G is reserved for "Georgian Calendar". Then goes normal Java dateformat, like $Gyyyy or $GEEE
+		}
+		else if (match.startsWith("G")) //G is reserved for "Georgian Calendar". Then goes normal Java dateformat, like $Gyyyy or $GEEE
 		{
 			return georgianDateOf(match.substring(1));
 		}
-		if (match.startsWith("N")) {
+		else if (match.startsWith("N")) {
 			return networkStatOf(match.substring(1));
+		}
+		else if(match.startsWith("T"))
+		{
+			return temperatureOf(match.substring(1));
 		}
 		return match;
 	}
@@ -155,6 +164,73 @@ public class StringFormatter {
 			return result;
 		} catch (Exception ignored) {
 			return "G" + format;
+		}
+	}
+
+	private CharSequence temperatureOf(String format)
+	{
+		try
+		{
+			Matcher match = Pattern.compile("^([A-Za-z])([0-9]*)$").matcher(format);
+
+			if(!match.find())
+			{
+				throw new Exception();
+			}
+			String typeStr = match.group(1);
+
+			long nextUpdate;
+
+			try
+			{
+				//noinspection ConstantConditions
+				nextUpdate = Integer.parseInt(match.group(2));
+			}
+			catch (Throwable ignored)
+			{
+				nextUpdate = 60;
+			}
+
+			nextUpdate *= 1000L;
+
+			int type = -1;
+
+			//noinspection ConstantConditions
+			switch (typeStr.toLowerCase())
+			{
+				case "b":
+					type = ThermalProvider.BATTERY;
+					break;
+				case "c":
+					type = ThermalProvider.CPU;
+					break;
+				case "g":
+					type = ThermalProvider.GPU;
+					break;
+				case "s":
+					type = ThermalProvider.SKIN;
+					break;
+			}
+
+			int temperature = ThermalProvider.getTemperatureAvgInt(type);
+
+			if(temperature < -990)
+			{
+				nextUpdate = 1000L;
+			}
+
+			new Timer().schedule(new TimerTask() {
+				@Override
+				public void run() {
+					informCallbacks();
+				}
+			}, nextUpdate);
+
+			return String.valueOf(temperature);
+
+		} catch (Exception ignored)
+		{
+			return "T" + format;
 		}
 	}
 

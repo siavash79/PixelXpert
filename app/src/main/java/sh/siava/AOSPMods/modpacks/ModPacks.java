@@ -37,6 +37,7 @@ import sh.siava.AOSPMods.modpacks.systemui.QSTileGrid;
 import sh.siava.AOSPMods.modpacks.systemui.ScreenGestures;
 import sh.siava.AOSPMods.modpacks.systemui.ScreenshotMuter;
 import sh.siava.AOSPMods.modpacks.systemui.StatusbarMods;
+import sh.siava.AOSPMods.modpacks.systemui.ThermalProvider;
 import sh.siava.AOSPMods.modpacks.systemui.ThreeButtonNavMods;
 import sh.siava.AOSPMods.modpacks.systemui.UDFPSManager;
 import sh.siava.AOSPMods.modpacks.systemui.VolumeTile;
@@ -76,6 +77,7 @@ public class ModPacks {
 		modPacks.add(CustomNavGestures.class);
 		modPacks.add(NotificationManager.class);
 		modPacks.add(VolumeTile.class);
+		modPacks.add(ThermalProvider.class);
 		//Telecom
 		modPacks.add(CallVibrator.class);
 		//Framework

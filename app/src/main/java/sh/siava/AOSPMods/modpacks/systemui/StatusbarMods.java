@@ -13,8 +13,10 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
+import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
@@ -832,6 +834,16 @@ public class StatusbarMods extends XposedModPack {
 							result.append(getFormattedString("$Ga", mAmPmStyle == AM_PM_STYLE_SMALL, mClockColor));
 						}
 						result.append(getFormattedString(mStringFormatAfter, mAfterSmall, mAfterClockColor)); //after clock
+
+						if(getAdditionalInstanceField(param.thisObject, "stringFormatCallBack") == null) {
+							StringFormatter.formattedStringCallback callback = () -> {
+								try {
+									callMethod(param.thisObject, "getSmallTime");
+								} catch (Throwable ignored){}
+							};
+							stringFormatter.registerCallback(callback);
+							setAdditionalInstanceField(param.thisObject, "stringFormatCallBack", callback);
+						}
 						param.setResult(result);
 					}
 				});

@@ -77,13 +77,6 @@
 			android:summaryOn="@string/general_on"
 			android:title="@string/charging_info_title" />
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="TemperatureUnitF"
-			android:summaryOff="@string/general_off"
-			android:summaryOn="@string/general_on"
-			android:title="@string/imperial_units_title" />
-
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory

@@ -438,8 +438,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				}
 				findPreference("KeyGuardDimAmount").setSummary(KeyGuardDimAmount < 0 ? getString(R.string.word_default) : KeyGuardDimAmount + "%");
 
-				findPreference("TemperatureUnitF").setVisible(sharedPreferences.getBoolean("ShowChargingInfo", false));
-
 				boolean lockScreenShortcutModsVisible = Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
 
 				findPreference("leftKeyguardShortcut").setVisible(lockScreenShortcutModsVisible);

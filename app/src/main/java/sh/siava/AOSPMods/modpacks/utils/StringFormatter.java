@@ -80,7 +80,7 @@ public class StringFormatter {
 	public CharSequence formatString(String input) {
 		SpannableStringBuilder result = new SpannableStringBuilder(input);
 		hasDate = false;
-		Pattern pattern = Pattern.compile("\\$(([tT][a-zA-Z][0-9]*)|([a-zA-Z]+))"); //variables start with $ and continue with characters, until they don't!
+		Pattern pattern = Pattern.compile("\\$(([tT][a-zA-Z][0-9]*)|([A-Z]+))"); //variables start with $ and continue with characters, until they don't!
 
 		//We'll locate each variable and replace it with a value, if possible
 		Matcher matcher = pattern.matcher(input);

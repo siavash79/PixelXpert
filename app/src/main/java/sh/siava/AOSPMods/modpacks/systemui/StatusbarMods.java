@@ -1244,11 +1244,17 @@ public class StatusbarMods extends XposedModPack {
 				(ContentResolver) getObjectField(mTunerService, "mContentResolver")
 				, ICON_HIDE_LIST);
 
-		if(mWifiVisble
-				&& CombineSignalIcons
-				&& !hideListString.contains("mobile"))
-			hideListString = hideListString + ",mobile";
-
+		if(CombineSignalIcons && mWifiVisble)
+		{
+			if(hideListString == null || hideListString.length() == 0)
+			{
+				hideListString = "mobile";
+			}
+			else if(!hideListString.contains("mobile"))
+			{
+				hideListString = hideListString + ",mobile";
+			}
+		}
 		@SuppressWarnings("unchecked")
 		Set<Object> tunables = (Set<Object>) callMethod(getObjectField(mTunerService, "mTunableLookup"), "get", ICON_HIDE_LIST);
 

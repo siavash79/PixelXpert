@@ -110,13 +110,13 @@ public class StringFormatter {
 		{
 			return temperatureOf(match.substring(1));
 		}
-		return match;
+		return "$" + match;
 	}
 
 	@SuppressWarnings("ConstantConditions")
 	private CharSequence networkStatOf(String variable) {
 		if (!SystemUtils.NetworkStats().isEnabled()) {
-			return "N" + variable;
+			return "$N" + variable;
 		}
 		long traffic = 0;
 		Integer textColor = null;
@@ -149,7 +149,7 @@ public class StringFormatter {
 			}
 			return transformed;
 		} catch (Exception ignored) {
-			return "N" + variable;
+			return "$N" + variable;
 		}
 	}
 
@@ -163,7 +163,7 @@ public class StringFormatter {
 			hasDate = true;
 			return result;
 		} catch (Exception ignored) {
-			return "G" + format;
+			return "$G" + format;
 		}
 	}
 
@@ -210,6 +210,8 @@ public class StringFormatter {
 				case "s":
 					type = ThermalProvider.SKIN;
 					break;
+				default:
+					throw new Exception();
 			}
 
 			int temperature = ThermalProvider.getTemperatureAvgInt(type);
@@ -230,7 +232,7 @@ public class StringFormatter {
 
 		} catch (Exception ignored)
 		{
-			return "T" + format;
+			return "$T" + format;
 		}
 	}
 
@@ -247,7 +249,7 @@ public class StringFormatter {
 			NumericShaper.getShaper(NumericShaper.EASTERN_ARABIC).shape(bytes, 0, bytes.length); //Numbers to be shown in correct font
 			return String.copyValueOf(bytes);
 		} catch (Exception ignored) {
-			return "P" + format;
+			return "$P" + format;
 		}
 	}
 

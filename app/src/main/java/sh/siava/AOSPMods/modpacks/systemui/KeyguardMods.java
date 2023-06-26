@@ -72,7 +72,8 @@ public class KeyguardMods extends XposedModPack {
 	private static String customCarrierText = "";
 	private static Object carrierTextController;
 
-	StringFormatter stringFormatter = new StringFormatter();
+	StringFormatter carrierStringFormatter = new StringFormatter();
+	StringFormatter clockStringFormatter = new StringFormatter();
 	private TextView KGMiddleCustomTextView;
 	private static String KGMiddleCustomText = "";
 	LinearLayout mStatusArea = null;
@@ -385,12 +386,14 @@ public class KeyguardMods extends XposedModPack {
 		});
 		//endregion
 
-		stringFormatter.registerCallback(() -> {
-			if(KGMiddleCustomText.length() > 0)
-				setMiddleText();
-
+		carrierStringFormatter.registerCallback(() -> {
 			if(customCarrierTextEnabled)
 				setCarrierText();
+		});
+
+		clockStringFormatter.registerCallback(() -> {
+			if(KGMiddleCustomText.length() > 0)
+				setMiddleText();
 		});
 
 		Resources res = mContext.getResources();
@@ -610,7 +613,7 @@ public class KeyguardMods extends XposedModPack {
 	private void setCarrierText() {
 		try {
 			TextView mView = (TextView) getObjectField(carrierTextController, "mView");
-			mView.setText(stringFormatter.formatString(customCarrierText));
+			mView.setText(carrierStringFormatter.formatString(customCarrierText));
 		} catch (Throwable ignored) {
 		} //probably not initiated yet
 	}
@@ -627,7 +630,7 @@ public class KeyguardMods extends XposedModPack {
 					((ViewGroup) KGMiddleCustomTextView.getParent()).removeView(KGMiddleCustomTextView);
 				}
 				mStatusArea.addView(KGMiddleCustomTextView, 0);
-				KGMiddleCustomTextView.setText(stringFormatter.formatString(KGMiddleCustomText));
+				KGMiddleCustomTextView.setText(clockStringFormatter.formatString(KGMiddleCustomText));
 
 			} catch (Exception ignored) {
 			}

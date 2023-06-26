@@ -725,7 +725,7 @@ public class StatusbarMods extends XposedModPack {
 				"animateHiddenState", new XC_MethodHook() {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						if (param.args[0] != mClockView) return;
+						if (param.args[(param.args[1] instanceof View) ? 1 : 0] != mClockView) return; //view can be the 2nd arg sometimes
 						for (ClockVisibilityCallback c : clockVisibilityCallbacks) {
 							try {
 								c.OnVisibilityChanged(false);

@@ -1,3 +1,7 @@
+**canary-262**  
+- Added temperature to customizable texts  
+- Fixed combined signal icons causing system crash on some devices  
+  
 **canary-261**  
 - A14: fixed charging chip background color when Light QS enabled  
 - A14: fixed combined signal icons  

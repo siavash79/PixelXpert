@@ -216,7 +216,7 @@ public class StringFormatter {
 					throw new Exception();
 			}
 
-			int temperature = ThermalProvider.getTemperatureAvgInt(type);
+			int temperature = ThermalProvider.getTemperatureMaxInt(type);
 
 			if(temperature < -990)
 			{

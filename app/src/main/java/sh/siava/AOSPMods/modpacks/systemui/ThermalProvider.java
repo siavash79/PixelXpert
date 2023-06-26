@@ -17,7 +17,7 @@ import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 
-@SuppressWarnings("RedundantThrows")
+@SuppressWarnings({"RedundantThrows", "unused"})
 public class ThermalProvider extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 
@@ -57,11 +57,31 @@ public class ThermalProvider extends XposedModPack {
 		});
 	}
 
+	public static float getTemperatureMaxFloat(int type)
+	{
+		Object[] temperatures = getTemperatures(type);
+
+		final float[] maxValue = {-999};
+
+		Arrays.stream(temperatures).forEach(temperature -> maxValue[0] = Math.max(maxValue[0], getFloatField(temperature, "mValue")));
+
+		if(TemperatureUnitF)
+		{
+			maxValue[0] = toFahrenheit(maxValue[0]);
+		}
+
+		return maxValue[0];
+	}
+
+	public static int getTemperatureMaxInt(int type)
+	{
+		return Math.round(getTemperatureMaxFloat(type));
+	}
+
 	public static float getTemperatureAvgFloat(int type)
 	{
-		if(thermalService == null) return -998;
+		Object[] temperatures = getTemperatures(type);
 
-		Object[] temperatures = (Object[]) callMethod(thermalService, "getCurrentTemperaturesWithType", type);
 		if (temperatures.length > 0)
 		{
 			final float[] totalValue = {0};
@@ -71,7 +91,7 @@ public class ThermalProvider extends XposedModPack {
 
 			if(TemperatureUnitF)
 			{
-				ret = (ret * 1.8f) + 32f;
+				ret = toFahrenheit(ret);
 			}
 
 			return ret;
@@ -82,5 +102,21 @@ public class ThermalProvider extends XposedModPack {
 	public static int getTemperatureAvgInt(int type)
 	{
 		return Math.round(getTemperatureAvgFloat(type));
+	}
+
+	private static Object[] getTemperatures(int type)
+	{
+		try {
+			return (Object[]) callMethod(thermalService, "getCurrentTemperaturesWithType", type);
+		}
+		catch (Throwable ignored)
+		{
+			return new Object[0];
+		}
+	}
+
+	private static float toFahrenheit(float celsius)
+	{
+		return (celsius * 1.8f) + 32f;
 	}
 }

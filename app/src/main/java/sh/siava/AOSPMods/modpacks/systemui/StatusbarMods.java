@@ -837,7 +837,9 @@ public class StatusbarMods extends XposedModPack {
 						if(getAdditionalInstanceField(param.thisObject, "stringFormatCallBack") == null) {
 							FormattedStringCallback callback = () -> {
 								try {
-									callMethod(param.thisObject, "getSmallTime");
+									if(mAmPmStyle == AM_PM_STYLE_GONE) {
+										callMethod(param.thisObject, "updateClock");
+									}
 								} catch (Throwable ignored){}
 							};
 							stringFormatter.registerCallback(callback);

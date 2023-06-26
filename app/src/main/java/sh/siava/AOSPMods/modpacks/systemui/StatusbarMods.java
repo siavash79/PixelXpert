@@ -1249,29 +1249,26 @@ public class StatusbarMods extends XposedModPack {
 	//region combined signal icons
 	private void wifiVisibleChanged()
 	{
-		//inspired from from TunerServiceImpl#reloadAll
-		String hideListString = Settings.Secure.getString(
-				(ContentResolver) getObjectField(mTunerService, "mContentResolver")
-				, ICON_HIDE_LIST);
+		try { //don't crash the system if failed
+			//inspired from from TunerServiceImpl#reloadAll
+			String hideListString = Settings.Secure.getString(
+					(ContentResolver) getObjectField(mTunerService, "mContentResolver")
+					, ICON_HIDE_LIST);
 
-		if(CombineSignalIcons && mWifiVisble)
-		{
-			if(hideListString == null || hideListString.length() == 0)
-			{
-				hideListString = "mobile";
+			if (CombineSignalIcons && mWifiVisble) {
+				if (hideListString == null || hideListString.length() == 0) {
+					hideListString = "mobile";
+				} else if (!hideListString.contains("mobile")) {
+					hideListString = hideListString + ",mobile";
+				}
 			}
-			else if(!hideListString.contains("mobile"))
-			{
-				hideListString = hideListString + ",mobile";
-			}
-		}
-		@SuppressWarnings("unchecked")
-		Set<Object> tunables = (Set<Object>) callMethod(getObjectField(mTunerService, "mTunableLookup"), "get", ICON_HIDE_LIST);
+			@SuppressWarnings("unchecked")
+			Set<Object> tunables = (Set<Object>) callMethod(getObjectField(mTunerService, "mTunableLookup"), "get", ICON_HIDE_LIST);
 
-		for (Object tunable : tunables)
-		{
-			callMethod(tunable, "onTuningChanged", ICON_HIDE_LIST, hideListString);
-		}
+			for (Object tunable : tunables) {
+				callMethod(tunable, "onTuningChanged", ICON_HIDE_LIST, hideListString);
+			}
+		} catch (Throwable ignored){}
 	}
 	//endregion
 }

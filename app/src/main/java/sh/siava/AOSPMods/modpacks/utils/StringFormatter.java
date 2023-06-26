@@ -220,7 +220,8 @@ public class StringFormatter {
 
 			if(temperature < -990)
 			{
-				nextUpdate = 1000L;
+				scheduleUpdate(1000L);
+				return "Err";
 			}
 
 			scheduleUpdate(nextUpdate);

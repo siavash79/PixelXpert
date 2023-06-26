@@ -73,7 +73,6 @@ import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.NetworkTraffic;
 import sh.siava.AOSPMods.modpacks.utils.NotificationIconContainerOverride;
-import sh.siava.AOSPMods.modpacks.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.modpacks.utils.ShyLinearLayout;
 import sh.siava.AOSPMods.modpacks.utils.StringFormatter;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
@@ -467,7 +466,6 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> TunerServiceImplClass = findClass("com.android.systemui.tuner.TunerServiceImpl", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
-		SettingsLibUtils.init(lpparam.classLoader);
 		//endregion
 
 		//region combined signal icons
@@ -641,7 +639,7 @@ public class StatusbarMods extends XposedModPack {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						//Getting QS text color for Network traffic
-						int fillColor = SettingsLibUtils.getColorAttrDefaultColor(
+						int fillColor = SettingsLibUtilsProvider.getColorAttrDefaultColor(
 									mContext.getResources().getIdentifier("@android:attr/textColorPrimary", "attr", mContext.getPackageName()),
 									mContext);
 

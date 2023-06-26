@@ -17,7 +17,6 @@ import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
-import sh.siava.AOSPMods.modpacks.utils.SettingsLibUtils;
 
 @SuppressWarnings("RedundantThrows")
 public class UDFPSManager extends XposedModPack {
@@ -43,7 +42,6 @@ public class UDFPSManager extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		SettingsLibUtils.init(lpparam.classLoader);
 		Class<?> UdfpsKeyguardViewClass = findClassIfExists("com.android.systemui.biometrics.UdfpsKeyguardViewLegacy", lpparam.classLoader); //A4B3
 		if(UdfpsKeyguardViewClass == null)
 		{ //A13
@@ -88,7 +86,7 @@ public class UDFPSManager extends XposedModPack {
 
 						if (mLockScreenFp == null) return;
 
-						int mTextColorPrimary = SettingsLibUtils.getColorAttrDefaultColor(
+						int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
 								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
 
 

@@ -41,7 +41,6 @@ import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
-import sh.siava.AOSPMods.modpacks.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.modpacks.utils.StringFormatter;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -189,7 +188,6 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> ZenModeControllerImplClass = findClass("com.android.systemui.statusbar.policy.ZenModeControllerImpl", lpparam.classLoader);
 		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpparam.classLoader);
 		Class<?> CommandQueueClass = findClass("com.android.systemui.statusbar.CommandQueue", lpparam.classLoader);
-		SettingsLibUtils.init(lpparam.classLoader);
 
 		hookAllConstructors(CommandQueueClass, new XC_MethodHook() {
 			@Override
@@ -295,7 +293,7 @@ public class KeyguardMods extends XposedModPack {
 						}
 
 						if (transparentBGcolor) {
-							@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = SettingsLibUtils.getColorAttrDefaultColor(
+							@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = SettingsLibUtilsProvider.getColorAttrDefaultColor(
 									mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
 
 							try {
@@ -304,10 +302,10 @@ public class KeyguardMods extends XposedModPack {
 							} catch (Throwable ignored) {
 							}
 						} else {
-							@SuppressLint("DiscouragedApi") int mTextColorPrimary = SettingsLibUtils.getColorAttrDefaultColor(
+							@SuppressLint("DiscouragedApi") int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
 									mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
 
-							@SuppressLint("DiscouragedApi") ColorStateList colorSurface = SettingsLibUtils.getColorAttr(
+							@SuppressLint("DiscouragedApi") ColorStateList colorSurface = SettingsLibUtilsProvider.getColorAttr(
 									mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
 
 							v.getDrawable().setTint(mTextColorPrimary);

@@ -33,7 +33,7 @@ import androidx.core.graphics.PathParser;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import sh.siava.AOSPMods.modpacks.utils.AlphaRefreshedPaint;
-import sh.siava.AOSPMods.modpacks.utils.SettingsLibUtils;
+import sh.siava.AOSPMods.modpacks.systemui.SettingsLibUtilsProvider;
 
 public class CircleBatteryDrawable extends BatteryDrawable
 {
@@ -83,7 +83,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mBatteryPaint.setDither(true);
 		mBatteryPaint.setStyle(STROKE);
 
-		mPowerSaveColor = SettingsLibUtils.getColorAttrDefaultColor(android.R.attr.colorError, context);
+		mPowerSaveColor = SettingsLibUtilsProvider.getColorAttrDefaultColor(android.R.attr.colorError, context);
 
 		setColors(frameColor, frameColor, frameColor);
 

@@ -23,7 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
-import sh.siava.AOSPMods.modpacks.utils.SettingsLibUtils;
+import sh.siava.AOSPMods.modpacks.systemui.SettingsLibUtilsProvider;
 
 public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	private static final int INTRINSIC_DIMENSION = 45;
@@ -46,7 +46,7 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	@SuppressLint("DiscouragedApi")
 	public CircleFilledBatteryDrawable(Context context) {
 
-		mPowerSaveColor = SettingsLibUtils.getColorAttrDefaultColor(android.R.attr.colorError, context);
+		mPowerSaveColor = SettingsLibUtilsProvider.getColorAttrDefaultColor(android.R.attr.colorError, context);
 
 		mLevelAlphaAnimator = ValueAnimator.ofInt(255, 255, 255, 45);
 

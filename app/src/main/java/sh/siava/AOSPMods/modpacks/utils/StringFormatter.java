@@ -28,7 +28,7 @@ import sh.siava.AOSPMods.modpacks.systemui.ThermalProvider;
 
 public class StringFormatter {
 	private static final ArrayList<StringFormatter> instances = new ArrayList<>();
-	private final ArrayList<formattedStringCallback> callbacks = new ArrayList<>();
+	private final ArrayList<FormattedStringCallback> callbacks = new ArrayList<>();
 	private boolean hasDate = false;
 	private final NetworkStats.networkStatCallback networkStatCallback = stats -> informCallbacks();
 	public static Integer RXColor, TXColor;
@@ -45,7 +45,7 @@ public class StringFormatter {
 	}
 
 	private void informCallbacks() {
-		for (formattedStringCallback callback : callbacks) {
+		for (FormattedStringCallback callback : callbacks) {
 			callback.onRefreshNeeded();
 		}
 	}
@@ -262,12 +262,12 @@ public class StringFormatter {
 		}
 	}
 
-	public void registerCallback(@NonNull formattedStringCallback callback) {
+	public void registerCallback(@NonNull FormattedStringCallback callback) {
 		callbacks.add(callback);
 	}
 
 	@SuppressWarnings("unused")
-	public void unRegisterCallback(@NonNull formattedStringCallback callback) {
+	public void unRegisterCallback(@NonNull FormattedStringCallback callback) {
 		callbacks.remove(callback);
 	}
 
@@ -276,7 +276,7 @@ public class StringFormatter {
 		callbacks.clear();
 	}
 
-	public interface formattedStringCallback extends Callback {
+	public interface FormattedStringCallback extends Callback {
 		void onRefreshNeeded();
 	}
 }

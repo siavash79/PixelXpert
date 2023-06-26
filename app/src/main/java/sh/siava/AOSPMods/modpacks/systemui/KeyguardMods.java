@@ -386,15 +386,9 @@ public class KeyguardMods extends XposedModPack {
 		});
 		//endregion
 
-		carrierStringFormatter.registerCallback(() -> {
-			if(customCarrierTextEnabled)
-				setCarrierText();
-		});
+		carrierStringFormatter.registerCallback(this::setCarrierText);
 
-		clockStringFormatter.registerCallback(() -> {
-			if(KGMiddleCustomText.length() > 0)
-				setMiddleText();
-		});
+		clockStringFormatter.registerCallback(this::setMiddleText);
 
 		Resources res = mContext.getResources();
 

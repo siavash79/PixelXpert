@@ -75,6 +75,7 @@ import sh.siava.AOSPMods.modpacks.utils.NetworkTraffic;
 import sh.siava.AOSPMods.modpacks.utils.NotificationIconContainerOverride;
 import sh.siava.AOSPMods.modpacks.utils.ShyLinearLayout;
 import sh.siava.AOSPMods.modpacks.utils.StringFormatter;
+import sh.siava.AOSPMods.modpacks.utils.StringFormatter.FormattedStringCallback;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.AOSPMods.modpacks.utils.batteryStyles.BatteryBarView;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -834,7 +835,7 @@ public class StatusbarMods extends XposedModPack {
 						result.append(getFormattedString(mStringFormatAfter, mAfterSmall, mAfterClockColor)); //after clock
 
 						if(getAdditionalInstanceField(param.thisObject, "stringFormatCallBack") == null) {
-							StringFormatter.formattedStringCallback callback = () -> {
+							FormattedStringCallback callback = () -> {
 								try {
 									callMethod(param.thisObject, "getSmallTime");
 								} catch (Throwable ignored){}

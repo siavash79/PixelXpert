@@ -33,6 +33,8 @@ public class StringFormatter {
 	private final NetworkStats.networkStatCallback networkStatCallback = stats -> informCallbacks();
 	public static Integer RXColor, TXColor;
 
+	private Timer scheduler = new Timer();
+
 	public StringFormatter() {
 		instances.add(this);
 		scheduleNextDateUpdate();
@@ -80,7 +82,7 @@ public class StringFormatter {
 	public CharSequence formatString(String input) {
 		SpannableStringBuilder result = new SpannableStringBuilder(input);
 		hasDate = false;
-		Pattern pattern = Pattern.compile("\\$(([tT][a-zA-Z][0-9]*)|([A-Z]+))"); //variables start with $ and continue with characters, until they don't!
+		Pattern pattern = Pattern.compile("\\$((T[a-zA-Z][0-9]*)|([A-Z][A-Za-z]+))"); //variables start with $ and continue with characters, until they don't!
 
 		//We'll locate each variable and replace it with a value, if possible
 		Matcher matcher = pattern.matcher(input);
@@ -193,7 +195,7 @@ public class StringFormatter {
 
 			nextUpdate *= 1000L;
 
-			int type = -1;
+			int type;
 
 			//noinspection ConstantConditions
 			switch (typeStr.toLowerCase())
@@ -221,12 +223,7 @@ public class StringFormatter {
 				nextUpdate = 1000L;
 			}
 
-			new Timer().schedule(new TimerTask() {
-				@Override
-				public void run() {
-					informCallbacks();
-				}
-			}, nextUpdate);
+			scheduleUpdate(nextUpdate);
 
 			return String.valueOf(temperature);
 
@@ -234,6 +231,18 @@ public class StringFormatter {
 		{
 			return "$T" + format;
 		}
+	}
+
+	private void scheduleUpdate(long nextUpdate) {
+		scheduler.cancel();
+
+		scheduler = new Timer();
+		scheduler.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				informCallbacks();
+			}
+		}, nextUpdate);
 	}
 
 	private CharSequence persianDateOf(String format) {

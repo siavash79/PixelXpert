@@ -35,7 +35,7 @@ import sh.siava.AOSPMods.modpacks.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.modpacks.systemui.QSThemeManager;
 import sh.siava.AOSPMods.modpacks.systemui.QSTileGrid;
 import sh.siava.AOSPMods.modpacks.systemui.ScreenGestures;
-import sh.siava.AOSPMods.modpacks.systemui.ScreenshotMuter;
+import sh.siava.AOSPMods.modpacks.systemui.ScreenshotManager;
 import sh.siava.AOSPMods.modpacks.systemui.SettingsLibUtilsProvider;
 import sh.siava.AOSPMods.modpacks.systemui.StatusbarMods;
 import sh.siava.AOSPMods.modpacks.systemui.ThermalProvider;
@@ -75,7 +75,7 @@ public class ModPacks {
 		modPacks.add(BatteryStyleManager.class);
 		modPacks.add(GestureNavbarManager.class);
 		modPacks.add(QSFooterTextManager.class);
-		modPacks.add(ScreenshotMuter.class);
+		modPacks.add(ScreenshotManager.class);
 		modPacks.add(KeyGuardPinScrambler.class);
 		modPacks.add(FingerprintWhileDozing.class);
 		modPacks.add(StatusbarSize.class);

@@ -261,6 +261,8 @@
 
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disable screenshot sound</string>
+    <!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
+    <string name="screenshot_insecure">Allow screenshot from restricted content</string>
     <string name="clipboard_smart_actions_title">Smart actions on clipboard overlay</string>
     <string name="allow_all_screen_rotations">Force-unlock all screen rotations</string>
     <string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
@@ -437,7 +439,6 @@
     <string name="toggle_notification">Toggle notification panel</string>
     <string name="toggle_one_handed">Toggle one handed mode</string>
     <string name="insecure_screenshot">Unrestricted screenshot</string>
-    <string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string>
     <string name="sleep">Sleep</string>
 
 </resources>

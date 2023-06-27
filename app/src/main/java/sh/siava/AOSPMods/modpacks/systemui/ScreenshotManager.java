@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
 import android.content.Context;
@@ -23,12 +24,13 @@ import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
-public class ScreenshotMuter extends XposedModPack {
+public class ScreenshotManager extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 
 	private static boolean disableScreenshotSound = false;
+	private boolean ScreenshotChordInsecure = false;
 
-	public ScreenshotMuter(Context context) {
+	public ScreenshotManager(Context context) {
 		super(context);
 	}
 
@@ -36,6 +38,7 @@ public class ScreenshotMuter extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		if (XPrefs.Xprefs == null) return;
 		disableScreenshotSound = XPrefs.Xprefs.getBoolean("disableScreenshotSound", false);
+		ScreenshotChordInsecure = XPrefs.Xprefs.getBoolean("ScreenshotChordInsecure", false);
 	}
 
 	@Override
@@ -43,6 +46,21 @@ public class ScreenshotMuter extends XposedModPack {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
 		Class<?> ScreenshotControllerClass = findClass("com.android.systemui.screenshot.ScreenshotController", lpparam.classLoader);
+
+		Class<?> CaptureArgsClass = findClassIfExists("android.window.ScreenCapture.CaptureArgs", lpparam.classLoader); //A14
+		if(CaptureArgsClass == null)
+		{
+			CaptureArgsClass = findClass("android.view.SurfaceControl$DisplayCaptureArgs", lpparam.classLoader); //A13
+		}
+		hookAllConstructors(CaptureArgsClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(ScreenshotChordInsecure) {
+					setObjectField(param.thisObject, "mAllowProtected", true);
+					setObjectField(param.thisObject, "mCaptureSecureLayers", true);
+				}
+			}
+		});
 
 		hookAllConstructors(ScreenshotControllerClass, new XC_MethodHook() {
 			@Override

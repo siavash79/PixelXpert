@@ -34,6 +34,7 @@ public class CustomNavGestures extends XposedModPack {
 	private static final int ACTION_KILL_APP = 3;
 	private static final int ACTION_NOTIFICATION = 4;
 	private static final int ACTION_ONE_HANDED = 5;
+	@Deprecated
 	private static final int ACTION_INSECURE_SCREENSHOT = 6;
 	private static final int ACTION_SLEEP = 7;
 
@@ -229,9 +230,9 @@ public class CustomNavGestures extends XposedModPack {
 			case ACTION_ONE_HANDED:
 				startOneHandedMode();
 				break;
-			case ACTION_INSECURE_SCREENSHOT:
+/*			case ACTION_INSECURE_SCREENSHOT:
 				takeInsecureScreenshot();
-				break;
+				break;*/
 			case ACTION_SLEEP:
 				goToSleep();
 				break;
@@ -244,6 +245,7 @@ public class CustomNavGestures extends XposedModPack {
 		mContext.sendBroadcast(broadcast);
 	}
 
+	@Deprecated
 	private void takeInsecureScreenshot() {
 		Intent broadcast = new Intent();
 		broadcast.setAction(Constants.ACTION_INSECURE_SCREENSHOT);

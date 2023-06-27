@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.modpacks;
 
 public final class Constants {
 	public static final String ACTION_SCREENSHOT = "sh.siava.AOSPMods.ACTION_SCREENSHOT";
+	@Deprecated
 	public static final String ACTION_INSECURE_SCREENSHOT = "sh.siava.AOSPMods.ACTION_INSECURE_SCREENSHOT";
 	public static final String ACTION_BACK = "sh.siava.AOSPMods.ACTION_BACK";
 	public static final String ACTION_SLEEP = "sh.siava.AOSPMods.ACTION_SLEEP";

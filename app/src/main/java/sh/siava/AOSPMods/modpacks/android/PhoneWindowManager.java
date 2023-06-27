@@ -1,8 +1,6 @@
 package sh.siava.AOSPMods.modpacks.android;
 
 import static android.content.Context.RECEIVER_EXPORTED;
-import static android.view.KeyEvent.KEYCODE_POWER;
-import static android.view.KeyEvent.KEYCODE_VOLUME_DOWN;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -25,13 +23,10 @@ import android.os.Bundle;
 import android.view.Display;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Collections;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.Constants;
-import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 
@@ -50,8 +45,8 @@ public class PhoneWindowManager extends XposedModPack {
 	private Display mDefaultDisplay;
 	private Object mDefaultDisplayPolicy;
 	private Object mHandler;
-	private boolean ScreenshotChordInsecure;
-	private final ArrayList<Object> screenshotChords = new ArrayList<>();
+//	private boolean ScreenshotChordInsecure;
+//	private final ArrayList<Object> screenshotChords = new ArrayList<>();
 	private Class<?> ScreenshotRequestClass;
 
 	public PhoneWindowManager(Context context) {
@@ -60,7 +55,7 @@ public class PhoneWindowManager extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		ScreenshotChordInsecure = XPrefs.Xprefs.getBoolean("ScreenshotChordInsecure", false);
+//		ScreenshotChordInsecure = XPrefs.Xprefs.getBoolean("ScreenshotChordInsecure", false);
 	}
 
 	BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -100,7 +95,7 @@ public class PhoneWindowManager extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		Collections.addAll(screenshotChords, KEYCODE_POWER, KEYCODE_VOLUME_DOWN);
+//		Collections.addAll(screenshotChords, KEYCODE_POWER, KEYCODE_VOLUME_DOWN);
 
 		if (!broadcastRegistered) {
 			broadcastRegistered = true;
@@ -119,7 +114,7 @@ public class PhoneWindowManager extends XposedModPack {
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					windowMan = param.thisObject;
 
-					//Apparently some stuff init before Xposed. Will have to find and hack them...
+/*					//Apparently some stuff init before Xposed. Will have to find and hack them...
 					Object mKeyCombinationManager = getObjectField(param.thisObject, "mKeyCombinationManager");
 					ArrayList<?> mRules = (ArrayList<?>) getObjectField(mKeyCombinationManager, "mRules");
 					for (Object mRule : mRules) {
@@ -139,13 +134,13 @@ public class PhoneWindowManager extends XposedModPack {
 							});
 							break;
 						}
-					}
+					}*/
 				}
 			});
 
 		} catch (Throwable ignored) {}
 	}
-
+	@Deprecated
 	private void takeInsecureScreenshot() {
 		if (mDisplayManagerInternal == null) {
 			initVars();

@@ -27,7 +27,7 @@
             android:key="ScreenshotChordInsecure"
             android:summaryOff="@string/general_off"
             android:summaryOn="@string/general_on"
-            android:title="@string/screenshot_chord_insecure" />
+            android:title="@string/screenshot_insecure" />
 
 
         <sh.siava.AOSPMods.ui.MaterialSwitchPreference

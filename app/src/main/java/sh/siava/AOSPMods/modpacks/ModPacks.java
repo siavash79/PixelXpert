@@ -17,6 +17,7 @@ import sh.siava.AOSPMods.modpacks.launcher.CustomNavGestures;
 import sh.siava.AOSPMods.modpacks.launcher.FeatureFlags;
 import sh.siava.AOSPMods.modpacks.launcher.TaskbarActivator;
 import sh.siava.AOSPMods.modpacks.settings.AppCloneEnabler;
+import sh.siava.AOSPMods.modpacks.android.RingerVolSeperator;
 import sh.siava.AOSPMods.modpacks.systemui.AOSPSettingsLauncher;
 import sh.siava.AOSPMods.modpacks.systemui.BatteryStyleManager;
 import sh.siava.AOSPMods.modpacks.systemui.BrightnessSlider;
@@ -92,6 +93,7 @@ public class ModPacks {
 		modPacks.add(ScreenRotation.class);
 		modPacks.add(ScreenOffKeys.class);
 		modPacks.add(HotSpotController.class);
+		modPacks.add(RingerVolSeperator.class);
 		//Launcher
 		modPacks.add(TaskbarActivator.class);
 		modPacks.add(ClearAllButtonMod.class);

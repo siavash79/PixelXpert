@@ -83,6 +83,13 @@
 
             app:defaultValue="100" />
 
+        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
+            android:defaultValue="false"
+            android:key="SeparateRingNotifVol"
+            android:summaryOff="@string/general_off"
+            android:summaryOn="@string/general_on"
+            android:title="@string/separate_ring_notif_vol_title" />
+
         <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
             android:layout_width="wrap_content"
             android:defaultValue="10"

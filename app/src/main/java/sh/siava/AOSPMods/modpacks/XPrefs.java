@@ -25,7 +25,9 @@ public class XPrefs {
 		packageName = context.getPackageName();
 		Xprefs = new RemotePreferences(context, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
 		log("AOSPMods Version: " + BuildConfig.VERSION_NAME);
-		log("AOSPMods Records: " + Xprefs.getAll().keySet().size());
+		try {
+			log("AOSPMods Records: " + Xprefs.getAll().keySet().size());
+		}catch (Throwable ignored){}
 		Xprefs.registerOnSharedPreferenceChangeListener(listener);
 	}
 

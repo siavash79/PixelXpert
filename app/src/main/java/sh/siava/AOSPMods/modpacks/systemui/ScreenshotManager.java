@@ -56,7 +56,6 @@ public class ScreenshotManager extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(ScreenshotChordInsecure) {
-					setObjectField(param.thisObject, "mAllowProtected", true);
 					setObjectField(param.thisObject, "mCaptureSecureLayers", true);
 				}
 			}

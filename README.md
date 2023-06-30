@@ -19,10 +19,13 @@ This is a mixed Xposed+Magisk module, which is made to allow customizations that
 ### **Features:**
 Currently, AOSP Mods offers customizations on different aspects of system framework and SystemUI, including:
 - Status bar
+- Quick Settings panel
 - Lock screen
 - Notifications
-- Quick Settings panel
-- Gestural Navigations
+- Gesture Navigations
+- Phone & Dialer
+- Hotspot
+- Package Manager
 - Screen properties
 <hr>
 

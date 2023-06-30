@@ -8,7 +8,7 @@
 
 ### **AOSPMods Support Channels:**
 
-[![XDA URL](https://img.shields.io/twitter/url?label=XDA%20Developers&logo=XDA-Developers&style=social&url=https%3A%2F%2Fsh-ort.app%2F1fjst)](https://sh-ort.app/1fjst)
+[![XDA URL](https://img.shields.io/twitter/url?label=XDA%20Developers&logo=XDA-Developers&style=social&url=http://XDA.AOSPMods.siava.sh)](http://XDA.AOSPMods.siava.sh)
 [![Telegram URL](https://img.shields.io/twitter/url?label=Telegram&logo=telegram&style=social&url=https%3A%2F%2Ft.me%2FAOSPMods_Support)](https://t.me/AOSPMods_Support)
 
 ![Header Image](https://github.com/siavash79/AOSPMods/blob/canary/.github/AOSPMods_Banner_1280.jpg?raw=true)

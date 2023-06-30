@@ -55,6 +55,13 @@ AOSPMods is based on "pure" AOSP. any changes in the rom may (or may not) break 
 - Install in magisk
 - Reboot (no bootloops are expected)
 - Open AOSPMods app and apply changes
+
+> P.S. KernelSu was tested by users in Telegram Support Group, but since it is not officially supported we cannot guarantee steps for that. Here are the steps that were put forward:
+> - Install "Zygisk on KernelSu" module
+> - Install "LSposed" module
+> - Install AOSPMods that you downloaded (as explained above)
+> - Reboot
+> - Open AOSPMods and apply changes
 <hr>
 
 ### **Variants:**  

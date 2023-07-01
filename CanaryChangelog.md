@@ -1,3 +1,10 @@
+**canary-263**  
+- Added option to auto-hide the taskbar (may not work on your device)  
+- No taskbar mods if it's not turned on  
+- Added option to separate Ringer/Notification volumes - Will not work on 13QPR2 and earlier  
+- Combined unrestricted screenshot settings  
+- A14: fixed battery bar / network monitor not hiding from lockscreen  
+  
 **canary-262**  
 - Added temperature to customizable texts  
 - Fixed combined signal icons causing system crash on some devices  

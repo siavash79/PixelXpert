@@ -49,10 +49,11 @@ public class TaskbarActivator extends XposedModPack {
 	private static int numShownHotseatIcons = 0;
 	private int UID = 0;
 	private Object recentTasksList;
-	private boolean TaskbarAsRecents = false;
+	private static boolean TaskbarAsRecents = false;
+	private static boolean TaskbarTransient = false;
 	private boolean refreshing = false;
 	private static float taskbarHeightOverride = 1f;
-	private float TaskbarRadiusOverride = 1f;
+	private static float TaskbarRadiusOverride = 1f;
 
 	private static boolean TaskbarHideAllAppsIcon = false;
 	private Object model;
@@ -78,6 +79,7 @@ public class TaskbarActivator extends XposedModPack {
 					}
 					break;
 				case "TaskbarAsRecents":
+				case "TaskbarTransient":
 				case "taskbarHeightOverride":
 				case "TaskbarRadiusOverride":
 				case "TaskbarHideAllAppsIcon":
@@ -99,6 +101,8 @@ public class TaskbarActivator extends XposedModPack {
 			}
 
 			taskbarMode = Integer.parseInt(taskbarModeStr);
+
+			TaskbarTransient = XPrefs.Xprefs.getBoolean("TaskbarTransient", false);
 		}
 	}
 
@@ -128,7 +132,7 @@ public class TaskbarActivator extends XposedModPack {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if(taskbarMode == TASKBAR_ON)
-					param.setResult(false);
+					param.setResult(TaskbarTransient);
 			}
 		});
 

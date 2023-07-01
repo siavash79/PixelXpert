@@ -253,6 +253,7 @@
     <string name="taskbar_force_enable_title">Force Enabled</string>
     <string name="taskbar_force_disable_title">Force Disabled</string>
     <string name="taskbar_hide_allapps_title">Hide all apps icon</string>
+    <string name="taskbar_transient_title">Auto hide</string>
 
     <!-- Package manager -->
     <string name="pm_bypass_signature_title">Bypass package signature check</string>

@@ -31,6 +31,13 @@
 
     <sh.siava.AOSPMods.ui.MaterialSwitchPreference
         android:defaultValue="false"
+        android:key="TaskbarTransient"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/taskbar_transient_title" />
+
+    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
+        android:defaultValue="false"
         android:key="TaskbarAsRecents"
         android:summaryOff="@string/general_off"
         android:summaryOn="@string/general_on"

@@ -127,14 +127,15 @@ public class TaskbarActivator extends XposedModPack {
 		hookAllMethods(DisplayControllerClass, "isTransientTaskbar", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				param.setResult(false);
+				if(taskbarMode == TASKBAR_ON)
+					param.setResult(false);
 			}
 		});
 
 		hookAllMethods(BaseDraggingActivityClass, "onResume", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(model != null) {
+				if(taskbarMode == TASKBAR_ON && model != null) {
 					XposedHelpers.callMethod(model, "onAppIconChanged", BuildConfig.APPLICATION_ID, UserHandle.getUserHandleForUid(0));
 				}
 			}
@@ -150,7 +151,7 @@ public class TaskbarActivator extends XposedModPack {
 		XC_MethodHook cornerRadiusHook = new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(TaskbarRadiusOverride != 1f) {
+				if(taskbarMode == TASKBAR_ON && TaskbarRadiusOverride != 1f) {
 					param.setResult(
 							Math.round(
 									(int) param.getResult() * TaskbarRadiusOverride
@@ -220,7 +221,7 @@ public class TaskbarActivator extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				TaskBarView = (ViewGroup) param.thisObject;
 
-				if(TaskbarHideAllAppsIcon)
+				if(taskbarMode == TASKBAR_ON && TaskbarHideAllAppsIcon)
 					setObjectField(TaskBarView, "mAllAppsButton", null);
 			}
 		});
@@ -235,7 +236,8 @@ public class TaskbarActivator extends XposedModPack {
 		hookAllMethods(RecentTasksListClass, "onRecentTasksChanged", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if (!TaskbarAsRecents
+				if (taskbarMode != TASKBAR_ON
+						|| !TaskbarAsRecents
 						|| refreshing
 						|| TaskBarView == null)
 					return;
@@ -311,7 +313,7 @@ public class TaskbarActivator extends XposedModPack {
 		hookAllMethods(TaskbarModelCallbacksClass, "commitItemsToUI", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if (!TaskbarAsRecents) return;
+				if (taskbarMode != TASKBAR_ON || !TaskbarAsRecents) return;
 
 				if (TaskBarView.getChildCount() == 0 && recentTasksList != null) {
 					callMethod(recentTasksList, "onRecentTasksChanged");

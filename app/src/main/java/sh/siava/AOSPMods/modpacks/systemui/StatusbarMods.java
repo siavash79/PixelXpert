@@ -337,7 +337,6 @@ public class StatusbarMods extends XposedModPack {
 
 
 		//region clock settings
-
 		clockPosition = Integer.parseInt(Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
 		if(clockPosition == POSITION_LEFT_EXTRA_LEVEL)
 		{
@@ -397,9 +396,8 @@ public class StatusbarMods extends XposedModPack {
 
 		try {
 			placeClock();
-			callMethod(mClockView, "getSmallTime");
-		} catch (Throwable ignored) {
-		}
+			updateClock();
+		} catch (Throwable ignored) {}
 		//endregion clock settings
 
 
@@ -428,6 +426,15 @@ public class StatusbarMods extends XposedModPack {
 			}
 		}
 
+	}
+
+	private void updateClock() {
+		try {
+			((View) mClockView).post(() -> {
+				callMethod(mClockView, "updateClock");
+			});
+		}
+		catch (Throwable ignored){}
 	}
 
 	private void placeNTQS() {
@@ -836,12 +843,10 @@ public class StatusbarMods extends XposedModPack {
 
 						if(getAdditionalInstanceField(param.thisObject, "stringFormatCallBack") == null) {
 							FormattedStringCallback callback = () -> {
-								try {
-									if(mAmPmStyle == AM_PM_STYLE_GONE) {
-										callMethod(param.thisObject, "updateClock");
-									}
-								} catch (Throwable ignored){}
+								if(mAmPmStyle == AM_PM_STYLE_GONE) //don't update again if it's going to do it every second anyway
+									updateClock();
 							};
+
 							stringFormatter.registerCallback(callback);
 							setAdditionalInstanceField(param.thisObject, "stringFormatCallBack", callback);
 						}

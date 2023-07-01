@@ -28,9 +28,13 @@ public class RingerVolSeperator extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		SeparateRingNotifVol = Xprefs.getBoolean("SeparateRingNotifVol", false);
 
-		if(Key.length > 0 && Key[0].equals("SeparateRingNotifVol")) {
-			setSeparateRingerNotif(SeparateRingNotifVol);
+		try
+		{
+			if(Key.length > 0 && Key[0].equals("SeparateRingNotifVol")) {
+				setSeparateRingerNotif(SeparateRingNotifVol);
+			}
 		}
+		catch (Throwable ignored){}
 	}
 
 	@Override

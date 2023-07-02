@@ -78,7 +78,7 @@ public class FlashLightLevel extends XposedModPack {
 				try {
 					Object state = param.args[0];
 					if (getObjectField(state, "spec").equals("flashlight")) {
-						SystemUtils.FlashlighLevelListener listener = (SystemUtils.FlashlighLevelListener) getAdditionalInstanceField(param.thisObject, "flashlightLevelListener");
+						SystemUtils.ChangeListener listener = (SystemUtils.ChangeListener) getAdditionalInstanceField(param.thisObject, "flashlightLevelListener");
 
 						if (listener == null) {
 							View thisView = (View) param.thisObject;
@@ -101,7 +101,7 @@ public class FlashLightLevel extends XposedModPack {
 
 							setAdditionalInstanceField(param.thisObject, "flashlightLevelListener", listener);
 
-							SystemUtils.registerFlashlighLevelListener(listener);
+							SystemUtils.registerFlashlightLevelListener(listener);
 
 							currentPct = XPrefs.Xprefs.getFloat("flashPCT", 0.5f);
 

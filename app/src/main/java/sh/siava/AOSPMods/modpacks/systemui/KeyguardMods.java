@@ -564,7 +564,7 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	private void toggleFlash() {
-		SystemUtils.ToggleFlash();
+		SystemUtils.toggleFlash();
 	}
 
 	private void toggleZen()

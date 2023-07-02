@@ -81,7 +81,7 @@ public class PhoneWindowManager extends XposedModPack {
 						callMethod(windowMan, "backKeyPress");
 						break;
 					case Constants.ACTION_SLEEP:
-						SystemUtils.Sleep();
+						SystemUtils.sleep();
 						break;
 				}
 			} catch (Throwable ignored) {}

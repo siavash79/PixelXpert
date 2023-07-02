@@ -132,7 +132,7 @@ public class ScreenOffKeys extends XposedModPack {
 							return;
 						}
 
-						SystemUtils.ToggleFlash();
+						SystemUtils.toggleFlash();
 
 						SystemUtils.vibrate(VibrationEffect.EFFECT_TICK, VibrationAttributes.USAGE_ACCESSIBILITY);
 

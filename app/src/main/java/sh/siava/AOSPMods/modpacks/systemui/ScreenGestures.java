@@ -77,7 +77,7 @@ public class ScreenGestures extends XposedModPack {
 		mLockscreenDoubleTapToSleep = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
 			@Override
 			public boolean onDoubleTap(MotionEvent e) {
-				SystemUtils.Sleep();
+				SystemUtils.sleep();
 				return true;
 			}
 		});
@@ -235,7 +235,7 @@ public class ScreenGestures extends XposedModPack {
 
 				if (doubleTap && action == ACTION_UP) {
 					if (doubleTapToSleepLockscreenEnabled && !isDozing)
-						SystemUtils.Sleep();
+						SystemUtils.sleep();
 					doubleTap = false;
 				}
 

@@ -458,6 +458,8 @@ public class SystemUtils {
 
 	public static void killSelf()
 	{
+		BootLoopProtector.resetCounter(android.os.Process.myProcessName());
+
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 	public static void killForegroundApp()

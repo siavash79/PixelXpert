@@ -47,7 +47,7 @@ public class ClearAllButtonMod extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		if(Key.length > 0 && Key[0].equals("RecentClearAllReposition"))
 		{
-			android.os.Process.killProcess(android.os.Process.myPid());
+			SystemUtils.killSelf();
 		}
 
 		RecentClearAllReposition = XPrefs.Xprefs.getBoolean("RecentClearAllReposition", false);

@@ -25,6 +25,8 @@ import android.view.ViewGroup;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
@@ -64,46 +66,38 @@ public class TaskbarActivator extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		String taskbarModeStr = XPrefs.Xprefs.getString("taskBarMode", "0");
 
-		if (Key.length > 0) {
-			switch (Key[0]) {
-				case "taskBarMode":
-					try {
-						int newtaskbarMode = Integer.parseInt(taskbarModeStr);
-						if (newtaskbarMode != taskbarMode) {
-							taskbarMode = newtaskbarMode;
-							SystemUtils.killSelf();
-						}
-					} catch (Exception ignored) {
-					}
-					break;
-				case "TaskbarAsRecents":
-				case "TaskbarTransient":
-				case "taskbarHeightOverride":
-				case "TaskbarRadiusOverride":
-				case "TaskbarHideAllAppsIcon":
-					SystemUtils.killSelf();
-					break;
-			}
-		} else {
-			TaskbarAsRecents = XPrefs.Xprefs.getBoolean("TaskbarAsRecents", false);
-			TaskbarHideAllAppsIcon = true;//Xprefs.getBoolean("TaskbarHideAllAppsIcon", false);
+		List<String> restartKeys = Arrays.asList(
+				"taskBarMode",
+				"TaskbarAsRecents",
+				"TaskbarTransient",
+				"taskbarHeightOverride",
+				"TaskbarRadiusOverride",
+				"TaskbarHideAllAppsIcon");
 
-			try
-			{
-				TaskbarRadiusOverride = RangeSliderPreference.getValues(XPrefs.Xprefs, "TaskbarRadiusOverride", 1f).get(0);
-			}catch (Throwable ignored){}
-
-			try {
-				taskbarHeightOverride = RangeSliderPreference.getValues(XPrefs.Xprefs, "taskbarHeightOverride", 100f).get(0) / 100f;
-			} catch (Throwable ignored) {
-			}
-
-			taskbarMode = Integer.parseInt(taskbarModeStr);
-
-			TaskbarTransient = XPrefs.Xprefs.getBoolean("TaskbarTransient", false);
+		if (Key.length > 0 && restartKeys.contains(Key[0])) {
+			SystemUtils.killSelf();
 		}
+
+		taskbarMode = Integer.parseInt(XPrefs.Xprefs.getString("taskBarMode", "0"));
+
+		TaskbarAsRecents = XPrefs.Xprefs.getBoolean("TaskbarAsRecents", false);
+		TaskbarHideAllAppsIcon = true;//Xprefs.getBoolean("TaskbarHideAllAppsIcon", false);
+
+		try
+		{
+			TaskbarRadiusOverride = RangeSliderPreference.getValues(XPrefs.Xprefs, "TaskbarRadiusOverride", 1f).get(0);
+		}catch (Throwable ignored){}
+
+		try {
+			taskbarHeightOverride = RangeSliderPreference.getValues(XPrefs.Xprefs, "taskbarHeightOverride", 100f).get(0) / 100f;
+		} catch (Throwable ignored) {
+		}
+
+		taskbarMode = Integer.parseInt(XPrefs.Xprefs.getString("taskBarMode", "0"));
+
+		TaskbarTransient = XPrefs.Xprefs.getBoolean("TaskbarTransient", false);
+
 	}
 
 	@Override

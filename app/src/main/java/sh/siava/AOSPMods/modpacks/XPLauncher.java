@@ -6,15 +6,13 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static sh.siava.AOSPMods.BuildConfig.APPLICATION_ID;
 import static sh.siava.AOSPMods.BuildConfig.DEBUG;
+import static sh.siava.AOSPMods.modpacks.utils.BootLoopProtector.isBootLooped;
 import static sh.siava.AOSPMods.modpacks.Constants.SYSTEM_UI_PACKAGE;
-import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
-import android.annotation.SuppressLint;
 import android.app.Instrumentation;
 import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -58,7 +56,7 @@ public class XPLauncher {
 					ResourceManager.modRes = mContext.createPackageContext(APPLICATION_ID, CONTEXT_IGNORE_SECURITY)
 							.getResources();
 
-					if(bootLooped(mContext.getPackageName()))
+					if(isBootLooped(mContext.getPackageName()))
 					{
 						log(String.format("AOSPMods: Possible bootloop in %s. Will not load for now", mContext.getPackageName()));
 						return;
@@ -86,31 +84,5 @@ public class XPLauncher {
 			}
 		});
 
-	}
-
-	@SuppressLint("ApplySharedPref")
-	private static boolean bootLooped(String packageName)
-	{
-		String loadTimeKey = String.format("packageLastLoad_%s", packageName);
-		String strikeKey = String.format("packageStrike_%s", packageName);
-		long currentTime = Calendar.getInstance().getTime().getTime();
-		long lastLoadTime = Xprefs.getLong(loadTimeKey, 0);
-		int strikeCount = Xprefs.getInt(strikeKey, 0);
-		if (currentTime - lastLoadTime > 40000)
-		{
-			Xprefs.edit()
-					.putLong(loadTimeKey, currentTime)
-					.putInt(strikeKey, 0)
-					.commit();
-		}
-		else if(strikeCount >= 3)
-		{
-			return true;
-		}
-		else
-		{
-			Xprefs.edit().putInt(strikeKey, ++strikeCount).commit();
-		}
-		return false;
 	}
 }

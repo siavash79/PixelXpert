@@ -9,6 +9,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
+import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
 public class RecordingMessage extends XposedModPack {
@@ -25,7 +26,7 @@ public class RecordingMessage extends XposedModPack {
 
 		if(Key.length > 0 && Key[0].equals("DialerRemoveRecordMessage"))
 		{
-			android.os.Process.killProcess(android.os.Process.myPid());
+			SystemUtils.killSelf();
 		}
 		removeRecodingMessage = Xprefs.getBoolean("DialerRemoveRecordMessage", false);
 	}

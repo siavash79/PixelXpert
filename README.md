@@ -64,7 +64,7 @@ AOSPMods is based on "pure" AOSP. any changes in the rom may (or may not) break 
 > - Open AOSPMods and apply changes
 <hr>
 
-### **Variants:**  
+### **Package Variants:**  
 Apart from modification on system elements, AOSPMods also includes a number of system overlays to modify fonts, system icons and colors.
 However, for those who are not interested on such overlays, we have added an Xposed-only package which, as the name says, only includes the system modification, without such system overlays. You can choose either package, and install the chosen one on your device.
 
@@ -73,7 +73,9 @@ However, for those who are not interested on such overlays, we have added an Xpo
 
 <ins>Full Package:</ins>
 - Includes everything present in Xposed package, plus additional system overlay options.
-  
+<hr>
+
+### **Release Variants:**  
 The module is also released in 2 flavors with different download and update procedures.
 
 <ins>Stable release:</ins> 

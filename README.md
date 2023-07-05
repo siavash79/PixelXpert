@@ -40,7 +40,7 @@ AOSPMods is based on "pure" AOSP. any changes in the rom may (or may not) break 
 
 - Android 12/12.1: [final version: v2.4.1](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)
 - Android 13 stable (up until November 2022 firmware): [final version: v.2.4.1](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)
-- Android 13 stable (starting from December 2022 firmware till QPR3): [starting with v.2.5](https://github.com/siavash79/AOSPMods/releases/tag/v2.5.0) up until latest canary version
+- Android 13 stable QPR3 and beta QPR4 (starting from December 2022 firmware till QPR3): [starting with v.2.5](https://github.com/siavash79/AOSPMods/releases/tag/v2.5.0) up until latest canary version
 - Android 14 beta3.1: [starting with v.2.9](https://github.com/siavash79/AOSPMods/releases/tag/v2.9.0) up until latest canary version
 <hr>
 

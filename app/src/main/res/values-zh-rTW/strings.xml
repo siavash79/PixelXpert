@@ -89,6 +89,7 @@
     <string name="hide_roaming_title">隱藏漫遊指示圖示</string>
     <string name="caution_mobile_costs">注意 - 不知情下漫遊會增加你的流量費用</string>
     <string name="volte_icon_title">可用時顯示 VoLTE 圖示</string>
+    <string name="vowifi_icon_title">可用時顯示 VoWiFi 圖示</string>
     <string name="hide_privacychip_title">隱藏隱私提示</string>
     <string name="sb_vibration_switch_title">顯示「震動」圖示</string>
     <string name="sbc_position_title">時鐘位置</string>

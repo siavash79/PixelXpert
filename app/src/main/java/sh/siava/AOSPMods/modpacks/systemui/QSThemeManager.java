@@ -80,6 +80,16 @@ public class QSThemeManager extends XposedModPack {
 			} catch (Throwable ignored) {
 			}
 		}
+
+		try
+		{
+			if(Key[0].equals("LightQSPanel")) {
+				//Application of Light QS usually only needs a screen off/on. but some users get confused. Let's restart systemUI and get it over with
+				//This has to happen AFTER overlays are applied. So we do it after update operations are done
+				SystemUtils.killSelf();
+			}
+		}
+		catch (Throwable ignored){}
 	}
 
 	public void setLightQSHeader(boolean state) {

@@ -30,13 +30,9 @@ Currently, AOSP Mods offers customizations on different aspects of system framew
 <hr>
 
 ### **Compatibility:**
-This MOD is compatible with ROMs or firmware that are built based on fairly unmodified Android (AOSP) source code. This means stock firmware from "manufacturers" like Sony, Motorola, Nokia, Asus, Oneplus, Nothing are NOT supported. So far it was reported that this MOD is compatible with Pixel stock firmware and Pixel Experience (normal edition) with some small issues. Other custom ROMs with less modifications have some broken features, but most other custom ROMs are NOT supported at all. Do NOT ask us whether "can I install this on X ROM"! Installing this in any else ROM/firmware is under your supervision! Users asking or reporting from unsupported custom ROMs will get 0 response and may even result in warns.
+This MOD is compatible with ROMs or firmware that are built based on fairly unmodified Android (AOSP) source code. This means stock firmware from third party manufacturers like Sony, Motorola, Nokia, Asus, Oneplus, Nothing, etc. may not support all (or in some cases any) of the features of AOSPMods. The same concept applies to custom ROMs (like EvolutionX, Proton, LineageOS, AncientOS, etc). So far, it was reported that this MOD is compatible with Pixel stock firmware fully and with Pixel Experience (normal edition) with some small issues.
 
-"Each and every" Android in the world (from begining of Android 1 to now and in the future: Pixel, Samsung, Oneplus, etc - Custom ROMs: LOS, Evo, PE, etc) is based on AOSP. AOSP means: Android open source project. Every Android firmware is from the AOSP project.
-
-BUT: There's only one Android which is almost 100% matching AOSP original code. That's pixel firmware. Others have differences that developers or maintainers have made into them. Some have small differences, some have more.
-
-AOSPMods is based on "pure" AOSP. any changes in the rom may (or may not) break the compatiblity. And thus, follow below to see which AOSPMods to use:
+AOSPMods is based on "pure" AOSP. Any changes in the ROM source code may (or may not) break the compatiblity. And thus, follow below to see which AOSPMods to use:
 
 - Android 12/12.1: [final version: v2.4.1](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)
 - Android 13 stable (up until November 2022 firmware): [final version: v.2.4.1](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)
@@ -55,13 +51,6 @@ AOSPMods is based on "pure" AOSP. any changes in the rom may (or may not) break 
 - Install in magisk
 - Reboot (no bootloops are expected)
 - Open AOSPMods app and apply changes
-
-> P.S. KernelSu was tested by users in Telegram Support Group, but since it is not officially supported we cannot guarantee steps for that. Here are the steps that were put forward:
-> - Install "Zygisk on KernelSu" module
-> - Install "LSposed" module
-> - Install AOSPMods that you downloaded (as explained above)
-> - Reboot
-> - Open AOSPMods and apply changes
 <hr>
 
 ### **Package Variants:**  

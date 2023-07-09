@@ -108,7 +108,6 @@ public class TaskbarActivator extends XposedModPack {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
-//		Class<?> info = findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
 		Class<?> RecentTasksListClass = findClass("com.android.quickstep.RecentTasksList", lpparam.classLoader);
 		Class<?> AppInfoClass = findClass("com.android.launcher3.model.data.AppInfo", lpparam.classLoader);
 		Class<?> TaskbarViewClass = findClass("com.android.launcher3.taskbar.TaskbarView", lpparam.classLoader);
@@ -119,7 +118,6 @@ public class TaskbarActivator extends XposedModPack {
 		Class<?> TaskbarActivityContextClass = findClass("com.android.launcher3.taskbar.TaskbarActivityContext", lpparam.classLoader);
 		Class<?> LauncherModelClass = findClass("com.android.launcher3.LauncherModel", lpparam.classLoader);
 		Class<?> BaseDraggingActivityClass = findClass("com.android.launcher3.BaseDraggingActivity", lpparam.classLoader);
-		//Transient taskbar. kept disabled until further notice
 		Class<?> DisplayControllerClass = findClass("com.android.launcher3.util.DisplayController", lpparam.classLoader);
 
 		hookAllMethods(DisplayControllerClass, "isTransientTaskbar", new XC_MethodHook() {
@@ -214,6 +212,15 @@ public class TaskbarActivator extends XposedModPack {
 			}
 		});
 
+		hookAllMethods(TaskbarViewClass, "setClickAndLongClickListenersForIcon", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				//Icon must be launched from recents
+				if(taskbarMode == TASKBAR_ON
+						&& TaskbarAsRecents)
+					((View) param.args[0]).setOnClickListener(listener);
+			}
+		});
 		hookAllConstructors(TaskbarViewClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -298,7 +305,6 @@ public class TaskbarActivator extends XposedModPack {
 
 								setAdditionalInstanceField(iconView, "taskId", getAdditionalInstanceField(itemInfos[itemInfos.length - i - 1], "taskId"));
 								callMethod(iconView, "applyFromApplicationInfo", itemInfos[itemInfos.length - i - 1]);
-								iconView.setOnClickListener(listener);
 							}
 						} catch (Throwable ignored) {
 						}

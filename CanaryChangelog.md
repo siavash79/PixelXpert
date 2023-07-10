@@ -1,3 +1,8 @@
+**canary-264**  
+- Fixed taskbar in recents mode not launching certain icons  
+- Performance improvement  
+- fixed statusbar icons disappear randomly if temperature is shown on statusbar  
+  
 **canary-263**  
 - Added option to auto-hide the taskbar (may not work on your device)  
 - No taskbar mods if it's not turned on  

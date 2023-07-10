@@ -1,6 +1,6 @@
 <resources>
     <!--General strings-->
-    <string name="app_themed_icon_title">Abilita l'icona dell'app a tema AOSP Mods alternativa</string>
+    <string name="app_themed_icon_title">Abilita l\'icona dell\'app a tema AOSP Mods alternativa</string>
     <string name="xposed_desc">Funzionalità custom per ROM basate su Android 12+ AOSP</string>
     <string name="volume_tile_title">Volume multimedia</string>
     <string name="error_not_activated">Controlla che il modulo sia attivo in LSPosed Manager</string>
@@ -280,7 +280,7 @@
     <string name="vibrate_on_call_drop_title">Vibra quando la chiamata si disconnette</string>
     <string name="vibration_type_notification">Intensità definita dalle impostazioni di vibrazione alle notifiche di sistema</string>
     <string name="dialer_mute_record_message_title">Rimuovi annuncio registrazione chiamate</string>
-    <string name="dialer_mute_record_message_summary">Si applica solo all'app Telefono Google con registrazione chiamate abilitata</string>
+    <string name="dialer_mute_record_message_summary">Si applica solo all\'app Telefono Google con registrazione chiamate abilitata</string>
   
     <!-- Theming section related -->
     <string name="gsans_override_title">Forza il font Google Sans a livello di sistema</string>

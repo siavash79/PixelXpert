@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.modpacks.utils;
 
+import static android.content.Context.RECEIVER_EXPORTED;
 import static android.content.res.Configuration.UI_MODE_NIGHT_YES;
 import static com.topjohnwu.superuser.Shell.cmd;
 import static de.robv.android.xposed.XposedBridge.log;
@@ -196,7 +197,7 @@ public class SystemUtils {
 
 		IntentFilter volumeFilter = new IntentFilter();
 		volumeFilter.addAction("android.media.VOLUME_CHANGED_ACTION");
-		mContext.registerReceiver(volChangeReceiver, volumeFilter);
+		mContext.registerReceiver(volChangeReceiver, volumeFilter, RECEIVER_EXPORTED);
 	}
 
 	public static void registerFlashlightLevelListener(ChangeListener listener)

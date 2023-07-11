@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.modpacks.utils;
 
+import static android.content.Context.RECEIVER_EXPORTED;
 import static de.robv.android.xposed.XposedBridge.log;
 
 import android.annotation.SuppressLint;
@@ -206,7 +207,7 @@ public class NetworkStats {
 		//noinspection deprecation
 		filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
 
-		mContext.registerReceiver(mIntentReceiver, filter, null, null);
+		mContext.registerReceiver(mIntentReceiver, filter, RECEIVER_EXPORTED);
 		operationDate = Calendar.getInstance();
 		scheduleDateChange();
 		enabled = true;
@@ -351,7 +352,11 @@ public class NetworkStats {
 		}
 	}
 
+	@SuppressLint("MissingPermission")
 	private String fetchCurrentWifiSSID() {
+		//method is deprecated, but will continue to work until further notice. the new way can be found here:
+		//https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Wifi/framework/java/android/net/wifi/WifiManager.java;l=3660?q=wifimanager
+		@SuppressWarnings("deprecation")
 		WifiInfo info = mContext.getSystemService(WifiManager.class).getConnectionInfo();
 		String ssid = "";
 		String theSsid = info.getSSID();

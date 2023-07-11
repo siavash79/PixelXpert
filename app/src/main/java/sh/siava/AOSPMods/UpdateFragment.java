@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods;
 
+import static android.content.Context.RECEIVER_EXPORTED;
+
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.app.PendingIntent;
@@ -34,7 +36,6 @@ import java.net.URI;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 import javax.security.auth.callback.Callback;
 
@@ -60,13 +61,13 @@ public class UpdateFragment extends Fragment {
 			if(getContext() != null)
 				getContext().unregisterReceiver(downloadCompletionReceiver);
 
-			try {
-				if (Objects.equals(intent.getAction(), DownloadManager.ACTION_DOWNLOAD_COMPLETE) && intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == downloadID) {
-					Cursor downloadData = downloadManager.query(
-							new DownloadManager.Query()
-									.setFilterById(downloadID)
-					);
 
+			boolean successful = false;
+			if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(intent.getAction()) && intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == downloadID) {
+				try(Cursor downloadData = downloadManager.query(
+						new DownloadManager.Query()
+								.setFilterById(downloadID)))
+				{
 					downloadData.moveToFirst();
 
 					int uriColIndex = downloadData.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
@@ -78,13 +79,13 @@ public class UpdateFragment extends Fragment {
 						downloadedFilePath = new File(URI.create(downloadData.getString(uriColIndex))).getAbsolutePath();
 
 						notifyInstall();
-					}
-					else
-					{
-						throw new Exception();
+						successful = true;
 					}
 				}
-			} catch (Exception e) {
+			}
+
+			if(!successful)
+			{
 				NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "updates")
 						.setSmallIcon(R.drawable.ic_notification_foreground)
 						.setContentTitle(getContext().getText(R.string.download_failed))
@@ -92,8 +93,6 @@ public class UpdateFragment extends Fragment {
 						.setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
 				NotificationManagerCompat.from(getContext()).notify(2, builder.build());
-
-				e.printStackTrace();
 			}
 		}
 	};
@@ -124,7 +123,7 @@ public class UpdateFragment extends Fragment {
 		super.onViewCreated(view, savedInstanceState);
 
 		//Android 13 requires notification permission to be granted or it won't allow it
-		Shell.cmd("pm grant sh.siava.AOSPMods android.permission.POST_NOTIFICATIONS").exec(); //will ask root if not granted yet
+		Shell.cmd(String.format("pm grant %s android.permission.POST_NOTIFICATIONS", BuildConfig.APPLICATION_ID)).exec(); //will ask root if not granted yet
 
 		if (!Shell.getShell().isRoot()) {
 			currentVersionName = getString(R.string.root_not_here);
@@ -166,6 +165,7 @@ public class UpdateFragment extends Fragment {
 
 					boolean enable = false;
 					try {
+						//noinspection ConstantConditions
 						latestCode = (int) result.get("versionCode");
 
 						if (rebootPending) {
@@ -208,6 +208,7 @@ public class UpdateFragment extends Fragment {
 				String zipURL = (installFullVersion) ? (String) latestVersion.get("zipUrl_Full") : (String) latestVersion.get("zipUrl_Xposed");
 				if (zipURL == null) zipURL = (String) latestVersion.get("zipUrl");
 
+				//noinspection ConstantConditions
 				startDownload(zipURL, (int) latestVersion.get("versionCode"));
 				binding.updateBtn.setEnabled(false);
 //				downloadStarted = true;
@@ -277,7 +278,7 @@ public class UpdateFragment extends Fragment {
 				.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE));
 
 		//noinspection ConstantConditions
-		getContext().registerReceiver(downloadCompletionReceiver, filters);
+		getContext().registerReceiver(downloadCompletionReceiver, filters, RECEIVER_EXPORTED);
 	}
 
 	@Override
@@ -353,7 +354,7 @@ public class UpdateFragment extends Fragment {
 		@Override
 		public void run() {
 			try {
-				Thread.sleep(200); //waiting for canaryupdate variable to initialize
+				Thread.sleep(200); //waiting for canaryUpdate variable to initialize
 				URL updateData = new URL((canaryUpdate) ? canaryUpdatesURL : stableUpdatesURL);
 				InputStream s = updateData.openStream();
 				InputStreamReader r = new InputStreamReader(s);

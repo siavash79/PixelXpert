@@ -164,6 +164,19 @@
     <string name="BB_batteryFastChargingColor">Fast charging color</string>
     <string name="BB_transit_colors">Shade colors between this range</string>
 
+    <string name="nt_stat_mode_today">Today</string>
+    <string name="nt_stat_mode_week">Current week</string>
+    <string name="nt_stat_mode_month">Current month</string>
+
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+
+
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Build number in QS Panel footer</string>
     <string name="qs_footer_mod_title">Modify build text number in QS panel</string>

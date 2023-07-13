@@ -10,6 +10,7 @@ import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.DownloadManager;
+import android.app.usage.NetworkStatsManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.hardware.camera2.CameraManager.TorchCallback;
 import android.hardware.camera2.CameraMetadata;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.PowerManager;
@@ -56,14 +58,15 @@ public class SystemUtils {
 	ConnectivityManager mConnectivityManager;
 	TelephonyManager mTelephonyManager;
 	AlarmManager mAlarmManager;
-	NetworkStats mNetworkStats;
 	DownloadManager mDownloadManager = null;
+	NetworkStatsManager mNetworkStatsManager = null;
 	boolean mHasVibrator = false;
 	int maxFlashLevel = -1;
 	static boolean isTorchOn = false;
 
 	ArrayList<ChangeListener> mFlashlightLevelListeners = new ArrayList<>();
 	ArrayList<ChangeListener> mVolumeChangeListeners = new ArrayList<>();
+	private WifiManager mWifiManager;
 
 	public static void restartSystemUI() {
 		cmd("killall com.android.systemui").submit();
@@ -92,12 +95,18 @@ public class SystemUtils {
 			instance.setFlashInternal(enabled);
 	}
 
-	public static NetworkStats NetworkStats() {
+	public static WifiManager WifiManager()
+	{
 		return instance == null
 				? null
-				: instance.getNetworkStats();
+				: instance.getWifiManager();
 	}
 
+	public static NetworkStatsManager NetworkStatsManager() {
+		return instance == null
+				? null
+				: instance.getNetworkStatsManager();
+	}
 	@Nullable
 	@Contract(pure = true)
 	public static AudioManager AudioManager() {
@@ -373,13 +382,6 @@ public class SystemUtils {
 		Shell.cmd("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
 	}
 
-	private NetworkStats getNetworkStats() {
-		if (mNetworkStats == null) {
-			mNetworkStats = new NetworkStats(mContext);
-		}
-		return mNetworkStats;
-	}
-
 	private AudioManager getAudioManager() {
 		if (mAudioManager == null) {
 			try {
@@ -391,6 +393,22 @@ public class SystemUtils {
 			}
 		}
 		return mAudioManager;
+	}
+
+	private WifiManager getWifiManager() {
+		if(mWifiManager == null)
+		{
+			try
+			{
+				mWifiManager = mContext.getSystemService(WifiManager.class);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log("AOSPMods Error getting wifi manager");
+					t.printStackTrace();
+				}
+			}
+		}
+		return mWifiManager;
 	}
 
 	private ConnectivityManager getConnectivityManager() {
@@ -470,6 +488,23 @@ public class SystemUtils {
 			}
 		}
 		return mVibrationManager;
+	}
+
+	private NetworkStatsManager getNetworkStatsManager()
+	{
+		if(mNetworkStatsManager == null)
+		{
+			try
+			{
+				mNetworkStatsManager = (NetworkStatsManager) mContext.getSystemService(Context.NETWORK_STATS_SERVICE);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log("AOSPMods Error getting network stats");
+					t.printStackTrace();
+				}
+			}
+		}
+		return mNetworkStatsManager;
 	}
 
 	private CameraManager getCameraManager() {

@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <sh.siava.AOSPMods.ui.MaterialListPreference
+        android:defaultValue="0"
+        android:entries="@array/network_stat_start_names"
+        android:entryValues="@array/network_stat_start_codes"
+        android:key="NetworkStatsStartBase"
+        android:summary="%s"
+        android:title="@string/qs_tile_style_title" />
+
+    <sh.siava.AOSPMods.ui.MaterialListPreference
+        android:defaultValue="1"
+        android:entries="@array/days_of_week_names"
+        android:entryValues="@array/days_of_week_codes"
+        android:key="NetworkStatsWeekStart"
+        android:summary="%s"
+        android:title="@string/qs_tile_style_title" />
+
+    <sh.siava.AOSPMods.ui.MaterialTimePickerPreference
+        android:key="NetworkStatsStartTime"
+        android:title="time of day"
+        android:persistent="true"/>
+
+    <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
+        android:key="NetworkStatsMonthStart"
+        android:title="@string/brightness_range_title"
+        android:summary="@string/brightness_range_not_linear"
+
+        app:tickInterval="1"
+
+        app:valueCount="1"
+        app:minVal="1"
+        app:maxVal="28"
+
+        app:defaultValue="1" />
+
+
+
+
     <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/general_section">
         <sh.siava.AOSPMods.ui.MaterialSwitchPreference
             android:defaultValue="false"

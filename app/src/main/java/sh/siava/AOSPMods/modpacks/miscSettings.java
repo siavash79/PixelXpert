@@ -9,12 +9,12 @@ import android.graphics.Color;
 
 import com.topjohnwu.superuser.Shell;
 
-import java.util.Objects;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.utils.ModuleFolderOperations;
 import sh.siava.AOSPMods.modpacks.utils.StringFormatter;
-import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class miscSettings extends XposedModPack {
@@ -28,15 +28,22 @@ public class miscSettings extends XposedModPack {
 		if (Xprefs == null) return; //it won't be null. but anyway...
 
 		//netstat settings
-		try {
-			Objects.requireNonNull(SystemUtils.NetworkStats()).setStatus(Xprefs.getBoolean("NetworkStatsEnabled", false));
-			Objects.requireNonNull(SystemUtils.NetworkStats()).setSaveInterval(Xprefs.getInt("netstatSaveInterval", 5));
-		} catch (Exception ignored) {
-		}
-
 		boolean netstatColorful = Xprefs.getBoolean("networkStatsColorful", false);
+
+		int NetStatsStartMonthStart = 1;
+		try {
+			NetStatsStartMonthStart = Math.round(RangeSliderPreference.getValues(Xprefs, "NetworkStatsMonthStart", 1).get(0));
+		} catch (Throwable ignored){}
+
 		StringFormatter.RXColor = (netstatColorful) ? Xprefs.getInt("networkStatDLColor", Color.GREEN) : null;
 		StringFormatter.TXColor = (netstatColorful) ? Xprefs.getInt("networkStatULColor", Color.RED) : null;
+		StringFormatter.NetStatStartBase = Integer.parseInt(Xprefs.getString("NetworkStatsStartBase", "0"));
+		StringFormatter.NetStatsStartTime = LocalTime.parse(Xprefs.getString("NetworkStatsStartTime", "0:0"), DateTimeFormatter.ofPattern("H:m"));
+
+		StringFormatter.NetStatsDayOf = StringFormatter.NetStatStartBase == StringFormatter.NET_STAT_TYPE_MONTH
+		? NetStatsStartMonthStart
+		: Integer.parseInt(Xprefs.getString("NetworkStatsWeekStart", "1"));
+
 		StringFormatter.refreshAll();
 
 		if (Key.length > 0) {

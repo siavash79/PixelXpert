@@ -8,13 +8,13 @@
 		android:entryValues="@array/network_stat_start_codes"
 		android:key="NetworkStatsStartBase"
 		android:summary="%s"
-		android:title="Type of Statistics" />
+		android:title="@string/network_stat_type" />
 
 	<sh.siava.AOSPMods.ui.MaterialTimePickerPreference
 		android:defaultValue="00:00"
 		android:key="NetworkStatsStartTime"
 		android:persistent="true"
-		android:title="Time of Day" />
+		android:title="@string/network_stat_day" />
 
 	<sh.siava.AOSPMods.ui.MaterialListPreference
 		android:defaultValue="1"
@@ -22,11 +22,11 @@
 		android:entryValues="@array/days_of_week_codes"
 		android:key="NetworkStatsWeekStart"
 		android:summary="%s"
-		android:title="Day of Week" />
+		android:title="@string/network_stat_week" />
 
 	<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
 		android:key="NetworkStatsMonthStart"
-		android:title="Day of Month"
+		android:title="@string/network_stat_month"
 		app:defaultValue="1"
 		app:maxVal="28"
 		app:minVal="1"

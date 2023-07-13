@@ -7,6 +7,7 @@ package sh.siava.AOSPMods.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -72,7 +73,7 @@ public class MaterialTimePickerPreference extends Preference {
 		AtomicInteger minute = new AtomicInteger(Integer.parseInt(timeValue.split(":")[1]));
 
 		MaterialTimePicker timePicker =
-				new MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H).setHour(hour.get()).setMinute(minute.get()).build();
+				new MaterialTimePicker.Builder().setTimeFormat(DateFormat.is24HourFormat(getContext()) ? TimeFormat.CLOCK_24H : TimeFormat.CLOCK_12H).setHour(hour.get()).setMinute(minute.get()).build();
 
 		timePicker.addOnPositiveButtonClickListener(
 				v -> {

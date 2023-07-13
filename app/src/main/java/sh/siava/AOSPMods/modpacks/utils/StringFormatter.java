@@ -1,13 +1,14 @@
 package sh.siava.AOSPMods.modpacks.utils;
 
+import static android.net.ConnectivityManager.TYPE_MOBILE;
+import static android.net.ConnectivityManager.TYPE_WIFI;
+import static android.net.wifi.WifiManager.UNKNOWN_SSID;
 import static de.robv.android.xposed.XposedBridge.log;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.usage.NetworkStats.Bucket;
 import android.app.usage.NetworkStatsManager.UsageCallback;
-import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
 import android.text.SpannableStringBuilder;
 
 import androidx.annotation.NonNull;
@@ -134,10 +135,10 @@ public class StringFormatter {
 		if(mRegisteredCallbackType != mNetworkStatsType) {
 			unregisterUsageCallback();
 			try {
-				SystemUtils.NetworkStatsManager().registerUsageCallback(ConnectivityManager.TYPE_MOBILE, null, NETSTAT_THRESHOLD_BYTES, networkUsageCallback);
+				SystemUtils.NetworkStatsManager().registerUsageCallback(TYPE_MOBILE, null, NETSTAT_THRESHOLD_BYTES, networkUsageCallback);
 				mRegisteredCallbackType |= NETWORK_STATS_CELL;
 				if ((mNetworkStatsType & NETWORK_STATS_WIFI) != 0)
-					SystemUtils.NetworkStatsManager().registerUsageCallback(ConnectivityManager.TYPE_WIFI, null, NETSTAT_THRESHOLD_BYTES, networkUsageCallback);
+					SystemUtils.NetworkStatsManager().registerUsageCallback(TYPE_WIFI, null, NETSTAT_THRESHOLD_BYTES, networkUsageCallback);
 				mRegisteredCallbackType |= NETWORK_STATS_WIFI;
 			} catch (Throwable ignored) {
 			}
@@ -156,22 +157,19 @@ public class StringFormatter {
 	}
 
 	private CharSequence valueOf(String match) {
-		if (match.startsWith("P")) //P is reserved for "Persian Calendar". Then goes normal Java dateformat, like $Pdd or $Pyyyy
+		switch (match.substring(0,1))
 		{
-			return persianDateOf(match.substring(1));
+			case "G":
+				return georgianDateOf(match.substring(1));
+			case "P":
+				return persianDateOf(match.substring(1));
+			case "N":
+				return networkStatOf(match.substring(1));
+			case "T":
+				return temperatureOf(match.substring(1));
+			default:
+				return "$" + match;
 		}
-		else if (match.startsWith("G")) //G is reserved for "Georgian Calendar". Then goes normal Java dateformat, like $Gyyyy or $GEEE
-		{
-			return georgianDateOf(match.substring(1));
-		}
-		else if (match.startsWith("N")) {
-			return networkStatOf(match.substring(1));
-		}
-		else if(match.startsWith("T"))
-		{
-			return temperatureOf(match.substring(1));
-		}
-		return "$" + match;
 	}
 
 	private CharSequence networkStatOf(String variable) {
@@ -180,35 +178,21 @@ public class StringFormatter {
 		variable = variable.toLowerCase();
 		CharSequence transformed = null;
 
-		long startTime = -1;
-		switch (NetStatStartBase)
-		{
-			case NET_STAT_TYPE_DAY:
-				startTime = getStartTime(NetStatsStartTime);
-				break;
-			case NET_STAT_TYPE_WEEK:
-				startTime = getStartTime(Calendar.DAY_OF_WEEK, NetStatsDayOf);
-				break;
-			case NET_STAT_TYPE_MONTH:
-				startTime = getStartTime(Calendar.DAY_OF_MONTH, NetStatsDayOf);
-				break;
-		}
-
 		try {
 			switch (variable) {
 				case "crx":
 				case "rx":
 					textColor = RXColor;
-					traffic = getTrafficStats(startTime, TYPE_RX, variable.startsWith("c"));
+					traffic = getTrafficStats(TYPE_RX, !variable.startsWith("c"));
 					break;
 				case "ctx":
 				case "tx":
 					textColor = TXColor;
-					traffic = getTrafficStats(startTime, TYPE_TX, variable.startsWith("c"));
+					traffic = getTrafficStats(TYPE_TX, !variable.startsWith("c"));
 					break;
 				case "call":
 				case "all":
-					traffic = getTrafficStats(startTime, TYPE_RX | TYPE_TX, variable.startsWith("c"));
+					traffic = getTrafficStats(TYPE_RX | TYPE_TX, !variable.startsWith("c"));
 					break;
 				case "ssid":
 					transformed = fetchCurrentWifiSSID();
@@ -224,37 +208,63 @@ public class StringFormatter {
 		}
 	}
 
+	private long getStartTime() {
+		switch (NetStatStartBase)
+		{
+			case NET_STAT_TYPE_DAY:
+				return getStartTime(NetStatsStartTime);
+			case NET_STAT_TYPE_WEEK:
+				return getStartTime(Calendar.DAY_OF_WEEK, NetStatsDayOf);
+			case NET_STAT_TYPE_MONTH:
+				return getStartTime(Calendar.DAY_OF_MONTH, NetStatsDayOf);
+			default:
+				return -1;
+		}
+	}
+
 	@SuppressLint("MissingPermission")
 	private String fetchCurrentWifiSSID() {
 		//method is deprecated, but will continue to work until further notice. the new way can be found here:
 		//https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Wifi/framework/java/android/net/wifi/WifiManager.java;l=3660?q=wifimanager
-		String ssid = "";
 		@SuppressWarnings({"ConstantConditions", "deprecation"})
 		String theSsid = SystemUtils.WifiManager().getConnectionInfo().getSSID();
 		if (theSsid.startsWith("\"") && theSsid.endsWith("\"")) {
 			theSsid = theSsid.substring(1, theSsid.length() - 1);
 		}
-		if (!WifiManager.UNKNOWN_SSID.equals(theSsid)) {
-			ssid = theSsid;
+		if (!UNKNOWN_SSID.equals(theSsid)) {
+			return theSsid;
 		}
-		return ssid;
+		return "";
 	}
 
-	private long getTrafficStats(long startTime, int type, boolean mobileOnly)
+	private long getTrafficStats(int type, boolean includeWiFi)
 	{
+		long startTime = getStartTime();
+
+		if(startTime < 0)
+			return 0;
+
 		long ret = 0;
 		try
 		{
 			@SuppressWarnings("ConstantConditions")
-			Bucket bucket = SystemUtils.NetworkStatsManager().querySummaryForDevice(ConnectivityManager.TYPE_MOBILE, null, startTime, Calendar.getInstance().getTime().getTime());
+			Bucket bucket = SystemUtils.NetworkStatsManager().querySummaryForDevice(
+					TYPE_MOBILE
+					, null
+					, startTime
+					, Calendar.getInstance().getTimeInMillis());
 			ret += getTraffic(bucket, type);
 
-			if(!mobileOnly)
+			if(includeWiFi)
 			{
 				mNetworkStatsType |= NETWORK_STATS_WIFI;
 
 				//noinspection ConstantConditions
-				bucket = SystemUtils.NetworkStatsManager().querySummaryForDevice(ConnectivityManager.TYPE_WIFI, null, startTime, Calendar.getInstance().getTime().getTime());
+				bucket = SystemUtils.NetworkStatsManager().querySummaryForDevice(
+						TYPE_WIFI
+						, null
+						, startTime
+						, Calendar.getInstance().getTimeInMillis());
 				ret += getTraffic(bucket, type);
 			}
 		}
@@ -287,7 +297,7 @@ public class StringFormatter {
 
 		if(startTimeCalendar.after(Calendar.getInstance()))
 		{
-			startTimeCalendar.add(Calendar.DATE, -1);
+			return -1;
 		}
 		return startTimeCalendar.getTime().getTime();
 	}

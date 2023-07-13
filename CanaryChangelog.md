@@ -1,3 +1,7 @@
+**canary-265**  
+- Network statistics refreshed (Misc->Network statistics options)  
+- A14: Fixed app crash when update starts  
+  
 **canary-264**  
 - Fixed taskbar in recents mode not launching certain icons  
 - Performance improvement  

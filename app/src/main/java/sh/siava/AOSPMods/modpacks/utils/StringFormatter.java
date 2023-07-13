@@ -45,7 +45,7 @@ public class StringFormatter {
 	private static final int NETWORK_STATS_NONE = 0;
 	private static final int NETWORK_STATS_CELL = 1 << 1;
 	private static final int NETWORK_STATS_WIFI = 1 << 2;
-	private static final long NETSTAT_THRESHOLD_BYTES = 1024*1024;
+	private static final long NETSTAT_THRESHOLD_BYTES = 5*1024*1024; //5MB
 	private final ArrayList<FormattedStringCallback> callbacks = new ArrayList<>();
 	private boolean hasDate = false;
 	public static Integer RXColor, TXColor;
@@ -287,7 +287,7 @@ public class StringFormatter {
 
 		if(startTimeCalendar.after(Calendar.getInstance()))
 		{
-			startTimeCalendar.set(Calendar.DATE, -1);
+			startTimeCalendar.add(Calendar.DATE, -1);
 		}
 		return startTimeCalendar.getTime().getTime();
 	}
@@ -305,14 +305,14 @@ public class StringFormatter {
 				startTimeCalendar.set(Calendar.DAY_OF_MONTH, dayOf);
 				if(startTimeCalendar.after(Calendar.getInstance()))
 				{
-					startTimeCalendar.set(Calendar.MONTH, -1);
+					startTimeCalendar.add(Calendar.MONTH, -1);
 				}
 				break;
 			case Calendar.DAY_OF_WEEK:
 				startTimeCalendar.set(Calendar.DAY_OF_WEEK, dayOf);
 				if(startTimeCalendar.after(Calendar.getInstance()))
 				{
-					startTimeCalendar.set(Calendar.DATE, -7);
+					startTimeCalendar.add(Calendar.DATE, -7);
 				}
 				break;
 			default:

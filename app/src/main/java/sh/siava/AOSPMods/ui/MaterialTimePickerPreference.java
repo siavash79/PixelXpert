@@ -7,6 +7,7 @@ package sh.siava.AOSPMods.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -19,12 +20,13 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import sh.siava.AOSPMods.R;
 
 public class MaterialTimePickerPreference extends Preference {
 
-	private String timeValue;
+	private String timeValue = "00:00";
 
 	public MaterialTimePickerPreference(Context context) {
 		super(context);
@@ -47,6 +49,8 @@ public class MaterialTimePickerPreference extends Preference {
 					context.getTheme().obtainStyledAttributes(attrs, R.styleable.MaterialTimePickerPreference, 0, 0);
 			try {
 				timeValue = a.getString(R.styleable.MaterialTimePickerPreference_presetValue);
+			} catch (Exception e) {
+				timeValue = "00:00";
 			} finally {
 				a.recycle();
 			}
@@ -64,14 +68,18 @@ public class MaterialTimePickerPreference extends Preference {
 	protected void onClick() {
 		super.onClick();
 
+		// parse hour and minute from timeValue
+		AtomicInteger hour = new AtomicInteger(Integer.parseInt(timeValue.split(":")[0]));
+		AtomicInteger minute = new AtomicInteger(Integer.parseInt(timeValue.split(":")[1]));
+
 		MaterialTimePicker timePicker =
-				new MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H).build();
+				new MaterialTimePicker.Builder().setTimeFormat(DateFormat.is24HourFormat(getContext()) ? TimeFormat.CLOCK_24H : TimeFormat.CLOCK_12H).setHour(hour.get()).setMinute(minute.get()).build();
 
 		timePicker.addOnPositiveButtonClickListener(
 				v -> {
-					int hour = timePicker.getHour();
-					int minute = timePicker.getMinute();
-					String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute);
+					hour.set(timePicker.getHour());
+					minute.set(timePicker.getMinute());
+					String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hour.get(), minute.get());
 
 					timeValue = selectedTime;
 					persistString(selectedTime);

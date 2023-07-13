@@ -2,21 +2,36 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
-		android:defaultValue="false"
-		android:key="NetworkStatsEnabled"
-		android:summaryOff="@string/general_off"
-		android:summaryOn="@string/general_on"
-		android:title="@string/netstat_enable_title" />
+	<sh.siava.AOSPMods.ui.MaterialListPreference
+		android:defaultValue="0"
+		android:entries="@array/network_stat_start_names"
+		android:entryValues="@array/network_stat_start_codes"
+		android:key="NetworkStatsStartBase"
+		android:summary="%s"
+		android:title="Type of Statistics" />
 
-	<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
-		android:defaultValue="5"
-		android:key="netstatSaveInterval"
-		android:max="10"
-		android:min="1"
-		android:title="@string/network_interval_custom_text_title"
-		app:min="1"
-		app:updatesContinuously="true" />
+	<sh.siava.AOSPMods.ui.MaterialTimePickerPreference
+		android:defaultValue="00:00"
+		android:key="NetworkStatsStartTime"
+		android:persistent="true"
+		android:title="Time of Day" />
+
+	<sh.siava.AOSPMods.ui.MaterialListPreference
+		android:defaultValue="1"
+		android:entries="@array/days_of_week_names"
+		android:entryValues="@array/days_of_week_codes"
+		android:key="NetworkStatsWeekStart"
+		android:summary="%s"
+		android:title="Day of Week" />
+
+	<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
+		android:key="NetworkStatsMonthStart"
+		android:title="Day of Month"
+		app:defaultValue="1"
+		app:maxVal="28"
+		app:minVal="1"
+		app:tickInterval="1"
+		app:valueCount="1" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"

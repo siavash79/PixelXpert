@@ -1,17 +1,24 @@
-
 package sh.siava.AOSPMods.ui;
+
+/*
+ * Modified from https://github.com/etidoUP/Material-Time-picker-preference-
+ * Credits: etidoUP
+ */
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
+
+import java.util.Locale;
 
 import sh.siava.AOSPMods.R;
 
@@ -34,7 +41,7 @@ public class MaterialTimePickerPreference extends Preference {
 	}
 
 	private void init(Context context, AttributeSet attrs) {
-		setWidgetLayoutResource(R.layout.time_picker);
+		setLayoutResource(R.layout.custom_preference_time_picker);
 		if (attrs != null) {
 			TypedArray a =
 					context.getTheme().obtainStyledAttributes(attrs, R.styleable.MaterialTimePickerPreference, 0, 0);
@@ -47,7 +54,7 @@ public class MaterialTimePickerPreference extends Preference {
 	}
 
 	@Override
-	public void onBindViewHolder(PreferenceViewHolder holder) {
+	public void onBindViewHolder(@NonNull PreferenceViewHolder holder) {
 		super.onBindViewHolder(holder);
 		TextView timeTextView = (TextView) holder.findViewById(R.id.time_stamp);
 		timeTextView.setText(timeValue);
@@ -64,7 +71,7 @@ public class MaterialTimePickerPreference extends Preference {
 				v -> {
 					int hour = timePicker.getHour();
 					int minute = timePicker.getMinute();
-					String selectedTime = String.format("%02d:%02d", hour, minute);
+					String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute);
 
 					timeValue = selectedTime;
 					persistString(selectedTime);

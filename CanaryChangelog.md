@@ -1,3 +1,6 @@
+**canary-266**  
+- Fixed Network statistics output error and code improvement  
+  
 **canary-265**  
 - Network statistics refreshed (Misc->Network statistics options)  
 - A14: Fixed app crash when update starts  

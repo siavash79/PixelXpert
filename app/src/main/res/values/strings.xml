@@ -379,6 +379,10 @@
     <string name="netstat_enable_title">Collect network statistics</string>
     <string name="network_interval_custom_text_title">Refresh interval</string>
     <string name="minutes_word">minute(s)</string>
+    <string name="network_stat_type">Type of Statistics</string>
+    <string name="network_stat_day">Time of Day</string>
+    <string name="network_stat_week">Day of Week</string>
+    <string name="network_stat_month">Day of Month</string>
 
     <!-- Incompatibility Alert -->
     <string name="incompatible_alert_title">Incompatible</string>

@@ -50,8 +50,8 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import sh.siava.AOSPMods.utils.PrefManager;
 import sh.siava.AOSPMods.utils.AppUtils;
+import sh.siava.AOSPMods.utils.PrefManager;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
@@ -703,24 +703,22 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		private void updateVisibility(SharedPreferences prefs) {
 			try {
 				long timeout = 0;
-				try
-				{
+				try {
 					timeout = (long) (RangeSliderPreference.getValues(prefs, "hotSpotTimeoutSecs", 0).get(0) * 1L);
+				} catch (Throwable ignored) {
 				}
-				catch (Throwable ignored){}
 
 				int clients = 0;
-				try
-				{
+				try {
 					clients = round(RangeSliderPreference.getValues(prefs, "hotSpotMaxClients", 0).get(0));
+				} catch (Throwable ignored) {
 				}
-				catch (Throwable ignored){}
 				Duration d = Duration.ofSeconds(timeout);
 
 				findPreference("hotSpotTimeoutSecs")
 						.setSummary(
 								timeout > 0
-										? String.format("%d %s", timeout/60, getString(R.string.minutes_word))
+										? String.format("%d %s", timeout / 60, getString(R.string.minutes_word))
 										: getString(R.string.word_default));
 
 				findPreference("hotSpotMaxClients")
@@ -728,8 +726,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 								clients > 0
 										? String.valueOf(clients)
 										: getString(R.string.word_default));
+			} catch (Throwable ignored) {
 			}
-			catch (Throwable ignored){}
 		}
 
 		@Override
@@ -1185,15 +1183,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 		private void updateVisibility(SharedPreferences sharedPreferences) {
 			try {
-				boolean netstatEnabled = sharedPreferences.getBoolean("NetworkStatsEnabled", false);
 				boolean networkTrafficColorful = sharedPreferences.getBoolean("networkStatsColorful", false);
+				String NetStartBase = sharedPreferences.getString("NetworkStatsStartBase", "0");
 
-				findPreference("netstatSaveInterval").setSummary(String.format("%s %s", sharedPreferences.getInt("netstatSaveInterval", 5), getString(R.string.minutes_word)));
-
-				findPreference("networkStatsColorful").setVisible(netstatEnabled);
-				findPreference("netstatSaveInterval").setVisible(netstatEnabled);
-				findPreference("networkStatDLColor").setVisible(netstatEnabled && networkTrafficColorful);
-				findPreference("networkStatULColor").setVisible(netstatEnabled && networkTrafficColorful);
+				findPreference("NetworkStatsStartTime").setVisible(NetStartBase.equals("0"));
+				findPreference("NetworkStatsWeekStart").setVisible(NetStartBase.equals("1"));
+				findPreference("NetworkStatsMonthStart").setVisible(NetStartBase.equals("2"));
+				findPreference("networkStatDLColor").setVisible(networkTrafficColorful);
+				findPreference("networkStatULColor").setVisible(networkTrafficColorful);
 
 			} catch (Exception ignored) {
 			}

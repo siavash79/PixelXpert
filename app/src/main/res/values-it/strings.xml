@@ -1,5 +1,8 @@
 <resources>
     <!--General strings-->
+    <string name="app_themed_icon_title">Abilita l\'icona dell\'app a tema AOSP Mods alternativa</string>
+    <string name="xposed_desc">Funzionalità custom per ROM basate su Android 12+ AOSP</string>
+    <string name="volume_tile_title">Volume multimedia</string>
     <string name="error_not_activated">Controlla che il modulo sia attivo in LSPosed Manager</string>
     <string name="hide_default">Nascondi (Default)</string>
     <string name="percent_of_default_size">% della dimensione di default</string>
@@ -11,17 +14,26 @@
     <string name="restart_needed">Richiede un riavvio per essere applicato</string>
     <string name="more_area">più spazio</string>
     <string name="less_area">meno spazio</string>
-
+  
     <!--Category titles-->
     <string name="lockscreen_header_title">Blocco schermo</string>
     <string name="statusbar_header">Status Bar</string>
     <string name="nav_header">NavBar</string>
+    <string name="dialer_header">Telefono &amp; Tastierino</string>
     <string name="misc_header">Varie</string>
     <string name="qs_panel_category_title">Pannello Quick Settings</string>
     <string name="theme_customization_category">Temi</string>
     <string name="pm_header">Gestore pacchetti</string>
-
+    <string name="hotspot_header">Hotspot portatile</string>
+  
+    <!-- Hotspot settings-->
+    <string name="hotspot_hide_ssid_title">Nascondi SSID</string>
+    <string name="hotspot_inactivity_timeout_title">Timeout inattività</string>
+    <string name="hotspot_max_client_title">Numero massimo client</string>
+  
     <!--Lock screen related-->
+    <string name="disable_unlock_hint_title">Disabilita animazione suggerimento di sblocco</string>
+    <string name="ls_general_options">Opzioni schermata di blocco</string>
     <string name="hide_avatar_title">Rimuovi avatar utente (modalità multiutente)</string>
     <string name="transparent_fingerprint_circle">Rimuovi il background dall\'icona del sensore d\'impronte sotto il display</string>
     <string name="transparent_fingerprint_circle_off">Background icona sensore d\'impronte attivo</string>
@@ -47,6 +59,7 @@
     <string name="torch_shortcut">Torcia</string>
     <string name="tv_remote_shortcut">Telecomando TV</string>
     <string name="dnd_shortcut">Non disturbare</string>
+    <string name="qr_scanner_shortcut">Scanner QR code</string>
     <string name="album_art_category">Opzioni multimedia</string>
     <string name="album_art_title">Abilita copertina album durante riproduzione</string>
     <string name="album_art_blur_text">Valore sfocatura</string>
@@ -57,28 +70,31 @@
     <string name="easy_unlock_summary">Se non funziona la prima volta, riprova</string>
     <string name="charging_info_title">Informazioni di ricarica sulla schermata di blocco</string>
     <string name="imperial_units_title">Sistema di unità imperiali</string>
-    
+  
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Doppio tocco per spegnere</string>
     <string name="battery_style_title">Stile batteria</string>
     <string name="battery_show_percent_title">Mostra percentuale batteria</string>
+    <string name="battery_show_charging_animation_title">Mostra animazione di ricarica</string>
     <string name="battery_style_category_title">Stile indicatore batteria</string>
     <string name="battery_icon_size_title">Dimensioni icona batteria</string>
     <string name="battery_hidden">Nascosta</string>
     <string name="BIcon_Opacity_title">Opacità</string>
     <string name="sb_center_fine_tune">Perfeziona posizione centrale</string>
     <string name="sb_multi_row_system_icons">Icone di sistema multi riga (necessita aumento altezza Status Bar)</string>
+    <string name="sb_multi_row_notification_icons">Icone di notifica multi riga (necessita aumento altezza Status Bar)</string>
     <string name="sb_double_row_category">Status Bar su due righe</string>
     <string name="sb_icon_sort_mode">Metodo posizionamento icone</string>
     <string name="sort_clean">Ordina in griglia</string>
     <string name="sort_tight">Adatta il massimo degli elementi</string>
     <string name="sb_notification_limit">N. massimo icone di notifica (vuoto per Default)</string>
-
+  
     <string name="lte_4g_icon_title">Icona LTE / 4G</string>
     <string name="combined_signal_icon_title">Icone di segnale combinate</string>
     <string name="hide_roaming_title">Nascondi indicatori roaming rete mobile</string>
     <string name="caution_mobile_costs">ATTENZIONE - Non sapere di essere in roaming potrebbe aumentare i costi della rete</string>
     <string name="volte_icon_title">Mostra icona VoLTE quando disponibile</string>
+    <string name="vowifi_icon_title">Mostra icona VoWiFi quando disponibile</string>
     <string name="hide_privacychip_title">Nascondi indicatore privacy \n(Fotocamera, Mic)</string><!-- \n means next line-->
     <string name="sb_vibration_switch_title">Mostra icone Vibrazione/Silenzioso</string>
     <string name="sbc_position_title">Posizione orologio</string>
@@ -143,7 +159,7 @@
     <string name="BB_batteryChargingColor">Colore ricarica</string>
     <string name="BB_batteryFastChargingColor">Colore ricarica rapida</string>
     <string name="BB_transit_colors">Sfuma i colori tra questo range</string>
-
+  
     <!--Quick settings panel related-->
     <string name="qs_mod_category_title">Numero build in fondo al pannello QS</string>
     <string name="qs_footer_mod_title">Modifica testo numero build nel pannello QS</string>
@@ -163,8 +179,10 @@
     <string name="qs_pulldown_side_title">Lato quick pull-down</string>
     <string name="qs_pulldown_category">Quick settings pull-down</string>
     <string name="qs_haptic_switch_title">Vibra al tocco del QS tile</string>
+    <string name="vibration_type_touch">Intensità definita dalle impostazioni di vibrazione al tocco di sistema</string>
     <string name="qs_tile_qty_portrait">In orientamento verticale</string>
     <string name="qs_tile_qty_landscape">In orientamento orizzontale</string>
+  
     <string name="qs_rows_number">Numero di righe QS</string>
     <string name="qs_cols_number">Numero di colonne QS</string>
     <string name="qqs_tiles_number">N. massimo tiles nel Quick QS (max 2 righe)</string>
@@ -184,7 +202,7 @@
     <string name="qs_tile_style_title">Temi QS Tile</string>
     <string name="qstile_default">Default</string>
     <string name="qs_volume_unmute_title">Valore riattivazione suono tile volume</string>
-
+  
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configura gesture indietro</string>
     <string name="back_from_left_title">Bordo sinistro dello schermo</string>
@@ -213,29 +231,35 @@
     <string name="taskbar_force_enable_title">Forza abilitata</string>
     <string name="taskbar_force_disable_title">Forza disabilitata</string>
     <string name="taskbar_hide_allapps_title">Icona nascondi tutte le app</string>
-
+    <string name="taskbar_transient_title">Nascondi automaticamente</string>
+  
     <!-- Package manager -->
     <string name="pm_bypass_signature_title">Ignora controllo firma pacchetto</string>
     <string name="pm_allow_downgrade_title">Consenti downgrade applicazione</string>
     <string name="auto_off_five_minutes">Abilitato per i prossimi 5 minuti</string>
-
+  
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Disattiva suono screenshot</string>
+    <!--string name="screenshot_chord_insecure">VolDown+Power screenshot su schermate protette</string-->
+    <string name="screenshot_insecure">Consenti screenshot per contenuti con restrizioni</string>
     <string name="clipboard_smart_actions_title">Smart actions su overlay clipboard</string>
     <string name="allow_all_screen_rotations">Sblocca forzatamente tutte le rotazioni dello schermo</string>
     <string name="allow_all_screen_rotations_summary">Ignorerà anche il pulsante per rotazione manuale</string>
     <string name="force_no_cutout">Ignora foro fotocamera</string>
     <string name="clear_all_reposition_title">Aggiungi il pulsante cancella tutto sulla schermata app recenti</string>
+    <string name="force_themed_icons_title">Genera automaticamente icone a tema mancanti (Android 14 - solo Pixel Launcher)</string>
+    <string name="reapply_themed_config">Riattiva le icone a tema da applicare</string>
     <string name="volume_button_step_title">Step volume (0 – 100%)</string>
     <string name="display_resolution_title">Risoluzione display</string>
     <string name="brightness_range_title">Limiti luminosità display</string>
     <string name="brightness_range_not_linear">Questo range NON è lineare: a volte una piccola differenza porta a notevoli cambiamenti</string>
-
+    <string name="separate_ring_notif_vol_title">Volume individuale per suoneria e notifiche</string>
+  
     <string name="so_power_longpress_torch_title">Premi a lungo il pulsante di accensione per attivare la torcia</string>
     <string name="so_taptaptorch_title">Abilita il doppio tap per la torcia nella schermata di blocco</string>
     <string name="so_taptaptorch_summary">Doppio tap e tieni premuto nella schermata di blocco per accesso rapido torcia</string>
     <string name="so_fingerprint_sensor_enabled">Consenti sensore di impronte quando lo schermo è spento</string>
-
+  
     <string name="so_double_tap_wake_title">Doppio tap per riattivare il telefono</string>
     <string name="so_double_tap_wake_summary">Disabilita singolo tap per riattivare</string>
     <string name="doze_header">Mentre lo schermo è spento…</string>
@@ -249,12 +273,15 @@
     <string name="disable_overscroll">Disattiva l\'effetto di overscroll elastico</string>
     <string name="overscroll_on_summary">Importante: DEVI abilitare le app per le quali desideri disabilitare l\'overscroll all\'interno di LSPosed</string>
     <string name="milliseconds">Milliseconds</string>
-
+  
     <!-- Call section -->
     <string name="call_category">Chiamate</string>
     <string name="vibrate_on_call_active_title">Vibra alla risposta di una chiamata in uscita</string>
     <string name="vibrate_on_call_drop_title">Vibra quando la chiamata si disconnette</string>
-
+    <string name="vibration_type_notification">Intensità definita dalle impostazioni di vibrazione alle notifiche di sistema</string>
+    <string name="dialer_mute_record_message_title">Rimuovi annuncio registrazione chiamate</string>
+    <string name="dialer_mute_record_message_summary">Si applica solo all\'app Telefono Google con registrazione chiamate abilitata</string>
+  
     <!-- Theming section related -->
     <string name="gsans_override_title">Forza il font Google Sans a livello di sistema</string>
     <string name="font_overlays_enable_title">Abilita l\'utilizzo di font personalizzati</string>
@@ -268,50 +295,50 @@
     <string name="power_menu_overlays_section">Temi menu spegnimento</string>
     <string name="power_menu_overlays_title">Abilita tema chiaro/scuro nel menu spegnimento</string>
     <string name="power_menu_overlays_summary_on">Questa opzione abilita anche alcune nuove fantastiche icone a livello di sistema</string>
-
+  
     <!-- Arrays strings -->
     <!-- Quick pull down -->
     <string name="pull_down_left">Sinistra</string>
     <string name="pull_down_right">Destra</string>
-
+  
     <!-- Battery styles -->
     <string name="word_default">Default</string>
     <string name="battery_circle">Cerchio</string>
     <string name="battery_dashed_circle">Cerchio tratteggiato</string>
     <string name="battery_circle_filled">Cerchio pieno</string>
-
+  
     <!-- Clock position -->
     <string name="clock_default">Sinistra (Default)</string>
-	<string name="clock_center">Centro</string>
-	<string name="clock_right">Destra</string>
-
+    <string name="clock_center">Centro</string>
+    <string name="clock_right">Destra</string>
+  
     <!-- AM/PM style -->
     <string name="am_pm_normal">100% della dimensione dell\'orologio</string>
     <string name="am_pm_small">70% della dimensione dell\'orologio</string>
-
+  
     <!-- Date position -->
     <string name="date_before">Prima dell\'orologio (100%)</string>
     <string name="date_before_small">Prima dell\'orologio (70%)</string>
     <string name="date_after">Dopo l\'orologio (100%)</string>
     <string name="date_after_small">Dopo l\'orologio (70%)</string>
-
+  
     <!-- 4G | LTE -->
     <string name="fourg_lte_default">Default di sistema</string>
     <string name="fourg_lte_lte">Forza icona LTE</string>
     <string name="fourg_lte_fourg">Forza icona 4G</string>
-
+  
     <!-- QS Rows overlays -->
-
+  
     <!-- Lockscreen/Quick Settings Custom Text -->
     <string name="netstat_enable_title">Raccogli statistiche di rete</string>
     <string name="network_interval_custom_text_title">Intervallo di aggiornamento</string>
     <string name="minutes_word">minuto(i)</string>
-
+  
     <!-- Incompatibility Alert -->
     <string name="incompatible_alert_title">Incompatibile</string>
     <string name="incompatible_alert_body">La tua ROM non è il target diretto di questo modulo. Puoi continuare a usarlo, ma alcune (o tutte) le opzioni potrebbero non funzionare come previsto\n\nSi prega di non segnalare bug</string>
     <string name="incompatible_alert_ok_btn">Ho capito</string>
-
+  
     <!-- Menu Items -->
     <string name="menu_settings_title">Importa/Esporta</string>
     <string name="menu_reset_defaults">Resetta tutte le impostazioni</string>
@@ -323,19 +350,21 @@
     <string name="menu_restart">Riavvia</string>
     <string name="menu_restartSysUI">Riavvia SystemUI</string>
     <string name="menu_updates">Aggiornamenti app</string>
-
+  
     <string name="nestat_caution_title">Attenzione!</string>
     <string name="nestat_caution_text">Le tue statistiche di rete verranno resettate permanentemente. Vuoi procedere?</string>
     <string name="netstat_caution_yes">Continua</string>
     <string name="netstat_caution_no">Forse dopo</string>
-
+  
     <string name="monitoring_category_title">Opzioni di monitoraggio</string>
     <string name="netstat_header">Impostazioni delle statistiche di rete</string>
-
+  
     <string name="string_formatter_manual_body">Oltre al normale testo che puoi inserire, sono disponibili anche variabili dinamiche:\n\n$G\&lt;format\&gt; : Data Georgiana, in base al formato. Per la documentazione del formato, cerca `Java Date Format`\nEsempio: $GMMM significa: Gen (o altro)\n\n$P&lt;format&gt; : Data Persiana, in base al formato\nEsempio: $Pyyyy significa: 1401\n\n$Nrx : Download totali di oggi\n$Ntx: Upload totali di oggi\n$Nall : Traffico totale di oggi\n$Nssid : WiFi SSID (se disponibile)\n\nSe sostituisci $N con $Nc ti verranno fornite le statistiche sui dati mobili (come $Ncrx per i download; esclude $Nssid)\n\nEsempio:\n`Traffico mobile di $GEEEE: $Ncall` produrrà:\n`Traffico mobile di Martedì: 2GB`</string>
     <string name="update_channel_name">Aggiornamenti</string>
     <string name="update_notification_title">Aggiornamento scaricato</string>
     <string name="update_notification_text">Tocca qui per installare</string>
+    <string name="download_failed">Errore download aggiornamento</string>
+    <string name="try_again_later">Per favore riprova più tardi</string>
     <string name="reboot_notification_title">AOSPMods aggiornata!</string>
     <string name="reboot_notification_text">Le modifiche avranno effetto dopo il riavvio del dispositivo</string>
     <string name="update_flavor_title">Canale di aggiornamento</string>
@@ -353,12 +382,12 @@
     <string name="update_word">Aggiornamento</string>
     <string name="switch_branches">Cambia branch</string>
     <string name="reinstall_word">Reinstalla</string>
-
+  
     <string name="own_prefs_header">Impostazioni AOSPMods</string>
     <string name="language_title">Lingua</string>
     <string name="camera_manager_master_title">Abilita mods torcia (Disabilita questa opzione se il tuo telefono non le supporta)</string>
     <string name="toggle_dark_apply">(Attiva/disattiva tema scuro per applicare)</string>
-
+  
     <string name="gesture_nav_extra_cat">Extra gestures NavBar</string>
     <string name="gesture_nav_long_swipe_fc_title">Scorri dalla parte superiore dello schermo per terminare l\'app in primo piano</string>
     <string name="gesture_nav_left_swipe_up_title">Scorri verso l\'alto dal lato sinistro della NavBar</string>
@@ -367,15 +396,14 @@
     <string name="gesture_nav_right_swipe_up_percent">Larghezza area swipe-up destra (%)</string>
     <string name="gesture_nav_two_finger_title">Azione swipe-up con due dita</string>
     <string name="gesture_nav_swipe_up_height">Altezza minima trigger azioni swipe-up</string>
-
+  
     <string name="none">Nessuno</string>
     <string name="screenshot">Screenshot</string>
     <string name="back">Indietro</string>
-    <string name="kill_foreground_app">Termina app primo piano</string>
+    <string name="kill_foreground_app">Termina app in primo piano</string>
     <string name="toggle_notification">Attiva/disattiva pannello notifiche</string>
     <string name="toggle_one_handed">Attiva/disattiva modalità a una mano</string>
     <string name="insecure_screenshot">Screenshot su schermate protette</string>
     <string name="screenshot_chord_insecure">VolDown+Power screenshot su schermate protette</string>
     <string name="sleep">Spegni schermo</string>
-
 </resources>

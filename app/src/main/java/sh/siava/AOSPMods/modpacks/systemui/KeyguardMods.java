@@ -607,7 +607,7 @@ public class KeyguardMods extends XposedModPack {
 	private void setCarrierText() {
 		try {
 			TextView mView = (TextView) getObjectField(carrierTextController, "mView");
-			mView.setText(carrierStringFormatter.formatString(customCarrierText));
+			mView.post(() -> mView.setText(carrierStringFormatter.formatString(customCarrierText)));
 		} catch (Throwable ignored) {
 		} //probably not initiated yet
 	}

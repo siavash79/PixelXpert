@@ -82,6 +82,7 @@ public class UpdateFragment extends Fragment {
 						successful = true;
 					}
 				}
+				catch (Throwable ignored){}
 			}
 
 			if(!successful)

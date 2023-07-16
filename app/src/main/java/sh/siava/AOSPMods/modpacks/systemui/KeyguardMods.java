@@ -582,7 +582,8 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	private void launchTVRemote() {
-		Shell.cmd("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity").exec();
+		Shell.cmd("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity").exec(); //enabling it if disabled, and start remote activity on older versions
+		Shell.cmd("am start -a com.google.android.apps.googletv.ACTION_VIRTUAL_REMOTE").exec(); //start activity on the updated TV app
 	}
 
 	private void launchCamera() {

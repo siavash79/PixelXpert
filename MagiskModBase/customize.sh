@@ -5,7 +5,7 @@ MAGISKDBPATH="/data/adb/magisk.db"
 
 prepareSQL(){
 	unzip $ZIPFILE sqlite3 -d $TMPDIR/ > /dev/null
-	chmod 777 $TMPDIR/sqlite3
+	chmod +x $TMPDIR/sqlite3
 
 	SQLITEPATH="$TMPDIR/sqlite3"
 }

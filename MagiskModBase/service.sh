@@ -5,7 +5,7 @@ MAGISKDBPATH="/data/adb/magisk.db"
 MODDIR=${0%/*} 
  
 prepareSQL(){ 
-	chmod 777 $MODDIR/sqlite3 
+	chmod +x $MODDIR/sqlite3
 	SQLITEPATH="$MODDIR/sqlite3" 
 } 
  

@@ -1,3 +1,8 @@
+**canary-267**  
+- edited string formatter instructions  
+- Fixed lockscreen TV remote shortcut for the Google TV app 4.39  
+- Fixed update fail notification not shown  
+  
 **canary-266**  
 - Fixed Network statistics output error and code improvement  
   

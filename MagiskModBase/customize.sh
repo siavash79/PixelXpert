@@ -43,6 +43,10 @@ grantRootApps(){
 	grantRootPkg $PKGNAME
 }
 
+migratePrefs(){
+  am start -n "$PKGNAME/.UpdateActivity" -e migratePrefs true
+}
+
 #activate PKGNAME in Lsposed
 activateModuleLSPD()
 {	
@@ -94,7 +98,9 @@ if [ $(ls $LSPDDBPATH) = $LSPDDBPATH ]; then
 	ui_print ''
 
 	activateModuleLSPD
-	
+	migratePrefs
+
+
 	ui_print ''
 	ui_print ''
 	ui_print 'Installation Complete!'

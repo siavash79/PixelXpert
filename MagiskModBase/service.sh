@@ -50,12 +50,12 @@ activateModuleLSPD()
 	echo '- Trying to activate the module in Lsposed...'	 
 	 
 	CMD="select mid from modules where module_pkg_name like \"$PKGNAME\";" && runSQL 
-	OLDMID=$(echo $SQLREUSLT | xargs) 
+	OLDMID=$(echo $SQLRESULT | xargs)
  
  
 	if [ $(($OLDMID+0)) -gt 0 ]; then
 		CMD="select mid from modules where mid = $OLDMID and apk_path like \"$PKGPATH\" and enabled = 1;" && runSQL 
-		REALMID=$(echo $SQLREUSLT | xargs) 
+		REALMID=$(echo $SQLRESULT | xargs)
 		 
 		if [ $(($REALMID+0)) = 0 ]; then 
 			CMD="delete from scope where mid = $OLDMID;" && runSQL 
@@ -71,7 +71,7 @@ activateModuleLSPD()
 	NEWMID=$(echo $SQLRESULT | xargs) 
 
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"android\",0);" && runSQL 
- 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.systemui\",0);" && runSQL 
+	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.systemui\",0);" && runSQL
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.google.android.apps.nexuslauncher\",0);" && runSQL
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.google.android.dialer\",0);" && runSQL
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.phone\",0);" && runSQL

@@ -65,9 +65,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-        body: 'Caution: The source asset isn''tt associated with the zips'
+        tag_name: 'canary_builds'
+        release_name: 'Latest Canary'
+        body: 'Caution: The source asset isn''tt associated with the zips\nPrevious canary builds can be found in Github artifacts or Telegram Channel'
         prerelease: true
         draft: false
         asset_files: 'output'

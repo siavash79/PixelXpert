@@ -1,0 +1,74 @@
+name: Make Test Build Canary Release
+
+on:
+  push:
+    branches:
+      - 'builtTest'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Grab Source
+      run: git clone --branch buildTest --single-branch --recurse-submodules https://github.com/siavash79/AOSPMods.git .
+      
+    - name: Setup JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+        
+    - name: Grant permission shell scripts
+      run: chmod +x .github/*.sh
+
+    - name: Generate Changelog
+      run: .github/extractChanges.sh
+
+    - name: Update Versions
+      run: .github/bumpVersion.sh ${{ github.run_id }}
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew assembleRelease
+
+    - uses: r0adkll/sign-android-release@v1
+      name: Sign app APK
+      id: sign_app
+      with:
+        releaseDirectory: app/build/outputs/apk/release
+        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+        alias: ${{ secrets.ALIAS }}
+        keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+        keyPassword: ${{ secrets.KEY_PASSWORD }}
+      env:
+        BUILD_TOOLS_VERSION: "33.0.0"
+          
+    - name: Run the zip script
+      run: .github/make_zip.sh
+
+    - name: Upload Xposed Zip
+      uses: actions/upload-artifact@v2
+      with: 
+        name: AOSPMods_Xposed.zip
+        path: output
+
+    - name: Delete previous release
+      run: gh release delete canary_builds -y -R siavash79/AOSPMods
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Release the canary binaries
+      uses: Hs1r1us/Release-AIO@v1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: ${{ github.ref }}
+        body: 'Caution: The source asset isn''tt associated with the zips'
+        prerelease: true
+        draft: false
+        asset_files: 'output'

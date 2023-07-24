@@ -1,3 +1,7 @@
+**canary-268**  
+- Updated canary upload location to improve the download experience  
+- improved module update script  
+  
 **canary-267**  
 - edited string formatter instructions  
 - Fixed lockscreen TV remote shortcut for the Google TV app 4.39  

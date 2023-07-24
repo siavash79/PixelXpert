@@ -1,3 +1,6 @@
+**canary-269**  
+- Fixed full version canary failing to install  
+  
 **canary-268**  
 - Updated canary upload location to improve the download experience  
 - improved module update script  

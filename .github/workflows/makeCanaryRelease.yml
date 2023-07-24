@@ -6,39 +6,39 @@ on:
       - 'canary'
     paths:
       - '.github/edit2MakeNewCanary'
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Grab Source
-      run: git clone --recurse-submodules https://github.com/siavash79/AOSPMods.git .
+    - name: Source Code Download
+      run: git clone --branch canary --single-branch --recurse-submodules https://github.com/siavash79/AOSPMods.git .
       
-    - name: Setup JDK 17
+    - name: JDK 17 Setup
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle
         
-    - name: Grant permission shell scripts
+    - name: Shell Scripts Permissions
       run: chmod +x .github/*.sh
 
-    - name: Generate Changelog
+    - name: Changelog Generation
       run: .github/extractChanges.sh
 
-    - name: Update Versions
+    - name: Version Bump
       run: .github/bumpVersion.sh ${{ github.run_id }}
 
-    - name: Grant execute permission for gradlew
+    - name: Gradlew Permissions
       run: chmod +x gradlew
       
-    - name: Build with Gradle
+    - name: Gradle Build
       run: ./gradlew assembleRelease
 
     - uses: r0adkll/sign-android-release@v1
-      name: Sign app APK
+      name: APK Signature
       id: sign_app
       with:
         releaseDirectory: app/build/outputs/apk/release
@@ -49,29 +49,40 @@ jobs:
       env:
         BUILD_TOOLS_VERSION: "33.0.0"
           
-    - name: Run the zip script
+    - name: Magisk Module Generation
       run: .github/make_zip.sh
 
-    - name: Prepare upload artifact
-      run: |
-        rm -rf tmp
-        mkdir -p tmp/xposed tmp/full
-        unzip -o output/xposed/*.zip -d tmp/xposed
-        unzip -o output/full/*.zip -d tmp/full
-        
-    - name: Upload Xposed Zip
+    - name: Upload Xposed Artifact to Actions
       uses: actions/upload-artifact@v2
       with: 
         name: AOSPMods_Xposed.zip
-        path: tmp/xposed
+        path: output
 
-    - name: Upload Full Zip
+    - name: Upload Full Artifact to Actions
       uses: actions/upload-artifact@v2
       with:
         name: AOSPMods_Full.zip
-        path: tmp/full
+        path: output
 
-    - name: Commit version bump
+    - name: Previous Release Deletion
+      continue-on-error: true
+      run: gh release delete canary_builds -y -R siavash79/AOSPMods
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Canary Binary Release
+      uses: Hs1r1us/Release-AIO@v1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: 'canary_builds'
+        release_name: 'Latest Canary'
+        body: 'Caution: The source code assets are not associated with the zip files'
+        prerelease: true
+        draft: false
+        asset_files: 'output'
+
+    - name: Version Bump Commit
       uses: github-actions-x/commit@v2.9
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -82,7 +93,7 @@ jobs:
         name: GitHub
         email: aospmods@siava.sh
 
-    - name: Inform Telegram
+    - name: Telegram Channel Post
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
@@ -90,6 +101,6 @@ jobs:
         message: ${{ env.TMessage }}
         format: markdown
 
-    - name: Send Files to Telegram
+    - name: Telegram File Attachment
       run: |
         curl -v "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMediaGroup?chat_id=${{ secrets.AOSPMODS_CHANNEL_ID }}&media=%5B%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FXposed%22%7D%2C%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FFull%22%7D%5D" -F Xposed="@output/xposed/AOSPMods_Xposed.zip" -F Full="@output/full/AOSPMods_Full.zip"

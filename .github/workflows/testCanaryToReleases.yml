@@ -55,6 +55,7 @@ jobs:
         path: output
 
     - name: Delete previous release
+      continue-on-error: true
       run: gh release delete canary_builds -y -R siavash79/AOSPMods
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

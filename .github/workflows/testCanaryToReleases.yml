@@ -1,9 +1,7 @@
 name: Make Test Build Canary Release
 
 on:
-  push:
-    branches:
-      - 'builtTest'
+  workflow_dispatch
 
 jobs:
   build:

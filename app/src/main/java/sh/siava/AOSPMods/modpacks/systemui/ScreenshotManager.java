@@ -3,6 +3,7 @@ package sh.siava.AOSPMods.modpacks.systemui;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
 import android.content.Context;
@@ -66,15 +67,25 @@ public class ScreenshotManager extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!disableScreenshotSound) return;
 
-				setObjectField(param.thisObject, "mBgExecutor", notExecutor);
+				((ExecutorService) getObjectField(param.thisObject, "mBgExecutor")).shutdownNow();
+
+				setObjectField(param.thisObject, "mBgExecutor", new NoExecutor());
 			}
 		});
 	}
 
+	@Override
+	public boolean listensTo(String packageName) {
+		return listenPackage.equals(packageName) && XPLauncher.isChildProcess;
+	}
+
 	//Seems like an executor, but doesn't act! perfect thing
-	ExecutorService notExecutor = new ExecutorService() {
+	private static class NoExecutor implements ExecutorService
+	{
 		@Override
-		public void shutdown() {}
+		public void shutdown() {
+
+		}
 
 		@Override
 		public List<Runnable> shutdownNow() {
@@ -92,53 +103,48 @@ public class ScreenshotManager extends XposedModPack {
 		}
 
 		@Override
-		public boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException {
+		public boolean awaitTermination(long l, TimeUnit timeUnit) throws InterruptedException {
 			return false;
 		}
 
 		@Override
-		public <T> Future<T> submit(Callable<T> task) {
+		public <T> Future<T> submit(Callable<T> callable) {
 			return null;
 		}
 
 		@Override
-		public <T> Future<T> submit(Runnable task, T result) {
+		public <T> Future<T> submit(Runnable runnable, T t) {
 			return null;
 		}
 
 		@Override
-		public Future<?> submit(Runnable task) {
+		public Future<?> submit(Runnable runnable) {
 			return null;
 		}
 
 		@Override
-		public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks) throws InterruptedException {
+		public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> collection) throws InterruptedException {
 			return null;
 		}
 
 		@Override
-		public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit) throws InterruptedException {
+		public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> collection, long l, TimeUnit timeUnit) throws InterruptedException {
 			return null;
 		}
 
 		@Override
-		public <T> T invokeAny(Collection<? extends Callable<T>> tasks) throws ExecutionException, InterruptedException {
+		public <T> T invokeAny(Collection<? extends Callable<T>> collection) throws ExecutionException, InterruptedException {
 			return null;
 		}
 
 		@Override
-		public <T> T invokeAny(Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit) throws ExecutionException, InterruptedException, TimeoutException {
+		public <T> T invokeAny(Collection<? extends Callable<T>> collection, long l, TimeUnit timeUnit) throws ExecutionException, InterruptedException, TimeoutException {
 			return null;
 		}
 
 		@Override
-		public void execute(Runnable command) {
+		public void execute(Runnable runnable) {
+
 		}
-	};
-
-
-	@Override
-	public boolean listensTo(String packageName) {
-		return listenPackage.equals(packageName) && XPLauncher.isChildProcess;
 	}
 }

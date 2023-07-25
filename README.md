@@ -73,8 +73,8 @@ The module is also released in 2 flavors with different download and update proc
 - Automated updates: through magisk manager, or through in-app updater
 
 <ins>Canary release:</ins>
-- Manual Install/Update: only through repository's Actions page  
-- Automated install/updates: only through in-app updater - updates will NOT appear in release section, and will NOT count against the module's download count  
+- Manual Install/Update: through repository's Actions page and [telegram channel](https://t.me/AOSPMods_Github) (latest version is available from [here](https://github.com/siavash79/AOSPMods/releases/tag/canary_builds) also)
+- Automated install/updates: through in-app updater - updates will NOT count against the module's download count  
 
 *No matter which flavor you're on, you can always switch to the other one with in-app updater
 <hr>

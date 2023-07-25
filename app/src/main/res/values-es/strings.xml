@@ -19,6 +19,7 @@
 	<string name="lockscreen_header_title">Pantalla de bloqueo</string>
 	<string name="statusbar_header">Barra de estado</string>
 	<string name="nav_header">Barra de navegación</string>
+	<string name="dialer_header">Teléfono &amp; Marcador</string>
 	<string name="misc_header">Miscelaneo</string>
 	<string name="qs_panel_category_title">Ajustes rápidos</string>
 	<string name="theme_customization_category">Temas</string>
@@ -356,7 +357,7 @@
 	<string name="monitoring_category_title">Opciones de monitoreo</string>
 	<string name="netstat_header">Configuración de estadísticas de red</string>
 	
-	<string name="string_formatter_manual_body_v2">Además del texto normal, puede introducir, variables dinámicas disponibles:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato. Para obtener documentación sobre el formato, busque `Java Date Format`\nExample: $GMMM means: Jan (O cualquier otro)\n\n$P&lt;format&gt; : Fecha persa, según el formato\nExample: $Pyyyy means: 1401\n\n$Nrx : Descargas totales de hoy\n$Ntx: Subidas totales de hoy\n$Nall : Tráfico total de hoy\n$Nssid : Nombre SSID WiFi (si es aplicable)\n\nIf tu reemplaza $N con $Nc se le proporcionarán estadísticas de datos móviles (like $Ncrx for downloads; excludes $Nssid)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
+	<string name="string_formatter_manual_body_v3">Además del texto normal, las variables dinámicas también están disponibles, como fecha, uso de datos y temperatura:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato*\n$P&lt;format&gt; : Fecha persa, según el formato*\n$Nrx : Descargas totales en el período especificado ** ***\n$Ntx: Subidas totales en el período especificado ** ***\n$Nall : Tráfico total en el período especificado Nombre SSID WiFi (si corresponde)\n\n$T\&lt;format\&gt;[interval] : Temperatura; \nformat puede ser b (para batería), c (para cpu), g (para gpu) y s (para piel) \nLastly, hay un número opcional de intervalo de actualización en segundos (predeterminado: 60 segundos) \n\n*for documentación de formato, busque "Formato de fecha Java"\n** Puede especificar el período de estadísticas en AOSPMods/Menú misceláneo/Configuración de estadísticas de red\n*** si reemplazas $N con $Nc obtendrás con estadísticas de datos móviles (por ejemplo, $Ncrx en lugar de Nrx)  </string>
 	<string name="update_channel_name">Actualizaciones</string>
 	<string name="update_notification_title">Actualización descargada</string>
 	<string name="update_notification_text">Toque aquí para instalar</string>

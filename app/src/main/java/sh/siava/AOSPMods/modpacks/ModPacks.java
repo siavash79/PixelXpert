@@ -10,6 +10,7 @@ import sh.siava.AOSPMods.modpacks.android.PhoneWindowManager;
 import sh.siava.AOSPMods.modpacks.android.ScreenOffKeys;
 import sh.siava.AOSPMods.modpacks.android.ScreenRotation;
 import sh.siava.AOSPMods.modpacks.android.StatusbarSize;
+import sh.siava.AOSPMods.modpacks.android.SystemScreenRecord;
 import sh.siava.AOSPMods.modpacks.dialer.RecordingMessage;
 import sh.siava.AOSPMods.modpacks.launcher.AOSPModsIconUpdater;
 import sh.siava.AOSPMods.modpacks.launcher.ClearAllButtonMod;
@@ -36,6 +37,7 @@ import sh.siava.AOSPMods.modpacks.systemui.QSQuickPullDown;
 import sh.siava.AOSPMods.modpacks.systemui.QSThemeManager;
 import sh.siava.AOSPMods.modpacks.systemui.QSTileGrid;
 import sh.siava.AOSPMods.modpacks.systemui.ScreenGestures;
+import sh.siava.AOSPMods.modpacks.systemui.ScreenRecord;
 import sh.siava.AOSPMods.modpacks.systemui.ScreenshotManager;
 import sh.siava.AOSPMods.modpacks.systemui.SettingsLibUtilsProvider;
 import sh.siava.AOSPMods.modpacks.systemui.StatusbarMods;
@@ -48,9 +50,9 @@ import sh.siava.AOSPMods.modpacks.telecom.CallVibrator;
 
 public class ModPacks {
 
-	public static ArrayList<Class> getMods()
+	public static ArrayList<Class<?>> getMods()
 	{
-		ArrayList<Class> modPacks = new ArrayList<>();
+		ArrayList<Class<?>> modPacks = new ArrayList<>();
 
 		//SystemUI
 
@@ -84,6 +86,7 @@ public class ModPacks {
 		modPacks.add(CustomNavGestures.class);
 		modPacks.add(NotificationManager.class);
 		modPacks.add(VolumeTile.class);
+		modPacks.add(ScreenRecord.class);
 		//Telecom
 		modPacks.add(CallVibrator.class);
 		//Framework
@@ -94,6 +97,7 @@ public class ModPacks {
 		modPacks.add(ScreenOffKeys.class);
 		modPacks.add(HotSpotController.class);
 		modPacks.add(RingerVolSeperator.class);
+		modPacks.add(SystemScreenRecord.class);
 		//Launcher
 		modPacks.add(TaskbarActivator.class);
 		modPacks.add(ClearAllButtonMod.class);

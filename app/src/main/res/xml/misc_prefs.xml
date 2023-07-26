@@ -31,6 +31,13 @@
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
+			android:key="InsecureScreenRecord"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/screen_record_insecure" />
+
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
 			android:key="allScreenRotations"
 			android:summary="@string/allow_all_screen_rotations_summary"
 			android:summaryOff="@string/general_off"

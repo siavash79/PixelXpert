@@ -32,6 +32,10 @@ public class XPrefs {
 	}
 
 	public static void loadEverything(String packageName, String... key) {
+		if(key.length > 0
+				&& Constants.PREF_UPDATE_EXCLUSIONS.stream().anyMatch(exclusion -> key[0].startsWith(exclusion)))
+			return;
+
 		if (packageName.equals(Constants.SYSTEM_UI_PACKAGE)) {
 			Overlays.setAll(false);
 		}

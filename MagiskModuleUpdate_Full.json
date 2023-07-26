@@ -1,6 +1,6 @@
 {
-  "version": "2.9.0",
-  "versionCode": 258,
+  "version": "canary-270",
+  "versionCode": 270,
   "zipUrl": "https://github.com/siavash79/AOSPMods/releases/download/canary_builds/AOSPMods_Full.zip",
   "changelog": "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/CanaryChangelog.md"
 }

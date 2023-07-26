@@ -89,7 +89,7 @@ jobs:
         push-branch: 'canary'
         commit-message: 'Version update: Release'
         force-add: 'true'
-        files: MagiskModBase/module.prop app/build.gradle latestVersion.json CanaryChangelog.md latestCanary.json
+        files: MagiskModBase/module.prop app/build.gradle latestVersion.json CanaryChangelog.md latestCanary.json MagiskModuleUpdate_Xposed.json MagiskModuleUpdate_Full.json
         name: GitHub
         email: aospmods@siava.sh
 

@@ -1,3 +1,8 @@
+**canary-270**  
+- Added option to screen-record from restricted content  
+- performance improvement  
+- now canary versions can also get updated through Magisk built-in updater  
+  
 **canary-269**  
 - Fixed full version canary failing to install  
   

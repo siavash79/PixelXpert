@@ -6,5 +6,6 @@
         <item>android</item>  <!-- System Framework -->
         <item>com.android.phone</item> <!-- phone services -->
         <item>com.android.settings</item> <!-- settings app -->
+        <item>com.google.android.dialer</item> <!-- google dialer -->
     </string-array>
 </resources>

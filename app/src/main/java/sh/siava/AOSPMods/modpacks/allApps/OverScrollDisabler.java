@@ -35,13 +35,15 @@ public class OverScrollDisabler extends XposedModPack {
 
 		Class<?> ViewClass = findClass("android.view.View", lpparam.classLoader);
 
-		hookAllMethods(ViewClass, "setOverScrollMode", new XC_MethodHook() {
-			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if (!disableOverScroll) return;
-				setObjectField(param.thisObject, "mOverScrollMode", View.OVER_SCROLL_NEVER);
-				param.setResult(null);
-			}
-		});
+		if(disableOverScroll)
+		{
+			hookAllMethods(ViewClass, "setOverScrollMode", new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					setObjectField(param.thisObject, "mOverScrollMode", View.OVER_SCROLL_NEVER);
+					param.setResult(null);
+				}
+			});
+		}
 	}
 }

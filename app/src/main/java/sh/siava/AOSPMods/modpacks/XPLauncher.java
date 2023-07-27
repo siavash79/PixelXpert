@@ -63,17 +63,16 @@ public class XPLauncher {
 					}
 
 					new SystemUtils(mContext);
-					XPrefs.loadEverything(mContext.getPackageName());
+					XPrefs.setPackagePrefs(mContext.getPackageName());
 				}
 
-				for (Class<?> mod : ModPacks.getMods()) {
+				for (Class<? extends XposedModPack> mod : ModPacks.getMods(lpparam.packageName)) {
 					try {
-						XposedModPack instance = ((XposedModPack) mod.getConstructor(Context.class).newInstance(mContext));
+						XposedModPack instance = mod.getConstructor(Context.class).newInstance(mContext);
 						if (!instance.listensTo(lpparam.packageName)) continue;
 						try {
 							instance.updatePrefs();
-						} catch (Throwable ignored) {
-						}
+						} catch (Throwable ignored) {}
 						instance.handleLoadPackage(lpparam);
 						runningMods.add(instance);
 					} catch (Throwable T) {

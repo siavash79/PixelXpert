@@ -36,11 +36,16 @@ public class XPrefs {
 				&& Constants.PREF_UPDATE_EXCLUSIONS.stream().anyMatch(exclusion -> key[0].startsWith(exclusion)))
 			return;
 
-		if (packageName.equals(Constants.SYSTEM_UI_PACKAGE)) {
-			Overlays.setAll(false);
-		}
+		setPackagePrefs(packageName);
+
 		for (XposedModPack thisMod : XPLauncher.runningMods) {
 			thisMod.updatePrefs(key);
+		}
+	}
+
+	public static void setPackagePrefs(String packageName) {
+		if (Constants.SYSTEM_UI_PACKAGE.equals(packageName)) {
+			Overlays.setAll(false);
 		}
 	}
 }

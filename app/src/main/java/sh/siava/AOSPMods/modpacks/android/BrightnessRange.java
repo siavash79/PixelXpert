@@ -13,6 +13,7 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.Constants;
+import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -46,7 +47,7 @@ public class BrightnessRange extends XposedModPack {
 
 	@Override
 	public boolean listensTo(String packageName) {
-		return listenPacks.contains(packageName);
+		return listenPacks.contains(packageName) && !XPLauncher.isChildProcess;
 	}
 
 	@Override

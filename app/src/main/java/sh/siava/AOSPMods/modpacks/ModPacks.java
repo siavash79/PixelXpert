@@ -50,63 +50,74 @@ import sh.siava.AOSPMods.modpacks.telecom.CallVibrator;
 
 public class ModPacks {
 
-	public static ArrayList<Class<?>> getMods()
+	public static ArrayList<Class<? extends XposedModPack>> getMods(String packageName)
 	{
-		ArrayList<Class<?>> modPacks = new ArrayList<>();
-
-		//SystemUI
+		ArrayList<Class<? extends XposedModPack>> modPacks = new ArrayList<>();
 
 		//Should be loaded before others
 		modPacks.add(ThermalProvider.class);
 		modPacks.add(SettingsLibUtilsProvider.class);
 
-		modPacks.add(NotificationExpander.class);
-		modPacks.add(QSTileGrid.class);
-		modPacks.add(BrightnessSlider.class);
-		modPacks.add(FeatureFlagsMods.class);
-		modPacks.add(ThreeButtonNavMods.class);
-		modPacks.add(QSThemeManager.class);
-		modPacks.add(ScreenGestures.class);
-		modPacks.add(miscSettings.class);
-		modPacks.add(AOSPSettingsLauncher.class);
-		modPacks.add(QSQuickPullDown.class);
-		modPacks.add(KeyguardMods.class);
-		modPacks.add(UDFPSManager.class);
-		modPacks.add(EasyUnlock.class);
-		modPacks.add(MultiStatusbarRows.class);
-		modPacks.add(StatusbarMods.class);
-		modPacks.add(BatteryStyleManager.class);
-		modPacks.add(GestureNavbarManager.class);
-		modPacks.add(QSFooterTextManager.class);
-		modPacks.add(ScreenshotManager.class);
-		modPacks.add(KeyGuardPinScrambler.class);
-		modPacks.add(FingerprintWhileDozing.class);
-		modPacks.add(StatusbarSize.class);
-		modPacks.add(FlashLightLevel.class);
-		modPacks.add(CustomNavGestures.class);
-		modPacks.add(NotificationManager.class);
-		modPacks.add(VolumeTile.class);
-		modPacks.add(ScreenRecord.class);
-		//Telecom
-		modPacks.add(CallVibrator.class);
-		//Framework
-		modPacks.add(PackageManager.class);
-		modPacks.add(BrightnessRange.class);
-		modPacks.add(PhoneWindowManager.class);
-		modPacks.add(ScreenRotation.class);
-		modPacks.add(ScreenOffKeys.class);
-		modPacks.add(HotSpotController.class);
-		modPacks.add(RingerVolSeperator.class);
-		modPacks.add(SystemScreenRecord.class);
-		//Launcher
-		modPacks.add(TaskbarActivator.class);
-		modPacks.add(ClearAllButtonMod.class);
-		modPacks.add(AOSPModsIconUpdater.class);
-		modPacks.add(FeatureFlags.class);
-		//Settings
-		modPacks.add(AppCloneEnabler.class);
-		//Dialer
-		modPacks.add(RecordingMessage.class);
+		switch (packageName)
+		{
+			case Constants.SYSTEM_FRAMEWORK_PACKAGE:
+				modPacks.add(StatusbarSize.class);
+				modPacks.add(PackageManager.class);
+				modPacks.add(BrightnessRange.class);
+				modPacks.add(PhoneWindowManager.class);
+				modPacks.add(ScreenRotation.class);
+				modPacks.add(ScreenOffKeys.class);
+				modPacks.add(HotSpotController.class);
+				modPacks.add(RingerVolSeperator.class);
+				modPacks.add(SystemScreenRecord.class);
+				break;
+			case Constants.SYSTEM_UI_PACKAGE:
+				modPacks.add(BrightnessRange.class);
+				modPacks.add(NotificationExpander.class);
+				modPacks.add(QSTileGrid.class);
+				modPacks.add(BrightnessSlider.class);
+				modPacks.add(FeatureFlagsMods.class);
+				modPacks.add(ThreeButtonNavMods.class);
+				modPacks.add(QSThemeManager.class);
+				modPacks.add(ScreenGestures.class);
+				modPacks.add(miscSettings.class);
+				modPacks.add(AOSPSettingsLauncher.class);
+				modPacks.add(QSQuickPullDown.class);
+				modPacks.add(KeyguardMods.class);
+				modPacks.add(UDFPSManager.class);
+				modPacks.add(EasyUnlock.class);
+				modPacks.add(MultiStatusbarRows.class);
+				modPacks.add(StatusbarMods.class);
+				modPacks.add(BatteryStyleManager.class);
+				modPacks.add(GestureNavbarManager.class);
+				modPacks.add(QSFooterTextManager.class);
+				modPacks.add(ScreenshotManager.class);
+				modPacks.add(KeyGuardPinScrambler.class);
+				modPacks.add(FingerprintWhileDozing.class);
+				modPacks.add(StatusbarSize.class);
+				modPacks.add(FlashLightLevel.class);
+				modPacks.add(CustomNavGestures.class);
+				modPacks.add(NotificationManager.class);
+				modPacks.add(VolumeTile.class);
+				modPacks.add(ScreenRecord.class);
+				break;
+			case Constants.LAUNCHER_PACKAGE:
+				modPacks.add(TaskbarActivator.class);
+				modPacks.add(ClearAllButtonMod.class);
+				modPacks.add(AOSPModsIconUpdater.class);
+				modPacks.add(FeatureFlags.class);
+				break;
+			case Constants.TELECOM_SERVER_PACKAGE:
+				modPacks.add(CallVibrator.class);
+				break;
+			case Constants.SETTINGS_PACKAGE:
+				modPacks.add(AppCloneEnabler.class);
+				break;
+			case Constants.DIALER_PACKAGE:
+				modPacks.add(RecordingMessage.class);
+				break;
+		}
+
 		//All Apps
 		modPacks.add(OverScrollDisabler.class);
 

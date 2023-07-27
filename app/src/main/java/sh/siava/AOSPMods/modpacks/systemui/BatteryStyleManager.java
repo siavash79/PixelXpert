@@ -139,17 +139,21 @@ public class BatteryStyleManager extends XposedModPack {
 
 	private static void refreshBatteryIcons() {
 		for (Object view : batteryViews) {
-			ImageView mBatteryIconView = (ImageView) getObjectField(view, "mBatteryIconView");
-			scale(mBatteryIconView);
-			try {
-				BatteryDrawable drawable = (BatteryDrawable) getAdditionalInstanceField(view, "mBatteryDrawable");
-				drawable.setShowPercent(ShowPercent);
-				drawable.setAlpha(Math.round(BatteryIconOpacity * 2.55f));
-				drawable.setChargingAnimationEnabled(BatteryChargingAnimationEnabled);
-				drawable.refresh();
-			} catch (Throwable ignored) {
-			} //it's probably the default battery. no action needed
+			updateBatteryViewValues(view);
 		}
+	}
+
+	private static void updateBatteryViewValues(Object view)
+	{
+		ImageView mBatteryIconView = (ImageView) getObjectField(view, "mBatteryIconView");
+		scale(mBatteryIconView);
+		try {
+			BatteryDrawable drawable = (BatteryDrawable) getAdditionalInstanceField(view, "mBatteryDrawable");
+			drawable.setShowPercent(ShowPercent);
+			drawable.setAlpha(Math.round(BatteryIconOpacity * 2.55f));
+			drawable.setChargingAnimationEnabled(BatteryChargingAnimationEnabled);
+			drawable.refresh();
+		} catch (Throwable ignored) {} //it's probably the default battery. no action needed
 	}
 
 	@Override
@@ -220,8 +224,9 @@ public class BatteryStyleManager extends XposedModPack {
 
 		View.OnAttachStateChangeListener listener = new View.OnAttachStateChangeListener() {
 			@Override
-			public void onViewAttachedToWindow(View v) {
-				batteryViews.add(v);
+			public void onViewAttachedToWindow(View view) {
+				batteryViews.add(view);
+				updateBatteryViewValues(view);
 				new Thread(() -> { //force refresh icons during systemui start - wait for the views to settle their properties
 					try
 					{

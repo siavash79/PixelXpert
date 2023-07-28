@@ -2,6 +2,7 @@
     <!--General strings-->
 	<string name="app_themed_icon_title">Alternatif AOSP Modları temalı uygulama simgesini etkinleştirAlternatif AOSPMods temalı uygulama simgesini etkinleştir</string>
     <string name="xposed_desc">Android 12+ AOSP tabanlı ROM\'lar için özel özellikler</string>
+    <string name="volume_tile_title">Medya Ses Gücü</string>
     <string name="error_not_activated">Lütfen modülün LSPosed Manager\'da etkinleştirildiğinden emin olun</string>
     <string name="hide_default">Gizle (Varsayılan)</string>
     <string name="percent_of_default_size">Varsayılan boyut</string>
@@ -18,6 +19,7 @@
     <string name="lockscreen_header_title">Kilit Ekranı yazısı</string>
     <string name="statusbar_header">Durum Çubuğu</string>
     <string name="nav_header">Gezinme Çubuğu</string>
+    <string name="dialer_header">Telefon</string>
     <string name="misc_header">Muhtelif</string>
     <string name="qs_panel_category_title">Hızlı Ayarlar Paneli</string>
     <string name="theme_customization_category">Temalandırma</string>
@@ -42,6 +44,7 @@
     <string name="camera_shortcut">Kamera</string>
     <string name="assistant_shortcut">Asistan</string>
     <string name="torch_shortcut">El feneri</string>
+    <string name="qr_scanner_shortcut">QR kod tarayıcı</string>
     <string name="album_art_category">Medya seçenekleri</string>
     <string name="album_art_title">Medya oynatırken albüm resmini etkinleştir</string>
     <string name="album_art_blur_text">Bulanıklık derecesi</string>
@@ -54,6 +57,7 @@
     <string name="double_tap_sleep_title">Ekranı kapatmak için iki kez dokunun</string>
     <string name="battery_style_title">Bir pil stili seçin</string>
     <string name="battery_show_percent_title">Pil yüzdesini göster</string>
+    <string name="battery_show_charging_animation_title">Şarj animasyonunu göster</string>
     <string name="battery_style_category_title">Pil stili</string>
     <string name="battery_icon_size_title">Pil simgesi boyutu</string>
     <string name="battery_hidden">Gizlenmiş</string>
@@ -195,11 +199,14 @@
     <string name="allow_all_screen_rotations">Tüm ekran dönüşmelerini etkinleştir</string>
     <string name="allow_all_screen_rotations_summary">Yüzen manuel döndürme düğmesini de yok sayar</string>
     <string name="force_no_cutout">Kamera kesimini yoksay</string>
+    <string name="force_themed_icons_title">Eksik temalı simgeleri otomatik oluştur (yalnızca Android 14 - Pixel Launcher için)</string>
+    <string name="reapply_themed_config">Uygulamak için temalı simgeleri yeniden etkinleştirin</string>
     <string name="volume_button_step_title">Ses ayarı adımları (%0\'dan %100\'e kadar)</string>
 
     <string name="display_resolution_title">Ekran çözünürlüğü</string>
     <string name="brightness_range_title">Ekran parlaklık limitleri</string>
     <string name="brightness_range_not_linear">Bu aralık doğrusal DEĞİLdir: Bazen küçük bir fark önemli değişikliklere yol açar</string>
+    <string name="separate_ring_notif_vol_title">Zil ve Bildirim için bireysel ses seviyesi</string>
     <string name="so_power_longpress_torch_title">El feneri için güç tuşuna uzun basın*</string>
     <string name="so_taptaptorch_title">Çift Dokunmayla el fenerini Etkinleştir</string>
     <string name="so_taptaptorch_summary">Hızlı el feneri için kilit ekranına iki kez dokunun ve basılı tutun</string>
@@ -223,6 +230,8 @@
     <string name="vibrate_on_call_drop_title">Arama kesildiğinde/sonlandığında titret</string>
 
     <!-- Theming section related -->
+    <string name="dialer_mute_record_message_title">Çağrı kaydı duyurusunu kaldır</string>
+    <string name="dialer_mute_record_message_summary">Yalnızca arama kaydının etkin olduğu Google telefon uygulaması için geçerlidir</string>
     <string name="gsans_override_title">Google Sans yazı tipini sisteme yükle</string>
     <string name="font_overlays_enable_title">Özel yazı tiplerini kullanmayı etkinleştir</string>
     <string name="theme_customization_font_title">Başlık / Gövde yazı tipi</string>
@@ -290,11 +299,12 @@
     <string name="monitoring_category_title">İzleme seçenekleri</string>
     <string name="netstat_header">Ağ istatistikleri ayarları</string>
 
-    <string name="string_formatter_manual_body">Girebileceğiniz normal metne ek olarak dinamik değişkenler de mevcuttur:\n\n$G\&lt;format\&gt; : Gürcü tarihi, formata göre. Biçim belgeleri için lütfen `Java Tarih Biçimi`ni okuyun\nÖrnek: $GMMM şu anlama gelir: Ocak (veya başka bir ay)\n\n$P&lt;format&gt; : Farsça tarih, biçime göre\nÖrnek: $Pyyyy şu anlama gelir: 1401\n\nAşağıdakı internet kullanımını etkinleştirmek için, Muhtelif/Ağ İstatistikleri Ayarları menüsünden Ağ istatistiklerini toplamayı etkinleştir seçeneğini aktif etmeniz gerekir\n\n$Nrx : Bugünkü Toplam İndirme Sayısı\n$Ntx: Bugünkü Toplam Yükleme Sayısı\n$Nall : Bugünün Toplam Trafiği\n\nEğer $N`i $Nc ile değiştirirseniz  , mobil veri istatistiklerine sahip olacaksınız (indirmeler için $Ncrx gibi)\n\nÖrnek:\n`$GEEEE Mobil Trafiği: $Ncall` şunları üretecek:\n`Salının Mobil Trafiği: 2GB`</string>
+    <string name="string_formatter_manual_body_v3">Normal metne ek olarak, Tarih, Veri kullanımı ve Sıcaklık gibi dinamik değişkenler de mevcuttur:\\n\\n$G\\&lt;format\\&gt; : Miladi tarih, formata göre*\\n$P&lt;format&gt; : Farsça tarih, biçime göre*\\n$Nrx : Belirtilen dönemdeki Toplam İndirmeler ** ***\\n$Ntx: Belirtilen dönemdeki Toplam Yüklemeler ** ***\\n$Nall : Belirtilen dönemdeki Toplam Trafik ** ***\\n$Nssid : WiFi SSID adı (varsa)\\n\\n$T\\&lt;format\\&gt;[interval] : Sıcaklık; \\nformat b (pil için), c (CPU için), g (GPU için) ve s (cilt için) olabilir \\nSon olarak, saniye cinsinden İSTEĞE BAĞLI sayıda güncelleme aralığı vardır (varsayılan: 60 saniye)\\n\\n* biçim belgeleri için \"Java Tarih Biçimi\"ni arayın\\n**İstatistik dönemini AOSPMods/Çeşitli menü/Ağ İstatistik Ayarları\'nda belirleyebilirsiniz\\n***$N yerine $Nc yazarsanız, mobil veri istatistiklerini alırsınız (örneğin, Nrx yerine $Ncrx)</string>
     <string name="update_channel_name">Güncellemeler</string>
     <string name="update_notification_title">Güncelleme indirildi</string>
     <string name="update_notification_text">Güncellemeyi indirmek için tıkla</string>
     <string name="download_failed">"Güncelleme indirilemedi "</string>
+    <string name="try_again_later">Lütfen daha sonra tekrar deneyiniz</string>
     <string name="reboot_notification_title">AOSPMods güncellendi!</string>
     <string name="reboot_notification_text">Değişiklikler yeniden başlatma sonra geçerli olacak</string>
     <string name="update_flavor_title">Kanalı güncelle</string>
@@ -337,7 +347,6 @@
     <string name="toggle_notification">Bildirim panelini aç/kapat</string>
     <string name="toggle_one_handed">Tek el modunu aç/kapat</string>
     <string name="insecure_screenshot">Güvenliksiz ekran görüntüsü</string>
-    <string name="screenshot_chord_insecure">Sesi kısma butonu + Güç — güvensiz ekran görüntüsü</string>
     <string name="taskbar_as_recents_title">Görev Çubuğunu son kullanılan uygulamalar çubuğuna dönüştür</string>
     <string name="wakeup_to_security_title">Cihaz uyanır uyanmaz ekran kilidini göstermek</string>
     <string name="taskbar_radius_title">Görev çubuğu köşe eğriliği</string>
@@ -364,6 +373,7 @@
     <string name="ls_general_options">"Kilit ekranı seçenekleri "</string>
     <string name="hide_avatar_title">Çoklu kullanıcı rejiminde kilit ekranındakı kullanıcı resmini kaldır</string>
     <string name="camera_manager_master_title">El feneri modlarını etkinleştir (cihazınız desteklemiyorsa inaktive edin)</string>
+    <string name="screenshot_insecure">Kısıtlanmış içerikten ekran görüntüsüne izin ver</string>
     <string name="clipboard_smart_actions_title">Panoda akıllı seçenekler</string>
 	<string name="pm_header">Paket Yöneticisi</string>
     <string name="LSleftLongClickShortcutTitle">Sol kısayol (Uzun tıklayın)</string>
@@ -375,6 +385,7 @@
 	<string name="qs_tile_qty_title">Hızlı ayarlar simge sayısı ayarları</string>
     <string name="qs_tile_qty_portrait">Dikey yönde</string>
     <string name="qs_tile_qty_landscape">Yatay yönde</string>
+    <string name="taskbar_transient_title">Otomatik gizleme</string>
     <string name="pm_bypass_signature_title">Paket imza kontrolünü atlayın</string>
     <string name="pm_allow_downgrade_title">Uygulama sürüm düşürmeye izin ver</string>
     <string name="incompatible_alert_title">Uyumsuz</string>
@@ -384,4 +395,19 @@
     <string name="auto_off_five_minutes">Önümüzdeki 5 dakika için etkin</string>
     <string name="vibration_type_touch">Sistem dokunmatik titreşim ayarları tarafından tanımlanan yoğunluk</string>
     <string name="vibration_type_notification">Sistem bildirim titreşim ayarları tarafından tanımlanan yoğunluk</string>
+    <string name="nt_stat_mode_today">Bugün</string>
+    <string name="nt_stat_mode_week">Bu hafta</string>
+    <string name="nt_stat_mode_month">Bu ay</string>
+    <string name="sunday">Pazar</string>
+    <string name="monday">Pazartesi</string>
+    <string name="tuesday">Salı</string>
+    <string name="wednesday">Çarşamba</string>
+    <string name="thursday">Perşembe</string>
+    <string name="friday">Cuma</string>
+    <string name="saturday">Cumartesi</string>
+    <string name="screen_record_insecure">Kısıtlanmış içerikten ekran kaydına izin ver</string>
+    <string name="network_stat_type">İstatistik Türü</string>
+    <string name="network_stat_day">Başlama zamanı</string>
+    <string name="network_stat_week">Haftanın ilk günü</string>
+    <string name="network_stat_month">Ayın ilk günü</string>
 </resources>

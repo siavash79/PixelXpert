@@ -1,8 +1,7 @@
 <resources>
     <!--General strings-->
-    <string name="app_themed_icon_title">"Aktivierung alternativer AOSP Mods thematisierter App-Symbole "</string>
-    <string name="xposed_desc">"Benutzerdefinierte Funktionen für Android 12+ AOSP-basierte ROMs "</string>
-    <string name="volume_tile_title">Medien Lautstärke</string>
+    <string name="app_themed_icon_title">Alternative AOSP Mods-Symbole aktivieren</string>
+    <string name="xposed_desc">Benutzerdefinierte Funktionen für Android 12+ AOSP-basierte ROMs</string>
     <string name="error_not_activated">Bitte kontrolliere, ob das Modul im LSPosed Manager aktiviert ist!</string>
     <string name="hide_default">Verstecken (Standard)</string>
     <string name="percent_of_default_size">% von der Standard Größe</string>
@@ -71,7 +70,6 @@
     <string name="lte_4g_icon_title">LTE / 4G Symbol</string>
     <string name="combined_signal_icon_title">Kombinierte Empfangssymbole</string>
     <string name="volte_icon_title">VoLTE-Symbol anzeigen, wenn verfügbar</string>
-    <string name="vowifi_icon_title">"VoWiFi-Symbol anzeigen, wenn verfügbar "</string>
     <string name="hide_privacychip_title">Datenschutzindikatoren ausblenden\n(Kamera, Mikrofon)</string>
     <string name="sb_vibration_switch_title">Zeige Vibration/Lautlos Symbole</string>
     <string name="sbc_position_title">Uhr Position</string>
@@ -248,8 +246,8 @@
 
     <!-- Clock position -->
     <string name="clock_default">links (Standard)</string>
-	<string name="clock_center">zentriert</string>
-	<string name="clock_right">rechts</string>
+    <string name="clock_center">zentriert</string>
+    <string name="clock_right">rechts</string>
 
     <!-- AM/PM style -->
     <string name="am_pm_normal">100% Größe der Uhr</string>
@@ -293,12 +291,9 @@
     <string name="monitoring_category_title">Überwachungsoptionen</string>
     <string name="netstat_header">Netzwerkstatistikeinstellungen</string>
 
-    <string name="string_formatter_manual_body">Zusätzlich zum normalen Text, den Sie eingeben können, sind auch dynamische Variablen verfügbar:\n\n$G\&lt;format\&gt; : georgisches Datum, basierend auf dem Format. Für Formatdokumentation suchen Sie bitte nach `Java Date Format`\nBeispiel: $GMMM bedeutet: Jan (oder irgendein anderer)\n\n$P&lt;format&gt; : Persisches Datum, basierend auf dem Format\nBeispiel: $Pyyyy bedeutet: 1401\n\nUm die Internetnutzung von unten zu aktivieren, müssen Sie zum Menü „Verschiedenes“, „Netzwerkstatistikeinstellungen“ und zur Option „Netzwerkstatistik sammeln aktivieren“ gehen\n\n$Nrx : Gesamtzahl der Downloads von heute\n$Ntx: Gesamtzahl der Uploads von heute\n$Nall : Gesamtzahl der Zugriffe von heute\n\nWenn Sie ersetzen $N mit $Nc erhalten Sie mobile Datenstatistiken (wie $Ncrx für Downloads)\n\nBeispiel:\n`Mobiler Traffic von $GEEEE: $Ncall` ergibt:\n`Mobiler Traffic von Dienstag: 2GB` </string>
     <string name="update_channel_name">Aktualisierungen</string>
     <string name="update_notification_title">Update heruntergeladen</string>
     <string name="update_notification_text">Zum Installieren hier tippen</string>
-    <string name="download_failed">"Download des Updates fehlgeschlagen "</string>
-    <string name="try_again_later">"Bitte später erneut versuchen "</string>
     <string name="reboot_notification_title">AOSPMods aktualisiert!</string>
     <string name="reboot_notification_text">Änderungen werden nach dem Neustart wirksam</string>
     <string name="update_flavor_title">Kanal aktualisieren</string>
@@ -341,14 +336,13 @@
     <string name="toggle_notification">Benachrichtigungsfeld umschalten</string>
     <string name="toggle_one_handed">Einhandmodus umschalten</string>
     <string name="insecure_screenshot">Unsicherer Screenshot</string>
-    <string name="screenshot_chord_insecure">VolDown+Power unsicherer Screenshot</string>
     <string name="taskbar_as_recents_title">Konvertieren Sie die Taskleiste in die Recents-Leiste</string>
     <string name="wakeup_to_security_title">Pineingabe anzeigen, sobald das Gerät erwacht</string>
     <string name="taskbar_radius_title">Taskleisten-Eckenradius</string>
     <string name="caution_unstable">Achtung! Diese Option kann für einige Benutzer instabil sein.</string>
-	<string name="qs_tile_vertical_title">Kachelsymbole nach oben verschieben</string>
+    <string name="qs_tile_vertical_title">Kachelsymbole nach oben verschieben</string>
     <string name="clear_all_reposition_title">Fügen Sie \'alles löschen\' unten auf die Recents-Leiste</string>
-	<string name="heads_up_notification_duration">Dauer der Heads-up-Benachrichtigung</string>
+    <string name="heads_up_notification_duration">Dauer der Heads-up-Benachrichtigung</string>
     <string name="milliseconds">Millisekunden</string>
     <string name="network_show_icons_title">Richtungssymbole für die Internet-Download-Geschwindigkeit anzeigen</string>
     <string name="power_menu_overlays_section">Power-Menü-Themen</string>
@@ -360,17 +354,16 @@
     <string name="imperial_units_title">Verwenden imperiale Einheiten</string>
     <string name="hide_roaming_title">Mobile Roaming-Anzeigen ausblenden</string>
     <string name="caution_mobile_costs">VORSICHT - Wenn Sie nicht wissen, dass Sie Roaming verwenden, können Ihre Mobilfunkkosten steigen</string>
-    <string name="hotspot_header">"Tragbarer Hotspot "</string>
+    <string name="hotspot_header">Tragbarer Hotspot</string>
     <string name="hotspot_hide_ssid_title">"SSID verstecken "</string>
     <string name="hotspot_inactivity_timeout_title">"Zeitüberschreitung bei Inaktivität "</string>
     <string name="hotspot_max_client_title">"Maximale Anzahl von Clients "</string>
-    <string name="disable_unlock_hint_title">"Optionen für den Sperrbildschirm "</string>
-    <string name="ls_general_options">Optionen für den Sperrbildschirm</string>
+    <string name="ls_general_options">Sperrbildschirm-Optionen</string>
     <string name="hide_avatar_title">Benutzer-Avatar entfernen (Mehrbenutzermodus)</string>
     <string name="clipboard_smart_actions_title">Smart-Aktionen in der Zwischenablage</string>
     <string name="camera_manager_master_title">Taschenlampenmodifikationen aktivieren (Deaktivieren, wenn das Gerät es nicht unterstützt)</string>
-	<string name="pm_header">Anwendungpaketmanager</string>
-	<string name="LSleftLongClickShortcutTitle">Linkes Shortcut (lang drücken)</string>
+    <string name="pm_header">Anwendungpaketmanager</string>
+    <string name="LSleftLongClickShortcutTitle">Linkes Shortcut (lang drücken)</string>
     <string name="LSrightLongClickShortcutTitle">Rechte Shortcut (Langer Druck)</string>
     <string name="tv_remote_shortcut">TV-Fernbedienung</string>
     <string name="dnd_shortcut">Bitte nicht stören</string>
@@ -386,6 +379,37 @@
     <string name="incompatible_alert_ok_btn">"Ich habe verstanden "</string>
     <string name="qs_volume_unmute_title">Lautstärke Kachel Wert aufheben</string>
     <string name="auto_off_five_minutes">Aktiviert für die nächsten 5 Minuten</string>
-	<string name="vibration_type_touch">"Intensität wird durch die Systemeinstellungen für die Berührungsvibration bestimmt "</string>
+    <string name="vibration_type_touch">"Intensität wird durch die Systemeinstellungen für die Berührungsvibration bestimmt "</string>
     <string name="vibration_type_notification">Intensität wird durch die Vibrationseinstellungen für die Systembenachrichtigung festgelegt</string>
+    <string name="volume_tile_title">Medienvolumen</string>
+    <string name="dialer_header">"Telefon "</string>
+    <string name="disable_unlock_hint_title">"Animation des Entsperrungshinweises deaktivieren "</string>
+    <string name="qr_scanner_shortcut">"QR-Code-Scanner "</string>
+    <string name="battery_show_charging_animation_title">"Ladeanimation anzeigen "</string>
+    <string name="vowifi_icon_title">"VoWiFi-Symbol anzeigen, wenn verfügbar "</string>
+    <string name="nt_stat_mode_today">Heute</string>
+    <string name="nt_stat_mode_week">Aktuelle Woche</string>
+    <string name="nt_stat_mode_month">Aktueller Monat</string>
+    <string name="sunday">Sonntag</string>
+    <string name="monday">Monntag</string>
+    <string name="tuesday">Dienstag</string>
+    <string name="wednesday">Mittwoch</string>
+    <string name="thursday">Donerstag</string>
+    <string name="friday">Frietag</string>
+    <string name="saturday">Samstag</string>
+    <string name="taskbar_transient_title">"Automatisches Ausblenden "</string>
+    <string name="screenshot_insecure">"Screenshot von eingeschränkten Inhalten zulassen "</string>
+    <string name="screen_record_insecure">"Bildschirmaufnahme von eingeschränkten Inhalten zulassen "</string>
+    <string name="force_themed_icons_title">"Fehlende Themensymbole automatisch generieren (nur Android 14 - Pixel Launcher) "</string>
+    <string name="reapply_themed_config">"Thematische Symbole wieder aktivieren und anwenden "</string>
+    <string name="separate_ring_notif_vol_title">"Individuelle Lautstärke für Rufton und Benachrichtigung "</string>
+    <string name="dialer_mute_record_message_title">"Ankündigung der Anrufaufzeichnung entfernen "</string>
+    <string name="dialer_mute_record_message_summary">"Gilt nur für die Google Telefon-App mit aktivierter Anrufaufzeichnung "</string>
+    <string name="network_stat_type">"Typ der Statistik "</string>
+    <string name="network_stat_day">Startzeit</string>
+    <string name="network_stat_week">"Tag des Wochenbeginns "</string>
+    <string name="network_stat_month">"Starttag des Monats "</string>
+    <string name="string_formatter_manual_body_v3">"Zusätzlich zum normalen Text sind auch dynamische Variablen verfügbar, wie Datum, Datennutzung und Temperatur:  $G\\&lt;format\\&gt; : Gregorianisches Datum, basierend auf dem Format* $P&lt;format&gt; : Persisches Datum, basierend auf dem Format* $Nrx : Gesamte Downloads im angegebenen Zeitraum ** *** $Ntx: Uploads insgesamt im angegebenen Zeitraum ** *** $Nall : Gesamter Datenverkehr im angegebenen Zeitraum ** *** $Nssid : WiFi SSID-Name (falls zutreffend)  $T\\&lt;format\\&gt;[interval] : Temperatur;  Format kann b (für Akku), c (für CPU), g (für GPU) und s (für Haut) sein  Schließlich gibt es eine OPTIONALE Zahl für das Aktualisierungsintervall in Sekunden (Standard: 60 Sekunden) z.B. $Tc20  *Für die Formatdokumentation, suchen Sie nach Java Date Format **Sie können den Statistikzeitraum in AOSPMods/Sonstiges-Menü/Netzwerkstatistik-Einstellungen festlegen ***Wenn Sie $N durch $Nc ersetzen, erhalten Sie eine Statistik für mobile Daten (z.B. $Ncrx statt Nrx) "</string>
+    <string name="download_failed">"Der Download des Updates ist fehlgeschlagen "</string>
+    <string name="try_again_later">Bitte versuchen Sie es später noch einmal</string>
 </resources>

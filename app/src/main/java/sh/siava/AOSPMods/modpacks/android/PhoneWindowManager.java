@@ -5,7 +5,9 @@ import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
+import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.modpacks.utils.SystemUtils.PackageManager;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -13,6 +15,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.ColorSpace;
 import android.graphics.Insets;
@@ -20,9 +24,13 @@ import android.graphics.ParcelableColorSpace;
 import android.graphics.Rect;
 import android.hardware.HardwareBuffer;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.view.Display;
+import android.view.WindowManager;
 
 import java.lang.reflect.Constructor;
+import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -48,6 +56,9 @@ public class PhoneWindowManager extends XposedModPack {
 //	private boolean ScreenshotChordInsecure;
 //	private final ArrayList<Object> screenshotChords = new ArrayList<>();
 	private Class<?> ScreenshotRequestClass;
+	private List<UserHandle> userHandleList;
+	private String currentPackage = "";
+	private int currentUser = -1;
 
 	public PhoneWindowManager(Context context) {
 		super(context);
@@ -83,10 +94,65 @@ public class PhoneWindowManager extends XposedModPack {
 					case Constants.ACTION_SLEEP:
 						SystemUtils.sleep();
 						break;
+					case Constants.ACTION_SWITCH_APP_PROFILE:
+						switchAppProfile();
+						break;
 				}
 			} catch (Throwable ignored) {}
 		}
 	};
+
+	private void switchAppProfile() {
+		if(currentUser < 0 || currentPackage.length() == 0) return;
+
+		int startIndex = 0;
+		for(int i = 0; i < userHandleList.size(); i++)
+		{
+			int userID = getIntField(userHandleList.get(i), "mHandle");
+			if(userID == currentUser) {
+				startIndex = i;
+				break;
+			}
+		}
+
+		boolean looped = false;
+		for(int i = startIndex; i < userHandleList.size(); )
+		{
+			i++;
+			if(i > userHandleList.size() - 1 && !looped)
+			{
+				i = 0;
+				looped = true;
+			}
+
+			if(isPackageAvailabileForUser(currentPackage, userHandleList.get(i)))
+			{
+				switchAppToProfile(currentPackage, userHandleList.get(i));
+				break;
+			}
+		}
+	}
+
+	private void switchAppToProfile(String packageName, UserHandle userHandle) {
+		try {
+			callMethod(getObjectField(windowMan, "mActivityTaskManagerInternal"),
+					"startActivityAsUser",
+					callMethod(mContext, "getIApplicationThread"),
+					packageName,
+					null,
+					PackageManager().getLaunchIntentForPackage(packageName),
+					null,
+					0,
+					null,
+					getObjectField(userHandle, "mHandle"));
+		}
+		catch (Throwable ignored)
+		{}
+	}
+	private boolean isPackageAvailabileForUser(String packageName, UserHandle userHandle) {
+		//noinspection unchecked
+		return ((List<PackageInfo>)callMethod(mContext.getPackageManager(), "getInstalledPackagesAsUser", PackageManager.PackageInfoFlags.of(PackageManager.GET_META_DATA), getObjectField(userHandle, "mHandle"))).stream().anyMatch(packageInfo -> packageInfo.packageName.equals(packageName) && packageInfo.applicationInfo.enabled);
+	}
 
 	IntentFilter intentFilter = new IntentFilter();
 
@@ -94,6 +160,10 @@ public class PhoneWindowManager extends XposedModPack {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
+
+		UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+		//noinspection unchecked
+		userHandleList = (List<UserHandle>) callMethod(userManager, "getProfiles", true);
 
 //		Collections.addAll(screenshotChords, KEYCODE_POWER, KEYCODE_VOLUME_DOWN);
 
@@ -103,11 +173,50 @@ public class PhoneWindowManager extends XposedModPack {
 			intentFilter.addAction(Constants.ACTION_BACK);
 			intentFilter.addAction(Constants.ACTION_INSECURE_SCREENSHOT);
 			intentFilter.addAction(Constants.ACTION_SLEEP);
+			intentFilter.addAction(Constants.ACTION_SWITCH_APP_PROFILE);
 			mContext.registerReceiver(broadcastReceiver, intentFilter, RECEIVER_EXPORTED); //for Android 14, receiver flag is mandatory
 		}
 
+
+
 		try {
 			Class<?> PhoneWindowManagerClass = findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
+
+			hookAllMethods(PhoneWindowManagerClass, "onDefaultDisplayFocusChangedLw", new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					if(param.args[0] == null) return;
+
+					new Thread(() -> {
+						if(callMethod(param.args[0], "getBaseType").equals(WindowManager.LayoutParams.FIRST_APPLICATION_WINDOW))
+						{
+							String newPackageName = (String) callMethod(param.args[0], "getOwningPackage");
+							int newUserID = (int) getObjectField(callMethod(param.args[0], "getTask"), "mUserId");
+							if(!newPackageName.equals(currentPackage) || newUserID != currentUser)
+							{
+								currentPackage = newPackageName;
+								currentUser = newUserID;
+
+								boolean avaialbleOnOtherUsers = false;
+								for(UserHandle userHandle : userHandleList)
+								{
+									int thisUserID = (int) getObjectField(userHandle, "mHandle");
+									if(thisUserID != currentUser)
+									{
+										if(isPackageAvailabileForUser(currentPackage, userHandle))
+										{
+											avaialbleOnOtherUsers = true;
+											break;
+										}
+									}
+								}
+								sendAppProfileSwitchAvailable(avaialbleOnOtherUsers);
+							}
+						}
+					}).start();
+				}
+			});
+
 			ScreenshotRequestClass = findClassIfExists("com.android.internal.util.ScreenshotRequest", lpparam.classLoader); //13 QPR3
 			hookAllMethods(PhoneWindowManagerClass, "enableScreen", new XC_MethodHook() {
 				@Override
@@ -140,6 +249,18 @@ public class PhoneWindowManager extends XposedModPack {
 
 		} catch (Throwable ignored) {}
 	}
+
+	@SuppressLint("MissingPermission")
+	private void sendAppProfileSwitchAvailable(boolean isAvailable) {
+		new Thread(() -> {
+			Intent broadcast = new Intent();
+			broadcast.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+			broadcast.setAction(Constants.ACTION_PROFILE_SWITCH_AVAILABLE);
+			broadcast.putExtra("available", isAvailable);
+			mContext.sendBroadcast(broadcast);
+		}).start();
+	}
+
 	@Deprecated
 	private void takeInsecureScreenshot() {
 		if (mDisplayManagerInternal == null) {

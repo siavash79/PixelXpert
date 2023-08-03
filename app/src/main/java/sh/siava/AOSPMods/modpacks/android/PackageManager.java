@@ -5,6 +5,7 @@ import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 
 import android.content.Context;
+import android.content.Intent;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,6 +16,7 @@ import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 
+/** @noinspection RedundantThrows*/
 public class PackageManager extends XposedModPack {
 	public static final String listenPackage = Constants.SYSTEM_FRAMEWORK_PACKAGE;
 
@@ -65,6 +67,20 @@ public class PackageManager extends XposedModPack {
 			Class<?> InstallPackageHelperClass = findClass("com.android.server.pm.InstallPackageHelper", lpparam.classLoader);
 			Class<?> PackageManagerServiceUtilsClass = findClass("com.android.server.pm.PackageManagerServiceUtils", lpparam.classLoader);
 			Class<?> SigningDetailsClass = findClass("android.content.pm.SigningDetails", lpparam.classLoader);
+
+			try
+			{
+				Class<?> ActivityManagerServiceClass = findClass("com.android.server.am.ActivityManagerService", lpparam.classLoader);
+
+				hookAllMethods(ActivityManagerServiceClass, "checkBroadcastFromSystem", new XC_MethodHook() { //This thing shouts too much. let's request for some silence
+					@Override
+					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+						Intent intent = (Intent) param.args[0];
+						if(intent.getAction().equals(Constants.ACTION_PROFILE_SWITCH_AVAILABLE))
+							param.setResult(null);
+					}
+				});
+			}catch (Throwable ignored){}
 
 			hookAllMethods(PackageManagerServiceUtilsClass, "checkDowngrade", new XC_MethodHook() {
 				@Override

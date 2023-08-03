@@ -15,6 +15,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
@@ -51,6 +52,7 @@ public class SystemUtils {
 	@SuppressLint("StaticFieldLeak")
 	static SystemUtils instance;
 	Context mContext;
+	PackageManager mPackageManager;
 	CameraManager mCameraManager;
 	VibratorManager mVibrationManager;
 	AudioManager mAudioManager;
@@ -107,6 +109,15 @@ public class SystemUtils {
 				? null
 				: instance.getNetworkStatsManager();
 	}
+
+	@Nullable
+	@Contract(pure = true)
+	public static PackageManager PackageManager() {
+		return instance == null
+				? null
+				: instance.getPackageManager();
+	}
+
 	@Nullable
 	@Contract(pure = true)
 	public static AudioManager AudioManager() {
@@ -393,6 +404,19 @@ public class SystemUtils {
 			}
 		}
 		return mAudioManager;
+	}
+
+	private PackageManager getPackageManager() {
+		if (mPackageManager == null) {
+			try {
+				mPackageManager = mContext.getPackageManager();
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					t.printStackTrace();
+				}
+			}
+		}
+		return mPackageManager;
 	}
 
 	private WifiManager getWifiManager() {

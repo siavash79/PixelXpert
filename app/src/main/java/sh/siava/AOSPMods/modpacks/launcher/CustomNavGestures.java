@@ -37,6 +37,7 @@ public class CustomNavGestures extends XposedModPack {
 	@Deprecated
 	private static final int ACTION_INSECURE_SCREENSHOT = 6;
 	private static final int ACTION_SLEEP = 7;
+	private static final int ACTION_SWITCH_APP_PROFILE = 8;
 
 	private static final int SWIPE_NONE = 0;
 	private static final int SWIPE_LEFT = 1;
@@ -236,7 +237,16 @@ public class CustomNavGestures extends XposedModPack {
 			case ACTION_SLEEP:
 				goToSleep();
 				break;
+			case ACTION_SWITCH_APP_PROFILE:
+				switchAppProfile();
+				break;
 		}
+	}
+
+	private void switchAppProfile() {
+		new Thread(() -> mContext.sendBroadcast(new Intent()
+				.setAction(Constants.ACTION_SWITCH_APP_PROFILE)
+				.addFlags(Intent.FLAG_RECEIVER_FOREGROUND))).start();
 	}
 
 	private void goToSleep() {

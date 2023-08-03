@@ -33,7 +33,7 @@ import sh.siava.AOSPMods.modpacks.systemui.MultiStatusbarRows;
 import sh.siava.AOSPMods.modpacks.systemui.NotificationExpander;
 import sh.siava.AOSPMods.modpacks.systemui.NotificationManager;
 import sh.siava.AOSPMods.modpacks.systemui.QSFooterTextManager;
-import sh.siava.AOSPMods.modpacks.systemui.QSQuickPullDown;
+import sh.siava.AOSPMods.modpacks.systemui.StatusbarGestures;
 import sh.siava.AOSPMods.modpacks.systemui.QSThemeManager;
 import sh.siava.AOSPMods.modpacks.systemui.QSTileGrid;
 import sh.siava.AOSPMods.modpacks.systemui.ScreenGestures;
@@ -82,7 +82,7 @@ public class ModPacks {
 				modPacks.add(ScreenGestures.class);
 				modPacks.add(miscSettings.class);
 				modPacks.add(AOSPSettingsLauncher.class);
-				modPacks.add(QSQuickPullDown.class);
+				modPacks.add(StatusbarGestures.class);
 				modPacks.add(KeyguardMods.class);
 				modPacks.add(UDFPSManager.class);
 				modPacks.add(EasyUnlock.class);

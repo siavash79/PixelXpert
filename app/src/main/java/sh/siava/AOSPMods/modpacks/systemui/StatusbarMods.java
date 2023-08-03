@@ -13,6 +13,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
+import static de.robv.android.xposed.XposedHelpers.findMethodExactIfExists;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
@@ -22,9 +23,11 @@ import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Icon;
@@ -176,6 +179,8 @@ public class StatusbarMods extends XposedModPack {
 	private final Executor voDataExec = Runnable::run;
 
 	private Object mStatusBarIconController;
+	private int mRemoveAllIconsForSlotParams = 1;
+
 	private Class<?> StatusBarIconClass;
 	private Class<?> StatusBarIconHolderClass;
 	private Object volteStatusbarIconHolder;
@@ -196,6 +201,30 @@ public class StatusbarMods extends XposedModPack {
 	private Object mTunerService;
 	public static final String ICON_HIDE_LIST = "icon_blacklist";
 	//endregion
+	//region app profile switch
+	private static final String APP_SWITCH_SLOT = "app_switch";
+	private Object mAppSwitchStatusbarIconHolder = null;
+
+	private static boolean StatusbarAppSwitchIconEnabled = false;
+
+	private final BroadcastReceiver mAppProfileSwitchReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if(intent.getAction().equals(Constants.ACTION_PROFILE_SWITCH_AVAILABLE))
+			{
+				boolean isAvailable = intent.getBooleanExtra("available", false);
+				if(isAvailable && StatusbarAppSwitchIconEnabled)
+				{
+					callMethod(mStatusBarIconController, "setIcon", APP_SWITCH_SLOT, mAppSwitchStatusbarIconHolder);
+				}
+				else
+				{
+					removeSBIconSlot(APP_SWITCH_SLOT);
+				}
+			}
+		}
+	};
+	//endregion
 
 	@SuppressLint("DiscouragedApi")
 	public StatusbarMods(Context context) {
@@ -206,6 +235,16 @@ public class StatusbarMods extends XposedModPack {
 		leftClockPadding = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("status_bar_left_clock_end_padding", "dimen", mContext.getPackageName()));
 	}
 
+	private void initSwitchIcon() {
+		try {
+			Icon appSwitchIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_app_switch);
+			//noinspection JavaReflectionMemberAccess
+			Object appSwitchStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, appSwitchIcon, 0, 0, APP_SWITCH_SLOT);
+			mAppSwitchStatusbarIconHolder = StatusBarIconHolderClass.newInstance();
+			setObjectField(mAppSwitchStatusbarIconHolder, "mIcon", appSwitchStatusbarIcon);
+		}catch (Throwable ignored){}
+	}
+
 	@Override
 	public boolean listensTo(String packageName) {
 		return listenPackage.equals(packageName) && !XPLauncher.isChildProcess;
@@ -213,6 +252,8 @@ public class StatusbarMods extends XposedModPack {
 
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
+
+		StatusbarAppSwitchIconEnabled = Xprefs.getBoolean("StatusbarAppSwitchIconEnabled", false);
 
 		HidePrivacyChip = Xprefs.getBoolean("HidePrivacyChip", false);
 
@@ -430,9 +471,7 @@ public class StatusbarMods extends XposedModPack {
 
 	private void updateClock() {
 		try {
-			((View) mClockView).post(() -> {
-				callMethod(mClockView, "updateClock");
-			});
+			((View) mClockView).post(() -> callMethod(mClockView, "updateClock"));
 		}
 		catch (Throwable ignored){}
 	}
@@ -457,6 +496,11 @@ public class StatusbarMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
+		IntentFilter f = new IntentFilter();
+		f.addAction(Constants.ACTION_PROFILE_SWITCH_AVAILABLE);
+
+		mContext.registerReceiver(mAppProfileSwitchReceiver, f, Context.RECEIVER_EXPORTED);
+
 		//region needed classes
 		Class<?> ActivityStarterClass = findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
 		Class<?> DependencyClass = findClass("com.android.systemui.Dependency", lpparam.classLoader);
@@ -466,7 +510,7 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 		Class<?> PhoneStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
 		Class<?> NotificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
-		NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
+//		Class<?> StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 		Class<?> StatusBarSignalPolicyClass = findClass("com.android.systemui.statusbar.phone.StatusBarSignalPolicy", lpparam.classLoader);
 		Class<?> PrivacyItemControllerClass = findClass("com.android.systemui.privacy.PrivacyItemController", lpparam.classLoader);
@@ -475,6 +519,8 @@ public class StatusbarMods extends XposedModPack {
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
 		//endregion
+
+		initSwitchIcon();
 
 		//region combined signal icons
 		hookAllConstructors(TunerServiceImplClass, new XC_MethodHook() {
@@ -751,6 +797,11 @@ public class StatusbarMods extends XposedModPack {
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 
 						mStatusBarIconController = getObjectField(param.thisObject, "mStatusBarIconController");
+
+						if(findMethodExactIfExists(mStatusBarIconController.getClass(), "removeAllIconsForSlot", String.class, boolean.class) != null)
+						{
+							mRemoveAllIconsForSlotParams = 2;
+						}
 
 						try {
 							mClockView = (View) getObjectField(param.thisObject, "mClockView");
@@ -1069,9 +1120,17 @@ public class StatusbarMods extends XposedModPack {
 
 	private void removeSBIconSlot(String slot) {
 		if (mStatusBar == null) return; //probably it's too soon to have a statusbar
+
 		mStatusBar.post(() -> {
 			try {
-				callMethod(mStatusBarIconController, "removeAllIconsForSlot", slot);
+				if(mRemoveAllIconsForSlotParams == 2)
+				{
+					callMethod(mStatusBarIconController, "removeAllIconsForSlot", slot, false);
+				}
+				else
+				{
+					callMethod(mStatusBarIconController, "removeAllIconsForSlot", slot);
+				}
 			} catch (Throwable ignored) {}
 		});
 	}

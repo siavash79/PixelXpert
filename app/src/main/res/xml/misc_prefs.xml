@@ -112,6 +112,23 @@
 			android:summaryOn="@string/overscroll_on_summary"
 			android:title="@string/disable_overscroll" />
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/work_clone_profile_header">
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="StatusbarLongpressAppSwitch"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/statusbar_long_press_app_switch" />
+
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="StatusbarAppSwitchIconEnabled"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/statusbar_app_switch_icon" />
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/doze_header">
 		<sh.siava.AOSPMods.ui.MaterialEditTextPreference
 			android:defaultValue="3"

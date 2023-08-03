@@ -103,7 +103,10 @@
 			android:layout_marginStart="2dp"
 			android:layout_marginTop="12dp"
 			android:layout_marginEnd="24dp"
-			android:layout_toEndOf="@android:id/widget_frame" />
+			android:layout_toEndOf="@android:id/widget_frame"
+			android:indeterminateDrawable="@drawable/seek_progress"
+			android:progressDrawable="@drawable/seekbar"
+			android:thumb="@drawable/seek_thumb" />
 
 	</RelativeLayout>
 </LinearLayout>

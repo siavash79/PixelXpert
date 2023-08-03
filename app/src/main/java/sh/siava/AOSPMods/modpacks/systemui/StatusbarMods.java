@@ -496,10 +496,9 @@ public class StatusbarMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		IntentFilter f = new IntentFilter();
-		f.addAction(Constants.ACTION_PROFILE_SWITCH_AVAILABLE);
-
-		mContext.registerReceiver(mAppProfileSwitchReceiver, f, Context.RECEIVER_EXPORTED);
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constants.ACTION_PROFILE_SWITCH_AVAILABLE);
+		mContext.registerReceiver(mAppProfileSwitchReceiver, filter, Context.RECEIVER_EXPORTED);
 
 		//region needed classes
 		Class<?> ActivityStarterClass = findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);

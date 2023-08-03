@@ -72,8 +72,10 @@ public class QSFooterTextManager extends XposedModPack {
 						"mShouldShowBuildText",
 						customText.trim().length() > 0);
 
-				mBuildText.setText(stringFormatter.formatString(customText));
-				mBuildText.setSelected(true);
+				mBuildText.post(() -> {
+					mBuildText.setText(stringFormatter.formatString(customText));
+					mBuildText.setSelected(true);
+				});
 			} else {
 				callMethod(QSFV,
 						"setBuildText");

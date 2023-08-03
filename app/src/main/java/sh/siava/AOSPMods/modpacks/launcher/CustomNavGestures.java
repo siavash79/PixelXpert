@@ -24,6 +24,7 @@ import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
+/** @noinspection ConstantValue*/
 @SuppressWarnings("RedundantThrows")
 public class CustomNavGestures extends XposedModPack {
 	private static final String listenPackage = Constants.LAUNCHER_PACKAGE;
@@ -244,9 +245,17 @@ public class CustomNavGestures extends XposedModPack {
 	}
 
 	private void switchAppProfile() {
-		new Thread(() -> mContext.sendBroadcast(new Intent()
-				.setAction(Constants.ACTION_SWITCH_APP_PROFILE)
-				.addFlags(Intent.FLAG_RECEIVER_FOREGROUND))).start();
+		new Thread(() -> {
+			try
+			{
+				Thread.sleep(200); //waiting for recents window to vanish
+
+				mContext.sendBroadcast(new Intent()
+						.setAction(Constants.ACTION_SWITCH_APP_PROFILE));
+			}
+			catch (Throwable ignored)
+			{}
+		}).start();
 	}
 
 	private void goToSleep() {

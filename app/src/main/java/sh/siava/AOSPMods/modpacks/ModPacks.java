@@ -96,13 +96,13 @@ public class ModPacks {
 				modPacks.add(FingerprintWhileDozing.class);
 				modPacks.add(StatusbarSize.class);
 				modPacks.add(FlashLightLevel.class);
-				modPacks.add(CustomNavGestures.class);
 				modPacks.add(NotificationManager.class);
 				modPacks.add(VolumeTile.class);
 				modPacks.add(ScreenRecord.class);
 				break;
 			case Constants.LAUNCHER_PACKAGE:
 				modPacks.add(TaskbarActivator.class);
+				modPacks.add(CustomNavGestures.class);
 				modPacks.add(ClearAllButtonMod.class);
 				modPacks.add(AOSPModsIconUpdater.class);
 				modPacks.add(FeatureFlags.class);

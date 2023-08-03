@@ -1,3 +1,8 @@
+**canary-271**  
+- Fixed navigation gestures not working in recent canaries  
+- Work/Clone apps: added options to quickly switch between the profiles  
+- Performance improvement  
+  
 **canary-270**  
 - Added option to screen-record from restricted content  
 - performance improvement  

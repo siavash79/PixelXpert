@@ -83,4 +83,5 @@ dependencies {
 
 	implementation 'com.github.tiagohm.MarkdownView:library:0.19.0' //Markdown reader
 
+	implementation 'com.github.ByteHamster:SearchPreference:v2.3.0'
 }

@@ -158,7 +158,7 @@ public class Helpers {
 		try {
 			com.topjohnwu.superuser.Shell.cmd("cmd overlay " + mode + " --user 0 " + packname).exec();
 		} catch (Throwable t) {
-			t.printStackTrace();
+			log(t);
 		}
 	}
 

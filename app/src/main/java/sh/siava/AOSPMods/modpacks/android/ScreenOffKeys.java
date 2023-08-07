@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.modpacks.android;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.hookMethod;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findMethodExact;
@@ -139,12 +140,12 @@ public class ScreenOffKeys extends XposedModPack {
 						param.setResult(null);
 						callMethod(SystemUtils.PowerManager(), "goToSleep", SystemClock.uptimeMillis());
 					} catch (Throwable T) {
-						T.printStackTrace();
+						log(T);
 					}
 				}
 			});
 		} catch (Throwable t) {
-			t.printStackTrace();
+			log(t);
 		}
 	}
 

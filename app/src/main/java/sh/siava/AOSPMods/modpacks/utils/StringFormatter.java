@@ -103,7 +103,7 @@ public class StringFormatter {
 		} catch (Throwable t) {
 			if (BuildConfig.DEBUG) {
 				log("Error setting formatted string update schedule");
-				t.printStackTrace();
+				log(t);
 			}
 		}
 	}

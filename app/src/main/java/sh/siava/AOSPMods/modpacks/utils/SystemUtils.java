@@ -265,7 +265,7 @@ public class SystemUtils {
 		} catch (Throwable t) {
 			if (BuildConfig.DEBUG) {
 				log("AOSPMods Error in setting flashlight");
-				t.printStackTrace();
+				log(t);
 			}
 		}
 	}
@@ -328,7 +328,7 @@ public class SystemUtils {
 		} catch (Throwable t) {
 			if (BuildConfig.DEBUG) {
 				log("AOSPMods Error in setting flashlight");
-				t.printStackTrace();
+				log(t);
 			}
 		}
 	}
@@ -393,7 +393,7 @@ public class SystemUtils {
 				mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 			} catch (Throwable t) {
 				if (BuildConfig.DEBUG) {
-					t.printStackTrace();
+					log(t);
 				}
 			}
 		}
@@ -406,7 +406,7 @@ public class SystemUtils {
 				mPackageManager = mContext.getPackageManager();
 			} catch (Throwable t) {
 				if (BuildConfig.DEBUG) {
-					t.printStackTrace();
+					log(t);
 				}
 			}
 		}
@@ -422,7 +422,7 @@ public class SystemUtils {
 			} catch (Throwable t) {
 				if (BuildConfig.DEBUG) {
 					log("AOSPMods Error getting wifi manager");
-					t.printStackTrace();
+					log(t);
 				}
 			}
 		}
@@ -438,7 +438,7 @@ public class SystemUtils {
 			} catch (Throwable t) {
 				if (BuildConfig.DEBUG) {
 					log("AOSPMods Error getting connection manager");
-					t.printStackTrace();
+					log(t);
 				}
 			}
 		}
@@ -454,7 +454,7 @@ public class SystemUtils {
 			} catch (Throwable t) {
 				if (BuildConfig.DEBUG) {
 					log("AOSPMods Error getting power manager");
-					t.printStackTrace();
+					log(t);
 				}
 			}
 		}
@@ -469,7 +469,7 @@ public class SystemUtils {
 			} catch (Throwable t) {
 				if (BuildConfig.DEBUG) {
 					log("AOSPMods Error getting alarm manager");
-					t.printStackTrace();
+					log(t);
 				}
 			}
 		}
@@ -484,7 +484,7 @@ public class SystemUtils {
 			} catch (Throwable t) {
 				if (BuildConfig.DEBUG) {
 					log("AOSPMods Error getting telephony manager");
-					t.printStackTrace();
+					log(t);
 				}
 			}
 		}
@@ -501,7 +501,7 @@ public class SystemUtils {
 			} catch (Throwable t) {
 				if (BuildConfig.DEBUG) {
 					log("AOSPMods Error getting vibrator");
-					t.printStackTrace();
+					log(t);
 				}
 			}
 		}
@@ -518,7 +518,7 @@ public class SystemUtils {
 			} catch (Throwable t) {
 				if (BuildConfig.DEBUG) {
 					log("AOSPMods Error getting network stats");
-					t.printStackTrace();
+					log(t);
 				}
 			}
 		}
@@ -544,7 +544,7 @@ public class SystemUtils {
 			} catch (Throwable t) {
 				mCameraManager = null;
 				if (BuildConfig.DEBUG) {
-					t.printStackTrace();
+					log(t);
 				}
 			}
 		}

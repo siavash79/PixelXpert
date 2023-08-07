@@ -8,20 +8,25 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
+import android.os.Process;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
-import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 /** @noinspection ConstantValue*/
@@ -58,6 +63,8 @@ public class CustomNavGestures extends XposedModPack {
 	private static boolean FCLongSwipeEnabled = false;
 	private Object mSystemUIProxy = null;
 	private static int leftSwipeUpAction = NO_ACTION, rightSwipeUpAction = NO_ACTION, twoFingerSwipeUpAction = NO_ACTION;
+	private Object mSysUiProxy;
+	private Object currentFocusedTask = null;
 
 	public CustomNavGestures(Context context) {
 		super(context);
@@ -102,11 +109,19 @@ public class CustomNavGestures extends XposedModPack {
 		Class<?> OtherActivityInputConsumerClass = findClass("com.android.quickstep.inputconsumers.OtherActivityInputConsumer", lpparam.classLoader); //When apps are open
 		Class<?> OverviewInputConsumerClass = findClass("com.android.quickstep.inputconsumers.OverviewInputConsumer", lpparam.classLoader); //When on Home screen and Recents
 		Class<?> SystemUiProxyClass = findClass("com.android.quickstep.SystemUiProxy", lpparam.classLoader);
+		Class<?> RecentTasksListClass = findClass("com.android.quickstep.RecentTasksList", lpparam.classLoader);
 
 		WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 		Rect displayBounds = wm.getMaximumWindowMetrics().getBounds();
 		displayW = Math.min(displayBounds.width(), displayBounds.height());
 		displayH = Math.max(displayBounds.width(), displayBounds.height());
+
+		hookAllConstructors(RecentTasksListClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				mSysUiProxy = getObjectField(param.thisObject, "mSysUiProxy");
+			}
+		});
 
 		hookAllConstructors(SystemUiProxyClass, new XC_MethodHook() {
 			@Override
@@ -141,6 +156,8 @@ public class CustomNavGestures extends XposedModPack {
 
 		if (action == MotionEvent.ACTION_DOWN) //Let's get ready
 		{
+			saveFocusedTask();
+
 			FCHandled = false;
 			swipeType = SWIPE_NONE;
 
@@ -212,7 +229,25 @@ public class CustomNavGestures extends XposedModPack {
 				}
 				swipeType = SWIPE_NONE;
 			}
+
+			currentFocusedTask = null;
 		}
+	}
+
+	private void saveFocusedTask() {
+		ArrayList<?> recentTaskList = (ArrayList<?>) callMethod(
+				mSysUiProxy,
+				"getRecentTasks",
+				1,
+				(int) callMethod(Process.myUserHandle(), "getIdentifier"));
+
+		Optional<?> focusedTask = recentTaskList.stream().filter(recentTask ->
+				(boolean) getObjectField(
+						((Object[]) getObjectField(recentTask, "mTasks"))[0],
+						"isFocused"
+				)).findFirst();
+
+		currentFocusedTask = focusedTask.map(o -> ((Object[]) getObjectField(o, "mTasks"))[0]).orElse(null);
 	}
 
 	private void runAction(int action) {
@@ -272,8 +307,14 @@ public class CustomNavGestures extends XposedModPack {
 	}
 
 	private void killForeground() {
+		if(currentFocusedTask == null) return;
+
 		Toast.makeText(mContext, "App Killed", Toast.LENGTH_SHORT).show();
-		SystemUtils.killForegroundApp();
+
+		callMethod(mContext.getSystemService(Context.ACTIVITY_SERVICE),
+				"forceStopPackageAsUser",
+				((ComponentName) getObjectField(currentFocusedTask, "realActivity")).getPackageName(),
+				getObjectField(currentFocusedTask, "userId"));
 	}
 
 	private void goBack() {

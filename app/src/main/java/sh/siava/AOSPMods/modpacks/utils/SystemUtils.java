@@ -36,8 +36,6 @@ import android.telephony.TelephonyManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.topjohnwu.superuser.Shell;
-
 import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
@@ -387,10 +385,6 @@ public class SystemUtils {
 		BootLoopProtector.resetCounter(android.os.Process.myProcessName());
 
 		android.os.Process.killProcess(android.os.Process.myPid());
-	}
-	public static void killForegroundApp()
-	{
-		Shell.cmd("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
 	}
 
 	private AudioManager getAudioManager() {

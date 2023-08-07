@@ -1,6 +1,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 
+	<com.bytehamster.lib.preferencesearch.SearchPreference android:key="searchPreference" />
+
 	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
 		app:fragment="sh.siava.AOSPMods.SettingsActivity$StatusbarFragment"

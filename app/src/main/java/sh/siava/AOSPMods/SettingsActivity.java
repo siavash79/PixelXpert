@@ -18,6 +18,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.LocaleList;
 import android.view.Gravity;
 import android.view.Menu;
@@ -40,6 +41,10 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SeekBarPreference;
 
+import com.bytehamster.lib.preferencesearch.SearchConfiguration;
+import com.bytehamster.lib.preferencesearch.SearchPreference;
+import com.bytehamster.lib.preferencesearch.SearchPreferenceResult;
+import com.bytehamster.lib.preferencesearch.SearchPreferenceResultListener;
 import com.google.android.material.slider.LabelFormatter;
 import com.topjohnwu.superuser.Shell;
 
@@ -54,7 +59,7 @@ import sh.siava.AOSPMods.utils.AppUtils;
 import sh.siava.AOSPMods.utils.PrefManager;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
-public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback, SearchPreferenceResultListener {
 
 	public static final int FULL_VERSION = 0;
 	public static final int XPOSED_ONLY = 1;
@@ -69,15 +74,18 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 	public static boolean showOverlays, showFonts;
 
-	public void backButtonEnabled() {
-		ActionBar actionBar = getSupportActionBar();
+	private static FragmentManager fragmentManager;
+	private HeaderFragment headerFragment;
+
+	private static ActionBar actionBar;
+
+	public static void backButtonEnabled() {
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
 	}
 
 	public void backButtonDisabled() {
-		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(false);
 		}
@@ -98,6 +106,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 		backButtonDisabled();
 		createNotificationChannel();
+		fragmentManager = getSupportFragmentManager();
+		actionBar = getSupportActionBar();
 
 		try {
 			Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER)); //access full filesystem
@@ -128,6 +138,15 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		});
 
 		Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.color_surface_overlay));
+	}
+
+	@Override
+	public void onSearchResultClicked(@NonNull final SearchPreferenceResult result) {
+		headerFragment = new HeaderFragment();
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.settings, headerFragment).addToBackStack(null)
+				.commit();
+		new Handler(getMainLooper()).post(() -> headerFragment.onSearchResultClicked(result));
 	}
 
 	@Override
@@ -204,10 +223,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		fragment.setArguments(args);
 		fragment.setTargetFragment(caller, 0);
 		// Replace the existing Fragment with the new Fragment
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.setCustomAnimations(R.anim.fragment_fade_in, R.anim.fragment_fade_out, R.anim.fragment_fade_in, R.anim.fragment_fade_out);
-		fragmentTransaction.replace(R.id.settings, fragment).addToBackStack(null).commit();
+		replaceFragment(fragment);
 		setTitle(pref.getTitle());
 		backButtonEnabled();
 		return true;
@@ -294,6 +310,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 	@SuppressWarnings("ConstantConditions")
 	public static class HeaderFragment extends PreferenceFragmentCompat {
+		SearchPreference searchPreference;
 
 		@Override
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -316,6 +333,34 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			} catch (Throwable ignored) {
 			}
 
+			searchPreference = findPreference("searchPreference");
+			SearchConfiguration config = searchPreference.getSearchConfiguration();
+			config.setActivity((AppCompatActivity) getActivity());
+			config.setFragmentContainerViewId(R.id.settings);
+
+			config.index(R.xml.header_preferences).addBreadcrumb(requireActivity().getResources().getString(R.string.app_name));
+			config.index(R.xml.dialer_prefs).addBreadcrumb(requireActivity().getResources().getString(R.string.dialer_header));
+			config.index(R.xml.gesture_nav_prefs).addBreadcrumb(requireActivity().getResources().getString(R.string.gesturenav_header));
+			config.setBreadcrumbsEnabled(true);
+			config.setHistoryEnabled(true);
+			config.setFuzzySearchEnabled(false);
+		}
+
+		private void onSearchResultClicked(SearchPreferenceResult result) {
+			if (result.getResourceFile() == R.xml.header_preferences) {
+				searchPreference.setVisible(false);
+				scrollToPreference(result.getKey());
+				findPreference(result.getKey()).setTitle("RESULT: " + findPreference(result.getKey()).getTitle());
+			} else {
+				getPreferenceScreen().removeAll();
+				if (result.getResourceFile() == R.xml.dialer_prefs) {
+					addPreferencesFromResource(R.xml.dialer_prefs);
+				} else if (result.getResourceFile() == R.xml.gesture_nav_prefs) {
+					addPreferencesFromResource(R.xml.gesture_nav_prefs);
+				}
+				result.highlight(this);
+				backButtonEnabled();
+			}
 		}
 
 		private void updateVisibility() {
@@ -327,6 +372,12 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			super.onResume();
 			requireActivity().setTitle(requireActivity().getResources().getString(R.string.app_name));
 		}
+	}
+
+	private static void replaceFragment(Fragment fragment) {
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.setCustomAnimations(R.anim.fragment_fade_in, R.anim.fragment_fade_out, R.anim.fragment_fade_in, R.anim.fragment_fade_out);
+		fragmentTransaction.replace(R.id.settings, fragment).addToBackStack(null).commit();
 	}
 
 	@SuppressWarnings("ConstantConditions")

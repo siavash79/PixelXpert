@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods.modpacks;
 
+import android.os.Build;
+
 import java.util.ArrayList;
 
 import sh.siava.AOSPMods.modpacks.allApps.OverScrollDisabler;
@@ -111,7 +113,8 @@ public class ModPacks {
 				modPacks.add(CallVibrator.class);
 				break;
 			case Constants.SETTINGS_PACKAGE:
-				modPacks.add(AppCloneEnabler.class);
+				if(Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU)
+					modPacks.add(AppCloneEnabler.class);
 				break;
 			case Constants.DIALER_PACKAGE:
 				modPacks.add(RecordingMessage.class);

@@ -1,3 +1,6 @@
+**canary-273**  
+- Fixed QQS BrightnessSlider not loading on some A13 devices  
+  
 **canary-272**  
 - A14: Fixed kill foreground app function - Compatibility with A13 not tested yet  
   

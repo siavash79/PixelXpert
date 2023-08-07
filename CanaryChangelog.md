@@ -1,3 +1,6 @@
+**canary-272**  
+- A14: Fixed kill foreground app function - Compatibility with A13 not tested yet  
+  
 **canary-271**  
 - Fixed navigation gestures not working in recent canaries  
 - Work/Clone apps: added options to quickly switch between the profiles  

@@ -50,6 +50,7 @@ import com.topjohnwu.superuser.Shell;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -76,6 +77,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 	private static FragmentManager fragmentManager;
 	private HeaderFragment headerFragment;
+	private static final List<int[]> prefsList = new ArrayList<>();
 
 	private static ActionBar actionBar;
 
@@ -108,6 +110,26 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		createNotificationChannel();
 		fragmentManager = getSupportFragmentManager();
 		actionBar = getSupportActionBar();
+
+		prefsList.add(new int[]{R.xml.header_preferences, R.string.app_name});
+		prefsList.add(new int[]{R.xml.dialer_prefs, R.string.dialer_header});
+		prefsList.add(new int[]{R.xml.gesture_nav_prefs, R.string.gesturenav_header});
+		prefsList.add(new int[]{R.xml.hotspot_prefs, R.string.hotspot_header});
+		prefsList.add(new int[]{R.xml.lock_screen_prefs, R.string.lockscreen_header_title});
+		prefsList.add(new int[]{R.xml.lsqs_custom_text, R.string.netstat_header});
+		prefsList.add(new int[]{R.xml.misc_prefs, R.string.misc_header});
+		prefsList.add(new int[]{R.xml.nav_prefs, R.string.nav_header});
+		prefsList.add(new int[]{R.xml.own_prefs_header, R.string.own_prefs_header});
+		prefsList.add(new int[]{R.xml.packagemanger_prefs, R.string.pm_header});
+		prefsList.add(new int[]{R.xml.qs_tile_qty_prefs, R.string.qs_tile_qty_title});
+		prefsList.add(new int[]{R.xml.quicksettings_prefs, R.string.qs_panel_category_title});
+		prefsList.add(new int[]{R.xml.sbqs_network_prefs, R.string.ntsb_category_title});
+		prefsList.add(new int[]{R.xml.statusbar_batterybar_prefs, R.string.sbbb_header});
+		prefsList.add(new int[]{R.xml.statusbar_batteryicon_prefs, R.string.sbbIcon_header});
+		prefsList.add(new int[]{R.xml.statusbar_clock_prefs, R.string.sbc_header});
+		prefsList.add(new int[]{R.xml.statusbar_settings, R.string.statusbar_header});
+		prefsList.add(new int[]{R.xml.theming_prefs, R.string.qs_tile_style_title});
+		prefsList.add(new int[]{R.xml.three_button_prefs, R.string.threebutton_header_title});
 
 		try {
 			Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER)); //access full filesystem
@@ -338,9 +360,10 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			config.setActivity((AppCompatActivity) getActivity());
 			config.setFragmentContainerViewId(R.id.settings);
 
-			config.index(R.xml.header_preferences).addBreadcrumb(requireActivity().getResources().getString(R.string.app_name));
-			config.index(R.xml.dialer_prefs).addBreadcrumb(requireActivity().getResources().getString(R.string.dialer_header));
-			config.index(R.xml.gesture_nav_prefs).addBreadcrumb(requireActivity().getResources().getString(R.string.gesturenav_header));
+			for (int[] obj : prefsList) {
+				config.index(obj[0]).addBreadcrumb(requireActivity().getResources().getString(obj[1]));
+			}
+
 			config.setBreadcrumbsEnabled(true);
 			config.setHistoryEnabled(true);
 			config.setFuzzySearchEnabled(false);
@@ -353,11 +376,15 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				findPreference(result.getKey()).setTitle("RESULT: " + findPreference(result.getKey()).getTitle());
 			} else {
 				getPreferenceScreen().removeAll();
-				if (result.getResourceFile() == R.xml.dialer_prefs) {
-					addPreferencesFromResource(R.xml.dialer_prefs);
-				} else if (result.getResourceFile() == R.xml.gesture_nav_prefs) {
-					addPreferencesFromResource(R.xml.gesture_nav_prefs);
+				addPreferencesFromResource(result.getResourceFile());
+
+				for (int[] obj : prefsList) {
+					if (obj[0] == result.getResourceFile()) {
+						requireActivity().setTitle(requireActivity().getResources().getString(obj[1]));
+						break;
+					}
 				}
+
 				result.highlight(this);
 				backButtonEnabled();
 			}

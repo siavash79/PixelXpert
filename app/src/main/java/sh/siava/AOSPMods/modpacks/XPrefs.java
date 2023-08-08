@@ -44,7 +44,7 @@ public class XPrefs {
 	}
 
 	public static void setPackagePrefs(String packageName) {
-		if (Constants.SYSTEM_UI_PACKAGE.equals(packageName)) {
+		if (Constants.SYSTEM_UI_PACKAGE.equals(packageName) && !XPLauncher.isChildProcess) {
 			Overlays.setAll(false);
 		}
 	}

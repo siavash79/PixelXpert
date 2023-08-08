@@ -1,3 +1,6 @@
+**canary-274**  
+- Fixed unrestricted screenshot for work profile  
+  
 **canary-273**  
 - Fixed QQS BrightnessSlider not loading on some A13 devices  
   

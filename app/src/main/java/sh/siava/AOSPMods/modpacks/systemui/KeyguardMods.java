@@ -41,6 +41,7 @@ import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
+import sh.siava.AOSPMods.modpacks.utils.Helpers;
 import sh.siava.AOSPMods.modpacks.utils.StringFormatter;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -262,14 +263,8 @@ public class KeyguardMods extends XposedModPack {
 			}
 		});
 
-		Method updateMethod = null;
-		Method[] methods = KeyguardBottomAreaViewBinderClass.getMethods();
-		for (Method m : methods) {
-			if (m.getName().contains("updateButton")) {
-				updateMethod = m;
-				break;
-			}
-		}
+		Method updateMethod = Helpers.findFirstMethodByName(KeyguardBottomAreaViewBinderClass, "updateButton");
+
 		if (updateMethod != null) {
 			hookMethod(updateMethod, new XC_MethodHook() {
 				@Override

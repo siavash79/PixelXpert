@@ -6,7 +6,6 @@ import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 
-import android.os.FileUtils;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -16,10 +15,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.topjohnwu.superuser.Shell;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -27,7 +22,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.zip.ZipFile;
 
 import de.robv.android.xposed.XC_MethodHook;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
@@ -100,6 +94,17 @@ public class Helpers {
 			log("\t\t" + f.getName() + "-" + f.getType().getName());
 		}
 		log("End dump");
+	}
+
+	public static Method findFirstMethodByName(Class<?> targetClass, String methodName)
+	{
+		Method[] methods = targetClass.getMethods();
+		for (Method m : methods) {
+			if (m.getName().contains(methodName)) {
+				return m;
+			}
+		}
+		return null;
 	}
 
 	public static void getActiveOverlays() {

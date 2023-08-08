@@ -1,6 +1,7 @@
 package sh.siava.AOSPMods.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
@@ -8,6 +9,7 @@ import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
 import android.content.Context;
 
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -23,6 +25,7 @@ import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
+import sh.siava.AOSPMods.modpacks.utils.Helpers;
 
 @SuppressWarnings("RedundantThrows")
 public class ScreenshotManager extends XposedModPack {
@@ -44,7 +47,7 @@ public class ScreenshotManager extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+		if (!listensTo(lpparam.packageName)) return;
 
 		Class<?> ScreenshotControllerClass = findClass("com.android.systemui.screenshot.ScreenshotController", lpparam.classLoader);
 
@@ -53,6 +56,21 @@ public class ScreenshotManager extends XposedModPack {
 		{
 			CaptureArgsClass = findClass("android.view.SurfaceControl$DisplayCaptureArgs", lpparam.classLoader); //A13
 		}
+
+		Class<?> ScreenshotPolicyImplClass = findClass("com.android.systemui.screenshot.ScreenshotPolicyImpl", lpparam.classLoader);
+
+		Method isManagedProfileMethod = Helpers.findFirstMethodByName(ScreenshotPolicyImplClass, "isManagedProfile");
+		if(isManagedProfileMethod != null)
+		{
+			hookMethod(isManagedProfileMethod, new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					if(ScreenshotChordInsecure)
+						param.setResult(false);
+				}
+			});
+		}
+
 		hookAllConstructors(CaptureArgsClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {

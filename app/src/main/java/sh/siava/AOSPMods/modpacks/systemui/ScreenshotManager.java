@@ -65,7 +65,8 @@ public class ScreenshotManager extends XposedModPack {
 			hookMethod(isManagedProfileMethod, new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					param.setResult(false);
+					if(ScreenshotChordInsecure)
+						param.setResult(false);
 				}
 			});
 		}

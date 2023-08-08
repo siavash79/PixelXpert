@@ -1,70 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/power_menu_overlays_section">
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="enablePowerMenuTheme"
-            android:summaryOff="@string/restart_needed"
-            android:summaryOn="@string/power_menu_overlays_summary_on"
-            android:title="@string/power_menu_overlays_title" />
-    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/theme_customization_font_title">
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="enableCustomFonts"
-            android:summaryOff="@string/restart_needed"
-            android:summaryOn="@string/restart_needed"
-            android:title="@string/font_overlays_enable_title" />
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:search="http://schemas.android.com/apk/com.bytehamster.lib.preferencesearch">
 
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="gsans_override"
-            android:summaryOff="@string/restart_needed"
-            android:summaryOn="@string/restart_needed"
-            android:title="@string/gsans_override_title" />
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/power_menu_overlays_section"
+		search:ignore="true">
 
-        <sh.siava.AOSPMods.ui.MaterialListPreference
-            android:defaultValue="None"
-            android:entries="@array/FontsOverlayEx_names"
-            android:entryValues="@array/FontsOverlayEx"
-            android:summary="%s"
-            android:key="FontsOverlayEx"
-            android:title="@string/theme_customization_font_title" />
-    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/icons_style_title">
-        <sh.siava.AOSPMods.ui.MaterialListPreference
-            android:defaultValue="None"
-            android:entries="@array/IconPacksOverlayEx_names"
-            android:entryValues="@array/IconPacksOverlayEx"
-            android:summary="%s"
-            android:key="IconPacksOverlayEx"
-            android:title="@string/icons_style_title" />
-    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/icon_shapes_title">
-        <sh.siava.AOSPMods.ui.MaterialListPreference
-            android:defaultValue="None"
-            android:entries="@array/IconShapesOverlayEx_names"
-            android:entryValues="@array/IconShapesOverlayEx"
-            android:summary="%s"
-            android:key="IconShapesOverlayEx"
-            android:title="@string/icon_shapes_title" />
-    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/signal_icons_theme_title">
-        <sh.siava.AOSPMods.ui.MaterialListPreference
-            android:defaultValue="None"
-            android:entries="@array/SignalIconsOverlayEx_names"
-            android:entryValues="@array/SignalIconsOverlayEx"
-            android:summary="%s"
-            android:key="SignalIconsOverlayEx"
-            android:title="@string/signal_icons_theme_title" />
-    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/dt_styles_category">
-        <sh.siava.AOSPMods.ui.MaterialListPreference
-            android:defaultValue="None"
-            android:entries="@array/DTStylesOverlayEx_names"
-            android:entryValues="@array/DTStylesOverlayEx"
-            android:summary="@string/caution_unstable"
-            android:key="DTStylesOverlayEx"
-            android:title="@string/dt_styles" />
-    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="enablePowerMenuTheme"
+			android:summaryOff="@string/restart_needed"
+			android:summaryOn="@string/power_menu_overlays_summary_on"
+			android:title="@string/power_menu_overlays_title" />
+
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/theme_customization_font_title"
+		search:ignore="true">
+
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="enableCustomFonts"
+			android:summaryOff="@string/restart_needed"
+			android:summaryOn="@string/restart_needed"
+			android:title="@string/font_overlays_enable_title" />
+
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="gsans_override"
+			android:summaryOff="@string/restart_needed"
+			android:summaryOn="@string/restart_needed"
+			android:title="@string/gsans_override_title" />
+
+		<sh.siava.AOSPMods.ui.MaterialListPreference
+			android:defaultValue="None"
+			android:entries="@array/FontsOverlayEx_names"
+			android:entryValues="@array/FontsOverlayEx"
+			android:key="FontsOverlayEx"
+			android:summary="%s"
+			android:title="@string/theme_customization_font_title" />
+
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/icons_style_title"
+		search:ignore="true">
+
+		<sh.siava.AOSPMods.ui.MaterialListPreference
+			android:defaultValue="None"
+			android:entries="@array/IconPacksOverlayEx_names"
+			android:entryValues="@array/IconPacksOverlayEx"
+			android:key="IconPacksOverlayEx"
+			android:summary="%s"
+			android:title="@string/icons_style_title" />
+
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/icon_shapes_title"
+		search:ignore="true">
+
+		<sh.siava.AOSPMods.ui.MaterialListPreference
+			android:defaultValue="None"
+			android:entries="@array/IconShapesOverlayEx_names"
+			android:entryValues="@array/IconShapesOverlayEx"
+			android:key="IconShapesOverlayEx"
+			android:summary="%s"
+			android:title="@string/icon_shapes_title" />
+
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/signal_icons_theme_title"
+		search:ignore="true">
+
+		<sh.siava.AOSPMods.ui.MaterialListPreference
+			android:defaultValue="None"
+			android:entries="@array/SignalIconsOverlayEx_names"
+			android:entryValues="@array/SignalIconsOverlayEx"
+			android:key="SignalIconsOverlayEx"
+			android:summary="%s"
+			android:title="@string/signal_icons_theme_title" />
+
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/dt_styles_category"
+		search:ignore="true">
+
+		<sh.siava.AOSPMods.ui.MaterialListPreference
+			android:defaultValue="None"
+			android:entries="@array/DTStylesOverlayEx_names"
+			android:entryValues="@array/DTStylesOverlayEx"
+			android:key="DTStylesOverlayEx"
+			android:summary="@string/caution_unstable"
+			android:title="@string/dt_styles" />
+
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

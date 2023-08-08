@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:search="http://schemas.android.com/apk/com.bytehamster.lib.preferencesearch"
 	android:visibility="visible">
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:layout="@layout/custom_preference_category"
-		android:title="@string/ls_general_options">
+		android:title="@string/ls_general_options"
+		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
@@ -81,7 +83,8 @@
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:layout="@layout/custom_preference_category"
-		android:title="@string/keyguard_bottom_category">
+		android:title="@string/keyguard_bottom_category"
+		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
@@ -126,7 +129,8 @@
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:layout="@layout/custom_preference_category"
-		android:title="@string/custom_text_category">
+		android:title="@string/custom_text_category"
+		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
@@ -134,12 +138,14 @@
 			android:title="@string/configure_carrier_text"
 			app:summaryOff="@string/carrier_text_mod_disabled"
 			app:summaryOn="@string/carrier_text_mod_enabled" />
+
 		<sh.siava.AOSPMods.ui.MaterialEditTextPreference
 			android:dialogLayout="@layout/string_formatter_manual"
 			android:key="carrierTextValue"
 			android:selectAllOnFocus="true"
 			android:singleLine="true"
 			android:title="@string/carrier_text_value" />
+
 		<sh.siava.AOSPMods.ui.MaterialEditTextPreference
 			android:dialogLayout="@layout/string_formatter_manual"
 			android:key="KGMiddleCustomText"

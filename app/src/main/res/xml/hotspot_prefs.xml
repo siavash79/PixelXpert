@@ -12,25 +12,19 @@
 	<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
 		android:key="hotSpotTimeoutSecs"
 		android:title="@string/hotspot_inactivity_timeout_title"
-
 		app:tickInterval="60"
-
 		app:valueCount="1"
 		app:minVal="0"
 		app:maxVal="7200"
-
 		app:defaultValue="0" />
 
 	<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
 		android:key="hotSpotMaxClients"
 		android:title="@string/hotspot_max_client_title"
-
 		app:tickInterval="1"
-
 		app:valueCount="1"
 		app:minVal="0"
 		app:maxVal="15"
-
 		app:defaultValue="0" />
 
 </PreferenceScreen>

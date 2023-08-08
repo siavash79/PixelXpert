@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory
-        android:title="@string/modify_3button_title"
-        android:summary="@string/sysui_restart_needed">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:search="http://schemas.android.com/apk/com.bytehamster.lib.preferencesearch">
 
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="ThreeButtonLayoutMod"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/modify_3button_title" />
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:summary="@string/sysui_restart_needed"
+		android:title="@string/modify_3button_title"
+		search:ignore="true">
 
-        <sh.siava.AOSPMods.ui.MaterialListPreference
-            android:defaultValue="back"
-            android:entries="@array/three_button_nav_buttons"
-            android:entryValues="@array/three_button_nav_buttons"
-            android:summary="%s"
-            android:key="ThreeButtonLeft"
-            android:title="@string/three_button_left_title" />
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="ThreeButtonLayoutMod"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/modify_3button_title" />
 
-        <sh.siava.AOSPMods.ui.MaterialListPreference
-            android:defaultValue="home"
-            android:entries="@array/three_button_nav_buttons"
-            android:entryValues="@array/three_button_nav_buttons"
-            android:summary="%s"
-            android:key="ThreeButtonCenter"
-            android:title="@string/three_button_center_title" />
+		<sh.siava.AOSPMods.ui.MaterialListPreference
+			android:defaultValue="back"
+			android:entries="@array/three_button_nav_buttons"
+			android:entryValues="@array/three_button_nav_buttons"
+			android:key="ThreeButtonLeft"
+			android:summary="%s"
+			android:title="@string/three_button_left_title" />
 
-        <sh.siava.AOSPMods.ui.MaterialListPreference
-            android:defaultValue="recent"
-            android:entries="@array/three_button_nav_buttons"
-            android:entryValues="@array/three_button_nav_buttons"
-            android:summary="%s"
-            android:key="ThreeButtonRight"
-            android:title="@string/three_button_right_title" />
+		<sh.siava.AOSPMods.ui.MaterialListPreference
+			android:defaultValue="home"
+			android:entries="@array/three_button_nav_buttons"
+			android:entryValues="@array/three_button_nav_buttons"
+			android:key="ThreeButtonCenter"
+			android:summary="%s"
+			android:title="@string/three_button_center_title" />
 
-    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+		<sh.siava.AOSPMods.ui.MaterialListPreference
+			android:defaultValue="recent"
+			android:entries="@array/three_button_nav_buttons"
+			android:entryValues="@array/three_button_nav_buttons"
+			android:key="ThreeButtonRight"
+			android:summary="%s"
+			android:title="@string/three_button_right_title" />
+
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

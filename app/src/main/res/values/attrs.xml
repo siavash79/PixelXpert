@@ -2,8 +2,12 @@
 <resources>
 	<!-- TimePickerPreference -->
 	<declare-styleable name="MaterialTimePickerPreference">
-		<attr
-			name="presetValue"
-			format="string" />
+		<attr name="presetValue" format="string" />
+	</declare-styleable>
+	<!-- SearchPreference -->
+	<declare-styleable name="SearchPreference">
+		<attr name="textHint" format="string" />
+		<attr name="textNoResults" format="string" />
+		<attr name="textClearHistory" format="string" />
 	</declare-styleable>
 </resources>

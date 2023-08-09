@@ -1,8 +1,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:search="http://schemas.android.com/apk/com.bytehamster.lib.preferencesearch">
+	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch">
 
-	<com.bytehamster.lib.preferencesearch.SearchPreference android:key="searchPreference" />
+	<sh.siava.AOSPMods.ui.preferencesearch.SearchPreference android:key="searchPreference" />
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
@@ -40,7 +40,7 @@
 		android:layout="@layout/custom_preference"
 		app:fragment="sh.siava.AOSPMods.SettingsActivity$NavFragment"
 		app:icon="@drawable/ic_settings_navigation"
-		app:key="misc_header"
+		app:key="nav_header"
 		app:title="@string/nav_header"
 		search:ignore="true" />
 
@@ -56,7 +56,7 @@
 		android:layout="@layout/custom_preference"
 		app:fragment="sh.siava.AOSPMods.SettingsActivity$HotSpotFragment"
 		app:icon="@drawable/ic_settings_wifi_hotspot"
-		app:key="own_header"
+		app:key="hotspot_header"
 		app:title="@string/hotspot_header"
 		search:ignore="true" />
 

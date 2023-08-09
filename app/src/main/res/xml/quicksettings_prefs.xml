@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:search="http://schemas.android.com/apk/com.bytehamster.lib.preferencesearch"
+	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch"
 	android:visibility="visible">
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
@@ -203,7 +203,7 @@
 			android:title="@string/ntsb_enabled_title" />
 
 		<sh.siava.AOSPMods.ui.MaterialPreference
-			app:fragment="sh.siava.AOSPMods.SettingsActivity$networkFragment"
+			app:fragment="sh.siava.AOSPMods.SettingsActivity$NetworkFragment"
 			app:key="network_settings_header"
 			app:title="@string/network_settings_pref" />
 

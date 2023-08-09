@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods;
 
+import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 import static java.lang.Math.round;
 
 import android.animation.Animator;
@@ -37,7 +38,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 import androidx.preference.SeekBarPreference;
 
 import com.google.android.material.slider.LabelFormatter;
@@ -45,13 +45,13 @@ import com.topjohnwu.superuser.Shell;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 import sh.siava.AOSPMods.utils.AppUtils;
 import sh.siava.AOSPMods.utils.PrefManager;
+import sh.siava.AOSPMods.utils.PreferenceHelper;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
@@ -109,6 +109,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		showOverlays = moduleType == FULL_VERSION;
 		showFonts = moduleType == FULL_VERSION;
 
+		PreferenceHelper.init(getDefaultSharedPreferences(createDeviceProtectedStorageContext()));
+
 		setContentView(R.layout.settings_activity);
 
 		if (savedInstanceState == null) {
@@ -132,7 +134,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 	@Override
 	protected void attachBaseContext(Context newBase) {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(newBase.createDeviceProtectedStorageContext());
+		SharedPreferences prefs = getDefaultSharedPreferences(newBase.createDeviceProtectedStorageContext());
 
 		String localeCode = prefs.getString("appLanguage", "");
 
@@ -215,7 +217,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
+		SharedPreferences prefs = getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
 
 		int itemID = item.getItemId();
 
@@ -245,7 +247,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		//showing an alert before taking action
 		new AlertDialog.Builder(this).setTitle(R.string.nestat_caution_title).setMessage(R.string.nestat_caution_text).setPositiveButton(R.string.netstat_caution_yes, (dialogInterface, i) -> {
 			try {
-				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
+				SharedPreferences prefs = getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
 				boolean currentStatus = prefs.getBoolean("NetworkStatsEnabled", false);
 
 				prefs.edit().putBoolean("NetworkStatsEnabled", false).commit();
@@ -274,7 +276,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 		if (data == null) return; //user hit cancel. Nothing to do
 
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
+		SharedPreferences prefs = getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
 		switch (requestCode) {
 			case REQUEST_IMPORT:
 				try {
@@ -319,7 +321,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		}
 
 		private void updateVisibility() {
-			findPreference("theming_header").setVisible(showOverlays);
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
@@ -331,36 +333,19 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 	@SuppressWarnings("ConstantConditions")
 	public static class NavFragment extends PreferenceFragmentCompat {
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> updateVisibility(sharedPreferences);
+		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> updateVisibility();
 
 		@Override
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.nav_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-			updateVisibility(prefs);
+			getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext())
+					.registerOnSharedPreferenceChangeListener(listener);
+			updateVisibility();
 		}
 
-		private void updateVisibility(SharedPreferences prefs) {
-			try {
-				findPreference("HideNavbarOverlay").setVisible(showOverlays);
-
-				int taskBarMode = Integer.parseInt(prefs.getString("taskBarMode", "0"));
-				findPreference("TaskbarAsRecents").setVisible(taskBarMode == 1);
-				findPreference("taskbarHeightOverride").setVisible(taskBarMode == 1);
-				findPreference("TaskbarRadiusOverride").setVisible(taskBarMode == 1);
-//				findPreference("TaskbarHideAllAppsIcon").setVisible(taskBarMode == 1);
-
-				float taskbarHeightOverride = 100f;
-				try {
-					taskbarHeightOverride = RangeSliderPreference.getValues(prefs, "taskbarHeightOverride", 100f).get(0);
-				} catch (Throwable ignored) {
-				}
-				findPreference("taskbarHeightOverride").setSummary(taskbarHeightOverride != 100f ? taskbarHeightOverride + "%" : getString(R.string.word_default));
-
-			} catch (Throwable ignored) {
-			}
+		private void updateVisibility() {
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
@@ -378,30 +363,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 		@SuppressLint("ApplySharedPref")
 		private void updateFontPrefs(SharedPreferences sharedPreferences) {
-			try {
-
-				boolean customFontsEnabled = sharedPreferences.getBoolean("enableCustomFonts", false);
-
-				if (!customFontsEnabled) {
-					sharedPreferences.edit().putString("FontsOverlayEx", "None").commit();
-				}
-
-				boolean gSansOverride = sharedPreferences.getBoolean("gsans_override", false);
-				boolean FontsOverlayExEnabled = !sharedPreferences.getString("FontsOverlayEx", "None").equals("None");
-
-				findPreference("gsans_override").setVisible(customFontsEnabled && !FontsOverlayExEnabled);
-				findPreference("FontsOverlayEx").setVisible(customFontsEnabled && !gSansOverride);
-
-			} catch (Exception ignored) {
-			}
-
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.theming_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			updateFontPrefs(prefs);
 			prefs.registerOnSharedPreferenceChangeListener(listener);
 		}
@@ -422,30 +391,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.lock_screen_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			updateVisibility(prefs);
 			prefs.registerOnSharedPreferenceChangeListener(listener);
 		}
 
 		private void updateVisibility(SharedPreferences sharedPreferences) {
-			try {
-				findPreference("carrierTextValue").setVisible(sharedPreferences.getBoolean("carrierTextMod", false));
-
-				float KeyGuardDimAmount = -1;
-				try {
-					KeyGuardDimAmount = RangeSliderPreference.getValues(sharedPreferences, "KeyGuardDimAmount", -1).get(0);
-				} catch (Exception ignored) {
-				}
-				findPreference("KeyGuardDimAmount").setSummary(KeyGuardDimAmount < 0 ? getString(R.string.word_default) : KeyGuardDimAmount + "%");
-
-				boolean lockScreenShortcutModsVisible = Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
-
-				findPreference("leftKeyguardShortcut").setVisible(lockScreenShortcutModsVisible);
-				findPreference("leftKeyguardShortcutLongClick").setVisible(lockScreenShortcutModsVisible);
-				findPreference("rightKeyguardShortcut").setVisible(lockScreenShortcutModsVisible);
-				findPreference("rightKeyguardShortcutLongClick").setVisible(lockScreenShortcutModsVisible);
-			} catch (Throwable ignored) {
-			}
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
@@ -462,50 +414,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.statusbar_batterybar_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			prefs.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> updateVisibility(prefs));
 			updateVisibility(prefs);
 		}
 
 		private void updateVisibility(SharedPreferences prefs) {
-			try {
-				boolean critZero = false, warnZero = false;
-				List<Float> BBarLevels = RangeSliderPreference.getValues(prefs, "batteryWarningRange", 0);
 
-				if (!BBarLevels.isEmpty()) {
-					critZero = BBarLevels.get(0) == 0;
-					warnZero = BBarLevels.get(1) == 0;
-				}
-				boolean bBarEnabled = prefs.getBoolean("BBarEnabled", false);
-				boolean isColorful = prefs.getBoolean("BBarColorful", false);
-				boolean transitColors = prefs.getBoolean("BBarTransitColors", false);
-
-				findPreference("batteryFastChargingColor").setVisible(prefs.getBoolean("indicateFastCharging", false) && bBarEnabled);
-				findPreference("batteryChargingColor").setVisible(prefs.getBoolean("indicateCharging", false) && bBarEnabled);
-				findPreference("batteryWarningColor").setVisible(!warnZero && bBarEnabled);
-				findPreference("batteryCriticalColor").setVisible((!critZero || transitColors) && bBarEnabled && findPreference("batteryWarningColor").isVisible());
-
-				findPreference("BBarTransitColors").setEnabled(bBarEnabled && !isColorful);
-				findPreference("BBarColorful").setEnabled(bBarEnabled);
-
-				findPreference("BBarTransitColors").setVisible(bBarEnabled);
-				findPreference("BBarColorful").setVisible(bBarEnabled);
-
-				findPreference("BBarTransitColors").setEnabled(!isColorful);
-				findPreference("BBarColorful").setEnabled(!transitColors);
-
-				findPreference("BBOnlyWhileCharging").setVisible(bBarEnabled);
-				findPreference("BBOnBottom").setVisible(bBarEnabled);
-				findPreference("BBOpacity").setVisible(bBarEnabled);
-				findPreference("BBOpacity").setSummary(prefs.getInt("BBOpacity", 100) + "%");
-				findPreference("BBarHeight").setVisible(bBarEnabled);
-				findPreference("BBarHeight").setSummary(prefs.getInt("BBarHeight", 50) + "%");
-				findPreference("BBSetCentered").setVisible(bBarEnabled);
-				findPreference("indicateCharging").setVisible(bBarEnabled);
-				findPreference("indicateFastCharging").setVisible(bBarEnabled);
-				findPreference("batteryWarningRange").setVisible(bBarEnabled);
-			} catch (Exception ignore) {
-			}
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
@@ -523,22 +439,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.sbqs_network_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			prefs.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> updateVisibility(prefs));
-			updateVisibility(prefs);
+			getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext())
+					.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> updateVisibility());
+			updateVisibility();
 		}
 
-		private void updateVisibility(SharedPreferences prefs) {
-			try {
-				findPreference("networkTrafficRXTop").setVisible(prefs.getString("networkTrafficMode", "0").equals("0"));
-				findPreference("networkTrafficColorful").setVisible(!prefs.getString("networkTrafficMode", "0").equals("3"));
-				boolean colorful = prefs.getBoolean("networkTrafficColorful", true);
-				findPreference("networkTrafficDLColor").setVisible(colorful);
-				findPreference("networkTrafficULColor").setVisible(colorful);
-				findPreference("networkTrafficInterval").setSummary(prefs.getInt("networkTrafficInterval", 1) + " second(s)");
-
-			} catch (Exception ignored) {
-			}
+		private void updateVisibility() {
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
@@ -558,50 +465,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.statusbar_batteryicon_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			prefs.registerOnSharedPreferenceChangeListener(listener);
 			updateVisibility(prefs);
 		}
 
 		private void updateVisibility(SharedPreferences prefs) {
-			try {
-				findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50) * 2 + getString(R.string.battery_size_summary));
-				findPreference("BatteryIconScaleFactor").setSummary(prefs.getInt("BatteryIconScaleFactor", 50) * 2 + getString(R.string.battery_size_summary));
-
-				int style = Integer.parseInt(prefs.getString("BatteryStyle", "0"));
-
-				boolean critZero = false, warnZero = false;
-				List<Float> BIconLevels = RangeSliderPreference.getValues(prefs, "BIconbatteryWarningRange", 0);
-
-				if (!BIconLevels.isEmpty()) {
-					critZero = BIconLevels.get(0) == 0;
-					warnZero = BIconLevels.get(1) == 0;
-				}
-
-				boolean colorful = prefs.getBoolean("BIconColorful", false);
-
-				findPreference("DualToneBatteryOverlay").setVisible(style == 0 && showOverlays);
-				findPreference("BIconOpacity").setVisible(style > 0 && style < 99);
-				findPreference("BIconOpacity").setSummary(prefs.getInt("BIconOpacity", 100) + "%");
-				findPreference("BatteryIconScaleFactor").setVisible(style < 99);
-				findPreference("BatteryShowPercent").setVisible(style == 1 || style == 2);
-				findPreference("BIconindicateCharging").setVisible(style == 3);
-				findPreference("batteryIconChargingColor").setVisible(style == 3 && prefs.getBoolean("BIconindicateCharging", false));
-				findPreference("BIconindicateFastCharging").setVisible(style > 0 && style < 99);
-				findPreference("batteryIconFastChargingColor").setVisible(style > 0 && style < 99 && prefs.getBoolean("BIconindicateFastCharging", false));
-
-				findPreference("BIconColorful").setVisible(style > 0 && style < 99);
-				findPreference("BIconTransitColors").setVisible(style > 0 && style < 99);
-				findPreference("BatteryChargingAnimationEnabled").setVisible(style > 0 && style < 99);
-
-				findPreference("BIconColorful").setEnabled(!prefs.getBoolean("BIconTransitColors", false));
-				findPreference("BIconTransitColors").setEnabled(!prefs.getBoolean("BIconColorful", false));
-
-				findPreference("BIconbatteryWarningRange").setVisible(style > 0 && style < 99);
-				findPreference("BIconbatteryCriticalColor").setVisible(style > 0 && style < 99 && (colorful || !critZero));
-				findPreference("BIconbatteryWarningColor").setVisible(style > 0 && style < 99 && (colorful || !warnZero));
-			} catch (Exception ignored) {
-			}
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
@@ -620,40 +490,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.misc_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			prefs.registerOnSharedPreferenceChangeListener(listener);
 			updateVisibility(prefs);
 
 		}
 
 		private void updateVisibility(SharedPreferences prefs) {
-			try {
-				int volumeStps = prefs.getInt("volumeStps", 0);
-				findPreference("volumeStps").setSummary(String.format("%s - (%s)", volumeStps == 10 ? getString(R.string.word_default) : String.valueOf(volumeStps), getString(R.string.restart_needed)));
-
-				findPreference("CustomThemedIconsOverlay").setVisible(showOverlays);
-
-				float displayOverride = 100;
-				try {
-					displayOverride = RangeSliderPreference.getValues(prefs, "displayOverride", 100f).get(0);
-				} catch (Exception ignored) {
-				}
-
-				float headsupDecayMillis = 5000;
-				try {
-					headsupDecayMillis = RangeSliderPreference.getValues(prefs, "HeadupAutoDismissNotificationDecay", -1).get(0);
-				} catch (Exception ignored) {
-				}
-				findPreference("HeadupAutoDismissNotificationDecay").setSummary(((int) headsupDecayMillis) + " " + getString(R.string.milliseconds));
-
-				double increasedArea = Math.round(Math.abs(Math.pow(displayOverride, 2) / 100 - 100));
-
-				findPreference("displayOverride").setSummary(String.format("%s \n (%s)", displayOverride == 100 ? getString(R.string.word_default) : String.format("%s%% - %s%% %s", String.valueOf(displayOverride), String.valueOf(increasedArea), displayOverride > 100 ? getString(R.string.more_area) : getString(R.string.less_area)), getString(R.string.sysui_restart_needed)));
-
-				findPreference("ForceThemedLauncherIcons").setVisible(Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
@@ -670,7 +514,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.packagemanger_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			prefs.registerOnSharedPreferenceChangeListener(listener);
 			updateVisibility(prefs);
 
@@ -693,7 +537,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.hotspot_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			prefs.registerOnSharedPreferenceChangeListener(listener);
 			updateVisibility(prefs);
 
@@ -701,33 +545,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 		@SuppressLint("DefaultLocale")
 		private void updateVisibility(SharedPreferences prefs) {
-			try {
-				long timeout = 0;
-				try {
-					timeout = (long) (RangeSliderPreference.getValues(prefs, "hotSpotTimeoutSecs", 0).get(0) * 1L);
-				} catch (Throwable ignored) {
-				}
-
-				int clients = 0;
-				try {
-					clients = round(RangeSliderPreference.getValues(prefs, "hotSpotMaxClients", 0).get(0));
-				} catch (Throwable ignored) {
-				}
-				Duration d = Duration.ofSeconds(timeout);
-
-				findPreference("hotSpotTimeoutSecs")
-						.setSummary(
-								timeout > 0
-										? String.format("%d %s", timeout / 60, getString(R.string.minutes_word))
-										: getString(R.string.word_default));
-
-				findPreference("hotSpotMaxClients")
-						.setSummary(
-								clients > 0
-										? String.valueOf(clients)
-										: getString(R.string.word_default));
-			} catch (Throwable ignored) {
-			}
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
@@ -747,16 +565,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.statusbar_clock_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			prefs.registerOnSharedPreferenceChangeListener(listener);
 			updateVisibility(prefs);
 		}
 
 		private void updateVisibility(SharedPreferences prefs) {
-			boolean colorfullEnabled = prefs.getBoolean("SBCClockColorful", false);
-			findPreference("SBCBeforeClockColor").setVisible(colorfullEnabled);
-			findPreference("SBCClockColor").setVisible(colorfullEnabled);
-			findPreference("SBCAfterClockColor").setVisible(colorfullEnabled);
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
@@ -773,7 +588,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.three_button_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			prefs.registerOnSharedPreferenceChangeListener(listener);
 			updateVisibility(prefs);
 
@@ -782,13 +597,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
 
 		private void updateVisibility(SharedPreferences prefs) {
-			try {
-				boolean ThreeButtonLayoutMod = prefs.getBoolean("ThreeButtonLayoutMod", false);
-				findPreference("ThreeButtonLeft").setVisible(ThreeButtonLayoutMod);
-				findPreference("ThreeButtonCenter").setVisible(ThreeButtonLayoutMod);
-				findPreference("ThreeButtonRight").setVisible(ThreeButtonLayoutMod);
-			} catch (Exception ignored) {
-			}
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
@@ -801,32 +610,15 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 	@SuppressWarnings("ConstantConditions")
 	public static class StatusbarFragment extends PreferenceFragmentCompat {
-
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> setVisibility(sharedPreferences);
-
-		private void setVisibility(SharedPreferences sharedPreferences) {
-			try {
-				boolean networkOnSBEnabled = sharedPreferences.getBoolean("networkOnSBEnabled", false);
-				findPreference("network_settings_header").setVisible(networkOnSBEnabled);
-				findPreference("networkTrafficPosition").setVisible(networkOnSBEnabled);
-
-				int statusbarHeightFactor = sharedPreferences.getInt("statusbarHeightFactor", 100);
-				findPreference("statusbarHeightFactor").setSummary(statusbarHeightFactor == 100 ? getResources().getString(R.string.word_default) : statusbarHeightFactor + "%");
-
-				findPreference("systemIconSortPlan").setVisible(sharedPreferences.getBoolean("systemIconsMultiRow", false));
-
-				findPreference("UnreadMessagesNumberOverlay").setVisible(showOverlays);
-			} catch (Exception ignored) {
-			}
-		}
-
 		@Override
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.statusbar_settings, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			setVisibility(prefs);
-			prefs.registerOnSharedPreferenceChangeListener(listener);
+
+			PreferenceFragmentCompat fragmentCompat = this;
+			getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext())
+					.registerOnSharedPreferenceChangeListener((sharedPreferences, s) -> PreferenceHelper.setupAllPreferences(fragmentCompat));
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
@@ -840,38 +632,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibililty(sharedPreferences);
 
 		private void updateVisibililty(SharedPreferences sharedPreferences) {
-			try {
-				int QSRowQty = sharedPreferences.getInt("QSRowQty", 0);
-				findPreference("QSRowQty").setSummary((QSRowQty == 0) ? getResources().getString(R.string.word_default) : String.valueOf(QSRowQty));
-
-				int QSColQty = sharedPreferences.getInt("QSColQty", 1);
-				findPreference("QSColQty").setSummary((QSColQty == 1) ? getResources().getString(R.string.word_default) : String.valueOf(QSColQty));
-
-				int QQSTileQty = sharedPreferences.getInt("QQSTileQty", 4);
-				findPreference("QQSTileQty").setSummary((QQSTileQty == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQty));
-
-				int QSRowQtyL = sharedPreferences.getInt("QSRowQtyL", 0);
-				findPreference("QSRowQtyL").setSummary((QSRowQtyL == 0) ? getResources().getString(R.string.word_default) : String.valueOf(QSRowQtyL));
-
-				((SeekBarPreference) findPreference("QSColQtyL")).setMax(QSColQty);
-
-				if (sharedPreferences.getInt("QSColQtyL", 1) > QSColQty) {
-					sharedPreferences.edit().putInt("QSColQtyL", QSColQty).apply();
-				}
-				int QSColQtyL = sharedPreferences.getInt("QSColQtyL", 1);
-				findPreference("QSColQtyL").setSummary((QSColQtyL == 1) ? getResources().getString(R.string.word_default) : String.valueOf(QSColQtyL));
-
-				int QQSTileQtyL = sharedPreferences.getInt("QQSTileQtyL", 4);
-				findPreference("QQSTileQtyL").setSummary((QQSTileQtyL == 4) ? getResources().getString(R.string.word_default) : String.valueOf(QQSTileQtyL));
-			} catch (Throwable ignored) {
-			}
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
 		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.qs_tile_qty_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			updateVisibililty(prefs);
 
 			prefs.registerOnSharedPreferenceChangeListener(listener);
@@ -894,14 +662,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		@SuppressLint("RtlHardcoded")
 		private void updateVisibililty(SharedPreferences sharedPreferences) {
 			try {
-				boolean QSPullodwnEnabled = sharedPreferences.getBoolean("QSPullodwnEnabled", false);
-
 				int displayWidth = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
-
-				findPreference("wifi_cell").setVisible(sharedPreferences.getBoolean("InternetTileModEnabled", true));
-
-				findPreference("QSPulldownPercent").setVisible(QSPullodwnEnabled);
-				findPreference("QSPulldownSide").setVisible(QSPullodwnEnabled);
 
 				findPreference("BSThickTrackOverlay").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false) && showOverlays);
 				findPreference("BrightnessSlierOnBottom").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
@@ -963,7 +724,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.quicksettings_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			updateVisibililty(prefs);
 
 			prefs.registerOnSharedPreferenceChangeListener(listener);
@@ -1081,7 +842,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.gesture_nav_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			updateVisibility(prefs);
 
 			prefs.registerOnSharedPreferenceChangeListener(listener);
@@ -1182,25 +943,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
 
 		private void updateVisibility(SharedPreferences sharedPreferences) {
-			try {
-				boolean networkTrafficColorful = sharedPreferences.getBoolean("networkStatsColorful", false);
-				String NetStartBase = sharedPreferences.getString("NetworkStatsStartBase", "0");
-
-				findPreference("NetworkStatsStartTime").setVisible(NetStartBase.equals("0"));
-				findPreference("NetworkStatsWeekStart").setVisible(NetStartBase.equals("1"));
-				findPreference("NetworkStatsMonthStart").setVisible(NetStartBase.equals("2"));
-				findPreference("networkStatDLColor").setVisible(networkTrafficColorful);
-				findPreference("networkStatULColor").setVisible(networkTrafficColorful);
-
-			} catch (Exception ignored) {
-			}
+			PreferenceHelper.setupAllPreferences(this);
 		}
 
 		@Override
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.lsqs_custom_text, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			updateVisibility(prefs);
 
 			prefs.registerOnSharedPreferenceChangeListener(listener);
@@ -1228,7 +978,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.dialer_prefs, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 			updateVisibility(prefs);
 
 			prefs.registerOnSharedPreferenceChangeListener(listener);
@@ -1294,7 +1044,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setStorageDeviceProtected();
 			setPreferencesFromResource(R.xml.own_prefs_header, rootKey);
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
 
 
 			prefs.registerOnSharedPreferenceChangeListener(listener);

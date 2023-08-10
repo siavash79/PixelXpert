@@ -37,7 +37,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: "32.0.0"
+          BUILD_TOOLS_VERSION: "33.0.0"
 
       - uses: actions/upload-artifact@v2
         name: Upload APK file

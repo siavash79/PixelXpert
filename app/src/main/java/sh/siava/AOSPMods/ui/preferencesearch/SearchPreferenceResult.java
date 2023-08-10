@@ -112,8 +112,32 @@ public class SearchPreferenceResult {
 	 */
 	private static void highlightFallback(PreferenceFragmentCompat prefsFragment, final Preference prefResult) {
 		prefsFragment.scrollToPreference(prefResult);
-		prefResult.setTitle(prefResult.getTitle() + " \uD83D\uDD0D");
-		new Handler(Looper.getMainLooper()).postDelayed(() -> prefResult.setTitle(Objects.requireNonNull(prefResult.getTitle()).toString().replace(" \uD83D\uDD0D", "")), 3000);
+		new Handler(Looper.getMainLooper()).postDelayed(() -> {
+			try {
+				final RecyclerView recyclerView = prefsFragment.getListView();
+				final RecyclerView.Adapter<?> adapter = recyclerView.getAdapter();
+
+				if (adapter instanceof PreferenceGroup.PreferencePositionCallback) {
+					PreferenceGroup.PreferencePositionCallback callback = (PreferenceGroup.PreferencePositionCallback) adapter;
+					final int position = callback.getPreferenceAdapterPosition(prefResult);
+
+					if (position != RecyclerView.NO_POSITION) {
+						recyclerView.scrollToPosition(position);
+						recyclerView.postDelayed(() -> {
+							RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
+							if (holder != null) {
+								Drawable background = holder.itemView.getBackground();
+								if (background instanceof RippleDrawable) {
+									forceRippleAnimation((RippleDrawable) background);
+								}
+							}
+						}, 200);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}, 400);
 	}
 
 	protected static void forceRippleAnimation(RippleDrawable background) {

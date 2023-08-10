@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import sh.siava.AOSPMods.R;
 
@@ -55,7 +56,7 @@ class SearchPreferenceAdapter extends RecyclerView.Adapter<SearchPreferenceAdapt
 			PreferenceItem item = (PreferenceItem) listItem;
 			holder.title.setText(item.title);
 
-			if (TextUtils.isEmpty(item.summary)) {
+			if (TextUtils.isEmpty(item.summary) || Objects.equals(item.summary, "%s")) {
 				holder.summary.setVisibility(View.GONE);
 			} else {
 				holder.summary.setVisibility(View.VISIBLE);

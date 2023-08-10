@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:clipToPadding="false"
-	android:padding="8dp">
+	android:paddingStart="@dimen/ui_container_margin_side"
+	android:paddingTop="12dp"
+	android:paddingEnd="@dimen/ui_container_margin_side"
+	android:paddingBottom="6dp">
 
 	<include layout="@layout/searchpreference_searchbar" />
 

@@ -16,11 +16,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -115,7 +115,7 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 		viewHolder.searchView.addTextChangedListener(textWatcher);
 
 		if (!searchConfiguration.isSearchBarEnabled()) {
-			viewHolder.cardView.setVisibility(View.GONE);
+			viewHolder.searchContainer.setVisibility(View.GONE);
 		}
 
 		if (searchTermPreset != null) {
@@ -280,7 +280,7 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 		private final EditText searchView;
 		private final RecyclerView recyclerView;
 		private final TextView noResults;
-		private final CardView cardView;
+		private final LinearLayout searchContainer;
 
 		SearchViewHolder(View root) {
 			searchView = root.findViewById(R.id.search);
@@ -288,7 +288,7 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 			recyclerView = root.findViewById(R.id.list);
 			moreButton = root.findViewById(R.id.more);
 			noResults = root.findViewById(R.id.no_results);
-			cardView = root.findViewById(R.id.search_card);
+			searchContainer = root.findViewById(R.id.search_card);
 		}
 	}
 }

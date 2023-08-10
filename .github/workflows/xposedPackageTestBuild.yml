@@ -1,4 +1,4 @@
-name: Make Test Package
+name: Make Xposed Test Package
 
 on:
   workflow_dispatch

@@ -2,6 +2,29 @@ package sh.siava.AOSPMods.ui.preferencesearch;
 
 /*
  * https://github.com/ByteHamster/SearchPreference
+ *
+ * MIT License
+ *
+ * Copyright (c) 2018 ByteHamster
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
  */
 
 import android.content.Context;
@@ -45,8 +68,6 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 	private SearchViewHolder viewHolder;
 	private SearchConfiguration searchConfiguration;
 	private SearchPreferenceAdapter adapter;
-	private HistoryClickListener historyClickListener;
-	private CharSequence searchTermPreset = null;
 	private final TextWatcher textWatcher = new TextWatcher() {
 		@Override
 		public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -62,6 +83,8 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 			viewHolder.clearButton.setVisibility(editable.toString().isEmpty() ? View.GONE : View.VISIBLE);
 		}
 	};
+	private HistoryClickListener historyClickListener;
+	private CharSequence searchTermPreset = null;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {

@@ -11,10 +11,10 @@ jobs:
       - run: git clone -b ${GITHUB_REF_NAME} --recurse-submodules https://github.com/siavash79/AOSPMods.git .
         name: Grab source code
         
-      - name: Setup JDK 17
+      - name: Setup JDK 18
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '18'
           distribution: 'temurin'
           cache: gradle
 

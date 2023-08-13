@@ -46,7 +46,9 @@ public abstract class ControlledPreferenceFragmentCompat extends PreferenceFragm
 	@Override
 	public void onDestroy()
 	{
-		mPreferences.unregisterOnSharedPreferenceChangeListener(changeListener);
+		if (mPreferences != null) {
+			mPreferences.unregisterOnSharedPreferenceChangeListener(changeListener);
+		}
 		super.onDestroy();
 	}
 

@@ -204,7 +204,7 @@
 
 		<sh.siava.AOSPMods.ui.MaterialPreference
 			app:fragment="sh.siava.AOSPMods.SettingsActivity$NetworkFragment"
-			app:key="network_settings_header"
+			app:key="network_settings_header_qs"
 			app:title="@string/network_settings_pref" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>

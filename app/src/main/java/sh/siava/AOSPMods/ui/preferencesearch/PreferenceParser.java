@@ -90,9 +90,10 @@ class PreferenceParser {
 					result.resId = item.getResId();
 
 					try {
-						if (!PreferenceHelper.isVisible(result.key) && !bannedKeys.contains(result.key))
-							bannedKeys.add(result.key);
-						else
+						if (!PreferenceHelper.isVisible(result.key)) {
+							if (!bannedKeys.contains(result.key))
+								bannedKeys.add(result.key);
+						} else
 							bannedKeys.remove(result.key);
 					} catch (Exception ignored) {
 					}

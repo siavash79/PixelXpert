@@ -27,7 +27,7 @@
 	<EditText
 		android:id="@+id/search"
 		android:layout_width="0dip"
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:layout_marginStart="8dp"
 		android:layout_weight="1"
 		android:autofillHints="preferenceSearch"

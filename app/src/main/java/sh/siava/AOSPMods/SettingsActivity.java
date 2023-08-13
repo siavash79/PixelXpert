@@ -17,6 +17,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.LocaleList;
 import android.view.Gravity;
 import android.view.Menu;
@@ -39,30 +40,41 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.topjohnwu.superuser.Shell;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+import sh.siava.AOSPMods.ui.preferencesearch.SearchConfiguration;
+import sh.siava.AOSPMods.ui.preferencesearch.SearchPreference;
+import sh.siava.AOSPMods.ui.preferencesearch.SearchPreferenceResult;
+import sh.siava.AOSPMods.ui.preferencesearch.SearchPreferenceResultListener;
 import sh.siava.AOSPMods.utils.AppUtils;
 import sh.siava.AOSPMods.utils.ControlledPreferenceFragmentCompat;
 import sh.siava.AOSPMods.utils.PrefManager;
 import sh.siava.AOSPMods.utils.PreferenceHelper;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
-public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback, SearchPreferenceResultListener {
 	private static final int REQUEST_IMPORT = 7;
 	private static final int REQUEST_EXPORT = 9;
 	private static final String TITLE_TAG = "settingsActivityTitle";
 	Context DPContext;
-	public void backButtonEnabled() {
-		ActionBar actionBar = getSupportActionBar();
+
+	private static FragmentManager fragmentManager;
+	private HeaderFragment headerFragment;
+	private static final List<Object[]> prefsList = new ArrayList<>();
+
+	private static ActionBar actionBar;
+
+	public static void backButtonEnabled() {
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
 	}
 
 	public void backButtonDisabled() {
-		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(false);
 		}
@@ -83,6 +95,28 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 		backButtonDisabled();
 		createNotificationChannel();
+		fragmentManager = getSupportFragmentManager();
+		actionBar = getSupportActionBar();
+
+		prefsList.add(new Object[]{R.xml.header_preferences, R.string.app_name, new HeaderFragment()});
+		prefsList.add(new Object[]{R.xml.dialer_prefs, R.string.dialer_header, new DialerFragment()});
+		prefsList.add(new Object[]{R.xml.gesture_nav_prefs, R.string.gesturenav_header, new GestureNavFragment()});
+		prefsList.add(new Object[]{R.xml.hotspot_prefs, R.string.hotspot_header, new HotSpotFragment()});
+		prefsList.add(new Object[]{R.xml.lock_screen_prefs, R.string.lockscreen_header_title, new LockScreenFragment()});
+		prefsList.add(new Object[]{R.xml.lsqs_custom_text, R.string.netstat_header, new NetworkStatFragment()});
+		prefsList.add(new Object[]{R.xml.misc_prefs, R.string.misc_header, new MiscFragment()});
+		prefsList.add(new Object[]{R.xml.nav_prefs, R.string.nav_header, new NavFragment()});
+		prefsList.add(new Object[]{R.xml.own_prefs_header, R.string.own_prefs_header, new OwnPrefsFragment()});
+		prefsList.add(new Object[]{R.xml.packagemanger_prefs, R.string.pm_header, new PackageManagerFragment()});
+		prefsList.add(new Object[]{R.xml.qs_tile_qty_prefs, R.string.qs_tile_qty_title, new QSTileQtyFragment()});
+		prefsList.add(new Object[]{R.xml.quicksettings_prefs, R.string.qs_panel_category_title, new QuickSettingsFragment()});
+		prefsList.add(new Object[]{R.xml.sbqs_network_prefs, R.string.ntsb_category_title, new NetworkFragment()});
+		prefsList.add(new Object[]{R.xml.statusbar_batterybar_prefs, R.string.sbbb_header, new SBBBFragment()});
+		prefsList.add(new Object[]{R.xml.statusbar_batteryicon_prefs, R.string.sbbIcon_header, new SBBIconFragment()});
+		prefsList.add(new Object[]{R.xml.statusbar_clock_prefs, R.string.sbc_header, new SBCFragment()});
+		prefsList.add(new Object[]{R.xml.statusbar_settings, R.string.statusbar_header, new StatusbarFragment()});
+		prefsList.add(new Object[]{R.xml.theming_prefs, R.string.qs_tile_style_title, new ThemingFragment()});
+		prefsList.add(new Object[]{R.xml.three_button_prefs, R.string.threebutton_header_title, new ThreeButtonNavFragment()});
 
 		try {
 			Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER)); //access full filesystem
@@ -110,6 +144,12 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		});
 
 		Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.color_surface_overlay));
+	}
+
+	@Override
+	public void onSearchResultClicked(@NonNull final SearchPreferenceResult result) {
+		headerFragment = new HeaderFragment();
+		new Handler(getMainLooper()).post(() -> headerFragment.onSearchResultClicked(result));
 	}
 
 	@Override
@@ -174,14 +214,11 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 	public boolean onPreferenceStartFragment(@NonNull PreferenceFragmentCompat caller, Preference pref) {
 		// Instantiate the new Fragment
 		final Bundle args = pref.getExtras();
-		final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(getClassLoader(), pref.getFragment());
+		final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(getClassLoader(), Objects.requireNonNull(pref.getFragment()));
 		fragment.setArguments(args);
 		fragment.setTargetFragment(caller, 0);
 		// Replace the existing Fragment with the new Fragment
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.setCustomAnimations(R.anim.fragment_fade_in, R.anim.fragment_fade_out, R.anim.fragment_fade_in, R.anim.fragment_fade_out);
-		fragmentTransaction.replace(R.id.settings, fragment).addToBackStack(null).commit();
+		replaceFragment(fragment);
 		setTitle(pref.getTitle());
 		backButtonEnabled();
 		return true;
@@ -268,6 +305,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 	@SuppressWarnings("ConstantConditions")
 	public static class HeaderFragment extends ControlledPreferenceFragmentCompat {
+		SearchPreference searchPreference;
+
 		@Override
 		public String getTitle() {
 			return getString(R.string.app_name);
@@ -294,7 +333,41 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				}
 			} catch (Throwable ignored) {
 			}
+
+			searchPreference = findPreference("searchPreference");
+			SearchConfiguration config = searchPreference.getSearchConfiguration();
+			config.setActivity((AppCompatActivity) getActivity());
+			config.setFragmentContainerViewId(R.id.settings);
+
+			for (Object[] obj : prefsList) {
+				config.index((Integer) obj[0]).addBreadcrumb(requireActivity().getResources().getString((Integer) obj[1]));
+			}
+
+			config.setBreadcrumbsEnabled(true);
+			config.setHistoryEnabled(true);
+			config.setFuzzySearchEnabled(false);
 		}
+
+		private void onSearchResultClicked(SearchPreferenceResult result) {
+			if (result.getResourceFile() == R.xml.header_preferences) {
+				searchPreference.setVisible(false);
+				SearchPreferenceResult.highlight(new HeaderFragment(), result.getKey());
+			} else {
+				for (Object[] obj : prefsList) {
+					if ((Integer) obj[0] == result.getResourceFile()) {
+						replaceFragment((PreferenceFragmentCompat) obj[2]);
+						SearchPreferenceResult.highlight((PreferenceFragmentCompat) obj[2], result.getKey());
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	private static void replaceFragment(Fragment fragment) {
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.setCustomAnimations(R.anim.fragment_fade_in, R.anim.fragment_fade_out, R.anim.fragment_fade_in, R.anim.fragment_fade_out);
+		fragmentTransaction.replace(R.id.settings, fragment).addToBackStack(null).commit();
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -350,7 +423,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static class networkFragment extends ControlledPreferenceFragmentCompat {
+	public static class NetworkFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
 			return getString(R.string.ntsb_category_title);
@@ -504,7 +577,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				lp.width = Math.round(mPreferences.getInt("QSPulldownPercent", 25) * displayWidth / 100f);
 				lp.gravity = Gravity.TOP | (Integer.parseInt(mPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
 				pullDownIndicator.setLayoutParams(lp);
-			} catch (Exception ignored) {}
+			} catch (Exception ignored) {
+			}
 		}
 
 		private void createPullDownIndicator() {
@@ -559,12 +633,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				float leftSwipeUpPercentage = 25f;
 				try {
 					leftSwipeUpPercentage = RangeSliderPreference.getValues(mPreferences, "leftSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 
 				float rightSwipeUpPercentage = 25f;
 				try {
 					rightSwipeUpPercentage = RangeSliderPreference.getValues(mPreferences, "rightSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 
 				int edgeWidth = Math.round(displayWidth * leftSwipeUpPercentage / 100f);
 				ViewGroup.LayoutParams lp = leftSwipeGestureIndicator.getLayoutParams();
@@ -592,7 +668,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				lp.height = edgeHeight;
 				leftBackGestureIndicator.setLayoutParams(lp);
 
-			} catch (Exception ignored) {}
+			} catch (Exception ignored) {
+			}
 		}
 
 		private FrameLayout prepareSwipeGestureView(int gravity) {
@@ -722,14 +799,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		public void updateScreen(String key) {
 			super.updateScreen(key);
 
-			if(key == null) return;
+			if (key == null) return;
 
-			switch (key)
-			{
+			switch (key) {
 				case "appLanguage":
 					try {
 						getActivity().recreate();
-					} catch (Exception ignored) {}
+					} catch (Exception ignored) {
+					}
 					break;
 
 				case "AlternativeThemedAppIcon":
@@ -737,7 +814,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 						boolean AlternativeThemedAppIconEnabled = mPreferences.getBoolean("AlternativeThemedAppIcon", false);
 
 						setAlternativeAppIcon(AlternativeThemedAppIconEnabled);
-					} catch (Exception ignored) {}
+					} catch (Exception ignored) {
+					}
 					break;
 			}
 		}

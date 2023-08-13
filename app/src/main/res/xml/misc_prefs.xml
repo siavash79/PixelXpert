@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto">
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/general_section">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch">
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/general_section"
+		search:ignore="true">
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="CustomThemedIconsOverlay"
 			android:title="@string/custom_themed_icons_title"
 			app:summaryOff="@string/custom_themed_icons_off"
 			app:summaryOn="@string/custom_themed_icons_on" />
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="disableScreenshotSound"
@@ -105,15 +111,20 @@
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
 			android:title="SystemUI Tuner" />
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="disableOverScroll"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/overscroll_on_summary"
 			android:title="@string/disable_overscroll" />
+
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/work_clone_profile_header">
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/work_clone_profile_header"
+		search:ignore="true">
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="StatusbarLongpressAppSwitch"
@@ -127,34 +138,47 @@
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
 			android:title="@string/statusbar_app_switch_icon" />
+
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/doze_header">
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/doze_header"
+		search:ignore="true">
+
 		<sh.siava.AOSPMods.ui.MaterialEditTextPreference
 			android:defaultValue="3"
 			android:key="NotificationAODIconLimit"
 			android:selectAllOnFocus="true"
 			android:singleLine="true"
 			android:title="@string/sb_notification_limit" />
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="true"
 			android:key="fingerprintWhileDozing"
 			android:title="@string/so_fingerprint_sensor_enabled" />
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="replaceAssistantwithTorch"
 			android:title="@string/so_power_longpress_torch_title" />
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="holdVolumeToSkip"
 			android:title="@string/so_vol_longpress_skip" />
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="doubleTapToWake"
 			android:title="@string/so_double_tap_wake_title"
 			app:summary="@string/so_double_tap_wake_summary" />
+
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/notifications_header">
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/notifications_header"
+		search:ignore="true">
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="notificationExpandallEnabled"
@@ -170,11 +194,17 @@
 			app:minVal="1000"
 			app:tickInterval="500"
 			app:valueCount="1" />
+
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/monitoring_category_title">
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/monitoring_category_title"
+		search:ignore="true">
+
 		<sh.siava.AOSPMods.ui.MaterialPreference
 			app:fragment="sh.siava.AOSPMods.SettingsActivity$NetworkStatFragment"
 			app:key="netstat_header"
 			app:title="@string/netstat_header" />
+
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

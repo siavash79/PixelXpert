@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch"
 	android:visibility="visible">
+
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:elevation="10dp"
-		android:title="@string/qs_general_options">
+		android:title="@string/qs_general_options"
+		search:ignore="true">
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="LightQSPanel"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
 			android:title="@string/light_qs_title" />
+
 		<!--sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="dualToneQSEnabled"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
 			android:title="@string/light_dualtone_qs_title" /-->
-		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/quick_settings_tiles_category">
+
+		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+			android:title="@string/quick_settings_tiles_category"
+			search:ignore="true">
+
 			<sh.siava.AOSPMods.ui.MaterialListPreference
 				android:defaultValue="None"
 				android:entries="@array/QSTilesThemesOverlayEx_names"
@@ -25,6 +34,7 @@
 				android:key="QSTilesThemesOverlayEx"
 				android:summary="%s"
 				android:title="@string/qs_tile_style_title" />
+
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 				android:defaultValue="false"
 				android:key="QSHapticEnabled"
@@ -37,7 +47,6 @@
 				android:key="UnMuteVolumePCT"
 				app:title="@string/qs_volume_unmute_title"
 				app:updatesContinuously="true" />
-
 
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 				android:defaultValue="false"
@@ -97,15 +106,19 @@
 				app:updatesContinuously="true" />
 
 		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+
 		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 			android:title="@string/qs_mod_category_title"
-			app:summary="@string/qs_footer_text_desc">
+			app:summary="@string/qs_footer_text_desc"
+			search:ignore="true">
+
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 				android:defaultValue="false"
 				android:key="QSFooterMod"
 				android:summaryOff="@string/general_off"
 				android:summaryOn="@string/general_on"
 				android:title="@string/qs_footer_mod_title" />
+
 			<sh.siava.AOSPMods.ui.MaterialEditTextPreference
 				android:dialogLayout="@layout/string_formatter_manual"
 				android:key="QSFooterText"
@@ -113,45 +126,60 @@
 				android:singleLine="true"
 				android:title="@string/qs_footer_text_value"
 				app:summary="@string/qs_footer_text_summary" />
+
 		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/QQS_brightness_category">
+
+		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+			android:title="@string/QQS_brightness_category"
+			search:ignore="true">
+
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 				android:defaultValue="false"
 				android:key="QSBrightnessDisabled"
 				android:summaryOff="@string/general_off"
 				android:summaryOn="@string/general_on"
 				android:title="@string/QS_brightness_disable_title" />
+
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 				android:defaultValue="false"
 				android:key="QQSBrightnessEnabled"
 				android:summaryOff="@string/general_off"
 				android:summaryOn="@string/general_on"
 				android:title="@string/QQS_brightness_title" />
+
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 				android:defaultValue="false"
 				android:key="BrightnessSlierOnBottom"
 				android:summaryOff="@string/general_off"
 				android:summaryOn="@string/general_on"
 				android:title="@string/QQS_brightness_bottom_title" />
+
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 				android:defaultValue="false"
 				android:key="BSThickTrackOverlay"
 				android:title="@string/bs_thick_track"
 				app:summaryOff="@string/general_off"
 				app:summaryOn="@string/general_on" />
+
 		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/qs_pulldown_category">
+
+		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+			android:title="@string/qs_pulldown_category"
+			search:ignore="true">
+
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 				android:defaultValue="false"
 				android:key="QSPullodwnEnabled"
 				android:summaryOff="@string/general_off"
 				android:summaryOn="@string/general_on"
 				android:title="@string/qs_pulldown_switch_title" />
+
 			<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
 				android:defaultValue="25"
 				android:key="QSPulldownPercent"
 				app:title="@string/qs_pulldown_size"
 				app:updatesContinuously="true" />
+
 			<sh.siava.AOSPMods.ui.MaterialListPreference
 				android:defaultValue="1"
 				android:entries="@array/qs_pulldown_side_names"
@@ -159,18 +187,25 @@
 				android:key="QSPulldownSide"
 				android:summary="%s"
 				android:title="@string/qs_pulldown_side_title" />
+
 		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/ntsb_category_title">
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/ntsb_category_title"
+		search:ignore="true">
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="networkOnQSEnabled"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
 			android:title="@string/ntsb_enabled_title" />
+
 		<sh.siava.AOSPMods.ui.MaterialPreference
-			app:fragment="sh.siava.AOSPMods.SettingsActivity$networkFragment"
+			app:fragment="sh.siava.AOSPMods.SettingsActivity$NetworkFragment"
 			app:key="network_settings_header_qs"
 			app:title="@string/network_settings_pref" />
+
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

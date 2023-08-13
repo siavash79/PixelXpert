@@ -1,168 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:visibility="visible">
-    <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/statusbar_general_options">
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="DoubleTapSleep"
-            android:title="@string/double_tap_sleep_title"
-            app:summaryOff="@string/general_off"
-            app:summaryOn="@string/general_on" />
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch"
+	android:visibility="visible">
 
-        <!--SeekBarPreference
-            android:layout_width="wrap_content"
-            android:defaultValue="50"
-            android:key="centerAreaFineTune"
-            android:max="70"
-            android:title="@string/sb_center_fine_tune"
-            app:min="30"
-            app:updatesContinuously="true" /-->
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/statusbar_general_options"
+		search:ignore="true">
 
-        <sh.siava.AOSPMods.ui.MaterialPreference
-            app:fragment="sh.siava.AOSPMods.SettingsActivity$SBCFragment"
-            app:key="sbc_header"
-            app:title="@string/sbc_header" />
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="DoubleTapSleep"
+			android:title="@string/double_tap_sleep_title"
+			app:summaryOff="@string/general_off"
+			app:summaryOn="@string/general_on" />
 
-        <sh.siava.AOSPMods.ui.MaterialPreference
-            app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBBFragment"
-            app:key="sbbb_header"
-            app:title="@string/sbbb_header" />
+		<!--SeekBarPreference
+			android:layout_width="wrap_content"
+			android:defaultValue="50"
+			android:key="centerAreaFineTune"
+			android:max="70"
+			android:title="@string/sb_center_fine_tune"
+			app:min="30"
+			app:updatesContinuously="true" /-->
 
-        <sh.siava.AOSPMods.ui.MaterialPreference
-            app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBIconFragment"
-            app:key="sbbIcon_header"
-            app:title="@string/sbbIcon_header" />
+		<sh.siava.AOSPMods.ui.MaterialPreference
+			app:fragment="sh.siava.AOSPMods.SettingsActivity$SBCFragment"
+			app:key="sbc_header"
+			app:title="@string/sbc_header" />
 
-        <!--sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="SBshowVibrationIcon"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/sb_vibration_switch_title" /-->
+		<sh.siava.AOSPMods.ui.MaterialPreference
+			app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBBFragment"
+			app:key="sbbb_header"
+			app:title="@string/sbbb_header" />
 
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="UnreadMessagesNumberOverlay"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/unread_messages_title" />
+		<sh.siava.AOSPMods.ui.MaterialPreference
+			app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBIconFragment"
+			app:key="sbbIcon_header"
+			app:title="@string/sbbIcon_header" />
 
-        <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
-            android:layout_width="wrap_content"
-            android:defaultValue="100"
-            android:key="statusbarHeightFactor"
-            android:max="200"
-            android:title="@string/status_bar_height"
-            app:min="50"
-            app:updatesContinuously="true" />
+		<!--sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="SBshowVibrationIcon"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/sb_vibration_switch_title" /-->
 
-        <sh.siava.AOSPMods.ui.MaterialEditTextPreference
-            android:key="NotificationIconLimit"
-            android:defaultValue="4"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="@string/sb_notification_limit" />
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="UnreadMessagesNumberOverlay"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/unread_messages_title" />
 
-        <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
-            android:key="statusbarPaddings"
-            android:title="@string/sb_padding_title"
-            android:summary="@string/sb_padding_summary"
+		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+			android:layout_width="wrap_content"
+			android:defaultValue="100"
+			android:key="statusbarHeightFactor"
+			android:max="200"
+			android:title="@string/status_bar_height"
+			app:min="50"
+			app:updatesContinuously="true" />
 
-            app:tickInterval=".5"
+		<sh.siava.AOSPMods.ui.MaterialEditTextPreference
+			android:defaultValue="4"
+			android:key="NotificationIconLimit"
+			android:selectAllOnFocus="true"
+			android:singleLine="true"
+			android:title="@string/sb_notification_limit" />
 
-            app:valueCount="2"
-            app:minVal="-.5"
-            app:maxVal="100.5"
+		<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
+			android:key="statusbarPaddings"
+			android:summary="@string/sb_padding_summary"
+			android:title="@string/sb_padding_title"
+			app:defaultValue="-.5,100.5"
+			app:maxVal="100.5"
+			app:minVal="-.5"
+			app:tickInterval=".5"
+			app:valueCount="2" />
 
-            app:defaultValue="-.5,100.5" />
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="combinedSignalEnabled"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/combined_signal_icon_title" />
 
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="combinedSignalEnabled"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/combined_signal_icon_title"/>
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="HideRoamingState"
+			android:summary="@string/caution_mobile_costs"
+			android:title="@string/hide_roaming_title" />
 
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="HideRoamingState"
-            android:title="@string/hide_roaming_title"
-            android:summary="@string/caution_mobile_costs"/>
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="VolteIconEnabled"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/volte_icon_title" />
 
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="VolteIconEnabled"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/volte_icon_title" />
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="VowifiIconEnabled"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/vowifi_icon_title" />
 
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="VowifiIconEnabled"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/vowifi_icon_title" />
+		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="HidePrivacyChip"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/hide_privacychip_title" />
 
-        <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-            android:defaultValue="false"
-            android:key="HidePrivacyChip"
-            android:summaryOff="@string/general_off"
-            android:summaryOn="@string/general_on"
-            android:title="@string/hide_privacychip_title" />
+		<sh.siava.AOSPMods.ui.MaterialListPreference
+			android:defaultValue="0"
+			android:entries="@array/lte4g_icon_names"
+			android:entryValues="@array/lte4g_icon_codes"
+			android:key="LTE4GIconMod"
+			android:summary="%s"
+			android:title="@string/lte_4g_icon_title" />
 
-        <sh.siava.AOSPMods.ui.MaterialListPreference
-            android:defaultValue="0"
-            android:entries="@array/lte4g_icon_names"
-            android:entryValues="@array/lte4g_icon_codes"
-            android:summary="%s"
-            android:key="LTE4GIconMod"
-            android:title="@string/lte_4g_icon_title" />
+		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+			android:title="@string/sb_double_row_category"
+			search:ignore="true">
 
-        <sh.siava.AOSPMods.ui.MaterialPreferenceCategory
-            android:key="sb_multi_row"
-            android:title="@string/sb_double_row_category">
-            <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-                android:defaultValue="false"
-                android:key="systemIconsMultiRow"
-                android:summaryOff="@string/general_off"
-                android:summaryOn="@string/general_on"
-                android:title="@string/sb_multi_row_system_icons" />
+			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+				android:defaultValue="false"
+				android:key="systemIconsMultiRow"
+				android:summaryOff="@string/general_off"
+				android:summaryOn="@string/general_on"
+				android:title="@string/sb_multi_row_system_icons" />
 
-            <sh.siava.AOSPMods.ui.MaterialListPreference
-                android:defaultValue="0"
-                android:entries="@array/sb_icon_sort_names"
-                android:entryValues="@array/sb_icon_sort_codes"
-                android:summary="%s"
-                android:key="systemIconSortPlan"
-                android:title="@string/sb_icon_sort_mode" />
+			<sh.siava.AOSPMods.ui.MaterialListPreference
+				android:defaultValue="0"
+				android:entries="@array/sb_icon_sort_names"
+				android:entryValues="@array/sb_icon_sort_codes"
+				android:key="systemIconSortPlan"
+				android:summary="%s"
+				android:title="@string/sb_icon_sort_mode" />
 
-            <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-                android:defaultValue="false"
-                android:key="notificationAreaMultiRow"
-                android:summaryOff="@string/general_off"
-                android:summaryOn="@string/general_on"
-                android:title="@string/sb_multi_row_notification_icons" />
-        </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+				android:defaultValue="false"
+				android:key="notificationAreaMultiRow"
+				android:summaryOff="@string/general_off"
+				android:summaryOn="@string/general_on"
+				android:title="@string/sb_multi_row_notification_icons" />
 
-        <sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/ntsb_category_title">
-            <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-                android:defaultValue="false"
-                android:key="networkOnSBEnabled"
-                android:summaryOff="@string/general_off"
-                android:summaryOn="@string/general_on"
-                android:title="@string/ntsb_enabled_title" />
-            <sh.siava.AOSPMods.ui.MaterialListPreference
-                android:defaultValue="2"
-                android:entries="@array/network_sb_locations"
-                android:entryValues="@array/sbc_position_codes"
-                android:summary="%s"
-                android:key="networkTrafficPosition"
-                android:title="@string/ntsb_position_title" />
-            <sh.siava.AOSPMods.ui.MaterialPreference
-                app:fragment="sh.siava.AOSPMods.SettingsActivity$networkFragment"
-                app:key="network_settings_header"
-                app:title="@string/network_settings_pref" />
-        </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-    </sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+
+		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+			android:title="@string/ntsb_category_title"
+			search:ignore="true">
+
+			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+				android:defaultValue="false"
+				android:key="networkOnSBEnabled"
+				android:summaryOff="@string/general_off"
+				android:summaryOn="@string/general_on"
+				android:title="@string/ntsb_enabled_title" />
+
+			<sh.siava.AOSPMods.ui.MaterialListPreference
+				android:defaultValue="2"
+				android:entries="@array/network_sb_locations"
+				android:entryValues="@array/sbc_position_codes"
+				android:key="networkTrafficPosition"
+				android:summary="%s"
+				android:title="@string/ntsb_position_title" />
+
+			<sh.siava.AOSPMods.ui.MaterialPreference
+				app:fragment="sh.siava.AOSPMods.SettingsActivity$NetworkFragment"
+				app:key="network_settings_header"
+				app:title="@string/network_settings_pref" />
+
+		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

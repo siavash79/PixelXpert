@@ -29,13 +29,11 @@ public class PreferenceHelper {
 
 	public static PreferenceHelper instance;
 
-	public static void init(SharedPreferences prefs)
-	{
+	public static void init(SharedPreferences prefs) {
 		new PreferenceHelper(prefs);
 	}
 
-	private PreferenceHelper(SharedPreferences prefs)
-	{
+	private PreferenceHelper(SharedPreferences prefs) {
 		mPreferences = prefs;
 
 		int moduleType = getVersionType();
@@ -45,12 +43,11 @@ public class PreferenceHelper {
 
 		instance = this;
 	}
-	public static boolean isVisible(String key)
-	{
-		if(instance == null) return true;
 
-		switch(key)
-		{
+	public static boolean isVisible(String key) {
+		if (instance == null) return true;
+
+		switch (key) {
 			case "theming_header":
 			case "HideNavbarOverlay":
 			case "CustomThemedIconsOverlay":
@@ -75,7 +72,7 @@ public class PreferenceHelper {
 
 			case "gsans_override":
 			case "FontsOverlayEx":
-				if(!showFonts)
+				if (!showFonts)
 					return false;
 
 				boolean customFontsEnabled = instance.mPreferences.getBoolean("enableCustomFonts", false);
@@ -87,12 +84,9 @@ public class PreferenceHelper {
 				boolean gSansOverride = instance.mPreferences.getBoolean("gsans_override", false);
 				boolean FontsOverlayExEnabled = !instance.mPreferences.getString("FontsOverlayEx", "None").equals("None");
 
-				if("gsans_override".equals(key))
-				{
+				if ("gsans_override".equals(key)) {
 					return customFontsEnabled && !FontsOverlayExEnabled;
-				}
-				else
-				{
+				} else {
 					return customFontsEnabled && !gSansOverride;
 				}
 
@@ -188,10 +182,10 @@ public class PreferenceHelper {
 					BIcritZero = BIconLevels.get(0) == 0;
 					BIwarnZero = BIconLevels.get(1) == 0;
 				}
-				
+
 				return "BIconbatteryCriticalColor".equals(key)
-					? Integer.parseInt(instance.mPreferences.getString("BatteryStyle", "0")) > 0 && Integer.parseInt(instance.mPreferences.getString("BatteryStyle", "0")) < 99 && (instance.mPreferences.getBoolean("BIconColorful", false) || !BIcritZero)
-					: Integer.parseInt(instance.mPreferences.getString("BatteryStyle", "0")) > 0 && Integer.parseInt(instance.mPreferences.getString("BatteryStyle", "0")) < 99 && (instance.mPreferences.getBoolean("BIconColorful", false) || !BIwarnZero);
+						? Integer.parseInt(instance.mPreferences.getString("BatteryStyle", "0")) > 0 && Integer.parseInt(instance.mPreferences.getString("BatteryStyle", "0")) < 99 && (instance.mPreferences.getBoolean("BIconColorful", false) || !BIcritZero)
+						: Integer.parseInt(instance.mPreferences.getString("BatteryStyle", "0")) > 0 && Integer.parseInt(instance.mPreferences.getString("BatteryStyle", "0")) < 99 && (instance.mPreferences.getBoolean("BIconColorful", false) || !BIwarnZero);
 
 			case "SBCBeforeClockColor":
 			case "SBCClockColor":
@@ -270,10 +264,8 @@ public class PreferenceHelper {
 		return true;
 	}
 
-	public static boolean isEnabled(String key)
-	{
-		switch (key)
-		{
+	public static boolean isEnabled(String key) {
+		switch (key) {
 			case "BBarTransitColors":
 				return !instance.mPreferences.getBoolean("BBarColorful", false);
 
@@ -289,18 +281,19 @@ public class PreferenceHelper {
 		return true;
 	}
 
-	/** @noinspection UnnecessaryCallToStringValueOf*/
+	/**
+	 * @noinspection UnnecessaryCallToStringValueOf
+	 */
 	@SuppressLint("DefaultLocale")
 	@Nullable
-	public static String getSummary(Context fragmentCompat, @NonNull String key)
-	{
-		switch (key)
-		{
+	public static String getSummary(Context fragmentCompat, @NonNull String key) {
+		switch (key) {
 			case "taskbarHeightOverride":
 				float taskbarHeightOverride = 100f;
 				try {
 					taskbarHeightOverride = RangeSliderPreference.getValues(instance.mPreferences, "taskbarHeightOverride", 100f).get(0);
-				} catch (Throwable ignored) {}
+				} catch (Throwable ignored) {
+				}
 				return taskbarHeightOverride != 100f
 						? taskbarHeightOverride + "%"
 						: fragmentCompat.getString(R.string.word_default);
@@ -309,7 +302,8 @@ public class PreferenceHelper {
 				float KeyGuardDimAmount = -1;
 				try {
 					KeyGuardDimAmount = RangeSliderPreference.getValues(instance.mPreferences, "KeyGuardDimAmount", -1).get(0);
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 				return KeyGuardDimAmount < 0
 						? fragmentCompat.getString(R.string.word_default)
 						: KeyGuardDimAmount + "%";
@@ -337,7 +331,8 @@ public class PreferenceHelper {
 				float displayOverride = 100;
 				try {
 					displayOverride = RangeSliderPreference.getValues(instance.mPreferences, "displayOverride", 100f).get(0);
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 
 				double increasedArea = Math.round(Math.abs(Math.pow(displayOverride, 2) / 100 - 100));
 
@@ -347,7 +342,8 @@ public class PreferenceHelper {
 				float headsupDecayMillis = 5000;
 				try {
 					headsupDecayMillis = RangeSliderPreference.getValues(instance.mPreferences, "HeadupAutoDismissNotificationDecay", -1).get(0);
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 
 				return ((int) headsupDecayMillis) + " " + fragmentCompat.getString(R.string.milliseconds);
 
@@ -356,9 +352,10 @@ public class PreferenceHelper {
 				long timeout = 0;
 				try {
 					timeout = (long) (RangeSliderPreference.getValues(instance.mPreferences, "hotSpotTimeoutSecs", 0).get(0) * 1L);
-				} catch (Throwable ignored) {}
+				} catch (Throwable ignored) {
+				}
 
-				return 	timeout > 0
+				return timeout > 0
 						? String.format("%d %s", timeout / 60, fragmentCompat.getString(R.string.minutes_word))
 						: fragmentCompat.getString(R.string.word_default);
 
@@ -366,7 +363,8 @@ public class PreferenceHelper {
 				int clients = 0;
 				try {
 					clients = round(RangeSliderPreference.getValues(instance.mPreferences, "hotSpotMaxClients", 0).get(0));
-				} catch (Throwable ignored) {}
+				} catch (Throwable ignored) {
+				}
 
 				return clients > 0
 						? String.valueOf(clients)
@@ -413,14 +411,16 @@ public class PreferenceHelper {
 				float QSLabelScaleFactor = 0;
 				try {
 					QSLabelScaleFactor = RangeSliderPreference.getValues(instance.mPreferences, "QSLabelScaleFactor", 0f).get(0);
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 				return (QSLabelScaleFactor + 100) + "% " + fragmentCompat.getString(R.string.toggle_dark_apply);
 
 			case "QSSecondaryLabelScaleFactor":
 				float QSSecondaryLabelScaleFactor = 0;
 				try {
 					QSSecondaryLabelScaleFactor = RangeSliderPreference.getValues(instance.mPreferences, "QSSecondaryLabelScaleFactor", 0f).get(0);
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 				return (QSSecondaryLabelScaleFactor + 100) + "% " + fragmentCompat.getString(R.string.toggle_dark_apply);
 
 			case "GesPillWidthModPos":
@@ -439,45 +439,46 @@ public class PreferenceHelper {
 				float leftSwipeUpPercentage = 25f;
 				try {
 					leftSwipeUpPercentage = RangeSliderPreference.getValues(instance.mPreferences, "leftSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 				return leftSwipeUpPercentage + "%";
 
 			case "rightSwipeUpPercentage":
 				float rightSwipeUpPercentage = 25f;
 				try {
 					rightSwipeUpPercentage = RangeSliderPreference.getValues(instance.mPreferences, "rightSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 				return rightSwipeUpPercentage + "%";
 
 			case "swipeUpPercentage":
 				float swipeUpPercentage = 20f;
 				try {
 					swipeUpPercentage = RangeSliderPreference.getValues(instance.mPreferences, "swipeUpPercentage", 20).get(0);
-				} catch (Exception ignored) {}
+				} catch (Exception ignored) {
+				}
 				return swipeUpPercentage + "%";
 		}
 		return null;
 	}
 
-	/** */
-	public static void setupPreference(Preference preference)
-	{
-		try
-		{
+	/**
+	 *
+	 */
+	public static void setupPreference(Preference preference) {
+		try {
 			String key = preference.getKey();
 
 			preference.setVisible(isVisible(key));
 			preference.setEnabled(isEnabled(key));
 
 			String summary = getSummary(preference.getContext(), key);
-			if(summary != null)
-			{
+			if (summary != null) {
 				preference.setSummary(summary);
 			}
 
 			//Other special cases
-			switch (key)
-			{
+			switch (key) {
 				case "QSColQtyL":
 					((SeekBarPreference) preference).setMax(instance.mPreferences.getInt("QSColQty", 1));
 					break;
@@ -487,26 +488,21 @@ public class PreferenceHelper {
 					((RangeSliderPreference) preference).slider.setLabelFormatter(value -> (value + 100) + "%");
 					break;
 			}
+		} catch (Throwable ignored) {
 		}
-		catch (Throwable ignored){}
 	}
 
-	public static void setupAllPreferences(PreferenceGroup group)
-	{
-		for(int i = 0; ; i++)
-		{
+	public static void setupAllPreferences(PreferenceGroup group) {
+		for (int i = 0; ; i++) {
 			try {
 				Preference thisPreference = group.getPreference(i);
 
 				PreferenceHelper.setupPreference(thisPreference);
 
-				if(thisPreference instanceof PreferenceGroup)
-				{
+				if (thisPreference instanceof PreferenceGroup) {
 					setupAllPreferences((PreferenceGroup) thisPreference);
 				}
-			}
-			catch (Throwable ignored)
-			{
+			} catch (Throwable ignored) {
 				break;
 			}
 		}

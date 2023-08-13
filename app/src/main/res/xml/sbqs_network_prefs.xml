@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<sh.siava.AOSPMods.ui.MaterialListPreference
 		android:defaultValue="0"
 		android:entries="@array/network_mode_names"
 		android:entryValues="@array/network_mode_codes"
-		android:summary="%s"
 		android:key="networkTrafficMode"
+		android:summary="%s"
 		android:title="@string/network_mode_title" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
@@ -29,8 +29,8 @@
 		android:key="networkTrafficInterval"
 		android:max="5"
 		android:min="1"
-		app:min="1"
 		android:title="@string/network_interval_title"
+		app:min="1"
 		app:updatesContinuously="true" />
 
 	<sh.siava.AOSPMods.ui.MaterialEditTextPreference
@@ -59,10 +59,10 @@
 		android:title="@string/network_upload_color_title" />
 
 	<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
-		app:isPreferenceVisible="false"
 		android:defaultValue="100"
 		android:key="networkTrafficOpacity"
 		android:title="@string/network_opacity_title"
+		app:isPreferenceVisible="false"
 		app:updatesContinuously="true" />
 
 </PreferenceScreen>

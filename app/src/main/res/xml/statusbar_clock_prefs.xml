@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch">
+
 	<sh.siava.AOSPMods.ui.MaterialListPreference
 		android:defaultValue="0"
 		android:entries="@array/sbc_position_names"
 		android:entryValues="@array/sbc_position_codes"
 		android:key="SBClockLoc"
 		android:title="@string/sbc_position_title" />
+
 	<sh.siava.AOSPMods.ui.MaterialListPreference
 		android:defaultValue="2"
 		android:entries="@array/sbc_ampm_style_names"
 		android:entryValues="@array/sbc_ampm_style_codes"
 		android:key="SBCAmPmStyle"
 		android:title="@string/sbc_ampm_style" />
+
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="SBCShowSeconds"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
 		android:title="@string/sbc_show_secs" />
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/sbc_date_cat">
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/sbc_date_cat"
+		search:ignore="true">
+
 		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue="0"
 			android:entries="@array/sbc_day_week_names"
@@ -26,7 +34,11 @@
 			android:key="SBCDayOfWeekMode"
 			android:summary="%s"
 			android:title="@string/sbc_day_of_week_options" />
-		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/sbc_advanced_cat">
+
+		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+			android:title="@string/sbc_advanced_cat"
+			search:ignore="true">
+
 			<sh.siava.AOSPMods.ui.MaterialEditTextPreference
 				android:defaultValue=""
 				android:dialogLayout="@layout/string_formatter_manual"
@@ -34,12 +46,14 @@
 				android:selectAllOnFocus="true"
 				android:singleLine="true"
 				android:title="@string/sbc_custom_date_before" />
+
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 				android:defaultValue="true"
 				android:key="BeforeSBCSmall"
 				android:summaryOff="@string/general_off"
 				android:summaryOn="@string/general_on"
 				android:title="@string/sbc_date_small" />
+
 			<sh.siava.AOSPMods.ui.MaterialEditTextPreference
 				android:defaultValue=""
 				android:dialogLayout="@layout/string_formatter_manual"
@@ -47,15 +61,21 @@
 				android:selectAllOnFocus="true"
 				android:singleLine="true"
 				android:title="@string/sbc_custom_date_after" />
+
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 				android:defaultValue="true"
 				android:key="AfterSBCSmall"
 				android:summaryOff="@string/general_off"
 				android:summaryOn="@string/general_on"
 				android:title="@string/sbc_date_small" />
+
 		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory android:title="@string/sbc_clock_color_category">
+
+	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		android:title="@string/sbc_clock_color_category"
+		search:ignore="true">
+
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="SBCClockColorful"
@@ -74,5 +94,6 @@
 		<sh.siava.AOSPMods.ui.MaterialColorPreference
 			android:key="SBCAfterClockColor"
 			android:title="@string/sbc_after_color" />
+
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

@@ -59,42 +59,38 @@ public class UpdateFragment extends Fragment {
 		@SuppressLint("MissingPermission")
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if(getContext() != null)
+			if (getContext() != null)
 				getContext().unregisterReceiver(downloadCompletionReceiver);
 
 
 			boolean successful = false;
 			if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(intent.getAction()) && intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == downloadID) {
-				try(Cursor downloadData = downloadManager.query(
+				try (Cursor downloadData = downloadManager.query(
 						new DownloadManager.Query()
-								.setFilterById(downloadID)))
-				{
+								.setFilterById(downloadID))) {
 					downloadData.moveToFirst();
 
 					int uriColIndex = downloadData.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
 
 					File downloadedFile = new File(URI.create(downloadData.getString(uriColIndex)));
 
-					if(downloadedFile.exists())
-					{
+					if (downloadedFile.exists()) {
 						downloadedFilePath = new File(URI.create(downloadData.getString(uriColIndex))).getAbsolutePath();
 
 						notifyInstall();
 						successful = true;
 					}
-				}
-				catch (Throwable ignored){}
+				} catch (Throwable ignored) {}
 			}
 
-			if(!successful)
-			{
-				NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "updates")
+			if (!successful) {
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), "updates")
 						.setSmallIcon(R.drawable.ic_notification_foreground)
-						.setContentTitle(getContext().getText(R.string.download_failed))
-						.setContentText(getContext().getText(R.string.try_again_later))
+						.setContentTitle(requireContext().getText(R.string.download_failed))
+						.setContentText(requireContext().getText(R.string.try_again_later))
 						.setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-				NotificationManagerCompat.from(getContext()).notify(2, builder.build());
+				NotificationManagerCompat.from(requireContext()).notify(2, builder.build());
 			}
 		}
 	};
@@ -103,7 +99,7 @@ public class UpdateFragment extends Fragment {
 	private int currentVersionType = PreferenceHelper.XPOSED_ONLY;
 	private String currentVersionName = "";
 	private boolean rebootPending = false;
-//	private boolean downloadStarted = false;
+	//	private boolean downloadStarted = false;
 	private boolean installFullVersion = true;
 
 	@Override
@@ -112,7 +108,7 @@ public class UpdateFragment extends Fragment {
 			Bundle savedInstanceState) {
 
 		//noinspection ConstantConditions
-		downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+		downloadManager = (DownloadManager) requireContext().getSystemService(Context.DOWNLOAD_SERVICE);
 
 
 		//finally
@@ -154,8 +150,7 @@ public class UpdateFragment extends Fragment {
 				requireActivity().runOnUiThread(() -> {
 					try {
 						((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFromUrl((String) result.get("changelog"));
-					}
-					catch (Throwable ignored){}
+					} catch (Throwable ignored) {}
 				});
 
 				requireActivity().runOnUiThread(() -> {
@@ -280,7 +275,7 @@ public class UpdateFragment extends Fragment {
 				.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE));
 
 		//noinspection ConstantConditions
-		getContext().registerReceiver(downloadCompletionReceiver, filters, RECEIVER_EXPORTED);
+		requireContext().registerReceiver(downloadCompletionReceiver, filters, RECEIVER_EXPORTED);
 	}
 
 	@Override
@@ -291,24 +286,24 @@ public class UpdateFragment extends Fragment {
 
 	@SuppressLint("MissingPermission")
 	public void notifyInstall() {
-		Intent notificationIntent = new Intent(getContext(), UpdateActivity.class);
+		Intent notificationIntent = new Intent(requireContext(), UpdateActivity.class);
 		notificationIntent.setAction(Intent.ACTION_RUN);
 		notificationIntent.addCategory(Intent.CATEGORY_DEFAULT);
 		notificationIntent.putExtra("updateTapped", true);
 		notificationIntent.putExtra("filePath", downloadedFilePath);
 
-		PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+		PendingIntent pendingIntent = PendingIntent.getActivity(requireContext(), 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
 		//noinspection ConstantConditions
-		NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "updates")
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), "updates")
 				.setSmallIcon(R.drawable.ic_notification_foreground)
-				.setContentTitle(getContext().getString(R.string.update_notification_title))
-				.setContentText(getContext().getString(R.string.update_notification_text))
+				.setContentTitle(requireContext().getString(R.string.update_notification_title))
+				.setContentText(requireContext().getString(R.string.update_notification_text))
 				.setPriority(NotificationCompat.PRIORITY_DEFAULT)
 				.setContentIntent(pendingIntent)
 				.setAutoCancel(true);
 
-		NotificationManagerCompat.from(getContext()).notify(1, builder.build());
+		NotificationManagerCompat.from(requireContext()).notify(1, builder.build());
 	}
 
 	public interface TaskDoneCallback extends Callback {

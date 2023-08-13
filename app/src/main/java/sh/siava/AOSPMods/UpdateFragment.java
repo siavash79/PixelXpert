@@ -41,6 +41,7 @@ import javax.security.auth.callback.Callback;
 
 import br.tiagohm.markdownview.MarkdownView;
 import sh.siava.AOSPMods.databinding.UpdateFragmentBinding;
+import sh.siava.AOSPMods.utils.PreferenceHelper;
 
 
 public class UpdateFragment extends Fragment {
@@ -58,35 +59,31 @@ public class UpdateFragment extends Fragment {
 		@SuppressLint("MissingPermission")
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if(requireContext() != null)
-				requireContext().unregisterReceiver(downloadCompletionReceiver);
+			if (getContext() != null)
+				getContext().unregisterReceiver(downloadCompletionReceiver);
 
 
 			boolean successful = false;
 			if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(intent.getAction()) && intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == downloadID) {
-				try(Cursor downloadData = downloadManager.query(
+				try (Cursor downloadData = downloadManager.query(
 						new DownloadManager.Query()
-								.setFilterById(downloadID)))
-				{
+								.setFilterById(downloadID))) {
 					downloadData.moveToFirst();
 
 					int uriColIndex = downloadData.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
 
 					File downloadedFile = new File(URI.create(downloadData.getString(uriColIndex)));
 
-					if(downloadedFile.exists())
-					{
+					if (downloadedFile.exists()) {
 						downloadedFilePath = new File(URI.create(downloadData.getString(uriColIndex))).getAbsolutePath();
 
 						notifyInstall();
 						successful = true;
 					}
-				}
-				catch (Throwable ignored){}
+				} catch (Throwable ignored) {}
 			}
 
-			if(!successful)
-			{
+			if (!successful) {
 				NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), "updates")
 						.setSmallIcon(R.drawable.ic_notification_foreground)
 						.setContentTitle(requireContext().getText(R.string.download_failed))
@@ -99,10 +96,10 @@ public class UpdateFragment extends Fragment {
 	};
 	private UpdateFragmentBinding binding;
 	private int currentVersionCode = -1;
-	private int currentVersionType = SettingsActivity.XPOSED_ONLY;
+	private int currentVersionType = PreferenceHelper.XPOSED_ONLY;
 	private String currentVersionName = "";
 	private boolean rebootPending = false;
-//	private boolean downloadStarted = false;
+	//	private boolean downloadStarted = false;
 	private boolean installFullVersion = true;
 
 	@Override
@@ -153,8 +150,7 @@ public class UpdateFragment extends Fragment {
 				requireActivity().runOnUiThread(() -> {
 					try {
 						((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFromUrl((String) result.get("changelog"));
-					}
-					catch (Throwable ignored){}
+					} catch (Throwable ignored) {}
 				});
 
 				requireActivity().runOnUiThread(() -> {
@@ -183,7 +179,7 @@ public class UpdateFragment extends Fragment {
 							}
 							enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
 						} else {
-							if (latestCode > currentVersionCode || (currentVersionType == SettingsActivity.FULL_VERSION) != installFullVersion) {
+							if (latestCode > currentVersionCode || (currentVersionType == PreferenceHelper.FULL_VERSION) != installFullVersion) {
 								enable = true;
 							}
 						}
@@ -217,7 +213,7 @@ public class UpdateFragment extends Fragment {
 			}
 		});
 
-		if (currentVersionType == SettingsActivity.FULL_VERSION) {
+		if (currentVersionType == PreferenceHelper.FULL_VERSION) {
 			((RadioButton) view.findViewById(R.id.fullTypeID)).setChecked(true);
 		} else {
 			((RadioButton) view.findViewById(R.id.XposedTypeID)).setChecked(true);
@@ -250,7 +246,7 @@ public class UpdateFragment extends Fragment {
 				try {
 					currentVersionType = Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", moduleDir)).exec().getOut().get(0));
 				} catch (Exception ignored) {
-					currentVersionType = SettingsActivity.XPOSED_ONLY;
+					currentVersionType = PreferenceHelper.XPOSED_ONLY;
 				}
 				rebootPending = true;
 			} else {
@@ -260,7 +256,7 @@ public class UpdateFragment extends Fragment {
 			rebootPending = false;
 			currentVersionName = BuildConfig.VERSION_NAME;
 			currentVersionCode = BuildConfig.VERSION_CODE;
-			currentVersionType = SettingsActivity.moduleType;
+			currentVersionType = PreferenceHelper.getVersionType();
 		}
 	}
 

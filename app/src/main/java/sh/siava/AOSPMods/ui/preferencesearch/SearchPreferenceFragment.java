@@ -197,6 +197,18 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		searcher = new PreferenceParser(requireContext());
+
+		assert getArguments() != null;
+		searchConfiguration = SearchConfiguration.fromBundle(getArguments());
+		ArrayList<SearchConfiguration.SearchIndexItem> files = searchConfiguration.getFiles();
+		for (SearchConfiguration.SearchIndexItem file : files) {
+			searcher.addResourceFile(file);
+		}
+		searcher.addPreferenceItems(searchConfiguration.getPreferencesToIndex());
+		loadHistory();
+
 		updateSearchResults(viewHolder.searchView.getText().toString());
 
 		if (searchConfiguration.isSearchBarEnabled()) {

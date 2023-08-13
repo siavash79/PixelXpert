@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods;
 
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
-import static java.lang.Math.round;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
@@ -17,7 +16,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.view.Gravity;
@@ -29,7 +27,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -38,37 +35,25 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SeekBarPreference;
 
-import com.google.android.material.slider.LabelFormatter;
 import com.topjohnwu.superuser.Shell;
 
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 import sh.siava.AOSPMods.utils.AppUtils;
+import sh.siava.AOSPMods.utils.ControlledPreferenceFragmentCompat;
 import sh.siava.AOSPMods.utils.PrefManager;
 import sh.siava.AOSPMods.utils.PreferenceHelper;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
-
-	public static final int FULL_VERSION = 0;
-	public static final int XPOSED_ONLY = 1;
-
 	private static final int REQUEST_IMPORT = 7;
 	private static final int REQUEST_EXPORT = 9;
 	private static final String TITLE_TAG = "settingsActivityTitle";
 	Context DPContext;
-
-	@SuppressWarnings("FieldCanBeLocal")
-	public static int moduleType = XPOSED_ONLY;
-
-	public static boolean showOverlays, showFonts;
-
 	public void backButtonEnabled() {
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
@@ -103,11 +88,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER)); //access full filesystem
 		} catch (Exception ignored) {
 		}
-
-		moduleType = getVersionType();
-
-		showOverlays = moduleType == FULL_VERSION;
-		showFonts = moduleType == FULL_VERSION;
 
 		PreferenceHelper.init(getDefaultSharedPreferences(createDeviceProtectedStorageContext()));
 
@@ -154,14 +134,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		}
 
 		super.attachBaseContext(newBase);
-	}
-
-	public static int getVersionType() {
-		try {
-			return Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", "/data/adb/modules/AOSPMods")).exec().getOut().get(0));
-		} catch (Exception ignored) {
-			return XPOSED_ONLY;
-		}
 	}
 
 	private void createNotificationChannel() {
@@ -295,21 +267,26 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static class HeaderFragment extends PreferenceFragmentCompat {
+	public static class HeaderFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.app_name);
+		}
+
+		@Override
+		public int getLayoutResource() {
+			return R.xml.header_preferences;
+		}
 
 		@Override
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.header_preferences, rootKey);
-
-			updateVisibility();
-
+			super.onCreatePreferences(savedInstanceState, rootKey);
 			try {
-				Process p = Runtime.getRuntime().exec("getprop ro.build.id");
-				p.waitFor();
-				byte[] buffer = new byte[p.getInputStream().available()];
+				Process process = Runtime.getRuntime().exec("getprop ro.build.id");
+				process.waitFor();
+				byte[] buffer = new byte[process.getInputStream().available()];
 				//noinspection ResultOfMethodCallIgnored
-				p.getInputStream().read(buffer);
+				process.getInputStream().read(buffer);
 				String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
 				if (!Pattern.matches("^[T|U][A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
 				{
@@ -317,399 +294,196 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				}
 			} catch (Throwable ignored) {
 			}
-
-		}
-
-		private void updateVisibility() {
-			PreferenceHelper.setupAllPreferences(this);
-		}
-
-		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.app_name));
 		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static class NavFragment extends PreferenceFragmentCompat {
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> updateVisibility();
-
+	public static class NavFragment extends ControlledPreferenceFragmentCompat {
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.nav_prefs, rootKey);
-			getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext())
-					.registerOnSharedPreferenceChangeListener(listener);
-			updateVisibility();
-		}
-
-		private void updateVisibility() {
-			PreferenceHelper.setupAllPreferences(this);
+		public String getTitle() {
+			return getString(R.string.nav_header);
 		}
 
 		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.nav_header));
-		}
-
-	}
-
-	@SuppressWarnings("ConstantConditions")
-	public static class ThemingFragment extends PreferenceFragmentCompat {
-
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> updateFontPrefs(sharedPreferences);
-
-		@SuppressLint("ApplySharedPref")
-		private void updateFontPrefs(SharedPreferences sharedPreferences) {
-			PreferenceHelper.setupAllPreferences(this);
-		}
-
-		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.theming_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			updateFontPrefs(prefs);
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-		}
-
-		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.qs_tile_style_title));
+		public int getLayoutResource() {
+			return R.xml.nav_prefs;
 		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static class LockScreenFragment extends PreferenceFragmentCompat {
-
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, s) -> updateVisibility(sharedPreferences);
-
+	public static class ThemingFragment extends ControlledPreferenceFragmentCompat {
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.lock_screen_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			updateVisibility(prefs);
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-		}
-
-		private void updateVisibility(SharedPreferences sharedPreferences) {
-			PreferenceHelper.setupAllPreferences(this);
+		public String getTitle() {
+			return getString(R.string.qs_tile_style_title);
 		}
 
 		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.lockscreen_header_title));
+		public int getLayoutResource() {
+			return R.xml.theming_prefs;
 		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static class SBBBFragment extends PreferenceFragmentCompat {
-
+	public static class LockScreenFragment extends ControlledPreferenceFragmentCompat {
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.statusbar_batterybar_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			prefs.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> updateVisibility(prefs));
-			updateVisibility(prefs);
-		}
-
-		private void updateVisibility(SharedPreferences prefs) {
-
-			PreferenceHelper.setupAllPreferences(this);
+		public String getTitle() {
+			return getString(R.string.lockscreen_header_title);
 		}
 
 		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.sbbb_header));
+		public int getLayoutResource() {
+			return R.xml.lock_screen_prefs;
 		}
-
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static class networkFragment extends PreferenceFragmentCompat {
-
+	public static class SBBBFragment extends ControlledPreferenceFragmentCompat {
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.sbqs_network_prefs, rootKey);
-			getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext())
-					.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> updateVisibility());
-			updateVisibility();
-		}
-
-		private void updateVisibility() {
-			PreferenceHelper.setupAllPreferences(this);
+		public String getTitle() {
+			return getString(R.string.sbbb_header);
 		}
 
 		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.ntsb_category_title));
+		public int getLayoutResource() {
+			return R.xml.statusbar_batterybar_prefs;
+		}
+	}
+
+	@SuppressWarnings("ConstantConditions")
+	public static class networkFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.ntsb_category_title);
+		}
+
+		@Override
+		public int getLayoutResource() {
+			return R.xml.sbqs_network_prefs;
 		}
 	}
 
 
 	@SuppressWarnings("ConstantConditions")
-	public static class SBBIconFragment extends PreferenceFragmentCompat {
-
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
-
+	public static class SBBIconFragment extends ControlledPreferenceFragmentCompat {
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.statusbar_batteryicon_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-			updateVisibility(prefs);
-		}
-
-		private void updateVisibility(SharedPreferences prefs) {
-			PreferenceHelper.setupAllPreferences(this);
+		public String getTitle() {
+			return getString(R.string.sbbIcon_header);
 		}
 
 		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.sbbIcon_header));
+		public int getLayoutResource() {
+			return R.xml.statusbar_batteryicon_prefs;
+		}
+	}
+
+	@SuppressWarnings("ConstantConditions")
+	public static class MiscFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.misc_header);
+		}
+
+		@Override
+		public int getLayoutResource() {
+			return R.xml.misc_prefs;
+		}
+	}
+
+	public static class PackageManagerFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.pm_header);
+		}
+
+		@Override
+		public int getLayoutResource() {
+			return R.xml.packagemanger_prefs;
+		}
+	}
+
+	public static class HotSpotFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.hotspot_header);
+		}
+
+		@Override
+		public int getLayoutResource() {
+			return R.xml.hotspot_prefs;
 		}
 	}
 
 
 	@SuppressWarnings("ConstantConditions")
-	public static class MiscFragment extends PreferenceFragmentCompat {
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
-
+	public static class SBCFragment extends ControlledPreferenceFragmentCompat {
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.misc_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-			updateVisibility(prefs);
-
-		}
-
-		private void updateVisibility(SharedPreferences prefs) {
-			PreferenceHelper.setupAllPreferences(this);
+		public String getTitle() {
+			return getString(R.string.sbc_header);
 		}
 
 		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.misc_header));
-		}
-	}
-
-	public static class PackageManagerFragment extends PreferenceFragmentCompat {
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
-
-		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.packagemanger_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-			updateVisibility(prefs);
-
-		}
-
-		private void updateVisibility(SharedPreferences prefs) {
-		}
-
-		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.pm_header));
-		}
-	}
-
-	public static class HotSpotFragment extends PreferenceFragmentCompat {
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
-
-		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.hotspot_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-			updateVisibility(prefs);
-
-		}
-
-		@SuppressLint("DefaultLocale")
-		private void updateVisibility(SharedPreferences prefs) {
-			PreferenceHelper.setupAllPreferences(this);
-		}
-
-		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.hotspot_header));
-		}
-	}
-
-
-	@SuppressWarnings("ConstantConditions")
-	public static class SBCFragment extends PreferenceFragmentCompat {
-
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
-
-		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.statusbar_clock_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-			updateVisibility(prefs);
-		}
-
-		private void updateVisibility(SharedPreferences prefs) {
-			PreferenceHelper.setupAllPreferences(this);
-		}
-
-		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.sbc_header));
+		public int getLayoutResource() {
+			return R.xml.statusbar_clock_prefs;
 		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static class ThreeButtonNavFragment extends PreferenceFragmentCompat {
-
+	public static class ThreeButtonNavFragment extends ControlledPreferenceFragmentCompat {
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.three_button_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-			updateVisibility(prefs);
-
-		}
-
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
-
-		private void updateVisibility(SharedPreferences prefs) {
-			PreferenceHelper.setupAllPreferences(this);
+		public String getTitle() {
+			return getString(R.string.threebutton_header_title);
 		}
 
 		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.threebutton_header_title));
-		}
-
-	}
-
-	@SuppressWarnings("ConstantConditions")
-	public static class StatusbarFragment extends PreferenceFragmentCompat {
-		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.statusbar_settings, rootKey);
-
-			PreferenceFragmentCompat fragmentCompat = this;
-			getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext())
-					.registerOnSharedPreferenceChangeListener((sharedPreferences, s) -> PreferenceHelper.setupAllPreferences(fragmentCompat));
-			PreferenceHelper.setupAllPreferences(this);
-		}
-
-		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.statusbar_header));
-		}
-	}
-
-	public static class QSTileQtyFragment extends PreferenceFragmentCompat {
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibililty(sharedPreferences);
-
-		private void updateVisibililty(SharedPreferences sharedPreferences) {
-			PreferenceHelper.setupAllPreferences(this);
-		}
-
-		@Override
-		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.qs_tile_qty_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			updateVisibililty(prefs);
-
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-		}
-
-		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.qs_tile_qty_title));
+		public int getLayoutResource() {
+			return R.xml.three_button_prefs;
 		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static class QuickSettingsFragment extends PreferenceFragmentCompat {
-		LabelFormatter formatter = value -> (value + 100) + "%";
+	public static class StatusbarFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.statusbar_header);
+		}
 
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibililty(sharedPreferences);
+		@Override
+		public int getLayoutResource() {
+			return R.xml.statusbar_settings;
+		}
+	}
+
+	public static class QSTileQtyFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.qs_tile_qty_title);
+		}
+
+		@Override
+		public int getLayoutResource() {
+			return R.xml.qs_tile_qty_prefs;
+		}
+	}
+
+	@SuppressWarnings("ConstantConditions")
+	public static class QuickSettingsFragment extends ControlledPreferenceFragmentCompat {
 		private FrameLayout pullDownIndicator;
 
-		@SuppressLint("RtlHardcoded")
-		private void updateVisibililty(SharedPreferences sharedPreferences) {
-			try {
-				int displayWidth = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
+		@Override
+		public String getTitle() {
+			return getString(R.string.qs_panel_category_title);
+		}
 
-				findPreference("BSThickTrackOverlay").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false) && showOverlays);
-				findPreference("BrightnessSlierOnBottom").setVisible(!sharedPreferences.getBoolean("QSBrightnessDisabled", false));
-				findPreference("QQSBrightnessEnabled").setVisible(sharedPreferences.getBoolean("QQSBrightnessSupported", true) && !sharedPreferences.getBoolean("QSBrightnessDisabled", false));
-				findPreference("QSFooterText").setVisible(sharedPreferences.getBoolean("QSFooterMod", false));
-				findPreference("QSPulldownPercent").setSummary(sharedPreferences.getInt("QSPulldownPercent", 25) + "%");
+		@Override
+		public int getLayoutResource() {
+			return R.xml.quicksettings_prefs;
+		}
 
-				findPreference("network_settings_header").setVisible(sharedPreferences.getBoolean("networkOnQSEnabled", false));
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+			super.onCreatePreferences(savedInstanceState, rootKey);
 
-				pullDownIndicator.setVisibility(findPreference("QSPulldownPercent").isVisible() ? View.VISIBLE : View.GONE);
-				FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) pullDownIndicator.getLayoutParams();
-				lp.width = Math.round(sharedPreferences.getInt("QSPulldownPercent", 25) * displayWidth / 100f);
-				lp.gravity = Gravity.TOP | (Integer.parseInt(sharedPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
-				pullDownIndicator.setLayoutParams(lp);
-
-				float QSLabelScaleFactor = 0;
-				try {
-					QSLabelScaleFactor = RangeSliderPreference.getValues(sharedPreferences, "QSLabelScaleFactor", 0f).get(0);
-				} catch (Exception ignored) {
-				}
-				findPreference("QSLabelScaleFactor").setSummary((QSLabelScaleFactor + 100) + "% " + getString(R.string.toggle_dark_apply));
-
-				float QSSecondaryLabelScaleFactor = 0;
-				try {
-					QSSecondaryLabelScaleFactor = RangeSliderPreference.getValues(sharedPreferences, "QSSecondaryLabelScaleFactor", 0f).get(0);
-				} catch (Exception ignored) {
-				}
-
-				findPreference("QSSecondaryLabelScaleFactor").setSummary((QSSecondaryLabelScaleFactor + 100) + "% " + getString(R.string.toggle_dark_apply));
-
-				try {
-					((RangeSliderPreference) findPreference("QSLabelScaleFactor")).slider.setLabelFormatter(formatter);
-				} catch (Exception ignored) {
-				}
-				try {
-					((RangeSliderPreference) findPreference("QSSecondaryLabelScaleFactor")).slider.setLabelFormatter(formatter);
-				} catch (Exception ignored) {
-				}
-
-				if (!showOverlays && sharedPreferences.getBoolean("BSThickTrackOverlay", false)) {
-					sharedPreferences.edit().putBoolean("BSThickTrackOverlay", false).apply();
-				}
-				findPreference("QSTilesThemesOverlayEx").setVisible(showOverlays);
-
-				findPreference("isFlashLevelGlobal").setVisible(findPreference("leveledFlashTile").isVisible() && sharedPreferences.getBoolean("leveledFlashTile", false));
-			} catch (Exception ignored) {
-			}
+			createPullDownIndicator();
 		}
 
 		@Override
@@ -718,16 +492,19 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			super.onDestroy();
 		}
 
+		@SuppressLint("RtlHardcoded")
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			createPullDownIndicator();
+		public void updateScreen(String key) {
+			super.updateScreen(key);
+			try {
+				int displayWidth = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
 
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.quicksettings_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			updateVisibililty(prefs);
-
-			prefs.registerOnSharedPreferenceChangeListener(listener);
+				pullDownIndicator.setVisibility(PreferenceHelper.isVisible("QSPulldownPercent") ? View.VISIBLE : View.GONE);
+				FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) pullDownIndicator.getLayoutParams();
+				lp.width = Math.round(mPreferences.getInt("QSPulldownPercent", 25) * displayWidth / 100f);
+				lp.gravity = Gravity.TOP | (Integer.parseInt(mPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
+				pullDownIndicator.setLayoutParams(lp);
+			} catch (Exception ignored) {}
 		}
 
 		private void createPullDownIndicator() {
@@ -742,60 +519,52 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 			((ViewGroup) getActivity().getWindow().getDecorView().getRootView()).addView(pullDownIndicator);
 		}
-
-		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.qs_panel_category_title));
-		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static class GestureNavFragment extends PreferenceFragmentCompat {
+	public static class GestureNavFragment extends ControlledPreferenceFragmentCompat {
 
 		FrameLayout leftBackGestureIndicator, rightBackGestureIndicator;
 		FrameLayout leftSwipeGestureIndicator, rightSwipeGestureIndicator;
 
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
+		@Override
+		public String getTitle() {
+			return getString(R.string.gesturenav_header);
+		}
 
-		private void updateVisibility(SharedPreferences sharedPreferences) {
+		@Override
+		public int getLayoutResource() {
+			return R.xml.gesture_nav_prefs;
+		}
+
+		@SuppressLint("RtlHardcoded")
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+			super.onCreatePreferences(savedInstanceState, rootKey);
+
+			rightBackGestureIndicator = prepareBackGestureView(Gravity.RIGHT);
+			leftBackGestureIndicator = prepareBackGestureView(Gravity.LEFT);
+
+			rightSwipeGestureIndicator = prepareSwipeGestureView(Gravity.RIGHT);
+			leftSwipeGestureIndicator = prepareSwipeGestureView(Gravity.LEFT);
+		}
+
+		@Override
+		public void updateScreen(String key) {
+			super.updateScreen(key);
 			try {
-				boolean HideNavbarOverlay = sharedPreferences.getBoolean("HideNavbarOverlay", false);
-
 				int displayHeight = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().height();
 				int displayWidth = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
 
-				findPreference("GesPillWidthModPos").setSummary(sharedPreferences.getInt("GesPillWidthModPos", 50) * 2 + getString(R.string.pill_width_summary));
-				findPreference("GesPillHeightFactor").setSummary(sharedPreferences.getInt("GesPillHeightFactor", 100) + getString(R.string.pill_width_summary));
-
-				findPreference("BackLeftHeight").setVisible(sharedPreferences.getBoolean("BackFromLeft", true));
-				findPreference("BackRightHeight").setVisible(sharedPreferences.getBoolean("BackFromRight", true));
-				findPreference("BackLeftHeight").setSummary(sharedPreferences.getInt("BackLeftHeight", 100) + "%");
-				findPreference("BackRightHeight").setSummary(sharedPreferences.getInt("BackRightHeight", 100) + "%");
-
-				findPreference("leftSwipeUpPercentage").setVisible(!sharedPreferences.getString("leftSwipeUpAction", "-1").equals("-1"));
-				findPreference("rightSwipeUpPercentage").setVisible(!sharedPreferences.getString("rightSwipeUpAction", "-1").equals("-1"));
-
 				float leftSwipeUpPercentage = 25f;
 				try {
-					leftSwipeUpPercentage = RangeSliderPreference.getValues(sharedPreferences, "leftSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {
-				}
-				findPreference("leftSwipeUpPercentage").setSummary(leftSwipeUpPercentage + "%");
+					leftSwipeUpPercentage = RangeSliderPreference.getValues(mPreferences, "leftSwipeUpPercentage", 25).get(0);
+				} catch (Exception ignored) {}
 
 				float rightSwipeUpPercentage = 25f;
 				try {
-					rightSwipeUpPercentage = RangeSliderPreference.getValues(sharedPreferences, "rightSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {
-				}
-				findPreference("rightSwipeUpPercentage").setSummary(rightSwipeUpPercentage + "%");
-
-				float swipeUpPercentage = 20f;
-				try {
-					swipeUpPercentage = RangeSliderPreference.getValues(sharedPreferences, "swipeUpPercentage", 20).get(0);
-				} catch (Exception ignored) {
-				}
-				findPreference("swipeUpPercentage").setSummary(swipeUpPercentage + "%");
+					rightSwipeUpPercentage = RangeSliderPreference.getValues(mPreferences, "rightSwipeUpPercentage", 25).get(0);
+				} catch (Exception ignored) {}
 
 				int edgeWidth = Math.round(displayWidth * leftSwipeUpPercentage / 100f);
 				ViewGroup.LayoutParams lp = leftSwipeGestureIndicator.getLayoutParams();
@@ -807,49 +576,28 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				lp.width = edgeWidth;
 				rightSwipeGestureIndicator.setLayoutParams(lp);
 
-				setVisibility(rightSwipeGestureIndicator, findPreference("rightSwipeUpPercentage").isVisible(), 400);
-				setVisibility(leftSwipeGestureIndicator, findPreference("leftSwipeUpPercentage").isVisible(), 400);
+				setVisibility(rightSwipeGestureIndicator, PreferenceHelper.isVisible("rightSwipeUpPercentage"), 400);
+				setVisibility(leftSwipeGestureIndicator, PreferenceHelper.isVisible("leftSwipeUpPercentage"), 400);
 
-				findPreference("nav_pill_cat").setVisible(!HideNavbarOverlay);
-				findPreference("nav_keyboard_height_cat").setVisible(!HideNavbarOverlay);
+				setVisibility(rightBackGestureIndicator, PreferenceHelper.isVisible("BackRightHeight"), 400);
+				setVisibility(leftBackGestureIndicator, PreferenceHelper.isVisible("BackLeftHeight"), 400);
 
-				setVisibility(rightBackGestureIndicator, findPreference("BackRightHeight").isVisible(), 400);
-				setVisibility(leftBackGestureIndicator, findPreference("BackLeftHeight").isVisible(), 400);
-
-				int edgeHeight = Math.round(displayHeight * sharedPreferences.getInt("BackRightHeight", 100) / 100f);
+				int edgeHeight = Math.round(displayHeight * mPreferences.getInt("BackRightHeight", 100) / 100f);
 				lp = rightBackGestureIndicator.getLayoutParams();
 				lp.height = edgeHeight;
 				rightBackGestureIndicator.setLayoutParams(lp);
 
-				edgeHeight = Math.round(displayHeight * sharedPreferences.getInt("BackLeftHeight", 100) / 100f);
+				edgeHeight = Math.round(displayHeight * mPreferences.getInt("BackLeftHeight", 100) / 100f);
 				lp = leftBackGestureIndicator.getLayoutParams();
 				lp.height = edgeHeight;
 				leftBackGestureIndicator.setLayoutParams(lp);
 
-				findPreference("nav_keyboard_height_cat").setVisible(showOverlays);
-			} catch (Exception ignored) {
-			}
-		}
-
-		@SuppressLint("RtlHardcoded")
-		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			rightBackGestureIndicator = prepareBackGestureView(Gravity.RIGHT);
-			leftBackGestureIndicator = prepareBackGestureView(Gravity.LEFT);
-
-			rightSwipeGestureIndicator = prepareSwipeGestureView(Gravity.RIGHT);
-			leftSwipeGestureIndicator = prepareSwipeGestureView(Gravity.LEFT);
-
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.gesture_nav_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			updateVisibility(prefs);
-
-			prefs.registerOnSharedPreferenceChangeListener(listener);
+			} catch (Exception ignored) {}
 		}
 
 		private FrameLayout prepareSwipeGestureView(int gravity) {
 			int navigationBarHeight = 0;
+			@SuppressLint({"DiscouragedApi", "InternalInsetResource"})
 			int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
 			if (resourceId > 0) {
 				navigationBarHeight = getContext().getResources().getDimensionPixelSize(resourceId);
@@ -870,6 +618,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 		private FrameLayout prepareBackGestureView(int gravity) {
 			int navigationBarHeight = 0;
+			@SuppressLint({"InternalInsetResource", "DiscouragedApi"})
 			int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
 			if (resourceId > 0) {
 				navigationBarHeight = getContext().getResources().getDimensionPixelSize(resourceId);
@@ -929,88 +678,67 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 			super.onDestroy();
 		}
+	}
+
+	@SuppressWarnings("ConstantConditions")
+	public static class NetworkStatFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.netstat_header);
+		}
 
 		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.gesturenav_header));
+		public int getLayoutResource() {
+			return R.xml.lsqs_custom_text;
 		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static class NetworkStatFragment extends PreferenceFragmentCompat {
-
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
-
-		private void updateVisibility(SharedPreferences sharedPreferences) {
-			PreferenceHelper.setupAllPreferences(this);
+	public static class DialerFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.dialer_header);
 		}
 
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.lsqs_custom_text, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			updateVisibility(prefs);
-
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-		}
-
-		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.netstat_header));
+		public int getLayoutResource() {
+			return R.xml.dialer_prefs;
 		}
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static class DialerFragment extends PreferenceFragmentCompat {
-
-		SharedPreferences.OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> updateVisibility(sharedPreferences);
-
-		private void updateVisibility(SharedPreferences sharedPreferences) {
-			try {
-			} catch (Exception ignored) {
-			}
+	public static class OwnPrefsFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.own_prefs_header);
 		}
 
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.dialer_prefs, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-			updateVisibility(prefs);
-
-			prefs.registerOnSharedPreferenceChangeListener(listener);
+		public int getLayoutResource() {
+			return R.xml.own_prefs_header;
 		}
 
 		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.dialer_header));
-		}
-	}
+		public void updateScreen(String key) {
+			super.updateScreen(key);
 
-	@SuppressWarnings("ConstantConditions")
-	public static class OwnPrefsFragment extends PreferenceFragmentCompat {
+			if(key == null) return;
 
-		SharedPreferences.OnSharedPreferenceChangeListener listener = this::onPrefChanged;
+			switch (key)
+			{
+				case "appLanguage":
+					try {
+						getActivity().recreate();
+					} catch (Exception ignored) {}
+					break;
 
-		private void onPrefChanged(SharedPreferences sharedPreferences, String key) {
-			if (key.equals("appLanguage")) {
-				try {
-					getActivity().recreate();
-				} catch (Exception ignored) {
-				}
-			}
+				case "AlternativeThemedAppIcon":
+					try {
+						boolean AlternativeThemedAppIconEnabled = mPreferences.getBoolean("AlternativeThemedAppIcon", false);
 
-			if (key.equals("AlternativeThemedAppIcon")) {
-				try {
-					boolean AlternativeThemedAppIconEnabled = sharedPreferences.getBoolean("AlternativeThemedAppIcon", false);
-
-					setAlternativeAppIcon(AlternativeThemedAppIconEnabled);
-				} catch (Exception ignored) {
-				}
+						setAlternativeAppIcon(AlternativeThemedAppIconEnabled);
+					} catch (Exception ignored) {}
+					break;
 			}
 		}
 
@@ -1038,22 +766,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 			manager.set(AlarmManager.RTC, System.currentTimeMillis() + 1, pendingIntent);
 			System.exit(0);
-		}
-
-		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			getPreferenceManager().setStorageDeviceProtected();
-			setPreferencesFromResource(R.xml.own_prefs_header, rootKey);
-			SharedPreferences prefs = getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
-
-
-			prefs.registerOnSharedPreferenceChangeListener(listener);
-		}
-
-		@Override
-		public void onResume() {
-			super.onResume();
-			requireActivity().setTitle(requireActivity().getResources().getString(R.string.own_prefs_header));
 		}
 	}
 }

@@ -170,7 +170,7 @@
 			android:title="@string/ntsb_enabled_title" />
 		<sh.siava.AOSPMods.ui.MaterialPreference
 			app:fragment="sh.siava.AOSPMods.SettingsActivity$networkFragment"
-			app:key="network_settings_header"
+			app:key="network_settings_header_qs"
 			app:title="@string/network_settings_pref" />
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

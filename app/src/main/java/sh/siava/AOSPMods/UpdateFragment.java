@@ -41,6 +41,7 @@ import javax.security.auth.callback.Callback;
 
 import br.tiagohm.markdownview.MarkdownView;
 import sh.siava.AOSPMods.databinding.UpdateFragmentBinding;
+import sh.siava.AOSPMods.utils.PreferenceHelper;
 
 
 public class UpdateFragment extends Fragment {
@@ -99,7 +100,7 @@ public class UpdateFragment extends Fragment {
 	};
 	private UpdateFragmentBinding binding;
 	private int currentVersionCode = -1;
-	private int currentVersionType = SettingsActivity.XPOSED_ONLY;
+	private int currentVersionType = PreferenceHelper.XPOSED_ONLY;
 	private String currentVersionName = "";
 	private boolean rebootPending = false;
 //	private boolean downloadStarted = false;
@@ -183,7 +184,7 @@ public class UpdateFragment extends Fragment {
 							}
 							enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
 						} else {
-							if (latestCode > currentVersionCode || (currentVersionType == SettingsActivity.FULL_VERSION) != installFullVersion) {
+							if (latestCode > currentVersionCode || (currentVersionType == PreferenceHelper.FULL_VERSION) != installFullVersion) {
 								enable = true;
 							}
 						}
@@ -217,7 +218,7 @@ public class UpdateFragment extends Fragment {
 			}
 		});
 
-		if (currentVersionType == SettingsActivity.FULL_VERSION) {
+		if (currentVersionType == PreferenceHelper.FULL_VERSION) {
 			((RadioButton) view.findViewById(R.id.fullTypeID)).setChecked(true);
 		} else {
 			((RadioButton) view.findViewById(R.id.XposedTypeID)).setChecked(true);
@@ -250,7 +251,7 @@ public class UpdateFragment extends Fragment {
 				try {
 					currentVersionType = Integer.parseInt(Shell.cmd(String.format("cat %s/build.type", moduleDir)).exec().getOut().get(0));
 				} catch (Exception ignored) {
-					currentVersionType = SettingsActivity.XPOSED_ONLY;
+					currentVersionType = PreferenceHelper.XPOSED_ONLY;
 				}
 				rebootPending = true;
 			} else {
@@ -260,7 +261,7 @@ public class UpdateFragment extends Fragment {
 			rebootPending = false;
 			currentVersionName = BuildConfig.VERSION_NAME;
 			currentVersionCode = BuildConfig.VERSION_CODE;
-			currentVersionType = SettingsActivity.moduleType;
+			currentVersionType = PreferenceHelper.getVersionType();
 		}
 	}
 

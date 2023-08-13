@@ -90,7 +90,7 @@ class PreferenceParser {
 					result.resId = item.getResId();
 
 					try {
-						if (!PreferenceHelper.isVisible(result.key)) {
+						if (!isSearchable(result)) {
 							if (!bannedKeys.contains(result.key))
 								bannedKeys.add(result.key);
 						} else
@@ -101,7 +101,8 @@ class PreferenceParser {
 					if (!BLACKLIST.contains(xpp.getName())
 							&& result.hasData()
 							&& !"true".equals(getAttribute(xpp, NS_SEARCH, "ignore"))
-							&& !bannedKeys.contains(result.key)) {
+							&& !bannedKeys.contains(result.key)
+							&& shouldAddPreferenceItem(results, result)) {
 						result.breadcrumbs = joinBreadcrumbs(breadcrumbs);
 						result.keyBreadcrumbs = cleanupKeyBreadcrumbs(keyBreadcrumbs);
 						results.add(result);
@@ -126,6 +127,21 @@ class PreferenceParser {
 			e.printStackTrace();
 		}
 		return results;
+	}
+
+	private boolean isSearchable(PreferenceItem result) {
+		return PreferenceHelper.isVisible(result.key);
+	}
+
+	private boolean shouldAddPreferenceItem(ArrayList<PreferenceItem> results, PreferenceItem result) {
+		boolean isAlreadyAdded = false;
+		for (PreferenceItem item : results) {
+			if (item.key.equals(result.key) && item.resId == result.resId) {
+				isAlreadyAdded = true;
+				break;
+			}
+		}
+		return !isAlreadyAdded;
 	}
 
 	private ArrayList<String> cleanupKeyBreadcrumbs(ArrayList<String> keyBreadcrumbs) {

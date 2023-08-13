@@ -1,3 +1,6 @@
+**canary-275**  
+- Added search in the app. (Shout out to DrDisagree@Telegram / Mahmud0808@Github)  
+  
 **canary-274**  
 - Fixed unrestricted screenshot for work profile  
   

@@ -56,7 +56,15 @@ public class PreferenceHelper {
 			case "CustomThemedIconsOverlay":
 			case "UnreadMessagesNumberOverlay":
 			case "QSTilesThemesOverlayEx":
+			case "enablePowerMenuTheme":
+			case "IconPacksOverlayEx":
+			case "IconShapesOverlayEx":
+			case "SignalIconsOverlayEx":
+			case "DTStylesOverlayEx":
 				return showOverlays;
+
+			case "enableCustomFonts":
+				return showFonts;
 
 			case "TaskbarAsRecents":
 			case "taskbarHeightOverride":
@@ -67,6 +75,9 @@ public class PreferenceHelper {
 
 			case "gsans_override":
 			case "FontsOverlayEx":
+				if(!showFonts)
+					return false;
+
 				boolean customFontsEnabled = instance.mPreferences.getBoolean("enableCustomFonts", false);
 
 				if (!customFontsEnabled && !instance.mPreferences.getString("FontsOverlayEx", "").equals("None")) {

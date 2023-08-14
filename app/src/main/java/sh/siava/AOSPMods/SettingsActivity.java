@@ -230,17 +230,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 		int itemID = item.getItemId();
 
-		if (itemID == android.R.id.home) {
-			onBackPressed();
-		} else if (itemID == R.id.menu_clearPrefs) {
+		if (itemID == R.id.menu_clearPrefs) {
 			PrefManager.clearPrefs(prefs);
 			AppUtils.RestartSystemUI();
 		} else if (itemID == R.id.menu_exportPrefs) {
 			importExportSettings(true);
 		} else if (itemID == R.id.menu_importPrefs) {
 			importExportSettings(false);
-		} else if (itemID == R.id.menu_netstat_clear) {
-			clearNetstatClick();
 		} else if (itemID == R.id.menu_restart) {
 			AppUtils.Restart();
 		} else if (itemID == R.id.menu_restartSysUI) {
@@ -249,26 +245,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			startActivity(new Intent(this, UpdateActivity.class));
 		}
 		return true;
-	}
-
-	@SuppressLint("ApplySharedPref")
-	private void clearNetstatClick() {
-		//showing an alert before taking action
-		new AlertDialog.Builder(this).setTitle(R.string.nestat_caution_title).setMessage(R.string.nestat_caution_text).setPositiveButton(R.string.netstat_caution_yes, (dialogInterface, i) -> {
-			try {
-				SharedPreferences prefs = getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
-				boolean currentStatus = prefs.getBoolean("NetworkStatsEnabled", false);
-
-				prefs.edit().putBoolean("NetworkStatsEnabled", false).commit();
-				Shell.cmd("rm -rf /data/user_de/0/com.android.systemui/netStats").exec();
-				Thread.sleep(100);
-
-				prefs.edit().putBoolean("NetworkStatsEnabled", true).commit();
-				Thread.sleep(100);
-				prefs.edit().putBoolean("NetworkStatsEnabled", currentStatus).apply();
-			} catch (Exception ignored) {
-			}
-		}).setNegativeButton(R.string.netstat_caution_no, (dialogInterface, i) -> {/*nothing happens*/}).setCancelable(true).create().show();
 	}
 
 	private void importExportSettings(boolean export) {

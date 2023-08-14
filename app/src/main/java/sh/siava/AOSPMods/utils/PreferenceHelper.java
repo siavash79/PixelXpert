@@ -138,14 +138,14 @@ public class PreferenceHelper {
 				return instance.mPreferences.getBoolean("BBarEnabled", false);
 
 			case "networkTrafficRXTop":
-				return instance.mPreferences.getString("networkTrafficMode", "0").equals("0");
+				return (instance.mPreferences.getBoolean("networkOnQSEnabled", false) || instance.mPreferences.getBoolean("networkOnSBEnabled", false)) && instance.mPreferences.getString("networkTrafficMode", "0").equals("0");
 
 			case "networkTrafficColorful":
-				return !instance.mPreferences.getString("networkTrafficMode", "0").equals("3");
+				return (instance.mPreferences.getBoolean("networkOnQSEnabled", false) || instance.mPreferences.getBoolean("networkOnSBEnabled", false)) && !instance.mPreferences.getString("networkTrafficMode", "0").equals("3");
 
 			case "networkTrafficDLColor":
 			case "networkTrafficULColor":
-				return instance.mPreferences.getBoolean("networkTrafficColorful", true);
+				return (instance.mPreferences.getBoolean("networkOnQSEnabled", false) || instance.mPreferences.getBoolean("networkOnSBEnabled", false)) && instance.mPreferences.getBoolean("networkTrafficColorful", true);
 
 			case "DualToneBatteryOverlay":
 				return Integer.parseInt(instance.mPreferences.getString("BatteryStyle", "0")) == 0 && showOverlays;
@@ -240,7 +240,12 @@ public class PreferenceHelper {
 				return instance.mPreferences.getBoolean("QSFooterMod", false);
 
 			case "network_settings_header_qs":
-				return instance.mPreferences.getBoolean("networkOnQSEnabled", false);
+			case "networkTrafficMode":
+			case "networkTrafficShowIcons":
+			case "networkTrafficInterval":
+			case "networkTrafficThreshold":
+			case "networkTrafficOpacity":
+				return (instance.mPreferences.getBoolean("networkOnQSEnabled", false) || instance.mPreferences.getBoolean("networkOnSBEnabled", false));
 
 			case "isFlashLevelGlobal":
 				return instance.mPreferences.getBoolean("leveledFlashTile", false);

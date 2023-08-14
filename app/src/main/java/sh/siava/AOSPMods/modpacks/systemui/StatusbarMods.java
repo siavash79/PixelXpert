@@ -195,7 +195,8 @@ public class StatusbarMods extends XposedModPack {
 	//endregion
 
 	//region combined signal icons
-	private boolean mWifiVisble = false;
+	private boolean mWifiVisible = false;
+	private long mStartTime = 0;
 	private static boolean CombineSignalIcons = false;
 	private static boolean HideRoamingState = false;
 	private Object mTunerService;
@@ -496,6 +497,8 @@ public class StatusbarMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
+		mStartTime = System.currentTimeMillis();
+
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Constants.ACTION_PROFILE_SWITCH_AVAILABLE);
 		mContext.registerReceiver(mAppProfileSwitchReceiver, filter, Context.RECEIVER_EXPORTED);
@@ -533,9 +536,9 @@ public class StatusbarMods extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				boolean wifiVisible = getBooleanField(getObjectField(param.args[0], "statusIcon"), "visible");
-				if(wifiVisible != mWifiVisble)
+				if(wifiVisible != mWifiVisible && System.currentTimeMillis() > mStartTime + 5000) //don't apply wifi change in the first 5 seconds
 				{
-					mWifiVisble = wifiVisible;
+					mWifiVisible = wifiVisible;
 					if(CombineSignalIcons) {
 						wifiVisibleChanged();
 					}
@@ -1321,7 +1324,7 @@ public class StatusbarMods extends XposedModPack {
 					(ContentResolver) getObjectField(mTunerService, "mContentResolver")
 					, ICON_HIDE_LIST);
 
-			if (CombineSignalIcons && mWifiVisble) {
+			if (CombineSignalIcons && mWifiVisible) {
 				if (hideListString == null || hideListString.length() == 0) {
 					hideListString = "mobile";
 				} else if (!hideListString.contains("mobile")) {
@@ -1334,7 +1337,7 @@ public class StatusbarMods extends XposedModPack {
 			for (Object tunable : tunables) {
 				callMethod(tunable, "onTuningChanged", ICON_HIDE_LIST, hideListString);
 			}
-		} catch (Throwable ignored){}
+		} catch (Throwable ignored) {}
 	}
 	//endregion
 }

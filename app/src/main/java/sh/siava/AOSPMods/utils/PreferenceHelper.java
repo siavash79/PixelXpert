@@ -247,7 +247,12 @@ public class PreferenceHelper {
 				return (instance.mPreferences.getBoolean("networkOnQSEnabled", false) || instance.mPreferences.getBoolean("networkOnSBEnabled", false));
 
 			case "network_settings_header_qs":
-				return instance.mPreferences.getBoolean("networkOnQSEnabled", false);
+			case "networkTrafficMode":
+			case "networkTrafficShowIcons":
+			case "networkTrafficInterval":
+			case "networkTrafficThreshold":
+			case "networkTrafficOpacity":
+				return (instance.mPreferences.getBoolean("networkOnQSEnabled", false) || instance.mPreferences.getBoolean("networkOnSBEnabled", false));
 
 			case "isFlashLevelGlobal":
 				return instance.mPreferences.getBoolean("leveledFlashTile", false);

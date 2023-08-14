@@ -813,7 +813,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 					try {
 						boolean AlternativeThemedAppIconEnabled = mPreferences.getBoolean("AlternativeThemedAppIcon", false);
 
-						setAlternativeAppIcon(AlternativeThemedAppIconEnabled);
+						new AlertDialog.Builder(getContext()).setTitle(R.string.app_kill_alert_title).setMessage(R.string.app_kill_alert_body).setPositiveButton(R.string.app_kill_ok_btn, (dialog, which) -> setAlternativeAppIcon(AlternativeThemedAppIconEnabled)).setCancelable(false).show();
 					} catch (Exception ignored) {
 					}
 					break;
@@ -836,14 +836,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 					PackageManager.DONT_KILL_APP
 			);
 
-			// Restart the app to apply the new app icon
-			Intent intent = getActivity().getPackageManager()
-					.getLaunchIntentForPackage(getActivity().getPackageName());
-			PendingIntent pendingIntent = PendingIntent.getActivity(
-					getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-			AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-			manager.set(AlarmManager.RTC, System.currentTimeMillis() + 1, pendingIntent);
-			System.exit(0);
+			getActivity().finish();
 		}
 	}
 }

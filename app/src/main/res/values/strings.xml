@@ -396,6 +396,11 @@
 	<string name="incompatible_alert_body">Your current ROM is not the direct target of this module. You may continue to use it, but some (or all) options might not work as intended\n\nPlease do not report bugs</string>
 	<string name="incompatible_alert_ok_btn">I understand</string>
 
+	<!-- App kill Alert -->
+	<string name="app_kill_alert_title">Notice</string>
+	<string name="app_kill_alert_body">App will close now. You can open it again by tapping on the new icon</string>
+	<string name="app_kill_ok_btn">Fine</string>
+
 	<!-- Menu Items -->
 	<string name="menu_settings_title">Import/Export</string>
 	<string name="menu_reset_defaults">Reset all settings</string>

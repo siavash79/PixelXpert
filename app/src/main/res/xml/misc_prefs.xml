@@ -11,8 +11,8 @@
 			android:defaultValue="false"
 			android:key="CustomThemedIconsOverlay"
 			android:title="@string/custom_themed_icons_title"
-			app:summaryOff="@string/custom_themed_icons_off"
-			app:summaryOn="@string/custom_themed_icons_on" />
+			android:summaryOff="@string/custom_themed_icons_off"
+			android:summaryOn="@string/custom_themed_icons_on" />
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
@@ -171,7 +171,7 @@
 			android:defaultValue="false"
 			android:key="doubleTapToWake"
 			android:title="@string/so_double_tap_wake_title"
-			app:summary="@string/so_double_tap_wake_summary" />
+			android:summary="@string/so_double_tap_wake_summary" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
@@ -203,8 +203,8 @@
 
 		<sh.siava.AOSPMods.ui.MaterialPreference
 			app:fragment="sh.siava.AOSPMods.SettingsActivity$NetworkStatFragment"
-			app:key="netstat_header"
-			app:title="@string/netstat_header" />
+			android:key="netstat_header"
+			android:title="@string/netstat_header" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

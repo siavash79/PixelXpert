@@ -12,8 +12,8 @@
 			android:defaultValue="false"
 			android:key="DoubleTapSleep"
 			android:title="@string/double_tap_sleep_title"
-			app:summaryOff="@string/general_off"
-			app:summaryOn="@string/general_on" />
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on" />
 
 		<!--SeekBarPreference
 			android:layout_width="wrap_content"
@@ -26,18 +26,18 @@
 
 		<sh.siava.AOSPMods.ui.MaterialPreference
 			app:fragment="sh.siava.AOSPMods.SettingsActivity$SBCFragment"
-			app:key="sbc_header"
-			app:title="@string/sbc_header" />
+			android:key="sbc_header"
+			android:title="@string/sbc_header" />
 
 		<sh.siava.AOSPMods.ui.MaterialPreference
 			app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBBFragment"
-			app:key="sbbb_header"
-			app:title="@string/sbbb_header" />
+			android:key="sbbb_header"
+			android:title="@string/sbbb_header" />
 
 		<sh.siava.AOSPMods.ui.MaterialPreference
 			app:fragment="sh.siava.AOSPMods.SettingsActivity$SBBIconFragment"
-			app:key="sbbIcon_header"
-			app:title="@string/sbbIcon_header" />
+			android:key="sbbIcon_header"
+			android:title="@string/sbbIcon_header" />
 
 		<!--sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
@@ -170,8 +170,8 @@
 
 			<sh.siava.AOSPMods.ui.MaterialPreference
 				app:fragment="sh.siava.AOSPMods.SettingsActivity$NetworkFragment"
-				app:key="network_settings_header"
-				app:title="@string/network_settings_pref" />
+				android:key="network_settings_header"
+				android:title="@string/network_settings_pref" />
 
 		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>

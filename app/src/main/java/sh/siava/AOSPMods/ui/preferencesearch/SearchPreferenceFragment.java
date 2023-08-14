@@ -86,10 +86,7 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 	private HistoryClickListener historyClickListener;
 	private CharSequence searchTermPreset = null;
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		prefs = requireContext().getSharedPreferences(SHARED_PREFS_FILE, Context.MODE_PRIVATE);
+	private void initSearch() {
 		searcher = new PreferenceParser(requireContext());
 
 		assert getArguments() != null;
@@ -100,6 +97,14 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 		}
 		searcher.addPreferenceItems(searchConfiguration.getPreferencesToIndex());
 		loadHistory();
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		prefs = requireContext().getSharedPreferences(SHARED_PREFS_FILE, Context.MODE_PRIVATE);
+
+		initSearch();
 	}
 
 	@Override
@@ -198,16 +203,7 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 	public void onResume() {
 		super.onResume();
 
-		searcher = new PreferenceParser(requireContext());
-
-		assert getArguments() != null;
-		searchConfiguration = SearchConfiguration.fromBundle(getArguments());
-		ArrayList<SearchConfiguration.SearchIndexItem> files = searchConfiguration.getFiles();
-		for (SearchConfiguration.SearchIndexItem file : files) {
-			searcher.addResourceFile(file);
-		}
-		searcher.addPreferenceItems(searchConfiguration.getPreferencesToIndex());
-		loadHistory();
+		initSearch();
 
 		updateSearchResults(viewHolder.searchView.getText().toString());
 

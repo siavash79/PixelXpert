@@ -136,7 +136,7 @@ class PreferenceParser {
 	private boolean shouldAddPreferenceItem(ArrayList<PreferenceItem> results, PreferenceItem result) {
 		boolean isAlreadyAdded = false;
 		for (PreferenceItem item : results) {
-			if (item.key.equals(result.key) && item.breadcrumbs.equals(result.breadcrumbs)) {
+			if (item.key.equals(result.key) && item.resId == result.resId) {
 				isAlreadyAdded = true;
 				break;
 			}

@@ -12,7 +12,7 @@
 			android:key="QSRowQty"
 			android:max="8"
 			app:min="0"
-			app:title="@string/qs_rows_number"
+			android:title="@string/qs_rows_number"
 			app:updatesContinuously="true" />
 
 		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
@@ -20,7 +20,7 @@
 			android:key="QSColQty"
 			android:max="4"
 			app:min="1"
-			app:title="@string/qs_cols_number"
+			android:title="@string/qs_cols_number"
 			app:updatesContinuously="true" />
 
 		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
@@ -28,7 +28,7 @@
 			android:key="QQSTileQty"
 			android:max="8"
 			app:min="2"
-			app:title="@string/qqs_tiles_number"
+			android:title="@string/qqs_tiles_number"
 			app:updatesContinuously="true" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
@@ -42,7 +42,7 @@
 			android:key="QSRowQtyL"
 			android:max="8"
 			app:min="0"
-			app:title="@string/qs_rows_number"
+			android:title="@string/qs_rows_number"
 			app:updatesContinuously="true" />
 
 		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
@@ -50,7 +50,7 @@
 			android:key="QSColQtyL"
 			android:max="4"
 			app:min="1"
-			app:title="@string/qs_cols_number"
+			android:title="@string/qs_cols_number"
 			app:updatesContinuously="true" />
 
 		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
@@ -58,7 +58,7 @@
 			android:key="QQSTileQtyL"
 			android:max="8"
 			app:min="2"
-			app:title="@string/qqs_tiles_number"
+			android:title="@string/qqs_tiles_number"
 			app:updatesContinuously="true" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>

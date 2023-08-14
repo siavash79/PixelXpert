@@ -3,13 +3,13 @@
 
 	<sh.siava.AOSPMods.ui.MaterialPreference
 		app:fragment="sh.siava.AOSPMods.SettingsActivity$GestureNavFragment"
-		app:key="gesturenav_header"
-		app:title="@string/gesturenav_header" />
+		android:key="gesturenav_header"
+		android:title="@string/gesturenav_header" />
 
 	<sh.siava.AOSPMods.ui.MaterialPreference
 		app:fragment="sh.siava.AOSPMods.SettingsActivity$ThreeButtonNavFragment"
-		app:key="threebutton_header"
-		app:title="@string/threebutton_header_title" />
+		android:key="threebutton_header"
+		android:title="@string/threebutton_header_title" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
@@ -53,7 +53,7 @@
 		app:maxVal="300"
 		app:minVal="50"
 		app:tickInterval="10"
-		app:title="@string/taskbar_height_title"
+		android:title="@string/taskbar_height_title"
 		app:updatesContinuously="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
@@ -62,7 +62,7 @@
 		app:maxVal="2"
 		app:minVal="0"
 		app:tickInterval=".1"
-		app:title="@string/taskbar_radius_title"
+		android:title="@string/taskbar_radius_title"
 		app:updatesContinuously="false" />
 
 </PreferenceScreen>

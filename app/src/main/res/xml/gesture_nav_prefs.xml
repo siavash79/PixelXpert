@@ -45,8 +45,8 @@
 			android:defaultValue="false"
 			android:key="FCLongSwipeEnabled"
 			android:title="@string/gesture_nav_long_swipe_fc_title"
-			app:summaryOff="@string/general_off"
-			app:summaryOn="@string/general_on" />
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on" />
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue="-1"
@@ -103,20 +103,20 @@
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:title="@string/gesture_nav_pill_cat"
-		app:key="nav_pill_cat"
+		android:key="nav_pill_cat"
 		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="navPillColorAccent"
 			android:title="@string/colorpill"
-			app:summaryOff="@string/general_off"
-			app:summaryOn="@string/general_on" />
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on" />
 
 		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
 			android:defaultValue="50"
 			android:key="GesPillWidthModPos"
-			app:title="@string/gesture_nav_pill_width_title"
+			android:title="@string/gesture_nav_pill_width_title"
 			app:updatesContinuously="true" />
 
 		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
@@ -125,22 +125,22 @@
 			android:max="300"
 			app:min="50"
 			app:seekBarIncrement="10"
-			app:title="@string/gesture_nav_pill_height_title"
+			android:title="@string/gesture_nav_pill_height_title"
 			app:updatesContinuously="true" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:title="@string/reducekeyboard_title"
-		app:key="nav_keyboard_height_cat"
+		android:key="nav_keyboard_height_cat"
 		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="ReduceKeyboardSpaceOverlay"
 			android:title="@string/reducekeyboard"
-			app:summaryOff="@string/general_off"
-			app:summaryOn="@string/general_on" />
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

@@ -39,7 +39,7 @@
 		android:singleLine="true"
 		android:title="@string/ntsb_threshold_title"
 		app:defaultValue="10"
-		app:summary="@string/ntsb_threshold_summary" />
+		android:summary="@string/ntsb_threshold_summary" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"

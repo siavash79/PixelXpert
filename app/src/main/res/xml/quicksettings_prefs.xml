@@ -45,7 +45,7 @@
 			<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
 				android:defaultValue="50"
 				android:key="UnMuteVolumePCT"
-				app:title="@string/qs_volume_unmute_title"
+				android:title="@string/qs_volume_unmute_title"
 				app:updatesContinuously="true" />
 
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
@@ -84,8 +84,8 @@
 
 			<sh.siava.AOSPMods.ui.MaterialPreference
 				app:fragment="sh.siava.AOSPMods.SettingsActivity$QSTileQtyFragment"
-				app:key="qs_tile_qty"
-				app:title="@string/qs_tile_qty_title" />
+				android:key="qs_tile_qty"
+				android:title="@string/qs_tile_qty_title" />
 
 			<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
 				android:key="QSLabelScaleFactor"
@@ -93,7 +93,7 @@
 				app:maxVal="50"
 				app:minVal="-50"
 				app:tickInterval="5"
-				app:title="@string/qs_tile_label_size"
+				android:title="@string/qs_tile_label_size"
 				app:updatesContinuously="true" />
 
 			<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
@@ -102,14 +102,14 @@
 				app:maxVal="50"
 				app:minVal="-50"
 				app:tickInterval="5"
-				app:title="@string/qs_tile_secondary_label_size"
+				android:title="@string/qs_tile_secondary_label_size"
 				app:updatesContinuously="true" />
 
 		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
 		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 			android:title="@string/qs_mod_category_title"
-			app:summary="@string/qs_footer_text_desc"
+			android:summary="@string/qs_footer_text_desc"
 			search:ignore="true">
 
 			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
@@ -125,7 +125,7 @@
 				android:selectAllOnFocus="true"
 				android:singleLine="true"
 				android:title="@string/qs_footer_text_value"
-				app:summary="@string/qs_footer_text_summary" />
+				android:summary="@string/qs_footer_text_summary" />
 
 		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
@@ -158,8 +158,8 @@
 				android:defaultValue="false"
 				android:key="BSThickTrackOverlay"
 				android:title="@string/bs_thick_track"
-				app:summaryOff="@string/general_off"
-				app:summaryOn="@string/general_on" />
+				android:summaryOff="@string/general_off"
+				android:summaryOn="@string/general_on" />
 
 		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
@@ -177,7 +177,7 @@
 			<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
 				android:defaultValue="25"
 				android:key="QSPulldownPercent"
-				app:title="@string/qs_pulldown_size"
+				android:title="@string/qs_pulldown_size"
 				app:updatesContinuously="true" />
 
 			<sh.siava.AOSPMods.ui.MaterialListPreference
@@ -204,8 +204,8 @@
 
 		<sh.siava.AOSPMods.ui.MaterialPreference
 			app:fragment="sh.siava.AOSPMods.SettingsActivity$NetworkFragment"
-			app:key="network_settings_header_qs"
-			app:title="@string/network_settings_pref" />
+			android:key="network_settings_header_qs"
+			android:title="@string/network_settings_pref" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

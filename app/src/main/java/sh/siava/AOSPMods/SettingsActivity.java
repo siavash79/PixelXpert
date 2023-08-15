@@ -4,11 +4,9 @@ import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -230,7 +228,9 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 		int itemID = item.getItemId();
 
-		if (itemID == R.id.menu_clearPrefs) {
+		if (itemID == android.R.id.home) {
+			onBackPressed();
+		} else if (itemID == R.id.menu_clearPrefs) {
 			PrefManager.clearPrefs(prefs);
 			AppUtils.RestartSystemUI();
 		} else if (itemID == R.id.menu_exportPrefs) {

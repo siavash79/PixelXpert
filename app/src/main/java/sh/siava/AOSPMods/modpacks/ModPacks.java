@@ -36,7 +36,7 @@ import sh.siava.AOSPMods.modpacks.systemui.NotificationExpander;
 import sh.siava.AOSPMods.modpacks.systemui.NotificationManager;
 import sh.siava.AOSPMods.modpacks.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.modpacks.systemui.StatusbarGestures;
-import sh.siava.AOSPMods.modpacks.systemui.QSThemeManager;
+import sh.siava.AOSPMods.modpacks.systemui.ThemeManager;
 import sh.siava.AOSPMods.modpacks.systemui.QSTileGrid;
 import sh.siava.AOSPMods.modpacks.systemui.ScreenGestures;
 import sh.siava.AOSPMods.modpacks.systemui.ScreenRecord;
@@ -86,7 +86,7 @@ public class ModPacks {
 					modPacks.add(BrightnessSlider.class);
 					modPacks.add(FeatureFlagsMods.class);
 					modPacks.add(ThreeButtonNavMods.class);
-					modPacks.add(QSThemeManager.class);
+					modPacks.add(ThemeManager.class);
 					modPacks.add(ScreenGestures.class);
 					modPacks.add(miscSettings.class);
 					modPacks.add(AOSPSettingsLauncher.class);

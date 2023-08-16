@@ -48,18 +48,18 @@ public class PreferenceHelper {
 		if (instance == null) return true;
 
 		switch (key) {
-			case "theming_header":
+			case "overlay_dependent":
 			case "HideNavbarOverlay":
 			case "CustomThemedIconsOverlay":
 			case "UnreadMessagesNumberOverlay":
 			case "QSTilesThemesOverlayEx":
-			case "enablePowerMenuTheme":
 			case "IconPacksOverlayEx":
 			case "IconShapesOverlayEx":
 			case "SignalIconsOverlayEx":
 			case "DTStylesOverlayEx":
 				return showOverlays;
 
+			case "font_dependent":
 			case "enableCustomFonts":
 				return showFonts;
 

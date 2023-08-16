@@ -90,7 +90,6 @@ public class UpdateActivity extends AppCompatActivity {
 
 		ModuleFolderOperations.applyVolumeSteps(volumeStps, updateRoot);
 		ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, updateRoot);
-		ModuleFolderOperations.applyPowerMenuOverlay(PowerMenuOverlayEnabled, updateRoot);
 	}
 
 	@Override

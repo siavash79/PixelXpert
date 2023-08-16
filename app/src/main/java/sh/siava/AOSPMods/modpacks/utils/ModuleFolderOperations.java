@@ -25,17 +25,4 @@ public class ModuleFolderOperations {
 		}
 		Shell.cmd("echo ro.config.media_vol_steps=" + volumeStps + " > " + rootPath + "/system.prop").exec();
 	}
-
-	public static void applyPowerMenuOverlay(boolean PowerMenuOverlayEnabled, String rootPath) {
-		new Thread(() -> {
-			try {
-				if (PowerMenuOverlayEnabled ) {
-					Shell.cmd(String.format("cp %s/data/productz/overlay/AOSPMods_System/AOSPModsSystem.apk %s/system/product/overlay/AOSPMods_System/AOSPModsSystem.apk && cp %s/data/productz/overlay/AOSPMods_SystemUI/AOSPModsSystemUI.apk %s/system/product/overlay/AOSPMods_SystemUI/AOSPModsSystemUI.apk", rootPath, rootPath, rootPath, rootPath)).exec();
-				} else {
-					Shell.cmd(String.format("rm -rf %s/system/product/overlay/AOSPMods_System/AOSPModsSystem.apk && rm -rf %s/system/product/overlay/AOSPMods_SystemUI/AOSPModsSystemUI.apk", rootPath, rootPath)).exec();
-				}
-			} catch (Exception ignored) {
-			}
-		}).start();
-	}
 }

@@ -2,21 +2,23 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch">
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
-		android:title="@string/power_menu_overlays_section"
-		search:ignore="true">
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="LightQSPanel"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/light_qs_title" />
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="enablePowerMenuTheme"
-			android:summaryOff="@string/restart_needed"
-			android:summaryOn="@string/power_menu_overlays_summary_on"
-			android:title="@string/power_menu_overlays_title" />
-
-	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="enablePowerMenuTheme"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/power_menu_overlays_title" />
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:title="@string/theme_customization_font_title"
+		android:key="font_dependent"
 		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
@@ -45,6 +47,7 @@
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:title="@string/icons_style_title"
+		android:key="overlay_dependent"
 		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference
@@ -59,6 +62,7 @@
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:title="@string/icon_shapes_title"
+		android:key="overlay_dependent"
 		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference
@@ -73,6 +77,7 @@
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:title="@string/signal_icons_theme_title"
+		android:key="overlay_dependent"
 		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference
@@ -87,6 +92,7 @@
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:title="@string/dt_styles_category"
+		android:key="overlay_dependent"
 		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference

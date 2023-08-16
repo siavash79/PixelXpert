@@ -113,7 +113,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		prefsList.add(new Object[]{R.xml.statusbar_batteryicon_prefs, R.string.sbbIcon_header, new SBBIconFragment()});
 		prefsList.add(new Object[]{R.xml.statusbar_clock_prefs, R.string.sbc_header, new SBCFragment()});
 		prefsList.add(new Object[]{R.xml.statusbar_settings, R.string.statusbar_header, new StatusbarFragment()});
-		prefsList.add(new Object[]{R.xml.theming_prefs, R.string.qs_tile_style_title, new ThemingFragment()});
+		prefsList.add(new Object[]{R.xml.theming_prefs, R.string.theme_customization_category, new ThemingFragment()});
 		prefsList.add(new Object[]{R.xml.three_button_prefs, R.string.threebutton_header_title, new ThreeButtonNavFragment()});
 
 		try {
@@ -363,7 +363,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 	public static class ThemingFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
-			return getString(R.string.qs_tile_style_title);
+			return getString(R.string.theme_customization_category);
 		}
 
 		@Override

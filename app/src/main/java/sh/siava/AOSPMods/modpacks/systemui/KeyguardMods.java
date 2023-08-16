@@ -427,13 +427,16 @@ public class KeyguardMods extends XposedModPack {
 					KGMiddleCustomTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 					KGMiddleCustomTextView.setLetterSpacing(.03f);
 
-					@SuppressLint("DiscouragedApi") int padding = res.getDimensionPixelSize(
+					@SuppressLint("DiscouragedApi") int sidePadding = res.getDimensionPixelSize(
 							res.getIdentifier(
 									"clock_padding_start",
 									"dimen",
 									mContext.getPackageName()));
 
-					KGMiddleCustomTextView.setPadding(padding, 0, padding, 0);
+					KGMiddleCustomTextView.setPadding(sidePadding,
+							(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, mContext.getResources().getDisplayMetrics()),
+							sidePadding,
+							0);
 
 					mStatusArea = ((LinearLayout) getObjectField(param.thisObject, "mStatusArea"));
 

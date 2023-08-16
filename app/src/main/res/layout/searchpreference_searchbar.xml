@@ -21,8 +21,8 @@
 		android:layout_marginStart="8dp"
 		android:layout_marginEnd="8dp"
 		android:contentDescription="@string/searchpreference_search"
-		app:srcCompat="@drawable/searchpreference_ic_search"
-		app:tint="?android:attr/textColorPrimary" />
+		app:srcCompat="@drawable/ic_search"
+		app:tint="@color/text_color_secondary" />
 
 	<EditText
 		android:id="@+id/search"
@@ -47,8 +47,8 @@
 		android:paddingRight="4dp"
 		android:paddingBottom="4dp"
 		android:visibility="gone"
-		app:srcCompat="@drawable/searchpreference_ic_clear"
-		app:tint="?android:attr/textColorPrimary" />
+		app:srcCompat="@drawable/ic_clear"
+		app:tint="@color/text_color_secondary" />
 
 	<ImageView
 		android:id="@+id/more"
@@ -61,7 +61,7 @@
 		android:paddingRight="4dp"
 		android:paddingBottom="4dp"
 		android:visibility="gone"
-		app:srcCompat="@drawable/searchpreference_ic_more"
-		app:tint="?android:attr/textColorPrimary" />
+		app:srcCompat="@drawable/ic_more"
+		app:tint="@color/text_color_secondary" />
 
 </LinearLayout>

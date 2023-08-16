@@ -23,6 +23,7 @@
 		android:gravity="center"
 		android:padding="48dp"
 		android:text="@string/searchpreference_no_results"
+		android:textColor="@color/text_color_secondary"
 		android:visibility="gone" />
 
 	<androidx.recyclerview.widget.RecyclerView

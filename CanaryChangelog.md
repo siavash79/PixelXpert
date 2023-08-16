@@ -1,3 +1,8 @@
+**canary-276**  
+- Changed power menu light theme method  
+- A14 lockscreen clocks: improved custom text padding with clock  
+- A14B5: Fixed combined signal icons not working on boot  
+  
 **canary-275**  
 - Added search in the app. (Shout out to DrDisagree@Telegram / Mahmud0808@Github)  
   

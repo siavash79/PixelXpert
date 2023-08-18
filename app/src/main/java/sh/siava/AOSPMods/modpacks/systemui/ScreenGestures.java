@@ -14,6 +14,7 @@ import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.view.GestureDetector;
@@ -26,7 +27,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
-import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 
@@ -37,12 +37,18 @@ public class ScreenGestures extends XposedModPack {
 	private static final long HOLD_DURATION = 500;
 	private static final int SHADE = 0; //frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/StatusBarState.java - screen unlocked - pulsing means screen is locked - shade locked means (Q)QS is open on lockscreen
 
+	private static final int REASON_SENSOR_TAP = 9; // from DozeTriggers
+	private static final int REASON_SENSOR_PICKUP = 3; // from DozeTriggers
+	private static final int PULSE_REASON_INTENT = 0; //from DozeLog
+
 	//settings
 	public static boolean doubleTapToSleepStatusbarEnabled = false;
 	private static boolean doubleTapToSleepLockscreenEnabled = false;
 	private static boolean doubleTapToWake = false;
 	private static boolean holdScreenTorchEnabled = false;
 
+	private static boolean TapToShowAmbient = false;
+	private static boolean PickToShowAmbient = false;
 	private static boolean turnedByTTT = false;
 	private static boolean mDoubleTap = false;  //double tap to wake when AOD off
 
@@ -59,10 +65,12 @@ public class ScreenGestures extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		doubleTapToWake = XPrefs.Xprefs.getBoolean("doubleTapToWake", false);
-		holdScreenTorchEnabled = XPrefs.Xprefs.getBoolean("holdScreenTorchEnabled", false);
-		doubleTapToSleepStatusbarEnabled = XPrefs.Xprefs.getBoolean("DoubleTapSleep", false);
-		doubleTapToSleepLockscreenEnabled = XPrefs.Xprefs.getBoolean("DoubleTapSleepLockscreen", false);
+		doubleTapToWake = Xprefs.getBoolean("doubleTapToWake", false);
+		holdScreenTorchEnabled = Xprefs.getBoolean("holdScreenTorchEnabled", false);
+		doubleTapToSleepStatusbarEnabled = Xprefs.getBoolean("DoubleTapSleep", false);
+		doubleTapToSleepLockscreenEnabled = Xprefs.getBoolean("DoubleTapSleepLockscreen", false);
+		TapToShowAmbient = Xprefs.getBoolean("TapToShowAmbient", false);
+		PickToShowAmbient = Xprefs.getBoolean("PickToShowAmbient", false);
 	}
 
 	@Override
@@ -97,7 +105,15 @@ public class ScreenGestures extends XposedModPack {
 				"onSensor", new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (doubleTapToWake && ((int) param.args[0]) == 9) {
+						if((TapToShowAmbient && param.args[0].equals(REASON_SENSOR_TAP)) ||
+						(PickToShowAmbient && param.args[0].equals(REASON_SENSOR_PICKUP)))
+						{
+							callMethod(param.thisObject, "requestPulse",PULSE_REASON_INTENT, false /* performedProxCheck */, null /* onPulseSuppressedListener */);
+							param.setResult(null);
+							return; //don't proceed anymore
+						}
+
+						if (doubleTapToWake && ((int) param.args[0]) == REASON_SENSOR_TAP) {
 							if (!mDoubleTap) {
 								param.setResult(null);
 								mDoubleTap = true;

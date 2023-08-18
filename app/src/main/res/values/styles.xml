@@ -66,4 +66,12 @@
 		<item name="android:track">@drawable/seek_track</item>
 	</style>
 
+	<style name="Widget.MaterialSwitch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+		<item name="materialThemeOverlay">@style/ThemeOverlay.MaterialSwitch</item>
+	</style>
+
+	<style name="ThemeOverlay.MaterialSwitch" parent="ThemeOverlay.Material3">
+		<item name="colorPrimaryContainer">?attr/colorOnPrimary</item>
+	</style>
+
 </resources>

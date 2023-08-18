@@ -21,9 +21,8 @@
 		android:layout_marginStart="6dp"
 		android:layout_marginEnd="16dp"
 		android:contentDescription="@string/searchpreference_history_entry"
-		app:srcCompat="@drawable/searchpreference_ic_history"
-		app:tint="?android:attr/textColorPrimary" />
-
+		app:srcCompat="@drawable/ic_history"
+		app:tint="@color/text_color_secondary" />
 
 	<RelativeLayout
 		android:layout_width="0dp"
@@ -34,7 +33,7 @@
 			android:id="@+id/term"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textColor="?android:attr/textColorPrimary" />
+			android:textColor="@color/text_color_secondary" />
 
 	</RelativeLayout>
 </LinearLayout>

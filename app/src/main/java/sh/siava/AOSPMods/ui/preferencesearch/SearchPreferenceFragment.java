@@ -52,6 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.SettingsActivity;
 
 public class SearchPreferenceFragment extends Fragment implements SearchPreferenceAdapter.SearchClickListener {
 	/**
@@ -210,6 +211,8 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 		if (searchConfiguration.isSearchBarEnabled()) {
 			showKeyboard();
 		}
+
+		SettingsActivity.backButtonEnabled();
 	}
 
 	private void showKeyboard() {

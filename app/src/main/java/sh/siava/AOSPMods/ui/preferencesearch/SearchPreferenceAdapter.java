@@ -84,12 +84,13 @@ class SearchPreferenceAdapter extends RecyclerView.Adapter<SearchPreferenceAdapt
 			} else {
 				holder.summary.setVisibility(View.VISIBLE);
 				holder.summary.setText(item.summary);
+				holder.summary.setAlpha(0.8f);
 			}
 
 			if (searchConfiguration.isBreadcrumbsEnabled()) {
 				holder.breadcrumbs.setText(item.breadcrumbs);
 				holder.breadcrumbs.setAlpha(0.6f);
-				holder.summary.setAlpha(1.0f);
+				holder.summary.setAlpha(0.8f);
 			} else {
 				holder.breadcrumbs.setVisibility(View.GONE);
 				holder.summary.setAlpha(0.6f);

@@ -1,3 +1,6 @@
+**canary-277**  
+- (Experimental) Compatibility with latest Lsposed canary versions  
+  
 **canary-276**  
 - Changed power menu light theme method  
 - A14 lockscreen clocks: improved custom text padding with clock  

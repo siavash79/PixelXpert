@@ -1,3 +1,6 @@
+**canary-278**  
+- Added options to show ambient display (on tap / pickup) when the screen is off  
+  
 **canary-277**  
 - (Experimental) Compatibility with latest Lsposed canary versions  
   

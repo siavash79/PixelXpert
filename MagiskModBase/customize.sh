@@ -5,7 +5,7 @@ MAGISKDBPATH="/data/adb/magisk.db"
 
 prepareSQL(){
 	unzip $ZIPFILE sqlite3 -d $TMPDIR/ > /dev/null
-	chmod 777 $TMPDIR/sqlite3
+	chmod +x $TMPDIR/sqlite3
 
 	SQLITEPATH="$TMPDIR/sqlite3"
 }
@@ -43,6 +43,10 @@ grantRootApps(){
 	grantRootPkg $PKGNAME
 }
 
+migratePrefs(){
+  am start -n "$PKGNAME/.UpdateActivity" -e migratePrefs true
+}
+
 #activate PKGNAME in Lsposed
 activateModuleLSPD()
 {	
@@ -51,12 +55,12 @@ activateModuleLSPD()
 	ui_print '- Trying to activate the module in Lsposed...'	
 	
 	CMD="select mid from modules where module_pkg_name like \"$PKGNAME\";" && runSQL
-	OLDMID=$(echo $SQLREUSLT | xargs)
+	OLDMID=$(echo $SQLRESULT | xargs)
 
 
 	if [ $(($OLDMID+0)) -gt 0 ]; then
 		CMD="select mid from modules where mid = $OLDMID and apk_path like \"$PKGPATH\" and enabled = 1;" && runSQL
-		REALMID=$(echo $SQLREUSLT | xargs)
+		REALMID=$(echo $SQLRESULT | xargs)
 		
 		if [ $(($REALMID+0)) = 0 ]; then
 			CMD="delete from scope where mid = $OLDMID;" && runSQL
@@ -72,11 +76,18 @@ activateModuleLSPD()
 	NEWMID=$(echo $SQLRESULT | xargs)
 
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"android\",0);" && runSQL
-	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.systemui\",0);" && runSQL
-	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.google.android.apps.nexuslauncher\",0);" && runSQL
-	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.phone\",0);" && runSQL
-	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.settings\",0);" && runSQL
+	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"system\",0);" && runSQL
 
+	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.systemui\",0);" && runSQL
+
+	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.google.android.apps.nexuslauncher\",0);" && runSQL
+
+	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.google.android.dialer\",0);" && runSQL
+
+	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.phone\",0);" && runSQL
+	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.server.telecom\",0);" && runSQL
+
+	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.settings\",0);" && runSQL
 
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"$PKGNAME\",0);" && runSQL
 }
@@ -93,7 +104,9 @@ if [ $(ls $LSPDDBPATH) = $LSPDDBPATH ]; then
 	ui_print ''
 
 	activateModuleLSPD
-	
+	migratePrefs
+
+
 	ui_print ''
 	ui_print ''
 	ui_print 'Installation Complete!'

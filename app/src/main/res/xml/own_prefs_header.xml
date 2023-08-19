@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <sh.siava.AOSPMods.ui.MaterialListPreference
-        android:entries="@array/languages_names"
-        android:entryValues="@array/languages_values"
-        android:summary="%s"
-        android:key="appLanguage"
-        android:title="@string/language_title" />
 
-    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-        android:defaultValue="false"
-        android:key="AlternativeThemedAppIcon"
-        android:summaryOff="@string/general_off"
-        android:summaryOn="@string/general_on"
-        android:title="@string/app_themed_icon_title"/>
+	<sh.siava.AOSPMods.ui.MaterialListPreference
+		android:entries="@array/languages_names"
+		android:entryValues="@array/languages_values"
+		android:key="appLanguage"
+		android:summary="%s"
+		android:title="@string/language_title" />
 
-    <!--SwitchPreference
-        android:defaultValue="true"
-        android:key="EnableCameraManager"
-        android:summaryOff="@string/general_off"
-        android:summaryOn="@string/general_on"
-        android:title="@string/camera_manager_master_title" /-->
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="AlternativeThemedAppIcon"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/app_themed_icon_title" />
+
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="TemperatureUnitF"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/imperial_units_title" />
+
+	<!--SwitchPreference
+		android:defaultValue="true"
+		android:key="EnableCameraManager"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/camera_manager_master_title" /-->
 
 </PreferenceScreen>

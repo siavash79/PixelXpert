@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 import de.robv.android.xposed.XC_MethodHook;
 
 public class NotificationIconContainerOverride {
-	public static Class<?> StatusBarIconViewClass = null;
-
 	public static final int STATE_ICON = 0;
 	public static final int STATE_DOT = 1;
 	public static final int STATE_HIDDEN = 2;

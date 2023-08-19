@@ -349,7 +349,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 			}
 		} catch (Throwable e) {
 			log("AOSPMODS Error - Flex Statusbar Container");
-			e.printStackTrace();
+			log(e);
 			setDefaultResponse(widthMeasureSpec, heightMeasureSpec);
 		}
 	}
@@ -530,7 +530,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 			System.gc();
 		} catch (Throwable t) {
 			log("AOSPMODS Error - Flex Statusbar Container");
-			t.printStackTrace();
+			log(t);
 		}
 	}
 

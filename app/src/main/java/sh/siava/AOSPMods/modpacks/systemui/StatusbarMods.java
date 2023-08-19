@@ -13,15 +13,21 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
+import static de.robv.android.xposed.XposedHelpers.findMethodExactIfExists;
+import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Icon;
@@ -31,6 +37,7 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
+import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyCallback;
 import android.text.Spannable;
@@ -38,7 +45,6 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.CharacterStyle;
 import android.text.style.RelativeSizeSpan;
-import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +60,7 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executor;
@@ -69,9 +76,9 @@ import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.NetworkTraffic;
 import sh.siava.AOSPMods.modpacks.utils.NotificationIconContainerOverride;
-import sh.siava.AOSPMods.modpacks.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.modpacks.utils.ShyLinearLayout;
 import sh.siava.AOSPMods.modpacks.utils.StringFormatter;
+import sh.siava.AOSPMods.modpacks.utils.StringFormatter.FormattedStringCallback;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.AOSPMods.modpacks.utils.batteryStyles.BatteryBarView;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -172,6 +179,8 @@ public class StatusbarMods extends XposedModPack {
 	private final Executor voDataExec = Runnable::run;
 
 	private Object mStatusBarIconController;
+	private int mRemoveAllIconsForSlotParams = 1;
+
 	private Class<?> StatusBarIconClass;
 	private Class<?> StatusBarIconHolderClass;
 	private Object volteStatusbarIconHolder;
@@ -186,11 +195,36 @@ public class StatusbarMods extends XposedModPack {
 	//endregion
 
 	//region combined signal icons
-	private Object NetworkController;
-	private boolean mWifiVisble = false;
-	private Object StatusBarSignalPolicy;
+	private boolean mWifiVisible = false;
+	private long mStartTime = 0;
 	private static boolean CombineSignalIcons = false;
 	private static boolean HideRoamingState = false;
+	private Object mTunerService;
+	public static final String ICON_HIDE_LIST = "icon_blacklist";
+	//endregion
+	//region app profile switch
+	private static final String APP_SWITCH_SLOT = "app_switch";
+	private Object mAppSwitchStatusbarIconHolder = null;
+
+	private static boolean StatusbarAppSwitchIconEnabled = false;
+
+	private final BroadcastReceiver mAppProfileSwitchReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if(intent.getAction().equals(Constants.ACTION_PROFILE_SWITCH_AVAILABLE))
+			{
+				boolean isAvailable = intent.getBooleanExtra("available", false);
+				if(isAvailable && StatusbarAppSwitchIconEnabled)
+				{
+					callMethod(mStatusBarIconController, "setIcon", APP_SWITCH_SLOT, mAppSwitchStatusbarIconHolder);
+				}
+				else
+				{
+					removeSBIconSlot(APP_SWITCH_SLOT);
+				}
+			}
+		}
+	};
 	//endregion
 
 	@SuppressLint("DiscouragedApi")
@@ -202,6 +236,16 @@ public class StatusbarMods extends XposedModPack {
 		leftClockPadding = mContext.getResources().getDimensionPixelSize(mContext.getResources().getIdentifier("status_bar_left_clock_end_padding", "dimen", mContext.getPackageName()));
 	}
 
+	private void initSwitchIcon() {
+		try {
+			Icon appSwitchIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_app_switch);
+			//noinspection JavaReflectionMemberAccess
+			Object appSwitchStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, appSwitchIcon, 0, 0, APP_SWITCH_SLOT);
+			mAppSwitchStatusbarIconHolder = StatusBarIconHolderClass.newInstance();
+			setObjectField(mAppSwitchStatusbarIconHolder, "mIcon", appSwitchStatusbarIcon);
+		}catch (Throwable ignored){}
+	}
+
 	@Override
 	public boolean listensTo(String packageName) {
 		return listenPackage.equals(packageName) && !XPLauncher.isChildProcess;
@@ -209,6 +253,8 @@ public class StatusbarMods extends XposedModPack {
 
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
+
+		StatusbarAppSwitchIconEnabled = Xprefs.getBoolean("StatusbarAppSwitchIconEnabled", false);
 
 		HidePrivacyChip = Xprefs.getBoolean("HidePrivacyChip", false);
 
@@ -220,7 +266,7 @@ public class StatusbarMods extends XposedModPack {
 		if (Key.length > 0 && Key[0].equals("notificationAreaMultiRow")) { //WHY we check the old value? because if prefs is empty it will fill it up and count an unwanted change
 			boolean newnotificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
 			if (newnotificationAreaMultiRow != notificationAreaMultiRow) {
-				SystemUtils.RestartSystemUI();
+				SystemUtils.restartSystemUI();
 			}
 		}
 		notificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
@@ -333,7 +379,6 @@ public class StatusbarMods extends XposedModPack {
 
 
 		//region clock settings
-
 		clockPosition = Integer.parseInt(Xprefs.getString("SBClockLoc", String.valueOf(POSITION_LEFT)));
 		if(clockPosition == POSITION_LEFT_EXTRA_LEVEL)
 		{
@@ -393,9 +438,8 @@ public class StatusbarMods extends XposedModPack {
 
 		try {
 			placeClock();
-			callMethod(mClockView, "getSmallTime");
-		} catch (Throwable ignored) {
-		}
+			updateClock();
+		} catch (Throwable ignored) {}
 		//endregion clock settings
 
 
@@ -426,6 +470,13 @@ public class StatusbarMods extends XposedModPack {
 
 	}
 
+	private void updateClock() {
+		try {
+			((View) mClockView).post(() -> callMethod(mClockView, "updateClock"));
+		}
+		catch (Throwable ignored){}
+	}
+
 	private void placeNTQS() {
 		if (networkTrafficQS == null) {
 			return;
@@ -446,6 +497,12 @@ public class StatusbarMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
+		mStartTime = System.currentTimeMillis();
+
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constants.ACTION_PROFILE_SWITCH_AVAILABLE);
+		mContext.registerReceiver(mAppProfileSwitchReceiver, filter, Context.RECEIVER_EXPORTED);
+
 		//region needed classes
 		Class<?> ActivityStarterClass = findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
 		Class<?> DependencyClass = findClass("com.android.systemui.Dependency", lpparam.classLoader);
@@ -455,40 +512,33 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 		Class<?> PhoneStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
 		Class<?> NotificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
-		NotificationIconContainerOverride.StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
+//		Class<?> StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 		Class<?> StatusBarSignalPolicyClass = findClass("com.android.systemui.statusbar.phone.StatusBarSignalPolicy", lpparam.classLoader);
-		Class<?> NetworkControllerImplClass = findClass("com.android.systemui.statusbar.connectivity.NetworkControllerImpl", lpparam.classLoader);
 		Class<?> PrivacyItemControllerClass = findClass("com.android.systemui.privacy.PrivacyItemController", lpparam.classLoader);
 		Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
+		Class<?> TunerServiceImplClass = findClass("com.android.systemui.tuner.TunerServiceImpl", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
-		SettingsLibUtils.init(lpparam.classLoader);
-
-//		Method setMeasuredDimensionMethod = findMethodExact(View.class, "setMeasuredDimension", int.class, int.class);
 		//endregion
 
+		initSwitchIcon();
+
 		//region combined signal icons
-		hookAllConstructors(NetworkControllerImplClass, new XC_MethodHook() {
+		hookAllConstructors(TunerServiceImplClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				NetworkController = param.thisObject;
+				mTunerService = param.thisObject;
 			}
 		});
 
-		hookAllConstructors(StatusBarSignalPolicyClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				StatusBarSignalPolicy = param.thisObject;
-			}
-		});
 		hookAllMethods(StatusBarSignalPolicyClass, "setWifiIndicators", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				boolean wifiVisible = getBooleanField(getObjectField(param.args[0], "statusIcon"), "visible");
-				if(wifiVisible != mWifiVisble)
+				if(wifiVisible != mWifiVisible && System.currentTimeMillis() > mStartTime + 5000) //don't apply wifi change in the first 5 seconds
 				{
-					mWifiVisble = wifiVisible;
+					mWifiVisible = wifiVisible;
 					if(CombineSignalIcons) {
 						wifiVisibleChanged();
 					}
@@ -645,7 +695,7 @@ public class StatusbarMods extends XposedModPack {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						//Getting QS text color for Network traffic
-						int fillColor = SettingsLibUtils.getColorAttrDefaultColor(
+						int fillColor = SettingsLibUtilsProvider.getColorAttrDefaultColor(
 									mContext.getResources().getIdentifier("@android:attr/textColorPrimary", "attr", mContext.getPackageName()),
 									mContext);
 
@@ -730,7 +780,7 @@ public class StatusbarMods extends XposedModPack {
 				"animateHiddenState", new XC_MethodHook() {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						if (param.args[0] != mClockView) return;
+						if (param.args[(param.args[1] instanceof View) ? 1 : 0] != mClockView) return; //view can be the 2nd arg sometimes
 						for (ClockVisibilityCallback c : clockVisibilityCallbacks) {
 							try {
 								c.OnVisibilityChanged(false);
@@ -749,6 +799,11 @@ public class StatusbarMods extends XposedModPack {
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 
 						mStatusBarIconController = getObjectField(param.thisObject, "mStatusBarIconController");
+
+						if(findMethodExactIfExists(mStatusBarIconController.getClass(), "removeAllIconsForSlot", String.class, boolean.class) != null)
+						{
+							mRemoveAllIconsForSlotParams = 2;
+						}
 
 						try {
 							mClockView = (View) getObjectField(param.thisObject, "mClockView");
@@ -838,6 +893,16 @@ public class StatusbarMods extends XposedModPack {
 							result.append(getFormattedString("$Ga", mAmPmStyle == AM_PM_STYLE_SMALL, mClockColor));
 						}
 						result.append(getFormattedString(mStringFormatAfter, mAfterSmall, mAfterClockColor)); //after clock
+
+						if(getAdditionalInstanceField(param.thisObject, "stringFormatCallBack") == null) {
+							FormattedStringCallback callback = () -> {
+								if(mAmPmStyle == AM_PM_STYLE_GONE) //don't update again if it's going to do it every second anyway
+									updateClock();
+							};
+
+							stringFormatter.registerCallback(callback);
+							setAdditionalInstanceField(param.thisObject, "stringFormatCallBack", callback);
+						}
 						param.setResult(result);
 					}
 				});
@@ -1057,9 +1122,17 @@ public class StatusbarMods extends XposedModPack {
 
 	private void removeSBIconSlot(String slot) {
 		if (mStatusBar == null) return; //probably it's too soon to have a statusbar
+
 		mStatusBar.post(() -> {
 			try {
-				callMethod(mStatusBarIconController, "removeAllIconsForSlot", slot);
+				if(mRemoveAllIconsForSlotParams == 2)
+				{
+					callMethod(mStatusBarIconController, "removeAllIconsForSlot", slot, false);
+				}
+				else
+				{
+					callMethod(mStatusBarIconController, "removeAllIconsForSlot", slot);
+				}
 			} catch (Throwable ignored) {}
 		});
 	}
@@ -1245,17 +1318,26 @@ public class StatusbarMods extends XposedModPack {
 	//region combined signal icons
 	private void wifiVisibleChanged()
 	{
-		try
-		{
-			setObjectField(StatusBarSignalPolicy, "mHideMobile", mWifiVisble && CombineSignalIcons);
+		try { //don't crash the system if failed
+			//inspired from from TunerServiceImpl#reloadAll
+			String hideListString = Settings.Secure.getString(
+					(ContentResolver) getObjectField(mTunerService, "mContentResolver")
+					, ICON_HIDE_LIST);
 
-			SparseArray<?> mMobileSignalControllers = (SparseArray<?>) getObjectField(NetworkController, "mMobileSignalControllers");
-
-			for (int i = 0; i < mMobileSignalControllers.size(); i++) {
-				callMethod(mMobileSignalControllers.get(mMobileSignalControllers.keyAt(i)), "notifyListeners", StatusBarSignalPolicy);
+			if (CombineSignalIcons && mWifiVisible) {
+				if (hideListString == null || hideListString.length() == 0) {
+					hideListString = "mobile";
+				} else if (!hideListString.contains("mobile")) {
+					hideListString = hideListString + ",mobile";
+				}
 			}
-		}
-		catch (Throwable ignored){}
+			@SuppressWarnings("unchecked")
+			Set<Object> tunables = (Set<Object>) callMethod(getObjectField(mTunerService, "mTunableLookup"), "get", ICON_HIDE_LIST);
+
+			for (Object tunable : tunables) {
+				callMethod(tunable, "onTuningChanged", ICON_HIDE_LIST, hideListString);
+			}
+		} catch (Throwable ignored) {}
 	}
 	//endregion
 }

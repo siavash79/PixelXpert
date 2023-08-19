@@ -2,6 +2,7 @@
 	<!--General strings-->
 	<string name="app_themed_icon_title">Habilitar icono temático alternativo para AOSP mods</string>
 	<string name="xposed_desc">Funciones personalizadas para ROM basadas en Android 12+ AOSP</string>
+	<string name="volume_tile_title">Volumen de medios</string>
 	<string name="error_not_activated">Confirme si el módulo está activado dentro de LSPosed Manager</string>
 	<string name="hide_default">No mostrar (por defecto)</string>
 	<string name="percent_of_default_size">% del tamaño por defecto</string>
@@ -18,6 +19,7 @@
 	<string name="lockscreen_header_title">Pantalla de bloqueo</string>
 	<string name="statusbar_header">Barra de estado</string>
 	<string name="nav_header">Barra de navegación</string>
+	<string name="dialer_header">Teléfono &amp; Marcador</string>
 	<string name="misc_header">Miscelaneo</string>
 	<string name="qs_panel_category_title">Ajustes rápidos</string>
 	<string name="theme_customization_category">Temas</string>
@@ -30,6 +32,7 @@
     <string name="hotspot_max_client_title">Clientes máximos</string>
 	
 	<!--Lock screen related-->
+	<string name="disable_unlock_hint_title">Deshabilitar la animación de pantalla de desbloqueo</string>
 	<string name="ls_general_options">Opciones de pantalla de bloqueo</string>
 	<string name="hide_avatar_title">Eliminar avatar de usuario (modo multiusuario)</string>
 	<string name="transparent_fingerprint_circle">Ocultar círculo del icono de la huella digital</string>
@@ -54,6 +57,9 @@
 	<string name="camera_shortcut">Cámara</string>
 	<string name="assistant_shortcut">Asistente</string>
 	<string name="torch_shortcut">Linterna</string>
+	<string name="tv_remote_shortcut">TV Remota</string>
+    <string name="dnd_shortcut">No molestar</string>
+	<string name="qr_scanner_shortcut">Escáner de código QR</string>
 	<string name="album_art_category">Opciones de visualización de reproducción de música</string>
 	<string name="album_art_title">Habilitar visualización de reproducción de música</string>
 	<string name="album_art_blur_text">Valor de desenfoque</string>
@@ -223,6 +229,7 @@
 	<string name="taskbar_force_enable_title">Forzar activada</string>
 	<string name="taskbar_force_disable_title">Forzar desactivada</string>
 	<string name="taskbar_hide_allapps_title">Ocultar el icono de todas las aplicaciones</string>
+	<string name="taskbar_transient_title">Esconder automáticamente</string>
 	
 	<!-- Package manager -->
     <string name="pm_bypass_signature_title">Pasar por alto la verificación de la firma del paquete</string>
@@ -231,15 +238,20 @@
 
 	<!--Miscellaneous section related-->
 	<string name="screenshot_sound_disable_title">Desactivar sonido de captura de pantalla</string>
+	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
+    <string name="screenshot_insecure">Permitir captura de pantalla de contenido restringido</string>
 	<string name="clipboard_smart_actions_title">Acciones inteligentes en la superposición del portapapeles</string>
 	<string name="allow_all_screen_rotations">Forzar el desbloqueo de todas las rotaciones de pantalla</string>
 	<string name="allow_all_screen_rotations_summary">También ignorará el botón flotante de rotación manual</string>
 	<string name="force_no_cutout">Ignora el recorte de la cámara</string>
 	<string name="clear_all_reposition_title">Agregar un botón de borrar todo en aplicaciones recientes</string>
+	<string name="force_themed_icons_title">Generar automáticamente íconos temáticos faltantes (Solo Android 14 - Pixel launcher )</string>
+    <string name="reapply_themed_config">Vuelva a habilitar los iconos temáticos para aplicar</string>
 	<string name="volume_button_step_title">Pasos de volumen (0 a 100%)</string>
 	<string name="display_resolution_title">Resolución de pantalla</string>
 	<string name="brightness_range_title">Límites de brillo de la pantalla</string>
 	<string name="brightness_range_not_linear">Este rango NO es lineal: A veces una pequeña diferencia conduce a cambios considerables</string>
+	<string name="separate_ring_notif_vol_title">Volumen individual para timbre y notificación</string>
 	
 	<string name="so_power_longpress_torch_title">Mantenga presionado el botón de encendido para la linterna</string>
 	<string name="so_taptaptorch_title">Habilitar doble toque para la linterna en pantalla de bloqueo</string>
@@ -265,6 +277,8 @@
 	<string name="vibrate_on_call_active_title">Vibrar cuenado la llamada saliente es respondida</string>
 	<string name="vibrate_on_call_drop_title">Vibrar cuando se desconecta la llamada</string>
 	<string name="vibration_type_notification">Intensidad definida por la configuración de vibración de notificación del sistema</string>
+	<string name="dialer_mute_record_message_title">Eliminar anuncio de grabación de llamada</string>
+    <string name="dialer_mute_record_message_summary">Solo se aplica a la aplicación de teléfono de Google con la grabación de llamadas habilitada</string>
 
 	<!-- Theming section related -->
 	<string name="gsans_override_title">Forzar la fuente Google Sans en todo el sistema</string>
@@ -343,10 +357,12 @@
 	<string name="monitoring_category_title">Opciones de monitoreo</string>
 	<string name="netstat_header">Configuración de estadísticas de red</string>
 	
-	<string name="string_formatter_manual_body">Además del texto normal, puede introducir, variables dinámicas disponibles:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato. Para obtener documentación sobre el formato, busque `Java Date Format`\nExample: $GMMM means: Jan (O cualquier otro)\n\n$P&lt;format&gt; : Fecha persa, según el formato\nExample: $Pyyyy means: 1401\n\n$Nrx : Descargas totales de hoy\n$Ntx: Subidas totales de hoy\n$Nall : Tráfico total de hoy\n$Nssid : Nombre SSID WiFi (si es aplicable)\n\nIf tu reemplaza $N con $Nc se le proporcionarán estadísticas de datos móviles (like $Ncrx for downloads; excludes $Nssid)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
+	<string name="string_formatter_manual_body_v3">Además del texto normal, las variables dinámicas también están disponibles, como fecha, uso de datos y temperatura:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato*\n$P&lt;format&gt; : Fecha persa, según el formato*\n$Nrx : Descargas totales en el período especificado ** ***\n$Ntx: Subidas totales en el período especificado ** ***\n$Nall : Tráfico total en el período especificado Nombre SSID WiFi (si corresponde)\n\n$T\&lt;format\&gt;[interval] : Temperatura; \nformat puede ser b (para batería), c (para cpu), g (para gpu) y s (para piel) \nLastly, hay un número opcional de intervalo de actualización en segundos (predeterminado: 60 segundos) \n\n*for documentación de formato, busque "Formato de fecha Java"\n** Puede especificar el período de estadísticas en AOSPMods/Menú misceláneo/Configuración de estadísticas de red\n*** si reemplazas $N con $Nc obtendrás con estadísticas de datos móviles (por ejemplo, $Ncrx en lugar de Nrx)  </string>
 	<string name="update_channel_name">Actualizaciones</string>
 	<string name="update_notification_title">Actualización descargada</string>
 	<string name="update_notification_text">Toque aquí para instalar</string>
+	<string name="download_failed">Error al descargar la actualización</string>
+    <string name="try_again_later">Por favor, inténtelo de nuevo más tarde</string>
 	<string name="reboot_notification_title">AOSPMods se actualizó!</string>
 	<string name="reboot_notification_text">Los cambios surtirán efecto después de reiniciar</string>
 	<string name="update_flavor_title">Actualizar canal</string>

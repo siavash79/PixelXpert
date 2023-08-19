@@ -13,18 +13,13 @@
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".UpdateActivity"
-            android:exported="false"
-            android:label="@string/title_activity_update"
-            android:parentActivityName=".SettingsActivity"/>
-        <activity
-            android:name=".updateActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_update"
             android:parentActivityName=".SettingsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.RUN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.RUN" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
         </activity>
 
         <activity
@@ -63,6 +58,17 @@
             android:name=".utils.VolumeTileService"
             android:label="@string/volume_tile_title"
             android:icon="@drawable/ic_volume"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".utils.AppProfileSwitchService"
+            android:label="@string/app_switch_tile_title"
+            android:icon="@drawable/ic_app_switch"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:exported="true">
             <intent-filter>

@@ -26,8 +26,6 @@ public class QSFooterTextManager extends XposedModPack {
 	private Object QSFV;
 	private final StringFormatter stringFormatter = new StringFormatter();
 
-	private final StringFormatter.formattedStringCallback refreshCallback = this::setQSFooterText;
-
 	public void updatePrefs(String... Key) {
 		if (XPrefs.Xprefs == null) return;
 		customQSFooterTextEnabled = XPrefs.Xprefs.getBoolean("QSFooterMod", false);
@@ -44,7 +42,7 @@ public class QSFooterTextManager extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		stringFormatter.registerCallback(refreshCallback);
+		stringFormatter.registerCallback(this::setQSFooterText);
 
 		Class<?> QSFooterViewClass = findClass("com.android.systemui.qs.QSFooterView", lpparam.classLoader);
 
@@ -74,8 +72,10 @@ public class QSFooterTextManager extends XposedModPack {
 						"mShouldShowBuildText",
 						customText.trim().length() > 0);
 
-				mBuildText.setText(stringFormatter.formatString(customText));
-				mBuildText.setSelected(true);
+				mBuildText.post(() -> {
+					mBuildText.setText(stringFormatter.formatString(customText));
+					mBuildText.setSelected(true);
+				});
 			} else {
 				callMethod(QSFV,
 						"setBuildText");

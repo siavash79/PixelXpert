@@ -10,6 +10,7 @@ import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -36,19 +37,18 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
-import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.Helpers;
-import sh.siava.AOSPMods.modpacks.utils.SettingsLibUtils;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
-public class QSThemeManager extends XposedModPack {
+public class ThemeManager extends XposedModPack {
 	public static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 
 	public static final int STATE_ACTIVE = 2;
 
 	private static boolean lightQSHeaderEnabled = false;
+	private static boolean enablePowerMenuTheme = false;
 	private static boolean brightnessThickTrackEnabled = false;
 
 	private boolean isDark;
@@ -57,10 +57,10 @@ public class QSThemeManager extends XposedModPack {
 	private int colorActive;
 	private Drawable lightFooterShape = null;
 	private Object mClockViewQSHeader;
-	private Object mScrimBehindTint = BLACK;
+	private int mScrimBehindTint = BLACK;
 	private Object unlockedScrimState;
 
-	public QSThemeManager(Context context) {
+	public ThemeManager(Context context) {
 		super(context);
 		if (!listensTo(context.getPackageName())) return;
 
@@ -70,10 +70,11 @@ public class QSThemeManager extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
+		if (Xprefs == null) return;
 
-		setLightQSHeader(XPrefs.Xprefs.getBoolean("LightQSPanel", false));
-		boolean newbrightnessThickTrackEnabled = XPrefs.Xprefs.getBoolean("BSThickTrackOverlay", false);
+		enablePowerMenuTheme = Xprefs.getBoolean("enablePowerMenuTheme", false);
+		setLightQSHeader(Xprefs.getBoolean("LightQSPanel", false));
+		boolean newbrightnessThickTrackEnabled = Xprefs.getBoolean("BSThickTrackOverlay", false);
 		if (newbrightnessThickTrackEnabled != brightnessThickTrackEnabled) {
 			brightnessThickTrackEnabled = newbrightnessThickTrackEnabled;
 			try {
@@ -81,6 +82,16 @@ public class QSThemeManager extends XposedModPack {
 			} catch (Throwable ignored) {
 			}
 		}
+
+		try
+		{
+			if(Key[0].equals("LightQSPanel")) {
+				//Application of Light QS usually only needs a screen off/on. but some users get confused. Let's restart systemUI and get it over with
+				//This has to happen AFTER overlays are applied. So we do it after update operations are done
+				SystemUtils.killSelf();
+			}
+		}
+		catch (Throwable ignored){}
 	}
 
 	public void setLightQSHeader(boolean state) {
@@ -107,7 +118,23 @@ public class QSThemeManager extends XposedModPack {
 		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 		Class<?> BrightnessSliderViewClass = findClass("com.android.systemui.settings.brightness.BrightnessSliderView", lpparam.classLoader);
-		SettingsLibUtils.init(lpparam.classLoader);
+		Class<?> GlobalActionsDialogLiteSinglePressActionClass = findClass("com.android.systemui.globalactions.GlobalActionsDialogLite$SinglePressAction", lpparam.classLoader);
+		Class<?> GlobalActionsDialogLiteEmergencyActionClass = findClass("com.android.systemui.globalactions.GlobalActionsDialogLite$EmergencyAction", lpparam.classLoader);
+		Class<?> GlobalActionsLayoutLiteClass = findClass("com.android.systemui.globalactions.GlobalActionsLayoutLite", lpparam.classLoader);
+
+		try {
+			Class<?> BatteryStatusChipClass = findClass("com.android.systemui.statusbar.BatteryStatusChip", lpparam.classLoader);
+			hookAllMethods(BatteryStatusChipClass, "updateResources", new XC_MethodHook() { //background color of 14's charging chip. Fix for light QS theme situation
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if (lightQSHeaderEnabled && !isDark)
+						((LinearLayout) getObjectField(param.thisObject, "roundedContainer"))
+								.getBackground()
+								.setTint(colorActive);
+				}
+			});
+		}
+		catch (Throwable ignored){} //Android 13 or something
 
 		hookAllMethods(BrightnessSliderViewClass, "onFinishInflate", new XC_MethodHook() { //setting brightness slider background to gray
 			@Override
@@ -236,7 +263,7 @@ public class QSThemeManager extends XposedModPack {
 						protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 							if (!lightQSHeaderEnabled) return;
 
-							int textColor = SettingsLibUtils.getColorAttrDefaultColor(android.R.attr.textColorPrimary, mContext);
+							int textColor = SettingsLibUtilsProvider.getColorAttrDefaultColor(android.R.attr.textColorPrimary, mContext);
 
 							((TextView) mView.findViewById(mContext.getResources().getIdentifier("clock", "id", mContext.getPackageName()))).setTextColor(textColor);
 							((TextView) mView.findViewById(mContext.getResources().getIdentifier("date", "id", mContext.getPackageName()))).setTextColor(textColor);
@@ -347,6 +374,55 @@ public class QSThemeManager extends XposedModPack {
 				}
 			}
 		});
+
+		//region power menu aka GlobalActions
+		hookAllMethods(GlobalActionsLayoutLiteClass, "onLayout", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(!enablePowerMenuTheme || isDark) return;
+
+				((View) param.thisObject)
+						.findViewById(android.R.id.list)
+						.getBackground()
+						.setTint(mScrimBehindTint); //Layout background color
+			}
+		});
+		hookAllMethods(GlobalActionsDialogLiteEmergencyActionClass, "create", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(!enablePowerMenuTheme || isDark) return;
+
+				((TextView) ((View) param.getResult())
+						.findViewById(android.R.id.message))
+						.setTextColor(BLACK); //Emergency Text Color
+			}
+		});
+
+		hookAllMethods(GlobalActionsDialogLiteSinglePressActionClass, "create", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(!enablePowerMenuTheme || isDark) return;
+
+				View itemView = (View) param.getResult();
+
+				ImageView iconView = itemView.findViewById(android.R.id.icon);
+
+				iconView
+						.getDrawable()
+						.setTint(colorInactive); //Icon color
+
+				iconView
+						.getBackground()
+						.setTint(colorActive); //Button Color
+
+				((TextView)itemView
+						.findViewById(android.R.id.message))
+						.setTextColor(BLACK); //Text Color
+			}
+		});
+
+		//endregion
+
 	}
 
 	private void applyOverlays(boolean force) throws Throwable {

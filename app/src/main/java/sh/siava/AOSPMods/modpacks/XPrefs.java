@@ -20,21 +20,30 @@ public class XPrefs {
 
 	private static final OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything(packageName, key);
 
-	public static void init(Context context)
-	{
+	public static void init(Context context) {
 		packageName = context.getPackageName();
 		Xprefs = new RemotePreferences(context, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
 		log("AOSPMods Version: " + BuildConfig.VERSION_NAME);
-		log("AOSPMods Records: " + Xprefs.getAll().keySet().size());
+		try {
+			log("AOSPMods Records: " + Xprefs.getAll().keySet().size());
+		} catch (Throwable ignored) {}
 		Xprefs.registerOnSharedPreferenceChangeListener(listener);
 	}
 
 	public static void loadEverything(String packageName, String... key) {
-		if (packageName.equals(Constants.SYSTEM_UI_PACKAGE)) {
-			Overlays.setAll(false);
-		}
+		if (key.length > 0 && (key[0] == null || Constants.PREF_UPDATE_EXCLUSIONS.stream().anyMatch(exclusion -> key[0].startsWith(exclusion))))
+			return;
+
+		setPackagePrefs(packageName);
+
 		for (XposedModPack thisMod : XPLauncher.runningMods) {
 			thisMod.updatePrefs(key);
+		}
+	}
+
+	public static void setPackagePrefs(String packageName) {
+		if (Constants.SYSTEM_UI_PACKAGE.equals(packageName) && !XPLauncher.isChildProcess) {
+			Overlays.setAll(false);
 		}
 	}
 }

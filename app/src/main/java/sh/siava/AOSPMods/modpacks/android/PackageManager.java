@@ -3,8 +3,11 @@ package sh.siava.AOSPMods.modpacks.android;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Binder;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,6 +18,7 @@ import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 
+/** @noinspection RedundantThrows*/
 public class PackageManager extends XposedModPack {
 	public static final String listenPackage = Constants.SYSTEM_FRAMEWORK_PACKAGE;
 
@@ -23,6 +27,7 @@ public class PackageManager extends XposedModPack {
 	private static final String ALLOW_DOWNGRADE_PREF = "PM_AllowDowngrade";
 
 	public static final int PERMISSION = 4;
+	private static final int PERMISSION_GRANTED = 0;
 
 	private static boolean PM_AllowMismatchedSignature = false;
 	private static boolean PM_AllowDowngrade = false;
@@ -65,6 +70,40 @@ public class PackageManager extends XposedModPack {
 			Class<?> InstallPackageHelperClass = findClass("com.android.server.pm.InstallPackageHelper", lpparam.classLoader);
 			Class<?> PackageManagerServiceUtilsClass = findClass("com.android.server.pm.PackageManagerServiceUtils", lpparam.classLoader);
 			Class<?> SigningDetailsClass = findClass("android.content.pm.SigningDetails", lpparam.classLoader);
+
+			try
+			{
+				Class<?> ActivityManagerServiceClass = findClass("com.android.server.am.ActivityManagerService", lpparam.classLoader);
+
+				hookAllMethods(ActivityManagerServiceClass, "checkBroadcastFromSystem", new XC_MethodHook() { //This thing shouts too much. let's request for some silence
+					@Override
+					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+						Intent intent = (Intent) param.args[0];
+						if(intent.getAction().equals(Constants.ACTION_PROFILE_SWITCH_AVAILABLE))
+							param.setResult(null);
+					}
+				});
+
+				//Granting pixel launcher permission to force stop apps
+				hookAllMethods(ActivityManagerServiceClass, "checkCallingPermission", new XC_MethodHook() {
+					@Override
+					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+						try {
+							if ("android.permission.FORCE_STOP_PACKAGES".equals(param.args[0])) {
+								if (Constants.LAUNCHER_PACKAGE.equals(
+										callMethod(
+												getObjectField(param.thisObject, "mInternal"),
+												"getPackageNameByPid",
+												Binder.getCallingPid()))) {
+									param.setResult(PERMISSION_GRANTED);
+								}
+							}
+						}
+						catch (Throwable ignored) {}
+					}
+				});
+
+			}catch (Throwable ignored){}
 
 			hookAllMethods(PackageManagerServiceUtilsClass, "checkDowngrade", new XC_MethodHook() {
 				@Override

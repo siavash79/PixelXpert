@@ -2,6 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 	<item
 		android:id="@android:id/background"
+		android:height="4.0dip"
 		android:gravity="fill_horizontal|center">
 		<shape
 			android:shape="rectangle"
@@ -13,13 +14,20 @@
 	</item>
 	<item
 		android:id="@android:id/secondaryProgress"
+		android:height="4.0dip"
 		android:gravity="fill_horizontal|center">
 		<scale android:scaleWidth="100%">
 			<selector>
-				<item
-					android:drawable="@*android:color/transparent"
-					android:state_enabled="false" />
-				<item>
+				<item android:state_enabled="false">
+					<shape
+						android:shape="rectangle"
+						android:tint="@color/text_color_primary">
+						<corners android:radius="24.0dip" />
+						<size android:height="4.0dip" />
+						<solid android:color="#33000000" />
+					</shape>
+				</item>
+				<item android:state_enabled="true">
 					<shape
 						android:shape="rectangle"
 						android:tint="?android:colorControlActivated">
@@ -33,13 +41,20 @@
 	</item>
 	<item
 		android:id="@android:id/progress"
+		android:height="4.0dip"
 		android:gravity="fill_horizontal|center">
 		<scale android:scaleWidth="100%">
 			<selector>
-				<item
-					android:drawable="@android:color/transparent"
-					android:state_enabled="false" />
-				<item>
+				<item android:state_enabled="false">
+					<shape
+						android:shape="rectangle"
+						android:tint="@color/text_color_primary">
+						<corners android:radius="24.0dip" />
+						<size android:height="4.0dip" />
+						<solid android:color="#33000000" />
+					</shape>
+				</item>
+				<item android:state_enabled="true">
 					<shape android:shape="rectangle">
 						<corners android:radius="24.0dip" />
 						<size android:height="4.0dip" />

@@ -85,23 +85,25 @@
     <string-array name="custom_action_titles">
         <item>@string/none</item>
         <item>@string/screenshot</item>
-        <item>@string/insecure_screenshot</item>
+        <!--item>@string/insecure_screenshot</item-->
         <!--item>@string/back</item-->
         <item>@string/kill_foreground_app</item>
         <item>@string/toggle_notification</item>
         <item>@string/toggle_one_handed</item>
         <item>@string/sleep</item>
+        <item>@string/app_switch_tile_title</item>
     </string-array>
 
     <string-array name="custom_action_codes">
         <item>-1</item>
         <item>1</item>
-        <item>6</item>
+        <!--item>6</item-->
         <!--item>2</item-->
         <item>3</item>
         <item>4</item>
         <item>5</item>
         <item>7</item>
+        <item>8</item>
     </string-array>
 
     <string-array name="battery_style_names">
@@ -187,6 +189,39 @@
         <item>@string/ntsb_far_left</item>
         <item>@string/ntsb_mid_left</item>
         <item>@string/ntsb_mid_right</item>
+    </string-array>
+
+    <string-array name="network_stat_start_names">
+        <item>@string/nt_stat_mode_today</item>
+        <item>@string/nt_stat_mode_week</item>
+        <item>@string/nt_stat_mode_month</item>
+    </string-array>
+
+    <string-array name="network_stat_start_codes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="days_of_week_names">
+        <item>@string/sunday</item>
+        <item>@string/monday</item>
+        <item>@string/tuesday</item>
+        <item>@string/wednesday</item>
+        <item>@string/thursday</item>
+        <item>@string/friday</item>
+        <item>@string/saturday</item>
+
+    </string-array>
+
+    <string-array name="days_of_week_codes">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
     </string-array>
 
     <string-array name="network_mode_names">

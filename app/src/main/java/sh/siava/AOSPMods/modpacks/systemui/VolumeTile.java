@@ -54,7 +54,7 @@ import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
-import sh.siava.AOSPMods.modpacks.utils.SystemUtils.VolumeChangeListener;
+import sh.siava.AOSPMods.modpacks.utils.SystemUtils.ChangeListener;
 
 @SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 public class VolumeTile extends XposedModPack {
@@ -99,7 +99,7 @@ public class VolumeTile extends XposedModPack {
 		hookAllMethods(QSTileImplClass, "removeCallback", new XC_MethodHook() { //removing dead tiles from callbacks
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				VolumeChangeListener volumeChangeListener = (VolumeChangeListener) getAdditionalInstanceField(param.thisObject, "volumeChangeListener");
+				ChangeListener volumeChangeListener = (ChangeListener) getAdditionalInstanceField(param.thisObject, "volumeChangeListener");
 
 				if(volumeChangeListener != null)
 					unregisterVolumeChangeListener(volumeChangeListener);
@@ -145,7 +145,7 @@ public class VolumeTile extends XposedModPack {
 	}
 
 	private void setVolumeChangeListener(Object tile, View tileView) {
-		VolumeChangeListener listener = () -> handleVolumeChanged(tileView);
+		ChangeListener listener = (ignored) -> handleVolumeChanged(tileView);
 
 		setAdditionalInstanceField(tile, "volumeChangeListener", listener);
 

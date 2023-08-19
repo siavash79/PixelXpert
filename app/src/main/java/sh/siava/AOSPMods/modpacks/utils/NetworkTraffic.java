@@ -1,5 +1,6 @@
 package sh.siava.AOSPMods.modpacks.utils;
 
+import static android.content.Context.RECEIVER_EXPORTED;
 import static android.widget.LinearLayout.VERTICAL;
 
 import android.annotation.SuppressLint;
@@ -36,7 +37,6 @@ import androidx.core.content.res.ResourcesCompat;
 
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.ResourceManager;
-import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.systemui.StatusbarMods;
 
 @SuppressLint("ViewConstructor")
@@ -262,6 +262,7 @@ public class NetworkTraffic extends FrameLayout {
 		}
 	}
 
+	@SuppressLint("DiscouragedApi")
 	private void setIndicatorMode() {
 		Resources res = ResourceManager.modRes;
 
@@ -307,7 +308,7 @@ public class NetworkTraffic extends FrameLayout {
 			mAttached = true;
 			IntentFilter filter = new IntentFilter();
 			filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-			mContext.registerReceiver(mIntentReceiver, filter, null, getHandler());
+			mContext.registerReceiver(mIntentReceiver, filter, null, getHandler(), RECEIVER_EXPORTED);
 		}
 		update();
 	}
@@ -369,6 +370,7 @@ public class NetworkTraffic extends FrameLayout {
 	}
 
 	protected void setSpacingAndFonts() {
+		@SuppressLint("DiscouragedApi")
 		String txtFont = getResources().getString(getResources().getIdentifier("android:string/config_headlineFontFamily", "string", mContext.getOpPackageName()));
 		mTextView.setTypeface(Typeface.create(txtFont, Typeface.BOLD));
 		mTextView.setLineSpacing(0.85f, 0.85f);

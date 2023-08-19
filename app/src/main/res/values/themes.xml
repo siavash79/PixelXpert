@@ -1,10 +1,19 @@
 <resources>
 
 	<style name="AppTheme.AOSPMods" parent="Theme.Material3.DayNight">
-		<item name="alertDialogTheme">@style/AppTheme.Dialog</item>
+		<!-- Primary brand color. -->
 		<item name="colorPrimary">@color/ui_accent</item>
-		<item name="colorOnPrimary">@android:color/system_accent1_10</item>
-		<item name="colorPrimaryContainer">@android:color/system_accent1_10</item>
+		<item name="colorPrimaryDark">@color/ui_accent</item>
+		<item name="colorPrimaryVariant">@color/ui_accent</item>
+		<item name="colorOnPrimary">@color/white</item>
+
+		<!-- Secondary brand color. -->
+		<item name="colorSecondary">@color/ui_accent_variant</item>
+		<item name="colorSecondaryVariant">@color/ui_accent_variant</item>
+		<item name="colorOnSecondary">@color/black</item>
+
+		<!-- App theme -->
+		<item name="alertDialogTheme">@style/AppTheme.Dialog</item>
 		<item name="materialAlertDialogTheme">@style/AppTheme.Dialog</item>
 		<item name="android:textColor">@color/text_color_primary</item>
 		<item name="android:textColorPrimary">@color/text_color_primary</item>
@@ -19,6 +28,51 @@
 		<item name="collapsingToolbarLayoutStyle">@style/Widget.CollapsingToolbar</item>
 		<item name="android:windowSplashScreenBackground">@color/ui_bg</item>
 		<item name="seekBarStyle">@style/Material3.SeekBar</item>
+		<item name="materialSwitchStyle">@style/Widget.MaterialSwitch</item>
+
+		<!-- Material3 attributes (needed if parent="Theme.MaterialComponents"). -->
+		<item name="colorPrimaryInverse">@color/colorPrimaryDark</item>
+		<item name="colorPrimaryContainer">@color/colorPrimaryContainerLight</item>
+		<item name="colorOnPrimaryContainer">@color/colorOnPrimaryContainerLight</item>
+		<item name="colorSecondaryContainer">@color/colorSecondaryContainerLight</item>
+		<item name="colorOnSecondaryContainer">@color/colorOnSecondaryContainerLight</item>
+		<item name="colorTertiary">@color/colorTertiaryLight</item>
+		<item name="colorOnTertiary">@color/colorOnTertiaryLight</item>
+		<item name="colorTertiaryContainer">@color/colorTertiaryContainerLight</item>
+		<item name="colorOnTertiaryContainer">@color/colorOnTertiaryContainerLight</item>
+		<item name="colorSurfaceVariant">@color/colorSurfaceVariantLight</item>
+		<item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariantLight</item>
+		<item name="colorSurfaceInverse">@color/colorSurfaceDark</item>
+		<item name="colorOnSurfaceInverse">@color/colorOnSurfaceDark</item>
+		<item name="colorOutline">@color/colorOutlineLight</item>
+		<item name="colorErrorContainer">@color/colorErrorContainerLight</item>
+		<item name="colorOnErrorContainer">@color/colorOnErrorContainerLight</item>
+		<item name="textAppearanceDisplayLarge">@style/TextAppearance.Material3.DisplayLarge</item>
+		<item name="textAppearanceDisplayMedium">@style/TextAppearance.Material3.DisplayMedium
+		</item>
+		<item name="textAppearanceDisplaySmall">@style/TextAppearance.Material3.DisplaySmall</item>
+		<item name="textAppearanceHeadlineLarge">@style/TextAppearance.Material3.HeadlineLarge
+		</item>
+		<item name="textAppearanceHeadlineMedium">@style/TextAppearance.Material3.HeadlineMedium
+		</item>
+		<item name="textAppearanceHeadlineSmall">@style/TextAppearance.Material3.HeadlineSmall
+		</item>
+		<item name="textAppearanceTitleLarge">@style/TextAppearance.Material3.TitleLarge</item>
+		<item name="textAppearanceTitleMedium">@style/TextAppearance.Material3.TitleMedium</item>
+		<item name="textAppearanceTitleSmall">@style/TextAppearance.Material3.TitleSmall</item>
+		<item name="textAppearanceBodyLarge">@style/TextAppearance.Material3.BodyLarge</item>
+		<item name="textAppearanceBodyMedium">@style/TextAppearance.Material3.BodyMedium</item>
+		<item name="textAppearanceBodySmall">@style/TextAppearance.Material3.BodySmall</item>
+		<item name="textAppearanceLabelLarge">@style/TextAppearance.Material3.LabelLarge</item>
+		<item name="textAppearanceLabelMedium">@style/TextAppearance.Material3.LabelMedium</item>
+		<item name="textAppearanceLabelSmall">@style/TextAppearance.Material3.LabelSmall</item>
+		<item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Material3.SmallComponent
+		</item>
+		<item name="shapeAppearanceMediumComponent">
+			@style/ShapeAppearance.Material3.MediumComponent
+		</item>
+		<item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Material3.LargeComponent
+		</item>
 	</style>
 
 </resources>

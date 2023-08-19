@@ -58,13 +58,17 @@ public class UpdateActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (getIntent().getBooleanExtra("updateTapped", false)) {
-
+		if (getIntent().getBooleanExtra("updateTapped", false))
+		{
 			String downloadPath = getIntent().getStringExtra("filePath");
 
 			installDoubleZip(downloadPath);
+		}
+		else if("true".equals(getIntent().getStringExtra("migratePrefs"))) //received intent from magisk, showing installation is done
+		{
 			applyPrefsToUpdate();
 		}
+
 		binding = ActivityUpdateBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
 
@@ -86,7 +90,6 @@ public class UpdateActivity extends AppCompatActivity {
 
 		ModuleFolderOperations.applyVolumeSteps(volumeStps, updateRoot);
 		ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, updateRoot);
-		ModuleFolderOperations.applyPowerMenuOverlay(PowerMenuOverlayEnabled, updateRoot);
 	}
 
 	@Override

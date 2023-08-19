@@ -6,8 +6,10 @@ import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
@@ -19,11 +21,10 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
-import sh.siava.AOSPMods.modpacks.XPrefs;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
-public class QSQuickPullDown extends XposedModPack {
+public class StatusbarGestures extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 
 	private static final int PULLDOWN_SIDE_RIGHT = 1;
@@ -36,16 +37,22 @@ public class QSQuickPullDown extends XposedModPack {
 	private static float statusbarPortion = 0.25f; // now set to 25% of the screen. it can be anything between 0 to 100%
 	private Object NotificationPanelViewController;
 	private String QSExpandMethodName;
-	public QSQuickPullDown(Context context) {
+
+	private GestureDetector mGestureDetector;
+
+	private boolean StatusbarLongpressAppSwitch = false;
+	public StatusbarGestures(Context context) {
 		super(context);
 	}
 
 	@Override
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
-		oneFingerPulldownEnabled = XPrefs.Xprefs.getBoolean("QSPullodwnEnabled", false);
-		statusbarPortion = XPrefs.Xprefs.getInt("QSPulldownPercent", 25) / 100f;
-		pullDownSide = Integer.parseInt(XPrefs.Xprefs.getString("QSPulldownSide", "1"));
+		if (Xprefs == null) return;
+		oneFingerPulldownEnabled = Xprefs.getBoolean("QSPullodwnEnabled", false);
+		statusbarPortion = Xprefs.getInt("QSPulldownPercent", 25) / 100f;
+		pullDownSide = Integer.parseInt(Xprefs.getString("QSPulldownSide", "1"));
+
+		StatusbarLongpressAppSwitch = Xprefs.getBoolean("StatusbarLongpressAppSwitch", false);
 	}
 
 	@Override
@@ -60,10 +67,41 @@ public class QSQuickPullDown extends XposedModPack {
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					Object mStatusBarViewTouchEventHandler = getObjectField(param.thisObject, "mStatusBarViewTouchEventHandler");
 
+					mGestureDetector = new GestureDetector(mContext, new GestureDetector.OnGestureListener() {
+						@Override
+						public boolean onDown(@NonNull MotionEvent e) {
+							return false;
+						}
+
+						@Override
+						public void onShowPress(@NonNull MotionEvent e) {}
+
+						@Override
+						public boolean onSingleTapUp(@NonNull MotionEvent e) {
+							return false;
+						}
+
+						@Override
+						public boolean onScroll(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
+							return false;
+						}
+
+						@Override
+						public void onLongPress(@NonNull MotionEvent e) { onStatusbarLongpress(); }
+
+						@Override
+						public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
+							return false;
+						}
+					});
+
 					hookAllMethods(mStatusBarViewTouchEventHandler.getClass(), "handleTouchEvent", new XC_MethodHook() {
 						@Override
 						protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
 							MotionEvent event = (MotionEvent) param1.args[0];
+
+							mGestureDetector.onTouchEvent(event);
+
 							if (!oneFingerPulldownEnabled) return;
 
 							int mBarState = (int) getObjectField(param.thisObject, "mBarState");
@@ -90,6 +128,34 @@ public class QSQuickPullDown extends XposedModPack {
 		}
 		else
 		{
+			mGestureDetector = new GestureDetector(mContext, new GestureDetector.OnGestureListener() {
+				@Override
+				public boolean onDown(@NonNull MotionEvent e) {
+					return false;
+				}
+
+				@Override
+				public void onShowPress(@NonNull MotionEvent e) {}
+
+				@Override
+				public boolean onSingleTapUp(@NonNull MotionEvent e) {
+					return false;
+				}
+
+				@Override
+				public boolean onScroll(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
+					return false;
+				}
+
+				@Override
+				public void onLongPress(@NonNull MotionEvent e) { onStatusbarLongpress(); }
+
+				@Override
+				public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
+					return false;
+				}
+			});
+
 			if(hookAllMethods(NotificationPanelViewControllerClass, "createTouchHandler", new XC_MethodHook() { //13 QPR2
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -97,6 +163,9 @@ public class QSQuickPullDown extends XposedModPack {
 						@Override
 						protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
 							MotionEvent event = (MotionEvent) param1.args[1];
+
+							mGestureDetector.onTouchEvent(event);
+
 							if (!oneFingerPulldownEnabled) return;
 
 							if (!(boolean) getObjectField(param.thisObject, "mPulsing")
@@ -123,7 +192,7 @@ public class QSQuickPullDown extends XposedModPack {
 				}
 			}).size() == 0)
 			{ //13 QPR3 - 14
-				GestureDetector gestureDetector = new GestureDetector(mContext, new GestureDetector.OnGestureListener() {
+				mGestureDetector = new GestureDetector(mContext, new GestureDetector.OnGestureListener() {
 					@Override
 					public boolean onDown(@NonNull MotionEvent e) {
 						return false;
@@ -145,7 +214,7 @@ public class QSQuickPullDown extends XposedModPack {
 					}
 
 					@Override
-					public void onLongPress(@NonNull MotionEvent e) {}
+					public void onLongPress(@NonNull MotionEvent e) { onStatusbarLongpress(); }
 
 					@Override
 					public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
@@ -197,7 +266,7 @@ public class QSQuickPullDown extends XposedModPack {
 										? (MotionEvent) param.args[0]
 										: (MotionEvent) param.args[1];
 
-						gestureDetector.onTouchEvent(event);
+						mGestureDetector.onTouchEvent(event);
 
 					}
 				};
@@ -205,6 +274,19 @@ public class QSQuickPullDown extends XposedModPack {
 				hookAllMethods(PhoneStatusBarViewControllerClass, "onTouch", statusbarTouchHook);
 			}
 		}
+	}
+
+	private void onStatusbarLongpress() {
+		if(StatusbarLongpressAppSwitch)
+		{
+			sendAppSwitchBroadcast();
+		}
+	}
+
+	private void sendAppSwitchBroadcast() {
+		new Thread(() -> mContext.sendBroadcast(new Intent()
+				.setAction(Constants.ACTION_SWITCH_APP_PROFILE)
+				.addFlags(Intent.FLAG_RECEIVER_FOREGROUND))).start();
 	}
 
 	@Override

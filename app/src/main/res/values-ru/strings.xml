@@ -19,7 +19,8 @@
     <string name="lockscreen_header_title">Экран блокировки</string>
     <string name="statusbar_header">Строка состояния</string>
     <string name="nav_header">Панель навигации</string>
-    <string name="misc_header">Разное</string>
+	<string name="dialer_header">Телефон</string>
+	<string name="misc_header">Разное</string>
     <string name="qs_panel_category_title">Панель быстрых настроек</string>
     <string name="theme_customization_category">Иконки и стили</string>
 
@@ -44,6 +45,7 @@
     <string name="camera_shortcut">Камера</string>
     <string name="assistant_shortcut">Ассистент</string>
     <string name="torch_shortcut">Фонарик</string>
+    <string name="qr_scanner_shortcut">"Сканер QR-кодов "</string>
     <string name="album_art_category">Параметры мультимедиа</string>
     <string name="album_art_title">Показывать обложки альбомов при воспроизведении медиафайлов</string>
     <string name="album_art_blur_text">Значение размытия</string>
@@ -57,6 +59,7 @@
     <string name="double_tap_sleep_title">Двойное нажатие для перехода в спящий режим</string>
     <string name="battery_style_title">Выберите стиль батареи</string>
     <string name="battery_show_percent_title">Показать процент заряда батареи</string>
+    <string name="battery_show_charging_animation_title">"Показать анимацию зарядки "</string>
     <string name="battery_style_category_title">Стиль батареи</string>
     <string name="battery_icon_size_title">Размер значка батареи</string>
     <string name="battery_hidden">Скрытый</string>
@@ -137,6 +140,16 @@
     <string name="BB_transit_colors">Цвета оттенков между диапазоном</string>
 
     <!--Quick settings panel related-->
+    <string name="nt_stat_mode_today">Сегодня</string>
+    <string name="nt_stat_mode_week">"Текущая неделя "</string>
+    <string name="nt_stat_mode_month">"Текущий месяц "</string>
+    <string name="sunday">Воскресенье</string>
+    <string name="monday">Понедельник</string>
+    <string name="tuesday">Вторник</string>
+    <string name="wednesday">Среда</string>
+    <string name="thursday">Четверг</string>
+    <string name="friday">Пятница</string>
+    <string name="saturday">Суббота</string>
     <string name="qs_mod_category_title">Номер сборки в панели быстрых настроек</string>
     <string name="qs_footer_mod_title">Изменить текст номера сборки в панели быстрых настроек</string>
     <string name="qs_footer_text_value">Ввести свой текст</string>
@@ -203,11 +216,14 @@
     <string name="allow_all_screen_rotations">Разблокировать все повороты экрана</string>
     <string name="allow_all_screen_rotations_summary">Будет игнорировать плавающую кнопку ручного вращения</string>
     <string name="force_no_cutout">Игнорировать вырез камеры</string>
+    <string name="force_themed_icons_title">Автоматическая генерация недостающих тематических значков (только для Android 14 - Pixel launcher)</string>
+    <string name="reapply_themed_config">Повторное включение тематических значков для применения</string>
     <string name="volume_button_step_title">Шаг громкости (от 0 до 100%)</string>
     <string name="display_resolution_title">Разрешение диплея</string>
 
     <string name="brightness_range_title">Пределы яркости дисплея</string>
     <string name="brightness_range_not_linear">Этот диапазон НЕ является линейным: иногда небольшая разница приводит к значительным изменениям.</string>
+    <string name="separate_ring_notif_vol_title">Индивидуальная громкость для звонка и уведомлений</string>
     <string name="so_power_longpress_torch_title">Долгое нажатие кнопки питания для включения фонарика</string>
     <string name="so_taptaptorch_title">Двойное нажатие для включения фонарика</string>
     <string name="so_taptaptorch_summary">Двойное нажатие для быстрого включения фонарика</string>
@@ -231,6 +247,8 @@
     <string name="vibrate_on_call_drop_title">Вибрация при отключении вызова</string>
 
     <!-- Theming section related -->
+    <string name="dialer_mute_record_message_title">Удаление объявления о записи вызова</string>
+    <string name="dialer_mute_record_message_summary">Применяется только для приложения Google phone с включенной записью звонков</string>
     <string name="gsans_override_title">Принудительное использование шрифта Google Sans во всей системе</string>
     <string name="font_overlays_enable_title">Разрешить использование пользовательских шрифтов</string>
     <string name="theme_customization_font_title">Заголовок / Основной шрифт</string>
@@ -298,7 +316,7 @@
     <string name="monitoring_category_title">Параметры мониторинга</string>
     <string name="netstat_header">Настройки сетевой статистики</string>
 
-    <string name="string_formatter_manual_body">Помимо обычного текста, который вы можете ввести, также доступны динамические переменные:\n\n$G\&lt;format\&gt; : григорианский дата в зависимости от формата. Документацию по формату можно найти в строке `Формат даты Java`\nПример: $GMMM означает: январь (или любой другой)\n\n$P&lt;format&gt; : дата на персидском языке, в зависимости от формата\nПример: $Pyyyy означает: 1401\n\nЧтобы включить статистику использования Интернета, необходимо включить параметр включить сбор сетевой статистики в меню Разное/Настройки сетевой статистики.\n\n$Nrx : Всего загрузок за сегодня\n$Ntx: Всего загрузок за сегодня\n$Nall : Всего загрузок за сегодня\n\nЕсли заменить $N с $Nc вам будет предоставлена ​​статистика мобильных данных (например, $Ncrx для загрузок)\n\nПример:\n`Мобильный трафик $GEEEE: $Ncall` создаст:\n`Мобильный трафик вторника: 2 ГБ`</string>
+    <string name="string_formatter_manual_body_v3">Помимо обычного текста, доступны динамические переменные, такие как дата, использование данных и температура:\n\n$G\&lt;format\&gt; : григорианская дата, основанная на формате*\n$P&lt;format&gt; : персидская дата, основанная на формате*\n$Nrx: Общее количество загрузок за указанный период ** ***\n$Ntx: Всего загрузок за указанный период ** ***\n$Nall: Общий трафик за указанный период ** ***\n$Nssid: Имя WiFi SSID (если применимо)\n\n$T\&lt;format\&gt;[interval]: Температура; \nформат может быть b (для батареи), c (для CPU), g (для GPU) и s (для кожи)\nИ наконец, есть ОПЦИОНАЛЬНОЕ количество интервалов обновления в секундах (по умолчанию: 60 секунд)\n\n*Для получения документации по формату ищите "Java Date Format"\n**Вы можете указать период статистики в AOSPMods/Miscellaneous menu/Network Statistics Settings\n***Если вы замените $N на $Nc, то получите статистику по мобильным данным (например, $Ncrx вместо $Ncrx). например, $Ncrx вместо Nrx)</string>
     <string name="update_channel_name">Обновления</string>
     <string name="update_notification_title">Обновление загружено</string>
     <string name="update_notification_text">Нажмите здесь, чтобы установить</string>
@@ -342,7 +360,6 @@
     <string name="toggle_notification">Открыть панель уведомлений</string>
     <string name="toggle_one_handed">Переключение режима управления одной рукой</string>
     <string name="insecure_screenshot">Небезопасный скриншот</string>
-    <string name="screenshot_chord_insecure">Разрешить скриншот в защищенном приложении (гр.вверх+кн.питания)</string>
     <string name="taskbar_as_recents_title">Превращать панель задач в список запущенных приложений</string>
     <string name="taskbar_radius_title">Угловой угол панели задач</string>
     <string name="caution_unstable">Внимание: эта опция может быть нестабильной для некоторых пользователей.</string>
@@ -368,6 +385,8 @@
     <string name="ls_general_options">"Опции экрана блокировки "</string>
     <string name="hide_avatar_title">Удалить аватар пользователя (многопользовательский режим)</string>
 	<string name="camera_manager_master_title">Включить модификации фонарика (Отключите, если устройство не поддерживает)</string>
+    <string name="screenshot_insecure">Разрешить снимок экрана из ограниченного содержимого</string>
+    <string name="screen_record_insecure">Разрешить запись экрана из ограниченного содержимого</string>
     <string name="clipboard_smart_actions_title">Дополнительные действия в буфере обмена</string>
 	<string name="pm_header">Менеджер пакетов</string>
     <string name="LSleftLongClickShortcutTitle">Левый ярлык (длительное нажатие)</string>
@@ -379,8 +398,13 @@
     <string name="qs_tile_qty_title">Настройки быстрых настроек счетчик плиток</string>
     <string name="qs_tile_qty_portrait">"В портретной ориентации "</string>
     <string name="qs_tile_qty_landscape">В горизонтальной ориентации</string>
+    <string name="taskbar_transient_title">Автоматическое скрытие</string>
     <string name="pm_bypass_signature_title">Обход проверки подписи пакета</string>
     <string name="pm_allow_downgrade_title">Разрешить понижение версии приложения</string>
+    <string name="network_stat_type">Тип статистики</string>
+    <string name="network_stat_day">Время начала</string>
+    <string name="network_stat_week">День начала недели</string>
+    <string name="network_stat_month">День начала месяца</string>
     <string name="incompatible_alert_title">Несовместимый</string>
     <string name="incompatible_alert_body">"Ваше текущее ПЗУ не совместимо с этим модулем. Вы можете продолжать использовать его, но некоторые (или все) опции могут работать не так, как задумано.\\n\\nПожалуйста, не сообщайте об ошибках "</string>
     <string name="incompatible_alert_ok_btn">Я понимаю</string>

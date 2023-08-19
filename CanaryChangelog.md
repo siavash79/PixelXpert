@@ -1,3 +1,82 @@
+**canary-278**  
+- Added options to show ambient display (on tap / pickup) when the screen is off  
+  
+**canary-277**  
+- (Experimental) Compatibility with latest Lsposed canary versions  
+  
+**canary-276**  
+- Changed power menu light theme method  
+- A14 lockscreen clocks: improved custom text padding with clock  
+- A14B5: Fixed combined signal icons not working on boot  
+  
+**canary-275**  
+- Added search in the app. (Shout out to DrDisagree@Telegram / Mahmud0808@Github)  
+  
+**canary-274**  
+- Fixed unrestricted screenshot for work profile  
+  
+**canary-273**  
+- Fixed QQS BrightnessSlider not loading on some A13 devices  
+  
+**canary-272**  
+- A14: Fixed kill foreground app function - Compatibility with A13 not tested yet  
+  
+**canary-271**  
+- Fixed navigation gestures not working in recent canaries  
+- Work/Clone apps: added options to quickly switch between the profiles  
+- Performance improvement  
+  
+**canary-270**  
+- Added option to screen-record from restricted content  
+- performance improvement  
+- now canary versions can also get updated through Magisk built-in updater  
+  
+**canary-269**  
+- Fixed full version canary failing to install  
+  
+**canary-268**  
+- Updated canary upload location to improve the download experience  
+- improved module update script  
+  
+**canary-267**  
+- edited string formatter instructions  
+- Fixed lockscreen TV remote shortcut for the Google TV app 4.39  
+- Fixed update fail notification not shown  
+  
+**canary-266**  
+- Fixed Network statistics output error and code improvement  
+  
+**canary-265**  
+- Network statistics refreshed (Misc->Network statistics options)  
+- A14: Fixed app crash when update starts  
+  
+**canary-264**  
+- Fixed taskbar in recents mode not launching certain icons  
+- Performance improvement  
+- fixed statusbar icons disappear randomly if temperature is shown on statusbar  
+  
+**canary-263**  
+- Added option to auto-hide the taskbar (may not work on your device)  
+- No taskbar mods if it's not turned on  
+- Added option to separate Ringer/Notification volumes - Will not work on 13QPR2 and earlier  
+- Combined unrestricted screenshot settings  
+- A14: fixed battery bar / network monitor not hiding from lockscreen  
+  
+**canary-262**  
+- Added temperature to customizable texts  
+- Fixed combined signal icons causing system crash on some devices  
+  
+**canary-261**  
+- A14: fixed charging chip background color when Light QS enabled  
+- A14: fixed combined signal icons  
+  
+**canary-260**  
+- Battery icons: added optional charging animation  
+  
+**canary-259**  
+- Added option to mute the call recording announcement from Google phone  
+- removed separate wifi/cell tile switch if device doesn't support it  
+  
 **canary-258**  
 - Fixed call chip placement if multi-row statusbar enabled  
   

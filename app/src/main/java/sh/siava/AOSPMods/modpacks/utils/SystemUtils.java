@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods.modpacks.utils;
 
+import static android.content.Context.RECEIVER_EXPORTED;
+import static android.content.res.Configuration.UI_MODE_NIGHT_YES;
 import static com.topjohnwu.superuser.Shell.cmd;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
@@ -8,17 +10,20 @@ import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.DownloadManager;
+import android.app.usage.NetworkStatsManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Configuration;
+import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
+import android.hardware.camera2.CameraManager.TorchCallback;
 import android.hardware.camera2.CameraMetadata;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.PowerManager;
@@ -31,8 +36,6 @@ import android.telephony.TelephonyManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.topjohnwu.superuser.Shell;
-
 import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
@@ -40,12 +43,14 @@ import java.util.ArrayList;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 
+@SuppressWarnings("unused")
 public class SystemUtils {
 	private static final int THREAD_PRIORITY_BACKGROUND = 10;
 
 	@SuppressLint("StaticFieldLeak")
 	static SystemUtils instance;
 	Context mContext;
+	PackageManager mPackageManager;
 	CameraManager mCameraManager;
 	VibratorManager mVibrationManager;
 	AudioManager mAudioManager;
@@ -53,109 +58,108 @@ public class SystemUtils {
 	ConnectivityManager mConnectivityManager;
 	TelephonyManager mTelephonyManager;
 	AlarmManager mAlarmManager;
-	NetworkStats mNetworkStats;
 	DownloadManager mDownloadManager = null;
-	boolean hasVibrator;
+	NetworkStatsManager mNetworkStatsManager = null;
+	boolean mHasVibrator = false;
 	int maxFlashLevel = -1;
+	static boolean isTorchOn = false;
 
-	ArrayList<FlashlighLevelListener> flashlighLevelListeners = new ArrayList<>();
-	ArrayList<VolumeChangeListener> volumeChangeListeners = new ArrayList<>();
+	ArrayList<ChangeListener> mFlashlightLevelListeners = new ArrayList<>();
+	ArrayList<ChangeListener> mVolumeChangeListeners = new ArrayList<>();
+	private WifiManager mWifiManager;
 
-	TorchCallback torchCallback = new TorchCallback();
-
-	public static void RestartSystemUI() {
+	public static void restartSystemUI() {
 		cmd("killall com.android.systemui").submit();
 	}
 
-	public static void Restart() {
+	public static void restart() {
 		cmd("am start -a android.intent.action.REBOOT").submit();
 	}
 
 	public static boolean isFlashOn() {
-		if (instance == null) return false;
-		return TorchCallback.torchOn;
+		return isTorchOn;
 	}
 
-	public static void ToggleFlash() {
-		if (instance == null) return;
-		instance.toggleFlashInternal();
-	}
-
-	public static NetworkStats NetworkStats() {
-		if (instance == null) return null;
-		instance.initiateNetworkStats();
-		return instance.mNetworkStats;
-	}
-
-	private void initiateNetworkStats() {
-		if (mNetworkStats == null) {
-			mNetworkStats = new NetworkStats(mContext);
-		}
+	public static void toggleFlash() {
+		if (instance != null)
+			instance.toggleFlashInternal();
 	}
 
 	public static void setFlash(boolean enabled, float pct) {
-		if (instance == null) return;
-		instance.setFlashInternal(enabled, pct);
+		if (instance != null)
+			instance.setFlashInternal(enabled, pct);
 	}
 
 	public static void setFlash(boolean enabled) {
-		if (instance == null) return;
-		instance.setFlashInternal(enabled);
+		if (instance != null)
+			instance.setFlashInternal(enabled);
+	}
+
+	public static WifiManager WifiManager()
+	{
+		return instance == null
+				? null
+				: instance.getWifiManager();
+	}
+
+	public static NetworkStatsManager NetworkStatsManager() {
+		return instance == null
+				? null
+				: instance.getNetworkStatsManager();
+	}
+
+	@Nullable
+	@Contract(pure = true)
+	public static PackageManager PackageManager() {
+		return instance == null
+				? null
+				: instance.getPackageManager();
 	}
 
 	@Nullable
 	@Contract(pure = true)
 	public static AudioManager AudioManager() {
-		if (instance == null) return null;
-		return instance.getAudioManager();
-	}
-
-	private AudioManager getAudioManager() { //we don't init audio manager unless it's requested by someone
-		if (mAudioManager == null) {
-			//Audio
-			try {
-				mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-			} catch (Throwable t) {
-				if (BuildConfig.DEBUG) {
-					t.printStackTrace();
-				}
-			}
-		}
-		return mAudioManager;
+		return instance == null
+				? null
+				: instance.getAudioManager();
 	}
 
 	@Nullable
 	@Contract(pure = true)
 	public static ConnectivityManager ConnectivityManager() {
-		if (instance == null) return null;
-		return instance.mConnectivityManager;
+		return instance == null
+				? null
+				: instance.getConnectivityManager();
 	}
 
 	@Nullable
 	@Contract(pure = true)
 	public static PowerManager PowerManager() {
-		if (instance == null) return null;
-		return instance.mPowerManager;
+		return instance == null
+				? null
+				: instance.getPowerManager();
 	}
 
 	@Nullable
 	@Contract(pure = true)
 	public static AlarmManager AlarmManager() {
-		if (instance == null) return null;
-		return instance.mAlarmManager;
+		return instance == null
+				? null
+				: instance.getAlarmManager();
 	}
-
 
 	@Nullable
 	@Contract(pure = true)
 	public static TelephonyManager TelephonyManager() {
-		if (instance == null) return null;
-		return instance.mTelephonyManager;
+		return instance == null
+				? null
+				: instance.getTelephonyManager();
 	}
 
 	public static DownloadManager DownloadManager() {
-		if (instance == null) return null;
-		return instance.getDownloadManager();
+		return instance == null
+				? null
+				: instance.getDownloadManager();
 	}
 
 	public static void vibrate(int effect, @Nullable Integer vibrationUsage) {
@@ -164,25 +168,29 @@ public class SystemUtils {
 
 	@SuppressLint("MissingPermission")
 	public static void vibrate(VibrationEffect effect, @Nullable Integer vibrationUsage) {
-		if (instance == null || !instance.hasVibrator) return;
+		if (instance == null || !instance.hasVibrator()) return;
 		try {
 			if(vibrationUsage != null) {
-				instance.mVibrationManager.getDefaultVibrator().vibrate(effect, VibrationAttributes.createForUsage(vibrationUsage));
+				instance.getVibrationManager().getDefaultVibrator().vibrate(effect, VibrationAttributes.createForUsage(vibrationUsage));
 			}
 			else
 			{
-				instance.mVibrationManager.getDefaultVibrator().vibrate(effect);
+				instance.getVibrationManager().getDefaultVibrator().vibrate(effect);
 			}
 		} catch (Exception ignored) {
 		}
 	}
 
-	public static void Sleep() {
-		if (instance == null) return;
+	private boolean hasVibrator() {
+		return getVibrationManager() != null && mHasVibrator;
+	}
 
-		try {
-			callMethod(instance.mPowerManager, "goToSleep", SystemClock.uptimeMillis());
-		} catch (Throwable ignored) {
+	public static void sleep() {
+		if (instance != null)
+		{
+			try {
+				callMethod(PowerManager(), "goToSleep", SystemClock.uptimeMillis());
+			} catch (Throwable ignored) {}
 		}
 	}
 
@@ -191,100 +199,53 @@ public class SystemUtils {
 
 		instance = this;
 
+		registerVolumeChangeReceiver();
+	}
+
+	private void registerVolumeChangeReceiver() {
 		BroadcastReceiver volChangeReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				for(VolumeChangeListener listener : volumeChangeListeners)
+				for(ChangeListener listener : mVolumeChangeListeners)
 				{
-					listener.onVolumeChanged();
+					listener.onChanged(0);
 				}
 			}
 		};
 
 		IntentFilter volumeFilter = new IntentFilter();
 		volumeFilter.addAction("android.media.VOLUME_CHANGED_ACTION");
-		mContext.registerReceiver(volChangeReceiver, volumeFilter);
-
-		//Connectivity
-		try {
-			mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		} catch (Throwable t) {
-			if (BuildConfig.DEBUG) {
-				log("AOSPMods Error getting connection manager");
-				t.printStackTrace();
-			}
-		}
-
-		//Power
-		try {
-			mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-		} catch (Throwable t) {
-			if (BuildConfig.DEBUG) {
-				log("AOSPMods Error getting power manager");
-				t.printStackTrace();
-			}
-		}
-
-		//Telephony
-		try {
-			mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-		} catch (Throwable t) {
-			if (BuildConfig.DEBUG) {
-				log("AOSPMods Error getting telephony manager");
-				t.printStackTrace();
-			}
-		}
-
-		//Alarm
-		try {
-			mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-		} catch (Throwable t) {
-			if (BuildConfig.DEBUG) {
-				log("AOSPMods Error getting alarm manager");
-				t.printStackTrace();
-			}
-		}
-
-		//Vibrator
-		try {
-			mVibrationManager = (VibratorManager) mContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
-			hasVibrator = mVibrationManager.getDefaultVibrator().hasVibrator();
-		} catch (Throwable t) {
-			if (BuildConfig.DEBUG) {
-				log("AOSPMods Error getting vibrator");
-				t.printStackTrace();
-			}
-		}
+		mContext.registerReceiver(volChangeReceiver, volumeFilter, RECEIVER_EXPORTED);
 	}
 
-	public static void registerFlashlighLevelListener(FlashlighLevelListener listener)
+	public static void registerFlashlightLevelListener(ChangeListener listener)
 	{
-		instance.flashlighLevelListeners.add(listener);
+		instance.mFlashlightLevelListeners.add(listener);
 	}
 
-	public static void registerVolumeChangeListener(VolumeChangeListener listener)
+	public static void registerVolumeChangeListener(ChangeListener listener)
 	{
-		instance.volumeChangeListeners.add(listener);
+		if(instance != null)
+			instance.mVolumeChangeListeners.add(listener);
 	}
 
-	public static void unregisterVolumeChangeListener(VolumeChangeListener listener)
+	public static void unregisterVolumeChangeListener(ChangeListener listener)
 	{
-		instance.volumeChangeListeners.remove(listener);
+		if(instance != null)
+			instance.mVolumeChangeListeners.remove(listener);
 	}
 
 	public static void setFlashlightLevel(int level)
 	{
-		for(FlashlighLevelListener listener : instance.flashlighLevelListeners)
+		for(ChangeListener listener : instance.mFlashlightLevelListeners)
 		{
-			listener.onLevelChanged(level);
+			listener.onChanged(level);
 		}
 	}
 
 	private void setFlashInternal(boolean enabled) {
-		if(cantInitCamera())
-		{
+		if(getCameraManager() == null)
 			return;
-		}
 
 		try {
 			String flashID = getFlashID(mCameraManager);
@@ -304,39 +265,19 @@ public class SystemUtils {
 		} catch (Throwable t) {
 			if (BuildConfig.DEBUG) {
 				log("AOSPMods Error in setting flashlight");
-				t.printStackTrace();
+				log(t);
 			}
-		}
-	}
-
-	private boolean cantInitCamera() {
-		if(mCameraManager != null) return false;
-
-		try {
-			HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
-			thread.start();
-			Handler mHandler = new Handler(thread.getLooper());
-			mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
-
-			mCameraManager.registerTorchCallback(torchCallback, mHandler);
-			return false;
-		} catch (Throwable t) {
-			mCameraManager = null;
-			if (BuildConfig.DEBUG) {
-				t.printStackTrace();
-			}
-			return true;
 		}
 	}
 
 	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean supportsFlashLevels() {
-		if (instance == null) return false;
-		return instance.supportsFlashLevelsInternal();
+		return instance != null
+				&& instance.supportsFlashLevelsInternal();
 	}
 
 	private boolean supportsFlashLevelsInternal() {
-		if(cantInitCamera())
+		if(getCameraManager() == null)
 		{
 			return false;
 		}
@@ -358,7 +299,7 @@ public class SystemUtils {
 	}
 
 	private void setFlashInternal(boolean enabled, float pct) {
-		if(cantInitCamera())
+		if(getCameraManager() == null)
 		{
 			return;
 		}
@@ -387,13 +328,13 @@ public class SystemUtils {
 		} catch (Throwable t) {
 			if (BuildConfig.DEBUG) {
 				log("AOSPMods Error in setting flashlight");
-				t.printStackTrace();
+				log(t);
 			}
 		}
 	}
 
 	private void toggleFlashInternal() {
-		setFlashInternal(!TorchCallback.torchOn);
+		setFlashInternal(!isTorchOn);
 	}
 
 	private String getFlashID(@NonNull CameraManager cameraManager) throws CameraAccessException {
@@ -408,30 +349,13 @@ public class SystemUtils {
 		return "";
 	}
 
-	private DownloadManager getDownloadManager() {
-		if (mDownloadManager == null) {
-			mDownloadManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
-		}
-		return mDownloadManager;
-	}
-
-	static class TorchCallback extends CameraManager.TorchCallback {
-		static boolean torchOn = false;
-
-		@Override
-		public void onTorchModeChanged(@NonNull String cameraId, boolean enabled) {
-			super.onTorchModeChanged(cameraId, enabled);
-			torchOn = enabled;
-		}
-	}
-
 	public static boolean isDarkMode() {
-		if (instance == null) return false;
-		return instance.getIsDark();
+		return instance != null
+				&& instance.getIsDark();
 	}
 
 	private boolean getIsDark() {
-		return (mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) == Configuration.UI_MODE_NIGHT_YES;
+		return (mContext.getResources().getConfiguration().uiMode & UI_MODE_NIGHT_YES) == UI_MODE_NIGHT_YES;
 	}
 
 	static boolean darkSwitching = false;
@@ -458,20 +382,184 @@ public class SystemUtils {
 
 	public static void killSelf()
 	{
+		BootLoopProtector.resetCounter(android.os.Process.myProcessName());
+
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
-	public static void killForegroundApp()
-	{
-		Shell.cmd("am force-stop $(dumpsys window | grep mCurrentFocus | cut -d \"/\" -f1 | cut -d \" \" -f5)").submit();
+
+	private AudioManager getAudioManager() {
+		if (mAudioManager == null) {
+			try {
+				mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log(t);
+				}
+			}
+		}
+		return mAudioManager;
 	}
 
-	public interface FlashlighLevelListener
-	{
-		void onLevelChanged(int level);
+	private PackageManager getPackageManager() {
+		if (mPackageManager == null) {
+			try {
+				mPackageManager = mContext.getPackageManager();
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log(t);
+				}
+			}
+		}
+		return mPackageManager;
 	}
 
-	public interface VolumeChangeListener
+	private WifiManager getWifiManager() {
+		if(mWifiManager == null)
+		{
+			try
+			{
+				mWifiManager = mContext.getSystemService(WifiManager.class);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log("AOSPMods Error getting wifi manager");
+					log(t);
+				}
+			}
+		}
+		return mWifiManager;
+	}
+
+	private ConnectivityManager getConnectivityManager() {
+		if(mConnectivityManager == null)
+		{
+			try
+			{
+				mConnectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log("AOSPMods Error getting connection manager");
+					log(t);
+				}
+			}
+		}
+		return mConnectivityManager;
+	}
+
+
+	private PowerManager getPowerManager() {
+		if(mPowerManager == null)
+		{
+			try {
+				mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log("AOSPMods Error getting power manager");
+					log(t);
+				}
+			}
+		}
+		return mPowerManager;
+	}
+
+	private AlarmManager getAlarmManager() {
+		if(mAlarmManager == null)
+		{
+			try {
+				mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log("AOSPMods Error getting alarm manager");
+					log(t);
+				}
+			}
+		}
+		return mAlarmManager;
+	}
+
+	private TelephonyManager getTelephonyManager() {
+		if(mTelephonyManager == null)
+		{
+			try {
+				mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log("AOSPMods Error getting telephony manager");
+					log(t);
+				}
+			}
+		}
+		return mTelephonyManager;
+	}
+
+	private VibratorManager getVibrationManager()
 	{
-		void onVolumeChanged();
+		if(mVibrationManager == null)
+		{
+			try {
+				mVibrationManager = (VibratorManager) mContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
+				mHasVibrator = mVibrationManager.getDefaultVibrator().hasVibrator();
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log("AOSPMods Error getting vibrator");
+					log(t);
+				}
+			}
+		}
+		return mVibrationManager;
+	}
+
+	private NetworkStatsManager getNetworkStatsManager()
+	{
+		if(mNetworkStatsManager == null)
+		{
+			try
+			{
+				mNetworkStatsManager = (NetworkStatsManager) mContext.getSystemService(Context.NETWORK_STATS_SERVICE);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log("AOSPMods Error getting network stats");
+					log(t);
+				}
+			}
+		}
+		return mNetworkStatsManager;
+	}
+
+	private CameraManager getCameraManager() {
+		if(mCameraManager == null)
+		{
+			try {
+				HandlerThread thread = new HandlerThread("", THREAD_PRIORITY_BACKGROUND);
+				thread.start();
+				Handler mHandler = new Handler(thread.getLooper());
+				mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
+
+				mCameraManager.registerTorchCallback(new TorchCallback() {
+					@Override
+					public void onTorchModeChanged(@NonNull String cameraId, boolean enabled) {
+						super.onTorchModeChanged(cameraId, enabled);
+						isTorchOn = enabled;
+					}
+				}, mHandler);
+			} catch (Throwable t) {
+				mCameraManager = null;
+				if (BuildConfig.DEBUG) {
+					log(t);
+				}
+			}
+		}
+		return mCameraManager;
+	}
+
+	private DownloadManager getDownloadManager() {
+		if (mDownloadManager == null) {
+			mDownloadManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
+		}
+		return mDownloadManager;
+	}
+
+	public interface ChangeListener
+	{
+		void onChanged(int newVal);
 	}
 }

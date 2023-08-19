@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class AppCloneEnabler extends XposedModPack {
 
 	@Override
 	public boolean listensTo(String packageName) {
-		return listenPackage.equals(packageName);
+		return listenPackage.equals(packageName) && Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU;
 	}
 
 	@SuppressLint("ResourceType")

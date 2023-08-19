@@ -6,7 +6,6 @@ import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 
-import android.os.FileUtils;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -16,22 +15,20 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.topjohnwu.superuser.Shell;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.zip.ZipFile;
+import java.util.stream.Stream;
 
 import de.robv.android.xposed.XC_MethodHook;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 
+/** @noinspection unused*/
 @SuppressWarnings("CommentedOutCode")
 public class Helpers {
 	private static final int KB = 1024;
@@ -52,7 +49,7 @@ public class Helpers {
 		dumpClass(className, classLoader);
 		return findClassIfExists(className, classLoader);
 	}
-	
+
 	@SuppressWarnings("unused")
 	public static void dumpClass(String className, ClassLoader classLoader)
 	{
@@ -102,6 +99,20 @@ public class Helpers {
 		log("End dump");
 	}
 
+	public static Method findFirstMethodByName(Class<?> targetClass, String methodName)
+	{
+		return concatArrays(
+						targetClass.getMethods(),
+						targetClass.getDeclaredMethods())
+				.filter(m -> m.getName().contains(methodName))
+				.findFirst()
+				.orElse(null);
+	}
+
+	static <T> Stream<T> concatArrays(T[] array1, T[] array2) {
+		return Stream.concat(Arrays.stream(array1), Arrays.stream(array2)).distinct();
+	}
+
 	public static void getActiveOverlays() {
 		List<String> result = new ArrayList<>();
 		List<String> lines = com.topjohnwu.superuser.Shell.cmd("cmd overlay list --user 0").exec().getOut();
@@ -125,13 +136,13 @@ public class Helpers {
 		if (activeOverlays == null) getActiveOverlays(); //make sure we have a list in hand
 
 		String mode = (enabled) ? "enable" : "disable";
-		String packname;
+		String packageName;
 //        boolean exclusive = false;
 
 		if (Key.endsWith("Overlay")) {
 			Overlays.overlayProp op = (Overlays.overlayProp) Overlays.Overlays.get(Key);
 			//noinspection ConstantConditions
-			packname = op.name;
+			packageName = op.name;
 //            exclusive = op.exclusive;
 		} else if (Key.endsWith("OverlayG")) //It's a group of overlays to work together as a team
 		{
@@ -141,7 +152,7 @@ public class Helpers {
 			}
 			return;
 		} else {
-			packname = Key;
+			packageName = Key;
 //            exclusive = true;
 		}
 
@@ -149,16 +160,16 @@ public class Helpers {
             mode += "-exclusive"; //since we are checking all overlays, we don't need exclusive anymore.
         }*/
 
-		boolean wasEnabled = (activeOverlays.contains(packname));
+		boolean wasEnabled = (activeOverlays.contains(packageName));
 
 		if (enabled == wasEnabled && !force) {
 			return; //nothing to do. We're already set
 		}
 
 		try {
-			com.topjohnwu.superuser.Shell.cmd("cmd overlay " + mode + " --user 0 " + packname).exec();
+			com.topjohnwu.superuser.Shell.cmd("cmd overlay " + mode + " --user 0 " + packageName).exec();
 		} catch (Throwable t) {
-			t.printStackTrace();
+			log(t);
 		}
 	}
 

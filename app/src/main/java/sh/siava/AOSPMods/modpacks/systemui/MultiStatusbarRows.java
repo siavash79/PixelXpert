@@ -33,7 +33,7 @@ public class MultiStatusbarRows extends XposedModPack {
 		if (Key.length > 0 && Key[0].equals("systemIconsMultiRow")) { //WHY we check the old value? because if prefs is empty it will fill it up and count an unwanted change
 			boolean newsystemIconsMultiRow = XPrefs.Xprefs.getBoolean("systemIconsMultiRow", false);
 			if (newsystemIconsMultiRow != systemIconsMultiRow) {
-				SystemUtils.RestartSystemUI();
+				SystemUtils.restartSystemUI();
 			}
 		}
 		systemIconsMultiRow = XPrefs.Xprefs.getBoolean("systemIconsMultiRow", false);

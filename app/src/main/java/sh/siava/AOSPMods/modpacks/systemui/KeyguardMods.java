@@ -41,7 +41,7 @@ import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
-import sh.siava.AOSPMods.modpacks.utils.SettingsLibUtils;
+import sh.siava.AOSPMods.modpacks.utils.Helpers;
 import sh.siava.AOSPMods.modpacks.utils.StringFormatter;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -73,7 +73,8 @@ public class KeyguardMods extends XposedModPack {
 	private static String customCarrierText = "";
 	private static Object carrierTextController;
 
-	StringFormatter stringFormatter = new StringFormatter();
+	StringFormatter carrierStringFormatter = new StringFormatter();
+	StringFormatter clockStringFormatter = new StringFormatter();
 	private TextView KGMiddleCustomTextView;
 	private static String KGMiddleCustomText = "";
 	LinearLayout mStatusArea = null;
@@ -189,7 +190,6 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> ZenModeControllerImplClass = findClass("com.android.systemui.statusbar.policy.ZenModeControllerImpl", lpparam.classLoader);
 		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpparam.classLoader);
 		Class<?> CommandQueueClass = findClass("com.android.systemui.statusbar.CommandQueue", lpparam.classLoader);
-		SettingsLibUtils.init(lpparam.classLoader);
 
 		hookAllConstructors(CommandQueueClass, new XC_MethodHook() {
 			@Override
@@ -263,14 +263,8 @@ public class KeyguardMods extends XposedModPack {
 			}
 		});
 
-		Method updateMethod = null;
-		Method[] methods = KeyguardBottomAreaViewBinderClass.getMethods();
-		for (Method m : methods) {
-			if (m.getName().contains("updateButton")) {
-				updateMethod = m;
-				break;
-			}
-		}
+		Method updateMethod = Helpers.findFirstMethodByName(KeyguardBottomAreaViewBinderClass, "updateButton");
+
 		if (updateMethod != null) {
 			hookMethod(updateMethod, new XC_MethodHook() {
 				@Override
@@ -295,7 +289,7 @@ public class KeyguardMods extends XposedModPack {
 						}
 
 						if (transparentBGcolor) {
-							@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = SettingsLibUtils.getColorAttrDefaultColor(
+							@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = SettingsLibUtilsProvider.getColorAttrDefaultColor(
 									mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
 
 							try {
@@ -304,10 +298,10 @@ public class KeyguardMods extends XposedModPack {
 							} catch (Throwable ignored) {
 							}
 						} else {
-							@SuppressLint("DiscouragedApi") int mTextColorPrimary = SettingsLibUtils.getColorAttrDefaultColor(
+							@SuppressLint("DiscouragedApi") int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
 									mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
 
-							@SuppressLint("DiscouragedApi") ColorStateList colorSurface = SettingsLibUtils.getColorAttr(
+							@SuppressLint("DiscouragedApi") ColorStateList colorSurface = SettingsLibUtilsProvider.getColorAttr(
 									mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
 
 							v.getDrawable().setTint(mTextColorPrimary);
@@ -387,13 +381,9 @@ public class KeyguardMods extends XposedModPack {
 		});
 		//endregion
 
-		stringFormatter.registerCallback(() -> {
-			if(KGMiddleCustomText.length() > 0)
-				setMiddleText();
+		carrierStringFormatter.registerCallback(this::setCarrierText);
 
-			if(customCarrierTextEnabled)
-				setCarrierText();
-		});
+		clockStringFormatter.registerCallback(this::setMiddleText);
 
 		Resources res = mContext.getResources();
 
@@ -437,13 +427,16 @@ public class KeyguardMods extends XposedModPack {
 					KGMiddleCustomTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 					KGMiddleCustomTextView.setLetterSpacing(.03f);
 
-					@SuppressLint("DiscouragedApi") int padding = res.getDimensionPixelSize(
+					@SuppressLint("DiscouragedApi") int sidePadding = res.getDimensionPixelSize(
 							res.getIdentifier(
 									"clock_padding_start",
 									"dimen",
 									mContext.getPackageName()));
 
-					KGMiddleCustomTextView.setPadding(padding, 0, padding, 0);
+					KGMiddleCustomTextView.setPadding(sidePadding,
+							(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, mContext.getResources().getDisplayMetrics()),
+							sidePadding,
+							0);
 
 					mStatusArea = ((LinearLayout) getObjectField(param.thisObject, "mStatusArea"));
 
@@ -569,7 +562,7 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	private void toggleFlash() {
-		SystemUtils.ToggleFlash();
+		SystemUtils.toggleFlash();
 	}
 
 	private void toggleZen()
@@ -587,7 +580,8 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	private void launchTVRemote() {
-		Shell.cmd("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity").exec();
+		Shell.cmd("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity").exec(); //enabling it if disabled, and start remote activity on older versions
+		Shell.cmd("am start -a com.google.android.apps.googletv.ACTION_VIRTUAL_REMOTE").exec(); //start activity on the updated TV app
 	}
 
 	private void launchCamera() {
@@ -612,7 +606,7 @@ public class KeyguardMods extends XposedModPack {
 	private void setCarrierText() {
 		try {
 			TextView mView = (TextView) getObjectField(carrierTextController, "mView");
-			mView.setText(stringFormatter.formatString(customCarrierText));
+			mView.post(() -> mView.setText(carrierStringFormatter.formatString(customCarrierText)));
 		} catch (Throwable ignored) {
 		} //probably not initiated yet
 	}
@@ -629,7 +623,7 @@ public class KeyguardMods extends XposedModPack {
 					((ViewGroup) KGMiddleCustomTextView.getParent()).removeView(KGMiddleCustomTextView);
 				}
 				mStatusArea.addView(KGMiddleCustomTextView, 0);
-				KGMiddleCustomTextView.setText(stringFormatter.formatString(KGMiddleCustomText));
+				KGMiddleCustomTextView.setText(clockStringFormatter.formatString(KGMiddleCustomText));
 
 			} catch (Exception ignored) {
 			}

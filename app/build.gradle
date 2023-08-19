@@ -6,14 +6,13 @@ apply plugin: 'kotlin-android'
 
 android {
 	compileSdk 34
-	buildToolsVersion '34.0.0'
 
 	defaultConfig {
 		applicationId "sh.siava.AOSPMods"
 		minSdk 33
 		targetSdk 34
-		versionCode 258
-		versionName "2.9.0"
+		versionCode 278
+		versionName "canary-278"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
@@ -25,8 +24,8 @@ android {
 			signingConfig signingConfigs.debug
 		}
 	}
-	applicationVariants.all { variant ->
-		variant.outputs.all { output ->
+	applicationVariants.configureEach { variant ->
+		variant.outputs.configureEach { output ->
 			outputFileName = new File("AOSPMods.apk")
 		}
 	}
@@ -44,30 +43,32 @@ android {
 		viewBinding true
 	}
 	kotlinOptions {
-		jvmTarget = '1.8'
+		jvmTarget = '9'
 	}
 }
 
 dependencies {
-	def libsuVersion = '5.0.5'
+	def libsuVersion = '5.2.0'
 
-	//Xposed api
+	// Xposed api
 	compileOnly files('lib/api-82.jar')
 	compileOnly files('lib/api-82-sources.jar')
 
 	implementation project(path: ':RangeSliderPreference')
 
 	implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-	implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-	implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-	implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-	implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+	implementation 'androidx.navigation:navigation-fragment-ktx:2.7.0'
+	implementation 'androidx.navigation:navigation-ui-ktx:2.7.0'
+	implementation 'androidx.navigation:navigation-fragment-ktx:2.7.0'
+	implementation 'androidx.navigation:navigation-ui-ktx:2.7.0'
 	implementation 'androidx.appcompat:appcompat:1.6.1'
 	implementation 'androidx.annotation:annotation:1.6.0'
-	implementation 'androidx.preference:preference-ktx:1.2.0'
-	implementation 'androidx.recyclerview:recyclerview:1.3.0'
+	implementation 'androidx.preference:preference-ktx:1.2.1'
+	implementation 'androidx.recyclerview:recyclerview:1.3.1'
 	implementation 'com.google.android.material:material:1.9.0'
-	implementation 'androidx.compose.ui:ui-geometry:1.4.3'
+	implementation 'androidx.compose.ui:ui-geometry:1.5.0'
+	//noinspection KtxExtensionAvailable
+	implementation 'androidx.activity:activity:1.8.0-alpha06'
 
 	// The core module that provides APIs to a shell
 	implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
@@ -77,10 +78,14 @@ dependencies {
 	implementation "com.github.topjohnwu.libsu:nio:${libsuVersion}"
 
 	implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8'
-	//Remote Preferences for Xposed Module prefs
+	// Remote Preferences for Xposed Module prefs
 	implementation 'com.jaredrummler:colorpicker:1.1.0' //Color Picker Component for UI
 	implementation 'com.github.mfathi91:persian-date-time:4.2.1' //Persian Calendar
 
 	implementation 'com.github.tiagohm.MarkdownView:library:0.19.0' //Markdown reader
 
+	// Search Preference
+	implementation 'androidx.cardview:cardview:1.0.0'
+	implementation 'androidx.preference:preference:1.2.1'
+	implementation 'org.apache.commons:commons-text:1.3'
 }

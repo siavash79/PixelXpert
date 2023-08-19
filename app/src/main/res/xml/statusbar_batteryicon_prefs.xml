@@ -1,96 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <sh.siava.AOSPMods.ui.MaterialListPreference
-        android:defaultValue="0"
-        android:entries="@array/battery_style_names"
-        android:entryValues="@array/battery_style_codes"
-        android:summary="%s"
-        android:key="BatteryStyle"
-        android:title="@string/battery_style_title" />
+	<sh.siava.AOSPMods.ui.MaterialListPreference
+		android:defaultValue="0"
+		android:entries="@array/battery_style_names"
+		android:entryValues="@array/battery_style_codes"
+		android:key="BatteryStyle"
+		android:summary="%s"
+		android:title="@string/battery_style_title" />
 
-    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-        android:defaultValue="false"
-        android:key="DualToneBatteryOverlay"
-        android:summaryOff="@string/general_off"
-        android:summaryOn="@string/dual_tone_battery_on_summary"
-        android:title="@string/dual_tone_battery_title" />
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="DualToneBatteryOverlay"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/dual_tone_battery_on_summary"
+		android:title="@string/dual_tone_battery_title" />
 
-    <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
-        android:defaultValue="50"
-        android:key="BatteryIconScaleFactor"
-        android:title="@string/battery_icon_size_title"
-        app:updatesContinuously="true" />
+	<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+		android:defaultValue="50"
+		android:key="BatteryIconScaleFactor"
+		android:title="@string/battery_icon_size_title"
+		app:updatesContinuously="true" />
 
-    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-        android:defaultValue="false"
-        android:key="BatteryShowPercent"
-        android:summaryOff="@string/general_off"
-        android:summaryOn="@string/general_on"
-        android:title="@string/battery_show_percent_title" />
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="BatteryShowPercent"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/battery_show_percent_title" />
 
-    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-        android:defaultValue="false"
-        android:key="BIconindicateCharging"
-        android:summaryOff="@string/general_off"
-        android:summaryOn="@string/general_on"
-        android:title="@string/BB_indicate_charging" />
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="true"
+		android:key="BatteryChargingAnimationEnabled"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/battery_show_charging_animation_title" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="-16711936"
-        android:key="batteryIconChargingColor"
-        android:title="@string/BB_batteryChargingColor" />
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="BIconindicateCharging"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/BB_indicate_charging" />
 
-    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-        android:defaultValue="false"
-        android:key="BIconindicateFastCharging"
-        android:summaryOff="@string/general_off"
-        android:summaryOn="@string/general_on"
-        android:title="@string/BB_indicate_fast_charging" />
+	<sh.siava.AOSPMods.ui.MaterialColorPreference
+		android:defaultValue="-16711936"
+		android:key="batteryIconChargingColor"
+		android:title="@string/BB_batteryChargingColor" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="-16776961"
-        android:key="batteryIconFastChargingColor"
-        android:title="@string/BB_batteryFastChargingColor" />
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="BIconindicateFastCharging"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/BB_indicate_fast_charging" />
 
-    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-        android:defaultValue="false"
-        android:key="BIconColorful"
-        android:summaryOff="@string/general_off"
-        android:summaryOn="@string/general_on"
-        android:title="@string/BB_colorful_title" />
+	<sh.siava.AOSPMods.ui.MaterialColorPreference
+		android:defaultValue="-16776961"
+		android:key="batteryIconFastChargingColor"
+		android:title="@string/BB_batteryFastChargingColor" />
 
-    <sh.siava.AOSPMods.ui.MaterialSeekbarPreference
-        android:defaultValue="100"
-        android:key="BIconOpacity"
-        android:title="@string/BIcon_Opacity_title"
-        app:updatesContinuously="true" />
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="BIconColorful"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/BB_colorful_title" />
 
-    <sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
-        android:key="BIconbatteryWarningRange"
-        android:title="@string/BB_warning_level"
-        android:summary="@string/BB_warning_tip"
-        app:minVal="0"
-        app:maxVal="100"
-        app:tickInterval="1"
-        app:valueCount="2"
-        app:defaultValue="15,40" />
+	<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+		android:defaultValue="100"
+		android:key="BIconOpacity"
+		android:title="@string/BIcon_Opacity_title"
+		app:updatesContinuously="true" />
 
-    <sh.siava.AOSPMods.ui.MaterialSwitchPreference
-        android:defaultValue="false"
-        android:key="BIconTransitColors"
-        android:summaryOff="@string/general_off"
-        android:summaryOn="@string/general_on"
-        android:title="@string/BB_transit_colors" />
+	<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
+		android:key="BIconbatteryWarningRange"
+		android:summary="@string/BB_warning_tip"
+		android:title="@string/BB_warning_level"
+		app:defaultValue="15,40"
+		app:maxVal="100"
+		app:minVal="0"
+		app:tickInterval="1"
+		app:valueCount="2" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="-65536"
-        android:key="BIconbatteryCriticalColor"
-        android:title="@string/BB_batteryCriticalColor" />
+	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="BIconTransitColors"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/BB_transit_colors" />
 
-    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="-256"
-        android:key="BIconbatteryWarningColor"
-        android:title="@string/BB_batteryWarningColor" />
+	<sh.siava.AOSPMods.ui.MaterialColorPreference
+		android:defaultValue="-65536"
+		android:key="BIconbatteryCriticalColor"
+		android:title="@string/BB_batteryCriticalColor" />
+
+	<sh.siava.AOSPMods.ui.MaterialColorPreference
+		android:defaultValue="-256"
+		android:key="BIconbatteryWarningColor"
+		android:title="@string/BB_batteryWarningColor" />
+    
 </PreferenceScreen>

@@ -25,6 +25,8 @@ import android.view.ViewGroup;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
@@ -49,10 +51,11 @@ public class TaskbarActivator extends XposedModPack {
 	private static int numShownHotseatIcons = 0;
 	private int UID = 0;
 	private Object recentTasksList;
-	private boolean TaskbarAsRecents = false;
+	private static boolean TaskbarAsRecents = false;
+	private static boolean TaskbarTransient = false;
 	private boolean refreshing = false;
 	private static float taskbarHeightOverride = 1f;
-	private float TaskbarRadiusOverride = 1f;
+	private static float TaskbarRadiusOverride = 1f;
 
 	private static boolean TaskbarHideAllAppsIcon = false;
 	private Object model;
@@ -63,43 +66,38 @@ public class TaskbarActivator extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		String taskbarModeStr = XPrefs.Xprefs.getString("taskBarMode", "0");
 
-		if (Key.length > 0) {
-			switch (Key[0]) {
-				case "taskBarMode":
-					try {
-						int newtaskbarMode = Integer.parseInt(taskbarModeStr);
-						if (newtaskbarMode != taskbarMode) {
-							taskbarMode = newtaskbarMode;
-							SystemUtils.killSelf();
-						}
-					} catch (Exception ignored) {
-					}
-					break;
-				case "TaskbarAsRecents":
-				case "taskbarHeightOverride":
-				case "TaskbarRadiusOverride":
-				case "TaskbarHideAllAppsIcon":
-					SystemUtils.killSelf();
-					break;
-			}
-		} else {
-			TaskbarAsRecents = XPrefs.Xprefs.getBoolean("TaskbarAsRecents", false);
-			TaskbarHideAllAppsIcon = true;//Xprefs.getBoolean("TaskbarHideAllAppsIcon", false);
+		List<String> restartKeys = Arrays.asList(
+				"taskBarMode",
+				"TaskbarAsRecents",
+				"TaskbarTransient",
+				"taskbarHeightOverride",
+				"TaskbarRadiusOverride",
+				"TaskbarHideAllAppsIcon");
 
-			try
-			{
-				TaskbarRadiusOverride = RangeSliderPreference.getValues(XPrefs.Xprefs, "TaskbarRadiusOverride", 1f).get(0);
-			}catch (Throwable ignored){}
-
-			try {
-				taskbarHeightOverride = RangeSliderPreference.getValues(XPrefs.Xprefs, "taskbarHeightOverride", 100f).get(0) / 100f;
-			} catch (Throwable ignored) {
-			}
-
-			taskbarMode = Integer.parseInt(taskbarModeStr);
+		if (Key.length > 0 && restartKeys.contains(Key[0])) {
+			SystemUtils.killSelf();
 		}
+
+		taskbarMode = Integer.parseInt(XPrefs.Xprefs.getString("taskBarMode", "0"));
+
+		TaskbarAsRecents = XPrefs.Xprefs.getBoolean("TaskbarAsRecents", false);
+		TaskbarHideAllAppsIcon = true;//Xprefs.getBoolean("TaskbarHideAllAppsIcon", false);
+
+		try
+		{
+			TaskbarRadiusOverride = RangeSliderPreference.getValues(XPrefs.Xprefs, "TaskbarRadiusOverride", 1f).get(0);
+		}catch (Throwable ignored){}
+
+		try {
+			taskbarHeightOverride = RangeSliderPreference.getValues(XPrefs.Xprefs, "taskbarHeightOverride", 100f).get(0) / 100f;
+		} catch (Throwable ignored) {
+		}
+
+		taskbarMode = Integer.parseInt(XPrefs.Xprefs.getString("taskBarMode", "0"));
+
+		TaskbarTransient = XPrefs.Xprefs.getBoolean("TaskbarTransient", false);
+
 	}
 
 	@Override
@@ -110,7 +108,6 @@ public class TaskbarActivator extends XposedModPack {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 
-//		Class<?> info = findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
 		Class<?> RecentTasksListClass = findClass("com.android.quickstep.RecentTasksList", lpparam.classLoader);
 		Class<?> AppInfoClass = findClass("com.android.launcher3.model.data.AppInfo", lpparam.classLoader);
 		Class<?> TaskbarViewClass = findClass("com.android.launcher3.taskbar.TaskbarView", lpparam.classLoader);
@@ -121,20 +118,20 @@ public class TaskbarActivator extends XposedModPack {
 		Class<?> TaskbarActivityContextClass = findClass("com.android.launcher3.taskbar.TaskbarActivityContext", lpparam.classLoader);
 		Class<?> LauncherModelClass = findClass("com.android.launcher3.LauncherModel", lpparam.classLoader);
 		Class<?> BaseDraggingActivityClass = findClass("com.android.launcher3.BaseDraggingActivity", lpparam.classLoader);
-		//Transient taskbar. kept disabled until further notice
 		Class<?> DisplayControllerClass = findClass("com.android.launcher3.util.DisplayController", lpparam.classLoader);
 
 		hookAllMethods(DisplayControllerClass, "isTransientTaskbar", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				param.setResult(false);
+				if(taskbarMode == TASKBAR_ON)
+					param.setResult(TaskbarTransient);
 			}
 		});
 
 		hookAllMethods(BaseDraggingActivityClass, "onResume", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(model != null) {
+				if(taskbarMode == TASKBAR_ON && model != null) {
 					XposedHelpers.callMethod(model, "onAppIconChanged", BuildConfig.APPLICATION_ID, UserHandle.getUserHandleForUid(0));
 				}
 			}
@@ -150,7 +147,7 @@ public class TaskbarActivator extends XposedModPack {
 		XC_MethodHook cornerRadiusHook = new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(TaskbarRadiusOverride != 1f) {
+				if(taskbarMode == TASKBAR_ON && TaskbarRadiusOverride != 1f) {
 					param.setResult(
 							Math.round(
 									(int) param.getResult() * TaskbarRadiusOverride
@@ -215,12 +212,21 @@ public class TaskbarActivator extends XposedModPack {
 			}
 		});
 
+		hookAllMethods(TaskbarViewClass, "setClickAndLongClickListenersForIcon", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				//Icon must be launched from recents
+				if(taskbarMode == TASKBAR_ON
+						&& TaskbarAsRecents)
+					((View) param.args[0]).setOnClickListener(listener);
+			}
+		});
 		hookAllConstructors(TaskbarViewClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				TaskBarView = (ViewGroup) param.thisObject;
 
-				if(TaskbarHideAllAppsIcon)
+				if(taskbarMode == TASKBAR_ON && TaskbarHideAllAppsIcon)
 					setObjectField(TaskBarView, "mAllAppsButton", null);
 			}
 		});
@@ -235,7 +241,8 @@ public class TaskbarActivator extends XposedModPack {
 		hookAllMethods(RecentTasksListClass, "onRecentTasksChanged", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if (!TaskbarAsRecents
+				if (taskbarMode != TASKBAR_ON
+						|| !TaskbarAsRecents
 						|| refreshing
 						|| TaskBarView == null)
 					return;
@@ -298,7 +305,6 @@ public class TaskbarActivator extends XposedModPack {
 
 								setAdditionalInstanceField(iconView, "taskId", getAdditionalInstanceField(itemInfos[itemInfos.length - i - 1], "taskId"));
 								callMethod(iconView, "applyFromApplicationInfo", itemInfos[itemInfos.length - i - 1]);
-								iconView.setOnClickListener(listener);
 							}
 						} catch (Throwable ignored) {
 						}
@@ -311,7 +317,7 @@ public class TaskbarActivator extends XposedModPack {
 		hookAllMethods(TaskbarModelCallbacksClass, "commitItemsToUI", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if (!TaskbarAsRecents) return;
+				if (taskbarMode != TASKBAR_ON || !TaskbarAsRecents) return;
 
 				if (TaskBarView.getChildCount() == 0 && recentTasksList != null) {
 					callMethod(recentTasksList, "onRecentTasksChanged");

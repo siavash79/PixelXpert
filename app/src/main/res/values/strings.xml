@@ -299,9 +299,9 @@
 
 	<string name="so_double_tap_wake_title">Double-tap to wake phone</string>
 	<string name="so_double_tap_wake_summary">Disables single-tap to wake</string>
-	<string name="so_tap_to_show_ambient_title">Tap to Show Ambient Display</string>
+	<string name="so_tap_to_show_ambient_title">Tap to show ambient display</string>
 	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Tapping on the screen shows ambient display</string>
-	<string name="so_pick_to_show_ambient_title">Pick to Show Ambient Display</string>
+	<string name="so_pick_to_show_ambient_title">Pick to show ambient display</string>
 	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Picking the phone shows ambient display</string>
 	<string name="doze_header">While screen is off…</string>
 	<string name="custom_themed_icons_title">Custom themed icons</string>

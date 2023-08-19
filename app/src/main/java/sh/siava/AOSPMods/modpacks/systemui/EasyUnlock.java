@@ -53,13 +53,11 @@ public class EasyUnlock extends XposedModPack {
 		hookAllMethods(StatusBarKeyguardViewManagerClass, "onDozingChanged", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(WakeUpToSecurityInput && param.args[0].equals(false) && (!getBooleanField(getObjectField(param.thisObject, "mKeyguardStateController"), "mCanDismissLockScreen")))//waking up
+				if (WakeUpToSecurityInput && param.args[0].equals(false) && (!getBooleanField(getObjectField(param.thisObject, "mKeyguardStateController"), "mCanDismissLockScreen")))//waking up
 				{
-					if(pre13QPR3) {
+					if (pre13QPR3) {
 						callMethod(getObjectField(param.thisObject, "mBouncer"), "show", true, true);
-					}
-					else
-					{
+					} else {
 						callMethod(param.thisObject, "showPrimaryBouncer", true);
 					}
 				}
@@ -91,19 +89,23 @@ public class EasyUnlock extends XposedModPack {
 						if (accepted) {
 							View mView = (View) getObjectField(param.thisObject, "mView");
 							mView.post(() -> {
-								try
-								{ //13 QPR3
-									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, getObjectField(param.thisObject, "mSecurityMode"));
-									return;
-								}catch (Throwable ignored){}
+								Object mSecurityMode = getObjectField(param.thisObject, "mSecurityMode");
+								Object mKeyguardSecurityCallback = callMethod(param.thisObject, "getKeyguardSecurityCallback");
 
-								try
-								{ //Pre 13QPR3
-									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */, getObjectField(param.thisObject, "mSecurityMode"));
-								}
-								catch (Throwable ignored)
-								{ //PRE-Pre 13QPR3
-									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */);
+								callMethod(mKeyguardSecurityCallback, "reportUnlockAttempt", userId, true /* success */, 0 /* timeoutMs */);
+
+								// 13 QPR3
+								try {
+									callMethod(mKeyguardSecurityCallback, "dismiss", userId, mSecurityMode);
+									return;
+								} catch (Throwable ignored) {}
+
+								try {
+									// Pre 13QPR3
+									callMethod(mKeyguardSecurityCallback, "dismiss", true /* successful */, userId, mSecurityMode);
+								} catch (Throwable ignored) {
+									// PRE-Pre 13QPR3
+									callMethod(mKeyguardSecurityCallback, "dismiss", true /* successful */, userId);
 								}
 							});
 						}
@@ -119,9 +121,8 @@ public class EasyUnlock extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!easyUnlockEnabled) return;
 
-				boolean succesful = (boolean) param.args[2];
-
-				if (succesful) {
+				boolean successful = (boolean) param.args[1];
+				if (successful) {
 					expectedPassLen = lastPassLen;
 					XPrefs.Xprefs.edit().putInt("expectedPassLen", expectedPassLen).commit();
 				}

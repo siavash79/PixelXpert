@@ -24,6 +24,8 @@ import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 public class XPLauncher {
 
 	public static boolean isChildProcess = false;
+	public static String processName = "";
+
 	public static ArrayList<XposedModPack> runningMods = new ArrayList<>();
 	public Context mContext = null;
 
@@ -34,6 +36,7 @@ public class XPLauncher {
 		try
 		{
 			isChildProcess = lpparam.processName.contains(":");
+			processName = lpparam.processName;
 		} catch (Throwable ignored)
 		{
 			isChildProcess = false;

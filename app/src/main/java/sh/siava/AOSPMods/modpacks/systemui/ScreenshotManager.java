@@ -94,7 +94,7 @@ public class ScreenshotManager extends XposedModPack {
 
 	@Override
 	public boolean listensTo(String packageName) {
-		return listenPackage.equals(packageName) && XPLauncher.isChildProcess;
+		return listenPackage.equals(packageName) && XPLauncher.isChildProcess && XPLauncher.processName.contains("screenshot");
 	}
 
 	//Seems like an executor, but doesn't act! perfect thing

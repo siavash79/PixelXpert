@@ -74,7 +74,7 @@ public class ModPacks {
 				modPacks.add(SystemScreenRecord.class);
 				break;
 			case Constants.SYSTEM_UI_PACKAGE:
-				if(XPLauncher.isChildProcess)
+				if(XPLauncher.isChildProcess && XPLauncher.processName.contains("screenshot"))
 				{
 					modPacks.add(ScreenshotManager.class);
 				}

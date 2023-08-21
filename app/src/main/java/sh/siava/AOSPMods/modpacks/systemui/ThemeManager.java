@@ -17,6 +17,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.graphics.drawable.LayerDrawable;
@@ -294,6 +295,11 @@ public class ThemeManager extends XposedModPack {
 
 						View settings_button_container = view.findViewById(res.getIdentifier("settings_button_container", "id", mContext.getPackageName()));
 						settings_button_container.getBackground().setTint(colorInactive);
+
+						//Power Button on QS Footer
+						((ImageView) ((ViewGroup)view.findViewById(res.getIdentifier("pm_lite", "id", mContext.getPackageName())))
+								.getChildAt(0))
+								.setColorFilter(colorInactive, PorterDuff.Mode.SRC_IN);
 
 						ImageView icon = settings_button_container.findViewById(res.getIdentifier("icon", "id", mContext.getPackageName()));
 						icon.setImageTintList(ColorStateList.valueOf(Color.BLACK));

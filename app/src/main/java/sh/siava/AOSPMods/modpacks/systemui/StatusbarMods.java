@@ -196,7 +196,6 @@ public class StatusbarMods extends XposedModPack {
 
 	//region combined signal icons
 	private boolean mWifiVisible = false;
-	private long mStartTime = 0;
 	private static boolean CombineSignalIcons = false;
 	private static boolean HideRoamingState = false;
 	private Object mTunerService;
@@ -472,7 +471,7 @@ public class StatusbarMods extends XposedModPack {
 
 	private void updateClock() {
 		try {
-			((View) mClockView).post(() -> callMethod(mClockView, "updateClock"));
+			mClockView.post(() -> callMethod(mClockView, "updateClock"));
 		}
 		catch (Throwable ignored){}
 	}
@@ -496,8 +495,6 @@ public class StatusbarMods extends XposedModPack {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
-
-		mStartTime = System.currentTimeMillis();
 
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Constants.ACTION_PROFILE_SWITCH_AVAILABLE);
@@ -529,14 +526,28 @@ public class StatusbarMods extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				mTunerService = param.thisObject;
+				hookAllMethods(getObjectField(param.thisObject, "mObserver").getClass(), "onChange", new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						wifiVisibleChanged();
+					}
+				});
 			}
 		});
+
+		hookAllMethods(TunerServiceImplClass, "addTunable", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				wifiVisibleChanged();
+			}
+		});
+
 
 		hookAllMethods(StatusBarSignalPolicyClass, "setWifiIndicators", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				boolean wifiVisible = getBooleanField(getObjectField(param.args[0], "statusIcon"), "visible");
-				if(wifiVisible != mWifiVisible && System.currentTimeMillis() > mStartTime + 5000) //don't apply wifi change in the first 5 seconds
+				if(wifiVisible != mWifiVisible)
 				{
 					mWifiVisible = wifiVisible;
 					if(CombineSignalIcons) {

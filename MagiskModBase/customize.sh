@@ -44,7 +44,7 @@ grantRootApps(){
 }
 
 migratePrefs(){
-  am start -n "$PKGNAME/.UpdateActivity" -e migratePrefs true
+  am start -n "$PKGNAME/.UpdateActivity" -e migratePrefs true > /dev/null
 }
 
 #activate PKGNAME in Lsposed

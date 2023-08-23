@@ -3,17 +3,20 @@ package sh.siava.AOSPMods.modpacks;
 import java.util.Arrays;
 import java.util.List;
 
+import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.modpacks.utils.BootLoopProtector;
 
 public final class Constants {
-	public static final String ACTION_SCREENSHOT = "sh.siava.AOSPMods.ACTION_SCREENSHOT";
+	public static final String ACTION_SCREENSHOT = BuildConfig.APPLICATION_ID + ".ACTION_SCREENSHOT";
 	@SuppressWarnings("DeprecatedIsStillUsed")
 	@Deprecated
-	public static final String ACTION_INSECURE_SCREENSHOT = "sh.siava.AOSPMods.ACTION_INSECURE_SCREENSHOT";
-	public static final String ACTION_BACK = "sh.siava.AOSPMods.ACTION_BACK";
-	public static final String ACTION_SLEEP = "sh.siava.AOSPMods.ACTION_SLEEP";
-	public static final String ACTION_SWITCH_APP_PROFILE = "sh.siava.AOSPMods.ACTION_SWITCH_APP_PROFILE";
-	public static final String ACTION_PROFILE_SWITCH_AVAILABLE = "sh.siava.AOSPMods.ACTION_PROFILE_SWITCH_AVAILABLE";
+	public static final String ACTION_INSECURE_SCREENSHOT = BuildConfig.APPLICATION_ID + ".ACTION_INSECURE_SCREENSHOT";
+	public static final String ACTION_BACK = BuildConfig.APPLICATION_ID + ".ACTION_BACK";
+	public static final String ACTION_SLEEP = BuildConfig.APPLICATION_ID + ".ACTION_SLEEP";
+	public static final String ACTION_SWITCH_APP_PROFILE = BuildConfig.APPLICATION_ID + ".ACTION_SWITCH_APP_PROFILE";
+	public static final String ACTION_PROFILE_SWITCH_AVAILABLE = BuildConfig.APPLICATION_ID + ".ACTION_PROFILE_SWITCH_AVAILABLE";
+	public static final String ACTION_CHECK_XPOSED_ENABLED = BuildConfig.APPLICATION_ID + ".ACTION_CHECK_XPOSED_ENABLED";
+	public static final String ACTION_XPOSED_CONFIRMED = BuildConfig.APPLICATION_ID + ".ACTION_XPOSED_CONFIRMED";
 
 	public static final String SYSTEM_UI_PACKAGE = "com.android.systemui";
 	public static final String SYSTEM_FRAMEWORK_PACKAGE = "android";

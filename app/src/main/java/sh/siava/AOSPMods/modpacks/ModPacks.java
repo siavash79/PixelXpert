@@ -4,6 +4,7 @@ import android.os.Build;
 
 import java.util.ArrayList;
 
+import sh.siava.AOSPMods.modpacks.allApps.HookTester;
 import sh.siava.AOSPMods.modpacks.allApps.OverScrollDisabler;
 import sh.siava.AOSPMods.modpacks.android.BrightnessRange;
 import sh.siava.AOSPMods.modpacks.android.HotSpotController;
@@ -59,6 +60,7 @@ public class ModPacks {
 		//Should be loaded before others
 		modPacks.add(ThermalProvider.class);
 		modPacks.add(SettingsLibUtilsProvider.class);
+		modPacks.add(HookTester.class);
 
 		switch (packageName)
 		{

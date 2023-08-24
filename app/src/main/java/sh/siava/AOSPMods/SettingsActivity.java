@@ -237,6 +237,9 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			importExportSettings(true);
 		} else if (itemID == R.id.menu_importPrefs) {
 			importExportSettings(false);
+		} else if (itemID == R.id.hooked_packages) {
+			Intent intent = new Intent(this, HookedPackagesActivity.class);
+			startActivity(intent);
 		} else if (itemID == R.id.menu_restart) {
 			AppUtils.Restart();
 		} else if (itemID == R.id.menu_restartSysUI) {

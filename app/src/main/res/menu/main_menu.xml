@@ -18,6 +18,9 @@
         </menu>
     </item>
     <item
+        android:id="@+id/hooked_packages"
+        android:title="@string/hooked_packages_title" />
+    <item
         android:id="@+id/menu_restart"
         android:title="@string/menu_restart" />
     <item

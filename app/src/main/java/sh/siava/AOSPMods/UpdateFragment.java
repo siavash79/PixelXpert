@@ -147,47 +147,52 @@ public class UpdateFragment extends Fragment {
 			checkUpdates(result -> {
 				latestVersion = result;
 
-				requireActivity().runOnUiThread(() -> {
-					try {
-						((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFromUrl((String) result.get("changelog"));
-					} catch (Throwable ignored) {}
-				});
-
-				requireActivity().runOnUiThread(() -> {
-					((TextView) view.findViewById(R.id.latestVersionValueID)).setText(
-							String.format("%s (%s)", result.get("version"),
-									result.get("versionCode")));
-					int latestCode;
-					int BtnText = R.string.update_word;
-
-					boolean enable = false;
-					try {
-						//noinspection ConstantConditions
-						latestCode = (int) result.get("versionCode");
-
-						if (rebootPending) {
-							enable = true;
-							BtnText = R.string.reboot_word;
-						} else if (!canaryUpdate) //stable selected
-						{
-							if (currentVersionName.contains("-")) //currently canary installed
-							{
-								BtnText = R.string.switch_branches;
-							} else if (latestCode == currentVersionCode) //already up to date
-							{
-								BtnText = R.string.reinstall_word;
-							}
-							enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
-						} else {
-							if (latestCode > currentVersionCode || (currentVersionType == PreferenceHelper.FULL_VERSION) != installFullVersion) {
-								enable = true;
-							}
+				if (getActivity() != null) {
+					requireActivity().runOnUiThread(() -> {
+						try {
+							((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFromUrl((String) result.get("changelog"));
+						} catch (Throwable ignored) {
 						}
-					} catch (Exception ignored) {
-					}
-					view.findViewById(R.id.updateBtn).setEnabled(enable);
-					((Button) view.findViewById(R.id.updateBtn)).setText(BtnText);
-				});
+					});
+				}
+
+				if (getActivity() != null) {
+					requireActivity().runOnUiThread(() -> {
+						((TextView) view.findViewById(R.id.latestVersionValueID)).setText(
+								String.format("%s (%s)", result.get("version"),
+										result.get("versionCode")));
+						int latestCode;
+						int BtnText = R.string.update_word;
+
+						boolean enable = false;
+						try {
+							//noinspection ConstantConditions
+							latestCode = (int) result.get("versionCode");
+
+							if (rebootPending) {
+								enable = true;
+								BtnText = R.string.reboot_word;
+							} else if (!canaryUpdate) //stable selected
+							{
+								if (currentVersionName.contains("-")) //currently canary installed
+								{
+									BtnText = R.string.switch_branches;
+								} else if (latestCode == currentVersionCode) //already up to date
+								{
+									BtnText = R.string.reinstall_word;
+								}
+								enable = true; //stable version is ALWAYS flashable, so that user can revert from canary or repair installation
+							} else {
+								if (latestCode > currentVersionCode || (currentVersionType == PreferenceHelper.FULL_VERSION) != installFullVersion) {
+									enable = true;
+								}
+							}
+						} catch (Exception ignored) {
+						}
+						view.findViewById(R.id.updateBtn).setEnabled(enable);
+						((Button) view.findViewById(R.id.updateBtn)).setText(BtnText);
+					});
+				}
 			});
 		};
 

@@ -25,6 +25,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.topjohnwu.superuser.Shell;
@@ -40,6 +41,8 @@ import java.util.List;
 import javax.security.auth.callback.Callback;
 
 import br.tiagohm.markdownview.MarkdownView;
+import br.tiagohm.markdownview.css.InternalStyleSheet;
+import br.tiagohm.markdownview.css.styles.Github;
 import sh.siava.AOSPMods.databinding.UpdateFragmentBinding;
 import sh.siava.AOSPMods.utils.PreferenceHelper;
 
@@ -150,7 +153,15 @@ public class UpdateFragment extends Fragment {
 				if (getActivity() != null) {
 					requireActivity().runOnUiThread(() -> {
 						try {
-							((MarkdownView) view.findViewById(R.id.changelogView)).loadMarkdownFromUrl((String) result.get("changelog"));
+							MarkdownView mMarkdownView = view.findViewById(R.id.changelogView);
+							InternalStyleSheet css = new Github();
+							css.addRule("body, kbd", "background-color: " + intToHex(ContextCompat.getColor(requireContext(), R.color.ui_bg)));
+							css.addRule("body, p, h1, h2, h3, h4, h5, h6, span, div", "color: " + intToHex(ContextCompat.getColor(requireContext(), R.color.text_color_primary)));
+							css.addRule("kbd", "border-color: " + intToHex(ContextCompat.getColor(requireContext(), R.color.text_color_secondary)));
+							css.addRule("kbd", "color: " + intToHex(ContextCompat.getColor(requireContext(), R.color.text_color_secondary)));
+							css.addRule("a", "color: " + intToHex(ContextCompat.getColor(requireContext(), R.color.ui_accent)));
+							mMarkdownView.addStyleSheet(css);
+							mMarkdownView.loadMarkdownFromUrl((String) result.get("changelog"));
 						} catch (Throwable ignored) {
 						}
 					});
@@ -389,5 +400,9 @@ public class UpdateFragment extends Fragment {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private String intToHex(int colorValue) {
+		return String.format("#%06X", (0xFFFFFF & colorValue));
 	}
 }

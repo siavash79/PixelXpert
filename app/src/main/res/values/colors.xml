@@ -10,8 +10,8 @@
 	<color name="ui_accent_variant">@color/accent_variant_dark</color>
 	<color name="ui_surface">@android:color/system_accent1_50</color>
 	<color name="ui_primary_surface">@android:color/system_accent1_100</color>
-	<color name="error">#ED3E4D</color>
-	<color name="success">#3ED88D</color>
+	<color name="error">#DA000E</color>
+	<color name="success">#008753</color>
 
 	<!-- Launcher icon -->
 	<color name="launcher_fg">@android:color/system_neutral2_700</color>

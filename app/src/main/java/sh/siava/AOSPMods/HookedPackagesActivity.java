@@ -1,5 +1,7 @@
 package sh.siava.AOSPMods;
 
+import static android.view.View.GONE;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,12 +35,14 @@ import sh.siava.AOSPMods.modpacks.Constants;
 @SuppressWarnings("FieldCanBeLocal")
 public class HookedPackagesActivity extends AppCompatActivity {
 
+	/** @noinspection unused*/
 	private final String TAG = getClass().getSimpleName();
 	private ActivityHookedPackagesBinding binding;
 	IntentFilter intentFilterHookedPackages = new IntentFilter();
 	private final List<String> hookedPackageList = new ArrayList<>();
-	private final StringBooleanMap map = new StringBooleanMap();
-	private List<String> packageList;
+	private final StringBooleanMap mRootMap = new StringBooleanMap();
+	private List<String> monitorPackageList;
+	private List<String> rootPackageList;
 	private final String SQLite3 = "/data/adb/modules/AOSPMods/sqlite3";
 	private final String LSPosedDB = "/data/adb/lspd/config/modules_config.db";
 
@@ -56,7 +59,8 @@ public class HookedPackagesActivity extends AppCompatActivity {
 		intentFilterHookedPackages.addAction(Constants.ACTION_XPOSED_CONFIRMED);
 		registerReceiver(receiverHookedPackages, intentFilterHookedPackages, RECEIVER_EXPORTED);
 
-		packageList = Arrays.asList(getResources().getStringArray(R.array.module_scope));
+		monitorPackageList = Arrays.asList(getResources().getStringArray(R.array.module_scope));
+		rootPackageList = Arrays.asList(getResources().getStringArray(R.array.root_requirement));
 		checkHookedPackages();
 
 		SwipeRefreshLayout mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
@@ -70,29 +74,57 @@ public class HookedPackagesActivity extends AppCompatActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (Objects.equals(intent.getAction(), Constants.ACTION_XPOSED_CONFIRMED)) {
-				String packageName = intent.getStringExtra("packageName");
-				boolean isRoot = intent.getBooleanExtra("isRoot", false);
-				map.put(packageName, isRoot);
+				String broadcastPackageName = intent.getStringExtra("packageName");
+				boolean broadcastIsRoot = intent.getBooleanExtra("isRoot", false);
 
-				if (!hookedPackageList.contains(packageName)) {
-					hookedPackageList.add(packageName);
+				for (int i = 0; i < binding.content.getChildCount(); i++) {
+					View list = binding.content.getChildAt(i);
+					TextView desc = list.findViewById(R.id.desc);
+					TextView root = list.findViewById(R.id.root);
+					String pkgName = ((TextView) list.findViewById(R.id.title)).getText().toString();
+
+					if(pkgName.equals(broadcastPackageName))
+					{
+						binding.content.post(() -> {
+							desc.setText(getText(R.string.package_hooked_successful));
+							desc.setTextColor(getColor(R.color.success));
+
+							if(rootPackageList.contains(pkgName)) {
+								if (broadcastIsRoot) {
+									root.setText(getText(R.string.root_granted));
+									root.setTextColor(getColor(R.color.success));
+								} else {
+									root.setText(getText(R.string.root_not_granted));
+									root.setTextColor(getColor(R.color.error));
+								}
+							}
+							else
+							{
+								root.setText(getText(R.string.root_not_needed));
+							}
+						});
+					}
 				}
-				Log.i(TAG, "packageName: " + packageName + " isRoot: " + isRoot);
+
+				if (!hookedPackageList.contains(broadcastPackageName)) {
+					hookedPackageList.add(broadcastPackageName);
+					mRootMap.put(broadcastPackageName, broadcastIsRoot);
+				}
 			}
 		}
 	};
 
 	private void checkHookedPackages() {
 		hookedPackageList.clear();
-		map.clear();
+		mRootMap.clear();
 
-		initListItem(packageList);
+		initListItem(monitorPackageList);
 		new Thread(() -> sendBroadcast(new Intent().setAction(Constants.ACTION_CHECK_XPOSED_ENABLED))).start();
 		waitAndRefresh();
 	}
 
 	private void waitAndRefresh() {
-		new CountDownTimer(3000, 1000) {
+		new CountDownTimer(5000, 1000) {
 			@Override
 			public void onTick(long millisUntilFinished) {
 			}
@@ -132,9 +164,13 @@ public class HookedPackagesActivity extends AppCompatActivity {
 			}
 
 			TextView root = list.findViewById(R.id.root);
-			if (map.get(pack.get(i))) {
-				root.setText(getText(R.string.root_granted));
-				root.setVisibility(View.VISIBLE);
+			if(rootPackageList.contains(pack.get(i)))
+			{
+				root.setText(getText(R.string.package_checking));
+			}
+			else
+			{
+				root.setText(R.string.root_not_needed);
 			}
 
 			ImageView preview = list.findViewById(R.id.icon);
@@ -173,6 +209,7 @@ public class HookedPackagesActivity extends AppCompatActivity {
 					} else {
 						desc.setText(getText(R.string.package_hooked_fail));
 						desc.setTextColor(getColor(R.color.error));
+						root.setVisibility(GONE);
 					}
 				} else {
 					desc.setText(getText(R.string.package_not_found));
@@ -180,13 +217,18 @@ public class HookedPackagesActivity extends AppCompatActivity {
 				}
 			}
 
-			if (map.get(pkgName)) {
-				root.setText(getText(R.string.root_granted));
-			} else {
-				root.setText(getText(R.string.root_not_granted));
+			if (isAppInstalled(pkgName) && rootPackageList.contains(pkgName)) {
+				if (mRootMap.get(pkgName)) {
+					root.setText(getText(R.string.root_granted));
+					root.setTextColor(getColor(R.color.success));
+				} else {
+					root.setText(getText(R.string.root_not_granted));
+					root.setTextColor(getColor(R.color.error));
+				}
 			}
-			if (isAppInstalled(pkgName)) {
-				root.setVisibility(View.VISIBLE);
+			else
+			{
+				root.setText(getText(R.string.root_not_needed));
 			}
 		}
 	}

@@ -484,11 +484,12 @@
 	<string name="searchpreference_no_results">No results</string>
 
 	<!-- Hooked Packages Activity -->
-	<string name="hooked_packages_title">Hooked Packages</string>
-	<string name="package_hooked_successful">Package successfully hooked</string>
-	<string name="package_hooked_fail">Package hooking failed</string>
+	<string name="hooked_packages_title">Connected packages</string>
+	<string name="package_hooked_successful">Package responsive</string>
+	<string name="package_hooked_fail">Package not responding/not enabled</string>
 	<string name="package_not_found">Package not found</string>
 	<string name="package_checking">Loading...</string>
-	<string name="root_granted">Root: True</string>
-	<string name="root_not_granted">Root: False</string>
+	<string name="root_granted">Root: Granted</string>
+	<string name="root_not_granted">Root: Not Granted</string>
+	<string name="root_not_needed">Root Access: Not required</string>
 </resources>

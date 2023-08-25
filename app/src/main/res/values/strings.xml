@@ -488,7 +488,7 @@
 	<string name="package_hooked_successful">Package responsive</string>
 	<string name="package_hooked_fail">Package not responding / not enabled</string>
 	<string name="package_not_found">Package not found</string>
-	<string name="package_checking">Loading…</string>
+	<string name="package_checking">Loading%s</string>
 	<string name="root_granted">Root: Granted</string>
 	<string name="root_not_granted">Root: Not Granted</string>
 	<string name="root_not_needed">Root Access: Not required</string>

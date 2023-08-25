@@ -47,6 +47,7 @@ public class HookedPackagesActivity extends AppCompatActivity {
 	private List<String> rootPackageList;
 	private final String SQLite3 = "/data/adb/modules/AOSPMods/sqlite3";
 	private final String LSPosedDB = "/data/adb/lspd/config/modules_config.db";
+	private int dotCount = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,13 +115,25 @@ public class HookedPackagesActivity extends AppCompatActivity {
 		}
 	};
 
-	private final CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
+	private final CountDownTimer countDownTimer = new CountDownTimer(5000, 500) {
 		@Override
 		public void onTick(long millisUntilFinished) {
+			dotCount = (dotCount + 1) % 4;
+			String dots = new String(new char[dotCount]).replace('\0', '.');
+
+			for (int i = 0; i < binding.content.getChildCount(); i++) {
+				View list = binding.content.getChildAt(i);
+				TextView desc = list.findViewById(R.id.desc);
+
+				if (((String) desc.getText()).contains(getString(R.string.package_checking, ""))) {
+					desc.setText(getString(R.string.package_checking, dots));
+				}
+			}
 		}
 
 		@Override
 		public void onFinish() {
+			dotCount = 0;
 			refreshListItem();
 		}
 	};
@@ -139,6 +152,7 @@ public class HookedPackagesActivity extends AppCompatActivity {
 	}
 
 	private void initListItem(List<String> pack) {
+		dotCount = 0;
 		countDownTimer.cancel();
 
 		if (binding.content.getChildCount() > 0)
@@ -161,7 +175,7 @@ public class HookedPackagesActivity extends AppCompatActivity {
 
 			TextView desc = list.findViewById(R.id.desc);
 			if (isAppInstalled(pack.get(i))) {
-				desc.setText(getText(R.string.package_checking));
+				desc.setText(getString(R.string.package_checking, ""));
 			} else {
 				desc.setText(getText(R.string.package_not_found));
 				desc.setTextColor(getColor(R.color.error));
@@ -169,7 +183,7 @@ public class HookedPackagesActivity extends AppCompatActivity {
 
 			TextView root = list.findViewById(R.id.root);
 			if (rootPackageList.contains(pack.get(i))) {
-				root.setText(getText(R.string.package_checking));
+				root.setText(getString(R.string.package_checking, ""));
 			} else {
 				root.setText(R.string.root_not_needed);
 			}

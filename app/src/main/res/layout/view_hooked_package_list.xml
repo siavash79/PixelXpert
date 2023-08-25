@@ -71,7 +71,7 @@
 			android:textColor="?android:attr/textColorSecondary"
 			android:textSize="14sp"
 			android:textStyle="normal"
-			android:visibility="gone" />
+			android:visibility="visible" />
 
 	</RelativeLayout>
 </LinearLayout>

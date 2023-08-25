@@ -114,6 +114,17 @@ public class HookedPackagesActivity extends AppCompatActivity {
 		}
 	};
 
+	private final CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
+		@Override
+		public void onTick(long millisUntilFinished) {
+		}
+
+		@Override
+		public void onFinish() {
+			refreshListItem();
+		}
+	};
+
 	private void checkHookedPackages() {
 		hookedPackageList.clear();
 		mRootMap.clear();
@@ -124,19 +135,12 @@ public class HookedPackagesActivity extends AppCompatActivity {
 	}
 
 	private void waitAndRefresh() {
-		new CountDownTimer(5000, 1000) {
-			@Override
-			public void onTick(long millisUntilFinished) {
-			}
-
-			@Override
-			public void onFinish() {
-				refreshListItem();
-			}
-		}.start();
+		countDownTimer.start();
 	}
 
 	private void initListItem(List<String> pack) {
+		countDownTimer.cancel();
+
 		if (binding.content.getChildCount() > 0)
 			binding.content.removeAllViews();
 

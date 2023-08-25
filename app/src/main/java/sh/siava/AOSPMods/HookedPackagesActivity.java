@@ -35,7 +35,9 @@ import sh.siava.AOSPMods.modpacks.Constants;
 @SuppressWarnings("FieldCanBeLocal")
 public class HookedPackagesActivity extends AppCompatActivity {
 
-	/** @noinspection unused*/
+	/**
+	 * @noinspection unused
+	 */
 	private final String TAG = getClass().getSimpleName();
 	private ActivityHookedPackagesBinding binding;
 	IntentFilter intentFilterHookedPackages = new IntentFilter();
@@ -83,13 +85,12 @@ public class HookedPackagesActivity extends AppCompatActivity {
 					TextView root = list.findViewById(R.id.root);
 					String pkgName = ((TextView) list.findViewById(R.id.title)).getText().toString();
 
-					if(pkgName.equals(broadcastPackageName))
-					{
+					if (pkgName.equals(broadcastPackageName)) {
 						binding.content.post(() -> {
 							desc.setText(getText(R.string.package_hooked_successful));
 							desc.setTextColor(getColor(R.color.success));
 
-							if(rootPackageList.contains(pkgName)) {
+							if (rootPackageList.contains(pkgName)) {
 								if (broadcastIsRoot) {
 									root.setText(getText(R.string.root_granted));
 									root.setTextColor(getColor(R.color.success));
@@ -97,11 +98,10 @@ public class HookedPackagesActivity extends AppCompatActivity {
 									root.setText(getText(R.string.root_not_granted));
 									root.setTextColor(getColor(R.color.error));
 								}
-							}
-							else
-							{
+							} else {
 								root.setText(getText(R.string.root_not_needed));
 							}
+							root.setVisibility(View.VISIBLE);
 						});
 					}
 				}
@@ -164,14 +164,12 @@ public class HookedPackagesActivity extends AppCompatActivity {
 			}
 
 			TextView root = list.findViewById(R.id.root);
-			if(rootPackageList.contains(pack.get(i)))
-			{
+			if (rootPackageList.contains(pack.get(i))) {
 				root.setText(getText(R.string.package_checking));
-			}
-			else
-			{
+			} else {
 				root.setText(R.string.root_not_needed);
 			}
+			root.setVisibility(GONE);
 
 			ImageView preview = list.findViewById(R.id.icon);
 			preview.setImageDrawable(getAppIcon(pack.get(i)));
@@ -209,7 +207,6 @@ public class HookedPackagesActivity extends AppCompatActivity {
 					} else {
 						desc.setText(getText(R.string.package_hooked_fail));
 						desc.setTextColor(getColor(R.color.error));
-						root.setVisibility(GONE);
 					}
 				} else {
 					desc.setText(getText(R.string.package_not_found));
@@ -217,18 +214,22 @@ public class HookedPackagesActivity extends AppCompatActivity {
 				}
 			}
 
-			if (isAppInstalled(pkgName) && rootPackageList.contains(pkgName)) {
-				if (mRootMap.get(pkgName)) {
-					root.setText(getText(R.string.root_granted));
-					root.setTextColor(getColor(R.color.success));
+			if (rootPackageList.contains(pkgName)) {
+				if (isAppInstalled(pkgName)) {
+					if (mRootMap.get(pkgName)) {
+						root.setText(getText(R.string.root_granted));
+						root.setTextColor(getColor(R.color.success));
+					} else {
+						root.setText(getText(R.string.root_not_granted));
+						root.setTextColor(getColor(R.color.error));
+					}
+					root.setVisibility(View.VISIBLE);
 				} else {
-					root.setText(getText(R.string.root_not_granted));
-					root.setTextColor(getColor(R.color.error));
+					root.setVisibility(GONE);
 				}
-			}
-			else
-			{
+			} else {
 				root.setText(getText(R.string.root_not_needed));
+				root.setVisibility(View.VISIBLE);
 			}
 		}
 	}

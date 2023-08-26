@@ -449,6 +449,7 @@
 	<string name="update_word">Update</string>
 	<string name="switch_branches">Switch branch</string>
 	<string name="reinstall_word">Reinstall</string>
+	<string name="changelog_title">Changelog</string>
 
 	<string name="title_activity_update" translatable="false">updateActivity</string>
 

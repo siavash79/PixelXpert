@@ -10,6 +10,7 @@
 	<color name="ui_accent_variant">@color/accent_variant_dark</color>
 	<color name="ui_surface">@android:color/system_accent1_50</color>
 	<color name="ui_primary_surface">@android:color/system_accent1_100</color>
+	<color name="changelog_bg">@android:color/system_neutral2_50</color>
 	<color name="error">#DA000E</color>
 	<color name="success">#008753</color>
 

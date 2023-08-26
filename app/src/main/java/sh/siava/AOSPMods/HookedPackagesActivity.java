@@ -261,12 +261,11 @@ public class HookedPackagesActivity extends AppCompatActivity {
 	}
 
 	private Drawable getAppIcon(String packageName) {
-		Drawable appIcon = ContextCompat.getDrawable(this, R.drawable.ic_android);
 		try {
-			appIcon = getPackageManager().getApplicationIcon(packageName);
+			return getPackageManager().getApplicationIcon(packageName);
 		} catch (PackageManager.NameNotFoundException ignored) {
+			return ContextCompat.getDrawable(this, R.drawable.ic_android);
 		}
-		return appIcon;
 	}
 
 	private boolean checkLSPosedDB(String pkgName) {

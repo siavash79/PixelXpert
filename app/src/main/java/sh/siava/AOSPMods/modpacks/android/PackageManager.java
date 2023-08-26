@@ -78,8 +78,10 @@ public class PackageManager extends XposedModPack {
 				hookAllMethods(ActivityManagerServiceClass, "checkBroadcastFromSystem", new XC_MethodHook() { //This thing shouts too much. let's request for some silence
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						Intent intent = (Intent) param.args[0];
-						if(intent.getAction().equals(Constants.ACTION_PROFILE_SWITCH_AVAILABLE))
+						String action = ((Intent) param.args[0]).getAction();
+
+						if(action.equals(Constants.ACTION_PROFILE_SWITCH_AVAILABLE)
+								|| action.equals(Constants.ACTION_XPOSED_CONFIRMED))
 							param.setResult(null);
 					}
 				});

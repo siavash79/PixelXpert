@@ -1,6 +1,7 @@
 package sh.siava.AOSPMods;
 
 import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -102,7 +103,7 @@ public class HookedPackagesActivity extends AppCompatActivity {
 							} else {
 								root.setText(getText(R.string.root_not_needed));
 							}
-							root.setVisibility(View.VISIBLE);
+							root.setVisibility(VISIBLE);
 						});
 					}
 				}
@@ -238,10 +239,10 @@ public class HookedPackagesActivity extends AppCompatActivity {
 					root.setText(getText(R.string.root_not_granted));
 					root.setTextColor(getColor(R.color.error));
 				}
-				root.setVisibility(View.VISIBLE);
+				root.setVisibility(VISIBLE);
 			} else {
 				root.setText(getText(R.string.root_not_needed));
-				root.setVisibility(View.VISIBLE);
+				root.setVisibility(VISIBLE);
 			}
 
 			if (!showRoot) root.setVisibility(GONE);
@@ -249,13 +250,14 @@ public class HookedPackagesActivity extends AppCompatActivity {
 	}
 
 	private boolean isAppInstalled(String packageName) {
-		PackageManager pm = getPackageManager();
 		try {
-			pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
-			return pm.getApplicationInfo(packageName, 0).enabled;
-		} catch (PackageManager.NameNotFoundException ignored) {
+			return Shell.cmd(
+					String.format("pm list packages --user 0 -e %s | grep \":%s$\" | wc -l", packageName, packageName))
+					.exec().getOut().get(0)
+					.equals("1");
+		} catch (Throwable ignored) {
+			return false;
 		}
-		return false;
 	}
 
 	private Drawable getAppIcon(String packageName) {

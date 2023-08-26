@@ -219,20 +219,15 @@ public class HookedPackagesActivity extends AppCompatActivity {
 				desc.setText(getText(R.string.package_hooked_successful));
 				desc.setTextColor(getColor(R.color.success));
 			} else {
-				if (isAppInstalled(pkgName)) {
-					if (hookedPackageList.contains(BuildConfig.APPLICATION_ID) && checkLSPosedDB(pkgName)) {
-						desc.setText(getText(R.string.package_hooked_successful));
-						desc.setTextColor(getColor(R.color.success));
-					} else {
-						desc.setText(getText(R.string.package_hooked_fail));
-						desc.setTextColor(getColor(R.color.error));
-						showRoot = false;
-					}
-				} else {
-					desc.setText(getText(R.string.package_not_found));
-					desc.setTextColor(getColor(R.color.error));
-					showRoot = false;
-				}
+				desc.setTextColor(getColor(R.color.error));
+				showRoot = false;
+
+				desc.setText(getText(
+						isAppInstalled(pkgName)
+							? checkLSPosedDB(pkgName)
+								? R.string.package_hook_no_response
+								: R.string.package_not_hook_enabled
+							: R.string.package_not_found));
 			}
 
 			if (rootPackageList.contains(pkgName)) {

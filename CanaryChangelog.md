@@ -1,3 +1,7 @@
+**canary-280**  
+- Added menu item to diagnose correct setup  
+- Tap to show ambient display improvement  
+  
 **canary-278**  
 - Added options to show ambient display (on tap / pickup) when the screen is off  
   

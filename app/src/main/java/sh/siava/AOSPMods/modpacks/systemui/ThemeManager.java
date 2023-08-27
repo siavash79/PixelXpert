@@ -44,13 +44,10 @@ import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 @SuppressWarnings("RedundantThrows")
 public class ThemeManager extends XposedModPack {
 	public static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
-
 	public static final int STATE_ACTIVE = 2;
-
 	private static boolean lightQSHeaderEnabled = false;
 	private static boolean enablePowerMenuTheme = false;
 	private static boolean brightnessThickTrackEnabled = false;
-
 	private boolean isDark;
 	private Integer colorInactive = null;
 	private int colorUnavailable;
@@ -77,10 +74,8 @@ public class ThemeManager extends XposedModPack {
 		boolean newbrightnessThickTrackEnabled = Xprefs.getBoolean("BSThickTrackOverlay", false);
 		if (newbrightnessThickTrackEnabled != brightnessThickTrackEnabled) {
 			brightnessThickTrackEnabled = newbrightnessThickTrackEnabled;
-			try {
-				applyOverlays(true);
-			} catch (Throwable ignored) {
-			}
+
+			applyOverlays(true);
 		}
 
 		try
@@ -98,10 +93,7 @@ public class ThemeManager extends XposedModPack {
 		if (lightQSHeaderEnabled != state) {
 			lightQSHeaderEnabled = state;
 
-			try {
-				applyOverlays(true);
-			} catch (Throwable ignored) {
-			}
+			applyOverlays(true);
 		}
 	}
 
@@ -354,11 +346,11 @@ public class ThemeManager extends XposedModPack {
 		});
 
 		hookAllMethods(CentralSurfacesImplClass, "updateTheme", new XC_MethodHook() { //required to recalculate colors and overlays when dark is toggled
-					@Override
-					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						applyOverlays(false);
-					}
-				});
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				applyOverlays(false);
+			}
+		});
 
 		hookAllMethods(ScrimControllerClass, "updateThemeColors", new XC_MethodHook() { //called when dark toggled or material change.
 			@Override
@@ -391,6 +383,7 @@ public class ThemeManager extends XposedModPack {
 						.setTint(mScrimBehindTint); //Layout background color
 			}
 		});
+
 		hookAllMethods(GlobalActionsDialogLiteEmergencyActionClass, "create", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -429,7 +422,7 @@ public class ThemeManager extends XposedModPack {
 
 	}
 
-	private void applyOverlays(boolean force) throws Throwable {
+	private void applyOverlays(boolean force) {
 		boolean isCurrentlyDark = isDarkMode();
 
 		if (isCurrentlyDark == isDark && !force) return;
@@ -438,16 +431,22 @@ public class ThemeManager extends XposedModPack {
 
 		calculateColors();
 
-		Helpers.setOverlay("QSLightThemeOverlay", false, true, false);
-		Helpers.setOverlay("QSLightThemeBSTOverlay", false, false, false);
+		new Thread(() -> {
+			try
+			{
+				Helpers.setOverlay("QSLightThemeOverlay", false, true, false);
+				Helpers.setOverlay("QSLightThemeBSTOverlay", false, false, false);
 
-		Thread.sleep(50);
+				Thread.sleep(50);
 
-		if (lightQSHeaderEnabled && !isCurrentlyDark)
-		{
-			Helpers.setOverlay("QSLightThemeOverlay", !brightnessThickTrackEnabled, true, false);
-			Helpers.setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, false, false);
-		}
+				if (lightQSHeaderEnabled && !isCurrentlyDark)
+				{
+					Helpers.setOverlay("QSLightThemeOverlay", !brightnessThickTrackEnabled, true, false);
+					Helpers.setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, false, false);
+				}
+			}
+			catch (Throwable ignored){}
+		}).start();
 	}
 
 	@SuppressLint("DiscouragedApi")

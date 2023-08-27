@@ -15,7 +15,7 @@
 				<shape android:shape="rectangle">
 					<stroke
 						android:width="2dp"
-						android:color="@color/color_accent_0_06_overlay" />
+						android:color="@color/changelog_border" />
 					<corners android:radius="@dimen/ui_container_radius" />
 				</shape>
 			</item>

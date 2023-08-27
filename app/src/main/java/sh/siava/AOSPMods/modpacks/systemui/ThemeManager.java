@@ -19,7 +19,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableWrapper;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
@@ -142,12 +141,11 @@ public class ThemeManager extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(!lightQSHeaderEnabled) return;
 
-				Object slider = getObjectField(param.thisObject, "mSlider");
-
-				LayerDrawable drawable = (LayerDrawable) callMethod(slider, "getProgressDrawable");
-
-				DrawableWrapper sliderBackground = (DrawableWrapper) drawable.findDrawableByLayerId(android.R.id.background);
-				sliderBackground.setTint(Color.GRAY);
+				((LayerDrawable) callMethod(
+						getObjectField(param.thisObject, "mSlider")
+						,"getProgressDrawable"))
+						.findDrawableByLayerId(android.R.id.background)
+						.setTint(Color.GRAY);
 			}
 		});
 

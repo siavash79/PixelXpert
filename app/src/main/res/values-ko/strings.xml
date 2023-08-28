@@ -5,7 +5,7 @@
     <string name="xposed_desc">Android 12+ AOSP 기반 롬을 위한 커스텀 기능들</string>
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="volume_tile_title">미디어 볼륨</string>
-	<string name="app_switch_tile_title">앱 프로필 바꾸기</string>
+    <string name="app_switch_tile_title">앱 프로필 바꾸기</string>
     <string name="error_not_activated">LSPosed Manager에서 모듈이 활성화되었는지 확인해주세요</string>
     <string name="hide_default">숨김 (기본값)</string>
     <string name="percent_of_default_size">% (기본값 대비)</string>
@@ -29,10 +29,10 @@
     <string name="pm_header">패키지 매니저</string>
     <string name="hotspot_header">휴대용 핫스팟</string>
 
-	<!-- Hotspot settings-->
-	<string name="hotspot_hide_ssid_title">SSID 숨기기</string>
-	<string name="hotspot_inactivity_timeout_title">비활성 상태 시간 제한</string>
-	<string name="hotspot_max_client_title">최대 사용자</string>
+    <!-- Hotspot settings-->
+    <string name="hotspot_hide_ssid_title">SSID 숨기기</string>
+    <string name="hotspot_inactivity_timeout_title">비활성 상태 시간 제한</string>
+    <string name="hotspot_max_client_title">최대 사용자</string>
 
     <!--Lock screen related-->
     <string name="disable_unlock_hint_title">잠금해제 힌트 애니메이션 비활성화</string>
@@ -165,17 +165,17 @@
     <string name="BB_batteryFastChargingColor">고속 충전 표시 색상</string>
     <string name="BB_transit_colors">단계 간 색상 부드럽게 전환</string>
     
-	<string name="nt_stat_mode_today">오늘</string>
-	<string name="nt_stat_mode_week">이번 주</string>
-	<string name="nt_stat_mode_month">이번 달</string>
+    <string name="nt_stat_mode_today">오늘</string>
+    <string name="nt_stat_mode_week">이번 주</string>
+    <string name="nt_stat_mode_month">이번 달</string>
 
-	<string name="sunday">일요일</string>
-	<string name="monday">월요일</string>
-	<string name="tuesday">화요일</string>
-	<string name="wednesday">수요일</string>
-	<string name="thursday">목요일</string>
-	<string name="friday">금요일</string>
-	<string name="saturday">토요일</string>
+    <string name="sunday">일요일</string>
+    <string name="monday">월요일</string>
+    <string name="tuesday">화요일</string>
+    <string name="wednesday">수요일</string>
+    <string name="thursday">목요일</string>
+    <string name="friday">금요일</string>
+    <string name="saturday">토요일</string>
 
 
     <!--Quick settings panel related-->
@@ -277,15 +277,15 @@
     <!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">스크린샷 효과음 비활성화</string>
     <!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
-	<string name="screenshot_insecure">제한된 컨텐츠로부터 스크린샷 허용</string>
-	<string name="screen_record_insecure">제한된 컨텐츠로부터 화면 녹화 허용</string>
+    <string name="screenshot_insecure">제한된 컨텐츠로부터 스크린샷 허용</string>
+    <string name="screen_record_insecure">제한된 컨텐츠로부터 화면 녹화 허용</string>
     <string name="clipboard_smart_actions_title">클립보드 오버레이 스마트 기능 활성화</string>
     <string name="allow_all_screen_rotations">화면 회전 방향 고정 강제 비활성화</string>
     <string name="allow_all_screen_rotations_summary">화면 회전 플로팅 버튼을 무시합니다</string>
     <string name="force_no_cutout">화면 속 카메라 무시</string>
     <string name="clear_all_reposition_title">최근 앱 화면에 모두 삭제 버튼 추가</string>
     <string name="force_themed_icons_title">테마 앱 아이콘이 없을 경우 자동 생성 (Android 14 - Pixel launcher 전용)</string>
-	<string name="reapply_themed_config">적용하려면 테마 앱 아이콘을 다시 활성화하세요</string>
+    <string name="reapply_themed_config">적용하려면 테마 앱 아이콘을 다시 활성화하세요</string>
     <string name="volume_button_step_title">볼륨 단계 (0에서 100%까지)</string>
     <string name="display_resolution_title">화면 해상도</string>
     <string name="brightness_range_title">화면 밝기 제한</string>
@@ -300,10 +300,10 @@
     <string name="so_double_tap_wake_title">두 번 탭하여 화면 켜기</string>
     <string name="so_double_tap_wake_summary">한 번 탭하여 화면 켜기 비활성화</string>
     <string name="so_tap_to_show_ambient_title">탭하여 앰비언트 디스플레이 보기</string>
-	<string name="so_tap_to_show_ambient_summary">[AOD 기능이 비활성화된 상태에서] 화면을 탭하면 앰비언트 디스플레이를 표시합니다</string>
-	<string name="so_pick_to_show_ambient_title">기기를 들어 앰비언트 디스플레이 보기</string>
-	<string name="so_pick_to_show_ambient_summary">[AOD 기능이 비활성화된 상태에서] 기기를 들면 앰비언트 디스플레이를 표시합니다</string>
-	<string name="doze_header">화면이 꺼진 상태에서…</string>
+    <string name="so_tap_to_show_ambient_summary">[AOD 기능이 비활성화된 상태에서] 화면을 탭하면 앰비언트 디스플레이를 표시합니다</string>
+    <string name="so_pick_to_show_ambient_title">기기를 들어 앰비언트 디스플레이 보기</string>
+    <string name="so_pick_to_show_ambient_summary">[AOD 기능이 비활성화된 상태에서] 기기를 들면 앰비언트 디스플레이를 표시합니다</string>
+    <string name="doze_header">화면이 꺼진 상태에서…</string>
     <string name="custom_themed_icons_title">커스텀 테마 아이콘</string>
     <string name="custom_themed_icons_off">커스텀 아이콘 비활성화됨</string>
     <string name="custom_themed_icons_on">커스텀 아이콘 활성화됨</string>
@@ -315,10 +315,10 @@
     <string name="overscroll_on_summary">중요: LSPosed 설정 내에서 오버스크롤 효과를 비활성화시킬 앱을 추가해야 합니다</string>
     <string name="milliseconds">밀리초</string>
 
-	<!-- Work/Clone profile -->
-	<string name="work_clone_profile_header">직장/복제 프로필</string>
-	<string name="statusbar_long_press_app_switch">상태표시줄을 길게 눌러 프로필 전환하기</string>
-	<string name="statusbar_app_switch_icon">프로필 전환이 가능할 때 상태표시줄에 아이콘을 표시합니다</string>
+    <!-- Work/Clone profile -->
+    <string name="work_clone_profile_header">직장/복제 프로필</string>
+    <string name="statusbar_long_press_app_switch">상태표시줄을 길게 눌러 프로필 전환하기</string>
+    <string name="statusbar_app_switch_icon">프로필 전환이 가능할 때 상태표시줄에 아이콘을 표시합니다</string>
 
     <!-- Call section -->
     <string name="call_category">전화</string>
@@ -326,7 +326,7 @@
     <string name="vibrate_on_call_drop_title">전화가 끊어진 경우 진동 알림</string>
     <string name="vibration_type_notification">시스템 알림 진동 설정에 따른 강도</string>
     <string name="dialer_mute_record_message_title">통화 녹음 알림 제거</string>
-	<string name="dialer_mute_record_message_summary">통화 녹음이 활성화된 구글 전화 앱에서만 적용됩니다</string>
+    <string name="dialer_mute_record_message_summary">통화 녹음이 활성화된 구글 전화 앱에서만 적용됩니다</string>
 
     <!-- Theming section related -->
     <string name="gsans_override_title">Google Sans 폰트 시스템 전체 강제 적용</string>
@@ -363,8 +363,8 @@
 
     <!-- Clock position -->
     <string name="clock_default">왼쪽 (기본)</string>
-	<string name="clock_center">가운데</string>
-	<string name="clock_right">오른쪽</string>
+    <string name="clock_center">가운데</string>
+    <string name="clock_right">오른쪽</string>
 
     <!-- AM/PM style -->
     <string name="am_pm_normal">시계 크기의 100%</string>
@@ -387,20 +387,20 @@
     <string name="netstat_enable_title">네트워크 기록 수집</string>
     <string name="network_interval_custom_text_title">새로고침 주기</string>
     <string name="minutes_word">분</string>
-	<string name="network_stat_type">통계 종류</string>
-	<string name="network_stat_day">일 시작 시간</string>
-	<string name="network_stat_week">주 시작 시간</string>
-	<string name="network_stat_month">달 시작 시간</string>
+    <string name="network_stat_type">통계 종류</string>
+    <string name="network_stat_day">일 시작 시간</string>
+    <string name="network_stat_week">주 시작 시간</string>
+    <string name="network_stat_month">달 시작 시간</string>
 
     <!-- Incompatibility Alert -->
     <string name="incompatible_alert_title">호환되지 않습니다</string>
     <string name="incompatible_alert_body">현재 사용 중인 ROM은 본 모듈의 지원 대상이 아닙니다. 계속해서 사용하실 수는 있으나, 일부 (혹은 모든) 기능이 의도대로 작동하지 않을 수 있습니다\n\n이에 따른 버그 신고는 하지 말아주세요</string>
     <string name="incompatible_alert_ok_btn">이해했습니다</string>
 
-	<!-- App kill Alert -->
-	<string name="app_kill_alert_title">알림</string>
-	<string name="app_kill_alert_body">앱이 종료될 예정입니다. 새로운 아이콘을 탭하여 다시 실행할 수 있습니다.</string>
-	<string name="app_kill_ok_btn">확인</string>
+    <!-- App kill Alert -->
+    <string name="app_kill_alert_title">알림</string>
+    <string name="app_kill_alert_body">앱이 종료될 예정입니다. 새로운 아이콘을 탭하여 다시 실행할 수 있습니다.</string>
+    <string name="app_kill_ok_btn">확인</string>
     
     <!-- Menu Items -->
     <string name="menu_settings_title">불러오기/내보내기</string>
@@ -427,8 +427,8 @@
     <string name="update_channel_name">업데이트</string>
     <string name="update_notification_title">업데이트 다운로드됨</string>
     <string name="update_notification_text">여기를 눌러 설치하세요</string>
-	<string name="download_failed">업데이트 다운로드 실패</string>
-	<string name="try_again_later">나중에 다시 시도해주세요</string>
+    <string name="download_failed">업데이트 다운로드 실패</string>
+    <string name="try_again_later">나중에 다시 시도해주세요</string>
     <string name="reboot_notification_title">AOSPMods가 업데이트되었습니다!</string>
     <string name="reboot_notification_text">변경된 사항들은 기기를 다시 시작하면 적용됩니다</string>
     <string name="update_flavor_title">업데이트 채널</string>
@@ -447,7 +447,7 @@
     <string name="update_word">업데이트</string>
     <string name="switch_branches">branch 전환하기</string>
     <string name="reinstall_word">재설치</string>
-	<string name="changelog_title">변경 사항</string>
+    <string name="changelog_title">변경 사항</string>
     
     <string name="title_activity_update" translatable="false">updateActivity</string>
 
@@ -456,14 +456,14 @@
     <string name="camera_manager_master_title">손전등 기능 활성화 (사용 중인 기기에서 손전등 관련 기능이 작동하지 않는다면 비활성화하세요)</string>
     <string name="toggle_dark_apply">(다크 테마를 토글하여 적용)</string>
 
-	<string name="gesture_nav_extra_cat">추가 네비게이션 바 제스쳐</string>
-	<string name="gesture_nav_long_swipe_fc_title">화면 상단까지 스와이프하여 현재 앱 종료</string>
-	<string name="gesture_nav_left_swipe_up_title">네비게이션 바 왼쪽 영역에서 쓸어올림</string>
-	<string name="gesture_nav_right_swipe_up_title">네비게이션 바 오른쪽 영역에서 쓸어올림</string>
-	<string name="gesture_nav_left_swipe_up_percent">왼쪽 제스쳐 인식 영역 너비 (%)</string>
-	<string name="gesture_nav_right_swipe_up_percent">오른쪽 제스쳐 인식 영역 너비 (%)</string>
-	<string name="gesture_nav_two_finger_title">두 손가락을 사용해 쓸어올림</string>
-	<string name="gesture_nav_swipe_up_height">쓸어올림 제스쳐 작동을 위한 최소 높이</string>
+    <string name="gesture_nav_extra_cat">추가 네비게이션 바 제스쳐</string>
+    <string name="gesture_nav_long_swipe_fc_title">화면 상단까지 스와이프하여 현재 앱 종료</string>
+    <string name="gesture_nav_left_swipe_up_title">네비게이션 바 왼쪽 영역에서 쓸어올림</string>
+    <string name="gesture_nav_right_swipe_up_title">네비게이션 바 오른쪽 영역에서 쓸어올림</string>
+    <string name="gesture_nav_left_swipe_up_percent">왼쪽 제스쳐 인식 영역 너비 (%)</string>
+    <string name="gesture_nav_right_swipe_up_percent">오른쪽 제스쳐 인식 영역 너비 (%)</string>
+    <string name="gesture_nav_two_finger_title">두 손가락을 사용해 쓸어올림</string>
+    <string name="gesture_nav_swipe_up_height">쓸어올림 제스쳐 작동을 위한 최소 높이</string>
 
     <string name="none">없음</string>
     <string name="screenshot">스크린샷</string>
@@ -474,22 +474,22 @@
     <string name="insecure_screenshot">제한 없는 스크린샷</string>
     <string name="sleep">화면 끄기</string>
 
-	<!-- Search Preference -->
-	<string name="searchpreference_search">검색...</string>
-	<string name="searchpreference_clear">지우기</string>
-	<string name="searchpreference_history_entry">이전 기록</string>
-	<string name="searchpreference_more">더 보기</string>
-	<string name="searchpreference_clear_history">기록 지우기</string>
-	<string name="searchpreference_no_results">결과 없음</string>
+    <!-- Search Preference -->
+    <string name="searchpreference_search">검색...</string>
+    <string name="searchpreference_clear">지우기</string>
+    <string name="searchpreference_history_entry">이전 기록</string>
+    <string name="searchpreference_more">더 보기</string>
+    <string name="searchpreference_clear_history">기록 지우기</string>
+    <string name="searchpreference_no_results">결과 없음</string>
 
-	<!-- Hooked Packages Activity -->
-	<string name="hooked_packages_title">연결된 패키지</string>
-	<string name="package_hooked_successful">패키지 연결 성공</string>
-	<string name="package_not_hook_enabled">패키지가 LSposed 앱에서 활성화되지 않았습니다</string>
-	<string name="package_hook_no_response">패키지가 응답하지 않습니다</string>
-	<string name="package_not_found">패키지를 찾을 수 없습니다</string>
-	<string name="package_checking">불러오는 중%s</string>
-	<string name="root_granted">루트 권한: 부여됨</string>
-	<string name="root_not_granted">루트 권한: 부여되지 않음</string>
-	<string name="root_not_needed">루트 권한: 불필요함</string>
+    <!-- Hooked Packages Activity -->
+    <string name="hooked_packages_title">연결된 패키지</string>
+    <string name="package_hooked_successful">패키지 연결 성공</string>
+    <string name="package_not_hook_enabled">패키지가 LSposed 앱에서 활성화되지 않았습니다</string>
+    <string name="package_hook_no_response">패키지가 응답하지 않습니다</string>
+    <string name="package_not_found">패키지를 찾을 수 없습니다</string>
+    <string name="package_checking">불러오는 중%s</string>
+    <string name="root_granted">루트 권한: 부여됨</string>
+    <string name="root_not_granted">루트 권한: 부여되지 않음</string>
+    <string name="root_not_needed">루트 권한: 불필요함</string>
 </resources>

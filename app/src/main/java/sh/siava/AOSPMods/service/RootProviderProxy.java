@@ -35,7 +35,7 @@ public class RootProviderProxy extends Service {
 
 		private final Context mContext;
 		private IRootProviderService mRootServiceIPC;
-		private final List<String> moduleScope;
+		private final List<String> rootAllowedPacks;
 
 		private final ServiceConnection mRootServiceConnection = new ServiceConnection() {
 		@Override
@@ -54,7 +54,7 @@ public class RootProviderProxy extends Service {
 		{
 			mContext = context;
 
-			moduleScope = Arrays.asList(mContext.getResources().getStringArray(R.array.module_scope));
+			rootAllowedPacks = Arrays.asList(mContext.getResources().getStringArray(R.array.root_requirement));
 
 			startRootService();
 		}
@@ -109,7 +109,7 @@ public class RootProviderProxy extends Service {
 
 		private void ensureSecurity(int uid) throws RemoteException {
 			for (String packageName : getPackageManager().getPackagesForUid(uid)) {
-				if(moduleScope.contains(packageName))
+				if(rootAllowedPacks.contains(packageName))
 					return;
 			}
 			throw new RemoteException("You do know you're not supposed to use this service. So...");

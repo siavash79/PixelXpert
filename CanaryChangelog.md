@@ -1,3 +1,7 @@
+**canary-281**  
+- Connected packages: better diagnosis / added options to help with lsposed activation  
+- root-required actions restructured: root requirement for AOSPMods app only - KernelSU support  
+  
 **canary-280**  
 - Added menu item to diagnose correct setup  
 - Tap to show ambient display improvement  

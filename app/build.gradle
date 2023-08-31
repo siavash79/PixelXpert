@@ -41,6 +41,7 @@ android {
 	namespace 'sh.siava.AOSPMods'
 	buildFeatures {
 		viewBinding true
+		aidl true
 	}
 	kotlinOptions {
 		jvmTarget = '9'
@@ -53,14 +54,15 @@ dependencies {
 	// Xposed api
 	compileOnly files('lib/api-82.jar')
 	compileOnly files('lib/api-82-sources.jar')
+	implementation files('lib/sqlite-android-3430000.aar')
 
 	implementation project(path: ':RangeSliderPreference')
 
 	implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-	implementation 'androidx.navigation:navigation-fragment-ktx:2.7.0'
-	implementation 'androidx.navigation:navigation-ui-ktx:2.7.0'
-	implementation 'androidx.navigation:navigation-fragment-ktx:2.7.0'
-	implementation 'androidx.navigation:navigation-ui-ktx:2.7.0'
+	implementation 'androidx.navigation:navigation-fragment-ktx:2.7.1'
+	implementation 'androidx.navigation:navigation-ui-ktx:2.7.1'
+	implementation 'androidx.navigation:navigation-fragment-ktx:2.7.1'
+	implementation 'androidx.navigation:navigation-ui-ktx:2.7.1'
 	implementation 'androidx.appcompat:appcompat:1.6.1'
 	implementation 'androidx.annotation:annotation:1.6.0'
 	implementation 'androidx.preference:preference-ktx:1.2.1'
@@ -86,7 +88,7 @@ dependencies {
 
 	// Search Preference
 	implementation 'androidx.cardview:cardview:1.0.0'
-	implementation 'androidx.preference:preference:1.2.1'
+	implementation 'androidx.preference:preference-ktx:1.2.1'
 	implementation 'org.apache.commons:commons-text:1.3'
 
 	// SwipeRefreshLayout

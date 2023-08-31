@@ -10,6 +10,5 @@
     </string-array>
     <string-array name="root_requirement">
         <item>com.android.systemui</item> <!-- systemUI -->
-        <item>com.google.android.apps.nexuslauncher</item> <!-- Pixel Launcher - Taskbar -->
     </string-array>
 </resources>

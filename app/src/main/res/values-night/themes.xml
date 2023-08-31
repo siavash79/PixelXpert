@@ -29,6 +29,7 @@
 		<item name="android:windowSplashScreenBackground">@color/ui_bg</item>
 		<item name="seekBarStyle">@style/Material3.SeekBar</item>
 		<item name="materialSwitchStyle">@style/Widget.MaterialSwitch</item>
+		<item name="extendedFloatingActionButtonStyle">@style/Widget.ExtendedFloatingActionButton</item>
 
 		<!-- Material3 attributes (needed if parent="Theme.MaterialComponents"). -->
 		<item name="colorPrimaryInverse">@color/colorPrimaryLight</item>

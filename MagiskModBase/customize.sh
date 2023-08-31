@@ -38,8 +38,6 @@ grantRootPkg(){
 
 #grant root access to required apps
 grantRootApps(){
-	grantRootPkg "com.android.systemui"
-	grantRootPkg "com.google.android.apps.nexuslauncher"
 	grantRootPkg $PKGNAME
 }
 

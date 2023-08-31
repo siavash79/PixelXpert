@@ -6,8 +6,7 @@ import static sh.siava.AOSPMods.modpacks.utils.Helpers.removeItemFromCommaString
 
 import android.content.Context;
 import android.graphics.Color;
-
-import com.topjohnwu.superuser.Shell;
+import android.os.RemoteException;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -84,21 +83,26 @@ public class miscSettings extends XposedModPack {
 		} catch (Exception ignored) {
 		}
 
-		String sizeResult = Shell.cmd("wm size").exec().getOut().get(0);
-		String[] physicalSizes = sizeResult.replace("Physical size: ", "").split("x");
-		int w = Integer.parseInt(physicalSizes[0]);
-		int h = Integer.parseInt(physicalSizes[1]);
+		try {
+			String sizeResult = XPLauncher.rootProxyIPC.runCommand("wm size")[0];
 
-		int overrideW = Math.round(w * displayOverride);
-		int overrideH = Math.round(h * displayOverride);
+			String[] physicalSizes = sizeResult.replace("Physical size: ", "").split("x");
+			int w = Integer.parseInt(physicalSizes[0]);
+			int h = Integer.parseInt(physicalSizes[1]);
 
-		Shell.cmd(String.format("wm size %sx%s", overrideW, overrideH)).submit();
+			int overrideW = Math.round(w * displayOverride);
+			int overrideH = Math.round(h * displayOverride);
+
+			XPLauncher.rootProxyIPC.runCommand(String.format("wm size %sx%s", overrideW, overrideH));
+		} catch (RemoteException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private void setVolumeSteps() {
 		int volumeStps = Xprefs.getInt("volumeStps", 0);
 
-		ModuleFolderOperations.applyVolumeSteps(volumeStps, XPrefs.MagiskRoot);
+		ModuleFolderOperations.applyVolumeSteps(volumeStps, XPrefs.MagiskRoot, false);
 	}
 
 	private void updateWifiCell() {
@@ -106,7 +110,7 @@ public class miscSettings extends XposedModPack {
 				&& Xprefs.getBoolean("InternetTileModEnabled", true);
 
 		try {
-			String currentTiles = Shell.cmd("settings get secure sysui_qs_tiles").exec().getOut().get(0);
+			String currentTiles = XPLauncher.rootProxyIPC.runCommand("settings get secure sysui_qs_tiles")[0];
 
 			boolean providerModel;
 
@@ -125,7 +129,7 @@ public class miscSettings extends XposedModPack {
 				currentTiles = addItemToCommaStringIfNotPresent(currentTiles, "internet");
 			}
 
-			com.topjohnwu.superuser.Shell.cmd("settings put global settings_provider_model " + providerModel + "; settings put secure sysui_qs_tiles \"" + currentTiles + "\"").exec();
+			XPLauncher.rootProxyIPC.runCommand("settings put global settings_provider_model " + providerModel + "; settings put secure sysui_qs_tiles \"" + currentTiles + "\"");
 		} catch (Exception ignored) {
 		}
 	}
@@ -135,7 +139,7 @@ public class miscSettings extends XposedModPack {
 			boolean SysUITunerEnabled = Xprefs.getBoolean("sysui_tuner", false);
 			String mode = (SysUITunerEnabled) ? "enable" : "disable";
 
-			com.topjohnwu.superuser.Shell.cmd("pm " + mode + " com.android.systemui/.tuner.TunerActivity").exec();
+			XPLauncher.rootProxyIPC.runCommand("pm " + mode + " com.android.systemui/.tuner.TunerActivity");
 		} catch (Exception ignored) {
 		}
 	}
@@ -144,7 +148,7 @@ public class miscSettings extends XposedModPack {
 		boolean customFontsEnabled = Xprefs.getBoolean("enableCustomFonts", false);
 		boolean GSansOverrideEnabled = Xprefs.getBoolean("gsans_override", false);
 
-		ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, XPrefs.MagiskRoot);
+		ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, XPrefs.MagiskRoot, false);
 	}
 
 	@Override

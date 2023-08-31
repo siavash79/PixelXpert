@@ -5,19 +5,25 @@ import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static sh.siava.AOSPMods.BuildConfig.APPLICATION_ID;
-import static sh.siava.AOSPMods.BuildConfig.DEBUG;
 import static sh.siava.AOSPMods.modpacks.utils.BootLoopProtector.isBootLooped;
 import static sh.siava.AOSPMods.modpacks.Constants.SYSTEM_UI_PACKAGE;
 
 import android.app.Instrumentation;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Build;
+import android.os.IBinder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.modpacks.utils.Helpers;
+import sh.siava.AOSPMods.BuildConfig;
+import sh.siava.AOSPMods.IRootProviderProxy;
+import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
@@ -28,6 +34,10 @@ public class XPLauncher {
 
 	public static ArrayList<XposedModPack> runningMods = new ArrayList<>();
 	public Context mContext = null;
+
+	public static IRootProviderProxy rootProxyIPC;
+	/** @noinspection FieldCanBeLocal*/
+	private ServiceConnection mRootProxyConnection;
 
 	public XPLauncher() {
 	}
@@ -66,6 +76,11 @@ public class XPLauncher {
 					ResourceManager.modRes = mContext.createPackageContext(APPLICATION_ID, CONTEXT_IGNORE_SECURITY)
 							.getResources();
 
+					if(Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(mContext.getPackageName()))
+					{
+						forceConnectRootService();
+					}
+
 					if(isBootLooped(mContext.getPackageName()))
 					{
 						log(String.format("AOSPMods: Possible bootloop in %s. Will not load for now", mContext.getPackageName()));
@@ -94,4 +109,37 @@ public class XPLauncher {
 		});
 
 	}
+	private void connectRootService()
+	{
+		// Start RootService connection
+		Intent intent = new Intent();
+		mRootProxyConnection = new ServiceConnection() {
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			rootProxyIPC = IRootProviderProxy.Stub.asInterface(service);
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			rootProxyIPC = null;
+
+			forceConnectRootService();
+		}
+	};
+		intent.setComponent(new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".service.RootProviderProxy"));
+
+		mContext.bindService(intent, mRootProxyConnection, Context.BIND_AUTO_CREATE);
+	}
+
+	private void forceConnectRootService() {
+		new Thread(() -> {
+			while (rootProxyIPC == null) {
+				connectRootService();
+				try {
+					Thread.sleep(1000);
+				} catch (Throwable ignored) {}
+			}
+		}).start();
+	}
+
 }

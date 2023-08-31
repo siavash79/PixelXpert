@@ -74,4 +74,13 @@
 		<item name="colorPrimaryContainer">?attr/colorOnPrimary</item>
 	</style>
 
+	<style name="Widget.ExtendedFloatingActionButton" parent="Widget.Material3.ExtendedFloatingActionButton.Primary">
+		<item name="shapeAppearanceOverlay">@style/ShapeAppearanceExtFAB</item>
+	</style>
+
+	<style name="ShapeAppearanceExtFAB">
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSize">@dimen/ui_container_radius</item>
+	</style>
+
 </resources>

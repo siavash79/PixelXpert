@@ -2,7 +2,6 @@ package sh.siava.AOSPMods.modpacks.utils;
 
 import static android.content.Context.RECEIVER_EXPORTED;
 import static android.content.res.Configuration.UI_MODE_NIGHT_YES;
-import static com.topjohnwu.superuser.Shell.cmd;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
@@ -41,6 +40,7 @@ import org.jetbrains.annotations.Contract;
 import java.util.ArrayList;
 
 import sh.siava.AOSPMods.BuildConfig;
+import sh.siava.AOSPMods.modpacks.XPLauncher;
 import sh.siava.AOSPMods.modpacks.XPrefs;
 
 @SuppressWarnings("unused")
@@ -69,11 +69,15 @@ public class SystemUtils {
 	private WifiManager mWifiManager;
 
 	public static void restartSystemUI() {
-		cmd("killall com.android.systemui").submit();
+		try {
+			XPLauncher.rootProxyIPC.runCommand("killall com.android.systemui");
+		} catch (Throwable ignored) {}
 	}
 
 	public static void restart() {
-		cmd("am start -a android.intent.action.REBOOT").submit();
+		try {
+			XPLauncher.rootProxyIPC.runCommand("am start -a android.intent.action.REBOOT");
+		} catch (Throwable ignored) {}
 	}
 
 	public static boolean isFlashOn() {
@@ -369,9 +373,9 @@ public class SystemUtils {
 				}
 				darkSwitching = true;
 
-				cmd("cmd uimode night " + (isDark ? "no" : "yes")).exec();
+				XPLauncher.rootProxyIPC.runCommand("cmd uimode night " + (isDark ? "no" : "yes"));
 				Thread.sleep(1000);
-				cmd("cmd uimode night " + (isDark ? "yes" : "no")).exec();
+				XPLauncher.rootProxyIPC.runCommand("cmd uimode night " + (isDark ? "yes" : "no"));
 
 				Thread.sleep(500);
 				darkSwitching = false;

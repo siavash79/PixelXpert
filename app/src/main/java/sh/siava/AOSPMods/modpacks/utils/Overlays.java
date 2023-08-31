@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.modpacks.utils;
 
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.RemoteException;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -89,13 +90,17 @@ public class Overlays {
 
 			if (prefs == null) return; // something not ready
 
-			Helpers.getActiveOverlays(); //update the real active overlay list
+			try {
+				Helpers.getActiveOverlays(); //update the real active overlay list
+			} catch (Throwable ignored) {}
 
 			Map<String, ?> allPrefs = prefs.getAll();
 
 			for (String pref : allPrefs.keySet()) {
 				if (pref.endsWith("Overlay") && Overlays.containsKey(pref)) {
-					Helpers.setOverlay(pref, prefs.getBoolean(pref, false), force);
+					try {
+						Helpers.setOverlay(pref, prefs.getBoolean(pref, false), force);
+					} catch (Throwable ignored) {}
 				}
 				//overlay groups, like themes of select one
 				else if (pref.endsWith("OverlayEx") && Overlays.containsKey(pref)) {
@@ -105,7 +110,9 @@ public class Overlays {
 					//noinspection ConstantConditions
 					for (overlayProp thisProp : thisGroup.members) {
 						if (!thisProp.name.equals("None")) {
-							Helpers.setOverlay(thisProp.name, activeOverlay.equals(thisProp.name), force);
+							try {
+								Helpers.setOverlay(thisProp.name, activeOverlay.equals(thisProp.name), force);
+							} catch (Throwable ignored) {}
 						}
 					}
 				}

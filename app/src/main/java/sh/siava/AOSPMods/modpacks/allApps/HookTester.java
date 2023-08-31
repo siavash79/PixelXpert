@@ -5,10 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-import com.topjohnwu.superuser.Shell;
-
-import java.util.Arrays;
-
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
@@ -33,15 +29,6 @@ public class HookTester extends XposedModPack {
 					Intent broadcast = new Intent(Constants.ACTION_XPOSED_CONFIRMED);
 
 					broadcast.putExtra("packageName", lpparam.packageName);
-					boolean isRoot = false;
-					try
-					{
-						if(Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(lpparam.packageName))
-							isRoot = Shell.getShell().isRoot();
-					}
-					catch (Throwable ignored){}
-
-					broadcast.putExtra("isRoot", isRoot);
 
 					broadcast.setPackage(BuildConfig.APPLICATION_ID);
 

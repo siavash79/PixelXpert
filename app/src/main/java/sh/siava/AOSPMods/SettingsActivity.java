@@ -35,8 +35,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.topjohnwu.superuser.Shell;
-
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +42,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.AOSPMods.ui.preferencesearch.SearchConfiguration;
 import sh.siava.AOSPMods.ui.preferencesearch.SearchPreference;
 import sh.siava.AOSPMods.ui.preferencesearch.SearchPreferenceResult;
@@ -59,6 +58,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 	private static final int REQUEST_EXPORT = 9;
 	private static final String TITLE_TAG = "settingsActivityTitle";
 	Context DPContext;
+
+	String TAG = getClass().getSimpleName();
 
 	private static FragmentManager fragmentManager;
 	private HeaderFragment headerFragment;
@@ -115,11 +116,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		prefsList.add(new Object[]{R.xml.statusbar_settings, R.string.statusbar_header, new StatusbarFragment()});
 		prefsList.add(new Object[]{R.xml.theming_prefs, R.string.theme_customization_category, new ThemingFragment()});
 		prefsList.add(new Object[]{R.xml.three_button_prefs, R.string.threebutton_header_title, new ThreeButtonNavFragment()});
-
-		try {
-			Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER)); //access full filesystem
-		} catch (Exception ignored) {
-		}
 
 		PreferenceHelper.init(getDefaultSharedPreferences(createDeviceProtectedStorageContext()));
 
@@ -803,14 +799,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			PackageManager packageManager = getActivity().getPackageManager();
 
 			packageManager.setComponentEnabledSetting(
-					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".SettingsActivityNormalIcon"),
+					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".SplashScreenActivityNormalIcon"),
 					alternativeThemedAppIconEnabled ? PackageManager.COMPONENT_ENABLED_STATE_DISABLED : PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
 					PackageManager.DONT_KILL_APP
 			);
 
 			// Enable themed app icon component
 			packageManager.setComponentEnabledSetting(
-					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".SettingsActivityAlternateIcon"),
+					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".SplashScreenActivityAlternateIcon"),
 					alternativeThemedAppIconEnabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
 					PackageManager.DONT_KILL_APP
 			);

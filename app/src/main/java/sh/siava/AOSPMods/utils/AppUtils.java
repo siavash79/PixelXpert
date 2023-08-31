@@ -1,7 +1,5 @@
 package sh.siava.AOSPMods.utils;
 
-import static com.topjohnwu.superuser.Shell.cmd;
-
 import android.os.FileUtils;
 
 import com.topjohnwu.superuser.Shell;
@@ -13,11 +11,11 @@ import java.util.zip.ZipFile;
 public class AppUtils {
 
 	public static void RestartSystemUI() {
-		cmd("killall com.android.systemui").submit();
+		Shell.cmd("killall com.android.systemui").submit();
 	}
 
 	public static void Restart() {
-		cmd("am start -a android.intent.action.REBOOT").submit();
+		Shell.cmd("am start -a android.intent.action.REBOOT").submit();
 	}
 
 	public static boolean installDoubleZip(String DoubleZipped) //installs the zip magisk module. even if it's zipped inside another zip

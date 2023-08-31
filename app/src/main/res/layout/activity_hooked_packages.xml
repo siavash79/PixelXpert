@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:fitsSystemWindows="true"
 	tools:context=".HookedPackagesActivity">
+
+	<com.google.android.material.progressindicator.CircularProgressIndicator
+		android:id="@+id/loading_indicator"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:indeterminate="true"
+		app:indicatorSize="48dp" />
 
 	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 		android:id="@+id/swipe_refresh_layout"
@@ -26,4 +35,17 @@
 
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</LinearLayout>
+	<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+		android:id="@+id/reboot_button"
+		style="?attr/floatingActionButtonSmallStyle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="end|bottom"
+		android:layout_marginEnd="@dimen/ui_container_margin_side"
+		android:layout_marginBottom="48dp"
+		android:contentDescription="@string/reboot_pending"
+		android:text="@string/reboot_pending"
+		app:icon="@drawable/ic_reboot"
+		app:shapeAppearanceOverlay="@style/ShapeAppearanceExtFAB" />
+
+</FrameLayout>

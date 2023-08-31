@@ -6,6 +6,7 @@ import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 
+import android.os.RemoteException;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -113,10 +114,9 @@ public class Helpers {
 		return Stream.concat(Arrays.stream(array1), Arrays.stream(array2)).distinct();
 	}
 
-	public static void getActiveOverlays() {
+	public static void getActiveOverlays() throws RemoteException {
 		List<String> result = new ArrayList<>();
-		List<String> lines = com.topjohnwu.superuser.Shell.cmd("cmd overlay list --user 0").exec().getOut();
-		//List<String> lines = Shell.sh("cmd overlay list --user 0").exec().getOut();
+		String[] lines = XPLauncher.rootProxyIPC.runCommand("cmd overlay list --user 0");
 		for (String thisLine : lines) {
 			if (thisLine.startsWith("[x]")) {
 				result.add(thisLine.replace("[x] ", ""));
@@ -125,12 +125,16 @@ public class Helpers {
 		activeOverlays = result;
 	}
 
-	public static void setOverlay(String Key, boolean enabled, boolean refresh, boolean force) {
-		if (refresh) getActiveOverlays();
+	public static void setOverlay(String Key, boolean enabled, boolean refresh, boolean force) throws RemoteException {
+		if (refresh) {
+			try {
+				getActiveOverlays();
+			} catch (Throwable ignored) {}
+		}
 		setOverlay(Key, enabled, force);
 	}
 
-	public static void setOverlay(String Key, boolean enabled, boolean force) {
+	public static void setOverlay(String Key, boolean enabled, boolean force) throws RemoteException {
 		if (XPLauncher.isChildProcess) return;
 
 		if (activeOverlays == null) getActiveOverlays(); //make sure we have a list in hand
@@ -167,7 +171,7 @@ public class Helpers {
 		}
 
 		try {
-			com.topjohnwu.superuser.Shell.cmd("cmd overlay " + mode + " --user 0 " + packageName).exec();
+			XPLauncher.rootProxyIPC.runCommand("cmd overlay " + mode + " --user 0 " + packageName);
 		} catch (Throwable t) {
 			log(t);
 		}
@@ -178,7 +182,9 @@ public class Helpers {
 
 		//noinspection ConstantConditions
 		for (Overlays.overlayProp thisProp : thisGroup.members) {
-			Helpers.setOverlay(thisProp.name, enabled, force);
+			try {
+				Helpers.setOverlay(thisProp.name, enabled, force);
+			} catch (Throwable ignored) {}
 		}
 	}
 

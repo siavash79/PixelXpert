@@ -88,8 +88,8 @@ public class UpdateActivity extends AppCompatActivity {
 		boolean GSansOverrideEnabled = prefs.getBoolean("gsans_override", false);
 		boolean PowerMenuOverlayEnabled = prefs.getBoolean("enablePowerMenuTheme", false);
 
-		ModuleFolderOperations.applyVolumeSteps(volumeStps, updateRoot);
-		ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, updateRoot);
+		ModuleFolderOperations.applyVolumeSteps(volumeStps, updateRoot, true);
+		ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, updateRoot, true);
 	}
 
 	@Override

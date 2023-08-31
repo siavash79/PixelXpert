@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.RemoteException;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +30,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
-
-import com.topjohnwu.superuser.Shell;
 
 import java.lang.reflect.Method;
 
@@ -580,8 +579,10 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	private void launchTVRemote() {
-		Shell.cmd("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity").exec(); //enabling it if disabled, and start remote activity on older versions
-		Shell.cmd("am start -a com.google.android.apps.googletv.ACTION_VIRTUAL_REMOTE").exec(); //start activity on the updated TV app
+		try {
+			XPLauncher.rootProxyIPC.runCommand("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity"); //enabling it if disabled, and start remote activity on older versions
+			XPLauncher.rootProxyIPC.runCommand("am start -a com.google.android.apps.googletv.ACTION_VIRTUAL_REMOTE"); //start activity on the updated TV app
+		} catch (Throwable ignored) {}
 	}
 
 	private void launchCamera() {

@@ -1,3 +1,6 @@
+**canary-282**  
+- Fixed app loading issues from canary 281  
+  
 **canary-281**  
 - Connected packages: better diagnosis / added options to help with lsposed activation  
 - root-required actions restructured: root requirement for AOSPMods app only - KernelSU support  

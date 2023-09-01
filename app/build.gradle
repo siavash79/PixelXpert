@@ -54,7 +54,6 @@ dependencies {
 	// Xposed api
 	compileOnly files('lib/api-82.jar')
 	compileOnly files('lib/api-82-sources.jar')
-	implementation files('lib/sqlite-android-3430000.aar')
 
 	implementation project(path: ':RangeSliderPreference')
 

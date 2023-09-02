@@ -21,7 +21,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.RemoteException;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -172,7 +171,6 @@ public class KeyguardMods extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-
 		Class<?> CarrierTextControllerClass = findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
 		Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
 		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpparam.classLoader);
@@ -615,19 +613,21 @@ public class KeyguardMods extends XposedModPack {
 	private void setMiddleText() {
 		if (KGCS == null) return;
 
-		if (KGMiddleCustomText.length() == 0) {
-			mStatusArea.removeView(KGMiddleCustomTextView);
-		} else {
-			try {
-				ViewGroup parent = (ViewGroup) KGMiddleCustomTextView.getParent();
-				if (parent != null) {
-					((ViewGroup) KGMiddleCustomTextView.getParent()).removeView(KGMiddleCustomTextView);
-				}
-				mStatusArea.addView(KGMiddleCustomTextView, 0);
-				KGMiddleCustomTextView.setText(clockStringFormatter.formatString(KGMiddleCustomText));
+		mStatusArea.post(() -> {
+			if (KGMiddleCustomText.length() == 0) {
+				mStatusArea.removeView(KGMiddleCustomTextView);
+			} else {
+				try {
+					ViewGroup parent = (ViewGroup) KGMiddleCustomTextView.getParent();
+					if (parent != null) {
+						((ViewGroup) KGMiddleCustomTextView.getParent()).removeView(KGMiddleCustomTextView);
+					}
+					mStatusArea.addView(KGMiddleCustomTextView, 0);
+					KGMiddleCustomTextView.setText(clockStringFormatter.formatString(KGMiddleCustomText));
 
-			} catch (Exception ignored) {
+				} catch (Exception ignored) {
+				}
 			}
-		}
+		});
 	}
 }

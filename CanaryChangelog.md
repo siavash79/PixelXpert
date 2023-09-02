@@ -1,3 +1,7 @@
+**canary-283**  
+- Fixed wifi SSID not updating on wifi change  
+- Fixed lockscreen clock area text random disappearance  
+  
 **canary-282**  
 - Fixed app loading issues from canary 281  
   

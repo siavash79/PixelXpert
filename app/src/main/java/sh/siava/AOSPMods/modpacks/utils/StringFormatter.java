@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.usage.NetworkStats.Bucket;
 import android.app.usage.NetworkStatsManager.UsageCallback;
+import android.net.ConnectivityManager;
 import android.text.SpannableStringBuilder;
 
 import androidx.annotation.NonNull;
@@ -55,6 +56,9 @@ public class StringFormatter {
 	public static int NetStatStartBase = NET_STAT_TYPE_DAY;
 	private Timer scheduler = new Timer();
 
+	private boolean ssidCallbackRegistered = false;
+	private boolean hasSSID = false;
+
 	private int mNetworkStatsType = NETWORK_STATS_NONE;
 	private int mRegisteredCallbackType = NETWORK_STATS_NONE;
 	private final UsageCallback networkUsageCallback = new UsageCallback() {
@@ -63,6 +67,7 @@ public class StringFormatter {
 			informCallbacks();
 		}
 	};
+	private final ConnectivityManager.OnNetworkActiveListener ssidChangeCallback = this::informCallbacks;
 
 	public StringFormatter() {
 		instances.add(this);
@@ -111,6 +116,7 @@ public class StringFormatter {
 	public CharSequence formatString(String input) {
 		SpannableStringBuilder result = new SpannableStringBuilder(input);
 		hasDate = false;
+		hasSSID = false;
 		mNetworkStatsType = NETWORK_STATS_NONE;
 		Pattern pattern = Pattern.compile("\\$((T[a-zA-Z][0-9]*)|([A-Z][A-Za-z]+))"); //variables start with $ and continue with characters, until they don't!
 
@@ -127,7 +133,24 @@ public class StringFormatter {
 		{
 			registerUsageCallback();
 		}
+
+		ensureSSIDCallback();
 		return result;
+	}
+
+	private void ensureSSIDCallback() {
+		if(hasSSID == ssidCallbackRegistered || SystemUtils.ConnectivityManager() == null)
+			return;
+
+		if(hasSSID)
+		{
+			SystemUtils.ConnectivityManager().addDefaultNetworkActiveListener(ssidChangeCallback);
+		}
+		else
+		{
+			SystemUtils.ConnectivityManager().removeDefaultNetworkActiveListener(ssidChangeCallback);
+		}
+		ssidCallbackRegistered = hasSSID;
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -196,6 +219,7 @@ public class StringFormatter {
 					break;
 				case "ssid":
 					transformed = fetchCurrentWifiSSID();
+					hasSSID = true;
 					break;
 			}
 
@@ -234,6 +258,7 @@ public class StringFormatter {
 		if (!UNKNOWN_SSID.equals(theSsid)) {
 			return theSsid;
 		}
+
 		return "";
 	}
 

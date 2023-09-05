@@ -3,7 +3,9 @@
     <item
         android:id="@+id/menu_Updates"
         android:title="@string/menu_updates" />
-
+    <item
+        android:id="@+id/hooked_packages"
+        android:title="@string/hooked_packages_title" />
     <item android:title="@string/menu_settings_title">
         <menu>
             <item
@@ -18,12 +20,18 @@
         </menu>
     </item>
     <item
-        android:id="@+id/hooked_packages"
-        android:title="@string/hooked_packages_title" />
-    <item
-        android:id="@+id/menu_restart"
-        android:title="@string/menu_restart" />
-    <item
-        android:id="@+id/menu_restartSysUI"
-        android:title="@string/menu_restartSysUI" />
+        android:title="@string/menu_restart">
+        <menu>
+            <item
+                android:id="@+id/menu_restartSysUI"
+                android:title="@string/menu_restartSysUI" />
+            <item
+                android:id="@+id/menu_soft_restart"
+                android:title="@string/menu_soft_restart" />
+            <item
+                android:id="@+id/menu_restart"
+                android:title="@string/menu_restart_system" />
+        </menu>
+    </item>
+
 </menu>

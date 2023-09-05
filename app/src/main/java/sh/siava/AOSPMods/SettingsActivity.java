@@ -228,7 +228,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			onBackPressed();
 		} else if (itemID == R.id.menu_clearPrefs) {
 			PrefManager.clearPrefs(prefs);
-			AppUtils.RestartSystemUI();
+			AppUtils.Restart("systemui");
 		} else if (itemID == R.id.menu_exportPrefs) {
 			importExportSettings(true);
 		} else if (itemID == R.id.menu_importPrefs) {
@@ -237,11 +237,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			Intent intent = new Intent(this, HookedPackagesActivity.class);
 			startActivity(intent);
 		} else if (itemID == R.id.menu_restart) {
-			AppUtils.Restart();
+			AppUtils.Restart("system");
 		} else if (itemID == R.id.menu_restartSysUI) {
-			AppUtils.RestartSystemUI();
+			AppUtils.Restart("systemui");
 		} else if (itemID == R.id.menu_Updates) {
 			startActivity(new Intent(this, UpdateActivity.class));
+		} else if (itemID == R.id.menu_soft_restart) {
+			AppUtils.Restart("zygote");
 		}
 		return true;
 	}
@@ -265,7 +267,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			case REQUEST_IMPORT:
 				try {
 					PrefManager.importPath(prefs, getContentResolver().openInputStream(data.getData()));
-					AppUtils.RestartSystemUI();
+					AppUtils.Restart("systemui");
 				} catch (Exception ignored) {
 				}
 				break;

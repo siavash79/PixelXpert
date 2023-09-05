@@ -44,6 +44,7 @@ import br.tiagohm.markdownview.MarkdownView;
 import br.tiagohm.markdownview.css.InternalStyleSheet;
 import br.tiagohm.markdownview.css.styles.Github;
 import sh.siava.AOSPMods.databinding.UpdateFragmentBinding;
+import sh.siava.AOSPMods.utils.AppUtils;
 import sh.siava.AOSPMods.utils.PreferenceHelper;
 
 
@@ -216,7 +217,7 @@ public class UpdateFragment extends Fragment {
 
 		binding.updateBtn.setOnClickListener(view1 -> {
 			if (rebootPending) {
-				Shell.cmd("am start -a android.intent.action.REBOOT").exec();
+				AppUtils.Restart("system");
 			} else {
 				String zipURL = (installFullVersion) ? (String) latestVersion.get("zipUrl_Full") : (String) latestVersion.get("zipUrl_Xposed");
 				if (zipURL == null) zipURL = (String) latestVersion.get("zipUrl");

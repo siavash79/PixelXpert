@@ -9,13 +9,20 @@ import java.io.FileOutputStream;
 import java.util.zip.ZipFile;
 
 public class AppUtils {
-
-	public static void RestartSystemUI() {
-		Shell.cmd("killall com.android.systemui").submit();
-	}
-
-	public static void Restart() {
-		Shell.cmd("am start -a android.intent.action.REBOOT").submit();
+	public static void Restart(String what) {
+		switch (what.toLowerCase())
+		{
+			case "systemui":
+				Shell.cmd("killall com.android.systemui").submit();
+				break;
+			case "system":
+				Shell.cmd("am start -a android.intent.action.REBOOT").submit();
+				break;
+			case "zygote":
+				Shell.cmd("kill $(pidof zygote)").submit();
+				Shell.cmd("kill $(pidof zygote64)").submit();
+				break;
+		}
 	}
 
 	public static boolean installDoubleZip(String DoubleZipped) //installs the zip magisk module. even if it's zipped inside another zip
@@ -52,5 +59,4 @@ public class AppUtils {
 			return false;
 		}
 	}
-
 }

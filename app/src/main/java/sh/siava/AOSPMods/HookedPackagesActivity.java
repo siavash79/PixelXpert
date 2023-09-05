@@ -75,7 +75,7 @@ public class HookedPackagesActivity extends AppCompatActivity {
 			rebootPending = savedInstanceState.getBoolean(reboot_key);
 		}
 
-		binding.rebootButton.setOnClickListener(view -> AppUtils.Restart());
+		binding.rebootButton.setOnClickListener(view -> AppUtils.Restart("system"));
 
 		if (!rebootPending) {
 			binding.rebootButton.hide();

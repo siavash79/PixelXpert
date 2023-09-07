@@ -12,10 +12,6 @@ import android.os.LocaleList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
 import java.util.Locale;
@@ -27,7 +23,6 @@ import sh.siava.AOSPMods.modpacks.utils.ModuleFolderOperations;
 
 public class UpdateActivity extends AppCompatActivity {
 
-	private AppBarConfiguration appBarConfiguration;
 	@SuppressWarnings("FieldCanBeLocal")
 	private ActivityUpdateBinding binding;
 
@@ -59,6 +54,10 @@ public class UpdateActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.menu_updates));
+		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+		Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
+
 		if (getIntent().getBooleanExtra("updateTapped", false))
 		{
 			String downloadPath = getIntent().getStringExtra("filePath");
@@ -75,10 +74,6 @@ public class UpdateActivity extends AppCompatActivity {
 
 		Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.color_surface_overlay));
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-		NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_update);
-		appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-		NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 	}
 
 	private void applyPrefsToUpdate() {
@@ -100,8 +95,7 @@ public class UpdateActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onSupportNavigateUp() {
-		NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_update);
 		onBackPressed();
-		return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+		return true;
 	}
 }

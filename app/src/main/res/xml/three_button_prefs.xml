@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch">
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:summary="@string/sysui_restart_needed"
 		android:title="@string/modify_3button_title"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
@@ -12,7 +14,8 @@
 			android:key="ThreeButtonLayoutMod"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/modify_3button_title" />
+			android:title="@string/modify_3button_title"
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue="back"
@@ -20,7 +23,8 @@
 			android:entryValues="@array/three_button_nav_buttons"
 			android:key="ThreeButtonLeft"
 			android:summary="%s"
-			android:title="@string/three_button_left_title" />
+			android:title="@string/three_button_left_title"
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue="home"
@@ -28,7 +32,8 @@
 			android:entryValues="@array/three_button_nav_buttons"
 			android:key="ThreeButtonCenter"
 			android:summary="%s"
-			android:title="@string/three_button_center_title" />
+			android:title="@string/three_button_center_title"
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue="recent"
@@ -36,7 +41,8 @@
 			android:entryValues="@array/three_button_nav_buttons"
 			android:key="ThreeButtonRight"
 			android:summary="%s"
-			android:title="@string/three_button_right_title" />
+			android:title="@string/three_button_right_title"
+			app:iconSpaceReserved="false" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

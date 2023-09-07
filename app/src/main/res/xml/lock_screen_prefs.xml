@@ -7,46 +7,53 @@
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:layout="@layout/custom_preference_category"
 		android:title="@string/ls_general_options"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="DoubleTapSleepLockscreen"
-			android:title="@string/double_tap_sleep_title"
 			android:summaryOff="@string/general_off"
-			android:summaryOn="@string/general_on" />
+			android:summaryOn="@string/general_on"
+			android:title="@string/double_tap_sleep_title"
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="holdScreenTorchEnabled"
+			android:summary="@string/so_taptaptorch_summary"
 			android:title="@string/so_taptaptorch_title"
-			android:summary="@string/so_taptaptorch_summary" />
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="fingerprint_circle_hide"
 			android:summaryOff="@string/transparent_fingerprint_circle_off"
+			android:summaryOn="@string/transparent_fingerprint_circle_on"
 			android:title="@string/transparent_fingerprint_circle"
-			android:summaryOn="@string/transparent_fingerprint_circle_on" />
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="DisableUnlockHintAnimation"
 			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
 			android:title="@string/disable_unlock_hint_title"
-			android:summaryOn="@string/general_on" />
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="HideLockScreenUserAvatar"
-			android:title="@string/hide_avatar_title"
 			android:summaryOff="@string/general_off"
-			android:summaryOn="@string/general_on" />
+			android:summaryOn="@string/general_on"
+			android:title="@string/hide_avatar_title"
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
 			android:key="KeyGuardDimAmount"
 			android:title="@string/keyguard_dim_amount_title"
 			app:defaultValue="-1"
+			app:iconSpaceReserved="false"
 			app:maxVal="100"
 			app:minVal="-1"
 			app:tickInterval="1"
@@ -56,34 +63,39 @@
 			android:defaultValue="false"
 			android:key="WakeUpToSecurityInput"
 			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
 			android:title="@string/wakeup_to_security_title"
-			android:summaryOn="@string/general_on" />
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="shufflePinEnabled"
 			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
 			android:title="@string/shufflePin_title"
-			android:summaryOn="@string/general_on" />
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="easyUnlockEnabled"
 			android:summary="@string/easy_unlock_summary"
-			android:title="@string/easy_unlock_title" />
+			android:title="@string/easy_unlock_title"
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="ShowChargingInfo"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/charging_info_title" />
+			android:title="@string/charging_info_title"
+			app:iconSpaceReserved="false" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:layout="@layout/custom_preference_category"
 		android:title="@string/keyguard_bottom_category"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
@@ -91,67 +103,76 @@
 			android:key="KeyguardBottomButtonsTransparent"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/keyguard_bottom_buttons_transparent_title" />
+			android:title="@string/keyguard_bottom_buttons_transparent_title"
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue=""
 			android:entries="@array/lockScreenShortcut_names"
 			android:entryValues="@array/lockScreenShortcut_values"
 			android:key="leftKeyguardShortcut"
+			android:summary="%s"
 			android:title="@string/LSleftShortcutTitle"
-			android:summary="%s" />
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue=""
 			android:entries="@array/lockScreenShortcut_names"
 			android:entryValues="@array/lockScreenShortcut_values"
 			android:key="leftKeyguardShortcutLongClick"
+			android:summary="%s"
 			android:title="@string/LSleftLongClickShortcutTitle"
-			android:summary="%s" />
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue=""
 			android:entries="@array/lockScreenShortcut_names"
 			android:entryValues="@array/lockScreenShortcut_values"
 			android:key="rightKeyguardShortcut"
+			android:summary="%s"
 			android:title="@string/LSrightShortcutTitle"
-			android:summary="%s" />
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialListPreference
 			android:defaultValue=""
 			android:entries="@array/lockScreenShortcut_names"
 			android:entryValues="@array/lockScreenShortcut_values"
 			android:key="rightKeyguardShortcutLongClick"
+			android:summary="%s"
 			android:title="@string/LSrightLongClickShortcutTitle"
-			android:summary="%s" />
+			app:iconSpaceReserved="false" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 
 	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
 		android:layout="@layout/custom_preference_category"
 		android:title="@string/custom_text_category"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
 		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="carrierTextMod"
-			android:title="@string/configure_carrier_text"
 			android:summaryOff="@string/carrier_text_mod_disabled"
-			android:summaryOn="@string/carrier_text_mod_enabled" />
+			android:summaryOn="@string/carrier_text_mod_enabled"
+			android:title="@string/configure_carrier_text"
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialEditTextPreference
 			android:dialogLayout="@layout/string_formatter_manual"
 			android:key="carrierTextValue"
 			android:selectAllOnFocus="true"
 			android:singleLine="true"
-			android:title="@string/carrier_text_value" />
+			android:title="@string/carrier_text_value"
+			app:iconSpaceReserved="false" />
 
 		<sh.siava.AOSPMods.ui.MaterialEditTextPreference
 			android:dialogLayout="@layout/string_formatter_manual"
 			android:key="KGMiddleCustomText"
 			android:selectAllOnFocus="true"
 			android:singleLine="false"
-			android:title="@string/lockscreen_center_text_value" />
+			android:title="@string/lockscreen_center_text_value"
+			app:iconSpaceReserved="false" />
 
 	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
 </PreferenceScreen>

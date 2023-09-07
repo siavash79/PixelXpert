@@ -7,39 +7,45 @@
 		android:key="BBarEnabled"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/BB_enable_title" />
+		android:title="@string/BB_enable_title"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="BBOnlyWhileCharging"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/BB_onlycharging_title" />
+		android:title="@string/BB_onlycharging_title"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="BBOnBottom"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/BB_move_SB_bottom_title" />
+		android:title="@string/BB_move_SB_bottom_title"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="BBarColorful"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/BB_colorful_title" />
+		android:title="@string/BB_colorful_title"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
 		android:defaultValue="100"
 		android:key="BBOpacity"
 		android:title="@string/BB_Opacity_title"
+		app:iconSpaceReserved="false"
 		app:updatesContinuously="true" />
 
 	<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
 		android:defaultValue="50"
 		android:key="BBarHeight"
 		android:title="@string/BB_Thickness_title"
+		app:iconSpaceReserved="false"
 		app:updatesContinuously="true" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
@@ -47,37 +53,43 @@
 		android:key="BBSetCentered"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/BB_center_align_title" />
+		android:title="@string/BB_center_align_title"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="indicateCharging"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/BB_indicate_charging" />
+		android:title="@string/BB_indicate_charging"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialColorPreference
 		android:defaultValue="-16711936"
 		android:key="batteryChargingColor"
-		android:title="@string/BB_batteryChargingColor" />
+		android:title="@string/BB_batteryChargingColor"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="indicateFastCharging"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/BB_indicate_fast_charging" />
+		android:title="@string/BB_indicate_fast_charging"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialColorPreference
 		android:defaultValue="-16776961"
 		android:key="batteryFastChargingColor"
-		android:title="@string/BB_batteryFastChargingColor" />
+		android:title="@string/BB_batteryFastChargingColor"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
 		android:key="batteryWarningRange"
 		android:summary="@string/BB_warning_tip"
 		android:title="@string/BB_warning_level"
 		app:defaultValue="15,40"
+		app:iconSpaceReserved="false"
 		app:maxVal="100"
 		app:minVal="0"
 		app:tickInterval="1"
@@ -88,16 +100,19 @@
 		android:key="BBarTransitColors"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/BB_transit_colors" />
+		android:title="@string/BB_transit_colors"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialColorPreference
 		android:defaultValue="-65536"
 		android:key="batteryCriticalColor"
-		android:title="@string/BB_batteryCriticalColor" />
+		android:title="@string/BB_batteryCriticalColor"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialColorPreference
 		android:defaultValue="-256"
 		android:key="batteryWarningColor"
-		android:title="@string/BB_batteryWarningColor" />
+		android:title="@string/BB_batteryWarningColor"
+		app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

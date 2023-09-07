@@ -8,13 +8,15 @@
 		android:entryValues="@array/network_stat_start_codes"
 		android:key="NetworkStatsStartBase"
 		android:summary="%s"
-		android:title="@string/network_stat_type" />
+		android:title="@string/network_stat_type"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialTimePickerPreference
 		android:defaultValue="00:00"
 		android:key="NetworkStatsStartTime"
 		android:persistent="true"
-		android:title="@string/network_stat_day" />
+		android:title="@string/network_stat_day"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialListPreference
 		android:defaultValue="1"
@@ -22,12 +24,14 @@
 		android:entryValues="@array/days_of_week_codes"
 		android:key="NetworkStatsWeekStart"
 		android:summary="%s"
-		android:title="@string/network_stat_week" />
+		android:title="@string/network_stat_week"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
 		android:key="NetworkStatsMonthStart"
 		android:title="@string/network_stat_month"
 		app:defaultValue="1"
+		app:iconSpaceReserved="false"
 		app:maxVal="28"
 		app:minVal="1"
 		app:tickInterval="1"
@@ -38,16 +42,19 @@
 		android:key="networkStatsColorful"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/network_colorful_title" />
+		android:title="@string/network_colorful_title"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialColorPreference
 		android:defaultValue="-7617718"
 		android:key="networkStatDLColor"
-		android:title="@string/network_download_color_title" />
+		android:title="@string/network_download_color_title"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialColorPreference
 		android:defaultValue="-351845"
 		android:key="networkStatULColor"
-		android:title="@string/network_upload_color_title" />
+		android:title="@string/network_upload_color_title"
+		app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

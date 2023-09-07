@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<sh.siava.AOSPMods.ui.MaterialListPreference
 		android:entries="@array/languages_names"
 		android:entryValues="@array/languages_values"
 		android:key="appLanguage"
 		android:summary="%s"
-		android:title="@string/language_title" />
+		android:title="@string/language_title"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="AlternativeThemedAppIcon"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/app_themed_icon_title" />
+		android:title="@string/app_themed_icon_title"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="TemperatureUnitF"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/imperial_units_title" />
+		android:title="@string/imperial_units_title"
+		app:iconSpaceReserved="false" />
 
 	<!--SwitchPreference
 		android:defaultValue="true"

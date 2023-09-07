@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="PM_AllowMismatchedSignature"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/auto_off_five_minutes"
-		android:title="@string/pm_bypass_signature_title" />
+		android:title="@string/pm_bypass_signature_title"
+		app:iconSpaceReserved="false" />
 
 	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="PM_AllowDowngrade"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/auto_off_five_minutes"
-		android:title="@string/pm_allow_downgrade_title" />
+		android:title="@string/pm_allow_downgrade_title"
+		app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

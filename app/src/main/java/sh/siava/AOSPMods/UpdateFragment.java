@@ -53,7 +53,7 @@ public class UpdateFragment extends Fragment {
 	private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestCanary.json";
 	DownloadManager downloadManager;
 	long downloadID = 0; //from download manager
-	boolean canaryUpdate = false;
+	static boolean canaryUpdate = BuildConfig.VERSION_NAME.toLowerCase().contains("canary");
 	HashMap<String, Object> latestVersion = null;
 	private String downloadedFilePath;
 	private static final String updateDir = String.format("%s/%s", UpdateActivity.MAGISK_UPDATE_DIR, UpdateActivity.MOD_NAME);
@@ -84,7 +84,8 @@ public class UpdateFragment extends Fragment {
 						notifyInstall();
 						successful = true;
 					}
-				} catch (Throwable ignored) {}
+				} catch (Throwable ignored) {
+				}
 			}
 
 			if (!successful) {
@@ -358,10 +359,10 @@ public class UpdateFragment extends Fragment {
     }
 */
 
-	private class updateChecker extends Thread {
+	public static class updateChecker extends Thread {
 		private final TaskDoneCallback mCallback;
 
-		private updateChecker(TaskDoneCallback callback) {
+		updateChecker(TaskDoneCallback callback) {
 			mCallback = callback;
 		}
 

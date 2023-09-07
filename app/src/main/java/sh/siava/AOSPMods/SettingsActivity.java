@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +15,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.LocaleList;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,25 +27,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+
+import com.topjohnwu.superuser.Shell;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 import sh.siava.AOSPMods.ui.preferencesearch.SearchConfiguration;
 import sh.siava.AOSPMods.ui.preferencesearch.SearchPreference;
 import sh.siava.AOSPMods.ui.preferencesearch.SearchPreferenceResult;
@@ -138,6 +146,53 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		});
 
 		Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.color_surface_overlay));
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(createDeviceProtectedStorageContext());
+		if (prefs.getBoolean("AutoUpdate", true)) {
+			checkUpdates(result -> {
+				try {
+					Integer latestVersionCode = (Integer) result.get("versionCode");
+					int currentVersionCode = BuildConfig.VERSION_CODE;
+					Shell.cmd(String.format("pm grant %s android.permission.POST_NOTIFICATIONS", BuildConfig.APPLICATION_ID)).exec();
+
+					if (latestVersionCode != null && latestVersionCode > currentVersionCode) {
+						showUpdateNotification();
+					}
+					Log.i("AOSPMods", "Latest version: " + latestVersionCode + " Current version: " + currentVersionCode);
+				} catch (Exception e) {
+					Log.e("AOSPMods", "Error while checking for updates", e);
+				}
+			});
+		}
+	}
+
+	private void checkUpdates(UpdateFragment.TaskDoneCallback callback) {
+		new UpdateFragment.updateChecker(callback).start();
+	}
+
+	private void showUpdateNotification() {
+		Intent notificationIntent = new Intent(this, UpdateActivity.class);
+		notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+
+		NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, getString(R.string.notification_channel_update))
+				.setSmallIcon(R.drawable.ic_launcher_foreground)
+				.setContentTitle(getString(R.string.new_update_title))
+				.setContentText(getString(R.string.new_update_desc))
+				.setContentIntent(pendingIntent)
+				.setOnlyAlertOnce(true)
+				.setAutoCancel(true);
+
+		NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+		createChannel(notificationManager);
+		notificationManager.notify(0, notificationBuilder.build());
+	}
+
+	public void createChannel(NotificationManager notificationManager) {
+		NotificationChannel channel = new NotificationChannel(getString(R.string.notification_channel_update), getString(R.string.notification_channel_update), NotificationManager.IMPORTANCE_DEFAULT);
+		channel.setDescription(getString(R.string.notification_channel_update_desc));
+		notificationManager.createNotificationChannel(channel);
 	}
 
 	@Override
@@ -174,7 +229,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		CharSequence name = getString(R.string.update_channel_name);
 		int importance = NotificationManager.IMPORTANCE_DEFAULT;
 
-		NotificationChannel channel = new NotificationChannel("updates", name, importance);
+		NotificationChannel channel = new NotificationChannel(getString(R.string.notification_channel_update), name, importance);
 		NotificationManager notificationManager = getSystemService(NotificationManager.class);
 		notificationManager.createNotificationChannel(channel);
 	}
@@ -317,7 +372,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			config.setFragmentContainerViewId(R.id.settings);
 
 			for (Object[] obj : prefsList) {
-				config.index((Integer) obj[0]).addBreadcrumb(requireActivity().getResources().getString((Integer) obj[1]));
+				config.index((Integer) obj[0]).addBreadcrumb(this.getResources().getString((Integer) obj[1]));
 			}
 
 			config.setBreadcrumbsEnabled(true);
@@ -770,6 +825,62 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		@Override
 		public int getLayoutResource() {
 			return R.xml.own_prefs_header;
+		}
+
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+			super.onCreatePreferences(savedInstanceState, rootKey);
+
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext().createDeviceProtectedStorageContext());
+
+			Preference preference = findPreference("appLanguage");
+			int current_language_code = Arrays.asList(getResources().getStringArray(R.array.languages_values)).indexOf(prefs.getString("appLanguage", getResources().getConfiguration().getLocales().get(0).getLanguage()));
+			int selected_language_code = current_language_code < 0 ? Arrays.asList(getResources().getStringArray(R.array.languages_values)).indexOf("en") : current_language_code;
+			String selected_language_name = Arrays.asList(getResources().getStringArray(R.array.languages_names)).get(selected_language_code);
+			preference.setSummary(selected_language_name);
+
+			preference = findPreference("CheckForUpdate");
+			preference.setSummary(getString(R.string.current_version, BuildConfig.VERSION_NAME));
+			preference.setOnPreferenceClickListener(preference1 -> {
+				startActivity(new Intent(getActivity(), UpdateActivity.class));
+				return true;
+			});
+
+			preference = findPreference("GitHubRepo");
+			preference.setOnPreferenceClickListener(preference1 -> {
+				try {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse("https://github.com/siavash79/AOSPMods"));
+					startActivity(intent);
+				} catch (Exception ignored) {
+					Toast.makeText(getContext(), getString(R.string.browser_not_found), Toast.LENGTH_SHORT).show();
+				}
+				return true;
+			});
+
+			preference = findPreference("TelegramGroup");
+			preference.setOnPreferenceClickListener(preference1 -> {
+				try {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse("https://t.me/AOSPMods_Support"));
+					startActivity(intent);
+				} catch (Exception ignored) {
+					Toast.makeText(getContext(), getString(R.string.browser_not_found), Toast.LENGTH_SHORT).show();
+				}
+				return true;
+			});
+
+			preference = findPreference("UsageWiki");
+			preference.setOnPreferenceClickListener(preference1 -> {
+				try {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse("https://github.com/siavash79/AOSPMods/wiki/AOSPMods-Wiki"));
+					startActivity(intent);
+				} catch (Exception ignored) {
+					Toast.makeText(getContext(), getString(R.string.browser_not_found), Toast.LENGTH_SHORT).show();
+				}
+				return true;
+			});
 		}
 
 		@Override

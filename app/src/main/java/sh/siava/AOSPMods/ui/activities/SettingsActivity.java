@@ -298,8 +298,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			AppUtils.Restart("system");
 		} else if (itemID == R.id.menu_restartSysUI) {
 			AppUtils.Restart("systemui");
-		} else if (itemID == R.id.menu_Updates) {
-			startActivity(new Intent(this, UpdateActivity.class));
 		} else if (itemID == R.id.menu_soft_restart) {
 			AppUtils.Restart("zygote");
 		}

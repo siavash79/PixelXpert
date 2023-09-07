@@ -105,7 +105,9 @@ class PreferenceParser {
 							&& shouldAddPreferenceItem(results, result)) {
 						result.breadcrumbs = joinBreadcrumbs(breadcrumbs);
 						result.keyBreadcrumbs = cleanupKeyBreadcrumbs(keyBreadcrumbs);
-						results.add(result);
+						if (!results.contains(result)) {
+							results.add(result);
+						}
 					}
 					if (CONTAINERS.contains(xpp.getName())) {
 						breadcrumbs.add(result.title == null ? "" : result.title);

@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui.preferencesearch;
+package sh.siava.AOSPMods.ui.preferences.preferencesearch;
 
 /*
  * https://github.com/ByteHamster/SearchPreference
@@ -38,7 +38,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import sh.siava.AOSPMods.R;
-import sh.siava.AOSPMods.SettingsActivity;
+import sh.siava.AOSPMods.ui.activities.SettingsActivity;
 
 public class SearchPreference extends Preference implements View.OnClickListener {
 	private final SearchConfiguration searchConfiguration = new SearchConfiguration();

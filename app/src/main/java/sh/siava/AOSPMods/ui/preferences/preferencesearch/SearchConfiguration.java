@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui.preferencesearch;
+package sh.siava.AOSPMods.ui.preferences.preferencesearch;
 
 /*
  * https://github.com/ByteHamster/SearchPreference

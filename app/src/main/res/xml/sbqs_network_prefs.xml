@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<sh.siava.AOSPMods.ui.MaterialListPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialListPreference
 		android:defaultValue="0"
 		android:entries="@array/network_mode_names"
 		android:entryValues="@array/network_mode_codes"
@@ -11,7 +11,7 @@
 		android:title="@string/network_mode_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="true"
 		android:key="networkTrafficRXTop"
 		android:summaryOff="@string/general_off"
@@ -19,7 +19,7 @@
 		android:title="@string/network_download_top"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="true"
 		android:key="networkTrafficShowIcons"
 		android:summaryOff="@string/general_off"
@@ -27,7 +27,7 @@
 		android:title="@string/network_show_icons_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialSeekbarPreference
 		android:defaultValue="1"
 		android:key="networkTrafficInterval"
 		android:max="5"
@@ -37,7 +37,7 @@
 		app:min="1"
 		app:updatesContinuously="true" />
 
-	<sh.siava.AOSPMods.ui.MaterialEditTextPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialEditTextPreference
 		android:key="networkTrafficThreshold"
 		android:selectAllOnFocus="true"
 		android:singleLine="true"
@@ -46,7 +46,7 @@
 		app:defaultValue="10"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="networkTrafficColorful"
 		android:summaryOff="@string/general_off"
@@ -54,19 +54,19 @@
 		android:title="@string/network_colorful_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialColorPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialColorPreference
 		android:defaultValue="-7617718"
 		android:key="networkTrafficDLColor"
 		android:title="@string/network_download_color_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialColorPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialColorPreference
 		android:defaultValue="-351845"
 		android:key="networkTrafficULColor"
 		android:title="@string/network_upload_color_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialSeekbarPreference
 		android:defaultValue="100"
 		android:key="networkTrafficOpacity"
 		android:title="@string/network_opacity_title"

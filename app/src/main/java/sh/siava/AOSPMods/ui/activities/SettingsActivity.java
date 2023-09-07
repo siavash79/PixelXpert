@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods;
+package sh.siava.AOSPMods.ui.activities;
 
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
@@ -51,10 +51,13 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import sh.siava.AOSPMods.ui.preferencesearch.SearchConfiguration;
-import sh.siava.AOSPMods.ui.preferencesearch.SearchPreference;
-import sh.siava.AOSPMods.ui.preferencesearch.SearchPreferenceResult;
-import sh.siava.AOSPMods.ui.preferencesearch.SearchPreferenceResultListener;
+import sh.siava.AOSPMods.BuildConfig;
+import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.ui.fragments.UpdateFragment;
+import sh.siava.AOSPMods.ui.preferences.preferencesearch.SearchConfiguration;
+import sh.siava.AOSPMods.ui.preferences.preferencesearch.SearchPreference;
+import sh.siava.AOSPMods.ui.preferences.preferencesearch.SearchPreferenceResult;
+import sh.siava.AOSPMods.ui.preferences.preferencesearch.SearchPreferenceResultListener;
 import sh.siava.AOSPMods.utils.AppUtils;
 import sh.siava.AOSPMods.utils.ControlledPreferenceFragmentCompat;
 import sh.siava.AOSPMods.utils.PrefManager;

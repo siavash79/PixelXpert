@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui;
+package sh.siava.AOSPMods.ui.preferences;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,36 +7,35 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.EditTextPreference;
 import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreferenceCompat;
 
 import sh.siava.AOSPMods.R;
 
-public class MaterialSwitchPreference extends SwitchPreferenceCompat {
+public class MaterialEditTextPreference extends EditTextPreference {
 
-	public MaterialSwitchPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+	public MaterialEditTextPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 		initResource();
 	}
 
-	public MaterialSwitchPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+	public MaterialEditTextPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		initResource();
 	}
 
-	public MaterialSwitchPreference(@NonNull Context context, @Nullable AttributeSet attrs) {
+	public MaterialEditTextPreference(@NonNull Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
 		initResource();
 	}
 
-	public MaterialSwitchPreference(@NonNull Context context) {
+	public MaterialEditTextPreference(@NonNull Context context) {
 		super(context);
 		initResource();
 	}
 
 	private void initResource() {
-		setLayoutResource(R.layout.custom_preference_switch);
-		setWidgetLayoutResource(R.layout.custom_preference_material_switch);
+		setLayoutResource(R.layout.custom_preference_edit_text);
 	}
 
 	@Override

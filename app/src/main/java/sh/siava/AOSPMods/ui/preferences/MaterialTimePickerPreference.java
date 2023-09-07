@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui;
+package sh.siava.AOSPMods.ui.preferences;
 
 /*
  * Modified from https://github.com/etidoUP/Material-Time-picker-preference-

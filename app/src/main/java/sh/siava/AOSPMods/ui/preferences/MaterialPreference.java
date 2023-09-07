@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui;
+package sh.siava.AOSPMods.ui.preferences;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,43 +7,40 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.preference.PreferenceCategory;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import sh.siava.AOSPMods.R;
 
-public class MaterialPreferenceCategory extends PreferenceCategory {
+public class MaterialPreference extends Preference {
 
-	public MaterialPreferenceCategory(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+	public MaterialPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 		initResource();
 	}
 
-	public MaterialPreferenceCategory(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+	public MaterialPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		initResource();
 	}
 
-	public MaterialPreferenceCategory(@NonNull Context context, @Nullable AttributeSet attrs) {
+	public MaterialPreference(@NonNull Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
 		initResource();
 	}
 
-	public MaterialPreferenceCategory(@NonNull Context context) {
+	public MaterialPreference(@NonNull Context context) {
 		super(context);
 		initResource();
 	}
 
 	private void initResource() {
-		setLayoutResource(R.layout.custom_preference_category);
+		setLayoutResource(R.layout.custom_preference);
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull PreferenceViewHolder holder) {
 		super.onBindViewHolder(holder);
-
-		holder.setDividerAllowedAbove(false);
-		holder.setDividerAllowedBelow(false);
 
 		if (holder.getBindingAdapterPosition() == 0) {
 			ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();

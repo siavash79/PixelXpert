@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui.preferencesearch;
+package sh.siava.AOSPMods.ui.preferences.preferencesearch;
 
 /*
  * https://github.com/ByteHamster/SearchPreference
@@ -27,29 +27,6 @@ package sh.siava.AOSPMods.ui.preferencesearch;
  *
  */
 
-class HistoryItem extends ListItem {
-	static final int TYPE = 1;
-	private final String term;
-
-	HistoryItem(String term) {
-		super();
-		this.term = term;
-	}
-
-	@Override
-	public int getType() {
-		return TYPE;
-	}
-
-	String getTerm() {
-		return term;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof HistoryItem) {
-			return ((HistoryItem) obj).term.equals(term);
-		}
-		return false;
-	}
+public abstract class ListItem {
+	public abstract int getType();
 }

@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui;
+package sh.siava.AOSPMods.ui.preferences;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,35 +7,35 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.preference.Preference;
+import androidx.preference.ListPreference;
 import androidx.preference.PreferenceViewHolder;
 
 import sh.siava.AOSPMods.R;
 
-public class MaterialPreference extends Preference {
+public class MaterialListPreference extends ListPreference {
 
-	public MaterialPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+	public MaterialListPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 		initResource();
 	}
 
-	public MaterialPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+	public MaterialListPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		initResource();
 	}
 
-	public MaterialPreference(@NonNull Context context, @Nullable AttributeSet attrs) {
+	public MaterialListPreference(@NonNull Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
 		initResource();
 	}
 
-	public MaterialPreference(@NonNull Context context) {
+	public MaterialListPreference(@NonNull Context context) {
 		super(context);
 		initResource();
 	}
 
 	private void initResource() {
-		setLayoutResource(R.layout.custom_preference);
+		setLayoutResource(R.layout.custom_preference_list);
 	}
 
 	@Override

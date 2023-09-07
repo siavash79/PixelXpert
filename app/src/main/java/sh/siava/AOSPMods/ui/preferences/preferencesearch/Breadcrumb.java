@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui.preferencesearch;
+package sh.siava.AOSPMods.ui.preferences.preferencesearch;
 
 /*
  * https://github.com/ByteHamster/SearchPreference
@@ -27,8 +27,26 @@ package sh.siava.AOSPMods.ui.preferencesearch;
  *
  */
 
-import androidx.annotation.NonNull;
+import android.text.TextUtils;
 
-public interface SearchPreferenceResultListener {
-	void onSearchResultClicked(@NonNull SearchPreferenceResult result);
+import androidx.annotation.Nullable;
+
+class Breadcrumb {
+	private Breadcrumb() {
+
+	}
+
+	/**
+	 * Joins two breadcrumbs
+	 *
+	 * @param s1 First breadcrumb, might be null
+	 * @param s2 Second breadcrumb
+	 * @return Both breadcrumbs joined
+	 */
+	static String concat(@Nullable String s1, String s2) {
+		if (TextUtils.isEmpty(s1)) {
+			return s2;
+		}
+		return s1 + " > " + s2;
+	}
 }

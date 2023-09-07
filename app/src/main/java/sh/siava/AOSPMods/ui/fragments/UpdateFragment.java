@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods;
+package sh.siava.AOSPMods.ui.fragments;
 
 import static android.content.Context.RECEIVER_EXPORTED;
 
@@ -43,6 +43,9 @@ import javax.security.auth.callback.Callback;
 import br.tiagohm.markdownview.MarkdownView;
 import br.tiagohm.markdownview.css.InternalStyleSheet;
 import br.tiagohm.markdownview.css.styles.Github;
+import sh.siava.AOSPMods.BuildConfig;
+import sh.siava.AOSPMods.R;
+import sh.siava.AOSPMods.ui.activities.UpdateActivity;
 import sh.siava.AOSPMods.databinding.UpdateFragmentBinding;
 import sh.siava.AOSPMods.utils.AppUtils;
 import sh.siava.AOSPMods.utils.PreferenceHelper;
@@ -362,7 +365,7 @@ public class UpdateFragment extends Fragment {
 	public static class updateChecker extends Thread {
 		private final TaskDoneCallback mCallback;
 
-		updateChecker(TaskDoneCallback callback) {
+		public updateChecker(TaskDoneCallback callback) {
 			mCallback = callback;
 		}
 

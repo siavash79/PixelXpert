@@ -21,17 +21,48 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme.AOSPMods">
 		<activity
-			android:name=".ui.SplashScreenActivity"
-			android:exported="true"
-			android:label="@string/title_activity_settings" />
-		<activity
-			android:name=".HookedPackagesActivity"
+			android:name=".ui.activities.WikiActivity"
 			android:exported="false" />
 		<activity
-			android:name=".UpdateActivity"
+			android:name=".ui.activities.SplashScreenActivity"
+			android:exported="true"
+			android:label="@string/title_activity_settings" />
+
+		<activity-alias
+			android:name=".SplashScreenActivityAlternateIcon"
+			android:enabled="false"
+			android:exported="true"
+			android:icon="@mipmap/ic_launcher_themed"
+			android:label="@string/title_activity_settings"
+			android:targetActivity=".ui.activities.SplashScreenActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity-alias>
+		<activity-alias
+			android:name=".SplashScreenActivityNormalIcon"
+			android:enabled="true"
+			android:exported="true"
+			android:icon="@mipmap/ic_launcher"
+			android:label="@string/title_activity_settings"
+			android:targetActivity=".ui.activities.SplashScreenActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity-alias>
+
+		<activity
+			android:name=".ui.activities.HookedPackagesActivity"
+			android:exported="false" />
+		<activity
+			android:name=".ui.activities.UpdateActivity"
 			android:exported="true"
 			android:label="@string/title_activity_update"
-			android:parentActivityName=".SettingsActivity">
+			android:parentActivityName=".ui.activities.SettingsActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.RUN" />
 
@@ -39,35 +70,8 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".SettingsActivity"
+			android:name=".ui.activities.SettingsActivity"
 			android:exported="false" />
-
-		<activity-alias
-			android:name=".SplashScreenActivityNormalIcon"
-			android:enabled="true"
-			android:exported="true"
-			android:icon="@mipmap/ic_launcher"
-			android:label="@string/title_activity_settings"
-			android:targetActivity=".ui.SplashScreenActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity-alias>
-		<activity-alias
-			android:name=".SplashScreenActivityAlternateIcon"
-			android:enabled="false"
-			android:exported="true"
-			android:icon="@mipmap/ic_launcher_themed"
-			android:label="@string/title_activity_settings"
-			android:targetActivity=".ui.SplashScreenActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity-alias>
 
 		<service
 			android:name=".utils.VolumeTileService"
@@ -91,7 +95,7 @@
 		</service>
 		<service
 			android:name=".service.RootProviderProxy"
-			android:exported="true"/>
+			android:exported="true" />
 
 		<provider
 			android:name=".utils.RemotePrefProvider"

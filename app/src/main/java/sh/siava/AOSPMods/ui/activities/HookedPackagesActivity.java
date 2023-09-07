@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods;
+package sh.siava.AOSPMods.ui.activities;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -37,6 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import sh.siava.AOSPMods.IRootProviderService;
+import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.databinding.ActivityHookedPackagesBinding;
 import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.service.RootProvider;

@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="vibrateOnAnswered"
 		android:summaryOff="@string/general_off"
@@ -10,7 +10,7 @@
 		android:title="@string/vibrate_on_call_active_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="vibrateOnDrop"
 		android:summaryOff="@string/general_off"
@@ -18,7 +18,7 @@
 		android:title="@string/vibrate_on_call_drop_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="DialerRemoveRecordMessage"
 		android:summaryOff="@string/general_off"

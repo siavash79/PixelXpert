@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui;
+package sh.siava.AOSPMods.ui.preferences;
 
 import android.content.Context;
 import android.content.ContextWrapper;

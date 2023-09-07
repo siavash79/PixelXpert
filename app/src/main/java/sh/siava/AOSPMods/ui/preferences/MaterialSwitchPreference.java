@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui;
+package sh.siava.AOSPMods.ui.preferences;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,35 +7,36 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.preference.ListPreference;
 import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreferenceCompat;
 
 import sh.siava.AOSPMods.R;
 
-public class MaterialListPreference extends ListPreference {
+public class MaterialSwitchPreference extends SwitchPreferenceCompat {
 
-	public MaterialListPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+	public MaterialSwitchPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 		initResource();
 	}
 
-	public MaterialListPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+	public MaterialSwitchPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		initResource();
 	}
 
-	public MaterialListPreference(@NonNull Context context, @Nullable AttributeSet attrs) {
+	public MaterialSwitchPreference(@NonNull Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
 		initResource();
 	}
 
-	public MaterialListPreference(@NonNull Context context) {
+	public MaterialSwitchPreference(@NonNull Context context) {
 		super(context);
 		initResource();
 	}
 
 	private void initResource() {
-		setLayoutResource(R.layout.custom_preference_list);
+		setLayoutResource(R.layout.custom_preference_switch);
+		setWidgetLayoutResource(R.layout.custom_preference_material_switch);
 	}
 
 	@Override

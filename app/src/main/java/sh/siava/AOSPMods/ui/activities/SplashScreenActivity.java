@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui;
+package sh.siava.AOSPMods.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -20,9 +20,7 @@ import com.topjohnwu.superuser.ipc.RootService;
 
 import java.util.concurrent.CountDownLatch;
 
-import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
-import sh.siava.AOSPMods.SettingsActivity;
 import sh.siava.AOSPMods.databinding.ActivitySplashScreenBinding;
 import sh.siava.AOSPMods.service.RootProvider;
 

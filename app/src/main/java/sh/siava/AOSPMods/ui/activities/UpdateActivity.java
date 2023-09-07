@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods;
+package sh.siava.AOSPMods.ui.activities;
 
 import static sh.siava.AOSPMods.utils.AppUtils.installDoubleZip;
 
@@ -21,6 +21,7 @@ import androidx.preference.PreferenceManager;
 import java.util.Locale;
 import java.util.Objects;
 
+import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.databinding.ActivityUpdateBinding;
 import sh.siava.AOSPMods.modpacks.utils.ModuleFolderOperations;
 

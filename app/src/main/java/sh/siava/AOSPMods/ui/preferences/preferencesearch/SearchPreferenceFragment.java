@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.ui.preferencesearch;
+package sh.siava.AOSPMods.ui.preferences.preferencesearch;
 
 /*
  * https://github.com/ByteHamster/SearchPreference
@@ -52,7 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sh.siava.AOSPMods.R;
-import sh.siava.AOSPMods.SettingsActivity;
+import sh.siava.AOSPMods.ui.activities.SettingsActivity;
 
 public class SearchPreferenceFragment extends Fragment implements SearchPreferenceAdapter.SearchClickListener {
 	/**

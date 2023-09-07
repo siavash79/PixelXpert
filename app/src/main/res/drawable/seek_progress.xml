@@ -8,7 +8,7 @@
 			<shape android:shape="rectangle">
 				<size android:height="4.0dip" />
 				<corners android:radius="24.0dip" />
-				<solid android:color="?android:colorControlNormal" />
+				<solid android:color="?attr/colorControlNormal" />
 			</shape>
 		</clip>
 	</item>
@@ -20,7 +20,7 @@
 			<shape android:shape="rectangle">
 				<size android:height="4.0dip" />
 				<corners android:radius="24.0dip" />
-				<solid android:color="@color/ui_accent" />
+				<solid android:color="?attr/colorPrimary" />
 			</shape>
 		</clip>
 	</item>
@@ -32,7 +32,7 @@
 			<shape android:shape="rectangle">
 				<size android:height="4.0dip" />
 				<corners android:radius="24.0dip" />
-				<solid android:color="@color/ui_accent" />
+				<solid android:color="?attr/colorPrimary" />
 			</shape>
 		</clip>
 	</item>

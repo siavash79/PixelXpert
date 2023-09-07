@@ -4,13 +4,26 @@
 		android:id="@android:id/background"
 		android:height="4.0dip"
 		android:gravity="fill_horizontal|center">
-		<shape
-			android:shape="rectangle"
-			android:tint="@color/text_color_primary">
-			<corners android:radius="24.0dip" />
-			<size android:height="4.0dip" />
-			<solid android:color="#33000000" />
-		</shape>
+		<selector>
+			<item android:state_enabled="false">
+				<shape
+					android:shape="rectangle"
+					android:tint="?attr/colorControlNormal">
+					<corners android:radius="24.0dip" />
+					<size android:height="4.0dip" />
+					<solid android:color="#33000000" />
+				</shape>
+			</item>
+			<item android:state_enabled="true">
+				<shape
+					android:shape="rectangle"
+					android:tint="?attr/colorPrimaryInverse">
+					<corners android:radius="24.0dip" />
+					<size android:height="4.0dip" />
+					<solid android:color="#4D000000" />
+				</shape>
+			</item>
+		</selector>
 	</item>
 	<item
 		android:id="@android:id/secondaryProgress"
@@ -21,7 +34,7 @@
 				<item android:state_enabled="false">
 					<shape
 						android:shape="rectangle"
-						android:tint="@color/text_color_primary">
+						android:tint="?attr/colorControlNormal">
 						<corners android:radius="24.0dip" />
 						<size android:height="4.0dip" />
 						<solid android:color="#33000000" />
@@ -48,17 +61,19 @@
 				<item android:state_enabled="false">
 					<shape
 						android:shape="rectangle"
-						android:tint="@color/text_color_primary">
+						android:tint="?attr/colorControlNormal">
 						<corners android:radius="24.0dip" />
 						<size android:height="4.0dip" />
 						<solid android:color="#33000000" />
 					</shape>
 				</item>
 				<item android:state_enabled="true">
-					<shape android:shape="rectangle">
+					<shape
+						android:shape="rectangle"
+						android:tint="?attr/colorPrimary">
 						<corners android:radius="24.0dip" />
 						<size android:height="4.0dip" />
-						<solid android:color="@color/color_accent_0_95_overlay" />
+						<solid android:color="#F2000000" />
 					</shape>
 				</item>
 			</selector>

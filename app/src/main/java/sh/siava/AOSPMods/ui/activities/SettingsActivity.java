@@ -180,7 +180,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
 
 		NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, getString(R.string.notification_channel_update))
-				.setSmallIcon(R.drawable.ic_launcher_foreground)
+				.setSmallIcon(R.drawable.ic_notification_foreground)
 				.setContentTitle(getString(R.string.new_update_title))
 				.setContentText(getString(R.string.new_update_desc))
 				.setContentIntent(pendingIntent)

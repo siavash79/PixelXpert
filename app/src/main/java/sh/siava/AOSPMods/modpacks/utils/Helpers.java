@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import de.robv.android.xposed.XC_MethodHook;
+import sh.siava.AOSPMods.IRootProviderProxy;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 
 /** @noinspection unused*/
@@ -114,9 +115,9 @@ public class Helpers {
 		return Stream.concat(Arrays.stream(array1), Arrays.stream(array2)).distinct();
 	}
 
-	public static void getActiveOverlays() throws RemoteException {
+	public static void getActiveOverlays(IRootProviderProxy proxy) throws RemoteException {
 		List<String> result = new ArrayList<>();
-		String[] lines = XPLauncher.rootProxyIPC.runCommand("cmd overlay list --user 0");
+		String[] lines = proxy.runCommand("cmd overlay list --user 0");
 		for (String thisLine : lines) {
 			if (thisLine.startsWith("[x]")) {
 				result.add(thisLine.replace("[x] ", ""));
@@ -125,19 +126,24 @@ public class Helpers {
 		activeOverlays = result;
 	}
 
-	public static void setOverlay(String Key, boolean enabled, boolean refresh, boolean force) throws RemoteException {
-		if (refresh) {
-			try {
-				getActiveOverlays();
-			} catch (Throwable ignored) {}
-		}
-		setOverlay(Key, enabled, force);
+	public static void setOverlay(String Key, boolean enabled, boolean refresh, boolean force) {
+		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
+			@Override
+			public void run(IRootProviderProxy proxy) {
+				if (refresh) {
+					try {
+						getActiveOverlays(proxy);
+					} catch (Throwable ignored) {}
+				}
+				setOverlay(Key, enabled, force);
+			}
+		});
 	}
 
-	public static void setOverlay(String Key, boolean enabled, boolean force) throws RemoteException {
+	private static void setOverlay(String Key, boolean enabled, boolean force, IRootProviderProxy proxy) throws RemoteException {
 		if (XPLauncher.isChildProcess) return;
 
-		if (activeOverlays == null) getActiveOverlays(); //make sure we have a list in hand
+		if (activeOverlays == null) getActiveOverlays(proxy); //make sure we have a list in hand
 
 		String mode = (enabled) ? "enable" : "disable";
 		String packageName;
@@ -150,10 +156,7 @@ public class Helpers {
 //            exclusive = op.exclusive;
 		} else if (Key.endsWith("OverlayG")) //It's a group of overlays to work together as a team
 		{
-			try {
-				setOverlayGroup(Key, enabled, force);
-			} catch (Exception ignored) {
-			}
+			setOverlayGroup(Key, enabled, force, proxy);
 			return;
 		} else {
 			packageName = Key;
@@ -171,19 +174,29 @@ public class Helpers {
 		}
 
 		try {
-			XPLauncher.rootProxyIPC.runCommand("cmd overlay " + mode + " --user 0 " + packageName);
+			proxy.runCommand("cmd overlay " + mode + " --user 0 " + packageName);
 		} catch (Throwable t) {
 			log(t);
 		}
 	}
 
-	private static void setOverlayGroup(String key, boolean enabled, boolean force) {
+	public static void setOverlay(String Key, boolean enabled, boolean force) {
+		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
+			@Override
+			public void run(IRootProviderProxy proxy) throws RemoteException {
+				setOverlay(Key, enabled, force, proxy);
+			}
+		});
+
+	}
+
+	private static void setOverlayGroup(String key, boolean enabled, boolean force, IRootProviderProxy proxy) {
 		Overlays.overlayGroup thisGroup = (Overlays.overlayGroup) Overlays.Overlays.get(key);
 
 		//noinspection ConstantConditions
 		for (Overlays.overlayProp thisProp : thisGroup.members) {
 			try {
-				Helpers.setOverlay(thisProp.name, enabled, force);
+				Helpers.setOverlay(thisProp.name, enabled, force, proxy);
 			} catch (Throwable ignored) {}
 		}
 	}

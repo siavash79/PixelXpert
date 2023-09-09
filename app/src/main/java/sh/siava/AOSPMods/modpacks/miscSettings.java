@@ -12,6 +12,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.IRootProviderProxy;
 import sh.siava.AOSPMods.modpacks.utils.ModuleFolderOperations;
 import sh.siava.AOSPMods.modpacks.utils.StringFormatter;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -80,23 +81,27 @@ public class miscSettings extends XposedModPack {
 		float displayOverride = 1f;
 		try {
 			displayOverride = RangeSliderPreference.getValues(Xprefs, "displayOverride", 100f).get(0) / 100f;
-		} catch (Exception ignored) {
-		}
+		} catch (Exception ignored) {}
+		float finalDisplayOverride = displayOverride;
+		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable(){
+			@Override public void run(IRootProviderProxy proxy)
+			{
+				try {
+					String sizeResult = proxy.runCommand("wm size")[0];
 
-		try {
-			String sizeResult = XPLauncher.rootProxyIPC.runCommand("wm size")[0];
+					String[] physicalSizes = sizeResult.replace("Physical size: ", "").split("x");
+					int w = Integer.parseInt(physicalSizes[0]);
+					int h = Integer.parseInt(physicalSizes[1]);
 
-			String[] physicalSizes = sizeResult.replace("Physical size: ", "").split("x");
-			int w = Integer.parseInt(physicalSizes[0]);
-			int h = Integer.parseInt(physicalSizes[1]);
+					int overrideW = Math.round(w * finalDisplayOverride);
+					int overrideH = Math.round(h * finalDisplayOverride);
 
-			int overrideW = Math.round(w * displayOverride);
-			int overrideH = Math.round(h * displayOverride);
-
-			XPLauncher.rootProxyIPC.runCommand(String.format("wm size %sx%s", overrideW, overrideH));
-		} catch (RemoteException e) {
-			throw new RuntimeException(e);
-		}
+					proxy.runCommand(String.format("wm size %sx%s", overrideW, overrideH));
+				} catch (RemoteException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		});
 	}
 
 	private void setVolumeSteps() {
@@ -106,42 +111,52 @@ public class miscSettings extends XposedModPack {
 	}
 
 	private void updateWifiCell() {
-		boolean WifiCellEnabled = Xprefs.getBoolean("wifi_cell", false)
-				&& Xprefs.getBoolean("InternetTileModEnabled", true);
+		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
+			@Override
+			public void run(IRootProviderProxy proxy) {
+				boolean WifiCellEnabled = Xprefs.getBoolean("wifi_cell", false)
+						&& Xprefs.getBoolean("InternetTileModEnabled", true);
 
-		try {
-			String currentTiles = XPLauncher.rootProxyIPC.runCommand("settings get secure sysui_qs_tiles")[0];
+				try {
+					String currentTiles = proxy.runCommand("settings get secure sysui_qs_tiles")[0];
 
-			boolean providerModel;
+					boolean providerModel;
 
-			if (WifiCellEnabled) {
-				providerModel = false;
-				currentTiles = addItemToCommaStringIfNotPresent(currentTiles, "cell_AOSPMods");
-				currentTiles = addItemToCommaStringIfNotPresent(currentTiles, "wifi_AOSPMods");
+					if (WifiCellEnabled) {
+						providerModel = false;
+						currentTiles = addItemToCommaStringIfNotPresent(currentTiles, "cell_AOSPMods");
+						currentTiles = addItemToCommaStringIfNotPresent(currentTiles, "wifi_AOSPMods");
 
-				currentTiles = removeItemFromCommaString(currentTiles, "internet");
-			} else {
-				providerModel = true;
+						currentTiles = removeItemFromCommaString(currentTiles, "internet");
+					} else {
+						providerModel = true;
 
-				currentTiles = removeItemFromCommaString(currentTiles, "cell_AOSPMods");
-				currentTiles = removeItemFromCommaString(currentTiles, "wifi_AOSPMods");
+						currentTiles = removeItemFromCommaString(currentTiles, "cell_AOSPMods");
+						currentTiles = removeItemFromCommaString(currentTiles, "wifi_AOSPMods");
 
-				currentTiles = addItemToCommaStringIfNotPresent(currentTiles, "internet");
+						currentTiles = addItemToCommaStringIfNotPresent(currentTiles, "internet");
+					}
+
+					proxy.runCommand("settings put global settings_provider_model " + providerModel + "; settings put secure sysui_qs_tiles \"" + currentTiles + "\"");
+				} catch (Exception ignored) {
+				}
 			}
-
-			XPLauncher.rootProxyIPC.runCommand("settings put global settings_provider_model " + providerModel + "; settings put secure sysui_qs_tiles \"" + currentTiles + "\"");
-		} catch (Exception ignored) {
-		}
+		});
 	}
 
 	private void updateSysUITuner() {
-		try {
-			boolean SysUITunerEnabled = Xprefs.getBoolean("sysui_tuner", false);
-			String mode = (SysUITunerEnabled) ? "enable" : "disable";
+		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
+			@Override
+			public void run(IRootProviderProxy proxy) {
+				try {
+					boolean SysUITunerEnabled = Xprefs.getBoolean("sysui_tuner", false);
+					String mode = (SysUITunerEnabled) ? "enable" : "disable";
 
-			XPLauncher.rootProxyIPC.runCommand("pm " + mode + " com.android.systemui/.tuner.TunerActivity");
-		} catch (Exception ignored) {
-		}
+					proxy.runCommand("pm " + mode + " com.android.systemui/.tuner.TunerActivity");
+				} catch (Exception ignored) {
+				}
+			}
+		});
 	}
 
 	private void updateFontsInfrastructure() {

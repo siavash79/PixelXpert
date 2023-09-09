@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import sh.siava.AOSPMods.IRootProviderProxy;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
@@ -83,41 +84,47 @@ public class Overlays {
 	}
 
 	private void setAllInternal(boolean force) {
-		new Thread(() -> {
-			if (prefs == null) {
-				prefs = XPrefs.Xprefs;
-			}
+		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
+			@Override
+			public void run(IRootProviderProxy proxy) {
+				new Thread(() -> {
+					if (prefs == null) {
+						prefs = XPrefs.Xprefs;
+					}
 
-			if (prefs == null) return; // something not ready
+					if (prefs == null) return; // something not ready
 
-			try {
-				Helpers.getActiveOverlays(); //update the real active overlay list
-			} catch (Throwable ignored) {}
-
-			Map<String, ?> allPrefs = prefs.getAll();
-
-			for (String pref : allPrefs.keySet()) {
-				if (pref.endsWith("Overlay") && Overlays.containsKey(pref)) {
 					try {
-						Helpers.setOverlay(pref, prefs.getBoolean(pref, false), force);
+						Helpers.getActiveOverlays(proxy); //update the real active overlay list
 					} catch (Throwable ignored) {}
-				}
-				//overlay groups, like themes of select one
-				else if (pref.endsWith("OverlayEx") && Overlays.containsKey(pref)) {
-					String activeOverlay = prefs.getString(pref, "None");
 
-					overlayGroup thisGroup = (overlayGroup) Overlays.get(pref);
-					//noinspection ConstantConditions
-					for (overlayProp thisProp : thisGroup.members) {
-						if (!thisProp.name.equals("None")) {
+					Map<String, ?> allPrefs = prefs.getAll();
+
+					for (String pref : allPrefs.keySet()) {
+						if (pref.endsWith("Overlay") && Overlays.containsKey(pref)) {
 							try {
-								Helpers.setOverlay(thisProp.name, activeOverlay.equals(thisProp.name), force);
+								Helpers.setOverlay(pref, prefs.getBoolean(pref, false), force);
 							} catch (Throwable ignored) {}
 						}
+						//overlay groups, like themes of select one
+						else if (pref.endsWith("OverlayEx") && Overlays.containsKey(pref)) {
+							String activeOverlay = prefs.getString(pref, "None");
+
+							overlayGroup thisGroup = (overlayGroup) Overlays.get(pref);
+							//noinspection ConstantConditions
+							for (overlayProp thisProp : thisGroup.members) {
+								if (!thisProp.name.equals("None")) {
+									try {
+										Helpers.setOverlay(thisProp.name, activeOverlay.equals(thisProp.name), force);
+									} catch (Throwable ignored) {}
+								}
+							}
+						}
 					}
-				}
+				}).start();
+
 			}
-		}).start();
+		});
 	}
 
 	class overlayStartupThread extends Thread {

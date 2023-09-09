@@ -5,8 +5,8 @@ import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static sh.siava.AOSPMods.BuildConfig.APPLICATION_ID;
-import static sh.siava.AOSPMods.modpacks.utils.BootLoopProtector.isBootLooped;
 import static sh.siava.AOSPMods.modpacks.Constants.SYSTEM_UI_PACKAGE;
+import static sh.siava.AOSPMods.modpacks.utils.BootLoopProtector.isBootLooped;
 
 import android.app.Instrumentation;
 import android.content.ComponentName;
@@ -15,31 +15,35 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.RemoteException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Objects;
+import java.util.Queue;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.IRootProviderProxy;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
-public class XPLauncher {
+public class XPLauncher implements ServiceConnection {
 
 	public static boolean isChildProcess = false;
 	public static String processName = "";
 
 	public static ArrayList<XposedModPack> runningMods = new ArrayList<>();
 	public Context mContext = null;
+	XPLauncher instance;
 
-	public static IRootProviderProxy rootProxyIPC;
+	private static IRootProviderProxy rootProxyIPC;
+	private static final Queue<ProxyRunnable> proxyQueue = new LinkedList<>();
 	/** @noinspection FieldCanBeLocal*/
-	private ServiceConnection mRootProxyConnection;
-
 	public XPLauncher() {
+		instance = this;
 	}
 
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
@@ -78,7 +82,7 @@ public class XPLauncher {
 
 					if(Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(mContext.getPackageName()))
 					{
-						forceConnectRootService();
+						connectRootService();
 					}
 
 					if(isBootLooped(mContext.getPackageName()))
@@ -111,35 +115,68 @@ public class XPLauncher {
 	}
 	private void connectRootService()
 	{
-		// Start RootService connection
-		Intent intent = new Intent();
-		mRootProxyConnection = new ServiceConnection() {
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			rootProxyIPC = IRootProviderProxy.Stub.asInterface(service);
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-			rootProxyIPC = null;
-
-			forceConnectRootService();
-		}
-	};
-		intent.setComponent(new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".service.RootProviderProxy"));
-
-		mContext.bindService(intent, mRootProxyConnection, Context.BIND_AUTO_CREATE);
-	}
-
-	private void forceConnectRootService() {
 		new Thread(() -> {
-			while (rootProxyIPC == null) {
-				connectRootService();
+			// Start RootService connection
+			Intent intent = new Intent();
+			intent.setComponent(new ComponentName(APPLICATION_ID, APPLICATION_ID + ".service.RootProviderProxy"));
+
+			if(!mContext.bindService(intent, instance, Context.BIND_AUTO_CREATE))
+			{
 				try {
-					Thread.sleep(1000);
-				} catch (Throwable ignored) {}
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+				connectRootService();
 			}
 		}).start();
 	}
 
+	@Override
+	public void onServiceConnected(ComponentName name, IBinder service) {
+		rootProxyIPC = IRootProviderProxy.Stub.asInterface(service);
+		synchronized (proxyQueue)
+		{
+			while(!proxyQueue.isEmpty())
+			{
+				try
+				{
+					Objects.requireNonNull(proxyQueue.poll()).run();
+				}
+				catch (Throwable ignored){}
+			}
+		}
+	}
+
+	@Override
+	public void onServiceDisconnected(ComponentName name) {
+		rootProxyIPC = null;
+
+		connectRootService();
+	}
+
+	public static void enqueueProxyCommand(ProxyRunnable runnable)
+	{
+		if(rootProxyIPC != null)
+		{
+			runnable.run();
+		}
+		else
+		{
+			proxyQueue.add(runnable);
+		}
+	}
+
+	public abstract static class ProxyRunnable implements Runnable
+	{
+		public abstract void run(IRootProviderProxy proxy) throws RemoteException;
+
+		@Override
+		public void run()
+		{
+			try {
+				run(rootProxyIPC);
+			} catch (Throwable ignored) {}
+		}
+	}
 }

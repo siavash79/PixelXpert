@@ -1,7 +1,10 @@
 package sh.siava.AOSPMods.modpacks.utils;
 
+import android.os.RemoteException;
+
 import com.topjohnwu.superuser.Shell;
 
+import sh.siava.AOSPMods.IRootProviderProxy;
 import sh.siava.AOSPMods.modpacks.XPLauncher;
 
 public class ModuleFolderOperations {
@@ -38,7 +41,12 @@ public class ModuleFolderOperations {
 			}
 			else
 			{
-				XPLauncher.rootProxyIPC.runCommand(command);
+				XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
+					@Override
+					public void run(IRootProviderProxy proxy) throws RemoteException {
+						proxy.runCommand(command);
+					}
+				});
 			}
 		}
 		catch (Throwable ignored){}

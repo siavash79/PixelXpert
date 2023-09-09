@@ -34,6 +34,7 @@ import java.lang.reflect.Method;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.IRootProviderProxy;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.Constants;
 import sh.siava.AOSPMods.modpacks.ResourceManager;
@@ -577,10 +578,14 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	private void launchTVRemote() {
-		try {
-			XPLauncher.rootProxyIPC.runCommand("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity"); //enabling it if disabled, and start remote activity on older versions
-			XPLauncher.rootProxyIPC.runCommand("am start -a com.google.android.apps.googletv.ACTION_VIRTUAL_REMOTE"); //start activity on the updated TV app
-		} catch (Throwable ignored) {}
+		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
+			public void run(IRootProviderProxy proxy) {
+				try {
+					proxy.runCommand("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity"); //enabling it if disabled, and start remote activity on older versions
+					proxy.runCommand("am start -a com.google.android.apps.googletv.ACTION_VIRTUAL_REMOTE"); //start activity on the updated TV app
+				} catch (Throwable ignored) {}
+			}
+		});
 	}
 
 	private void launchCamera() {

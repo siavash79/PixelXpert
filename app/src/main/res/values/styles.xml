@@ -83,4 +83,10 @@
 		<item name="cornerSize">@dimen/ui_container_radius</item>
 	</style>
 
+	<style name="MaterialComponents.MaterialAlertDialog" parent="MaterialAlertDialog.Material3">
+		<item name="android:background">@drawable/container</item>
+		<item name="android:dialogCornerRadius">@dimen/ui_container_radius</item>
+		<item name="android:backgroundDimAmount">0.6</item>
+	</style>
+
 </resources>

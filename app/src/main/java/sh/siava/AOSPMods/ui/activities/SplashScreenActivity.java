@@ -1,7 +1,6 @@
 package sh.siava.AOSPMods.ui.activities;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -14,6 +13,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ipc.RootService;
@@ -38,6 +38,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 	private final CountDownLatch mRootServiceConnected = new CountDownLatch(1);
 	private boolean mCoreRootServiceBound = false;
 	private ServiceConnection mCoreRootServiceConnection;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -78,7 +79,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 				mRootCheckPassed.countDown();
 			} else {
 				runOnUiThread(() ->
-						new AlertDialog.Builder(SplashScreenActivity.this)
+						new MaterialAlertDialogBuilder(SplashScreenActivity.this, R.style.MaterialComponents_MaterialAlertDialog)
 								.setCancelable(false)
 								.setMessage(getText(R.string.root_access_denied))
 								.setPositiveButton(getText(R.string.exit), (dialog, i) -> System.exit(0))

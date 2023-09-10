@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods;
+package sh.siava.AOSPMods.utils;
 
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
@@ -13,6 +13,7 @@ import androidx.work.WorkManager;
 
 import java.util.concurrent.TimeUnit;
 
+import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.utils.UpdateWorker;
 
 public class UpdateScheduler {

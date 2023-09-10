@@ -4,7 +4,6 @@ import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.ComponentName;
@@ -36,10 +35,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.topjohnwu.superuser.Shell;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -50,7 +47,7 @@ import java.util.regex.Pattern;
 
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
-import sh.siava.AOSPMods.UpdateScheduler;
+import sh.siava.AOSPMods.utils.UpdateScheduler;
 import sh.siava.AOSPMods.ui.preferences.preferencesearch.SearchConfiguration;
 import sh.siava.AOSPMods.ui.preferences.preferencesearch.SearchPreference;
 import sh.siava.AOSPMods.ui.preferences.preferencesearch.SearchPreferenceResult;

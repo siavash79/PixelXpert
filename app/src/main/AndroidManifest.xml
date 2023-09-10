@@ -99,7 +99,7 @@
 			android:exported="true" />
 
 		<receiver
-			android:name=".BootReceiver"
+			android:name=".utils.BootReceiver"
 			android:enabled="true"
 			android:exported="true">
 			<intent-filter>

@@ -1,9 +1,11 @@
-package sh.siava.AOSPMods;
+package sh.siava.AOSPMods.utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
+import sh.siava.AOSPMods.BuildConfig;
 
 public class BootReceiver extends BroadcastReceiver {
 	@Override

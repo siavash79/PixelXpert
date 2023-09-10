@@ -70,6 +70,9 @@ dependencies {
 	implementation 'androidx.compose.ui:ui-geometry:1.5.0'
 	//noinspection KtxExtensionAvailable
 	implementation 'androidx.activity:activity:1.8.0-alpha07'
+	implementation 'androidx.work:work-runtime:2.8.1'
+	implementation "androidx.concurrent:concurrent-futures:1.1.0"
+
 
 	// The core module that provides APIs to a shell
 	implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"

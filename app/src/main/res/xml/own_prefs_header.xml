@@ -43,6 +43,14 @@
 			android:title="@string/auto_update_title"
 			app:defaultValue="true" />
 
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:icon="@drawable/ic_update_over_wifi"
+			android:key="UpdateWifiOnly"
+			android:summary="@string/update_over_wifi_summary"
+			android:title="@string/update_over_wifi_title"
+			app:defaultValue="true" />
+
 	</sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory>
 
 	<sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory

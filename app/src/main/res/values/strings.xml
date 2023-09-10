@@ -30,6 +30,8 @@
 	<string name="settings_check_for_update_title">Check For Update</string>
 	<string name="auto_update_title">Auto Update</string>
 	<string name="auto_update_summary">Check for new versions when opening the app.</string>
+	<string name="update_over_wifi_title">Update Over WiFi Only</string>
+	<string name="update_over_wifi_summary">Check for updates in background only when connected to wifi.</string>
 	<string name="github_repo_title">GitHub Repository</string>
 	<string name="github_repo_summary" translatable="false">siavash79/AOSPMods</string>
 	<string name="telegram_group_title">Telegram Group</string>

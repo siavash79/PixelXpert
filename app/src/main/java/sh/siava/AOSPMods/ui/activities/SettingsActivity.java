@@ -36,6 +36,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.topjohnwu.superuser.Shell;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -308,7 +312,11 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
 				if (!Pattern.matches("^[T|U][A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
 				{
-					new AlertDialog.Builder(getContext()).setTitle(R.string.incompatible_alert_title).setMessage(R.string.incompatible_alert_body).setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss()).show();
+					new MaterialAlertDialogBuilder(getContext(), R.style.MaterialComponents_MaterialAlertDialog)
+							.setTitle(R.string.incompatible_alert_title)
+							.setMessage(R.string.incompatible_alert_body)
+							.setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss())
+							.show();
 				}
 			} catch (Throwable ignored) {
 			}
@@ -839,7 +847,12 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 					try {
 						boolean AlternativeThemedAppIconEnabled = mPreferences.getBoolean("AlternativeThemedAppIcon", false);
 
-						new AlertDialog.Builder(getContext()).setTitle(R.string.app_kill_alert_title).setMessage(R.string.app_kill_alert_body).setPositiveButton(R.string.app_kill_ok_btn, (dialog, which) -> setAlternativeAppIcon(AlternativeThemedAppIconEnabled)).setCancelable(false).show();
+						new MaterialAlertDialogBuilder(getContext(), R.style.MaterialComponents_MaterialAlertDialog)
+								.setTitle(R.string.app_kill_alert_title)
+								.setMessage(R.string.app_kill_alert_body)
+								.setPositiveButton(R.string.app_kill_ok_btn, (dialog, which) -> setAlternativeAppIcon(AlternativeThemedAppIconEnabled))
+								.setCancelable(false)
+								.show();
 					} catch (Exception ignored) {
 					}
 					break;

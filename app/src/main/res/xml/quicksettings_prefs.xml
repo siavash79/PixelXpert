@@ -4,189 +4,216 @@
 	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch"
 	android:visibility="visible">
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+	<sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory
 		android:title="@string/quick_settings_tiles_category"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
-		<sh.siava.AOSPMods.ui.MaterialListPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialListPreference
 			android:defaultValue="None"
 			android:entries="@array/QSTilesThemesOverlayEx_names"
 			android:entryValues="@array/QSTilesThemesOverlayEx"
 			android:key="QSTilesThemesOverlayEx"
 			android:summary="%s"
-			android:title="@string/qs_tile_style_title" />
+			android:title="@string/qs_tile_style_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="QSHapticEnabled"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/vibration_type_touch"
-			android:title="@string/qs_haptic_switch_title" />
+			android:title="@string/qs_haptic_switch_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSeekbarPreference
 			android:defaultValue="50"
 			android:key="UnMuteVolumePCT"
 			android:title="@string/qs_volume_unmute_title"
+			app:iconSpaceReserved="false"
 			app:updatesContinuously="true" />
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="leveledFlashTile"
 			android:summary="@string/qs_leveled_flashlight_summary"
-			android:title="@string/qs_leveled_flashlight_title" />
+			android:title="@string/qs_leveled_flashlight_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="isFlashLevelGlobal"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/qs_flashlight_level_global_title" />
+			android:title="@string/qs_flashlight_level_global_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="QRTileInactiveColor"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/qs_qr_tile_inactive_title" />
+			android:title="@string/qs_qr_tile_inactive_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="VerticalQSTile"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/qs_tile_vertical_title" />
+			android:title="@string/qs_tile_vertical_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="wifi_cell"
 			android:summaryOff="@string/wifi_cell_off"
 			android:summaryOn="@string/wifi_cell_on"
-			android:title="@string/wifi_cell_title" />
+			android:title="@string/wifi_cell_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialPreference
 			android:key="qs_tile_qty"
 			android:title="@string/qs_tile_qty_title"
-			app:fragment="sh.siava.AOSPMods.SettingsActivity$QSTileQtyFragment" />
+			app:fragment="sh.siava.AOSPMods.ui.activities.SettingsActivity$QSTileQtyFragment"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialRangeSliderPreference
 			android:key="QSLabelScaleFactor"
 			android:title="@string/qs_tile_label_size"
 			app:defaultValue="0"
+			app:iconSpaceReserved="false"
 			app:maxVal="50"
 			app:minVal="-50"
 			app:tickInterval="5"
 			app:updatesContinuously="true" />
 
-		<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialRangeSliderPreference
 			android:key="QSSecondaryLabelScaleFactor"
 			android:title="@string/qs_tile_secondary_label_size"
 			app:defaultValue="0"
+			app:iconSpaceReserved="false"
 			app:maxVal="50"
 			app:minVal="-50"
 			app:tickInterval="5"
 			app:updatesContinuously="true" />
 
-	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	</sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory>
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+	<sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory
 		android:summary="@string/qs_footer_text_desc"
 		android:title="@string/qs_mod_category_title"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="QSFooterMod"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/qs_footer_mod_title" />
+			android:title="@string/qs_footer_mod_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialEditTextPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialEditTextPreference
 			android:dialogLayout="@layout/string_formatter_manual"
 			android:key="QSFooterText"
 			android:selectAllOnFocus="true"
 			android:singleLine="true"
 			android:summary="@string/qs_footer_text_summary"
-			android:title="@string/qs_footer_text_value" />
+			android:title="@string/qs_footer_text_value"
+			app:iconSpaceReserved="false" />
 
-	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	</sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory>
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+	<sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory
 		android:title="@string/QQS_brightness_category"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="QSBrightnessDisabled"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/QS_brightness_disable_title" />
+			android:title="@string/QS_brightness_disable_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="QQSBrightnessEnabled"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/QQS_brightness_title" />
+			android:title="@string/QQS_brightness_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="BrightnessSlierOnBottom"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/QQS_brightness_bottom_title" />
+			android:title="@string/QQS_brightness_bottom_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="BSThickTrackOverlay"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/bs_thick_track" />
+			android:title="@string/bs_thick_track"
+			app:iconSpaceReserved="false" />
 
-	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	</sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory>
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+	<sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory
 		android:title="@string/qs_pulldown_category"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="QSPullodwnEnabled"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/qs_pulldown_switch_title" />
+			android:title="@string/qs_pulldown_switch_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSeekbarPreference
 			android:defaultValue="25"
 			android:key="QSPulldownPercent"
 			android:title="@string/qs_pulldown_size"
+			app:iconSpaceReserved="false"
 			app:updatesContinuously="true" />
 
-		<sh.siava.AOSPMods.ui.MaterialListPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialListPreference
 			android:defaultValue="1"
 			android:entries="@array/qs_pulldown_side_names"
 			android:entryValues="@array/qs_pulldown_side_left"
 			android:key="QSPulldownSide"
 			android:summary="%s"
-			android:title="@string/qs_pulldown_side_title" />
+			android:title="@string/qs_pulldown_side_title"
+			app:iconSpaceReserved="false" />
 
-	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	</sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory>
 
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+	<sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory
 		android:title="@string/ntsb_category_title"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="networkOnQSEnabled"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/ntsb_enabled_title" />
+			android:title="@string/ntsb_enabled_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialPreference
+		<sh.siava.AOSPMods.ui.preferences.MaterialPreference
 			android:key="network_settings_header_qs"
 			android:title="@string/network_settings_pref"
-			app:fragment="sh.siava.AOSPMods.SettingsActivity$NetworkFragment" />
+			app:fragment="sh.siava.AOSPMods.ui.activities.SettingsActivity$NetworkFragment"
+			app:iconSpaceReserved="false" />
 
-	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	</sh.siava.AOSPMods.ui.preferences.MaterialPreferenceCategory>
 </PreferenceScreen>

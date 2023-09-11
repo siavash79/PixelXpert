@@ -15,8 +15,10 @@ import androidx.preference.SeekBarPreference;
 
 import com.topjohnwu.superuser.Shell;
 
+import java.util.Arrays;
 import java.util.List;
 
+import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
@@ -267,6 +269,9 @@ public class PreferenceHelper {
 			case "nav_pill_cat":
 			case "nav_keyboard_height_cat":
 				return !instance.mPreferences.getBoolean("HideNavbarOverlay", false);
+
+			case "UpdateWifiOnly":
+				return instance.mPreferences.getBoolean("AutoUpdate", true);
 		}
 		return true;
 	}
@@ -465,6 +470,17 @@ public class PreferenceHelper {
 				} catch (Exception ignored) {
 				}
 				return swipeUpPercentage + "%";
+
+			case "appLanguage":
+				int current_language_code = Arrays.asList(fragmentCompat.getResources().getStringArray(R.array.languages_values)).indexOf(instance.mPreferences.getString("appLanguage", fragmentCompat.getResources().getConfiguration().getLocales().get(0).getLanguage()));
+				int selected_language_code = current_language_code < 0 ? Arrays.asList(fragmentCompat.getResources().getStringArray(R.array.languages_values)).indexOf("en") : current_language_code;
+				return Arrays.asList(fragmentCompat.getResources().getStringArray(R.array.languages_names)).get(selected_language_code);
+
+			case "CheckForUpdate":
+				return fragmentCompat.getString(R.string.current_version, BuildConfig.VERSION_NAME);
+
+
+
 		}
 		return null;
 	}

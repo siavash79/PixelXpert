@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="sh.siava.AOSPMods.UpdateFragment"
+        android:name="sh.siava.AOSPMods.ui.fragments.UpdateFragment"
         android:label="@string/update_fragment_label"
         tools:layout="@layout/update_fragment" />
 </navigation>

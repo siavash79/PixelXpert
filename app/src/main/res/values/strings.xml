@@ -1,7 +1,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_name" translatable="false">AOSP Mods</string>
-	<string name="app_themed_icon_title">Enable alternative AOSP Mods themed app icon</string>
+	<string name="app_themed_icon_title">Alternative Themed Icon</string>
 	<string name="xposed_desc">Custom features for Android 12+ AOSP based ROMs</string>
 	<string name="title_activity_settings" translatable="false">@string/app_name</string>
 	<string name="volume_tile_title">Media Volume</string>
@@ -17,17 +17,38 @@
 	<string name="restart_needed">Requires a reboot to apply</string>
 	<string name="more_area">more area</string>
 	<string name="less_area">less area</string>
+	<string name="current_version">Current version: %s</string>
+	<string name="notification_channel_update">Updates</string>
+	<string name="notification_channel_update_desc">This channel shows notification about the latest updates.</string>
+	<string name="new_update_title">Update available</string>
+	<string name="new_update_desc">A new version of AOSPMods is available</string>
+	<string name="browser_not_found">Browser not found</string>
+	<string name="settings_general_section_title">General</string>
+	<string name="settings_update_section_title">Update</string>
+	<string name="settings_misc_section_title">Misc</string>
+	<string name="settings_about_section_title">About</string>
+	<string name="settings_check_for_update_title">Check for updates</string>
+	<string name="auto_update_title">Automatically check for updates</string>
+	<string name="auto_update_summary">Check for new versions once in a while</string>
+	<string name="update_over_wifi_title">Check updates over WiFi only</string>
+	<string name="update_over_wifi_summary">Check for updates in background only when connected to wifi</string>
+	<string name="github_repo_title">GitHub repository</string>
+	<string name="github_repo_summary" translatable="false">siavash79/AOSPMods</string>
+	<string name="telegram_group_title">Telegram group</string>
+	<string name="telegram_group_summary" translatable="false">\@AOSPMods_Support</string>
+	<string name="usage_title">Usage</string>
+	<string name="usage_summary">Open wiki page</string>
 
 	<!--Category titles-->
-	<string name="lockscreen_header_title">Lock Screen</string>
-	<string name="statusbar_header">Status Bar</string>
+	<string name="lockscreen_header_title">Lock screen</string>
+	<string name="statusbar_header">Status bar</string>
 	<string name="nav_header">Navigation bar</string>
-	<string name="dialer_header">Phone &amp; Dialer</string>
+	<string name="dialer_header">Phone &amp; dialer</string>
 	<string name="misc_header">Miscellaneous</string>
-	<string name="qs_panel_category_title">Quick Settings Panel</string>
+	<string name="qs_panel_category_title">Quick settings panel</string>
 	<string name="theme_customization_category">Theming</string>
-	<string name="pm_header">Package Manager</string>
-	<string name="hotspot_header">Portable Hotspot</string>
+	<string name="pm_header">Package manager</string>
+	<string name="hotspot_header">Portable hotspot</string>
 
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Hide SSID</string>
@@ -416,7 +437,7 @@
 	<string name="menu_restart_system">Restart system</string>
 	<string name="menu_soft_restart">Soft reboot</string>
 	<string name="menu_restartSysUI">Restart SystemUI</string>
-	<string name="menu_updates">Updates…</string>
+	<string name="menu_updates">Updates</string>
 
 	<string name="nestat_caution_title">Caution!</string>
 	<string name="nestat_caution_text">Your network stats will reset permanently. Proceed?</string>
@@ -455,7 +476,7 @@
 
 	<string name="title_activity_update" translatable="false">updateActivity</string>
 
-	<string name="own_prefs_header">AOSPMods settings</string>
+	<string name="own_prefs_header">Settings</string>
 	<string name="language_title">Language</string>
 	<string name="camera_manager_master_title">Enable flashlight mods (Disable this if your phone doesn\'t support them)</string>
 	<string name="toggle_dark_apply">(Toggle dark theme to apply)</string>

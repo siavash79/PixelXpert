@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="vibrateOnAnswered"
-		android:title="@string/vibrate_on_call_active_title"
+		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/vibration_type_notification"
-		android:summaryOff="@string/general_off" />
+		android:title="@string/vibrate_on_call_active_title"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="vibrateOnDrop"
-		android:title="@string/vibrate_on_call_drop_title"
+		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/vibration_type_notification"
-		android:summaryOff="@string/general_off" />
+		android:title="@string/vibrate_on_call_drop_title"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="DialerRemoveRecordMessage"
-		android:title="@string/dialer_mute_record_message_title"
+		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/dialer_mute_record_message_summary"
-		android:summaryOff="@string/general_off" />
+		android:title="@string/dialer_mute_record_message_title"
+		app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

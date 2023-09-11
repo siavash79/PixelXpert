@@ -79,6 +79,10 @@ The module is also released in 2 flavors with different download and update proc
 *No matter which flavor you're on, you can always switch to the other one with in-app updater
 <hr>
 
+### **Donations:**
+This project is open source and free for usage, build or copy. However, if you really feel like it, you can donate to your favorite charity on our behalf, or help funding education for children in need, at [Child Foundation](https://mycf.childfoundation.org/s/donate)
+<hr>
+
 ### **Credits / Thanks:**
 - Android Team
 - @topjohnwu for Magisk

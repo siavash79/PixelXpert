@@ -1,3 +1,9 @@
+**canary-284**  
+- App: AOSPMods settings redesigned  
+- Added option to automatically check for updates  
+- Fixed wrong app name shown after update  
+- App menu revised  
+  
 **canary-283**  
 - Fixed wifi SSID not updating on wifi change  
 - Fixed lockscreen clock area text random disappearance  

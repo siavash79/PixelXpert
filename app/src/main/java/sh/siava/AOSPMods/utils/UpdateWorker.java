@@ -37,26 +37,21 @@ public class UpdateWorker extends ListenableWorker {
 	public ListenableFuture<Result> startWork() {
 		SharedPreferences prefs = getDefaultSharedPreferences(mContext.createDeviceProtectedStorageContext());
 
-		boolean success;
 		boolean UpdateWifiOnly = prefs.getBoolean("UpdateWifiOnly", true);
-		if(UpdateWifiOnly)
-		{
-			ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-			NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+		ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
 
-			success = capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED) && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
-		}
-		else
-		{
-			success = true;
-		}
+		boolean isGoodNetwork =
+				capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+						&& !UpdateWifiOnly
+						|| capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED);
 
-		if(success)
+		if(isGoodNetwork)
 			checkForUpdates();
 
 		return CallbackToFutureAdapter.getFuture(completer -> {
-			completer.set(success ? Result.success() : Result.retry());
+			completer.set(isGoodNetwork ? Result.success() : Result.retry());
 			return completer;
 		});
 	}
@@ -99,7 +94,6 @@ public class UpdateWorker extends ListenableWorker {
 			if (latestVersionCode != null && latestVersionCode > currentVersionCode) {
 				showUpdateNotification();
 			}
-//			Log.i("AOSPMods", "Latest version: " + latestVersionCode + " Current version: " + currentVersionCode);
 		} catch (Exception e) {
 			Log.e("AOSPMods", "Error while checking for updates", e);
 		}

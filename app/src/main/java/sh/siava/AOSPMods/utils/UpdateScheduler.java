@@ -14,7 +14,6 @@ import androidx.work.WorkManager;
 import java.util.concurrent.TimeUnit;
 
 import sh.siava.AOSPMods.BuildConfig;
-import sh.siava.AOSPMods.utils.UpdateWorker;
 
 public class UpdateScheduler {
 	private static final String UPDATE_WORK_NAME = BuildConfig.APPLICATION_ID + ".UpdateSchedule";
@@ -36,7 +35,7 @@ public class UpdateScheduler {
 
 			workManager.enqueueUniquePeriodicWork(
 					UPDATE_WORK_NAME,
-					ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE,
+					ExistingPeriodicWorkPolicy.UPDATE,
 					builder.build());
 		}
 		else

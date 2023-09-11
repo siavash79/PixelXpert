@@ -21,34 +21,34 @@
 	<string name="notification_channel_update">Updates</string>
 	<string name="notification_channel_update_desc">This channel shows notification about the latest updates.</string>
 	<string name="new_update_title">Update available</string>
-	<string name="new_update_desc">A new version of AOSPMods is available.</string>
+	<string name="new_update_desc">A new version of AOSPMods is available</string>
 	<string name="browser_not_found">Browser not found</string>
 	<string name="settings_general_section_title">General</string>
 	<string name="settings_update_section_title">Update</string>
 	<string name="settings_misc_section_title">Misc</string>
 	<string name="settings_about_section_title">About</string>
-	<string name="settings_check_for_update_title">Check For Update</string>
-	<string name="auto_update_title">Auto Update</string>
-	<string name="auto_update_summary">Check for new versions when opening the app.</string>
-	<string name="update_over_wifi_title">Update Over WiFi Only</string>
-	<string name="update_over_wifi_summary">Check for updates in background only when connected to wifi.</string>
-	<string name="github_repo_title">GitHub Repository</string>
+	<string name="settings_check_for_update_title">Check for updates</string>
+	<string name="auto_update_title">Automatically check for updates</string>
+	<string name="auto_update_summary">Check for new versions once in a while</string>
+	<string name="update_over_wifi_title">Check updates over WiFi only</string>
+	<string name="update_over_wifi_summary">Check for updates in background only when connected to wifi</string>
+	<string name="github_repo_title">GitHub repository</string>
 	<string name="github_repo_summary" translatable="false">siavash79/AOSPMods</string>
-	<string name="telegram_group_title">Telegram Group</string>
+	<string name="telegram_group_title">Telegram group</string>
 	<string name="telegram_group_summary" translatable="false">\@AOSPMods_Support</string>
 	<string name="usage_title">Usage</string>
 	<string name="usage_summary">Open wiki page</string>
 
 	<!--Category titles-->
-	<string name="lockscreen_header_title">Lock Screen</string>
-	<string name="statusbar_header">Status Bar</string>
+	<string name="lockscreen_header_title">Lock screen</string>
+	<string name="statusbar_header">Status bar</string>
 	<string name="nav_header">Navigation bar</string>
-	<string name="dialer_header">Phone &amp; Dialer</string>
+	<string name="dialer_header">Phone &amp; dialer</string>
 	<string name="misc_header">Miscellaneous</string>
-	<string name="qs_panel_category_title">Quick Settings Panel</string>
+	<string name="qs_panel_category_title">Quick settings panel</string>
 	<string name="theme_customization_category">Theming</string>
-	<string name="pm_header">Package Manager</string>
-	<string name="hotspot_header">Portable Hotspot</string>
+	<string name="pm_header">Package manager</string>
+	<string name="hotspot_header">Portable hotspot</string>
 
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Hide SSID</string>

@@ -269,6 +269,9 @@ public class PreferenceHelper {
 			case "nav_pill_cat":
 			case "nav_keyboard_height_cat":
 				return !instance.mPreferences.getBoolean("HideNavbarOverlay", false);
+
+			case "UpdateWifiOnly":
+				return instance.mPreferences.getBoolean("AutoUpdate", true);
 		}
 		return true;
 	}

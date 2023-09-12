@@ -423,7 +423,7 @@
 	<!-- App kill Alert -->
 	<string name="app_kill_alert_title">Notice</string>
 	<string name="app_kill_alert_body">App will close now. You can open it again by tapping on the new icon</string>
-	<string name="app_kill_ok_btn">Fine</string>
+	<string name="app_kill_ok_btn">OK</string>
 
 	<!-- Menu Items -->
 	<string name="menu_settings_title">Import/Export</string>

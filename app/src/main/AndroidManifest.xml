@@ -75,7 +75,7 @@
 			android:exported="false" />
 
 		<service
-			android:name=".utils.VolumeTileService"
+			android:name=".service.tileServices.VolumeTileService"
 			android:exported="true"
 			android:icon="@drawable/ic_volume"
 			android:label="@string/volume_tile_title"
@@ -85,7 +85,7 @@
 			</intent-filter>
 		</service>
 		<service
-			android:name=".utils.AppProfileSwitchService"
+			android:name=".service.tileServices.AppProfileSwitchTileService"
 			android:exported="true"
 			android:icon="@drawable/ic_app_switch"
 			android:label="@string/app_switch_tile_title"

@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.utils;
+package sh.siava.AOSPMods.service.tileServices;
 
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;

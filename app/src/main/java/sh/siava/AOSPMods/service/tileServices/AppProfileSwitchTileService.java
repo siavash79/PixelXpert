@@ -1,4 +1,4 @@
-package sh.siava.AOSPMods.utils;
+package sh.siava.AOSPMods.service.tileServices;
 
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.service.quicksettings.TileService;
 
 import sh.siava.AOSPMods.modpacks.Constants;
 
-public class AppProfileSwitchService extends TileService{
+public class AppProfileSwitchTileService extends TileService{
 	Intent broadcast = new Intent()
 			.setAction(Constants.ACTION_SWITCH_APP_PROFILE)
 			.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);

@@ -59,7 +59,7 @@ import sh.siava.AOSPMods.modpacks.utils.SystemUtils.ChangeListener;
 @SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 public class VolumeTile extends XposedModPack {
 	public static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
-	private static final String TARGET_SPEC = "custom(sh.siava.AOSPMods/.utils.VolumeTileService)";
+	private static final String TARGET_SPEC = "custom(sh.siava.AOSPMods/.service.tileServices.VolumeTileService)";
 
 	private int currentPct = 50;
 	private static int unMuteVolumePCT = 50;

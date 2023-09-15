@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.work.BackoffPolicy;
+import androidx.work.Configuration;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -23,7 +24,13 @@ public class UpdateScheduler {
 		if(BuildConfig.DEBUG)
 			Log.d("Update Scheduler", "Updating update schedule...");
 
+		if(!WorkManager.isInitialized())
+		{
+			WorkManager.initialize(context, new Configuration.Builder().build());
+		}
+
 		WorkManager workManager = WorkManager.getInstance(context);
+
 		SharedPreferences prefs = getDefaultSharedPreferences(context.createDeviceProtectedStorageContext());
 
 		boolean autoUpdate = prefs.getBoolean("AutoUpdate", true);

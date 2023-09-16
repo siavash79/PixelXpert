@@ -34,6 +34,7 @@ public class XPLauncher implements ServiceConnection {
 
 	public static boolean isChildProcess = false;
 	public static String processName = "";
+	private String packageName;
 
 	public static ArrayList<XposedModPack> runningMods = new ArrayList<>();
 	public Context mContext = null;
@@ -41,12 +42,14 @@ public class XPLauncher implements ServiceConnection {
 
 	private static IRootProviderProxy rootProxyIPC;
 	private static final Queue<ProxyRunnable> proxyQueue = new LinkedList<>();
+
 	/** @noinspection FieldCanBeLocal*/
 	public XPLauncher() {
 		instance = this;
 	}
 
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+		packageName = lpparam.packageName;
 		try
 		{
 			isChildProcess = lpparam.processName.contains(":");
@@ -57,9 +60,13 @@ public class XPLauncher implements ServiceConnection {
 		}
 
 		//If example class isn't found, user is using an older version. Don't load the module at all
-		if (Build.VERSION.SDK_INT ==  Build.VERSION_CODES.TIRAMISU && lpparam.packageName.equals(SYSTEM_UI_PACKAGE)) {
+		if (Build.VERSION.SDK_INT ==  Build.VERSION_CODES.TIRAMISU && packageName.equals(SYSTEM_UI_PACKAGE)) {
 			Class<?> A33R18Example = findClassIfExists("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
-			if (A33R18Example == null) return;
+			if (A33R18Example == null)
+			{
+				log("This version isn't compatible with your ROM. Exiting...");
+				return;
+			}
 		}
 
 		/*if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && DEBUG && false) {
@@ -80,25 +87,26 @@ public class XPLauncher implements ServiceConnection {
 					ResourceManager.modRes = mContext.createPackageContext(APPLICATION_ID, CONTEXT_IGNORE_SECURITY)
 							.getResources();
 
-					if(Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(mContext.getPackageName()))
+					if(isBootLooped(packageName))
 					{
-						connectRootService();
-					}
-
-					if(isBootLooped(mContext.getPackageName()))
-					{
-						log(String.format("AOSPMods: Possible bootloop in %s. Will not load for now", mContext.getPackageName()));
+						log(String.format("AOSPMods: Possible bootloop in %s. Will not load for now", packageName));
 						return;
 					}
 
 					new SystemUtils(mContext);
-					XPrefs.setPackagePrefs(mContext.getPackageName());
+					XPrefs.setPackagePrefs(packageName);
 				}
 
-				for (Class<? extends XposedModPack> mod : ModPacks.getMods(lpparam.packageName)) {
+				if(Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(packageName))
+				{
+					connectRootService();
+				}
+
+
+				for (Class<? extends XposedModPack> mod : ModPacks.getMods(packageName)) {
 					try {
 						XposedModPack instance = mod.getConstructor(Context.class).newInstance(mContext);
-						if (!instance.listensTo(lpparam.packageName)) continue;
+						if (!instance.listensTo(packageName)) continue;
 						try {
 							instance.updatePrefs();
 						} catch (Throwable ignored) {}

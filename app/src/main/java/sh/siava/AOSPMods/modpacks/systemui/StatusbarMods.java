@@ -538,7 +538,14 @@ public class StatusbarMods extends XposedModPack {
 		hookAllMethods(TunerServiceImplClass, "addTunable", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				wifiVisibleChanged();
+				if(param.args[1].getClass().equals(String[].class)
+						&& Arrays.asList((String[]) param.args[1]).contains(ICON_HIDE_LIST))
+				{
+					wifiVisibleChanged();
+				}
+				else if (ICON_HIDE_LIST.equals(param.args[1])) {
+					wifiVisibleChanged();
+				}
 			}
 		});
 

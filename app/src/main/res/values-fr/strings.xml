@@ -1,7 +1,6 @@
 <resources>
     <!--General strings-->
-    <string name="error_not_activated">Merci de confirmer que le module est activé dans LSPosed Manager</string>
-    <string name="hide_default">Cacher (par défaut)</string>
+	<string name="hide_default">Cacher (par défaut)</string>
     <string name="percent_of_default_size">% de la taille par défaut</string>
     <string name="overlay_none_title">(valeur par défaut)</string>
     <string name="general_section">Paramètres généraux</string>
@@ -26,8 +25,7 @@
     <string name="transparent_fingerprint_circle">Retirer le disque autour du détecteur d’empreintes</string>
     <string name="transparent_fingerprint_circle_off">Le disque autour du détecteur d’empreintes est visible</string>
     <string name="transparent_fingerprint_circle_on">Le disque autour du détecteur d’empreintes est caché</string>
-    <string name="carrier_text_category">Texte du fournisseur réseau</string>
-    <string name="custom_text_category">Texte personnalisé sur l’écran de verrouillage</string>
+	<string name="custom_text_category">Texte personnalisé sur l’écran de verrouillage</string>
     <string name="configure_carrier_text">Personnaliser le texte du fournisseur réseau - haut de l’écran</string>
     <string name="carrier_text_mod_disabled">Texte du fournisseur inchangé</string>
     <string name="carrier_text_mod_enabled">Texte du fournisseur personnalisé</string>
@@ -36,9 +34,7 @@
     <string name="keyguard_dim_amount_title">Niveau d’obscurité du fond de l’écran de verrrouillage</string>
     <string name="keyguard_bottom_category">Raccourcis du bas de l’écran</string>
     <string name="keyguard_bottom_buttons_transparent_title">Retirer le disque autour des icônes</string>
-    <string name="keyguard_bottom_force_camera_title">Montrer le raccourci pour l’appareil photo</string>
-    <string name="keyguard_left_shortcut">Montrer le raccourci de gauche de l’écran de verrouillage</string>
-    <string name="LSleftShortcutTitle">Raccourci de gauche</string>
+	<string name="LSleftShortcutTitle">Raccourci de gauche</string>
     <string name="LSrightShortcutTitle">Raccourci de droite</string>
     <string name="LSleftLongClickShortcutTitle">Raccourci de gauche (appui long)</string>
     <string name="LSrightLongClickShortcutTitle">Raccourci de droite (appui long)</string>
@@ -47,11 +43,7 @@
     <string name="torch_shortcut">Lampe torche</string>
     <string name="tv_remote_shortcut">Télécommande TV</string>
     <string name="dnd_shortcut">Ne pas déranger</string>
-    <string name="album_art_category">Options pour les médias</string>
-    <string name="album_art_title">Activer la pochette d’album lors de la lecture d’un média</string>
-    <string name="album_art_blur_text">Niveau de flou</string>
-    <string name="album_art_grayscale">Nuances de gris</string>
-    <string name="shufflePin_title">Mélanger les chiffres du code</string>
+	<string name="shufflePin_title">Mélanger les chiffres du code</string>
     <string name="wakeup_to_security_title">Demander le code dès l’allumage de l’écran</string>
     <string name="easy_unlock_title">Déverrouillage facile (code PIN/mot de passe)</string>
     <string name="easy_unlock_summary">Si ça n’a pas marché la première fois, réessayer</string>
@@ -62,12 +54,10 @@
     <string name="double_tap_sleep_title">Double appui pour mise en veille</string>
     <string name="battery_style_title">Choisir un style de batterie</string>
     <string name="battery_show_percent_title">Montrer le pourcentage de la batterie</string>
-    <string name="battery_style_category_title">Style de batterie</string>
-    <string name="battery_icon_size_title">Taille de l’icône de batterie</string>
+	<string name="battery_icon_size_title">Taille de l’icône de batterie</string>
     <string name="battery_hidden">Cachée</string>
     <string name="BIcon_Opacity_title">Opacité</string>
-    <string name="sb_center_fine_tune">Ajuster la zone centrale</string>
-    <string name="sb_multi_row_system_icons">Icônes systèmes sur plusieurs lignes (nécessite une hauteur suffisante)</string>
+	<string name="sb_multi_row_system_icons">Icônes systèmes sur plusieurs lignes (nécessite une hauteur suffisante)</string>
     <string name="sb_multi_row_notification_icons">Icônes de notifications sur plusieurs lignes (nécessite une hauteur suffisante)</string>
     <string name="sb_double_row_category">Icônes sur plusieurs lignes</string>
     <string name="sb_icon_sort_mode">Méthode de placement des icônes</string>
@@ -81,15 +71,13 @@
     <string name="caution_mobile_costs">Attention ! Des surcoûts peuvent s’appliquer en itinérance des données</string>
     <string name="volte_icon_title">Montrer l’icône VoLTE si disponible</string>
     <string name="hide_privacychip_title">Cacher les indicateurs de confidentialité\n(Appareil photo, micro)</string><!-- \n means next line-->
-    <string name="sb_vibration_switch_title">Montrer l’icône du vibreur</string>
-    <string name="sbc_position_title">Position de l’horloge</string>
+	<string name="sbc_position_title">Position de l’horloge</string>
     <string name="sbc_ampm_style">Préférences de AM/PM</string>
     <string name="sbc_show_secs">Montrer les secondes</string>
     <string name="sbc_date_cat">Préférences pour la date</string>
     <string name="sbc_day_of_week_options">Montrer le jour de la semaine</string>
     <string name="sbc_advanced_cat">Paramètres avancés (remplace les autres paramètres)</string>
-    <string name="sbc_advanced_sum">Merci de lire la documentation du formattage Java des dates</string>
-    <string name="sbc_custom_date_before">Texte personnalisé avant l’holorge</string>
+	<string name="sbc_custom_date_before">Texte personnalisé avant l’holorge</string>
     <string name="sbc_date_small">Plus petite police (70%)</string>
     <string name="sbc_custom_date_after">Texte personnalisé après l’horloge</string>
     <string name="sbc_header">Personnalisation de l’horloge de la barre d’état</string>
@@ -158,8 +146,7 @@
     <string name="qs_tile_qty_title">Préférences du nombre de blocs</string>
     <string name="qs_leveled_flashlight_summary">Nécessite un appareil compatible</string>
     <string name="light_qs_title">Appliquer la fenêtre de configuration rapide claire quand le thème clair est activé</string>
-    <string name="light_dualtone_qs_title">Activer la fenêtre de configuration rapide en double couleur</string>
-    <string name="qs_pulldown_size">Largeur pour l’accès rapide</string>
+	<string name="qs_pulldown_size">Largeur pour l’accès rapide</string>
     <string name="qs_pulldown_switch_title">Accès rapide depuis la barre d’état</string>
     <string name="qs_pulldown_side_title">Côté pour l’accès rapide</string>
     <string name="qs_pulldown_category">Accès à la fenêtre de configuration rapide</string>
@@ -173,9 +160,7 @@
     <string name="qqs_tiles_number">Nombre maximum de blocs (maximum deux lignes)</string>
     <string name="qs_tile_label_size">Taille de la police des titres des blocs</string>
     <string name="qs_tile_secondary_label_size">Taille de la police des descriptions des blocs</string>
-    <string name="qs_general_options">Préférences de la fenêtre de configuration rapide</string>
-    <string name="qs_text_size_title">Définir la taille du texte pour les blocs de la fenêtre de configuration rapide</string>
-    <string name="wifi_cell_title">Blocs Internet</string>
+	<string name="wifi_cell_title">Blocs Internet</string>
     <string name="wifi_cell_on">Utiliser deux blocs séparés pour les données mobiles et le Wi-Fi</string>
     <string name="wifi_cell_off">Utiliser un bloc Internet</string>
     <string name="QQS_brightness_category">Préférence pour le curseur de luminosité</string>
@@ -185,8 +170,7 @@
     <string name="bs_thick_track">Utiliser une ligne épaisse pour le curseur</string>
     <string name="quick_settings_tiles_category">Préférences de la fenêtre de configuration rapide</string>
     <string name="qs_tile_style_title">Style de la fenêtre de configuration rapide</string>
-    <string name="qstile_default">Valeur par défaut</string>
-    <string name="qs_volume_unmute_title">Valeur de réactivation du bloc de volume</string>
+	<string name="qs_volume_unmute_title">Valeur de réactivation du bloc de volume</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">Configurer le retour en arrière</string>
@@ -195,12 +179,10 @@
     <string name="back_height_title">Hauteur pour le geste</string>
     <string name="gesturenav_header">Navigation par gestes</string>
     <string name="gesture_nav_pill_cat">Trait de la barre de navigation</string>
-    <string name="gesture_nav_pill_mod_title">Changer le trait de la barre de navigation</string>
-    <string name="gesture_nav_pill_width_title">Largeur par rapport à la taille standard</string>
+	<string name="gesture_nav_pill_width_title">Largeur par rapport à la taille standard</string>
     <string name="gesture_nav_pill_height_title">Hauteur par rapport à la taille standard</string>
     <string name="threebutton_header_title">Navigation à trois boutons</string>
-    <string name="back_longpress_kill_title">Maintenir le retour en arrière pour forcer l’arrêt de l’application au premier plan</string>
-    <string name="modify_3button_title">Changer l’ordre des boutons</string>
+	<string name="modify_3button_title">Changer l’ordre des boutons</string>
     <string name="three_button_left_title">Bouton gauche</string>
     <string name="three_button_center_title">Bouton central</string>
     <string name="three_button_right_title">Bouton droit</string>
@@ -208,16 +190,14 @@
     <string name="taskbar_as_recents_title">Transformer la TaskBar en applications récentes</string>
     <string name="taskbar_height_title">Hauteur de la TaskBar</string>
     <string name="taskbar_radius_title">Courbure des angles de la TaskBar</string>
-    <string name="colorpill_title">Trait de la barre de navigation coloré</string>
-    <string name="colorpill">Trait coloré avec la couleur secondaire</string>
+	<string name="colorpill">Trait coloré avec la couleur secondaire</string>
     <string name="reducekeyboard_title">Espace du clavier pour les gestes</string>
     <string name="reducekeyboard">Réduire l’espace du clavier</string>
     <string name="taskbar_status_title">Taskbar</string>
     <string name="taskbar_force_enable_title">Forcer l’activation</string>
     <string name="taskbar_force_disable_title">Forcer la désactivation</string>
-    <string name="taskbar_hide_allapps_title">Cacher les icônes des applications</string>
 
-    <!-- Package manager -->
+	<!-- Package manager -->
     <string name="pm_bypass_signature_title">Contourner la vérification des signatures des paquets</string>
     <string name="pm_allow_downgrade_title">Autoriser le rétrogradage des applications</string>
     <string name="auto_off_five_minutes">Actif pour les cinq prochaines minutes</string>
@@ -254,8 +234,7 @@
     <string name="milliseconds">Millisecondes</string>
 
     <!-- Call section -->
-    <string name="call_category">Appels</string>
-    <string name="vibrate_on_call_active_title">Vibrer lors du décrochage d’un appel entrant</string>
+	<string name="vibrate_on_call_active_title">Vibrer lors du décrochage d’un appel entrant</string>
     <string name="vibrate_on_call_drop_title">Vibrer lors du raccrochage</string>
     <string name="vibration_type_notification">L’intensité de vibration est celle définie par les paramètres de notifications de l’appareil</string>
 
@@ -270,11 +249,9 @@
     <string name="dt_styles_category">Styles du thème sombre</string>
     <string name="dt_styles">Choisir un style</string>
     <string name="caution_unstable">Attention : cette option peut être instable pour certains utilisateurs.</string>
-    <string name="power_menu_overlays_section">Style du menu marche/arrêt</string>
-    <string name="power_menu_overlays_title">Activer le thème clair/sombre dans le menu marche/arrêt</string>
-    <string name="power_menu_overlays_summary_on">Cette option active aussi des nouvelles icônes super chouettes dans tout l’OS</string>
+	<string name="power_menu_overlays_title">Activer le thème clair/sombre dans le menu marche/arrêt</string>
 
-    <!-- Arrays strings -->
+	<!-- Arrays strings -->
     <!-- Quick pull down -->
     <string name="pull_down_left">Gauche</string>
     <string name="pull_down_right">Droite</string>
@@ -308,9 +285,7 @@
     <!-- QS Rows overlays -->
 
     <!-- Lockscreen/Quick Settings Custom Text -->
-    <string name="netstat_enable_title">Collecter les statistiques réseau</string>
-    <string name="network_interval_custom_text_title">Actualiser l’intervalle</string>
-    <string name="minutes_word">minute(s)</string>
+	<string name="minutes_word">minute(s)</string>
 
     <!-- Incompatibility Alert -->
     <string name="incompatible_alert_title">Incompatible</string>
@@ -322,28 +297,17 @@
     <string name="menu_reset_defaults">Réinitialiser tous les paramètres</string>
     <string name="menu_import_settings">Importer des paramètres depuis un fichier…</string>
     <string name="menu_export_settings">Exporter des paramètres vers un fichier…</string>
-    <string name="menu_netstat_title">Statistiques réseau</string>
-    <string name="menu_netstat_enable">Activer les statistiques</string>
-    <string name="menu_netstat_clear">Réinitialiser les statistiques</string>
-    <string name="menu_restart">Redémarrer l’appareil</string>
+	<string name="menu_restart">Redémarrer l’appareil</string>
     <string name="menu_restartSysUI">Redémarrer l’interface système</string>
     <string name="menu_updates">Mise à jour de l’application</string>
 
-    <string name="nestat_caution_title">Attention !</string>
-    <string name="nestat_caution_text">Vos statistiques réseau seront supprimées définitivement. Continuer ?</string>
-    <string name="netstat_caution_yes">Continuer</string>
-    <string name="netstat_caution_no">Un autre jour peut-être</string>
-
-    <string name="monitoring_category_title">Options du moniteur</string>
+	<string name="monitoring_category_title">Options du moniteur</string>
     <string name="netstat_header">Préférences des statistiques réseau</string>
 
-    <string name="string_formatter_manual_body">En plus du texte, des variables dynamiques sont à votre disposition :\n\n$G\&lt;format\&gt; : Date du calendrier géorgien, selon le format. Pour la documentation sur le formattage, merci de chercher `Java Date Format`\nExemple : $GMMM donne : Jan (ou autre)\n\n$P&lt;format&gt; : Date du calendrier perse, selon le format.\nExemple : $Pyyyy donne : 1401\n\nPour activer l’utilisation d’Internet depuis ci-dessous, vous devez aller activer l’option Divers > Statistiques réseau > Activer les statistiques\n\n$Nrx : Total des téléchargements d’aujourd’hui\n$Ntx: Total des uploads d’aujourd’hui\n$Nall : Trafic total d’aujourd’hui\n$Nssid : Nom du SSID du Wi-Fi (si disponible)\n\nEn remplaçant $N par $Nc, vous aurez les statistiques des données mobiles (par exemple $Ncrx pour les téléchargements, sauf pour $Nssid)\n\nExemple :\n`Utilisation des données de $GEEEE : $Ncall` donnera :\n`Utilisation des données de mardi : 2 Go`</string>
-    <string name="update_channel_name">Mises à jour</string>
+	<string name="update_channel_name">Mises à jour</string>
     <string name="update_notification_title">Mise à jour téléchargée</string>
     <string name="update_notification_text">Installer</string>
-    <string name="reboot_notification_title">AOSPMods mise à jour !</string>
-    <string name="reboot_notification_text">La mise à jour sera active après le prochain redémarrage de l’appareil</string>
-    <string name="update_flavor_title">Canal de mise à jour</string>
+	<string name="update_flavor_title">Canal de mise à jour</string>
     <string name="stable_flavor">Stable</string>
     <string name="update_type_title">Type</string>
     <string name="full_type">Complet</string>
@@ -361,8 +325,7 @@
 
     <string name="own_prefs_header">Paramètre d’AOSPMods</string>
     <string name="language_title">Langues</string>
-    <string name="camera_manager_master_title">Activer la personnalisation de la lampe torche (désactiver si l’appareil est incompatible)</string>
-    <string name="toggle_dark_apply">(désactiver puis réactiver le thème sombre pour appliquer)</string>
+	<string name="toggle_dark_apply">(désactiver puis réactiver le thème sombre pour appliquer)</string>
 
     <string name="gesture_nav_extra_cat">Plus de gestes pour la barre de navigation</string>
     <string name="gesture_nav_long_swipe_fc_title">Swiper vers le haut pour forcer l’arrêt de l’application au premier plan</string>
@@ -375,12 +338,9 @@
 
     <string name="none">Rien</string>
     <string name="screenshot">Capture d’écran</string>
-    <string name="back">Retour</string>
-    <string name="kill_foreground_app">Forcer l’arrêt de l’application au premier plan</string>
+	<string name="kill_foreground_app">Forcer l’arrêt de l’application au premier plan</string>
     <string name="toggle_notification">Monter/cacher les notifications</string>
     <string name="toggle_one_handed">Activer/désactiver le mode à une main</string>
-    <string name="insecure_screenshot">Capture d’écran sans restrictions</string>
-    <string name="screenshot_chord_insecure">Volume moins + bouton marche/arrêt pour capturer l’écran sans restrictions</string>
-    <string name="sleep">Repos</string>
+	<string name="sleep">Repos</string>
 
 </resources>

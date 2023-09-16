@@ -2,8 +2,7 @@
     <!--General strings-->
     <string name="app_themed_icon_title">启用替代的 AOSP Mods 主题应用图标</string>
     <string name="xposed_desc">基于 Android 12+ AOSP ROM 的自定义功能</string>
-    <string name="error_not_activated">请确认该模块是否在 LSPosed 管理器上被激活</string>
-    <string name="hide_default">隐藏 (默认)</string>
+	<string name="hide_default">隐藏 (默认)</string>
     <string name="percent_of_default_size">% 默认</string>
     <string name="overlay_none_title">(默认)</string>
     <string name="general_section">常规选项</string>
@@ -35,8 +34,7 @@
 	<string name="transparent_fingerprint_circle">隐藏屏下指纹背景</string>
     <string name="transparent_fingerprint_circle_off">指纹背景启用</string>
     <string name="transparent_fingerprint_circle_on">指纹背景隐藏</string>
-    <string name="carrier_text_category">运营商文本</string>
-    <string name="custom_text_category">自定义锁屏文本</string>
+	<string name="custom_text_category">自定义锁屏文本</string>
     <string name="configure_carrier_text">设置运营商文本</string>
     <string name="carrier_text_mod_disabled">未修改运营商文本</string>
     <string name="carrier_text_mod_enabled">自定义运营商文本</string>
@@ -45,9 +43,7 @@
     <string name="keyguard_dim_amount_title">锁屏壁纸亮度</string>
     <string name="keyguard_bottom_category">底部快捷方式</string>
     <string name="keyguard_bottom_buttons_transparent_title">隐藏图标背景</string>
-    <string name="keyguard_bottom_force_camera_title">显示相机快捷方式</string>
-    <string name="keyguard_left_shortcut">锁屏显示左侧快捷方式</string>
-    <string name="LSleftShortcutTitle">左侧</string>
+	<string name="LSleftShortcutTitle">左侧</string>
     <string name="LSrightShortcutTitle">右侧</string>
     <string name="LSleftLongClickShortcutTitle">左侧(长按)</string>
     <string name="LSrightLongClickShortcutTitle">右侧(长按)</string>
@@ -56,11 +52,7 @@
     <string name="torch_shortcut">手电筒</string>
     <string name="tv_remote_shortcut">TV 遥控器</string>
     <string name="dnd_shortcut">勿扰模式</string>
-    <string name="album_art_category">媒体选项</string>
-    <string name="album_art_title">播放媒体时显示专辑封面</string>
-    <string name="album_art_blur_text">模糊值</string>
-    <string name="album_art_grayscale">灰度值</string>
-    <string name="shufflePin_title">打乱密码盘</string>
+	<string name="shufflePin_title">打乱密码盘</string>
     <string name="wakeup_to_security_title">设备唤醒时显示密码输入界面</string>
     <string name="easy_unlock_title">简易解锁 (Pin/密码)</string>
     <string name="easy_unlock_summary">如果第一次未生效，请重试</string>
@@ -71,12 +63,10 @@
     <string name="double_tap_sleep_title">双击息屏</string>
     <string name="battery_style_title">选择电池图标样式</string>
     <string name="battery_show_percent_title">显示电量百分比</string>
-    <string name="battery_style_category_title">电池样式</string>
-    <string name="battery_icon_size_title">电池图标大小</string>
+	<string name="battery_icon_size_title">电池图标大小</string>
     <string name="battery_hidden">隐藏</string>
     <string name="BIcon_Opacity_title">不透明度</string>
-    <string name="sb_center_fine_tune">微调中心区域</string>
-    <string name="sb_multi_row_system_icons">多行状态图标 (需要增加状态栏高度)</string>
+	<string name="sb_multi_row_system_icons">多行状态图标 (需要增加状态栏高度)</string>
     <string name="sb_multi_row_notification_icons">多行通知图标 (需要增加状态栏高度)</string>
     <string name="sb_double_row_category">多行状态栏</string>
     <string name="sb_icon_sort_mode">排列图标方式</string>
@@ -91,15 +81,13 @@
     <string name="volte_icon_title">可用时显示 VoLTE 图标</string>
     <string name="vowifi_icon_title">可用时显示 VoWiFi 图标</string>
     <string name="hide_privacychip_title">隐藏隐私指示器</string>
-    <string name="sb_vibration_switch_title">显示 震动 图标</string>
-    <string name="sbc_position_title">时钟位置</string>
+	<string name="sbc_position_title">时钟位置</string>
     <string name="sbc_ampm_style">AM / PM 样式</string>
     <string name="sbc_show_secs">显示秒数</string>
     <string name="sbc_date_cat">日期选项</string>
     <string name="sbc_day_of_week_options">显示日期</string>
     <string name="sbc_advanced_cat">日期进阶选项 (将取代上方设置!)</string>
-    <string name="sbc_advanced_sum">请阅读 Java 日期格式文档</string>
-    <string name="sbc_custom_date_before">自定义时钟左侧格式</string>
+	<string name="sbc_custom_date_before">自定义时钟左侧格式</string>
     <string name="sbc_date_small">较小的尺寸 (70%)</string>
     <string name="sbc_custom_date_after">自定义时钟右侧格式</string>
     <string name="sbc_header">状态栏时钟定制</string>
@@ -168,8 +156,7 @@
     <string name="qs_tile_qty_title">磁贴面板数量设定</string>
     <string name="qs_leveled_flashlight_summary">需要硬件支持</string>
     <string name="light_qs_title">浅色主题下使用浅色磁贴面板 (可能会出现问题)</string>
-    <string name="light_dualtone_qs_title">启用双色磁贴面板</string>
-    <string name="qs_pulldown_size">快速下拉磁贴面板</string>
+	<string name="qs_pulldown_size">快速下拉磁贴面板</string>
     <string name="qs_pulldown_switch_title">快速下拉磁贴面板</string>
     <string name="qs_pulldown_side_title">快速下拉宽度</string>
     <string name="qs_pulldown_category">磁贴面板下拉选项</string>
@@ -183,9 +170,7 @@
     <string name="qqs_tiles_number">磁贴面板最大磁贴数量 (最大2行)</string>
     <string name="qs_tile_label_size">磁贴标签大小</string>
     <string name="qs_tile_secondary_label_size">磁贴标签内容大小</string>
-    <string name="qs_general_options">磁贴面板选项</string>
-    <string name="qs_text_size_title">磁贴文本大小</string>
-    <string name="wifi_cell_title">网络磁贴</string>
+	<string name="wifi_cell_title">网络磁贴</string>
     <string name="wifi_cell_on">分离 WIFI 和数据磁贴</string>
     <string name="wifi_cell_off">合并 WIFI 和数据磁贴</string>
     <string name="QQS_brightness_category">亮度滑块选项</string>
@@ -195,8 +180,7 @@
     <string name="bs_thick_track">使用较粗的亮度滑块</string>
     <string name="quick_settings_tiles_category">磁贴选项</string>
     <string name="qs_tile_style_title">磁贴主题</string>
-    <string name="qstile_default">默认</string>
-    <string name="qs_volume_unmute_title">音量磁贴取消静音时音量</string>
+	<string name="qs_volume_unmute_title">音量磁贴取消静音时音量</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">返回手势</string>
@@ -205,12 +189,10 @@
     <string name="back_height_title">触发高度</string>
     <string name="gesturenav_header">手势导航</string>
     <string name="gesture_nav_pill_cat">小白条宽度</string>
-    <string name="gesture_nav_pill_mod_title">修改宽度</string>
-    <string name="gesture_nav_pill_width_title">对比标准大小的宽度</string>
+	<string name="gesture_nav_pill_width_title">对比标准大小的宽度</string>
     <string name="gesture_nav_pill_height_title">对比标准大小的高度</string>
     <string name="threebutton_header_title">三按钮导航</string>
-    <string name="back_longpress_kill_title">长按返回键杀死前台应用</string>
-    <string name="modify_3button_title">更改按钮顺序</string>
+	<string name="modify_3button_title">更改按钮顺序</string>
     <string name="three_button_left_title">左按钮</string>
     <string name="three_button_center_title">中按钮</string>
     <string name="three_button_right_title">右按钮</string>
@@ -218,16 +200,14 @@
     <string name="taskbar_as_recents_title">将任务栏替换为最近任务栏</string>
     <string name="taskbar_height_title">任务栏高度</string>
     <string name="taskbar_radius_title">任务栏圆角</string>
-    <string name="colorpill_title">小白条颜色</string>
-    <string name="colorpill">小白条强调色</string>
+	<string name="colorpill">小白条强调色</string>
     <string name="reducekeyboard_title">键盘空间</string>
     <string name="reducekeyboard">减小键盘底部空间</string>
     <string name="taskbar_status_title">任务栏</string>
     <string name="taskbar_force_enable_title">强制开启</string>
     <string name="taskbar_force_disable_title">强制关闭</string>
-    <string name="taskbar_hide_allapps_title">隐藏所有软件图标</string>
 
-    <!-- Package manager -->
+	<!-- Package manager -->
     <string name="pm_bypass_signature_title">绕过应用签名检查</string>
     <string name="pm_allow_downgrade_title">允许应用降级</string>
     <string name="auto_off_five_minutes">在接下来的五分钟内保持开启</string>
@@ -264,8 +244,7 @@
     <string name="milliseconds">毫秒</string>
 
     <!-- Call section -->
-    <string name="call_category">通话选项</string>
-    <string name="vibrate_on_call_active_title">去电被接通时震动</string>
+	<string name="vibrate_on_call_active_title">去电被接通时震动</string>
     <string name="vibrate_on_call_drop_title">结束通话时震动</string>
     <string name="vibration_type_notification">强度由系统通知振动设置定义</string>
 
@@ -279,11 +258,9 @@
     <string name="dt_styles_category">深色主题样式</string>
     <string name="dt_styles">选择样式</string>
     <string name="caution_unstable">注意: 该功能对部分用户不稳定</string>
-    <string name="power_menu_overlays_section">电源菜单主题</string>
-    <string name="power_menu_overlays_title">在电源菜单启用浅色 / 深色主题</string>
-    <string name="power_menu_overlays_summary_on">将同时系统级启用一些新图标</string>
+	<string name="power_menu_overlays_title">在电源菜单启用浅色 / 深色主题</string>
 
-    <!-- Arrays strings -->
+	<!-- Arrays strings -->
     <!-- Quick pull down -->
     <string name="pull_down_left">左侧</string>
     <string name="pull_down_right">右侧</string>
@@ -317,9 +294,7 @@
     <!-- QS Rows overlays -->
 
     <!-- Lockscreen/Quick Settings Custom Text -->
-    <string name="netstat_enable_title">采集网络统计数据</string>
-    <string name="network_interval_custom_text_title">刷新间隔</string>
-    <string name="minutes_word">分钟</string>
+	<string name="minutes_word">分钟</string>
 
     <!-- Incompatibility Alert -->
     <string name="incompatible_alert_title">不兼容</string>
@@ -331,28 +306,17 @@
     <string name="menu_reset_defaults">重置所有设置</string>
     <string name="menu_import_settings">从文件中导入设置</string>
     <string name="menu_export_settings">导出设置到文件中</string>
-    <string name="menu_netstat_title">网络统计</string>
-    <string name="menu_netstat_enable">启用统计</string>
-    <string name="menu_netstat_clear">重置网络统计</string>
-    <string name="menu_restart">重启</string>
+	<string name="menu_restart">重启</string>
     <string name="menu_restartSysUI">重启 SystemUI</string>
     <string name="menu_updates">App 更新</string>
 
-    <string name="nestat_caution_title">注意!</string>
-    <string name="nestat_caution_text">您的网络统计数据将永久重置,确认?</string>
-    <string name="netstat_caution_yes">继续</string>
-    <string name="netstat_caution_no">以后再说</string>
-
-    <string name="monitoring_category_title">监控选项</string>
+	<string name="monitoring_category_title">监控选项</string>
     <string name="netstat_header">网络统计设置</string>
 
-    <string name="string_formatter_manual_body">除了普通文字,动态变量也可以被使用:\n\n$G\&lt;格式\&gt; : 地理位置日期,依照格式,关于格式文档,请搜索`Java Date Format`\n例如: $GMMM 显示为: 1月 (或其他)\n\n$P&lt;格式&gt; : 波斯日期,依照格式\n例如: $Pyyyy 显示为: 1401\n\n为了启用下方的网络统计信息, 你需要在 其他 菜单的 网络统计设置 里开启 启用统计\n\n$Nrx : 今日总下载流量\n$Ntx: 今日总上传流量\n$Nall : 今日总流量\n$Nssid : WiFi SSID(如果可用)\n\n如果你替换 $N 为 $Nc 将显示移动流量的数据(比如 $Ncrx 为移动流量的下载; 除了 $Nssid)\n\n例子:\n` $GEEEE流量用量: $Ncall` 将显示:\n`星期二流量用量: 2GB`</string>
-    <string name="update_channel_name">更新</string>
+	<string name="update_channel_name">更新</string>
     <string name="update_notification_title">已下载更新</string>
     <string name="update_notification_text">点此安装</string>
-    <string name="reboot_notification_title">AOSP Mods 已更新</string>
-    <string name="reboot_notification_text">更改将在重启设备后生效</string>
-    <string name="update_flavor_title">更新通道</string>
+	<string name="update_flavor_title">更新通道</string>
     <string name="stable_flavor">稳定版</string>
     <string name="update_type_title">更新包类型</string>
     <string name="full_type">完整包</string>
@@ -370,8 +334,7 @@
 
     <string name="own_prefs_header">AOSP Mods 设置</string>
     <string name="language_title">语言</string>
-    <string name="camera_manager_master_title">启用手电筒Mods (如果你的设备不支持请禁用)</string>
-    <string name="toggle_dark_apply">(切换深色模式以应用)</string>
+	<string name="toggle_dark_apply">(切换深色模式以应用)</string>
 
     <string name="gesture_nav_extra_cat">更多导航栏手势</string>
     <string name="gesture_nav_long_swipe_fc_title">上滑至屏幕顶部杀死前台APP</string>
@@ -384,12 +347,9 @@
 
     <string name="none">无</string>
     <string name="screenshot">截图</string>
-    <string name="back">返回</string>
-    <string name="kill_foreground_app">杀死前台app</string>
+	<string name="kill_foreground_app">杀死前台app</string>
     <string name="toggle_notification">打开通知面板</string>
     <string name="toggle_one_handed">打开单手模式</string>
-    <string name="insecure_screenshot">无限制截图</string>
-    <string name="screenshot_chord_insecure">音量减 + 电源键强制截图</string>
-    <string name="sleep">睡眠</string>
+	<string name="sleep">睡眠</string>
 
 </resources>

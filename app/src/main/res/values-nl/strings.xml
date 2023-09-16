@@ -20,8 +20,7 @@
     <string name="transparent_fingerprint_circle">Vingerafdrukcirkel onder het scherm verbergen</string>
     <string name="transparent_fingerprint_circle_off">Cirkel rond vingerafdrukpictogram is actief</string>
     <string name="transparent_fingerprint_circle_on">Cirkel rond vingerafdrukpictogram wordt verborgen</string>
-    <string name="carrier_text_category">Vervoerder tekst</string>
-    <string name="custom_text_category">Aangepaste tekst op Lockscreen</string>
+	<string name="custom_text_category">Aangepaste tekst op Lockscreen</string>
     <string name="configure_carrier_text">Dragertekst configureren - Bovenaan het scherm</string>
     <string name="carrier_text_mod_disabled">Vervoerder tekst ongewijzigd</string>
     <string name="carrier_text_mod_enabled">Aangepaste koerierstekst</string>
@@ -29,39 +28,29 @@
     <string name="lockscreen_center_text_value">Aangepaste tekst klokgebied</string>
     <string name="keyguard_bottom_category">Sneltoetsen in het onderste gebied</string>
     <string name="keyguard_bottom_buttons_transparent_title">Verberg cirkel rond pictogrammen</string>
-    <string name="keyguard_bottom_force_camera_title">Camerasnelkoppeling weergeven</string>
-    <string name="keyguard_left_shortcut">Show left shortcut on lock screen</string>
-    <string name="LSleftShortcutTitle">Snelkoppeling naar links</string>
+	<string name="LSleftShortcutTitle">Snelkoppeling naar links</string>
     <string name="LSrightShortcutTitle">Sneltoets rechts</string>
     <string name="camera_shortcut">Camera</string>
     <string name="assistant_shortcut">Assistent</string>
     <string name="torch_shortcut">Zaklamp</string>
-    <string name="album_art_category">Media-opties</string>
-    <string name="album_art_title">Albumhoezen inschakelen bij het afspelen van media</string>
-    <string name="album_art_blur_text">Vervagingswaarde</string>
-    <string name="album_art_grayscale">grijswaarden</string>
-    <string name="shufflePin_title">Shuffle-pin</string>
+	<string name="shufflePin_title">Shuffle-pin</string>
 
     <!--Status bar related-->
     <string name="double_tap_sleep_title">Dubbeltik om te slapen</string>
     <string name="battery_style_title">Kies een batterijstijl</string>
     <string name="battery_show_percent_title">Toon batterijpercentage</string>
-    <string name="battery_style_category_title">Batterijstijl</string>
-    <string name="battery_icon_size_title">Grootte batterijpictogram</string>
+	<string name="battery_icon_size_title">Grootte batterijpictogram</string>
     <string name="battery_hidden">Verborgen</string>
-    <string name="sb_center_fine_tune">Middengebied fijn afstellen</string>
 
-    <string name="combined_signal_icon_title">Gecombineerde signaalpictogrammen</string>
+	<string name="combined_signal_icon_title">Gecombineerde signaalpictogrammen</string>
     <string name="volte_icon_title">Toon VoLTE-pictogram indien beschikbaar</string>
-    <string name="sb_vibration_switch_title">Pictogrammen Trillen/Stil tonen</string>
-    <string name="sbc_position_title">Klok positie</string>
+	<string name="sbc_position_title">Klok positie</string>
     <string name="sbc_ampm_style">AM/PM Stijl</string>
     <string name="sbc_show_secs">Toon secondes</string>
     <string name="sbc_date_cat">Data optie</string>
     <string name="sbc_day_of_week_options">Dag van de week weergeven met klok</string>
     <string name="sbc_advanced_cat">Geavanceerd (vervangt bovenstaande instelling!)</string>
-    <string name="sbc_advanced_sum">Lees de documentatie over de Java-datumnotatie</string>
-    <string name="sbc_custom_date_before">Aangepaste tekst vóór de klok</string>
+	<string name="sbc_custom_date_before">Aangepaste tekst vóór de klok</string>
     <string name="sbc_date_small">Kleiner formaat (70%)</string>
     <string name="sbc_custom_date_after">Aangepaste tekst na klok</string>
     <string name="sbc_header">Aanpassing van de statusbalkklok</string>
@@ -120,16 +109,13 @@
     <string name="qs_footer_text_summary">Laat het leeg om de tekst volledig te verwijderen</string>
     <string name="qs_footer_text_desc">Zet het scherm aan/uit om toe te passen</string>
     <string name="light_qs_title">Licht QS-paneel tijdens lichtthema</string>
-    <string name="light_dualtone_qs_title">Dual tone QS-paneel inschakelen</string>
-    <string name="qs_pulldown_size">Snel naar beneden trekkende breedte</string>
+	<string name="qs_pulldown_size">Snel naar beneden trekkende breedte</string>
     <string name="qs_pulldown_switch_title">Snel QS-paneel naar beneden trekken vanuit de statusbalk</string>
     <string name="qs_pulldown_side_title">Snel naar beneden trekkende kant</string>
     <string name="qs_pulldown_category">Snelle instellingen pull-down</string>
     <string name="qs_haptic_switch_title">Trillen op QS tegelkraan</string>
     <string name="qs_rows_number">QS Rijen nummer</string>
-    <string name="qs_general_options">Opties voor snelle instellingen</string>
-    <string name="qs_text_size_title">QS Tegels tekstgrootte</string>
-    <string name="wifi_cell_title">Internettegel</string>
+	<string name="wifi_cell_title">Internettegel</string>
     <string name="wifi_cell_on">Gebruik wifi en data aparte tegels</string>
     <string name="wifi_cell_off">Gebruik enkele internettegel</string>
     <string name="QQS_brightness_category">Opties voor schuifregelaar helderheid</string>
@@ -139,22 +125,18 @@
     <string name="bs_thick_track">zie een dik nummer op de schuifregelaar voor helderheid</string>
     <string name="quick_settings_tiles_category">Opties voor QS-tegels</string>
     <string name="qs_tile_style_title">QS-Tegels thema\'s</string>
-    <string name="qstile_default">Standaard</string>
 
-    <!--Navigation bar related-->
+	<!--Navigation bar related-->
     <string name="back_gesture_category_title">Teruggebaar configureren</string>
     <string name="back_from_left_title">Linkerkant van het scherm</string>
     <string name="back_from_right_title">Rechterkant van het scherm</string>
     <string name="back_height_title">Gebaar hoogte</string>
     <string name="gesturenav_header">Gebaar navigatie</string>
     <string name="gesture_nav_pill_cat">Breedte pil van navigatiebalk</string>
-    <string name="gesture_nav_pill_mod_title">NavBar-pilbreedte wijzigen</string>
-    <string name="gesture_nav_pill_width_title">Breedte vergeleken met standaard maat</string>
+	<string name="gesture_nav_pill_width_title">Breedte vergeleken met standaard maat</string>
     <string name="threebutton_header_title">3-knops navigatie</string>
-    <string name="back_longpress_kill_title">Druk lang op terug om de voorgrond-app te beëindigen</string>
-    <string name="hide_navbar_title">Navigatiebalk verbergen</string>
-    <string name="colorpill_title">Gebarenpil inkleuren</string>
-    <string name="colorpill">Accent gekleurde gebaren pil</string>
+	<string name="hide_navbar_title">Navigatiebalk verbergen</string>
+	<string name="colorpill">Accent gekleurde gebaren pil</string>
     <string name="reducekeyboard_title">Gebaren toetsenbordruimte</string>
     <string name="taskbar_status_title">Android-taakbalk</string>
     <string name="taskbar_force_enable_title">Geforceerd ingeschakeld</string>
@@ -220,8 +202,7 @@
     <!-- QS Rows overlays -->
 
     <!-- Lockscreen/Quick Settings Custom Text -->
-    <string name="network_interval_custom_text_title">Vernieuwingsinterval</string>
-    <string name="minutes_word">minuten (s)</string>
+	<string name="minutes_word">minuten (s)</string>
 
 
     <!-- Menu Items -->
@@ -229,28 +210,17 @@
     <string name="menu_reset_defaults">Alle instellingen resetten</string>
     <string name="menu_import_settings">Instellingen importeren uit bestand…</string>
     <string name="menu_export_settings">Instellingen exporteren naar bestand…</string>
-    <string name="menu_netstat_title">Netwerkstatistieken</string>
-    <string name="menu_netstat_enable">Statistieken inschakelen</string>
-    <string name="menu_netstat_clear">Netwerkstatistieken resetten</string>
-    <string name="menu_restart">Opnieuw opstarten</string>
+	<string name="menu_restart">Opnieuw opstarten</string>
     <string name="menu_restartSysUI">Herstart SystemUI</string>
     <string name="menu_updates">App-updates</string>
 
-    <string name="nestat_caution_title">Voorzichtigheid!</string>
-    <string name="nestat_caution_text">Je netwerkstatistieken worden permanent gereset. Doorgaan?</string>
-    <string name="netstat_caution_yes">Doorgaan</string>
-    <string name="netstat_caution_no">Misschien later</string>
-
-    <string name="monitoring_category_title">Bewakingsopties</string>
+	<string name="monitoring_category_title">Bewakingsopties</string>
     <string name="netstat_header">Instellingen voor netwerkstatistieken</string>
 
-    <string name="string_formatter_manual_body">In addition to the normal text you can enter, dynamic variables are also available:\n\n$G\&lt;format\&gt; : Georgian date, based on format. For format documentation, please search `Java Date Format`\nExample: $GMMM means: Jan (or any other)\n\n$P&lt;format&gt; : Persian date, based on format\nExample: $Pyyyy means: 1401\n\n$Nrx : Total Downloads of today\n$Ntx: Total Uploads of today\n$Nall : Total Traffic of today\n$Nssid : WiFi SSID name (if applicable)\n\nIf you replace $N with $Nc you will be provided with mobile data statistics (like $Ncrx for downloads; excludes $Nssid)\n\nExample:\n`Mobile Traffic of $GEEEE: $Ncall` will produce:\n`Mobile Traffic of Tuesday: 2GB`</string>
-    <string name="update_channel_name">Updates</string>
+	<string name="update_channel_name">Updates</string>
     <string name="update_notification_title">Update gedownload</string>
     <string name="update_notification_text">Tik hier om te installeren</string>
-    <string name="reboot_notification_title">AOSPMods bijgewerkt!</string>
-    <string name="reboot_notification_text">Wijzigingen worden van kracht na opnieuw opstarten</string>
-    <string name="update_flavor_title">Kanaal bijwerken</string>
+	<string name="update_flavor_title">Kanaal bijwerken</string>
     <string name="stable_flavor">Stabiel</string>
     <string name="currentVersionTitle">Geïnstalleerde versie: </string>
     <string name="lastestVersionTitle">Laatste versie: </string>
@@ -280,8 +250,7 @@
     <string name="force_no_cutout">Negeer de camera-uitsparing</string>
     <string name="volume_button_step_title">Volumestappen (0 tot 100%)</string>
     <string name="so_fingerprint_sensor_enabled">Vingerafdruksensor toestaan wanneer het scherm is uitgeschakeld</string>
-    <string name="call_category">Telefoongesprekken</string>
-    <string name="vibrate_on_call_active_title">Trillen bij beantwoord uitgaande oproep</string>
+	<string name="vibrate_on_call_active_title">Trillen bij beantwoord uitgaande oproep</string>
     <string name="vibrate_on_call_drop_title">Trillen wanneer gesprek wordt verbroken</string>
     <string name="word_default">Standaard</string>
     <string name="update_type_title">Pakkettype</string>
@@ -295,14 +264,12 @@
     <string name="qs_qr_tile_inactive_title">Kleur QR-Scan-tegel omkeren</string>
     <string name="qs_footer_text_value">Aangepaste tekst invoeren</string>
     <string name="BIcon_Opacity_title">Dekking</string>
-    <string name="error_not_activated">Bevestig a.u.b. of de module is geactiveerd in LSPosed Manager</string>
-    <string name="lte_4g_icon_title">LTE / 4G-pictogram</string>
+	<string name="lte_4g_icon_title">LTE / 4G-pictogram</string>
     <string name="reducekeyboard">Ruimte op het toetsenbord verkleinen</string>
     <string name="keyguard_dim_amount_title">Keyguard behang verduisterd</string>
     <string name="qs_leveled_flashlight_title">Helderheid-nivellerende zaklamptegel</string>
     <string name="hide_default">Verbergen (standaard)</string>
     <string name="qs_flashlight_level_global_title">Zaklampniveau globaal toepassen</string>
     <string name="qs_leveled_flashlight_summary">Vereist ondersteunde hardware</string>
-    <string name="netstat_enable_title">Verzamel netwerkstatistieken</string>
 
 </resources>

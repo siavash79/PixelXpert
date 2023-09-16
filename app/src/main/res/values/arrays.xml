@@ -250,14 +250,7 @@
         <item>2</item>
     </string-array>
 
-    <string-array name="NBPThicknessOverlayEx">
-        <item>None</item>
-        <item>com.android.systemui.overlay.thinpill</item>
-        <item>com.android.systemui.overlay.thickpill</item>
-        <item>com.android.systemui.overlay.thickerpill</item>
-    </string-array>
-
-    <string-array name="FontsOverlayEx_names">
+	<string-array name="FontsOverlayEx_names">
         <item>@string/overlay_none_title</item>
         <item>Blender Pro</item>
         <item>Euclid Circular</item>
@@ -434,69 +427,7 @@
         <item>com.android.theme.icon_pack.acherus.systemui</item>
     </string-array>
 
-    <string-array name="CircularOverlayG">
-        <item>com.android.theme.icon_pack.circular.android</item>
-        <item>com.android.theme.icon_pack.circular.systemui</item>
-        <item>com.android.theme.icon_pack.circular.settings</item>
-        <item>com.android.theme.icon_pack.circular.launcher</item>
-        <item>com.android.theme.icon_pack.circular.themepicker</item>
-    </string-array>
-
-    <string-array name="FilledOverlayG">
-        <item>com.android.theme.icon_pack.filled.android</item>
-        <item>com.android.theme.icon_pack.filled.systemui</item>
-        <item>com.android.theme.icon_pack.filled.settings</item>
-        <item>com.android.theme.icon_pack.filled.launcher</item>
-        <item>com.android.theme.icon_pack.filled.themepicker</item>
-    </string-array>
-
-    <string-array name="KaiOverlayG">
-        <item>com.android.theme.icon_pack.kai.android</item>
-        <item>com.android.theme.icon_pack.kai.systemui</item>
-        <item>com.android.theme.icon_pack.kai.settings</item>
-        <item>com.android.theme.icon_pack.kai.launcher</item>
-        <item>com.android.theme.icon_pack.kai.themepicker</item>
-    </string-array>
-
-    <string-array name="OxygenOSOverlayG">
-        <item>com.android.theme.icon_pack.oos.android</item>
-        <item>com.android.theme.icon_pack.oos.systemui</item>
-        <item>com.android.theme.icon_pack.oos.settings</item>
-        <item>com.android.theme.icon_pack.oos.launcher</item>
-        <item>com.android.theme.icon_pack.oos.themepicker</item>
-    </string-array>
-
-    <string-array name="RoundedOverlayG">
-        <item>com.android.theme.icon_pack.rounded.android</item>
-        <item>com.android.theme.icon_pack.rounded.systemui</item>
-        <item>com.android.theme.icon_pack.rounded.settings</item>
-        <item>com.android.theme.icon_pack.rounded.launcher</item>
-        <item>com.android.theme.icon_pack.rounded.themepicker</item>
-    </string-array>
-
-    <string-array name="SamOverlayG">
-        <item>com.android.theme.icon_pack.sam.android</item>
-        <item>com.android.theme.icon_pack.sam.systemui</item>
-        <item>com.android.theme.icon_pack.sam.settings</item>
-        <item>com.android.theme.icon_pack.sam.launcher</item>
-        <item>com.android.theme.icon_pack.sam.themepicker</item>
-    </string-array>
-
-    <string-array name="VictorOverlayG">
-        <item>com.android.theme.icon_pack.victor.android</item>
-        <item>com.android.theme.icon_pack.victor.systemui</item>
-        <item>com.android.theme.icon_pack.victor.settings</item>
-        <item>com.android.theme.icon_pack.victor.launcher</item>
-        <item>com.android.theme.icon_pack.victor.themepicker</item>
-    </string-array>
-
-    <string-array name="OutlineOverlayG">
-        <item>com.android.theme.icon_pack.outline.android</item>
-        <item>com.android.theme.icon_pack.outline.systemui</item>
-        <item>com.android.theme.icon_pack.outline.settings</item>
-    </string-array>
-
-    <string-array name="SignalIconsOverlayEx_names">
+	<string-array name="SignalIconsOverlayEx_names">
         <item>@string/overlay_none_title</item>
         <item>Stroke</item>
         <item>Sneaky</item>
@@ -520,47 +451,7 @@
         <item>BarsOverlayG</item>
     </string-array>
 
-    <string-array name="StrokeOverlayG">
-        <item>com.tenx.systemui.signalbar_a</item>
-        <item>com.tenx.systemui.wifibar_a</item>
-    </string-array>
-
-    <string-array name="SneakyOverlayG">
-        <item>com.tenx.systemui.signalbar_b</item>
-        <item>com.tenx.systemui.wifibar_b</item>
-    </string-array>
-
-    <string-array name="XperiaOverlayG">
-        <item>com.tenx.systemui.signalbar_c</item>
-        <item>com.tenx.systemui.wifibar_c</item>
-    </string-array>
-
-    <string-array name="ZigZagOverlayG">
-        <item>com.tenx.systemui.signalbar_d</item>
-        <item>com.tenx.systemui.wifibar_d</item>
-    </string-array>
-
-    <string-array name="WavyOverlayG">
-        <item>com.tenx.systemui.signalbar_e</item>
-        <item>com.tenx.systemui.wifibar_e</item>
-    </string-array>
-
-    <string-array name="RoundOverlayG">
-        <item>com.tenx.systemui.signalbar_f</item>
-        <item>com.tenx.systemui.wifibar_f</item>
-    </string-array>
-
-    <string-array name="InsideOverlayG">
-        <item>com.tenx.systemui.signalbar_g</item>
-        <item>com.tenx.systemui.wifibar_g</item>
-    </string-array>
-
-    <string-array name="BarsOverlayG">
-        <item>com.tenx.systemui.signalbar_h</item>
-        <item>com.tenx.systemui.wifibar_h</item>
-    </string-array>
-
-    <string-array name="QSTilesThemesOverlayEx_names">
+	<string-array name="QSTilesThemesOverlayEx_names">
         <item>@string/overlay_none_title</item>
         <item>No34D</item>
         <item>@string/qstile_circleoutline</item>

@@ -1,7 +1,6 @@
 <resources>
     <!--General strings-->
-    <string name="error_not_activated">Potwierdź, czy moduł jest aktywowany w LSPosed Manager</string>
-    <string name="hide_default">Ukryj (domyślnie)</string>
+	<string name="hide_default">Ukryj (domyślnie)</string>
     <string name="percent_of_default_size">%domyślnego rozmiaru</string>
     <string name="overlay_none_title">(Domyślna)</string>
     <string name="general_section">Opcje ogólne</string>
@@ -24,8 +23,7 @@
     <string name="transparent_fingerprint_circle">Usuń okrąg tła z odcisku palca pod wyświetlaczem</string>
     <string name="transparent_fingerprint_circle_off">Okrąg wokół ikony odcisku palca jest aktywny</string>
     <string name="transparent_fingerprint_circle_on">Okrąg wokół ikony odcisku palca zostanie ukryty</string>
-    <string name="carrier_text_category">Tekst operatora</string>
-    <string name="custom_text_category">Niestandardowy tekst na ekranie blokady</string>
+	<string name="custom_text_category">Niestandardowy tekst na ekranie blokady</string>
     <string name="configure_carrier_text">Skonfiguruj tekst operatora — góra ekranu</string>
     <string name="carrier_text_mod_disabled">Tekst operatora niezmieniony</string>
     <string name="carrier_text_mod_enabled">Niestandardowy tekst operatora</string>
@@ -34,18 +32,12 @@
     <string name="keyguard_dim_amount_title">Przyciemniona tapeta z blokadą klawiatury</string>
     <string name="keyguard_bottom_category">Skróty w dolnej części</string>
     <string name="keyguard_bottom_buttons_transparent_title">Usuń kółko wokół ikon</string>
-    <string name="keyguard_bottom_force_camera_title">Pokaż skrót do aparatu</string>
-    <string name="keyguard_left_shortcut">Pokaż lewy skrót na ekranie blokady</string>
-    <string name="LSleftShortcutTitle">Lewy skrót</string>
+	<string name="LSleftShortcutTitle">Lewy skrót</string>
     <string name="LSrightShortcutTitle">Skrót w prawo</string>
     <string name="camera_shortcut">Aparat fotograficzny</string>
     <string name="assistant_shortcut">Asystent</string>
     <string name="torch_shortcut">Latarka</string>
-    <string name="album_art_category">Opcje mediów</string>
-    <string name="album_art_title">Włącz okładkę albumu podczas odtwarzania multimediów</string>
-    <string name="album_art_blur_text">Wartość rozmycia</string>
-    <string name="album_art_grayscale">Skala szarości</string>
-    <string name="shufflePin_title">Pomieszaj pin</string>
+	<string name="shufflePin_title">Pomieszaj pin</string>
     <string name="easy_unlock_title">Łatwe odblokowanie (kod PIN/hasło)</string>
     <string name="easy_unlock_summary">Jeśli to nie zadziałało za pierwszym razem, spróbuj ponownie</string>
 
@@ -53,12 +45,10 @@
     <string name="double_tap_sleep_title">Kliknij dwukrotnie, by wyłączyc</string>
     <string name="battery_style_title">Wybierz styl baterii</string>
     <string name="battery_show_percent_title">Pokaż procent baterii</string>
-    <string name="battery_style_category_title">Styl baterii</string>
-    <string name="battery_icon_size_title">Rozmiar ikony baterii</string>
+	<string name="battery_icon_size_title">Rozmiar ikony baterii</string>
     <string name="battery_hidden">Ukryty</string>
     <string name="BIcon_Opacity_title">Nieprzezroczystość</string>
-    <string name="sb_center_fine_tune">Dostrój obszar środkowy</string>
-    <string name="sb_multi_row_system_icons">Ikony systemu wielorzędowego (wymaga podwyższonej wysokości paska stanu)</string>
+	<string name="sb_multi_row_system_icons">Ikony systemu wielorzędowego (wymaga podwyższonej wysokości paska stanu)</string>
     <string name="sb_icon_sort_mode">Metoda umieszczania ikon</string>
     <string name="sort_clean">Sortuj w siatce</string>
     <string name="sort_tight">Dopasuj maksymalną liczbę przedmiotów</string>
@@ -68,15 +58,13 @@
     <string name="combined_signal_icon_title">Połączone ikony sygnałów</string>
     <string name="volte_icon_title">Pokaż ikonę VoLTE, gdy jest dostępna</string>
     <string name="hide_privacychip_title">Ukryj wskaźniki prywatności\n(Aparat, Mikrofon)</string>
-    <string name="sb_vibration_switch_title">Pokaż ikony Wibracja/Cichy</string>
-    <string name="sbc_position_title">Pozycja zegara</string>
+	<string name="sbc_position_title">Pozycja zegara</string>
     <string name="sbc_ampm_style">Styl AM/PM</string>
     <string name="sbc_show_secs">Pokaż sekundy</string>
     <string name="sbc_date_cat">Opcje daty</string>
     <string name="sbc_day_of_week_options">Pokaż dzień tygodnia z zegarem</string>
     <string name="sbc_advanced_cat">Zaawansowane (zastąpi powyższe ustawienie!)</string>
-    <string name="sbc_advanced_sum">Proszę przeczytać dokumentację formatu daty Java</string>
-    <string name="sbc_custom_date_before">Własny tekst przed zegarem</string>
+	<string name="sbc_custom_date_before">Własny tekst przed zegarem</string>
     <string name="sbc_date_small">Mniejszy rozmiar (70%)</string>
     <string name="sbc_custom_date_after">Niestandardowy tekst po zegarze</string>
     <string name="sbc_header">Dostosowanie zegara paska stanu</string>
@@ -142,8 +130,7 @@
     <string name="qs_qr_tile_inactive_title">Odwróć kolor płytki QR-Scan</string>
     <string name="qs_leveled_flashlight_summary">Wymaga obsługiwanego sprzętu</string>
     <string name="light_qs_title">Zastosuj jasny panel QS podczas korzystania z jasnego motywu</string>
-    <string name="light_dualtone_qs_title">Włącz dwutonowy panel QS</string>
-    <string name="qs_pulldown_size">Szerokość szybkiego opuszczania</string>
+	<string name="qs_pulldown_size">Szerokość szybkiego opuszczania</string>
     <string name="qs_pulldown_switch_title">Szybkie rozwijanie panelu QS z paska stanu</string>
     <string name="qs_pulldown_side_title">Strona szybkiego opuszczania</string>
     <string name="qs_pulldown_category">Szybkie ustawienia rozwijane</string>
@@ -153,9 +140,7 @@
     <string name="qqs_tiles_number">Maksymalna liczba płytek w Quick QS (maks. 2 rzędy)</string>
     <string name="qs_tile_label_size">Rozmiar etykiety płytki QS</string>
     <string name="qs_tile_secondary_label_size">Rozmiar podsumowania etykiety QS Tile</string>
-    <string name="qs_general_options">Opcje szybkich ustawień</string>
-    <string name="qs_text_size_title">Ustaw rozmiar tekstu dla płytek QS</string>
-    <string name="wifi_cell_title">Kafelek internetowy</string>
+	<string name="wifi_cell_title">Kafelek internetowy</string>
     <string name="wifi_cell_on">Użyj oddzielnego Wi-Fi</string>
     <string name="wifi_cell_off">Użyj jednego kafelka internetowego</string>
     <string name="QQS_brightness_category">Opcje suwaka jasności</string>
@@ -165,9 +150,8 @@
     <string name="bs_thick_track">Użyj grubej ścieżki na suwaku jasności</string>
     <string name="quick_settings_tiles_category">Opcje płytek QS</string>
     <string name="qs_tile_style_title">Motywy QS Tile</string>
-    <string name="qstile_default">Domyślna</string>
 
-    <!--Navigation bar related-->
+	<!--Navigation bar related-->
     <string name="back_gesture_category_title">Skonfiguruj gest powrotu</string>
 
 
@@ -177,18 +161,15 @@
     <string name="back_height_title">Wysokość gestu</string>
     <string name="gesturenav_header">Nawigacja gestami</string>
     <string name="gesture_nav_pill_cat">Pigułka paska nawigacyjnego</string>
-    <string name="gesture_nav_pill_mod_title">Zmodyfikuj pigułkę paska nawigacyjnego</string>
-    <string name="gesture_nav_pill_width_title">Szerokość w porównaniu do rozmiaru standardowego</string>
+	<string name="gesture_nav_pill_width_title">Szerokość w porównaniu do rozmiaru standardowego</string>
     <string name="gesture_nav_pill_height_title">Wysokość w porównaniu do rozmiaru standardowego</string>
     <string name="threebutton_header_title">3-przyciskowa nawigacja</string>
-    <string name="back_longpress_kill_title">Naciśnij i przytrzymaj, aby zabić aplikację na pierwszym planie</string>
-    <string name="modify_3button_title">Zmodyfikuj kolejność przycisków</string>
+	<string name="modify_3button_title">Zmodyfikuj kolejność przycisków</string>
     <string name="three_button_left_title">Lewy przycisk</string>
     <string name="three_button_center_title">Środkowy przycisk</string>
     <string name="three_button_right_title">Prawy przycisk</string>
     <string name="hide_navbar_title">Ukryj pasek nawigacyjny</string>
-    <string name="colorpill_title">Koloruj pigułkę gestów</string>
-    <string name="colorpill">Pigułka z akcentem w kolorze gestów</string>
+	<string name="colorpill">Pigułka z akcentem w kolorze gestów</string>
     <string name="reducekeyboard_title">Miejsce na klawiaturę dla gestów</string>
     <string name="reducekeyboard">Zmniejsz miejsce na klawiaturze</string>
     <string name="taskbar_status_title">Pasek zadań Androida</string>
@@ -221,8 +202,7 @@
     <string name="overscroll_on_summary">Ważne: MUSISZ włączyć aplikacje, dla których chcesz wyłączyć overscroll w ramach LSPosed</string>
 
 
-    <string name="call_category">Rozmowy telefoniczne</string>
-    <string name="vibrate_on_call_active_title">Wibracje przy odebraniu połączenia wychodzącego</string>
+	<string name="vibrate_on_call_active_title">Wibracje przy odebraniu połączenia wychodzącego</string>
     <string name="vibrate_on_call_drop_title">Wibracje po rozłączeniu połączenia</string>
 
     <!-- Theming section related -->
@@ -269,37 +249,24 @@
     <!-- QS Rows overlays -->
 
     <!-- Lockscreen/Quick Settings Custom Text -->
-    <string name="netstat_enable_title">Zbieraj statystyki sieciowe</string>
-    <string name="network_interval_custom_text_title">Częstotliwość odświeżania</string>
-    <string name="minutes_word">minuty)</string>
+	<string name="minutes_word">minuty)</string>
 
     <!-- Menu Items -->
     <string name="menu_settings_title">Import Eksport</string>
     <string name="menu_reset_defaults">Zresetuj wszystkie ustawienia</string>
     <string name="menu_import_settings">Importuj ustawienia z pliku…</string>
     <string name="menu_export_settings">Eksportuj ustawienia do pliku…</string>
-    <string name="menu_netstat_title">Statystyki sieci</string>
-    <string name="menu_netstat_enable">Włącz statystyki</string>
-    <string name="menu_netstat_clear">Zresetuj statystyki sieci</string>
-    <string name="menu_restart">Restart</string>
+	<string name="menu_restart">Restart</string>
     <string name="menu_restartSysUI">Uruchom ponownie systemowy interfejs użytkownika</string>
     <string name="menu_updates">Aktualizacje aplikacji</string>
 
-    <string name="nestat_caution_title">Ostrożność!</string>
-    <string name="nestat_caution_text">Twoje statystyki sieci zostaną zresetowane na stałe. Przystępować?</string>
-    <string name="netstat_caution_yes">Kontynuować</string>
-    <string name="netstat_caution_no">Może później</string>
-
-    <string name="monitoring_category_title">Opcje monitorowania</string>
+	<string name="monitoring_category_title">Opcje monitorowania</string>
     <string name="netstat_header">Ustawienia statystyk sieci</string>
 
-    <string name="string_formatter_manual_body">Oprócz zwykłego tekstu, który można wprowadzić, dostępne są również zmienne dynamiczne:\n\n$G\&lt;format\&gt; : data gruzińska, na podstawie formatu. Aby uzyskać dokumentację formatu, wyszukaj `Java Date Format`\nPrzykład: $GMMM oznacza: Jan (lub dowolny inny)\n\n$P&lt;format&gt; : Data perska na podstawie formatu\nPrzykład: $Pyyyy oznacza: 1401\n\n$Nrx : Łączna liczba pobrań dzisiaj\n$Ntx: Łączna liczba przesłanych dzisiaj\n$Nall : Łączny ruch dzisiaj\n$Nssid : Nazwa SSID Wi-Fi (jeśli dotyczy)\n\nJeśli zastąpisz $N $Nc otrzymasz statystyki danych mobilnych (takie jak $Ncrx dla pobierania; z wyłączeniem $Nssid)\n\nPrzykład:\n`Ruch mobilny $GEEEE: $Ncall` wygeneruje:\n`Ruch mobilny we wtorek: 2GB`</string>
-    <string name="update_channel_name">Aktualizacje</string>
+	<string name="update_channel_name">Aktualizacje</string>
     <string name="update_notification_title">Pobrano aktualizację</string>
     <string name="update_notification_text">Kliknij tutaj, aby zainstalować</string>
-    <string name="reboot_notification_title">Zaktualizowano AOSPMods!</string>
-    <string name="reboot_notification_text">Zmiany zaczną obowiązywać po ponownym uruchomieniu urządzenia</string>
-    <string name="update_flavor_title">Zaktualizuj kanał</string>
+	<string name="update_flavor_title">Zaktualizuj kanał</string>
     <string name="stable_flavor">Stabilny</string>
     <string name="update_type_title">typ przesyłki</string>
     <string name="full_type">Pełny</string>
@@ -330,11 +297,8 @@
 
     <string name="none">Nic</string>
     <string name="screenshot">Zrzut ekranu</string>
-    <string name="back">Z powrotem</string>
-    <string name="kill_foreground_app">Zabij aplikację na pierwszym planie</string>
+	<string name="kill_foreground_app">Zabij aplikację na pierwszym planie</string>
     <string name="toggle_notification">Przełącz panel powiadomień</string>
     <string name="toggle_one_handed">Przełącz tryb jednoręczny</string>
-    <string name="insecure_screenshot">Niezabezpieczony zrzut ekranu</string>
-    <string name="screenshot_chord_insecure">Niebezpieczny zrzut ekranu VolDown Power</string>
 
 </resources>

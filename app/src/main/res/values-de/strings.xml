@@ -2,8 +2,7 @@
     <!--General strings-->
     <string name="app_themed_icon_title">Alternative AOSP Mods-Symbole aktivieren</string>
     <string name="xposed_desc">Benutzerdefinierte Funktionen für Android 12+ AOSP-basierte ROMs</string>
-    <string name="error_not_activated">Bitte kontrolliere, ob das Modul im LSPosed Manager aktiviert ist!</string>
-    <string name="hide_default">Verstecken (Standard)</string>
+	<string name="hide_default">Verstecken (Standard)</string>
     <string name="percent_of_default_size">% von der Standard Größe</string>
     <string name="overlay_none_title">(Standard)</string>
     <string name="general_section">Allgemeine Optionen</string>
@@ -26,8 +25,7 @@
     <string name="transparent_fingerprint_circle">Verstecke den Kreis um das Fingerabdrucksymbol</string>
     <string name="transparent_fingerprint_circle_off">Kreis um das Fingerabdrucksymbol wird angezeigt</string>
     <string name="transparent_fingerprint_circle_on">Kreis um das Fingerabdrucksymbol wird versteckt</string>
-    <string name="carrier_text_category">Betreibertext</string>
-    <string name="custom_text_category">Benutzerdefinierter Text auf dem Sperrbildschirm</string>
+	<string name="custom_text_category">Benutzerdefinierter Text auf dem Sperrbildschirm</string>
     <string name="configure_carrier_text">Konfiguriere den Betreibertext</string>
     <string name="carrier_text_mod_disabled">Betreibertext unverändert</string>
     <string name="carrier_text_mod_enabled">Benutzerdefinierter Betreibertext</string>
@@ -35,18 +33,12 @@
     <string name="lockscreen_center_text_value">Benutzerdefinierter Text des Uhrenbereichs</string>
     <string name="keyguard_bottom_category">Verknüpfungen im unterem Bereich</string>
     <string name="keyguard_bottom_buttons_transparent_title">Verstecke den Kreis um die Symbole</string>
-    <string name="keyguard_bottom_force_camera_title">Zeige Kamera Verknüpfung</string>
-    <string name="keyguard_left_shortcut">Zeige die linke Verknüpfung auf dem Sperrbildschirm</string>
-    <string name="LSleftShortcutTitle">Verknüpfung links</string>
+	<string name="LSleftShortcutTitle">Verknüpfung links</string>
     <string name="LSrightShortcutTitle">Verknüpfung rechts</string>
     <string name="camera_shortcut">Kamera</string>
     <string name="assistant_shortcut">Assistent</string>
     <string name="torch_shortcut">Fackel</string>
-    <string name="album_art_category">Medieneinstellungen</string>
-    <string name="album_art_title">Aktiviere Album Anzeige wenn Medien abgespielt werden</string>
-    <string name="album_art_blur_text">Unschärfewert</string>
-    <string name="album_art_grayscale">Graustufen</string>
-    <string name="shufflePin_title">Zufallsanordnung PIN</string>
+	<string name="shufflePin_title">Zufallsanordnung PIN</string>
     <string name="easy_unlock_title">Einfaches Entsperren (Pin/Passwort)</string>
     <string name="easy_unlock_summary">Wenn es beim ersten Mal nicht funktioniert hat, versuche es erneut</string>
 
@@ -55,12 +47,10 @@
     <string name="double_tap_sleep_title">Doppelt Tippen zum Sperren</string>
     <string name="battery_style_title">Wähle den Akku Stil</string>
     <string name="battery_show_percent_title">Zeige die Akkuprozente</string>
-    <string name="battery_style_category_title">Akku Stil</string>
-    <string name="battery_icon_size_title">Akkusymbolgröße</string>
+	<string name="battery_icon_size_title">Akkusymbolgröße</string>
     <string name="battery_hidden">Versteckt</string>
     <string name="BIcon_Opacity_title">Sichtbarkeit</string>
-    <string name="sb_center_fine_tune">Mittenbereich feinabstimmen</string>
-    <string name="sb_multi_row_system_icons">Mehrzeilige Systemsymbole (erfordert eine höhere Höhe der Statusleiste)</string>
+	<string name="sb_multi_row_system_icons">Mehrzeilige Systemsymbole (erfordert eine höhere Höhe der Statusleiste)</string>
     <string name="sb_icon_sort_mode">Icon-Platzierungsmethode</string>
     <string name="sort_clean">In einem Raster sortieren</string>
     <string name="sort_tight">Höchstzahl an Artikeln anpassen</string>
@@ -71,15 +61,13 @@
     <string name="combined_signal_icon_title">Kombinierte Empfangssymbole</string>
     <string name="volte_icon_title">VoLTE-Symbol anzeigen, wenn verfügbar</string>
     <string name="hide_privacychip_title">Datenschutzindikatoren ausblenden\n(Kamera, Mikrofon)</string>
-    <string name="sb_vibration_switch_title">Zeige Vibration/Lautlos Symbole</string>
-    <string name="sbc_position_title">Uhr Position</string>
+	<string name="sbc_position_title">Uhr Position</string>
     <string name="sbc_ampm_style">AM/PM Stil</string>
     <string name="sbc_show_secs">Zeige Sekunden</string>
     <string name="sbc_date_cat">Datumsoptionen</string>
     <string name="sbc_day_of_week_options">Zeige den Wochentag mit der Uhr</string>
     <string name="sbc_advanced_cat">Erweitertes Datum (ersetzt obige Einstellung!)</string>
-    <string name="sbc_advanced_sum">Bitte lies die Dokumentation zum Java-Datumsformat</string>
-    <string name="sbc_custom_date_before">Benutzerdefiniertes Datumsformat vor der Uhr</string>
+	<string name="sbc_custom_date_before">Benutzerdefiniertes Datumsformat vor der Uhr</string>
     <string name="sbc_date_small">Kleiner (70%)</string>
     <string name="sbc_custom_date_after">Benutzerdefiniertes Datumsformat nach der Uhr</string>
     <string name="sbc_header">Statusleisten Uhr Anpassung</string>
@@ -140,8 +128,7 @@
     <string name="qs_footer_text_summary">Leer lassen um den Text zu entfernen</string>
     <string name="qs_footer_text_desc">Schalte das Display Ein/Aus um zu aktivieren</string>
     <string name="light_qs_title">Helle Schnelleinstellungen während hellem Thema (könnte fehlerhaft sein)</string>
-    <string name="light_dualtone_qs_title">Aktiviere zweifarbige Schnelleinstellungen</string>
-    <string name="qs_pulldown_size">Schnell herunterziehen Größe</string>
+	<string name="qs_pulldown_size">Schnell herunterziehen Größe</string>
     <string name="qs_pulldown_switch_title">Schnelles herunterziehen des Schnelleinstellungsmenüs von der Statusleiste </string>
     <string name="qs_pulldown_side_title">Schnelles herunterziehen Seite</string>
     <string name="qs_pulldown_category">Schnelleinstellungen herunterziehen</string>
@@ -151,9 +138,7 @@
     <string name="qqs_tiles_number">Maximale Kacheln in Quick QS (max. 2 Zeilen)</string>
     <string name="qs_tile_label_size">QS-Kacheletikettengröße</string>
     <string name="qs_tile_secondary_label_size">Zusammenfassungsgröße des QS Tile-Labels</string>
-    <string name="qs_general_options">Schnelleinstellungs Optionen</string>
-    <string name="qs_text_size_title">Schnelleinstellungselemente Schriftgröße</string>
-    <string name="wifi_cell_title">Internet Element</string>
+	<string name="wifi_cell_title">Internet Element</string>
     <string name="wifi_cell_on">Benutze getrennte Elemente für Wifi und Daten</string>
     <string name="wifi_cell_off">Benutze einzelnes Internet Element</string>
     <string name="QQS_brightness_category">Helligkeitsregler Optionen</string>
@@ -163,28 +148,24 @@
     <string name="bs_thick_track">Benutze eine dicke Spur für den Helligkeitsregler</string>
     <string name="quick_settings_tiles_category">Schnelleinstellungsverknüpfingsoptionen</string>
     <string name="qs_tile_style_title">Schnelleinstellungsstile</string>
-    <string name="qstile_default">Standard</string>
 
-    <!--Navigation bar related-->
+	<!--Navigation bar related-->
     <string name="back_gesture_category_title">Anpassen der Zurück-Geste</string>
     <string name="back_from_left_title">linker Bildschirmrand</string>
     <string name="back_from_right_title">rechter Bildschirmrand</string>
     <string name="back_height_title">Gestenhöhe</string>
     <string name="gesturenav_header">Gesten Navigation</string>
     <string name="gesture_nav_pill_cat">Gestennavigationsleistenbreite</string>
-    <string name="gesture_nav_pill_mod_title">Ändere die Navigationsleistenbreite</string>
-    <string name="gesture_nav_pill_width_title">Breite im Vergleich zu der Standartbreite</string>
+	<string name="gesture_nav_pill_width_title">Breite im Vergleich zu der Standartbreite</string>
     <string name="gesture_nav_pill_height_title">Höhe im Vergleich zu der Standartbreite</string>
     <string name="threebutton_header_title">3-Schaltflächen Navigation</string>
-    <string name="back_longpress_kill_title">Zurück Taste lange drücken um die Anwendung im Vordergrund zu schließen</string>
-    <string name="modify_3button_title">Ändern Sie die Reihenfolge der Schaltflächen</string>
+	<string name="modify_3button_title">Ändern Sie die Reihenfolge der Schaltflächen</string>
     <string name="three_button_left_title">Linker Knopf</string>
     <string name="three_button_center_title">Mittler Knopf</string>
     <string name="three_button_right_title">Rechter Knopf</string>
     <string name="hide_navbar_title">Verstecke Gestennavigationsleiste</string>
     <string name="taskbar_height_title">Höhe der Taskleiste</string>
-    <string name="colorpill_title">Gestennavigationsleistenfarbe</string>
-    <string name="colorpill">Gestennavigationsleisten in Akzentfarbe</string>
+	<string name="colorpill">Gestennavigationsleisten in Akzentfarbe</string>
     <string name="reducekeyboard_title">Tastatur Gestenbereich</string>
     <string name="reducekeyboard">Reduziere den Gestenbereich der Tastatur</string>
     <string name="taskbar_status_title">Android Taskleiste</string>
@@ -219,8 +200,7 @@
     <string name="overscroll_on_summary">Wichtig: Sie MÜSSEN die Apps, für die Sie Overscroll deaktivieren möchten, in LSPosed aktivieren</string>
 
     <!-- Call section -->
-    <string name="call_category">Telefonanrufe</string>
-    <string name="vibrate_on_call_active_title">Vibrieren bei angenommenem abgehenden Anruf</string>
+	<string name="vibrate_on_call_active_title">Vibrieren bei angenommenem abgehenden Anruf</string>
     <string name="vibrate_on_call_drop_title">Vibrieren, wenn Anruf getrennt wird</string>
 
     <!-- Theming section related -->
@@ -267,36 +247,24 @@
     <!-- QS Rows overlays -->
 
     <!-- Lockscreen/Quick Settings Custom Text -->
-    <string name="netstat_enable_title">Netzwerkstatistiken sammeln</string>
-    <string name="network_interval_custom_text_title">Aktualisierungsintervall</string>
-    <string name="minutes_word">Minute(n)</string>
+	<string name="minutes_word">Minute(n)</string>
 
     <!-- Menu Items -->
     <string name="menu_settings_title">Importieren/Exportieren</string>
     <string name="menu_reset_defaults">Alle Einstellungen zurücksetzen</string>
     <string name="menu_import_settings">Einstellungen aus Datei importieren…</string>
     <string name="menu_export_settings">Einstellungen in Datei exportieren…</string>
-    <string name="menu_netstat_title">Netzwerkstatistik</string>
-    <string name="menu_netstat_enable">Statistik aktivieren</string>
-    <string name="menu_netstat_clear">Netzwerkstatistik zurücksetzen</string>
-    <string name="menu_restart">Neu starten</string>
+	<string name="menu_restart">Neu starten</string>
     <string name="menu_restartSysUI">SystemUI neustarten</string>
     <string name="menu_updates">App-Updates</string>
 
-    <string name="nestat_caution_title">Achtung!</string>
-    <string name="nestat_caution_text">Ihre Netzwerkstatistiken werden dauerhaft zurückgesetzt. Fortfahren?</string>
-    <string name="netstat_caution_yes">Weiter</string>
-    <string name="netstat_caution_no">Vielleicht später</string>
-
-    <string name="monitoring_category_title">Überwachungsoptionen</string>
+	<string name="monitoring_category_title">Überwachungsoptionen</string>
     <string name="netstat_header">Netzwerkstatistikeinstellungen</string>
 
     <string name="update_channel_name">Aktualisierungen</string>
     <string name="update_notification_title">Update heruntergeladen</string>
     <string name="update_notification_text">Zum Installieren hier tippen</string>
-    <string name="reboot_notification_title">AOSPMods aktualisiert!</string>
-    <string name="reboot_notification_text">Änderungen werden nach dem Neustart wirksam</string>
-    <string name="update_flavor_title">Kanal aktualisieren</string>
+	<string name="update_flavor_title">Kanal aktualisieren</string>
     <string name="stable_flavor">Stabil</string>
     <string name="update_type_title">Pakettyp</string>
     <string name="full_type">Voll</string>
@@ -331,12 +299,10 @@
     <string name="gesture_nav_swipe_up_height">Swipe-up-Aktionen minimale Triggerhöhe</string>
     <string name="none">Keiner</string>
     <string name="screenshot">Bildschirmfoto</string>
-    <string name="back">Zürück</string>
-    <string name="kill_foreground_app">Vordergrund-App beenden</string>
+	<string name="kill_foreground_app">Vordergrund-App beenden</string>
     <string name="toggle_notification">Benachrichtigungsfeld umschalten</string>
     <string name="toggle_one_handed">Einhandmodus umschalten</string>
-    <string name="insecure_screenshot">Unsicherer Screenshot</string>
-    <string name="taskbar_as_recents_title">Konvertieren Sie die Taskleiste in die Recents-Leiste</string>
+	<string name="taskbar_as_recents_title">Konvertieren Sie die Taskleiste in die Recents-Leiste</string>
     <string name="wakeup_to_security_title">Pineingabe anzeigen, sobald das Gerät erwacht</string>
     <string name="taskbar_radius_title">Taskleisten-Eckenradius</string>
     <string name="caution_unstable">Achtung! Diese Option kann für einige Benutzer instabil sein.</string>
@@ -345,12 +311,9 @@
     <string name="heads_up_notification_duration">Dauer der Heads-up-Benachrichtigung</string>
     <string name="milliseconds">Millisekunden</string>
     <string name="network_show_icons_title">Richtungssymbole für die Internet-Download-Geschwindigkeit anzeigen</string>
-    <string name="power_menu_overlays_section">Power-Menü-Themen</string>
-    <string name="power_menu_overlays_summary_on">Mit dieser Option werden auch einige coole neue Icons systemweit aktiviert</string>
-    <string name="power_menu_overlays_title">Helle/dunkle Themen für das Power-Menü aktivieren</string>
+	<string name="power_menu_overlays_title">Helle/dunkle Themen für das Power-Menü aktivieren</string>
     <string name="sleep">Gerät in den Ruhezustand versetzen</string>
-    <string name="taskbar_hide_allapps_title">Symbol für alle Anwendungen ausblenden</string>
-    <string name="charging_info_title">Ladeinformationen auf dem Sperrbildschirm</string>
+	<string name="charging_info_title">Ladeinformationen auf dem Sperrbildschirm</string>
     <string name="imperial_units_title">Verwenden imperiale Einheiten</string>
     <string name="hide_roaming_title">Mobile Roaming-Anzeigen ausblenden</string>
     <string name="caution_mobile_costs">VORSICHT - Wenn Sie nicht wissen, dass Sie Roaming verwenden, können Ihre Mobilfunkkosten steigen</string>
@@ -361,8 +324,7 @@
     <string name="ls_general_options">Sperrbildschirm-Optionen</string>
     <string name="hide_avatar_title">Benutzer-Avatar entfernen (Mehrbenutzermodus)</string>
     <string name="clipboard_smart_actions_title">Smart-Aktionen in der Zwischenablage</string>
-    <string name="camera_manager_master_title">Taschenlampenmodifikationen aktivieren (Deaktivieren, wenn das Gerät es nicht unterstützt)</string>
-    <string name="pm_header">Anwendungpaketmanager</string>
+	<string name="pm_header">Anwendungpaketmanager</string>
     <string name="LSleftLongClickShortcutTitle">Linkes Shortcut (lang drücken)</string>
     <string name="LSrightLongClickShortcutTitle">Rechte Shortcut (Langer Druck)</string>
     <string name="tv_remote_shortcut">TV-Fernbedienung</string>

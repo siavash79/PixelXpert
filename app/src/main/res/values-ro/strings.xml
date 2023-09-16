@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--General strings-->
-    <string name="error_not_activated">Confirmați dacă modulul este activat în cadrul managerului LSPosed</string>
-    <string name="hide_default">Ascuns (implicit)</string>
+	<string name="hide_default">Ascuns (implicit)</string>
     <string name="percent_of_default_size">% din dimensiunea implicită</string>
     <string name="overlay_none_title">(Implicit)</string>
     <string name="general_section">Opțiuni generale</string>
@@ -24,8 +23,7 @@
     <string name="transparent_fingerprint_circle">Elimină cercul de fundal a amprentei de sub afișaj</string>
     <string name="transparent_fingerprint_circle_off">Cercul în jurul pictogramei amprentei este activat</string>
     <string name="transparent_fingerprint_circle_on">Cercul din jurul imaginii amprentei va fi ascuns</string>
-    <string name="carrier_text_category">Text furnizor</string>
-    <string name="custom_text_category">Text personalizat pe Ecranul de blocare</string>
+	<string name="custom_text_category">Text personalizat pe Ecranul de blocare</string>
     <string name="configure_carrier_text">Configurarea textului furnizorului - Partea de sus a ecranului</string>
     <string name="carrier_text_mod_disabled">Textul furnizorului neschimbat</string>
     <string name="carrier_text_mod_enabled">Text personalizat furnizor</string>
@@ -34,18 +32,12 @@
     <string name="keyguard_dim_amount_title">Diminuare fundal ecran blocare</string>
     <string name="keyguard_bottom_category">Comenzi rapide în zona de jos</string>
     <string name="keyguard_bottom_buttons_transparent_title">Elimină cercul din jurul pictogramelor</string>
-    <string name="keyguard_bottom_force_camera_title">Arată scurtătura cameră foto</string>
-    <string name="keyguard_left_shortcut">Arată scurtătură din stânga pe ecranul de blocare</string>
-    <string name="LSleftShortcutTitle">Comanda rapidă din stânga</string>
+	<string name="LSleftShortcutTitle">Comanda rapidă din stânga</string>
     <string name="LSrightShortcutTitle">Comanda rapidă din dreapta</string>
     <string name="camera_shortcut">Cameră</string>
     <string name="assistant_shortcut">Asistent</string>
     <string name="torch_shortcut">Lanternă</string>
-    <string name="album_art_category">Opțiuni media</string>
-    <string name="album_art_title">Activează coperta de album când se redă media</string>
-    <string name="album_art_blur_text">Valoare estompare</string>
-    <string name="album_art_grayscale">Tonuri de gri</string>
-    <string name="shufflePin_title">Amestecare PIN</string>
+	<string name="shufflePin_title">Amestecare PIN</string>
     <string name="wakeup_to_security_title">Afișează introducerea de securitate la activarea dispozitivului</string>
     <string name="easy_unlock_title">Deblocare ușoară (Pin/Parolă)</string>
     <string name="easy_unlock_summary">Dacă nu a funcționat pentru prima dată, încercați din nou</string>
@@ -55,12 +47,10 @@
     <string name="double_tap_sleep_title">Dublă-atingere pentru oprire ecran</string>
     <string name="battery_style_title">Alege un stil de baterie</string>
     <string name="battery_show_percent_title">Afișează procentajul bateriei</string>
-    <string name="battery_style_category_title">Stil baterie</string>
-    <string name="battery_icon_size_title">Dimensiune pictogramă baterie</string>
+	<string name="battery_icon_size_title">Dimensiune pictogramă baterie</string>
     <string name="battery_hidden">Ascunsă</string>
     <string name="BIcon_Opacity_title">Transparență</string>
-    <string name="sb_center_fine_tune">Reglează fin zona centrală</string>
-    <string name="sb_multi_row_system_icons">Pictograme de sistem cu mai multe rânduri (necesită înălțime mai mare a barei de stare)</string>
+	<string name="sb_multi_row_system_icons">Pictograme de sistem cu mai multe rânduri (necesită înălțime mai mare a barei de stare)</string>
     <string name="sb_icon_sort_mode">Metoda de plasare pictograme</string>
     <string name="sort_clean">Sortează într-o grilă</string>
     <string name="sort_tight">Potrivire elemente maxime</string>
@@ -72,15 +62,13 @@
     <string name="volte_icon_title">Afișare pictogramă VoLTE atunci când este disponibilă</string>
     <string name="hide_privacychip_title">Ascunde indicatorii de confidențialitate\n(Camera, Mic)</string>
     <!-- \n means next line-->
-    <string name="sb_vibration_switch_title">Afișare pictograme vibrare/silențios</string>
-    <string name="sbc_position_title">Poziția ceasului</string>
+	<string name="sbc_position_title">Poziția ceasului</string>
     <string name="sbc_ampm_style">Stil AM/PM</string>
     <string name="sbc_show_secs">Afișare secunde</string>
     <string name="sbc_date_cat">Opțiuni dată</string>
     <string name="sbc_day_of_week_options">Arată ziua săptămânii cu ceasul</string>
     <string name="sbc_advanced_cat">Avansat (se va suprapune peste setare!)</string>
-    <string name="sbc_advanced_sum">Te rugăm să citești documentația formatului de dată Java</string>
-    <string name="sbc_custom_date_before">Text personalizat înainte de ceas</string>
+	<string name="sbc_custom_date_before">Text personalizat înainte de ceas</string>
     <string name="sbc_date_small">Dimensiuni mai mici (70%)</string>
     <string name="sbc_custom_date_after">Text personalizat după ceas</string>
     <string name="sbc_header">Personalizare ceas în bara de stare</string>
@@ -147,8 +135,7 @@
     <string name="qs_tile_vertical_title">Mută pictogramele dalelor în partea de sus</string>
     <string name="qs_leveled_flashlight_summary">Necesită hardware suportat</string>
     <string name="light_qs_title">Aplică panoul de setări rapide luminoase când se utilizează tema luminoasă</string>
-    <string name="light_dualtone_qs_title">Activează panoul setărilor rapide cu ton dublu</string>
-    <string name="qs_pulldown_size">Lățime tragere rapidă</string>
+	<string name="qs_pulldown_size">Lățime tragere rapidă</string>
     <string name="qs_pulldown_switch_title">Panou setări rapide la tragere în jos a barei de stare</string>
     <string name="qs_pulldown_side_title">Poziție tragere rapidă în jos</string>
     <string name="qs_pulldown_category">Tragere în jos a setărilor rapide</string>
@@ -158,9 +145,7 @@
     <string name="qqs_tiles_number">Maximum dale în QS rapid (max 2 rânduri)</string>
     <string name="qs_tile_label_size">Dimensiune etichetă dală QS</string>
     <string name="qs_tile_secondary_label_size">Dimensiune sumar etichetă dală QS</string>
-    <string name="qs_general_options">Opțiuni setări rapide</string>
-    <string name="qs_text_size_title">Setează dimensiunea textului pentru pictogramele QS</string>
-    <string name="wifi_cell_title">Dală Internet</string>
+	<string name="wifi_cell_title">Dală Internet</string>
     <string name="wifi_cell_on">Utilizează plăci WiFi și date separate</string>
     <string name="wifi_cell_off">Folosește o singură dală Internet</string>
     <string name="QQS_brightness_category">Opțiuni glisor luminozitate</string>
@@ -170,20 +155,17 @@
     <string name="bs_thick_track">Utilizează o pistă groasă pe glisorul de luminozitate</string>
     <string name="quick_settings_tiles_category">Opțiuni dale QS</string>
     <string name="qs_tile_style_title">Teme dale QS</string>
-    <string name="qstile_default">Implicit</string>
-    <!--Navigation bar related-->
+	<!--Navigation bar related-->
     <string name="back_gesture_category_title">Configurare gest înapoi</string>
     <string name="back_from_left_title">Partea stângă a ecranului</string>
     <string name="back_from_right_title">Partea dreaptă a ecranului</string>
     <string name="back_height_title">Înălțimea gestului</string>
     <string name="gesturenav_header">Navigare prin gesturi</string>
     <string name="gesture_nav_pill_cat">Bară de navigare</string>
-    <string name="gesture_nav_pill_mod_title">Modificare bară de navigare</string>
-    <string name="gesture_nav_pill_width_title">Lățime comparată cu dimensiunea standard</string>
+	<string name="gesture_nav_pill_width_title">Lățime comparată cu dimensiunea standard</string>
     <string name="gesture_nav_pill_height_title">Înălțimea comparată cu dimensiunea standard</string>
     <string name="threebutton_header_title">Navigare cu 3 butoane</string>
-    <string name="back_longpress_kill_title">Apăsare lungă Înapoi pentru a închide aplicația din prim-plan</string>
-    <string name="modify_3button_title">Modifică ordinea butoanelor</string>
+	<string name="modify_3button_title">Modifică ordinea butoanelor</string>
     <string name="three_button_left_title">Butonul din stânga</string>
     <string name="three_button_center_title">Butonul de mijloc</string>
     <string name="three_button_right_title">Butonul din dreapta</string>
@@ -191,15 +173,13 @@
     <string name="taskbar_as_recents_title">Convertește bara de activități în bara de recente</string>
     <string name="taskbar_height_title">Înălțime bară de activități</string>
     <string name="taskbar_radius_title">Curba colțului barei de activități</string>
-    <string name="colorpill_title">Colorează bara de navigare</string>
-    <string name="colorpill">Bara de navigare nuanțată</string>
+	<string name="colorpill">Bara de navigare nuanțată</string>
     <string name="reducekeyboard_title">Spațiu tastatură pentru gesturi</string>
     <string name="reducekeyboard">Reduce spațiul de sub tastatură</string>
     <string name="taskbar_status_title">Bara de activități Android</string>
     <string name="taskbar_force_enable_title">Activată forțat</string>
     <string name="taskbar_force_disable_title">Dezactivată forțat</string>
-    <string name="taskbar_hide_allapps_title">Pictograma Ascunde toate aplicațiile</string>
-    <!--Miscellaneous section related-->
+	<!--Miscellaneous section related-->
     <string name="screenshot_sound_disable_title">Dezactivare sunet captură ecran</string>
     <string name="clipboard_smart_actions_title">Acțiuni inteligente pe suprapunerea clipboard-ului</string>
     <string name="allow_all_screen_rotations">Deblocare forțată a tuturor rotațiilor ecranului</string>
@@ -228,8 +208,7 @@
     <string name="overscroll_on_summary">Important: TREBUIE să activați aplicațiile pentru care doriți să dezactivați derularea elastică în LSPosed</string>
     <string name="milliseconds">Milisecunde</string>
     <!-- Call section -->
-    <string name="call_category">Apeluri telefonice</string>
-    <string name="vibrate_on_call_active_title">Vibrează la răspunsul unui apel efectuat</string>
+	<string name="vibrate_on_call_active_title">Vibrează la răspunsul unui apel efectuat</string>
     <string name="vibrate_on_call_drop_title">Vibrare la deconectare apel</string>
     <!-- Theming section related -->
     <string name="gsans_override_title">Forțează sistemul de fonturi Google Sans în tot sistemul</string>
@@ -241,10 +220,8 @@
     <string name="dt_styles_category">Stil temă întunecată</string>
     <string name="dt_styles">Alege un stil</string>
     <string name="caution_unstable">Atenție: Această opțiune ar putea fi instabilă pentru unii utilizatori.</string>
-    <string name="power_menu_overlays_section">Teme meniu buton de alimentare</string>
-    <string name="power_menu_overlays_title">Activează tema luminoasă/întunecată a meniului butonului de alimentare</string>
-    <string name="power_menu_overlays_summary_on">Această opțiune permite, de asemenea, introducerea unor pictograme noi și interesante</string>
-    <!-- Arrays strings -->
+	<string name="power_menu_overlays_title">Activează tema luminoasă/întunecată a meniului butonului de alimentare</string>
+	<!-- Arrays strings -->
     <!-- Quick pull down -->
     <string name="pull_down_left">Stânga</string>
     <string name="pull_down_right">Dreapta</string>
@@ -271,33 +248,21 @@
     <string name="fourg_lte_fourg">Forțează pictograma 4G</string>
     <!-- QS Rows overlays -->
     <!-- Lockscreen/Quick Settings Custom Text -->
-    <string name="netstat_enable_title">Colectare statistici de rețea</string>
-    <string name="network_interval_custom_text_title">Interval de reîmprospătare</string>
-    <string name="minutes_word">minut(e)</string>
+	<string name="minutes_word">minut(e)</string>
     <!-- Menu Items -->
     <string name="menu_settings_title">Import/Export</string>
     <string name="menu_reset_defaults">Reinițializare setări</string>
     <string name="menu_import_settings">Importă setările din fișier…</string>
     <string name="menu_export_settings">Exportă setările în fișier…</string>
-    <string name="menu_netstat_title">Statistici de rețea</string>
-    <string name="menu_netstat_enable">Activare statistici</string>
-    <string name="menu_netstat_clear">Resetare statistici de rețea</string>
-    <string name="menu_restart">Repornire</string>
+	<string name="menu_restart">Repornire</string>
     <string name="menu_restartSysUI">Repornire SystemUI</string>
     <string name="menu_updates">Actualizări aplicație</string>
-    <string name="nestat_caution_title">Atenție!</string>
-    <string name="nestat_caution_text">Statisticile de rețea se vor reseta definitiv. Continuați?</string>
-    <string name="netstat_caution_yes">Continuare</string>
-    <string name="netstat_caution_no">Poate mai târziu</string>
-    <string name="monitoring_category_title">Opțiuni monitorizare</string>
+	<string name="monitoring_category_title">Opțiuni monitorizare</string>
     <string name="netstat_header">Setări statistici de rețea</string>
-    <string name="string_formatter_manual_body">În plus față de textul normal pe care îl puteți introduce, variabilele dinamice sunt, de asemenea, disponibile:\n\n$G\&lt;format\&gt; : data georgiană, bazată pe format. Pentru documentație, vă rugăm să căutaţi `Java Date Format`\nDe exemplu: $GMMM înseamnă: Ian (sau oricare altele)\n\n$P&lt;format&gt; : Dată persană, bazat pe format\nDe exemplu: $Pyyyy înseamnă: 1401\n\nPentru a activa utilizarea internetului de mai jos, trebuie să mergeți la meniul Diverse, Setări, Statistici de rețea, și să activați opțiunea Colectare statistică rețea\n\n$Nrx: Descărcări totale astăzi\n$Ntx: Total încărcări de astăzi\n$Nall : Trafic total astăzi\n$Nssid : Nume SSID WiFi (dacă este cazul)\n\nDacă îl înlocuiți pe $N cu $Nc , veți fi furnizat cu statistici de date mobile (cum ar fi $Ncrx pentru descărcări; exclude $Nssid)\n\nExemplu:\n`Trafic mobil $GEEEE: $Ncall` va produce:\n`Trafic mobil de marți: 2GB`</string>
-    <string name="update_channel_name">Actualizări</string>
+	<string name="update_channel_name">Actualizări</string>
     <string name="update_notification_title">Actualizare descărcată</string>
     <string name="update_notification_text">Atingeți aici pentru instalare</string>
-    <string name="reboot_notification_title">AOSPMods actualizat!</string>
-    <string name="reboot_notification_text">Modificările vor avea efect după repornirea dispozitivului</string>
-    <string name="update_flavor_title">Canalul de actualizare</string>
+	<string name="update_flavor_title">Canalul de actualizare</string>
     <string name="stable_flavor">Stabil</string>
     <string name="update_type_title">Tip de pachet</string>
     <string name="full_type">Complet</string>
@@ -314,8 +279,7 @@
     <string name="reinstall_word">Reinstalare</string>
     <string name="own_prefs_header">Setări AOSPMods</string>
     <string name="language_title">Limbă</string>
-    <string name="camera_manager_master_title">Activare moduri lanternă (Dezactivează dacă telefonul nu le suportă)</string>
-    <string name="toggle_dark_apply">(Comutați tema întunecată pentru a aplica)</string>
+	<string name="toggle_dark_apply">(Comutați tema întunecată pentru a aplica)</string>
     <string name="gesture_nav_extra_cat">Gesturi suplimentare bară de navigare</string>
     <string name="gesture_nav_long_swipe_fc_title">Glisați în partea de sus a ecranului pentru a închide aplicația din prim-plan</string>
     <string name="gesture_nav_left_swipe_up_title">Glisare în sus din stânga barei de navigare</string>
@@ -326,11 +290,8 @@
     <string name="gesture_nav_swipe_up_height">Înălțimea minimă a declanșatorului la acțiunea de glisare în sus</string>
     <string name="none">Nimic</string>
     <string name="screenshot">Captură de ecran</string>
-    <string name="back">Înapoi</string>
-    <string name="kill_foreground_app">Închide aplicația din prim-plan</string>
+	<string name="kill_foreground_app">Închide aplicația din prim-plan</string>
     <string name="toggle_notification">Comută panoul de notificări</string>
     <string name="toggle_one_handed">Comută modul cu o mână</string>
-    <string name="insecure_screenshot">Captură ecran nerestricționată</string>
-    <string name="screenshot_chord_insecure">Captură de ecran nerestricționată VolDown+Power</string>
-    <string name="sleep">Somn</string>
+	<string name="sleep">Somn</string>
 </resources>

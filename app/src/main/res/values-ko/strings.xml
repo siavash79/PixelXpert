@@ -6,8 +6,7 @@
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="volume_tile_title">미디어 볼륨</string>
     <string name="app_switch_tile_title">앱 프로필 바꾸기</string>
-    <string name="error_not_activated">LSPosed Manager에서 모듈이 활성화되었는지 확인해주세요</string>
-    <string name="hide_default">숨김 (기본값)</string>
+	<string name="hide_default">숨김 (기본값)</string>
     <string name="percent_of_default_size">% (기본값 대비)</string>
     <string name="overlay_none_title">(기본값)</string>
     <string name="general_section">일반 설정</string>
@@ -41,8 +40,7 @@
     <string name="transparent_fingerprint_circle">화면 내장 지문인식 아이콘 원형 배경 삭제</string>
     <string name="transparent_fingerprint_circle_off">지문인식 아이콘의 원형 배경이 표시되고 있습니다</string>
     <string name="transparent_fingerprint_circle_on">지문인식 아이콘의 원형 배경이 숨겨집니다</string>
-    <string name="carrier_text_category">통신사 문구</string>
-    <string name="custom_text_category">잠금 화면 커스텀 문구</string>
+	<string name="custom_text_category">잠금 화면 커스텀 문구</string>
     <string name="configure_carrier_text">화면 상단 통신사 문구 변경</string>
     <string name="carrier_text_mod_disabled">통신사 문구가 그대로 표시됩니다</string>
     <string name="carrier_text_mod_enabled">변경된 통신사 문구가 표시됩니다</string>
@@ -51,9 +49,7 @@
     <string name="keyguard_dim_amount_title">잠금 화면 배경화면 밝기</string>
     <string name="keyguard_bottom_category">하단 영역 바로가기</string>
     <string name="keyguard_bottom_buttons_transparent_title">아이콘 원형 배경 삭제</string>
-    <string name="keyguard_bottom_force_camera_title">카메라 바로가기 표시</string>
-    <string name="keyguard_left_shortcut">잠금 화면 좌측 바로가기 표시</string>
-    <string name="LSleftShortcutTitle">왼쪽 바로가기</string>
+	<string name="LSleftShortcutTitle">왼쪽 바로가기</string>
     <string name="LSrightShortcutTitle">오른쪽 바로가기</string>
     <string name="LSleftLongClickShortcutTitle">왼쪽 바로가기 (길게 누름)</string>
     <string name="LSrightLongClickShortcutTitle">오른쪽 바로가기 (길게 누름)</string>
@@ -63,11 +59,7 @@
     <string name="tv_remote_shortcut">TV 리모컨</string>
     <string name="dnd_shortcut">방해 금지 모드</string>
     <string name="qr_scanner_shortcut">QR 코드 스캐너</string>
-    <string name="album_art_category">미디어 설정</string>
-    <string name="album_art_title">미디어 재생 중 앨범아트 표시</string>
-    <string name="album_art_blur_text">블러 값</string>
-    <string name="album_art_grayscale">그레이스케일</string>
-    <string name="shufflePin_title">PIN 숫자 섞기</string>
+	<string name="shufflePin_title">PIN 숫자 섞기</string>
     <string name="wakeup_to_security_title">화면 켜짐 시 입력창 바로 표시</string>
     <string name="easy_unlock_title">쉬운 잠금해제 (PIN/비밀번호)</string>
     <string name="easy_unlock_summary">적용 직후, 작동하지 않았다면 다시 시도해보세요</string>
@@ -79,14 +71,11 @@
     <string name="battery_style_title">배터리 아이콘 설정</string>
     <string name="battery_show_percent_title">배터리 퍼센트 표시</string>
     <string name="battery_show_charging_animation_title">충전 애니메이션 표시</string>
-    <string name="battery_style_category_title">배터리 스타일</string>
-    <string name="battery_style_category_summary" translatable="false">@string/qs_footer_text_desc</string>
-    <string name="battery_icon_size_title">배터리 아이콘 크기</string>
+	<string name="battery_icon_size_title">배터리 아이콘 크기</string>
     <string name="battery_size_summary" translatable="false">@string/percent_of_default_size</string>
     <string name="battery_hidden">숨김</string>
     <string name="BIcon_Opacity_title">투명도</string>
-    <string name="sb_center_fine_tune">중심부 미세 조정</string>
-    <string name="sb_multi_row_system_icons">시스템 아이콘 여러 줄 표시 (늘어난 높이의 상태 표시줄 필요)</string>
+	<string name="sb_multi_row_system_icons">시스템 아이콘 여러 줄 표시 (늘어난 높이의 상태 표시줄 필요)</string>
     <string name="sb_multi_row_notification_icons">알림 아이콘 여러 줄 표시 (늘어난 높이의 상태 표시줄 필요)</string>
     <string name="sb_double_row_category">상태 표시줄 두 줄 확장</string>
     <string name="sb_icon_sort_mode">아이콘 배치 방식</string>
@@ -101,15 +90,13 @@
     <string name="volte_icon_title">VoLTE 사용 가능 시 아이콘 표시</string>
     <string name="vowifi_icon_title">VoWiFi 사용 가능 시 아이콘 표시</string>
     <string name="hide_privacychip_title">개인 정보 보호 표시 숨김\n(카메라, 마이크 사용 알림)</string><!-- \n means next line-->
-    <string name="sb_vibration_switch_title">진동 아이콘 표시</string>
-    <string name="sbc_position_title">시계 위치</string>
+	<string name="sbc_position_title">시계 위치</string>
     <string name="sbc_ampm_style">AM/PM 스타일</string>
     <string name="sbc_show_secs">초 단위 표시</string>
     <string name="sbc_date_cat">날짜 설정</string>
     <string name="sbc_day_of_week_options">요일 표시</string>
     <string name="sbc_advanced_cat">고급 설정 (위 설정보다 우선 적용됩니다!)</string>
-    <string name="sbc_advanced_sum">Java 날짜 포맷 문서를 참고하세요</string>
-    <string name="sbc_custom_date_before">시계 앞 커스텀 문구</string>
+	<string name="sbc_custom_date_before">시계 앞 커스텀 문구</string>
     <string name="sbc_date_small">크기 줄이기 (70%)</string>
     <string name="sbc_custom_date_after">시계 뒤 커스텀 문구</string>
     <string name="sbc_header">상태 표시줄 시계 개인 설정</string>
@@ -191,8 +178,7 @@
     <string name="qs_tile_qty_title">빠른 설정 타일 배치 설정</string>
     <string name="qs_leveled_flashlight_summary">지원되는 하드웨어가 필요합니다</string>
     <string name="light_qs_title">밝은 테마 사용 시 밝은 빠른 설정 화면 적용</string>
-    <string name="light_dualtone_qs_title">다중 색상 빠른 설정 화면 활성화</string>
-    <string name="qs_pulldown_size">바로 열기 영역 너비</string>
+	<string name="qs_pulldown_size">바로 열기 영역 너비</string>
     <string name="qs_pulldown_switch_title">상태 표시줄로부터 빠른 설정 바로 열기</string>
     <string name="qs_pulldown_side_title">바로 열기 영역 위치</string>
     <string name="qs_pulldown_category">빠른 설정 바로 열기</string>
@@ -206,9 +192,7 @@
     <string name="qqs_tiles_number">최대 타일 개수 (최대 2 가로 행)</string>
     <string name="qs_tile_label_size">타일 라벨 크기</string>
     <string name="qs_tile_secondary_label_size">타일 요약 라벨 크기</string>
-    <string name="qs_general_options">빠른 설정 화면 설정</string>
-    <string name="qs_text_size_title">타일 글자 크기 설정</string>
-    <string name="wifi_cell_title">인터넷 타일</string>
+	<string name="wifi_cell_title">인터넷 타일</string>
     <string name="wifi_cell_on">WiFi 및 데이터 타일 분리</string>
     <string name="wifi_cell_off">통합된 인터넷 타일 사용</string>
     <string name="QQS_brightness_category">밝기 조절 슬라이더 설정</string>
@@ -218,8 +202,7 @@
     <string name="bs_thick_track">밝기 조절 슬라이더 두꺼운 배경 사용</string>
     <string name="quick_settings_tiles_category">빠른 설정 타일 설정</string>
     <string name="qs_tile_style_title">빠른 설정 타일 테마</string>
-    <string name="qstile_default">기본</string>
-    <string name="qstile_cookie" translatable="false">Cookie</string>
+	<string name="qstile_cookie" translatable="false">Cookie</string>
     <string name="qstile_triangles" translatable="false">Triangle</string>
     <string name="qstile_divided" translatable="false">Divided Circle</string>
     <string name="qstile_attemptmountain" translatable="false">An attempt at a mountain</string>
@@ -245,12 +228,10 @@
     <string name="back_height_title">제스쳐 높이</string>
     <string name="gesturenav_header">제스쳐 탐색</string>
     <string name="gesture_nav_pill_cat">알약 모양 네비게이션 바</string>
-    <string name="gesture_nav_pill_mod_title">네비게이션 바 수정하기</string>
-    <string name="gesture_nav_pill_width_title">기본값 대비 너비 설정</string>
+	<string name="gesture_nav_pill_width_title">기본값 대비 너비 설정</string>
     <string name="gesture_nav_pill_height_title">기본값 대비 높이 설정</string>
     <string name="threebutton_header_title">3-버튼 네비게이션 바</string>
-    <string name="back_longpress_kill_title">뒤로 가기 길게 눌러 실행 중인 앱 종료하기</string>
-    <string name="modify_3button_title">버튼 순서 수정하기</string>
+	<string name="modify_3button_title">버튼 순서 수정하기</string>
     <string name="three_button_left_title">왼쪽 버튼</string>
     <string name="three_button_center_title">가운데 버튼</string>
     <string name="three_button_right_title">오른쪽 버튼</string>
@@ -259,15 +240,13 @@
     <string name="taskbar_as_recents_title">작업표시줄을 최근 앱으로 바꾸기</string>
     <string name="taskbar_height_title">작업표시줄 높이</string>
     <string name="taskbar_radius_title">작업표시줄 곡률</string>
-    <string name="colorpill_title">제스쳐 알약 색상 변경</string>
-    <string name="colorpill">제스쳐 알약 강조 색상으로 설정</string>
+	<string name="colorpill">제스쳐 알약 강조 색상으로 설정</string>
     <string name="reducekeyboard_title">제스쳐를 위한 키보드 여백</string>
     <string name="reducekeyboard">키보드 여백 줄이기</string>
     <string name="taskbar_status_title">안드로이드 작업표시줄</string>
     <string name="taskbar_force_enable_title">강제 활성화</string>
     <string name="taskbar_force_disable_title">강제 비활성화</string>
-    <string name="taskbar_hide_allapps_title">모든 앱 아이콘 숨기기</string>
-    <string name="taskbar_transient_title">자동 숨김</string>
+	<string name="taskbar_transient_title">자동 숨김</string>
 
     <!-- Package manager -->
     <string name="pm_bypass_signature_title">패키지 인증서 확인 절차 우회</string>
@@ -321,8 +300,7 @@
     <string name="statusbar_app_switch_icon">프로필 전환이 가능할 때 상태표시줄에 아이콘을 표시합니다</string>
 
     <!-- Call section -->
-    <string name="call_category">전화</string>
-    <string name="vibrate_on_call_active_title">상대방이 나의 전화를 받은 경우 진동 알림</string>
+	<string name="vibrate_on_call_active_title">상대방이 나의 전화를 받은 경우 진동 알림</string>
     <string name="vibrate_on_call_drop_title">전화가 끊어진 경우 진동 알림</string>
     <string name="vibration_type_notification">시스템 알림 진동 설정에 따른 강도</string>
     <string name="dialer_mute_record_message_title">통화 녹음 알림 제거</string>
@@ -345,10 +323,8 @@
     <string name="dt_style" translatable="false">Dark Blue</string>
     <string name="dt_darkgray" translatable="false">Dark Grey</string>
     <string name="dt_materialocean" translatable="false">Material Ocean</string>
-    <string name="dt_night" translatable="false">Night</string>
-    <string name="dt_solarizeddark" translatable="false">Solarized Dark</string>
-    <string name="power_menu_overlays_section">전원 메뉴 테마</string>
-    <string name="power_menu_overlays_title">전원 메뉴 라이트/다크 테마 활성화</string>
+	<string name="dt_solarizeddark" translatable="false">Solarized Dark</string>
+	<string name="power_menu_overlays_title">전원 메뉴 라이트/다크 테마 활성화</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->
@@ -384,9 +360,7 @@
     <!-- QS Rows overlays -->
 
     <!-- Lockscreen/Quick Settings Custom Text -->
-    <string name="netstat_enable_title">네트워크 기록 수집</string>
-    <string name="network_interval_custom_text_title">새로고침 주기</string>
-    <string name="minutes_word">분</string>
+	<string name="minutes_word">분</string>
     <string name="network_stat_type">통계 종류</string>
     <string name="network_stat_day">일 시작 시간</string>
     <string name="network_stat_week">주 시작 시간</string>
@@ -407,31 +381,20 @@
     <string name="menu_reset_defaults">모든 설정 초기화</string>
     <string name="menu_import_settings">파일로부터 설정 불러오기…</string>
     <string name="menu_export_settings">파일로부터 설정 내보내기…</string>
-    <string name="menu_netstat_title">네트워크 기록</string>
-    <string name="menu_netstat_enable">기록 수집 활성화</string>
-    <string name="menu_netstat_clear">네트워크 기록 초기화</string>
-    <string name="menu_restart">다시 시작</string>
+	<string name="menu_restart">다시 시작</string>
     <string name="menu_restartSysUI">SystemUI 다시 시작</string>
     <string name="menu_updates">앱 업데이트</string>
 
-    <string name="nestat_caution_title">주의!</string>
-    <string name="nestat_caution_text">당신의 네트워크 기록이 영구히 초기화됩니다. 계속하시겠습니까?</string>
-    <string name="netstat_caution_yes">계속하기</string>
-    <string name="netstat_caution_no">다음에</string>
-
-    <string name="monitoring_category_title">모니터링 설정</string>
+	<string name="monitoring_category_title">모니터링 설정</string>
     <string name="netstat_header">네트워크 기록 설정</string>
 
-    <string name="string_formatter_manual_body">일반적인 문장 이외에도, 동적 변수 또한 사용이 가능합니다:\n\n$G\&lt;format\&gt; : 그레고리안 날짜를 주어진 format에 따라 출력합니다. 포맷에 대한 자세한 정보가 필요하다면, `Java 날짜 포맷`을 검색해보세요\n예시: $GMMM 은: Jan 과 같이 영문자 3글자로 월을 표시합니다\n\n$P&lt;format&gt; : 페르시안 날짜를 주어진 format에 따라 출력합니다\n예시: $Pyyyy 는: 1401 이 표시될 수 있습니다\n\n인터넷 사용량을 표시하고자 한다면, 기타 설정 메뉴의, 네트워크 기록 설정으로 이동하여, 네트워크 기록 수집을 활성화하세요\n\n$Nrx : 오늘의 다운로드 총량\n$Ntx: 오늘의 업로드 총량\n$Nall : 오늘의 트래픽 총량\n$Nssid : WiFi SSID 이름 (표시 가능한 경우)\n\n$N 을 $Nc 로 대치할 경우, 모바일 데이터 사용기록에 따른 정보가 제공됩니다 (예로, 모바일 데이터 다운로드 총량은 $Ncrx 로 접근이 가능합니다; $Nssid 제외)\n\n예시:\n`$GEEEE 의 데이터 사용량: $Ncall` 표현식은:\n`Tuesday 의 데이터 사용량: 2GB`를 출력합니다</string>
-    <string name="update_fragment_label" translatable="false">@string/menu_updates</string>
+	<string name="update_fragment_label" translatable="false">@string/menu_updates</string>
     <string name="update_channel_name">업데이트</string>
     <string name="update_notification_title">업데이트 다운로드됨</string>
     <string name="update_notification_text">여기를 눌러 설치하세요</string>
     <string name="download_failed">업데이트 다운로드 실패</string>
     <string name="try_again_later">나중에 다시 시도해주세요</string>
-    <string name="reboot_notification_title">AOSPMods가 업데이트되었습니다!</string>
-    <string name="reboot_notification_text">변경된 사항들은 기기를 다시 시작하면 적용됩니다</string>
-    <string name="update_flavor_title">업데이트 채널</string>
+	<string name="update_flavor_title">업데이트 채널</string>
     <string name="stable_flavor">Stable</string>
     <string name="canary_flavor" translatable="false">Canary</string>
     <string name="update_type_title">패키지 타입</string>
@@ -453,8 +416,7 @@
 
     <string name="own_prefs_header">AOSPMods 설정</string>
     <string name="language_title">언어</string>
-    <string name="camera_manager_master_title">손전등 기능 활성화 (사용 중인 기기에서 손전등 관련 기능이 작동하지 않는다면 비활성화하세요)</string>
-    <string name="toggle_dark_apply">(다크 테마를 토글하여 적용)</string>
+	<string name="toggle_dark_apply">(다크 테마를 토글하여 적용)</string>
 
     <string name="gesture_nav_extra_cat">추가 네비게이션 바 제스쳐</string>
     <string name="gesture_nav_long_swipe_fc_title">화면 상단까지 스와이프하여 현재 앱 종료</string>
@@ -467,12 +429,10 @@
 
     <string name="none">없음</string>
     <string name="screenshot">스크린샷</string>
-    <string name="back">뒤로 가기</string>
-    <string name="kill_foreground_app">실행 중인 앱 종료</string>
+	<string name="kill_foreground_app">실행 중인 앱 종료</string>
     <string name="toggle_notification">알림 화면 토글</string>
     <string name="toggle_one_handed">한 손 모드 토글</string>
-    <string name="insecure_screenshot">제한 없는 스크린샷</string>
-    <string name="sleep">화면 끄기</string>
+	<string name="sleep">화면 끄기</string>
 
     <!-- Search Preference -->
     <string name="searchpreference_search">검색...</string>
@@ -489,7 +449,4 @@
     <string name="package_hook_no_response">패키지가 응답하지 않습니다</string>
     <string name="package_not_found">패키지를 찾을 수 없습니다</string>
     <string name="package_checking">불러오는 중%s</string>
-    <string name="root_granted">루트 권한: 부여됨</string>
-    <string name="root_not_granted">루트 권한: 부여되지 않음</string>
-    <string name="root_not_needed">루트 권한: 불필요함</string>
 </resources>

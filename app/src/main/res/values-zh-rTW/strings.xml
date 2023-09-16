@@ -2,8 +2,7 @@
     <!--General strings-->
     <string name="app_themed_icon_title">啟用替代的 AOSP Mods 主題應用圖示</string>
     <string name="xposed_desc">基於 Android 12+ AOSP ROM 的自定義功能</string>
-    <string name="error_not_activated">請確認該模組是否在 LSPosed 上被啟用。</string>
-    <string name="hide_default">隱藏 (預設)</string>
+	<string name="hide_default">隱藏 (預設)</string>
     <string name="percent_of_default_size">% 預設</string>
     <string name="overlay_none_title">(預設)</string>
     <string name="general_section">常規選項</string>
@@ -35,8 +34,7 @@
     <string name="transparent_fingerprint_circle">隱藏螢幕下指紋背景圓</string>
     <string name="transparent_fingerprint_circle_off">指紋圖示背景被啟用</string>
     <string name="transparent_fingerprint_circle_on">指紋圖示背景被隱藏</string>
-    <string name="carrier_text_category">電信商名稱</string>
-    <string name="custom_text_category">自訂鎖定畫面文本顯示</string>
+	<string name="custom_text_category">自訂鎖定畫面文本顯示</string>
     <string name="configure_carrier_text">設定電信商名稱</string>
     <string name="carrier_text_mod_disabled">未修改電信商名稱</string>
     <string name="carrier_text_mod_enabled">自訂電信商名稱</string>
@@ -45,9 +43,7 @@
     <string name="keyguard_dim_amount_title">鎖定畫面桌布亮度</string>
     <string name="keyguard_bottom_category">底部快捷方式</string>
     <string name="keyguard_bottom_buttons_transparent_title">隱藏圖示周圍圓圈</string>
-    <string name="keyguard_bottom_force_camera_title">顯示相機快捷方式</string>
-    <string name="keyguard_left_shortcut">鎖定畫面顯示左側快捷方式</string>
-    <string name="LSleftShortcutTitle">左側</string>
+	<string name="LSleftShortcutTitle">左側</string>
     <string name="LSrightShortcutTitle">右側</string>
     <string name="LSleftLongClickShortcutTitle">左側(長按)</string>
     <string name="LSrightLongClickShortcutTitle">右側(長按)</string>
@@ -56,11 +52,7 @@
     <string name="torch_shortcut">手電筒</string>
     <string name="tv_remote_shortcut">TV 遙控器</string>
     <string name="dnd_shortcut">勿擾模式</string>
-    <string name="album_art_category">多媒體選項</string>
-    <string name="album_art_title">播放多媒體時顯示專輯封面</string>
-    <string name="album_art_blur_text">模糊值</string>
-    <string name="album_art_grayscale">灰度值</string>
-    <string name="shufflePin_title">打亂密碼盤</string>
+	<string name="shufflePin_title">打亂密碼盤</string>
     <string name="wakeup_to_security_title">裝置喚醒時顯示密碼輸入介面</string>
     <string name="easy_unlock_title">快速解鎖 (Pin/密碼)</string>
     <string name="easy_unlock_summary">如果第一次未生效，請重試</string>
@@ -71,12 +63,10 @@
     <string name="double_tap_sleep_title">雙擊關閉螢幕</string>
     <string name="battery_style_title">選擇電池圖示樣式</string>
     <string name="battery_show_percent_title">顯示電量百分比</string>
-    <string name="battery_style_category_title">電池樣式</string>
-    <string name="battery_icon_size_title">電池圖示大小</string>
+	<string name="battery_icon_size_title">電池圖示大小</string>
     <string name="battery_hidden">隱藏</string>
     <string name="BIcon_Opacity_title">不透明度</string>
-    <string name="sb_center_fine_tune">微調中心區域</string>
-    <string name="sb_multi_row_system_icons">多行狀態圖示 (需要增加狀態列高度)</string>
+	<string name="sb_multi_row_system_icons">多行狀態圖示 (需要增加狀態列高度)</string>
     <string name="sb_multi_row_notification_icons">多行通知圖示 (需要增加狀態列高度)</string>
     <string name="sb_double_row_category">雙行狀態列</string>
     <string name="sb_icon_sort_mode">排列圖示方式</string>
@@ -91,15 +81,13 @@
     <string name="volte_icon_title">可用時顯示 VoLTE 圖示</string>
     <string name="vowifi_icon_title">可用時顯示 VoWiFi 圖示</string>
     <string name="hide_privacychip_title">隱藏隱私提示</string>
-    <string name="sb_vibration_switch_title">顯示「震動」圖示</string>
-    <string name="sbc_position_title">時鐘位置</string>
+	<string name="sbc_position_title">時鐘位置</string>
     <string name="sbc_ampm_style">AM/PM 樣式</string>
     <string name="sbc_show_secs">顯示秒數</string>
     <string name="sbc_date_cat">日期選項</string>
     <string name="sbc_day_of_week_options">顯示日期</string>
     <string name="sbc_advanced_cat">日期進階選項（將取代上方設定！）</string>
-    <string name="sbc_advanced_sum">請閱讀 Java 日期格式文件</string>
-    <string name="sbc_custom_date_before">自訂時鐘左側格式</string>
+	<string name="sbc_custom_date_before">自訂時鐘左側格式</string>
     <string name="sbc_date_small">較小的尺寸 (70%)</string>
     <string name="sbc_custom_date_after">自訂時鐘右側格式</string>
     <string name="sbc_header">自定狀態列時鐘</string>
@@ -168,8 +156,7 @@
     <string name="qs_tile_qty_title">方塊面板數量設定</string>
     <string name="qs_leveled_flashlight_summary">需要硬體支援</string>
     <string name="light_qs_title">淺色主題下使用淺色方塊面板 (可能會出現問題)</string>
-    <string name="light_dualtone_qs_title">啟用雙色方塊面板</string>
-    <string name="qs_pulldown_size">快速下拉方塊面板</string>
+	<string name="qs_pulldown_size">快速下拉方塊面板</string>
     <string name="qs_pulldown_switch_title">快速下拉方塊面板</string>
     <string name="qs_pulldown_side_title">快速下拉寬度</string>
     <string name="qs_pulldown_category">方塊面板下拉</string>
@@ -183,9 +170,7 @@
     <string name="qqs_tiles_number">方塊面板最大方塊數量 (最大2行)</string>
     <string name="qs_tile_label_size">方塊標籤大小</string>
     <string name="qs_tile_secondary_label_size">方塊標籤內容大小</string>
-    <string name="qs_general_options">自定方塊面板</string>
-    <string name="qs_text_size_title">方塊字體大小</string>
-    <string name="wifi_cell_title">網路方塊</string>
+	<string name="wifi_cell_title">網路方塊</string>
     <string name="wifi_cell_on">分離 WIFI 和資料方塊</string>
     <string name="wifi_cell_off">合併 WIFI 和資料方塊</string>
     <string name="QQS_brightness_category">亮度滑塊選項</string>
@@ -195,8 +180,7 @@
     <string name="bs_thick_track">使用較粗的亮度滑塊</string>
     <string name="quick_settings_tiles_category">方塊選項</string>
     <string name="qs_tile_style_title">方塊主題</string>
-    <string name="qstile_default">預設</string>
-    <string name="qs_volume_unmute_title">音量方塊取消靜音時音量</string>
+	<string name="qs_volume_unmute_title">音量方塊取消靜音時音量</string>
 
     <!--Navigation bar related-->
     <string name="back_gesture_category_title">設定返回手勢</string>
@@ -205,12 +189,10 @@
     <string name="back_height_title">手勢高度</string>
     <string name="gesturenav_header">手勢導航</string>
     <string name="gesture_nav_pill_cat">小白條寬度</string>
-    <string name="gesture_nav_pill_mod_title">修改寬度</string>
-    <string name="gesture_nav_pill_width_title">對比標準大小的寬度</string>
+	<string name="gesture_nav_pill_width_title">對比標準大小的寬度</string>
     <string name="gesture_nav_pill_height_title">對比標準大小的高度</string>
     <string name="threebutton_header_title">3 個虛擬導航鍵</string>
-    <string name="back_longpress_kill_title">長按返回鍵殺死前臺應用</string>
-    <string name="modify_3button_title">更改按鈕順序</string>
+	<string name="modify_3button_title">更改按鈕順序</string>
     <string name="three_button_left_title">左按鈕</string>
     <string name="three_button_center_title">中按鈕</string>
     <string name="three_button_right_title">右按鈕</string>
@@ -218,16 +200,14 @@
     <string name="taskbar_as_recents_title">將工作列替換為最近工作列</string>
     <string name="taskbar_height_title">工作列高度</string>
     <string name="taskbar_radius_title">工作列圓角</string>
-    <string name="colorpill_title">小白條顏色</string>
-    <string name="colorpill">小白條強調色</string>
+	<string name="colorpill">小白條強調色</string>
     <string name="reducekeyboard_title">鍵盤空間</string>
     <string name="reducekeyboard">減小鍵盤底部空間</string>
     <string name="taskbar_status_title">工作列</string>
     <string name="taskbar_force_enable_title">強制開啟</string>
     <string name="taskbar_force_disable_title">強制關閉</string>
-    <string name="taskbar_hide_allapps_title">隱藏所有軟體圖示</string>
 
-    <!-- Package manager -->
+	<!-- Package manager -->
     <string name="pm_bypass_signature_title">繞過應用簽名檢查</string>
     <string name="pm_allow_downgrade_title">允許應用降級</string>
     <string name="auto_off_five_minutes">在接下來的五分鐘內保持開啟</string>
@@ -264,8 +244,7 @@
     <string name="milliseconds">毫秒</string>
 
     <!-- Call section -->
-    <string name="call_category">通話</string>
-    <string name="vibrate_on_call_active_title">去電被接通時震動</string>
+	<string name="vibrate_on_call_active_title">去電被接通時震動</string>
     <string name="vibrate_on_call_drop_title">結束通話時震動</string>
     <string name="vibration_type_notification">強度由系統通知振動設定定義</string>
 
@@ -279,11 +258,9 @@
     <string name="dt_styles_category">深色主題樣式</string>
     <string name="dt_styles">選擇樣式</string>
     <string name="caution_unstable">注意: 該功能對部分使用者不穩定</string>
-    <string name="power_menu_overlays_section">電源選單主題</string>
-    <string name="power_menu_overlays_title">在電源選單啟用淺色/深色主題</string>
-    <string name="power_menu_overlays_summary_on">將同時系統級啟用一些新圖示</string>
+	<string name="power_menu_overlays_title">在電源選單啟用淺色/深色主題</string>
 
-    <!-- Arrays strings -->
+	<!-- Arrays strings -->
     <!-- Quick pull down -->
     <string name="pull_down_left">左側</string>
     <string name="pull_down_right">右側</string>
@@ -317,9 +294,7 @@
     <!-- QS Rows overlays -->
 
     <!-- Lockscreen/Quick Settings Custom Text -->
-    <string name="netstat_enable_title">採集網路統計資料</string>
-    <string name="network_interval_custom_text_title">重新整理間隔</string>
-    <string name="minutes_word">分鐘</string>
+	<string name="minutes_word">分鐘</string>
 
     <!-- Incompatibility Alert -->
     <string name="incompatible_alert_title">不相容</string>
@@ -331,28 +306,17 @@
     <string name="menu_reset_defaults">重置所有設定</string>
     <string name="menu_import_settings">從檔案中匯入設定</string>
     <string name="menu_export_settings">匯出設定到檔案中</string>
-    <string name="menu_netstat_title">網路統計</string>
-    <string name="menu_netstat_enable">啟用統計</string>
-    <string name="menu_netstat_clear">重置網路統計</string>
-    <string name="menu_restart">重啟</string>
+	<string name="menu_restart">重啟</string>
     <string name="menu_restartSysUI">重啟 SystemUI</string>
     <string name="menu_updates">App 更新</string>
 
-    <string name="nestat_caution_title">注意!</string>
-    <string name="nestat_caution_text">您的網路統計資料將永久重置,確認?</string>
-    <string name="netstat_caution_yes">繼續</string>
-    <string name="netstat_caution_no">也許以後</string>
-
-    <string name="monitoring_category_title">監控選項</string>
+	<string name="monitoring_category_title">監控選項</string>
     <string name="netstat_header">網路統計設定</string>
 
-    <string name="string_formatter_manual_body">除了普通文字,動態變數也可以被使用:\n\n$G\&lt;格式\&gt; : 地理位置日期,依照格式,關於格式文件,請搜尋`Java Date Format`\n例如: $GMMM 顯示為: 1月 (或其他)\n\n$P&lt;格式&gt; : 波斯日期,依照格式\n例如: $Pyyyy 顯示為: 1401\n\n為了啟用下方的網路統計資訊, 你需要在 其他 選單的 網路統計設定 裡開啟 啟用統計\n\n$Nrx : 今日總下載流量\n$Ntx: 今日總上傳流量\n$Nall : 今日總流量\n$Nssid : WiFi SSID(如果可用)\n\n如果你替換 $N 為 $Nc 將顯示移動流量的資料(比如 $Ncrx 為移動流量的下載; 除了 $Nssid)\n\n例子:\n` $GEEEE流量用量: $Ncall` 將顯示:\n`星期二流量用量: 2GB`</string>
-    <string name="update_channel_name">更新</string>
+	<string name="update_channel_name">更新</string>
     <string name="update_notification_title">已下載更新</string>
     <string name="update_notification_text">點此安裝</string>
-    <string name="reboot_notification_title">AOSP Mods 已更新</string>
-    <string name="reboot_notification_text">更改將在重啟裝置後生效</string>
-    <string name="update_flavor_title">更新通道</string>
+	<string name="update_flavor_title">更新通道</string>
     <string name="stable_flavor">穩定版</string>
     <string name="update_type_title">更新包型別</string>
     <string name="full_type">完整包</string>
@@ -370,8 +334,7 @@
 
     <string name="own_prefs_header">AOSP Mods 設定</string>
     <string name="language_title">語言</string>
-    <string name="camera_manager_master_title">啟用手電筒Mods (如果你的裝置不支援請禁用)</string>
-    <string name="toggle_dark_apply">(切換深色模式以應用)</string>
+	<string name="toggle_dark_apply">(切換深色模式以應用)</string>
 
     <string name="gesture_nav_extra_cat">更多導航欄手勢</string>
     <string name="gesture_nav_long_swipe_fc_title">上滑至螢幕頂部以殺死前臺APP</string>
@@ -384,12 +347,9 @@
 
     <string name="none">無</string>
     <string name="screenshot">截圖</string>
-    <string name="back">返回</string>
-    <string name="kill_foreground_app">殺死前臺app</string>
+	<string name="kill_foreground_app">殺死前臺app</string>
     <string name="toggle_notification">啟用通知欄面板</string>
     <string name="toggle_one_handed">啟用單手模式</string>
-    <string name="insecure_screenshot">無限制截圖</string>
-    <string name="screenshot_chord_insecure">音量減 + 電源鍵強制截圖</string>
-    <string name="sleep">睡眠</string>
+	<string name="sleep">睡眠</string>
 
 </resources>

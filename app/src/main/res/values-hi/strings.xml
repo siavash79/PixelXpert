@@ -1,6 +1,5 @@
 <resources>
 	<!--General strings-->
-	<string name="error_not_activated">Please confirm if the module is activated within LSPosed Manager</string>
 	<string name="hide_default">छुपाएं (डिफ़ॉल्ट)</string>
 	<string name="percent_of_default_size">% डिफ़ॉल्ट आकार का</string>
 	<string name="overlay_none_title">(डिफ़ॉल्ट)</string>
@@ -24,7 +23,6 @@
 	<string name="transparent_fingerprint_circle">फ़िंगरप्रिंट आइकन के चारों ओर वृत्त छिपाएँ</string>
 	<string name="transparent_fingerprint_circle_off">फ़िंगरप्रिंट आइकन के चारों ओर सर्कल दिखाई देगा</string>
 	<string name="transparent_fingerprint_circle_on">फ़िंगरप्रिंट आइकन के चारों ओर वृत्त छिपा हुआ है</string>
-	<string name="carrier_text_category">ऑपरेटर टेक्स्ट</string>
 	<string name="custom_text_category">लॉक स्क्रीन पर कस्टम टेक्स्ट</string>
 	<string name="configure_carrier_text">ऑपरेटर टेक्स्ट कॉन्फ़िगर करें</string>
 	<string name="carrier_text_mod_disabled">ऑपरेटर टेक्स्ट अपरिवर्तित</string>
@@ -33,17 +31,11 @@
 	<string name="lockscreen_center_text_value">कस्टम घड़ी क्षेत्र टेक्स्टठ</string>
 	<string name="keyguard_bottom_category">नीचे दिए गए लिंक</string>
 	<string name="keyguard_bottom_buttons_transparent_title">प्रतीकों के चारों ओर चक्र छुपाएं</string>
-	<string name="keyguard_bottom_force_camera_title">कैमरा शॉर्टकट दिखाएं</string>
-	<string name="keyguard_left_shortcut">लॉक स्क्रीन पर बायां शॉर्टकट दिखाएं</string>
 	<string name="LSleftShortcutTitle">शॉर्टकट छोड़ दिया</string>
 	<string name="LSrightShortcutTitle">दाईं ओर शॉर्टकट</string>
 	<string name="camera_shortcut">कैमरा</string>
 	<string name="assistant_shortcut">सहायक</string>
 	<string name="torch_shortcut">मशाल</string>
-	<string name="album_art_category">मीडिया सेटिंग्स</string>
-	<string name="album_art_title">जब मीडिया चल रहा हो तो एल्बम प्रदर्शन सक्षम करें</string>
-	<string name="album_art_blur_text">धुंधला मूल्य</string>
-	<string name="album_art_grayscale">ग्रेस्केल</string>
 	<string name="shufflePin_title">रैंडम फेरबदल पिन</string>
 	<string name="easy_unlock_title">आसान अनलॉक (पिन/पासवर्ड)</string>
 	<string name="easy_unlock_summary">अगर यह पहली बार काम नहीं करता है, तो पुनः प्रयास करें</string>
@@ -53,11 +45,9 @@
 	<string name="double_tap_sleep_title">लॉक करने के लिए डबल टैप करें</string>
 	<string name="battery_style_title">बैटरी शैली चुनें</string>
 	<string name="battery_show_percent_title">बैटरी प्रतिशत दिखाएं</string>
-	<string name="battery_style_category_title">बैटरी शैली</string>
 	<string name="battery_icon_size_title">बैटरी आइकन आकार</string>
 	<string name="battery_hidden">छिपा हुआ</string>
 	<string name="BIcon_Opacity_title">दृश्यता</string>
-	<string name="sb_center_fine_tune">मिडरेंज को फाइन-ट्यून करें</string>
 	<string name="sb_multi_row_system_icons">मल्टी-लाइन सिस्टम आइकन (उच्च स्थिति बार ऊंचाई की आवश्यकता है)</string>
 	<string name="sb_icon_sort_mode">आइकन-प्लेसमेंट विधि</string>
 	<string name="sort_clean">एक ग्रिड में क्रमबद्ध करें</string>
@@ -68,14 +58,12 @@
 	<string name="lte_4g_icon_title">LTE / 4G प्रतीक</string>
 	<string name="volte_icon_title">VoLTE-प्रतीक संयुक्त</string>
 	<string name="hide_privacychip_title">गोपनीयता संकेतक छुपाएं\n(कैमरा, माइक्रोफ़ोन)</string>
-	<string name="sb_vibration_switch_title">कंपन/साइलेंट आइकन दिखाएं</string>
 	<string name="sbc_position_title">घड़ी की स्थिति</string>
 	<string name="sbc_ampm_style">AM/PM शैली</string>
 	<string name="sbc_show_secs">सेकंड दिखाएँ</string>
 	<string name="sbc_date_cat">दिनांक विकल्प</string>
 	<string name="sbc_day_of_week_options">सप्ताह का दिन घड़ी के साथ दिखाएं</string>
 	<string name="sbc_advanced_cat">विस्तारित तिथि (उपरोक्त सेटिंग को बदल देता है!)</string>
-	<string name="sbc_advanced_sum">कृपया जावा दिनांक स्वरूप दस्तावेज़ीकरण पढ़ें</string>
 	<string name="sbc_custom_date_before">घड़ी के सामने कस्टम दिनांक स्वरूप</string>
 	<string name="sbc_date_small">छोटे (70%)</string>
 	<string name="sbc_custom_date_after">घड़ी के बाद कस्टम दिनांक स्वरूप</string>
@@ -137,7 +125,6 @@
 	<string name="qs_footer_text_summary">टेक्स्ट हटाने के लिए खाली छोड़ दें</string>
 	<string name="qs_footer_text_desc">सक्रिय करने के लिए डिस्प्ले को टॉगल करें</string>
 	<string name="light_qs_title">लाइट थीम के दौरान हल्की त्‍वरित सेटिंग (छोटी गाड़ी हो सकती है)</string>
-	<string name="light_dualtone_qs_title">डुअल टोन त्‍वरित सेटिंग सक्षम करें</string>
 	<string name="qs_pulldown_size">त्वरित पुल डाउन आकार</string>
 	<string name="qs_pulldown_switch_title">स्टेटस बार से त्वरित सेटिंग मेनू को तुरंत नीचे खींचें</string>
 	<string name="qs_pulldown_side_title">त्वरित पुल डाउन साइड</string>
@@ -148,8 +135,6 @@
 	<string name="qqs_tiles_number">त्वरित QS में अधिकतम टाइलें (अधिकतम 2 पंक्तियां)</string>
 	<string name="qs_tile_label_size">QS टाइल लेबल का आकार</string>
 	<string name="qs_tile_secondary_label_size">QS टाइल लेबल सारांश आकार</string>
-	<string name="qs_general_options">त्वरित सेटिंग विकल्प</string>
-	<string name="qs_text_size_title">फ़ॉन्ट आकार त्वरित सेटिंग आइटम</string>
 	<string name="wifi_cell_title">इंटरनेट तत्व</string>
 	<string name="wifi_cell_on">वाईफ़ाई और डेटा के लिए अलग-अलग तत्वों का उपयोग करें</string>
 	<string name="wifi_cell_off">एकल इंटरनेट तत्व का उपयोग करें</string>
@@ -160,7 +145,6 @@
 	<string name="bs_thick_track">चमकदार स्लाइडर के लिए मोटे ट्रैक का उपयोग करें</string>
 	<string name="quick_settings_tiles_category">त्वरित सेटिंग्स शॉर्टकट विकल्प</string>
 	<string name="qs_tile_style_title">त्वरित सेटिंग शैलियाँ</string>
-	<string name="qstile_default">डिफ़ॉल्ट</string>
 
 	<!--Navigation bar related-->
 	<string name="back_gesture_category_title">पीछे के हावभाव को अनुकूलित करना</string>
@@ -169,18 +153,15 @@
 	<string name="back_height_title">जेस्चर की ऊंचाई</string>
 	<string name="gesturenav_header">जेस्चर नेविगेशन</string>
 	<string name="gesture_nav_pill_cat">जेस्चर नेविगेशन बार की चौड़ाई</string>
-	<string name="gesture_nav_pill_mod_title">नेव बार की चौड़ाई बदलें</string>
 	<string name="gesture_nav_pill_width_title">डिफ़ॉल्ट चौड़ाई की तुलना में चौड़ाई</string>
 	<string name="gesture_nav_pill_height_title">डिफ़ॉल्ट चौड़ाई की तुलना में ऊंचाई</string>
 	<string name="threebutton_header_title">3-बटन नेविगेशन</string>
-	<string name="back_longpress_kill_title">अग्रभूमि अनुप्रयोग को बंद करने के लिए पीछे की कुंजी को देर तक दबाए रखें</string>
 	<string name="modify_3button_title">बटनों का क्रम बदलें</string>
 	<string name="three_button_left_title">बायां बटन</string>
 	<string name="three_button_center_title">मध्य बटन</string>
 	<string name="three_button_right_title">दायां बटन</string>
 	<string name="hide_navbar_title">जेस्चर नेविगेशन बार छुपाएं</string>
 	<string name="taskbar_height_title">टास्कबार की ऊंचाई</string>
-	<string name="colorpill_title">जेस्चर नेविगेशन बार कलर</string>
 	<string name="colorpill">एक्सेंट के रंग में जेस्चर नेविगेशन बार</string>
 	<string name="reducekeyboard_title">कीबोर्ड इशारा क्षेत्र</string>
 	<string name="reducekeyboard">कीबोर्ड जेस्चर एरिया कम करें</string>
@@ -216,7 +197,6 @@
 	<string name="overscroll_on_summary">महत्वपूर्ण: आप उन ऐप्स को अवश्य सक्षम करें जिनके लिए आप LSPosed में ओवरस्क्रॉल अक्षम करना चाहते हैं</string>
 
 	<!-- Call section -->
-	<string name="call_category">Telefonanrufe</string>
 	<string name="vibrate_on_call_active_title">Vibrieren bei angenommenem abgehenden Anruf</string>
 	<string name="vibrate_on_call_drop_title">Vibrieren, wenn Anruf getrennt wird</string>
 
@@ -263,8 +243,6 @@
 	<!-- QS Rows overlays -->
 
 	<!-- Lockscreen/Quick Settings Custom Text -->
-	<string name="netstat_enable_title">नेटवर्क आंकड़े एकत्र करें</string>
-	<string name="network_interval_custom_text_title">अद्यतन अंतराल</string>
 	<string name="minutes_word">मिनट(n)</string>
 
 	<!-- Menu Items -->
@@ -272,27 +250,16 @@
 	<string name="menu_reset_defaults">सभी सेटिंग रीसेट करें</string>
 	<string name="menu_import_settings">फ़ाइल से सेटिंग आयात करें…</string>
 	<string name="menu_export_settings">सेटिंग्स को फ़ाइल में निर्यात करें…</string>
-	<string name="menu_netstat_title">नेटवर्क सांख्यिकी</string>
-	<string name="menu_netstat_enable">आंकड़े सक्षम करें</string>
-	<string name="menu_netstat_clear">नेटवर्क आंकड़े साफ़ करें</string>
 	<string name="menu_restart">रीस्टार्ट करें</string>
 	<string name="menu_restartSysUI">SystemUI को पुनरारंभ करें</string>
 	<string name="menu_updates">ऐप अपडेट्स</string>
 
-	<string name="nestat_caution_title">चेतावनी!</string>
-	<string name="nestat_caution_text">आपके नेटवर्क आंकड़े स्थायी रूप से रीसेट कर दिए जाएंगे। जारी रखें?</string>
-	<string name="netstat_caution_yes">जारी रखें</string>
-	<string name="netstat_caution_no">शायद बाद में</string>
-
 	<string name="monitoring_category_title">निगरानी विकल्प</string>
 	<string name="netstat_header">नेटवर्क सांख्यिकी सेटिंग</string>
 
-	<string name="string_formatter_manual_body">आपके द्वारा दर्ज किए जा सकने वाले सामान्य पाठ के अतिरिक्त, गतिशील चर भी उपलब्ध हैं:\n\n$G\&lt;format\&gt; : जॉर्जियाई तारीख प्रारूप के आधार पर। प्रारूप प्रलेखन के लिए, कृपया `जावा तिथि प्रारूप` खोजें\nउदाहरण: $GMMM साधन: जनवरी (या कोई अन्य)\n\n$P&lt;format&gt; : प्रारूप के आधार पर फारसी तिथि\nउदाहरण: $Pyyyy साधन: 1401\n\nUm नीचे से इंटरनेट उपयोग को सक्षम करने के लिए आपको "विविध", "नेटवर्क सांख्यिकी सेटिंग" मेनू पर जाना होगा और "नेटवर्क सांख्यिकी संग्रह सक्षम करें" विकल्प पर जाएं\n\n$Nrx : आज डाउनलोड की कुल संख्या\n$Ntx: आज से अपलोड की कुल संख्या\n$Nall : आज हिट की कुल संख्या\n\nयदि आप प्रतिस्थापित करते हैं $N साथ $Nc मोबाइल डेटा आँकड़े प्राप्त करें (जैसे$Ncrx डाउनलोड के लिए)\n\nउदाहरण:\n`से मोबाइल यातायात $GEEEE: $Ncall` परिणाम:\n`मंगलवार से मोबाइल ट्रैफिक: 2GB`</string>
 	<string name="update_channel_name">अपडेट्स</string>
 	<string name="update_notification_title">अपडेट डाउनलोड हो गया</string>
 	<string name="update_notification_text">इंस्टॉल करने के लिए यहां टैप करें</string>
-	<string name="reboot_notification_title">एओएसपीमोड्स अपडेट किए गए!</string>
-	<string name="reboot_notification_text">रीबूट के बाद परिवर्तन प्रभावी होंगे</string>
 	<string name="update_flavor_title">चैनल अपडेट करें</string>
 	<string name="stable_flavor">स्थिर</string>
 	<string name="update_type_title">पैकेज का प्रकार</string>
@@ -328,12 +295,9 @@
 	<string name="gesture_nav_swipe_up_height">कार्रवाइयों को न्यूनतम ट्रिगर ऊंचाई पर स्वाइप करें</string>
 	<string name="none">कोई नहीं</string>
 	<string name="screenshot">स्क्रीनशॉट</string>
-	<string name="back">वापस</string>
 	<string name="kill_foreground_app">किल फोरग्राउंड ऐप</string>
 	<string name="toggle_notification">सूचना पैनल टॉगल करें</string>
 	<string name="toggle_one_handed">एक हाथ वाला मोड टॉगल करें</string>
-	<string name="insecure_screenshot">असुरक्षित स्क्रीनशॉट</string>
-	<string name="screenshot_chord_insecure">VolDown+Power असुरक्षित स्क्रीनशॉट</string>
 	<string name="taskbar_as_recents_title">टास्कबार को हाल के बार में बदलें</string>
 	<string name="wakeup_to_security_title">डिवाइस के सक्रिय होने पर पिन प्रविष्टि दिखाएं</string>
 	<string name="taskbar_radius_title">टास्कबार कॉर्नर का दायरा</string>
@@ -343,18 +307,14 @@
 	<string name="heads_up_notification_duration">अग्रणी अधिसूचना अवधि</string>
 	<string name="milliseconds">मिलीसेकंड</string>
 	<string name="network_show_icons_title">इंटरनेट डाउनलोड गति दिशात्मक आइकन दिखाएं</string>
-	<string name="power_menu_overlays_section">पावर मेनू थीम्स</string>
-	<string name="power_menu_overlays_summary_on">यह विकल्प पूरे सिस्टम में कुछ शानदार नए आइकन भी सक्षम करता है</string>
 	<string name="power_menu_overlays_title">पावर मेन्यू के लिए हल्की/गहरी थीम सक्षम करें</string>
 	<string name="sleep">डिवाइस को स्लीप मोड में रखें</string>
-	<string name="taskbar_hide_allapps_title">सभी एप्लिकेशन के लिए आइकन छिपाएं</string>
 	<string name="charging_info_title">लॉक स्क्रीन पर चार्जिंग जानकारी</string>
 	<string name="imperial_units_title">शाही इकाइयों का प्रयोग करें</string>
 	<string name="hide_roaming_title">मोबाइल रोमिंग विज्ञापन छुपाएं</string>
 	<string name="caution_mobile_costs">चेतावनी - अगर आपको पता नहीं है कि आप रोमिंग में हैं, तो आपकी मोबाइल लागत बढ़ सकती है</string>
 	<string name="hide_avatar_title">उपयोगकर्ता अवतार हटाएं (बहु-उपयोगकर्ता मोड)</string>
 	<string name="clipboard_smart_actions_title">क्लिपबोर्ड स्मार्ट क्रियाएं</string>
-	<string name="camera_manager_master_title">फ्लैशलाइट मोड सक्षम करें (यदि डिवाइस इसका समर्थन नहीं करता है तो अक्षम करें)</string>
 	<string name="pm_header">एप्लिकेशन पैकेज मैनेजर</string>
 	<string name="LSleftLongClickShortcutTitle">बायां शॉर्टकट (लॉन्ग प्रेस)</string>
 	<string name="LSrightLongClickShortcutTitle">दायां शॉर्टकट (लंबा क्लिक)</string>

@@ -3,8 +3,7 @@
 	<string name="app_themed_icon_title">Alternatif AOSP Modları temalı uygulama simgesini etkinleştirAlternatif AOSPMods temalı uygulama simgesini etkinleştir</string>
     <string name="xposed_desc">Android 12+ AOSP tabanlı ROM\'lar için özel özellikler</string>
     <string name="volume_tile_title">Medya Ses Gücü</string>
-    <string name="error_not_activated">Lütfen modülün LSPosed Manager\'da etkinleştirildiğinden emin olun</string>
-    <string name="hide_default">Gizle (Varsayılan)</string>
+	<string name="hide_default">Gizle (Varsayılan)</string>
     <string name="percent_of_default_size">Varsayılan boyut</string>
     <string name="overlay_none_title">(Varsayılan)</string>
     <string name="general_section">Genel seçenekler</string>
@@ -28,8 +27,7 @@
     <string name="transparent_fingerprint_circle">Ekran altı parmak izi dairesini gizle</string>
     <string name="transparent_fingerprint_circle_off">Parmak izi simgesinin etrafındaki daire etkin</string>
     <string name="transparent_fingerprint_circle_on">Parmak izi simgesinin etrafındaki daire gizli</string>
-    <string name="carrier_text_category">Operatör metni</string>
-    <string name="custom_text_category">Kilit ekranına özel metin yerleştirme</string>
+	<string name="custom_text_category">Kilit ekranına özel metin yerleştirme</string>
     <string name="configure_carrier_text">Operatör metnini yapılandır</string>
     <string name="carrier_text_mod_disabled">Operatör metni değişmedi</string>
     <string name="carrier_text_mod_enabled">Özel operatör metni</string>
@@ -37,19 +35,13 @@
     <string name="lockscreen_center_text_value">Saat bölgesi özel metin</string>
     <string name="keyguard_bottom_category">Alt alan kısayolları</string>
     <string name="keyguard_bottom_buttons_transparent_title">Simgelerin etrafındaki daireyi gizle</string>
-    <string name="keyguard_bottom_force_camera_title">Kamera kısayolunu göstert</string>
-    <string name="keyguard_left_shortcut">Kilit ekranında sol tarafta kısayolu göster</string>
-    <string name="LSleftShortcutTitle">Sol kısayol</string>
+	<string name="LSleftShortcutTitle">Sol kısayol</string>
     <string name="LSrightShortcutTitle">Sağ kısayol</string>
     <string name="camera_shortcut">Kamera</string>
     <string name="assistant_shortcut">Asistan</string>
     <string name="torch_shortcut">El feneri</string>
     <string name="qr_scanner_shortcut">QR kod tarayıcı</string>
-    <string name="album_art_category">Medya seçenekleri</string>
-    <string name="album_art_title">Medya oynatırken albüm resmini etkinleştir</string>
-    <string name="album_art_blur_text">Bulanıklık derecesi</string>
-    <string name="album_art_grayscale">Renkleri grileştir</string>
-    <string name="shufflePin_title">Pin Rakamlarını Karıştır</string>
+	<string name="shufflePin_title">Pin Rakamlarını Karıştır</string>
     <string name="easy_unlock_title">Hızlı kilit açma (Pin/Parola)</string>
     <string name="easy_unlock_summary">İlk kez çalışmazsa bir daha deneyin</string>
 
@@ -58,12 +50,10 @@
     <string name="battery_style_title">Bir pil stili seçin</string>
     <string name="battery_show_percent_title">Pil yüzdesini göster</string>
     <string name="battery_show_charging_animation_title">Şarj animasyonunu göster</string>
-    <string name="battery_style_category_title">Pil stili</string>
-    <string name="battery_icon_size_title">Pil simgesi boyutu</string>
+	<string name="battery_icon_size_title">Pil simgesi boyutu</string>
     <string name="battery_hidden">Gizlenmiş</string>
     <string name="BIcon_Opacity_title">Opaklık</string>
-    <string name="sb_center_fine_tune">İnce ayar merkez alanı</string>
-    <string name="sb_multi_row_system_icons">Çok satırlı sistem simgeleri (daha yüksek durum çubuğu yüksekliği gerekir)</string>
+	<string name="sb_multi_row_system_icons">Çok satırlı sistem simgeleri (daha yüksek durum çubuğu yüksekliği gerekir)</string>
     <string name="sb_icon_sort_mode">Simge yerleştirme yöntemi</string>
     <string name="sort_clean">Ağ sistemine uygun sığdır</string>
     <string name="sort_tight">Maksimum öğeyi sığdırs</string>
@@ -74,15 +64,13 @@
     <string name="volte_icon_title">Varsa VoLTE simgesini göster</string>
     <string name="vowifi_icon_title">"Kullanılabilir olduğunda VoWiFi simgesini göster "</string>
     <string name="hide_privacychip_title">Gizlilik göstergelerini gizle\n(Kamera, Mikrofon)</string>
-    <string name="sb_vibration_switch_title">Titreşim/Sessiz simgelerini göster</string>
-    <string name="sbc_position_title">Saat konumu</string>
+	<string name="sbc_position_title">Saat konumu</string>
     <string name="sbc_ampm_style">AM/PM Stili</string>
     <string name="sbc_show_secs">Saniyeyi göster</string>
     <string name="sbc_date_cat">Tarih seçeneği</string>
     <string name="sbc_day_of_week_options">Haftanın gününü saatle birlikte göster</string>
     <string name="sbc_advanced_cat">Gelişmiş tarih (yukarıdaki ayarın yerini alacaktır!)</string>
-    <string name="sbc_advanced_sum">Lütfen Java tarih formatı belgelerini okuyun</string>
-    <string name="sbc_custom_date_before">Saatten önce özel tarih formatı</string>
+	<string name="sbc_custom_date_before">Saatten önce özel tarih formatı</string>
     <string name="sbc_date_small">Daha küçük boyut (%70)</string>
     <string name="sbc_custom_date_after">Saatten sonra özel tarih formatı</string>
     <string name="sbc_header">Durum çubuğu saat özelleştirmesi</string>
@@ -143,8 +131,7 @@
     <string name="qs_footer_text_summary">Metni tamamen kaldırmak için boş bırakın</string>
     <string name="qs_footer_text_desc">Uygulamak için ekranı kapatın/açın</string>
     <string name="light_qs_title">Aydınlık mod sırasında aydın hızlı ayarlar paneli</string>
-    <string name="light_dualtone_qs_title">Çift tonlu hızlı ayarlar panelini etkinleştir</string>
-    <string name="qs_pulldown_size">Hızlı aşağı çekme genişliği</string>
+	<string name="qs_pulldown_size">Hızlı aşağı çekme genişliği</string>
     <string name="qs_pulldown_switch_title">Durum çubuğundan hızlı ayarlar panelini çabuk aşağı çekme</string>
     <string name="qs_pulldown_side_title">Çabuk çekme tarafı</string>
     <string name="qs_pulldown_category">Hızlı ayarlar için aşağı çekin</string>
@@ -154,9 +141,7 @@
     <string name="qqs_tiles_number">Üst hızlı ayar panelinde maksimum kutucuk sayısı (en fazla 2 satır)</string>
     <string name="qs_tile_label_size">Hızlı ayar yazı büyüklüğü</string>
     <string name="qs_tile_secondary_label_size">Hızlı ayar açıklama büyüklüğü</string>
-    <string name="qs_general_options">Hızlı ayar seçenekleri</string>
-    <string name="qs_text_size_title">Hızlı ayar butonlarının metin boyutu</string>
-    <string name="wifi_cell_title">İnternet Kutucuğu</string>
+	<string name="wifi_cell_title">İnternet Kutucuğu</string>
     <string name="wifi_cell_on">WiFi ve Mobil internet için ayrı kutucukları kullan</string>
     <string name="wifi_cell_off">Tek İnternet kutucuğu kullan</string>
     <string name="QQS_brightness_category">Parlaklık kaydırıcı seçenekleri</string>
@@ -166,28 +151,24 @@
     <string name="bs_thick_track">Parlaklık kaydırıcısında kalın bir iz kullan</string>
     <string name="quick_settings_tiles_category">Hızlı Ayar Opsiyonları</string>
     <string name="qs_tile_style_title">Hızlı Ayar Temaları</string>
-    <string name="qstile_default">Varsayılan</string>
 
-    <!--Navigation bar related-->
+	<!--Navigation bar related-->
     <string name="back_gesture_category_title">Geri hareketini yapılandır</string>
     <string name="back_from_left_title">Ekranın sol tarafı</string>
     <string name="back_from_right_title">Ekranın sağ tarafı</string>
     <string name="back_height_title">Jest hareketi yüksekliği</string>
     <string name="gesturenav_header">Jest hareketi navigasyonu</string>
     <string name="gesture_nav_pill_cat">Gezinme Çubuğu genişliği</string>
-    <string name="gesture_nav_pill_mod_title">Gezinme Çubuğu genişliğini değiştirin</string>
-    <string name="gesture_nav_pill_width_title">Standart boyuta göre genişlik</string>
+	<string name="gesture_nav_pill_width_title">Standart boyuta göre genişlik</string>
     <string name="gesture_nav_pill_height_title">Standart boyuta göre yükseklik</string>
     <string name="threebutton_header_title">3 düğmeli gezinme</string>
-    <string name="back_longpress_kill_title">Geri butonunu uzun basılı tutarak uygulamayı öldür</string>
-    <string name="modify_3button_title">Düğme sırasını değiştirin</string>
+	<string name="modify_3button_title">Düğme sırasını değiştirin</string>
     <string name="three_button_left_title">Sol düğme</string>
     <string name="three_button_center_title">Orta düğme</string>
     <string name="three_button_right_title">Sağ düğme</string>
     <string name="hide_navbar_title">Gezinme çubuğunu gizle</string>
     <string name="taskbar_height_title">Görev Çubuğu yüksekliği</string>
-    <string name="colorpill_title">Gezinme Çubuğunu renklendir</string>
-    <string name="colorpill">Gezinme Çubuğunu vurgu rengine göre renklendir</string>
+	<string name="colorpill">Gezinme Çubuğunu vurgu rengine göre renklendir</string>
     <string name="reducekeyboard_title">Klavye altı jest hareket alanı</string>
     <string name="reducekeyboard">Klavyede altı alanı azaltın</string>
     <string name="taskbar_status_title">Android Görev Çubuğu</string>
@@ -225,8 +206,7 @@
     <string name="overscroll_on_summary">Önemli: LSPosed\'da aşırı kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
 
     <!-- Call section -->
-    <string name="call_category">Aramalar</string>
-    <string name="vibrate_on_call_active_title">Giden bir aramayı yanıtlarken titret</string>
+	<string name="vibrate_on_call_active_title">Giden bir aramayı yanıtlarken titret</string>
     <string name="vibrate_on_call_drop_title">Arama kesildiğinde/sonlandığında titret</string>
 
     <!-- Theming section related -->
@@ -275,28 +255,18 @@
     <!-- QS Rows overlays -->
 
     <!-- Lockscreen/Quick Settings Custom Text -->
-    <string name="netstat_enable_title">Ağ istatistiklerini toplayın</string>
-    <string name="network_interval_custom_text_title">Yenileme aralığı</string>
-    <string name="minutes_word">dakika(lar)</string>
+	<string name="minutes_word">dakika(lar)</string>
 
     <!-- Menu Items -->
     <string name="menu_settings_title">İçe Aktar/Dışa Aktar</string>
     <string name="menu_reset_defaults">Tüm ayarları sıfırlayın</string>
     <string name="menu_import_settings">Ayarları dosyadan aktar…</string>
     <string name="menu_export_settings">Ayarları dosyaya aktar…</string>
-    <string name="menu_netstat_title">Ağ İstatistikleri</string>
-    <string name="menu_netstat_enable">İstatistikleri Etkinleştir</string>
-    <string name="menu_netstat_clear">Ağ istatistiklerini sıfırlayın</string>
-    <string name="menu_restart">Yeniden başlat</string>
+	<string name="menu_restart">Yeniden başlat</string>
     <string name="menu_restartSysUI">SystemUI\'yi yeniden başlatın</string>
     <string name="menu_updates">Güncellemeler…</string>
 
-    <string name="nestat_caution_title">Dikkat!</string>
-    <string name="nestat_caution_text">Ağ istatistikleriniz kalıcı olarak sıfırlanacak. Devam edilsin mi?</string>
-    <string name="netstat_caution_yes">Devam</string>
-    <string name="netstat_caution_no">Belki daha sonra</string>
-
-    <string name="monitoring_category_title">İzleme seçenekleri</string>
+	<string name="monitoring_category_title">İzleme seçenekleri</string>
     <string name="netstat_header">Ağ istatistikleri ayarları</string>
 
     <string name="string_formatter_manual_body_v3">Normal metne ek olarak, Tarih, Veri kullanımı ve Sıcaklık gibi dinamik değişkenler de mevcuttur:\n\n$G\&lt;format\&gt; : Miladi tarih, formata göre*\n$P\&lt;format\&gt; : Farsça tarih, formata göre*\n$Nrx : Belirtilen dönemdeki Toplam İndirme ** ***\n$Ntx: Belirtilen dönemdeki Toplam Yüklemeler ** ***\n$Nall : Belirtilen dönemdeki Toplam Trafik ** ***\n$Nssid : WiFi SSID adı (varsa)\n\n$T\&lt;format\&gt;[interval] : Sıcaklık; \nformat b (pil için), c (CPU için), g (GPU için) ve s (cilt için) olabilir \nSon olarak, saniye cinsinden OPSİYONEL güncelleme aralığı sayısı vardır (varsayılan: 60 saniye)\n\n*biçim belgeleri için \'Java Tarih Biçimi\'ni aratın\n**İstatistik dönemini AOSPMods/Miscellaneous menüsü/Network Statistics Settings\'den belirleyebilirsiniz\n*** $N yerine $Nc koyarsanız mobil veri istatistikleri ile birlikte alırsınız (örn. Nrx yerine $Ncrx)</string>
@@ -305,9 +275,7 @@
     <string name="update_notification_text">Güncellemeyi indirmek için tıkla</string>
     <string name="download_failed">"Güncelleme indirilemedi "</string>
     <string name="try_again_later">Lütfen daha sonra tekrar deneyiniz</string>
-    <string name="reboot_notification_title">AOSPMods güncellendi!</string>
-    <string name="reboot_notification_text">Değişiklikler yeniden başlatma sonra geçerli olacak</string>
-    <string name="update_flavor_title">Kanalı güncelle</string>
+	<string name="update_flavor_title">Kanalı güncelle</string>
     <string name="stable_flavor">Stabil</string>
     <string name="update_type_title">Paket tipi</string>
     <string name="full_type">Full paket</string>
@@ -342,12 +310,10 @@
     <string name="gesture_nav_swipe_up_height">Minimal yukarı kaydırma alanı</string>
     <string name="none">Hiçbiri</string>
     <string name="screenshot">Ekran görüntüsü</string>
-    <string name="back">Geri</string>
-    <string name="kill_foreground_app">Uygulamayı kapat</string>
+	<string name="kill_foreground_app">Uygulamayı kapat</string>
     <string name="toggle_notification">Bildirim panelini aç/kapat</string>
     <string name="toggle_one_handed">Tek el modunu aç/kapat</string>
-    <string name="insecure_screenshot">Güvenliksiz ekran görüntüsü</string>
-    <string name="taskbar_as_recents_title">Görev Çubuğunu son kullanılan uygulamalar çubuğuna dönüştür</string>
+	<string name="taskbar_as_recents_title">Görev Çubuğunu son kullanılan uygulamalar çubuğuna dönüştür</string>
     <string name="wakeup_to_security_title">Cihaz uyanır uyanmaz ekran kilidini göstermek</string>
     <string name="taskbar_radius_title">Görev çubuğu köşe eğriliği</string>
     <string name="caution_unstable">Dikkat: Bu seçenek bazı cihazları dengesiz  yapabilir</string>
@@ -356,12 +322,9 @@
 	<string name="heads_up_notification_duration">Heads-up bildirim süresi</string>
     <string name="milliseconds">Millisaniyeler</string>
     <string name="network_show_icons_title">İnternet indirme hızı yön simgelerini göster</string>
-    <string name="power_menu_overlays_section">Power Menü Temaları</string>
-    <string name="power_menu_overlays_summary_on">Bu seçenek sistem genelinde bazı harika yeni simgeleri etkinleştirir</string>
-    <string name="power_menu_overlays_title">Power menüsünde açık/koyu temaları etkinleştirin</string>
+	<string name="power_menu_overlays_title">Power menüsünde açık/koyu temaları etkinleştirin</string>
     <string name="sleep">Uyku modu</string>
-    <string name="taskbar_hide_allapps_title">Tüm uygulamalar simgesini gizle</string>
-    <string name="charging_info_title">Kilit ekranında şarj bilgisi</string>
+	<string name="charging_info_title">Kilit ekranında şarj bilgisi</string>
     <string name="imperial_units_title">İngiliz ölçü birimini kullan</string>
     <string name="hide_roaming_title">Dolaşım (R) indikatörünü gösterme</string>
     <string name="caution_mobile_costs">DİKKAT - dolaşım kullandığını bilmemek mobil ödemeni arttırabilir</string>
@@ -372,8 +335,7 @@
     <string name="disable_unlock_hint_title">"Kilit açma ipucu animasyonunu kapatın "</string>
     <string name="ls_general_options">"Kilit ekranı seçenekleri "</string>
     <string name="hide_avatar_title">Çoklu kullanıcı rejiminde kilit ekranındakı kullanıcı resmini kaldır</string>
-    <string name="camera_manager_master_title">El feneri modlarını etkinleştir (cihazınız desteklemiyorsa inaktive edin)</string>
-    <string name="screenshot_insecure">Kısıtlanmış içerikten ekran görüntüsüne izin ver</string>
+	<string name="screenshot_insecure">Kısıtlanmış içerikten ekran görüntüsüne izin ver</string>
     <string name="clipboard_smart_actions_title">Panoda akıllı seçenekler</string>
 	<string name="pm_header">Paket Yöneticisi</string>
     <string name="LSleftLongClickShortcutTitle">Sol kısayol (Uzun tıklayın)</string>

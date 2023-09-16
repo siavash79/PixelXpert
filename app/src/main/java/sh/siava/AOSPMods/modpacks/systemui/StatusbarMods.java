@@ -213,7 +213,9 @@ public class StatusbarMods extends XposedModPack {
 			if(intent.getAction().equals(Constants.ACTION_PROFILE_SWITCH_AVAILABLE))
 			{
 				boolean isAvailable = intent.getBooleanExtra("available", false);
-				if(isAvailable && StatusbarAppSwitchIconEnabled)
+				if(isAvailable
+						&& StatusbarAppSwitchIconEnabled
+						&& mStatusBarIconController != null)
 				{
 					callMethod(mStatusBarIconController, "setIcon", APP_SWITCH_SLOT, mAppSwitchStatusbarIconHolder);
 				}

@@ -61,3 +61,4 @@ local.properties
 # Generated APK files
 /app/debug/
 /app/release/
+/crowdin.properties

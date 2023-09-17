@@ -1,0 +1,32 @@
+name: Update Translations
+
+on:
+  workflow_dispatch
+
+jobs:
+  synchronize-with-crowdin:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Source Code Download
+        run: git clone --branch canary --single-branch --recurse-submodules https://github.com/siavash79/AOSPMods.git .
+
+      - name: Sync Translations
+        uses: crowdin/github-action@v1
+        with:
+          upload_sources: true
+          upload_translations: true
+          download_translations: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Commit
+        uses: github-actions-x/commit@v2.9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'test-crowdin'
+          commit-message: 'Translation Update'
+          name: GitHub
+          email: aospmods@siava.sh

@@ -1,355 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--General strings-->
-    <string name="app_themed_icon_title">啟用替代的 AOSP Mods 主題應用圖示</string>
-    <string name="xposed_desc">基於 Android 12+ AOSP ROM 的自定義功能</string>
+	<!--General strings-->
+	<string name="app_themed_icon_title">啟用替代的 AOSP Mods 主題應用圖示</string>
+	<string name="xposed_desc">基於 Android 12+ AOSP ROM 的自定義功能</string>
+	<string name="volume_tile_title">Media Volume</string>
+	<string name="app_switch_tile_title">Switch App Profile</string>
 	<string name="hide_default">隱藏 (預設)</string>
-    <string name="percent_of_default_size">% 預設</string>
-    <string name="overlay_none_title">(預設)</string>
-    <string name="general_section">常規選項</string>
-    <string name="general_on">已開啟</string>
-    <string name="general_off">已關閉</string>
-    <string name="sysui_restart_needed">重啟系統介面以生效</string>
-    <string name="restart_needed">重新啟動系統以生效</string>
-    <string name="more_area">顯示區域更大</string>
-    <string name="less_area">顯示區域更小</string>
-
-    <!--Category titles-->
-    <string name="lockscreen_header_title">鎖定畫面</string>
-    <string name="statusbar_header">狀態列</string>
-    <string name="nav_header">導航欄</string>
-    <string name="misc_header">雜項</string>
-    <string name="qs_panel_category_title">方塊面板</string>
-    <string name="theme_customization_category">主題化</string>
-    <string name="pm_header">包管理器</string>
-    <string name="hotspot_header">無線基地台</string>
-
-    <!-- Hotspot settings-->
-    <string name="hotspot_hide_ssid_title">隱藏 SSID</string>
-    <string name="hotspot_inactivity_timeout_title">自動關閉時間</string>
-    <string name="hotspot_max_client_title">最大接入數</string>
-
-    <!--Lock screen related-->
-    <string name="ls_general_options">自定鎖定畫面</string>
-    <string name="hide_avatar_title">隱藏使用者頭像(多使用者模式)</string>
-    <string name="transparent_fingerprint_circle">隱藏螢幕下指紋背景圓</string>
-    <string name="transparent_fingerprint_circle_off">指紋圖示背景被啟用</string>
-    <string name="transparent_fingerprint_circle_on">指紋圖示背景被隱藏</string>
+	<string name="percent_of_default_size">% 預設</string>
+	<string name="overlay_none_title">(預設)</string>
+	<string name="general_section">常規選項</string>
+	<string name="general_on">已開啟</string>
+	<string name="general_off">已關閉</string>
+	<string name="sysui_restart_needed">重啟系統介面以生效</string>
+	<string name="restart_needed">重新啟動系統以生效</string>
+	<string name="more_area">顯示區域更大</string>
+	<string name="less_area">顯示區域更小</string>
+	<string name="current_version">Current version: %s</string>
+	<string name="notification_channel_update">Updates</string>
+	<string name="notification_channel_update_desc">This channel shows notification about the latest updates.</string>
+	<string name="new_update_title">Update available</string>
+	<string name="new_update_desc">A new version of AOSPMods is available</string>
+	<string name="browser_not_found">Browser not found</string>
+	<string name="settings_general_section_title">General</string>
+	<string name="settings_update_section_title">Update</string>
+	<string name="settings_misc_section_title">Misc</string>
+	<string name="settings_about_section_title">About</string>
+	<string name="settings_check_for_update_title">Check for updates</string>
+	<string name="auto_update_title">Automatically check for updates</string>
+	<string name="auto_update_summary">Check for new versions once in a while</string>
+	<string name="update_over_wifi_title">Check updates over WiFi only</string>
+	<string name="update_over_wifi_summary">Check for updates in background only when connected to wifi</string>
+	<string name="github_repo_title">GitHub repository</string>
+	<string name="telegram_group_title">Telegram group</string>
+	<string name="usage_title">Usage</string>
+	<string name="usage_summary">Open wiki page</string>
+	<!--Category titles-->
+	<string name="lockscreen_header_title">鎖定畫面</string>
+	<string name="statusbar_header">狀態列</string>
+	<string name="nav_header">導航欄</string>
+	<string name="dialer_header">Phone &amp; dialer</string>
+	<string name="misc_header">雜項</string>
+	<string name="qs_panel_category_title">方塊面板</string>
+	<string name="theme_customization_category">主題化</string>
+	<string name="pm_header">包管理器</string>
+	<string name="hotspot_header">無線基地台</string>
+	<!-- Hotspot settings-->
+	<string name="hotspot_hide_ssid_title">隱藏 SSID</string>
+	<string name="hotspot_inactivity_timeout_title">自動關閉時間</string>
+	<string name="hotspot_max_client_title">最大接入數</string>
+	<!--Lock screen related-->
+	<string name="disable_unlock_hint_title">Disable the unlock hint animation</string>
+	<string name="ls_general_options">自定鎖定畫面</string>
+	<string name="hide_avatar_title">隱藏使用者頭像(多使用者模式)</string>
+	<string name="transparent_fingerprint_circle">隱藏螢幕下指紋背景圓</string>
+	<string name="transparent_fingerprint_circle_off">指紋圖示背景被啟用</string>
+	<string name="transparent_fingerprint_circle_on">指紋圖示背景被隱藏</string>
 	<string name="custom_text_category">自訂鎖定畫面文本顯示</string>
-    <string name="configure_carrier_text">設定電信商名稱</string>
-    <string name="carrier_text_mod_disabled">未修改電信商名稱</string>
-    <string name="carrier_text_mod_enabled">自訂電信商名稱</string>
-    <string name="carrier_text_value">插入自訂文本</string>
-    <string name="lockscreen_center_text_value">自訂時鐘區文本顯示</string>
-    <string name="keyguard_dim_amount_title">鎖定畫面桌布亮度</string>
-    <string name="keyguard_bottom_category">底部快捷方式</string>
-    <string name="keyguard_bottom_buttons_transparent_title">隱藏圖示周圍圓圈</string>
+	<string name="configure_carrier_text">設定電信商名稱</string>
+	<string name="carrier_text_mod_disabled">未修改電信商名稱</string>
+	<string name="carrier_text_mod_enabled">自訂電信商名稱</string>
+	<string name="carrier_text_value">插入自訂文本</string>
+	<string name="lockscreen_center_text_value">自訂時鐘區文本顯示</string>
+	<string name="keyguard_dim_amount_title">鎖定畫面桌布亮度</string>
+	<string name="keyguard_bottom_category">底部快捷方式</string>
+	<string name="keyguard_bottom_buttons_transparent_title">隱藏圖示周圍圓圈</string>
 	<string name="LSleftShortcutTitle">左側</string>
-    <string name="LSrightShortcutTitle">右側</string>
-    <string name="LSleftLongClickShortcutTitle">左側(長按)</string>
-    <string name="LSrightLongClickShortcutTitle">右側(長按)</string>
-    <string name="camera_shortcut">相機</string>
-    <string name="assistant_shortcut">語音助手</string>
-    <string name="torch_shortcut">手電筒</string>
-    <string name="tv_remote_shortcut">TV 遙控器</string>
-    <string name="dnd_shortcut">勿擾模式</string>
+	<string name="LSrightShortcutTitle">右側</string>
+	<string name="LSleftLongClickShortcutTitle">左側(長按)</string>
+	<string name="LSrightLongClickShortcutTitle">右側(長按)</string>
+	<string name="camera_shortcut">相機</string>
+	<string name="assistant_shortcut">語音助手</string>
+	<string name="torch_shortcut">手電筒</string>
+	<string name="tv_remote_shortcut">TV 遙控器</string>
+	<string name="dnd_shortcut">勿擾模式</string>
+	<string name="qr_scanner_shortcut">QR code scanner</string>
 	<string name="shufflePin_title">打亂密碼盤</string>
-    <string name="wakeup_to_security_title">裝置喚醒時顯示密碼輸入介面</string>
-    <string name="easy_unlock_title">快速解鎖 (Pin/密碼)</string>
-    <string name="easy_unlock_summary">如果第一次未生效，請重試</string>
-    <string name="charging_info_title">鎖定畫面顯示充電資訊</string>
-    <string name="imperial_units_title">使用英制單位</string>
-
-    <!--Status bar related-->
-    <string name="double_tap_sleep_title">雙擊關閉螢幕</string>
-    <string name="battery_style_title">選擇電池圖示樣式</string>
-    <string name="battery_show_percent_title">顯示電量百分比</string>
+	<string name="wakeup_to_security_title">裝置喚醒時顯示密碼輸入介面</string>
+	<string name="easy_unlock_title">快速解鎖 (Pin/密碼)</string>
+	<string name="easy_unlock_summary">如果第一次未生效，請重試</string>
+	<string name="charging_info_title">鎖定畫面顯示充電資訊</string>
+	<string name="imperial_units_title">使用英制單位</string>
+	<!--Status bar related-->
+	<string name="double_tap_sleep_title">雙擊關閉螢幕</string>
+	<string name="battery_style_title">選擇電池圖示樣式</string>
+	<string name="battery_show_percent_title">顯示電量百分比</string>
+	<string name="battery_show_charging_animation_title">Show charging animation</string>
 	<string name="battery_icon_size_title">電池圖示大小</string>
-    <string name="battery_hidden">隱藏</string>
-    <string name="BIcon_Opacity_title">不透明度</string>
+	<string name="battery_hidden">隱藏</string>
+	<string name="BIcon_Opacity_title">不透明度</string>
 	<string name="sb_multi_row_system_icons">多行狀態圖示 (需要增加狀態列高度)</string>
-    <string name="sb_multi_row_notification_icons">多行通知圖示 (需要增加狀態列高度)</string>
-    <string name="sb_double_row_category">雙行狀態列</string>
-    <string name="sb_icon_sort_mode">排列圖示方式</string>
-    <string name="sort_clean">在網格中排列</string>
-    <string name="sort_tight">最大圖示數量</string>
-    <string name="sb_notification_limit">最大通知圖示數量 (留空預設)</string>
-
-    <string name="lte_4g_icon_title">LTE/4G 圖示</string>
-    <string name="combined_signal_icon_title">合併訊號圖示</string>
-    <string name="hide_roaming_title">隱藏漫遊指示圖示</string>
-    <string name="caution_mobile_costs">注意 - 不知情下漫遊會增加你的流量費用</string>
-    <string name="volte_icon_title">可用時顯示 VoLTE 圖示</string>
-    <string name="vowifi_icon_title">可用時顯示 VoWiFi 圖示</string>
-    <string name="hide_privacychip_title">隱藏隱私提示</string>
+	<string name="sb_multi_row_notification_icons">多行通知圖示 (需要增加狀態列高度)</string>
+	<string name="sb_double_row_category">雙行狀態列</string>
+	<string name="sb_icon_sort_mode">排列圖示方式</string>
+	<string name="sort_clean">在網格中排列</string>
+	<string name="sort_tight">最大圖示數量</string>
+	<string name="sb_notification_limit">最大通知圖示數量 (留空預設)</string>
+	<string name="lte_4g_icon_title">LTE/4G 圖示</string>
+	<string name="combined_signal_icon_title">合併訊號圖示</string>
+	<string name="hide_roaming_title">隱藏漫遊指示圖示</string>
+	<string name="caution_mobile_costs">注意 - 不知情下漫遊會增加你的流量費用</string>
+	<string name="volte_icon_title">可用時顯示 VoLTE 圖示</string>
+	<string name="vowifi_icon_title">可用時顯示 VoWiFi 圖示</string>
+	<string name="hide_privacychip_title">隱藏隱私提示</string>
+	<!-- \n means next line-->
 	<string name="sbc_position_title">時鐘位置</string>
-    <string name="sbc_ampm_style">AM/PM 樣式</string>
-    <string name="sbc_show_secs">顯示秒數</string>
-    <string name="sbc_date_cat">日期選項</string>
-    <string name="sbc_day_of_week_options">顯示日期</string>
-    <string name="sbc_advanced_cat">日期進階選項（將取代上方設定！）</string>
+	<string name="sbc_ampm_style">AM/PM 樣式</string>
+	<string name="sbc_show_secs">顯示秒數</string>
+	<string name="sbc_date_cat">日期選項</string>
+	<string name="sbc_day_of_week_options">顯示日期</string>
+	<string name="sbc_advanced_cat">日期進階選項（將取代上方設定！）</string>
 	<string name="sbc_custom_date_before">自訂時鐘左側格式</string>
-    <string name="sbc_date_small">較小的尺寸 (70%)</string>
-    <string name="sbc_custom_date_after">自訂時鐘右側格式</string>
-    <string name="sbc_header">自定狀態列時鐘</string>
-    <string name="sbc_clock_color_category">顏色選項</string>
-    <string name="sbc_colorful_title">著色</string>
-    <string name="sbc_before_color">時間前文字顯示</string>
-    <string name="sbc_color">時間</string>
-    <string name="sbc_after_color">時間後文字顯示</string>
-    <string name="network_settings_pref">流量顯示設定</string>
-    <string name="ntsb_far_left">最左</string>
-    <string name="ntsb_mid_left">中間偏左</string>
-    <string name="ntsb_mid_right">中間偏右</string>
-    <string name="ntsb_category_title">流量指示器</string>
-    <string name="ntsb_enabled_title">開啟流量顯示</string>
-    <string name="ntsb_position_title">顯示位置</string>
-    <string name="ntsb_threshold_title">自動隱藏閾值</string>
-    <string name="ntsb_threshold_summary">流量低於設定閾值時隱藏 (KB)</string>
-    <string name="network_mode_title">顯示樣式</string>
-    <string name="network_colorful_title">著色</string>
-    <string name="network_download_top">下載速度在上</string>
-    <string name="network_download_color_title">下載顏色</string>
-    <string name="network_upload_color_title">上傳顏色</string>
-    <string name="network_opacity_title">不透明度</string>
-    <string name="network_interval_title">重新整理時間 (秒)</string>
-    <string name="network_show_icons_title">顯示流量方向圖示</string>
-    <string name="nt_mode_rxtx">下載 &amp; 上傳</string>
-    <string name="nt_mode_total">下載 +上傳 (合併)</string>
-    <string name="nt_mode_rxonly">僅下載</string>
-    <string name="nt_mode_txonly">僅上傳</string>
-    <string name="statusbar_general_options">自定狀態列</string>
-    <string name="dual_tone_battery_title">雙色電池圖示</string>
-    <string name="dual_tone_battery_on_summary">開啟 (僅當縱向圖示時生效)</string>
-    <string name="unread_messages_title">顯示未讀通知數量</string>
-    <string name="status_bar_height">狀態高度</string>
-    <string name="sb_padding_title">狀態列內邊距</string>
-    <string name="sb_padding_summary">最小/最大 等同於裝置預設值</string>
-    <string name="sbbb_header">電池條設定</string>
-    <string name="sbbIcon_header">電池圖示設定</string>
-    <string name="BB_enable_title">啟用電池條</string>
-    <string name="BB_onlycharging_title">僅充電時</string>
-    <string name="BB_move_SB_bottom_title">狀態列下方</string>
-    <string name="BB_colorful_title">著色</string>
-    <string name="BB_Opacity_title">不透明度</string>
-    <string name="BB_center_align_title">居中對齊</string>
-    <string name="BB_Thickness_title">粗細度</string>
-    <string name="BB_indicate_charging">充電顯示</string>
-    <string name="BB_indicate_fast_charging">快充顯示</string>
-    <string name="BB_warning_level">電量警告</string>
-    <string name="BB_warning_tip">均設為 0 將禁用基於電量的顏色變化</string>
-    <string name="BB_batteryCriticalColor">臨界值顏色</string>
-    <string name="BB_batteryWarningColor">警告顏色</string>
-    <string name="BB_batteryChargingColor">充電顏色</string>
-    <string name="BB_batteryFastChargingColor">快充顏色</string>
-    <string name="BB_transit_colors">陰影漸變</string>
-
-    <!--Quick settings panel related-->
-    <string name="qs_mod_category_title">下拉方塊面板底部版本號</string>
-    <string name="qs_footer_mod_title">修改版本號內容</string>
-    <string name="qs_footer_text_value">輸入自訂內容</string>
-    <string name="qs_footer_text_summary">留空以移除</string>
-    <string name="qs_footer_text_desc">關閉並開啟屏幕後生效</string>
-    <string name="qs_leveled_flashlight_title">亮度可調手電筒方塊</string>
-    <string name="qs_flashlight_level_global_title">全域性應用手電筒亮度</string>
-    <string name="qs_qr_tile_inactive_title">反色掃碼方塊顏色</string>
-    <string name="qs_tile_vertical_title">將方塊圖示移至頂部</string>
-    <string name="qs_tile_qty_title">方塊面板數量設定</string>
-    <string name="qs_leveled_flashlight_summary">需要硬體支援</string>
-    <string name="light_qs_title">淺色主題下使用淺色方塊面板 (可能會出現問題)</string>
+	<string name="sbc_date_small">較小的尺寸 (70%)</string>
+	<string name="sbc_custom_date_after">自訂時鐘右側格式</string>
+	<string name="sbc_header">自定狀態列時鐘</string>
+	<string name="sbc_clock_color_category">顏色選項</string>
+	<string name="sbc_colorful_title">著色</string>
+	<string name="sbc_before_color">時間前文字顯示</string>
+	<string name="sbc_color">時間</string>
+	<string name="sbc_after_color">時間後文字顯示</string>
+	<string name="network_settings_pref">流量顯示設定</string>
+	<string name="ntsb_far_left">最左</string>
+	<string name="ntsb_mid_left">中間偏左</string>
+	<string name="ntsb_mid_right">中間偏右</string>
+	<string name="ntsb_category_title">流量指示器</string>
+	<string name="ntsb_enabled_title">開啟流量顯示</string>
+	<string name="ntsb_position_title">顯示位置</string>
+	<string name="ntsb_threshold_title">自動隱藏閾值</string>
+	<string name="ntsb_threshold_summary">流量低於設定閾值時隱藏 (KB)</string>
+	<string name="network_mode_title">顯示樣式</string>
+	<string name="network_colorful_title">著色</string>
+	<string name="network_download_top">下載速度在上</string>
+	<string name="network_download_color_title">下載顏色</string>
+	<string name="network_upload_color_title">上傳顏色</string>
+	<string name="network_opacity_title">不透明度</string>
+	<string name="network_interval_title">重新整理時間 (秒)</string>
+	<string name="network_show_icons_title">顯示流量方向圖示</string>
+	<string name="nt_mode_rxtx">下載 &amp; 上傳</string>
+	<string name="nt_mode_total">下載 +上傳 (合併)</string>
+	<string name="nt_mode_rxonly">僅下載</string>
+	<string name="nt_mode_txonly">僅上傳</string>
+	<string name="statusbar_general_options">自定狀態列</string>
+	<string name="dual_tone_battery_title">雙色電池圖示</string>
+	<string name="dual_tone_battery_on_summary">開啟 (僅當縱向圖示時生效)</string>
+	<string name="unread_messages_title">顯示未讀通知數量</string>
+	<string name="status_bar_height">狀態高度</string>
+	<string name="sb_padding_title">狀態列內邊距</string>
+	<string name="sb_padding_summary">最小/最大 等同於裝置預設值</string>
+	<string name="sbbb_header">電池條設定</string>
+	<string name="sbbIcon_header">電池圖示設定</string>
+	<string name="BB_enable_title">啟用電池條</string>
+	<string name="BB_onlycharging_title">僅充電時</string>
+	<string name="BB_move_SB_bottom_title">狀態列下方</string>
+	<string name="BB_colorful_title">著色</string>
+	<string name="BB_Opacity_title">不透明度</string>
+	<string name="BB_center_align_title">居中對齊</string>
+	<string name="BB_Thickness_title">粗細度</string>
+	<string name="BB_indicate_charging">充電顯示</string>
+	<string name="BB_indicate_fast_charging">快充顯示</string>
+	<string name="BB_warning_level">電量警告</string>
+	<string name="BB_warning_tip">均設為 0 將禁用基於電量的顏色變化</string>
+	<string name="BB_batteryCriticalColor">臨界值顏色</string>
+	<string name="BB_batteryWarningColor">警告顏色</string>
+	<string name="BB_batteryChargingColor">充電顏色</string>
+	<string name="BB_batteryFastChargingColor">快充顏色</string>
+	<string name="BB_transit_colors">陰影漸變</string>
+	<string name="nt_stat_mode_today">Today</string>
+	<string name="nt_stat_mode_week">Current week</string>
+	<string name="nt_stat_mode_month">Current month</string>
+	<string name="sunday">Sunday</string>
+	<string name="monday">Monday</string>
+	<string name="tuesday">Tuesday</string>
+	<string name="wednesday">Wednesday</string>
+	<string name="thursday">Thursday</string>
+	<string name="friday">Friday</string>
+	<string name="saturday">Saturday</string>
+	<!--Quick settings panel related-->
+	<string name="qs_mod_category_title">下拉方塊面板底部版本號</string>
+	<string name="qs_footer_mod_title">修改版本號內容</string>
+	<string name="qs_footer_text_value">輸入自訂內容</string>
+	<string name="qs_footer_text_summary">留空以移除</string>
+	<string name="qs_footer_text_desc">關閉並開啟屏幕後生效</string>
+	<string name="qs_leveled_flashlight_title">亮度可調手電筒方塊</string>
+	<string name="qs_flashlight_level_global_title">全域性應用手電筒亮度</string>
+	<string name="qs_qr_tile_inactive_title">反色掃碼方塊顏色</string>
+	<string name="qs_tile_vertical_title">將方塊圖示移至頂部</string>
+	<string name="qs_tile_qty_title">方塊面板數量設定</string>
+	<string name="qs_leveled_flashlight_summary">需要硬體支援</string>
+	<string name="light_qs_title">淺色主題下使用淺色方塊面板 (可能會出現問題)</string>
 	<string name="qs_pulldown_size">快速下拉方塊面板</string>
-    <string name="qs_pulldown_switch_title">快速下拉方塊面板</string>
-    <string name="qs_pulldown_side_title">快速下拉寬度</string>
-    <string name="qs_pulldown_category">方塊面板下拉</string>
-    <string name="qs_haptic_switch_title">點選按鈕震動</string>
-    <string name="vibration_type_touch">強度由系統觸控振動設定定義</string>
-    <string name="qs_tile_qty_portrait">豎屏時</string>
-    <string name="qs_tile_qty_landscape">橫屏時</string>
-
-    <string name="qs_rows_number">方塊面板行數</string>
-    <string name="qs_cols_number">方塊面板列數</string>
-    <string name="qqs_tiles_number">方塊面板最大方塊數量 (最大2行)</string>
-    <string name="qs_tile_label_size">方塊標籤大小</string>
-    <string name="qs_tile_secondary_label_size">方塊標籤內容大小</string>
+	<string name="qs_pulldown_switch_title">快速下拉方塊面板</string>
+	<string name="qs_pulldown_side_title">快速下拉寬度</string>
+	<string name="qs_pulldown_category">方塊面板下拉</string>
+	<string name="qs_haptic_switch_title">點選按鈕震動</string>
+	<string name="vibration_type_touch">強度由系統觸控振動設定定義</string>
+	<string name="qs_tile_qty_portrait">豎屏時</string>
+	<string name="qs_tile_qty_landscape">橫屏時</string>
+	<string name="qs_rows_number">方塊面板行數</string>
+	<string name="qs_cols_number">方塊面板列數</string>
+	<string name="qqs_tiles_number">方塊面板最大方塊數量 (最大2行)</string>
+	<string name="qs_tile_label_size">方塊標籤大小</string>
+	<string name="qs_tile_secondary_label_size">方塊標籤內容大小</string>
 	<string name="wifi_cell_title">網路方塊</string>
-    <string name="wifi_cell_on">分離 WIFI 和資料方塊</string>
-    <string name="wifi_cell_off">合併 WIFI 和資料方塊</string>
-    <string name="QQS_brightness_category">亮度滑塊選項</string>
-    <string name="QQS_brightness_title">在下拉方塊面板顯示</string>
-    <string name="QQS_brightness_bottom_title">將亮度條移動到底部</string>
-    <string name="QS_brightness_disable_title">在方塊面板中隱藏</string>
-    <string name="bs_thick_track">使用較粗的亮度滑塊</string>
-    <string name="quick_settings_tiles_category">方塊選項</string>
-    <string name="qs_tile_style_title">方塊主題</string>
+	<string name="wifi_cell_on">分離 WIFI 和資料方塊</string>
+	<string name="wifi_cell_off">合併 WIFI 和資料方塊</string>
+	<string name="QQS_brightness_category">亮度滑塊選項</string>
+	<string name="QQS_brightness_title">在下拉方塊面板顯示</string>
+	<string name="QQS_brightness_bottom_title">將亮度條移動到底部</string>
+	<string name="QS_brightness_disable_title">在方塊面板中隱藏</string>
+	<string name="bs_thick_track">使用較粗的亮度滑塊</string>
+	<string name="quick_settings_tiles_category">方塊選項</string>
+	<string name="qs_tile_style_title">方塊主題</string>
 	<string name="qs_volume_unmute_title">音量方塊取消靜音時音量</string>
-
-    <!--Navigation bar related-->
-    <string name="back_gesture_category_title">設定返回手勢</string>
-    <string name="back_from_left_title">螢幕左側</string>
-    <string name="back_from_right_title">螢幕右側</string>
-    <string name="back_height_title">手勢高度</string>
-    <string name="gesturenav_header">手勢導航</string>
-    <string name="gesture_nav_pill_cat">小白條寬度</string>
+	<!--Navigation bar related-->
+	<string name="back_gesture_category_title">設定返回手勢</string>
+	<string name="back_from_left_title">螢幕左側</string>
+	<string name="back_from_right_title">螢幕右側</string>
+	<string name="back_height_title">手勢高度</string>
+	<string name="gesturenav_header">手勢導航</string>
+	<string name="gesture_nav_pill_cat">小白條寬度</string>
 	<string name="gesture_nav_pill_width_title">對比標準大小的寬度</string>
-    <string name="gesture_nav_pill_height_title">對比標準大小的高度</string>
-    <string name="threebutton_header_title">3 個虛擬導航鍵</string>
+	<string name="gesture_nav_pill_height_title">對比標準大小的高度</string>
+	<string name="threebutton_header_title">3 個虛擬導航鍵</string>
 	<string name="modify_3button_title">更改按鈕順序</string>
-    <string name="three_button_left_title">左按鈕</string>
-    <string name="three_button_center_title">中按鈕</string>
-    <string name="three_button_right_title">右按鈕</string>
-    <string name="hide_navbar_title">隱藏小白條</string>
-    <string name="taskbar_as_recents_title">將工作列替換為最近工作列</string>
-    <string name="taskbar_height_title">工作列高度</string>
-    <string name="taskbar_radius_title">工作列圓角</string>
+	<string name="three_button_left_title">左按鈕</string>
+	<string name="three_button_center_title">中按鈕</string>
+	<string name="three_button_right_title">右按鈕</string>
+	<string name="hide_navbar_title">隱藏小白條</string>
+	<string name="taskbar_as_recents_title">將工作列替換為最近工作列</string>
+	<string name="taskbar_height_title">工作列高度</string>
+	<string name="taskbar_radius_title">工作列圓角</string>
 	<string name="colorpill">小白條強調色</string>
-    <string name="reducekeyboard_title">鍵盤空間</string>
-    <string name="reducekeyboard">減小鍵盤底部空間</string>
-    <string name="taskbar_status_title">工作列</string>
-    <string name="taskbar_force_enable_title">強制開啟</string>
-    <string name="taskbar_force_disable_title">強制關閉</string>
-
+	<string name="reducekeyboard_title">鍵盤空間</string>
+	<string name="reducekeyboard">減小鍵盤底部空間</string>
+	<string name="taskbar_status_title">工作列</string>
+	<string name="taskbar_force_enable_title">強制開啟</string>
+	<string name="taskbar_force_disable_title">強制關閉</string>
+	<string name="taskbar_transient_title">Auto hide</string>
 	<!-- Package manager -->
-    <string name="pm_bypass_signature_title">繞過應用簽名檢查</string>
-    <string name="pm_allow_downgrade_title">允許應用降級</string>
-    <string name="auto_off_five_minutes">在接下來的五分鐘內保持開啟</string>
-
-    <!--Miscellaneous section related-->
-    <string name="screenshot_sound_disable_title">關閉截圖提示音</string>
-    <string name="clipboard_smart_actions_title">剪貼簿快捷選項</string>
-    <string name="allow_all_screen_rotations">解除全螢幕旋轉</string>
-    <string name="allow_all_screen_rotations_summary">將同時無視手動旋轉懸浮鈕</string>
-    <string name="force_no_cutout">無視螢幕開孔</string>
-    <string name="clear_all_reposition_title">在最近任務右側「清除所有」按鈕</string>
-    <string name="volume_button_step_title">音量步進 (0至100%)</string>
-    <string name="display_resolution_title">顯示解析度</string>
-    <string name="brightness_range_title">顯示亮度限制</string>
-    <string name="brightness_range_not_linear">這個範圍不是線性的,有時一個小的差異會導致相當大的變化</string>
-
-    <string name="so_power_longpress_torch_title">長按電源開啟手電筒</string>
-    <string name="so_taptaptorch_title">鎖定畫面雙擊開啟手電筒</string>
-    <string name="so_taptaptorch_summary">鎖定畫面時 雙擊+長按開啟手電筒</string>
-    <string name="so_fingerprint_sensor_enabled">螢幕關閉時啟用指紋感測器</string>
-
-    <string name="so_double_tap_wake_title">雙擊亮屏</string>
-    <string name="so_double_tap_wake_summary">將禁用單擊喚醒</string>
-    <string name="doze_header">鎖定畫面時</string>
-    <string name="custom_themed_icons_title">自訂帶主題的圖示</string>
-    <string name="custom_themed_icons_off">自訂圖示已禁用</string>
-    <string name="custom_themed_icons_on">自訂圖示已啟用</string>
-    <string name="so_vol_longpress_skip">長按音量鍵跳過歌曲</string>
-    <string name="notifications_header">通知選項</string>
-    <string name="expand_notifications_icons_title">新增展開/摺疊所有按鈕</string>
-    <string name="heads_up_notification_duration">通知浮動持續時間</string>
-    <string name="disable_overscroll">禁用過度滾動效果</string>
-    <string name="overscroll_on_summary">重要:你必須在 LSPosed 作用域中勾選你要禁用的應用程式</string>
-    <string name="milliseconds">毫秒</string>
-
-    <!-- Call section -->
+	<string name="pm_bypass_signature_title">繞過應用簽名檢查</string>
+	<string name="pm_allow_downgrade_title">允許應用降級</string>
+	<string name="auto_off_five_minutes">在接下來的五分鐘內保持開啟</string>
+	<!--Miscellaneous section related-->
+	<string name="screenshot_sound_disable_title">關閉截圖提示音</string>
+	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
+	<string name="screenshot_insecure">Allow screenshot from restricted content</string>
+	<string name="screen_record_insecure">Allow screen recording from restricted content</string>
+	<string name="clipboard_smart_actions_title">剪貼簿快捷選項</string>
+	<string name="allow_all_screen_rotations">解除全螢幕旋轉</string>
+	<string name="allow_all_screen_rotations_summary">將同時無視手動旋轉懸浮鈕</string>
+	<string name="force_no_cutout">無視螢幕開孔</string>
+	<string name="clear_all_reposition_title">在最近任務右側「清除所有」按鈕</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Android 14 - Pixel launcher only)</string>
+	<string name="reapply_themed_config">Re-enable themed icons to apply</string>
+	<string name="volume_button_step_title">音量步進 (0至100%)</string>
+	<string name="display_resolution_title">顯示解析度</string>
+	<string name="brightness_range_title">顯示亮度限制</string>
+	<string name="brightness_range_not_linear">這個範圍不是線性的,有時一個小的差異會導致相當大的變化</string>
+	<string name="separate_ring_notif_vol_title">Individual volume for Ringer and Notification</string>
+	<string name="so_power_longpress_torch_title">長按電源開啟手電筒</string>
+	<string name="so_taptaptorch_title">鎖定畫面雙擊開啟手電筒</string>
+	<string name="so_taptaptorch_summary">鎖定畫面時 雙擊+長按開啟手電筒</string>
+	<string name="so_fingerprint_sensor_enabled">螢幕關閉時啟用指紋感測器</string>
+	<string name="so_double_tap_wake_title">雙擊亮屏</string>
+	<string name="so_double_tap_wake_summary">將禁用單擊喚醒</string>
+	<string name="so_tap_to_show_ambient_title">Tap to show ambient display</string>
+	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Tapping on the screen shows ambient display</string>
+	<string name="so_pick_to_show_ambient_title">Pick to show ambient display</string>
+	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Picking the phone shows ambient display</string>
+	<string name="doze_header">鎖定畫面時</string>
+	<string name="custom_themed_icons_title">自訂帶主題的圖示</string>
+	<string name="custom_themed_icons_off">自訂圖示已禁用</string>
+	<string name="custom_themed_icons_on">自訂圖示已啟用</string>
+	<string name="so_vol_longpress_skip">長按音量鍵跳過歌曲</string>
+	<string name="notifications_header">通知選項</string>
+	<string name="expand_notifications_icons_title">新增展開/摺疊所有按鈕</string>
+	<string name="heads_up_notification_duration">通知浮動持續時間</string>
+	<string name="disable_overscroll">禁用過度滾動效果</string>
+	<string name="overscroll_on_summary">重要:你必須在 LSPosed 作用域中勾選你要禁用的應用程式</string>
+	<string name="milliseconds">毫秒</string>
+	<!-- Work/Clone profile -->
+	<string name="work_clone_profile_header">Work/Clone Profile</string>
+	<string name="statusbar_long_press_app_switch">Long press statusbar to switch profile</string>
+	<string name="statusbar_app_switch_icon">Show an icon on statusbar when switching is available</string>
+	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">去電被接通時震動</string>
-    <string name="vibrate_on_call_drop_title">結束通話時震動</string>
-    <string name="vibration_type_notification">強度由系統通知振動設定定義</string>
-
-    <!-- Theming section related -->
-    <string name="gsans_override_title">系統級強制使用 Google Sans</string>
-    <string name="font_overlays_enable_title">啟用自訂字型</string>
-    <string name="theme_customization_font_title">標題/正文字型</string>
-    <string name="icons_style_title">圖示樣式</string>
-    <string name="icon_shapes_title">圖示形狀</string>
-    <string name="signal_icons_theme_title">訊號圖示主題</string>
-    <string name="dt_styles_category">深色主題樣式</string>
-    <string name="dt_styles">選擇樣式</string>
-    <string name="caution_unstable">注意: 該功能對部分使用者不穩定</string>
+	<string name="vibrate_on_call_drop_title">結束通話時震動</string>
+	<string name="vibration_type_notification">強度由系統通知振動設定定義</string>
+	<string name="dialer_mute_record_message_title">Remove call recording announcement</string>
+	<string name="dialer_mute_record_message_summary">Only applies to Google phone app with call recording enabled</string>
+	<!-- Theming section related -->
+	<string name="gsans_override_title">系統級強制使用 Google Sans</string>
+	<string name="font_overlays_enable_title">啟用自訂字型</string>
+	<string name="theme_customization_font_title">標題/正文字型</string>
+	<string name="icons_style_title">圖示樣式</string>
+	<string name="icon_shapes_title">圖示形狀</string>
+	<string name="signal_icons_theme_title">訊號圖示主題</string>
+	<string name="dt_styles_category">深色主題樣式</string>
+	<string name="dt_styles">選擇樣式</string>
+	<string name="caution_unstable">注意: 該功能對部分使用者不穩定</string>
 	<string name="power_menu_overlays_title">在電源選單啟用淺色/深色主題</string>
-
 	<!-- Arrays strings -->
-    <!-- Quick pull down -->
-    <string name="pull_down_left">左側</string>
-    <string name="pull_down_right">右側</string>
-
-    <!-- Battery styles -->
-    <string name="word_default">預設</string>
-    <string name="battery_circle">圓形</string>
-    <string name="battery_dashed_circle">虛線圓</string>
-
-    <!-- Clock position -->
-    <string name="battery_circle_filled">實心圓</string>
-    <string name="clock_default">左側 (預設)</string>
-    <string name="clock_center">中間</string>
-    <string name="clock_right">右側</string>
-
-    <!-- AM/PM style -->
-    <string name="am_pm_normal">100%</string>
-    <string name="am_pm_small">70%</string>
-
-    <!-- Date position -->
-    <string name="date_before">時間前 (100%)</string>
-    <string name="date_before_small">時間前 (70%)</string>
-    <string name="date_after">時間後 (100%)</string>
-    <string name="date_after_small">時間後 (70%)</string>
-
-    <!-- 4G | LTE -->
-    <string name="fourg_lte_default">系統預設</string>
-    <string name="fourg_lte_lte">使用 LTE 圖示</string>
-    <string name="fourg_lte_fourg">使用 4G 圖示</string>
-
-    <!-- QS Rows overlays -->
-
-    <!-- Lockscreen/Quick Settings Custom Text -->
+	<!-- Quick pull down -->
+	<string name="pull_down_left">左側</string>
+	<string name="pull_down_right">右側</string>
+	<!-- Battery styles -->
+	<string name="word_default">預設</string>
+	<string name="battery_circle">圓形</string>
+	<string name="battery_dashed_circle">虛線圓</string>
+	<string name="battery_circle_filled">實心圓</string>
+	<!-- Clock position -->
+	<string name="clock_default">左側 (預設)</string>
+	<string name="clock_center">中間</string>
+	<string name="clock_right">右側</string>
+	<!-- AM/PM style -->
+	<string name="am_pm_normal">100%</string>
+	<string name="am_pm_small">70%</string>
+	<!-- Date position -->
+	<string name="date_before">時間前 (100%)</string>
+	<string name="date_before_small">時間前 (70%)</string>
+	<string name="date_after">時間後 (100%)</string>
+	<string name="date_after_small">時間後 (70%)</string>
+	<!-- 4G | LTE -->
+	<string name="fourg_lte_default">系統預設</string>
+	<string name="fourg_lte_lte">使用 LTE 圖示</string>
+	<string name="fourg_lte_fourg">使用 4G 圖示</string>
+	<!-- QS Rows overlays -->
+	<!-- Lockscreen/Quick Settings Custom Text -->
 	<string name="minutes_word">分鐘</string>
-
-    <!-- Incompatibility Alert -->
-    <string name="incompatible_alert_title">不相容</string>
-    <string name="incompatible_alert_body">你當前的 ROM 不是該模組的直接目標,你可以繼續使用它,但一些(或所有)功能可能不會預期工作</string>
-    <string name="incompatible_alert_ok_btn">我已知曉</string>
-
-    <!-- Menu Items -->
-    <string name="menu_settings_title">匯入/匯出</string>
-    <string name="menu_reset_defaults">重置所有設定</string>
-    <string name="menu_import_settings">從檔案中匯入設定</string>
-    <string name="menu_export_settings">匯出設定到檔案中</string>
+	<string name="network_stat_type">Type of Statistics</string>
+	<string name="network_stat_day">Start time</string>
+	<string name="network_stat_week">Week start day</string>
+	<string name="network_stat_month">Month start day</string>
+	<!-- Incompatibility Alert -->
+	<string name="incompatible_alert_title">不相容</string>
+	<string name="incompatible_alert_body">你當前的 ROM 不是該模組的直接目標,你可以繼續使用它,但一些(或所有)功能可能不會預期工作</string>
+	<string name="incompatible_alert_ok_btn">我已知曉</string>
+	<!-- App kill Alert -->
+	<string name="app_kill_alert_title">Notice</string>
+	<string name="app_kill_alert_body">App will close now. You can open it again by tapping on the new icon</string>
+	<string name="app_kill_ok_btn">OK</string>
+	<!-- Menu Items -->
+	<string name="menu_settings_title">匯入/匯出</string>
+	<string name="menu_reset_defaults">重置所有設定</string>
+	<string name="menu_import_settings">從檔案中匯入設定</string>
+	<string name="menu_export_settings">匯出設定到檔案中</string>
 	<string name="menu_restart">重啟</string>
-    <string name="menu_restartSysUI">重啟 SystemUI</string>
-    <string name="menu_updates">App 更新</string>
-
+	<string name="menu_restart_system">Restart system</string>
+	<string name="menu_soft_restart">Soft reboot</string>
+	<string name="menu_restartSysUI">重啟 SystemUI</string>
+	<string name="menu_updates">App 更新</string>
 	<string name="monitoring_category_title">監控選項</string>
-    <string name="netstat_header">網路統計設定</string>
-
+	<string name="netstat_header">網路統計設定</string>
+	<string name="string_formatter_manual_body_v3">In addition to the normal text, dynamic variables are also available, like Date, Data usage and Temperature:\n\n$G\&lt;format\&gt; : Gregorian date, based on format*\n$P&lt;format&gt; : Persian date, based on format*\n$Nrx : Total Downloads in specified period ** ***\n$Ntx: Total Uploads in specified period ** ***\n$Nall : Total Traffic in specified period ** ***\n$Nssid : WiFi SSID name (if applicable)\n\n$T\&lt;format\&gt;[interval] : Temperature; \nformat can be b (for battery), c (for CPU), g (for GPU) and s (for skin) \nLastly, there is OPTIONAL number of update interval in seconds (default: 60 seconds)\n\n*for format documentation, search for \"Java Date Format\"\n**You can specify the statistics period in AOSPMods/Miscellaneous menu/Network Statistics Settings\n***If you replace $N with $Nc you will get with mobile data statistics (e.g. $Ncrx instead of Nrx)</string>
 	<string name="update_channel_name">更新</string>
-    <string name="update_notification_title">已下載更新</string>
-    <string name="update_notification_text">點此安裝</string>
+	<string name="update_notification_title">已下載更新</string>
+	<string name="update_notification_text">點此安裝</string>
+	<string name="download_failed">Failed to download the update</string>
+	<string name="try_again_later">Please try again later</string>
 	<string name="update_flavor_title">更新通道</string>
-    <string name="stable_flavor">穩定版</string>
-    <string name="update_type_title">更新包型別</string>
-    <string name="full_type">完整包</string>
-    <string name="xposed_type">僅Xposed</string>
-    <string name="currentVersionTitle">已安裝版本:</string>
-    <string name="lastestVersionTitle">最新版本:</string>
-    <string name="root_not_here">未獲得 ROOT 授權!</string>
-    <string name="reboot_pending">稍後重啟</string>
-    <string name="reboot_word">現在重啟</string>
-    <string name="update_checking">正在檢查...</string>
-    <string name="update_download_started">正在下載 - 請在完成後點選通知</string>
-    <string name="update_word">更新</string>
-    <string name="switch_branches">更換分支</string>
-    <string name="reinstall_word">重新安裝</string>
-
-    <string name="own_prefs_header">AOSP Mods 設定</string>
-    <string name="language_title">語言</string>
+	<string name="stable_flavor">穩定版</string>
+	<string name="update_type_title">更新包型別</string>
+	<string name="full_type">完整包</string>
+	<string name="xposed_type">僅Xposed</string>
+	<string name="currentVersionTitle">已安裝版本:</string>
+	<string name="lastestVersionTitle">最新版本:</string>
+	<string name="root_not_here">未獲得 ROOT 授權!</string>
+	<string name="reboot_pending">稍後重啟</string>
+	<string name="reboot_word">現在重啟</string>
+	<string name="update_checking">正在檢查...</string>
+	<string name="update_download_started">正在下載 - 請在完成後點選通知</string>
+	<string name="update_word">更新</string>
+	<string name="switch_branches">更換分支</string>
+	<string name="reinstall_word">重新安裝</string>
+	<string name="changelog_title">Changelog</string>
+	<string name="own_prefs_header">AOSP Mods 設定</string>
+	<string name="language_title">語言</string>
 	<string name="toggle_dark_apply">(切換深色模式以應用)</string>
-
-    <string name="gesture_nav_extra_cat">更多導航欄手勢</string>
-    <string name="gesture_nav_long_swipe_fc_title">上滑至螢幕頂部以殺死前臺APP</string>
-    <string name="gesture_nav_left_swipe_up_title">左側導航欄上滑動作</string>
-    <string name="gesture_nav_right_swipe_up_title">右側導航欄上滑動作</string>
-    <string name="gesture_nav_left_swipe_up_percent">左側上滑區域 (%)</string>
-    <string name="gesture_nav_right_swipe_up_percent">右側上滑區域 (%)</string>
-    <string name="gesture_nav_two_finger_title">雙指上滑動作</string>
-    <string name="gesture_nav_swipe_up_height">上滑動作觸發最低高度</string>
-
-    <string name="none">無</string>
-    <string name="screenshot">截圖</string>
+	<string name="gesture_nav_extra_cat">更多導航欄手勢</string>
+	<string name="gesture_nav_long_swipe_fc_title">上滑至螢幕頂部以殺死前臺APP</string>
+	<string name="gesture_nav_left_swipe_up_title">左側導航欄上滑動作</string>
+	<string name="gesture_nav_right_swipe_up_title">右側導航欄上滑動作</string>
+	<string name="gesture_nav_left_swipe_up_percent">左側上滑區域 (%)</string>
+	<string name="gesture_nav_right_swipe_up_percent">右側上滑區域 (%)</string>
+	<string name="gesture_nav_two_finger_title">雙指上滑動作</string>
+	<string name="gesture_nav_swipe_up_height">上滑動作觸發最低高度</string>
+	<string name="none">無</string>
+	<string name="screenshot">截圖</string>
 	<string name="kill_foreground_app">殺死前臺app</string>
-    <string name="toggle_notification">啟用通知欄面板</string>
-    <string name="toggle_one_handed">啟用單手模式</string>
+	<string name="toggle_notification">啟用通知欄面板</string>
+	<string name="toggle_one_handed">啟用單手模式</string>
 	<string name="sleep">睡眠</string>
-
+	<!-- Search Preference -->
+	<string name="searchpreference_search">Search…</string>
+	<string name="searchpreference_clear">Clear</string>
+	<string name="searchpreference_history_entry">History entry</string>
+	<string name="searchpreference_more">More</string>
+	<string name="searchpreference_clear_history">Clear history</string>
+	<string name="searchpreference_no_results">No results</string>
+	<!-- Hooked Packages Activity -->
+	<string name="hooked_packages_title">Connected packages</string>
+	<string name="package_hooked_successful">Package responsive</string>
+	<string name="package_not_hook_enabled">Package not enabled in LSposed</string>
+	<string name="package_hook_no_response">Package not responding</string>
+	<string name="package_not_found">Package not found</string>
+	<string name="package_checking">Loading%s</string>
+	<string name="package_activated">Package successfully activated</string>
+	<string name="package_activation_failed">Package activation failed</string>
+	<string name="activate_in_lsposed">Activate in LSPosed</string>
+	<!-- Splash Activity -->
+	<string name="checking_root_permissions">Checking root permissions…</string>
+	<string name="connecting_root_service">Connecting to the root service…</string>
+	<string name="root_access_denied">Root access denied. Please allow root access.</string>
+	<string name="exit">Exit</string>
 </resources>

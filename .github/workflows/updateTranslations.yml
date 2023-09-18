@@ -18,7 +18,7 @@ jobs:
           upload_translations: true
           download_translations: true
           localization_branch_name: crowdin_sync
-          create_pull_request: false
+          create_pull_request: true
           pull_request_title: 'Crowdin Translation Sync'
           pull_request_body: 'Syncing crowdin translations with repo'
         env:

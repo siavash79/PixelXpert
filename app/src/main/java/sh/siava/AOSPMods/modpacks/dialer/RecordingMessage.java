@@ -1,13 +1,15 @@
 package sh.siava.AOSPMods.modpacks.dialer;
 
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 
-import de.robv.android.xposed.callbacks.XC_InitPackageResources;
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.AOSPMods.modpacks.Constants;
-import sh.siava.AOSPMods.modpacks.ResourceManager;
 import sh.siava.AOSPMods.modpacks.XposedModPack;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 
@@ -36,16 +38,21 @@ public class RecordingMessage extends XposedModPack {
 		return listenPackage.equals(packageName);
 	}
 
+	@SuppressLint("DiscouragedApi")
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if(removeRecodingMessage)
-		{
-			XC_InitPackageResources.InitPackageResourcesParam resparam = ResourceManager.resparams.get(listenPackage);
+		int call_recording_starting_voice = mContext.getResources().getIdentifier("call_recording_starting_voice", "string", mContext.getPackageName());
+		int call_recording_ending_voice = mContext.getResources().getIdentifier("call_recording_ending_voice", "string", mContext.getPackageName());
 
-			if(resparam != null) {
-				resparam.res.setReplacement(listenPackage, "string", "call_recording_starting_voice", "");
-				resparam.res.setReplacement(listenPackage, "string", "call_recording_ending_voice", "");
+		hookAllMethods(Resources.class, "getString", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(removeRecodingMessage
+						&& (param.args[0].equals(call_recording_starting_voice) || param.args[0].equals(call_recording_ending_voice)))
+				{
+					param.setResult("");
+				}
 			}
-		}
+		});
 	}
 }

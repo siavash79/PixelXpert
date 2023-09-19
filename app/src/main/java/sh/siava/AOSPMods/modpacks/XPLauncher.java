@@ -38,7 +38,7 @@ public class XPLauncher implements ServiceConnection {
 
 	public static ArrayList<XposedModPack> runningMods = new ArrayList<>();
 	public Context mContext = null;
-	XPLauncher instance;
+	static XPLauncher instance;
 
 	private static IRootProviderProxy rootProxyIPC;
 	private static final Queue<ProxyRunnable> proxyQueue = new LinkedList<>();
@@ -172,6 +172,7 @@ public class XPLauncher implements ServiceConnection {
 		else
 		{
 			proxyQueue.add(runnable);
+			instance.connectRootService();
 		}
 	}
 

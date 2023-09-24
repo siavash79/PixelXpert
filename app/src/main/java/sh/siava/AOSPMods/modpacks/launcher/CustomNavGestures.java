@@ -18,9 +18,9 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -40,8 +40,6 @@ public class CustomNavGestures extends XposedModPack {
 	private static final int ACTION_KILL_APP = 3;
 	private static final int ACTION_NOTIFICATION = 4;
 	private static final int ACTION_ONE_HANDED = 5;
-	@Deprecated
-	private static final int ACTION_INSECURE_SCREENSHOT = 6;
 	private static final int ACTION_SLEEP = 7;
 	private static final int ACTION_SWITCH_APP_PROFILE = 8;
 
@@ -234,20 +232,32 @@ public class CustomNavGestures extends XposedModPack {
 		}
 	}
 
+	String mTasksFieldName = null; // in case the code was obfuscated
 	private void saveFocusedTask() {
 		ArrayList<?> recentTaskList = (ArrayList<?>) callMethod(
 				mSysUiProxy,
 				"getRecentTasks",
 				1,
-				(int) callMethod(Process.myUserHandle(), "getIdentifier"));
+				callMethod(Process.myUserHandle(), "getIdentifier"));
+
+		if(mTasksFieldName == null)
+		{
+			for(Field f : recentTaskList.get(0).getClass().getFields())
+			{
+				if(f.getType().getName().contains("RecentTaskInfo"))
+				{
+					mTasksFieldName = f.getName();
+				}
+			}
+		}
 
 		Optional<?> focusedTask = recentTaskList.stream().filter(recentTask ->
 				(boolean) getObjectField(
-						((Object[]) getObjectField(recentTask, "mTasks"))[0],
+						((Object[]) getObjectField(recentTask, mTasksFieldName))[0],
 						"isFocused"
 				)).findFirst();
 
-		currentFocusedTask = focusedTask.map(o -> ((Object[]) getObjectField(o, "mTasks"))[0]).orElse(null);
+		currentFocusedTask = focusedTask.map(o -> ((Object[]) getObjectField(o, mTasksFieldName))[0]).orElse(null);
 	}
 
 	private void runAction(int action) {
@@ -296,13 +306,6 @@ public class CustomNavGestures extends XposedModPack {
 	private void goToSleep() {
 		Intent broadcast = new Intent();
 		broadcast.setAction(Constants.ACTION_SLEEP);
-		mContext.sendBroadcast(broadcast);
-	}
-
-	@Deprecated
-	private void takeInsecureScreenshot() {
-		Intent broadcast = new Intent();
-		broadcast.setAction(Constants.ACTION_INSECURE_SCREENSHOT);
 		mContext.sendBroadcast(broadcast);
 	}
 

@@ -1,13 +1,16 @@
 package sh.siava.AOSPMods.modpacks;
 
 import static android.content.Context.CONTEXT_IGNORE_SECURITY;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static sh.siava.AOSPMods.BuildConfig.APPLICATION_ID;
 import static sh.siava.AOSPMods.modpacks.Constants.SYSTEM_UI_PACKAGE;
+import static sh.siava.AOSPMods.modpacks.XPrefs.Xprefs;
 import static sh.siava.AOSPMods.modpacks.utils.BootLoopProtector.isBootLooped;
 
+import android.annotation.SuppressLint;
 import android.app.Instrumentation;
 import android.content.ComponentName;
 import android.content.Context;
@@ -22,9 +25,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.concurrent.CompletableFuture;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.IRootProviderProxy;
 import sh.siava.AOSPMods.R;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
@@ -38,6 +43,7 @@ public class XPLauncher implements ServiceConnection {
 
 	public static ArrayList<XposedModPack> runningMods = new ArrayList<>();
 	public Context mContext = null;
+	@SuppressLint("StaticFieldLeak")
 	static XPLauncher instance;
 
 	private static IRootProviderProxy rootProxyIPC;
@@ -75,52 +81,88 @@ public class XPLauncher implements ServiceConnection {
 			log("------------");
 		}*/
 
-		findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (mContext == null)
-				{
-					mContext = (Context) param.args[2];
-
-					XPrefs.init(mContext);
-
-					ResourceManager.modRes = mContext.createPackageContext(APPLICATION_ID, CONTEXT_IGNORE_SECURITY)
-							.getResources();
-
-					if(isBootLooped(packageName))
-					{
-						log(String.format("AOSPMods: Possible bootloop in %s. Will not load for now", packageName));
-						return;
-					}
-
-					new SystemUtils(mContext);
-					XPrefs.setPackagePrefs(packageName);
-				}
-
-				if(Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(packageName))
-				{
-					connectRootService();
-				}
-
-
-				for (Class<? extends XposedModPack> mod : ModPacks.getMods(packageName)) {
+		Class<?> PhoneWindowManagerClass = findClassIfExists("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
+		if(PhoneWindowManagerClass != null)
+		{
+			hookAllMethods(PhoneWindowManagerClass, "init", new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 					try {
-						XposedModPack instance = mod.getConstructor(Context.class).newInstance(mContext);
-						if (!instance.listensTo(packageName)) continue;
-						try {
-							instance.updatePrefs();
-						} catch (Throwable ignored) {}
-						instance.handleLoadPackage(lpparam);
-						runningMods.add(instance);
-					} catch (Throwable T) {
-						log("Start Error Dump - Occurred in " + mod.getName());
-						log(T);
+						if (mContext == null) {
+							mContext = (Context) param.args[0];
+
+							ResourceManager.modRes = mContext.createPackageContext(APPLICATION_ID, CONTEXT_IGNORE_SECURITY)
+									.getResources();
+
+							XPrefs.init(mContext);
+
+							CompletableFuture.runAsync(() -> waitForXprefsLoad(lpparam));
+						}
+					}
+					catch (Throwable t){
+						log(t);
 					}
 				}
-			}
-		});
+			});
+		}
+		else {
+			findAndHookMethod(Instrumentation.class, "newApplication", ClassLoader.class, String.class, Context.class, new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					try {
+						if (mContext == null) {
+							mContext = (Context) param.args[2];
 
+							ResourceManager.modRes = mContext.createPackageContext(APPLICATION_ID, CONTEXT_IGNORE_SECURITY)
+									.getResources();
+
+							XPrefs.init(mContext);
+
+							waitForXprefsLoad(lpparam);
+						}
+					}
+					catch (Throwable t){
+						log(t);
+					}
+				}
+			});
+		}
 	}
+
+	private void onXPrefsReady(XC_LoadPackage.LoadPackageParam lpparam) {
+		if (isBootLooped(packageName)) {
+			log(String.format("AOSPMods: Possible bootloop in %s. Will not load for now", packageName));
+			return;
+		}
+
+		new SystemUtils(mContext);
+		XPrefs.setPackagePrefs(packageName);
+
+		loadModpacks(lpparam);
+	}
+
+	private void loadModpacks(XC_LoadPackage.LoadPackageParam lpparam) {
+		if (Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(packageName)) {
+			connectRootService();
+		}
+
+		for (Class<? extends XposedModPack> mod : ModPacks.getMods(packageName)) {
+			try {
+				XposedModPack instance = mod.getConstructor(Context.class).newInstance(mContext);
+				if (!instance.listensTo(packageName)) continue;
+				try {
+					instance.updatePrefs();
+				} catch (Throwable ignored) {
+				}
+				instance.handleLoadPackage(lpparam);
+				runningMods.add(instance);
+			} catch (Throwable T) {
+				log("Start Error Dump - Occurred in " + mod.getName());
+				log(T);
+			}
+		}
+	}
+
 	private void connectRootService()
 	{
 		new Thread(() -> {
@@ -155,6 +197,32 @@ public class XPLauncher implements ServiceConnection {
 			}
 		}
 	}
+
+	private void waitForXprefsLoad(XC_LoadPackage.LoadPackageParam lpparam) {
+		while(true)
+		{
+			try
+			{
+				Xprefs.getBoolean("LoadTestBooleanValue", false);
+				break;
+			}
+			catch (Throwable ignored)
+			{
+				try {
+					//noinspection BusyWait
+					Thread.sleep(1000);
+				} catch (Throwable ignored1) {}
+			}
+		}
+
+		log("AOSPMods Version: " + BuildConfig.VERSION_NAME);
+		try {
+			log("AOSPMods Records: " + Xprefs.getAll().keySet().size());
+		} catch (Throwable ignored) {}
+
+		onXPrefsReady(lpparam);
+	}
+
 
 	@Override
 	public void onServiceDisconnected(ComponentName name) {

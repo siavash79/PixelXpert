@@ -1,7 +1,5 @@
 package sh.siava.AOSPMods.modpacks;
 
-import static de.robv.android.xposed.XposedBridge.log;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -19,16 +17,14 @@ public class XPrefs {
 	private static String packageName;
 
 	private static final OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything(packageName, key);
-
 	public static void init(Context context) {
 		packageName = context.getPackageName();
+
 		Xprefs = new RemotePreferences(context, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
-		log("AOSPMods Version: " + BuildConfig.VERSION_NAME);
-		try {
-			log("AOSPMods Records: " + Xprefs.getAll().keySet().size());
-		} catch (Throwable ignored) {}
+
 		Xprefs.registerOnSharedPreferenceChangeListener(listener);
 	}
+
 
 	public static void loadEverything(String packageName, String... key) {
 		if (key.length > 0 && (key[0] == null || Constants.PREF_UPDATE_EXCLUSIONS.stream().anyMatch(exclusion -> key[0].startsWith(exclusion))))

@@ -45,13 +45,14 @@ import br.tiagohm.markdownview.css.InternalStyleSheet;
 import br.tiagohm.markdownview.css.styles.Github;
 import sh.siava.AOSPMods.BuildConfig;
 import sh.siava.AOSPMods.R;
-import sh.siava.AOSPMods.ui.activities.UpdateActivity;
 import sh.siava.AOSPMods.databinding.UpdateFragmentBinding;
+import sh.siava.AOSPMods.ui.activities.UpdateActivity;
 import sh.siava.AOSPMods.utils.AppUtils;
 import sh.siava.AOSPMods.utils.PreferenceHelper;
 
 
 public class UpdateFragment extends Fragment {
+	public static final String UPDATES_CHANNEL_ID = "Updates";
 	private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/stable/latestStable.json";
 	private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/AOSPMods/canary/latestCanary.json";
 	DownloadManager downloadManager;
@@ -92,7 +93,7 @@ public class UpdateFragment extends Fragment {
 			}
 
 			if (!successful) {
-				NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), "updates")
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), UPDATES_CHANNEL_ID)
 						.setSmallIcon(R.drawable.ic_notification_foreground)
 						.setContentTitle(requireContext().getText(R.string.download_failed))
 						.setContentText(requireContext().getText(R.string.try_again_later))
@@ -316,7 +317,7 @@ public class UpdateFragment extends Fragment {
 		PendingIntent pendingIntent = PendingIntent.getActivity(requireContext(), 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
 		//noinspection ConstantConditions
-		NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), "updates")
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), UPDATES_CHANNEL_ID)
 				.setSmallIcon(R.drawable.ic_notification_foreground)
 				.setContentTitle(requireContext().getString(R.string.update_notification_title))
 				.setContentText(requireContext().getString(R.string.update_notification_text))

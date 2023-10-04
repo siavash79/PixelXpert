@@ -2,6 +2,8 @@ package sh.siava.AOSPMods.ui.activities;
 
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
+import static sh.siava.AOSPMods.ui.fragments.UpdateFragment.UPDATES_CHANNEL_ID;
+
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
@@ -179,7 +181,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		CharSequence name = getString(R.string.update_channel_name);
 		int importance = NotificationManager.IMPORTANCE_DEFAULT;
 
-		NotificationChannel channel = new NotificationChannel(getString(R.string.notification_channel_update), name, importance);
+		NotificationChannel channel = new NotificationChannel(UPDATES_CHANNEL_ID, name, importance);
 		NotificationManager notificationManager = getSystemService(NotificationManager.class);
 		notificationManager.createNotificationChannel(channel);
 	}

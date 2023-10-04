@@ -319,8 +319,7 @@ public class BrightnessSlider extends XposedModPack {
 		ViewGroup quickQSPanel = (ViewGroup) getObjectField(QQSPC, "mView");
 
 		quickQSPanel.post(() -> {
-
-			QQSBrightnessSliderController = callMethod(brightnessSliderFactory, "create", mContext, quickQSPanel);
+			QQSBrightnessSliderController = callMethod(brightnessSliderFactory, "create", callMethod(QSPanelController, "getContext"), quickQSPanel);
 
 			QQSBrightnessSliderView = (View) getObjectField(QQSBrightnessSliderController, "mView");
 
@@ -348,11 +347,17 @@ public class BrightnessSlider extends XposedModPack {
 
 	private boolean makeBrightnessController(Object mBrightnessSliderController) {
 		mBrightnessController = null;
+
 		try
-		{ //13 QPR3
-			mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mUserTracker"),getObjectField(brightnessControllerFactory, "mDisplayTracker"), getObjectField(brightnessControllerFactory, "mMainExecutor"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
+		{ //14 QPR1
+			mBrightnessController = callMethod(brightnessControllerFactory, "create", mBrightnessSliderController);
 		} catch (Throwable ignored){}
 
+		if(mBrightnessController == null) {
+			try { //13 QPR3
+				mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mUserTracker"), getObjectField(brightnessControllerFactory, "mDisplayTracker"), getObjectField(brightnessControllerFactory, "mMainExecutor"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
+			} catch (Throwable ignored) {}
+		}
 		if(mBrightnessController == null) {
 			try { //13 QPR2
 				mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mUserTracker"), getObjectField(brightnessControllerFactory, "mMainExecutor"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));

@@ -42,7 +42,7 @@ import sh.siava.AOSPMods.modpacks.utils.Helpers;
 import sh.siava.AOSPMods.modpacks.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
-public class ThemeManager extends XposedModPack {
+public class ThemeManager_13 extends XposedModPack {
 	public static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 	public static final int STATE_ACTIVE = 2;
 	private static boolean lightQSHeaderEnabled = false;
@@ -57,7 +57,7 @@ public class ThemeManager extends XposedModPack {
 	private int mScrimBehindTint = BLACK;
 	private Object unlockedScrimState;
 
-	public ThemeManager(Context context) {
+	public ThemeManager_13(Context context) {
 		super(context);
 		if (!listensTo(context.getPackageName())) return;
 

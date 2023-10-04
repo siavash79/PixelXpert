@@ -37,18 +37,20 @@ import sh.siava.AOSPMods.modpacks.systemui.NotificationExpander;
 import sh.siava.AOSPMods.modpacks.systemui.NotificationManager;
 import sh.siava.AOSPMods.modpacks.systemui.QSFooterTextManager;
 import sh.siava.AOSPMods.modpacks.systemui.StatusbarGestures;
-import sh.siava.AOSPMods.modpacks.systemui.ThemeManager;
+import sh.siava.AOSPMods.modpacks.systemui.ThemeManager_13;
 import sh.siava.AOSPMods.modpacks.systemui.QSTileGrid;
 import sh.siava.AOSPMods.modpacks.systemui.ScreenGestures;
 import sh.siava.AOSPMods.modpacks.systemui.ScreenRecord;
 import sh.siava.AOSPMods.modpacks.systemui.ScreenshotManager;
 import sh.siava.AOSPMods.modpacks.systemui.SettingsLibUtilsProvider;
 import sh.siava.AOSPMods.modpacks.systemui.StatusbarMods;
+import sh.siava.AOSPMods.modpacks.systemui.ThemeManager_14;
 import sh.siava.AOSPMods.modpacks.systemui.ThermalProvider;
 import sh.siava.AOSPMods.modpacks.systemui.ThreeButtonNavMods;
 import sh.siava.AOSPMods.modpacks.systemui.UDFPSManager;
 import sh.siava.AOSPMods.modpacks.systemui.VolumeTile;
 import sh.siava.AOSPMods.modpacks.telecom.CallVibrator;
+import sh.siava.AOSPMods.modpacks.utils.Helpers;
 
 
 public class ModPacks {
@@ -82,13 +84,22 @@ public class ModPacks {
 				}
 				else
 				{
+					if(Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+					{
+						Helpers.setOverlay("QSLightThemeOverlay", false, true, true);
+						modPacks.add(ThemeManager_14.class);
+					}
+					else
+					{
+						modPacks.add(ThemeManager_13.class);
+					}
+
 					modPacks.add(BrightnessRange.class);
 					modPacks.add(NotificationExpander.class);
 					modPacks.add(QSTileGrid.class);
 					modPacks.add(BrightnessSlider.class);
 					modPacks.add(FeatureFlagsMods.class);
 					modPacks.add(ThreeButtonNavMods.class);
-					modPacks.add(ThemeManager.class);
 					modPacks.add(ScreenGestures.class);
 					modPacks.add(miscSettings.class);
 					modPacks.add(AOSPSettingsLauncher.class);

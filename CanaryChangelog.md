@@ -1,3 +1,10 @@
+**canary-285**  
+- Experimental - A14QPR1 compatibility  
+- A14QPR1: Experimental - Fixed QS light theme  
+- A14QPR1: fixed QQS BrightnessSlider  
+- A14QPR1: Fixed Taskbar in recents mode  
+- A14QPR1: Fixed kill foreground app  
+  
 **canary-284**  
 - App: AOSPMods settings redesigned  
 - Added option to automatically check for updates  

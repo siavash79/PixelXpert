@@ -386,7 +386,12 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllConstructors(CentralSurfacesImplClass, new XC_MethodHook() { //SystemUI init
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				rebuildSysUI(true);
+				new Thread(() -> {
+					try {
+						Thread.sleep(5000);
+						rebuildSysUI(true);
+					} catch (Throwable ignored) {}
+				}).start();
 			}
 		});
 

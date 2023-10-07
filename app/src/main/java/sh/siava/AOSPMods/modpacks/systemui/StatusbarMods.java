@@ -513,10 +513,10 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> NotificationIconContainerClass = findClass("com.android.systemui.statusbar.phone.NotificationIconContainer", lpparam.classLoader);
 //		Class<?> StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
-		Class<?> StatusBarSignalPolicyClass = findClass("com.android.systemui.statusbar.phone.StatusBarSignalPolicy", lpparam.classLoader);
 		Class<?> PrivacyItemControllerClass = findClass("com.android.systemui.privacy.PrivacyItemController", lpparam.classLoader);
 		Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
 		Class<?> TunerServiceImplClass = findClass("com.android.systemui.tuner.TunerServiceImpl", lpparam.classLoader);
+		Class<?> ConnectivityCallbackHandlerClass = findClass("com.android.systemui.statusbar.connectivity.CallbackHandler", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
 		//endregion
@@ -552,7 +552,7 @@ public class StatusbarMods extends XposedModPack {
 		});
 
 
-		hookAllMethods(StatusBarSignalPolicyClass, "setWifiIndicators", new XC_MethodHook() {
+		hookAllMethods(ConnectivityCallbackHandlerClass, "setWifiIndicators", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				boolean wifiVisible = getBooleanField(getObjectField(param.args[0], "statusIcon"), "visible");
@@ -1354,9 +1354,12 @@ public class StatusbarMods extends XposedModPack {
 			@SuppressWarnings("unchecked")
 			Set<Object> tunables = (Set<Object>) callMethod(getObjectField(mTunerService, "mTunableLookup"), "get", ICON_HIDE_LIST);
 
-			for (Object tunable : tunables) {
-				callMethod(tunable, "onTuningChanged", ICON_HIDE_LIST, hideListString);
-			}
+			String finalHideListString = hideListString;
+			mStatusBar.post(() -> {
+				for (Object tunable : tunables) {
+					callMethod(tunable, "onTuningChanged", ICON_HIDE_LIST, finalHideListString);
+				}
+			});
 		} catch (Throwable ignored) {}
 	}
 	//endregion

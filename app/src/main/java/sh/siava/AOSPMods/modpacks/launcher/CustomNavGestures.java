@@ -242,7 +242,7 @@ public class CustomNavGestures extends XposedModPack {
 
 		if(mTasksFieldName == null)
 		{
-			for(Field f : recentTaskList.get(0).getClass().getFields())
+			for(Field f : recentTaskList.get(0).getClass().getDeclaredFields())
 			{
 				if(f.getType().getName().contains("RecentTaskInfo"))
 				{

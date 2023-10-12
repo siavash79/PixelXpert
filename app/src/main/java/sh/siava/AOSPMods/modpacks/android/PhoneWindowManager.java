@@ -159,8 +159,6 @@ public class PhoneWindowManager extends XposedModPack {
 	@SuppressLint("WrongConstant")
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
-
 		UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
 		//noinspection unchecked
 		userHandleList = (List<UserHandle>) callMethod(userManager, "getProfiles", true);

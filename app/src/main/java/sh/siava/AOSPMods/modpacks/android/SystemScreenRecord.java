@@ -30,8 +30,6 @@ public class SystemScreenRecord extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
-
 		try
 		{
 			Class<?> DisplayManagerServiceClass = findClass("com.android.server.display.DisplayManagerService", lpparam.classLoader);

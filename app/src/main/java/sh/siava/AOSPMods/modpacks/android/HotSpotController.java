@@ -50,8 +50,6 @@ public class HotSpotController extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
-
 		try
 		{
 			Class<?> SoftApConfiguration = findClass("android.net.wifi.SoftApConfiguration", lpparam.classLoader);

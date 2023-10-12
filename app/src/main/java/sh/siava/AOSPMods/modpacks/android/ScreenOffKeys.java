@@ -49,8 +49,6 @@ public class ScreenOffKeys extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
-
 		Class<?> PhoneWindowManagerClass;
 		Method powerLongPressMethod;
 		Method interceptKeyBeforeQueueingMethod;

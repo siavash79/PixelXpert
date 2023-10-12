@@ -1,3 +1,9 @@
+**canary-286**  
+- Fixed in-call vibration functions  
+- Compatibility with Lsposed 1.9.2  
+- A14QPR1: Fixed combined signal icons  
+- Fixed update notifications not shown properly  
+  
 **canary-285**  
 - Experimental - A14QPR1 compatibility  
 - A14QPR1: Experimental - Fixed QS light theme  

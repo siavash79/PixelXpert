@@ -4,6 +4,7 @@ import static android.content.Context.CONTEXT_IGNORE_SECURITY;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static sh.siava.AOSPMods.BuildConfig.APPLICATION_ID;
 import static sh.siava.AOSPMods.modpacks.Constants.SYSTEM_UI_PACKAGE;
@@ -39,7 +40,6 @@ public class XPLauncher implements ServiceConnection {
 
 	public static boolean isChildProcess = false;
 	public static String processName = "";
-	private String packageName;
 
 	public static ArrayList<XposedModPack> runningMods = new ArrayList<>();
 	public Context mContext = null;
@@ -55,7 +55,6 @@ public class XPLauncher implements ServiceConnection {
 	}
 
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		packageName = lpparam.packageName;
 		try
 		{
 			isChildProcess = lpparam.processName.contains(":");
@@ -66,7 +65,7 @@ public class XPLauncher implements ServiceConnection {
 		}
 
 		//If example class isn't found, user is using an older version. Don't load the module at all
-		if (Build.VERSION.SDK_INT ==  Build.VERSION_CODES.TIRAMISU && packageName.equals(SYSTEM_UI_PACKAGE)) {
+		if (Build.VERSION.SDK_INT ==  Build.VERSION_CODES.TIRAMISU && lpparam.packageName.equals(SYSTEM_UI_PACKAGE)) {
 			Class<?> A33R18Example = findClassIfExists("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
 			if (A33R18Example == null)
 			{
@@ -75,15 +74,9 @@ public class XPLauncher implements ServiceConnection {
 			}
 		}
 
-		/*if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE) && DEBUG && false) {
-			log("------------");
-			Helpers.dumpClass("com.android.systemui.statusbar.notification.collection.NotifCollection", lpparam.classLoader);
-			log("------------");
-		}*/
-
-		Class<?> PhoneWindowManagerClass = findClassIfExists("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
-		if(PhoneWindowManagerClass != null)
+		if(lpparam.packageName.equals(Constants.SYSTEM_FRAMEWORK_PACKAGE))
 		{
+			Class<?> PhoneWindowManagerClass = findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
 			hookAllMethods(PhoneWindowManagerClass, "init", new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -110,7 +103,7 @@ public class XPLauncher implements ServiceConnection {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					try {
-						if (mContext == null) {
+						if (mContext == null || lpparam.packageName.equals(Constants.TELECOM_SERVER_PACKAGE)) { //telecom service launches as a secondary process in framework, but has its own package name. context is not null when it loads
 							mContext = (Context) param.args[2];
 
 							ResourceManager.modRes = mContext.createPackageContext(APPLICATION_ID, CONTEXT_IGNORE_SECURITY)
@@ -130,26 +123,26 @@ public class XPLauncher implements ServiceConnection {
 	}
 
 	private void onXPrefsReady(XC_LoadPackage.LoadPackageParam lpparam) {
-		if (isBootLooped(packageName)) {
-			log(String.format("AOSPMods: Possible bootloop in %s. Will not load for now", packageName));
+		if (isBootLooped(lpparam.packageName)) {
+			log(String.format("AOSPMods: Possible bootloop in %s. Will not load for now", lpparam.packageName));
 			return;
 		}
 
 		new SystemUtils(mContext);
-		XPrefs.setPackagePrefs(packageName);
+		XPrefs.setPackagePrefs(lpparam.packageName);
 
 		loadModpacks(lpparam);
 	}
 
 	private void loadModpacks(XC_LoadPackage.LoadPackageParam lpparam) {
-		if (Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(packageName)) {
+		if (Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(lpparam.packageName)) {
 			connectRootService();
 		}
 
-		for (Class<? extends XposedModPack> mod : ModPacks.getMods(packageName)) {
+		for (Class<? extends XposedModPack> mod : ModPacks.getMods(lpparam.packageName)) {
 			try {
 				XposedModPack instance = mod.getConstructor(Context.class).newInstance(mContext);
-				if (!instance.listensTo(packageName)) continue;
+				if (!instance.listensTo(lpparam.packageName)) continue;
 				try {
 					instance.updatePrefs();
 				} catch (Throwable ignored) {

@@ -1,3 +1,6 @@
+**canary-287**  
+- Fixed kill foreground app / recents taskbar  
+  
 **canary-286**  
 - Fixed in-call vibration functions  
 - Compatibility with Lsposed 1.9.2  

@@ -1,7 +1,7 @@
 id=AOSPMods
 name=AOSP Mods - Lite (Xposed only)
-version=canary-287
-versionCode=287
+version=canary-288
+versionCode=288
 author=Siavash79 + ElTifo
 description=Xposed based module for customizations on SystemUI on AOSP based roms. Supports Android 12+
 updateJson=https://raw.githubusercontent.com/siavash79/AOSPMods/canary/MagiskModuleUpdate_Xposed.json

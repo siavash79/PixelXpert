@@ -1,3 +1,6 @@
+**canary-288**  
+- A14QPR1: Fixed double system icons  
+  
 **canary-287**  
 - Fixed kill foreground app / recents taskbar  
   

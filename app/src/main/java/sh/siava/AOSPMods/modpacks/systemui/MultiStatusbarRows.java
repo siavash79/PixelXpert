@@ -2,6 +2,7 @@ package sh.siava.AOSPMods.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static sh.siava.AOSPMods.modpacks.utils.Helpers.dumpClass;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -73,6 +74,7 @@ public class MultiStatusbarRows extends XposedModPack {
 					ViewGroup parent = (ViewGroup) linear.getParent();
 					int index = parent.indexOfChild(linear);
 					parent.addView(flex, index);
+					parent.getLayoutParams().height = LinearLayout.LayoutParams.MATCH_PARENT;
 					linear.setVisibility(View.GONE); //remove will crash the system
 					param.args[0] = flex;
 

@@ -1,3 +1,7 @@
+**canary-289**  
+- Fixed in-call vibration while a bluetooth device is connected  
+- A14: Fixed QS flashing when switching dark theme while QS light theme is disabled  
+  
 **canary-288**  
 - A14QPR1: Fixed double system icons  
   

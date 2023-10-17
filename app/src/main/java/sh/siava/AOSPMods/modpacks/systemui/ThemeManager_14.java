@@ -388,8 +388,10 @@ public class ThemeManager_14 extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				new Thread(() -> {
 					try {
-						Thread.sleep(5000);
-						rebuildSysUI(true);
+						if(lightQSHeaderEnabled) {
+							Thread.sleep(5000);
+							rebuildSysUI(true);
+						}
 					} catch (Throwable ignored) {}
 				}).start();
 			}
@@ -418,7 +420,8 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllMethods(CentralSurfacesImplClass, "updateTheme", new XC_MethodHook() { //required to recalculate colors and overlays when dark is toggled
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				rebuildSysUI(false);
+				if(lightQSHeaderEnabled)
+					rebuildSysUI(false);
 			}
 		});
 

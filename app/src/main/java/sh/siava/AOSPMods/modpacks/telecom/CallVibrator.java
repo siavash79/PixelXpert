@@ -1,9 +1,9 @@
 package sh.siava.AOSPMods.modpacks.telecom;
 
 import static android.os.SystemClock.uptimeMillis;
-import static android.os.VibrationAttributes.USAGE_NOTIFICATION;
+import static android.os.VibrationAttributes.USAGE_ACCESSIBILITY;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
+import static de.robv.android.xposed.XposedHelpers.findClass;
 
 import android.content.Context;
 import android.os.VibrationEffect;
@@ -23,8 +23,8 @@ public class CallVibrator extends XposedModPack {
 	public static final int ACTIVE = 5;
 	public static final int DISCONNECTED = 7;
 
-	private static final VibrationEffect vibrationEffect = VibrationEffect.createWaveform(new long[]{0, 100, 100, 100}, -1); //100ms on, 100 off, 100 again. don't repeat
-	private static long lastActiveVibration = 0, lastDropVibration = 0;
+	private static final VibrationEffect mVibrationEffect = VibrationEffect.createWaveform(new long[]{0, 100, 100, 100}, -1); //100ms on, 100 off, 100 again. don't repeat
+	private static long mLastVibration = 0;
 	private static boolean vibrateOnAnswered = false, vibrateOnDrop = false;
 
 	public CallVibrator(Context context) {
@@ -45,8 +45,7 @@ public class CallVibrator extends XposedModPack {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		try {
-			Class<?> InCallControllerClass = findClassIfExists("com.android.server.telecom.InCallController", lpparam.classLoader);
-			if (InCallControllerClass == null) return;
+			Class<?> InCallControllerClass = findClass("com.android.server.telecom.InCallController", lpparam.classLoader);
 
 			hookAllMethods(InCallControllerClass, "onCallStateChanged", new XC_MethodHook() {
 				@Override
@@ -55,24 +54,27 @@ public class CallVibrator extends XposedModPack {
 						int oldState = (int) param.args[1];
 						int newState = (int) param.args[2];
 
-						if (vibrateOnAnswered
+						if (
+								(vibrateOnAnswered
 								&& oldState == DIALING
-								&& newState == ACTIVE
-								&& uptimeMillis() - lastActiveVibration > 5000L /* Don't vibrate on concurrent method calls */) {
-							lastActiveVibration = uptimeMillis();
-							SystemUtils.vibrate(vibrationEffect, USAGE_NOTIFICATION);
-						} else if (vibrateOnDrop
+								&& newState == ACTIVE)
+								||
+								(vibrateOnDrop
 								&& oldState == ACTIVE
-								&& newState == DISCONNECTED
-								&& uptimeMillis() - lastDropVibration > 5000L) {
-							lastDropVibration = uptimeMillis();
-							SystemUtils.vibrate(vibrationEffect, USAGE_NOTIFICATION);
+								&& newState == DISCONNECTED)
+						) {
+							vibrate();
 						}
-					} catch (Throwable ignored) {
-					}
+					} catch (Throwable ignored) {}
 				}
 			});
-		} catch (Throwable ignored) {
+		} catch (Throwable ignored) {}
+	}
+
+	private void vibrate() {
+		if(uptimeMillis() - mLastVibration > 200L) {
+			mLastVibration = uptimeMillis();
+			SystemUtils.vibrate(mVibrationEffect, USAGE_ACCESSIBILITY);
 		}
 	}
 }

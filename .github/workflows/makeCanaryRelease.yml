@@ -97,4 +97,4 @@ jobs:
 
     - name: Telegram File Attachment
       run: |
-        curl -v "https%3A%2F%2Fapi.telegram.org%2Fbot%24%7B%7Bsecrets.TELEGRAM_TOKEN%7D%7D%2FsendMediaGroup%3Fchat_id%3D%24%7B%7Bsecrets.AOSPMODS_CHANNEL_ID%7D%7D%26media%3D%5B%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FXposed%22%7D%5D" -F Xposed="@output/PixelXpert.zip"
+        curl -v https://api.telegram.org/bot${{secrets.TELEGRAM_TOKEN}}/sendMediaGroup?chat_id=${{secrets.AOSPMODS_CHANNEL_ID}}&media=[{"type":"document", "media":"attach://Xposed"}] -F Xposed="@output/PixelXpert.zip"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">启用替代的 AOSP Mods 主题应用图标</string>
+	<string name="app_themed_icon_title">启用替代的 Pixel Xpert 主题应用图标</string>
 	<string name="xposed_desc">基于 Android 12+ AOSP ROM 的自定义功能</string>
 	<string name="volume_tile_title">Media Volume</string>
 	<string name="app_switch_tile_title">Switch App Profile</string>
@@ -373,7 +373,7 @@
 	<string name="switch_branches">更换分支</string>
 	<string name="reinstall_word">重装</string>
 	<string name="changelog_title">Changelog</string>
-	<string name="own_prefs_header">AOSP Mods 设置</string>
+	<string name="own_prefs_header">Pixel Xpert 设置</string>
 	<string name="language_title">语言</string>
 	<string name="toggle_dark_apply">(切换深色模式以应用)</string>
 	<string name="gesture_nav_extra_cat">更多导航栏手势</string>

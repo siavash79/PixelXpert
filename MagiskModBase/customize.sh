@@ -1,7 +1,15 @@
-PKGNAME="sh.siava.AOSPMods"
-PKGPATH="/system/priv-app/AOSPMods/AOSPMods.apk"
+PKGNAME="sh.siava.pixelxpert"
+PKGPATH="/system/priv-app/PixelXpert/PixelXpert.apk"
 LSPDDBPATH="/data/adb/lspd/config/modules_config.db"
 MAGISKDBPATH="/data/adb/magisk.db"
+
+exportFromAOSPMods(){
+	AOSPModsPrefPath="/data/user_de/0/sh.siava.AOSPMods/shared_prefs/sh.siava.AOSPMods_preferences.xml"
+    if [ -f "$AOSPModsPrefPath" ]; then
+            yes | cp -f $AOSPModsPrefPath /sdcard/PX_migrate.tmp
+    fi
+    touch /data/adb/modules/AOSPMods/remove
+}
 
 prepareSQL(){
 	unzip $ZIPFILE sqlite3 -d $TMPDIR/ > /dev/null
@@ -101,6 +109,7 @@ if [ $(ls $LSPDDBPATH) = $LSPDDBPATH ]; then
 	ui_print ''
 
 	activateModuleLSPD
+	exportFromAOSPMods
 	migratePrefs
 
 
@@ -115,7 +124,7 @@ else
 	ui_print 'Please:'
 	ui_print '- Insall Lsposed'
 	ui_print '- Reboot'
-	ui_print '- Manually enable AOSPMods in Lsposed'
+	ui_print '- Manually enable PixelXpert in Lsposed'
 	ui_print '- Reboot'
 fi
 

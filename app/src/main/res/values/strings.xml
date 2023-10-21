@@ -1,6 +1,6 @@
 <resources>
 	<!--General strings-->
-	<string name="app_name" translatable="false">AOSP Mods</string>
+	<string name="app_name" translatable="false">Pixel Xpert</string>
 	<string name="app_themed_icon_title">Alternative Themed Icon</string>
 	<string name="xposed_desc">Custom features for Android 12+ AOSP based ROMs</string>
 	<string name="title_activity_settings" translatable="false">@string/app_name</string>
@@ -20,7 +20,7 @@
 	<string name="notification_channel_update">Updates</string>
 	<string name="notification_channel_update_desc">This channel shows notification about the latest updates.</string>
 	<string name="new_update_title">Update available</string>
-	<string name="new_update_desc">A new version of AOSPMods is available</string>
+	<string name="new_update_desc">A new version of PixelXpert is available</string>
 	<string name="browser_not_found">Browser not found</string>
 	<string name="settings_general_section_title">General</string>
 	<string name="settings_update_section_title">Update</string>
@@ -32,7 +32,7 @@
 	<string name="update_over_wifi_title">Check updates over WiFi only</string>
 	<string name="update_over_wifi_summary">Check for updates in background only when connected to wifi</string>
 	<string name="github_repo_title">GitHub repository</string>
-	<string name="github_repo_summary" translatable="false">siavash79/AOSPMods</string>
+	<string name="github_repo_summary" translatable="false">siavash79/PixelXpert</string>
 	<string name="telegram_group_title">Telegram group</string>
 	<string name="telegram_group_summary" translatable="false">\@AOSPMods_Support</string>
 	<string name="usage_title">Usage</string>
@@ -399,6 +399,9 @@
 	<string name="app_kill_alert_body">App will close now. You can open it again by tapping on the new icon</string>
 	<string name="app_kill_ok_btn">OK</string>
 
+	<!-- Reboot alert -->
+	<string name="reboot_alert_body">A system reboot is required for the settings to apply</string>
+
 	<!-- Menu Items -->
 	<string name="menu_settings_title">Import/Export</string>
 	<string name="menu_reset_defaults">Reset all settings</string>
@@ -413,7 +416,7 @@
 	<string name="monitoring_category_title">Monitoring options</string>
 	<string name="netstat_header">Network statistics settings</string>
 
-	<string name="string_formatter_manual_body_v3">In addition to the normal text, dynamic variables are also available, like Date, Data usage and Temperature:\n\n$G\&lt;format\&gt; : Gregorian date, based on format*\n$P&lt;format&gt; : Persian date, based on format*\n$Nrx : Total Downloads in specified period ** ***\n$Ntx: Total Uploads in specified period ** ***\n$Nall : Total Traffic in specified period ** ***\n$Nssid : WiFi SSID name (if applicable)\n\n$T\&lt;format\&gt;[interval] : Temperature; \nformat can be b (for battery), c (for CPU), g (for GPU) and s (for skin) \nLastly, there is OPTIONAL number of update interval in seconds (default: 60 seconds)\n\n*for format documentation, search for "Java Date Format"\n**You can specify the statistics period in AOSPMods/Miscellaneous menu/Network Statistics Settings\n***If you replace $N with $Nc you will get with mobile data statistics (e.g. $Ncrx instead of Nrx)</string>
+	<string name="string_formatter_manual_body_v3">In addition to the normal text, dynamic variables are also available, like Date, Data usage and Temperature:\n\n$G\&lt;format\&gt; : Gregorian date, based on format*\n$P&lt;format&gt; : Persian date, based on format*\n$Nrx : Total Downloads in specified period ** ***\n$Ntx: Total Uploads in specified period ** ***\n$Nall : Total Traffic in specified period ** ***\n$Nssid : WiFi SSID name (if applicable)\n\n$T\&lt;format\&gt;[interval] : Temperature; \nformat can be b (for battery), c (for CPU), g (for GPU) and s (for skin) \nLastly, there is OPTIONAL number of update interval in seconds (default: 60 seconds)\n\n*for format documentation, search for "Java Date Format"\n**You can specify the statistics period in PixelXpert/Miscellaneous menu/Network Statistics Settings\n***If you replace $N with $Nc you will get with mobile data statistics (e.g. $Ncrx instead of Nrx)</string>
 	<string name="update_fragment_label" translatable="false">@string/menu_updates</string>
 	<string name="update_channel_name">Updates</string>
 	<string name="update_notification_title">Update downloaded</string>

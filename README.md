@@ -1,24 +1,24 @@
 ### For Pixel Stock Android 12 and 13 (Up to Nov 2022 - AOSP 13R8):  
-[![Latest Release for A12 & A13 up to Nov 2022](https://img.shields.io/badge/Download-v2.4.1-blue)](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)  
+[![Latest Release for A12 & A13 up to Nov 2022](https://img.shields.io/badge/Download-v2.4.1-blue)](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1)  
 
 ### For Pixel Stock Android 13 and 14 (starting with Dec 2022 security patch):  
-[![Latest Release](https://img.shields.io/github/v/release/siavash79/aospmods?color=green&include_prereleases&label=Download%20Latest%20Stable)](https://github.com/siavash79/AOSPMods/releases/latest)
-[![Latest Canary Release](https://img.shields.io/badge/Download%20Latest-Canary-blue)](https://github.com/siavash79/AOSPMods/releases/tag/canary_builds)
+[![Latest Release](https://img.shields.io/github/v/release/siavash79/PixelXpert?color=green&include_prereleases&label=Download%20Latest%20Stable)](https://github.com/siavash79/PixelXpert/releases/latest)
+[![Latest Canary Release](https://img.shields.io/badge/Download%20Latest-Canary-blue)](https://github.com/siavash79/PixelXpert/releases/tag/canary_builds)
 
-![Downloads - Stable channel](https://img.shields.io/github/downloads/siavash79/aospmods/total?color=red&label=Downloads%20-%20Stable%20Channel)
+![Downloads - Stable channel](https://img.shields.io/github/downloads/siavash79/PixelXpert/total?color=red&label=Downloads%20-%20Stable%20Channel)
 
-### **AOSPMods Support Channels:**
+### **PixelXpert Support Channels:**
 
 [![XDA URL](https://img.shields.io/twitter/url?label=XDA%20Developers&logo=XDA-Developers&style=social&url=http://XDA.AOSPMods.siava.sh)](http://XDA.AOSPMods.siava.sh)
 [![Telegram URL](https://img.shields.io/twitter/url?label=Telegram&logo=telegram&style=social&url=https%3A%2F%2Ft.me%2FAOSPMods_Support)](https://t.me/AOSPMods_Support)
 
-![Header Image](https://github.com/siavash79/AOSPMods/blob/canary/.github/AOSPMods_Banner_1280.jpg?raw=true)
+![Header Image](https://github.com/siavash79/PixelXpert/blob/canary/.github/AOSPMods_Banner_1280.jpg?raw=true)
 
 This is a mixed Xposed+Magisk module, which is made to allow customizations that are not originally designed in AOSP (Android Open Source Project). Please read thorough below before reaching to download links
 <hr>
 
 ### **Features:**
-Currently, AOSP Mods offers customizations on different aspects of system framework and SystemUI, including:
+Currently, Pixel Xpert offers customizations on different aspects of system framework and SystemUI, including:
 - Status bar
 - Quick Settings panel
 - Lock screen
@@ -35,10 +35,10 @@ This MOD is compatible with ROMs or firmware that are built based on fairly unmo
 
 AOSPMods is based on "pure" AOSP. Any changes in the ROM source code may (or may not) break the compatiblity. And thus, follow below to see which AOSPMods to use:
 
-- Android 12/12.1: [final version: v2.4.1](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)
-- Android 13 stable (up until November 2022 firmware): [final version: v.2.4.1](https://github.com/siavash79/AOSPMods/releases/tag/v2.4.1)
-- Android 13 stable QPR3 and beta QPR4 (starting from December 2022 firmware till QPR3): [starting with v.2.5](https://github.com/siavash79/AOSPMods/releases/tag/v2.5.0) up until latest canary version
-- Android 14 beta3.1: [starting with v.2.9](https://github.com/siavash79/AOSPMods/releases/tag/v2.9.0) up until latest canary version
+- Android 12/12.1: [final version: v2.4.1](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1)
+- Android 13 stable (up until November 2022 firmware): [final version: v.2.4.1](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1)
+- Android 13 stable QPR3 and beta QPR4 (starting from December 2022 firmware till QPR3): [starting with v.2.5](https://github.com/siavash79/PixelXpert/releases/tag/v2.5.0) up until latest canary version
+- Android 14 beta3.1: [starting with v.2.9](https://github.com/siavash79/PixelXpert/releases/tag/v2.9.0) up until latest canary version
 <hr>
 
 ### **Prerequisites:**
@@ -73,7 +73,7 @@ The module is also released in 2 flavors with different download and update proc
 - Automated updates: through magisk manager, or through in-app updater
 
 <ins>Canary release:</ins>
-- Manual Install/Update: through repository's Actions page and [telegram channel](https://t.me/AOSPMods_Github) (latest version is available from [here](https://github.com/siavash79/AOSPMods/releases/tag/canary_builds) also)
+- Manual Install/Update: through repository's Actions page and [telegram channel](https://t.me/AOSPMods_Github) (latest version is available from [here](https://github.com/siavash79/PixelXpert/releases/tag/canary_builds) also)
 - Automated install/updates: through in-app updater - updates will NOT count against the module's download count  
 
 *No matter which flavor you're on, you can always switch to the other one with in-app updater

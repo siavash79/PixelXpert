@@ -18,9 +18,9 @@
 	<application
 		android:enableOnBackInvokedCallback="true"
 		android:icon="@mipmap/ic_launcher"
-		android:label="AOSP Mods"
+		android:label="Pixel Xpert"
 		android:supportsRtl="true"
-		android:theme="@style/AppTheme.AOSPMods">
+		android:theme="@style/AppTheme.PixelXpert">
 		<activity
 			android:name=".ui.activities.WikiActivity"
 			android:exported="false" />
@@ -109,7 +109,7 @@
 
 		<provider
 			android:name=".utils.RemotePrefProvider"
-			android:authorities="sh.siava.AOSPMods"
+			android:authorities="sh.siava.pixelxpert"
 			android:directBootAware="true"
 			android:exported="true"
 			tools:ignore="ExportedContentProvider" />

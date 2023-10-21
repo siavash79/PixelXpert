@@ -295,7 +295,7 @@
 	<string name="sb_multi_row_notification_icons">Várias linhas para ícones das notificações (requer barra de estado mais espessa)</string>
     <string name="incompatible_alert_body">Este módulo não foi desenhado para ser utilizado com a ROM presente no dispositivo. Pode utilizar o módulo mas algumas, ou todas, as funcionalidades poderão não funcionar como pretendido.\n\nAssim, e por isso, por favor, não reporte bugs.</string>
     <string name="xposed_desc">Funcionalidades personalizadas para ROMs Android 12+ baseadas no AOSP</string>
-    <string name="app_themed_icon_title">Ativar ícone temático alternativo da app AOSP Mods</string>
+    <string name="app_themed_icon_title">Ativar ícone temático alternativo da app Pixel Xpert</string>
 	<string name="hotspot_header">PA Móvel</string>
     <string name="hotspot_hide_ssid_title">Esconder SSID</string>
     <string name="hotspot_inactivity_timeout_title">Tempo limite de inatividade</string>

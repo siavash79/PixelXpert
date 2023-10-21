@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<sh.siava.AOSPMods.ui.preferences.MaterialSwitchPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="hotSpotHideSSID"
 		android:summaryOff="@string/general_off"
@@ -10,7 +10,7 @@
 		android:title="@string/hotspot_hide_ssid_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.preferences.MaterialRangeSliderPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 		android:key="hotSpotTimeoutSecs"
 		android:title="@string/hotspot_inactivity_timeout_title"
 		app:defaultValue="0"
@@ -20,7 +20,7 @@
 		app:tickInterval="60"
 		app:valueCount="1" />
 
-	<sh.siava.AOSPMods.ui.preferences.MaterialRangeSliderPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 		android:key="hotSpotMaxClients"
 		android:title="@string/hotspot_max_client_title"
 		app:defaultValue="0"

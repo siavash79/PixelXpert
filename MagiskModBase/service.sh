@@ -1,5 +1,5 @@
-PKGNAME="sh.siava.AOSPMods" 
-PKGPATH="/system/priv-app/AOSPMods/AOSPMods.apk" 
+PKGNAME="sh.siava.PixelXpert"
+PKGPATH="/system/priv-app/PixelXpert/PixelXpert.apk"
 LSPDDBPATH="/data/adb/lspd/config/modules_config.db" 
 MAGISKDBPATH="/data/adb/magisk.db" 
 MODDIR=${0%/*} 

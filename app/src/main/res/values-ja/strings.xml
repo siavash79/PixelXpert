@@ -285,7 +285,7 @@
     <string name="update_word">アップデート</string>
     <string name="switch_branches">ブランチを切り替え</string>
     <string name="reinstall_word">再インストール</string>
-    <string name="own_prefs_header">AOSPModsの設定</string>
+    <string name="own_prefs_header">PixelXpertの設定</string>
     <string name="language_title">言語</string>
 	<string name="toggle_dark_apply">(ダークテーマの適用)</string>
     <string name="gesture_nav_extra_cat">ナビゲーションバーの追加ジェスチャー</string>

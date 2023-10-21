@@ -1,6 +1,6 @@
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">Habilitar icono temático alternativo para AOSP mods</string>
+	<string name="app_themed_icon_title">Habilitar icono temático alternativo para Pixel Xpert</string>
 	<string name="xposed_desc">Funciones personalizadas para ROM basadas en Android 12+ AOSP</string>
 	<string name="volume_tile_title">Volumen de medios</string>
 	<string name="hide_default">No mostrar (por defecto)</string>
@@ -324,7 +324,7 @@
 	<string name="monitoring_category_title">Opciones de monitoreo</string>
 	<string name="netstat_header">Configuración de estadísticas de red</string>
 	
-	<string name="string_formatter_manual_body_v3">Además del texto normal, las variables dinámicas también están disponibles, como fecha, uso de datos y temperatura:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato*\n$P&lt;format&gt; : Fecha persa, según el formato*\n$Nrx : Descargas totales en el período especificado ** ***\n$Ntx: Subidas totales en el período especificado ** ***\n$Nall : Tráfico total en el período especificado Nombre SSID WiFi (si corresponde)\n\n$T\&lt;format\&gt;[interval] : Temperatura; \nformat puede ser b (para batería), c (para cpu), g (para gpu) y s (para piel) \nLastly, hay un número opcional de intervalo de actualización en segundos (predeterminado: 60 segundos) \n\n*for documentación de formato, busque "Formato de fecha Java"\n** Puede especificar el período de estadísticas en AOSPMods/Menú misceláneo/Configuración de estadísticas de red\n*** si reemplazas $N con $Nc obtendrás con estadísticas de datos móviles (por ejemplo, $Ncrx en lugar de Nrx)  </string>
+	<string name="string_formatter_manual_body_v3">Además del texto normal, las variables dinámicas también están disponibles, como fecha, uso de datos y temperatura:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato*\n$P&lt;format&gt; : Fecha persa, según el formato*\n$Nrx : Descargas totales en el período especificado ** ***\n$Ntx: Subidas totales en el período especificado ** ***\n$Nall : Tráfico total en el período especificado Nombre SSID WiFi (si corresponde)\n\n$T\&lt;format\&gt;[interval] : Temperatura; \nformat puede ser b (para batería), c (para cpu), g (para gpu) y s (para piel) \nLastly, hay un número opcional de intervalo de actualización en segundos (predeterminado: 60 segundos) \n\n*for documentación de formato, busque "Formato de fecha Java"\n** Puede especificar el período de estadísticas en PixelXpert/Menú misceláneo/Configuración de estadísticas de red\n*** si reemplazas $N con $Nc obtendrás con estadísticas de datos móviles (por ejemplo, $Ncrx en lugar de Nrx)  </string>
 	<string name="update_channel_name">Actualizaciones</string>
 	<string name="update_notification_title">Actualización descargada</string>
 	<string name="update_notification_text">Toque aquí para instalar</string>
@@ -346,7 +346,7 @@
 	<string name="switch_branches">Cambiar rama</string>
 	<string name="reinstall_word">Reinstalar</string>
 	
-	<string name="own_prefs_header">Configuración de AOSPMods</string>
+	<string name="own_prefs_header">Configuración de PixelXpert</string>
 	<string name="language_title">Idioma</string>
 	<string name="toggle_dark_apply">(Alternar tema oscuro para aplicar)</string>
 

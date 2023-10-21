@@ -1,6 +1,6 @@
 <resources>
 
-	<style name="AppTheme.AOSPMods" parent="Theme.Material3.DayNight">
+	<style name="AppTheme.PixelXpert" parent="Theme.Material3.DayNight">
 		<!-- Primary brand color. -->
 		<item name="colorPrimary">@color/ui_accent</item>
 		<item name="colorPrimaryDark">@color/ui_accent</item>

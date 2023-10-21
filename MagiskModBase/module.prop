@@ -1,8 +1,8 @@
-id=AOSPMods
-name=AOSP Mods - Lite (Xposed only)
+id=PixelXpert
+name=Pixel Xpert
 version=canary-289
 versionCode=289
 author=Siavash79 + ElTifo
 description=Xposed based module for customizations on SystemUI on AOSP based roms. Supports Android 12+
-updateJson=https://raw.githubusercontent.com/siavash79/AOSPMods/canary/MagiskModuleUpdate_Xposed.json
+updateJson=https://raw.githubusercontent.com/siavash79/PixelXpert/canary/MagiskModuleUpdate_Xposed.json
 minMagisk=24200

@@ -1,7 +1,7 @@
 <resources>
     <!--General strings-->
-    <string name="app_name" translatable="false">AOSP Mods</string>
-    <string name="app_themed_icon_title">AOSP Mods 테마의 대체 아이콘 활성화</string>
+    <string name="app_name" translatable="false">Pixel Xpert</string>
+    <string name="app_themed_icon_title">Pixel Xpert 테마의 대체 아이콘 활성화</string>
     <string name="xposed_desc">Android 12+ AOSP 기반 롬을 위한 커스텀 기능들</string>
     <string name="title_activity_settings" translatable="false">@string/app_name</string>
     <string name="volume_tile_title">미디어 볼륨</string>

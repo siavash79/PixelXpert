@@ -1,6 +1,6 @@
 <resources>
     <!--General strings-->
-    <string name="app_themed_icon_title">Abilita l\'icona dell\'app a tema AOSP Mods alternativa</string>
+    <string name="app_themed_icon_title">Abilita l\'icona dell\'app a tema Pixel Xpert alternativa</string>
     <string name="xposed_desc">Funzionalità custom per ROM basate su Android 12+ AOSP</string>
     <string name="volume_tile_title">Volume multimedia</string>
 	<string name="hide_default">Nascondi (Default)</string>
@@ -347,7 +347,7 @@
     <string name="switch_branches">Cambia branch</string>
     <string name="reinstall_word">Reinstalla</string>
   
-    <string name="own_prefs_header">Impostazioni AOSPMods</string>
+    <string name="own_prefs_header">Impostazioni PixelXpert</string>
     <string name="language_title">Lingua</string>
 	<string name="toggle_dark_apply">(Attiva/disattiva tema scuro per applicare)</string>
   

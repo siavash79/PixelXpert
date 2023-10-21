@@ -1,6 +1,6 @@
 <resources>
     <!--General strings-->
-	<string name="app_themed_icon_title">הפעל סמל אפליקציה חלופי עם ערכות נושא של AOSP Mods</string>
+	<string name="app_themed_icon_title">הפעל סמל אפליקציה חלופי עם ערכות נושא של Pixel Xpert</string>
     <string name="xposed_desc">תכונות מותאמות אישית עבור אנדרואיד 12+ ROMs מבוססי AOSP</string>
 	<string name="hide_default">הסתר (ברירת מחדל)</string>
     <string name="percent_of_default_size">% מגודל ברירת המחדל</string>
@@ -294,7 +294,7 @@
     <string name="update_word">עדכון</string>
     <string name="switch_branches">החלף סניף</string>
     <string name="reinstall_word">התקן מחדש</string>
-    <string name="own_prefs_header">הגדרות AOSPMods</string>
+    <string name="own_prefs_header">הגדרות PixelXpert</string>
     <string name="language_title">שפה</string>
 	<string name="toggle_dark_apply">(החלף ערכת נושא כהה ליישום)</string>
     <string name="gesture_nav_extra_cat">מחוות סרגל ניווט נוספות</string>

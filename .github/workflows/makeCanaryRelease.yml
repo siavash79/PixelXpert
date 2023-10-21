@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - name: Source Code Download
-      run: git clone --branch canary --single-branch --recurse-submodules https://github.com/siavash79/AOSPMods.git .
+      run: git clone --branch canary --single-branch --recurse-submodules https://github.com/siavash79/PixelXpert.git .
       
     - name: JDK 17 Setup
       uses: actions/setup-java@v3
@@ -55,18 +55,12 @@ jobs:
     - name: Upload Xposed Artifact to Actions
       uses: actions/upload-artifact@v2
       with: 
-        name: AOSPMods_Xposed.zip
-        path: output
-
-    - name: Upload Full Artifact to Actions
-      uses: actions/upload-artifact@v2
-      with:
-        name: AOSPMods_Full.zip
+        name: PixelXpert.zip
         path: output
 
     - name: Previous Release Deletion
       continue-on-error: true
-      run: gh release delete canary_builds -y -R siavash79/AOSPMods
+      run: gh release delete canary_builds -y -R siavash79/PixelXpert
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -91,7 +85,7 @@ jobs:
         force-add: 'true'
         files: MagiskModBase/module.prop app/build.gradle latestVersion.json CanaryChangelog.md latestCanary.json MagiskModuleUpdate_Xposed.json MagiskModuleUpdate_Full.json
         name: GitHub
-        email: aospmods@siava.sh
+        email: PixelXpert@siava.sh
 
     - name: Telegram Channel Post
       uses: appleboy/telegram-action@master
@@ -103,4 +97,4 @@ jobs:
 
     - name: Telegram File Attachment
       run: |
-        curl -v "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMediaGroup?chat_id=${{ secrets.AOSPMODS_CHANNEL_ID }}&media=%5B%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FXposed%22%7D%2C%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FFull%22%7D%5D" -F Xposed="@output/AOSPMods_Xposed.zip" -F Full="@output/AOSPMods_Full.zip"
+        curl -v "https%3A%2F%2Fapi.telegram.org%2Fbot%24%7B%7Bsecrets.TELEGRAM_TOKEN%7D%7D%2FsendMediaGroup%3Fchat_id%3D%24%7B%7Bsecrets.AOSPMODS_CHANNEL_ID%7D%7D%26media%3D%5B%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FXposed%22%7D%5D" -F Xposed="@output/PixelXpert.zip"

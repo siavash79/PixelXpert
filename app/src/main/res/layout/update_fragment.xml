@@ -14,11 +14,20 @@
 		android:padding="24dp">
 
 		<TextView
+			android:id="@+id/currentVersionID"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/currentVersionTitle"
+			android:textStyle="bold"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<TextView
 			android:id="@+id/currentVersionValueID"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="8dp"
-			android:text="@string/currentVersionTitle"
+			android:text="..."
 			android:textStyle="bold"
 			app:layout_constraintStart_toEndOf="@+id/currentVersionID"
 			app:layout_constraintTop_toTopOf="@+id/currentVersionID" />
@@ -38,7 +47,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
-			app:layout_constraintStart_toStartOf="@+id/packageTypeRadioGroup"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/textView">
 
 			<RadioButton
@@ -63,7 +73,8 @@
 			android:layout_marginTop="8dp"
 			android:text="@string/update_type_title"
 			android:textStyle="bold"
-			app:layout_constraintStart_toStartOf="@+id/packageTypeRadioGroup"
+			android:visibility="gone"
+			app:layout_constraintStart_toStartOf="@+id/updateChannelRadioGroup"
 			app:layout_constraintTop_toBottomOf="@+id/updateChannelRadioGroup" />
 
 		<RadioGroup
@@ -71,8 +82,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
+			android:visibility="gone"
+			app:layout_constraintStart_toStartOf="@+id/textView3"
 			app:layout_constraintTop_toBottomOf="@+id/textView3">
 
 			<RadioButton
@@ -89,15 +100,6 @@
 				android:layout_weight="1"
 				android:text="@string/xposed_type" />
 		</RadioGroup>
-
-		<TextView
-			android:id="@+id/currentVersionID"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/currentVersionTitle"
-			android:textStyle="bold"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent" />
 
 		<TextView
 			android:id="@+id/latestVersionTitleID"

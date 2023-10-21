@@ -57,8 +57,8 @@ body:
         !This part is vital for bugreport! Missing logs will most probably lead in dismissal of the bugreport!
         Please attach LSposed Module log if you are able to. (Open LSPosed, go to module logs, press save button and attach to this bug report)
         To give clear logs, before extracting LSposed logs, follow these steps:
-        - Disable all magisk modules other than AOSPMods and LSposed
-        - Disable all LSposed modules other than AOSPMods
+        - Disable all magisk modules other than PixelXpert and LSposed
+        - Disable all LSposed modules other than PixelXpert
         - Disable all theming apps (e.g. Substratum, Repainter and etc)
         - Restart and replicate the issue
         - After that extract LSposed logs.

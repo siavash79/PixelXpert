@@ -1,3 +1,6 @@
+**canary-290**  
+- Introducing Pixel Xpert! From the beginning, AOSPMods was designed using AOSP source code, with Pixel phones in mind. But the name was confusing to many people running AOSP based custom roms. So, in favor of more clarity, we've decided to rename to module to Pixel Xpert Also, since we are not maintaining the fonts and overlays which were part of "Full Package", they are now removed from the module permanently.  
+  
 **canary-289**  
 - Fixed in-call vibration while a bluetooth device is connected  
 - A14: Fixed QS flashing when switching dark theme while QS light theme is disabled  

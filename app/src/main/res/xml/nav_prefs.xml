@@ -1,30 +1,34 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<sh.siava.AOSPMods.ui.MaterialPreference
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$GestureNavFragment"
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreference
 		android:key="gesturenav_header"
-		android:title="@string/gesturenav_header" />
+		android:title="@string/gesturenav_header"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$GestureNavFragment"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreference
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$ThreeButtonNavFragment"
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreference
 		android:key="threebutton_header"
-		android:title="@string/threebutton_header_title" />
+		android:title="@string/threebutton_header_title"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$ThreeButtonNavFragment"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="HideNavbarOverlay"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/hide_navbar_title" />
+		android:title="@string/hide_navbar_title"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialListPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 		android:defaultValue="0"
 		android:entries="@array/taskbar_option_names"
 		android:entryValues="@array/taskbar_option_value"
 		android:key="taskBarMode"
 		android:summary="%s"
-		android:title="@string/taskbar_status_title" />
+		android:title="@string/taskbar_status_title"
+		app:iconSpaceReserved="false" />
 
 	<!--SwitchPreference
 		android:defaultValue="false"
@@ -33,36 +37,40 @@
 		android:summaryOn="@string/general_on"
 		android:title="@string/taskbar_hide_allapps_title" /-->
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="TaskbarTransient"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/taskbar_transient_title" />
+		android:title="@string/taskbar_transient_title"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="TaskbarAsRecents"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/taskbar_as_recents_title" />
+		android:title="@string/taskbar_as_recents_title"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 		android:key="taskbarHeightOverride"
+		android:title="@string/taskbar_height_title"
 		app:defaultValue="100"
+		app:iconSpaceReserved="false"
 		app:maxVal="300"
 		app:minVal="50"
 		app:tickInterval="10"
-		android:title="@string/taskbar_height_title"
 		app:updatesContinuously="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 		android:key="TaskbarRadiusOverride"
+		android:title="@string/taskbar_radius_title"
 		app:defaultValue="1"
+		app:iconSpaceReserved="false"
 		app:maxVal="2"
 		app:minVal="0"
 		app:tickInterval=".1"
-		android:title="@string/taskbar_radius_title"
 		app:updatesContinuously="false" />
 
 </PreferenceScreen>

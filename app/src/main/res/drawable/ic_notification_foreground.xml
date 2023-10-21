@@ -4,7 +4,11 @@
 	android:tint="@color/launcher_fg"
 	android:viewportWidth="24"
 	android:viewportHeight="24">
-	<group>
+	<group
+		android:pivotX="12"
+		android:pivotY="12"
+		android:scaleX="0.85"
+		android:scaleY="0.85">
 		<clip-path android:pathData="M0,0h24v24h-24z" />
 		<path
 			android:fillColor="#000000"

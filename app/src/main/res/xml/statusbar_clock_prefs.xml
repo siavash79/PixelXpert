@@ -1,99 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:search="http://schemas.android.com/apk/sh.siava.pixelxpert.ui.preferencesearch">
 
-	<sh.siava.AOSPMods.ui.MaterialListPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 		android:defaultValue="0"
 		android:entries="@array/sbc_position_names"
 		android:entryValues="@array/sbc_position_codes"
 		android:key="SBClockLoc"
-		android:title="@string/sbc_position_title" />
+		android:title="@string/sbc_position_title"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialListPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 		android:defaultValue="2"
 		android:entries="@array/sbc_ampm_style_names"
 		android:entryValues="@array/sbc_ampm_style_codes"
 		android:key="SBCAmPmStyle"
-		android:title="@string/sbc_ampm_style" />
+		android:title="@string/sbc_ampm_style"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="SBCShowSeconds"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/sbc_show_secs" />
+		android:title="@string/sbc_show_secs"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
 		android:title="@string/sbc_date_cat"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
-		<sh.siava.AOSPMods.ui.MaterialListPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 			android:defaultValue="0"
 			android:entries="@array/sbc_day_week_names"
 			android:entryValues="@array/sbc_day_week_codes"
 			android:key="SBCDayOfWeekMode"
 			android:summary="%s"
-			android:title="@string/sbc_day_of_week_options" />
+			android:title="@string/sbc_day_of_week_options"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
 			android:title="@string/sbc_advanced_cat"
+			app:iconSpaceReserved="false"
 			search:ignore="true">
 
-			<sh.siava.AOSPMods.ui.MaterialEditTextPreference
+			<sh.siava.pixelxpert.ui.preferences.MaterialEditTextPreference
 				android:defaultValue=""
 				android:dialogLayout="@layout/string_formatter_manual"
 				android:key="DateFormatBeforeSBC"
 				android:selectAllOnFocus="true"
 				android:singleLine="true"
-				android:title="@string/sbc_custom_date_before" />
+				android:title="@string/sbc_custom_date_before"
+				app:iconSpaceReserved="false" />
 
-			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 				android:defaultValue="true"
 				android:key="BeforeSBCSmall"
 				android:summaryOff="@string/general_off"
 				android:summaryOn="@string/general_on"
-				android:title="@string/sbc_date_small" />
+				android:title="@string/sbc_date_small"
+				app:iconSpaceReserved="false" />
 
-			<sh.siava.AOSPMods.ui.MaterialEditTextPreference
+			<sh.siava.pixelxpert.ui.preferences.MaterialEditTextPreference
 				android:defaultValue=""
 				android:dialogLayout="@layout/string_formatter_manual"
 				android:key="DateFormatAfterSBC"
 				android:selectAllOnFocus="true"
 				android:singleLine="true"
-				android:title="@string/sbc_custom_date_after" />
+				android:title="@string/sbc_custom_date_after"
+				app:iconSpaceReserved="false" />
 
-			<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+			<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 				android:defaultValue="true"
 				android:key="AfterSBCSmall"
 				android:summaryOff="@string/general_off"
 				android:summaryOn="@string/general_on"
-				android:title="@string/sbc_date_small" />
+				android:title="@string/sbc_date_small"
+				app:iconSpaceReserved="false" />
 
-		</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
-	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+		</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
 		android:title="@string/sbc_clock_color_category"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
-		<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="SBCClockColorful"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
-			android:title="@string/sbc_colorful_title" />
+			android:title="@string/sbc_colorful_title"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialColorPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialColorPreference
 			android:key="SBCBeforeClockColor"
-			android:title="@string/sbc_before_color" />
+			android:title="@string/sbc_before_color"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialColorPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialColorPreference
 			android:key="SBCClockColor"
-			android:title="@string/sbc_color" />
+			android:title="@string/sbc_color"
+			app:iconSpaceReserved="false" />
 
-		<sh.siava.AOSPMods.ui.MaterialColorPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialColorPreference
 			android:key="SBCAfterClockColor"
-			android:title="@string/sbc_after_color" />
+			android:title="@string/sbc_after_color"
+			app:iconSpaceReserved="false" />
 
-	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 </PreferenceScreen>

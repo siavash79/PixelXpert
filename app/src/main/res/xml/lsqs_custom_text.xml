@@ -2,52 +2,59 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<sh.siava.AOSPMods.ui.MaterialListPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 		android:defaultValue="0"
 		android:entries="@array/network_stat_start_names"
 		android:entryValues="@array/network_stat_start_codes"
 		android:key="NetworkStatsStartBase"
 		android:summary="%s"
-		android:title="@string/network_stat_type" />
+		android:title="@string/network_stat_type"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialTimePickerPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialTimePickerPreference
 		android:defaultValue="00:00"
 		android:key="NetworkStatsStartTime"
 		android:persistent="true"
-		android:title="@string/network_stat_day" />
+		android:title="@string/network_stat_day"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialListPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 		android:defaultValue="1"
 		android:entries="@array/days_of_week_names"
 		android:entryValues="@array/days_of_week_codes"
 		android:key="NetworkStatsWeekStart"
 		android:summary="%s"
-		android:title="@string/network_stat_week" />
+		android:title="@string/network_stat_week"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialRangeSliderPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 		android:key="NetworkStatsMonthStart"
 		android:title="@string/network_stat_month"
 		app:defaultValue="1"
+		app:iconSpaceReserved="false"
 		app:maxVal="28"
 		app:minVal="1"
 		app:tickInterval="1"
 		app:valueCount="1" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 		android:defaultValue="false"
 		android:key="networkStatsColorful"
 		android:summaryOff="@string/general_off"
 		android:summaryOn="@string/general_on"
-		android:title="@string/network_colorful_title" />
+		android:title="@string/network_colorful_title"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialColorPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialColorPreference
 		android:defaultValue="-7617718"
 		android:key="networkStatDLColor"
-		android:title="@string/network_download_color_title" />
+		android:title="@string/network_download_color_title"
+		app:iconSpaceReserved="false" />
 
-	<sh.siava.AOSPMods.ui.MaterialColorPreference
+	<sh.siava.pixelxpert.ui.preferences.MaterialColorPreference
 		android:defaultValue="-351845"
 		android:key="networkStatULColor"
-		android:title="@string/network_upload_color_title" />
+		android:title="@string/network_upload_color_title"
+		app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

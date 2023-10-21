@@ -1,93 +1,93 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch">
+	xmlns:search="http://schemas.android.com/apk/sh.siava.pixelxpert.ui.preferencesearch">
 
-	<sh.siava.AOSPMods.ui.preferencesearch.SearchPreference android:key="searchPreference" />
+	<sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreference android:key="searchPreference" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$StatusbarFragment"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$StatusbarFragment"
 		app:icon="@drawable/ic_settings_statusbar"
 		app:key="statusbar_header"
 		app:title="@string/statusbar_header"
 		search:ignore="true" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$QuickSettingsFragment"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$QuickSettingsFragment"
 		app:icon="@drawable/ic_settings_quicksettings"
 		app:key="quicksettings_header"
 		app:title="@string/qs_panel_category_title"
 		search:ignore="true" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$ThemingFragment"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$ThemingFragment"
 		app:icon="@drawable/ic_settings_themes"
 		app:key="theming_header"
 		app:title="@string/theme_customization_category"
 		search:ignore="true" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$LockScreenFragment"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$LockScreenFragment"
 		app:icon="@drawable/ic_settings_lockscreen"
 		app:key="lockscreen_header"
 		app:title="@string/lockscreen_header_title"
 		search:ignore="true" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$NavFragment"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$NavFragment"
 		app:icon="@drawable/ic_settings_navigation"
 		app:key="nav_header"
 		app:title="@string/nav_header"
 		search:ignore="true" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$DialerFragment"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$DialerFragment"
 		app:icon="@drawable/ic_phone"
 		app:key="dialer_header"
 		app:title="@string/dialer_header"
 		search:ignore="true" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$HotSpotFragment"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$HotSpotFragment"
 		app:icon="@drawable/ic_settings_wifi_hotspot"
 		app:key="hotspot_header"
 		app:title="@string/hotspot_header"
 		search:ignore="true" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$PackageManagerFragment"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$PackageManagerFragment"
 		app:icon="@drawable/ic_settings_package_manager"
 		app:key="pm_header"
 		app:title="@string/pm_header"
 		search:ignore="true" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$MiscFragment"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$MiscFragment"
 		app:icon="@drawable/ic_settings_misc"
 		app:key="misc_header"
 		app:title="@string/misc_header"
 		search:ignore="true" />
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$OwnPrefsFragment"
-		app:icon="@drawable/ic_settings_aospmods"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$OwnPrefsFragment"
+		app:icon="@drawable/ic_settings_pixelxpert"
 		app:key="own_header"
 		app:title="@string/own_prefs_header"
 		search:ignore="true" />
 
 	<!-- Let's remove this for the time being...
-	<sh.siava.AOSPMods.ui.MaterialPreferenceMain
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
 		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.AOSPMods.SettingsActivity$ScreenOffFragment"
+		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$ScreenOffFragment"
 		app:key="doze_header"
 		app:title="@string/doze_header"
 		app:icon="@drawable/ic_settings_lockscreen"

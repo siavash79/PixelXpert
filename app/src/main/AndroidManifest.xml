@@ -1,97 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+	xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <application
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme.AOSPMods"
-        android:enableOnBackInvokedCallback="true"
-        android:icon="@mipmap/ic_launcher">
-        <activity
-            android:name=".UpdateActivity"
-            android:exported="true"
-            android:label="@string/title_activity_update"
-            android:parentActivityName=".SettingsActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.RUN" />
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
-        </activity>
+	<queries>
+		<package android:name="com.android.systemui" /> <!-- systemUI -->
+		<package android:name="com.google.android.apps.nexuslauncher" /> <!-- Pixel Launcher - Taskbar -->
+		<package android:name="android" /> <!-- System Framework -->
+		<package android:name="com.android.phone" /> <!-- phone services -->
+		<package android:name="com.android.settings" /> <!-- settings app -->
+		<package android:name="com.google.android.dialer" /> <!-- google dialer -->
+	</queries>
 
-        <activity
-            android:name=".SettingsActivity"
-            android:exported="true"
-            android:label="@string/title_activity_settings">
-        </activity>
+	<application
+		android:enableOnBackInvokedCallback="true"
+		android:icon="@mipmap/ic_launcher"
+		android:label="Pixel Xpert"
+		android:supportsRtl="true"
+		android:theme="@style/AppTheme.PixelXpert">
+		<activity
+			android:name=".ui.activities.WikiActivity"
+			android:exported="false" />
+		<activity
+			android:name=".ui.activities.SplashScreenActivity"
+			android:exported="true"
+			android:label="@string/title_activity_settings" />
 
-        <activity-alias
-            android:name=".SettingsActivityNormalIcon"
-            android:targetActivity=".SettingsActivity"
-            android:enabled="true"
-            android:icon="@mipmap/ic_launcher"
-            android:exported="true"
-            android:label="@string/title_activity_settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
+		<activity-alias
+			android:name=".SplashScreenActivityAlternateIcon"
+			android:enabled="false"
+			android:exported="true"
+			android:icon="@mipmap/ic_launcher_themed"
+			android:label="@string/title_activity_settings"
+			android:targetActivity=".ui.activities.SplashScreenActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
 
-        <activity-alias
-            android:name=".SettingsActivityAlternateIcon"
-            android:targetActivity=".SettingsActivity"
-            android:enabled="false"
-            android:icon="@mipmap/ic_launcher_themed"
-            android:exported="true"
-            android:label="@string/title_activity_settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity-alias>
+		<activity-alias
+			android:name=".SplashScreenActivityNormalIcon"
+			android:enabled="true"
+			android:exported="true"
+			android:icon="@mipmap/ic_launcher"
+			android:label="@string/title_activity_settings"
+			android:targetActivity=".ui.activities.SplashScreenActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
 
-        <service
-            android:name=".utils.VolumeTileService"
-            android:label="@string/volume_tile_title"
-            android:icon="@drawable/ic_volume"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity-alias>
 
-        <service
-            android:name=".utils.AppProfileSwitchService"
-            android:label="@string/app_switch_tile_title"
-            android:icon="@drawable/ic_app_switch"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
+		<activity
+			android:name=".ui.activities.HookedPackagesActivity"
+			android:exported="false" />
+		<activity
+			android:name=".ui.activities.UpdateActivity"
+			android:exported="true"
+			android:label="@string/title_activity_update"
+			android:parentActivityName=".ui.activities.SettingsActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.RUN" />
 
-        <provider
-            android:name=".utils.RemotePrefProvider"
-            android:authorities="sh.siava.AOSPMods"
-            android:directBootAware="true"
-            android:exported="true"
-            tools:ignore="ExportedContentProvider" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ui.activities.SettingsActivity"
+			android:exported="false" />
 
-        <meta-data
-            android:name="xposeddescription"
-            android:value="@string/xposed_desc" />
-        <meta-data
-            android:name="xposedminversion"
-            android:value="82" />
-        <meta-data
-            android:name="xposedscope"
-            android:resource="@array/module_scope" />
-    </application>
+		<service
+			android:name=".service.tileServices.VolumeTileService"
+			android:exported="true"
+			android:icon="@drawable/ic_volume"
+			android:label="@string/volume_tile_title"
+			android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+			<intent-filter>
+				<action android:name="android.service.quicksettings.action.QS_TILE" />
+			</intent-filter>
+		</service>
+		<service
+			android:name=".service.tileServices.AppProfileSwitchTileService"
+			android:exported="true"
+			android:icon="@drawable/ic_app_switch"
+			android:label="@string/app_switch_tile_title"
+			android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+			<intent-filter>
+				<action android:name="android.service.quicksettings.action.QS_TILE" />
+			</intent-filter>
+		</service>
+		<service
+			android:name=".service.RootProviderProxy"
+			android:exported="true" />
+
+		<receiver
+			android:name=".utils.BootReceiver"
+			android:enabled="true"
+			android:exported="true">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
+
+		<provider
+			android:name=".utils.RemotePrefProvider"
+			android:authorities="sh.siava.pixelxpert"
+			android:directBootAware="true"
+			android:exported="true"
+			tools:ignore="ExportedContentProvider" />
+
+		<meta-data
+			android:name="xposeddescription"
+			android:value="@string/xposed_desc" />
+		<meta-data
+			android:name="xposedminversion"
+			android:value="82" />
+		<meta-data
+			android:name="xposedscope"
+			android:resource="@array/module_scope" />
+	</application>
 
 </manifest>

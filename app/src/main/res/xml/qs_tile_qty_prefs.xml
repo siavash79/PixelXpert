@@ -1,65 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:search="http://schemas.android.com/apk/sh.siava.AOSPMods.ui.preferencesearch">
+	xmlns:search="http://schemas.android.com/apk/sh.siava.pixelxpert.ui.preferencesearch">
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
 		android:title="@string/qs_tile_qty_portrait"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
-		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
 			android:defaultValue="0"
 			android:key="QSRowQty"
 			android:max="8"
-			app:min="0"
 			android:title="@string/qs_rows_number"
+			app:iconSpaceReserved="false"
+			app:min="0"
 			app:updatesContinuously="true" />
 
-		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
 			android:defaultValue="0"
 			android:key="QSColQty"
 			android:max="4"
-			app:min="1"
 			android:title="@string/qs_cols_number"
+			app:iconSpaceReserved="false"
+			app:min="1"
 			app:updatesContinuously="true" />
 
-		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
 			android:defaultValue="4"
 			android:key="QQSTileQty"
 			android:max="8"
-			app:min="2"
 			android:title="@string/qqs_tiles_number"
+			app:iconSpaceReserved="false"
+			app:min="2"
 			app:updatesContinuously="true" />
 
-	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
-	<sh.siava.AOSPMods.ui.MaterialPreferenceCategory
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
 		android:title="@string/qs_tile_qty_landscape"
+		app:iconSpaceReserved="false"
 		search:ignore="true">
 
-		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
 			android:defaultValue="0"
 			android:key="QSRowQtyL"
 			android:max="8"
-			app:min="0"
 			android:title="@string/qs_rows_number"
+			app:iconSpaceReserved="false"
+			app:min="0"
 			app:updatesContinuously="true" />
 
-		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
 			android:defaultValue="0"
 			android:key="QSColQtyL"
 			android:max="4"
-			app:min="1"
 			android:title="@string/qs_cols_number"
+			app:iconSpaceReserved="false"
+			app:min="1"
 			app:updatesContinuously="true" />
 
-		<sh.siava.AOSPMods.ui.MaterialSeekbarPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
 			android:defaultValue="4"
 			android:key="QQSTileQtyL"
 			android:max="8"
-			app:min="2"
 			android:title="@string/qqs_tiles_number"
+			app:iconSpaceReserved="false"
+			app:min="2"
 			app:updatesContinuously="true" />
 
-	</sh.siava.AOSPMods.ui.MaterialPreferenceCategory>
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 </PreferenceScreen>

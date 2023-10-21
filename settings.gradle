@@ -1,4 +1,4 @@
-rootProject.name = "AOSPMods"
+rootProject.name = "PixelXpert"
 include ':app'
 include ':RangeSliderPreference'
 

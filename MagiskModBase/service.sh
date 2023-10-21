@@ -1,5 +1,5 @@
-PKGNAME="sh.siava.AOSPMods" 
-PKGPATH="/system/priv-app/AOSPMods/AOSPMods.apk" 
+PKGNAME="sh.siava.PixelXpert"
+PKGPATH="/system/priv-app/PixelXpert/PixelXpert.apk"
 LSPDDBPATH="/data/adb/lspd/config/modules_config.db" 
 MAGISKDBPATH="/data/adb/magisk.db" 
 MODDIR=${0%/*} 
@@ -37,8 +37,6 @@ grantRootPkg(){
  
 #grant root access to required apps 
 grantRootApps(){ 
-	grantRootPkg "com.android.systemui"
-	grantRootPkg "com.google.android.apps.nexuslauncher"
 	grantRootPkg $PKGNAME
 } 
  
@@ -80,7 +78,6 @@ activateModuleLSPD()
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.google.android.dialer\",0);" && runSQL
 
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.phone\",0);" && runSQL
-	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.server.telecom\",0);" && runSQL
 
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.settings\",0);" && runSQL
 

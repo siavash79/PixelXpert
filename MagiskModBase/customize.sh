@@ -1,7 +1,15 @@
-PKGNAME="sh.siava.AOSPMods"
-PKGPATH="/system/priv-app/AOSPMods/AOSPMods.apk"
+PKGNAME="sh.siava.pixelxpert"
+PKGPATH="/system/priv-app/PixelXpert/PixelXpert.apk"
 LSPDDBPATH="/data/adb/lspd/config/modules_config.db"
 MAGISKDBPATH="/data/adb/magisk.db"
+
+exportFromAOSPMods(){
+	AOSPModsPrefPath="/data/user_de/0/sh.siava.AOSPMods/shared_prefs/sh.siava.AOSPMods_preferences.xml"
+    if [ -f "$AOSPModsPrefPath" ]; then
+            yes | cp -f $AOSPModsPrefPath /sdcard/PX_migrate.tmp
+    fi
+    touch /data/adb/modules/AOSPMods/remove
+}
 
 prepareSQL(){
 	unzip $ZIPFILE sqlite3 -d $TMPDIR/ > /dev/null
@@ -38,13 +46,11 @@ grantRootPkg(){
 
 #grant root access to required apps
 grantRootApps(){
-	grantRootPkg "com.android.systemui"
-	grantRootPkg "com.google.android.apps.nexuslauncher"
 	grantRootPkg $PKGNAME
 }
 
 migratePrefs(){
-  am start -n "$PKGNAME/.UpdateActivity" -e migratePrefs true
+  am start -n "$PKGNAME/.UpdateActivity" -e migratePrefs true > /dev/null
 }
 
 #activate PKGNAME in Lsposed
@@ -85,7 +91,6 @@ activateModuleLSPD()
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.google.android.dialer\",0);" && runSQL
 
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.phone\",0);" && runSQL
-	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.server.telecom\",0);" && runSQL
 
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.settings\",0);" && runSQL
 
@@ -104,6 +109,7 @@ if [ $(ls $LSPDDBPATH) = $LSPDDBPATH ]; then
 	ui_print ''
 
 	activateModuleLSPD
+	exportFromAOSPMods
 	migratePrefs
 
 
@@ -118,7 +124,7 @@ else
 	ui_print 'Please:'
 	ui_print '- Insall Lsposed'
 	ui_print '- Reboot'
-	ui_print '- Manually enable AOSPMods in Lsposed'
+	ui_print '- Manually enable PixelXpert in Lsposed'
 	ui_print '- Reboot'
 fi
 

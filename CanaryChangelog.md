@@ -1,3 +1,50 @@
+**canary-290**  
+- Introducing Pixel Xpert! From the beginning, AOSPMods was designed using AOSP source code, with Pixel phones in mind. But the name was confusing to many people running AOSP based custom roms. So, in favor of more clarity, we've decided to rename to module to Pixel Xpert Also, since we are not maintaining the fonts and overlays which were part of "Full Package", they are now removed from the module permanently.  
+  
+**canary-289**  
+- Fixed in-call vibration while a bluetooth device is connected  
+- A14: Fixed QS flashing when switching dark theme while QS light theme is disabled  
+  
+**canary-288**  
+- A14QPR1: Fixed double system icons  
+  
+**canary-287**  
+- Fixed kill foreground app / recents taskbar  
+  
+**canary-286**  
+- Fixed in-call vibration functions  
+- Compatibility with Lsposed 1.9.2  
+- A14QPR1: Fixed combined signal icons  
+- Fixed update notifications not shown properly  
+  
+**canary-285**  
+- Experimental - A14QPR1 compatibility  
+- A14QPR1: Experimental - Fixed QS light theme  
+- A14QPR1: fixed QQS BrightnessSlider  
+- A14QPR1: Fixed Taskbar in recents mode  
+- A14QPR1: Fixed kill foreground app  
+  
+**canary-284**  
+- App: AOSPMods settings redesigned  
+- Added option to automatically check for updates  
+- Fixed wrong app name shown after update  
+- App menu revised  
+  
+**canary-283**  
+- Fixed wifi SSID not updating on wifi change  
+- Fixed lockscreen clock area text random disappearance  
+  
+**canary-282**  
+- Fixed app loading issues from canary 281  
+  
+**canary-281**  
+- Connected packages: better diagnosis / added options to help with lsposed activation  
+- root-required actions restructured: root requirement for AOSPMods app only - KernelSU support  
+  
+**canary-280**  
+- Added menu item to diagnose correct setup  
+- Tap to show ambient display improvement  
+  
 **canary-278**  
 - Added options to show ambient display (on tap / pickup) when the screen is off  
   

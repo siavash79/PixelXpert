@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<style name="AppTheme.AppBarOverlay" parent="Theme.Material3.Dark" />
-
-	<style name="AppTheme.PopupOverlay" parent="Theme.Material3.Light" />
-
-	<style name="AppTheme.AOSPMods.NoActionBar">
-		<item name="windowActionBar">false</item>
-		<item name="windowNoTitle">true</item>
-	</style>
-
 	<style name="TextAppearance.App.ListItem.Title" parent="TextAppearance.AppCompat.Subhead">
 		<item name="android:textSize">19sp</item> <!-- A12 B2: 20sp -->
 	</style>
@@ -32,25 +23,8 @@
 		<item name="colorPrimarySurface">@color/ui_primary_surface</item>
 	</style>
 
-	<style name="Toolbar.TextAppearanceHeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
-		<item name="fontFamily">@font/google_sans_text_500</item>
-	</style>
-
-	<style name="Toolbar.TextAppearanceHeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
-		<item name="fontFamily">@font/google_sans_text_400</item>
-	</style>
-
 	<style name="Widget.CollapsingToolbar" parent="Widget.Material3.CollapsingToolbar">
 		<item name="contentScrim">@drawable/color_surface_overlay</item>
-	</style>
-
-	<style name="Dialog.MaterialAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
-		<item name="shapeAppearanceOverlay">@style/MaterialAlertDialog.Rounded</item>
-	</style>
-
-	<style name="MaterialAlertDialog.Rounded" parent="">
-		<item name="cornerFamily">rounded</item>
-		<item name="cornerSize">@dimen/ui_container_radius</item>
 	</style>
 
 	<style name="Material3.SeekBar" parent="Widget.AppCompat.SeekBar">
@@ -72,6 +46,21 @@
 
 	<style name="ThemeOverlay.MaterialSwitch" parent="ThemeOverlay.Material3">
 		<item name="colorPrimaryContainer">?attr/colorOnPrimary</item>
+	</style>
+
+	<style name="Widget.ExtendedFloatingActionButton" parent="Widget.Material3.ExtendedFloatingActionButton.Primary">
+		<item name="shapeAppearanceOverlay">@style/ShapeAppearanceExtFAB</item>
+	</style>
+
+	<style name="ShapeAppearanceExtFAB">
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSize">@dimen/ui_container_radius</item>
+	</style>
+
+	<style name="MaterialComponents.MaterialAlertDialog" parent="MaterialAlertDialog.Material3">
+		<item name="android:background">@drawable/container</item>
+		<item name="android:dialogCornerRadius">@dimen/ui_container_radius</item>
+		<item name="android:backgroundDimAmount">0.6</item>
 	</style>
 
 </resources>

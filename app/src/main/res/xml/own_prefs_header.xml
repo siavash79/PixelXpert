@@ -1,26 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:search="http://schemas.android.com/apk/sh.siava.pixelxpert.ui.preferencesearch">
 
-	<sh.siava.AOSPMods.ui.MaterialListPreference
-		android:entries="@array/languages_names"
-		android:entryValues="@array/languages_values"
-		android:key="appLanguage"
-		android:summary="%s"
-		android:title="@string/language_title" />
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/settings_general_section_title"
+		search:ignore="true">
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
-		android:defaultValue="false"
-		android:key="AlternativeThemedAppIcon"
-		android:summaryOff="@string/general_off"
-		android:summaryOn="@string/general_on"
-		android:title="@string/app_themed_icon_title" />
+		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
+			android:entries="@array/languages_names"
+			android:entryValues="@array/languages_values"
+			android:icon="@drawable/ic_language"
+			android:key="appLanguage"
+			android:summary="%s"
+			android:title="@string/language_title" />
 
-	<sh.siava.AOSPMods.ui.MaterialSwitchPreference
-		android:defaultValue="false"
-		android:key="TemperatureUnitF"
-		android:summaryOff="@string/general_off"
-		android:summaryOn="@string/general_on"
-		android:title="@string/imperial_units_title" />
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:icon="@drawable/ic_alternative_icon"
+			android:key="AlternativeThemedAppIcon"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/app_themed_icon_title" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/settings_update_section_title"
+		search:ignore="true">
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreference
+			android:icon="@drawable/ic_check_update"
+			android:key="CheckForUpdate"
+			android:summary="@string/current_version"
+			android:title="@string/settings_check_for_update_title" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:icon="@drawable/ic_auto_update"
+			android:key="AutoUpdate"
+			android:summary="@string/auto_update_summary"
+			android:title="@string/auto_update_title"
+			app:defaultValue="true" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:icon="@drawable/ic_update_over_wifi"
+			android:key="UpdateWifiOnly"
+			android:summary="@string/update_over_wifi_summary"
+			android:title="@string/update_over_wifi_title"
+			app:defaultValue="true" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/settings_misc_section_title"
+		search:ignore="true">
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:icon="@drawable/ic_imperial_unit"
+			android:key="TemperatureUnitF"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/imperial_units_title" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/settings_about_section_title"
+		search:ignore="true">
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreference
+			android:icon="@drawable/ic_github"
+			android:key="GitHubRepo"
+			android:summary="@string/github_repo_summary"
+			android:title="@string/github_repo_title" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreference
+			android:icon="@drawable/ic_telegram"
+			android:key="TelegramGroup"
+			android:summary="@string/telegram_group_summary"
+			android:title="@string/telegram_group_title" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreference
+			android:icon="@drawable/ic_usage"
+			android:key="UsageWiki"
+			android:summary="@string/usage_summary"
+			android:title="@string/usage_title" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
 	<!--SwitchPreference
 		android:defaultValue="true"

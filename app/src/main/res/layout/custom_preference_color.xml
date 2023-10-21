@@ -1,71 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:baselineAligned="false"
-	android:gravity="center_vertical"
+	android:clickable="true"
+	android:focusable="true"
+	android:foreground="?android:selectableItemBackgroundBorderless"
 	android:minHeight="?android:attr/listPreferredItemHeight"
-	android:orientation="horizontal"
-	android:paddingTop="16dp"
-	android:paddingEnd="16dp"
-	android:paddingBottom="16dp"
-	tools:ignore="RtlSymmetry">
+	android:paddingHorizontal="32dp"
+	android:paddingVertical="22dp">
 
-	<LinearLayout
-		android:layout_width="38dp"
-		android:layout_height="match_parent"
-		android:gravity="center"
-		android:orientation="horizontal">
-
-		<ImageView
-			android:id="@android:id/icon"
-			android:layout_width="24dp"
-			android:layout_height="24dp"
-			android:layout_gravity="center"
-			android:contentDescription="@android:string/untitled"
-			app:tint="@color/ui_accent" />
-
-	</LinearLayout>
+	<ImageView
+		android:id="@android:id/icon"
+		android:layout_width="20dp"
+		android:layout_height="20dp"
+		android:layout_alignParentStart="true"
+		android:layout_centerVertical="true"
+		android:layout_marginEnd="18dp"
+		android:contentDescription="@android:string/untitled"
+		android:visibility="gone"
+		app:tint="@color/text_color_primary" />
 
 	<RelativeLayout
-		android:layout_width="0dp"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_weight="1">
+		android:layout_centerVertical="true"
+		android:layout_toStartOf="@android:id/widget_frame"
+		android:layout_toEndOf="@android:id/icon"
+		android:orientation="vertical">
 
 		<TextView
 			android:id="@android:id/title"
+			style="@style/TextAppearance.Material3.TitleMedium"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:fontFamily="sans-serif"
-			android:textColor="?android:attr/textColorPrimary"
-			android:textSize="16sp"
-			android:textStyle="normal" />
+			android:textColor="@color/text_color_primary" />
 
 		<TextView
 			android:id="@android:id/summary"
+			style="@style/TextAppearance.Material3.BodyMedium"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_below="@android:id/title"
-			android:layout_alignStart="@android:id/title"
-			android:layout_marginTop="2dp"
-			android:fontFamily="sans-serif"
-			android:lineSpacingExtra="3sp"
-			android:maxLines="4"
-			android:textColor="?android:attr/textColorSecondary"
-			android:textSize="14sp"
-			android:textStyle="normal" />
+			android:textColor="@color/text_color_secondary" />
 
 	</RelativeLayout>
 
 	<LinearLayout
 		android:id="@android:id/widget_frame"
 		android:layout_width="wrap_content"
-		android:layout_height="match_parent"
-		android:layout_marginStart="22dp"
-		android:layout_marginEnd="16dp"
-		android:gravity="center_vertical"
+		android:layout_height="wrap_content"
+		android:layout_alignParentEnd="true"
+		android:layout_centerVertical="true"
+		android:layout_marginStart="10dp"
 		android:orientation="vertical" />
 
-</LinearLayout>
+</RelativeLayout>

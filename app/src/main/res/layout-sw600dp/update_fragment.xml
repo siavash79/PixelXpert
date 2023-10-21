@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fillViewport="true"
+	tools:context=".ui.fragments.UpdateFragment">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fillViewport="true"
+		android:paddingStart="48dp"
+		android:paddingTop="24dp"
+		android:paddingEnd="48dp"
+		android:paddingBottom="24dp">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/updateFragmentLayout"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:fillViewport="true"
+			android:paddingEnd="24dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toStartOf="@id/changelogContainer"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:ignore="RtlSymmetry">
+
+			<TextView
+				android:id="@+id/currentVersionID"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/currentVersionTitle"
+				android:textStyle="bold"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<TextView
+				android:id="@+id/currentVersionValueID"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:text="..."
+				android:textStyle="bold"
+				app:layout_constraintStart_toEndOf="@+id/currentVersionID"
+				app:layout_constraintTop_toTopOf="@+id/currentVersionID" />
+
+			<TextView
+				android:id="@+id/textView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="16dp"
+				android:text="@string/update_flavor_title"
+				android:textStyle="bold"
+				app:layout_constraintStart_toStartOf="@+id/updateChannelRadioGroup"
+				app:layout_constraintTop_toBottomOf="@+id/currentVersionID" />
+
+			<RadioGroup
+				android:id="@+id/updateChannelRadioGroup"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/textView">
+
+				<RadioButton
+					android:id="@+id/stableID"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/stable_flavor" />
+
+				<RadioButton
+					android:id="@+id/canaryID"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/canary_flavor" />
+			</RadioGroup>
+
+			<TextView
+				android:id="@+id/textView3"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:text="@string/update_type_title"
+				android:textStyle="bold"
+				android:visibility="gone"
+				app:layout_constraintStart_toStartOf="@+id/updateChannelRadioGroup"
+				app:layout_constraintTop_toBottomOf="@+id/updateChannelRadioGroup" />
+
+			<RadioGroup
+				android:id="@+id/packageTypeRadioGroup"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:visibility="gone"
+				app:layout_constraintStart_toStartOf="@+id/textView3"
+				app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+				<RadioButton
+					android:id="@+id/fullTypeID"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/full_type" />
+
+				<RadioButton
+					android:id="@+id/XposedTypeID"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/xposed_type" />
+			</RadioGroup>
+
+			<TextView
+				android:id="@+id/latestVersionTitleID"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:text="@string/lastestVersionTitle"
+				android:textStyle="bold"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/packageTypeRadioGroup" />
+
+			<TextView
+				android:id="@+id/latestVersionValueID"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:text="..."
+				android:textStyle="bold"
+				app:layout_constraintStart_toEndOf="@+id/latestVersionTitleID"
+				app:layout_constraintTop_toTopOf="@+id/latestVersionTitleID" />
+
+			<Button
+				android:id="@+id/updateBtn"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:enabled="false"
+				android:text="@string/update_word"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/latestVersionTitleID" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+		<androidx.cardview.widget.CardView
+			android:id="@+id/changelogContainer"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:backgroundTint="@color/changelog_bg"
+			android:elevation="0dp"
+			android:foreground="@drawable/changelog_container"
+			android:outlineAmbientShadowColor="@android:color/transparent"
+			android:outlineSpotShadowColor="@android:color/transparent"
+			app:cardCornerRadius="@dimen/ui_container_radius"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/updateFragmentLayout"
+			app:layout_constraintTop_toTopOf="parent">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="12dp"
+					android:text="@string/changelog_title"
+					android:textAlignment="center"
+					android:textColor="@color/text_color_primary"
+					android:textSize="16sp"
+					android:textStyle="bold" />
+
+				<androidx.core.widget.NestedScrollView
+					android:id="@+id/changelogScrollView"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fadeScrollbars="true"
+					android:isScrollContainer="true"
+					android:scrollbars="vertical">
+
+					<br.tiagohm.markdownview.MarkdownView
+						android:id="@+id/changelogView"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:minHeight="40dp"
+						app:escapeHtml="false" />
+
+				</androidx.core.widget.NestedScrollView>
+			</LinearLayout>
+		</androidx.cardview.widget.CardView>
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

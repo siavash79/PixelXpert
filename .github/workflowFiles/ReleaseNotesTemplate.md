@@ -1,10 +1,11 @@
 **Compatibility:**  
-AOSP based Androids:  
-13 R18 and later (Pixel stock firmware 13, Dec 2022 stable version and later)
-14 R1  
+Pixel Stock Rom:  
+13 R18 and later (Firmware 13, Dec 2022 stable version and later)
+14 Stable
+14 QPR1 Beta 2
   
 **If you're updating from previous versions:**  
-Update your module via module update shortcut in Magisk, or use the built-in updater located in 3-dot menu of the app   
+Update your module via module update shortcut in Magisk, or use the built-in updater located in the app   
   
 **To install, you will need to:**  
 Install LSPosed Zygisk (https://github.com/LSPosed/LSPosed/releases)  

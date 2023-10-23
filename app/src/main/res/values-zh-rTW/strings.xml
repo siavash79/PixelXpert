@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">啟用替代的 Pixel Xpert 主題應用圖示</string>
+	<string name="app_themed_icon_title">啟用替代的 AOSP Mods 主題應用圖示</string>
 	<string name="xposed_desc">基於 Android 12+ AOSP ROM 的自定義功能</string>
 	<string name="volume_tile_title">Media Volume</string>
 	<string name="app_switch_tile_title">Switch App Profile</string>
@@ -351,7 +351,7 @@
 	<string name="menu_updates">App 更新</string>
 	<string name="monitoring_category_title">監控選項</string>
 	<string name="netstat_header">網路統計設定</string>
-	<string name="string_formatter_manual_body_v3">In addition to the normal text, dynamic variables are also available, like Date, Data usage and Temperature:\n\n$G\&lt;format\&gt; : Gregorian date, based on format*\n$P&lt;format&gt; : Persian date, based on format*\n$Nrx : Total Downloads in specified period ** ***\n$Ntx: Total Uploads in specified period ** ***\n$Nall : Total Traffic in specified period ** ***\n$Nssid : WiFi SSID name (if applicable)\n\n$T\&lt;format\&gt;[interval] : Temperature; \nformat can be b (for battery), c (for CPU), g (for GPU) and s (for skin) \nLastly, there is OPTIONAL number of update interval in seconds (default: 60 seconds)\n\n*for format documentation, search for \"Java Date Format\"\n**You can specify the statistics period in PixelXpert/Miscellaneous menu/Network Statistics Settings\n***If you replace $N with $Nc you will get with mobile data statistics (e.g. $Ncrx instead of Nrx)</string>
+	<string name="string_formatter_manual_body_v3">In addition to the normal text, dynamic variables are also available, like Date, Data usage and Temperature:\n\n$G\&lt;format\&gt; : Gregorian date, based on format*\n$P&lt;format&gt; : Persian date, based on format*\n$Nrx : Total Downloads in specified period ** ***\n$Ntx: Total Uploads in specified period ** ***\n$Nall : Total Traffic in specified period ** ***\n$Nssid : WiFi SSID name (if applicable)\n\n$T\&lt;format\&gt;[interval] : Temperature; \nformat can be b (for battery), c (for CPU), g (for GPU) and s (for skin) \nLastly, there is OPTIONAL number of update interval in seconds (default: 60 seconds)\n\n*for format documentation, search for \"Java Date Format\"\n**You can specify the statistics period in AOSPMods/Miscellaneous menu/Network Statistics Settings\n***If you replace $N with $Nc you will get with mobile data statistics (e.g. $Ncrx instead of Nrx)</string>
 	<string name="update_channel_name">更新</string>
 	<string name="update_notification_title">已下載更新</string>
 	<string name="update_notification_text">點此安裝</string>
@@ -373,7 +373,7 @@
 	<string name="switch_branches">更換分支</string>
 	<string name="reinstall_word">重新安裝</string>
 	<string name="changelog_title">Changelog</string>
-	<string name="own_prefs_header">Pixel Xpert 設定</string>
+	<string name="own_prefs_header">AOSP Mods 設定</string>
 	<string name="language_title">語言</string>
 	<string name="toggle_dark_apply">(切換深色模式以應用)</string>
 	<string name="gesture_nav_extra_cat">更多導航欄手勢</string>

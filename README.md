@@ -93,6 +93,8 @@ This project is open source and free for usage, build or copy. However, if you r
 - @nijel8 for double-tap to wake
 
 **Translations:**
+[![Crowdin](https://badges.crowdin.net/aospmods/localized.svg)](https://crowdin.com/project/aospmods)
+
 - @ElTifo Portuguese
 - @cracky5322 Chinese Traditional
 - @JohnsonRan Chinese Simplified

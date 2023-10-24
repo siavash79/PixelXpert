@@ -16,11 +16,13 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -61,6 +63,7 @@ public class ScreenGestures extends XposedModPack {
 	private boolean isDozing; //determiner for wakeup or sleep decision
 	private Object NotificationPanelViewController;
 	private Timer mTimer;
+	private XC_MethodHook.Unhook mLongPressHook;
 
 	public ScreenGestures(Context context) {
 		super(context);
@@ -273,6 +276,23 @@ public class ScreenGestures extends XposedModPack {
 				if ((action == ACTION_DOWN || action == ACTION_MOVE)) {
 					if (doubleTap && !SystemUtils.isFlashOn() && uptimeMillis() - ev.getDownTime() > HOLD_DURATION) {
 						turnedByTTT = true;
+
+						try { //A13 doesn't have such thing
+							View mView = (View) getObjectField(NotificationPanelViewController, "mView");
+
+							@SuppressLint("DiscouragedApi")
+							View longPressReceiver = mView.findViewById(mContext.getResources().getIdentifier("keyguard_long_press", "id", mContext.getPackageName()));
+							mLongPressHook = hookAllMethods(longPressReceiver.getClass(), "onTouchEvent", new XC_MethodHook() {
+								@Override
+								protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+									if(param.thisObject == longPressReceiver)
+									{
+										param.setResult(false);
+									}
+								}
+							}).iterator().next();
+						} catch (Throwable ignored){}
+
 						callMethod(SystemUtils.PowerManager(), "wakeUp", uptimeMillis());
 						SystemUtils.setFlash(true);
 						SystemUtils.vibrate(EFFECT_TICK, USAGE_ACCESSIBILITY);
@@ -309,6 +329,13 @@ public class ScreenGestures extends XposedModPack {
 
 	private void turnOffTTT() {
 		turnedByTTT = false;
+
+		if(mLongPressHook != null)
+		{
+			mLongPressHook.unhook();
+			mLongPressHook = null;
+		}
+
 		SystemUtils.setFlash(false);
 	}
 }

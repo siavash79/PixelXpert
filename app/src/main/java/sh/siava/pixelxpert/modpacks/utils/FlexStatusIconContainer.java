@@ -347,9 +347,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 				}
 				setMeasuredDimension(totalWidth, MeasureSpec.getSize(heightMeasureSpec));
 			}
-		} catch (Throwable e) {
-			log("PixelXpert Error - Flex Statusbar Container");
-			log(e);
+		} catch (Throwable ignored) {
 			setDefaultResponse(widthMeasureSpec, heightMeasureSpec);
 		}
 	}

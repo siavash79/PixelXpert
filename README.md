@@ -92,7 +92,7 @@ This project is open source and free for usage, build or copy. However, if you r
 - apsun@github for remote-preferences
 - @nijel8 for double-tap to wake
 
-**Translations:**
+**Translations:**  
 [![Crowdin](https://badges.crowdin.net/aospmods/localized.svg)](https://crowdin.com/project/aospmods)
 
 - @ElTifo Portuguese

@@ -227,6 +227,14 @@
 			android:title="@string/expand_notifications_icons_title"
 			app:iconSpaceReserved="false" />
 
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="DisableOngoingNotifDismiss"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/disbale_ongoing_notif_dismiss_title"
+			app:iconSpaceReserved="false" />
+
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			android:key="HeadupAutoDismissNotificationDecay"
 			android:title="@string/heads_up_notification_duration"

@@ -1,16 +1,18 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
+import android.service.notification.StatusBarNotification;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
@@ -21,6 +23,7 @@ public class NotificationManager extends XposedModPack {
 	private Object HeadsUpManager = null;
 
 	private static int HeadupAutoDismissNotificationDecay = -1;
+	private boolean DisableOngoingNotifDismiss = false;
 
 	public NotificationManager(Context context) {
 		super(context);
@@ -29,10 +32,10 @@ public class NotificationManager extends XposedModPack {
 	@Override
 	public void updatePrefs(String... Key) {
 		try {
-			HeadupAutoDismissNotificationDecay = RangeSliderPreference.getValues(XPrefs.Xprefs, "HeadupAutoDismissNotificationDecay", -1).get(0).intValue();
+			HeadupAutoDismissNotificationDecay = RangeSliderPreference.getValues(Xprefs, "HeadupAutoDismissNotificationDecay", -1).get(0).intValue();
+			DisableOngoingNotifDismiss = Xprefs.getBoolean("DisableOngoingNotifDismiss", false);
 			applyDurations();
-		} catch (Throwable ignored) {
-		}
+		} catch (Throwable ignored) {}
 	}
 
 	@Override
@@ -50,6 +53,14 @@ public class NotificationManager extends XposedModPack {
 			}
 		});
 
+		hookAllMethods(StatusBarNotification.class, "isNonDismissable", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(DisableOngoingNotifDismiss) {
+					param.setResult((boolean) param.getResult() || ((StatusBarNotification) param.thisObject).isOngoing());
+				}
+			}
+		});
 	}
 
 	private void applyDurations() {

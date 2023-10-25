@@ -79,6 +79,11 @@ The module is also released in 2 flavors with different download and update proc
 *No matter which flavor you're on, you can always switch to the other one with in-app updater
 <hr>
 
+### **Translations:**  
+[![Crowdin](https://badges.crowdin.net/aospmods/localized.svg)](https://crowdin.com/project/aospmods)  
+Want to help translate Pixel Xpert to your language? Visit [Crowdin](https://crowdin.com/project/aospmods)
+<hr>
+
 ### **Donations:**
 This project is open source and free for usage, build or copy. However, if you really feel like it, you can donate to your favorite charity on our behalf, or help funding education for children in need, at [Child Foundation](https://mycf.childfoundation.org/s/donate)
 <hr>
@@ -92,33 +97,6 @@ This project is open source and free for usage, build or copy. However, if you r
 - apsun@github for remote-preferences
 - @nijel8 for double-tap to wake
 
-**Translations:**  
-[![Crowdin](https://badges.crowdin.net/aospmods/localized.svg)](https://crowdin.com/project/aospmods)
-
-- @ElTifo Portuguese
-- @cracky5322 Chinese Traditional
-- @JohnsonRan Chinese Simplified
-- @huajijam Chinese Simplified, Chinese Traditional
-- @TireX228 Russian
-- @ygorigor Romanian
-- @krystianokris Polish
-- @HofaTheRipper German
-- @acuicultor Spanish
-- @tomaja18 Spanish
-- @n3rd3x3 Spanish
-- @TeaqariaWTF Turkish
-- @EleoXDA Turkish, German, Russian
-- @nmayorga092   Spanish
-- @vitalitk Ukrainian
-- @siavash79 Persian
-- @abalam1980 Dutch
-- @trinhloivn Vietnamese
-- @xxz3 Italian
-- zz842@Telegram Hebrew
-- @Katsuyuki-Karasawa Japanese
-- @potatosalad775 Korean
-- @hcosserat French
-- @deepanshpandey Hindi
 
 **UI design:**  
 - @Mahmud0808  

@@ -1,3 +1,8 @@
+**canary-291**  
+- Added option to disable dismissing the ongoing notifications (A14+)  
+- A14: Fixed lockscreen customization button showing up during lockscreen double-tap-torch  
+- Moved translations to crowdin  
+  
 **canary-290**  
 - Introducing Pixel Xpert! From the beginning, AOSPMods was designed using AOSP source code, with Pixel phones in mind. But the name was confusing to many people running AOSP based custom roms. So, in favor of more clarity, we've decided to rename to module to Pixel Xpert Also, since we are not maintaining the fonts and overlays which were part of "Full Package", they are now removed from the module permanently.  
   

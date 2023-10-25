@@ -1,7 +1,7 @@
 id=PixelXpert
 name=Pixel Xpert
-version=canary-290
-versionCode=290
+version=canary-291
+versionCode=291
 author=Siavash79 + ElTifo
 description=Xposed based module for customizations on SystemUI on AOSP based roms. Supports Android 12+
 updateJson=https://raw.githubusercontent.com/siavash79/PixelXpert/canary/MagiskModuleUpdate_Xposed.json

@@ -321,6 +321,9 @@
 	<string name="statusbar_long_press_app_switch">Long press statusbar to switch profile</string>
 	<string name="statusbar_app_switch_icon">Show an icon on statusbar when switching is available</string>
 
+	<!-- Cloned apps bragging message -->
+	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrate on outgoing call answered</string>
 	<string name="vibrate_on_call_drop_title">Vibrate when call disconnects</string>

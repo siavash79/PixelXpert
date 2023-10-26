@@ -2,7 +2,9 @@ package sh.siava.pixelxpert.modpacks.settings;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
 import android.annotation.SuppressLint;
@@ -15,12 +17,15 @@ import java.util.ArrayList;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.Constants;
+import sh.siava.pixelxpert.modpacks.ResourceManager;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
-@SuppressWarnings({"RedundantThrows", "deprecation"})
+@SuppressWarnings({"RedundantThrows"})
 public class AppCloneEnabler extends XposedModPack {
 	private static final String listenPackage = Constants.SETTINGS_PACKAGE;
+	private static final int AVAILABLE = 0;
 
 	public AppCloneEnabler(Context context) {
 		super(context);
@@ -73,7 +78,19 @@ public class AppCloneEnabler extends XposedModPack {
 			@SuppressLint("ResourceType")
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				param.setResult(0);
+				param.setResult(AVAILABLE);
+			}
+		});
+
+		hookAllMethods(ClonedAppsPreferenceControllerClass, "updateSummary", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				callMethod(
+						getObjectField(param.thisObject, "mPreference"),
+						"setSummary",
+						ResourceManager.modRes.getText(R.string.settings_cloned_apps_active));
+
+				param.setResult(null);
 			}
 		});
 	}

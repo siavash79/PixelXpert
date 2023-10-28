@@ -1,6 +1,9 @@
 <resources>
 
-	<style name="AppTheme.PixelXpert" parent="Theme.Material3.DayNight">
+	<style name="AppTheme.PixelXpert" parent="Theme.Material3.DayNight.NoActionBar">
+		<!-- Window layout. -->
+		<item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
 		<!-- Primary brand color. -->
 		<item name="colorPrimary">@color/ui_accent</item>
 		<item name="colorPrimaryDark">@color/ui_accent</item>
@@ -20,8 +23,10 @@
 		<item name="android:textColorSecondary">@color/text_color_secondary</item>
 		<item name="textAppearanceListItem">@style/TextAppearance.App.ListItem.Title</item>
 		<item name="android:windowLightStatusBar">?attr/isLightTheme</item>
-		<item name="android:statusBarColor">@color/color_accent_0_10_overlay</item>
+		<item name="android:statusBarColor">@android:color/transparent</item>
 		<item name="android:navigationBarColor">@android:color/transparent</item>
+		<item name="android:windowLightNavigationBar">?attr/isLightTheme</item>
+		<item name="android:enforceNavigationBarContrast">false</item>
 		<item name="android:windowBackground">@color/ui_bg</item>
 		<item name="android:colorBackground">@color/ui_bg</item>
 		<item name="fontFamily">@font/google_sans_text_400</item>

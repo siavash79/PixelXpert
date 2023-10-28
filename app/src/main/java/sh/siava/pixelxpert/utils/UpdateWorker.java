@@ -23,7 +23,7 @@ import com.topjohnwu.superuser.Shell;
 
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
-import sh.siava.pixelxpert.ui.activities.UpdateActivity;
+import sh.siava.pixelxpert.ui.activities.SettingsActivity;
 import sh.siava.pixelxpert.ui.fragments.UpdateFragment;
 
 public class UpdateWorker extends ListenableWorker {
@@ -61,8 +61,9 @@ public class UpdateWorker extends ListenableWorker {
 	}
 
 	private void showUpdateNotification() {
-		Intent notificationIntent = new Intent(mContext, UpdateActivity.class);
+		Intent notificationIntent = new Intent(mContext, SettingsActivity.class);
 		notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		notificationIntent.putExtra("newUpdate", true);
 
 		PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
 

@@ -1,5 +1,6 @@
-package sh.siava.pixelxpert.ui.activities;
+package sh.siava.pixelxpert.ui.fragments;
 
+import static android.content.Context.RECEIVER_EXPORTED;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -18,6 +19,7 @@ import android.os.RemoteException;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,9 +27,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.fragment.app.Fragment;
 
 import com.topjohnwu.superuser.ipc.RootService;
 
@@ -39,19 +41,17 @@ import java.util.Objects;
 
 import sh.siava.pixelxpert.IRootProviderService;
 import sh.siava.pixelxpert.R;
-import sh.siava.pixelxpert.databinding.ActivityHookedPackagesBinding;
+import sh.siava.pixelxpert.databinding.FragmentHooksBinding;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.service.RootProvider;
+import sh.siava.pixelxpert.ui.activities.BaseActivity;
 import sh.siava.pixelxpert.utils.AppUtils;
 
-@SuppressWarnings("FieldCanBeLocal")
-public class HookedPackagesActivity extends AppCompatActivity {
+@SuppressWarnings({"FieldCanBeLocal", "unused"})
+public class HooksFragment extends Fragment {
 
-	/**
-	 * @noinspection unused
-	 */
+	private FragmentHooksBinding binding;
 	private final String TAG = getClass().getSimpleName();
-	private ActivityHookedPackagesBinding binding;
 	IntentFilter intentFilterHookedPackages = new IntentFilter();
 	private final List<String> hookedPackageList = new ArrayList<>();
 	private List<String> monitorPackageList;
@@ -64,14 +64,8 @@ public class HookedPackagesActivity extends AppCompatActivity {
 	private final String reboot_key = "reboot_pending";
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		binding = ActivityHookedPackagesBinding.inflate(getLayoutInflater());
-		setContentView(binding.getRoot());
-		setTitle(getText(R.string.hooked_packages_title));
-
-		Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.color_surface_overlay));
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		binding = FragmentHooksBinding.inflate(inflater, container, false);
 
 		if (savedInstanceState != null) {
 			rebootPending = savedInstanceState.getBoolean(reboot_key);
@@ -82,12 +76,15 @@ public class HookedPackagesActivity extends AppCompatActivity {
 		if (!rebootPending) {
 			binding.rebootButton.hide();
 		}
+
 		startRootService();
+
+		return binding.getRoot();
 	}
 
 	private void startRootService() {
 		// Start RootService connection
-		Intent intent = new Intent(this, RootProvider.class);
+		Intent intent = new Intent(requireContext(), RootProvider.class);
 		mCoreRootServiceConnection = new ServiceConnection() {
 			@Override
 			public void onServiceConnected(ComponentName name, IBinder service) {
@@ -105,16 +102,19 @@ public class HookedPackagesActivity extends AppCompatActivity {
 	}
 
 	private void onRootServiceStarted() {
+		if (getContext() == null) {
+			return;
+		}
+
 		intentFilterHookedPackages.addAction(Constants.ACTION_XPOSED_CONFIRMED);
-		registerReceiver(receiverHookedPackages, intentFilterHookedPackages, RECEIVER_EXPORTED);
+		requireContext().registerReceiver(receiverHookedPackages, intentFilterHookedPackages, RECEIVER_EXPORTED);
 
 		monitorPackageList = Arrays.asList(getResources().getStringArray(R.array.module_scope));
 		checkHookedPackages();
 
-		SwipeRefreshLayout mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
-		mSwipeRefreshLayout.setOnRefreshListener(() -> {
+		binding.swipeRefreshLayout.setOnRefreshListener(() -> {
 			checkHookedPackages();
-			mSwipeRefreshLayout.setRefreshing(false);
+			binding.swipeRefreshLayout.setRefreshing(false);
 		});
 	}
 
@@ -132,7 +132,7 @@ public class HookedPackagesActivity extends AppCompatActivity {
 					if (pkgName.equals(broadcastPackageName)) {
 						binding.content.post(() -> {
 							desc.setText(getText(R.string.package_hooked_successful));
-							desc.setTextColor(getColor(R.color.success));
+							desc.setTextColor(requireContext().getColor(R.color.success));
 						});
 					}
 				}
@@ -171,7 +171,7 @@ public class HookedPackagesActivity extends AppCompatActivity {
 		hookedPackageList.clear();
 
 		initListItem(monitorPackageList);
-		new Thread(() -> sendBroadcast(new Intent().setAction(Constants.ACTION_CHECK_XPOSED_ENABLED))).start();
+		new Thread(() -> requireContext().sendBroadcast(new Intent().setAction(Constants.ACTION_CHECK_XPOSED_ENABLED))).start();
 		waitAndRefresh();
 	}
 
@@ -183,19 +183,18 @@ public class HookedPackagesActivity extends AppCompatActivity {
 		dotCount = 0;
 		countDownTimer.cancel();
 
-		if (binding.content.getChildCount() > 0)
+		if (binding.content.getChildCount() > 0) {
 			binding.content.removeAllViews();
+		}
 
 		for (int i = 0; i < pack.size(); i++) {
-			View list = LayoutInflater.from(this).inflate(R.layout.view_hooked_package_list, binding.content, false);
+			View list = LayoutInflater.from(requireContext()).inflate(R.layout.view_hooked_package_list, binding.content, false);
+			int margin = getResources().getDimensionPixelSize(R.dimen.ui_container_margin_side);
+			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) list.getLayoutParams();
 			if (i == 0) {
-				LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) list.getLayoutParams();
-				int margin = getResources().getDimensionPixelSize(R.dimen.ui_container_margin_side);
-				params.setMargins(margin, dp2px(this, 12), margin, dp2px(this, 6));
+				params.setMargins(margin, dp2px(requireContext(), 12), margin, dp2px(requireContext(), 6));
 			} else if (i == pack.size() - 1) {
-				LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) list.getLayoutParams();
-				int margin = getResources().getDimensionPixelSize(R.dimen.ui_container_margin_side);
-				params.setMargins(margin, dp2px(this, 6), margin, dp2px(this, 12));
+				params.setMargins(margin, dp2px(requireContext(), 6), margin, dp2px(requireContext(), 12));
 			}
 
 			TextView title = list.findViewById(R.id.title);
@@ -206,7 +205,7 @@ public class HookedPackagesActivity extends AppCompatActivity {
 				desc.setText(getString(R.string.package_checking, ""));
 			} else {
 				desc.setText(getText(R.string.package_not_found));
-				desc.setTextColor(getColor(R.color.error));
+				desc.setTextColor(requireContext().getColor(R.color.error));
 			}
 
 			ImageView preview = list.findViewById(R.id.icon);
@@ -220,15 +219,15 @@ public class HookedPackagesActivity extends AppCompatActivity {
 				try {
 					if (mRootServiceIPC.activateInLSPosed(pack.get(finalI))) {
 						activateInLSPosed.animate().setDuration(300).withEndAction(() -> activateInLSPosed.setVisibility(GONE)).start();
-						Toast.makeText(getApplicationContext(), getText(R.string.package_activated), Toast.LENGTH_SHORT).show();
+						Toast.makeText(requireContext(), getText(R.string.package_activated), Toast.LENGTH_SHORT).show();
 						binding.rebootButton.show();
 						rebootPending = true;
 					} else {
-						Toast.makeText(getApplicationContext(), getText(R.string.package_activation_failed), Toast.LENGTH_SHORT).show();
+						Toast.makeText(requireContext(), getText(R.string.package_activation_failed), Toast.LENGTH_SHORT).show();
 						activateInLSPosed.setEnabled(true);
 					}
 				} catch (RemoteException e) {
-					Toast.makeText(getApplicationContext(), getText(R.string.package_activation_failed), Toast.LENGTH_SHORT).show();
+					Toast.makeText(requireContext(), getText(R.string.package_activation_failed), Toast.LENGTH_SHORT).show();
 					activateInLSPosed.setEnabled(true);
 					e.printStackTrace();
 				}
@@ -236,7 +235,7 @@ public class HookedPackagesActivity extends AppCompatActivity {
 
 			list.setOnClickListener(view -> {
 				try {
-					Intent intent = getPackageManager().getLaunchIntentForPackage(pack.get(finalI));
+					Intent intent = requireContext().getPackageManager().getLaunchIntentForPackage(pack.get(finalI));
 					if (intent != null) {
 						startActivity(intent);
 					}
@@ -256,9 +255,9 @@ public class HookedPackagesActivity extends AppCompatActivity {
 
 			if (hookedPackageList.contains(pkgName)) {
 				desc.setText(getText(R.string.package_hooked_successful));
-				desc.setTextColor(getColor(R.color.success));
+				desc.setTextColor(requireContext().getColor(R.color.success));
 			} else {
-				desc.setTextColor(getColor(R.color.error));
+				desc.setTextColor(requireContext().getColor(R.color.error));
 
 				desc.setText(getText(
 						isAppInstalled(pkgName)
@@ -286,9 +285,9 @@ public class HookedPackagesActivity extends AppCompatActivity {
 
 	private Drawable getAppIcon(String packageName) {
 		try {
-			return getPackageManager().getApplicationIcon(packageName);
+			return requireContext().getPackageManager().getApplicationIcon(packageName);
 		} catch (PackageManager.NameNotFoundException ignored) {
-			return ContextCompat.getDrawable(this, R.drawable.ic_android);
+			return ContextCompat.getDrawable(requireContext(), R.drawable.ic_android);
 		}
 	}
 
@@ -331,27 +330,32 @@ public class HookedPackagesActivity extends AppCompatActivity {
 	}
 
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		unregisterReceiver(receiverHookedPackages);
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public boolean onSupportNavigateUp() {
-		onBackPressed();
-		return true;
-	}
-
-	@Override
-	protected void onSaveInstanceState(@NonNull Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putBoolean(reboot_key, rebootPending);
 		super.onSaveInstanceState(outState);
 	}
 
 	@Override
-	protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-		rebootPending = savedInstanceState.getBoolean(reboot_key);
-		super.onRestoreInstanceState(savedInstanceState);
+	public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+		super.onViewStateRestored(savedInstanceState);
+		if (savedInstanceState != null) {
+			rebootPending = savedInstanceState.getBoolean(reboot_key);
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		countDownTimer.cancel();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		try {
+			requireContext().unregisterReceiver(receiverHookedPackages);
+		} catch (Exception ignored) {
+		}
+		countDownTimer.cancel();
 	}
 }

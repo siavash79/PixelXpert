@@ -11,6 +11,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
+import sh.siava.pixelxpert.ui.activities.BaseActivity;
+
 public abstract class ControlledPreferenceFragmentCompat extends PreferenceFragmentCompat {
 	public SharedPreferences mPreferences;
 	private final OnSharedPreferenceChangeListener changeListener = (sharedPreferences, key) -> updateScreen(key);
@@ -40,7 +42,9 @@ public abstract class ControlledPreferenceFragmentCompat extends PreferenceFragm
 	@Override
 	public void onResume() {
 		super.onResume();
-		requireActivity().setTitle(getTitle());
+		if (getContext() != null) {
+			BaseActivity.setHeader(getContext(), getTitle());
+		}
 	}
 
 	@Override

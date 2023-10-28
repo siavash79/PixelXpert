@@ -18,7 +18,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.LocaleList;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,21 +30,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.topjohnwu.superuser.Shell;
 
-import java.io.File;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -54,6 +48,9 @@ import java.util.regex.Pattern;
 
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
+import sh.siava.pixelxpert.databinding.SettingsActivityBinding;
+import sh.siava.pixelxpert.ui.fragments.HooksFragment;
+import sh.siava.pixelxpert.ui.fragments.UpdateFragment;
 import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchConfiguration;
 import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreference;
 import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreferenceResult;
@@ -65,10 +62,13 @@ import sh.siava.pixelxpert.utils.PreferenceHelper;
 import sh.siava.pixelxpert.utils.UpdateScheduler;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
-public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback, SearchPreferenceResultListener {
+public class SettingsActivity extends BaseActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback, SearchPreferenceResultListener {
 	private static final int REQUEST_IMPORT = 7;
 	private static final int REQUEST_EXPORT = 9;
 	private static final String TITLE_TAG = "settingsActivityTitle";
+	private SettingsActivityBinding binding;
+	private static final String mData = "mDataKey";
+	private Integer selectedFragment = null;
 	Context DPContext;
 
 	String TAG = getClass().getSimpleName();
@@ -82,12 +82,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 	public static void backButtonEnabled() {
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setDisplayShowHomeEnabled(true);
 		}
 	}
 
-	public void backButtonDisabled() {
+	public static void backButtonDisabled() {
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(false);
+			actionBar.setDisplayShowHomeEnabled(false);
 		}
 	}
 
@@ -100,15 +102,16 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		binding = SettingsActivityBinding.inflate(getLayoutInflater());
 		DPContext = this.createDeviceProtectedStorageContext();
 		DPContext.moveSharedPreferencesFrom(this, BuildConfig.APPLICATION_ID + "_preferences");
 		super.onCreate(savedInstanceState);
 
 		tryMigratePrefs();
 
-		backButtonDisabled();
 		createNotificationChannel();
 		fragmentManager = getSupportFragmentManager();
+		setSupportActionBar(binding.header.toolbar);
 		actionBar = getSupportActionBar();
 
 		prefsList.add(new Object[]{R.xml.header_preferences, R.string.app_name, new HeaderFragment()});
@@ -133,33 +136,134 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 		PreferenceHelper.init(getDefaultSharedPreferences(createDeviceProtectedStorageContext()));
 
-		setContentView(R.layout.settings_activity);
+		setContentView(binding.getRoot());
 
 		if (savedInstanceState == null) {
-			FragmentManager fragmentManager = getSupportFragmentManager();
-			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-			fragmentTransaction.setCustomAnimations(R.anim.fragment_fade_in, R.anim.fragment_fade_out, R.anim.fragment_fade_in, R.anim.fragment_fade_out);
-			fragmentTransaction.replace(R.id.settings, new HeaderFragment()).commit();
+			replaceFragment(new HeaderFragment());
 		} else {
-			setTitle(savedInstanceState.getCharSequence(TITLE_TAG));
+			setHeader(this, savedInstanceState.getCharSequence(TITLE_TAG));
 		}
 
+		if (getIntent() != null && getIntent().getBooleanExtra("updateTapped", false)) {
+			Intent intent = getIntent();
+			Bundle bundle = new Bundle();
+			bundle.putBoolean("updateTapped", intent.getBooleanExtra("updateTapped", false));
+			bundle.putString("filePath", intent.getStringExtra("filePath"));
+			UpdateFragment updateFragment = new UpdateFragment();
+			updateFragment.setArguments(bundle);
+			replaceFragment(updateFragment);
+		} else if (getIntent() != null && "true".equals(getIntent().getStringExtra("migratePrefs"))) {
+			Intent intent = getIntent();
+			Bundle bundle = new Bundle();
+			bundle.putString("migratePrefs", intent.getStringExtra("migratePrefs"));
+			UpdateFragment updateFragment = new UpdateFragment();
+			updateFragment.setArguments(bundle);
+			replaceFragment(updateFragment);
+		} else if (getIntent() != null && getIntent().getBooleanExtra("newUpdate", false)) {
+			replaceFragment(new UpdateFragment());
+		}
+
+		setupBottomNavigationView();
+	}
+
+	@SuppressLint("NonConstantResourceId")
+	private void setupBottomNavigationView() {
 		getSupportFragmentManager().addOnBackStackChangedListener(() -> {
-			if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-				setTitle(R.string.title_activity_settings);
-				backButtonDisabled();
+			String tag = getTopFragment();
+
+			if (Objects.equals(tag, HeaderFragment.class.getSimpleName())) {
+				selectedFragment = R.id.navigation_home;
+				binding.bottomNavigationView.getMenu().getItem(0).setChecked(true);
+				setHeader(this, getString(R.string.app_name));
+			} else if (Objects.equals(tag, UpdateFragment.class.getSimpleName())) {
+				selectedFragment = R.id.navigation_update;
+				binding.bottomNavigationView.getMenu().getItem(1).setChecked(true);
+				setHeader(this, getString(R.string.menu_updates));
+			} else if (Objects.equals(tag, HooksFragment.class.getSimpleName())) {
+				selectedFragment = R.id.navigation_hooks;
+				binding.bottomNavigationView.getMenu().getItem(2).setChecked(true);
+				setHeader(this, getString(R.string.hooked_packages_title));
+			} else if (Objects.equals(tag, OwnPrefsFragment.class.getSimpleName())) {
+				selectedFragment = R.id.navigation_settings;
+				binding.bottomNavigationView.getMenu().getItem(3).setChecked(true);
+				setHeader(this, getString(R.string.own_prefs_header));
 			}
 		});
 
-		Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.color_surface_overlay));
+		binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+			String tag = getTopFragment();
+
+			switch (item.getItemId()) {
+				case R.id.navigation_home:
+					if (!Objects.equals(tag, HeaderFragment.class.getSimpleName())) {
+						selectedFragment = R.id.navigation_home;
+						replaceFragment(new HeaderFragment());
+					}
+					return true;
+				case R.id.navigation_update:
+					if (!Objects.equals(tag, UpdateFragment.class.getSimpleName())) {
+						selectedFragment = R.id.navigation_update;
+						replaceFragment(new UpdateFragment());
+					}
+					return true;
+				case R.id.navigation_hooks:
+					if (!Objects.equals(tag, HooksFragment.class.getSimpleName())) {
+						selectedFragment = R.id.navigation_hooks;
+						replaceFragment(new HooksFragment());
+					}
+					return true;
+				case R.id.navigation_settings:
+					if (!Objects.equals(tag, OwnPrefsFragment.class.getSimpleName())) {
+						selectedFragment = R.id.navigation_settings;
+						replaceFragment(new OwnPrefsFragment());
+					}
+					return true;
+				default:
+					return true;
+			}
+		});
+	}
+
+	private String getTopFragment() {
+		String[] fragment = {null};
+
+		int last = getSupportFragmentManager().getFragments().size() - 1;
+
+		if (last >= 0) {
+			Fragment topFragment = getSupportFragmentManager().getFragments().get(last);
+
+			if (topFragment instanceof HeaderFragment)
+				fragment[0] = HeaderFragment.class.getSimpleName();
+			else if (topFragment instanceof UpdateFragment)
+				fragment[0] = UpdateFragment.class.getSimpleName();
+			else if (topFragment instanceof HooksFragment)
+				fragment[0] = HooksFragment.class.getSimpleName();
+			else if (topFragment instanceof OwnPrefsFragment)
+				fragment[0] = OwnPrefsFragment.class.getSimpleName();
+		}
+
+		return fragment[0];
+	}
+
+	@Override
+	protected void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (selectedFragment != null) outState.putInt(mData, selectedFragment);
+		// Save current activity title so we can set it again after a configuration change
+		outState.putCharSequence(TITLE_TAG, getTitle());
+	}
+
+	@Override
+	public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		selectedFragment = savedInstanceState.getInt(mData);
 	}
 
 	private void tryMigratePrefs() {
 		String migrateFileName = "PX_migrate.tmp";
 		@SuppressLint("SdCardPath")
 		String migrateFilePath = "/sdcard/" + migrateFileName;
-		if(Shell.cmd(String.format("stat %s", migrateFilePath)).exec().getOut().size() > 0)
-		{
+		if (Shell.cmd(String.format("stat %s", migrateFilePath)).exec().getOut().size() > 0) {
 			String PXPrefsPath = "/data/user_de/0/sh.siava.pixelxpert/shared_prefs/sh.siava.pixelxpert_preferences.xml";
 			Shell.cmd(String.format("mv %s %s", migrateFilePath, PXPrefsPath)).exec();
 			Shell.cmd(String.format("chmod 777 %s", PXPrefsPath)).exec(); //system will correct the permissions upon next launch. let's just give it access to do so
@@ -184,23 +288,18 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		SharedPreferences prefs = getDefaultSharedPreferences(newBase.createDeviceProtectedStorageContext());
 
 		String localeCode = prefs.getString("appLanguage", "");
+		Locale locale = !localeCode.isEmpty() ? Locale.forLanguageTag(localeCode) : Locale.getDefault();
 
-		if (!localeCode.isEmpty()) {
-			Locale locale = Locale.forLanguageTag(localeCode);
+		Resources res = newBase.getResources();
+		Configuration configuration = res.getConfiguration();
 
-			Resources res = newBase.getResources();
-			Configuration configuration = res.getConfiguration();
+		configuration.setLocale(locale);
 
-			configuration.setLocale(locale);
+		LocaleList localeList = new LocaleList(locale);
+		LocaleList.setDefault(localeList);
+		configuration.setLocales(localeList);
 
-			LocaleList localeList = new LocaleList(locale);
-			LocaleList.setDefault(localeList);
-			configuration.setLocales(localeList);
-
-			newBase = newBase.createConfigurationContext(configuration);
-		}
-
-		super.attachBaseContext(newBase);
+		super.attachBaseContext(newBase.createConfigurationContext(configuration));
 	}
 
 	private void createNotificationChannel() {
@@ -215,18 +314,11 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (getTitle() == getString(R.string.title_activity_settings)) {
+		if (Objects.equals(getTopFragment(), HeaderFragment.class.getSimpleName())) {
 			backButtonDisabled();
 		} else {
 			backButtonEnabled();
 		}
-	}
-
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		// Save current activity title so we can set it again after a configuration change
-		outState.putCharSequence(TITLE_TAG, getTitle());
 	}
 
 	@Override
@@ -246,7 +338,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 		fragment.setTargetFragment(caller, 0);
 		// Replace the existing Fragment with the new Fragment
 		replaceFragment(fragment);
-		setTitle(pref.getTitle());
+		setHeader(this, pref.getTitle());
 		backButtonEnabled();
 		return true;
 	}
@@ -266,9 +358,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 			importExportSettings(true);
 		} else if (itemID == R.id.menu_importPrefs) {
 			importExportSettings(false);
-		} else if (itemID == R.id.hooked_packages) {
-			Intent intent = new Intent(this, HookedPackagesActivity.class);
-			startActivity(intent);
 		} else if (itemID == R.id.menu_restart) {
 			AppUtils.Restart("system");
 		} else if (itemID == R.id.menu_restartSysUI) {
@@ -374,12 +463,31 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 				}
 			}
 		}
+
+		@Override
+		public void onResume() {
+			super.onResume();
+			backButtonDisabled();
+		}
 	}
 
 	private static void replaceFragment(Fragment fragment) {
+		String tag = fragment.getClass().getSimpleName();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		fragmentTransaction.setCustomAnimations(R.anim.fragment_fade_in, R.anim.fragment_fade_out, R.anim.fragment_fade_in, R.anim.fragment_fade_out);
-		fragmentTransaction.replace(R.id.settings, fragment).addToBackStack(null).commit();
+		fragmentTransaction.replace(R.id.settings, fragment, tag);
+		if (Objects.equals(tag, HeaderFragment.class.getSimpleName())) {
+			fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		} else if (Objects.equals(tag, UpdateFragment.class.getSimpleName()) ||
+				Objects.equals(tag, HooksFragment.class.getSimpleName()) ||
+				Objects.equals(tag, OwnPrefsFragment.class.getSimpleName())) {
+			fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			fragmentTransaction.addToBackStack(tag);
+		} else {
+			fragmentTransaction.addToBackStack(tag);
+		}
+
+		fragmentTransaction.commit();
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -813,7 +921,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 			findPreference("CheckForUpdate")
 					.setOnPreferenceClickListener(preference -> {
-						startActivity(new Intent(getActivity(), UpdateActivity.class));
+						replaceFragment(new UpdateFragment());
 						return true;
 					});
 
@@ -833,7 +941,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 					.setOnPreferenceClickListener(preference -> {
 						try {
 							Intent intent = new Intent(Intent.ACTION_VIEW);
-							intent.setData(Uri.parse("https://t.me/AOSPMods_Support"));
+							intent.setData(Uri.parse("https://t.me/PixelXpert_Discussion"));
 							startActivity(intent);
 						} catch (Exception ignored) {
 							Toast.makeText(getContext(), getString(R.string.browser_not_found), Toast.LENGTH_SHORT).show();
@@ -845,7 +953,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 					.setOnPreferenceClickListener(preference -> {
 						try {
 							Intent intent = new Intent(Intent.ACTION_VIEW);
-							intent.setData(Uri.parse("https://github.com/siavash79/PixelXpert/wiki/AOSPMods-Wiki"));
+							intent.setData(Uri.parse("https://github.com/siavash79/PixelXpert/wiki/PixelXpert-Wiki"));
 							startActivity(intent);
 						} catch (Exception ignored) {
 							Toast.makeText(getContext(), getString(R.string.browser_not_found), Toast.LENGTH_SHORT).show();
@@ -906,5 +1014,11 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 			getActivity().finish();
 		}
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		setIntent(intent);
 	}
 }

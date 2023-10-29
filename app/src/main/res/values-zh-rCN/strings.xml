@@ -284,7 +284,7 @@
 	<string name="statusbar_long_press_app_switch">Long press statusbar to switch profile</string>
 	<string name="statusbar_app_switch_icon">Show an icon on statusbar when switching is available</string>
 	<!-- Cloned apps bragging message -->
-	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<string name="settings_cloned_apps_active">通过 <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font> 解锁所有应用：开始 享受吧！</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">去电被接通时震动</string>
 	<string name="vibrate_on_call_drop_title">结束通话时震动</string>

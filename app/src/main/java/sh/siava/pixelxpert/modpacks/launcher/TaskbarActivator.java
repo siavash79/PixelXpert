@@ -121,6 +121,18 @@ public class TaskbarActivator extends XposedModPack {
 		Class<?> LauncherModelClass = findClass("com.android.launcher3.LauncherModel", lpparam.classLoader);
 		Class<?> BaseDraggingActivityClass = findClass("com.android.launcher3.BaseDraggingActivity", lpparam.classLoader);
 		Class<?> DisplayControllerClass = findClass("com.android.launcher3.util.DisplayController", lpparam.classLoader);
+		Class<?> DisplayControllerInfoClass = findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
+
+		hookAllMethods(DisplayControllerInfoClass, "isTablet", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(taskbarMode == TASKBAR_DEFAULT) return;
+
+				boolean taskbarEnabled = taskbarMode == TASKBAR_ON;
+
+				if(taskbarEnabled) param.setResult(true);
+			}
+		});
 
 		hookAllMethods(DisplayControllerClass, "isTransientTaskbar", new XC_MethodHook() {
 			@Override
@@ -193,7 +205,7 @@ public class TaskbarActivator extends XposedModPack {
 
 				boolean taskbarEnabled = taskbarMode == TASKBAR_ON;
 
-				setObjectField(param.thisObject, "isTaskbarPresent", taskbarEnabled);
+//				setObjectField(param.thisObject, "isTaskbarPresent", taskbarEnabled);
 
 				if(taskbarEnabled)
 				{

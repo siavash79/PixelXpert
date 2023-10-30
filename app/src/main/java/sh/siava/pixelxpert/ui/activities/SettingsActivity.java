@@ -164,6 +164,25 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 
 		setupBottomNavigationView();
+
+		try {
+			Process process = Runtime.getRuntime().exec("getprop ro.build.id");
+			process.waitFor();
+			byte[] buffer = new byte[process.getInputStream().available()];
+			//noinspection ResultOfMethodCallIgnored
+			process.getInputStream().read(buffer);
+			String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
+			if (!Pattern.matches("^[T|U][A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
+			{
+				new MaterialAlertDialogBuilder(this, R.style.MaterialComponents_MaterialAlertDialog)
+						.setTitle(R.string.incompatible_alert_title)
+						.setMessage(R.string.incompatible_alert_body)
+						.setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss())
+						.show();
+			}
+		} catch (Throwable ignored) {
+		}
+
 	}
 
 	@SuppressLint("NonConstantResourceId")
@@ -417,23 +436,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		@Override
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			super.onCreatePreferences(savedInstanceState, rootKey);
-			try {
-				Process process = Runtime.getRuntime().exec("getprop ro.build.id");
-				process.waitFor();
-				byte[] buffer = new byte[process.getInputStream().available()];
-				//noinspection ResultOfMethodCallIgnored
-				process.getInputStream().read(buffer);
-				String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
-				if (!Pattern.matches("^[T|U][A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
-				{
-					new MaterialAlertDialogBuilder(getContext(), R.style.MaterialComponents_MaterialAlertDialog)
-							.setTitle(R.string.incompatible_alert_title)
-							.setMessage(R.string.incompatible_alert_body)
-							.setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss())
-							.show();
-				}
-			} catch (Throwable ignored) {
-			}
 
 			searchPreference = findPreference("searchPreference");
 			SearchConfiguration config = searchPreference.getSearchConfiguration();

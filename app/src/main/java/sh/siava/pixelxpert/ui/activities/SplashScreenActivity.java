@@ -19,6 +19,7 @@ import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ipc.RootService;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.databinding.ActivitySplashScreenBinding;
@@ -56,17 +57,12 @@ public class SplashScreenActivity extends AppCompatActivity {
 		mCoreRootServiceConnection = new ServiceConnection() {
 			@Override
 			public void onServiceConnected(ComponentName name, IBinder service) {
-				Log.d(TAG, "onServiceConnected: ");
 				mCoreRootServiceBound = true;
 				mRootServiceConnected.countDown();
-
-				// Update the UI
-				setCheckUIDone(mBinding.circularRootService.getId(), mBinding.doneRootService.getId(), mRootServiceConnected.getCount() == 0);
 			}
 
 			@Override
 			public void onServiceDisconnected(ComponentName name) {
-				Log.d(TAG, "onServiceDisconnected: ");
 				mCoreRootServiceBound = false;
 				mRootServiceConnected.countDown();
 			}
@@ -95,15 +91,31 @@ public class SplashScreenActivity extends AppCompatActivity {
 			try {
 				// Wait for all checks to pass and for all operations to finish
 				mRootCheckPassed.await();
-				mRootServiceConnected.await();
+
+				mRootServiceConnected.await(5, TimeUnit.SECONDS);
+
+				// Update the UI
+				setCheckUIDone(mBinding.circularRootService.getId(), mBinding.doneRootService.getId(), mRootServiceConnected.getCount() == 0);
 
 				// This is just for aesthetics: I don't want the splashscreen to be too fast
 				Thread.sleep(1000);
 
-				// Start the main activity
-				Intent intent1 = new Intent(SplashScreenActivity.this, SettingsActivity.class);
-				intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-				startActivity(intent1);
+				if(mRootServiceConnected.getCount() == 0)
+				{
+					// Start the main activity
+					Intent intent1 = new Intent(SplashScreenActivity.this, SettingsActivity.class);
+					intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					startActivity(intent1);
+				}
+				else
+				{
+					runOnUiThread(() ->
+							new MaterialAlertDialogBuilder(SplashScreenActivity.this, R.style.MaterialComponents_MaterialAlertDialog)
+									.setCancelable(false)
+									.setMessage(getText(R.string.root_access_denied))
+									.setPositiveButton(getText(R.string.exit), (dialog, i) -> System.exit(0))
+									.show());
+				}
 			} catch (InterruptedException e) {
 				Log.e(TAG, e.toString());
 			}

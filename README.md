@@ -43,26 +43,17 @@ AOSPMods is based on "pure" AOSP. Any changes in the ROM source code may (or may
 
 ### **Prerequisites:**
 - Compatible ROM (see Compatibility text above)
-- Device Rooted with Magisk 24.2+
+- Device Rooted with Magisk 24.2+ or KSU
 - LSPosed (Zygisk Version preferred)
 <hr>
 
 ### **How to install:**
 - Download the stable magisk module according to your firmware as mentioned above 
-- Install in magisk
+- Install in magisk/KSU
 - Reboot (no bootloops are expected)
 - Open AOSPMods app and apply changes
-<hr>
 
-### **Package Variants:**  
-Apart from modification on system elements, AOSPMods also includes a number of system overlays to modify fonts, system icons and colors.
-However, for those who are not interested on such overlays, we have added an Xposed-only package which, as the name says, only includes the system modification, without such system overlays. You can choose either package, and install the chosen one on your device.
-
-<ins>Xposed Package:</ins>
-- Includes only Xposed-based modification and has a rather smaller file-size. This is the one that module developers also use.
-
-<ins>Full Package:</ins>
-- Includes everything present in Xposed package, plus additional system overlay options.
+P.S. For KSU, there is an extra step of granting root access to PixelXpert as it doesn't request automatically as in Magisk
 <hr>
 
 ### **Release Variants:**  

@@ -1,3 +1,9 @@
+**canary-292**  
+- UI Improvement  
+- removed the remaining "reduce keyboard space" option from the app  
+- A14QPR1: Fixed taskbar (Note: Activating the taskbar with this release will trigger "tablet mode" on pixel launcher)  
+- New language: Hungarian! (translate your language via: https://crowdin.com/project/aospmods)  
+  
 **canary-291**  
 - Added option to disable dismissing the ongoing notifications (A14+)  
 - A14: Fixed lockscreen customization button showing up during lockscreen double-tap-torch  

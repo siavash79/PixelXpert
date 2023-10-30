@@ -492,4 +492,10 @@
 	<string name="root_access_denied">Root access denied. Please allow root access.</string>
 	<string name="exit">Exit</string>
 
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
+
 </resources>

@@ -57,22 +57,14 @@
 		</activity-alias>
 
 		<activity
-			android:name=".ui.activities.HookedPackagesActivity"
-			android:exported="false" />
-		<activity
-			android:name=".ui.activities.UpdateActivity"
-			android:exported="true"
-			android:label="@string/title_activity_update"
-			android:parentActivityName=".ui.activities.SettingsActivity">
+			android:name=".ui.activities.SettingsActivity"
+			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.RUN" />
 
 				<category android:name="android.intent.category.DEFAULT" />
 			</intent-filter>
 		</activity>
-		<activity
-			android:name=".ui.activities.SettingsActivity"
-			android:exported="false" />
 
 		<service
 			android:name=".service.tileServices.VolumeTileService"

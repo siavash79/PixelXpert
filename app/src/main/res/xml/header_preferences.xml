@@ -76,13 +76,13 @@
 		app:title="@string/misc_header"
 		search:ignore="true" />
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
-		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$OwnPrefsFragment"
-		app:icon="@drawable/ic_settings_pixelxpert"
-		app:key="own_header"
-		app:title="@string/own_prefs_header"
-		search:ignore="true" />
+<!--	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain-->
+<!--		android:layout="@layout/custom_preference"-->
+<!--		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$OwnPrefsFragment"-->
+<!--		app:icon="@drawable/ic_settings_pixelxpert"-->
+<!--		app:key="own_header"-->
+<!--		app:title="@string/own_prefs_header"-->
+<!--		search:ignore="true" />-->
 
 	<!-- Let's remove this for the time being...
 	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain

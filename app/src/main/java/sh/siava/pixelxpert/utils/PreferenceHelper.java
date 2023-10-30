@@ -59,6 +59,7 @@ public class PreferenceHelper {
 			case "IconShapesOverlayEx":
 			case "SignalIconsOverlayEx":
 			case "DTStylesOverlayEx":
+			case "ReduceKeyboardSpaceOverlay":
 				return showOverlays;
 
 			case "font_dependent":

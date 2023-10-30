@@ -19,7 +19,7 @@
 	<string name="notification_channel_update">Atualizações</string>
 	<string name="notification_channel_update_desc">Este canal mostra notificações acerca das últimas atualizações.</string>
 	<string name="new_update_title">Atualização disponível</string>
-	<string name="new_update_desc">Está disponível uma versão mais recente da AOSPMods</string>
+	<string name="new_update_desc">Está disponível uma nova versão da PixelXpert</string>
 	<string name="browser_not_found">Navegador não encontrado</string>
 	<string name="settings_general_section_title">Geral</string>
 	<string name="settings_update_section_title">Atualizações</string>
@@ -274,6 +274,7 @@
 	<string name="so_vol_longpress_skip">Manter premido para mudar de faixa</string>
 	<string name="notifications_header">Opções das notificações</string>
 	<string name="expand_notifications_icons_title">Mostrar botões expandir/encolher tudo</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Nunca dispensar as notificações em curso (A14+)</string>
 	<string name="heads_up_notification_duration">Duração das notificações no topo</string>
 	<string name="disable_overscroll">Desativar o efeito elástico no final da navegação</string>
 	<string name="overscroll_on_summary">Nota: Requer ativar as apps, para as quais pretende desativar o efeito elástico, no gestor da LSposed</string>
@@ -282,6 +283,8 @@
 	<string name="work_clone_profile_header">Perfil de Trabalho/Clone</string>
 	<string name="statusbar_long_press_app_switch">Mantenha pressionado a barra de estado para mudar de perfil</string>
 	<string name="statusbar_app_switch_icon">Mostrar um ícone na barra de estado quando a mudança for possível</string>
+	<!-- Cloned apps bragging message -->
+	<string name="settings_cloned_apps_active">Desbloqueado para todas as aplicações via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Desfrute!</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrar ao atender chamada</string>
 	<string name="vibrate_on_call_drop_title">Vibrar ao terminar chamada</string>
@@ -339,6 +342,8 @@
 	<string name="app_kill_alert_title">Aviso</string>
 	<string name="app_kill_alert_body">A app irá encerrar. Toque no novo ícone para voltar a abrir</string>
 	<string name="app_kill_ok_btn">OK</string>
+	<!-- Reboot alert -->
+	<string name="reboot_alert_body">É necessário reiniciar o sistema para aplicar as definições</string>
 	<!-- Menu Items -->
 	<string name="menu_settings_title">Importar/Exportar</string>
 	<string name="menu_reset_defaults">Restaurar todas as definições</string>
@@ -351,7 +356,7 @@
 	<string name="menu_updates">Atualizações da App</string>
 	<string name="monitoring_category_title">Opções de monitorização</string>
 	<string name="netstat_header">Definições das estatísticas de rede</string>
-	<string name="string_formatter_manual_body_v3">Além de texto normal, também estão disponíveis variáveis dinâmicas, como Dados, Uso de dados e Temperatura::\n\n$G\&lt;format\&gt; : Data gregoriana, com base no formato*\n$P&lt;format&gt; : Data persa, com base no formato*\n$Nrx : Total de downloads no período especificado ** ***\n$Ntx: Total de uploads no período especificado ** ***\n$Nall : Tráfego total no período especificado ** ***\n$Nssid : Nome SSID WiFi (se aplicável)\n\n$T\&lt;format\&gt;[interval] : Temperatura; \no formato pode ser b (para bateria), c (para CPU), g (para GPU) e s (para skin) \nPor último, há um número OPCIONAL de intervalo de atualização em segundos (padrão: 60 segundos)\n\n*Para documentação de formato, procure por Formato de data Java\n**É possível especificar o período de estatísticas em AOSPMods/Menu Diversos/Configurações de estatísticas de rede\n***Se substituir $N por $Nc, irá obter estatísticas de dados móveis (por exemplo, $Ncrx em vez de Nrx)</string>
+	<string name="string_formatter_manual_body_v3">Além do texto normal, também estão disponíveis variáveis dinâmicas, como Data, Uso de dados e Temperatura:\n\n$G\&lt;format\&gt; : Data gregoriana, com base no formato*\n$P&lt;format&gt; : Data persa, com base no formato*\n$Nrx : Total de downloads no período especificado ** ***\n$Ntx: Total de uploads no período especificado ** ***\n$Nall : Tráfego total no período especificado ** ***\n$Nssid : Nome SSID do WiFi (se aplicável)\n\n$T\&lt;format\&gt;[interval] : Temperatura; \no formato pode ser b (para bateria), c (para CPU), g (para GPU) e s (para skin) \nPor último, há um número OPCIONAL de intervalo de atualização em segundos (padrão: 60 segundos)\n\n*para formato documentação, procure por \"Formato de data Java\"\n**Você pode especificar o período de estatísticas em PixelXpert/menu Diversos/Configurações de estatísticas de rede\n***Se você substituir $N por $Nc , obterá estatísticas de dados móveis (por exemplo, $Ncrx em vez de Nrx )</string>
 	<string name="update_channel_name">Atualizações</string>
 	<string name="update_notification_title">Atualização descarregada</string>
 	<string name="update_notification_text">Toque aqui para instalar</string>

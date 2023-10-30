@@ -4,7 +4,7 @@
 	<string name="app_themed_icon_title">Включение альтернативной иконки AOSPMods </string>
 	<string name="xposed_desc">Дополнительные функции для ОС Android 12+ ПЗУ на базе AOSP</string>
 	<string name="volume_tile_title">Громкость мультимедиа </string>
-	<string name="app_switch_tile_title">Switch App Profile</string>
+	<string name="app_switch_tile_title">Сменить профиль приложения</string>
 	<string name="hide_default">Скрыть (по умолчанию)</string>
 	<string name="percent_of_default_size">% от стандартного размера</string>
 	<string name="overlay_none_title">(по умолчанию)</string>
@@ -15,25 +15,25 @@
 	<string name="restart_needed">Требуется перезагрузка для применения</string>
 	<string name="more_area">больше места</string>
 	<string name="less_area">меньше места</string>
-	<string name="current_version">Current version: %s</string>
-	<string name="notification_channel_update">Updates</string>
-	<string name="notification_channel_update_desc">This channel shows notification about the latest updates.</string>
-	<string name="new_update_title">Update available</string>
-	<string name="new_update_desc">A new version of AOSPMods is available</string>
-	<string name="browser_not_found">Browser not found</string>
-	<string name="settings_general_section_title">General</string>
-	<string name="settings_update_section_title">Update</string>
-	<string name="settings_misc_section_title">Misc</string>
-	<string name="settings_about_section_title">About</string>
-	<string name="settings_check_for_update_title">Check for updates</string>
-	<string name="auto_update_title">Automatically check for updates</string>
-	<string name="auto_update_summary">Check for new versions once in a while</string>
-	<string name="update_over_wifi_title">Check updates over WiFi only</string>
-	<string name="update_over_wifi_summary">Check for updates in background only when connected to wifi</string>
-	<string name="github_repo_title">GitHub repository</string>
-	<string name="telegram_group_title">Telegram group</string>
-	<string name="usage_title">Usage</string>
-	<string name="usage_summary">Open wiki page</string>
+	<string name="current_version">Текущая версия: %s</string>
+	<string name="notification_channel_update">Обновления</string>
+	<string name="notification_channel_update_desc">На этом канале отображаются уведомления о последних обновлениях.</string>
+	<string name="new_update_title">Доступно обновление</string>
+	<string name="new_update_desc">Доступна новая версия PixelXpert</string>
+	<string name="browser_not_found">Браузер не найден</string>
+	<string name="settings_general_section_title">Общее</string>
+	<string name="settings_update_section_title">Обновить</string>
+	<string name="settings_misc_section_title">Прочее</string>
+	<string name="settings_about_section_title">О нас</string>
+	<string name="settings_check_for_update_title">Проверить наличие обновлений</string>
+	<string name="auto_update_title">Автоматически проверять наличие обновлений</string>
+	<string name="auto_update_summary">Периодически проверять наличие новых версий</string>
+	<string name="update_over_wifi_title">Проверять наличие обновления только при подключенном WiFi</string>
+	<string name="update_over_wifi_summary">Проверять наличие обновлений в фоновом режиме только при подключенном Wi-Fi</string>
+	<string name="github_repo_title">Репозиторий Github</string>
+	<string name="telegram_group_title">Группа Telegram</string>
+	<string name="usage_title">Использование</string>
+	<string name="usage_summary">Открыть wiki страницу</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Экран блокировки</string>
 	<string name="statusbar_header">Строка состояния</string>
@@ -263,10 +263,10 @@
 	<string name="so_fingerprint_sensor_enabled">Датчик отпечатков пальцев работает при выключенном экране</string>
 	<string name="so_double_tap_wake_title">Двойное нажатие для пробуждения телефона</string>
 	<string name="so_double_tap_wake_summary">Отключение однократного нажатия для пробуждения</string>
-	<string name="so_tap_to_show_ambient_title">Tap to show ambient display</string>
-	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Tapping on the screen shows ambient display</string>
-	<string name="so_pick_to_show_ambient_title">Pick to show ambient display</string>
-	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Picking the phone shows ambient display</string>
+	<string name="so_tap_to_show_ambient_title">Нажмите, чтобы отобразить ambient display</string>
+	<string name="so_tap_to_show_ambient_summary">[При выключенном режиме] При нажатии на экран отображается ambient display</string>
+	<string name="so_pick_to_show_ambient_title">Нажмите, чтобы отобразить ambient display</string>
+	<string name="so_pick_to_show_ambient_summary">[При выключенном режиме] При нажатии на экран отображается ambient display</string>
 	<string name="doze_header">Когда экран выключен…</string>
 	<string name="custom_themed_icons_title">Пользовательские тематические иконки</string>
 	<string name="custom_themed_icons_off">Пользовательские значки отключены</string>
@@ -274,14 +274,17 @@
 	<string name="so_vol_longpress_skip">Долгое нажатие клавишь громкости для переключения треков</string>
 	<string name="notifications_header">Параметры уведомлений</string>
 	<string name="expand_notifications_icons_title">Добавить кнопки развернуть/свернуть все</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Никогда не закрывайте текущие уведомления (A14+)</string>
 	<string name="heads_up_notification_duration">Длительность уведомления о предупреждениях</string>
 	<string name="disable_overscroll">Отключить эффект упругости в конце прокрутки</string>
 	<string name="overscroll_on_summary">Важно: Вы ДОЛЖНЫ включить приложения, для которых Вы хотите отключить прокрутку, в LSPosed</string>
 	<string name="milliseconds">Миллисекунды</string>
 	<!-- Work/Clone profile -->
-	<string name="work_clone_profile_header">Work/Clone Profile</string>
-	<string name="statusbar_long_press_app_switch">Long press statusbar to switch profile</string>
-	<string name="statusbar_app_switch_icon">Show an icon on statusbar when switching is available</string>
+	<string name="work_clone_profile_header">Работать/Клонировать Профиль</string>
+	<string name="statusbar_long_press_app_switch">Длительное нажатие на строке состояния для переключения профиля</string>
+	<string name="statusbar_app_switch_icon">Показывать значок в строке состояния, когда переключение доступно</string>
+	<!-- Cloned apps bragging message -->
+	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Вибрация при ответе на исходящий вызов</string>
 	<string name="vibrate_on_call_drop_title">Вибрация при отключении вызова</string>
@@ -336,22 +339,24 @@
 	<string name="incompatible_alert_body">Ваше текущее ПЗУ не совместимо с этим модулем. Вы можете продолжать использовать его, но некоторые (или все) опции могут работать не так, как задумано.\\n\\nПожалуйста, не сообщайте об ошибках </string>
 	<string name="incompatible_alert_ok_btn">Я понимаю</string>
 	<!-- App kill Alert -->
-	<string name="app_kill_alert_title">Notice</string>
-	<string name="app_kill_alert_body">App will close now. You can open it again by tapping on the new icon</string>
-	<string name="app_kill_ok_btn">OK</string>
+	<string name="app_kill_alert_title">Примечание</string>
+	<string name="app_kill_alert_body">Приложение будет закрыто. Вы можете открыть его снова, нажав на новый значок</string>
+	<string name="app_kill_ok_btn">ОК</string>
+	<!-- Reboot alert -->
+	<string name="reboot_alert_body">Для применения настроек требуется перезагрузка системы</string>
 	<!-- Menu Items -->
 	<string name="menu_settings_title">Импорт/Экспорт</string>
 	<string name="menu_reset_defaults">Сбросить все настройки</string>
 	<string name="menu_import_settings">Импортировать настройки из файла…</string>
 	<string name="menu_export_settings">Экспортировать настройки в файл…</string>
 	<string name="menu_restart">Перезагрузка</string>
-	<string name="menu_restart_system">Restart system</string>
-	<string name="menu_soft_restart">Soft reboot</string>
+	<string name="menu_restart_system">Перезагрузить систему</string>
+	<string name="menu_soft_restart">Перезагрузка интерфейса</string>
 	<string name="menu_restartSysUI">Перезапустить SystemUI</string>
 	<string name="menu_updates">Обновление приложения</string>
 	<string name="monitoring_category_title">Параметры мониторинга</string>
 	<string name="netstat_header">Настройки сетевой статистики</string>
-	<string name="string_formatter_manual_body_v3">Помимо обычного текста, доступны динамические переменные, такие как дата, использование данных и температура:\n\n$G\&lt;format\&gt; : григорианская дата, основанная на формате*\n$P&lt;format&gt; : персидская дата, основанная на формате*\n$Nrx: Общее количество загрузок за указанный период ** ***\n$Ntx: Всего загрузок за указанный период ** ***\n$Nall: Общий трафик за указанный период ** ***\n$Nssid: Имя WiFi SSID (если применимо)\n\n$T\&lt;format\&gt;[interval]: Температура; \nформат может быть b (для батареи), c (для CPU), g (для GPU) и s (для кожи)\nИ наконец, есть ОПЦИОНАЛЬНОЕ количество интервалов обновления в секундах (по умолчанию: 60 секунд)\n\n*Для получения документации по формату ищите \"Java Date Format\"\n**Вы можете указать период статистики в AOSPMods/Miscellaneous menu/Network Statistics Settings\n***Если вы замените $N на $Nc, то получите статистику по мобильным данным (например, $Ncrx вместо $Ncrx). например, $Ncrx вместо Nrx)</string>
+	<string name="string_formatter_manual_body_v3">В дополнение к обычному тексту доступны динамические переменные, такие как дата, использование данных и температура:\n\n$G\&lt;format\&gt; : григорианская дата, основанная на формате*\n$P&lt;format&gt; : персидская дата, основанная на формате*\n$Nrx : Общее количество скачиваний за указанный период ** ***\n$Ntx: Всего загрузок за указанный период ** ***\n$Nall: Общий трафик за указанный период ** ***\n$Nssid: Имя WiFi SSID (если применимо)\n\n$T\&lt;format\&gt;[interval]: Температура; \nформат может быть b (для батареи), c (для CPU), g (для GPU) и s (для кожи)\nИ наконец, есть ОПЦИОНАЛЬНОЕ количество интервалов обновления в секундах (по умолчанию: 60 секунд)\n\n*Для получения документации по формату ищите \"Java Date Format\"\n**Вы можете указать период статистики в PixelXpert/Miscellaneous menu/Network Statistics Settings\n***Если вы замените $N на $Nc, то получите статистику по мобильным данным (например, $Ncrx вместо Nrx)</string>
 	<string name="update_channel_name">Обновления</string>
 	<string name="update_notification_title">Обновление загружено</string>
 	<string name="update_notification_text">Нажмите здесь, чтобы установить</string>
@@ -372,7 +377,7 @@
 	<string name="update_word">Обновить</string>
 	<string name="switch_branches">Сменить канал</string>
 	<string name="reinstall_word">Переустановить</string>
-	<string name="changelog_title">Changelog</string>
+	<string name="changelog_title">История изменений</string>
 	<string name="own_prefs_header">Настройки AOSPMods</string>
 	<string name="language_title">Выберите язык</string>
 	<string name="toggle_dark_apply">(Переключиться на темную тему)</string>
@@ -391,25 +396,25 @@
 	<string name="toggle_one_handed">Переключение режима управления одной рукой</string>
 	<string name="sleep">Режим сна</string>
 	<!-- Search Preference -->
-	<string name="searchpreference_search">Search…</string>
-	<string name="searchpreference_clear">Clear</string>
-	<string name="searchpreference_history_entry">History entry</string>
-	<string name="searchpreference_more">More</string>
-	<string name="searchpreference_clear_history">Clear history</string>
-	<string name="searchpreference_no_results">No results</string>
+	<string name="searchpreference_search">Поиск…</string>
+	<string name="searchpreference_clear">Очистить</string>
+	<string name="searchpreference_history_entry">История записей</string>
+	<string name="searchpreference_more">Дополнительно</string>
+	<string name="searchpreference_clear_history">Очистить историю</string>
+	<string name="searchpreference_no_results">Нет результатов</string>
 	<!-- Hooked Packages Activity -->
-	<string name="hooked_packages_title">Connected packages</string>
-	<string name="package_hooked_successful">Package responsive</string>
-	<string name="package_not_hook_enabled">Package not enabled in LSposed</string>
-	<string name="package_hook_no_response">Package not responding</string>
-	<string name="package_not_found">Package not found</string>
-	<string name="package_checking">Loading%s</string>
-	<string name="package_activated">Package successfully activated</string>
-	<string name="package_activation_failed">Package activation failed</string>
-	<string name="activate_in_lsposed">Activate in LSPosed</string>
+	<string name="hooked_packages_title">Подключенные пакеты</string>
+	<string name="package_hooked_successful">Ответ пакета</string>
+	<string name="package_not_hook_enabled">Пакет не включен в LSposed</string>
+	<string name="package_hook_no_response">Пакет не отвечает</string>
+	<string name="package_not_found">Пакет не найден</string>
+	<string name="package_checking">Загрузка%s</string>
+	<string name="package_activated">Пакет успешно активирован</string>
+	<string name="package_activation_failed">Не удалось активировать пакет</string>
+	<string name="activate_in_lsposed">Активировать в LSPosed</string>
 	<!-- Splash Activity -->
-	<string name="checking_root_permissions">Checking root permissions…</string>
-	<string name="connecting_root_service">Connecting to the root service…</string>
-	<string name="root_access_denied">Root access denied. Please allow root access.</string>
-	<string name="exit">Exit</string>
+	<string name="checking_root_permissions">Проверка прав доступа к корневой системе…</string>
+	<string name="connecting_root_service">Подключение к корневому сервису…</string>
+	<string name="root_access_denied">Рут доступ запрещен. Пожалуйста, предоставьте права суперпользователя.</string>
+	<string name="exit">Выход</string>
 </resources>

@@ -490,6 +490,7 @@
 	<string name="checking_root_permissions">Checking root permissions…</string>
 	<string name="connecting_root_service">Connecting to the root service…</string>
 	<string name="root_access_denied">Root access denied. Please allow root access.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Exit</string>
 
 	<!-- Bottom Navigation -->

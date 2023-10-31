@@ -112,7 +112,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 					runOnUiThread(() ->
 							new MaterialAlertDialogBuilder(SplashScreenActivity.this, R.style.MaterialComponents_MaterialAlertDialog)
 									.setCancelable(false)
-									.setMessage(getText(R.string.root_access_denied))
+									.setMessage(getText(R.string.root_service_failed))
 									.setPositiveButton(getText(R.string.exit), (dialog, i) -> System.exit(0))
 									.show());
 				}

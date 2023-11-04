@@ -53,7 +53,7 @@ jobs:
       run: .github/make_zip.sh
 
     - name: Upload Xposed Artifact to Actions
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with: 
         name: PixelXpert.zip
         path: output
@@ -65,7 +65,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Canary Binary Release
-      uses: Hs1r1us/Release-AIO@v1.0
+      uses: Hs1r1us/Release-AIO@v2.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:

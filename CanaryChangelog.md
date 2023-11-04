@@ -1,3 +1,6 @@
+**canary-293**  
+- A14: Added option to disable lockscreen customization pill  
+  
 **canary-292**  
 - UI Improvement  
 - removed the remaining "reduce keyboard space" option from the app  

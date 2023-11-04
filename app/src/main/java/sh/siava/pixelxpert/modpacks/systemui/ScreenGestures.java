@@ -63,7 +63,7 @@ public class ScreenGestures extends XposedModPack {
 	private boolean isDozing; //determiner for wakeup or sleep decision
 	private Object NotificationPanelViewController;
 	private Timer mTimer;
-	private XC_MethodHook.Unhook mLongPressHook;
+	private static boolean DisableLockScreenPill = false;
 
 	public ScreenGestures(Context context) {
 		super(context);
@@ -77,6 +77,7 @@ public class ScreenGestures extends XposedModPack {
 		doubleTapToSleepLockscreenEnabled = Xprefs.getBoolean("DoubleTapSleepLockscreen", false);
 		TapToShowAmbient = Xprefs.getBoolean("TapToShowAmbient", false);
 		PickToShowAmbient = Xprefs.getBoolean("PickToShowAmbient", false);
+		DisableLockScreenPill = Xprefs.getBoolean("DisableLockScreenPill", false);
 	}
 
 	@Override
@@ -159,6 +160,7 @@ public class ScreenGestures extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				NotificationPanelViewController = param.thisObject;
+				hookLockScreenCustomizePill();
 				try {
 					hookTouchHandler(getObjectField(param.thisObject, "mStatusBarViewTouchEventHandler").getClass());
 				}
@@ -171,9 +173,29 @@ public class ScreenGestures extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				NotificationPanelViewController = param.thisObject;
+				hookLockScreenCustomizePill();
 				hookTouchHandler(param.getResult().getClass());
 			}
 		});
+	}
+
+	private void hookLockScreenCustomizePill() {
+		try { //A13 doesn't have such thing
+			View mView = (View) getObjectField(NotificationPanelViewController, "mView");
+
+			@SuppressLint("DiscouragedApi")
+			View longPressReceiver = mView.findViewById(mContext.getResources().getIdentifier("keyguard_long_press", "id", mContext.getPackageName()));
+			hookAllMethods(longPressReceiver.getClass(), "onTouchEvent", new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					if(param.thisObject == longPressReceiver && (turnedByTTT || DisableLockScreenPill))
+					{
+						param.setResult(false);
+					}
+				}
+			});
+		} catch (Throwable ignored){}
+
 	}
 
 	private void showAmbientDisplay(Object dozeTrigger) {
@@ -277,22 +299,6 @@ public class ScreenGestures extends XposedModPack {
 					if (doubleTap && !SystemUtils.isFlashOn() && uptimeMillis() - ev.getDownTime() > HOLD_DURATION) {
 						turnedByTTT = true;
 
-						try { //A13 doesn't have such thing
-							View mView = (View) getObjectField(NotificationPanelViewController, "mView");
-
-							@SuppressLint("DiscouragedApi")
-							View longPressReceiver = mView.findViewById(mContext.getResources().getIdentifier("keyguard_long_press", "id", mContext.getPackageName()));
-							mLongPressHook = hookAllMethods(longPressReceiver.getClass(), "onTouchEvent", new XC_MethodHook() {
-								@Override
-								protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-									if(param.thisObject == longPressReceiver)
-									{
-										param.setResult(false);
-									}
-								}
-							}).iterator().next();
-						} catch (Throwable ignored){}
-
 						callMethod(SystemUtils.PowerManager(), "wakeUp", uptimeMillis());
 						SystemUtils.setFlash(true);
 						SystemUtils.vibrate(EFFECT_TICK, USAGE_ACCESSIBILITY);
@@ -329,12 +335,6 @@ public class ScreenGestures extends XposedModPack {
 
 	private void turnOffTTT() {
 		turnedByTTT = false;
-
-		if(mLongPressHook != null)
-		{
-			mLongPressHook.unhook();
-			mLongPressHook = null;
-		}
 
 		SystemUtils.setFlash(false);
 	}

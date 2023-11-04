@@ -62,6 +62,9 @@ public class PreferenceHelper {
 			case "ReduceKeyboardSpaceOverlay":
 				return showOverlays;
 
+			case "DisableLockScreenPill":
+				return Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
+
 			case "font_dependent":
 			case "enableCustomFonts":
 				return showFonts;

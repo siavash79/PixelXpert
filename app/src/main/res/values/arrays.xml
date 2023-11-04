@@ -31,6 +31,7 @@
     </string-array>
 
     <string-array name="languages_names">
+        <item>Arabic</item>
         <item>Chinese (China)</item>
         <item>Chinese (Taiwan)</item>
         <item>Dutch</item>
@@ -55,6 +56,7 @@
     </string-array>
 
     <string-array name="languages_values">
+        <item>ar</item>
         <item>zh-CN</item>
         <item>zh-TW</item>
         <item>nl</item>

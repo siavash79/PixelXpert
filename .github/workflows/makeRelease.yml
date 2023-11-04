@@ -47,13 +47,13 @@ jobs:
         run: .github/make_zip.sh
 
       - name: Upload Zip
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: AOSPMods.zip
           path: output
 
       - name: Release the binaries
-        uses: Hs1r1us/Release-AIO@v1.0
+        uses: Hs1r1us/Release-AIO@v2.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

@@ -63,6 +63,7 @@ public class PreferenceHelper {
 				return showOverlays;
 
 			case "DisableLockScreenPill":
+			case "ForceThemedLauncherIcons":
 				return Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
 
 			case "font_dependent":

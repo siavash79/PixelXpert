@@ -285,7 +285,7 @@
 	<string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
 	<string name="force_no_cutout">Ignore the camera cutout</string>
 	<string name="clear_all_reposition_title">Add an accessible clear-all button to recents page</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Android 14 - Pixel launcher only)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Re-enable themed icons to apply</string>
 	<string name="volume_button_step_title">Volume steps (0 to 100%)</string>
 	<string name="display_resolution_title">Display resolution</string>

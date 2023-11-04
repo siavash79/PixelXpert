@@ -364,7 +364,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		SharedPreferences prefs = getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
+		SharedPreferences prefs = getDefaultSharedPreferences(createDeviceProtectedStorageContext());
 
 		int itemID = item.getItemId();
 
@@ -401,7 +401,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 		if (data == null) return; //user hit cancel. Nothing to do
 
-		SharedPreferences prefs = getDefaultSharedPreferences(getApplicationContext().createDeviceProtectedStorageContext());
+		SharedPreferences prefs = getDefaultSharedPreferences(createDeviceProtectedStorageContext());
 		switch (requestCode) {
 			case REQUEST_IMPORT:
 				try {

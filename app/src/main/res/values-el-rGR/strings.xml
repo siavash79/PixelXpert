@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Εικονίδιο εναλλακτικού θέματος</string>
-	<string name="xposed_desc">Προσαρμοσμένες δυνατότητες για ROM με βάση το Android 12+ AOSP</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Ένταση πολυμέσων</string>
 	<string name="app_switch_tile_title">Εναλλαγή προφίλ εφαρμογής</string>
 	<string name="hide_default">Απόκρυψη (Προεπιλογή)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Εύκολο ξεκλείδωμα (Καρφίτσωμα/Κωδικός πρόσβασης)</string>
 	<string name="easy_unlock_summary">Εάν δεν λειτούργησε την πρώτη φορά, δοκιμάστε ξανά</string>
 	<string name="charging_info_title">Πληροφορίες φόρτισης στην οθόνη κλειδώματος</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Χρησιμοποιήστε αυτοκρατορικές μονάδες</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Πατήστε δύο φορές για ύπνο</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Θα αγνοήσει επίσης το αιωρούμενο κουμπί χειροκίνητης περιστροφής</string>
 	<string name="force_no_cutout">Αγνοήστε την αποκοπή της κάμερας</string>
 	<string name="clear_all_reposition_title">Προσθέστε ένα προσβάσιμο κουμπί διαγραφής όλων στη σελίδα πρόσφατων</string>
-	<string name="force_themed_icons_title">Αυτόματη δημιουργία εικονιδίων με θέμα που λείπουν (Android 14 - Εκκίνηση μόνο Pixel)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Ενεργοποιήστε ξανά τα εικονίδια με θέμα για εφαρμογή</string>
 	<string name="volume_button_step_title">Βήματα έντασης (0 έως 100%)</string>
 	<string name="display_resolution_title">Ανάλυση της οθόνης</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Έλεγχος δικαιωμάτων root…</string>
 	<string name="connecting_root_service">Σύνδεση στην υπηρεσία root…</string>
 	<string name="root_access_denied">Δεν επιτρέπεται η πρόσβαση ρίζας. Επιτρέψτε την πρόσβαση root.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Εξοδος</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

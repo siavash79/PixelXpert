@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">Икона алтернативне теме</string>
-	<string name="xposed_desc">Прилагођене функције за Андроид 12+ АОСП базиране РОМ-ове</string>
-	<string name="volume_tile_title">Јачина медија</string>
+	<string name="app_themed_icon_title">Алтернативни стил иконе</string>
+	<string name="xposed_desc">Персонализација за Google Pixel уређаје</string>
+	<string name="volume_tile_title">Јачина звука медија</string>
 	<string name="app_switch_tile_title">Промените профил апликације</string>
 	<string name="hide_default">Сакриј (подразумевано)</string>
 	<string name="percent_of_default_size">% подразумеване величине</string>
-	<string name="overlay_none_title">(Уобичајено)</string>
-	<string name="general_section">Генералне опције</string>
-	<string name="general_on">на</string>
-	<string name="general_off">Ван</string>
+	<string name="overlay_none_title">Подразумевано</string>
+	<string name="general_section">Опште</string>
+	<string name="general_on">Укључено</string>
+	<string name="general_off">Искључено</string>
 	<string name="sysui_restart_needed">Захтева поновно покретање СистемУИ да би се применило</string>
 	<string name="restart_needed">За примену је потребно поновно покретање</string>
 	<string name="more_area">више области</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Лако откључавање (Пин/Лозинка)</string>
 	<string name="easy_unlock_summary">Ако није успело први пут, покушајте поново</string>
 	<string name="charging_info_title">Информације о пуњењу на закључаном екрану</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Користите империјалне јединице</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Двапут додирните за спавање</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Такође ће игнорисати плутајуће дугме за ручно ротирање</string>
 	<string name="force_no_cutout">Занемарите изрез камере</string>
 	<string name="clear_all_reposition_title">Додајте доступно дугме за брисање свега на страницу са најновијим информацијама</string>
-	<string name="force_themed_icons_title">Аутоматски генеришите недостајуће тематске иконе (Андроид 14 – само покретач за Пикел)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Поново омогућите тематске иконе за примену</string>
 	<string name="volume_button_step_title">Кораци јачине звука (0 до 100%)</string>
 	<string name="display_resolution_title">Резолуција екрана</string>
@@ -339,8 +340,8 @@
 	<string name="incompatible_alert_body">Ваш тренутни РОМ није директна мета овог модула. Можете наставити да га користите, али неке (или све) опције можда неће радити како је предвиђено\n\nНемојте пријављивати грешке</string>
 	<string name="incompatible_alert_ok_btn">разумем</string>
 	<!-- App kill Alert -->
-	<string name="app_kill_alert_title">Објава</string>
-	<string name="app_kill_alert_body">Апликација ће се сада затворити. Можете га поново отворити додиром на нову икону</string>
+	<string name="app_kill_alert_title">Упозорење</string>
+	<string name="app_kill_alert_body">Апликација ће се затворити. Можете је поново покренути додиром на нову икону.</string>
 	<string name="app_kill_ok_btn">У реду</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Потребно је поновно покретање система да би се подешавања применила</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Провера роот дозвола…</string>
 	<string name="connecting_root_service">Повезивање са роот сервисом…</string>
 	<string name="root_access_denied">Роот приступ је одбијен. Дозволите роот приступ.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Изађи</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

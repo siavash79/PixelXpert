@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Alternatiewe tema-ikoon</string>
-	<string name="xposed_desc">Pasgemaakte kenmerke vir Android 12+ AOSP-gebaseerde ROM\'s</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Media Volume</string>
 	<string name="app_switch_tile_title">Wissel App-profiel</string>
 	<string name="hide_default">Versteek (verstek)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Maklik ontsluit (Pin/Wagwoord)</string>
 	<string name="easy_unlock_summary">As dit nie die eerste keer gewerk het nie, probeer weer</string>
 	<string name="charging_info_title">Laai inligting op sluitskerm</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Gebruik imperiale eenhede</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Dubbeltik om te slaap</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Sal ook handrotasie drywende knoppie ignoreer</string>
 	<string name="force_no_cutout">Ignoreer die kamera-uitsny</string>
 	<string name="clear_all_reposition_title">Voeg \'n toeganklike skoon-alles-knoppie by onlangse bladsy</string>
-	<string name="force_themed_icons_title">Outo-genereer ontbrekende tema-ikone (Android 14 - slegs Pixel-lanseerder)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Aktiveer tema-ikone weer om toe te pas</string>
 	<string name="volume_button_step_title">Volumestappe (0 tot 100%)</string>
 	<string name="display_resolution_title">Vertoon resolusie</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Kontroleer worteltoestemmings…</string>
 	<string name="connecting_root_service">Koppel aan die worteldiens…</string>
 	<string name="root_access_denied">Worteltoegang geweier. Laat asseblief worteltoegang toe.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Verlaat</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

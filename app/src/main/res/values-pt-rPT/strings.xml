@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Ativar ícone temático alternativo da app AOSP Mods</string>
-	<string name="xposed_desc">Funcionalidades personalizadas para ROMs Android 12+ baseadas no AOSP</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Volume de multimédia</string>
 	<string name="app_switch_tile_title">Alternar Perfil de App</string>
 	<string name="hide_default">Não mostrar (padrão)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Desbloquear fácil (Pin/Password)</string>
 	<string name="easy_unlock_summary">Se não funcionar à primeira, tente novamente</string>
 	<string name="charging_info_title">Informação de carregamento no ecrã de bloqueio</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Usar unidades imperiais</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Duplo toque para desligar</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Irá ignorar o botão de rotação manual</string>
 	<string name="force_no_cutout">Ignorar o <i>notch</i> da câmara</string>
 	<string name="clear_all_reposition_title">Mostrar botão limpar tudo no ecrã das apps recentes</string>
-	<string name="force_themed_icons_title">Gerar ícones temáticos automaticamente (Android 14 - Apenas para Pixel launcher)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Requer reativar a opção de ícones temáticos</string>
 	<string name="volume_button_step_title">Níveis de volume (0 a 100%)</string>
 	<string name="display_resolution_title">Resolução do ecrã</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">A verificar permissões root…</string>
 	<string name="connecting_root_service">A ligar ao serviço root…</string>
 	<string name="root_access_denied">Acesso root negado. Por favor, permita o acesso root.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Sair</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Início</string>
+	<string name="navigation_update">Atualizações</string>
+	<string name="navigation_hooks">\"Hooks\"</string>
+	<string name="navigation_settings">Definições</string>
 </resources>

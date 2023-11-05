@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Alternatif Temalı Simge</string>
-	<string name="xposed_desc">Android 12+ AOSP tabanlı ROM\'lar için özel özellikler</string>
+	<string name="xposed_desc">Google Pixel cihazları için özelleştirmeler</string>
 	<string name="volume_tile_title">Medya ses düzeyi</string>
 	<string name="app_switch_tile_title">Uygulama Profilini Değiştir</string>
 	<string name="hide_default">Gizle (Varsayılan)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Hızlı kilit açma (Pin/Parola)</string>
 	<string name="easy_unlock_summary">İlk seferde işe yaramadıysa, tekrar deneyin</string>
 	<string name="charging_info_title">Kilit ekranında şarj bilgisi</string>
+	<string name="disable_lockscreen_pill_title">\"Kilit Ekranını Özelleştir\" hapını gösterme</string>
 	<string name="imperial_units_title">İngiliz ölçü birimini kullan</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Çift dokunuşla ekranı kapat</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Yüzen manuel döndürme düğmesini de yok sayar</string>
 	<string name="force_no_cutout">Kamera boşluğunu görmezden gel</string>
 	<string name="clear_all_reposition_title">Son kullanılanlar sayfasına erişilebilir bir tümünü temizle düğmesi ekle</string>
-	<string name="force_themed_icons_title">Eksik temalı simgeleri otomatik oluştur (yalnızca Android 14 - Pixel Launcher için)</string>
+	<string name="force_themed_icons_title">Eksik temalı simgeleri otomatik oluştur (yalnızca Android - Pixel Launcher için)</string>
 	<string name="reapply_themed_config">Temalı simgeleri uygulamak için yeniden etkinleştirin</string>
 	<string name="volume_button_step_title">Ses ayarı adımları (%0\'dan %100\'e kadar)</string>
 	<string name="display_resolution_title">Ekran çözünürlüğü</string>
@@ -378,7 +379,7 @@
 	<string name="switch_branches">Dalı değiştir</string>
 	<string name="reinstall_word">Yeniden indir ve yükle</string>
 	<string name="changelog_title">Değişiklik günlüğü</string>
-	<string name="own_prefs_header">AOSPMods ayarları</string>
+	<string name="own_prefs_header">Ayarlar</string>
 	<string name="language_title">Dil seçimi</string>
 	<string name="toggle_dark_apply">(Uygulamak için koyu temaya geçin)</string>
 	<string name="gesture_nav_extra_cat">Ekstra Gezinme Çubuğu hareketleri</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Kök izinleri kontrol ediliyor…</string>
 	<string name="connecting_root_service">Kök hizmetine bağlanılıyor…</string>
 	<string name="root_access_denied">Kök erişimi reddedildi. Lütfen root erişimine izin verin.</string>
+	<string name="root_service_failed">Kök hizmetine bağlanılamıyor. Lütfen daha sonra tekrar deneyin</string>
 	<string name="exit">Çıkış yap</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Anasayfa</string>
+	<string name="navigation_update">Güncelleme</string>
+	<string name="navigation_hooks">Kanca (modül)</string>
+	<string name="navigation_settings">Ayarlar</string>
 </resources>

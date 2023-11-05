@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">AOSP Mods 테마의 대체 아이콘 활성화</string>
-	<string name="xposed_desc">Android 12+ AOSP 기반 롬을 위한 커스텀 기능들</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">미디어 볼륨</string>
 	<string name="app_switch_tile_title">앱 프로필 바꾸기</string>
 	<string name="hide_default">숨김 (기본값)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">쉬운 잠금해제 (PIN/비밀번호)</string>
 	<string name="easy_unlock_summary">적용 직후, 작동하지 않았다면 다시 시도해보세요</string>
 	<string name="charging_info_title">잠금 화면 충전 정보 표시</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">야드파운드 표시법 사용</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">두 번 눌러 화면 끄기</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">화면 회전 플로팅 버튼을 무시합니다</string>
 	<string name="force_no_cutout">화면 속 카메라 무시</string>
 	<string name="clear_all_reposition_title">최근 앱 화면에 모두 삭제 버튼 추가</string>
-	<string name="force_themed_icons_title">테마 앱 아이콘이 없을 경우 자동 생성 (Android 14 - Pixel launcher 전용)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">적용하려면 테마 앱 아이콘을 다시 활성화하세요</string>
 	<string name="volume_button_step_title">볼륨 단계 (0에서 100%까지)</string>
 	<string name="display_resolution_title">화면 해상도</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">루트 권한 확인 중…</string>
 	<string name="connecting_root_service">루트 서비스에 연결 중…</string>
 	<string name="root_access_denied">루트 액세스가 거부되었습니다. 루트 액세스를 허용해 주세요.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">출구</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

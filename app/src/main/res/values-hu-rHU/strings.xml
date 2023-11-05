@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Alternatív témájú ikon</string>
-	<string name="xposed_desc">Egyéni funkciók Android 12+ AOSP alapú ROM-okhoz</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Média kötet</string>
 	<string name="app_switch_tile_title">Alkalmazás profil váltás</string>
 	<string name="hide_default">Elrejtés (alapértelmezett)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Egyszerű feloldás (Pin/jelszó)</string>
 	<string name="easy_unlock_summary">Ha az első alkalommal nem sikerült, próbálja újra</string>
 	<string name="charging_info_title">Töltési információk a lezárási képernyőn</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Használjon angolszász mértékegységet</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Dupla érintésre alvó mód</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Figyelmen kívül hagyja a kézi forgató lebegő gombot is</string>
 	<string name="force_no_cutout">Hagyja figyelmen kívül a kamera kivágását</string>
 	<string name="clear_all_reposition_title">Adjon hozzá egy hozzáférhető, minden törlése gombot a legutóbbi oldalhoz</string>
-	<string name="force_themed_icons_title">Hiányzó tematikus ikonok automatikus generálása (Android 14 – csak Pixel indító)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Az alkalmazáshoz engedélyezze újra a tematikus ikonokat</string>
 	<string name="volume_button_step_title">Hangerő lépések (0-100%)</string>
 	<string name="display_resolution_title">Kijelző felbontása</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">A root jogosultságok ellenőrzése…</string>
 	<string name="connecting_root_service">Csatlakozás a root szolgáltatáshoz…</string>
 	<string name="root_access_denied">Root hozzáférés megtagadva. Kérjük, engedélyezze a root hozzáférést.</string>
+	<string name="root_service_failed">Nem lehet kapcsolódni a root szolgáltatásokhoz. Kérjük, később próbáld meg újra</string>
 	<string name="exit">Kijárat</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Kezdőlap</string>
+	<string name="navigation_update">Frissítés</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Beállítások</string>
 </resources>

@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">代替テーマのアイコン</string>
-	<string name="xposed_desc">Android 12+ AOSP ベースの ROM のカスタム機能</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">メディアボリューム</string>
 	<string name="app_switch_tile_title">アプリプロファイルを切り替える</string>
 	<string name="hide_default">隠す (既定)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">ロック解除を即座に実行 (PIN/パスワード)</string>
 	<string name="easy_unlock_summary">最初に適用がされなかった場合は再度行なってみてください</string>
 	<string name="charging_info_title">ロック画面に充電の詳細情報を表示</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">帝国単位を使用する</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">ダブルタップでスリープ</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
 	<string name="force_no_cutout">Ignore the camera cutout</string>
 	<string name="clear_all_reposition_title">Add an accessible clear-all button to recents page</string>
-	<string name="force_themed_icons_title">不足しているテーマアイコンを自動生成 (Android 14 - Pixel ランチャーのみ)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">テーマアイコンの適用を再度有効化します</string>
 	<string name="volume_button_step_title">ボリュームステップ (0から100%)</string>
 	<string name="display_resolution_title">画面の解像度</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">root権限の確認…</string>
 	<string name="connecting_root_service">ルートサービス…への接続</string>
 	<string name="root_access_denied">ルートアクセスが拒否されました。 root アクセスを許可してください。</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">出口</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

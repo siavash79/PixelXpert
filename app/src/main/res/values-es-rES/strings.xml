@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Habilitar icono temático alternativo para Pixel Xpert</string>
-	<string name="xposed_desc">Funciones personalizadas para ROM basadas en Android 12+ AOSP</string>
+	<string name="xposed_desc">Personalizaciones para dispositivos Google Pixel</string>
 	<string name="volume_tile_title">Volumen de medios</string>
 	<string name="app_switch_tile_title">Cambiar perfil de aplicación</string>
 	<string name="hide_default">No mostrar (por defecto)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Fácil desbloqueo (Pin/Contraseña)</string>
 	<string name="easy_unlock_summary">Si no funcionó la primera vez, intente nuevamente</string>
 	<string name="charging_info_title">Información de carga en la pantalla de bloqueo</string>
+	<string name="disable_lockscreen_pill_title">No mostrar la píldora \"Personalizar Pantalla de bloqueo\"</string>
 	<string name="imperial_units_title">Usar unidades imperiales</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Doble toque para bloquear pantalla</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">También ignorará el botón flotante de rotación manual</string>
 	<string name="force_no_cutout">Ignora el recorte de la cámara</string>
 	<string name="clear_all_reposition_title">Agregar un botón de borrar todo en aplicaciones recientes</string>
-	<string name="force_themed_icons_title">Generar automáticamente íconos temáticos faltantes (Solo Android 14 - Pixel launcher )</string>
+	<string name="force_themed_icons_title">Generar automáticamente íconos temáticos faltantes (Solo Android - Pixel launcher)</string>
 	<string name="reapply_themed_config">Vuelva a habilitar los iconos temáticos para aplicar</string>
 	<string name="volume_button_step_title">Pasos de volumen (0 a 100%)</string>
 	<string name="display_resolution_title">Resolución de pantalla</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Comprobando permisos root…</string>
 	<string name="connecting_root_service">Conectando al servicio root…</string>
 	<string name="root_access_denied">Acceso root denegado. Por favor autoriza el acceso root.</string>
+	<string name="root_service_failed">No se puede conectar a los servicios root. Por favor, inténtalo de nuevo más tarde</string>
 	<string name="exit">Salir</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Inicio</string>
+	<string name="navigation_update">Actualizar</string>
+	<string name="navigation_hooks">Conexiones</string>
+	<string name="navigation_settings">Ajustes</string>
 </resources>

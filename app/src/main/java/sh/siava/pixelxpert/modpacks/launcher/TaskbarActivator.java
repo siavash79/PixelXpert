@@ -308,11 +308,16 @@ public class TaskbarActivator extends XposedModPack {
 									ItemInfoClass,
 									Math.min(numShownHotseatIcons, recentTaskList.size()));
 
+							int prevItemsLength = mItemsLength;
 							mItemsLength = itemInfos.length;
 							if(mItemsLength == 0)
 							{
 								invokeOriginalMethod(commitItemsToUIMethod, TaskbarModelCallbacks,null);
 								return;
+							}
+							else if(prevItemsLength == 0 && mItemsLength == 1)
+							{
+								TaskBarView.removeAllViews(); //moving from suggested apps to recent apps. old ones are not valid anymore
 							}
 
 							for (int i = 0; i < itemInfos.length; i++) {

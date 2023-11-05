@@ -31,15 +31,14 @@ Currently, PixelXpert offers customizations on different aspects of system frame
 <hr>
 
 ### **Compatibility:**
-This MOD is compatible with ROMs or firmware that are built based on fairly unmodified Android (AOSP) source code. This means stock firmware from third party manufacturers like Sony, Motorola, Nokia, Asus, Oneplus, Nothing, etc. may not support all (or in some cases any) of the features of PixelXpert. The same concept applies to custom ROMs (like EvolutionX, Proton, LineageOS, AncientOS, etc). So far, it was reported that this MOD is compatible with Pixel stock firmware fully and with Pixel Experience (normal edition) with some small issues.
+PixelXpert is only fully compatible with pixel stock firmware. Any custom ROM is not tested and may not be fully (or even at all) compatible.
 
-PixelXpert is based on "pure" AOSP. Any changes in the ROM source code may (or may not) break the compatiblity. And thus, follow below to see which PixelXpert to use:
+Here is the compatibility chart according to different android versions and QPRs:
 
-- Android 12/12.1: [final version: v2.4.1](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1)
-- Android 13 stable (up until November 2022 firmware): [final version: v.2.4.1](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1)
-- Android 13 stable QPR3 and beta QPR4 (starting from December 2022 firmware till QPR3): [starting with v.2.5](https://github.com/siavash79/PixelXpert/releases/tag/v2.5.0) up until latest canary version
-- Android 14 beta3.1: [starting with v.2.9](https://github.com/siavash79/PixelXpert/releases/tag/v2.9.0) up until latest canary version
-<hr>
+- Android 12/12.1: [final version: v2.4.1](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1).
+- Android 13 stable QPR1 (up until November 2022 firmware): [final version: v.2.4.1](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1).
+- Android 13 stable QPR3 (starting from December 2022 firmware till QPR3): [starting with v.2.5](https://github.com/siavash79/PixelXpert/releases/tag/v2.5.0) up until the latest stable/canary versions.
+- Android 14: [starting with v.2.9](https://github.com/siavash79/PixelXpert/releases/tag/v2.9.0) up until the latest stable/canary versions.
 
 ### **Prerequisites:**
 - Compatible ROM (see Compatibility text above)

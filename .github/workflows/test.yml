@@ -22,6 +22,7 @@ jobs:
           name: "test title from action"
           omitBodyDuringUpdate: true
           prerelease: true
+          allowUpdates: true
           replacesArtifacts: true
           draft: true
           artifacts: 'output/*.*'

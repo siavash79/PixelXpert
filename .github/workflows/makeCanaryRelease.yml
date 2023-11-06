@@ -11,6 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
     - name: Source Code Download
       run: git clone --branch canary --single-branch --recurse-submodules https://github.com/siavash79/PixelXpert.git .
@@ -58,23 +61,23 @@ jobs:
         name: PixelXpert.zip
         path: output
 
-    - name: Previous Release Deletion
-      continue-on-error: true
-      run: gh release delete canary_builds -y -R siavash79/PixelXpert
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#    - name: Previous Release Deletion
+#      continue-on-error: true
+#      run: gh release delete canary_builds -y -R siavash79/PixelXpert
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Canary Binary Release
-      uses: Hs1r1us/Release-AIO@v2.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: ncipollo/release-action@v1.13.0
       with:
-        tag_name: 'canary_builds'
-        release_name: 'Latest Canary'
-        body: 'Caution: The source code assets are not associated with the zip files'
+        tag: 'canary_builds'
+        name: 'Latest Canary'
+        omitBodyDuringUpdate: true
         prerelease: true
+        allowUpdates: true
+        replacesArtifacts: true
         draft: false
-        asset_files: 'output'
+        artifacts: 'output/*.*'
 
     - name: Version Bump Commit
       uses: github-actions-x/commit@v2.9

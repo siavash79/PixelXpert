@@ -13,12 +13,15 @@ jobs:
       - name: make asset
         run: |
           mkdir output
-          echo content > output/asset.zip
+          echo content > output/newasset.zip
 
       - name: Test Release
         uses: ncipollo/release-action@v1.13.0
         with:
           tag: 'test_tag'
+          name: "test title from action"
+          omitBodyDuringUpdate: true
           prerelease: true
+          replacesArtifacts: true
           draft: true
           artifacts: 'output/*.*'

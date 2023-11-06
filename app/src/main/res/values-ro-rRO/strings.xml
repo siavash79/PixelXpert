@@ -2,9 +2,9 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Pictogramă tematică alternativă</string>
-	<string name="xposed_desc">Funcții personalizate pentru ROM-urile bazate pe Android 12+ AOSP</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Volumul media</string>
-	<string name="app_switch_tile_title">Schimbați profilul aplicației</string>
+	<string name="app_switch_tile_title">Schimbă profilul aplicației</string>
 	<string name="hide_default">Ascuns (implicit)</string>
 	<string name="percent_of_default_size">% din dimensiunea implicită</string>
 	<string name="overlay_none_title">(Implicit)</string>
@@ -18,18 +18,18 @@
 	<string name="current_version">Versiunea curentă: %s</string>
 	<string name="notification_channel_update">Actualizări</string>
 	<string name="notification_channel_update_desc">Acest canal afișează notificări despre cele mai recente actualizări.</string>
-	<string name="new_update_title">Actualizare disponibila</string>
-	<string name="new_update_desc">Este disponibilă o nouă versiune de PixelXpert</string>
+	<string name="new_update_title">Actualizare disponibilă</string>
+	<string name="new_update_desc">O nouă versiune de PixelXpert este disponibilă</string>
 	<string name="browser_not_found">Browserul nu a fost găsit</string>
 	<string name="settings_general_section_title">General</string>
-	<string name="settings_update_section_title">Actualizați</string>
+	<string name="settings_update_section_title">Actualizare</string>
 	<string name="settings_misc_section_title">Diverse</string>
 	<string name="settings_about_section_title">Despre</string>
 	<string name="settings_check_for_update_title">Verifică pentru actualizări</string>
-	<string name="auto_update_title">Verificați automat actualizările</string>
-	<string name="auto_update_summary">Verificați din când în când versiunile noi</string>
-	<string name="update_over_wifi_title">Verificați actualizările numai prin WiFi</string>
-	<string name="update_over_wifi_summary">Verificați actualizările în fundal numai atunci când sunteți conectat la wifi</string>
+	<string name="auto_update_title">Verifică automat dacă sunt actualizări</string>
+	<string name="auto_update_summary">Verifică din când în când versiunile noi</string>
+	<string name="update_over_wifi_title">Verifică actualizările numai prin WiFi</string>
+	<string name="update_over_wifi_summary">Verifică dacă există actualizări în fundal doar când ești conectat la WiFi</string>
 	<string name="github_repo_title">Depozitul GitHub</string>
 	<string name="telegram_group_title">Grupul Telegram</string>
 	<string name="usage_title">Utilizare</string>
@@ -38,18 +38,18 @@
 	<string name="lockscreen_header_title">Ecran de blocare</string>
 	<string name="statusbar_header">Bară de stare</string>
 	<string name="nav_header">Bară de navigare</string>
-	<string name="dialer_header">Telefon &amp; dialer</string>
+	<string name="dialer_header">Telefon și dialer</string>
 	<string name="misc_header">Diverse</string>
 	<string name="qs_panel_category_title">Panoul Setări Rapide</string>
 	<string name="theme_customization_category">Tematică</string>
 	<string name="pm_header">Manager de pachete</string>
 	<string name="hotspot_header">Hotspot portabil</string>
 	<!-- Hotspot settings-->
-	<string name="hotspot_hide_ssid_title">ascunde SSID</string>
+	<string name="hotspot_hide_ssid_title">Ascunde SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Timeout inactivitate</string>
-	<string name="hotspot_max_client_title">Numar maxim de clienti</string>
+	<string name="hotspot_max_client_title">Număr maxim de clienți</string>
 	<!--Lock screen related-->
-	<string name="disable_unlock_hint_title">Dezactivați animația indicii de deblocare</string>
+	<string name="disable_unlock_hint_title">Dezactivează animația de indiciu a deblocării</string>
 	<string name="ls_general_options">Opțiuni pentru ecranul de blocare</string>
 	<string name="hide_avatar_title">Eliminare avatar utilizator (mod utilizatori multipli)</string>
 	<string name="transparent_fingerprint_circle">Elimină cercul de fundal a amprentei de sub afișaj</string>
@@ -66,12 +66,12 @@
 	<string name="keyguard_bottom_buttons_transparent_title">Elimină cercul din jurul pictogramelor</string>
 	<string name="LSleftShortcutTitle">Comanda rapidă din stânga</string>
 	<string name="LSrightShortcutTitle">Comanda rapidă din dreapta</string>
-	<string name="LSleftLongClickShortcutTitle">Comandă rapidă la stânga (apăsare lungă)</string>
-	<string name="LSrightLongClickShortcutTitle">Comandă rapidă la dreapta (apăsare lungă)</string>
+	<string name="LSleftLongClickShortcutTitle">Scurtătură stânga (apăsare lungă)</string>
+	<string name="LSrightLongClickShortcutTitle">Scurtătură dreapta (apăsare lungă)</string>
 	<string name="camera_shortcut">Cameră</string>
 	<string name="assistant_shortcut">Asistent</string>
 	<string name="torch_shortcut">Lanternă</string>
-	<string name="tv_remote_shortcut">Telecomanda</string>
+	<string name="tv_remote_shortcut">Telecomandă TV</string>
 	<string name="dnd_shortcut">Nu deranjați</string>
 	<string name="qr_scanner_shortcut">Scaner de coduri QR</string>
 	<string name="shufflePin_title">Amestecare PIN</string>
@@ -79,12 +79,13 @@
 	<string name="easy_unlock_title">Deblocare ușoară (Pin/Parolă)</string>
 	<string name="easy_unlock_summary">Dacă nu a funcționat pentru prima dată, încercați din nou</string>
 	<string name="charging_info_title">Informații despre încărcare pe ecranul de blocare</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Utilizează unități imperiale</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Dublă-atingere pentru oprire ecran</string>
 	<string name="battery_style_title">Alege un stil de baterie</string>
 	<string name="battery_show_percent_title">Afișează procentajul bateriei</string>
-	<string name="battery_show_charging_animation_title">Afișați animația de încărcare</string>
+	<string name="battery_show_charging_animation_title">Arată animația de încărcare</string>
 	<string name="battery_icon_size_title">Dimensiune pictogramă baterie</string>
 	<string name="battery_hidden">Ascunsă</string>
 	<string name="BIcon_Opacity_title">Transparență</string>
@@ -100,7 +101,7 @@
 	<string name="hide_roaming_title">Ascundere indicator de roaming</string>
 	<string name="caution_mobile_costs">ATENȚIE - Necunoașterea că sunteți în roaming poate crește costurile mobile</string>
 	<string name="volte_icon_title">Afișare pictogramă VoLTE atunci când este disponibilă</string>
-	<string name="vowifi_icon_title">Afișați pictograma VoWiFi când este disponibilă</string>
+	<string name="vowifi_icon_title">Arată pictograma VoWiFi atunci când este disponibilă</string>
 	<string name="hide_privacychip_title">Ascunde indicatorii de confidențialitate\n(Camera, Mic)</string>
 	<!-- \n means next line-->
 	<string name="sbc_position_title">Poziția ceasului</string>
@@ -167,13 +168,13 @@
 	<string name="nt_stat_mode_today">Astăzi</string>
 	<string name="nt_stat_mode_week">Săptămâna aceasta</string>
 	<string name="nt_stat_mode_month">Luna curentă</string>
-	<string name="sunday">duminică</string>
-	<string name="monday">luni</string>
-	<string name="tuesday">marţi</string>
-	<string name="wednesday">miercuri</string>
-	<string name="thursday">joi</string>
-	<string name="friday">vineri</string>
-	<string name="saturday">sâmbătă</string>
+	<string name="sunday">Duminică</string>
+	<string name="monday">Luni</string>
+	<string name="tuesday">Marți</string>
+	<string name="wednesday">Miercuri</string>
+	<string name="thursday">Joi</string>
+	<string name="friday">Vineri</string>
+	<string name="saturday">Sâmbătă</string>
 	<!--Quick settings panel related-->
 	<string name="qs_mod_category_title">Numărul versiunii în subsolul panoului setărilor rapide</string>
 	<string name="qs_footer_mod_title">Modifică textul versiunii în panoul setărilor rapide</string>
@@ -210,7 +211,7 @@
 	<string name="bs_thick_track">Utilizează o pistă groasă pe glisorul de luminozitate</string>
 	<string name="quick_settings_tiles_category">Opțiuni dale QS</string>
 	<string name="qs_tile_style_title">Teme dale QS</string>
-	<string name="qs_volume_unmute_title">Valoarea de activare a sunetului pentru țiglă de volum</string>
+	<string name="qs_volume_unmute_title">Valoarea de activare a sunetului pentru dala de volum</string>
 	<!--Navigation bar related-->
 	<string name="back_gesture_category_title">Configurare gest înapoi</string>
 	<string name="back_from_left_title">Partea stângă a ecranului</string>
@@ -237,8 +238,8 @@
 	<string name="taskbar_force_disable_title">Dezactivată forțat</string>
 	<string name="taskbar_transient_title">Ascundere automată</string>
 	<!-- Package manager -->
-	<string name="pm_bypass_signature_title">Ocoliți verificarea semnăturii pachetului</string>
-	<string name="pm_allow_downgrade_title">Permiteți downgrade aplicației</string>
+	<string name="pm_bypass_signature_title">Ignoră verificarea semnăturii pachetului</string>
+	<string name="pm_allow_downgrade_title">Permite retrogradarea aplicației</string>
 	<string name="auto_off_five_minutes">Activat pentru următoarele 5 minute</string>
 	<!--Miscellaneous section related-->
 	<string name="screenshot_sound_disable_title">Dezactivare sunet captură ecran</string>
@@ -250,8 +251,8 @@
 	<string name="allow_all_screen_rotations_summary">Va ignora, de asemenea, butonul plutitor de rotație manuală</string>
 	<string name="force_no_cutout">Ignoră decuparea camerei</string>
 	<string name="clear_all_reposition_title">Adăugați un buton accesibil de ștergere toate la pagina de recente</string>
-	<string name="force_themed_icons_title">Generați automat pictogramele tematice lipsă (Android 14 - Numai lansatorul Pixel)</string>
-	<string name="reapply_themed_config">Reactivați pictogramele tematice pentru aplicare</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="reapply_themed_config">Reactivează pictogramele tematice pentru aplicare</string>
 	<string name="volume_button_step_title">Pași volum (0 la 100%)</string>
 	<string name="display_resolution_title">Rezoluție afișaj</string>
 	<string name="brightness_range_title">Limitele luminozității</string>
@@ -263,9 +264,9 @@
 	<string name="so_fingerprint_sensor_enabled">Permite senzor de amprentă când ecranul este oprit</string>
 	<string name="so_double_tap_wake_title">Apăsare dublă pentru trezire telefon</string>
 	<string name="so_double_tap_wake_summary">Dezactivează apăsarea unică pentru trezire</string>
-	<string name="so_tap_to_show_ambient_title">Atingeți pentru a afișa afișajul ambiental</string>
+	<string name="so_tap_to_show_ambient_title">Atinge pentru a afișa ecranul ambiental</string>
 	<string name="so_tap_to_show_ambient_summary">[Când întotdeauna afișat este dezactivat] Atingerea ecranului arată afișarea ambientală</string>
-	<string name="so_pick_to_show_ambient_title">Alegeți pentru a afișa afișajul ambiental</string>
+	<string name="so_pick_to_show_ambient_title">Alege pentru a afișa ecranul ambiental</string>
 	<string name="so_pick_to_show_ambient_summary">[Când tot timpul afișat este dezactivat] Alegerea telefonului arată afișajul ambiental</string>
 	<string name="doze_header">În timp ce ecranul este oprit…</string>
 	<string name="custom_themed_icons_title">Pictograme personalizate</string>
@@ -281,15 +282,15 @@
 	<string name="milliseconds">Milisecunde</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Profil de lucru/Clonare</string>
-	<string name="statusbar_long_press_app_switch">Apăsați lung pe bara de stare pentru a schimba profilul</string>
-	<string name="statusbar_app_switch_icon">Afișați o pictogramă pe bara de stare când comutarea este disponibilă</string>
+	<string name="statusbar_long_press_app_switch">Apasă lung pe bara de stare pentru a schimba profilul</string>
+	<string name="statusbar_app_switch_icon">Arată o pictogramă pe bara de stare atunci când comutarea este disponibilă</string>
 	<!-- Cloned apps bragging message -->
-	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<string name="settings_cloned_apps_active">Deblocat pentru toate aplicațiile prin <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Bucurați-vă!</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrează la răspunsul unui apel efectuat</string>
 	<string name="vibrate_on_call_drop_title">Vibrare la deconectare apel</string>
 	<string name="vibration_type_notification">Intensitatea definită de setările de vibrații ale notificărilor sistemului</string>
-	<string name="dialer_mute_record_message_title">Eliminați anunțul de înregistrare a apelurilor</string>
+	<string name="dialer_mute_record_message_title">Elimină anunțul de înregistrare a apelurilor</string>
 	<string name="dialer_mute_record_message_summary">Se aplică numai aplicației Google pentru telefon cu înregistrarea apelurilor activată</string>
 	<!-- Theming section related -->
 	<string name="gsans_override_title">Forțează sistemul de fonturi Google Sans în tot sistemul</string>
@@ -336,7 +337,7 @@
 	<string name="network_stat_month">Ziua de începere a lunii</string>
 	<!-- Incompatibility Alert -->
 	<string name="incompatible_alert_title">Incompatibil</string>
-	<string name="incompatible_alert_body">ROM-ul dvs. actual nu este ținta directă a acestui modul. Puteți continua să îl utilizați, dar este posibil ca unele (sau toate) opțiunile să nu funcționeze conform intenției\n\nVă rugăm să nu raportați erori</string>
+	<string name="incompatible_alert_body">ROM-ul actual nu este ținta directă a acestui modul. Poți continua să îl utilizezi, dar este posibil ca unele (sau toate) opțiunile să nu funcționeze conform intenției\n\nNu raporta erori</string>
 	<string name="incompatible_alert_ok_btn">Am înțeles</string>
 	<!-- App kill Alert -->
 	<string name="app_kill_alert_title">Înștiințare</string>
@@ -350,7 +351,7 @@
 	<string name="menu_import_settings">Importă setările din fișier…</string>
 	<string name="menu_export_settings">Exportă setările în fișier…</string>
 	<string name="menu_restart">Repornire</string>
-	<string name="menu_restart_system">Reporniți sistemul</string>
+	<string name="menu_restart_system">Repornire sistem</string>
 	<string name="menu_soft_restart">Repornire soft</string>
 	<string name="menu_restartSysUI">Repornire SystemUI</string>
 	<string name="menu_updates">Actualizări aplicație</string>
@@ -361,7 +362,7 @@
 	<string name="update_notification_title">Actualizare descărcată</string>
 	<string name="update_notification_text">Atingeți aici pentru instalare</string>
 	<string name="download_failed">Nu s-a putut descărca actualizarea</string>
-	<string name="try_again_later">Vă rugăm să încercați din nou mai târziu</string>
+	<string name="try_again_later">Încearcă din nou mai târziu</string>
 	<string name="update_flavor_title">Canalul de actualizare</string>
 	<string name="stable_flavor">Stabil</string>
 	<string name="update_type_title">Tip de pachet</string>
@@ -396,25 +397,31 @@
 	<string name="toggle_one_handed">Comută modul cu o mână</string>
 	<string name="sleep">Somn</string>
 	<!-- Search Preference -->
-	<string name="searchpreference_search">Cauta…</string>
-	<string name="searchpreference_clear">clar</string>
-	<string name="searchpreference_history_entry">Intrare în istorie</string>
+	<string name="searchpreference_search">Căutare…</string>
+	<string name="searchpreference_clear">Elimină</string>
+	<string name="searchpreference_history_entry">Intrare în istoric</string>
 	<string name="searchpreference_more">Mai mult</string>
-	<string name="searchpreference_clear_history">Sterge istoricul</string>
-	<string name="searchpreference_no_results">Fara rezultate</string>
+	<string name="searchpreference_clear_history">Șterge istoricul</string>
+	<string name="searchpreference_no_results">Niciun rezultat</string>
 	<!-- Hooked Packages Activity -->
 	<string name="hooked_packages_title">Pachete conectate</string>
 	<string name="package_hooked_successful">Pachetul receptiv</string>
 	<string name="package_not_hook_enabled">Pachetul nu este activat în LSposed</string>
 	<string name="package_hook_no_response">Pachetul nu răspunde</string>
 	<string name="package_not_found">Pachetul nu a fost găsit</string>
-	<string name="package_checking">Se incarca%s</string>
+	<string name="package_checking">Se încarcă%s</string>
 	<string name="package_activated">Pachetul a fost activat cu succes</string>
 	<string name="package_activation_failed">Activarea pachetului a eșuat</string>
-	<string name="activate_in_lsposed">Activați în LSPosed</string>
+	<string name="activate_in_lsposed">Activează în LSPosed</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Verificarea permisiunilor root…</string>
 	<string name="connecting_root_service">Conectarea la serviciul root…</string>
-	<string name="root_access_denied">Accesul rădăcină a fost refuzat. Vă rugăm să permiteți accesul root.</string>
+	<string name="root_access_denied">Accesul root a fost refuzat. Permite accesul root.</string>
+	<string name="root_service_failed">Nu se poate conecta la serviciile root. Încearcă din nou mai târziu</string>
 	<string name="exit">Ieșire</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Acasă</string>
+	<string name="navigation_update">Actualizare</string>
+	<string name="navigation_hooks">Cârlige</string>
+	<string name="navigation_settings">Setări</string>
 </resources>

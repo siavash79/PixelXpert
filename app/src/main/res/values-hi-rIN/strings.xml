@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">वैकल्पिक थीम वाला चिह्न</string>
-	<string name="xposed_desc">Android 12+ AOSP आधारित ROM के लिए कस्टम सुविधाएँ</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">मीडिया वॉल्यूम</string>
 	<string name="app_switch_tile_title">ऐप प्रोफ़ाइल स्विच करें</string>
 	<string name="hide_default">छुपाएं (डिफ़ॉल्ट)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">आसान अनलॉक (पिन/पासवर्ड)</string>
 	<string name="easy_unlock_summary">अगर यह पहली बार काम नहीं करता है, तो पुनः प्रयास करें</string>
 	<string name="charging_info_title">लॉक स्क्रीन पर चार्जिंग जानकारी</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">शाही इकाइयों का प्रयोग करें</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">लॉक करने के लिए डबल टैप करें</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">मैन्युअल रोटेशन फ़्लोटिंग बटन को भी अनदेखा करता है</string>
 	<string name="force_no_cutout">कैमरा कटआउट पर ध्यान न दें</string>
 	<string name="clear_all_reposition_title">हालिया बार के नीचे \'सभी साफ़ करें\' पेस्ट करें</string>
-	<string name="force_themed_icons_title">गुम थीम वाले आइकन स्वतः उत्पन्न करें (केवल Android 14 - पिक्सेल लॉन्चर)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">लागू करने के लिए थीम वाले आइकन पुनः सक्षम करें</string>
 	<string name="volume_button_step_title">वॉल्यूम चरण (0 से 100%)</string>
 	<string name="display_resolution_title">स्क्रीन रेजोल्यूशन</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">रूट अनुमतियाँ जाँचना…</string>
 	<string name="connecting_root_service">रूट सेवा से कनेक्ट करना…</string>
 	<string name="root_access_denied">रूट पहुंच अस्वीकृत. कृपया रूट एक्सेस की अनुमति दें.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">बाहर निकलना</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

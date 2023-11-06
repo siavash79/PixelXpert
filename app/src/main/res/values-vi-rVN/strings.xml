@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Biểu tượng theo chủ đề thay thế</string>
-	<string name="xposed_desc">Các tính năng tùy chỉnh cho ROM dựa trên AOSP của Android 12+</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Âm lượng đa phương tiện</string>
 	<string name="app_switch_tile_title">Chuyển hồ sơ ứng dụng</string>
 	<string name="hide_default">Ẩn (Mặc định)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Mở khoá nhanh</string>
 	<string name="easy_unlock_summary">Nếu lần đầu tiên không hoạt động, hãy thử lại</string>
 	<string name="charging_info_title">Thông tin sạc trên màn hình khóa</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Sử dụng đơn vị Hệ Thống Đo Lường Anh</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Chạm hai lần để tắt màn hình</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Bỏ qua nút nổi xoay thủ công</string>
 	<string name="force_no_cutout">Bỏ qua phần cắt máy ảnh (với các thiết bị có màn hình đục lỗ)</string>
 	<string name="clear_all_reposition_title">Thêm nút \"Xóa tất cả\" vào cuối trang ứng dụng gần đây</string>
-	<string name="force_themed_icons_title">Tự động tạo các biểu tượng theo chủ đề bị thiếu (chỉ dành cho Android 14 - Pixel launcher)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Kích hoạt lại các biểu tượng theo chủ đề để áp dụng</string>
 	<string name="volume_button_step_title">Tăng mức âm lượng (0 đến 100%)</string>
 	<string name="display_resolution_title">Độ phân giải màn hình</string>
@@ -284,7 +285,7 @@
 	<string name="statusbar_long_press_app_switch">Nhấn và giữ thanh trạng thái để chuyển hồ sơ</string>
 	<string name="statusbar_app_switch_icon">Hiển thị biểu tượng trên thanh trạng thái khi có thể chuyển đổi</string>
 	<!-- Cloned apps bragging message -->
-	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<string name="settings_cloned_apps_active">Mở khóa toàn bộ tại <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Hãy tận hưởng!</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Rung khi cuộc gọi được kết nối</string>
 	<string name="vibrate_on_call_drop_title">Rung khi cuộc gọi ngắt kết nối</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Kiểm tra quyền root…</string>
 	<string name="connecting_root_service">Kết nối với dịch vụ root…</string>
 	<string name="root_access_denied">Quyền truy cập root bị từ chối. Vui lòng cho phép quyền truy cập root.</string>
+	<string name="root_service_failed">Không thể kết nối với các dịch vụ root. Vui lòng thử lại sau</string>
 	<string name="exit">Lối ra</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Trang chủ</string>
+	<string name="navigation_update">Cập nhật</string>
+	<string name="navigation_hooks">Các móc nối</string>
+	<string name="navigation_settings">Cài đặt</string>
 </resources>

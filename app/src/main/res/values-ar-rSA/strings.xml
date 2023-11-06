@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">أيقونة الموضوع البديل</string>
-	<string name="xposed_desc">ميزات مخصصة لنظام أندرويد 12+ روم مبني على</string>
-	<string name="volume_tile_title">حجم الوسائط</string>
-	<string name="app_switch_tile_title">تبديل الملف الشخصي للتطبيق</string>
+	<string name="app_themed_icon_title">ايقونة الموضوع البديل</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="volume_tile_title">مستوى صوت الوسائط</string>
+	<string name="app_switch_tile_title">تبديل ملفك الشخصي </string>
 	<string name="hide_default">إخفاء (افتراضي)</string>
-	<string name="percent_of_default_size">% من الحجم الافتراضي</string>
-	<string name="overlay_none_title">(افتراضي)</string>
+	<string name="percent_of_default_size">٪ من الحجم الافتراضي</string>
+	<string name="overlay_none_title">(إفتراضي)</string>
 	<string name="general_section">خيارات عامة</string>
 	<string name="general_on">تشغيل</string>
 	<string name="general_off">متوقف</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">فتح سهل (بن/كلمة)</string>
 	<string name="easy_unlock_summary">إذا لم يعمل للمرة الأولى، حاول مرة أخرى</string>
 	<string name="charging_info_title">معلومات الشحن على شاشة القفل</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">استخدام الوحدات الإمبراطورية</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">النقر المزدوج للنوم</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">سوف يتجاهل أيضًا زر دوران يدوي عائم</string>
 	<string name="force_no_cutout">تجاهل قطع الكاميرا</string>
 	<string name="clear_all_reposition_title">إضافة زر واضح الوصول إلى صفحة التطبيقات الأخيرة</string>
-	<string name="force_themed_icons_title">الإنشاء التلقائي لأيقونات الموضوع المفقودة (أندرويد 14 - مشغل Pixel فقط)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">إعادة تمكين الأيقونات الثيم لتطبيق</string>
 	<string name="volume_button_step_title">درجات الصوت (0 إلى 100%)</string>
 	<string name="display_resolution_title">عرض الدقة</string>
@@ -284,7 +285,7 @@
 	<string name="statusbar_long_press_app_switch">اضغط مطولاً على شريط الحالة لتبديل الملف الشخصي</string>
 	<string name="statusbar_app_switch_icon">إظهار أيقونة على شريط الحالة عندما يكون التبديل متوفر</string>
 	<!-- Cloned apps bragging message -->
-	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<string name="settings_cloned_apps_active">مفتوح لجميع التطبيقات عبر <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: استمتع!</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">إهتزاز عند الرد على المكالمة الصادرة</string>
 	<string name="vibrate_on_call_drop_title">اهتزاز عند قطع اتصال المكالمة</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">التحقق من أذونات الجذر…</string>
 	<string name="connecting_root_service">جارٍ الاتصال بالخدمة الجذر…</string>
 	<string name="root_access_denied">تم رفض الوصول إلى الجذر. الرجاء السماح بالوصول إلى الجذر.</string>
+	<string name="root_service_failed">غير قادر على الاتصال بخدمات الجذر. الرجاء المحاولة مرة أخرى لاحقاً</string>
 	<string name="exit">الخروج</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">الصفحة الرئيسية</string>
+	<string name="navigation_update">تحديث</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">الإعدادات</string>
 </resources>

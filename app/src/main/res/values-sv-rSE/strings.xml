@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Alternativt tema ikon</string>
-	<string name="xposed_desc">Anpassade funktioner för Android 12+ AOSP-baserade ROM</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Mediavolym</string>
 	<string name="app_switch_tile_title">Byt appprofil</string>
 	<string name="hide_default">Dölj (standard)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Enkel upplåsning (Pin/Lösenord)</string>
 	<string name="easy_unlock_summary">Om det inte fungerade första gången, försök igen</string>
 	<string name="charging_info_title">Laddningsinformation på låsskärm</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Använd kejserliga enheter</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Dubbeltryck för att sova</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Kommer också att ignorera manuell rotation flytande knapp</string>
 	<string name="force_no_cutout">Ignorera kamerautskärningen</string>
 	<string name="clear_all_reposition_title">Lägg till en tillgänglig rensa-allt-knapp på sidan Senaste</string>
-	<string name="force_themed_icons_title">Generera ikoner med teman som saknas automatiskt (Android 14 – endast Pixel launcher)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Återaktivera temaikoner för att tillämpa</string>
 	<string name="volume_button_step_title">Volymsteg (0 till 100 %)</string>
 	<string name="display_resolution_title">Skärmupplösning</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Kontrollera root-behörigheter…</string>
 	<string name="connecting_root_service">Ansluter till rottjänsten…</string>
 	<string name="root_access_denied">Rotåtkomst nekad. Vänligen tillåt root-åtkomst.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Utgång</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

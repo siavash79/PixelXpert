@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Abilita l\'icona dell\'app a tema AOSP Mods alternativa</string>
-	<string name="xposed_desc">Funzionalità custom per ROM basate su Android 12+ AOSP</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Volume multimedia</string>
 	<string name="app_switch_tile_title">Cambia profilo dell\'app</string>
 	<string name="hide_default">Nascondi (Default)</string>
@@ -15,12 +15,12 @@
 	<string name="restart_needed">Richiede un riavvio per essere applicato</string>
 	<string name="more_area">più spazio</string>
 	<string name="less_area">meno spazio</string>
-	<string name="current_version">Versione attuale: %s</string>
-	<string name="notification_channel_update">Aggiornamenti</string>
-	<string name="notification_channel_update_desc">Questo canale mostra la notifica sugli ultimi aggiornamenti.</string>
+	<string name="current_version">Versione corrente: %s</string>
+	<string name="notification_channel_update">Aggiornamenti app</string>
+	<string name="notification_channel_update_desc">Questo canale mostra le notifiche sugli ultimi aggiornamenti.</string>
 	<string name="new_update_title">Aggiornamento disponibile</string>
 	<string name="new_update_desc">È disponibile una nuova versione di PixelXpert</string>
-	<string name="browser_not_found">Browser non trovato</string>
+	<string name="browser_not_found">Non è stata trovata un\'app per navigare in Internet</string>
 	<string name="settings_general_section_title">Generale</string>
 	<string name="settings_update_section_title">Aggiornamento</string>
 	<string name="settings_misc_section_title">Varie</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Sblocco facilitato (Pin/Password)</string>
 	<string name="easy_unlock_summary">Se non funziona la prima volta, riprova</string>
 	<string name="charging_info_title">Informazioni di ricarica sulla schermata di blocco</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Sistema di unità imperiali</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Doppio tocco per spegnere</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Ignorerà anche il pulsante per rotazione manuale</string>
 	<string name="force_no_cutout">Ignora foro fotocamera</string>
 	<string name="clear_all_reposition_title">Aggiungi il pulsante cancella tutto sulla schermata app recenti</string>
-	<string name="force_themed_icons_title">Genera automaticamente icone a tema mancanti (Android 14 - solo Pixel Launcher)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Riattiva le icone a tema da applicare</string>
 	<string name="volume_button_step_title">Step volume (0 – 100%)</string>
 	<string name="display_resolution_title">Risoluzione display</string>
@@ -284,7 +285,7 @@
 	<string name="statusbar_long_press_app_switch">Premi a lungo la barra di stato per cambiare profilo</string>
 	<string name="statusbar_app_switch_icon">Mostra un\'icona sulla barra di stato quando è disponibile il passaggio</string>
 	<!-- Cloned apps bragging message -->
-	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<string name="settings_cloned_apps_active">Sbloccato per tutte le app tramite <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Goditelo!</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibra alla risposta di una chiamata in uscita</string>
 	<string name="vibrate_on_call_drop_title">Vibra quando la chiamata si disconnette</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Verifica permessi root…</string>
 	<string name="connecting_root_service">Connessione al servizio root…</string>
 	<string name="root_access_denied">Accesso root negato. Si prega di consentire l\'accesso root.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Uscita</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Aggiornamenti</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Impostazioni</string>
 </resources>

@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Включение альтернативной иконки AOSPMods </string>
-	<string name="xposed_desc">Дополнительные функции для ОС Android 12+ ПЗУ на базе AOSP</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Громкость мультимедиа </string>
 	<string name="app_switch_tile_title">Сменить профиль приложения</string>
 	<string name="hide_default">Скрыть (по умолчанию)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Легкая разблокировка (пин-код/пароль)</string>
 	<string name="easy_unlock_summary">Если не получилось в первый раз, попробуйте еще раз</string>
 	<string name="charging_info_title">Информация о зарядке на экране блокировки</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Использовать британские единицы измерения</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Двойное нажатие для перехода в спящий режим</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Будет игнорировать плавающую кнопку ручного вращения</string>
 	<string name="force_no_cutout">Игнорировать вырез камеры</string>
 	<string name="clear_all_reposition_title">Добавить кнопку для очистки приложений внизу панель задач</string>
-	<string name="force_themed_icons_title">Автоматическая генерация недостающих тематических значков (только для Android 14 - Pixel launcher)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Повторное включение тематических значков для применения</string>
 	<string name="volume_button_step_title">Шаг громкости (от 0 до 100%)</string>
 	<string name="display_resolution_title">Разрешение диплея</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Проверка прав доступа к корневой системе…</string>
 	<string name="connecting_root_service">Подключение к корневому сервису…</string>
 	<string name="root_access_denied">Рут доступ запрещен. Пожалуйста, предоставьте права суперпользователя.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Выход</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

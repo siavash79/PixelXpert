@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Alternativt tema-ikon</string>
-	<string name="xposed_desc">Egendefinerte funksjoner for Android 12+ AOSP-baserte ROM-er</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Medievolum</string>
 	<string name="app_switch_tile_title">Bytt appprofil</string>
 	<string name="hide_default">Skjul (standard)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Enkel opplåsing (Pin/Passord)</string>
 	<string name="easy_unlock_summary">Hvis det ikke fungerte første gang, prøv igjen</string>
 	<string name="charging_info_title">Ladeinformasjon på låseskjerm</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Bruk keiserlige enheter</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Dobbelttrykk for å sove</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Vil også ignorere manuell rotasjon flytende knapp</string>
 	<string name="force_no_cutout">Ignorer kamerautskjæringen</string>
 	<string name="clear_all_reposition_title">Legg til en tilgjengelig slett-alt-knapp på siden for nylig</string>
-	<string name="force_themed_icons_title">Autogenerer manglende temaikoner (Android 14 – bare pikselstarter)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Aktiver temaikoner på nytt for å bruke</string>
 	<string name="volume_button_step_title">Volumtrinn (0 til 100 %)</string>
 	<string name="display_resolution_title">Skjermoppløsning</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Sjekker root-tillatelser…</string>
 	<string name="connecting_root_service">Koble til rottjenesten…</string>
 	<string name="root_access_denied">Rottilgang nektet. Tillat root-tilgang.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Exit</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

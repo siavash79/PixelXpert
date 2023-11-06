@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Alternativt tema-ikon</string>
-	<string name="xposed_desc">Brugerdefinerede funktioner til Android 12+ AOSP-baserede ROM\'er</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Medievolumen</string>
 	<string name="app_switch_tile_title">Skift appprofil</string>
 	<string name="hide_default">Skjul (standard)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Nem oplåsning (pinkode/adgangskode)</string>
 	<string name="easy_unlock_summary">Hvis det ikke virkede første gang, så prøv igen</string>
 	<string name="charging_info_title">Opladningsoplysninger på låseskærm</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Brug kejserlige enheder</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Dobbelttryk for at sove</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Vil også ignorere manuel rotation flydende knap</string>
 	<string name="force_no_cutout">Ignorer kameraets udskæring</string>
 	<string name="clear_all_reposition_title">Føj en tilgængelig knap til at rydde alt til siden for seneste nyheder</string>
-	<string name="force_themed_icons_title">Autogenerer manglende temaikoner (Android 14 – kun Pixel launcher)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Genaktiver temaikoner for at anvende</string>
 	<string name="volume_button_step_title">Lydstyrketrin (0 til 100 %)</string>
 	<string name="display_resolution_title">Skærmopløsning</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Kontrollerer root-tilladelser…</string>
 	<string name="connecting_root_service">Opretter forbindelse til rodtjenesten…</string>
 	<string name="root_access_denied">Rodadgang nægtet. Tillad venligst root-adgang.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Afslut</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

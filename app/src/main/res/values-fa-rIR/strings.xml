@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">نماد تم جایگزین</string>
-	<string name="xposed_desc">امکانات اضافی برای اندروید 12 به بالا</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">صدای موسیقی</string>
 	<string name="app_switch_tile_title">تغییر پروفایل برنامه</string>
 	<string name="hide_default">پنهان (پیش‌فرض)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">باز کردن قفل بدون دکمه ورود</string>
 	<string name="easy_unlock_summary">اگر برای اولین بار کار نکرد، دوباره امتحان کنید</string>
 	<string name="charging_info_title">نمایش اطلاعات شارژ روی صفحه قفل</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">استفاده از واحدهای آمریکایی</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">خاموشی صفحه با دو ضربه</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">همچنین دکمه شناور چرخش دستی را نادیده می گیرد</string>
 	<string name="force_no_cutout">فرض کن صفحه نمایش بریدگی دوربین ندارد</string>
 	<string name="clear_all_reposition_title">دکمه بستن تمام برنامه ها در پایین صفحه Recent اضافه شود</string>
-	<string name="force_themed_icons_title">ایجاد خودکار نمادهای مضمون گمشده (Android 14 - فقط راه‌انداز پیکسل)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">مجدداً نمادهای مضمون را فعال کنید تا اعمال شوند</string>
 	<string name="volume_button_step_title">مراحل صدای موزیک (0 تا 100%)</string>
 	<string name="display_resolution_title">ابعاد صفحه نمایش</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">بررسی مجوزهای ریشه…</string>
 	<string name="connecting_root_service">اتصال به سرویس ریشه…</string>
 	<string name="root_access_denied">دسترسی ریشه ممنوع شد. لطفاً اجازه دسترسی روت را بدهید.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">خارج شوید</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

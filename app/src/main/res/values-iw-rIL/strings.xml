@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">הפעל סמל אפליקציה חלופי עם ערכות נושא של AOSP Mods</string>
-	<string name="xposed_desc">תכונות מותאמות אישית עבור אנדרואיד 12+ ROMs מבוססי AOSP</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">עוצמת קול של מדיה</string>
 	<string name="app_switch_tile_title">החלף פרופיל אפליקציה</string>
 	<string name="hide_default">הסתר (ברירת מחדל)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">ביטול נעילה קל (קוד PIN/סיסמה)</string>
 	<string name="easy_unlock_summary">אם זה לא עבד בפעם הראשונה, נסה שוב</string>
 	<string name="charging_info_title">מידע על טעינה במסך הנעילה</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">השתמש ביחידות אימפריאליות</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">הקש פעמיים כדי לכבות את המסך</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">יתעלם גם כפתור צף מסיבוב ידני</string>
 	<string name="force_no_cutout">התעלם מגזרת המצלמה</string>
 	<string name="clear_all_reposition_title">הוסף לחצן \'ניקוי הכל\', נגיש לעמוד האחרון</string>
-	<string name="force_themed_icons_title">יצירה אוטומטית של סמלים חסרי נושא (Android 14 - משגר Pixel בלבד)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">הפעל מחדש סמלים עם נושא ליישום</string>
 	<string name="volume_button_step_title">צעדי עוצמת הקול (0 עד 100%)</string>
 	<string name="display_resolution_title">הרזולוציה של המסך</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">בדיקת הרשאות שורש…</string>
 	<string name="connecting_root_service">מתחבר לשירות השורש…</string>
 	<string name="root_access_denied">גישת שורש נדחתה. אנא אפשר גישת שורש.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">יְצִיאָה</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">启用替代的 AOSP Mods 主题应用图标</string>
-	<string name="xposed_desc">基于 Android 12+ AOSP ROM 的自定义功能</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">媒体音量</string>
 	<string name="app_switch_tile_title">Switch App Profile</string>
 	<string name="hide_default">隐藏 (默认)</string>
@@ -32,7 +32,7 @@
 	<string name="update_over_wifi_summary">Check for updates in background only when connected to wifi</string>
 	<string name="github_repo_title">GitHub 仓库</string>
 	<string name="telegram_group_title">Telegram 群组</string>
-	<string name="usage_title">Usage</string>
+	<string name="usage_title">用途</string>
 	<string name="usage_summary">打开 Wiki 页面</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">锁屏</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">简易解锁 (Pin/密码)</string>
 	<string name="easy_unlock_summary">如果第一次未生效，请重试</string>
 	<string name="charging_info_title">锁屏显示充电信息</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">使用英制单位</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">双击息屏</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">将同时无视手动旋转悬浮钮</string>
 	<string name="force_no_cutout">无视屏幕开孔</string>
 	<string name="clear_all_reposition_title">最近任务右侧添加 清除所有 按钮</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Android 14 - Pixel launcher only)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Re-enable themed icons to apply</string>
 	<string name="volume_button_step_title">音量步进 (0至100%)</string>
 	<string name="display_resolution_title">显示分辨率</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Checking root permissions…</string>
 	<string name="connecting_root_service">Connecting to the root service…</string>
 	<string name="root_access_denied">Root access denied. Please allow root access.</string>
+	<string name="root_service_failed">无法连接服务器，请稍后再试</string>
 	<string name="exit">Exit</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">首页</string>
+	<string name="navigation_update">更新</string>
+	<string name="navigation_hooks">钩子</string>
+	<string name="navigation_settings">设置</string>
 </resources>

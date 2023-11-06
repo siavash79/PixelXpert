@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Thème d\'icone alternatif</string>
-	<string name="xposed_desc">Fonctionnalités personnalisées pour les ROM basées sur Android 12+ AOSP</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Volume des médias</string>
 	<string name="app_switch_tile_title">Changer de profil d\'application</string>
 	<string name="hide_default">Cacher (par défaut)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Déverrouillage facile (code PIN/mot de passe)</string>
 	<string name="easy_unlock_summary">Si ça n’a pas marché la première fois, réessayer</string>
 	<string name="charging_info_title">Informations de charge sur l’écran de verrouillage</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Utiliser les unités impériales</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Double appui pour mise en veille</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Ignorera le bouton de changement d’orientation</string>
 	<string name="force_no_cutout">Ne pas prendre en compte l’encoche de l’appareil photo</string>
 	<string name="clear_all_reposition_title">Ajouter un bouton pour retirer toutes les applications récentes facilement</string>
-	<string name="force_themed_icons_title">Générer automatiquement des icônes thématiques manquantes (Android 14 – Lanceur de pixels uniquement)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Réactiver les icônes thématiques à appliquer</string>
 	<string name="volume_button_step_title">Pas du volume (0% à 100%)</string>
 	<string name="display_resolution_title">Résolution de l’écran</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Vérification des autorisations root…</string>
 	<string name="connecting_root_service">Connexion au service racine…</string>
 	<string name="root_access_denied">Accès root refusé. Veuillez autoriser l\'accès root.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Sortie</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

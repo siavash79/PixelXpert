@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">啟用替代的 AOSP Mods 主題應用圖示</string>
-	<string name="xposed_desc">基於 Android 12+ AOSP ROM 的自定義功能</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Media Volume</string>
 	<string name="app_switch_tile_title">Switch App Profile</string>
 	<string name="hide_default">隱藏 (預設)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">快速解鎖 (Pin/密碼)</string>
 	<string name="easy_unlock_summary">如果第一次未生效，請重試</string>
 	<string name="charging_info_title">鎖定畫面顯示充電資訊</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">使用英制單位</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">雙擊關閉螢幕</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">將同時無視手動旋轉懸浮鈕</string>
 	<string name="force_no_cutout">無視螢幕開孔</string>
 	<string name="clear_all_reposition_title">在最近任務右側「清除所有」按鈕</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Android 14 - Pixel launcher only)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Re-enable themed icons to apply</string>
 	<string name="volume_button_step_title">音量步進 (0至100%)</string>
 	<string name="display_resolution_title">顯示解析度</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Checking root permissions…</string>
 	<string name="connecting_root_service">Connecting to the root service…</string>
 	<string name="root_access_denied">Root access denied. Please allow root access.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Exit</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Alternatywna ikona tematyczna</string>
-	<string name="xposed_desc">Niestandardowe funkcje dla ROM-ów opartych na systemie Android 12+ AOSP</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Głośność multimediów</string>
 	<string name="app_switch_tile_title">Zmień profil aplikacji</string>
 	<string name="hide_default">Ukryj (domyślnie)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Łatwe odblokowanie (kod PIN/hasło)</string>
 	<string name="easy_unlock_summary">Jeśli to nie zadziałało za pierwszym razem, spróbuj ponownie</string>
 	<string name="charging_info_title">Informacje o ładowaniu na ekranie blokady</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Używaj jednostek imperialnych</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Kliknij dwukrotnie, by wyłączyc</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Zignoruje również pływający przycisk ręcznego obracania</string>
 	<string name="force_no_cutout">Zignoruj ​​wycięcie aparatu</string>
 	<string name="clear_all_reposition_title">Dodaj dostępny przycisk czyszczenia wszystkiego do strony ostatnich</string>
-	<string name="force_themed_icons_title">Automatycznie generuj brakujące ikony tematyczne (Android 14 – tylko program uruchamiający Pixel)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Włącz ponownie ikony tematyczne, aby je zastosować</string>
 	<string name="volume_button_step_title">Kroki głośności (0 do 100%)</string>
 	<string name="display_resolution_title">Rozdzielczość wyświetlacza</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Sprawdzanie uprawnień roota…</string>
 	<string name="connecting_root_service">Łączenie się z usługą root…</string>
 	<string name="root_access_denied">Odmowa dostępu do roota. Zezwól na dostęp do konta root.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Wyjście</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

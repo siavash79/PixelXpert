@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Vaihtoehtoinen teemakuvake</string>
-	<string name="xposed_desc">Mukautetut ominaisuudet Android 12+ AOSP-pohjaisille ROM-levyille</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">Media Volume</string>
 	<string name="app_switch_tile_title">Vaihda sovellusprofiilia</string>
 	<string name="hide_default">Piilota (oletus)</string>
@@ -79,6 +79,7 @@
 	<string name="easy_unlock_title">Helppo lukituksen avaaminen (Pin/Password)</string>
 	<string name="easy_unlock_summary">Jos se ei toiminut ensimmäisellä kerralla, yritä uudelleen</string>
 	<string name="charging_info_title">Lataustiedot lukitusnäytöllä</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Käytä imperialistisia yksiköitä</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Nukkumaan kaksoisnapauttamalla</string>
@@ -250,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Ohittaa myös manuaalisen kiertopainikkeen</string>
 	<string name="force_no_cutout">Ohita kameran katkaisu</string>
 	<string name="clear_all_reposition_title">Lisää käytettävissä oleva tyhjennä kaikki -painike viimeisimmät sivulle</string>
-	<string name="force_themed_icons_title">Luo puuttuvat teemakuvakkeet automaattisesti (Android 14 – vain pikselin käynnistysohjelma)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Ota teemakuvakkeet uudelleen käyttöön</string>
 	<string name="volume_button_step_title">Äänenvoimakkuuden portaat (0–100 %)</string>
 	<string name="display_resolution_title">Näytön resoluutio</string>
@@ -416,5 +417,11 @@
 	<string name="checking_root_permissions">Pääkäyttäjän oikeuksien tarkistaminen…</string>
 	<string name="connecting_root_service">Yhdistäminen juuripalveluun…</string>
 	<string name="root_access_denied">Pääkäyttäjän käyttöoikeus estetty. Salli pääkäyttäjän oikeudet.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Poistu</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

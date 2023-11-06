@@ -1,0 +1,24 @@
+name: test release action
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: make asset
+        run: |
+          mkdir output
+          echo content > output/asset.zip
+
+      - name: Test Release
+        uses: ncipollo/release-action@v1.13.0
+        with:
+          tag: 'test_tag'
+          prerelease: true
+          draft: true
+          asset_files: 'output'

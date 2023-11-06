@@ -21,4 +21,4 @@ jobs:
           tag: 'test_tag'
           prerelease: true
           draft: true
-          asset_files: 'output'
+          artifacts: 'output/*.*'

@@ -52,23 +52,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 		getWindow().setStatusBarColor(getColor(R.color.ui_bg));
 
-		// Start RootService connection
-		Intent intent = new Intent(this, RootProvider.class);
-		mCoreRootServiceConnection = new ServiceConnection() {
-			@Override
-			public void onServiceConnected(ComponentName name, IBinder service) {
-				mCoreRootServiceBound = true;
-				mRootServiceConnected.countDown();
-			}
-
-			@Override
-			public void onServiceDisconnected(ComponentName name) {
-				mCoreRootServiceBound = false;
-				mRootServiceConnected.countDown();
-			}
-		};
-		RootService.bind(intent, mCoreRootServiceConnection);
-
 		// Root permission check
 		new Thread(() -> {
 			if (Shell.getShell().isRoot()) {
@@ -92,7 +75,11 @@ public class SplashScreenActivity extends AppCompatActivity {
 				// Wait for all checks to pass and for all operations to finish
 				mRootCheckPassed.await();
 
-				mRootServiceConnected.await(5, TimeUnit.SECONDS);
+				for(int i = 0; i < 2; i++)
+				{
+					if(connectRootService())
+						break;
+				}
 
 				// Update the UI
 				setCheckUIDone(mBinding.circularRootService.getId(), mBinding.doneRootService.getId(), mRootServiceConnected.getCount() == 0);
@@ -120,6 +107,32 @@ public class SplashScreenActivity extends AppCompatActivity {
 				Log.e(TAG, e.toString());
 			}
 		}).start();
+	}
+
+	private boolean connectRootService() {
+		try {
+			// Start RootService connection
+			Intent intent = new Intent(this, RootProvider.class);
+			mCoreRootServiceConnection = new ServiceConnection() {
+				@Override
+				public void onServiceConnected(ComponentName name, IBinder service) {
+					mCoreRootServiceBound = true;
+					mRootServiceConnected.countDown();
+				}
+
+				@Override
+				public void onServiceDisconnected(ComponentName name) {
+					mCoreRootServiceBound = false;
+					mRootServiceConnected.countDown();
+				}
+			};
+			this.runOnUiThread(() -> RootService.bind(intent, mCoreRootServiceConnection));
+			return mRootServiceConnected.await(5, TimeUnit.SECONDS);
+		}
+		catch (Exception ignored)
+		{
+			return false;
+		}
 	}
 
 	private void setCheckUIDone(int circularID, int doneImageID, boolean success) {

@@ -36,22 +36,20 @@ jobs:
 
     - name: Gradlew Permissions
       run: chmod +x gradlew
+
+    - name: Signature files preparation
+      run: |
+          if [ ! -z "${{ secrets.SIGNING_KEY }}" ]; then
+            echo storePassword='${{ secrets.KEY_STORE_PASSWORD }}' >> ReleaseKey.properties
+            echo keyAlias='${{ secrets.ALIAS }}' >> ReleaseKey.properties
+            echo keyPassword='${{ secrets.KEY_PASSWORD }}' >> ReleaseKey.properties
+            echo storeFile='${{ github.workspace }}/ReleaseKey.jks' >> ReleaseKey.properties
+            echo ${{ secrets.SIGNING_KEY }} | base64 --decode > ${{ github.workspace }}/ReleaseKey.jks
+          fi
       
     - name: Gradle Build
       run: ./gradlew assembleRelease
 
-    - uses: r0adkll/sign-android-release@v1
-      name: APK Signature
-      id: sign_app
-      with:
-        releaseDirectory: app/build/outputs/apk/release
-        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-        alias: ${{ secrets.ALIAS }}
-        keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-        keyPassword: ${{ secrets.KEY_PASSWORD }}
-      env:
-        BUILD_TOOLS_VERSION: "33.0.0"
-          
     - name: Magisk Module Generation
       run: .github/make_zip.sh
 

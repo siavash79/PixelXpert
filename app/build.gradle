@@ -32,6 +32,8 @@ android {
 					storePassword keystoreProperties['storePassword']
 				}
 	}
+	catch(ignored)
+	{}
 
 	buildTypes {
 		release {

@@ -83,7 +83,6 @@ This project is open source and free for usage, build or copy. However, if you r
 - @topjohnwu for Magisk
 - @rovo89 for Xposed
 - Team LSPosed
-- Team EvolutionX (Specially @kdrag0n). Some of the mods are inspired from their work
 - apsun@github for remote-preferences
 - @nijel8 for double-tap to wake
 

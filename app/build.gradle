@@ -17,13 +17,37 @@ android {
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
 
-	buildTypes {
-		release {
-			minifyEnabled false
-			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-			signingConfig signingConfigs.debug
+	final def keystorePropertiesFile = rootProject.file("releaseKey.properties")
+
+	def releaseSignature = signingConfigs.debug
+	if (keystorePropertiesFile.exists()) {
+		final def keystoreProperties = new Properties()
+		try(def keystorePropertiesStream = new FileInputStream(keystorePropertiesFile))
+		{
+			keystoreProperties.load(keystorePropertiesStream)
+			releaseSignature = signingConfigs.create("releaseSignature")
+					{
+						keyAlias keystoreProperties['keyAlias']
+						keyPassword keystoreProperties['keyPassword']
+						storeFile rootProject.file(keystoreProperties['storeFile'])
+						storePassword keystoreProperties['storePassword']
+					}
 		}
 	}
+
+	buildTypes {
+		release {
+			minifyEnabled true
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			signingConfig releaseSignature
+		}
+		debug {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			signingConfig releaseSignature
+		}
+	}
+
 	applicationVariants.configureEach { variant ->
 		variant.outputs.configureEach { output ->
 			outputFileName = new File("PixelXpert.apk")

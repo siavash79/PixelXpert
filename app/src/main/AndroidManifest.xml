@@ -5,15 +5,8 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-	<queries>
-		<package android:name="com.android.systemui" /> <!-- systemUI -->
-		<package android:name="com.google.android.apps.nexuslauncher" /> <!-- Pixel Launcher - Taskbar -->
-		<package android:name="android" /> <!-- System Framework -->
-		<package android:name="com.android.phone" /> <!-- phone services -->
-		<package android:name="com.android.settings" /> <!-- settings app -->
-		<package android:name="com.google.android.dialer" /> <!-- google dialer -->
-	</queries>
+	<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+		tools:ignore="QueryAllPackagesPermission" />
 
 	<application
 		android:enableOnBackInvokedCallback="true"
@@ -88,7 +81,8 @@
 		</service>
 		<service
 			android:name=".service.RootProviderProxy"
-			android:exported="true" />
+			android:exported="true"
+			tools:ignore="ExportedService" />
 
 		<receiver
 			android:name=".utils.BootReceiver"

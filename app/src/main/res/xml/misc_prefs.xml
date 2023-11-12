@@ -150,7 +150,6 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			android:key="VolumeDialogTimeout"
-			android:summary="@string/volume_dialog_timeout_summary"
 			android:title="@string/volume_dialog_timeout"
 			app:defaultValue="3000"
 			app:iconSpaceReserved="false"

@@ -64,6 +64,7 @@ public class PreferenceHelper {
 
 			case "DisableLockScreenPill":
 			case "ForceThemedLauncherIcons":
+			case "DisableOngoingNotifDismiss":
 				return Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
 
 			case "font_dependent":

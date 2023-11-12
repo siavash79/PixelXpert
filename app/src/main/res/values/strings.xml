@@ -317,6 +317,11 @@
 	<string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for within LSPosed</string>
 	<string name="milliseconds">Milliseconds</string>
 
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_dialog_timeout_summary">(in milliseconds)</string>
+
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Work/Clone Profile</string>
 	<string name="statusbar_long_press_app_switch">Long press statusbar to switch profile</string>

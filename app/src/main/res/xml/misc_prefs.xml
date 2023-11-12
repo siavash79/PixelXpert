@@ -138,6 +138,24 @@
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
 	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/volume_panel_category"
+		app:iconSpaceReserved="false"
+		search:ignore="true">
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+			android:key="VolumeDialogTimeout"
+			android:title="@string/volume_dialog_timeout"
+			android:summary="@string/volume_dialog_timeout_summary"
+			app:defaultValue="3000"
+			app:iconSpaceReserved="false"
+			app:maxVal="5000"
+			app:minVal="1000"
+			app:tickInterval="500"
+			app:valueCount="1" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
 		android:title="@string/work_clone_profile_header"
 		app:iconSpaceReserved="false"
 		search:ignore="true">

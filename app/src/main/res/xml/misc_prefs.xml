@@ -103,6 +103,29 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
+			android:key="sysui_tuner"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="SystemUI Tuner"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="disableOverScroll"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/overscroll_on_summary"
+			android:title="@string/disable_overscroll"
+			app:iconSpaceReserved="false" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/volume_panel_category"
+		app:iconSpaceReserved="false"
+		search:ignore="true">
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
 			android:key="SeparateRingNotifVol"
 			android:summary="@string/restart_needed"
 			android:title="@string/separate_ring_notif_vol_title"
@@ -121,19 +144,20 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
-			android:key="sysui_tuner"
-			android:summaryOff="@string/general_off"
-			android:summaryOn="@string/general_on"
-			android:title="SystemUI Tuner"
+			android:key="holdVolumeToSkip"
+			android:title="@string/so_vol_longpress_skip"
 			app:iconSpaceReserved="false" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="disableOverScroll"
-			android:summaryOff="@string/general_off"
-			android:summaryOn="@string/overscroll_on_summary"
-			android:title="@string/disable_overscroll"
-			app:iconSpaceReserved="false" />
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+			android:key="VolumeDialogTimeout"
+			android:summary="@string/volume_dialog_timeout_summary"
+			android:title="@string/volume_dialog_timeout"
+			app:defaultValue="3000"
+			app:iconSpaceReserved="false"
+			app:maxVal="5000"
+			app:minVal="1000"
+			app:tickInterval="500"
+			app:valueCount="1" />
 
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
@@ -183,12 +207,6 @@
 			android:defaultValue="false"
 			android:key="replaceAssistantwithTorch"
 			android:title="@string/so_power_longpress_torch_title"
-			app:iconSpaceReserved="false" />
-
-		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="holdVolumeToSkip"
-			android:title="@string/so_vol_longpress_skip"
 			app:iconSpaceReserved="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference

@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">ايقونة الموضوع البديل</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">تخصيصات لأجهزة جوجل بيكسيل</string>
 	<string name="volume_tile_title">مستوى صوت الوسائط</string>
 	<string name="app_switch_tile_title">تبديل ملفك الشخصي </string>
 	<string name="hide_default">إخفاء (افتراضي)</string>
@@ -79,7 +79,7 @@
 	<string name="easy_unlock_title">فتح سهل (بن/كلمة)</string>
 	<string name="easy_unlock_summary">إذا لم يعمل للمرة الأولى، حاول مرة أخرى</string>
 	<string name="charging_info_title">معلومات الشحن على شاشة القفل</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">لا تظهر اشعار \"تخصيص شاشة القفل\"</string>
 	<string name="imperial_units_title">استخدام الوحدات الإمبراطورية</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">النقر المزدوج للنوم</string>
@@ -251,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">سوف يتجاهل أيضًا زر دوران يدوي عائم</string>
 	<string name="force_no_cutout">تجاهل قطع الكاميرا</string>
 	<string name="clear_all_reposition_title">إضافة زر واضح الوصول إلى صفحة التطبيقات الأخيرة</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="force_themed_icons_title">الإنشاء التلقائي للأيقونات ذات السمات المفقودة (Pixel Launcher فقط)</string>
 	<string name="reapply_themed_config">إعادة تمكين الأيقونات الثيم لتطبيق</string>
 	<string name="volume_button_step_title">درجات الصوت (0 إلى 100%)</string>
 	<string name="display_resolution_title">عرض الدقة</string>

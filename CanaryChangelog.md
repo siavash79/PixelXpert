@@ -1,3 +1,5 @@
+**canary-295**  
+  
 **canary-294**  
 - Recents taskbar now shows suggested apps if there's no recent app to show  
 - New language: Arabic (You can contribute to translations on: https://crowdin.com/project/aospmods)  

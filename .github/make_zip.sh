@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir -p output
-cp app/build/outputs/apk/release/PixelXpert-signed.apk MagiskModBase/system/priv-app/PixelXpert/PixelXpert.apk
+cp app/build/outputs/apk/release/PixelXpert.apk MagiskModBase/system/priv-app/PixelXpert/PixelXpert.apk
 cd MagiskModBase;
 FILENAME="PixelXpert.zip"
 

@@ -48,6 +48,7 @@ import sh.siava.pixelxpert.modpacks.systemui.ThemeManager_14;
 import sh.siava.pixelxpert.modpacks.systemui.ThermalProvider;
 import sh.siava.pixelxpert.modpacks.systemui.ThreeButtonNavMods;
 import sh.siava.pixelxpert.modpacks.systemui.UDFPSManager;
+import sh.siava.pixelxpert.modpacks.systemui.VolumeDialog;
 import sh.siava.pixelxpert.modpacks.systemui.VolumeTile;
 import sh.siava.pixelxpert.modpacks.telecom.CallVibrator;
 import sh.siava.pixelxpert.modpacks.utils.Helpers;
@@ -119,6 +120,7 @@ public class ModPacks {
 					modPacks.add(NotificationManager.class);
 					modPacks.add(VolumeTile.class);
 					modPacks.add(ScreenRecord.class);
+					modPacks.add(VolumeDialog.class);
 				}
 				break;
 			case Constants.LAUNCHER_PACKAGE:

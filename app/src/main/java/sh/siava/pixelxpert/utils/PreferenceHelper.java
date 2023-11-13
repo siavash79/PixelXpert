@@ -13,8 +13,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.SeekBarPreference;
 
-import com.topjohnwu.superuser.Shell;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -64,6 +62,7 @@ public class PreferenceHelper {
 
 			case "DisableLockScreenPill":
 			case "ForceThemedLauncherIcons":
+			case "DisableOngoingNotifDismiss":
 				return Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
 
 			case "font_dependent":
@@ -305,6 +304,17 @@ public class PreferenceHelper {
 	@Nullable
 	public static String getSummary(Context fragmentCompat, @NonNull String key) {
 		switch (key) {
+			case "VolumeDialogTimeout":
+				int VolumeDialogTimeout = 3000;
+				try
+				{
+					VolumeDialogTimeout = Math.round(RangeSliderPreference.getValues(instance.mPreferences, "VolumeDialogTimeout", 3000).get(0));
+				}
+				catch (Throwable ignored){}
+				return VolumeDialogTimeout == 3000
+						? fragmentCompat.getString(R.string.word_default)
+						: String.format("%s %s", VolumeDialogTimeout, fragmentCompat.getString(R.string.milliseconds));
+
 			case "taskbarHeightOverride":
 				float taskbarHeightOverride = 100f;
 				try {

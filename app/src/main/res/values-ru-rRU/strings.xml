@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Включение альтернативной иконки AOSPMods </string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc"></string>
 	<string name="volume_tile_title">Громкость мультимедиа </string>
 	<string name="app_switch_tile_title">Сменить профиль приложения</string>
 	<string name="hide_default">Скрыть (по умолчанию)</string>

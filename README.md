@@ -39,6 +39,7 @@ Here is the compatibility chart according to different android versions and QPRs
 - Android 13 stable QPR1 (up until November 2022 firmware): [final version: v.2.4.1](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1).
 - Android 13 stable QPR3 (starting from December 2022 firmware till QPR3): [starting with v.2.5](https://github.com/siavash79/PixelXpert/releases/tag/v2.5.0) up until the latest stable/canary versions.
 - Android 14: [starting with v.2.9](https://github.com/siavash79/PixelXpert/releases/tag/v2.9.0) up until the latest stable/canary versions.
+<hr>
 
 ### **Prerequisites:**
 - Compatible ROM (see Compatibility text above)
@@ -56,15 +57,13 @@ P.S. For KSU, there is an extra step of granting root access to PixelXpert as it
 <hr>
 
 ### **Release Variants:**  
-The module is also released in 2 flavors with different download and update procedures.
+The module is also released in 2 flavors with different manual download and update procedures. But both can utilize automated updates through magisk manager, or through in-app updater (for canary, updates will not count against the module's download count).
 
 <ins>Stable release:</ins> 
-- Manual Install/Update: through repository's Github release page (link below) AND through in-app updater  
-- Automated updates: through magisk manager, or through in-app updater
+- Manual Install/Update: through repository's Github release page (link below) AND through in-app updater
 
 <ins>Canary release:</ins>
-- Manual Install/Update: through repository's Actions page and [telegram channel](https://t.me/PixelXpert_Discussion) (latest version is available from [here](https://github.com/siavash79/PixelXpert/releases/tag/canary_builds) also)
-- Automated install/updates: through in-app updater - updates will NOT count against the module's download count  
+- Manual Install/Update: through repository's Actions page and [telegram channel](https://t.me/PixelXpert_Github) (latest version is available from [here](https://github.com/siavash79/PixelXpert/releases/tag/canary_builds) also)
 
 *No matter which flavor you're on, you can always switch to the other one with in-app updater
 <hr>
@@ -83,7 +82,6 @@ This project is open source and free for usage, build or copy. However, if you r
 - @topjohnwu for Magisk
 - @rovo89 for Xposed
 - Team LSPosed
-- Team EvolutionX (Specially @kdrag0n). Some of the mods are inspired from their work
 - apsun@github for remote-preferences
 - @nijel8 for double-tap to wake
 

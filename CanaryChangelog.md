@@ -1,4 +1,5 @@
 **canary-295**  
+- QS light theme footer shape size correction
   
 **canary-294**  
 - Recents taskbar now shows suggested apps if there's no recent app to show  

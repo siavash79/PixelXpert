@@ -1,3 +1,7 @@
+**canary-295**  
+- A14: QS light theme footer shape size correction  
+- Added option to change volume dialog timeout time  
+  
 **canary-294**  
 - Recents taskbar now shows suggested apps if there's no recent app to show  
 - New language: Arabic (You can contribute to translations on: https://crowdin.com/project/aospmods)  

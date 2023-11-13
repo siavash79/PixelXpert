@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">Dlouhým stisknutím tlačítek hlasitosti přeskočíte hudbu</string>
 	<string name="notifications_header">Možnosti oznámení</string>
 	<string name="expand_notifications_icons_title">Přidat rozbalit/sbalit všechna tlačítka</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Nikdy nezavírat probíhající oznámení (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Trvání upozornění na upozornění</string>
 	<string name="disable_overscroll">Zakázat efekt elastického přetažení</string>
 	<string name="overscroll_on_summary">Důležité: MUSÍTE povolit aplikace, u kterých chcete zakázat přetáčení v rámci LSPosed</string>
 	<string name="milliseconds">milisekundy</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Profil práce/klonování</string>
 	<string name="statusbar_long_press_app_switch">Dlouhým stisknutím stavového řádku přepnete profil</string>

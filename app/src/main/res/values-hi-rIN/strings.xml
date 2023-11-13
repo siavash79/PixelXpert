@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">ट्रैक्स को छोड़ने के लिए वॉल्यूम को देर तक दबाएं*</string>
 	<string name="notifications_header">सूचना सेटिंग</string>
 	<string name="expand_notifications_icons_title">सभी को विस्तृत/संक्षिप्त करें</string>
-	<string name="disbale_ongoing_notif_dismiss_title">चल रही सूचनाओं को कभी भी ख़ारिज न करें (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">अग्रणी अधिसूचना अवधि</string>
 	<string name="disable_overscroll">इलास्टिक ओवरस्क्रॉलिंग प्रभाव अक्षम करें</string>
 	<string name="overscroll_on_summary">महत्वपूर्ण: आप उन ऐप्स को अवश्य सक्षम करें जिनके लिए आप LSPosed में ओवरस्क्रॉल अक्षम करना चाहते हैं</string>
 	<string name="milliseconds">मिलीसेकंड</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">कार्य/क्लोन प्रोफ़ाइल</string>
 	<string name="statusbar_long_press_app_switch">प्रोफ़ाइल स्विच करने के लिए स्टेटसबार को देर तक दबाएँ</string>

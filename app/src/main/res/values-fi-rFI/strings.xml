@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">Ohita musiikki painamalla äänenvoimakkuuspainikkeita pitkään</string>
 	<string name="notifications_header">Ilmoitusvaihtoehdot</string>
 	<string name="expand_notifications_icons_title">Lisää laajenna/kutista kaikki painikkeet</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Älä koskaan hylkää meneillään olevia ilmoituksia (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Varoitusilmoituksen kesto</string>
 	<string name="disable_overscroll">Poista elastinen ylivieritystehoste käytöstä</string>
 	<string name="overscroll_on_summary">Tärkeää: sinun TÄYTYY ottaa käyttöön sovellukset, joiden ylivierityksen haluat poistaa käytöstä LSPosedissa</string>
 	<string name="milliseconds">Millisekuntia</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Työ/klooniprofiili</string>
 	<string name="statusbar_long_press_app_switch">Vaihda profiilia painamalla pitkään tilapalkkia</string>

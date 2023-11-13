@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">فشار طولانی دکمه های میزان صدا برای رد کردن موزیک</string>
 	<string name="notifications_header">تنظیمات اعلان ها</string>
 	<string name="expand_notifications_icons_title">افزودن دکمه باز و بسته کردن تمام اعلانها</string>
-	<string name="disbale_ongoing_notif_dismiss_title">هرگز اعلان‌های جاری را نادیده نگیرید (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">هرگز اعلان‌های جاری حذف نشوند</string>
 	<string name="heads_up_notification_duration">مدت زمان اعلان هدآپ</string>
 	<string name="disable_overscroll">غیر فعال کردن حالت الاستیک اسکرول صفحه</string>
 	<string name="overscroll_on_summary">مهم: هر برنامه که این امکان مورد نیاز است باید در LSposed اضافه شود</string>
 	<string name="milliseconds">هزارم ثانیه</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">نمایه کار/کلون</string>
 	<string name="statusbar_long_press_app_switch">برای تغییر نمایه، نوار وضعیت را طولانی فشار دهید</string>

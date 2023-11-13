@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">Maintenir les boutons du volume pour changer de chanson</string>
 	<string name="notifications_header">Préférences des notifications</string>
 	<string name="expand_notifications_icons_title">Ajouter un bouton pour étendre/réduire toutes les notifications</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Ne jamais ignorer les notifications en cours (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Durée des notifications d’avertissement</string>
 	<string name="disable_overscroll">Désactiver l’effet elastique de fin de défilement</string>
 	<string name="overscroll_on_summary">Important : les applications dans lesquelles l’effet sera actif sont celles activées dans LSPosed</string>
 	<string name="milliseconds">Millisecondes</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Profil de travail/clonage</string>
 	<string name="statusbar_long_press_app_switch">Appuyez longuement sur la barre d\'état pour changer de profil</string>

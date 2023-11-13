@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">启用替代的 AOSP Mods 主题应用图标</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">自定义 Google Pixel 设备</string>
 	<string name="volume_tile_title">媒体音量</string>
 	<string name="app_switch_tile_title">Switch App Profile</string>
 	<string name="hide_default">隐藏 (默认)</string>
@@ -79,7 +79,7 @@
 	<string name="easy_unlock_title">简易解锁 (Pin/密码)</string>
 	<string name="easy_unlock_summary">如果第一次未生效，请重试</string>
 	<string name="charging_info_title">锁屏显示充电信息</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">不显示 “自定义锁屏”胶囊</string>
 	<string name="imperial_units_title">使用英制单位</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">双击息屏</string>
@@ -251,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">将同时无视手动旋转悬浮钮</string>
 	<string name="force_no_cutout">无视屏幕开孔</string>
 	<string name="clear_all_reposition_title">最近任务右侧添加 清除所有 按钮</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="force_themed_icons_title">自动生成缺少的主题图标 (只适配 Pixel 启动器)</string>
 	<string name="reapply_themed_config">Re-enable themed icons to apply</string>
 	<string name="volume_button_step_title">音量步进 (0至100%)</string>
 	<string name="display_resolution_title">显示分辨率</string>
@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">长按音量键切歌</string>
 	<string name="notifications_header">通知选项</string>
 	<string name="expand_notifications_icons_title">添加展开 / 折叠所有按钮</string>
-	<string name="disbale_ongoing_notif_dismiss_title">永不取消正在进行的通知 (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">永不取消正在进行的通知</string>
 	<string name="heads_up_notification_duration">通知浮动持续时间</string>
 	<string name="disable_overscroll">禁用过度滚动效果</string>
 	<string name="overscroll_on_summary">重要:你必须在 LSPosed 作用域中勾选你要禁用的app</string>
 	<string name="milliseconds">毫秒</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">音量面板</string>
+	<string name="volume_dialog_timeout">音量控制超时</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Work/Clone Profile</string>
 	<string name="statusbar_long_press_app_switch">Long press statusbar to switch profile</string>

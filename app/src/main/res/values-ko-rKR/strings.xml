@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">볼륨 버튼 길게 눌러 곡 넘기기</string>
 	<string name="notifications_header">알림 설정</string>
 	<string name="expand_notifications_icons_title">전부 펼치기 / 전부 접기 버튼 추가</string>
-	<string name="disbale_ongoing_notif_dismiss_title">진행 중인 알림을 닫지 않음(A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">헤드업 알림 지속 시간</string>
 	<string name="disable_overscroll">늘어나는 오버스크롤 효과 비활성화</string>
 	<string name="overscroll_on_summary">중요: LSPosed 설정 내에서 오버스크롤 효과를 비활성화시킬 앱을 추가해야 합니다</string>
 	<string name="milliseconds">밀리초</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">직장/복제 프로필</string>
 	<string name="statusbar_long_press_app_switch">상태표시줄을 길게 눌러 프로필 전환하기</string>

@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">音量ボタン長押しで曲をスキップ</string>
 	<string name="notifications_header">通知のオプション</string>
 	<string name="expand_notifications_icons_title">Add expand/collapse all buttons</string>
-	<string name="disbale_ongoing_notif_dismiss_title">進行中の通知を無視しないでください (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Heads-up notification duration</string>
 	<string name="disable_overscroll">オーバースクロール効果を無効化</string>
 	<string name="overscroll_on_summary">重要事項: LSPosedでオーバースクロールを無効化するアプリをスコープに追加をする必要があります</string>
 	<string name="milliseconds">ミリ秒</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">作業/クローンプロファイル</string>
 	<string name="statusbar_long_press_app_switch">ステータスバーを長押ししてプロファイルを切り替えます</string>

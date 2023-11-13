@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">اضغط مطولاً على أزرار الصوت لتخطي الموسيقى</string>
 	<string name="notifications_header">خيارات الإشعارات</string>
 	<string name="expand_notifications_icons_title">إضافة تمديد / إغلاق جميع الأزرار</string>
-	<string name="disbale_ongoing_notif_dismiss_title">عدم تجاهل الإشعارات الجارية أبدا (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">مدة الإشعار بالرؤوس</string>
 	<string name="disable_overscroll">تعطيل تأثير التمرير المرن</string>
 	<string name="overscroll_on_summary">هام: يمكنك تمكين التطبيقات التي تريد تعطيل التمرير الزائد داخل LSPosed</string>
 	<string name="milliseconds">المللي ثانية</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">الملف الشخصي للعمل/غير الشخصي</string>
 	<string name="statusbar_long_press_app_switch">اضغط مطولاً على شريط الحالة لتبديل الملف الشخصي</string>

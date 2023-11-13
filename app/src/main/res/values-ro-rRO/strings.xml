@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">Apăsare lungă butoane Volum pentru a omite melodia</string>
 	<string name="notifications_header">Opțiuni notificări</string>
 	<string name="expand_notifications_icons_title">Adaugă butoane extindere/restrânge toate</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Nu respinge niciodată notificările în curs (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Nu respinge niciodată notificările în desfășurare</string>
 	<string name="heads_up_notification_duration">Durată notificare de atenționare</string>
 	<string name="disable_overscroll">Dezactivare efect de derulare elastică</string>
 	<string name="overscroll_on_summary">Important: TREBUIE să activați aplicațiile pentru care doriți să dezactivați derularea elastică în LSPosed</string>
 	<string name="milliseconds">Milisecunde</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Panou de volum</string>
+	<string name="volume_dialog_timeout">Expirare panou de volum</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Profil de lucru/Clonare</string>
 	<string name="statusbar_long_press_app_switch">Apasă lung pe bara de stare pentru a schimba profilul</string>

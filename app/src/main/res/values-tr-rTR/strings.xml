@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">Ses düğmelerine uzun süre basılı tutarak müziği atla</string>
 	<string name="notifications_header">Bildirim seçenekleri</string>
 	<string name="expand_notifications_icons_title">Tüm bildirimleri genişletme/daraltma butonu ekle</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Devam eden bildirimleri asla kapatma (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Devam eden bildirimleri asla kapatma</string>
 	<string name="heads_up_notification_duration">Uyarı bildirimi süresi</string>
 	<string name="disable_overscroll">Elastik kaydırma efektini devre dışı bırak</string>
 	<string name="overscroll_on_summary">Önemli: LSPosed içinde kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
 	<string name="milliseconds">Millisaniyeler</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Ses paneli</string>
+	<string name="volume_dialog_timeout">Ses paneli zaman aşımı</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Çalışma/Klon Profili</string>
 	<string name="statusbar_long_press_app_switch">Profil değiştirmek için durum çubuğuna uzun basın</string>

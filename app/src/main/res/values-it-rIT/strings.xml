@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">Premi a lungo i pulsanti volume per saltare traccia</string>
 	<string name="notifications_header">Opzioni di notifica</string>
 	<string name="expand_notifications_icons_title">Aggiungi pulsante espandi/comprimi tutte</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Non eliminare mai le notifiche in corso (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Non eliminare mai le notifiche in corso</string>
 	<string name="heads_up_notification_duration">Durata notifica heads-up</string>
 	<string name="disable_overscroll">Disattiva l\'effetto di overscroll elastico</string>
 	<string name="overscroll_on_summary">Importante: DEVI abilitare le app per le quali desideri disabilitare l\'overscroll all\'interno di LSPosed</string>
 	<string name="milliseconds">Milliseconds</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Pannello del volume</string>
+	<string name="volume_dialog_timeout">Durata del pannello volume</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Lavora/Clona profilo</string>
 	<string name="statusbar_long_press_app_switch">Premi a lungo la barra di stato per cambiare profilo</string>

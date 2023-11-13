@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">Nhấn và giữ phím âm lượng để \"+Chuyển tiếp/-Phát lại\" bài hát</string>
 	<string name="notifications_header">Tùy chỉnh thông báo</string>
 	<string name="expand_notifications_icons_title">Thêm nút Mở rộng/Thu gọn tất cả thông báo</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Không bao giờ loại bỏ các thông báo đang diễn ra (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Thời gian hiển thị thông báo</string>
 	<string name="disable_overscroll">Tắt hiệu ứng cuộn</string>
 	<string name="overscroll_on_summary">Quan trọng: bạn PHẢI bật các ứng dụng bạn muốn tắt hiệu ứng cuộn trong LSPosed</string>
 	<string name="milliseconds">Mili giây</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Hồ sơ công việc/bản sao</string>
 	<string name="statusbar_long_press_app_switch">Nhấn và giữ thanh trạng thái để chuyển hồ sơ</string>

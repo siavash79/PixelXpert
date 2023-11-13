@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">Долгое нажатие клавишь громкости для переключения треков</string>
 	<string name="notifications_header">Параметры уведомлений</string>
 	<string name="expand_notifications_icons_title">Добавить кнопки развернуть/свернуть все</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Никогда не закрывайте текущие уведомления (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Длительность уведомления о предупреждениях</string>
 	<string name="disable_overscroll">Отключить эффект упругости в конце прокрутки</string>
 	<string name="overscroll_on_summary">Важно: Вы ДОЛЖНЫ включить приложения, для которых Вы хотите отключить прокрутку, в LSPosed</string>
 	<string name="milliseconds">Миллисекунды</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Работать/Клонировать Профиль</string>
 	<string name="statusbar_long_press_app_switch">Длительное нажатие на строке состояния для переключения профиля</string>

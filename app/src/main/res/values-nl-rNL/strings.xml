@@ -275,11 +275,14 @@
 	<string name="so_vol_longpress_skip">Druk lang op Volume om muziek over te slaan*</string>
 	<string name="notifications_header">Opties voor meldingen</string>
 	<string name="expand_notifications_icons_title">Alle knoppen uitvouwen/samenvouwen toevoegen</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Negeer lopende meldingen nooit (A14+)</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Duur van heads-up-melding</string>
 	<string name="disable_overscroll">Elastisch overscroll-effect uitschakelen</string>
 	<string name="overscroll_on_summary">Belangrijk: je MOET de apps inschakelen waarvoor je overscroll wilt uitschakelen, in LSPosed</string>
 	<string name="milliseconds">Milliseconden</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Werk-/kloonprofiel</string>
 	<string name="statusbar_long_press_app_switch">Houd de statusbalk lang ingedrukt om van profiel te wisselen</string>

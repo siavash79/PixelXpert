@@ -1,3 +1,5 @@
+**canary-296**  
+  
 **canary-295**  
 - QS light theme footer shape size correction
   

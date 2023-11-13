@@ -2,7 +2,6 @@ package sh.siava.pixelxpert.modpacks.systemui;
 
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.WHITE;
-import static android.graphics.Paint.Style.FILL;
 import static android.service.quicksettings.Tile.STATE_ACTIVE;
 import static android.service.quicksettings.Tile.STATE_UNAVAILABLE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
@@ -25,8 +24,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.RemoteException;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +59,6 @@ public class ThemeManager_14 extends XposedModPack {
 
 	private int colorUnavailable;
 	private int colorActive;
-	private Drawable lightFooterShape = null;
 	private int mScrimBehindTint = BLACK;
 	private Object unlockedScrimState;
 
@@ -70,7 +66,6 @@ public class ThemeManager_14 extends XposedModPack {
 		super(context);
 		if (!listensTo(context.getPackageName())) return;
 
-		lightFooterShape = getFooterShape(context);
 		isDark = isDarkMode();
 	}
 
@@ -350,7 +345,7 @@ public class ThemeManager_14 extends XposedModPack {
 					ViewGroup parent = (ViewGroup) settings_button_container.getParent();
 					for (int i = 0; i < 3; i++) //Security + Foreground services containers
 					{
-						parent.getChildAt(i).setBackground(lightFooterShape.getConstantState().newDrawable().mutate());
+						parent.getChildAt(i).getBackground().setTint(colorInactive);
 					}
 				}
 			}
@@ -529,8 +524,6 @@ public class ThemeManager_14 extends XposedModPack {
 			colorInactive = mContext.getColor(android.R.color.system_accent1_10);
 
 			colorUnavailable = applyAlpha(0.3f, colorInactive); //30% opacity of inactive color
-
-			lightFooterShape.setTint(colorInactive);
 		}
 	}
 
@@ -543,18 +536,6 @@ public class ThemeManager_14 extends XposedModPack {
 		alpha *= Color.alpha(inputColor);
 		return Color.argb((int) (alpha), Color.red(inputColor), Color.green(inputColor),
 				Color.blue(inputColor));
-	}
-
-	private static Drawable getFooterShape(Context context) {
-		Resources res = context.getResources();
-		@SuppressLint("DiscouragedApi") int radius = res.getDimensionPixelSize(res.getIdentifier("qs_security_footer_corner_radius", "dimen", context.getPackageName()));
-		float[] radiusF = new float[8];
-		for (int i = 0; i < 8; i++) {
-			radiusF[i] = radius;
-		}
-		final ShapeDrawable result = new ShapeDrawable(new RoundRectShape(radiusF, null, null));
-		result.getPaint().setStyle(FILL);
-		return result;
 	}
 
 	@Override

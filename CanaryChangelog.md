@@ -1,6 +1,8 @@
 **canary-297**  
+- app: fixed unrelated preferences change together
   
 **canary-296**  
+- fixed canary 295 build fail
   
 **canary-295**  
 - QS light theme footer shape size correction

@@ -23,6 +23,8 @@ public class AppUtils {
 				Shell.cmd("kill $(pidof zygote)").submit();
 				Shell.cmd("kill $(pidof zygote64)").submit();
 				break;
+			default:
+				Shell.cmd(String.format("killall %s", what)).submit();
 		}
 	}
 

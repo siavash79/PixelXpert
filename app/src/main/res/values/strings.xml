@@ -490,6 +490,9 @@
 	<string name="package_activated">Package successfully activated</string>
 	<string name="package_activation_failed">Package activation failed</string>
 	<string name="activate_in_lsposed">Activate in LSPosed</string>
+	<string name="package_not_launchable">Package is not launch-able</string>
+	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_restart_app">Restart app</string>
 
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Checking root permissions…</string>

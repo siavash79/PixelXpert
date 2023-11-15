@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/launch_app"
+		android:title="@string/menu_launch_app" />
+	<item
+		android:id="@+id/restart_app"
+		android:title="@string/menu_restart_app" />
+</menu>

@@ -3,6 +3,8 @@ package sh.siava.pixelxpert.ui.fragments;
 import static android.content.Context.RECEIVER_EXPORTED;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static sh.siava.pixelxpert.modpacks.Constants.SYSTEM_FRAMEWORK_PACKAGE;
+import static sh.siava.pixelxpert.modpacks.Constants.SYSTEM_UI_PACKAGE;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -17,12 +19,15 @@ import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ipc.RootService;
 
 import java.util.ArrayList;
@@ -44,7 +50,6 @@ import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.databinding.FragmentHooksBinding;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.service.RootProvider;
-import sh.siava.pixelxpert.ui.activities.BaseActivity;
 import sh.siava.pixelxpert.utils.AppUtils;
 
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
@@ -234,16 +239,61 @@ public class HooksFragment extends Fragment {
 			});
 
 			list.setOnClickListener(view -> {
-				try {
-					Intent intent = requireContext().getPackageManager().getLaunchIntentForPackage(pack.get(finalI));
+				// show ripple effect and do nothing
+			});
+
+			PopupMenu popupMenu = new PopupMenu(requireContext(), list, Gravity.END);
+			MenuInflater inflater = popupMenu.getMenuInflater();
+			inflater.inflate(R.menu.hooks_menu, popupMenu.getMenu());
+
+			popupMenu.setOnMenuItemClickListener(item -> {
+				int itemId = item.getItemId();
+
+				if (itemId == R.id.launch_app) {
+					Intent intent = requireContext()
+							.getPackageManager()
+							.getLaunchIntentForPackage(pack.get(finalI));
 					if (intent != null) {
 						startActivity(intent);
+					} else {
+						Toast.makeText(
+								requireContext(),
+								requireContext().getString(R.string.package_not_launchable),
+								Toast.LENGTH_SHORT
+						).show();
 					}
-				} catch (Exception ignored) {
+				} else if (itemId == R.id.restart_app) {
+					handleApplicationRestart(pack.get(finalI));
 				}
+
+				return true;
+			});
+
+			list.setOnLongClickListener(v -> {
+				popupMenu.show();
+				return true;
 			});
 
 			binding.content.addView(list);
+		}
+	}
+
+	private void handleApplicationRestart(String packageName) {
+		if (SYSTEM_FRAMEWORK_PACKAGE.equals(packageName)) {
+			AppUtils.Restart("android");
+		} else if (SYSTEM_UI_PACKAGE.equals(packageName)) {
+			AppUtils.Restart("systemui");
+		} else {
+			Shell.cmd(
+					"killall " + packageName,
+					"am force-stop " + packageName
+			).exec();
+			Intent intent = requireContext()
+					.getPackageManager()
+					.getLaunchIntentForPackage(packageName);
+			if (intent != null) {
+				startActivity(intent);
+			}
 		}
 	}
 

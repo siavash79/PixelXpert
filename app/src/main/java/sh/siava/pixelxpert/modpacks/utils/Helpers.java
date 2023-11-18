@@ -52,6 +52,20 @@ public class Helpers {
 		return findClassIfExists(className, classLoader);
 	}
 
+	public static Method findMethod(Class<?> clazz, String namePattern)
+	{
+		Method[] methods = clazz.getMethods();
+
+		for(Method method : methods)
+		{
+			if(Pattern.matches(namePattern, method.getName()))
+			{
+				return method;
+			}
+		}
+		return null;
+	}
+
 	@SuppressWarnings("unused")
 	public static void dumpClass(String className, ClassLoader classLoader)
 	{

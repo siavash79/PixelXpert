@@ -40,6 +40,8 @@ Here is the compatibility chart according to different android versions and QPRs
 - Android 13 stable QPR3 (starting from December 2022 firmware till QPR3): [starting with v.2.5](https://github.com/siavash79/PixelXpert/releases/tag/v2.5.0) up until the latest stable/canary versions.
 - Android 14: [starting with v.2.9](https://github.com/siavash79/PixelXpert/releases/tag/v2.9.0) up until the latest stable/canary versions.
 <hr>
+- Android 14 QPR2 beta builds not yet fully compatible. Please be patient until we iron out the incompatibilities caused by code changes in source (source code not available for QPR beta)
+<hr>
 
 ### **Prerequisites:**
 - Compatible ROM (see Compatibility text above)

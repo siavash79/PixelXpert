@@ -195,32 +195,42 @@ public class VolumeTile extends XposedModPack {
 	}
 
 	private void updateTileView(LinearLayout tileView, int state) {
-		Resources res = mContext.getResources();
+		try { //don't crash systemui if failed
+			Resources res = mContext.getResources();
 
-		volumePercentageDrawable.setTint(
-				(isDarkMode() || !lightQSHeaderEnabled) && state != STATE_ACTIVE
-						? Color.WHITE
-						: Color.BLACK);
+			volumePercentageDrawable.setTint(
+					(isDarkMode() || !lightQSHeaderEnabled) && state != STATE_ACTIVE
+							? Color.WHITE
+							: Color.BLACK);
 
-		LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), volumePercentageDrawable});
-		tileView.setBackground(layerDrawable);
+			LayerDrawable layerDrawable;
+			try {
+				layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "backgroundDrawable"), volumePercentageDrawable});
+			} catch (Throwable ignored) {
+				layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), volumePercentageDrawable});
+			}
+			if(layerDrawable == null) return; //something is wrong
 
-		TextView label = (TextView) getObjectField(tileView, "label");
+			tileView.setBackground(layerDrawable);
 
-		@SuppressLint("DiscouragedApi")
-		String newLabel = String.format("%s - %s%%",
-				res.getText(
-						res.getIdentifier(
-								"media_output_dialog_accessibility_seekbar",
-								"string", mContext.getPackageName())),
-				currentPct
-		);
+			TextView label = (TextView) getObjectField(tileView, "label");
 
-		label.setText(newLabel);
+			@SuppressLint("DiscouragedApi")
+			String newLabel = String.format("%s - %s%%",
+					res.getText(
+							res.getIdentifier(
+									"media_output_dialog_accessibility_seekbar",
+									"string", mContext.getPackageName())),
+					currentPct
+			);
 
-		//We don't need the chevron icon on the right side
-		((View) getObjectField(tileView, "chevronView"))
-				.setVisibility(GONE);
+			label.setText(newLabel);
+
+			//We don't need the chevron icon on the right side
+			((View) getObjectField(tileView, "chevronView"))
+					.setVisibility(GONE);
+		}
+		catch (Throwable ignored){}
 	}
 
 	private void toggleMute() {

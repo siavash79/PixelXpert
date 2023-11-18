@@ -1,3 +1,9 @@
+**canary-298**  
+- A14ap11: Fixed QS clock/calendar/battery click actions  
+- A14ap11: Fixed notification Expand/Collapse buttons  
+- A14ap11: Fixed BrightnessSlider causing systemUI crash  
+- A14ap11: Fixed volume tile causing systemUI crash  
+  
 **canary-297**  
 - app: fixed unrelated preferences change together
   

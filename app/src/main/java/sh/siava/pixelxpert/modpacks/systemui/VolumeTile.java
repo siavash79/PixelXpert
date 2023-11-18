@@ -204,9 +204,9 @@ public class VolumeTile extends XposedModPack {
 							: Color.BLACK);
 
 			LayerDrawable layerDrawable;
-			try {
+			try { //A14 AP11
 				layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "backgroundDrawable"), volumePercentageDrawable});
-			} catch (Throwable ignored) {
+			} catch (Throwable ignored) { //Older
 				layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), volumePercentageDrawable});
 			}
 			if(layerDrawable == null) return; //something is wrong

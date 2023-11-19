@@ -416,6 +416,9 @@
 	<string name="package_activated">Pakket suksesvol geaktiveer</string>
 	<string name="package_activation_failed">Pakketaktivering het misluk</string>
 	<string name="activate_in_lsposed">Aktiveer in LSPosed</string>
+	<string name="package_not_launchable">Package is not launch-able</string>
+	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_restart_app">Restart app</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Kontroleer worteltoestemmings…</string>
 	<string name="connecting_root_service">Koppel aan die worteldiens…</string>

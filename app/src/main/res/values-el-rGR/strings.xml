@@ -416,6 +416,9 @@
 	<string name="package_activated">Το πακέτο ενεργοποιήθηκε με επιτυχία</string>
 	<string name="package_activation_failed">Η ενεργοποίηση του πακέτου απέτυχε</string>
 	<string name="activate_in_lsposed">Ενεργοποίηση στο LSPosed</string>
+	<string name="package_not_launchable">Package is not launch-able</string>
+	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_restart_app">Restart app</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Έλεγχος δικαιωμάτων root…</string>
 	<string name="connecting_root_service">Σύνδεση στην υπηρεσία root…</string>

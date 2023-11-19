@@ -416,6 +416,9 @@
 	<string name="package_activated">패키지가 성공적으로 활성화되었습니다.</string>
 	<string name="package_activation_failed">패키지 활성화 실패</string>
 	<string name="activate_in_lsposed">LSPosed에서 활성화</string>
+	<string name="package_not_launchable">Package is not launch-able</string>
+	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_restart_app">Restart app</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">루트 권한 확인 중…</string>
 	<string name="connecting_root_service">루트 서비스에 연결 중…</string>

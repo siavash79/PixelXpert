@@ -416,6 +416,9 @@
 	<string name="package_activated">Package activé avec succès</string>
 	<string name="package_activation_failed">L\'activation du package a échoué</string>
 	<string name="activate_in_lsposed">Activer dans LSPosed</string>
+	<string name="package_not_launchable">Package is not launch-able</string>
+	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_restart_app">Restart app</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Vérification des autorisations root…</string>
 	<string name="connecting_root_service">Connexion au service racine…</string>

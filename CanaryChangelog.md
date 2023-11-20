@@ -1,3 +1,6 @@
+**canary-300**  
+- A14ap11: Fixed easy unlock  
+  
 **canary-299**  
 - A14ap11: Fixed mute screenshot sound  
 - A14ap11: Fixed flashlight tile level indicator  

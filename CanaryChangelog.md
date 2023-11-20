@@ -1,3 +1,6 @@
+**canary-301**  
+- Fixed pref reset after reboot  
+  
 **canary-300**  
 - A14ap11: Fixed easy unlock  
   

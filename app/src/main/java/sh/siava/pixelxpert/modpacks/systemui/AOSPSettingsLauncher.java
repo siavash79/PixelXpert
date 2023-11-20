@@ -41,9 +41,16 @@ public class AOSPSettingsLauncher extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+		Class<?> QSFragmentClass;
+		try
+		{ //A14 ap11 -- seems like a temporary thing
+			QSFragmentClass	= findClass("com.android.systemui.qs.QSFragmentLegacy", lpparam.classLoader);
+		}
+		catch (Throwable ignored)
+		{ //Older
+			QSFragmentClass	= findClass("com.android.systemui.qs.QSFragment", lpparam.classLoader);
+		}
 
-		Class<?> QSFragmentClass = findClass("com.android.systemui.qs.QSFragment", lpparam.classLoader);
 		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpparam.classLoader);
 
 		View.OnLongClickListener listener = v -> {

@@ -1,3 +1,9 @@
+**canary-299**  
+- A14ap11: Fixed mute screenshot sound  
+- A14ap11: Fixed flashlight tile level indicator  
+- A14ap11: Fixed QS settings longpress action  
+- A14ap11: Fixed QS light theme  
+  
 **canary-298**  
 - A14ap11: Fixed QS clock/calendar/battery click actions  
 - A14ap11: Fixed notification Expand/Collapse buttons  

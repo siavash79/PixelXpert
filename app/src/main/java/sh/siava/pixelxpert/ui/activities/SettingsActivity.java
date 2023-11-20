@@ -69,7 +69,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	private SettingsActivityBinding binding;
 	private static final String mData = "mDataKey";
 	private Integer selectedFragment = null;
-	Context DPContext;
 
 	String TAG = getClass().getSimpleName();
 
@@ -103,8 +102,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		binding = SettingsActivityBinding.inflate(getLayoutInflater());
-		DPContext = this.createDeviceProtectedStorageContext();
-		DPContext.moveSharedPreferencesFrom(this, BuildConfig.APPLICATION_ID + "_preferences");
 		super.onCreate(savedInstanceState);
 
 		tryMigratePrefs();

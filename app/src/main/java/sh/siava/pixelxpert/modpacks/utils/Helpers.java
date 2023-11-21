@@ -279,7 +279,7 @@ public class Helpers {
 
 	public static void tryHookAllMethods(Class<?> clazz, String method, XC_MethodHook hook) {
 		try {
-			hookAllMethods(clazz, method, hook);
+			XposedBridge.hookAllMethods(clazz, method, hook);
 		} catch (Throwable ignored) {
 		}
 	}

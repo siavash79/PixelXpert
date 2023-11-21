@@ -142,12 +142,6 @@
 			app:seekBarIncrement="5"
 			app:updatesContinuously="true" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="holdVolumeToSkip"
-			android:title="@string/so_vol_longpress_skip"
-			app:iconSpaceReserved="false" />
-
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			android:key="VolumeDialogTimeout"
 			android:title="@string/volume_dialog_timeout"
@@ -207,6 +201,13 @@
 			android:key="replaceAssistantwithTorch"
 			android:title="@string/so_power_longpress_torch_title"
 			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="holdVolumeToSkip"
+			android:title="@string/so_vol_longpress_skip"
+			app:iconSpaceReserved="false" />
+
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"

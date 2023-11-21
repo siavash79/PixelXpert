@@ -2,7 +2,6 @@ package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedHelpers.findClass;
-import static sh.siava.pixelxpert.modpacks.utils.Helpers.dumpClass;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -58,24 +57,24 @@ public class MultiStatusbarRows extends XposedModPack {
 				if (!systemIconsMultiRow) return;
 
 				try {
-					View linear = (View) param.args[0];
+					View linearStatusbarIconContainer = (View) param.args[0];
 
-					String id = mContext.getResources().getResourceName(((View) linear.getParent().getParent()).getId()); //helps getting exception if it's in QS
+					String id = mContext.getResources().getResourceName(((View) linearStatusbarIconContainer.getParent().getParent()).getId()); //helps getting exception if it's in QS
 					if (!id.contains("status_bar_end_side_content")) return;
 
-					FlexStatusIconContainer flex = new FlexStatusIconContainer(mContext, lpparam.classLoader);
-					flex.setPadding(linear.getPaddingLeft(), 0, linear.getPaddingRight(), 0);
+					FlexStatusIconContainer flex = new FlexStatusIconContainer(mContext, lpparam.classLoader, linearStatusbarIconContainer);
+					flex.setPadding(linearStatusbarIconContainer.getPaddingLeft(), 0, linearStatusbarIconContainer.getPaddingRight(), 0);
 
 					LinearLayout.LayoutParams flexParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
 					flex.setLayoutParams(flexParams);
 
 					flex.setForegroundGravity(Gravity.CENTER_VERTICAL | Gravity.END);
 
-					ViewGroup parent = (ViewGroup) linear.getParent();
-					int index = parent.indexOfChild(linear);
+					ViewGroup parent = (ViewGroup) linearStatusbarIconContainer.getParent();
+					int index = parent.indexOfChild(linearStatusbarIconContainer);
 					parent.addView(flex, index);
 					parent.getLayoutParams().height = LinearLayout.LayoutParams.MATCH_PARENT;
-					linear.setVisibility(View.GONE); //remove will crash the system
+					linearStatusbarIconContainer.setVisibility(View.GONE); //remove will crash the system
 					param.args[0] = flex;
 
 				} catch (Throwable ignored) {

@@ -23,10 +23,12 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 
@@ -50,6 +52,16 @@ public class Helpers {
 	{
 		dumpClass(className, classLoader);
 		return findClassIfExists(className, classLoader);
+	}
+
+	public static Set<XC_MethodHook.Unhook> hookAllMethods(Class<?> clazz, String method, XC_MethodHook callback)
+	{
+		Set<XC_MethodHook.Unhook> result = XposedBridge.hookAllMethods(clazz, method, callback);
+		if(true) {
+			Throwable t = new Throwable();
+			log(t.getStackTrace()[1].getClassName() + " " + t.getStackTrace()[1].getLineNumber() + " hook size " + result.size());
+		}
+		return result;
 	}
 
 	public static Method findMethod(Class<?> clazz, String namePattern)

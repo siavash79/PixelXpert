@@ -13,6 +13,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.Helpers.findMethod;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -230,7 +231,7 @@ public class ThemeManager_14 extends XposedModPack {
 			}
 		});
 
-		hookAllMethods(BatteryStatusChipClass, "updateResources", new XC_MethodHook() { //background color of 14's charging chip. Fix for light QS theme situation
+		hookAllMethods(BatteryStatusChipClass, findMethod(BatteryStatusChipClass, "updateResources.*").getName(), new XC_MethodHook() { //background color of 14's charging chip. Fix for light QS theme situation
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (lightQSHeaderEnabled && !isDark)
@@ -449,7 +450,7 @@ public class ThemeManager_14 extends XposedModPack {
 			}
 		});
 
-		hookAllMethods(ScrimControllerClass, "applyState", new XC_MethodHook() {
+		hookAllMethods(ScrimControllerClass, findMethod(ScrimControllerClass, "applyState.*").getName(), new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!lightQSHeaderEnabled) return;

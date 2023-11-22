@@ -416,6 +416,9 @@
 	<string name="package_activated">بسته با موفقیت فعال شد</string>
 	<string name="package_activation_failed">فعال سازی بسته انجام نشد</string>
 	<string name="activate_in_lsposed">در LSPosed فعال کنید</string>
+	<string name="package_not_launchable">Package is not launch-able</string>
+	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_restart_app">Restart app</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">بررسی مجوزهای ریشه…</string>
 	<string name="connecting_root_service">اتصال به سرویس ریشه…</string>

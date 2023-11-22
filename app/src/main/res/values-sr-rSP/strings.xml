@@ -28,7 +28,7 @@
 	<string name="settings_check_for_update_title">Потражи ажурирања</string>
 	<string name="auto_update_title">Аутоматски тражи ажурирања</string>
 	<string name="auto_update_summary">Повремено проверава да ли постоји нова верзија</string>
-	<string name="update_over_wifi_title">Тражи ажурирања само преко Wi-Fi-ја</string>
+	<string name="update_over_wifi_title">Тражи ажурирања само преко Wi-Fi-а</string>
 	<string name="update_over_wifi_summary">Проверава да ли постоји нова верзија само када сте повезани на Wi-Fi</string>
 	<string name="github_repo_title">Репозиторијум на GitHub-у</string>
 	<string name="telegram_group_title">Група на Telegram-у</string>
@@ -82,12 +82,12 @@
 	<string name="disable_lockscreen_pill_title">Не приказуј „Прилагоди закључани екран”</string>
 	<string name="imperial_units_title">Империјалне јединице</string>
 	<!--Status bar related-->
-	<string name="double_tap_sleep_title">Двапут додирните за спавање</string>
+	<string name="double_tap_sleep_title">Двапут додирните за режим спавања</string>
 	<string name="battery_style_title">Стил батерије</string>
 	<string name="battery_show_percent_title">Прикажи проценат батерије</string>
 	<string name="battery_show_charging_animation_title">Прикажи анимацију пуњења</string>
 	<string name="battery_icon_size_title">Величина иконе</string>
-	<string name="battery_hidden">Сакривен</string>
+	<string name="battery_hidden">Скривено</string>
 	<string name="BIcon_Opacity_title">Непрозирност</string>
 	<string name="sb_multi_row_system_icons">Системске иконе у више редова (потребна је подигнута висина статусне траке)</string>
 	<string name="sb_multi_row_notification_icons">Иконе обавештења у више редова (потребна је подигнута висина статусне траке)</string>
@@ -316,9 +316,9 @@
 	<string name="battery_dashed_circle">Испрекидани круг</string>
 	<string name="battery_circle_filled">Попуњен круг</string>
 	<!-- Clock position -->
-	<string name="clock_default">лево (подразумевано)</string>
-	<string name="clock_center">Центар</string>
-	<string name="clock_right">Јел тако</string>
+	<string name="clock_default">Лево (подразумевано)</string>
+	<string name="clock_center">Средина</string>
+	<string name="clock_right">Десно</string>
 	<!-- AM/PM style -->
 	<string name="am_pm_normal">100% величина сата</string>
 	<string name="am_pm_small">70% величине сата</string>
@@ -333,39 +333,39 @@
 	<string name="fourg_lte_fourg">Форце 4Г икона</string>
 	<!-- QS Rows overlays -->
 	<!-- Lockscreen/Quick Settings Custom Text -->
-	<string name="minutes_word">минута)</string>
-	<string name="network_stat_type">Врста статистике</string>
-	<string name="network_stat_day">Почетно време</string>
-	<string name="network_stat_week">Дан почетка недеље</string>
-	<string name="network_stat_month">Дан почетка месеца</string>
+	<string name="minutes_word">мин.</string>
+	<string name="network_stat_type">Тип статистике</string>
+	<string name="network_stat_day">Време почетка</string>
+	<string name="network_stat_week">Почетак недеље</string>
+	<string name="network_stat_month">Почетак месеца</string>
 	<!-- Incompatibility Alert -->
 	<string name="incompatible_alert_title">Некомпатибилно</string>
 	<string name="incompatible_alert_body">Ваш тренутни РОМ није директна мета овог модула. Можете наставити да га користите, али неке (или све) опције можда неће радити како је предвиђено\n\nНемојте пријављивати грешке</string>
-	<string name="incompatible_alert_ok_btn">разумем</string>
+	<string name="incompatible_alert_ok_btn">Разумем</string>
 	<!-- App kill Alert -->
 	<string name="app_kill_alert_title">Упозорење</string>
 	<string name="app_kill_alert_body">Апликација ће се затворити. Можете је поново покренути додиром на нову икону.</string>
 	<string name="app_kill_ok_btn">У реду</string>
 	<!-- Reboot alert -->
-	<string name="reboot_alert_body">Потребно је поновно покретање система да би се подешавања применила</string>
+	<string name="reboot_alert_body">Потребно је поновно покретање система да би промене ступиле на снагу</string>
 	<!-- Menu Items -->
-	<string name="menu_settings_title">Увоз извоз</string>
-	<string name="menu_reset_defaults">Ресетовање свих подешавања</string>
+	<string name="menu_settings_title">Увоз/извоз</string>
+	<string name="menu_reset_defaults">Ресетуј сва подешавања</string>
 	<string name="menu_import_settings">Увези подешавања из фајла…</string>
-	<string name="menu_export_settings">Извезите подешавања у датотеку…</string>
-	<string name="menu_restart">Поново покренути</string>
-	<string name="menu_restart_system">Поново покрените систем</string>
-	<string name="menu_soft_restart">Софт ребоот</string>
-	<string name="menu_restartSysUI">Поново покрените СистемУИ</string>
+	<string name="menu_export_settings">Извези подешавања у фајл…</string>
+	<string name="menu_restart">Рестартовање</string>
+	<string name="menu_restart_system">Рестартуј систем</string>
+	<string name="menu_soft_restart">Рестартуј брзо</string>
+	<string name="menu_restartSysUI">Рестартуј интерфејс</string>
 	<string name="menu_updates">Ажурирања</string>
-	<string name="monitoring_category_title">Опције надгледања</string>
+	<string name="monitoring_category_title">Опције мониторинга</string>
 	<string name="netstat_header">Подешавања мрежне статистике</string>
 	<string name="string_formatter_manual_body_v3">Поред нормалног текста, доступне су и динамичке варијабле, као што су датум, употреба података и температура:\n\n$G\&lt;format\&gt; : грегоријански датум, на основу формата*\n$P&lt;format&gt; : персијски датум, на основу формата*\n$Nrx : Укупно преузимања у наведеном периоду ** ***\n$Ntx: Укупно отпремања у наведеном периоду ** ***\n$Nall : Укупан саобраћај у наведеном периоду ** ***\n$Nssid : ВиФи ССИД име (ако је применљиво)\n\n$T\&lt;format\&gt;[interval] : Температура; \nформат може бити б (за батерију), ц (за ЦПУ), г (за ГПУ) и с (за кожу) \nНа крају, постоји ОПЦИОНАЛНИ број интервала ажурирања у секундама (подразумевано: 60 секунди)\n\n*за формат документацију, потражите \"Јава Дате Формат\"\n**Можете одредити период статистике у ПикелКсперт/Мени Разно/Подешавање статистике мреже\n***Ако замените $N са $Nc добићете статистику мобилних података (нпр. $Ncrx уместо Нрк )</string>
 	<string name="update_channel_name">Ажурирања</string>
 	<string name="update_notification_title">Ажурирање је преузето</string>
 	<string name="update_notification_text">Додирните овде да бисте инсталирали</string>
 	<string name="download_failed">Преузимање ажурирања није успело</string>
-	<string name="try_again_later">Покушајте поново касније</string>
+	<string name="try_again_later">Покушајте касније</string>
 	<string name="update_flavor_title">Канал ажурирања</string>
 	<string name="stable_flavor">Стабилни</string>
 	<string name="update_type_title">Тип пакета</string>
@@ -373,11 +373,11 @@
 	<string name="xposed_type">Само Xposed</string>
 	<string name="currentVersionTitle">Инсталирана верзија: </string>
 	<string name="lastestVersionTitle">Најновија верзија: </string>
-	<string name="root_not_here">РООТ ПРИСТУП НИЈЕ ДОБРАН!</string>
+	<string name="root_not_here">Приступ root-у није одобрен!</string>
 	<string name="reboot_pending">Чека се поновно покретање</string>
 	<string name="reboot_word">Поново покрените уређај сада</string>
-	<string name="update_checking">Проверавам…</string>
-	<string name="update_download_started">Преузимање – додирните обавештење када се заврши</string>
+	<string name="update_checking">Проверава се…</string>
+	<string name="update_download_started">Преузима се – по завршетку додирните обавештење</string>
 	<string name="update_word">Ажурирање</string>
 	<string name="switch_branches">Промени грану</string>
 	<string name="reinstall_word">Инсталирај поново</string>
@@ -385,20 +385,20 @@
 	<string name="own_prefs_header">Подешавања</string>
 	<string name="language_title">Језик</string>
 	<string name="toggle_dark_apply">(Укључите тамну тему да бисте је применили)</string>
-	<string name="gesture_nav_extra_cat">Додатни покрети траке за навигацију</string>
-	<string name="gesture_nav_long_swipe_fc_title">Превуците прстом до врха екрана да бисте убили апликацију у првом плану</string>
-	<string name="gesture_nav_left_swipe_up_title">Радња превлачења нагоре са леве стране Навбар-а</string>
-	<string name="gesture_nav_right_swipe_up_title">Радња превлачења нагоре са десне стране Навбар-а</string>
-	<string name="gesture_nav_left_swipe_up_percent">Ширина области за превлачење налево (%)</string>
-	<string name="gesture_nav_right_swipe_up_percent">Ширина области за превлачење нагоре (%)</string>
-	<string name="gesture_nav_two_finger_title">Акција превлачења нагоре са два прста</string>
-	<string name="gesture_nav_swipe_up_height">Минимална висина окидача за радње превлачења нагоре</string>
-	<string name="none">Ниједан</string>
+	<string name="gesture_nav_extra_cat">Додатни покрети</string>
+	<string name="gesture_nav_long_swipe_fc_title">Превуците до врха екрана да бисте принудно зауставили апликацију</string>
+	<string name="gesture_nav_left_swipe_up_title">Превлачење нагоре с леве стране траке за навигацију</string>
+	<string name="gesture_nav_right_swipe_up_title">Превлачење нагоре с десне стране траке за навигацију</string>
+	<string name="gesture_nav_left_swipe_up_percent">Ширина зоне за превлачење слева</string>
+	<string name="gesture_nav_right_swipe_up_percent">Ширина зоне за превлачење здесна</string>
+	<string name="gesture_nav_two_finger_title">Превлачење нагоре са два прста</string>
+	<string name="gesture_nav_swipe_up_height">Минимална висина за активацију покрета</string>
+	<string name="none">Ништа</string>
 	<string name="screenshot">Снимак екрана</string>
-	<string name="kill_foreground_app">Затвори апликацију у првом плану</string>
-	<string name="toggle_notification">Укључите таблу са обавештењима</string>
-	<string name="toggle_one_handed">Укључите режим једном руком</string>
-	<string name="sleep">Спавај</string>
+	<string name="kill_foreground_app">Принудно заустави апликацију</string>
+	<string name="toggle_notification">Отвори/затвори панел са обавештењима</string>
+	<string name="toggle_one_handed">Укључи/искључи режим једном руком</string>
+	<string name="sleep">Искључи екран</string>
 	<!-- Search Preference -->
 	<string name="searchpreference_search">Претражите…</string>
 	<string name="searchpreference_clear">Обриши</string>
@@ -409,17 +409,20 @@
 	<!-- Hooked Packages Activity -->
 	<string name="hooked_packages_title">Повезани пакети</string>
 	<string name="package_hooked_successful">Пакет одговара</string>
-	<string name="package_not_hook_enabled">Пакет није омогућен у ЛСпоседу</string>
-	<string name="package_hook_no_response">Пакет не реагује</string>
+	<string name="package_not_hook_enabled">Пакет није омогућен у LSposed-у</string>
+	<string name="package_hook_no_response">Пакет не одговара</string>
 	<string name="package_not_found">Пакет није пронађен</string>
 	<string name="package_checking">Учитавање%s</string>
 	<string name="package_activated">Пакет је успешно активиран</string>
 	<string name="package_activation_failed">Активација пакета није успела</string>
-	<string name="activate_in_lsposed">Активирајте у ЛПоседу</string>
+	<string name="activate_in_lsposed">Активирајте у LSPosed-у</string>
+	<string name="package_not_launchable">Package is not launch-able</string>
+	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_restart_app">Restart app</string>
 	<!-- Splash Activity -->
-	<string name="checking_root_permissions">Провера роот дозвола…</string>
-	<string name="connecting_root_service">Повезивање са роот сервисом…</string>
-	<string name="root_access_denied">Роот приступ је одбијен. Дозволите роот приступ.</string>
+	<string name="checking_root_permissions">Провера root права…</string>
+	<string name="connecting_root_service">Повезивање са услугом root-а…</string>
+	<string name="root_access_denied">Приступ root-у је одбијен. Одобрите га.</string>
 	<string name="root_service_failed">Није могуће повезати се са услугом root-а. Покушајте касније.</string>
 	<string name="exit">Изађи</string>
 	<!-- Bottom Navigation -->

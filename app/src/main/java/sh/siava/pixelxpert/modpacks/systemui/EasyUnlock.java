@@ -75,38 +75,37 @@ public class EasyUnlock extends XposedModPack {
 
 				if (passwordLen == expectedPassLen && passwordLen > lastPassLen) {
 					new Thread(() -> {
-						int userId = (int) callMethod(getObjectField(param.thisObject, "mKeyguardUpdateMonitor"), "getCurrentUser");
+						try { //don't crash systemUI if failed
+							int userId = (int) getObjectField(getObjectField(param.thisObject, "mKeyguardUpdateMonitor"), "sCurrentUser");
 
-						String methodName = param.thisObject.getClass().getName().contains("Password") ? "createPassword" : "createPin";
+							String methodName = param.thisObject.getClass().getName().contains("Password") ? "createPassword" : "createPin";
 
-						Object password = callStaticMethod(LockscreenCredentialClass, methodName, getObjectField(getObjectField(param.thisObject, "mPasswordEntry"), "mText").toString());
+							Object password = callStaticMethod(LockscreenCredentialClass, methodName, getObjectField(getObjectField(param.thisObject, "mPasswordEntry"), "mText").toString());
 
-						boolean accepted = (boolean) callMethod(
-								getObjectField(param.thisObject, "mLockPatternUtils"),
-								"checkCredential",
-								password,
-								userId,
-								null /* callback */);
+							boolean accepted = (boolean) callMethod(
+									getObjectField(param.thisObject, "mLockPatternUtils"),
+									"checkCredential",
+									password,
+									userId,
+									null /* callback */);
 
-						if (accepted) {
-							View mView = (View) getObjectField(param.thisObject, "mView");
-							mView.post(() -> {
-								try
-								{ //13 QPR3
-									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, getObjectField(param.thisObject, "mSecurityMode"));
-									return;
-								}catch (Throwable ignored){}
+							if (accepted) {
+								View mView = (View) getObjectField(param.thisObject, "mView");
+								mView.post(() -> {
+									try { //13 QPR3
+										callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, getObjectField(param.thisObject, "mSecurityMode"));
+										return;
+									} catch (Throwable ignored) {
+									}
 
-								try
-								{ //Pre 13QPR3
-									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */, getObjectField(param.thisObject, "mSecurityMode"));
-								}
-								catch (Throwable ignored)
-								{ //PRE-Pre 13QPR3
-									callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */);
-								}
-							});
-						}
+									try { //Pre 13QPR3
+										callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */, getObjectField(param.thisObject, "mSecurityMode"));
+									} catch (Throwable ignored) { //PRE-Pre 13QPR3
+										callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */);
+									}
+								});
+							}
+						} catch (Throwable ignored){}
 					}).start();
 				}
 				lastPassLen = passwordLen;

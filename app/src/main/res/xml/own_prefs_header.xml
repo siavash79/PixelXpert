@@ -84,6 +84,12 @@
 			android:title="@string/telegram_group_title" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialPreference
+			android:icon="@drawable/ic_crowdin"
+			android:key="CrowdinProject"
+			android:summary="@string/crowdin_summary"
+			android:title="@string/crowdin_title" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreference
 			android:icon="@drawable/ic_usage"
 			android:key="UsageWiki"
 			android:summary="@string/usage_summary"

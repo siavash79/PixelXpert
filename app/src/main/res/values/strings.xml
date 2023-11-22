@@ -37,6 +37,8 @@
 	<string name="telegram_group_summary" translatable="false">\@PixelXpert_Support</string>
 	<string name="usage_title">Usage</string>
 	<string name="usage_summary">Open wiki page</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Lock screen</string>

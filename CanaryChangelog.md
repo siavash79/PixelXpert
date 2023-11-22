@@ -1,3 +1,25 @@
+**canary-302**  
+- A14ap11: Fixed statusbar multi-row system icons  
+- A14ap11: QS light theme improvement  
+  
+**canary-301**  
+- Fixed pref reset after reboot  
+  
+**canary-300**  
+- A14ap11: Fixed easy unlock  
+  
+**canary-299**  
+- A14ap11: Fixed mute screenshot sound  
+- A14ap11: Fixed flashlight tile level indicator  
+- A14ap11: Fixed QS settings longpress action  
+- A14ap11: Fixed QS light theme  
+  
+**canary-298**  
+- A14ap11: Fixed QS clock/calendar/battery click actions  
+- A14ap11: Fixed notification Expand/Collapse buttons  
+- A14ap11: Fixed BrightnessSlider causing systemUI crash  
+- A14ap11: Fixed volume tile causing systemUI crash  
+  
 **canary-297**  
 - app: fixed unrelated preferences change together
   

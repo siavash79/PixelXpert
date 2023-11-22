@@ -69,7 +69,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	private SettingsActivityBinding binding;
 	private static final String mData = "mDataKey";
 	private Integer selectedFragment = null;
-	Context DPContext;
 
 	String TAG = getClass().getSimpleName();
 
@@ -103,8 +102,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		binding = SettingsActivityBinding.inflate(getLayoutInflater());
-		DPContext = this.createDeviceProtectedStorageContext();
-		DPContext.moveSharedPreferencesFrom(this, BuildConfig.APPLICATION_ID + "_preferences");
 		super.onCreate(savedInstanceState);
 
 		tryMigratePrefs();
@@ -944,6 +941,19 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 						try {
 							Intent intent = new Intent(Intent.ACTION_VIEW);
 							intent.setData(Uri.parse("https://t.me/PixelXpert_Discussion"));
+							startActivity(intent);
+						} catch (Exception ignored) {
+							Toast.makeText(getContext(), getString(R.string.browser_not_found), Toast.LENGTH_SHORT).show();
+						}
+						return true;
+					});
+
+			findPreference("CrowdinProject").setSummary(getString(R.string.crowdin_summary, getString(R.string.app_name)));
+			findPreference("CrowdinProject")
+					.setOnPreferenceClickListener(preference -> {
+						try {
+							Intent intent = new Intent(Intent.ACTION_VIEW);
+							intent.setData(Uri.parse("https://crowdin.com/project/aospmods"));
 							startActivity(intent);
 						} catch (Exception ignored) {
 							Toast.makeText(getContext(), getString(R.string.browser_not_found), Toast.LENGTH_SHORT).show();

@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Biểu tượng theo chủ đề thay thế</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">Các tùy chỉnh cho thiết bị Google Pixel</string>
 	<string name="volume_tile_title">Âm lượng đa phương tiện</string>
 	<string name="app_switch_tile_title">Chuyển hồ sơ ứng dụng</string>
 	<string name="hide_default">Ẩn (Mặc định)</string>
@@ -79,7 +79,7 @@
 	<string name="easy_unlock_title">Mở khoá nhanh</string>
 	<string name="easy_unlock_summary">Nếu lần đầu tiên không hoạt động, hãy thử lại</string>
 	<string name="charging_info_title">Thông tin sạc trên màn hình khóa</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">Không hiện đính \"Tùy chỉnh Màn hình khóa\"</string>
 	<string name="imperial_units_title">Sử dụng đơn vị Hệ Thống Đo Lường Anh</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Chạm hai lần để tắt màn hình</string>
@@ -251,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Bỏ qua nút nổi xoay thủ công</string>
 	<string name="force_no_cutout">Bỏ qua phần cắt máy ảnh (với các thiết bị có màn hình đục lỗ)</string>
 	<string name="clear_all_reposition_title">Thêm nút \"Xóa tất cả\" vào cuối trang ứng dụng gần đây</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="force_themed_icons_title">Tự động tạo các biểu tượng thiếu theo chủ đề (chỉ dành cho Pixel launcher)</string>
 	<string name="reapply_themed_config">Kích hoạt lại các biểu tượng theo chủ đề để áp dụng</string>
 	<string name="volume_button_step_title">Tăng mức âm lượng (0 đến 100%)</string>
 	<string name="display_resolution_title">Độ phân giải màn hình</string>
@@ -275,14 +275,14 @@
 	<string name="so_vol_longpress_skip">Nhấn và giữ phím âm lượng để \"+Chuyển tiếp/-Phát lại\" bài hát</string>
 	<string name="notifications_header">Tùy chỉnh thông báo</string>
 	<string name="expand_notifications_icons_title">Thêm nút Mở rộng/Thu gọn tất cả thông báo</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Không bao giờ loại bỏ các thông báo đang diễn ra</string>
 	<string name="heads_up_notification_duration">Thời gian hiển thị thông báo</string>
 	<string name="disable_overscroll">Tắt hiệu ứng cuộn</string>
 	<string name="overscroll_on_summary">Quan trọng: bạn PHẢI bật các ứng dụng bạn muốn tắt hiệu ứng cuộn trong LSPosed</string>
 	<string name="milliseconds">Mili giây</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">Bảng điều chỉnh âm lượng</string>
+	<string name="volume_dialog_timeout">Thời gian chờ hộp thoại âm lượng</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Hồ sơ công việc/bản sao</string>
 	<string name="statusbar_long_press_app_switch">Nhấn và giữ thanh trạng thái để chuyển hồ sơ</string>
@@ -416,6 +416,9 @@
 	<string name="package_activated">Gói kích hoạt thành công</string>
 	<string name="package_activation_failed">Kích hoạt gói không thành công</string>
 	<string name="activate_in_lsposed">Kích hoạt trong LSPosed</string>
+	<string name="package_not_launchable">Gói không thể khởi động</string>
+	<string name="menu_launch_app">Khởi động ứng dụng</string>
+	<string name="menu_restart_app">Khởi động lại ứng dụng</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Kiểm tra quyền root…</string>
 	<string name="connecting_root_service">Kết nối với dịch vụ root…</string>

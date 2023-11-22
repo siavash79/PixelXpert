@@ -416,6 +416,9 @@
 	<string name="package_activated">A csomag sikeresen aktiválva</string>
 	<string name="package_activation_failed">A csomag aktiválása nem sikerült</string>
 	<string name="activate_in_lsposed">Aktiválás az LSPosedben</string>
+	<string name="package_not_launchable">Package is not launch-able</string>
+	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_restart_app">Restart app</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">A root jogosultságok ellenőrzése…</string>
 	<string name="connecting_root_service">Csatlakozás a root szolgáltatáshoz…</string>

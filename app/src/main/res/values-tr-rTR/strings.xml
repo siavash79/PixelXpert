@@ -416,6 +416,9 @@
 	<string name="package_activated">Paket başarılı bir şekilde etkinleştirildi</string>
 	<string name="package_activation_failed">Paket etkinleştirme başarısız oldu</string>
 	<string name="activate_in_lsposed">LSPosed içinde etkinleştirin</string>
+	<string name="package_not_launchable">Paket başlatılabilir değil</string>
+	<string name="menu_launch_app">Uygulamayı başlat</string>
+	<string name="menu_restart_app">Uygulamayı yeniden başlat</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Kök izinleri kontrol ediliyor…</string>
 	<string name="connecting_root_service">Kök hizmetine bağlanılıyor…</string>

@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Pictogramă tematică alternativă</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">Personalizări pentru dispozitivele Google Pixel</string>
 	<string name="volume_tile_title">Volumul media</string>
 	<string name="app_switch_tile_title">Schimbă profilul aplicației</string>
 	<string name="hide_default">Ascuns (implicit)</string>
@@ -79,7 +79,7 @@
 	<string name="easy_unlock_title">Deblocare ușoară (Pin/Parolă)</string>
 	<string name="easy_unlock_summary">Dacă nu a funcționat pentru prima dată, încercați din nou</string>
 	<string name="charging_info_title">Informații despre încărcare pe ecranul de blocare</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">Nu arăta \"Personalizare Ecran de blocare\"</string>
 	<string name="imperial_units_title">Utilizează unități imperiale</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Dublă-atingere pentru oprire ecran</string>
@@ -251,7 +251,7 @@
 	<string name="allow_all_screen_rotations_summary">Va ignora, de asemenea, butonul plutitor de rotație manuală</string>
 	<string name="force_no_cutout">Ignoră decuparea camerei</string>
 	<string name="clear_all_reposition_title">Adăugați un buton accesibil de ștergere toate la pagina de recente</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="force_themed_icons_title">Auto-generare pictograme tematice lipsă (doar lansatorul Pixel)</string>
 	<string name="reapply_themed_config">Reactivează pictogramele tematice pentru aplicare</string>
 	<string name="volume_button_step_title">Pași volum (0 la 100%)</string>
 	<string name="display_resolution_title">Rezoluție afișaj</string>
@@ -416,6 +416,9 @@
 	<string name="package_activated">Pachetul a fost activat cu succes</string>
 	<string name="package_activation_failed">Activarea pachetului a eșuat</string>
 	<string name="activate_in_lsposed">Activează în LSPosed</string>
+	<string name="package_not_launchable">Pachetul nu poate fi lansat</string>
+	<string name="menu_launch_app">Lansează aplicația</string>
+	<string name="menu_restart_app">Repornește aplicația</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Verificarea permisiunilor root…</string>
 	<string name="connecting_root_service">Conectarea la serviciul root…</string>

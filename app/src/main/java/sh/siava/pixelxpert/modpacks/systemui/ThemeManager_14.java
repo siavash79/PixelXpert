@@ -13,6 +13,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.Helpers.findMethod;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -124,6 +125,22 @@ public class ThemeManager_14 extends XposedModPack {
 		Class<?> ShadeHeaderControllerClass = findClassIfExists("com.android.systemui.shade.ShadeHeaderController", lpparam.classLoader);
 		Class<?> FooterActionsViewBinderClass = findClass("com.android.systemui.qs.footer.ui.binder.FooterActionsViewBinder", lpparam.classLoader);
 
+		try
+		{ //temporary until release of ap11 source
+			Class<?> FeatureFlagsClassicReleaseClass = findClass("com.android.systemui.flags.FeatureFlagsClassicRelease", lpparam.classLoader);
+
+			hookAllMethods(FeatureFlagsClassicReleaseClass, "isEnabled", new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					if("compose_qs_footer_actions".equals(getObjectField(param.args[0], "name")))
+					{
+						param.setResult(false);
+					}
+				}
+			});
+		}
+		catch (Throwable ignored){}
+
 		if (ShadeHeaderControllerClass == null)
 		{
 			ShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpparam.classLoader);
@@ -214,7 +231,7 @@ public class ThemeManager_14 extends XposedModPack {
 			}
 		});
 
-		hookAllMethods(BatteryStatusChipClass, "updateResources", new XC_MethodHook() { //background color of 14's charging chip. Fix for light QS theme situation
+		hookAllMethods(BatteryStatusChipClass, findMethod(BatteryStatusChipClass, "updateResources.*").getName(), new XC_MethodHook() { //background color of 14's charging chip. Fix for light QS theme situation
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (lightQSHeaderEnabled && !isDark)
@@ -267,7 +284,6 @@ public class ThemeManager_14 extends XposedModPack {
 			}
 		});
 
-
 		hookAllMethods(FooterActionsViewBinderClass, "bind", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -298,7 +314,14 @@ public class ThemeManager_14 extends XposedModPack {
 						((TextView) mView.findViewById(mContext.getResources().getIdentifier("clock", "id", mContext.getPackageName()))).setTextColor(textColor);
 						((TextView) mView.findViewById(mContext.getResources().getIdentifier("date", "id", mContext.getPackageName()))).setTextColor(textColor);
 
-						callMethod(iconManager, "setTint", textColor);
+						try
+						{ //A14 ap11
+							callMethod(iconManager, "setTint", textColor, textColor);
+						}
+						catch (Throwable ignored)
+						{ //A14 older
+							callMethod(iconManager, "setTint", textColor);
+						}
 
 						for (int i = 1; i <= 3; i++) {
 							String id = String.format("carrier%s", i);
@@ -427,7 +450,7 @@ public class ThemeManager_14 extends XposedModPack {
 			}
 		});
 
-		hookAllMethods(ScrimControllerClass, "applyState", new XC_MethodHook() {
+		hookAllMethods(ScrimControllerClass, findMethod(ScrimControllerClass, "applyState.*").getName(), new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!lightQSHeaderEnabled) return;

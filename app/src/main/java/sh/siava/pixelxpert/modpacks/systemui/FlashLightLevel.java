@@ -173,7 +173,14 @@ public class FlashLightLevel extends XposedModPack {
 										? Color.WHITE
 										: Color.BLACK);
 
-						LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), flashPercentageDrawable});
+						LayerDrawable layerDrawable;
+						try { //A14 AP11
+							layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "backgroundDrawable"), flashPercentageDrawable});
+						} catch (Throwable ignored) { //Older
+							layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), flashPercentageDrawable});
+						}
+						if(layerDrawable == null) return; //something is wrong
+
 						tileView.setBackground(layerDrawable);
 					}
 				}catch (Throwable ignored){}

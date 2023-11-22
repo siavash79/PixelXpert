@@ -416,6 +416,9 @@
 	<string name="package_activated">Balíček byl úspěšně aktivován</string>
 	<string name="package_activation_failed">Aktivace balíčku se nezdařila</string>
 	<string name="activate_in_lsposed">Aktivujte v LSPosed</string>
+	<string name="package_not_launchable">Package is not launch-able</string>
+	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_restart_app">Restart app</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Kontrola oprávnění uživatele root…</string>
 	<string name="connecting_root_service">Připojování ke kořenové službě…</string>

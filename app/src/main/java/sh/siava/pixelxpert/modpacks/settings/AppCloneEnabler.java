@@ -2,10 +2,12 @@ package sh.siava.pixelxpert.modpacks.settings;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.utils.Helpers.dumpClass;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -47,6 +49,16 @@ public class AppCloneEnabler extends XposedModPack {
 
 		Class<?> ClonedAppsPreferenceControllerClass = findClass("com.android.settings.applications.ClonedAppsPreferenceController", lpparam.classLoader);
 		Class<?> AppStateClonedAppsBridgeClass = findClass("com.android.settings.applications.AppStateClonedAppsBridge", lpparam.classLoader);
+
+		/* Private Space
+		Class<?> FlagsClass = findClass("android.os.Flags", lpparam.classLoader);
+
+		hookAllMethods(FlagsClass, "allowPrivateProfile", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				param.setResult(true);
+			}
+		});*/
 
 		hookAllConstructors(AppStateClonedAppsBridgeClass, new XC_MethodHook() {
 			@SuppressLint("QueryPermissionsNeeded")

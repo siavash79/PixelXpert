@@ -1,8 +1,7 @@
 package sh.siava.pixelxpert.modpacks.utils;
 
-import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
-import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 
@@ -56,13 +55,39 @@ public class Helpers {
 
 	public static Set<XC_MethodHook.Unhook> hookAllMethods(Class<?> clazz, String method, XC_MethodHook callback)
 	{
-		Set<XC_MethodHook.Unhook> result = XposedBridge.hookAllMethods(clazz, method, callback);
+		XC_MethodHook hook = new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(false) {
+					log(param.method.getName() + " called");
+				}
+				callMethod(callback, "beforeHookedMethod", param);
+			}
+
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				callMethod(callback, "afterHookedMethod", param);
+			}
+		};
+
+		Set<XC_MethodHook.Unhook> result = XposedBridge.hookAllMethods(clazz, method, hook);
 		if(true) {
 			Throwable t = new Throwable();
 			log(t.getStackTrace()[1].getClassName() + " " + t.getStackTrace()[1].getLineNumber() + " hook size " + result.size());
 		}
 		return result;
 	}
+
+	public static Set<XC_MethodHook.Unhook> hookAllConstructors(Class<?> clazz, XC_MethodHook callback)
+	{
+		Set<XC_MethodHook.Unhook> result = XposedBridge.hookAllConstructors(clazz, callback);
+		if(true) {
+			Throwable t = new Throwable();
+			log(t.getStackTrace()[1].getClassName() + " " + t.getStackTrace()[1].getLineNumber() + " hook size " + result.size());
+		}
+		return result;
+	}
+
 
 	public static Method findMethod(Class<?> clazz, String namePattern)
 	{
@@ -286,7 +311,7 @@ public class Helpers {
 
 	public static void tryHookAllConstructors(Class<?> clazz, XC_MethodHook hook) {
 		try {
-			hookAllConstructors(clazz, hook);
+			XposedBridge.hookAllConstructors(clazz, hook);
 		} catch (Throwable ignored) {
 		}
 	}

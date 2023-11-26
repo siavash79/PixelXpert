@@ -10,6 +10,8 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -31,7 +33,7 @@ import de.robv.android.xposed.XposedBridge;
 import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 
-/** @noinspection unused*/
+/** @noinspection unused, RedundantThrows */
 @SuppressWarnings("CommentedOutCode")
 public class Helpers {
 	private static final int KB = 1024;
@@ -150,6 +152,37 @@ public class Helpers {
 			log("\t\t" + f.getName() + "-" + f.getType().getName());
 		}
 		log("End dump");
+	}
+
+
+	public static void dumpIDs(View v)
+	{
+		dumpIDs(v, 0);
+	}
+
+	private static void dumpIDs(View v, int level)
+	{
+		dumpID(v, level);
+		if(v instanceof ViewGroup)
+		{
+			for(int i = 0; i < ((ViewGroup) v).getChildCount(); i++)
+			{
+				dumpIDs(((ViewGroup) v).getChildAt(i), level+1);
+			}
+		}
+	}
+	private static void dumpID(View v, int level)
+	{
+		try {
+			StringBuilder str = new StringBuilder();
+			for(int i = 0; i < level; i++)
+			{
+				str.append("\t");
+			}
+			String name = v.getContext().getResources().getResourceName(v.getId());
+			log(str+ "id " + name + " type " + v.getClass().getName());
+		}
+		catch (Throwable ignored){}
 	}
 
 	public static Method findFirstMethodByName(Class<?> targetClass, String methodName)

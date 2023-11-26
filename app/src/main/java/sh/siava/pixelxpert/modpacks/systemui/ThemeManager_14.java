@@ -37,6 +37,7 @@ import androidx.annotation.ColorInt;
 
 import com.topjohnwu.superuser.Shell;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -62,7 +63,8 @@ public class ThemeManager_14 extends XposedModPack {
 	private int colorActive;
 	private int mScrimBehindTint = BLACK;
 	private Object unlockedScrimState;
-
+	private Object ShadeCarrierGroupController;
+	private final ArrayList<Object> ModernShadeCarrierGroupMobileViews = new ArrayList<>();
 	public ThemeManager_14(Context context) {
 		super(context);
 		if (!listensTo(context.getPackageName())) return;
@@ -103,7 +105,23 @@ public class ThemeManager_14 extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+		try
+		{ //temporary until release of ap11 source
+			Class<?> FeatureFlagsClassicReleaseClass = findClass("com.android.systemui.flags.FeatureFlagsClassicRelease", lpparam.classLoader);
+
+			hookAllMethods(FeatureFlagsClassicReleaseClass, "isEnabled", new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					if("compose_qs_footer_actions".equals(getObjectField(param.args[0], "name")))
+					{
+						param.setResult(false);
+					}
+				}
+			});
+		}
+		catch (Throwable ignored){}
+
+		if (!lightQSHeaderEnabled) return; //light QS header pref update needs a systemui restart. so there's no point to load these if not enabled
 
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
@@ -125,16 +143,21 @@ public class ThemeManager_14 extends XposedModPack {
 		Class<?> ShadeHeaderControllerClass = findClassIfExists("com.android.systemui.shade.ShadeHeaderController", lpparam.classLoader);
 		Class<?> FooterActionsViewBinderClass = findClass("com.android.systemui.qs.footer.ui.binder.FooterActionsViewBinder", lpparam.classLoader);
 
-		try
-		{ //temporary until release of ap11 source
-			Class<?> FeatureFlagsClassicReleaseClass = findClass("com.android.systemui.flags.FeatureFlagsClassicRelease", lpparam.classLoader);
+		try { //A14 ap11 onwards - modern implementation of mobile icons
+			Class<?> ShadeCarrierGroupControllerClass = findClass("com.android.systemui.shade.carrier.ShadeCarrierGroupController", lpparam.classLoader);
+			Class<?> MobileIconBinderClass = findClass("com.android.systemui.statusbar.pipeline.mobile.ui.binder.MobileIconBinder", lpparam.classLoader);
 
-			hookAllMethods(FeatureFlagsClassicReleaseClass, "isEnabled", new XC_MethodHook() {
+			hookAllConstructors(ShadeCarrierGroupControllerClass, new XC_MethodHook() {
 				@Override
-				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if("compose_qs_footer_actions".equals(getObjectField(param.args[0], "name")))
-					{
-						param.setResult(false);
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					ShadeCarrierGroupController = param.thisObject;
+				}
+			});
+			hookAllMethods(MobileIconBinderClass, "bind", new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if(param.args[1].getClass().getName().contains("ShadeCarrierGroupMobileIconViewModel")) {
+						ModernShadeCarrierGroupMobileViews.add(param.getResult());
 					}
 				}
 			});
@@ -149,7 +172,7 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllConstructors(QSCustomizerClass, new XC_MethodHook() { //QS Customize panel
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (lightQSHeaderEnabled && !isDark) {
+				if (!isDark) {
 					ViewGroup mainView = (ViewGroup) param.thisObject;
 					for (int i = 0; i < mainView.getChildCount(); i++) {
 						mainView.getChildAt(i).setBackgroundColor(mScrimBehindTint);
@@ -158,10 +181,10 @@ public class ThemeManager_14 extends XposedModPack {
 			}
 		});
 
-		hookAllMethods(ShadeCarrierClass, "updateState", new XC_MethodHook() { //mobile signal icons
+		hookAllMethods(ShadeCarrierClass, "updateState", new XC_MethodHook() { //mobile signal icons - this is the legacy model. new model uses viewmodels
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (lightQSHeaderEnabled && !isDark) {
+				if (!isDark) {
 					((ImageView) getObjectField(param.thisObject
 							, "mMobileSignal"))
 							.setImageTintList(
@@ -174,7 +197,7 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllConstructors(NumberButtonViewHolderClass, new XC_MethodHook() { //QS security footer count circle
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (lightQSHeaderEnabled && !isDark) {
+				if (!isDark) {
 					((ImageView) getObjectField(param.thisObject
 							, "newDot"))
 							.setColorFilter(BLACK);
@@ -189,7 +212,7 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllConstructors(TextButtonViewHolderClass, new XC_MethodHook() { //QS security footer
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (lightQSHeaderEnabled && !isDark) {
+				if (!isDark) {
 					((ImageView) getObjectField(param.thisObject
 							, "chevron"))
 							.setColorFilter(BLACK);
@@ -212,7 +235,7 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllMethods(QSFooterViewClass, "onFinishInflate", new XC_MethodHook() { //QS Footer built text row
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (lightQSHeaderEnabled && !isDark) {
+				if (!isDark) {
 					((TextView) getObjectField(param.thisObject
 							, "mBuildText"))
 							.setTextColor(BLACK);
@@ -234,7 +257,7 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllMethods(BatteryStatusChipClass, findMethod(BatteryStatusChipClass, "updateResources.*").getName(), new XC_MethodHook() { //background color of 14's charging chip. Fix for light QS theme situation
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (lightQSHeaderEnabled && !isDark)
+				if (!isDark)
 					((LinearLayout) getObjectField(param.thisObject, "roundedContainer"))
 							.getBackground()
 							.setTint(colorInactive);
@@ -243,7 +266,7 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllMethods(BrightnessSliderViewClass, "onFinishInflate", new XC_MethodHook() { //brightness slider
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (lightQSHeaderEnabled && !isDark) {
+				if (!isDark) {
 					((LayerDrawable) callMethod(
 							getObjectField(param.thisObject, "mSlider")
 							, "getProgressDrawable"))
@@ -271,8 +294,6 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllMethods(unlockedScrimState.getClass(), "prepare", new XC_MethodHook() { //after brightness adjustment
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!lightQSHeaderEnabled) return;
-
 				setObjectField(unlockedScrimState, "mBehindTint", mScrimBehindTint);
 			}
 		});
@@ -287,7 +308,7 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllMethods(FooterActionsViewBinderClass, "bind", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (lightQSHeaderEnabled && !isDark) {
+				if (!isDark) {
 					LinearLayout view = (LinearLayout) param.args[0];
 					view.setBackgroundColor(mScrimBehindTint);
 					view.setElevation(0); //remove elevation shadow
@@ -307,12 +328,12 @@ public class ThemeManager_14 extends XposedModPack {
 					@SuppressLint("DiscouragedApi")
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						if (!lightQSHeaderEnabled) return;
+						Resources res = mContext.getResources();
 
 						int textColor = SettingsLibUtilsProvider.getColorAttrDefaultColor(android.R.attr.textColorPrimary, mContext);
 
-						((TextView) mView.findViewById(mContext.getResources().getIdentifier("clock", "id", mContext.getPackageName()))).setTextColor(textColor);
-						((TextView) mView.findViewById(mContext.getResources().getIdentifier("date", "id", mContext.getPackageName()))).setTextColor(textColor);
+						((TextView) mView.findViewById(res.getIdentifier("clock", "id", mContext.getPackageName()))).setTextColor(textColor);
+						((TextView) mView.findViewById(res.getIdentifier("date", "id", mContext.getPackageName()))).setTextColor(textColor);
 
 						try
 						{ //A14 ap11
@@ -323,12 +344,17 @@ public class ThemeManager_14 extends XposedModPack {
 							callMethod(iconManager, "setTint", textColor);
 						}
 
+						try { //A14 ap11
+							ModernShadeCarrierGroupMobileViews.forEach(view -> callMethod(view, "onIconTintChanged", textColor, textColor));
+							setModernSignalTextColor(textColor);
+						} catch (Throwable ignored){}
+
 						for (int i = 1; i <= 3; i++) {
 							String id = String.format("carrier%s", i);
 
-							((TextView) getObjectField(mView.findViewById(mContext.getResources().getIdentifier(id, "id", mContext.getPackageName())), "mCarrierText")).setTextColor(textColor);
-							((ImageView) getObjectField(mView.findViewById(mContext.getResources().getIdentifier(id, "id", mContext.getPackageName())), "mMobileSignal")).setImageTintList(ColorStateList.valueOf(textColor));
-							((ImageView) getObjectField(mView.findViewById(mContext.getResources().getIdentifier(id, "id", mContext.getPackageName())), "mMobileRoaming")).setImageTintList(ColorStateList.valueOf(textColor));
+							((TextView) getObjectField(mView.findViewById(res.getIdentifier(id, "id", mContext.getPackageName())), "mCarrierText")).setTextColor(textColor);
+							((ImageView) getObjectField(mView.findViewById(res.getIdentifier(id, "id", mContext.getPackageName())), "mMobileSignal")).setImageTintList(ColorStateList.valueOf(textColor));
+							((ImageView) getObjectField(mView.findViewById(res.getIdentifier(id, "id", mContext.getPackageName())), "mMobileRoaming")).setImageTintList(ColorStateList.valueOf(textColor));
 						}
 
 						callMethod(batteryIcon, "updateColors", textColor, textColor, textColor);
@@ -341,7 +367,7 @@ public class ThemeManager_14 extends XposedModPack {
 			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!isDark && lightQSHeaderEnabled) {
+				if (!isDark) {
 					Resources res = mContext.getResources();
 					ViewGroup view = (ViewGroup) param.thisObject;
 
@@ -377,9 +403,7 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllMethods(QSIconViewImplClass, "updateIcon", new XC_MethodHook() { //setting color for QS tile icons on light theme
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (lightQSHeaderEnabled
-						&& !isDark) {
-
+				if (!isDark) {
 					int color;
 					switch (getIntField(param.args[1], "state")) {
 						case STATE_ACTIVE:
@@ -406,10 +430,8 @@ public class ThemeManager_14 extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				new Thread(() -> {
 					try {
-						if(lightQSHeaderEnabled) {
-							Thread.sleep(5000);
-							rebuildSysUI(true);
-						}
+						Thread.sleep(5000);
+						rebuildSysUI(true);
 					} catch (Throwable ignored) {}
 				}).start();
 			}
@@ -418,7 +440,7 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllConstructors(QSTileViewImplClass, new XC_MethodHook() { //setting tile colors in light theme
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!lightQSHeaderEnabled || isDark) return;
+				if (isDark) return;
 
 				setObjectField(param.thisObject, "colorActive", colorActive);
 				setObjectField(param.thisObject, "colorInactive", colorInactive);
@@ -438,8 +460,7 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllMethods(CentralSurfacesImplClass, "updateTheme", new XC_MethodHook() { //required to recalculate colors and overlays when dark is toggled
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(lightQSHeaderEnabled)
-					rebuildSysUI(false);
+				rebuildSysUI(false);
 			}
 		});
 
@@ -453,8 +474,6 @@ public class ThemeManager_14 extends XposedModPack {
 		hookAllMethods(ScrimControllerClass, findMethod(ScrimControllerClass, "applyState.*").getName(), new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!lightQSHeaderEnabled) return;
-
 				boolean mClipsQsScrim = (boolean) getObjectField(param.thisObject, "mClipsQsScrim");
 				if (mClipsQsScrim) {
 					setObjectField(param.thisObject, "mBehindTint", mScrimBehindTint);
@@ -513,6 +532,21 @@ public class ThemeManager_14 extends XposedModPack {
 
 	}
 
+	@SuppressLint("DiscouragedApi")
+	private void setModernSignalTextColor(int textColor) {
+		Resources res = mContext.getResources();
+
+		for(View shadeCarrier : (View[]) getObjectField(ShadeCarrierGroupController, "mCarrierGroups"))
+		{
+			try {
+				shadeCarrier = shadeCarrier.findViewById(res.getIdentifier("carrier_combo", "id", mContext.getPackageName()));
+				((TextView) shadeCarrier.findViewById(res.getIdentifier("mobile_carrier_text", "id", mContext.getPackageName()))).setTextColor(textColor);
+			}
+			catch (Throwable ignored){
+			}
+		}
+	}
+
 	private void rebuildSysUI(boolean force) {
 		boolean isCurrentlyDark = isDarkMode();
 
@@ -532,8 +566,6 @@ public class ThemeManager_14 extends XposedModPack {
 
 	@SuppressLint("DiscouragedApi")
 	private void calculateColors() { //calculating dual-tone QS scrim color and tile colors
-		if (!lightQSHeaderEnabled) return;
-
 		mScrimBehindTint = mContext.getColor(
 				isDark
 						? android.R.color.system_neutral1_1000

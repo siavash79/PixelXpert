@@ -1,3 +1,6 @@
+**canary-303**  
+- A14ap11: fixed white signal icons on QS light theme  
+  
 **canary-302**  
 - A14ap11: Fixed statusbar multi-row system icons  
 - A14ap11: QS light theme improvement  

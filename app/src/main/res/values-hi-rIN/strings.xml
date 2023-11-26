@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">टेलीग्राम समूह</string>
 	<string name="usage_title">प्रयोग</string>
 	<string name="usage_summary">विकि पृष्ठ खोलें</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">लॉक स्क्रीन</string>
 	<string name="statusbar_header">स्टेटस बार</string>

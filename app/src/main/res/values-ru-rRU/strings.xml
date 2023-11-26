@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">Группа Telegram</string>
 	<string name="usage_title">Использование</string>
 	<string name="usage_summary">Открыть wiki страницу</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Экран блокировки</string>
 	<string name="statusbar_header">Строка состояния</string>

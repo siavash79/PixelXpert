@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">Telegram grupp</string>
 	<string name="usage_title">Användande</string>
 	<string name="usage_summary">Öppna wikisidan</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Låsskärm</string>
 	<string name="statusbar_header">Statusfältet</string>

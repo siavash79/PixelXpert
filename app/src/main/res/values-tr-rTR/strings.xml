@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">Telegram grubu</string>
 	<string name="usage_title">Kullanım</string>
 	<string name="usage_summary">Wiki sayfasını aç</string>
+	<string name="crowdin_title">Kendi dilinize çevirin</string>
+	<string name="crowdin_summary">%s\'yi kendi dilinize çevirmemize yardımcı olun</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Kilit Ekranı</string>
 	<string name="statusbar_header">Durum Çubuğu</string>

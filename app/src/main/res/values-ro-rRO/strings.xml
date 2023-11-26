@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">Grupul Telegram</string>
 	<string name="usage_title">Utilizare</string>
 	<string name="usage_summary">Deschide pagina wiki</string>
+	<string name="crowdin_title">Tradu în limba ta</string>
+	<string name="crowdin_summary">Ajută-ne să traducem %s în limba ta</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Ecran de blocare</string>
 	<string name="statusbar_header">Bară de stare</string>

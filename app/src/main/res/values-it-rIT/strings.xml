@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">Gruppo Telegram</string>
 	<string name="usage_title">Utilizzo</string>
 	<string name="usage_summary">Apri la pagina wiki</string>
+	<string name="crowdin_title">Traduci nella tua lingua</string>
+	<string name="crowdin_summary">Aiutaci a tradurre %s nella tua lingua</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Blocco schermo</string>
 	<string name="statusbar_header">Status Bar</string>
@@ -416,9 +418,9 @@
 	<string name="package_activated">Pacchetto attivato con successo</string>
 	<string name="package_activation_failed">Attivazione del pacchetto non riuscita</string>
 	<string name="activate_in_lsposed">Attiva in LSPosed</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">Il pacchetto non è avviabile</string>
+	<string name="menu_launch_app">Avvia app</string>
+	<string name="menu_restart_app">Riavvia app</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Verifica permessi root…</string>
 	<string name="connecting_root_service">Connessione al servizio root…</string>

@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">Skupina telegramů</string>
 	<string name="usage_title">Používání</string>
 	<string name="usage_summary">Otevřete stránku wiki</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Uzamknout obrazovku</string>
 	<string name="statusbar_header">Stavový řádek</string>

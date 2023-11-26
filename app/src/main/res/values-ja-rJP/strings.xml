@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">電報グループ</string>
 	<string name="usage_title">使用法</string>
 	<string name="usage_summary">ウィキページを開く</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">ロック画面</string>
 	<string name="statusbar_header">ステータスバー</string>

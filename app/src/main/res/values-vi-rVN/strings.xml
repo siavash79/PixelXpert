@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">Nhóm Telegram</string>
 	<string name="usage_title">Cách sử dụng</string>
 	<string name="usage_summary">Mở trang wiki</string>
+	<string name="crowdin_title">Dịch sang ngôn ngữ của bạn</string>
+	<string name="crowdin_summary">Hãy giúp chúng tôi dịch %s sang ngôn ngữ của bạn</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Màn hình khóa</string>
 	<string name="statusbar_header">Thanh trạng thái</string>
@@ -47,7 +49,7 @@
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Ẩn SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Thời gian không hoạt động</string>
-	<string name="hotspot_max_client_title">Khách hàng tối đa</string>
+	<string name="hotspot_max_client_title">Lượng client tối đa</string>
 	<!--Lock screen related-->
 	<string name="disable_unlock_hint_title">Tắt hoạt ảnh gợi ý mở khóa</string>
 	<string name="ls_general_options">Tùy chọn màn hình khóa</string>
@@ -76,7 +78,7 @@
 	<string name="qr_scanner_shortcut">Máy quét mã QR</string>
 	<string name="shufflePin_title">Xáo trộn mã pin</string>
 	<string name="wakeup_to_security_title">Nhập mật khẩu ngay khi màn hình bật</string>
-	<string name="easy_unlock_title">Mở khoá nhanh</string>
+	<string name="easy_unlock_title">Mở khoá nhanh (Pin/Password)</string>
 	<string name="easy_unlock_summary">Nếu lần đầu tiên không hoạt động, hãy thử lại</string>
 	<string name="charging_info_title">Thông tin sạc trên màn hình khóa</string>
 	<string name="disable_lockscreen_pill_title">Không hiện đính \"Tùy chỉnh Màn hình khóa\"</string>
@@ -111,7 +113,7 @@
 	<string name="sbc_day_of_week_options">Hiển thị ngày trong tuần cạnh đồng hồ</string>
 	<string name="sbc_advanced_cat">Nâng cao (sẽ thay thế cài đặt trên!)</string>
 	<string name="sbc_custom_date_before">Văn bản tùy chỉnh trước đồng hồ</string>
-	<string name="sbc_date_small">Kích cỡ nhỏ hơn</string>
+	<string name="sbc_date_small">Nhỏ hơn (70%)</string>
 	<string name="sbc_custom_date_after">Văn bản tùy chỉnh sau đồng hồ</string>
 	<string name="sbc_header">Tùy chỉnh đồng hồ trên thanh trạng thái</string>
 	<string name="sbc_clock_color_category">Tùy chọn màu sắc</string>
@@ -320,12 +322,12 @@
 	<string name="clock_center">Trung tâm</string>
 	<string name="clock_right">Phải</string>
 	<!-- AM/PM style -->
-	<string name="am_pm_normal">Bằng kích thước của đồng hồ</string>
-	<string name="am_pm_small">Nhỏ hơn kích thước của đồng hồ</string>
+	<string name="am_pm_normal">100% kích thước của đồng hồ</string>
+	<string name="am_pm_small">70% kích thước của đồng hồ</string>
 	<!-- Date position -->
-	<string name="date_before">Trước đồng hồ (kích cỡ bằng)</string>
-	<string name="date_before_small">Trước đồng hồ (kích cỡ nhỏ hơn)</string>
-	<string name="date_after">Sau đồng hồ (kích cỡ bằng)</string>
+	<string name="date_before">Trước đồng hồ (100%)</string>
+	<string name="date_before_small">Trước đồng hồ (70%)</string>
+	<string name="date_after">Sau đồng hồ (100%)</string>
 	<string name="date_after_small">Sau đồng hồ (kích cỡ nhỏ hơn)</string>
 	<!-- 4G | LTE -->
 	<string name="fourg_lte_default">Mặc định hệ thống</string>
@@ -333,17 +335,17 @@
 	<string name="fourg_lte_fourg">Biểu tượng 4G</string>
 	<!-- QS Rows overlays -->
 	<!-- Lockscreen/Quick Settings Custom Text -->
-	<string name="minutes_word">phút(s)</string>
+	<string name="minutes_word">phút</string>
 	<string name="network_stat_type">Loại thống kê</string>
 	<string name="network_stat_day">Thời gian bắt đầu</string>
 	<string name="network_stat_week">Ngày đầu tuần</string>
 	<string name="network_stat_month">Ngày bắt đầu tháng</string>
 	<!-- Incompatibility Alert -->
 	<string name="incompatible_alert_title">Không tương thích</string>
-	<string name="incompatible_alert_body">ROM hiện tại của bạn không phải là mục tiêu trực tiếp của mô-đun này. Bạn có thể tiếp tục sử dụng nó, nhưng một số (hoặc tất cả) tùy chọn có thể không hoạt động như dự định\n\nVui lòng không báo cáo lỗi</string>
+	<string name="incompatible_alert_body">ROM hiện tại của bạn không phải là đối tượng có thể sử dụng mô-đun này. Bạn có thể tiếp tục dùng, nhưng một số (hoặc tất cả) tùy chỉnh có thể không hoạt động như dự định\n\nVui lòng không báo cáo lỗi</string>
 	<string name="incompatible_alert_ok_btn">Tôi hiểu</string>
 	<!-- App kill Alert -->
-	<string name="app_kill_alert_title">Để ý</string>
+	<string name="app_kill_alert_title">Chú ý</string>
 	<string name="app_kill_alert_body">Ứng dụng sẽ đóng ngay bây giờ. Bạn có thể mở lại bằng cách nhấn vào biểu tượng mới</string>
 	<string name="app_kill_ok_btn">ĐƯỢC RỒI</string>
 	<!-- Reboot alert -->
@@ -358,7 +360,7 @@
 	<string name="menu_soft_restart">Khởi động lại mềm</string>
 	<string name="menu_restartSysUI">Khởi động lại SystemUI</string>
 	<string name="menu_updates">Cập nhật ứng dụng</string>
-	<string name="monitoring_category_title">Các tùy chọn giám sát mạng</string>
+	<string name="monitoring_category_title">Các tùy chọn giám sát</string>
 	<string name="netstat_header">Cài đặt thống kê mạng</string>
 	<string name="string_formatter_manual_body_v3">Ngoài văn bản thông thường, các biến động cũng có sẵn, như Ngày, Sử dụng dữ liệu và Nhiệt độ:\n\n$G\&lt;format\&gt; : Ngày Gregory, dựa trên định dạng*\n$P&lt;format&gt; : Ngày Ba Tư, dựa trên định dạng*\n$Nrx : Tổng số lượt tải xuống trong khoảng thời gian được chỉ định ** ***\n$Ntx: Tổng số lượt tải lên trong khoảng thời gian được chỉ định ** ***\n$Nall : Tổng lưu lượng truy cập trong khoảng thời gian được chỉ định ** ***\n$Nssid : Tên SSID WiFi (nếu có)\n\n$T\&lt;format\&gt;[interval] : Nhiệt độ; \nđịnh dạng có thể là b (đối với pin), c (đối với CPU), g (đối với GPU) và s (đối với giao diện) \nCuối cùng, có số khoảng thời gian cập nhật TÙY CHỌN tính bằng giây (mặc định: 60 giây)\n\n*đối với định dạng tài liệu, tìm kiếm \"Định dạng ngày Java\"\n**Bạn có thể chỉ định khoảng thời gian thống kê trong PixelXpert/menu Khác/Cài đặt thống kê mạng\n***Nếu bạn thay thế $N bằng $Nc , bạn sẽ nhận được số liệu thống kê dữ liệu di động (ví dụ: $Ncrx thay vì Nrx )</string>
 	<string name="update_channel_name">Cập nhật</string>
@@ -401,8 +403,8 @@
 	<string name="sleep">Tắt màn hình</string>
 	<!-- Search Preference -->
 	<string name="searchpreference_search">Tìm kiếm…</string>
-	<string name="searchpreference_clear">Thông thoáng</string>
-	<string name="searchpreference_history_entry">Mục nhập lịch sử</string>
+	<string name="searchpreference_clear">Xóa</string>
+	<string name="searchpreference_history_entry">Lịch sử tìm kiếm</string>
 	<string name="searchpreference_more">Hơn</string>
 	<string name="searchpreference_clear_history">Xóa lịch sử</string>
 	<string name="searchpreference_no_results">Ko có kết quả</string>

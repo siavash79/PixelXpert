@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">전보 그룹</string>
 	<string name="usage_title">용법</string>
 	<string name="usage_summary">위키 페이지 열기</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">잠금 화면</string>
 	<string name="statusbar_header">상태 표시줄</string>

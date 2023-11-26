@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">Groupe de télégramme</string>
 	<string name="usage_title">Usage</string>
 	<string name="usage_summary">Ouvrir la page wiki</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Écran de verrouillage</string>
 	<string name="statusbar_header">Barre d’état</string>

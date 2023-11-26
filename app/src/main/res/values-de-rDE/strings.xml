@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">Telegrammgruppe</string>
 	<string name="usage_title">Verwendung</string>
 	<string name="usage_summary">Wiki-Seite öffnen</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Sperrbildschirm</string>
 	<string name="statusbar_header">Statusleiste</string>

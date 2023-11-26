@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">گروه تلگرام</string>
 	<string name="usage_title">استفاده</string>
 	<string name="usage_summary">صفحه ویکی را باز کنید</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">صفحه قفل</string>
 	<string name="statusbar_header">نوار وضعیت</string>

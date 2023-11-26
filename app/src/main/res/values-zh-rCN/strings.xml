@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">Telegram 群组</string>
 	<string name="usage_title">用途</string>
 	<string name="usage_summary">打开 Wiki 页面</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">锁屏</string>
 	<string name="statusbar_header">状态栏</string>

@@ -34,6 +34,8 @@
 	<string name="telegram_group_title">مجموعة تيليجرام</string>
 	<string name="usage_title">الاستخدام</string>
 	<string name="usage_summary">فتح صفحة ويكي</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">قفل الشاشة</string>
 	<string name="statusbar_header">شريط الحالة</string>

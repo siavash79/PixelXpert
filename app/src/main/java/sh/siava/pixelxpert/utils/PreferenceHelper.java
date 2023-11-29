@@ -65,6 +65,9 @@ public class PreferenceHelper {
 			case "DisableOngoingNotifDismiss":
 				return Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
 
+			case "enablePowerMenuTheme":
+				return  instance.mPreferences.getBoolean("LightQSPanel", false);
+
 			case "font_dependent":
 			case "enableCustomFonts":
 				return showFonts;

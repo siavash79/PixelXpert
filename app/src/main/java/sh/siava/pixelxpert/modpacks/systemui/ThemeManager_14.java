@@ -7,6 +7,7 @@ import static android.service.quicksettings.Tile.STATE_UNAVAILABLE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
+import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
@@ -65,6 +66,8 @@ public class ThemeManager_14 extends XposedModPack {
 	private Object unlockedScrimState;
 	private Object ShadeCarrierGroupController;
 	private final ArrayList<Object> ModernShadeCarrierGroupMobileViews = new ArrayList<>();
+	private static final int PM_LITE_BACKGROUND_CODE = 1;
+
 	public ThemeManager_14(Context context) {
 		super(context);
 		if (!listensTo(context.getPackageName())) return;
@@ -105,22 +108,6 @@ public class ThemeManager_14 extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-		try
-		{ //temporary until release of ap11 source
-			Class<?> FeatureFlagsClassicReleaseClass = findClass("com.android.systemui.flags.FeatureFlagsClassicRelease", lpparam.classLoader);
-
-			hookAllMethods(FeatureFlagsClassicReleaseClass, "isEnabled", new XC_MethodHook() {
-				@Override
-				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if("compose_qs_footer_actions".equals(getObjectField(param.args[0], "name")))
-					{
-						param.setResult(false);
-					}
-				}
-			});
-		}
-		catch (Throwable ignored){}
-
 		if (!lightQSHeaderEnabled) return; //light QS header pref update needs a systemui restart. so there's no point to load these if not enabled
 
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
@@ -142,6 +129,95 @@ public class ThemeManager_14 extends XposedModPack {
 		Class<?> QSContainerImplClass = findClass("com.android.systemui.qs.QSContainerImpl", lpparam.classLoader);
 		Class<?> ShadeHeaderControllerClass = findClassIfExists("com.android.systemui.shade.ShadeHeaderController", lpparam.classLoader);
 		Class<?> FooterActionsViewBinderClass = findClass("com.android.systemui.qs.footer.ui.binder.FooterActionsViewBinder", lpparam.classLoader);
+
+		try { //A14 Compose implementation of QS Footer actions
+			Class<?> FooterActionsButtonViewModelClass = findClass("com.android.systemui.qs.footer.ui.viewmodel.FooterActionsButtonViewModel", lpparam.classLoader);
+			Class<?> FooterActionsViewModelClass = findClass("com.android.systemui.qs.footer.ui.viewmodel.FooterActionsViewModel", lpparam.classLoader);
+//			Class<?> FooterActionsKtClass = findClass("com.android.systemui.qs.footer.ui.compose.FooterActionsKt", lpparam.classLoader);
+			Class<?> ThemeColorKtClass = findClass("com.android.compose.theme.ColorKt", lpparam.classLoader);
+			Class<?> ExpandableControllerImplClass = findClass("com.android.compose.animation.ExpandableControllerImpl", lpparam.classLoader);
+
+			hookAllConstructors(ExpandableControllerImplClass, new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					if(!isDark)
+					{
+						Class<?> GraphicsColorKtClass = findClass("androidx.compose.ui.graphics.ColorKt", lpparam.classLoader);
+						param.args[1] = callStaticMethod(GraphicsColorKtClass, "Color", BLACK);
+					}
+				}
+			});
+
+			hookAllMethods(ThemeColorKtClass, "colorAttr", new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					if(isDark) return;
+
+					int code = (int) param.args[0];
+
+					int result = 0;
+
+					if (code == PM_LITE_BACKGROUND_CODE) {
+						result = colorActive;
+					}
+					else {
+						try {
+							switch (mContext.getResources().getResourceName(code).split("/")[1])
+							{
+								case "underSurface":
+								case "onShadeActive":
+								case "shadeInactive":
+									result = colorInactive; //button backgrounds
+									break;
+								case "onShadeInactiveVariant":
+									result = BLACK; //numberbutton text
+									break;
+							}
+						}
+						catch (Throwable ignored) {}
+					}
+
+					if(result != 0)
+					{
+						Class<?> GraphicsColorKtClass = findClass("androidx.compose.ui.graphics.ColorKt", lpparam.classLoader);
+						param.setResult(callStaticMethod(GraphicsColorKtClass, "Color",result));
+					}
+				}
+			});
+
+			hookAllConstructors(FooterActionsViewModelClass, new XC_MethodHook() { //transparent background for footer actions
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if(isDark) return;
+
+					//we must use the classes defined in the apk. using our own will fail
+					Class<?> StateFlowImplClass = findClass("kotlinx.coroutines.flow.StateFlowImpl", lpparam.classLoader);
+					Class<?> ReadonlyStateFlowClass = findClass("kotlinx.coroutines.flow.ReadonlyStateFlow", lpparam.classLoader);
+
+					Object zeroAlphaFlow = StateFlowImplClass.getConstructor(Object.class).newInstance(0f);
+					setObjectField(param.thisObject, "backgroundAlpha", ReadonlyStateFlowClass.getConstructor(StateFlowImplClass).newInstance(zeroAlphaFlow));
+				}
+			});
+
+			hookAllConstructors(FooterActionsButtonViewModelClass, new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					if(isDark) return;
+
+					switch (mContext.getResources().getResourceName((Integer) param.args[0]).split("/")[1])
+					{
+						case "settings_button_container":
+						case "multi_user_switch":
+							param.args[2] = BLACK; //icon tint
+							break;
+						case "pm_lite":
+							param.args[2] = colorInactive; //icon tint
+							param.args[3] = PM_LITE_BACKGROUND_CODE; //background color "code"
+							break;
+					}
+				}
+			});
+		} catch (Throwable ignored){}
 
 		try { //A14 ap11 onwards - modern implementation of mobile icons
 			Class<?> ShadeCarrierGroupControllerClass = findClass("com.android.systemui.shade.carrier.ShadeCarrierGroupController", lpparam.classLoader);
@@ -368,34 +444,36 @@ public class ThemeManager_14 extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!isDark) {
-					Resources res = mContext.getResources();
-					ViewGroup view = (ViewGroup) param.thisObject;
+					try { //In case a compose implementation is in order, this block will fail
+						Resources res = mContext.getResources();
+						ViewGroup view = (ViewGroup) param.thisObject;
 
-					View settings_button_container = view.findViewById(res.getIdentifier("settings_button_container", "id", mContext.getPackageName()));
-					settings_button_container.getBackground().setTint(colorInactive);
+						View settings_button_container = view.findViewById(res.getIdentifier("settings_button_container", "id", mContext.getPackageName()));
+						settings_button_container.getBackground().setTint(colorInactive);
 
-					//Power Button on QS Footer
-					ViewGroup powerButton = view.findViewById(res.getIdentifier("pm_lite", "id", mContext.getPackageName()));
-					((ImageView) powerButton
-							.getChildAt(0))
-							.setColorFilter(colorInactive, PorterDuff.Mode.SRC_IN);
-					powerButton.getBackground().setTint(colorActive);
+						//Power Button on QS Footer
+						ViewGroup powerButton = view.findViewById(res.getIdentifier("pm_lite", "id", mContext.getPackageName()));
+						((ImageView) powerButton
+								.getChildAt(0))
+								.setColorFilter(colorInactive, PorterDuff.Mode.SRC_IN);
+						powerButton.getBackground().setTint(colorActive);
 
-					ImageView icon = settings_button_container.findViewById(res.getIdentifier("icon", "id", mContext.getPackageName()));
-					icon.setColorFilter(BLACK);
+						ImageView icon = settings_button_container.findViewById(res.getIdentifier("icon", "id", mContext.getPackageName()));
+						icon.setColorFilter(BLACK);
 
-					((FrameLayout.LayoutParams)
-							((ViewGroup) settings_button_container
-									.getParent()
-							).getLayoutParams()
-					).setMarginEnd(0);
+						((FrameLayout.LayoutParams)
+								((ViewGroup) settings_button_container
+										.getParent()
+								).getLayoutParams()
+						).setMarginEnd(0);
 
 
-					ViewGroup parent = (ViewGroup) settings_button_container.getParent();
-					for (int i = 0; i < 3; i++) //Security + Foreground services containers
-					{
-						parent.getChildAt(i).getBackground().setTint(colorInactive);
-					}
+						ViewGroup parent = (ViewGroup) settings_button_container.getParent();
+						for (int i = 0; i < 3; i++) //Security + Foreground services containers
+						{
+							parent.getChildAt(i).getBackground().setTint(colorInactive);
+						}
+					} catch (Throwable ignored){}
 				}
 			}
 		});

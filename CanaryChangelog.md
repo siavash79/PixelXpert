@@ -1,3 +1,8 @@
+**canary-304**  
+- A14ap11: Long-press on QS settings icon will not open PX app anymore  
+- A14ap11: QS light theme: supporting material3 UI  
+- A14: improved transparent fingerprint icon  
+  
 **canary-303**  
 - A14ap11: fixed white signal icons on QS light theme  
   

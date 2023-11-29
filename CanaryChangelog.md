@@ -1,3 +1,6 @@
+**canary-305**  
+- A14: Fixed systemUI crash while changing battery styles  
+  
 **canary-304**  
 - A14ap11: Long-press on QS settings icon will not open PX app anymore  
 - A14ap11: QS light theme: supporting material3 UI  

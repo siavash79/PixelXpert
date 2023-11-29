@@ -1,7 +1,7 @@
 id=PixelXpert
 name=Pixel Xpert
-version=canary-304
-versionCode=304
+version=canary-305
+versionCode=305
 author=Pixel Xpert Team
 description=Xposed based module for customizations on Pixel roms. Android 13+
 updateJson=https://raw.githubusercontent.com/siavash79/PixelXpert/canary/MagiskModuleUpdate_Xposed.json

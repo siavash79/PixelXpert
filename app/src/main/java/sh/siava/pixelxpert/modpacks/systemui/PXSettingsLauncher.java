@@ -19,13 +19,13 @@ import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
-public class AOSPSettingsLauncher extends XposedModPack {
+public class PXSettingsLauncher extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 
 
 	private static Object activityStarter = null;
 
-	public AOSPSettingsLauncher(Context context) {
+	public PXSettingsLauncher(Context context) {
 		super(context);
 	}
 
@@ -75,9 +75,13 @@ public class AOSPSettingsLauncher extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				View QSView = (View) param.args[0];
 
-				QSView.findViewById(mContext.getResources()
-						.getIdentifier("settings_button_container", "id", mContext.getPackageName()))
-						.setOnLongClickListener(listener);
+				try
+				{
+					QSView.findViewById(mContext.getResources()
+									.getIdentifier("settings_button_container", "id", mContext.getPackageName()))
+							.setOnLongClickListener(listener);
+				}
+				catch (Throwable ignored){} //A14 compose view
 			}
 		});
 	}

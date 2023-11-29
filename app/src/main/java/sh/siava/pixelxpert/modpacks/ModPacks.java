@@ -22,7 +22,7 @@ import sh.siava.pixelxpert.modpacks.launcher.FeatureFlags;
 import sh.siava.pixelxpert.modpacks.launcher.TaskbarActivator;
 import sh.siava.pixelxpert.modpacks.settings.AppCloneEnabler;
 import sh.siava.pixelxpert.modpacks.android.RingerVolSeperator;
-import sh.siava.pixelxpert.modpacks.systemui.AOSPSettingsLauncher;
+import sh.siava.pixelxpert.modpacks.systemui.PXSettingsLauncher;
 import sh.siava.pixelxpert.modpacks.systemui.BatteryStyleManager;
 import sh.siava.pixelxpert.modpacks.systemui.BrightnessSlider;
 import sh.siava.pixelxpert.modpacks.systemui.EasyUnlock;
@@ -103,7 +103,7 @@ public class ModPacks {
 					modPacks.add(ThreeButtonNavMods.class);
 					modPacks.add(ScreenGestures.class);
 					modPacks.add(miscSettings.class);
-					modPacks.add(AOSPSettingsLauncher.class);
+					modPacks.add(PXSettingsLauncher.class);
 					modPacks.add(StatusbarGestures.class);
 					modPacks.add(KeyguardMods.class);
 					modPacks.add(UDFPSManager.class);

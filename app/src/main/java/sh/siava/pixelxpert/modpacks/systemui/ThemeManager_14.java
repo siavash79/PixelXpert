@@ -234,6 +234,10 @@ public class ThemeManager_14 extends XposedModPack {
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					if(param.args[1].getClass().getName().contains("ShadeCarrierGroupMobileIconViewModel")) {
 						ModernShadeCarrierGroupMobileViews.add(param.getResult());
+						if(!isDark) {
+							int textColor = SettingsLibUtilsProvider.getColorAttrDefaultColor(android.R.attr.textColorPrimary, mContext);
+							setMobileIconTint(param.getResult(), textColor);
+						}
 					}
 				}
 			});
@@ -421,7 +425,7 @@ public class ThemeManager_14 extends XposedModPack {
 						}
 
 						try { //A14 ap11
-							ModernShadeCarrierGroupMobileViews.forEach(view -> callMethod(view, "onIconTintChanged", textColor, textColor));
+							ModernShadeCarrierGroupMobileViews.forEach(view -> setMobileIconTint(view, textColor));
 							setModernSignalTextColor(textColor);
 						} catch (Throwable ignored){}
 
@@ -608,6 +612,10 @@ public class ThemeManager_14 extends XposedModPack {
 
 		//endregion
 
+	}
+
+	private void setMobileIconTint(Object ModernStatusBarViewBinding, int textColor) {
+		callMethod(ModernStatusBarViewBinding, "onIconTintChanged", textColor, textColor);
 	}
 
 	@SuppressLint("DiscouragedApi")

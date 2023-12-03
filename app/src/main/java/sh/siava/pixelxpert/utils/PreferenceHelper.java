@@ -99,6 +99,9 @@ public class PreferenceHelper {
 					return customFontsEnabled && !gSansOverride;
 				}
 
+			case "displayOverride":
+				return instance.mPreferences.getBoolean("displayOverrideEnabled", false);
+
 			case "leftKeyguardShortcut":
 			case "leftKeyguardShortcutLongClick":
 			case "rightKeyguardShortcut":

@@ -102,7 +102,7 @@ public class ModPacks {
 					modPacks.add(FeatureFlagsMods.class);
 					modPacks.add(ThreeButtonNavMods.class);
 					modPacks.add(ScreenGestures.class);
-					modPacks.add(miscSettings.class);
+					modPacks.add(MiscSettings.class);
 					modPacks.add(PXSettingsLauncher.class);
 					modPacks.add(StatusbarGestures.class);
 					modPacks.add(KeyguardMods.class);

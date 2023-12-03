@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">Ativar ícone temático alternativo da app AOSP Mods</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="app_themed_icon_title">Ícone Temático Alternativo</string>
+	<string name="xposed_desc">Personalizações para dispositivos Google Pixel</string>
 	<string name="volume_tile_title">Volume de multimédia</string>
 	<string name="app_switch_tile_title">Alternar Perfil de App</string>
 	<string name="hide_default">Não mostrar (padrão)</string>
@@ -34,8 +34,8 @@
 	<string name="telegram_group_title">Grupo no Telegram</string>
 	<string name="usage_title">Utilização</string>
 	<string name="usage_summary">Abrir página wiki</string>
-	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_title">Traduza para o seu idioma</string>
+	<string name="crowdin_summary">Ajude-nos a traduzir %s para o seu idioma</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Ecrã de bloqueio</string>
 	<string name="statusbar_header">Barra de estado</string>
@@ -81,7 +81,7 @@
 	<string name="easy_unlock_title">Desbloquear fácil (Pin/Password)</string>
 	<string name="easy_unlock_summary">Se não funcionar à primeira, tente novamente</string>
 	<string name="charging_info_title">Informação de carregamento no ecrã de bloqueio</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">Não mostrar pílula \"Personalizar Ecrã de Bloqueio\"</string>
 	<string name="imperial_units_title">Usar unidades imperiais</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Duplo toque para desligar</string>
@@ -253,7 +253,7 @@
 	<string name="allow_all_screen_rotations_summary">Irá ignorar o botão de rotação manual</string>
 	<string name="force_no_cutout">Ignorar o <i>notch</i> da câmara</string>
 	<string name="clear_all_reposition_title">Mostrar botão limpar tudo no ecrã das apps recentes</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="force_themed_icons_title">Gerar ícones temáticos automaticamente (Apenas para Pixel launcher)</string>
 	<string name="reapply_themed_config">Requer reativar a opção de ícones temáticos</string>
 	<string name="volume_button_step_title">Níveis de volume (0 a 100%)</string>
 	<string name="display_resolution_title">Resolução do ecrã</string>
@@ -277,14 +277,14 @@
 	<string name="so_vol_longpress_skip">Manter premido para mudar de faixa</string>
 	<string name="notifications_header">Opções das notificações</string>
 	<string name="expand_notifications_icons_title">Mostrar botões expandir/encolher tudo</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Nunca dispensar notificações em curso</string>
 	<string name="heads_up_notification_duration">Duração das notificações no topo</string>
 	<string name="disable_overscroll">Desativar o efeito elástico no final da navegação</string>
 	<string name="overscroll_on_summary">Nota: Requer ativar as apps, para as quais pretende desativar o efeito elástico, no gestor da LSposed</string>
 	<string name="milliseconds">Milissegundos</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">Painel de volume</string>
+	<string name="volume_dialog_timeout">Duração do painel de volume</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Perfil de Trabalho/Clone</string>
 	<string name="statusbar_long_press_app_switch">Mantenha pressionado a barra de estado para mudar de perfil</string>
@@ -418,14 +418,14 @@
 	<string name="package_activated">Aplicação ativada com sucesso</string>
 	<string name="package_activation_failed">A ativação falhou</string>
 	<string name="activate_in_lsposed">Ativar no LSPosed</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">O pacote não pode ser lançado</string>
+	<string name="menu_launch_app">Iniciar aplicação</string>
+	<string name="menu_restart_app">Reiniciar aplicação</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">A verificar permissões root…</string>
 	<string name="connecting_root_service">A ligar ao serviço root…</string>
 	<string name="root_access_denied">Acesso root negado. Por favor, permita o acesso root.</string>
-	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
+	<string name="root_service_failed">Não foi possível conectar ao serviço de root. Por favor, tente novamente mais tarde</string>
 	<string name="exit">Sair</string>
 	<!-- Bottom Navigation -->
 	<string name="navigation_home">Início</string>

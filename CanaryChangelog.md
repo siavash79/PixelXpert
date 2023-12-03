@@ -1,3 +1,8 @@
+**canary-306**  
+- Added option to disable the display resolution mod  
+- Reduced unnecessary logs  
+- A14ap11: QS light theme: fixed white signal icons after airplane mode  
+  
 **canary-305**  
 - A14: Fixed systemUI crash while changing battery styles  
   

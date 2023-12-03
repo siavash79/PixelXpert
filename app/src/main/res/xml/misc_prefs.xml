@@ -91,6 +91,13 @@
 			app:tickInterval=".01"
 			app:valueCount="2" />
 
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="displayOverrideEnabled"
+			android:summary="@string/display_resolution_switch_summary"
+			android:title="@string/display_resolution_switch_title"
+			app:iconSpaceReserved="false" />
+
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			android:key="displayOverride"
 			android:title="@string/display_resolution_title"

@@ -17,9 +17,9 @@ import sh.siava.pixelxpert.modpacks.utils.ModuleFolderOperations;
 import sh.siava.pixelxpert.modpacks.utils.StringFormatter;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
-public class miscSettings extends XposedModPack {
+public class MiscSettings extends XposedModPack {
 
-	public miscSettings(Context context) {
+	public MiscSettings(Context context) {
 		super(context);
 	}
 
@@ -58,7 +58,7 @@ public class miscSettings extends XposedModPack {
 					break;
 				case "enableCustomFonts":
 				case "gsans_override":
-					updateFontsInfrastructure();
+		//			updateFontsInfrastructure();
 					break;
 				case "volumeStps":
 					setVolumeSteps();
@@ -71,13 +71,15 @@ public class miscSettings extends XposedModPack {
 			setDisplayOverride();
 
 			updateSysUITuner();
-			updateFontsInfrastructure();
+	//		updateFontsInfrastructure();
 
 			setVolumeSteps();
 		}
 	}
 
 	private void setDisplayOverride() {
+		if(!Xprefs.getBoolean("displayOverrideEnabled", false)) return;
+
 		float displayOverride = 1f;
 		try {
 			displayOverride = RangeSliderPreference.getValues(Xprefs, "displayOverride", 100f).get(0) / 100f;
@@ -159,6 +161,7 @@ public class miscSettings extends XposedModPack {
 		});
 	}
 
+	@Deprecated
 	private void updateFontsInfrastructure() {
 		boolean customFontsEnabled = Xprefs.getBoolean("enableCustomFonts", false);
 		boolean GSansOverrideEnabled = Xprefs.getBoolean("gsans_override", false);

@@ -290,7 +290,11 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Re-enable themed icons to apply</string>
 	<string name="volume_button_step_title">Volume steps (0 to 100%)</string>
+
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Display resolution</string>
+
 	<string name="brightness_range_title">Display brightness limits</string>
 	<string name="brightness_range_not_linear">This range is NOT linear: Sometimes a small difference leads to considerable changes</string>
 	<string name="separate_ring_notif_vol_title">Individual volume for Ringer and Notification</string>

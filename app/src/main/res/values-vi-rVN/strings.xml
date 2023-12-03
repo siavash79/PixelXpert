@@ -267,7 +267,7 @@
 	<string name="so_double_tap_wake_title">Nhấn đúp để đánh thức</string>
 	<string name="so_double_tap_wake_summary">Tắt nhấn một lần nhấn để đánh thức</string>
 	<string name="so_tap_to_show_ambient_title">Nhấn để hiển thị màn hình xung quanh</string>
-	<string name="so_tap_to_show_ambient_summary">[Khi màn hình luôn bật tắt] Chạm vào màn hình sẽ hiển thị hiển thị xung quanh</string>
+	<string name="so_tap_to_show_ambient_summary">[Khi chế độ màn hình luôn bật đã tắt] Chạm vào màn hình sẽ hiển thị hiển thị xung quanh</string>
 	<string name="so_pick_to_show_ambient_title">Chọn để hiển thị màn hình xung quanh</string>
 	<string name="so_pick_to_show_ambient_summary">[Khi tắt màn hình luôn bật] Chọn điện thoại sẽ hiển thị màn hình xung quanh</string>
 	<string name="doze_header">Khi màn hình tắt…</string>

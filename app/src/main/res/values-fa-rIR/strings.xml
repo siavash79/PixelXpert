@@ -34,8 +34,8 @@
 	<string name="telegram_group_title">گروه تلگرام</string>
 	<string name="usage_title">استفاده</string>
 	<string name="usage_summary">صفحه ویکی را باز کنید</string>
-	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_title">همکاری در ترجمه این برنامه</string>
+	<string name="crowdin_summary">کمک کنید که ترجمه %s تکمیل شود</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">صفحه قفل</string>
 	<string name="statusbar_header">نوار وضعیت</string>
@@ -283,8 +283,8 @@
 	<string name="overscroll_on_summary">مهم: هر برنامه که این امکان مورد نیاز است باید در LSposed اضافه شود</string>
 	<string name="milliseconds">هزارم ثانیه</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">پنل صدا</string>
+	<string name="volume_dialog_timeout">مدت زمان نمایش پنجره صدا</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">نمایه کار/کلون</string>
 	<string name="statusbar_long_press_app_switch">برای تغییر نمایه، نوار وضعیت را طولانی فشار دهید</string>
@@ -418,9 +418,9 @@
 	<string name="package_activated">بسته با موفقیت فعال شد</string>
 	<string name="package_activation_failed">فعال سازی بسته انجام نشد</string>
 	<string name="activate_in_lsposed">در LSPosed فعال کنید</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">این برنامه قابل اجرا نیست</string>
+	<string name="menu_launch_app">اجرا</string>
+	<string name="menu_restart_app">راه‌اندازی مجدد</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">بررسی مجوزهای ریشه…</string>
 	<string name="connecting_root_service">اتصال به سرویس ریشه…</string>

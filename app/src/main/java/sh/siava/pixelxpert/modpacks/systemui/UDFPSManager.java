@@ -50,7 +50,18 @@ public class UDFPSManager extends XposedModPack {
 			UdfpsKeyguardViewClass = findClassIfExists("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader);
 		}
 		Class<?> LockIconViewClass = findClass("com.android.keyguard.LockIconView", lpparam.classLoader);
+		Class<?> LockIconViewControllerClass = findClass("com.android.keyguard.LockIconViewController", lpparam.classLoader);
 
+		hookAllMethods(LockIconViewControllerClass, "updateIsUdfpsEnrolled", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(transparentBG)
+					setObjectField(
+							getObjectField(param.thisObject, "mView"),
+							"mUseBackground",
+							false);
+			}
+		});
 
 		hookAllConstructors(UdfpsKeyguardViewClass, new XC_MethodHook() {
 			@Override
@@ -81,7 +92,11 @@ public class UDFPSManager extends XposedModPack {
 				"updateIcon", new XC_MethodHook() {
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						setObjectField(param.thisObject, "mUseBackground", false);
+						if(transparentBG)
+							setObjectField(
+									param.thisObject,
+									"mUseBackground",
+									false);
 					}
 				});
 

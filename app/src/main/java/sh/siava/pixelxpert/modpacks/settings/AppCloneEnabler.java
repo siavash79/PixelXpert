@@ -52,6 +52,20 @@ public class AppCloneEnabler extends XposedModPack {
 
 		Class<?> ClonedAppsPreferenceControllerClass = findClass("com.android.settings.applications.ClonedAppsPreferenceController", lpparam.classLoader);
 		Class<?> AppStateClonedAppsBridgeClass = findClass("com.android.settings.applications.AppStateClonedAppsBridge", lpparam.classLoader);
+		Class<?> ManageApplicationsClass = findClass("com.android.settings.applications.manageapplications.ManageApplications", lpparam.classLoader);
+		UtilsClass = findClass("com.android.settings.Utils", lpparam.classLoader);
+
+		hookAllMethods(ManageApplicationsClass, "updateOptionsMenu", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(getObjectField(param.thisObject, "mListType").equals(LIST_TYPE_CLONED_APPS) && getCloneUserID() > 0)
+				{
+					Menu mOptionsMenu = (Menu) getObjectField(param.thisObject, "mOptionsMenu");
+					mOptionsMenu.findItem(mContext.getResources().getIdentifier("delete_all_app_clones", "id", mContext.getPackageName())).setVisible(true);
+				}
+			}
+		});
+
 
 		/* Private Space
 		Class<?> FlagsClass = findClass("android.os.Flags", lpparam.classLoader);

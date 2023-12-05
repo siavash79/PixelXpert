@@ -1,3 +1,10 @@
+**canary-307**  
+- Long-press on settings icon to launch PixelXpert now replaced with an app shortcut in settings page  
+- A14: Cloned apps page: added option to remove the clone profile  
+- A14: Cloned apps: don't show cloned system apps in the app list  
+- Improved transparent fingerprint indicator mod  
+- Improved transparent fingerprint indicator mod  
+  
 **canary-306**  
 - Added option to disable the display resolution mod  
 - Reduced unnecessary logs  

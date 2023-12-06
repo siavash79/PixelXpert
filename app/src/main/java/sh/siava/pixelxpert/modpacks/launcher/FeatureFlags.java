@@ -66,21 +66,6 @@ public class FeatureFlags extends XposedModPack {
 					catch (Throwable ignored){}
 				}
 			});
-
-			hookAllMethods(FeatureFlags.getField("ENABLE_APP_CLONING_CHANGES_IN_LAUNCHER").getType(), "get", new XC_MethodHook() {
-				@Override
-				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						param.setResult(true);
-				}
-			});
-
-/*			hookAllMethods(FeatureFlags.getField("ENABLE_FORCED_MONO_ICON").getType(), "get", new XC_MethodHook() {
-				@Override
-				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if (ForceThemedLauncherIcons)
-						param.setResult(true);
-				}
-			});*/
 		}
 		catch (Throwable ignored){} //Android 13
 	}

@@ -1,6 +1,7 @@
 package sh.siava.pixelxpert.ui.fragments;
 
 import static android.content.Context.RECEIVER_EXPORTED;
+import static sh.siava.pixelxpert.utils.AppUtils.installDoubleZip;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
@@ -9,11 +10,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +30,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import com.topjohnwu.superuser.Shell;
 
@@ -46,13 +50,18 @@ import br.tiagohm.markdownview.css.styles.Github;
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.databinding.UpdateFragmentBinding;
-import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.ui.activities.UpdateActivity;
+import sh.siava.pixelxpert.modpacks.utils.ModuleFolderOperations;
+import sh.siava.pixelxpert.ui.activities.SettingsActivity;
 import sh.siava.pixelxpert.utils.AppUtils;
 import sh.siava.pixelxpert.utils.PreferenceHelper;
 
 
 public class UpdateFragment extends Fragment {
+	public static final String MOD_NAME = "PixelXpert";
+	public static final String MAGISK_UPDATE_DIR = "/data/adb/modules_update";
+	public static final String MAGISK_MODULES_DIR = "/data/adb/modules";
+	private static final String updateRoot = String.format("%s/%s", MAGISK_UPDATE_DIR, MOD_NAME);
+
 	public static final String UPDATES_CHANNEL_ID = "Updates";
 	private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/PixelXpert/stable/latestStable.json";
 	private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/PixelXpert/canary/latestCanary.json";
@@ -61,8 +70,8 @@ public class UpdateFragment extends Fragment {
 	static boolean canaryUpdate = BuildConfig.VERSION_NAME.toLowerCase().contains("canary");
 	HashMap<String, Object> latestVersion = null;
 	private String downloadedFilePath;
-	private static final String updateDir = String.format("%s/%s", UpdateActivity.MAGISK_UPDATE_DIR, UpdateActivity.MOD_NAME);
-	private static final String moduleDir = String.format("%s/%s", UpdateActivity.MAGISK_MODULES_DIR, UpdateActivity.MOD_NAME);
+	private static final String updateDir = String.format("%s/%s", MAGISK_UPDATE_DIR, MOD_NAME);
+	private static final String moduleDir = String.format("%s/%s", MAGISK_MODULES_DIR, MOD_NAME);
 
 	BroadcastReceiver downloadCompletionReceiver = new BroadcastReceiver() {
 		@SuppressLint("MissingPermission")
@@ -123,7 +132,28 @@ public class UpdateFragment extends Fragment {
 
 		//finally
 		binding = UpdateFragmentBinding.inflate(inflater, container, false);
+
+		if (getArguments() != null && getArguments().getBoolean("updateTapped", false)) {
+			String downloadPath = getArguments().getString("filePath");
+
+			installDoubleZip(downloadPath);
+		} else if (getArguments() != null && "true".equals(getArguments().getString("migratePrefs"))) //received intent from magisk, showing installation is done
+		{
+			applyPrefsToUpdate();
+		}
+
 		return binding.getRoot();
+	}
+
+	private void applyPrefsToUpdate() {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext().createDeviceProtectedStorageContext());
+
+		int volumeStps = prefs.getInt("volumeStps", 0);
+		boolean customFontsEnabled = prefs.getBoolean("enableCustomFonts", false);
+		boolean GSansOverrideEnabled = prefs.getBoolean("gsans_override", false);
+
+		ModuleFolderOperations.applyVolumeSteps(volumeStps, updateRoot, true);
+		ModuleFolderOperations.applyFontSettings(customFontsEnabled, GSansOverrideEnabled, updateRoot, true);
 	}
 
 	@Override
@@ -291,7 +321,9 @@ public class UpdateFragment extends Fragment {
 				.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE));
 
 		//noinspection ConstantConditions
-		requireContext().registerReceiver(downloadCompletionReceiver, filters, RECEIVER_EXPORTED);
+		if (getContext() != null) {
+			getContext().registerReceiver(downloadCompletionReceiver, filters, RECEIVER_EXPORTED);
+		}
 	}
 
 	@Override
@@ -302,16 +334,21 @@ public class UpdateFragment extends Fragment {
 
 	@SuppressLint("MissingPermission")
 	public void notifyInstall() {
-		Intent notificationIntent = new Intent(requireContext(), UpdateActivity.class);
+		if (getContext() == null) {
+			Log.w("UpdateFragment", "notifyInstall: context is null");
+			return;
+		}
+
+		Intent notificationIntent = new Intent(getContext(), SettingsActivity.class);
 		notificationIntent.setAction(Intent.ACTION_RUN);
 		notificationIntent.addCategory(Intent.CATEGORY_DEFAULT);
 		notificationIntent.putExtra("updateTapped", true);
 		notificationIntent.putExtra("filePath", downloadedFilePath);
 
-		PendingIntent pendingIntent = PendingIntent.getActivity(requireContext(), 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+		PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
 		//noinspection ConstantConditions
-		NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), UPDATES_CHANNEL_ID)
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), UPDATES_CHANNEL_ID)
 				.setSmallIcon(R.drawable.ic_notification_foreground)
 				.setContentTitle(requireContext().getString(R.string.update_notification_title))
 				.setContentText(requireContext().getString(R.string.update_notification_text))
@@ -319,7 +356,7 @@ public class UpdateFragment extends Fragment {
 				.setContentIntent(pendingIntent)
 				.setAutoCancel(true);
 
-		NotificationManagerCompat.from(requireContext()).notify(1, builder.build());
+		NotificationManagerCompat.from(getContext()).notify(1, builder.build());
 	}
 
 	public interface TaskDoneCallback extends Callback {

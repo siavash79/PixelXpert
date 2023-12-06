@@ -41,7 +41,7 @@ public class SystemScreenRecord extends XposedModPack {
 					{
 						if(InsecureScreenRecord && (boolean) callMethod(param.thisObject, "validatePackageName"
 								, Binder.getCallingUid()
-								, "com.android.systemui"))
+								, Constants.SYSTEM_UI_PACKAGE))
 							param.setResult(true);
 					}
 					catch (Throwable ignored) {}

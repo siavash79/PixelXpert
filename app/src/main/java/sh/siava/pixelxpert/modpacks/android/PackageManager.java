@@ -14,6 +14,7 @@ import java.util.TimerTask;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
@@ -78,9 +79,10 @@ public class PackageManager extends XposedModPack {
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 						String action = ((Intent) param.args[0]).getAction();
 
-						if(action.equals(Constants.ACTION_PROFILE_SWITCH_AVAILABLE)
-								|| action.equals(Constants.ACTION_XPOSED_CONFIRMED))
+						if(action.startsWith(BuildConfig.APPLICATION_ID + ".ACTION"))
+						{
 							param.setResult(null);
+						}
 					}
 				});
 

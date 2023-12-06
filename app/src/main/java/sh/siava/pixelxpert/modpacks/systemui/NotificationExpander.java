@@ -64,10 +64,18 @@ public class NotificationExpander extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!listenPackage.equals(lpparam.packageName) || !notificationExpandallHookEnabled) return;
 
-		Class<?> FooterViewClass = findClass("com.android.systemui.statusbar.notification.row.FooterView", lpparam.classLoader);
-		Class<?> FooterViewButtonClass = findClass("com.android.systemui.statusbar.notification.row.FooterViewButton", lpparam.classLoader);
 		Class<?> NotificationStackScrollLayoutClass = findClass("com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout", lpparam.classLoader);
+		Class<?> FooterViewButtonClass = findClass("com.android.systemui.statusbar.notification.row.FooterViewButton", lpparam.classLoader);
 		Class<?> NotifCollectionClass = findClassIfExists("com.android.systemui.statusbar.notification.collection.NotifCollection", lpparam.classLoader);
+		Class<?> FooterViewClass;
+
+		try { //14AP11
+			FooterViewClass = findClass("com.android.systemui.statusbar.notification.footer.ui.view.FooterView", lpparam.classLoader);
+		}
+		catch (Throwable ignored) //Older
+		{
+			FooterViewClass = findClass("com.android.systemui.statusbar.notification.row.FooterView", lpparam.classLoader);
+		}
 
 		//Notification Footer, where shortcuts should live
 		hookAllMethods(FooterViewClass, "onFinishInflate", new XC_MethodHook() {

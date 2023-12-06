@@ -1,0 +1,101 @@
+name: Make Canary Release
+
+on:
+  push:
+    branches:
+      - 'canary'
+    paths:
+      - '.github/edit2MakeNewCanary'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+    - name: Source Code Download
+      run: git clone --branch canary --single-branch --recurse-submodules https://github.com/siavash79/PixelXpert.git .
+      
+    - name: JDK 17 Setup
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+        
+    - name: Shell Scripts Permissions
+      run: chmod +x .github/*.sh
+
+    - name: Changelog Generation
+      run: .github/extractChanges.sh
+
+    - name: Version Bump
+      run: .github/bumpVersion.sh ${{ github.run_id }}
+
+    - name: Gradlew Permissions
+      run: chmod +x gradlew
+
+    - name: Signature files preparation
+      run: |
+          if [ ! -z "${{ secrets.SIGNING_KEY }}" ]; then
+            echo storePassword='${{ secrets.KEY_STORE_PASSWORD }}' >> ReleaseKey.properties
+            echo keyAlias='${{ secrets.ALIAS }}' >> ReleaseKey.properties
+            echo keyPassword='${{ secrets.KEY_PASSWORD }}' >> ReleaseKey.properties
+            echo storeFile='${{ github.workspace }}/ReleaseKey.jks' >> ReleaseKey.properties
+            echo ${{ secrets.SIGNING_KEY }} | base64 --decode > ${{ github.workspace }}/ReleaseKey.jks
+          fi
+      
+    - name: Gradle Build
+      run: ./gradlew assembleRelease
+
+    - name: Magisk Module Generation
+      run: .github/make_zip.sh
+
+    - name: Upload Xposed Artifact to Actions
+      uses: actions/upload-artifact@v3
+      with: 
+        name: PixelXpert.zip
+        path: output
+
+#    - name: Previous Release Deletion
+#      continue-on-error: true
+#      run: gh release delete canary_builds -y -R siavash79/PixelXpert
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Canary Binary Release
+      uses: ncipollo/release-action@v1.13.0
+      with:
+        tag: 'canary_builds'
+        name: 'Latest Canary'
+        omitBodyDuringUpdate: true
+        prerelease: true
+        allowUpdates: true
+        replacesArtifacts: true
+        draft: false
+        artifacts: 'output/*.*'
+
+    - name: Version Bump Commit
+      uses: github-actions-x/commit@v2.9
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        push-branch: 'canary'
+        commit-message: 'Version update: Release'
+        force-add: 'true'
+        files: MagiskModBase/module.prop app/build.gradle latestVersion.json CanaryChangelog.md latestCanary.json MagiskModuleUpdate_Xposed.json MagiskModuleUpdate_Full.json
+        name: GitHub
+        email: PixelXpert@siava.sh
+
+    - name: Telegram Channel Post
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.AOSPMODS_CHANNEL_ID }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: ${{ env.TMessage }}
+        format: markdown
+
+    - name: Telegram File Attachment
+      run: |
+        curl -v "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMediaGroup?chat_id=${{ secrets.AOSPMODS_CHANNEL_ID }}&media=%5B%7B%22type%22%3A%22document%22%2C%20%22media%22%3A%22attach%3A%2F%2FXposed%22%7D%5D" -F Xposed="@output/PixelXpert.zip"

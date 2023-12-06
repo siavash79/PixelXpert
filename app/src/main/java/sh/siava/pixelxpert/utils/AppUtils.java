@@ -14,15 +14,18 @@ public class AppUtils {
 		switch (what.toLowerCase())
 		{
 			case "systemui":
-				Shell.cmd("killall com.android.systemui").submit();
+				Shell.cmd("killall com.android.systemui").exec();
 				break;
 			case "system":
 				Shell.cmd("am start -a android.intent.action.REBOOT").exec();
 				break;
 			case "zygote":
+			case "android":
 				Shell.cmd("kill $(pidof zygote)").submit();
 				Shell.cmd("kill $(pidof zygote64)").submit();
 				break;
+			default:
+				Shell.cmd(String.format("killall %s", what)).exec();
 		}
 	}
 

@@ -50,7 +50,7 @@ grantRootApps(){
 }
 
 migratePrefs(){
-  am start -n "$PKGNAME/.UpdateActivity" -e migratePrefs true > /dev/null
+  am start -n "$PKGNAME/.ui.activities.SettingsActivity" -e migratePrefs true > /dev/null
 }
 
 #activate PKGNAME in Lsposed
@@ -132,8 +132,6 @@ fi
 	ui_print '  **********************'
 	ui_print '  * Brought to you by: *'
 	ui_print '  *                    *'
-	ui_print '  * siavash79@github   *'
-	ui_print '  *                    *'
-	ui_print '  * eltifo@github      *'
+	ui_print '  * PixelXpert team    *'
 	ui_print '  **********************'
 	ui_print ''

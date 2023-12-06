@@ -1,14 +1,17 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
+import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.ShapeDrawable;
 import android.widget.ImageView;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -43,52 +46,59 @@ public class UDFPSManager extends XposedModPack {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
 		Class<?> UdfpsKeyguardViewClass = findClassIfExists("com.android.systemui.biometrics.UdfpsKeyguardViewLegacy", lpparam.classLoader); //A4B3
-		if(UdfpsKeyguardViewClass == null)
-		{ //A13
+		if (UdfpsKeyguardViewClass == null) { //A13
 			UdfpsKeyguardViewClass = findClassIfExists("com.android.systemui.biometrics.UdfpsKeyguardView", lpparam.classLoader);
 		}
-		Class<?> LockIconViewClass = findClass("com.android.keyguard.LockIconView", lpparam.classLoader);
+		Class<?> LockIconViewControllerClass = findClass("com.android.keyguard.LockIconViewController", lpparam.classLoader);
 
-
-		XC_MethodHook FPCircleTransparenter = new XC_MethodHook() {
+		hookAllMethods(LockIconViewControllerClass, "updateIsUdfpsEnrolled", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!transparentBG) return;
-
-				try {
-					ImageView mBgProtection = (ImageView) getObjectField(param.thisObject, "mBgProtection");
-					mBgProtection.setImageAlpha(0);
-				} catch (Throwable ignored) {
-				} //if (!mFullyInflated) A13
+				if(transparentBG)
+					setObjectField(
+							getObjectField(param.thisObject, "mView"),
+							"mUseBackground",
+							false);
 			}
-		};
+		});
 
-		hookAllMethods(UdfpsKeyguardViewClass, "updateBurnInOffsets", FPCircleTransparenter);
-		hookAllMethods(UdfpsKeyguardViewClass, "onFinishInflate", FPCircleTransparenter);
+		hookAllConstructors(UdfpsKeyguardViewClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				try {
+					hookAllMethods(getObjectField(param.thisObject, "mLayoutInflaterFinishListener").getClass(),
+							"onInflateFinished",
+							new XC_MethodHook() {
+								@Override
+								protected void afterHookedMethod(MethodHookParam param1) throws Throwable {
+									removeUDFPSBG(param.thisObject);
+								}
+							});
+				} catch (Throwable ignored) {
+				}//A13
+			}
+		});
 
-
-		hookAllMethods(LockIconViewClass,
-				"updateIcon", new XC_MethodHook() {
-					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						setObjectField(param.thisObject, "mUseBackground", false);
-					}
-				});
+		hookAllMethods(UdfpsKeyguardViewClass, "onFinishInflate", new XC_MethodHook() { //A13
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				removeUDFPSBG(param.thisObject);
+			}
+		});
 
 		hookAllMethods(UdfpsKeyguardViewClass,
 				"updateColor", new XC_MethodHook() {
 					@SuppressLint("DiscouragedApi")
 					@Override
 					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (!transparentBG) return;
+						if (!transparentBG ||
+								!getBooleanField(param.thisObject, "mFullyInflated"))
+							return;
 
 						Object mLockScreenFp = getObjectField(param.thisObject, "mLockScreenFp");
 
-						if (mLockScreenFp == null) return;
-
 						int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
 								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
-
 
 						setObjectField(param.thisObject, "mTextColorPrimary", mTextColorPrimary);
 
@@ -96,5 +106,12 @@ public class UDFPSManager extends XposedModPack {
 						param.setResult(null);
 					}
 				});
+	}
+
+	private void removeUDFPSBG(Object object) {
+		if (!transparentBG) return;
+
+		ImageView mBgProtection = (ImageView) getObjectField(object, "mBgProtection");
+		mBgProtection.setImageDrawable(new ShapeDrawable());
 	}
 }

@@ -1,6 +1,7 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.hookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
@@ -80,6 +81,7 @@ public class ScreenshotManager extends XposedModPack {
 			}
 		});
 
+		//A14 QPR1 and older
 		hookAllConstructors(ScreenshotControllerClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -88,6 +90,15 @@ public class ScreenshotManager extends XposedModPack {
 				((ExecutorService) getObjectField(param.thisObject, "mBgExecutor")).shutdownNow();
 
 				setObjectField(param.thisObject, "mBgExecutor", new NoExecutor());
+			}
+		});
+
+		//A14 QPR2
+		hookAllMethods(ScreenshotControllerClass, "playCameraSoundIfNeeded", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if (disableScreenshotSound)
+					param.setResult(null);
 			}
 		});
 	}

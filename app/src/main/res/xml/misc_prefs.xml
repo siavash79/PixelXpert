@@ -91,6 +91,13 @@
 			app:tickInterval=".01"
 			app:valueCount="2" />
 
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="displayOverrideEnabled"
+			android:summary="@string/display_resolution_switch_summary"
+			android:title="@string/display_resolution_switch_title"
+			app:iconSpaceReserved="false" />
+
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			android:key="displayOverride"
 			android:title="@string/display_resolution_title"
@@ -100,6 +107,29 @@
 			app:minVal="50"
 			app:tickInterval="5"
 			app:valueCount="1" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="sysui_tuner"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="SystemUI Tuner"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="disableOverScroll"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/overscroll_on_summary"
+			android:title="@string/disable_overscroll"
+			app:iconSpaceReserved="false" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/volume_panel_category"
+		app:iconSpaceReserved="false"
+		search:ignore="true">
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
@@ -119,21 +149,15 @@
 			app:seekBarIncrement="5"
 			app:updatesContinuously="true" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="sysui_tuner"
-			android:summaryOff="@string/general_off"
-			android:summaryOn="@string/general_on"
-			android:title="SystemUI Tuner"
-			app:iconSpaceReserved="false" />
-
-		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="disableOverScroll"
-			android:summaryOff="@string/general_off"
-			android:summaryOn="@string/overscroll_on_summary"
-			android:title="@string/disable_overscroll"
-			app:iconSpaceReserved="false" />
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+			android:key="VolumeDialogTimeout"
+			android:title="@string/volume_dialog_timeout"
+			app:defaultValue="3000"
+			app:iconSpaceReserved="false"
+			app:maxVal="5000"
+			app:minVal="1000"
+			app:tickInterval="500"
+			app:valueCount="1" />
 
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
@@ -191,6 +215,7 @@
 			android:title="@string/so_vol_longpress_skip"
 			app:iconSpaceReserved="false" />
 
+
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="doubleTapToWake"
@@ -225,6 +250,14 @@
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
 			android:title="@string/expand_notifications_icons_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="DisableOngoingNotifDismiss"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/disbale_ongoing_notif_dismiss_title"
 			app:iconSpaceReserved="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference

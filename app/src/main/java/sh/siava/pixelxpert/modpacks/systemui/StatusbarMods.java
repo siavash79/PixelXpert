@@ -8,7 +8,6 @@ import static android.widget.LinearLayout.VERTICAL;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
-import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
@@ -503,8 +502,7 @@ public class StatusbarMods extends XposedModPack {
 		mContext.registerReceiver(mAppProfileSwitchReceiver, filter, Context.RECEIVER_EXPORTED);
 
 		//region needed classes
-		Class<?> ActivityStarterClass = findClass("com.android.systemui.plugins.ActivityStarter", lpparam.classLoader);
-		Class<?> DependencyClass = findClass("com.android.systemui.Dependency", lpparam.classLoader);
+		Class<?> QSSecurityFooterUtilsClass = findClass("com.android.systemui.qs.QSSecurityFooterUtils", lpparam.classLoader);
 		Class<?> KeyguardStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
 //        Class<?> QuickStatusBarHeaderControllerClass = findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
 		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
@@ -701,8 +699,15 @@ public class StatusbarMods extends XposedModPack {
 				lp.gravity = Gravity.CENTER_HORIZONTAL;
 				NTQSHolder.setLayoutParams(lp);
 				((FrameLayout) QSBH).addView(NTQSHolder);
-				mActivityStarter = callStaticMethod(DependencyClass, "get", ActivityStarterClass);
 				placeNTQS();
+			}
+		});
+
+		//stealing a working activity starter
+		hookAllConstructors(QSSecurityFooterUtilsClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				mActivityStarter = getObjectField(param.thisObject, "mActivityStarter");
 			}
 		});
 

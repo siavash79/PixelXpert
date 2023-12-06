@@ -9,6 +9,7 @@ import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.utils.Helpers.findMethod;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -60,7 +61,6 @@ public class BrightnessSlider extends XposedModPack {
 
 	private boolean duringSliderPlacement = false;
 	private Object QQSBrightnessSliderController;
-
 	public BrightnessSlider(Context context) {
 		super(context);
 	}
@@ -319,29 +319,35 @@ public class BrightnessSlider extends XposedModPack {
 		ViewGroup quickQSPanel = (ViewGroup) getObjectField(QQSPC, "mView");
 
 		quickQSPanel.post(() -> {
-			QQSBrightnessSliderController = callMethod(brightnessSliderFactory, "create", callMethod(QSPanelController, "getContext"), quickQSPanel);
+			try { //don't crash systemUI if failed
+				View mView = (View) getObjectField(QSPanelController, "mView"); //ViewController#getContext
+				QQSBrightnessSliderController = callMethod(brightnessSliderFactory, "create", mView.getContext(), quickQSPanel);
 
-			QQSBrightnessSliderView = (View) getObjectField(QQSBrightnessSliderController, "mView");
+				QQSBrightnessSliderView = (View) getObjectField(QQSBrightnessSliderController, "mView");
 
-			if(!makeBrightnessController(QQSBrightnessSliderController))
-			{
-				return;
-			}
+				if (!makeBrightnessController(QQSBrightnessSliderController)) {
+					return;
+				}
 
-			try {
-				mBrightnessMirrorHandler = BrightnessMirrorHandlerClass.getConstructors()[0].newInstance(mBrightnessController);
-			} catch (Throwable ignored) {}
+				try {
+					mBrightnessMirrorHandler = BrightnessMirrorHandlerClass.getConstructors()[0].newInstance(mBrightnessController);
+				} catch (Throwable ignored) {}
 
-			addTunable(mTunerService, quickQSPanel, QS_SHOW_BRIGHTNESS);
-			setController(mBrightnessMirrorHandler, mBrightnessMirrorController);
-			registerCallbacks(mBrightnessController);
-			callMethod(QQSBrightnessSliderController, "init");
+				addTunable(mTunerService, quickQSPanel, QS_SHOW_BRIGHTNESS);
+				setController(mBrightnessMirrorHandler, mBrightnessMirrorController);
+				registerCallbacks(mBrightnessController);
+//			dumpClass(QQSBrightnessSliderController.getClass());
+
+				findMethod(QQSBrightnessSliderController.getClass(), "^init.*")
+						.invoke(QQSBrightnessSliderController);
 
 //        callMethod(mBrightnessController, "checkRestrictionAndSetEnabled"); //apparently not needed
 
-			onQsPanelAttached(mBrightnessMirrorHandler);
+				onQsPanelAttached(mBrightnessMirrorHandler);
 
-			setQQSVisibility();
+				setQQSVisibility();
+			}
+			catch (Throwable ignored){}
 		});
 	}
 

@@ -1,8 +1,7 @@
 package sh.siava.pixelxpert.modpacks.utils;
 
-import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
-import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 
@@ -11,6 +10,8 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -23,14 +24,16 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 
-/** @noinspection unused*/
+/** @noinspection unused, RedundantThrows */
 @SuppressWarnings("CommentedOutCode")
 public class Helpers {
 	private static final int KB = 1024;
@@ -50,6 +53,56 @@ public class Helpers {
 	{
 		dumpClass(className, classLoader);
 		return findClassIfExists(className, classLoader);
+	}
+
+	public static Set<XC_MethodHook.Unhook> hookAllMethods(Class<?> clazz, String method, XC_MethodHook callback)
+	{
+		XC_MethodHook hook = new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(false) {
+					log(param.method.getName() + " called");
+				}
+				callMethod(callback, "beforeHookedMethod", param);
+			}
+
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				callMethod(callback, "afterHookedMethod", param);
+			}
+		};
+
+		Set<XC_MethodHook.Unhook> result = XposedBridge.hookAllMethods(clazz, method, hook);
+		if(true) {
+			Throwable t = new Throwable();
+			log(t.getStackTrace()[1].getClassName() + " " + t.getStackTrace()[1].getLineNumber() + " hook size " + result.size());
+		}
+		return result;
+	}
+
+	public static Set<XC_MethodHook.Unhook> hookAllConstructors(Class<?> clazz, XC_MethodHook callback)
+	{
+		Set<XC_MethodHook.Unhook> result = XposedBridge.hookAllConstructors(clazz, callback);
+		if(true) {
+			Throwable t = new Throwable();
+			log(t.getStackTrace()[1].getClassName() + " " + t.getStackTrace()[1].getLineNumber() + " hook size " + result.size());
+		}
+		return result;
+	}
+
+
+	public static Method findMethod(Class<?> clazz, String namePattern)
+	{
+		Method[] methods = clazz.getMethods();
+
+		for(Method method : methods)
+		{
+			if(Pattern.matches(namePattern, method.getName()))
+			{
+				return method;
+			}
+		}
+		return null;
 	}
 
 	@SuppressWarnings("unused")
@@ -99,6 +152,37 @@ public class Helpers {
 			log("\t\t" + f.getName() + "-" + f.getType().getName());
 		}
 		log("End dump");
+	}
+
+
+	public static void dumpIDs(View v)
+	{
+		dumpIDs(v, 0);
+	}
+
+	private static void dumpIDs(View v, int level)
+	{
+		dumpID(v, level);
+		if(v instanceof ViewGroup)
+		{
+			for(int i = 0; i < ((ViewGroup) v).getChildCount(); i++)
+			{
+				dumpIDs(((ViewGroup) v).getChildAt(i), level+1);
+			}
+		}
+	}
+	private static void dumpID(View v, int level)
+	{
+		try {
+			StringBuilder str = new StringBuilder();
+			for(int i = 0; i < level; i++)
+			{
+				str.append("\t");
+			}
+			String name = v.getContext().getResources().getResourceName(v.getId());
+			log(str+ "id " + name + " type " + v.getClass().getName());
+		}
+		catch (Throwable ignored){}
 	}
 
 	public static Method findFirstMethodByName(Class<?> targetClass, String methodName)
@@ -253,14 +337,14 @@ public class Helpers {
 
 	public static void tryHookAllMethods(Class<?> clazz, String method, XC_MethodHook hook) {
 		try {
-			hookAllMethods(clazz, method, hook);
+			XposedBridge.hookAllMethods(clazz, method, hook);
 		} catch (Throwable ignored) {
 		}
 	}
 
 	public static void tryHookAllConstructors(Class<?> clazz, XC_MethodHook hook) {
 		try {
-			hookAllConstructors(clazz, hook);
+			XposedBridge.hookAllConstructors(clazz, hook);
 		} catch (Throwable ignored) {
 		}
 	}

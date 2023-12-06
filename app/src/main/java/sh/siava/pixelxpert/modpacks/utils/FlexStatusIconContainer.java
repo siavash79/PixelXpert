@@ -25,7 +25,9 @@ import java.util.List;
 
 @SuppressLint("ViewConstructor")
 public class FlexStatusIconContainer extends LinearLayout {
-	Class<?> StatusIconStateClass;
+//	Class<?> StatusIconStateClass;
+
+	Object StatusIconContainer;
 
 	public static final int STATE_ICON = 0;
 	public static final int STATE_DOT = 1;
@@ -63,14 +65,15 @@ public class FlexStatusIconContainer extends LinearLayout {
 		sortPlan = plan;
 	}
 
-	public FlexStatusIconContainer(Context context, ClassLoader classLoader) {
-		this(context, null, classLoader);
+	public FlexStatusIconContainer(Context context, ClassLoader classLoader, Object statusIconContainerInstance) {
+		this(context, null, classLoader, statusIconContainerInstance);
 	}
 
-	public FlexStatusIconContainer(Context context, AttributeSet attrs, ClassLoader classLoader) {
+	public FlexStatusIconContainer(Context context, AttributeSet attrs, ClassLoader classLoader, Object statusIconContainerInstance) {
 		super(context, attrs);
 
-		StatusIconStateClass = findClass("com.android.systemui.statusbar.phone.StatusIconContainer$StatusIconState", classLoader);
+//		StatusIconStateClass = findClass("com.android.systemui.statusbar.phone.StatusIconContainer$StatusIconState", classLoader);
+		StatusIconContainer = statusIconContainerInstance;
 		Class<?> ViewStateClass = findClass("com.android.systemui.statusbar.notification.stack.ViewState", classLoader);
 
 		if(findFieldIfExists(ViewStateClass, "mAlpha") == null)
@@ -347,9 +350,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 				}
 				setMeasuredDimension(totalWidth, MeasureSpec.getSize(heightMeasureSpec));
 			}
-		} catch (Throwable e) {
-			log("PixelXpert Error - Flex Statusbar Container");
-			log(e);
+		} catch (Throwable ignored) {
 			setDefaultResponse(widthMeasureSpec, heightMeasureSpec);
 		}
 	}
@@ -370,10 +371,8 @@ public class FlexStatusIconContainer extends LinearLayout {
 	@Override
 	public void onViewAdded(View child) {
 		super.onViewAdded(child);
-		try {
-			Object vs = StatusIconStateClass.newInstance();
-			setObjectField(vs, "justAdded", true);
-			child.setTag(mTagID, vs);
+		try { //StatusIconState constructor is not accessible. using the container to construct one for us
+			callMethod(StatusIconContainer, "onViewAdded", child);
 		} catch (Throwable ignored) {
 		}
 	}

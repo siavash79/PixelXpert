@@ -2,7 +2,7 @@
 	<!--General strings-->
 	<string name="app_name" translatable="false">Pixel Xpert</string>
 	<string name="app_themed_icon_title">Alternative Themed Icon</string>
-	<string name="xposed_desc">Custom features for Android 12+ AOSP based ROMs</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="title_activity_settings" translatable="false">@string/app_name</string>
 	<string name="volume_tile_title">Media Volume</string>
 	<string name="app_switch_tile_title">Switch App Profile</string>
@@ -34,9 +34,11 @@
 	<string name="github_repo_title">GitHub repository</string>
 	<string name="github_repo_summary" translatable="false">siavash79/PixelXpert</string>
 	<string name="telegram_group_title">Telegram group</string>
-	<string name="telegram_group_summary" translatable="false">\@AOSPMods_Support</string>
+	<string name="telegram_group_summary" translatable="false">\@PixelXpert_Support</string>
 	<string name="usage_title">Usage</string>
 	<string name="usage_summary">Open wiki page</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Lock screen</string>
@@ -85,6 +87,7 @@
 	<string name="easy_unlock_title">Easy unlock (Pin/Password)</string>
 	<string name="easy_unlock_summary">If it didn\'t work the first time, try again</string>
 	<string name="charging_info_title">Charging information on lockscreen</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">Use imperial units</string>
 
 	<!--Status bar related-->
@@ -284,10 +287,14 @@
 	<string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
 	<string name="force_no_cutout">Ignore the camera cutout</string>
 	<string name="clear_all_reposition_title">Add an accessible clear-all button to recents page</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Android 14 - Pixel launcher only)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Re-enable themed icons to apply</string>
 	<string name="volume_button_step_title">Volume steps (0 to 100%)</string>
+
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Display resolution</string>
+
 	<string name="brightness_range_title">Display brightness limits</string>
 	<string name="brightness_range_not_linear">This range is NOT linear: Sometimes a small difference leads to considerable changes</string>
 	<string name="separate_ring_notif_vol_title">Individual volume for Ringer and Notification</string>
@@ -310,15 +317,23 @@
 	<string name="so_vol_longpress_skip">Long press Volume buttons to skip music</string>
 	<string name="notifications_header">Notifications options</string>
 	<string name="expand_notifications_icons_title">Add expand/collapse all buttons</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Heads-up notification duration</string>
 	<string name="disable_overscroll">Disable elastic overscroll effect</string>
 	<string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for within LSPosed</string>
 	<string name="milliseconds">Milliseconds</string>
 
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Work/Clone Profile</string>
 	<string name="statusbar_long_press_app_switch">Long press statusbar to switch profile</string>
 	<string name="statusbar_app_switch_icon">Show an icon on statusbar when switching is available</string>
+
+	<!-- Cloned apps bragging message -->
+	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
 
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrate on outgoing call answered</string>
@@ -481,11 +496,21 @@
 	<string name="package_activated">Package successfully activated</string>
 	<string name="package_activation_failed">Package activation failed</string>
 	<string name="activate_in_lsposed">Activate in LSPosed</string>
+	<string name="package_not_launchable">Package is not launch-able</string>
+	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_restart_app">Restart app</string>
 
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Checking root permissions…</string>
 	<string name="connecting_root_service">Connecting to the root service…</string>
 	<string name="root_access_denied">Root access denied. Please allow root access.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Exit</string>
+
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 
 </resources>

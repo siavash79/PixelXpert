@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">Habilitar icono temático alternativo para AOSP mods</string>
-	<string name="xposed_desc">Funciones personalizadas para ROM basadas en Android 12+ AOSP</string>
+	<string name="app_themed_icon_title">Habilitar icono temático alternativo para Pixel Xpert</string>
+	<string name="xposed_desc">Personalizaciones para dispositivos Google Pixel</string>
 	<string name="volume_tile_title">Volumen de medios</string>
-	<string name="app_switch_tile_title">Switch App Profile</string>
+	<string name="app_switch_tile_title">Cambiar perfil de aplicación</string>
 	<string name="hide_default">No mostrar (por defecto)</string>
 	<string name="percent_of_default_size">% del tamaño por defecto</string>
 	<string name="overlay_none_title">(Por defecto)</string>
@@ -15,25 +15,27 @@
 	<string name="restart_needed">Requiere reiniciar</string>
 	<string name="more_area">más área</string>
 	<string name="less_area">menos área</string>
-	<string name="current_version">Current version: %s</string>
-	<string name="notification_channel_update">Updates</string>
-	<string name="notification_channel_update_desc">This channel shows notification about the latest updates.</string>
-	<string name="new_update_title">Update available</string>
-	<string name="new_update_desc">A new version of AOSPMods is available</string>
-	<string name="browser_not_found">Browser not found</string>
+	<string name="current_version">Versión actual: %s</string>
+	<string name="notification_channel_update">Actualizaciones</string>
+	<string name="notification_channel_update_desc">Este canal muestra notificaciones sobre las últimas actualizaciones.</string>
+	<string name="new_update_title">Actualización disponible</string>
+	<string name="new_update_desc">Una nueva versión de PixelXpert está disponible</string>
+	<string name="browser_not_found">Navegador no encontrado</string>
 	<string name="settings_general_section_title">General</string>
-	<string name="settings_update_section_title">Update</string>
-	<string name="settings_misc_section_title">Misc</string>
-	<string name="settings_about_section_title">About</string>
-	<string name="settings_check_for_update_title">Check for updates</string>
-	<string name="auto_update_title">Automatically check for updates</string>
-	<string name="auto_update_summary">Check for new versions once in a while</string>
-	<string name="update_over_wifi_title">Check updates over WiFi only</string>
-	<string name="update_over_wifi_summary">Check for updates in background only when connected to wifi</string>
-	<string name="github_repo_title">GitHub repository</string>
-	<string name="telegram_group_title">Telegram group</string>
-	<string name="usage_title">Usage</string>
-	<string name="usage_summary">Open wiki page</string>
+	<string name="settings_update_section_title">Actualizar</string>
+	<string name="settings_misc_section_title">Varios</string>
+	<string name="settings_about_section_title">Acerca de</string>
+	<string name="settings_check_for_update_title">Buscar actualizaciones</string>
+	<string name="auto_update_title">Buscar actualizaciones automáticamente</string>
+	<string name="auto_update_summary">Buscar nuevas versiones de vez en cuando</string>
+	<string name="update_over_wifi_title">Comprobar sólo actualizaciones por WiFi</string>
+	<string name="update_over_wifi_summary">Buscar actualizaciones en segundo plano sólo cuando se conecta a wifi</string>
+	<string name="github_repo_title">Repositorio de GitHub</string>
+	<string name="telegram_group_title">Grupo de Telegram</string>
+	<string name="usage_title">Uso</string>
+	<string name="usage_summary">Abrir página wiki</string>
+	<string name="crowdin_title">Traducir a mi idioma</string>
+	<string name="crowdin_summary">Ayúdanos a traducir %s a tu propio idioma</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Pantalla de bloqueo</string>
 	<string name="statusbar_header">Barra de estado</string>
@@ -79,12 +81,13 @@
 	<string name="easy_unlock_title">Fácil desbloqueo (Pin/Contraseña)</string>
 	<string name="easy_unlock_summary">Si no funcionó la primera vez, intente nuevamente</string>
 	<string name="charging_info_title">Información de carga en la pantalla de bloqueo</string>
+	<string name="disable_lockscreen_pill_title">No mostrar la píldora \"Personalizar Pantalla de bloqueo\"</string>
 	<string name="imperial_units_title">Usar unidades imperiales</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Doble toque para bloquear pantalla</string>
 	<string name="battery_style_title">Escoger un estilo de batería</string>
 	<string name="battery_show_percent_title">Mostrar porcentaje</string>
-	<string name="battery_show_charging_animation_title">Show charging animation</string>
+	<string name="battery_show_charging_animation_title">Mostrar la animación de carga</string>
 	<string name="battery_icon_size_title">Tamaño del icono de batería</string>
 	<string name="battery_hidden">Oculta</string>
 	<string name="BIcon_Opacity_title">Opacidad</string>
@@ -164,16 +167,16 @@
 	<string name="BB_batteryChargingColor">Color de carga</string>
 	<string name="BB_batteryFastChargingColor">Color de carga rápida</string>
 	<string name="BB_transit_colors">Sombrear colores en transito de cambio</string>
-	<string name="nt_stat_mode_today">Today</string>
-	<string name="nt_stat_mode_week">Current week</string>
-	<string name="nt_stat_mode_month">Current month</string>
-	<string name="sunday">Sunday</string>
-	<string name="monday">Monday</string>
-	<string name="tuesday">Tuesday</string>
-	<string name="wednesday">Wednesday</string>
-	<string name="thursday">Thursday</string>
-	<string name="friday">Friday</string>
-	<string name="saturday">Saturday</string>
+	<string name="nt_stat_mode_today">Hoy</string>
+	<string name="nt_stat_mode_week">Semana actual</string>
+	<string name="nt_stat_mode_month">Mes actual</string>
+	<string name="sunday">Domingo</string>
+	<string name="monday">Lunes</string>
+	<string name="tuesday">Martes</string>
+	<string name="wednesday">Miércoles</string>
+	<string name="thursday">Jueves</string>
+	<string name="friday">Viernes</string>
+	<string name="saturday">Sábado</string>
 	<!--Quick settings panel related-->
 	<string name="qs_mod_category_title">Número de compilación en el panel de ajustes rápidos</string>
 	<string name="qs_footer_mod_title">Personalizar el número de compilación</string>
@@ -210,7 +213,7 @@
 	<string name="bs_thick_track">Usar barra gruesa en la barra de brillo</string>
 	<string name="quick_settings_tiles_category">Opciones de mosaico QS</string>
 	<string name="qs_tile_style_title">Temas de mosaico QS</string>
-	<string name="qs_volume_unmute_title">Volume tile unmute value</string>
+	<string name="qs_volume_unmute_title">Valor para desactivar silencio del mosaico</string>
 	<!--Navigation bar related-->
 	<string name="back_gesture_category_title">Personalizar gesto atrás</string>
 	<string name="back_from_left_title">Lado izquierdo de la pantalla</string>
@@ -244,13 +247,13 @@
 	<string name="screenshot_sound_disable_title">Desactivar sonido de captura de pantalla</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Permitir captura de pantalla de contenido restringido</string>
-	<string name="screen_record_insecure">Allow screen recording from restricted content</string>
+	<string name="screen_record_insecure">Permitir grabación de pantalla con contenido restringido</string>
 	<string name="clipboard_smart_actions_title">Acciones inteligentes en la superposición del portapapeles</string>
 	<string name="allow_all_screen_rotations">Forzar el desbloqueo de todas las rotaciones de pantalla</string>
 	<string name="allow_all_screen_rotations_summary">También ignorará el botón flotante de rotación manual</string>
 	<string name="force_no_cutout">Ignora el recorte de la cámara</string>
 	<string name="clear_all_reposition_title">Agregar un botón de borrar todo en aplicaciones recientes</string>
-	<string name="force_themed_icons_title">Generar automáticamente íconos temáticos faltantes (Solo Android 14 - Pixel launcher )</string>
+	<string name="force_themed_icons_title">Generar automáticamente íconos temáticos faltantes (Solo Android - Pixel launcher)</string>
 	<string name="reapply_themed_config">Vuelva a habilitar los iconos temáticos para aplicar</string>
 	<string name="volume_button_step_title">Pasos de volumen (0 a 100%)</string>
 	<string name="display_resolution_title">Resolución de pantalla</string>
@@ -263,10 +266,10 @@
 	<string name="so_fingerprint_sensor_enabled">Permitir el sensor de huellas dactilares cuando la pantalla está apagada</string>
 	<string name="so_double_tap_wake_title">Toca dos veces para activar el teléfono</string>
 	<string name="so_double_tap_wake_summary">Desactiva un solo toque para despertar</string>
-	<string name="so_tap_to_show_ambient_title">Tap to show ambient display</string>
-	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Tapping on the screen shows ambient display</string>
-	<string name="so_pick_to_show_ambient_title">Pick to show ambient display</string>
-	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Picking the phone shows ambient display</string>
+	<string name="so_tap_to_show_ambient_title">Toca para mostrar la pantalla ambiente</string>
+	<string name="so_tap_to_show_ambient_summary">[Cuando esté apagado] Pulsar en la pantalla muestra pantalla ambiente</string>
+	<string name="so_pick_to_show_ambient_title">Levantar para mostrar la pantalla ambiente</string>
+	<string name="so_pick_to_show_ambient_summary">[Cuando esté apagado] Levantar muestra pantalla ambiente</string>
 	<string name="doze_header">Mientras la pantalla está apagada…</string>
 	<string name="custom_themed_icons_title">Iconos temáticos personalizados</string>
 	<string name="custom_themed_icons_off">Iconos personalizados deshabilitados</string>
@@ -274,14 +277,20 @@
 	<string name="so_vol_longpress_skip">Mantenga presionados los botones de volumen para saltar música</string>
 	<string name="notifications_header">Opciones de notificaciones</string>
 	<string name="expand_notifications_icons_title">Agregar expandir/contraer todos los botones</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Nunca descartar notificaciones en curso</string>
 	<string name="heads_up_notification_duration">Duración de la notificación Heads-up</string>
 	<string name="disable_overscroll">Deshabilitar el efecto de desplazamiento elástico</string>
 	<string name="overscroll_on_summary">Importante: DEBE habilitar las aplicaciones para las que desea deshabilitar el desplazamiento excesivo dentro de LSPosed</string>
 	<string name="milliseconds">Milisegundos</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Panel de Volumen</string>
+	<string name="volume_dialog_timeout">Tiempo de espera del panel de volumen</string>
 	<!-- Work/Clone profile -->
-	<string name="work_clone_profile_header">Work/Clone Profile</string>
-	<string name="statusbar_long_press_app_switch">Long press statusbar to switch profile</string>
-	<string name="statusbar_app_switch_icon">Show an icon on statusbar when switching is available</string>
+	<string name="work_clone_profile_header">Perfil de trabajo/clonar</string>
+	<string name="statusbar_long_press_app_switch">Pulsación larga de la barra de estado para cambiar de perfil</string>
+	<string name="statusbar_app_switch_icon">Mostrar un icono en la barra de estado cuando el cambio está disponible</string>
+	<!-- Cloned apps bragging message -->
+	<string name="settings_cloned_apps_active">Desbloqueado para todas las aplicaciones a través de <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: ¡Disfruta!</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrar cuenado la llamada saliente es respondida</string>
 	<string name="vibrate_on_call_drop_title">Vibrar cuando se desconecta la llamada</string>
@@ -327,31 +336,33 @@
 	<!-- QS Rows overlays -->
 	<!-- Lockscreen/Quick Settings Custom Text -->
 	<string name="minutes_word">minuto(s)</string>
-	<string name="network_stat_type">Type of Statistics</string>
-	<string name="network_stat_day">Start time</string>
-	<string name="network_stat_week">Week start day</string>
-	<string name="network_stat_month">Month start day</string>
+	<string name="network_stat_type">Tipo de Estadísticas</string>
+	<string name="network_stat_day">Hora de inicio</string>
+	<string name="network_stat_week">Día de inicio de la semana</string>
+	<string name="network_stat_month">Día de inicio del mes</string>
 	<!-- Incompatibility Alert -->
 	<string name="incompatible_alert_title">Incompatible</string>
 	<string name="incompatible_alert_body">Su ROM actual no es el objetivo directo de este módulo. Puede continuar usándolo, pero es posible que algunas (o todas) las opciones no funcionen según lo previsto.\n\nNo informe errores</string>
 	<string name="incompatible_alert_ok_btn">Entiendo</string>
 	<!-- App kill Alert -->
-	<string name="app_kill_alert_title">Notice</string>
-	<string name="app_kill_alert_body">App will close now. You can open it again by tapping on the new icon</string>
-	<string name="app_kill_ok_btn">OK</string>
+	<string name="app_kill_alert_title">Aviso</string>
+	<string name="app_kill_alert_body">La aplicación se cerrará ahora. Puedes abrirla de nuevo tocando el nuevo icono</string>
+	<string name="app_kill_ok_btn">Ok</string>
+	<!-- Reboot alert -->
+	<string name="reboot_alert_body">Se requiere un reinicio del sistema para aplicar la configuración</string>
 	<!-- Menu Items -->
 	<string name="menu_settings_title">Importar/Exportar</string>
 	<string name="menu_reset_defaults">Restablecer todos los ajustes</string>
 	<string name="menu_import_settings">Importar configuraciones desde un archivo…</string>
 	<string name="menu_export_settings">Exportar configuración a archivo…</string>
 	<string name="menu_restart">Reiniciar</string>
-	<string name="menu_restart_system">Restart system</string>
-	<string name="menu_soft_restart">Soft reboot</string>
+	<string name="menu_restart_system">Reiniciar el sistema</string>
+	<string name="menu_soft_restart">Reinicio rápido</string>
 	<string name="menu_restartSysUI">Reiniciar SystemUI</string>
 	<string name="menu_updates">Actualizaciones de la aplicación</string>
 	<string name="monitoring_category_title">Opciones de monitoreo</string>
 	<string name="netstat_header">Configuración de estadísticas de red</string>
-	<string name="string_formatter_manual_body_v3">Además del texto normal, las variables dinámicas también están disponibles, como fecha, uso de datos y temperatura:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato*\n$P&lt;format&gt; : Fecha persa, según el formato*\n$Nrx : Descargas totales en el período especificado ** ***\n$Ntx: Subidas totales en el período especificado ** ***\n$Nall : Tráfico total en el período especificado Nombre SSID WiFi (si corresponde)\n\n$T\&lt;format\&gt;[interval] : Temperatura; \nformat puede ser b (para batería), c (para cpu), g (para gpu) y s (para piel) \nLastly, hay un número opcional de intervalo de actualización en segundos (predeterminado: 60 segundos) \n\n*for documentación de formato, busque \"Formato de fecha Java\"\n** Puede especificar el período de estadísticas en AOSPMods/Menú misceláneo/Configuración de estadísticas de red\n*** si reemplazas $N con $Nc obtendrás con estadísticas de datos móviles (por ejemplo, $Ncrx en lugar de Nrx)  </string>
+	<string name="string_formatter_manual_body_v3">Además del texto normal, las variables dinámicas también están disponibles, como fecha, uso de datos y temperatura:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato*\n$P&lt;format&gt; : Fecha persa, según el formato*\n$Nrx : Descargas totales en el período especificado ** ***\n$Ntx: Subidas totales en el período especificado ** ***\n$Nall : Tráfico total en el período especificado Nombre SSID WiFi (si corresponde)\n\n$T\&lt;format\&gt;[interval] : Temperatura; \nformat puede ser b (para batería), c (para cpu), g (para gpu) y s (para piel) \nLastly, hay un número opcional de intervalo de actualización en segundos (predeterminado: 60 segundos) \n\n*for documentación de formato, busque \"Formato de fecha Java\"\n** Puede especificar el período de estadísticas en AOSPMods/Menú misceláneo/Configuración de estadísticas de red\n*** si reemplazas $N con $Nc obtendrás con estadísticas de datos móviles (por ejemplo, $Ncrx en lugar de Nrx)</string>
 	<string name="update_channel_name">Actualizaciones</string>
 	<string name="update_notification_title">Actualización descargada</string>
 	<string name="update_notification_text">Toque aquí para instalar</string>
@@ -372,7 +383,7 @@
 	<string name="update_word">Actualizar</string>
 	<string name="switch_branches">Cambiar rama</string>
 	<string name="reinstall_word">Reinstalar</string>
-	<string name="changelog_title">Changelog</string>
+	<string name="changelog_title">Lista de cambios</string>
 	<string name="own_prefs_header">Configuración de AOSPMods</string>
 	<string name="language_title">Idioma</string>
 	<string name="toggle_dark_apply">(Alternar tema oscuro para aplicar)</string>
@@ -391,25 +402,34 @@
 	<string name="toggle_one_handed">Cambiar el modo de una mano</string>
 	<string name="sleep">Dormir</string>
 	<!-- Search Preference -->
-	<string name="searchpreference_search">Search…</string>
-	<string name="searchpreference_clear">Clear</string>
-	<string name="searchpreference_history_entry">History entry</string>
-	<string name="searchpreference_more">More</string>
-	<string name="searchpreference_clear_history">Clear history</string>
-	<string name="searchpreference_no_results">No results</string>
+	<string name="searchpreference_search">Buscar…</string>
+	<string name="searchpreference_clear">Limpiar</string>
+	<string name="searchpreference_history_entry">Historial de entrada</string>
+	<string name="searchpreference_more">Más</string>
+	<string name="searchpreference_clear_history">Limpiar el historial</string>
+	<string name="searchpreference_no_results">Sin resultados</string>
 	<!-- Hooked Packages Activity -->
-	<string name="hooked_packages_title">Connected packages</string>
-	<string name="package_hooked_successful">Package responsive</string>
-	<string name="package_not_hook_enabled">Package not enabled in LSposed</string>
-	<string name="package_hook_no_response">Package not responding</string>
-	<string name="package_not_found">Package not found</string>
-	<string name="package_checking">Loading%s</string>
-	<string name="package_activated">Package successfully activated</string>
-	<string name="package_activation_failed">Package activation failed</string>
-	<string name="activate_in_lsposed">Activate in LSPosed</string>
+	<string name="hooked_packages_title">Paquetes conectados</string>
+	<string name="package_hooked_successful">Paquete responsivo</string>
+	<string name="package_not_hook_enabled">Paquete no habilitado en LSposed</string>
+	<string name="package_hook_no_response">El paquete no responde</string>
+	<string name="package_not_found">Paquete no encontrado</string>
+	<string name="package_checking">Cargando %s</string>
+	<string name="package_activated">Paquete activado con éxito</string>
+	<string name="package_activation_failed">Error en la activación del paquete</string>
+	<string name="activate_in_lsposed">Activar en LSPosed</string>
+	<string name="package_not_launchable">El paquete no se puede lanzar</string>
+	<string name="menu_launch_app">Abrir aplicación</string>
+	<string name="menu_restart_app">Reiniciar aplicación</string>
 	<!-- Splash Activity -->
-	<string name="checking_root_permissions">Checking root permissions…</string>
-	<string name="connecting_root_service">Connecting to the root service…</string>
-	<string name="root_access_denied">Root access denied. Please allow root access.</string>
-	<string name="exit">Exit</string>
+	<string name="checking_root_permissions">Comprobando permisos root…</string>
+	<string name="connecting_root_service">Conectando al servicio root…</string>
+	<string name="root_access_denied">Acceso root denegado. Por favor autoriza el acceso root.</string>
+	<string name="root_service_failed">No se puede conectar a los servicios root. Por favor, inténtalo de nuevo más tarde</string>
+	<string name="exit">Salir</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Inicio</string>
+	<string name="navigation_update">Actualizar</string>
+	<string name="navigation_hooks">Conexiones</string>
+	<string name="navigation_settings">Ajustes</string>
 </resources>

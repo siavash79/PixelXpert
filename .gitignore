@@ -62,3 +62,4 @@ local.properties
 /app/debug/
 /app/release/
 /crowdin.properties
+/ReleaseKey.properties

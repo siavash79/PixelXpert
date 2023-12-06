@@ -22,7 +22,7 @@ import sh.siava.pixelxpert.modpacks.launcher.FeatureFlags;
 import sh.siava.pixelxpert.modpacks.launcher.TaskbarActivator;
 import sh.siava.pixelxpert.modpacks.settings.AppCloneEnabler;
 import sh.siava.pixelxpert.modpacks.android.RingerVolSeperator;
-import sh.siava.pixelxpert.modpacks.systemui.AOSPSettingsLauncher;
+import sh.siava.pixelxpert.modpacks.settings.PXSettingsLauncher;
 import sh.siava.pixelxpert.modpacks.systemui.BatteryStyleManager;
 import sh.siava.pixelxpert.modpacks.systemui.BrightnessSlider;
 import sh.siava.pixelxpert.modpacks.systemui.EasyUnlock;
@@ -48,6 +48,7 @@ import sh.siava.pixelxpert.modpacks.systemui.ThemeManager_14;
 import sh.siava.pixelxpert.modpacks.systemui.ThermalProvider;
 import sh.siava.pixelxpert.modpacks.systemui.ThreeButtonNavMods;
 import sh.siava.pixelxpert.modpacks.systemui.UDFPSManager;
+import sh.siava.pixelxpert.modpacks.systemui.VolumeDialog;
 import sh.siava.pixelxpert.modpacks.systemui.VolumeTile;
 import sh.siava.pixelxpert.modpacks.telecom.CallVibrator;
 import sh.siava.pixelxpert.modpacks.utils.Helpers;
@@ -101,8 +102,7 @@ public class ModPacks {
 					modPacks.add(FeatureFlagsMods.class);
 					modPacks.add(ThreeButtonNavMods.class);
 					modPacks.add(ScreenGestures.class);
-					modPacks.add(miscSettings.class);
-					modPacks.add(AOSPSettingsLauncher.class);
+					modPacks.add(MiscSettings.class);
 					modPacks.add(StatusbarGestures.class);
 					modPacks.add(KeyguardMods.class);
 					modPacks.add(UDFPSManager.class);
@@ -119,6 +119,7 @@ public class ModPacks {
 					modPacks.add(NotificationManager.class);
 					modPacks.add(VolumeTile.class);
 					modPacks.add(ScreenRecord.class);
+					modPacks.add(VolumeDialog.class);
 				}
 				break;
 			case Constants.LAUNCHER_PACKAGE:
@@ -132,6 +133,8 @@ public class ModPacks {
 				modPacks.add(CallVibrator.class);
 				break;
 			case Constants.SETTINGS_PACKAGE:
+				modPacks.add(PXSettingsLauncher.class);
+
 				if(Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU)
 					modPacks.add(AppCloneEnabler.class);
 				break;

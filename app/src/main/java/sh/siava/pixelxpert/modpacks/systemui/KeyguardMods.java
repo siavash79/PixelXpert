@@ -391,13 +391,13 @@ public class KeyguardMods extends XposedModPack {
 
 				carrierTextController = param.thisObject;
 				Object carrierTextCallback = getObjectField(carrierTextController, "mCarrierTextCallback");
+				setCarrierText();
 				hookAllMethods(carrierTextCallback.getClass(),
 						"updateCarrierInfo", new XC_MethodHook() {
 							@Override
 							protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-								if (!customCarrierTextEnabled) return; //nothing to do
-								setCarrierText();
-								param.setResult(null);
+								if (customCarrierTextEnabled)
+									param.setResult(null);
 							}
 						});
 			}
@@ -608,11 +608,12 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	private void setCarrierText() {
+		if(!customCarrierTextEnabled) return;
+
 		try {
 			TextView mView = (TextView) getObjectField(carrierTextController, "mView");
 			mView.post(() -> mView.setText(carrierStringFormatter.formatString(customCarrierText)));
-		} catch (Throwable ignored) {
-		} //probably not initiated yet
+		} catch (Throwable ignored) {} //probably not initiated yet
 	}
 
 	private void setMiddleText() {

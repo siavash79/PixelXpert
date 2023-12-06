@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">AOSP Mods 테마의 대체 아이콘 활성화</string>
-	<string name="xposed_desc">Android 12+ AOSP 기반 롬을 위한 커스텀 기능들</string>
+	<string name="xposed_desc">Customizations for Google Pixel devices</string>
 	<string name="volume_tile_title">미디어 볼륨</string>
 	<string name="app_switch_tile_title">앱 프로필 바꾸기</string>
 	<string name="hide_default">숨김 (기본값)</string>
@@ -15,25 +15,27 @@
 	<string name="restart_needed">적용하려면 기기를 다시 시작해야 합니다</string>
 	<string name="more_area">더 많은 영역</string>
 	<string name="less_area">더 좁은 영역</string>
-	<string name="current_version">Current version: %s</string>
-	<string name="notification_channel_update">Updates</string>
-	<string name="notification_channel_update_desc">This channel shows notification about the latest updates.</string>
-	<string name="new_update_title">Update available</string>
-	<string name="new_update_desc">A new version of AOSPMods is available</string>
-	<string name="browser_not_found">Browser not found</string>
-	<string name="settings_general_section_title">General</string>
-	<string name="settings_update_section_title">Update</string>
-	<string name="settings_misc_section_title">Misc</string>
-	<string name="settings_about_section_title">About</string>
-	<string name="settings_check_for_update_title">Check for updates</string>
-	<string name="auto_update_title">Automatically check for updates</string>
-	<string name="auto_update_summary">Check for new versions once in a while</string>
-	<string name="update_over_wifi_title">Check updates over WiFi only</string>
-	<string name="update_over_wifi_summary">Check for updates in background only when connected to wifi</string>
-	<string name="github_repo_title">GitHub repository</string>
-	<string name="telegram_group_title">Telegram group</string>
-	<string name="usage_title">Usage</string>
-	<string name="usage_summary">Open wiki page</string>
+	<string name="current_version">현재 버전: %s</string>
+	<string name="notification_channel_update">업데이트</string>
+	<string name="notification_channel_update_desc">이 채널은 최신 업데이트에 대한 알림을 표시합니다.</string>
+	<string name="new_update_title">업데이트 가능</string>
+	<string name="new_update_desc">PixelXpert의 새 버전을 사용할 수 있습니다.</string>
+	<string name="browser_not_found">브라우저를 찾을 수 없습니다</string>
+	<string name="settings_general_section_title">일반적인</string>
+	<string name="settings_update_section_title">업데이트</string>
+	<string name="settings_misc_section_title">기타</string>
+	<string name="settings_about_section_title">에 대한</string>
+	<string name="settings_check_for_update_title">업데이트 확인</string>
+	<string name="auto_update_title">자동으로 업데이트 확인</string>
+	<string name="auto_update_summary">가끔씩 새 버전을 확인하세요.</string>
+	<string name="update_over_wifi_title">Wi-Fi를 통해서만 업데이트 확인</string>
+	<string name="update_over_wifi_summary">Wi-Fi에 연결된 경우에만 백그라운드에서 업데이트를 확인하세요.</string>
+	<string name="github_repo_title">GitHub 저장소</string>
+	<string name="telegram_group_title">전보 그룹</string>
+	<string name="usage_title">용법</string>
+	<string name="usage_summary">위키 페이지 열기</string>
+	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">잠금 화면</string>
 	<string name="statusbar_header">상태 표시줄</string>
@@ -79,6 +81,7 @@
 	<string name="easy_unlock_title">쉬운 잠금해제 (PIN/비밀번호)</string>
 	<string name="easy_unlock_summary">적용 직후, 작동하지 않았다면 다시 시도해보세요</string>
 	<string name="charging_info_title">잠금 화면 충전 정보 표시</string>
+	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
 	<string name="imperial_units_title">야드파운드 표시법 사용</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">두 번 눌러 화면 끄기</string>
@@ -250,7 +253,7 @@
 	<string name="allow_all_screen_rotations_summary">화면 회전 플로팅 버튼을 무시합니다</string>
 	<string name="force_no_cutout">화면 속 카메라 무시</string>
 	<string name="clear_all_reposition_title">최근 앱 화면에 모두 삭제 버튼 추가</string>
-	<string name="force_themed_icons_title">테마 앱 아이콘이 없을 경우 자동 생성 (Android 14 - Pixel launcher 전용)</string>
+	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">적용하려면 테마 앱 아이콘을 다시 활성화하세요</string>
 	<string name="volume_button_step_title">볼륨 단계 (0에서 100%까지)</string>
 	<string name="display_resolution_title">화면 해상도</string>
@@ -274,14 +277,20 @@
 	<string name="so_vol_longpress_skip">볼륨 버튼 길게 눌러 곡 넘기기</string>
 	<string name="notifications_header">알림 설정</string>
 	<string name="expand_notifications_icons_title">전부 펼치기 / 전부 접기 버튼 추가</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">헤드업 알림 지속 시간</string>
 	<string name="disable_overscroll">늘어나는 오버스크롤 효과 비활성화</string>
 	<string name="overscroll_on_summary">중요: LSPosed 설정 내에서 오버스크롤 효과를 비활성화시킬 앱을 추가해야 합니다</string>
 	<string name="milliseconds">밀리초</string>
+	<!-- Volume panel -->
+	<string name="volume_panel_category">Volume panel</string>
+	<string name="volume_dialog_timeout">Volume dialog timeout</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">직장/복제 프로필</string>
 	<string name="statusbar_long_press_app_switch">상태표시줄을 길게 눌러 프로필 전환하기</string>
 	<string name="statusbar_app_switch_icon">프로필 전환이 가능할 때 상태표시줄에 아이콘을 표시합니다</string>
+	<!-- Cloned apps bragging message -->
+	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">상대방이 나의 전화를 받은 경우 진동 알림</string>
 	<string name="vibrate_on_call_drop_title">전화가 끊어진 경우 진동 알림</string>
@@ -339,19 +348,21 @@
 	<string name="app_kill_alert_title">알림</string>
 	<string name="app_kill_alert_body">앱이 종료될 예정입니다. 새로운 아이콘을 탭하여 다시 실행할 수 있습니다.</string>
 	<string name="app_kill_ok_btn">확인</string>
+	<!-- Reboot alert -->
+	<string name="reboot_alert_body">설정을 적용하려면 시스템을 재부팅해야 합니다.</string>
 	<!-- Menu Items -->
 	<string name="menu_settings_title">불러오기/내보내기</string>
 	<string name="menu_reset_defaults">모든 설정 초기화</string>
 	<string name="menu_import_settings">파일로부터 설정 불러오기…</string>
 	<string name="menu_export_settings">파일로부터 설정 내보내기…</string>
 	<string name="menu_restart">다시 시작</string>
-	<string name="menu_restart_system">Restart system</string>
-	<string name="menu_soft_restart">Soft reboot</string>
+	<string name="menu_restart_system">시스템 재시작</string>
+	<string name="menu_soft_restart">소프트 재부팅</string>
 	<string name="menu_restartSysUI">SystemUI 다시 시작</string>
 	<string name="menu_updates">앱 업데이트</string>
 	<string name="monitoring_category_title">모니터링 설정</string>
 	<string name="netstat_header">네트워크 기록 설정</string>
-	<string name="string_formatter_manual_body_v3">In addition to the normal text, dynamic variables are also available, like Date, Data usage and Temperature:\n\n$G\&lt;format\&gt; : Gregorian date, based on format*\n$P&lt;format&gt; : Persian date, based on format*\n$Nrx : Total Downloads in specified period ** ***\n$Ntx: Total Uploads in specified period ** ***\n$Nall : Total Traffic in specified period ** ***\n$Nssid : WiFi SSID name (if applicable)\n\n$T\&lt;format\&gt;[interval] : Temperature; \nformat can be b (for battery), c (for CPU), g (for GPU) and s (for skin) \nLastly, there is OPTIONAL number of update interval in seconds (default: 60 seconds)\n\n*for format documentation, search for \"Java Date Format\"\n**You can specify the statistics period in AOSPMods/Miscellaneous menu/Network Statistics Settings\n***If you replace $N with $Nc you will get with mobile data statistics (e.g. $Ncrx instead of Nrx)</string>
+	<string name="string_formatter_manual_body_v3">일반 텍스트 외에도 날짜, 데이터 사용량 및 온도와 같은 동적 변수도 사용할 수 있습니다.\n\n$G\&lt;format\&gt; : 그레고리력 날짜, 형식 기반*\n$P&lt;format&gt; : 페르시아 날짜, 형식 기반*\n$Nrx : 총 다운로드 수 지정된 기간 ** ***\n$Ntx: 지정된 기간의 총 업로드 ** ***\n$Nall : 지정된 기간의 총 트래픽 ** ***\n$Nssid : WiFi SSID 이름(해당되는 경우)\n\n$T\&lt;format\&gt;[interval] : 온도; \n형식은 b(배터리용), c(CPU용), g(GPU용) 및 s(스킨용)일 수 있습니다. \n마지막으로 초 단위의 업데이트 간격 수(기본값: 60초)가 있습니다\n\n*형식의 경우 설명서에서 \"Java Date Format\"을 검색하세요.\n**PixelXpert/기타 메뉴/네트워크 통계 설정에서 통계 기간을 지정할 수 있습니다.\n*** $N $Nc 로 바꾸면 모바일 데이터 통계가 표시됩니다(예: Nrx 대신 $Ncrx)</string>
 	<string name="update_channel_name">업데이트</string>
 	<string name="update_notification_title">업데이트 다운로드됨</string>
 	<string name="update_notification_text">여기를 눌러 설치하세요</string>
@@ -404,12 +415,21 @@
 	<string name="package_hook_no_response">패키지가 응답하지 않습니다</string>
 	<string name="package_not_found">패키지를 찾을 수 없습니다</string>
 	<string name="package_checking">불러오는 중%s</string>
-	<string name="package_activated">Package successfully activated</string>
-	<string name="package_activation_failed">Package activation failed</string>
-	<string name="activate_in_lsposed">Activate in LSPosed</string>
+	<string name="package_activated">패키지가 성공적으로 활성화되었습니다.</string>
+	<string name="package_activation_failed">패키지 활성화 실패</string>
+	<string name="activate_in_lsposed">LSPosed에서 활성화</string>
+	<string name="package_not_launchable">Package is not launch-able</string>
+	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_restart_app">Restart app</string>
 	<!-- Splash Activity -->
-	<string name="checking_root_permissions">Checking root permissions…</string>
-	<string name="connecting_root_service">Connecting to the root service…</string>
-	<string name="root_access_denied">Root access denied. Please allow root access.</string>
-	<string name="exit">Exit</string>
+	<string name="checking_root_permissions">루트 권한 확인 중…</string>
+	<string name="connecting_root_service">루트 서비스에 연결 중…</string>
+	<string name="root_access_denied">루트 액세스가 거부되었습니다. 루트 액세스를 허용해 주세요.</string>
+	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
+	<string name="exit">출구</string>
+	<!-- Bottom Navigation -->
+	<string name="navigation_home">Home</string>
+	<string name="navigation_update">Update</string>
+	<string name="navigation_hooks">Hooks</string>
+	<string name="navigation_settings">Settings</string>
 </resources>

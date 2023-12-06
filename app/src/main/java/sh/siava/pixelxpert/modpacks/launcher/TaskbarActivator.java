@@ -2,10 +2,11 @@ package sh.siava.pixelxpert.modpacks.launcher;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
+import static de.robv.android.xposed.XposedBridge.invokeOriginalMethod;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
+import static de.robv.android.xposed.XposedHelpers.findMethodExact;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
@@ -26,6 +27,7 @@ import android.view.ViewGroup;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -62,6 +64,9 @@ public class TaskbarActivator extends XposedModPack {
 	private static boolean TaskbarHideAllAppsIcon = false;
 	private Object model;
 	String mTasksFieldName = null; // in case the code was obfuscated
+	private Object TaskbarModelCallbacks;
+	private int mItemsLength = 0;
+
 	public TaskbarActivator(Context context) {
 		super(context);
 	}
@@ -121,6 +126,19 @@ public class TaskbarActivator extends XposedModPack {
 		Class<?> LauncherModelClass = findClass("com.android.launcher3.LauncherModel", lpparam.classLoader);
 		Class<?> BaseDraggingActivityClass = findClass("com.android.launcher3.BaseDraggingActivity", lpparam.classLoader);
 		Class<?> DisplayControllerClass = findClass("com.android.launcher3.util.DisplayController", lpparam.classLoader);
+		Class<?> DisplayControllerInfoClass = findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
+		Method commitItemsToUIMethod =  findMethodExact(TaskbarModelCallbacksClass, "commitItemsToUI");
+
+		hookAllMethods(DisplayControllerInfoClass, "isTablet", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(taskbarMode == TASKBAR_DEFAULT) return;
+
+				boolean taskbarEnabled = taskbarMode == TASKBAR_ON;
+
+				if(taskbarEnabled) param.setResult(true);
+			}
+		});
 
 		hookAllMethods(DisplayControllerClass, "isTransientTaskbar", new XC_MethodHook() {
 			@Override
@@ -193,7 +211,7 @@ public class TaskbarActivator extends XposedModPack {
 
 				boolean taskbarEnabled = taskbarMode == TASKBAR_ON;
 
-				setObjectField(param.thisObject, "isTaskbarPresent", taskbarEnabled);
+//				setObjectField(param.thisObject, "isTaskbarPresent", taskbarEnabled);
 
 				if(taskbarEnabled)
 				{
@@ -219,7 +237,8 @@ public class TaskbarActivator extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				//Icon must be launched from recents
 				if(taskbarMode == TASKBAR_ON
-						&& TaskbarAsRecents)
+						&& TaskbarAsRecents
+						&& mItemsLength > 0)
 					((View) param.args[0]).setOnClickListener(listener);
 			}
 		});
@@ -289,6 +308,18 @@ public class TaskbarActivator extends XposedModPack {
 									ItemInfoClass,
 									Math.min(numShownHotseatIcons, recentTaskList.size()));
 
+							int prevItemsLength = mItemsLength;
+							mItemsLength = itemInfos.length;
+							if(mItemsLength == 0)
+							{
+								invokeOriginalMethod(commitItemsToUIMethod, TaskbarModelCallbacks,null);
+								return;
+							}
+							else if(prevItemsLength == 0 && mItemsLength == 1)
+							{
+								TaskBarView.removeAllViews(); //moving from suggested apps to recent apps. old ones are not valid anymore
+							}
+
 							for (int i = 0; i < itemInfos.length; i++) {
 								TaskInfo taskInfo = (TaskInfo) ((Object[]) getObjectField(recentTaskList.get(i), mTasksFieldName))[0];
 
@@ -318,12 +349,16 @@ public class TaskbarActivator extends XposedModPack {
 								setAdditionalInstanceField(iconView, "taskId", getAdditionalInstanceField(itemInfos[itemInfos.length - i - 1], "taskId"));
 								callMethod(iconView, "applyFromApplicationInfo", itemInfos[itemInfos.length - i - 1]);
 							}
-						} catch (Throwable t) {
-							if(BuildConfig.DEBUG) log(t);
-						}
+						} catch (Throwable ignored) {}
 					});
 					refreshing = false;
 				}).start();
+			}
+		});
+		hookAllConstructors(TaskbarModelCallbacksClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				TaskbarModelCallbacks = param.thisObject;
 			}
 		});
 

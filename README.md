@@ -9,16 +9,16 @@
 
 ### **PixelXpert Support Channels:**
 
-[![XDA URL](https://img.shields.io/twitter/url?label=XDA%20Developers&logo=XDA-Developers&style=social&url=http://XDA.AOSPMods.siava.sh)](http://XDA.AOSPMods.siava.sh)
-[![Telegram URL](https://img.shields.io/twitter/url?label=Telegram&logo=telegram&style=social&url=https%3A%2F%2Ft.me%2FAOSPMods_Support)](https://t.me/AOSPMods_Support)
+[![XDA URL](https://img.shields.io/twitter/url?label=XDA%20Developers&logo=XDA-Developers&style=social&url=http://XDA.PixelXpert.siava.sh)](http://XDA.PixelXpert.siava.sh)
+[![Telegram URL](https://img.shields.io/twitter/url?label=Telegram&logo=telegram&style=social)](https://t.me/PixelXpert_Discussion)
 
-![Header Image](https://github.com/siavash79/PixelXpert/blob/canary/.github/AOSPMods_Banner_1280.jpg?raw=true)
+![Header Image](https://github.com/siavash79/PixelXpert/blob/canary/.github/PixelXpert_Banner_1280.png?raw=true)
 
 This is a mixed Xposed+Magisk module, which is made to allow customizations that are not originally designed in AOSP (Android Open Source Project). Please read thorough below before reaching to download links
 <hr>
 
 ### **Features:**
-Currently, Pixel Xpert offers customizations on different aspects of system framework and SystemUI, including:
+Currently, PixelXpert offers customizations on different aspects of system framework and SystemUI, including:
 - Status bar
 - Quick Settings panel
 - Lock screen
@@ -31,52 +31,48 @@ Currently, Pixel Xpert offers customizations on different aspects of system fram
 <hr>
 
 ### **Compatibility:**
-This MOD is compatible with ROMs or firmware that are built based on fairly unmodified Android (AOSP) source code. This means stock firmware from third party manufacturers like Sony, Motorola, Nokia, Asus, Oneplus, Nothing, etc. may not support all (or in some cases any) of the features of AOSPMods. The same concept applies to custom ROMs (like EvolutionX, Proton, LineageOS, AncientOS, etc). So far, it was reported that this MOD is compatible with Pixel stock firmware fully and with Pixel Experience (normal edition) with some small issues.
+PixelXpert is only fully compatible with pixel stock firmware. Any custom ROM is not tested and may not be fully (or even at all) compatible.
 
-AOSPMods is based on "pure" AOSP. Any changes in the ROM source code may (or may not) break the compatiblity. And thus, follow below to see which AOSPMods to use:
+Here is the compatibility chart according to different android versions and QPRs:
 
-- Android 12/12.1: [final version: v2.4.1](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1)
-- Android 13 stable (up until November 2022 firmware): [final version: v.2.4.1](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1)
-- Android 13 stable QPR3 and beta QPR4 (starting from December 2022 firmware till QPR3): [starting with v.2.5](https://github.com/siavash79/PixelXpert/releases/tag/v2.5.0) up until latest canary version
-- Android 14 beta3.1: [starting with v.2.9](https://github.com/siavash79/PixelXpert/releases/tag/v2.9.0) up until latest canary version
+- Android 12/12.1: [final version: v2.4.1](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1).
+- Android 13 stable QPR1 (up until November 2022 firmware): [final version: v.2.4.1](https://github.com/siavash79/PixelXpert/releases/tag/v2.4.1).
+- Android 13 stable QPR3 (starting from December 2022 firmware till QPR3): [starting with v.2.5](https://github.com/siavash79/PixelXpert/releases/tag/v2.5.0) up until the latest stable/canary versions.
+- Android 14: [starting with v.2.9](https://github.com/siavash79/PixelXpert/releases/tag/v2.9.0) up until the latest stable/canary versions.
+<hr>
+- Android 14 QPR2 beta builds not yet fully compatible. Please be patient until we iron out the incompatibilities caused by code changes in source (source code not available for QPR beta)
 <hr>
 
 ### **Prerequisites:**
 - Compatible ROM (see Compatibility text above)
-- Device Rooted with Magisk 24.2+
+- Device Rooted with Magisk 24.2+ or KSU
 - LSPosed (Zygisk Version preferred)
 <hr>
 
 ### **How to install:**
 - Download the stable magisk module according to your firmware as mentioned above 
-- Install in magisk
+- Install in magisk/KSU
 - Reboot (no bootloops are expected)
-- Open AOSPMods app and apply changes
-<hr>
+- Open PixelXpert app and apply changes
 
-### **Package Variants:**  
-Apart from modification on system elements, AOSPMods also includes a number of system overlays to modify fonts, system icons and colors.
-However, for those who are not interested on such overlays, we have added an Xposed-only package which, as the name says, only includes the system modification, without such system overlays. You can choose either package, and install the chosen one on your device.
-
-<ins>Xposed Package:</ins>
-- Includes only Xposed-based modification and has a rather smaller file-size. This is the one that module developers also use.
-
-<ins>Full Package:</ins>
-- Includes everything present in Xposed package, plus additional system overlay options.
+P.S. For KSU, there is an extra step of granting root access to PixelXpert as it doesn't request automatically as in Magisk
 <hr>
 
 ### **Release Variants:**  
-The module is also released in 2 flavors with different download and update procedures.
+The module is also released in 2 flavors with different manual download and update procedures. But both can utilize automated updates through magisk manager, or through in-app updater (for canary, updates will not count against the module's download count).
 
 <ins>Stable release:</ins> 
-- Manual Install/Update: through repository's Github release page (link below) AND through in-app updater  
-- Automated updates: through magisk manager, or through in-app updater
+- Manual Install/Update: through repository's Github release page (link below) AND through in-app updater
 
 <ins>Canary release:</ins>
-- Manual Install/Update: through repository's Actions page and [telegram channel](https://t.me/AOSPMods_Github) (latest version is available from [here](https://github.com/siavash79/PixelXpert/releases/tag/canary_builds) also)
-- Automated install/updates: through in-app updater - updates will NOT count against the module's download count  
+- Manual Install/Update: through repository's Actions page and [telegram channel](https://t.me/PixelXpert_Github) (latest version is available from [here](https://github.com/siavash79/PixelXpert/releases/tag/canary_builds) also)
 
 *No matter which flavor you're on, you can always switch to the other one with in-app updater
+<hr>
+
+### **Translations:**  
+[![Crowdin](https://badges.crowdin.net/aospmods/localized.svg)](https://crowdin.com/project/aospmods)  
+Want to help translate PixelXpert to your language? Visit [Crowdin](https://crowdin.com/project/aospmods)
 <hr>
 
 ### **Donations:**
@@ -88,35 +84,9 @@ This project is open source and free for usage, build or copy. However, if you r
 - @topjohnwu for Magisk
 - @rovo89 for Xposed
 - Team LSPosed
-- Team EvolutionX (Specially @kdrag0n). Some of the mods are inspired from their work
 - apsun@github for remote-preferences
 - @nijel8 for double-tap to wake
 
-**Translations:**
-- @ElTifo Portuguese
-- @cracky5322 Chinese Traditional
-- @JohnsonRan Chinese Simplified
-- @huajijam Chinese Simplified, Chinese Traditional
-- @TireX228 Russian
-- @ygorigor Romanian
-- @krystianokris Polish
-- @HofaTheRipper German
-- @acuicultor Spanish
-- @tomaja18 Spanish
-- @n3rd3x3 Spanish
-- @TeaqariaWTF Turkish
-- @EleoXDA Turkish, German, Russian
-- @nmayorga092   Spanish
-- @vitalitk Ukrainian
-- @siavash79 Persian
-- @abalam1980 Dutch
-- @trinhloivn Vietnamese
-- @xxz3 Italian
-- zz842@Telegram Hebrew
-- @Katsuyuki-Karasawa Japanese
-- @potatosalad775 Korean
-- @hcosserat French
-- @deepanshpandey Hindi
 
 **UI design:**  
 - @Mahmud0808  

@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Grab Source
-        run: git clone --branch stable --single-branch --recurse-submodules https://github.com/siavash79/AOSPMods.git .
+      - name: Source Code Download
+        run: git clone --branch stable --single-branch --recurse-submodules https://github.com/siavash79/PixelXpert.git .
 
       - name: Setup JDK 17
         uses: actions/setup-java@v3
@@ -19,50 +19,45 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Grant permission shell scripts
+      - name: Shell Scripts Permissions
         run: chmod +x .github/*.sh
 
-      - name: Update Versions
+      - name: Version Bump
         run: .github/bumpVersion.sh
 
-      - name: Grant execute permission for gradlew
+      - name: Gradlew Permissions
         run: chmod +x gradlew
 
-      - name: Build with Gradle
+      - name: Signature files preparation
+        run: |
+          if [ ! -z "${{ secrets.SIGNING_KEY }}" ]; then
+            echo storePassword='${{ secrets.KEY_STORE_PASSWORD }}' >> ReleaseKey.properties
+            echo keyAlias='${{ secrets.ALIAS }}' >> ReleaseKey.properties
+            echo keyPassword='${{ secrets.KEY_PASSWORD }}' >> ReleaseKey.properties
+            echo storeFile='${{ github.workspace }}/ReleaseKey.jks' >> ReleaseKey.properties              echo ${{ secrets.SIGNING_KEY }} | base64 --decode > ${{ github.workspace }}/ReleaseKey.jks
+          fi
+
+      - name: Gradle Build
         run: ./gradlew assembleRelease
 
-      - uses: r0adkll/sign-android-release@v1
-        name: Sign app APK
-        id: sign_app
-        with:
-          releaseDirectory: app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: "33.0.0"
-
-      - name: Run the zip script
+      - name: Magisk Module Generation
         run: .github/make_zip.sh
 
       - name: Upload Zip
         uses: actions/upload-artifact@v3
         with:
-          name: AOSPMods.zip
+          name: PixelXpert.zip
           path: output
 
       - name: Release the binaries
-        uses: Hs1r1us/Release-AIO@v2.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@v1.13.0
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          body_path: 'releaseNotes.md'
+          tag: ${{ github.ref }}
+          name: ${{ github.ref }}
           prerelease: false
           draft: false
-          asset_files: 'output'
+          artifacts: 'output/*.*'
+          bodyFile: 'releaseNotes.md'
 
       - name: Commit version bump
         uses: github-actions-x/commit@v2.9
@@ -73,9 +68,9 @@ jobs:
           force-add: 'true'
           files: MagiskModBase/module.prop MagiskModAddon/module.prop app/build.gradle MagiskModuleUpdate.json MagiskModuleUpdate_Full.json MagiskModuleUpdate_Xposed.json latestStable.json MagiskChangelog.md
           name: GitHub
-          email: aospmods@siava.sh
+          email: pixelxpert@siava.sh
 
-      - name: Inform Telegram
+      - name: Telegram Channel Post
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.AOSPMODS_CHANNEL_ID }}

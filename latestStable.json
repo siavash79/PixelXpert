@@ -2,6 +2,6 @@
     "version": "3.2.0",
     "versionCode": 308,
     "changelog": "https://raw.githubusercontent.com/siavash79/PixelXpert/stable/MagiskChangelog.md",
-    "zipUrl_Full": "https://github.com/siavash79/AOSPMods/releases/download/v3.2.0/PixelXpert.zip",
-    "zipUrl_Xposed": "https://github.com/siavash79/AOSPMods/releases/download/v3.2.0/PixelXpert.zip"
+    "zipUrl_Full": "https://github.com/siavash79/PixelXpert/releases/download/v3.2.0/PixelXpert.zip",
+    "zipUrl_Xposed": "https://github.com/siavash79/PixelXpert/releases/download/v3.2.0/PixelXpert.zip"
 }

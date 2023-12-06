@@ -1,3 +1,9 @@
+**3.2.0**  
+- App user interface improvement  
+- New languages: Hungarian & Arabic  
+- A14: Added option to remove lockscreen customization pill  
+  
+- Bugfixes    
 **3.1.0**  
 - The module is now called: Pixel Xpert!  
 - Theming and font options are removed. Pixel Xpert is now released in one package type  

@@ -19,20 +19,20 @@ sed -i 's/versionCode=.*/versionCode='$NEWVERCODE'/' MagiskModAddon/module.prop
 #legacy
 sed -i 's/"version":.*/"version": "'$NEWVERNAME'",/' MagiskModuleUpdate.json
 sed -i 's/"versionCode":.*/"versionCode": '$NEWVERCODE',/' MagiskModuleUpdate.json
-sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Full.zip",/' MagiskModuleUpdate.json
+sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/PixelXpert\/releases\/download\/'$GITHUB_REF_NAME'\/PixelXpert.zip",/' MagiskModuleUpdate.json
 #Full
 sed -i 's/"version":.*/"version": "'$NEWVERNAME'",/' MagiskModuleUpdate_Full.json
 sed -i 's/"versionCode":.*/"versionCode": '$NEWVERCODE',/' MagiskModuleUpdate_Full.json
-sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Full.zip",/' MagiskModuleUpdate_Full.json
+sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/PixelXpert\/releases\/download\/'$GITHUB_REF_NAME'\/PixelXpert.zip",/' MagiskModuleUpdate_Full.json
 #Xposed
 sed -i 's/"version":.*/"version": "'$NEWVERNAME'",/' MagiskModuleUpdate_Xposed.json
 sed -i 's/"versionCode":.*/"versionCode": '$NEWVERCODE',/' MagiskModuleUpdate_Xposed.json
-sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Xposed.zip",/' MagiskModuleUpdate_Xposed.json
+sed -i 's/"zipUrl":.*/"zipUrl": "https:\/\/github.com\/siavash79\/PixelXpert\/releases\/download\/'$GITHUB_REF_NAME'\/PixelXpert.zip",/' MagiskModuleUpdate_Xposed.json
 #In-app updater
 sed -i 's/"version":.*/"version": "'$NEWVERNAME'",/' latestStable.json
 sed -i 's/"versionCode":.*/"versionCode": '$NEWVERCODE',/' latestStable.json
-sed -i 's/"zipUrl_Full":.*/"zipUrl_Full": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Full.zip",/' latestStable.json
-sed -i 's/"zipUrl_Xposed":.*/"zipUrl_Xposed": "https:\/\/github.com\/siavash79\/AOSPMods\/releases\/download\/'$GITHUB_REF_NAME'\/AOSPMods_Xposed.zip"/' latestStable.json
+sed -i 's/"zipUrl_Full":.*/"zipUrl_Full": "https:\/\/github.com\/siavash79\/PixelXpert\/releases\/download\/'$GITHUB_REF_NAME'\/PixelXpert.zip",/' latestStable.json
+sed -i 's/"zipUrl_Xposed":.*/"zipUrl_Xposed": "https:\/\/github.com\/siavash79\/PixelXpert\/releases\/download\/'$GITHUB_REF_NAME'\/PixelXpert.zip"/' latestStable.json
 
 # module changelog
 echo "**$NEWVERNAME**  " > newChangeLog.md

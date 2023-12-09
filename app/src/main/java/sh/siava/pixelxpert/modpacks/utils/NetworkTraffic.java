@@ -215,7 +215,7 @@ public class NetworkTraffic extends FrameLayout {
 		if (!mTrafficVisible || !mViewVisible) return;
 
 		if (lastInstanceParamUpdate < lastParamUpdate) {
-			this.setAlpha(2.55f * opacity);
+			setAlpha(opacity/100f);
 			setIndicatorMode();
 			mTextView.setGravity(Gravity.CENTER);
 			mTextView.setMaxLines(2);

@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">الإنشاء التلقائي للأيقونات ذات السمات المفقودة (Pixel Launcher فقط)</string>
 	<string name="reapply_themed_config">إعادة تمكين الأيقونات الثيم لتطبيق</string>
 	<string name="volume_button_step_title">درجات الصوت (0 إلى 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">عرض الدقة</string>
 	<string name="brightness_range_title">حدود سطوع العرض</string>
 	<string name="brightness_range_not_linear">هذا النطاق ليس خطياً: في بعض الأحيان يؤدي اختلاف صغير إلى تغييرات كبيرة</string>

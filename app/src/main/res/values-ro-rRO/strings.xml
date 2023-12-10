@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Auto-generare pictograme tematice lipsă (doar lansatorul Pixel)</string>
 	<string name="reapply_themed_config">Reactivează pictogramele tematice pentru aplicare</string>
 	<string name="volume_button_step_title">Pași volum (0 la 100%)</string>
+	<string name="display_resolution_switch_title">Modifică rezoluția afișajului</string>
+	<string name="display_resolution_switch_summary">Înainte de a activa, asigură-te că resetezi toate modificările dimensiunii afișajului/dpi la cele implicite</string>
 	<string name="display_resolution_title">Rezoluție afișaj</string>
 	<string name="brightness_range_title">Limitele luminozității</string>
 	<string name="brightness_range_not_linear">Acest interval NU este liniar: Uneori o diferență mică duce la schimbări considerabile</string>

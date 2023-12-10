@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Аутоматски генериши тематске иконе које недостају (само на Pixel Launcher-у)</string>
 	<string name="reapply_themed_config">Поново омогућите тематске иконе за примену</string>
 	<string name="volume_button_step_title">Кораци јачине звука (0 до 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Резолуција екрана</string>
 	<string name="brightness_range_title">Ограничења осветљености екрана</string>
 	<string name="brightness_range_not_linear">Овај опсег НИЈЕ линеаран: Понекад мала разлика доводи до значајних промена</string>

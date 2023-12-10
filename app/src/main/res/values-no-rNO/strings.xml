@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Aktiver temaikoner på nytt for å bruke</string>
 	<string name="volume_button_step_title">Volumtrinn (0 til 100 %)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Skjermoppløsning</string>
 	<string name="brightness_range_title">Skjermens lysstyrkegrenser</string>
 	<string name="brightness_range_not_linear">Dette området er IKKE lineært: Noen ganger fører en liten forskjell til betydelige endringer</string>

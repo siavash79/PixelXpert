@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Gerar ícones temáticos automaticamente (Apenas para Pixel launcher)</string>
 	<string name="reapply_themed_config">Requer reativar a opção de ícones temáticos</string>
 	<string name="volume_button_step_title">Níveis de volume (0 a 100%)</string>
+	<string name="display_resolution_switch_title">Modificar resolução da exibição</string>
+	<string name="display_resolution_switch_summary">Antes de ativar esta opção, certifique-se que redefiniu todas as alterações de exibição/dpi para os valores padrão</string>
 	<string name="display_resolution_title">Resolução do ecrã</string>
 	<string name="brightness_range_title">Limites do brilho do ecrã</string>
 	<string name="brightness_range_not_linear">Este intervalo NÃO é linear: Por vezes, uma pequena diferença leva a mudanças consideráveis.</string>

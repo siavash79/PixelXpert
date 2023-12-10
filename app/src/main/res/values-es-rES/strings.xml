@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Generar automáticamente íconos temáticos faltantes (Solo Android - Pixel launcher)</string>
 	<string name="reapply_themed_config">Vuelva a habilitar los iconos temáticos para aplicar</string>
 	<string name="volume_button_step_title">Pasos de volumen (0 a 100%)</string>
+	<string name="display_resolution_switch_title">Modificar resolución de pantalla</string>
+	<string name="display_resolution_switch_summary">Antes de activar esto, asegúrese de reiniciar todos los cambios de tamaño de pantalla/dpi por defecto</string>
 	<string name="display_resolution_title">Resolución de pantalla</string>
 	<string name="brightness_range_title">Límites de brillo de la pantalla</string>
 	<string name="brightness_range_not_linear">Este rango NO es lineal: A veces una pequeña diferencia conduce a cambios considerables</string>

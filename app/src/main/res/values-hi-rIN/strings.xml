@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">लागू करने के लिए थीम वाले आइकन पुनः सक्षम करें</string>
 	<string name="volume_button_step_title">वॉल्यूम चरण (0 से 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">स्क्रीन रेजोल्यूशन</string>
 	<string name="brightness_range_title">चमक रेंज दिखाएं</string>
 	<string name="brightness_range_not_linear">यह श्रेणी रैखिक नहीं है: कभी-कभी एक छोटा सा अंतर बड़ा अंतर पैदा कर देता है</string>

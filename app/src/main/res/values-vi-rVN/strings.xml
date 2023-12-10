@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Tự động tạo các biểu tượng thiếu theo chủ đề (chỉ dành cho Pixel launcher)</string>
 	<string name="reapply_themed_config">Kích hoạt lại các biểu tượng theo chủ đề để áp dụng</string>
 	<string name="volume_button_step_title">Tăng mức âm lượng (0 đến 100%)</string>
+	<string name="display_resolution_switch_title">Tinh chỉnh độ phân giải màn hình</string>
+	<string name="display_resolution_switch_summary">Trước khi kích hoạt, hãy chắc chắn đã lại tất cả các thay đổi về kích cỡ/dpi về mặc định</string>
 	<string name="display_resolution_title">Độ phân giải màn hình</string>
 	<string name="brightness_range_title">Giới hạn độ sáng màn hình</string>
 	<string name="brightness_range_not_linear">CHÚ Ý: Một sự thay đổi nhỏ dẫn đến những thay đổi khác biệt đáng kể</string>

@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">적용하려면 테마 앱 아이콘을 다시 활성화하세요</string>
 	<string name="volume_button_step_title">볼륨 단계 (0에서 100%까지)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">화면 해상도</string>
 	<string name="brightness_range_title">화면 밝기 제한</string>
 	<string name="brightness_range_not_linear">해당 범위는 선형적으로 적용되지 않을 수 있습니다: 경우에 따라 작은 설정 차이가 큰 밝기 차이를 야기할 수 있습니다.</string>

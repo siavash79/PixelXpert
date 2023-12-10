@@ -1,3 +1,7 @@
+**canary-309**  
+- Resolved app startup crashes on certain devices  
+- Improved lockscreen carrier text mod  
+  
 **canary-307**  
 - Long-press on settings icon to launch PixelXpert now replaced with an app shortcut in settings page  
 - A14: Cloned apps page: added option to remove the clone profile  

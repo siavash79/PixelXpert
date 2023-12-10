@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Знову ввімкніть тематичні значки, щоб застосувати їх</string>
 	<string name="volume_button_step_title">Кроки гучності (від 0 до 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Роздільна здатність дисплея</string>
 	<string name="brightness_range_title">Обмеження яскравості дисплея</string>
 	<string name="brightness_range_not_linear">Цей діапазон НЕ є лінійним: іноді невелика різниця призводить до значних змін</string>

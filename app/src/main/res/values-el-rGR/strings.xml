@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Ενεργοποιήστε ξανά τα εικονίδια με θέμα για εφαρμογή</string>
 	<string name="volume_button_step_title">Βήματα έντασης (0 έως 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Ανάλυση της οθόνης</string>
 	<string name="brightness_range_title">Όρια φωτεινότητας οθόνης</string>
 	<string name="brightness_range_not_linear">Αυτό το εύρος ΔΕΝ είναι γραμμικό: Μερικές φορές μια μικρή διαφορά οδηγεί σε σημαντικές αλλαγές</string>

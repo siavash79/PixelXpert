@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Ota teemakuvakkeet uudelleen käyttöön</string>
 	<string name="volume_button_step_title">Äänenvoimakkuuden portaat (0–100 %)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Näytön resoluutio</string>
 	<string name="brightness_range_title">Näytön kirkkausrajat</string>
 	<string name="brightness_range_not_linear">Tämä alue EI ole lineaarinen: Joskus pieni ero johtaa huomattaviin muutoksiin</string>

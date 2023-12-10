@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">הפעל מחדש סמלים עם נושא ליישום</string>
 	<string name="volume_button_step_title">צעדי עוצמת הקול (0 עד 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">הרזולוציה של המסך</string>
 	<string name="brightness_range_title">מגבלות בהירות התצוגה</string>
 	<string name="brightness_range_not_linear">טווח זה אינו ליניארי: לפעמים הבדל קטן מוביל לשינויים ניכרים</string>

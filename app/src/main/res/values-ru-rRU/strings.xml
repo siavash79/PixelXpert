@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Повторное включение тематических значков для применения</string>
 	<string name="volume_button_step_title">Шаг громкости (от 0 до 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Разрешение диплея</string>
 	<string name="brightness_range_title">Пределы яркости дисплея</string>
 	<string name="brightness_range_not_linear">Этот диапазон НЕ является линейным: иногда небольшая разница приводит к значительным изменениям.</string>
@@ -283,8 +285,8 @@
 	<string name="overscroll_on_summary">Важно: Вы ДОЛЖНЫ включить приложения, для которых Вы хотите отключить прокрутку, в LSPosed</string>
 	<string name="milliseconds">Миллисекунды</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">Панель громкости</string>
+	<string name="volume_dialog_timeout">Тайм-аут панели громкости</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Работать/Клонировать Профиль</string>
 	<string name="statusbar_long_press_app_switch">Длительное нажатие на строке состояния для переключения профиля</string>
@@ -419,7 +421,7 @@
 	<string name="package_activation_failed">Не удалось активировать пакет</string>
 	<string name="activate_in_lsposed">Активировать в LSPosed</string>
 	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
+	<string name="menu_launch_app">Запустить приложение</string>
 	<string name="menu_restart_app">Restart app</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Проверка прав доступа к корневой системе…</string>
@@ -428,7 +430,7 @@
 	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
 	<string name="exit">Выход</string>
 	<!-- Bottom Navigation -->
-	<string name="navigation_home">Home</string>
+	<string name="navigation_home">Главная</string>
 	<string name="navigation_update">Update</string>
 	<string name="navigation_hooks">Hooks</string>
 	<string name="navigation_settings">Settings</string>

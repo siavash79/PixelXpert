@@ -256,6 +256,8 @@
 	<string name="force_themed_icons_title">Genera automaticamente icone a tema mancanti (solo Pixel Launcher)</string>
 	<string name="reapply_themed_config">Riattiva le icone a tema da applicare</string>
 	<string name="volume_button_step_title">Step volume (0 – 100%)</string>
+	<string name="display_resolution_switch_title">Modifica risoluzione del display</string>
+	<string name="display_resolution_switch_summary">Prima di abilitare, assicurati di reimpostare a default tutte le modifiche alle dimensioni del display/dpi</string>
 	<string name="display_resolution_title">Risoluzione display</string>
 	<string name="brightness_range_title">Limiti luminosità display</string>
 	<string name="brightness_range_not_linear">Questo range NON è lineare: a volte una piccola differenza porta a notevoli cambiamenti</string>

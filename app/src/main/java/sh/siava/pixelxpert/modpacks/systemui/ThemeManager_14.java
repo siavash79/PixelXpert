@@ -14,7 +14,6 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
-import static sh.siava.pixelxpert.modpacks.utils.Helpers.dumpClass;
 import static sh.siava.pixelxpert.modpacks.utils.Helpers.findMethod;
 
 import android.annotation.SuppressLint;
@@ -195,7 +194,6 @@ public class ThemeManager_14 extends XposedModPack {
 					Class<?> StateFlowImplClass = findClass("kotlinx.coroutines.flow.StateFlowImpl", lpparam.classLoader);
 					Class<?> ReadonlyStateFlowClass = findClass("kotlinx.coroutines.flow.ReadonlyStateFlow", lpparam.classLoader);
 
-					dumpClass(ReadonlyStateFlowClass);
 					Object zeroAlphaFlow = StateFlowImplClass.getConstructor(Object.class).newInstance(0f);
 					setObjectField(param.thisObject, "backgroundAlpha", ReadonlyStateFlowClass.getConstructors()[0].newInstance(zeroAlphaFlow));
 				}

@@ -197,7 +197,7 @@ public class KeyguardMods extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(ForceAODwCharging) {
-					param.setResult((boolean) param.getResult() & BatteryStyleManager.charging);
+					param.setResult((boolean) param.getResult() || BatteryStyleManager.charging);
 				}
 			}
 		});

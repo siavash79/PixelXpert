@@ -237,6 +237,13 @@
 			android:title="@string/so_pick_to_show_ambient_title"
 			app:iconSpaceReserved="false" />
 
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="ForceAODwCharging"
+			android:summary="@string/force_aod_while_charging_summary"
+			android:title="@string/force_aod_while_charging_title"
+			app:iconSpaceReserved="false" />
+
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
 	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory

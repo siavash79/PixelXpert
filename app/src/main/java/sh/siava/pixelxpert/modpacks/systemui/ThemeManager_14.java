@@ -14,6 +14,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.Helpers.dumpClass;
 import static sh.siava.pixelxpert.modpacks.utils.Helpers.findMethod;
 
 import android.annotation.SuppressLint;
@@ -194,8 +195,9 @@ public class ThemeManager_14 extends XposedModPack {
 					Class<?> StateFlowImplClass = findClass("kotlinx.coroutines.flow.StateFlowImpl", lpparam.classLoader);
 					Class<?> ReadonlyStateFlowClass = findClass("kotlinx.coroutines.flow.ReadonlyStateFlow", lpparam.classLoader);
 
+					dumpClass(ReadonlyStateFlowClass);
 					Object zeroAlphaFlow = StateFlowImplClass.getConstructor(Object.class).newInstance(0f);
-					setObjectField(param.thisObject, "backgroundAlpha", ReadonlyStateFlowClass.getConstructor(StateFlowImplClass).newInstance(zeroAlphaFlow));
+					setObjectField(param.thisObject, "backgroundAlpha", ReadonlyStateFlowClass.getConstructors()[0].newInstance(zeroAlphaFlow));
 				}
 			});
 
@@ -334,7 +336,7 @@ public class ThemeManager_14 extends XposedModPack {
 			}
 		});
 
-		hookAllMethods(BatteryStatusChipClass, findMethod(BatteryStatusChipClass, "updateResources.*").getName(), new XC_MethodHook() { //background color of 14's charging chip. Fix for light QS theme situation
+		XC_MethodHook updateResourcesHook = new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!isDark)
@@ -342,7 +344,11 @@ public class ThemeManager_14 extends XposedModPack {
 							.getBackground()
 							.setTint(colorInactive);
 			}
-		});
+		};
+
+		hookAllConstructors(BatteryStatusChipClass, updateResourcesHook);
+		hookAllMethods(BatteryStatusChipClass, "onConfigurationChanged", updateResourcesHook);
+
 		hookAllMethods(BrightnessSliderViewClass, "onFinishInflate", new XC_MethodHook() { //brightness slider
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {

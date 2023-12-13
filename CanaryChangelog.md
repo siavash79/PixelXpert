@@ -1,3 +1,6 @@
+**canary-312**  
+- A14ap11b2: Fixed lockscreen dts  
+  
 **canary-311**  
 - Added option to force AOD while charging  
 - Added option to force AOD while charging  

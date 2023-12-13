@@ -1,3 +1,7 @@
+**canary-311**  
+- Added option to force AOD while charging  
+- Added option to force AOD while charging  
+  
 **canary-310**  
 - A14ap11b2: Fixed light QS theme  
 - Return of Hide Navbar  

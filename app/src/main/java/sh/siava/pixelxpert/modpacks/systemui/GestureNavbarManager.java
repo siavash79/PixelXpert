@@ -11,6 +11,7 @@ import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -23,7 +24,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.launcher.TaskbarActivator;
 import sh.siava.pixelxpert.modpacks.utils.Helpers;
@@ -53,6 +53,8 @@ public class GestureNavbarManager extends XposedModPack {
 	private boolean colorReplaced = false;
 	private static boolean navPillColorAccent = false;
 	private static final int mLightColor = Color.parseColor("#EBffffff"), mDarkColor = Color.parseColor("#99000000"); //original navbar colors
+	private static boolean HideNavbar = false;
+	private Object NavigationBar;
 	//endregion
 
 	public GestureNavbarManager(Context context) {
@@ -60,21 +62,25 @@ public class GestureNavbarManager extends XposedModPack {
 	}
 
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
+		if (Xprefs == null) return;
 
 		//region Back gesture
-		leftEnabled = XPrefs.Xprefs.getBoolean("BackFromLeft", true);
-		rightEnabled = XPrefs.Xprefs.getBoolean("BackFromRight", true);
-		backGestureHeightFractionLeft = XPrefs.Xprefs.getInt("BackLeftHeight", 100) / 100f;
-		backGestureHeightFractionRight = XPrefs.Xprefs.getInt("BackRightHeight", 100) / 100f;
+		leftEnabled = Xprefs.getBoolean("BackFromLeft", true);
+		rightEnabled = Xprefs.getBoolean("BackFromRight", true);
+		backGestureHeightFractionLeft = Xprefs.getInt("BackLeftHeight", 100) / 100f;
+		backGestureHeightFractionRight = Xprefs.getInt("BackRightHeight", 100) / 100f;
+		//endregion
+
+		//region hide navbar
+		HideNavbar = Xprefs.getBoolean("HideNavbar", false);
 		//endregion
 
 		//region pill size
-		widthFactor = XPrefs.Xprefs.getInt("GesPillWidthModPos", 50) * .02f;
-		GesPillHeightFactor = XPrefs.Xprefs.getInt("GesPillHeightFactor", 100);
+		widthFactor = Xprefs.getInt("GesPillWidthModPos", 50) * .02f;
+		GesPillHeightFactor = Xprefs.getInt("GesPillHeightFactor", 100);
 
 		int taskbarMode = TaskbarActivator.TASKBAR_DEFAULT;
-		String taskbarModeStr = XPrefs.Xprefs.getString("taskBarMode", "0");
+		String taskbarModeStr = Xprefs.getString("taskBarMode", "0");
 		try {
 			taskbarMode = Integer.parseInt(taskbarModeStr);
 		} catch (Exception ignored) {
@@ -85,17 +91,18 @@ public class GestureNavbarManager extends XposedModPack {
 		}
 
 		if (Key.length > 0) {
+			refreshNavbar();
+
 			switch (Key[0]) {
-				case "GesPillWidthModPos":
-				case "GesPillHeightFactor":
-					refreshNavbar();
+				case "HideNavbar":
+					setNavbarVisibility();
 					break;
 			}
 		}
 		//endregion
 
 		//region pill color
-		navPillColorAccent = XPrefs.Xprefs.getBoolean("navPillColorAccent", false);
+		navPillColorAccent = Xprefs.getBoolean("navPillColorAccent", false);
 		//endregion
 	}
 
@@ -114,11 +121,21 @@ public class GestureNavbarManager extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
+		Class<?> NavigationBarClass = findClass("com.android.systemui.navigationbar.NavigationBar", lpparam.classLoader);
 		Class<?> NavigationBarInflaterViewClass = findClass("com.android.systemui.navigationbar.NavigationBarInflaterView", lpparam.classLoader);
 		Class<?> NavigationHandleClass = findClass("com.android.systemui.navigationbar.gestural.NavigationHandle", lpparam.classLoader);
 		Class<?> EdgeBackGestureHandlerClass = findClassIfExists("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader);
 		Class<?> NavigationBarEdgePanelClass = findClassIfExists("com.android.systemui.navigationbar.gestural.NavigationBarEdgePanel", lpparam.classLoader);
 		Class<?> BackPanelControllerClass = findClass("com.android.systemui.navigationbar.gestural.BackPanelController", lpparam.classLoader);
+
+		hookAllMethods(NavigationBarClass, "onViewAttached", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				NavigationBar = param.thisObject;
+
+				setNavbarVisibility();
+			}
+		});
 
 		//region back gesture
 		//A14
@@ -246,6 +263,16 @@ public class GestureNavbarManager extends XposedModPack {
 				});
 		//endregion
 
+	}
+
+	private void setNavbarVisibility() {
+		((View) getObjectField(
+				NavigationBar,
+				"mFrame")
+		).setAlpha(
+				HideNavbar
+						? 0
+						: 1);
 	}
 
 	//region Back gesture

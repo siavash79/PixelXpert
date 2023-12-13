@@ -1,3 +1,8 @@
+**canary-310**  
+- A14ap11b2: Fixed light QS theme  
+- Return of Hide Navbar  
+- Fixed network monitor opacity not applied correctly  
+  
 **canary-309**  
 - Resolved app startup crashes on certain devices  
 - Improved lockscreen carrier text mod  

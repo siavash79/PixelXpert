@@ -43,13 +43,14 @@
 				android:importantForAccessibility="no"
 				android:visibility="gone" />
 
-			<com.google.android.material.progressindicator.CircularProgressIndicator
+			<ProgressBar
 				android:id="@+id/circular_root"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="32dp"
+				android:layout_height="32dp"
 				android:indeterminate="true"
-				android:progressTint="@color/ui_accent"
-				app:indicatorSize="24dp" />
+				android:indeterminateTint="@color/ui_accent"
+				android:indeterminateTintMode="src_atop"
+				android:progressTint="@color/ui_accent_variant" />
 
 			<TextView
 				android:layout_width="wrap_content"
@@ -75,13 +76,13 @@
 				android:importantForAccessibility="no"
 				android:visibility="gone" />
 
-			<com.google.android.material.progressindicator.CircularProgressIndicator
+			<ProgressBar
 				android:id="@+id/circular_root_service"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="32dp"
+				android:layout_height="32dp"
 				android:indeterminate="true"
-				android:progressTint="@color/ui_accent"
-				app:indicatorSize="24dp" />
+				android:indeterminateTint="@color/ui_accent_variant"
+				android:indeterminateTintMode="src_atop" />
 
 			<TextView
 				android:layout_width="wrap_content"

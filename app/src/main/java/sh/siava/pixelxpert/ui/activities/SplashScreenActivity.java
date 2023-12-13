@@ -136,7 +136,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 	}
 
 	private void setCheckUIDone(int circularID, int doneImageID, boolean success) {
-		CircularProgressIndicator circular = findViewById(circularID);
+		View circular = findViewById(circularID);
 		ImageView doneImage = findViewById(doneImageID);
 		runOnUiThread(() -> {
 			circular.setVisibility(View.GONE);

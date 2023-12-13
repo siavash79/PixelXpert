@@ -109,6 +109,7 @@ public class KeyguardMods extends XposedModPack {
 
 	//region hide user avatar
 	private boolean HideLockScreenUserAvatar = false;
+	private static boolean ForceAODwCharging = false;
 	//endregion
 
 	public KeyguardMods(Context context) {
@@ -128,6 +129,8 @@ public class KeyguardMods extends XposedModPack {
 		TemperatureUnitF = Xprefs.getBoolean("TemperatureUnitF", false);
 
 		HideLockScreenUserAvatar = Xprefs.getBoolean("HideLockScreenUserAvatar", false);
+
+		ForceAODwCharging = Xprefs.getBoolean("ForceAODwCharging", false);
 
 		try {
 			KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
@@ -188,6 +191,16 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> ZenModeControllerImplClass = findClass("com.android.systemui.statusbar.policy.ZenModeControllerImpl", lpparam.classLoader);
 		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpparam.classLoader);
 		Class<?> CommandQueueClass = findClass("com.android.systemui.statusbar.CommandQueue", lpparam.classLoader);
+		Class<?> AmbientDisplayConfigurationClass = findClass("android.hardware.display.AmbientDisplayConfiguration", lpparam.classLoader);
+
+		hookAllMethods(AmbientDisplayConfigurationClass, "alwaysOnEnabled", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(ForceAODwCharging) {
+					param.setResult((boolean) param.getResult() & BatteryStyleManager.charging);
+				}
+			}
+		});
 
 		hookAllConstructors(CommandQueueClass, new XC_MethodHook() {
 			@Override

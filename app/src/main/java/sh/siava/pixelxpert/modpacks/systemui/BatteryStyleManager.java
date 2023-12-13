@@ -58,6 +58,7 @@ public class BatteryStyleManager extends XposedModPack {
 	private static boolean BatteryChargingAnimationEnabled = true;
 	private static final ArrayList<Object> batteryViews = new ArrayList<>();
 	private Object BatteryController;
+	public static boolean charging = false;
 
 	public BatteryStyleManager(Context context) {
 		super(context);
@@ -89,7 +90,7 @@ public class BatteryStyleManager extends XposedModPack {
 			for (Object view : batteryViews) //destroy old drawables and make new ones :D
 			{
 				ImageView mBatteryIconView = (ImageView) getObjectField(view, "mBatteryIconView");
-				boolean mCharging = false;
+				boolean mCharging;
 
 				try
 				{ //A14
@@ -206,7 +207,7 @@ public class BatteryStyleManager extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				int level = getIntField(param.thisObject, "mLevel");
-				boolean charging = getBooleanField(param.thisObject, "mPluggedIn")
+				charging = getBooleanField(param.thisObject, "mPluggedIn")
 						|| getBooleanField(param.thisObject, "mCharging")
 						|| getBooleanField(param.thisObject, "mWirelessCharging");
 

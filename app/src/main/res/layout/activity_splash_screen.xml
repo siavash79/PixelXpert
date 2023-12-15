@@ -48,7 +48,7 @@
 				android:layout_width="32dp"
 				android:layout_height="32dp"
 				android:indeterminate="true"
-				android:indeterminateTint="@color/ui_accent"
+				android:indeterminateTint="@color/ui_accent_variant"
 				android:indeterminateTintMode="src_atop"
 				android:progressTint="@color/ui_accent_variant" />
 

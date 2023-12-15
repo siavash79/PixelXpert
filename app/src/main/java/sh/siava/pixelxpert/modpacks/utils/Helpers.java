@@ -185,6 +185,14 @@ public class Helpers {
 		catch (Throwable ignored){}
 	}
 
+	public static int tryParseInt(String string, int fallbackResult) {
+		try {
+			return Integer.parseInt(string);
+		} catch (Exception ignored) {
+			return fallbackResult;
+		}
+	}
+
 	public static Method findFirstMethodByName(Class<?> targetClass, String methodName)
 	{
 		return concatArrays(

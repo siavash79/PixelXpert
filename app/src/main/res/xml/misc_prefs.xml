@@ -277,6 +277,15 @@
 			app:tickInterval="500"
 			app:valueCount="1" />
 
+		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
+			android:defaultValue="0"
+			android:entries="@array/notif_default_expansion_entries"
+			android:entryValues="@array/notif_default_expansion_values"
+			android:key="notificationDefaultExpansion"
+			android:summary="%s"
+			android:title="@string/notif_default_expansion_title"
+			app:iconSpaceReserved="false" />
+
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
 	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory

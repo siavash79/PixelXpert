@@ -525,4 +525,16 @@
         <item>com.android.dark.style</item>
     </string-array>
 
+	<string-array name="notif_default_expansion_entries">
+		<item>@string/word_default</item>
+		<item>@string/notif_always_expand</item>
+		<item>@string/notif_always_collapse</item>
+	</string-array>
+
+	<string-array name="notif_default_expansion_values">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
+
 </resources>

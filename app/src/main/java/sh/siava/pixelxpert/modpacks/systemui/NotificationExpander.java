@@ -74,8 +74,9 @@ public class NotificationExpander extends XposedModPack {
 		Class<?> NotificationStackScrollLayoutClass = findClass("com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout", lpparam.classLoader);
 		Class<?> FooterViewButtonClass = findClass("com.android.systemui.statusbar.notification.row.FooterViewButton", lpparam.classLoader);
 		Class<?> NotifCollectionClass = findClassIfExists("com.android.systemui.statusbar.notification.collection.NotifCollection", lpparam.classLoader);
-		Class<?> ExpandableNotificationRowClass = findClass("com.android.systemui.statusbar.notification.row.ExpandableNotificationRow", lpparam.classLoader);
+		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
 		Class<?> FooterViewClass;
+
 
 		try { //14AP11
 			FooterViewClass = findClass("com.android.systemui.statusbar.notification.footer.ui.view.FooterView", lpparam.classLoader);
@@ -86,12 +87,11 @@ public class NotificationExpander extends XposedModPack {
 		}
 
 		//region default notification state
-		hookAllConstructors(ExpandableNotificationRowClass, new XC_MethodHook() {
+		hookAllMethods(NotificationPanelViewControllerClass, "notifyExpandingStarted", new XC_MethodHook() {
 			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(notificationDefaultExpansion != DEFAULT) {
-					setRowExpansion(param.thisObject, notificationDefaultExpansion == EXPAND_ALWAYS);
-				}
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(notificationDefaultExpansion != DEFAULT)
+					expandAll(notificationDefaultExpansion == EXPAND_ALWAYS);
 			}
 		});
 		//endregion
@@ -206,6 +206,6 @@ public class NotificationExpander extends XposedModPack {
 	}
 
 	private void setRowExpansion(Object row, boolean expand) {
-		callMethod(row, "setUserExpanded", expand, expand);
+		callMethod(row, "setUserExpanded", expand, true);
 	}
 }

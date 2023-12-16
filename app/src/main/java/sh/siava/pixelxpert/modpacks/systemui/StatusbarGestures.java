@@ -31,9 +31,11 @@ public class StatusbarGestures extends XposedModPack {
 	@SuppressWarnings("unused")
 	private static final int PULLDOWN_SIDE_LEFT = 2;
 	private static final int STATUSBAR_MODE_SHADE = 0;
+	private static final int STATUSBAR_MODE_SHADE_LOCKED = 2;
 
 	private static int pullDownSide = PULLDOWN_SIDE_RIGHT;
 	private static boolean oneFingerPulldownEnabled = false;
+	private boolean oneFingerPullupEnabled = false;
 	private static float statusbarPortion = 0.25f; // now set to 25% of the screen. it can be anything between 0 to 100%
 	private Object NotificationPanelViewController;
 	private String QSExpandMethodName;
@@ -41,6 +43,7 @@ public class StatusbarGestures extends XposedModPack {
 	private GestureDetector mGestureDetector;
 
 	private boolean StatusbarLongpressAppSwitch = false;
+
 	public StatusbarGestures(Context context) {
 		super(context);
 	}
@@ -49,6 +52,7 @@ public class StatusbarGestures extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
 		oneFingerPulldownEnabled = Xprefs.getBoolean("QSPullodwnEnabled", false);
+		oneFingerPullupEnabled = Xprefs.getBoolean("oneFingerPullupEnabled", false);
 		statusbarPortion = Xprefs.getInt("QSPulldownPercent", 25) / 100f;
 		pullDownSide = Integer.parseInt(Xprefs.getString("QSPulldownSide", "1"));
 
@@ -218,24 +222,25 @@ public class StatusbarGestures extends XposedModPack {
 
 					@Override
 					public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
+						int mBarState = (int) getObjectField(NotificationPanelViewController, "mBarState");
 						if(velocityY > 500)
 						{
-							int mBarState = (int) getObjectField(NotificationPanelViewController, "mBarState");
-							if (mBarState != STATUSBAR_MODE_SHADE) return false;
+							if (mBarState != STATUSBAR_MODE_SHADE)
+								return false;
 
-							int w = (int) callMethod(
-									getObjectField(NotificationPanelViewController, "mView"),
-									"getMeasuredWidth");
-
-							float x = e1.getX();
-							float region = w * statusbarPortion;
-
-							boolean pullDownApproved = (pullDownSide == PULLDOWN_SIDE_RIGHT)
-									? w - region < x
-									: x < region;
-
-							if (pullDownApproved) {
+							if (isTouchInRegion(e1)) {
 								callMethod(NotificationPanelViewController, QSExpandMethodName);
+								return true;
+							}
+						}
+						else if(velocityY < -500)
+						{
+							if (mBarState != STATUSBAR_MODE_SHADE && mBarState != STATUSBAR_MODE_SHADE_LOCKED)
+								return false;
+
+							if(isTouchInRegion(e1))
+							{
+								callMethod(NotificationPanelViewController, "collapse", 1f, true);
 								return true;
 							}
 						}
@@ -254,8 +259,18 @@ public class StatusbarGestures extends XposedModPack {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						NotificationPanelViewController = param.thisObject;
+						Object mTouchHandler = getObjectField(param.thisObject, "mTouchHandler");
+						hookAllMethods(mTouchHandler.getClass(), "onTouchEvent", new XC_MethodHook() {
+							@Override
+							protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+								if(oneFingerPulldownEnabled && oneFingerPullupEnabled) {
+									mGestureDetector.onTouchEvent((MotionEvent) param.args[0]);
+								}
+							}
+						});
 					}
 				});
+
 				XC_MethodHook statusbarTouchHook = new XC_MethodHook() {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -274,6 +289,20 @@ public class StatusbarGestures extends XposedModPack {
 				hookAllMethods(PhoneStatusBarViewControllerClass, "onTouch", statusbarTouchHook);
 			}
 		}
+	}
+
+	private boolean isTouchInRegion(MotionEvent motionEvent) {
+		int w = (int) callMethod(
+				getObjectField(NotificationPanelViewController, "mView"),
+				"getMeasuredWidth");
+
+		float x = motionEvent.getX();
+		float region = w * statusbarPortion;
+
+		return (pullDownSide == PULLDOWN_SIDE_RIGHT)
+				? w - region < x
+				: x < region;
+
 	}
 
 	private void onStatusbarLongpress() {

@@ -234,6 +234,7 @@ public class PreferenceHelper {
 
 			case "QSPulldownPercent":
 			case "QSPulldownSide":
+			case "oneFingerPullupEnabled":
 				return instance.mPreferences.getBoolean("QSPullodwnEnabled", false);
 
 			case "BSThickTrackOverlay":

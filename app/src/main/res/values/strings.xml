@@ -206,6 +206,7 @@
 	<string name="qs_pulldown_switch_title">Quick QS panel pull-down from status bar</string>
 	<string name="qs_pulldown_side_title">Quick pull-down side</string>
 	<string name="qs_pulldown_category">Quick settings pull-down</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
 	<string name="vibration_type_touch">Intensity defined by system touch vibration settings</string>
 	<string name="qs_tile_qty_portrait">In portrait orientation</string>

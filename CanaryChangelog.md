@@ -1,3 +1,6 @@
+**canary-313**  
+- Added option to set notification's default expansion state  
+  
 **canary-312**  
 - A14ap11b2: Fixed lockscreen dts  
   

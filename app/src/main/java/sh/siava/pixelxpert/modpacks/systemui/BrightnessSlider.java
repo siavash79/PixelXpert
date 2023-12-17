@@ -9,7 +9,7 @@ import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
-import static sh.siava.pixelxpert.modpacks.utils.Helpers.findMethod;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findMethod;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

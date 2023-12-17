@@ -7,7 +7,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
-import static sh.siava.pixelxpert.modpacks.utils.Helpers.tryParseInt;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ObjectTools.tryParseInt;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

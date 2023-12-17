@@ -38,6 +38,7 @@ import androidx.core.content.res.ResourcesCompat;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.ResourceManager;
 import sh.siava.pixelxpert.modpacks.systemui.StatusbarMods;
+import sh.siava.pixelxpert.modpacks.utils.toolkit.ObjectTools;
 
 @SuppressLint("ViewConstructor")
 public class NetworkTraffic extends FrameLayout {
@@ -162,7 +163,7 @@ public class NetworkTraffic extends FrameLayout {
 		private SpannableStringBuilder formatOutput(long timeDelta, long data, @Nullable @ColorInt Integer textColor) {
 			long speed = (long) (data / (timeDelta / 1000F));
 
-			return Helpers.getHumanizedBytes(speed, .7f, (indicatorMode == MODE_SHOW_RXTX) ? " " : "\n", symbol, textColor);
+			return ObjectTools.getHumanizedBytes(speed, .7f, (indicatorMode == MODE_SHOW_RXTX) ? " " : "\n", symbol, textColor);
 		}
 
 		private boolean shouldHide(long rxData, long txData, long timeDelta) {

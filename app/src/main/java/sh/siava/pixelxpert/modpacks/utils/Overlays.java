@@ -1,8 +1,10 @@
 package sh.siava.pixelxpert.modpacks.utils;
 
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.OverlayTools.getActiveOverlays;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.OverlayTools.setOverlay;
+
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.os.RemoteException;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -33,18 +35,18 @@ public class Overlays {
 		fillOverlays(); //these are groups - to be loaded from resource arrays that end with "OverlayEx" or "OverlayG"
 
 		//independent overlays
-		Overlays.put("HideNavbarOverlay", new overlayProp("com.android.overlay.removenavbar", false));
-		Overlays.put("QSLightThemeOverlay", new overlayProp("sh.siava.pixelxpert_QSTheme", false));
-		Overlays.put("QSLightThemeBSTOverlay", new overlayProp("sh.siava.pixelxpert_QSTheme_BST", false));
-		Overlays.put("QSDualToneOverlay", new overlayProp("sh.siava.pixelxpert_QSDualTone", false));
-		Overlays.put("CustomThemedIconsOverlay", new overlayProp("com.romcontrolicons.nexuslauncher", false));
-		Overlays.put("DualToneBatteryOverlay", new overlayProp("com.android.dualtonebattery", false));
-		Overlays.put("UnreadMessagesNumberOverlay", new overlayProp("com.android.systemui.shownumber", false));
+		Overlays.put("HideNavbarOverlay", new OverlayProp("com.android.overlay.removenavbar", false));
+		Overlays.put("QSLightThemeOverlay", new OverlayProp("sh.siava.pixelxpert_QSTheme", false));
+		Overlays.put("QSLightThemeBSTOverlay", new OverlayProp("sh.siava.pixelxpert_QSTheme_BST", false));
+		Overlays.put("QSDualToneOverlay", new OverlayProp("sh.siava.pixelxpert_QSDualTone", false));
+		Overlays.put("CustomThemedIconsOverlay", new OverlayProp("com.romcontrolicons.nexuslauncher", false));
+		Overlays.put("DualToneBatteryOverlay", new OverlayProp("com.android.dualtonebattery", false));
+		Overlays.put("UnreadMessagesNumberOverlay", new OverlayProp("com.android.systemui.shownumber", false));
         /*Deprecated shortcut...no longer makes sense
         Overlays.put("KeyguardLeftShortcutOverlay", new overlayProp("com.android.systemui.showleftshortcut", false));
          */
-		Overlays.put("ReduceKeyboardSpaceOverlay", new overlayProp("com.android.overlay.reducekeyboard", false));
-		Overlays.put("BSThickTrackOverlay", new overlayProp("com.android.systemui.bstrack.overlay", false));
+		Overlays.put("ReduceKeyboardSpaceOverlay", new OverlayProp("com.android.overlay.reducekeyboard", false));
+		Overlays.put("BSThickTrackOverlay", new OverlayProp("com.android.systemui.bstrack.overlay", false));
 
 		instance = this;
 
@@ -61,11 +63,11 @@ public class Overlays {
 				int resid = field.getInt(R.array.AcherusOverlayG);
 				if (resources.getResourceName(resid).endsWith("OverlayEx") || resources.getResourceName(resid).endsWith("OverlayG")) {
 					String[] overlayNames = resources.getStringArray(resid);
-					ArrayList<overlayProp> members = new ArrayList<>();
+					ArrayList<OverlayProp> members = new ArrayList<>();
 					for (String overlayName : overlayNames) {
-						members.add(new overlayProp(overlayName, true));
+						members.add(new OverlayProp(overlayName, true));
 					}
-					Overlays.put(resources.getResourceName(resid).replace("sh.siava.pixelxpert:array/", ""), new overlayGroup(resources.getResourceName(resid), members));
+					Overlays.put(resources.getResourceName(resid).replace("sh.siava.pixelxpert:array/", ""), new OverlayGroup(resources.getResourceName(resid), members));
 				}
 			} catch (Exception ignored) {
 			}
@@ -95,7 +97,7 @@ public class Overlays {
 					if (prefs == null) return; // something not ready
 
 					try {
-						Helpers.getActiveOverlays(proxy); //update the real active overlay list
+						getActiveOverlays(proxy); //update the real active overlay list
 					} catch (Throwable ignored) {}
 
 					Map<String, ?> allPrefs = prefs.getAll();
@@ -103,19 +105,19 @@ public class Overlays {
 					for (String pref : allPrefs.keySet()) {
 						if (pref.endsWith("Overlay") && Overlays.containsKey(pref)) {
 							try {
-								Helpers.setOverlay(pref, prefs.getBoolean(pref, false), force);
+								setOverlay(pref, prefs.getBoolean(pref, false), force);
 							} catch (Throwable ignored) {}
 						}
 						//overlay groups, like themes of select one
 						else if (pref.endsWith("OverlayEx") && Overlays.containsKey(pref)) {
 							String activeOverlay = prefs.getString(pref, "None");
 
-							overlayGroup thisGroup = (overlayGroup) Overlays.get(pref);
+							OverlayGroup thisGroup = (OverlayGroup) Overlays.get(pref);
 							//noinspection ConstantConditions
-							for (overlayProp thisProp : thisGroup.members) {
+							for (OverlayProp thisProp : thisGroup.members) {
 								if (!thisProp.name.equals("None")) {
 									try {
-										Helpers.setOverlay(thisProp.name, activeOverlay.equals(thisProp.name), force);
+										setOverlay(thisProp.name, activeOverlay.equals(thisProp.name), force);
 									} catch (Throwable ignored) {}
 								}
 							}
@@ -141,23 +143,23 @@ public class Overlays {
 	}
 
 
-	static class overlayProp {
+	public static class OverlayProp {
 		public String name;
 		public boolean exclusive;
 
-		public overlayProp(String name, boolean exclusive) {
+		public OverlayProp(String name, boolean exclusive) {
 			this.name = name;
 			this.exclusive = exclusive;
 		}
 	}
 
-	static class overlayGroup {
-		public overlayGroup(String name, ArrayList<overlayProp> members) {
+	public static class OverlayGroup {
+		public OverlayGroup(String name, ArrayList<OverlayProp> members) {
 			this.name = name;
 			this.members = members;
 		}
 
 		public String name;
-		public ArrayList<overlayProp> members;
+		public ArrayList<OverlayProp> members;
 	}
 }

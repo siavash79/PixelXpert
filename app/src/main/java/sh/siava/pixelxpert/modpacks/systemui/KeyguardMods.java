@@ -11,6 +11,7 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findFirstMethodByName;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
@@ -40,7 +41,6 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.ResourceManager;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.pixelxpert.modpacks.utils.Helpers;
 import sh.siava.pixelxpert.modpacks.utils.StringFormatter;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -274,7 +274,7 @@ public class KeyguardMods extends XposedModPack {
 			}
 		});
 
-		Method updateMethod = Helpers.findFirstMethodByName(KeyguardBottomAreaViewBinderClass, "updateButton");
+		Method updateMethod = findFirstMethodByName(KeyguardBottomAreaViewBinderClass, "updateButton");
 
 		if (updateMethod != null) {
 			hookMethod(updateMethod, new XC_MethodHook() {

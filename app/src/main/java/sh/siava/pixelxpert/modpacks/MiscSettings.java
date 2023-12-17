@@ -1,8 +1,8 @@
 package sh.siava.pixelxpert.modpacks;
 
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
-import static sh.siava.pixelxpert.modpacks.utils.Helpers.addItemToCommaStringIfNotPresent;
-import static sh.siava.pixelxpert.modpacks.utils.Helpers.removeItemFromCommaString;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ObjectTools.addItemToCommaStringIfNotPresent;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ObjectTools.removeItemFromCommaString;
 
 import android.content.Context;
 import android.graphics.Color;

@@ -7,6 +7,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findFirstMethodByName;
 
 import android.content.Context;
 
@@ -26,7 +27,6 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.pixelxpert.modpacks.utils.Helpers;
 
 @SuppressWarnings("RedundantThrows")
 public class ScreenshotManager extends XposedModPack {
@@ -60,7 +60,7 @@ public class ScreenshotManager extends XposedModPack {
 
 		Class<?> ScreenshotPolicyImplClass = findClass("com.android.systemui.screenshot.ScreenshotPolicyImpl", lpparam.classLoader);
 
-		Method isManagedProfileMethod = Helpers.findFirstMethodByName(ScreenshotPolicyImplClass, "isManagedProfile");
+		Method isManagedProfileMethod = findFirstMethodByName(ScreenshotPolicyImplClass, "isManagedProfile");
 		if(isManagedProfileMethod != null)
 		{
 			hookMethod(isManagedProfileMethod, new XC_MethodHook() {

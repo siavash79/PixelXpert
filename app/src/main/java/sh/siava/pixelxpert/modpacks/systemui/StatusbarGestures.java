@@ -10,8 +10,10 @@ import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
@@ -31,6 +33,8 @@ public class StatusbarGestures extends XposedModPack {
 	@SuppressWarnings("unused")
 	private static final int PULLDOWN_SIDE_LEFT = 2;
 	private static final int STATUSBAR_MODE_SHADE = 0;
+	private static final int STATUSBAR_MODE_KEYGUARD = 1;
+	/** @noinspection unused*/
 	private static final int STATUSBAR_MODE_SHADE_LOCKED = 2;
 
 	private static int pullDownSide = PULLDOWN_SIDE_RIGHT;
@@ -41,6 +45,7 @@ public class StatusbarGestures extends XposedModPack {
 	private String QSExpandMethodName;
 
 	private GestureDetector mGestureDetector;
+	WindowManager mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 
 	private boolean StatusbarLongpressAppSwitch = false;
 
@@ -203,9 +208,7 @@ public class StatusbarGestures extends XposedModPack {
 					}
 
 					@Override
-					public void onShowPress(@NonNull MotionEvent e) {
-
-					}
+					public void onShowPress(@NonNull MotionEvent e) {}
 
 					@Override
 					public boolean onSingleTapUp(@NonNull MotionEvent e) {
@@ -218,31 +221,25 @@ public class StatusbarGestures extends XposedModPack {
 					}
 
 					@Override
-					public void onLongPress(@NonNull MotionEvent e) { onStatusbarLongpress(); }
+					public void onLongPress(@NonNull MotionEvent e) {
+						onStatusbarLongpress();
+					}
 
 					@Override
 					public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
 						int mBarState = (int) getObjectField(NotificationPanelViewController, "mBarState");
-						if(velocityY > 500)
-						{
-							if (mBarState != STATUSBAR_MODE_SHADE)
-								return false;
 
-							if (isTouchInRegion(e1)) {
-								callMethod(NotificationPanelViewController, QSExpandMethodName);
-								return true;
-							}
+						if (mBarState == STATUSBAR_MODE_SHADE
+								&& isValidFling(e1, e2, velocityY, .15f, 0.01f))
+						{
+							callMethod(NotificationPanelViewController, QSExpandMethodName);
+							return true;
 						}
-						else if(velocityY < -500)
+						else if(mBarState != STATUSBAR_MODE_KEYGUARD
+								&& isValidFling(e1, e2, velocityY, -.15f, -.06f))
 						{
-							if (mBarState != STATUSBAR_MODE_SHADE && mBarState != STATUSBAR_MODE_SHADE_LOCKED)
-								return false;
-
-							if(isTouchInRegion(e1))
-							{
-								callMethod(NotificationPanelViewController, "collapse", 1f, true);
-								return true;
-							}
+							callMethod(NotificationPanelViewController, "collapse", 1f, true);
+							return true;
 						}
 						return false;
 					}
@@ -291,18 +288,22 @@ public class StatusbarGestures extends XposedModPack {
 		}
 	}
 
-	private boolean isTouchInRegion(MotionEvent motionEvent) {
-		int w = (int) callMethod(
-				getObjectField(NotificationPanelViewController, "mView"),
-				"getMeasuredWidth");
+	//speedfactor & heightfactor are based on display height
+	private boolean isValidFling(MotionEvent e1, MotionEvent e2, float velocityY, float speedFactor, float heightFactor) {
+		Rect displayBounds = mWindowManager.getCurrentWindowMetrics().getBounds();
 
+		return (e2.getY() - e1.getY()) / heightFactor > displayBounds.height() //enough travel in right direction
+				&& isTouchInRegion(e1, displayBounds.width()) //start point in hot zone
+				&& (velocityY / speedFactor > displayBounds.height()); //enough speed in right direction
+	}
+
+	private boolean isTouchInRegion(MotionEvent motionEvent, float width) {
 		float x = motionEvent.getX();
-		float region = w * statusbarPortion;
+		float region = width * statusbarPortion;
 
 		return (pullDownSide == PULLDOWN_SIDE_RIGHT)
-				? w - region < x
+				? width - region < x
 				: x < region;
-
 	}
 
 	private void onStatusbarLongpress() {

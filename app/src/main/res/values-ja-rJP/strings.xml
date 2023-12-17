@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">ステータスバーからクイック設定をプルダウン</string>
 	<string name="qs_pulldown_side_title">クイックプルダウンの側面</string>
 	<string name="qs_pulldown_category">クイック設定のプルダウン</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">クイック設定のタイルをタップで振動</string>
 	<string name="vibration_type_touch">システムのタッチ振動設定によって定義される強度</string>
 	<string name="qs_tile_qty_portrait">縦方向時</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">【常時表示オフ時】 画面をタップするとアンビエント表示になります</string>
 	<string name="so_pick_to_show_ambient_title">選択してアンビエント表示を表示します</string>
 	<string name="so_pick_to_show_ambient_summary">【常時表示オフ時】受話器を取るとアンビエント表示が表示されます</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">While screen is off…</string>
 	<string name="custom_themed_icons_title">カスタムテーマアイコン</string>
 	<string name="custom_themed_icons_off">カスタムアイコン無効</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Add expand/collapse all buttons</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Heads-up notification duration</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">オーバースクロール効果を無効化</string>
 	<string name="overscroll_on_summary">重要事項: LSPosedでオーバースクロールを無効化するアプリをスコープに追加をする必要があります</string>
 	<string name="milliseconds">ミリ秒</string>

@@ -34,8 +34,8 @@
 	<string name="telegram_group_title">Группа Telegram</string>
 	<string name="usage_title">Использование</string>
 	<string name="usage_summary">Открыть wiki страницу</string>
-	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_title"></string>
+	<string name="crowdin_summary"></string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Экран блокировки</string>
 	<string name="statusbar_header">Строка состояния</string>
@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Быстрое вытягивание панели быстрых настроек из строки состояния</string>
 	<string name="qs_pulldown_side_title">Сторона быстрого вытягивания</string>
 	<string name="qs_pulldown_category">Вытягивание быстрых настроек</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Вибрация при касании плиток быстрых настроек</string>
 	<string name="vibration_type_touch">Интенсивность определяется системными настройками вибрации при касании</string>
 	<string name="qs_tile_qty_portrait">В портретной ориентации </string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[При выключенном режиме] При нажатии на экран отображается ambient display</string>
 	<string name="so_pick_to_show_ambient_title">Нажмите, чтобы отобразить ambient display</string>
 	<string name="so_pick_to_show_ambient_summary">[При выключенном режиме] При нажатии на экран отображается ambient display</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Когда экран выключен…</string>
 	<string name="custom_themed_icons_title">Пользовательские тематические иконки</string>
 	<string name="custom_themed_icons_off">Пользовательские значки отключены</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Добавить кнопки развернуть/свернуть все</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Длительность уведомления о предупреждениях</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Отключить эффект упругости в конце прокрутки</string>
 	<string name="overscroll_on_summary">Важно: Вы ДОЛЖНЫ включить приложения, для которых Вы хотите отключить прокрутку, в LSPosed</string>
 	<string name="milliseconds">Миллисекунды</string>

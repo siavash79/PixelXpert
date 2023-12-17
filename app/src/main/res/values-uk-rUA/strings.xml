@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Розкривний список панелі швидких налаштувань у рядку стану</string>
 	<string name="qs_pulldown_side_title">Потягніть вниз</string>
 	<string name="qs_pulldown_category">Випадаюча панель швидких налаштувань</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Вібрувати при натисканні на плитку Швидких налаштувань</string>
 	<string name="vibration_type_touch">Інтенсивність визначається налаштуваннями системної вібрації при дотику</string>
 	<string name="qs_tile_qty_portrait">У книжковій орієнтації</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Якщо дисплей завжди увімкнено, вимкнено] Натискання на екрані відображає навколишнє відображення</string>
 	<string name="so_pick_to_show_ambient_title">Виберіть, щоб відобразити навколишнє відображення</string>
 	<string name="so_pick_to_show_ambient_summary">[Коли дисплей завжди увімкнено вимкнено] Під час користування телефоном відображається зовнішній дисплей</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Поки екран вимкнено…</string>
 	<string name="custom_themed_icons_title">Користувацькі теми для значків</string>
 	<string name="custom_themed_icons_off">Користувацькі значки вимкнено</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Додати всі кнопки \"розгорнути/згорнути</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Тривалість попереднього сповіщення</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Вимкнути еластичний ефект прокрутки</string>
 	<string name="overscroll_on_summary">Важливо: ОБОВ\'ЯЗКОВО увімкніть програми, для яких ви хочете вимкнути прокрутку в LSPosed</string>
 	<string name="milliseconds">мілісекунди</string>

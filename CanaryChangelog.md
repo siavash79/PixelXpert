@@ -1,3 +1,6 @@
+**canary-314**  
+- A14: Added option to close QS with a single swipe  
+  
 **canary-313**  
 - Added option to set notification's default expansion state  
   

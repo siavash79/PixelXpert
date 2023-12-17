@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">کشویی سریع پانل QS از نوار وضعیت</string>
 	<string name="qs_pulldown_side_title">سمت پایین کشی سریع</string>
 	<string name="qs_pulldown_category">تنظیمات سریع کشویی</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">لرزش در هنگام انتخاب تنظیمات سریع</string>
 	<string name="vibration_type_touch">شدت توسط تنظیمات لرزش لمسی سیستم تعریف شده است</string>
 	<string name="qs_tile_qty_portrait">در جهت پرتره</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[هنگامی که نمایشگر همیشه روشن خاموش است] ضربه زدن روی صفحه نمایشگر محیط را نشان می دهد</string>
 	<string name="so_pick_to_show_ambient_title">برای نشان دادن نمایشگر محیطی انتخاب کنید</string>
 	<string name="so_pick_to_show_ambient_summary">[وقتی نمایشگر همیشه روشن خاموش است] انتخاب تلفن صفحه نمایش محیط را نشان می دهد</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">وقتی که صفحه نمایش خاموش است…</string>
 	<string name="custom_themed_icons_title">نمادهای با تم سفارشی</string>
 	<string name="custom_themed_icons_off">نمادهای سفارشی غیرفعال است</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">افزودن دکمه باز و بسته کردن تمام اعلانها</string>
 	<string name="disbale_ongoing_notif_dismiss_title">هرگز اعلان‌های جاری حذف نشوند</string>
 	<string name="heads_up_notification_duration">مدت زمان اعلان هدآپ</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">غیر فعال کردن حالت الاستیک اسکرول صفحه</string>
 	<string name="overscroll_on_summary">مهم: هر برنامه که این امکان مورد نیاز است باید در LSposed اضافه شود</string>
 	<string name="milliseconds">هزارم ثانیه</string>

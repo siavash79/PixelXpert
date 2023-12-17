@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">快速下拉磁贴面板</string>
 	<string name="qs_pulldown_side_title">快速下拉宽度</string>
 	<string name="qs_pulldown_category">磁贴面板下拉选项</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">点击按钮震动</string>
 	<string name="vibration_type_touch">强度由系统触摸振动设置定义</string>
 	<string name="qs_tile_qty_portrait">竖屏时</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Tapping on the screen shows ambient display</string>
 	<string name="so_pick_to_show_ambient_title">Pick to show ambient display</string>
 	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Picking the phone shows ambient display</string>
+	<string name="force_aod_while_charging_title">充电时强制开启息屏显示</string>
+	<string name="force_aod_while_charging_summary">充电时开启息屏显示</string>
 	<string name="doze_header">锁屏功能</string>
 	<string name="custom_themed_icons_title">自定义带主题的图标</string>
 	<string name="custom_themed_icons_off">自定义图标已禁用</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">添加展开 / 折叠所有按钮</string>
 	<string name="disbale_ongoing_notif_dismiss_title">永不取消正在进行的通知</string>
 	<string name="heads_up_notification_duration">通知浮动持续时间</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">禁用过度滚动效果</string>
 	<string name="overscroll_on_summary">重要:你必须在 LSPosed 作用域中勾选你要禁用的app</string>
 	<string name="milliseconds">毫秒</string>

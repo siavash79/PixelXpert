@@ -39,7 +39,7 @@
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Kilit ekranı</string>
 	<string name="statusbar_header">Durum çubuğu</string>
-	<string name="nav_header">Gezinti çubuğu</string>
+	<string name="nav_header">Gezinme çubuğu</string>
 	<string name="dialer_header">Telefon</string>
 	<string name="misc_header">Çeşitli</string>
 	<string name="qs_panel_category_title">QS paneli</string>
@@ -81,7 +81,7 @@
 	<string name="easy_unlock_title">Kolay kilit açma (Pin/Şifre)</string>
 	<string name="easy_unlock_summary">İlk seferde işe yaramadıysa, tekrar deneyin</string>
 	<string name="charging_info_title">Kilit ekranında şarj bilgisi</string>
-	<string name="disable_lockscreen_pill_title">\"Kilit Ekranını Özelleştir\" hapını gösterme</string>
+	<string name="disable_lockscreen_pill_title">\"Kilit Ekranını Özelleştir\" sekmesini gösterme</string>
 	<string name="imperial_units_title">İngiliz ölçü birimlerini kullan</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Uyku için çift dokunun</string>
@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Durum çubuğundan hızlı QS paneli çek</string>
 	<string name="qs_pulldown_side_title">Hızlı çekilebilen taraf</string>
 	<string name="qs_pulldown_category">QS açılır menüsü</string>
+	<string name="qs_pullup_switch_title">Tek kaydırmayla hızlı ayarları kapat</string>
 	<string name="qs_haptic_switch_title">QS kutucuğuna dokununca titreştir</string>
 	<string name="vibration_type_touch">Sistem dokunmatik titreşim ayarları tarafından tanımlanan yoğunluk</string>
 	<string name="qs_tile_qty_portrait">Dikey yönde</string>
@@ -210,7 +211,7 @@
 	<string name="QQS_brightness_title">QQS Panelinde parlaklık kaydırıcısını göster</string>
 	<string name="QQS_brightness_bottom_title">Parlaklık kaydırıcısını en alta taşı</string>
 	<string name="QS_brightness_disable_title">Parlaklık kaydırıcısını QS\'den gizle</string>
-	<string name="bs_thick_track">Use a thick track on the brightness slider</string>
+	<string name="bs_thick_track">Parlaklık kaydırıcısında kalın bir iz kullan</string>
 	<string name="quick_settings_tiles_category">QS kutucuk Seçenekleri</string>
 	<string name="qs_tile_style_title">QS kutucuk temaları</string>
 	<string name="qs_volume_unmute_title">Ses kutucuğunu sessiz açma değeri</string>
@@ -220,7 +221,7 @@
 	<string name="back_from_right_title">Ekranın sağ tarafı</string>
 	<string name="back_height_title">Hareket yüksekliği</string>
 	<string name="gesturenav_header">Hareketle gezinme</string>
-	<string name="gesture_nav_pill_cat">Gezinti çubuğu hapı</string>
+	<string name="gesture_nav_pill_cat">Gezinme çubuğu sekmesi</string>
 	<string name="gesture_nav_pill_width_title">Standart boyuta göre genişlik</string>
 	<string name="gesture_nav_pill_height_title">Standart boyuta göre yükseklik</string>
 	<string name="threebutton_header_title">3 Tuşlu gezinme</string>
@@ -228,11 +229,11 @@
 	<string name="three_button_left_title">Sol tuş</string>
 	<string name="three_button_center_title">Merkez tuş</string>
 	<string name="three_button_right_title">Sağ tuş</string>
-	<string name="hide_navbar_title">Gezinti çubuğunu gizle</string>
+	<string name="hide_navbar_title">Gezinme çubuğunu gizle</string>
 	<string name="taskbar_as_recents_title">Görev çubuğunu son kullanılanlar çubuğuna dönüştür</string>
 	<string name="taskbar_height_title">Görev çubuğu yüksekliği</string>
 	<string name="taskbar_radius_title">Görev çubuğu köşe kavisi</string>
-	<string name="colorpill">Vurgu renkli hareket hapı</string>
+	<string name="colorpill">Vurgu renkli hareket sekmesi</string>
 	<string name="reducekeyboard_title">Hareketler için klavye boşluğu</string>
 	<string name="reducekeyboard">Klavye üzerindeki boşluğu azalt</string>
 	<string name="taskbar_status_title">Android Görev Çubuğu</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Her zaman açık ekran kapalıyken] Ekrana dokunulduğunda ortam ekranı gösterilir</string>
 	<string name="so_pick_to_show_ambient_title">Ortam ekranını göstermek için seçin</string>
 	<string name="so_pick_to_show_ambient_summary">[Her zaman açık ekran kapalıyken] Telefonu açmak ortam ekranını gösterir</string>
+	<string name="force_aod_while_charging_title">Şarj olurken AOD\'yi zorla</string>
+	<string name="force_aod_while_charging_summary">Cihaz şarj olurken her zaman açık ekranı etkin tut (AOD)</string>
 	<string name="doze_header">Ekran kapalıyken...</string>
 	<string name="custom_themed_icons_title">Özel temalı simgeler</string>
 	<string name="custom_themed_icons_off">Özel simgeler devre dışı</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Tümünü genişlet/daralt düğmeleri ekle</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Devam eden bildirimleri asla reddetme</string>
 	<string name="heads_up_notification_duration">Uyarı bildirim süresi</string>
+	<string name="notif_default_expansion_title">Varsayılan bildirim genişlemesi</string>
+	<string name="notif_always_expand">Her zaman genişlet</string>
+	<string name="notif_always_collapse">Her zaman daralt</string>
 	<string name="disable_overscroll">Elastik kaydırma efektini devre dışı bırak</string>
 	<string name="overscroll_on_summary">Önemli: LSPosed içinde kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
 	<string name="milliseconds">Milisaniye</string>
@@ -344,7 +350,7 @@
 	<string name="network_stat_month">Ayın başlangıç günü</string>
 	<!-- Incompatibility Alert -->
 	<string name="incompatible_alert_title">Uyumsuz</string>
-	<string name="incompatible_alert_body">Your current ROM is not the direct target of this module. You may continue to use it, but some (or all) options might not work as intended\n\nPlease do not report bugs</string>
+	<string name="incompatible_alert_body">Mevcut ROM\'unuz bu modülün doğrudan hedefi değildir. Kullanmaya devam edebilirsiniz, ancak bazı (veya tüm) seçenekler amaçlandığı gibi çalışmayabilir\n\nLütfen hataları bildirmeyin</string>
 	<string name="incompatible_alert_ok_btn">Anladım</string>
 	<!-- App kill Alert -->
 	<string name="app_kill_alert_title">Uyarı</string>
@@ -389,7 +395,7 @@
 	<string name="own_prefs_header">Ayarlar</string>
 	<string name="language_title">Dil</string>
 	<string name="toggle_dark_apply">(Uygulamak için koyu temaya geçin)</string>
-	<string name="gesture_nav_extra_cat">Ekstra gezinti çubuğu hareketleri</string>
+	<string name="gesture_nav_extra_cat">Ekstra gezinme çubuğu hareketleri</string>
 	<string name="gesture_nav_long_swipe_fc_title">Ön plandaki uygulamayı öldürmek için ekranın üst kısmına kaydırın</string>
 	<string name="gesture_nav_left_swipe_up_title">Navbar\'ın solundan yukarı kaydırma hareketi</string>
 	<string name="gesture_nav_right_swipe_up_title">Navbar\'ın sağından yukarı kaydırma hareketi</string>

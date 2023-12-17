@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">상태 표시줄로부터 빠른 설정 바로 열기</string>
 	<string name="qs_pulldown_side_title">바로 열기 영역 위치</string>
 	<string name="qs_pulldown_category">빠른 설정 바로 열기</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">빠른 설정 타일 터치 시 진동</string>
 	<string name="vibration_type_touch">시스템 터치 진동 설정에 따른 강도</string>
 	<string name="qs_tile_qty_portrait">세로 화면 설정</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[AOD 기능이 비활성화된 상태에서] 화면을 탭하면 앰비언트 디스플레이를 표시합니다</string>
 	<string name="so_pick_to_show_ambient_title">기기를 들어 앰비언트 디스플레이 보기</string>
 	<string name="so_pick_to_show_ambient_summary">[AOD 기능이 비활성화된 상태에서] 기기를 들면 앰비언트 디스플레이를 표시합니다</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">화면이 꺼진 상태에서…</string>
 	<string name="custom_themed_icons_title">커스텀 테마 아이콘</string>
 	<string name="custom_themed_icons_off">커스텀 아이콘 비활성화됨</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">전부 펼치기 / 전부 접기 버튼 추가</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">헤드업 알림 지속 시간</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">늘어나는 오버스크롤 효과 비활성화</string>
 	<string name="overscroll_on_summary">중요: LSPosed 설정 내에서 오버스크롤 효과를 비활성화시킬 앱을 추가해야 합니다</string>
 	<string name="milliseconds">밀리초</string>

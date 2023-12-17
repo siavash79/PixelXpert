@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Hurtig QS panel pull-down fra statuslinjen</string>
 	<string name="qs_pulldown_side_title">Hurtig nedtræksside</string>
 	<string name="qs_pulldown_category">Hurtige indstillinger pull-down</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Vibrer på QS flisehane</string>
 	<string name="vibration_type_touch">Intensitet defineret af systemets berøringsvibrationsindstillinger</string>
 	<string name="qs_tile_qty_portrait">I stående retning</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Hvis du trykker på skærmen, vises det omgivende display</string>
 	<string name="so_pick_to_show_ambient_title">Vælg for at vise omgivende visning</string>
 	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Hvis du vælger telefonen, vises det omgivende display</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Mens skærmen er slukket…</string>
 	<string name="custom_themed_icons_title">Brugerdefinerede temaikoner</string>
 	<string name="custom_themed_icons_off">Brugerdefinerede ikoner deaktiveret</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Tilføj udvid/skjul alle knapper</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Varighed af heads-up notifikation</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Deaktiver elastisk overscroll-effekt</string>
 	<string name="overscroll_on_summary">Vigtigt: du SKAL aktivere de apps, du vil deaktivere overscroll for i LSPosed</string>
 	<string name="milliseconds">Millisekunder</string>

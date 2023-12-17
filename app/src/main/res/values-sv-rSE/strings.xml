@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Snabb QS-panelrullgardin från statusfältet</string>
 	<string name="qs_pulldown_side_title">Snabb neddragbar sida</string>
 	<string name="qs_pulldown_category">Snabbinställningar rullgardinsmeny</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Vibrera på QS kakelkran</string>
 	<string name="vibration_type_touch">Intensitet definieras av systemets pekvibrationsinställningar</string>
 	<string name="qs_tile_qty_portrait">I stående orientering</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Om du trycker på skärmen visas omgivande visning</string>
 	<string name="so_pick_to_show_ambient_title">Välj för att visa omgivande display</string>
 	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Om du väljer telefonen visas omgivande display</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Medan skärmen är avstängd…</string>
 	<string name="custom_themed_icons_title">Ikoner med anpassade teman</string>
 	<string name="custom_themed_icons_off">Anpassade ikoner inaktiverade</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Lägg till expandera/komprimera alla knappar</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Varaktighet för heads-up-meddelanden</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Inaktivera elastisk överrullningseffekt</string>
 	<string name="overscroll_on_summary">Viktigt: du MÅSTE aktivera de appar du vill inaktivera överrullning för inom LSPosed</string>
 	<string name="milliseconds">Millisekunder</string>

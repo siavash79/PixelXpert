@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Γρήγορο αναπτυσσόμενο πλαίσιο QS από τη γραμμή κατάστασης</string>
 	<string name="qs_pulldown_side_title">Γρήγορη συρόμενη πλευρά</string>
 	<string name="qs_pulldown_category">Αναδυόμενο γρήγορες ρυθμίσεις</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Δόνηση στο πάτημα πλακιδίων QS</string>
 	<string name="vibration_type_touch">Ένταση που ορίζεται από τις ρυθμίσεις δόνησης αφής συστήματος</string>
 	<string name="qs_tile_qty_portrait">Σε κατακόρυφο προσανατολισμό</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Όταν η οθόνη πάντα είναι απενεργοποιημένη] Πατώντας στην οθόνη εμφανίζεται η εμφάνιση περιβάλλοντος</string>
 	<string name="so_pick_to_show_ambient_title">Επιλέξτε για εμφάνιση της οθόνης περιβάλλοντος</string>
 	<string name="so_pick_to_show_ambient_summary">[Όταν η οθόνη είναι πάντα απενεργοποιημένη] Η επιλογή του τηλεφώνου εμφανίζει την οθόνη περιβάλλοντος</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Ενώ η οθόνη είναι απενεργοποιημένη…</string>
 	<string name="custom_themed_icons_title">Εικονίδια με προσαρμοσμένο θέμα</string>
 	<string name="custom_themed_icons_off">Τα προσαρμοσμένα εικονίδια είναι απενεργοποιημένα</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Προσθήκη επέκτασης/σύμπτυξης όλων των κουμπιών</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Διάρκεια ειδοποίησης heads-up</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Απενεργοποιήστε το ελαστικό εφέ υπερκύλισης</string>
 	<string name="overscroll_on_summary">Σημαντικό: ΠΡΕΠΕΙ να ενεργοποιήσετε τις εφαρμογές για τις οποίες θέλετε να απενεργοποιήσετε την υπερκύλιση εντός LSPosed</string>
 	<string name="milliseconds">χιλιοστά του δευτερολέπτου</string>

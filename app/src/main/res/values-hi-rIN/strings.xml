@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">स्टेटस बार से त्वरित सेटिंग मेनू को तुरंत नीचे खींचें</string>
 	<string name="qs_pulldown_side_title">त्वरित पुल डाउन साइड</string>
 	<string name="qs_pulldown_category">त्वरित सेटिंग्स को नीचे खींचें</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">त्वरित सेटिंग टैब को छूने पर कंपन होता है</string>
 	<string name="vibration_type_touch">स्पर्श कंपन के लिए सिस्टम सेटिंग्स द्वारा तीव्रता निर्धारित की जाती है</string>
 	<string name="qs_tile_qty_portrait">पोर्ट्रेट में</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[जब हमेशा ऑन डिस्प्ले बंद हो] स्क्रीन पर टैप करने से परिवेशी डिस्प्ले दिखता है</string>
 	<string name="so_pick_to_show_ambient_title">परिवेशीय प्रदर्शन दिखाने के लिए चुनें</string>
 	<string name="so_pick_to_show_ambient_summary">[जब हमेशा ऑन डिस्प्ले बंद हो] फोन उठाने पर परिवेशी डिस्प्ले दिखता है</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">स्क्रीन बंद होने पर…</string>
 	<string name="custom_themed_icons_title">कस्टम आइकन थीम</string>
 	<string name="custom_themed_icons_off">कस्टम आइकन अक्षम</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">सभी को विस्तृत/संक्षिप्त करें</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">अग्रणी अधिसूचना अवधि</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">इलास्टिक ओवरस्क्रॉलिंग प्रभाव अक्षम करें</string>
 	<string name="overscroll_on_summary">महत्वपूर्ण: आप उन ऐप्स को अवश्य सक्षम करें जिनके लिए आप LSPosed में ओवरस्क्रॉल अक्षम करना चाहते हैं</string>
 	<string name="milliseconds">मिलीसेकंड</string>

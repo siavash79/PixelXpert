@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Pannello quick QS pull-down dalla Status Bar</string>
 	<string name="qs_pulldown_side_title">Lato quick pull-down</string>
 	<string name="qs_pulldown_category">Quick settings pull-down</string>
+	<string name="qs_pullup_switch_title">Chiudi le impostazioni rapide con un solo scorrimento</string>
 	<string name="qs_haptic_switch_title">Vibra al tocco del QS tile</string>
 	<string name="vibration_type_touch">Intensità definita dalle impostazioni di vibrazione al tocco di sistema</string>
 	<string name="qs_tile_qty_portrait">In orientamento verticale</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Quando il display sempre attivo è disattivato] Toccando lo schermo viene visualizzata la visualizzazione ambientale</string>
 	<string name="so_pick_to_show_ambient_title">Scegli per mostrare la visualizzazione ambientale</string>
 	<string name="so_pick_to_show_ambient_summary">[Quando il display sempre attivo è disattivato] Se si prende il telefono viene visualizzata la visualizzazione ambientale</string>
+	<string name="force_aod_while_charging_title">Forza AOD durante la carica</string>
+	<string name="force_aod_while_charging_summary">Mantieni \"Always-On Display\" abilitato durante la ricarica del dispositivo</string>
 	<string name="doze_header">Mentre lo schermo è spento…</string>
 	<string name="custom_themed_icons_title">Icone a tema personalizzate</string>
 	<string name="custom_themed_icons_off">Icone personalizzate disabilitate</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Aggiungi pulsante espandi/comprimi tutte</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Non eliminare mai le notifiche in corso</string>
 	<string name="heads_up_notification_duration">Durata notifica heads-up</string>
+	<string name="notif_default_expansion_title">Espansione predefinita notifiche</string>
+	<string name="notif_always_expand">Sempre espanso</string>
+	<string name="notif_always_collapse">Comprimi sempre</string>
 	<string name="disable_overscroll">Disattiva l\'effetto di overscroll elastico</string>
 	<string name="overscroll_on_summary">Importante: DEVI abilitare le app per le quali desideri disabilitare l\'overscroll all\'interno di LSPosed</string>
 	<string name="milliseconds">Milliseconds</string>

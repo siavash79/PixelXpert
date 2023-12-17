@@ -11,10 +11,10 @@
 	<string name="general_section">Opțiuni generale</string>
 	<string name="general_on">Pornit</string>
 	<string name="general_off">Oprit</string>
-	<string name="sysui_restart_needed">Necesită repornirea interfeței sistemului pentru a fi aplicată</string>
-	<string name="restart_needed">Necesită o repornire pentru a aplica</string>
-	<string name="more_area">mai multă suprafață</string>
-	<string name="less_area">zonă mai mică</string>
+	<string name="sysui_restart_needed">Necesită repornirea interfeței sistemului pentru aplicare</string>
+	<string name="restart_needed">Necesită o repornire pentru aplicare</string>
+	<string name="more_area">suprafață mai mare</string>
+	<string name="less_area">suprafață mai mică</string>
 	<string name="current_version">Versiunea curentă: %s</string>
 	<string name="notification_channel_update">Actualizări</string>
 	<string name="notification_channel_update_desc">Acest canal afișează notificări despre cele mai recente actualizări.</string>
@@ -40,9 +40,9 @@
 	<string name="lockscreen_header_title">Ecran de blocare</string>
 	<string name="statusbar_header">Bară de stare</string>
 	<string name="nav_header">Bară de navigare</string>
-	<string name="dialer_header">Telefon și dialer</string>
+	<string name="dialer_header">Telefon și tastatură numerică</string>
 	<string name="misc_header">Diverse</string>
-	<string name="qs_panel_category_title">Panoul Setări Rapide</string>
+	<string name="qs_panel_category_title">Panoul Setări rapide</string>
 	<string name="theme_customization_category">Tematică</string>
 	<string name="pm_header">Manager de pachete</string>
 	<string name="hotspot_header">Hotspot portabil</string>
@@ -79,7 +79,7 @@
 	<string name="shufflePin_title">Amestecare PIN</string>
 	<string name="wakeup_to_security_title">Afișează introducerea de securitate la activarea dispozitivului</string>
 	<string name="easy_unlock_title">Deblocare ușoară (Pin/Parolă)</string>
-	<string name="easy_unlock_summary">Dacă nu a funcționat pentru prima dată, încercați din nou</string>
+	<string name="easy_unlock_summary">Dacă nu a funcționat pentru prima dată, încearcă din nou</string>
 	<string name="charging_info_title">Informații despre încărcare pe ecranul de blocare</string>
 	<string name="disable_lockscreen_pill_title">Nu arăta \"Personalizare Ecran de blocare\"</string>
 	<string name="imperial_units_title">Utilizează unități imperiale</string>
@@ -92,19 +92,19 @@
 	<string name="battery_hidden">Ascunsă</string>
 	<string name="BIcon_Opacity_title">Transparență</string>
 	<string name="sb_multi_row_system_icons">Pictograme de sistem cu mai multe rânduri (necesită înălțime mai mare a barei de stare)</string>
-	<string name="sb_multi_row_notification_icons">Pictograme de notificare pe mai multe rânduri (necesită înălțimea barei de stare ridicată)</string>
+	<string name="sb_multi_row_notification_icons">Pictograme de notificare pe mai multe rânduri (necesită înălțime mai mare a barei de stare)</string>
 	<string name="sb_double_row_category">Rânduri duble din bara de stare</string>
-	<string name="sb_icon_sort_mode">Metoda de plasare pictograme</string>
+	<string name="sb_icon_sort_mode">Metoda de plasare a pictogramelor</string>
 	<string name="sort_clean">Sortează într-o grilă</string>
-	<string name="sort_tight">Potrivire elemente maxime</string>
+	<string name="sort_tight">Potrivire maximum elemente</string>
 	<string name="sb_notification_limit">Numărul maxim de pictograme de notificare (Lasă gol pentru implicit)</string>
 	<string name="lte_4g_icon_title">Pictogramă LTE / 4G</string>
 	<string name="combined_signal_icon_title">Combinare pictograme de semnal</string>
-	<string name="hide_roaming_title">Ascundere indicator de roaming</string>
-	<string name="caution_mobile_costs">ATENȚIE - Necunoașterea că sunteți în roaming poate crește costurile mobile</string>
+	<string name="hide_roaming_title">Ascunde indicatorul de roaming</string>
+	<string name="caution_mobile_costs">ATENȚIE - Necunoașterea că ești în roaming poate crește costurile serviciilor mobile</string>
 	<string name="volte_icon_title">Afișare pictogramă VoLTE atunci când este disponibilă</string>
-	<string name="vowifi_icon_title">Arată pictograma VoWiFi atunci când este disponibilă</string>
-	<string name="hide_privacychip_title">Ascunde indicatorii de confidențialitate\n(Camera, Mic)</string>
+	<string name="vowifi_icon_title">Afișare pictogramă VoWiFi atunci când este disponibilă</string>
+	<string name="hide_privacychip_title">Ascunde indicatorii de confidențialitate\n(Cameră, Microfon)</string>
 	<!-- \n means next line-->
 	<string name="sbc_position_title">Poziția ceasului</string>
 	<string name="sbc_ampm_style">Stil AM/PM</string>
@@ -113,7 +113,7 @@
 	<string name="sbc_day_of_week_options">Arată ziua săptămânii cu ceasul</string>
 	<string name="sbc_advanced_cat">Avansat (se va suprapune peste setare!)</string>
 	<string name="sbc_custom_date_before">Text personalizat înainte de ceas</string>
-	<string name="sbc_date_small">Dimensiuni mai mici (70%)</string>
+	<string name="sbc_date_small">Dimensiune mai mică (70%)</string>
 	<string name="sbc_custom_date_after">Text personalizat după ceas</string>
 	<string name="sbc_header">Personalizare ceas în bara de stare</string>
 	<string name="sbc_clock_color_category">Opțiuni culoare</string>
@@ -136,7 +136,7 @@
 	<string name="network_download_color_title">Culoare descărcare</string>
 	<string name="network_upload_color_title">Culoare încărcare</string>
 	<string name="network_opacity_title">Transparență</string>
-	<string name="network_interval_title">Interval de reîmprospătare(secunde)</string>
+	<string name="network_interval_title">Interval de reîmprospătare (secunde)</string>
 	<string name="network_show_icons_title">Arată pictogramele direcției de trafic</string>
 	<string name="nt_mode_rxtx">Descărcare și încărcare</string>
 	<string name="nt_mode_total">Descărcare + Încărcare (Combinat)</string>
@@ -146,7 +146,7 @@
 	<string name="dual_tone_battery_title">Activare baterie cu ton dual</string>
 	<string name="dual_tone_battery_on_summary">Pornit (funcționează numai cu pictograma portret)</string>
 	<string name="unread_messages_title">Arată numărul de mesaje necitite</string>
-	<string name="status_bar_height">Înălțimea barei de stare (rotiți ecranul pentru a aplica)</string>
+	<string name="status_bar_height">Înălțimea barei de stare (rotește ecranul pentru a aplica)</string>
 	<string name="sb_padding_title">Umplere bară de stare</string>
 	<string name="sb_padding_summary">Setarea valorilor la min/max este echivalentă cu valorile implicite ale dispozitivului</string>
 	<string name="sbbb_header">Setări bară baterie</string>
@@ -194,24 +194,25 @@
 	<string name="qs_pulldown_switch_title">Panou setări rapide la tragere în jos a barei de stare</string>
 	<string name="qs_pulldown_side_title">Poziție tragere rapidă în jos</string>
 	<string name="qs_pulldown_category">Tragere în jos a setărilor rapide</string>
+	<string name="qs_pullup_switch_title">Închide setările rapide cu o singură glisare</string>
 	<string name="qs_haptic_switch_title">Vibrează la apăsarea comutatorului QS</string>
 	<string name="vibration_type_touch">Intensitatea definită de setările sistemului de vibrație la atingere</string>
 	<string name="qs_tile_qty_portrait">În orientare portret</string>
 	<string name="qs_tile_qty_landscape">În orientare peisaj</string>
-	<string name="qs_rows_number">Numărul de rânduri QS</string>
-	<string name="qs_cols_number">Numărul de coloane QS</string>
-	<string name="qqs_tiles_number">Maximum dale în QS rapid (max 2 rânduri)</string>
-	<string name="qs_tile_label_size">Dimensiune etichetă dală QS</string>
-	<string name="qs_tile_secondary_label_size">Dimensiune sumar etichetă dală QS</string>
+	<string name="qs_rows_number">Numărul de rânduri în setările rapide</string>
+	<string name="qs_cols_number">Numărul de coloane în setările rapide</string>
+	<string name="qqs_tiles_number">Maximum dale în setările rapide (max 2 rânduri)</string>
+	<string name="qs_tile_label_size">Dimensiune etichete dale în setările rapide</string>
+	<string name="qs_tile_secondary_label_size">Dimensiune sumar etichetă dale în setările rapide</string>
 	<string name="wifi_cell_title">Dală Internet</string>
-	<string name="wifi_cell_on">Utilizează plăci WiFi și date separate</string>
+	<string name="wifi_cell_on">Utilizează plăci separate pentru WiFi și date mobile</string>
 	<string name="wifi_cell_off">Folosește o singură dală Internet</string>
 	<string name="QQS_brightness_category">Opțiuni glisor luminozitate</string>
-	<string name="QQS_brightness_title">Arată glisorul de luminozitate în panoul QS</string>
+	<string name="QQS_brightness_title">Arată glisorul de luminozitate în panoul setărilor rapide</string>
 	<string name="QQS_brightness_bottom_title">Mută glisorul de luminozitate în partea de jos</string>
-	<string name="QS_brightness_disable_title">Ascunde glisorul de luminozitate din Setările Rapide</string>
+	<string name="QS_brightness_disable_title">Ascunde glisorul de luminozitate în setările rapide</string>
 	<string name="bs_thick_track">Utilizează o pistă groasă pe glisorul de luminozitate</string>
-	<string name="quick_settings_tiles_category">Opțiuni dale QS</string>
+	<string name="quick_settings_tiles_category">Opțiuni dale setări rapide</string>
 	<string name="qs_tile_style_title">Teme dale QS</string>
 	<string name="qs_volume_unmute_title">Valoarea de activare a sunetului pentru dala de volum</string>
 	<!--Navigation bar related-->
@@ -234,7 +235,7 @@
 	<string name="taskbar_radius_title">Curba colțului barei de activități</string>
 	<string name="colorpill">Bara de navigare nuanțată</string>
 	<string name="reducekeyboard_title">Spațiu tastatură pentru gesturi</string>
-	<string name="reducekeyboard">Reduce spațiul de sub tastatură</string>
+	<string name="reducekeyboard">Redu spațiul de sub tastatură</string>
 	<string name="taskbar_status_title">Bara de activități Android</string>
 	<string name="taskbar_force_enable_title">Activată forțat</string>
 	<string name="taskbar_force_disable_title">Dezactivată forțat</string>
@@ -263,15 +264,17 @@
 	<string name="brightness_range_not_linear">Acest interval NU este liniar: Uneori o diferență mică duce la schimbări considerabile</string>
 	<string name="separate_ring_notif_vol_title">Volum individual pentru sonerie și notificare</string>
 	<string name="so_power_longpress_torch_title">Apăsare lungă pe butonul de alimentare pentru lanternă</string>
-	<string name="so_taptaptorch_title">Activați atingerea dublă pentru lanternă pe ecranul de blocare</string>
-	<string name="so_taptaptorch_summary">Atingeți dublu și mențineți apăsat ecranul de blocare pentru acces rapid la lanternă</string>
+	<string name="so_taptaptorch_title">Activează atingerea dublă pentru lanternă pe ecranul de blocare</string>
+	<string name="so_taptaptorch_summary">Atinge dublu și menține apăsat ecranul de blocare pentru acces rapid la lanternă</string>
 	<string name="so_fingerprint_sensor_enabled">Permite senzor de amprentă când ecranul este oprit</string>
 	<string name="so_double_tap_wake_title">Apăsare dublă pentru trezire telefon</string>
 	<string name="so_double_tap_wake_summary">Dezactivează apăsarea unică pentru trezire</string>
 	<string name="so_tap_to_show_ambient_title">Atinge pentru a afișa ecranul ambiental</string>
-	<string name="so_tap_to_show_ambient_summary">[Când întotdeauna afișat este dezactivat] Atingerea ecranului arată afișarea ambientală</string>
+	<string name="so_tap_to_show_ambient_summary">[Când afișajul ambiental este dezactivat] Atingerea ecranului activează afișajul ambiental</string>
 	<string name="so_pick_to_show_ambient_title">Alege pentru a afișa ecranul ambiental</string>
-	<string name="so_pick_to_show_ambient_summary">[Când tot timpul afișat este dezactivat] Alegerea telefonului arată afișajul ambiental</string>
+	<string name="so_pick_to_show_ambient_summary">[Când afișajul ambiental este dezactivat] Ridicarea telefonului activează afișajul ambiental</string>
+	<string name="force_aod_while_charging_title">Forțează Afișajul ambiental în timpul încărcării</string>
+	<string name="force_aod_while_charging_summary">Păstrează Afișajul ambiental pornit în timp ce dispozitivul se încarcă</string>
 	<string name="doze_header">În timp ce ecranul este oprit…</string>
 	<string name="custom_themed_icons_title">Pictograme personalizate</string>
 	<string name="custom_themed_icons_off">Pictograme personalizate dezactivate</string>
@@ -281,8 +284,11 @@
 	<string name="expand_notifications_icons_title">Adaugă butoane extindere/restrânge toate</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Nu respinge niciodată notificările în desfășurare</string>
 	<string name="heads_up_notification_duration">Durată notificare de atenționare</string>
+	<string name="notif_default_expansion_title">Expansiunea implicită a notificărilor</string>
+	<string name="notif_always_expand">Extinse întotdeauna</string>
+	<string name="notif_always_collapse">Restrânse întotdeauna</string>
 	<string name="disable_overscroll">Dezactivare efect de derulare elastică</string>
-	<string name="overscroll_on_summary">Important: TREBUIE să activați aplicațiile pentru care doriți să dezactivați derularea elastică în LSPosed</string>
+	<string name="overscroll_on_summary">Important: TREBUIE să activezi aplicațiile pentru care dorești să dezactivezi derularea elastică în LSPosed</string>
 	<string name="milliseconds">Milisecunde</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Panou de volum</string>
@@ -292,15 +298,15 @@
 	<string name="statusbar_long_press_app_switch">Apasă lung pe bara de stare pentru a schimba profilul</string>
 	<string name="statusbar_app_switch_icon">Arată o pictogramă pe bara de stare atunci când comutarea este disponibilă</string>
 	<!-- Cloned apps bragging message -->
-	<string name="settings_cloned_apps_active">Deblocat pentru toate aplicațiile prin <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Bucurați-vă!</string>
+	<string name="settings_cloned_apps_active">Deblocat pentru toate aplicațiile prin <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Bucură-te!</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrează la răspunsul unui apel efectuat</string>
 	<string name="vibrate_on_call_drop_title">Vibrare la deconectare apel</string>
 	<string name="vibration_type_notification">Intensitatea definită de setările de vibrații ale notificărilor sistemului</string>
 	<string name="dialer_mute_record_message_title">Elimină anunțul de înregistrare a apelurilor</string>
-	<string name="dialer_mute_record_message_summary">Se aplică numai aplicației Google pentru telefon cu înregistrarea apelurilor activată</string>
+	<string name="dialer_mute_record_message_summary">Se aplică numai pentru aplicația Telefon Google cu înregistrarea apelurilor activată</string>
 	<!-- Theming section related -->
-	<string name="gsans_override_title">Forțează sistemul de fonturi Google Sans în tot sistemul</string>
+	<string name="gsans_override_title">Forțează utilizarea fontului Google Sans în tot sistemul</string>
 	<string name="font_overlays_enable_title">Activează utilizarea fonturilor personalizate</string>
 	<string name="theme_customization_font_title">Font pentru Titlu / Corp text</string>
 	<string name="icons_style_title">Stil pictogramă</string>
@@ -340,18 +346,18 @@
 	<string name="minutes_word">minut(e)</string>
 	<string name="network_stat_type">Tip de statistici</string>
 	<string name="network_stat_day">Timpul de începere</string>
-	<string name="network_stat_week">Ziua începerii săptămânii</string>
-	<string name="network_stat_month">Ziua de începere a lunii</string>
+	<string name="network_stat_week">Ziua de începere din săptămână</string>
+	<string name="network_stat_month">Ziua de începere din lună</string>
 	<!-- Incompatibility Alert -->
 	<string name="incompatible_alert_title">Incompatibil</string>
 	<string name="incompatible_alert_body">ROM-ul actual nu este ținta directă a acestui modul. Poți continua să îl utilizezi, dar este posibil ca unele (sau toate) opțiunile să nu funcționeze conform intenției\n\nNu raporta erori</string>
 	<string name="incompatible_alert_ok_btn">Am înțeles</string>
 	<!-- App kill Alert -->
 	<string name="app_kill_alert_title">Înștiințare</string>
-	<string name="app_kill_alert_body">Aplicația se va închide acum. Îl puteți deschide din nou atingând noua pictogramă</string>
+	<string name="app_kill_alert_body">Aplicația se va închide acum. O poți deschide din nou atingând noua pictogramă</string>
 	<string name="app_kill_ok_btn">Bine</string>
 	<!-- Reboot alert -->
-	<string name="reboot_alert_body">Este necesară o repornire a sistemului pentru ca setările să se aplice</string>
+	<string name="reboot_alert_body">Este necesară o repornire a sistemului pentru ca setările să fie aplicate</string>
 	<!-- Menu Items -->
 	<string name="menu_settings_title">Import/Export</string>
 	<string name="menu_reset_defaults">Reinițializare setări</string>
@@ -367,7 +373,7 @@
 	<string name="string_formatter_manual_body_v3">Pe lângă textul normal, sunt disponibile și variabile dinamice, cum ar fi Data, Utilizarea datelor și Temperatura:\n\n$G\&lt;format\&gt; : Data gregoriană, pe baza formatului*\n$P&lt;format&gt; : Data persană, pe baza formatului*\n$Nrx : Descărcări totale în perioada specificată ** ***\n$Ntx: Încărcări totale în perioada specificată ** ***\n$Nall : Trafic total în perioada specificată ** ***\n$Nssid : Nume SSID WiFi (dacă este cazul)\n\n$T\&lt;format\&gt;[interval] : Temperatura; Formatul \npoate fi b (pentru baterie), c (pentru CPU), g (pentru GPU) și s (pentru piele) \nÎn sfârșit, există un număr OPȚIONAL de interval de actualizare în secunde (implicit: 60 de secunde)\n\n*pentru format documentație, căutați „Java Date Format”\n**Puteți specifica perioada de statistici în PixelXpert/Meniul Diverse/Setări statistici de rețea\n***Dacă înlocuiți $N cu $Nc , veți obține statistici de date mobile (de ex. $Ncrx în loc de Nrx )</string>
 	<string name="update_channel_name">Actualizări</string>
 	<string name="update_notification_title">Actualizare descărcată</string>
-	<string name="update_notification_text">Atingeți aici pentru instalare</string>
+	<string name="update_notification_text">Atinge aici pentru instalare</string>
 	<string name="download_failed">Nu s-a putut descărca actualizarea</string>
 	<string name="try_again_later">Încearcă din nou mai târziu</string>
 	<string name="update_flavor_title">Canalul de actualizare</string>
@@ -379,7 +385,7 @@
 	<string name="lastestVersionTitle">Ultima versiune: </string>
 	<string name="root_not_here">ACCESUL ROOT NU ESTE ACORDAT!</string>
 	<string name="reboot_pending">Repornire în așteptare</string>
-	<string name="reboot_word">Reporniți dispozitivul acum</string>
+	<string name="reboot_word">Repornește dispozitivul acum</string>
 	<string name="update_checking">Se verifică…</string>
 	<string name="update_download_started">Descărcare - atinge notificarea după finalizare</string>
 	<string name="update_word">Actualizare</string>
@@ -388,9 +394,9 @@
 	<string name="changelog_title">Jurnalul modificărilor</string>
 	<string name="own_prefs_header">Setări AOSPMods</string>
 	<string name="language_title">Limbă</string>
-	<string name="toggle_dark_apply">(Comutați tema întunecată pentru a aplica)</string>
+	<string name="toggle_dark_apply">(Comută tema întunecată pentru a aplica)</string>
 	<string name="gesture_nav_extra_cat">Gesturi suplimentare bară de navigare</string>
-	<string name="gesture_nav_long_swipe_fc_title">Glisați în partea de sus a ecranului pentru a închide aplicația din prim-plan</string>
+	<string name="gesture_nav_long_swipe_fc_title">Glisează în partea de sus a ecranului pentru a închide aplicația din prim-plan</string>
 	<string name="gesture_nav_left_swipe_up_title">Glisare în sus din stânga barei de navigare</string>
 	<string name="gesture_nav_right_swipe_up_title">Glisare în sus din dreapta barei de navigare</string>
 	<string name="gesture_nav_left_swipe_up_percent">Lățimea zonei din stânga glisare în sus (%)</string>

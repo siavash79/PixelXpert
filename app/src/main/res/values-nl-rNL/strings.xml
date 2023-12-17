@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Snel QS-paneel naar beneden trekken vanuit de statusbalk</string>
 	<string name="qs_pulldown_side_title">Snel naar beneden trekkende kant</string>
 	<string name="qs_pulldown_category">Snelle instellingen pull-down</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Trillen op QS tegelkraan</string>
 	<string name="vibration_type_touch">Intensiteit gedefinieerd door de instellingen voor aanraaktrilling van het systeem</string>
 	<string name="qs_tile_qty_portrait">In portretoriëntatie</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Als display altijd aan is uitgeschakeld] Als u op het scherm tikt, wordt de omgevingsweergave weergegeven</string>
 	<string name="so_pick_to_show_ambient_title">Kies om omgevingsdisplay weer te geven</string>
 	<string name="so_pick_to_show_ambient_summary">[Als het scherm altijd aan is, is uitgeschakeld] Als u de telefoon oppakt, wordt het omgevingsdisplay weergegeven</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Terwijl het scherm is uitgeschakeld…</string>
 	<string name="custom_themed_icons_title">Aangepaste thema-pictogrammen</string>
 	<string name="custom_themed_icons_off">Aangepaste pictogrammen uitgeschakeld</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Alle knoppen uitvouwen/samenvouwen toevoegen</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Duur van heads-up-melding</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Elastisch overscroll-effect uitschakelen</string>
 	<string name="overscroll_on_summary">Belangrijk: je MOET de apps inschakelen waarvoor je overscroll wilt uitschakelen, in LSPosed</string>
 	<string name="milliseconds">Milliseconden</string>

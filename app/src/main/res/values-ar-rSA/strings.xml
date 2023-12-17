@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">لوحة الإعدادات السريعة سحب لأسفل من شريط الحالة</string>
 	<string name="qs_pulldown_side_title">سحب سريع لأسفل</string>
 	<string name="qs_pulldown_category">سحب الإعدادات السريعة لأسفل</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">اهتزاز عند النقر على مربع الإعدادات السريعة</string>
 	<string name="vibration_type_touch">كثافة معرَّفة بواسطة إعدادات إهتزاز لمس النظام</string>
 	<string name="qs_tile_qty_portrait">في الاتجاه العمودي</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[عندما يكون العرض دائمًا غير مفعل] النقر على الشاشة يظهر العرض المحيط</string>
 	<string name="so_pick_to_show_ambient_title">اختر لعرض العرض المحيط</string>
 	<string name="so_pick_to_show_ambient_summary">[عندما يكون العرض دائمًا غير مفعل] يعرض الهاتف العرض المحيط</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">أثناء إيقاف الشاشة…</string>
 	<string name="custom_themed_icons_title">الأيقونات المخصصة للموضوع</string>
 	<string name="custom_themed_icons_off">الرموز المخصصة معطلة</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">إضافة تمديد / إغلاق جميع الأزرار</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">مدة الإشعار بالرؤوس</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">تعطيل تأثير التمرير المرن</string>
 	<string name="overscroll_on_summary">هام: يمكنك تمكين التطبيقات التي تريد تعطيل التمرير الزائد داخل LSPosed</string>
 	<string name="milliseconds">المللي ثانية</string>

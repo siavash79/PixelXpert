@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Rask QS-paneltrekk ned fra statuslinjen</string>
 	<string name="qs_pulldown_side_title">Rask nedtrekksside</string>
 	<string name="qs_pulldown_category">Rask innstillinger rullegardin</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Vibrer på QS-flisekran</string>
 	<string name="vibration_type_touch">Intensitet definert av systemets berøringsvibrasjonsinnstillinger</string>
 	<string name="qs_tile_qty_portrait">I stående orientering</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Å trykke på skjermen viser omgivelsesvisning</string>
 	<string name="so_pick_to_show_ambient_title">Velg for å vise omgivelsesvisning</string>
 	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Hvis du velger telefonen, vises omgivelsesskjermen</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Mens skjermen er av…</string>
 	<string name="custom_themed_icons_title">Egendefinerte ikoner</string>
 	<string name="custom_themed_icons_off">Egendefinerte ikoner deaktivert</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Legg til utvide/skjul alle knapper</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Varighet for heads-up-varsling</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Deaktiver elastisk overrullingseffekt</string>
 	<string name="overscroll_on_summary">Viktig: du MÅ aktivere appene du vil deaktivere overscroll for i LSPosed</string>
 	<string name="milliseconds">Millisekunder</string>

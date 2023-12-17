@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Vinnige QS-paneel-aftrek vanaf statusbalk</string>
 	<string name="qs_pulldown_side_title">Vinnige aftrekkant</string>
 	<string name="qs_pulldown_category">Vinnige instellings aftrek</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Vibreer op QS-teëlkraan</string>
 	<string name="vibration_type_touch">Intensiteit word gedefinieer deur stelselaanraakvibrasie-instellings</string>
 	<string name="qs_tile_qty_portrait">In portretoriëntasie</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Wanneer altyd op vertoning af is] Deur op die skerm te tik, wys die omgewingsvertoning</string>
 	<string name="so_pick_to_show_ambient_title">Kies om omgewingsvertoning te wys</string>
 	<string name="so_pick_to_show_ambient_summary">[Wanneer altyd op vertoning af is] As jy die foon kies, wys die omgewingsvertoning</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Terwyl skerm af is…</string>
 	<string name="custom_themed_icons_title">Pasgemaakte tema-ikone</string>
 	<string name="custom_themed_icons_off">Gepasmaakte ikone gedeaktiveer</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Voeg alle knoppies uit/vou alle knoppies in</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Tydsduur van kennisname</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Deaktiveer elastiese oorrol-effek</string>
 	<string name="overscroll_on_summary">Belangrik: jy MOET die programme waarvoor jy oorblaai wil deaktiveer binne LSPosed aktiveer</string>
 	<string name="milliseconds">Millisekondes</string>

@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Szybkie rozwijanie panelu QS z paska stanu</string>
 	<string name="qs_pulldown_side_title">Strona szybkiego opuszczania</string>
 	<string name="qs_pulldown_category">Szybkie ustawienia rozwijane</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Wibracje przy dotknięciu kafelka QS</string>
 	<string name="vibration_type_touch">Intensywność zdefiniowana przez systemowe ustawienia wibracji dotykowych</string>
 	<string name="qs_tile_qty_portrait">W orientacji pionowej</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Gdy zawsze włączony wyświetlacz jest wyłączony] Dotknięcie ekranu powoduje wyświetlenie obrazu otoczenia</string>
 	<string name="so_pick_to_show_ambient_title">Wybierz, aby wyświetlić ekran otoczenia</string>
 	<string name="so_pick_to_show_ambient_summary">[Gdy zawsze włączony wyświetlacz jest wyłączony] Podniesienie telefonu pokazuje wyświetlacz otoczenia</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Gdy ekran jest wyłączony…</string>
 	<string name="custom_themed_icons_title">Niestandardowe ikony tematyczne</string>
 	<string name="custom_themed_icons_off">Niestandardowe ikony wyłączone</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Dodaj rozwiń/zwiń wszystkie przyciski</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Czas trwania powiadomienia ostrzegawczego</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Wyłącz efekt elastycznego przewijania</string>
 	<string name="overscroll_on_summary">Ważne: MUSISZ włączyć aplikacje, dla których chcesz wyłączyć overscroll w ramach LSPosed</string>
 	<string name="milliseconds">milisekundy</string>

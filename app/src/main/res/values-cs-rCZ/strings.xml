@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Rychlé stahování panelu QS ze stavového řádku</string>
 	<string name="qs_pulldown_side_title">Rychlá stahovací strana</string>
 	<string name="qs_pulldown_category">Rozbalovací nabídka rychlého nastavení</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Vibrujte na dlaždicovém kohoutku QS</string>
 	<string name="vibration_type_touch">Intenzita definovaná nastavením vibrací dotyku systému</string>
 	<string name="qs_tile_qty_portrait">V orientaci na výšku</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Když je vždy na displeji vypnuto] Klepnutím na obrazovku zobrazíte okolní displej</string>
 	<string name="so_pick_to_show_ambient_title">Vyberte pro zobrazení okolního displeje</string>
 	<string name="so_pick_to_show_ambient_summary">[Když je vždy zapnutý displej vypnutý] Zvednutím telefonu se zobrazí okolní displej</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Když je obrazovka vypnutá…</string>
 	<string name="custom_themed_icons_title">Vlastní tématické ikony</string>
 	<string name="custom_themed_icons_off">Vlastní ikony jsou zakázány</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Přidat rozbalit/sbalit všechna tlačítka</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Trvání upozornění na upozornění</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Zakázat efekt elastického přetažení</string>
 	<string name="overscroll_on_summary">Důležité: MUSÍTE povolit aplikace, u kterých chcete zakázat přetáčení v rámci LSPosed</string>
 	<string name="milliseconds">milisekundy</string>

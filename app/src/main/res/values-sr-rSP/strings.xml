@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">Брзо КС панел падајући са статусне траке</string>
 	<string name="qs_pulldown_side_title">Страна за брзо повлачење</string>
 	<string name="qs_pulldown_category">Падајући мени за брза подешавања</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Вибрирајте на КС плочици</string>
 	<string name="vibration_type_touch">Интензитет дефинисан поставкама вибрације на додир система</string>
 	<string name="qs_tile_qty_portrait">У портретној оријентацији</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Када је увек на екрану искључено] Додиром на екран приказује се амбијентални приказ</string>
 	<string name="so_pick_to_show_ambient_title">Изаберите да бисте приказали амбијентални приказ</string>
 	<string name="so_pick_to_show_ambient_summary">[Када је увек на екрану искључено] Избором телефона приказује се амбијентални екран</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Док је екран искључен…</string>
 	<string name="custom_themed_icons_title">Прилагођене тематске иконе</string>
 	<string name="custom_themed_icons_off">Прилагођене иконе су онемогућене</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">Додај прошири/скупи сва дугмад</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Трајање упозорења</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Онемогућите ефекат еластичног премотавања</string>
 	<string name="overscroll_on_summary">Важно: МОРАТЕ да омогућите апликације за које желите да онемогућите прекомерно померање у оквиру ЛПосед</string>
 	<string name="milliseconds">Милисекунде</string>

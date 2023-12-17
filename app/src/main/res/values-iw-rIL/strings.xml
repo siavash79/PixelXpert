@@ -194,6 +194,7 @@
 	<string name="qs_pulldown_switch_title">פתיחת מהירה של QS משורת המצב</string>
 	<string name="qs_pulldown_side_title">צד נפתח מהיר</string>
 	<string name="qs_pulldown_category">הגדרות מהירות נפתחות</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">רטט בהקשה על אריח QS</string>
 	<string name="vibration_type_touch">עוצמה מוגדרת על ידי הגדרות רטט מגע במערכת</string>
 	<string name="qs_tile_qty_portrait">בכיוון פורטרט</string>
@@ -272,6 +273,8 @@
 	<string name="so_tap_to_show_ambient_summary">[כאשר תמיד בתצוגה כבויה] הקשה על המסך מציגה תצוגת סביבה</string>
 	<string name="so_pick_to_show_ambient_title">בחר כדי להציג תצוגת סביבה</string>
 	<string name="so_pick_to_show_ambient_summary">[כאשר תמיד בתצוגה כבוי] בחירה בטלפון מציגה תצוגת סביבה</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">בזמן שהמסך כבוי…</string>
 	<string name="custom_themed_icons_title">סמלים מותאמים אישית</string>
 	<string name="custom_themed_icons_off">סמלים מותאמים אישית מושבתים</string>
@@ -281,6 +284,9 @@
 	<string name="expand_notifications_icons_title">הוספת הרחבה/כיווץ של כל הלחצנים</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">משך זמן ההודעה על התרעה ראשונית</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">ביטול אפקט גלילה גמישה</string>
 	<string name="overscroll_on_summary">חשוב: עליך להפעיל את האפליקציות שברצונך להשבית עבורן גלישת יתר בתוך LSPosed</string>
 	<string name="milliseconds">אלפיות השנייה</string>

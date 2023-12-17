@@ -266,7 +266,7 @@ public class StatusbarMods extends XposedModPack {
 		if (Key.length > 0 && Key[0].equals("notificationAreaMultiRow")) { //WHY we check the old value? because if prefs is empty it will fill it up and count an unwanted change
 			boolean newnotificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
 			if (newnotificationAreaMultiRow != notificationAreaMultiRow) {
-				SystemUtils.restartSystemUI();
+				SystemUtils.killSelf();
 			}
 		}
 		notificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);

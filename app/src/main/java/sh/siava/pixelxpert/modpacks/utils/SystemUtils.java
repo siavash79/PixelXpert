@@ -70,6 +70,8 @@ public class SystemUtils {
 	private WifiManager mWifiManager;
 
 	public static void restartSystemUI() {
+		BootLoopProtector.resetCounter("com.android.systemui");
+
 		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
 			@Override
 			public void run(IRootProviderProxy proxy) {

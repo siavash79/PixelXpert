@@ -27,10 +27,12 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.os.UserManager;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.os.VibratorManager;
 import android.telephony.TelephonyManager;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -68,6 +70,8 @@ public class SystemUtils {
 	ArrayList<ChangeListener> mFlashlightLevelListeners = new ArrayList<>();
 	ArrayList<ChangeListener> mVolumeChangeListeners = new ArrayList<>();
 	private WifiManager mWifiManager;
+	private WindowManager mWindowManager;
+	private UserManager mUserManager;
 
 	public static void restartSystemUI() {
 		BootLoopProtector.resetCounter("com.android.systemui");
@@ -139,6 +143,22 @@ public class SystemUtils {
 		return instance == null
 				? null
 				: instance.getAudioManager();
+	}
+
+	@Nullable
+	@Contract(pure = true)
+	public static WindowManager WindowManager() {
+		return instance == null
+				? null
+				: instance.getWindowManager();
+	}
+
+	@Nullable
+	@Contract(pure = true)
+	public static UserManager UserManager() {
+		return instance == null
+				? null
+				: instance.getUserManager();
 	}
 
 	@Nullable
@@ -580,6 +600,32 @@ public class SystemUtils {
 		return mDownloadManager;
 	}
 
+	private WindowManager getWindowManager() {
+		if (mWindowManager == null) {
+			try {
+				mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log(t);
+				}
+			}
+		}
+		return mWindowManager;
+	}
+
+	private UserManager getUserManager() {
+		if (mUserManager == null) {
+			try {
+				mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log(t);
+				}
+			}
+		}
+		return mUserManager;
+	}
+	
 	public interface ChangeListener
 	{
 		void onChanged(int newVal);

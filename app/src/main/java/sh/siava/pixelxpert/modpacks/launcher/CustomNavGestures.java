@@ -15,7 +15,6 @@ import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Process;
 import android.view.MotionEvent;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
@@ -27,6 +26,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
+import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 /** @noinspection ConstantValue*/
@@ -109,8 +109,7 @@ public class CustomNavGestures extends XposedModPack {
 		Class<?> SystemUiProxyClass = findClass("com.android.quickstep.SystemUiProxy", lpparam.classLoader);
 		Class<?> RecentTasksListClass = findClass("com.android.quickstep.RecentTasksList", lpparam.classLoader);
 
-		WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-		Rect displayBounds = wm.getMaximumWindowMetrics().getBounds();
+		Rect displayBounds = SystemUtils.WindowManager().getMaximumWindowMetrics().getBounds();
 		displayW = Math.min(displayBounds.width(), displayBounds.height());
 		displayH = Math.max(displayBounds.width(), displayBounds.height());
 

@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
@@ -24,6 +23,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
+import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
 public class StatusbarGestures extends XposedModPack {
@@ -45,8 +45,6 @@ public class StatusbarGestures extends XposedModPack {
 	private String QSExpandMethodName;
 
 	private GestureDetector mGestureDetector;
-	WindowManager mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-
 	private boolean StatusbarLongpressAppSwitch = false;
 
 	public StatusbarGestures(Context context) {
@@ -290,7 +288,8 @@ public class StatusbarGestures extends XposedModPack {
 
 	//speedfactor & heightfactor are based on display height
 	private boolean isValidFling(MotionEvent e1, MotionEvent e2, float velocityY, float speedFactor, float heightFactor) {
-		Rect displayBounds = mWindowManager.getCurrentWindowMetrics().getBounds();
+		//noinspection DataFlowIssue
+		Rect displayBounds = SystemUtils.WindowManager().getCurrentWindowMetrics().getBounds();
 
 		return (e2.getY() - e1.getY()) / heightFactor > displayBounds.height() //enough travel in right direction
 				&& isTouchInRegion(e1, displayBounds.width()) //start point in hot zone

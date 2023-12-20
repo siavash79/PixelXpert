@@ -36,8 +36,6 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 
-import com.topjohnwu.superuser.Shell;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -649,7 +647,7 @@ public class ThemeManager_14 extends XposedModPack {
 		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
 			@Override
 			public void run(IRootProviderProxy proxy) throws RemoteException {
-				Shell.cmd("cmd overlay disable com.google.android.systemui.gxoverlay; cmd overlay enable com.google.android.systemui.gxoverlay").exec();
+				proxy.runCommand("cmd overlay disable com.google.android.systemui.gxoverlay; cmd overlay enable com.google.android.systemui.gxoverlay");
 			}
 		});
 	}

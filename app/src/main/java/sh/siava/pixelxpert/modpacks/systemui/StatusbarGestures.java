@@ -55,7 +55,7 @@ public class StatusbarGestures extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
 		oneFingerPulldownEnabled = Xprefs.getBoolean("QSPullodwnEnabled", false);
-		oneFingerPullupEnabled = Xprefs.getBoolean("oneFingerPullupEnabled", false);
+		oneFingerPullupEnabled = oneFingerPulldownEnabled && Xprefs.getBoolean("oneFingerPullupEnabled", false);
 		statusbarPortion = Xprefs.getInt("QSPulldownPercent", 25) / 100f;
 		pullDownSide = Integer.parseInt(Xprefs.getString("QSPulldownSide", "1"));
 
@@ -225,16 +225,13 @@ public class StatusbarGestures extends XposedModPack {
 
 					@Override
 					public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
-						int mBarState = (int) getObjectField(NotificationPanelViewController, "mBarState");
-
-						if (mBarState == STATUSBAR_MODE_SHADE
+						if (STATUSBAR_MODE_SHADE == (int) getObjectField(NotificationPanelViewController, "mBarState")
 								&& isValidFling(e1, e2, velocityY, .15f, 0.01f))
 						{
 							callMethod(NotificationPanelViewController, QSExpandMethodName);
 							return true;
 						}
-						else if(mBarState != STATUSBAR_MODE_KEYGUARD
-								&& isValidFling(e1, e2, velocityY, -.15f, -.06f))
+						else if(isValidFling(e1, e2, velocityY, -.15f, -.06f))
 						{
 							callMethod(NotificationPanelViewController, "collapse", 1f, true);
 							return true;
@@ -258,7 +255,8 @@ public class StatusbarGestures extends XposedModPack {
 						hookAllMethods(mTouchHandler.getClass(), "onTouchEvent", new XC_MethodHook() {
 							@Override
 							protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-								if(oneFingerPulldownEnabled && oneFingerPullupEnabled) {
+								if(oneFingerPullupEnabled
+										&& STATUSBAR_MODE_KEYGUARD != (int) getObjectField(NotificationPanelViewController, "mBarState")) {
 									mGestureDetector.onTouchEvent((MotionEvent) param.args[0]);
 								}
 							}

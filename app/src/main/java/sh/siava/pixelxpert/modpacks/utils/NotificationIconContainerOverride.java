@@ -33,8 +33,12 @@ public class NotificationIconContainerOverride {
 		float translationX = (float) callMethod(thisObject, "getActualPaddingStart");
 		int firstOverflowIndex = -1;
 		int childCount = thisObject.getChildCount();
-		int maxVisibleIcons = getBooleanField(thisObject, "mOnLockScreen") ? MAX_ICONS_ON_AOD :
-				getBooleanField(thisObject, "mIsStaticLayout") ? MAX_STATIC_ICONS : childCount;
+		int maxVisibleIcons = getBooleanField(thisObject, "mOnLockScreen")
+				? MAX_ICONS_ON_AOD
+				: getBooleanField(thisObject, "mIsStaticLayout")
+					? MAX_STATIC_ICONS
+					: childCount;
+
 		float layoutEnd = getLayoutEnd(thisObject);
 		setObjectField(thisObject, "mVisualOverflowStart", 0);
 		setObjectField(thisObject, "mFirstVisibleIconState", null);
@@ -44,7 +48,9 @@ public class NotificationIconContainerOverride {
 
 			if(xTranslationField == null)  //A13 QPR1 - QPR2 compatibility check
 			{
-				xTranslationField = (findFieldIfExists(iconState.getClass().getSuperclass(), "mXTranslation") == null) ? "xTranslation" : "mXTranslation";
+				xTranslationField = (findFieldIfExists(iconState.getClass().getSuperclass(), "mXTranslation") == null)
+						? "xTranslation"
+						: "mXTranslation";
 			}
 
 			if (getFloatField(iconState, "iconAppearAmount") == 1.0f) {
@@ -71,7 +77,9 @@ public class NotificationIconContainerOverride {
 			boolean isOverflowing = translationX > overflowDotX;
 
 			if (firstOverflowIndex == -1 && (forceOverflow || isOverflowing)) {
-				firstOverflowIndex = isLastChild && !forceOverflow ? i - 1 : i;
+				firstOverflowIndex = isLastChild && !forceOverflow
+						? i - 1
+						: i;
 				setObjectField(thisObject, "mVisualOverflowStart", layoutEnd - getIntField(thisObject, "mIconSize"));
 				if (forceOverflow || getBooleanField(thisObject, "mIsStaticLayout")) {
 					setObjectField(thisObject, "mVisualOverflowStart", Math.min(translationX, getFloatField(thisObject, "mVisualOverflowStart")));
@@ -96,7 +104,10 @@ public class NotificationIconContainerOverride {
 						mNumDots++;
 						//setObjectField(thisObject, "mNumDots", getIntField(thisObject, "mNumDots") + 1);
 					}
-					translationX += (mNumDots == MAX_DOTS ? MAX_DOTS * dotWidth : dotWidth)
+					translationX +=
+							(mNumDots == MAX_DOTS
+									? MAX_DOTS * dotWidth
+									: dotWidth)
 							* getFloatField(iconState, "iconAppearAmount");
 					try {
 						setObjectField(thisObject, "mLastVisibleIconState", iconState);

@@ -481,7 +481,7 @@ public class StringFormatter {
 		callbacks.clear();
 	}
 
-	public interface FormattedStringCallback extends Callback {
+	public interface FormattedStringCallback {
 		void onRefreshNeeded();
 	}
 }

@@ -25,6 +25,7 @@ import sh.siava.pixelxpert.modpacks.launcher.PixelXpertIconUpdater;
 import sh.siava.pixelxpert.modpacks.launcher.TaskbarActivator;
 import sh.siava.pixelxpert.modpacks.settings.AppCloneEnabler;
 import sh.siava.pixelxpert.modpacks.settings.PXSettingsLauncher;
+import sh.siava.pixelxpert.modpacks.systemui.BatteryInfoUpdateIndicator;
 import sh.siava.pixelxpert.modpacks.systemui.BatteryStyleManager;
 import sh.siava.pixelxpert.modpacks.systemui.BrightnessSlider;
 import sh.siava.pixelxpert.modpacks.systemui.EasyUnlock;
@@ -37,7 +38,7 @@ import sh.siava.pixelxpert.modpacks.systemui.KeyguardMods;
 import sh.siava.pixelxpert.modpacks.systemui.MultiStatusbarRows;
 import sh.siava.pixelxpert.modpacks.systemui.NotificationExpander;
 import sh.siava.pixelxpert.modpacks.systemui.NotificationManager;
-import sh.siava.pixelxpert.modpacks.systemui.QSFooterTextManager;
+import sh.siava.pixelxpert.modpacks.systemui.QSFooterManager;
 import sh.siava.pixelxpert.modpacks.systemui.QSTileGrid;
 import sh.siava.pixelxpert.modpacks.systemui.ScreenGestures;
 import sh.siava.pixelxpert.modpacks.systemui.ScreenRecord;
@@ -95,7 +96,7 @@ public class ModPacks {
 					{
 						modPacks.add(ThemeManager_13.class);
 					}
-
+					modPacks.add(BatteryInfoUpdateIndicator.class);
 					modPacks.add(BrightnessRange.class);
 					modPacks.add(NotificationExpander.class);
 					modPacks.add(QSTileGrid.class);
@@ -112,7 +113,7 @@ public class ModPacks {
 					modPacks.add(StatusbarMods.class);
 					modPacks.add(BatteryStyleManager.class);
 					modPacks.add(GestureNavbarManager.class);
-					modPacks.add(QSFooterTextManager.class);
+					modPacks.add(QSFooterManager.class);
 					modPacks.add(KeyGuardPinScrambler.class);
 					modPacks.add(FingerprintWhileDozing.class);
 					modPacks.add(StatusbarSize.class);

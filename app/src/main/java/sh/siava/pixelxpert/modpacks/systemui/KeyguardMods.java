@@ -61,6 +61,9 @@ public class KeyguardMods extends XposedModPack {
 	public static final String SHORTCUT_ZEN = "zen";
 	public static final String SHORTCUT_QR_SCANNER = "qrscanner";
 
+	/** @noinspection FieldCanBeLocal*/
+	private static KeyguardMods instance = null;
+
 	private float max_charging_current = 0;
 	private float max_charging_voltage = 0;
 	private float temperature = 0;
@@ -110,10 +113,13 @@ public class KeyguardMods extends XposedModPack {
 	//region hide user avatar
 	private boolean HideLockScreenUserAvatar = false;
 	private static boolean ForceAODwCharging = false;
+	private Object KeyguardIndicationController;
 	//endregion
 
 	public KeyguardMods(Context context) {
 		super(context);
+
+		instance = this;
 	}
 
 	@Override
@@ -354,12 +360,21 @@ public class KeyguardMods extends XposedModPack {
 			}
 		};
 
+		XC_MethodHook keyguardIndicatorFinder = new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				KeyguardIndicationController = param.thisObject;
+			}
+		};
+
 		try { //A14
 			Class<?> KeyguardIndicationControllerGoogleClass = findClass("com.google.android.systemui.statusbar.KeyguardIndicationControllerGoogle", lpparam.classLoader);
+			hookAllConstructors(KeyguardIndicationControllerGoogleClass, keyguardIndicatorFinder);
 			hookAllMethods(KeyguardIndicationControllerGoogleClass, "computePowerIndication", powerIndicationHook);
 		}
 		catch (Throwable ignored)
 		{ //A13 and maybe 14 custom
+			hookAllConstructors(KeyguardIndicationControllerClass, keyguardIndicatorFinder);
 			hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", powerIndicationHook);
 		}
 
@@ -648,5 +663,10 @@ public class KeyguardMods extends XposedModPack {
 				}
 			}
 		});
+	}
+
+	public static String getPowerIndicationString()
+	{
+		return (String) callMethod(instance.KeyguardIndicationController, "computePowerIndication");
 	}
 }

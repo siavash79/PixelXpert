@@ -6,7 +6,6 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getFloatField;
@@ -29,7 +28,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.StringFormatter;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
@@ -187,7 +185,6 @@ public class QSFooterManager extends XposedModPack {
 
 	public void setChargingIndicatorVisibility()
 	{
-		log(mQSOpen + " " + mCharging);
 		mChargingIndicator.setVisibility(mCharging && mQSOpen
 				? VISIBLE
 				: GONE);

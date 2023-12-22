@@ -1,3 +1,10 @@
+**canary-315**  
+- A14ap11: Fixed hiding the mobile roaming indicator  
+- A14: Improved QS pull up/down  
+- Added option to show charging information on QS footer  
+- BootLoopProtector: increased bootloop measurement from 40s to 60s  
+- A14: Improved QS pull-up/down swipe gesture detection  
+  
 **canary-314**  
 - A14: Added option to close QS with a single swipe  
   

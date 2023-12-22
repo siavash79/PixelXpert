@@ -39,6 +39,7 @@ import android.provider.CalendarContract;
 import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyCallback;
+import android.telephony.TelephonyDisplayInfo;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -948,7 +949,15 @@ public class StatusbarMods extends XposedModPack {
 					}
 				});
 
-		hookAllMethods(ServiceState.class, "getRoaming", new XC_MethodHook() {
+		hookAllMethods(ServiceState.class, "getRoaming", new XC_MethodHook() { //A14QPR1 and prior
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(HideRoamingState)
+					param.setResult(false);
+			}
+		});
+
+		hookAllMethods(TelephonyDisplayInfo.class, "isRoaming", new XC_MethodHook() { //A14QPR2
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if(HideRoamingState)

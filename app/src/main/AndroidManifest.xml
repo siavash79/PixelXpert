@@ -9,6 +9,7 @@
 		tools:ignore="QueryAllPackagesPermission" />
 
 	<application
+		android:name=".PixelXpert"
 		android:enableOnBackInvokedCallback="true"
 		android:icon="@mipmap/ic_launcher"
 		android:label="Pixel Xpert"

@@ -37,7 +37,7 @@ public class QSFooterManager extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 	private static boolean customQSFooterTextEnabled = false;
 	private static String customText = "";
-	private Object QSFV;
+	private Object QSFooterView;
 	private final StringFormatter stringFormatter = new StringFormatter();
 
 	private TextView mChargingIndicator;
@@ -45,6 +45,7 @@ public class QSFooterManager extends XposedModPack {
 	private boolean mQSOpen = false;
 	private static boolean ChargingInfoOnQSEnabled = false;
 	private LinearLayout mQSFooterContainer;
+	private Boolean mIsComposeFooterAction = null;
 
 
 	public void updatePrefs(String... Key) {
@@ -74,7 +75,7 @@ public class QSFooterManager extends XposedModPack {
 		hookAllConstructors(QSFooterViewClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				QSFV = param.thisObject;
+				QSFooterView = param.thisObject;
 			}
 		});
 
@@ -107,11 +108,19 @@ public class QSFooterManager extends XposedModPack {
 		});
 
 		hookAllMethods(QSContainerImplClass, "updateResources", new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mQSFooterContainer.getLayoutParams();
-				lp.leftMargin = -1*getIntField(param.thisObject, "mTilesPageMargin");
-				lp.rightMargin = lp.leftMargin;
+				if(mIsComposeFooterAction == null)
+				{
+					mIsComposeFooterAction = ((View)param.thisObject).findViewById(mContext.getResources().getIdentifier("qs_footer_actions", "id", mContext.getPackageName())).getClass().getName().contains("Compose");
+				}
+				int margin = mIsComposeFooterAction
+						? -1 * getIntField(param.thisObject, "mTilesPageMargin")
+						: 0;
+				lp.leftMargin = margin;
+				lp.rightMargin = margin;
 			}
 		});
 
@@ -165,9 +174,9 @@ public class QSFooterManager extends XposedModPack {
 	private void setQSFooterText() {
 		try {
 			if (customQSFooterTextEnabled) {
-				TextView mBuildText = (TextView) getObjectField(QSFV, "mBuildText");
+				TextView mBuildText = (TextView) getObjectField(QSFooterView, "mBuildText");
 
-				setObjectField(QSFV,
+				setObjectField(QSFooterView,
 						"mShouldShowBuildText",
 						customText.trim().length() > 0);
 
@@ -176,7 +185,7 @@ public class QSFooterManager extends XposedModPack {
 					mBuildText.setSelected(true);
 				});
 			} else {
-				callMethod(QSFV,
+				callMethod(QSFooterView,
 						"setBuildText");
 			}
 		} catch (Throwable ignored) {

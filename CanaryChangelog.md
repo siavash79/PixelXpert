@@ -1,3 +1,6 @@
+**canary-316**  
+- Fixed QS footer actions layout margins  
+  
 **canary-315**  
 - A14ap11: Fixed hiding the mobile roaming indicator  
 - A14: Improved QS pull up/down  

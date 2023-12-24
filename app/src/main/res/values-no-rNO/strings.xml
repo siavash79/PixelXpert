@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Intensitet definert av systemets berøringsvibrasjonsinnstillinger</string>
 	<string name="qs_tile_qty_portrait">I stående orientering</string>
 	<string name="qs_tile_qty_landscape">I landskapsorientering</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Antall QS-rader</string>
 	<string name="qs_cols_number">Antall QS-kolonner</string>
 	<string name="qqs_tiles_number">Maksimalt antall fliser i Quick QS (maks 2 rader)</string>

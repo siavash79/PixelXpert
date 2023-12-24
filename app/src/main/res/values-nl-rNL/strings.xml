@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Intensiteit gedefinieerd door de instellingen voor aanraaktrilling van het systeem</string>
 	<string name="qs_tile_qty_portrait">In portretoriëntatie</string>
 	<string name="qs_tile_qty_landscape">In landschapsoriëntatie</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">QS Rijen nummer</string>
 	<string name="qs_cols_number">Aantal QS-kolommen</string>
 	<string name="qqs_tiles_number">Maximum aantal tegels in Quick QS (max. 2 rijen)</string>

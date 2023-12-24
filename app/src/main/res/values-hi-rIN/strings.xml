@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">स्पर्श कंपन के लिए सिस्टम सेटिंग्स द्वारा तीव्रता निर्धारित की जाती है</string>
 	<string name="qs_tile_qty_portrait">पोर्ट्रेट में</string>
 	<string name="qs_tile_qty_landscape">लैंडस्केप</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">त्वरित सेटिंग्स में पंक्तियों की संख्या</string>
 	<string name="qs_cols_number">QS कॉलम की संख्या</string>
 	<string name="qqs_tiles_number">त्वरित QS में अधिकतम टाइलें (अधिकतम 2 पंक्तियां)</string>

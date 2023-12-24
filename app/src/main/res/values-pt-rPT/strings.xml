@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Intensidade definida pelas definições de vibração de toque do sistema</string>
 	<string name="qs_tile_qty_portrait">Em modo retrato</string>
 	<string name="qs_tile_qty_landscape">Em modo paisagem</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Número de linhas</string>
 	<string name="qs_cols_number">Número de colunas das DR</string>
 	<string name="qqs_tiles_number">Número de atalhos no painel rápido das DR (2 linhas máx.)</string>

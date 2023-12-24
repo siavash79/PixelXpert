@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Sistem dokunmatik titreşim ayarları tarafından tanımlanan yoğunluk</string>
 	<string name="qs_tile_qty_portrait">Dikey yönde</string>
 	<string name="qs_tile_qty_landscape">Yatay yönde</string>
+	<string name="qs_mod_category_misc_title">Çeşitli</string>
+	<string name="charging_info_on_qs">QS panelinde şarj bilgilerini göster</string>
 	<string name="qs_rows_number">QS satırlarının sayısı</string>
 	<string name="qs_cols_number">QS sütunlarının sayısı</string>
 	<string name="qqs_tiles_number">Hızlı QS\'de maksimum kutucuk (maksimum 2 sıra)</string>

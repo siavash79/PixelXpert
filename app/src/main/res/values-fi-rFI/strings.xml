@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Järjestelmän kosketusvärinäasetusten määrittämä voimakkuus</string>
 	<string name="qs_tile_qty_portrait">Pystysuuntainen</string>
 	<string name="qs_tile_qty_landscape">Vaakasuunnassa</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">QS-rivien lukumäärä</string>
 	<string name="qs_cols_number">QS-sarakkeiden lukumäärä</string>
 	<string name="qqs_tiles_number">Laattojen enimmäismäärä Quick QS:ssä (enintään 2 riviä)</string>

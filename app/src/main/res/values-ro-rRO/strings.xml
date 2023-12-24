@@ -185,9 +185,9 @@
 	<string name="qs_footer_text_desc">Oprește afișajul pentru a aplica</string>
 	<string name="qs_leveled_flashlight_title">Lanternă cu nivel de luminozitate</string>
 	<string name="qs_flashlight_level_global_title">Aplică nivelul lanternei global</string>
-	<string name="qs_qr_tile_inactive_title">Inversează culoarea dalei QR-Scan</string>
+	<string name="qs_qr_tile_inactive_title">Inversează culoarea dalei Scaner de coduri QR</string>
 	<string name="qs_tile_vertical_title">Mută pictogramele dalelor în partea de sus</string>
-	<string name="qs_tile_qty_title">Setări rapide setări de numărare a plăcilor</string>
+	<string name="qs_tile_qty_title">Setarea numărului plăcilor</string>
 	<string name="qs_leveled_flashlight_summary">Necesită hardware suportat</string>
 	<string name="light_qs_title">Aplică panoul de setări rapide luminoase când se utilizează tema luminoasă</string>
 	<string name="qs_pulldown_size">Lățime tragere rapidă</string>
@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Intensitatea definită de setările sistemului de vibrație la atingere</string>
 	<string name="qs_tile_qty_portrait">În orientare portret</string>
 	<string name="qs_tile_qty_landscape">În orientare peisaj</string>
+	<string name="qs_mod_category_misc_title">Diverse</string>
+	<string name="charging_info_on_qs">Afișează informații despre încărcare în panoul setărilor rapide</string>
 	<string name="qs_rows_number">Numărul de rânduri în setările rapide</string>
 	<string name="qs_cols_number">Numărul de coloane în setările rapide</string>
 	<string name="qqs_tiles_number">Maximum dale în setările rapide (max 2 rânduri)</string>

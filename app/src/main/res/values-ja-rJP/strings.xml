@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">システムのタッチ振動設定によって定義される強度</string>
 	<string name="qs_tile_qty_portrait">縦方向時</string>
 	<string name="qs_tile_qty_landscape">横方向時</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">クイック設定の列数</string>
 	<string name="qs_cols_number">クイック設定のカラム数</string>
 	<string name="qqs_tiles_number">クイック設定の最大タイル数 (最大2列)</string>

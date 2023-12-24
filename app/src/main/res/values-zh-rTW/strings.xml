@@ -194,11 +194,13 @@
 	<string name="qs_pulldown_switch_title">快速下拉方塊面板</string>
 	<string name="qs_pulldown_side_title">快速下拉寬度</string>
 	<string name="qs_pulldown_category">方塊面板下拉</string>
-	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
+	<string name="qs_pullup_switch_title">一鍵關閉快速設定</string>
 	<string name="qs_haptic_switch_title">點選按鈕震動</string>
 	<string name="vibration_type_touch">強度由系統觸控振動設定定義</string>
 	<string name="qs_tile_qty_portrait">豎屏時</string>
 	<string name="qs_tile_qty_landscape">橫屏時</string>
+	<string name="qs_mod_category_misc_title">雜項</string>
+	<string name="charging_info_on_qs">在快速設定面板上顯示充電信息</string>
 	<string name="qs_rows_number">方塊面板行數</string>
 	<string name="qs_cols_number">方塊面板列數</string>
 	<string name="qqs_tiles_number">方塊面板最大方塊數量 (最大2行)</string>
@@ -284,9 +286,9 @@
 	<string name="expand_notifications_icons_title">新增展開/摺疊所有按鈕</string>
 	<string name="disbale_ongoing_notif_dismiss_title">切勿忽略正在進行的通知</string>
 	<string name="heads_up_notification_duration">通知浮動持續時間</string>
-	<string name="notif_default_expansion_title">Notification default expansion</string>
-	<string name="notif_always_expand">Always expand</string>
-	<string name="notif_always_collapse">Always collapse</string>
+	<string name="notif_default_expansion_title">通知預設擴展</string>
+	<string name="notif_always_expand">總是展開</string>
+	<string name="notif_always_collapse">總是折疊</string>
 	<string name="disable_overscroll">禁用過度滾動效果</string>
 	<string name="overscroll_on_summary">重要:你必須在 LSPosed 作用域中勾選你要禁用的應用程式</string>
 	<string name="milliseconds">毫秒</string>

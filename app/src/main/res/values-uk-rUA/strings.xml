@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Інтенсивність визначається налаштуваннями системної вібрації при дотику</string>
 	<string name="qs_tile_qty_portrait">У книжковій орієнтації</string>
 	<string name="qs_tile_qty_landscape">В альбомній орієнтації</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Номер рядків Швидких налаштувань</string>
 	<string name="qs_cols_number">Кількість колонок QS</string>
 	<string name="qqs_tiles_number">Максимальна кількість плиток у Quick QS (максимум 2 рядки)</string>

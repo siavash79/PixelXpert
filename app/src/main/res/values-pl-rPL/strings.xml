@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Intensywność zdefiniowana przez systemowe ustawienia wibracji dotykowych</string>
 	<string name="qs_tile_qty_portrait">W orientacji pionowej</string>
 	<string name="qs_tile_qty_landscape">W orientacji poziomej</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Liczba rzędów QS</string>
 	<string name="qs_cols_number">Liczba kolumn QS</string>
 	<string name="qqs_tiles_number">Maksymalna liczba płytek w Quick QS (maks. 2 rzędy)</string>

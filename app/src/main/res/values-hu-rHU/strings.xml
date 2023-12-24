@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">A rendszer érintési rezgésbeállításai által meghatározott intenzitás</string>
 	<string name="qs_tile_qty_portrait">Álló tájolásban</string>
 	<string name="qs_tile_qty_landscape">Fekvő tájolásban</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">QS-sorok száma</string>
 	<string name="qs_cols_number">QS oszlopok száma</string>
 	<string name="qqs_tiles_number">Maximális csempék a Quick QS-ben (max. 2 sor)</string>

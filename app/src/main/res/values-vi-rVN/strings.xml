@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Cường độ được xác định bởi cài đặt rung khi chạm vào hệ thống</string>
 	<string name="qs_tile_qty_portrait">Theo hướng dọc</string>
 	<string name="qs_tile_qty_landscape">Theo hướng ngang</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Số hàng bảng cài đặt nhanh</string>
 	<string name="qs_cols_number">Số cột bảng cài đặt nhanh</string>
 	<string name="qqs_tiles_number">Tối đa số ô trong bảng cài đặt nhanh (tối đa 2 hàng)</string>
@@ -284,9 +286,9 @@
 	<string name="expand_notifications_icons_title">Thêm nút Mở rộng/Thu gọn tất cả thông báo</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Không bao giờ loại bỏ các thông báo đang diễn ra</string>
 	<string name="heads_up_notification_duration">Thời gian hiển thị thông báo</string>
-	<string name="notif_default_expansion_title">Notification default expansion</string>
-	<string name="notif_always_expand">Always expand</string>
-	<string name="notif_always_collapse">Always collapse</string>
+	<string name="notif_default_expansion_title">Mở rộng mặc định thông báo</string>
+	<string name="notif_always_expand">Luôn mở rộng</string>
+	<string name="notif_always_collapse">Luôn thu lại</string>
 	<string name="disable_overscroll">Tắt hiệu ứng cuộn</string>
 	<string name="overscroll_on_summary">Quan trọng: bạn PHẢI bật các ứng dụng bạn muốn tắt hiệu ứng cuộn trong LSPosed</string>
 	<string name="milliseconds">Mili giây</string>

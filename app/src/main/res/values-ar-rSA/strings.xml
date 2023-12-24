@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">كثافة معرَّفة بواسطة إعدادات إهتزاز لمس النظام</string>
 	<string name="qs_tile_qty_portrait">في الاتجاه العمودي</string>
 	<string name="qs_tile_qty_landscape">في الاتجاه الأفقي</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">عدد صفوف الإعدادات السريعة</string>
 	<string name="qs_cols_number">عدد أعمدة الإعدادات السريعة</string>
 	<string name="qqs_tiles_number">الحد الأقصى للبلاط في الإعدادات السريعة (صف أقصى 2)</string>

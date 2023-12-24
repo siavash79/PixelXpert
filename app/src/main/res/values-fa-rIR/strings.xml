@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">شدت توسط تنظیمات لرزش لمسی سیستم تعریف شده است</string>
 	<string name="qs_tile_qty_portrait">در جهت پرتره</string>
 	<string name="qs_tile_qty_landscape">در جهت گیری منظره</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">تعداد ردیفهای تنظیمات سریع</string>
 	<string name="qs_cols_number">تعداد ستونهای تنظیمات سریع</string>
 	<string name="qqs_tiles_number">حداکثر آیتمهای تنظیمات سریع در QQS (حداکثر 2 ردیف)</string>

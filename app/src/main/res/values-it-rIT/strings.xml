@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Intensità definita dalle impostazioni di vibrazione al tocco di sistema</string>
 	<string name="qs_tile_qty_portrait">In orientamento verticale</string>
 	<string name="qs_tile_qty_landscape">In orientamento orizzontale</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Numero di righe QS</string>
 	<string name="qs_cols_number">Numero di colonne QS</string>
 	<string name="qqs_tiles_number">N. massimo tiles nel Quick QS (max 2 righe)</string>

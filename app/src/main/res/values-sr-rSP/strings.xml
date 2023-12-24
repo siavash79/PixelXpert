@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Интензитет дефинисан поставкама вибрације на додир система</string>
 	<string name="qs_tile_qty_portrait">У портретној оријентацији</string>
 	<string name="qs_tile_qty_landscape">У пејзажној оријентацији</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Број КС редова</string>
 	<string name="qs_cols_number">Број КС колона</string>
 	<string name="qqs_tiles_number">Максималан број плочица у Куицк КС (максимално 2 реда)</string>

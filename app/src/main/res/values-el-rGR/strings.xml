@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Ένταση που ορίζεται από τις ρυθμίσεις δόνησης αφής συστήματος</string>
 	<string name="qs_tile_qty_portrait">Σε κατακόρυφο προσανατολισμό</string>
 	<string name="qs_tile_qty_landscape">Σε οριζόντιο προσανατολισμό</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Αριθμός σειρών QS</string>
 	<string name="qs_cols_number">Αριθμός στηλών QS</string>
 	<string name="qqs_tiles_number">Μέγιστα πλακίδια στο Quick QS (μέγιστο 2 σειρές)</string>

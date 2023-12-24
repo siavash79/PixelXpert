@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Intensidad definida por la configuración de vibración táctil del sistema</string>
 	<string name="qs_tile_qty_portrait">En orientación vertical</string>
 	<string name="qs_tile_qty_landscape">En orientación apaisada</string>
+	<string name="qs_mod_category_misc_title">Misceláneo</string>
+	<string name="charging_info_on_qs">Mostrar información de carga en el panel QS</string>
 	<string name="qs_rows_number">Número de líneas</string>
 	<string name="qs_cols_number">Número de columnas QS</string>
 	<string name="qqs_tiles_number">Número máximo de mosaicos en QS (máx. 2 filas)</string>

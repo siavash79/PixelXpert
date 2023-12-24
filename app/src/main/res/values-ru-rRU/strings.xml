@@ -199,6 +199,8 @@
 	<string name="vibration_type_touch">Интенсивность определяется системными настройками вибрации при касании</string>
 	<string name="qs_tile_qty_portrait">В портретной ориентации </string>
 	<string name="qs_tile_qty_landscape">В горизонтальной ориентации</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Количество рядов быстрых настроек</string>
 	<string name="qs_cols_number">Количество столбцов быстрых настроек</string>
 	<string name="qqs_tiles_number">Максимальное количество плиток в полураскрытых быстрых настройках (максимум 2 строки)</string>

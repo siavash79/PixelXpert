@@ -26,16 +26,13 @@ public class OverlayTools {
 	}
 
 	public static void setOverlay(String Key, boolean enabled, boolean refresh, boolean force) {
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			@Override
-			public void run(IRootProviderProxy proxy) {
-				if (refresh) {
-					try {
-						getActiveOverlays(proxy);
-					} catch (Throwable ignored) {}
-				}
-				setOverlay(Key, enabled, force);
+		XPLauncher.enqueueProxyCommand(proxy -> {
+			if (refresh) {
+				try {
+					getActiveOverlays(proxy);
+				} catch (Throwable ignored) {}
 			}
+			setOverlay(Key, enabled, force);
 		});
 	}
 
@@ -80,13 +77,7 @@ public class OverlayTools {
 	}
 
 	public static void setOverlay(String Key, boolean enabled, boolean force) {
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			@Override
-			public void run(IRootProviderProxy proxy) throws RemoteException {
-				setOverlay(Key, enabled, force, proxy);
-			}
-		});
-
+		XPLauncher.enqueueProxyCommand(proxy -> setOverlay(Key, enabled, force, proxy));
 	}
 
 	private static void setOverlayGroup(String key, boolean enabled, boolean force, IRootProviderProxy proxy) {

@@ -26,7 +26,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.RemoteException;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -41,7 +40,6 @@ import java.util.Arrays;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
@@ -644,12 +642,7 @@ public class ThemeManager_14 extends XposedModPack {
 
 		calculateColors();
 
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			@Override
-			public void run(IRootProviderProxy proxy) throws RemoteException {
-				proxy.runCommand("cmd overlay disable com.google.android.systemui.gxoverlay; cmd overlay enable com.google.android.systemui.gxoverlay");
-			}
-		});
+		XPLauncher.enqueueProxyCommand(proxy -> proxy.runCommand("cmd overlay disable com.google.android.systemui.gxoverlay; cmd overlay enable com.google.android.systemui.gxoverlay"));
 	}
 
 	@SuppressLint("DiscouragedApi")

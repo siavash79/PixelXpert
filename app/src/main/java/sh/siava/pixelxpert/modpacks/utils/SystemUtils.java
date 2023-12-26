@@ -42,7 +42,6 @@ import org.jetbrains.annotations.Contract;
 import java.util.ArrayList;
 
 import sh.siava.pixelxpert.BuildConfig;
-import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XPrefs;
 
@@ -76,24 +75,18 @@ public class SystemUtils {
 	public static void restartSystemUI() {
 		BootLoopProtector.resetCounter("com.android.systemui");
 
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			@Override
-			public void run(IRootProviderProxy proxy) {
-				try {
-					proxy.runCommand("killall com.android.systemui");
-				} catch (Throwable ignored) {}
-			}
+		XPLauncher.enqueueProxyCommand(proxy -> {
+			try {
+				proxy.runCommand("killall com.android.systemui");
+			} catch (Throwable ignored) {}
 		});
 	}
 
 	public static void restart() {
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			@Override
-			public void run(IRootProviderProxy proxy) {
-				try {
-					proxy.runCommand("am start -a android.intent.action.REBOOT");
-				} catch (Throwable ignored) {}
-			}
+		XPLauncher.enqueueProxyCommand(proxy -> {
+			try {
+				proxy.runCommand("am start -a android.intent.action.REBOOT");
+			} catch (Throwable ignored) {}
 		});
 	}
 
@@ -398,27 +391,24 @@ public class SystemUtils {
 	static boolean darkSwitching = false;
 
 	public static void doubleToggleDarkMode() {
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			@Override
-			public void run(IRootProviderProxy proxy) {
-				boolean isDark = isDarkMode();
-				new Thread(() -> {
-					try {
-						while (darkSwitching) {
-							Thread.currentThread().wait(100);
-						}
-						darkSwitching = true;
-
-						proxy.runCommand("cmd uimode night " + (isDark ? "no" : "yes"));
-						Thread.sleep(1000);
-						proxy.runCommand("cmd uimode night " + (isDark ? "yes" : "no"));
-
-						Thread.sleep(500);
-						darkSwitching = false;
-					} catch (Exception ignored) {
+		XPLauncher.enqueueProxyCommand(proxy -> {
+			boolean isDark = isDarkMode();
+			new Thread(() -> {
+				try {
+					while (darkSwitching) {
+						Thread.currentThread().wait(100);
 					}
-				}).start();
-			}
+					darkSwitching = true;
+
+					proxy.runCommand("cmd uimode night " + (isDark ? "no" : "yes"));
+					Thread.sleep(1000);
+					proxy.runCommand("cmd uimode night " + (isDark ? "yes" : "no"));
+
+					Thread.sleep(500);
+					darkSwitching = false;
+				} catch (Exception ignored) {
+				}
+			}).start();
 		});
 	}
 

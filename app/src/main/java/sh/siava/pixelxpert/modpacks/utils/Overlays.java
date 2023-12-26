@@ -86,47 +86,41 @@ public class Overlays {
 	}
 
 	private void setAllInternal(boolean force) {
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			@Override
-			public void run(IRootProviderProxy proxy) {
-				new Thread(() -> {
-					if (prefs == null) {
-						prefs = XPrefs.Xprefs;
-					}
+		XPLauncher.enqueueProxyCommand(proxy -> new Thread(() -> {
+			if (prefs == null) {
+				prefs = XPrefs.Xprefs;
+			}
 
-					if (prefs == null) return; // something not ready
+			if (prefs == null) return; // something not ready
 
+			try {
+				getActiveOverlays(proxy); //update the real active overlay list
+			} catch (Throwable ignored) {}
+
+			Map<String, ?> allPrefs = prefs.getAll();
+
+			for (String pref : allPrefs.keySet()) {
+				if (pref.endsWith("Overlay") && Overlays.containsKey(pref)) {
 					try {
-						getActiveOverlays(proxy); //update the real active overlay list
+						setOverlay(pref, prefs.getBoolean(pref, false), force);
 					} catch (Throwable ignored) {}
+				}
+				//overlay groups, like themes of select one
+				else if (pref.endsWith("OverlayEx") && Overlays.containsKey(pref)) {
+					String activeOverlay = prefs.getString(pref, "None");
 
-					Map<String, ?> allPrefs = prefs.getAll();
-
-					for (String pref : allPrefs.keySet()) {
-						if (pref.endsWith("Overlay") && Overlays.containsKey(pref)) {
+					OverlayGroup thisGroup = (OverlayGroup) Overlays.get(pref);
+					//noinspection ConstantConditions
+					for (OverlayProp thisProp : thisGroup.members) {
+						if (!thisProp.name.equals("None")) {
 							try {
-								setOverlay(pref, prefs.getBoolean(pref, false), force);
+								setOverlay(thisProp.name, activeOverlay.equals(thisProp.name), force);
 							} catch (Throwable ignored) {}
 						}
-						//overlay groups, like themes of select one
-						else if (pref.endsWith("OverlayEx") && Overlays.containsKey(pref)) {
-							String activeOverlay = prefs.getString(pref, "None");
-
-							OverlayGroup thisGroup = (OverlayGroup) Overlays.get(pref);
-							//noinspection ConstantConditions
-							for (OverlayProp thisProp : thisGroup.members) {
-								if (!thisProp.name.equals("None")) {
-									try {
-										setOverlay(thisProp.name, activeOverlay.equals(thisProp.name), force);
-									} catch (Throwable ignored) {}
-								}
-							}
-						}
 					}
-				}).start();
-
+				}
 			}
-		});
+		}).start());
 	}
 
 	class overlayStartupThread extends Thread {

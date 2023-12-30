@@ -20,7 +20,7 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
-/** @noinspection unused, RedundantThrows */
+/** @noinspection RedundantThrows */
 public class BatteryDataProvider extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 
@@ -32,8 +32,6 @@ public class BatteryDataProvider extends XposedModPack {
 	private static BatteryDataProvider instance = null;
 
 	List<BatteryStatusCallback> mStatusCallbacks = new ArrayList<>();
-	private int speed;
-
 	private boolean mCharging;
 	private int mCurrentLevel = 0;
 
@@ -65,7 +63,7 @@ public class BatteryDataProvider extends XposedModPack {
 						|| getBooleanField(param.thisObject, "mWirelessCharging");
 				mPowerSave = getBooleanField(param.thisObject, "mPowerSave");
 
-				informInfoCallbacks();
+				onBatteryInfoChanged();
 			}
 		};
 
@@ -98,6 +96,7 @@ public class BatteryDataProvider extends XposedModPack {
 		instance.mStatusCallbacks.add(callback);
 	}
 
+	/** @noinspection unused*/
 	public static void unRegisterStatusCallback(BatteryStatusCallback callback)
 	{
 		instance.mStatusCallbacks.remove(callback);
@@ -113,6 +112,7 @@ public class BatteryDataProvider extends XposedModPack {
 		instance.mInfoCallbacks.add(callback);
 	}
 
+	/** @noinspection unused*/
 	public static void unRegisterInfoCallback(BatteryInfoCallback callback)
 	{
 		instance.mInfoCallbacks.remove(callback);
@@ -138,18 +138,20 @@ public class BatteryDataProvider extends XposedModPack {
 		return instance.mCharging && instance.mIsFastCharging;
 	}
 
-	public void informInfoCallbacks() {
+	public static void refreshAllInfoCallbacks()
+	{
+		instance.onBatteryInfoChanged();
+	}
+	private void onBatteryInfoChanged() {
 		for(BatteryInfoCallback callback : mInfoCallbacks)
 		{
-			callback.onBatteryInfoChanged();
+			try
+			{
+				callback.onBatteryInfoChanged();
+			}
+			catch (Throwable ignored){}
 		}
 	}
-
-	public static BatteryDataProvider getInstance()
-	{
-		return instance;
-	}
-
 	public interface BatteryInfoCallback
 	{
 		void onBatteryInfoChanged();

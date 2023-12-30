@@ -157,7 +157,7 @@ public class BatteryStyleManager extends XposedModPack {
 					try
 					{
 						Thread.sleep(500);
-						BatteryDataProvider.getInstance().informInfoCallbacks();
+						BatteryDataProvider.refreshAllInfoCallbacks();
 					}catch (Throwable ignored) {}
 				}).start();
 			}

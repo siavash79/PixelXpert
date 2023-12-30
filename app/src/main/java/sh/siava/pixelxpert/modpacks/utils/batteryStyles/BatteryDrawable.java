@@ -6,27 +6,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider;
+
 public abstract class BatteryDrawable extends Drawable {
 
 	public abstract void setShowPercent(boolean showPercent);
 
 	public abstract void setMeterStyle(int batteryStyle);
 
-	public abstract void setFastCharging(boolean isFastCharging);
-
-	public abstract void setCharging(boolean isCharging);
-
-	public abstract void setBatteryLevel(int mLevel);
-
 	public abstract void setColors(int fgColor, int bgColor, int singleToneColor);
 
-	public abstract void setPowerSaving(boolean isPowerSaving);
-
 	public abstract void setChargingAnimationEnabled(boolean enabled);
-
-	public abstract void refresh();
-
-
 	public static boolean colorful;
 	public static List<Float> batteryLevels = new ArrayList<>();
 	public static int[] batteryColors;
@@ -49,5 +39,10 @@ public abstract class BatteryDrawable extends Drawable {
 		BatteryDrawable.colorful = colorful;
 
 		lastVarUpdate = Calendar.getInstance().getTime().getTime();
+	}
+
+	public BatteryDrawable()
+	{
+		BatteryDataProvider.registerInfoCallback(this::invalidateSelf);
 	}
 }

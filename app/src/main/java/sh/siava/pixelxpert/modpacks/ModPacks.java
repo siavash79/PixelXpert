@@ -25,7 +25,7 @@ import sh.siava.pixelxpert.modpacks.launcher.PixelXpertIconUpdater;
 import sh.siava.pixelxpert.modpacks.launcher.TaskbarActivator;
 import sh.siava.pixelxpert.modpacks.settings.AppCloneEnabler;
 import sh.siava.pixelxpert.modpacks.settings.PXSettingsLauncher;
-import sh.siava.pixelxpert.modpacks.systemui.BatteryInfoUpdateIndicator;
+import sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider;
 import sh.siava.pixelxpert.modpacks.systemui.BatteryStyleManager;
 import sh.siava.pixelxpert.modpacks.systemui.BrightnessSlider;
 import sh.siava.pixelxpert.modpacks.systemui.EasyUnlock;
@@ -96,7 +96,7 @@ public class ModPacks {
 					{
 						modPacks.add(ThemeManager_13.class);
 					}
-					modPacks.add(BatteryInfoUpdateIndicator.class);
+					modPacks.add(BatteryDataProvider.class);
 					modPacks.add(BrightnessRange.class);
 					modPacks.add(NotificationExpander.class);
 					modPacks.add(QSTileGrid.class);

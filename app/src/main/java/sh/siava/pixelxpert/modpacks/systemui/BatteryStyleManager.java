@@ -50,7 +50,6 @@ public class BatteryStyleManager extends XposedModPack {
 	private static int BatteryIconOpacity = 100;
 	private static boolean BatteryChargingAnimationEnabled = true;
 	private static final ArrayList<Object> batteryViews = new ArrayList<>();
-	public static boolean charging = false;
 
 	public BatteryStyleManager(Context context) {
 		super(context);

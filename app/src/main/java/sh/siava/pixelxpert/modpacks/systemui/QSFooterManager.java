@@ -157,7 +157,7 @@ public class QSFooterManager extends XposedModPack {
 
 		mChargingIndicator.setText(KeyguardMods.getPowerIndicationString());
 
-		BatteryDataProvider.registerStatusCallback(batteryStatus -> {
+		BatteryDataProvider.registerStatusCallback((batteryStatus, batteryStatusIntent) -> {
 			if(ChargingInfoOnQSEnabled && batteryStatus != BATTERY_STATUS_DISCHARGING)
 			{
 				mChargingIndicator.setText(KeyguardMods.getPowerIndicationString());

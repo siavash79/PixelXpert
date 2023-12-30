@@ -10,6 +10,7 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,17 +76,19 @@ public class BatteryDataProvider extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				mIsFastCharging = callMethod(param.thisObject, "getChargingSpeed", mContext).equals(CHARGING_FAST);
-				onBatteryStatusChanged((int)getObjectField(param.thisObject, "status"));
+				if(param.args.length > 0) {
+					onBatteryStatusChanged((int) getObjectField(param.thisObject, "status"), (Intent) param.args[0]);
+				}
 			}
 		});
 	}
 
-	private void onBatteryStatusChanged(int status) {
+	private void onBatteryStatusChanged(int status, Intent intent) {
 		for(BatteryStatusCallback callback : mStatusCallbacks)
 		{
 			try
 			{
-				callback.onBatteryStatusChanged(status);
+				callback.onBatteryStatusChanged(status, intent);
 			}
 			catch (Throwable ignored){}
 		}
@@ -160,7 +163,7 @@ public class BatteryDataProvider extends XposedModPack {
 
 	public interface BatteryStatusCallback
 	{
-		void onBatteryStatusChanged(int batteryStatus);
+		void onBatteryStatusChanged(int batteryStatus, Intent batteryStatusIntent);
 	}
 }
 

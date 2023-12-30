@@ -11,12 +11,12 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findFirstMethodByName;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -182,7 +182,6 @@ public class KeyguardMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		Class<?> CarrierTextControllerClass = findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
 		Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
-		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpparam.classLoader);
 		Class<?> KeyguardIndicationControllerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
@@ -202,7 +201,7 @@ public class KeyguardMods extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(ForceAODwCharging) {
-					param.setResult((boolean) param.getResult() || BatteryStyleManager.charging);
+					param.setResult((boolean) param.getResult() || isCharging());
 				}
 			}
 		});
@@ -377,17 +376,10 @@ public class KeyguardMods extends XposedModPack {
 			hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", powerIndicationHook);
 		}
 
-		hookAllConstructors(BatteryStatusClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				try {
-					Intent batteryInfoIntent = (Intent) param.args[0];
-
-					max_charging_current = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_CURRENT, 0) / 1000000f;
-					max_charging_voltage = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_VOLTAGE, 0) / 1000000f;
-					temperature = batteryInfoIntent.getIntExtra(EXTRA_TEMPERATURE, 0) / 10f;
-				} catch (Throwable ignored){}
-			}
+		BatteryDataProvider.registerStatusCallback((batteryStatus, batteryStatusIntent) -> {
+			max_charging_current = batteryStatusIntent.getIntExtra(EXTRA_MAX_CHARGING_CURRENT, 0) / 1000000f;
+			max_charging_voltage = batteryStatusIntent.getIntExtra(EXTRA_MAX_CHARGING_VOLTAGE, 0) / 1000000f;
+			temperature = batteryStatusIntent.getIntExtra(EXTRA_TEMPERATURE, 0) / 10f;
 		});
 		//endregion
 

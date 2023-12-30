@@ -1,5 +1,9 @@
 package sh.siava.pixelxpert.modpacks.utils.batteryStyles;
 
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.getCurrentLevel;
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isFastCharging;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
@@ -20,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider;
 import sh.siava.pixelxpert.modpacks.systemui.StatusbarMods;
 
 public class BatteryBarView extends FrameLayout {
@@ -34,17 +39,12 @@ public class BatteryBarView extends FrameLayout {
 	private boolean isCenterBased = false;
 	private int barHeight = 10;
 	private final ImageView barView;
-	private int batteryPCT;
 	private boolean onTop = true;
-	private static int initialLevel = 0;
-	private static boolean initialCharging = false;
 	@SuppressLint("StaticFieldLeak")
 	private static BatteryBarView instance = null;
-	private static boolean isCharging = false;
-	private static boolean isFastCharging = false;
 	private boolean onlyWhileCharging = false;
-	private boolean isEnabled = true;
-	private boolean isHidden = false;
+	private boolean mIsEnabled = true;
+	private boolean mIsHidden = false;
 	private static List<Float> batteryLevels = Arrays.asList(20f, 40f);
 	private static int[] batteryColors = new int[]{Color.RED, Color.YELLOW};
 	private static int chargingColor = Color.WHITE;
@@ -74,13 +74,6 @@ public class BatteryBarView extends FrameLayout {
 		refreshLayout();
 	}
 
-	public void setBatteryLevel(int level, boolean charging) {
-		isCharging = charging;
-		if (!charging) setIsFastCharging(false);
-		batteryPCT = level;
-		refreshLayout();
-	}
-
 	@Override
 	public void onAttachedToWindow() {
 		super.onAttachedToWindow();
@@ -101,7 +94,7 @@ public class BatteryBarView extends FrameLayout {
 	}
 
 	private LayoutParams maskLayoutParams() {
-		LayoutParams result = new LayoutParams(Math.round(getWidth() * batteryPCT / 100f), ViewGroup.LayoutParams.MATCH_PARENT);
+		LayoutParams result = new LayoutParams(Math.round(getWidth() * getCurrentLevel() / 100f), ViewGroup.LayoutParams.MATCH_PARENT);
 		result.gravity = (isCenterBased) ? Gravity.CENTER : Gravity.START;
 		return result;
 	}
@@ -117,9 +110,6 @@ public class BatteryBarView extends FrameLayout {
 		super(context);
 		instance = this;
 		this.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-
-		batteryPCT = initialLevel;
-		isCharging = initialCharging;
 
 		mDrawable.setShape(new RectShape());
 		this.setSingleColorTone(singleColorTone);
@@ -141,8 +131,10 @@ public class BatteryBarView extends FrameLayout {
 		StatusbarMods.registerClockVisibilityCallback(this::setVisible);
 
 		refreshLayout();
-	}
 
+		BatteryBarView instance = this;
+		BatteryDataProvider.registerInfoCallback(() -> instance.post(instance::refreshLayout));
+	}
 	@Override
 	public void setLayoutDirection(int direction) {
 		super.setLayoutDirection(direction);
@@ -180,18 +172,18 @@ public class BatteryBarView extends FrameLayout {
 		mPaint.setShader(null);
 		mDrawable.setIntrinsicWidth(lenX);
 		mDrawable.setIntrinsicHeight(lenY);
-		if (isFastCharging && indicateFastCharging) //fast charging color
+		if (isFastCharging() && indicateFastCharging) //fast charging color
 		{
 			mPaint.setColor(fastChargingColor);
-		} else if (isCharging && indicateCharging) //normal charging color
+		} else if (isCharging() && indicateCharging) //normal charging color
 		{
 			mPaint.setColor(chargingColor);
 		} else if (!colorful || shadeColors == null) {                    //not charging color
 			for (int i = 0; i < batteryLevels.size(); i++) {
-				if (batteryPCT <= batteryLevels.get(i)) {
+				if (getCurrentLevel() <= batteryLevels.get(i)) {
 					if (transitColors && i > 0) {
 						float range = batteryLevels.get(i) - batteryLevels.get(i - 1);
-						float currentPos = batteryPCT - batteryLevels.get(i - 1);
+						float currentPos = getCurrentLevel() - batteryLevels.get(i - 1);
 						float ratio = currentPos / range;
 						mPaint.setColor(ColorUtils.blendARGB(batteryColors[i - 1], batteryColors[i], ratio));
 					} else {
@@ -242,29 +234,20 @@ public class BatteryBarView extends FrameLayout {
 	}
 
 	public void setEnabled(boolean enabled) {
-		this.isEnabled = enabled;
+		this.mIsEnabled = enabled;
 		refreshVisibility();
 	}
 
 	public void setVisible(boolean visible) {
-		this.isHidden = !visible;
+		this.mIsHidden = !visible;
 		refreshVisibility();
 	}
 
 	private void refreshVisibility() {
-		if (!isEnabled || isHidden || (onlyWhileCharging && !isCharging)) {
+		if (!mIsEnabled || mIsHidden || (onlyWhileCharging && !isCharging())) {
 			barView.setVisibility(GONE);
 		} else {
 			barView.setVisibility(VISIBLE);
-		}
-	}
-
-
-	public static void setStaticLevel(int level, boolean charging) {
-		initialLevel = level;
-		initialCharging = charging;
-		if (instance != null) {
-			instance.post(() -> instance.setBatteryLevel(level, charging));
 		}
 	}
 
@@ -279,16 +262,6 @@ public class BatteryBarView extends FrameLayout {
 
 	public static boolean hasInstance() {
 		return (instance != null);
-	}
-
-	public static void setIsFastCharging(boolean isFast) {
-		if (isFast != isFastCharging) {
-			isFastCharging = isFast;
-			if (isFast) isCharging = true;
-			if (hasInstance()) {
-				instance.refreshLayout();
-			}
-		}
 	}
 
 	public void setCenterBased(boolean bbSetCentered) {

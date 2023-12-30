@@ -13,6 +13,8 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.BATTERY_STATUS_DISCHARGING;
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -41,7 +43,6 @@ public class QSFooterManager extends XposedModPack {
 	private final StringFormatter stringFormatter = new StringFormatter();
 
 	private TextView mChargingIndicator;
-	private boolean mCharging = false;
 	private boolean mQSOpen = false;
 	private static boolean ChargingInfoOnQSEnabled = false;
 	private LinearLayout mQSFooterContainer;
@@ -156,15 +157,10 @@ public class QSFooterManager extends XposedModPack {
 
 		mChargingIndicator.setText(KeyguardMods.getPowerIndicationString());
 
-		BatteryInfoUpdateIndicator.registerCallback(batteryStatus -> {
-			if(ChargingInfoOnQSEnabled && batteryStatus != BatteryInfoUpdateIndicator.BATTERY_STATUS_DISCHARGING)
+		BatteryDataProvider.registerStatusCallback(batteryStatus -> {
+			if(ChargingInfoOnQSEnabled && batteryStatus != BATTERY_STATUS_DISCHARGING)
 			{
 				mChargingIndicator.setText(KeyguardMods.getPowerIndicationString());
-				mCharging = true;
-			}
-			else
-			{
-				mCharging = false;
 			}
 			setChargingIndicatorVisibility();
 		});
@@ -194,7 +190,7 @@ public class QSFooterManager extends XposedModPack {
 
 	public void setChargingIndicatorVisibility()
 	{
-		mChargingIndicator.setVisibility(mCharging && mQSOpen
+		mChargingIndicator.setVisibility(isCharging() && mQSOpen
 				? VISIBLE
 				: GONE);
 	}

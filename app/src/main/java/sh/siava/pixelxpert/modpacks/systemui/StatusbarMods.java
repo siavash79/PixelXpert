@@ -32,7 +32,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Message;
 import android.os.UserHandle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
@@ -87,11 +86,6 @@ import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class StatusbarMods extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
-
-	//region battery
-	public static final int CHARGING_FAST = 2;
-	//endregion
-
 	//region Clock
 	public static final int POSITION_LEFT = 0;
 	public static final int POSITION_CENTER = 1;
@@ -100,7 +94,6 @@ public class StatusbarMods extends XposedModPack {
 
 	private static final int AM_PM_STYLE_SMALL = 1;
 	private static final int AM_PM_STYLE_GONE = 2;
-	private static final int MSG_BATTERY_UPDATE = 302;
 	private int leftClockPadding = 0, rightClockPadding = 0;
 	private static int clockPosition = POSITION_LEFT;
 	private static int mAmPmStyle = AM_PM_STYLE_GONE;
@@ -513,7 +506,7 @@ public class StatusbarMods extends XposedModPack {
 //		Class<?> StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 		Class<?> PrivacyItemControllerClass = findClass("com.android.systemui.privacy.PrivacyItemController", lpparam.classLoader);
-		Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
+//		Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
 		Class<?> TunerServiceImplClass = findClass("com.android.systemui.tuner.TunerServiceImpl", lpparam.classLoader);
 		Class<?> ConnectivityCallbackHandlerClass = findClass("com.android.systemui.statusbar.connectivity.CallbackHandler", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
@@ -641,32 +634,6 @@ public class StatusbarMods extends XposedModPack {
 
 		//endregion
 
-		//setting charing status for batterybar and batteryicon
-
-		hookAllConstructors(KeyguardUpdateMonitorClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				Object handler = getObjectField(param.thisObject, "mHandler");
-
-				hookAllMethods(handler.getClass(), "handleMessage", new XC_MethodHook() {
-					@Override
-					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						Message msg = (Message) param.args[0];
-						if(msg.what == MSG_BATTERY_UPDATE)
-						{
-							int mChargingSpeed = (int) callMethod(msg.obj, "getChargingSpeed", mContext);
-							if (mChargingSpeed == CHARGING_FAST) {
-								BatteryBarView.setIsFastCharging(true);
-								BatteryStyleManager.setIsFastCharging(true);
-							} else {
-								BatteryBarView.setIsFastCharging(false);
-								BatteryStyleManager.setIsFastCharging(false);
-							}
-						}
-					}
-				});
-			}
-		});
 		//getting statusbar class for further use
 		hookAllConstructors(CollapsedStatusBarFragmentClass, new XC_MethodHook() {
 			@Override

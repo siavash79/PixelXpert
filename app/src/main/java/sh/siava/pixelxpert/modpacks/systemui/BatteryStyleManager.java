@@ -4,15 +4,10 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
-import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookConstructor;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
-import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
-import static de.robv.android.xposed.XposedHelpers.getBooleanField;
-import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
@@ -36,7 +31,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.pixelxpert.modpacks.utils.batteryStyles.BatteryBarView;
 import sh.siava.pixelxpert.modpacks.utils.batteryStyles.BatteryDrawable;
 import sh.siava.pixelxpert.modpacks.utils.batteryStyles.CircleBatteryDrawable;
 import sh.siava.pixelxpert.modpacks.utils.batteryStyles.CircleFilledBatteryDrawable;
@@ -53,26 +47,13 @@ public class BatteryStyleManager extends XposedModPack {
 	public static int mBatteryStyle = 1;
 	public static boolean ShowPercent = false;
 	public static int scaleFactor = 100;
-	private static boolean isFastCharging = false;
 	private static int BatteryIconOpacity = 100;
 	private static boolean BatteryChargingAnimationEnabled = true;
 	private static final ArrayList<Object> batteryViews = new ArrayList<>();
-	private Object BatteryController;
 	public static boolean charging = false;
 
 	public BatteryStyleManager(Context context) {
 		super(context);
-	}
-
-	public static void setIsFastCharging(boolean isFastCharging) {
-		BatteryStyleManager.isFastCharging = isFastCharging;
-		for (Object view : batteryViews) {
-			try {
-				BatteryDrawable drawable = (BatteryDrawable) getAdditionalInstanceField(view, "mBatteryDrawable");
-				drawable.setFastCharging(isFastCharging);
-			} catch (Throwable ignored) {
-			} //it's probably default battery. no action needed
-		}
 	}
 
 	public void updatePrefs(String... Key) {
@@ -90,26 +71,11 @@ public class BatteryStyleManager extends XposedModPack {
 			for (Object view : batteryViews) //destroy old drawables and make new ones :D
 			{
 				ImageView mBatteryIconView = (ImageView) getObjectField(view, "mBatteryIconView");
-				boolean mCharging;
-
-				try
-				{ //A14
-					mCharging = (boolean) callMethod(view, "isCharging");
-				}
-				catch (Throwable ignored)
-				{ //A13
-					mCharging = (boolean) getObjectField(view, "mCharging");
-				}
-
-				int mLevel = (int) getObjectField(view, "mLevel");
 
 				if (customBatteryEnabled) {
 					BatteryDrawable newDrawable = getNewDrawable(mContext);
 					mBatteryIconView.setImageDrawable(newDrawable);
 					setAdditionalInstanceField(view, "mBatteryDrawable", newDrawable);
-					newDrawable.setBatteryLevel(mLevel);
-					newDrawable.setCharging(mCharging);
-					BatteryBarView.setStaticLevel(mLevel, mCharging);
 				} else {
 					try {
 						mBatteryIconView.setImageDrawable(
@@ -163,7 +129,7 @@ public class BatteryStyleManager extends XposedModPack {
 			drawable.setShowPercent(ShowPercent);
 			drawable.setAlpha(Math.round(BatteryIconOpacity * 2.55f));
 			drawable.setChargingAnimationEnabled(BatteryChargingAnimationEnabled);
-			drawable.refresh();
+			drawable.invalidateSelf();
 		} catch (Throwable ignored) {} //it's probably the default battery. no action needed
 	}
 
@@ -178,60 +144,9 @@ public class BatteryStyleManager extends XposedModPack {
 			}
 		});
 
-		Class<?> BatteryControllerImplClass = findClass("com.android.systemui.statusbar.policy.BatteryControllerImpl", lpparam.classLoader);
-//		Class<?> BatteryMeterViewControllerClass = findClassIfExists("com.android.systemui.battery.BatteryMeterViewController", lpparam.classLoader);
+		BatteryDataProvider.registerInfoCallback(BatteryStyleManager::scaleAll);
+
 		Class<?> BatteryMeterViewClass = findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
-
-		hookAllConstructors(BatteryControllerImplClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				BatteryController = param.thisObject;
-			}
-		});
-
-		hookAllMethods(BatteryControllerImplClass, "fireBatteryUnknownStateChanged", new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!customBatteryEnabled) return;
-
-				for(Object view : batteryViews)
-				{
-					BatteryDrawable mBatteryDrawable = (BatteryDrawable) getAdditionalInstanceField(view, "mBatteryDrawable");
-					mBatteryDrawable.setMeterStyle(mBatteryStyle);
-					callMethod(view, "setImageDrawable", mBatteryDrawable);
-				}
-			}
-		});
-
-		XC_MethodHook batteryDataRefreshHook = new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				int level = getIntField(param.thisObject, "mLevel");
-				charging = getBooleanField(param.thisObject, "mPluggedIn")
-						|| getBooleanField(param.thisObject, "mCharging")
-						|| getBooleanField(param.thisObject, "mWirelessCharging");
-
-				boolean powerSave = getBooleanField(param.thisObject, "mPowerSave");
-
-				//Feeding battery bar
-				BatteryBarView.setStaticLevel(level, charging);
-
-				if (!customBatteryEnabled) return;
-				for(Object view : batteryViews)
-				{
-					((View) view).post(() -> { //we might be running this outside the UI thread
-						BatteryDrawable drawable = (BatteryDrawable) getAdditionalInstanceField(view, "mBatteryDrawable");
-						drawable.setBatteryLevel(level);
-						drawable.setCharging(charging);
-						drawable.setPowerSaving(powerSave);
-						scale(view);
-					});
-				}
-			}
-		};
-
-		hookAllMethods(BatteryControllerImplClass, "fireBatteryLevelChanged", batteryDataRefreshHook);
-		hookAllMethods(BatteryControllerImplClass, "firePowerSaveChanged", batteryDataRefreshHook);
 
 		View.OnAttachStateChangeListener listener = new View.OnAttachStateChangeListener() {
 			@Override
@@ -242,7 +157,7 @@ public class BatteryStyleManager extends XposedModPack {
 					try
 					{
 						Thread.sleep(500);
-						callMethod(BatteryController, "fireBatteryLevelChanged");
+						BatteryDataProvider.getInstance().informInfoCallbacks();
 					}catch (Throwable ignored) {}
 				}).start();
 			}
@@ -252,6 +167,7 @@ public class BatteryStyleManager extends XposedModPack {
 				batteryViews.remove(v);
 			}
 		};
+
 
 		hookAllConstructors(BatteryMeterViewClass, new XC_MethodHook() {
 			@Override
@@ -267,8 +183,6 @@ public class BatteryStyleManager extends XposedModPack {
 
 				mBatteryIconView.setImageDrawable(mBatteryDrawable);
 				setObjectField(param.thisObject, "mBatteryIconView", mBatteryIconView);
-
-				callMethod(BatteryController, "fireBatteryLevelChanged"); //force refresh icons during systemui start
 			}
 		});
 
@@ -286,25 +200,34 @@ public class BatteryStyleManager extends XposedModPack {
 	}
 
 	private BatteryDrawable getNewDrawable(Context context) {
-		BatteryDrawable mBatteryDrawable = null;
+		BatteryDrawable batteryDrawable = null;
 		switch (mBatteryStyle) {
 			case 1:
 			case 2:
-				mBatteryDrawable = new CircleBatteryDrawable(context, frameColor);
+				batteryDrawable = new CircleBatteryDrawable(context, frameColor);
 				break;
 			case 3:
-				mBatteryDrawable = new CircleFilledBatteryDrawable(context, frameColor);
+				batteryDrawable = new CircleFilledBatteryDrawable(context, frameColor);
 				break;
 			case 99:
-				mBatteryDrawable = new HiddenBatteryDrawable();
+				batteryDrawable = new HiddenBatteryDrawable();
 		}
-		if (mBatteryDrawable != null) {
-			mBatteryDrawable.setShowPercent(ShowPercent);
-			mBatteryDrawable.setMeterStyle(mBatteryStyle);
-			mBatteryDrawable.setFastCharging(isFastCharging);
-			mBatteryDrawable.setAlpha(Math.round(BatteryIconOpacity * 2.55f));
+		if (batteryDrawable != null) {
+			batteryDrawable.setShowPercent(ShowPercent);
+			batteryDrawable.setMeterStyle(mBatteryStyle);
+			batteryDrawable.setAlpha(Math.round(BatteryIconOpacity * 2.55f));
+
+			batteryDrawable.invalidateSelf();
 		}
-		return mBatteryDrawable;
+		return batteryDrawable;
+	}
+
+	public static void scaleAll()
+	{
+		for(Object batteryView : batteryViews)
+		{
+			scale(batteryView);
+		}
 	}
 
 	public static void scale(Object thisObject) {

@@ -194,13 +194,13 @@
 	<string name="qs_pulldown_switch_title">Kéo xuống nhanh bảng cài đặt từ thanh trạng thái</string>
 	<string name="qs_pulldown_side_title">Mặt kéo xuống nhanh</string>
 	<string name="qs_pulldown_category">Kéo xuống nhanh</string>
-	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
+	<string name="qs_pullup_switch_title">Đóng cài đặt nhanh bằng một lần vuốt</string>
 	<string name="qs_haptic_switch_title">Rung khi chạm vào ô cài đặt nhanh</string>
 	<string name="vibration_type_touch">Cường độ được xác định bởi cài đặt rung khi chạm vào hệ thống</string>
 	<string name="qs_tile_qty_portrait">Theo hướng dọc</string>
 	<string name="qs_tile_qty_landscape">Theo hướng ngang</string>
-	<string name="qs_mod_category_misc_title">Miscellaneous</string>
-	<string name="charging_info_on_qs">Show charging info on QS panel</string>
+	<string name="qs_mod_category_misc_title">Tuỳ chỉnh nhỏ khác</string>
+	<string name="charging_info_on_qs">Hiển thị thông tin sạc trên bảng QS</string>
 	<string name="qs_rows_number">Số hàng bảng cài đặt nhanh</string>
 	<string name="qs_cols_number">Số cột bảng cài đặt nhanh</string>
 	<string name="qqs_tiles_number">Tối đa số ô trong bảng cài đặt nhanh (tối đa 2 hàng)</string>

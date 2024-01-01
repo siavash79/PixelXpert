@@ -509,11 +509,30 @@ public class StatusbarMods extends XposedModPack {
 //		Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
 		Class<?> TunerServiceImplClass = findClass("com.android.systemui.tuner.TunerServiceImpl", lpparam.classLoader);
 		Class<?> ConnectivityCallbackHandlerClass = findClass("com.android.systemui.statusbar.connectivity.CallbackHandler", lpparam.classLoader);
+		Class<?> HeadsUpStatusBarViewClass = findClass("com.android.systemui.statusbar.HeadsUpStatusBarView", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
 		//endregion
 
 		initSwitchIcon();
+
+		// Placing the headsUp text right next to the icon. if it's double row, it needs to shift down
+		hookAllMethods(HeadsUpStatusBarViewClass, "onLayout", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				View headsUpView = (View) param.thisObject;
+				int[] headsUpLocation = new int[2];
+				headsUpView.getLocationOnScreen(headsUpLocation);
+
+				int[] notificationContainerLocation = new int[2];
+				mNotificationIconContainer.getLocationOnScreen(notificationContainerLocation);
+
+				((View) getObjectField(param.thisObject, "mTextView"))
+						.setTranslationY(
+								(notificationContainerLocation[1] - headsUpLocation[1])
+										/ 2f);
+			}
+		});
 
 		//region combined signal icons
 		hookAllConstructors(TunerServiceImplClass, new XC_MethodHook() {
@@ -945,9 +964,11 @@ public class StatusbarMods extends XposedModPack {
 		mNotificationIconContainer = mStatusBar.findViewById(mContext.getResources().getIdentifier("notificationIcons", "id", mContext.getPackageName()));
 
 		mNotificationContainerContainer = new LinearLayout(mContext);
+		mNotificationContainerContainer.setClipChildren(false); //allowing headsup icon to go beyond
 
 		if (mLeftVerticalSplitContainer == null) {
 			mLeftVerticalSplitContainer = new LinearLayout(mContext);
+			mLeftVerticalSplitContainer.setClipChildren(false); //allowing headsup icon to go beyond
 		} else {
 			mLeftVerticalSplitContainer.removeAllViews();
 			if (mLeftVerticalSplitContainer.getParent() != null)

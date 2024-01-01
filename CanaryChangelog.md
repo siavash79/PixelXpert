@@ -1,3 +1,7 @@
+**canary-317**  
+- Happy 2024 everyone!  
+- Fixed heads-up notification icon not shown correctly  
+  
 **canary-316**  
 - Fixed QS footer actions layout margins  
   

@@ -35,6 +35,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
+import java.lang.ref.WeakReference;
+
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.ResourceManager;
 import sh.siava.pixelxpert.modpacks.systemui.StatusbarMods;
@@ -82,12 +84,10 @@ public class NetworkTraffic extends FrameLayout {
 		lastParamUpdate = SystemClock.elapsedRealtime();
 	}
 
-	@SuppressLint("StaticFieldLeak")
-	private static NetworkTraffic SBInstance = null;
+	private static WeakReference<NetworkTraffic> SBInstance = null;
 	private static int SBTintColor;
 
-	@SuppressLint("StaticFieldLeak")
-	private static NetworkTraffic QSInstance = null;
+	private static WeakReference<NetworkTraffic> QSInstance = null;
 	private static int QSTintColor;
 
 	private final LinearLayout iconLayout;
@@ -192,11 +192,11 @@ public class NetworkTraffic extends FrameLayout {
 	};
 
 	public static NetworkTraffic getInstance(Context context, boolean onStatusbar) {
-		NetworkTraffic instance = (onStatusbar) ? SBInstance : QSInstance;
-		if (instance == null) {
+		WeakReference<NetworkTraffic> instance = (onStatusbar) ? SBInstance : QSInstance;
+		if (instance == null || instance.get() == null) {
 			new NetworkTraffic(context, onStatusbar);
 		}
-		return (onStatusbar) ? SBInstance : QSInstance;
+		return (onStatusbar) ? SBInstance.get() : QSInstance.get();
 	}
 
 	private void hide(boolean trafficRelated) {
@@ -252,14 +252,14 @@ public class NetworkTraffic extends FrameLayout {
 
 		isSBInstance = onStatusbar;
 		if (onStatusbar) {
-			SBInstance = this;
+			SBInstance = new WeakReference<>(this);
 			setTintColor(StatusbarMods.clockColor, true);
 			StatusbarMods.registerClockVisibilityCallback(visible -> {
 				if (visible) makeVisible(false);
 				else hide(false);
 			});
 		} else {
-			QSInstance = this;
+			QSInstance = new WeakReference<>(this);
 		}
 	}
 
@@ -382,13 +382,13 @@ public class NetworkTraffic extends FrameLayout {
 		if ((SBTintColor != color && isSBInstance) || (QSTintColor != color && !isSBInstance)) {
 			if (isSBInstance) {
 				SBTintColor = color;
-				if (SBInstance != null) {
-					SBInstance.updateTrafficDrawable();
+				if (SBInstance != null && SBInstance.get() != null) {
+					SBInstance.get().updateTrafficDrawable();
 				}
 			} else {
 				QSTintColor = color;
-				if (QSInstance != null) {
-					QSInstance.updateTrafficDrawable();
+				if (QSInstance != null && QSInstance.get() != null) {
+					QSInstance.get().updateTrafficDrawable();
 				}
 			}
 		}

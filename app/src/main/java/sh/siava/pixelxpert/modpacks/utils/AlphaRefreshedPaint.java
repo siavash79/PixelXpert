@@ -2,7 +2,8 @@ package sh.siava.pixelxpert.modpacks.utils;
 
 import android.graphics.Paint;
 
-//When setting a paint's color, alpha gets reset... naturally. So we refresh the alpha in this class
+/** When setting a paint's color, alpha gets reset... naturally. So this is kind of paint that remembers its alpha and keeps it intact
+ */
 public class AlphaRefreshedPaint extends Paint {
 	public AlphaRefreshedPaint(int flag) {
 		super(flag);

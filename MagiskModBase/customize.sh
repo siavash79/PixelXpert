@@ -1,4 +1,5 @@
 PKGNAME="sh.siava.pixelxpert"
+PKGPATH="/system/priv-app/PixelXpert/PixelXpert.apk"
 LSPDDBPATH="/data/adb/lspd/config/modules_config.db"
 MAGISKDBPATH="/data/adb/magisk.db"
 
@@ -95,13 +96,6 @@ activateModuleLSPD()
 
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"$PKGNAME\",0);" && runSQL
 }
-
-getPackagePath()
-{
-	PKGPATH=$(pm path $PKGNAME | cut -d ":" -f 2)
-}
-
-getPackagePath
 
 prepareSQL
 

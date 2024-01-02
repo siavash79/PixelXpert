@@ -1,11 +1,13 @@
 package sh.siava.pixelxpert.modpacks.utils.toolkit;
 
+import static de.robv.android.xposed.XposedBridge.hookMethod;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ObjectTools.concatArrays;
 
+import android.util.ArraySet;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -53,7 +55,7 @@ public class ReflectionTools {
 		};
 
 		Set<XC_MethodHook.Unhook> result = XposedBridge.hookAllMethods(clazz, method, hook);
-		if(true) {
+		if(false) {
 			Throwable t = new Throwable();
 			log(t.getStackTrace()[1].getClassName() + " " + t.getStackTrace()[1].getLineNumber() + " hook size " + result.size());
 		}
@@ -63,13 +65,39 @@ public class ReflectionTools {
 	public static Set<XC_MethodHook.Unhook> hookAllConstructors(Class<?> clazz, XC_MethodHook callback)
 	{
 		Set<XC_MethodHook.Unhook> result = XposedBridge.hookAllConstructors(clazz, callback);
-		if(true) {
+		if(false) {
 			Throwable t = new Throwable();
 			log(t.getStackTrace()[1].getClassName() + " " + t.getStackTrace()[1].getLineNumber() + " hook size " + result.size());
 		}
 		return result;
 	}
 
+	public static Set<XC_MethodHook.Unhook> hookAllMethodsMatchPattern(Class<?> clazz, String namePatter, XC_MethodHook callback)
+	{
+		Set<XC_MethodHook.Unhook> result = new ArraySet<>();
+
+		for(Method method : findMethods(clazz, namePatter))
+		{
+			result.add(hookMethod(method, callback));
+		}
+		return result;
+	}
+
+	public static Set<Method> findMethods(Class<?> clazz, String namePattern)
+	{
+		Set<Method> result = new ArraySet<>();
+
+		Method[] methods = clazz.getMethods();
+
+		for(Method method : methods)
+		{
+			if(Pattern.matches(namePattern, method.getName()))
+			{
+				result.add(method);
+			}
+		}
+		return result;
+	}
 
 	public static Method findMethod(Class<?> clazz, String namePattern)
 	{

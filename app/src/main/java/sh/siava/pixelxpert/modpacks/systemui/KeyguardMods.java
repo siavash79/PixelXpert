@@ -13,6 +13,7 @@ import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findFirstMethodByName;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.hookAllMethodsMatchPattern;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
@@ -384,7 +385,7 @@ public class KeyguardMods extends XposedModPack {
 		//endregion
 
 		//region keyguardDimmer
-		hookAllMethods(ScrimControllerClass, "scheduleUpdate", new XC_MethodHook() {
+		hookAllMethodsMatchPattern(ScrimControllerClass, "scheduleUpdate.*", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if (KeyGuardDimAmount < 0 || KeyGuardDimAmount > 1) return;

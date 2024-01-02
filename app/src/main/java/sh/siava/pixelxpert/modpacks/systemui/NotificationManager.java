@@ -40,18 +40,25 @@ public class NotificationManager extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
-
-		Class<?> HeadsUpManagerClass = findClass("com.android.systemui.statusbar.policy.HeadsUpManager", lpparam.classLoader);
-
-		hookAllConstructors(HeadsUpManagerClass, new XC_MethodHook() {
+		XC_MethodHook headsupFinder = new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				HeadsUpManager = param.thisObject;
 
 				applyDurations();
 			}
-		});
+		};
+
+		Class<?> HeadsUpManagerClass = findClass("com.android.systemui.statusbar.policy.HeadsUpManager", lpparam.classLoader);
+		hookAllConstructors(HeadsUpManagerClass, headsupFinder); //interface in 14QPR2, class in older
+
+		try //A14 QPR2
+		{
+			Class<?> BaseHeadsUpManagerClass = findClass("com.android.systemui.statusbar.policy.BaseHeadsUpManager", lpparam.classLoader);
+			hookAllConstructors(BaseHeadsUpManagerClass, headsupFinder);
+		}
+		catch (Throwable ignored){}
+
 
 		hookAllMethods(StatusBarNotification.class, "isNonDismissable", new XC_MethodHook() {
 			@Override

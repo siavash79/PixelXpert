@@ -8,8 +8,6 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
-import static de.robv.android.xposed.XposedHelpers.getFloatField;
-import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
@@ -19,7 +17,6 @@ import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isChargi
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -43,11 +40,7 @@ public class QSFooterManager extends XposedModPack {
 	private final StringFormatter stringFormatter = new StringFormatter();
 
 	private TextView mChargingIndicator;
-	private boolean mQSOpen = false;
 	private static boolean ChargingInfoOnQSEnabled = false;
-	private LinearLayout mQSFooterContainer;
-	private Boolean mIsComposeFooterAction = null;
-
 
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
@@ -56,10 +49,8 @@ public class QSFooterManager extends XposedModPack {
 
 		ChargingInfoOnQSEnabled = Xprefs.getBoolean("ChargingInfoOnQSEnabled", true);
 
-		if(!ChargingInfoOnQSEnabled)
-			mQSOpen = false;
-
 		setQSFooterText();
+		setChargingIndicatorVisibility();
 	}
 
 	public QSFooterManager(Context context) {
@@ -96,66 +87,36 @@ public class QSFooterManager extends XposedModPack {
 
 			}
 		});
-
-		hookAllMethods(QSContainerImplClass, "updateExpansion", new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(ChargingInfoOnQSEnabled)
-				{
-					mQSOpen = getFloatField(param.thisObject, "mQsExpansion") != 0;
-					setChargingIndicatorVisibility();
-				}
-			}
-		});
-
-		hookAllMethods(QSContainerImplClass, "updateResources", new XC_MethodHook() {
-			@SuppressLint("DiscouragedApi")
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mQSFooterContainer.getLayoutParams();
-				if(mIsComposeFooterAction == null)
-				{
-					mIsComposeFooterAction = ((View)param.thisObject).findViewById(mContext.getResources().getIdentifier("qs_footer_actions", "id", mContext.getPackageName())).getClass().getName().contains("Compose");
-				}
-				int margin = mIsComposeFooterAction
-						? -1 * getIntField(param.thisObject, "mTilesPageMargin")
-						: 0;
-				lp.leftMargin = margin;
-				lp.rightMargin = margin;
-			}
-		});
-
 	}
 
 	private void createQSBatteryIndicator(FrameLayout QSContainerImpl) {
 		Resources res = mContext.getResources();
 
 		@SuppressLint("DiscouragedApi")
-		View footerActionsView = QSContainerImpl.findViewById(res.getIdentifier("qs_footer_actions", "id", mContext.getPackageName()));
-
-		mQSFooterContainer = new LinearLayout(mContext);
-		mQSFooterContainer.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout QSPanelView = QSContainerImpl.findViewById(res.getIdentifier("quick_settings_panel", "id", mContext.getPackageName()));
 
 		mChargingIndicator = new TextView(mContext);
 		mChargingIndicator.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
-		mChargingIndicator.setVisibility(GONE);
 
 		mChargingIndicator.setTextColor(SystemUtils.isDarkMode() ? WHITE : BLACK);
 		mChargingIndicator.setMaxLines(2);
 
-		ViewGroup footerActionsParent = (ViewGroup)footerActionsView.getParent();
-		footerActionsParent.removeView(footerActionsView);
+		QSPanelView.setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
+			@Override
+			public void onChildViewAdded(View parent, View child) {
+				if(QSPanelView.indexOfChild(mChargingIndicator) < QSPanelView.getChildCount() - 1)
+				{
+					QSPanelView.removeView(mChargingIndicator);
+					QSPanelView.addView(mChargingIndicator);
+				}
+			}
 
-		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		lp.gravity = Gravity.BOTTOM;
-
-		mQSFooterContainer.addView(mChargingIndicator);
-		mQSFooterContainer.addView(footerActionsView);
-
-		QSContainerImpl.addView(mQSFooterContainer);
-		mQSFooterContainer.setLayoutParams(lp);
+			@Override
+			public void onChildViewRemoved(View parent, View child) {}
+		});
 
 		mChargingIndicator.setText(KeyguardMods.getPowerIndicationString());
+		setChargingIndicatorVisibility();
 
 		BatteryDataProvider.registerStatusCallback((batteryStatus, batteryStatusIntent) -> {
 			if(ChargingInfoOnQSEnabled && batteryStatus != BATTERY_STATUS_DISCHARGING)
@@ -164,7 +125,6 @@ public class QSFooterManager extends XposedModPack {
 			}
 			setChargingIndicatorVisibility();
 		});
-
 	}
 
 	private void setQSFooterText() {
@@ -190,7 +150,7 @@ public class QSFooterManager extends XposedModPack {
 
 	public void setChargingIndicatorVisibility()
 	{
-		mChargingIndicator.setVisibility(isCharging() && mQSOpen
+		mChargingIndicator.setVisibility(ChargingInfoOnQSEnabled && isCharging()
 				? VISIBLE
 				: GONE);
 	}

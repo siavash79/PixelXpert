@@ -1,3 +1,7 @@
+**canary-319**  
+- battery icon on QS: when charging, click will show charging info dialog  
+- Relocated QS charging info to avoid touch conflicts  
+  
 **canary-318**  
 - A14ap11: Fixed heads-up notification duration  
 - A14ap11: Fixed keyguard wallpaper dim  

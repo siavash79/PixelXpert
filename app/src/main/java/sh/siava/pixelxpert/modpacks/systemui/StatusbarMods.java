@@ -1,5 +1,6 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
+import static android.content.DialogInterface.BUTTON_NEUTRAL;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
@@ -18,13 +19,16 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.ResourceManager.modRes;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
@@ -71,6 +75,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.Constants;
+import sh.siava.pixelxpert.modpacks.ResourceManager;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.NetworkTraffic;
@@ -176,6 +181,7 @@ public class StatusbarMods extends XposedModPack {
 
 	private Class<?> StatusBarIconClass;
 	private Class<?> StatusBarIconHolderClass;
+	private Class<?> SystemUIDialogClass;
 	private Object volteStatusbarIconHolder;
 	private boolean telephonyCallbackRegistered = false;
 	private boolean lastVolteAvailable = false;
@@ -498,7 +504,7 @@ public class StatusbarMods extends XposedModPack {
 		//region needed classes
 		Class<?> QSSecurityFooterUtilsClass = findClass("com.android.systemui.qs.QSSecurityFooterUtils", lpparam.classLoader);
 		Class<?> KeyguardStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
-//        Class<?> QuickStatusBarHeaderControllerClass = findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
+//      Class<?> QuickStatusBarHeaderControllerClass = findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
 		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 		Class<?> PhoneStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
@@ -512,6 +518,7 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> HeadsUpStatusBarViewClass = findClass("com.android.systemui.statusbar.HeadsUpStatusBarView", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
+		SystemUIDialogClass = findClass("com.android.systemui.statusbar.phone.SystemUIDialog", lpparam.classLoader);
 		//endregion
 
 		initSwitchIcon();
@@ -1242,7 +1249,17 @@ public class StatusbarMods extends XposedModPack {
 				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", todayIntent, 0);
 			}
 			else if (name.endsWith("batteryRemainingIcon")) {
-				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(Intent.ACTION_POWER_USAGE_SUMMARY), 0);
+
+				if(BatteryDataProvider.isCharging())
+				{
+					try
+					{
+						showChargingDialog();
+						return;
+					}
+					catch (Throwable ignored){}
+				}
+				showBatteryPage();
 			}
 		}
 
@@ -1260,6 +1277,22 @@ public class StatusbarMods extends XposedModPack {
 			}
 			return false;
 		}
+	}
+
+	private void showChargingDialog() throws Throwable {
+		AlertDialog dialog = (AlertDialog) SystemUIDialogClass.getConstructor(Context.class).newInstance(mContext);
+
+		dialog.setMessage(KeyguardMods.getPowerIndicationString());
+
+		dialog.setButton(BUTTON_NEUTRAL,
+				modRes.getText(R.string.battery_info_button_title),
+				(dialog1, which) -> showBatteryPage());
+
+		dialog.show();
+	}
+
+	private void showBatteryPage() {
+		callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(Intent.ACTION_POWER_USAGE_SUMMARY), 0);
 	}
 	//endregion
 

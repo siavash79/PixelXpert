@@ -1,3 +1,7 @@
+**canary-318**  
+- A14ap11: Fixed heads-up notification duration  
+- A14ap11: Fixed keyguard wallpaper dim  
+  
 **canary-317**  
 - Happy 2024 everyone!  
 - Fixed heads-up notification icon not shown correctly  

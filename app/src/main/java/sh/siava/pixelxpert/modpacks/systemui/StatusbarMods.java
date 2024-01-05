@@ -28,7 +28,6 @@ import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
@@ -75,7 +74,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.modpacks.ResourceManager;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.NetworkTraffic;
@@ -516,12 +514,38 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> TunerServiceImplClass = findClass("com.android.systemui.tuner.TunerServiceImpl", lpparam.classLoader);
 		Class<?> ConnectivityCallbackHandlerClass = findClass("com.android.systemui.statusbar.connectivity.CallbackHandler", lpparam.classLoader);
 		Class<?> HeadsUpStatusBarViewClass = findClass("com.android.systemui.statusbar.HeadsUpStatusBarView", lpparam.classLoader);
+		Class<?> BatteryStatusChipClass = findClass("com.android.systemui.statusbar.BatteryStatusChip", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
 		SystemUIDialogClass = findClass("com.android.systemui.statusbar.phone.SystemUIDialog", lpparam.classLoader);
 		//endregion
 
 		initSwitchIcon();
+
+		//forcing a refresh on statusbar once the charging chip goes away to avoid layout issues
+		//only needed if chip is shown on lockscreen and device is unlocked quickly afterwards
+		hookAllConstructors(BatteryStatusChipClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				((View) param.thisObject).addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+					@Override
+					public void onViewAttachedToWindow(@NonNull View v) {}
+
+					@Override
+					public void onViewDetachedFromWindow(@NonNull View v) {
+						try {
+							Thread.sleep(200);
+							mStatusBar.post(() ->
+									{
+										mStatusBar.measure(View.MeasureSpec.makeMeasureSpec(mStatusBar.getMeasuredWidth(), View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(mStatusBar.getMeasuredHeight(), View.MeasureSpec.EXACTLY));
+										mStatusBar.layout(mStatusBar.getLeft(), mStatusBar.getTop(), mStatusBar.getRight(), mStatusBar.getBottom());
+									}
+							);
+						} catch (Throwable ignored) {}
+					}
+				});
+			}
+		});
 
 		// Placing the headsUp text right next to the icon. if it's double row, it needs to shift down
 		hookAllMethods(HeadsUpStatusBarViewClass, "onLayout", new XC_MethodHook() {

@@ -1,3 +1,6 @@
+**canary-320**  
+- fixed occasional statusbar layout glitches  
+  
 **canary-319**  
 - battery icon on QS: when charging, click will show charging info dialog  
 - Relocated QS charging info to avoid touch conflicts  

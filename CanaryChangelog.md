@@ -1,3 +1,6 @@
+**canary-321**  
+- fixed occasional statusbar layout glitches (agian!)  
+  
 **canary-320**  
 - fixed occasional statusbar layout glitches  
   

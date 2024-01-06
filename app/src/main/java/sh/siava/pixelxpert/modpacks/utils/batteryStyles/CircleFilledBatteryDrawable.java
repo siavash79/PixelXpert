@@ -220,7 +220,5 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	@Override
 	public void setChargingAnimationEnabled(boolean enabled) {
 		mChargingAnimationEnabled = enabled;
-
-		invalidateSelf();
 	}
 }

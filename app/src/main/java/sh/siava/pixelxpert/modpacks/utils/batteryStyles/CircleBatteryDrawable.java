@@ -129,8 +129,6 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	@Override
 	public void setChargingAnimationEnabled(boolean enabled) {
 		mChargingAnimationEnabled = enabled;
-
-		invalidateSelf();
 	}
 
 	private void refreshShadeColors()

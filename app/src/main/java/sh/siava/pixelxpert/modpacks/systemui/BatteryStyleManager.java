@@ -110,16 +110,16 @@ public class BatteryStyleManager extends XposedModPack {
 
 		BatteryDrawable.setStaticColor(batteryLevels, batteryColors, BIconIndicateCharging, batteryChargingColor, BIconIndicateFastCharging, batteryIconFastChargingColor, BIconTransitColors, BIconColorful);
 
-		refreshBatteryIcons();
+		refreshAllBatteryIcons();
 	}
 
-	private static void refreshBatteryIcons() {
+	private static void refreshAllBatteryIcons() {
 		for (Object view : batteryViews) {
-			updateBatteryViewValues(view);
+			updateBatteryViewValues((View) view);
 		}
 	}
 
-	private static void updateBatteryViewValues(Object view)
+	private static void updateBatteryViewValues(View view)
 	{
 		ImageView mBatteryIconView = (ImageView) getObjectField(view, "mBatteryIconView");
 		scale(mBatteryIconView);
@@ -134,16 +134,12 @@ public class BatteryStyleManager extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-		if (!lpparam.packageName.equals(listenPackage)) return;
-
 		findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				frameColor = (int) param.args[1];
 			}
 		});
-
-		BatteryDataProvider.registerInfoCallback(BatteryStyleManager::scaleAll);
 
 		Class<?> BatteryMeterViewClass = findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
 
@@ -152,13 +148,6 @@ public class BatteryStyleManager extends XposedModPack {
 			public void onViewAttachedToWindow(View view) {
 				batteryViews.add(view);
 				updateBatteryViewValues(view);
-				new Thread(() -> { //force refresh icons during systemui start - wait for the views to settle their properties
-					try
-					{
-						Thread.sleep(500);
-						BatteryDataProvider.refreshAllInfoCallbacks();
-					}catch (Throwable ignored) {}
-				}).start();
 			}
 
 			@Override
@@ -221,19 +210,6 @@ public class BatteryStyleManager extends XposedModPack {
 		return batteryDrawable;
 	}
 
-	public static void scaleAll()
-	{
-		for(Object batteryView : batteryViews)
-		{
-			scale(batteryView);
-		}
-	}
-
-	public static void scale(Object thisObject) {
-		ImageView mBatteryIconView = (ImageView) getObjectField(thisObject, "mBatteryIconView");
-		scale(mBatteryIconView);
-	}
-
 	@SuppressLint("DiscouragedApi")
 	public static void scale(ImageView mBatteryIconView) {
 		if (mBatteryIconView == null) {
@@ -248,14 +224,16 @@ public class BatteryStyleManager extends XposedModPack {
 		res.getValue(res.getIdentifier("status_bar_icon_scale_factor", "dimen", context.getPackageName()), typedValue, true);
 		float iconScaleFactor = typedValue.getFloat() * (scaleFactor / 100f);
 
-		int batteryHeight = res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName()));
-		int batteryWidth = res.getDimensionPixelSize(res.getIdentifier((customBatteryEnabled) ? "status_bar_battery_icon_height" : "status_bar_battery_icon_width", "dimen", context.getPackageName()));
+		int height = Math.round(res.getDimensionPixelSize(res.getIdentifier("status_bar_battery_icon_height", "dimen", context.getPackageName())) * iconScaleFactor);
+		int width = Math.round(res.getDimensionPixelSize(res.getIdentifier((customBatteryEnabled) ? "status_bar_battery_icon_height" : "status_bar_battery_icon_width", "dimen", context.getPackageName())) * iconScaleFactor);
 
-		ViewGroup.LayoutParams scaledLayoutParams = mBatteryIconView.getLayoutParams();
-		scaledLayoutParams.height = (int) (batteryHeight * iconScaleFactor);
-		scaledLayoutParams.width = (int) (batteryWidth * iconScaleFactor);
+		mBatteryIconView.post(() -> {
+			ViewGroup.LayoutParams scaledLayoutParams = mBatteryIconView.getLayoutParams();
+			scaledLayoutParams.height = height;
+			scaledLayoutParams.width = width;
 
-		mBatteryIconView.setLayoutParams(scaledLayoutParams);
+			mBatteryIconView.setLayoutParams(scaledLayoutParams);
+		});
 	}
 
 	@Override

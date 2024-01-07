@@ -301,6 +301,8 @@
 	<string name="statusbar_app_switch_icon">Mostra un\'icona sulla barra di stato quando è disponibile il passaggio</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Sbloccato per tutte le app tramite <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Goditelo!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibra alla risposta di una chiamata in uscita</string>
 	<string name="vibrate_on_call_drop_title">Vibra quando la chiamata si disconnette</string>

@@ -301,6 +301,8 @@
 	<string name="statusbar_app_switch_icon">Показывать значок в строке состояния, когда переключение доступно</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Разблокировано для всех приложений через <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Наслаждайтесь!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Вибрация при ответе на исходящий вызов</string>
 	<string name="vibrate_on_call_drop_title">Вибрация при отключении вызова</string>

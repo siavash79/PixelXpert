@@ -301,6 +301,8 @@
 	<string name="statusbar_app_switch_icon">Anahtarlama mevcut olduğunda durum çubuğunda bir simge göster</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Tüm uygulamalarda <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font> aracılığıyla kilidi açıldı: Keyfini çıkarın!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Pil bilgisi…</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Giden çağrı cevaplandığında titreştir</string>
 	<string name="vibrate_on_call_drop_title">Çağrı bağlantısı kesildiğinde titreştir</string>

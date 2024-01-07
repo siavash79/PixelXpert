@@ -194,13 +194,13 @@
 	<string name="qs_pulldown_switch_title">Deslize rápido para baixo desde a barra de estado</string>
 	<string name="qs_pulldown_side_title">Lado por onde deslizar</string>
 	<string name="qs_pulldown_category">Deslize rápido para baixo</string>
-	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
+	<string name="qs_pullup_switch_title">Fechar definições rápidas com um deslizar</string>
 	<string name="qs_haptic_switch_title">Vibrar ao tocar nos atalhos das DR</string>
 	<string name="vibration_type_touch">Intensidade definida pelas definições de vibração de toque do sistema</string>
 	<string name="qs_tile_qty_portrait">Em modo retrato</string>
 	<string name="qs_tile_qty_landscape">Em modo paisagem</string>
-	<string name="qs_mod_category_misc_title">Miscellaneous</string>
-	<string name="charging_info_on_qs">Show charging info on QS panel</string>
+	<string name="qs_mod_category_misc_title">Diversos</string>
+	<string name="charging_info_on_qs">Mostrar informações de carregamento no painel das DR</string>
 	<string name="qs_rows_number">Número de linhas</string>
 	<string name="qs_cols_number">Número de colunas das DR</string>
 	<string name="qqs_tiles_number">Número de atalhos no painel rápido das DR (2 linhas máx.)</string>
@@ -286,9 +286,9 @@
 	<string name="expand_notifications_icons_title">Mostrar botões expandir/encolher tudo</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Nunca dispensar notificações em curso</string>
 	<string name="heads_up_notification_duration">Duração das notificações no topo</string>
-	<string name="notif_default_expansion_title">Notification default expansion</string>
-	<string name="notif_always_expand">Always expand</string>
-	<string name="notif_always_collapse">Always collapse</string>
+	<string name="notif_default_expansion_title">Expansão padrão das notificações</string>
+	<string name="notif_always_expand">Expandir sempre</string>
+	<string name="notif_always_collapse">Encurtar sempre</string>
 	<string name="disable_overscroll">Desativar o efeito elástico no final da navegação</string>
 	<string name="overscroll_on_summary">Nota: Requer ativar as apps, para as quais pretende desativar o efeito elástico, no gestor da LSposed</string>
 	<string name="milliseconds">Milissegundos</string>
@@ -301,6 +301,8 @@
 	<string name="statusbar_app_switch_icon">Mostrar um ícone na barra de estado quando a mudança for possível</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Desbloqueado para todas as aplicações via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Desfrute!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Informação da bateria…</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrar ao atender chamada</string>
 	<string name="vibrate_on_call_drop_title">Vibrar ao terminar chamada</string>

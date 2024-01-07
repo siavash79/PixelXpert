@@ -301,6 +301,8 @@
 	<string name="statusbar_app_switch_icon">هنگامی که جابجایی در دسترس است، نمادی را در نوار وضعیت نشان دهید</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">از طریق <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font> بدون محدودیت باز شد: حالشو ببر!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">لرزش در زمان پاسخ تماس خروجی</string>
 	<string name="vibrate_on_call_drop_title">لرزش در زمان قطع تماس</string>

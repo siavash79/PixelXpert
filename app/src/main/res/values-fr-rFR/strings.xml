@@ -301,6 +301,8 @@
 	<string name="statusbar_app_switch_icon">Afficher une icône sur la barre d\'état lorsque la commutation est disponible</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Déverrouillé pour toutes les applications via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Profitez !</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Informations sur la batterie…</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrer lors du décrochage d’un appel entrant</string>
 	<string name="vibrate_on_call_drop_title">Vibrer lors du raccrochage</string>

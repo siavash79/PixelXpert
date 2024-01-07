@@ -301,6 +301,8 @@
 	<string name="statusbar_app_switch_icon">Vis et ikon på statuslinjen når bytte er tilgjengelig</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrer ved utgående anrop besvart</string>
 	<string name="vibrate_on_call_drop_title">Vibrer når samtalen kobles fra</string>

@@ -301,6 +301,8 @@
 	<string name="statusbar_app_switch_icon">프로필 전환이 가능할 때 상태표시줄에 아이콘을 표시합니다</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">상대방이 나의 전화를 받은 경우 진동 알림</string>
 	<string name="vibrate_on_call_drop_title">전화가 끊어진 경우 진동 알림</string>

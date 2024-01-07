@@ -301,6 +301,8 @@
 	<string name="statusbar_app_switch_icon">Arată o pictogramă pe bara de stare atunci când comutarea este disponibilă</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Deblocat pentru toate aplicațiile prin <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Bucură-te!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Informații baterie…</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrează la răspunsul unui apel efectuat</string>
 	<string name="vibrate_on_call_drop_title">Vibrare la deconectare apel</string>

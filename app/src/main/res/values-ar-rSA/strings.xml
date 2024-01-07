@@ -34,7 +34,7 @@
 	<string name="telegram_group_title">مجموعة تيليجرام</string>
 	<string name="usage_title">الاستخدام</string>
 	<string name="usage_summary">فتح صفحة ويكي</string>
-	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_title">ترجم إلى لغتك</string>
 	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">قفل الشاشة</string>
@@ -301,6 +301,8 @@
 	<string name="statusbar_app_switch_icon">إظهار أيقونة على شريط الحالة عندما يكون التبديل متوفر</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">مفتوح لجميع التطبيقات عبر <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: استمتع!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">إهتزاز عند الرد على المكالمة الصادرة</string>
 	<string name="vibrate_on_call_drop_title">اهتزاز عند قطع اتصال المكالمة</string>

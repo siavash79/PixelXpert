@@ -301,6 +301,8 @@
 	<string name="statusbar_app_switch_icon">Ikon megjelenítése az állapotsoron, ha elérhető a váltás</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Engedélyezve az összes appnak a <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font> által. Jó szórakozást!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Rezgés fogadott kimenő híváskor</string>
 	<string name="vibrate_on_call_drop_title">Rezgés, amikor megszakad a hívás</string>

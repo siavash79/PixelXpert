@@ -74,7 +74,15 @@ public class NotificationManager extends XposedModPack {
 		if(HeadsUpManager != null && HeadupAutoDismissNotificationDecay > 0)
 		{
 			setObjectField(HeadsUpManager, "mMinimumDisplayTime", Math.round(HeadupAutoDismissNotificationDecay/2.5f));
-			setObjectField(HeadsUpManager, "mAutoDismissNotificationDecay", HeadupAutoDismissNotificationDecay);
+
+			try //A14 QPR2B3
+			{
+				setObjectField(HeadsUpManager, "mAutoDismissTime", HeadupAutoDismissNotificationDecay);
+			}
+			catch (Throwable ignored) //Older
+			{
+				setObjectField(HeadsUpManager, "mAutoDismissNotificationDecay", HeadupAutoDismissNotificationDecay);
+			}
 		}
 	}
 

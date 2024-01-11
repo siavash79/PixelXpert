@@ -1,3 +1,6 @@
+**canary-322**  
+- A14 ap11b3: Fixed heads-up notification duration  
+  
 **canary-321**  
 - fixed occasional statusbar layout glitches (agian!)  
   

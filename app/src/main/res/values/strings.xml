@@ -345,6 +345,7 @@
 
 	<!-- SystemUI hook -->
 	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrate on outgoing call answered</string>

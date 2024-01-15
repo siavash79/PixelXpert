@@ -311,13 +311,13 @@ public class KeyguardMods extends XposedModPack {
 							try {
 								v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
 								v.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
-							} catch (Throwable ignored) {
-							}
-						} else {
-							@SuppressLint("DiscouragedApi") int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
+							} catch (Throwable ignored) {}
+						} else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE){
+							int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
 									mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
 
-							@SuppressLint("DiscouragedApi") ColorStateList colorSurface = SettingsLibUtilsProvider.getColorAttr(
+							@SuppressLint("DiscouragedApi")
+							ColorStateList colorSurface = SettingsLibUtilsProvider.getColorAttr(
 									mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
 
 							v.getDrawable().setTint(mTextColorPrimary);
@@ -657,6 +657,12 @@ public class KeyguardMods extends XposedModPack {
 
 	public static String getPowerIndicationString()
 	{
-		return (String) callMethod(instance.KeyguardIndicationController, "computePowerIndication");
+		try {
+			return (String) callMethod(instance.KeyguardIndicationController, "computePowerIndication");
+		}
+		catch (Throwable ignored)
+		{
+			return ResourceManager.modRes.getString(R.string.power_indication_error);
+		}
 	}
 }

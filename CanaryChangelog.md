@@ -1,3 +1,7 @@
+**canary-323**  
+- A14: Fixed lockscreen "toggle" shortcuts not changing colors  
+- Behavior change: long-press on power button to toggle torch now turns off the flashlight even if the screen is on  
+  
 **canary-322**  
 - A14 ap11b3: Fixed heads-up notification duration  
   

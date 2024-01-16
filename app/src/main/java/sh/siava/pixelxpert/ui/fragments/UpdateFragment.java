@@ -2,6 +2,8 @@ package sh.siava.pixelxpert.ui.fragments;
 
 import static android.content.Context.RECEIVER_EXPORTED;
 import static sh.siava.pixelxpert.utils.AppUtils.installDoubleZip;
+import static sh.siava.pixelxpert.utils.MiscUtils.getColorFromAttribute;
+import static sh.siava.pixelxpert.utils.MiscUtils.intToHex;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
@@ -17,6 +19,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.JsonReader;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -192,11 +196,11 @@ public class UpdateFragment extends Fragment {
 						try {
 							MarkdownView mMarkdownView = view.findViewById(R.id.changelogView);
 							InternalStyleSheet css = new Github();
-							css.addRule("body, kbd", "background-color: " + intToHex(ContextCompat.getColor(requireContext(), R.color.changelog_bg)));
-							css.addRule("body, p, h1, h2, h3, h4, h5, h6, span, div", "color: " + intToHex(ContextCompat.getColor(requireContext(), R.color.text_color_primary)));
-							css.addRule("kbd", "border-color: " + intToHex(ContextCompat.getColor(requireContext(), R.color.text_color_secondary)));
-							css.addRule("kbd", "color: " + intToHex(ContextCompat.getColor(requireContext(), R.color.text_color_secondary)));
-							css.addRule("a", "color: " + intToHex(ContextCompat.getColor(requireContext(), R.color.ui_accent)));
+							css.addRule("body, kbd", "background-color: " + intToHex(getColorFromAttribute(requireContext(), R.attr.colorSurfaceContainer)));
+							css.addRule("body, p, h1, h2, h3, h4, h5, h6, span, div", "color: " + intToHex(getColorFromAttribute(requireContext(), R.attr.colorOnSurface)));
+							css.addRule("kbd", "border-color: " + intToHex(getColorFromAttribute(requireContext(), R.attr.colorSurfaceVariant)));
+							css.addRule("kbd", "color: " + intToHex(getColorFromAttribute(requireContext(), R.attr.colorOnSurface)));
+							css.addRule("a", "color: " + intToHex(getColorFromAttribute(requireContext(), R.attr.colorPrimary)));
 							mMarkdownView.addStyleSheet(css);
 							mMarkdownView.loadMarkdownFromUrl((String) result.get("changelog"));
 						} catch (Throwable ignored) {
@@ -437,9 +441,5 @@ public class UpdateFragment extends Fragment {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	private String intToHex(int colorValue) {
-		return String.format("#%06X", (0xFFFFFF & colorValue));
 	}
 }

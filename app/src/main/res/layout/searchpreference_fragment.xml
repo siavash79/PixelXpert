@@ -11,19 +11,17 @@
 		layout="@layout/searchpreference_searchbar"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/searchbar_height"
-		android:layout_marginStart="@dimen/ui_container_margin_side"
-		android:layout_marginTop="12dp"
-		android:layout_marginEnd="@dimen/ui_container_margin_side"
-		android:layout_marginBottom="12dp" />
+		android:layout_marginHorizontal="@dimen/ui_container_margin_side"
+		android:layout_marginVertical="12dp" />
 
-	<TextView
+	<com.google.android.material.textview.MaterialTextView
 		android:id="@+id/no_results"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center"
 		android:padding="48dp"
 		android:text="@string/searchpreference_no_results"
-		android:textColor="@color/text_color_secondary"
+		android:textColor="?attr/colorOnSurface"
 		android:visibility="gone" />
 
 	<androidx.recyclerview.widget.RecyclerView

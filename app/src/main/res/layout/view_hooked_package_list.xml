@@ -30,7 +30,7 @@
 		android:layout_weight="1"
 		android:animateLayoutChanges="true">
 
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/title"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -38,11 +38,11 @@
 			android:fadingEdge="horizontal"
 			android:fontFamily="sans-serif-medium"
 			android:singleLine="true"
-			android:textColor="?android:attr/textColorPrimary"
+			android:textColor="?attr/colorOnSurface"
 			android:textSize="16sp"
 			android:textStyle="normal" />
 
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/desc"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -52,11 +52,11 @@
 			android:fontFamily="sans-serif"
 			android:lineSpacingExtra="3sp"
 			android:maxLines="4"
-			android:textColor="?android:attr/textColorSecondary"
+			android:textColor="?attr/colorOnSurface"
 			android:textSize="14sp"
 			android:textStyle="normal" />
 
-		<Button
+		<com.google.android.material.button.MaterialButton
 			android:id="@+id/activate_in_lsposed"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

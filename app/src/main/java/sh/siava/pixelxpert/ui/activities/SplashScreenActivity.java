@@ -1,5 +1,7 @@
 package sh.siava.pixelxpert.ui.activities;
 
+import static sh.siava.pixelxpert.utils.MiscUtils.getColorFromAttribute;
+
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -14,7 +16,6 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ipc.RootService;
 
@@ -50,7 +51,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 			getSupportActionBar().hide();
 		}
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-		getWindow().setStatusBarColor(getColor(R.color.ui_bg));
+		getWindow().setStatusBarColor(getColorFromAttribute(this, R.attr.colorSurface));
 
 		// Root permission check
 		new Thread(() -> {
@@ -75,9 +76,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 				// Wait for all checks to pass and for all operations to finish
 				mRootCheckPassed.await();
 
-				for(int i = 0; i < 2; i++)
-				{
-					if(connectRootService())
+				for (int i = 0; i < 2; i++) {
+					if (connectRootService())
 						break;
 				}
 
@@ -87,15 +87,12 @@ public class SplashScreenActivity extends AppCompatActivity {
 				// This is just for aesthetics: I don't want the splashscreen to be too fast
 				Thread.sleep(1000);
 
-				if(mRootServiceConnected.getCount() == 0)
-				{
+				if (mRootServiceConnected.getCount() == 0) {
 					// Start the main activity
 					Intent intent1 = new Intent(SplashScreenActivity.this, SettingsActivity.class);
 					intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					startActivity(intent1);
-				}
-				else
-				{
+				} else {
 					runOnUiThread(() ->
 							new MaterialAlertDialogBuilder(SplashScreenActivity.this, R.style.MaterialComponents_MaterialAlertDialog)
 									.setCancelable(false)
@@ -128,9 +125,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 			};
 			this.runOnUiThread(() -> RootService.bind(intent, mCoreRootServiceConnection));
 			return mRootServiceConnected.await(5, TimeUnit.SECONDS);
-		}
-		catch (Exception ignored)
-		{
+		} catch (Exception ignored) {
 			return false;
 		}
 	}

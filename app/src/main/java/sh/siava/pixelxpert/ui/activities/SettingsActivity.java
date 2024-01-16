@@ -191,18 +191,22 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 				selectedFragment = R.id.navigation_home;
 				binding.bottomNavigationView.getMenu().getItem(0).setChecked(true);
 				setHeader(this, getString(R.string.app_name));
+				backButtonDisabled();
 			} else if (Objects.equals(tag, UpdateFragment.class.getSimpleName())) {
 				selectedFragment = R.id.navigation_update;
 				binding.bottomNavigationView.getMenu().getItem(1).setChecked(true);
 				setHeader(this, getString(R.string.menu_updates));
+				backButtonEnabled();
 			} else if (Objects.equals(tag, HooksFragment.class.getSimpleName())) {
 				selectedFragment = R.id.navigation_hooks;
 				binding.bottomNavigationView.getMenu().getItem(2).setChecked(true);
 				setHeader(this, getString(R.string.hooked_packages_title));
+				backButtonEnabled();
 			} else if (Objects.equals(tag, OwnPrefsFragment.class.getSimpleName())) {
 				selectedFragment = R.id.navigation_settings;
 				binding.bottomNavigationView.getMenu().getItem(3).setChecked(true);
 				setHeader(this, getString(R.string.own_prefs_header));
+				backButtonEnabled();
 			}
 		});
 

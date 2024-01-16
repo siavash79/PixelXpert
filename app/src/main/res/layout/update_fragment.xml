@@ -14,31 +14,34 @@
 		android:fillViewport="true"
 		android:padding="24dp">
 
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/currentVersionID"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/currentVersionTitle"
+			android:textColor="?attr/colorOnSurface"
 			android:textStyle="bold"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
 
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/currentVersionValueID"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="8dp"
 			android:text="..."
+			android:textColor="?attr/colorOnSurface"
 			android:textStyle="bold"
 			app:layout_constraintStart_toEndOf="@+id/currentVersionID"
 			app:layout_constraintTop_toTopOf="@+id/currentVersionID" />
 
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/textView"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
 			android:text="@string/update_flavor_title"
+			android:textColor="?attr/colorOnSurface"
 			android:textStyle="bold"
 			app:layout_constraintStart_toStartOf="@+id/updateChannelRadioGroup"
 			app:layout_constraintTop_toBottomOf="@+id/currentVersionID" />
@@ -57,22 +60,25 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-				android:text="@string/stable_flavor" />
+				android:text="@string/stable_flavor"
+				android:textColor="?attr/colorOnSurface" />
 
 			<RadioButton
 				android:id="@+id/canaryID"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-				android:text="@string/canary_flavor" />
+				android:text="@string/canary_flavor"
+				android:textColor="?attr/colorOnSurface" />
 		</RadioGroup>
 
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/textView3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="8dp"
 			android:text="@string/update_type_title"
+			android:textColor="?attr/colorOnSurface"
 			android:textStyle="bold"
 			android:visibility="gone"
 			app:layout_constraintStart_toStartOf="@+id/updateChannelRadioGroup"
@@ -92,37 +98,41 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-				android:text="@string/full_type" />
+				android:text="@string/full_type"
+				android:textColor="?attr/colorOnSurface" />
 
 			<RadioButton
 				android:id="@+id/XposedTypeID"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-				android:text="@string/xposed_type" />
+				android:text="@string/xposed_type"
+				android:textColor="?attr/colorOnSurface" />
 		</RadioGroup>
 
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/latestVersionTitleID"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="8dp"
 			android:text="@string/lastestVersionTitle"
+			android:textColor="?attr/colorOnSurface"
 			android:textStyle="bold"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/packageTypeRadioGroup" />
 
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/latestVersionValueID"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="8dp"
 			android:text="..."
+			android:textColor="?attr/colorOnSurface"
 			android:textStyle="bold"
 			app:layout_constraintStart_toEndOf="@+id/latestVersionTitleID"
 			app:layout_constraintTop_toTopOf="@+id/latestVersionTitleID" />
 
-		<Button
+		<com.google.android.material.button.MaterialButton
 			android:id="@+id/updateBtn"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -137,7 +147,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="0dp"
 			android:layout_marginTop="16dp"
-			android:backgroundTint="@color/changelog_bg"
+			android:backgroundTint="?attr/colorSurfaceContainer"
 			android:elevation="0dp"
 			android:foreground="@drawable/changelog_container"
 			android:outlineAmbientShadowColor="@android:color/transparent"
@@ -153,13 +163,13 @@
 				android:layout_height="match_parent"
 				android:orientation="vertical">
 
-				<TextView
+				<com.google.android.material.textview.MaterialTextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:padding="12dp"
 					android:text="@string/changelog_title"
 					android:textAlignment="center"
-					android:textColor="@color/text_color_primary"
+					android:textColor="?attr/colorOnSurface"
 					android:textSize="16sp"
 					android:textStyle="bold" />
 

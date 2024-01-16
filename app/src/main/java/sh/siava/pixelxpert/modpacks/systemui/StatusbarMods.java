@@ -294,8 +294,8 @@ public class StatusbarMods extends XposedModPack {
 		BBOnlyWhileCharging = Xprefs.getBoolean("BBOnlyWhileCharging", false);
 		BBOnBottom = Xprefs.getBoolean("BBOnBottom", false);
 		BBSetCentered = Xprefs.getBoolean("BBSetCentered", false);
-		BBOpacity = Xprefs.getInt("BBOpacity", 100);
-		BBarHeight = Xprefs.getInt("BBarHeight", 50);
+		BBOpacity = RangeSliderPreference.getSingleIntValue(Xprefs, "BBOpacity", 100);
+		BBarHeight = RangeSliderPreference.getSingleIntValue(Xprefs, "BBarHeight", 50);
 		BBarTransitColors = Xprefs.getBoolean("BBarTransitColors", false);
 
 		batteryLevels = RangeSliderPreference.getValues(Xprefs, "batteryWarningRange", 0);
@@ -330,8 +330,8 @@ public class StatusbarMods extends XposedModPack {
 		boolean networkTrafficRXTop = Xprefs.getBoolean("networkTrafficRXTop", true);
 		int networkTrafficDLColor = Xprefs.getInt("networkTrafficDLColor", Color.GREEN);
 		int networkTrafficULColor = Xprefs.getInt("networkTrafficULColor", Color.RED);
-		int networkTrafficOpacity = Xprefs.getInt("networkTrafficOpacity", 100);
-		int networkTrafficInterval = Xprefs.getInt("networkTrafficInterval", 1);
+		int networkTrafficOpacity = RangeSliderPreference.getSingleIntValue(Xprefs, "networkTrafficOpacity", 100);
+		int networkTrafficInterval = RangeSliderPreference.getSingleIntValue(Xprefs, "networkTrafficInterval", 1);
 		boolean networkTrafficColorful = Xprefs.getBoolean("networkTrafficColorful", false);
 		boolean networkTrafficShowIcons = Xprefs.getBoolean("networkTrafficShowIcons", true);
 

@@ -138,14 +138,14 @@
 			android:title="@string/separate_ring_notif_vol_title"
 			app:iconSpaceReserved="false" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			android:layout_width="wrap_content"
-			android:defaultValue="10"
+			app:defaultValue="10"
 			android:key="volumeStps"
-			android:max="50"
+			app:maxVal="50"
 			android:title="@string/volume_button_step_title"
 			app:iconSpaceReserved="false"
-			app:min="10"
+			app:minVal="10"
 			app:seekBarIncrement="5"
 			app:updatesContinuously="true" />
 

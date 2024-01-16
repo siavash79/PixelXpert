@@ -25,7 +25,7 @@
 		android:background="@drawable/icon_background"
 		android:contentDescription="@android:string/untitled"
 		android:scaleType="centerInside"
-		app:tint="?attr/colorOnSurface"
+		app:tint="?attr/colorOnPrimaryContainer"
 		android:visibility="gone" />
 
 	<RelativeLayout

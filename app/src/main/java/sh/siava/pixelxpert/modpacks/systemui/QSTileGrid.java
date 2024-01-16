@@ -75,15 +75,15 @@ public class QSTileGrid extends XposedModPack {
 
 		QSHapticEnabled = Xprefs.getBoolean("QSHapticEnabled", false);
 
-		QSRowQty = Xprefs.getInt("QSRowQty", NOT_SET);
-		QSColQty = Xprefs.getInt("QSColQty", QS_COL_NOT_SET);
+		QSRowQty = RangeSliderPreference.getSingleIntValue(Xprefs, "QSRowQty", NOT_SET);
+		QSColQty = RangeSliderPreference.getSingleIntValue(Xprefs, "QSColQty", QS_COL_NOT_SET);
 		if(QSColQty < QS_COL_NOT_SET) QSColQty = QS_COL_NOT_SET;
-		QQSTileQty = Xprefs.getInt("QQSTileQty", QQS_NOT_SET);
+		QQSTileQty = RangeSliderPreference.getSingleIntValue(Xprefs, "QQSTileQty", QQS_NOT_SET);
 
-		QSRowQtyL = Xprefs.getInt("QSRowQtyL", NOT_SET);
-		QSColQtyL = Xprefs.getInt("QSColQtyL", QS_COL_NOT_SET);
+		QSRowQtyL = RangeSliderPreference.getSingleIntValue(Xprefs, "QSRowQtyL", NOT_SET);
+		QSColQtyL = RangeSliderPreference.getSingleIntValue(Xprefs, "QSColQtyL", QS_COL_NOT_SET);
 		if(QSColQtyL < QS_COL_NOT_SET) QSColQtyL = QS_COL_NOT_SET;
-		QQSTileQtyL = Xprefs.getInt("QQSTileQtyL", QQS_NOT_SET);
+		QQSTileQtyL = RangeSliderPreference.getSingleIntValue(Xprefs, "QQSTileQtyL", QQS_NOT_SET);
 
 		QRTileInactiveColor = Xprefs.getBoolean("QRTileInactiveColor", false);
 

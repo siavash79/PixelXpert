@@ -19,8 +19,8 @@
 		android:title="@string/dual_tone_battery_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
-		android:defaultValue="50"
+	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+		app:defaultValue="50"
 		android:key="BatteryIconScaleFactor"
 		android:title="@string/battery_icon_size_title"
 		app:iconSpaceReserved="false"
@@ -78,8 +78,8 @@
 		android:title="@string/BB_colorful_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
-		android:defaultValue="100"
+	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+		app:defaultValue="100"
 		android:key="BIconOpacity"
 		android:title="@string/BIcon_Opacity_title"
 		app:iconSpaceReserved="false"

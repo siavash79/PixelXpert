@@ -56,8 +56,7 @@ public class StatusbarGestures extends XposedModPack {
 		if (Xprefs == null) return;
 		oneFingerPulldownEnabled = Xprefs.getBoolean("QSPullodwnEnabled", false);
 		oneFingerPullupEnabled = oneFingerPulldownEnabled && Xprefs.getBoolean("oneFingerPullupEnabled", false);
-		statusbarPortion = RangeSliderPreference.getSingleFloatValue(Xprefs, "QSPulldownPercent", 25) / 100f;
-
+		statusbarPortion = RangeSliderPreference.getSingleIntValue(Xprefs, "QSPulldownPercent", 25) / 100f;
 		pullDownSide = Integer.parseInt(Xprefs.getString("QSPulldownSide", "1"));
 
 		StatusbarLongpressAppSwitch = Xprefs.getBoolean("StatusbarLongpressAppSwitch", false);

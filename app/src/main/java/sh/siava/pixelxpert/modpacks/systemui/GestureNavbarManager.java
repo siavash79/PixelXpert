@@ -27,6 +27,7 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.launcher.TaskbarActivator;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class GestureNavbarManager extends XposedModPack {
@@ -52,7 +53,7 @@ public class GestureNavbarManager extends XposedModPack {
 	//region pill color
 	private boolean colorReplaced = false;
 	private static boolean navPillColorAccent = false;
-	private static final int mLightColor = Color.parseColor("#EBffffff"), mDarkColor = Color.parseColor("#99000000"); //original navbar colors
+	private static final int mLightColor = 0xEBFFFFFF, mDarkColor = 0x99000000; //original navbar colors
 	//endregion
 
 	public GestureNavbarManager(Context context) {
@@ -65,13 +66,13 @@ public class GestureNavbarManager extends XposedModPack {
 		//region Back gesture
 		leftEnabled = Xprefs.getBoolean("BackFromLeft", true);
 		rightEnabled = Xprefs.getBoolean("BackFromRight", true);
-		backGestureHeightFractionLeft = Xprefs.getInt("BackLeftHeight", 100) / 100f;
-		backGestureHeightFractionRight = Xprefs.getInt("BackRightHeight", 100) / 100f;
+		backGestureHeightFractionLeft = RangeSliderPreference.getSingleIntValue(Xprefs, "BackLeftHeight", 100) / 100f;
+		backGestureHeightFractionRight = RangeSliderPreference.getSingleIntValue(Xprefs, "BackRightHeight", 100) / 100f;
 		//endregion
 
 		//region pill size
-		widthFactor = Xprefs.getInt("GesPillWidthModPos", 50) * .02f;
-		GesPillHeightFactor = Xprefs.getInt("GesPillHeightFactor", 100);
+		widthFactor = RangeSliderPreference.getSingleIntValue(Xprefs, "GesPillWidthModPos", 50) * .02f;
+		GesPillHeightFactor = RangeSliderPreference.getSingleIntValue(Xprefs, "GesPillHeightFactor", 100);
 
 		int taskbarMode = TaskbarActivator.TASKBAR_DEFAULT;
 		String taskbarModeStr = Xprefs.getString("taskBarMode", "0");

@@ -697,7 +697,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 				pullDownIndicator.setVisibility(PreferenceHelper.isVisible("QSPulldownPercent") ? View.VISIBLE : View.GONE);
 				FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) pullDownIndicator.getLayoutParams();
-				lp.width = Math.round(mPreferences.getInt("QSPulldownPercent", 25) * displayWidth / 100f);
+				lp.width = Math.round(RangeSliderPreference.getSingleIntValue(mPreferences, "QSPulldownPercent", 25) * displayWidth / 100f);
 				lp.gravity = Gravity.TOP | (Integer.parseInt(mPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
 				pullDownIndicator.setLayoutParams(lp);
 			} catch (Exception ignored) {

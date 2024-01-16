@@ -58,7 +58,7 @@ public class BatteryStyleManager extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
 		String BatteryStyleStr = Xprefs.getString("BatteryStyle", "0");
-		scaleFactor = Xprefs.getInt("BatteryIconScaleFactor", 50) * 2;
+		scaleFactor = RangeSliderPreference.getSingleIntValue(Xprefs, "BatteryIconScaleFactor", 50) * 2;
 		int batteryStyle = Integer.parseInt(BatteryStyleStr);
 		customBatteryEnabled = batteryStyle != 0;
 		if (batteryStyle == 99) {
@@ -94,7 +94,7 @@ public class BatteryStyleManager extends XposedModPack {
 		ShowPercent = Xprefs.getBoolean("BatteryShowPercent", false);
 		BatteryChargingAnimationEnabled = Xprefs.getBoolean("BatteryChargingAnimationEnabled", true);
 
-		BatteryIconOpacity = Xprefs.getInt("BIconOpacity", 100);
+		BatteryIconOpacity = RangeSliderPreference.getSingleIntValue(Xprefs, "BIconOpacity", 100);
 		boolean BIconTransitColors = Xprefs.getBoolean("BIconTransitColors", false);
 		boolean BIconColorful = Xprefs.getBoolean("BIconColorful", false);
 		boolean BIconIndicateFastCharging = Xprefs.getBoolean("BIconindicateFastCharging", false);

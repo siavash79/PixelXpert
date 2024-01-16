@@ -138,10 +138,7 @@ public class KeyguardMods extends XposedModPack {
 
 		ForceAODwCharging = Xprefs.getBoolean("ForceAODwCharging", false);
 
-		try {
-			KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
-		} catch (Throwable ignored) {
-		}
+		KeyGuardDimAmount = RangeSliderPreference.getSingleFloatValue(Xprefs, "KeyGuardDimAmount", -1f) / 100f;
 
 		leftShortcutClick = Xprefs.getString("leftKeyguardShortcut", "");
 		rightShortcutClick = Xprefs.getString("rightKeyguardShortcut", "");
@@ -313,6 +310,7 @@ public class KeyguardMods extends XposedModPack {
 								v.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
 							} catch (Throwable ignored) {}
 						} else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE){
+							@SuppressLint("DiscouragedApi")
 							int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
 									mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
 

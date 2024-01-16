@@ -1,6 +1,5 @@
 package sh.siava.pixelxpert.modpacks.android;
 
-import static java.lang.Math.round;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
@@ -26,21 +25,10 @@ public class HotSpotController extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		long timeout = 0;
-		try
-		{
-			timeout = (long) (RangeSliderPreference.getValues(XPrefs.Xprefs, "hotSpotTimeoutSecs", 0).get(0) * 1000L);
-		}
-		catch (Throwable ignored){}
 
-		int clients = 0;
-		try
-		{
-			clients = round(RangeSliderPreference.getValues(XPrefs.Xprefs, "hotSpotMaxClients", 0).get(0));
-		}
-		catch (Throwable ignored){}
+		int clients = RangeSliderPreference.getSingleIntValue(XPrefs.Xprefs, "hotSpotMaxClients", 0);
 
-		hotSpotTimeoutMillis = (long) timeout;
+		hotSpotTimeoutMillis = (long) (RangeSliderPreference.getSingleFloatValue(XPrefs.Xprefs, "hotSpotTimeoutSecs", 0) * 1000L);
 		hotSpotHideSSID = XPrefs.Xprefs.getBoolean("hotSpotHideSSID", false);
 		hotSpotMaxClients = clients;
 	}

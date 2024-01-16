@@ -177,11 +177,14 @@
 			android:title="@string/qs_pulldown_switch_title"
 			app:iconSpaceReserved="false" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
-			android:defaultValue="25"
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			android:key="QSPulldownPercent"
 			android:title="@string/qs_pulldown_size"
+			app:defaultValue="25"
 			app:iconSpaceReserved="false"
+			app:maxVal="100"
+			app:minVal="0"
+			app:tickInterval="1"
 			app:updatesContinuously="true" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference

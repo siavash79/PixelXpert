@@ -87,11 +87,8 @@ public class QSTileGrid extends XposedModPack {
 
 		QRTileInactiveColor = Xprefs.getBoolean("QRTileInactiveColor", false);
 
-		try {
-			QSLabelScaleFactor = (RangeSliderPreference.getValues(Xprefs, "QSLabelScaleFactor", 0).get(0) + 100) / 100f;
-			QSSecondaryLabelScaleFactor = (RangeSliderPreference.getValues(Xprefs, "QSSecondaryLabelScaleFactor", 0).get(0) + 100) / 100f;
-		} catch (Exception ignored) {
-		}
+		QSLabelScaleFactor = (RangeSliderPreference.getSingleFloatValue(Xprefs, "QSLabelScaleFactor", 0) + 100) / 100f;
+		QSSecondaryLabelScaleFactor = (RangeSliderPreference.getSingleFloatValue(Xprefs, "QSSecondaryLabelScaleFactor", 0) + 100) / 100f;
 
 		if (Key.length > 0 && (Key[0].equals("QSRowQty") || Key[0].equals("QSColQty") || Key[0].equals("QQSTileQty") || Key[0].equals("QSRowQtyL") || Key[0].equals("QSColQtyL") || Key[0].equals("QQSTileQtyL"))) {
 			SystemUtils.doubleToggleDarkMode();

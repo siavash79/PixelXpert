@@ -753,17 +753,9 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 				int displayHeight = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().height();
 				int displayWidth = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
 
-				float leftSwipeUpPercentage = 25f;
-				try {
-					leftSwipeUpPercentage = RangeSliderPreference.getValues(mPreferences, "leftSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {
-				}
+				float leftSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(mPreferences, "leftSwipeUpPercentage", 25);
 
-				float rightSwipeUpPercentage = 25f;
-				try {
-					rightSwipeUpPercentage = RangeSliderPreference.getValues(mPreferences, "rightSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {
-				}
+				float rightSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(mPreferences, "rightSwipeUpPercentage", 25);
 
 				int edgeWidth = Math.round(displayWidth * leftSwipeUpPercentage / 100f);
 				ViewGroup.LayoutParams lp = leftSwipeGestureIndicator.getLayoutParams();

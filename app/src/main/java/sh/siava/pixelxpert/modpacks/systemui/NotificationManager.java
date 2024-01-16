@@ -31,9 +31,9 @@ public class NotificationManager extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
+		HeadupAutoDismissNotificationDecay = RangeSliderPreference.getSingleIntValue(Xprefs, "HeadupAutoDismissNotificationDecay", -1);
+		DisableOngoingNotifDismiss = Xprefs.getBoolean("DisableOngoingNotifDismiss", false);
 		try {
-			HeadupAutoDismissNotificationDecay = RangeSliderPreference.getValues(Xprefs, "HeadupAutoDismissNotificationDecay", -1).get(0).intValue();
-			DisableOngoingNotifDismiss = Xprefs.getBoolean("DisableOngoingNotifDismiss", false);
 			applyDurations();
 		} catch (Throwable ignored) {}
 	}

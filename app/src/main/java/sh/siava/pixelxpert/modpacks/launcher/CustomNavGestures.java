@@ -7,6 +7,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -24,7 +25,6 @@ import java.util.Optional;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -70,21 +70,13 @@ public class CustomNavGestures extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		FCLongSwipeEnabled = XPrefs.Xprefs.getBoolean("FCLongSwipeEnabled", false);
-		leftSwipeUpAction = readAction(XPrefs.Xprefs, "leftSwipeUpAction");
-		rightSwipeUpAction = readAction(XPrefs.Xprefs, "rightSwipeUpAction");
-		twoFingerSwipeUpAction = readAction(XPrefs.Xprefs, "twoFingerSwipeUpAction");
-		leftSwipeUpPercentage = readRangeSlider(XPrefs.Xprefs, "leftSwipeUpPercentage", 25f) / 100f;
-		rightSwipeUpPercentage = readRangeSlider(XPrefs.Xprefs, "rightSwipeUpPercentage", 25f) / 100f;
-		swipeUpPercentage = readRangeSlider(XPrefs.Xprefs, "swipeUpPercentage", 20f) / 100f;
-	}
-
-	private float readRangeSlider(SharedPreferences xprefs, String prefName, @SuppressWarnings("SameParameterValue") float defaultVal) {
-		try {
-			return RangeSliderPreference.getValues(xprefs, prefName, 25f).get(0);
-		} catch (Exception ignored) {
-			return defaultVal;
-		}
+		FCLongSwipeEnabled = Xprefs.getBoolean("FCLongSwipeEnabled", false);
+		leftSwipeUpAction = readAction(Xprefs, "leftSwipeUpAction");
+		rightSwipeUpAction = readAction(Xprefs, "rightSwipeUpAction");
+		twoFingerSwipeUpAction = readAction(Xprefs, "twoFingerSwipeUpAction");
+		leftSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(Xprefs, "leftSwipeUpPercentage", 25f) / 100f;
+		rightSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(Xprefs, "rightSwipeUpPercentage", 25f) / 100f;
+		swipeUpPercentage = RangeSliderPreference.getSingleFloatValue(Xprefs, "swipeUpPercentage", 25f) / 100f;
 	}
 
 	private static int readAction(SharedPreferences xprefs, String prefName) {

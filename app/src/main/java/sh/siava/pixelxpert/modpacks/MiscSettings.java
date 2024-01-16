@@ -29,10 +29,7 @@ public class MiscSettings extends XposedModPack {
 		//netstat settings
 		boolean netstatColorful = Xprefs.getBoolean("networkStatsColorful", false);
 
-		int NetStatsStartMonthStart = 1;
-		try {
-			NetStatsStartMonthStart = Math.round(RangeSliderPreference.getValues(Xprefs, "NetworkStatsMonthStart", 1).get(0));
-		} catch (Throwable ignored){}
+		int NetStatsStartMonthStart = RangeSliderPreference.getSingleIntValue(Xprefs, "NetworkStatsMonthStart", 1);
 
 		StringFormatter.RXColor = (netstatColorful) ? Xprefs.getInt("networkStatDLColor", Color.GREEN) : null;
 		StringFormatter.TXColor = (netstatColorful) ? Xprefs.getInt("networkStatULColor", Color.RED) : null;
@@ -79,11 +76,7 @@ public class MiscSettings extends XposedModPack {
 	private void setDisplayOverride() {
 		if(!Xprefs.getBoolean("displayOverrideEnabled", false)) return;
 
-		float displayOverride = 1f;
-		try {
-			displayOverride = RangeSliderPreference.getValues(Xprefs, "displayOverride", 100f).get(0) / 100f;
-		} catch (Exception ignored) {}
-		float finalDisplayOverride = displayOverride;
+		float displayOverride = RangeSliderPreference.getSingleFloatValue(Xprefs, "displayOverride", 100f) / 100f;
 		XPLauncher.enqueueProxyCommand(proxy -> {
 			try {
 				String sizeResult = proxy.runCommand("wm size")[0];
@@ -92,8 +85,8 @@ public class MiscSettings extends XposedModPack {
 				int w = Integer.parseInt(physicalSizes[0]);
 				int h = Integer.parseInt(physicalSizes[1]);
 
-				int overrideW = Math.round(w * finalDisplayOverride);
-				int overrideH = Math.round(h * finalDisplayOverride);
+				int overrideW = Math.round(w * displayOverride);
+				int overrideH = Math.round(h * displayOverride);
 
 				proxy.runCommand(String.format("wm size %sx%s", overrideW, overrideH));
 			} catch (RemoteException e) {

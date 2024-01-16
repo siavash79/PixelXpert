@@ -31,11 +31,7 @@ public class VolumeDialog extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		try
-		{
-			VolumeDialogTimeout = Math.round(RangeSliderPreference.getValues(Xprefs, "VolumeDialogTimeout", 3000).get(0));
-		}
-		catch (Throwable ignored){}
+		VolumeDialogTimeout = RangeSliderPreference.getSingleIntValue(Xprefs, "VolumeDialogTimeout", 3000);
 	}
 
 	@Override

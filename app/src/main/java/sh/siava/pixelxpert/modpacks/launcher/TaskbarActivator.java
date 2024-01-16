@@ -91,15 +91,9 @@ public class TaskbarActivator extends XposedModPack {
 		TaskbarAsRecents = XPrefs.Xprefs.getBoolean("TaskbarAsRecents", false);
 		TaskbarHideAllAppsIcon = true;//Xprefs.getBoolean("TaskbarHideAllAppsIcon", false);
 
-		try
-		{
-			TaskbarRadiusOverride = RangeSliderPreference.getValues(XPrefs.Xprefs, "TaskbarRadiusOverride", 1f).get(0);
-		}catch (Throwable ignored){}
+		TaskbarRadiusOverride = RangeSliderPreference.getSingleFloatValue(XPrefs.Xprefs, "TaskbarRadiusOverride", 1f);
 
-		try {
-			taskbarHeightOverride = RangeSliderPreference.getValues(XPrefs.Xprefs, "taskbarHeightOverride", 100f).get(0) / 100f;
-		} catch (Throwable ignored) {
-		}
+		taskbarHeightOverride = RangeSliderPreference.getSingleFloatValue(XPrefs.Xprefs, "taskbarHeightOverride", 100f) / 100f;
 
 		taskbarMode = Integer.parseInt(XPrefs.Xprefs.getString("taskBarMode", "0"));
 

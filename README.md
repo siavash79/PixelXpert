@@ -10,7 +10,7 @@
 ### **PixelXpert Support Channels:**
 
 [![XDA URL](https://img.shields.io/twitter/url?label=XDA%20Developers&logo=XDA-Developers&style=social&url=http://XDA.PixelXpert.siava.sh)](http://XDA.PixelXpert.siava.sh)
-[![Telegram URL](https://img.shields.io/twitter/url?label=Telegram&logo=telegram&style=social)](https://t.me/PixelXpert_Discussion)
+[![Telegram URL](https://img.shields.io/badge/Telegram-Join-2CA5E?style=social&logo=telegram)](https://t.me/PixelXpert_Discussion)
 
 ![Header Image](https://github.com/siavash79/PixelXpert/blob/canary/.github/PixelXpert_Banner_1280.png?raw=true)
 

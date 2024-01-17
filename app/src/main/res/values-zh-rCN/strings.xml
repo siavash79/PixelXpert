@@ -303,6 +303,7 @@
 	<string name="settings_cloned_apps_active">通过 <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font> 解锁所有应用：开始 享受吧！</string>
 	<!-- SystemUI hook -->
 	<string name="battery_info_button_title">电池信息…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">去电被接通时震动</string>
 	<string name="vibrate_on_call_drop_title">结束通话时震动</string>

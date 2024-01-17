@@ -303,6 +303,7 @@
 	<string name="settings_cloned_apps_active">Tüm uygulamalarda <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font> aracılığıyla kilidi açıldı: Keyfini çıkarın!</string>
 	<!-- SystemUI hook -->
 	<string name="battery_info_button_title">Pil bilgisi…</string>
+	<string name="power_indication_error">Şarj verileri alınırken hata oluştu</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Giden çağrı cevaplandığında titreştir</string>
 	<string name="vibrate_on_call_drop_title">Çağrı bağlantısı kesildiğinde titreştir</string>

@@ -303,6 +303,7 @@
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
 	<!-- SystemUI hook -->
 	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Δόνηση στην εξερχόμενη κλήση απαντήθηκε</string>
 	<string name="vibrate_on_call_drop_title">Δόνηση όταν αποσυνδέεται η κλήση</string>

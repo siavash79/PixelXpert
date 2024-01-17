@@ -1,3 +1,6 @@
+**canary-324**  
+- Updated all sliders in the app  
+  
 **canary-323**  
 - A14: Fixed lockscreen "toggle" shortcuts not changing colors  
 - Behavior change: long-press on power button to toggle torch now turns off the flashlight even if the screen is on  

@@ -1,11 +1,10 @@
 **Compatibility:**  
 Pixel Stock Rom:  
-13 QPR1 (December 2022) and later
-14 Stable
-14 QPR1 (December 2023)
+13 QPR1 (December 2022) and later  
+14 Stable (including QPR1 & QPR2)  
   
 **If you're updating from previous versions:**  
-Update your module via module update shortcut in Magisk, or use the built-in updater located in the app   
+Update your module via module update shortcut in Magisk, or use the built-in updater located in the app  
   
 **To install, you will need to:**  
 Install LSPosed Zygisk (https://github.com/LSPosed/LSPosed/releases)  

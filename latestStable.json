@@ -1,7 +1,7 @@
 {
-    "version": "3.2.0",
-    "versionCode": 308,
+    "version": "3.3.0",
+    "versionCode": 324,
     "changelog": "https://raw.githubusercontent.com/siavash79/PixelXpert/stable/MagiskChangelog.md",
-    "zipUrl_Full": "https://github.com/siavash79/PixelXpert/releases/download/v3.2.0/PixelXpert.zip",
-    "zipUrl_Xposed": "https://github.com/siavash79/PixelXpert/releases/download/v3.2.0/PixelXpert.zip"
+    "zipUrl_Full": "https://github.com/siavash79/PixelXpert/releases/download/v3.3.0/PixelXpert.zip",
+    "zipUrl_Xposed": "https://github.com/siavash79/PixelXpert/releases/download/v3.3.0/PixelXpert.zip"
 }

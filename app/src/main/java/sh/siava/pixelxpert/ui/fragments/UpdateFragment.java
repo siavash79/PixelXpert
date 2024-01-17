@@ -58,6 +58,7 @@ import sh.siava.pixelxpert.modpacks.utils.ModuleFolderOperations;
 import sh.siava.pixelxpert.ui.activities.SettingsActivity;
 import sh.siava.pixelxpert.utils.AppUtils;
 import sh.siava.pixelxpert.utils.PreferenceHelper;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 
 public class UpdateFragment extends Fragment {
@@ -152,7 +153,7 @@ public class UpdateFragment extends Fragment {
 	private void applyPrefsToUpdate() {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext().createDeviceProtectedStorageContext());
 
-		int volumeStps = prefs.getInt("volumeStps", 0);
+		int volumeStps = RangeSliderPreference.getSingleIntValue(prefs, "volumeStps", 0);
 		boolean customFontsEnabled = prefs.getBoolean("enableCustomFonts", false);
 		boolean GSansOverrideEnabled = prefs.getBoolean("gsans_override", false);
 

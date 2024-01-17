@@ -1,7 +1,5 @@
 package sh.siava.pixelxpert.utils;
 
-import static java.lang.Math.round;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
-import androidx.preference.SeekBarPreference;
 
 import java.util.Arrays;
 import java.util.List;
@@ -428,10 +425,10 @@ public class PreferenceHelper {
 				return RangeSliderPreference.getSingleIntValue(instance.mPreferences, "GesPillHeightFactor", 100) + fragmentCompat.getString(R.string.pill_width_summary);
 
 			case "BackLeftHeight":
-				return instance.mPreferences.getInt("BackLeftHeight", 100) + "%";
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences, "BackLeftHeight", 100) + "%";
 
 			case "BackRightHeight":
-				return instance.mPreferences.getInt("BackRightHeight", 100) + "%";
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences,"BackRightHeight", 100) + "%";
 
 			case "leftSwipeUpPercentage":
 				float leftSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(instance.mPreferences, "leftSwipeUpPercentage", 25);
@@ -481,7 +478,7 @@ public class PreferenceHelper {
 			//Other special cases
 			switch (key) {
 				case "QSColQtyL":
-					((SeekBarPreference) preference).setMax(instance.mPreferences.getInt("QSColQty", 1));
+					((RangeSliderPreference) preference).setMax(RangeSliderPreference.getSingleFloatValue(instance.mPreferences, "QSColQty", 1));
 					break;
 
 				case "QSLabelScaleFactor":

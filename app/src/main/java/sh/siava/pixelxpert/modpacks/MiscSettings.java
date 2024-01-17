@@ -96,7 +96,7 @@ public class MiscSettings extends XposedModPack {
 	}
 
 	private void setVolumeSteps() {
-		int volumeStps = Xprefs.getInt("volumeStps", 0);
+		int volumeStps = RangeSliderPreference.getSingleIntValue(Xprefs,"volumeStps", 0);
 
 		ModuleFolderOperations.applyVolumeSteps(volumeStps, XPrefs.MagiskRoot, false);
 	}

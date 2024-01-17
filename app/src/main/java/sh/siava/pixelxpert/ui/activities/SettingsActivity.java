@@ -773,12 +773,12 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 				setVisibility(rightBackGestureIndicator, PreferenceHelper.isVisible("BackRightHeight"), 400);
 				setVisibility(leftBackGestureIndicator, PreferenceHelper.isVisible("BackLeftHeight"), 400);
 
-				int edgeHeight = Math.round(displayHeight * mPreferences.getInt("BackRightHeight", 100) / 100f);
+				int edgeHeight = Math.round(displayHeight * RangeSliderPreference.getSingleIntValue(mPreferences, "BackRightHeight", 100) / 100f);
 				lp = rightBackGestureIndicator.getLayoutParams();
 				lp.height = edgeHeight;
 				rightBackGestureIndicator.setLayoutParams(lp);
 
-				edgeHeight = Math.round(displayHeight * mPreferences.getInt("BackLeftHeight", 100) / 100f);
+				edgeHeight = Math.round(displayHeight * RangeSliderPreference.getSingleIntValue(mPreferences, "BackLeftHeight", 100) / 100f);
 				lp = leftBackGestureIndicator.getLayoutParams();
 				lp.height = edgeHeight;
 				leftBackGestureIndicator.setLayoutParams(lp);

@@ -14,7 +14,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
-import static sh.siava.pixelxpert.modpacks.utils.Helpers.findMethod;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.hookAllMethodsMatchPattern;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -26,7 +26,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.RemoteException;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -36,14 +35,11 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 
-import com.topjohnwu.superuser.Shell;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
@@ -195,7 +191,7 @@ public class ThemeManager_14 extends XposedModPack {
 					Class<?> ReadonlyStateFlowClass = findClass("kotlinx.coroutines.flow.ReadonlyStateFlow", lpparam.classLoader);
 
 					Object zeroAlphaFlow = StateFlowImplClass.getConstructor(Object.class).newInstance(0f);
-					setObjectField(param.thisObject, "backgroundAlpha", ReadonlyStateFlowClass.getConstructor(StateFlowImplClass).newInstance(zeroAlphaFlow));
+					setObjectField(param.thisObject, "backgroundAlpha", ReadonlyStateFlowClass.getConstructors()[0].newInstance(zeroAlphaFlow));
 				}
 			});
 
@@ -334,7 +330,7 @@ public class ThemeManager_14 extends XposedModPack {
 			}
 		});
 
-		hookAllMethods(BatteryStatusChipClass, findMethod(BatteryStatusChipClass, "updateResources.*").getName(), new XC_MethodHook() { //background color of 14's charging chip. Fix for light QS theme situation
+		XC_MethodHook updateResourcesHook = new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!isDark)
@@ -342,7 +338,11 @@ public class ThemeManager_14 extends XposedModPack {
 							.getBackground()
 							.setTint(colorInactive);
 			}
-		});
+		};
+
+		hookAllConstructors(BatteryStatusChipClass, updateResourcesHook);
+		hookAllMethods(BatteryStatusChipClass, "onConfigurationChanged", updateResourcesHook);
+
 		hookAllMethods(BrightnessSliderViewClass, "onFinishInflate", new XC_MethodHook() { //brightness slider
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -553,7 +553,7 @@ public class ThemeManager_14 extends XposedModPack {
 			}
 		});
 
-		hookAllMethods(ScrimControllerClass, findMethod(ScrimControllerClass, "applyState.*").getName(), new XC_MethodHook() {
+		hookAllMethodsMatchPattern(ScrimControllerClass, "applyState.*",  new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				boolean mClipsQsScrim = (boolean) getObjectField(param.thisObject, "mClipsQsScrim");
@@ -642,12 +642,7 @@ public class ThemeManager_14 extends XposedModPack {
 
 		calculateColors();
 
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			@Override
-			public void run(IRootProviderProxy proxy) throws RemoteException {
-				Shell.cmd("cmd overlay disable com.google.android.systemui.gxoverlay; cmd overlay enable com.google.android.systemui.gxoverlay").exec();
-			}
-		});
+		XPLauncher.enqueueProxyCommand(proxy -> proxy.runCommand("cmd overlay disable com.google.android.systemui.gxoverlay; cmd overlay enable com.google.android.systemui.gxoverlay"));
 	}
 
 	@SuppressLint("DiscouragedApi")

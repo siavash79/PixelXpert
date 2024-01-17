@@ -19,37 +19,12 @@ public class HiddenBatteryDrawable extends BatteryDrawable {
 	}
 
 	@Override
-	public void setFastCharging(boolean isFastCharging) {
-
-	}
-
-	@Override
-	public void setCharging(boolean isCharging) {
-
-	}
-
-	@Override
-	public void setBatteryLevel(int mLevel) {
-
-	}
-
-	@Override
 	public void setColors(int fgColor, int bgColor, int singleToneColor) {
 
 	}
 
 	@Override
-	public void setPowerSaving(boolean isPowerSaving) {
-
-	}
-
-	@Override
 	public void setChargingAnimationEnabled(boolean enabled) {
-
-	}
-
-	@Override
-	public void refresh() {
 
 	}
 

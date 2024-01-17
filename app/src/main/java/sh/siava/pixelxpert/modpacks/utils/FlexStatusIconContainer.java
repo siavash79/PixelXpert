@@ -23,6 +23,11 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+/** A LinearLayout that measures its available space and aligns its statusbar icons
+ *  in a way that the can either fit in a row, or fits them in different rows to use maximum
+ *  available space
+ */
+
 @SuppressLint("ViewConstructor")
 public class FlexStatusIconContainer extends LinearLayout {
 //	Class<?> StatusIconStateClass;
@@ -87,7 +92,6 @@ public class FlexStatusIconContainer extends LinearLayout {
 			stateAlphaField = "mAlpha";
 			stateXTranslationField = "mXTranslation";
 			stateYTranslationField = "mYTranslation";
-
 		}
 
 		initDimens();
@@ -117,11 +121,11 @@ public class FlexStatusIconContainer extends LinearLayout {
 		mIconDotFrameWidth = res.getDimensionPixelSize(
 				res.getIdentifier("status_bar_icon_size", "dimen", "android"));
 		mIconSize = mIconDotFrameWidth;
-		int mDotPadding = getResources().getDimensionPixelSize(
+		int mDotPadding = res.getDimensionPixelSize(
 				res.getIdentifier("overflow_icon_dot_padding", "dimen", getContext().getPackageName()));
-		mIconSpacing = getResources().getDimensionPixelSize(
+		mIconSpacing = res.getDimensionPixelSize(
 				res.getIdentifier("status_bar_system_icon_spacing", "dimen", getContext().getPackageName()));
-		int radius = getResources().getDimensionPixelSize(
+		int radius = res.getDimensionPixelSize(
 				res.getIdentifier("overflow_dot_radius", "dimen", getContext().getPackageName()));
 		int mStaticDotDiameter = 2 * radius;
 		mUnderflowWidth = mIconDotFrameWidth + mStaticDotDiameter + mDotPadding;

@@ -55,6 +55,7 @@ import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils.ChangeListener;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 public class VolumeTile extends XposedModPack {
@@ -74,7 +75,7 @@ public class VolumeTile extends XposedModPack {
 	@Override
 	public void updatePrefs(String... Key) {
 		lightQSHeaderEnabled = XPrefs.Xprefs.getBoolean("LightQSPanel", false);
-		unMuteVolumePCT = XPrefs.Xprefs.getInt("UnMuteVolumePCT", 50);
+		unMuteVolumePCT = RangeSliderPreference.getSingleIntValue(XPrefs.Xprefs, "UnMuteVolumePCT", 50);
 	}
 
 	@Override

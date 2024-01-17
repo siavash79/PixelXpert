@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">Nopea QS-paneelin alasveto tilapalkista</string>
 	<string name="qs_pulldown_side_title">Nopeasti alas vedettävä puoli</string>
 	<string name="qs_pulldown_category">Pika-asetusten alasvetovalikko</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Värinä QS-laattahanalla</string>
 	<string name="vibration_type_touch">Järjestelmän kosketusvärinäasetusten määrittämä voimakkuus</string>
 	<string name="qs_tile_qty_portrait">Pystysuuntainen</string>
 	<string name="qs_tile_qty_landscape">Vaakasuunnassa</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">QS-rivien lukumäärä</string>
 	<string name="qs_cols_number">QS-sarakkeiden lukumäärä</string>
 	<string name="qqs_tiles_number">Laattojen enimmäismäärä Quick QS:ssä (enintään 2 riviä)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Ota teemakuvakkeet uudelleen käyttöön</string>
 	<string name="volume_button_step_title">Äänenvoimakkuuden portaat (0–100 %)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Näytön resoluutio</string>
 	<string name="brightness_range_title">Näytön kirkkausrajat</string>
 	<string name="brightness_range_not_linear">Tämä alue EI ole lineaarinen: Joskus pieni ero johtaa huomattaviin muutoksiin</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Kun aina on näyttö on pois päältä] Näytön napauttaminen näyttää ympäristön näytön</string>
 	<string name="so_pick_to_show_ambient_title">Valitse näyttääksesi ympäristön näytön</string>
 	<string name="so_pick_to_show_ambient_summary">[Kun aina päällä näyttö on pois päältä] Kun valitset puhelimen, näyttöön tulee ympäristön näyttö</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Kun näyttö on pois päältä…</string>
 	<string name="custom_themed_icons_title">Mukautetut teemakuvakkeet</string>
 	<string name="custom_themed_icons_off">Mukautetut kuvakkeet poistettu käytöstä</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">Lisää laajenna/kutista kaikki painikkeet</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Varoitusilmoituksen kesto</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Poista elastinen ylivieritystehoste käytöstä</string>
 	<string name="overscroll_on_summary">Tärkeää: sinun TÄYTYY ottaa käyttöön sovellukset, joiden ylivierityksen haluat poistaa käytöstä LSPosedissa</string>
 	<string name="milliseconds">Millisekuntia</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">Näytä kuvake tilapalkissa, kun vaihto on käytettävissä</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Värinä, kun lähtevään puheluun vastataan</string>
 	<string name="vibrate_on_call_drop_title">Värinä, kun puhelu katkeaa</string>

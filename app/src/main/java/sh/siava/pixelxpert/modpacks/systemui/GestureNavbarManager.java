@@ -11,6 +11,8 @@ import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.tryHookAllMethods;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -23,10 +25,9 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.launcher.TaskbarActivator;
-import sh.siava.pixelxpert.modpacks.utils.Helpers;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class GestureNavbarManager extends XposedModPack {
@@ -52,7 +53,7 @@ public class GestureNavbarManager extends XposedModPack {
 	//region pill color
 	private boolean colorReplaced = false;
 	private static boolean navPillColorAccent = false;
-	private static final int mLightColor = Color.parseColor("#EBffffff"), mDarkColor = Color.parseColor("#99000000"); //original navbar colors
+	private static final int mLightColor = 0xEBFFFFFF, mDarkColor = 0x99000000; //original navbar colors
 	//endregion
 
 	public GestureNavbarManager(Context context) {
@@ -60,53 +61,45 @@ public class GestureNavbarManager extends XposedModPack {
 	}
 
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
+		if (Xprefs == null) return;
 
 		//region Back gesture
-		leftEnabled = XPrefs.Xprefs.getBoolean("BackFromLeft", true);
-		rightEnabled = XPrefs.Xprefs.getBoolean("BackFromRight", true);
-		backGestureHeightFractionLeft = XPrefs.Xprefs.getInt("BackLeftHeight", 100) / 100f;
-		backGestureHeightFractionRight = XPrefs.Xprefs.getInt("BackRightHeight", 100) / 100f;
+		leftEnabled = Xprefs.getBoolean("BackFromLeft", true);
+		rightEnabled = Xprefs.getBoolean("BackFromRight", true);
+		backGestureHeightFractionLeft = RangeSliderPreference.getSingleIntValue(Xprefs, "BackLeftHeight", 100) / 100f;
+		backGestureHeightFractionRight = RangeSliderPreference.getSingleIntValue(Xprefs, "BackRightHeight", 100) / 100f;
 		//endregion
 
 		//region pill size
-		widthFactor = XPrefs.Xprefs.getInt("GesPillWidthModPos", 50) * .02f;
-		GesPillHeightFactor = XPrefs.Xprefs.getInt("GesPillHeightFactor", 100);
+		widthFactor = RangeSliderPreference.getSingleIntValue(Xprefs, "GesPillWidthModPos", 50) * .02f;
+		GesPillHeightFactor = RangeSliderPreference.getSingleIntValue(Xprefs, "GesPillHeightFactor", 100);
 
 		int taskbarMode = TaskbarActivator.TASKBAR_DEFAULT;
-		String taskbarModeStr = XPrefs.Xprefs.getString("taskBarMode", "0");
+		String taskbarModeStr = Xprefs.getString("taskBarMode", "0");
 		try {
 			taskbarMode = Integer.parseInt(taskbarModeStr);
 		} catch (Exception ignored) {
 		}
 
-		if (taskbarMode == TaskbarActivator.TASKBAR_ON) {
+		if (taskbarMode == TaskbarActivator.TASKBAR_ON || Xprefs.getBoolean("HideNavbar", false)) {
 			widthFactor = 0f;
 		}
 
 		if (Key.length > 0) {
-			switch (Key[0]) {
-				case "GesPillWidthModPos":
-				case "GesPillHeightFactor":
-					refreshNavbar();
-					break;
-			}
+			refreshNavbar();
 		}
 		//endregion
 
 		//region pill color
-		navPillColorAccent = XPrefs.Xprefs.getBoolean("navPillColorAccent", false);
+		navPillColorAccent = Xprefs.getBoolean("navPillColorAccent", false);
 		//endregion
 	}
 
 	//region pill size
 	private void refreshNavbar() {
 		try {
-			callMethod(mNavigationBarInflaterView, "clearViews");
-			Object defaultLayout = callMethod(mNavigationBarInflaterView, "getDefaultLayout");
-			callMethod(mNavigationBarInflaterView, "inflateLayout", defaultLayout);
-		} catch (Throwable ignored) {
-		}
+			callMethod(mNavigationBarInflaterView, "onFinishInflate");
+		} catch (Throwable ignored) {}
 	}
 	//endregion
 
@@ -119,6 +112,7 @@ public class GestureNavbarManager extends XposedModPack {
 		Class<?> EdgeBackGestureHandlerClass = findClassIfExists("com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler", lpparam.classLoader);
 		Class<?> NavigationBarEdgePanelClass = findClassIfExists("com.android.systemui.navigationbar.gestural.NavigationBarEdgePanel", lpparam.classLoader);
 		Class<?> BackPanelControllerClass = findClass("com.android.systemui.navigationbar.gestural.BackPanelController", lpparam.classLoader);
+
 
 		//region back gesture
 		//A14
@@ -149,7 +143,7 @@ public class GestureNavbarManager extends XposedModPack {
 		});
 
 		//Android 13
-		Helpers.tryHookAllMethods(NavigationBarEdgePanelClass, "onMotionEvent", new XC_MethodHook() {
+		tryHookAllMethods(NavigationBarEdgePanelClass, "onMotionEvent", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				MotionEvent event = (MotionEvent) param.args[0];
@@ -215,7 +209,7 @@ public class GestureNavbarManager extends XposedModPack {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						if (mRadius > 0) {
-							setObjectField(param.thisObject, "mRadius", Math.round(mRadius));
+							setObjectField(param.thisObject, "mRadius", mRadius);
 						}
 					}
 				});

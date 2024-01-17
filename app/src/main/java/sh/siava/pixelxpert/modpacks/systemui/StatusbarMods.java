@@ -1,5 +1,6 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
+import static android.content.DialogInterface.BUTTON_NEUTRAL;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
@@ -18,10 +19,12 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.ResourceManager.modRes;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -32,13 +35,13 @@ import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Message;
 import android.os.UserHandle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyCallback;
+import android.telephony.TelephonyDisplayInfo;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -86,11 +89,6 @@ import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class StatusbarMods extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
-
-	//region battery
-	public static final int CHARGING_FAST = 2;
-	//endregion
-
 	//region Clock
 	public static final int POSITION_LEFT = 0;
 	public static final int POSITION_CENTER = 1;
@@ -99,7 +97,6 @@ public class StatusbarMods extends XposedModPack {
 
 	private static final int AM_PM_STYLE_SMALL = 1;
 	private static final int AM_PM_STYLE_GONE = 2;
-	private static final int MSG_BATTERY_UPDATE = 302;
 	private int leftClockPadding = 0, rightClockPadding = 0;
 	private static int clockPosition = POSITION_LEFT;
 	private static int mAmPmStyle = AM_PM_STYLE_GONE;
@@ -182,6 +179,7 @@ public class StatusbarMods extends XposedModPack {
 
 	private Class<?> StatusBarIconClass;
 	private Class<?> StatusBarIconHolderClass;
+	private Class<?> SystemUIDialogClass;
 	private Object volteStatusbarIconHolder;
 	private boolean telephonyCallbackRegistered = false;
 	private boolean lastVolteAvailable = false;
@@ -266,7 +264,7 @@ public class StatusbarMods extends XposedModPack {
 		if (Key.length > 0 && Key[0].equals("notificationAreaMultiRow")) { //WHY we check the old value? because if prefs is empty it will fill it up and count an unwanted change
 			boolean newnotificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
 			if (newnotificationAreaMultiRow != notificationAreaMultiRow) {
-				SystemUtils.restartSystemUI();
+				SystemUtils.killSelf();
 			}
 		}
 		notificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
@@ -296,8 +294,8 @@ public class StatusbarMods extends XposedModPack {
 		BBOnlyWhileCharging = Xprefs.getBoolean("BBOnlyWhileCharging", false);
 		BBOnBottom = Xprefs.getBoolean("BBOnBottom", false);
 		BBSetCentered = Xprefs.getBoolean("BBSetCentered", false);
-		BBOpacity = Xprefs.getInt("BBOpacity", 100);
-		BBarHeight = Xprefs.getInt("BBarHeight", 50);
+		BBOpacity = RangeSliderPreference.getSingleIntValue(Xprefs, "BBOpacity", 100);
+		BBarHeight = RangeSliderPreference.getSingleIntValue(Xprefs, "BBarHeight", 50);
 		BBarTransitColors = Xprefs.getBoolean("BBarTransitColors", false);
 
 		batteryLevels = RangeSliderPreference.getValues(Xprefs, "batteryWarningRange", 0);
@@ -332,8 +330,8 @@ public class StatusbarMods extends XposedModPack {
 		boolean networkTrafficRXTop = Xprefs.getBoolean("networkTrafficRXTop", true);
 		int networkTrafficDLColor = Xprefs.getInt("networkTrafficDLColor", Color.GREEN);
 		int networkTrafficULColor = Xprefs.getInt("networkTrafficULColor", Color.RED);
-		int networkTrafficOpacity = Xprefs.getInt("networkTrafficOpacity", 100);
-		int networkTrafficInterval = Xprefs.getInt("networkTrafficInterval", 1);
+		int networkTrafficOpacity = RangeSliderPreference.getSingleIntValue(Xprefs, "networkTrafficOpacity", 100);
+		int networkTrafficInterval = RangeSliderPreference.getSingleIntValue(Xprefs, "networkTrafficInterval", 1);
 		boolean networkTrafficColorful = Xprefs.getBoolean("networkTrafficColorful", false);
 		boolean networkTrafficShowIcons = Xprefs.getBoolean("networkTrafficShowIcons", true);
 
@@ -504,7 +502,7 @@ public class StatusbarMods extends XposedModPack {
 		//region needed classes
 		Class<?> QSSecurityFooterUtilsClass = findClass("com.android.systemui.qs.QSSecurityFooterUtils", lpparam.classLoader);
 		Class<?> KeyguardStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarViewController", lpparam.classLoader);
-//        Class<?> QuickStatusBarHeaderControllerClass = findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
+//      Class<?> QuickStatusBarHeaderControllerClass = findClass("com.android.systemui.qs.QuickStatusBarHeaderController", lpparam.classLoader);
 		Class<?> QuickStatusBarHeaderClass = findClass("com.android.systemui.qs.QuickStatusBarHeader", lpparam.classLoader);
 		Class<?> ClockClass = findClass("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader);
 		Class<?> PhoneStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarView", lpparam.classLoader);
@@ -512,14 +510,38 @@ public class StatusbarMods extends XposedModPack {
 //		Class<?> StatusBarIconViewClass = findClass("com.android.systemui.statusbar.StatusBarIconView", lpparam.classLoader);
 		Class<?> CollapsedStatusBarFragmentClass = findClassIfExists("com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment", lpparam.classLoader);
 		Class<?> PrivacyItemControllerClass = findClass("com.android.systemui.privacy.PrivacyItemController", lpparam.classLoader);
-		Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
+//		Class<?> KeyguardUpdateMonitorClass = findClass("com.android.keyguard.KeyguardUpdateMonitor", lpparam.classLoader);
 		Class<?> TunerServiceImplClass = findClass("com.android.systemui.tuner.TunerServiceImpl", lpparam.classLoader);
 		Class<?> ConnectivityCallbackHandlerClass = findClass("com.android.systemui.statusbar.connectivity.CallbackHandler", lpparam.classLoader);
+		Class<?> HeadsUpStatusBarViewClass = findClass("com.android.systemui.statusbar.HeadsUpStatusBarView", lpparam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpparam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpparam.classLoader);
+		SystemUIDialogClass = findClass("com.android.systemui.statusbar.phone.SystemUIDialog", lpparam.classLoader);
 		//endregion
 
 		initSwitchIcon();
+
+		//forcing a refresh on statusbar once the charging chip goes away to avoid layout issues
+		//only needed if chip is shown on lockscreen and device is unlocked quickly afterwards
+
+
+		// Placing the headsUp text right next to the icon. if it's double row, it needs to shift down
+		hookAllMethods(HeadsUpStatusBarViewClass, "onLayout", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				View headsUpView = (View) param.thisObject;
+				int[] headsUpLocation = new int[2];
+				headsUpView.getLocationOnScreen(headsUpLocation);
+
+				int[] notificationContainerLocation = new int[2];
+				mNotificationIconContainer.getLocationOnScreen(notificationContainerLocation);
+
+				((View) getObjectField(param.thisObject, "mTextView"))
+						.setTranslationY(
+								(notificationContainerLocation[1] - headsUpLocation[1])
+										/ 2f);
+			}
+		});
 
 		//region combined signal icons
 		hookAllConstructors(TunerServiceImplClass, new XC_MethodHook() {
@@ -640,32 +662,6 @@ public class StatusbarMods extends XposedModPack {
 
 		//endregion
 
-		//setting charing status for batterybar and batteryicon
-
-		hookAllConstructors(KeyguardUpdateMonitorClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				Object handler = getObjectField(param.thisObject, "mHandler");
-
-				hookAllMethods(handler.getClass(), "handleMessage", new XC_MethodHook() {
-					@Override
-					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						Message msg = (Message) param.args[0];
-						if(msg.what == MSG_BATTERY_UPDATE)
-						{
-							int mChargingSpeed = (int) callMethod(msg.obj, "getChargingSpeed", mContext);
-							if (mChargingSpeed == CHARGING_FAST) {
-								BatteryBarView.setIsFastCharging(true);
-								BatteryStyleManager.setIsFastCharging(true);
-							} else {
-								BatteryBarView.setIsFastCharging(false);
-								BatteryStyleManager.setIsFastCharging(false);
-							}
-						}
-					}
-				});
-			}
-		});
 		//getting statusbar class for further use
 		hookAllConstructors(CollapsedStatusBarFragmentClass, new XC_MethodHook() {
 			@Override
@@ -948,7 +944,15 @@ public class StatusbarMods extends XposedModPack {
 					}
 				});
 
-		hookAllMethods(ServiceState.class, "getRoaming", new XC_MethodHook() {
+		hookAllMethods(ServiceState.class, "getRoaming", new XC_MethodHook() { //A14QPR1 and prior
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(HideRoamingState)
+					param.setResult(false);
+			}
+		});
+
+		hookAllMethods(TelephonyDisplayInfo.class, "isRoaming", new XC_MethodHook() { //A14QPR2
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if(HideRoamingState)
@@ -969,9 +973,11 @@ public class StatusbarMods extends XposedModPack {
 		mNotificationIconContainer = mStatusBar.findViewById(mContext.getResources().getIdentifier("notificationIcons", "id", mContext.getPackageName()));
 
 		mNotificationContainerContainer = new LinearLayout(mContext);
+		mNotificationContainerContainer.setClipChildren(false); //allowing headsup icon to go beyond
 
 		if (mLeftVerticalSplitContainer == null) {
 			mLeftVerticalSplitContainer = new LinearLayout(mContext);
+			mLeftVerticalSplitContainer.setClipChildren(false); //allowing headsup icon to go beyond
 		} else {
 			mLeftVerticalSplitContainer.removeAllViews();
 			if (mLeftVerticalSplitContainer.getParent() != null)
@@ -1245,7 +1251,17 @@ public class StatusbarMods extends XposedModPack {
 				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", todayIntent, 0);
 			}
 			else if (name.endsWith("batteryRemainingIcon")) {
-				callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(Intent.ACTION_POWER_USAGE_SUMMARY), 0);
+
+				if(BatteryDataProvider.isCharging())
+				{
+					try
+					{
+						showChargingDialog();
+						return;
+					}
+					catch (Throwable ignored){}
+				}
+				showBatteryPage();
 			}
 		}
 
@@ -1263,6 +1279,22 @@ public class StatusbarMods extends XposedModPack {
 			}
 			return false;
 		}
+	}
+
+	private void showChargingDialog() throws Throwable {
+		AlertDialog dialog = (AlertDialog) SystemUIDialogClass.getConstructor(Context.class).newInstance(mContext);
+
+		dialog.setMessage(KeyguardMods.getPowerIndicationString());
+
+		dialog.setButton(BUTTON_NEUTRAL,
+				modRes.getText(R.string.battery_info_button_title),
+				(dialog1, which) -> showBatteryPage());
+
+		dialog.show();
+	}
+
+	private void showBatteryPage() {
+		callMethod(mActivityStarter, "postStartActivityDismissingKeyguard", new Intent(Intent.ACTION_POWER_USAGE_SUMMARY), 0);
 	}
 	//endregion
 

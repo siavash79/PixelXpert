@@ -8,10 +8,9 @@
 	android:gravity="center_vertical"
 	android:minHeight="?android:attr/listPreferredItemHeight"
 	android:orientation="horizontal"
+	android:paddingVertical="16dp"
 	android:paddingStart="24dp"
-	android:paddingTop="16dp"
-	android:paddingEnd="16dp"
-	android:paddingBottom="16dp">
+	android:paddingEnd="16dp">
 
 	<ImageView
 		android:id="@+id/history"
@@ -22,18 +21,18 @@
 		android:layout_marginEnd="16dp"
 		android:contentDescription="@string/searchpreference_history_entry"
 		app:srcCompat="@drawable/ic_history"
-		app:tint="@color/text_color_secondary" />
+		app:tint="?attr/colorOnSurface" />
 
 	<RelativeLayout
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_weight="1">
 
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/term"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textColor="@color/text_color_secondary" />
+			android:textColor="?attr/colorOnSurface" />
 
 	</RelativeLayout>
 </LinearLayout>

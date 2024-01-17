@@ -1,10 +1,7 @@
 package sh.siava.pixelxpert.modpacks.utils;
 
-import android.os.RemoteException;
-
 import com.topjohnwu.superuser.Shell;
 
-import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 
 public class ModuleFolderOperations {
@@ -41,12 +38,7 @@ public class ModuleFolderOperations {
 			}
 			else
 			{
-				XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-					@Override
-					public void run(IRootProviderProxy proxy) throws RemoteException {
-						proxy.runCommand(command);
-					}
-				});
+				XPLauncher.enqueueProxyCommand(proxy -> proxy.runCommand(command));
 			}
 		}
 		catch (Throwable ignored){}

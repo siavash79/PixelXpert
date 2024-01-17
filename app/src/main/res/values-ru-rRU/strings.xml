@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Включение альтернативной иконки AOSPMods </string>
-	<string name="xposed_desc"></string>
+	<string name="xposed_desc">Настройки для устройств Google Pixel</string>
 	<string name="volume_tile_title">Громкость мультимедиа </string>
 	<string name="app_switch_tile_title">Сменить профиль приложения</string>
 	<string name="hide_default">Скрыть (по умолчанию)</string>
@@ -34,8 +34,8 @@
 	<string name="telegram_group_title">Группа Telegram</string>
 	<string name="usage_title">Использование</string>
 	<string name="usage_summary">Открыть wiki страницу</string>
-	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_title">Помогите с переводом</string>
+	<string name="crowdin_summary">Помогите нам в переводе %s на ваш язык</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Экран блокировки</string>
 	<string name="statusbar_header">Строка состояния</string>
@@ -81,7 +81,7 @@
 	<string name="easy_unlock_title">Легкая разблокировка (пин-код/пароль)</string>
 	<string name="easy_unlock_summary">Если не получилось в первый раз, попробуйте еще раз</string>
 	<string name="charging_info_title">Информация о зарядке на экране блокировки</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">Не показывать кнопку «Настройки заблокированного экрана»</string>
 	<string name="imperial_units_title">Использовать британские единицы измерения</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Двойное нажатие для перехода в спящий режим</string>
@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">Быстрое вытягивание панели быстрых настроек из строки состояния</string>
 	<string name="qs_pulldown_side_title">Сторона быстрого вытягивания</string>
 	<string name="qs_pulldown_category">Вытягивание быстрых настроек</string>
+	<string name="qs_pullup_switch_title">Закрыть быстрые настройки одним свайпом</string>
 	<string name="qs_haptic_switch_title">Вибрация при касании плиток быстрых настроек</string>
 	<string name="vibration_type_touch">Интенсивность определяется системными настройками вибрации при касании</string>
 	<string name="qs_tile_qty_portrait">В портретной ориентации </string>
 	<string name="qs_tile_qty_landscape">В горизонтальной ориентации</string>
+	<string name="qs_mod_category_misc_title">Разное</string>
+	<string name="charging_info_on_qs">Отображать информацию о зарядке в панели быстрых настроек</string>
 	<string name="qs_rows_number">Количество рядов быстрых настроек</string>
 	<string name="qs_cols_number">Количество столбцов быстрых настроек</string>
 	<string name="qqs_tiles_number">Максимальное количество плиток в полураскрытых быстрых настройках (максимум 2 строки)</string>
@@ -253,9 +256,11 @@
 	<string name="allow_all_screen_rotations_summary">Будет игнорировать плавающую кнопку ручного вращения</string>
 	<string name="force_no_cutout">Игнорировать вырез камеры</string>
 	<string name="clear_all_reposition_title">Добавить кнопку для очистки приложений внизу панель задач</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="force_themed_icons_title">Автоматическая генерация недостающих тематических значков (только Pixel launcher)</string>
 	<string name="reapply_themed_config">Повторное включение тематических значков для применения</string>
 	<string name="volume_button_step_title">Шаг громкости (от 0 до 100%)</string>
+	<string name="display_resolution_switch_title">Изменить разрешение экрана</string>
+	<string name="display_resolution_switch_summary">Перед включением убедитесь, что все изменения размера экрана/dpi были сброшены до значений умолчанию</string>
 	<string name="display_resolution_title">Разрешение диплея</string>
 	<string name="brightness_range_title">Пределы яркости дисплея</string>
 	<string name="brightness_range_not_linear">Этот диапазон НЕ является линейным: иногда небольшая разница приводит к значительным изменениям.</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[При выключенном режиме] При нажатии на экран отображается ambient display</string>
 	<string name="so_pick_to_show_ambient_title">Нажмите, чтобы отобразить ambient display</string>
 	<string name="so_pick_to_show_ambient_summary">[При выключенном режиме] При нажатии на экран отображается ambient display</string>
+	<string name="force_aod_while_charging_title">Принудительный AOD во время зарядки</string>
+	<string name="force_aod_while_charging_summary">Всегда включать AOD во время зарядки устройства</string>
 	<string name="doze_header">Когда экран выключен…</string>
 	<string name="custom_themed_icons_title">Пользовательские тематические иконки</string>
 	<string name="custom_themed_icons_off">Пользовательские значки отключены</string>
@@ -277,20 +284,26 @@
 	<string name="so_vol_longpress_skip">Долгое нажатие клавишь громкости для переключения треков</string>
 	<string name="notifications_header">Параметры уведомлений</string>
 	<string name="expand_notifications_icons_title">Добавить кнопки развернуть/свернуть все</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Никогда не закрывайте текущие уведомления (A14)</string>
 	<string name="heads_up_notification_duration">Длительность уведомления о предупреждениях</string>
+	<string name="notif_default_expansion_title">Раскрытие уведомлений по умолчанию</string>
+	<string name="notif_always_expand">Всегда раскрывать</string>
+	<string name="notif_always_collapse">Всегда сворачивать</string>
 	<string name="disable_overscroll">Отключить эффект упругости в конце прокрутки</string>
 	<string name="overscroll_on_summary">Важно: Вы ДОЛЖНЫ включить приложения, для которых Вы хотите отключить прокрутку, в LSPosed</string>
 	<string name="milliseconds">Миллисекунды</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">Панель регулировки громкости</string>
+	<string name="volume_dialog_timeout">Тайм-аут панели громкости</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Работать/Клонировать Профиль</string>
 	<string name="statusbar_long_press_app_switch">Длительное нажатие на строке состояния для переключения профиля</string>
 	<string name="statusbar_app_switch_icon">Показывать значок в строке состояния, когда переключение доступно</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Разблокировано для всех приложений через <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Наслаждайтесь!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Информация о батарее…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Вибрация при ответе на исходящий вызов</string>
 	<string name="vibrate_on_call_drop_title">Вибрация при отключении вызова</string>
@@ -418,18 +431,18 @@
 	<string name="package_activated">Пакет успешно активирован</string>
 	<string name="package_activation_failed">Не удалось активировать пакет</string>
 	<string name="activate_in_lsposed">Активировать в LSPosed</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">Пакет не может быть запущен</string>
+	<string name="menu_launch_app">Запустить приложение</string>
+	<string name="menu_restart_app">Перезапустить приложение</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Проверка прав доступа к корневой системе…</string>
 	<string name="connecting_root_service">Подключение к корневому сервису…</string>
 	<string name="root_access_denied">Рут доступ запрещен. Пожалуйста, предоставьте права суперпользователя.</string>
-	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
+	<string name="root_service_failed">Не удалось соединиться с root сервисом. Пожалуйста, попробуйте позже.</string>
 	<string name="exit">Выход</string>
 	<!-- Bottom Navigation -->
-	<string name="navigation_home">Home</string>
-	<string name="navigation_update">Update</string>
-	<string name="navigation_hooks">Hooks</string>
-	<string name="navigation_settings">Settings</string>
+	<string name="navigation_home">Главная</string>
+	<string name="navigation_update">Обновить</string>
+	<string name="navigation_hooks">Хуки</string>
+	<string name="navigation_settings">Настройки</string>
 </resources>

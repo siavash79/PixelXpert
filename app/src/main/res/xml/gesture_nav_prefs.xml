@@ -15,14 +15,14 @@
 			android:title="@string/back_from_left_title"
 			app:iconSpaceReserved="false" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			android:layout_width="wrap_content"
-			android:defaultValue="100"
+			app:defaultValue="100"
 			android:key="BackLeftHeight"
-			android:max="100"
+			app:maxVal="100"
 			android:title="@string/back_height_title"
 			app:iconSpaceReserved="false"
-			app:min="10"
+			app:minVal="10"
 			app:updatesContinuously="true" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
@@ -31,13 +31,13 @@
 			android:title="@string/back_from_right_title"
 			app:iconSpaceReserved="false" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
-			android:defaultValue="100"
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+			app:defaultValue="100"
 			android:key="BackRightHeight"
-			android:max="100"
+			app:maxVal="100"
 			android:title="@string/back_height_title"
 			app:iconSpaceReserved="false"
-			app:min="10"
+			app:minVal="10"
 			app:updatesContinuously="true" />
 
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
@@ -128,20 +128,20 @@
 			android:title="@string/colorpill"
 			app:iconSpaceReserved="false" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
-			android:defaultValue="50"
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+			app:defaultValue="50"
 			android:key="GesPillWidthModPos"
 			android:title="@string/gesture_nav_pill_width_title"
 			app:iconSpaceReserved="false"
 			app:updatesContinuously="true" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
-			android:defaultValue="100"
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+			app:defaultValue="100"
 			android:key="GesPillHeightFactor"
-			android:max="300"
+			app:maxVal="300"
 			android:title="@string/gesture_nav_pill_height_title"
 			app:iconSpaceReserved="false"
-			app:min="50"
+			app:minVal="50"
 			app:seekBarIncrement="10"
 			app:updatesContinuously="true" />
 

@@ -26,8 +26,8 @@
 			android:title="@string/qs_haptic_switch_title"
 			app:iconSpaceReserved="false" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
-			android:defaultValue="50"
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+			app:defaultValue="50"
 			android:key="UnMuteVolumePCT"
 			android:title="@string/qs_volume_unmute_title"
 			app:iconSpaceReserved="false"
@@ -177,8 +177,8 @@
 			android:title="@string/qs_pulldown_switch_title"
 			app:iconSpaceReserved="false" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
-			android:defaultValue="25"
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+			app:defaultValue="25"
 			android:key="QSPulldownPercent"
 			android:title="@string/qs_pulldown_size"
 			app:iconSpaceReserved="false"
@@ -191,6 +191,14 @@
 			android:key="QSPulldownSide"
 			android:summary="%s"
 			android:title="@string/qs_pulldown_side_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="oneFingerPullupEnabled"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/qs_pullup_switch_title"
 			app:iconSpaceReserved="false" />
 
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
@@ -213,6 +221,21 @@
 			android:key="network_settings_header_qs"
 			android:title="@string/network_settings_pref"
 			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$NetworkFragment"
+			app:iconSpaceReserved="false" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/qs_mod_category_misc_title"
+		app:iconSpaceReserved="false"
+		search:ignore="true">
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="ChargingInfoOnQSEnabled"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/charging_info_on_qs"
 			app:iconSpaceReserved="false" />
 
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>

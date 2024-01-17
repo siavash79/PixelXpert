@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">Брзо КС панел падајући са статусне траке</string>
 	<string name="qs_pulldown_side_title">Страна за брзо повлачење</string>
 	<string name="qs_pulldown_category">Падајући мени за брза подешавања</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Вибрирајте на КС плочици</string>
 	<string name="vibration_type_touch">Интензитет дефинисан поставкама вибрације на додир система</string>
 	<string name="qs_tile_qty_portrait">У портретној оријентацији</string>
 	<string name="qs_tile_qty_landscape">У пејзажној оријентацији</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Број КС редова</string>
 	<string name="qs_cols_number">Број КС колона</string>
 	<string name="qqs_tiles_number">Максималан број плочица у Куицк КС (максимално 2 реда)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">Аутоматски генериши тематске иконе које недостају (само на Pixel Launcher-у)</string>
 	<string name="reapply_themed_config">Поново омогућите тематске иконе за примену</string>
 	<string name="volume_button_step_title">Кораци јачине звука (0 до 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Резолуција екрана</string>
 	<string name="brightness_range_title">Ограничења осветљености екрана</string>
 	<string name="brightness_range_not_linear">Овај опсег НИЈЕ линеаран: Понекад мала разлика доводи до значајних промена</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Када је увек на екрану искључено] Додиром на екран приказује се амбијентални приказ</string>
 	<string name="so_pick_to_show_ambient_title">Изаберите да бисте приказали амбијентални приказ</string>
 	<string name="so_pick_to_show_ambient_summary">[Када је увек на екрану искључено] Избором телефона приказује се амбијентални екран</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Док је екран искључен…</string>
 	<string name="custom_themed_icons_title">Прилагођене тематске иконе</string>
 	<string name="custom_themed_icons_off">Прилагођене иконе су онемогућене</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">Додај прошири/скупи сва дугмад</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Трајање упозорења</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Онемогућите ефекат еластичног премотавања</string>
 	<string name="overscroll_on_summary">Важно: МОРАТЕ да омогућите апликације за које желите да онемогућите прекомерно померање у оквиру ЛПосед</string>
 	<string name="milliseconds">Милисекунде</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">Прикажите икону на статусној траци када је пребацивање доступно</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Откључано за све апликације уз <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Уживајте!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Вибрација при одговору на одлазни позив</string>
 	<string name="vibrate_on_call_drop_title">Вибрирајте када се позив прекине</string>

@@ -21,6 +21,14 @@
 		android:title="@string/hide_navbar_title"
 		app:iconSpaceReserved="false" />
 
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="HideNavbar"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/hide_navbar_title"
+		app:iconSpaceReserved="false" />
+
 	<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 		android:defaultValue="0"
 		android:entries="@array/taskbar_option_names"

@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">Vinnige QS-paneel-aftrek vanaf statusbalk</string>
 	<string name="qs_pulldown_side_title">Vinnige aftrekkant</string>
 	<string name="qs_pulldown_category">Vinnige instellings aftrek</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Vibreer op QS-teëlkraan</string>
 	<string name="vibration_type_touch">Intensiteit word gedefinieer deur stelselaanraakvibrasie-instellings</string>
 	<string name="qs_tile_qty_portrait">In portretoriëntasie</string>
 	<string name="qs_tile_qty_landscape">In landskaporiëntasie</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Aantal QS-rye</string>
 	<string name="qs_cols_number">Aantal QS-kolomme</string>
 	<string name="qqs_tiles_number">Maksimum teëls in Quick QS (maksimum 2 rye)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Aktiveer tema-ikone weer om toe te pas</string>
 	<string name="volume_button_step_title">Volumestappe (0 tot 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Vertoon resolusie</string>
 	<string name="brightness_range_title">Vertoon helderheid limiete</string>
 	<string name="brightness_range_not_linear">Hierdie reeks is NIE lineêr nie: Soms lei \'n klein verskil tot aansienlike veranderinge</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Wanneer altyd op vertoning af is] Deur op die skerm te tik, wys die omgewingsvertoning</string>
 	<string name="so_pick_to_show_ambient_title">Kies om omgewingsvertoning te wys</string>
 	<string name="so_pick_to_show_ambient_summary">[Wanneer altyd op vertoning af is] As jy die foon kies, wys die omgewingsvertoning</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Terwyl skerm af is…</string>
 	<string name="custom_themed_icons_title">Pasgemaakte tema-ikone</string>
 	<string name="custom_themed_icons_off">Gepasmaakte ikone gedeaktiveer</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">Voeg alle knoppies uit/vou alle knoppies in</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Tydsduur van kennisname</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Deaktiveer elastiese oorrol-effek</string>
 	<string name="overscroll_on_summary">Belangrik: jy MOET die programme waarvoor jy oorblaai wil deaktiveer binne LSPosed aktiveer</string>
 	<string name="milliseconds">Millisekondes</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">Wys \'n ikoon op statusbalk wanneer oorskakeling beskikbaar is</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibreer op uitgaande oproep beantwoord</string>
 	<string name="vibrate_on_call_drop_title">Vibreer wanneer oproep ontkoppel</string>

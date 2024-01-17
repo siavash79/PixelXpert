@@ -184,7 +184,7 @@ public class XPLauncher implements ServiceConnection {
 			{
 				try
 				{
-					Objects.requireNonNull(proxyQueue.poll()).run();
+					Objects.requireNonNull(proxyQueue.poll()).run(rootProxyIPC);
 				}
 				catch (Throwable ignored){}
 			}
@@ -228,7 +228,9 @@ public class XPLauncher implements ServiceConnection {
 	{
 		if(rootProxyIPC != null)
 		{
-			runnable.run();
+			try {
+				runnable.run(rootProxyIPC);
+			} catch (RemoteException ignored) {}
 		}
 		else
 		{
@@ -237,16 +239,8 @@ public class XPLauncher implements ServiceConnection {
 		}
 	}
 
-	public abstract static class ProxyRunnable implements Runnable
+	public interface ProxyRunnable
 	{
-		public abstract void run(IRootProviderProxy proxy) throws RemoteException;
-
-		@Override
-		public void run()
-		{
-			try {
-				run(rootProxyIPC);
-			} catch (Throwable ignored) {}
-		}
+		void run(IRootProviderProxy proxy) throws RemoteException;
 	}
 }

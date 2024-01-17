@@ -8,28 +8,11 @@
 	<style name="AppTheme.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
 		<item name="android:dialogCornerRadius">32dp</item>
 		<item name="android:backgroundDimAmount">0.60</item>
-		<item name="android:textColor">@color/text_color_primary</item>
-		<item name="android:textColorPrimary">@color/text_color_primary</item>
-		<item name="android:textColorSecondary">@color/text_color_secondary</item>
-		<item name="colorPrimary">@color/ui_accent</item>
-		<item name="colorPrimaryVariant">@color/ui_accent</item>
-		<item name="colorOnPrimary">@color/ui_fg</item>
-		<item name="colorSecondary">@color/ui_accent</item>
-		<item name="colorSecondaryVariant">@color/ui_accent</item>
-		<item name="colorOnSecondary">@color/ui_fg</item>
-		<item name="colorAccent">@color/ui_accent</item>
-		<item name="colorBackgroundFloating">@color/ui_bg</item>
-		<item name="colorSurface">@color/ui_surface</item>
-		<item name="colorPrimarySurface">@color/ui_primary_surface</item>
-	</style>
-
-	<style name="Widget.CollapsingToolbar" parent="Widget.Material3.CollapsingToolbar">
-		<item name="contentScrim">@drawable/color_surface_overlay</item>
 	</style>
 
 	<style name="Material3.SeekBar" parent="Widget.AppCompat.SeekBar">
 		<item name="android:progressBackgroundTint">@color/color_accent_0_80_overlay</item>
-		<item name="android:progressTint">@color/ui_accent</item>
+		<item name="android:progressTint">?attr/colorPrimary</item>
 		<item name="android:thumbTint">@null</item>
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">wrap_content</item>
@@ -38,14 +21,6 @@
 		<item name="android:splitTrack">false</item>
 		<item name="android:thumb">@drawable/seek_thumb</item>
 		<item name="android:track">@drawable/seek_track</item>
-	</style>
-
-	<style name="Widget.MaterialSwitch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
-		<item name="materialThemeOverlay">@style/ThemeOverlay.MaterialSwitch</item>
-	</style>
-
-	<style name="ThemeOverlay.MaterialSwitch" parent="ThemeOverlay.Material3">
-		<item name="colorPrimaryContainer">?attr/colorOnPrimary</item>
 	</style>
 
 	<style name="Widget.ExtendedFloatingActionButton" parent="Widget.Material3.ExtendedFloatingActionButton.Primary">
@@ -73,14 +48,12 @@
 
 	<style name="MaterialAlertDialog.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
 		<item name="android:background">@drawable/container</item>
-		<item name="android:textColor">@color/text_color_primary</item>
 		<item name="android:textSize">20sp</item>
 		<item name="android:fontFamily">sans-serif-medium</item>
 	</style>
 
 	<style name="MaterialAlertDialog.Body.Text" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
 		<item name="android:background">@drawable/container</item>
-		<item name="android:textColor">@color/text_color_secondary</item>
 		<item name="android:textSize">14sp</item>
 		<item name="android:fontFamily">sans-serif</item>
 	</style>
@@ -89,6 +62,10 @@
 		<item name="android:background">@drawable/container</item>
 		<item name="android:textSize">16sp</item>
 		<item name="android:fontFamily">sans-serif-medium</item>
+	</style>
+
+	<style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
+		<item name="android:popupBackground">?attr/colorSurfaceVariant</item>
 	</style>
 
 </resources>

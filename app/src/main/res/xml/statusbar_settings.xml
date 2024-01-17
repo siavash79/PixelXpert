@@ -21,9 +21,9 @@
 			android:layout_width="wrap_content"
 			android:defaultValue="50"
 			android:key="centerAreaFineTune"
-			android:max="70"
+			app:maxVal="70"
 			android:title="@string/sb_center_fine_tune"
-			app:min="30"
+			app:minVal="30"
 			app:updatesContinuously="true" /-->
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialPreference
@@ -59,14 +59,14 @@
 			android:title="@string/unread_messages_title"
 			app:iconSpaceReserved="false" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			android:layout_width="wrap_content"
-			android:defaultValue="100"
+			app:defaultValue="100"
 			android:key="statusbarHeightFactor"
-			android:max="200"
+			app:maxVal="200"
 			android:title="@string/status_bar_height"
 			app:iconSpaceReserved="false"
-			app:min="50"
+			app:minVal="50"
 			app:updatesContinuously="true" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialEditTextPreference

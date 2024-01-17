@@ -9,6 +9,9 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
+/** A LinearLayout that hides itself when it's got no children.
+ *  Using this, we don't need to track children and make it visible
+ *  and hidden all the time */
 public class ShyLinearLayout extends LinearLayout {
 
 	public ShyLinearLayout(Context context) {

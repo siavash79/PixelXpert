@@ -17,11 +17,12 @@
 		android:importantForAccessibility="no"
 		app:srcCompat="@mipmap/ic_launcher" />
 
-	<TextView
+	<com.google.android.material.textview.MaterialTextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="32dp"
 		android:text="@string/app_name"
+		android:textColor="?attr/colorOnSurface"
 		android:textSize="34sp" />
 
 	<LinearLayout
@@ -43,21 +44,22 @@
 				android:importantForAccessibility="no"
 				android:visibility="gone" />
 
-			<com.google.android.material.progressindicator.CircularProgressIndicator
+			<ProgressBar
 				android:id="@+id/circular_root"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="32dp"
+				android:layout_height="32dp"
 				android:indeterminate="true"
-				android:progressTint="?attr/colorPrimary"
-				app:indicatorSize="24dp" />
+				android:indeterminateTint="?attr/colorPrimary"
+				android:indeterminateTintMode="src_atop"
+				android:progressTint="?attr/colorPrimary" />
 
-			<TextView
+			<com.google.android.material.textview.MaterialTextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:layout_marginStart="8dp"
 				android:text="@string/checking_root_permissions"
-				android:textColor="@color/text_color_primary" />
+				android:textColor="?attr/colorOnSurface" />
 
 		</LinearLayout>
 
@@ -75,21 +77,21 @@
 				android:importantForAccessibility="no"
 				android:visibility="gone" />
 
-			<com.google.android.material.progressindicator.CircularProgressIndicator
+			<ProgressBar
 				android:id="@+id/circular_root_service"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="32dp"
+				android:layout_height="32dp"
 				android:indeterminate="true"
-				android:progressTint="?attr/colorPrimary"
-				app:indicatorSize="24dp" />
+				android:indeterminateTint="?attr/colorPrimary"
+				android:indeterminateTintMode="src_atop" />
 
-			<TextView
+			<com.google.android.material.textview.MaterialTextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:layout_marginStart="8dp"
 				android:text="@string/connecting_root_service"
-				android:textColor="@color/text_color_primary" />
+				android:textColor="?attr/colorOnSurface" />
 
 		</LinearLayout>
 	</LinearLayout>

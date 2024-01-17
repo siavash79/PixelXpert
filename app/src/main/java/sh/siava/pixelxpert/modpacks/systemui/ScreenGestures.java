@@ -18,6 +18,7 @@ import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.GestureDetector;
@@ -252,12 +253,19 @@ public class ScreenGestures extends XposedModPack {
 			protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
 
 				boolean isQSExpanded;
-				try { //13QPR3
-					isQSExpanded = getBooleanField(
-							getObjectField(NotificationPanelViewController, "mQsController"),
-							"mExpanded");
-				} catch (Throwable ignored) {
-					isQSExpanded = getBooleanField(NotificationPanelViewController, "mQsExpanded"); //13QPR2,1
+				if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+				{
+					isQSExpanded = (boolean)callMethod(NotificationPanelViewController, "isShadeFullyExpanded");
+				}
+				else
+				{
+					try { //13QPR3
+						isQSExpanded = getBooleanField(
+								getObjectField(NotificationPanelViewController, "mQsController"),
+								"mExpanded");
+					} catch (Throwable ignored) {
+						isQSExpanded = getBooleanField(NotificationPanelViewController, "mQsExpanded"); //13QPR2,1
+					}
 				}
 
 				if (isQSExpanded || getBooleanField(NotificationPanelViewController, "mBouncerShowing")) {

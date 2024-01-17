@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">Gyors QS panel legördülő az állapotsorról</string>
 	<string name="qs_pulldown_side_title">Gyorsan lehúzható oldal</string>
 	<string name="qs_pulldown_category">Gyors beállítások legördülő menü</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Rezgés a QS csempecsapon</string>
 	<string name="vibration_type_touch">A rendszer érintési rezgésbeállításai által meghatározott intenzitás</string>
 	<string name="qs_tile_qty_portrait">Álló tájolásban</string>
 	<string name="qs_tile_qty_landscape">Fekvő tájolásban</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">QS-sorok száma</string>
 	<string name="qs_cols_number">QS oszlopok száma</string>
 	<string name="qqs_tiles_number">Maximális csempék a Quick QS-ben (max. 2 sor)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Az alkalmazáshoz engedélyezze újra a tematikus ikonokat</string>
 	<string name="volume_button_step_title">Hangerő lépések (0-100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Kijelző felbontása</string>
 	<string name="brightness_range_title">A kijelző fényerejének korlátai</string>
 	<string name="brightness_range_not_linear">Ez a tartomány NEM lineáris: Néha egy kis eltérés jelentős változásokhoz vezet</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Amikor a kijelző mindig ki van kapcsolva] A képernyő megérintésével megjelenik a környezeti kijelzés</string>
 	<string name="so_pick_to_show_ambient_title">Válassza ki a környezeti kijelző megjelenítéséhez</string>
 	<string name="so_pick_to_show_ambient_summary">[Amikor mindig a kijelző ki van kapcsolva] A telefon kiválasztásakor a környezeti kijelző látható</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Amíg a képernyő ki van kapcsolva,…</string>
 	<string name="custom_themed_icons_title">Egyedi témájú ikonok</string>
 	<string name="custom_themed_icons_off">Egyéni ikonok letiltva</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">Az összes kibontása/összecsukása gomb hozzáadása</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Figyelmeztető értesítés időtartama</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">A rugalmas túlgörgetési hatás letiltása</string>
 	<string name="overscroll_on_summary">Fontos: engedélyeznie KELL azokat az alkalmazásokat, amelyeknél letiltani szeretné a túlgörgetést az LSPoseden belül</string>
 	<string name="milliseconds">Ezredmásodperc</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">Ikon megjelenítése az állapotsoron, ha elérhető a váltás</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Engedélyezve az összes appnak a <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font> által. Jó szórakozást!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Rezgés fogadott kimenő híváskor</string>
 	<string name="vibrate_on_call_drop_title">Rezgés, amikor megszakad a hívás</string>

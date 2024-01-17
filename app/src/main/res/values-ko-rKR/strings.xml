@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">AOSP Mods 테마의 대체 아이콘 활성화</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">구글 픽셀용 커스텀마이징</string>
 	<string name="volume_tile_title">미디어 볼륨</string>
 	<string name="app_switch_tile_title">앱 프로필 바꾸기</string>
 	<string name="hide_default">숨김 (기본값)</string>
@@ -34,8 +34,8 @@
 	<string name="telegram_group_title">전보 그룹</string>
 	<string name="usage_title">용법</string>
 	<string name="usage_summary">위키 페이지 열기</string>
-	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_title">당신의 언어로 번역하세요</string>
+	<string name="crowdin_summary">%s를 당신의 언어로 번역하는것을 도와주세요</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">잠금 화면</string>
 	<string name="statusbar_header">상태 표시줄</string>
@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">상태 표시줄로부터 빠른 설정 바로 열기</string>
 	<string name="qs_pulldown_side_title">바로 열기 영역 위치</string>
 	<string name="qs_pulldown_category">빠른 설정 바로 열기</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">빠른 설정 타일 터치 시 진동</string>
 	<string name="vibration_type_touch">시스템 터치 진동 설정에 따른 강도</string>
 	<string name="qs_tile_qty_portrait">세로 화면 설정</string>
 	<string name="qs_tile_qty_landscape">가로 화면 설정</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">빠른 설정 가로 행 개수</string>
 	<string name="qs_cols_number">빠른 설정 세로 열 개수</string>
 	<string name="qqs_tiles_number">최대 타일 개수 (최대 2 가로 행)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">적용하려면 테마 앱 아이콘을 다시 활성화하세요</string>
 	<string name="volume_button_step_title">볼륨 단계 (0에서 100%까지)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">화면 해상도</string>
 	<string name="brightness_range_title">화면 밝기 제한</string>
 	<string name="brightness_range_not_linear">해당 범위는 선형적으로 적용되지 않을 수 있습니다: 경우에 따라 작은 설정 차이가 큰 밝기 차이를 야기할 수 있습니다.</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[AOD 기능이 비활성화된 상태에서] 화면을 탭하면 앰비언트 디스플레이를 표시합니다</string>
 	<string name="so_pick_to_show_ambient_title">기기를 들어 앰비언트 디스플레이 보기</string>
 	<string name="so_pick_to_show_ambient_summary">[AOD 기능이 비활성화된 상태에서] 기기를 들면 앰비언트 디스플레이를 표시합니다</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">화면이 꺼진 상태에서…</string>
 	<string name="custom_themed_icons_title">커스텀 테마 아이콘</string>
 	<string name="custom_themed_icons_off">커스텀 아이콘 비활성화됨</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">전부 펼치기 / 전부 접기 버튼 추가</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">헤드업 알림 지속 시간</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">늘어나는 오버스크롤 효과 비활성화</string>
 	<string name="overscroll_on_summary">중요: LSPosed 설정 내에서 오버스크롤 효과를 비활성화시킬 앱을 추가해야 합니다</string>
 	<string name="milliseconds">밀리초</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">프로필 전환이 가능할 때 상태표시줄에 아이콘을 표시합니다</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">상대방이 나의 전화를 받은 경우 진동 알림</string>
 	<string name="vibrate_on_call_drop_title">전화가 끊어진 경우 진동 알림</string>
@@ -431,5 +444,5 @@
 	<string name="navigation_home">Home</string>
 	<string name="navigation_update">Update</string>
 	<string name="navigation_hooks">Hooks</string>
-	<string name="navigation_settings">Settings</string>
+	<string name="navigation_settings">설정</string>
 </resources>

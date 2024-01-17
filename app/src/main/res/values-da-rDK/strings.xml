@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">Hurtig QS panel pull-down fra statuslinjen</string>
 	<string name="qs_pulldown_side_title">Hurtig nedtræksside</string>
 	<string name="qs_pulldown_category">Hurtige indstillinger pull-down</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Vibrer på QS flisehane</string>
 	<string name="vibration_type_touch">Intensitet defineret af systemets berøringsvibrationsindstillinger</string>
 	<string name="qs_tile_qty_portrait">I stående retning</string>
 	<string name="qs_tile_qty_landscape">I landskabsorientering</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Antal QS-rækker</string>
 	<string name="qs_cols_number">Antal QS-kolonner</string>
 	<string name="qqs_tiles_number">Maksimalt antal fliser i Quick QS (maks. 2 rækker)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Genaktiver temaikoner for at anvende</string>
 	<string name="volume_button_step_title">Lydstyrketrin (0 til 100 %)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Skærmopløsning</string>
 	<string name="brightness_range_title">Displayets lysstyrkegrænser</string>
 	<string name="brightness_range_not_linear">Dette interval er IKKE lineært: Nogle gange fører en lille forskel til betydelige ændringer</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Hvis du trykker på skærmen, vises det omgivende display</string>
 	<string name="so_pick_to_show_ambient_title">Vælg for at vise omgivende visning</string>
 	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Hvis du vælger telefonen, vises det omgivende display</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Mens skærmen er slukket…</string>
 	<string name="custom_themed_icons_title">Brugerdefinerede temaikoner</string>
 	<string name="custom_themed_icons_off">Brugerdefinerede ikoner deaktiveret</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">Tilføj udvid/skjul alle knapper</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Varighed af heads-up notifikation</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Deaktiver elastisk overscroll-effekt</string>
 	<string name="overscroll_on_summary">Vigtigt: du SKAL aktivere de apps, du vil deaktivere overscroll for i LSPosed</string>
 	<string name="milliseconds">Millisekunder</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">Vis et ikon på statuslinjen, når skift er tilgængeligt</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrer ved udgående opkald besvaret</string>
 	<string name="vibrate_on_call_drop_title">Vibrer, når opkaldet afbrydes</string>

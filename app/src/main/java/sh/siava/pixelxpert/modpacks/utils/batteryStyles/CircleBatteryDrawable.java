@@ -5,9 +5,11 @@ import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.Align.CENTER;
 import static android.graphics.Paint.Style.STROKE;
 import static android.graphics.Typeface.BOLD;
-
 import static java.lang.Math.round;
-import static de.robv.android.xposed.XposedBridge.log;
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.getCurrentLevel;
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isFastCharging;
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isPowerSaving;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -32,8 +34,8 @@ import androidx.core.graphics.ColorUtils;
 import androidx.core.graphics.PathParser;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
-import sh.siava.pixelxpert.modpacks.utils.AlphaRefreshedPaint;
 import sh.siava.pixelxpert.modpacks.systemui.SettingsLibUtilsProvider;
+import sh.siava.pixelxpert.modpacks.utils.AlphaRefreshedPaint;
 
 public class CircleBatteryDrawable extends BatteryDrawable
 {
@@ -45,12 +47,8 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	private static final PathEffect DASH_PATH_EFFECT = new DashPathEffect(new float[]{3f, 2f}, 0f);
 	private final Context mContext;
 	private final int mPowerSaveColor;
-	private boolean mIsFastCharging = false;
-	private boolean mIsCharging = false;
-	private boolean mIsPowerSaving = false;
 	private boolean mShowPercentage = false;
 	private boolean mChargingAnimationEnabled = true;
-	private int mBatteryLevel;
 	private int mDiameter;
 	private final RectF mFrame = new RectF();
 	private int mFGColor = WHITE;
@@ -69,6 +67,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	@SuppressLint("DiscouragedApi")
 	public CircleBatteryDrawable(Context context, int frameColor)
 	{
+		super();
 		mContext = context;
 
 		mFramePaint.setDither(true);
@@ -102,37 +101,12 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	@Override
 	public void setShowPercent(boolean showPercent) {
 		mShowPercentage = showPercent;
-		invalidateSelf();
 	}
 
 	@Override
 	public void setMeterStyle(int batteryStyle) {
 		mFramePaint.setPathEffect(batteryStyle == BATTERY_STYLE_DOTTED_CIRCLE ? DASH_PATH_EFFECT : null);
 		mBatteryPaint.setPathEffect(batteryStyle == BATTERY_STYLE_DOTTED_CIRCLE ? DASH_PATH_EFFECT : null);
-
-		invalidateSelf();
-	}
-
-	@Override
-	public void setFastCharging(boolean isFastCharging) {
-		mIsFastCharging = isFastCharging;
-		if(isFastCharging) mIsCharging = true;
-
-		invalidateSelf();
-	}
-
-	@Override
-	public void setCharging(boolean isCharging) {
-		mIsCharging = isCharging;
-		if(!isCharging) mIsFastCharging = false;
-
-		invalidateSelf();
-	}
-
-	@Override
-	public void setBatteryLevel(int level) {
-		mBatteryLevel = level;
-		invalidateSelf();
 	}
 
 	@Override
@@ -152,24 +126,9 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 		invalidateSelf();
 	}
-
-	@Override
-	public void setPowerSaving(boolean isPowerSaving) {
-		mIsPowerSaving = isPowerSaving;
-
-		invalidateSelf();
-	}
-
 	@Override
 	public void setChargingAnimationEnabled(boolean enabled) {
 		mChargingAnimationEnabled = enabled;
-
-		invalidateSelf();
-	}
-
-	@Override
-	public void refresh() {
-		invalidateSelf();
 	}
 
 	private void refreshShadeColors()
@@ -204,7 +163,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 	@Override
 	public void draw(@NonNull Canvas canvas) {
-		if(mBatteryLevel < 0 || mDiameter == 0) return;
+		if(getCurrentLevel() < 0 || mDiameter == 0) return;
 
 		if (mLastUpdate != lastVarUpdate)
 		{
@@ -214,7 +173,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 		setLevelBasedColors(mBatteryPaint, mFrame.centerX(), mFrame.centerY());
 
-		if(mIsCharging && mBatteryLevel < 100)
+		if(isCharging() && getCurrentLevel() < 100)
 		{
 			if(!mBoltAlphaAnimator.isStarted() && mChargingAnimationEnabled)
 				mBoltAlphaAnimator.start();
@@ -230,14 +189,14 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 		canvas.drawArc(mFrame, 270f, 360f, false, mFramePaint);
 
-		if(mBatteryLevel > 0)
+		if(getCurrentLevel() > 0)
 		{
-			canvas.drawArc(mFrame, 270f, 3.6f * mBatteryLevel, false, mBatteryPaint);
+			canvas.drawArc(mFrame, 270f, 3.6f * getCurrentLevel(), false, mBatteryPaint);
 		}
 
-		if(!mIsCharging && mBatteryLevel < 100 && mShowPercentage)
+		if(!isCharging() && getCurrentLevel() < 100 && mShowPercentage)
 		{
-			String pctText = mBatteryLevel > CRITICAL_LEVEL ? String.valueOf(mBatteryLevel) : WARNING_STRING;
+			String pctText = getCurrentLevel() > CRITICAL_LEVEL ? String.valueOf(getCurrentLevel()) : WARNING_STRING;
 
 			float textHeight = -mTextPaint.getFontMetrics().ascent;
 			float pctX = mDiameter * .5f;
@@ -250,15 +209,15 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	{
 		paint.setShader(null);
 
-		if(mIsPowerSaving)
+		if(isPowerSaving())
 		{
 			paint.setColor(mPowerSaveColor);
 			return;
-		} else if(mIsFastCharging && showFastCharging && mBatteryLevel < 100)
+		} else if(isFastCharging() && showFastCharging && getCurrentLevel() < 100)
 		{
 			paint.setColor(fastChargingColor);
 			return;
-		} else if (mIsCharging && showCharging && mBatteryLevel < 100) {
+		} else if (isCharging() && showCharging && getCurrentLevel() < 100) {
 			paint.setColor(chargingColor);
 			return;
 		}
@@ -267,12 +226,12 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		{
 			for(int i = 0; i < batteryLevels.size(); i++)
 			{
-				if(mBatteryLevel <= batteryLevels.get(i))
+				if(getCurrentLevel() <= batteryLevels.get(i))
 				{
 					if(transitColors && i > 0)
 					{
 						float range = batteryLevels.get(i) - batteryLevels.get(i - 1);
-						float currentPos = mBatteryLevel - batteryLevels.get(i - 1);
+						float currentPos = getCurrentLevel() - batteryLevels.get(i - 1);
 
 						float ratio = currentPos / range;
 
@@ -305,8 +264,6 @@ public class CircleBatteryDrawable extends BatteryDrawable
 
 		mTextPaint.setAlpha(alpha);
 		mBatteryPaint.setAlpha(alpha);
-
-		invalidateSelf();
 	}
 
 	@SuppressLint("DiscouragedApi")

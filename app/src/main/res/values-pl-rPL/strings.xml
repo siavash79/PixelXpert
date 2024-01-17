@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">Szybkie rozwijanie panelu QS z paska stanu</string>
 	<string name="qs_pulldown_side_title">Strona szybkiego opuszczania</string>
 	<string name="qs_pulldown_category">Szybkie ustawienia rozwijane</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Wibracje przy dotknięciu kafelka QS</string>
 	<string name="vibration_type_touch">Intensywność zdefiniowana przez systemowe ustawienia wibracji dotykowych</string>
 	<string name="qs_tile_qty_portrait">W orientacji pionowej</string>
 	<string name="qs_tile_qty_landscape">W orientacji poziomej</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Liczba rzędów QS</string>
 	<string name="qs_cols_number">Liczba kolumn QS</string>
 	<string name="qqs_tiles_number">Maksymalna liczba płytek w Quick QS (maks. 2 rzędy)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Włącz ponownie ikony tematyczne, aby je zastosować</string>
 	<string name="volume_button_step_title">Kroki głośności (0 do 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Rozdzielczość wyświetlacza</string>
 	<string name="brightness_range_title">Wyświetl limity jasności</string>
 	<string name="brightness_range_not_linear">Ten zakres NIE jest liniowy: czasami niewielka różnica prowadzi do znacznych zmian</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Gdy zawsze włączony wyświetlacz jest wyłączony] Dotknięcie ekranu powoduje wyświetlenie obrazu otoczenia</string>
 	<string name="so_pick_to_show_ambient_title">Wybierz, aby wyświetlić ekran otoczenia</string>
 	<string name="so_pick_to_show_ambient_summary">[Gdy zawsze włączony wyświetlacz jest wyłączony] Podniesienie telefonu pokazuje wyświetlacz otoczenia</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Gdy ekran jest wyłączony…</string>
 	<string name="custom_themed_icons_title">Niestandardowe ikony tematyczne</string>
 	<string name="custom_themed_icons_off">Niestandardowe ikony wyłączone</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">Dodaj rozwiń/zwiń wszystkie przyciski</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Czas trwania powiadomienia ostrzegawczego</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Wyłącz efekt elastycznego przewijania</string>
 	<string name="overscroll_on_summary">Ważne: MUSISZ włączyć aplikacje, dla których chcesz wyłączyć overscroll w ramach LSPosed</string>
 	<string name="milliseconds">milisekundy</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">Pokaż ikonę na pasku stanu, gdy możliwe jest przełączanie</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Wibracje przy odebraniu połączenia wychodzącego</string>
 	<string name="vibrate_on_call_drop_title">Wibracje po rozłączeniu połączenia</string>

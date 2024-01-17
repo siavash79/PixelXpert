@@ -20,6 +20,7 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
+import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 
 //We are playing in system framework. should be extra cautious..... many try-catchs, still not enough!
@@ -53,7 +54,7 @@ public class StatusbarSize extends XposedModPack {
 				|| XPrefs.Xprefs.getBoolean("systemIconsMultiRow", false)
 				|| XPrefs.Xprefs.getBoolean("notificationAreaMultiRow", false);
 
-		sizeFactor = XPrefs.Xprefs.getInt("statusbarHeightFactor", 100);
+		sizeFactor = RangeSliderPreference.getSingleIntValue(XPrefs.Xprefs, "statusbarHeightFactor", 100);
 		if (sizeFactor != 100 || edited || mForceApplyHeight) {
 			Configuration conf = new Configuration();
 			conf.updateFrom(mContext.getResources().getConfiguration());

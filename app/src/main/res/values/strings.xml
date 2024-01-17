@@ -206,10 +206,13 @@
 	<string name="qs_pulldown_switch_title">Quick QS panel pull-down from status bar</string>
 	<string name="qs_pulldown_side_title">Quick pull-down side</string>
 	<string name="qs_pulldown_category">Quick settings pull-down</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Vibrate on QS tile tap</string>
 	<string name="vibration_type_touch">Intensity defined by system touch vibration settings</string>
 	<string name="qs_tile_qty_portrait">In portrait orientation</string>
 	<string name="qs_tile_qty_landscape">In landscape orientation</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 
 	<string name="qs_rows_number">Number of QS rows</string>
 	<string name="qs_cols_number">Number of QS columns</string>
@@ -310,6 +313,8 @@
 	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Tapping on the screen shows ambient display</string>
 	<string name="so_pick_to_show_ambient_title">Pick to show ambient display</string>
 	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Picking the phone shows ambient display</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">While screen is off…</string>
 	<string name="custom_themed_icons_title">Custom themed icons</string>
 	<string name="custom_themed_icons_off">Custom icons disabled</string>
@@ -319,6 +324,9 @@
 	<string name="expand_notifications_icons_title">Add expand/collapse all buttons</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Heads-up notification duration</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Disable elastic overscroll effect</string>
 	<string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for within LSPosed</string>
 	<string name="milliseconds">Milliseconds</string>
@@ -334,6 +342,10 @@
 
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrate on outgoing call answered</string>

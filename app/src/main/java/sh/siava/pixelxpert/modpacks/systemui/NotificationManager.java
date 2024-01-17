@@ -31,27 +31,34 @@ public class NotificationManager extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
+		HeadupAutoDismissNotificationDecay = RangeSliderPreference.getSingleIntValue(Xprefs, "HeadupAutoDismissNotificationDecay", -1);
+		DisableOngoingNotifDismiss = Xprefs.getBoolean("DisableOngoingNotifDismiss", false);
 		try {
-			HeadupAutoDismissNotificationDecay = RangeSliderPreference.getValues(Xprefs, "HeadupAutoDismissNotificationDecay", -1).get(0).intValue();
-			DisableOngoingNotifDismiss = Xprefs.getBoolean("DisableOngoingNotifDismiss", false);
 			applyDurations();
 		} catch (Throwable ignored) {}
 	}
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
-
-		Class<?> HeadsUpManagerClass = findClass("com.android.systemui.statusbar.policy.HeadsUpManager", lpparam.classLoader);
-
-		hookAllConstructors(HeadsUpManagerClass, new XC_MethodHook() {
+		XC_MethodHook headsupFinder = new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				HeadsUpManager = param.thisObject;
 
 				applyDurations();
 			}
-		});
+		};
+
+		Class<?> HeadsUpManagerClass = findClass("com.android.systemui.statusbar.policy.HeadsUpManager", lpparam.classLoader);
+		hookAllConstructors(HeadsUpManagerClass, headsupFinder); //interface in 14QPR2, class in older
+
+		try //A14 QPR2
+		{
+			Class<?> BaseHeadsUpManagerClass = findClass("com.android.systemui.statusbar.policy.BaseHeadsUpManager", lpparam.classLoader);
+			hookAllConstructors(BaseHeadsUpManagerClass, headsupFinder);
+		}
+		catch (Throwable ignored){}
+
 
 		hookAllMethods(StatusBarNotification.class, "isNonDismissable", new XC_MethodHook() {
 			@Override
@@ -67,7 +74,15 @@ public class NotificationManager extends XposedModPack {
 		if(HeadsUpManager != null && HeadupAutoDismissNotificationDecay > 0)
 		{
 			setObjectField(HeadsUpManager, "mMinimumDisplayTime", Math.round(HeadupAutoDismissNotificationDecay/2.5f));
-			setObjectField(HeadsUpManager, "mAutoDismissNotificationDecay", HeadupAutoDismissNotificationDecay);
+
+			try //A14 QPR2B3
+			{
+				setObjectField(HeadsUpManager, "mAutoDismissTime", HeadupAutoDismissNotificationDecay);
+			}
+			catch (Throwable ignored) //Older
+			{
+				setObjectField(HeadsUpManager, "mAutoDismissNotificationDecay", HeadupAutoDismissNotificationDecay);
+			}
 		}
 	}
 

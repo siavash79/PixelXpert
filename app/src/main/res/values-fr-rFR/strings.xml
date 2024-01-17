@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Thème d\'icone alternatif</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">Personnalisations pour les appareils Google Pixel</string>
 	<string name="volume_tile_title">Volume des médias</string>
 	<string name="app_switch_tile_title">Changer de profil d\'application</string>
 	<string name="hide_default">Cacher (par défaut)</string>
@@ -34,8 +34,8 @@
 	<string name="telegram_group_title">Groupe de télégramme</string>
 	<string name="usage_title">Usage</string>
 	<string name="usage_summary">Ouvrir la page wiki</string>
-	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_title">Traduire dans votre langue</string>
+	<string name="crowdin_summary">Aidez-nous à traduire %s dans votre propre langue</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Écran de verrouillage</string>
 	<string name="statusbar_header">Barre d’état</string>
@@ -81,7 +81,7 @@
 	<string name="easy_unlock_title">Déverrouillage facile (code PIN/mot de passe)</string>
 	<string name="easy_unlock_summary">Si ça n’a pas marché la première fois, réessayer</string>
 	<string name="charging_info_title">Informations de charge sur l’écran de verrouillage</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">Ne pas afficher la pilule \"Personnaliser l\'écran de verrouillage\"</string>
 	<string name="imperial_units_title">Utiliser les unités impériales</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Double appui pour mise en veille</string>
@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">Accès rapide depuis la barre d’état</string>
 	<string name="qs_pulldown_side_title">Côté pour l’accès rapide</string>
 	<string name="qs_pulldown_category">Accès à la fenêtre de configuration rapide</string>
+	<string name="qs_pullup_switch_title">Fermer les paramètres rapides avec un balayage</string>
 	<string name="qs_haptic_switch_title">Vibrer lors de l’utilisation d’un bloc</string>
 	<string name="vibration_type_touch">L’intensité de vibration est définie par les paramètres de l’appareil</string>
 	<string name="qs_tile_qty_portrait">En mode portrait</string>
 	<string name="qs_tile_qty_landscape">En mode paysage</string>
+	<string name="qs_mod_category_misc_title">Divers</string>
+	<string name="charging_info_on_qs">Afficher les informations de charge sur le panneau des réglages rapides</string>
 	<string name="qs_rows_number">Nombre de lignes</string>
 	<string name="qs_cols_number">Nombre de colonnes</string>
 	<string name="qqs_tiles_number">Nombre maximum de blocs (maximum deux lignes)</string>
@@ -253,9 +256,11 @@
 	<string name="allow_all_screen_rotations_summary">Ignorera le bouton de changement d’orientation</string>
 	<string name="force_no_cutout">Ne pas prendre en compte l’encoche de l’appareil photo</string>
 	<string name="clear_all_reposition_title">Ajouter un bouton pour retirer toutes les applications récentes facilement</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="force_themed_icons_title">Générer automatiquement les icônes thématiques manquantes (lanceur Pixel seulement)</string>
 	<string name="reapply_themed_config">Réactiver les icônes thématiques à appliquer</string>
 	<string name="volume_button_step_title">Pas du volume (0% à 100%)</string>
+	<string name="display_resolution_switch_title">Modifier la résolution d\'affichage</string>
+	<string name="display_resolution_switch_summary">Avant de l\'activer, assurez-vous de réinitialiser toutes les modifications de taille d\'affichage/dpi par défaut</string>
 	<string name="display_resolution_title">Résolution de l’écran</string>
 	<string name="brightness_range_title">Limites de luminosité</string>
 	<string name="brightness_range_not_linear">Cet intervalle N’EST PAS linéaire : de petites variations peuvent avoir un gros impact</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Lorsque l\'affichage permanent est désactivé] Appuyer sur l\'écran affiche l\'affichage ambiant</string>
 	<string name="so_pick_to_show_ambient_title">Choisissez pour afficher l\'affichage ambiant</string>
 	<string name="so_pick_to_show_ambient_summary">[Lorsque l\'affichage permanent est éteint] Le fait de choisir le téléphone affiche l\'affichage ambiant</string>
+	<string name="force_aod_while_charging_title">Forcer l\'affichage permanent lors du chargement</string>
+	<string name="force_aod_while_charging_summary">Garder l\'affichage permanent activé pendant que l\'appareil est en charge</string>
 	<string name="doze_header">Quand l’écran est éteint…</string>
 	<string name="custom_themed_icons_title">Icônes personnalisés</string>
 	<string name="custom_themed_icons_off">Icônes personnalisés désactivés</string>
@@ -277,20 +284,26 @@
 	<string name="so_vol_longpress_skip">Maintenir les boutons du volume pour changer de chanson</string>
 	<string name="notifications_header">Préférences des notifications</string>
 	<string name="expand_notifications_icons_title">Ajouter un bouton pour étendre/réduire toutes les notifications</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Ne jamais ignorer les notifications en cours</string>
 	<string name="heads_up_notification_duration">Durée des notifications d’avertissement</string>
+	<string name="notif_default_expansion_title">Extension par défaut des notifications</string>
+	<string name="notif_always_expand">Toujours développer</string>
+	<string name="notif_always_collapse">Toujours réduire</string>
 	<string name="disable_overscroll">Désactiver l’effet elastique de fin de défilement</string>
 	<string name="overscroll_on_summary">Important : les applications dans lesquelles l’effet sera actif sont celles activées dans LSPosed</string>
 	<string name="milliseconds">Millisecondes</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">Panneau de volume</string>
+	<string name="volume_dialog_timeout">Délai de fermeture du panneau de volume</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Profil de travail/clonage</string>
 	<string name="statusbar_long_press_app_switch">Appuyez longuement sur la barre d\'état pour changer de profil</string>
 	<string name="statusbar_app_switch_icon">Afficher une icône sur la barre d\'état lorsque la commutation est disponible</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Déverrouillé pour toutes les applications via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Profitez !</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Informations sur la batterie…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrer lors du décrochage d’un appel entrant</string>
 	<string name="vibrate_on_call_drop_title">Vibrer lors du raccrochage</string>
@@ -418,18 +431,18 @@
 	<string name="package_activated">Package activé avec succès</string>
 	<string name="package_activation_failed">L\'activation du package a échoué</string>
 	<string name="activate_in_lsposed">Activer dans LSPosed</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">Le paquet ne peut pas être lancé</string>
+	<string name="menu_launch_app">Lancer l\'application</string>
+	<string name="menu_restart_app">Redémarrez l\'application</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Vérification des autorisations root…</string>
 	<string name="connecting_root_service">Connexion au service racine…</string>
 	<string name="root_access_denied">Accès root refusé. Veuillez autoriser l\'accès root.</string>
-	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
+	<string name="root_service_failed">Impossible de se connecter aux services root. Veuillez réessayer plus tard</string>
 	<string name="exit">Sortie</string>
 	<!-- Bottom Navigation -->
-	<string name="navigation_home">Home</string>
-	<string name="navigation_update">Update</string>
-	<string name="navigation_hooks">Hooks</string>
-	<string name="navigation_settings">Settings</string>
+	<string name="navigation_home">Accueil</string>
+	<string name="navigation_update">Mise à jour</string>
+	<string name="navigation_hooks">Crochets</string>
+	<string name="navigation_settings">Paramètres</string>
 </resources>

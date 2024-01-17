@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Alternatief thema-icoon</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">Aanpassingen voor Google Pixel toestellen</string>
 	<string name="volume_tile_title">Mediavolume</string>
 	<string name="app_switch_tile_title">Van app-profiel wisselen</string>
 	<string name="hide_default">Verbergen (standaard)</string>
@@ -34,8 +34,8 @@
 	<string name="telegram_group_title">Telegramgroep</string>
 	<string name="usage_title">Gebruik</string>
 	<string name="usage_summary">Open wikipagina</string>
-	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_title">Vertaal naar je eigen taal</string>
+	<string name="crowdin_summary">Help ons om %s naar je eigen taal te vertalen</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Vergrendel scherm</string>
 	<string name="statusbar_header">Status Bar</string>
@@ -81,7 +81,7 @@
 	<string name="easy_unlock_title">Eenvoudig ontgrendelen (pin/wachtwoord)</string>
 	<string name="easy_unlock_summary">Als het de eerste keer niet werkte, probeer het dan opnieuw</string>
 	<string name="charging_info_title">Oplaadinformatie op vergrendelscherm</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">Laat \'\'personaliseeer vergrendelingsscherm\'\' niet zien</string>
 	<string name="imperial_units_title">Gebruik imperiale eenheden</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Dubbeltik om te slapen</string>
@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">Snel QS-paneel naar beneden trekken vanuit de statusbalk</string>
 	<string name="qs_pulldown_side_title">Snel naar beneden trekkende kant</string>
 	<string name="qs_pulldown_category">Snelle instellingen pull-down</string>
+	<string name="qs_pullup_switch_title">Sluit snelle instellingen met maar een swipe</string>
 	<string name="qs_haptic_switch_title">Trillen op QS tegelkraan</string>
 	<string name="vibration_type_touch">Intensiteit gedefinieerd door de instellingen voor aanraaktrilling van het systeem</string>
 	<string name="qs_tile_qty_portrait">In portretoriëntatie</string>
 	<string name="qs_tile_qty_landscape">In landschapsoriëntatie</string>
+	<string name="qs_mod_category_misc_title">Diverse</string>
+	<string name="charging_info_on_qs">Laat oplaadniveau zien op QS scherm</string>
 	<string name="qs_rows_number">QS Rijen nummer</string>
 	<string name="qs_cols_number">Aantal QS-kolommen</string>
 	<string name="qqs_tiles_number">Maximum aantal tegels in Quick QS (max. 2 rijen)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Schakel themapictogrammen opnieuw in om toe te passen</string>
 	<string name="volume_button_step_title">Volumestappen (0 tot 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Schermresolutie</string>
 	<string name="brightness_range_title">Helderheidslimieten weergeven</string>
 	<string name="brightness_range_not_linear">Dit bereik is NIET lineair: soms leidt een klein verschil tot aanzienlijke veranderingen</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Als display altijd aan is uitgeschakeld] Als u op het scherm tikt, wordt de omgevingsweergave weergegeven</string>
 	<string name="so_pick_to_show_ambient_title">Kies om omgevingsdisplay weer te geven</string>
 	<string name="so_pick_to_show_ambient_summary">[Als het scherm altijd aan is, is uitgeschakeld] Als u de telefoon oppakt, wordt het omgevingsdisplay weergegeven</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Terwijl het scherm is uitgeschakeld…</string>
 	<string name="custom_themed_icons_title">Aangepaste thema-pictogrammen</string>
 	<string name="custom_themed_icons_off">Aangepaste pictogrammen uitgeschakeld</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">Alle knoppen uitvouwen/samenvouwen toevoegen</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Duur van heads-up-melding</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Elastisch overscroll-effect uitschakelen</string>
 	<string name="overscroll_on_summary">Belangrijk: je MOET de apps inschakelen waarvoor je overscroll wilt uitschakelen, in LSPosed</string>
 	<string name="milliseconds">Milliseconden</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">Toon een pictogram op de statusbalk wanneer schakelen beschikbaar is</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Trillen bij beantwoord uitgaande oproep</string>
 	<string name="vibrate_on_call_drop_title">Trillen wanneer gesprek wordt verbroken</string>

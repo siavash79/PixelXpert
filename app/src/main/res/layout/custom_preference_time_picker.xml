@@ -19,7 +19,7 @@
 		android:layout_marginEnd="18dp"
 		android:contentDescription="@android:string/untitled"
 		android:visibility="gone"
-		app:tint="@color/text_color_primary" />
+		app:tint="?attr/colorOnSurface" />
 
 	<RelativeLayout
 		android:layout_width="match_parent"
@@ -29,20 +29,20 @@
 		android:layout_toEndOf="@android:id/icon"
 		android:orientation="vertical">
 
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
 			android:id="@android:id/title"
 			style="@style/TextAppearance.Material3.TitleMedium"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textColor="@color/text_color_primary" />
+			android:textColor="?attr/colorOnSurface" />
 
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/time_stamp"
 			style="@style/TextAppearance.Material3.BodyMedium"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_below="@android:id/title"
-			android:textColor="@color/text_color_secondary" />
+			android:textColor="?attr/colorOnSurface" />
 
 	</RelativeLayout>
 </RelativeLayout>

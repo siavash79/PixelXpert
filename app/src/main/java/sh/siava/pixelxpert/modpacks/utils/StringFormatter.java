@@ -33,6 +33,7 @@ import javax.security.auth.callback.Callback;
 
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.modpacks.systemui.ThermalProvider;
+import sh.siava.pixelxpert.modpacks.utils.toolkit.ObjectTools;
 
 @SuppressWarnings("deprecation")
 public class StringFormatter {
@@ -224,7 +225,7 @@ public class StringFormatter {
 			}
 
 			if (transformed == null) {
-				transformed = Helpers.getHumanizedBytes(traffic, .6f, "", "", textColor);
+				transformed = ObjectTools.getHumanizedBytes(traffic, .6f, "", "", textColor);
 			}
 			return transformed;
 		} catch (Exception ignored) {
@@ -480,7 +481,7 @@ public class StringFormatter {
 		callbacks.clear();
 	}
 
-	public interface FormattedStringCallback extends Callback {
+	public interface FormattedStringCallback {
 		void onRefreshNeeded();
 	}
 }

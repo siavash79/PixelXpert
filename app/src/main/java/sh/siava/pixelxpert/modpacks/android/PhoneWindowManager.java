@@ -25,7 +25,6 @@ import android.graphics.Rect;
 import android.hardware.HardwareBuffer;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -159,9 +158,8 @@ public class PhoneWindowManager extends XposedModPack {
 	@SuppressLint("WrongConstant")
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
 		//noinspection unchecked
-		userHandleList = (List<UserHandle>) callMethod(userManager, "getProfiles", true);
+		userHandleList = (List<UserHandle>) callMethod(SystemUtils.UserManager(), "getProfiles", true);
 
 //		Collections.addAll(screenshotChords, KEYCODE_POWER, KEYCODE_VOLUME_DOWN);
 
@@ -174,8 +172,6 @@ public class PhoneWindowManager extends XposedModPack {
 			intentFilter.addAction(Constants.ACTION_SWITCH_APP_PROFILE);
 			mContext.registerReceiver(broadcastReceiver, intentFilter, RECEIVER_EXPORTED); //for Android 14, receiver flag is mandatory
 		}
-
-
 
 		try {
 			Class<?> PhoneWindowManagerClass = findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
@@ -220,28 +216,6 @@ public class PhoneWindowManager extends XposedModPack {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					windowMan = param.thisObject;
-
-/*					//Apparently some stuff init before Xposed. Will have to find and hack them...
-					Object mKeyCombinationManager = getObjectField(param.thisObject, "mKeyCombinationManager");
-					ArrayList<?> mRules = (ArrayList<?>) getObjectField(mKeyCombinationManager, "mRules");
-					for (Object mRule : mRules) {
-						if (screenshotChords.contains(getObjectField(mRule, "mKeyCode1"))
-								&& screenshotChords.contains(getObjectField(mRule, "mKeyCode2"))) {
-							hookAllMethods(mRule.getClass(), "execute", new XC_MethodHook() {
-								@Override
-								protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-									if (ScreenshotChordInsecure) {
-										try {
-											takeInsecureScreenshot();
-											param.setResult(null);
-										} catch (Throwable ignored) {
-										}
-									}
-								}
-							});
-							break;
-						}
-					}*/
 				}
 			});
 

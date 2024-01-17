@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">Rychlé stahování panelu QS ze stavového řádku</string>
 	<string name="qs_pulldown_side_title">Rychlá stahovací strana</string>
 	<string name="qs_pulldown_category">Rozbalovací nabídka rychlého nastavení</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">Vibrujte na dlaždicovém kohoutku QS</string>
 	<string name="vibration_type_touch">Intenzita definovaná nastavením vibrací dotyku systému</string>
 	<string name="qs_tile_qty_portrait">V orientaci na výšku</string>
 	<string name="qs_tile_qty_landscape">V orientaci na šířku</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">Počet řádků QS</string>
 	<string name="qs_cols_number">Počet sloupců QS</string>
 	<string name="qqs_tiles_number">Maximální počet dlaždic v rychlém QS (max. 2 řádky)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">Znovu povolte tematické ikony, které se mají použít</string>
 	<string name="volume_button_step_title">Kroky hlasitosti (0 až 100 %)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">Rozlišení displeje</string>
 	<string name="brightness_range_title">Limity jasu displeje</string>
 	<string name="brightness_range_not_linear">Tento rozsah NENÍ lineární: Někdy malý rozdíl vede ke značným změnám</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Když je vždy na displeji vypnuto] Klepnutím na obrazovku zobrazíte okolní displej</string>
 	<string name="so_pick_to_show_ambient_title">Vyberte pro zobrazení okolního displeje</string>
 	<string name="so_pick_to_show_ambient_summary">[Když je vždy zapnutý displej vypnutý] Zvednutím telefonu se zobrazí okolní displej</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Když je obrazovka vypnutá…</string>
 	<string name="custom_themed_icons_title">Vlastní tématické ikony</string>
 	<string name="custom_themed_icons_off">Vlastní ikony jsou zakázány</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">Přidat rozbalit/sbalit všechna tlačítka</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">Trvání upozornění na upozornění</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Zakázat efekt elastického přetažení</string>
 	<string name="overscroll_on_summary">Důležité: MUSÍTE povolit aplikace, u kterých chcete zakázat přetáčení v rámci LSPosed</string>
 	<string name="milliseconds">milisekundy</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">Když je přepínání dostupné, zobrazit ikonu na stavovém řádku</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrace při přijetí odchozího hovoru</string>
 	<string name="vibrate_on_call_drop_title">Vibrovat, když se hovor odpojí</string>

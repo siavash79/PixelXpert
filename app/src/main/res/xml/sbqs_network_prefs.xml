@@ -27,14 +27,13 @@
 		android:title="@string/network_show_icons_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
-		android:defaultValue="1"
+	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+		app:defaultValue="1"
 		android:key="networkTrafficInterval"
-		android:max="5"
-		android:min="1"
+		app:maxVal="5"
 		android:title="@string/network_interval_title"
 		app:iconSpaceReserved="false"
-		app:min="1"
+		app:minVal="1"
 		app:updatesContinuously="true" />
 
 	<sh.siava.pixelxpert.ui.preferences.MaterialEditTextPreference
@@ -66,8 +65,8 @@
 		android:title="@string/network_upload_color_title"
 		app:iconSpaceReserved="false" />
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialSeekbarPreference
-		android:defaultValue="100"
+	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+		app:defaultValue="100"
 		android:key="networkTrafficOpacity"
 		android:title="@string/network_opacity_title"
 		app:iconSpaceReserved="false"

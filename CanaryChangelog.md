@@ -1,3 +1,63 @@
+**canary-324**  
+- Updated all sliders in the app  
+  
+**canary-323**  
+- A14: Fixed lockscreen "toggle" shortcuts not changing colors  
+- Behavior change: long-press on power button to toggle torch now turns off the flashlight even if the screen is on  
+  
+**canary-322**  
+- A14 ap11b3: Fixed heads-up notification duration  
+  
+**canary-321**  
+- fixed occasional statusbar layout glitches (agian!)  
+  
+**canary-320**  
+- fixed occasional statusbar layout glitches  
+  
+**canary-319**  
+- battery icon on QS: when charging, click will show charging info dialog  
+- Relocated QS charging info to avoid touch conflicts  
+  
+**canary-318**  
+- A14ap11: Fixed heads-up notification duration  
+- A14ap11: Fixed keyguard wallpaper dim  
+  
+**canary-317**  
+- Happy 2024 everyone!  
+- Fixed heads-up notification icon not shown correctly  
+  
+**canary-316**  
+- Fixed QS footer actions layout margins  
+  
+**canary-315**  
+- A14ap11: Fixed hiding the mobile roaming indicator  
+- A14: Improved QS pull up/down  
+- Added option to show charging information on QS footer  
+- BootLoopProtector: increased bootloop measurement from 40s to 60s  
+- A14: Improved QS pull-up/down swipe gesture detection  
+  
+**canary-314**  
+- A14: Added option to close QS with a single swipe  
+  
+**canary-313**  
+- Added option to set notification's default expansion state  
+  
+**canary-312**  
+- A14ap11b2: Fixed lockscreen dts  
+  
+**canary-311**  
+- Added option to force AOD while charging  
+- Added option to force AOD while charging  
+  
+**canary-310**  
+- A14ap11b2: Fixed light QS theme  
+- Return of Hide Navbar  
+- Fixed network monitor opacity not applied correctly  
+  
+**canary-309**  
+- Resolved app startup crashes on certain devices  
+- Improved lockscreen carrier text mod  
+  
 **canary-307**  
 - Long-press on settings icon to launch PixelXpert now replaced with an app shortcut in settings page  
 - A14: Cloned apps page: added option to remove the clone profile  

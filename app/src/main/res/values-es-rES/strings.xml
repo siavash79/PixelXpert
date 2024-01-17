@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">Deslize rápido para abajo desde la barra de estado</string>
 	<string name="qs_pulldown_side_title">Lado por donde deslizar</string>
 	<string name="qs_pulldown_category">Deslizar rápido para abajo en ajustes rápidos</string>
+	<string name="qs_pullup_switch_title">Cerrar ajustes rápidos con un deslizamiento</string>
 	<string name="qs_haptic_switch_title">Vibrar al tocar los ajustes rápidos</string>
 	<string name="vibration_type_touch">Intensidad definida por la configuración de vibración táctil del sistema</string>
 	<string name="qs_tile_qty_portrait">En orientación vertical</string>
 	<string name="qs_tile_qty_landscape">En orientación apaisada</string>
+	<string name="qs_mod_category_misc_title">Misceláneo</string>
+	<string name="charging_info_on_qs">Mostrar información de carga en el panel QS</string>
 	<string name="qs_rows_number">Número de líneas</string>
 	<string name="qs_cols_number">Número de columnas QS</string>
 	<string name="qqs_tiles_number">Número máximo de mosaicos en QS (máx. 2 filas)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">Generar automáticamente íconos temáticos faltantes (Solo Android - Pixel launcher)</string>
 	<string name="reapply_themed_config">Vuelva a habilitar los iconos temáticos para aplicar</string>
 	<string name="volume_button_step_title">Pasos de volumen (0 a 100%)</string>
+	<string name="display_resolution_switch_title">Modificar resolución de pantalla</string>
+	<string name="display_resolution_switch_summary">Antes de activar esto, asegúrese de reiniciar todos los cambios de tamaño de pantalla/dpi por defecto</string>
 	<string name="display_resolution_title">Resolución de pantalla</string>
 	<string name="brightness_range_title">Límites de brillo de la pantalla</string>
 	<string name="brightness_range_not_linear">Este rango NO es lineal: A veces una pequeña diferencia conduce a cambios considerables</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Cuando esté apagado] Pulsar en la pantalla muestra pantalla ambiente</string>
 	<string name="so_pick_to_show_ambient_title">Levantar para mostrar la pantalla ambiente</string>
 	<string name="so_pick_to_show_ambient_summary">[Cuando esté apagado] Levantar muestra pantalla ambiente</string>
+	<string name="force_aod_while_charging_title">Forzar AOD mientras se carga</string>
+	<string name="force_aod_while_charging_summary">Mantener siempre activada la pantalla mientras el dispositivo está cargando</string>
 	<string name="doze_header">Mientras la pantalla está apagada…</string>
 	<string name="custom_themed_icons_title">Iconos temáticos personalizados</string>
 	<string name="custom_themed_icons_off">Iconos personalizados deshabilitados</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">Agregar expandir/contraer todos los botones</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Nunca descartar notificaciones en curso</string>
 	<string name="heads_up_notification_duration">Duración de la notificación Heads-up</string>
+	<string name="notif_default_expansion_title">Expansión predeterminada de notificación</string>
+	<string name="notif_always_expand">Siempre expandido</string>
+	<string name="notif_always_collapse">Siempre contraer</string>
 	<string name="disable_overscroll">Deshabilitar el efecto de desplazamiento elástico</string>
 	<string name="overscroll_on_summary">Importante: DEBE habilitar las aplicaciones para las que desea deshabilitar el desplazamiento excesivo dentro de LSPosed</string>
 	<string name="milliseconds">Milisegundos</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">Mostrar un icono en la barra de estado cuando el cambio está disponible</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Desbloqueado para todas las aplicaciones a través de <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: ¡Disfruta!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Información de la batería…</string>
+	<string name="power_indication_error">Error obteniendo datos de carga</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrar cuenado la llamada saliente es respondida</string>
 	<string name="vibrate_on_call_drop_title">Vibrar cuando se desconecta la llamada</string>

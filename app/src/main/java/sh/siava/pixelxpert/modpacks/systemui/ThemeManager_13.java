@@ -11,6 +11,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.OverlayTools.setOverlay;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -38,7 +39,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.pixelxpert.modpacks.utils.Helpers;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 
 @SuppressWarnings("RedundantThrows")
@@ -434,15 +434,15 @@ public class ThemeManager_13 extends XposedModPack {
 		new Thread(() -> {
 			try
 			{
-				Helpers.setOverlay("QSLightThemeOverlay", false, true, false);
-				Helpers.setOverlay("QSLightThemeBSTOverlay", false, false, false);
+				setOverlay("QSLightThemeOverlay", false, true, false);
+				setOverlay("QSLightThemeBSTOverlay", false, false, false);
 
 				Thread.sleep(50);
 
 				if (lightQSHeaderEnabled && !isCurrentlyDark)
 				{
-					Helpers.setOverlay("QSLightThemeOverlay", !brightnessThickTrackEnabled, true, false);
-					Helpers.setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, false, false);
+					setOverlay("QSLightThemeOverlay", !brightnessThickTrackEnabled, true, false);
+					setOverlay("QSLightThemeBSTOverlay", brightnessThickTrackEnabled, false, false);
 				}
 			}
 			catch (Throwable ignored){}

@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">啟用替代的 AOSP Mods 主題應用圖示</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">針對 Google Pixel 裝置的自定義</string>
 	<string name="volume_tile_title">Media Volume</string>
 	<string name="app_switch_tile_title">Switch App Profile</string>
 	<string name="hide_default">隱藏 (預設)</string>
@@ -34,8 +34,8 @@
 	<string name="telegram_group_title">Telegram group</string>
 	<string name="usage_title">Usage</string>
 	<string name="usage_summary">Open wiki page</string>
-	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_title">翻譯成你的語言</string>
+	<string name="crowdin_summary">幫助我們將 %s 翻譯成自己的語言</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">鎖定畫面</string>
 	<string name="statusbar_header">狀態列</string>
@@ -81,7 +81,7 @@
 	<string name="easy_unlock_title">快速解鎖 (Pin/密碼)</string>
 	<string name="easy_unlock_summary">如果第一次未生效，請重試</string>
 	<string name="charging_info_title">鎖定畫面顯示充電資訊</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">不顯示「自訂鎖定畫面」小白條</string>
 	<string name="imperial_units_title">使用英制單位</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">雙擊關閉螢幕</string>
@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">快速下拉方塊面板</string>
 	<string name="qs_pulldown_side_title">快速下拉寬度</string>
 	<string name="qs_pulldown_category">方塊面板下拉</string>
+	<string name="qs_pullup_switch_title">一鍵關閉快速設定</string>
 	<string name="qs_haptic_switch_title">點選按鈕震動</string>
 	<string name="vibration_type_touch">強度由系統觸控振動設定定義</string>
 	<string name="qs_tile_qty_portrait">豎屏時</string>
 	<string name="qs_tile_qty_landscape">橫屏時</string>
+	<string name="qs_mod_category_misc_title">雜項</string>
+	<string name="charging_info_on_qs">在快速設定面板上顯示充電信息</string>
 	<string name="qs_rows_number">方塊面板行數</string>
 	<string name="qs_cols_number">方塊面板列數</string>
 	<string name="qqs_tiles_number">方塊面板最大方塊數量 (最大2行)</string>
@@ -253,9 +256,11 @@
 	<string name="allow_all_screen_rotations_summary">將同時無視手動旋轉懸浮鈕</string>
 	<string name="force_no_cutout">無視螢幕開孔</string>
 	<string name="clear_all_reposition_title">在最近任務右側「清除所有」按鈕</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="force_themed_icons_title">自動產生缺少的主題圖示（僅限 Pixel 啟動器）</string>
 	<string name="reapply_themed_config">Re-enable themed icons to apply</string>
 	<string name="volume_button_step_title">音量步進 (0至100%)</string>
+	<string name="display_resolution_switch_title">修改顯示分辨率</string>
+	<string name="display_resolution_switch_summary">啟用此功能之前，請確保將所有顯示尺寸/dpi 變更重設為預設值</string>
 	<string name="display_resolution_title">顯示解析度</string>
 	<string name="brightness_range_title">顯示亮度限制</string>
 	<string name="brightness_range_not_linear">這個範圍不是線性的,有時一個小的差異會導致相當大的變化</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Tapping on the screen shows ambient display</string>
 	<string name="so_pick_to_show_ambient_title">Pick to show ambient display</string>
 	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Picking the phone shows ambient display</string>
+	<string name="force_aod_while_charging_title">充電時強制 AOD</string>
+	<string name="force_aod_while_charging_summary">設備充電時保持始終顯示啟用狀態</string>
 	<string name="doze_header">鎖定畫面時</string>
 	<string name="custom_themed_icons_title">自訂帶主題的圖示</string>
 	<string name="custom_themed_icons_off">自訂圖示已禁用</string>
@@ -277,20 +284,26 @@
 	<string name="so_vol_longpress_skip">長按音量鍵跳過歌曲</string>
 	<string name="notifications_header">通知選項</string>
 	<string name="expand_notifications_icons_title">新增展開/摺疊所有按鈕</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
+	<string name="disbale_ongoing_notif_dismiss_title">切勿忽略正在進行的通知</string>
 	<string name="heads_up_notification_duration">通知浮動持續時間</string>
+	<string name="notif_default_expansion_title">通知預設擴展</string>
+	<string name="notif_always_expand">總是展開</string>
+	<string name="notif_always_collapse">總是折疊</string>
 	<string name="disable_overscroll">禁用過度滾動效果</string>
 	<string name="overscroll_on_summary">重要:你必須在 LSPosed 作用域中勾選你要禁用的應用程式</string>
 	<string name="milliseconds">毫秒</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">音量面板</string>
+	<string name="volume_dialog_timeout">音量面板自動關閉時間</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Work/Clone Profile</string>
 	<string name="statusbar_long_press_app_switch">Long press statusbar to switch profile</string>
 	<string name="statusbar_app_switch_icon">Show an icon on statusbar when switching is available</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">去電被接通時震動</string>
 	<string name="vibrate_on_call_drop_title">結束通話時震動</string>
@@ -418,18 +431,18 @@
 	<string name="package_activated">Package successfully activated</string>
 	<string name="package_activation_failed">Package activation failed</string>
 	<string name="activate_in_lsposed">Activate in LSPosed</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">應用包無法啟動</string>
+	<string name="menu_launch_app">啟動應用</string>
+	<string name="menu_restart_app">重啟應用</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Checking root permissions…</string>
 	<string name="connecting_root_service">Connecting to the root service…</string>
 	<string name="root_access_denied">Root access denied. Please allow root access.</string>
-	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
+	<string name="root_service_failed">無法連接到root服務。請稍後再試</string>
 	<string name="exit">Exit</string>
 	<!-- Bottom Navigation -->
-	<string name="navigation_home">Home</string>
-	<string name="navigation_update">Update</string>
-	<string name="navigation_hooks">Hooks</string>
-	<string name="navigation_settings">Settings</string>
+	<string name="navigation_home">主頁</string>
+	<string name="navigation_update">更新</string>
+	<string name="navigation_hooks">掛鈎</string>
+	<string name="navigation_settings">設定</string>
 </resources>

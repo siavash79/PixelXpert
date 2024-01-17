@@ -191,18 +191,22 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 				selectedFragment = R.id.navigation_home;
 				binding.bottomNavigationView.getMenu().getItem(0).setChecked(true);
 				setHeader(this, getString(R.string.app_name));
+				backButtonDisabled();
 			} else if (Objects.equals(tag, UpdateFragment.class.getSimpleName())) {
 				selectedFragment = R.id.navigation_update;
 				binding.bottomNavigationView.getMenu().getItem(1).setChecked(true);
 				setHeader(this, getString(R.string.menu_updates));
+				backButtonEnabled();
 			} else if (Objects.equals(tag, HooksFragment.class.getSimpleName())) {
 				selectedFragment = R.id.navigation_hooks;
 				binding.bottomNavigationView.getMenu().getItem(2).setChecked(true);
 				setHeader(this, getString(R.string.hooked_packages_title));
+				backButtonEnabled();
 			} else if (Objects.equals(tag, OwnPrefsFragment.class.getSimpleName())) {
 				selectedFragment = R.id.navigation_settings;
 				binding.bottomNavigationView.getMenu().getItem(3).setChecked(true);
 				setHeader(this, getString(R.string.own_prefs_header));
+				backButtonEnabled();
 			}
 		});
 
@@ -693,7 +697,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 				pullDownIndicator.setVisibility(PreferenceHelper.isVisible("QSPulldownPercent") ? View.VISIBLE : View.GONE);
 				FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) pullDownIndicator.getLayoutParams();
-				lp.width = Math.round(mPreferences.getInt("QSPulldownPercent", 25) * displayWidth / 100f);
+				lp.width = Math.round(RangeSliderPreference.getSingleIntValue(mPreferences, "QSPulldownPercent", 25) * displayWidth / 100f);
 				lp.gravity = Gravity.TOP | (Integer.parseInt(mPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
 				pullDownIndicator.setLayoutParams(lp);
 			} catch (Exception ignored) {
@@ -749,17 +753,9 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 				int displayHeight = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().height();
 				int displayWidth = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
 
-				float leftSwipeUpPercentage = 25f;
-				try {
-					leftSwipeUpPercentage = RangeSliderPreference.getValues(mPreferences, "leftSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {
-				}
+				float leftSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(mPreferences, "leftSwipeUpPercentage", 25);
 
-				float rightSwipeUpPercentage = 25f;
-				try {
-					rightSwipeUpPercentage = RangeSliderPreference.getValues(mPreferences, "rightSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {
-				}
+				float rightSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(mPreferences, "rightSwipeUpPercentage", 25);
 
 				int edgeWidth = Math.round(displayWidth * leftSwipeUpPercentage / 100f);
 				ViewGroup.LayoutParams lp = leftSwipeGestureIndicator.getLayoutParams();
@@ -777,12 +773,12 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 				setVisibility(rightBackGestureIndicator, PreferenceHelper.isVisible("BackRightHeight"), 400);
 				setVisibility(leftBackGestureIndicator, PreferenceHelper.isVisible("BackLeftHeight"), 400);
 
-				int edgeHeight = Math.round(displayHeight * mPreferences.getInt("BackRightHeight", 100) / 100f);
+				int edgeHeight = Math.round(displayHeight * RangeSliderPreference.getSingleIntValue(mPreferences, "BackRightHeight", 100) / 100f);
 				lp = rightBackGestureIndicator.getLayoutParams();
 				lp.height = edgeHeight;
 				rightBackGestureIndicator.setLayoutParams(lp);
 
-				edgeHeight = Math.round(displayHeight * mPreferences.getInt("BackLeftHeight", 100) / 100f);
+				edgeHeight = Math.round(displayHeight * RangeSliderPreference.getSingleIntValue(mPreferences, "BackLeftHeight", 100) / 100f);
 				lp = leftBackGestureIndicator.getLayoutParams();
 				lp.height = edgeHeight;
 				leftBackGestureIndicator.setLayoutParams(lp);

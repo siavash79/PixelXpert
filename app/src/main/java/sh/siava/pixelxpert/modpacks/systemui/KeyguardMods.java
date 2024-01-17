@@ -11,11 +11,13 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findFirstMethodByName;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.hookAllMethodsMatchPattern;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -34,13 +36,11 @@ import java.lang.reflect.Method;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.ResourceManager;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.pixelxpert.modpacks.utils.Helpers;
 import sh.siava.pixelxpert.modpacks.utils.StringFormatter;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 import sh.siava.rangesliderpreference.RangeSliderPreference;
@@ -60,6 +60,9 @@ public class KeyguardMods extends XposedModPack {
 	public static final String SHORTCUT_TORCH = "torch";
 	public static final String SHORTCUT_ZEN = "zen";
 	public static final String SHORTCUT_QR_SCANNER = "qrscanner";
+
+	/** @noinspection FieldCanBeLocal*/
+	private static KeyguardMods instance = null;
 
 	private float max_charging_current = 0;
 	private float max_charging_voltage = 0;
@@ -109,10 +112,14 @@ public class KeyguardMods extends XposedModPack {
 
 	//region hide user avatar
 	private boolean HideLockScreenUserAvatar = false;
+	private static boolean ForceAODwCharging = false;
+	private Object KeyguardIndicationController;
 	//endregion
 
 	public KeyguardMods(Context context) {
 		super(context);
+
+		instance = this;
 	}
 
 	@Override
@@ -129,10 +136,9 @@ public class KeyguardMods extends XposedModPack {
 
 		HideLockScreenUserAvatar = Xprefs.getBoolean("HideLockScreenUserAvatar", false);
 
-		try {
-			KeyGuardDimAmount = RangeSliderPreference.getValues(Xprefs, "KeyGuardDimAmount", -1f).get(0) / 100f;
-		} catch (Throwable ignored) {
-		}
+		ForceAODwCharging = Xprefs.getBoolean("ForceAODwCharging", false);
+
+		KeyGuardDimAmount = RangeSliderPreference.getSingleFloatValue(Xprefs, "KeyGuardDimAmount", -1f) / 100f;
 
 		leftShortcutClick = Xprefs.getString("leftKeyguardShortcut", "");
 		rightShortcutClick = Xprefs.getString("rightKeyguardShortcut", "");
@@ -174,7 +180,6 @@ public class KeyguardMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		Class<?> CarrierTextControllerClass = findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
 		Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
-		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpparam.classLoader);
 		Class<?> KeyguardIndicationControllerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
@@ -188,6 +193,16 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> ZenModeControllerImplClass = findClass("com.android.systemui.statusbar.policy.ZenModeControllerImpl", lpparam.classLoader);
 		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpparam.classLoader);
 		Class<?> CommandQueueClass = findClass("com.android.systemui.statusbar.CommandQueue", lpparam.classLoader);
+		Class<?> AmbientDisplayConfigurationClass = findClass("android.hardware.display.AmbientDisplayConfiguration", lpparam.classLoader);
+
+		hookAllMethods(AmbientDisplayConfigurationClass, "alwaysOnEnabled", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(ForceAODwCharging) {
+					param.setResult((boolean) param.getResult() || isCharging());
+				}
+			}
+		});
 
 		hookAllConstructors(CommandQueueClass, new XC_MethodHook() {
 			@Override
@@ -261,7 +276,7 @@ public class KeyguardMods extends XposedModPack {
 			}
 		});
 
-		Method updateMethod = Helpers.findFirstMethodByName(KeyguardBottomAreaViewBinderClass, "updateButton");
+		Method updateMethod = findFirstMethodByName(KeyguardBottomAreaViewBinderClass, "updateButton");
 
 		if (updateMethod != null) {
 			hookMethod(updateMethod, new XC_MethodHook() {
@@ -293,13 +308,14 @@ public class KeyguardMods extends XposedModPack {
 							try {
 								v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
 								v.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
-							} catch (Throwable ignored) {
-							}
-						} else {
-							@SuppressLint("DiscouragedApi") int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
+							} catch (Throwable ignored) {}
+						} else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE){
+							@SuppressLint("DiscouragedApi")
+							int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
 									mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
 
-							@SuppressLint("DiscouragedApi") ColorStateList colorSurface = SettingsLibUtilsProvider.getColorAttr(
+							@SuppressLint("DiscouragedApi")
+							ColorStateList colorSurface = SettingsLibUtilsProvider.getColorAttr(
 									mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
 
 							v.getDrawable().setTint(mTextColorPrimary);
@@ -341,31 +357,33 @@ public class KeyguardMods extends XposedModPack {
 			}
 		};
 
+		XC_MethodHook keyguardIndicatorFinder = new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				KeyguardIndicationController = param.thisObject;
+			}
+		};
+
 		try { //A14
 			Class<?> KeyguardIndicationControllerGoogleClass = findClass("com.google.android.systemui.statusbar.KeyguardIndicationControllerGoogle", lpparam.classLoader);
+			hookAllConstructors(KeyguardIndicationControllerGoogleClass, keyguardIndicatorFinder);
 			hookAllMethods(KeyguardIndicationControllerGoogleClass, "computePowerIndication", powerIndicationHook);
 		}
 		catch (Throwable ignored)
 		{ //A13 and maybe 14 custom
+			hookAllConstructors(KeyguardIndicationControllerClass, keyguardIndicatorFinder);
 			hookAllMethods(KeyguardIndicationControllerClass, "computePowerIndication", powerIndicationHook);
 		}
 
-		hookAllConstructors(BatteryStatusClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				try {
-					Intent batteryInfoIntent = (Intent) param.args[0];
-
-					max_charging_current = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_CURRENT, 0) / 1000000f;
-					max_charging_voltage = batteryInfoIntent.getIntExtra(EXTRA_MAX_CHARGING_VOLTAGE, 0) / 1000000f;
-					temperature = batteryInfoIntent.getIntExtra(EXTRA_TEMPERATURE, 0) / 10f;
-				} catch (Throwable ignored){}
-			}
+		BatteryDataProvider.registerStatusCallback((batteryStatus, batteryStatusIntent) -> {
+			max_charging_current = batteryStatusIntent.getIntExtra(EXTRA_MAX_CHARGING_CURRENT, 0) / 1000000f;
+			max_charging_voltage = batteryStatusIntent.getIntExtra(EXTRA_MAX_CHARGING_VOLTAGE, 0) / 1000000f;
+			temperature = batteryStatusIntent.getIntExtra(EXTRA_TEMPERATURE, 0) / 10f;
 		});
 		//endregion
 
 		//region keyguardDimmer
-		hookAllMethods(ScrimControllerClass, "scheduleUpdate", new XC_MethodHook() {
+		hookAllMethodsMatchPattern(ScrimControllerClass, "scheduleUpdate.*", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				if (KeyGuardDimAmount < 0 || KeyGuardDimAmount > 1) return;
@@ -578,13 +596,11 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	private void launchTVRemote() {
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			public void run(IRootProviderProxy proxy) {
-				try {
-					proxy.runCommand("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity"); //enabling it if disabled, and start remote activity on older versions
-					proxy.runCommand("am start -a com.google.android.apps.googletv.ACTION_VIRTUAL_REMOTE"); //start activity on the updated TV app
-				} catch (Throwable ignored) {}
-			}
+		XPLauncher.enqueueProxyCommand(proxy -> {
+			try {
+				proxy.runCommand("pm enable com.google.android.videos; am start -n com.google.android.videos/com.google.android.apps.play.movies.common.remote.RemoteDevicesListActivity"); //enabling it if disabled, and start remote activity on older versions
+				proxy.runCommand("am start -a com.google.android.apps.googletv.ACTION_VIRTUAL_REMOTE"); //start activity on the updated TV app
+			} catch (Throwable ignored) {}
 		});
 	}
 
@@ -635,5 +651,16 @@ public class KeyguardMods extends XposedModPack {
 				}
 			}
 		});
+	}
+
+	public static String getPowerIndicationString()
+	{
+		try {
+			return (String) callMethod(instance.KeyguardIndicationController, "computePowerIndication");
+		}
+		catch (Throwable ignored)
+		{
+			return ResourceManager.modRes.getString(R.string.power_indication_error);
+		}
 	}
 }

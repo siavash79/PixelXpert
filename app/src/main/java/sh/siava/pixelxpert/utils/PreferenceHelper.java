@@ -1,7 +1,5 @@
 package sh.siava.pixelxpert.utils;
 
-import static java.lang.Math.round;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
-import androidx.preference.SeekBarPreference;
 
 import java.util.Arrays;
 import java.util.List;
@@ -236,6 +233,9 @@ public class PreferenceHelper {
 			case "QSPulldownSide":
 				return instance.mPreferences.getBoolean("QSPullodwnEnabled", false);
 
+			case "oneFingerPullupEnabled":
+				return instance.mPreferences.getBoolean("QSPullodwnEnabled", false) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
+
 			case "BSThickTrackOverlay":
 				if (!showOverlays && instance.mPreferences.getBoolean("BSThickTrackOverlay", false)) {
 					instance.mPreferences.edit().putBoolean("BSThickTrackOverlay", false).apply();
@@ -311,177 +311,131 @@ public class PreferenceHelper {
 	public static String getSummary(Context fragmentCompat, @NonNull String key) {
 		switch (key) {
 			case "VolumeDialogTimeout":
-				int VolumeDialogTimeout = 3000;
-				try
-				{
-					VolumeDialogTimeout = Math.round(RangeSliderPreference.getValues(instance.mPreferences, "VolumeDialogTimeout", 3000).get(0));
-				}
-				catch (Throwable ignored){}
+				int VolumeDialogTimeout = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "VolumeDialogTimeout", 3000);
 				return VolumeDialogTimeout == 3000
 						? fragmentCompat.getString(R.string.word_default)
 						: String.format("%s %s", VolumeDialogTimeout, fragmentCompat.getString(R.string.milliseconds));
 
 			case "taskbarHeightOverride":
-				float taskbarHeightOverride = 100f;
-				try {
-					taskbarHeightOverride = RangeSliderPreference.getValues(instance.mPreferences, "taskbarHeightOverride", 100f).get(0);
-				} catch (Throwable ignored) {
-				}
+				int taskbarHeightOverride = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "taskbarHeightOverride", 100);
 				return taskbarHeightOverride != 100f
 						? taskbarHeightOverride + "%"
 						: fragmentCompat.getString(R.string.word_default);
 
 			case "KeyGuardDimAmount":
-				float KeyGuardDimAmount = -1;
-				try {
-					KeyGuardDimAmount = RangeSliderPreference.getValues(instance.mPreferences, "KeyGuardDimAmount", -1).get(0);
-				} catch (Exception ignored) {
-				}
+				int KeyGuardDimAmount = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "KeyGuardDimAmount", -1);
 				return KeyGuardDimAmount < 0
 						? fragmentCompat.getString(R.string.word_default)
 						: KeyGuardDimAmount + "%";
 
 			case "BBOpacity":
-				return instance.mPreferences.getInt("BBOpacity", 100) + "%";
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences, "BBOpacity", 100) + "%";
 
 			case "BBarHeight":
-				return instance.mPreferences.getInt("BBarHeight", 100) + "%";
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences, "BBarHeight", 100) + "%";
 
 			case "networkTrafficInterval":
-				return instance.mPreferences.getInt("networkTrafficInterval", 1) + " second(s)";
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences, "networkTrafficInterval", 1) + " second(s)";
 
 			case "BatteryIconScaleFactor":
-				return instance.mPreferences.getInt("BatteryIconScaleFactor", 50) * 2 + fragmentCompat.getString(R.string.battery_size_summary);
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences, "BatteryIconScaleFactor", 50) * 2 + fragmentCompat.getString(R.string.battery_size_summary);
 
 			case "BIconOpacity":
-				return instance.mPreferences.getInt("BIconOpacity", 100) + "%";
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences, "BIconOpacity", 100) + "%";
 
 			case "volumeStps":
-				int volumeStps = instance.mPreferences.getInt("volumeStps", 0);
+				int volumeStps = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "volumeStps", 0);
 				return String.format("%s - (%s)", volumeStps == 10 ? fragmentCompat.getString(R.string.word_default) : String.valueOf(volumeStps), fragmentCompat.getString(R.string.restart_needed));
 
 			case "displayOverride":
-				float displayOverride = 100;
-				try {
-					displayOverride = RangeSliderPreference.getValues(instance.mPreferences, "displayOverride", 100f).get(0);
-				} catch (Exception ignored) {
-				}
+				float displayOverride = RangeSliderPreference.getSingleFloatValue(instance.mPreferences, "displayOverride", 100f);
 
 				double increasedArea = Math.round(Math.abs(Math.pow(displayOverride, 2) / 100 - 100));
 
 				return String.format("%s \n (%s)", displayOverride == 100 ? fragmentCompat.getString(R.string.word_default) : String.format("%s%% - %s%% %s", String.valueOf(displayOverride), String.valueOf(increasedArea), displayOverride > 100 ? fragmentCompat.getString(R.string.more_area) : fragmentCompat.getString(R.string.less_area)), fragmentCompat.getString(R.string.sysui_restart_needed));
 
 			case "HeadupAutoDismissNotificationDecay":
-				float headsupDecayMillis = 5000;
-				try {
-					headsupDecayMillis = RangeSliderPreference.getValues(instance.mPreferences, "HeadupAutoDismissNotificationDecay", -1).get(0);
-				} catch (Exception ignored) {
-				}
+				int headsupDecayMillis = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "HeadupAutoDismissNotificationDecay", 5000);
 
-				return ((int) headsupDecayMillis) + " " + fragmentCompat.getString(R.string.milliseconds);
+				return headsupDecayMillis + " " + fragmentCompat.getString(R.string.milliseconds);
 
 
 			case "hotSpotTimeoutSecs":
-				long timeout = 0;
-				try {
-					timeout = (long) (RangeSliderPreference.getValues(instance.mPreferences, "hotSpotTimeoutSecs", 0).get(0) * 1L);
-				} catch (Throwable ignored) {
-				}
+				long timeout = (long) (RangeSliderPreference.getSingleFloatValue(instance.mPreferences, "hotSpotTimeoutSecs", 0) * 1L);
 
 				return timeout > 0
 						? String.format("%d %s", timeout / 60, fragmentCompat.getString(R.string.minutes_word))
 						: fragmentCompat.getString(R.string.word_default);
 
 			case "hotSpotMaxClients":
-				int clients = 0;
-				try {
-					clients = round(RangeSliderPreference.getValues(instance.mPreferences, "hotSpotMaxClients", 0).get(0));
-				} catch (Throwable ignored) {
-				}
-
+				int clients = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "hotSpotMaxClients", 0);
 				return clients > 0
 						? String.valueOf(clients)
 						: fragmentCompat.getString(R.string.word_default);
 
 
 			case "statusbarHeightFactor":
-				int statusbarHeightFactor = instance.mPreferences.getInt("statusbarHeightFactor", 100);
+				int statusbarHeightFactor = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "statusbarHeightFactor", 100);
 				return statusbarHeightFactor == 100 ? fragmentCompat.getString(R.string.word_default) : statusbarHeightFactor + "%";
 
 			case "QSColQty":
-				int QSColQty = instance.mPreferences.getInt("QSColQty", 1);
+				int QSColQty = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "QSColQty", 1);
 
-				if (instance.mPreferences.getInt("QSColQtyL", 1) > QSColQty) {
+				if (RangeSliderPreference.getSingleIntValue(instance.mPreferences, "QSColQtyL", 1) > QSColQty) {
 					instance.mPreferences.edit().putInt("QSColQtyL", QSColQty).apply();
 				}
 
 				return (QSColQty == 1) ? fragmentCompat.getString(R.string.word_default) : String.valueOf(QSColQty);
 
 			case "QSRowQty":
-				int QSRowQty = instance.mPreferences.getInt("QSRowQty", 0);
+				int QSRowQty = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "QSRowQty", 0);
 				return (QSRowQty == 0) ? fragmentCompat.getString(R.string.word_default) : String.valueOf(QSRowQty);
 
 			case "QQSTileQty":
-				int QQSTileQty = instance.mPreferences.getInt("QQSTileQty", 4);
+				int QQSTileQty = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "QQSTileQty", 4);
 				return (QQSTileQty == 4) ? fragmentCompat.getString(R.string.word_default) : String.valueOf(QQSTileQty);
 
 			case "QSRowQtyL":
-				int QSRowQtyL = instance.mPreferences.getInt("QSRowQtyL", 0);
+				int QSRowQtyL = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "QSRowQtyL", 0);
 				return (QSRowQtyL == 0) ? fragmentCompat.getString(R.string.word_default) : String.valueOf(QSRowQtyL);
 
 			case "QSColQtyL":
-				int QSColQtyL = instance.mPreferences.getInt("QSColQtyL", 1);
+				int QSColQtyL = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "QSColQtyL", 1);
 				return (QSColQtyL == 1) ? fragmentCompat.getString(R.string.word_default) : String.valueOf(QSColQtyL);
 
 			case "QQSTileQtyL":
-				int QQSTileQtyL = instance.mPreferences.getInt("QQSTileQtyL", 4);
+				int QQSTileQtyL = RangeSliderPreference.getSingleIntValue(instance.mPreferences, "QQSTileQtyL", 4);
 				return (QQSTileQtyL == 4) ? fragmentCompat.getString(R.string.word_default) : String.valueOf(QQSTileQtyL);
 
 			case "QSPulldownPercent":
-				return instance.mPreferences.getInt("QSPulldownPercent", 25) + "%";
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences, "QSPulldownPercent", 25) + "%";
 
 			case "QSLabelScaleFactor":
-				float QSLabelScaleFactor = 0;
-				try {
-					QSLabelScaleFactor = RangeSliderPreference.getValues(instance.mPreferences, "QSLabelScaleFactor", 0f).get(0);
-				} catch (Exception ignored) {
-				}
+				float QSLabelScaleFactor = RangeSliderPreference.getSingleFloatValue(instance.mPreferences, "QSLabelScaleFactor", 0f);
 				return (QSLabelScaleFactor + 100) + "% " + fragmentCompat.getString(R.string.toggle_dark_apply);
 
 			case "QSSecondaryLabelScaleFactor":
-				float QSSecondaryLabelScaleFactor = 0;
-				try {
-					QSSecondaryLabelScaleFactor = RangeSliderPreference.getValues(instance.mPreferences, "QSSecondaryLabelScaleFactor", 0f).get(0);
-				} catch (Exception ignored) {
-				}
+				float QSSecondaryLabelScaleFactor = RangeSliderPreference.getSingleFloatValue(instance.mPreferences, "QSSecondaryLabelScaleFactor", 0f);
 				return (QSSecondaryLabelScaleFactor + 100) + "% " + fragmentCompat.getString(R.string.toggle_dark_apply);
 
 			case "GesPillWidthModPos":
-				return instance.mPreferences.getInt("GesPillWidthModPos", 50) * 2 + fragmentCompat.getString(R.string.pill_width_summary);
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences, "GesPillWidthModPos", 50) * 2 + fragmentCompat.getString(R.string.pill_width_summary);
 
 			case "GesPillHeightFactor":
-				return instance.mPreferences.getInt("GesPillHeightFactor", 100) + fragmentCompat.getString(R.string.pill_width_summary);
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences, "GesPillHeightFactor", 100) + fragmentCompat.getString(R.string.pill_width_summary);
 
 			case "BackLeftHeight":
-				return instance.mPreferences.getInt("BackLeftHeight", 100) + "%";
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences, "BackLeftHeight", 100) + "%";
 
 			case "BackRightHeight":
-				return instance.mPreferences.getInt("BackRightHeight", 100) + "%";
+				return RangeSliderPreference.getSingleIntValue(instance.mPreferences,"BackRightHeight", 100) + "%";
 
 			case "leftSwipeUpPercentage":
-				float leftSwipeUpPercentage = 25f;
-				try {
-					leftSwipeUpPercentage = RangeSliderPreference.getValues(instance.mPreferences, "leftSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {
-				}
+				float leftSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(instance.mPreferences, "leftSwipeUpPercentage", 25);
 				return leftSwipeUpPercentage + "%";
 
 			case "rightSwipeUpPercentage":
-				float rightSwipeUpPercentage = 25f;
-				try {
-					rightSwipeUpPercentage = RangeSliderPreference.getValues(instance.mPreferences, "rightSwipeUpPercentage", 25).get(0);
-				} catch (Exception ignored) {
-				}
+				float rightSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(instance.mPreferences, "rightSwipeUpPercentage", 25);
 				return rightSwipeUpPercentage + "%";
 
 			case "swipeUpPercentage":
@@ -524,7 +478,7 @@ public class PreferenceHelper {
 			//Other special cases
 			switch (key) {
 				case "QSColQtyL":
-					((SeekBarPreference) preference).setMax(instance.mPreferences.getInt("QSColQty", 1));
+					((RangeSliderPreference) preference).setMax(RangeSliderPreference.getSingleFloatValue(instance.mPreferences, "QSColQty", 1));
 					break;
 
 				case "QSLabelScaleFactor":

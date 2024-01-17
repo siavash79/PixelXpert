@@ -6,6 +6,8 @@ import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ObjectTools.tryParseInt;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -24,16 +26,20 @@ import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.ResourceManager;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
 public class NotificationExpander extends XposedModPack {
+	private static final int DEFAULT = 0;
+	private static final int EXPAND_ALWAYS = 1;
+	/** @noinspection unused*/
+	private static final int COLLAPSE_ALWAYS = 2;
+
 	public static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 
 	public static boolean notificationExpandallHookEnabled = true;
 	public static boolean notificationExpandallEnabled = false;
-
+	private static int notificationDefaultExpansion = DEFAULT;
 	private Button ExpandBtn, CollapseBtn;
 	private FrameLayout FooterView;
 	private FrameLayout BtnLayout;
@@ -47,8 +53,9 @@ public class NotificationExpander extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		notificationExpandallEnabled = XPrefs.Xprefs.getBoolean("notificationExpandallEnabled", false);
-		notificationExpandallHookEnabled = XPrefs.Xprefs.getBoolean("notificationExpandallHookEnabled", true);
+		notificationExpandallEnabled = Xprefs.getBoolean("notificationExpandallEnabled", false);
+		notificationExpandallHookEnabled = Xprefs.getBoolean("notificationExpandallHookEnabled", true);
+		notificationDefaultExpansion = tryParseInt(Xprefs.getString("notificationDefaultExpansion", "0"), 0);
 
 		if (Key.length > 0 && Key[0].equals("notificationExpandallEnabled")) {
 			updateFooterBtn();
@@ -67,7 +74,9 @@ public class NotificationExpander extends XposedModPack {
 		Class<?> NotificationStackScrollLayoutClass = findClass("com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout", lpparam.classLoader);
 		Class<?> FooterViewButtonClass = findClass("com.android.systemui.statusbar.notification.row.FooterViewButton", lpparam.classLoader);
 		Class<?> NotifCollectionClass = findClassIfExists("com.android.systemui.statusbar.notification.collection.NotifCollection", lpparam.classLoader);
+		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
 		Class<?> FooterViewClass;
+
 
 		try { //14AP11
 			FooterViewClass = findClass("com.android.systemui.statusbar.notification.footer.ui.view.FooterView", lpparam.classLoader);
@@ -76,6 +85,16 @@ public class NotificationExpander extends XposedModPack {
 		{
 			FooterViewClass = findClass("com.android.systemui.statusbar.notification.row.FooterView", lpparam.classLoader);
 		}
+
+		//region default notification state
+		hookAllMethods(NotificationPanelViewControllerClass, "notifyExpandingStarted", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(notificationDefaultExpansion != DEFAULT)
+					expandAll(notificationDefaultExpansion == EXPAND_ALWAYS);
+			}
+		});
+		//endregion
 
 		//Notification Footer, where shortcuts should live
 		hookAllMethods(FooterViewClass, "onFinishInflate", new XC_MethodHook() {
@@ -180,9 +199,13 @@ public class NotificationExpander extends XposedModPack {
 		for (Object entry : entries.toArray()) {
 			Object row = getObjectField(entry, "row");
 			if (row != null) {
-				callMethod(row, "setUserExpanded", expand, expand);
+				setRowExpansion(row, expand);
 			}
 		}
 
+	}
+
+	private void setRowExpansion(Object row, boolean expand) {
+		callMethod(row, "setUserExpanded", expand, true);
 	}
 }

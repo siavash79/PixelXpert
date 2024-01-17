@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">स्टेटस बार से त्वरित सेटिंग मेनू को तुरंत नीचे खींचें</string>
 	<string name="qs_pulldown_side_title">त्वरित पुल डाउन साइड</string>
 	<string name="qs_pulldown_category">त्वरित सेटिंग्स को नीचे खींचें</string>
+	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
 	<string name="qs_haptic_switch_title">त्वरित सेटिंग टैब को छूने पर कंपन होता है</string>
 	<string name="vibration_type_touch">स्पर्श कंपन के लिए सिस्टम सेटिंग्स द्वारा तीव्रता निर्धारित की जाती है</string>
 	<string name="qs_tile_qty_portrait">पोर्ट्रेट में</string>
 	<string name="qs_tile_qty_landscape">लैंडस्केप</string>
+	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">त्वरित सेटिंग्स में पंक्तियों की संख्या</string>
 	<string name="qs_cols_number">QS कॉलम की संख्या</string>
 	<string name="qqs_tiles_number">त्वरित QS में अधिकतम टाइलें (अधिकतम 2 पंक्तियां)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
 	<string name="reapply_themed_config">लागू करने के लिए थीम वाले आइकन पुनः सक्षम करें</string>
 	<string name="volume_button_step_title">वॉल्यूम चरण (0 से 100%)</string>
+	<string name="display_resolution_switch_title">Modify display resolution</string>
+	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
 	<string name="display_resolution_title">स्क्रीन रेजोल्यूशन</string>
 	<string name="brightness_range_title">चमक रेंज दिखाएं</string>
 	<string name="brightness_range_not_linear">यह श्रेणी रैखिक नहीं है: कभी-कभी एक छोटा सा अंतर बड़ा अंतर पैदा कर देता है</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[जब हमेशा ऑन डिस्प्ले बंद हो] स्क्रीन पर टैप करने से परिवेशी डिस्प्ले दिखता है</string>
 	<string name="so_pick_to_show_ambient_title">परिवेशीय प्रदर्शन दिखाने के लिए चुनें</string>
 	<string name="so_pick_to_show_ambient_summary">[जब हमेशा ऑन डिस्प्ले बंद हो] फोन उठाने पर परिवेशी डिस्प्ले दिखता है</string>
+	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">स्क्रीन बंद होने पर…</string>
 	<string name="custom_themed_icons_title">कस्टम आइकन थीम</string>
 	<string name="custom_themed_icons_off">कस्टम आइकन अक्षम</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">सभी को विस्तृत/संक्षिप्त करें</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
 	<string name="heads_up_notification_duration">अग्रणी अधिसूचना अवधि</string>
+	<string name="notif_default_expansion_title">Notification default expansion</string>
+	<string name="notif_always_expand">Always expand</string>
+	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">इलास्टिक ओवरस्क्रॉलिंग प्रभाव अक्षम करें</string>
 	<string name="overscroll_on_summary">महत्वपूर्ण: आप उन ऐप्स को अवश्य सक्षम करें जिनके लिए आप LSPosed में ओवरस्क्रॉल अक्षम करना चाहते हैं</string>
 	<string name="milliseconds">मिलीसेकंड</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">स्विचिंग उपलब्ध होने पर स्टेटसबार पर एक आइकन दिखाएं</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">Battery info…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrieren bei angenommenem abgehenden Anruf</string>
 	<string name="vibrate_on_call_drop_title">Vibrieren, wenn Anruf getrennt wird</string>

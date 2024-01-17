@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">启用替代的 AOSP Mods 主题应用图标</string>
+	<string name="app_themed_icon_title">其他主题图标</string>
 	<string name="xposed_desc">自定义 Google Pixel 设备</string>
 	<string name="volume_tile_title">媒体音量</string>
 	<string name="app_switch_tile_title">Switch App Profile</string>
@@ -34,8 +34,8 @@
 	<string name="telegram_group_title">Telegram 群组</string>
 	<string name="usage_title">用途</string>
 	<string name="usage_summary">打开 Wiki 页面</string>
-	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_title">翻译到你的语言</string>
+	<string name="crowdin_summary">帮助我们将 %s 翻译成您的语言</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">锁屏</string>
 	<string name="statusbar_header">状态栏</string>
@@ -194,10 +194,13 @@
 	<string name="qs_pulldown_switch_title">快速下拉磁贴面板</string>
 	<string name="qs_pulldown_side_title">快速下拉宽度</string>
 	<string name="qs_pulldown_category">磁贴面板下拉选项</string>
+	<string name="qs_pullup_switch_title">滑动关闭快速设置</string>
 	<string name="qs_haptic_switch_title">点击按钮震动</string>
 	<string name="vibration_type_touch">强度由系统触摸振动设置定义</string>
 	<string name="qs_tile_qty_portrait">竖屏时</string>
 	<string name="qs_tile_qty_landscape">横屏时</string>
+	<string name="qs_mod_category_misc_title">杂项</string>
+	<string name="charging_info_on_qs">在快速设置面板上显示充电信息</string>
 	<string name="qs_rows_number">磁贴面板行数</string>
 	<string name="qs_cols_number">磁贴面板列数</string>
 	<string name="qqs_tiles_number">磁贴面板最大磁贴数量 (最大2行)</string>
@@ -256,6 +259,8 @@
 	<string name="force_themed_icons_title">自动生成缺少的主题图标 (只适配 Pixel 启动器)</string>
 	<string name="reapply_themed_config">重新启用主题图标以应用</string>
 	<string name="volume_button_step_title">音量步进 (0至100%)</string>
+	<string name="display_resolution_switch_title">修改显示分辨率</string>
+	<string name="display_resolution_switch_summary">启用前，请确保将所有的 显示大小/DPI 更改 重置为默认值</string>
 	<string name="display_resolution_title">显示分辨率</string>
 	<string name="brightness_range_title">显示亮度限制</string>
 	<string name="brightness_range_not_linear">这个范围不是线性的,有时一个小的差异会导致相当大的变化</string>
@@ -270,6 +275,8 @@
 	<string name="so_tap_to_show_ambient_summary">[When always on display is off] Tapping on the screen shows ambient display</string>
 	<string name="so_pick_to_show_ambient_title">Pick to show ambient display</string>
 	<string name="so_pick_to_show_ambient_summary">[When always on display is off] Picking the phone shows ambient display</string>
+	<string name="force_aod_while_charging_title">充电时强制开启息屏显示</string>
+	<string name="force_aod_while_charging_summary">充电时开启息屏显示</string>
 	<string name="doze_header">锁屏功能</string>
 	<string name="custom_themed_icons_title">自定义带主题的图标</string>
 	<string name="custom_themed_icons_off">自定义图标已禁用</string>
@@ -279,6 +286,9 @@
 	<string name="expand_notifications_icons_title">添加展开 / 折叠所有按钮</string>
 	<string name="disbale_ongoing_notif_dismiss_title">永不取消正在进行的通知</string>
 	<string name="heads_up_notification_duration">通知浮动持续时间</string>
+	<string name="notif_default_expansion_title">通知默认展开模式</string>
+	<string name="notif_always_expand">始终展开</string>
+	<string name="notif_always_collapse">始终折叠</string>
 	<string name="disable_overscroll">禁用过度滚动效果</string>
 	<string name="overscroll_on_summary">重要:你必须在 LSPosed 作用域中勾选你要禁用的app</string>
 	<string name="milliseconds">毫秒</string>
@@ -291,6 +301,9 @@
 	<string name="statusbar_app_switch_icon">Show an icon on statusbar when switching is available</string>
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">通过 <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font> 解锁所有应用：开始 享受吧！</string>
+	<!-- SystemUI hook -->
+	<string name="battery_info_button_title">电池信息…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">去电被接通时震动</string>
 	<string name="vibrate_on_call_drop_title">结束通话时震动</string>
@@ -418,9 +431,9 @@
 	<string name="package_activated">软件包已成功启动</string>
 	<string name="package_activation_failed">软件包启动失败</string>
 	<string name="activate_in_lsposed">在 LSposed 中启用</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">软件包不可启动</string>
+	<string name="menu_launch_app">启动应用</string>
+	<string name="menu_restart_app">重启应用</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">正在检查 root 权限...</string>
 	<string name="connecting_root_service">正在连接 root 服务…</string>

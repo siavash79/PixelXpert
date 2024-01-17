@@ -120,8 +120,10 @@ public class ScreenOffKeys extends XposedModPack {
 			hookMethod(powerLongPressMethod, new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					boolean screenIsOn = SystemClock.uptimeMillis() - wakeTime > 1000;
 					if (!replaceAssistantwithTorch
-							|| SystemClock.uptimeMillis() - wakeTime > 1000)
+							|| (screenIsOn
+								&& !SystemUtils.isFlashOn()))
 						return;
 
 					try {
@@ -136,7 +138,9 @@ public class ScreenOffKeys extends XposedModPack {
 						SystemUtils.vibrate(VibrationEffect.EFFECT_TICK, VibrationAttributes.USAGE_ACCESSIBILITY);
 
 						param.setResult(null);
-						callMethod(SystemUtils.PowerManager(), "goToSleep", SystemClock.uptimeMillis());
+
+						if(!screenIsOn)
+							callMethod(SystemUtils.PowerManager(), "goToSleep", SystemClock.uptimeMillis());
 					} catch (Throwable T) {
 						log(T);
 					}

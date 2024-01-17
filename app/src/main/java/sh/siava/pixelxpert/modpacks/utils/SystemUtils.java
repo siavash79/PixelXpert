@@ -27,10 +27,12 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.os.UserManager;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.os.VibratorManager;
 import android.telephony.TelephonyManager;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +42,6 @@ import org.jetbrains.annotations.Contract;
 import java.util.ArrayList;
 
 import sh.siava.pixelxpert.BuildConfig;
-import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XPrefs;
 
@@ -68,26 +69,24 @@ public class SystemUtils {
 	ArrayList<ChangeListener> mFlashlightLevelListeners = new ArrayList<>();
 	ArrayList<ChangeListener> mVolumeChangeListeners = new ArrayList<>();
 	private WifiManager mWifiManager;
+	private WindowManager mWindowManager;
+	private UserManager mUserManager;
 
 	public static void restartSystemUI() {
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			@Override
-			public void run(IRootProviderProxy proxy) {
-				try {
-					proxy.runCommand("killall com.android.systemui");
-				} catch (Throwable ignored) {}
-			}
+		BootLoopProtector.resetCounter("com.android.systemui");
+
+		XPLauncher.enqueueProxyCommand(proxy -> {
+			try {
+				proxy.runCommand("killall com.android.systemui");
+			} catch (Throwable ignored) {}
 		});
 	}
 
 	public static void restart() {
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			@Override
-			public void run(IRootProviderProxy proxy) {
-				try {
-					proxy.runCommand("am start -a android.intent.action.REBOOT");
-				} catch (Throwable ignored) {}
-			}
+		XPLauncher.enqueueProxyCommand(proxy -> {
+			try {
+				proxy.runCommand("am start -a android.intent.action.REBOOT");
+			} catch (Throwable ignored) {}
 		});
 	}
 
@@ -137,6 +136,22 @@ public class SystemUtils {
 		return instance == null
 				? null
 				: instance.getAudioManager();
+	}
+
+	@Nullable
+	@Contract(pure = true)
+	public static WindowManager WindowManager() {
+		return instance == null
+				? null
+				: instance.getWindowManager();
+	}
+
+	@Nullable
+	@Contract(pure = true)
+	public static UserManager UserManager() {
+		return instance == null
+				? null
+				: instance.getUserManager();
 	}
 
 	@Nullable
@@ -376,27 +391,24 @@ public class SystemUtils {
 	static boolean darkSwitching = false;
 
 	public static void doubleToggleDarkMode() {
-		XPLauncher.enqueueProxyCommand(new XPLauncher.ProxyRunnable() {
-			@Override
-			public void run(IRootProviderProxy proxy) {
-				boolean isDark = isDarkMode();
-				new Thread(() -> {
-					try {
-						while (darkSwitching) {
-							Thread.currentThread().wait(100);
-						}
-						darkSwitching = true;
-
-						proxy.runCommand("cmd uimode night " + (isDark ? "no" : "yes"));
-						Thread.sleep(1000);
-						proxy.runCommand("cmd uimode night " + (isDark ? "yes" : "no"));
-
-						Thread.sleep(500);
-						darkSwitching = false;
-					} catch (Exception ignored) {
+		XPLauncher.enqueueProxyCommand(proxy -> {
+			boolean isDark = isDarkMode();
+			new Thread(() -> {
+				try {
+					while (darkSwitching) {
+						Thread.currentThread().wait(100);
 					}
-				}).start();
-			}
+					darkSwitching = true;
+
+					proxy.runCommand("cmd uimode night " + (isDark ? "no" : "yes"));
+					Thread.sleep(1000);
+					proxy.runCommand("cmd uimode night " + (isDark ? "yes" : "no"));
+
+					Thread.sleep(500);
+					darkSwitching = false;
+				} catch (Exception ignored) {
+				}
+			}).start();
 		});
 	}
 
@@ -578,6 +590,32 @@ public class SystemUtils {
 		return mDownloadManager;
 	}
 
+	private WindowManager getWindowManager() {
+		if (mWindowManager == null) {
+			try {
+				mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log(t);
+				}
+			}
+		}
+		return mWindowManager;
+	}
+
+	private UserManager getUserManager() {
+		if (mUserManager == null) {
+			try {
+				mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+			} catch (Throwable t) {
+				if (BuildConfig.DEBUG) {
+					log(t);
+				}
+			}
+		}
+		return mUserManager;
+	}
+	
 	public interface ChangeListener
 	{
 		void onChanged(int newVal);

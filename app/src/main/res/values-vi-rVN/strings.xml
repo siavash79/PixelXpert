@@ -303,6 +303,7 @@
 	<string name="settings_cloned_apps_active">Mở khóa toàn bộ tại <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Hãy tận hưởng!</string>
 	<!-- SystemUI hook -->
 	<string name="battery_info_button_title">Thông tin pin…</string>
+	<string name="power_indication_error">Lỗi khi tải về dữ liệu sạc</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Rung khi cuộc gọi được kết nối</string>
 	<string name="vibrate_on_call_drop_title">Rung khi cuộc gọi ngắt kết nối</string>

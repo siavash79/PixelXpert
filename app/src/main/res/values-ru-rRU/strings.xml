@@ -302,7 +302,8 @@
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Разблокировано для всех приложений через <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Наслаждайтесь!</string>
 	<!-- SystemUI hook -->
-	<string name="battery_info_button_title">Battery info…</string>
+	<string name="battery_info_button_title">Информация о батарее…</string>
+	<string name="power_indication_error">Error fetching charging data</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Вибрация при ответе на исходящий вызов</string>
 	<string name="vibrate_on_call_drop_title">Вибрация при отключении вызова</string>

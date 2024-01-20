@@ -9,5 +9,7 @@
 	<!-- Launcher icon -->
 	<color name="launcher_fg">@android:color/system_neutral2_700</color>
 	<color name="launcher_bg">@android:color/background_light</color>
+	<color name="launcher_accent">@android:color/system_accent1_600</color>
+	<color name="launcher_accent_variant">@android:color/system_accent3_600</color>
 
 </resources>

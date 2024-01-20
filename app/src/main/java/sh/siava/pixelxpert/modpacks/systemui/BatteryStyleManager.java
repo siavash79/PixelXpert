@@ -134,8 +134,6 @@ public class BatteryStyleManager extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-		BatteryDataProvider.registerInfoCallback(BatteryStyleManager::refreshAllBatteryIcons);
-
 		findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

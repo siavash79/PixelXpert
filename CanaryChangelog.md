@@ -1,3 +1,6 @@
+**canary-326**  
+- Fixed alternative themed icon  
+  
 **canary-325**  
 - [Experiment] Fixed battery icon unwanted resize  
   

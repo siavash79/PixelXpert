@@ -1,3 +1,6 @@
+**canary-325**  
+- [Experiment] Fixed battery icon unwanted resize  
+  
 **canary-324**  
 - Updated all sliders in the app  
   

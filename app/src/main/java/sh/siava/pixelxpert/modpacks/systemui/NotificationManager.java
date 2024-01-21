@@ -14,7 +14,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class NotificationManager extends XposedModPack {
@@ -31,7 +30,7 @@ public class NotificationManager extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		HeadupAutoDismissNotificationDecay = RangeSliderPreference.getSingleIntValue(Xprefs, "HeadupAutoDismissNotificationDecay", -1);
+		HeadupAutoDismissNotificationDecay = Xprefs.getSliderInt( "HeadupAutoDismissNotificationDecay", -1);
 		DisableOngoingNotifDismiss = Xprefs.getBoolean("DisableOngoingNotifDismiss", false);
 		try {
 			applyDurations();

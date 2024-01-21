@@ -7,9 +7,7 @@ import android.content.IntentFilter;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.BuildConfig;
-import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.modpacks.ResourceManager;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 public class HookTester extends XposedModPack {

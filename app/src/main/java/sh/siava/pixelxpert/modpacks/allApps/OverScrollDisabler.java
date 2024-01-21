@@ -3,13 +3,13 @@ package sh.siava.pixelxpert.modpacks.allApps;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.view.View;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -22,7 +22,7 @@ public class OverScrollDisabler extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		disableOverScroll = XPrefs.Xprefs.getBoolean("disableOverScroll", false);
+		disableOverScroll = Xprefs.getBoolean("disableOverScroll", false);
 	}
 
 	@Override

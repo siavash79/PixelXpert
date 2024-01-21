@@ -9,6 +9,7 @@ import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findMethod;
 
 import android.annotation.SuppressLint;
@@ -32,7 +33,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 @SuppressWarnings({"RedundantThrows", "unchecked", "rawtypes"})
@@ -85,11 +85,11 @@ public class BrightnessSlider extends XposedModPack {
 	@Override
 	public void updatePrefs(String... Key) {
 
-		BrightnessHookEnabled = XPrefs.Xprefs.getBoolean("BrightnessHookEnabled", true);
-		QQSBrightnessEnabled = XPrefs.Xprefs.getBoolean("QQSBrightnessEnabled", false);
-		QSBrightnessDisabled = XPrefs.Xprefs.getBoolean("QSBrightnessDisabled", false);
-		BrightnessSliderOnBottom = XPrefs.Xprefs.getBoolean("BrightnessSlierOnBottom", false);
-		QQSBrightnessSupported = XPrefs.Xprefs.getBoolean("QQSBrightnessSupported", true);
+		BrightnessHookEnabled = Xprefs.getBoolean("BrightnessHookEnabled", true);
+		QQSBrightnessEnabled = Xprefs.getBoolean("QQSBrightnessEnabled", false);
+		QSBrightnessDisabled = Xprefs.getBoolean("QSBrightnessDisabled", false);
+		BrightnessSliderOnBottom = Xprefs.getBoolean("BrightnessSlierOnBottom", false);
+		QQSBrightnessSupported = Xprefs.getBoolean("QQSBrightnessSupported", true);
 
 		if (QSBrightnessDisabled) QQSBrightnessEnabled = false; //if there's no slider, then .......
 
@@ -384,14 +384,14 @@ public class BrightnessSlider extends XposedModPack {
 
 		if(mBrightnessController != null) {
 			if (!QQSBrightnessSupported) {
-				XPrefs.Xprefs.edit().putBoolean("QQSBrightnessSupported", true).apply();
+				Xprefs.edit().putBoolean("QQSBrightnessSupported", true).apply();
 			}
 			return true;
 		}
 		else
 		{
 			if(QQSBrightnessSupported) {
-				XPrefs.Xprefs.edit().putBoolean("QQSBrightnessSupported", false).apply();
+				Xprefs.edit().putBoolean("QQSBrightnessSupported", false).apply();
 			}
 			return false;
 		}

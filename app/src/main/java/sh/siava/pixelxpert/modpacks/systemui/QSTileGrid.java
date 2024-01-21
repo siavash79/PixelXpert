@@ -31,7 +31,6 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class QSTileGrid extends XposedModPack {
@@ -75,20 +74,20 @@ public class QSTileGrid extends XposedModPack {
 
 		QSHapticEnabled = Xprefs.getBoolean("QSHapticEnabled", false);
 
-		QSRowQty = RangeSliderPreference.getSingleIntValue(Xprefs, "QSRowQty", NOT_SET);
-		QSColQty = RangeSliderPreference.getSingleIntValue(Xprefs, "QSColQty", QS_COL_NOT_SET);
+		QSRowQty = Xprefs.getSliderInt( "QSRowQty", NOT_SET);
+		QSColQty = Xprefs.getSliderInt( "QSColQty", QS_COL_NOT_SET);
 		if(QSColQty < QS_COL_NOT_SET) QSColQty = QS_COL_NOT_SET;
-		QQSTileQty = RangeSliderPreference.getSingleIntValue(Xprefs, "QQSTileQty", QQS_NOT_SET);
+		QQSTileQty = Xprefs.getSliderInt( "QQSTileQty", QQS_NOT_SET);
 
-		QSRowQtyL = RangeSliderPreference.getSingleIntValue(Xprefs, "QSRowQtyL", NOT_SET);
-		QSColQtyL = RangeSliderPreference.getSingleIntValue(Xprefs, "QSColQtyL", QS_COL_NOT_SET);
+		QSRowQtyL = Xprefs.getSliderInt( "QSRowQtyL", NOT_SET);
+		QSColQtyL = Xprefs.getSliderInt( "QSColQtyL", QS_COL_NOT_SET);
 		if(QSColQtyL < QS_COL_NOT_SET) QSColQtyL = QS_COL_NOT_SET;
-		QQSTileQtyL = RangeSliderPreference.getSingleIntValue(Xprefs, "QQSTileQtyL", QQS_NOT_SET);
+		QQSTileQtyL = Xprefs.getSliderInt( "QQSTileQtyL", QQS_NOT_SET);
 
 		QRTileInactiveColor = Xprefs.getBoolean("QRTileInactiveColor", false);
 
-		QSLabelScaleFactor = (RangeSliderPreference.getSingleFloatValue(Xprefs, "QSLabelScaleFactor", 0) + 100) / 100f;
-		QSSecondaryLabelScaleFactor = (RangeSliderPreference.getSingleFloatValue(Xprefs, "QSSecondaryLabelScaleFactor", 0) + 100) / 100f;
+		QSLabelScaleFactor = (Xprefs.getSliderFloat( "QSLabelScaleFactor", 0) + 100) / 100f;
+		QSSecondaryLabelScaleFactor = (Xprefs.getSliderFloat( "QSSecondaryLabelScaleFactor", 0) + 100) / 100f;
 
 		if (Key.length > 0 && (Key[0].equals("QSRowQty") || Key[0].equals("QSColQty") || Key[0].equals("QQSTileQty") || Key[0].equals("QSRowQtyL") || Key[0].equals("QSColQtyL") || Key[0].equals("QQSTileQtyL"))) {
 			SystemUtils.doubleToggleDarkMode();

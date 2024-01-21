@@ -3,15 +3,14 @@ package sh.siava.pixelxpert.modpacks.android;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class HotSpotController extends XposedModPack {
@@ -26,10 +25,10 @@ public class HotSpotController extends XposedModPack {
 	@Override
 	public void updatePrefs(String... Key) {
 
-		int clients = RangeSliderPreference.getSingleIntValue(XPrefs.Xprefs, "hotSpotMaxClients", 0);
+		int clients = Xprefs.getSliderInt("hotSpotMaxClients", 0);
 
-		hotSpotTimeoutMillis = (long) (RangeSliderPreference.getSingleFloatValue(XPrefs.Xprefs, "hotSpotTimeoutSecs", 0) * 1000L);
-		hotSpotHideSSID = XPrefs.Xprefs.getBoolean("hotSpotHideSSID", false);
+		hotSpotTimeoutMillis = (long) (Xprefs.getSliderFloat( "hotSpotTimeoutSecs", 0) * 1000L);
+		hotSpotHideSSID = Xprefs.getBoolean("hotSpotHideSSID", false);
 		hotSpotMaxClients = clients;
 	}
 

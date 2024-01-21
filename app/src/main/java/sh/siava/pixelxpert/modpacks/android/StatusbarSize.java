@@ -4,6 +4,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -18,9 +19,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 
 //We are playing in system framework. should be extra cautious..... many try-catchs, still not enough!
@@ -45,16 +44,16 @@ public class StatusbarSize extends XposedModPack {
 	@SuppressLint({"DiscouragedApi", "InternalInsetResource"})
 	@Override
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
+		if (Xprefs == null) return;
 
-		noCutoutEnabled = XPrefs.Xprefs.getBoolean("noCutoutEnabled", false);
+		noCutoutEnabled = Xprefs.getBoolean("noCutoutEnabled", false);
 
-		mForceApplyHeight = XPrefs.Xprefs.getBoolean("allScreenRotations", false) //Particularly used for rotation Status bar
+		mForceApplyHeight = Xprefs.getBoolean("allScreenRotations", false) //Particularly used for rotation Status bar
 				|| noCutoutEnabled
-				|| XPrefs.Xprefs.getBoolean("systemIconsMultiRow", false)
-				|| XPrefs.Xprefs.getBoolean("notificationAreaMultiRow", false);
+				|| Xprefs.getBoolean("systemIconsMultiRow", false)
+				|| Xprefs.getBoolean("notificationAreaMultiRow", false);
 
-		sizeFactor = RangeSliderPreference.getSingleIntValue(XPrefs.Xprefs, "statusbarHeightFactor", 100);
+		sizeFactor = Xprefs.getSliderInt("statusbarHeightFactor", 100);
 		if (sizeFactor != 100 || edited || mForceApplyHeight) {
 			Configuration conf = new Configuration();
 			conf.updateFrom(mContext.getResources().getConfiguration());

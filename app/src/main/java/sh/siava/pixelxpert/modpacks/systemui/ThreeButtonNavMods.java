@@ -2,6 +2,7 @@ package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 
@@ -9,7 +10,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -24,12 +24,12 @@ public class ThreeButtonNavMods extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
-		ThreeButtonLayoutMod = XPrefs.Xprefs.getBoolean("ThreeButtonLayoutMod", false);
+		if (Xprefs == null) return;
+		ThreeButtonLayoutMod = Xprefs.getBoolean("ThreeButtonLayoutMod", false);
 
-		ThreeButtonLeft = XPrefs.Xprefs.getString("ThreeButtonLeft", "back");
-		ThreeButtonCenter = XPrefs.Xprefs.getString("ThreeButtonCenter", "home");
-		ThreeButtonRight = XPrefs.Xprefs.getString("ThreeButtonRight", "recent");
+		ThreeButtonLeft = Xprefs.getString("ThreeButtonLeft", "back");
+		ThreeButtonCenter = Xprefs.getString("ThreeButtonCenter", "home");
+		ThreeButtonRight = Xprefs.getString("ThreeButtonRight", "recent");
 	}
 
 

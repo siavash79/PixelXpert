@@ -7,6 +7,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,7 +17,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -35,9 +35,9 @@ public class EasyUnlock extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		easyUnlockEnabled = XPrefs.Xprefs.getBoolean("easyUnlockEnabled", false);
-		expectedPassLen = XPrefs.Xprefs.getInt("expectedPassLen", -1);
-		WakeUpToSecurityInput = XPrefs.Xprefs.getBoolean("WakeUpToSecurityInput", false);
+		easyUnlockEnabled = Xprefs.getBoolean("easyUnlockEnabled", false);
+		expectedPassLen = Xprefs.getInt("expectedPassLen", -1);
+		WakeUpToSecurityInput = Xprefs.getBoolean("WakeUpToSecurityInput", false);
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public class EasyUnlock extends XposedModPack {
 
 				if (succesful) {
 					expectedPassLen = lastPassLen;
-					XPrefs.Xprefs.edit().putInt("expectedPassLen", expectedPassLen).commit();
+					Xprefs.edit().putInt("expectedPassLen", expectedPassLen).commit();
 				}
 			}
 		});

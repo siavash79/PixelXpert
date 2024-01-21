@@ -1,7 +1,6 @@
 package sh.siava.pixelxpert.utils;
 
 import android.os.FileUtils;
-import android.util.Log;
 
 import com.topjohnwu.superuser.Shell;
 

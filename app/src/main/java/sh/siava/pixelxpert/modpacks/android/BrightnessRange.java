@@ -4,6 +4,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 
@@ -14,9 +15,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class BrightnessRange extends XposedModPack {
@@ -33,10 +32,10 @@ public class BrightnessRange extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
+		if (Xprefs == null) return;
 
 		try {
-			List<Float> BrightnessRange = RangeSliderPreference.getValues(XPrefs.Xprefs, "BrightnessRange", 100f);
+			List<Float> BrightnessRange = Xprefs.getSliderValues("BrightnessRange", 100f);
 			if (BrightnessRange.size() == 2) {
 				minimumBrightnessLevel = BrightnessRange.get(0) / 100;
 				maximumBrightnessLevel = BrightnessRange.get(1) / 100;

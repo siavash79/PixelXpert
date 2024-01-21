@@ -7,6 +7,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findFirstMethodByName;
 
 import android.content.Context;
@@ -25,7 +26,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -41,9 +41,9 @@ public class ScreenshotManager extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
-		disableScreenshotSound = XPrefs.Xprefs.getBoolean("disableScreenshotSound", false);
-		ScreenshotChordInsecure = XPrefs.Xprefs.getBoolean("ScreenshotChordInsecure", false);
+		if (Xprefs == null) return;
+		disableScreenshotSound = Xprefs.getBoolean("disableScreenshotSound", false);
+		ScreenshotChordInsecure = Xprefs.getBoolean("ScreenshotChordInsecure", false);
 	}
 
 	@Override

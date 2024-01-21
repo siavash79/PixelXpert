@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.utils.ModuleFolderOperations;
 import sh.siava.pixelxpert.modpacks.utils.StringFormatter;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class MiscSettings extends XposedModPack {
 
@@ -29,7 +28,7 @@ public class MiscSettings extends XposedModPack {
 		//netstat settings
 		boolean netstatColorful = Xprefs.getBoolean("networkStatsColorful", false);
 
-		int NetStatsStartMonthStart = RangeSliderPreference.getSingleIntValue(Xprefs, "NetworkStatsMonthStart", 1);
+		int NetStatsStartMonthStart = Xprefs.getSliderInt( "NetworkStatsMonthStart", 1);
 
 		StringFormatter.RXColor = (netstatColorful) ? Xprefs.getInt("networkStatDLColor", Color.GREEN) : null;
 		StringFormatter.TXColor = (netstatColorful) ? Xprefs.getInt("networkStatULColor", Color.RED) : null;
@@ -76,7 +75,7 @@ public class MiscSettings extends XposedModPack {
 	private void setDisplayOverride() {
 		if(!Xprefs.getBoolean("displayOverrideEnabled", false)) return;
 
-		float displayOverride = RangeSliderPreference.getSingleFloatValue(Xprefs, "displayOverride", 100f) / 100f;
+		float displayOverride = Xprefs.getSliderFloat( "displayOverride", 100f) / 100f;
 		XPLauncher.enqueueProxyCommand(proxy -> {
 			try {
 				String sizeResult = proxy.runCommand("wm size")[0];
@@ -96,7 +95,7 @@ public class MiscSettings extends XposedModPack {
 	}
 
 	private void setVolumeSteps() {
-		int volumeStps = RangeSliderPreference.getSingleIntValue(Xprefs,"volumeStps", 0);
+		int volumeStps = Xprefs.getSliderInt("volumeStps", 0);
 
 		ModuleFolderOperations.applyVolumeSteps(volumeStps, XPrefs.MagiskRoot, false);
 	}

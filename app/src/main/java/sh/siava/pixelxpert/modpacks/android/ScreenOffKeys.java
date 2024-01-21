@@ -7,6 +7,7 @@ import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findMethodExact;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +24,6 @@ import java.lang.reflect.Method;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 
@@ -43,8 +43,8 @@ public class ScreenOffKeys extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		holdVolumeToSkip = XPrefs.Xprefs.getBoolean("holdVolumeToSkip", false);
-		replaceAssistantwithTorch = XPrefs.Xprefs.getBoolean("replaceAssistantwithTorch", false);
+		holdVolumeToSkip = Xprefs.getBoolean("holdVolumeToSkip", false);
+		replaceAssistantwithTorch = Xprefs.getBoolean("replaceAssistantwithTorch", false);
 	}
 
 	@Override

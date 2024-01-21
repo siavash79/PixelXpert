@@ -27,7 +27,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 /** @noinspection ConstantValue*/
 @SuppressWarnings("RedundantThrows")
@@ -74,9 +73,9 @@ public class CustomNavGestures extends XposedModPack {
 		leftSwipeUpAction = readAction(Xprefs, "leftSwipeUpAction");
 		rightSwipeUpAction = readAction(Xprefs, "rightSwipeUpAction");
 		twoFingerSwipeUpAction = readAction(Xprefs, "twoFingerSwipeUpAction");
-		leftSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(Xprefs, "leftSwipeUpPercentage", 25f) / 100f;
-		rightSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(Xprefs, "rightSwipeUpPercentage", 25f) / 100f;
-		swipeUpPercentage = RangeSliderPreference.getSingleFloatValue(Xprefs, "swipeUpPercentage", 25f) / 100f;
+		leftSwipeUpPercentage = Xprefs.getSliderFloat( "leftSwipeUpPercentage", 25f) / 100f;
+		rightSwipeUpPercentage = Xprefs.getSliderFloat( "rightSwipeUpPercentage", 25f) / 100f;
+		swipeUpPercentage = Xprefs.getSliderFloat( "swipeUpPercentage", 25f) / 100f;
 	}
 
 	private static int readAction(SharedPreferences xprefs, String prefName) {

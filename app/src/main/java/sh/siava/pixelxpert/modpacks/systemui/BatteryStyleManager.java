@@ -35,7 +35,6 @@ import sh.siava.pixelxpert.modpacks.utils.batteryStyles.BatteryDrawable;
 import sh.siava.pixelxpert.modpacks.utils.batteryStyles.CircleBatteryDrawable;
 import sh.siava.pixelxpert.modpacks.utils.batteryStyles.CircleFilledBatteryDrawable;
 import sh.siava.pixelxpert.modpacks.utils.batteryStyles.HiddenBatteryDrawable;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class BatteryStyleManager extends XposedModPack {
@@ -58,7 +57,7 @@ public class BatteryStyleManager extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
 		String BatteryStyleStr = Xprefs.getString("BatteryStyle", "0");
-		scaleFactor = RangeSliderPreference.getSingleIntValue(Xprefs, "BatteryIconScaleFactor", 50) * 2;
+		scaleFactor = Xprefs.getSliderInt( "BatteryIconScaleFactor", 50) * 2;
 		int batteryStyle = Integer.parseInt(BatteryStyleStr);
 		customBatteryEnabled = batteryStyle != 0;
 		if (batteryStyle == 99) {
@@ -94,7 +93,7 @@ public class BatteryStyleManager extends XposedModPack {
 		ShowPercent = Xprefs.getBoolean("BatteryShowPercent", false);
 		BatteryChargingAnimationEnabled = Xprefs.getBoolean("BatteryChargingAnimationEnabled", true);
 
-		BatteryIconOpacity = RangeSliderPreference.getSingleIntValue(Xprefs, "BIconOpacity", 100);
+		BatteryIconOpacity = Xprefs.getSliderInt( "BIconOpacity", 100);
 		boolean BIconTransitColors = Xprefs.getBoolean("BIconTransitColors", false);
 		boolean BIconColorful = Xprefs.getBoolean("BIconColorful", false);
 		boolean BIconIndicateFastCharging = Xprefs.getBoolean("BIconindicateFastCharging", false);
@@ -102,7 +101,7 @@ public class BatteryStyleManager extends XposedModPack {
 		int batteryChargingColor = Xprefs.getInt("batteryIconChargingColor", Color.GREEN);
 		boolean BIconIndicateCharging = Xprefs.getBoolean("BIconindicateCharging", false);
 
-		List<Float> batteryLevels = RangeSliderPreference.getValues(Xprefs, "BIconbatteryWarningRange", 0);
+		List<Float> batteryLevels = Xprefs.getSliderValues("BIconbatteryWarningRange", 0);
 
 		int[] batteryColors = new int[]{
 				Xprefs.getInt("BIconbatteryCriticalColor", Color.RED),

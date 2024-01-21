@@ -1,26 +1,26 @@
 package sh.siava.pixelxpert.modpacks;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 
-import com.crossbowffs.remotepreferences.RemotePreferences;
-
 import sh.siava.pixelxpert.BuildConfig;
+import sh.siava.pixelxpert.modpacks.utils.ExtendedRemotePreferences;
 import sh.siava.pixelxpert.modpacks.utils.Overlays;
 
 
 public class XPrefs {
 
-	public static SharedPreferences Xprefs;
-	public static String MagiskRoot = "/data/adb/modules/PixelXpert";
+	@SuppressLint("StaticFieldLeak")
+	public static ExtendedRemotePreferences Xprefs;
+	public static final String MagiskRoot = "/data/adb/modules/PixelXpert";
 	private static String packageName;
 
 	private static final OnSharedPreferenceChangeListener listener = (sharedPreferences, key) -> loadEverything(packageName, key);
 	public static void init(Context context) {
 		packageName = context.getPackageName();
 
-		Xprefs = new RemotePreferences(context, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
+		Xprefs = (ExtendedRemotePreferences) new ExtendedRemotePreferences(context, BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + "_preferences", true);
 
 		Xprefs.registerOnSharedPreferenceChangeListener(listener);
 	}

@@ -25,7 +25,6 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class StatusbarGestures extends XposedModPack {
@@ -56,7 +55,7 @@ public class StatusbarGestures extends XposedModPack {
 		if (Xprefs == null) return;
 		oneFingerPulldownEnabled = Xprefs.getBoolean("QSPullodwnEnabled", false);
 		oneFingerPullupEnabled = oneFingerPulldownEnabled && Xprefs.getBoolean("oneFingerPullupEnabled", false);
-		statusbarPortion = RangeSliderPreference.getSingleIntValue(Xprefs, "QSPulldownPercent", 25) / 100f;
+		statusbarPortion = Xprefs.getSliderInt( "QSPulldownPercent", 25) / 100f;
 		pullDownSide = Integer.parseInt(Xprefs.getString("QSPulldownSide", "1"));
 
 		StatusbarLongpressAppSwitch = Xprefs.getBoolean("StatusbarLongpressAppSwitch", false);
@@ -261,7 +260,7 @@ public class StatusbarGestures extends XposedModPack {
 	}
 
 	private class LongpressListener implements GestureDetector.OnGestureListener {
-		boolean mDetectLongpress;
+		final boolean mDetectLongpress;
 		public LongpressListener(boolean detectLongpress)
 		{
 			mDetectLongpress = detectLongpress;

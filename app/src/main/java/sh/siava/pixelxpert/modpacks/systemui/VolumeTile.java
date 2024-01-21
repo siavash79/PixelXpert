@@ -19,6 +19,7 @@ import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.systemui.QSTileGrid.QSHapticEnabled;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.AudioManager;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.isDarkMode;
@@ -52,10 +53,8 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils.ChangeListener;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 public class VolumeTile extends XposedModPack {
@@ -74,8 +73,8 @@ public class VolumeTile extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		lightQSHeaderEnabled = XPrefs.Xprefs.getBoolean("LightQSPanel", false);
-		unMuteVolumePCT = RangeSliderPreference.getSingleIntValue(XPrefs.Xprefs, "UnMuteVolumePCT", 50);
+		lightQSHeaderEnabled = Xprefs.getBoolean("LightQSPanel", false);
+		unMuteVolumePCT = Xprefs.getSliderInt("UnMuteVolumePCT", 50);
 	}
 
 	@Override

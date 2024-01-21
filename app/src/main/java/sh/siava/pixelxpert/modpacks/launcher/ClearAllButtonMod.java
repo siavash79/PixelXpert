@@ -5,6 +5,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findMethodBestMatch;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -26,7 +27,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.ResourceManager;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 
@@ -50,7 +50,7 @@ public class ClearAllButtonMod extends XposedModPack {
 			SystemUtils.killSelf();
 		}
 
-		RecentClearAllReposition = XPrefs.Xprefs.getBoolean("RecentClearAllReposition", false);
+		RecentClearAllReposition = Xprefs.getBoolean("RecentClearAllReposition", false);
 	}
 
 	@Override

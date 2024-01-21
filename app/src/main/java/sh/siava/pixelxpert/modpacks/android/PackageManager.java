@@ -4,6 +4,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +17,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 /** @noinspection RedundantThrows*/
@@ -37,8 +37,8 @@ public class PackageManager extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		PM_AllowMismatchedSignature = XPrefs.Xprefs.getBoolean(ALLOW_SIGNATURE_PREF, false);
-		PM_AllowDowngrade = XPrefs.Xprefs.getBoolean(ALLOW_DOWNGRADE_PREF, false);
+		PM_AllowMismatchedSignature = Xprefs.getBoolean(ALLOW_SIGNATURE_PREF, false);
+		PM_AllowDowngrade = Xprefs.getBoolean(ALLOW_DOWNGRADE_PREF, false);
 
 		if(PM_AllowDowngrade || PM_AllowMismatchedSignature) {
 			if (Key.length == 0) {
@@ -57,7 +57,7 @@ public class PackageManager extends XposedModPack {
 	}
 
 	private void disablePMMods() {
-		XPrefs.Xprefs.edit()
+		Xprefs.edit()
 				.putBoolean(ALLOW_SIGNATURE_PREF, false)
 				.putBoolean(ALLOW_DOWNGRADE_PREF, false)
 				.apply();

@@ -48,7 +48,8 @@ public class BatteryStyleManager extends XposedModPack {
 	public static int scaleFactor = 100;
 	private static int BatteryIconOpacity = 100;
 	private static boolean BatteryChargingAnimationEnabled = true;
-	private static final ArrayList<Object> batteryViews = new ArrayList<>();
+	private final ArrayList<Object> batteryViews = new ArrayList<>();
+	private static boolean mShouldScale = false;
 
 	public BatteryStyleManager(Context context) {
 		super(context);
@@ -56,10 +57,14 @@ public class BatteryStyleManager extends XposedModPack {
 
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
+
 		String BatteryStyleStr = Xprefs.getString("BatteryStyle", "0");
 		scaleFactor = Xprefs.getSliderInt( "BatteryIconScaleFactor", 50) * 2;
 		int batteryStyle = Integer.parseInt(BatteryStyleStr);
+
 		customBatteryEnabled = batteryStyle != 0;
+		mShouldScale = mShouldScale || customBatteryEnabled || scaleFactor != 100;
+
 		if (batteryStyle == 99) {
 			scaleFactor = 0;
 		}
@@ -112,7 +117,7 @@ public class BatteryStyleManager extends XposedModPack {
 		refreshAllBatteryIcons();
 	}
 
-	private static void refreshAllBatteryIcons() {
+	private void refreshAllBatteryIcons() {
 		for (Object view : batteryViews) {
 			updateBatteryViewValues((View) view);
 		}
@@ -133,7 +138,7 @@ public class BatteryStyleManager extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-		BatteryDataProvider.registerInfoCallback(BatteryStyleManager::refreshAllBatteryIcons);
+		BatteryDataProvider.registerInfoCallback(this::refreshAllBatteryIcons);
 
 		findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
 			@Override
@@ -213,7 +218,7 @@ public class BatteryStyleManager extends XposedModPack {
 
 	@SuppressLint("DiscouragedApi")
 	public static void scale(ImageView mBatteryIconView) {
-		if (mBatteryIconView == null) {
+		if (mBatteryIconView == null || !mShouldScale) {
 			return;
 		}
 

@@ -189,7 +189,7 @@
 	<string name="qs_tile_vertical_title">Tuş kutucuklarını en üste taşı</string>
 	<string name="qs_tile_qty_title">QS kutucuk sayısı ayarları</string>
 	<string name="qs_leveled_flashlight_summary">Desteklenen donanım gerektirir</string>
-	<string name="light_qs_title">Hafif tema kullanırken hafif QS Paneli uygulayın</string>
+	<string name="light_qs_title">Aydınlık tema kullanırken aydınlık QS Paneli uygula</string>
 	<string name="qs_pulldown_size">Hızlı aşağı çekme genişliği</string>
 	<string name="qs_pulldown_switch_title">Durum çubuğundan hızlı QS paneli çek</string>
 	<string name="qs_pulldown_side_title">Hızlı çekilebilen taraf</string>

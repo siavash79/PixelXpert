@@ -83,9 +83,6 @@ import sh.siava.pixelxpert.modpacks.utils.StringFormatter;
 import sh.siava.pixelxpert.modpacks.utils.StringFormatter.FormattedStringCallback;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 import sh.siava.pixelxpert.modpacks.utils.batteryStyles.BatteryBarView;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
-
-@SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 
 public class StatusbarMods extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
@@ -157,7 +154,6 @@ public class StatusbarMods extends XposedModPack {
 	//    private Object STB = null;
 
 	private View mClockView;
-	@SuppressWarnings("FieldCanBeLocal")
 	private ViewGroup mNotificationIconContainer = null;
 	LinearLayout mNotificationContainerContainer;
 	private LinearLayout mLeftVerticalSplitContainer;
@@ -281,7 +277,7 @@ public class StatusbarMods extends XposedModPack {
 			NotificationIconContainerOverride.MAX_ICONS_ON_AOD = 3;
 		}
 
-		List<Float> paddings = RangeSliderPreference.getValues(Xprefs, "statusbarPaddings", 0);
+		List<Float> paddings = Xprefs.getSliderValues("statusbarPaddings", 0);
 
 		if (paddings.size() > 1) {
 			SBPaddingStart = paddings.get(0);
@@ -294,11 +290,11 @@ public class StatusbarMods extends XposedModPack {
 		BBOnlyWhileCharging = Xprefs.getBoolean("BBOnlyWhileCharging", false);
 		BBOnBottom = Xprefs.getBoolean("BBOnBottom", false);
 		BBSetCentered = Xprefs.getBoolean("BBSetCentered", false);
-		BBOpacity = RangeSliderPreference.getSingleIntValue(Xprefs, "BBOpacity", 100);
-		BBarHeight = RangeSliderPreference.getSingleIntValue(Xprefs, "BBarHeight", 50);
+		BBOpacity = Xprefs.getSliderInt( "BBOpacity", 100);
+		BBarHeight = Xprefs.getSliderInt( "BBarHeight", 50);
 		BBarTransitColors = Xprefs.getBoolean("BBarTransitColors", false);
 
-		batteryLevels = RangeSliderPreference.getValues(Xprefs, "batteryWarningRange", 0);
+		batteryLevels = Xprefs.getSliderValues("batteryWarningRange", 0);
 
 		batteryColors = new int[]{
 				Xprefs.getInt("batteryCriticalColor", Color.RED),
@@ -330,8 +326,8 @@ public class StatusbarMods extends XposedModPack {
 		boolean networkTrafficRXTop = Xprefs.getBoolean("networkTrafficRXTop", true);
 		int networkTrafficDLColor = Xprefs.getInt("networkTrafficDLColor", Color.GREEN);
 		int networkTrafficULColor = Xprefs.getInt("networkTrafficULColor", Color.RED);
-		int networkTrafficOpacity = RangeSliderPreference.getSingleIntValue(Xprefs, "networkTrafficOpacity", 100);
-		int networkTrafficInterval = RangeSliderPreference.getSingleIntValue(Xprefs, "networkTrafficInterval", 1);
+		int networkTrafficOpacity = Xprefs.getSliderInt( "networkTrafficOpacity", 100);
+		int networkTrafficInterval = Xprefs.getSliderInt( "networkTrafficInterval", 1);
 		boolean networkTrafficColorful = Xprefs.getBoolean("networkTrafficColorful", false);
 		boolean networkTrafficShowIcons = Xprefs.getBoolean("networkTrafficShowIcons", true);
 

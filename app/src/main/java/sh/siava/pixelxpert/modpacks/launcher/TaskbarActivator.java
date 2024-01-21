@@ -13,6 +13,7 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.app.TaskInfo;
@@ -37,10 +38,8 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class TaskbarActivator extends XposedModPack {
@@ -86,18 +85,18 @@ public class TaskbarActivator extends XposedModPack {
 			SystemUtils.killSelf();
 		}
 
-		taskbarMode = Integer.parseInt(XPrefs.Xprefs.getString("taskBarMode", "0"));
+		taskbarMode = Integer.parseInt(Xprefs.getString("taskBarMode", "0"));
 
-		TaskbarAsRecents = XPrefs.Xprefs.getBoolean("TaskbarAsRecents", false);
+		TaskbarAsRecents = Xprefs.getBoolean("TaskbarAsRecents", false);
 		TaskbarHideAllAppsIcon = true;//Xprefs.getBoolean("TaskbarHideAllAppsIcon", false);
 
-		TaskbarRadiusOverride = RangeSliderPreference.getSingleFloatValue(XPrefs.Xprefs, "TaskbarRadiusOverride", 1f);
+		TaskbarRadiusOverride = Xprefs.getSliderFloat( "TaskbarRadiusOverride", 1f);
 
-		taskbarHeightOverride = RangeSliderPreference.getSingleFloatValue(XPrefs.Xprefs, "taskbarHeightOverride", 100f) / 100f;
+		taskbarHeightOverride = Xprefs.getSliderFloat( "taskbarHeightOverride", 100f) / 100f;
 
-		taskbarMode = Integer.parseInt(XPrefs.Xprefs.getString("taskBarMode", "0"));
+		taskbarMode = Integer.parseInt(Xprefs.getString("taskBarMode", "0"));
 
-		TaskbarTransient = XPrefs.Xprefs.getBoolean("TaskbarTransient", false);
+		TaskbarTransient = Xprefs.getBoolean("TaskbarTransient", false);
 
 	}
 

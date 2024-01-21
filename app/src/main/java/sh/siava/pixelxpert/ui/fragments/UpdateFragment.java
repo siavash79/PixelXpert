@@ -12,14 +12,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.JsonReader;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,11 +26,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
@@ -57,8 +53,8 @@ import sh.siava.pixelxpert.databinding.UpdateFragmentBinding;
 import sh.siava.pixelxpert.modpacks.utils.ModuleFolderOperations;
 import sh.siava.pixelxpert.ui.activities.SettingsActivity;
 import sh.siava.pixelxpert.utils.AppUtils;
+import sh.siava.pixelxpert.utils.ExtendedSharedPreferences;
 import sh.siava.pixelxpert.utils.PreferenceHelper;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 
 public class UpdateFragment extends Fragment {
@@ -78,7 +74,7 @@ public class UpdateFragment extends Fragment {
 	private static final String updateDir = String.format("%s/%s", MAGISK_UPDATE_DIR, MOD_NAME);
 	private static final String moduleDir = String.format("%s/%s", MAGISK_MODULES_DIR, MOD_NAME);
 
-	BroadcastReceiver downloadCompletionReceiver = new BroadcastReceiver() {
+	final BroadcastReceiver downloadCompletionReceiver = new BroadcastReceiver() {
 		@SuppressLint("MissingPermission")
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -151,9 +147,9 @@ public class UpdateFragment extends Fragment {
 	}
 
 	private void applyPrefsToUpdate() {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext().createDeviceProtectedStorageContext());
+		ExtendedSharedPreferences prefs = ExtendedSharedPreferences.from(PreferenceManager.getDefaultSharedPreferences(requireContext().createDeviceProtectedStorageContext()));
 
-		int volumeStps = RangeSliderPreference.getSingleIntValue(prefs, "volumeStps", 0);
+		int volumeStps = prefs.getSliderInt("volumeStps", 0);
 		boolean customFontsEnabled = prefs.getBoolean("enableCustomFonts", false);
 		boolean GSansOverrideEnabled = prefs.getBoolean("gsans_override", false);
 
@@ -251,9 +247,7 @@ public class UpdateFragment extends Fragment {
 
 		binding.updateChannelRadioGroup.setOnCheckedChangeListener(onCheckChangedListener);
 
-		binding.packageTypeRadioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
-			onCheckChangedListener.onCheckedChanged(view.findViewById(R.id.updateChannelRadioGroup), 0);
-		});
+		binding.packageTypeRadioGroup.setOnCheckedChangeListener((radioGroup, i) -> onCheckChangedListener.onCheckedChanged(view.findViewById(R.id.updateChannelRadioGroup), 0));
 
 		binding.updateBtn.setOnClickListener(view1 -> {
 			if (rebootPending) {

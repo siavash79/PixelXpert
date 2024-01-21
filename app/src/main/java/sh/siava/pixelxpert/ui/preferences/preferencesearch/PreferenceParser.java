@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import sh.siava.pixelxpert.utils.ExtendedSharedPreferences;
 import sh.siava.pixelxpert.utils.PreferenceHelper;
 
 class PreferenceParser {
@@ -49,12 +50,12 @@ class PreferenceParser {
 	private static final String NS_SEARCH = "http://schemas.android.com/apk/sh.siava.pixelxpert.ui.preferencesearch";
 	private static final List<String> BLACKLIST = Arrays.asList(SearchPreference.class.getName(), "PreferenceCategory");
 	private static final List<String> CONTAINERS = Arrays.asList("PreferenceCategory", "PreferenceScreen");
-	private final Context context;
+	private final Context mContext;
 	private final ArrayList<PreferenceItem> allEntries = new ArrayList<>();
 
 	PreferenceParser(Context context) {
-		this.context = context;
-		PreferenceHelper.init(getDefaultSharedPreferences(context.createDeviceProtectedStorageContext()));
+		mContext = context;
+		PreferenceHelper.init(ExtendedSharedPreferences.from(getDefaultSharedPreferences(context.createDeviceProtectedStorageContext())));
 	}
 
 	@SuppressWarnings("UseCompareMethod")
@@ -73,7 +74,7 @@ class PreferenceParser {
 
 	private ArrayList<PreferenceItem> parseFile(SearchConfiguration.SearchIndexItem item) {
 		ArrayList<PreferenceItem> results = new ArrayList<>();
-		XmlPullParser xpp = context.getResources().getXml(item.getResId());
+		XmlPullParser xpp = mContext.getResources().getXml(item.getResId());
 		List<String> bannedKeys = item.getSearchConfiguration().getBannedKeys();
 
 		try {
@@ -206,7 +207,7 @@ class PreferenceParser {
 		if (s.startsWith("@")) {
 			try {
 				int id = Integer.parseInt(s.substring(1));
-				String[] elements = context.getResources().getStringArray(id);
+				String[] elements = mContext.getResources().getStringArray(id);
 				return TextUtils.join(",", elements);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -222,7 +223,7 @@ class PreferenceParser {
 		if (s.startsWith("@")) {
 			try {
 				int id = Integer.parseInt(s.substring(1));
-				return context.getString(id);
+				return mContext.getString(id);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

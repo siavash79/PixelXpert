@@ -43,7 +43,6 @@ import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.StringFormatter;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class KeyguardMods extends XposedModPack {
@@ -61,7 +60,6 @@ public class KeyguardMods extends XposedModPack {
 	public static final String SHORTCUT_ZEN = "zen";
 	public static final String SHORTCUT_QR_SCANNER = "qrscanner";
 
-	/** @noinspection FieldCanBeLocal*/
 	private static KeyguardMods instance = null;
 
 	private float max_charging_current = 0;
@@ -75,8 +73,8 @@ public class KeyguardMods extends XposedModPack {
 	private static String customCarrierText = "";
 	private static Object carrierTextController;
 
-	StringFormatter carrierStringFormatter = new StringFormatter();
-	StringFormatter clockStringFormatter = new StringFormatter();
+	final StringFormatter carrierStringFormatter = new StringFormatter();
+	final StringFormatter clockStringFormatter = new StringFormatter();
 	private TextView KGMiddleCustomTextView;
 	private static String KGMiddleCustomText = "";
 	LinearLayout mStatusArea = null;
@@ -138,7 +136,7 @@ public class KeyguardMods extends XposedModPack {
 
 		ForceAODwCharging = Xprefs.getBoolean("ForceAODwCharging", false);
 
-		KeyGuardDimAmount = RangeSliderPreference.getSingleFloatValue(Xprefs, "KeyGuardDimAmount", -1f) / 100f;
+		KeyGuardDimAmount = Xprefs.getSliderFloat( "KeyGuardDimAmount", -1f) / 100f;
 
 		leftShortcutClick = Xprefs.getString("leftKeyguardShortcut", "");
 		rightShortcutClick = Xprefs.getString("rightKeyguardShortcut", "");

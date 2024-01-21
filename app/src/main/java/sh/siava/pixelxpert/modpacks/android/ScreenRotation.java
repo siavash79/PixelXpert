@@ -5,13 +5,13 @@ import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -28,9 +28,9 @@ public class ScreenRotation extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		if (XPrefs.Xprefs == null) return;
+		if (Xprefs == null) return;
 
-		allScreenRotations = XPrefs.Xprefs.getBoolean("allScreenRotations", false);
+		allScreenRotations = Xprefs.getBoolean("allScreenRotations", false);
 	}
 
 	@Override

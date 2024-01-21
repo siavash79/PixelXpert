@@ -14,7 +14,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 /** @noinspection RedundantThrows*/
 public class VolumeDialog extends XposedModPack {
@@ -31,7 +30,7 @@ public class VolumeDialog extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		VolumeDialogTimeout = RangeSliderPreference.getSingleIntValue(Xprefs, "VolumeDialogTimeout", 3000);
+		VolumeDialogTimeout = Xprefs.getSliderInt( "VolumeDialogTimeout", 3000);
 	}
 
 	@Override

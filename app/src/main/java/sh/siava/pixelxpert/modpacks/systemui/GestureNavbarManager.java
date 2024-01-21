@@ -15,7 +15,6 @@ import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.tryHookAllMethods;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,7 +26,6 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.launcher.TaskbarActivator;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class GestureNavbarManager extends XposedModPack {
@@ -66,13 +64,13 @@ public class GestureNavbarManager extends XposedModPack {
 		//region Back gesture
 		leftEnabled = Xprefs.getBoolean("BackFromLeft", true);
 		rightEnabled = Xprefs.getBoolean("BackFromRight", true);
-		backGestureHeightFractionLeft = RangeSliderPreference.getSingleIntValue(Xprefs, "BackLeftHeight", 100) / 100f;
-		backGestureHeightFractionRight = RangeSliderPreference.getSingleIntValue(Xprefs, "BackRightHeight", 100) / 100f;
+		backGestureHeightFractionLeft = Xprefs.getSliderInt( "BackLeftHeight", 100) / 100f;
+		backGestureHeightFractionRight = Xprefs.getSliderInt( "BackRightHeight", 100) / 100f;
 		//endregion
 
 		//region pill size
-		widthFactor = RangeSliderPreference.getSingleIntValue(Xprefs, "GesPillWidthModPos", 50) * .02f;
-		GesPillHeightFactor = RangeSliderPreference.getSingleIntValue(Xprefs, "GesPillHeightFactor", 100);
+		widthFactor = Xprefs.getSliderInt( "GesPillWidthModPos", 50) * .02f;
+		GesPillHeightFactor = Xprefs.getSliderInt( "GesPillHeightFactor", 100);
 
 		int taskbarMode = TaskbarActivator.TASKBAR_DEFAULT;
 		String taskbarModeStr = Xprefs.getString("taskBarMode", "0");

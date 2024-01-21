@@ -65,10 +65,10 @@ public class PhoneWindowManager extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-//		ScreenshotChordInsecure = XPrefs.Xprefs.getBoolean("ScreenshotChordInsecure", false);
+//		ScreenshotChordInsecure = Xprefs.getBoolean("ScreenshotChordInsecure", false);
 	}
 
-	BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+	final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			try {
@@ -153,8 +153,6 @@ public class PhoneWindowManager extends XposedModPack {
 		return ((List<PackageInfo>)callMethod(mContext.getPackageManager(), "getInstalledPackagesAsUser", PackageManager.PackageInfoFlags.of(PackageManager.GET_META_DATA), getObjectField(userHandle, "mHandle"))).stream().anyMatch(packageInfo -> packageInfo.packageName.equals(packageName) && packageInfo.applicationInfo.enabled);
 	}
 
-	IntentFilter intentFilter = new IntentFilter();
-
 	@SuppressLint("WrongConstant")
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
@@ -165,6 +163,8 @@ public class PhoneWindowManager extends XposedModPack {
 
 		if (!broadcastRegistered) {
 			broadcastRegistered = true;
+
+			IntentFilter intentFilter = new IntentFilter();
 			intentFilter.addAction(Constants.ACTION_SCREENSHOT);
 			intentFilter.addAction(Constants.ACTION_BACK);
 			intentFilter.addAction(Constants.ACTION_INSECURE_SCREENSHOT);

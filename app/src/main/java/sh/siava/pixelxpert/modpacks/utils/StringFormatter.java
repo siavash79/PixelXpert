@@ -29,8 +29,6 @@ import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.security.auth.callback.Callback;
-
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.modpacks.systemui.ThermalProvider;
 import sh.siava.pixelxpert.modpacks.utils.toolkit.ObjectTools;

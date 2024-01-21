@@ -1,3 +1,9 @@
+**canary-327**  
+- Don't scale battery icon if not required / a bit of compatibility with other battery icon mods  
+  
+**canary-326**  
+- Fixed alternative themed icon  
+  
 **canary-325**  
 - [Experiment] Fixed battery icon unwanted resize  
   

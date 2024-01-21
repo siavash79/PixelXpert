@@ -193,9 +193,9 @@ public class UpdateFragment extends Fragment {
 						try {
 							MarkdownView mMarkdownView = view.findViewById(R.id.changelogView);
 							InternalStyleSheet css = new Github();
-							css.addRule("body, kbd", "background-color: " + intToHex(getColorFromAttribute(requireContext(), R.attr.colorSurfaceContainer)));
+							css.addRule("body, kbd", "background-color: " + intToHex(requireContext().getColor(R.color.changelog_bg)));
 							css.addRule("body, p, h1, h2, h3, h4, h5, h6, span, div", "color: " + intToHex(getColorFromAttribute(requireContext(), R.attr.colorOnSurface)));
-							css.addRule("kbd", "border-color: " + intToHex(getColorFromAttribute(requireContext(), R.attr.colorSurfaceVariant)));
+							css.addRule("kbd", "border-color: " + intToHex(requireContext().getColor(R.color.changelog_bg)));
 							css.addRule("kbd", "color: " + intToHex(getColorFromAttribute(requireContext(), R.attr.colorOnSurface)));
 							css.addRule("a", "color: " + intToHex(getColorFromAttribute(requireContext(), R.attr.colorPrimary)));
 							mMarkdownView.addStyleSheet(css);

@@ -12,4 +12,6 @@
 	<color name="launcher_accent">@android:color/system_accent1_600</color>
 	<color name="launcher_accent_variant">@android:color/system_accent3_600</color>
 
+	<color name="changelog_bg">@android:color/system_neutral1_50</color>
+
 </resources>

@@ -158,15 +158,14 @@
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
-		<androidx.cardview.widget.CardView
+		<com.google.android.material.card.MaterialCardView
 			android:id="@+id/changelogContainer"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
-			android:backgroundTint="?attr/colorSurfaceContainer"
 			android:elevation="0dp"
-			android:foreground="@drawable/changelog_container"
 			android:outlineAmbientShadowColor="@android:color/transparent"
 			android:outlineSpotShadowColor="@android:color/transparent"
+			app:cardBackgroundColor="?attr/colorSurfaceContainer"
 			app:cardCornerRadius="@dimen/ui_container_radius"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
@@ -205,6 +204,6 @@
 
 				</androidx.core.widget.NestedScrollView>
 			</LinearLayout>
-		</androidx.cardview.widget.CardView>
+		</com.google.android.material.card.MaterialCardView>
 	</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

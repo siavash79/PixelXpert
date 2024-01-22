@@ -652,7 +652,10 @@ public class ThemeManager_14 extends XposedModPack {
 						? android.R.color.system_neutral1_1000
 						: android.R.color.system_neutral1_100);
 
-		setObjectField(unlockedScrimState, "mBehindTint", mScrimBehindTint);
+		try {
+			setObjectField(unlockedScrimState, "mBehindTint", mScrimBehindTint);
+		}
+		catch (Throwable ignored){}
 
 		if (!isDark) {
 			colorActive = mContext.getColor(android.R.color.system_accent1_600);

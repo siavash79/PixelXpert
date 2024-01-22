@@ -378,9 +378,9 @@ public class PreferenceHelper {
 				return statusbarHeightFactor == 100 ? fragmentCompat.getString(R.string.word_default) : statusbarHeightFactor + "%";
 
 			case "QSColQty":
-				int QSColQty = instance.mPreferences.getSliderInt("QSColQty", 1);
+				int QSColQty = instance.mPreferences.getSliderInt("QSColQty", 2);
 
-				if (instance.mPreferences.getSliderInt("QSColQtyL", 1) > QSColQty) {
+				if (instance.mPreferences.getSliderInt("QSColQtyL", 2) > QSColQty) {
 					instance.mPreferences.edit().putInt("QSColQtyL", QSColQty).apply();
 				}
 
@@ -472,7 +472,9 @@ public class PreferenceHelper {
 			//Other special cases
 			switch (key) {
 				case "QSColQtyL":
-					((RangeSliderPreference) preference).setMax(instance.mPreferences.getSliderFloat( "QSColQty", 1));
+					int QSColQty = instance.mPreferences.getSliderInt( "QSColQty", 1);
+					QSColQty += QSColQty == 1 ? 1 : 0;
+					((RangeSliderPreference) preference).setMax(QSColQty);
 					break;
 
 				case "QSLabelScaleFactor":

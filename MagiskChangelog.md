@@ -1,3 +1,7 @@
+**3.3.1**  
+- Bugfixes  
+  
+    
 **3.3.0**  
 - Compatible with Android 14 QPR2  
 - App user interface improvement  

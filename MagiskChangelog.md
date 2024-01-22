@@ -16,6 +16,8 @@ Added:
 - A14: Added option to remove lockscreen customization pill  
   
 - Bugfixes    
+  
+  
 **3.1.0**  
 - The module is now called: Pixel Xpert!  
 - Theming and font options are removed. Pixel Xpert is now released in one package type  

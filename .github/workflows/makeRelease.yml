@@ -54,7 +54,7 @@ jobs:
         uses: ncipollo/release-action@v1.13.0
         with:
           tag: ${{ github.ref }}
-          name: ${{ github.ref }}
+          name: ${{ github.ref_name }}
           prerelease: false
           draft: false
           artifacts: 'output/*.*'

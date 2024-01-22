@@ -5,7 +5,6 @@ import static sh.siava.pixelxpert.BuildConfig.APPLICATION_ID;
 import java.util.Arrays;
 import java.util.List;
 
-import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.modpacks.utils.BootLoopProtector;
 
 public final class Constants {

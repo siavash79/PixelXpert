@@ -6,6 +6,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -33,7 +34,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 
@@ -51,8 +51,8 @@ public class FlashLightLevel extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		leveledFlashTile = XPrefs.Xprefs.getBoolean("leveledFlashTile", false);
-		lightQSHeaderEnabled = XPrefs.Xprefs.getBoolean("LightQSPanel", false);
+		leveledFlashTile = Xprefs.getBoolean("leveledFlashTile", false);
+		lightQSHeaderEnabled = Xprefs.getBoolean("LightQSPanel", false);
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class FlashLightLevel extends XposedModPack {
 
 							SystemUtils.registerFlashlightLevelListener(listener);
 
-							currentPct = XPrefs.Xprefs.getFloat("flashPCT", 0.5f);
+							currentPct = Xprefs.getFloat("flashPCT", 0.5f);
 
 							thisView.setOnTouchListener(new View.OnTouchListener() {
 								float initX = 0;
@@ -137,7 +137,7 @@ public class FlashLightLevel extends XposedModPack {
 										case MotionEvent.ACTION_UP: {
 											if (moved) {
 												moved = false;
-												XPrefs.Xprefs.edit().putFloat("flashPCT", currentPct).apply();
+												Xprefs.edit().putFloat("flashPCT", currentPct).apply();
 											} else {
 												handleFlashLightClick(true, currentPct);
 												if (QSTileGrid.QSHapticEnabled)
@@ -164,7 +164,7 @@ public class FlashLightLevel extends XposedModPack {
 					if (getObjectField(state, "spec").equals("flashlight")) {
 						LinearLayout tileView = (LinearLayout) param.thisObject;
 
-						currentPct = XPrefs.Xprefs.getFloat("flashPCT", 0.5f);
+						currentPct = Xprefs.getFloat("flashPCT", 0.5f);
 
 						SystemUtils.setFlashlightLevel(Math.round(currentPct * 100f));
 

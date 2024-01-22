@@ -4,6 +4,7 @@ import static android.os.SystemClock.uptimeMillis;
 import static android.os.VibrationAttributes.USAGE_ACCESSIBILITY;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.os.VibrationEffect;
@@ -11,7 +12,6 @@ import android.os.VibrationEffect;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 
@@ -33,8 +33,8 @@ public class CallVibrator extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		vibrateOnAnswered = XPrefs.Xprefs.getBoolean("vibrateOnAnswered", false);
-		vibrateOnDrop = XPrefs.Xprefs.getBoolean("vibrateOnDrop", false);
+		vibrateOnAnswered = Xprefs.getBoolean("vibrateOnAnswered", false);
+		vibrateOnDrop = Xprefs.getBoolean("vibrateOnDrop", false);
 	}
 
 	@Override

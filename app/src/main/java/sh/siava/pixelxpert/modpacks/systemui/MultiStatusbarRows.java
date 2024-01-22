@@ -2,6 +2,7 @@ package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -13,7 +14,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.FlexStatusIconContainer;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
@@ -31,13 +31,13 @@ public class MultiStatusbarRows extends XposedModPack {
 	@Override
 	public void updatePrefs(String... Key) {
 		if (Key.length > 0 && Key[0].equals("systemIconsMultiRow")) { //WHY we check the old value? because if prefs is empty it will fill it up and count an unwanted change
-			boolean newsystemIconsMultiRow = XPrefs.Xprefs.getBoolean("systemIconsMultiRow", false);
+			boolean newsystemIconsMultiRow = Xprefs.getBoolean("systemIconsMultiRow", false);
 			if (newsystemIconsMultiRow != systemIconsMultiRow) {
 				SystemUtils.killSelf();
 			}
 		}
-		systemIconsMultiRow = XPrefs.Xprefs.getBoolean("systemIconsMultiRow", false);
-		FlexStatusIconContainer.setSortPlan(Integer.parseInt(XPrefs.Xprefs.getString("systemIconSortPlan", String.valueOf(FlexStatusIconContainer.SORT_CLEAN))));
+		systemIconsMultiRow = Xprefs.getBoolean("systemIconsMultiRow", false);
+		FlexStatusIconContainer.setSortPlan(Integer.parseInt(Xprefs.getString("systemIconSortPlan", String.valueOf(FlexStatusIconContainer.SORT_CLEAN))));
 	}
 
 	@Override

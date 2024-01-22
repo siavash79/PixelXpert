@@ -150,9 +150,11 @@ public class QSFooterManager extends XposedModPack {
 
 	public void setChargingIndicatorVisibility()
 	{
-		mChargingIndicator.setVisibility(ChargingInfoOnQSEnabled && isCharging()
-				? VISIBLE
-				: GONE);
+		if(mChargingIndicator != null) {
+			mChargingIndicator.setVisibility(ChargingInfoOnQSEnabled && isCharging()
+					? VISIBLE
+					: GONE);
+		}
 	}
 
 

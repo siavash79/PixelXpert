@@ -35,7 +35,6 @@ import sh.siava.pixelxpert.modpacks.utils.batteryStyles.BatteryDrawable;
 import sh.siava.pixelxpert.modpacks.utils.batteryStyles.CircleBatteryDrawable;
 import sh.siava.pixelxpert.modpacks.utils.batteryStyles.CircleFilledBatteryDrawable;
 import sh.siava.pixelxpert.modpacks.utils.batteryStyles.HiddenBatteryDrawable;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 @SuppressWarnings("RedundantThrows")
 public class BatteryStyleManager extends XposedModPack {
@@ -49,7 +48,8 @@ public class BatteryStyleManager extends XposedModPack {
 	public static int scaleFactor = 100;
 	private static int BatteryIconOpacity = 100;
 	private static boolean BatteryChargingAnimationEnabled = true;
-	private static final ArrayList<Object> batteryViews = new ArrayList<>();
+	private final ArrayList<Object> batteryViews = new ArrayList<>();
+	private static boolean mShouldScale = false;
 
 	public BatteryStyleManager(Context context) {
 		super(context);
@@ -57,10 +57,14 @@ public class BatteryStyleManager extends XposedModPack {
 
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
+
 		String BatteryStyleStr = Xprefs.getString("BatteryStyle", "0");
-		scaleFactor = RangeSliderPreference.getSingleIntValue(Xprefs, "BatteryIconScaleFactor", 50) * 2;
+		scaleFactor = Xprefs.getSliderInt( "BatteryIconScaleFactor", 50) * 2;
 		int batteryStyle = Integer.parseInt(BatteryStyleStr);
+
 		customBatteryEnabled = batteryStyle != 0;
+		mShouldScale = mShouldScale || customBatteryEnabled || scaleFactor != 100;
+
 		if (batteryStyle == 99) {
 			scaleFactor = 0;
 		}
@@ -94,7 +98,7 @@ public class BatteryStyleManager extends XposedModPack {
 		ShowPercent = Xprefs.getBoolean("BatteryShowPercent", false);
 		BatteryChargingAnimationEnabled = Xprefs.getBoolean("BatteryChargingAnimationEnabled", true);
 
-		BatteryIconOpacity = RangeSliderPreference.getSingleIntValue(Xprefs, "BIconOpacity", 100);
+		BatteryIconOpacity = Xprefs.getSliderInt( "BIconOpacity", 100);
 		boolean BIconTransitColors = Xprefs.getBoolean("BIconTransitColors", false);
 		boolean BIconColorful = Xprefs.getBoolean("BIconColorful", false);
 		boolean BIconIndicateFastCharging = Xprefs.getBoolean("BIconindicateFastCharging", false);
@@ -102,7 +106,7 @@ public class BatteryStyleManager extends XposedModPack {
 		int batteryChargingColor = Xprefs.getInt("batteryIconChargingColor", Color.GREEN);
 		boolean BIconIndicateCharging = Xprefs.getBoolean("BIconindicateCharging", false);
 
-		List<Float> batteryLevels = RangeSliderPreference.getValues(Xprefs, "BIconbatteryWarningRange", 0);
+		List<Float> batteryLevels = Xprefs.getSliderValues("BIconbatteryWarningRange", 0);
 
 		int[] batteryColors = new int[]{
 				Xprefs.getInt("BIconbatteryCriticalColor", Color.RED),
@@ -113,7 +117,7 @@ public class BatteryStyleManager extends XposedModPack {
 		refreshAllBatteryIcons();
 	}
 
-	private static void refreshAllBatteryIcons() {
+	private void refreshAllBatteryIcons() {
 		for (Object view : batteryViews) {
 			updateBatteryViewValues((View) view);
 		}
@@ -134,6 +138,8 @@ public class BatteryStyleManager extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+		BatteryDataProvider.registerInfoCallback(this::refreshAllBatteryIcons);
+
 		findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -212,7 +218,7 @@ public class BatteryStyleManager extends XposedModPack {
 
 	@SuppressLint("DiscouragedApi")
 	public static void scale(ImageView mBatteryIconView) {
-		if (mBatteryIconView == null) {
+		if (mBatteryIconView == null || !mShouldScale) {
 			return;
 		}
 

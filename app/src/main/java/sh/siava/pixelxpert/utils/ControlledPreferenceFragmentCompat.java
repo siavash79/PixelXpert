@@ -2,7 +2,6 @@ package sh.siava.pixelxpert.utils;
 
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
-import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import sh.siava.pixelxpert.ui.activities.BaseActivity;
 
 public abstract class ControlledPreferenceFragmentCompat extends PreferenceFragmentCompat {
-	public SharedPreferences mPreferences;
+	public ExtendedSharedPreferences mPreferences;
 	private final OnSharedPreferenceChangeListener changeListener = (sharedPreferences, key) -> updateScreen(key);
 
 	public abstract String getTitle();
@@ -30,7 +29,7 @@ public abstract class ControlledPreferenceFragmentCompat extends PreferenceFragm
 	@Override
 	public RecyclerView.Adapter<?> onCreateAdapter(@NonNull PreferenceScreen preferenceScreen)
 	{
-		mPreferences = getDefaultSharedPreferences(requireContext().createDeviceProtectedStorageContext());
+		mPreferences = ExtendedSharedPreferences.from(getDefaultSharedPreferences(requireContext().createDeviceProtectedStorageContext()));
 
 		mPreferences.registerOnSharedPreferenceChangeListener(changeListener);
 

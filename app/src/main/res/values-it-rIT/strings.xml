@@ -199,8 +199,8 @@
 	<string name="vibration_type_touch">Intensità definita dalle impostazioni di vibrazione al tocco di sistema</string>
 	<string name="qs_tile_qty_portrait">In orientamento verticale</string>
 	<string name="qs_tile_qty_landscape">In orientamento orizzontale</string>
-	<string name="qs_mod_category_misc_title">Miscellaneous</string>
-	<string name="charging_info_on_qs">Show charging info on QS panel</string>
+	<string name="qs_mod_category_misc_title">Varie</string>
+	<string name="charging_info_on_qs">Mostra informazioni di ricarica nel pannello delle impostazioni rapide</string>
 	<string name="qs_rows_number">Numero di righe QS</string>
 	<string name="qs_cols_number">Numero di colonne QS</string>
 	<string name="qqs_tiles_number">N. massimo tiles nel Quick QS (max 2 righe)</string>
@@ -302,8 +302,8 @@
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Sbloccato per tutte le app tramite <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Goditelo!</string>
 	<!-- SystemUI hook -->
-	<string name="battery_info_button_title">Battery info…</string>
-	<string name="power_indication_error">Error fetching charging data</string>
+	<string name="battery_info_button_title">Informazioni batteria…</string>
+	<string name="power_indication_error">Errore nel recupero dei dati della ricarica</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibra alla risposta di una chiamata in uscita</string>
 	<string name="vibrate_on_call_drop_title">Vibra quando la chiamata si disconnette</string>

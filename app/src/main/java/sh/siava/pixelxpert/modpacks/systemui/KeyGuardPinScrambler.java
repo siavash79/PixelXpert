@@ -6,6 +6,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 
@@ -17,7 +18,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -32,7 +32,7 @@ public class KeyGuardPinScrambler extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		shufflePinEnabled = XPrefs.Xprefs.getBoolean("shufflePinEnabled", false);
+		shufflePinEnabled = Xprefs.getBoolean("shufflePinEnabled", false);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class KeyGuardPinScrambler extends XposedModPack {
 		return listenPackage.equals(packageName) && !XPLauncher.isChildProcess;
 	}
 
-	List<Integer> digits = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
+	final List<Integer> digits = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {

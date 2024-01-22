@@ -57,10 +57,10 @@ import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreferenceResul
 import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreferenceResultListener;
 import sh.siava.pixelxpert.utils.AppUtils;
 import sh.siava.pixelxpert.utils.ControlledPreferenceFragmentCompat;
+import sh.siava.pixelxpert.utils.ExtendedSharedPreferences;
 import sh.siava.pixelxpert.utils.PrefManager;
 import sh.siava.pixelxpert.utils.PreferenceHelper;
 import sh.siava.pixelxpert.utils.UpdateScheduler;
-import sh.siava.rangesliderpreference.RangeSliderPreference;
 
 public class SettingsActivity extends BaseActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback, SearchPreferenceResultListener {
 	private static final int REQUEST_IMPORT = 7;
@@ -131,7 +131,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		prefsList.add(new Object[]{R.xml.theming_prefs, R.string.theme_customization_category, new ThemingFragment()});
 		prefsList.add(new Object[]{R.xml.three_button_prefs, R.string.threebutton_header_title, new ThreeButtonNavFragment()});
 
-		PreferenceHelper.init(getDefaultSharedPreferences(createDeviceProtectedStorageContext()));
+		PreferenceHelper.init(ExtendedSharedPreferences.from(getDefaultSharedPreferences(createDeviceProtectedStorageContext())));
 
 		setContentView(binding.getRoot());
 
@@ -420,7 +420,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	public static class HeaderFragment extends ControlledPreferenceFragmentCompat {
 		SearchPreference searchPreference;
 
@@ -493,7 +492,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		fragmentTransaction.commit();
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	public static class NavFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -506,7 +504,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	public static class ThemingFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -519,7 +516,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	public static class LockScreenFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -532,7 +528,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	public static class SBBBFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -545,7 +540,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	
 	public static class NetworkFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -559,7 +554,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	}
 
 
-	@SuppressWarnings("ConstantConditions")
+	
 	public static class SBBIconFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -572,7 +567,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	
 	public static class MiscFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -610,7 +605,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	}
 
 
-	@SuppressWarnings("ConstantConditions")
+	
 	public static class SBCFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -623,7 +618,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	
 	public static class ThreeButtonNavFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -636,7 +631,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	
 	public static class StatusbarFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -661,7 +656,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	
 	public static class QuickSettingsFragment extends ControlledPreferenceFragmentCompat {
 		private FrameLayout pullDownIndicator;
 
@@ -697,7 +692,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 				pullDownIndicator.setVisibility(PreferenceHelper.isVisible("QSPulldownPercent") ? View.VISIBLE : View.GONE);
 				FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) pullDownIndicator.getLayoutParams();
-				lp.width = Math.round(RangeSliderPreference.getSingleIntValue(mPreferences, "QSPulldownPercent", 25) * displayWidth / 100f);
+				lp.width = Math.round(mPreferences.getSliderInt( "QSPulldownPercent", 25) * displayWidth / 100f);
 				lp.gravity = Gravity.TOP | (Integer.parseInt(mPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
 				pullDownIndicator.setLayoutParams(lp);
 			} catch (Exception ignored) {
@@ -718,7 +713,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	
 	public static class GestureNavFragment extends ControlledPreferenceFragmentCompat {
 
 		FrameLayout leftBackGestureIndicator, rightBackGestureIndicator;
@@ -753,9 +748,9 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 				int displayHeight = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().height();
 				int displayWidth = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
 
-				float leftSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(mPreferences, "leftSwipeUpPercentage", 25);
+				float leftSwipeUpPercentage = mPreferences.getSliderFloat( "leftSwipeUpPercentage", 25);
 
-				float rightSwipeUpPercentage = RangeSliderPreference.getSingleFloatValue(mPreferences, "rightSwipeUpPercentage", 25);
+				float rightSwipeUpPercentage = mPreferences.getSliderFloat( "rightSwipeUpPercentage", 25);
 
 				int edgeWidth = Math.round(displayWidth * leftSwipeUpPercentage / 100f);
 				ViewGroup.LayoutParams lp = leftSwipeGestureIndicator.getLayoutParams();
@@ -773,12 +768,12 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 				setVisibility(rightBackGestureIndicator, PreferenceHelper.isVisible("BackRightHeight"), 400);
 				setVisibility(leftBackGestureIndicator, PreferenceHelper.isVisible("BackLeftHeight"), 400);
 
-				int edgeHeight = Math.round(displayHeight * RangeSliderPreference.getSingleIntValue(mPreferences, "BackRightHeight", 100) / 100f);
+				int edgeHeight = Math.round(displayHeight * mPreferences.getSliderInt( "BackRightHeight", 100) / 100f);
 				lp = rightBackGestureIndicator.getLayoutParams();
 				lp.height = edgeHeight;
 				rightBackGestureIndicator.setLayoutParams(lp);
 
-				edgeHeight = Math.round(displayHeight * RangeSliderPreference.getSingleIntValue(mPreferences, "BackLeftHeight", 100) / 100f);
+				edgeHeight = Math.round(displayHeight * mPreferences.getSliderInt( "BackLeftHeight", 100) / 100f);
 				lp = leftBackGestureIndicator.getLayoutParams();
 				lp.height = edgeHeight;
 				leftBackGestureIndicator.setLayoutParams(lp);
@@ -872,7 +867,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	
 	public static class NetworkStatFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -885,7 +880,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	
 	public static class DialerFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -898,7 +893,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	
 	public static class OwnPrefsFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {

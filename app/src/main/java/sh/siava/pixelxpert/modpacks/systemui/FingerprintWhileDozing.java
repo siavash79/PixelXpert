@@ -3,6 +3,7 @@ package sh.siava.pixelxpert.modpacks.systemui;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 
@@ -10,7 +11,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 @SuppressWarnings("RedundantThrows")
@@ -24,7 +24,7 @@ public class FingerprintWhileDozing extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		fingerprintWhileDozing = XPrefs.Xprefs.getBoolean("fingerprintWhileDozing", true);
+		fingerprintWhileDozing = Xprefs.getBoolean("fingerprintWhileDozing", true);
 	}
 
 	@Override

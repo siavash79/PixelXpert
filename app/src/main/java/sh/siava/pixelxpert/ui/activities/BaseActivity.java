@@ -17,8 +17,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.shape.MaterialShapeDrawable;
 
-import java.util.Objects;
-
 import sh.siava.pixelxpert.R;
 
 @SuppressWarnings("unused")

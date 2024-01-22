@@ -5,6 +5,7 @@ import static android.content.res.Configuration.UI_MODE_NIGHT_YES;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -43,7 +44,6 @@ import java.util.ArrayList;
 
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
-import sh.siava.pixelxpert.modpacks.XPrefs;
 
 @SuppressWarnings("unused")
 public class SystemUtils {
@@ -283,10 +283,10 @@ public class SystemUtils {
 				return;
 			}
 			if (enabled
-					&& XPrefs.Xprefs.getBoolean("leveledFlashTile", false)
-					&& XPrefs.Xprefs.getBoolean("isFlashLevelGlobal", false)
+					&& Xprefs.getBoolean("leveledFlashTile", false)
+					&& Xprefs.getBoolean("isFlashLevelGlobal", false)
 					&& supportsFlashLevelsInternal()) {
-				float currentPct = XPrefs.Xprefs.getFloat("flashPCT", 0.5f);
+				float currentPct = Xprefs.getFloat("flashPCT", 0.5f);
 				setFlashInternal(true, currentPct);
 				return;
 			}

@@ -15,7 +15,7 @@
 			android:title="@string/qs_rows_number"
 			app:iconSpaceReserved="false"
 			app:minVal="0"
-			app:updatesContinuously="true" />
+			app:updatesContinuously="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			app:defaultValue="1"
@@ -24,7 +24,7 @@
 			android:title="@string/qs_cols_number"
 			app:iconSpaceReserved="false"
 			app:minVal="1"
-			app:updatesContinuously="true" />
+			app:updatesContinuously="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			app:defaultValue="4"
@@ -33,7 +33,7 @@
 			android:title="@string/qqs_tiles_number"
 			app:iconSpaceReserved="false"
 			app:minVal="2"
-			app:updatesContinuously="true" />
+			app:updatesContinuously="false" />
 
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
@@ -49,7 +49,7 @@
 			android:title="@string/qs_rows_number"
 			app:iconSpaceReserved="false"
 			app:minVal="0"
-			app:updatesContinuously="true" />
+			app:updatesContinuously="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			app:defaultValue="1"
@@ -58,7 +58,7 @@
 			android:title="@string/qs_cols_number"
 			app:iconSpaceReserved="false"
 			app:minVal="1"
-			app:updatesContinuously="true" />
+			app:updatesContinuously="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			app:defaultValue="4"
@@ -67,7 +67,7 @@
 			android:title="@string/qqs_tiles_number"
 			app:iconSpaceReserved="false"
 			app:minVal="2"
-			app:updatesContinuously="true" />
+			app:updatesContinuously="false" />
 
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 </PreferenceScreen>

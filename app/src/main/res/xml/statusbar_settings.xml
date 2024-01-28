@@ -90,6 +90,14 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
+			android:key="BatteryPercentIndicateCharging"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/colored_battery_percentage_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
 			android:key="combinedSignalEnabled"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"

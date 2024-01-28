@@ -215,11 +215,15 @@ public class BatteryStyleManager extends XposedModPack {
 				{
 					setAdditionalInstanceField(meterView, "lastPCTColor", mBatteryPercentView.getTextColors().getDefaultColor());
 				}
+				int lastPCTColor = getAdditionalInstanceField(meterView, "lastPCTColor") == null
+						? Color.BLACK
+						: (int) getAdditionalInstanceField(meterView, "lastPCTColor");
+
 				int color = BatteryDataProvider.isCharging()
 					? isDark(mBatteryPercentView.getTextColors().getDefaultColor())
 						? 0xFF048800 //dark green
 						: Color.GREEN
-					: (int) getAdditionalInstanceField(meterView, "lastPCTColor");
+					: lastPCTColor;
 
 				mBatteryPercentView.setTextColor(color);
 			}

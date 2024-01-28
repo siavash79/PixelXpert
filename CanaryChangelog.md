@@ -1,3 +1,6 @@
+**canary-328**  
+- Added option to show change battery percentage text while charging  
+  
 **canary-327**  
 - Don't scale battery icon if not required / a bit of compatibility with other battery icon mods  
   

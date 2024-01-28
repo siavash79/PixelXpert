@@ -111,7 +111,11 @@ public class UDFPSManager extends XposedModPack {
 	private void removeUDFPSBG(Object object) {
 		if (!transparentBG) return;
 
-		ImageView mBgProtection = (ImageView) getObjectField(object, "mBgProtection");
-		mBgProtection.setImageDrawable(new ShapeDrawable());
+		try
+		{
+			ImageView mBgProtection = (ImageView) getObjectField(object, "mBgProtection");
+			mBgProtection.setImageDrawable(new ShapeDrawable());
+		}
+		catch (Throwable ignored){}
 	}
 }

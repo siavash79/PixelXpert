@@ -902,7 +902,7 @@ public class StatusbarMods extends XposedModPack {
 						result.append(getFormattedString(mStringFormatBefore, mBeforeSmall, mBeforeClockColor)); //before clock
 						SpannableStringBuilder clockText = SpannableStringBuilder.valueOf((CharSequence) param.getResult()); //THE clock
 						if (mClockColor != null) {
-							clockText.setSpan(new NetworkTraffic.trafficStyle(mClockColor), 0, (clockText).length(),
+							clockText.setSpan(new NetworkTraffic.TrafficStyle(mClockColor), 0, (clockText).length(),
 									Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 						}
 						result.append(clockText);
@@ -1345,7 +1345,7 @@ public class StatusbarMods extends XposedModPack {
 			formatted.setSpan(style, 0, formatted.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 		if (textColor != null) {
-			formatted.setSpan(new NetworkTraffic.trafficStyle(textColor), 0, (formatted).length(),
+			formatted.setSpan(new NetworkTraffic.TrafficStyle(textColor), 0, (formatted).length(),
 					Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 

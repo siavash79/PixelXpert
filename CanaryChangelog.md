@@ -1,3 +1,6 @@
+**canary-329**  
+- Improved colored battery percentage  
+  
 **canary-328**  
 - Added option to show change battery percentage text while charging  
   

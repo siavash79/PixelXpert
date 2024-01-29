@@ -7,6 +7,7 @@ import android.text.style.RelativeSizeSpan;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.ColorUtils;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -86,6 +87,9 @@ public class ObjectTools {
 	}
 
 
+	public static boolean isColorDark(@ColorInt int color) {
+		return ColorUtils.calculateLuminance(color) < 0.5;
+	}
 
 
 	public static String removeItemFromCommaString(String string, String key)

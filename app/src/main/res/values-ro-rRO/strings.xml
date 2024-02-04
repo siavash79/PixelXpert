@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Culoare încărcare</string>
 	<string name="BB_batteryFastChargingColor">Culoare de încărcare rapidă</string>
 	<string name="BB_transit_colors">Nuanță culori între aceste game</string>
+	<string name="colored_battery_percentage_title">Procentaj colorat al bateriei în timpul încărcării</string>
 	<string name="nt_stat_mode_today">Astăzi</string>
 	<string name="nt_stat_mode_week">Săptămâna aceasta</string>
 	<string name="nt_stat_mode_month">Luna curentă</string>

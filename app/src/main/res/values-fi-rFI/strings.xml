@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Latauksen väri</string>
 	<string name="BB_batteryFastChargingColor">Nopeasti latautuva väri</string>
 	<string name="BB_transit_colors">Varjostaa värejä tämän alueen välillä</string>
+	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Tänään</string>
 	<string name="nt_stat_mode_week">Tämä viikko</string>
 	<string name="nt_stat_mode_month">Tämä kuukausi</string>

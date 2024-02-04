@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Barva nabíjení</string>
 	<string name="BB_batteryFastChargingColor">Barva rychlého nabíjení</string>
 	<string name="BB_transit_colors">Stínujte barvy mezi tímto rozsahem</string>
+	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Dnes</string>
 	<string name="nt_stat_mode_week">Tento týden</string>
 	<string name="nt_stat_mode_month">Aktuální měsíc</string>

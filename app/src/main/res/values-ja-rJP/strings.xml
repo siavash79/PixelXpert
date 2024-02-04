@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">代替テーマのアイコン</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc"></string>
 	<string name="volume_tile_title">メディアボリューム</string>
 	<string name="app_switch_tile_title">アプリプロファイルを切り替える</string>
 	<string name="hide_default">隠す (既定)</string>
@@ -35,7 +35,7 @@
 	<string name="usage_title">使用法</string>
 	<string name="usage_summary">ウィキページを開く</string>
 	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_summary"></string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">ロック画面</string>
 	<string name="statusbar_header">ステータスバー</string>
@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">充電中の色</string>
 	<string name="BB_batteryFastChargingColor">急速充電の色</string>
 	<string name="BB_transit_colors">この範囲内のシェード色</string>
+	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">今日</string>
 	<string name="nt_stat_mode_week">今週</string>
 	<string name="nt_stat_mode_month">今月</string>

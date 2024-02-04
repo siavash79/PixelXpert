@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Şarj rengi</string>
 	<string name="BB_batteryFastChargingColor">Hızlı şarj rengi</string>
 	<string name="BB_transit_colors">Bu aralık arasındaki renk tonları</string>
+	<string name="colored_battery_percentage_title">Şarj sırasında renkli pil yüzdesi</string>
 	<string name="nt_stat_mode_today">Bugün</string>
 	<string name="nt_stat_mode_week">Geçerli hafta</string>
 	<string name="nt_stat_mode_month">Geçerli ay</string>

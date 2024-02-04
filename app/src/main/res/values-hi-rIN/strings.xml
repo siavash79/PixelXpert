@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">चार्जिंग कलर</string>
 	<string name="BB_batteryFastChargingColor">तेजी से चार्ज होने वाला रंग</string>
 	<string name="BB_transit_colors">क्षेत्रों के बीच रंगों को छायांकित करना</string>
+	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">आज</string>
 	<string name="nt_stat_mode_week">यह सप्ताह</string>
 	<string name="nt_stat_mode_month">अभी चल रहा माह</string>

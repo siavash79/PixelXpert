@@ -1,3 +1,6 @@
+**canary-330**  
+- Fixed power long press torch not togging flashlight in some situations  
+  
 **canary-329**  
 - Improved colored battery percentage  
   

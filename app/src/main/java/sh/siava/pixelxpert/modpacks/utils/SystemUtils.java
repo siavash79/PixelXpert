@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 
+/** @noinspection UnusedReturnValue*/
 @SuppressWarnings("unused")
 public class SystemUtils {
 	private static final int THREAD_PRIORITY_BACKGROUND = 10;
@@ -109,17 +110,28 @@ public class SystemUtils {
 			instance.setFlashInternal(enabled);
 	}
 
+	@Nullable
+	@Contract(pure = true)
 	public static WifiManager WifiManager()
 	{
 		return instance == null
 				? null
 				: instance.getWifiManager();
 	}
-
+	@Nullable
+	@Contract(pure = true)
 	public static NetworkStatsManager NetworkStatsManager() {
 		return instance == null
 				? null
 				: instance.getNetworkStatsManager();
+	}
+
+	@Nullable
+	@Contract(pure = true)
+	public static CameraManager CameraManager() {
+		return instance == null
+				? null
+				: instance.getCameraManager();
 	}
 
 	@Nullable

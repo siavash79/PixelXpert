@@ -1,3 +1,7 @@
+**canary-331**  
+- A14ap21: SystemUI crashes  
+- A14ap21: Fixed lockscreen mods  
+  
 **canary-330**  
 - Fixed power long press torch not togging flashlight in some situations  
   

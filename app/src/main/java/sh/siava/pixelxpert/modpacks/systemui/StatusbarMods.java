@@ -59,6 +59,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
+import org.objenesis.ObjenesisHelper;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -84,6 +86,7 @@ import sh.siava.pixelxpert.modpacks.utils.StringFormatter.FormattedStringCallbac
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 import sh.siava.pixelxpert.modpacks.utils.batteryStyles.BatteryBarView;
 
+/** @noinspection RedundantThrows*/
 public class StatusbarMods extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 	//region Clock
@@ -235,8 +238,7 @@ public class StatusbarMods extends XposedModPack {
 			Icon appSwitchIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_app_switch);
 			//noinspection JavaReflectionMemberAccess
 			Object appSwitchStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, appSwitchIcon, 0, 0, APP_SWITCH_SLOT);
-			mAppSwitchStatusbarIconHolder = StatusBarIconHolderClass.newInstance();
-			setObjectField(mAppSwitchStatusbarIconHolder, "mIcon", appSwitchStatusbarIcon);
+			mAppSwitchStatusbarIconHolder = getStatusbarIconHolderFor(appSwitchStatusbarIcon);
 		}catch (Throwable ignored){}
 	}
 
@@ -1067,6 +1069,24 @@ public class StatusbarMods extends XposedModPack {
 	}
 	//endregion
 
+	//region statusbar icon holder
+	private Object getStatusbarIconHolderFor(Object statusbarIcon)
+	{
+		Object holder = ObjenesisHelper.newInstance(StatusBarIconHolderClass);
+		String[] iconFiled = new String[1];
+		Arrays.stream(StatusBarIconHolderClass.getFields()).forEach(field ->
+		{
+			if(field.getName().toLowerCase().contains("icon"))
+				iconFiled[0]=field.getName();
+		});
+
+		setObjectField(holder, iconFiled[0], statusbarIcon);
+
+		return holder;
+	}
+
+	//endregion
+
 	//region vo_data related
 	private void initVoData() {
 		try {
@@ -1075,26 +1095,25 @@ public class StatusbarMods extends XposedModPack {
 				Icon volteIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_volte);
 				//noinspection JavaReflectionMemberAccess
 				Object volteStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, VO_LTE_SLOT);
-				volteStatusbarIconHolder = StatusBarIconHolderClass.newInstance();
-				setObjectField(volteStatusbarIconHolder, "mIcon", volteStatusbarIcon);
+				volteStatusbarIconHolder = getStatusbarIconHolderFor(volteStatusbarIcon);
 
 				Icon vowifiIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_vowifi);
 				//noinspection JavaReflectionMemberAccess
 				Object vowifiStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, vowifiIcon, 0, 0, VO_WIFI_SLOT);
-				vowifiStatusbarIconHolder = StatusBarIconHolderClass.newInstance();
-				setObjectField(vowifiStatusbarIconHolder, "mIcon", vowifiStatusbarIcon);
+				vowifiStatusbarIconHolder = getStatusbarIconHolderFor(vowifiStatusbarIcon);
 
+				//noinspection DataFlowIssue
 				SystemUtils.TelephonyManager().registerTelephonyCallback(voDataExec, voDataCallback);
 				telephonyCallbackRegistered = true;
 			}
-		} catch (Exception ignored) {
-		}
+		} catch (Exception ignored) {}
 
 		updateVoData(true);
 	}
 
 	private void removeVoDataCallback() {
 		try {
+			//noinspection DataFlowIssue
 			SystemUtils.TelephonyManager().unregisterTelephonyCallback(voDataCallback);
 			telephonyCallbackRegistered = false;
 		} catch (Exception ignored) {
@@ -1327,6 +1346,7 @@ public class StatusbarMods extends XposedModPack {
 		if (index != null) {
 			targetArea.addView(mClockView, index);
 		} else {
+			//noinspection DataFlowIssue
 			targetArea.addView(mClockView);
 		}
 	}

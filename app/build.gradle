@@ -118,4 +118,8 @@ dependencies {
 
 	// SwipeRefreshLayout
 	implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
+
+	// Class initializer
+	// https://mvnrepository.com/artifact/org.objenesis/objenesis
+	implementation 'org.objenesis:objenesis:3.3'
 }

@@ -44,6 +44,7 @@ public class PreferenceHelper {
 		if (instance == null) return true;
 
 		switch (key) {
+			case "nav_keyboard_height_cat":
 			case "overlay_dependent":
 			case "HideNavbarOverlay":
 			case "CustomThemedIconsOverlay":
@@ -276,7 +277,6 @@ public class PreferenceHelper {
 				return !instance.mPreferences.getString("rightSwipeUpAction", "-1").equals("-1");
 
 			case "nav_pill_cat":
-			case "nav_keyboard_height_cat":
 				return !instance.mPreferences.getBoolean("HideNavbarOverlay", false);
 
 			case "UpdateWifiOnly":

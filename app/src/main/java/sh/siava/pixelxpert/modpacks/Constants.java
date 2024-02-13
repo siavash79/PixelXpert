@@ -9,9 +9,12 @@ import sh.siava.pixelxpert.modpacks.utils.BootLoopProtector;
 
 public final class Constants {
 	public static final String ACTION_SCREENSHOT = APPLICATION_ID + ".ACTION_SCREENSHOT";
+
 	@SuppressWarnings("DeprecatedIsStillUsed")
 	@Deprecated
 	public static final String ACTION_INSECURE_SCREENSHOT = APPLICATION_ID + ".ACTION_INSECURE_SCREENSHOT";
+	public static final String ACTION_HOME = APPLICATION_ID + ".ACTION_HOME";
+
 	public static final String ACTION_BACK = APPLICATION_ID + ".ACTION_BACK";
 	public static final String ACTION_SLEEP = APPLICATION_ID + ".ACTION_SLEEP";
 	public static final String ACTION_SWITCH_APP_PROFILE = APPLICATION_ID + ".ACTION_SWITCH_APP_PROFILE";

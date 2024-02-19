@@ -2,9 +2,7 @@ package sh.siava.pixelxpert.modpacks.launcher;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
-import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
@@ -16,9 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
-import android.hardware.input.InputManager;
 import android.os.Process;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
@@ -97,8 +93,6 @@ public class CustomNavGestures extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		log("wow?");
-
 		Class<?> OtherActivityInputConsumerClass = findClass("com.android.quickstep.inputconsumers.OtherActivityInputConsumer", lpparam.classLoader); //When apps are open
 		Class<?> OverviewInputConsumerClass = findClass("com.android.quickstep.inputconsumers.OverviewInputConsumer", lpparam.classLoader); //When on Home screen and Recents
 		Class<?> SystemUiProxyClass = findClass("com.android.quickstep.SystemUiProxy", lpparam.classLoader);
@@ -268,7 +262,6 @@ public class CustomNavGestures extends XposedModPack {
 				toggleNotification();
 				break;
 			case ACTION_KILL_APP:
-				log("kill forg");
 				killForeground();
 				break;
 			case ACTION_ONE_HANDED:

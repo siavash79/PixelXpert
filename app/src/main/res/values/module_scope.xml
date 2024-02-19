@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="module_scope">
-        <item>com.android.systemui</item> <!-- systemUI -->
-        <item>com.google.android.apps.nexuslauncher</item> <!-- Pixel Launcher - Taskbar -->
-        <item>android</item>  <!-- System Framework -->
-        <item>com.android.settings</item> <!-- settings app -->
-        <item>com.google.android.dialer</item> <!-- google dialer -->
-    </string-array>
-    <string-array name="root_requirement">
-        <item>com.android.systemui</item> <!-- systemUI -->
-    </string-array>
+	<string-array name="module_scope">
+		<item>com.android.systemui</item> <!-- systemUI -->
+		<item>com.google.android.apps.nexuslauncher</item> <!-- Pixel Launcher - Taskbar -->
+		<item>android</item>  <!-- System Framework -->
+		<item>com.android.settings</item> <!-- settings app -->
+		<item>com.google.android.dialer</item> <!-- google dialer -->
+	</string-array>
+	<string-array name="root_requirement">
+		<item>com.android.systemui</item> <!-- systemUI -->
+	</string-array>
 </resources>

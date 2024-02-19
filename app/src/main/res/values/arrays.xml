@@ -1,529 +1,529 @@
 <resources>
 
-    <array name="lockScreenShortcut_names">
-        <item>@string/overlay_none_title</item>
-        <item>@string/camera_shortcut</item>
-        <item>@string/assistant_shortcut</item>
-        <item>@string/torch_shortcut</item>
-        <item>@string/tv_remote_shortcut</item>
-        <item>@string/dnd_shortcut</item>
-        <item>@string/qr_scanner_shortcut</item>
-    </array>
+	<array name="lockScreenShortcut_names">
+		<item>@string/overlay_none_title</item>
+		<item>@string/camera_shortcut</item>
+		<item>@string/assistant_shortcut</item>
+		<item>@string/torch_shortcut</item>
+		<item>@string/tv_remote_shortcut</item>
+		<item>@string/dnd_shortcut</item>
+		<item>@string/qr_scanner_shortcut</item>
+	</array>
 
-    <array name="lockScreenShortcut_values">
-        <item>""</item>
-        <item>camera</item>
-        <item>assistant</item>
-        <item>torch</item>
-        <item>tvremote</item>
-        <item>zen</item>
-        <item>qrscanner</item>
-    </array>
+	<array name="lockScreenShortcut_values">
+		<item>""</item>
+		<item>camera</item>
+		<item>assistant</item>
+		<item>torch</item>
+		<item>tvremote</item>
+		<item>zen</item>
+		<item>qrscanner</item>
+	</array>
 
-    <string-array name="qs_pulldown_side_names">
-        <item>@string/pull_down_left</item>
-        <item>@string/pull_down_right</item>
-    </string-array>
+	<string-array name="qs_pulldown_side_names">
+		<item>@string/pull_down_left</item>
+		<item>@string/pull_down_right</item>
+	</string-array>
 
-    <string-array name="qs_pulldown_side_left">
-        <item>2</item>
-        <item>1</item>
-    </string-array>
+	<string-array name="qs_pulldown_side_left">
+		<item>2</item>
+		<item>1</item>
+	</string-array>
 
-    <string-array name="languages_names">
-        <item>Arabic</item>
-        <item>Chinese (China)</item>
-        <item>Chinese (Taiwan)</item>
-        <item>Dutch</item>
-        <item>English</item>
-        <item>French</item>
-        <item>German</item>
-        <item>Hebrew</item>
-        <item>Hindi</item>
-        <item>Hungarian</item>
-        <item>Italian</item>
-        <item>Japanese</item>
-        <item>Korean</item>
-        <item>Persian</item>
-        <item>Polish</item>
-        <item>Portuguese</item>
-        <item>Romanian</item>
-        <item>Russian</item>
-        <item>Spanish</item>
-        <item>Turkish</item>
-        <item>Ukrainian</item>
-        <item>Vietnamese</item>
-    </string-array>
+	<string-array name="languages_names">
+		<item>Arabic</item>
+		<item>Chinese (China)</item>
+		<item>Chinese (Taiwan)</item>
+		<item>Dutch</item>
+		<item>English</item>
+		<item>French</item>
+		<item>German</item>
+		<item>Hebrew</item>
+		<item>Hindi</item>
+		<item>Hungarian</item>
+		<item>Italian</item>
+		<item>Japanese</item>
+		<item>Korean</item>
+		<item>Persian</item>
+		<item>Polish</item>
+		<item>Portuguese</item>
+		<item>Romanian</item>
+		<item>Russian</item>
+		<item>Spanish</item>
+		<item>Turkish</item>
+		<item>Ukrainian</item>
+		<item>Vietnamese</item>
+	</string-array>
 
-    <string-array name="languages_values">
-        <item>ar</item>
-        <item>zh-CN</item>
-        <item>zh-TW</item>
-        <item>nl</item>
-        <item>en</item>
-        <item>fr</item>
-        <item>de</item>
-        <item>iw</item>
-        <item>hi</item>
-        <item>hu</item>
-        <item>it</item>
-        <item>ja</item>
-        <item>ko</item>
-        <item>fa</item>
-        <item>pl</item>
-        <item>pt-PT</item>
-        <item>ro</item>
-        <item>ru</item>
-        <item>es</item>
-        <item>tr</item>
-        <item>uk</item>
-        <item>vi</item>
-    </string-array>
+	<string-array name="languages_values">
+		<item>ar</item>
+		<item>zh-CN</item>
+		<item>zh-TW</item>
+		<item>nl</item>
+		<item>en</item>
+		<item>fr</item>
+		<item>de</item>
+		<item>iw</item>
+		<item>hi</item>
+		<item>hu</item>
+		<item>it</item>
+		<item>ja</item>
+		<item>ko</item>
+		<item>fa</item>
+		<item>pl</item>
+		<item>pt-PT</item>
+		<item>ro</item>
+		<item>ru</item>
+		<item>es</item>
+		<item>tr</item>
+		<item>uk</item>
+		<item>vi</item>
+	</string-array>
 
-    <string-array name="three_button_nav_buttons">
-        <item>back</item>
-        <item>home</item>
-        <item>recent</item>
-    </string-array>
+	<string-array name="three_button_nav_buttons">
+		<item>back</item>
+		<item>home</item>
+		<item>recent</item>
+	</string-array>
 
-    <string-array name="custom_action_titles">
-        <item>@string/none</item>
-        <item>@string/screenshot</item>
-        <!--item>@string/insecure_screenshot</item-->
-        <!--item>@string/back</item-->
-        <item>@string/kill_foreground_app</item>
-        <item>@string/toggle_notification</item>
-        <item>@string/toggle_one_handed</item>
-        <item>@string/sleep</item>
-        <item>@string/app_switch_tile_title</item>
-    </string-array>
+	<string-array name="custom_action_titles">
+		<item>@string/none</item>
+		<item>@string/screenshot</item>
+		<!--item>@string/insecure_screenshot</item-->
+		<!--item>@string/back</item-->
+		<item>@string/kill_foreground_app</item>
+		<item>@string/toggle_notification</item>
+		<item>@string/toggle_one_handed</item>
+		<item>@string/sleep</item>
+		<item>@string/app_switch_tile_title</item>
+	</string-array>
 
-    <string-array name="custom_action_codes">
-        <item>-1</item>
-        <item>1</item>
-        <!--item>6</item-->
-        <!--item>2</item-->
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>7</item>
-        <item>8</item>
-    </string-array>
+	<string-array name="custom_action_codes">
+		<item>-1</item>
+		<item>1</item>
+		<!--item>6</item-->
+		<!--item>2</item-->
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>7</item>
+		<item>8</item>
+	</string-array>
 
-    <string-array name="battery_style_names">
-        <item>@string/word_default</item>
-        <item>@string/battery_circle</item>
-        <item>@string/battery_dashed_circle</item>
-        <item>@string/battery_circle_filled</item>
-        <item>@string/battery_hidden</item>
-    </string-array>
+	<string-array name="battery_style_names">
+		<item>@string/word_default</item>
+		<item>@string/battery_circle</item>
+		<item>@string/battery_dashed_circle</item>
+		<item>@string/battery_circle_filled</item>
+		<item>@string/battery_hidden</item>
+	</string-array>
 
-    <string-array name="battery_style_codes">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>99</item>
-    </string-array>
+	<string-array name="battery_style_codes">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>99</item>
+	</string-array>
 
-    <string-array name="sbc_position_names">
-        <item>@string/clock_default</item>
-        <item>@string/clock_center</item>
-        <item>@string/clock_right</item>
-    </string-array>
+	<string-array name="sbc_position_names">
+		<item>@string/clock_default</item>
+		<item>@string/clock_center</item>
+		<item>@string/clock_right</item>
+	</string-array>
 
-    <string-array name="sbc_position_codes">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
+	<string-array name="sbc_position_codes">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
 
-    <string-array name="sbc_ampm_style_names">
-        <item>@string/am_pm_default</item>
-        <item>@string/am_pm_normal</item>
-        <item>@string/am_pm_small</item>
-    </string-array>
+	<string-array name="sbc_ampm_style_names">
+		<item>@string/am_pm_default</item>
+		<item>@string/am_pm_normal</item>
+		<item>@string/am_pm_small</item>
+	</string-array>
 
-    <string-array name="sbc_ampm_style_codes">
-        <item>2</item>
-        <item>0</item>
-        <item>1</item>
-    </string-array>
+	<string-array name="sbc_ampm_style_codes">
+		<item>2</item>
+		<item>0</item>
+		<item>1</item>
+	</string-array>
 
 
-    <string-array name="sbc_day_week_names">
-        <item>@string/date_default</item>
-        <item>@string/date_before</item>
-        <item>@string/date_before_small</item>
-        <item>@string/date_after</item>
-        <item>@string/date_after_small</item>
-    </string-array>
+	<string-array name="sbc_day_week_names">
+		<item>@string/date_default</item>
+		<item>@string/date_before</item>
+		<item>@string/date_before_small</item>
+		<item>@string/date_after</item>
+		<item>@string/date_after_small</item>
+	</string-array>
 
-    <string-array name="sbc_day_week_codes">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </string-array>
+	<string-array name="sbc_day_week_codes">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+	</string-array>
 
-    <string-array name="lte4g_icon_names">
-        <item>@string/fourg_lte_default</item>
-        <item>@string/fourg_lte_lte</item>
-        <item>@string/fourg_lte_fourg</item>
-    </string-array>
+	<string-array name="lte4g_icon_names">
+		<item>@string/fourg_lte_default</item>
+		<item>@string/fourg_lte_lte</item>
+		<item>@string/fourg_lte_fourg</item>
+	</string-array>
 
-    <string-array name="lte4g_icon_codes">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
+	<string-array name="lte4g_icon_codes">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
 
-    <string-array name="sb_icon_sort_names">
-        <item>@string/sort_clean</item>
-        <item>@string/sort_tight</item>
-    </string-array>
+	<string-array name="sb_icon_sort_names">
+		<item>@string/sort_clean</item>
+		<item>@string/sort_tight</item>
+	</string-array>
 
-    <string-array name="sb_icon_sort_codes">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
+	<string-array name="sb_icon_sort_codes">
+		<item>0</item>
+		<item>1</item>
+	</string-array>
 
-    <string-array name="network_sb_locations">
-        <item>@string/ntsb_far_left</item>
-        <item>@string/ntsb_mid_left</item>
-        <item>@string/ntsb_mid_right</item>
-    </string-array>
+	<string-array name="network_sb_locations">
+		<item>@string/ntsb_far_left</item>
+		<item>@string/ntsb_mid_left</item>
+		<item>@string/ntsb_mid_right</item>
+	</string-array>
 
-    <string-array name="network_stat_start_names">
-        <item>@string/nt_stat_mode_today</item>
-        <item>@string/nt_stat_mode_week</item>
-        <item>@string/nt_stat_mode_month</item>
-    </string-array>
+	<string-array name="network_stat_start_names">
+		<item>@string/nt_stat_mode_today</item>
+		<item>@string/nt_stat_mode_week</item>
+		<item>@string/nt_stat_mode_month</item>
+	</string-array>
 
-    <string-array name="network_stat_start_codes">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
+	<string-array name="network_stat_start_codes">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
 
-    <string-array name="days_of_week_names">
-        <item>@string/sunday</item>
-        <item>@string/monday</item>
-        <item>@string/tuesday</item>
-        <item>@string/wednesday</item>
-        <item>@string/thursday</item>
-        <item>@string/friday</item>
-        <item>@string/saturday</item>
+	<string-array name="days_of_week_names">
+		<item>@string/sunday</item>
+		<item>@string/monday</item>
+		<item>@string/tuesday</item>
+		<item>@string/wednesday</item>
+		<item>@string/thursday</item>
+		<item>@string/friday</item>
+		<item>@string/saturday</item>
 
-    </string-array>
+	</string-array>
 
-    <string-array name="days_of_week_codes">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-    </string-array>
+	<string-array name="days_of_week_codes">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+		<item>7</item>
+	</string-array>
 
-    <string-array name="network_mode_names">
-        <item>@string/nt_mode_rxtx</item>
-        <item>@string/nt_mode_total</item>
-        <item>@string/nt_mode_rxonly</item>
-        <item>@string/nt_mode_txonly</item>
-    </string-array>
+	<string-array name="network_mode_names">
+		<item>@string/nt_mode_rxtx</item>
+		<item>@string/nt_mode_total</item>
+		<item>@string/nt_mode_rxonly</item>
+		<item>@string/nt_mode_txonly</item>
+	</string-array>
 
-    <string-array name="network_mode_codes">
-        <item>0</item>
-        <item>3</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
+	<string-array name="network_mode_codes">
+		<item>0</item>
+		<item>3</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
 
-    <string-array name="taskbar_option_names">
-        <item>@string/overlay_none_title</item>
-        <item>@string/taskbar_force_enable_title</item>
-        <item>@string/taskbar_force_disable_title</item>
-    </string-array>
+	<string-array name="taskbar_option_names">
+		<item>@string/overlay_none_title</item>
+		<item>@string/taskbar_force_enable_title</item>
+		<item>@string/taskbar_force_disable_title</item>
+	</string-array>
 
-    <string-array name="taskbar_option_value">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
+	<string-array name="taskbar_option_value">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
 
 	<string-array name="FontsOverlayEx_names">
-        <item>@string/overlay_none_title</item>
-        <item>Blender Pro</item>
-        <item>Euclid Circular</item>
-        <item>Harmony</item>
-        <item>Inter</item>
-        <item>Linotte</item>
-        <item>Evolve Sans</item>
-        <item>Manrope</item>
-        <item>MiLan Pro</item>
-        <item>Noto Sans</item>
-        <item>Noto Serif / Source Sans Pro</item>
-        <item>One Plus Sans</item>
-        <item>One Plus Slate</item>
-        <item>Poppins</item>
-        <item>Recursive Casual</item>
-        <item>Recursive Linear</item>
-        <item>Roboto</item>
-        <item>Rosemary</item>
-        <item>Source Sans</item>
-        <item>Source Serif</item>
-        <item>Storopia</item>
-        <item>Simple Day</item>
-        <item>LG Smart Gothic</item>
-        <item>Nokia Pure</item>
-        <item>Bariol</item>
-        <item>Comfortaa</item>
-        <item>Cool Story</item>
-        <item>Comic Sans</item>
-        <item>Sony Sketch</item>
-        <item>Amarante</item>
-        <item>Cocon</item>
-        <item>Fucek</item>
-        <item>Oduda</item>
-        <item>Lemon Milk</item>
-        <item>Aclonica</item>
-        <item>Fifa 2018</item>
-        <item>Reemkufi</item>
-        <item>Exo Two</item>
-        <item>Samsung One</item>
-        <item>Nunito</item>
-        <item>Quando</item>
-        <item>Ubuntu</item>
-        <item>Antipasto Pro</item>
-        <item>Surfer</item>
-        <item>Cagliostro</item>
-        <item>Grand Hotel</item>
-        <item>Redressed</item>
-        <item>JetBrains Mono</item>
-        <item>Roboto Serif</item>
-    </string-array>
+		<item>@string/overlay_none_title</item>
+		<item>Blender Pro</item>
+		<item>Euclid Circular</item>
+		<item>Harmony</item>
+		<item>Inter</item>
+		<item>Linotte</item>
+		<item>Evolve Sans</item>
+		<item>Manrope</item>
+		<item>MiLan Pro</item>
+		<item>Noto Sans</item>
+		<item>Noto Serif / Source Sans Pro</item>
+		<item>One Plus Sans</item>
+		<item>One Plus Slate</item>
+		<item>Poppins</item>
+		<item>Recursive Casual</item>
+		<item>Recursive Linear</item>
+		<item>Roboto</item>
+		<item>Rosemary</item>
+		<item>Source Sans</item>
+		<item>Source Serif</item>
+		<item>Storopia</item>
+		<item>Simple Day</item>
+		<item>LG Smart Gothic</item>
+		<item>Nokia Pure</item>
+		<item>Bariol</item>
+		<item>Comfortaa</item>
+		<item>Cool Story</item>
+		<item>Comic Sans</item>
+		<item>Sony Sketch</item>
+		<item>Amarante</item>
+		<item>Cocon</item>
+		<item>Fucek</item>
+		<item>Oduda</item>
+		<item>Lemon Milk</item>
+		<item>Aclonica</item>
+		<item>Fifa 2018</item>
+		<item>Reemkufi</item>
+		<item>Exo Two</item>
+		<item>Samsung One</item>
+		<item>Nunito</item>
+		<item>Quando</item>
+		<item>Ubuntu</item>
+		<item>Antipasto Pro</item>
+		<item>Surfer</item>
+		<item>Cagliostro</item>
+		<item>Grand Hotel</item>
+		<item>Redressed</item>
+		<item>JetBrains Mono</item>
+		<item>Roboto Serif</item>
+	</string-array>
 
-    <string-array name="FontsOverlayEx">
-        <item>None</item>
-        <item>org.protonaosp.theme.font.blenderpro</item>
-        <item>org.protonaosp.theme.font.euclid</item>
-        <item>org.protonaosp.theme.font.harmonysans</item>
-        <item>org.protonaosp.theme.font.googlesans.inter</item>
-        <item>org.protonaosp.theme.font.linottesource</item>
-        <item>com.android.theme.font.evolvesans</item>
-        <item>org.protonaosp.theme.font.manrope</item>
-        <item>org.protonaosp.theme.font.milanpro</item>
-        <item>org.protonaosp.theme.font.noto_sans</item>
-        <item>com.android.theme.font.notoserifsource</item>
-        <item>com.android.theme.font.opsans</item>
-        <item>com.android.theme.font.oneplusslate</item>
-        <item>org.protonaosp.theme.font.poppins</item>
-        <item>org.protonaosp.theme.font.recursive_casual</item>
-        <item>org.protonaosp.theme.font.recursive_linear</item>
-        <item>org.protonaosp.theme.font.roboto</item>
-        <item>com.android.theme.font.rosemarysource</item>
-        <item>org.protonaosp.theme.font.source_sans</item>
-        <item>org.protonaosp.theme.font.source_serif</item>
-        <item>com.android.theme.font.storopia</item>
-        <item>com.android.theme.font.simpleday</item>
-        <item>com.android.theme.font.lgsmartgothicsource</item>
-        <item>com.android.theme.font.nokiapure</item>
-        <item>com.android.theme.font.bariolsource</item>
-        <item>com.android.theme.font.comfortaa</item>
-        <item>com.android.theme.font.coolstorysource</item>
-        <item>com.android.theme.font.comicsans</item>
-        <item>com.android.theme.font.sonysketchsource</item>
-        <item>com.android.theme.font.amarantesource</item>
-        <item>com.android.theme.font.cocon</item>
-        <item>com.android.theme.font.fucek</item>
-        <item>com.android.theme.font.oduda</item>
-        <item>com.android.theme.font.lemonmilk</item>
-        <item>com.android.theme.font.aclonicasource</item>
-        <item>com.android.theme.font.fifa2018</item>
-        <item>com.android.theme.font.reemkufi</item>
-        <item>com.android.theme.font.exotwo</item>
-        <item>com.android.theme.font.samsungone</item>
-        <item>com.android.theme.font.nunito</item>
-        <item>com.android.theme.font.quando</item>
-        <item>com.android.theme.font.ubuntu</item>
-        <item>com.android.theme.font.antipastopro</item>
-        <item>com.android.theme.font.surfersource</item>
-        <item>com.android.theme.font.cagliostrosource</item>
-        <item>com.android.theme.font.grandhotel</item>
-        <item>com.android.theme.font.redressed</item>
-        <item>com.android.theme.font.jbmono</item>
-        <item>com.android.theme.font.rbserif</item>
-    </string-array>
+	<string-array name="FontsOverlayEx">
+		<item>None</item>
+		<item>org.protonaosp.theme.font.blenderpro</item>
+		<item>org.protonaosp.theme.font.euclid</item>
+		<item>org.protonaosp.theme.font.harmonysans</item>
+		<item>org.protonaosp.theme.font.googlesans.inter</item>
+		<item>org.protonaosp.theme.font.linottesource</item>
+		<item>com.android.theme.font.evolvesans</item>
+		<item>org.protonaosp.theme.font.manrope</item>
+		<item>org.protonaosp.theme.font.milanpro</item>
+		<item>org.protonaosp.theme.font.noto_sans</item>
+		<item>com.android.theme.font.notoserifsource</item>
+		<item>com.android.theme.font.opsans</item>
+		<item>com.android.theme.font.oneplusslate</item>
+		<item>org.protonaosp.theme.font.poppins</item>
+		<item>org.protonaosp.theme.font.recursive_casual</item>
+		<item>org.protonaosp.theme.font.recursive_linear</item>
+		<item>org.protonaosp.theme.font.roboto</item>
+		<item>com.android.theme.font.rosemarysource</item>
+		<item>org.protonaosp.theme.font.source_sans</item>
+		<item>org.protonaosp.theme.font.source_serif</item>
+		<item>com.android.theme.font.storopia</item>
+		<item>com.android.theme.font.simpleday</item>
+		<item>com.android.theme.font.lgsmartgothicsource</item>
+		<item>com.android.theme.font.nokiapure</item>
+		<item>com.android.theme.font.bariolsource</item>
+		<item>com.android.theme.font.comfortaa</item>
+		<item>com.android.theme.font.coolstorysource</item>
+		<item>com.android.theme.font.comicsans</item>
+		<item>com.android.theme.font.sonysketchsource</item>
+		<item>com.android.theme.font.amarantesource</item>
+		<item>com.android.theme.font.cocon</item>
+		<item>com.android.theme.font.fucek</item>
+		<item>com.android.theme.font.oduda</item>
+		<item>com.android.theme.font.lemonmilk</item>
+		<item>com.android.theme.font.aclonicasource</item>
+		<item>com.android.theme.font.fifa2018</item>
+		<item>com.android.theme.font.reemkufi</item>
+		<item>com.android.theme.font.exotwo</item>
+		<item>com.android.theme.font.samsungone</item>
+		<item>com.android.theme.font.nunito</item>
+		<item>com.android.theme.font.quando</item>
+		<item>com.android.theme.font.ubuntu</item>
+		<item>com.android.theme.font.antipastopro</item>
+		<item>com.android.theme.font.surfersource</item>
+		<item>com.android.theme.font.cagliostrosource</item>
+		<item>com.android.theme.font.grandhotel</item>
+		<item>com.android.theme.font.redressed</item>
+		<item>com.android.theme.font.jbmono</item>
+		<item>com.android.theme.font.rbserif</item>
+	</string-array>
 
-    <string-array name="IconShapesOverlayEx_names">
-        <item>@string/overlay_none_title</item>
-        <item>Cylinder</item>
-        <item>Leaf</item>
-        <item>Heart</item>
-        <item>Hexagon</item>
-        <item>Mallow</item>
-        <item>Pebble</item>
-        <item>Roundedhexagon</item>
-        <item>Roundedrect</item>
-        <item>Square</item>
-        <item>Squircle</item>
-        <item>Taperedrect</item>
-        <item>Teardrop</item>
-        <item>Vessel</item>
-        <item>Cloudy</item>
-        <item>Flower</item>
-        <item>Stretched</item>
-    </string-array>
+	<string-array name="IconShapesOverlayEx_names">
+		<item>@string/overlay_none_title</item>
+		<item>Cylinder</item>
+		<item>Leaf</item>
+		<item>Heart</item>
+		<item>Hexagon</item>
+		<item>Mallow</item>
+		<item>Pebble</item>
+		<item>Roundedhexagon</item>
+		<item>Roundedrect</item>
+		<item>Square</item>
+		<item>Squircle</item>
+		<item>Taperedrect</item>
+		<item>Teardrop</item>
+		<item>Vessel</item>
+		<item>Cloudy</item>
+		<item>Flower</item>
+		<item>Stretched</item>
+	</string-array>
 
-    <string-array name="IconShapesOverlayEx">
-        <item>None</item>
-        <item>com.android.theme.icon.cylinder</item>
-        <item>com.android.theme.icon.leaf</item>
-        <item>com.android.theme.icon.heart</item>
-        <item>com.android.theme.icon.hexagon</item>
-        <item>com.android.theme.icon.mallow</item>
-        <item>com.android.theme.icon.pebble</item>
-        <item>com.android.theme.icon.roundedhexagon</item>
-        <item>com.android.theme.icon.roundedrect</item>
-        <item>com.android.theme.icon.square</item>
-        <item>com.android.theme.icon.squircle</item>
-        <item>com.android.theme.icon.taperedrect</item>
-        <item>com.android.theme.icon.teardrop</item>
-        <item>com.android.theme.icon.vessel</item>
-        <item>com.android.theme.icon.cloudy</item>
-        <item>com.android.theme.icon.flower</item>
-        <item>com.android.theme.icon.stretched</item>
-    </string-array>
+	<string-array name="IconShapesOverlayEx">
+		<item>None</item>
+		<item>com.android.theme.icon.cylinder</item>
+		<item>com.android.theme.icon.leaf</item>
+		<item>com.android.theme.icon.heart</item>
+		<item>com.android.theme.icon.hexagon</item>
+		<item>com.android.theme.icon.mallow</item>
+		<item>com.android.theme.icon.pebble</item>
+		<item>com.android.theme.icon.roundedhexagon</item>
+		<item>com.android.theme.icon.roundedrect</item>
+		<item>com.android.theme.icon.square</item>
+		<item>com.android.theme.icon.squircle</item>
+		<item>com.android.theme.icon.taperedrect</item>
+		<item>com.android.theme.icon.teardrop</item>
+		<item>com.android.theme.icon.vessel</item>
+		<item>com.android.theme.icon.cloudy</item>
+		<item>com.android.theme.icon.flower</item>
+		<item>com.android.theme.icon.stretched</item>
+	</string-array>
 
-    <string-array name="IconPacksOverlayEx_names">
-        <item>@string/overlay_none_title</item>
-        <item>Acherus</item>
-        <item>Circular</item>
-        <item>Filled</item>
-        <item>Kai</item>
-        <item>OxygenOS</item>
-        <item>Rounded</item>
-        <item>Sam</item>
-        <item>Victor</item>
-        <item>Outline</item>
-        <item>Liv</item>
-    </string-array>
+	<string-array name="IconPacksOverlayEx_names">
+		<item>@string/overlay_none_title</item>
+		<item>Acherus</item>
+		<item>Circular</item>
+		<item>Filled</item>
+		<item>Kai</item>
+		<item>OxygenOS</item>
+		<item>Rounded</item>
+		<item>Sam</item>
+		<item>Victor</item>
+		<item>Outline</item>
+		<item>Liv</item>
+	</string-array>
 
-    <string-array name="IconPacksOverlayEx">
-        <item>None</item>
-        <item>AcherusOverlayG</item>
-        <item>CircularOverlayG</item>
-        <item>FilledOverlayG</item>
-        <item>KaiOverlayG</item>
-        <item>OxygenOSOverlayG</item>
-        <item>RoundedOverlayG</item>
-        <item>SamOverlayG</item>
-        <item>VictorOverlayG</item>
-        <item>OutlineOverlayG</item>
-        <item>com.android.theme.icon_pack.liv.android</item>
-    </string-array>
+	<string-array name="IconPacksOverlayEx">
+		<item>None</item>
+		<item>AcherusOverlayG</item>
+		<item>CircularOverlayG</item>
+		<item>FilledOverlayG</item>
+		<item>KaiOverlayG</item>
+		<item>OxygenOSOverlayG</item>
+		<item>RoundedOverlayG</item>
+		<item>SamOverlayG</item>
+		<item>VictorOverlayG</item>
+		<item>OutlineOverlayG</item>
+		<item>com.android.theme.icon_pack.liv.android</item>
+	</string-array>
 
-    <string-array name="AcherusOverlayG">
-        <item>com.android.theme.icon_pack.acherus.android</item>
-        <item>com.android.theme.icon_pack.acherus.systemui</item>
-    </string-array>
+	<string-array name="AcherusOverlayG">
+		<item>com.android.theme.icon_pack.acherus.android</item>
+		<item>com.android.theme.icon_pack.acherus.systemui</item>
+	</string-array>
 
 	<string-array name="SignalIconsOverlayEx_names">
-        <item>@string/overlay_none_title</item>
-        <item>Stroke</item>
-        <item>Sneaky</item>
-        <item>Xperia</item>
-        <item>Zig-Zag</item>
-        <item>Wavy</item>
-        <item>Round</item>
-        <item>Inside</item>
-        <item>Bars</item>
-    </string-array>
+		<item>@string/overlay_none_title</item>
+		<item>Stroke</item>
+		<item>Sneaky</item>
+		<item>Xperia</item>
+		<item>Zig-Zag</item>
+		<item>Wavy</item>
+		<item>Round</item>
+		<item>Inside</item>
+		<item>Bars</item>
+	</string-array>
 
-    <string-array name="SignalIconsOverlayEx">
-        <item>None</item>
-        <item>StrokeOverlayG</item>
-        <item>SneakyOverlayG</item>
-        <item>XperiaOverlayG</item>
-        <item>ZigZagOverlayG</item>
-        <item>WavyOverlayG</item>
-        <item>RoundOverlayG</item>
-        <item>InsideOverlayG</item>
-        <item>BarsOverlayG</item>
-    </string-array>
+	<string-array name="SignalIconsOverlayEx">
+		<item>None</item>
+		<item>StrokeOverlayG</item>
+		<item>SneakyOverlayG</item>
+		<item>XperiaOverlayG</item>
+		<item>ZigZagOverlayG</item>
+		<item>WavyOverlayG</item>
+		<item>RoundOverlayG</item>
+		<item>InsideOverlayG</item>
+		<item>BarsOverlayG</item>
+	</string-array>
 
 	<string-array name="QSTilesThemesOverlayEx_names">
-        <item>@string/overlay_none_title</item>
-        <item>No34D</item>
-        <item>@string/qstile_circleoutline</item>
-        <item>@string/qstile_dual_tone_circle</item>
-        <item>@string/qstile_cookie</item>
-        <item>O34D</item>
-        <item>@string/qstile_ninja</item>
-        <item>@string/qstile_cosmos</item>
-        <item>@string/qstile_dottedcircle</item>
-        <item>@string/qstile_inkdrop</item>
-        <item>@string/qstile_wavey</item>
-        <item>@string/qstile_attemptmountain</item>
-        <item>@string/qstile_squircle_trim</item>
-        <item>@string/qstile_pokesign</item>
-        <item>@string/qstile_neonlike</item>
-        <item>@string/qstile_squaremedo</item>
-        <item>@string/qstile_divided</item>
-        <item>@string/qstile_triangles</item>
-        <item>@string/qstile_circle_trim</item>
-        <item>@string/qstile_circle</item>
-    </string-array>
+		<item>@string/overlay_none_title</item>
+		<item>No34D</item>
+		<item>@string/qstile_circleoutline</item>
+		<item>@string/qstile_dual_tone_circle</item>
+		<item>@string/qstile_cookie</item>
+		<item>O34D</item>
+		<item>@string/qstile_ninja</item>
+		<item>@string/qstile_cosmos</item>
+		<item>@string/qstile_dottedcircle</item>
+		<item>@string/qstile_inkdrop</item>
+		<item>@string/qstile_wavey</item>
+		<item>@string/qstile_attemptmountain</item>
+		<item>@string/qstile_squircle_trim</item>
+		<item>@string/qstile_pokesign</item>
+		<item>@string/qstile_neonlike</item>
+		<item>@string/qstile_squaremedo</item>
+		<item>@string/qstile_divided</item>
+		<item>@string/qstile_triangles</item>
+		<item>@string/qstile_circle_trim</item>
+		<item>@string/qstile_circle</item>
+	</string-array>
 
-    <string-array name="QSTilesThemesOverlayEx">
-        <item>None</item>
-        <item>com.android.systemui.qstile.no34d.overlay</item>
-        <item>com.android.systemui.qstile.circout.overlay</item>
-        <item>com.android.systemui.qstile.dualtone.overlay</item>
-        <item>com.android.systemui.qstile.cookie.overlay</item>
-        <item>com.android.systemui.qstile.o34d.overlay</item>
-        <item>com.android.systemui.qstile.ninja.overlay</item>
-        <item>com.android.systemui.qstile.cosmos.overlay</item>
-        <item>com.android.systemui.qstile.dottedcircle.overlay</item>
-        <item>com.android.systemui.qstile.inkdrop.overlay</item>
-        <item>com.android.systemui.qstile.wavey.overlay</item>
-        <item>com.android.systemui.qstile.attemptmountain.overlay</item>
-        <item>com.android.systemui.qstile.squircle.overlay</item>
-        <item>com.android.systemui.qstile.pokesign.overlay</item>
-        <item>com.android.systemui.qstile.neonlike.overlay</item>
-        <item>com.android.systemui.qstile.squaremedo.overlay</item>
-        <item>com.android.systemui.qstile.divided.overlay</item>
-        <item>com.android.systemui.qstile.triangles.overlay</item>
-        <item>com.android.systemui.qstile.circletrim.overlay</item>
-        <item>com.android.systemui.qstile.circle.overlay</item>
-    </string-array>
+	<string-array name="QSTilesThemesOverlayEx">
+		<item>None</item>
+		<item>com.android.systemui.qstile.no34d.overlay</item>
+		<item>com.android.systemui.qstile.circout.overlay</item>
+		<item>com.android.systemui.qstile.dualtone.overlay</item>
+		<item>com.android.systemui.qstile.cookie.overlay</item>
+		<item>com.android.systemui.qstile.o34d.overlay</item>
+		<item>com.android.systemui.qstile.ninja.overlay</item>
+		<item>com.android.systemui.qstile.cosmos.overlay</item>
+		<item>com.android.systemui.qstile.dottedcircle.overlay</item>
+		<item>com.android.systemui.qstile.inkdrop.overlay</item>
+		<item>com.android.systemui.qstile.wavey.overlay</item>
+		<item>com.android.systemui.qstile.attemptmountain.overlay</item>
+		<item>com.android.systemui.qstile.squircle.overlay</item>
+		<item>com.android.systemui.qstile.pokesign.overlay</item>
+		<item>com.android.systemui.qstile.neonlike.overlay</item>
+		<item>com.android.systemui.qstile.squaremedo.overlay</item>
+		<item>com.android.systemui.qstile.divided.overlay</item>
+		<item>com.android.systemui.qstile.triangles.overlay</item>
+		<item>com.android.systemui.qstile.circletrim.overlay</item>
+		<item>com.android.systemui.qstile.circle.overlay</item>
+	</string-array>
 
-    <string-array name="DTStylesOverlayEx_names">
-        <item>@string/overlay_none_title</item>
-        <item>@string/dt_bakedgreen</item>
-        <item>@string/dt_chocox</item>
-        <item>@string/dt_darkgray</item>
-        <item>@string/dt_materialocean</item>
-        <item>@string/dt_black</item>
-        <item>@string/dt_solarizeddark</item>
-        <item>@string/dt_darkaubergine</item>
-        <item>@string/dt_style</item>
-    </string-array>
+	<string-array name="DTStylesOverlayEx_names">
+		<item>@string/overlay_none_title</item>
+		<item>@string/dt_bakedgreen</item>
+		<item>@string/dt_chocox</item>
+		<item>@string/dt_darkgray</item>
+		<item>@string/dt_materialocean</item>
+		<item>@string/dt_black</item>
+		<item>@string/dt_solarizeddark</item>
+		<item>@string/dt_darkaubergine</item>
+		<item>@string/dt_style</item>
+	</string-array>
 
-    <string-array name="DTStylesOverlayEx">
-        <item>None</item>
-        <item>com.android.dark.bakedgreen</item>
-        <item>com.android.dark.chocox</item>
-        <item>com.android.dark.darkgrey</item>
-        <item>com.android.dark.materialocean</item>
-        <item>com.android.dark.pitchblack</item>
-        <item>com.android.dark.solarizeddark</item>
-        <item>com.android.dark.darkaubergine</item>
-        <item>com.android.dark.style</item>
-    </string-array>
+	<string-array name="DTStylesOverlayEx">
+		<item>None</item>
+		<item>com.android.dark.bakedgreen</item>
+		<item>com.android.dark.chocox</item>
+		<item>com.android.dark.darkgrey</item>
+		<item>com.android.dark.materialocean</item>
+		<item>com.android.dark.pitchblack</item>
+		<item>com.android.dark.solarizeddark</item>
+		<item>com.android.dark.darkaubergine</item>
+		<item>com.android.dark.style</item>
+	</string-array>
 
 	<string-array name="notif_default_expansion_entries">
 		<item>@string/word_default</item>

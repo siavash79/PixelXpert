@@ -1,3 +1,7 @@
+**canary-332**  
+- Fixed compatibility issues with A14 Feb2024 - hopefully  
+- Kill foreground app gesture now goes to home screen  
+  
 **canary-331**  
 - A14ap21: SystemUI crashes  
 - A14ap21: Fixed lockscreen mods  

@@ -942,6 +942,7 @@ public class StatusbarMods extends XposedModPack {
 					}
 				});
 
+		//region mobile roaming
 		hookAllMethods(ServiceState.class, "getRoaming", new XC_MethodHook() { //A14QPR1 and prior
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -957,6 +958,25 @@ public class StatusbarMods extends XposedModPack {
 					param.setResult(false);
 			}
 		});
+
+		try { //A14QPR3
+			Class<?> MobileIconInteractorImplClass = findClass("com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl", lpparam.classLoader);
+
+			//we must use the classes defined in the apk. using our own will fail
+			Class<?> StateFlowImplClass = findClass("kotlinx.coroutines.flow.StateFlowImpl", lpparam.classLoader);
+			Class<?> ReadonlyStateFlowClass = findClass("kotlinx.coroutines.flow.ReadonlyStateFlow", lpparam.classLoader);
+
+			hookAllConstructors(MobileIconInteractorImplClass, new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if(HideRoamingState) {
+						Object notRoamingFlow = StateFlowImplClass.getConstructor(Object.class).newInstance(false);
+						setObjectField(param.thisObject, "isRoaming", ReadonlyStateFlowClass.getConstructors()[0].newInstance(notRoamingFlow));
+					}
+				}
+			});
+		} catch (Throwable ignored) {}
+		//endregion
 	}
 
 	private void updateStatusbarHeight() {
@@ -1039,7 +1059,7 @@ public class StatusbarMods extends XposedModPack {
 			networkTrafficSB.getLayoutParams().height = statusbarHeight / ((networkTrafficPosition == POSITION_LEFT && notificationAreaMultiRow) ?  2 : 1);
 		}
 	}
-	//end region
+	//endregion
 
 	//region battery bar related
 	private void refreshBatteryBar(BatteryBarView instance) {

@@ -1,3 +1,6 @@
+**canary-333**  
+- A14ap21: Fixed hide roaming indicator  
+  
 **canary-332**  
 - Fixed compatibility issues with A14 Feb2024 - hopefully  
 - Kill foreground app gesture now goes to home screen  

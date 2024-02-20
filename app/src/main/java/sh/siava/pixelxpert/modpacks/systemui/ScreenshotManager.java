@@ -10,7 +10,9 @@ import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findFirstMethodByName;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.media.MediaPlayer;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -27,6 +29,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
+import sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools;
 
 @SuppressWarnings("RedundantThrows")
 public class ScreenshotManager extends XposedModPack {
@@ -101,6 +104,19 @@ public class ScreenshotManager extends XposedModPack {
 					param.setResult(null);
 			}
 		});
+
+		//A14 QPR3
+		Class<?> ScreenshotSoundProviderImplClass = findClassIfExists("com.android.systemui.screenshot.ScreenshotSoundProviderImpl", lpparam.classLoader);
+		if(ScreenshotSoundProviderImplClass != null) {
+			ReflectionTools.hookAllMethods(ScreenshotSoundProviderImplClass, "getScreenshotSound", new XC_MethodHook() {
+				@SuppressLint("NewApi")
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					if(disableScreenshotSound)
+						param.setResult(new MediaPlayer(mContext));
+				}
+			});
+		}
 	}
 
 	@Override

@@ -4,7 +4,6 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.hookMethod;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
@@ -13,7 +12,6 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
-import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findFirstMethodByName;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.hookAllMethodsMatchPattern;
 
 import android.annotation.SuppressLint;
@@ -32,8 +30,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
-
-import java.lang.reflect.Method;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -280,57 +276,52 @@ public class KeyguardMods extends XposedModPack {
 			}
 		});
 
-		Method updateMethod = findFirstMethodByName(KeyguardBottomAreaViewBinderClass, "updateButton");
+		hookAllMethodsMatchPattern(KeyguardBottomAreaViewBinderClass, ".*updateButton", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				ImageView v = (ImageView) param.args[0];
 
-		if (updateMethod != null) {
-			hookMethod(updateMethod, new XC_MethodHook() {
-				@Override
-				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-					ImageView v = (ImageView) param.args[0];
+				try {
+					if(Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { //feature deprecated for Android 14
+						String shortcutID = mContext.getResources().getResourceName(v.getId());
 
-					try {
-						if(Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { //feature deprecated for Android 14
-							String shortcutID = mContext.getResources().getResourceName(v.getId());
-
-							if (shortcutID.contains("start")) {
-								convertShortcut(v, leftShortcutClick);
-								if (isShortcutSet(v)) {
-									setLongPress(v, leftShortcutLongClick);
-								}
-							} else if (shortcutID.contains("end")) {
-								convertShortcut(v, rightShortcutClick);
-								if (isShortcutSet(v)) {
-									setLongPress(v, rightShortcutLongClick);
-								}
+						if (shortcutID.contains("start")) {
+							convertShortcut(v, leftShortcutClick);
+							if (isShortcutSet(v)) {
+								setLongPress(v, leftShortcutLongClick);
+							}
+						} else if (shortcutID.contains("end")) {
+							convertShortcut(v, rightShortcutClick);
+							if (isShortcutSet(v)) {
+								setLongPress(v, rightShortcutLongClick);
 							}
 						}
-
-						if (transparentBGcolor) {
-							@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = SettingsLibUtilsProvider.getColorAttrDefaultColor(
-									mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
-
-							try {
-								v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
-								v.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
-							} catch (Throwable ignored) {}
-						} else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE){
-							@SuppressLint("DiscouragedApi")
-							int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
-									mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
-
-							@SuppressLint("DiscouragedApi")
-							ColorStateList colorSurface = SettingsLibUtilsProvider.getColorAttr(
-									mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
-
-							v.getDrawable().setTint(mTextColorPrimary);
-
-							v.setBackgroundTintList(colorSurface);
-						}
-					} catch (Throwable ignored) {
 					}
-				}
-			});
-		}
+
+					if (transparentBGcolor) {
+						@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = SettingsLibUtilsProvider.getColorAttrDefaultColor(
+								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
+
+						try {
+							v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
+							v.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+						} catch (Throwable ignored) {}
+					} else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE){
+						@SuppressLint("DiscouragedApi")
+						int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
+								mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
+
+						@SuppressLint("DiscouragedApi")
+						ColorStateList colorSurface = SettingsLibUtilsProvider.getColorAttr(
+								mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
+
+						v.getDrawable().setTint(mTextColorPrimary);
+
+						v.setBackgroundTintList(colorSurface);
+					}
+				} catch (Throwable ignored) {}
+			}
+		});
 
 		//endregion
 

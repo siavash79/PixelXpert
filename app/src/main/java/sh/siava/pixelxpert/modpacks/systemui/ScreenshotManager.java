@@ -2,19 +2,17 @@ package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedBridge.hookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
-import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findFirstMethodByName;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.hookAllMethodsMatchPattern;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.MediaPlayer;
 
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -63,17 +61,13 @@ public class ScreenshotManager extends XposedModPack {
 
 		Class<?> ScreenshotPolicyImplClass = findClass("com.android.systemui.screenshot.ScreenshotPolicyImpl", lpparam.classLoader);
 
-		Method isManagedProfileMethod = findFirstMethodByName(ScreenshotPolicyImplClass, "isManagedProfile");
-		if(isManagedProfileMethod != null)
-		{
-			hookMethod(isManagedProfileMethod, new XC_MethodHook() {
-				@Override
-				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if(ScreenshotChordInsecure)
-						param.setResult(false);
-				}
-			});
-		}
+		hookAllMethodsMatchPattern(ScreenshotPolicyImplClass, ".*isManagedProfile.*", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(ScreenshotChordInsecure)
+					param.setResult(false);
+			}
+		});
 
 		hookAllConstructors(CaptureArgsClass, new XC_MethodHook() {
 			@Override

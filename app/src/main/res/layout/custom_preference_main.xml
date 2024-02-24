@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_marginHorizontal="@dimen/ui_container_margin_side"
 	android:layout_marginVertical="6dp"
 	android:background="@drawable/container"
 	android:baselineAligned="false"
 	android:gravity="center_vertical"
 	android:orientation="horizontal"
-	android:paddingStart="23dp"
 	android:paddingVertical="18dp"
+	android:paddingStart="23dp"
 	android:paddingEnd="16dp"
 	tools:ignore="RtlSymmetry">
 
@@ -25,8 +25,8 @@
 		android:background="@drawable/icon_background"
 		android:contentDescription="@android:string/untitled"
 		android:scaleType="centerInside"
-		app:tint="?attr/colorOnPrimaryContainer"
-		android:visibility="gone" />
+		android:visibility="gone"
+		app:tint="?attr/colorOnPrimaryContainer" />
 
 	<RelativeLayout
 		android:id="@+id/content"
@@ -51,12 +51,12 @@
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@android:id/summary"
-			android:alpha="0.8"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_below="@android:id/title"
 			android:layout_alignStart="@android:id/title"
 			android:layout_marginTop="2dp"
+			android:alpha="0.8"
 			android:fontFamily="sans-serif"
 			android:lineSpacingExtra="3sp"
 			android:maxLines="4"
@@ -73,9 +73,9 @@
 		android:layout_alignParentEnd="true"
 		android:layout_centerVertical="true"
 		android:layout_marginStart="16dp"
-		app:tint="?attr/colorOnSurface"
 		android:contentDescription="@android:string/untitled"
 		android:scaleType="centerInside"
-		android:src="@drawable/ic_arrow_right" />
+		android:src="@drawable/ic_arrow_right"
+		app:tint="?attr/colorOnSurface" />
 
 </RelativeLayout>

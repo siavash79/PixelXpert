@@ -12,7 +12,7 @@
 	<string name="general_on">På</string>
 	<string name="general_off">Av</string>
 	<string name="sysui_restart_needed">Kräver omstart av SystemUI för att kunna tillämpas</string>
-	<string name="restart_needed">Kräver en omstart för att ansöka</string>
+	<string name="restart_needed">Kräver en omstart för att tillämpa</string>
 	<string name="more_area">mer område</string>
 	<string name="less_area">mindre område</string>
 	<string name="current_version">Nuvarande version: %s</string>

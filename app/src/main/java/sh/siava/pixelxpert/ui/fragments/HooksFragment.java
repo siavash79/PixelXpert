@@ -51,6 +51,7 @@ import sh.siava.pixelxpert.databinding.FragmentHooksBinding;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.service.RootProvider;
 import sh.siava.pixelxpert.utils.AppUtils;
+import sh.siava.pixelxpert.utils.TimeSyncScheduler;
 
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class HooksFragment extends Fragment {

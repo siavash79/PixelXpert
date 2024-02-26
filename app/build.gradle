@@ -122,4 +122,7 @@ dependencies {
 	// Class initializer
 	// https://mvnrepository.com/artifact/org.objenesis/objenesis
 	implementation 'org.objenesis:objenesis:3.3'
+
+	//NTP Client
+	implementation "com.lyft.kronos:kronos-android:0.0.1-alpha11"
 }

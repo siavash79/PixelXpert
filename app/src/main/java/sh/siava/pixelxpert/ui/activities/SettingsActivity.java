@@ -60,6 +60,7 @@ import sh.siava.pixelxpert.utils.ControlledPreferenceFragmentCompat;
 import sh.siava.pixelxpert.utils.ExtendedSharedPreferences;
 import sh.siava.pixelxpert.utils.PrefManager;
 import sh.siava.pixelxpert.utils.PreferenceHelper;
+import sh.siava.pixelxpert.utils.TimeSyncScheduler;
 import sh.siava.pixelxpert.utils.UpdateScheduler;
 
 public class SettingsActivity extends BaseActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback, SearchPreferenceResultListener {
@@ -995,6 +996,11 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 				case "AutoUpdate":
 					UpdateScheduler.scheduleUpdates(getContext());
+					break;
+
+				case "SyncNTPTime":
+				case "TimeSyncInterval":
+					TimeSyncScheduler.scheduleTimeSync(getContext());
 					break;
 			}
 		}

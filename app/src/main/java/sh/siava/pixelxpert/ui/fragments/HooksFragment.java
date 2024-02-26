@@ -52,17 +52,16 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.service.RootProvider;
 import sh.siava.pixelxpert.utils.AppUtils;
 
-@SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class HooksFragment extends Fragment {
 
 	private FragmentHooksBinding binding;
+	/** @noinspection unused*/
 	private final String TAG = getClass().getSimpleName();
 	IntentFilter intentFilterHookedPackages = new IntentFilter();
 	private final List<String> hookedPackageList = new ArrayList<>();
 	private List<String> monitorPackageList;
-	private final String SQLite3 = "/data/adb/modules/PixelXpert/sqlite3";
-	private final String LSPosedDB = "/data/adb/lspd/config/modules_config.db";
 	private int dotCount = 0;
+	/** @noinspection FieldCanBeLocal*/
 	private ServiceConnection mCoreRootServiceConnection;
 	private IRootProviderService mRootServiceIPC = null;
 	private boolean rebootPending = false;

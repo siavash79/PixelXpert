@@ -1,3 +1,7 @@
+**canary-334**  
+- Modified Volte/VoWifi icons and fixed padding  
+- A14ap21: Improved screenshot sound mute  
+  
 **canary-333**  
 - A14ap21: Fixed hide roaming indicator  
   

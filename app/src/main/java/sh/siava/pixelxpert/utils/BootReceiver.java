@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import androidx.work.Configuration;
-import androidx.work.WorkManager;
-
 import sh.siava.pixelxpert.BuildConfig;
 
 public class BootReceiver extends BroadcastReceiver {

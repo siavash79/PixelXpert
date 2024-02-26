@@ -210,6 +210,11 @@ public class PreferenceHelper {
 			case "networkTrafficPosition":
 				return instance.mPreferences.getBoolean("networkOnSBEnabled", false);
 
+			case "SyncNTPTimeNow":
+			case "TimeSyncInterval":
+			case "NTPServers":
+				return instance.mPreferences.getBoolean("SyncNTPTime", false);
+
 			case "systemIconSortPlan":
 				return instance.mPreferences.getBoolean("systemIconsMultiRow", false);
 
@@ -357,6 +362,11 @@ public class PreferenceHelper {
 				int headsupDecayMillis = instance.mPreferences.getSliderInt("HeadupAutoDismissNotificationDecay", 5000);
 
 				return headsupDecayMillis + " " + fragmentCompat.getString(R.string.milliseconds);
+
+			case "TimeSyncInterval":
+				int timeSyncIntervalMillis = instance.mPreferences.getSliderInt("TimeSyncInterval", 24);
+
+				return timeSyncIntervalMillis + " " + fragmentCompat.getString(R.string.hours);
 
 
 			case "hotSpotTimeoutSecs":

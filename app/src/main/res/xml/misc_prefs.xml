@@ -300,4 +300,43 @@
 			app:iconSpaceReserved="false" />
 
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/system_time_title"
+		app:iconSpaceReserved="false"
+		search:ignore="true">
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="SyncNTPTime"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/sync_ntp_time_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+			android:key="TimeSyncInterval"
+			android:title="@string/ntp_time_interval_title"
+			app:defaultValue="24"
+			app:iconSpaceReserved="false"
+			app:maxVal="24"
+			app:minVal="1"
+			app:tickInterval="1"
+			app:valueCount="1" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialEditTextPreference
+			android:key="NTPServers"
+			android:selectAllOnFocus="true"
+			android:singleLine="true"
+			android:summary="@string/ntp_servers_summary"
+			android:title="@string/ntp_servers_title"
+			app:defaultValue="0.pool.ntp.org;1.pool.ntp.org"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreference
+			android:key="SyncNTPTimeNow"
+			android:title="@string/sync_ntp_time_now_title"
+			app:iconSpaceReserved="false" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 </PreferenceScreen>

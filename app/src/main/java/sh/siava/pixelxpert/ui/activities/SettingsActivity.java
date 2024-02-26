@@ -58,6 +58,7 @@ import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreferenceResul
 import sh.siava.pixelxpert.utils.AppUtils;
 import sh.siava.pixelxpert.utils.ControlledPreferenceFragmentCompat;
 import sh.siava.pixelxpert.utils.ExtendedSharedPreferences;
+import sh.siava.pixelxpert.utils.NTPTimeSyncer;
 import sh.siava.pixelxpert.utils.PrefManager;
 import sh.siava.pixelxpert.utils.PreferenceHelper;
 import sh.siava.pixelxpert.utils.TimeSyncScheduler;
@@ -578,6 +579,17 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		@Override
 		public int getLayoutResource() {
 			return R.xml.misc_prefs;
+		}
+
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+			super.onCreatePreferences(savedInstanceState, rootKey);
+
+			findPreference("SyncNTPTimeNow")
+					.setOnPreferenceClickListener(preference -> {
+						new NTPTimeSyncer(getContext()).syncTimeNow();
+						return true;
+					});
 		}
 	}
 

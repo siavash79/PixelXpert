@@ -1,3 +1,6 @@
+**canary-335**  
+- Added option to enable periodical NTP time sync  
+  
 **canary-334**  
 - Modified Volte/VoWifi icons and fixed padding  
 - A14ap21: Improved screenshot sound mute  

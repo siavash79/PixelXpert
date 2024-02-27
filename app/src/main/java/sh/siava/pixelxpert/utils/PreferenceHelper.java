@@ -364,10 +364,7 @@ public class PreferenceHelper {
 				return headsupDecayMillis + " " + fragmentCompat.getString(R.string.milliseconds);
 
 			case "TimeSyncInterval":
-				int timeSyncIntervalMillis = instance.mPreferences.getSliderInt("TimeSyncInterval", 24);
-
-				return timeSyncIntervalMillis + " " + fragmentCompat.getString(R.string.hours);
-
+				return instance.mPreferences.getSliderInt("TimeSyncInterval", 24) + " " + fragmentCompat.getString(R.string.hours);
 
 			case "hotSpotTimeoutSecs":
 				long timeout = (long) (instance.mPreferences.getSliderFloat( "hotSpotTimeoutSecs", 0) * 1L);

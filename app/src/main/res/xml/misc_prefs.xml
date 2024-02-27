@@ -319,9 +319,9 @@
 			android:title="@string/ntp_time_interval_title"
 			app:defaultValue="24"
 			app:iconSpaceReserved="false"
-			app:maxVal="24"
-			app:minVal="1"
-			app:tickInterval="1"
+			app:maxVal="120"
+			app:minVal="12"
+			app:tickInterval="12"
 			app:valueCount="1" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialEditTextPreference

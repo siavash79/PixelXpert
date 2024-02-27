@@ -338,6 +338,8 @@
 	<string name="ntp_servers_title">NTP servers</string>
 	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
 	<string name="sync_ntp_time_now_title">Sync now</string>
+	<string name="sync_ntp_successful">Time synced successfully</string>
+	<string name="sync_ntp_failed">NTP server connection error!</string>
 
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Volume panel</string>

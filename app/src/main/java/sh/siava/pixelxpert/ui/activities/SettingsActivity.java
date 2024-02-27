@@ -587,9 +587,20 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 			findPreference("SyncNTPTimeNow")
 					.setOnPreferenceClickListener(preference -> {
-						new NTPTimeSyncer(getContext()).syncTimeNow();
+						syncNTP();
+
 						return true;
 					});
+		}
+
+		private void syncNTP() {
+			boolean successful = new NTPTimeSyncer(getContext()).syncTimeNow();
+
+			int toastResource = successful
+					? R.string.sync_ntp_successful
+					: R.string.sync_ntp_failed;
+
+			Toast.makeText(getContext(), toastResource, Toast.LENGTH_SHORT).show();
 		}
 	}
 

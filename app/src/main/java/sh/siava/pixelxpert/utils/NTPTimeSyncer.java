@@ -92,9 +92,7 @@ public class NTPTimeSyncer {
 		}
 
 		if(servers.isEmpty())
-		{
-			servers.add("0.pool.ntp.org");
-		}
+			servers.add("time.nist.gov");
 
 		return servers;
 	}

@@ -8,7 +8,7 @@
 	android:foreground="?android:selectableItemBackgroundBorderless"
 	android:minHeight="?android:attr/listPreferredItemHeight"
 	android:paddingHorizontal="32dp"
-	android:paddingVertical="22dp">
+	android:paddingVertical="12dp">
 
 	<ImageView
 		android:id="@android:id/icon"
@@ -42,7 +42,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_below="@android:id/title"
-			android:alpha="0.8"
+			android:alpha="0.7"
 			android:textColor="?attr/colorOnSurface" />
 
 		<com.google.android.material.textview.MaterialTextView

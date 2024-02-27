@@ -56,7 +56,7 @@
 			android:layout_below="@android:id/title"
 			android:layout_alignStart="@android:id/title"
 			android:layout_marginTop="2dp"
-			android:alpha="0.8"
+			android:alpha="0.7"
 			android:fontFamily="sans-serif"
 			android:lineSpacingExtra="3sp"
 			android:maxLines="4"

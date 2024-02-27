@@ -5,8 +5,8 @@
 		<item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
 		<!-- App theme -->
-		<item name="alertDialogTheme">@style/AppTheme.Dialog</item>
-		<item name="materialAlertDialogTheme">@style/AppTheme.Dialog</item>
+		<item name="alertDialogTheme">@style/MaterialComponents.MaterialAlertDialog</item>
+		<item name="materialAlertDialogTheme">@style/MaterialComponents.MaterialAlertDialog</item>
 		<item name="textAppearanceListItem">@style/TextAppearance.App.ListItem.Title</item>
 		<item name="android:windowLightStatusBar">?attr/isLightTheme</item>
 		<item name="android:statusBarColor">@android:color/transparent</item>

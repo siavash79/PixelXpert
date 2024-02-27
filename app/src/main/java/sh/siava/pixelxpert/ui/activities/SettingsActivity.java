@@ -569,7 +569,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	
 	public static class MiscFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -591,6 +590,20 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 						return true;
 					});
+		}
+
+		@Override
+		public void updateScreen(String key) {
+			super.updateScreen(key);
+
+			if (key == null) return;
+
+			switch (key) {
+				case "SyncNTPTime":
+				case "TimeSyncInterval":
+					TimeSyncScheduler.scheduleTimeSync(getContext());
+					break;
+			}
 		}
 
 		private void syncNTP() {
@@ -1019,11 +1032,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 				case "AutoUpdate":
 					UpdateScheduler.scheduleUpdates(getContext());
-					break;
-
-				case "SyncNTPTime":
-				case "TimeSyncInterval":
-					TimeSyncScheduler.scheduleTimeSync(getContext());
 					break;
 			}
 		}

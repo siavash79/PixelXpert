@@ -3,7 +3,6 @@ package sh.siava.pixelxpert.utils;
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.work.BackoffPolicy;
@@ -31,10 +30,10 @@ public class TimeSyncScheduler {
 
 		WorkManager workManager = WorkManager.getInstance(context);
 
-		SharedPreferences prefs = getDefaultSharedPreferences(context.createDeviceProtectedStorageContext());
+		ExtendedSharedPreferences prefs = ExtendedSharedPreferences.from(getDefaultSharedPreferences(context.createDeviceProtectedStorageContext()));
 
 		boolean SyncNTPTime = prefs.getBoolean("SyncNTPTime", false);
-		int TimeSyncInterval = prefs.getInt("TimeSyncInterval", 24);
+		int TimeSyncInterval = prefs.getSliderInt("TimeSyncInterval", 24);
 
 		if(SyncNTPTime)
 		{

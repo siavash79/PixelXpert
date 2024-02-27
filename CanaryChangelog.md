@@ -1,3 +1,6 @@
+**canary-336**  
+- Fixed app FC when toggling NTP  
+  
 **canary-335**  
 - Added option to enable periodical NTP time sync  
   

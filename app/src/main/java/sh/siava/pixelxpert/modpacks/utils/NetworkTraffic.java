@@ -394,16 +394,16 @@ public class NetworkTraffic extends FrameLayout {
 		}
 	}
 
-	public static class trafficStyle extends CharacterStyle {
+	public static class TrafficStyle extends CharacterStyle {
 		private final int textColor;
 
-		public trafficStyle(@ColorInt int textColor) {
+		public TrafficStyle(@ColorInt int textColor) {
 			this.textColor = textColor;
 		}
 
 		@Override
 		public void updateDrawState(TextPaint textPaint) {
-			textPaint.setShadowLayer(textPaint.getTextSize() / 17, 0, 0, Color.BLACK);
+			textPaint.setShadowLayer(textPaint.getTextSize() / 10, 0, 0, Color.BLACK);
 			textPaint.setColor(textColor);
 		}
 	}

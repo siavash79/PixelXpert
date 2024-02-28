@@ -44,6 +44,7 @@ public class PreferenceHelper {
 		if (instance == null) return true;
 
 		switch (key) {
+			case "nav_keyboard_height_cat":
 			case "overlay_dependent":
 			case "HideNavbarOverlay":
 			case "CustomThemedIconsOverlay":
@@ -209,6 +210,11 @@ public class PreferenceHelper {
 			case "networkTrafficPosition":
 				return instance.mPreferences.getBoolean("networkOnSBEnabled", false);
 
+			case "SyncNTPTimeNow":
+			case "TimeSyncInterval":
+			case "NTPServers":
+				return instance.mPreferences.getBoolean("SyncNTPTime", false);
+
 			case "systemIconSortPlan":
 				return instance.mPreferences.getBoolean("systemIconsMultiRow", false);
 
@@ -276,7 +282,6 @@ public class PreferenceHelper {
 				return !instance.mPreferences.getString("rightSwipeUpAction", "-1").equals("-1");
 
 			case "nav_pill_cat":
-			case "nav_keyboard_height_cat":
 				return !instance.mPreferences.getBoolean("HideNavbarOverlay", false);
 
 			case "UpdateWifiOnly":
@@ -358,6 +363,8 @@ public class PreferenceHelper {
 
 				return headsupDecayMillis + " " + fragmentCompat.getString(R.string.milliseconds);
 
+			case "TimeSyncInterval":
+				return instance.mPreferences.getSliderInt("TimeSyncInterval", 24) + " " + fragmentCompat.getString(R.string.hours);
 
 			case "hotSpotTimeoutSecs":
 				long timeout = (long) (instance.mPreferences.getSliderFloat( "hotSpotTimeoutSecs", 0) * 1L);

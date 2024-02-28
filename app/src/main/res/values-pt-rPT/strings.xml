@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Cor ao carregar</string>
 	<string name="BB_batteryFastChargingColor">Cor ao carregar rápido</string>
 	<string name="BB_transit_colors">Cores entre o intervalo</string>
+	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Hoje</string>
 	<string name="nt_stat_mode_week">Semana atual</string>
 	<string name="nt_stat_mode_month">Mês atual</string>
@@ -303,7 +304,7 @@
 	<string name="settings_cloned_apps_active">Desbloqueado para todas as aplicações via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Desfrute!</string>
 	<!-- SystemUI hook -->
 	<string name="battery_info_button_title">Informação da bateria…</string>
-	<string name="power_indication_error">Error fetching charging data</string>
+	<string name="power_indication_error">Erro ao carregar dados</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrar ao atender chamada</string>
 	<string name="vibrate_on_call_drop_title">Vibrar ao terminar chamada</string>

@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">충전 표시 색상</string>
 	<string name="BB_batteryFastChargingColor">고속 충전 표시 색상</string>
 	<string name="BB_transit_colors">단계 간 색상 부드럽게 전환</string>
+	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">오늘</string>
 	<string name="nt_stat_mode_week">이번 주</string>
 	<string name="nt_stat_mode_month">이번 달</string>

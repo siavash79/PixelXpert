@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Màu đang sạc</string>
 	<string name="BB_batteryFastChargingColor">Màu đang sạc nhanh</string>
 	<string name="BB_transit_colors">Màu bóng đổ trong khoảng này</string>
+	<string name="colored_battery_percentage_title">Thêm màu vào phần trăm pin khi đang sạc</string>
 	<string name="nt_stat_mode_today">Hôm nay</string>
 	<string name="nt_stat_mode_week">Tuần này</string>
 	<string name="nt_stat_mode_month">Tháng này</string>

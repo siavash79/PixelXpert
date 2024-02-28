@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Боја пуњења</string>
 	<string name="BB_batteryFastChargingColor">Боја за брзо пуњење</string>
 	<string name="BB_transit_colors">Нијансе боја између овог опсега</string>
+	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Данас</string>
 	<string name="nt_stat_mode_week">Тренутна седмица</string>
 	<string name="nt_stat_mode_month">Текући месец</string>

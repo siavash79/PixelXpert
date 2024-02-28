@@ -93,8 +93,6 @@ public class CustomNavGestures extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
-
 		Class<?> OtherActivityInputConsumerClass = findClass("com.android.quickstep.inputconsumers.OtherActivityInputConsumer", lpparam.classLoader); //When apps are open
 		Class<?> OverviewInputConsumerClass = findClass("com.android.quickstep.inputconsumers.OverviewInputConsumer", lpparam.classLoader); //When on Home screen and Recents
 		Class<?> SystemUiProxyClass = findClass("com.android.quickstep.SystemUiProxy", lpparam.classLoader);
@@ -230,6 +228,8 @@ public class CustomNavGestures extends XposedModPack {
 				1,
 				callMethod(Process.myUserHandle(), "getIdentifier"));
 
+		if(recentTaskList.size() == 0) return;
+
 		if(mTasksFieldName == null)
 		{
 			for(Field f : recentTaskList.get(0).getClass().getDeclaredFields())
@@ -302,12 +302,18 @@ public class CustomNavGestures extends XposedModPack {
 	private void killForeground() {
 		if(currentFocusedTask == null) return;
 
-		Toast.makeText(mContext, "App Killed", Toast.LENGTH_SHORT).show();
+		try
+		{
+			Toast.makeText(mContext, "App Killed", Toast.LENGTH_SHORT).show();
 
-		callMethod(mContext.getSystemService(Context.ACTIVITY_SERVICE),
-				"forceStopPackageAsUser",
-				((ComponentName) getObjectField(currentFocusedTask, "realActivity")).getPackageName(),
-				getObjectField(currentFocusedTask, "userId"));
+			callMethod(mContext.getSystemService(Context.ACTIVITY_SERVICE),
+					"forceStopPackageAsUser",
+					((ComponentName) getObjectField(currentFocusedTask, "realActivity")).getPackageName(),
+					getObjectField(currentFocusedTask, "userId"));
+
+			goHome();
+		}
+		catch (Throwable ignored) {}
 	}
 
 	private void goBack() {
@@ -325,6 +331,12 @@ public class CustomNavGestures extends XposedModPack {
 	private void takeScreenshot() {
 		Intent broadcast = new Intent();
 		broadcast.setAction(Constants.ACTION_SCREENSHOT);
+		mContext.sendBroadcast(broadcast);
+	}
+
+	private void goHome() {
+		Intent broadcast = new Intent();
+		broadcast.setAction(Constants.ACTION_HOME);
 		mContext.sendBroadcast(broadcast);
 	}
 }

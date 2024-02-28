@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Color de carga</string>
 	<string name="BB_batteryFastChargingColor">Color de carga rápida</string>
 	<string name="BB_transit_colors">Sombrear colores en transito de cambio</string>
+	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Hoy</string>
 	<string name="nt_stat_mode_week">Semana actual</string>
 	<string name="nt_stat_mode_month">Mes actual</string>

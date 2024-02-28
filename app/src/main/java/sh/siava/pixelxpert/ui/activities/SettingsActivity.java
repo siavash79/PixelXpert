@@ -58,8 +58,10 @@ import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreferenceResul
 import sh.siava.pixelxpert.utils.AppUtils;
 import sh.siava.pixelxpert.utils.ControlledPreferenceFragmentCompat;
 import sh.siava.pixelxpert.utils.ExtendedSharedPreferences;
+import sh.siava.pixelxpert.utils.NTPTimeSyncer;
 import sh.siava.pixelxpert.utils.PrefManager;
 import sh.siava.pixelxpert.utils.PreferenceHelper;
+import sh.siava.pixelxpert.utils.TimeSyncScheduler;
 import sh.siava.pixelxpert.utils.UpdateScheduler;
 
 public class SettingsActivity extends BaseActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback, SearchPreferenceResultListener {
@@ -567,7 +569,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	
 	public static class MiscFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -577,6 +578,42 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		@Override
 		public int getLayoutResource() {
 			return R.xml.misc_prefs;
+		}
+
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+			super.onCreatePreferences(savedInstanceState, rootKey);
+
+			findPreference("SyncNTPTimeNow")
+					.setOnPreferenceClickListener(preference -> {
+						syncNTP();
+
+						return true;
+					});
+		}
+
+		@Override
+		public void updateScreen(String key) {
+			super.updateScreen(key);
+
+			if (key == null) return;
+
+			switch (key) {
+				case "SyncNTPTime":
+				case "TimeSyncInterval":
+					TimeSyncScheduler.scheduleTimeSync(getContext());
+					break;
+			}
+		}
+
+		private void syncNTP() {
+			boolean successful = new NTPTimeSyncer(getContext()).syncTimeNow();
+
+			int toastResource = successful
+					? R.string.sync_ntp_successful
+					: R.string.sync_ntp_failed;
+
+			Toast.makeText(getContext(), toastResource, Toast.LENGTH_SHORT).show();
 		}
 	}
 

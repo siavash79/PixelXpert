@@ -1,6 +1,5 @@
 package sh.siava.pixelxpert.modpacks.settings;
 
-import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -24,8 +23,6 @@ import sh.siava.pixelxpert.modpacks.XposedModPack;
 public class PXSettingsLauncher extends XposedModPack {
 	private static final String listenPackage = Constants.SETTINGS_PACKAGE;
 
-	private Object TopLevelSettings;
-
 	public PXSettingsLauncher(Context context) {
 		super(context);
 	}
@@ -41,9 +38,9 @@ public class PXSettingsLauncher extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		Class<?> SettingsPreferenceFragmentClass = findClass("com.android.settings.SettingsPreferenceFragment", lpparam.classLoader);
 		Class<?> HomepagePreferenceClass = findClass("com.android.settings.widget.HomepagePreference", lpparam.classLoader);
 		Class<?> TopLevelSettingsClass = findClass("com.android.settings.homepage.TopLevelSettings", lpparam.classLoader);
+
 		hookAllMethods(TopLevelSettingsClass, "onPreferenceTreeClick", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -57,18 +54,9 @@ public class PXSettingsLauncher extends XposedModPack {
 			}
 		});
 
-		hookAllConstructors(TopLevelSettingsClass, new XC_MethodHook() {
+		hookAllMethods(TopLevelSettingsClass, "onCreateAdapter", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				TopLevelSettings = param.thisObject;
-			}
-		});
-
-		hookAllMethods(SettingsPreferenceFragmentClass, "setPreferenceScreen", new XC_MethodHook() {
-			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(param.thisObject != TopLevelSettings) return;
-
 				Object PXPreference = HomepagePreferenceClass.getConstructor(Context.class).newInstance(mContext);
 
 				callMethod(PXPreference, "setIcon",

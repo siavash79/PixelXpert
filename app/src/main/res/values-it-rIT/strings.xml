@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Colore ricarica</string>
 	<string name="BB_batteryFastChargingColor">Colore ricarica rapida</string>
 	<string name="BB_transit_colors">Sfuma i colori tra questo range</string>
+	<string name="colored_battery_percentage_title">Percentuale della batteria colorata durante la ricarica</string>
 	<string name="nt_stat_mode_today">Oggi</string>
 	<string name="nt_stat_mode_week">Settimana corrente</string>
 	<string name="nt_stat_mode_month">Corrente mese</string>

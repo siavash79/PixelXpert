@@ -12,7 +12,7 @@
 	<string name="general_on">På</string>
 	<string name="general_off">Av</string>
 	<string name="sysui_restart_needed">Kräver omstart av SystemUI för att kunna tillämpas</string>
-	<string name="restart_needed">Kräver en omstart för att ansöka</string>
+	<string name="restart_needed">Kräver en omstart för att tillämpa</string>
 	<string name="more_area">mer område</string>
 	<string name="less_area">mindre område</string>
 	<string name="current_version">Nuvarande version: %s</string>
@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Laddningsfärg</string>
 	<string name="BB_batteryFastChargingColor">Snabbladdningsfärg</string>
 	<string name="BB_transit_colors">Nyansfärger mellan detta intervall</string>
+	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">I dag</string>
 	<string name="nt_stat_mode_week">Denna vecka</string>
 	<string name="nt_stat_mode_month">Denna månad</string>
@@ -432,17 +433,17 @@
 	<string name="package_activation_failed">Paketaktiveringen misslyckades</string>
 	<string name="activate_in_lsposed">Aktivera i LSPosed</string>
 	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="menu_launch_app">Starta app</string>
+	<string name="menu_restart_app">Starta om appen</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Kontrollera root-behörigheter…</string>
 	<string name="connecting_root_service">Ansluter till rottjänsten…</string>
 	<string name="root_access_denied">Rotåtkomst nekad. Vänligen tillåt root-åtkomst.</string>
-	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
+	<string name="root_service_failed">Kunde inte ansluta till root services. Vänligen försök igen senare</string>
 	<string name="exit">Utgång</string>
 	<!-- Bottom Navigation -->
-	<string name="navigation_home">Home</string>
-	<string name="navigation_update">Update</string>
+	<string name="navigation_home">Hem</string>
+	<string name="navigation_update">Uppdatera</string>
 	<string name="navigation_hooks">Hooks</string>
-	<string name="navigation_settings">Settings</string>
+	<string name="navigation_settings">Inställningar</string>
 </resources>

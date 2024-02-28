@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Колір заряджання</string>
 	<string name="BB_batteryFastChargingColor">Колір швидкого заряджання</string>
 	<string name="BB_transit_colors">Кольори відтінків між діапазоном</string>
+	<string name="colored_battery_percentage_title">Кольоровий відсоток заряду батареї під час зарядки</string>
 	<string name="nt_stat_mode_today">Сьогодні</string>
 	<string name="nt_stat_mode_week">Поточний тиждень</string>
 	<string name="nt_stat_mode_month">Поточний місяць</string>
@@ -303,7 +304,7 @@
 	<string name="settings_cloned_apps_active">Розблоковано для всіх додатків з <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Розважайся!</string>
 	<!-- SystemUI hook -->
 	<string name="battery_info_button_title">Інформація про акумулятор…</string>
-	<string name="power_indication_error">Error fetching charging data</string>
+	<string name="power_indication_error">Помилка отримання даних про зарядку</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Вібрувати під час вихідного виклику</string>
 	<string name="vibrate_on_call_drop_title">Вібрація, коли виклик розривається</string>

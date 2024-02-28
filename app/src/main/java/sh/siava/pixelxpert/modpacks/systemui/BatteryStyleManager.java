@@ -1,17 +1,15 @@
-// Starting Android 12.1, we hook to the callback used in battery view controller
-
-
 package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
+import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findAndHookConstructor;
-import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ObjectTools.isColorDark;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -22,6 +20,9 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.core.graphics.ColorUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,6 @@ public class BatteryStyleManager extends XposedModPack {
 	public static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 
 	public static boolean customBatteryEnabled = false;
-
 	private int frameColor;
 	public static int mBatteryStyle = 1;
 	public static boolean ShowPercent = false;
@@ -50,6 +50,7 @@ public class BatteryStyleManager extends XposedModPack {
 	private static boolean BatteryChargingAnimationEnabled = true;
 	private final ArrayList<Object> batteryViews = new ArrayList<>();
 	private static boolean mShouldScale = false;
+	private static boolean BatteryPercentIndicateCharging = false;
 
 	public BatteryStyleManager(Context context) {
 		super(context);
@@ -64,6 +65,7 @@ public class BatteryStyleManager extends XposedModPack {
 
 		customBatteryEnabled = batteryStyle != 0;
 		mShouldScale = mShouldScale || customBatteryEnabled || scaleFactor != 100;
+		BatteryPercentIndicateCharging = Xprefs.getBoolean("BatteryPercentIndicateCharging", false);
 
 		if (batteryStyle == 99) {
 			scaleFactor = 0;
@@ -114,17 +116,19 @@ public class BatteryStyleManager extends XposedModPack {
 
 		BatteryDrawable.setStaticColor(batteryLevels, batteryColors, BIconIndicateCharging, batteryChargingColor, BIconIndicateFastCharging, batteryIconFastChargingColor, BIconTransitColors, BIconColorful);
 
-		refreshAllBatteryIcons();
+		refreshAllBatteryIcons(true);
 	}
 
-	private void refreshAllBatteryIcons() {
+	private void refreshAllBatteryIcons(boolean forcePercentageColor) {
 		for (Object view : batteryViews) {
-			updateBatteryViewValues((View) view);
+			updateBatteryViewValues((View) view, forcePercentageColor);
 		}
 	}
 
-	private static void updateBatteryViewValues(View view)
+	private static void updateBatteryViewValues(View view, boolean forcePercentageColor)
 	{
+		setPercentViewColor(view, forcePercentageColor);
+
 		ImageView mBatteryIconView = (ImageView) getObjectField(view, "mBatteryIconView");
 		scale(mBatteryIconView);
 		try {
@@ -138,7 +142,7 @@ public class BatteryStyleManager extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-		BatteryDataProvider.registerInfoCallback(this::refreshAllBatteryIcons);
+		BatteryDataProvider.registerInfoCallback(() -> refreshAllBatteryIcons(false));
 
 		findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
 			@Override
@@ -153,7 +157,7 @@ public class BatteryStyleManager extends XposedModPack {
 			@Override
 			public void onViewAttachedToWindow(View view) {
 				batteryViews.add(view);
-				updateBatteryViewValues(view);
+				updateBatteryViewValues(view, true);
 			}
 
 			@Override
@@ -180,17 +184,46 @@ public class BatteryStyleManager extends XposedModPack {
 			}
 		});
 
-		findAndHookMethod(BatteryMeterViewClass,
-				"updateColors", int.class, int.class, int.class, new XC_MethodHook() {
+		hookAllMethods(BatteryMeterViewClass, "updateColors", new XC_MethodHook() {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-						if (!customBatteryEnabled) return;
-
-						BatteryDrawable mBatteryDrawable = (BatteryDrawable) getAdditionalInstanceField(param.thisObject, "mBatteryDrawable");
-						if (mBatteryDrawable == null) return;
-						mBatteryDrawable.setColors((int) param.args[0], (int) param.args[1], (int) param.args[2]);
+						setPercentViewColor(param.thisObject);
+						if(customBatteryEnabled)
+						{
+							BatteryDrawable mBatteryDrawable = (BatteryDrawable) getAdditionalInstanceField(param.thisObject, "mBatteryDrawable");
+							if (mBatteryDrawable == null) return;
+							mBatteryDrawable.setColors((int) param.args[0], (int) param.args[1], (int) param.args[2]);
+						}
 					}
 				});
+
+		hookAllMethods(BatteryMeterViewClass, "updatePercentText", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				setPercentViewColor(param.thisObject);
+			}
+		});
+	}
+
+	private static void setPercentViewColor(Object meterView)
+	{
+		setPercentViewColor(meterView, false);
+	}
+	private static void setPercentViewColor(Object meterView, boolean force) {
+		if(BatteryPercentIndicateCharging || force) {
+			TextView mBatteryPercentView = (TextView) getObjectField(meterView, "mBatteryPercentView");
+			if (mBatteryPercentView != null) {
+				int mTextColor = (int) getObjectField(meterView, "mTextColor");
+
+				int color = BatteryPercentIndicateCharging && BatteryDataProvider.isCharging()
+					? isColorDark(mTextColor)
+						? 0xFF048800 //dark green
+						: Color.GREEN
+					: mTextColor;
+
+				mBatteryPercentView.post(() -> mBatteryPercentView.setTextColor(color));
+			}
+		}
 	}
 
 	private BatteryDrawable getNewDrawable(Context context) {

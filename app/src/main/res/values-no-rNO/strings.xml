@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Ladefarge</string>
 	<string name="BB_batteryFastChargingColor">Hurtigladende farge</string>
 	<string name="BB_transit_colors">Skygge farger mellom dette området</string>
+	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">I dag</string>
 	<string name="nt_stat_mode_week">Nåværende uke</string>
 	<string name="nt_stat_mode_month">Denne måneden</string>

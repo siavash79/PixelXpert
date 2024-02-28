@@ -8,7 +8,7 @@
 	android:foreground="?android:selectableItemBackgroundBorderless"
 	android:minHeight="?android:attr/listPreferredItemHeight"
 	android:paddingHorizontal="32dp"
-	android:paddingVertical="22dp">
+	android:paddingVertical="12dp">
 
 	<ImageView
 		android:id="@android:id/icon"

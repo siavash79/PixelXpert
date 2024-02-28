@@ -14,7 +14,9 @@ public class BootReceiver extends BroadcastReceiver {
 		{
 			if(BuildConfig.DEBUG)
 				Log.d("BootReceiver", "Broadcast received: " + intent.getAction());
+
 			UpdateScheduler.scheduleUpdates(context);
+			TimeSyncScheduler.scheduleTimeSync(context);
 		}
 	}
 }

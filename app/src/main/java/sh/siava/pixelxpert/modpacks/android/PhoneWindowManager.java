@@ -87,6 +87,9 @@ public class PhoneWindowManager extends XposedModPack {
 							callMethod(windowMan, "handleScreenShot", 1, 1); //pre 13 QPR3
 						}
 						break;
+					case Constants.ACTION_HOME:
+							callMethod(windowMan, "launchHomeFromHotKey", Display.DEFAULT_DISPLAY);
+							break;
 					case Constants.ACTION_BACK:
 						callMethod(windowMan, "backKeyPress");
 						break;
@@ -166,6 +169,7 @@ public class PhoneWindowManager extends XposedModPack {
 
 			IntentFilter intentFilter = new IntentFilter();
 			intentFilter.addAction(Constants.ACTION_SCREENSHOT);
+			intentFilter.addAction(Constants.ACTION_HOME);
 			intentFilter.addAction(Constants.ACTION_BACK);
 			intentFilter.addAction(Constants.ACTION_INSECURE_SCREENSHOT);
 			intentFilter.addAction(Constants.ACTION_SLEEP);

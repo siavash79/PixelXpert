@@ -31,7 +31,7 @@ import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 public class ScreenOffKeys extends XposedModPack {
 	public static final String listenPackage = Constants.SYSTEM_FRAMEWORK_PACKAGE;
 	public static final int LONG_PRESS_POWER_SHUT_OFF_NO_CONFIRM = 3;
-	private static boolean replaceAssistantwithTorch = false;
+	private static boolean replaceAssistantWithTorch = false;
 	private static boolean holdVolumeToSkip = false;
 	private long wakeTime = 0;
 	//    private boolean isVolumeLongPress = false;
@@ -44,7 +44,11 @@ public class ScreenOffKeys extends XposedModPack {
 	@Override
 	public void updatePrefs(String... Key) {
 		holdVolumeToSkip = Xprefs.getBoolean("holdVolumeToSkip", false);
-		replaceAssistantwithTorch = Xprefs.getBoolean("replaceAssistantwithTorch", false);
+		replaceAssistantWithTorch = Xprefs.getBoolean("replaceAssistantwithTorch", false);
+
+		//make sure camera manager is ready and registered flashlight events
+		if(replaceAssistantWithTorch) //noinspection ResultOfMethodCallIgnored
+			SystemUtils.CameraManager();
 	}
 
 	@Override
@@ -107,7 +111,7 @@ public class ScreenOffKeys extends XposedModPack {
 			hookAllMethods(PhoneWindowManagerClass, "startedWakingUp", new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if (!replaceAssistantwithTorch) return;
+					if (!replaceAssistantWithTorch) return;
 					int r = (int) param.args[param.args.length-1];
 
 					if (r == 1) {
@@ -121,7 +125,7 @@ public class ScreenOffKeys extends XposedModPack {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 					boolean screenIsOn = SystemClock.uptimeMillis() - wakeTime > 1000;
-					if (!replaceAssistantwithTorch
+					if (!replaceAssistantWithTorch
 							|| (screenIsOn
 								&& !SystemUtils.isFlashOn()))
 						return;

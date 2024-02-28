@@ -127,7 +127,7 @@ public class ThemeManager_14 extends XposedModPack {
 		Class<?> FooterActionsViewBinderClass = findClass("com.android.systemui.qs.footer.ui.binder.FooterActionsViewBinder", lpparam.classLoader);
 
 		try { //A14 Compose implementation of QS Footer actions
-			Class<?> FooterActionsButtonViewModelClass = findClass("com.android.systemui.qs.footer.ui.viewmodel.FooterActionsButtonViewModel", lpparam.classLoader);
+//			Class<?> FooterActionsButtonViewModelClass = findClass("com.android.systemui.qs.footer.ui.viewmodel.FooterActionsButtonViewModel", lpparam.classLoader);
 			Class<?> FooterActionsViewModelClass = findClass("com.android.systemui.qs.footer.ui.viewmodel.FooterActionsViewModel", lpparam.classLoader);
 //			Class<?> FooterActionsKtClass = findClass("com.android.systemui.qs.footer.ui.compose.FooterActionsKt", lpparam.classLoader);
 			Class<?> ThemeColorKtClass = findClass("com.android.compose.theme.ColorKt", lpparam.classLoader);
@@ -186,31 +186,23 @@ public class ThemeManager_14 extends XposedModPack {
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					if(isDark) return;
 
+					//power button
+					Object power = getObjectField(param.thisObject, "power");
+					setObjectField(power, "iconTint", colorInactive);
+					setObjectField(power, "backgroundColor", PM_LITE_BACKGROUND_CODE);
+
+					//settings button
+					setObjectField(
+							getObjectField(param.thisObject, "settings"),
+							"iconTint",
+							BLACK);
+
 					//we must use the classes defined in the apk. using our own will fail
 					Class<?> StateFlowImplClass = findClass("kotlinx.coroutines.flow.StateFlowImpl", lpparam.classLoader);
 					Class<?> ReadonlyStateFlowClass = findClass("kotlinx.coroutines.flow.ReadonlyStateFlow", lpparam.classLoader);
 
 					Object zeroAlphaFlow = StateFlowImplClass.getConstructor(Object.class).newInstance(0f);
 					setObjectField(param.thisObject, "backgroundAlpha", ReadonlyStateFlowClass.getConstructors()[0].newInstance(zeroAlphaFlow));
-				}
-			});
-
-			hookAllConstructors(FooterActionsButtonViewModelClass, new XC_MethodHook() {
-				@Override
-				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if(isDark) return;
-
-					switch (mContext.getResources().getResourceName((Integer) param.args[0]).split("/")[1])
-					{
-						case "settings_button_container":
-						case "multi_user_switch":
-							param.args[2] = BLACK; //icon tint
-							break;
-						case "pm_lite":
-							param.args[2] = colorInactive; //icon tint
-							param.args[3] = PM_LITE_BACKGROUND_CODE; //background color "code"
-							break;
-					}
 				}
 			});
 		} catch (Throwable ignored){}

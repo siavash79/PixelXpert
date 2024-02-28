@@ -195,9 +195,15 @@ public class StatusbarGestures extends XposedModPack {
 		//noinspection DataFlowIssue
 		Rect displayBounds = SystemUtils.WindowManager().getCurrentWindowMetrics().getBounds();
 
-		return (e2.getY() - e1.getY()) / heightFactor > displayBounds.height() //enough travel in right direction
-				&& isTouchInRegion(e1, displayBounds.width()) //start point in hot zone
-				&& (velocityY / speedFactor > displayBounds.height()); //enough speed in right direction
+		try {
+			return (e2.getY() - e1.getY()) / heightFactor > displayBounds.height() //enough travel in right direction
+					&& isTouchInRegion(e1, displayBounds.width()) //start point in hot zone
+					&& (velocityY / speedFactor > displayBounds.height()); //enough speed in right direction
+		}
+		catch (Throwable ignored)
+		{
+			return false;
+		}
 	}
 
 	private boolean isTouchInRegion(MotionEvent motionEvent, float width) {
@@ -243,7 +249,6 @@ public class StatusbarGestures extends XposedModPack {
 		{
 			@Override
 			public boolean onFling(@Nullable MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
-				//noinspection DataFlowIssue
 				if(isValidFling(e1, e2, velocityY, -.15f, -.06f))
 				{
 					callMethod(NotificationPanelViewController, "collapse", 1f, true);

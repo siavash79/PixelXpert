@@ -167,6 +167,7 @@
 	<string name="BB_batteryChargingColor">Oplaadkleur</string>
 	<string name="BB_batteryFastChargingColor">Snel opladen kleur</string>
 	<string name="BB_transit_colors">Schaduwkleuren tussen het bereik</string>
+	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Vandaag</string>
 	<string name="nt_stat_mode_week">Deze week</string>
 	<string name="nt_stat_mode_month">Deze maand</string>

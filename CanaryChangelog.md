@@ -1,3 +1,33 @@
+**canary-336**  
+- Fixed app FC when toggling NTP  
+  
+**canary-335**  
+- Added option to enable periodical NTP time sync  
+  
+**canary-334**  
+- Modified Volte/VoWifi icons and fixed padding  
+- A14ap21: Improved screenshot sound mute  
+  
+**canary-333**  
+- A14ap21: Fixed hide roaming indicator  
+  
+**canary-332**  
+- Fixed compatibility issues with A14 Feb2024 - hopefully  
+- Kill foreground app gesture now goes to home screen  
+  
+**canary-331**  
+- A14ap21: SystemUI crashes  
+- A14ap21: Fixed lockscreen mods  
+  
+**canary-330**  
+- Fixed power long press torch not togging flashlight in some situations  
+  
+**canary-329**  
+- Improved colored battery percentage  
+  
+**canary-328**  
+- Added option to show change battery percentage text while charging  
+  
 **canary-327**  
 - Don't scale battery icon if not required / a bit of compatibility with other battery icon mods  
   

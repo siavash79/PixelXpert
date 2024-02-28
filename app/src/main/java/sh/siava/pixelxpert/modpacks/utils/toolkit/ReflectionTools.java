@@ -64,8 +64,24 @@ public class ReflectionTools {
 
 	public static Set<XC_MethodHook.Unhook> hookAllConstructors(Class<?> clazz, XC_MethodHook callback)
 	{
-		Set<XC_MethodHook.Unhook> result = XposedBridge.hookAllConstructors(clazz, callback);
-		if(false) {
+		XC_MethodHook hook = new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(true) {
+					log(param.method.getName() + " called");
+				}
+				callMethod(callback, "beforeHookedMethod", param);
+			}
+
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				callMethod(callback, "afterHookedMethod", param);
+			}
+		};
+
+
+		Set<XC_MethodHook.Unhook> result = XposedBridge.hookAllConstructors(clazz, hook);
+		if(true) {
 			Throwable t = new Throwable();
 			log(t.getStackTrace()[1].getClassName() + " " + t.getStackTrace()[1].getLineNumber() + " hook size " + result.size());
 		}

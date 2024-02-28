@@ -13,7 +13,7 @@ jobs:
         run: git clone --branch stable --single-branch --recurse-submodules https://github.com/siavash79/PixelXpert.git .
 
       - name: Setup JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4.1.0
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -45,13 +45,13 @@ jobs:
         run: .github/make_zip.sh
 
       - name: Upload Zip
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.1
         with:
           name: PixelXpert.zip
           path: output
 
       - name: Release the binaries
-        uses: ncipollo/release-action@v1.13.0
+        uses: ncipollo/release-action@v1.14.0
         with:
           tag: ${{ github.ref }}
           name: ${{ github.ref_name }}

@@ -42,7 +42,7 @@ public class ReflectionTools {
 		XC_MethodHook hook = new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(false) {
+				if(true) {
 					log(param.method.getName() + " called");
 				}
 				callMethod(callback, "beforeHookedMethod", param);

@@ -68,8 +68,8 @@ public class BatteryDataProvider extends XposedModPack {
 			}
 		};
 
-		hookAllMethods(BatteryControllerImplClass, "fireBatteryLevelChanged", batteryDataRefreshHook);
-		hookAllMethods(BatteryControllerImplClass, "firePowerSaveChanged", batteryDataRefreshHook);
+		hookAllMethods(BatteryControllerImplClass, "onReceive", batteryDataRefreshHook);
+//		hookAllMethods(BatteryControllerImplClass, "firePowerSaveChanged", batteryDataRefreshHook);
 
 
 		hookAllConstructors(BatteryStatusClass, new XC_MethodHook() {

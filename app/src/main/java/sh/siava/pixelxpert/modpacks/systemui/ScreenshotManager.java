@@ -102,7 +102,7 @@ public class ScreenshotManager extends XposedModPack {
 		//A14 QPR3
 		Class<?> ScreenshotSoundProviderImplClass = findClassIfExists("com.android.systemui.screenshot.ScreenshotSoundProviderImpl", lpparam.classLoader);
 		if(ScreenshotSoundProviderImplClass != null) {
-			ReflectionTools.hookAllMethods(ScreenshotSoundProviderImplClass, "getScreenshotSound", new XC_MethodHook() {
+			hookAllMethods(ScreenshotSoundProviderImplClass, "getScreenshotSound", new XC_MethodHook() {
 				@SuppressLint("NewApi")
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

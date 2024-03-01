@@ -1,3 +1,6 @@
+**canary-337**  
+- Fixed power saving mode not reflecting immediately on battery icon  
+  
 **canary-336**  
 - Fixed app FC when toggling NTP  
   

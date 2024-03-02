@@ -55,7 +55,9 @@ public class BatteryDataProvider extends XposedModPack {
 		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpparam.classLoader);
 		Class<?> BatteryControllerImplClass = findClass("com.android.systemui.statusbar.policy.BatteryControllerImpl", lpparam.classLoader);
 
-		XC_MethodHook batteryDataRefreshHook = new XC_MethodHook() {
+		//once an intent is received, it's either battery level change, powersave change, or demo mode. we don't expect demo
+		// intents normally. So it's safe to assume we'll need to update battery anyway
+		hookAllMethods(BatteryControllerImplClass, "onReceive", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				mCurrentLevel = getIntField(param.thisObject, "mLevel");
@@ -64,12 +66,9 @@ public class BatteryDataProvider extends XposedModPack {
 						|| getBooleanField(param.thisObject, "mWirelessCharging");
 				mPowerSave = getBooleanField(param.thisObject, "mPowerSave");
 
-				onBatteryInfoChanged();
+				fireBatteryInfoChanged();
 			}
-		};
-
-		hookAllMethods(BatteryControllerImplClass, "onReceive", batteryDataRefreshHook);
-//		hookAllMethods(BatteryControllerImplClass, "firePowerSaveChanged", batteryDataRefreshHook);
+		});
 
 
 		hookAllConstructors(BatteryStatusClass, new XC_MethodHook() {
@@ -141,11 +140,7 @@ public class BatteryDataProvider extends XposedModPack {
 		return instance.mCharging && instance.mIsFastCharging;
 	}
 
-	public static void refreshAllInfoCallbacks()
-	{
-		instance.onBatteryInfoChanged();
-	}
-	private void onBatteryInfoChanged() {
+	private void fireBatteryInfoChanged() {
 		for(BatteryInfoCallback callback : mInfoCallbacks)
 		{
 			try

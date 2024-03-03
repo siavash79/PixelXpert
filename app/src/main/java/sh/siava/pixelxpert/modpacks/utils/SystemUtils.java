@@ -243,6 +243,12 @@ public class SystemUtils {
 
 		registerVolumeChangeReceiver();
 	}
+	public static void sleep(int millis)
+	{
+		try {
+			Thread.sleep(millis);
+		} catch (Throwable ignored) {}
+	}
 
 	private void registerVolumeChangeReceiver() {
 		BroadcastReceiver volChangeReceiver = new BroadcastReceiver() {

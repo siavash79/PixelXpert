@@ -10,6 +10,7 @@ import static sh.siava.pixelxpert.BuildConfig.APPLICATION_ID;
 import static sh.siava.pixelxpert.modpacks.Constants.SYSTEM_UI_PACKAGE;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.utils.BootLoopProtector.isBootLooped;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 
 import android.annotation.SuppressLint;
 import android.app.Instrumentation;
@@ -136,7 +137,7 @@ public class XPLauncher implements ServiceConnection {
 
 	private void loadModpacks(XC_LoadPackage.LoadPackageParam lpparam) {
 		if (Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(lpparam.packageName)) {
-			connectRootService();
+			forceConnectRootService();
 		}
 
 		for (Class<? extends XposedModPack> mod : ModPacks.getMods(lpparam.packageName)) {
@@ -156,23 +157,35 @@ public class XPLauncher implements ServiceConnection {
 		}
 	}
 
-	private void connectRootService()
+	private void forceConnectRootService()
 	{
 		new Thread(() -> {
-			// Start RootService connection
-			Intent intent = new Intent();
-			intent.setComponent(new ComponentName(APPLICATION_ID, APPLICATION_ID + ".service.RootProviderProxy"));
-
-			if(!mContext.bindService(intent, instance, Context.BIND_AUTO_CREATE))
+			while(SystemUtils.UserManager() == null
+					|| !SystemUtils.UserManager().isUserUnlocked()) //device is still CE encrypted
 			{
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					throw new RuntimeException(e);
-				}
+				sleep(2000);
+			}
+			sleep(5000); //wait for the unlocked account to settle down a bit
+
+			while(rootProxyIPC == null)
+			{
 				connectRootService();
+				sleep(5000);
 			}
 		}).start();
+	}
+
+	private void connectRootService()
+	{
+		try {
+			Intent intent = new Intent();
+			intent.setComponent(new ComponentName(APPLICATION_ID, APPLICATION_ID + ".service.RootProviderProxy"));
+			mContext.bindService(intent, instance, Context.BIND_AUTO_CREATE | Context.BIND_ADJUST_WITH_ACTIVITY);
+		}
+		catch (Throwable t)
+		{
+			log(t);
+		}
 	}
 
 	@Override
@@ -201,10 +214,7 @@ public class XPLauncher implements ServiceConnection {
 			}
 			catch (Throwable ignored)
 			{
-				try {
-					//noinspection BusyWait
-					Thread.sleep(1000);
-				} catch (Throwable ignored1) {}
+				sleep(1000);
 			}
 		}
 
@@ -221,7 +231,7 @@ public class XPLauncher implements ServiceConnection {
 	public void onServiceDisconnected(ComponentName name) {
 		rootProxyIPC = null;
 
-		connectRootService();
+		forceConnectRootService();
 	}
 
 	public static void enqueueProxyCommand(ProxyRunnable runnable)
@@ -234,8 +244,10 @@ public class XPLauncher implements ServiceConnection {
 		}
 		else
 		{
-			proxyQueue.add(runnable);
-			instance.connectRootService();
+			synchronized (proxyQueue) {
+				proxyQueue.add(runnable);
+			}
+			instance.forceConnectRootService();
 		}
 	}
 

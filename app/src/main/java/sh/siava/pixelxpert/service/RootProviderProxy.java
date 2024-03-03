@@ -63,15 +63,22 @@ public class RootProviderProxy extends Service {
 		{
 			// Start RootService connection
 			Intent intent = new Intent(mContext, RootProvider.class);
-			RootService.bind(intent, mRootServiceConnection);
+			getMainExecutor().execute(() -> RootService.bind(intent, mRootServiceConnection));
 		}
 
+		/** @noinspection RedundantThrows*/
 		@Override
 		public String[] runCommand(String command) throws RemoteException {
-			ensureEnvironment();
+			try {
+				ensureEnvironment();
 
-			List<String> result = Shell.cmd(command).exec().getOut();
-			return result.toArray(new String[0]);
+				List<String> result = Shell.cmd(command).exec().getOut();
+				return result.toArray(new String[0]);
+			}
+			catch (Throwable t)
+			{
+				return new String[0];
+			}
 		}
 
 		@Override
@@ -89,7 +96,7 @@ public class RootProviderProxy extends Service {
 				startRootService();
 
 				long startTime = System.currentTimeMillis();
-				while(mRootServiceIPC == null && System.currentTimeMillis() > startTime + 5000)
+				while(mRootServiceIPC == null && System.currentTimeMillis() < startTime + 5000)
 				{
 					try {
 						//noinspection BusyWait

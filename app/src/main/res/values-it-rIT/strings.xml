@@ -293,6 +293,15 @@
 	<string name="disable_overscroll">Disattiva l\'effetto di overscroll elastico</string>
 	<string name="overscroll_on_summary">Importante: DEVI abilitare le app per le quali desideri disabilitare l\'overscroll all\'interno di LSPosed</string>
 	<string name="milliseconds">Milliseconds</string>
+	<string name="hours">Ore</string>
+	<string name="system_time_title">Ora di sistema</string>
+	<string name="sync_ntp_time_title">Usa NTP per sincronizzare l\'orario</string>
+	<string name="ntp_time_interval_title">Intervallo sincronizzazione dati</string>
+	<string name="ntp_servers_title">Server NTP</string>
+	<string name="ntp_servers_summary">Usa il punto e virgola per separare i server multipli</string>
+	<string name="sync_ntp_time_now_title">Sincronizza ora</string>
+	<string name="sync_ntp_successful">Orario sincronizzato con successo</string>
+	<string name="sync_ntp_failed">Errore di connessione al server NTP!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Pannello del volume</string>
 	<string name="volume_dialog_timeout">Durata del pannello volume</string>

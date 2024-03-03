@@ -293,6 +293,15 @@
 	<string name="disable_overscroll">Tắt hiệu ứng cuộn</string>
 	<string name="overscroll_on_summary">Quan trọng: bạn PHẢI bật các ứng dụng bạn muốn tắt hiệu ứng cuộn trong LSPosed</string>
 	<string name="milliseconds">Mili giây</string>
+	<string name="hours">Giờ</string>
+	<string name="system_time_title">Thời gian hệ thống</string>
+	<string name="sync_ntp_time_title">Dùng NTP để đồng bộ thời gian</string>
+	<string name="ntp_time_interval_title">Khoảng thời gian đồng bộ thời gian</string>
+	<string name="ntp_servers_title">Máy chủ NTP</string>
+	<string name="ntp_servers_summary">Sử dụng dấu chấm phẩy để phân tách nhiều máy chủ</string>
+	<string name="sync_ntp_time_now_title">Đồng bộ ngay</string>
+	<string name="sync_ntp_successful">Thời gian đồng bộ thành công</string>
+	<string name="sync_ntp_failed">Kết nối tới máy chủ NTP lỗi!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Bảng điều chỉnh âm lượng</string>
 	<string name="volume_dialog_timeout">Thời gian chờ hộp thoại âm lượng</string>

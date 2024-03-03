@@ -15,7 +15,7 @@
 	<string name="restart_needed">重启系统以生效</string>
 	<string name="more_area">显示区域更大</string>
 	<string name="less_area">显示区域更小</string>
-	<string name="current_version">Current version: %s</string>
+	<string name="current_version">当前版本：%s</string>
 	<string name="notification_channel_update">更新</string>
 	<string name="notification_channel_update_desc">此频道会展示最新更新的通知。</string>
 	<string name="new_update_title">有可用更新</string>
@@ -293,6 +293,15 @@
 	<string name="disable_overscroll">禁用过度滚动效果</string>
 	<string name="overscroll_on_summary">重要:你必须在 LSPosed 作用域中勾选你要禁用的app</string>
 	<string name="milliseconds">毫秒</string>
+	<string name="hours">小时</string>
+	<string name="system_time_title">系统时间</string>
+	<string name="sync_ntp_time_title">用 NTP 同步时间</string>
+	<string name="ntp_time_interval_title">同步时间间隔</string>
+	<string name="ntp_servers_title">NTP 服务器</string>
+	<string name="ntp_servers_summary">使用分号分隔多个服务器</string>
+	<string name="sync_ntp_time_now_title">立即同步</string>
+	<string name="sync_ntp_successful">时间同步成功</string>
+	<string name="sync_ntp_failed">NTP 服务器连接失败！</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">音量面板</string>
 	<string name="volume_dialog_timeout">音量控制超时</string>

@@ -293,6 +293,15 @@
 	<string name="disable_overscroll">Deshabilitar el efecto de desplazamiento elástico</string>
 	<string name="overscroll_on_summary">Importante: DEBE habilitar las aplicaciones para las que desea deshabilitar el desplazamiento excesivo dentro de LSPosed</string>
 	<string name="milliseconds">Milisegundos</string>
+	<string name="hours">Horas</string>
+	<string name="system_time_title">Hora del sistema</string>
+	<string name="sync_ntp_time_title">Usar NTP para sincronizar la hora</string>
+	<string name="ntp_time_interval_title">Intervalo de sincronización de hora</string>
+	<string name="ntp_servers_title">Servidores NTP</string>
+	<string name="ntp_servers_summary">Usar punto y coma para separar múltiples servidores</string>
+	<string name="sync_ntp_time_now_title">Sincronizar ahora</string>
+	<string name="sync_ntp_successful">Tiempo sincronizado correctamente</string>
+	<string name="sync_ntp_failed">¡Error de conexión al servidor NTP!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Panel de Volumen</string>
 	<string name="volume_dialog_timeout">Tiempo de espera del panel de volumen</string>

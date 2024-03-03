@@ -293,6 +293,15 @@
 	<string name="disable_overscroll">Онемогућите ефекат еластичног премотавања</string>
 	<string name="overscroll_on_summary">Важно: МОРАТЕ да омогућите апликације за које желите да онемогућите прекомерно померање у оквиру ЛПосед</string>
 	<string name="milliseconds">Милисекунде</string>
+	<string name="hours">Hours</string>
+	<string name="system_time_title">System time</string>
+	<string name="sync_ntp_time_title">Use NTP to sync time</string>
+	<string name="ntp_time_interval_title">Time synchronization interval</string>
+	<string name="ntp_servers_title">NTP servers</string>
+	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
+	<string name="sync_ntp_time_now_title">Sync now</string>
+	<string name="sync_ntp_successful">Time synced successfully</string>
+	<string name="sync_ntp_failed">NTP server connection error!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Volume panel</string>
 	<string name="volume_dialog_timeout">Volume dialog timeout</string>

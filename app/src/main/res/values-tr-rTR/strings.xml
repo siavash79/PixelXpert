@@ -293,6 +293,15 @@
 	<string name="disable_overscroll">Elastik kaydırma efektini devre dışı bırak</string>
 	<string name="overscroll_on_summary">Önemli: LSPosed içinde kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
 	<string name="milliseconds">Milisaniye</string>
+	<string name="hours">Saat</string>
+	<string name="system_time_title">Sistem zamanı</string>
+	<string name="sync_ntp_time_title">Zamanı senkronize etmek için NTP kullan</string>
+	<string name="ntp_time_interval_title">Zaman senkronizasyon aralığı</string>
+	<string name="ntp_servers_title">NTP sunucuları</string>
+	<string name="ntp_servers_summary">Birden fazla sunucuyu ayırmak için noktalı virgül kullan</string>
+	<string name="sync_ntp_time_now_title">Şimdi senkronize et</string>
+	<string name="sync_ntp_successful">Zaman başarıyla senkronize edildi</string>
+	<string name="sync_ntp_failed">NTP sunucusu bağlantı hatası!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Ses paneli</string>
 	<string name="volume_dialog_timeout">Ses seviyesi iletişim kutusu zaman aşımı</string>

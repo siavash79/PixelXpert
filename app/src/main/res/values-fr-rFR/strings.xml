@@ -293,6 +293,15 @@
 	<string name="disable_overscroll">Désactiver l’effet elastique de fin de défilement</string>
 	<string name="overscroll_on_summary">Important : les applications dans lesquelles l’effet sera actif sont celles activées dans LSPosed</string>
 	<string name="milliseconds">Millisecondes</string>
+	<string name="hours">Heures</string>
+	<string name="system_time_title">Heure du système</string>
+	<string name="sync_ntp_time_title">Utiliser NTP pour synchroniser l\'heure</string>
+	<string name="ntp_time_interval_title">Intervalle de synchronisation de l\'heure</string>
+	<string name="ntp_servers_title">Serveurs NTP</string>
+	<string name="ntp_servers_summary">Utiliser un point-virgule pour séparer plusieurs serveurs</string>
+	<string name="sync_ntp_time_now_title">Synchroniser maintenant</string>
+	<string name="sync_ntp_successful">Heure synchronisée avec succès</string>
+	<string name="sync_ntp_failed">Erreur de connexion au serveur NTP !</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Panneau de volume</string>
 	<string name="volume_dialog_timeout">Délai de fermeture du panneau de volume</string>

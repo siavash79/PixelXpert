@@ -293,6 +293,15 @@
 	<string name="disable_overscroll">Dezactivare efect de derulare elastică</string>
 	<string name="overscroll_on_summary">Important: TREBUIE să activezi aplicațiile pentru care dorești să dezactivezi derularea elastică în LSPosed</string>
 	<string name="milliseconds">Milisecunde</string>
+	<string name="hours">Ore</string>
+	<string name="system_time_title">Ora sistemului</string>
+	<string name="sync_ntp_time_title">Utilizează NTP pentru a sincroniza ora</string>
+	<string name="ntp_time_interval_title">Interval de sincronizare timp</string>
+	<string name="ntp_servers_title">Servere NTP</string>
+	<string name="ntp_servers_summary">Folosește punct și virgulă pentru a separa mai multe servere</string>
+	<string name="sync_ntp_time_now_title">Sincronizează acum</string>
+	<string name="sync_ntp_successful">Timp sincronizat cu succes</string>
+	<string name="sync_ntp_failed">Eroare de conexiune la serverul NTP!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Panou de volum</string>
 	<string name="volume_dialog_timeout">Expirare panou de volum</string>

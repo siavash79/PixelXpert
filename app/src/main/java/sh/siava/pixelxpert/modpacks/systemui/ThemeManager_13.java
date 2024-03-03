@@ -11,6 +11,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.OverlayTools.setOverlay;
 
 import android.annotation.SuppressLint;
@@ -437,7 +438,7 @@ public class ThemeManager_13 extends XposedModPack {
 				setOverlay("QSLightThemeOverlay", false, true, false);
 				setOverlay("QSLightThemeBSTOverlay", false, false, false);
 
-				Thread.sleep(50);
+				sleep(50);
 
 				if (lightQSHeaderEnabled && !isCurrentlyDark)
 				{

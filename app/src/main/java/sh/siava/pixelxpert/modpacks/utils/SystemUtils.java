@@ -419,10 +419,10 @@ public class SystemUtils {
 					darkSwitching = true;
 
 					proxy.runCommand("cmd uimode night " + (isDark ? "no" : "yes"));
-					Thread.sleep(1000);
+					sleep(1000);
 					proxy.runCommand("cmd uimode night " + (isDark ? "yes" : "no"));
 
-					Thread.sleep(500);
+					sleep(500);
 					darkSwitching = false;
 				} catch (Exception ignored) {
 				}

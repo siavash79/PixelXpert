@@ -1,5 +1,7 @@
 package sh.siava.pixelxpert.service;
 
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
+
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
@@ -98,12 +100,7 @@ public class RootProviderProxy extends Service {
 				long startTime = System.currentTimeMillis();
 				while(mRootServiceIPC == null && System.currentTimeMillis() < startTime + 5000)
 				{
-					try {
-						//noinspection BusyWait
-						Thread.sleep(50);
-					} catch (InterruptedException ignored) {
-						throw new RemoteException("Root service connection interrupted");
-					}
+					sleep(50);
 				}
 
 				if(mRootServiceIPC == null)

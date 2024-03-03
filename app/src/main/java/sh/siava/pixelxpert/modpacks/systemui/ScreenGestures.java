@@ -15,6 +15,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -93,7 +94,7 @@ public class ScreenGestures extends XposedModPack {
 		mLockscreenDoubleTapToSleep = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
 			@Override
 			public boolean onDoubleTap(MotionEvent e) {
-				SystemUtils.sleep();
+				sleep();
 				return true;
 			}
 		});
@@ -148,10 +149,7 @@ public class ScreenGestures extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				new Thread(() -> {
-					try {
-						Thread.sleep(5000); //for some reason lsposed doesn't find methods in the class. so we'll hook to constructor and wait a bit!
-					} catch (Exception ignored) {
-					}
+					sleep(5000); //for some reason lsposed doesn't find methods in the class. so we'll hook to constructor and wait a bit!
 					setHooks(param);
 				}).start();
 			}
@@ -298,7 +296,7 @@ public class ScreenGestures extends XposedModPack {
 
 				if (doubleTap && action == ACTION_UP) {
 					if (doubleTapToSleepLockscreenEnabled && !isDozing)
-						SystemUtils.sleep();
+						sleep();
 					doubleTap = false;
 				}
 
@@ -315,7 +313,7 @@ public class ScreenGestures extends XposedModPack {
 							while (turnedByTTT) {
 								try {
 									//noinspection BusyWait
-									Thread.sleep(200);
+									sleep(200);
 									if (keyguardNotShowing(mStatusBarKeyguardViewManager)) {
 										turnOffTTT();
 									}

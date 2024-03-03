@@ -8,6 +8,7 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -283,7 +284,7 @@ public class CustomNavGestures extends XposedModPack {
 		new Thread(() -> {
 			try
 			{
-				Thread.sleep(200); //waiting for recents window to vanish
+				sleep(200); //waiting for recents window to vanish
 
 				mContext.sendBroadcast(new Intent()
 						.setAction(Constants.ACTION_SWITCH_APP_PROFILE));

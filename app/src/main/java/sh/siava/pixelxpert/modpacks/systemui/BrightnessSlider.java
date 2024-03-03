@@ -10,6 +10,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findMethod;
 
 import android.annotation.SuppressLint;
@@ -73,7 +74,7 @@ public class BrightnessSlider extends XposedModPack {
 		if (collectedFields.size() == 3) {
 			new Thread(() -> {
 				try {
-					Thread.sleep(5000);
+					sleep(5000);
 					createQQSBrightness(BrightnessMirrorHandlerClass);
 				} catch (Throwable ignored) {
 				}
@@ -150,8 +151,7 @@ public class BrightnessSlider extends XposedModPack {
 				new Thread(() -> {
 					try {
 						while (mBrightnessMirrorController == null) {
-							//noinspection BusyWait
-							Thread.sleep(500);
+							sleep(500);
 							mBrightnessMirrorController = getObjectField(param.thisObject, "mBrightnessMirrorController");
 						}
 						dataCollected(2, BrightnessMirrorHandlerClass);

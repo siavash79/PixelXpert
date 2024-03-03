@@ -14,6 +14,7 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.hookAllMethodsMatchPattern;
 
 import android.annotation.SuppressLint;
@@ -504,7 +505,7 @@ public class ThemeManager_14 extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				new Thread(() -> {
 					try {
-						Thread.sleep(5000);
+						sleep(5000);
 						rebuildSysUI(true);
 					} catch (Throwable ignored) {}
 				}).start();

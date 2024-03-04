@@ -62,9 +62,7 @@ public class ModPacks {
 	{
 		ArrayList<Class<? extends XposedModPack>> modPacks = new ArrayList<>();
 
-		//Should be loaded before others
-		modPacks.add(ThermalProvider.class);
-		modPacks.add(SettingsLibUtilsProvider.class);
+		//all packages
 		modPacks.add(HookTester.class);
 
 		switch (packageName)
@@ -80,6 +78,7 @@ public class ModPacks {
 				modPacks.add(RingerVolSeperator.class);
 				modPacks.add(SystemScreenRecord.class);
 				break;
+
 			case Constants.SYSTEM_UI_PACKAGE:
 				if(XPLauncher.isChildProcess && XPLauncher.processName.contains("screenshot"))
 				{
@@ -87,6 +86,10 @@ public class ModPacks {
 				}
 				else
 				{
+					//load before others
+					modPacks.add(ThermalProvider.class);
+					modPacks.add(SettingsLibUtilsProvider.class);
+
 					if(Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 					{
 						setOverlay("QSLightThemeOverlay", false, true, true);
@@ -96,6 +99,7 @@ public class ModPacks {
 					{
 						modPacks.add(ThemeManager_13.class);
 					}
+
 					modPacks.add(BatteryDataProvider.class);
 					modPacks.add(BrightnessRange.class);
 					modPacks.add(NotificationExpander.class);
@@ -124,6 +128,7 @@ public class ModPacks {
 					modPacks.add(VolumeDialog.class);
 				}
 				break;
+
 			case Constants.LAUNCHER_PACKAGE:
 				modPacks.add(TaskbarActivator.class);
 				modPacks.add(CustomNavGestures.class);
@@ -131,15 +136,18 @@ public class ModPacks {
 				modPacks.add(PixelXpertIconUpdater.class);
 				modPacks.add(FeatureFlags.class);
 				break;
+
 			case Constants.TELECOM_SERVER_PACKAGE:
 				modPacks.add(CallVibrator.class);
 				break;
+
 			case Constants.SETTINGS_PACKAGE:
 				modPacks.add(PXSettingsLauncher.class);
 
 				if(Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU)
 					modPacks.add(AppCloneEnabler.class);
 				break;
+
 			case Constants.DIALER_PACKAGE:
 				modPacks.add(RecordingMessage.class);
 				break;

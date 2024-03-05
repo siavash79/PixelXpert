@@ -1,3 +1,7 @@
+**canary-338**  
+- Added March 2024's abnormal build number to support list  
+- improved root service operations  
+  
 **canary-337**  
 - Fixed power saving mode not reflecting immediately on battery icon  
   

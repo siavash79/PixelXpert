@@ -1,11 +1,14 @@
 package sh.siava.pixelxpert.utils;
 
 import android.os.FileUtils;
+import android.util.Log;
 
 import com.topjohnwu.superuser.Shell;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.regex.Pattern;
 import java.util.zip.ZipFile;
 
 public class AppUtils {
@@ -25,6 +28,24 @@ public class AppUtils {
 				break;
 			default:
 				Shell.cmd(String.format("killall %s", what)).exec();
+		}
+	}
+
+	public static boolean isLikelyPixelBuild()
+	{
+		try
+		{
+			Process process = Runtime.getRuntime().exec("getprop ro.build.id");
+			process.waitFor();
+			byte[] buffer = new byte[process.getInputStream().available()];
+			//noinspection ResultOfMethodCallIgnored
+			process.getInputStream().read(buffer);
+			String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
+			return Pattern.matches("^[TUA][A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result); //Pixel standard build number of A13/14 + new weird build number of 'A' prefix
+		}
+		catch (Throwable ignored)
+		{
+			return false;
 		}
 	}
 
@@ -58,7 +79,7 @@ public class AppUtils {
 			unzippedFile.delete();
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e("PixelXpert Installer", "PixelXpert zip install error: ", e);
 			return false;
 		}
 	}

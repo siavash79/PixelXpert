@@ -1,3 +1,7 @@
+**canary-339**  
+- A14ap21b2: Fixed QS Tile label sizes  
+- A14ap21b2: Fixed NotificationExpander  
+  
 **canary-338**  
 - Added March 2024's abnormal build number to support list  
 - improved root service operations  

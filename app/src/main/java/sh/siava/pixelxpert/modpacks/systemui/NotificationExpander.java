@@ -162,14 +162,14 @@ public class NotificationExpander extends XposedModPack {
 	private void updateFooterBtn() {
 		if(FooterView == null) return; //Footer not inflated yet
 
-		View mDismissButton = (View) getObjectField(FooterView, "mManageButton"); //A13
+		View mClearAllButton = (View) getObjectField(FooterView, "mClearAllButton"); //A13
 
-		int fh = mDismissButton.getLayoutParams().height;
+		int fh = mClearAllButton.getLayoutParams().height;
 
 		if (fh > 0) { //sometimes it's zero. we don't need that
 			NotificationExpander.fh = fh;
 		}
-		int tc = (int) callMethod(mDismissButton, "getCurrentTextColor");
+		int tc = (int) callMethod(mClearAllButton, "getCurrentTextColor");
 
 		Drawable expandArrows = ResourcesCompat.getDrawable(ResourceManager.modRes, R.drawable.ic_expand, mContext.getTheme());
 		expandArrows.setTint(tc);

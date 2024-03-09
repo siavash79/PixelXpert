@@ -264,15 +264,13 @@ public class QSTileGrid extends XposedModPack {
 					}
 
 					if (labelSize == null) { //we need initial font sizes
-						callStaticMethod(FontSizeUtilsClass,
-								"updateFontSize",
-								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
-								getObjectField(param.thisObject, "label"));
+						updateFontSize(FontSizeUtilsClass,
+								getObjectField(param.thisObject, "label"),
+								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
 
-						callStaticMethod(FontSizeUtilsClass,
-								"updateFontSize",
-								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
-								getObjectField(param.thisObject, "secondaryLabel"));
+						updateFontSize(FontSizeUtilsClass,
+								getObjectField(param.thisObject, "secondaryLabel"),
+								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
 
 						TextView label = (TextView) getObjectField(param.thisObject, "label");
 						TextView secondaryLabel = (TextView) getObjectField(param.thisObject, "secondaryLabel");
@@ -283,8 +281,7 @@ public class QSTileGrid extends XposedModPack {
 						secondaryLabelSizeUnit = secondaryLabel.getTextSizeUnit();
 						secondaryLabelSize = secondaryLabel.getTextSize();
 					}
-				} catch (Throwable ignored) {
-				}
+				} catch (Throwable ignored) {}
 			}
 		});
 
@@ -303,6 +300,24 @@ public class QSTileGrid extends XposedModPack {
 				}
 			}
 		});
+	}
+
+	private void updateFontSize(Class<?> FontSizeUtilsClass, Object textView, int resId)
+	{
+		try
+		{
+			callStaticMethod(FontSizeUtilsClass,
+					"updateFontSize",
+					textView,
+					resId);
+		}
+		catch (Throwable ignored)
+		{
+			callStaticMethod(FontSizeUtilsClass,
+					"updateFontSize",
+					resId,
+					textView);
+		}
 	}
 
 	@SuppressLint("DiscouragedApi")
@@ -379,8 +394,7 @@ public class QSTileGrid extends XposedModPack {
 			if (QSSecondaryLabelScaleFactor != 1) {
 				((TextView) getObjectField(param.thisObject, "secondaryLabel")).setTextSize(secondaryLabelSizeUnit, secondaryLabelSize * QSSecondaryLabelScaleFactor);
 			}
-		} catch (Throwable ignored) {
-		}
+		} catch (Throwable ignored) {}
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
+import static de.robv.android.xposed.XposedHelpers.findMethodExactIfExists;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
@@ -56,6 +57,8 @@ public class QSTileGrid extends XposedModPack {
 
 	protected static boolean QSHapticEnabled = false;
 	private static boolean VerticalQSTile = false;
+
+	private int updateFontSizeMethodType = 0;
 
 	public QSTileGrid(Context context) {
 		super(context);
@@ -108,6 +111,13 @@ public class QSTileGrid extends XposedModPack {
 		Class<?> TileAdapterClass = findClass("com.android.systemui.qs.customize.TileAdapter", lpparam.classLoader);
 		Class<?> SideLabelTileLayoutClass = findClass("com.android.systemui.qs.SideLabelTileLayout", lpparam.classLoader);
 
+		if(findMethodExactIfExists(FontSizeUtilsClass,
+				"updateFontSize",
+				TextView.class, int.class)
+				!= null)
+		{
+			updateFontSizeMethodType = 1;
+		}
 		hookAllMethods(SideLabelTileLayoutClass, "updateResources", new XC_MethodHook() {
 			@SuppressLint("DiscouragedApi")
 			@Override
@@ -304,14 +314,14 @@ public class QSTileGrid extends XposedModPack {
 
 	private void updateFontSize(Class<?> FontSizeUtilsClass, Object textView, int resId)
 	{
-		try
+		if(updateFontSizeMethodType == 1)
 		{
 			callStaticMethod(FontSizeUtilsClass,
 					"updateFontSize",
 					textView,
 					resId);
 		}
-		catch (Throwable ignored)
+		else
 		{
 			callStaticMethod(FontSizeUtilsClass,
 					"updateFontSize",

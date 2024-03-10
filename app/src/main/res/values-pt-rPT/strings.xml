@@ -167,7 +167,7 @@
 	<string name="BB_batteryChargingColor">Cor ao carregar</string>
 	<string name="BB_batteryFastChargingColor">Cor ao carregar rápido</string>
 	<string name="BB_transit_colors">Cores entre o intervalo</string>
-	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
+	<string name="colored_battery_percentage_title">Cor da bateria ao carregar</string>
 	<string name="nt_stat_mode_today">Hoje</string>
 	<string name="nt_stat_mode_week">Semana atual</string>
 	<string name="nt_stat_mode_month">Mês atual</string>
@@ -293,15 +293,15 @@
 	<string name="disable_overscroll">Desativar o efeito elástico no final da navegação</string>
 	<string name="overscroll_on_summary">Nota: Requer ativar as apps, para as quais pretende desativar o efeito elástico, no gestor da LSposed</string>
 	<string name="milliseconds">Milissegundos</string>
-	<string name="hours">Hours</string>
-	<string name="system_time_title">System time</string>
-	<string name="sync_ntp_time_title">Use NTP to sync time</string>
-	<string name="ntp_time_interval_title">Time synchronization interval</string>
-	<string name="ntp_servers_title">NTP servers</string>
-	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
-	<string name="sync_ntp_time_now_title">Sync now</string>
-	<string name="sync_ntp_successful">Time synced successfully</string>
-	<string name="sync_ntp_failed">NTP server connection error!</string>
+	<string name="hours">Horas</string>
+	<string name="system_time_title">Hora do sistema</string>
+	<string name="sync_ntp_time_title">Usar NTP para sincronizar dia e hora</string>
+	<string name="ntp_time_interval_title">Intervalo de sincronização</string>
+	<string name="ntp_servers_title">Servidores NTP</string>
+	<string name="ntp_servers_summary">Use ponto e vírgula para separar vários servidores</string>
+	<string name="sync_ntp_time_now_title">Sincronizar agora</string>
+	<string name="sync_ntp_successful">Data e hora sincronizada com sucesso</string>
+	<string name="sync_ntp_failed">Erro de ligação ao servidor NTP!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Painel de volume</string>
 	<string name="volume_dialog_timeout">Duração do painel de volume</string>
@@ -313,7 +313,7 @@
 	<string name="settings_cloned_apps_active">Desbloqueado para todas as aplicações via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Desfrute!</string>
 	<!-- SystemUI hook -->
 	<string name="battery_info_button_title">Informação da bateria…</string>
-	<string name="power_indication_error">Erro ao carregar dados</string>
+	<string name="power_indication_error">Erro ao carregar dados de carregamento</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrar ao atender chamada</string>
 	<string name="vibrate_on_call_drop_title">Vibrar ao terminar chamada</string>

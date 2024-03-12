@@ -223,32 +223,36 @@ public class CustomNavGestures extends XposedModPack {
 
 	String mTasksFieldName = null; // in case the code was obfuscated
 	private void saveFocusedTask() {
-		ArrayList<?> recentTaskList = (ArrayList<?>) callMethod(
-				mSysUiProxy,
-				"getRecentTasks",
-				1,
-				callMethod(Process.myUserHandle(), "getIdentifier"));
-
-		if(recentTaskList.size() == 0) return;
-
-		if(mTasksFieldName == null)
+		try
 		{
-			for(Field f : recentTaskList.get(0).getClass().getDeclaredFields())
+			ArrayList<?> recentTaskList = (ArrayList<?>) callMethod(
+					mSysUiProxy,
+					"getRecentTasks",
+					1,
+					callMethod(Process.myUserHandle(), "getIdentifier"));
+
+			if(recentTaskList.isEmpty()) return;
+
+			if(mTasksFieldName == null)
 			{
-				if(f.getType().getName().contains("RecentTaskInfo"))
+				for(Field f : recentTaskList.get(0).getClass().getDeclaredFields())
 				{
-					mTasksFieldName = f.getName();
+					if(f.getType().getName().contains("RecentTaskInfo"))
+					{
+						mTasksFieldName = f.getName();
+					}
 				}
 			}
+
+			Optional<?> focusedTask = recentTaskList.stream().filter(recentTask ->
+					(boolean) getObjectField(
+							((Object[]) getObjectField(recentTask, mTasksFieldName))[0],
+							"isFocused"
+					)).findFirst();
+
+			currentFocusedTask = focusedTask.map(o -> ((Object[]) getObjectField(o, mTasksFieldName))[0]).orElse(null);
 		}
-
-		Optional<?> focusedTask = recentTaskList.stream().filter(recentTask ->
-				(boolean) getObjectField(
-						((Object[]) getObjectField(recentTask, mTasksFieldName))[0],
-						"isFocused"
-				)).findFirst();
-
-		currentFocusedTask = focusedTask.map(o -> ((Object[]) getObjectField(o, mTasksFieldName))[0]).orElse(null);
+		catch (Throwable ignored){}
 	}
 
 	private void runAction(int action) {

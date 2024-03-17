@@ -1,3 +1,6 @@
+**canary-340**  
+- A14a21b2 & A15: Fixed system crash when changing adjusting volume  
+  
 **canary-339**  
 - A14ap21b2: Fixed QS Tile label sizes  
 - A14ap21b2: Fixed NotificationExpander  

@@ -2,6 +2,7 @@ package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
@@ -12,13 +13,14 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
+import sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools;
 
 @SuppressWarnings("RedundantThrows")
 public class FeatureFlagsMods extends XposedModPack {
 	public static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 
-	public static final String CLIPBOARD_OVERLAY_SHOW_ACTIONS = "clipboard_overlay_show_actions";
-	public static final String NAMESPACE_SYSTEMUI = "systemui";
+//	public static final String CLIPBOARD_OVERLAY_SHOW_ACTIONS = "clipboard_overlay_show_actions";
+//	public static final String NAMESPACE_SYSTEMUI = "systemui";
 
 	private static final int SIGNAL_DEFAULT = 0;
 	@SuppressWarnings("unused")
@@ -48,7 +50,7 @@ public class FeatureFlagsMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		Class<?> DeviceConfigClass = findClass("android.provider.DeviceConfig", lpparam.classLoader);
+/*		Class<?> DeviceConfigClass = findClass("android.provider.DeviceConfig", lpparam.classLoader);
 
 		hookAllMethods(DeviceConfigClass, "getBoolean", new XC_MethodHook() {
 			@Override
@@ -58,7 +60,21 @@ public class FeatureFlagsMods extends XposedModPack {
 					param.setResult(EnableClipboardSmartActions);
 				}
 			}
+		});*/
+		//replaced with this:
+		Class<?> ClipboardOverlayControllerClass = findClass("com.android.systemui.clipboardoverlay.ClipboardOverlayController", lpparam.classLoader);
+		ReflectionTools.hookAllMethodsMatchPattern(ClipboardOverlayControllerClass, "setExpandedView.*", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(EnableClipboardSmartActions) {
+					setObjectField(
+							getObjectField(param.thisObject, "mClipboardModel"),
+							"isRemote",
+							true);
+				}
+			}
 		});
+
 
 		hookAllMethods(
 				findClass("com.android.settingslib.mobile.MobileMappings$Config", lpparam.classLoader),

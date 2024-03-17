@@ -95,13 +95,20 @@ public class BatteryDataProvider extends XposedModPack {
 
 	public static void registerStatusCallback(BatteryStatusCallback callback)
 	{
-		instance.mStatusCallbacks.add(callback);
+		try
+		{
+			instance.mStatusCallbacks.add(callback);
+		}
+		catch (Throwable ignored) {}
 	}
 
 	/** @noinspection unused*/
 	public static void unRegisterStatusCallback(BatteryStatusCallback callback)
 	{
-		instance.mStatusCallbacks.remove(callback);
+		try {
+			instance.mStatusCallbacks.remove(callback);
+		}
+		catch (Throwable ignored){}
 	}
 
 	@Override
@@ -111,33 +118,64 @@ public class BatteryDataProvider extends XposedModPack {
 
 	public static void registerInfoCallback(BatteryInfoCallback callback)
 	{
-		instance.mInfoCallbacks.add(callback);
+		try
+		{
+			instance.mInfoCallbacks.add(callback);
+		}
+		catch (Throwable ignored){}
 	}
 
 	/** @noinspection unused*/
 	public static void unRegisterInfoCallback(BatteryInfoCallback callback)
 	{
-		instance.mInfoCallbacks.remove(callback);
+		try {
+			instance.mInfoCallbacks.remove(callback);
+		}
+		catch (Throwable ignored){}
 	}
 
 	public static boolean isCharging()
 	{
-		return instance.mCharging;
+		try {
+			return instance.mCharging;
+		}
+		catch (Throwable ignored)
+		{
+			return false;
+		}
 	}
 
 	public static int getCurrentLevel()
 	{
-		return instance.mCurrentLevel;
+		try {
+			return instance.mCurrentLevel;
+		}
+		catch (Throwable ignored)
+		{
+			return 0;
+		}
 	}
 
 	public static boolean isPowerSaving()
 	{
-		return instance.mPowerSave;
+		try {
+			return instance.mPowerSave;
+		}
+		catch (Throwable ignored)
+		{
+			return false;
+		}
 	}
 
 	public static boolean isFastCharging()
 	{
-		return instance.mCharging && instance.mIsFastCharging;
+		try {
+			return instance.mCharging && instance.mIsFastCharging;
+		}
+		catch (Throwable ignored)
+		{
+			return false;
+		}
 	}
 
 	private void fireBatteryInfoChanged() {

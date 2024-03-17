@@ -8,7 +8,6 @@ import static android.os.VibrationEffect.EFFECT_CLICK;
 import static android.service.quicksettings.Tile.STATE_ACTIVE;
 import static android.service.quicksettings.Tile.STATE_INACTIVE;
 import static android.view.View.GONE;
-import static java.lang.Math.abs;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.round;
@@ -86,8 +85,10 @@ public class VolumeTile extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage) || AudioManager() == null) return;
 
-		minVol = AudioManager().getStreamMinVolume(STREAM_MUSIC);
-		maxVol = AudioManager().getStreamMaxVolume(STREAM_MUSIC);
+		new Thread(() -> {
+			minVol = AudioManager().getStreamMinVolume(STREAM_MUSIC);
+			maxVol = AudioManager().getStreamMaxVolume(STREAM_MUSIC);
+		}).start();
 
 		volumePercentageDrawable = new PercentageShape();
 		volumePercentageDrawable.setAlpha(64);
@@ -113,7 +114,7 @@ public class VolumeTile extends XposedModPack {
 				{
 					Object tile = getObjectField(record, "tile");
 
-					if (TARGET_SPEC.equals((String) getObjectField(tile, "mTileSpec"))) {
+					if (TARGET_SPEC.equals(getObjectField(tile, "mTileSpec"))) {
 						View tileView = (View) getObjectField(record, "tileView");
 
 						setupTile(tile, tileView);
@@ -145,7 +146,7 @@ public class VolumeTile extends XposedModPack {
 	}
 
 	private void setVolumeChangeListener(Object tile, View tileView) {
-		ChangeListener listener = (ignored) -> handleVolumeChanged(tileView);
+		ChangeListener listener = newVal -> handleVolumeChanged(tileView, round(100f * (newVal - minVol) / (maxVol - minVol)));
 
 		setAdditionalInstanceField(tile, "volumeChangeListener", listener);
 
@@ -162,23 +163,34 @@ public class VolumeTile extends XposedModPack {
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
 				switch (motionEvent.getAction()) {
-					case MotionEvent.ACTION_DOWN: {
+					case MotionEvent.ACTION_DOWN:
+					{
 						initX = motionEvent.getX();
 						initPct = initX / view.getWidth();
 						return true;
 					}
-					case MotionEvent.ACTION_MOVE: {
-						float newPct = motionEvent.getX() / view.getWidth();
-						float deltaPct = abs(newPct - initPct);
-						if (deltaPct > .03f) {
-							view.getParent().requestDisallowInterceptTouchEvent(true);
-							moved = true;
-							currentPct = round(max(min(newPct, 1), 0) * 100f);
-							changeVolume(currentPct);
+
+					case MotionEvent.ACTION_MOVE:
+					{
+						float deltaMove = Math.abs(initX - motionEvent.getX()) / view.getWidth();
+
+						if(deltaMove > .03)
+						{
+							int newPct = clampPctToSteps(round(max(min((motionEvent.getX() / view.getWidth()), 1), 0) * 100f));
+
+							if (newPct != currentPct) {
+								currentPct = newPct;
+								view.getParent().requestDisallowInterceptTouchEvent(true);
+								moved = true;
+
+								changeVolume(currentPct);
+							}
 						}
 						return true;
 					}
-					case MotionEvent.ACTION_UP: {
+
+					case MotionEvent.ACTION_UP:
+					{
 						if (moved) {
 							moved = false;
 						} else {
@@ -192,6 +204,10 @@ public class VolumeTile extends XposedModPack {
 				return true;
 			}
 		});
+	}
+
+	private int clampPctToSteps(int volPct) {
+		return round(round((maxVol - minVol) * volPct / 100f) * 1f / (maxVol - minVol) *100f);
 	}
 
 	private void updateTileView(LinearLayout tileView, int state) {
@@ -240,15 +256,15 @@ public class VolumeTile extends XposedModPack {
 		}
 		else
 		{
-			changeVolume(unMuteVolumePCT);
+			changeVolume(clampPctToSteps(unMuteVolumePCT));
 		}
 	}
 
-	private void handleVolumeChanged(View thisView) {
+	private void handleVolumeChanged(View thisView, int newVal) {
 		new Thread(() -> {
 			Object parentTile = getAdditionalInstanceField(thisView, "mParentTile");
 
-			currentPct = getCurrentVolumePercent();
+			currentPct = newVal;
 
 			Object mTile = getObjectField(parentTile, "mTile");
 
@@ -263,6 +279,11 @@ public class VolumeTile extends XposedModPack {
 			thisView.post(() -> updateTileView((LinearLayout) thisView, newState));
 		}).start();
 	}
+
+	private void handleVolumeChanged(View thisView) {
+		new Thread(() -> handleVolumeChanged(thisView, getCurrentVolumePercent())).start();
+	}
+
 
 	private void changeVolume(int currentPct) {
 		AudioManager().setStreamVolume(

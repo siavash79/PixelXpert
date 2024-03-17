@@ -49,6 +49,8 @@ import sh.siava.pixelxpert.modpacks.XPLauncher;
 @SuppressWarnings("unused")
 public class SystemUtils {
 	private static final int THREAD_PRIORITY_BACKGROUND = 10;
+	public static final String EXTRA_VOLUME_STREAM_TYPE = "android.media.EXTRA_VOLUME_STREAM_TYPE";
+	public static final String EXTRA_VOLUME_STREAM_VALUE = "android.media.EXTRA_VOLUME_STREAM_VALUE";
 
 	@SuppressLint("StaticFieldLeak")
 	static SystemUtils instance;
@@ -254,9 +256,13 @@ public class SystemUtils {
 		BroadcastReceiver volChangeReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				for(ChangeListener listener : mVolumeChangeListeners)
+				if(intent.getIntExtra(EXTRA_VOLUME_STREAM_TYPE, -1) == AudioManager.STREAM_MUSIC)
 				{
-					listener.onChanged(0);
+					int newLevel = intent.getIntExtra(EXTRA_VOLUME_STREAM_VALUE, 0);
+					for(ChangeListener listener : mVolumeChangeListeners)
+					{
+						listener.onChanged(newLevel);
+					}
 				}
 			}
 		};
@@ -297,7 +303,7 @@ public class SystemUtils {
 
 		try {
 			String flashID = getFlashID(mCameraManager);
-			if (flashID.equals("")) {
+			if (flashID.isEmpty()) {
 				return;
 			}
 			if (enabled
@@ -332,7 +338,7 @@ public class SystemUtils {
 
 		try {
 			String flashID = getFlashID(mCameraManager);
-			if (flashID.equals("")) {
+			if (flashID.isEmpty()) {
 				return false;
 			}
 			if (maxFlashLevel == -1) {
@@ -354,7 +360,7 @@ public class SystemUtils {
 
 		try {
 			String flashID = getFlashID(mCameraManager);
-			if (flashID.equals("")) {
+			if (flashID.isEmpty()) {
 				return;
 			}
 			if (maxFlashLevel == -1) {

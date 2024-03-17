@@ -1,12 +1,8 @@
 package sh.siava.pixelxpert.service;
 
-import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
-
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -14,13 +10,11 @@ import android.os.RemoteException;
 import androidx.annotation.Nullable;
 
 import com.topjohnwu.superuser.Shell;
-import com.topjohnwu.superuser.ipc.RootService;
 
 import java.util.Arrays;
 import java.util.List;
 
 import sh.siava.pixelxpert.IRootProviderProxy;
-import sh.siava.pixelxpert.IRootProviderService;
 import sh.siava.pixelxpert.R;
 
 public class RootProviderProxy extends Service {
@@ -35,37 +29,14 @@ public class RootProviderProxy extends Service {
 		/** @noinspection unused*/
 		String TAG = getClass().getSimpleName();
 
-		private final Context mContext;
-		private IRootProviderService mRootServiceIPC;
 		private final List<String> rootAllowedPacks;
-
-		private final ServiceConnection mRootServiceConnection = new ServiceConnection() {
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			mRootServiceIPC = IRootProviderService.Stub.asInterface(service);
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-			mRootServiceIPC = null;
-		}
-	};
-
+		private final boolean rootGranted;
 
 		private RootPoviderProxyIPC(Context context)
 		{
-			mContext = context;
+			rootGranted = Shell.getShell().isRoot();
 
-			rootAllowedPacks = Arrays.asList(mContext.getResources().getStringArray(R.array.root_requirement));
-
-			startRootService();
-		}
-
-		private void startRootService()
-		{
-			// Start RootService connection
-			Intent intent = new Intent(mContext, RootProvider.class);
-			getMainExecutor().execute(() -> RootService.bind(intent, mRootServiceConnection));
+			rootAllowedPacks = Arrays.asList(context.getResources().getStringArray(R.array.root_requirement));
 		}
 
 		/** @noinspection RedundantThrows*/
@@ -83,32 +54,13 @@ public class RootProviderProxy extends Service {
 			}
 		}
 
-		@Override
-		public IBinder getFileSystemService() throws RemoteException {
-			ensureEnvironment();
-
-			return mRootServiceIPC.getFileSystemService();
-		}
-
 		private void ensureEnvironment() throws RemoteException {
-			ensureSecurity(Binder.getCallingUid());
-
-			if(mRootServiceIPC == null)
+			if(!rootGranted)
 			{
-				startRootService();
-
-				long startTime = System.currentTimeMillis();
-				while(mRootServiceIPC == null && System.currentTimeMillis() < startTime + 5000)
-				{
-					sleep(50);
-				}
-
-				if(mRootServiceIPC == null)
-				{
-					//This shouldn't happen at all
-					throw new RemoteException("Timeout: Could not connect to root service");
-				}
+				throw new RemoteException("Root permission denied");
 			}
+
+			ensureSecurity(Binder.getCallingUid());
 		}
 
 		private void ensureSecurity(int uid) throws RemoteException {

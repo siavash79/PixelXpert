@@ -9,5 +9,4 @@ interface IRootProviderProxy {
 	 * and return values in AIDL.
 	 */
 	String[] runCommand(String command);
-	IBinder getFileSystemService();
 }

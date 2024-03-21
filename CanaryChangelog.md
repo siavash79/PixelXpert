@@ -1,3 +1,8 @@
+**canary-341**  
+- Happy Nowruz!  
+- Network monitor: added bit/s to options  
+- Refined leveled flashlight tile  
+  
 **canary-340**  
 - A14a21b2 & A15: Fixed system crash when adjusting volume  
   

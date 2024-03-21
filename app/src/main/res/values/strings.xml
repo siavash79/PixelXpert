@@ -150,6 +150,7 @@
 	<string name="nt_mode_total">Download + Upload (Combined)</string>
 	<string name="nt_mode_rxonly">Download only</string>
 	<string name="nt_mode_txonly">Upload only</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Status Bar Options</string>
 	<string name="dual_tone_battery_title">Enable dual tone battery meter</string>
 	<string name="dual_tone_battery_on_summary">On (only works with portrait icon)</string>

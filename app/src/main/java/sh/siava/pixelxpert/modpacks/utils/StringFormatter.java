@@ -223,7 +223,7 @@ public class StringFormatter {
 			}
 
 			if (transformed == null) {
-				transformed = ObjectTools.getHumanizedBytes(traffic, .6f, "", "", textColor);
+				transformed = ObjectTools.getHumanizedBytes(traffic, false, .6f, "", "", textColor);
 			}
 			return transformed;
 		} catch (Exception ignored) {

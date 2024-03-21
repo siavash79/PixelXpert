@@ -332,6 +332,7 @@ public class StatusbarMods extends XposedModPack {
 		int networkTrafficInterval = Xprefs.getSliderInt( "networkTrafficInterval", 1);
 		boolean networkTrafficColorful = Xprefs.getBoolean("networkTrafficColorful", false);
 		boolean networkTrafficShowIcons = Xprefs.getBoolean("networkTrafficShowIcons", true);
+		boolean networkTrafficShowInBits = Xprefs.getBoolean("networkTrafficShowInBits", false);
 
 		if (networkOnSBEnabled || networkOnQSEnabled) {
 			networkTrafficPosition = Integer.parseInt(Xprefs.getString("networkTrafficPosition", String.valueOf(POSITION_RIGHT)));
@@ -349,7 +350,7 @@ public class StatusbarMods extends XposedModPack {
 			} catch (Exception ignored) {
 				networkTrafficThreshold = 10;
 			}
-			NetworkTraffic.setConstants(networkTrafficInterval, networkTrafficThreshold, networkTrafficMode, networkTrafficRXTop, networkTrafficColorful, networkTrafficDLColor, networkTrafficULColor, networkTrafficOpacity, networkTrafficShowIcons);
+			NetworkTraffic.setConstants(networkTrafficInterval, networkTrafficThreshold, networkTrafficMode, networkTrafficRXTop, networkTrafficColorful, networkTrafficDLColor, networkTrafficULColor, networkTrafficOpacity, networkTrafficShowIcons, networkTrafficShowInBits);
 
 		}
 		if (networkOnSBEnabled) {
@@ -402,7 +403,7 @@ public class StatusbarMods extends XposedModPack {
 		}
 
 
-		if ((mStringFormatBefore + mStringFormatAfter).trim().length() == 0) {
+		if ((mStringFormatBefore + mStringFormatAfter).trim().isEmpty()) {
 			int SBCDayOfWeekMode = Integer.parseInt(Xprefs.getString("SBCDayOfWeekMode", "0"));
 
 			switch (SBCDayOfWeekMode) {
@@ -1374,7 +1375,7 @@ public class StatusbarMods extends XposedModPack {
 	private final StringFormatter stringFormatter = new StringFormatter();
 
 	private CharSequence getFormattedString(String dateFormat, boolean small, @Nullable @ColorInt Integer textColor) {
-		if (dateFormat.length() == 0) return "";
+		if (dateFormat.isEmpty()) return "";
 
 		//There's some format to work on
 		SpannableStringBuilder formatted = new SpannableStringBuilder(stringFormatter.formatString(dateFormat));
@@ -1418,7 +1419,7 @@ public class StatusbarMods extends XposedModPack {
 					, ICON_HIDE_LIST);
 
 			if (CombineSignalIcons && mWifiVisible) {
-				if (hideListString == null || hideListString.length() == 0) {
+				if (hideListString == null || hideListString.isEmpty()) {
 					hideListString = "mobile";
 				} else if (!hideListString.contains("mobile")) {
 					hideListString = hideListString + ",mobile";

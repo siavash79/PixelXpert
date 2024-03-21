@@ -19,9 +19,9 @@ import sh.siava.pixelxpert.modpacks.utils.NetworkTraffic;
 /** @noinspection unused, RedundantThrows */
 @SuppressWarnings("CommentedOutCode")
 public class ObjectTools {
-	private static final int KB = 1024;
-	private static final int MB = 1024 * KB;
-	private static final int GB = 1024 * MB;
+	private static final int KILO = 1024;
+	private static final int MEGA = 1024 * KILO;
+	private static final int GIGA = 1024 * MEGA;
 
 
 	public static int tryParseInt(String string, int fallbackResult) {
@@ -38,40 +38,45 @@ public class ObjectTools {
 	}
 
 
-	public static SpannableStringBuilder getHumanizedBytes(long bytes, float unitSizeFactor, String unitSeparator, String indicatorSymbol, @Nullable @ColorInt Integer textColor) {
+	public static SpannableStringBuilder getHumanizedBytes(long bytes, boolean showInBits, float unitSizeFactor, String unitSeparator, String indicatorSymbol, @Nullable @ColorInt Integer textColor) {
+		if(showInBits)
+		{
+			bytes *= 8;
+		}
+
 		DecimalFormat decimalFormat;
 		CharSequence formattedData;
 		SpannableString spanSizeString;
 		SpannableString spanUnitString;
 		String unit;
-		if (bytes >= GB) {
-			unit = "GB";
+		if (bytes >= GIGA) {
+			unit = showInBits ? "Gb" : "GB";
 			decimalFormat = new DecimalFormat("0.00");
-			formattedData = decimalFormat.format(bytes / (float) GB);
-		} else if (bytes >= 100 * MB) {
+			formattedData = decimalFormat.format(bytes / (float) GIGA);
+		} else if (bytes >= 100 * MEGA) {
 			decimalFormat = new DecimalFormat("000");
-			unit = "MB";
-			formattedData = decimalFormat.format(bytes / (float) MB);
-		} else if (bytes >= 10 * MB) {
+			unit = showInBits ? "Mb" : "MB";
+			formattedData = decimalFormat.format(bytes / (float) MEGA);
+		} else if (bytes >= 10 * MEGA) {
 			decimalFormat = new DecimalFormat("00.0");
-			unit = "MB";
-			formattedData = decimalFormat.format(bytes / (float) MB);
-		} else if (bytes >= MB) {
+			unit = showInBits ? "Mb" : "MB";
+			formattedData = decimalFormat.format(bytes / (float) MEGA);
+		} else if (bytes >= MEGA) {
 			decimalFormat = new DecimalFormat("0.00");
-			unit = "MB";
-			formattedData = decimalFormat.format(bytes / (float) MB);
-		} else if (bytes >= 100 * KB) {
+			unit = showInBits ? "Mb" : "MB";
+			formattedData = decimalFormat.format(bytes / (float) MEGA);
+		} else if (bytes >= 100 * KILO) {
 			decimalFormat = new DecimalFormat("000");
-			unit = "KB";
-			formattedData = decimalFormat.format(bytes / (float) KB);
-		} else if (bytes >= 10 * KB) {
+			unit = showInBits ? "Kb" : "KB";
+			formattedData = decimalFormat.format(bytes / (float) KILO);
+		} else if (bytes >= 10 * KILO) {
 			decimalFormat = new DecimalFormat("00.0");
-			unit = "KB";
-			formattedData = decimalFormat.format(bytes / (float) KB);
+			unit = showInBits ? "Kb" : "KB";
+			formattedData = decimalFormat.format(bytes / (float) KILO);
 		} else {
 			decimalFormat = new DecimalFormat("0.00");
-			unit = "KB";
-			formattedData = decimalFormat.format(bytes / (float) KB);
+			unit = showInBits ? "Kb" : "KB";
+			formattedData = decimalFormat.format(bytes / (float) KILO);
 		}
 		spanSizeString = new SpannableString(formattedData);
 
@@ -101,7 +106,7 @@ public class ObjectTools {
 	{
 		if(Pattern.matches(getCommaSearchPattern(key), string)) return string;
 
-		return String.format("%s%s%s", key, (string.length() > 0) ? "," : "", string);
+		return String.format("%s%s%s", key, !string.isEmpty() ? "," : "", string);
 	}
 	private static String getCommaSearchPattern(String tile) {
 		return String.format("^(%s,)(.+)|(.+)(,%s)(,.+|$)", tile, tile);

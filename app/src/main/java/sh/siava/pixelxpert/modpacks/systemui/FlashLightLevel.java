@@ -7,6 +7,7 @@ import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.getFlashlightLevel;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -73,7 +74,7 @@ public class FlashLightLevel extends XposedModPack {
 			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if (!SystemUtils.supportsFlashLevels() || !leveledFlashTile) return;
+				if (!leveledFlashTile || !SystemUtils.supportsFlashLevels()) return;
 
 				try {
 					Object state = param.args[0];
@@ -123,13 +124,15 @@ public class FlashLightLevel extends XposedModPack {
 											return true;
 										}
 										case MotionEvent.ACTION_MOVE: {
-											float newPct = motionEvent.getX() / view.getWidth();
-											float deltaPct = Math.abs(newPct - initPct);
-											if (deltaPct > .03f) {
+											float deltaMove = Math.abs(initX - motionEvent.getX()) / view.getWidth();
+
+											if (deltaMove > .03f) {
+												int newLevel = getFlashlightLevel(motionEvent.getX() / view.getWidth());
+
 												view.getParent().requestDisallowInterceptTouchEvent(true);
 												moved = true;
-												currentPct = Math.max(0.01f, Math.min(newPct, 1));
-												handleFlashLightClick(false, currentPct);
+												currentPct = newLevel * 1f / SystemUtils.getMaxFlashLevel();
+												handleFlashLightClick(false, newLevel);
 												SystemUtils.setFlashlightLevel(Math.round(currentPct * 100f));
 											}
 											return true;
@@ -139,7 +142,7 @@ public class FlashLightLevel extends XposedModPack {
 												moved = false;
 												Xprefs.edit().putFloat("flashPCT", currentPct).apply();
 											} else {
-												handleFlashLightClick(true, currentPct);
+												handleFlashLightClick(true, getFlashlightLevel(currentPct));
 												if (QSTileGrid.QSHapticEnabled)
 													SystemUtils.vibrate(VibrationEffect.EFFECT_CLICK, VibrationAttributes.USAGE_TOUCH);
 											}
@@ -188,8 +191,8 @@ public class FlashLightLevel extends XposedModPack {
 		});
 	}
 
-	private void handleFlashLightClick(boolean toggle, float pct) {
-		SystemUtils.setFlash(toggle ^ SystemUtils.isFlashOn(), pct);
+	private void handleFlashLightClick(boolean toggle, int level) {
+		SystemUtils.setFlash(toggle ^ SystemUtils.isFlashOn(), level);
 	}
 
 	private class PercentageShape extends Drawable {

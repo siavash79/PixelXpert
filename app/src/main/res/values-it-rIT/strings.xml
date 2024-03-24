@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Download + Upload (Combinato)</string>
 	<string name="nt_mode_rxonly">Solo download</string>
 	<string name="nt_mode_txonly">Solo upload</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Opzioni Status Bar</string>
 	<string name="dual_tone_battery_title">Abilita indicatore batteria dual-tone</string>
 	<string name="dual_tone_battery_on_summary">On (solo con icona verticale)</string>

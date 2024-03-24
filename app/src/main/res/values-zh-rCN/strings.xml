@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">下载 + 上传 (合并)</string>
 	<string name="nt_mode_rxonly">仅下载</string>
 	<string name="nt_mode_txonly">仅上传</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">状态栏选项</string>
 	<string name="dual_tone_battery_title">双色电池图标</string>
 	<string name="dual_tone_battery_on_summary">开启 (仅当纵向图标时生效)</string>

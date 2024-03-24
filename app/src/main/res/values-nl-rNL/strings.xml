@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Downloaden + Uploaden (gecombineerd)</string>
 	<string name="nt_mode_rxonly">Alleen downloaden</string>
 	<string name="nt_mode_txonly">Alleen uploaden</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Statusbalkopties</string>
 	<string name="dual_tone_battery_title">Dual tone batterijmeter inschakelen</string>
 	<string name="dual_tone_battery_on_summary">Aan (werkt alleen met portretpictogram)</string>

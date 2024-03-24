@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Descarga + subida (Combinado)</string>
 	<string name="nt_mode_rxonly">Solo descarga</string>
 	<string name="nt_mode_txonly">Solo subida</string>
+	<string name="nt_unit_show_bits">Mostrar en bits/s</string>
 	<string name="statusbar_general_options">Preferencias de barra de estado</string>
 	<string name="dual_tone_battery_title">Activar icono de tono dual</string>
 	<string name="dual_tone_battery_on_summary">Activado (solo en modo horizontal)</string>

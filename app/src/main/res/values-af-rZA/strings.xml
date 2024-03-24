@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Aflaai + Laai op (Gekombineerd)</string>
 	<string name="nt_mode_rxonly">Slegs aflaai</string>
 	<string name="nt_mode_txonly">Slegs oplaai</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Statusbalkopsies</string>
 	<string name="dual_tone_battery_title">Aktiveer dubbeltoonbatterymeter</string>
 	<string name="dual_tone_battery_on_summary">Aan (werk net met portretikoon)</string>

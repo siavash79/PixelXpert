@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Stáhnout + nahrát (kombinované)</string>
 	<string name="nt_mode_rxonly">Pouze stáhnout</string>
 	<string name="nt_mode_txonly">Pouze nahrát</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Možnosti stavového řádku</string>
 	<string name="dual_tone_battery_title">Povolit dvoutónový měřič baterie</string>
 	<string name="dual_tone_battery_on_summary">Zapnuto (funguje pouze s ikonou na výšku)</string>

@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">下載 +上傳 (合併)</string>
 	<string name="nt_mode_rxonly">僅下載</string>
 	<string name="nt_mode_txonly">僅上傳</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">自定狀態列</string>
 	<string name="dual_tone_battery_title">雙色電池圖示</string>
 	<string name="dual_tone_battery_on_summary">開啟 (僅當縱向圖示時生效)</string>

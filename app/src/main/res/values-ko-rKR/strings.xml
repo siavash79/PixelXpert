@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">다운로드 속도 + 업로드 속도 합산 표시</string>
 	<string name="nt_mode_rxonly">다운로드 속도만 표시</string>
 	<string name="nt_mode_txonly">업로드 속도만 표시</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">상태 표시줄 설정</string>
 	<string name="dual_tone_battery_title">다중 색상 배터리 아이콘 활성화</string>
 	<string name="dual_tone_battery_on_summary">켜짐 (세로 아이콘에만 적용)</string>

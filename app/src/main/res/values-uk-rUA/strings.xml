@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Завантаження + Відправлення (Разом)</string>
 	<string name="nt_mode_rxonly">Лише завантаження</string>
 	<string name="nt_mode_txonly">Лише відправлення</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Налаштування рядка стану</string>
 	<string name="dual_tone_battery_title">Увімкнути двотональний індикатор заряду батареї</string>
 	<string name="dual_tone_battery_on_summary">Увімк (працює лише зі значком портретної орієнтації)</string>

@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Téléchargement + upload (combiné)</string>
 	<string name="nt_mode_rxonly">Téléchargement seulement</string>
 	<string name="nt_mode_txonly">Upload seulement</string>
+	<string name="nt_unit_show_bits">Afficher en bits/s</string>
 	<string name="statusbar_general_options">Préférence de la barre d’état</string>
 	<string name="dual_tone_battery_title">Activer le compteur de batterie à double couleur</string>
 	<string name="dual_tone_battery_on_summary">Activé (marche seulement pour le mode portrait)</string>

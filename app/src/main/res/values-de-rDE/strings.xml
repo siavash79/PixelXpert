@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Herunterladen + Hochladen (kombiniert)</string>
 	<string name="nt_mode_rxonly">Nur herunterladen</string>
 	<string name="nt_mode_txonly">Nur hochladen</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Statusleisten Optionen</string>
 	<string name="dual_tone_battery_title">Aktivieren die Zweiton-Akkuanzeige</string>
 	<string name="dual_tone_battery_on_summary">Ein (Funktioniert nur mit dem Portrait Symbol)</string>

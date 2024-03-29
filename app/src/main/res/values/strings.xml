@@ -63,6 +63,9 @@
 	<string name="transparent_fingerprint_circle">Remove background circle from under-display fingerprint</string>
 	<string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
 	<string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Custom text on Lockscreen</string>
 	<string name="configure_carrier_text">Configure carrier text - Top of the screen</string>
 	<string name="carrier_text_mod_disabled">Carrier text unchanged</string>

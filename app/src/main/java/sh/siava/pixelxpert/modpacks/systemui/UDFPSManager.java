@@ -25,6 +25,7 @@ import sh.siava.pixelxpert.modpacks.XposedModPack;
 public class UDFPSManager extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 	private static boolean transparentBG = false;
+	private static boolean transparentFG = false;
 
 	public UDFPSManager(Context context) {
 		super(context);
@@ -34,6 +35,7 @@ public class UDFPSManager extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		if (Xprefs == null) return;
 		transparentBG = Xprefs.getBoolean("fingerprint_circle_hide", false);
+		transparentFG = Xprefs.getBoolean("fingerprint_icon_hide", false);
 	}
 
 	@Override
@@ -71,7 +73,7 @@ public class UDFPSManager extends XposedModPack {
 							new XC_MethodHook() {
 								@Override
 								protected void afterHookedMethod(MethodHookParam param1) throws Throwable {
-									removeUDFPSBG(param.thisObject);
+									removeUDFPSGraphics(param.thisObject);
 								}
 							});
 				} catch (Throwable ignored) {
@@ -82,7 +84,7 @@ public class UDFPSManager extends XposedModPack {
 		hookAllMethods(UdfpsKeyguardViewClass, "onFinishInflate", new XC_MethodHook() { //A13
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				removeUDFPSBG(param.thisObject);
+				removeUDFPSGraphics(param.thisObject);
 			}
 		});
 
@@ -108,13 +110,21 @@ public class UDFPSManager extends XposedModPack {
 				});
 	}
 
-	private void removeUDFPSBG(Object object) {
-		if (!transparentBG) return;
-
+	private void removeUDFPSGraphics(Object object) {
 		try
 		{
-			ImageView mBgProtection = (ImageView) getObjectField(object, "mBgProtection");
-			mBgProtection.setImageDrawable(new ShapeDrawable());
+			if (transparentBG) {
+				ImageView mBgProtection = (ImageView) getObjectField(object, "mBgProtection");
+				mBgProtection.setImageDrawable(new ShapeDrawable());
+			}
+
+			if (transparentFG) {
+				ImageView mLockScreenFp = (ImageView) getObjectField(object, "mLockScreenFp");
+				mLockScreenFp.setImageDrawable(new ShapeDrawable());
+				
+				ImageView mAodFp = (ImageView) getObjectField(object, "mAodFp");
+				mAodFp.setImageDrawable(new ShapeDrawable());
+			}
 		}
 		catch (Throwable ignored){}
 	}

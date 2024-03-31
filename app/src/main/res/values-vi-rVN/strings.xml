@@ -142,7 +142,7 @@
 	<string name="nt_mode_total">Tải xuống + Tải lên (Kết hợp)</string>
 	<string name="nt_mode_rxonly">Chỉ tải xuống</string>
 	<string name="nt_mode_txonly">Chỉ tải lên</string>
-	<string name="nt_unit_show_bits">Show in bits/s</string>
+	<string name="nt_unit_show_bits">Hiển thị kiểu bit/s</string>
 	<string name="statusbar_general_options">Tùy chỉnh thanh trạng thái</string>
 	<string name="dual_tone_battery_title">Bật biểu tượng pin hai tông màu</string>
 	<string name="dual_tone_battery_on_summary">Bật (chỉ hoạt động với biểu tượng dọc)</string>

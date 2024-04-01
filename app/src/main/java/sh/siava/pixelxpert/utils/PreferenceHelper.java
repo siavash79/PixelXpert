@@ -205,6 +205,10 @@ public class PreferenceHelper {
 			case "SBCAfterClockColor":
 				return instance.mPreferences.getBoolean("SBCClockColorful", false);
 
+			case "status_bar_clock_auto_hide_hduration":
+			case "status_bar_clock_auto_hide_sduration":
+				return instance.mPreferences.getBoolean("status_bar_clock_auto_hide", false);
+
 			case "ThreeButtonLeft":
 			case "ThreeButtonCenter":
 			case "ThreeButtonRight":
@@ -366,6 +370,11 @@ public class PreferenceHelper {
 				int headsupDecayMillis = instance.mPreferences.getSliderInt("HeadupAutoDismissNotificationDecay", 5000);
 
 				return headsupDecayMillis + " " + fragmentCompat.getString(R.string.milliseconds);
+
+			case "status_bar_clock_auto_hide_hduration":
+				return fragmentCompat.getString(R.string.status_bar_clock_auto_hide_hdur_summary) + "\n" + instance.mPreferences.getSliderInt("status_bar_clock_auto_hide_hduration", 60) + " " + fragmentCompat.getString(R.string.seconds);
+			case "status_bar_clock_auto_hide_sduration":
+				return fragmentCompat.getString(R.string.status_bar_clock_auto_hide_sdur_summary) + "\n" + instance.mPreferences.getSliderInt("status_bar_clock_auto_hide_sduration", 5) + " " + fragmentCompat.getString(R.string.seconds);
 
 			case "TimeSyncInterval":
 				return instance.mPreferences.getSliderInt("TimeSyncInterval", 24) + " " + fragmentCompat.getString(R.string.hours);

@@ -115,6 +115,13 @@
 	<string name="vowifi_icon_title">Show VoWiFi icon when available</string>
 	<string name="hide_privacychip_title">Hide privacy indicators\n(Camera, Mic)</string><!-- \n means next line-->
 	<string name="sbc_position_title">Clock position</string>
+	<string name="status_bar_clock_auto_hide_title">Auto hide</string>
+	<string name="status_bar_clock_auto_hide_launcher_summary">Hide clock if launcher is visible</string>
+	<string name="status_bar_clock_auto_hide_summary">Hide clock at regular interval</string>
+	<string name="status_bar_clock_auto_hide_hdur_title">Hide duration</string>
+	<string name="status_bar_clock_auto_hide_hdur_summary">Number of seconds to hide clock</string>
+	<string name="status_bar_clock_auto_hide_sdur_title">Show duration</string>
+	<string name="status_bar_clock_auto_hide_sdur_summary">Number of seconds to wait before hiding clock</string>
 	<string name="sbc_ampm_style">AM/PM Style</string>
 	<string name="sbc_show_secs">Show seconds</string>
 	<string name="sbc_date_cat">Date options</string>
@@ -334,6 +341,7 @@
 	<string name="disable_overscroll">Disable elastic overscroll effect</string>
 	<string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for within LSPosed</string>
 	<string name="milliseconds">Milliseconds</string>
+	<string name="seconds">Seconds</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>
 	<string name="sync_ntp_time_title">Use NTP to sync time</string>

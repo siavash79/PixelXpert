@@ -11,6 +11,33 @@
 		android:title="@string/sbc_position_title"
 		app:iconSpaceReserved="false" />
 
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+		app:iconSpaceReserved="false"
+		android:key="status_bar_clock_auto_hide"
+		android:title="@string/status_bar_clock_auto_hide_title"
+		android:summary="@string/status_bar_clock_auto_hide_summary"
+		android:defaultValue="false" />
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+		android:key="status_bar_clock_auto_hide_hduration"
+		android:title="@string/status_bar_clock_auto_hide_hdur_title"
+		android:summary="@string/status_bar_clock_auto_hide_hdur_summary"
+		app:maxVal="300"
+		app:minVal="5"
+		app:tickInterval="5"
+		app:defaultValue="60"
+		android:dependency="status_bar_clock_auto_hide" />
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+		android:key="status_bar_clock_auto_hide_sduration"
+		android:title="@string/status_bar_clock_auto_hide_sdur_title"
+		android:summary="@string/status_bar_clock_auto_hide_sdur_summary"
+		app:maxVal="300"
+		app:minVal="5"
+		app:tickInterval="5"
+		app:defaultValue="5"
+		android:dependency="status_bar_clock_auto_hide"/>
+
 	<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 		android:defaultValue="2"
 		android:entries="@array/sbc_ampm_style_names"

@@ -1,3 +1,6 @@
+**canary-342**  
+- This release is brought to you by: aaronjamt and DHD2280  
+  
 **canary-341**  
 - Happy Nowruz!  
 - Network monitor: added bit/s to options  

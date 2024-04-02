@@ -3,6 +3,7 @@ package sh.siava.pixelxpert.modpacks.utils.batteryStyles;
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.getCurrentLevel;
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isFastCharging;
+import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isPowerSaving;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -49,16 +50,20 @@ public class BatteryBarView extends FrameLayout {
 	private static int[] batteryColors = new int[]{Color.RED, Color.YELLOW};
 	private static int chargingColor = Color.WHITE;
 	private static int fastChargingColor = Color.WHITE;
+	private static int powerSaveColor = Color.parseColor("#FFBF00");
 	private static boolean indicateCharging = false;
 	private static boolean indicateFastCharging = false;
+	private static boolean indicatePowerSave = false;
 	private static boolean transitColors = false;
 
-	public static void setStaticColor(List<Float> batteryLevels, int[] batteryColors, boolean indicateCharging, int chargingColor, boolean indicateFastCharging, int fastChargingColor, boolean transitColors) {
+	public static void setStaticColor(List<Float> batteryLevels, int[] batteryColors, boolean indicateCharging, int chargingColor, boolean indicateFastCharging, int fastChargingColor, boolean indicatePowerSave, int powerSaveColor, boolean transitColors) {
 		BatteryBarView.transitColors = transitColors;
 		BatteryBarView.batteryLevels = batteryLevels;
 		BatteryBarView.batteryColors = batteryColors;
 		BatteryBarView.chargingColor = chargingColor;
 		BatteryBarView.fastChargingColor = fastChargingColor;
+		BatteryBarView.indicatePowerSave = indicatePowerSave;
+		BatteryBarView.powerSaveColor = powerSaveColor;
 		BatteryBarView.indicateCharging = indicateCharging;
 		BatteryBarView.indicateFastCharging = indicateFastCharging;
 	}
@@ -178,6 +183,9 @@ public class BatteryBarView extends FrameLayout {
 		} else if (isCharging() && indicateCharging) //normal charging color
 		{
 			mPaint.setColor(chargingColor);
+		} else if (isPowerSaving() && indicatePowerSave) //power saving color
+		{
+			mPaint.setColor(powerSaveColor);
 		} else if (!colorful || shadeColors == null) {                    //not charging color
 			for (int i = 0; i < batteryLevels.size(); i++) {
 				if (getCurrentLevel() <= batteryLevels.get(i)) {

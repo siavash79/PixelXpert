@@ -169,12 +169,14 @@
 	<string name="BB_Thickness_title">Bar thickness</string>
 	<string name="BB_indicate_charging">Indicate charging</string>
 	<string name="BB_indicate_fast_charging">Indicate fast charging</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Warning level range</string>
 	<string name="BB_warning_tip">Set both to 0 to disable level-based colors</string>
 	<string name="BB_batteryCriticalColor">Critical level color</string>
 	<string name="BB_batteryWarningColor">Warning level color</string>
 	<string name="BB_batteryChargingColor">Charging color</string>
 	<string name="BB_batteryFastChargingColor">Fast charging color</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Shade colors between this range</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 

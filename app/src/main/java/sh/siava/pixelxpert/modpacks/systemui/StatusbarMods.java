@@ -131,8 +131,10 @@ public class StatusbarMods extends XposedModPack {
 	private static int[] batteryColors = new int[]{Color.RED, Color.YELLOW};
 	private static int chargingColor = Color.WHITE;
 	private static int fastChargingColor = Color.WHITE;
+	private static int powerSaveColor = Color.parseColor("#FFBF00");
 	private static boolean indicateCharging = false;
 	private static boolean indicateFastCharging = false;
+	private static boolean indicatePowerSave = false;
 	private static boolean BBarTransitColors = false;
 	//endregion
 
@@ -304,10 +306,12 @@ public class StatusbarMods extends XposedModPack {
 
 
 		indicateFastCharging = Xprefs.getBoolean("indicateFastCharging", false);
+		indicatePowerSave = Xprefs.getBoolean("indicatePowerSave", false);
 		indicateCharging = Xprefs.getBoolean("indicateCharging", true);
 
 		chargingColor = Xprefs.getInt("batteryChargingColor", Color.GREEN);
 		fastChargingColor = Xprefs.getInt("batteryFastChargingColor", Color.BLUE);
+		powerSaveColor = Xprefs.getInt("batteryPowerSaveColor", Color.parseColor("#FFBF00"));
 
 		if (BBarEnabled) {
 			placeBatteryBar();
@@ -1064,7 +1068,7 @@ public class StatusbarMods extends XposedModPack {
 
 	//region battery bar related
 	private void refreshBatteryBar(BatteryBarView instance) {
-		BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, chargingColor, indicateFastCharging, fastChargingColor, BBarTransitColors);
+		BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, chargingColor, indicateFastCharging, fastChargingColor, indicatePowerSave, powerSaveColor, BBarTransitColors);
 		instance.setVisibility((BBarEnabled) ? VISIBLE : GONE);
 		instance.setColorful(BBarColorful);
 		instance.setOnlyWhileCharging(BBOnlyWhileCharging);

@@ -1,5 +1,7 @@
 **canary-342**  
 - This release is brought to you by: aaronjamt and DHD2280  
+- Added option to indicate power saving on battery bar  
+- Added option to completely hide the fingerprint icon from lockscreen  
   
 **canary-341**  
 - Happy Nowruz!  

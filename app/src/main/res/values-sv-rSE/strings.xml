@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Ladda ner + Ladda upp (kombinerat)</string>
 	<string name="nt_mode_rxonly">Endast nedladdning</string>
 	<string name="nt_mode_txonly">Endast ladda upp</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Statusfältsalternativ</string>
 	<string name="dual_tone_battery_title">Aktivera batterimätare med dubbla toner</string>
 	<string name="dual_tone_battery_on_summary">På (fungerar bara med stående ikon)</string>

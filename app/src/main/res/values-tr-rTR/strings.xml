@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">İndirme + Yükleme (Birleşik)</string>
 	<string name="nt_mode_rxonly">Sadece indirme</string>
 	<string name="nt_mode_txonly">Sadece yükleme</string>
+	<string name="nt_unit_show_bits">Bit/s olarak göster</string>
 	<string name="statusbar_general_options">Durum Çubuğu Seçenekleri</string>
 	<string name="dual_tone_battery_title">Çift tonlu pil ölçeri etkinleştir</string>
 	<string name="dual_tone_battery_on_summary">Açık (yalnızca portre simgesiyle çalışır)</string>

@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">تحميل + تحميل (مجمع)</string>
 	<string name="nt_mode_rxonly">تنزيل فقط</string>
 	<string name="nt_mode_txonly">تحميل فقط</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">خيارات شريط الحالة</string>
 	<string name="dual_tone_battery_title">تمكين مقياس بطارية النغمة المزدوجة</string>
 	<string name="dual_tone_battery_on_summary">تشغيل (يعمل فقط مع أيقونة عمودية)</string>
@@ -167,7 +168,7 @@
 	<string name="BB_batteryChargingColor">لون الشحن</string>
 	<string name="BB_batteryFastChargingColor">لون الشحن السريع</string>
 	<string name="BB_transit_colors">ألوان التظليل بين هذا النطاق</string>
-	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
+	<string name="colored_battery_percentage_title">نسبة بطارية ملونة أثناء الشحن</string>
 	<string name="nt_stat_mode_today">اليوم</string>
 	<string name="nt_stat_mode_week">الأسبوع الحالي</string>
 	<string name="nt_stat_mode_month">الشهر الحالي</string>
@@ -289,22 +290,22 @@
 	<string name="heads_up_notification_duration">مدة الإشعار بالرؤوس</string>
 	<string name="notif_default_expansion_title">توسيع الإشعارات تلقائياً</string>
 	<string name="notif_always_expand">توسيع تلقائي</string>
-	<string name="notif_always_collapse">Always collapse</string>
+	<string name="notif_always_collapse">الإنهيار دائمًا</string>
 	<string name="disable_overscroll">تعطيل تأثير التمرير المرن</string>
 	<string name="overscroll_on_summary">هام: يمكنك تمكين التطبيقات التي تريد تعطيل التمرير الزائد داخل LSPosed</string>
 	<string name="milliseconds">المللي ثانية</string>
-	<string name="hours">Hours</string>
-	<string name="system_time_title">System time</string>
-	<string name="sync_ntp_time_title">Use NTP to sync time</string>
-	<string name="ntp_time_interval_title">Time synchronization interval</string>
-	<string name="ntp_servers_title">NTP servers</string>
-	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
-	<string name="sync_ntp_time_now_title">Sync now</string>
-	<string name="sync_ntp_successful">Time synced successfully</string>
-	<string name="sync_ntp_failed">NTP server connection error!</string>
+	<string name="hours">ساعات</string>
+	<string name="system_time_title">وقت النظام</string>
+	<string name="sync_ntp_time_title">استخدم NTP لمزامنة الوقت</string>
+	<string name="ntp_time_interval_title">المدة الزمنية للمزامنة</string>
+	<string name="ntp_servers_title">خوادم NTP</string>
+	<string name="ntp_servers_summary">استخدام المنصة لفصل عدة خوادم</string>
+	<string name="sync_ntp_time_now_title">المزامنة الآن</string>
+	<string name="sync_ntp_successful">تمت مزامنة الوقت بنجاح</string>
+	<string name="sync_ntp_failed">خطأ في اتصال سيرفر NTP!</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">لوحة مستوى الصوت</string>
+	<string name="volume_dialog_timeout">مهلة لوحة مستوى الصوت</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">الملف الشخصي للعمل/غير الشخصي</string>
 	<string name="statusbar_long_press_app_switch">اضغط مطولاً على شريط الحالة لتبديل الملف الشخصي</string>
@@ -312,8 +313,8 @@
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">مفتوح لجميع التطبيقات عبر <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: استمتع!</string>
 	<!-- SystemUI hook -->
-	<string name="battery_info_button_title">Battery info…</string>
-	<string name="power_indication_error">Error fetching charging data</string>
+	<string name="battery_info_button_title">معلومات البطارية…</string>
+	<string name="power_indication_error">خطأ في جلب بيانات الشحن</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">إهتزاز عند الرد على المكالمة الصادرة</string>
 	<string name="vibrate_on_call_drop_title">اهتزاز عند قطع اتصال المكالمة</string>
@@ -441,9 +442,9 @@
 	<string name="package_activated">تم تفعيل الحزمة بنجاح</string>
 	<string name="package_activation_failed">فشل تنشيط الحزمة</string>
 	<string name="activate_in_lsposed">تنشيط في LSPosed</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">الحزمة غير قابلة للتشغيل</string>
+	<string name="menu_launch_app">تشغيل التطبيق</string>
+	<string name="menu_restart_app">إعادة تشغيل التطبيق</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">التحقق من أذونات الجذر…</string>
 	<string name="connecting_root_service">جارٍ الاتصال بالخدمة الجذر…</string>

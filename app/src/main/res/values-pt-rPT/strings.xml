@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Downlaod + Upload (Combinado)</string>
 	<string name="nt_mode_rxonly">Apenas download</string>
 	<string name="nt_mode_txonly">Apenas upload</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Preferências da barra de estado</string>
 	<string name="dual_tone_battery_title">Ativar ícone de dois tons</string>
 	<string name="dual_tone_battery_on_summary">Ativado (apenas para o ícone em retrato)</string>

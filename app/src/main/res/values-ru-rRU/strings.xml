@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Загрузка + Отдача (комбинированная)</string>
 	<string name="nt_mode_rxonly">Только загрузка</string>
 	<string name="nt_mode_txonly">Только отдача</string>
+	<string name="nt_unit_show_bits">Показывать в битах/с</string>
 	<string name="statusbar_general_options">Параметры строки состояния</string>
 	<string name="dual_tone_battery_title">Включить двухтонный измеритель заряда батареи</string>
 	<string name="dual_tone_battery_on_summary">Вкл (работает только с портретным значком)</string>

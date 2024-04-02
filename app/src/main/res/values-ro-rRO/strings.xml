@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Descărcare + Încărcare (Combinat)</string>
 	<string name="nt_mode_rxonly">Doar descărcare</string>
 	<string name="nt_mode_txonly">Doar încărcare</string>
+	<string name="nt_unit_show_bits">Arată în biți/s</string>
 	<string name="statusbar_general_options">Opțiuni bară de stare</string>
 	<string name="dual_tone_battery_title">Activare baterie cu ton dual</string>
 	<string name="dual_tone_battery_on_summary">Pornit (funcționează numai cu pictograma portret)</string>

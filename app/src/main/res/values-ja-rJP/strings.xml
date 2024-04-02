@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">下り + 上り (複合)</string>
 	<string name="nt_mode_rxonly">下りのみ</string>
 	<string name="nt_mode_txonly">上りのみ</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">ステータスバーの設定</string>
 	<string name="dual_tone_battery_title">デュアルトーンバッテリーメーターを有効化</string>
 	<string name="dual_tone_battery_on_summary">ON (縦画面時のみ有効)</string>

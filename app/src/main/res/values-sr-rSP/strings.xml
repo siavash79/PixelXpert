@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Преузимање + отпремање (комбиновано)</string>
 	<string name="nt_mode_rxonly">Само преузимање</string>
 	<string name="nt_mode_txonly">Само отпремање</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Опције статусне траке</string>
 	<string name="dual_tone_battery_title">Омогућите двотонски мерач батерије</string>
 	<string name="dual_tone_battery_on_summary">Укључено (ради само са иконом портрета)</string>

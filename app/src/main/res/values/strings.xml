@@ -63,6 +63,9 @@
 	<string name="transparent_fingerprint_circle">Remove background circle from under-display fingerprint</string>
 	<string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
 	<string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Custom text on Lockscreen</string>
 	<string name="configure_carrier_text">Configure carrier text - Top of the screen</string>
 	<string name="carrier_text_mod_disabled">Carrier text unchanged</string>
@@ -169,12 +172,14 @@
 	<string name="BB_Thickness_title">Bar thickness</string>
 	<string name="BB_indicate_charging">Indicate charging</string>
 	<string name="BB_indicate_fast_charging">Indicate fast charging</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Warning level range</string>
 	<string name="BB_warning_tip">Set both to 0 to disable level-based colors</string>
 	<string name="BB_batteryCriticalColor">Critical level color</string>
 	<string name="BB_batteryWarningColor">Warning level color</string>
 	<string name="BB_batteryChargingColor">Charging color</string>
 	<string name="BB_batteryFastChargingColor">Fast charging color</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Shade colors between this range</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 

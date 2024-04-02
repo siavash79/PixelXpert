@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Λήψη + Μεταφόρτωση (Συνδυασμένη)</string>
 	<string name="nt_mode_rxonly">Λήψη μόνο</string>
 	<string name="nt_mode_txonly">Μεταφόρτωση μόνο</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Επιλογές γραμμής κατάστασης</string>
 	<string name="dual_tone_battery_title">Ενεργοποίηση μετρητή μπαταρίας διπλού τόνου</string>
 	<string name="dual_tone_battery_on_summary">Ενεργό (λειτουργεί μόνο με κατακόρυφο εικονίδιο)</string>

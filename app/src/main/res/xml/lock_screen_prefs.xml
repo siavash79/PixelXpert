@@ -35,6 +35,14 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
+			android:key="fingerprint_icon_hide"
+			android:summaryOff="@string/fingerprint_icon_off"
+			android:summaryOn="@string/fingerprint_icon_on"
+			android:title="@string/fingerprint_icon"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
 			android:key="DisableUnlockHintAnimation"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"

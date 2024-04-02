@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Download + Upload (kombineret)</string>
 	<string name="nt_mode_rxonly">Kun download</string>
 	<string name="nt_mode_txonly">Kun upload</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Statuslinjeindstillinger</string>
 	<string name="dual_tone_battery_title">Aktiver dual tone batterimåler</string>
 	<string name="dual_tone_battery_on_summary">Til (virker kun med portrætikon)</string>

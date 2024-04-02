@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">डाउनलोड + अपलोड (संयुक्त)</string>
 	<string name="nt_mode_rxonly">केवल डाउनलोड करें</string>
 	<string name="nt_mode_txonly">केवल अपलोड करें</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">स्थिति पट्टी विकल्प</string>
 	<string name="dual_tone_battery_title">डुअल टोन बैटरी इंडिकेटर सक्षम करें</string>
 	<string name="dual_tone_battery_on_summary">ऑन (केवल पोर्ट्रेट आइकन के साथ काम करता है)</string>

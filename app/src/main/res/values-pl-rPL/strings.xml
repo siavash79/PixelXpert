@@ -142,6 +142,7 @@
 	<string name="nt_mode_total">Pobierz Prześlij (łącznie)</string>
 	<string name="nt_mode_rxonly">Tylko pobierz</string>
 	<string name="nt_mode_txonly">Tylko prześlij</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Opcje paska stanu</string>
 	<string name="dual_tone_battery_title">Włącz dwutonowy miernik baterii</string>
 	<string name="dual_tone_battery_on_summary">Włączone (działa tylko z ikoną pionową)</string>

@@ -1,3 +1,7 @@
+**canary-343**  
+- A14ap21: Fixed Easy Unlock  
+- A14ap21: Fixed QS panel mods  
+  
 **canary-342**  
 - This release is brought to you by: aaronjamt and DHD2280  
 - Added option to indicate power saving on battery bar  

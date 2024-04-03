@@ -1,5 +1,6 @@
 package sh.siava.pixelxpert.modpacks.utils.toolkit;
 
+import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -11,6 +12,7 @@ import androidx.core.graphics.ColorUtils;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -112,5 +114,9 @@ public class ObjectTools {
 		return String.format("^(%s,)(.+)|(.+)(,%s)(,.+|$)", tile, tile);
 	}
 
-
+	public static @ColorInt int getRandomColor()
+	{
+		Random rnd = new Random();
+		return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+	}
 }

@@ -158,7 +158,7 @@ public class StatusbarMods extends XposedModPack {
 	private FrameLayout fullStatusbar;
 	//    private Object STB = null;
 
-	private View mClockView;
+	private TextView mClockView;
 	private ViewGroup mNotificationIconContainer = null;
 	LinearLayout mNotificationContainerContainer;
 	private LinearLayout mLeftVerticalSplitContainer;
@@ -468,12 +468,15 @@ public class StatusbarMods extends XposedModPack {
 					break;
 			}
 		}
-
 	}
 
 	private void updateClock() {
 		try {
-			mClockView.post(() -> callMethod(mClockView, "updateClock"));
+			mClockView.post(() -> { //the builtin update method doesn't care about the format. Just the text sadly
+				callMethod(getObjectField(mClockView, "mCalendar"), "setTimeInMillis", System.currentTimeMillis());
+
+				mClockView.setText((CharSequence) callMethod(mClockView, "getSmallTime"));
+			});
 		}
 		catch (Throwable ignored){}
 	}
@@ -830,10 +833,10 @@ public class StatusbarMods extends XposedModPack {
 						}
 
 						try {
-							mClockView = (View) getObjectField(param.thisObject, "mClockView");
+							mClockView = (TextView) getObjectField(param.thisObject, "mClockView");
 						} catch (Throwable t) { //PE Plus
 							Object mClockController = getObjectField(param.thisObject, "mClockController");
-							mClockView = (View) callMethod(mClockController, "getClock");
+							mClockView = (TextView) callMethod(mClockController, "getClock");
 						}
 
 						mStatusBar = (ViewGroup) getObjectField(mCollapsedStatusBarFragment, "mStatusBar");
@@ -920,7 +923,7 @@ public class StatusbarMods extends XposedModPack {
 
 						if(getAdditionalInstanceField(param.thisObject, "stringFormatCallBack") == null) {
 							FormattedStringCallback callback = () -> {
-								if(mAmPmStyle == AM_PM_STYLE_GONE) //don't update again if it's going to do it every second anyway
+								if(!mShowSeconds) //don't update again if it's going to do it every second anyway
 									updateClock();
 							};
 

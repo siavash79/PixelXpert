@@ -101,7 +101,6 @@ public class QSTileGrid extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		Class<?> tileLayoutClass = findClass("com.android.systemui.qs.TileLayout", lpparam.classLoader);
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
 		Class<?> FontSizeUtilsClass = findClass("com.android.systemui.FontSizeUtils", lpparam.classLoader);
 		Class<?> QSTileImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
@@ -110,6 +109,12 @@ public class QSTileGrid extends XposedModPack {
 		Class<?> QuickQSPanelClass =findClass("com.android.systemui.qs.QuickQSPanel", lpparam.classLoader);
 		Class<?> TileAdapterClass = findClass("com.android.systemui.qs.customize.TileAdapter", lpparam.classLoader);
 		Class<?> SideLabelTileLayoutClass = findClass("com.android.systemui.qs.SideLabelTileLayout", lpparam.classLoader);
+
+		Class<?> TileLayoutClass = findClassIfExists("com.android.systemui.qs.TileLayout", lpparam.classLoader);
+		if(TileLayoutClass == null) //new versions have merged tile layout to sidelable
+		{
+			TileLayoutClass = SideLabelTileLayoutClass;
+		}
 
 		if(findMethodExactIfExists(FontSizeUtilsClass,
 				"updateFontSize",
@@ -141,7 +146,7 @@ public class QSTileGrid extends XposedModPack {
 				}
 			}
 		});
-		hookAllMethods(tileLayoutClass, "updateResources", new XC_MethodHook() {
+		hookAllMethods(TileLayoutClass, "updateResources", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(getQSCols() != QS_COL_NOT_SET || getQSRows() != NOT_SET)
@@ -296,7 +301,7 @@ public class QSTileGrid extends XposedModPack {
 		});
 
 		// when media is played, system reverts tile cols to default value of 2. handling it:
-		hookAllMethods(tileLayoutClass, "setMaxColumns", new XC_MethodHook() {
+		hookAllMethods(TileLayoutClass, "setMaxColumns", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				Context context = (Context) getObjectField(param.thisObject, "mContext");

@@ -12,13 +12,7 @@ import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.getFlashlightLevel;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.VibrationAttributes;
@@ -28,15 +22,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
+import sh.siava.pixelxpert.modpacks.utils.TilePercentageDrawable;
 
 @SuppressWarnings("RedundantThrows")
 public class FlashLightLevel extends XposedModPack {
@@ -44,7 +36,7 @@ public class FlashLightLevel extends XposedModPack {
 	private static boolean leveledFlashTile = false;
 	private float currentPct = .5f;
 	private static boolean lightQSHeaderEnabled = false;
-	Drawable flashPercentageDrawable = null;
+	TilePercentageDrawable mFlashPercentageDrawable = null;
 
 	public FlashLightLevel(Context context) {
 		super(context);
@@ -65,8 +57,8 @@ public class FlashLightLevel extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (!lpparam.packageName.equals(listenPackage)) return;
 
-		flashPercentageDrawable = new PercentageShape();
-		flashPercentageDrawable.setAlpha(64);
+		mFlashPercentageDrawable = new TilePercentageDrawable(mContext);
+		mFlashPercentageDrawable.setAlpha(64);
 
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
 
@@ -104,7 +96,7 @@ public class FlashLightLevel extends XposedModPack {
 
 							SystemUtils.registerFlashlightLevelListener(listener);
 
-							currentPct = Xprefs.getFloat("flashPCT", 0.5f);
+							setPct(Xprefs.getFloat("flashPCT", 0.5f));
 
 							thisView.setOnTouchListener(new View.OnTouchListener() {
 								float initX = 0;
@@ -131,7 +123,7 @@ public class FlashLightLevel extends XposedModPack {
 
 												view.getParent().requestDisallowInterceptTouchEvent(true);
 												moved = true;
-												currentPct = newLevel * 1f / SystemUtils.getMaxFlashLevel();
+												setPct(newLevel * 1f / SystemUtils.getMaxFlashLevel());
 												handleFlashLightClick(false, newLevel);
 												SystemUtils.setFlashlightLevel(Math.round(currentPct * 100f));
 											}
@@ -167,20 +159,20 @@ public class FlashLightLevel extends XposedModPack {
 					if (getObjectField(state, "spec").equals("flashlight")) {
 						LinearLayout tileView = (LinearLayout) param.thisObject;
 
-						currentPct = Xprefs.getFloat("flashPCT", 0.5f);
+						setPct(Xprefs.getFloat("flashPCT", 0.5f));
 
 						SystemUtils.setFlashlightLevel(Math.round(currentPct * 100f));
 
-						flashPercentageDrawable.setTint(
+						mFlashPercentageDrawable.setTint(
 								(SystemUtils.isDarkMode() || !lightQSHeaderEnabled) && !getObjectField(state, "state").equals(STATE_ACTIVE)
 										? Color.WHITE
 										: Color.BLACK);
 
 						LayerDrawable layerDrawable;
 						try { //A14 AP11
-							layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "backgroundDrawable"), flashPercentageDrawable});
+							layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "backgroundDrawable"), mFlashPercentageDrawable});
 						} catch (Throwable ignored) { //Older
-							layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), flashPercentageDrawable});
+							layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), mFlashPercentageDrawable});
 						}
 						if(layerDrawable == null) return; //something is wrong
 
@@ -191,58 +183,12 @@ public class FlashLightLevel extends XposedModPack {
 		});
 	}
 
-	private void handleFlashLightClick(boolean toggle, int level) {
-		SystemUtils.setFlash(toggle ^ SystemUtils.isFlashOn(), level);
+	private void setPct(float newVal) {
+		currentPct = newVal;
+		mFlashPercentageDrawable.setPct(Math.round(newVal * 100));
 	}
 
-	private class PercentageShape extends Drawable {
-		final Drawable shape;
-
-		@SuppressLint({"UseCompatLoadingForDrawables", "DiscouragedApi"})
-		private PercentageShape() {
-			shape = mContext.getDrawable(mContext.getResources().getIdentifier("qs_tile_background_shape", "drawable", mContext.getPackageName()));
-		}
-
-		@Override
-		public void setBounds(Rect bounds) {
-			shape.setBounds(bounds);
-		}
-
-		@Override
-		public void setBounds(int a, int b, int c, int d) {
-			shape.setBounds(a, b, c, d);
-		}
-
-		@Override
-		public void draw(@NonNull Canvas canvas) {
-			try {
-				Bitmap bitmap = Bitmap.createBitmap(Math.round(shape.getBounds().width() * currentPct), shape.getBounds().height(), Bitmap.Config.ARGB_8888);
-				Canvas tempCanvas = new Canvas(bitmap);
-				shape.draw(tempCanvas);
-
-				canvas.drawBitmap(bitmap, 0, 0, new Paint());
-			}
-			catch (Throwable ignored){}
-		}
-
-		@Override
-		public void setAlpha(int i) {
-			shape.setAlpha(i);
-		}
-
-		@Override
-		public void setColorFilter(@Nullable ColorFilter colorFilter) {
-			shape.setColorFilter(colorFilter);
-		}
-
-		@Override
-		public int getOpacity() {
-			return PixelFormat.UNKNOWN;
-		}
-
-		@Override
-		public void setTint(int t) {
-			shape.setTint(t);
-		}
+	private void handleFlashLightClick(boolean toggle, int level) {
+		SystemUtils.setFlash(toggle ^ SystemUtils.isFlashOn(), level);
 	}
 }

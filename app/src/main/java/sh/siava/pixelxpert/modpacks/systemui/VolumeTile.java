@@ -1,7 +1,5 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
-import static android.graphics.Bitmap.Config;
-import static android.graphics.Bitmap.createBitmap;
 import static android.media.AudioManager.STREAM_MUSIC;
 import static android.os.VibrationAttributes.USAGE_TOUCH;
 import static android.os.VibrationEffect.EFFECT_CLICK;
@@ -29,22 +27,13 @@ import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.vibrate;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -54,6 +43,7 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils.ChangeListener;
+import sh.siava.pixelxpert.modpacks.utils.TilePercentageDrawable;
 
 @SuppressWarnings({"RedundantThrows", "ConstantConditions"})
 public class VolumeTile extends XposedModPack {
@@ -63,7 +53,7 @@ public class VolumeTile extends XposedModPack {
 	private int currentPct = 50;
 	private static int unMuteVolumePCT = 50;
 	private static boolean lightQSHeaderEnabled = false;
-	Drawable volumePercentageDrawable = null;
+	TilePercentageDrawable mVolumePercentageDrawable = null;
 	private static int minVol = -1;
 	private static int maxVol = -1;
 	public VolumeTile(Context context) {
@@ -90,8 +80,8 @@ public class VolumeTile extends XposedModPack {
 			maxVol = AudioManager().getStreamMaxVolume(STREAM_MUSIC);
 		}).start();
 
-		volumePercentageDrawable = new PercentageShape();
-		volumePercentageDrawable.setAlpha(64);
+		mVolumePercentageDrawable = new TilePercentageDrawable(mContext);
+		mVolumePercentageDrawable.setAlpha(64);
 
 		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
 		Class<?> QSPanelControllerBaseClass = findClass("com.android.systemui.qs.QSPanelControllerBase", lpparam.classLoader);
@@ -179,7 +169,8 @@ public class VolumeTile extends XposedModPack {
 							int newPct = clampPctToSteps(round(max(min((motionEvent.getX() / view.getWidth()), 1), 0) * 100f));
 
 							if (newPct != currentPct) {
-								currentPct = newPct;
+								setPct(newPct);
+
 								view.getParent().requestDisallowInterceptTouchEvent(true);
 								moved = true;
 
@@ -214,16 +205,16 @@ public class VolumeTile extends XposedModPack {
 		try { //don't crash systemui if failed
 			Resources res = mContext.getResources();
 
-			volumePercentageDrawable.setTint(
+			mVolumePercentageDrawable.setTint(
 					(isDarkMode() || !lightQSHeaderEnabled) && state != STATE_ACTIVE
 							? Color.WHITE
 							: Color.BLACK);
 
 			LayerDrawable layerDrawable;
 			try { //A14 AP11
-				layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "backgroundDrawable"), volumePercentageDrawable});
+				layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "backgroundDrawable"), mVolumePercentageDrawable});
 			} catch (Throwable ignored) { //Older
-				layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), volumePercentageDrawable});
+				layerDrawable = new LayerDrawable(new Drawable[]{(Drawable) getObjectField(tileView, "colorBackgroundDrawable"), mVolumePercentageDrawable});
 			}
 			if(layerDrawable == null) return; //something is wrong
 
@@ -264,7 +255,7 @@ public class VolumeTile extends XposedModPack {
 		new Thread(() -> {
 			Object parentTile = getAdditionalInstanceField(thisView, "mParentTile");
 
-			currentPct = newVal;
+			setPct(newVal);
 
 			Object mTile = getObjectField(parentTile, "mTile");
 
@@ -278,6 +269,11 @@ public class VolumeTile extends XposedModPack {
 			}
 			thisView.post(() -> updateTileView((LinearLayout) thisView, newState));
 		}).start();
+	}
+
+	private void setPct(int newVal) {
+		currentPct = newVal;
+		mVolumePercentageDrawable.setPct(newVal);
 	}
 
 	private void handleVolumeChanged(View thisView) {
@@ -298,54 +294,5 @@ public class VolumeTile extends XposedModPack {
 		return round(100f * (currentVol - minVol) / (maxVol - minVol));
 	}
 
-	private class PercentageShape extends Drawable {
-		final Drawable shape;
 
-		@SuppressLint({"UseCompatLoadingForDrawables", "DiscouragedApi"})
-		private PercentageShape() {
-			shape = mContext.getDrawable(mContext.getResources().getIdentifier("qs_tile_background_shape", "drawable", mContext.getPackageName()));
-		}
-
-		@Override
-		public void setBounds(Rect bounds) {
-			shape.setBounds(bounds);
-		}
-
-		@Override
-		public void setBounds(int a, int b, int c, int d) {
-			shape.setBounds(a, b, c, d);
-		}
-
-		@Override
-		public void draw(@NonNull Canvas canvas) {
-			try {
-				Bitmap bitmap = createBitmap(round(shape.getBounds().width() * currentPct / 100f), shape.getBounds().height(), Config.ARGB_8888);
-				Canvas tempCanvas = new Canvas(bitmap);
-				shape.draw(tempCanvas);
-
-				canvas.drawBitmap(bitmap, 0, 0, new Paint());
-			}
-			catch (Throwable ignored){}
-		}
-
-		@Override
-		public void setAlpha(int i) {
-			shape.setAlpha(i);
-		}
-
-		@Override
-		public void setColorFilter(@Nullable ColorFilter colorFilter) {
-			shape.setColorFilter(colorFilter);
-		}
-
-		@Override
-		public int getOpacity() {
-			return PixelFormat.UNKNOWN;
-		}
-
-		@Override
-		public void setTint(int t) {
-			shape.setTint(t);
-		}
-	}
 }

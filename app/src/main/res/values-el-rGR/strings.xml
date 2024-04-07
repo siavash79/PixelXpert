@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Αφαιρέστε τον κύκλο φόντου από το δακτυλικό αποτύπωμα κάτω από την οθόνη</string>
 	<string name="transparent_fingerprint_circle_off">Το εικονίδιο του κύκλου γύρω από το δακτυλικό αποτύπωμα είναι ενεργό</string>
 	<string name="transparent_fingerprint_circle_on">Το εικονίδιο του κύκλου γύρω από το δακτυλικό αποτύπωμα θα είναι κρυφό</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Προσαρμοσμένο κείμενο στην οθόνη κλειδώματος</string>
 	<string name="configure_carrier_text">Διαμόρφωση κειμένου φορέα - Επάνω μέρος της οθόνης</string>
 	<string name="carrier_text_mod_disabled">Το κείμενο της εταιρείας κινητής τηλεφωνίας δεν άλλαξε</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Πάχος ράβδου</string>
 	<string name="BB_indicate_charging">Υποδείξτε τη φόρτιση</string>
 	<string name="BB_indicate_fast_charging">Υποδεικνύει γρήγορη φόρτιση</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Εύρος επιπέδου προειδοποίησης</string>
 	<string name="BB_warning_tip">Ορίστε και τα δύο στο 0 για να απενεργοποιήσετε τα χρώματα που βασίζονται σε επίπεδο</string>
 	<string name="BB_batteryCriticalColor">Χρώμα κρίσιμου επιπέδου</string>
 	<string name="BB_batteryWarningColor">Χρώμα επιπέδου προειδοποίησης</string>
 	<string name="BB_batteryChargingColor">Χρώμα φόρτισης</string>
 	<string name="BB_batteryFastChargingColor">Χρώμα γρήγορης φόρτισης</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Σκιάστε τα χρώματα μεταξύ αυτού του εύρους</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Σήμερα</string>

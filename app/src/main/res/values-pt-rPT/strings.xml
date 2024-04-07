@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Esconder círculo no ícone da impressão digital</string>
 	<string name="transparent_fingerprint_circle_off">O círculo está ativado</string>
 	<string name="transparent_fingerprint_circle_on">O círculo será escondido</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Texto personalizado no ecrã de bloqueio</string>
 	<string name="configure_carrier_text">Personalizar texto da operadora</string>
 	<string name="carrier_text_mod_disabled">Texto inalterado</string>
@@ -142,7 +145,7 @@
 	<string name="nt_mode_total">Downlaod + Upload (Combinado)</string>
 	<string name="nt_mode_rxonly">Apenas download</string>
 	<string name="nt_mode_txonly">Apenas upload</string>
-	<string name="nt_unit_show_bits">Show in bits/s</string>
+	<string name="nt_unit_show_bits">Mostrar em bits/s</string>
 	<string name="statusbar_general_options">Preferências da barra de estado</string>
 	<string name="dual_tone_battery_title">Ativar ícone de dois tons</string>
 	<string name="dual_tone_battery_on_summary">Ativado (apenas para o ícone em retrato)</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Espessura da barra</string>
 	<string name="BB_indicate_charging">Indicar a carregar</string>
 	<string name="BB_indicate_fast_charging">Indicar a carregar rápido</string>
+	<string name="BB_indicate_power_save">Indicar economia de energia</string>
 	<string name="BB_warning_level">Limites para bateria fraca/crítica</string>
 	<string name="BB_warning_tip">Defina 0 para ambas de modo a desativar as cores por nível</string>
 	<string name="BB_batteryCriticalColor">Cor para bateria crítica</string>
 	<string name="BB_batteryWarningColor">Cor para bateria fraca</string>
 	<string name="BB_batteryChargingColor">Cor ao carregar</string>
 	<string name="BB_batteryFastChargingColor">Cor ao carregar rápido</string>
+	<string name="BB_batteryPowerSaveColor">Cor da economia de energia</string>
 	<string name="BB_transit_colors">Cores entre o intervalo</string>
 	<string name="colored_battery_percentage_title">Cor da bateria ao carregar</string>
 	<string name="nt_stat_mode_today">Hoje</string>

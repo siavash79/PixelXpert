@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Ekran altı parmak izindeki arka plan çemberini kaldır</string>
 	<string name="transparent_fingerprint_circle_off">Parmak izi simgesinin etrafındaki daire etkin</string>
 	<string name="transparent_fingerprint_circle_on">Parmak izi simgesinin etrafındaki daire gizli</string>
+	<string name="fingerprint_icon">Ekran altı parmak izindeki arka plan çemberini kaldır</string>
+	<string name="fingerprint_icon_off">Parmak izi simgesi etkin</string>
+	<string name="fingerprint_icon_on">Parmak izi simgesi gizlenecek</string>
 	<string name="custom_text_category">Kilit ekranında özel metin</string>
 	<string name="configure_carrier_text">Operatör metnini yapılandır - Ekranın üst kısmı</string>
 	<string name="carrier_text_mod_disabled">Operatör metni değişmedi</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Çubuk kalınlığı</string>
 	<string name="BB_indicate_charging">Şarjı belirt</string>
 	<string name="BB_indicate_fast_charging">Hızlı şarjı belirt</string>
+	<string name="BB_indicate_power_save">Güç tasarrufunu göster</string>
 	<string name="BB_warning_level">Uyarı seviyesi aralığı</string>
 	<string name="BB_warning_tip">Seviye tabanlı renkleri devre dışı bırakmak için her ikisini de 0 olarak ayarlayın</string>
 	<string name="BB_batteryCriticalColor">Kritik seviyesi rengi</string>
 	<string name="BB_batteryWarningColor">Uyarı seviyesi rengi</string>
 	<string name="BB_batteryChargingColor">Şarj rengi</string>
 	<string name="BB_batteryFastChargingColor">Hızlı şarj rengi</string>
+	<string name="BB_batteryPowerSaveColor">Güç Tasarrufu rengi</string>
 	<string name="BB_transit_colors">Bu aralık arasındaki renk tonları</string>
 	<string name="colored_battery_percentage_title">Şarj sırasında renkli pil yüzdesi</string>
 	<string name="nt_stat_mode_today">Bugün</string>

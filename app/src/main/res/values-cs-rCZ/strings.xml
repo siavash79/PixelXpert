@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Odstraňte kruh na pozadí z otisku prstu pod displejem</string>
 	<string name="transparent_fingerprint_circle_off">Kruh kolem ikony otisku prstu je aktivní</string>
 	<string name="transparent_fingerprint_circle_on">Kruh kolem ikony otisku prstu bude skrytý</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Vlastní text na obrazovce uzamčení</string>
 	<string name="configure_carrier_text">Konfigurace textu operátora – horní část obrazovky</string>
 	<string name="carrier_text_mod_disabled">Text nosiče nezměněn</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Tloušťka tyče</string>
 	<string name="BB_indicate_charging">Označte nabíjení</string>
 	<string name="BB_indicate_fast_charging">Označte rychlé nabíjení</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Rozsah úrovně varování</string>
 	<string name="BB_warning_tip">Nastavením obou na 0 deaktivujete barvy založené na úrovni</string>
 	<string name="BB_batteryCriticalColor">Barva kritické úrovně</string>
 	<string name="BB_batteryWarningColor">Barva úrovně varování</string>
 	<string name="BB_batteryChargingColor">Barva nabíjení</string>
 	<string name="BB_batteryFastChargingColor">Barva rychlého nabíjení</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Stínujte barvy mezi tímto rozsahem</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Dnes</string>

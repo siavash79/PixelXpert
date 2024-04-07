@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Alternative AOSP Mods-Symbole aktivieren</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">Anpassungen für Google Pixel-Geräte</string>
 	<string name="volume_tile_title">Medienvolumen</string>
 	<string name="app_switch_tile_title">App-Profil wechseln</string>
 	<string name="hide_default">Verstecken (Standard)</string>
@@ -34,8 +34,8 @@
 	<string name="telegram_group_title">Telegrammgruppe</string>
 	<string name="usage_title">Verwendung</string>
 	<string name="usage_summary">Wiki-Seite öffnen</string>
-	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_title">In Deine Sprache übersetzen</string>
+	<string name="crowdin_summary">Hilf uns, %s in deine eigene Sprache zu übersetzen</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Sperrbildschirm</string>
 	<string name="statusbar_header">Statusleiste</string>
@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Verstecke den Kreis um das Fingerabdrucksymbol</string>
 	<string name="transparent_fingerprint_circle_off">Kreis um das Fingerabdrucksymbol wird angezeigt</string>
 	<string name="transparent_fingerprint_circle_on">Kreis um das Fingerabdrucksymbol wird versteckt</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Benutzerdefinierter Text auf dem Sperrbildschirm</string>
 	<string name="configure_carrier_text">Konfiguriere den Betreibertext</string>
 	<string name="carrier_text_mod_disabled">Betreibertext unverändert</string>
@@ -81,7 +84,7 @@
 	<string name="easy_unlock_title">Einfaches Entsperren (Pin/Passwort)</string>
 	<string name="easy_unlock_summary">Wenn es beim ersten Mal nicht funktioniert hat, versuche es erneut</string>
 	<string name="charging_info_title">Ladeinformationen auf dem Sperrbildschirm</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">\"Sperrbildschirm anpassen\" Pille nicht anzeigen</string>
 	<string name="imperial_units_title">Verwenden imperiale Einheiten</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Doppelt Tippen zum Sperren</string>
@@ -142,7 +145,7 @@
 	<string name="nt_mode_total">Herunterladen + Hochladen (kombiniert)</string>
 	<string name="nt_mode_rxonly">Nur herunterladen</string>
 	<string name="nt_mode_txonly">Nur hochladen</string>
-	<string name="nt_unit_show_bits">Show in bits/s</string>
+	<string name="nt_unit_show_bits">In Bits/s anzeigen</string>
 	<string name="statusbar_general_options">Statusleisten Optionen</string>
 	<string name="dual_tone_battery_title">Aktivieren die Zweiton-Akkuanzeige</string>
 	<string name="dual_tone_battery_on_summary">Ein (Funktioniert nur mit dem Portrait Symbol)</string>
@@ -161,14 +164,16 @@
 	<string name="BB_Thickness_title">Leistendicke</string>
 	<string name="BB_indicate_charging">Ladeanzeige</string>
 	<string name="BB_indicate_fast_charging">Schnelladeanzeige</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Warnung bei Akkulevel</string>
 	<string name="BB_warning_tip">Setze beide auf 0 um die Level basierenden Farben zu deaktivieren</string>
 	<string name="BB_batteryCriticalColor">Farbe bei kritischem Akkulevel</string>
 	<string name="BB_batteryWarningColor">Farbe bei Warnung des Akkulevel</string>
 	<string name="BB_batteryChargingColor">Farbe beim Laden</string>
 	<string name="BB_batteryFastChargingColor">Farbe beim Schnelladen</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Schattierungsfarben zwischen den Bereichen</string>
-	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
+	<string name="colored_battery_percentage_title">Farbiger Akku-Prozentsatz beim Laden</string>
 	<string name="nt_stat_mode_today">Heute</string>
 	<string name="nt_stat_mode_week">Aktuelle Woche</string>
 	<string name="nt_stat_mode_month">Aktueller Monat</string>
@@ -196,13 +201,13 @@
 	<string name="qs_pulldown_switch_title">Schnelles herunterziehen des Schnelleinstellungsmenüs von der Statusleiste </string>
 	<string name="qs_pulldown_side_title">Schnelles herunterziehen Seite</string>
 	<string name="qs_pulldown_category">Schnelleinstellungen herunterziehen</string>
-	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
+	<string name="qs_pullup_switch_title">Schnelleinstellungen mit einem Wischen schließen</string>
 	<string name="qs_haptic_switch_title">Vibriere beim berühren eines Schnelleinstellungs Tab </string>
 	<string name="vibration_type_touch">Intensität wird durch die Systemeinstellungen für die Berührungsvibration bestimmt </string>
 	<string name="qs_tile_qty_portrait">Im Hochformat</string>
 	<string name="qs_tile_qty_landscape">Im Querformat</string>
-	<string name="qs_mod_category_misc_title">Miscellaneous</string>
-	<string name="charging_info_on_qs">Show charging info on QS panel</string>
+	<string name="qs_mod_category_misc_title">Verschiedenes</string>
+	<string name="charging_info_on_qs">Ladeinformationen im QS-Panel anzeigen</string>
 	<string name="qs_rows_number">Anzahl Reihen in den Schnelleinstellungen</string>
 	<string name="qs_cols_number">Anzahl der QS-Spalten</string>
 	<string name="qqs_tiles_number">Maximale Kacheln in Quick QS (max. 2 Zeilen)</string>
@@ -258,11 +263,11 @@
 	<string name="allow_all_screen_rotations_summary">Ignoriert auch die schwebende Schaltfläche für die manuelle Drehung</string>
 	<string name="force_no_cutout">Kameraausschnitt ignorieren</string>
 	<string name="clear_all_reposition_title">Fügen Sie \'alles löschen\' unten auf die Recents-Leiste</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="force_themed_icons_title">Fehlende Themensymbole automatisch generieren (nur Pixel Launcher)</string>
 	<string name="reapply_themed_config">Thematische Symbole wieder aktivieren und anwenden </string>
 	<string name="volume_button_step_title">Lautstärkeschritte (0 bis 100%)</string>
-	<string name="display_resolution_switch_title">Modify display resolution</string>
-	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
+	<string name="display_resolution_switch_title">Bildschirmauflösung ändern</string>
+	<string name="display_resolution_switch_summary">Bevor Sie dies aktivieren, stellen Sie sicher, dass alle Displaygrößen/dpi-Änderungen auf Standard zurückgesetzt wurden</string>
 	<string name="display_resolution_title">Bildschirmauflösung</string>
 	<string name="brightness_range_title">Helligkeitsgrenzen anzeigen</string>
 	<string name="brightness_range_not_linear">Dieser Bereich ist NICHT linear: Manchmal führt ein kleiner Unterschied zu erheblichen Veränderungen</string>
@@ -277,8 +282,8 @@
 	<string name="so_tap_to_show_ambient_summary">[Wenn die Anzeige immer eingeschaltet ist, ist sie ausgeschaltet] Wenn Sie auf den Bildschirm tippen, wird die Umgebungsanzeige angezeigt</string>
 	<string name="so_pick_to_show_ambient_title">Wählen Sie diese Option, um die Umgebungsanzeige anzuzeigen</string>
 	<string name="so_pick_to_show_ambient_summary">[Wenn das Display immer eingeschaltet ist, ist es ausgeschaltet] Wenn Sie das Telefon in die Hand nehmen, wird die Umgebungsanzeige angezeigt</string>
-	<string name="force_aod_while_charging_title">Force AOD while charging</string>
-	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
+	<string name="force_aod_while_charging_title">AOD während des Ladens erzwingen</string>
+	<string name="force_aod_while_charging_summary">AOD während des Ladevorgangs aktiviert lassen</string>
 	<string name="doze_header">Während der Bildschirm aus ist…</string>
 	<string name="custom_themed_icons_title">Benutzerdefiniertes Symbolthema</string>
 	<string name="custom_themed_icons_off">Benutzerdefinierte Symbole deaktiviert</string>
@@ -286,35 +291,35 @@
 	<string name="so_vol_longpress_skip">Lautstärke lange drücken um Titel zu überspringen*</string>
 	<string name="notifications_header">Benachrichtigungseinstellungen</string>
 	<string name="expand_notifications_icons_title">Alle ausklappen/einklappen aktivieren</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Laufende Benachrichtigungen niemals ablehnen</string>
 	<string name="heads_up_notification_duration">Dauer der Heads-up-Benachrichtigung</string>
-	<string name="notif_default_expansion_title">Notification default expansion</string>
-	<string name="notif_always_expand">Always expand</string>
-	<string name="notif_always_collapse">Always collapse</string>
+	<string name="notif_default_expansion_title">Standard Benachrichtigungs-Erweiterung</string>
+	<string name="notif_always_expand">Immer erweitern</string>
+	<string name="notif_always_collapse">Immer einklappen</string>
 	<string name="disable_overscroll">Deaktiviere elastischen Überscrolling Effekt</string>
 	<string name="overscroll_on_summary">Wichtig: Sie MÜSSEN die Apps, für die Sie Overscroll deaktivieren möchten, in LSPosed aktivieren</string>
 	<string name="milliseconds">Millisekunden</string>
-	<string name="hours">Hours</string>
-	<string name="system_time_title">System time</string>
-	<string name="sync_ntp_time_title">Use NTP to sync time</string>
-	<string name="ntp_time_interval_title">Time synchronization interval</string>
-	<string name="ntp_servers_title">NTP servers</string>
-	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
-	<string name="sync_ntp_time_now_title">Sync now</string>
-	<string name="sync_ntp_successful">Time synced successfully</string>
-	<string name="sync_ntp_failed">NTP server connection error!</string>
+	<string name="hours">Stunden</string>
+	<string name="system_time_title">Systemzeit</string>
+	<string name="sync_ntp_time_title">NTP zum Synchronisieren der Zeit verwenden</string>
+	<string name="ntp_time_interval_title">Zeitsynchronisierungsintervall</string>
+	<string name="ntp_servers_title">NTP-Server</string>
+	<string name="ntp_servers_summary">Verwenden Sie Semikola, um mehrere Server zu trennen</string>
+	<string name="sync_ntp_time_now_title">Jetzt synchronisieren</string>
+	<string name="sync_ntp_successful">Zeit erfolgreich synchronisiert</string>
+	<string name="sync_ntp_failed">NTP-Server-Verbindungsfehler!</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">Lautstärkefeld</string>
+	<string name="volume_dialog_timeout">Anzeigedauer des Lautstärkefeldes</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Arbeits-/Klonprofil</string>
 	<string name="statusbar_long_press_app_switch">Drücken Sie lange auf die Statusleiste, um das Profil zu wechseln</string>
 	<string name="statusbar_app_switch_icon">Zeigt ein Symbol in der Statusleiste an, wenn ein Wechsel möglich ist</string>
 	<!-- Cloned apps bragging message -->
-	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<string name="settings_cloned_apps_active">Über <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font> für alle Apps entsperrt!</string>
 	<!-- SystemUI hook -->
-	<string name="battery_info_button_title">Battery info…</string>
-	<string name="power_indication_error">Error fetching charging data</string>
+	<string name="battery_info_button_title">Akkuinfo…</string>
+	<string name="power_indication_error">Fehler beim Abrufen der Ladeinformationen</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrieren bei angenommenem abgehenden Anruf</string>
 	<string name="vibrate_on_call_drop_title">Vibrieren, wenn Anruf getrennt wird</string>
@@ -442,18 +447,18 @@
 	<string name="package_activated">Paket erfolgreich aktiviert</string>
 	<string name="package_activation_failed">Die Paketaktivierung ist fehlgeschlagen</string>
 	<string name="activate_in_lsposed">In LSPosed aktivieren</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">Paket kann nicht gestartet werden</string>
+	<string name="menu_launch_app">App öffnen</string>
+	<string name="menu_restart_app">App neu starten</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">Root-Berechtigungen prüfen…</string>
 	<string name="connecting_root_service">Verbindung zum Root-Dienst herstellen…</string>
 	<string name="root_access_denied">Root-Zugriff verweigert. Bitte erlauben Sie Root-Zugriff.</string>
-	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
+	<string name="root_service_failed">Keine Verbindung zu Root-Diensten möglich. Bitte versuchen Sie es später erneut</string>
 	<string name="exit">Ausfahrt</string>
 	<!-- Bottom Navigation -->
-	<string name="navigation_home">Home</string>
+	<string name="navigation_home">Startseite</string>
 	<string name="navigation_update">Update</string>
 	<string name="navigation_hooks">Hooks</string>
-	<string name="navigation_settings">Settings</string>
+	<string name="navigation_settings">Einstellungen</string>
 </resources>

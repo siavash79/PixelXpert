@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Ẩn vòng tròn dấu vân tay dưới màn hình</string>
 	<string name="transparent_fingerprint_circle_off">Biểu tượng vòng tròn dấu vân tay đang hoạt động</string>
 	<string name="transparent_fingerprint_circle_on">Biểu tượng vòng tròn dấu vân tay sẽ bị ẩn</string>
+	<string name="fingerprint_icon">Xóa biểu tượng nền khỏi dấu vân tay dưới màn hình</string>
+	<string name="fingerprint_icon_off">Dấu vân tay được kích hoạt</string>
+	<string name="fingerprint_icon_on">Dấu vân tay sẽ được ẩn</string>
 	<string name="custom_text_category">Văn bản tùy chỉnh trên Màn hình khóa</string>
 	<string name="configure_carrier_text">Định cấu hình văn bản của nhà cung cấp dịch vụ - Đầu màn hình</string>
 	<string name="carrier_text_mod_disabled">Văn bản của nhà cung cấp dịch vụ chưa thay đổi</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Độ dày thanh</string>
 	<string name="BB_indicate_charging">Cho biết đang sạc</string>
 	<string name="BB_indicate_fast_charging">Cho biết đang sạc nhanh</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Phạm vi mức cảnh báo</string>
 	<string name="BB_warning_tip">Đặt cả hai thành 0 để tắt màu dựa trên cấp độ</string>
 	<string name="BB_batteryCriticalColor">Màu cấp độ nguy cấp</string>
 	<string name="BB_batteryWarningColor">Màu cấp độ cảnh báo</string>
 	<string name="BB_batteryChargingColor">Màu đang sạc</string>
 	<string name="BB_batteryFastChargingColor">Màu đang sạc nhanh</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Màu bóng đổ trong khoảng này</string>
 	<string name="colored_battery_percentage_title">Thêm màu vào phần trăm pin khi đang sạc</string>
 	<string name="nt_stat_mode_today">Hôm nay</string>

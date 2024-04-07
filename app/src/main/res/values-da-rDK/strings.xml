@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Fjern baggrundscirkel fra fingeraftryk under skærmen</string>
 	<string name="transparent_fingerprint_circle_off">Cirkel omkring fingeraftryksikonet er aktivt</string>
 	<string name="transparent_fingerprint_circle_on">Cirkel omkring fingeraftryksikonet vil blive skjult</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Brugerdefineret tekst på låseskærm</string>
 	<string name="configure_carrier_text">Konfigurer operatørtekst - Øverst på skærmen</string>
 	<string name="carrier_text_mod_disabled">Transportørtekst uændret</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Bar tykkelse</string>
 	<string name="BB_indicate_charging">Angiv opladning</string>
 	<string name="BB_indicate_fast_charging">Angiv hurtig opladning</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Advarselsniveauområde</string>
 	<string name="BB_warning_tip">Indstil begge til 0 for at deaktivere niveaubaserede farver</string>
 	<string name="BB_batteryCriticalColor">Farve på kritisk niveau</string>
 	<string name="BB_batteryWarningColor">Farve på advarselsniveau</string>
 	<string name="BB_batteryChargingColor">Opladningsfarve</string>
 	<string name="BB_batteryFastChargingColor">Hurtig opladning farve</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Skygge farver mellem dette område</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">I dag</string>

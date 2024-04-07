@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Retirer le disque autour du détecteur d’empreintes</string>
 	<string name="transparent_fingerprint_circle_off">Le disque autour du détecteur d’empreintes est visible</string>
 	<string name="transparent_fingerprint_circle_on">Le disque autour du détecteur d’empreintes est caché</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Texte personnalisé sur l’écran de verrouillage</string>
 	<string name="configure_carrier_text">Personnaliser le texte du fournisseur réseau - haut de l’écran</string>
 	<string name="carrier_text_mod_disabled">Texte du fournisseur inchangé</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Épaisseur de la barre</string>
 	<string name="BB_indicate_charging">Montrer que l’appareil charge</string>
 	<string name="BB_indicate_fast_charging">Montrer que l’appareil est en charge rapide</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Intervalle du niveau d’alerte</string>
 	<string name="BB_warning_tip">Mettre tout à 0 pour désactiver les couleurs par niveaux</string>
 	<string name="BB_batteryCriticalColor">Couleur du niveau critique</string>
 	<string name="BB_batteryWarningColor">Couleur du niveau d’alerte</string>
 	<string name="BB_batteryChargingColor">Couleur de charge</string>
 	<string name="BB_batteryFastChargingColor">Couleur de charge rapide</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Nuancer les couleurs dans cet intervalle</string>
 	<string name="colored_battery_percentage_title">Pourcentage de batterie coloré pendant la charge</string>
 	<string name="nt_stat_mode_today">Aujourd\'hui</string>

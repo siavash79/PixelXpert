@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Уклони позадински круг са сензора отиска прста</string>
 	<string name="transparent_fingerprint_circle_off">Круг око иконе отиска прста је активан</string>
 	<string name="transparent_fingerprint_circle_on">Круг око иконе отиска прста ће бити скривен</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Прилагођени текст на закључаном екрану</string>
 	<string name="configure_carrier_text">Прилагођени текст оператера</string>
 	<string name="carrier_text_mod_disabled">Користи се подразумевани текст</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Дебљина траке</string>
 	<string name="BB_indicate_charging">Индикатор пуњења</string>
 	<string name="BB_indicate_fast_charging">Индикатор брзог пуњења</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Опсег за нивое напуњености батерије</string>
 	<string name="BB_warning_tip">Поставите обе вредности на нулу да бисте онемогућили боје засноване на нивоу</string>
 	<string name="BB_batteryCriticalColor">Критични ниво</string>
 	<string name="BB_batteryWarningColor">Упозоравајући ниво</string>
 	<string name="BB_batteryChargingColor">Боја пуњења</string>
 	<string name="BB_batteryFastChargingColor">Боја за брзо пуњење</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Нијансе боја између овог опсега</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Данас</string>

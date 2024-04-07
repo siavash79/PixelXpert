@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Távolítsa el a háttérkört a kijelző alatti ujjlenyomatból</string>
 	<string name="transparent_fingerprint_circle_off">Az ujjlenyomat ikon körüli kör aktív</string>
 	<string name="transparent_fingerprint_circle_on">Az ujjlenyomat ikon körüli kör el lesz rejtve</string>
+	<string name="fingerprint_icon">Távolítsa el a háttérkört a kijelző alatti ujjlenyomatból</string>
+	<string name="fingerprint_icon_off">Ujjlenyomat ikon aktív</string>
+	<string name="fingerprint_icon_on">Ujjlenyomat ikon el lesz rejtve</string>
 	<string name="custom_text_category">Egyéni szöveg a lezárási képernyőn</string>
 	<string name="configure_carrier_text">Szolgáltatói szöveg konfigurálása – a képernyő tetején</string>
 	<string name="carrier_text_mod_disabled">A szolgáltató szövege változatlan</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">A sor vastagsága</string>
 	<string name="BB_indicate_charging">Töltés jelzése</string>
 	<string name="BB_indicate_fast_charging">Gyorstöltés kijelzése</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Figyelmeztetési szint tartomány</string>
 	<string name="BB_warning_tip">Állítsa mindkettőt 0-ra a szintalapú színek letiltásához</string>
 	<string name="BB_batteryCriticalColor">Kritikus szintű szín</string>
 	<string name="BB_batteryWarningColor">Figyelmeztető szint színe</string>
 	<string name="BB_batteryChargingColor">Töltő szín</string>
 	<string name="BB_batteryFastChargingColor">Gyors töltés szín</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Árnyékolja a színeket e tartomány között</string>
 	<string name="colored_battery_percentage_title">Színes akkumulátor ikon töltés során</string>
 	<string name="nt_stat_mode_today">Ma</string>

@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">پنهان کردن دایره اثر انگشت زیر نمایشگر</string>
 	<string name="transparent_fingerprint_circle_off">دایره اطراف نماد اثر انگشت فعال است</string>
 	<string name="transparent_fingerprint_circle_on">دایره اطراف نماد اثر انگشت پنهان شد</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">متن دلخواه در صفحه قفل</string>
 	<string name="configure_carrier_text">متن دلخواه نام اپراتور (بالای صفحه)</string>
 	<string name="carrier_text_mod_disabled">نام اپراتور بدون تغییر</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">ضخامت</string>
 	<string name="BB_indicate_charging">نمایش شارژ شدن</string>
 	<string name="BB_indicate_fast_charging">نمایش شارژ سریع</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">محدوده هشدار</string>
 	<string name="BB_warning_tip">برای غیرفعال کردن رنگ‌ها، هر دو را روی 0 تنظیم کنید</string>
 	<string name="BB_batteryCriticalColor">رنگ سطح بحرانی</string>
 	<string name="BB_batteryWarningColor">رنگ سطح هشدار</string>
 	<string name="BB_batteryChargingColor">رنگ شارژ</string>
 	<string name="BB_batteryFastChargingColor">رنگ شارژ سریع</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">تنظیم رنگ بر اساس سطح باتری</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">امروز</string>

@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">화면 내장 지문인식 아이콘 원형 배경 삭제</string>
 	<string name="transparent_fingerprint_circle_off">지문인식 아이콘의 원형 배경이 표시되고 있습니다</string>
 	<string name="transparent_fingerprint_circle_on">지문인식 아이콘의 원형 배경이 숨겨집니다</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">잠금 화면 커스텀 문구</string>
 	<string name="configure_carrier_text">화면 상단 통신사 문구 변경</string>
 	<string name="carrier_text_mod_disabled">통신사 문구가 그대로 표시됩니다</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">막대 굵기</string>
 	<string name="BB_indicate_charging">충전 상태 표시</string>
 	<string name="BB_indicate_fast_charging">고속 충전 표시</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">주의 단계 범위 설정</string>
 	<string name="BB_warning_tip">단계에 따른 막대 색 변화를 비활성화하려면 전부 0으로 설정</string>
 	<string name="BB_batteryCriticalColor">치명 단계 색상</string>
 	<string name="BB_batteryWarningColor">주의 단계 색상</string>
 	<string name="BB_batteryChargingColor">충전 표시 색상</string>
 	<string name="BB_batteryFastChargingColor">고속 충전 표시 색상</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">단계 간 색상 부드럽게 전환</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">오늘</string>

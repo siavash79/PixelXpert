@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Rimuovi il background dall\'icona del sensore d\'impronte sotto il display</string>
 	<string name="transparent_fingerprint_circle_off">Background icona sensore d\'impronte attivo</string>
 	<string name="transparent_fingerprint_circle_on">Background icona sensore d\'impronte disattivo</string>
+	<string name="fingerprint_icon">Rimuove l\'icona di primo piano dall\'impronta digitale sotto al display</string>
+	<string name="fingerprint_icon_off">L\'icona dell\'impronta digitale è attiva</string>
+	<string name="fingerprint_icon_on">L\'icona dell\'impronta digitale sarà nascosta</string>
 	<string name="custom_text_category">Testo personalizzato su blocco schermo</string>
 	<string name="configure_carrier_text">Configura testo operatore - Parte superiore dello schermo</string>
 	<string name="carrier_text_mod_disabled">Testo operatore invariato</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Spessore barra</string>
 	<string name="BB_indicate_charging">Indica ricarica</string>
 	<string name="BB_indicate_fast_charging">Indica ricarica rapida</string>
+	<string name="BB_indicate_power_save">Indicare risparmio energetico</string>
 	<string name="BB_warning_level">Range livello allerta</string>
 	<string name="BB_warning_tip">Imposta entrambi a 0 per disabilitare i colori in base al livello</string>
 	<string name="BB_batteryCriticalColor">Colore livello critico</string>
 	<string name="BB_batteryWarningColor">Colore livello allerta</string>
 	<string name="BB_batteryChargingColor">Colore ricarica</string>
 	<string name="BB_batteryFastChargingColor">Colore ricarica rapida</string>
+	<string name="BB_batteryPowerSaveColor">Colore risparmio energetico</string>
 	<string name="BB_transit_colors">Sfuma i colori tra questo range</string>
 	<string name="colored_battery_percentage_title">Percentuale della batteria colorata durante la ricarica</string>
 	<string name="nt_stat_mode_today">Oggi</string>

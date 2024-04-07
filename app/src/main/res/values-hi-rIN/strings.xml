@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">फ़िंगरप्रिंट आइकन के चारों ओर वृत्त छिपाएँ</string>
 	<string name="transparent_fingerprint_circle_off">फ़िंगरप्रिंट आइकन के चारों ओर सर्कल दिखाई देगा</string>
 	<string name="transparent_fingerprint_circle_on">फ़िंगरप्रिंट आइकन के चारों ओर वृत्त छिपा हुआ है</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">लॉक स्क्रीन पर कस्टम टेक्स्ट</string>
 	<string name="configure_carrier_text">ऑपरेटर टेक्स्ट कॉन्फ़िगर करें</string>
 	<string name="carrier_text_mod_disabled">ऑपरेटर टेक्स्ट अपरिवर्तित</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">बार की मोटाई</string>
 	<string name="BB_indicate_charging">चार्जिंग इंडिकेटर</string>
 	<string name="BB_indicate_fast_charging">तेज़ चार्जिंग संकेतक</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">बैटरी स्तर की चेतावनी</string>
 	<string name="BB_warning_tip">स्तर आधारित रंगों को अक्षम करने के लिए दोनों को 0 पर सेट करें</string>
 	<string name="BB_batteryCriticalColor">बैटरी क्रिटिकल कलर</string>
 	<string name="BB_batteryWarningColor">बैटरी चेतावनी रंग</string>
 	<string name="BB_batteryChargingColor">चार्जिंग कलर</string>
 	<string name="BB_batteryFastChargingColor">तेजी से चार्ज होने वाला रंग</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">क्षेत्रों के बीच रंगों को छायांकित करना</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">आज</string>

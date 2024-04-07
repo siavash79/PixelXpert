@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Ocultar círculo del icono de la huella digital</string>
 	<string name="transparent_fingerprint_circle_off">El círculo se activará</string>
 	<string name="transparent_fingerprint_circle_on">El círculo se ocultará</string>
+	<string name="fingerprint_icon">Ocultar círculo del icono de la huella digital</string>
+	<string name="fingerprint_icon_off">El icono de huella dactilar está activo</string>
+	<string name="fingerprint_icon_on">El icono de huella dactilar se ocultará</string>
 	<string name="custom_text_category">Texto personalizado en la pantalla de bloqueo</string>
 	<string name="configure_carrier_text">Personalizar texto del operador</string>
 	<string name="carrier_text_mod_disabled">Texto por defecto</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Grosor de barra</string>
 	<string name="BB_indicate_charging">Indicador de carga</string>
 	<string name="BB_indicate_fast_charging">Indicar carga rápida</string>
+	<string name="BB_indicate_power_save">Indique ahorro de energía</string>
 	<string name="BB_warning_level">Valor del nivel critico de batería</string>
 	<string name="BB_warning_tip">Poner los dos a 0 para deshabilitar los colores de nivel de batería</string>
 	<string name="BB_batteryCriticalColor">Color de nivel de bateria critíco</string>
 	<string name="BB_batteryWarningColor">Aviso de nivel de batería</string>
 	<string name="BB_batteryChargingColor">Color de carga</string>
 	<string name="BB_batteryFastChargingColor">Color de carga rápida</string>
+	<string name="BB_batteryPowerSaveColor">Color de ahorro de energía</string>
 	<string name="BB_transit_colors">Sombrear colores en transito de cambio</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Hoy</string>

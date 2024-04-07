@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">הסר את עיגול הרקע מטביעת האצבע מתחת לתצוגה</string>
 	<string name="transparent_fingerprint_circle_off">מעגל סביב סמל טביעת האצבע פעיל</string>
 	<string name="transparent_fingerprint_circle_on">מעגל סביב סמל טביעת האצבע יוסתר</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">טקסט מותאם אישית במסך הנעילה</string>
 	<string name="configure_carrier_text">הגדר את הטקסט של הספק - בחלק העליון של המסך</string>
 	<string name="carrier_text_mod_disabled">טקסט הספק לא השתנה</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">עובי בר</string>
 	<string name="BB_indicate_charging">ציין טעינה</string>
 	<string name="BB_indicate_fast_charging">ציין טעינה מהירה</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">טווח רמות אזהרה</string>
 	<string name="BB_warning_tip">הגדר את שניהם ל-0 כדי להשבית צבעים מבוססי רמות</string>
 	<string name="BB_batteryCriticalColor">צבע ברמה קריטית</string>
 	<string name="BB_batteryWarningColor">צבע רמת אזהרה</string>
 	<string name="BB_batteryChargingColor">צבע טעינה</string>
 	<string name="BB_batteryFastChargingColor">צבע טעינה מהירה</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">גוון צבעי בין טווח זה</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">היום</string>

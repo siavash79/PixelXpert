@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">隐藏屏下指纹背景</string>
 	<string name="transparent_fingerprint_circle_off">指纹背景启用</string>
 	<string name="transparent_fingerprint_circle_on">指纹背景隐藏</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">自定义锁屏文本</string>
 	<string name="configure_carrier_text">设置运营商文本</string>
 	<string name="carrier_text_mod_disabled">未修改运营商文本</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">厚度</string>
 	<string name="BB_indicate_charging">充电显示</string>
 	<string name="BB_indicate_fast_charging">快充显示</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">电量警告</string>
 	<string name="BB_warning_tip">均设为 0 将禁用基于电量的颜色变化</string>
 	<string name="BB_batteryCriticalColor">临界值颜色</string>
 	<string name="BB_batteryWarningColor">警告颜色</string>
 	<string name="BB_batteryChargingColor">充电颜色</string>
 	<string name="BB_batteryFastChargingColor">快充颜色</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">颜色渐变</string>
 	<string name="colored_battery_percentage_title">充电时彩色电池百分比</string>
 	<string name="nt_stat_mode_today">今天</string>

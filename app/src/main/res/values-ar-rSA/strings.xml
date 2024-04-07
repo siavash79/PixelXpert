@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">إزالة دائرة الخلفية من البصمة السفلية</string>
 	<string name="transparent_fingerprint_circle_off">الدائرة حول أيقونة البصمة نشطة</string>
 	<string name="transparent_fingerprint_circle_on">الدائرة حول أيقونة بصمة الاصبع سوف تكون مخفية</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">نص مخصص على شاشة القفل</string>
 	<string name="configure_carrier_text">تكوين نص شركة الاتصالات - أعلى الشاشة</string>
 	<string name="carrier_text_mod_disabled">نص الناقل لم يتغير</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">سمك الشريط</string>
 	<string name="BB_indicate_charging">اذكر الشحن</string>
 	<string name="BB_indicate_fast_charging">حدد الشحن السريع</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">نطاق مستوى التحذير</string>
 	<string name="BB_warning_tip">تعيين كلا إلى 0 لتعطيل الألوان المستندة إلى المستوى</string>
 	<string name="BB_batteryCriticalColor">لون المستوى الحرج</string>
 	<string name="BB_batteryWarningColor">لون مستوى التحذير</string>
 	<string name="BB_batteryChargingColor">لون الشحن</string>
 	<string name="BB_batteryFastChargingColor">لون الشحن السريع</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">ألوان التظليل بين هذا النطاق</string>
 	<string name="colored_battery_percentage_title">نسبة بطارية ملونة أثناء الشحن</string>
 	<string name="nt_stat_mode_today">اليوم</string>

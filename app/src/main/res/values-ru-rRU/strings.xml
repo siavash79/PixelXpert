@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Скрыть фон под индикатором отпечатков пальцев</string>
 	<string name="transparent_fingerprint_circle_off">Круг вокруг значка отпечатка пальца активен</string>
 	<string name="transparent_fingerprint_circle_on">Круг вокруг значка отпечатка пальца будет скрыт</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Свой текст на экран блокировки</string>
 	<string name="configure_carrier_text">Настройка своего текста</string>
 	<string name="carrier_text_mod_disabled">Свой текст не установлен</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Толщина строки</string>
 	<string name="BB_indicate_charging">Индикатор зарядки</string>
 	<string name="BB_indicate_fast_charging">Индикатор быстрой зарядки</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Диапазон уровней предупреждения</string>
 	<string name="BB_warning_tip">Установите оба значения в 0, чтобы отключить цвета на основе уровней</string>
 	<string name="BB_batteryCriticalColor">Цвет критического уровня</string>
 	<string name="BB_batteryWarningColor">Цвет уровня предупреждения</string>
 	<string name="BB_batteryChargingColor">Цвет зарядки</string>
 	<string name="BB_batteryFastChargingColor">Цвет быстрой зарядки</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Цвета оттенков между диапазоном</string>
 	<string name="colored_battery_percentage_title">Цветной индикатор батареи при зарядке</string>
 	<string name="nt_stat_mode_today">Сегодня</string>

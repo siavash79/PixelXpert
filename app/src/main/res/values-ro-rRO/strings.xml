@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Elimină cercul de fundal a amprentei de sub afișaj</string>
 	<string name="transparent_fingerprint_circle_off">Cercul în jurul pictogramei amprentei este activat</string>
 	<string name="transparent_fingerprint_circle_on">Cercul din jurul imaginii amprentei va fi ascuns</string>
+	<string name="fingerprint_icon">Elimină pictograma prim-plan a amprentei de sub afișaj</string>
+	<string name="fingerprint_icon_off">Pictograma amprentei este activă</string>
+	<string name="fingerprint_icon_on">Pictograma amprentei va fi ascunsă</string>
 	<string name="custom_text_category">Text personalizat pe Ecranul de blocare</string>
 	<string name="configure_carrier_text">Configurarea textului furnizorului - Partea de sus a ecranului</string>
 	<string name="carrier_text_mod_disabled">Textul furnizorului neschimbat</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Grosimea barei</string>
 	<string name="BB_indicate_charging">Indică încărcarea</string>
 	<string name="BB_indicate_fast_charging">Indică încărcarea rapidă</string>
+	<string name="BB_indicate_power_save">Indică economisirea energiei</string>
 	<string name="BB_warning_level">Interval de avertizare</string>
 	<string name="BB_warning_tip">Setează ambele la 0 pentru a dezactiva culori bazate pe niveluri</string>
 	<string name="BB_batteryCriticalColor">Culoare nivel critic</string>
 	<string name="BB_batteryWarningColor">Culoare nivel de avertizare</string>
 	<string name="BB_batteryChargingColor">Culoare încărcare</string>
 	<string name="BB_batteryFastChargingColor">Culoare de încărcare rapidă</string>
+	<string name="BB_batteryPowerSaveColor">Culoare economisire baterie</string>
 	<string name="BB_transit_colors">Nuanță culori între aceste game</string>
 	<string name="colored_battery_percentage_title">Procentaj colorat al bateriei în timpul încărcării</string>
 	<string name="nt_stat_mode_today">Astăzi</string>

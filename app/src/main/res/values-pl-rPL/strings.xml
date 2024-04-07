@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">Usuń okrąg tła z odcisku palca pod wyświetlaczem</string>
 	<string name="transparent_fingerprint_circle_off">Okrąg wokół ikony odcisku palca jest aktywny</string>
 	<string name="transparent_fingerprint_circle_on">Okrąg wokół ikony odcisku palca zostanie ukryty</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Niestandardowy tekst na ekranie blokady</string>
 	<string name="configure_carrier_text">Skonfiguruj tekst operatora — góra ekranu</string>
 	<string name="carrier_text_mod_disabled">Tekst operatora niezmieniony</string>
@@ -161,12 +164,14 @@
 	<string name="BB_Thickness_title">Grubość pręta</string>
 	<string name="BB_indicate_charging">Wskaż ładowanie</string>
 	<string name="BB_indicate_fast_charging">Wskaż szybkie ładowanie</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Zakres poziomu ostrzegawczego</string>
 	<string name="BB_warning_tip">Ustaw oba na 0, aby wyłączyć kolory oparte na poziomie</string>
 	<string name="BB_batteryCriticalColor">Kolor poziomu krytycznego</string>
 	<string name="BB_batteryWarningColor">Kolor poziomu ostrzeżenia</string>
 	<string name="BB_batteryChargingColor">Kolor ładowania</string>
 	<string name="BB_batteryFastChargingColor">Kolor szybkiego ładowania</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Odcień kolorów między tym zakresem</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Dzisiaj</string>

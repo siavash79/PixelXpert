@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">代替テーマのアイコン</string>
-	<string name="xposed_desc"></string>
+	<string name="xposed_desc">Google Pixelのみカスタマイズ可能</string>
 	<string name="volume_tile_title">メディアボリューム</string>
 	<string name="app_switch_tile_title">アプリプロファイルを切り替える</string>
 	<string name="hide_default">隠す (既定)</string>
@@ -34,7 +34,7 @@
 	<string name="telegram_group_title">電報グループ</string>
 	<string name="usage_title">使用法</string>
 	<string name="usage_summary">ウィキページを開く</string>
-	<string name="crowdin_title">Translate to your language</string>
+	<string name="crowdin_title">翻訳</string>
 	<string name="crowdin_summary"></string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">ロック画面</string>
@@ -57,6 +57,9 @@
 	<string name="transparent_fingerprint_circle">ディスプレイ下部の指紋認証の円の表示を削除</string>
 	<string name="transparent_fingerprint_circle_off">指紋認証アイコンを囲む円は表示されています</string>
 	<string name="transparent_fingerprint_circle_on">指紋認証アイコンを囲む円は非表示です</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">ロック画面に変更をしたテキストを表示します</string>
 	<string name="configure_carrier_text">キャリアテキストの設定 - 画面上部</string>
 	<string name="carrier_text_mod_disabled">キャリアテキスト変更は無効です</string>
@@ -81,7 +84,7 @@
 	<string name="easy_unlock_title">ロック解除を即座に実行 (PIN/パスワード)</string>
 	<string name="easy_unlock_summary">最初に適用がされなかった場合は再度行なってみてください</string>
 	<string name="charging_info_title">ロック画面に充電の詳細情報を表示</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">「ロック画面のカスタマイズ」を非表示</string>
 	<string name="imperial_units_title">帝国単位を使用する</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">ダブルタップでスリープ</string>
@@ -161,14 +164,16 @@
 	<string name="BB_Thickness_title">バーの太さ</string>
 	<string name="BB_indicate_charging">充電中である事を表示</string>
 	<string name="BB_indicate_fast_charging">急速充電の表示</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">警告レベルの範囲</string>
 	<string name="BB_warning_tip">両方とも0にするとレベルの設定が無効になります</string>
 	<string name="BB_batteryCriticalColor">致命的レベルの色</string>
 	<string name="BB_batteryWarningColor">警告レベルの色</string>
 	<string name="BB_batteryChargingColor">充電中の色</string>
 	<string name="BB_batteryFastChargingColor">急速充電の色</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">この範囲内のシェード色</string>
-	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
+	<string name="colored_battery_percentage_title">充電中の残量に応じて電池残量（%）に色を付ける</string>
 	<string name="nt_stat_mode_today">今日</string>
 	<string name="nt_stat_mode_week">今週</string>
 	<string name="nt_stat_mode_month">今月</string>
@@ -196,13 +201,13 @@
 	<string name="qs_pulldown_switch_title">ステータスバーからクイック設定をプルダウン</string>
 	<string name="qs_pulldown_side_title">クイックプルダウンの側面</string>
 	<string name="qs_pulldown_category">クイック設定のプルダウン</string>
-	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
+	<string name="qs_pullup_switch_title">一回のスワイプでクイック設定を閉じる</string>
 	<string name="qs_haptic_switch_title">クイック設定のタイルをタップで振動</string>
 	<string name="vibration_type_touch">システムのタッチ振動設定によって定義される強度</string>
 	<string name="qs_tile_qty_portrait">縦方向時</string>
 	<string name="qs_tile_qty_landscape">横方向時</string>
-	<string name="qs_mod_category_misc_title">Miscellaneous</string>
-	<string name="charging_info_on_qs">Show charging info on QS panel</string>
+	<string name="qs_mod_category_misc_title">その他</string>
+	<string name="charging_info_on_qs">クイック設定に充電の詳細を表示</string>
 	<string name="qs_rows_number">クイック設定の列数</string>
 	<string name="qs_cols_number">クイック設定のカラム数</string>
 	<string name="qqs_tiles_number">クイック設定の最大タイル数 (最大2列)</string>
@@ -258,11 +263,11 @@
 	<string name="allow_all_screen_rotations_summary">Will also ignore manual rotation floating button</string>
 	<string name="force_no_cutout">Ignore the camera cutout</string>
 	<string name="clear_all_reposition_title">Add an accessible clear-all button to recents page</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="force_themed_icons_title">非対応のテーマアイコンを自動生成（Pixel Launcherのみ）</string>
 	<string name="reapply_themed_config">テーマアイコンの適用を再度有効化します</string>
 	<string name="volume_button_step_title">ボリュームステップ (0から100%)</string>
-	<string name="display_resolution_switch_title">Modify display resolution</string>
-	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
+	<string name="display_resolution_switch_title">ディスプレイの解像度を変更</string>
+	<string name="display_resolution_switch_summary">これを有効にする前に、すべての表示サイズ/dpiの変更をデフォルトに設定してください</string>
 	<string name="display_resolution_title">画面の解像度</string>
 	<string name="brightness_range_title">ディスプレイの明るさ制限</string>
 	<string name="brightness_range_not_linear">This range is NOT linear: Sometimes a small difference leads to considerable changes</string>
@@ -277,8 +282,8 @@
 	<string name="so_tap_to_show_ambient_summary">【常時表示オフ時】 画面をタップするとアンビエント表示になります</string>
 	<string name="so_pick_to_show_ambient_title">選択してアンビエント表示を表示します</string>
 	<string name="so_pick_to_show_ambient_summary">【常時表示オフ時】受話器を取るとアンビエント表示が表示されます</string>
-	<string name="force_aod_while_charging_title">Force AOD while charging</string>
-	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
+	<string name="force_aod_while_charging_title">強制的にAODを使用</string>
+	<string name="force_aod_while_charging_summary">充電中は常に画面をオンにする</string>
 	<string name="doze_header">While screen is off…</string>
 	<string name="custom_themed_icons_title">カスタムテーマアイコン</string>
 	<string name="custom_themed_icons_off">カスタムアイコン無効</string>
@@ -286,35 +291,35 @@
 	<string name="so_vol_longpress_skip">音量ボタン長押しで曲をスキップ</string>
 	<string name="notifications_header">通知のオプション</string>
 	<string name="expand_notifications_icons_title">Add expand/collapse all buttons</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
+	<string name="disbale_ongoing_notif_dismiss_title">進行中の通知を削除しない</string>
 	<string name="heads_up_notification_duration">Heads-up notification duration</string>
-	<string name="notif_default_expansion_title">Notification default expansion</string>
-	<string name="notif_always_expand">Always expand</string>
-	<string name="notif_always_collapse">Always collapse</string>
+	<string name="notif_default_expansion_title">通知のデフォルト展開</string>
+	<string name="notif_always_expand">常に展開</string>
+	<string name="notif_always_collapse">常に折りたたむ</string>
 	<string name="disable_overscroll">オーバースクロール効果を無効化</string>
 	<string name="overscroll_on_summary">重要事項: LSPosedでオーバースクロールを無効化するアプリをスコープに追加をする必要があります</string>
 	<string name="milliseconds">ミリ秒</string>
-	<string name="hours">Hours</string>
-	<string name="system_time_title">System time</string>
-	<string name="sync_ntp_time_title">Use NTP to sync time</string>
-	<string name="ntp_time_interval_title">Time synchronization interval</string>
-	<string name="ntp_servers_title">NTP servers</string>
-	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
-	<string name="sync_ntp_time_now_title">Sync now</string>
-	<string name="sync_ntp_successful">Time synced successfully</string>
-	<string name="sync_ntp_failed">NTP server connection error!</string>
+	<string name="hours">時間</string>
+	<string name="system_time_title">システム時刻</string>
+	<string name="sync_ntp_time_title">NTPを使って時刻を同期する</string>
+	<string name="ntp_time_interval_title">時刻同期の間隔</string>
+	<string name="ntp_servers_title">NTPサーバー</string>
+	<string name="ntp_servers_summary">セミコロンを使用して複数のサーバーを使用</string>
+	<string name="sync_ntp_time_now_title">今すぐ同期</string>
+	<string name="sync_ntp_successful">時刻の同期が完了しました</string>
+	<string name="sync_ntp_failed">NTPサーバーへ接続に失敗</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">音量パネル</string>
+	<string name="volume_dialog_timeout">音量パネルの表示時間</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">作業/クローンプロファイル</string>
 	<string name="statusbar_long_press_app_switch">ステータスバーを長押ししてプロファイルを切り替えます</string>
 	<string name="statusbar_app_switch_icon">切り替えが可能な場合はステータスバーにアイコンを表示します</string>
 	<!-- Cloned apps bragging message -->
-	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<string name="settings_cloned_apps_active"><font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>により、全てのアプリでご利用いただけます。</string>
 	<!-- SystemUI hook -->
-	<string name="battery_info_button_title">Battery info…</string>
-	<string name="power_indication_error">Error fetching charging data</string>
+	<string name="battery_info_button_title">バッテリー情報</string>
+	<string name="power_indication_error">充電データの取得に失敗</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">着信応答時にバイブレーション</string>
 	<string name="vibrate_on_call_drop_title">通話切断時にバイブレーション</string>
@@ -442,18 +447,18 @@
 	<string name="package_activated">パッケージが正常にアクティブ化されました</string>
 	<string name="package_activation_failed">パッケージのアクティベーションに失敗しました</string>
 	<string name="activate_in_lsposed">LSPosed でアクティブ化する</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">起動可能パッケージではありません</string>
+	<string name="menu_launch_app">アプリを起動</string>
+	<string name="menu_restart_app">アプリを再起動</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">root権限の確認…</string>
 	<string name="connecting_root_service">ルートサービス…への接続</string>
 	<string name="root_access_denied">ルートアクセスが拒否されました。 root アクセスを許可してください。</string>
-	<string name="root_service_failed">Unable to connect to root services. Please try again later</string>
+	<string name="root_service_failed">Rootサービスが利用できません。後でもう一度お試しください。</string>
 	<string name="exit">出口</string>
 	<!-- Bottom Navigation -->
-	<string name="navigation_home">Home</string>
-	<string name="navigation_update">Update</string>
-	<string name="navigation_hooks">Hooks</string>
-	<string name="navigation_settings">Settings</string>
+	<string name="navigation_home">ホーム</string>
+	<string name="navigation_update">更新</string>
+	<string name="navigation_hooks">フック</string>
+	<string name="navigation_settings">設定</string>
 </resources>

@@ -519,6 +519,31 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		public int getLayoutResource() {
 			return R.xml.lock_screen_prefs;
 		}
+
+		@Override
+		public void updateScreen(String key) {
+			super.updateScreen(key);
+
+			if (key == null) return;
+
+			switch (key) {
+				case "DWallpaperEnabled":
+					try {
+						boolean DepthEffectEnabled = mPreferences.getBoolean("DWallpaperEnabled", false);
+
+						if (DepthEffectEnabled) {
+							new MaterialAlertDialogBuilder(getContext(), R.style.MaterialComponents_MaterialAlertDialog)
+									.setTitle(R.string.depth_effect_alert_title)
+									.setMessage(getString(R.string.depth_effect_alert_body, getString(R.string.sysui_restart_needed)))
+									.setPositiveButton(R.string.depth_effect_ok_btn, (dialog, which) -> dialog.dismiss())
+									.setCancelable(false)
+									.show();
+						}
+					} catch (Exception ignored) {
+					}
+					break;
+			}
+		}
 	}
 
 	public static class SBBBFragment extends ControlledPreferenceFragmentCompat {

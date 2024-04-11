@@ -60,6 +60,7 @@ public class PreferenceHelper {
 			case "DisableLockScreenPill":
 			case "ForceThemedLauncherIcons":
 			case "DisableOngoingNotifDismiss":
+			case "DWallpaperEnabled":
 				return Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
 
 			case "enablePowerMenuTheme":
@@ -290,6 +291,9 @@ public class PreferenceHelper {
 
 			case "UpdateWifiOnly":
 				return instance.mPreferences.getBoolean("AutoUpdate", true);
+
+			case "DWOpacity":
+				return instance.mPreferences.getBoolean("DWallpaperEnabled", false);
 		}
 		return true;
 	}

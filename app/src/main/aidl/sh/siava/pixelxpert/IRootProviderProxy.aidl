@@ -9,4 +9,5 @@ interface IRootProviderProxy {
 	 * and return values in AIDL.
 	 */
 	String[] runCommand(String command);
+	void extractSubject(in Bitmap input, String resultPath);
 }

@@ -90,8 +90,8 @@ dependencies {
 	implementation 'androidx.annotation:annotation:1.7.1'
 	implementation 'androidx.preference:preference-ktx:1.2.1'
 	implementation 'androidx.recyclerview:recyclerview:1.3.2'
-	implementation 'com.google.android.material:material:1.12.0-alpha03'
-	implementation 'androidx.compose.ui:ui-geometry:1.6.1'
+	implementation 'com.google.android.material:material:1.12.0-rc01'
+	implementation 'androidx.compose.ui:ui-geometry:1.6.5'
 	//noinspection KtxExtensionAvailable
 	implementation 'androidx.activity:activity:1.8.2'
 	implementation 'androidx.work:work-runtime:2.9.0'
@@ -125,4 +125,7 @@ dependencies {
 
 	//NTP Client
 	implementation "com.lyft.kronos:kronos-android:0.0.1-alpha11"
+
+	//Google Subject Segmentation - MLKit
+	implementation 'com.google.android.gms:play-services-mlkit-subject-segmentation:16.0.0-beta1'
 }

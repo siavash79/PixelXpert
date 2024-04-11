@@ -2,6 +2,8 @@ package sh.siava.pixelxpert.modpacks;
 
 import static sh.siava.pixelxpert.BuildConfig.APPLICATION_ID;
 
+import android.content.Context;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,4 +32,9 @@ public final class Constants {
 	public static final String DIALER_PACKAGE = "com.google.android.dialer";
 
 	public static final List<String> PREF_UPDATE_EXCLUSIONS = Arrays.asList(BootLoopProtector.LOAD_TIME_KEY_KEY, BootLoopProtector.PACKAGE_STRIKE_KEY_KEY);
+
+	public static String getLockScreenCachePath(Context context)
+	{
+		return context.getCacheDir().getAbsolutePath() + "/lswt.png";
+	}
 }

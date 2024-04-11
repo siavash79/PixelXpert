@@ -40,12 +40,10 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.topjohnwu.superuser.Shell;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
@@ -535,7 +533,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 							new MaterialAlertDialogBuilder(getContext(), R.style.MaterialComponents_MaterialAlertDialog)
 									.setTitle(R.string.depth_effect_alert_title)
 									.setMessage(getString(R.string.depth_effect_alert_body, getString(R.string.sysui_restart_needed)))
-									.setPositiveButton(R.string.depth_effect_ok_btn, (dialog, which) -> dialog.dismiss())
+									.setPositiveButton(R.string.depth_effect_ok_btn, (dialog, which) -> AppUtils.Restart("systemui"))
 									.setCancelable(false)
 									.show();
 						}

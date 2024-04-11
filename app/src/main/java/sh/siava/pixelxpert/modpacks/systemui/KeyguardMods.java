@@ -165,7 +165,7 @@ public class KeyguardMods extends XposedModPack {
 
 		transparentBGcolor = Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
 
-		DWallpaperEnabled = Xprefs.getBoolean("DWallpaperEnabled", true);
+		DWallpaperEnabled = Xprefs.getBoolean("DWallpaperEnabled", false);
 		DWOpacity = Xprefs.getSliderInt("DWOpacity", 192);
 
 		if (Key.length > 0) {
@@ -821,7 +821,9 @@ public class KeyguardMods extends XposedModPack {
 	private void invalidateLSWSC() //invalidate lock screen wallpaper subject cache
 	{
 		lockScreenSubjectCacheValid = false;
-		instance.mLockScreenSubject.post(() -> instance.mLockScreenSubject.setVisibility(GONE));
+		if(mLockScreenSubject != null) {
+			instance.mLockScreenSubject.post(() -> instance.mLockScreenSubject.setVisibility(GONE));
+		}
 		try {
 			//noinspection ResultOfMethodCallIgnored
 			new File(Constants.getLockScreenCachePath(mContext)).delete();

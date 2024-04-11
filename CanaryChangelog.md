@@ -1,3 +1,6 @@
+**canary-344**  
+- Added option to enable depth effect on lockscreen wallpaper  
+  
 **canary-343**  
 - A14ap21: Fixed Easy Unlock  
 - A14ap21: Fixed QS panel mods  

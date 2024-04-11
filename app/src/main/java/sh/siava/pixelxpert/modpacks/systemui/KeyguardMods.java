@@ -165,9 +165,8 @@ public class KeyguardMods extends XposedModPack {
 
 		transparentBGcolor = Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
 
-		DWallpaperEnabled = Xprefs.getBoolean("DWallpaperEnabled", false);
-		DWOpacity = Xprefs.getInt("DWOpacity", 192);
-
+		DWallpaperEnabled = Xprefs.getBoolean("DWallpaperEnabled", true);
+		DWOpacity = Xprefs.getSliderInt("DWOpacity", 192);
 
 		if (Key.length > 0) {
 			switch (Key[0]) {

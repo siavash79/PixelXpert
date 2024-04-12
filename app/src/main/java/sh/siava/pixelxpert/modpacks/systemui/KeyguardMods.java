@@ -8,7 +8,6 @@ import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
-import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
@@ -20,30 +19,17 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.TypedValue;
-import android.view.PixelCopy;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
-
-import java.io.File;
-import java.io.FileInputStream;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -125,14 +111,7 @@ public class KeyguardMods extends XposedModPack {
 	private Object KeyguardIndicationController;
 	//endregion
 
-	private static boolean lockScreenSubjectCacheValid = false;
-	private FrameLayout mLockScreenSubject;
-	private Object mQS;
-	private Object mScrimController;
 
-	private static boolean DWallpaperEnabled = false;
-	private static int DWOpacity = 192;
-	private Drawable mDimmingOverlay;
 	public KeyguardMods(Context context) {
 		super(context);
 
@@ -165,8 +144,6 @@ public class KeyguardMods extends XposedModPack {
 
 		transparentBGcolor = Xprefs.getBoolean("KeyguardBottomButtonsTransparent", false);
 
-		DWallpaperEnabled = Xprefs.getBoolean("DWallpaperEnabled", false);
-		DWOpacity = Xprefs.getSliderInt("DWOpacity", 192);
 
 		if (Key.length > 0) {
 			switch (Key[0]) {
@@ -212,102 +189,12 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpparam.classLoader);
 		Class<?> CommandQueueClass = findClass("com.android.systemui.statusbar.CommandQueue", lpparam.classLoader);
 		Class<?> AmbientDisplayConfigurationClass = findClass("android.hardware.display.AmbientDisplayConfiguration", lpparam.classLoader);
-		Class<?> QSImplClass = findClass("com.android.systemui.qs.QSImpl", lpparam.classLoader);
-		Class<?> CanvasEngineClass = findClass("com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine", lpparam.classLoader);
 		Class<?> AssistManagerClass = findClassIfExists("com.android.systemui.assist.AssistManager", lpparam.classLoader);
 		if(AssistManagerClass == null)
 		{
 			AssistManagerClass = findClass("com.google.android.systemui.assist.AssistManagerGoogle", lpparam.classLoader);
 		}
 
-		hookAllMethods(CentralSurfacesImplClass, "start", new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(!DWallpaperEnabled) return;
-
-				View scrimBehind = (View) getObjectField(mScrimController, "mScrimBehind");
-				ViewGroup rootView = (ViewGroup) scrimBehind.getParent();
-
-				@SuppressLint("DiscouragedApi")
-				ViewGroup targetView = rootView.findViewById(mContext.getResources().getIdentifier("notification_container_parent", "id", mContext.getPackageName()));
-
-				mLockScreenSubject = new FrameLayout(mContext);
-				FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-1, -1);
-				mLockScreenSubject.setLayoutParams(lp);
-
-				targetView.addView(mLockScreenSubject,1);
-			}
-		});
-		hookAllConstructors(QSImplClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				mQS = param.thisObject;
-			}
-		});
-
-
-		hookAllMethods(CanvasEngineClass, "drawFrameOnCanvas", new XC_MethodHook() {
-			@SuppressLint("NewApi")
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(!DWallpaperEnabled
-						||
-						((int) callMethod(param.thisObject, "getWallpaperFlags")
-								& WallpaperManager.FLAG_LOCK)
-								!= WallpaperManager.FLAG_LOCK)
-				{
-					return; //It's home screen wallpaper
-				}
-
-				invalidateLSWSC();
-
-				SurfaceHolder wallpaperSurfaceHolder = (SurfaceHolder) getObjectField(param.thisObject, "mSurfaceHolder");
-
-				Rect surfaceBounds = wallpaperSurfaceHolder.getSurfaceFrame();
-
-				Bitmap wallpaperBitmap = Bitmap.createBitmap(surfaceBounds.width(), surfaceBounds.height(), Bitmap.Config.ARGB_8888);
-
-				PixelCopy.request(wallpaperSurfaceHolder.getSurface(), wallpaperBitmap, copyResult -> { //stealing it from the actual screen
-					try {
-						Rect displayBounds =  ((Context) callMethod(param.thisObject, "getDisplayContext")).getSystemService(WindowManager.class)
-								.getCurrentWindowMetrics()
-								.getBounds();
-
-						Bitmap resizedWallpaper = resizeAndCrop(wallpaperBitmap, displayBounds);
-						wallpaperBitmap.recycle();
-						XPLauncher.enqueueProxyCommand(proxy -> {
-							proxy.extractSubject(resizedWallpaper, Constants.getLockScreenCachePath(mContext));
-							resizedWallpaper.recycle();
-						});
-					}
-					catch (Throwable ignored)
-					{}
-				}, new Handler(Looper.myLooper()));
-			}
-		});
-
-		hookAllConstructors(ScrimControllerClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				mScrimController = param.thisObject;
-			}
-		});
-		hookAllMethods(ScrimControllerClass, "applyAndDispatchState", new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				setDepthWallpaper();
-			}
-		});
-
-		hookAllMethods(QSImplClass, "setQsExpansion", new XC_MethodHook() {
-			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if((boolean) callMethod(param.thisObject, "isKeyguardState"))
-				{
-					setDepthWallpaper();
-				}
-			}
-		});
 
 		hookAllMethods(AmbientDisplayConfigurationClass, "alwaysOnEnabled", new XC_MethodHook() {
 			@Override
@@ -573,6 +460,7 @@ public class KeyguardMods extends XposedModPack {
 		});
 	}
 
+
 	private void setLongPress(ImageView button, String type) {
 		if(type.isEmpty())
 		{
@@ -704,42 +592,6 @@ public class KeyguardMods extends XposedModPack {
 		callMethod(mAssistUtils, "launchVoiceAssistFromKeyguard");
 	}
 
-	private void setDepthWallpaper()
-	{
-		if(DWallpaperEnabled
-				&& getObjectField(mScrimController, "mState").toString().equals("KEYGUARD")
-				&& (boolean) callMethod(mQS, "isFullyCollapsed")) {
-
-			if(!lockScreenSubjectCacheValid && new File(Constants.getLockScreenCachePath(mContext)).exists())
-			{
-				try (FileInputStream inputStream = new FileInputStream(Constants.getLockScreenCachePath(mContext)))
-				{
-					Drawable bitmapDrawable = BitmapDrawable.createFromStream(inputStream, "");
-					bitmapDrawable.setAlpha(255);
-
-					mDimmingOverlay = bitmapDrawable.getConstantState().newDrawable().mutate();
-					mDimmingOverlay.setTint(Color.BLACK);
-
-					mLockScreenSubject.setBackground(new LayerDrawable(new Drawable[]{bitmapDrawable, mDimmingOverlay}));
-					lockScreenSubjectCacheValid = true;
-				}
-				catch (Throwable ignored) {}
-			}
-
-			if(lockScreenSubjectCacheValid) {
-				mLockScreenSubject.getBackground().setAlpha(DWOpacity);
-
-				//this is the dimmed wallpaper coverage
-				mDimmingOverlay.setAlpha(Math.round(getFloatField(mScrimController, "mScrimBehindAlphaKeyguard")*240)); //A tad bit lower than max. show it a bit lighter than other stuff
-
-				mLockScreenSubject.setVisibility(VISIBLE);
-			}
-		}
-		else
-		{
-			mLockScreenSubject.setVisibility(GONE);
-		}
-	}
 
 	private void launchTVRemote() {
 		XPLauncher.enqueueProxyCommand(proxy -> {
@@ -799,37 +651,6 @@ public class KeyguardMods extends XposedModPack {
 		});
 	}
 
-	private Bitmap resizeAndCrop(Bitmap wallpaperBitmap, Rect displayBounds) {
-		int desiredHeight = wallpaperBitmap.getHeight() > wallpaperBitmap.getWidth()
-				? displayBounds.height()
-				: Math.round(wallpaperBitmap.getHeight() * (displayBounds.width() * 1f / wallpaperBitmap.getWidth()));
-
-		int desiredWidth = wallpaperBitmap.getWidth() > wallpaperBitmap.getHeight()
-				? displayBounds.width()
-				: Math.round(wallpaperBitmap.getWidth() * (displayBounds.height() * 1f / wallpaperBitmap.getHeight()));
-
-		Bitmap scaledWallpaperBitmap = Bitmap.createScaledBitmap(wallpaperBitmap, desiredWidth, desiredHeight, true);
-
-		int xPixelShift = (desiredWidth - displayBounds.width()) / 2;
-		int yPixelShift = (desiredHeight - displayBounds.height()) / 2;
-
-		//crop to display bounds
-		scaledWallpaperBitmap = Bitmap.createBitmap(scaledWallpaperBitmap, xPixelShift, yPixelShift, displayBounds.width(), displayBounds.height());
-		return scaledWallpaperBitmap;
-	}
-
-	private void invalidateLSWSC() //invalidate lock screen wallpaper subject cache
-	{
-		lockScreenSubjectCacheValid = false;
-		if(mLockScreenSubject != null) {
-			instance.mLockScreenSubject.post(() -> instance.mLockScreenSubject.setVisibility(GONE));
-		}
-		try {
-			//noinspection ResultOfMethodCallIgnored
-			new File(Constants.getLockScreenCachePath(mContext)).delete();
-		}
-		catch (Throwable ignored){}
-	}
 
 	public static String getPowerIndicationString()
 	{

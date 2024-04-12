@@ -28,6 +28,7 @@ import sh.siava.pixelxpert.modpacks.settings.PXSettingsLauncher;
 import sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider;
 import sh.siava.pixelxpert.modpacks.systemui.BatteryStyleManager;
 import sh.siava.pixelxpert.modpacks.systemui.BrightnessSlider;
+import sh.siava.pixelxpert.modpacks.systemui.DepthWallpaper;
 import sh.siava.pixelxpert.modpacks.systemui.EasyUnlock;
 import sh.siava.pixelxpert.modpacks.systemui.FeatureFlagsMods;
 import sh.siava.pixelxpert.modpacks.systemui.FingerprintWhileDozing;
@@ -126,6 +127,7 @@ public class ModPacks {
 					modPacks.add(VolumeTile.class);
 					modPacks.add(ScreenRecord.class);
 					modPacks.add(VolumeDialog.class);
+					modPacks.add(DepthWallpaper.class);
 				}
 				break;
 

@@ -173,6 +173,7 @@ public class DepthWallpaper extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				setDepthWallpaper();
+
 			}
 		});
 
@@ -195,9 +196,10 @@ public class DepthWallpaper extends XposedModPack {
 	}
 	private void setDepthWallpaper()
 	{
-		//noinspection ConstantValue
+		String state = getObjectField(mScrimController, "mState").toString();
+
 		if(DWallpaperEnabled
-				&& getObjectField(mScrimController, "mState").toString().equals("KEYGUARD")
+				&& state.equals("KEYGUARD")
 				&& (boolean) callMethod(mQS, "isFullyCollapsed")) {
 
 			if(!lockScreenSubjectCacheValid && new File(Constants.getLockScreenCachePath(mContext)).exists())
@@ -229,6 +231,9 @@ public class DepthWallpaper extends XposedModPack {
 		}
 		else
 		{
+			if(state.equals("UNLOCKED")) {
+				mWallpaperBackground.setVisibility(GONE);
+			}
 			mLockScreenSubject.setVisibility(GONE);
 		}
 	}

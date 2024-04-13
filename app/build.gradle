@@ -11,8 +11,8 @@ android {
 		applicationId "sh.siava.pixelxpert"
 		minSdk 33
 		targetSdk 34
-		versionCode 344
-		versionName "canary-344"
+		versionCode 345
+		versionName "canary-345"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}

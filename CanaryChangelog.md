@@ -1,3 +1,6 @@
+**canary-345**  
+- Depth wallpaper: bug fixes  
+  
 **canary-344**  
 - Added option to enable depth effect on lockscreen wallpaper  
   

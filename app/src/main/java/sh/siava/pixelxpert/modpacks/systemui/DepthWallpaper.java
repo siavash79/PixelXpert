@@ -38,16 +38,15 @@ public class DepthWallpaper extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 
 	private static boolean lockScreenSubjectCacheValid = false;
-	private FrameLayout mLockScreenSubject;
 	private Object mQS;
 	private Object mScrimController;
-
 	private static boolean DWallpaperEnabled = false;
 	private static int DWOpacity = 192;
-	private Drawable mDimmingOverlay;
-	private int mLastXShift = -1, mLastYShift = -1;
-	private Bitmap mWallpaperBitmap;
-
+	private FrameLayout mLockScreenSubject;
+	private Drawable mSubjectDimmingOverlay;
+	private FrameLayout mWallpaperBackground;
+	private FrameLayout mWallpaperBitmapContainer;
+	private FrameLayout mWallpaperDimmingOverlay;
 
 	public DepthWallpaper(Context context) {
 		super(context);
@@ -77,6 +76,21 @@ public class DepthWallpaper extends XposedModPack {
 				@SuppressLint("DiscouragedApi")
 				ViewGroup targetView = rootView.findViewById(mContext.getResources().getIdentifier("notification_container_parent", "id", mContext.getPackageName()));
 
+				mWallpaperBackground = new FrameLayout(mContext);
+				mWallpaperDimmingOverlay = new FrameLayout(mContext);
+				mWallpaperBitmapContainer = new FrameLayout(mContext);
+				FrameLayout.LayoutParams lpw = new FrameLayout.LayoutParams(-1, -1);
+
+				mWallpaperDimmingOverlay.setBackgroundColor(Color.BLACK);
+				mWallpaperDimmingOverlay.setLayoutParams(lpw);
+				mWallpaperBitmapContainer.setLayoutParams(lpw);
+
+				mWallpaperBackground.addView(mWallpaperBitmapContainer);
+				mWallpaperBackground.addView(mWallpaperDimmingOverlay);
+				mWallpaperBackground.setLayoutParams(lpw);
+
+				rootView.addView(mWallpaperBackground, 0);
+
 				mLockScreenSubject = new FrameLayout(mContext);
 				FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-1, -1);
 				mLockScreenSubject.setLayoutParams(lp);
@@ -88,15 +102,6 @@ public class DepthWallpaper extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				mQS = param.thisObject;
-			}
-		});
-
-		hookAllMethods(CanvasEngineClass, "onOffsetsChanged", new XC_MethodHook() {
-			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(!isLockScreenWallpaper(param.thisObject)) return;
-
-				processPossibleChange(param.thisObject, (float) param.args[0], (float) param.args[1]);
 			}
 		});
 
@@ -130,7 +135,30 @@ public class DepthWallpaper extends XposedModPack {
 				if(DWallpaperEnabled && isLockScreenWallpaper(param.thisObject))
 				{
 					invalidateLSWSC();
-					mWallpaperBitmap = Bitmap.createBitmap((Bitmap) param.args[0]);
+					Bitmap wallpaperBitmap = Bitmap.createBitmap((Bitmap) param.args[0]);
+
+					Rect displayBounds =  ((Context) callMethod(param.thisObject, "getDisplayContext")).getSystemService(WindowManager.class)
+							.getCurrentWindowMetrics()
+							.getBounds();
+
+					float ratioW = 1f * displayBounds.width() / wallpaperBitmap.getWidth();
+					float ratioH = 1f * displayBounds.height() / wallpaperBitmap.getHeight();
+
+					int desiredHeight = Math.round(Math.max(ratioH, ratioW) * wallpaperBitmap.getHeight());
+					int desiredWidth = Math.round(Math.max(ratioH, ratioW) * wallpaperBitmap.getWidth());
+
+					int xPixelShift = (desiredWidth - displayBounds.width()) / 2;
+					int yPixelShift = (desiredHeight - displayBounds.height()) / 2;
+
+					Bitmap scaledWallpaperBitmap = Bitmap.createScaledBitmap(wallpaperBitmap, desiredWidth, desiredHeight, true);
+
+					//crop to display bounds
+					scaledWallpaperBitmap = Bitmap.createBitmap(scaledWallpaperBitmap, xPixelShift, yPixelShift, displayBounds.width(), displayBounds.height());
+					Bitmap finalScaledWallpaperBitmap = scaledWallpaperBitmap;
+
+					mWallpaperBackground.post(() -> mWallpaperBitmapContainer.setBackground(new BitmapDrawable(mContext.getResources(), finalScaledWallpaperBitmap)));
+
+					XPLauncher.enqueueProxyCommand(proxy -> proxy.extractSubject(finalScaledWallpaperBitmap, Constants.getLockScreenCachePath(mContext)));
 				}
 			}
 		});
@@ -161,12 +189,13 @@ public class DepthWallpaper extends XposedModPack {
 
 	private boolean isLockScreenWallpaper(Object canvasEngine)
 	{
-		return ((int) callMethod(canvasEngine, "getWallpaperFlags")
+		return (getWallpaperFlag(canvasEngine)
 				& WallpaperManager.FLAG_LOCK)
 				== WallpaperManager.FLAG_LOCK;
 	}
 	private void setDepthWallpaper()
 	{
+		//noinspection ConstantValue
 		if(DWallpaperEnabled
 				&& getObjectField(mScrimController, "mState").toString().equals("KEYGUARD")
 				&& (boolean) callMethod(mQS, "isFullyCollapsed")) {
@@ -178,10 +207,10 @@ public class DepthWallpaper extends XposedModPack {
 					Drawable bitmapDrawable = BitmapDrawable.createFromStream(inputStream, "");
 					bitmapDrawable.setAlpha(255);
 
-					mDimmingOverlay = bitmapDrawable.getConstantState().newDrawable().mutate();
-					mDimmingOverlay.setTint(Color.BLACK);
+					mSubjectDimmingOverlay = bitmapDrawable.getConstantState().newDrawable().mutate();
+					mSubjectDimmingOverlay.setTint(Color.BLACK);
 
-					mLockScreenSubject.setBackground(new LayerDrawable(new Drawable[]{bitmapDrawable, mDimmingOverlay}));
+					mLockScreenSubject.setBackground(new LayerDrawable(new Drawable[]{bitmapDrawable, mSubjectDimmingOverlay}));
 					lockScreenSubjectCacheValid = true;
 				}
 				catch (Throwable ignored) {}
@@ -191,8 +220,10 @@ public class DepthWallpaper extends XposedModPack {
 				mLockScreenSubject.getBackground().setAlpha(DWOpacity);
 
 				//this is the dimmed wallpaper coverage
-				mDimmingOverlay.setAlpha(Math.round(getFloatField(mScrimController, "mScrimBehindAlphaKeyguard")*240)); //A tad bit lower than max. show it a bit lighter than other stuff
+				mSubjectDimmingOverlay.setAlpha(Math.round(getFloatField(mScrimController, "mScrimBehindAlphaKeyguard")*240)); //A tad bit lower than max. show it a bit lighter than other stuff
+				mWallpaperDimmingOverlay.setAlpha(getFloatField(mScrimController, "mScrimBehindAlphaKeyguard"));
 
+				mWallpaperBackground.setVisibility(VISIBLE);
 				mLockScreenSubject.setVisibility(VISIBLE);
 			}
 		}
@@ -202,69 +233,20 @@ public class DepthWallpaper extends XposedModPack {
 		}
 	}
 
-	private void processPossibleChange(Object canvasEngine, float xOff, float yOff) {
-		if(mWallpaperBitmap == null || mWallpaperBitmap.isRecycled()) return;
-
-		Rect displayBounds =  ((Context) callMethod(canvasEngine, "getDisplayContext")).getSystemService(WindowManager.class)
-				.getCurrentWindowMetrics()
-				.getBounds();
-
-		float ratioW = 1f * displayBounds.width() / mWallpaperBitmap.getWidth();
-		float ratioH = 1f * displayBounds.height() / mWallpaperBitmap.getHeight();
-
-		int desiredHeight = Math.round(Math.max(ratioH, ratioW) * mWallpaperBitmap.getHeight());
-		int desiredWidth = Math.round(Math.max(ratioH, ratioW) * mWallpaperBitmap.getWidth());
-
-		int xPixelShift;
-		int yPixelShift;
-
-		if(getWallpaperFlag(canvasEngine) != WallpaperManager.FLAG_LOCK)
-		{
-			xPixelShift = (desiredWidth - displayBounds.width()) / 2;
-			yPixelShift = (desiredHeight - displayBounds.height()) / 2;
-		}
-		else
-		{
-			xPixelShift = Math.round(xOff * desiredWidth);
-			yPixelShift = Math.round(yOff * desiredHeight);
-
-			if(xPixelShift + displayBounds.width() > desiredWidth)
-			{
-				xPixelShift = desiredWidth - displayBounds.width();
-			}
-			if (yPixelShift + displayBounds.height() > desiredHeight
-			) {
-				yPixelShift = desiredHeight - displayBounds.height();
-			}
-		}
-
-		if(xPixelShift != mLastXShift || yPixelShift != mLastYShift) {
-			invalidateLSWSC();
-
-			mLastXShift = xPixelShift;
-			mLastYShift = yPixelShift;
-
-			Bitmap scaledWallpaperBitmap = Bitmap.createScaledBitmap(mWallpaperBitmap, desiredWidth, desiredHeight, true);
-
-			//crop to display bounds
-			scaledWallpaperBitmap = Bitmap.createBitmap(scaledWallpaperBitmap, xPixelShift, yPixelShift, displayBounds.width(), displayBounds.height());
-			Bitmap finalScaledWallpaperBitmap = scaledWallpaperBitmap;
-			XPLauncher.enqueueProxyCommand(proxy -> proxy.extractSubject(finalScaledWallpaperBitmap, Constants.getLockScreenCachePath(mContext)));
-		}
-
-	}
-
 	private int getWallpaperFlag(Object canvasEngine) {
 		return (int) callMethod(canvasEngine, "getWallpaperFlags");
 	}
 
 	private void invalidateLSWSC() //invalidate lock screen wallpaper subject cache
 	{
-		mLastXShift = mLastYShift = -1;
-
 		lockScreenSubjectCacheValid = false;
 		if(mLockScreenSubject != null) {
-			mLockScreenSubject.post(() -> mLockScreenSubject.setVisibility(GONE));
+			mLockScreenSubject.post(() -> {
+				mLockScreenSubject.setVisibility(GONE);
+				mLockScreenSubject.setBackground(null);
+				mWallpaperBackground.setVisibility(GONE);
+				mWallpaperBitmapContainer.setBackground(null);
+			});
 		}
 		try {
 			//noinspection ResultOfMethodCallIgnored

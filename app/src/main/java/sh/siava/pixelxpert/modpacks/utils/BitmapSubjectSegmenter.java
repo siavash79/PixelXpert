@@ -43,9 +43,13 @@ public class BitmapSubjectSegmenter {
 						}
 					}
 
+					inputBitmap.recycle();
 					listener.onSuccess(resultBitmap);
 				})
-				.addOnFailureListener(e -> listener.onFail());
+				.addOnFailureListener(e -> {
+					inputBitmap.recycle();
+					listener.onFail();
+				});
 
 	}
 

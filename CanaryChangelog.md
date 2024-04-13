@@ -1,3 +1,6 @@
+**canary-346**  
+- Depth wallpaper: fixed subject misalignment  
+  
 **canary-345**  
 - Depth wallpaper: bug fixes  
   

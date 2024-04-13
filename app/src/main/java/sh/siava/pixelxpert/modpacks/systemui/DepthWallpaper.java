@@ -76,24 +76,11 @@ public class DepthWallpaper extends XposedModPack {
 				@SuppressLint("DiscouragedApi")
 				ViewGroup targetView = rootView.findViewById(mContext.getResources().getIdentifier("notification_container_parent", "id", mContext.getPackageName()));
 
-				mWallpaperBackground = new FrameLayout(mContext);
-				mWallpaperDimmingOverlay = new FrameLayout(mContext);
-				mWallpaperBitmapContainer = new FrameLayout(mContext);
-				FrameLayout.LayoutParams lpw = new FrameLayout.LayoutParams(-1, -1);
-
-				mWallpaperDimmingOverlay.setBackgroundColor(Color.BLACK);
-				mWallpaperDimmingOverlay.setLayoutParams(lpw);
-				mWallpaperBitmapContainer.setLayoutParams(lpw);
-
-				mWallpaperBackground.addView(mWallpaperBitmapContainer);
-				mWallpaperBackground.addView(mWallpaperDimmingOverlay);
-				mWallpaperBackground.setLayoutParams(lpw);
+				if(mWallpaperBackground == null) {
+					createLayers();
+				}
 
 				rootView.addView(mWallpaperBackground, 0);
-
-				mLockScreenSubject = new FrameLayout(mContext);
-				FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-1, -1);
-				mLockScreenSubject.setLayoutParams(lp);
 
 				targetView.addView(mLockScreenSubject,1);
 			}
@@ -156,6 +143,10 @@ public class DepthWallpaper extends XposedModPack {
 					scaledWallpaperBitmap = Bitmap.createBitmap(scaledWallpaperBitmap, xPixelShift, yPixelShift, displayBounds.width(), displayBounds.height());
 					Bitmap finalScaledWallpaperBitmap = scaledWallpaperBitmap;
 
+					if(mWallpaperBackground == null) {
+						createLayers();
+					}
+
 					mWallpaperBackground.post(() -> mWallpaperBitmapContainer.setBackground(new BitmapDrawable(mContext.getResources(), finalScaledWallpaperBitmap)));
 
 					XPLauncher.enqueueProxyCommand(proxy -> proxy.extractSubject(finalScaledWallpaperBitmap, Constants.getLockScreenCachePath(mContext)));
@@ -186,6 +177,25 @@ public class DepthWallpaper extends XposedModPack {
 				}
 			}
 		});
+	}
+
+	private void createLayers() {
+		mWallpaperBackground = new FrameLayout(mContext);
+		mWallpaperDimmingOverlay = new FrameLayout(mContext);
+		mWallpaperBitmapContainer = new FrameLayout(mContext);
+		FrameLayout.LayoutParams lpw = new FrameLayout.LayoutParams(-1, -1);
+
+		mWallpaperDimmingOverlay.setBackgroundColor(Color.BLACK);
+		mWallpaperDimmingOverlay.setLayoutParams(lpw);
+		mWallpaperBitmapContainer.setLayoutParams(lpw);
+
+		mWallpaperBackground.addView(mWallpaperBitmapContainer);
+		mWallpaperBackground.addView(mWallpaperDimmingOverlay);
+		mWallpaperBackground.setLayoutParams(lpw);
+
+		mLockScreenSubject = new FrameLayout(mContext);
+		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-1, -1);
+		mLockScreenSubject.setLayoutParams(lp);
 	}
 
 	private boolean isLockScreenWallpaper(Object canvasEngine)

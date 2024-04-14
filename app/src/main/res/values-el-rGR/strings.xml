@@ -51,6 +51,9 @@
 	<string name="hotspot_inactivity_timeout_title">Χρονικό όριο αδράνειας</string>
 	<string name="hotspot_max_client_title">Μέγιστος αριθμός πελατών</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="disable_unlock_hint_title">Απενεργοποιήστε το κινούμενο σχέδιο υποδείξεων ξεκλειδώματος</string>
 	<string name="ls_general_options">Επιλογές κλειδώματος οθόνης</string>
 	<string name="hide_avatar_title">Κατάργηση avatar χρήστη (λειτουργία πολλαπλών χρηστών)</string>
@@ -377,6 +380,10 @@
 	<string name="app_kill_alert_title">Ειδοποίηση</string>
 	<string name="app_kill_alert_body">Η εφαρμογή θα κλείσει τώρα. Μπορείτε να το ανοίξετε ξανά πατώντας στο νέο εικονίδιο</string>
 	<string name="app_kill_ok_btn">Εντάξει</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Απαιτείται επανεκκίνηση συστήματος για να εφαρμοστούν οι ρυθμίσεις</string>
 	<!-- Menu Items -->

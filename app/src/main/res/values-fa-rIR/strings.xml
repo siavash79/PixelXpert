@@ -51,6 +51,9 @@
 	<string name="hotspot_inactivity_timeout_title">مدت زمان غیر فعال بود</string>
 	<string name="hotspot_max_client_title">حداکثر تعداد کاربران</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="disable_unlock_hint_title">حذف انیمیشن راهنمایی باز کردن قفل</string>
 	<string name="ls_general_options">تنظیمات قفل صفحه</string>
 	<string name="hide_avatar_title">حذف نمایه کاربر (حالت چند کاربره)</string>
@@ -58,8 +61,8 @@
 	<string name="transparent_fingerprint_circle_off">دایره اطراف نماد اثر انگشت فعال است</string>
 	<string name="transparent_fingerprint_circle_on">دایره اطراف نماد اثر انگشت پنهان شد</string>
 	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
-	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
-	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
+	<string name="fingerprint_icon_off">نماد اثرانگشت فعال است</string>
+	<string name="fingerprint_icon_on">نماد اثرانگشت پنهان خواهد شد</string>
 	<string name="custom_text_category">متن دلخواه در صفحه قفل</string>
 	<string name="configure_carrier_text">متن دلخواه نام اپراتور (بالای صفحه)</string>
 	<string name="carrier_text_mod_disabled">نام اپراتور بدون تغییر</string>
@@ -145,7 +148,7 @@
 	<string name="nt_mode_total">دانلود+‌ آپلود (ترکیبی)</string>
 	<string name="nt_mode_rxonly">فقط دانلود</string>
 	<string name="nt_mode_txonly">فقط آپلود</string>
-	<string name="nt_unit_show_bits">Show in bits/s</string>
+	<string name="nt_unit_show_bits">نمایش در بیت‌ بر ثانیه</string>
 	<string name="statusbar_general_options">تنظیمات نوار وضعیت</string>
 	<string name="dual_tone_battery_title">باتری دو رنگ</string>
 	<string name="dual_tone_battery_on_summary">روشن (فقط با نماد عمودی کار می کند)</string>
@@ -164,16 +167,16 @@
 	<string name="BB_Thickness_title">ضخامت</string>
 	<string name="BB_indicate_charging">نمایش شارژ شدن</string>
 	<string name="BB_indicate_fast_charging">نمایش شارژ سریع</string>
-	<string name="BB_indicate_power_save">Indicate power save</string>
+	<string name="BB_indicate_power_save">نشان دادن ذخیره باتری</string>
 	<string name="BB_warning_level">محدوده هشدار</string>
 	<string name="BB_warning_tip">برای غیرفعال کردن رنگ‌ها، هر دو را روی 0 تنظیم کنید</string>
 	<string name="BB_batteryCriticalColor">رنگ سطح بحرانی</string>
 	<string name="BB_batteryWarningColor">رنگ سطح هشدار</string>
 	<string name="BB_batteryChargingColor">رنگ شارژ</string>
 	<string name="BB_batteryFastChargingColor">رنگ شارژ سریع</string>
-	<string name="BB_batteryPowerSaveColor">Power Save color</string>
+	<string name="BB_batteryPowerSaveColor">رنگ ذخیره باتری</string>
 	<string name="BB_transit_colors">تنظیم رنگ بر اساس سطح باتری</string>
-	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
+	<string name="colored_battery_percentage_title">رنگی بودن درصد باتری هنگام شارژ</string>
 	<string name="nt_stat_mode_today">امروز</string>
 	<string name="nt_stat_mode_week">هفته جاری</string>
 	<string name="nt_stat_mode_month">ماه جاری</string>
@@ -206,7 +209,7 @@
 	<string name="vibration_type_touch">شدت توسط تنظیمات لرزش لمسی سیستم تعریف شده است</string>
 	<string name="qs_tile_qty_portrait">در جهت پرتره</string>
 	<string name="qs_tile_qty_landscape">در جهت گیری منظره</string>
-	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="qs_mod_category_misc_title">متفرقه</string>
 	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">تعداد ردیفهای تنظیمات سریع</string>
 	<string name="qs_cols_number">تعداد ستونهای تنظیمات سریع</string>
@@ -266,8 +269,8 @@
 	<string name="force_themed_icons_title">ایجاد خودکار نمادهای تک رنگ ناقص (فقط راه‌انداز پیکسل)</string>
 	<string name="reapply_themed_config">مجدداً نمادهای مضمون را فعال کنید تا اعمال شوند</string>
 	<string name="volume_button_step_title">مراحل صدای موزیک (0 تا 100%)</string>
-	<string name="display_resolution_switch_title">Modify display resolution</string>
-	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
+	<string name="display_resolution_switch_title">تغییر رزولوشن صفحه نمایش</string>
+	<string name="display_resolution_switch_summary">قبل از فعال کردن این، لطفاً تمام تنظیمات مربوط به اندازه/dpi صفحه نمایش را به حالت پیش‌فرض برگردانید</string>
 	<string name="display_resolution_title">ابعاد صفحه نمایش</string>
 	<string name="brightness_range_title">محدوده مجاز نور صفحه</string>
 	<string name="brightness_range_not_linear">این محدوده خطی نیست: بعضی اوقات باید آزمون و خطا کنید</string>
@@ -282,7 +285,7 @@
 	<string name="so_tap_to_show_ambient_summary">[هنگامی که نمایشگر همیشه روشن خاموش است] ضربه زدن روی صفحه نمایشگر محیط را نشان می دهد</string>
 	<string name="so_pick_to_show_ambient_title">برای نشان دادن نمایشگر محیطی انتخاب کنید</string>
 	<string name="so_pick_to_show_ambient_summary">[وقتی نمایشگر همیشه روشن خاموش است] انتخاب تلفن صفحه نمایش محیط را نشان می دهد</string>
-	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_title">مجبور کردن صفحه نمایش همیشه روشن هنگام شارژ</string>
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">وقتی که صفحه نمایش خاموش است…</string>
 	<string name="custom_themed_icons_title">نمادهای با تم سفارشی</string>
@@ -377,6 +380,10 @@
 	<string name="app_kill_alert_title">اطلاع</string>
 	<string name="app_kill_alert_body">برنامه اکنون بسته خواهد شد. با ضربه زدن روی نماد جدید می توانید دوباره آن را باز کنید</string>
 	<string name="app_kill_ok_btn">خوب</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">برای اعمال تنظیمات به راه اندازی مجدد سیستم نیاز است</string>
 	<!-- Menu Items -->

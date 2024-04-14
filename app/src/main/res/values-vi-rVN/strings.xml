@@ -51,6 +51,9 @@
 	<string name="hotspot_inactivity_timeout_title">Thời gian không hoạt động</string>
 	<string name="hotspot_max_client_title">Lượng client tối đa</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="disable_unlock_hint_title">Tắt hoạt ảnh gợi ý mở khóa</string>
 	<string name="ls_general_options">Tùy chọn màn hình khóa</string>
 	<string name="hide_avatar_title">Xóa hình đại diện người dùng (chế độ nhiều người dùng)</string>
@@ -377,6 +380,10 @@
 	<string name="app_kill_alert_title">Chú ý</string>
 	<string name="app_kill_alert_body">Ứng dụng sẽ đóng ngay bây giờ. Bạn có thể mở lại bằng cách nhấn vào biểu tượng mới</string>
 	<string name="app_kill_ok_btn">ĐƯỢC RỒI</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Cần phải khởi động lại hệ thống để áp dụng cài đặt</string>
 	<!-- Menu Items -->

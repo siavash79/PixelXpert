@@ -51,6 +51,9 @@
 	<string name="hotspot_inactivity_timeout_title">Hareketsizlik zaman aşımı</string>
 	<string name="hotspot_max_client_title">Maksimum istemciler</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Derinlik efektli duvar kağıdı</string>
+	<string name="depth_wallpaper_summary">Duvar kağıdının ön planını saatle dinamik olarak entegre et</string>
+	<string name="depth_wallpaper_opacity_title">Duvar kağıdı ön plan opaklığı</string>
 	<string name="disable_unlock_hint_title">Kilit açma ipucu animasyonunu devre dışı bırak</string>
 	<string name="ls_general_options">Kilit ekranı seçenekleri</string>
 	<string name="hide_avatar_title">Kullanıcı avatarını kaldır (çoklu kullanıcı modu)</string>
@@ -377,6 +380,10 @@
 	<string name="app_kill_alert_title">Uyarı</string>
 	<string name="app_kill_alert_body">Uygulama şimdi kapanacaktır. Yeni simgeye dokunarak tekrar açabilirsiniz</string>
 	<string name="app_kill_ok_btn">TAMAM</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Dikkat</string>
+	<string name="depth_effect_alert_body">Kilit ekranı duvar kağıdınızı seçerken, ön plandaki unsurların kilit ekranınızdaki saati tamamen engellemediğinden emin olun. Böylece kilit ekranınızda hem görsel çekicilik hem de işlevsel netlik sağlanır.\n\nNot: %s.</string>
+	<string name="depth_effect_ok_btn">Tamam</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Ayarların uygulanması için sistemin yeniden başlatılması gerekir</string>
 	<!-- Menu Items -->

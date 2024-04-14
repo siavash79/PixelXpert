@@ -51,6 +51,9 @@
 	<string name="hotspot_inactivity_timeout_title">निष्क्रियता मध्यांतर</string>
 	<string name="hotspot_max_client_title">अधिकतम ग्राहक</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="disable_unlock_hint_title">अनलॉक संकेत एनीमेशन अक्षम करें</string>
 	<string name="ls_general_options">लॉक स्क्रीन विकल्प</string>
 	<string name="hide_avatar_title">उपयोगकर्ता अवतार हटाएं (बहु-उपयोगकर्ता मोड)</string>
@@ -377,6 +380,10 @@
 	<string name="app_kill_alert_title">सूचना</string>
 	<string name="app_kill_alert_body">ऐप अब बंद हो जाएगा. आप नए आइकन पर टैप करके इसे दोबारा खोल सकते हैं</string>
 	<string name="app_kill_ok_btn">ठीक है</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">सेटिंग्स लागू करने के लिए सिस्टम रीबूट की आवश्यकता होती है</string>
 	<!-- Menu Items -->

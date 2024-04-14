@@ -51,6 +51,9 @@
 	<string name="hotspot_inactivity_timeout_title">Timeout inattività</string>
 	<string name="hotspot_max_client_title">Numero massimo client</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Sfondo effetto profondità</string>
+	<string name="depth_wallpaper_summary">Integra dinamicamente il primo piano dello sfondo con l\'orologio</string>
+	<string name="depth_wallpaper_opacity_title">Opacità primo piano dello sfondo</string>
 	<string name="disable_unlock_hint_title">Disabilita animazione suggerimento di sblocco</string>
 	<string name="ls_general_options">Opzioni schermata di blocco</string>
 	<string name="hide_avatar_title">Rimuovi avatar utente (modalità multiutente)</string>
@@ -377,6 +380,10 @@
 	<string name="app_kill_alert_title">Avviso</string>
 	<string name="app_kill_alert_body">L\'app verrà chiusa ora. Puoi aprirlo di nuovo toccando la nuova icona</string>
 	<string name="app_kill_ok_btn">OK</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attenzione</string>
+	<string name="depth_effect_alert_body">Usa uno sfondo adatto alla schermata di blocco in cui gli elementi di primo piano non ostacolano l\'intero orologio sulla schermata di blocco, garantendo sia il fascino visivo che la chiarezza funzionale sulla schermata di blocco.\n\nNota: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Per applicare le impostazioni è necessario il riavvio del sistema</string>
 	<!-- Menu Items -->

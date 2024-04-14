@@ -51,6 +51,9 @@
 	<string name="hotspot_inactivity_timeout_title">Timeout inactivitate</string>
 	<string name="hotspot_max_client_title">Număr maxim de clienți</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Fundal cu efect de adâncime</string>
+	<string name="depth_wallpaper_summary">Integrare dinamică a imaginii de fundal cu ceasul</string>
+	<string name="depth_wallpaper_opacity_title">Opacitatea fundalului în prim-plan</string>
 	<string name="disable_unlock_hint_title">Dezactivează animația de indiciu a deblocării</string>
 	<string name="ls_general_options">Opțiuni pentru ecranul de blocare</string>
 	<string name="hide_avatar_title">Eliminare avatar utilizator (mod utilizatori multipli)</string>
@@ -377,6 +380,10 @@
 	<string name="app_kill_alert_title">Înștiințare</string>
 	<string name="app_kill_alert_body">Aplicația se va închide acum. O poți deschide din nou atingând noua pictogramă</string>
 	<string name="app_kill_ok_btn">Bine</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Atenție</string>
+	<string name="depth_effect_alert_body">Utilizează o imagine de fundal a ecranului de blocare adecvată în cazul în care elementele din prim-plan nu obstrucționează întregul ceas pe ecranul de blocare, asigurând atractivități vizuale și a clarități funcționale pe ecranul de blocare.\n\nNotă: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Este necesară o repornire a sistemului pentru ca setările să fie aplicate</string>
 	<!-- Menu Items -->

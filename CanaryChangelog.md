@@ -1,3 +1,6 @@
+**canary-347**  
+- Depth wallpaper: fixed screen obstruction during HUN  
+  
 **canary-346**  
 - Depth wallpaper: fixed subject misalignment  
   

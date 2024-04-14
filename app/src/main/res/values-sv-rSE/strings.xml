@@ -51,6 +51,9 @@
 	<string name="hotspot_inactivity_timeout_title">Timeout för inaktivitet</string>
 	<string name="hotspot_max_client_title">Maximalt antal kunder</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="disable_unlock_hint_title">Inaktivera upplåsningstipsanimeringen</string>
 	<string name="ls_general_options">Alternativ för låsskärm</string>
 	<string name="hide_avatar_title">Ta bort användaravatar (fleranvändarläge)</string>
@@ -377,6 +380,10 @@
 	<string name="app_kill_alert_title">Lägga märke till</string>
 	<string name="app_kill_alert_body">Appen stängs nu. Du kan öppna den igen genom att trycka på den nya ikonen</string>
 	<string name="app_kill_ok_btn">OK</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">En omstart av systemet krävs för att inställningarna ska gälla</string>
 	<!-- Menu Items -->

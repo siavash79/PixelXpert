@@ -51,6 +51,9 @@
 	<string name="hotspot_inactivity_timeout_title">비활성 상태 시간 제한</string>
 	<string name="hotspot_max_client_title">최대 사용자</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="disable_unlock_hint_title">잠금해제 힌트 애니메이션 비활성화</string>
 	<string name="ls_general_options">잠금화면 설정</string>
 	<string name="hide_avatar_title">사용자 아바타 삭제 (멀티 사용자 모드)</string>
@@ -377,6 +380,10 @@
 	<string name="app_kill_alert_title">알림</string>
 	<string name="app_kill_alert_body">앱이 종료될 예정입니다. 새로운 아이콘을 탭하여 다시 실행할 수 있습니다.</string>
 	<string name="app_kill_ok_btn">확인</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">설정을 적용하려면 시스템을 재부팅해야 합니다.</string>
 	<!-- Menu Items -->

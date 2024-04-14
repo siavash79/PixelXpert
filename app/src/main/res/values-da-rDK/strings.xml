@@ -51,6 +51,9 @@
 	<string name="hotspot_inactivity_timeout_title">Timeout for inaktivitet</string>
 	<string name="hotspot_max_client_title">Maksimalt antal kunder</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="disable_unlock_hint_title">Deaktiver oplåsningshint-animationen</string>
 	<string name="ls_general_options">Indstillinger for låseskærm</string>
 	<string name="hide_avatar_title">Fjern brugeravatar (multibrugertilstand)</string>
@@ -377,6 +380,10 @@
 	<string name="app_kill_alert_title">Varsel</string>
 	<string name="app_kill_alert_body">Appen lukker nu. Du kan åbne den igen ved at trykke på det nye ikon</string>
 	<string name="app_kill_ok_btn">Okay</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">En systemgenstart er påkrævet, for at indstillingerne kan anvendes</string>
 	<!-- Menu Items -->

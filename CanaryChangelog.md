@@ -1,3 +1,6 @@
+**canary-348**  
+- Depth Wallpaper: bugfixes and performance improvement  
+  
 **canary-347**  
 - Depth wallpaper: fixed screen obstruction during HUN  
   

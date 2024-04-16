@@ -24,8 +24,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Arrays;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -115,14 +118,16 @@ public class DepthWallpaper extends XposedModPack {
 				}
 			}
 		});
+
 		hookAllMethods(CanvasEngineClass, "drawFrameOnCanvas", new XC_MethodHook() {
 			@SuppressLint("NewApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(DWallpaperEnabled && isLockScreenWallpaper(param.thisObject))
 				{
-					invalidateLSWSC();
 					Bitmap wallpaperBitmap = Bitmap.createBitmap((Bitmap) param.args[0]);
+
+					boolean cacheIsValid = assertCache(wallpaperBitmap);
 
 					Rect displayBounds =  ((Context) callMethod(param.thisObject, "getDisplayContext")).getSystemService(WindowManager.class)
 							.getCurrentWindowMetrics()
@@ -149,7 +154,10 @@ public class DepthWallpaper extends XposedModPack {
 
 					mWallpaperBackground.post(() -> mWallpaperBitmapContainer.setBackground(new BitmapDrawable(mContext.getResources(), finalScaledWallpaperBitmap)));
 
-					XPLauncher.enqueueProxyCommand(proxy -> proxy.extractSubject(finalScaledWallpaperBitmap, Constants.getLockScreenCachePath(mContext)));
+					if(!cacheIsValid)
+					{
+						XPLauncher.enqueueProxyCommand(proxy -> proxy.extractSubject(finalScaledWallpaperBitmap, Constants.getLockScreenSubjectCachePath(mContext)));
+					}
 				}
 			}
 		});
@@ -177,6 +185,44 @@ public class DepthWallpaper extends XposedModPack {
 				}
 			}
 		});
+	}
+
+	private boolean assertCache(Bitmap wallpaperBitmap) {
+
+		boolean cacheIsValid = false;
+		try
+		{
+			File wallpaperCacheFile = new File(Constants.getLockScreenBitmapCachePath(mContext));
+
+			ByteArrayOutputStream compressedBitmap = new ByteArrayOutputStream();
+			wallpaperBitmap.compress(Bitmap.CompressFormat.JPEG, 100, compressedBitmap);
+			if(wallpaperCacheFile.exists())
+			{
+				FileInputStream cacheStream = new FileInputStream(wallpaperCacheFile);
+
+				if(Arrays.equals(cacheStream.readAllBytes(), compressedBitmap.toByteArray()))
+				{
+					cacheIsValid = true;
+				}
+				else
+				{
+					FileOutputStream newCacheStream = new FileOutputStream(wallpaperCacheFile);
+					compressedBitmap.writeTo(newCacheStream);
+					newCacheStream.close();
+				}
+				cacheStream.close();
+			}
+			compressedBitmap.close();
+		}
+		catch (Throwable ignored)
+		{}
+
+		if(!cacheIsValid)
+		{
+			invalidateLSWSC();
+		}
+
+		return cacheIsValid;
 	}
 
 	private void createLayers() {
@@ -212,9 +258,9 @@ public class DepthWallpaper extends XposedModPack {
 				&& state.equals("KEYGUARD")
 				&& (boolean) callMethod(mQS, "isFullyCollapsed")) {
 
-			if(!lockScreenSubjectCacheValid && new File(Constants.getLockScreenCachePath(mContext)).exists())
+			if(!lockScreenSubjectCacheValid && new File(Constants.getLockScreenSubjectCachePath(mContext)).exists())
 			{
-				try (FileInputStream inputStream = new FileInputStream(Constants.getLockScreenCachePath(mContext)))
+				try (FileInputStream inputStream = new FileInputStream(Constants.getLockScreenSubjectCachePath(mContext)))
 				{
 					Drawable bitmapDrawable = BitmapDrawable.createFromStream(inputStream, "");
 					bitmapDrawable.setAlpha(255);
@@ -265,7 +311,7 @@ public class DepthWallpaper extends XposedModPack {
 		}
 		try {
 			//noinspection ResultOfMethodCallIgnored
-			new File(Constants.getLockScreenCachePath(mContext)).delete();
+			new File(Constants.getLockScreenSubjectCachePath(mContext)).delete();
 		}
 		catch (Throwable ignored){}
 	}

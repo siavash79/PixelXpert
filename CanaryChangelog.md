@@ -1,3 +1,6 @@
+**canary-349**  
+- A15ap31: Fixed forced themed icons on pixel launcher  
+  
 **canary-348**  
 - Depth Wallpaper: bugfixes and performance improvement  
   

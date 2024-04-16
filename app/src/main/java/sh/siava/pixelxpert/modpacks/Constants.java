@@ -33,8 +33,14 @@ public final class Constants {
 
 	public static final List<String> PREF_UPDATE_EXCLUSIONS = Arrays.asList(BootLoopProtector.LOAD_TIME_KEY_KEY, BootLoopProtector.PACKAGE_STRIKE_KEY_KEY);
 
-	public static String getLockScreenCachePath(Context context)
+	public static String getLockScreenSubjectCachePath(Context context)
 	{
 		return context.getCacheDir().getAbsolutePath() + "/lswt.png";
 	}
+
+	public static String getLockScreenBitmapCachePath(Context context)
+	{
+		return context.getCacheDir().getAbsolutePath() + "/lsw.jpg";
+	}
+
 }

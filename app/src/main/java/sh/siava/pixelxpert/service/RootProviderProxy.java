@@ -67,7 +67,7 @@ public class RootProviderProxy extends Service {
 			ensureEnvironment();
 
 			try {
-				new BitmapSubjectSegmenter().segmentSubject(input, new BitmapSubjectSegmenter.SegmentResultListener() {
+				new BitmapSubjectSegmenter(getApplicationContext()).segmentSubject(input, new BitmapSubjectSegmenter.SegmentResultListener() {
 					@Override
 					public void onSuccess(Bitmap result) {
 						try {

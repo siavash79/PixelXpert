@@ -1,8 +1,12 @@
 package sh.siava.pixelxpert.modpacks.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
+import com.google.android.gms.common.moduleinstall.ModuleInstall;
+import com.google.android.gms.common.moduleinstall.ModuleInstallClient;
+import com.google.android.gms.common.moduleinstall.ModuleInstallRequest;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.segmentation.subject.SubjectSegmentation;
 import com.google.mlkit.vision.segmentation.subject.SubjectSegmenter;
@@ -12,12 +16,32 @@ import java.nio.FloatBuffer;
 
 public class BitmapSubjectSegmenter {
 	SubjectSegmenter mSegmenter;
-	public BitmapSubjectSegmenter()
+	public BitmapSubjectSegmenter(Context context)
 	{
 		mSegmenter = SubjectSegmentation.getClient(
 				new SubjectSegmenterOptions.Builder()
 						.enableForegroundConfidenceMask()
 						.build());
+
+		downloadModelIfNeeded(context);
+	}
+
+	public void downloadModelIfNeeded(Context context)
+	{
+		ModuleInstallClient moduleInstallClient = ModuleInstall.getClient(context);
+
+		moduleInstallClient
+				.areModulesAvailable(mSegmenter)
+				.addOnSuccessListener(
+						response -> {
+							if (!response.areModulesAvailable()) {
+								moduleInstallClient
+										.installModules(
+												ModuleInstallRequest.newBuilder()
+														.addApi(mSegmenter)
+														.build());
+							}
+						});
 	}
 
 	public void segmentSubject(Bitmap inputBitmap, SegmentResultListener listener)

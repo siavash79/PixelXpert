@@ -3,3 +3,10 @@ include ':app'
 include ':RangeSliderPreference'
 
 project(':RangeSliderPreference').projectDir = new File(rootDir, 'Submodules/RangeSliderPreference/')
+
+dependencyResolutionManagement {
+	repositories {
+		google()
+		mavenCentral()
+	}
+}

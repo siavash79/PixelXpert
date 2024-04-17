@@ -120,7 +120,6 @@ public class DepthWallpaper extends XposedModPack {
 		});
 
 		hookAllMethods(CanvasEngineClass, "drawFrameOnCanvas", new XC_MethodHook() {
-			@SuppressLint("NewApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(DWallpaperEnabled && isLockScreenWallpaper(param.thisObject))

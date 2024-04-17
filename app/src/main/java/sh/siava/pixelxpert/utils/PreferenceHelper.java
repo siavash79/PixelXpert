@@ -60,7 +60,6 @@ public class PreferenceHelper {
 			case "DisableLockScreenPill":
 			case "ForceThemedLauncherIcons":
 			case "DisableOngoingNotifDismiss":
-			case "DWallpaperEnabled":
 				return Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
 
 			case "enablePowerMenuTheme":

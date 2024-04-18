@@ -1,3 +1,6 @@
+**canary-350**  
+- Experimental: unlocked depth wallpaper for Android 13  
+  
 **canary-349**  
 - A15ap31: Fixed forced themed icons on pixel launcher  
   

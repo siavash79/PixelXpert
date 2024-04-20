@@ -327,6 +327,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">While screen is off…</string>
 	<string name="custom_themed_icons_title">Custom themed icons</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Custom icons disabled</string>
 	<string name="custom_themed_icons_on">Custom icons enabled</string>
 	<string name="so_vol_longpress_skip">Long press Volume buttons to skip music</string>

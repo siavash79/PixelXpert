@@ -4,6 +4,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,13 +24,17 @@ import sh.siava.pixelxpert.modpacks.XposedModPack;
 public class PXSettingsLauncher extends XposedModPack {
 	private static final String listenPackage = Constants.SETTINGS_PACKAGE;
 
+	private static boolean PXInSettings = true;
+
 	public PXSettingsLauncher(Context context) {
 		super(context);
 	}
 
 
 	@Override
-	public void updatePrefs(String... Key) {}
+	public void updatePrefs(String... Key) {
+		PXInSettings = Xprefs.getBoolean("PXInSettings", true);
+	}
 
 	@Override
 	public boolean listensTo(String packageName) {
@@ -57,16 +62,18 @@ public class PXSettingsLauncher extends XposedModPack {
 		hookAllMethods(TopLevelSettingsClass, "onCreateAdapter", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				Object PXPreference = HomepagePreferenceClass.getConstructor(Context.class).newInstance(mContext);
+				if (PXInSettings) {
+					Object PXPreference = HomepagePreferenceClass.getConstructor(Context.class).newInstance(mContext);
 
-				callMethod(PXPreference, "setIcon",
-						ResourcesCompat.getDrawable(ResourceManager.modRes,
-								R.drawable.ic_notification_foreground,
-								mContext.getTheme()));
-				callMethod(PXPreference, "setTitle", ResourceManager.modRes.getString(R.string.app_name));
-				callMethod(PXPreference, "setOrder", 9999);
+					callMethod(PXPreference, "setIcon",
+							ResourcesCompat.getDrawable(ResourceManager.modRes,
+									R.drawable.ic_notification_foreground,
+									mContext.getTheme()));
+					callMethod(PXPreference, "setTitle", ResourceManager.modRes.getString(R.string.app_name));
+					callMethod(PXPreference, "setOrder", 9999);
 
-				callMethod(param.args[0], "addPreference", PXPreference);
+					callMethod(param.args[0], "addPreference", PXPreference);
+				}
 			}
 		});
 	}

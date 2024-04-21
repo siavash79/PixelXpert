@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">充电时开启息屏显示</string>
 	<string name="doze_header">锁屏功能</string>
 	<string name="custom_themed_icons_title">自定义带主题的图标</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">自定义图标已禁用</string>
 	<string name="custom_themed_icons_on">自定义图标已启用</string>
 	<string name="so_vol_longpress_skip">长按音量键切歌</string>

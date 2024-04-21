@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Mens skærmen er slukket…</string>
 	<string name="custom_themed_icons_title">Brugerdefinerede temaikoner</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Brugerdefinerede ikoner deaktiveret</string>
 	<string name="custom_themed_icons_on">Brugerdefinerede ikoner aktiveret</string>
 	<string name="so_vol_longpress_skip">Tryk længe på lydstyrkeknapperne for at springe musik over</string>

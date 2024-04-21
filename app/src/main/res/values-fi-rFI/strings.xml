@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Kun näyttö on pois päältä…</string>
 	<string name="custom_themed_icons_title">Mukautetut teemakuvakkeet</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Mukautetut kuvakkeet poistettu käytöstä</string>
 	<string name="custom_themed_icons_on">Mukautetut kuvakkeet käytössä</string>
 	<string name="so_vol_longpress_skip">Ohita musiikki painamalla äänenvoimakkuuspainikkeita pitkään</string>

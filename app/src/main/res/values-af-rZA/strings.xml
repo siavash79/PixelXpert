@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Terwyl skerm af is…</string>
 	<string name="custom_themed_icons_title">Pasgemaakte tema-ikone</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Gepasmaakte ikone gedeaktiveer</string>
 	<string name="custom_themed_icons_on">Gepasmaakte ikone geaktiveer</string>
 	<string name="so_vol_longpress_skip">Druk lank op Volume-knoppies om musiek oor te slaan</string>

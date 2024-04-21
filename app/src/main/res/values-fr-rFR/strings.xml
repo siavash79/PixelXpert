@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Garder l\'affichage permanent activé pendant que l\'appareil est en charge</string>
 	<string name="doze_header">Quand l’écran est éteint…</string>
 	<string name="custom_themed_icons_title">Icônes personnalisés</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Icônes personnalisés désactivés</string>
 	<string name="custom_themed_icons_on">Icônes personnalisés activés</string>
 	<string name="so_vol_longpress_skip">Maintenir les boutons du volume pour changer de chanson</string>

@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">إظهار الوقت والمعلومات دائما أثناء شحن الجهاز</string>
 	<string name="doze_header">أثناء إيقاف الشاشة…</string>
 	<string name="custom_themed_icons_title">الأيقونات المخصصة للموضوع</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">الرموز المخصصة معطلة</string>
 	<string name="custom_themed_icons_on">تم تمكين الأيقونات المخصصة</string>
 	<string name="so_vol_longpress_skip">اضغط مطولاً على أزرار الصوت لتخطي الموسيقى</string>

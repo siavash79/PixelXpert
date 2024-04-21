@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">स्क्रीन बंद होने पर…</string>
 	<string name="custom_themed_icons_title">कस्टम आइकन थीम</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">कस्टम आइकन अक्षम</string>
 	<string name="custom_themed_icons_on">कस्टम थीम वाले आइकन सक्षम हैं</string>
 	<string name="so_vol_longpress_skip">ट्रैक्स को छोड़ने के लिए वॉल्यूम को देर तक दबाएं*</string>

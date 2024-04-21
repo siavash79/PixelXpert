@@ -51,9 +51,9 @@
 	<string name="hotspot_inactivity_timeout_title">Inaktivitási időtúllépés</string>
 	<string name="hotspot_max_client_title">Maximális ügyfélszám</string>
 	<!--Lock screen related-->
-	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
-	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
-	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_title">Mélységi effektes háttérkép</string>
+	<string name="depth_wallpaper_summary">Dinamikusan előtérbe helyezi a háttér bizonyos részei az óra elé</string>
+	<string name="depth_wallpaper_opacity_title">Háttérkép előtérbeni áttetszősége</string>
 	<string name="disable_unlock_hint_title">Tiltsa le a feloldó tipp animációt</string>
 	<string name="ls_general_options">Lezárási képernyő beállításai</string>
 	<string name="hide_avatar_title">Felhasználói avatar eltávolítása (többfelhasználós mód)</string>
@@ -167,14 +167,14 @@
 	<string name="BB_Thickness_title">A sor vastagsága</string>
 	<string name="BB_indicate_charging">Töltés jelzése</string>
 	<string name="BB_indicate_fast_charging">Gyorstöltés kijelzése</string>
-	<string name="BB_indicate_power_save">Indicate power save</string>
+	<string name="BB_indicate_power_save">Energia állapot kijelzése</string>
 	<string name="BB_warning_level">Figyelmeztetési szint tartomány</string>
 	<string name="BB_warning_tip">Állítsa mindkettőt 0-ra a szintalapú színek letiltásához</string>
 	<string name="BB_batteryCriticalColor">Kritikus szintű szín</string>
 	<string name="BB_batteryWarningColor">Figyelmeztető szint színe</string>
 	<string name="BB_batteryChargingColor">Töltő szín</string>
 	<string name="BB_batteryFastChargingColor">Gyors töltés szín</string>
-	<string name="BB_batteryPowerSaveColor">Power Save color</string>
+	<string name="BB_batteryPowerSaveColor">Akkumulátor kímélő mód színe</string>
 	<string name="BB_transit_colors">Árnyékolja a színeket e tartomány között</string>
 	<string name="colored_battery_percentage_title">Színes akkumulátor ikon töltés során</string>
 	<string name="nt_stat_mode_today">Ma</string>
@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">A \"mindig bekapcsolt\" kijelző engedélyezése, míg a készülék tölt</string>
 	<string name="doze_header">Amíg a képernyő ki van kapcsolva,…</string>
 	<string name="custom_themed_icons_title">Egyedi témájú ikonok</string>
+	<string name="px_in_settings_title">PixelXpert hozzáadása a beállításokhoz</string>
 	<string name="custom_themed_icons_off">Egyéni ikonok letiltva</string>
 	<string name="custom_themed_icons_on">Egyéni ikonok engedélyezve</string>
 	<string name="so_vol_longpress_skip">A zene kihagyásához nyomja meg hosszan a hangerő gombokat</string>
@@ -381,8 +382,8 @@
 	<string name="app_kill_alert_body">Az alkalmazás most bezárul. Az új ikon megérintésével újra megnyithatja</string>
 	<string name="app_kill_ok_btn">rendben</string>
 	<!-- Depth Effect Alert -->
-	<string name="depth_effect_alert_title">Attention</string>
-	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_alert_title">Figyelem</string>
+	<string name="depth_effect_alert_body">Megfelelő zárképernyő háttérképet használj, ahol az előtéri elemek nem takarják ki teljesen az órát, így biztosítva a szemgyönyörködtető látványt és funkcionálitást is.\n\nMegjegyzés: %s.</string>
 	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">A beállítások érvényesítéséhez a rendszer újraindítása szükséges</string>

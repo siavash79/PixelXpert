@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Cihaz şarj olurken her zaman açık ekranı etkin tut (AOD)</string>
 	<string name="doze_header">Ekran kapalıyken...</string>
 	<string name="custom_themed_icons_title">Özel temalı simgeler</string>
+	<string name="px_in_settings_title">PixelXpert\'i ayar öğelerine ekle</string>
 	<string name="custom_themed_icons_off">Özel simgeler devre dışı</string>
 	<string name="custom_themed_icons_on">Özel simgeler etkin</string>
 	<string name="so_vol_longpress_skip">Müzik atlamak için Ses düğmelerine uzun basın</string>

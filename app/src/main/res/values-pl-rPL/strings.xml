@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Gdy ekran jest wyłączony…</string>
 	<string name="custom_themed_icons_title">Niestandardowe ikony tematyczne</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Niestandardowe ikony wyłączone</string>
 	<string name="custom_themed_icons_on">Włączone ikony niestandardowe</string>
 	<string name="so_vol_longpress_skip">Długie naciśnięcie przycisków głośności, aby pominąć muzykę</string>

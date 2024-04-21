@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">בזמן שהמסך כבוי…</string>
 	<string name="custom_themed_icons_title">סמלים מותאמים אישית</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">סמלים מותאמים אישית מושבתים</string>
 	<string name="custom_themed_icons_on">סמלים מותאמים אישית מופעלים</string>
 	<string name="so_vol_longpress_skip">לחץ לחיצה ארוכה על לחצני עוצמת הקול כדי לדלג על מוזיקה</string>

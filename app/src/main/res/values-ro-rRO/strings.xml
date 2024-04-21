@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Păstrează Afișajul ambiental pornit în timp ce dispozitivul se încarcă</string>
 	<string name="doze_header">În timp ce ecranul este oprit…</string>
 	<string name="custom_themed_icons_title">Pictograme personalizate</string>
+	<string name="px_in_settings_title">Adaugă PixelXpert la elementele Setărilor</string>
 	<string name="custom_themed_icons_off">Pictograme personalizate dezactivate</string>
 	<string name="custom_themed_icons_on">Pictograme personalizate activate</string>
 	<string name="so_vol_longpress_skip">Apăsare lungă butoane Volum pentru a omite melodia</string>

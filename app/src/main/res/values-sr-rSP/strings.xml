@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Док је екран искључен…</string>
 	<string name="custom_themed_icons_title">Прилагођене тематске иконе</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Прилагођене иконе су онемогућене</string>
 	<string name="custom_themed_icons_on">Прилагођене иконе су омогућене</string>
 	<string name="so_vol_longpress_skip">Дуго притисните дугмад за јачину звука да бисте прескочили музику</string>

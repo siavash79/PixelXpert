@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Всегда включать AOD во время зарядки устройства</string>
 	<string name="doze_header">Когда экран выключен…</string>
 	<string name="custom_themed_icons_title">Пользовательские тематические иконки</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Пользовательские значки отключены</string>
 	<string name="custom_themed_icons_on">Пользовательские значки включены</string>
 	<string name="so_vol_longpress_skip">Долгое нажатие клавишь громкости для переключения треков</string>

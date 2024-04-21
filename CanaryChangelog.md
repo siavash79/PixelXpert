@@ -1,3 +1,6 @@
+**canary-351**  
+- Added: option to remove PixelXpert shortcut from phone settings  
+  
 **canary-350**  
 - Experimental: unlocked depth wallpaper for Android 13  
   

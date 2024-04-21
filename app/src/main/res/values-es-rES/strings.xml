@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Mantener siempre activada la pantalla mientras el dispositivo está cargando</string>
 	<string name="doze_header">Mientras la pantalla está apagada…</string>
 	<string name="custom_themed_icons_title">Iconos temáticos personalizados</string>
+	<string name="px_in_settings_title">Añadir PixelXpert a los elementos de configuración</string>
 	<string name="custom_themed_icons_off">Iconos personalizados deshabilitados</string>
 	<string name="custom_themed_icons_on">Iconos personalizados habilitados</string>
 	<string name="so_vol_longpress_skip">Mantenga presionados los botones de volumen para saltar música</string>

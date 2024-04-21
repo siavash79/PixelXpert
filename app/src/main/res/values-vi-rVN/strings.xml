@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Giữ màn hình luôn hiển thị khi thiết bị đang được sạc</string>
 	<string name="doze_header">Khi màn hình tắt…</string>
 	<string name="custom_themed_icons_title">Biểu tượng theo chủ đề tùy chỉnh</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Các biểu tượng tùy chỉnh đã bị vô hiệu hóa</string>
 	<string name="custom_themed_icons_on">Các biểu tượng tùy chỉnh đã được bật</string>
 	<string name="so_vol_longpress_skip">Nhấn và giữ phím âm lượng để \"+Chuyển tiếp/-Phát lại\" bài hát</string>

@@ -50,6 +50,7 @@ public class DepthWallpaper extends XposedModPack {
 	private FrameLayout mWallpaperBackground;
 	private FrameLayout mWallpaperBitmapContainer;
 	private FrameLayout mWallpaperDimmingOverlay;
+	private boolean mLayersCreated = false;
 
 	public DepthWallpaper(Context context) {
 		super(context);
@@ -241,6 +242,8 @@ public class DepthWallpaper extends XposedModPack {
 		mLockScreenSubject = new FrameLayout(mContext);
 		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-1, -1);
 		mLockScreenSubject.setLayoutParams(lp);
+
+		mLayersCreated = true;
 	}
 
 	private boolean isLockScreenWallpaper(Object canvasEngine)
@@ -286,10 +289,12 @@ public class DepthWallpaper extends XposedModPack {
 		}
 		else
 		{
-			if(state.equals("UNLOCKED")) {
-				mWallpaperBackground.setVisibility(GONE);
+			if(mLayersCreated) {
+				if (state.equals("UNLOCKED")) {
+					mWallpaperBackground.setVisibility(GONE);
+				}
+				mLockScreenSubject.setVisibility(GONE);
 			}
-			mLockScreenSubject.setVisibility(GONE);
 		}
 	}
 
@@ -300,7 +305,7 @@ public class DepthWallpaper extends XposedModPack {
 	private void invalidateLSWSC() //invalidate lock screen wallpaper subject cache
 	{
 		lockScreenSubjectCacheValid = false;
-		if(mLockScreenSubject != null) {
+		if(mLayersCreated) {
 			mLockScreenSubject.post(() -> {
 				mLockScreenSubject.setVisibility(GONE);
 				mLockScreenSubject.setBackground(null);

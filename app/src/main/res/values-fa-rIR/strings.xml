@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">وقتی که صفحه نمایش خاموش است…</string>
 	<string name="custom_themed_icons_title">نمادهای با تم سفارشی</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">نمادهای سفارشی غیرفعال است</string>
 	<string name="custom_themed_icons_on">نمادهای سفارشی فعال شد</string>
 	<string name="so_vol_longpress_skip">فشار طولانی دکمه های میزان صدا برای رد کردن موزیک</string>

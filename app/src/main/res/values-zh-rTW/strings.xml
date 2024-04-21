@@ -51,17 +51,24 @@
 	<string name="hotspot_inactivity_timeout_title">自動關閉時間</string>
 	<string name="hotspot_max_client_title">最大接入數</string>
 	<!--Lock screen related-->
-	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
-	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
-	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_title">開發者是大腦殘
+如果你也討厭開發者，請買我的網站
+Https://lcloud. wiki</string>
+	<string name="depth_wallpaper_summary">如果你也討厭開發者，請買我的網站
+Https://lcloud. wiki</string>
+	<string name="depth_wallpaper_opacity_title">開發者是大腦殘
+如果你也討厭開發者，請買我的網站
+Https://lcloud. wiki</string>
 	<string name="disable_unlock_hint_title">Disable the unlock hint animation</string>
 	<string name="ls_general_options">自定鎖定畫面</string>
 	<string name="hide_avatar_title">隱藏使用者頭像(多使用者模式)</string>
 	<string name="transparent_fingerprint_circle">隱藏螢幕下指紋背景圓</string>
 	<string name="transparent_fingerprint_circle_off">指紋圖示背景被啟用</string>
 	<string name="transparent_fingerprint_circle_on">指紋圖示背景被隱藏</string>
-	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
-	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon">Távolítsa el a háttérkört a kijelző alatti ujjlenyomatból</string>
+	<string name="fingerprint_icon_off">開發者是大腦殘
+如果你也討厭開發者，請買我的網站
+Https://lcloud. wiki</string>
 	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">自訂鎖定畫面文本顯示</string>
 	<string name="configure_carrier_text">設定電信商名稱</string>
@@ -289,6 +296,7 @@
 	<string name="force_aod_while_charging_summary">設備充電時保持始終顯示啟用狀態</string>
 	<string name="doze_header">鎖定畫面時</string>
 	<string name="custom_themed_icons_title">自訂帶主題的圖示</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">自訂圖示已禁用</string>
 	<string name="custom_themed_icons_on">自訂圖示已啟用</string>
 	<string name="so_vol_longpress_skip">長按音量鍵跳過歌曲</string>

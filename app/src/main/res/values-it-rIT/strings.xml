@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Mantieni \"Always-On Display\" abilitato durante la ricarica del dispositivo</string>
 	<string name="doze_header">Mentre lo schermo è spento…</string>
 	<string name="custom_themed_icons_title">Icone a tema personalizzate</string>
+	<string name="px_in_settings_title">Aggiungi PixelXpert agli elementi delle impostazioni</string>
 	<string name="custom_themed_icons_off">Icone personalizzate disabilitate</string>
 	<string name="custom_themed_icons_on">Icone personalizzate abilitate</string>
 	<string name="so_vol_longpress_skip">Premi a lungo i pulsanti volume per saltare traccia</string>

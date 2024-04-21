@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">AOD während des Ladevorgangs aktiviert lassen</string>
 	<string name="doze_header">Während der Bildschirm aus ist…</string>
 	<string name="custom_themed_icons_title">Benutzerdefiniertes Symbolthema</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Benutzerdefinierte Symbole deaktiviert</string>
 	<string name="custom_themed_icons_on">Benutzerdefinierte Symbole aktiviert</string>
 	<string name="so_vol_longpress_skip">Lautstärke lange drücken um Titel zu überspringen*</string>

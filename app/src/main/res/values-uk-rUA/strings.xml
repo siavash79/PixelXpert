@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">Залишати екран увімкненим коли пристрій заряджається</string>
 	<string name="doze_header">Поки екран вимкнено…</string>
 	<string name="custom_themed_icons_title">Користувацькі теми для значків</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Користувацькі значки вимкнено</string>
 	<string name="custom_themed_icons_on">Користувацькі значки увімкнено</string>
 	<string name="so_vol_longpress_skip">Утримуйте кнопку гучності, щоб пропустити музичний трек</string>

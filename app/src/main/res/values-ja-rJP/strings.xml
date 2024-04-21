@@ -289,6 +289,7 @@
 	<string name="force_aod_while_charging_summary">充電中は常に画面をオンにする</string>
 	<string name="doze_header">While screen is off…</string>
 	<string name="custom_themed_icons_title">カスタムテーマアイコン</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">カスタムアイコン無効</string>
 	<string name="custom_themed_icons_on">カスタムアイコン有効</string>
 	<string name="so_vol_longpress_skip">音量ボタン長押しで曲をスキップ</string>

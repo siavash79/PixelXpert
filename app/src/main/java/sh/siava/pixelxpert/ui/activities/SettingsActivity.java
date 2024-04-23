@@ -48,6 +48,7 @@ import java.util.Objects;
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.databinding.SettingsActivityBinding;
+import sh.siava.pixelxpert.modpacks.utils.BitmapSubjectSegmenter;
 import sh.siava.pixelxpert.ui.fragments.HooksFragment;
 import sh.siava.pixelxpert.ui.fragments.UpdateFragment;
 import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchConfiguration;
@@ -508,6 +509,18 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	}
 
 	public static class LockScreenFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey)
+		{
+			super.onCreatePreferences(savedInstanceState, rootKey);
+
+			new BitmapSubjectSegmenter(getActivity()).checkModelAvailability(moduleAvailabilityResponse ->
+					findPreference("DWallpaperEnabled")
+					.setSummary(
+							moduleAvailabilityResponse.areModulesAvailable()
+									? R.string.depth_wallpaper_model_ready
+									: R.string.depth_wallpaper_model_not_available));
+		}
 		@Override
 		public String getTitle() {
 			return getString(R.string.lockscreen_header_title);

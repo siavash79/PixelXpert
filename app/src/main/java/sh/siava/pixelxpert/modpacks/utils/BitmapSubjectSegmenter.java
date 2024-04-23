@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
+import com.google.android.gms.common.moduleinstall.ModuleAvailabilityResponse;
 import com.google.android.gms.common.moduleinstall.ModuleInstall;
 import com.google.android.gms.common.moduleinstall.ModuleInstallClient;
 import com.google.android.gms.common.moduleinstall.ModuleInstallRequest;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.segmentation.subject.SubjectSegmentation;
 import com.google.mlkit.vision.segmentation.subject.SubjectSegmenter;
@@ -15,20 +17,22 @@ import com.google.mlkit.vision.segmentation.subject.SubjectSegmenterOptions;
 import java.nio.FloatBuffer;
 
 public class BitmapSubjectSegmenter {
-	SubjectSegmenter mSegmenter;
+	final SubjectSegmenter mSegmenter;
+	final Context mContext;
 	public BitmapSubjectSegmenter(Context context)
 	{
+		mContext = context;
 		mSegmenter = SubjectSegmentation.getClient(
 				new SubjectSegmenterOptions.Builder()
 						.enableForegroundConfidenceMask()
 						.build());
 
-		downloadModelIfNeeded(context);
+		downloadModelIfNeeded();
 	}
 
-	public void downloadModelIfNeeded(Context context)
+	public void downloadModelIfNeeded()
 	{
-		ModuleInstallClient moduleInstallClient = ModuleInstall.getClient(context);
+		ModuleInstallClient moduleInstallClient = ModuleInstall.getClient(mContext);
 
 		moduleInstallClient
 				.areModulesAvailable(mSegmenter)
@@ -42,6 +46,13 @@ public class BitmapSubjectSegmenter {
 														.build());
 							}
 						});
+	}
+
+	public void checkModelAvailability(OnSuccessListener<ModuleAvailabilityResponse> resultListener)
+	{
+		ModuleInstallClient moduleInstallClient = ModuleInstall.getClient(mContext);
+
+		moduleInstallClient.areModulesAvailable(mSegmenter).addOnSuccessListener(resultListener);
 	}
 
 	public void segmentSubject(Bitmap inputBitmap, SegmentResultListener listener)

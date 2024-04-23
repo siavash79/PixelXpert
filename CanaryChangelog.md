@@ -1,3 +1,6 @@
+**canary-352**  
+- Depth wallpaper bug fixes  
+  
 **canary-351**  
 - Added: option to remove PixelXpert shortcut from phone settings  
   

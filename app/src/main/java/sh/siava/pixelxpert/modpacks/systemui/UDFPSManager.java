@@ -56,11 +56,14 @@ public class UDFPSManager extends XposedModPack {
 		hookAllMethods(LockIconViewControllerClass, "updateIsUdfpsEnrolled", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(transparentBG)
+				if(transparentBG) {
 					setObjectField(
 							getObjectField(param.thisObject, "mView"),
 							"mUseBackground",
 							false);
+
+					callMethod(getObjectField(param.thisObject, "mView"), "updateColorAndBackgroundVisibility");
+				}
 			}
 		});
 

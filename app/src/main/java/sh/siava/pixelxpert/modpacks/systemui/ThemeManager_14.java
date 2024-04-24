@@ -104,42 +104,42 @@ public class ThemeManager_14 extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) {
 		if (!lightQSHeaderEnabled) return; //light QS header pref update needs a systemui restart. so there's no point to load these if not enabled
 
-		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
-		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
-		Class<?> QSPanelControllerClass = findClass("com.android.systemui.qs.QSPanelController", lpparam.classLoader);
-		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
-		Class<?> QSIconViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSIconViewImpl", lpparam.classLoader);
-		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
-		Class<?> GlobalActionsDialogLiteSinglePressActionClass = findClass("com.android.systemui.globalactions.GlobalActionsDialogLite$SinglePressAction", lpparam.classLoader);
-		Class<?> GlobalActionsDialogLiteEmergencyActionClass = findClass("com.android.systemui.globalactions.GlobalActionsDialogLite$EmergencyAction", lpparam.classLoader);
-		Class<?> GlobalActionsLayoutLiteClass = findClass("com.android.systemui.globalactions.GlobalActionsLayoutLite", lpparam.classLoader);
-		Class<?> QSFooterViewClass = findClass("com.android.systemui.qs.QSFooterView", lpparam.classLoader);
-		Class<?> TextButtonViewHolderClass = findClass("com.android.systemui.qs.footer.ui.binder.TextButtonViewHolder", lpparam.classLoader);
-		Class<?> NumberButtonViewHolderClass = findClass("com.android.systemui.qs.footer.ui.binder.NumberButtonViewHolder", lpparam.classLoader);
-		Class<?> BrightnessSliderViewClass = findClass("com.android.systemui.settings.brightness.BrightnessSliderView", lpparam.classLoader);
-		Class<?> ShadeCarrierClass = findClass("com.android.systemui.shade.carrier.ShadeCarrier", lpparam.classLoader);
-		Class<?> QSCustomizerClass = findClass("com.android.systemui.qs.customize.QSCustomizer", lpparam.classLoader);
-		Class<?> BatteryStatusChipClass = findClass("com.android.systemui.statusbar.BatteryStatusChip", lpparam.classLoader);
-		Class<?> QSContainerImplClass = findClass("com.android.systemui.qs.QSContainerImpl", lpparam.classLoader);
-		Class<?> ShadeHeaderControllerClass = findClassIfExists("com.android.systemui.shade.ShadeHeaderController", lpparam.classLoader);
-		Class<?> FooterActionsViewBinderClass = findClass("com.android.systemui.qs.footer.ui.binder.FooterActionsViewBinder", lpparam.classLoader);
+		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpParam.classLoader);
+		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpParam.classLoader);
+		Class<?> QSPanelControllerClass = findClass("com.android.systemui.qs.QSPanelController", lpParam.classLoader);
+		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpParam.classLoader);
+		Class<?> QSIconViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSIconViewImpl", lpParam.classLoader);
+		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpParam.classLoader);
+		Class<?> GlobalActionsDialogLiteSinglePressActionClass = findClass("com.android.systemui.globalactions.GlobalActionsDialogLite$SinglePressAction", lpParam.classLoader);
+		Class<?> GlobalActionsDialogLiteEmergencyActionClass = findClass("com.android.systemui.globalactions.GlobalActionsDialogLite$EmergencyAction", lpParam.classLoader);
+		Class<?> GlobalActionsLayoutLiteClass = findClass("com.android.systemui.globalactions.GlobalActionsLayoutLite", lpParam.classLoader);
+		Class<?> QSFooterViewClass = findClass("com.android.systemui.qs.QSFooterView", lpParam.classLoader);
+		Class<?> TextButtonViewHolderClass = findClass("com.android.systemui.qs.footer.ui.binder.TextButtonViewHolder", lpParam.classLoader);
+		Class<?> NumberButtonViewHolderClass = findClass("com.android.systemui.qs.footer.ui.binder.NumberButtonViewHolder", lpParam.classLoader);
+		Class<?> BrightnessSliderViewClass = findClass("com.android.systemui.settings.brightness.BrightnessSliderView", lpParam.classLoader);
+		Class<?> ShadeCarrierClass = findClass("com.android.systemui.shade.carrier.ShadeCarrier", lpParam.classLoader);
+		Class<?> QSCustomizerClass = findClass("com.android.systemui.qs.customize.QSCustomizer", lpParam.classLoader);
+		Class<?> BatteryStatusChipClass = findClass("com.android.systemui.statusbar.BatteryStatusChip", lpParam.classLoader);
+		Class<?> QSContainerImplClass = findClass("com.android.systemui.qs.QSContainerImpl", lpParam.classLoader);
+		Class<?> ShadeHeaderControllerClass = findClassIfExists("com.android.systemui.shade.ShadeHeaderController", lpParam.classLoader);
+		Class<?> FooterActionsViewBinderClass = findClass("com.android.systemui.qs.footer.ui.binder.FooterActionsViewBinder", lpParam.classLoader);
 
 		try { //A14 Compose implementation of QS Footer actions
-//			Class<?> FooterActionsButtonViewModelClass = findClass("com.android.systemui.qs.footer.ui.viewmodel.FooterActionsButtonViewModel", lpparam.classLoader);
-			Class<?> FooterActionsViewModelClass = findClass("com.android.systemui.qs.footer.ui.viewmodel.FooterActionsViewModel", lpparam.classLoader);
-//			Class<?> FooterActionsKtClass = findClass("com.android.systemui.qs.footer.ui.compose.FooterActionsKt", lpparam.classLoader);
-			Class<?> ThemeColorKtClass = findClass("com.android.compose.theme.ColorKt", lpparam.classLoader);
-			Class<?> ExpandableControllerImplClass = findClass("com.android.compose.animation.ExpandableControllerImpl", lpparam.classLoader);
+//			Class<?> FooterActionsButtonViewModelClass = findClass("com.android.systemui.qs.footer.ui.viewmodel.FooterActionsButtonViewModel", lpParam.classLoader);
+			Class<?> FooterActionsViewModelClass = findClass("com.android.systemui.qs.footer.ui.viewmodel.FooterActionsViewModel", lpParam.classLoader);
+//			Class<?> FooterActionsKtClass = findClass("com.android.systemui.qs.footer.ui.compose.FooterActionsKt", lpParam.classLoader);
+			Class<?> ThemeColorKtClass = findClass("com.android.compose.theme.ColorKt", lpParam.classLoader);
+			Class<?> ExpandableControllerImplClass = findClass("com.android.compose.animation.ExpandableControllerImpl", lpParam.classLoader);
 
 			hookAllConstructors(ExpandableControllerImplClass, new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 					if(!isDark)
 					{
-						Class<?> GraphicsColorKtClass = findClass("androidx.compose.ui.graphics.ColorKt", lpparam.classLoader);
+						Class<?> GraphicsColorKtClass = findClass("androidx.compose.ui.graphics.ColorKt", lpParam.classLoader);
 						param.args[1] = callStaticMethod(GraphicsColorKtClass, "Color", BLACK);
 					}
 				}
@@ -176,7 +176,7 @@ public class ThemeManager_14 extends XposedModPack {
 
 					if(result != 0)
 					{
-						Class<?> GraphicsColorKtClass = findClass("androidx.compose.ui.graphics.ColorKt", lpparam.classLoader);
+						Class<?> GraphicsColorKtClass = findClass("androidx.compose.ui.graphics.ColorKt", lpParam.classLoader);
 						param.setResult(callStaticMethod(GraphicsColorKtClass, "Color",result));
 					}
 				}
@@ -199,8 +199,8 @@ public class ThemeManager_14 extends XposedModPack {
 							BLACK);
 
 					//we must use the classes defined in the apk. using our own will fail
-					Class<?> StateFlowImplClass = findClass("kotlinx.coroutines.flow.StateFlowImpl", lpparam.classLoader);
-					Class<?> ReadonlyStateFlowClass = findClass("kotlinx.coroutines.flow.ReadonlyStateFlow", lpparam.classLoader);
+					Class<?> StateFlowImplClass = findClass("kotlinx.coroutines.flow.StateFlowImpl", lpParam.classLoader);
+					Class<?> ReadonlyStateFlowClass = findClass("kotlinx.coroutines.flow.ReadonlyStateFlow", lpParam.classLoader);
 
 					Object zeroAlphaFlow = StateFlowImplClass.getConstructor(Object.class).newInstance(0f);
 					setObjectField(param.thisObject, "backgroundAlpha", ReadonlyStateFlowClass.getConstructors()[0].newInstance(zeroAlphaFlow));
@@ -209,8 +209,8 @@ public class ThemeManager_14 extends XposedModPack {
 		} catch (Throwable ignored){}
 
 		try { //A14 ap11 onwards - modern implementation of mobile icons
-			Class<?> ShadeCarrierGroupControllerClass = findClass("com.android.systemui.shade.carrier.ShadeCarrierGroupController", lpparam.classLoader);
-			Class<?> MobileIconBinderClass = findClass("com.android.systemui.statusbar.pipeline.mobile.ui.binder.MobileIconBinder", lpparam.classLoader);
+			Class<?> ShadeCarrierGroupControllerClass = findClass("com.android.systemui.shade.carrier.ShadeCarrierGroupController", lpParam.classLoader);
+			Class<?> MobileIconBinderClass = findClass("com.android.systemui.statusbar.pipeline.mobile.ui.binder.MobileIconBinder", lpParam.classLoader);
 
 			hookAllConstructors(ShadeCarrierGroupControllerClass, new XC_MethodHook() {
 				@Override
@@ -235,7 +235,7 @@ public class ThemeManager_14 extends XposedModPack {
 
 		if (ShadeHeaderControllerClass == null)
 		{
-			ShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpparam.classLoader);
+			ShadeHeaderControllerClass = findClass("com.android.systemui.shade.LargeScreenShadeHeaderController", lpParam.classLoader);
 		}
 
 		hookAllConstructors(QSCustomizerClass, new XC_MethodHook() { //QS Customize panel

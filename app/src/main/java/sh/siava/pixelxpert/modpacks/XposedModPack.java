@@ -13,7 +13,7 @@ public abstract class XposedModPack {
 
 	public abstract void updatePrefs(String... Key);
 
-	public abstract void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable;
+	public abstract void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable;
 
 	public abstract boolean listensTo(String packageName);
 }

@@ -42,9 +42,9 @@ public class PXSettingsLauncher extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		Class<?> HomepagePreferenceClass = findClass("com.android.settings.widget.HomepagePreference", lpparam.classLoader);
-		Class<?> TopLevelSettingsClass = findClass("com.android.settings.homepage.TopLevelSettings", lpparam.classLoader);
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		Class<?> HomepagePreferenceClass = findClass("com.android.settings.widget.HomepagePreference", lpParam.classLoader);
+		Class<?> TopLevelSettingsClass = findClass("com.android.settings.homepage.TopLevelSettings", lpParam.classLoader);
 
 		hookAllMethods(TopLevelSettingsClass, "onPreferenceTreeClick", new XC_MethodHook() {
 			@Override

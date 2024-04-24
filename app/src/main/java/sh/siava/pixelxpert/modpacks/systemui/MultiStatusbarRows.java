@@ -46,10 +46,10 @@ public class MultiStatusbarRows extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!lpParam.packageName.equals(listenPackage)) return;
 
-		Class<?> IconManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconController$IconManager", lpparam.classLoader);
+		Class<?> IconManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconController$IconManager", lpParam.classLoader);
 
 		hookAllConstructors(IconManagerClass, new XC_MethodHook() {
 			@Override
@@ -62,7 +62,7 @@ public class MultiStatusbarRows extends XposedModPack {
 					String id = mContext.getResources().getResourceName(((View) linearStatusbarIconContainer.getParent().getParent()).getId()); //helps getting exception if it's in QS
 					if (!id.contains("status_bar_end_side_content")) return;
 
-					FlexStatusIconContainer flex = new FlexStatusIconContainer(mContext, lpparam.classLoader, linearStatusbarIconContainer);
+					FlexStatusIconContainer flex = new FlexStatusIconContainer(mContext, lpParam.classLoader, linearStatusbarIconContainer);
 					flex.setPadding(linearStatusbarIconContainer.getPaddingLeft(), 0, linearStatusbarIconContainer.getPaddingRight(), 0);
 
 					LinearLayout.LayoutParams flexParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);

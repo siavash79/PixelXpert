@@ -54,13 +54,13 @@ public class FlashLightLevel extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!lpParam.packageName.equals(listenPackage)) return;
 
 		mFlashPercentageDrawable = new TilePercentageDrawable(mContext);
 		mFlashPercentageDrawable.setAlpha(64);
 
-		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
+		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpParam.classLoader);
 
 		hookAllMethods(QSTileViewImplClass, "handleStateChanged", new XC_MethodHook() {
 			@SuppressLint("DiscouragedApi")

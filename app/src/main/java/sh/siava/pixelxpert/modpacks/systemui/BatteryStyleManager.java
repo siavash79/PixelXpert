@@ -141,17 +141,17 @@ public class BatteryStyleManager extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) {
 		BatteryDataProvider.registerInfoCallback(() -> refreshAllBatteryIcons(false));
 
-		findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
+		findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpParam.classLoader, Context.class, int.class, new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				frameColor = (int) param.args[1];
 			}
 		});
 
-		Class<?> BatteryMeterViewClass = findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
+		Class<?> BatteryMeterViewClass = findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpParam.classLoader);
 
 		View.OnAttachStateChangeListener listener = new View.OnAttachStateChangeListener() {
 			@Override

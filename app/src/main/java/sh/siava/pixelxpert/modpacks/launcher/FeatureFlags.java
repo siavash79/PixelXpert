@@ -39,11 +39,11 @@ public class FeatureFlags extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		try {
-//			Class<?> FeatureFlags = findClass("com.android.launcher3.config.FeatureFlags", lpparam.classLoader);
-			Class<?> LauncherIconsClass = findClass("com.android.launcher3.icons.LauncherIcons", lpparam.classLoader);
-			Class<?> ClippedMonoDrawableClass = findClass("com.android.launcher3.icons.BaseIconFactory$ClippedMonoDrawable", lpparam.classLoader);
+//			Class<?> FeatureFlags = findClass("com.android.launcher3.config.FeatureFlags", lpParam.classLoader);
+			Class<?> LauncherIconsClass = findClass("com.android.launcher3.icons.LauncherIcons", lpParam.classLoader);
+			Class<?> ClippedMonoDrawableClass = findClass("com.android.launcher3.icons.BaseIconFactory$ClippedMonoDrawable", lpParam.classLoader);
 			hookAllMethods(LauncherIconsClass, "getMonochromeDrawable", new XC_MethodHook() {  //flag doesn't work on A14B3 for some reason
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

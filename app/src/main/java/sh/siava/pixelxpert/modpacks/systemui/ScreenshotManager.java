@@ -48,18 +48,18 @@ public class ScreenshotManager extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!listensTo(lpparam.packageName)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!listensTo(lpParam.packageName)) return;
 
-		Class<?> ScreenshotControllerClass = findClass("com.android.systemui.screenshot.ScreenshotController", lpparam.classLoader);
+		Class<?> ScreenshotControllerClass = findClass("com.android.systemui.screenshot.ScreenshotController", lpParam.classLoader);
 
-		Class<?> CaptureArgsClass = findClassIfExists("android.window.ScreenCapture.CaptureArgs", lpparam.classLoader); //A14
+		Class<?> CaptureArgsClass = findClassIfExists("android.window.ScreenCapture.CaptureArgs", lpParam.classLoader); //A14
 		if(CaptureArgsClass == null)
 		{
-			CaptureArgsClass = findClass("android.view.SurfaceControl$DisplayCaptureArgs", lpparam.classLoader); //A13
+			CaptureArgsClass = findClass("android.view.SurfaceControl$DisplayCaptureArgs", lpParam.classLoader); //A13
 		}
 
-		Class<?> ScreenshotPolicyImplClass = findClass("com.android.systemui.screenshot.ScreenshotPolicyImpl", lpparam.classLoader);
+		Class<?> ScreenshotPolicyImplClass = findClass("com.android.systemui.screenshot.ScreenshotPolicyImpl", lpParam.classLoader);
 
 		hookAllMethodsMatchPattern(ScreenshotPolicyImplClass, ".*isManagedProfile.*", new XC_MethodHook() {
 			@Override
@@ -100,7 +100,7 @@ public class ScreenshotManager extends XposedModPack {
 		});
 
 		//A14 QPR3
-		Class<?> ScreenshotSoundProviderImplClass = findClassIfExists("com.android.systemui.screenshot.ScreenshotSoundProviderImpl", lpparam.classLoader);
+		Class<?> ScreenshotSoundProviderImplClass = findClassIfExists("com.android.systemui.screenshot.ScreenshotSoundProviderImpl", lpParam.classLoader);
 		if(ScreenshotSoundProviderImplClass != null) {
 			hookAllMethods(ScreenshotSoundProviderImplClass, "getScreenshotSound", new XC_MethodHook() {
 				@SuppressLint("NewApi")

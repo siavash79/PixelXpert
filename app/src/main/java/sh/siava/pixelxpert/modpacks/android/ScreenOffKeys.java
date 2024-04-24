@@ -52,13 +52,13 @@ public class ScreenOffKeys extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		Class<?> PhoneWindowManagerClass;
 		Method powerLongPressMethod;
 		Method interceptKeyBeforeQueueingMethod;
 
 		try {
-			PhoneWindowManagerClass = findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
+			PhoneWindowManagerClass = findClass("com.android.server.policy.PhoneWindowManager", lpParam.classLoader);
 
 			powerLongPressMethod = findMethodExact(PhoneWindowManagerClass, "powerLongPress", long.class);
 			interceptKeyBeforeQueueingMethod = findMethodExact(PhoneWindowManagerClass, "interceptKeyBeforeQueueing", KeyEvent.class, int.class);

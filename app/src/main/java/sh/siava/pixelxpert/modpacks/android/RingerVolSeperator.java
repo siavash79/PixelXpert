@@ -43,10 +43,10 @@ public class RingerVolSeperator extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 
 		try {
-			DeviceConfigClass = findClass("android.provider.DeviceConfig", lpparam.classLoader);
+			DeviceConfigClass = findClass("android.provider.DeviceConfig", lpParam.classLoader);
 
 			hookAllMethods(DeviceConfigClass, "setProperty", new XC_MethodHook() {
 				@Override
@@ -61,7 +61,7 @@ public class RingerVolSeperator extends XposedModPack {
 				}
 			});
 
-			if (Constants.SYSTEM_FRAMEWORK_PACKAGE.equals(lpparam.packageName))
+			if (Constants.SYSTEM_FRAMEWORK_PACKAGE.equals(lpParam.packageName))
 				setSeparateRingerNotif(SeparateRingNotifVol);
 		} catch (Throwable ignored) {}
 	}

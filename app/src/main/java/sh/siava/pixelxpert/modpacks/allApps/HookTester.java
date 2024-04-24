@@ -19,14 +19,14 @@ public class HookTester extends XposedModPack {
 	public void updatePrefs(String... Key) {}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				new Thread(() -> {
 					Intent broadcast = new Intent(Constants.ACTION_XPOSED_CONFIRMED);
 
-					broadcast.putExtra("packageName", lpparam.packageName);
+					broadcast.putExtra("packageName", lpParam.packageName);
 
 					broadcast.setPackage(BuildConfig.APPLICATION_ID);
 

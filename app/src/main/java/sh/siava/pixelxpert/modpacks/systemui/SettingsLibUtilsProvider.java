@@ -48,7 +48,7 @@ public class SettingsLibUtilsProvider extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		UtilsClass = findClass("com.android.settingslib.Utils", lpparam.classLoader);
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		UtilsClass = findClass("com.android.settingslib.Utils", lpParam.classLoader);
 	}
 }

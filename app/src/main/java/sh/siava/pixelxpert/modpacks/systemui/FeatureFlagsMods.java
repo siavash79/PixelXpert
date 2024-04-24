@@ -47,10 +47,10 @@ public class FeatureFlagsMods extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!lpParam.packageName.equals(listenPackage)) return;
 
-/*		Class<?> DeviceConfigClass = findClass("android.provider.DeviceConfig", lpparam.classLoader);
+/*		Class<?> DeviceConfigClass = findClass("android.provider.DeviceConfig", lpParam.classLoader);
 
 		hookAllMethods(DeviceConfigClass, "getBoolean", new XC_MethodHook() {
 			@Override
@@ -62,7 +62,7 @@ public class FeatureFlagsMods extends XposedModPack {
 			}
 		});*/
 		//replaced with this:
-		Class<?> ClipboardOverlayControllerClass = findClass("com.android.systemui.clipboardoverlay.ClipboardOverlayController", lpparam.classLoader);
+		Class<?> ClipboardOverlayControllerClass = findClass("com.android.systemui.clipboardoverlay.ClipboardOverlayController", lpParam.classLoader);
 		ReflectionTools.hookAllMethodsMatchPattern(ClipboardOverlayControllerClass, "setExpandedView.*", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -77,7 +77,7 @@ public class FeatureFlagsMods extends XposedModPack {
 
 
 		hookAllMethods(
-				findClass("com.android.settingslib.mobile.MobileMappings$Config", lpparam.classLoader),
+				findClass("com.android.settingslib.mobile.MobileMappings$Config", lpParam.classLoader),
 				"readConfig", new XC_MethodHook() {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {

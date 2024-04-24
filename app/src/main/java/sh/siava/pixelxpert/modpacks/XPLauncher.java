@@ -55,19 +55,19 @@ public class XPLauncher implements ServiceConnection {
 		instance = this;
 	}
 
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		try
 		{
-			isChildProcess = lpparam.processName.contains(":");
-			processName = lpparam.processName;
+			isChildProcess = lpParam.processName.contains(":");
+			processName = lpParam.processName;
 		} catch (Throwable ignored)
 		{
 			isChildProcess = false;
 		}
 
 		//If example class isn't found, user is using an older version. Don't load the module at all
-		if (Build.VERSION.SDK_INT ==  Build.VERSION_CODES.TIRAMISU && lpparam.packageName.equals(SYSTEM_UI_PACKAGE)) {
-			Class<?> A33R18Example = findClassIfExists("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
+		if (Build.VERSION.SDK_INT ==  Build.VERSION_CODES.TIRAMISU && lpParam.packageName.equals(SYSTEM_UI_PACKAGE)) {
+			Class<?> A33R18Example = findClassIfExists("com.android.systemui.shade.NotificationPanelViewController", lpParam.classLoader);
 			if (A33R18Example == null)
 			{
 				log("This version isn't compatible with your ROM. Exiting...");
@@ -75,9 +75,9 @@ public class XPLauncher implements ServiceConnection {
 			}
 		}
 
-		if(lpparam.packageName.equals(Constants.SYSTEM_FRAMEWORK_PACKAGE))
+		if(lpParam.packageName.equals(Constants.SYSTEM_FRAMEWORK_PACKAGE))
 		{
-			Class<?> PhoneWindowManagerClass = findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
+			Class<?> PhoneWindowManagerClass = findClass("com.android.server.policy.PhoneWindowManager", lpParam.classLoader);
 			hookAllMethods(PhoneWindowManagerClass, "init", new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -90,7 +90,7 @@ public class XPLauncher implements ServiceConnection {
 
 							XPrefs.init(mContext);
 
-							CompletableFuture.runAsync(() -> waitForXprefsLoad(lpparam));
+							CompletableFuture.runAsync(() -> waitForXprefsLoad(lpParam));
 						}
 					}
 					catch (Throwable t){
@@ -104,7 +104,7 @@ public class XPLauncher implements ServiceConnection {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					try {
-						if (mContext == null || lpparam.packageName.equals(Constants.TELECOM_SERVER_PACKAGE)) { //telecom service launches as a secondary process in framework, but has its own package name. context is not null when it loads
+						if (mContext == null || lpParam.packageName.equals(Constants.TELECOM_SERVER_PACKAGE)) { //telecom service launches as a secondary process in framework, but has its own package name. context is not null when it loads
 							mContext = (Context) param.args[2];
 
 							ResourceManager.modRes = mContext.createPackageContext(APPLICATION_ID, CONTEXT_IGNORE_SECURITY)
@@ -112,7 +112,7 @@ public class XPLauncher implements ServiceConnection {
 
 							XPrefs.init(mContext);
 
-							waitForXprefsLoad(lpparam);
+							waitForXprefsLoad(lpParam);
 						}
 					}
 					catch (Throwable t){
@@ -123,32 +123,32 @@ public class XPLauncher implements ServiceConnection {
 		}
 	}
 
-	private void onXPrefsReady(XC_LoadPackage.LoadPackageParam lpparam) {
-		if (isBootLooped(lpparam.packageName)) {
-			log(String.format("PixelXpert: Possible bootloop in %s. Will not load for now", lpparam.packageName));
+	private void onXPrefsReady(XC_LoadPackage.LoadPackageParam lpParam) {
+		if (isBootLooped(lpParam.packageName)) {
+			log(String.format("PixelXpert: Possible bootloop in %s. Will not load for now", lpParam.packageName));
 			return;
 		}
 
 		new SystemUtils(mContext);
-		XPrefs.setPackagePrefs(lpparam.packageName);
+		XPrefs.setPackagePrefs(lpParam.packageName);
 
-		loadModpacks(lpparam);
+		loadModpacks(lpParam);
 	}
 
-	private void loadModpacks(XC_LoadPackage.LoadPackageParam lpparam) {
-		if (Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(lpparam.packageName)) {
+	private void loadModpacks(XC_LoadPackage.LoadPackageParam lpParam) {
+		if (Arrays.asList(ResourceManager.modRes.getStringArray(R.array.root_requirement)).contains(lpParam.packageName)) {
 			forceConnectRootService();
 		}
 
-		for (Class<? extends XposedModPack> mod : ModPacks.getMods(lpparam.packageName)) {
+		for (Class<? extends XposedModPack> mod : ModPacks.getMods(lpParam.packageName)) {
 			try {
 				XposedModPack instance = mod.getConstructor(Context.class).newInstance(mContext);
-				if (!instance.listensTo(lpparam.packageName)) continue;
+				if (!instance.listensTo(lpParam.packageName)) continue;
 				try {
 					instance.updatePrefs();
 				} catch (Throwable ignored) {
 				}
-				instance.handleLoadPackage(lpparam);
+				instance.handleLoadPackage(lpParam);
 				runningMods.add(instance);
 			} catch (Throwable T) {
 				log("Start Error Dump - Occurred in " + mod.getName());
@@ -204,7 +204,7 @@ public class XPLauncher implements ServiceConnection {
 		}
 	}
 
-	private void waitForXprefsLoad(XC_LoadPackage.LoadPackageParam lpparam) {
+	private void waitForXprefsLoad(XC_LoadPackage.LoadPackageParam lpParam) {
 		while(true)
 		{
 			try
@@ -223,7 +223,7 @@ public class XPLauncher implements ServiceConnection {
 			log("PixelXpert Records: " + Xprefs.getAll().keySet().size());
 		} catch (Throwable ignored) {}
 
-		onXPrefsReady(lpparam);
+		onXPrefsReady(lpParam);
 	}
 
 

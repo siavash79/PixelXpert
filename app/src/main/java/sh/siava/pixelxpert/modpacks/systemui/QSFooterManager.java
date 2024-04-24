@@ -58,11 +58,11 @@ public class QSFooterManager extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		stringFormatter.registerCallback(this::setQSFooterText);
 
-		Class<?> QSFooterViewClass = findClass("com.android.systemui.qs.QSFooterView", lpparam.classLoader);
-		Class<?> QSContainerImplClass = findClass("com.android.systemui.qs.QSContainerImpl", lpparam.classLoader);
+		Class<?> QSFooterViewClass = findClass("com.android.systemui.qs.QSFooterView", lpParam.classLoader);
+		Class<?> QSContainerImplClass = findClass("com.android.systemui.qs.QSContainerImpl", lpParam.classLoader);
 
 		hookAllConstructors(QSFooterViewClass, new XC_MethodHook() {
 			@Override

@@ -51,9 +51,9 @@ public class BatteryDataProvider extends XposedModPack {
 	public void updatePrefs(String... Key) {}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpparam.classLoader);
-		Class<?> BatteryControllerImplClass = findClass("com.android.systemui.statusbar.policy.BatteryControllerImpl", lpparam.classLoader);
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpParam.classLoader);
+		Class<?> BatteryControllerImplClass = findClass("com.android.systemui.statusbar.policy.BatteryControllerImpl", lpParam.classLoader);
 
 		//once an intent is received, it's either battery level change, powersave change, or demo mode. we don't expect demo
 		// intents normally. So it's safe to assume we'll need to update battery anyway

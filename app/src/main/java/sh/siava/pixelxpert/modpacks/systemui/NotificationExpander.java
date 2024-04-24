@@ -68,22 +68,22 @@ public class NotificationExpander extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!listenPackage.equals(lpparam.packageName) || !notificationExpandallHookEnabled) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!listenPackage.equals(lpParam.packageName) || !notificationExpandallHookEnabled) return;
 
-		Class<?> NotificationStackScrollLayoutClass = findClass("com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout", lpparam.classLoader);
-		Class<?> FooterViewButtonClass = findClass("com.android.systemui.statusbar.notification.row.FooterViewButton", lpparam.classLoader);
-		Class<?> NotifCollectionClass = findClassIfExists("com.android.systemui.statusbar.notification.collection.NotifCollection", lpparam.classLoader);
-		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
+		Class<?> NotificationStackScrollLayoutClass = findClass("com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout", lpParam.classLoader);
+		Class<?> FooterViewButtonClass = findClass("com.android.systemui.statusbar.notification.row.FooterViewButton", lpParam.classLoader);
+		Class<?> NotifCollectionClass = findClassIfExists("com.android.systemui.statusbar.notification.collection.NotifCollection", lpParam.classLoader);
+		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpParam.classLoader);
 		Class<?> FooterViewClass;
 
 
 		try { //14AP11
-			FooterViewClass = findClass("com.android.systemui.statusbar.notification.footer.ui.view.FooterView", lpparam.classLoader);
+			FooterViewClass = findClass("com.android.systemui.statusbar.notification.footer.ui.view.FooterView", lpParam.classLoader);
 		}
 		catch (Throwable ignored) //Older
 		{
-			FooterViewClass = findClass("com.android.systemui.statusbar.notification.row.FooterView", lpparam.classLoader);
+			FooterViewClass = findClass("com.android.systemui.statusbar.notification.row.FooterView", lpParam.classLoader);
 		}
 
 		//region default notification state

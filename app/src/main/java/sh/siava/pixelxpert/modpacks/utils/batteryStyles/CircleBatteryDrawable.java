@@ -35,7 +35,7 @@ import androidx.core.graphics.PathParser;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import sh.siava.pixelxpert.modpacks.systemui.SettingsLibUtilsProvider;
-import sh.siava.pixelxpert.modpacks.utils.AlphaRefreshedPaint;
+import sh.siava.pixelxpert.modpacks.utils.AlphaConsistantPaint;
 
 public class CircleBatteryDrawable extends BatteryDrawable
 {
@@ -52,11 +52,11 @@ public class CircleBatteryDrawable extends BatteryDrawable
 	private int mDiameter;
 	private final RectF mFrame = new RectF();
 	private int mFGColor = WHITE;
-	private final Paint mTextPaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
-	private final Paint mFramePaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
-	private final Paint mBatteryPaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
-	private final Paint mWarningTextPaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
-	private final Paint mBoltPaint = new AlphaRefreshedPaint(ANTI_ALIAS_FLAG);
+	private final Paint mTextPaint = new AlphaConsistantPaint(ANTI_ALIAS_FLAG);
+	private final Paint mFramePaint = new AlphaConsistantPaint(ANTI_ALIAS_FLAG);
+	private final Paint mBatteryPaint = new AlphaConsistantPaint(ANTI_ALIAS_FLAG);
+	private final Paint mWarningTextPaint = new AlphaConsistantPaint(ANTI_ALIAS_FLAG);
+	private final Paint mBoltPaint = new AlphaConsistantPaint(ANTI_ALIAS_FLAG);
 	private final ValueAnimator mBoltAlphaAnimator;
 	private int[] mShadeColors;
 	private float[] mShadeLevels;

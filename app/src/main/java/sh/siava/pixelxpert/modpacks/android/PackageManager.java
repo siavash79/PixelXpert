@@ -64,15 +64,15 @@ public class PackageManager extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		try {
-			Class<?> InstallPackageHelperClass = findClass("com.android.server.pm.InstallPackageHelper", lpparam.classLoader);
-			Class<?> PackageManagerServiceUtilsClass = findClass("com.android.server.pm.PackageManagerServiceUtils", lpparam.classLoader);
-			Class<?> SigningDetailsClass = findClass("android.content.pm.SigningDetails", lpparam.classLoader);
+			Class<?> InstallPackageHelperClass = findClass("com.android.server.pm.InstallPackageHelper", lpParam.classLoader);
+			Class<?> PackageManagerServiceUtilsClass = findClass("com.android.server.pm.PackageManagerServiceUtils", lpParam.classLoader);
+			Class<?> SigningDetailsClass = findClass("android.content.pm.SigningDetails", lpParam.classLoader);
 
 			try
 			{
-				Class<?> ActivityManagerServiceClass = findClass("com.android.server.am.ActivityManagerService", lpparam.classLoader);
+				Class<?> ActivityManagerServiceClass = findClass("com.android.server.am.ActivityManagerService", lpParam.classLoader);
 
 				hookAllMethods(ActivityManagerServiceClass, "checkBroadcastFromSystem", new XC_MethodHook() { //This thing shouts too much. let's request for some silence
 					@Override

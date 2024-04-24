@@ -43,7 +43,7 @@ public class ObjectTools {
 	public static SpannableStringBuilder getHumanizedBytes(long bytes, boolean showInBits, float unitSizeFactor, String unitSeparator, String indicatorSymbol, @Nullable @ColorInt Integer textColor) {
 		if(showInBits)
 		{
-			bytes *= 8;
+			bytes <<= 3;
 		}
 
 		DecimalFormat decimalFormat;

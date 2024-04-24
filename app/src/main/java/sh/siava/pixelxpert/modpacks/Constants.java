@@ -3,6 +3,7 @@ package sh.siava.pixelxpert.modpacks;
 import static sh.siava.pixelxpert.BuildConfig.APPLICATION_ID;
 
 import android.content.Context;
+import android.content.Intent;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,6 +42,13 @@ public final class Constants {
 	public static String getLockScreenBitmapCachePath(Context context)
 	{
 		return context.getCacheDir().getAbsolutePath() + "/lsw.jpg";
+	}
+
+	public static Intent getAppProfileSwitchIntent()
+	{
+		return new Intent()
+				.setAction(Constants.ACTION_SWITCH_APP_PROFILE)
+				.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
 	}
 
 }

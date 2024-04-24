@@ -223,9 +223,7 @@ public class StatusbarGestures extends XposedModPack {
 	}
 
 	private void sendAppSwitchBroadcast() {
-		new Thread(() -> mContext.sendBroadcast(new Intent()
-				.setAction(Constants.ACTION_SWITCH_APP_PROFILE)
-				.addFlags(Intent.FLAG_RECEIVER_FOREGROUND))).start();
+		new Thread(() -> mContext.sendBroadcast(Constants.getAppProfileSwitchIntent())).start();
 	}
 
 	private GestureDetector.OnGestureListener getPullDownLPListener(String QSExpandMethodName) {

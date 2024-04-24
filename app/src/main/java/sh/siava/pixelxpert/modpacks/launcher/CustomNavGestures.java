@@ -290,8 +290,7 @@ public class CustomNavGestures extends XposedModPack {
 			{
 				sleep(200); //waiting for recents window to vanish
 
-				mContext.sendBroadcast(new Intent()
-						.setAction(Constants.ACTION_SWITCH_APP_PROFILE));
+				mContext.sendBroadcast(Constants.getAppProfileSwitchIntent());
 			}
 			catch (Throwable ignored)
 			{}

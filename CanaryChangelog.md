@@ -1,3 +1,7 @@
+**canary-353**  
+- Depth wallpaper improvements  
+- Added option to fix wifi hotspot in certain conditions  
+  
 **canary-352**  
 - Depth wallpaper bug fixes  
   

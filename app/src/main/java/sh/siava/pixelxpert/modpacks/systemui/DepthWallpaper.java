@@ -81,7 +81,12 @@ public class DepthWallpaper extends XposedModPack {
 						notificationAlpha = 0;
 
 					float subjectAlpha = 1f - notificationAlpha;
-					mLockScreenSubject.post(() -> mLockScreenSubject.setAlpha(subjectAlpha));
+					if(subjectAlpha < .75f)
+					{
+						subjectAlpha /= .75f;
+					}
+					final float finalAlpha = subjectAlpha;
+					mLockScreenSubject.post(() -> mLockScreenSubject.setAlpha(finalAlpha));
 				}
 			}
 		});

@@ -220,16 +220,19 @@ public class ReflectionTools {
 	}
 	private static void dumpID(View v, int level)
 	{
+		String name = "**";
+		StringBuilder str = new StringBuilder();
+		for(int i = 0; i < level; i++)
+		{
+			str.append("\t");
+		}
+
 		try {
-			StringBuilder str = new StringBuilder();
-			for(int i = 0; i < level; i++)
-			{
-				str.append("\t");
-			}
-			String name = v.getContext().getResources().getResourceName(v.getId());
-			log(str+ "id " + name + " type " + v.getClass().getName());
+			name = v.getContext().getResources().getResourceName(v.getId());
 		}
 		catch (Throwable ignored){}
+
+		log(str+ "id " + name + " type " + v.getClass().getName());
 	}
 
 }

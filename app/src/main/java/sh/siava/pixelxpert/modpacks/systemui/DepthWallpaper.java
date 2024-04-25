@@ -68,6 +68,23 @@ public class DepthWallpaper extends XposedModPack {
 		Class<?> CanvasEngineClass = findClass("com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine", lpParam.classLoader);
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpParam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpParam.classLoader);
+		Class<?> ScrimViewClass = findClass("com.android.systemui.scrim.ScrimView", lpParam.classLoader);
+
+		hookAllMethods(ScrimViewClass, "setViewAlpha", new XC_MethodHook() {
+			@Override
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+				if(mLayersCreated && getObjectField(param.thisObject, "mScrimName").equals("notifications_scrim"))
+				{
+					float notificationAlpha = (float)param.args[0];
+
+					if(notificationAlpha < .25f)
+						notificationAlpha = 0;
+
+					float subjectAlpha = 1f - notificationAlpha;
+					mLockScreenSubject.post(() -> mLockScreenSubject.setAlpha(subjectAlpha));
+				}
+			}
+		});
 
 		hookAllMethods(CentralSurfacesImplClass, "start", new XC_MethodHook() {
 			@Override
@@ -80,7 +97,7 @@ public class DepthWallpaper extends XposedModPack {
 				@SuppressLint("DiscouragedApi")
 				ViewGroup targetView = rootView.findViewById(mContext.getResources().getIdentifier("notification_container_parent", "id", mContext.getPackageName()));
 
-				if(mWallpaperBackground == null) {
+				if(!mLayersCreated) {
 					createLayers();
 				}
 
@@ -148,7 +165,7 @@ public class DepthWallpaper extends XposedModPack {
 					scaledWallpaperBitmap = Bitmap.createBitmap(scaledWallpaperBitmap, xPixelShift, yPixelShift, displayBounds.width(), displayBounds.height());
 					Bitmap finalScaledWallpaperBitmap = scaledWallpaperBitmap;
 
-					if(mWallpaperBackground == null) {
+					if(!mLayersCreated) {
 						createLayers();
 					}
 
@@ -168,6 +185,7 @@ public class DepthWallpaper extends XposedModPack {
 				mScrimController = param.thisObject;
 			}
 		});
+
 		hookAllMethods(ScrimControllerClass, "applyAndDispatchState", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {

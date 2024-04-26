@@ -1,3 +1,6 @@
+**canary-354**  
+- Added option to enable wallpaper depth effect on AOD  
+  
 **canary-353**  
 - Depth wallpaper improvements  
 - Added option to fix wifi hotspot in certain conditions  

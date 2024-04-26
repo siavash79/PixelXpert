@@ -292,6 +292,7 @@ public class PreferenceHelper {
 				return instance.mPreferences.getBoolean("AutoUpdate", true);
 
 			case "DWOpacity":
+			case "DWonAOD":
 				return instance.mPreferences.getBoolean("DWallpaperEnabled", false);
 		}
 		return true;

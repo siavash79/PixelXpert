@@ -41,10 +41,11 @@ public class DepthWallpaper extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 
 	private static boolean lockScreenSubjectCacheValid = false;
-	private Object mQS;
 	private Object mScrimController;
 	private static boolean DWallpaperEnabled = false;
 	private static int DWOpacity = 192;
+
+	private static boolean DWonAOD = false;
 	private FrameLayout mLockScreenSubject;
 	private Drawable mSubjectDimmingOverlay;
 	private FrameLayout mWallpaperBackground;
@@ -60,6 +61,7 @@ public class DepthWallpaper extends XposedModPack {
 	public void updatePrefs(String... Key) {
 		DWallpaperEnabled = Xprefs.getBoolean("DWallpaperEnabled", false);
 		DWOpacity = Xprefs.getSliderInt("DWOpacity", 192);
+		DWonAOD = Xprefs.getBoolean("DWonAOD", false);
 	}
 
 	@Override
@@ -73,7 +75,13 @@ public class DepthWallpaper extends XposedModPack {
 		hookAllMethods(ScrimViewClass, "setViewAlpha", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(mLayersCreated && getObjectField(param.thisObject, "mScrimName").equals("notifications_scrim"))
+				if(!mLayersCreated) return;
+
+				if(DWonAOD
+						&& !getObjectField(mScrimController, "mState").toString().equals("KEYGUARD")) {
+					mLockScreenSubject.post(() -> mLockScreenSubject.setAlpha(DWOpacity));
+				}
+				else if(mLayersCreated && getObjectField(param.thisObject, "mScrimName").equals("notifications_scrim"))
 				{
 					float notificationAlpha = (float)param.args[0];
 
@@ -85,7 +93,8 @@ public class DepthWallpaper extends XposedModPack {
 					{
 						subjectAlpha /= .75f;
 					}
-					final float finalAlpha = subjectAlpha;
+					final float finalAlpha = subjectAlpha * getFloatField(mScrimController, "mBehindAlpha");
+
 					mLockScreenSubject.post(() -> mLockScreenSubject.setAlpha(finalAlpha));
 				}
 			}
@@ -109,12 +118,6 @@ public class DepthWallpaper extends XposedModPack {
 				rootView.addView(mWallpaperBackground, 0);
 
 				targetView.addView(mLockScreenSubject,1);
-			}
-		});
-		hookAllConstructors(QSImplClass, new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				mQS = param.thisObject;
 			}
 		});
 
@@ -278,11 +281,18 @@ public class DepthWallpaper extends XposedModPack {
 	private void setDepthWallpaper()
 	{
 		String state = getObjectField(mScrimController, "mState").toString();
+		boolean showSubject = DWallpaperEnabled
+				&&
+				(
+						state.equals("KEYGUARD")
+						||
+								(DWonAOD
+										&&
+										(state.equals("AOD") || state.equals("PULSING"))
+								)
+				);
 
-		if(DWallpaperEnabled
-				&& state.equals("KEYGUARD")
-				&& (boolean) callMethod(mQS, "isFullyCollapsed")) {
-
+		if(showSubject) {
 			if(!lockScreenSubjectCacheValid && new File(Constants.getLockScreenSubjectCachePath(mContext)).exists())
 			{
 				try (FileInputStream inputStream = new FileInputStream(Constants.getLockScreenSubjectCachePath(mContext)))
@@ -302,21 +312,25 @@ public class DepthWallpaper extends XposedModPack {
 			if(lockScreenSubjectCacheValid) {
 				mLockScreenSubject.getBackground().setAlpha(DWOpacity);
 
-				//this is the dimmed wallpaper coverage
-				mSubjectDimmingOverlay.setAlpha(Math.round(getFloatField(mScrimController, "mScrimBehindAlphaKeyguard")*240)); //A tad bit lower than max. show it a bit lighter than other stuff
-				mWallpaperDimmingOverlay.setAlpha(getFloatField(mScrimController, "mScrimBehindAlphaKeyguard"));
+				if(!state.equals("KEYGUARD")) {
+					mSubjectDimmingOverlay.setAlpha(192 /*Math.round(192 * (DWOpacity / 255f))*/);
+				}
+				else {
+					//this is the dimmed wallpaper coverage
+					mSubjectDimmingOverlay.setAlpha(Math.round(getFloatField(mScrimController, "mScrimBehindAlphaKeyguard") * 240)); //A tad bit lower than max. show it a bit lighter than other stuff
+					mWallpaperDimmingOverlay.setAlpha(getFloatField(mScrimController, "mScrimBehindAlphaKeyguard"));
+				}
 
 				mWallpaperBackground.setVisibility(VISIBLE);
 				mLockScreenSubject.setVisibility(VISIBLE);
 			}
 		}
-		else
+		else if(mLayersCreated)
 		{
-			if(mLayersCreated) {
-				if (state.equals("UNLOCKED")) {
-					mWallpaperBackground.setVisibility(GONE);
-				}
-				mLockScreenSubject.setVisibility(GONE);
+			mLockScreenSubject.setVisibility(GONE);
+
+			if (state.equals("UNLOCKED")) {
+				mWallpaperBackground.setVisibility(GONE);
 			}
 		}
 	}

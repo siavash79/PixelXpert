@@ -50,10 +50,15 @@
 	<string name="hotspot_hide_ssid_title">Ascunde SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Timeout inactivitate</string>
 	<string name="hotspot_max_client_title">Număr maxim de clienți</string>
+	<string name="hotspot_disable_approval_title">Soluție pentru problemele de conectivitate hotspot</string>
+	<string name="hotspot_disable_approval_summary">Permite clienților care nu sunt „pre-aprobați” să se conecteze fără probleme</string>
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Fundal cu efect de adâncime</string>
 	<string name="depth_wallpaper_summary">Integrare dinamică a imaginii de fundal cu ceasul</string>
 	<string name="depth_wallpaper_opacity_title">Opacitatea fundalului în prim-plan</string>
+	<string name="depth_wallpaper_aod_title">De asemenea, pe „Afișaj ambiental”</string>
+	<string name="depth_wallpaper_model_ready">Modelul AI a fost descărcat pe dispozitiv</string>
+	<string name="depth_wallpaper_model_not_available">Modelul AI nu este disponibil pe dispozitiv (încă)</string>
 	<string name="disable_unlock_hint_title">Dezactivează animația de indiciu a deblocării</string>
 	<string name="ls_general_options">Opțiuni pentru ecranul de blocare</string>
 	<string name="hide_avatar_title">Eliminare avatar utilizator (mod utilizatori multipli)</string>

@@ -50,10 +50,15 @@
 	<string name="hotspot_hide_ssid_title">SSID\'yi Gizle</string>
 	<string name="hotspot_inactivity_timeout_title">Hareketsizlik zaman aşımı</string>
 	<string name="hotspot_max_client_title">Maksimum istemciler</string>
+	<string name="hotspot_disable_approval_title">Hotspot bağlantı sorunları geçici çözümü</string>
+	<string name="hotspot_disable_approval_summary">\"Önceden onaylanmamış\" istemcilerin sorunsuz bir şekilde bağlanmasına izin ver</string>
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Derinlik efektli duvar kağıdı</string>
 	<string name="depth_wallpaper_summary">Duvar kağıdının ön planını saatle dinamik olarak entegre et</string>
 	<string name="depth_wallpaper_opacity_title">Duvar kağıdı ön plan opaklığı</string>
+	<string name="depth_wallpaper_aod_title">Ayrıca \"her zaman açık ekran\"\"</string>
+	<string name="depth_wallpaper_model_ready">AI modeli cihaza indirildi</string>
+	<string name="depth_wallpaper_model_not_available">AI modeli cihazda mevcut değil (henüz)</string>
 	<string name="disable_unlock_hint_title">Kilit açma ipucu animasyonunu devre dışı bırak</string>
 	<string name="ls_general_options">Kilit ekranı seçenekleri</string>
 	<string name="hide_avatar_title">Kullanıcı avatarını kaldır (çoklu kullanıcı modu)</string>

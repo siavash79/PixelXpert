@@ -3,7 +3,7 @@
 	<!--General strings-->
 	<string name="app_themed_icon_title">代替テーマのアイコン</string>
 	<string name="xposed_desc">Google Pixelのみカスタマイズ可能</string>
-	<string name="volume_tile_title">メディアボリューム</string>
+	<string name="volume_tile_title">メディアの音量</string>
 	<string name="app_switch_tile_title">アプリプロファイルを切り替える</string>
 	<string name="hide_default">隠す (既定)</string>
 	<string name="percent_of_default_size">% 大きくする</string>
@@ -31,7 +31,7 @@
 	<string name="update_over_wifi_title">WiFi 経由でのみアップデートを確認する</string>
 	<string name="update_over_wifi_summary">Wi-Fi に接続している場合にのみバックグラウンドでアップデートを確認する</string>
 	<string name="github_repo_title">GitHub リポジトリ</string>
-	<string name="telegram_group_title">電報グループ</string>
+	<string name="telegram_group_title">Telegram グループ</string>
 	<string name="usage_title">使用法</string>
 	<string name="usage_summary">ウィキページを開く</string>
 	<string name="crowdin_title">翻訳</string>
@@ -50,10 +50,15 @@
 	<string name="hotspot_hide_ssid_title">SSIDを隠します</string>
 	<string name="hotspot_inactivity_timeout_title">非アクティブタイムアウト</string>
 	<string name="hotspot_max_client_title">最大クライアント数</string>
+	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
+	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
+	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
 	<string name="disable_unlock_hint_title">ロック解除ヒントのアニメーションを無効にする</string>
 	<string name="ls_general_options">ロック画面のオプション</string>
 	<string name="hide_avatar_title">ユーザーアバター表示を削除 (マルチユーザーモード)</string>

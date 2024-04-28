@@ -50,19 +50,24 @@
 	<string name="hotspot_hide_ssid_title">隐藏 SSID</string>
 	<string name="hotspot_inactivity_timeout_title">自动关闭时间</string>
 	<string name="hotspot_max_client_title">最大连接数</string>
+	<string name="hotspot_disable_approval_title">已绕过热点的问题</string>
+	<string name="hotspot_disable_approval_summary">允许非“预先批准”客户端无缝连接</string>
 	<!--Lock screen related-->
-	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
-	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
-	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_title">深度效果壁纸</string>
+	<string name="depth_wallpaper_summary">动态整合壁纸的前景和时钟</string>
+	<string name="depth_wallpaper_opacity_title">壁纸前景透明度</string>
+	<string name="depth_wallpaper_aod_title">也在“息屏显示”上展示</string>
+	<string name="depth_wallpaper_model_ready">AI 模型已下载到设备</string>
+	<string name="depth_wallpaper_model_not_available">AI 模型在设备上(目前暂)不可用</string>
 	<string name="disable_unlock_hint_title">禁用解锁提示动画</string>
 	<string name="ls_general_options">锁屏选项</string>
 	<string name="hide_avatar_title">隐藏用户头像 (多用户模式)</string>
 	<string name="transparent_fingerprint_circle">隐藏屏下指纹背景</string>
 	<string name="transparent_fingerprint_circle_off">指纹背景启用</string>
 	<string name="transparent_fingerprint_circle_on">指纹背景隐藏</string>
-	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
-	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
-	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
+	<string name="fingerprint_icon">从屏下指纹移除前景图标</string>
+	<string name="fingerprint_icon_off">指纹图标已激活</string>
+	<string name="fingerprint_icon_on">指纹图标将被隐藏</string>
 	<string name="custom_text_category">自定义锁屏文本</string>
 	<string name="configure_carrier_text">设置运营商文本</string>
 	<string name="carrier_text_mod_disabled">未修改运营商文本</string>
@@ -148,7 +153,7 @@
 	<string name="nt_mode_total">下载 + 上传 (合并)</string>
 	<string name="nt_mode_rxonly">仅下载</string>
 	<string name="nt_mode_txonly">仅上传</string>
-	<string name="nt_unit_show_bits">以位/秒显示</string>
+	<string name="nt_unit_show_bits">以 bits/s 显示</string>
 	<string name="statusbar_general_options">状态栏选项</string>
 	<string name="dual_tone_battery_title">双色电池图标</string>
 	<string name="dual_tone_battery_on_summary">开启 (仅当纵向图标时生效)</string>
@@ -167,14 +172,14 @@
 	<string name="BB_Thickness_title">厚度</string>
 	<string name="BB_indicate_charging">充电显示</string>
 	<string name="BB_indicate_fast_charging">快充显示</string>
-	<string name="BB_indicate_power_save">Indicate power save</string>
+	<string name="BB_indicate_power_save">指示节能</string>
 	<string name="BB_warning_level">电量警告</string>
 	<string name="BB_warning_tip">均设为 0 将禁用基于电量的颜色变化</string>
 	<string name="BB_batteryCriticalColor">临界值颜色</string>
 	<string name="BB_batteryWarningColor">警告颜色</string>
 	<string name="BB_batteryChargingColor">充电颜色</string>
 	<string name="BB_batteryFastChargingColor">快充颜色</string>
-	<string name="BB_batteryPowerSaveColor">Power Save color</string>
+	<string name="BB_batteryPowerSaveColor">节能颜色</string>
 	<string name="BB_transit_colors">颜色渐变</string>
 	<string name="colored_battery_percentage_title">充电时彩色电池百分比</string>
 	<string name="nt_stat_mode_today">今天</string>
@@ -289,7 +294,7 @@
 	<string name="force_aod_while_charging_summary">充电时开启息屏显示</string>
 	<string name="doze_header">锁屏功能</string>
 	<string name="custom_themed_icons_title">自定义带主题的图标</string>
-	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
+	<string name="px_in_settings_title">添加 PixelXpert 到设置项</string>
 	<string name="custom_themed_icons_off">自定义图标已禁用</string>
 	<string name="custom_themed_icons_on">自定义图标已启用</string>
 	<string name="so_vol_longpress_skip">长按音量键切歌</string>
@@ -382,9 +387,9 @@
 	<string name="app_kill_alert_body">应用现在将关闭。您可以通过点击新图标重新打开它</string>
 	<string name="app_kill_ok_btn">好的</string>
 	<!-- Depth Effect Alert -->
-	<string name="depth_effect_alert_title">Attention</string>
-	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
-	<string name="depth_effect_ok_btn">OK</string>
+	<string name="depth_effect_alert_title">请注意</string>
+	<string name="depth_effect_alert_body">使用合适的锁屏壁纸，让前台元素不会阻挡您锁屏上的整个时钟， 确保您锁屏界面的视觉吸引力和功能清晰度。\n\n注：%s.</string>
+	<string name="depth_effect_ok_btn">确定</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">需要重新启动系统才能应用设置</string>
 	<!-- Menu Items -->

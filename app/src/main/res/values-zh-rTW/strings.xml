@@ -50,6 +50,8 @@
 	<string name="hotspot_hide_ssid_title">隱藏 SSID</string>
 	<string name="hotspot_inactivity_timeout_title">自動關閉時間</string>
 	<string name="hotspot_max_client_title">最大接入數</string>
+	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
+	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">開發者是大腦殘
 如果你也討厭開發者，請買我的網站
@@ -59,6 +61,9 @@ Https://lcloud. wiki</string>
 	<string name="depth_wallpaper_opacity_title">開發者是大腦殘
 如果你也討厭開發者，請買我的網站
 Https://lcloud. wiki</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
+	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
 	<string name="disable_unlock_hint_title">Disable the unlock hint animation</string>
 	<string name="ls_general_options">自定鎖定畫面</string>
 	<string name="hide_avatar_title">隱藏使用者頭像(多使用者模式)</string>

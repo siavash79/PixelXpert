@@ -50,10 +50,15 @@
 	<string name="hotspot_hide_ssid_title">ukryj SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Limit czasu bezczynności</string>
 	<string name="hotspot_max_client_title">Maksymalna liczba klientów</string>
+	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
+	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
+	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
 	<string name="disable_unlock_hint_title">Wyłącz animację podpowiedzi odblokowania</string>
 	<string name="ls_general_options">Opcje ekranu blokady</string>
 	<string name="hide_avatar_title">Usuń awatar użytkownika (tryb wielu użytkowników)</string>

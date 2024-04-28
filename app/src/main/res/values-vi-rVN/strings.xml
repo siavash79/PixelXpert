@@ -50,10 +50,15 @@
 	<string name="hotspot_hide_ssid_title">Ẩn SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Thời gian không hoạt động</string>
 	<string name="hotspot_max_client_title">Lượng client tối đa</string>
+	<string name="hotspot_disable_approval_title">Giải quyết tạm vấn đề kết nối điểm phát sóng</string>
+	<string name="hotspot_disable_approval_summary">Cho phép máy khách \"chưa được phê duyệt trước\" kết nối liền mạch</string>
 	<!--Lock screen related-->
-	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
-	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
-	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_title">Hình nền hiệu ứng chiều sâu</string>
+	<string name="depth_wallpaper_summary">Tích hợp động hình nền với đồng hồ</string>
+	<string name="depth_wallpaper_opacity_title">Độ mờ nền trước hình nền</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">Mẫu AI đã được tải xuống thiết bị</string>
+	<string name="depth_wallpaper_model_not_available">Mẫu AI không khả dụng với thiết bị(hoặc chưa)</string>
 	<string name="disable_unlock_hint_title">Tắt hoạt ảnh gợi ý mở khóa</string>
 	<string name="ls_general_options">Tùy chọn màn hình khóa</string>
 	<string name="hide_avatar_title">Xóa hình đại diện người dùng (chế độ nhiều người dùng)</string>
@@ -167,14 +172,14 @@
 	<string name="BB_Thickness_title">Độ dày thanh</string>
 	<string name="BB_indicate_charging">Cho biết đang sạc</string>
 	<string name="BB_indicate_fast_charging">Cho biết đang sạc nhanh</string>
-	<string name="BB_indicate_power_save">Indicate power save</string>
+	<string name="BB_indicate_power_save">Chỉ ra tiết kiệm năng lượng</string>
 	<string name="BB_warning_level">Phạm vi mức cảnh báo</string>
 	<string name="BB_warning_tip">Đặt cả hai thành 0 để tắt màu dựa trên cấp độ</string>
 	<string name="BB_batteryCriticalColor">Màu cấp độ nguy cấp</string>
 	<string name="BB_batteryWarningColor">Màu cấp độ cảnh báo</string>
 	<string name="BB_batteryChargingColor">Màu đang sạc</string>
 	<string name="BB_batteryFastChargingColor">Màu đang sạc nhanh</string>
-	<string name="BB_batteryPowerSaveColor">Power Save color</string>
+	<string name="BB_batteryPowerSaveColor">Màu tiết kiệm năng lượng</string>
 	<string name="BB_transit_colors">Màu bóng đổ trong khoảng này</string>
 	<string name="colored_battery_percentage_title">Thêm màu vào phần trăm pin khi đang sạc</string>
 	<string name="nt_stat_mode_today">Hôm nay</string>
@@ -289,7 +294,7 @@
 	<string name="force_aod_while_charging_summary">Giữ màn hình luôn hiển thị khi thiết bị đang được sạc</string>
 	<string name="doze_header">Khi màn hình tắt…</string>
 	<string name="custom_themed_icons_title">Biểu tượng theo chủ đề tùy chỉnh</string>
-	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
+	<string name="px_in_settings_title">Thêm PixelXpert tới menu Cài Đặt</string>
 	<string name="custom_themed_icons_off">Các biểu tượng tùy chỉnh đã bị vô hiệu hóa</string>
 	<string name="custom_themed_icons_on">Các biểu tượng tùy chỉnh đã được bật</string>
 	<string name="so_vol_longpress_skip">Nhấn và giữ phím âm lượng để \"+Chuyển tiếp/-Phát lại\" bài hát</string>
@@ -382,9 +387,9 @@
 	<string name="app_kill_alert_body">Ứng dụng sẽ đóng ngay bây giờ. Bạn có thể mở lại bằng cách nhấn vào biểu tượng mới</string>
 	<string name="app_kill_ok_btn">ĐƯỢC RỒI</string>
 	<!-- Depth Effect Alert -->
-	<string name="depth_effect_alert_title">Attention</string>
-	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
-	<string name="depth_effect_ok_btn">OK</string>
+	<string name="depth_effect_alert_title">Chú ý</string>
+	<string name="depth_effect_alert_body">Sử dụng hình nền màn hình khóa phù hợp trong đó các thành phần nền trước không cản trở toàn bộ đồng hồ trên màn hình khóa của bạn, đảm bảo vừa hấp dẫn về mặt hình ảnh vừa đảm bảo tính rõ ràng về mặt chức năng trên màn hình khóa.\n\nLưu ý: %s.</string>
+	<string name="depth_effect_ok_btn">Đồng ý</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Cần phải khởi động lại hệ thống để áp dụng cài đặt</string>
 	<!-- Menu Items -->

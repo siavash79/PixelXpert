@@ -50,10 +50,15 @@
 	<string name="hotspot_hide_ssid_title">Ocultar SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Tiempo de inactividad</string>
 	<string name="hotspot_max_client_title">Clientes máximos</string>
+	<string name="hotspot_disable_approval_title">Problemas de conectividad de punto de acceso</string>
+	<string name="hotspot_disable_approval_summary">Permitir que los clientes no \"pre-aprobados\" se conecten sin problemas</string>
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Fondo de pantalla de efecto profundo</string>
 	<string name="depth_wallpaper_summary">Integrar dinámicamente el fondo de pantalla con el reloj</string>
 	<string name="depth_wallpaper_opacity_title">Opacidad del fondo de pantalla</string>
+	<string name="depth_wallpaper_aod_title">También en \"siempre en pantalla\"</string>
+	<string name="depth_wallpaper_model_ready">El modelo de IA se ha descargado en el dispositivo</string>
+	<string name="depth_wallpaper_model_not_available">El modelo de IA no está disponible en el dispositivo (todavía)</string>
 	<string name="disable_unlock_hint_title">Deshabilitar la animación de pantalla de desbloqueo</string>
 	<string name="ls_general_options">Opciones de pantalla de bloqueo</string>
 	<string name="hide_avatar_title">Eliminar avatar de usuario (modo multiusuario)</string>
@@ -176,7 +181,7 @@
 	<string name="BB_batteryFastChargingColor">Color de carga rápida</string>
 	<string name="BB_batteryPowerSaveColor">Color de ahorro de energía</string>
 	<string name="BB_transit_colors">Sombrear colores en transito de cambio</string>
-	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
+	<string name="colored_battery_percentage_title"></string>
 	<string name="nt_stat_mode_today">Hoy</string>
 	<string name="nt_stat_mode_week">Semana actual</string>
 	<string name="nt_stat_mode_month">Mes actual</string>

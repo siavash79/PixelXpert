@@ -50,19 +50,24 @@
 	<string name="hotspot_hide_ssid_title">Masquer le SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Délai d\'inactivité</string>
 	<string name="hotspot_max_client_title">Clientèle maximale</string>
+	<string name="hotspot_disable_approval_title">Solution aux problèmes de connectivité du hotspot</string>
+	<string name="hotspot_disable_approval_summary">Permettre aux clients non \"pré-approuvés\" de se connecter de manière transparente</string>
 	<!--Lock screen related-->
-	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
-	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
-	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_title">Effet de profondeur du fond d\'écran</string>
+	<string name="depth_wallpaper_summary">Intégration dynamique du fond d\'écran avec l\'horloge</string>
+	<string name="depth_wallpaper_opacity_title">Opacité du fond d\'écran</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">Le modèle IA est téléchargé sur l\'appareil</string>
+	<string name="depth_wallpaper_model_not_available">Le modèle IA n\'est pas (encore) disponible sur l\'appareil</string>
 	<string name="disable_unlock_hint_title">Désactiver l\'animation des indices de déverrouillage</string>
 	<string name="ls_general_options">Options de l\'écran de verrouillage</string>
 	<string name="hide_avatar_title">Retirer l’avatar d’utilisateur (mode utilisateurs multiples)</string>
 	<string name="transparent_fingerprint_circle">Retirer le disque autour du détecteur d’empreintes</string>
 	<string name="transparent_fingerprint_circle_off">Le disque autour du détecteur d’empreintes est visible</string>
 	<string name="transparent_fingerprint_circle_on">Le disque autour du détecteur d’empreintes est caché</string>
-	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
-	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
-	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
+	<string name="fingerprint_icon">Supprimer l\'icône de premier plan de l\'empreinte digitale sous l\'écran</string>
+	<string name="fingerprint_icon_off">L\'icône d\'empreinte digitale est active</string>
+	<string name="fingerprint_icon_on">L\'icône d\'empreinte digitale sera masquée</string>
 	<string name="custom_text_category">Texte personnalisé sur l’écran de verrouillage</string>
 	<string name="configure_carrier_text">Personnaliser le texte du fournisseur réseau - haut de l’écran</string>
 	<string name="carrier_text_mod_disabled">Texte du fournisseur inchangé</string>
@@ -167,14 +172,14 @@
 	<string name="BB_Thickness_title">Épaisseur de la barre</string>
 	<string name="BB_indicate_charging">Montrer que l’appareil charge</string>
 	<string name="BB_indicate_fast_charging">Montrer que l’appareil est en charge rapide</string>
-	<string name="BB_indicate_power_save">Indicate power save</string>
+	<string name="BB_indicate_power_save">Indique l\'économie d\'énergie</string>
 	<string name="BB_warning_level">Intervalle du niveau d’alerte</string>
 	<string name="BB_warning_tip">Mettre tout à 0 pour désactiver les couleurs par niveaux</string>
 	<string name="BB_batteryCriticalColor">Couleur du niveau critique</string>
 	<string name="BB_batteryWarningColor">Couleur du niveau d’alerte</string>
 	<string name="BB_batteryChargingColor">Couleur de charge</string>
 	<string name="BB_batteryFastChargingColor">Couleur de charge rapide</string>
-	<string name="BB_batteryPowerSaveColor">Power Save color</string>
+	<string name="BB_batteryPowerSaveColor">Couleur d\'économie d\'énergie</string>
 	<string name="BB_transit_colors">Nuancer les couleurs dans cet intervalle</string>
 	<string name="colored_battery_percentage_title">Pourcentage de batterie coloré pendant la charge</string>
 	<string name="nt_stat_mode_today">Aujourd\'hui</string>
@@ -289,7 +294,7 @@
 	<string name="force_aod_while_charging_summary">Garder l\'affichage permanent activé pendant que l\'appareil est en charge</string>
 	<string name="doze_header">Quand l’écran est éteint…</string>
 	<string name="custom_themed_icons_title">Icônes personnalisés</string>
-	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
+	<string name="px_in_settings_title">Ajouter PixelXpert aux paramètres</string>
 	<string name="custom_themed_icons_off">Icônes personnalisés désactivés</string>
 	<string name="custom_themed_icons_on">Icônes personnalisés activés</string>
 	<string name="so_vol_longpress_skip">Maintenir les boutons du volume pour changer de chanson</string>
@@ -383,7 +388,7 @@
 	<string name="app_kill_ok_btn">D\'ACCORD</string>
 	<!-- Depth Effect Alert -->
 	<string name="depth_effect_alert_title">Attention</string>
-	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_alert_body">Utilisez un fond d\'écran de verrouillage approprié où les éléments de premier plan n\'obstruent pas l\'intégralité de l\'horloge sur votre écran de verrouillage, garantissant à la fois l\'attrait visuel et la clarté fonctionnelle de votre écran de verrouillage.\n\nRemarque: %s.</string>
 	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Un redémarrage du système est requis pour que les paramètres s\'appliquent</string>

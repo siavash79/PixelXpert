@@ -1,3 +1,6 @@
+**canary-355**  
+- Removed spam from Chinese Traditional translation  
+  
 **canary-354**  
 - Added option to enable wallpaper depth effect on AOD  
   

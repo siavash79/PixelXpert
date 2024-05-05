@@ -56,7 +56,7 @@
 	<string name="depth_wallpaper_title">Hình nền hiệu ứng chiều sâu</string>
 	<string name="depth_wallpaper_summary">Tích hợp động hình nền với đồng hồ</string>
 	<string name="depth_wallpaper_opacity_title">Độ mờ nền trước hình nền</string>
-	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_aod_title">Gồm cả \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">Mẫu AI đã được tải xuống thiết bị</string>
 	<string name="depth_wallpaper_model_not_available">Mẫu AI không khả dụng với thiết bị(hoặc chưa)</string>
 	<string name="disable_unlock_hint_title">Tắt hoạt ảnh gợi ý mở khóa</string>

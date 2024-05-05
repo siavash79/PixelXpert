@@ -56,7 +56,7 @@
 	<string name="depth_wallpaper_title">Effet de profondeur du fond d\'écran</string>
 	<string name="depth_wallpaper_summary">Intégration dynamique du fond d\'écran avec l\'horloge</string>
 	<string name="depth_wallpaper_opacity_title">Opacité du fond d\'écran</string>
-	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_aod_title">Également sur « toujours affiché »</string>
 	<string name="depth_wallpaper_model_ready">Le modèle IA est téléchargé sur l\'appareil</string>
 	<string name="depth_wallpaper_model_not_available">Le modèle IA n\'est pas (encore) disponible sur l\'appareil</string>
 	<string name="disable_unlock_hint_title">Désactiver l\'animation des indices de déverrouillage</string>

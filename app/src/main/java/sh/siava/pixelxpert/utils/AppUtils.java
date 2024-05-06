@@ -1,5 +1,7 @@
 package sh.siava.pixelxpert.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.FileUtils;
 import android.util.Log;
 
@@ -10,6 +12,8 @@ import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 import java.util.zip.ZipFile;
+
+import sh.siava.pixelxpert.modpacks.Constants;
 
 public class AppUtils {
 	public static void Restart(String what) {
@@ -29,6 +33,18 @@ public class AppUtils {
 			default:
 				Shell.cmd(String.format("killall %s", what)).exec();
 		}
+	}
+
+	public static void runKSURootActivity(Context context, boolean launchApp)
+	{
+		Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(Constants.KSU_PACKAGE);
+		launchIntent.putExtra(Constants.PX_ROOT_EXTRA, 1);
+		if(launchApp)
+		{
+			launchIntent.putExtra("launchApp", 1);
+		}
+
+		context.startActivity(launchIntent);
 	}
 
 	public static boolean isLikelyPixelBuild()

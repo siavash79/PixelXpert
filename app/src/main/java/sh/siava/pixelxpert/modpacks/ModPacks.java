@@ -18,6 +18,7 @@ import sh.siava.pixelxpert.modpacks.android.ScreenRotation;
 import sh.siava.pixelxpert.modpacks.android.StatusbarSize;
 import sh.siava.pixelxpert.modpacks.android.SystemScreenRecord;
 import sh.siava.pixelxpert.modpacks.dialer.RecordingMessage;
+import sh.siava.pixelxpert.modpacks.ksu.KSUInjector;
 import sh.siava.pixelxpert.modpacks.launcher.ClearAllButtonMod;
 import sh.siava.pixelxpert.modpacks.launcher.CustomNavGestures;
 import sh.siava.pixelxpert.modpacks.launcher.FeatureFlags;
@@ -34,6 +35,7 @@ import sh.siava.pixelxpert.modpacks.systemui.FeatureFlagsMods;
 import sh.siava.pixelxpert.modpacks.systemui.FingerprintWhileDozing;
 import sh.siava.pixelxpert.modpacks.systemui.FlashLightLevel;
 import sh.siava.pixelxpert.modpacks.systemui.GestureNavbarManager;
+import sh.siava.pixelxpert.modpacks.systemui.KSURootReceiver;
 import sh.siava.pixelxpert.modpacks.systemui.KeyGuardPinScrambler;
 import sh.siava.pixelxpert.modpacks.systemui.KeyguardMods;
 import sh.siava.pixelxpert.modpacks.systemui.MultiStatusbarRows;
@@ -128,6 +130,7 @@ public class ModPacks {
 					modPacks.add(ScreenRecord.class);
 					modPacks.add(VolumeDialog.class);
 					modPacks.add(DepthWallpaper.class);
+					modPacks.add(KSURootReceiver.class);
 				}
 				break;
 
@@ -152,6 +155,10 @@ public class ModPacks {
 
 			case Constants.DIALER_PACKAGE:
 				modPacks.add(RecordingMessage.class);
+				break;
+
+			case Constants.KSU_PACKAGE:
+				modPacks.add(KSUInjector.class);
 				break;
 		}
 

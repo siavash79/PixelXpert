@@ -19,6 +19,7 @@ import java.util.List;
 
 import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.R;
+import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.utils.BitmapSubjectSegmenter;
 
 public class RootProviderProxy extends Service {
@@ -43,6 +44,11 @@ public class RootProviderProxy extends Service {
 			}
 			catch (Throwable ignored){}
 			rootGranted = Shell.getShell().isRoot();
+
+			if(!rootGranted)
+			{
+				context.sendBroadcast(new Intent(Constants.ACTION_KSU_ACQUIRE_ROOT));
+			}
 
 			rootAllowedPacks = Arrays.asList(context.getResources().getStringArray(R.array.root_requirement));
 		}

@@ -6,6 +6,7 @@
 		<item>android</item>  <!-- System Framework -->
 		<item>com.android.settings</item> <!-- settings app -->
 		<item>com.google.android.dialer</item> <!-- google dialer -->
+		<item>me.weishu.kernelsu</item> <!-- KSU Manager -->
 	</string-array>
 	<string-array name="root_requirement">
 		<item>com.android.systemui</item> <!-- systemUI -->

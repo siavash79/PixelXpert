@@ -94,8 +94,35 @@ activateModuleLSPD()
 
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"com.android.settings\",0);" && runSQL
 
+	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"me.weishu.kernelsu\",0);" && runSQL
+
 	CMD="insert into scope (mid, app_pkg_name, user_id) values ($NEWMID, \"$PKGNAME\",0);" && runSQL
 }
+
+testKernelSU()
+{
+	if [[ $(ksud -V 2>&1 | grep "not found" | wc -c) -eq 0 ]]; then #KSU installed
+    	if [[ $(pm list packages | grep $PKGNAME | wc -c) -eq 0 ]]; then #PixelXpert NOT installed yet
+    		ui_print ''
+    		ui_print '*******************************'
+    		ui_print 'KernelSU binaries found!'
+    		ui_print ''
+    		ui_print '        CAUTION!:      '
+    		ui_print 'Before installation, you MUST disable'
+    		ui_print '"Unmount modules by default"'
+    		ui_print 'Otherwise, your device will fall into BOOTLOOP!'
+    		ui_print ''
+    		ui_print 'Do you wish to continue?'
+    		ui_print 'Volume Up: Continue'
+    		ui_print 'Volume Down: Abort'
+    		if [[ "$(getevent -l -c 1 /dev/input/event0)" == *"VOLUMEDOWN"* ]]; then
+    			abort 'Installation cancelled'
+    		fi;
+    	fi;
+    fi;
+}
+
+testKernelSU
 
 prepareSQL
 

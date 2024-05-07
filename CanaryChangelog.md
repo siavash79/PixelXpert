@@ -1,3 +1,6 @@
+**canary-356**  
+- Now supporting for KernelSU  
+  
 **canary-355**  
 - Removed spam from Chinese Traditional translation  
   

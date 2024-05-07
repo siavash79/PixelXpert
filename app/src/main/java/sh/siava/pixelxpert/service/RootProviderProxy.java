@@ -20,7 +20,7 @@ import java.util.List;
 import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.modpacks.utils.BitmapSubjectSegmenter;
+import sh.siava.pixelxpert.utils.BitmapSubjectSegmenter;
 
 public class RootProviderProxy extends Service {
 	@Nullable

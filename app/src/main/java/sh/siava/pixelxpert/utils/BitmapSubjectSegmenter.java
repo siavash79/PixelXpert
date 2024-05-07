@@ -1,4 +1,4 @@
-package sh.siava.pixelxpert.modpacks.utils;
+package sh.siava.pixelxpert.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -48,7 +48,7 @@ import java.util.Objects;
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.databinding.SettingsActivityBinding;
-import sh.siava.pixelxpert.modpacks.utils.BitmapSubjectSegmenter;
+import sh.siava.pixelxpert.utils.BitmapSubjectSegmenter;
 import sh.siava.pixelxpert.ui.fragments.HooksFragment;
 import sh.siava.pixelxpert.ui.fragments.UpdateFragment;
 import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchConfiguration;

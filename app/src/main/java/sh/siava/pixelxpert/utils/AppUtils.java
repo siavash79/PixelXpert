@@ -86,7 +86,8 @@ public class AppUtils {
 			}
 
 			//install
-			Shell.cmd(String.format("magisk --install-module %s", unzippedFile.getAbsolutePath())).exec();
+			Shell.cmd(String.format("magisk --install-module %s", unzippedFile.getAbsolutePath())).exec(); //magisk
+			Shell.cmd(String.format("ksud module install %s", unzippedFile.getAbsolutePath())).exec(); //ksu
 
 			//cleanup
 			//noinspection ResultOfMethodCallIgnored

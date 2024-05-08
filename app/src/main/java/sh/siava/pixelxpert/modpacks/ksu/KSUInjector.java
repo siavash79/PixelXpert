@@ -85,7 +85,8 @@ public class KSUInjector extends XposedModPack {
 			mContext.startActivity(
 					mContext
 							.getPackageManager()
-							.getLaunchIntentForPackage(BuildConfig.APPLICATION_ID));
+							.getLaunchIntentForPackage(BuildConfig.APPLICATION_ID)
+							.putExtra("FromKSU" , 1));
 		}
 	}
 

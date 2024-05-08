@@ -59,7 +59,9 @@ public class SplashScreenActivity extends AppCompatActivity {
 			if (Shell.getShell().isRoot()) {
 				mRootCheckPassed.countDown();
 			} else {
-				AppUtils.runKSURootActivity(this, true);
+				if(!getIntent().hasExtra("FromKSU")) {
+					AppUtils.runKSURootActivity(this, true);
+				}
 
 				runOnUiThread(() ->
 						new MaterialAlertDialogBuilder(SplashScreenActivity.this, R.style.MaterialComponents_MaterialAlertDialog)

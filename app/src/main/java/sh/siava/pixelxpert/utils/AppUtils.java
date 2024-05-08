@@ -37,14 +37,16 @@ public class AppUtils {
 
 	public static void runKSURootActivity(Context context, boolean launchApp)
 	{
-		Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(Constants.KSU_PACKAGE);
-		launchIntent.putExtra(Constants.PX_ROOT_EXTRA, 1);
-		if(launchApp)
-		{
-			launchIntent.putExtra("launchApp", 1);
-		}
+		try {
+			Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(Constants.KSU_PACKAGE);
+			launchIntent.putExtra(Constants.PX_ROOT_EXTRA, 1);
+			if (launchApp) {
+				launchIntent.putExtra("launchApp", 1);
+			}
 
-		context.startActivity(launchIntent);
+			context.startActivity(launchIntent);
+		}
+		catch (Throwable ignored){}
 	}
 
 	public static boolean isLikelyPixelBuild()

@@ -12,6 +12,8 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ColorUtils.getColorAttr;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ColorUtils.getColorAttrDefaultColor;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.hookAllMethodsMatchPattern;
 
 import android.annotation.SuppressLint;
@@ -300,8 +302,9 @@ public class KeyguardMods extends XposedModPack {
 					}
 
 					if (transparentBGcolor) {
-						@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = SettingsLibUtilsProvider.getColorAttrDefaultColor(
-								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
+						@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = getColorAttrDefaultColor(
+								mContext,
+								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
 
 						try {
 							v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
@@ -309,12 +312,14 @@ public class KeyguardMods extends XposedModPack {
 						} catch (Throwable ignored) {}
 					} else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE){
 						@SuppressLint("DiscouragedApi")
-						int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
-								mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
+						int mTextColorPrimary = getColorAttrDefaultColor(
+								mContext,
+								mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"));
 
 						@SuppressLint("DiscouragedApi")
-						ColorStateList colorSurface = SettingsLibUtilsProvider.getColorAttr(
-								mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
+						ColorStateList colorSurface = getColorAttr(
+								mContext,
+								mContext.getResources().getIdentifier("colorSurface", "attr", "android"));
 
 						v.getDrawable().setTint(mTextColorPrimary);
 

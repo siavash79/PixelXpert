@@ -10,6 +10,7 @@ import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.getCurre
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isFastCharging;
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isPowerSaving;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ColorUtils.getColorAttrDefaultColor;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -34,7 +35,6 @@ import androidx.core.graphics.ColorUtils;
 import androidx.core.graphics.PathParser;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
-import sh.siava.pixelxpert.modpacks.systemui.SettingsLibUtilsProvider;
 import sh.siava.pixelxpert.modpacks.utils.AlphaConsistantPaint;
 
 public class CircleBatteryDrawable extends BatteryDrawable
@@ -82,7 +82,7 @@ public class CircleBatteryDrawable extends BatteryDrawable
 		mBatteryPaint.setDither(true);
 		mBatteryPaint.setStyle(STROKE);
 
-		mPowerSaveColor = SettingsLibUtilsProvider.getColorAttrDefaultColor(android.R.attr.colorError, context);
+		mPowerSaveColor = getColorAttrDefaultColor(context, android.R.attr.colorError);
 
 		setColors(frameColor, frameColor, frameColor);
 

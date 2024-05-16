@@ -6,6 +6,7 @@ import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.getCurre
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isFastCharging;
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isPowerSaving;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ColorUtils.getColorAttrDefaultColor;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -24,8 +25,6 @@ import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
-import sh.siava.pixelxpert.modpacks.systemui.SettingsLibUtilsProvider;
-
 public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	private static final int INTRINSIC_DIMENSION = 45;
 	private final ValueAnimator mLevelAlphaAnimator;
@@ -43,7 +42,7 @@ public class CircleFilledBatteryDrawable extends BatteryDrawable {
 	@SuppressLint("DiscouragedApi")
 	public CircleFilledBatteryDrawable(Context context) {
 
-		mPowerSaveColor = SettingsLibUtilsProvider.getColorAttrDefaultColor(android.R.attr.colorError, context);
+		mPowerSaveColor = getColorAttrDefaultColor(context, android.R.attr.colorError);
 
 		mLevelAlphaAnimator = ValueAnimator.ofInt(255, 255, 255, 45);
 

@@ -9,6 +9,7 @@ import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ColorUtils.getColorAttrDefaultColor;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -102,8 +103,9 @@ public class UDFPSManager extends XposedModPack {
 
 						Object mLockScreenFp = getObjectField(param.thisObject, "mLockScreenFp");
 
-						int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
-								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
+						int mTextColorPrimary = getColorAttrDefaultColor(
+								mContext,
+								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
 
 						setObjectField(param.thisObject, "mTextColorPrimary", mTextColorPrimary);
 

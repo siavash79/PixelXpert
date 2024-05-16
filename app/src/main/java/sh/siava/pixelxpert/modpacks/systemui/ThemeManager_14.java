@@ -15,6 +15,7 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ColorUtils.getColorAttrDefaultColor;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.hookAllMethodsMatchPattern;
 
 import android.annotation.SuppressLint;
@@ -224,7 +225,7 @@ public class ThemeManager_14 extends XposedModPack {
 					if(param.args[1].getClass().getName().contains("ShadeCarrierGroupMobileIconViewModel")) {
 						ModernShadeCarrierGroupMobileViews.add(param.getResult());
 						if(!isDark) {
-							int textColor = SettingsLibUtilsProvider.getColorAttrDefaultColor(android.R.attr.textColorPrimary, mContext);
+							int textColor = getColorAttrDefaultColor(mContext, android.R.attr.textColorPrimary);
 							setMobileIconTint(param.getResult(), textColor);
 						}
 					}
@@ -403,7 +404,7 @@ public class ThemeManager_14 extends XposedModPack {
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						Resources res = mContext.getResources();
 
-						int textColor = SettingsLibUtilsProvider.getColorAttrDefaultColor(android.R.attr.textColorPrimary, mContext);
+						int textColor = getColorAttrDefaultColor(mContext, android.R.attr.textColorPrimary);
 
 						((TextView) mView.findViewById(res.getIdentifier("clock", "id", mContext.getPackageName()))).setTextColor(textColor);
 						((TextView) mView.findViewById(res.getIdentifier("date", "id", mContext.getPackageName()))).setTextColor(textColor);

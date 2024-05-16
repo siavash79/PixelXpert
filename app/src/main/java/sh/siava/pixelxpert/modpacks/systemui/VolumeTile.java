@@ -56,6 +56,7 @@ public class VolumeTile extends XposedModPack {
 	TilePercentageDrawable mVolumePercentageDrawable = null;
 	private static int minVol = -1;
 	private static int maxVol = -1;
+	private boolean moved = false;
 	public VolumeTile(Context context) {
 		super(context);
 	}
@@ -145,7 +146,6 @@ public class VolumeTile extends XposedModPack {
 		tileView.setOnTouchListener(new View.OnTouchListener() {
 			float initX = 0;
 			float initPct = 0;
-			boolean moved = false;
 
 			@SuppressLint({"DiscouragedApi", "ClickableViewAccessibility"})
 			@Override

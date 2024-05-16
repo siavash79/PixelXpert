@@ -131,8 +131,6 @@ public class VolumeTile extends XposedModPack {
 		setAdditionalInstanceField(tileView, "mParentTile", tile);
 
 		setVolumeChangeListener(tile, tileView);
-
-		setTouchListener(tileView);
 	}
 
 	private void setVolumeChangeListener(Object tile, View tileView) {
@@ -203,6 +201,8 @@ public class VolumeTile extends XposedModPack {
 
 	private void updateTileView(LinearLayout tileView, int state) {
 		try { //don't crash systemui if failed
+			setTouchListener(tileView);
+
 			Resources res = mContext.getResources();
 
 			mVolumePercentageDrawable.setTint(

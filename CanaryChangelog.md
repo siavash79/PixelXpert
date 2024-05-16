@@ -1,3 +1,8 @@
+**canary-357**  
+- A15B2: Fixed various color issues  
+- A15B2: Fixed battery icon styles  
+- A15B2: Fixed notification icon container  
+  
 **canary-356**  
 - Now supporting for KernelSU  
   

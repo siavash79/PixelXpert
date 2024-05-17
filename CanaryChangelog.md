@@ -1,3 +1,6 @@
+**canary-358**  
+- A15B2: Fixed flashlight and volume sliding tiles  
+  
 **canary-357**  
 - A15B2: Fixed various color issues  
 - A15B2: Fixed battery icon styles  

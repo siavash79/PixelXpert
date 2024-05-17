@@ -1,3 +1,7 @@
+**canary-359**  
+- A15B2: Fixed transparent fingerprint icon  
+- Volume tile: fixed slide resulting in mute  
+  
 **canary-358**  
 - A15B2: Fixed flashlight and volume sliding tiles  
   

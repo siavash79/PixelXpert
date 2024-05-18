@@ -25,6 +25,9 @@ import sh.siava.pixelxpert.modpacks.XposedModPack;
 @SuppressWarnings("RedundantThrows")
 public class UDFPSManager extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
+
+	private static final int TRANSPARENT = 0;
+	private static final int OPAQUE = 255;
 	private static boolean transparentBG = false;
 	private static boolean transparentFG = false;
 	private Object mDeviceEntryIconView;
@@ -60,7 +63,6 @@ public class UDFPSManager extends XposedModPack {
 		if (UdfpsKeyguardViewClass == null) { //A13
 			UdfpsKeyguardViewClass = findClassIfExists("com.android.systemui.biometrics.UdfpsKeyguardView", lpParam.classLoader);
 		}
-		Class<?> LockIconViewControllerClass = findClass("com.android.keyguard.LockIconViewController", lpParam.classLoader);
 
 		if(UdfpsKeyguardViewClass == null) //A15 Beta 2 - Compose
 		{
@@ -93,6 +95,8 @@ public class UDFPSManager extends XposedModPack {
 		}
 		else
 		{
+			Class<?> LockIconViewControllerClass = findClass("com.android.keyguard.LockIconViewController", lpParam.classLoader);
+
 			hookAllMethods(LockIconViewControllerClass, "updateIsUdfpsEnrolled", new XC_MethodHook() {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -162,11 +166,15 @@ public class UDFPSManager extends XposedModPack {
 		if(transparentFG || force)
 		{
 			((ImageView) getObjectField(mDeviceEntryIconView, "iconView"))
-					.setImageAlpha(transparentFG ? 0 : 255);
+					.setImageAlpha(transparentFG
+							? TRANSPARENT
+							: OPAQUE);
 		}
 		if(transparentFG || transparentBG || force) {
 			((ImageView) getObjectField(mDeviceEntryIconView, "bgView"))
-					.setImageAlpha(transparentFG || transparentBG ? 0 : 255);
+					.setImageAlpha(transparentFG || transparentBG
+							? TRANSPARENT
+							: OPAQUE);
 		}
 	}
 

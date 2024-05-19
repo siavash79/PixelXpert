@@ -1,3 +1,7 @@
+**canary-360**  
+- Double tap to sleep: fixed QS getting randomly stuck on the screen  
+- Double tap to sleep: fixed QS getting stuck on the screen  
+  
 **canary-359**  
 - A15B2: Fixed transparent fingerprint icon  
 - Volume tile: fixed slide resulting in mute  

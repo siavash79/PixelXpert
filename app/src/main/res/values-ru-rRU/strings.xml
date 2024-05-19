@@ -50,24 +50,24 @@
 	<string name="hotspot_hide_ssid_title">Скрыть SSID </string>
 	<string name="hotspot_inactivity_timeout_title">Таймаут бездействия </string>
 	<string name="hotspot_max_client_title">Максимальное количество клиентов </string>
-	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
-	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
+	<string name="hotspot_disable_approval_title">Проблемы подключения к точке доступа</string>
+	<string name="hotspot_disable_approval_summary">Разрешить не \"предварительно одобренные\" клиенты для бесшовного подключения</string>
 	<!--Lock screen related-->
-	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
-	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
-	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
-	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
-	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
-	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
+	<string name="depth_wallpaper_title">Обои с эффектом глубины</string>
+	<string name="depth_wallpaper_summary">Динамическая интеграция переднего плана обоев с часами</string>
+	<string name="depth_wallpaper_opacity_title">Прозрачность переднего плана обоев</string>
+	<string name="depth_wallpaper_aod_title">Также на \"Always on display\"</string>
+	<string name="depth_wallpaper_model_ready">Модель ИИ загружена на устройство</string>
+	<string name="depth_wallpaper_model_not_available">Модель ИИ недоступна на устройстве (пока)</string>
 	<string name="disable_unlock_hint_title">Отключить анимацию подсказки разблокировки </string>
 	<string name="ls_general_options">Опции экрана блокировки </string>
 	<string name="hide_avatar_title">Удалить аватар пользователя (многопользовательский режим)</string>
 	<string name="transparent_fingerprint_circle">Скрыть фон под индикатором отпечатков пальцев</string>
 	<string name="transparent_fingerprint_circle_off">Круг вокруг значка отпечатка пальца активен</string>
 	<string name="transparent_fingerprint_circle_on">Круг вокруг значка отпечатка пальца будет скрыт</string>
-	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
-	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
-	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
+	<string name="fingerprint_icon">Скрыть фон под индикатором отпечатков пальцев</string>
+	<string name="fingerprint_icon_off">Значок отпечатка пальца активен</string>
+	<string name="fingerprint_icon_on">Значок отпечатка пальца будет скрыт</string>
 	<string name="custom_text_category">Свой текст на экран блокировки</string>
 	<string name="configure_carrier_text">Настройка своего текста</string>
 	<string name="carrier_text_mod_disabled">Свой текст не установлен</string>
@@ -172,14 +172,14 @@
 	<string name="BB_Thickness_title">Толщина строки</string>
 	<string name="BB_indicate_charging">Индикатор зарядки</string>
 	<string name="BB_indicate_fast_charging">Индикатор быстрой зарядки</string>
-	<string name="BB_indicate_power_save">Indicate power save</string>
+	<string name="BB_indicate_power_save">Индикатор энергосбережения</string>
 	<string name="BB_warning_level">Диапазон уровней предупреждения</string>
 	<string name="BB_warning_tip">Установите оба значения в 0, чтобы отключить цвета на основе уровней</string>
 	<string name="BB_batteryCriticalColor">Цвет критического уровня</string>
 	<string name="BB_batteryWarningColor">Цвет уровня предупреждения</string>
 	<string name="BB_batteryChargingColor">Цвет зарядки</string>
 	<string name="BB_batteryFastChargingColor">Цвет быстрой зарядки</string>
-	<string name="BB_batteryPowerSaveColor">Power Save color</string>
+	<string name="BB_batteryPowerSaveColor">Цвет экономии энергии</string>
 	<string name="BB_transit_colors">Цвета оттенков между диапазоном</string>
 	<string name="colored_battery_percentage_title">Цветной индикатор батареи при зарядке</string>
 	<string name="nt_stat_mode_today">Сегодня</string>
@@ -294,7 +294,7 @@
 	<string name="force_aod_while_charging_summary">Всегда включать AOD во время зарядки устройства</string>
 	<string name="doze_header">Когда экран выключен…</string>
 	<string name="custom_themed_icons_title">Пользовательские тематические иконки</string>
-	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
+	<string name="px_in_settings_title">Добавить PixelXpert в настройки элементов</string>
 	<string name="custom_themed_icons_off">Пользовательские значки отключены</string>
 	<string name="custom_themed_icons_on">Пользовательские значки включены</string>
 	<string name="so_vol_longpress_skip">Долгое нажатие клавишь громкости для переключения треков</string>
@@ -387,9 +387,9 @@
 	<string name="app_kill_alert_body">Приложение будет закрыто. Вы можете открыть его снова, нажав на новый значок</string>
 	<string name="app_kill_ok_btn">ОК</string>
 	<!-- Depth Effect Alert -->
-	<string name="depth_effect_alert_title">Attention</string>
-	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
-	<string name="depth_effect_ok_btn">OK</string>
+	<string name="depth_effect_alert_title">Предупреждение</string>
+	<string name="depth_effect_alert_body">Используйте подходящие обои экрана блокировки, где элементы переднего плана не препятствуют часам на экране блокировки, обеспечивающие визуальную привлекательность и функциональность на экране блокировки.\n\nПримечание: %s.</string>
+	<string name="depth_effect_ok_btn">ОК</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Для применения настроек требуется перезагрузка системы</string>
 	<!-- Menu Items -->

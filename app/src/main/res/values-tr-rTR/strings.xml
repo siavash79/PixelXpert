@@ -8,14 +8,14 @@
 	<string name="hide_default">Gizle (Varsayılan)</string>
 	<string name="percent_of_default_size">Varsayılan boyutun %\'si</string>
 	<string name="overlay_none_title">(Varsayılan)</string>
-	<string name="general_section">Genel ayarlar</string>
+	<string name="general_section">Genel Ayarlar</string>
 	<string name="general_on">Açık</string>
 	<string name="general_off">Kapalı</string>
 	<string name="sysui_restart_needed">Uygulanması için SystemUI\'nin yeniden başlatılması gerekir</string>
 	<string name="restart_needed">Uygulanması için yeniden başlatma gerekir</string>
 	<string name="more_area">daha fazla alan</string>
 	<string name="less_area">daha az alan</string>
-	<string name="current_version">Mevcut sürüm: %s</string>
+	<string name="current_version">Mevcut Sürüm: %s</string>
 	<string name="notification_channel_update">Güncellemeler</string>
 	<string name="notification_channel_update_desc">Bu kanal en son güncellemeler hakkında bildirim gösterir.</string>
 	<string name="new_update_title">Güncelleme mevcut</string>
@@ -25,27 +25,27 @@
 	<string name="settings_update_section_title">Güncelleme</string>
 	<string name="settings_misc_section_title">Çeşitli</string>
 	<string name="settings_about_section_title">Hakkında</string>
-	<string name="settings_check_for_update_title">Güncellemeleri kontrol et</string>
-	<string name="auto_update_title">Güncellemeleri otomatik olarak kontrol et</string>
-	<string name="auto_update_summary">Yeni sürümleri arada bir kontrol et</string>
-	<string name="update_over_wifi_title">Güncellemeleri yalnızca WiFi üzerinden kontrol et</string>
-	<string name="update_over_wifi_summary">Güncellemeleri yalnızca WiFi\'ye bağlıyken arka planda kontrol edin</string>
-	<string name="github_repo_title">GitHub deposu</string>
-	<string name="telegram_group_title">Telegram grubu</string>
+	<string name="settings_check_for_update_title">Güncellemeleri Denetle</string>
+	<string name="auto_update_title">Güncellemeleri Otomatik Olarak Denetle</string>
+	<string name="auto_update_summary">Yeni sürümleri arada bir denetle</string>
+	<string name="update_over_wifi_title">Güncellemeleri Yalnızca WiFi Üzerinden Denetle</string>
+	<string name="update_over_wifi_summary">Güncellemeleri yalnızca WiFi\'ye bağlıyken arka planda denetle</string>
+	<string name="github_repo_title">GitHub Deposu</string>
+	<string name="telegram_group_title">Telegram Grubu</string>
 	<string name="usage_title">Kullanım</string>
 	<string name="usage_summary">Wiki sayfasını aç</string>
-	<string name="crowdin_title">Kendi dilinize çevirin</string>
+	<string name="crowdin_title">Dil Çevirisi Yap</string>
 	<string name="crowdin_summary">%s\'yi kendi dilinize çevirmemize yardımcı olun</string>
 	<!--Category titles-->
-	<string name="lockscreen_header_title">Kilit ekranı</string>
-	<string name="statusbar_header">Durum çubuğu</string>
-	<string name="nav_header">Gezinme çubuğu</string>
+	<string name="lockscreen_header_title">Kilit Ekranı</string>
+	<string name="statusbar_header">Durum Çubuğu</string>
+	<string name="nav_header">Gezinme Çubuğu</string>
 	<string name="dialer_header">Telefon</string>
 	<string name="misc_header">Çeşitli</string>
-	<string name="qs_panel_category_title">QS paneli</string>
+	<string name="qs_panel_category_title">QS Paneli</string>
 	<string name="theme_customization_category">Temalandırma</string>
-	<string name="pm_header">Paket yöneticisi</string>
-	<string name="hotspot_header">Taşınabilir hotspot</string>
+	<string name="pm_header">Paket Yöneticisi</string>
+	<string name="hotspot_header">Taşınabilir Hotspot</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">SSID\'yi Gizle</string>
 	<string name="hotspot_inactivity_timeout_title">Hareketsizlik zaman aşımı</string>
@@ -60,7 +60,7 @@
 	<string name="depth_wallpaper_model_ready">AI modeli cihaza indirildi</string>
 	<string name="depth_wallpaper_model_not_available">AI modeli cihazda mevcut değil (henüz)</string>
 	<string name="disable_unlock_hint_title">Kilit açma ipucu animasyonunu devre dışı bırak</string>
-	<string name="ls_general_options">Kilit ekranı seçenekleri</string>
+	<string name="ls_general_options">Kilit Ekranı Ayarları</string>
 	<string name="hide_avatar_title">Kullanıcı avatarını kaldır (çoklu kullanıcı modu)</string>
 	<string name="transparent_fingerprint_circle">Ekran altı parmak izindeki arka plan çemberini kaldır</string>
 	<string name="transparent_fingerprint_circle_off">Parmak izi simgesinin etrafındaki daire etkin</string>
@@ -68,14 +68,14 @@
 	<string name="fingerprint_icon">Ekran altı parmak izindeki arka plan çemberini kaldır</string>
 	<string name="fingerprint_icon_off">Parmak izi simgesi etkin</string>
 	<string name="fingerprint_icon_on">Parmak izi simgesi gizlenecek</string>
-	<string name="custom_text_category">Kilit ekranında özel metin</string>
+	<string name="custom_text_category">Kilit Ekranında Özel Metin</string>
 	<string name="configure_carrier_text">Operatör metnini yapılandır - Ekranın üst kısmı</string>
 	<string name="carrier_text_mod_disabled">Operatör metni değişmedi</string>
 	<string name="carrier_text_mod_enabled">Özel operatör metni</string>
 	<string name="carrier_text_value">Özel operatör metni</string>
 	<string name="lockscreen_center_text_value">Saat alanı özel metni</string>
 	<string name="keyguard_dim_amount_title">Keyguard duvar kağıdı karartması</string>
-	<string name="keyguard_bottom_category">Alt alan kısayolları</string>
+	<string name="keyguard_bottom_category">Alt Alan Kısayolları</string>
 	<string name="keyguard_bottom_buttons_transparent_title">Simgelerin etrafındaki daireyi kaldır</string>
 	<string name="LSleftShortcutTitle">Sol kısayol</string>
 	<string name="LSrightShortcutTitle">Sağ kısayol</string>
@@ -92,10 +92,10 @@
 	<string name="easy_unlock_title">Kolay kilit açma (Pin/Şifre)</string>
 	<string name="easy_unlock_summary">İlk seferde işe yaramadıysa, tekrar deneyin</string>
 	<string name="charging_info_title">Kilit ekranında şarj bilgisi</string>
-	<string name="disable_lockscreen_pill_title">\"Kilit Ekranını Özelleştir\" sekmesini gösterme</string>
-	<string name="imperial_units_title">İngiliz ölçü birimlerini kullan</string>
+	<string name="disable_lockscreen_pill_title">\"Kilit Ekranını Özelleştir\" çubuğunu gösterme</string>
+	<string name="imperial_units_title">İngiliz Ölçü Birimlerini Kullan</string>
 	<!--Status bar related-->
-	<string name="double_tap_sleep_title">Uyku için çift dokunun</string>
+	<string name="double_tap_sleep_title">Çift dokunuşla ekranı kapat</string>
 	<string name="battery_style_title">Bir pil stili seçin</string>
 	<string name="battery_show_percent_title">Pil yüzdesini göster</string>
 	<string name="battery_show_charging_animation_title">Şarj etme animasyonunu göster</string>
@@ -120,7 +120,7 @@
 	<string name="sbc_position_title">Saat konumu</string>
 	<string name="sbc_ampm_style">AM/PM Stili</string>
 	<string name="sbc_show_secs">Saniyeleri göster</string>
-	<string name="sbc_date_cat">Tarih ayarları</string>
+	<string name="sbc_date_cat">Tarih Ayarları</string>
 	<string name="sbc_day_of_week_options">Haftanın gününü saatle birlikte göster</string>
 	<string name="sbc_advanced_cat">Gelişmiş (yukarıdaki ayarın yerini alacaktır!)</string>
 	<string name="sbc_custom_date_before">Saat sonrası öncesi metin</string>
@@ -154,12 +154,12 @@
 	<string name="nt_mode_rxonly">Sadece indirme</string>
 	<string name="nt_mode_txonly">Sadece yükleme</string>
 	<string name="nt_unit_show_bits">Bit/s olarak göster</string>
-	<string name="statusbar_general_options">Durum Çubuğu Seçenekleri</string>
+	<string name="statusbar_general_options">Durum Çubuğu Ayarları</string>
 	<string name="dual_tone_battery_title">Çift tonlu pil ölçeri etkinleştir</string>
 	<string name="dual_tone_battery_on_summary">Açık (yalnızca portre simgesiyle çalışır)</string>
 	<string name="unread_messages_title">Okunmamış mesaj sayısını göster</string>
 	<string name="status_bar_height">Durum çubuğu yüksekliği (uygulamak için ekranı döndürün)</string>
-	<string name="sb_padding_title">Durum çubuğu Dolgusu</string>
+	<string name="sb_padding_title">Durum çubuğu dolgusu</string>
 	<string name="sb_padding_summary">Değerlerin min/maks olarak ayarlanması cihaz varsayılanı ile eşdeğerdir</string>
 	<string name="sbbb_header">Pil çubuğu ayarları</string>
 	<string name="sbbIcon_header">Pil simgesi ayarları</string>
@@ -193,7 +193,7 @@
 	<string name="friday">Cuma</string>
 	<string name="saturday">Cumartesi</string>
 	<!--Quick settings panel related-->
-	<string name="qs_mod_category_title">QS Panel altbilgisindeki yapı numarası</string>
+	<string name="qs_mod_category_title">QS Panel Alt Bilgisindeki Yapı Numarası</string>
 	<string name="qs_footer_mod_title">QS panelinde yapı metin numarasını özelleştir</string>
 	<string name="qs_footer_text_value">Özel metin girin</string>
 	<string name="qs_footer_text_summary">Tamamen kaldırmak için boş bırakın</string>
@@ -208,7 +208,7 @@
 	<string name="qs_pulldown_size">Hızlı aşağı çekme genişliği</string>
 	<string name="qs_pulldown_switch_title">Durum çubuğundan hızlı QS paneli çek</string>
 	<string name="qs_pulldown_side_title">Hızlı çekilebilen taraf</string>
-	<string name="qs_pulldown_category">QS açılır menüsü</string>
+	<string name="qs_pulldown_category">QS Açılır Menüsü</string>
 	<string name="qs_pullup_switch_title">Tek kaydırmayla hızlı ayarları kapat</string>
 	<string name="qs_haptic_switch_title">QS kutucuğuna dokununca titreştir</string>
 	<string name="vibration_type_touch">Sistem dokunmatik titreşim ayarları tarafından tanımlanan yoğunluk</string>
@@ -224,12 +224,12 @@
 	<string name="wifi_cell_title">İnternet Kutucuğu</string>
 	<string name="wifi_cell_on">Ayrı WiFi &amp; Veri kutucukları kullan</string>
 	<string name="wifi_cell_off">Tek bir İnternet kutucuğu kullan</string>
-	<string name="QQS_brightness_category">Parlaklık kaydırıcı seçenekleri</string>
+	<string name="QQS_brightness_category">Parlaklık Kaydırıcı Ayarları</string>
 	<string name="QQS_brightness_title">QQS Panelinde parlaklık kaydırıcısını göster</string>
 	<string name="QQS_brightness_bottom_title">Parlaklık kaydırıcısını en alta taşı</string>
 	<string name="QS_brightness_disable_title">Parlaklık kaydırıcısını QS\'den gizle</string>
 	<string name="bs_thick_track">Parlaklık kaydırıcısında kalın bir iz kullan</string>
-	<string name="quick_settings_tiles_category">QS kutucuk Seçenekleri</string>
+	<string name="quick_settings_tiles_category">QS Kutucuk Ayarları</string>
 	<string name="qs_tile_style_title">QS kutucuk temaları</string>
 	<string name="qs_volume_unmute_title">Ses kutucuğunu sessiz açma değeri</string>
 	<!--Navigation bar related-->
@@ -238,7 +238,7 @@
 	<string name="back_from_right_title">Ekranın sağ tarafı</string>
 	<string name="back_height_title">Hareket yüksekliği</string>
 	<string name="gesturenav_header">Hareketle gezinme</string>
-	<string name="gesture_nav_pill_cat">Gezinme çubuğu sekmesi</string>
+	<string name="gesture_nav_pill_cat">Gezinme çubuğu</string>
 	<string name="gesture_nav_pill_width_title">Standart boyuta göre genişlik</string>
 	<string name="gesture_nav_pill_height_title">Standart boyuta göre yükseklik</string>
 	<string name="threebutton_header_title">3 Tuşlu gezinme</string>
@@ -250,7 +250,7 @@
 	<string name="taskbar_as_recents_title">Görev çubuğunu son kullanılanlar çubuğuna dönüştür</string>
 	<string name="taskbar_height_title">Görev çubuğu yüksekliği</string>
 	<string name="taskbar_radius_title">Görev çubuğu köşe kavisi</string>
-	<string name="colorpill">Vurgu renkli hareket sekmesi</string>
+	<string name="colorpill">Vurgu renkli hareket çubuğu</string>
 	<string name="reducekeyboard_title">Hareketler için klavye boşluğu</string>
 	<string name="reducekeyboard">Klavye üzerindeki boşluğu azalt</string>
 	<string name="taskbar_status_title">Android Görev Çubuğu</string>
@@ -292,13 +292,13 @@
 	<string name="so_pick_to_show_ambient_summary">[Her zaman açık ekran kapalıyken] Telefonu açmak ortam ekranını gösterir</string>
 	<string name="force_aod_while_charging_title">Şarj olurken AOD\'yi zorla</string>
 	<string name="force_aod_while_charging_summary">Cihaz şarj olurken her zaman açık ekranı etkin tut (AOD)</string>
-	<string name="doze_header">Ekran kapalıyken...</string>
+	<string name="doze_header">Ekran Kapalıyken…</string>
 	<string name="custom_themed_icons_title">Özel temalı simgeler</string>
 	<string name="px_in_settings_title">PixelXpert\'i ayar öğelerine ekle</string>
 	<string name="custom_themed_icons_off">Özel simgeler devre dışı</string>
 	<string name="custom_themed_icons_on">Özel simgeler etkin</string>
 	<string name="so_vol_longpress_skip">Müzik atlamak için Ses düğmelerine uzun basın</string>
-	<string name="notifications_header">Bildirim seçenekleri</string>
+	<string name="notifications_header">Bildirim Ayarları</string>
 	<string name="expand_notifications_icons_title">Tümünü genişlet/daralt düğmeleri ekle</string>
 	<string name="disbale_ongoing_notif_dismiss_title">Devam eden bildirimleri asla reddetme</string>
 	<string name="heads_up_notification_duration">Uyarı bildirim süresi</string>
@@ -309,7 +309,7 @@
 	<string name="overscroll_on_summary">Önemli: LSPosed içinde kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
 	<string name="milliseconds">Milisaniye</string>
 	<string name="hours">Saat</string>
-	<string name="system_time_title">Sistem zamanı</string>
+	<string name="system_time_title">Sistem Zamanı</string>
 	<string name="sync_ntp_time_title">Zamanı senkronize etmek için NTP kullan</string>
 	<string name="ntp_time_interval_title">Zaman senkronizasyon aralığı</string>
 	<string name="ntp_servers_title">NTP sunucuları</string>
@@ -318,7 +318,7 @@
 	<string name="sync_ntp_successful">Zaman başarıyla senkronize edildi</string>
 	<string name="sync_ntp_failed">NTP sunucusu bağlantı hatası!</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Ses paneli</string>
+	<string name="volume_panel_category">Ses Paneli</string>
 	<string name="volume_dialog_timeout">Ses seviyesi iletişim kutusu zaman aşımı</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Çalışma/Klon Profili</string>
@@ -380,7 +380,7 @@
 	<string name="network_stat_month">Ayın başlangıç günü</string>
 	<!-- Incompatibility Alert -->
 	<string name="incompatible_alert_title">Uyumsuz</string>
-	<string name="incompatible_alert_body">Mevcut ROM\'unuz bu modülün doğrudan hedefi değildir. Kullanmaya devam edebilirsiniz, ancak bazı (veya tüm) seçenekler amaçlandığı gibi çalışmayabilir\n\nLütfen hataları bildirmeyin</string>
+	<string name="incompatible_alert_body">Mevcut ROM\'unuz bu modülün doğrudan hedefi değildir. Kullanmaya devam edebilirsiniz, ancak bazı (veya tüm) ayarlar amaçlandığı gibi çalışmayabilir.\n\nLütfen hataları bildirmeyin.</string>
 	<string name="incompatible_alert_ok_btn">Anladım</string>
 	<!-- App kill Alert -->
 	<string name="app_kill_alert_title">Uyarı</string>
@@ -399,10 +399,10 @@
 	<string name="menu_export_settings">Ayarları dosyaya aktar...</string>
 	<string name="menu_restart">Yeniden Başlat</string>
 	<string name="menu_restart_system">Sistemi yeniden başlat</string>
-	<string name="menu_soft_restart">Hızlı yeniden başlat</string>
+	<string name="menu_soft_restart">Hızlıca yeniden başlat</string>
 	<string name="menu_restartSysUI">SystemUI\'yi Yeniden Başlat</string>
 	<string name="menu_updates">Güncellemeler</string>
-	<string name="monitoring_category_title">Monitör seçenekleri</string>
+	<string name="monitoring_category_title">Monitör Ayarları</string>
 	<string name="netstat_header">Ağ istatistikleri ayarları</string>
 	<string name="string_formatter_manual_body_v3">Normal metne ek olarak, Tarih, Veri kullanımı ve Sıcaklık gibi dinamik değişkenler de mevcuttur:\n\n$G\&lt;format\&gt; : Miladi tarih, formata göre*\n$P&lt;format&gt; : Farsça tarih, formata göre*\n$Nrx : Belirtilen dönemdeki Toplam İndirme ** ***\n$Ntx: Belirtilen dönemdeki Toplam Yüklemeler ** ***\n$Nall : Belirtilen dönemdeki Toplam Trafik ** ***\n$Nssid : WiFi SSID adı (varsa)\n\n$T\&lt;format\&gt;[interval] : Sıcaklık; \nformat b (pil için), c (CPU için), g (GPU için) ve s (cilt için) olabilir \nSon olarak, saniye cinsinden OPSİYONEL güncelleme aralığı sayısı vardır (varsayılan: 60 saniye)\n\n*biçim belgeleri için \"Java Tarih Biçimi\"\n**İstatistik dönemini PixelXpert/Çeşitli menü/Ağ İstatistikleri Ayarları\n***\'da belirtebilirsiniz. $N yerine $Nc koyarsanız mobil veri istatistikleri elde edersiniz (örn. g. Nrx yerine $Ncrx)</string>
 	<string name="update_channel_name">Güncellemeler</string>
@@ -410,12 +410,12 @@
 	<string name="update_notification_text">Kurmak için buraya dokunun</string>
 	<string name="download_failed">Güncelleme indirilemedi</string>
 	<string name="try_again_later">Lütfen daha sonra tekrar deneyin</string>
-	<string name="update_flavor_title">Güncelleme kanalı</string>
+	<string name="update_flavor_title">Güncelleme Kanalı</string>
 	<string name="stable_flavor">Stabil</string>
 	<string name="update_type_title">Paket Türü</string>
 	<string name="full_type">Tam</string>
 	<string name="xposed_type">Sadece xPosed</string>
-	<string name="currentVersionTitle">Yüklü sürüm: </string>
+	<string name="currentVersionTitle">Yüklü Sürüm: </string>
 	<string name="lastestVersionTitle">Güncel sürüm: </string>
 	<string name="root_not_here">ROOT ERİŞİMİ VERİLMEDİ!</string>
 	<string name="reboot_pending">Yeniden başlatma bekleniyor</string>
@@ -451,7 +451,7 @@
 	<string name="searchpreference_clear_history">Geçmişi temizle</string>
 	<string name="searchpreference_no_results">Sonuç yok</string>
 	<!-- Hooked Packages Activity -->
-	<string name="hooked_packages_title">Bağlı paketler</string>
+	<string name="hooked_packages_title">Bağlı Paketler</string>
 	<string name="package_hooked_successful">Paket duyarlılığı</string>
 	<string name="package_not_hook_enabled">Paket LSposed\'da etkin değil</string>
 	<string name="package_hook_no_response">Paket yanıt vermiyor</string>

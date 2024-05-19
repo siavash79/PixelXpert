@@ -301,7 +301,12 @@ public class ScreenGestures extends XposedModPack {
 				}
 
 				if (!holdScreenTorchEnabled) return;
+
 				if ((action == ACTION_DOWN || action == ACTION_MOVE)) {
+					if(doubleTap || turnedByTTT) //we really don't want to see swipe gestures during TTT
+					{
+						ev.setAction(ACTION_DOWN);
+					}
 					if (doubleTap && !SystemUtils.isFlashOn() && uptimeMillis() - ev.getDownTime() > HOLD_DURATION) {
 						turnedByTTT = true;
 
@@ -320,9 +325,6 @@ public class ScreenGestures extends XposedModPack {
 								} catch (Throwable ignored) {}
 							}
 						}).start();
-					}
-					if (turnedByTTT) {
-						ev.setAction(ACTION_DOWN);
 					}
 				} else if (turnedByTTT) {
 					turnOffTTT();

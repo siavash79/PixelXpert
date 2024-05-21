@@ -39,6 +39,7 @@ import sh.siava.pixelxpert.modpacks.XposedModPack;
 /** @noinspection RedundantThrows*/
 public class DepthWallpaper extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
+	protected static final float KEYGUARD_SCRIM_ALPHA = 0.2f; //from ScrimController
 
 	private static boolean lockScreenSubjectCacheValid = false;
 	private Object mScrimController;
@@ -52,6 +53,7 @@ public class DepthWallpaper extends XposedModPack {
 	private FrameLayout mWallpaperBitmapContainer;
 	private FrameLayout mWallpaperDimmingOverlay;
 	private boolean mLayersCreated = false;
+	private static float mDefaultDimAmount = KEYGUARD_SCRIM_ALPHA;
 
 	public DepthWallpaper(Context context) {
 		super(context);
@@ -62,6 +64,12 @@ public class DepthWallpaper extends XposedModPack {
 		DWallpaperEnabled = Xprefs.getBoolean("DWallpaperEnabled", false);
 		DWOpacity = Xprefs.getSliderInt("DWOpacity", 192);
 		DWonAOD = Xprefs.getBoolean("DWonAOD", false);
+
+		float KeyGuardDimAmount = Xprefs.getSliderFloat( "KeyGuardDimAmount", -1f) / 100f;
+
+		mDefaultDimAmount = KeyGuardDimAmount == -1
+				? KEYGUARD_SCRIM_ALPHA
+				: KeyGuardDimAmount;
 	}
 
 	@Override
@@ -81,21 +89,18 @@ public class DepthWallpaper extends XposedModPack {
 						&& !getObjectField(mScrimController, "mState").toString().equals("KEYGUARD")) {
 					mLockScreenSubject.post(() -> mLockScreenSubject.setAlpha(DWOpacity));
 				}
-				else if(mLayersCreated && getObjectField(param.thisObject, "mScrimName").equals("notifications_scrim"))
+				else if(getObjectField(param.thisObject, "mScrimName").equals("notifications_scrim"))
 				{
 					float notificationAlpha = (float)param.args[0];
 
-					if(notificationAlpha < .25f)
+					if(notificationAlpha < mDefaultDimAmount)
 						notificationAlpha = 0;
 
-					float subjectAlpha = 1f - notificationAlpha;
-					if(subjectAlpha < .75f)
-					{
-						subjectAlpha /= .75f;
-					}
-					final float finalAlpha = subjectAlpha * getFloatField(mScrimController, "mBehindAlpha");
+					float subjectAlpha = (notificationAlpha > mDefaultDimAmount)
+							? (1f - notificationAlpha) / (1f - mDefaultDimAmount)
+							: 1f;
 
-					mLockScreenSubject.post(() -> mLockScreenSubject.setAlpha(finalAlpha));
+					mLockScreenSubject.post(() -> mLockScreenSubject.setAlpha(subjectAlpha));
 				}
 			}
 		});

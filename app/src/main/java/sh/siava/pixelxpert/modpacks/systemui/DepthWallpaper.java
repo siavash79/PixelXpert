@@ -6,6 +6,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
@@ -74,7 +75,12 @@ public class DepthWallpaper extends XposedModPack {
 
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
-		Class<?> QSImplClass = findClass("com.android.systemui.qs.QSImpl", lpParam.classLoader);
+		Class<?> QSImplClass = findClassIfExists("com.android.systemui.qs.QSImpl", lpParam.classLoader);
+		if(QSImplClass == null) //Older versions of QS
+		{
+			QSImplClass = findClass("com.android.systemui.qs.QSFragment", lpParam.classLoader);
+		}
+
 		Class<?> CanvasEngineClass = findClass("com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine", lpParam.classLoader);
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpParam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpParam.classLoader);
@@ -89,7 +95,7 @@ public class DepthWallpaper extends XposedModPack {
 						&& !getObjectField(mScrimController, "mState").toString().equals("KEYGUARD")) {
 					mLockScreenSubject.post(() -> mLockScreenSubject.setAlpha(DWOpacity));
 				}
-				else if(getObjectField(param.thisObject, "mScrimName").equals("notifications_scrim"))
+				else if(getObjectField(mScrimController, "mNotificationsScrim").equals(param.thisObject)) //instead of using the mScrimName since older ones don't have that field
 				{
 					float notificationAlpha = (float)param.args[0];
 

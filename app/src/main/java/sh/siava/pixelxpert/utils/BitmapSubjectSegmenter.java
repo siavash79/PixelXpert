@@ -9,6 +9,7 @@ import com.google.android.gms.common.moduleinstall.ModuleInstall;
 import com.google.android.gms.common.moduleinstall.ModuleInstallClient;
 import com.google.android.gms.common.moduleinstall.ModuleInstallRequest;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.mlkit.common.MlKit;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.segmentation.subject.SubjectSegmentation;
 import com.google.mlkit.vision.segmentation.subject.SubjectSegmenter;
@@ -22,6 +23,12 @@ public class BitmapSubjectSegmenter {
 	public BitmapSubjectSegmenter(Context context)
 	{
 		mContext = context;
+
+		try {
+			MlKit.initialize(context);
+		}
+		catch (Throwable ignored){}
+
 		mSegmenter = SubjectSegmentation.getClient(
 				new SubjectSegmenterOptions.Builder()
 						.enableForegroundConfidenceMask()

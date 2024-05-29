@@ -238,6 +238,7 @@
 	<string name="wifi_cell_on">Use separate WiFi &amp; Data tiles</string>
 	<string name="wifi_cell_off">Use a single Internet tile</string>
 	<string name="QQS_brightness_category">Brightness slider options</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Show brightness slider on QQS Panel</string>
 	<string name="QQS_brightness_bottom_title">Move brightness slider to the bottom</string>
 	<string name="QS_brightness_disable_title">Hide brightness slider from Quick Settings</string>

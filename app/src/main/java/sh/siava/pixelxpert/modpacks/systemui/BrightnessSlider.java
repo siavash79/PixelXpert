@@ -1,5 +1,6 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
@@ -10,21 +11,33 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.isDarkMode;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findMethod;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.ContentObserver;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -32,13 +45,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.Constants;
+import sh.siava.pixelxpert.modpacks.ResourceManager;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 @SuppressWarnings({"RedundantThrows", "unchecked", "rawtypes"})
 public class BrightnessSlider extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
+	public static final String SCREEN_BRIGHTNESS_MODE_KEY = "screen_brightness_mode";
 
 	private Object brightnessSliderFactory = null;
 	private Object brightnessControllerFactory = null;
@@ -62,6 +78,11 @@ public class BrightnessSlider extends XposedModPack {
 
 	private boolean duringSliderPlacement = false;
 	private Object QQSBrightnessSliderController;
+	private static boolean QSAutoBrightnessToggle = false;
+	private final ArrayList<QSAutoBrightnessCallback> mQSAutoBrightnessCallbacks = new ArrayList<>();
+	private long mLastAutoToggleClick = 0;
+	private static boolean LightQSPanel = false;
+
 	public BrightnessSlider(Context context) {
 		super(context);
 	}
@@ -91,6 +112,8 @@ public class BrightnessSlider extends XposedModPack {
 		QSBrightnessDisabled = Xprefs.getBoolean("QSBrightnessDisabled", false);
 		BrightnessSliderOnBottom = Xprefs.getBoolean("BrightnessSlierOnBottom", false);
 		QQSBrightnessSupported = Xprefs.getBoolean("QQSBrightnessSupported", true);
+		QSAutoBrightnessToggle = Xprefs.getBoolean("QSAutoBrightnessToggle", false);
+		LightQSPanel = Xprefs.getBoolean("LightQSPanel", false);
 
 		if (QSBrightnessDisabled) QQSBrightnessEnabled = false; //if there's no slider, then .......
 
@@ -104,6 +127,8 @@ public class BrightnessSlider extends XposedModPack {
 					break;
 			}
 		}
+
+		mQSAutoBrightnessCallbacks.forEach(QSAutoBrightnessCallback::onSettingsChanged);
 	}
 
 	@Override
@@ -134,6 +159,56 @@ public class BrightnessSlider extends XposedModPack {
 				{
 					callMethod(QQSBrightnessSliderController, "mirrorTouchEvent", param.args[0]);
 				}
+			}
+		});
+
+		hookAllMethods(BrightnessSliderViewClass, "onFinishInflate", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				Resources res = mContext.getResources();
+
+				View slider = (View) getObjectField(param.thisObject, "mSlider");
+				FrameLayout parent = (FrameLayout) slider.getParent();
+				parent.removeView(slider);
+
+				LinearLayout innerLayout = new LinearLayout(mContext);
+				LinearLayout.LayoutParams innerLayoutParams = new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
+				innerLayout.setLayoutParams(innerLayoutParams);
+
+				parent.addView(innerLayout);
+
+				View toggleView = new View(mContext);
+				@SuppressLint("DiscouragedApi")
+				int toggleSize = res.getDimensionPixelSize(res.getIdentifier("brightness_mirror_height", "dimen", mContext.getPackageName()));
+				LinearLayout.LayoutParams toggleViewParams = new LinearLayout.LayoutParams(toggleSize, toggleSize);
+				toggleViewParams.weight = 0;
+				toggleView.setLayoutParams(toggleViewParams);
+
+				toggleView.setOnClickListener(v -> {
+					if(SystemClock.uptimeMillis() > mLastAutoToggleClick + 500) { //falsing prevention
+						mLastAutoToggleClick = SystemClock.uptimeMillis();
+						toggleAutoBrightness();
+					}
+				});
+
+				innerLayout.addView(slider);
+				innerLayout.addView(toggleView);
+
+				LinearLayout.LayoutParams sliderParams = ((LinearLayout.LayoutParams)slider.getLayoutParams());
+				sliderParams.weight = 100;
+				sliderParams.width = 1;
+
+				setAutoBrightnessVisibility(toggleView);
+				setAutoBrightnessIcon(toggleView);
+
+				mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor("screen_brightness_mode"), false, new ContentObserver(new Handler(mContext.getMainLooper())) {
+					@Override
+					public void onChange(boolean selfChange) {
+						setAutoBrightnessIcon(toggleView);
+					}
+				});
+
+				mQSAutoBrightnessCallbacks.add(() -> setAutoBrightnessVisibility(toggleView));
 			}
 		});
 
@@ -228,6 +303,72 @@ public class BrightnessSlider extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 			}
 		});
+	}
+
+	private void setAutoBrightnessVisibility(View toggleView) {
+		toggleView.setVisibility(
+				QSAutoBrightnessToggle
+						? View.VISIBLE
+						: View.GONE);
+	}
+
+	private void toggleAutoBrightness() {
+		setAutoBrightness(!isAutoBrightnessEnabled());
+	}
+
+	private void setAutoBrightnessIcon(View brightnessToggle) {
+		boolean enabled = isAutoBrightnessEnabled();
+
+		OvalShape backgroundShape = new OvalShape();
+		ShapeDrawable backgroundDrawable = new ShapeDrawable(backgroundShape);
+
+		backgroundDrawable.setTint(getBTBackgroundColor(enabled));
+
+		Drawable iconDrawable = ResourcesCompat.getDrawable(
+				ResourceManager.modRes,
+				enabled
+						? R.drawable.ic_brightness_auto
+						: R.drawable.ic_brightness_manual,
+				mContext.getTheme());
+
+		//noinspection DataFlowIssue
+		iconDrawable.setTint(getBTIconColor(enabled));
+
+		LayerDrawable toggleDrawable =new LayerDrawable(new Drawable[]{backgroundDrawable, iconDrawable});
+
+		brightnessToggle.setBackground(toggleDrawable);
+	}
+
+	public int getBTIconColor(boolean enabled) {
+		return (isDarkMode() || !LightQSPanel) == enabled
+				? Color.BLACK
+				: mContext.getColor(android.R.color.system_accent1_100);
+	}
+
+	public int getBTBackgroundColor(boolean enabled)
+	{
+		if(isDarkMode() || !LightQSPanel)
+		{
+			if(enabled)
+				return mContext.getColor(android.R.color.system_accent1_100);
+			else
+				return mContext.getColor(android.R.color.system_neutral1_800);
+		}
+		else
+		{
+			if(enabled)
+				return mContext.getColor(android.R.color.system_accent1_600);
+			else
+				return mContext.getColor(android.R.color.system_accent1_10);
+		}
+	}
+
+	private boolean isAutoBrightnessEnabled() {
+		return Settings.System.getInt(mContext.getContentResolver(), SCREEN_BRIGHTNESS_MODE_KEY, 0) == 1;
+	}
+	private void setAutoBrightness(boolean enabled)
+	{
+		Settings.System.putInt(mContext.getContentResolver(), SCREEN_BRIGHTNESS_MODE_KEY, enabled ? 1 : 0);
 	}
 
 	//swapping top and bottom margins of slider
@@ -359,6 +500,7 @@ public class BrightnessSlider extends XposedModPack {
 			mBrightnessController = callMethod(brightnessControllerFactory, "create", mBrightnessSliderController);
 		} catch (Throwable ignored){}
 
+		//noinspection ConstantValue
 		if(mBrightnessController == null) {
 			try { //13 QPR3
 				mBrightnessController = BrightnessControllerClass.getConstructors()[0].newInstance(getObjectField(brightnessControllerFactory, "mContext"), mBrightnessSliderController, getObjectField(brightnessControllerFactory, "mUserTracker"), getObjectField(brightnessControllerFactory, "mDisplayTracker"), getObjectField(brightnessControllerFactory, "mMainExecutor"), getObjectField(brightnessControllerFactory, "mBackgroundHandler"));
@@ -462,5 +604,10 @@ public class BrightnessSlider extends XposedModPack {
 				"getStringForUser", getObjectField(service, "mContentResolver"), key, getObjectField(service, "mCurrentUser"));
 		String value = (String) callStaticMethod(DejankUtilsClass, "whitelistIpcs", runnable);
 		callMethod(tunable, "onTuningChanged", key, value);
+	}
+
+	interface QSAutoBrightnessCallback
+	{
+		void onSettingsChanged();
 	}
 }

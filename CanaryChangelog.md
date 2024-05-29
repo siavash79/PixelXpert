@@ -1,3 +1,7 @@
+**canary-361**  
+- Added option to add adaptive brightness shortcut to QS panel  
+- Depth wallpaper effect: compatibility with custom lockscreen dim values  
+  
 **canary-360**  
 - Double tap to sleep: fixed QS getting randomly stuck on the screen  
 - Double tap to sleep: fixed QS getting stuck on the screen  

@@ -343,7 +343,9 @@ public class BrightnessSlider extends XposedModPack {
 	public int getBTIconColor(boolean enabled) {
 		return (isDarkMode() || !LightQSPanel) == enabled
 				? Color.BLACK
-				: mContext.getColor(android.R.color.system_accent1_100);
+				: enabled
+					? Color.WHITE //light theme, enabled
+					: mContext.getColor(android.R.color.system_accent1_100); //dark, disabled
 	}
 
 	public int getBTBackgroundColor(boolean enabled)

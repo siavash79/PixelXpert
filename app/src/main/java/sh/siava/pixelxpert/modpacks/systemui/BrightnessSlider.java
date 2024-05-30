@@ -163,6 +163,7 @@ public class BrightnessSlider extends XposedModPack {
 		});
 
 		hookAllMethods(BrightnessSliderViewClass, "onFinishInflate", new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				Resources res = mContext.getResources();
@@ -178,10 +179,10 @@ public class BrightnessSlider extends XposedModPack {
 				parent.addView(innerLayout);
 
 				View toggleView = new View(mContext);
-				@SuppressLint("DiscouragedApi")
 				int toggleSize = res.getDimensionPixelSize(res.getIdentifier("brightness_mirror_height", "dimen", mContext.getPackageName()));
 				LinearLayout.LayoutParams toggleViewParams = new LinearLayout.LayoutParams(toggleSize, toggleSize);
 				toggleViewParams.weight = 0;
+				toggleViewParams.setMarginStart(res.getDimensionPixelSize(res.getIdentifier("qs_tile_margin_horizontal", "dimen", mContext.getPackageName())));
 				toggleView.setLayoutParams(toggleViewParams);
 
 				toggleView.setOnClickListener(v -> {

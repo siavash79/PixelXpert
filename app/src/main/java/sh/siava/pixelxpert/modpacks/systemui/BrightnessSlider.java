@@ -345,7 +345,7 @@ public class BrightnessSlider extends XposedModPack {
 				? Color.BLACK
 				: enabled
 					? Color.WHITE //light theme, enabled
-					: mContext.getColor(android.R.color.system_accent1_100); //dark, disabled
+					: mContext.getColor(android.R.color.system_neutral1_200); //dark, disabled
 	}
 
 	public int getBTBackgroundColor(boolean enabled)

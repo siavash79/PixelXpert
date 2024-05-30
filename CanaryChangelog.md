@@ -1,3 +1,6 @@
+**canary-362**  
+- Adaptive brightness shortcut placement improved  
+  
 **canary-361**  
 - Added option to add adaptive brightness shortcut to QS panel  
 - Depth wallpaper effect: compatibility with custom lockscreen dim values  

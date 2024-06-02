@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Használjon külön WiFi &amp; adatlapkákat</string>
 	<string name="wifi_cell_off">Használjon egyetlen internetes csempét</string>
 	<string name="QQS_brightness_category">Fényerő-csúszka beállításai</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Fényerő-csúszka megjelenítése a QQS panelen</string>
 	<string name="QQS_brightness_bottom_title">Mozgassa a fényerő csúszkát alul</string>
 	<string name="QS_brightness_disable_title">Fényerő-csúszka elrejtése a Gyorsbeállításokban</string>

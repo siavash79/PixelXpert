@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Käytä erillisiä WiFi &amp; -datalaattoja</string>
 	<string name="wifi_cell_off">Käytä yhtä Internet-laattaa</string>
 	<string name="QQS_brightness_category">Kirkkauden liukusäätimen asetukset</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Näytä kirkkauden liukusäädin QQS-paneelissa</string>
 	<string name="QQS_brightness_bottom_title">Siirrä kirkkauden liukusäädin alas</string>
 	<string name="QS_brightness_disable_title">Piilota kirkkauden liukusäädin pika-asetuksista</string>

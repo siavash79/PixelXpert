@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Usar WiFi e Dados em separado</string>
 	<string name="wifi_cell_off">Usar apenas o atalho Internet</string>
 	<string name="QQS_brightness_category">Opções do controlo de brilho</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Controlo de brilho no painel rápido das DR</string>
 	<string name="QQS_brightness_bottom_title">Controlo de brilho no fundo do painel</string>
 	<string name="QS_brightness_disable_title">Esconder o controlo de brilho</string>

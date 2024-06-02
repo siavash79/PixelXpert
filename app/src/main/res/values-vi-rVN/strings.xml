@@ -56,7 +56,7 @@
 	<string name="depth_wallpaper_title">Hình nền hiệu ứng chiều sâu</string>
 	<string name="depth_wallpaper_summary">Tích hợp động hình nền với đồng hồ</string>
 	<string name="depth_wallpaper_opacity_title">Độ mờ nền trước hình nền</string>
-	<string name="depth_wallpaper_aod_title">Gồm cả \"always on display\"</string>
+	<string name="depth_wallpaper_aod_title">Bao gồm cả \"màn hình luôn bật\"</string>
 	<string name="depth_wallpaper_model_ready">Mẫu AI đã được tải xuống thiết bị</string>
 	<string name="depth_wallpaper_model_not_available">Mẫu AI không khả dụng với thiết bị(hoặc chưa)</string>
 	<string name="disable_unlock_hint_title">Tắt hoạt ảnh gợi ý mở khóa</string>
@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Tách biệt WiFi &amp; Dữ liệu di động</string>
 	<string name="wifi_cell_off">Sử dụng một ô biểu tượng mạng duy nhất</string>
 	<string name="QQS_brightness_category">Tùy chỉnh thanh trượt độ sáng</string>
+	<string name="QS_auto_brightness_title">Lối tắt độ sáng thích ứng</string>
 	<string name="QQS_brightness_title">Hiển thị thanh trượt độ sáng trên Bảng cài đặt nhanh</string>
 	<string name="QQS_brightness_bottom_title">Di chuyển thanh trượt độ sáng xuống dưới cùng</string>
 	<string name="QS_brightness_disable_title">Ẩn thanh trượt độ sáng khỏi Bảng cài đặt nhanh</string>

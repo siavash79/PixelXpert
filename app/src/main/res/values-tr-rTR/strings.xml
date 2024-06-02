@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Ayrı WiFi &amp; Veri kutucukları kullan</string>
 	<string name="wifi_cell_off">Tek bir İnternet kutucuğu kullan</string>
 	<string name="QQS_brightness_category">Parlaklık Kaydırıcı Ayarları</string>
+	<string name="QS_auto_brightness_title">Uyarlanabilir parlaklık kısayolu</string>
 	<string name="QQS_brightness_title">QQS Panelinde parlaklık kaydırıcısını göster</string>
 	<string name="QQS_brightness_bottom_title">Parlaklık kaydırıcısını en alta taşı</string>
 	<string name="QS_brightness_disable_title">Parlaklık kaydırıcısını QS\'den gizle</string>

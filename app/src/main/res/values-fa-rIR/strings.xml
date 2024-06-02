@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">جداسازی تنظیمات وای فای و اینترنت همراه</string>
 	<string name="wifi_cell_off">تلفیق تنظیمات وای فای و اینترنت همراه</string>
 	<string name="QQS_brightness_category">تنظیمات نوار نور صفحه</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">نوار نور صفحه در پنل QQS</string>
 	<string name="QQS_brightness_bottom_title">نوار نور صفحه در پایین تنظیمات سریع باشد</string>
 	<string name="QS_brightness_disable_title">حذف نوار نور صفحه از تنظیمات سریع</string>

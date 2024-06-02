@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Použijte samostatné dlaždice WiFi &amp; Data</string>
 	<string name="wifi_cell_off">Použijte jednu internetovou dlaždici</string>
 	<string name="QQS_brightness_category">Možnosti posuvníku jasu</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Zobrazit posuvník jasu na panelu QQS</string>
 	<string name="QQS_brightness_bottom_title">Posuňte posuvník jasu dolů</string>
 	<string name="QS_brightness_disable_title">Skrýt posuvník jasu v Rychlém nastavení</string>

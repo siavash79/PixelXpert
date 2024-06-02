@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Користите засебне ВиФи &amp; плочице података</string>
 	<string name="wifi_cell_off">Користите једну интернет плочицу</string>
 	<string name="QQS_brightness_category">Опције клизача за осветљеност</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Прикажи клизач за осветљеност на ККС панелу</string>
 	<string name="QQS_brightness_bottom_title">Померите клизач за осветљеност на дно</string>
 	<string name="QS_brightness_disable_title">Сакриј клизач за осветљеност из Брзих подешавања</string>

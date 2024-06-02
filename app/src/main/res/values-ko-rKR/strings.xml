@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">WiFi 및 데이터 타일 분리</string>
 	<string name="wifi_cell_off">통합된 인터넷 타일 사용</string>
 	<string name="QQS_brightness_category">밝기 조절 슬라이더 설정</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">알림 화면에 밝기 조절 슬라이더 표시</string>
 	<string name="QQS_brightness_bottom_title">밝기 조절 슬라이더 하단 이동</string>
 	<string name="QS_brightness_disable_title">빠른 설정 화면에서 밝기 조절 슬라이더 숨기기</string>

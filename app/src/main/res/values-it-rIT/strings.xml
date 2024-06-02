@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Usa tiles separati per WiFi &amp; Data</string>
 	<string name="wifi_cell_off">Usa un singolo tile Internet</string>
 	<string name="QQS_brightness_category">Opzioni slider luminosità</string>
+	<string name="QS_auto_brightness_title">Scorciatoia luminosità adattiva</string>
 	<string name="QQS_brightness_title">Mostra slider luminosità nel pannello QQS</string>
 	<string name="QQS_brightness_bottom_title">Sposta slider luminosità sul fondo</string>
 	<string name="QS_brightness_disable_title">Nascondi slider luminosità dai QS</string>

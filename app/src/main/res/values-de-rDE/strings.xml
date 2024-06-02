@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Benutze getrennte Elemente für Wifi und Daten</string>
 	<string name="wifi_cell_off">Benutze einzelnes Internet Element</string>
 	<string name="QQS_brightness_category">Helligkeitsregler Optionen</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Zeige Helligkeitsregler in eingeklappten Schnelleinstellungen</string>
 	<string name="QQS_brightness_bottom_title">Bewegen den Helligkeitsregler nach unten</string>
 	<string name="QS_brightness_disable_title">Verstecke Helligkeitsregler in eingeklappten Schnelleinstellungen</string>

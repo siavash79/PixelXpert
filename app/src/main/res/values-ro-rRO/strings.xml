@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Utilizează plăci separate pentru WiFi și date mobile</string>
 	<string name="wifi_cell_off">Folosește o singură dală Internet</string>
 	<string name="QQS_brightness_category">Opțiuni glisor luminozitate</string>
+	<string name="QS_auto_brightness_title">Comandă rapidă pentru luminozitatea adaptivă</string>
 	<string name="QQS_brightness_title">Arată glisorul de luminozitate în panoul setărilor rapide</string>
 	<string name="QQS_brightness_bottom_title">Mută glisorul de luminozitate în partea de jos</string>
 	<string name="QS_brightness_disable_title">Ascunde glisorul de luminozitate în setările rapide</string>

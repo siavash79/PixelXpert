@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">استخدام WiFi &amp; بلاط البيانات</string>
 	<string name="wifi_cell_off">استخدام مربع إنترنت واحد</string>
 	<string name="QQS_brightness_category">خيارات شريط تمرير السطوع</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">إظهار شريط تمرير السطوع على لوحة QQS</string>
 	<string name="QQS_brightness_bottom_title">نقل شريط تمرير السطوع إلى الأسفل</string>
 	<string name="QS_brightness_disable_title">إخفاء شريط تمرير السطوع من الإعدادات السريعة</string>

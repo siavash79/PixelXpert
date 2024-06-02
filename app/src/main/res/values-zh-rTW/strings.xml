@@ -50,15 +50,15 @@
 	<string name="hotspot_hide_ssid_title">隱藏 SSID</string>
 	<string name="hotspot_inactivity_timeout_title">自動關閉時間</string>
 	<string name="hotspot_max_client_title">最大接入數</string>
-	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
-	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
+	<string name="hotspot_disable_approval_title">Hotspot 連線問題的解決方法</string>
+	<string name="hotspot_disable_approval_summary">允許非\"預先批准\"的客戶端無縫連接</string>
 	<!--Lock screen related-->
-	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
-	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
-	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
-	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
-	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
-	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
+	<string name="depth_wallpaper_title">深度效果壁紙</string>
+	<string name="depth_wallpaper_summary">動態整合壁紙前景與時鐘</string>
+	<string name="depth_wallpaper_opacity_title">壁紙前景不透明度</string>
+	<string name="depth_wallpaper_aod_title">也適用於\"隨顯熒幕\" (AOD)</string>
+	<string name="depth_wallpaper_model_ready">AI模型已下載到裝置上</string>
+	<string name="depth_wallpaper_model_not_available">AI 模型尚未在裝置上可用 (暫未提供)</string>
 	<string name="disable_unlock_hint_title">Disable the unlock hint animation</string>
 	<string name="ls_general_options">自定鎖定畫面</string>
 	<string name="hide_avatar_title">隱藏使用者頭像(多使用者模式)</string>
@@ -66,8 +66,8 @@
 	<string name="transparent_fingerprint_circle_off">指紋圖示背景被啟用</string>
 	<string name="transparent_fingerprint_circle_on">指紋圖示背景被隱藏</string>
 	<string name="fingerprint_icon">Távolítsa el a háttérkört a kijelző alatti ujjlenyomatból</string>
-	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
-	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
+	<string name="fingerprint_icon_off">指紋圖示已啟用</string>
+	<string name="fingerprint_icon_on">指紋圖示將被隱藏</string>
 	<string name="custom_text_category">自訂鎖定畫面文本顯示</string>
 	<string name="configure_carrier_text">設定電信商名稱</string>
 	<string name="carrier_text_mod_disabled">未修改電信商名稱</string>
@@ -153,7 +153,7 @@
 	<string name="nt_mode_total">下載 +上傳 (合併)</string>
 	<string name="nt_mode_rxonly">僅下載</string>
 	<string name="nt_mode_txonly">僅上傳</string>
-	<string name="nt_unit_show_bits">Show in bits/s</string>
+	<string name="nt_unit_show_bits">以 bits/s 顯示</string>
 	<string name="statusbar_general_options">自定狀態列</string>
 	<string name="dual_tone_battery_title">雙色電池圖示</string>
 	<string name="dual_tone_battery_on_summary">開啟 (僅當縱向圖示時生效)</string>
@@ -172,16 +172,16 @@
 	<string name="BB_Thickness_title">粗細度</string>
 	<string name="BB_indicate_charging">充電顯示</string>
 	<string name="BB_indicate_fast_charging">快充顯示</string>
-	<string name="BB_indicate_power_save">Indicate power save</string>
+	<string name="BB_indicate_power_save">顯示省電模式已開啟</string>
 	<string name="BB_warning_level">電量警告</string>
 	<string name="BB_warning_tip">均設為 0 將禁用基於電量的顏色變化</string>
 	<string name="BB_batteryCriticalColor">臨界值顏色</string>
 	<string name="BB_batteryWarningColor">警告顏色</string>
 	<string name="BB_batteryChargingColor">充電顏色</string>
 	<string name="BB_batteryFastChargingColor">快充顏色</string>
-	<string name="BB_batteryPowerSaveColor">Power Save color</string>
+	<string name="BB_batteryPowerSaveColor">省電模式顏色</string>
 	<string name="BB_transit_colors">陰影漸變</string>
-	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
+	<string name="colored_battery_percentage_title">充電彩色電池百分比</string>
 	<string name="nt_stat_mode_today">Today</string>
 	<string name="nt_stat_mode_week">Current week</string>
 	<string name="nt_stat_mode_month">Current month</string>
@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">分離 WIFI 和資料方塊</string>
 	<string name="wifi_cell_off">合併 WIFI 和資料方塊</string>
 	<string name="QQS_brightness_category">亮度滑塊選項</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">在下拉方塊面板顯示</string>
 	<string name="QQS_brightness_bottom_title">將亮度條移動到底部</string>
 	<string name="QS_brightness_disable_title">在方塊面板中隱藏</string>
@@ -294,7 +295,7 @@
 	<string name="force_aod_while_charging_summary">設備充電時保持始終顯示啟用狀態</string>
 	<string name="doze_header">鎖定畫面時</string>
 	<string name="custom_themed_icons_title">自訂帶主題的圖示</string>
-	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
+	<string name="px_in_settings_title">將 PixelXpert 加入設定選項</string>
 	<string name="custom_themed_icons_off">自訂圖示已禁用</string>
 	<string name="custom_themed_icons_on">自訂圖示已啟用</string>
 	<string name="so_vol_longpress_skip">長按音量鍵跳過歌曲</string>
@@ -308,15 +309,15 @@
 	<string name="disable_overscroll">禁用過度滾動效果</string>
 	<string name="overscroll_on_summary">重要:你必須在 LSPosed 作用域中勾選你要禁用的應用程式</string>
 	<string name="milliseconds">毫秒</string>
-	<string name="hours">Hours</string>
-	<string name="system_time_title">System time</string>
-	<string name="sync_ntp_time_title">Use NTP to sync time</string>
-	<string name="ntp_time_interval_title">Time synchronization interval</string>
-	<string name="ntp_servers_title">NTP servers</string>
-	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
-	<string name="sync_ntp_time_now_title">Sync now</string>
-	<string name="sync_ntp_successful">Time synced successfully</string>
-	<string name="sync_ntp_failed">NTP server connection error!</string>
+	<string name="hours">小時</string>
+	<string name="system_time_title">系統時間</string>
+	<string name="sync_ntp_time_title">使用 NTP 同步時間 (網路時間協議)</string>
+	<string name="ntp_time_interval_title">時間同步間隔</string>
+	<string name="ntp_servers_title">NTP 伺服器</string>
+	<string name="ntp_servers_summary">使用分號來分隔多個伺服器</string>
+	<string name="sync_ntp_time_now_title">立即同步</string>
+	<string name="sync_ntp_successful">時間同步成功</string>
+	<string name="sync_ntp_failed">NTP伺服器連線錯誤！</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">音量面板</string>
 	<string name="volume_dialog_timeout">音量面板自動關閉時間</string>
@@ -325,10 +326,10 @@
 	<string name="statusbar_long_press_app_switch">Long press statusbar to switch profile</string>
 	<string name="statusbar_app_switch_icon">Show an icon on statusbar when switching is available</string>
 	<!-- Cloned apps bragging message -->
-	<string name="settings_cloned_apps_active">Unlocked for all apps via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Enjoy!</string>
+	<string name="settings_cloned_apps_active">透過 <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font> 解鎖所有應用程式: 享受！</string>
 	<!-- SystemUI hook -->
-	<string name="battery_info_button_title">Battery info…</string>
-	<string name="power_indication_error">Error fetching charging data</string>
+	<string name="battery_info_button_title">電池資訊...</string>
+	<string name="power_indication_error">取得充電數據時出錯</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">去電被接通時震動</string>
 	<string name="vibrate_on_call_drop_title">結束通話時震動</string>
@@ -387,9 +388,9 @@
 	<string name="app_kill_alert_body">App will close now. You can open it again by tapping on the new icon</string>
 	<string name="app_kill_ok_btn">OK</string>
 	<!-- Depth Effect Alert -->
-	<string name="depth_effect_alert_title">Attention</string>
-	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
-	<string name="depth_effect_ok_btn">OK</string>
+	<string name="depth_effect_alert_title">請注意</string>
+	<string name="depth_effect_alert_body">使用適合的鎖定畫面壁紙，其前景元素不會完全遮擋鎖定畫面的時鐘，確保鎖定畫面既具視覺吸引力又清晰易讀。\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">確認</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">需要重新啟動系統才能套用設定</string>
 	<!-- Menu Items -->

@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Brug separate WiFi &amp; datafliser</string>
 	<string name="wifi_cell_off">Brug en enkelt internetflise</string>
 	<string name="QQS_brightness_category">Indstillinger for lysstyrkeskyder</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Vis lysstyrkeskyderen på QQS Panel</string>
 	<string name="QQS_brightness_bottom_title">Flyt lysstyrkeskyderen til bunden</string>
 	<string name="QS_brightness_disable_title">Skjul lysstyrkeskyderen fra Hurtige indstillinger</string>

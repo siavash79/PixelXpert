@@ -249,24 +249,7 @@ public class ScreenGestures extends XposedModPack {
 		XC_MethodHook doubleTapHook = new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
-
-				boolean isQSExpanded;
-				if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
-				{
-					isQSExpanded = (boolean)callMethod(NotificationPanelViewController, "isShadeFullyExpanded");
-				}
-				else
-				{
-					try { //13QPR3
-						isQSExpanded = getBooleanField(
-								getObjectField(NotificationPanelViewController, "mQsController"),
-								"mExpanded");
-					} catch (Throwable ignored) {
-						isQSExpanded = getBooleanField(NotificationPanelViewController, "mQsExpanded"); //13QPR2,1
-					}
-				}
-
-				if (isQSExpanded || getBooleanField(NotificationPanelViewController, "mBouncerShowing")) {
+				if (isQSExpanded() || getBooleanField(NotificationPanelViewController, "mBouncerShowing")) {
 					return;
 				}
 				doubleTap = true;
@@ -317,7 +300,6 @@ public class ScreenGestures extends XposedModPack {
 						new Thread(() -> { //if keyguard is dismissed for any reason (face or udfps touch), then:
 							while (turnedByTTT) {
 								try {
-									//noinspection BusyWait
 									sleep(200);
 									if (keyguardNotShowing(mStatusBarKeyguardViewManager)) {
 										turnOffTTT();
@@ -331,6 +313,23 @@ public class ScreenGestures extends XposedModPack {
 				}
 			}
 		});
+	}
+
+	private boolean isQSExpanded() {
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+		{
+			return  (boolean)callMethod(NotificationPanelViewController, "isShadeFullyExpanded");
+		}
+		else
+		{
+			try { //13QPR3
+				return getBooleanField(
+						getObjectField(NotificationPanelViewController, "mQsController"),
+						"mExpanded");
+			} catch (Throwable ignored) {
+				return getBooleanField(NotificationPanelViewController, "mQsExpanded"); //13QPR2,1
+			}
+		}
 	}
 
 	private boolean keyguardNotShowing(Object mStatusBarKeyguardViewManager) {

@@ -13,6 +13,7 @@ import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findMethod;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.runDelayedOnMainThread;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -73,7 +74,6 @@ public class BrightnessSlider extends XposedModPack {
 	private View QQSBrightnessSliderView;
 	static Class<?> BrightnessControllerClass = null;
 	static Class<?> DejankUtilsClass = null;
-
 	private boolean duringSliderPlacement = false;
 	private Object QQSBrightnessSliderController;
 	private static boolean QSAutoBrightnessToggle = false;
@@ -172,13 +172,11 @@ public class BrightnessSlider extends XposedModPack {
 			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				new Thread(() -> {
+				View slider = (View) getObjectField(param.thisObject, "mSlider");
+
+				runDelayedOnMainThread(slider, 500, () -> {
 					try {
-						Thread.sleep(500);
-
 						Resources res = mContext.getResources();
-
-						View slider = (View) getObjectField(param.thisObject, "mSlider");
 
 						slider.post(() -> {
 							FrameLayout parent = (FrameLayout) slider.getParent();
@@ -224,9 +222,8 @@ public class BrightnessSlider extends XposedModPack {
 							mQSAutoBrightnessCallbacks.add(() -> setAutoBrightnessVisibility(toggleView));
 						});
 					}
-					catch (Throwable ignored)
-					{}
-				}).start();
+					catch (Throwable ignored){}
+				});
 			}
 		});
 

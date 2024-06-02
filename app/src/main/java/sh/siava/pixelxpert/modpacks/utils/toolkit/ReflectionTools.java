@@ -88,6 +88,19 @@ public class ReflectionTools {
 		return result;
 	}
 
+	public static void runDelayedOnMainThread(View viewObject, long delay, Runnable runnable)
+	{
+		new Thread(() -> {
+			try
+			{
+				Thread.sleep(delay);
+				viewObject.post(runnable);
+			}
+			catch (Throwable ignored)
+			{}
+		}).start();
+	}
+
 	public static Set<XC_MethodHook.Unhook> hookAllMethodsMatchPattern(Class<?> clazz, String namePatter, XC_MethodHook callback)
 	{
 		Set<XC_MethodHook.Unhook> result = new ArraySet<>();

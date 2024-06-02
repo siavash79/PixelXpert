@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Gebruik wifi en data aparte tegels</string>
 	<string name="wifi_cell_off">Gebruik enkele internettegel</string>
 	<string name="QQS_brightness_category">Opties voor schuifregelaar helderheid</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Helderheidsschuifregelaar weergeven op QQS-paneel</string>
 	<string name="QQS_brightness_bottom_title">Schuifregelaar voor helderheid naar beneden verplaatsen</string>
 	<string name="QS_brightness_disable_title">Schuifregelaar voor helderheid verbergen in Snelle instellingen</string>

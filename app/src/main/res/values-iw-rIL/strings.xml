@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">השתמש ב-WiFi נפרד &amp; אריחי נתונים</string>
 	<string name="wifi_cell_off">שימוש באריח אינטרנט יחיד</string>
 	<string name="QQS_brightness_category">אפשרויות מחוון בהירות</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">הצג את מחוון הבהירות בלוח QQS</string>
 	<string name="QQS_brightness_bottom_title">הזז את מחוון הבהירות לתחתית</string>
 	<string name="QS_brightness_disable_title">הסתר את מחוון הבהירות מהגדרות מהירות</string>

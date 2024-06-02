@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Usar Wifi y Datos por separado</string>
 	<string name="wifi_cell_off">Usar solo el atajo de Internet</string>
 	<string name="QQS_brightness_category">Preferencias de la barra de brillo</string>
+	<string name="QS_auto_brightness_title">Acceso directo de brillo adaptativo</string>
 	<string name="QQS_brightness_title">Mostrar la barra de brillo en el panel de ajustes rápidos</string>
 	<string name="QQS_brightness_bottom_title">Mover la barra de brillo abajo</string>
 	<string name="QS_brightness_disable_title">Ocultar el control deslizante de brillo de la configuración rápida</string>

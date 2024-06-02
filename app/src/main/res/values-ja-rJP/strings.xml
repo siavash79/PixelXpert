@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Wi-Fiとモバイルデータのタイルを分離</string>
 	<string name="wifi_cell_off">インターネットタイルを単一表示</string>
 	<string name="QQS_brightness_category">画面の明るさのスライダーの設定</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">クイック設定パネルに画面の明るさのスライダーを表示</string>
 	<string name="QQS_brightness_bottom_title">画面の明るさのスライダーを下部に移動</string>
 	<string name="QS_brightness_disable_title">クイック設定から画面の明るさのスライダーを非表示</string>

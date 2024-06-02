@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">分離 WIFI 和資料方塊</string>
 	<string name="wifi_cell_off">合併 WIFI 和資料方塊</string>
 	<string name="QQS_brightness_category">亮度滑塊選項</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">在下拉方塊面板顯示</string>
 	<string name="QQS_brightness_bottom_title">將亮度條移動到底部</string>
 	<string name="QS_brightness_disable_title">在方塊面板中隱藏</string>

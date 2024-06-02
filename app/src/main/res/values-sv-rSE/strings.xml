@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Använd separata WiFi &amp; -dataplattor</string>
 	<string name="wifi_cell_off">Använd en enda Internetbricka</string>
 	<string name="QQS_brightness_category">Alternativ för skjutreglage för ljusstyrka</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Visa skjutreglaget för ljusstyrka på QQS-panelen</string>
 	<string name="QQS_brightness_bottom_title">Flytta skjutreglaget för ljusstyrka till botten</string>
 	<string name="QS_brightness_disable_title">Dölj skjutreglaget för ljusstyrka från Snabbinställningar</string>

@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Використовувати окремі плитки Wi-Fi та мобільних даних</string>
 	<string name="wifi_cell_off">Використовувати одинарну плитку Інтернету</string>
 	<string name="QQS_brightness_category">Налаштування повзунка яскравості</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Показувати повзунок яскравості на панелі QQS</string>
 	<string name="QQS_brightness_bottom_title">Перемістити повзунок яскравості вниз</string>
 	<string name="QS_brightness_disable_title">Сховати повзунок яскравості з панелі Швидких налаштувань</string>

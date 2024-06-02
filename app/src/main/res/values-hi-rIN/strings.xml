@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">वाईफ़ाई और डेटा के लिए अलग-अलग तत्वों का उपयोग करें</string>
 	<string name="wifi_cell_off">एकल इंटरनेट तत्व का उपयोग करें</string>
 	<string name="QQS_brightness_category">चमक स्लाइडर विकल्प</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">संक्षिप्त त्वरित सेटिंग में चमक नियंत्रण दिखाएं</string>
 	<string name="QQS_brightness_bottom_title">चमक स्लाइडर को नीचे ले जाएं</string>
 	<string name="QS_brightness_disable_title">संक्षिप्त त्वरित सेटिंग में चमक नियंत्रण छुपाएं</string>

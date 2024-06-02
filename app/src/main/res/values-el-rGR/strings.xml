@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Χρησιμοποιήστε ξεχωριστά πλακίδια δεδομένων WiFi &amp;</string>
 	<string name="wifi_cell_off">Χρησιμοποιήστε ένα μόνο πλακίδιο Διαδικτύου</string>
 	<string name="QQS_brightness_category">Επιλογές ρυθμιστικού φωτεινότητας</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Εμφάνιση ρυθμιστικού φωτεινότητας στον πίνακα QQS</string>
 	<string name="QQS_brightness_bottom_title">Μετακινήστε το ρυθμιστικό φωτεινότητας στο κάτω μέρος</string>
 	<string name="QS_brightness_disable_title">Απόκρυψη του ρυθμιστικού φωτεινότητας από τις Γρήγορες ρυθμίσεις</string>

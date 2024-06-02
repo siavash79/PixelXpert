@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Bruk separate WiFi &amp; datafliser</string>
 	<string name="wifi_cell_off">Bruk en enkelt Internett-brikke</string>
 	<string name="QQS_brightness_category">Lysstyrkeskyvealternativer</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Vis glidebryteren for lysstyrke på QQS-panelet</string>
 	<string name="QQS_brightness_bottom_title">Flytt lysstyrkeglidebryteren til bunnen</string>
 	<string name="QS_brightness_disable_title">Skjul lysstyrkeglidebryteren fra Hurtiginnstillinger</string>

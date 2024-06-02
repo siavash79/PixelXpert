@@ -225,6 +225,7 @@
 	<string name="wifi_cell_on">Utiliser deux blocs séparés pour les données mobiles et le Wi-Fi</string>
 	<string name="wifi_cell_off">Utiliser un bloc Internet</string>
 	<string name="QQS_brightness_category">Préférence pour le curseur de luminosité</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Montrer le curseur de luminosité dans la fenêtre de configuration rapide</string>
 	<string name="QQS_brightness_bottom_title">Bouger le curseur en bas</string>
 	<string name="QS_brightness_disable_title">Cacher le curseur</string>

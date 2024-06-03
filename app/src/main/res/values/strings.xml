@@ -297,6 +297,7 @@
 	<string name="auto_off_five_minutes">Enabled for the next 5 minutes</string>
 
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Launcher options</string>
 	<string name="screenshot_sound_disable_title">Disable screenshot sound</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Allow screenshot from restricted content</string>

@@ -254,6 +254,114 @@
 		<item>2</item>
 	</string-array>
 
+	<string-array name="long_press_power_button_screen_off_names">
+		<item>@string/word_default</item>
+		<item>@string/torch</item>
+		<item>@string/camera</item>
+		<item>@string/do_not_disturb</item>
+		<item>@string/pause_media</item>
+		<item>@string/skip_media</item>
+	</string-array>
+
+	<string-array name="long_press_power_button_screen_off_value">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+	</string-array>
+
+	<string-array name="long_press_power_button_screen_on_names">
+		<item>@string/word_default</item>
+		<item>@string/torch</item>
+		<item>@string/camera</item>
+		<item>@string/do_not_disturb</item>
+		<item>@string/pause_media</item>
+		<item>@string/skip_media</item>
+	</string-array>
+
+	<string-array name="long_press_power_button_screen_on_value">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+	</string-array>
+
+	<string-array name="long_press_volume_up_button_screen_off_names">
+		<item>@string/word_default</item>
+		<item>@string/torch</item>
+		<item>@string/camera</item>
+		<item>@string/do_not_disturb</item>
+		<item>@string/pause_media</item>
+		<item>@string/skip_media</item>
+	</string-array>
+
+	<string-array name="long_press_volume_up_button_screen_off_value">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+	</string-array>
+
+	<string-array name="long_press_volume_down_button_screen_off_names">
+		<item>@string/word_default</item>
+		<item>@string/torch</item>
+		<item>@string/camera</item>
+		<item>@string/do_not_disturb</item>
+		<item>@string/pause_media</item>
+		<item>@string/skip_media</item>
+	</string-array>
+
+	<string-array name="long_press_volume_down_button_screen_off_value">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+	</string-array>
+
+	<string-array name="double_press_power_button_screen_off_names">
+		<item>@string/word_default</item>
+		<item>@string/torch</item>
+		<item>@string/camera</item>
+		<item>@string/do_not_disturb</item>
+		<item>@string/pause_media</item>
+		<item>@string/skip_media</item>
+	</string-array>
+
+	<string-array name="double_press_power_button_screen_off_value">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+	</string-array>
+
+	<string-array name="double_press_power_button_screen_on_names">
+		<item>@string/word_default</item>
+		<item>@string/torch</item>
+		<item>@string/camera</item>
+		<item>@string/do_not_disturb</item>
+		<item>@string/pause_media</item>
+		<item>@string/skip_media</item>
+	</string-array>
+
+	<string-array name="double_press_power_button_screen_on_value">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+	</string-array>
+
 	<string-array name="FontsOverlayEx_names">
 		<item>@string/overlay_none_title</item>
 		<item>Blender Pro</item>

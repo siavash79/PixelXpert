@@ -290,6 +290,7 @@
 	<string name="taskbar_force_enable_title">Force Enabled</string>
 	<string name="taskbar_force_disable_title">Force Disabled</string>
 	<string name="taskbar_transient_title">Auto hide</string>
+	<string name="remap_physical_buttons_title">Remap physical buttons</string>
 
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Bypass package signature check</string>
@@ -556,5 +557,19 @@
 	<string name="navigation_update">Update</string>
 	<string name="navigation_hooks">Hooks</string>
 	<string name="navigation_settings">Settings</string>
+
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">While screen is off</string>
+	<string name="while_screen_is_on_title">While screen is on</string>
+	<string name="remap_long_press_power_button_title">Long press power button</string>
+	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
+	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
+	<string name="remap_double_press_power_button_title">Double press power button</string>
+
+	<string name="torch">Torch</string>
+	<string name="camera">Camera</string>
+	<string name="do_not_disturb">Do not disturb</string>
+	<string name="pause_media">Pause media</string>
+	<string name="skip_media">Skip media</string>
 
 </resources>

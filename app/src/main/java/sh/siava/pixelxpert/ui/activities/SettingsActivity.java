@@ -132,6 +132,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		prefsList.add(new Object[]{R.xml.statusbar_settings, R.string.statusbar_header, new StatusbarFragment()});
 		prefsList.add(new Object[]{R.xml.theming_prefs, R.string.theme_customization_category, new ThemingFragment()});
 		prefsList.add(new Object[]{R.xml.three_button_prefs, R.string.threebutton_header_title, new ThreeButtonNavFragment()});
+		prefsList.add(new Object[]{R.xml.physical_buttons_prefs, R.string.remap_physical_buttons_title, new PhysicalButtonRemapFragment()});
 
 		PreferenceHelper.init(ExtendedSharedPreferences.from(getDefaultSharedPreferences(createDeviceProtectedStorageContext())));
 
@@ -695,7 +696,20 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	
+
+	public static class PhysicalButtonRemapFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.remap_physical_buttons_title);
+		}
+
+		@Override
+		public int getLayoutResource() {
+			return R.xml.physical_buttons_prefs;
+		}
+	}
+
+
 	public static class StatusbarFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {

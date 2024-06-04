@@ -27,9 +27,9 @@
 			app:iconSpaceReserved="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
-			app:defaultValue="50"
 			android:key="UnMuteVolumePCT"
 			android:title="@string/qs_volume_unmute_title"
+			app:defaultValue="50"
 			app:iconSpaceReserved="false"
 			app:updatesContinuously="true" />
 
@@ -101,7 +101,6 @@
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
 	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
-		android:summary="@string/qs_footer_text_desc"
 		android:title="@string/qs_mod_category_title"
 		app:iconSpaceReserved="false"
 		search:ignore="true">
@@ -109,8 +108,7 @@
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
 			android:key="QSFooterMod"
-			android:summaryOff="@string/general_off"
-			android:summaryOn="@string/general_on"
+			android:summary="@string/qs_footer_text_desc"
 			android:title="@string/qs_footer_mod_title"
 			app:iconSpaceReserved="false" />
 
@@ -186,9 +184,9 @@
 			app:iconSpaceReserved="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
-			app:defaultValue="25"
 			android:key="QSPulldownPercent"
 			android:title="@string/qs_pulldown_size"
+			app:defaultValue="25"
 			app:iconSpaceReserved="false"
 			app:updatesContinuously="true" />
 

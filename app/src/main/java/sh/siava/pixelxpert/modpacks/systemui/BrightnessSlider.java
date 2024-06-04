@@ -11,7 +11,6 @@ import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
-import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.findMethod;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.runDelayedOnMainThread;
 
@@ -49,6 +48,7 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.ResourceManager;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
+import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 
 @SuppressWarnings({"RedundantThrows", "unchecked", "rawtypes"})
 public class BrightnessSlider extends XposedModPack {
@@ -93,7 +93,7 @@ public class BrightnessSlider extends XposedModPack {
 		if (collectedFields.size() == 3) {
 			new Thread(() -> {
 				try {
-					sleep(5000);
+					SystemUtils.threadSleep(5000);
 					createQQSBrightness(BrightnessMirrorHandlerClass);
 				} catch (Throwable ignored) {
 				}
@@ -241,7 +241,7 @@ public class BrightnessSlider extends XposedModPack {
 				new Thread(() -> {
 					try {
 						while (mBrightnessMirrorController == null) {
-							sleep(500);
+							SystemUtils.threadSleep(500);
 							mBrightnessMirrorController = getObjectField(param.thisObject, "mBrightnessMirrorController");
 						}
 						dataCollected(2, BrightnessMirrorHandlerClass);

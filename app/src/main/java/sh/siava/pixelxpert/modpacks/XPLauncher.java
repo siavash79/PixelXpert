@@ -10,7 +10,6 @@ import static sh.siava.pixelxpert.BuildConfig.APPLICATION_ID;
 import static sh.siava.pixelxpert.modpacks.Constants.SYSTEM_UI_PACKAGE;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.utils.BootLoopProtector.isBootLooped;
-import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 
 import android.annotation.SuppressLint;
 import android.app.Instrumentation;
@@ -163,14 +162,14 @@ public class XPLauncher implements ServiceConnection {
 			while(SystemUtils.UserManager() == null
 					|| !SystemUtils.UserManager().isUserUnlocked()) //device is still CE encrypted
 			{
-				sleep(2000);
+				SystemUtils.threadSleep(2000);
 			}
-			sleep(5000); //wait for the unlocked account to settle down a bit
+			SystemUtils.threadSleep(5000); //wait for the unlocked account to settle down a bit
 
 			while(rootProxyIPC == null)
 			{
 				connectRootService();
-				sleep(5000);
+				SystemUtils.threadSleep(5000);
 			}
 		}).start();
 	}
@@ -214,7 +213,7 @@ public class XPLauncher implements ServiceConnection {
 			}
 			catch (Throwable ignored)
 			{
-				sleep(1000);
+				SystemUtils.threadSleep(1000);
 			}
 		}
 

@@ -6,9 +6,7 @@
 	android:clickable="true"
 	android:focusable="true"
 	android:foreground="?android:selectableItemBackgroundBorderless"
-	android:minHeight="?android:attr/listPreferredItemHeight"
-	android:paddingHorizontal="32dp"
-	android:paddingTop="16dp">
+	android:paddingHorizontal="32dp">
 
 	<ImageView
 		android:id="@android:id/icon"
@@ -24,17 +22,21 @@
 	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_centerVertical="true"
+		android:layout_marginBottom="12dp"
 		android:layout_toStartOf="@android:id/widget_frame"
 		android:layout_toEndOf="@android:id/icon"
 		android:orientation="vertical">
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@android:id/title"
-			style="@style/TextAppearance.Material3.TitleMedium"
+			style="@style/TextAppearance.Material3.TitleSmall"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textColor="?attr/colorPrimary" />
+			android:layout_marginTop="8dp"
+			android:background="@drawable/preference_category_background"
+			android:paddingHorizontal="12dp"
+			android:paddingVertical="6dp"
+			android:textColor="?attr/colorOnPrimaryContainer" />
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@android:id/summary"

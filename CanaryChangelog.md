@@ -1,3 +1,6 @@
+**canary-363**  
+- Added option to remap physical buttons to custom actions  
+  
 **canary-362**  
 - Adaptive brightness shortcut placement improved  
   

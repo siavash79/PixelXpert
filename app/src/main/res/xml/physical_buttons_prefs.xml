@@ -10,8 +10,8 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 			android:defaultValue="0"
-			android:entries="@array/long_press_power_button_screen_off_names"
-			android:entryValues="@array/long_press_power_button_screen_off_value"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
 			android:key="longPressPowerButtonScreenOff"
 			android:summary="%s"
 			android:title="@string/remap_long_press_power_button_title"
@@ -19,8 +19,8 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 			android:defaultValue="0"
-			android:entries="@array/double_press_power_button_screen_off_names"
-			android:entryValues="@array/double_press_power_button_screen_off_value"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
 			android:key="doublePressPowerButtonScreenOff"
 			android:summary="%s"
 			android:title="@string/remap_double_press_power_button_title"
@@ -28,8 +28,8 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 			android:defaultValue="0"
-			android:entries="@array/long_press_volume_up_button_screen_off_names"
-			android:entryValues="@array/long_press_volume_up_button_screen_off_value"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
 			android:key="longPressVolumeUpButtonScreenOff"
 			android:summary="%s"
 			android:title="@string/remap_long_press_volume_up_button_title"
@@ -37,8 +37,8 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 			android:defaultValue="0"
-			android:entries="@array/long_press_volume_down_button_screen_off_names"
-			android:entryValues="@array/long_press_volume_down_button_screen_off_value"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
 			android:key="longPressVolumeDownButtonScreenOff"
 			android:summary="%s"
 			android:title="@string/remap_long_press_volume_down_button_title"
@@ -53,8 +53,8 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 			android:defaultValue="0"
-			android:entries="@array/long_press_power_button_screen_on_names"
-			android:entryValues="@array/long_press_power_button_screen_on_value"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
 			android:key="longPressPowerButtonScreenOn"
 			android:summary="%s"
 			android:title="@string/remap_long_press_power_button_title"
@@ -62,8 +62,8 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
 			android:defaultValue="0"
-			android:entries="@array/double_press_power_button_screen_on_names"
-			android:entryValues="@array/double_press_power_button_screen_on_value"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
 			android:key="doublePressPowerButtonScreenOn"
 			android:summary="%s"
 			android:title="@string/remap_double_press_power_button_title"

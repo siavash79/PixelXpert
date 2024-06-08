@@ -114,8 +114,10 @@ public class ScreenOffKeys extends XposedModPack {
 						@Override
 						protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 							windowMan = param.thisObject;
-							Object gm = getObjectField(param.thisObject,"mGestureLauncherService");
-							setObjectField(gm, "mCameraDoubleTapPowerEnabled", true);
+
+							setObjectField(getObjectField(param.thisObject,"mGestureLauncherService"),
+									"mCameraDoubleTapPowerEnabled",
+									true);
 						}
 					});
 

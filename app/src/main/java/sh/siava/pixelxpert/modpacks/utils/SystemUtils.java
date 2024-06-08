@@ -246,7 +246,7 @@ public class SystemUtils {
 
 		registerVolumeChangeReceiver();
 	}
-	public static void sleep(int millis)
+	public static void threadSleep(int millis)
 	{
 		try {
 			Thread.sleep(millis);
@@ -451,10 +451,10 @@ public class SystemUtils {
 					darkSwitching = true;
 
 					proxy.runCommand("cmd uimode night " + (isDark ? "no" : "yes"));
-					sleep(1000);
+					threadSleep(1000);
 					proxy.runCommand("cmd uimode night " + (isDark ? "yes" : "no"));
 
-					sleep(500);
+					threadSleep(500);
 					darkSwitching = false;
 				} catch (Exception ignored) {
 				}

@@ -14,7 +14,6 @@ import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
-import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 
 import android.annotation.SuppressLint;
 import android.app.TaskInfo;
@@ -263,7 +262,7 @@ public class TaskbarActivator extends XposedModPack {
 					return;
 				new Thread(() -> {
 					refreshing = true;
-					sleep(100);
+					SystemUtils.threadSleep(100);
 
 					TaskBarView.post(() -> {
 						try {

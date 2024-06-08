@@ -1,3 +1,9 @@
+**canary-364**  
+- Fixed notification icon count limit. The setting might (... will) not work on older android versions anymore  
+  
+**canary-363**  
+- Added option to remap physical buttons to custom actions  
+  
 **canary-362**  
 - Adaptive brightness shortcut placement improved  
   

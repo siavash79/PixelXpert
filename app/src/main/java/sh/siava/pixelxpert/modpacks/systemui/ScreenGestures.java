@@ -149,7 +149,7 @@ public class ScreenGestures extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				new Thread(() -> {
-					sleep(5000); //for some reason lsposed doesn't find methods in the class. so we'll hook to constructor and wait a bit!
+					SystemUtils.threadSleep(5000); //for some reason lsposed doesn't find methods in the class. so we'll hook to constructor and wait a bit!
 					setHooks(param);
 				}).start();
 			}
@@ -300,7 +300,7 @@ public class ScreenGestures extends XposedModPack {
 						new Thread(() -> { //if keyguard is dismissed for any reason (face or udfps touch), then:
 							while (turnedByTTT) {
 								try {
-									sleep(200);
+									SystemUtils.threadSleep(200);
 									if (keyguardNotShowing(mStatusBarKeyguardViewManager)) {
 										turnOffTTT();
 									}

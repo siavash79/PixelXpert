@@ -254,112 +254,27 @@
 		<item>2</item>
 	</string-array>
 
-	<string-array name="long_press_power_button_screen_off_names">
+	<string-array name="physical_remap_action_names">
 		<item>@string/word_default</item>
 		<item>@string/torch</item>
 		<item>@string/camera</item>
-		<item>@string/do_not_disturb</item>
+		<item>@string/assistant</item>
+		<!--item>@string/do_not_disturb</item-->
 		<item>@string/pause_media</item>
-		<item>@string/skip_media</item>
+		<item>@string/skip_media_next</item>
+		<item>@string/skip_media_prev</item>
 	</string-array>
 
-	<string-array name="long_press_power_button_screen_off_value">
+	<string-array name="physical_remap_action_values">
 		<item>0</item>
 		<item>1</item>
 		<item>2</item>
 		<item>3</item>
-		<item>4</item>
+		<!--item>4</item-->
 		<item>5</item>
-	</string-array>
-
-	<string-array name="long_press_power_button_screen_on_names">
-		<item>@string/word_default</item>
-		<item>@string/torch</item>
-		<item>@string/camera</item>
-		<item>@string/do_not_disturb</item>
-		<item>@string/pause_media</item>
-		<item>@string/skip_media</item>
-	</string-array>
-
-	<string-array name="long_press_power_button_screen_on_value">
-		<item>0</item>
-		<item>1</item>
-		<item>2</item>
-		<item>3</item>
-		<item>4</item>
-		<item>5</item>
-	</string-array>
-
-	<string-array name="long_press_volume_up_button_screen_off_names">
-		<item>@string/word_default</item>
-		<item>@string/torch</item>
-		<item>@string/camera</item>
-		<item>@string/do_not_disturb</item>
-		<item>@string/pause_media</item>
-		<item>@string/skip_media</item>
-	</string-array>
-
-	<string-array name="long_press_volume_up_button_screen_off_value">
-		<item>0</item>
-		<item>1</item>
-		<item>2</item>
-		<item>3</item>
-		<item>4</item>
-		<item>5</item>
-	</string-array>
-
-	<string-array name="long_press_volume_down_button_screen_off_names">
-		<item>@string/word_default</item>
-		<item>@string/torch</item>
-		<item>@string/camera</item>
-		<item>@string/do_not_disturb</item>
-		<item>@string/pause_media</item>
-		<item>@string/skip_media</item>
-	</string-array>
-
-	<string-array name="long_press_volume_down_button_screen_off_value">
-		<item>0</item>
-		<item>1</item>
-		<item>2</item>
-		<item>3</item>
-		<item>4</item>
-		<item>5</item>
-	</string-array>
-
-	<string-array name="double_press_power_button_screen_off_names">
-		<item>@string/word_default</item>
-		<item>@string/torch</item>
-		<item>@string/camera</item>
-		<item>@string/do_not_disturb</item>
-		<item>@string/pause_media</item>
-		<item>@string/skip_media</item>
-	</string-array>
-
-	<string-array name="double_press_power_button_screen_off_value">
-		<item>0</item>
-		<item>1</item>
-		<item>2</item>
-		<item>3</item>
-		<item>4</item>
-		<item>5</item>
-	</string-array>
-
-	<string-array name="double_press_power_button_screen_on_names">
-		<item>@string/word_default</item>
-		<item>@string/torch</item>
-		<item>@string/camera</item>
-		<item>@string/do_not_disturb</item>
-		<item>@string/pause_media</item>
-		<item>@string/skip_media</item>
-	</string-array>
-
-	<string-array name="double_press_power_button_screen_on_value">
-		<item>0</item>
-		<item>1</item>
-		<item>2</item>
-		<item>3</item>
-		<item>4</item>
-		<item>5</item>
+		<item>6</item>
+		<item>7</item>
+		<item>8</item>
 	</string-array>
 
 	<string-array name="FontsOverlayEx_names">

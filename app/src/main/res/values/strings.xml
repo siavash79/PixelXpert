@@ -566,10 +566,12 @@
 	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
 	<string name="remap_double_press_power_button_title">Double press power button</string>
 
-	<string name="torch">Torch</string>
-	<string name="camera">Camera</string>
-	<string name="do_not_disturb">Do not disturb</string>
-	<string name="pause_media">Pause media</string>
-	<string name="skip_media">Skip media</string>
+	<string name="torch">Toggle torch</string>
+	<string name="camera">Launch camera</string>
+	<string name="assistant">Launch assistant</string>
+	<string name="do_not_disturb">Toggle Do not disturb</string>
+	<string name="pause_media">Play/Pause media</string>
+	<string name="skip_media_next">Media control - Skip</string>
+	<string name="skip_media_prev">Media control - Previous</string>
 
 </resources>

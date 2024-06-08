@@ -150,7 +150,10 @@ public class StatusbarMods extends XposedModPack {
 	private Object QSBH = null;
 	private ViewGroup mStatusBar;
 	private static boolean notificationAreaMultiRow = false;
-
+	private static int NotificationAODIconLimit = 3;
+	private static int NotificationIconLimit = 4;
+	private Object AODNIC;
+	private Object SBNIC;
 	private Object mCollapsedStatusBarFragment = null;
 	private ViewGroup mStatusbarStartSide = null;
 	private View mCenteredIconArea = null;
@@ -271,15 +274,22 @@ public class StatusbarMods extends XposedModPack {
 		notificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
 
 		try {
-			NotificationIconContainerOverride.MAX_STATIC_ICONS = Integer.parseInt(Xprefs.getString("NotificationIconLimit", "").trim());
+			NotificationIconLimit = Integer.parseInt(Xprefs.getString("NotificationIconLimit", "").trim());
 		} catch (Throwable ignored) {
-			NotificationIconContainerOverride.MAX_STATIC_ICONS = 4;
+			NotificationIconLimit = getIntegerResource("max_notif_static_icons", 4);
 		}
 
+
 		try {
-			NotificationIconContainerOverride.MAX_ICONS_ON_AOD = Integer.parseInt(Xprefs.getString("NotificationAODIconLimit", "").trim());
+			NotificationAODIconLimit = Integer.parseInt(Xprefs.getString("NotificationAODIconLimit", "").trim());
 		} catch (Throwable ignored) {
-			NotificationIconContainerOverride.MAX_ICONS_ON_AOD = 3;
+			NotificationAODIconLimit = getIntegerResource("max_notif_icons_on_aod", 3);
+		}
+
+		if(AODNIC != null)
+		{
+			setObjectField(AODNIC, "maxIcons", NotificationAODIconLimit);
+			setObjectField(SBNIC, "maxIcons", NotificationIconLimit);
 		}
 
 		List<Float> paddings = Xprefs.getSliderValues("statusbarPaddings", 0);
@@ -471,6 +481,17 @@ public class StatusbarMods extends XposedModPack {
 		}
 	}
 
+	@SuppressLint("DiscouragedApi")
+	private int getIntegerResource(String resourceName, int defaultValue) {
+		try {
+			return mContext.getResources().getInteger(mContext.getResources().getIdentifier(resourceName, "integer", mContext.getPackageName()));
+		}
+		catch (Throwable ignored)
+		{
+			return defaultValue;
+		}
+	}
+
 	private void updateClock() {
 		try {
 			mClockView.post(() -> { //the builtin update method doesn't care about the format. Just the text sadly
@@ -521,10 +542,32 @@ public class StatusbarMods extends XposedModPack {
 		Class<?> TunerServiceImplClass = findClass("com.android.systemui.tuner.TunerServiceImpl", lpParam.classLoader);
 		Class<?> ConnectivityCallbackHandlerClass = findClass("com.android.systemui.statusbar.connectivity.CallbackHandler", lpParam.classLoader);
 		Class<?> HeadsUpStatusBarViewClass = findClass("com.android.systemui.statusbar.HeadsUpStatusBarView", lpParam.classLoader);
+		Class<?> NotificationIconContainerAlwaysOnDisplayViewModelClass = findClassIfExists("com.android.systemui.statusbar.notification.icon.ui.viewmodel.NotificationIconContainerAlwaysOnDisplayViewModel", lpParam.classLoader);
+		Class<?> NotificationIconContainerStatusBarViewModelClass = findClassIfExists("com.android.systemui.statusbar.notification.icon.ui.viewmodel.NotificationIconContainerStatusBarViewModel", lpParam.classLoader);
 		StatusBarIconClass = findClass("com.android.internal.statusbar.StatusBarIcon", lpParam.classLoader);
 		StatusBarIconHolderClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconHolder", lpParam.classLoader);
 		SystemUIDialogClass = findClass("com.android.systemui.statusbar.phone.SystemUIDialog", lpParam.classLoader);
 		//endregion
+
+
+		if(NotificationIconContainerAlwaysOnDisplayViewModelClass != null) //Viewbinder implementation of the notification icon container
+		{
+			hookAllConstructors(NotificationIconContainerAlwaysOnDisplayViewModelClass, new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					AODNIC = param.thisObject;
+					setObjectField(AODNIC, "maxIcons", NotificationAODIconLimit);
+				}
+			});
+			hookAllConstructors(NotificationIconContainerStatusBarViewModelClass, new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					SBNIC = param.thisObject;
+					setObjectField(SBNIC, "maxIcons", NotificationIconLimit);
+				}
+			});
+		}
+
 
 		initSwitchIcon();
 

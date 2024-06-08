@@ -20,8 +20,7 @@ android {
 	final def keystorePropertiesFile = rootProject.file("ReleaseKey.properties")
 
 	def releaseSignature = signingConfigs.debug
-	try(def keystorePropertiesStream = new FileInputStream(keystorePropertiesFile))
-	{
+	try (def keystorePropertiesStream = new FileInputStream(keystorePropertiesFile)) {
 		final def keystoreProperties = new Properties()
 		keystoreProperties.load(keystorePropertiesStream)
 		releaseSignature = signingConfigs.create("releaseSignature")
@@ -32,8 +31,8 @@ android {
 					storePassword keystoreProperties['storePassword']
 				}
 	}
-	catch(ignored)
-	{}
+	catch (ignored) {
+	}
 
 	buildTypes {
 		release {
@@ -86,17 +85,16 @@ dependencies {
 	implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
 	implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
 	implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
-	implementation 'androidx.appcompat:appcompat:1.6.1'
-	implementation 'androidx.annotation:annotation:1.7.1'
+	implementation 'androidx.appcompat:appcompat:1.7.0'
+	implementation 'androidx.annotation:annotation:1.8.0'
 	implementation 'androidx.preference:preference-ktx:1.2.1'
 	implementation 'androidx.recyclerview:recyclerview:1.3.2'
-	implementation 'com.google.android.material:material:1.12.0-rc01'
-	implementation 'androidx.compose.ui:ui-geometry:1.6.6'
+	implementation 'com.google.android.material:material:1.12.0'
+	implementation 'androidx.compose.ui:ui-geometry:1.6.7'
 	//noinspection KtxExtensionAvailable
 	implementation 'androidx.activity:activity:1.9.0'
 	implementation 'androidx.work:work-runtime:2.9.0'
 	implementation "androidx.concurrent:concurrent-futures:1.1.0"
-
 
 	// The core module that provides APIs to a shell
 	implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
@@ -128,5 +126,5 @@ dependencies {
 
 	//Google Subject Segmentation - MLKit
 	implementation 'com.google.android.gms:play-services-mlkit-subject-segmentation:16.0.0-beta1'
-	implementation 'com.google.android.gms:play-services-base:18.4.0'
+	implementation 'com.google.android.gms:play-services-base:18.5.0'
 }

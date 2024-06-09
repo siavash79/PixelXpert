@@ -1,3 +1,6 @@
+**canary-365**  
+- physical button gestures: improvement and bug fix  
+  
 **canary-364**  
 - Fixed notification icon count limit. The setting might (... will) not work on older android versions anymore  
   

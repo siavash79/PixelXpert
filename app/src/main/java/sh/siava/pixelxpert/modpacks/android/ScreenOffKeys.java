@@ -3,6 +3,8 @@ package sh.siava.pixelxpert.modpacks.android;
 import static android.os.VibrationAttributes.USAGE_ACCESSIBILITY;
 import static android.os.VibrationEffect.EFFECT_TICK;
 import static android.view.KeyEvent.ACTION_DOWN;
+import static android.view.KeyEvent.KEYCODE_CAMERA;
+import static android.view.KeyEvent.KEYCODE_POWER;
 import static android.view.KeyEvent.KEYCODE_VOLUME_DOWN;
 import static android.view.KeyEvent.KEYCODE_VOLUME_UP;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
@@ -61,7 +63,7 @@ public class ScreenOffKeys extends XposedModPack {
 	private Object windowMan;
 	private long mWakeTime = 0;
 
-	VolumeLongPressRunnable mVolumeLongPress = new VolumeLongPressRunnable(false);
+	VolumeLongPressRunnable mVolumeLongPress = new VolumeLongPressRunnable(PHYSICAL_ACTION_NONE);
 
 	public ScreenOffKeys(Context context) {
 		super(context);
@@ -97,16 +99,10 @@ public class ScreenOffKeys extends XposedModPack {
 						@Override
 						protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 							boolean screenIsOn = screenIsOn(true);
-							boolean forceScreenOffAction = longPressPowerButtonScreenOff == PHYSICAL_ACTION_TORCH && SystemUtils.isFlashOn();
 
-							if(doublePressPowerButtonScreenOff != PHYSICAL_ACTION_NONE && (!screenIsOn || forceScreenOffAction))
-							{
-								param.setResult(launchAction(doublePressPowerButtonScreenOff, screenIsOn, true));
-							}
-							else if(doublePressPowerButtonScreenOn != PHYSICAL_ACTION_NONE && screenIsOn)
-							{
-								param.setResult(launchAction(doublePressPowerButtonScreenOn, screenIsOn, true));
-							}
+							launchAction(resolveAction(KEYCODE_CAMERA, screenIsOn),
+									screenIsOn,
+									true);
 						}
 					});
 
@@ -125,18 +121,10 @@ public class ScreenOffKeys extends XposedModPack {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 					boolean screenIsOn = screenIsOn(true);
-					boolean handled = false;
 
-					boolean forceScreenOffAction = longPressPowerButtonScreenOff == PHYSICAL_ACTION_TORCH && SystemUtils.isFlashOn();
-
-					if(longPressPowerButtonScreenOff != PHYSICAL_ACTION_NONE && (!screenIsOn || forceScreenOffAction))
-					{
-						handled = launchAction(longPressPowerButtonScreenOff, screenIsOn, false);
-					} else if (longPressPowerButtonScreenOn != PHYSICAL_ACTION_NONE && screenIsOn) {
-						handled = launchAction(longPressPowerButtonScreenOn, screenIsOn, false);
-					}
-
-					if(handled)
+					if(launchAction(resolveAction(KEYCODE_POWER, screenIsOn),
+							screenIsOn,
+							false))
 						param.setResult(null);
 				}
 			});
@@ -171,9 +159,14 @@ public class ScreenOffKeys extends XposedModPack {
 									}
 									return;
 								case KeyEvent.ACTION_DOWN:
-									mVolumeLongPress = new VolumeLongPressRunnable(keyCode == KEYCODE_VOLUME_UP);
-									handler.postDelayed(mVolumeLongPress, ViewConfiguration.getLongPressTimeout());
-									param.setResult(0);
+									int action = resolveAction(keyCode, false);
+
+									mVolumeLongPress = new VolumeLongPressRunnable(action);
+									if(isActionLaunchable(action))
+									{
+										handler.postDelayed(mVolumeLongPress, ViewConfiguration.getLongPressTimeout());
+										param.setResult(0);
+									}
 									break;
 							}
 						}
@@ -183,6 +176,47 @@ public class ScreenOffKeys extends XposedModPack {
 				}
 			});
 		} catch (Throwable ignored) {}
+	}
+
+	private int resolveAction(int keyCode, boolean screenIsOn) {
+		boolean flashIsOn = SystemUtils.isFlashOn();
+
+		switch (keyCode)
+		{
+			case KEYCODE_CAMERA:
+				if(doublePressPowerButtonScreenOff == PHYSICAL_ACTION_TORCH && flashIsOn)
+				{
+					return PHYSICAL_ACTION_TORCH;
+				}
+				return screenIsOn
+						? doublePressPowerButtonScreenOn
+						: doublePressPowerButtonScreenOff;
+			case KEYCODE_VOLUME_DOWN:
+				return longPressVolumeDownButtonScreenOff;
+			case KEYCODE_VOLUME_UP:
+				return longPressVolumeUpButtonScreenOff;
+			case KEYCODE_POWER:
+				if(longPressPowerButtonScreenOff == PHYSICAL_ACTION_TORCH && flashIsOn) {
+					return PHYSICAL_ACTION_TORCH;
+				}
+				return screenIsOn
+						? longPressPowerButtonScreenOn
+						: longPressPowerButtonScreenOff;
+			default:
+				return PHYSICAL_ACTION_NONE;
+		}
+	}
+
+	private boolean isActionLaunchable(int action) {
+		switch (action)
+		{
+			case PHYSICAL_ACTION_MEDIA_NEXT:
+			case PHYSICAL_ACTION_MEDIA_PREV:
+				//noinspection DataFlowIssue
+				return SystemUtils.AudioManager().isMusicActive();
+			default:
+				return true;
+		}
 	}
 
 	private boolean screenIsOn(boolean useWakeTime) { //for power button, display state isn't reliable enough because pressing power will trigger it
@@ -204,7 +238,6 @@ public class ScreenOffKeys extends XposedModPack {
 			{
 				case PHYSICAL_ACTION_TORCH:
 					SystemUtils.toggleFlash();
-					if(!screenIsOn) sleep();
 					handled = true;
 					break;
 				case PHYSICAL_ACTION_CAMERA:
@@ -276,18 +309,14 @@ public class ScreenOffKeys extends XposedModPack {
 	}
 
 	class VolumeLongPressRunnable implements Runnable {
-		boolean mIsVolumeUp;
-		public VolumeLongPressRunnable(boolean isVolumeUp)
+		int mAction;
+		public VolumeLongPressRunnable(int action)
 		{
-			mIsVolumeUp = isVolumeUp;
+			mAction = action;
 		}
 		@Override
 		public void run() {
-			launchAction(mIsVolumeUp
-							? longPressVolumeUpButtonScreenOff
-							: longPressVolumeDownButtonScreenOff,
-					false,
-					false);
+			launchAction(mAction, false, false);
 		}
 	}
 }

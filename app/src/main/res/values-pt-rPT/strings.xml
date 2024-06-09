@@ -258,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Forçar ativar</string>
 	<string name="taskbar_force_disable_title">Forçar desativar</string>
 	<string name="taskbar_transient_title">Ocultar automaticamente</string>
+	<string name="remap_physical_buttons_title">Remapear botões físicos</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Ignorar a assinatura das aplicações</string>
 	<string name="pm_allow_downgrade_title">Permitir o downgrade das apps</string>
 	<string name="auto_off_five_minutes">Ativado pelos próximos 5 minutos</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Opções da App Página Inicial</string>
 	<string name="screenshot_sound_disable_title">Desativar som da captura de ecrã</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Permitir capturar ecrã de conteúdo protegido</string>
@@ -475,4 +477,18 @@
 	<string name="navigation_update">Atualizações</string>
 	<string name="navigation_hooks">\"Hooks\"</string>
 	<string name="navigation_settings">Definições</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">Quando o ecrã está desligado</string>
+	<string name="while_screen_is_on_title">Quando o ecrã está ligado</string>
+	<string name="remap_long_press_power_button_title">Manter premido o botão de energia</string>
+	<string name="remap_long_press_volume_up_button_title">Manter premido o botão de volume para cima</string>
+	<string name="remap_long_press_volume_down_button_title">Manter premido o botão de volume para baixo</string>
+	<string name="remap_double_press_power_button_title">Toque duplo no botão de energia</string>
+	<string name="torch">Ligar/desligar lanterna</string>
+	<string name="camera">Iniciar câmara</string>
+	<string name="assistant">Iniciar Assistente</string>
+	<string name="do_not_disturb">Ativar/desativar Não incomodar</string>
+	<string name="pause_media">Reproduzir/pausar mídia</string>
+	<string name="skip_media_next">Saltar mídia</string>
+	<string name="skip_media_prev">Mídia Anterior</string>
 </resources>

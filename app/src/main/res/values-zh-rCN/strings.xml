@@ -225,7 +225,7 @@
 	<string name="wifi_cell_on">分离 WIFI 和数据磁贴</string>
 	<string name="wifi_cell_off">合并 WIFI 和数据磁贴</string>
 	<string name="QQS_brightness_category">亮度滑块选项</string>
-	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
+	<string name="QS_auto_brightness_title">自适应亮度快捷方式</string>
 	<string name="QQS_brightness_title">在下拉磁贴面板显示</string>
 	<string name="QQS_brightness_bottom_title">将亮度条移动到底部</string>
 	<string name="QS_brightness_disable_title">在磁贴面板中隐藏</string>
@@ -258,11 +258,13 @@
 	<string name="taskbar_force_enable_title">强制开启</string>
 	<string name="taskbar_force_disable_title">强制关闭</string>
 	<string name="taskbar_transient_title">Auto hide</string>
+	<string name="remap_physical_buttons_title">重映射物理按钮</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">绕过应用签名检查</string>
 	<string name="pm_allow_downgrade_title">允许应用降级</string>
 	<string name="auto_off_five_minutes">在接下来的五分钟内保持开启</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">启动器选项</string>
 	<string name="screenshot_sound_disable_title">关闭截图提示音</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">在内容受限时允许截图</string>
@@ -475,4 +477,18 @@
 	<string name="navigation_update">更新</string>
 	<string name="navigation_hooks">钩子</string>
 	<string name="navigation_settings">设置</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">当屏幕关闭时</string>
+	<string name="while_screen_is_on_title">当屏幕开启时</string>
+	<string name="remap_long_press_power_button_title">长按电源键</string>
+	<string name="remap_long_press_volume_up_button_title">长按 音量+ 键</string>
+	<string name="remap_long_press_volume_down_button_title">长按 音量- 键</string>
+	<string name="remap_double_press_power_button_title">双击电源键</string>
+	<string name="torch">开关手电筒</string>
+	<string name="camera">启动相机</string>
+	<string name="assistant">启动语音助手</string>
+	<string name="do_not_disturb">切换勿扰模式</string>
+	<string name="pause_media">播放/暂停媒体</string>
+	<string name="skip_media_next">媒体控制 - 跳过</string>
+	<string name="skip_media_prev">媒体控制 - 上一个</string>
 </resources>

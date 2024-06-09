@@ -258,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Activată forțat</string>
 	<string name="taskbar_force_disable_title">Dezactivată forțat</string>
 	<string name="taskbar_transient_title">Ascundere automată</string>
+	<string name="remap_physical_buttons_title">Realocare butoane fizice</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Ignoră verificarea semnăturii pachetului</string>
 	<string name="pm_allow_downgrade_title">Permite retrogradarea aplicației</string>
 	<string name="auto_off_five_minutes">Activat pentru următoarele 5 minute</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Opțiuni lansator</string>
 	<string name="screenshot_sound_disable_title">Dezactivare sunet captură ecran</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Permite capturi de ecran din conținut restricționat</string>
@@ -475,4 +477,18 @@
 	<string name="navigation_update">Actualizare</string>
 	<string name="navigation_hooks">Cârlige</string>
 	<string name="navigation_settings">Setări</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">În timp ce ecranul este oprit</string>
+	<string name="while_screen_is_on_title">În timp ce ecranul este pornit</string>
+	<string name="remap_long_press_power_button_title">Apăsare lungă pe butonul de alimentare</string>
+	<string name="remap_long_press_volume_up_button_title">Apăsare lungă pe butonul de volum sus</string>
+	<string name="remap_long_press_volume_down_button_title">Apăsare lungă pe butonul de volum în jos</string>
+	<string name="remap_double_press_power_button_title">Apăsare dublă a butonului de alimentare</string>
+	<string name="torch">Comutare lanternă</string>
+	<string name="camera">Lansare cameră foto</string>
+	<string name="assistant">Lansare Asistent</string>
+	<string name="do_not_disturb">Comutare Nu deranja</string>
+	<string name="pause_media">Redare/Pauză media</string>
+	<string name="skip_media_next">Control media - Omitere</string>
+	<string name="skip_media_prev">Control media - Precedent</string>
 </resources>

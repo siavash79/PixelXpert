@@ -258,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Forzar activada</string>
 	<string name="taskbar_force_disable_title">Forzar desactivada</string>
 	<string name="taskbar_transient_title">Esconder automáticamente</string>
+	<string name="remap_physical_buttons_title">Mapear botones físicos</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Pasar por alto la verificación de la firma del paquete</string>
 	<string name="pm_allow_downgrade_title">Permitir degradar la aplicación</string>
 	<string name="auto_off_five_minutes">Habilitado durante los próximos 5 minutos</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Opciones del Lanzador</string>
 	<string name="screenshot_sound_disable_title">Desactivar sonido de captura de pantalla</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Permitir captura de pantalla de contenido restringido</string>
@@ -475,4 +477,18 @@
 	<string name="navigation_update">Actualizar</string>
 	<string name="navigation_hooks">Conexiones</string>
 	<string name="navigation_settings">Ajustes</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">Cuando la pantalla está apagada</string>
+	<string name="while_screen_is_on_title">Con la pantalla activada</string>
+	<string name="remap_long_press_power_button_title">Pulsación larga del botón de encendido</string>
+	<string name="remap_long_press_volume_up_button_title">Pulsación larga del botón de volumen arriba</string>
+	<string name="remap_long_press_volume_down_button_title">Pulsación larga del botón de volumen abajo</string>
+	<string name="remap_double_press_power_button_title">Doble clic en el botón de encendido</string>
+	<string name="torch">Linterna</string>
+	<string name="camera">Abrir cámara</string>
+	<string name="assistant">Iniciar el Asistente</string>
+	<string name="do_not_disturb">Mosaico No molestar</string>
+	<string name="pause_media">Reproducir/Pausa</string>
+	<string name="skip_media_next">Control Multimedia - Omitir</string>
+	<string name="skip_media_prev">Control Multimedia - Anterior</string>
 </resources>

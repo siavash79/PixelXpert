@@ -258,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Bật</string>
 	<string name="taskbar_force_disable_title">Tắt</string>
 	<string name="taskbar_transient_title">Tự động ẩn</string>
+	<string name="remap_physical_buttons_title">Sửa lại các nút vật lý</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Bỏ qua kiểm tra chữ ký gói</string>
 	<string name="pm_allow_downgrade_title">Cho phép hạ cấp ứng dụng</string>
 	<string name="auto_off_five_minutes">Kích hoạt trong 5 phút tiếp theo</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Các tùy chọn trình khởi chạy</string>
 	<string name="screenshot_sound_disable_title">Tắt âm thanh ảnh chụp màn hình</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Cho phép chụp ảnh màn hình từ nội dung bị hạn chế</string>
@@ -475,4 +477,18 @@
 	<string name="navigation_update">Cập nhật</string>
 	<string name="navigation_hooks">Các móc nối</string>
 	<string name="navigation_settings">Cài đặt</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">Khi màn hình tắt</string>
+	<string name="while_screen_is_on_title">Khi màn hình đang bật</string>
+	<string name="remap_long_press_power_button_title">Bấm giữ phím nguồn</string>
+	<string name="remap_long_press_volume_up_button_title">Bấm giữ phím tăng âm lượng</string>
+	<string name="remap_long_press_volume_down_button_title">Bấm giữ phím giảm âm lượng</string>
+	<string name="remap_double_press_power_button_title">Nhấn đúp phím Nguồn</string>
+	<string name="torch">Toggle torch</string>
+	<string name="camera">Launch camera</string>
+	<string name="assistant">Launch assistant</string>
+	<string name="do_not_disturb">Toggle Do not disturb</string>
+	<string name="pause_media">Play/Pause media</string>
+	<string name="skip_media_next">Media control - Skip</string>
+	<string name="skip_media_prev">Media control - Previous</string>
 </resources>

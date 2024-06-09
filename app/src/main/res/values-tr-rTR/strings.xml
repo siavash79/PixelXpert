@@ -258,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Etkinleştirmeye Zorla</string>
 	<string name="taskbar_force_disable_title">Devre Dışı Bırakmaya Zorla</string>
 	<string name="taskbar_transient_title">Otomatik gizle</string>
+	<string name="remap_physical_buttons_title">Fiziksel düğmeleri yeniden eşleştir</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Paket imza kontrolünü atla</string>
 	<string name="pm_allow_downgrade_title">Uygulama sürümünü düşürmeye izin ver</string>
 	<string name="auto_off_five_minutes">Önümüzdeki 5 dakika için etkin</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Başlatıcı seçenekleri</string>
 	<string name="screenshot_sound_disable_title">Ekran görüntüsü sesini devre dışı bırak</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Kısıtlanmış içerikten ekran görüntüsü alınmasına izin ver</string>
@@ -475,4 +477,18 @@
 	<string name="navigation_update">Güncelleme</string>
 	<string name="navigation_hooks">Modüller</string>
 	<string name="navigation_settings">Ayarlar</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">Ekran kapalıyken</string>
+	<string name="while_screen_is_on_title">Ekran açıkken</string>
+	<string name="remap_long_press_power_button_title">Güç düğmesine uzun bas</string>
+	<string name="remap_long_press_volume_up_button_title">Ses açma düğmesine uzun bas</string>
+	<string name="remap_long_press_volume_down_button_title">Ses kısma düğmesine uzun bas</string>
+	<string name="remap_double_press_power_button_title">Güç düğmesine çift bas</string>
+	<string name="torch">Feneri aç/kapat</string>
+	<string name="camera">Kamerayı başlat</string>
+	<string name="assistant">Başlatma asistanı</string>
+	<string name="do_not_disturb">Rahatsız etmeyin seçeneğini aç/kapat</string>
+	<string name="pause_media">Medyayı oynat/duraklat</string>
+	<string name="skip_media_next">Medya kontrolü - Atla</string>
+	<string name="skip_media_prev">Medya kontrolü - Önceki</string>
 </resources>

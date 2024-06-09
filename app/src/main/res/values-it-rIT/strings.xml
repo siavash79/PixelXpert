@@ -258,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Forza abilitata</string>
 	<string name="taskbar_force_disable_title">Forza disabilitata</string>
 	<string name="taskbar_transient_title">Nascondi automaticamente</string>
+	<string name="remap_physical_buttons_title">Rimappa pulsanti fisici</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Ignora controllo firma pacchetto</string>
 	<string name="pm_allow_downgrade_title">Consenti downgrade applicazione</string>
 	<string name="auto_off_five_minutes">Abilitato per i prossimi 5 minuti</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Opzioni Launcher</string>
 	<string name="screenshot_sound_disable_title">Disattiva suono screenshot</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Consenti screenshot per contenuti con restrizioni</string>
@@ -475,4 +477,18 @@
 	<string name="navigation_update">Aggiornamenti</string>
 	<string name="navigation_hooks">Hooks</string>
 	<string name="navigation_settings">Impostazioni</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">Mentre lo schermo è spento</string>
+	<string name="while_screen_is_on_title">Mentre lo schermo è acceso</string>
+	<string name="remap_long_press_power_button_title">Pressione prolungata sul tasto di accensione</string>
+	<string name="remap_long_press_volume_up_button_title">Pressione prolungata del pulsante volume su</string>
+	<string name="remap_long_press_volume_down_button_title">Pressione prolungata del pulsante volume giù</string>
+	<string name="remap_double_press_power_button_title">Premi due volte il pulsante di accensione</string>
+	<string name="torch">Accendi/Spegni torcia</string>
+	<string name="camera">Avvia fotocamera</string>
+	<string name="assistant">Avvia assistente</string>
+	<string name="do_not_disturb">Attiva/Disattiva Non disturbare</string>
+	<string name="pause_media">Riproduci/Pausa brano</string>
+	<string name="skip_media_next">Controllo multimediale - Salta</string>
+	<string name="skip_media_prev">Controllo multimediale - Precedente</string>
 </resources>

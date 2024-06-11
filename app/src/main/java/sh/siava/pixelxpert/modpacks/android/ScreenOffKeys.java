@@ -100,9 +100,12 @@ public class ScreenOffKeys extends XposedModPack {
 						protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 							boolean screenIsOn = screenIsOn(true);
 
-							launchAction(resolveAction(KEYCODE_CAMERA, screenIsOn),
+							boolean handled = launchAction(resolveAction(KEYCODE_CAMERA, screenIsOn),
 									screenIsOn,
 									true);
+
+							if(handled)
+								param.setResult(true);
 						}
 					});
 

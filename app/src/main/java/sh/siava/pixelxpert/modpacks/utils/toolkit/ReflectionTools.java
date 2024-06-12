@@ -215,6 +215,22 @@ public class ReflectionTools {
 		}
 	}
 
+	public static void dumpParentIDs(View v)
+	{
+		dumpParentIDs(v, 0);
+	}
+
+	private static void dumpParentIDs(View v, int level) {
+		dumpID(v, level);
+		try {
+			if(v.getParent() instanceof View)
+			{
+				dumpParentIDs((View) v.getParent(), level+1);
+			}
+		}
+		catch (Throwable ignored){}
+	}
+
 	public static void dumpIDs(View v)
 	{
 		dumpIDs(v, 0);

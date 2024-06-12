@@ -50,7 +50,7 @@
 				android:layout_width="32dp"
 				android:layout_height="32dp"
 				android:indeterminate="true"
-				android:indeterminateTint="?attr/colorPrimary"
+				android:indeterminateTint="@color/launcher_accent"
 				android:indeterminateTintMode="src_atop" />
 
 			<com.google.android.material.textview.MaterialTextView
@@ -82,7 +82,7 @@
 				android:layout_width="32dp"
 				android:layout_height="32dp"
 				android:indeterminate="true"
-				android:indeterminateTint="?attr/colorPrimary"
+				android:indeterminateTint="@color/launcher_accent"
 				android:indeterminateTintMode="src_atop" />
 
 			<com.google.android.material.textview.MaterialTextView

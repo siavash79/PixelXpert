@@ -1,3 +1,8 @@
+**canary-366**  
+- A14QPR2+: Fixed statusbar system icons multi row  
+- physical button gestures improved  
+- physical button gestures: bug fix  
+  
 **canary-365**  
 - physical button gestures: improvement and bug fix  
   

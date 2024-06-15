@@ -13,15 +13,20 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.AudioManager;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.CameraManager;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.PowerManager;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.isFlashOn;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.threadSleep;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.toggleFlash;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.vibrate;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 
@@ -31,7 +36,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 import sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools;
 
 @SuppressWarnings("RedundantThrows")
@@ -86,7 +90,7 @@ public class ScreenOffKeys extends XposedModPack {
 			longPressVolumeUpButtonScreenOff = Integer.parseInt(Xprefs.getString("longPressVolumeUpButtonScreenOff", "0"));
 			longPressVolumeDownButtonScreenOff = Integer.parseInt(Xprefs.getString("longPressVolumeDownButtonScreenOff", "0"));
 			//noinspection ResultOfMethodCallIgnored
-			SystemUtils.CameraManager(); //init CameraManager to listen to flash status
+			CameraManager(); //init CameraManager to listen to flash status
 		} catch (Throwable ignored) {}
 	}
 
@@ -101,7 +105,7 @@ public class ScreenOffKeys extends XposedModPack {
 			hookAllMethods(GestureLauncherServiceClass, "handleCameraGesture", new XC_MethodHook() { //double tap on power is handled here
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					boolean screenIsOn = screenIsOn(true);
+					boolean screenIsOn = screenIsOn();
 
 					boolean handled = launchAction(resolveAction(KEYCODE_CAMERA, screenIsOn),
 							screenIsOn,
@@ -126,7 +130,7 @@ public class ScreenOffKeys extends XposedModPack {
 			hookAllMethods(PowerKeyRuleClass, "onLongPress", new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					boolean screenIsOn = screenIsOn(true);
+					boolean screenIsOn = screenIsOn();
 
 					if (launchAction(resolveAction(KEYCODE_POWER, screenIsOn),
 							screenIsOn,
@@ -151,7 +155,7 @@ public class ScreenOffKeys extends XposedModPack {
 						KeyEvent event = (KeyEvent) param.args[0];
 						int keyCode = event.getKeyCode();
 
-						if (!screenIsOn(false) &&
+						if (!deviceIsInteractive() &&
 								((keyCode == KEYCODE_VOLUME_UP && longPressVolumeUpButtonScreenOff != PHYSICAL_ACTION_DEFAULT) ||
 										(keyCode == KEYCODE_VOLUME_DOWN && longPressVolumeDownButtonScreenOff != PHYSICAL_ACTION_DEFAULT))) {
 							Handler handler = (Handler) getObjectField(param.thisObject, "mHandler");
@@ -159,7 +163,7 @@ public class ScreenOffKeys extends XposedModPack {
 							switch (event.getAction()) {
 								case KeyEvent.ACTION_UP:
 									if (handler.hasCallbacks(mVolumeLongPress)) {
-										SystemUtils.AudioManager().adjustStreamVolume(AudioManager.STREAM_MUSIC, keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ? AudioManager.ADJUST_LOWER : AudioManager.ADJUST_RAISE, 0);
+										AudioManager().adjustStreamVolume(AudioManager.STREAM_MUSIC, keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ? AudioManager.ADJUST_LOWER : AudioManager.ADJUST_RAISE, 0);
 										handler.removeCallbacks(mVolumeLongPress);
 									}
 									return;
@@ -181,7 +185,7 @@ public class ScreenOffKeys extends XposedModPack {
 	}
 
 	private int resolveAction(int keyCode, boolean screenIsOn) {
-		boolean flashIsOn = SystemUtils.isFlashOn();
+		boolean flashIsOn = isFlashOn();
 
 		switch (keyCode) {
 			case KEYCODE_CAMERA:
@@ -212,18 +216,20 @@ public class ScreenOffKeys extends XposedModPack {
 			case PHYSICAL_ACTION_MEDIA_NEXT:
 			case PHYSICAL_ACTION_MEDIA_PREV:
 				//noinspection DataFlowIssue
-				return SystemUtils.AudioManager().isMusicActive();
+				return AudioManager().isMusicActive();
 			default:
 				return true;
 		}
 	}
 
-	private boolean screenIsOn(boolean useWakeTime) { //for power button, display state isn't reliable enough because pressing power will trigger it
-		if (useWakeTime) {
-			return SystemClock.uptimeMillis() - mWakeTime > 1000;
-		}
-		Display defaultDisplay = (Display) getObjectField(windowMan, "mDefaultDisplay");
-		return defaultDisplay.getState() == Display.STATE_ON;
+	private boolean screenIsOn() { //for power button, display state isn't reliable enough because pressing power will trigger it
+		return SystemClock.uptimeMillis() - mWakeTime > 1000;
+	}
+
+	private boolean deviceIsInteractive()
+	{
+		//noinspection DataFlowIssue
+		return PowerManager().isInteractive();
 	}
 
 	/**
@@ -239,7 +245,7 @@ public class ScreenOffKeys extends XposedModPack {
 					handled = true;
 					break;
 				case PHYSICAL_ACTION_TORCH:
-					SystemUtils.toggleFlash();
+					toggleFlash();
 					handled = true;
 					break;
 				case PHYSICAL_ACTION_CAMERA:
@@ -261,13 +267,13 @@ public class ScreenOffKeys extends XposedModPack {
 					handled = true;
 					break;
 				case PHYSICAL_ACTION_MEDIA_NEXT:
-					if (SystemUtils.AudioManager().isMusicActive()) {
+					if (AudioManager().isMusicActive()) {
 						dispatchAudioKey(KeyEvent.KEYCODE_MEDIA_NEXT);
 					}
 					handled = true;
 					break;
 				case PHYSICAL_ACTION_MEDIA_PREV:
-					if (SystemUtils.AudioManager().isMusicActive()) {
+					if (AudioManager().isMusicActive()) {
 						dispatchAudioKey(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
 					}
 					handled = true;
@@ -276,7 +282,7 @@ public class ScreenOffKeys extends XposedModPack {
 
 			if (handled) {
 				if (action != PHYSICAL_ACTION_NONE) {
-					SystemUtils.vibrate(EFFECT_TICK, USAGE_ACCESSIBILITY);
+					vibrate(EFFECT_TICK, USAGE_ACCESSIBILITY);
 				}
 				if (!screenIsOn && shouldSleep) {
 					new Thread(() -> {
@@ -295,9 +301,9 @@ public class ScreenOffKeys extends XposedModPack {
 
 	private void dispatchAudioKey(int keyCode) {
 		//noinspection DataFlowIssue
-		SystemUtils.AudioManager().dispatchMediaKeyEvent(new KeyEvent(ACTION_DOWN, keyCode));
+		AudioManager().dispatchMediaKeyEvent(new KeyEvent(ACTION_DOWN, keyCode));
 
-		SystemUtils.AudioManager().dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, keyCode));
+		AudioManager().dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, keyCode));
 	}
 
 	@Override

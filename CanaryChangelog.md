@@ -1,3 +1,6 @@
+**canary-367**  
+- physical buttons remap: bugfix  
+  
 **canary-366**  
 - A14QPR2+: Fixed statusbar system icons multi row  
 - physical button gestures improved  

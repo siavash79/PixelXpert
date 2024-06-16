@@ -225,7 +225,7 @@
 	<string name="wifi_cell_on">Использовать отдельные плитки для WiFi и мобильных данных</string>
 	<string name="wifi_cell_off">Использовать одну плитку интернета</string>
 	<string name="QQS_brightness_category">Параметры ползунка яркости</string>
-	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
+	<string name="QS_auto_brightness_title">Ярлык адаптивной яркости</string>
 	<string name="QQS_brightness_title">Показывать ползунок яркости в полураскрытой панели быстрых настроек</string>
 	<string name="QQS_brightness_bottom_title">Переместить ползунок яркости в нижнюю часть быстрых настроек</string>
 	<string name="QS_brightness_disable_title">Скрыть ползунок яркости из быстрых настроек</string>
@@ -258,13 +258,13 @@
 	<string name="taskbar_force_enable_title">Принудительно включена</string>
 	<string name="taskbar_force_disable_title">Принудительно отключена</string>
 	<string name="taskbar_transient_title">Автоматическое скрытие</string>
-	<string name="remap_physical_buttons_title">Remap physical buttons</string>
+	<string name="remap_physical_buttons_title">Переназначение физических кнопок</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Обход проверки подписи пакета</string>
 	<string name="pm_allow_downgrade_title">Разрешить понижение версии приложения</string>
 	<string name="auto_off_five_minutes">Включено на следующие 5 минут</string>
 	<!--Miscellaneous section related-->
-	<string name="launcher_section">Launcher options</string>
+	<string name="launcher_section">Настройки лаунчера</string>
 	<string name="screenshot_sound_disable_title">Отключить звука скриншота</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Разрешить снимок экрана из ограниченного содержимого</string>
@@ -478,17 +478,17 @@
 	<string name="navigation_hooks">Хуки</string>
 	<string name="navigation_settings">Настройки</string>
 	<!-- Remap Physical Buttons -->
-	<string name="while_screen_is_off_title">While screen is off</string>
-	<string name="while_screen_is_on_title">While screen is on</string>
-	<string name="remap_long_press_power_button_title">Long press power button</string>
-	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
-	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
-	<string name="remap_double_press_power_button_title">Double press power button</string>
-	<string name="torch">Toggle torch</string>
-	<string name="camera">Launch camera</string>
-	<string name="assistant">Launch assistant</string>
-	<string name="do_not_disturb">Toggle Do not disturb</string>
-	<string name="pause_media">Play/Pause media</string>
-	<string name="skip_media_next">Media control - Skip</string>
-	<string name="skip_media_prev">Media control - Previous</string>
+	<string name="while_screen_is_off_title">Пока экран выключен</string>
+	<string name="while_screen_is_on_title">Пока экран включен</string>
+	<string name="remap_long_press_power_button_title">Длительное нажатие кнопки питания</string>
+	<string name="remap_long_press_volume_up_button_title">Длительное нажатие кнопки увеличения громкости</string>
+	<string name="remap_long_press_volume_down_button_title">Длительное нажатие кнопки уменьшения громкости</string>
+	<string name="remap_double_press_power_button_title">Двойное нажатие кнопки питания</string>
+	<string name="torch">Переключить фонарик</string>
+	<string name="camera">Запустить камеру</string>
+	<string name="assistant">Запустить ассистента</string>
+	<string name="do_not_disturb">Переключить \"Не беспокоить\"</string>
+	<string name="pause_media">Воспроизведение/пауза мультимедиа</string>
+	<string name="skip_media_next">Управление мультимедиа – Пропустить</string>
+	<string name="skip_media_prev">Управление мультимедиа - Предыдущий</string>
 </resources>

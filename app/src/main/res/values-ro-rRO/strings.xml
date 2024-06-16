@@ -48,7 +48,7 @@
 	<string name="hotspot_header">Hotspot portabil</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Ascunde SSID</string>
-	<string name="hotspot_inactivity_timeout_title">Timeout inactivitate</string>
+	<string name="hotspot_inactivity_timeout_title">Expirare inactivitate</string>
 	<string name="hotspot_max_client_title">Număr maxim de clienți</string>
 	<string name="hotspot_disable_approval_title">Soluție pentru problemele de conectivitate hotspot</string>
 	<string name="hotspot_disable_approval_summary">Permite clienților care nu sunt „pre-aprobați” să se conecteze fără probleme</string>
@@ -61,7 +61,7 @@
 	<string name="depth_wallpaper_model_not_available">Modelul AI nu este disponibil pe dispozitiv (încă)</string>
 	<string name="disable_unlock_hint_title">Dezactivează animația de indiciu a deblocării</string>
 	<string name="ls_general_options">Opțiuni pentru ecranul de blocare</string>
-	<string name="hide_avatar_title">Eliminare avatar utilizator (mod utilizatori multipli)</string>
+	<string name="hide_avatar_title">Elimină avatarul utilizatorului (mod utilizatori multipli)</string>
 	<string name="transparent_fingerprint_circle">Elimină cercul de fundal a amprentei de sub afișaj</string>
 	<string name="transparent_fingerprint_circle_off">Cercul în jurul pictogramei amprentei este activat</string>
 	<string name="transparent_fingerprint_circle_on">Cercul din jurul imaginii amprentei va fi ascuns</string>
@@ -88,7 +88,7 @@
 	<string name="dnd_shortcut">Nu deranjați</string>
 	<string name="qr_scanner_shortcut">Scaner de coduri QR</string>
 	<string name="shufflePin_title">Amestecare PIN</string>
-	<string name="wakeup_to_security_title">Afișează introducerea de securitate la activarea dispozitivului</string>
+	<string name="wakeup_to_security_title">Afișează introducerea de securitate la pornirea ecranului</string>
 	<string name="easy_unlock_title">Deblocare ușoară (Pin/Parolă)</string>
 	<string name="easy_unlock_summary">Dacă nu a funcționat pentru prima dată, încearcă din nou</string>
 	<string name="charging_info_title">Informații despre încărcare pe ecranul de blocare</string>
@@ -407,7 +407,7 @@
 	<string name="menu_updates">Actualizări aplicație</string>
 	<string name="monitoring_category_title">Opțiuni monitorizare</string>
 	<string name="netstat_header">Setări statistici de rețea</string>
-	<string name="string_formatter_manual_body_v3">Pe lângă textul normal, sunt disponibile și variabile dinamice, cum ar fi Data, Utilizarea datelor și Temperatura:\n\n$G\&lt;format\&gt; : Data gregoriană, pe baza formatului*\n$P&lt;format&gt; : Data persană, pe baza formatului*\n$Nrx : Descărcări totale în perioada specificată ** ***\n$Ntx: Încărcări totale în perioada specificată ** ***\n$Nall : Trafic total în perioada specificată ** ***\n$Nssid : Nume SSID WiFi (dacă este cazul)\n\n$T\&lt;format\&gt;[interval] : Temperatura; Formatul \npoate fi b (pentru baterie), c (pentru CPU), g (pentru GPU) și s (pentru piele) \nÎn sfârșit, există un număr OPȚIONAL de interval de actualizare în secunde (implicit: 60 de secunde)\n\n*pentru format documentație, căutați „Java Date Format”\n**Puteți specifica perioada de statistici în PixelXpert/Meniul Diverse/Setări statistici de rețea\n***Dacă înlocuiți $N cu $Nc , veți obține statistici de date mobile (de ex. $Ncrx în loc de Nrx )</string>
+	<string name="string_formatter_manual_body_v3">Pe lângă textul normal, sunt disponibile și variabile dinamice, cum ar fi Data, Utilizarea datelor și Temperatura:\n\n$G\&lt;format\&gt; : Data gregoriană, pe baza formatului*\n$P&lt;format&gt; : Data persană, pe baza formatului*\n$Nrx : Descărcări totale în perioada specificată ** ***\n$Ntx: Încărcări totale în perioada specificată ** ***\n$Nall : Trafic total în perioada specificată ** ***\n$Nssid : Nume SSID WiFi (dacă este cazul)\n\n$T\&lt;format\&gt;[interval] : Temperatura; Formatul \npoate fi b (pentru baterie), c (pentru CPU), g (pentru GPU) și s (pentru piele) \nÎn sfârșit, există un număr OPȚIONAL de interval de actualizare în secunde (implicit: 60 de secunde)\n\n*pentru format documentație, caută „Java Date Format”\n**Poți specifica perioada de statistici în PixelXpert/Meniul Diverse/Setări statistici de rețea\n***Dacă înlocuiești $N cu $Nc , vei obține statistici de date mobile (de ex. $Ncrx în loc de Nrx )</string>
 	<string name="update_channel_name">Actualizări</string>
 	<string name="update_notification_title">Actualizare descărcată</string>
 	<string name="update_notification_text">Atinge aici pentru instalare</string>

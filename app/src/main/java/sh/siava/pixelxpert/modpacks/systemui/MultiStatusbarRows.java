@@ -1,7 +1,7 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
-import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
@@ -49,7 +49,11 @@ public class MultiStatusbarRows extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		if (!lpParam.packageName.equals(listenPackage)) return;
 
-		Class<?> IconManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarIconController$IconManager", lpParam.classLoader);
+		Class<?> IconManagerClass = findClassIfExists("com.android.systemui.statusbar.phone.ui.IconManager", lpParam.classLoader);
+		if(IconManagerClass == null) //pre 15beta3
+		{
+			IconManagerClass = findClassIfExists("com.android.systemui.statusbar.phone.StatusBarIconController$IconManager", lpParam.classLoader);
+		}
 
 		hookAllConstructors(IconManagerClass, new XC_MethodHook() {
 			@Override

@@ -1072,10 +1072,14 @@ public class StatusbarMods extends XposedModPack {
 		parent.removeView(mNotificationIconContainer);
 		mLeftVerticalSplitContainer.addView(mNotificationContainerContainer);
 
-		View ongoingCallChipView = mStatusBar.findViewById(mContext.getResources().getIdentifier("ongoing_call_chip", "id", mContext.getPackageName()));
-		((ViewGroup)ongoingCallChipView.getParent()).removeView(ongoingCallChipView);
+		View ongoingActivityChipView = mStatusBar.findViewById(mContext.getResources().getIdentifier("ongoing_activity_chip", "id", mContext.getPackageName()));
+		if(ongoingActivityChipView == null) //pre 15beta3
+		{
+			ongoingActivityChipView = mStatusBar.findViewById(mContext.getResources().getIdentifier("ongoing_call_chip", "id", mContext.getPackageName()));
+		}
+		((ViewGroup)ongoingActivityChipView.getParent()).removeView(ongoingActivityChipView);
 
-		mNotificationContainerContainer.addView(ongoingCallChipView);
+		mNotificationContainerContainer.addView(ongoingActivityChipView);
 		mNotificationContainerContainer.addView(mNotificationIconContainer);
 
 		((LinearLayout.LayoutParams) mNotificationIconContainer.getLayoutParams()).weight = 100;

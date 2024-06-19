@@ -40,7 +40,6 @@ import java.nio.ByteBuffer;
  * Utility class to generate monochrome icons version for a given drawable.
  */
 public class GoogleMonochromeIconFactory extends Drawable {
-	Class<?> mClippedMonoDrawableClass;
 
 	private final Bitmap mFlatBitmap;
 	private final Canvas mFlatCanvas;
@@ -56,8 +55,7 @@ public class GoogleMonochromeIconFactory extends Drawable {
 	private final Paint mDrawPaint;
 	private final Rect mSrcRect;
 
-	public GoogleMonochromeIconFactory(Class<?> ClippedMonoDrawableClass, int iconBitmapSize) {
-		mClippedMonoDrawableClass = ClippedMonoDrawableClass;
+	public GoogleMonochromeIconFactory(int iconBitmapSize) {
 
 		float extraFactor = AdaptiveIconDrawable.getExtraInsetFraction();
 		float viewPortScale = 1 / (1 + 2 * extraFactor);
@@ -108,7 +106,7 @@ public class GoogleMonochromeIconFactory extends Drawable {
 				drawDrawable(aid.getBackground());
 				drawDrawable(aid.getForeground());
 				generateMono();
-				return (Drawable) mClippedMonoDrawableClass.getConstructors()[0].newInstance(this);
+				return this;
 			}
 		}
 		catch (Throwable ignored){}
@@ -117,7 +115,7 @@ public class GoogleMonochromeIconFactory extends Drawable {
 			mFlatCanvas.drawColor(Color.WHITE);
 			drawDrawable(icon);
 			generateMono();
-			return (Drawable) mClippedMonoDrawableClass.getConstructors()[0].newInstance(this);
+			return this;
 		}
 		catch (Throwable ignored)
 		{ // WTF?!
@@ -141,7 +139,8 @@ public class GoogleMonochromeIconFactory extends Drawable {
 			max = Math.max(max, b & 0xFF);
 		}
 
-		if (min < max) {
+		if (min < max) //noinspection ExtractMethodRecommender
+		{
 			// rescale pixels to increase contrast
 			float range = max - min;
 

@@ -91,7 +91,7 @@ public class ModPacks {
 					//load before others
 					modPacks.add(ThermalProvider.class);
 
-					if(Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+					if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 					{
 						setOverlay("QSLightThemeOverlay", false, true, true);
 						modPacks.add(ThemeManager_14.class);

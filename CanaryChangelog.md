@@ -1,3 +1,8 @@
+**canary-368**  
+- A15beta3: fixed a bootloop caused by statusbar mods  
+- A15beta3: fixed QS light theme  
+- A15beta3: fixed multi row statusbar - system icons  
+  
 **canary-367**  
 - physical buttons remap: bugfix  
   

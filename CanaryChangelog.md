@@ -1,3 +1,6 @@
+**canary-369**  
+- A15beta3: fixed forced monochrome icons  
+  
 **canary-368**  
 - A15beta3: fixed a bootloop caused by statusbar mods  
 - A15beta3: fixed QS light theme  

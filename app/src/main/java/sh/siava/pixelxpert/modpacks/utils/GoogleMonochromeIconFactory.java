@@ -30,6 +30,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.AdaptiveIconDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.WorkerThread;
@@ -39,7 +40,7 @@ import java.nio.ByteBuffer;
 /**
  * Utility class to generate monochrome icons version for a given drawable.
  */
-public class GoogleMonochromeIconFactory extends Drawable {
+public class GoogleMonochromeIconFactory extends BitmapDrawable {
 
 	private final Bitmap mFlatBitmap;
 	private final Canvas mFlatCanvas;
@@ -55,8 +56,8 @@ public class GoogleMonochromeIconFactory extends Drawable {
 	private final Paint mDrawPaint;
 	private final Rect mSrcRect;
 
-	public GoogleMonochromeIconFactory(int iconBitmapSize) {
-
+	/** @noinspection deprecation*/
+	public GoogleMonochromeIconFactory(Drawable icon, int iconBitmapSize) {
 		float extraFactor = AdaptiveIconDrawable.getExtraInsetFraction();
 		float viewPortScale = 1 / (1 + 2 * extraFactor);
 		mBitmapSize = Math.round(iconBitmapSize * 2 * viewPortScale);
@@ -84,6 +85,8 @@ public class GoogleMonochromeIconFactory extends Drawable {
 		vals[15] = vals[16] = vals[17] = .3333f;
 		vals[18] = vals[19] = 0;
 		mCopyPaint.setColorFilter(new ColorMatrixColorFilter(vals));
+
+		convertMono(icon);
 	}
 
 	private void drawDrawable(Drawable drawable) {
@@ -97,7 +100,7 @@ public class GoogleMonochromeIconFactory extends Drawable {
 	 * Creates a monochrome version of the provided drawable
 	 */
 	@WorkerThread
-	public Drawable wrap(Drawable icon) {
+	public void convertMono(Drawable icon) {
 		try
 		{
 			if (icon instanceof AdaptiveIconDrawable) {
@@ -106,7 +109,7 @@ public class GoogleMonochromeIconFactory extends Drawable {
 				drawDrawable(aid.getBackground());
 				drawDrawable(aid.getForeground());
 				generateMono();
-				return this;
+				return;
 			}
 		}
 		catch (Throwable ignored){}
@@ -115,11 +118,9 @@ public class GoogleMonochromeIconFactory extends Drawable {
 			mFlatCanvas.drawColor(Color.WHITE);
 			drawDrawable(icon);
 			generateMono();
-			return this;
 		}
 		catch (Throwable ignored)
 		{ // WTF?!
-			return null;
 		}
 	}
 
@@ -163,6 +164,7 @@ public class GoogleMonochromeIconFactory extends Drawable {
 			}
 			buffer.rewind();
 			mAlphaBitmap.copyPixelsFromBuffer(buffer);
+			setBitmap(mAlphaBitmap);
 		}
 	}
 

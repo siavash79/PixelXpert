@@ -1,14 +1,15 @@
 package sh.siava.pixelxpert.modpacks.launcher;
 
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
+import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
-import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.hookAllConstructors;
 
 import android.content.Context;
 import android.graphics.drawable.AdaptiveIconDrawable;
-import android.graphics.drawable.Drawable;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -21,7 +22,6 @@ public class FeatureFlags extends XposedModPack {
 	private static final String listenPackage = Constants.LAUNCHER_PACKAGE;
 	private static boolean ForceThemedLauncherIcons = false;
 	private int mIconBitmapSize;
-	private GoogleMonochromeIconFactory mGoogleMonochromeIconFactory;
 
 	public FeatureFlags(Context context) {
 		super(context);
@@ -55,11 +55,13 @@ public class FeatureFlags extends XposedModPack {
 					try {
 						if(param.getResult() == null && ForceThemedLauncherIcons)
 						{
-							if(mGoogleMonochromeIconFactory == null)
+							GoogleMonochromeIconFactory mono = (GoogleMonochromeIconFactory) getAdditionalInstanceField(param.thisObject, "mMonoFactoryPX");
+							if(mono == null)
 							{
-								mGoogleMonochromeIconFactory = new GoogleMonochromeIconFactory(mIconBitmapSize);
+								mono = new GoogleMonochromeIconFactory((AdaptiveIconDrawable) param.thisObject, mIconBitmapSize);
+								setAdditionalInstanceField(param.thisObject, "mMonoFactoryPX", mono);
 							}
-							param.setResult(mGoogleMonochromeIconFactory.wrap((Drawable) param.thisObject));
+							param.setResult(mono);
 						}
 					}
 					catch (Throwable ignored){}

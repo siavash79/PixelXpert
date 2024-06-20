@@ -4,6 +4,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
+import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
@@ -27,7 +28,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools;
 
 @SuppressWarnings("RedundantThrows")
 public class ScreenshotManager extends XposedModPack {
@@ -84,9 +84,11 @@ public class ScreenshotManager extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!disableScreenshotSound) return;
 
-				((ExecutorService) getObjectField(param.thisObject, "mBgExecutor")).shutdownNow();
+				if(findFieldIfExists(ScreenshotControllerClass, "mScreenshotSoundController") == null) { //Since 15B3 bg executor has other usages than sound. Don't kill it if that's the case
+					((ExecutorService) getObjectField(param.thisObject, "mBgExecutor")).shutdownNow();
 
-				setObjectField(param.thisObject, "mBgExecutor", new NoExecutor());
+					setObjectField(param.thisObject, "mBgExecutor", new NoExecutor());
+				}
 			}
 		});
 

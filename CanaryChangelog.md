@@ -1,3 +1,6 @@
+**canary-371**  
+- A15beta3: Fixed transparent fingerprint color  
+  
 **canary-370**  
 - A15beta3: screenshot error when sound is disabled  
 - A15beta3: fixed forced monochrome icons bug  

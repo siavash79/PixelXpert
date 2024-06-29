@@ -31,6 +31,8 @@ public class UDFPSManager extends XposedModPack {
 	private static boolean transparentBG = false;
 	private static boolean transparentFG = false;
 	private Object mDeviceEntryIconView;
+	private Class<?> StateFlowImplClass;
+	private Class<?> ReadonlyStateFlowClass;
 
 	public UDFPSManager(Context context) {
 		super(context);
@@ -67,7 +69,23 @@ public class UDFPSManager extends XposedModPack {
 		if(UdfpsKeyguardViewClass == null) //A15 Beta 2 - Compose
 		{
 			Class<?> DeviceEntryIconViewClass = findClass("com.android.systemui.keyguard.ui.view.DeviceEntryIconView", lpParam.classLoader);
-			Class<?> ForegroundIconViewModelClass = findClass("com.android.systemui.keyguard.ui.viewmodel.DeviceEntryForegroundViewModel$ForegroundIconViewModel", lpParam.classLoader);
+			Class<?> DeviceEntryIconViewModelClass = findClass("com.android.systemui.keyguard.ui.viewmodel.DeviceEntryIconViewModel", lpParam.classLoader);
+
+			StateFlowImplClass = findClass("kotlinx.coroutines.flow.StateFlowImpl", lpParam.classLoader);
+			ReadonlyStateFlowClass = findClass("kotlinx.coroutines.flow.ReadonlyStateFlow", lpParam.classLoader);
+
+			hookAllConstructors(DeviceEntryIconViewModelClass, new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if((transparentBG && !transparentFG)) {
+							try {
+								Object FalseFlow = StateFlowImplClass.getConstructor(Object.class).newInstance(false);
+								setObjectField(param.thisObject, "useBackgroundProtection", ReadonlyStateFlowClass.getConstructors()[0].newInstance(FalseFlow));
+							} catch (Throwable ignored) {}
+					}
+				}
+			});
+
 
 			hookAllConstructors(DeviceEntryIconViewClass, new XC_MethodHook() {
 				@Override
@@ -75,21 +93,6 @@ public class UDFPSManager extends XposedModPack {
 					mDeviceEntryIconView = param.thisObject;
 
 					setUDFPSGraphics(false);
-				}
-			});
-
-			hookAllConstructors(ForegroundIconViewModelClass, new XC_MethodHook() {
-				@Override
-				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-					if(transparentBG && !transparentFG)
-					{
-						@SuppressLint("DiscouragedApi")
-						int tint = getColorAttrDefaultColor(
-								mContext,
-								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
-
-						setObjectField(param.thisObject, "tint", tint);
-					}
 				}
 			});
 		}

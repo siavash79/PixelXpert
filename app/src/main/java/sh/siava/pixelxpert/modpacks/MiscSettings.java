@@ -156,6 +156,6 @@ public class MiscSettings extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 	}
 }

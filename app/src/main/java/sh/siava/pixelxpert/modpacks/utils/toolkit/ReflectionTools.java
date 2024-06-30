@@ -42,7 +42,7 @@ public class ReflectionTools {
 		XC_MethodHook hook = new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				if(false) {
+				if(true) {
 					log(param.method.getName() + " called");
 				}
 				callMethod(callback, "beforeHookedMethod", param);
@@ -86,6 +86,19 @@ public class ReflectionTools {
 			log(t.getStackTrace()[1].getClassName() + " " + t.getStackTrace()[1].getLineNumber() + " hook size " + result.size());
 		}
 		return result;
+	}
+
+	public static void runDelayedOnMainThread(View viewObject, long delay, Runnable runnable)
+	{
+		new Thread(() -> {
+			try
+			{
+				Thread.sleep(delay);
+				viewObject.post(runnable);
+			}
+			catch (Throwable ignored)
+			{}
+		}).start();
 	}
 
 	public static Set<XC_MethodHook.Unhook> hookAllMethodsMatchPattern(Class<?> clazz, String namePatter, XC_MethodHook callback)
@@ -202,6 +215,22 @@ public class ReflectionTools {
 		}
 	}
 
+	public static void dumpParentIDs(View v)
+	{
+		dumpParentIDs(v, 0);
+	}
+
+	private static void dumpParentIDs(View v, int level) {
+		dumpID(v, level);
+		try {
+			if(v.getParent() instanceof View)
+			{
+				dumpParentIDs((View) v.getParent(), level+1);
+			}
+		}
+		catch (Throwable ignored){}
+	}
+
 	public static void dumpIDs(View v)
 	{
 		dumpIDs(v, 0);
@@ -220,16 +249,19 @@ public class ReflectionTools {
 	}
 	private static void dumpID(View v, int level)
 	{
+		String name = "**";
+		StringBuilder str = new StringBuilder();
+		for(int i = 0; i < level; i++)
+		{
+			str.append("\t");
+		}
+
 		try {
-			StringBuilder str = new StringBuilder();
-			for(int i = 0; i < level; i++)
-			{
-				str.append("\t");
-			}
-			String name = v.getContext().getResources().getResourceName(v.getId());
-			log(str+ "id " + name + " type " + v.getClass().getName());
+			name = v.getContext().getResources().getResourceName(v.getId());
 		}
 		catch (Throwable ignored){}
+
+		log(str+ "id " + name + " type " + v.getClass().getName());
 	}
 
 }

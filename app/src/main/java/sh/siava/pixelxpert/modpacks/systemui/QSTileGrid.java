@@ -8,6 +8,7 @@ import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
+import static de.robv.android.xposed.XposedHelpers.findMethodExactIfExists;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
@@ -57,6 +58,8 @@ public class QSTileGrid extends XposedModPack {
 	protected static boolean QSHapticEnabled = false;
 	private static boolean VerticalQSTile = false;
 
+	private int updateFontSizeMethodType = 0;
+
 	public QSTileGrid(Context context) {
 		super(context);
 	}
@@ -95,19 +98,31 @@ public class QSTileGrid extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!lpParam.packageName.equals(listenPackage)) return;
 
-		Class<?> tileLayoutClass = findClass("com.android.systemui.qs.TileLayout", lpparam.classLoader);
-		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpparam.classLoader);
-		Class<?> FontSizeUtilsClass = findClass("com.android.systemui.FontSizeUtils", lpparam.classLoader);
-		Class<?> QSTileImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpparam.classLoader);
-		Class<?> QSFactoryImplClass = findClass("com.android.systemui.qs.tileimpl.QSFactoryImpl", lpparam.classLoader);
-		Class<?> QuickQSPanelControllerClass = findClass("com.android.systemui.qs.QuickQSPanelController", lpparam.classLoader);
-		Class<?> QuickQSPanelClass =findClass("com.android.systemui.qs.QuickQSPanel", lpparam.classLoader);
-		Class<?> TileAdapterClass = findClass("com.android.systemui.qs.customize.TileAdapter", lpparam.classLoader);
-		Class<?> SideLabelTileLayoutClass = findClass("com.android.systemui.qs.SideLabelTileLayout", lpparam.classLoader);
+		Class<?> QSTileViewImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileViewImpl", lpParam.classLoader);
+		Class<?> FontSizeUtilsClass = findClass("com.android.systemui.FontSizeUtils", lpParam.classLoader);
+		Class<?> QSTileImplClass = findClass("com.android.systemui.qs.tileimpl.QSTileImpl", lpParam.classLoader);
+		Class<?> QSFactoryImplClass = findClass("com.android.systemui.qs.tileimpl.QSFactoryImpl", lpParam.classLoader);
+		Class<?> QuickQSPanelControllerClass = findClass("com.android.systemui.qs.QuickQSPanelController", lpParam.classLoader);
+		Class<?> QuickQSPanelClass =findClass("com.android.systemui.qs.QuickQSPanel", lpParam.classLoader);
+		Class<?> TileAdapterClass = findClass("com.android.systemui.qs.customize.TileAdapter", lpParam.classLoader);
+		Class<?> SideLabelTileLayoutClass = findClass("com.android.systemui.qs.SideLabelTileLayout", lpParam.classLoader);
 
+		Class<?> TileLayoutClass = findClassIfExists("com.android.systemui.qs.TileLayout", lpParam.classLoader);
+		if(TileLayoutClass == null) //new versions have merged tile layout to sidelable
+		{
+			TileLayoutClass = SideLabelTileLayoutClass;
+		}
+
+		if(findMethodExactIfExists(FontSizeUtilsClass,
+				"updateFontSize",
+				TextView.class, int.class)
+				!= null)
+		{
+			updateFontSizeMethodType = 1;
+		}
 		hookAllMethods(SideLabelTileLayoutClass, "updateResources", new XC_MethodHook() {
 			@SuppressLint("DiscouragedApi")
 			@Override
@@ -131,7 +146,7 @@ public class QSTileGrid extends XposedModPack {
 				}
 			}
 		});
-		hookAllMethods(tileLayoutClass, "updateResources", new XC_MethodHook() {
+		hookAllMethods(TileLayoutClass, "updateResources", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(getQSCols() != QS_COL_NOT_SET || getQSRows() != NOT_SET)
@@ -167,7 +182,7 @@ public class QSTileGrid extends XposedModPack {
 		});
 
 		try {
-			if(findClassIfExists("com.android.systemui.qs.tiles.WifiTile", lpparam.classLoader) == null)
+			if(findClassIfExists("com.android.systemui.qs.tiles.WifiTile", lpParam.classLoader) == null)
 				Xprefs
 						.edit()
 						.putBoolean("InternetTileModEnabled", false)
@@ -208,7 +223,7 @@ public class QSTileGrid extends XposedModPack {
 			}
 		});
 
-		Class<?> QRCodeScannerTileClass = findClassIfExists("com.android.systemui.qs.tiles.QRCodeScannerTile", lpparam.classLoader);
+		Class<?> QRCodeScannerTileClass = findClassIfExists("com.android.systemui.qs.tiles.QRCodeScannerTile", lpParam.classLoader);
 
 		if (QRCodeScannerTileClass != null) {
 			hookAllMethods(QRCodeScannerTileClass, "handleUpdateState", new XC_MethodHook() {
@@ -264,15 +279,13 @@ public class QSTileGrid extends XposedModPack {
 					}
 
 					if (labelSize == null) { //we need initial font sizes
-						callStaticMethod(FontSizeUtilsClass,
-								"updateFontSize",
-								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
-								getObjectField(param.thisObject, "label"));
+						updateFontSize(FontSizeUtilsClass,
+								getObjectField(param.thisObject, "label"),
+								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
 
-						callStaticMethod(FontSizeUtilsClass,
-								"updateFontSize",
-								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()),
-								getObjectField(param.thisObject, "secondaryLabel"));
+						updateFontSize(FontSizeUtilsClass,
+								getObjectField(param.thisObject, "secondaryLabel"),
+								mContext.getResources().getIdentifier("qs_tile_text_size", "dimen", mContext.getPackageName()));
 
 						TextView label = (TextView) getObjectField(param.thisObject, "label");
 						TextView secondaryLabel = (TextView) getObjectField(param.thisObject, "secondaryLabel");
@@ -283,13 +296,12 @@ public class QSTileGrid extends XposedModPack {
 						secondaryLabelSizeUnit = secondaryLabel.getTextSizeUnit();
 						secondaryLabelSize = secondaryLabel.getTextSize();
 					}
-				} catch (Throwable ignored) {
-				}
+				} catch (Throwable ignored) {}
 			}
 		});
 
 		// when media is played, system reverts tile cols to default value of 2. handling it:
-		hookAllMethods(tileLayoutClass, "setMaxColumns", new XC_MethodHook() {
+		hookAllMethods(TileLayoutClass, "setMaxColumns", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				Context context = (Context) getObjectField(param.thisObject, "mContext");
@@ -303,6 +315,24 @@ public class QSTileGrid extends XposedModPack {
 				}
 			}
 		});
+	}
+
+	private void updateFontSize(Class<?> FontSizeUtilsClass, Object textView, int resId)
+	{
+		if(updateFontSizeMethodType == 1)
+		{
+			callStaticMethod(FontSizeUtilsClass,
+					"updateFontSize",
+					textView,
+					resId);
+		}
+		else
+		{
+			callStaticMethod(FontSizeUtilsClass,
+					"updateFontSize",
+					resId,
+					textView);
+		}
 	}
 
 	@SuppressLint("DiscouragedApi")
@@ -379,8 +409,7 @@ public class QSTileGrid extends XposedModPack {
 			if (QSSecondaryLabelScaleFactor != 1) {
 				((TextView) getObjectField(param.thisObject, "secondaryLabel")).setTextSize(secondaryLabelSizeUnit, secondaryLabelSize * QSSecondaryLabelScaleFactor);
 			}
-		} catch (Throwable ignored) {
-		}
+		} catch (Throwable ignored) {}
 	}
 
 	@Override

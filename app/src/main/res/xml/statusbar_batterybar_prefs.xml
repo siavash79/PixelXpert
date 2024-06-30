@@ -84,6 +84,20 @@
 		android:title="@string/BB_batteryFastChargingColor"
 		app:iconSpaceReserved="false" />
 
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="indicatePowerSave"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/BB_indicate_power_save"
+		app:iconSpaceReserved="false" />
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialColorPreference
+		android:defaultValue="0xFFFFBF00"
+		android:key="batteryPowerSaveColor"
+		android:title="@string/BB_batteryPowerSaveColor"
+		app:iconSpaceReserved="false" />
+
 	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 		android:key="batteryWarningRange"
 		android:summary="@string/BB_warning_tip"

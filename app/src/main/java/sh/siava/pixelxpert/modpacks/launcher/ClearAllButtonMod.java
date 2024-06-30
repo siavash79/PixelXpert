@@ -59,11 +59,11 @@ public class ClearAllButtonMod extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!lpParam.packageName.equals(listenPackage)) return;
 
-		Class<?> OverviewActionsViewClass = findClass("com.android.quickstep.views.OverviewActionsView", lpparam.classLoader);
-		Class<?> RecentsViewClass = findClass("com.android.quickstep.views.RecentsView", lpparam.classLoader);
+		Class<?> OverviewActionsViewClass = findClass("com.android.quickstep.views.OverviewActionsView", lpParam.classLoader);
+		Class<?> RecentsViewClass = findClass("com.android.quickstep.views.RecentsView", lpParam.classLoader);
 		Method dismissAllTasksMethod = findMethodBestMatch(RecentsViewClass, "dismissAllTasks", View.class);
 
 		hookAllConstructors(RecentsViewClass, new XC_MethodHook() {

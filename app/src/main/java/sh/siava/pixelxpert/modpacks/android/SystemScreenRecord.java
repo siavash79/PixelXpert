@@ -29,10 +29,10 @@ public class SystemScreenRecord extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		try
 		{
-			Class<?> DisplayManagerServiceClass = findClass("com.android.server.display.DisplayManagerService", lpparam.classLoader);
+			Class<?> DisplayManagerServiceClass = findClass("com.android.server.display.DisplayManagerService", lpParam.classLoader);
 
 			hookAllMethods(DisplayManagerServiceClass, "canProjectSecureVideo", new XC_MethodHook() { //Granting the required permission to systemui
 				@Override

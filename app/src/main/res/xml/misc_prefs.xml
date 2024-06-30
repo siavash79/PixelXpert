@@ -9,11 +9,11 @@
 		search:ignore="true">
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="CustomThemedIconsOverlay"
-			android:summaryOff="@string/custom_themed_icons_off"
-			android:summaryOn="@string/custom_themed_icons_on"
-			android:title="@string/custom_themed_icons_title"
+			android:defaultValue="true"
+			android:key="PXInSettings"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/px_in_settings_title"
 			app:iconSpaceReserved="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
@@ -65,21 +65,6 @@
 			android:title="@string/force_no_cutout"
 			app:iconSpaceReserved="false" />
 
-		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="ForceThemedLauncherIcons"
-			android:summary="@string/reapply_themed_config"
-			android:title="@string/force_themed_icons_title"
-			app:iconSpaceReserved="false" />
-
-		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="RecentClearAllReposition"
-			android:summaryOff="@string/general_off"
-			android:summaryOn="@string/general_on"
-			android:title="@string/clear_all_reposition_title"
-			app:iconSpaceReserved="false" />
-
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			android:key="BrightnessRange"
 			android:summary="@string/brightness_range_not_linear"
@@ -124,6 +109,42 @@
 			android:title="@string/disable_overscroll"
 			app:iconSpaceReserved="false" />
 
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreference
+			android:key="remap_physical_buttons"
+			android:title="@string/remap_physical_buttons_title"
+			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$PhysicalButtonRemapFragment"
+			app:iconSpaceReserved="false" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/launcher_section"
+		app:iconSpaceReserved="false"
+		search:ignore="true">
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="CustomThemedIconsOverlay"
+			android:summaryOff="@string/custom_themed_icons_off"
+			android:summaryOn="@string/custom_themed_icons_on"
+			android:title="@string/custom_themed_icons_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="ForceThemedLauncherIcons"
+			android:summary="@string/reapply_themed_config"
+			android:title="@string/force_themed_icons_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="RecentClearAllReposition"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/clear_all_reposition_title"
+			app:iconSpaceReserved="false" />
+
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
 	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
@@ -140,11 +161,11 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 			android:layout_width="wrap_content"
-			app:defaultValue="10"
 			android:key="volumeStps"
-			app:maxVal="50"
 			android:title="@string/volume_button_step_title"
+			app:defaultValue="10"
 			app:iconSpaceReserved="false"
+			app:maxVal="50"
 			app:minVal="10"
 			app:seekBarIncrement="5"
 			app:updatesContinuously="true" />
@@ -202,19 +223,6 @@
 			android:key="fingerprintWhileDozing"
 			android:title="@string/so_fingerprint_sensor_enabled"
 			app:iconSpaceReserved="false" />
-
-		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="replaceAssistantwithTorch"
-			android:title="@string/so_power_longpress_torch_title"
-			app:iconSpaceReserved="false" />
-
-		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
-			android:defaultValue="false"
-			android:key="holdVolumeToSkip"
-			android:title="@string/so_vol_longpress_skip"
-			app:iconSpaceReserved="false" />
-
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"

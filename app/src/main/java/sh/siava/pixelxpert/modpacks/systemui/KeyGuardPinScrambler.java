@@ -43,10 +43,10 @@ public class KeyGuardPinScrambler extends XposedModPack {
 	final List<Integer> digits = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!lpParam.packageName.equals(listenPackage)) return;
 
-		Class<?> KeyguardPinBasedInputViewClass = findClass("com.android.keyguard.KeyguardPinBasedInputView", lpparam.classLoader);
+		Class<?> KeyguardPinBasedInputViewClass = findClass("com.android.keyguard.KeyguardPinBasedInputView", lpParam.classLoader);
 
 		XC_MethodHook pinShuffleHook = new XC_MethodHook() {
 			@Override

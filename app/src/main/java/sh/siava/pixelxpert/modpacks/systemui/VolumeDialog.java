@@ -34,8 +34,8 @@ public class VolumeDialog extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		Class<?> VolumeDialogImplClass = findClass("com.android.systemui.volume.VolumeDialogImpl", lpparam.classLoader);
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		Class<?> VolumeDialogImplClass = findClass("com.android.systemui.volume.VolumeDialogImpl", lpParam.classLoader);
 		hookAllMethods(VolumeDialogImplClass, "rescheduleTimeoutH", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {

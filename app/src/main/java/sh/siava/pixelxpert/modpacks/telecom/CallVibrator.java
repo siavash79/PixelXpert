@@ -43,9 +43,9 @@ public class CallVibrator extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		try {
-			Class<?> InCallControllerClass = findClass("com.android.server.telecom.InCallController", lpparam.classLoader);
+			Class<?> InCallControllerClass = findClass("com.android.server.telecom.InCallController", lpParam.classLoader);
 
 			hookAllMethods(InCallControllerClass, "onCallStateChanged", new XC_MethodHook() {
 				@Override

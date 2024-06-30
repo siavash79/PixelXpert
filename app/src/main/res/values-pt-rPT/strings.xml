@@ -37,7 +37,7 @@
 	<string name="crowdin_title">Traduza para o seu idioma</string>
 	<string name="crowdin_summary">Ajude-nos a traduzir %s para o seu idioma</string>
 	<!--Category titles-->
-	<string name="lockscreen_header_title">Ecrã de bloqueio</string>
+	<string name="lockscreen_header_title">Tela de bloqueio</string>
 	<string name="statusbar_header">Barra de estado</string>
 	<string name="nav_header">Barra de navegação</string>
 	<string name="dialer_header">Telefone &amp; marcação</string>
@@ -50,13 +50,24 @@
 	<string name="hotspot_hide_ssid_title">Esconder SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Tempo limite de inatividade</string>
 	<string name="hotspot_max_client_title">Nr. máximo de clientes</string>
+	<string name="hotspot_disable_approval_title">Solução alternativa para problemas de conectividade de ponto de acesso</string>
+	<string name="hotspot_disable_approval_summary">Permitir que clientes não \"pré-aprovados\" se conectem perfeitamente</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Papel de parede com efeito de profundidade</string>
+	<string name="depth_wallpaper_summary">Integre dinamicamente o primeiro plano do papel de parede com o relógio</string>
+	<string name="depth_wallpaper_opacity_title">Opacidade do primeiro plano do papel de parede</string>
+	<string name="depth_wallpaper_aod_title">Também no \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">O modelo AI é baixado no dispositivo</string>
+	<string name="depth_wallpaper_model_not_available">O modelo AI não está disponível no dispositivo (ainda)</string>
 	<string name="disable_unlock_hint_title">Desativar animação da dica de desbloqueio</string>
 	<string name="ls_general_options">Opções do ecrã de bloqueio</string>
 	<string name="hide_avatar_title">Remover avatar do utilizador (modo multi-utilizador)</string>
 	<string name="transparent_fingerprint_circle">Esconder círculo no ícone da impressão digital</string>
 	<string name="transparent_fingerprint_circle_off">O círculo está ativado</string>
 	<string name="transparent_fingerprint_circle_on">O círculo será escondido</string>
+	<string name="fingerprint_icon">Remova o ícone de impressão digital sob exibição</string>
+	<string name="fingerprint_icon_off">O ícone de impressão digital está ativo</string>
+	<string name="fingerprint_icon_on">O ícone de impressão digital ficará oculto</string>
 	<string name="custom_text_category">Texto personalizado no ecrã de bloqueio</string>
 	<string name="configure_carrier_text">Personalizar texto da operadora</string>
 	<string name="carrier_text_mod_disabled">Texto inalterado</string>
@@ -142,6 +153,7 @@
 	<string name="nt_mode_total">Downlaod + Upload (Combinado)</string>
 	<string name="nt_mode_rxonly">Apenas download</string>
 	<string name="nt_mode_txonly">Apenas upload</string>
+	<string name="nt_unit_show_bits">Mostrar em bits/s</string>
 	<string name="statusbar_general_options">Preferências da barra de estado</string>
 	<string name="dual_tone_battery_title">Ativar ícone de dois tons</string>
 	<string name="dual_tone_battery_on_summary">Ativado (apenas para o ícone em retrato)</string>
@@ -160,14 +172,16 @@
 	<string name="BB_Thickness_title">Espessura da barra</string>
 	<string name="BB_indicate_charging">Indicar a carregar</string>
 	<string name="BB_indicate_fast_charging">Indicar a carregar rápido</string>
+	<string name="BB_indicate_power_save">Indicar economia de energia</string>
 	<string name="BB_warning_level">Limites para bateria fraca/crítica</string>
 	<string name="BB_warning_tip">Defina 0 para ambas de modo a desativar as cores por nível</string>
 	<string name="BB_batteryCriticalColor">Cor para bateria crítica</string>
 	<string name="BB_batteryWarningColor">Cor para bateria fraca</string>
 	<string name="BB_batteryChargingColor">Cor ao carregar</string>
 	<string name="BB_batteryFastChargingColor">Cor ao carregar rápido</string>
+	<string name="BB_batteryPowerSaveColor">Cor da economia de energia</string>
 	<string name="BB_transit_colors">Cores entre o intervalo</string>
-	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
+	<string name="colored_battery_percentage_title">Cor da bateria ao carregar</string>
 	<string name="nt_stat_mode_today">Hoje</string>
 	<string name="nt_stat_mode_week">Semana atual</string>
 	<string name="nt_stat_mode_month">Mês atual</string>
@@ -211,6 +225,7 @@
 	<string name="wifi_cell_on">Usar WiFi e Dados em separado</string>
 	<string name="wifi_cell_off">Usar apenas o atalho Internet</string>
 	<string name="QQS_brightness_category">Opções do controlo de brilho</string>
+	<string name="QS_auto_brightness_title">Atalho para brilho adaptável</string>
 	<string name="QQS_brightness_title">Controlo de brilho no painel rápido das DR</string>
 	<string name="QQS_brightness_bottom_title">Controlo de brilho no fundo do painel</string>
 	<string name="QS_brightness_disable_title">Esconder o controlo de brilho</string>
@@ -243,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Forçar ativar</string>
 	<string name="taskbar_force_disable_title">Forçar desativar</string>
 	<string name="taskbar_transient_title">Ocultar automaticamente</string>
+	<string name="remap_physical_buttons_title">Remapear botões físicos</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Ignorar a assinatura das aplicações</string>
 	<string name="pm_allow_downgrade_title">Permitir o downgrade das apps</string>
 	<string name="auto_off_five_minutes">Ativado pelos próximos 5 minutos</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Opções da App Página Inicial</string>
 	<string name="screenshot_sound_disable_title">Desativar som da captura de ecrã</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Permitir capturar ecrã de conteúdo protegido</string>
@@ -280,6 +297,7 @@
 	<string name="force_aod_while_charging_summary">Manter o ecrã ligado enquanto o dispositivo carrega</string>
 	<string name="doze_header">Enquanto o ecrã está desligado…</string>
 	<string name="custom_themed_icons_title">Ícones temáticos personalizados</string>
+	<string name="px_in_settings_title">Adicione PixelXpert aos itens de configuração</string>
 	<string name="custom_themed_icons_off">Ícones personalizados inativos</string>
 	<string name="custom_themed_icons_on">Ícones personalizados ativos</string>
 	<string name="so_vol_longpress_skip">Manter premido para mudar de faixa</string>
@@ -293,6 +311,15 @@
 	<string name="disable_overscroll">Desativar o efeito elástico no final da navegação</string>
 	<string name="overscroll_on_summary">Nota: Requer ativar as apps, para as quais pretende desativar o efeito elástico, no gestor da LSposed</string>
 	<string name="milliseconds">Milissegundos</string>
+	<string name="hours">Horas</string>
+	<string name="system_time_title">Hora do sistema</string>
+	<string name="sync_ntp_time_title">Usar NTP para sincronizar dia e hora</string>
+	<string name="ntp_time_interval_title">Intervalo de sincronização</string>
+	<string name="ntp_servers_title">Servidores NTP</string>
+	<string name="ntp_servers_summary">Use ponto e vírgula para separar vários servidores</string>
+	<string name="sync_ntp_time_now_title">Sincronizar agora</string>
+	<string name="sync_ntp_successful">Data e hora sincronizada com sucesso</string>
+	<string name="sync_ntp_failed">Erro de ligação ao servidor NTP!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Painel de volume</string>
 	<string name="volume_dialog_timeout">Duração do painel de volume</string>
@@ -304,7 +331,7 @@
 	<string name="settings_cloned_apps_active">Desbloqueado para todas as aplicações via <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: Desfrute!</string>
 	<!-- SystemUI hook -->
 	<string name="battery_info_button_title">Informação da bateria…</string>
-	<string name="power_indication_error">Erro ao carregar dados</string>
+	<string name="power_indication_error">Erro ao carregar dados de carregamento</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrar ao atender chamada</string>
 	<string name="vibrate_on_call_drop_title">Vibrar ao terminar chamada</string>
@@ -362,6 +389,10 @@
 	<string name="app_kill_alert_title">Aviso</string>
 	<string name="app_kill_alert_body">A app irá encerrar. Toque no novo ícone para voltar a abrir</string>
 	<string name="app_kill_ok_btn">OK</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Atenção</string>
+	<string name="depth_effect_alert_body">Use um papel de parede de tela de bloqueio adequado, onde os elementos do primeiro plano não obstruam todo o relógio da tela de bloqueio, garantindo apelo visual e clareza funcional na tela de bloqueio.\n\nObservação: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">É necessário reiniciar o sistema para aplicar as definições</string>
 	<!-- Menu Items -->
@@ -446,4 +477,18 @@
 	<string name="navigation_update">Atualizações</string>
 	<string name="navigation_hooks">\"Hooks\"</string>
 	<string name="navigation_settings">Definições</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">Quando o ecrã está desligado</string>
+	<string name="while_screen_is_on_title">Quando o ecrã está ligado</string>
+	<string name="remap_long_press_power_button_title">Manter premido o botão de energia</string>
+	<string name="remap_long_press_volume_up_button_title">Manter premido o botão de volume para cima</string>
+	<string name="remap_long_press_volume_down_button_title">Manter premido o botão de volume para baixo</string>
+	<string name="remap_double_press_power_button_title">Toque duplo no botão de energia</string>
+	<string name="torch">Ligar/desligar lanterna</string>
+	<string name="camera">Iniciar câmara</string>
+	<string name="assistant">Iniciar Assistente</string>
+	<string name="do_not_disturb">Ativar/desativar Não incomodar</string>
+	<string name="pause_media">Reproduzir/pausar mídia</string>
+	<string name="skip_media_next">Saltar mídia</string>
+	<string name="skip_media_prev">Mídia Anterior</string>
 </resources>

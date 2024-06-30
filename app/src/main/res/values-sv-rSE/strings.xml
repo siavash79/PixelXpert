@@ -50,13 +50,24 @@
 	<string name="hotspot_hide_ssid_title">Dölj SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Timeout för inaktivitet</string>
 	<string name="hotspot_max_client_title">Maximalt antal kunder</string>
+	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
+	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
+	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
 	<string name="disable_unlock_hint_title">Inaktivera upplåsningstipsanimeringen</string>
 	<string name="ls_general_options">Alternativ för låsskärm</string>
 	<string name="hide_avatar_title">Ta bort användaravatar (fleranvändarläge)</string>
 	<string name="transparent_fingerprint_circle">Ta bort bakgrundscirkeln från fingeravtrycket under skärmen</string>
 	<string name="transparent_fingerprint_circle_off">Cirkel runt fingeravtrycksikonen är aktiv</string>
 	<string name="transparent_fingerprint_circle_on">Cirkel runt fingeravtrycksikonen döljs</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Anpassad text på låsskärm</string>
 	<string name="configure_carrier_text">Konfigurera operatörstext - Överst på skärmen</string>
 	<string name="carrier_text_mod_disabled">Operatörens text oförändrad</string>
@@ -142,6 +153,7 @@
 	<string name="nt_mode_total">Ladda ner + Ladda upp (kombinerat)</string>
 	<string name="nt_mode_rxonly">Endast nedladdning</string>
 	<string name="nt_mode_txonly">Endast ladda upp</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Statusfältsalternativ</string>
 	<string name="dual_tone_battery_title">Aktivera batterimätare med dubbla toner</string>
 	<string name="dual_tone_battery_on_summary">På (fungerar bara med stående ikon)</string>
@@ -160,12 +172,14 @@
 	<string name="BB_Thickness_title">Stångtjocklek</string>
 	<string name="BB_indicate_charging">Ange laddning</string>
 	<string name="BB_indicate_fast_charging">Indikerar snabbladdning</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Varningsnivåintervall</string>
 	<string name="BB_warning_tip">Ställ in båda på 0 för att inaktivera nivåbaserade färger</string>
 	<string name="BB_batteryCriticalColor">Kritisk nivå färg</string>
 	<string name="BB_batteryWarningColor">Färg på varningsnivån</string>
 	<string name="BB_batteryChargingColor">Laddningsfärg</string>
 	<string name="BB_batteryFastChargingColor">Snabbladdningsfärg</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Nyansfärger mellan detta intervall</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">I dag</string>
@@ -211,6 +225,7 @@
 	<string name="wifi_cell_on">Använd separata WiFi &amp; -dataplattor</string>
 	<string name="wifi_cell_off">Använd en enda Internetbricka</string>
 	<string name="QQS_brightness_category">Alternativ för skjutreglage för ljusstyrka</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Visa skjutreglaget för ljusstyrka på QQS-panelen</string>
 	<string name="QQS_brightness_bottom_title">Flytta skjutreglaget för ljusstyrka till botten</string>
 	<string name="QS_brightness_disable_title">Dölj skjutreglaget för ljusstyrka från Snabbinställningar</string>
@@ -243,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Force Enabled</string>
 	<string name="taskbar_force_disable_title">Tvinga inaktiverad</string>
 	<string name="taskbar_transient_title">Dölj automatiskt</string>
+	<string name="remap_physical_buttons_title">Remap physical buttons</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Förbigå paketsignaturkontroll</string>
 	<string name="pm_allow_downgrade_title">Tillåt appnedgradering</string>
 	<string name="auto_off_five_minutes">Aktiverad under de kommande 5 minuterna</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Launcher options</string>
 	<string name="screenshot_sound_disable_title">Inaktivera skärmdumpljud</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Tillåt skärmdumpar från begränsat innehåll</string>
@@ -280,6 +297,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Medan skärmen är avstängd…</string>
 	<string name="custom_themed_icons_title">Ikoner med anpassade teman</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Anpassade ikoner inaktiverade</string>
 	<string name="custom_themed_icons_on">Anpassade ikoner aktiverade</string>
 	<string name="so_vol_longpress_skip">Tryck länge på volymknapparna för att hoppa över musik</string>
@@ -293,6 +311,15 @@
 	<string name="disable_overscroll">Inaktivera elastisk överrullningseffekt</string>
 	<string name="overscroll_on_summary">Viktigt: du MÅSTE aktivera de appar du vill inaktivera överrullning för inom LSPosed</string>
 	<string name="milliseconds">Millisekunder</string>
+	<string name="hours">Hours</string>
+	<string name="system_time_title">System time</string>
+	<string name="sync_ntp_time_title">Use NTP to sync time</string>
+	<string name="ntp_time_interval_title">Time synchronization interval</string>
+	<string name="ntp_servers_title">NTP servers</string>
+	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
+	<string name="sync_ntp_time_now_title">Sync now</string>
+	<string name="sync_ntp_successful">Time synced successfully</string>
+	<string name="sync_ntp_failed">NTP server connection error!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Volume panel</string>
 	<string name="volume_dialog_timeout">Volume dialog timeout</string>
@@ -362,6 +389,10 @@
 	<string name="app_kill_alert_title">Lägga märke till</string>
 	<string name="app_kill_alert_body">Appen stängs nu. Du kan öppna den igen genom att trycka på den nya ikonen</string>
 	<string name="app_kill_ok_btn">OK</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">En omstart av systemet krävs för att inställningarna ska gälla</string>
 	<!-- Menu Items -->
@@ -446,4 +477,18 @@
 	<string name="navigation_update">Uppdatera</string>
 	<string name="navigation_hooks">Hooks</string>
 	<string name="navigation_settings">Inställningar</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">While screen is off</string>
+	<string name="while_screen_is_on_title">While screen is on</string>
+	<string name="remap_long_press_power_button_title">Long press power button</string>
+	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
+	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
+	<string name="remap_double_press_power_button_title">Double press power button</string>
+	<string name="torch">Toggle torch</string>
+	<string name="camera">Launch camera</string>
+	<string name="assistant">Launch assistant</string>
+	<string name="do_not_disturb">Toggle Do not disturb</string>
+	<string name="pause_media">Play/Pause media</string>
+	<string name="skip_media_next">Media control - Skip</string>
+	<string name="skip_media_prev">Media control - Previous</string>
 </resources>

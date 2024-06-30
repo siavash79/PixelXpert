@@ -18,6 +18,7 @@ import sh.siava.pixelxpert.modpacks.android.ScreenRotation;
 import sh.siava.pixelxpert.modpacks.android.StatusbarSize;
 import sh.siava.pixelxpert.modpacks.android.SystemScreenRecord;
 import sh.siava.pixelxpert.modpacks.dialer.RecordingMessage;
+import sh.siava.pixelxpert.modpacks.ksu.KSUInjector;
 import sh.siava.pixelxpert.modpacks.launcher.ClearAllButtonMod;
 import sh.siava.pixelxpert.modpacks.launcher.CustomNavGestures;
 import sh.siava.pixelxpert.modpacks.launcher.FeatureFlags;
@@ -28,11 +29,13 @@ import sh.siava.pixelxpert.modpacks.settings.PXSettingsLauncher;
 import sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider;
 import sh.siava.pixelxpert.modpacks.systemui.BatteryStyleManager;
 import sh.siava.pixelxpert.modpacks.systemui.BrightnessSlider;
+import sh.siava.pixelxpert.modpacks.systemui.DepthWallpaper;
 import sh.siava.pixelxpert.modpacks.systemui.EasyUnlock;
 import sh.siava.pixelxpert.modpacks.systemui.FeatureFlagsMods;
 import sh.siava.pixelxpert.modpacks.systemui.FingerprintWhileDozing;
 import sh.siava.pixelxpert.modpacks.systemui.FlashLightLevel;
 import sh.siava.pixelxpert.modpacks.systemui.GestureNavbarManager;
+import sh.siava.pixelxpert.modpacks.systemui.KSURootReceiver;
 import sh.siava.pixelxpert.modpacks.systemui.KeyGuardPinScrambler;
 import sh.siava.pixelxpert.modpacks.systemui.KeyguardMods;
 import sh.siava.pixelxpert.modpacks.systemui.MultiStatusbarRows;
@@ -43,7 +46,6 @@ import sh.siava.pixelxpert.modpacks.systemui.QSTileGrid;
 import sh.siava.pixelxpert.modpacks.systemui.ScreenGestures;
 import sh.siava.pixelxpert.modpacks.systemui.ScreenRecord;
 import sh.siava.pixelxpert.modpacks.systemui.ScreenshotManager;
-import sh.siava.pixelxpert.modpacks.systemui.SettingsLibUtilsProvider;
 import sh.siava.pixelxpert.modpacks.systemui.StatusbarGestures;
 import sh.siava.pixelxpert.modpacks.systemui.StatusbarMods;
 import sh.siava.pixelxpert.modpacks.systemui.ThemeManager_13;
@@ -62,9 +64,7 @@ public class ModPacks {
 	{
 		ArrayList<Class<? extends XposedModPack>> modPacks = new ArrayList<>();
 
-		//Should be loaded before others
-		modPacks.add(ThermalProvider.class);
-		modPacks.add(SettingsLibUtilsProvider.class);
+		//all packages
 		modPacks.add(HookTester.class);
 
 		switch (packageName)
@@ -80,6 +80,7 @@ public class ModPacks {
 				modPacks.add(RingerVolSeperator.class);
 				modPacks.add(SystemScreenRecord.class);
 				break;
+
 			case Constants.SYSTEM_UI_PACKAGE:
 				if(XPLauncher.isChildProcess && XPLauncher.processName.contains("screenshot"))
 				{
@@ -87,7 +88,10 @@ public class ModPacks {
 				}
 				else
 				{
-					if(Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+					//load before others
+					modPacks.add(ThermalProvider.class);
+
+					if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 					{
 						setOverlay("QSLightThemeOverlay", false, true, true);
 						modPacks.add(ThemeManager_14.class);
@@ -96,6 +100,7 @@ public class ModPacks {
 					{
 						modPacks.add(ThemeManager_13.class);
 					}
+
 					modPacks.add(BatteryDataProvider.class);
 					modPacks.add(BrightnessRange.class);
 					modPacks.add(NotificationExpander.class);
@@ -122,8 +127,11 @@ public class ModPacks {
 					modPacks.add(VolumeTile.class);
 					modPacks.add(ScreenRecord.class);
 					modPacks.add(VolumeDialog.class);
+					modPacks.add(DepthWallpaper.class);
+					modPacks.add(KSURootReceiver.class);
 				}
 				break;
+
 			case Constants.LAUNCHER_PACKAGE:
 				modPacks.add(TaskbarActivator.class);
 				modPacks.add(CustomNavGestures.class);
@@ -131,17 +139,24 @@ public class ModPacks {
 				modPacks.add(PixelXpertIconUpdater.class);
 				modPacks.add(FeatureFlags.class);
 				break;
+
 			case Constants.TELECOM_SERVER_PACKAGE:
 				modPacks.add(CallVibrator.class);
 				break;
+
 			case Constants.SETTINGS_PACKAGE:
 				modPacks.add(PXSettingsLauncher.class);
 
 				if(Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU)
 					modPacks.add(AppCloneEnabler.class);
 				break;
+
 			case Constants.DIALER_PACKAGE:
 				modPacks.add(RecordingMessage.class);
+				break;
+
+			case Constants.KSU_PACKAGE:
+				modPacks.add(KSUInjector.class);
 				break;
 		}
 

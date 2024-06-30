@@ -51,11 +51,13 @@ public class BatteryDataProvider extends XposedModPack {
 	public void updatePrefs(String... Key) {}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpparam.classLoader);
-		Class<?> BatteryControllerImplClass = findClass("com.android.systemui.statusbar.policy.BatteryControllerImpl", lpparam.classLoader);
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		Class<?> BatteryStatusClass = findClass("com.android.settingslib.fuelgauge.BatteryStatus", lpParam.classLoader);
+		Class<?> BatteryControllerImplClass = findClass("com.android.systemui.statusbar.policy.BatteryControllerImpl", lpParam.classLoader);
 
-		XC_MethodHook batteryDataRefreshHook = new XC_MethodHook() {
+		//once an intent is received, it's either battery level change, powersave change, or demo mode. we don't expect demo
+		// intents normally. So it's safe to assume we'll need to update battery anyway
+		hookAllMethods(BatteryControllerImplClass, "onReceive", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				mCurrentLevel = getIntField(param.thisObject, "mLevel");
@@ -64,12 +66,9 @@ public class BatteryDataProvider extends XposedModPack {
 						|| getBooleanField(param.thisObject, "mWirelessCharging");
 				mPowerSave = getBooleanField(param.thisObject, "mPowerSave");
 
-				onBatteryInfoChanged();
+				fireBatteryInfoChanged();
 			}
-		};
-
-		hookAllMethods(BatteryControllerImplClass, "fireBatteryLevelChanged", batteryDataRefreshHook);
-		hookAllMethods(BatteryControllerImplClass, "firePowerSaveChanged", batteryDataRefreshHook);
+		});
 
 
 		hookAllConstructors(BatteryStatusClass, new XC_MethodHook() {
@@ -96,13 +95,20 @@ public class BatteryDataProvider extends XposedModPack {
 
 	public static void registerStatusCallback(BatteryStatusCallback callback)
 	{
-		instance.mStatusCallbacks.add(callback);
+		try
+		{
+			instance.mStatusCallbacks.add(callback);
+		}
+		catch (Throwable ignored) {}
 	}
 
 	/** @noinspection unused*/
 	public static void unRegisterStatusCallback(BatteryStatusCallback callback)
 	{
-		instance.mStatusCallbacks.remove(callback);
+		try {
+			instance.mStatusCallbacks.remove(callback);
+		}
+		catch (Throwable ignored){}
 	}
 
 	@Override
@@ -112,40 +118,67 @@ public class BatteryDataProvider extends XposedModPack {
 
 	public static void registerInfoCallback(BatteryInfoCallback callback)
 	{
-		instance.mInfoCallbacks.add(callback);
+		try
+		{
+			instance.mInfoCallbacks.add(callback);
+		}
+		catch (Throwable ignored){}
 	}
 
 	/** @noinspection unused*/
 	public static void unRegisterInfoCallback(BatteryInfoCallback callback)
 	{
-		instance.mInfoCallbacks.remove(callback);
+		try {
+			instance.mInfoCallbacks.remove(callback);
+		}
+		catch (Throwable ignored){}
 	}
 
 	public static boolean isCharging()
 	{
-		return instance.mCharging;
+		try {
+			return instance.mCharging;
+		}
+		catch (Throwable ignored)
+		{
+			return false;
+		}
 	}
 
 	public static int getCurrentLevel()
 	{
-		return instance.mCurrentLevel;
+		try {
+			return instance.mCurrentLevel;
+		}
+		catch (Throwable ignored)
+		{
+			return 0;
+		}
 	}
 
 	public static boolean isPowerSaving()
 	{
-		return instance.mPowerSave;
+		try {
+			return instance.mPowerSave;
+		}
+		catch (Throwable ignored)
+		{
+			return false;
+		}
 	}
 
 	public static boolean isFastCharging()
 	{
-		return instance.mCharging && instance.mIsFastCharging;
+		try {
+			return instance.mCharging && instance.mIsFastCharging;
+		}
+		catch (Throwable ignored)
+		{
+			return false;
+		}
 	}
 
-	public static void refreshAllInfoCallbacks()
-	{
-		instance.onBatteryInfoChanged();
-	}
-	private void onBatteryInfoChanged() {
+	private void fireBatteryInfoChanged() {
 		for(BatteryInfoCallback callback : mInfoCallbacks)
 		{
 			try

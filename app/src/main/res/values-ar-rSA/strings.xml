@@ -31,9 +31,9 @@
 	<string name="update_over_wifi_title">التحقق من التحديثات عبر الواي فاي فقط</string>
 	<string name="update_over_wifi_summary">التحقق من وجود تحديثات في الخلفية فقط عند الاتصال بشبكة Wi-Fi</string>
 	<string name="github_repo_title">GitHub repository</string>
-	<string name="telegram_group_title">مجموعة تيليجرام</string>
+	<string name="telegram_group_title">مجموعة Telegram</string>
 	<string name="usage_title">الاستخدام</string>
-	<string name="usage_summary">فتح صفحة ويكي</string>
+	<string name="usage_summary">فتح صفحة wiki</string>
 	<string name="crowdin_title">ترجم إلى لغتك</string>
 	<string name="crowdin_summary">ساعدنا في تَرْجَمَة خبير بيكسل إلي لغتك الخاصة</string>
 	<!--Category titles-->
@@ -50,13 +50,24 @@
 	<string name="hotspot_hide_ssid_title">إخفاء SSID</string>
 	<string name="hotspot_inactivity_timeout_title">مهلة عدم النشاط</string>
 	<string name="hotspot_max_client_title">الحد الأقصى للعملاء</string>
+	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
+	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
+	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
 	<string name="disable_unlock_hint_title">تعطيل حركة تلميح فتح القفل</string>
 	<string name="ls_general_options">خيارات قفل الشاشة</string>
 	<string name="hide_avatar_title">إزالة الصورة الرمزية للمستخدم (وضع المستخدم المتعدد)</string>
 	<string name="transparent_fingerprint_circle">إزالة دائرة الخلفية من البصمة السفلية</string>
 	<string name="transparent_fingerprint_circle_off">الدائرة حول أيقونة البصمة نشطة</string>
 	<string name="transparent_fingerprint_circle_on">الدائرة حول أيقونة بصمة الاصبع سوف تكون مخفية</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">نص مخصص على شاشة القفل</string>
 	<string name="configure_carrier_text">تكوين نص شركة الاتصالات - أعلى الشاشة</string>
 	<string name="carrier_text_mod_disabled">نص الناقل لم يتغير</string>
@@ -142,6 +153,7 @@
 	<string name="nt_mode_total">تحميل + تحميل (مجمع)</string>
 	<string name="nt_mode_rxonly">تنزيل فقط</string>
 	<string name="nt_mode_txonly">تحميل فقط</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">خيارات شريط الحالة</string>
 	<string name="dual_tone_battery_title">تمكين مقياس بطارية النغمة المزدوجة</string>
 	<string name="dual_tone_battery_on_summary">تشغيل (يعمل فقط مع أيقونة عمودية)</string>
@@ -160,14 +172,16 @@
 	<string name="BB_Thickness_title">سمك الشريط</string>
 	<string name="BB_indicate_charging">اذكر الشحن</string>
 	<string name="BB_indicate_fast_charging">حدد الشحن السريع</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">نطاق مستوى التحذير</string>
 	<string name="BB_warning_tip">تعيين كلا إلى 0 لتعطيل الألوان المستندة إلى المستوى</string>
 	<string name="BB_batteryCriticalColor">لون المستوى الحرج</string>
 	<string name="BB_batteryWarningColor">لون مستوى التحذير</string>
 	<string name="BB_batteryChargingColor">لون الشحن</string>
 	<string name="BB_batteryFastChargingColor">لون الشحن السريع</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">ألوان التظليل بين هذا النطاق</string>
-	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
+	<string name="colored_battery_percentage_title">نسبة بطارية ملونة أثناء الشحن</string>
 	<string name="nt_stat_mode_today">اليوم</string>
 	<string name="nt_stat_mode_week">الأسبوع الحالي</string>
 	<string name="nt_stat_mode_month">الشهر الحالي</string>
@@ -211,6 +225,7 @@
 	<string name="wifi_cell_on">استخدام WiFi &amp; بلاط البيانات</string>
 	<string name="wifi_cell_off">استخدام مربع إنترنت واحد</string>
 	<string name="QQS_brightness_category">خيارات شريط تمرير السطوع</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">إظهار شريط تمرير السطوع على لوحة QQS</string>
 	<string name="QQS_brightness_bottom_title">نقل شريط تمرير السطوع إلى الأسفل</string>
 	<string name="QS_brightness_disable_title">إخفاء شريط تمرير السطوع من الإعدادات السريعة</string>
@@ -243,11 +258,13 @@
 	<string name="taskbar_force_enable_title">تمكين إجباري</string>
 	<string name="taskbar_force_disable_title">تعطيل إجباري</string>
 	<string name="taskbar_transient_title">إخفاء تلقائي</string>
+	<string name="remap_physical_buttons_title">Remap physical buttons</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">تجاوز التحقق من توقيع الحزمة</string>
 	<string name="pm_allow_downgrade_title">السماح بخفض مستوى التطبيق</string>
 	<string name="auto_off_five_minutes">تمكين لمدة الدقائق الخمس التالية</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Launcher options</string>
 	<string name="screenshot_sound_disable_title">تعطيل صوت لقطة الشاشة</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">السماح لقطة الشاشة من المحتوى المقيد</string>
@@ -280,6 +297,7 @@
 	<string name="force_aod_while_charging_summary">إظهار الوقت والمعلومات دائما أثناء شحن الجهاز</string>
 	<string name="doze_header">أثناء إيقاف الشاشة…</string>
 	<string name="custom_themed_icons_title">الأيقونات المخصصة للموضوع</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">الرموز المخصصة معطلة</string>
 	<string name="custom_themed_icons_on">تم تمكين الأيقونات المخصصة</string>
 	<string name="so_vol_longpress_skip">اضغط مطولاً على أزرار الصوت لتخطي الموسيقى</string>
@@ -289,13 +307,22 @@
 	<string name="heads_up_notification_duration">مدة الإشعار بالرؤوس</string>
 	<string name="notif_default_expansion_title">توسيع الإشعارات تلقائياً</string>
 	<string name="notif_always_expand">توسيع تلقائي</string>
-	<string name="notif_always_collapse">Always collapse</string>
+	<string name="notif_always_collapse">الإنهيار دائمًا</string>
 	<string name="disable_overscroll">تعطيل تأثير التمرير المرن</string>
 	<string name="overscroll_on_summary">هام: يمكنك تمكين التطبيقات التي تريد تعطيل التمرير الزائد داخل LSPosed</string>
 	<string name="milliseconds">المللي ثانية</string>
+	<string name="hours">ساعات</string>
+	<string name="system_time_title">وقت النظام</string>
+	<string name="sync_ntp_time_title">استخدم NTP لمزامنة الوقت</string>
+	<string name="ntp_time_interval_title">المدة الزمنية للمزامنة</string>
+	<string name="ntp_servers_title">خوادم NTP</string>
+	<string name="ntp_servers_summary">استخدام المنصة لفصل عدة خوادم</string>
+	<string name="sync_ntp_time_now_title">المزامنة الآن</string>
+	<string name="sync_ntp_successful">تمت مزامنة الوقت بنجاح</string>
+	<string name="sync_ntp_failed">خطأ في اتصال سيرفر NTP!</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">لوحة مستوى الصوت</string>
+	<string name="volume_dialog_timeout">مهلة لوحة مستوى الصوت</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">الملف الشخصي للعمل/غير الشخصي</string>
 	<string name="statusbar_long_press_app_switch">اضغط مطولاً على شريط الحالة لتبديل الملف الشخصي</string>
@@ -303,8 +330,8 @@
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">مفتوح لجميع التطبيقات عبر <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font>: استمتع!</string>
 	<!-- SystemUI hook -->
-	<string name="battery_info_button_title">Battery info…</string>
-	<string name="power_indication_error">Error fetching charging data</string>
+	<string name="battery_info_button_title">معلومات البطارية…</string>
+	<string name="power_indication_error">خطأ في جلب بيانات الشحن</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">إهتزاز عند الرد على المكالمة الصادرة</string>
 	<string name="vibrate_on_call_drop_title">اهتزاز عند قطع اتصال المكالمة</string>
@@ -362,6 +389,10 @@
 	<string name="app_kill_alert_title">إشعار</string>
 	<string name="app_kill_alert_body">سيتم إغلاق التطبيق الآن. يمكنك فتحه مرة أخرى بالنقر على الرمز الجديد</string>
 	<string name="app_kill_ok_btn">حسناً</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">مطلوب إعادة تشغيل النظام لتطبيق الإعدادات</string>
 	<!-- Menu Items -->
@@ -432,9 +463,9 @@
 	<string name="package_activated">تم تفعيل الحزمة بنجاح</string>
 	<string name="package_activation_failed">فشل تنشيط الحزمة</string>
 	<string name="activate_in_lsposed">تنشيط في LSPosed</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">الحزمة غير قابلة للتشغيل</string>
+	<string name="menu_launch_app">تشغيل التطبيق</string>
+	<string name="menu_restart_app">إعادة تشغيل التطبيق</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">التحقق من أذونات الجذر…</string>
 	<string name="connecting_root_service">جارٍ الاتصال بالخدمة الجذر…</string>
@@ -446,4 +477,18 @@
 	<string name="navigation_update">تحديث</string>
 	<string name="navigation_hooks">Hooks</string>
 	<string name="navigation_settings">الإعدادات</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">While screen is off</string>
+	<string name="while_screen_is_on_title">While screen is on</string>
+	<string name="remap_long_press_power_button_title">Long press power button</string>
+	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
+	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
+	<string name="remap_double_press_power_button_title">Double press power button</string>
+	<string name="torch">Toggle torch</string>
+	<string name="camera">Launch camera</string>
+	<string name="assistant">Launch assistant</string>
+	<string name="do_not_disturb">Toggle Do not disturb</string>
+	<string name="pause_media">Play/Pause media</string>
+	<string name="skip_media_next">Media control - Skip</string>
+	<string name="skip_media_prev">Media control - Previous</string>
 </resources>

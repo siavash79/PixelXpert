@@ -48,12 +48,12 @@ public class AppCloneEnabler extends XposedModPack {
 
 	@SuppressLint("ResourceType")
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 
-		Class<?> ClonedAppsPreferenceControllerClass = findClass("com.android.settings.applications.ClonedAppsPreferenceController", lpparam.classLoader);
-		Class<?> AppStateClonedAppsBridgeClass = findClass("com.android.settings.applications.AppStateClonedAppsBridge", lpparam.classLoader);
-		Class<?> ManageApplicationsClass = findClass("com.android.settings.applications.manageapplications.ManageApplications", lpparam.classLoader);
-		UtilsClass = findClass("com.android.settings.Utils", lpparam.classLoader);
+		Class<?> ClonedAppsPreferenceControllerClass = findClass("com.android.settings.applications.ClonedAppsPreferenceController", lpParam.classLoader);
+		Class<?> AppStateClonedAppsBridgeClass = findClass("com.android.settings.applications.AppStateClonedAppsBridge", lpParam.classLoader);
+		Class<?> ManageApplicationsClass = findClass("com.android.settings.applications.manageapplications.ManageApplications", lpParam.classLoader);
+		UtilsClass = findClass("com.android.settings.Utils", lpParam.classLoader);
 
 		hookAllMethods(ManageApplicationsClass, "updateOptionsMenu", new XC_MethodHook() {
 			@Override
@@ -68,7 +68,7 @@ public class AppCloneEnabler extends XposedModPack {
 
 
 		/* Private Space
-		Class<?> FlagsClass = findClass("android.os.Flags", lpparam.classLoader);
+		Class<?> FlagsClass = findClass("android.os.Flags", lpParam.classLoader);
 
 		hookAllMethods(FlagsClass, "allowPrivateProfile", new XC_MethodHook() {
 			@Override
@@ -119,7 +119,7 @@ public class AppCloneEnabler extends XposedModPack {
 		});
 
 		//the way to manually clone the app
-/*		Class<?> CloneBackendClass = findClass("com.android.settings.applications.manageapplications.CloneBackend", lpparam.classLoader);
+/*		Class<?> CloneBackendClass = findClass("com.android.settings.applications.manageapplications.CloneBackend", lpParam.classLoader);
 
 		Object cb = callStaticMethod(CloneBackendClass, "getInstance", mContext);
 		callMethod(cb, "installCloneApp", "com.whatsapp");*/

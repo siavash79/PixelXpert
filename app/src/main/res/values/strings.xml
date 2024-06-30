@@ -55,14 +55,25 @@
 	<string name="hotspot_hide_ssid_title">Hide SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Inactivity timeout</string>
 	<string name="hotspot_max_client_title">Maximum clients</string>
+	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
+	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
 
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
+	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
 	<string name="disable_unlock_hint_title">Disable the unlock hint animation</string>
 	<string name="ls_general_options">Lock screen options</string>
 	<string name="hide_avatar_title">Remove user avatar (multi user mode)</string>
 	<string name="transparent_fingerprint_circle">Remove background circle from under-display fingerprint</string>
 	<string name="transparent_fingerprint_circle_off">Circle around fingerprint icon is active</string>
 	<string name="transparent_fingerprint_circle_on">Circle around fingerprint icon will be hidden</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Custom text on Lockscreen</string>
 	<string name="configure_carrier_text">Configure carrier text - Top of the screen</string>
 	<string name="carrier_text_mod_disabled">Carrier text unchanged</string>
@@ -150,6 +161,7 @@
 	<string name="nt_mode_total">Download + Upload (Combined)</string>
 	<string name="nt_mode_rxonly">Download only</string>
 	<string name="nt_mode_txonly">Upload only</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Status Bar Options</string>
 	<string name="dual_tone_battery_title">Enable dual tone battery meter</string>
 	<string name="dual_tone_battery_on_summary">On (only works with portrait icon)</string>
@@ -168,12 +180,14 @@
 	<string name="BB_Thickness_title">Bar thickness</string>
 	<string name="BB_indicate_charging">Indicate charging</string>
 	<string name="BB_indicate_fast_charging">Indicate fast charging</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Warning level range</string>
 	<string name="BB_warning_tip">Set both to 0 to disable level-based colors</string>
 	<string name="BB_batteryCriticalColor">Critical level color</string>
 	<string name="BB_batteryWarningColor">Warning level color</string>
 	<string name="BB_batteryChargingColor">Charging color</string>
 	<string name="BB_batteryFastChargingColor">Fast charging color</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Shade colors between this range</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 
@@ -224,6 +238,7 @@
 	<string name="wifi_cell_on">Use separate WiFi &amp; Data tiles</string>
 	<string name="wifi_cell_off">Use a single Internet tile</string>
 	<string name="QQS_brightness_category">Brightness slider options</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Show brightness slider on QQS Panel</string>
 	<string name="QQS_brightness_bottom_title">Move brightness slider to the bottom</string>
 	<string name="QS_brightness_disable_title">Hide brightness slider from Quick Settings</string>
@@ -275,6 +290,7 @@
 	<string name="taskbar_force_enable_title">Force Enabled</string>
 	<string name="taskbar_force_disable_title">Force Disabled</string>
 	<string name="taskbar_transient_title">Auto hide</string>
+	<string name="remap_physical_buttons_title">Remap physical buttons</string>
 
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Bypass package signature check</string>
@@ -282,6 +298,7 @@
 	<string name="auto_off_five_minutes">Enabled for the next 5 minutes</string>
 
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Launcher options</string>
 	<string name="screenshot_sound_disable_title">Disable screenshot sound</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Allow screenshot from restricted content</string>
@@ -318,6 +335,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">While screen is off…</string>
 	<string name="custom_themed_icons_title">Custom themed icons</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Custom icons disabled</string>
 	<string name="custom_themed_icons_on">Custom icons enabled</string>
 	<string name="so_vol_longpress_skip">Long press Volume buttons to skip music</string>
@@ -436,6 +454,11 @@
 	<string name="app_kill_alert_body">App will close now. You can open it again by tapping on the new icon</string>
 	<string name="app_kill_ok_btn">OK</string>
 
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
+
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">A system reboot is required for the settings to apply</string>
 
@@ -534,5 +557,21 @@
 	<string name="navigation_update">Update</string>
 	<string name="navigation_hooks">Hooks</string>
 	<string name="navigation_settings">Settings</string>
+
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">While screen is off</string>
+	<string name="while_screen_is_on_title">While screen is on</string>
+	<string name="remap_long_press_power_button_title">Long press power button</string>
+	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
+	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
+	<string name="remap_double_press_power_button_title">Double press power button</string>
+
+	<string name="torch">Toggle torch</string>
+	<string name="camera">Launch camera</string>
+	<string name="assistant">Launch assistant</string>
+	<string name="do_not_disturb">Toggle Do not disturb</string>
+	<string name="pause_media">Play/Pause media</string>
+	<string name="skip_media_next">Media control - Skip</string>
+	<string name="skip_media_prev">Media control - Previous</string>
 
 </resources>

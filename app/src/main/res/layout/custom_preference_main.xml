@@ -26,7 +26,7 @@
 		android:contentDescription="@android:string/untitled"
 		android:scaleType="centerInside"
 		android:visibility="gone"
-		app:tint="?attr/colorOnPrimaryContainer" />
+		app:tint="?attr/colorOnSurface" />
 
 	<RelativeLayout
 		android:id="@+id/content"

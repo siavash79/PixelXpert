@@ -1,5 +1,6 @@
 package sh.siava.pixelxpert.modpacks.utils;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
@@ -16,6 +17,7 @@ import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
@@ -185,8 +187,15 @@ public class FlexStatusIconContainer extends LinearLayout {
 				return;
 			}
 
+
+			ViewGroup parent = (ViewGroup) this.getParent();
+			if(parent.getLayoutParams().height != MATCH_PARENT)
+			{
+				parent.getLayoutParams().height = MATCH_PARENT;
+			}
+
 			int totalIconHeight = mIconSize;
-			int mTotalPossibleRows = height / totalIconHeight;
+			int totalPossibleRows = height / totalIconHeight;
 
 			int paddings = getPaddingLeft() + getPaddingRight();
 			int availableWidth = width - paddings;
@@ -197,7 +206,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 				case SORT_CLEAN:
 					mRowCount = 0;
 					mIconWidths.clear();
-					int initialCapacity = mTotalPossibleRows * MAX_ROW_ICONS;
+					int initialCapacity = totalPossibleRows * MAX_ROW_ICONS;
 
 					for (int i = getChildCount() - 1; i >= 0; i--) {
 						View icon = getChildAt(i);
@@ -205,8 +214,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 						boolean isBlocked = false;
 						try {
 							isBlocked = (boolean) callMethod(icon, "isIconBlocked");
-						} catch (Throwable ignored) {
-						}
+						} catch (Throwable ignored) {}
 
 						if ((boolean) callMethod(icon, "isIconVisible") && !isBlocked
 								&& !mIgnoredSlots.contains((String) callMethod(icon, "getSlot"))) {   //icon should be considered!
@@ -237,12 +245,13 @@ public class FlexStatusIconContainer extends LinearLayout {
 
 					//reduce iconsperrow until we find a winner
 					for (; iconsPerRow > 0 && !success; iconsPerRow--) {
-						int iconCapacity = iconsPerRow * mTotalPossibleRows - ((mHasDot) ? 1 : 0);
+						int iconCapacity = iconsPerRow * totalPossibleRows - ((mHasDot) ? 1 : 0);
 
 						if (mIconWidths.size() > iconCapacity) {
 							if (!mHasDot) {
 								mHasDot = true;
-								iconCapacity--;
+								if(iconCapacity > 0)
+									iconCapacity--;
 							}
 							mIconWidths.subList(iconCapacity, mIconWidths.size()).clear();
 						}
@@ -282,7 +291,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 					break;
 				case SORT_TIGHT:
 					mRowCount = 1;
-					int availableRows = mTotalPossibleRows - 1;
+					int availableRows = totalPossibleRows - 1;
 					int remainingWidth = availableWidth;
 					int colIndex = 0;
 
@@ -292,8 +301,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 						boolean isBlocked = false;
 						try {
 							isBlocked = (boolean) callMethod(icon, "isIconBlocked");
-						} catch (Throwable ignored) {
-						}
+						} catch (Throwable ignored) {}
 
 						if ((boolean) callMethod(icon, "isIconVisible") && !isBlocked
 								&& !mIgnoredSlots.contains((String) callMethod(icon, "getSlot"))) {   //icon should be considered!
@@ -377,8 +385,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 		super.onViewAdded(child);
 		try { //StatusIconState constructor is not accessible. using the container to construct one for us
 			callMethod(StatusIconContainer, "onViewAdded", child);
-		} catch (Throwable ignored) {
-		}
+		} catch (Throwable ignored) {}
 	}
 
 	@Override
@@ -436,8 +443,7 @@ public class FlexStatusIconContainer extends LinearLayout {
 				if (callMethod(child, "getSlot").equals(slot)) {
 					return child;
 				}
-			} catch (Throwable ignored) {
-			}
+			} catch (Throwable ignored) {}
 		}
 		return null;
 	}

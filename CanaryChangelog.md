@@ -1,3 +1,126 @@
+**canary-371**  
+- A15beta3: Fixed transparent fingerprint color  
+  
+**canary-370**  
+- A15beta3: screenshot error when sound is disabled  
+- A15beta3: fixed forced monochrome icons bug  
+  
+**canary-369**  
+- A15beta3: fixed forced monochrome icons  
+  
+**canary-368**  
+- A15beta3: fixed a bootloop caused by statusbar mods  
+- A15beta3: fixed QS light theme  
+- A15beta3: fixed multi row statusbar - system icons  
+  
+**canary-367**  
+- physical buttons remap: bugfix  
+  
+**canary-366**  
+- A14QPR2+: Fixed statusbar system icons multi row  
+- physical button gestures improved  
+- physical button gestures: bug fix  
+  
+**canary-365**  
+- physical button gestures: improvement and bug fix  
+  
+**canary-364**  
+- Fixed notification icon count limit. The setting might (... will) not work on older android versions anymore  
+  
+**canary-363**  
+- Added option to remap physical buttons to custom actions  
+  
+**canary-362**  
+- Adaptive brightness shortcut placement improved  
+  
+**canary-361**  
+- Added option to add adaptive brightness shortcut to QS panel  
+- Depth wallpaper effect: compatibility with custom lockscreen dim values  
+  
+**canary-360**  
+- Double tap to sleep: fixed QS getting randomly stuck on the screen  
+- Double tap to sleep: fixed QS getting stuck on the screen  
+  
+**canary-359**  
+- A15B2: Fixed transparent fingerprint icon  
+- Volume tile: fixed slide resulting in mute  
+  
+**canary-358**  
+- A15B2: Fixed flashlight and volume sliding tiles  
+  
+**canary-357**  
+- A15B2: Fixed various color issues  
+- A15B2: Fixed battery icon styles  
+- A15B2: Fixed notification icon container  
+  
+**canary-356**  
+- Now supporting for KernelSU  
+  
+**canary-355**  
+- Removed spam from Chinese Traditional translation  
+  
+**canary-354**  
+- Added option to enable wallpaper depth effect on AOD  
+  
+**canary-353**  
+- Depth wallpaper improvements  
+- Added option to fix wifi hotspot in certain conditions  
+  
+**canary-352**  
+- Depth wallpaper bug fixes  
+  
+**canary-351**  
+- Added: option to remove PixelXpert shortcut from phone settings  
+  
+**canary-350**  
+- Experimental: unlocked depth wallpaper for Android 13  
+  
+**canary-349**  
+- A15ap31: Fixed forced themed icons on pixel launcher  
+  
+**canary-348**  
+- Depth Wallpaper: bugfixes and performance improvement  
+  
+**canary-347**  
+- Depth wallpaper: fixed screen obstruction during HUN  
+  
+**canary-346**  
+- Depth wallpaper: fixed subject misalignment  
+  
+**canary-345**  
+- Depth wallpaper: bug fixes  
+  
+**canary-344**  
+- Added option to enable depth effect on lockscreen wallpaper  
+  
+**canary-343**  
+- A14ap21: Fixed Easy Unlock  
+- A14ap21: Fixed QS panel mods  
+  
+**canary-342**  
+- This release is brought to you by: aaronjamt and DHD2280  
+- Added option to indicate power saving on battery bar  
+- Added option to completely hide the fingerprint icon from lockscreen  
+  
+**canary-341**  
+- Happy Nowruz!  
+- Network monitor: added bit/s to options  
+- Refined leveled flashlight tile  
+  
+**canary-340**  
+- A14a21b2 & A15: Fixed system crash when adjusting volume  
+  
+**canary-339**  
+- A14ap21b2: Fixed QS Tile label sizes  
+- A14ap21b2: Fixed NotificationExpander  
+  
+**canary-338**  
+- Added March 2024's abnormal build number to support list  
+- improved root service operations  
+  
+**canary-337**  
+- Fixed power saving mode not reflecting immediately on battery icon  
+  
 **canary-336**  
 - Fixed app FC when toggling NTP  
   

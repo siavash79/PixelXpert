@@ -2,6 +2,7 @@ package sh.siava.pixelxpert.ui.activities;
 
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 import static sh.siava.pixelxpert.ui.fragments.UpdateFragment.UPDATES_CHANNEL_ID;
+import static sh.siava.pixelxpert.utils.AppUtils.isLikelyPixelBuild;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
@@ -39,16 +40,14 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.topjohnwu.superuser.Shell;
 
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.databinding.SettingsActivityBinding;
+import sh.siava.pixelxpert.ui.models.SearchPreferenceItem;
+import sh.siava.pixelxpert.utils.BitmapSubjectSegmenter;
 import sh.siava.pixelxpert.ui.fragments.HooksFragment;
 import sh.siava.pixelxpert.ui.fragments.UpdateFragment;
 import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchConfiguration;
@@ -72,11 +71,9 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	private static final String mData = "mDataKey";
 	private Integer selectedFragment = null;
 
-	String TAG = getClass().getSimpleName();
-
 	private static FragmentManager fragmentManager;
 	private HeaderFragment headerFragment;
-	private static final List<Object[]> prefsList = new ArrayList<>();
+	private static SearchPreferenceItem[] searchItems = null;
 
 	private static ActionBar actionBar;
 
@@ -112,26 +109,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		fragmentManager = getSupportFragmentManager();
 		setSupportActionBar(binding.header.toolbar);
 		actionBar = getSupportActionBar();
-
-		prefsList.add(new Object[]{R.xml.header_preferences, R.string.app_name, new HeaderFragment()});
-		prefsList.add(new Object[]{R.xml.dialer_prefs, R.string.dialer_header, new DialerFragment()});
-		prefsList.add(new Object[]{R.xml.gesture_nav_prefs, R.string.gesturenav_header, new GestureNavFragment()});
-		prefsList.add(new Object[]{R.xml.hotspot_prefs, R.string.hotspot_header, new HotSpotFragment()});
-		prefsList.add(new Object[]{R.xml.lock_screen_prefs, R.string.lockscreen_header_title, new LockScreenFragment()});
-		prefsList.add(new Object[]{R.xml.lsqs_custom_text, R.string.netstat_header, new NetworkStatFragment()});
-		prefsList.add(new Object[]{R.xml.misc_prefs, R.string.misc_header, new MiscFragment()});
-		prefsList.add(new Object[]{R.xml.nav_prefs, R.string.nav_header, new NavFragment()});
-		prefsList.add(new Object[]{R.xml.own_prefs_header, R.string.own_prefs_header, new OwnPrefsFragment()});
-		prefsList.add(new Object[]{R.xml.packagemanger_prefs, R.string.pm_header, new PackageManagerFragment()});
-		prefsList.add(new Object[]{R.xml.qs_tile_qty_prefs, R.string.qs_tile_qty_title, new QSTileQtyFragment()});
-		prefsList.add(new Object[]{R.xml.quicksettings_prefs, R.string.qs_panel_category_title, new QuickSettingsFragment()});
-		prefsList.add(new Object[]{R.xml.sbqs_network_prefs, R.string.ntsb_category_title, new NetworkFragment()});
-		prefsList.add(new Object[]{R.xml.statusbar_batterybar_prefs, R.string.sbbb_header, new SBBBFragment()});
-		prefsList.add(new Object[]{R.xml.statusbar_batteryicon_prefs, R.string.sbbIcon_header, new SBBIconFragment()});
-		prefsList.add(new Object[]{R.xml.statusbar_clock_prefs, R.string.sbc_header, new SBCFragment()});
-		prefsList.add(new Object[]{R.xml.statusbar_settings, R.string.statusbar_header, new StatusbarFragment()});
-		prefsList.add(new Object[]{R.xml.theming_prefs, R.string.theme_customization_category, new ThemingFragment()});
-		prefsList.add(new Object[]{R.xml.three_button_prefs, R.string.threebutton_header_title, new ThreeButtonNavFragment()});
+		initSearchableItems();
 
 		PreferenceHelper.init(ExtendedSharedPreferences.from(getDefaultSharedPreferences(createDeviceProtectedStorageContext())));
 
@@ -164,24 +142,39 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 		setupBottomNavigationView();
 
-		try {
-			Process process = Runtime.getRuntime().exec("getprop ro.build.id");
-			process.waitFor();
-			byte[] buffer = new byte[process.getInputStream().available()];
-			//noinspection ResultOfMethodCallIgnored
-			process.getInputStream().read(buffer);
-			String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
-			if (!Pattern.matches("^[T|U][A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result)) //Pixel standard build number of A13
-			{
-				new MaterialAlertDialogBuilder(this, R.style.MaterialComponents_MaterialAlertDialog)
-						.setTitle(R.string.incompatible_alert_title)
-						.setMessage(R.string.incompatible_alert_body)
-						.setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss())
-						.show();
-			}
-		} catch (Throwable ignored) {
+		if (!isLikelyPixelBuild() && !BuildConfig.DEBUG)
+		{
+			new MaterialAlertDialogBuilder(this, R.style.MaterialComponents_MaterialAlertDialog)
+					.setTitle(R.string.incompatible_alert_title)
+					.setMessage(R.string.incompatible_alert_body)
+					.setPositiveButton(R.string.incompatible_alert_ok_btn, (dialog, which) -> dialog.dismiss())
+					.show();
 		}
+	}
 
+	private void initSearchableItems() {
+		searchItems = new SearchPreferenceItem[]{
+				new SearchPreferenceItem(R.xml.header_preferences, R.string.app_name, new HeaderFragment()),
+				new SearchPreferenceItem(R.xml.dialer_prefs, R.string.dialer_header, new DialerFragment()),
+				new SearchPreferenceItem(R.xml.gesture_nav_prefs, R.string.gesturenav_header, new GestureNavFragment()),
+				new SearchPreferenceItem(R.xml.hotspot_prefs, R.string.hotspot_header, new HotSpotFragment()),
+				new SearchPreferenceItem(R.xml.lock_screen_prefs, R.string.lockscreen_header_title, new LockScreenFragment()),
+				new SearchPreferenceItem(R.xml.lsqs_custom_text, R.string.netstat_header, new NetworkStatFragment()),
+				new SearchPreferenceItem(R.xml.misc_prefs, R.string.misc_header, new MiscFragment()),
+				new SearchPreferenceItem(R.xml.nav_prefs, R.string.nav_header, new NavFragment()),
+				new SearchPreferenceItem(R.xml.own_prefs_header, R.string.own_prefs_header, new OwnPrefsFragment()),
+				new SearchPreferenceItem(R.xml.packagemanger_prefs, R.string.pm_header, new PackageManagerFragment()),
+				new SearchPreferenceItem(R.xml.qs_tile_qty_prefs, R.string.qs_tile_qty_title, new QSTileQtyFragment()),
+				new SearchPreferenceItem(R.xml.quicksettings_prefs, R.string.qs_panel_category_title, new QuickSettingsFragment()),
+				new SearchPreferenceItem(R.xml.sbqs_network_prefs, R.string.ntsb_category_title, new NetworkFragment()),
+				new SearchPreferenceItem(R.xml.statusbar_batterybar_prefs, R.string.sbbb_header, new SBBBFragment()),
+				new SearchPreferenceItem(R.xml.statusbar_batteryicon_prefs, R.string.sbbIcon_header, new SBBIconFragment()),
+				new SearchPreferenceItem(R.xml.statusbar_clock_prefs, R.string.sbc_header, new SBCFragment()),
+				new SearchPreferenceItem(R.xml.statusbar_settings, R.string.statusbar_header, new StatusbarFragment()),
+				new SearchPreferenceItem(R.xml.theming_prefs, R.string.theme_customization_category, new ThemingFragment()),
+				new SearchPreferenceItem(R.xml.three_button_prefs, R.string.threebutton_header_title, new ThreeButtonNavFragment()),
+				new SearchPreferenceItem(R.xml.physical_buttons_prefs, R.string.remap_physical_buttons_title, new PhysicalButtonRemapFragment()),
+		};
 	}
 
 	@SuppressLint("NonConstantResourceId")
@@ -285,7 +278,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		String migrateFileName = "PX_migrate.tmp";
 		@SuppressLint("SdCardPath")
 		String migrateFilePath = "/sdcard/" + migrateFileName;
-		if (Shell.cmd(String.format("stat %s", migrateFilePath)).exec().getOut().size() > 0) {
+		if (!Shell.cmd(String.format("stat %s", migrateFilePath)).exec().getOut().isEmpty()) {
 			String PXPrefsPath = "/data/user_de/0/sh.siava.pixelxpert/shared_prefs/sh.siava.pixelxpert_preferences.xml";
 			Shell.cmd(String.format("mv %s %s", migrateFilePath, PXPrefsPath)).exec();
 			Shell.cmd(String.format("chmod 777 %s", PXPrefsPath)).exec(); //system will correct the permissions upon next launch. let's just give it access to do so
@@ -440,17 +433,20 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 			super.onCreatePreferences(savedInstanceState, rootKey);
 
 			searchPreference = findPreference("searchPreference");
-			SearchConfiguration config = searchPreference.getSearchConfiguration();
-			config.setActivity((AppCompatActivity) getActivity());
-			config.setFragmentContainerViewId(R.id.settings);
 
-			for (Object[] obj : prefsList) {
-				config.index((Integer) obj[0]).addBreadcrumb(this.getResources().getString((Integer) obj[1]));
+			if (searchPreference != null && getActivity() != null) {
+				SearchConfiguration config = searchPreference.getSearchConfiguration();
+				config.setActivity((AppCompatActivity) getActivity());
+				config.setFragmentContainerViewId(R.id.settings);
+
+				for (SearchPreferenceItem searchItem : searchItems) {
+					config.index(searchItem.getXml()).addBreadcrumb(this.getResources().getString(searchItem.getTitle()));
+				}
+
+				config.setBreadcrumbsEnabled(true);
+				config.setHistoryEnabled(true);
+				config.setFuzzySearchEnabled(false);
 			}
-
-			config.setBreadcrumbsEnabled(true);
-			config.setHistoryEnabled(true);
-			config.setFuzzySearchEnabled(false);
 		}
 
 		private void onSearchResultClicked(SearchPreferenceResult result) {
@@ -458,10 +454,10 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 				searchPreference.setVisible(false);
 				SearchPreferenceResult.highlight(new HeaderFragment(), result.getKey());
 			} else {
-				for (Object[] obj : prefsList) {
-					if ((Integer) obj[0] == result.getResourceFile()) {
-						replaceFragment((PreferenceFragmentCompat) obj[2]);
-						SearchPreferenceResult.highlight((PreferenceFragmentCompat) obj[2], result.getKey());
+				for (SearchPreferenceItem searchItem : searchItems) {
+					if (searchItem.getXml() == result.getResourceFile()) {
+						replaceFragment(searchItem.getFragment());
+						SearchPreferenceResult.highlight(searchItem.getFragment(), result.getKey());
 						break;
 					}
 				}
@@ -520,6 +516,19 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 	public static class LockScreenFragment extends ControlledPreferenceFragmentCompat {
 		@Override
+		public void onCreatePreferences(Bundle savedInstanceState, String rootKey)
+		{
+			super.onCreatePreferences(savedInstanceState, rootKey);
+
+			new BitmapSubjectSegmenter(getActivity()).checkModelAvailability(moduleAvailabilityResponse ->
+					findPreference("DWallpaperEnabled")
+							.setSummary(
+									moduleAvailabilityResponse.areModulesAvailable()
+											? R.string.depth_wallpaper_model_ready
+											: R.string.depth_wallpaper_model_not_available));
+		}
+
+		@Override
 		public String getTitle() {
 			return getString(R.string.lockscreen_header_title);
 		}
@@ -527,6 +536,29 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		@Override
 		public int getLayoutResource() {
 			return R.xml.lock_screen_prefs;
+		}
+
+		@Override
+		public void updateScreen(String key) {
+			super.updateScreen(key);
+
+			if (key == null) return;
+
+			if (key.equals("DWallpaperEnabled")) {
+				try {
+					boolean DepthEffectEnabled = mPreferences.getBoolean("DWallpaperEnabled", false);
+
+					if (DepthEffectEnabled && getContext() != null) {
+						new MaterialAlertDialogBuilder(getContext(), R.style.MaterialComponents_MaterialAlertDialog)
+								.setTitle(R.string.depth_effect_alert_title)
+								.setMessage(getString(R.string.depth_effect_alert_body, getString(R.string.sysui_restart_needed)))
+								.setPositiveButton(R.string.depth_effect_ok_btn, (dialog, which) -> AppUtils.Restart("systemui"))
+								.setCancelable(false)
+								.show();
+					}
+				} catch (Exception ignored) {
+				}
+			}
 		}
 	}
 
@@ -542,7 +574,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	
 	public static class NetworkFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -555,8 +586,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-
-	
 	public static class SBBIconFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -641,8 +670,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-
-	
 	public static class SBCFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -655,7 +682,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	
 	public static class ThreeButtonNavFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -668,7 +694,19 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	
+
+	public static class PhysicalButtonRemapFragment extends ControlledPreferenceFragmentCompat {
+		@Override
+		public String getTitle() {
+			return getString(R.string.remap_physical_buttons_title);
+		}
+
+		@Override
+		public int getLayoutResource() {
+			return R.xml.physical_buttons_prefs;
+		}
+	}
+
 	public static class StatusbarFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -693,7 +731,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	
 	public static class QuickSettingsFragment extends ControlledPreferenceFragmentCompat {
 		private FrameLayout pullDownIndicator;
 
@@ -729,7 +766,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 				pullDownIndicator.setVisibility(PreferenceHelper.isVisible("QSPulldownPercent") ? View.VISIBLE : View.GONE);
 				FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) pullDownIndicator.getLayoutParams();
-				lp.width = Math.round(mPreferences.getSliderInt( "QSPulldownPercent", 25) * displayWidth / 100f);
+				lp.width = Math.round(mPreferences.getSliderInt("QSPulldownPercent", 25) * displayWidth / 100f);
 				lp.gravity = Gravity.TOP | (Integer.parseInt(mPreferences.getString("QSPulldownSide", "1")) == 1 ? Gravity.RIGHT : Gravity.LEFT);
 				pullDownIndicator.setLayoutParams(lp);
 			} catch (Exception ignored) {
@@ -750,7 +787,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	
 	public static class GestureNavFragment extends ControlledPreferenceFragmentCompat {
 
 		FrameLayout leftBackGestureIndicator, rightBackGestureIndicator;
@@ -785,9 +821,9 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 				int displayHeight = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().height();
 				int displayWidth = getActivity().getWindowManager().getCurrentWindowMetrics().getBounds().width();
 
-				float leftSwipeUpPercentage = mPreferences.getSliderFloat( "leftSwipeUpPercentage", 25);
+				float leftSwipeUpPercentage = mPreferences.getSliderFloat("leftSwipeUpPercentage", 25);
 
-				float rightSwipeUpPercentage = mPreferences.getSliderFloat( "rightSwipeUpPercentage", 25);
+				float rightSwipeUpPercentage = mPreferences.getSliderFloat("rightSwipeUpPercentage", 25);
 
 				int edgeWidth = Math.round(displayWidth * leftSwipeUpPercentage / 100f);
 				ViewGroup.LayoutParams lp = leftSwipeGestureIndicator.getLayoutParams();
@@ -805,12 +841,12 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 				setVisibility(rightBackGestureIndicator, PreferenceHelper.isVisible("BackRightHeight"), 400);
 				setVisibility(leftBackGestureIndicator, PreferenceHelper.isVisible("BackLeftHeight"), 400);
 
-				int edgeHeight = Math.round(displayHeight * mPreferences.getSliderInt( "BackRightHeight", 100) / 100f);
+				int edgeHeight = Math.round(displayHeight * mPreferences.getSliderInt("BackRightHeight", 100) / 100f);
 				lp = rightBackGestureIndicator.getLayoutParams();
 				lp.height = edgeHeight;
 				rightBackGestureIndicator.setLayoutParams(lp);
 
-				edgeHeight = Math.round(displayHeight * mPreferences.getSliderInt( "BackLeftHeight", 100) / 100f);
+				edgeHeight = Math.round(displayHeight * mPreferences.getSliderInt("BackLeftHeight", 100) / 100f);
 				lp = leftBackGestureIndicator.getLayoutParams();
 				lp.height = edgeHeight;
 				leftBackGestureIndicator.setLayoutParams(lp);
@@ -904,7 +940,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	
 	public static class NetworkStatFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -917,7 +952,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	
 	public static class DialerFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -930,7 +964,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		}
 	}
 
-	
 	public static class OwnPrefsFragment extends ControlledPreferenceFragmentCompat {
 		@Override
 		public String getTitle() {
@@ -956,7 +989,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 					.setOnPreferenceClickListener(preference -> {
 						try {
 							Intent intent = new Intent(Intent.ACTION_VIEW);
-							intent.setData(Uri.parse("https://github.com/siavash79/PixelXpert"));
+							intent.setData(Uri.parse("https://pixelxpert.siava.sh"));
 							startActivity(intent);
 						} catch (Exception ignored) {
 							Toast.makeText(getContext(), getString(R.string.browser_not_found), Toast.LENGTH_SHORT).show();
@@ -981,7 +1014,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 					.setOnPreferenceClickListener(preference -> {
 						try {
 							Intent intent = new Intent(Intent.ACTION_VIEW);
-							intent.setData(Uri.parse("https://crowdin.com/project/aospmods"));
+							intent.setData(Uri.parse("https://pixelxpert.siava.sh/translate"));
 							startActivity(intent);
 						} catch (Exception ignored) {
 							Toast.makeText(getContext(), getString(R.string.browser_not_found), Toast.LENGTH_SHORT).show();
@@ -993,7 +1026,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 					.setOnPreferenceClickListener(preference -> {
 						try {
 							Intent intent = new Intent(Intent.ACTION_VIEW);
-							intent.setData(Uri.parse("https://github.com/siavash79/PixelXpert/wiki/PixelXpert-Wiki"));
+							intent.setData(Uri.parse("https://pixelxpert.siava.sh/wiki"));
 							startActivity(intent);
 						} catch (Exception ignored) {
 							Toast.makeText(getContext(), getString(R.string.browser_not_found), Toast.LENGTH_SHORT).show();
@@ -1011,7 +1044,9 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 			switch (key) {
 				case "appLanguage":
 					try {
-						getActivity().recreate();
+						if (getActivity() != null) {
+							getActivity().recreate();
+						}
 					} catch (Exception ignored) {
 					}
 					break;
@@ -1057,7 +1092,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	}
 
 	@Override
-	protected void onNewIntent(Intent intent) {
+	protected void onNewIntent(@NonNull Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
 	}

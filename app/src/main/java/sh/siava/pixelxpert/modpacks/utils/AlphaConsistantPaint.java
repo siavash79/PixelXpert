@@ -4,8 +4,8 @@ import android.graphics.Paint;
 
 /** When setting a paint's color, alpha gets reset... naturally. So this is kind of paint that remembers its alpha and keeps it intact
  */
-public class AlphaRefreshedPaint extends Paint {
-	public AlphaRefreshedPaint(int flag) {
+public class AlphaConsistantPaint extends Paint {
+	public AlphaConsistantPaint(int flag) {
 		super(flag);
 	}
 

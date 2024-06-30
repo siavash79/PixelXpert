@@ -48,15 +48,26 @@
 	<string name="hotspot_header">Hotspot portabil</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Ascunde SSID</string>
-	<string name="hotspot_inactivity_timeout_title">Timeout inactivitate</string>
+	<string name="hotspot_inactivity_timeout_title">Expirare inactivitate</string>
 	<string name="hotspot_max_client_title">Număr maxim de clienți</string>
+	<string name="hotspot_disable_approval_title">Soluție pentru problemele de conectivitate hotspot</string>
+	<string name="hotspot_disable_approval_summary">Permite clienților care nu sunt „pre-aprobați” să se conecteze fără probleme</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Fundal cu efect de adâncime</string>
+	<string name="depth_wallpaper_summary">Integrare dinamică a imaginii de fundal cu ceasul</string>
+	<string name="depth_wallpaper_opacity_title">Opacitatea fundalului în prim-plan</string>
+	<string name="depth_wallpaper_aod_title">De asemenea, pe „Afișaj ambiental”</string>
+	<string name="depth_wallpaper_model_ready">Modelul AI a fost descărcat pe dispozitiv</string>
+	<string name="depth_wallpaper_model_not_available">Modelul AI nu este disponibil pe dispozitiv (încă)</string>
 	<string name="disable_unlock_hint_title">Dezactivează animația de indiciu a deblocării</string>
 	<string name="ls_general_options">Opțiuni pentru ecranul de blocare</string>
-	<string name="hide_avatar_title">Eliminare avatar utilizator (mod utilizatori multipli)</string>
+	<string name="hide_avatar_title">Elimină avatarul utilizatorului (mod utilizatori multipli)</string>
 	<string name="transparent_fingerprint_circle">Elimină cercul de fundal a amprentei de sub afișaj</string>
 	<string name="transparent_fingerprint_circle_off">Cercul în jurul pictogramei amprentei este activat</string>
 	<string name="transparent_fingerprint_circle_on">Cercul din jurul imaginii amprentei va fi ascuns</string>
+	<string name="fingerprint_icon">Elimină pictograma prim-plan a amprentei de sub afișaj</string>
+	<string name="fingerprint_icon_off">Pictograma amprentei este activă</string>
+	<string name="fingerprint_icon_on">Pictograma amprentei va fi ascunsă</string>
 	<string name="custom_text_category">Text personalizat pe Ecranul de blocare</string>
 	<string name="configure_carrier_text">Configurarea textului furnizorului - Partea de sus a ecranului</string>
 	<string name="carrier_text_mod_disabled">Textul furnizorului neschimbat</string>
@@ -77,7 +88,7 @@
 	<string name="dnd_shortcut">Nu deranjați</string>
 	<string name="qr_scanner_shortcut">Scaner de coduri QR</string>
 	<string name="shufflePin_title">Amestecare PIN</string>
-	<string name="wakeup_to_security_title">Afișează introducerea de securitate la activarea dispozitivului</string>
+	<string name="wakeup_to_security_title">Afișează introducerea de securitate la pornirea ecranului</string>
 	<string name="easy_unlock_title">Deblocare ușoară (Pin/Parolă)</string>
 	<string name="easy_unlock_summary">Dacă nu a funcționat pentru prima dată, încearcă din nou</string>
 	<string name="charging_info_title">Informații despre încărcare pe ecranul de blocare</string>
@@ -142,6 +153,7 @@
 	<string name="nt_mode_total">Descărcare + Încărcare (Combinat)</string>
 	<string name="nt_mode_rxonly">Doar descărcare</string>
 	<string name="nt_mode_txonly">Doar încărcare</string>
+	<string name="nt_unit_show_bits">Arată în biți/s</string>
 	<string name="statusbar_general_options">Opțiuni bară de stare</string>
 	<string name="dual_tone_battery_title">Activare baterie cu ton dual</string>
 	<string name="dual_tone_battery_on_summary">Pornit (funcționează numai cu pictograma portret)</string>
@@ -160,12 +172,14 @@
 	<string name="BB_Thickness_title">Grosimea barei</string>
 	<string name="BB_indicate_charging">Indică încărcarea</string>
 	<string name="BB_indicate_fast_charging">Indică încărcarea rapidă</string>
+	<string name="BB_indicate_power_save">Indică economisirea energiei</string>
 	<string name="BB_warning_level">Interval de avertizare</string>
 	<string name="BB_warning_tip">Setează ambele la 0 pentru a dezactiva culori bazate pe niveluri</string>
 	<string name="BB_batteryCriticalColor">Culoare nivel critic</string>
 	<string name="BB_batteryWarningColor">Culoare nivel de avertizare</string>
 	<string name="BB_batteryChargingColor">Culoare încărcare</string>
 	<string name="BB_batteryFastChargingColor">Culoare de încărcare rapidă</string>
+	<string name="BB_batteryPowerSaveColor">Culoare economisire baterie</string>
 	<string name="BB_transit_colors">Nuanță culori între aceste game</string>
 	<string name="colored_battery_percentage_title">Procentaj colorat al bateriei în timpul încărcării</string>
 	<string name="nt_stat_mode_today">Astăzi</string>
@@ -211,6 +225,7 @@
 	<string name="wifi_cell_on">Utilizează plăci separate pentru WiFi și date mobile</string>
 	<string name="wifi_cell_off">Folosește o singură dală Internet</string>
 	<string name="QQS_brightness_category">Opțiuni glisor luminozitate</string>
+	<string name="QS_auto_brightness_title">Comandă rapidă pentru luminozitatea adaptivă</string>
 	<string name="QQS_brightness_title">Arată glisorul de luminozitate în panoul setărilor rapide</string>
 	<string name="QQS_brightness_bottom_title">Mută glisorul de luminozitate în partea de jos</string>
 	<string name="QS_brightness_disable_title">Ascunde glisorul de luminozitate în setările rapide</string>
@@ -243,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Activată forțat</string>
 	<string name="taskbar_force_disable_title">Dezactivată forțat</string>
 	<string name="taskbar_transient_title">Ascundere automată</string>
+	<string name="remap_physical_buttons_title">Realocare butoane fizice</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Ignoră verificarea semnăturii pachetului</string>
 	<string name="pm_allow_downgrade_title">Permite retrogradarea aplicației</string>
 	<string name="auto_off_five_minutes">Activat pentru următoarele 5 minute</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Opțiuni lansator</string>
 	<string name="screenshot_sound_disable_title">Dezactivare sunet captură ecran</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Permite capturi de ecran din conținut restricționat</string>
@@ -280,6 +297,7 @@
 	<string name="force_aod_while_charging_summary">Păstrează Afișajul ambiental pornit în timp ce dispozitivul se încarcă</string>
 	<string name="doze_header">În timp ce ecranul este oprit…</string>
 	<string name="custom_themed_icons_title">Pictograme personalizate</string>
+	<string name="px_in_settings_title">Adaugă PixelXpert la elementele Setărilor</string>
 	<string name="custom_themed_icons_off">Pictograme personalizate dezactivate</string>
 	<string name="custom_themed_icons_on">Pictograme personalizate activate</string>
 	<string name="so_vol_longpress_skip">Apăsare lungă butoane Volum pentru a omite melodia</string>
@@ -293,6 +311,15 @@
 	<string name="disable_overscroll">Dezactivare efect de derulare elastică</string>
 	<string name="overscroll_on_summary">Important: TREBUIE să activezi aplicațiile pentru care dorești să dezactivezi derularea elastică în LSPosed</string>
 	<string name="milliseconds">Milisecunde</string>
+	<string name="hours">Ore</string>
+	<string name="system_time_title">Ora sistemului</string>
+	<string name="sync_ntp_time_title">Utilizează NTP pentru a sincroniza ora</string>
+	<string name="ntp_time_interval_title">Interval de sincronizare timp</string>
+	<string name="ntp_servers_title">Servere NTP</string>
+	<string name="ntp_servers_summary">Folosește punct și virgulă pentru a separa mai multe servere</string>
+	<string name="sync_ntp_time_now_title">Sincronizează acum</string>
+	<string name="sync_ntp_successful">Timp sincronizat cu succes</string>
+	<string name="sync_ntp_failed">Eroare de conexiune la serverul NTP!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Panou de volum</string>
 	<string name="volume_dialog_timeout">Expirare panou de volum</string>
@@ -362,6 +389,10 @@
 	<string name="app_kill_alert_title">Înștiințare</string>
 	<string name="app_kill_alert_body">Aplicația se va închide acum. O poți deschide din nou atingând noua pictogramă</string>
 	<string name="app_kill_ok_btn">Bine</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Atenție</string>
+	<string name="depth_effect_alert_body">Utilizează o imagine de fundal a ecranului de blocare adecvată în cazul în care elementele din prim-plan nu obstrucționează întregul ceas pe ecranul de blocare, asigurând atractivități vizuale și a clarități funcționale pe ecranul de blocare.\n\nNotă: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Este necesară o repornire a sistemului pentru ca setările să fie aplicate</string>
 	<!-- Menu Items -->
@@ -376,7 +407,7 @@
 	<string name="menu_updates">Actualizări aplicație</string>
 	<string name="monitoring_category_title">Opțiuni monitorizare</string>
 	<string name="netstat_header">Setări statistici de rețea</string>
-	<string name="string_formatter_manual_body_v3">Pe lângă textul normal, sunt disponibile și variabile dinamice, cum ar fi Data, Utilizarea datelor și Temperatura:\n\n$G\&lt;format\&gt; : Data gregoriană, pe baza formatului*\n$P&lt;format&gt; : Data persană, pe baza formatului*\n$Nrx : Descărcări totale în perioada specificată ** ***\n$Ntx: Încărcări totale în perioada specificată ** ***\n$Nall : Trafic total în perioada specificată ** ***\n$Nssid : Nume SSID WiFi (dacă este cazul)\n\n$T\&lt;format\&gt;[interval] : Temperatura; Formatul \npoate fi b (pentru baterie), c (pentru CPU), g (pentru GPU) și s (pentru piele) \nÎn sfârșit, există un număr OPȚIONAL de interval de actualizare în secunde (implicit: 60 de secunde)\n\n*pentru format documentație, căutați „Java Date Format”\n**Puteți specifica perioada de statistici în PixelXpert/Meniul Diverse/Setări statistici de rețea\n***Dacă înlocuiți $N cu $Nc , veți obține statistici de date mobile (de ex. $Ncrx în loc de Nrx )</string>
+	<string name="string_formatter_manual_body_v3">Pe lângă textul normal, sunt disponibile și variabile dinamice, cum ar fi Data, Utilizarea datelor și Temperatura:\n\n$G\&lt;format\&gt; : Data gregoriană, pe baza formatului*\n$P&lt;format&gt; : Data persană, pe baza formatului*\n$Nrx : Descărcări totale în perioada specificată ** ***\n$Ntx: Încărcări totale în perioada specificată ** ***\n$Nall : Trafic total în perioada specificată ** ***\n$Nssid : Nume SSID WiFi (dacă este cazul)\n\n$T\&lt;format\&gt;[interval] : Temperatura; Formatul \npoate fi b (pentru baterie), c (pentru CPU), g (pentru GPU) și s (pentru piele) \nÎn sfârșit, există un număr OPȚIONAL de interval de actualizare în secunde (implicit: 60 de secunde)\n\n*pentru format documentație, caută „Java Date Format”\n**Poți specifica perioada de statistici în PixelXpert/Meniul Diverse/Setări statistici de rețea\n***Dacă înlocuiești $N cu $Nc , vei obține statistici de date mobile (de ex. $Ncrx în loc de Nrx )</string>
 	<string name="update_channel_name">Actualizări</string>
 	<string name="update_notification_title">Actualizare descărcată</string>
 	<string name="update_notification_text">Atinge aici pentru instalare</string>
@@ -446,4 +477,18 @@
 	<string name="navigation_update">Actualizare</string>
 	<string name="navigation_hooks">Cârlige</string>
 	<string name="navigation_settings">Setări</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">În timp ce ecranul este oprit</string>
+	<string name="while_screen_is_on_title">În timp ce ecranul este pornit</string>
+	<string name="remap_long_press_power_button_title">Apăsare lungă pe butonul de alimentare</string>
+	<string name="remap_long_press_volume_up_button_title">Apăsare lungă pe butonul de volum sus</string>
+	<string name="remap_long_press_volume_down_button_title">Apăsare lungă pe butonul de volum în jos</string>
+	<string name="remap_double_press_power_button_title">Apăsare dublă a butonului de alimentare</string>
+	<string name="torch">Comutare lanternă</string>
+	<string name="camera">Lansare cameră foto</string>
+	<string name="assistant">Lansare Asistent</string>
+	<string name="do_not_disturb">Comutare Nu deranja</string>
+	<string name="pause_media">Redare/Pauză media</string>
+	<string name="skip_media_next">Control media - Omitere</string>
+	<string name="skip_media_prev">Control media - Precedent</string>
 </resources>

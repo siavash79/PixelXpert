@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
@@ -142,7 +143,7 @@
     <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />
     <option name="myNullables">
       <value>
-        <list size="13">
+        <list size="15">
           <item index="0" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
           <item index="1" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
           <item index="2" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
@@ -156,12 +157,14 @@
           <item index="10" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
           <item index="11" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
           <item index="12" class="java.lang.String" itemvalue="org.jspecify.nullness.Nullable" />
+          <item index="13" class="java.lang.String" itemvalue="org.jspecify.annotations.Nullable" />
+          <item index="14" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
         </list>
       </value>
     </option>
     <option name="myNotNulls">
       <value>
-        <list size="12">
+        <list size="14">
           <item index="0" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
           <item index="1" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
           <item index="2" class="java.lang.String" itemvalue="com.android.annotations.NonNull" />
@@ -174,6 +177,8 @@
           <item index="9" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
           <item index="10" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
           <item index="11" class="java.lang.String" itemvalue="org.jspecify.nullness.NonNull" />
+          <item index="12" class="java.lang.String" itemvalue="org.jspecify.annotations.NonNull" />
+          <item index="13" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
         </list>
       </value>
     </option>

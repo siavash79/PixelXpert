@@ -27,6 +27,31 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
+			app:allowDividerAbove="true"
+			android:key="DWallpaperEnabled"
+			android:summary="@string/depth_wallpaper_summary"
+			android:title="@string/depth_wallpaper_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
+			android:key="DWOpacity"
+			android:title="@string/depth_wallpaper_opacity_title"
+			app:defaultValue="192"
+			app:iconSpaceReserved="false"
+			app:maxVal="255"
+			app:minVal="25"
+			app:tickInterval="1"
+			app:valueCount="1" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="DWonAOD"
+			android:title="@string/depth_wallpaper_aod_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			app:allowDividerAbove="true"
 			android:key="fingerprint_circle_hide"
 			android:summaryOff="@string/transparent_fingerprint_circle_off"
 			android:summaryOn="@string/transparent_fingerprint_circle_on"
@@ -35,6 +60,15 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
+			android:key="fingerprint_icon_hide"
+			android:summaryOff="@string/fingerprint_icon_off"
+			android:summaryOn="@string/fingerprint_icon_on"
+			android:title="@string/fingerprint_icon"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			app:allowDividerAbove="true"
 			android:key="DisableUnlockHintAnimation"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"

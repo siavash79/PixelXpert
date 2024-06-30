@@ -106,20 +106,20 @@ public class TaskbarActivator extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 
-		Class<?> RecentTasksListClass = findClass("com.android.quickstep.RecentTasksList", lpparam.classLoader);
-		Class<?> AppInfoClass = findClass("com.android.launcher3.model.data.AppInfo", lpparam.classLoader);
-		Class<?> TaskbarViewClass = findClass("com.android.launcher3.taskbar.TaskbarView", lpparam.classLoader);
-		Class<?> ItemInfoClass = findClass("com.android.launcher3.model.data.ItemInfo", lpparam.classLoader);
-		Class<?> TaskbarModelCallbacksClass = findClass("com.android.launcher3.taskbar.TaskbarModelCallbacks", lpparam.classLoader);
-		Class<?> DeviceProfileClass = findClass("com.android.launcher3.DeviceProfile", lpparam.classLoader);
-		Class<?> ActivityManagerWrapperClass = findClass("com.android.systemui.shared.system.ActivityManagerWrapper", lpparam.classLoader);
-		Class<?> TaskbarActivityContextClass = findClass("com.android.launcher3.taskbar.TaskbarActivityContext", lpparam.classLoader);
-		Class<?> LauncherModelClass = findClass("com.android.launcher3.LauncherModel", lpparam.classLoader);
-		Class<?> BaseDraggingActivityClass = findClass("com.android.launcher3.BaseDraggingActivity", lpparam.classLoader);
-		Class<?> DisplayControllerClass = findClass("com.android.launcher3.util.DisplayController", lpparam.classLoader);
-		Class<?> DisplayControllerInfoClass = findClass("com.android.launcher3.util.DisplayController$Info", lpparam.classLoader);
+		Class<?> RecentTasksListClass = findClass("com.android.quickstep.RecentTasksList", lpParam.classLoader);
+		Class<?> AppInfoClass = findClass("com.android.launcher3.model.data.AppInfo", lpParam.classLoader);
+		Class<?> TaskbarViewClass = findClass("com.android.launcher3.taskbar.TaskbarView", lpParam.classLoader);
+		Class<?> ItemInfoClass = findClass("com.android.launcher3.model.data.ItemInfo", lpParam.classLoader);
+		Class<?> TaskbarModelCallbacksClass = findClass("com.android.launcher3.taskbar.TaskbarModelCallbacks", lpParam.classLoader);
+		Class<?> DeviceProfileClass = findClass("com.android.launcher3.DeviceProfile", lpParam.classLoader);
+		Class<?> ActivityManagerWrapperClass = findClass("com.android.systemui.shared.system.ActivityManagerWrapper", lpParam.classLoader);
+		Class<?> TaskbarActivityContextClass = findClass("com.android.launcher3.taskbar.TaskbarActivityContext", lpParam.classLoader);
+		Class<?> LauncherModelClass = findClass("com.android.launcher3.LauncherModel", lpParam.classLoader);
+		Class<?> BaseDraggingActivityClass = findClass("com.android.launcher3.BaseDraggingActivity", lpParam.classLoader);
+		Class<?> DisplayControllerClass = findClass("com.android.launcher3.util.DisplayController", lpParam.classLoader);
+		Class<?> DisplayControllerInfoClass = findClass("com.android.launcher3.util.DisplayController$Info", lpParam.classLoader);
 		Method commitItemsToUIMethod =  findMethodExact(TaskbarModelCallbacksClass, "commitItemsToUI");
 
 		hookAllMethods(DisplayControllerInfoClass, "isTablet", new XC_MethodHook() {
@@ -262,9 +262,7 @@ public class TaskbarActivator extends XposedModPack {
 					return;
 				new Thread(() -> {
 					refreshing = true;
-					try {
-						Thread.sleep(100);
-					} catch (Throwable ignored) {}
+					SystemUtils.threadSleep(100);
 
 					TaskBarView.post(() -> {
 						try {

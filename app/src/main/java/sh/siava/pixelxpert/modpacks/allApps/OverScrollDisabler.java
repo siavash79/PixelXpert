@@ -31,9 +31,9 @@ public class OverScrollDisabler extends XposedModPack {
 	} //This mod is compatible with every package
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 
-		Class<?> ViewClass = findClass("android.view.View", lpparam.classLoader);
+		Class<?> ViewClass = findClass("android.view.View", lpParam.classLoader);
 
 		if(disableOverScroll)
 		{

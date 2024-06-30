@@ -92,11 +92,11 @@ public class CustomNavGestures extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		Class<?> OtherActivityInputConsumerClass = findClass("com.android.quickstep.inputconsumers.OtherActivityInputConsumer", lpparam.classLoader); //When apps are open
-		Class<?> OverviewInputConsumerClass = findClass("com.android.quickstep.inputconsumers.OverviewInputConsumer", lpparam.classLoader); //When on Home screen and Recents
-		Class<?> SystemUiProxyClass = findClass("com.android.quickstep.SystemUiProxy", lpparam.classLoader);
-		Class<?> RecentTasksListClass = findClass("com.android.quickstep.RecentTasksList", lpparam.classLoader);
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		Class<?> OtherActivityInputConsumerClass = findClass("com.android.quickstep.inputconsumers.OtherActivityInputConsumer", lpParam.classLoader); //When apps are open
+		Class<?> OverviewInputConsumerClass = findClass("com.android.quickstep.inputconsumers.OverviewInputConsumer", lpParam.classLoader); //When on Home screen and Recents
+		Class<?> SystemUiProxyClass = findClass("com.android.quickstep.SystemUiProxy", lpParam.classLoader);
+		Class<?> RecentTasksListClass = findClass("com.android.quickstep.RecentTasksList", lpParam.classLoader);
 
 		Rect displayBounds = SystemUtils.WindowManager().getMaximumWindowMetrics().getBounds();
 		displayW = Math.min(displayBounds.width(), displayBounds.height());
@@ -222,32 +222,36 @@ public class CustomNavGestures extends XposedModPack {
 
 	String mTasksFieldName = null; // in case the code was obfuscated
 	private void saveFocusedTask() {
-		ArrayList<?> recentTaskList = (ArrayList<?>) callMethod(
-				mSysUiProxy,
-				"getRecentTasks",
-				1,
-				callMethod(Process.myUserHandle(), "getIdentifier"));
-
-		if(recentTaskList.size() == 0) return;
-
-		if(mTasksFieldName == null)
+		try
 		{
-			for(Field f : recentTaskList.get(0).getClass().getDeclaredFields())
+			ArrayList<?> recentTaskList = (ArrayList<?>) callMethod(
+					mSysUiProxy,
+					"getRecentTasks",
+					1,
+					callMethod(Process.myUserHandle(), "getIdentifier"));
+
+			if(recentTaskList.isEmpty()) return;
+
+			if(mTasksFieldName == null)
 			{
-				if(f.getType().getName().contains("RecentTaskInfo"))
+				for(Field f : recentTaskList.get(0).getClass().getDeclaredFields())
 				{
-					mTasksFieldName = f.getName();
+					if(f.getType().getName().contains("RecentTaskInfo"))
+					{
+						mTasksFieldName = f.getName();
+					}
 				}
 			}
+
+			Optional<?> focusedTask = recentTaskList.stream().filter(recentTask ->
+					(boolean) getObjectField(
+							((Object[]) getObjectField(recentTask, mTasksFieldName))[0],
+							"isFocused"
+					)).findFirst();
+
+			currentFocusedTask = focusedTask.map(o -> ((Object[]) getObjectField(o, mTasksFieldName))[0]).orElse(null);
 		}
-
-		Optional<?> focusedTask = recentTaskList.stream().filter(recentTask ->
-				(boolean) getObjectField(
-						((Object[]) getObjectField(recentTask, mTasksFieldName))[0],
-						"isFocused"
-				)).findFirst();
-
-		currentFocusedTask = focusedTask.map(o -> ((Object[]) getObjectField(o, mTasksFieldName))[0]).orElse(null);
+		catch (Throwable ignored){}
 	}
 
 	private void runAction(int action) {
@@ -283,10 +287,9 @@ public class CustomNavGestures extends XposedModPack {
 		new Thread(() -> {
 			try
 			{
-				Thread.sleep(200); //waiting for recents window to vanish
+				SystemUtils.threadSleep(200); //waiting for recents window to vanish
 
-				mContext.sendBroadcast(new Intent()
-						.setAction(Constants.ACTION_SWITCH_APP_PROFILE));
+				mContext.sendBroadcast(Constants.getAppProfileSwitchIntent());
 			}
 			catch (Throwable ignored)
 			{}

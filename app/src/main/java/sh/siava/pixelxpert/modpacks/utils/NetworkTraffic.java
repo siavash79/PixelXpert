@@ -66,11 +66,12 @@ public class NetworkTraffic extends FrameLayout {
 	private static boolean colorTraffic = false;
 	private static int opacity = 100;
 	private static long lastParamUpdate = 0;
+	private static boolean showInBits = false;
 
 	private final boolean isSBInstance;
 	private long lastInstanceParamUpdate = -1;
 
-	public static void setConstants(int refreshInterval, int autoHideThreshold, int indicatorMode, boolean RXonTop, boolean colorTraffic, int downloadColor, int uploadColor, int opacity, boolean showIcons) {
+	public static void setConstants(int refreshInterval, int autoHideThreshold, int indicatorMode, boolean RXonTop, boolean colorTraffic, int downloadColor, int uploadColor, int opacity, boolean showIcons, boolean showInBits) {
 		NetworkTraffic.refreshInterval = refreshInterval;
 		NetworkTraffic.autoHideThreshold = autoHideThreshold * KB;
 		NetworkTraffic.indicatorMode = indicatorMode;
@@ -80,6 +81,7 @@ public class NetworkTraffic extends FrameLayout {
 		NetworkTraffic.uploadColor = uploadColor;
 		NetworkTraffic.opacity = opacity;
 		NetworkTraffic.showIcons = showIcons;
+		NetworkTraffic.showInBits = showInBits;
 
 		lastParamUpdate = SystemClock.elapsedRealtime();
 	}
@@ -163,7 +165,7 @@ public class NetworkTraffic extends FrameLayout {
 		private SpannableStringBuilder formatOutput(long timeDelta, long data, @Nullable @ColorInt Integer textColor) {
 			long speed = (long) (data / (timeDelta / 1000F));
 
-			return ObjectTools.getHumanizedBytes(speed, .7f, (indicatorMode == MODE_SHOW_RXTX) ? " " : "\n", symbol, textColor);
+			return ObjectTools.getHumanizedBytes(speed, showInBits, .7f, (indicatorMode == MODE_SHOW_RXTX) ? " " : "\n", symbol, textColor);
 		}
 
 		private boolean shouldHide(long rxData, long txData, long timeDelta) {

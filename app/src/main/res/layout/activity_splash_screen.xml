@@ -9,6 +9,7 @@
 	android:gravity="center"
 	android:orientation="vertical"
 	android:padding="16dp"
+	android:theme="@style/Theme.Material3.DayNight.NoActionBar"
 	tools:context=".ui.activities.SplashScreenActivity">
 
 	<ImageView
@@ -49,9 +50,8 @@
 				android:layout_width="32dp"
 				android:layout_height="32dp"
 				android:indeterminate="true"
-				android:indeterminateTint="?attr/colorPrimary"
-				android:indeterminateTintMode="src_atop"
-				android:progressTint="?attr/colorPrimary" />
+				android:indeterminateTint="@color/launcher_accent"
+				android:indeterminateTintMode="src_atop" />
 
 			<com.google.android.material.textview.MaterialTextView
 				android:layout_width="wrap_content"
@@ -82,7 +82,7 @@
 				android:layout_width="32dp"
 				android:layout_height="32dp"
 				android:indeterminate="true"
-				android:indeterminateTint="?attr/colorPrimary"
+				android:indeterminateTint="@color/launcher_accent"
 				android:indeterminateTintMode="src_atop" />
 
 			<com.google.android.material.textview.MaterialTextView

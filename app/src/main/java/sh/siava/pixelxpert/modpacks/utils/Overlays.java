@@ -127,10 +127,7 @@ public class Overlays {
 		public void run() {
 			for (int i = 0; i < 2; i++) {
 				setAllInternal(false);
-				try {
-					Thread.sleep(20000);//wait some seconds in case any other mod plays with us at system startup, and apply again in background
-				} catch (Exception ignored) {
-				}
+				SystemUtils.threadSleep(20000);//wait some seconds in case any other mod plays with us at system startup, and apply again in background
 			}
 		}
 	}

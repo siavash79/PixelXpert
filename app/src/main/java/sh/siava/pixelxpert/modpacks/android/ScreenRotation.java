@@ -39,9 +39,9 @@ public class ScreenRotation extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		try {
-			Class<?> DisplayRotationClass = findClass("com.android.server.wm.DisplayRotation", lpparam.classLoader);
+			Class<?> DisplayRotationClass = findClass("com.android.server.wm.DisplayRotation", lpParam.classLoader);
 
 			hookAllMethods(DisplayRotationClass, "rotationForOrientation", new XC_MethodHook() {
 				@Override

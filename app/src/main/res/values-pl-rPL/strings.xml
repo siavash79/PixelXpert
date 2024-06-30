@@ -50,13 +50,24 @@
 	<string name="hotspot_hide_ssid_title">ukryj SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Limit czasu bezczynności</string>
 	<string name="hotspot_max_client_title">Maksymalna liczba klientów</string>
+	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
+	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
+	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
 	<string name="disable_unlock_hint_title">Wyłącz animację podpowiedzi odblokowania</string>
 	<string name="ls_general_options">Opcje ekranu blokady</string>
 	<string name="hide_avatar_title">Usuń awatar użytkownika (tryb wielu użytkowników)</string>
 	<string name="transparent_fingerprint_circle">Usuń okrąg tła z odcisku palca pod wyświetlaczem</string>
 	<string name="transparent_fingerprint_circle_off">Okrąg wokół ikony odcisku palca jest aktywny</string>
 	<string name="transparent_fingerprint_circle_on">Okrąg wokół ikony odcisku palca zostanie ukryty</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Niestandardowy tekst na ekranie blokady</string>
 	<string name="configure_carrier_text">Skonfiguruj tekst operatora — góra ekranu</string>
 	<string name="carrier_text_mod_disabled">Tekst operatora niezmieniony</string>
@@ -142,6 +153,7 @@
 	<string name="nt_mode_total">Pobierz Prześlij (łącznie)</string>
 	<string name="nt_mode_rxonly">Tylko pobierz</string>
 	<string name="nt_mode_txonly">Tylko prześlij</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Opcje paska stanu</string>
 	<string name="dual_tone_battery_title">Włącz dwutonowy miernik baterii</string>
 	<string name="dual_tone_battery_on_summary">Włączone (działa tylko z ikoną pionową)</string>
@@ -160,12 +172,14 @@
 	<string name="BB_Thickness_title">Grubość pręta</string>
 	<string name="BB_indicate_charging">Wskaż ładowanie</string>
 	<string name="BB_indicate_fast_charging">Wskaż szybkie ładowanie</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Zakres poziomu ostrzegawczego</string>
 	<string name="BB_warning_tip">Ustaw oba na 0, aby wyłączyć kolory oparte na poziomie</string>
 	<string name="BB_batteryCriticalColor">Kolor poziomu krytycznego</string>
 	<string name="BB_batteryWarningColor">Kolor poziomu ostrzeżenia</string>
 	<string name="BB_batteryChargingColor">Kolor ładowania</string>
 	<string name="BB_batteryFastChargingColor">Kolor szybkiego ładowania</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Odcień kolorów między tym zakresem</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Dzisiaj</string>
@@ -211,6 +225,7 @@
 	<string name="wifi_cell_on">Użyj oddzielnego Wi-Fi</string>
 	<string name="wifi_cell_off">Użyj jednego kafelka internetowego</string>
 	<string name="QQS_brightness_category">Opcje suwaka jasności</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Pokaż suwak jasności na panelu QQS</string>
 	<string name="QQS_brightness_bottom_title">Przesuń suwak jasności na dół</string>
 	<string name="QS_brightness_disable_title">Ukryj suwak jasności w Szybkich ustawieniach</string>
@@ -243,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Wymuś włączone</string>
 	<string name="taskbar_force_disable_title">Wymuszanie wyłączone</string>
 	<string name="taskbar_transient_title">Automatyczne chowanie</string>
+	<string name="remap_physical_buttons_title">Remap physical buttons</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Pomiń sprawdzanie podpisu pakietu</string>
 	<string name="pm_allow_downgrade_title">Zezwalaj na niższą wersję aplikacji</string>
 	<string name="auto_off_five_minutes">Włączone na następne 5 minut</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Launcher options</string>
 	<string name="screenshot_sound_disable_title">Wyłącz dźwięk zrzutu ekranu</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Zezwalaj na zrzuty ekranu z treści objętych ograniczeniami</string>
@@ -280,6 +297,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Gdy ekran jest wyłączony…</string>
 	<string name="custom_themed_icons_title">Niestandardowe ikony tematyczne</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Niestandardowe ikony wyłączone</string>
 	<string name="custom_themed_icons_on">Włączone ikony niestandardowe</string>
 	<string name="so_vol_longpress_skip">Długie naciśnięcie przycisków głośności, aby pominąć muzykę</string>
@@ -293,6 +311,15 @@
 	<string name="disable_overscroll">Wyłącz efekt elastycznego przewijania</string>
 	<string name="overscroll_on_summary">Ważne: MUSISZ włączyć aplikacje, dla których chcesz wyłączyć overscroll w ramach LSPosed</string>
 	<string name="milliseconds">milisekundy</string>
+	<string name="hours">Hours</string>
+	<string name="system_time_title">System time</string>
+	<string name="sync_ntp_time_title">Use NTP to sync time</string>
+	<string name="ntp_time_interval_title">Time synchronization interval</string>
+	<string name="ntp_servers_title">NTP servers</string>
+	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
+	<string name="sync_ntp_time_now_title">Sync now</string>
+	<string name="sync_ntp_successful">Time synced successfully</string>
+	<string name="sync_ntp_failed">NTP server connection error!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Volume panel</string>
 	<string name="volume_dialog_timeout">Volume dialog timeout</string>
@@ -362,6 +389,10 @@
 	<string name="app_kill_alert_title">Ogłoszenie</string>
 	<string name="app_kill_alert_body">Aplikacja zostanie teraz zamknięta. Możesz go otworzyć ponownie, dotykając nowej ikony</string>
 	<string name="app_kill_ok_btn">OK</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Aby ustawienia zostały zastosowane, wymagane jest ponowne uruchomienie systemu</string>
 	<!-- Menu Items -->
@@ -446,4 +477,18 @@
 	<string name="navigation_update">Update</string>
 	<string name="navigation_hooks">Hooks</string>
 	<string name="navigation_settings">Settings</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">While screen is off</string>
+	<string name="while_screen_is_on_title">While screen is on</string>
+	<string name="remap_long_press_power_button_title">Long press power button</string>
+	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
+	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
+	<string name="remap_double_press_power_button_title">Double press power button</string>
+	<string name="torch">Toggle torch</string>
+	<string name="camera">Launch camera</string>
+	<string name="assistant">Launch assistant</string>
+	<string name="do_not_disturb">Toggle Do not disturb</string>
+	<string name="pause_media">Play/Pause media</string>
+	<string name="skip_media_next">Media control - Skip</string>
+	<string name="skip_media_prev">Media control - Previous</string>
 </resources>

@@ -27,6 +27,14 @@
 		android:title="@string/network_show_icons_title"
 		app:iconSpaceReserved="false" />
 
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="networkTrafficShowInBits"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/nt_unit_show_bits"
+		app:iconSpaceReserved="false" />
+
 	<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
 		app:defaultValue="1"
 		android:key="networkTrafficInterval"

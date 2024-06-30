@@ -50,13 +50,24 @@
 	<string name="hotspot_hide_ssid_title">Nascondi SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Timeout inattività</string>
 	<string name="hotspot_max_client_title">Numero massimo client</string>
+	<string name="hotspot_disable_approval_title">Problemi di connettività hotspot</string>
+	<string name="hotspot_disable_approval_summary">Consenti ai client non \"pre-approvati\" di connettersi senza problemi</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Sfondo effetto profondità</string>
+	<string name="depth_wallpaper_summary">Integra dinamicamente il primo piano dello sfondo con l\'orologio</string>
+	<string name="depth_wallpaper_opacity_title">Opacità primo piano dello sfondo</string>
+	<string name="depth_wallpaper_aod_title">Anche su \"schermo sempre attivo\"</string>
+	<string name="depth_wallpaper_model_ready">Il modello AI è scaricato sul dispositivo</string>
+	<string name="depth_wallpaper_model_not_available">Il modello AI non è disponibile sul dispositivo (per ora)</string>
 	<string name="disable_unlock_hint_title">Disabilita animazione suggerimento di sblocco</string>
 	<string name="ls_general_options">Opzioni schermata di blocco</string>
 	<string name="hide_avatar_title">Rimuovi avatar utente (modalità multiutente)</string>
 	<string name="transparent_fingerprint_circle">Rimuovi il background dall\'icona del sensore d\'impronte sotto il display</string>
 	<string name="transparent_fingerprint_circle_off">Background icona sensore d\'impronte attivo</string>
 	<string name="transparent_fingerprint_circle_on">Background icona sensore d\'impronte disattivo</string>
+	<string name="fingerprint_icon">Rimuove l\'icona di primo piano dall\'impronta digitale sotto al display</string>
+	<string name="fingerprint_icon_off">L\'icona dell\'impronta digitale è attiva</string>
+	<string name="fingerprint_icon_on">L\'icona dell\'impronta digitale sarà nascosta</string>
 	<string name="custom_text_category">Testo personalizzato su blocco schermo</string>
 	<string name="configure_carrier_text">Configura testo operatore - Parte superiore dello schermo</string>
 	<string name="carrier_text_mod_disabled">Testo operatore invariato</string>
@@ -142,6 +153,7 @@
 	<string name="nt_mode_total">Download + Upload (Combinato)</string>
 	<string name="nt_mode_rxonly">Solo download</string>
 	<string name="nt_mode_txonly">Solo upload</string>
+	<string name="nt_unit_show_bits">Mostra in bit/s</string>
 	<string name="statusbar_general_options">Opzioni Status Bar</string>
 	<string name="dual_tone_battery_title">Abilita indicatore batteria dual-tone</string>
 	<string name="dual_tone_battery_on_summary">On (solo con icona verticale)</string>
@@ -160,12 +172,14 @@
 	<string name="BB_Thickness_title">Spessore barra</string>
 	<string name="BB_indicate_charging">Indica ricarica</string>
 	<string name="BB_indicate_fast_charging">Indica ricarica rapida</string>
+	<string name="BB_indicate_power_save">Indicare risparmio energetico</string>
 	<string name="BB_warning_level">Range livello allerta</string>
 	<string name="BB_warning_tip">Imposta entrambi a 0 per disabilitare i colori in base al livello</string>
 	<string name="BB_batteryCriticalColor">Colore livello critico</string>
 	<string name="BB_batteryWarningColor">Colore livello allerta</string>
 	<string name="BB_batteryChargingColor">Colore ricarica</string>
 	<string name="BB_batteryFastChargingColor">Colore ricarica rapida</string>
+	<string name="BB_batteryPowerSaveColor">Colore risparmio energetico</string>
 	<string name="BB_transit_colors">Sfuma i colori tra questo range</string>
 	<string name="colored_battery_percentage_title">Percentuale della batteria colorata durante la ricarica</string>
 	<string name="nt_stat_mode_today">Oggi</string>
@@ -211,6 +225,7 @@
 	<string name="wifi_cell_on">Usa tiles separati per WiFi &amp; Data</string>
 	<string name="wifi_cell_off">Usa un singolo tile Internet</string>
 	<string name="QQS_brightness_category">Opzioni slider luminosità</string>
+	<string name="QS_auto_brightness_title">Scorciatoia luminosità adattiva</string>
 	<string name="QQS_brightness_title">Mostra slider luminosità nel pannello QQS</string>
 	<string name="QQS_brightness_bottom_title">Sposta slider luminosità sul fondo</string>
 	<string name="QS_brightness_disable_title">Nascondi slider luminosità dai QS</string>
@@ -243,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Forza abilitata</string>
 	<string name="taskbar_force_disable_title">Forza disabilitata</string>
 	<string name="taskbar_transient_title">Nascondi automaticamente</string>
+	<string name="remap_physical_buttons_title">Rimappa pulsanti fisici</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Ignora controllo firma pacchetto</string>
 	<string name="pm_allow_downgrade_title">Consenti downgrade applicazione</string>
 	<string name="auto_off_five_minutes">Abilitato per i prossimi 5 minuti</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Opzioni Launcher</string>
 	<string name="screenshot_sound_disable_title">Disattiva suono screenshot</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Consenti screenshot per contenuti con restrizioni</string>
@@ -280,6 +297,7 @@
 	<string name="force_aod_while_charging_summary">Mantieni \"Always-On Display\" abilitato durante la ricarica del dispositivo</string>
 	<string name="doze_header">Mentre lo schermo è spento…</string>
 	<string name="custom_themed_icons_title">Icone a tema personalizzate</string>
+	<string name="px_in_settings_title">Aggiungi PixelXpert agli elementi delle impostazioni</string>
 	<string name="custom_themed_icons_off">Icone personalizzate disabilitate</string>
 	<string name="custom_themed_icons_on">Icone personalizzate abilitate</string>
 	<string name="so_vol_longpress_skip">Premi a lungo i pulsanti volume per saltare traccia</string>
@@ -293,6 +311,15 @@
 	<string name="disable_overscroll">Disattiva l\'effetto di overscroll elastico</string>
 	<string name="overscroll_on_summary">Importante: DEVI abilitare le app per le quali desideri disabilitare l\'overscroll all\'interno di LSPosed</string>
 	<string name="milliseconds">Milliseconds</string>
+	<string name="hours">Ore</string>
+	<string name="system_time_title">Ora di sistema</string>
+	<string name="sync_ntp_time_title">Usa NTP per sincronizzare l\'orario</string>
+	<string name="ntp_time_interval_title">Intervallo sincronizzazione dati</string>
+	<string name="ntp_servers_title">Server NTP</string>
+	<string name="ntp_servers_summary">Usa il punto e virgola per separare i server multipli</string>
+	<string name="sync_ntp_time_now_title">Sincronizza ora</string>
+	<string name="sync_ntp_successful">Orario sincronizzato con successo</string>
+	<string name="sync_ntp_failed">Errore di connessione al server NTP!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Pannello del volume</string>
 	<string name="volume_dialog_timeout">Durata del pannello volume</string>
@@ -362,6 +389,10 @@
 	<string name="app_kill_alert_title">Avviso</string>
 	<string name="app_kill_alert_body">L\'app verrà chiusa ora. Puoi aprirlo di nuovo toccando la nuova icona</string>
 	<string name="app_kill_ok_btn">OK</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attenzione</string>
+	<string name="depth_effect_alert_body">Usa uno sfondo adatto alla schermata di blocco in cui gli elementi di primo piano non ostacolano l\'intero orologio sulla schermata di blocco, garantendo sia il fascino visivo che la chiarezza funzionale sulla schermata di blocco.\n\nNota: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Per applicare le impostazioni è necessario il riavvio del sistema</string>
 	<!-- Menu Items -->
@@ -446,4 +477,18 @@
 	<string name="navigation_update">Aggiornamenti</string>
 	<string name="navigation_hooks">Hooks</string>
 	<string name="navigation_settings">Impostazioni</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">Mentre lo schermo è spento</string>
+	<string name="while_screen_is_on_title">Mentre lo schermo è acceso</string>
+	<string name="remap_long_press_power_button_title">Pressione prolungata sul tasto di accensione</string>
+	<string name="remap_long_press_volume_up_button_title">Pressione prolungata del pulsante volume su</string>
+	<string name="remap_long_press_volume_down_button_title">Pressione prolungata del pulsante volume giù</string>
+	<string name="remap_double_press_power_button_title">Premi due volte il pulsante di accensione</string>
+	<string name="torch">Accendi/Spegni torcia</string>
+	<string name="camera">Avvia fotocamera</string>
+	<string name="assistant">Avvia assistente</string>
+	<string name="do_not_disturb">Attiva/Disattiva Non disturbare</string>
+	<string name="pause_media">Riproduci/Pausa brano</string>
+	<string name="skip_media_next">Controllo multimediale - Salta</string>
+	<string name="skip_media_prev">Controllo multimediale - Precedente</string>
 </resources>

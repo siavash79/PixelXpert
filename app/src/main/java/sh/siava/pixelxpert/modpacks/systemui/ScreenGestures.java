@@ -15,6 +15,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getBooleanField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -87,22 +88,22 @@ public class ScreenGestures extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!lpParam.packageName.equals(listenPackage)) return;
 
 		mLockscreenDoubleTapToSleep = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
 			@Override
 			public boolean onDoubleTap(MotionEvent e) {
-				SystemUtils.sleep();
+				sleep();
 				return true;
 			}
 		});
 
-		Class<?> NotificationShadeWindowViewControllerClass = findClass("com.android.systemui.shade.NotificationShadeWindowViewController", lpparam.classLoader);
-		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
-		Class<?> DozeTriggersClass = findClass("com.android.systemui.doze.DozeTriggers", lpparam.classLoader);
+		Class<?> NotificationShadeWindowViewControllerClass = findClass("com.android.systemui.shade.NotificationShadeWindowViewController", lpParam.classLoader);
+		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpParam.classLoader);
+		Class<?> DozeTriggersClass = findClass("com.android.systemui.doze.DozeTriggers", lpParam.classLoader);
 
-		Class<?> PhoneStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarViewController", lpparam.classLoader);
+		Class<?> PhoneStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarViewController", lpParam.classLoader);
 
 		try { //13 QPR3
 			hookTouchHandler(PhoneStatusBarViewControllerClass);
@@ -148,10 +149,7 @@ public class ScreenGestures extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				new Thread(() -> {
-					try {
-						Thread.sleep(5000); //for some reason lsposed doesn't find methods in the class. so we'll hook to constructor and wait a bit!
-					} catch (Exception ignored) {
-					}
+					SystemUtils.threadSleep(5000); //for some reason lsposed doesn't find methods in the class. so we'll hook to constructor and wait a bit!
 					setHooks(param);
 				}).start();
 			}
@@ -251,24 +249,7 @@ public class ScreenGestures extends XposedModPack {
 		XC_MethodHook doubleTapHook = new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param1) throws Throwable {
-
-				boolean isQSExpanded;
-				if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
-				{
-					isQSExpanded = (boolean)callMethod(NotificationPanelViewController, "isShadeFullyExpanded");
-				}
-				else
-				{
-					try { //13QPR3
-						isQSExpanded = getBooleanField(
-								getObjectField(NotificationPanelViewController, "mQsController"),
-								"mExpanded");
-					} catch (Throwable ignored) {
-						isQSExpanded = getBooleanField(NotificationPanelViewController, "mQsExpanded"); //13QPR2,1
-					}
-				}
-
-				if (isQSExpanded || getBooleanField(NotificationPanelViewController, "mBouncerShowing")) {
+				if (isQSExpanded() || getBooleanField(NotificationPanelViewController, "mBouncerShowing")) {
 					return;
 				}
 				doubleTap = true;
@@ -298,12 +279,17 @@ public class ScreenGestures extends XposedModPack {
 
 				if (doubleTap && action == ACTION_UP) {
 					if (doubleTapToSleepLockscreenEnabled && !isDozing)
-						SystemUtils.sleep();
+						sleep();
 					doubleTap = false;
 				}
 
 				if (!holdScreenTorchEnabled) return;
+
 				if ((action == ACTION_DOWN || action == ACTION_MOVE)) {
+					if(doubleTap || turnedByTTT) //we really don't want to see swipe gestures during TTT
+					{
+						ev.setAction(ACTION_DOWN);
+					}
 					if (doubleTap && !SystemUtils.isFlashOn() && uptimeMillis() - ev.getDownTime() > HOLD_DURATION) {
 						turnedByTTT = true;
 
@@ -314,8 +300,7 @@ public class ScreenGestures extends XposedModPack {
 						new Thread(() -> { //if keyguard is dismissed for any reason (face or udfps touch), then:
 							while (turnedByTTT) {
 								try {
-									//noinspection BusyWait
-									Thread.sleep(200);
+									SystemUtils.threadSleep(200);
 									if (keyguardNotShowing(mStatusBarKeyguardViewManager)) {
 										turnOffTTT();
 									}
@@ -323,14 +308,28 @@ public class ScreenGestures extends XposedModPack {
 							}
 						}).start();
 					}
-					if (turnedByTTT) {
-						ev.setAction(ACTION_DOWN);
-					}
 				} else if (turnedByTTT) {
 					turnOffTTT();
 				}
 			}
 		});
+	}
+
+	private boolean isQSExpanded() {
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+		{
+			return  (boolean)callMethod(NotificationPanelViewController, "isShadeFullyExpanded");
+		}
+		else
+		{
+			try { //13QPR3
+				return getBooleanField(
+						getObjectField(NotificationPanelViewController, "mQsController"),
+						"mExpanded");
+			} catch (Throwable ignored) {
+				return getBooleanField(NotificationPanelViewController, "mQsExpanded"); //13QPR2,1
+			}
+		}
 	}
 
 	private boolean keyguardNotShowing(Object mStatusBarKeyguardViewManager) {

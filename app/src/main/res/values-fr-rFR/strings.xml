@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">Thème d\'icone alternatif</string>
+	<string name="app_themed_icon_title">Icône avec thème alternatif</string>
 	<string name="xposed_desc">Personnalisations pour les appareils Google Pixel</string>
 	<string name="volume_tile_title">Volume des médias</string>
 	<string name="app_switch_tile_title">Changer de profil d\'application</string>
@@ -50,13 +50,24 @@
 	<string name="hotspot_hide_ssid_title">Masquer le SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Délai d\'inactivité</string>
 	<string name="hotspot_max_client_title">Clientèle maximale</string>
+	<string name="hotspot_disable_approval_title">Solution aux problèmes de connectivité du hotspot</string>
+	<string name="hotspot_disable_approval_summary">Permettre aux clients non \"pré-approuvés\" de se connecter de manière transparente</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Effet de profondeur du fond d\'écran</string>
+	<string name="depth_wallpaper_summary">Intégration dynamique du fond d\'écran avec l\'horloge</string>
+	<string name="depth_wallpaper_opacity_title">Opacité du fond d\'écran</string>
+	<string name="depth_wallpaper_aod_title">Également sur \"toujours à l\'écran\"</string>
+	<string name="depth_wallpaper_model_ready">Le modèle IA est téléchargé sur l\'appareil</string>
+	<string name="depth_wallpaper_model_not_available">Le modèle IA n\'est pas (encore) disponible sur l\'appareil</string>
 	<string name="disable_unlock_hint_title">Désactiver l\'animation des indices de déverrouillage</string>
 	<string name="ls_general_options">Options de l\'écran de verrouillage</string>
 	<string name="hide_avatar_title">Retirer l’avatar d’utilisateur (mode utilisateurs multiples)</string>
 	<string name="transparent_fingerprint_circle">Retirer le disque autour du détecteur d’empreintes</string>
 	<string name="transparent_fingerprint_circle_off">Le disque autour du détecteur d’empreintes est visible</string>
 	<string name="transparent_fingerprint_circle_on">Le disque autour du détecteur d’empreintes est caché</string>
+	<string name="fingerprint_icon">Supprimer l\'icône de premier plan de l\'empreinte digitale sous l\'écran</string>
+	<string name="fingerprint_icon_off">L\'icône d\'empreinte digitale est active</string>
+	<string name="fingerprint_icon_on">L\'icône d\'empreinte digitale sera masquée</string>
 	<string name="custom_text_category">Texte personnalisé sur l’écran de verrouillage</string>
 	<string name="configure_carrier_text">Personnaliser le texte du fournisseur réseau - haut de l’écran</string>
 	<string name="carrier_text_mod_disabled">Texte du fournisseur inchangé</string>
@@ -142,6 +153,7 @@
 	<string name="nt_mode_total">Téléchargement + upload (combiné)</string>
 	<string name="nt_mode_rxonly">Téléchargement seulement</string>
 	<string name="nt_mode_txonly">Upload seulement</string>
+	<string name="nt_unit_show_bits">Afficher en bits/s</string>
 	<string name="statusbar_general_options">Préférence de la barre d’état</string>
 	<string name="dual_tone_battery_title">Activer le compteur de batterie à double couleur</string>
 	<string name="dual_tone_battery_on_summary">Activé (marche seulement pour le mode portrait)</string>
@@ -160,12 +172,14 @@
 	<string name="BB_Thickness_title">Épaisseur de la barre</string>
 	<string name="BB_indicate_charging">Montrer que l’appareil charge</string>
 	<string name="BB_indicate_fast_charging">Montrer que l’appareil est en charge rapide</string>
+	<string name="BB_indicate_power_save">Indique l\'économie d\'énergie</string>
 	<string name="BB_warning_level">Intervalle du niveau d’alerte</string>
 	<string name="BB_warning_tip">Mettre tout à 0 pour désactiver les couleurs par niveaux</string>
 	<string name="BB_batteryCriticalColor">Couleur du niveau critique</string>
 	<string name="BB_batteryWarningColor">Couleur du niveau d’alerte</string>
 	<string name="BB_batteryChargingColor">Couleur de charge</string>
 	<string name="BB_batteryFastChargingColor">Couleur de charge rapide</string>
+	<string name="BB_batteryPowerSaveColor">Couleur d\'économie d\'énergie</string>
 	<string name="BB_transit_colors">Nuancer les couleurs dans cet intervalle</string>
 	<string name="colored_battery_percentage_title">Pourcentage de batterie coloré pendant la charge</string>
 	<string name="nt_stat_mode_today">Aujourd\'hui</string>
@@ -211,6 +225,7 @@
 	<string name="wifi_cell_on">Utiliser deux blocs séparés pour les données mobiles et le Wi-Fi</string>
 	<string name="wifi_cell_off">Utiliser un bloc Internet</string>
 	<string name="QQS_brightness_category">Préférence pour le curseur de luminosité</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Montrer le curseur de luminosité dans la fenêtre de configuration rapide</string>
 	<string name="QQS_brightness_bottom_title">Bouger le curseur en bas</string>
 	<string name="QS_brightness_disable_title">Cacher le curseur</string>
@@ -243,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Forcer l’activation</string>
 	<string name="taskbar_force_disable_title">Forcer la désactivation</string>
 	<string name="taskbar_transient_title">Masquage automatique</string>
+	<string name="remap_physical_buttons_title">Remap physical buttons</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Contourner la vérification des signatures des paquets</string>
 	<string name="pm_allow_downgrade_title">Autoriser le rétrogradage des applications</string>
 	<string name="auto_off_five_minutes">Actif pour les cinq prochaines minutes</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Launcher options</string>
 	<string name="screenshot_sound_disable_title">Désactiver le son des captures d’écran</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Autoriser les captures d\'écran à partir de contenus restreints</string>
@@ -280,6 +297,7 @@
 	<string name="force_aod_while_charging_summary">Garder l\'affichage permanent activé pendant que l\'appareil est en charge</string>
 	<string name="doze_header">Quand l’écran est éteint…</string>
 	<string name="custom_themed_icons_title">Icônes personnalisés</string>
+	<string name="px_in_settings_title">Ajouter PixelXpert aux paramètres</string>
 	<string name="custom_themed_icons_off">Icônes personnalisés désactivés</string>
 	<string name="custom_themed_icons_on">Icônes personnalisés activés</string>
 	<string name="so_vol_longpress_skip">Maintenir les boutons du volume pour changer de chanson</string>
@@ -293,11 +311,20 @@
 	<string name="disable_overscroll">Désactiver l’effet elastique de fin de défilement</string>
 	<string name="overscroll_on_summary">Important : les applications dans lesquelles l’effet sera actif sont celles activées dans LSPosed</string>
 	<string name="milliseconds">Millisecondes</string>
+	<string name="hours">Heures</string>
+	<string name="system_time_title">Heure du système</string>
+	<string name="sync_ntp_time_title">Utiliser NTP pour synchroniser l\'heure</string>
+	<string name="ntp_time_interval_title">Intervalle de synchronisation de l\'heure</string>
+	<string name="ntp_servers_title">Serveurs NTP</string>
+	<string name="ntp_servers_summary">Utiliser un point-virgule pour séparer plusieurs serveurs</string>
+	<string name="sync_ntp_time_now_title">Synchroniser maintenant</string>
+	<string name="sync_ntp_successful">Heure synchronisée avec succès</string>
+	<string name="sync_ntp_failed">Erreur de connexion au serveur NTP !</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Panneau de volume</string>
 	<string name="volume_dialog_timeout">Délai de fermeture du panneau de volume</string>
 	<!-- Work/Clone profile -->
-	<string name="work_clone_profile_header">Profil de travail/clonage</string>
+	<string name="work_clone_profile_header">Profil de travail/cloné</string>
 	<string name="statusbar_long_press_app_switch">Appuyez longuement sur la barre d\'état pour changer de profil</string>
 	<string name="statusbar_app_switch_icon">Afficher une icône sur la barre d\'état lorsque la commutation est disponible</string>
 	<!-- Cloned apps bragging message -->
@@ -307,12 +334,12 @@
 	<string name="power_indication_error">Erreur de récupération des données de chargement</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Vibrer lors du décrochage d’un appel entrant</string>
-	<string name="vibrate_on_call_drop_title">Vibrer lors du raccrochage</string>
+	<string name="vibrate_on_call_drop_title">Vibrer lorsque l\'appel est terminé</string>
 	<string name="vibration_type_notification">L’intensité de vibration est celle définie par les paramètres de notifications de l’appareil</string>
 	<string name="dialer_mute_record_message_title">Supprimer l\'annonce d\'enregistrement d\'appel</string>
 	<string name="dialer_mute_record_message_summary">S\'applique uniquement à l\'application téléphonique Google avec l\'enregistrement des appels activé</string>
 	<!-- Theming section related -->
-	<string name="gsans_override_title">Forcer l’utilisation de la police Google Sans dans tout l’appareil</string>
+	<string name="gsans_override_title">Forcer l’utilisation de la police Google Sans dans le système</string>
 	<string name="font_overlays_enable_title">Activer l’utilisation de polices personnalisées</string>
 	<string name="theme_customization_font_title">Police des titres/corps</string>
 	<string name="icons_style_title">Style des icônes</string>
@@ -340,9 +367,9 @@
 	<string name="am_pm_small">70% de la taille de l’horloge</string>
 	<!-- Date position -->
 	<string name="date_before">Avant l’horloge (100%)</string>
-	<string name="date_before_small">Après l’horloge (70%)</string>
+	<string name="date_before_small">Avant l’horloge (70%)</string>
 	<string name="date_after">Après l’horloge (100%)</string>
-	<string name="date_after_small">Avant l’horloge (70%)</string>
+	<string name="date_after_small">Après l’horloge (70%)</string>
 	<!-- 4G | LTE -->
 	<string name="fourg_lte_default">Selon les paramètres de l’appareil</string>
 	<string name="fourg_lte_lte">Forcer l’icône LTE</string>
@@ -352,16 +379,20 @@
 	<string name="minutes_word">minute(s)</string>
 	<string name="network_stat_type">Type de statistiques</string>
 	<string name="network_stat_day">Heure de début</string>
-	<string name="network_stat_week">Jour de début de semaine</string>
-	<string name="network_stat_month">Jour de début du mois</string>
+	<string name="network_stat_week">Premier jour de la semaine</string>
+	<string name="network_stat_month">Premier jour du mois</string>
 	<!-- Incompatibility Alert -->
 	<string name="incompatible_alert_title">Incompatible</string>
-	<string name="incompatible_alert_body">Votre ROM n’est pas ciblée par ce module. Vous pouvez continuer à l’utiliser, mais certaines options ne fonctionneront pas comme prévu.\n\nLMerci de ne pas signaler de bugs.</string>
+	<string name="incompatible_alert_body">Votre ROM actuelle n\'est pas compatible avec ce module. Vous pouvez continuer à l\'utiliser, mais certaines options (ou toutes) pourraient ne pas fonctionner comme prévu\n\nVeuillez ne pas signaler les bugs</string>
 	<string name="incompatible_alert_ok_btn">J’ai compris</string>
 	<!-- App kill Alert -->
 	<string name="app_kill_alert_title">Avis</string>
 	<string name="app_kill_alert_body">L\'application va se fermer maintenant. Vous pouvez l\'ouvrir à nouveau en appuyant sur la nouvelle icône</string>
 	<string name="app_kill_ok_btn">D\'ACCORD</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Utilisez un fond d\'écran de verrouillage approprié où les éléments de premier plan n\'obstruent pas l\'intégralité de l\'horloge sur votre écran de verrouillage, garantissant à la fois l\'attrait visuel et la clarté fonctionnelle de votre écran de verrouillage.\n\nRemarque: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Un redémarrage du système est requis pour que les paramètres s\'appliquent</string>
 	<!-- Menu Items -->
@@ -375,8 +406,8 @@
 	<string name="menu_restartSysUI">Redémarrer l’interface système</string>
 	<string name="menu_updates">Mise à jour de l’application</string>
 	<string name="monitoring_category_title">Options du moniteur</string>
-	<string name="netstat_header">Préférences des statistiques réseau</string>
-	<string name="string_formatter_manual_body_v3">En plus du texte normal, des variables dynamiques sont également disponibles, comme la date, l\'utilisation des données et la température :\n\n$G\&lt;format\&gt;  : date grégorienne, basée sur le format*\n$P&lt;format&gt;  : date persane, basée sur le format*\n$Nrx  : nombre total de téléchargements. dans la période spécifiée ** ***\n$Ntx: Total des téléchargements dans la période spécifiée ** ***\n$Nall : Trafic total dans la période spécifiée ** ***\n$Nssid : Nom SSID WiFi (le cas échéant)\n\n$T\&lt;format\&gt;[interval] : Température; \nle format peut être b (pour la batterie), c (pour le CPU), g (pour le GPU) et s (pour le skin) \nEnfin, il existe un nombre OPTIONNEL d\'intervalle de mise à jour en secondes (par défaut : 60 secondes)\n\n*pour le format documentation, recherchez \"Java Date Format\"\n**Vous pouvez spécifier la période des statistiques dans PixelXpert/Menu Divers/Paramètres des statistiques réseau\n***Si vous remplacez $N par $Nc , vous obtiendrez des statistiques de données mobiles (par exemple $Ncrx au lieu de Nrx )</string>
+	<string name="netstat_header">Préférences des statistiques du réseau</string>
+	<string name="string_formatter_manual_body_v3">En plus du texte normal, des variables dynamiques sont également disponibles, comme la date, l\'utilisation des données et la température :\n\n$G\&lt;format\&gt;  : Date grégorienne, basée sur le format*\n$P&lt;format&gt;  : Date persane, basée sur le format*\n$Nrx  : Nombre total de téléchargements dans la période spécifiée ** ***\n$Ntx: Total des envois de données dans la période spécifiée ** ***\n$Nall : Trafic total dans la période spécifiée ** ***\n$Nssid : Nom SSID WiFi (le cas échéant)\n\n$T\&lt;format\&gt;[interval] : Température; \nle format peut être b (pour la batterie), c (pour le CPU), g (pour le GPU) et s (pour le skin) \nEnfin, il existe un nombre OPTIONNEL d\'intervalle de mise à jour en secondes (par défaut : 60 secondes)\n\n*Pour la documentation sur le format, recherchez \"Java Date Format\"\n**Vous pouvez spécifier la période des statistiques dans PixelXpert/Menu Divers/Paramètres des statistiques réseau\n***Si vous remplacez $N par $Nc , vous obtiendrez des statistiques sur les données mobiles (par exemple $Ncrx au lieu de Nrx )</string>
 	<string name="update_channel_name">Mises à jour</string>
 	<string name="update_notification_title">Mise à jour téléchargée</string>
 	<string name="update_notification_text">Installer</string>
@@ -402,35 +433,35 @@
 	<string name="language_title">Langues</string>
 	<string name="toggle_dark_apply">(désactiver puis réactiver le thème sombre pour appliquer)</string>
 	<string name="gesture_nav_extra_cat">Plus de gestes pour la barre de navigation</string>
-	<string name="gesture_nav_long_swipe_fc_title">Swiper vers le haut pour forcer l’arrêt de l’application au premier plan</string>
-	<string name="gesture_nav_left_swipe_up_title">Action de swipe depuis la gauche de la barre de navigation</string>
-	<string name="gesture_nav_right_swipe_up_title">Action de swipe depuis la droite de la barre de navigation</string>
-	<string name="gesture_nav_left_swipe_up_percent">Largeur de la zone de swipe gauche (%)</string>
-	<string name="gesture_nav_right_swipe_up_percent">Largeur de la zone de swipe droit (%)</string>
-	<string name="gesture_nav_two_finger_title">Action de swipe avec deux doigts</string>
-	<string name="gesture_nav_swipe_up_height">Seuil de hauteur pour le swipe</string>
+	<string name="gesture_nav_long_swipe_fc_title">Balayer vers le haut pour forcer l’arrêt de l’application au premier plan</string>
+	<string name="gesture_nav_left_swipe_up_title">Balayage depuis la gauche de la barre de navigation</string>
+	<string name="gesture_nav_right_swipe_up_title">Balayage depuis la droite de la barre de navigation</string>
+	<string name="gesture_nav_left_swipe_up_percent">Largeur de la zone de balayage gauche (%)</string>
+	<string name="gesture_nav_right_swipe_up_percent">Largeur de la zone de balayage droit (%)</string>
+	<string name="gesture_nav_two_finger_title">Balayage avec deux doigts</string>
+	<string name="gesture_nav_swipe_up_height">Hauteur de déclenchement minimale des actions de balayage vers le haut</string>
 	<string name="none">Rien</string>
 	<string name="screenshot">Capture d’écran</string>
 	<string name="kill_foreground_app">Forcer l’arrêt de l’application au premier plan</string>
-	<string name="toggle_notification">Monter/cacher les notifications</string>
-	<string name="toggle_one_handed">Activer/désactiver le mode à une main</string>
-	<string name="sleep">Repos</string>
+	<string name="toggle_notification">Montrer/cacher les notifications</string>
+	<string name="toggle_one_handed">Basculer en mode à une main</string>
+	<string name="sleep">En veille</string>
 	<!-- Search Preference -->
 	<string name="searchpreference_search">Recherche…</string>
-	<string name="searchpreference_clear">Clair</string>
-	<string name="searchpreference_history_entry">Entrée d\'historique</string>
+	<string name="searchpreference_clear">Nettoyé</string>
+	<string name="searchpreference_history_entry">Saisie de l\'historique</string>
 	<string name="searchpreference_more">Plus</string>
-	<string name="searchpreference_clear_history">Histoire claire</string>
+	<string name="searchpreference_clear_history">Supprimer l\'historique</string>
 	<string name="searchpreference_no_results">Aucun résultat</string>
 	<!-- Hooked Packages Activity -->
 	<string name="hooked_packages_title">Forfaits connectés</string>
 	<string name="package_hooked_successful">Paquet réactif</string>
-	<string name="package_not_hook_enabled">Package non activé dans LSposed</string>
-	<string name="package_hook_no_response">Le colis ne répond pas</string>
+	<string name="package_not_hook_enabled">Paquet non activé dans LSposed</string>
+	<string name="package_hook_no_response">Le paquet ne répond pas</string>
 	<string name="package_not_found">Paquet introuvable</string>
 	<string name="package_checking">Chargement%s</string>
-	<string name="package_activated">Package activé avec succès</string>
-	<string name="package_activation_failed">L\'activation du package a échoué</string>
+	<string name="package_activated">Paquet activé avec succès</string>
+	<string name="package_activation_failed">L\'activation du paquet a échoué</string>
 	<string name="activate_in_lsposed">Activer dans LSPosed</string>
 	<string name="package_not_launchable">Le paquet ne peut pas être lancé</string>
 	<string name="menu_launch_app">Lancer l\'application</string>
@@ -446,4 +477,18 @@
 	<string name="navigation_update">Mise à jour</string>
 	<string name="navigation_hooks">Crochets</string>
 	<string name="navigation_settings">Paramètres</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">While screen is off</string>
+	<string name="while_screen_is_on_title">While screen is on</string>
+	<string name="remap_long_press_power_button_title">Long press power button</string>
+	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
+	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
+	<string name="remap_double_press_power_button_title">Double press power button</string>
+	<string name="torch">Toggle torch</string>
+	<string name="camera">Launch camera</string>
+	<string name="assistant">Launch assistant</string>
+	<string name="do_not_disturb">Toggle Do not disturb</string>
+	<string name="pause_media">Play/Pause media</string>
+	<string name="skip_media_next">Media control - Skip</string>
+	<string name="skip_media_prev">Media control - Previous</string>
 </resources>

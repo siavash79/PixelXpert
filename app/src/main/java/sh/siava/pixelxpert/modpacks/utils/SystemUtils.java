@@ -2,6 +2,7 @@ package sh.siava.pixelxpert.modpacks.utils;
 
 import static android.content.Context.RECEIVER_EXPORTED;
 import static android.content.res.Configuration.UI_MODE_NIGHT_YES;
+import static java.lang.Math.round;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
@@ -49,6 +50,8 @@ import sh.siava.pixelxpert.modpacks.XPLauncher;
 @SuppressWarnings("unused")
 public class SystemUtils {
 	private static final int THREAD_PRIORITY_BACKGROUND = 10;
+	public static final String EXTRA_VOLUME_STREAM_TYPE = "android.media.EXTRA_VOLUME_STREAM_TYPE";
+	public static final String EXTRA_VOLUME_STREAM_VALUE = "android.media.EXTRA_VOLUME_STREAM_VALUE";
 
 	@SuppressLint("StaticFieldLeak")
 	static SystemUtils instance;
@@ -100,9 +103,9 @@ public class SystemUtils {
 			instance.toggleFlashInternal();
 	}
 
-	public static void setFlash(boolean enabled, float pct) {
+	public static void setFlash(boolean enabled, int level) {
 		if (instance != null)
-			instance.setFlashInternal(enabled, pct);
+			instance.setFlashInternal(enabled, level);
 	}
 
 	public static void setFlash(boolean enabled) {
@@ -243,14 +246,24 @@ public class SystemUtils {
 
 		registerVolumeChangeReceiver();
 	}
+	public static void threadSleep(int millis)
+	{
+		try {
+			Thread.sleep(millis);
+		} catch (Throwable ignored) {}
+	}
 
 	private void registerVolumeChangeReceiver() {
 		BroadcastReceiver volChangeReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				for(ChangeListener listener : mVolumeChangeListeners)
+				if(intent.getIntExtra(EXTRA_VOLUME_STREAM_TYPE, -1) == AudioManager.STREAM_MUSIC)
 				{
-					listener.onChanged(0);
+					int newLevel = intent.getIntExtra(EXTRA_VOLUME_STREAM_VALUE, 0);
+					for(ChangeListener listener : mVolumeChangeListeners)
+					{
+						listener.onChanged(newLevel);
+					}
 				}
 			}
 		};
@@ -291,7 +304,7 @@ public class SystemUtils {
 
 		try {
 			String flashID = getFlashID(mCameraManager);
-			if (flashID.equals("")) {
+			if (flashID.isEmpty()) {
 				return;
 			}
 			if (enabled
@@ -299,7 +312,7 @@ public class SystemUtils {
 					&& Xprefs.getBoolean("isFlashLevelGlobal", false)
 					&& supportsFlashLevelsInternal()) {
 				float currentPct = Xprefs.getFloat("flashPCT", 0.5f);
-				setFlashInternal(true, currentPct);
+				setFlashInternal(true, getFlashlightLevelInternal(currentPct));
 				return;
 			}
 
@@ -312,6 +325,22 @@ public class SystemUtils {
 		}
 	}
 
+	public static int getFlashlightLevel(float flashPct)
+	{
+		if(instance == null) return 1;
+		return instance.getFlashlightLevelInternal(flashPct);
+	}
+
+	private int getFlashlightLevelInternal(float flashPct) {
+		return
+				Math.max(
+						Math.min(
+								round(SystemUtils.getMaxFlashLevel() * flashPct),
+								SystemUtils.getMaxFlashLevel())
+						, 1);
+	}
+
+
 	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public static boolean supportsFlashLevels() {
 		return instance != null
@@ -319,36 +348,19 @@ public class SystemUtils {
 	}
 
 	private boolean supportsFlashLevelsInternal() {
-		if(getCameraManager() == null)
+		if(maxFlashLevel == -1)
 		{
-			return false;
+			refreshFlashLevel();
 		}
-
-		try {
-			String flashID = getFlashID(mCameraManager);
-			if (flashID.equals("")) {
-				return false;
-			}
-			if (maxFlashLevel == -1) {
-				@SuppressWarnings("unchecked")
-				CameraCharacteristics.Key<Integer> FLASH_INFO_STRENGTH_MAXIMUM_LEVEL = (CameraCharacteristics.Key<Integer>) getStaticObjectField(CameraCharacteristics.class, "FLASH_INFO_STRENGTH_MAXIMUM_LEVEL");
-				maxFlashLevel = mCameraManager.getCameraCharacteristics(flashID).get(FLASH_INFO_STRENGTH_MAXIMUM_LEVEL);
-			}
-			return maxFlashLevel > 1;
-		} catch (Throwable ignored) {
-			return false;
-		}
+		return maxFlashLevel > 0;
 	}
 
-	private void setFlashInternal(boolean enabled, float pct) {
-		if(getCameraManager() == null)
-		{
-			return;
-		}
-
+	private void refreshFlashLevel()
+	{
 		try {
-			String flashID = getFlashID(mCameraManager);
-			if (flashID.equals("")) {
+			String flashID = getFlashID(getCameraManager());
+			if (flashID.isEmpty()) {
+				maxFlashLevel = -1;
 				return;
 			}
 			if (maxFlashLevel == -1) {
@@ -356,10 +368,36 @@ public class SystemUtils {
 				CameraCharacteristics.Key<Integer> FLASH_INFO_STRENGTH_MAXIMUM_LEVEL = (CameraCharacteristics.Key<Integer>) getStaticObjectField(CameraCharacteristics.class, "FLASH_INFO_STRENGTH_MAXIMUM_LEVEL");
 				maxFlashLevel = mCameraManager.getCameraCharacteristics(flashID).get(FLASH_INFO_STRENGTH_MAXIMUM_LEVEL);
 			}
+		} catch (Throwable ignored) {}
+	}
+
+	public static int getMaxFlashLevel()
+	{
+		return instance == null
+				? -1
+				: instance.getMaxFlashLevelInternal();
+	}
+
+	private int getMaxFlashLevelInternal() {
+		if(maxFlashLevel == -1)
+		{
+			refreshFlashLevel();
+		}
+		return maxFlashLevel;
+	}
+
+	private void setFlashInternal(boolean enabled, int level) {
+		if(getCameraManager() == null)
+		{
+			return;
+		}
+
+		try {
+			String flashID = getFlashID(mCameraManager);
 			if (enabled) {
-				if (maxFlashLevel > 1) //good news. we can set levels
+				if (supportsFlashLevels()) //good news. we can set levels
 				{
-					callMethod(mCameraManager, "turnOnTorchWithStrengthLevel", flashID, Math.max(Math.round(pct * maxFlashLevel), 1));
+					callMethod(mCameraManager, "turnOnTorchWithStrengthLevel", flashID, Math.max(level, 1));
 				} else //flash doesn't support levels: go normal
 				{
 					setFlashInternal(true);
@@ -413,10 +451,10 @@ public class SystemUtils {
 					darkSwitching = true;
 
 					proxy.runCommand("cmd uimode night " + (isDark ? "no" : "yes"));
-					Thread.sleep(1000);
+					threadSleep(1000);
 					proxy.runCommand("cmd uimode night " + (isDark ? "yes" : "no"));
 
-					Thread.sleep(500);
+					threadSleep(500);
 					darkSwitching = false;
 				} catch (Exception ignored) {
 				}

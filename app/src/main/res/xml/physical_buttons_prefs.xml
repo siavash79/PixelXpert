@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:search="http://schemas.android.com/apk/sh.siava.pixelxpert.ui.preferencesearch">
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/while_screen_is_off_title"
+		app:iconSpaceReserved="false"
+		search:ignore="true">
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
+			android:defaultValue="0"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
+			android:key="longPressPowerButtonScreenOff"
+			android:summary="%s"
+			android:title="@string/remap_long_press_power_button_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
+			android:defaultValue="0"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
+			android:key="doublePressPowerButtonScreenOff"
+			android:summary="%s"
+			android:title="@string/remap_double_press_power_button_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
+			android:defaultValue="0"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
+			android:key="longPressVolumeUpButtonScreenOff"
+			android:summary="%s"
+			android:title="@string/remap_long_press_volume_up_button_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
+			android:defaultValue="0"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
+			android:key="longPressVolumeDownButtonScreenOff"
+			android:summary="%s"
+			android:title="@string/remap_long_press_volume_down_button_title"
+			app:iconSpaceReserved="false" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory
+		android:title="@string/while_screen_is_on_title"
+		app:iconSpaceReserved="false"
+		search:ignore="true">
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
+			android:defaultValue="0"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
+			android:key="longPressPowerButtonScreenOn"
+			android:summary="%s"
+			android:title="@string/remap_long_press_power_button_title"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
+			android:defaultValue="0"
+			android:entries="@array/physical_remap_action_names"
+			android:entryValues="@array/physical_remap_action_values"
+			android:key="doublePressPowerButtonScreenOn"
+			android:summary="%s"
+			android:title="@string/remap_double_press_power_button_title"
+			app:iconSpaceReserved="false" />
+
+	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
+</PreferenceScreen>

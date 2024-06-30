@@ -1,11 +1,11 @@
 package sh.siava.pixelxpert.modpacks.launcher;
 
+import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getIntField;
-import static de.robv.android.xposed.XposedHelpers.getObjectField;
-import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
@@ -15,12 +15,13 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
+import sh.siava.pixelxpert.modpacks.utils.GoogleMonochromeIconFactory;
 
 @SuppressWarnings("RedundantThrows")
 public class FeatureFlags extends XposedModPack {
 	private static final String listenPackage = Constants.LAUNCHER_PACKAGE;
-
 	private static boolean ForceThemedLauncherIcons = false;
+	private int mIconBitmapSize;
 
 	public FeatureFlags(Context context) {
 		super(context);
@@ -37,30 +38,30 @@ public class FeatureFlags extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		try {
-			Class<?> FeatureFlags = findClass("com.android.launcher3.config.FeatureFlags", lpparam.classLoader);
-			Class<?> LauncherIconsClass = findClass("com.android.launcher3.icons.LauncherIcons", lpparam.classLoader);
+			Class<?> BaseIconFactoryClass = findClass("com.android.launcher3.icons.BaseIconFactory", lpParam.classLoader);
 
-			hookAllMethods(LauncherIconsClass, "getMonochromeDrawable", new XC_MethodHook() {  //flag doesn't work on A14B3 for some reason
+			hookAllConstructors(BaseIconFactoryClass, new XC_MethodHook() {
 				@Override
-				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if(!ForceThemedLauncherIcons) return;
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					mIconBitmapSize = getIntField(param.thisObject, "mIconBitmapSize");
+				}
+			});
 
-					try
-					{
-						if(!(param.args[0] instanceof AdaptiveIconDrawable) || ((AdaptiveIconDrawable) param.args[0]).getMonochrome() == null)
+			hookAllMethods(AdaptiveIconDrawable.class, "getMonochrome", new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					try {
+						if(param.getResult() == null && ForceThemedLauncherIcons)
 						{
-							//at this point it's clear that we don't have a monochrome icon
-							Object mMonochromeIconFactory = getObjectField(param.thisObject, "mMonochromeIconFactory");
-							if(mMonochromeIconFactory == null)
+							GoogleMonochromeIconFactory mono = (GoogleMonochromeIconFactory) getAdditionalInstanceField(param.thisObject, "mMonoFactoryPX");
+							if(mono == null)
 							{
-								Class<?> MonochromeIconFactoryClass = findClass("com.android.launcher3.icons.MonochromeIconFactory", lpparam.classLoader);
-								int mIconBitmapSize = getIntField(param.thisObject, "mIconBitmapSize");
-								mMonochromeIconFactory = MonochromeIconFactoryClass.getConstructors()[0].newInstance(mIconBitmapSize);
-								setObjectField(param.thisObject, "mMonochromeIconFactory", mMonochromeIconFactory);
+								mono = new GoogleMonochromeIconFactory((AdaptiveIconDrawable) param.thisObject, mIconBitmapSize);
+								setAdditionalInstanceField(param.thisObject, "mMonoFactoryPX", mono);
 							}
-							param.setResult(callMethod(mMonochromeIconFactory, "wrap", param.args[0]));
+							param.setResult(mono);
 						}
 					}
 					catch (Throwable ignored){}

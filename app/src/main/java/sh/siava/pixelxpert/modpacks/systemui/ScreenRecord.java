@@ -31,8 +31,8 @@ public class ScreenRecord extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!lpParam.packageName.equals(listenPackage)) return;
 
 		hookAllMethods(MediaProjection.class, "createVirtualDisplay", new XC_MethodHook() {
 			@Override

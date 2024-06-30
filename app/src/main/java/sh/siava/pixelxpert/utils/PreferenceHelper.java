@@ -109,6 +109,7 @@ public class PreferenceHelper {
 				return instance.mPreferences.getBoolean("carrierTextMod", false);
 
 			case "batteryFastChargingColor":
+			case "batteryPowerSaveColor":
 			case "batteryChargingColor":
 			case "batteryWarningColor":
 			case "batteryCriticalColor":
@@ -128,6 +129,8 @@ public class PreferenceHelper {
 						return instance.mPreferences.getBoolean("indicateFastCharging", false) && bBarEnabled;
 					case "batteryChargingColor":
 						return instance.mPreferences.getBoolean("indicateCharging", false) && bBarEnabled;
+					case "batteryPowerSaveColor":
+						return instance.mPreferences.getBoolean("indicatePowerSave", false) && bBarEnabled;
 					case "batteryWarningColor":
 						return !warnZero && bBarEnabled;
 					default:  //batteryCriticalColor
@@ -143,6 +146,7 @@ public class PreferenceHelper {
 			case "BBSetCentered":
 			case "indicateCharging":
 			case "indicateFastCharging":
+			case "indicatePowerSave":
 			case "batteryWarningRange":
 				return instance.mPreferences.getBoolean("BBarEnabled", false);
 
@@ -286,6 +290,10 @@ public class PreferenceHelper {
 
 			case "UpdateWifiOnly":
 				return instance.mPreferences.getBoolean("AutoUpdate", true);
+
+			case "DWOpacity":
+			case "DWonAOD":
+				return instance.mPreferences.getBoolean("DWallpaperEnabled", false);
 		}
 		return true;
 	}

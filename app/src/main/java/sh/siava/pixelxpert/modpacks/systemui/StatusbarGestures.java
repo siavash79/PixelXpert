@@ -62,10 +62,10 @@ public class StatusbarGestures extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!lpParam.packageName.equals(listenPackage)) return;
 
-		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader);
+		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpParam.classLoader);
 
 		if(findFieldIfExists(NotificationPanelViewControllerClass, "mStatusBarViewTouchEventHandler") != null) { //13 QPR1
 			hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
@@ -146,7 +146,7 @@ public class StatusbarGestures extends XposedModPack {
 				}
 			}).size() == 0)
 			{ //13 QPR3 - 14
-				Class<?> PhoneStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarViewController", lpparam.classLoader);
+				Class<?> PhoneStatusBarViewControllerClass = findClass("com.android.systemui.statusbar.phone.PhoneStatusBarViewController", lpParam.classLoader);
 				hookAllConstructors(NotificationPanelViewControllerClass, new XC_MethodHook() {
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -223,9 +223,7 @@ public class StatusbarGestures extends XposedModPack {
 	}
 
 	private void sendAppSwitchBroadcast() {
-		new Thread(() -> mContext.sendBroadcast(new Intent()
-				.setAction(Constants.ACTION_SWITCH_APP_PROFILE)
-				.addFlags(Intent.FLAG_RECEIVER_FOREGROUND))).start();
+		new Thread(() -> mContext.sendBroadcast(Constants.getAppProfileSwitchIntent())).start();
 	}
 
 	private GestureDetector.OnGestureListener getPullDownLPListener(String QSExpandMethodName) {

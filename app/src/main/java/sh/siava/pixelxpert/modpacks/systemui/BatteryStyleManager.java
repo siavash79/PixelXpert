@@ -2,7 +2,7 @@ package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
-import static de.robv.android.xposed.XposedHelpers.findAndHookConstructor;
+import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
@@ -21,8 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.core.graphics.ColorUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,17 +139,25 @@ public class BatteryStyleManager extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) {
 		BatteryDataProvider.registerInfoCallback(() -> refreshAllBatteryIcons(false));
 
-		findAndHookConstructor("com.android.settingslib.graph.ThemedBatteryDrawable", lpparam.classLoader, Context.class, int.class, new XC_MethodHook() {
+		Class<?> ThemedBatteryDrawableClass = findClass("com.android.settingslib.graph.ThemedBatteryDrawable", lpParam.classLoader);
+		Class<?> BatteryMeterViewClass = findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpParam.classLoader);
+
+		hookAllConstructors(ThemedBatteryDrawableClass, new XC_MethodHook() {
 			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				frameColor = (int) param.args[1];
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(param.args[0] instanceof Context)
+				{
+					frameColor = (int) param.args[1];
+				}
+				else
+				{
+					frameColor = (int) param.args[0];
+				}
 			}
 		});
-
-		Class<?> BatteryMeterViewClass = findClassIfExists("com.android.systemui.battery.BatteryMeterView", lpparam.classLoader);
 
 		View.OnAttachStateChangeListener listener = new View.OnAttachStateChangeListener() {
 			@Override

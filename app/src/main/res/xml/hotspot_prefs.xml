@@ -30,4 +30,11 @@
 		app:tickInterval="1"
 		app:valueCount="1" />
 
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="hotspotDisableApproval"
+		android:summary="@string/hotspot_disable_approval_summary"
+		android:title="@string/hotspot_disable_approval_title"
+		app:iconSpaceReserved="false" />
+
 </PreferenceScreen>

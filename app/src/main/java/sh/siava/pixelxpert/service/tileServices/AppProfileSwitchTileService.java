@@ -9,10 +9,6 @@ import android.service.quicksettings.TileService;
 import sh.siava.pixelxpert.modpacks.Constants;
 
 public class AppProfileSwitchTileService extends TileService{
-	Intent broadcast = new Intent()
-			.setAction(Constants.ACTION_SWITCH_APP_PROFILE)
-			.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-
 	// Called when the user adds your tile.
 	@Override
 	public void onTileAdded() {
@@ -41,11 +37,12 @@ public class AppProfileSwitchTileService extends TileService{
 
 		if (Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
 			startActivityAndCollapse(PendingIntent.getActivity(
-					getApplicationContext(),
+					this,
 					0,
 					new Intent(),
 					PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE));
-		} else {
+		} else
+		{
 			startActivityAndCollapse(new Intent());
 		}
 
@@ -54,7 +51,7 @@ public class AppProfileSwitchTileService extends TileService{
 
 	private void sendBroadcast() {
 		new Thread(() -> {
-			sendBroadcast(broadcast);
+			sendBroadcast(Constants.getAppProfileSwitchIntent());
 
 			getQsTile().setState(Tile.STATE_INACTIVE);
 			getQsTile().updateTile();

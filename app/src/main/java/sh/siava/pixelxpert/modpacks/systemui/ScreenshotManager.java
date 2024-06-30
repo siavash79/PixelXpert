@@ -4,6 +4,7 @@ import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
+import static de.robv.android.xposed.XposedHelpers.findFieldIfExists;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
@@ -27,7 +28,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools;
 
 @SuppressWarnings("RedundantThrows")
 public class ScreenshotManager extends XposedModPack {
@@ -48,18 +48,18 @@ public class ScreenshotManager extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!listensTo(lpparam.packageName)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!listensTo(lpParam.packageName)) return;
 
-		Class<?> ScreenshotControllerClass = findClass("com.android.systemui.screenshot.ScreenshotController", lpparam.classLoader);
+		Class<?> ScreenshotControllerClass = findClass("com.android.systemui.screenshot.ScreenshotController", lpParam.classLoader);
 
-		Class<?> CaptureArgsClass = findClassIfExists("android.window.ScreenCapture.CaptureArgs", lpparam.classLoader); //A14
+		Class<?> CaptureArgsClass = findClassIfExists("android.window.ScreenCapture.CaptureArgs", lpParam.classLoader); //A14
 		if(CaptureArgsClass == null)
 		{
-			CaptureArgsClass = findClass("android.view.SurfaceControl$DisplayCaptureArgs", lpparam.classLoader); //A13
+			CaptureArgsClass = findClass("android.view.SurfaceControl$DisplayCaptureArgs", lpParam.classLoader); //A13
 		}
 
-		Class<?> ScreenshotPolicyImplClass = findClass("com.android.systemui.screenshot.ScreenshotPolicyImpl", lpparam.classLoader);
+		Class<?> ScreenshotPolicyImplClass = findClass("com.android.systemui.screenshot.ScreenshotPolicyImpl", lpParam.classLoader);
 
 		hookAllMethodsMatchPattern(ScreenshotPolicyImplClass, ".*isManagedProfile.*", new XC_MethodHook() {
 			@Override
@@ -84,9 +84,11 @@ public class ScreenshotManager extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!disableScreenshotSound) return;
 
-				((ExecutorService) getObjectField(param.thisObject, "mBgExecutor")).shutdownNow();
+				if(findFieldIfExists(ScreenshotControllerClass, "mScreenshotSoundController") == null) { //Since 15B3 bg executor has other usages than sound. Don't kill it if that's the case
+					((ExecutorService) getObjectField(param.thisObject, "mBgExecutor")).shutdownNow();
 
-				setObjectField(param.thisObject, "mBgExecutor", new NoExecutor());
+					setObjectField(param.thisObject, "mBgExecutor", new NoExecutor());
+				}
 			}
 		});
 
@@ -100,9 +102,9 @@ public class ScreenshotManager extends XposedModPack {
 		});
 
 		//A14 QPR3
-		Class<?> ScreenshotSoundProviderImplClass = findClassIfExists("com.android.systemui.screenshot.ScreenshotSoundProviderImpl", lpparam.classLoader);
+		Class<?> ScreenshotSoundProviderImplClass = findClassIfExists("com.android.systemui.screenshot.ScreenshotSoundProviderImpl", lpParam.classLoader);
 		if(ScreenshotSoundProviderImplClass != null) {
-			ReflectionTools.hookAllMethods(ScreenshotSoundProviderImplClass, "getScreenshotSound", new XC_MethodHook() {
+			hookAllMethods(ScreenshotSoundProviderImplClass, "getScreenshotSound", new XC_MethodHook() {
 				@SuppressLint("NewApi")
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

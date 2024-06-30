@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.databinding.ActivitySplashScreenBinding;
 import sh.siava.pixelxpert.service.RootProvider;
+import sh.siava.pixelxpert.utils.AppUtils;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
@@ -58,6 +59,10 @@ public class SplashScreenActivity extends AppCompatActivity {
 			if (Shell.getShell().isRoot()) {
 				mRootCheckPassed.countDown();
 			} else {
+				if(!getIntent().hasExtra("FromKSU")) {
+					AppUtils.runKSURootActivity(this, true);
+				}
+
 				runOnUiThread(() ->
 						new MaterialAlertDialogBuilder(SplashScreenActivity.this, R.style.MaterialComponents_MaterialAlertDialog)
 								.setCancelable(false)

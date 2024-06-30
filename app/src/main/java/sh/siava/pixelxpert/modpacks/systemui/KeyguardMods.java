@@ -12,6 +12,8 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isCharging;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ColorUtils.getColorAttr;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ColorUtils.getColorAttrDefaultColor;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.hookAllMethodsMatchPattern;
 
 import android.annotation.SuppressLint;
@@ -111,6 +113,7 @@ public class KeyguardMods extends XposedModPack {
 	private Object KeyguardIndicationController;
 	//endregion
 
+
 	public KeyguardMods(Context context) {
 		super(context);
 
@@ -172,28 +175,28 @@ public class KeyguardMods extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		Class<?> CarrierTextControllerClass = findClass("com.android.keyguard.CarrierTextController", lpparam.classLoader);
-		Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpparam.classLoader);
-		Class<?> KeyguardIndicationControllerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpparam.classLoader);
-		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpparam.classLoader);
-		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpparam.classLoader);
-		Class<?> KeyguardStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarView", lpparam.classLoader);
-		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpparam.classLoader);
-		Class<?> KeyguardBottomAreaViewBinderClass = findClass("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpparam.classLoader);
-		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpparam.classLoader); //used to launch camera
-		Class<?> QRCodeScannerControllerClass = findClass("com.android.systemui.qrcodescanner.controller.QRCodeScannerController", lpparam.classLoader);
-//		Class<?> ActivityStarterDelegateClass = findClass("com.android.systemui.ActivityStarterDelegate", lpparam.classLoader);
-		Class<?> ZenModeControllerImplClass = findClass("com.android.systemui.statusbar.policy.ZenModeControllerImpl", lpparam.classLoader);
-		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpparam.classLoader);
-		Class<?> CommandQueueClass = findClass("com.android.systemui.statusbar.CommandQueue", lpparam.classLoader);
-		Class<?> AmbientDisplayConfigurationClass = findClass("android.hardware.display.AmbientDisplayConfiguration", lpparam.classLoader);
-
-		Class<?> AssistManagerClass = findClassIfExists("com.android.systemui.assist.AssistManager", lpparam.classLoader);
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		Class<?> CarrierTextControllerClass = findClass("com.android.keyguard.CarrierTextController", lpParam.classLoader);
+		Class<?> KeyguardClockSwitchClass = findClass("com.android.keyguard.KeyguardClockSwitch", lpParam.classLoader);
+		Class<?> KeyguardIndicationControllerClass = findClass("com.android.systemui.statusbar.KeyguardIndicationController", lpParam.classLoader);
+		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpParam.classLoader);
+		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpParam.classLoader);
+		Class<?> KeyguardStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarView", lpParam.classLoader);
+		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpParam.classLoader);
+		Class<?> KeyguardBottomAreaViewBinderClass = findClass("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpParam.classLoader);
+		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpParam.classLoader); //used to launch camera
+		Class<?> QRCodeScannerControllerClass = findClass("com.android.systemui.qrcodescanner.controller.QRCodeScannerController", lpParam.classLoader);
+//		Class<?> ActivityStarterDelegateClass = findClass("com.android.systemui.ActivityStarterDelegate", lpParam.classLoader);
+		Class<?> ZenModeControllerImplClass = findClass("com.android.systemui.statusbar.policy.ZenModeControllerImpl", lpParam.classLoader);
+		Class<?> FooterActionsInteractorImplClass = findClass("com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl", lpParam.classLoader);
+		Class<?> CommandQueueClass = findClass("com.android.systemui.statusbar.CommandQueue", lpParam.classLoader);
+		Class<?> AmbientDisplayConfigurationClass = findClass("android.hardware.display.AmbientDisplayConfiguration", lpParam.classLoader);
+		Class<?> AssistManagerClass = findClassIfExists("com.android.systemui.assist.AssistManager", lpParam.classLoader);
 		if(AssistManagerClass == null)
 		{
-			AssistManagerClass = findClass("com.google.android.systemui.assist.AssistManagerGoogle", lpparam.classLoader);
+			AssistManagerClass = findClass("com.google.android.systemui.assist.AssistManagerGoogle", lpParam.classLoader);
 		}
+
 
 		hookAllMethods(AmbientDisplayConfigurationClass, "alwaysOnEnabled", new XC_MethodHook() {
 			@Override
@@ -299,8 +302,9 @@ public class KeyguardMods extends XposedModPack {
 					}
 
 					if (transparentBGcolor) {
-						@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = SettingsLibUtilsProvider.getColorAttrDefaultColor(
-								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()), mContext);
+						@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = getColorAttrDefaultColor(
+								mContext,
+								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
 
 						try {
 							v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
@@ -308,12 +312,14 @@ public class KeyguardMods extends XposedModPack {
 						} catch (Throwable ignored) {}
 					} else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE){
 						@SuppressLint("DiscouragedApi")
-						int mTextColorPrimary = SettingsLibUtilsProvider.getColorAttrDefaultColor(
-								mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"), mContext);
+						int mTextColorPrimary = getColorAttrDefaultColor(
+								mContext,
+								mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"));
 
 						@SuppressLint("DiscouragedApi")
-						ColorStateList colorSurface = SettingsLibUtilsProvider.getColorAttr(
-								mContext.getResources().getIdentifier("colorSurface", "attr", "android"), mContext);
+						ColorStateList colorSurface = getColorAttr(
+								mContext,
+								mContext.getResources().getIdentifier("colorSurface", "attr", "android"));
 
 						v.getDrawable().setTint(mTextColorPrimary);
 
@@ -360,7 +366,7 @@ public class KeyguardMods extends XposedModPack {
 		};
 
 		try { //A14
-			Class<?> KeyguardIndicationControllerGoogleClass = findClass("com.google.android.systemui.statusbar.KeyguardIndicationControllerGoogle", lpparam.classLoader);
+			Class<?> KeyguardIndicationControllerGoogleClass = findClass("com.google.android.systemui.statusbar.KeyguardIndicationControllerGoogle", lpParam.classLoader);
 			hookAllConstructors(KeyguardIndicationControllerGoogleClass, keyguardIndicatorFinder);
 			hookAllMethods(KeyguardIndicationControllerGoogleClass, "computePowerIndication", powerIndicationHook);
 		}
@@ -459,8 +465,9 @@ public class KeyguardMods extends XposedModPack {
 		});
 	}
 
+
 	private void setLongPress(ImageView button, String type) {
-		if(type.length() == 0)
+		if(type.isEmpty())
 		{
 			button.setLongClickable(false);
 			return;
@@ -483,7 +490,7 @@ public class KeyguardMods extends XposedModPack {
 
 		Resources res = mContext.getResources();
 
-		if(leftShortcutClick.length() > 0) {
+		if(!leftShortcutClick.isEmpty()) {
 			((View) KeyguardBottomAreaView)
 					.findViewById(res.getIdentifier("start_button",
 							"id",
@@ -491,7 +498,7 @@ public class KeyguardMods extends XposedModPack {
 					.setVisibility(visibility);
 		}
 
-		if(rightShortcutClick.length() > 0) {
+		if(!rightShortcutClick.isEmpty()) {
 			((View) KeyguardBottomAreaView)
 					.findViewById(res.getIdentifier("end_button",
 							"id",
@@ -502,7 +509,7 @@ public class KeyguardMods extends XposedModPack {
 
 	@SuppressLint("DiscouragedApi")
 	private void convertShortcut(ImageView button, String type) {
-		if(type.length() == 0) return;
+		if(type.isEmpty()) return;
 
 		Resources res = mContext.getResources();
 
@@ -590,6 +597,7 @@ public class KeyguardMods extends XposedModPack {
 		callMethod(mAssistUtils, "launchVoiceAssistFromKeyguard");
 	}
 
+
 	private void launchTVRemote() {
 		XPLauncher.enqueueProxyCommand(proxy -> {
 			try {
@@ -631,7 +639,7 @@ public class KeyguardMods extends XposedModPack {
 		if (KGCS == null) return;
 
 		mStatusArea.post(() -> {
-			if (KGMiddleCustomText.length() == 0) {
+			if (KGMiddleCustomText.isEmpty()) {
 				mStatusArea.removeView(KGMiddleCustomTextView);
 			} else {
 				try {
@@ -647,6 +655,7 @@ public class KeyguardMods extends XposedModPack {
 			}
 		});
 	}
+
 
 	public static String getPowerIndicationString()
 	{

@@ -15,7 +15,7 @@
 	<string name="restart_needed">重启系统以生效</string>
 	<string name="more_area">显示区域更大</string>
 	<string name="less_area">显示区域更小</string>
-	<string name="current_version">Current version: %s</string>
+	<string name="current_version">当前版本：%s</string>
 	<string name="notification_channel_update">更新</string>
 	<string name="notification_channel_update_desc">此频道会展示最新更新的通知。</string>
 	<string name="new_update_title">有可用更新</string>
@@ -50,13 +50,24 @@
 	<string name="hotspot_hide_ssid_title">隐藏 SSID</string>
 	<string name="hotspot_inactivity_timeout_title">自动关闭时间</string>
 	<string name="hotspot_max_client_title">最大连接数</string>
+	<string name="hotspot_disable_approval_title">已绕过热点的问题</string>
+	<string name="hotspot_disable_approval_summary">允许非“预先批准”客户端无缝连接</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">深度效果壁纸</string>
+	<string name="depth_wallpaper_summary">动态整合壁纸的前景和时钟</string>
+	<string name="depth_wallpaper_opacity_title">壁纸前景透明度</string>
+	<string name="depth_wallpaper_aod_title">也在“息屏显示”上展示</string>
+	<string name="depth_wallpaper_model_ready">AI 模型已下载到设备</string>
+	<string name="depth_wallpaper_model_not_available">AI 模型在设备上(目前暂)不可用</string>
 	<string name="disable_unlock_hint_title">禁用解锁提示动画</string>
 	<string name="ls_general_options">锁屏选项</string>
 	<string name="hide_avatar_title">隐藏用户头像 (多用户模式)</string>
 	<string name="transparent_fingerprint_circle">隐藏屏下指纹背景</string>
 	<string name="transparent_fingerprint_circle_off">指纹背景启用</string>
 	<string name="transparent_fingerprint_circle_on">指纹背景隐藏</string>
+	<string name="fingerprint_icon">从屏下指纹移除前景图标</string>
+	<string name="fingerprint_icon_off">指纹图标已激活</string>
+	<string name="fingerprint_icon_on">指纹图标将被隐藏</string>
 	<string name="custom_text_category">自定义锁屏文本</string>
 	<string name="configure_carrier_text">设置运营商文本</string>
 	<string name="carrier_text_mod_disabled">未修改运营商文本</string>
@@ -142,6 +153,7 @@
 	<string name="nt_mode_total">下载 + 上传 (合并)</string>
 	<string name="nt_mode_rxonly">仅下载</string>
 	<string name="nt_mode_txonly">仅上传</string>
+	<string name="nt_unit_show_bits">以 bits/s 显示</string>
 	<string name="statusbar_general_options">状态栏选项</string>
 	<string name="dual_tone_battery_title">双色电池图标</string>
 	<string name="dual_tone_battery_on_summary">开启 (仅当纵向图标时生效)</string>
@@ -160,12 +172,14 @@
 	<string name="BB_Thickness_title">厚度</string>
 	<string name="BB_indicate_charging">充电显示</string>
 	<string name="BB_indicate_fast_charging">快充显示</string>
+	<string name="BB_indicate_power_save">指示节能</string>
 	<string name="BB_warning_level">电量警告</string>
 	<string name="BB_warning_tip">均设为 0 将禁用基于电量的颜色变化</string>
 	<string name="BB_batteryCriticalColor">临界值颜色</string>
 	<string name="BB_batteryWarningColor">警告颜色</string>
 	<string name="BB_batteryChargingColor">充电颜色</string>
 	<string name="BB_batteryFastChargingColor">快充颜色</string>
+	<string name="BB_batteryPowerSaveColor">节能颜色</string>
 	<string name="BB_transit_colors">颜色渐变</string>
 	<string name="colored_battery_percentage_title">充电时彩色电池百分比</string>
 	<string name="nt_stat_mode_today">今天</string>
@@ -211,6 +225,7 @@
 	<string name="wifi_cell_on">分离 WIFI 和数据磁贴</string>
 	<string name="wifi_cell_off">合并 WIFI 和数据磁贴</string>
 	<string name="QQS_brightness_category">亮度滑块选项</string>
+	<string name="QS_auto_brightness_title">自适应亮度快捷方式</string>
 	<string name="QQS_brightness_title">在下拉磁贴面板显示</string>
 	<string name="QQS_brightness_bottom_title">将亮度条移动到底部</string>
 	<string name="QS_brightness_disable_title">在磁贴面板中隐藏</string>
@@ -243,11 +258,13 @@
 	<string name="taskbar_force_enable_title">强制开启</string>
 	<string name="taskbar_force_disable_title">强制关闭</string>
 	<string name="taskbar_transient_title">Auto hide</string>
+	<string name="remap_physical_buttons_title">重映射物理按钮</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">绕过应用签名检查</string>
 	<string name="pm_allow_downgrade_title">允许应用降级</string>
 	<string name="auto_off_five_minutes">在接下来的五分钟内保持开启</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">启动器选项</string>
 	<string name="screenshot_sound_disable_title">关闭截图提示音</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">在内容受限时允许截图</string>
@@ -280,6 +297,7 @@
 	<string name="force_aod_while_charging_summary">充电时开启息屏显示</string>
 	<string name="doze_header">锁屏功能</string>
 	<string name="custom_themed_icons_title">自定义带主题的图标</string>
+	<string name="px_in_settings_title">添加 PixelXpert 到设置项</string>
 	<string name="custom_themed_icons_off">自定义图标已禁用</string>
 	<string name="custom_themed_icons_on">自定义图标已启用</string>
 	<string name="so_vol_longpress_skip">长按音量键切歌</string>
@@ -293,6 +311,15 @@
 	<string name="disable_overscroll">禁用过度滚动效果</string>
 	<string name="overscroll_on_summary">重要:你必须在 LSPosed 作用域中勾选你要禁用的app</string>
 	<string name="milliseconds">毫秒</string>
+	<string name="hours">小时</string>
+	<string name="system_time_title">系统时间</string>
+	<string name="sync_ntp_time_title">用 NTP 同步时间</string>
+	<string name="ntp_time_interval_title">同步时间间隔</string>
+	<string name="ntp_servers_title">NTP 服务器</string>
+	<string name="ntp_servers_summary">使用分号分隔多个服务器</string>
+	<string name="sync_ntp_time_now_title">立即同步</string>
+	<string name="sync_ntp_successful">时间同步成功</string>
+	<string name="sync_ntp_failed">NTP 服务器连接失败！</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">音量面板</string>
 	<string name="volume_dialog_timeout">音量控制超时</string>
@@ -362,6 +389,10 @@
 	<string name="app_kill_alert_title">通知</string>
 	<string name="app_kill_alert_body">应用现在将关闭。您可以通过点击新图标重新打开它</string>
 	<string name="app_kill_ok_btn">好的</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">请注意</string>
+	<string name="depth_effect_alert_body">使用合适的锁屏壁纸，让前台元素不会阻挡您锁屏上的整个时钟， 确保您锁屏界面的视觉吸引力和功能清晰度。\n\n注：%s.</string>
+	<string name="depth_effect_ok_btn">确定</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">需要重新启动系统才能应用设置</string>
 	<!-- Menu Items -->
@@ -446,4 +477,18 @@
 	<string name="navigation_update">更新</string>
 	<string name="navigation_hooks">钩子</string>
 	<string name="navigation_settings">设置</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">当屏幕关闭时</string>
+	<string name="while_screen_is_on_title">当屏幕开启时</string>
+	<string name="remap_long_press_power_button_title">长按电源键</string>
+	<string name="remap_long_press_volume_up_button_title">长按 音量+ 键</string>
+	<string name="remap_long_press_volume_down_button_title">长按 音量- 键</string>
+	<string name="remap_double_press_power_button_title">双击电源键</string>
+	<string name="torch">开关手电筒</string>
+	<string name="camera">启动相机</string>
+	<string name="assistant">启动语音助手</string>
+	<string name="do_not_disturb">切换勿扰模式</string>
+	<string name="pause_media">播放/暂停媒体</string>
+	<string name="skip_media_next">媒体控制 - 跳过</string>
+	<string name="skip_media_prev">媒体控制 - 上一个</string>
 </resources>

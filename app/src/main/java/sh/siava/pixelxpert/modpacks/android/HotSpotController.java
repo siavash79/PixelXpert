@@ -19,6 +19,7 @@ public class HotSpotController extends XposedModPack {
 	private static long hotSpotTimeoutMillis = 0;
 	private static boolean hotSpotHideSSID = false;
 	private static int hotSpotMaxClients = 0;
+	private static boolean hotspotDisableApproval = false;
 
 	public HotSpotController(Context context) { super(context); }
 
@@ -29,6 +30,7 @@ public class HotSpotController extends XposedModPack {
 
 		hotSpotTimeoutMillis = (long) (Xprefs.getSliderFloat( "hotSpotTimeoutSecs", 0) * 1000L);
 		hotSpotHideSSID = Xprefs.getBoolean("hotSpotHideSSID", false);
+		hotspotDisableApproval = Xprefs.getBoolean("hotspotDisableApproval", false);
 		hotSpotMaxClients = clients;
 	}
 
@@ -36,15 +38,19 @@ public class HotSpotController extends XposedModPack {
 	public boolean listensTo(String packageName) { return listenPackage.equals(packageName);	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		try
 		{
-			Class<?> SoftApConfiguration = findClass("android.net.wifi.SoftApConfiguration", lpparam.classLoader);
+			Class<?> SoftApConfiguration = findClass("android.net.wifi.SoftApConfiguration", lpParam.classLoader);
 
 			hookAllConstructors(SoftApConfiguration, new XC_MethodHook() {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					setObjectField(param.thisObject, "mHiddenSsid", hotSpotHideSSID);
+
+					if(hotspotDisableApproval) {
+						setObjectField(param.thisObject, "mClientControlByUser", false);
+					}
 
 					if(hotSpotTimeoutMillis > 0)
 					{

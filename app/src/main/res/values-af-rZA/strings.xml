@@ -50,13 +50,24 @@
 	<string name="hotspot_hide_ssid_title">Versteek SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Onaktiwiteit uitteltyd</string>
 	<string name="hotspot_max_client_title">Maksimum kliënte</string>
+	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
+	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
+	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
 	<string name="disable_unlock_hint_title">Deaktiveer die ontsluitwenk-animasie</string>
 	<string name="ls_general_options">Sluit skerm opsies</string>
 	<string name="hide_avatar_title">Verwyder gebruikeravatar (multigebruikermodus)</string>
 	<string name="transparent_fingerprint_circle">Verwyder agtergrondsirkel van vingerafdruk onder die skerm</string>
 	<string name="transparent_fingerprint_circle_off">Sirkel om vingerafdrukikoon is aktief</string>
 	<string name="transparent_fingerprint_circle_on">Sirkel om vingerafdrukikoon sal versteek word</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
+	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
 	<string name="custom_text_category">Pasgemaakte teks op sluitskerm</string>
 	<string name="configure_carrier_text">Stel diensverskafferteks op - Boaan die skerm</string>
 	<string name="carrier_text_mod_disabled">Draerteks onveranderd</string>
@@ -142,6 +153,7 @@
 	<string name="nt_mode_total">Aflaai + Laai op (Gekombineerd)</string>
 	<string name="nt_mode_rxonly">Slegs aflaai</string>
 	<string name="nt_mode_txonly">Slegs oplaai</string>
+	<string name="nt_unit_show_bits">Show in bits/s</string>
 	<string name="statusbar_general_options">Statusbalkopsies</string>
 	<string name="dual_tone_battery_title">Aktiveer dubbeltoonbatterymeter</string>
 	<string name="dual_tone_battery_on_summary">Aan (werk net met portretikoon)</string>
@@ -160,12 +172,14 @@
 	<string name="BB_Thickness_title">Staaf dikte</string>
 	<string name="BB_indicate_charging">Dui laai aan</string>
 	<string name="BB_indicate_fast_charging">Dui vinnige laai aan</string>
+	<string name="BB_indicate_power_save">Indicate power save</string>
 	<string name="BB_warning_level">Waarskuwing vlak reeks</string>
 	<string name="BB_warning_tip">Stel albei op 0 om vlakgebaseerde kleure uit te skakel</string>
 	<string name="BB_batteryCriticalColor">Kritieke vlak kleur</string>
 	<string name="BB_batteryWarningColor">Waarskuwing vlak kleur</string>
 	<string name="BB_batteryChargingColor">Laai kleur</string>
 	<string name="BB_batteryFastChargingColor">Vinnig laai kleur</string>
+	<string name="BB_batteryPowerSaveColor">Power Save color</string>
 	<string name="BB_transit_colors">Skadu kleure tussen hierdie reeks</string>
 	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
 	<string name="nt_stat_mode_today">Vandag</string>
@@ -211,6 +225,7 @@
 	<string name="wifi_cell_on">Gebruik aparte WiFi &amp; Data-teëls</string>
 	<string name="wifi_cell_off">Gebruik \'n enkele internetteël</string>
 	<string name="QQS_brightness_category">Helderheid glyer opsies</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Wys helderheidsskuifbalk op QQS-paneel</string>
 	<string name="QQS_brightness_bottom_title">Skuif die helderheidsskuifbalk na onder</string>
 	<string name="QS_brightness_disable_title">Versteek helderheid-skuifbalk vanaf Vinnige instellings</string>
@@ -243,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Force geaktiveer</string>
 	<string name="taskbar_force_disable_title">Dwing gedeaktiveer</string>
 	<string name="taskbar_transient_title">Versteek outomaties</string>
+	<string name="remap_physical_buttons_title">Remap physical buttons</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Omseil pakkethandtekeningkontrole</string>
 	<string name="pm_allow_downgrade_title">Laat programafgradering toe</string>
 	<string name="auto_off_five_minutes">Geaktiveer vir die volgende 5 minute</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Launcher options</string>
 	<string name="screenshot_sound_disable_title">Deaktiveer skermskootklank</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Laat skermkiekie van beperkte inhoud toe</string>
@@ -280,6 +297,7 @@
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">Terwyl skerm af is…</string>
 	<string name="custom_themed_icons_title">Pasgemaakte tema-ikone</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">Gepasmaakte ikone gedeaktiveer</string>
 	<string name="custom_themed_icons_on">Gepasmaakte ikone geaktiveer</string>
 	<string name="so_vol_longpress_skip">Druk lank op Volume-knoppies om musiek oor te slaan</string>
@@ -293,6 +311,15 @@
 	<string name="disable_overscroll">Deaktiveer elastiese oorrol-effek</string>
 	<string name="overscroll_on_summary">Belangrik: jy MOET die programme waarvoor jy oorblaai wil deaktiveer binne LSPosed aktiveer</string>
 	<string name="milliseconds">Millisekondes</string>
+	<string name="hours">Hours</string>
+	<string name="system_time_title">System time</string>
+	<string name="sync_ntp_time_title">Use NTP to sync time</string>
+	<string name="ntp_time_interval_title">Time synchronization interval</string>
+	<string name="ntp_servers_title">NTP servers</string>
+	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
+	<string name="sync_ntp_time_now_title">Sync now</string>
+	<string name="sync_ntp_successful">Time synced successfully</string>
+	<string name="sync_ntp_failed">NTP server connection error!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Volume panel</string>
 	<string name="volume_dialog_timeout">Volume dialog timeout</string>
@@ -362,6 +389,10 @@
 	<string name="app_kill_alert_title">Kennisgewing</string>
 	<string name="app_kill_alert_body">Toepassing sal nou toemaak. Jy kan dit weer oopmaak deur op die nuwe ikoon te tik</string>
 	<string name="app_kill_ok_btn">OK</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">\'n Stelselherlaai word vereis om die instellings toe te pas</string>
 	<!-- Menu Items -->
@@ -446,4 +477,18 @@
 	<string name="navigation_update">Update</string>
 	<string name="navigation_hooks">Hooks</string>
 	<string name="navigation_settings">Settings</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">While screen is off</string>
+	<string name="while_screen_is_on_title">While screen is on</string>
+	<string name="remap_long_press_power_button_title">Long press power button</string>
+	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
+	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
+	<string name="remap_double_press_power_button_title">Double press power button</string>
+	<string name="torch">Toggle torch</string>
+	<string name="camera">Launch camera</string>
+	<string name="assistant">Launch assistant</string>
+	<string name="do_not_disturb">Toggle Do not disturb</string>
+	<string name="pause_media">Play/Pause media</string>
+	<string name="skip_media_next">Media control - Skip</string>
+	<string name="skip_media_prev">Media control - Previous</string>
 </resources>

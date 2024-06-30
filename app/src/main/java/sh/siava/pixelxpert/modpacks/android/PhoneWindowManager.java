@@ -74,9 +74,6 @@ public class PhoneWindowManager extends XposedModPack {
 			try {
 				String action = intent.getAction();
 				switch (action) {
-					case Constants.ACTION_INSECURE_SCREENSHOT:
-						takeInsecureScreenshot();
-						break;
 					case Constants.ACTION_SCREENSHOT:
 						try
 						{
@@ -105,7 +102,7 @@ public class PhoneWindowManager extends XposedModPack {
 	};
 
 	private void switchAppProfile() {
-		if(currentUser < 0 || currentPackage.length() == 0) return;
+		if(currentUser < 0 || currentPackage.isEmpty()) return;
 
 		int startIndex = 0;
 		for(int i = 0; i < userHandleList.size(); i++)
@@ -127,7 +124,7 @@ public class PhoneWindowManager extends XposedModPack {
 				looped = true;
 			}
 
-			if(isPackageAvailabileForUser(currentPackage, userHandleList.get(i)))
+			if(isPackageAvailableForUser(currentPackage, userHandleList.get(i)))
 			{
 				switchAppToProfile(currentPackage, userHandleList.get(i));
 				break;
@@ -151,14 +148,14 @@ public class PhoneWindowManager extends XposedModPack {
 		catch (Throwable ignored)
 		{}
 	}
-	private boolean isPackageAvailabileForUser(String packageName, UserHandle userHandle) {
+	private boolean isPackageAvailableForUser(String packageName, UserHandle userHandle) {
 		//noinspection unchecked
 		return ((List<PackageInfo>)callMethod(mContext.getPackageManager(), "getInstalledPackagesAsUser", PackageManager.PackageInfoFlags.of(PackageManager.GET_META_DATA), getObjectField(userHandle, "mHandle"))).stream().anyMatch(packageInfo -> packageInfo.packageName.equals(packageName) && packageInfo.applicationInfo.enabled);
 	}
 
 	@SuppressLint("WrongConstant")
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
 		//noinspection unchecked
 		userHandleList = (List<UserHandle>) callMethod(SystemUtils.UserManager(), "getProfiles", true);
 
@@ -171,14 +168,13 @@ public class PhoneWindowManager extends XposedModPack {
 			intentFilter.addAction(Constants.ACTION_SCREENSHOT);
 			intentFilter.addAction(Constants.ACTION_HOME);
 			intentFilter.addAction(Constants.ACTION_BACK);
-			intentFilter.addAction(Constants.ACTION_INSECURE_SCREENSHOT);
 			intentFilter.addAction(Constants.ACTION_SLEEP);
 			intentFilter.addAction(Constants.ACTION_SWITCH_APP_PROFILE);
 			mContext.registerReceiver(broadcastReceiver, intentFilter, RECEIVER_EXPORTED); //for Android 14, receiver flag is mandatory
 		}
 
 		try {
-			Class<?> PhoneWindowManagerClass = findClass("com.android.server.policy.PhoneWindowManager", lpparam.classLoader);
+			Class<?> PhoneWindowManagerClass = findClass("com.android.server.policy.PhoneWindowManager", lpParam.classLoader);
 
 			hookAllMethods(PhoneWindowManagerClass, "onDefaultDisplayFocusChangedLw", new XC_MethodHook() {
 				@Override
@@ -195,27 +191,27 @@ public class PhoneWindowManager extends XposedModPack {
 								currentPackage = newPackageName;
 								currentUser = newUserID;
 
-								boolean avaialbleOnOtherUsers = false;
+								boolean availableOnOtherUsers = false;
 								for(UserHandle userHandle : userHandleList)
 								{
 									int thisUserID = (int) getObjectField(userHandle, "mHandle");
 									if(thisUserID != currentUser)
 									{
-										if(isPackageAvailabileForUser(currentPackage, userHandle))
+										if(isPackageAvailableForUser(currentPackage, userHandle))
 										{
-											avaialbleOnOtherUsers = true;
+											availableOnOtherUsers = true;
 											break;
 										}
 									}
 								}
-								sendAppProfileSwitchAvailable(avaialbleOnOtherUsers);
+								sendAppProfileSwitchAvailable(availableOnOtherUsers);
 							}
 						}
 					}).start();
 				}
 			});
 
-			ScreenshotRequestClass = findClassIfExists("com.android.internal.util.ScreenshotRequest", lpparam.classLoader); //13 QPR3
+			ScreenshotRequestClass = findClassIfExists("com.android.internal.util.ScreenshotRequest", lpParam.classLoader); //13 QPR3
 			hookAllMethods(PhoneWindowManagerClass, "enableScreen", new XC_MethodHook() {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -237,6 +233,7 @@ public class PhoneWindowManager extends XposedModPack {
 		}).start();
 	}
 
+	/** @noinspection unused*/
 	@Deprecated
 	private void takeInsecureScreenshot() {
 		if (mDisplayManagerInternal == null) {

@@ -50,13 +50,24 @@
 	<string name="hotspot_hide_ssid_title">نام مخفی باشد</string>
 	<string name="hotspot_inactivity_timeout_title">مدت زمان غیر فعال بود</string>
 	<string name="hotspot_max_client_title">حداکثر تعداد کاربران</string>
+	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
+	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
+	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
 	<string name="disable_unlock_hint_title">حذف انیمیشن راهنمایی باز کردن قفل</string>
 	<string name="ls_general_options">تنظیمات قفل صفحه</string>
 	<string name="hide_avatar_title">حذف نمایه کاربر (حالت چند کاربره)</string>
 	<string name="transparent_fingerprint_circle">پنهان کردن دایره اثر انگشت زیر نمایشگر</string>
 	<string name="transparent_fingerprint_circle_off">دایره اطراف نماد اثر انگشت فعال است</string>
 	<string name="transparent_fingerprint_circle_on">دایره اطراف نماد اثر انگشت پنهان شد</string>
+	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
+	<string name="fingerprint_icon_off">نماد اثرانگشت فعال است</string>
+	<string name="fingerprint_icon_on">نماد اثرانگشت پنهان خواهد شد</string>
 	<string name="custom_text_category">متن دلخواه در صفحه قفل</string>
 	<string name="configure_carrier_text">متن دلخواه نام اپراتور (بالای صفحه)</string>
 	<string name="carrier_text_mod_disabled">نام اپراتور بدون تغییر</string>
@@ -142,6 +153,7 @@
 	<string name="nt_mode_total">دانلود+‌ آپلود (ترکیبی)</string>
 	<string name="nt_mode_rxonly">فقط دانلود</string>
 	<string name="nt_mode_txonly">فقط آپلود</string>
+	<string name="nt_unit_show_bits">نمایش در بیت‌ بر ثانیه</string>
 	<string name="statusbar_general_options">تنظیمات نوار وضعیت</string>
 	<string name="dual_tone_battery_title">باتری دو رنگ</string>
 	<string name="dual_tone_battery_on_summary">روشن (فقط با نماد عمودی کار می کند)</string>
@@ -160,14 +172,16 @@
 	<string name="BB_Thickness_title">ضخامت</string>
 	<string name="BB_indicate_charging">نمایش شارژ شدن</string>
 	<string name="BB_indicate_fast_charging">نمایش شارژ سریع</string>
+	<string name="BB_indicate_power_save">نشان دادن ذخیره باتری</string>
 	<string name="BB_warning_level">محدوده هشدار</string>
 	<string name="BB_warning_tip">برای غیرفعال کردن رنگ‌ها، هر دو را روی 0 تنظیم کنید</string>
 	<string name="BB_batteryCriticalColor">رنگ سطح بحرانی</string>
 	<string name="BB_batteryWarningColor">رنگ سطح هشدار</string>
 	<string name="BB_batteryChargingColor">رنگ شارژ</string>
 	<string name="BB_batteryFastChargingColor">رنگ شارژ سریع</string>
+	<string name="BB_batteryPowerSaveColor">رنگ ذخیره باتری</string>
 	<string name="BB_transit_colors">تنظیم رنگ بر اساس سطح باتری</string>
-	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
+	<string name="colored_battery_percentage_title">رنگی بودن درصد باتری هنگام شارژ</string>
 	<string name="nt_stat_mode_today">امروز</string>
 	<string name="nt_stat_mode_week">هفته جاری</string>
 	<string name="nt_stat_mode_month">ماه جاری</string>
@@ -200,7 +214,7 @@
 	<string name="vibration_type_touch">شدت توسط تنظیمات لرزش لمسی سیستم تعریف شده است</string>
 	<string name="qs_tile_qty_portrait">در جهت پرتره</string>
 	<string name="qs_tile_qty_landscape">در جهت گیری منظره</string>
-	<string name="qs_mod_category_misc_title">Miscellaneous</string>
+	<string name="qs_mod_category_misc_title">متفرقه</string>
 	<string name="charging_info_on_qs">Show charging info on QS panel</string>
 	<string name="qs_rows_number">تعداد ردیفهای تنظیمات سریع</string>
 	<string name="qs_cols_number">تعداد ستونهای تنظیمات سریع</string>
@@ -211,6 +225,7 @@
 	<string name="wifi_cell_on">جداسازی تنظیمات وای فای و اینترنت همراه</string>
 	<string name="wifi_cell_off">تلفیق تنظیمات وای فای و اینترنت همراه</string>
 	<string name="QQS_brightness_category">تنظیمات نوار نور صفحه</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">نوار نور صفحه در پنل QQS</string>
 	<string name="QQS_brightness_bottom_title">نوار نور صفحه در پایین تنظیمات سریع باشد</string>
 	<string name="QS_brightness_disable_title">حذف نوار نور صفحه از تنظیمات سریع</string>
@@ -243,11 +258,13 @@
 	<string name="taskbar_force_enable_title">فعال باشد</string>
 	<string name="taskbar_force_disable_title">غیر فعال باشد</string>
 	<string name="taskbar_transient_title">پنهان کردن خودکار</string>
+	<string name="remap_physical_buttons_title">Remap physical buttons</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">دور زدن چک امضای بسته</string>
 	<string name="pm_allow_downgrade_title">اجازه تنزل برنامه</string>
 	<string name="auto_off_five_minutes">موقتا فعال شد</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Launcher options</string>
 	<string name="screenshot_sound_disable_title">غیرفعال کردن صدای اسکرین شات</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">اجازه گرفتن اسکرین شات از محتوای محدود شده</string>
@@ -260,8 +277,8 @@
 	<string name="force_themed_icons_title">ایجاد خودکار نمادهای تک رنگ ناقص (فقط راه‌انداز پیکسل)</string>
 	<string name="reapply_themed_config">مجدداً نمادهای مضمون را فعال کنید تا اعمال شوند</string>
 	<string name="volume_button_step_title">مراحل صدای موزیک (0 تا 100%)</string>
-	<string name="display_resolution_switch_title">Modify display resolution</string>
-	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
+	<string name="display_resolution_switch_title">تغییر رزولوشن صفحه نمایش</string>
+	<string name="display_resolution_switch_summary">قبل از فعال کردن این، لطفاً تمام تنظیمات مربوط به اندازه/dpi صفحه نمایش را به حالت پیش‌فرض برگردانید</string>
 	<string name="display_resolution_title">ابعاد صفحه نمایش</string>
 	<string name="brightness_range_title">محدوده مجاز نور صفحه</string>
 	<string name="brightness_range_not_linear">این محدوده خطی نیست: بعضی اوقات باید آزمون و خطا کنید</string>
@@ -276,10 +293,11 @@
 	<string name="so_tap_to_show_ambient_summary">[هنگامی که نمایشگر همیشه روشن خاموش است] ضربه زدن روی صفحه نمایشگر محیط را نشان می دهد</string>
 	<string name="so_pick_to_show_ambient_title">برای نشان دادن نمایشگر محیطی انتخاب کنید</string>
 	<string name="so_pick_to_show_ambient_summary">[وقتی نمایشگر همیشه روشن خاموش است] انتخاب تلفن صفحه نمایش محیط را نشان می دهد</string>
-	<string name="force_aod_while_charging_title">Force AOD while charging</string>
+	<string name="force_aod_while_charging_title">مجبور کردن صفحه نمایش همیشه روشن هنگام شارژ</string>
 	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
 	<string name="doze_header">وقتی که صفحه نمایش خاموش است…</string>
 	<string name="custom_themed_icons_title">نمادهای با تم سفارشی</string>
+	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
 	<string name="custom_themed_icons_off">نمادهای سفارشی غیرفعال است</string>
 	<string name="custom_themed_icons_on">نمادهای سفارشی فعال شد</string>
 	<string name="so_vol_longpress_skip">فشار طولانی دکمه های میزان صدا برای رد کردن موزیک</string>
@@ -293,6 +311,15 @@
 	<string name="disable_overscroll">غیر فعال کردن حالت الاستیک اسکرول صفحه</string>
 	<string name="overscroll_on_summary">مهم: هر برنامه که این امکان مورد نیاز است باید در LSposed اضافه شود</string>
 	<string name="milliseconds">هزارم ثانیه</string>
+	<string name="hours">Hours</string>
+	<string name="system_time_title">System time</string>
+	<string name="sync_ntp_time_title">Use NTP to sync time</string>
+	<string name="ntp_time_interval_title">Time synchronization interval</string>
+	<string name="ntp_servers_title">NTP servers</string>
+	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
+	<string name="sync_ntp_time_now_title">Sync now</string>
+	<string name="sync_ntp_successful">Time synced successfully</string>
+	<string name="sync_ntp_failed">NTP server connection error!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">پنل صدا</string>
 	<string name="volume_dialog_timeout">مدت زمان نمایش پنجره صدا</string>
@@ -362,6 +389,10 @@
 	<string name="app_kill_alert_title">اطلاع</string>
 	<string name="app_kill_alert_body">برنامه اکنون بسته خواهد شد. با ضربه زدن روی نماد جدید می توانید دوباره آن را باز کنید</string>
 	<string name="app_kill_ok_btn">خوب</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Attention</string>
+	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">برای اعمال تنظیمات به راه اندازی مجدد سیستم نیاز است</string>
 	<!-- Menu Items -->
@@ -446,4 +477,18 @@
 	<string name="navigation_update">به‌روزرسانی</string>
 	<string name="navigation_hooks">اتصالات</string>
 	<string name="navigation_settings">تنظیمات</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">While screen is off</string>
+	<string name="while_screen_is_on_title">While screen is on</string>
+	<string name="remap_long_press_power_button_title">Long press power button</string>
+	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
+	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
+	<string name="remap_double_press_power_button_title">Double press power button</string>
+	<string name="torch">Toggle torch</string>
+	<string name="camera">Launch camera</string>
+	<string name="assistant">Launch assistant</string>
+	<string name="do_not_disturb">Toggle Do not disturb</string>
+	<string name="pause_media">Play/Pause media</string>
+	<string name="skip_media_next">Media control - Skip</string>
+	<string name="skip_media_prev">Media control - Previous</string>
 </resources>

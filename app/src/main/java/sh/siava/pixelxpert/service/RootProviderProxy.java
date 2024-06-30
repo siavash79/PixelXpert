@@ -1,10 +1,9 @@
 package sh.siava.pixelxpert.service;
 
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
+import android.graphics.Bitmap;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -12,14 +11,16 @@ import android.os.RemoteException;
 import androidx.annotation.Nullable;
 
 import com.topjohnwu.superuser.Shell;
-import com.topjohnwu.superuser.ipc.RootService;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.List;
 
 import sh.siava.pixelxpert.IRootProviderProxy;
-import sh.siava.pixelxpert.IRootProviderService;
 import sh.siava.pixelxpert.R;
+import sh.siava.pixelxpert.modpacks.Constants;
+import sh.siava.pixelxpert.utils.BitmapSubjectSegmenter;
 
 public class RootProviderProxy extends Service {
 	@Nullable
@@ -33,78 +34,75 @@ public class RootProviderProxy extends Service {
 		/** @noinspection unused*/
 		String TAG = getClass().getSimpleName();
 
-		private final Context mContext;
-		private IRootProviderService mRootServiceIPC;
 		private final List<String> rootAllowedPacks;
-
-		private final ServiceConnection mRootServiceConnection = new ServiceConnection() {
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			mRootServiceIPC = IRootProviderService.Stub.asInterface(service);
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-			mRootServiceIPC = null;
-		}
-	};
-
+		private final boolean rootGranted;
 
 		private RootPoviderProxyIPC(Context context)
 		{
-			mContext = context;
+			try {
+				Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER));
+			}
+			catch (Throwable ignored){}
+			rootGranted = Shell.getShell().isRoot();
 
-			rootAllowedPacks = Arrays.asList(mContext.getResources().getStringArray(R.array.root_requirement));
+			if(!rootGranted)
+			{
+				context.sendBroadcast(new Intent(Constants.ACTION_KSU_ACQUIRE_ROOT));
+			}
 
-			startRootService();
+			rootAllowedPacks = Arrays.asList(context.getResources().getStringArray(R.array.root_requirement));
 		}
 
-		private void startRootService()
-		{
-			// Start RootService connection
-			Intent intent = new Intent(mContext, RootProvider.class);
-			RootService.bind(intent, mRootServiceConnection);
-		}
-
+		/** @noinspection RedundantThrows*/
 		@Override
 		public String[] runCommand(String command) throws RemoteException {
-			ensureEnvironment();
+			try {
+				ensureEnvironment();
 
-			List<String> result = Shell.cmd(command).exec().getOut();
-			return result.toArray(new String[0]);
+				List<String> result = Shell.cmd(command).exec().getOut();
+				return result.toArray(new String[0]);
+			}
+			catch (Throwable t)
+			{
+				return new String[0];
+			}
 		}
 
 		@Override
-		public IBinder getFileSystemService() throws RemoteException {
+		public void extractSubject(Bitmap input, String resultPath) throws RemoteException {
 			ensureEnvironment();
 
-			return mRootServiceIPC.getFileSystemService();
+			try {
+				new BitmapSubjectSegmenter(getApplicationContext()).segmentSubject(input, new BitmapSubjectSegmenter.SegmentResultListener() {
+					@Override
+					public void onSuccess(Bitmap result) {
+						try {
+							File tempFile = File.createTempFile("lswt", ".png");
+
+							FileOutputStream outputStream = new FileOutputStream(tempFile);
+							result.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+
+							outputStream.close();
+							result.recycle();
+
+							Shell.cmd("cp -F " + tempFile.getAbsolutePath() + " " + resultPath).exec();
+							Shell.cmd("chmod 644 " + resultPath).exec();
+						} catch (Throwable ignored) {}
+					}
+
+					@Override
+					public void onFail() {}
+				});
+			} catch (Throwable ignored) {}
 		}
 
 		private void ensureEnvironment() throws RemoteException {
-			ensureSecurity(Binder.getCallingUid());
-
-			if(mRootServiceIPC == null)
+			if(!rootGranted)
 			{
-				startRootService();
-
-				long startTime = System.currentTimeMillis();
-				while(mRootServiceIPC == null && System.currentTimeMillis() > startTime + 5000)
-				{
-					try {
-						//noinspection BusyWait
-						Thread.sleep(50);
-					} catch (InterruptedException ignored) {
-						throw new RemoteException("Root service connection interrupted");
-					}
-				}
-
-				if(mRootServiceIPC == null)
-				{
-					//This shouldn't happen at all
-					throw new RemoteException("Timeout: Could not connect to root service");
-				}
+				throw new RemoteException("Root permission denied");
 			}
+
+			ensureSecurity(Binder.getCallingUid());
 		}
 
 		private void ensureSecurity(int uid) throws RemoteException {

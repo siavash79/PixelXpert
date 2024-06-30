@@ -17,11 +17,9 @@ public class NotificationIconContainerOverride {
 	public static final int STATE_ICON = 0;
 	public static final int STATE_DOT = 1;
 	public static final int STATE_HIDDEN = 2;
-
-	public static int MAX_STATIC_ICONS = 4;
-	public static int MAX_ICONS_ON_AOD = 3;
 	private static final int MAX_DOTS = 1;
 	private static final int NO_VALUE = Integer.MIN_VALUE;
+	public static final int LEGACY_MAX_ICONS = 4;
 
 	public static void calculateIconXTranslations(XC_MethodHook.MethodHookParam param) { //A13
 		ViewGroup thisObject = (ViewGroup) param.thisObject;
@@ -33,11 +31,6 @@ public class NotificationIconContainerOverride {
 		float translationX = (float) callMethod(thisObject, "getActualPaddingStart");
 		int firstOverflowIndex = -1;
 		int childCount = thisObject.getChildCount();
-		int maxVisibleIcons = getBooleanField(thisObject, "mOnLockScreen")
-				? MAX_ICONS_ON_AOD
-				: getBooleanField(thisObject, "mIsStaticLayout")
-					? MAX_STATIC_ICONS
-					: childCount;
 
 		float layoutEnd = getLayoutEnd(thisObject);
 		setObjectField(thisObject, "mVisualOverflowStart", 0);
@@ -63,12 +56,30 @@ public class NotificationIconContainerOverride {
 				setObjectField(thisObject, "mFirstVisibleIconState", iconState);
 			}
 			int mSpeedBumpIndex = getIntField(thisObject, "mSpeedBumpIndex");
-			boolean forceOverflow = mSpeedBumpIndex != -1 && i >= mSpeedBumpIndex
-					&& getFloatField(iconState, "iconAppearAmount") > 0.0f || i >= maxVisibleIcons;
+
+			int maxIcons = LEGACY_MAX_ICONS; //legacy versions
+			try { //viewmodel versions of the class
+				maxIcons = getIntField(thisObject, "mMaxIcons");
+			}
+			catch (Throwable ignored){}
+
+			boolean forceOverflow = shouldForceOverflow(i, mSpeedBumpIndex, getFloatField(iconState, "iconAppearAmount"), maxIcons);
+
 			boolean isLastChild = i == childCount - 1;
-			float drawingScale = getBooleanField(thisObject, "mOnLockScreen") && view.getClass().getName().endsWith("StatusBarIconView")
-					? getIconScaleIncreased(view)
-					: 1f;
+			float drawingScale;
+
+			try { //older versions
+				drawingScale = getBooleanField(thisObject, "mOnLockScreen") && view.getClass().getName().endsWith("StatusBarIconView")
+						? getIconScaleIncreased(view)
+						: 1f;
+			}
+			catch (Throwable ignored) //A15 Beta 2
+			{
+				drawingScale = getBooleanField(thisObject, "mUseIncreasedIconScale") && view.getClass().getName().endsWith("StatusBarIconView")
+						? getIconScaleIncreased(view)
+						: 1f;
+			}
+
 			setObjectField(iconState, "visibleState", getBooleanField(iconState, "hidden")
 					? STATE_HIDDEN
 					: STATE_ICON);
@@ -148,7 +159,12 @@ public class NotificationIconContainerOverride {
 		}
 	}
 
-	//Since classloader can't find these methods, we implement them ourselves
+	private static boolean shouldForceOverflow(int i, int speedBumpIndex, float iconAppearAmount,
+	                                           int maxVisibleIcons) {
+		return speedBumpIndex != -1 && i >= speedBumpIndex
+				&& iconAppearAmount > 0.0f || i >= maxVisibleIcons;
+	}
+//Since classloader can't find these methods, we implement them ourselves
 	private static float getLayoutEnd(View v) {
 		return getActualWidth(v) - getActualPaddingEnd(v);
 	}

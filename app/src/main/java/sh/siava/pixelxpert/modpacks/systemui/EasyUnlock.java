@@ -41,12 +41,12 @@ public class EasyUnlock extends XposedModPack {
 	}
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-		if (!lpparam.packageName.equals(listenPackage)) return;
+	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
+		if (!lpParam.packageName.equals(listenPackage)) return;
 
-		Class<?> KeyguardAbsKeyInputViewControllerClass = findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpparam.classLoader);
-		Class<?> LockscreenCredentialClass = findClass("com.android.internal.widget.LockscreenCredential", lpparam.classLoader);
-		Class<?> StatusBarKeyguardViewManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager", lpparam.classLoader);
+		Class<?> KeyguardAbsKeyInputViewControllerClass = findClass("com.android.keyguard.KeyguardAbsKeyInputViewController", lpParam.classLoader);
+		Class<?> LockscreenCredentialClass = findClass("com.android.internal.widget.LockscreenCredential", lpParam.classLoader);
+		Class<?> StatusBarKeyguardViewManagerClass = findClass("com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager", lpParam.classLoader);
 
 		boolean pre13QPR3 = findFieldIfExists(StatusBarKeyguardViewManagerClass, "mBouncer") != null;
 
@@ -76,7 +76,18 @@ public class EasyUnlock extends XposedModPack {
 				if (passwordLen == expectedPassLen && passwordLen > lastPassLen) {
 					new Thread(() -> {
 						try { //don't crash systemUI if failed
-							int userId = (int) getObjectField(getObjectField(param.thisObject, "mKeyguardUpdateMonitor"), "sCurrentUser");
+							int userId;
+							try { //14 QPR3 beta 2.1
+								userId = (int) callMethod(
+										getObjectField(
+												getObjectField(param.thisObject, "mKeyguardUpdateMonitor"),
+												"mSelectedUserInteractor")
+										, "getSelectedUserId");
+							}
+							catch (Throwable ignored)
+							{ //14 QPR3 beta 2 and older
+								userId = (int) getObjectField(getObjectField(param.thisObject, "mKeyguardUpdateMonitor"), "sCurrentUser");
+							}
 
 							String methodName = param.thisObject.getClass().getName().contains("Password") ? "createPassword" : "createPin";
 
@@ -91,17 +102,18 @@ public class EasyUnlock extends XposedModPack {
 
 							if (accepted) {
 								View mView = (View) getObjectField(param.thisObject, "mView");
+								int finalUserId = userId;
 								mView.post(() -> {
 									try { //13 QPR3
-										callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, getObjectField(param.thisObject, "mSecurityMode"));
+										callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", finalUserId, getObjectField(param.thisObject, "mSecurityMode"));
 										return;
 									} catch (Throwable ignored) {
 									}
 
 									try { //Pre 13QPR3
-										callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */, getObjectField(param.thisObject, "mSecurityMode"));
+										callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", finalUserId, true /* sucessful */, getObjectField(param.thisObject, "mSecurityMode"));
 									} catch (Throwable ignored) { //PRE-Pre 13QPR3
-										callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", userId, true /* sucessful */);
+										callMethod(callMethod(param.thisObject, "getKeyguardSecurityCallback"), "dismiss", finalUserId, true /* sucessful */);
 									}
 								});
 							}
@@ -118,9 +130,9 @@ public class EasyUnlock extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if (!easyUnlockEnabled) return;
 
-				boolean succesful = (boolean) param.args[2];
+				boolean successful = (boolean) param.args[2];
 
-				if (succesful) {
+				if (successful) {
 					expectedPassLen = lastPassLen;
 					Xprefs.edit().putInt("expectedPassLen", expectedPassLen).commit();
 				}

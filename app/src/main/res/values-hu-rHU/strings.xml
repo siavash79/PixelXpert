@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Alternatív témájú ikon</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">Testreszabás Google Pixel eszközökhöz</string>
 	<string name="volume_tile_title">Média kötet</string>
 	<string name="app_switch_tile_title">Alkalmazás profil váltás</string>
 	<string name="hide_default">Elrejtés (alapértelmezett)</string>
@@ -34,8 +34,8 @@
 	<string name="telegram_group_title">Telegram csoport</string>
 	<string name="usage_title">Használat</string>
 	<string name="usage_summary">Nyissa meg a wiki oldalt</string>
-	<string name="crowdin_title">Translate to your language</string>
-	<string name="crowdin_summary">Help us in translating %s into your own language</string>
+	<string name="crowdin_title">Fordítsd le a saját nyelvedre</string>
+	<string name="crowdin_summary">Segíts lefordítani a %s a saját nyelvedre</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Lezárási képernyő</string>
 	<string name="statusbar_header">Állapotsor</string>
@@ -50,13 +50,24 @@
 	<string name="hotspot_hide_ssid_title">SSID elrejtése</string>
 	<string name="hotspot_inactivity_timeout_title">Inaktivitási időtúllépés</string>
 	<string name="hotspot_max_client_title">Maximális ügyfélszám</string>
+	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
+	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
 	<!--Lock screen related-->
+	<string name="depth_wallpaper_title">Mélységi effektes háttérkép</string>
+	<string name="depth_wallpaper_summary">Dinamikusan előtérbe helyezi a háttér bizonyos részei az óra elé</string>
+	<string name="depth_wallpaper_opacity_title">Háttérkép előtérbeni áttetszősége</string>
+	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
+	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
 	<string name="disable_unlock_hint_title">Tiltsa le a feloldó tipp animációt</string>
 	<string name="ls_general_options">Lezárási képernyő beállításai</string>
 	<string name="hide_avatar_title">Felhasználói avatar eltávolítása (többfelhasználós mód)</string>
 	<string name="transparent_fingerprint_circle">Távolítsa el a háttérkört a kijelző alatti ujjlenyomatból</string>
 	<string name="transparent_fingerprint_circle_off">Az ujjlenyomat ikon körüli kör aktív</string>
 	<string name="transparent_fingerprint_circle_on">Az ujjlenyomat ikon körüli kör el lesz rejtve</string>
+	<string name="fingerprint_icon">Távolítsa el a háttérkört a kijelző alatti ujjlenyomatból</string>
+	<string name="fingerprint_icon_off">Ujjlenyomat ikon aktív</string>
+	<string name="fingerprint_icon_on">Ujjlenyomat ikon el lesz rejtve</string>
 	<string name="custom_text_category">Egyéni szöveg a lezárási képernyőn</string>
 	<string name="configure_carrier_text">Szolgáltatói szöveg konfigurálása – a képernyő tetején</string>
 	<string name="carrier_text_mod_disabled">A szolgáltató szövege változatlan</string>
@@ -81,7 +92,7 @@
 	<string name="easy_unlock_title">Egyszerű feloldás (Pin/jelszó)</string>
 	<string name="easy_unlock_summary">Ha az első alkalommal nem sikerült, próbálja újra</string>
 	<string name="charging_info_title">Töltési információk a lezárási képernyőn</string>
-	<string name="disable_lockscreen_pill_title">Don\'t show \"Customize Lock Screen\" pill</string>
+	<string name="disable_lockscreen_pill_title">Ne mutassa a \"Zár képernyő testreszabása\" gombot</string>
 	<string name="imperial_units_title">Használjon angolszász mértékegységet</string>
 	<!--Status bar related-->
 	<string name="double_tap_sleep_title">Dupla érintésre alvó mód</string>
@@ -142,6 +153,7 @@
 	<string name="nt_mode_total">Letöltés + Feltöltés (kombinált)</string>
 	<string name="nt_mode_rxonly">Csak letöltés</string>
 	<string name="nt_mode_txonly">Csak feltöltés</string>
+	<string name="nt_unit_show_bits">Mutassa bits/s-ben</string>
 	<string name="statusbar_general_options">Az állapotsor beállításai</string>
 	<string name="dual_tone_battery_title">A kéttónusú akkumulátormérő engedélyezése</string>
 	<string name="dual_tone_battery_on_summary">Be (csak az álló ikonnal működik)</string>
@@ -160,14 +172,16 @@
 	<string name="BB_Thickness_title">A sor vastagsága</string>
 	<string name="BB_indicate_charging">Töltés jelzése</string>
 	<string name="BB_indicate_fast_charging">Gyorstöltés kijelzése</string>
+	<string name="BB_indicate_power_save">Energia állapot kijelzése</string>
 	<string name="BB_warning_level">Figyelmeztetési szint tartomány</string>
 	<string name="BB_warning_tip">Állítsa mindkettőt 0-ra a szintalapú színek letiltásához</string>
 	<string name="BB_batteryCriticalColor">Kritikus szintű szín</string>
 	<string name="BB_batteryWarningColor">Figyelmeztető szint színe</string>
 	<string name="BB_batteryChargingColor">Töltő szín</string>
 	<string name="BB_batteryFastChargingColor">Gyors töltés szín</string>
+	<string name="BB_batteryPowerSaveColor">Akkumulátor kímélő mód színe</string>
 	<string name="BB_transit_colors">Árnyékolja a színeket e tartomány között</string>
-	<string name="colored_battery_percentage_title">Colored battery percentage while charging</string>
+	<string name="colored_battery_percentage_title">Színes akkumulátor ikon töltés során</string>
 	<string name="nt_stat_mode_today">Ma</string>
 	<string name="nt_stat_mode_week">Jelenlegi hét</string>
 	<string name="nt_stat_mode_month">Jelenlegi hónap</string>
@@ -195,13 +209,13 @@
 	<string name="qs_pulldown_switch_title">Gyors QS panel legördülő az állapotsorról</string>
 	<string name="qs_pulldown_side_title">Gyorsan lehúzható oldal</string>
 	<string name="qs_pulldown_category">Gyors beállítások legördülő menü</string>
-	<string name="qs_pullup_switch_title">Close quick settings with one swipe</string>
+	<string name="qs_pullup_switch_title">A gyors beállítások bezárása egy húzással</string>
 	<string name="qs_haptic_switch_title">Rezgés a QS csempecsapon</string>
 	<string name="vibration_type_touch">A rendszer érintési rezgésbeállításai által meghatározott intenzitás</string>
 	<string name="qs_tile_qty_portrait">Álló tájolásban</string>
 	<string name="qs_tile_qty_landscape">Fekvő tájolásban</string>
-	<string name="qs_mod_category_misc_title">Miscellaneous</string>
-	<string name="charging_info_on_qs">Show charging info on QS panel</string>
+	<string name="qs_mod_category_misc_title">Egyebek</string>
+	<string name="charging_info_on_qs">Töltési információk kijelzése a gyors beállítások panelen</string>
 	<string name="qs_rows_number">QS-sorok száma</string>
 	<string name="qs_cols_number">QS oszlopok száma</string>
 	<string name="qqs_tiles_number">Maximális csempék a Quick QS-ben (max. 2 sor)</string>
@@ -211,6 +225,7 @@
 	<string name="wifi_cell_on">Használjon külön WiFi &amp; adatlapkákat</string>
 	<string name="wifi_cell_off">Használjon egyetlen internetes csempét</string>
 	<string name="QQS_brightness_category">Fényerő-csúszka beállításai</string>
+	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
 	<string name="QQS_brightness_title">Fényerő-csúszka megjelenítése a QQS panelen</string>
 	<string name="QQS_brightness_bottom_title">Mozgassa a fényerő csúszkát alul</string>
 	<string name="QS_brightness_disable_title">Fényerő-csúszka elrejtése a Gyorsbeállításokban</string>
@@ -243,11 +258,13 @@
 	<string name="taskbar_force_enable_title">Kényszer engedélyezve</string>
 	<string name="taskbar_force_disable_title">Kényszer letiltva</string>
 	<string name="taskbar_transient_title">Automatikus elrejtés</string>
+	<string name="remap_physical_buttons_title">Remap physical buttons</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Csomag aláírás-ellenőrzés megkerülése</string>
 	<string name="pm_allow_downgrade_title">Alkalmazás visszaminősítésének engedélyezése</string>
 	<string name="auto_off_five_minutes">Engedélyezve a következő 5 percben</string>
 	<!--Miscellaneous section related-->
+	<string name="launcher_section">Launcher options</string>
 	<string name="screenshot_sound_disable_title">Képernyőkép hangjának letiltása</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Képernyőkép engedélyezése korlátozott tartalomból</string>
@@ -257,11 +274,11 @@
 	<string name="allow_all_screen_rotations_summary">Figyelmen kívül hagyja a kézi forgató lebegő gombot is</string>
 	<string name="force_no_cutout">Hagyja figyelmen kívül a kamera kivágását</string>
 	<string name="clear_all_reposition_title">Adjon hozzá egy hozzáférhető, minden törlése gombot a legutóbbi oldalhoz</string>
-	<string name="force_themed_icons_title">Auto-generate missing themed icons (Pixel launcher only)</string>
+	<string name="force_themed_icons_title">Automatikusan hozza létre a hiányzó témázott ikonokat (csak Pixel Launcher-re működik)</string>
 	<string name="reapply_themed_config">Az alkalmazáshoz engedélyezze újra a tematikus ikonokat</string>
 	<string name="volume_button_step_title">Hangerő lépések (0-100%)</string>
-	<string name="display_resolution_switch_title">Modify display resolution</string>
-	<string name="display_resolution_switch_summary">Before enabling this, make sure to reset all display size/dpi changes to default</string>
+	<string name="display_resolution_switch_title">Képernyő felbontás módosítása</string>
+	<string name="display_resolution_switch_summary">Mielőtt engedélyeznéd ezt, győződj meg róla, hogy minden képernyő méret/dpi változásokat az eredeti értékekre visszaállítottál</string>
 	<string name="display_resolution_title">Kijelző felbontása</string>
 	<string name="brightness_range_title">A kijelző fényerejének korlátai</string>
 	<string name="brightness_range_not_linear">Ez a tartomány NEM lineáris: Néha egy kis eltérés jelentős változásokhoz vezet</string>
@@ -276,26 +293,36 @@
 	<string name="so_tap_to_show_ambient_summary">[Amikor a kijelző mindig ki van kapcsolva] A képernyő megérintésével megjelenik a környezeti kijelzés</string>
 	<string name="so_pick_to_show_ambient_title">Válassza ki a környezeti kijelző megjelenítéséhez</string>
 	<string name="so_pick_to_show_ambient_summary">[Amikor mindig a kijelző ki van kapcsolva] A telefon kiválasztásakor a környezeti kijelző látható</string>
-	<string name="force_aod_while_charging_title">Force AOD while charging</string>
-	<string name="force_aod_while_charging_summary">Keep always on display enabled while device is charging</string>
+	<string name="force_aod_while_charging_title">AOD kényszerítése töltés alatt</string>
+	<string name="force_aod_while_charging_summary">A \"mindig bekapcsolt\" kijelző engedélyezése, míg a készülék tölt</string>
 	<string name="doze_header">Amíg a képernyő ki van kapcsolva,…</string>
 	<string name="custom_themed_icons_title">Egyedi témájú ikonok</string>
+	<string name="px_in_settings_title">PixelXpert hozzáadása a beállításokhoz</string>
 	<string name="custom_themed_icons_off">Egyéni ikonok letiltva</string>
 	<string name="custom_themed_icons_on">Egyéni ikonok engedélyezve</string>
 	<string name="so_vol_longpress_skip">A zene kihagyásához nyomja meg hosszan a hangerő gombokat</string>
 	<string name="notifications_header">Értesítési lehetőségek</string>
 	<string name="expand_notifications_icons_title">Az összes kibontása/összecsukása gomb hozzáadása</string>
-	<string name="disbale_ongoing_notif_dismiss_title">Never dismiss ongoing notifications</string>
+	<string name="disbale_ongoing_notif_dismiss_title">Soha ne törölje a futó értesítéseket</string>
 	<string name="heads_up_notification_duration">Figyelmeztető értesítés időtartama</string>
-	<string name="notif_default_expansion_title">Notification default expansion</string>
-	<string name="notif_always_expand">Always expand</string>
-	<string name="notif_always_collapse">Always collapse</string>
+	<string name="notif_default_expansion_title">Értesítések alap terjedelme</string>
+	<string name="notif_always_expand">Mindig kiterjesztett</string>
+	<string name="notif_always_collapse">Mindig összecsukott</string>
 	<string name="disable_overscroll">A rugalmas túlgörgetési hatás letiltása</string>
 	<string name="overscroll_on_summary">Fontos: engedélyeznie KELL azokat az alkalmazásokat, amelyeknél letiltani szeretné a túlgörgetést az LSPoseden belül</string>
 	<string name="milliseconds">Ezredmásodperc</string>
+	<string name="hours">Órák</string>
+	<string name="system_time_title">Rendszer idő</string>
+	<string name="sync_ntp_time_title">NTP használata az idő szinkronizálásához</string>
+	<string name="ntp_time_interval_title">Idő szinkronizálási időintervallum</string>
+	<string name="ntp_servers_title">NTP szerverek</string>
+	<string name="ntp_servers_summary">Pontosvesszőt használj a szerverek elválasztásához</string>
+	<string name="sync_ntp_time_now_title">Szinkronizálás most</string>
+	<string name="sync_ntp_successful">Az idő sikeresen szinkronizálásra került</string>
+	<string name="sync_ntp_failed">NTP szerver kapcsolódási hiba!</string>
 	<!-- Volume panel -->
-	<string name="volume_panel_category">Volume panel</string>
-	<string name="volume_dialog_timeout">Volume dialog timeout</string>
+	<string name="volume_panel_category">Hangerő panel</string>
+	<string name="volume_dialog_timeout">Hangerő panel kijelzési idő</string>
 	<!-- Work/Clone profile -->
 	<string name="work_clone_profile_header">Munka/klónozási profil</string>
 	<string name="statusbar_long_press_app_switch">A profilváltáshoz nyomja meg hosszan az állapotsort</string>
@@ -303,8 +330,8 @@
 	<!-- Cloned apps bragging message -->
 	<string name="settings_cloned_apps_active">Engedélyezve az összes appnak a <font fgcolor="#FF64A829"><b><u>Pixel Xpert</u></b></font> által. Jó szórakozást!</string>
 	<!-- SystemUI hook -->
-	<string name="battery_info_button_title">Battery info…</string>
-	<string name="power_indication_error">Error fetching charging data</string>
+	<string name="battery_info_button_title">Akkumulátor infó…</string>
+	<string name="power_indication_error">Töltési adatok lekérésekor hiba lépett fel</string>
 	<!-- Call section -->
 	<string name="vibrate_on_call_active_title">Rezgés fogadott kimenő híváskor</string>
 	<string name="vibrate_on_call_drop_title">Rezgés, amikor megszakad a hívás</string>
@@ -362,6 +389,10 @@
 	<string name="app_kill_alert_title">Értesítés</string>
 	<string name="app_kill_alert_body">Az alkalmazás most bezárul. Az új ikon megérintésével újra megnyithatja</string>
 	<string name="app_kill_ok_btn">rendben</string>
+	<!-- Depth Effect Alert -->
+	<string name="depth_effect_alert_title">Figyelem</string>
+	<string name="depth_effect_alert_body">Megfelelő zárképernyő háttérképet használj, ahol az előtéri elemek nem takarják ki teljesen az órát, így biztosítva a szemgyönyörködtető látványt és funkcionálitást is.\n\nMegjegyzés: %s.</string>
+	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">A beállítások érvényesítéséhez a rendszer újraindítása szükséges</string>
 	<!-- Menu Items -->
@@ -432,9 +463,9 @@
 	<string name="package_activated">A csomag sikeresen aktiválva</string>
 	<string name="package_activation_failed">A csomag aktiválása nem sikerült</string>
 	<string name="activate_in_lsposed">Aktiválás az LSPosedben</string>
-	<string name="package_not_launchable">Package is not launch-able</string>
-	<string name="menu_launch_app">Launch app</string>
-	<string name="menu_restart_app">Restart app</string>
+	<string name="package_not_launchable">A csomag nem futtatható</string>
+	<string name="menu_launch_app">App futtatása</string>
+	<string name="menu_restart_app">App újraindítása</string>
 	<!-- Splash Activity -->
 	<string name="checking_root_permissions">A root jogosultságok ellenőrzése…</string>
 	<string name="connecting_root_service">Csatlakozás a root szolgáltatáshoz…</string>
@@ -446,4 +477,18 @@
 	<string name="navigation_update">Frissítés</string>
 	<string name="navigation_hooks">Hooks</string>
 	<string name="navigation_settings">Beállítások</string>
+	<!-- Remap Physical Buttons -->
+	<string name="while_screen_is_off_title">While screen is off</string>
+	<string name="while_screen_is_on_title">While screen is on</string>
+	<string name="remap_long_press_power_button_title">Long press power button</string>
+	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
+	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
+	<string name="remap_double_press_power_button_title">Double press power button</string>
+	<string name="torch">Toggle torch</string>
+	<string name="camera">Launch camera</string>
+	<string name="assistant">Launch assistant</string>
+	<string name="do_not_disturb">Toggle Do not disturb</string>
+	<string name="pause_media">Play/Pause media</string>
+	<string name="skip_media_next">Media control - Skip</string>
+	<string name="skip_media_prev">Media control - Previous</string>
 </resources>

@@ -40,8 +40,6 @@ import sh.siava.pixelxpert.modpacks.XposedModPack;
 /** @noinspection RedundantThrows*/
 public class DepthWallpaper extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
-	protected static final float KEYGUARD_SCRIM_ALPHA = 0.2f; //from ScrimController
-
 	private static boolean lockScreenSubjectCacheValid = false;
 	private Object mScrimController;
 	private static boolean DWallpaperEnabled = false;
@@ -54,8 +52,6 @@ public class DepthWallpaper extends XposedModPack {
 	private FrameLayout mWallpaperBitmapContainer;
 	private FrameLayout mWallpaperDimmingOverlay;
 	private boolean mLayersCreated = false;
-	private static float mDefaultDimAmount = KEYGUARD_SCRIM_ALPHA;
-
 	public DepthWallpaper(Context context) {
 		super(context);
 	}
@@ -65,12 +61,6 @@ public class DepthWallpaper extends XposedModPack {
 		DWallpaperEnabled = Xprefs.getBoolean("DWallpaperEnabled", false);
 		DWOpacity = Xprefs.getSliderInt("DWOpacity", 192);
 		DWonAOD = Xprefs.getBoolean("DWonAOD", false);
-
-		float KeyGuardDimAmount = Xprefs.getSliderFloat( "KeyGuardDimAmount", -1f) / 100f;
-
-		mDefaultDimAmount = KeyGuardDimAmount == -1
-				? KEYGUARD_SCRIM_ALPHA
-				: KeyGuardDimAmount;
 	}
 
 	@Override
@@ -97,13 +87,15 @@ public class DepthWallpaper extends XposedModPack {
 				}
 				else if(getObjectField(mScrimController, "mNotificationsScrim").equals(param.thisObject)) //instead of using the mScrimName since older ones don't have that field
 				{
+					float mScrimBehindAlphaKeyguard = getFloatField(mScrimController, "mScrimBehindAlphaKeyguard");
+
 					float notificationAlpha = (float)param.args[0];
 
-					if(notificationAlpha < mDefaultDimAmount)
+					if(notificationAlpha < mScrimBehindAlphaKeyguard)
 						notificationAlpha = 0;
 
-					float subjectAlpha = (notificationAlpha > mDefaultDimAmount)
-							? (1f - notificationAlpha) / (1f - mDefaultDimAmount)
+					float subjectAlpha = (notificationAlpha > mScrimBehindAlphaKeyguard)
+							? (1f - notificationAlpha) / (1f - mScrimBehindAlphaKeyguard)
 							: 1f;
 
 					mLockScreenSubject.post(() -> mLockScreenSubject.setAlpha(subjectAlpha));
@@ -323,7 +315,7 @@ public class DepthWallpaper extends XposedModPack {
 			if(lockScreenSubjectCacheValid) {
 				mLockScreenSubject.getBackground().setAlpha(DWOpacity);
 
-				if(!state.equals("KEYGUARD")) {
+				if(!state.equals("KEYGUARD")) { //AOD
 					mSubjectDimmingOverlay.setAlpha(192 /*Math.round(192 * (DWOpacity / 255f))*/);
 				}
 				else {

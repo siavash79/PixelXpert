@@ -384,6 +384,7 @@ public class KeyguardMods extends XposedModPack {
 		//endregion
 
 		//region keyguardDimmer
+		//A13 - A14
 		hookAllMethodsMatchPattern(ScrimControllerClass, "scheduleUpdate.*", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -396,6 +397,17 @@ public class KeyguardMods extends XposedModPack {
 				}
 			}
 		});
+
+		//A15
+		hookAllMethods(WallpaperManager.class, "getWallpaperDimAmount", new XC_MethodHook() {
+					@Override
+					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+						if (KeyGuardDimAmount < 0 || KeyGuardDimAmount > 1) return;
+
+						//ref ColorUtils.compositeAlpha - Since KEYGUARD_SCRIM_ALPHA = .2f, we need to range the result between -70 and 255 to get the correct value when composed with 20% - we use 60 to cover float inaccuracies and never see a negative final result
+						param.setResult((325 * KeyGuardDimAmount - 60) / 255);
+					}
+				});
 		//endregion
 
 		carrierStringFormatter.registerCallback(this::setCarrierText);

@@ -1,3 +1,7 @@
+**canary-373**  
+- monochrome icon generator: bugfix  
+- Keygyard wallpaper dim now respects bedtime mode  
+  
 **canary-372**  
 - Wallpaper depth effect: fixed unwanted transparency on main subject  
 - Fixed keyguard wallpaper dim  

@@ -1,3 +1,7 @@
+**canary-372**  
+- Wallpaper depth effect: fixed unwanted transparency on main subject  
+- Fixed keyguard wallpaper dim  
+  
 **canary-371**  
 - A15beta3: Fixed transparent fingerprint color  
   

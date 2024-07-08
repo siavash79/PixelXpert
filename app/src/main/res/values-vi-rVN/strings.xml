@@ -484,11 +484,11 @@
 	<string name="remap_long_press_volume_up_button_title">Bấm giữ phím tăng âm lượng</string>
 	<string name="remap_long_press_volume_down_button_title">Bấm giữ phím giảm âm lượng</string>
 	<string name="remap_double_press_power_button_title">Nhấn đúp phím Nguồn</string>
-	<string name="torch">Toggle torch</string>
-	<string name="camera">Launch camera</string>
-	<string name="assistant">Launch assistant</string>
-	<string name="do_not_disturb">Toggle Do not disturb</string>
-	<string name="pause_media">Play/Pause media</string>
-	<string name="skip_media_next">Media control - Skip</string>
-	<string name="skip_media_prev">Media control - Previous</string>
+	<string name="torch">Bật/tắt đèn pin</string>
+	<string name="camera">Khởi chạy camera</string>
+	<string name="assistant">Khởi chạy trợ lý</string>
+	<string name="do_not_disturb">Bật/tắt Không làm phiền</string>
+	<string name="pause_media">Phát/Dừng đa phương tiện</string>
+	<string name="skip_media_next">Điều khiển đa phương tiện - Bỏ qua</string>
+	<string name="skip_media_prev">Điều khiển đa phương tiện - Về trước</string>
 </resources>

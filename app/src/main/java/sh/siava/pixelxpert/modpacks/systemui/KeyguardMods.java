@@ -58,7 +58,7 @@ public class KeyguardMods extends XposedModPack {
 	public static final String SHORTCUT_TORCH = "torch";
 	public static final String SHORTCUT_ZEN = "zen";
 	public static final String SHORTCUT_QR_SCANNER = "qrscanner";
-
+	private static final Object WALLPAPER_DIM_AMOUNT_DIMMED = 0.6F; //DefaultDeviceEffectsApplier
 	private static KeyguardMods instance = null;
 
 	private float max_charging_current = 0;
@@ -401,8 +401,10 @@ public class KeyguardMods extends XposedModPack {
 		//A15
 		hookAllMethods(WallpaperManager.class, "getWallpaperDimAmount", new XC_MethodHook() {
 					@Override
-					protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-						if (KeyGuardDimAmount < 0 || KeyGuardDimAmount > 1) return;
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						if ((KeyGuardDimAmount < 0 || KeyGuardDimAmount > 1)
+								|| param.getResult().equals(WALLPAPER_DIM_AMOUNT_DIMMED))
+							return;
 
 						//ref ColorUtils.compositeAlpha - Since KEYGUARD_SCRIM_ALPHA = .2f, we need to range the result between -70 and 255 to get the correct value when composed with 20% - we use 60 to cover float inaccuracies and never see a negative final result
 						param.setResult((325 * KeyGuardDimAmount - 60) / 255);

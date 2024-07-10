@@ -60,8 +60,6 @@ public class ScreenOffKeys extends XposedModPack {
 	public static final int PHYSICAL_ACTION_PLAY_PAUSE = 5;
 	public static final int PHYSICAL_ACTION_MEDIA_NEXT = 6;
 	public static final int PHYSICAL_ACTION_MEDIA_PREV = 7;
-	public static final int PHYSICAL_ACTION_INCREASE_TORCH = 70;
-	public static final int PHYSICAL_ACTION_DECREASE_TORCH = 71;
 
 	public static final int WAKE_REASON_POWER_BUTTON = 1;
 	public static final int CAMERA_LAUNCH_SOURCE_POWER_DOUBLE_TAP = 1;
@@ -263,12 +261,8 @@ public class ScreenOffKeys extends XposedModPack {
 						? doublePressPowerButtonScreenOn
 						: doublePressPowerButtonScreenOff;
 			case KEYCODE_VOLUME_DOWN:
-				if(flashIsOn)
-					return PHYSICAL_ACTION_DECREASE_TORCH;
 				return longPressVolumeDownButtonScreenOff;
 			case KEYCODE_VOLUME_UP:
-				if(flashIsOn)
-					return PHYSICAL_ACTION_INCREASE_TORCH;
 				return longPressVolumeUpButtonScreenOff;
 			case KEYCODE_POWER:
 				if (longPressPowerButtonScreenOff == PHYSICAL_ACTION_TORCH && flashIsOn) {
@@ -349,8 +343,6 @@ public class ScreenOffKeys extends XposedModPack {
 					}
 					handled = true;
 					break;
-				case PHYSICAL_ACTION_INCREASE_TORCH:
-
 			}
 
 			if (handled) {

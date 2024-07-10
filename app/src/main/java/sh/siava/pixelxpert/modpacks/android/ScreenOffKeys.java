@@ -3,6 +3,7 @@ package sh.siava.pixelxpert.modpacks.android;
 import static android.os.VibrationAttributes.USAGE_ACCESSIBILITY;
 import static android.os.VibrationEffect.EFFECT_TICK;
 import static android.view.KeyEvent.ACTION_DOWN;
+import static android.view.KeyEvent.ACTION_UP;
 import static android.view.KeyEvent.KEYCODE_CAMERA;
 import static android.view.KeyEvent.KEYCODE_POWER;
 import static android.view.KeyEvent.KEYCODE_VOLUME_DOWN;
@@ -16,6 +17,7 @@ import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.AudioManager;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.CameraManager;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.PowerManager;
+import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.getFlashStrengthPCT;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.isFlashOn;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.sleep;
 import static sh.siava.pixelxpert.modpacks.utils.SystemUtils.threadSleep;
@@ -30,12 +32,15 @@ import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 
+import org.apache.commons.lang3.SystemProperties;
+
 import java.lang.reflect.Method;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
+import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
 import sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools;
 
 @SuppressWarnings("RedundantThrows")
@@ -55,6 +60,9 @@ public class ScreenOffKeys extends XposedModPack {
 	public static final int PHYSICAL_ACTION_PLAY_PAUSE = 5;
 	public static final int PHYSICAL_ACTION_MEDIA_NEXT = 6;
 	public static final int PHYSICAL_ACTION_MEDIA_PREV = 7;
+	public static final int PHYSICAL_ACTION_INCREASE_TORCH = 70;
+	public static final int PHYSICAL_ACTION_DECREASE_TORCH = 71;
+
 	public static final int WAKE_REASON_POWER_BUTTON = 1;
 	public static final int CAMERA_LAUNCH_SOURCE_POWER_DOUBLE_TAP = 1;
 	private static final int INVOCATION_TYPE_POWER_BUTTON_LONG_PRESS = 6;
@@ -67,11 +75,17 @@ public class ScreenOffKeys extends XposedModPack {
 	private static int longPressVolumeUpButtonScreenOff = 0;
 	private static int longPressVolumeDownButtonScreenOff = 0;
 
+	private static boolean controlFlashWithVolKeys = false;
+
 	Method launchAssistActionMethod;
 	private Object windowMan;
 	private long mWakeTime = 0;
 
 	VolumeLongPressRunnable mVolumeLongPress = new VolumeLongPressRunnable(PHYSICAL_ACTION_DEFAULT);
+	FlashAdjustLongRunnable mFlashAdjustRunnable = new FlashAdjustLongRunnable(KEYCODE_VOLUME_DOWN);
+	final Object mLock = new Object();
+	boolean mKeyIsDown = false;
+	boolean mLoopRan = false;
 
 	public ScreenOffKeys(Context context) {
 		super(context);
@@ -89,6 +103,8 @@ public class ScreenOffKeys extends XposedModPack {
 
 			longPressVolumeUpButtonScreenOff = Integer.parseInt(Xprefs.getString("longPressVolumeUpButtonScreenOff", "0"));
 			longPressVolumeDownButtonScreenOff = Integer.parseInt(Xprefs.getString("longPressVolumeDownButtonScreenOff", "0"));
+
+			controlFlashWithVolKeys = Xprefs.getBoolean("controlFlashWithVolKeys", false);
 			//noinspection ResultOfMethodCallIgnored
 			CameraManager(); //init CameraManager to listen to flash status
 		} catch (Throwable ignored) {}
@@ -155,6 +171,16 @@ public class ScreenOffKeys extends XposedModPack {
 						KeyEvent event = (KeyEvent) param.args[0];
 						int keyCode = event.getKeyCode();
 
+						if ((keyCode == KEYCODE_VOLUME_UP || keyCode == KEYCODE_VOLUME_DOWN)
+								&& controlFlashWithVolKeys
+								&& isFlashOn())
+						{
+							Handler handler = (Handler) getObjectField(param.thisObject, "mHandler");
+							handleFlashKeys(event, handler);
+							param.setResult(0);
+							return;
+						}
+
 						if (!deviceIsInteractive() &&
 								((keyCode == KEYCODE_VOLUME_UP && longPressVolumeUpButtonScreenOff != PHYSICAL_ACTION_DEFAULT) ||
 										(keyCode == KEYCODE_VOLUME_DOWN && longPressVolumeDownButtonScreenOff != PHYSICAL_ACTION_DEFAULT))) {
@@ -165,6 +191,7 @@ public class ScreenOffKeys extends XposedModPack {
 									if (handler.hasCallbacks(mVolumeLongPress)) {
 										AudioManager().adjustStreamVolume(AudioManager.STREAM_MUSIC, keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ? AudioManager.ADJUST_LOWER : AudioManager.ADJUST_RAISE, 0);
 										handler.removeCallbacks(mVolumeLongPress);
+										param.setResult(0);
 									}
 									return;
 								case KeyEvent.ACTION_DOWN:
@@ -184,6 +211,46 @@ public class ScreenOffKeys extends XposedModPack {
 		} catch (Throwable ignored) {}
 	}
 
+	private void handleFlashKeys(KeyEvent event, Handler handler) {
+		int action = event.getAction();
+
+		switch (action)
+		{
+			case ACTION_DOWN:
+				mFlashAdjustRunnable = new FlashAdjustLongRunnable(event.getKeyCode());
+				synchronized (mLock) {
+					mKeyIsDown = true;
+					mLoopRan = false;
+				}
+				handler.postDelayed(mFlashAdjustRunnable, ViewConfiguration.getLongPressTimeout());
+				break;
+			case ACTION_UP:
+				synchronized (mLock)
+				{
+					mKeyIsDown = false;
+				}
+				if(handler.hasCallbacks(mFlashAdjustRunnable))
+				{
+					handler.removeCallbacks(mFlashAdjustRunnable);
+				}
+				synchronized (mLock)
+				{
+					if(!mLoopRan)
+					{
+						adjustFlashStep(event.getKeyCode());
+					}
+				}
+				break;
+		}
+	}
+
+	private void adjustFlashStep(int keyCode) {
+		float step = (keyCode == KEYCODE_VOLUME_UP ? 1f : -1f)
+				/ SystemProperties.getInt("ro.config.media_vol_steps", () -> 10);
+
+		SystemUtils.setFlash(true, SystemUtils.getFlashlightLevel(getFlashStrengthPCT() + step));
+	}
+
 	private int resolveAction(int keyCode, boolean screenIsOn) {
 		boolean flashIsOn = isFlashOn();
 
@@ -196,8 +263,12 @@ public class ScreenOffKeys extends XposedModPack {
 						? doublePressPowerButtonScreenOn
 						: doublePressPowerButtonScreenOff;
 			case KEYCODE_VOLUME_DOWN:
+				if(flashIsOn)
+					return PHYSICAL_ACTION_DECREASE_TORCH;
 				return longPressVolumeDownButtonScreenOff;
 			case KEYCODE_VOLUME_UP:
+				if(flashIsOn)
+					return PHYSICAL_ACTION_INCREASE_TORCH;
 				return longPressVolumeUpButtonScreenOff;
 			case KEYCODE_POWER:
 				if (longPressPowerButtonScreenOff == PHYSICAL_ACTION_TORCH && flashIsOn) {
@@ -278,6 +349,8 @@ public class ScreenOffKeys extends XposedModPack {
 					}
 					handled = true;
 					break;
+				case PHYSICAL_ACTION_INCREASE_TORCH:
+
 			}
 
 			if (handled) {
@@ -323,4 +396,39 @@ public class ScreenOffKeys extends XposedModPack {
 			launchAction(mAction, false, false);
 		}
 	}
+
+	class FlashAdjustLongRunnable implements Runnable {
+		int mKeyCode;
+
+		public FlashAdjustLongRunnable(int keyCode) {
+			mKeyCode = keyCode;
+		}
+
+		@Override
+		public void run() {
+			synchronized (mLock)
+			{
+				mLoopRan = true;
+			}
+			new Thread(() -> {
+				try
+				{
+					while(true)
+					{
+						adjustFlashStep(mKeyCode);
+
+						//noinspection BusyWait
+						Thread.sleep(100);
+
+						synchronized (mLock)
+						{
+							if(!mKeyIsDown) break;
+						}
+					}
+				}
+				catch (Throwable ignored){}
+			}).start();
+		}
+	}
+
 }

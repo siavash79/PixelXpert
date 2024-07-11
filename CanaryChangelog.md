@@ -1,3 +1,6 @@
+**canary-374**  
+- Added option to control torch level via volume keys  
+  
 **canary-373**  
 - monochrome icon generator: bugfix  
 - Keygyard wallpaper dim now respects bedtime mode  

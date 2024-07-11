@@ -115,6 +115,14 @@
 			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$PhysicalButtonRemapFragment"
 			app:iconSpaceReserved="false" />
 
+		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+			android:defaultValue="false"
+			android:key="controlFlashWithVolKeys"
+			android:summaryOff="@string/general_off"
+			android:summaryOn="@string/general_on"
+			android:title="@string/control_flashlight_with_volume_keys"
+			app:iconSpaceReserved="false" />
+
 	</sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory>
 
 	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceCategory

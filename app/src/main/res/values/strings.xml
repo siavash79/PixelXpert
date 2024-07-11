@@ -348,6 +348,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Disable elastic overscroll effect</string>
 	<string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for within LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">Milliseconds</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>

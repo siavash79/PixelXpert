@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Wyłącz efekt elastycznego przewijania</string>
 	<string name="overscroll_on_summary">Ważne: MUSISZ włączyć aplikacje, dla których chcesz wyłączyć overscroll w ramach LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">milisekundy</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>

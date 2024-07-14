@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">Immer einklappen</string>
 	<string name="disable_overscroll">Deaktiviere elastischen Überscrolling Effekt</string>
 	<string name="overscroll_on_summary">Wichtig: Sie MÜSSEN die Apps, für die Sie Overscroll deaktivieren möchten, in LSPosed aktivieren</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">Millisekunden</string>
 	<string name="hours">Stunden</string>
 	<string name="system_time_title">Systemzeit</string>

@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">الإنهيار دائمًا</string>
 	<string name="disable_overscroll">تعطيل تأثير التمرير المرن</string>
 	<string name="overscroll_on_summary">هام: يمكنك تمكين التطبيقات التي تريد تعطيل التمرير الزائد داخل LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">المللي ثانية</string>
 	<string name="hours">ساعات</string>
 	<string name="system_time_title">وقت النظام</string>

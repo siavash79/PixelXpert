@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">इलास्टिक ओवरस्क्रॉलिंग प्रभाव अक्षम करें</string>
 	<string name="overscroll_on_summary">महत्वपूर्ण: आप उन ऐप्स को अवश्य सक्षम करें जिनके लिए आप LSPosed में ओवरस्क्रॉल अक्षम करना चाहते हैं</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">मिलीसेकंड</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>

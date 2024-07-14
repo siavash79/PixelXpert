@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">Всегда сворачивать</string>
 	<string name="disable_overscroll">Отключить эффект упругости в конце прокрутки</string>
 	<string name="overscroll_on_summary">Важно: Вы ДОЛЖНЫ включить приложения, для которых Вы хотите отключить прокрутку, в LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">Миллисекунды</string>
 	<string name="hours">Часы</string>
 	<string name="system_time_title">Системное время</string>

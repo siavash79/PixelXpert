@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Απενεργοποιήστε το ελαστικό εφέ υπερκύλισης</string>
 	<string name="overscroll_on_summary">Σημαντικό: ΠΡΕΠΕΙ να ενεργοποιήσετε τις εφαρμογές για τις οποίες θέλετε να απενεργοποιήσετε την υπερκύλιση εντός LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">χιλιοστά του δευτερολέπτου</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>

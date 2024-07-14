@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">Завжди згортати</string>
 	<string name="disable_overscroll">Вимкнути еластичний ефект прокрутки</string>
 	<string name="overscroll_on_summary">Важливо: ОБОВ\'ЯЗКОВО увімкніть програми, для яких ви хочете вимкнути прокрутку в LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">мілісекунди</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>

@@ -1,3 +1,8 @@
+**canary-375**  
+- A15b4: Fixed QS light theme  
+- A15b4: Fixed QS column count not getting applied  
+- A15b4: Fixed additional statusbar icons causing system crash  
+  
 **canary-374**  
 - Added option to control torch level via volume keys  
   

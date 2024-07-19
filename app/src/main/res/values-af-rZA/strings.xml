@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Deaktiveer elastiese oorrol-effek</string>
 	<string name="overscroll_on_summary">Belangrik: jy MOET die programme waarvoor jy oorblaai wil deaktiveer binne LSPosed aktiveer</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">Millisekondes</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>

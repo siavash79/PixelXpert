@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">Mindig összecsukott</string>
 	<string name="disable_overscroll">A rugalmas túlgörgetési hatás letiltása</string>
 	<string name="overscroll_on_summary">Fontos: engedélyeznie KELL azokat az alkalmazásokat, amelyeknél letiltani szeretné a túlgörgetést az LSPoseden belül</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">Ezredmásodperc</string>
 	<string name="hours">Órák</string>
 	<string name="system_time_title">Rendszer idő</string>

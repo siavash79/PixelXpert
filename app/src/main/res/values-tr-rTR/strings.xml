@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">Her zaman daralt</string>
 	<string name="disable_overscroll">Elastik kaydırma efektini devre dışı bırak</string>
 	<string name="overscroll_on_summary">Önemli: LSPosed içinde kaydırmayı devre dışı bırakmak istediğiniz uygulamaları etkinleştirmeniz GEREKİR</string>
+	<string name="control_flashlight_with_volume_keys">Ses düğmeleri ile el fenerini kontrol et</string>
 	<string name="milliseconds">Milisaniye</string>
 	<string name="hours">Saat</string>
 	<string name="system_time_title">Sistem Zamanı</string>

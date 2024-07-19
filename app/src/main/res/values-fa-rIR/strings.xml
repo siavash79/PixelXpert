@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">غیر فعال کردن حالت الاستیک اسکرول صفحه</string>
 	<string name="overscroll_on_summary">مهم: هر برنامه که این امکان مورد نیاز است باید در LSposed اضافه شود</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">هزارم ثانیه</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>

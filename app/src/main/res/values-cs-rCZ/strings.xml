@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Ikona s alternativní tématikou</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">Přizpůsobení zařízení Google Pixel</string>
 	<string name="volume_tile_title">Hlasitost médií</string>
 	<string name="app_switch_tile_title">Přepnout profil aplikace</string>
 	<string name="hide_default">Skrýt (výchozí)</string>
@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Zakázat efekt elastického přetažení</string>
 	<string name="overscroll_on_summary">Důležité: MUSÍTE povolit aplikace, u kterých chcete zakázat přetáčení v rámci LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">milisekundy</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>

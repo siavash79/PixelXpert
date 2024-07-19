@@ -310,6 +310,7 @@
 	<string name="notif_always_collapse">總是折疊</string>
 	<string name="disable_overscroll">禁用過度滾動效果</string>
 	<string name="overscroll_on_summary">重要:你必須在 LSPosed 作用域中勾選你要禁用的應用程式</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">毫秒</string>
 	<string name="hours">小時</string>
 	<string name="system_time_title">系統時間</string>

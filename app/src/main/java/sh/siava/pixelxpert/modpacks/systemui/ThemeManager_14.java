@@ -117,15 +117,69 @@ public class ThemeManager_14 extends XposedModPack {
 		Class<?> GlobalActionsDialogLiteEmergencyActionClass = findClass("com.android.systemui.globalactions.GlobalActionsDialogLite$EmergencyAction", lpParam.classLoader);
 		Class<?> GlobalActionsLayoutLiteClass = findClass("com.android.systemui.globalactions.GlobalActionsLayoutLite", lpParam.classLoader);
 		Class<?> QSFooterViewClass = findClass("com.android.systemui.qs.QSFooterView", lpParam.classLoader);
-		Class<?> TextButtonViewHolderClass = findClass("com.android.systemui.qs.footer.ui.binder.TextButtonViewHolder", lpParam.classLoader);
-		Class<?> NumberButtonViewHolderClass = findClass("com.android.systemui.qs.footer.ui.binder.NumberButtonViewHolder", lpParam.classLoader);
 		Class<?> BrightnessSliderViewClass = findClass("com.android.systemui.settings.brightness.BrightnessSliderView", lpParam.classLoader);
 		Class<?> ShadeCarrierClass = findClass("com.android.systemui.shade.carrier.ShadeCarrier", lpParam.classLoader);
 		Class<?> QSCustomizerClass = findClass("com.android.systemui.qs.customize.QSCustomizer", lpParam.classLoader);
 		Class<?> BatteryStatusChipClass = findClass("com.android.systemui.statusbar.BatteryStatusChip", lpParam.classLoader);
 		Class<?> QSContainerImplClass = findClass("com.android.systemui.qs.QSContainerImpl", lpParam.classLoader);
 		Class<?> ShadeHeaderControllerClass = findClassIfExists("com.android.systemui.shade.ShadeHeaderController", lpParam.classLoader);
-		Class<?> FooterActionsViewBinderClass = findClass("com.android.systemui.qs.footer.ui.binder.FooterActionsViewBinder", lpParam.classLoader);
+
+		try { //A15 early implementation of QS Footer actions - doesn't seem to be leading to final A15 release
+			Class<?> FooterActionsViewBinderClass = findClass("com.android.systemui.qs.footer.ui.binder.FooterActionsViewBinder", lpParam.classLoader);
+			Class<?> TextButtonViewHolderClass = findClass("com.android.systemui.qs.footer.ui.binder.TextButtonViewHolder", lpParam.classLoader);
+			Class<?> NumberButtonViewHolderClass = findClass("com.android.systemui.qs.footer.ui.binder.NumberButtonViewHolder", lpParam.classLoader);
+
+			hookAllConstructors(NumberButtonViewHolderClass, new XC_MethodHook() { //QS security footer count circle
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if (!isDark) {
+						((ImageView) getObjectField(param.thisObject
+								, "newDot"))
+								.setColorFilter(BLACK);
+
+						((TextView) getObjectField(param.thisObject
+								, "number"))
+								.setTextColor(BLACK);
+					}
+				}
+			});
+
+			hookAllConstructors(TextButtonViewHolderClass, new XC_MethodHook() { //QS security footer
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if (!isDark) {
+						((ImageView) getObjectField(param.thisObject
+								, "chevron"))
+								.setColorFilter(BLACK);
+
+						((ImageView) getObjectField(param.thisObject
+								, "icon"))
+								.setColorFilter(BLACK);
+
+						((ImageView) getObjectField(param.thisObject
+								, "newDot"))
+								.setColorFilter(BLACK);
+
+						((TextView) getObjectField(param.thisObject
+								, "text"))
+								.setTextColor(BLACK);
+					}
+				}
+			});
+
+			hookAllMethods(FooterActionsViewBinderClass, "bind", new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					if (!isDark) {
+						LinearLayout view = (LinearLayout) param.args[0];
+						view.setBackgroundColor(mScrimBehindTint);
+						view.setElevation(0); //remove elevation shadow
+					}
+				}
+			});
+
+		}
+		catch (Throwable ignored){}
 
 		try { //A14 Compose implementation of QS Footer actions
 //			Class<?> FooterActionsButtonViewModelClass = findClass("com.android.systemui.qs.footer.ui.viewmodel.FooterActionsButtonViewModel", lpParam.classLoader);
@@ -263,44 +317,6 @@ public class ThemeManager_14 extends XposedModPack {
 			}
 		});
 
-		hookAllConstructors(NumberButtonViewHolderClass, new XC_MethodHook() { //QS security footer count circle
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!isDark) {
-					((ImageView) getObjectField(param.thisObject
-							, "newDot"))
-							.setColorFilter(BLACK);
-
-					((TextView) getObjectField(param.thisObject
-							, "number"))
-							.setTextColor(BLACK);
-				}
-			}
-		});
-
-		hookAllConstructors(TextButtonViewHolderClass, new XC_MethodHook() { //QS security footer
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!isDark) {
-					((ImageView) getObjectField(param.thisObject
-							, "chevron"))
-							.setColorFilter(BLACK);
-
-					((ImageView) getObjectField(param.thisObject
-							, "icon"))
-							.setColorFilter(BLACK);
-
-					((ImageView) getObjectField(param.thisObject
-							, "newDot"))
-							.setColorFilter(BLACK);
-
-					((TextView) getObjectField(param.thisObject
-							, "text"))
-							.setTextColor(BLACK);
-				}
-			}
-		});
-
 		hookAllMethods(QSFooterViewClass, "onFinishInflate", new XC_MethodHook() { //QS Footer built text row
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -375,17 +391,6 @@ public class ThemeManager_14 extends XposedModPack {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				calculateColors();
-			}
-		});
-
-		hookAllMethods(FooterActionsViewBinderClass, "bind", new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if (!isDark) {
-					LinearLayout view = (LinearLayout) param.args[0];
-					view.setBackgroundColor(mScrimBehindTint);
-					view.setElevation(0); //remove elevation shadow
-				}
 			}
 		});
 

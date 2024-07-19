@@ -55,7 +55,7 @@ public class ReflectionTools {
 		};
 
 		Set<XC_MethodHook.Unhook> result = XposedBridge.hookAllMethods(clazz, method, hook);
-		if(false) {
+		if(true) {
 			Throwable t = new Throwable();
 			log(t.getStackTrace()[1].getClassName() + " " + t.getStackTrace()[1].getLineNumber() + " hook size " + result.size());
 		}

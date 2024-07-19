@@ -123,6 +123,17 @@ public class QSTileGrid extends XposedModPack {
 		{
 			updateFontSizeMethodType = 1;
 		}
+
+		final int tileLayoutHookSize = hookAllMethods(TileLayoutClass, "updateResources", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(getQSCols() != QS_COL_NOT_SET || getQSRows() != NOT_SET)
+				{
+					param.setResult(updateTileLayoutResources(param.thisObject));
+				}
+			}
+		}).size();
+
 		hookAllMethods(SideLabelTileLayoutClass, "updateResources", new XC_MethodHook() {
 			@SuppressLint("DiscouragedApi")
 			@Override
@@ -134,6 +145,12 @@ public class QSTileGrid extends XposedModPack {
 					QSRows = res.getInteger(res.getIdentifier("quick_settings_max_rows", "integer", mContext.getPackageName()));
 				}
 				setObjectField(param.thisObject, "mMaxAllowedRows", Math.max(1, QSRows));
+
+				if(tileLayoutHookSize == 0) {
+					if (getQSCols() != QS_COL_NOT_SET || getQSRows() != NOT_SET) {
+						param.setResult(updateTileLayoutResources(param.thisObject));
+					}
+				}
 			}
 		});
 
@@ -143,15 +160,6 @@ public class QSTileGrid extends XposedModPack {
 				if(getQSCols() != QS_COL_NOT_SET)
 				{
 					setObjectField(param.thisObject, "mNumColumns", getQSCols());
-				}
-			}
-		});
-		hookAllMethods(TileLayoutClass, "updateResources", new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				if(getQSCols() != QS_COL_NOT_SET || getQSRows() != NOT_SET)
-				{
-					param.setResult(updateTileLayoutResources(param.thisObject));
 				}
 			}
 		});

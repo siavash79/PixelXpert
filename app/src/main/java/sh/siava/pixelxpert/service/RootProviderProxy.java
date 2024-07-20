@@ -26,10 +26,10 @@ public class RootProviderProxy extends Service {
 	@Nullable
 	@Override
 	public IBinder onBind(Intent intent) {
-		return new RootPoviderProxyIPC(this);
+		return new RootProviderProxyIPC(this);
 	}
 
-	class RootPoviderProxyIPC extends IRootProviderProxy.Stub
+	class RootProviderProxyIPC extends IRootProviderProxy.Stub
 	{
 		/** @noinspection unused*/
 		String TAG = getClass().getSimpleName();
@@ -37,7 +37,7 @@ public class RootProviderProxy extends Service {
 		private final List<String> rootAllowedPacks;
 		private final boolean rootGranted;
 
-		private RootPoviderProxyIPC(Context context)
+		private RootProviderProxyIPC(Context context)
 		{
 			try {
 				Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER));

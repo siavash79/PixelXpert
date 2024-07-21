@@ -46,7 +46,7 @@ Here is the compatibility chart according to different android versions and QPRs
 ### **Prerequisites:**
 - Compatible ROM (see Compatibility text above)
 - Device Rooted with Magisk 24.2+ or KSU
-- LSPosed (Zygisk Version preferred)
+- LSPosed (Zygisk Version preferred) (For Android 14+ use [LSPosed_mod](https://github.com/mywalkb/LSPosed_mod/releases))
 <hr>
 
 ### **How to install:**

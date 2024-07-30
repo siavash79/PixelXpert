@@ -20,6 +20,7 @@ import com.github.mfathi91.time.PersianDate;
 import java.awt.font.NumericShaper;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,6 +29,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.chrono.HijrahDate;
+import java.awt.font.NumericShaper.Range;
+
 
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.modpacks.systemui.ThermalProvider;
@@ -183,6 +187,8 @@ public class StringFormatter {
 		{
 			case "G":
 				return georgianDateOf(match.substring(1));
+			case "H":
+				return hijrahDateOf(match.substring(1));
 			case "P":
 				return persianDateOf(match.substring(1));
 			case "N":
@@ -446,6 +452,24 @@ public class StringFormatter {
 				informCallbacks();
 			}
 		}, nextUpdate);
+	}
+
+	private ChatSequence hijrahDateOf(String format) {
+		try {
+		        String result = HijrahDate.from(
+				LocalDate.now()
+			).format(
+				DateTimeFormatter.ofPattern(
+					format, Locale.forLanguageTag("ar")
+				)
+			);
+			hasDate = true;
+			char[] bytes = result.toCharArray();
+			NumericShaper.getShaper(NumericShaper.ARABIC).shape(bytes, 0, bytes.length); // Numbers to be shown in correct font
+			return String.copyValueOf(bytes);
+		} catch (Exception ignored) {
+			return "$H" + format;
+		}		
 	}
 
 	private CharSequence persianDateOf(String format) {

@@ -225,7 +225,7 @@
 	<string name="wifi_cell_on">Utiliser deux blocs séparés pour les données mobiles et le Wi-Fi</string>
 	<string name="wifi_cell_off">Utiliser un bloc Internet</string>
 	<string name="QQS_brightness_category">Préférence pour le curseur de luminosité</string>
-	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
+	<string name="QS_auto_brightness_title">Raccourci de luminosité adaptative</string>
 	<string name="QQS_brightness_title">Montrer le curseur de luminosité dans la fenêtre de configuration rapide</string>
 	<string name="QQS_brightness_bottom_title">Bouger le curseur en bas</string>
 	<string name="QS_brightness_disable_title">Cacher le curseur</string>
@@ -258,13 +258,13 @@
 	<string name="taskbar_force_enable_title">Forcer l’activation</string>
 	<string name="taskbar_force_disable_title">Forcer la désactivation</string>
 	<string name="taskbar_transient_title">Masquage automatique</string>
-	<string name="remap_physical_buttons_title">Remap physical buttons</string>
+	<string name="remap_physical_buttons_title">Redéfinir les boutons physiques</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Contourner la vérification des signatures des paquets</string>
 	<string name="pm_allow_downgrade_title">Autoriser le rétrogradage des applications</string>
 	<string name="auto_off_five_minutes">Actif pour les cinq prochaines minutes</string>
 	<!--Miscellaneous section related-->
-	<string name="launcher_section">Launcher options</string>
+	<string name="launcher_section">Options du Lanceur</string>
 	<string name="screenshot_sound_disable_title">Désactiver le son des captures d’écran</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Autoriser les captures d\'écran à partir de contenus restreints</string>
@@ -310,7 +310,7 @@
 	<string name="notif_always_collapse">Toujours réduire</string>
 	<string name="disable_overscroll">Désactiver l’effet elastique de fin de défilement</string>
 	<string name="overscroll_on_summary">Important : les applications dans lesquelles l’effet sera actif sont celles activées dans LSPosed</string>
-	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
+	<string name="control_flashlight_with_volume_keys">Contrôlez la lampe de poche avec les boutons de volume</string>
 	<string name="milliseconds">Millisecondes</string>
 	<string name="hours">Heures</string>
 	<string name="system_time_title">Heure du système</string>
@@ -479,17 +479,17 @@
 	<string name="navigation_hooks">Crochets</string>
 	<string name="navigation_settings">Paramètres</string>
 	<!-- Remap Physical Buttons -->
-	<string name="while_screen_is_off_title">While screen is off</string>
-	<string name="while_screen_is_on_title">While screen is on</string>
-	<string name="remap_long_press_power_button_title">Long press power button</string>
-	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
-	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
-	<string name="remap_double_press_power_button_title">Double press power button</string>
-	<string name="torch">Toggle torch</string>
-	<string name="camera">Launch camera</string>
-	<string name="assistant">Launch assistant</string>
-	<string name="do_not_disturb">Toggle Do not disturb</string>
-	<string name="pause_media">Play/Pause media</string>
-	<string name="skip_media_next">Media control - Skip</string>
-	<string name="skip_media_prev">Media control - Previous</string>
+	<string name="while_screen_is_off_title">Lorsque l\'écran est éteint</string>
+	<string name="while_screen_is_on_title">Lorsque l\'écran est allumé</string>
+	<string name="remap_long_press_power_button_title">Appui prolongé sur le bouton Marche/Arrêt</string>
+	<string name="remap_long_press_volume_up_button_title">Appui long sur le bouton Volume haut</string>
+	<string name="remap_long_press_volume_down_button_title">Appui long sur le bouton Volume bas</string>
+	<string name="remap_double_press_power_button_title">Appui rapide deux fois sur le bouton Marche/Arrêt</string>
+	<string name="torch">Activer/désactiver la lampe</string>
+	<string name="camera">Lancer l’appareil photo</string>
+	<string name="assistant">Lancer l\'Assistant Vocal</string>
+	<string name="do_not_disturb">Activer/désactiver le mode \"Ne pas déranger\"</string>
+	<string name="pause_media">Lecture/Pause de la musique</string>
+	<string name="skip_media_next">Contrôle des médias - Passer</string>
+	<string name="skip_media_prev">Contrôle du média - Précédent</string>
 </resources>

@@ -31,7 +31,7 @@ Currently, PixelXpert offers customizations on different aspects of system frame
 <hr>
 
 ### **Compatibility:**
-PixelXpert is only fully compatible with pixel stock firmware. Any custom ROM is not tested and may not be fully (or even at all) compatible.
+PixelXpert is ONLY compatible with pixel stock firmware on Google Pixel devices. Any custom ROM (including PE, PE plus, pixel plus ui and etc) or stock ROM outside stock pixel firmware on Google pixel devices (e.g. OneUI on Samsung, MIUI on Xiaomi and etc) is not supported and may not be fully (or even at all) compatible.
 
 Here is the compatibility chart according to different android versions and QPRs:
 

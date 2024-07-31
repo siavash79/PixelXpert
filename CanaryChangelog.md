@@ -1,3 +1,6 @@
+**canary-376**  
+- VoLTE - VoWiFi icon update  
+  
 **canary-375**  
 - A15b4: Fixed QS light theme  
 - A15b4: Fixed QS column count not getting applied  

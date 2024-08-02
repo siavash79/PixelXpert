@@ -1234,7 +1234,7 @@ public class StatusbarMods extends XposedModPack {
 
 		if (lastVolteAvailable != volteStateAvailable || force) {
 			lastVolteAvailable = volteStateAvailable;
-			if (volteStateAvailable) {
+			if (volteStateAvailable && VolteIconEnabled) {
 				mStatusBar.post(() -> {
 					try {
 						callMethod(mStatusBarIconController, "setIcon", VO_LTE_SLOT, volteStatusbarIconHolder);
@@ -1249,7 +1249,7 @@ public class StatusbarMods extends XposedModPack {
 
 		if (lastVowifiAvailable != voWifiAvailable || force) {
 			lastVowifiAvailable = voWifiAvailable;
-			if (voWifiAvailable) {
+			if (voWifiAvailable && VowifiIconEnabled) {
 				mStatusBar.post(() -> {
 					try {
 						callMethod(mStatusBarIconController, "setIcon", VO_WIFI_SLOT, vowifiStatusbarIconHolder);

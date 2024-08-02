@@ -1,3 +1,6 @@
+**canary-378**  
+- VoLTE - VoWifi: Fixed random icon showup when not even enabled  
+  
 **canary-377**  
 - VoLTE - VoWiFi icon update (again)  
   

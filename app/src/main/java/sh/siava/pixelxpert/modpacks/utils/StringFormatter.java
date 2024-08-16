@@ -30,8 +30,6 @@ import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.time.chrono.HijrahDate;
-import java.awt.font.NumericShaper.Range;
-
 
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.modpacks.systemui.ThermalProvider;
@@ -454,7 +452,7 @@ public class StringFormatter {
 		}, nextUpdate);
 	}
 
-	private ChatSequence hijrahDateOf(String format) {
+	private CharSequence hijrahDateOf(String format) {
 		try {
 		        String result = HijrahDate.from(
 				LocalDate.now()

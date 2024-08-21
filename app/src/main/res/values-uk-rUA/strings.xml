@@ -76,7 +76,7 @@
 	<string name="lockscreen_center_text_value">Користувацький текст в області годинника</string>
 	<string name="keyguard_dim_amount_title">Клавіатурні шпалери тьмяні</string>
 	<string name="keyguard_bottom_category">Ярлики нижньої області</string>
-	<string name="keyguard_bottom_buttons_transparent_title">Сховати коло біля значків</string>
+	<string name="keyguard_bottom_buttons_transparent_title">Сховати круг для значків</string>
 	<string name="LSleftShortcutTitle">Лівий ярлик</string>
 	<string name="LSrightShortcutTitle">Правий ярлик</string>
 	<string name="LSleftLongClickShortcutTitle">Ліва клавіша швидкого доступу (тривале натискання)</string>
@@ -204,7 +204,7 @@
 	<string name="qs_tile_vertical_title">Перемістіть значки плиток угору</string>
 	<string name="qs_tile_qty_title">Налаштування кількості плиток швидкого налаштування</string>
 	<string name="qs_leveled_flashlight_summary">Потрібне підтримуване обладнання</string>
-	<string name="light_qs_title">Засвітити панель швидких налаштувань під час світлої теми</string>
+	<string name="light_qs_title">Висвітлити панель швидких налаштувань для світлої теми</string>
 	<string name="qs_pulldown_size">Ширина Швидких налагтувань</string>
 	<string name="qs_pulldown_switch_title">Розкривний список панелі швидких налаштувань у рядку стану</string>
 	<string name="qs_pulldown_side_title">Потягніть вниз</string>

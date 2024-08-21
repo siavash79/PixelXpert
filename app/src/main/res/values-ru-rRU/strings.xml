@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">Включение альтернативной иконки AOSPMods </string>
+	<string name="app_themed_icon_title">Включение альтернативной иконки </string>
 	<string name="xposed_desc">Настройки для устройств Google Pixel</string>
 	<string name="volume_tile_title">Громкость мультимедиа </string>
 	<string name="app_switch_tile_title">Сменить профиль приложения</string>

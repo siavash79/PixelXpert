@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">Habilitar icono temático alternativo para Pixel Xpert</string>
+	<string name="app_themed_icon_title">Habilitar icono temático alternativo</string>
 	<string name="xposed_desc">Personalizaciones para dispositivos Google Pixel</string>
 	<string name="volume_tile_title">Volumen de medios</string>
 	<string name="app_switch_tile_title">Cambiar perfil de aplicación</string>
@@ -11,8 +11,8 @@
 	<string name="general_section">Opciones generales</string>
 	<string name="general_on">Activado</string>
 	<string name="general_off">Desactivado</string>
-	<string name="sysui_restart_needed">Requiere reiniciar UI del sistema</string>
-	<string name="restart_needed">Requiere reiniciar</string>
+	<string name="sysui_restart_needed">Requiere reiniciar UI del sistema para aplicar</string>
+	<string name="restart_needed">Requiere reiniciar para aplicar</string>
 	<string name="more_area">más área</string>
 	<string name="less_area">menos área</string>
 	<string name="current_version">Versión actual: %s</string>
@@ -28,7 +28,7 @@
 	<string name="settings_check_for_update_title">Buscar actualizaciones</string>
 	<string name="auto_update_title">Buscar actualizaciones automáticamente</string>
 	<string name="auto_update_summary">Buscar nuevas versiones de vez en cuando</string>
-	<string name="update_over_wifi_title">Comprobar actualizaciones solo por Wifi</string>
+	<string name="update_over_wifi_title">Comprobar actualizaciones solo por WiFi</string>
 	<string name="update_over_wifi_summary">Buscar actualizaciones en segundo plano sólo cuando se conecta a wifi</string>
 	<string name="github_repo_title">Repositorio de GitHub</string>
 	<string name="telegram_group_title">Grupo de Telegram</string>

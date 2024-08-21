@@ -27,7 +27,7 @@
 	<string name="settings_about_section_title">について</string>
 	<string name="settings_check_for_update_title">アップデートを確認</string>
 	<string name="auto_update_title">アップデートを自動的にチェックする</string>
-	<string name="auto_update_summary">時々新しいバージョンをチェックしてください</string>
+	<string name="auto_update_summary">自動的に新しいバージョンを確認</string>
 	<string name="update_over_wifi_title">WiFi 経由でのみアップデートを確認する</string>
 	<string name="update_over_wifi_summary">Wi-Fi に接続している場合にのみバックグラウンドでアップデートを確認する</string>
 	<string name="github_repo_title">GitHub リポジトリ</string>

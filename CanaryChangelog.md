@@ -1,3 +1,7 @@
+**canary-380**  
+- A15QPR1B1: Fixed taskbar in recents mode  
+- A15QPR1B1: Fixed navigation bar mods  
+  
 **canary-379**  
 - Added support for Hijri calendar (thanks to @forabi)  
   

@@ -40,6 +40,7 @@ import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
 import sh.siava.pixelxpert.modpacks.utils.SystemUtils;
+import sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools;
 
 @SuppressWarnings("RedundantThrows")
 public class TaskbarActivator extends XposedModPack {
@@ -65,6 +66,7 @@ public class TaskbarActivator extends XposedModPack {
 	String mTasksFieldName = null; // in case the code was obfuscated
 	private Object TaskbarModelCallbacks;
 	private int mItemsLength = 0;
+	private int mUpdateHotseatParams = 2;
 
 	public TaskbarActivator(Context context) {
 		super(context);
@@ -245,6 +247,7 @@ public class TaskbarActivator extends XposedModPack {
 			}
 		});
 
+		mUpdateHotseatParams = ReflectionTools.findMethod(TaskbarViewClass, "updateHotseatItems").getParameterCount();
 		hookAllConstructors(RecentTasksListClass, new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -325,7 +328,14 @@ public class TaskbarActivator extends XposedModPack {
 								setAdditionalInstanceField(itemInfos[i], "taskId", taskInfo.taskId);
 							}
 
-							callMethod(TaskBarView, "updateHotseatItems", new Object[]{itemInfos});
+							if(mUpdateHotseatParams == 2) //A15QPR1
+							{
+								callMethod(TaskBarView, "updateHotseatItems", itemInfos, new ArrayList<>());
+							}
+							else
+							{ //Older
+								callMethod(TaskBarView, "updateHotseatItems", new Object[]{itemInfos});
+							}
 
 							for (int i = 0; i < itemInfos.length; i++) {
 								View iconView = TaskBarView.getChildAt(i);

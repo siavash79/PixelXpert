@@ -50,15 +50,15 @@
 	<string name="hotspot_hide_ssid_title">SSID verstecken </string>
 	<string name="hotspot_inactivity_timeout_title">Zeitüberschreitung bei Inaktivität </string>
 	<string name="hotspot_max_client_title">Maximale Anzahl von Clients </string>
-	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
-	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
+	<string name="hotspot_disable_approval_title">Hotspot Verbindungsprobleme Umweg</string>
+	<string name="hotspot_disable_approval_summary">Erlauben nicht gestattete Klienten sich zu verbinden</string>
 	<!--Lock screen related-->
-	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
+	<string name="depth_wallpaper_title">Tiefeffekt bei Hintergrundbild</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
-	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
-	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
+	<string name="depth_wallpaper_model_ready">KI Modell wird auf das Gerät heruntergeladen</string>
+	<string name="depth_wallpaper_model_not_available">KI Modell ist (noch) nicht auf dem Gerät verfügbar</string>
 	<string name="disable_unlock_hint_title">Animation des Entsperrungshinweises deaktivieren </string>
 	<string name="ls_general_options">Sperrbildschirm-Optionen</string>
 	<string name="hide_avatar_title">Benutzer-Avatar entfernen (Mehrbenutzermodus)</string>
@@ -483,13 +483,13 @@
 	<string name="while_screen_is_on_title">While screen is on</string>
 	<string name="remap_long_press_power_button_title">Long press power button</string>
 	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
-	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
-	<string name="remap_double_press_power_button_title">Double press power button</string>
-	<string name="torch">Toggle torch</string>
-	<string name="camera">Launch camera</string>
-	<string name="assistant">Launch assistant</string>
-	<string name="do_not_disturb">Toggle Do not disturb</string>
-	<string name="pause_media">Play/Pause media</string>
-	<string name="skip_media_next">Media control - Skip</string>
-	<string name="skip_media_prev">Media control - Previous</string>
+	<string name="remap_long_press_volume_down_button_title">Lautstärke runter lange drücken</string>
+	<string name="remap_double_press_power_button_title">Aus Knopf doppelt drücken</string>
+	<string name="torch">Taschenlampe an / aus schalten</string>
+	<string name="camera">Kamera starten</string>
+	<string name="assistant">Assistent starten</string>
+	<string name="do_not_disturb">Nicht Stören an / aus schalten</string>
+	<string name="pause_media">Play/Pause Medien</string>
+	<string name="skip_media_next">Medien überspringen</string>
+	<string name="skip_media_prev">Medien zurück</string>
 </resources>

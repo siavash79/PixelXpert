@@ -50,24 +50,24 @@
 	<string name="hotspot_hide_ssid_title">إخفاء SSID</string>
 	<string name="hotspot_inactivity_timeout_title">مهلة عدم النشاط</string>
 	<string name="hotspot_max_client_title">الحد الأقصى للعملاء</string>
-	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
-	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
+	<string name="hotspot_disable_approval_title">مشاكل الاتصال بنقطة الوصول</string>
+	<string name="hotspot_disable_approval_summary">السماح للعملاء \"غير المعتمدين\" بالاتصال بسلاسة</string>
 	<!--Lock screen related-->
-	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
-	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
-	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
-	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
-	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
-	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
+	<string name="depth_wallpaper_title">خلفية بتأثير العمق</string>
+	<string name="depth_wallpaper_summary">دمج خلفية الساعة ديناميكيًا مع الخلفية</string>
+	<string name="depth_wallpaper_opacity_title">شفافية خلفية الشاشة</string>
+	<string name="depth_wallpaper_aod_title">أيضًا على \"الشاشة دائمًا مفتوحة\"</string>
+	<string name="depth_wallpaper_model_ready">تم تنزيل نموذج الذكاء الاصطناعي على الجهاز</string>
+	<string name="depth_wallpaper_model_not_available">نموذج الذكاء الاصطناعي غير متاح على الجهاز (حتى الآن)</string>
 	<string name="disable_unlock_hint_title">تعطيل حركة تلميح فتح القفل</string>
 	<string name="ls_general_options">خيارات قفل الشاشة</string>
 	<string name="hide_avatar_title">إزالة الصورة الرمزية للمستخدم (وضع المستخدم المتعدد)</string>
 	<string name="transparent_fingerprint_circle">إزالة دائرة الخلفية من البصمة السفلية</string>
 	<string name="transparent_fingerprint_circle_off">الدائرة حول أيقونة البصمة نشطة</string>
 	<string name="transparent_fingerprint_circle_on">الدائرة حول أيقونة بصمة الاصبع سوف تكون مخفية</string>
-	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
-	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
-	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
+	<string name="fingerprint_icon">إزالة أيقونة بصمة الإصبع</string>
+	<string name="fingerprint_icon_off">أيقونة بصمة الإصبع مفعل</string>
+	<string name="fingerprint_icon_on">سيتم إخفاء أيقونة بصمة الإصبع</string>
 	<string name="custom_text_category">نص مخصص على شاشة القفل</string>
 	<string name="configure_carrier_text">تكوين نص شركة الاتصالات - أعلى الشاشة</string>
 	<string name="carrier_text_mod_disabled">نص الناقل لم يتغير</string>
@@ -153,7 +153,7 @@
 	<string name="nt_mode_total">تحميل + تحميل (مجمع)</string>
 	<string name="nt_mode_rxonly">تنزيل فقط</string>
 	<string name="nt_mode_txonly">تحميل فقط</string>
-	<string name="nt_unit_show_bits">Show in bits/s</string>
+	<string name="nt_unit_show_bits">عرض بالبت/ثانية</string>
 	<string name="statusbar_general_options">خيارات شريط الحالة</string>
 	<string name="dual_tone_battery_title">تمكين مقياس بطارية النغمة المزدوجة</string>
 	<string name="dual_tone_battery_on_summary">تشغيل (يعمل فقط مع أيقونة عمودية)</string>
@@ -172,14 +172,14 @@
 	<string name="BB_Thickness_title">سمك الشريط</string>
 	<string name="BB_indicate_charging">اذكر الشحن</string>
 	<string name="BB_indicate_fast_charging">حدد الشحن السريع</string>
-	<string name="BB_indicate_power_save">Indicate power save</string>
+	<string name="BB_indicate_power_save">عرض حالة توفير الطاقة</string>
 	<string name="BB_warning_level">نطاق مستوى التحذير</string>
 	<string name="BB_warning_tip">تعيين كلا إلى 0 لتعطيل الألوان المستندة إلى المستوى</string>
 	<string name="BB_batteryCriticalColor">لون المستوى الحرج</string>
 	<string name="BB_batteryWarningColor">لون مستوى التحذير</string>
 	<string name="BB_batteryChargingColor">لون الشحن</string>
 	<string name="BB_batteryFastChargingColor">لون الشحن السريع</string>
-	<string name="BB_batteryPowerSaveColor">Power Save color</string>
+	<string name="BB_batteryPowerSaveColor">لون توفير الطاقة</string>
 	<string name="BB_transit_colors">ألوان التظليل بين هذا النطاق</string>
 	<string name="colored_battery_percentage_title">نسبة بطارية ملونة أثناء الشحن</string>
 	<string name="nt_stat_mode_today">اليوم</string>
@@ -225,7 +225,7 @@
 	<string name="wifi_cell_on">استخدام WiFi &amp; بلاط البيانات</string>
 	<string name="wifi_cell_off">استخدام مربع إنترنت واحد</string>
 	<string name="QQS_brightness_category">خيارات شريط تمرير السطوع</string>
-	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
+	<string name="QS_auto_brightness_title">اختصار السطوع التكيفي</string>
 	<string name="QQS_brightness_title">إظهار شريط تمرير السطوع على لوحة QQS</string>
 	<string name="QQS_brightness_bottom_title">نقل شريط تمرير السطوع إلى الأسفل</string>
 	<string name="QS_brightness_disable_title">إخفاء شريط تمرير السطوع من الإعدادات السريعة</string>
@@ -258,13 +258,13 @@
 	<string name="taskbar_force_enable_title">تمكين إجباري</string>
 	<string name="taskbar_force_disable_title">تعطيل إجباري</string>
 	<string name="taskbar_transient_title">إخفاء تلقائي</string>
-	<string name="remap_physical_buttons_title">Remap physical buttons</string>
+	<string name="remap_physical_buttons_title">إعادة تعيين الأزرار الفيزيائية</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">تجاوز التحقق من توقيع الحزمة</string>
 	<string name="pm_allow_downgrade_title">السماح بخفض مستوى التطبيق</string>
 	<string name="auto_off_five_minutes">تمكين لمدة الدقائق الخمس التالية</string>
 	<!--Miscellaneous section related-->
-	<string name="launcher_section">Launcher options</string>
+	<string name="launcher_section">خيارات مشغل التطبيقات</string>
 	<string name="screenshot_sound_disable_title">تعطيل صوت لقطة الشاشة</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">السماح لقطة الشاشة من المحتوى المقيد</string>
@@ -297,7 +297,7 @@
 	<string name="force_aod_while_charging_summary">إظهار الوقت والمعلومات دائما أثناء شحن الجهاز</string>
 	<string name="doze_header">أثناء إيقاف الشاشة…</string>
 	<string name="custom_themed_icons_title">الأيقونات المخصصة للموضوع</string>
-	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
+	<string name="px_in_settings_title">إضافة PixelXpert إلى عناصر الإعدادات</string>
 	<string name="custom_themed_icons_off">الرموز المخصصة معطلة</string>
 	<string name="custom_themed_icons_on">تم تمكين الأيقونات المخصصة</string>
 	<string name="so_vol_longpress_skip">اضغط مطولاً على أزرار الصوت لتخطي الموسيقى</string>
@@ -310,7 +310,7 @@
 	<string name="notif_always_collapse">الإنهيار دائمًا</string>
 	<string name="disable_overscroll">تعطيل تأثير التمرير المرن</string>
 	<string name="overscroll_on_summary">هام: يمكنك تمكين التطبيقات التي تريد تعطيل التمرير الزائد داخل LSPosed</string>
-	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
+	<string name="control_flashlight_with_volume_keys">تحكم في الكشاف باستخدام أزرار الصوت</string>
 	<string name="milliseconds">المللي ثانية</string>
 	<string name="hours">ساعات</string>
 	<string name="system_time_title">وقت النظام</string>
@@ -391,9 +391,9 @@
 	<string name="app_kill_alert_body">سيتم إغلاق التطبيق الآن. يمكنك فتحه مرة أخرى بالنقر على الرمز الجديد</string>
 	<string name="app_kill_ok_btn">حسناً</string>
 	<!-- Depth Effect Alert -->
-	<string name="depth_effect_alert_title">Attention</string>
-	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
-	<string name="depth_effect_ok_btn">OK</string>
+	<string name="depth_effect_alert_title">تنبيه</string>
+	<string name="depth_effect_alert_body">استخدم خلفية شاشة قفل مناسبة حيث لا تعيق العناصر الأمامية الساعة بالكامل على شاشة القفل الخاصة بك، مما يضمن الجاذبية البصرية والوضوح الوظيفي على شاشة القفل.\n\nملاحظة: %s.</string>
+	<string name="depth_effect_ok_btn">حسناً</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">مطلوب إعادة تشغيل النظام لتطبيق الإعدادات</string>
 	<!-- Menu Items -->
@@ -479,17 +479,17 @@
 	<string name="navigation_hooks">Hooks</string>
 	<string name="navigation_settings">الإعدادات</string>
 	<!-- Remap Physical Buttons -->
-	<string name="while_screen_is_off_title">While screen is off</string>
-	<string name="while_screen_is_on_title">While screen is on</string>
-	<string name="remap_long_press_power_button_title">Long press power button</string>
-	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
-	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
-	<string name="remap_double_press_power_button_title">Double press power button</string>
-	<string name="torch">Toggle torch</string>
-	<string name="camera">Launch camera</string>
-	<string name="assistant">Launch assistant</string>
-	<string name="do_not_disturb">Toggle Do not disturb</string>
-	<string name="pause_media">Play/Pause media</string>
-	<string name="skip_media_next">Media control - Skip</string>
-	<string name="skip_media_prev">Media control - Previous</string>
+	<string name="while_screen_is_off_title">بينما الشاشة مطفأة</string>
+	<string name="while_screen_is_on_title">بينما الشاشة مضاءة</string>
+	<string name="remap_long_press_power_button_title">ضغط طويل على زر الطاقة</string>
+	<string name="remap_long_press_volume_up_button_title">ضغط طويل على زر رفع الصوت</string>
+	<string name="remap_long_press_volume_down_button_title">ضغط طويل على زر خفض الصوت</string>
+	<string name="remap_double_press_power_button_title">ضغط مزدوج على زر الطاقة</string>
+	<string name="torch">كشاف</string>
+	<string name="camera">فتح الكاميرا</string>
+	<string name="assistant">بدء المساعد</string>
+	<string name="do_not_disturb">عدم الإزعاج</string>
+	<string name="pause_media">تشغيل/إيقاف مؤقت</string>
+	<string name="skip_media_next">التحكم في الوسائط - تخطي</string>
+	<string name="skip_media_prev">التحكم في الوسائط - السابق</string>
 </resources>

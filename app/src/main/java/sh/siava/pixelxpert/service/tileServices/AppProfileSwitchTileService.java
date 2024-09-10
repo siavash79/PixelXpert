@@ -1,5 +1,6 @@
 package sh.siava.pixelxpert.service.tileServices;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
@@ -28,6 +29,7 @@ public class AppProfileSwitchTileService extends TileService{
 	}
 
 	// Called when the user taps on your tile in an active or inactive state.
+	@SuppressLint("StartActivityAndCollapseDeprecated")
 	@Override
 	public void onClick() {
 		super.onClick();
@@ -35,7 +37,7 @@ public class AppProfileSwitchTileService extends TileService{
 		getQsTile().setState(Tile.STATE_UNAVAILABLE);
 		getQsTile().updateTile();
 
-		if (Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
 			startActivityAndCollapse(PendingIntent.getActivity(
 					this,
 					0,

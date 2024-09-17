@@ -1,3 +1,8 @@
+**canary-381**  
+- A15QPR1B2: Fixed Lockscreen mods - bottom shortcut transparency will probably be a "wont fix"  
+- A15QPR1B2: Fixed screenshot mods  
+- A15: fixed app profile switch tile  
+  
 **canary-380**  
 - A15QPR1B1: Fixed taskbar in recents mode  
 - A15QPR1B1: Fixed navigation bar mods  

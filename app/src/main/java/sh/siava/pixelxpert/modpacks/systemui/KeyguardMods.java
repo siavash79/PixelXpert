@@ -810,10 +810,12 @@ public class KeyguardMods extends XposedModPack {
 
 		public static void captureDrawable(ImageView imageView)
 		{
-			Drawable background = imageView.getBackground();
+			try {
+				Drawable background = imageView.getBackground();
 
-			background = new ControlledLaunchableImageViewBackgroundDrawable(background.getCurrent().mutate(), imageView);
-			imageView.setBackground(background);
+				background = new ControlledLaunchableImageViewBackgroundDrawable(background.getCurrent().mutate(), imageView);
+				imageView.setBackground(background);
+			} catch (Throwable ignored) {}
 		}
 		@Override
 		public Drawable mutate()

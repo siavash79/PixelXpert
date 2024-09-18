@@ -1,5 +1,6 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
+import static android.graphics.Color.TRANSPARENT;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
@@ -22,7 +23,11 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Outline;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.TypedValue;
@@ -32,7 +37,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
+
+import java.lang.ref.WeakReference;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -185,7 +194,6 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpParam.classLoader);
 		Class<?> KeyguardStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarView", lpParam.classLoader);
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpParam.classLoader);
-//		Class<?> KeyguardQuickAffordanceViewBinderClass = findClassIfExists("com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder", lpParam.classLoader);
 		Class<?> KeyguardBottomAreaViewBinderClass = findClassIfExists("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpParam.classLoader);
 		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpParam.classLoader); //used to launch camera
 		Class<?> QRCodeScannerControllerClass = findClass("com.android.systemui.qrcodescanner.controller.QRCodeScannerController", lpParam.classLoader);
@@ -195,10 +203,32 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> CommandQueueClass = findClass("com.android.systemui.statusbar.CommandQueue", lpParam.classLoader);
 		Class<?> AmbientDisplayConfigurationClass = findClass("android.hardware.display.AmbientDisplayConfiguration", lpParam.classLoader);
 		Class<?> AssistManagerClass = findClassIfExists("com.android.systemui.assist.AssistManager", lpParam.classLoader);
+		Class<?> DefaultShortcutsSectionClass = findClassIfExists("com.android.systemui.keyguard.ui.view.layout.sections.DefaultShortcutsSection", lpParam.classLoader);
 		if(AssistManagerClass == null)
 		{
 			AssistManagerClass = findClass("com.google.android.systemui.assist.AssistManagerGoogle", lpParam.classLoader);
 		}
+
+		tryHookAllMethods(DefaultShortcutsSectionClass, "addViews", new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				Resources res = mContext.getResources();
+
+				ControlledLaunchableImageViewBackgroundDrawable.captureDrawable(
+						(ImageView) callMethod(param.args[0], "findViewById", res.getIdentifier(
+								"end_button",
+								"id",
+								mContext.getPackageName())));
+
+				ControlledLaunchableImageViewBackgroundDrawable.captureDrawable(
+						(ImageView) callMethod(param.args[0], "findViewById", res.getIdentifier(
+								"start_button",
+								"id",
+								mContext.getPackageName())));
+
+			}
+		});
 
 		Class<?> SmartspaceSectionClass = findClassIfExists("com.android.systemui.keyguard.ui.view.layout.sections.SmartspaceSection", lpParam.classLoader);
 		tryHookAllMethods(SmartspaceSectionClass, "addViews", new XC_MethodHook() {
@@ -769,6 +799,173 @@ public class KeyguardMods extends XposedModPack {
 		catch (Throwable ignored)
 		{
 			return ResourceManager.modRes.getString(R.string.power_indication_error);
+		}
+	}
+
+	public static class ControlledLaunchableImageViewBackgroundDrawable extends Drawable
+	{
+		Context mContext;
+		Drawable mDrawable;
+		WeakReference<ImageView> parentImageViewReference;
+
+		public static void captureDrawable(ImageView imageView)
+		{
+			Drawable background = imageView.getBackground();
+
+			background = new ControlledLaunchableImageViewBackgroundDrawable(background.getCurrent().mutate(), imageView);
+			imageView.setBackground(background);
+		}
+		@Override
+		public Drawable mutate()
+		{
+			return new ControlledLaunchableImageViewBackgroundDrawable(mDrawable.mutate(), parentImageViewReference.get());
+		}
+		public ControlledLaunchableImageViewBackgroundDrawable(Drawable drawable, ImageView parentView)
+		{
+			parentImageViewReference = new WeakReference<>(parentView);
+			mContext = parentView.getContext();
+			mDrawable = drawable;
+		}
+		@Override
+		public void setTint(int tintColor)
+		{
+			if(!transparentBGcolor)
+			{
+				mDrawable.setTint(tintColor);
+			}
+			else
+			{
+				mDrawable.setTint(TRANSPARENT);
+			}
+		}
+
+		@Override
+		public void setTintList(ColorStateList tintList) {
+			if(transparentBGcolor)
+			{
+				mDrawable.setTint(TRANSPARENT);
+
+				ImageView parentView = parentImageViewReference.get();
+				if (parentView != null && parentView.getDrawable() != null) {
+					@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = getColorAttrDefaultColor(
+							mContext,
+							mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
+
+					parentView.getDrawable().setTint(wallpaperTextColorAccent);
+				}
+			}
+			else
+			{
+				mDrawable.setTintList(tintList);
+			}
+		}
+
+		@Override
+		public void draw(@NonNull Canvas canvas) {
+			mDrawable.draw(canvas);
+		}
+
+		@Override
+		public void jumpToCurrentState()
+		{
+			mDrawable.jumpToCurrentState();
+		}
+
+		@Override
+		public void setAlpha(int alpha) {
+			mDrawable.setAlpha(alpha);
+		}
+
+		@Override
+		public void setColorFilter(@Nullable ColorFilter colorFilter) {
+			if(!transparentBGcolor)
+			{
+				mDrawable.setColorFilter(colorFilter);
+			}
+		}
+
+		@Override
+		public int getOpacity() {
+			//noinspection deprecation
+			return mDrawable.getOpacity();
+		}
+
+		@Override
+		public boolean getPadding(Rect padding)
+		{
+			return mDrawable.getPadding(padding);
+		}
+
+		@Override
+		public int getMinimumHeight()
+		{
+			return mDrawable.getMinimumHeight();
+		}
+
+		@Override
+		public int getMinimumWidth()
+		{
+			return mDrawable.getMinimumWidth();
+		}
+
+		@Override
+		public boolean isStateful()
+		{
+			return mDrawable.isStateful();
+		}
+
+		@Override
+		public boolean setVisible(boolean visible, boolean restart)
+		{
+			return mDrawable.setVisible(visible, restart);
+		}
+
+		@Override
+		public void getOutline(Outline outline)
+		{
+			mDrawable.getOutline(outline);
+		}
+
+		@Override
+		public boolean isProjected()
+		{
+			return mDrawable.isProjected();
+		}
+
+		@Override
+		public void setBounds(Rect bounds)
+		{
+			mDrawable.setBounds(bounds);
+		}
+
+		@Override
+		public void setBounds(int l, int t, int r, int b)
+		{
+			mDrawable.setBounds(l,t,r,b);
+		}
+
+		@Override
+		public Drawable getCurrent()
+		{
+			return mDrawable.getCurrent();
+		}
+
+		@Override
+		public boolean setState(int[] stateSet)
+		{
+			return mDrawable.setState(stateSet);
+		}
+
+		@Override
+		public int getIntrinsicWidth()
+		{
+			return mDrawable.getIntrinsicWidth();
+		}
+
+		@Override
+		public int getIntrinsicHeight()
+		{
+			return mDrawable.getIntrinsicHeight();
 		}
 	}
 }

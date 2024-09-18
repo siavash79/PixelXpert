@@ -1,3 +1,6 @@
+**canary-382**  
+- A15QPR1B2: Fixed lockscreen shortcuts transparency  
+  
 **canary-381**  
 - A15QPR1B2: Fixed Lockscreen mods - bottom shortcut transparency will probably be a "wont fix"  
 - A15QPR1B2: Fixed screenshot mods  

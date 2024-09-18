@@ -204,37 +204,40 @@ public class KeyguardMods extends XposedModPack {
 		tryHookAllMethods(SmartspaceSectionClass, "addViews", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				mComposeKGMiddleCustomTextView = new TextView(mContext);
-				mComposeKGMiddleCustomTextView.setMaxLines(2);
-				mComposeKGMiddleCustomTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-				mComposeKGMiddleCustomTextView.setLetterSpacing(.03f);
-				mComposeKGMiddleCustomTextView.setId(View.generateViewId());
+				try {
+					mComposeKGMiddleCustomTextView = new TextView(mContext);
+					mComposeKGMiddleCustomTextView.setMaxLines(2);
+					mComposeKGMiddleCustomTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+					mComposeKGMiddleCustomTextView.setLetterSpacing(.03f);
+					mComposeKGMiddleCustomTextView.setId(View.generateViewId());
 
-				mComposeSmartSpaceContainer = (LinearLayout) getObjectField(param.thisObject, "dateWeatherView");
-				mComposeSmartSpaceContainer.setOrientation(LinearLayout.VERTICAL);
+					mComposeSmartSpaceContainer = (LinearLayout) getObjectField(param.thisObject, "dateWeatherView");
+					mComposeSmartSpaceContainer.setOrientation(LinearLayout.VERTICAL);
 
-				LinearLayout l = new LinearLayout(mContext);
-				l.setLayoutParams(new LinearLayout.LayoutParams(-1,-2));
-				l.setId(View.generateViewId());
-				while(mComposeSmartSpaceContainer.getChildCount() > 0)
-				{
-					View c = mComposeSmartSpaceContainer.getChildAt(0);
-					mComposeSmartSpaceContainer.removeView(c);
-					l.addView(c);
-				}
-				mComposeSmartSpaceContainer.addView(l);
-
-				mComposeSmartSpaceContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
-					ViewGroup.LayoutParams lp = v.getLayoutParams();
-					if(lp.width != -1)
+					LinearLayout l = new LinearLayout(mContext);
+					l.setLayoutParams(new LinearLayout.LayoutParams(-1,-2));
+					l.setId(View.generateViewId());
+					while(mComposeSmartSpaceContainer.getChildCount() > 0)
 					{
-						lp.width = -1;
-						setObjectField(lp, "rightMargin", getObjectField(lp, "leftMargin"));
+						View c = mComposeSmartSpaceContainer.getChildAt(0);
+						mComposeSmartSpaceContainer.removeView(c);
+						l.addView(c);
 					}
-				});
+					mComposeSmartSpaceContainer.addView(l);
 
-				updateMiddleTexts();
-				setMiddleColor();
+					mComposeSmartSpaceContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+						ViewGroup.LayoutParams lp = v.getLayoutParams();
+						if(lp.width != -1)
+						{
+							lp.width = -1;
+							setObjectField(lp, "rightMargin", getObjectField(lp, "leftMargin"));
+						}
+					});
+
+					updateMiddleTexts();
+					setMiddleColor();
+				}
+				catch (Throwable ignored){}
 			}
 		});
 

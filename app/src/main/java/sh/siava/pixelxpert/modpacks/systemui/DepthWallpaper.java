@@ -14,6 +14,7 @@ import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -108,6 +109,8 @@ public class DepthWallpaper extends XposedModPack {
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				if(!DWallpaperEnabled) return;
 
+				Resources res = mContext.getResources();
+
 				View scrimBehind = (View) getObjectField(mScrimController, "mScrimBehind");
 				ViewGroup rootView = (ViewGroup) scrimBehind.getParent();
 
@@ -120,7 +123,17 @@ public class DepthWallpaper extends XposedModPack {
 
 				rootView.addView(mWallpaperBackground, 0);
 
-				targetView.addView(mLockScreenSubject,1);
+				@SuppressLint("DiscouragedApi")
+				View keyguardRootView = rootView.findViewById(res.getIdentifier("keyguard_root_view", "id", mContext.getPackageName()));
+
+				if(keyguardRootView == null) //legacy view
+				{
+					targetView.addView(mLockScreenSubject);
+				}
+				else //A15 QPR1 compose view
+				{
+					rootView.addView(mLockScreenSubject, rootView.indexOfChild(keyguardRootView) + 1);
+				}
 			}
 		});
 

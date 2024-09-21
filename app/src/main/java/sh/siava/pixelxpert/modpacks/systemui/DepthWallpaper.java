@@ -10,6 +10,8 @@ import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.reAddView;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.tryHookAllConstructors;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
@@ -26,6 +28,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,8 +41,9 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.modpacks.XPLauncher;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
+import sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools;
 
-/** @noinspection RedundantThrows*/
+/** @noinspection RedundantThrows, SameParameterValue */
 public class DepthWallpaper extends XposedModPack {
 	private static final String listenPackage = Constants.SYSTEM_UI_PACKAGE;
 	private static boolean lockScreenSubjectCacheValid = false;
@@ -76,6 +81,41 @@ public class DepthWallpaper extends XposedModPack {
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpParam.classLoader);
 		Class<?> ScrimControllerClass = findClass("com.android.systemui.statusbar.phone.ScrimController", lpParam.classLoader);
 		Class<?> ScrimViewClass = findClass("com.android.systemui.scrim.ScrimView", lpParam.classLoader);
+
+
+		Class<?> AodBurnInLayerClass = findClassIfExists("com.android.systemui.keyguard.ui.view.layout.sections.AodBurnInLayer", lpParam.classLoader);
+		tryHookAllConstructors(AodBurnInLayerClass, new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable { //A15 compose keyguard
+				View entryV = (View) param.thisObject;
+
+				if(!DWallpaperEnabled) return;
+
+				Resources res = mContext.getResources();
+
+				entryV.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+					@SuppressLint("DiscouragedApi")
+					@Override
+					public void onViewAttachedToWindow(@NonNull View v) {
+						ReflectionTools.runDelayedOnMainThread(entryV, 1000, () -> {
+							ViewGroup rootView = (ViewGroup) entryV.getParent();
+
+							if(!mLayersCreated) {
+								createLayers();
+							}
+
+							reAddView(rootView, mLockScreenSubject, 0);
+							reAddView(rootView, rootView.findViewById(res.getIdentifier("lockscreen_clock_view_large", "id", mContext.getPackageName())), 0);
+							reAddView(rootView, rootView.findViewById(res.getIdentifier("lockscreen_clock_view", "id", mContext.getPackageName())),0);
+						});
+					}
+
+					@Override
+					public void onViewDetachedFromWindow(@NonNull View v) {
+					}
+				});
+			}
+		});
 
 		hookAllMethods(ScrimViewClass, "setViewAlpha", new XC_MethodHook() {
 			@Override
@@ -115,25 +155,15 @@ public class DepthWallpaper extends XposedModPack {
 				ViewGroup rootView = (ViewGroup) scrimBehind.getParent();
 
 				@SuppressLint("DiscouragedApi")
-				ViewGroup targetView = rootView.findViewById(mContext.getResources().getIdentifier("notification_container_parent", "id", mContext.getPackageName()));
+				ViewGroup targetView = rootView.findViewById(res.getIdentifier("notification_container_parent", "id", mContext.getPackageName()));
 
 				if(!mLayersCreated) {
 					createLayers();
 				}
 
-				rootView.addView(mWallpaperBackground, 0);
+				reAddView(rootView, mWallpaperBackground, 0);
 
-				@SuppressLint("DiscouragedApi")
-				View keyguardRootView = rootView.findViewById(res.getIdentifier("keyguard_root_view", "id", mContext.getPackageName()));
-
-				if(keyguardRootView == null) //legacy view
-				{
-					targetView.addView(mLockScreenSubject);
-				}
-				else //A15 QPR1 compose view
-				{
-					rootView.addView(mLockScreenSubject, rootView.indexOfChild(keyguardRootView) + 1);
-				}
+				targetView.addView(mLockScreenSubject,1);
 			}
 		});
 
@@ -187,7 +217,7 @@ public class DepthWallpaper extends XposedModPack {
 
 					//crop to display bounds
 					scaledWallpaperBitmap = Bitmap.createBitmap(scaledWallpaperBitmap, xPixelShift, yPixelShift, displayBounds.width(), displayBounds.height());
-					Bitmap finalScaledWallpaperBitmap = scaledWallpaperBitmap;
+					Bitmap finalScaledWallpaperBitmap = Bitmap.createBitmap(scaledWallpaperBitmap);
 
 					if(!mLayersCreated) {
 						createLayers();
@@ -246,13 +276,14 @@ public class DepthWallpaper extends XposedModPack {
 				{
 					cacheIsValid = true;
 				}
-				else
-				{
-					FileOutputStream newCacheStream = new FileOutputStream(wallpaperCacheFile);
-					compressedBitmap.writeTo(newCacheStream);
-					newCacheStream.close();
-				}
 				cacheStream.close();
+			}
+
+			if(!cacheIsValid)
+			{
+				FileOutputStream newCacheStream = new FileOutputStream(wallpaperCacheFile);
+				compressedBitmap.writeTo(newCacheStream);
+				newCacheStream.close();
 			}
 			compressedBitmap.close();
 		}
@@ -284,6 +315,8 @@ public class DepthWallpaper extends XposedModPack {
 		mLockScreenSubject = new FrameLayout(mContext);
 		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-1, -1);
 		mLockScreenSubject.setLayoutParams(lp);
+
+		mLockScreenSubject.setId(View.generateViewId()); //a fake ID so that it can be added to constrained layout
 
 		mLayersCreated = true;
 	}

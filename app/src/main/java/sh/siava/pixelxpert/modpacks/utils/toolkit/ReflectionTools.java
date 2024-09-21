@@ -101,6 +101,25 @@ public class ReflectionTools {
 		}).start();
 	}
 
+	public static void reAddView(ViewGroup parentView, View childView) {
+		if(childView == null) return;
+
+		try {
+			((ViewGroup)childView.getParent()).removeView(childView);
+		} catch (Throwable ignored) {}
+		parentView.addView(childView);
+	}
+	public static void reAddView(ViewGroup parentView, View childView, int index)
+	{
+		if(childView == null) return;
+
+		try {
+			((ViewGroup)childView.getParent()).removeView(childView);
+		} catch (Throwable ignored) {}
+		parentView.addView(childView, index);
+	}
+
+
 	public static Set<XC_MethodHook.Unhook> hookAllMethodsMatchPattern(Class<?> clazz, String namePatter, XC_MethodHook callback)
 	{
 		Set<XC_MethodHook.Unhook> result = new ArraySet<>();

@@ -1,3 +1,6 @@
+**canary-385**  
+- A15QPR1B2: Wallpaper depth effect bugfix  
+  
 **canary-384**  
 - A15QPR1B2: Fixed wallpaper depth effect  
   

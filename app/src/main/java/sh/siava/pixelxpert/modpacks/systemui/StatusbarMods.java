@@ -137,7 +137,6 @@ public class StatusbarMods extends XposedModPack {
 	private static boolean indicateFastCharging = false;
 	private static boolean indicatePowerSave = false;
 	private static boolean BBarTransitColors = false;
-	private static boolean BBAnimateCharging = false;
 	//endregion
 
 	//region privacy chip
@@ -310,7 +309,6 @@ public class StatusbarMods extends XposedModPack {
 		BBOpacity = Xprefs.getSliderInt( "BBOpacity", 100);
 		BBarHeight = Xprefs.getSliderInt( "BBarHeight", 50);
 		BBarTransitColors = Xprefs.getBoolean("BBarTransitColors", false);
-		BBAnimateCharging = Xprefs.getBoolean("BBAnimateCharging", false);
 
 		batteryLevels = Xprefs.getSliderValues("batteryWarningRange", 0);
 
@@ -1122,7 +1120,7 @@ public class StatusbarMods extends XposedModPack {
 
 	//region battery bar related
 	private void refreshBatteryBar(BatteryBarView instance) {
-		BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, chargingColor, indicateFastCharging, fastChargingColor, indicatePowerSave, powerSaveColor, BBarTransitColors, BBAnimateCharging);
+		BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, chargingColor, indicateFastCharging, fastChargingColor, indicatePowerSave, powerSaveColor, BBarTransitColors);
 		instance.setVisibility((BBarEnabled) ? VISIBLE : GONE);
 		instance.setColorful(BBarColorful);
 		instance.setOnlyWhileCharging(BBOnlyWhileCharging);

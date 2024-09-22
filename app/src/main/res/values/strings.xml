@@ -178,7 +178,6 @@
 	<string name="BB_Opacity_title">Bar opacity</string>
 	<string name="BB_center_align_title">Center Aligned</string>
 	<string name="BB_Thickness_title">Bar thickness</string>
-	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">Indicate charging</string>
 	<string name="BB_indicate_fast_charging">Indicate fast charging</string>
 	<string name="BB_indicate_power_save">Indicate power save</string>

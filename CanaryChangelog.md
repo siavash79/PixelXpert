@@ -1,3 +1,6 @@
+**canary-386**  
+- A15QPR1B2: Compatibility with new settings app  
+  
 **canary-385**  
 - A15QPR1B2: Wallpaper depth effect bugfix  
   

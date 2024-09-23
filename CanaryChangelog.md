@@ -1,3 +1,6 @@
+**canary-387**  
+- Improved app startup duration  
+  
 **canary-386**  
 - A15QPR1B2: Compatibility with new settings app  
   

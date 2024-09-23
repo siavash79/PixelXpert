@@ -1,0 +1,10 @@
+-keepattributes Exceptions,LineNumberTable,Signature,SourceFile
+
+-keepclasseswithmembernames,allowoptimization,allowobfuscation class * {
+    native <methods>;
+}
+
+-keepclassmembers,allowoptimization,allowobfuscation enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}

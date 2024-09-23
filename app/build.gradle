@@ -36,13 +36,15 @@ android {
 
 	buildTypes {
 		release {
-			minifyEnabled false
-			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			minifyEnabled true
+			shrinkResources true
+			crunchPngs true
+			proguardFiles("proguard-android-optimize.txt", "proguard.pro", "proguard-rules.pro")
 			signingConfig releaseSignature
 		}
 		debug {
 			minifyEnabled false
-			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			proguardFiles("proguard-android-optimize.txt", "proguard.pro", "proguard-rules.pro")
 			signingConfig releaseSignature
 		}
 	}

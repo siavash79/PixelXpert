@@ -42,8 +42,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,7 +55,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sh.siava.pixelxpert.R;
-import sh.siava.pixelxpert.ui.activities.SettingsActivity;
 
 public class SearchPreferenceFragment extends Fragment implements SearchPreferenceAdapter.SearchClickListener {
 	/**
@@ -159,6 +161,24 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 		return rootView;
 	}
 
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		AppCompatActivity baseContext = (AppCompatActivity) getContext();
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+
+		if (baseContext != null) {
+			if (toolbar != null) {
+				baseContext.setSupportActionBar(toolbar);
+				toolbar.setTitle(R.string.searchpreference_title);
+			}
+			if (baseContext.getSupportActionBar() != null) {
+				baseContext.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+			}
+		}
+	}
+
 	private void loadHistory() {
 		history = new ArrayList<>();
 		if (!searchConfiguration.isHistoryEnabled()) {
@@ -211,8 +231,6 @@ public class SearchPreferenceFragment extends Fragment implements SearchPreferen
 		if (searchConfiguration.isSearchBarEnabled()) {
 			showKeyboard();
 		}
-
-		SettingsActivity.backButtonEnabled();
 	}
 
 	private void showKeyboard() {

@@ -525,6 +525,7 @@
 	<string name="sleep">Sleep</string>
 
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">Search…</string>
 	<string name="searchpreference_clear">Clear</string>
 	<string name="searchpreference_history_entry">History entry</string>

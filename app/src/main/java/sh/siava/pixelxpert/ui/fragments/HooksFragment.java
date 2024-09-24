@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,7 +35,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ipc.RootService;
@@ -52,20 +52,29 @@ import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.service.RootProvider;
 import sh.siava.pixelxpert.utils.AppUtils;
 
-public class HooksFragment extends Fragment {
+public class HooksFragment extends BaseFragment {
 
 	private FragmentHooksBinding binding;
-	/** @noinspection unused*/
+	/**
+	 * @noinspection unused
+	 */
 	private final String TAG = getClass().getSimpleName();
 	IntentFilter intentFilterHookedPackages = new IntentFilter();
 	private final List<String> hookedPackageList = new ArrayList<>();
 	private List<String> monitorPackageList;
 	private int dotCount = 0;
-	/** @noinspection FieldCanBeLocal*/
+	/**
+	 * @noinspection FieldCanBeLocal
+	 */
 	private ServiceConnection mCoreRootServiceConnection;
 	private IRootProviderService mRootServiceIPC = null;
 	private boolean rebootPending = false;
 	private final String reboot_key = "reboot_pending";
+
+	@Override
+	public String getTitle() {
+		return getString(R.string.hooked_packages_title);
+	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -193,12 +202,16 @@ public class HooksFragment extends Fragment {
 
 		for (int i = 0; i < pack.size(); i++) {
 			View list = LayoutInflater.from(requireContext()).inflate(R.layout.view_hooked_package_list, binding.content, false);
-			int margin = getResources().getDimensionPixelSize(R.dimen.ui_container_margin_side);
+
 			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) list.getLayoutParams();
 			if (i == 0) {
-				params.setMargins(margin, dp2px(requireContext(), 12), margin, dp2px(requireContext(), 6));
+				list.setBackgroundResource(R.drawable.container_top);
+				params.topMargin = dp2px(requireContext(), 16);
 			} else if (i == pack.size() - 1) {
-				params.setMargins(margin, dp2px(requireContext(), 6), margin, dp2px(requireContext(), 12));
+				list.setBackgroundResource(R.drawable.container_bottom);
+				params.bottomMargin = dp2px(requireContext(), 16);
+			} else {
+				list.setBackgroundResource(R.drawable.container_mid);
 			}
 
 			TextView title = list.findViewById(R.id.title);
@@ -233,7 +246,7 @@ public class HooksFragment extends Fragment {
 				} catch (RemoteException e) {
 					Toast.makeText(requireContext(), getText(R.string.package_activation_failed), Toast.LENGTH_SHORT).show();
 					activateInLSPosed.setEnabled(true);
-					e.printStackTrace();
+					Log.e(TAG, e.toString());
 				}
 			});
 

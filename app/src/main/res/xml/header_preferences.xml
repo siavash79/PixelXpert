@@ -2,87 +2,132 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:search="http://schemas.android.com/apk/sh.siava.pixelxpert.ui.preferencesearch">
 
-	<sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreference android:key="searchPreference" />
+	<PreferenceCategory
+		android:key="top_level_category"
+		android:layout="@layout/settingslib_preference_category_no_title">
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
-		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$StatusbarFragment"
-		app:icon="@drawable/ic_settings_statusbar"
-		app:key="statusbar_header"
-		app:title="@string/statusbar_header"
-		search:ignore="true" />
+		<sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreference android:key="searchPreference" />
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
-		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$QuickSettingsFragment"
-		app:icon="@drawable/ic_settings_quicksettings"
-		app:key="quicksettings_header"
-		app:title="@string/qs_panel_category_title"
-		search:ignore="true" />
+	</PreferenceCategory>
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
-		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$ThemingFragment"
-		app:icon="@drawable/ic_settings_themes"
-		app:key="theming_header"
-		app:title="@string/theme_customization_category"
-		search:ignore="true" />
+	<PreferenceCategory
+		android:key="top_level_category"
+		android:layout="@layout/settingslib_preference_category_no_title"
+		app:allowDividerAbove="false"
+		app:allowDividerBelow="false">
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
-		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$LockScreenFragment"
-		app:icon="@drawable/ic_settings_lockscreen"
-		app:key="lockscreen_header"
-		app:title="@string/lockscreen_header_title"
-		search:ignore="true" />
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
+			android:layout="@layout/custom_preference"
+			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$QuickSettingsFragment"
+			app:icon="@drawable/ic_settings_quicksettings"
+			app:key="quicksettings_header"
+			app:position="topItem"
+			app:summary="Placeholder summary text"
+			app:title="@string/qs_panel_category_title"
+			search:ignore="true" />
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
-		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$NavFragment"
-		app:icon="@drawable/ic_settings_navigation"
-		app:key="nav_header"
-		app:title="@string/nav_header"
-		search:ignore="true" />
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
+			android:layout="@layout/custom_preference"
+			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$LockScreenFragment"
+			app:icon="@drawable/ic_settings_lockscreen"
+			app:key="lockscreen_header"
+			app:summary="Placeholder summary text"
+			app:title="@string/lockscreen_header_title"
+			search:ignore="true" />
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
-		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$DialerFragment"
-		app:icon="@drawable/ic_phone"
-		app:key="dialer_header"
-		app:title="@string/dialer_header"
-		search:ignore="true" />
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
+			android:layout="@layout/custom_preference"
+			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$ThemingFragment"
+			app:icon="@drawable/ic_settings_themes"
+			app:key="theming_header"
+			app:position="bottomItem"
+			app:summary="Placeholder summary text"
+			app:title="@string/theme_customization_category"
+			search:ignore="true" />
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
-		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$HotSpotFragment"
-		app:icon="@drawable/ic_settings_wifi_hotspot"
-		app:key="hotspot_header"
-		app:title="@string/hotspot_header"
-		search:ignore="true" />
+	</PreferenceCategory>
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
-		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$PackageManagerFragment"
-		app:icon="@drawable/ic_settings_package_manager"
-		app:key="pm_header"
-		app:title="@string/pm_header"
-		search:ignore="true" />
+	<PreferenceCategory
+		android:key="mid_level_category"
+		android:layout="@layout/settingslib_preference_category_no_title"
+		app:allowDividerAbove="false"
+		app:allowDividerBelow="false">
 
-	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
-		android:layout="@layout/custom_preference"
-		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$MiscFragment"
-		app:icon="@drawable/ic_settings_misc"
-		app:key="misc_header"
-		app:title="@string/misc_header"
-		search:ignore="true" />
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
+			android:layout="@layout/custom_preference"
+			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$StatusbarFragment"
+			app:icon="@drawable/ic_settings_statusbar"
+			app:key="statusbar_header"
+			app:position="topItem"
+			app:summary="Placeholder summary text"
+			app:title="@string/statusbar_header"
+			search:ignore="true" />
 
-<!--	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain-->
-<!--		android:layout="@layout/custom_preference"-->
-<!--		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$OwnPrefsFragment"-->
-<!--		app:icon="@drawable/ic_settings_pixelxpert"-->
-<!--		app:key="own_header"-->
-<!--		app:title="@string/own_prefs_header"-->
-<!--		search:ignore="true" />-->
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
+			android:layout="@layout/custom_preference"
+			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$NavFragment"
+			app:icon="@drawable/ic_settings_navigation"
+			app:key="nav_header"
+			app:position="bottomItem"
+			app:summary="Placeholder summary text"
+			app:title="@string/nav_header"
+			search:ignore="true" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:key="bottom_level_category"
+		android:layout="@layout/settingslib_preference_category_no_title"
+		app:allowDividerAbove="false"
+		app:allowDividerBelow="false">
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
+			android:layout="@layout/custom_preference"
+			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$DialerFragment"
+			app:icon="@drawable/ic_phone"
+			app:key="dialer_header"
+			app:position="topItem"
+			app:summary="Placeholder summary text"
+			app:title="@string/dialer_header"
+			search:ignore="true" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
+			android:layout="@layout/custom_preference"
+			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$HotSpotFragment"
+			app:icon="@drawable/ic_settings_wifi_hotspot"
+			app:key="hotspot_header"
+			app:summary="Placeholder summary text"
+			app:title="@string/hotspot_header"
+			search:ignore="true" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
+			android:layout="@layout/custom_preference"
+			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$PackageManagerFragment"
+			app:icon="@drawable/ic_settings_package_manager"
+			app:key="pm_header"
+			app:summary="Placeholder summary text"
+			app:title="@string/pm_header"
+			search:ignore="true" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain
+			android:layout="@layout/custom_preference"
+			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$MiscFragment"
+			app:icon="@drawable/ic_settings_misc"
+			app:key="misc_header"
+			app:position="bottomItem"
+			app:summary="Placeholder summary text"
+			app:title="@string/misc_header"
+			search:ignore="true" />
+
+	</PreferenceCategory>
+
+	<!--	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain-->
+	<!--		android:layout="@layout/custom_preference"-->
+	<!--		app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$OwnPrefsFragment"-->
+	<!--		app:icon="@drawable/ic_settings_pixelxpert"-->
+	<!--		app:key="own_header"-->
+	<!--		app:title="@string/own_prefs_header"-->
+	<!--		search:ignore="true" />-->
 
 	<!-- Let's remove this for the time being...
 	<sh.siava.pixelxpert.ui.preferences.MaterialPreferenceMain

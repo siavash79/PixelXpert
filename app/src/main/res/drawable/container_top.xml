@@ -4,7 +4,11 @@
 	<item>
 		<shape android:shape="rectangle">
 			<solid android:color="?attr/colorSurfaceContainerHigh" />
-			<corners android:radius="@dimen/ui_container_radius" />
+			<corners
+				android:bottomLeftRadius="4dp"
+				android:bottomRightRadius="4dp"
+				android:topLeftRadius="@dimen/ui_container_radius"
+				android:topRightRadius="@dimen/ui_container_radius" />
 		</shape>
 	</item>
 </ripple>

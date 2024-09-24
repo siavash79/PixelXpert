@@ -13,12 +13,7 @@
 		android:id="@+id/settings"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_above="@+id/bottomNavigationView"
-		android:layout_below="@+id/header" />
-
-	<include
-		android:id="@+id/header"
-		layout="@layout/view_header" />
+		android:layout_above="@+id/bottomNavigationView" />
 
 	<com.google.android.material.bottomnavigation.BottomNavigationView
 		android:id="@+id/bottomNavigationView"

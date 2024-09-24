@@ -1,3 +1,6 @@
+**canary-389**  
+- Fixed wallpaper depth effect - broken in last canary  
+  
 **canary-388**  
 - Build optimization  
   

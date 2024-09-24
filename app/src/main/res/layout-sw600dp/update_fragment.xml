@@ -168,7 +168,7 @@
 				android:elevation="0dp"
 				android:outlineAmbientShadowColor="@android:color/transparent"
 				android:outlineSpotShadowColor="@android:color/transparent"
-				app:cardBackgroundColor="?attr/colorSurfaceContainer"
+				app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
 				app:cardCornerRadius="@dimen/ui_container_radius"
 				app:layout_constraintBottom_toBottomOf="parent"
 				app:layout_constraintEnd_toEndOf="parent"

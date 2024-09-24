@@ -17,7 +17,7 @@
 		app:collapsedSubtitleTextColor="?attr/colorOnSurfaceVariant"
 		app:collapsedTitleTextAppearance="@style/Toolbar.TitleText.Collapsed"
 		app:collapsedTitleTextColor="?attr/colorOnSurface"
-		app:contentScrim="?attr/colorSurfaceContainerHighest"
+		app:contentScrim="?attr/colorSurfaceContainerHigh"
 		app:expandedSubtitleTextAppearance="@style/Toolbar.SubTitleText.Expanded"
 		app:expandedTitleMarginBottom="16dp"
 		app:expandedTitleMarginEnd="24dp"

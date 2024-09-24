@@ -35,7 +35,8 @@
 			android:layout_marginTop="8dp"
 			android:background="@drawable/preference_category_background"
 			android:paddingHorizontal="12dp"
-			android:paddingVertical="6dp"
+			android:paddingTop="5dp"
+			android:paddingBottom="6dp"
 			android:textColor="?attr/colorOnPrimaryContainer" />
 
 		<com.google.android.material.textview.MaterialTextView

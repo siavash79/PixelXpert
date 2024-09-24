@@ -21,7 +21,7 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
 		android:layout_gravity="bottom"
-		android:background="?attr/colorSurfaceContainerHighest"
+		android:background="?attr/colorSurfaceContainerHigh"
 		app:labelVisibilityMode="auto"
 		app:menu="@menu/bottom_nav_menu" />
 

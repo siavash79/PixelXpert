@@ -84,7 +84,7 @@ public class MaterialPreferenceMain extends Preference {
 				holder.itemView.setBackgroundResource(R.drawable.container_top);
 				break;
 			case POSITION_SINGLE:
-				holder.itemView.setBackgroundResource(R.drawable.container);
+				holder.itemView.setBackgroundResource(R.drawable.container_single);
 				break;
 			case POSITION_BOTTOM:
 				holder.itemView.setBackgroundResource(R.drawable.container_bottom);

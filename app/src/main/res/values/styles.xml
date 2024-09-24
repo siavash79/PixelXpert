@@ -91,7 +91,7 @@
 	</style>
 
 	<style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
-		<item name="android:popupBackground">?attr/colorSurfaceVariant</item>
+		<item name="android:popupBackground">?attr/colorSurfaceContainerHighest</item>
 	</style>
 
 </resources>

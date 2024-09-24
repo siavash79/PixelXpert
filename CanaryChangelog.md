@@ -1,3 +1,6 @@
+**canary-388**  
+- Build optimization  
+  
 **canary-387**  
 - Improved app startup duration  
   

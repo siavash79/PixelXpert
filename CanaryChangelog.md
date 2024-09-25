@@ -1,3 +1,6 @@
+**canary-392**  
+- PX App UI redesign - bugfix  
+  
 **canary-391**  
 - PX App UI redesign (by DrDisagree)  
   

@@ -40,10 +40,12 @@
 -keep class sh.siava.pixelxpert.service.RootProviderProxy { *; }
 -keep class sh.siava.pixelxpert.IRootProviderProxy { *; }
 
-# AIDL Classes
+# Services
 -keep interface **.I* { *; }
 -keep class **.I*$Stub { *; }
 -keep class **.I*$Stub$Proxy { *; }
+-keep class sh.siava.pixelxpert.service.*
+
 
 # Keep all inner classes and their names within the specified package
 # but allow optimization of their internal code

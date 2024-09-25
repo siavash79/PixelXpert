@@ -1,3 +1,9 @@
+**canary-389**  
+- Fixed wallpaper depth effect - broken in last canary  
+  
+**canary-388**  
+- Build optimization  
+  
 **canary-387**  
 - Improved app startup duration  
   

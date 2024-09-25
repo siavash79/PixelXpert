@@ -1,0 +1,53 @@
+[versions]
+activity = "1.9.2"
+annotation = "1.8.2"
+appcompat = "1.7.0"
+cardview = "1.0.0"
+colorpicker = "1.1.0"
+commonsText = "1.11.0"
+concurrentFutures = "1.2.0"
+constraintlayout = "2.1.4"
+markdown = "0.19.0"
+libsuVersion = "5.2.2"
+android-material = "1.12.0"
+navigationUiKtxVersion = "2.8.1"
+navigationFragmentKtxVersion = "2.8.1"
+objenesis = "3.3"
+ntpClient = "0.0.1-alpha11"
+persianDateTime = "4.2.1"
+playServicesBase = "18.5.0"
+playServicesMlkitSubjectSegmentation = "16.0.0-beta1"
+recyclerview = "1.3.2"
+preferenceKtx = "1.2.1"
+remotepreferences = "0.8"
+swiperefreshlayout = "1.2.0-alpha01"
+uiGeometry = "1.7.2"
+workRuntime = "2.9.1"
+
+[libraries]
+androidx-activity = { module = "androidx.activity:activity", version.ref = "activity" }
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preferenceKtx" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+androidx-ui-geometry = { module = "androidx.compose.ui:ui-geometry", version.ref = "uiGeometry" }
+androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntime" }
+androidx-concurrent-futures = { module = "androidx.concurrent:concurrent-futures", version.ref = "concurrentFutures" }
+colorpicker = { module = "com.jaredrummler:colorpicker", version.ref = "colorpicker" }
+apache-commons-text = { module = "org.apache.commons:commons-text", version.ref = "commonsText" }
+markdown = { module = "com.github.tiagohm.MarkdownView:library", version.ref = "markdown" }
+android-material = { module = "com.google.android.material:material", version.ref = "android-material" }
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtxVersion" }
+navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationUiKtxVersion" }
+libsuCore = { module = "com.github.topjohnwu.libsu:core", version.ref = "libsuVersion" }
+libsuNIO = { module = "com.github.topjohnwu.libsu:nio", version.ref = "libsuVersion" }
+libsuService = { module = "com.github.topjohnwu.libsu:service", version.ref = "libsuVersion" }
+objenesis = { group = "org.objenesis", name = "objenesis", version.ref = "objenesis" }
+ntpClient = { group = "com.lyft.kronos", name = "kronos-android", version.ref = "ntpClient" }
+persian-date-time = { module = "com.github.mfathi91:persian-date-time", version.ref = "persianDateTime" }
+play-services-base = { module = "com.google.android.gms:play-services-base", version.ref = "playServicesBase" }
+play-services-mlkit-subject-segmentation = { module = "com.google.android.gms:play-services-mlkit-subject-segmentation", version.ref = "playServicesMlkitSubjectSegmentation" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+remotepreferences = { module = "com.crossbowffs.remotepreferences:remotepreferences", version.ref = "remotepreferences" }

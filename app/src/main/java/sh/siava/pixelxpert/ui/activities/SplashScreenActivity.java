@@ -36,7 +36,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 		setContentView(mBinding.getRoot());
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-		getWindow().setStatusBarColor(getColorFromAttribute(this, R.attr.colorSurface));
+		getWindow().setStatusBarColor(getColorFromAttribute(this, R.attr.colorSurfaceContainer));
 
 		// Root permission check
 		new Thread(() -> {

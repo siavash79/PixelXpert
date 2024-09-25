@@ -42,14 +42,23 @@
 
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Lock screen</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">Status bar</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">Navigation bar</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Phone &amp; dialer</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">Miscellaneous</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">Quick settings panel</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">Theming</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">Package manager</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">Portable hotspot</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Hide SSID</string>

@@ -3,7 +3,7 @@
 	xmlns:search="http://schemas.android.com/apk/sh.siava.pixelxpert.ui.preferencesearch">
 
 	<PreferenceCategory
-		android:key="top_level_category"
+		android:key="search_category"
 		android:layout="@layout/settingslib_preference_category_no_title">
 
 		<sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreference android:key="searchPreference" />
@@ -22,7 +22,7 @@
 			app:icon="@drawable/ic_settings_quicksettings"
 			app:key="quicksettings_header"
 			app:position="topItem"
-			app:summary="Placeholder summary text"
+			app:summary="@string/qs_panel_category_summary"
 			app:title="@string/qs_panel_category_title"
 			search:ignore="true" />
 
@@ -31,7 +31,7 @@
 			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$LockScreenFragment"
 			app:icon="@drawable/ic_settings_lockscreen"
 			app:key="lockscreen_header"
-			app:summary="Placeholder summary text"
+			app:summary="@string/lockscreen_header_summary"
 			app:title="@string/lockscreen_header_title"
 			search:ignore="true" />
 
@@ -41,7 +41,7 @@
 			app:icon="@drawable/ic_settings_themes"
 			app:key="theming_header"
 			app:position="bottomItem"
-			app:summary="Placeholder summary text"
+			app:summary="@string/theme_customization_summary"
 			app:title="@string/theme_customization_category"
 			search:ignore="true" />
 
@@ -59,7 +59,7 @@
 			app:icon="@drawable/ic_settings_statusbar"
 			app:key="statusbar_header"
 			app:position="topItem"
-			app:summary="Placeholder summary text"
+			app:summary="@string/statusbar_header_summary"
 			app:title="@string/statusbar_header"
 			search:ignore="true" />
 
@@ -69,7 +69,7 @@
 			app:icon="@drawable/ic_settings_navigation"
 			app:key="nav_header"
 			app:position="bottomItem"
-			app:summary="Placeholder summary text"
+			app:summary="@string/nav_header_summary"
 			app:title="@string/nav_header"
 			search:ignore="true" />
 
@@ -87,7 +87,7 @@
 			app:icon="@drawable/ic_phone"
 			app:key="dialer_header"
 			app:position="topItem"
-			app:summary="Placeholder summary text"
+			app:summary="@string/dialer_header_summary"
 			app:title="@string/dialer_header"
 			search:ignore="true" />
 
@@ -96,7 +96,7 @@
 			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$HotSpotFragment"
 			app:icon="@drawable/ic_settings_wifi_hotspot"
 			app:key="hotspot_header"
-			app:summary="Placeholder summary text"
+			app:summary="@string/hotspot_header_summary"
 			app:title="@string/hotspot_header"
 			search:ignore="true" />
 
@@ -105,7 +105,7 @@
 			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$PackageManagerFragment"
 			app:icon="@drawable/ic_settings_package_manager"
 			app:key="pm_header"
-			app:summary="Placeholder summary text"
+			app:summary="@string/pm_header_summary"
 			app:title="@string/pm_header"
 			search:ignore="true" />
 
@@ -115,7 +115,7 @@
 			app:icon="@drawable/ic_settings_misc"
 			app:key="misc_header"
 			app:position="bottomItem"
-			app:summary="Placeholder summary text"
+			app:summary="@string/misc_header_summary"
 			app:title="@string/misc_header"
 			search:ignore="true" />
 

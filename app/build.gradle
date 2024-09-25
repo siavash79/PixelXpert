@@ -127,5 +127,5 @@ dependencies {
 	implementation libs.play.services.base
   
   // Collapsing Toolbar with subtitle
-	implementation "com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:1.5.0"
+	implementation libs.collapsingtoolbarlayout.subtitle
 }

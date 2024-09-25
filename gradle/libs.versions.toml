@@ -3,6 +3,7 @@ activity = "1.9.2"
 annotation = "1.8.2"
 appcompat = "1.7.0"
 cardview = "1.0.0"
+collapsingtoolbarlayoutSubtitle = "1.5.0"
 colorpicker = "1.1.0"
 commonsText = "1.11.0"
 concurrentFutures = "1.2.0"
@@ -35,6 +36,7 @@ androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version
 androidx-ui-geometry = { module = "androidx.compose.ui:ui-geometry", version.ref = "uiGeometry" }
 androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntime" }
 androidx-concurrent-futures = { module = "androidx.concurrent:concurrent-futures", version.ref = "concurrentFutures" }
+collapsingtoolbarlayout-subtitle = { module = "com.hendraanggrian.material:collapsingtoolbarlayout-subtitle", version.ref = "collapsingtoolbarlayoutSubtitle" }
 colorpicker = { module = "com.jaredrummler:colorpicker", version.ref = "colorpicker" }
 apache-commons-text = { module = "org.apache.commons:commons-text", version.ref = "commonsText" }
 markdown = { module = "com.github.tiagohm.MarkdownView:library", version.ref = "markdown" }

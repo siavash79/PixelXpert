@@ -1,3 +1,6 @@
+**canary-391**  
+- PX App UI redesign (by DrDisagree)  
+  
 **canary-390**  
 - Wallpaper depth effect: remade (no change in use experience in expected)  
   

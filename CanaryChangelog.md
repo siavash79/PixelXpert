@@ -1,3 +1,6 @@
+**canary-390**  
+- Wallpaper depth effect: remade (no change in use experience in expected)  
+  
 **canary-389**  
 - Fixed wallpaper depth effect - broken in last canary  
   

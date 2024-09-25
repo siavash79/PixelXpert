@@ -80,9 +80,9 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 				if (app.mRootServiceConnected.getCount() == 0) {
 					// Start the main activity
-					Intent intent1 = new Intent(SplashScreenActivity.this, SettingsActivity.class);
-					intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-					startActivity(intent1);
+					Intent intent = new Intent(SplashScreenActivity.this, SettingsActivity.class);
+					startActivity(intent);
+					finish();
 				} else {
 					runOnUiThread(() ->
 							new MaterialAlertDialogBuilder(SplashScreenActivity.this, R.style.MaterialComponents_MaterialAlertDialog)
@@ -104,10 +104,5 @@ public class SplashScreenActivity extends AppCompatActivity {
 			doneImage.setImageResource(success ? R.drawable.ic_success : R.drawable.ic_fail);
 			doneImage.setVisibility(View.VISIBLE);
 		});
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
 	}
 }

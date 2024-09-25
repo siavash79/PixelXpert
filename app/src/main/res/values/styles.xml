@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<style name="PrefsThemeToolbar" parent="PreferenceThemeOverlay.v14.Material">
+		<item name="android:layout">@layout/fragment_preference_container</item>
+	</style>
+
+	<style name="PrefsThemeCollapsingToolbar" parent="PreferenceThemeOverlay.v14.Material">
+		<item name="android:layout">@layout/fragment_preference_container_home</item>
+	</style>
+
+	<style name="Toolbar.TitleText" parent="TextAppearance.Material3.TitleLarge" />
+
+	<style name="Toolbar.SubTitleText" parent="TextAppearance.Material3.TitleSmall" />
+
+	<style name="Toolbar.TitleText.Collapsed">
+		<item name="android:textSize">22sp</item>
+		<item name="fontFamily">sans-serif</item>
+		<item name="android:fontFamily">sans-serif</item>
+	</style>
+
+	<style name="Toolbar.TitleText.Expanded" parent="TextAppearance.Material3.TitleLarge">
+		<item name="android:textSize">40sp</item>
+	</style>
+
+	<style name="Toolbar.SubTitleText.Collapsed">
+		<item name="android:textSize">13sp</item>
+		<item name="fontFamily">sans-serif</item>
+		<item name="android:fontFamily">sans-serif</item>
+	</style>
+
+	<style name="Toolbar.SubTitleText.Expanded" parent="TextAppearance.Material3.BodyMedium" />
+
 	<style name="TextAppearance.App.ListItem.Title" parent="TextAppearance.AppCompat.Subhead">
 		<item name="android:textSize">19sp</item> <!-- A12 B2: 20sp -->
 	</style>
@@ -61,7 +91,7 @@
 	</style>
 
 	<style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
-		<item name="android:popupBackground">?attr/colorSurfaceVariant</item>
+		<item name="android:popupBackground">?attr/colorSurfaceContainerHighest</item>
 	</style>
 
 </resources>

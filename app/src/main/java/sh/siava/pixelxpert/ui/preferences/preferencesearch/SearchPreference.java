@@ -38,7 +38,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import sh.siava.pixelxpert.R;
-import sh.siava.pixelxpert.ui.activities.SettingsActivity;
 
 public class SearchPreference extends Preference implements View.OnClickListener {
 	private final SearchConfiguration searchConfiguration = new SearchConfiguration();
@@ -102,7 +101,6 @@ public class SearchPreference extends Preference implements View.OnClickListener
 	@Override
 	public void onClick(View view) {
 		getSearchConfiguration().showSearchFragment();
-		SettingsActivity.backButtonEnabled();
 	}
 
 	/**

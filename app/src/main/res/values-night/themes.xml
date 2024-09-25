@@ -1,8 +1,10 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
 	<style name="AppTheme.PixelXpert" parent="Theme.Material3.DayNight.NoActionBar">
 		<!-- Window layout. -->
 		<item name="android:windowDrawsSystemBarBackgrounds">true</item>
+		<item name="android:windowBackground">?attr/colorSurfaceContainer</item>
+		<item name="android:windowSplashScreenBackground">?attr/colorSurfaceContainer</item>
 
 		<!-- App theme -->
 		<item name="alertDialogTheme">@style/MaterialComponents.MaterialAlertDialog</item>
@@ -15,8 +17,10 @@
 		<item name="android:enforceNavigationBarContrast">false</item>
 		<item name="fontFamily">@font/google_sans_text_400</item>
 		<item name="seekBarStyle">@style/Material3.SeekBar</item>
-		<item name="extendedFloatingActionButtonStyle">@style/Widget.ExtendedFloatingActionButton</item>
+		<item name="extendedFloatingActionButtonStyle">@style/Widget.ExtendedFloatingActionButton
+		</item>
 		<item name="android:popupMenuStyle">@style/PopupMenu</item>
+		<item name="colorSurface">?attr/colorSurfaceContainerHigh</item>
 	</style>
 
 </resources>

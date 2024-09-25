@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/searchbar_height"
 	android:layout_gravity="center"
-	android:background="@drawable/container"
+	android:background="@drawable/container_search"
 	android:foregroundGravity="center_vertical"
 	android:gravity="center_vertical"
 	android:orientation="horizontal"
@@ -15,7 +15,8 @@
 	<ImageView
 		android:layout_width="24dp"
 		android:layout_height="24dp"
-		android:layout_marginHorizontal="8dp"
+		android:layout_marginStart="16dp"
+		android:layout_marginEnd="8dp"
 		android:contentDescription="@string/searchpreference_search"
 		app:srcCompat="@drawable/ic_search"
 		app:tint="?attr/colorOnSurface" />
@@ -30,7 +31,8 @@
 		android:background="@null"
 		android:hint="@string/searchpreference_search"
 		android:inputType="textNoSuggestions"
-		android:textColor="?attr/colorOnSurface" />
+		android:textColor="?attr/colorOnSurface"
+		android:textSize="16sp" />
 
 	<ImageView
 		android:id="@+id/clear"
@@ -47,6 +49,7 @@
 		android:id="@+id/more"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginEnd="8dp"
 		android:alpha="0.54"
 		android:background="?selectableItemBackgroundBorderless"
 		android:contentDescription="@string/searchpreference_more"

@@ -22,7 +22,9 @@ import sh.siava.pixelxpert.utils.AppUtils;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
-	/** @noinspection unused*/
+	/**
+	 * @noinspection unused
+	 */
 	String TAG = getClass().getSimpleName();
 	private ActivitySplashScreenBinding mBinding;
 	private final CountDownLatch mRootCheckPassed = new CountDownLatch(1);
@@ -33,9 +35,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 		mBinding = ActivitySplashScreenBinding.inflate(getLayoutInflater());
 		setContentView(mBinding.getRoot());
 
-		if (getSupportActionBar() != null) {
-			getSupportActionBar().hide();
-		}
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 		getWindow().setStatusBarColor(getColorFromAttribute(this, R.attr.colorSurface));
 
@@ -44,7 +43,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 			if (PixelXpert.get().hasRootAccess()) {
 				mRootCheckPassed.countDown();
 			} else {
-				if(!getIntent().hasExtra("FromKSU")) {
+				if (!getIntent().hasExtra("FromKSU")) {
 					AppUtils.runKSURootActivity(this, true);
 				}
 
@@ -67,8 +66,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 				mRootCheckPassed.await();
 
 				PixelXpert app = PixelXpert.get();
-				if(!PixelXpert.get().isCoreRootServiceBound())
-				{
+				if (!PixelXpert.get().isCoreRootServiceBound()) {
 					app.tryConnectRootService();
 				}
 
@@ -93,7 +91,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 									.setPositiveButton(getText(R.string.exit), (dialog, i) -> System.exit(0))
 									.show());
 				}
-			} catch (InterruptedException ignored) {}
+			} catch (InterruptedException ignored) {
+			}
 		}).start();
 	}
 

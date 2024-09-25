@@ -125,4 +125,7 @@ dependencies {
 	//Google Subject Segmentation - MLKit
 	implementation libs.play.services.mlkit.subject.segmentation
 	implementation libs.play.services.base
+  
+  // Collapsing Toolbar with subtitle
+	implementation "com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:1.5.0"
 }

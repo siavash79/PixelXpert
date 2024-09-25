@@ -1,51 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	tools:context=".ui.fragments.HooksFragment">
 
-	<com.google.android.material.progressindicator.CircularProgressIndicator
-		android:id="@+id/loading_indicator"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"
-		android:indeterminate="true"
-		app:indicatorSize="48dp" />
-
-	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-		android:id="@+id/swipe_refresh_layout"
+	<androidx.core.widget.NestedScrollView
+		android:id="@+id/nested_scroll_view"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		android:fillViewport="true"
+		android:orientation="vertical"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-		<androidx.core.widget.NestedScrollView
-			android:id="@+id/nestedScrollView"
+		<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:fillViewport="true">
+			android:layout_height="match_parent">
 
-			<LinearLayout
-				android:id="@+id/content"
+			<com.google.android.material.progressindicator.CircularProgressIndicator
+				android:id="@+id/loading_indicator"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:indeterminate="true"
+				app:indicatorSize="48dp" />
+
+			<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+				android:id="@+id/swipe_refresh_layout"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:orientation="vertical" />
+				android:layout_height="match_parent">
 
-		</androidx.core.widget.NestedScrollView>
+				<androidx.core.widget.NestedScrollView
+					android:id="@+id/nestedScrollView"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:fillViewport="true">
 
-	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+					<LinearLayout
+						android:id="@+id/content"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:orientation="vertical" />
 
-	<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-		android:id="@+id/reboot_button"
-		style="?attr/floatingActionButtonSmallStyle"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="end|bottom"
-		android:layout_marginEnd="@dimen/ui_container_margin_side"
-		android:layout_marginBottom="48dp"
-		android:contentDescription="@string/reboot_pending"
-		android:text="@string/reboot_pending"
-		app:icon="@drawable/ic_reboot"
-		app:shapeAppearanceOverlay="@style/ShapeAppearanceExtFAB" />
+				</androidx.core.widget.NestedScrollView>
 
-</FrameLayout>
+			</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+			<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+				android:id="@+id/reboot_button"
+				style="?attr/floatingActionButtonSmallStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="end|bottom"
+				android:layout_marginEnd="@dimen/ui_container_margin_side"
+				android:layout_marginBottom="48dp"
+				android:contentDescription="@string/reboot_pending"
+				android:text="@string/reboot_pending"
+				app:icon="@drawable/ic_reboot"
+				app:shapeAppearanceOverlay="@style/ShapeAppearanceExtFAB" />
+
+		</FrameLayout>
+	</androidx.core.widget.NestedScrollView>
+
+	<include
+		android:id="@+id/header"
+		layout="@layout/view_header" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

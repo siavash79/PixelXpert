@@ -1,6 +1,5 @@
 package sh.siava.pixelxpert.ui.activities;
 
-import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -8,7 +7,6 @@ import android.view.Window;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -19,7 +17,6 @@ import com.google.android.material.shape.MaterialShapeDrawable;
 
 import sh.siava.pixelxpert.R;
 
-@SuppressWarnings("unused")
 public class BaseActivity extends AppCompatActivity {
 
 	@Override
@@ -56,17 +53,5 @@ public class BaseActivity extends AppCompatActivity {
 				return windowInsets;
 			});
 		}
-	}
-
-	public static void setHeader(Context context, int title) {
-		Toolbar toolbar = ((AppCompatActivity) context).findViewById(R.id.toolbar);
-		((AppCompatActivity) context).setSupportActionBar(toolbar);
-		toolbar.setTitle(title);
-	}
-
-	public static void setHeader(Context context, CharSequence title) {
-		Toolbar toolbar = ((AppCompatActivity) context).findViewById(R.id.toolbar);
-		((AppCompatActivity) context).setSupportActionBar(toolbar);
-		toolbar.setTitle(title);
 	}
 }

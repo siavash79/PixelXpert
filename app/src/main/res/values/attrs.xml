@@ -4,10 +4,20 @@
 	<declare-styleable name="MaterialTimePickerPreference">
 		<attr name="presetValue" format="string" />
 	</declare-styleable>
+
 	<!-- SearchPreference -->
 	<declare-styleable name="SearchPreference">
 		<attr name="textHint" format="string" />
 		<attr name="textNoResults" format="string" />
 		<attr name="textClearHistory" format="string" />
+	</declare-styleable>
+
+	<declare-styleable name="MaterialPreferenceMain">
+		<attr name="position" format="string">
+			<enum name="topItem" value="0" />
+			<enum name="defaultItem" value="1" />
+			<enum name="singleItem" value="2" />
+			<enum name="bottomItem" value="3" />
+		</attr>
 	</declare-styleable>
 </resources>

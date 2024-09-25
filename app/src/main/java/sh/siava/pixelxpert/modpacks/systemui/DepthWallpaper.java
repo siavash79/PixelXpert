@@ -191,44 +191,67 @@ public class DepthWallpaper extends XposedModPack {
 			}
 		});
 
+		final Thread[] wallpaperProcessorThread = {null};
 		hookAllMethods(CanvasEngineClass, "drawFrameOnCanvas", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				if(wallpaperProcessorThread[0] != null)
+				{
+					wallpaperProcessorThread[0].interrupt();
+				}
+
 				if(DWallpaperEnabled && isLockScreenWallpaper(param.thisObject))
 				{
-					Bitmap wallpaperBitmap = Bitmap.createBitmap((Bitmap) param.args[0]);
+					wallpaperProcessorThread[0] =new Thread(() -> {
+							Bitmap wallpaperBitmap = Bitmap.createBitmap((Bitmap) param.args[0]);
 
-					boolean cacheIsValid = assertCache(wallpaperBitmap);
+							boolean cacheIsValid = assertCache(wallpaperBitmap);
 
-					Rect displayBounds =  ((Context) callMethod(param.thisObject, "getDisplayContext")).getSystemService(WindowManager.class)
-							.getCurrentWindowMetrics()
-							.getBounds();
+							Rect displayBounds =  ((Context) callMethod(param.thisObject, "getDisplayContext")).getSystemService(WindowManager.class)
+									.getCurrentWindowMetrics()
+									.getBounds();
 
-					float ratioW = 1f * displayBounds.width() / wallpaperBitmap.getWidth();
-					float ratioH = 1f * displayBounds.height() / wallpaperBitmap.getHeight();
+							float ratioW = 1f * displayBounds.width() / wallpaperBitmap.getWidth();
+							float ratioH = 1f * displayBounds.height() / wallpaperBitmap.getHeight();
 
-					int desiredHeight = Math.round(Math.max(ratioH, ratioW) * wallpaperBitmap.getHeight());
-					int desiredWidth = Math.round(Math.max(ratioH, ratioW) * wallpaperBitmap.getWidth());
+							int desiredHeight = Math.round(Math.max(ratioH, ratioW) * wallpaperBitmap.getHeight());
+							int desiredWidth = Math.round(Math.max(ratioH, ratioW) * wallpaperBitmap.getWidth());
 
-					int xPixelShift = (desiredWidth - displayBounds.width()) / 2;
-					int yPixelShift = (desiredHeight - displayBounds.height()) / 2;
+							int xPixelShift = (desiredWidth - displayBounds.width()) / 2;
+							int yPixelShift = (desiredHeight - displayBounds.height()) / 2;
 
-					Bitmap scaledWallpaperBitmap = Bitmap.createScaledBitmap(wallpaperBitmap, desiredWidth, desiredHeight, true);
+							Bitmap scaledWallpaperBitmap = Bitmap.createScaledBitmap(wallpaperBitmap, desiredWidth, desiredHeight, true);
 
-					//crop to display bounds
-					scaledWallpaperBitmap = Bitmap.createBitmap(scaledWallpaperBitmap, xPixelShift, yPixelShift, displayBounds.width(), displayBounds.height());
-					Bitmap finalScaledWallpaperBitmap = Bitmap.createBitmap(scaledWallpaperBitmap);
+							//crop to display bounds
+							scaledWallpaperBitmap = Bitmap.createBitmap(scaledWallpaperBitmap, xPixelShift, yPixelShift, displayBounds.width(), displayBounds.height());
+							Bitmap finalScaledWallpaperBitmap = Bitmap.createBitmap(scaledWallpaperBitmap);
 
-					if(!mLayersCreated) {
-						createLayers();
-					}
+							if(!mLayersCreated) {
+								createLayers();
+							}
 
-					mWallpaperBackground.post(() -> mWallpaperBitmapContainer.setBackground(new BitmapDrawable(mContext.getResources(), finalScaledWallpaperBitmap)));
+						mWallpaperBackground.post(() -> mWallpaperBitmapContainer.setBackground(new BitmapDrawable(mContext.getResources(), finalScaledWallpaperBitmap)));
 
-					if(!cacheIsValid)
-					{
-						XPLauncher.enqueueProxyCommand(proxy -> proxy.extractSubject(finalScaledWallpaperBitmap, Constants.getLockScreenSubjectCachePath(mContext)));
-					}
+						if(!cacheIsValid) {
+							try {
+								String cachePath = Constants.getLockScreenSubjectCachePath(mContext);
+								Bitmap subjectBitmap = XPLauncher.getRootProviderProxy().extractSubject(finalScaledWallpaperBitmap);
+
+								if(subjectBitmap != null) {
+									FileOutputStream subjectOutputStream = new FileOutputStream(cachePath);
+									subjectBitmap.compress(Bitmap.CompressFormat.PNG, 100, subjectOutputStream);
+									subjectOutputStream.close();
+
+									Thread.sleep(500); //letting the filesystem settle down
+
+									setDepthWallpaper();
+								}
+							} catch (Throwable ignored) {}
+						}
+
+						wallpaperProcessorThread[0] = null;
+					});
+					wallpaperProcessorThread[0].start();
 				}
 			}
 		});
@@ -342,7 +365,7 @@ public class DepthWallpaper extends XposedModPack {
 				);
 
 		if(showSubject) {
-			if(!lockScreenSubjectCacheValid && new File(Constants.getLockScreenSubjectCachePath(mContext)).exists())
+			if(!lockScreenSubjectCacheValid && isSubjectCacheAvailable())
 			{
 				try (FileInputStream inputStream = new FileInputStream(Constants.getLockScreenSubjectCachePath(mContext)))
 				{
@@ -381,6 +404,14 @@ public class DepthWallpaper extends XposedModPack {
 			if (state.equals("UNLOCKED")) {
 				mWallpaperBackground.setVisibility(GONE);
 			}
+		}
+	}
+
+	private boolean isSubjectCacheAvailable() {
+		try {
+			return new File(Constants.getLockScreenSubjectCachePath(mContext)).length() > 0;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 

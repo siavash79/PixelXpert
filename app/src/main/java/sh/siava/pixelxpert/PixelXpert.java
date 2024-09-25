@@ -28,6 +28,7 @@ public class PixelXpert extends Application {
 	public final CountDownLatch mRootServiceConnected = new CountDownLatch(1);
 
 	private ServiceConnection mCoreRootServiceConnection;
+	private IRootProviderService mCoreRootService;
 
 
 	public void onCreate() {
@@ -38,6 +39,12 @@ public class PixelXpert extends Application {
 		DynamicColors.applyToActivitiesIfAvailable(this);
 	}
 
+	/** @noinspection unused*/
+	public IRootProviderService getRootService()
+	{
+		return mCoreRootService;
+	}
+
 	public static PixelXpert get() {
 		if (instance == null) {
 			instance = new PixelXpert();
@@ -45,6 +52,7 @@ public class PixelXpert extends Application {
 		return instance;
 	}
 
+	/** @noinspection BooleanMethodIsAlwaysInverted*/
 	public boolean isCoreRootServiceBound() {
 		return mCoreRootServiceBound;
 	}
@@ -73,6 +81,7 @@ public class PixelXpert extends Application {
 				public void onServiceConnected(ComponentName name, IBinder service) {
 					mCoreRootServiceBound = true;
 					mRootServiceConnected.countDown();
+					mCoreRootService = IRootProviderService.Stub.asInterface(service);
 				}
 
 				@Override

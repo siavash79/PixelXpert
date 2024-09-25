@@ -11,8 +11,8 @@ android {
 		applicationId "sh.siava.pixelxpert"
 		minSdk 33
 		targetSdk 34
-		versionCode 389
-		versionName "canary-389"
+		versionCode 391
+		versionName "canary-391"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
@@ -127,7 +127,7 @@ dependencies {
 	implementation libs.play.services.base
   
   // Collapsing Toolbar with subtitle
-	implementation "com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:1.5.0"
+	implementation libs.collapsingtoolbarlayout.subtitle
 
 	// Splash screen
 	implementation 'androidx.core:core-splashscreen:1.0.1'

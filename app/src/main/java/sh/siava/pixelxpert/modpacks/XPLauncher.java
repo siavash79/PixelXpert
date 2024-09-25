@@ -27,6 +27,8 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -46,12 +48,27 @@ public class XPLauncher implements ServiceConnection {
 	@SuppressLint("StaticFieldLeak")
 	static XPLauncher instance;
 
+	private CountDownLatch rootProxyCountdown = new CountDownLatch(1);
 	private static IRootProviderProxy rootProxyIPC;
 	private static final Queue<ProxyRunnable> proxyQueue = new LinkedList<>();
 
 	/** @noinspection FieldCanBeLocal*/
 	public XPLauncher() {
 		instance = this;
+	}
+
+	public static IRootProviderProxy getRootProviderProxy()
+	{
+		if(rootProxyIPC == null)
+		{
+			instance.rootProxyCountdown = new CountDownLatch(1);
+			instance.forceConnectRootService();
+			try {
+				//noinspection ResultOfMethodCallIgnored
+				instance.rootProxyCountdown.await(5, TimeUnit.SECONDS);
+			} catch (Throwable ignored) {}
+		}
+		return rootProxyIPC;
 	}
 
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
@@ -190,6 +207,8 @@ public class XPLauncher implements ServiceConnection {
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
 		rootProxyIPC = IRootProviderProxy.Stub.asInterface(service);
+		rootProxyCountdown.countDown();
+
 		synchronized (proxyQueue)
 		{
 			while(!proxyQueue.isEmpty())

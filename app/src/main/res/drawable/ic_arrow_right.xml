@@ -9,7 +9,7 @@
 		android:fillType="nonZero"
 		android:pathData="M10.00,16.50L14.50,12.00L10.00,7.50"
 		android:strokeWidth="2.112"
-		android:strokeAlpha="0.54"
+		android:strokeAlpha="0.77"
 		android:strokeColor="#FF000000"
 		android:strokeLineCap="square"
 		android:strokeLineJoin="miter" />

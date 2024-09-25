@@ -1,10 +1,10 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
 	<style name="AppTheme.PixelXpert" parent="Theme.Material3.DayNight.NoActionBar">
 		<!-- Window layout. -->
 		<item name="android:windowDrawsSystemBarBackgrounds">true</item>
 		<item name="android:windowBackground">?attr/colorSurfaceContainer</item>
-		<item name="android:windowSplashScreenBackground">?attr/colorSurfaceContainer</item>
+		<item name="android:colorBackground">?attr/colorSurfaceContainer</item>
 
 		<!-- App theme -->
 		<item name="alertDialogTheme">@style/MaterialComponents.MaterialAlertDialog</item>
@@ -21,6 +21,15 @@
 		</item>
 		<item name="android:popupMenuStyle">@style/PopupMenu</item>
 		<item name="colorSurface">?attr/colorSurfaceContainerHigh</item>
+		<item name="android:splashScreenTheme">@style/AppTheme.PixelXpert.SplashScreen</item>
+	</style>
+
+	<style name="AppTheme.PixelXpert.SplashScreen" parent="Theme.SplashScreen">
+		<item name="android:windowSplashScreenBackground">?attr/colorSurfaceContainer</item>
+		<item name="android:windowSplashScreenIconBackgroundColor">
+			?attr/colorSurfaceContainerHighest
+		</item>
+		<item name="postSplashScreenTheme">@style/AppTheme.PixelXpert</item>
 	</style>
 
 </resources>

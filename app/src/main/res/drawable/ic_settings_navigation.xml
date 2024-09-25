@@ -4,42 +4,42 @@
 	android:viewportWidth="24.0"
 	android:viewportHeight="24.0">
 	<path
-		android:fillAlpha="0.54"
+		android:fillAlpha="0.88"
 		android:fillColor="#66000000"
 		android:fillType="nonZero"
 		android:pathData="M11.43,2.00C8.98,2.00,6.99,4.05,6.99,6.57C6.99,9.10,8.98,11.14,11.43,11.14C13.88,11.14,15.87,9.10,15.87,6.57C15.87,4.05,13.88,2.00,11.43,2.00z"
 		android:strokeLineCap="square"
 		android:strokeLineJoin="miter" />
 	<path
-		android:fillAlpha="0.54"
+		android:fillAlpha="0.88"
 		android:fillColor="#66000000"
 		android:fillType="nonZero"
 		android:pathData="M3.50,14.00L8.27,14.00A1.50 1.50 0 0 1 9.77,15.50L9.77,20.50A1.50 1.50 0 0 1 8.27,22.00L3.50,22.00A1.50 1.50 0 0 1 2.00,20.50L2.00,15.50A1.50 1.50 0 0 1 3.50,14.00z"
 		android:strokeLineCap="square"
 		android:strokeLineJoin="miter" />
 	<path
-		android:fillAlpha="0.54"
+		android:fillAlpha="0.88"
 		android:fillColor="#66000000"
 		android:fillType="nonZero"
 		android:pathData="M15.87,14.00L12.17,20.29C11.64,21.29,12.26,22.00,12.82,22.00L21.14,22.00C21.70,22.00,22.33,21.29,21.80,20.29L18.10,14.00M20.51,20.50C21.01,20.50,21.82,19.88,21.34,19.00L18.01,13.50C17.53,13.05,16.43,13.05,15.87,14.00z"
 		android:strokeLineCap="square"
 		android:strokeLineJoin="miter" />
 	<path
-		android:fillAlpha="0.54"
+		android:fillAlpha="0.88"
 		android:fillColor="#FF000000"
 		android:fillType="nonZero"
 		android:pathData="M11.43,2.00C8.98,2.00,6.99,4.05,6.99,6.57C6.99,9.10,8.98,11.14,11.43,11.14C13.88,11.14,15.87,9.10,15.87,6.57C15.87,4.05,13.88,2.00,11.43,2.00zM11.43,4.29C12.66,4.29,13.65,5.31,13.65,6.57C13.65,7.83,12.66,8.86,11.43,8.86C10.21,8.86,9.21,7.83,9.21,6.57C9.21,5.31,10.21,4.29,11.43,4.29z"
 		android:strokeLineCap="square"
 		android:strokeLineJoin="miter" />
 	<path
-		android:fillAlpha="0.54"
+		android:fillAlpha="0.88"
 		android:fillColor="#FF000000"
 		android:fillType="nonZero"
 		android:pathData="M3.50,14.00L8.27,14.00A1.50 1.50 0 0 1 9.77,15.50L9.77,20.50A1.50 1.50 0 0 1 8.27,22.00L3.50,22.00A1.50 1.50 0 0 1 2.00,20.50L2.00,15.50A1.50 1.50 0 0 1 3.50,14.00zM4.22,16.84L4.22,19.16A0.55 0.55 0 0 0 4.77,19.71L6.99,19.71A0.55 0.55 0 0 0 7.55,19.16L7.55,16.84A0.55 0.55 0 0 0 6.99,16.29L4.77,16.29A0.55 0.55 0 0 0 4.22,16.84z"
 		android:strokeLineCap="square"
 		android:strokeLineJoin="miter" />
 	<path
-		android:fillAlpha="0.54"
+		android:fillAlpha="0.88"
 		android:fillColor="#FF000000"
 		android:fillType="nonZero"
 		android:pathData="M15.87,14.00L12.17,20.29C11.64,21.29,12.26,22.00,12.82,22.00L21.14,22.00C21.70,22.00,22.33,21.29,21.80,20.29L18.10,14.00M20.51,20.50C21.01,20.50,21.82,19.88,21.34,19.00L18.01,13.50C17.53,13.05,16.43,13.05,15.87,14.00zM14.90,20.00L16.98,16.29L19.06,20.00L14.90,20.00z"

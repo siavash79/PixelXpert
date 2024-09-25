@@ -1037,14 +1037,14 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 			PackageManager packageManager = getActivity().getPackageManager();
 
 			packageManager.setComponentEnabledSetting(
-					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".SplashScreenActivityNormalIcon"),
+					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".FakeSplashActivityNormalIcon"),
 					alternativeThemedAppIconEnabled ? PackageManager.COMPONENT_ENABLED_STATE_DISABLED : PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
 					PackageManager.DONT_KILL_APP
 			);
 
 			// Enable themed app icon component
 			packageManager.setComponentEnabledSetting(
-					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".SplashScreenActivityAlternateIcon"),
+					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".FakeSplashActivityAlternateIcon"),
 					alternativeThemedAppIconEnabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
 					PackageManager.DONT_KILL_APP
 			);

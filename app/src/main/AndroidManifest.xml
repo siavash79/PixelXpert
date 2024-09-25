@@ -5,32 +5,38 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-	<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+	<uses-permission
+		android:name="android.permission.QUERY_ALL_PACKAGES"
 		tools:ignore="QueryAllPackagesPermission" />
 
 	<application
 		android:name=".PixelXpert"
 		android:enableOnBackInvokedCallback="true"
+		android:forceQueryable="true"
 		android:icon="@mipmap/ic_launcher"
 		android:label="Pixel Xpert"
 		android:supportsRtl="true"
-		android:forceQueryable="true"
 		android:theme="@style/AppTheme.PixelXpert">
 		<activity
 			android:name=".ui.activities.WikiActivity"
 			android:exported="false" />
+		<activity
+			android:name=".ui.activities.FakeSplashActivity"
+			android:exported="true"
+			android:label="@string/title_activity_settings"
+			android:theme="@style/AppTheme.PixelXpert.SplashScreen" />
 		<activity
 			android:name=".ui.activities.SplashScreenActivity"
 			android:exported="true"
 			android:label="@string/title_activity_settings" />
 
 		<activity-alias
-			android:name=".SplashScreenActivityAlternateIcon"
+			android:name=".FakeSplashActivityAlternateIcon"
 			android:enabled="false"
 			android:exported="true"
 			android:icon="@mipmap/ic_launcher_themed"
 			android:label="@string/title_activity_settings"
-			android:targetActivity=".ui.activities.SplashScreenActivity">
+			android:targetActivity=".ui.activities.FakeSplashActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
@@ -38,12 +44,12 @@
 			</intent-filter>
 		</activity-alias>
 		<activity-alias
-			android:name=".SplashScreenActivityNormalIcon"
+			android:name=".FakeSplashActivityNormalIcon"
 			android:enabled="true"
 			android:exported="true"
 			android:icon="@mipmap/ic_launcher"
 			android:label="@string/title_activity_settings"
-			android:targetActivity=".ui.activities.SplashScreenActivity">
+			android:targetActivity=".ui.activities.FakeSplashActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 

@@ -128,4 +128,7 @@ dependencies {
   
   // Collapsing Toolbar with subtitle
 	implementation libs.collapsingtoolbarlayout.subtitle
+
+	// Splash screen
+	implementation 'androidx.core:core-splashscreen:1.0.1'
 }

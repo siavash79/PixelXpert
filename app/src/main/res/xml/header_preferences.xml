@@ -21,7 +21,6 @@
 			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$QuickSettingsFragment"
 			app:icon="@drawable/ic_settings_quicksettings"
 			app:key="quicksettings_header"
-			app:position="topItem"
 			app:summary="@string/qs_panel_category_summary"
 			app:title="@string/qs_panel_category_title"
 			search:ignore="true" />
@@ -40,7 +39,6 @@
 			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$ThemingFragment"
 			app:icon="@drawable/ic_settings_themes"
 			app:key="theming_header"
-			app:position="bottomItem"
 			app:summary="@string/theme_customization_summary"
 			app:title="@string/theme_customization_category"
 			search:ignore="true" />
@@ -58,7 +56,6 @@
 			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$StatusbarFragment"
 			app:icon="@drawable/ic_settings_statusbar"
 			app:key="statusbar_header"
-			app:position="topItem"
 			app:summary="@string/statusbar_header_summary"
 			app:title="@string/statusbar_header"
 			search:ignore="true" />
@@ -68,7 +65,6 @@
 			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$NavFragment"
 			app:icon="@drawable/ic_settings_navigation"
 			app:key="nav_header"
-			app:position="bottomItem"
 			app:summary="@string/nav_header_summary"
 			app:title="@string/nav_header"
 			search:ignore="true" />
@@ -86,7 +82,6 @@
 			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$DialerFragment"
 			app:icon="@drawable/ic_phone"
 			app:key="dialer_header"
-			app:position="topItem"
 			app:summary="@string/dialer_header_summary"
 			app:title="@string/dialer_header"
 			search:ignore="true" />
@@ -114,7 +109,6 @@
 			app:fragment="sh.siava.pixelxpert.ui.activities.SettingsActivity$MiscFragment"
 			app:icon="@drawable/ic_settings_misc"
 			app:key="misc_header"
-			app:position="bottomItem"
 			app:summary="@string/misc_header_summary"
 			app:title="@string/misc_header"
 			search:ignore="true" />

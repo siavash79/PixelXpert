@@ -168,7 +168,7 @@ public class BatteryBarView extends FrameLayout {
 			startX = screenWidth;
 			endX = Math.round(getWidth() * getCurrentLevel() / 100f);
 		}
-		if (isCenterBased) endX = getWidth() / 2f + chargingIndicatorView.getWidth() / 2f;
+		if (isCenterBased) endX = getWidth() / 2f;
 
 		TranslateAnimation animation = new TranslateAnimation(startX, endX, 0, 0);
 		animation.setDuration(ANIM_DURATION);

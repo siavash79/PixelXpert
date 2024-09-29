@@ -144,6 +144,7 @@ public class PreferenceHelper {
 			case "BBOpacity":
 			case "BBarHeight":
 			case "BBSetCentered":
+			case "BBAnimateCharging":
 			case "indicateCharging":
 			case "indicateFastCharging":
 			case "indicatePowerSave":

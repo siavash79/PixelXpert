@@ -230,8 +230,7 @@ public class BatteryBarView extends FrameLayout {
 		int pixels = (int) (metrics.density * dp + 0.5f);
 		LayoutParams result = new LayoutParams(pixels, barHeight);
 
-		result.gravity = (RTL) ? Gravity.CENTER : Gravity.START;
-
+		result.gravity = (RTL) ? Gravity.END : Gravity.START;
 		result.gravity |= (onTop) ? Gravity.TOP : Gravity.BOTTOM;
 
 		return result;

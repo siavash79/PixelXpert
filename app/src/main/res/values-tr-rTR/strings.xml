@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">%s dilinize çevirmemize yardımcı olun</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Kilitleme ekranı</string>
+	<string name="lockscreen_header_summary">Anahtar koruyucunuzu zevkinize göre değiştirin</string>
 	<string name="statusbar_header">Durum çubuğu</string>
+	<string name="statusbar_header_summary">Yararlı verileri gösteren ince çubuk</string>
 	<string name="nav_header">Navigasyon çubuğu</string>
+	<string name="nav_header_summary">Uygulamalarda gezinme şeklinizi değiştirin</string>
 	<string name="dialer_header">Telefon &amp; arama</string>
+	<string name="dialer_header_summary">Telefon görüşmeleriniz için biraz yardım</string>
 	<string name="misc_header">Çeşitli</string>
+	<string name="misc_header_summary">PixelXpert tarafından sunulan diğer her şey</string>
 	<string name="qs_panel_category_title">Hızlı ayarlar paneli</string>
+	<string name="qs_panel_category_summary">Parlaklık kaydırıcısı, el feneri seviyesi ve daha fazlası</string>
 	<string name="theme_customization_category">Tema özelleştirme</string>
+	<string name="theme_customization_summary">Hızlı Ayarlar\'da hafif bir tema</string>
 	<string name="pm_header">Paket yöneticisi</string>
+	<string name="pm_header_summary">Apk dosyaları için güvenlik kontrollerini atlayın</string>
 	<string name="hotspot_header">Taşınabilir hotspot</string>
+	<string name="hotspot_header_summary">Eğer gizli WiFi işleriyle ilgileniyorsanız</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">SSID\'yi Gizle</string>
 	<string name="hotspot_inactivity_timeout_title">Etkinliksizlik zaman aşımı</string>
@@ -448,6 +457,7 @@
 	<string name="toggle_one_handed">Tek elle kullanım modunu aç/kapat</string>
 	<string name="sleep">Uyku</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Ara</string>
 	<string name="searchpreference_search">Ara…</string>
 	<string name="searchpreference_clear">Temizle</string>
 	<string name="searchpreference_history_entry">Geçmiş girişi</string>

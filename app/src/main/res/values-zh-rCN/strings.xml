@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">帮助我们将 %s 翻译成您的语言</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">锁屏</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">状态栏</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">导航栏</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">电话与拨号</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">杂项</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">磁贴面板</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">主题</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">包管理器</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">热点</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">隐藏 SSID</string>
 	<string name="hotspot_inactivity_timeout_title">自动关闭时间</string>
@@ -448,6 +457,7 @@
 	<string name="toggle_one_handed">打开单手模式</string>
 	<string name="sleep">睡眠</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">搜索…</string>
 	<string name="searchpreference_clear">清空</string>
 	<string name="searchpreference_history_entry">历史条目</string>

@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">幫助我們將 %s 翻譯成自己的語言</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">鎖定畫面</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">狀態列</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">導航欄</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Phone &amp; dialer</string>
+	<string name="dialer_header_summary">為通話功能提供一些選項</string>
 	<string name="misc_header">雜項</string>
+	<string name="misc_header_summary">PixelXpert提供的更多選項</string>
 	<string name="qs_panel_category_title">方塊面板</string>
+	<string name="qs_panel_category_summary">狀態列亮度滑桿、手電筒亮度...等</string>
 	<string name="theme_customization_category">主題化</string>
+	<string name="theme_customization_summary">快速設定中的淺色主題</string>
 	<string name="pm_header">包管理器</string>
+	<string name="pm_header_summary">繞過APK安全性檢查</string>
 	<string name="hotspot_header">無線基地台</string>
+	<string name="hotspot_header_summary">隱藏Wi-Fi SSID等設定</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">隱藏 SSID</string>
 	<string name="hotspot_inactivity_timeout_title">自動關閉時間</string>
@@ -448,6 +457,7 @@
 	<string name="toggle_one_handed">啟用單手模式</string>
 	<string name="sleep">睡眠</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">搜尋</string>
 	<string name="searchpreference_search">Search…</string>
 	<string name="searchpreference_clear">Clear</string>
 	<string name="searchpreference_history_entry">History entry</string>

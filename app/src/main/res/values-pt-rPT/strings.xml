@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Ajude-nos a traduzir %s para o seu idioma</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Tela de bloqueio</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">Barra de estado</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">Barra de navegação</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Telefone &amp; marcação</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">Diversos</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">Definições Rápidas</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">Temas</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">Gestor de apps</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">PA Móvel</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Esconder SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Tempo limite de inatividade</string>
@@ -448,6 +457,7 @@
 	<string name="toggle_one_handed">Ativar modo para uma mão</string>
 	<string name="sleep">Desligar ecrã</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">Procurar…</string>
 	<string name="searchpreference_clear">Limpar</string>
 	<string name="searchpreference_history_entry">Histórico</string>

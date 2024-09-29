@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">ساعدنا في تَرْجَمَة خبير بيكسل إلي لغتك الخاصة</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">قفل الشاشة</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">شريط الحالة</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">شريط التنقل</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">الهاتف &amp; متصل</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">متنوعات</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">لوحة الإعدادات السريعة</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">القالب</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">مدير الحزمة</string>
+	<string name="pm_header_summary">تجاوز التحققات الأمنية لملفات apk</string>
 	<string name="hotspot_header">نقطة اتصال محمولة</string>
+	<string name="hotspot_header_summary">إذا كنت في أشياء WiFi المخفية</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">إخفاء SSID</string>
 	<string name="hotspot_inactivity_timeout_title">مهلة عدم النشاط</string>
@@ -448,6 +457,7 @@
 	<string name="toggle_one_handed">تبديل وضع اليد الواحد</string>
 	<string name="sleep">النوم</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">البحث</string>
 	<string name="searchpreference_search">البحث…</string>
 	<string name="searchpreference_clear">مسح</string>
 	<string name="searchpreference_history_entry">تاريخ الإدخال</string>

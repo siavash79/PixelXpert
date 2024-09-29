@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Помогите нам в переводе %s на ваш язык</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Экран блокировки</string>
+	<string name="lockscreen_header_summary">Изменить клавиатуру по своему вкусу</string>
 	<string name="statusbar_header">Строка состояния</string>
+	<string name="statusbar_header_summary">Эта тонкая полоска, которая показывает полезные данные</string>
 	<string name="nav_header">Панель навигации</string>
+	<string name="nav_header_summary">Измените способ навигации по приложениям</string>
 	<string name="dialer_header">Телефон</string>
+	<string name="dialer_header_summary">Небольшая помощь для телефонных звонков</string>
 	<string name="misc_header">Разное</string>
+	<string name="misc_header_summary">Все, что еще предлагает PixelXpert</string>
 	<string name="qs_panel_category_title">Панель быстрых настроек</string>
+	<string name="qs_panel_category_summary">Ползунок яркости, яркость фонарика и многое другое</string>
 	<string name="theme_customization_category">Иконки и стили</string>
+	<string name="theme_customization_summary">Световая тема в быстрых настройках</string>
 	<string name="pm_header">Менеджер пакетов</string>
+	<string name="pm_header_summary">Обход проверки безопасности apk файлов</string>
 	<string name="hotspot_header">Портативная точка доступа </string>
+	<string name="hotspot_header_summary">Если вы хотите скрыть точку доступа</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Скрыть SSID </string>
 	<string name="hotspot_inactivity_timeout_title">Таймаут бездействия </string>
@@ -448,6 +457,7 @@
 	<string name="toggle_one_handed">Переключение режима управления одной рукой</string>
 	<string name="sleep">Режим сна</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Поиск</string>
 	<string name="searchpreference_search">Поиск…</string>
 	<string name="searchpreference_clear">Очистить</string>
 	<string name="searchpreference_history_entry">История записей</string>

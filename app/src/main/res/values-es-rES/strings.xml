@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Ayúdanos a traducir %s a tu propio idioma</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Pantalla de bloqueo</string>
+	<string name="lockscreen_header_summary">Cambia el teclado para que coincida con tu gusto</string>
 	<string name="statusbar_header">Barra de estado</string>
+	<string name="statusbar_header_summary">Esa pequeña barra que muestra datos útiles</string>
 	<string name="nav_header">Barra de navegación</string>
+	<string name="nav_header_summary">Cambiar la forma en la que navegas a través de aplicaciones</string>
 	<string name="dialer_header">Teléfono &amp; Marcador</string>
+	<string name="dialer_header_summary">Un poco de ayuda para tus llamadas</string>
 	<string name="misc_header">Miscelaneo</string>
+	<string name="misc_header_summary">Cualquier otra cosa ofrecida por PixelXpert</string>
 	<string name="qs_panel_category_title">Ajustes rápidos</string>
+	<string name="qs_panel_category_summary">Deslizador de brillo, nivel de linterna y más</string>
 	<string name="theme_customization_category">Temas</string>
+	<string name="theme_customization_summary">Un tema claro en ajustes rápidos</string>
 	<string name="pm_header">Gestor de paquetes</string>
+	<string name="pm_header_summary">Comprobaciones de seguridad Bypass para archivos apk</string>
 	<string name="hotspot_header">Punto de acceso portátil</string>
+	<string name="hotspot_header_summary">Si estás en cosas de WiFi ocultas</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Ocultar SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Tiempo de inactividad</string>
@@ -448,6 +457,7 @@
 	<string name="toggle_one_handed">Cambiar el modo de una mano</string>
 	<string name="sleep">Dormir</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Buscar</string>
 	<string name="searchpreference_search">Buscar…</string>
 	<string name="searchpreference_clear">Limpiar</string>
 	<string name="searchpreference_history_entry">Historial de entrada</string>

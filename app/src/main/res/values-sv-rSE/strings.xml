@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Låsskärm</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">Statusfältet</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">Navigeringsfält</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Telefon &amp; uppringare</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">Diverse</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">Panel för snabbinställningar</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">Teman</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">Pakethanterare</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">Bärbar hotspot</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Dölj SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Timeout för inaktivitet</string>
@@ -448,6 +457,7 @@
 	<string name="toggle_one_handed">Växla enhandsläge</string>
 	<string name="sleep">Sova</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">Sök…</string>
 	<string name="searchpreference_clear">Klar</string>
 	<string name="searchpreference_history_entry">Historik inträde</string>

@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Aidez-nous à traduire %s dans votre propre langue</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Écran de verrouillage</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">Barre d’état</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">Barre de navigation</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Numéroteur du téléphone &amp;</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">Divers</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">Fenêtre de configuration rapide</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">Thèmes et styles</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">Gestion des applications</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">Un hotspot portable</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Masquer le SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Délai d\'inactivité</string>
@@ -448,6 +457,7 @@
 	<string name="toggle_one_handed">Basculer en mode à une main</string>
 	<string name="sleep">En veille</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">Recherche…</string>
 	<string name="searchpreference_clear">Nettoyé</string>
 	<string name="searchpreference_history_entry">Saisie de l\'historique</string>

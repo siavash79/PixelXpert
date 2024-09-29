@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">کمک کنید که ترجمه %s تکمیل شود</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">صفحه قفل</string>
+	<string name="lockscreen_header_summary">صفحه قفل رو جوری عوض کن که میخوای</string>
 	<string name="statusbar_header">نوار وضعیت</string>
+	<string name="statusbar_header_summary">اون نوار نازکه که چیزهای بدرد بخور نشون میده</string>
 	<string name="nav_header">نوار ناوبری</string>
+	<string name="nav_header_summary">حرکت بین برنامه‌ها رو دستکاری کن</string>
 	<string name="dialer_header">تماس و تلفن</string>
+	<string name="dialer_header_summary">کمک‌های مفیدی برای تماس‌های تلفنی</string>
 	<string name="misc_header">متفرقه</string>
+	<string name="misc_header_summary">هرچیز دیگری که ارائه میشه</string>
 	<string name="qs_panel_category_title">پنل تنظیمات سریع</string>
+	<string name="qs_panel_category_summary">نوار تنظیم نور، قدرت چراغ قوه و غیره</string>
 	<string name="theme_customization_category">ظواهر</string>
+	<string name="theme_customization_summary">تم روشن برای صفحه تنظیمات دم دستی</string>
 	<string name="pm_header">مدیریت نرم افزار</string>
+	<string name="pm_header_summary">دور زدن امنیت نصب برنامه‌ها</string>
 	<string name="hotspot_header">نقطه اتصال</string>
+	<string name="hotspot_header_summary">اگر وای فای مخفی به دردت میخوره</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">نام مخفی باشد</string>
 	<string name="hotspot_inactivity_timeout_title">مدت زمان غیر فعال بود</string>
@@ -448,6 +457,7 @@
 	<string name="toggle_one_handed">خاموش/روشن کردن حالت یکدستی</string>
 	<string name="sleep">خاموش</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">جستجو…</string>
 	<string name="searchpreference_clear">پاک کردن</string>
 	<string name="searchpreference_history_entry">مدخل تاریخ</string>

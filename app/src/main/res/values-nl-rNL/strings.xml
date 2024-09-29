@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Help ons om %s naar je eigen taal te vertalen</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Vergrendel scherm</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">Status Bar</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">Navigatie bar</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Telefoon &amp; kiezer</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">Diversen</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">Paneel Snelle instellingen</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">Thema\'s</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">Pakket manager</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">Draagbare hotspot</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">SSID verbergen</string>
 	<string name="hotspot_inactivity_timeout_title">Time-out voor inactiviteit</string>
@@ -448,6 +457,7 @@
 	<string name="toggle_one_handed">Schakel de modus voor één hand in</string>
 	<string name="sleep">Slaap</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">Zoek…</string>
 	<string name="searchpreference_clear">Duidelijk</string>
 	<string name="searchpreference_history_entry">Geschiedenisinvoer</string>

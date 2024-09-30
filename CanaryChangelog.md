@@ -1,3 +1,6 @@
+**canary-393**  
+- Added charging animation option to the battery bar (Thanks to: OnePlus Customizer dev: @DHD2280)  
+  
 **canary-392**  
 - PX App UI redesign - bugfix  
   

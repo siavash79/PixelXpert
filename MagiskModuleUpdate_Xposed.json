@@ -1,6 +1,6 @@
 {
-    "version": "3.4.0",
-    "versionCode": 371,
-    "zipUrl": "https://github.com/siavash79/PixelXpert/releases/download/v3.4.0/PixelXpert.zip",
+    "version": "4.0.0",
+    "versionCode": 393,
+    "zipUrl": "https://github.com/siavash79/PixelXpert/releases/download/v4.0.0/PixelXpert.zip",
     "changelog": "https://raw.githubusercontent.com/siavash79/PixelXpert/stable/MagiskChangelog.md"
 }

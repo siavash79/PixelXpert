@@ -429,6 +429,25 @@ public class SystemUtils {
 		return "";
 	}
 
+	public static int getFlashStrength()
+	{
+		return instance.getFlashStrengthInternal();
+	}
+
+	public static float getFlashStrengthPCT()
+	{
+		return instance.getFlashStrengthInternal() / (float) SystemUtils.getMaxFlashLevel();
+	}
+
+	private int getFlashStrengthInternal()
+	{
+		try {
+			return mCameraManager.getTorchStrengthLevel(getFlashID(mCameraManager));
+		} catch (CameraAccessException e) {
+			return 0;
+		}
+	}
+
 	public static boolean isDarkMode() {
 		return instance != null
 				&& instance.getIsDark();

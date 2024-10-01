@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Hãy giúp chúng tôi dịch %s sang ngôn ngữ của bạn</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Màn hình khóa</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">Thanh trạng thái</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">Thanh điều hướng</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Trình gọi &amp; quay số điện thoại</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">Tuỳ chỉnh khác</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">Cài đặt nhanh</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">Chủ đề</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">Trình quản lý gói ứng dụng</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">Điểm phát sóng di động</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Ẩn SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Thời gian không hoạt động</string>
@@ -310,6 +319,7 @@
 	<string name="notif_always_collapse">Luôn thu lại</string>
 	<string name="disable_overscroll">Tắt hiệu ứng cuộn</string>
 	<string name="overscroll_on_summary">Quan trọng: bạn PHẢI bật các ứng dụng bạn muốn tắt hiệu ứng cuộn trong LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Điều khiển đèn pin bằng các nút âm lượng</string>
 	<string name="milliseconds">Mili giây</string>
 	<string name="hours">Giờ</string>
 	<string name="system_time_title">Thời gian hệ thống</string>
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">Mở chế độ một tay</string>
 	<string name="sleep">Tắt màn hình</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">Tìm kiếm…</string>
 	<string name="searchpreference_clear">Xóa</string>
 	<string name="searchpreference_history_entry">Lịch sử tìm kiếm</string>
@@ -484,11 +495,11 @@
 	<string name="remap_long_press_volume_up_button_title">Bấm giữ phím tăng âm lượng</string>
 	<string name="remap_long_press_volume_down_button_title">Bấm giữ phím giảm âm lượng</string>
 	<string name="remap_double_press_power_button_title">Nhấn đúp phím Nguồn</string>
-	<string name="torch">Toggle torch</string>
-	<string name="camera">Launch camera</string>
-	<string name="assistant">Launch assistant</string>
-	<string name="do_not_disturb">Toggle Do not disturb</string>
-	<string name="pause_media">Play/Pause media</string>
-	<string name="skip_media_next">Media control - Skip</string>
-	<string name="skip_media_prev">Media control - Previous</string>
+	<string name="torch">Bật/tắt đèn pin</string>
+	<string name="camera">Khởi chạy camera</string>
+	<string name="assistant">Khởi chạy trợ lý</string>
+	<string name="do_not_disturb">Bật/tắt Không làm phiền</string>
+	<string name="pause_media">Phát/Dừng đa phương tiện</string>
+	<string name="skip_media_next">Điều khiển đa phương tiện - Bỏ qua</string>
+	<string name="skip_media_prev">Điều khiển đa phương tiện - Về trước</string>
 </resources>

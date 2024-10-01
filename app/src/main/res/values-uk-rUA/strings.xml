@@ -38,36 +38,45 @@
 	<string name="crowdin_summary">Допоможіть нам перекласти %s на вашу рідну мову</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Екран блокування</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">Рядок стану</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">Панель навігації</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Номеронабирач телефону &amp;</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">Різне</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">Панель швидких налаштувань</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">Пофарбування</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">Менеджер пакетів</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">Портативна точка доступу</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Приховати SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Тайм-аут бездіяльності</string>
 	<string name="hotspot_max_client_title">Максимум клієнтів</string>
-	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
-	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
+	<string name="hotspot_disable_approval_title">Обхід проблем із підключенням до точки доступу</string>
+	<string name="hotspot_disable_approval_summary">Дозволити безперешкодно підключатися \"попередньо не схваленим\" користувачам</string>
 	<!--Lock screen related-->
-	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
-	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
-	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
-	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
-	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
-	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
+	<string name="depth_wallpaper_title">Шпалери з ефектом глибини</string>
+	<string name="depth_wallpaper_summary">Динамічна інтеграція переднього плану шпалер із годинником</string>
+	<string name="depth_wallpaper_opacity_title">Непрозорість переднього плану шпалер</string>
+	<string name="depth_wallpaper_aod_title">Також на \"always on display\"</string>
+	<string name="depth_wallpaper_model_ready">ШІ-модель завантажена на пристрій</string>
+	<string name="depth_wallpaper_model_not_available">ШІ-модель недоступна на цьому пристрої (поки що)</string>
 	<string name="disable_unlock_hint_title">Вимкніть анімацію підказки розблокування</string>
 	<string name="ls_general_options">Параметри блокування екрана</string>
 	<string name="hide_avatar_title">Видалити аватар користувача (багатокористувацький режим)</string>
 	<string name="transparent_fingerprint_circle">Сховати коло для відбитка пальця під дисплеєм</string>
 	<string name="transparent_fingerprint_circle_off">Коло біля значка відбитка пальця активне</string>
 	<string name="transparent_fingerprint_circle_on">Коло біля значка відбитка пальця буде сховано</string>
-	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
-	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
-	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
+	<string name="fingerprint_icon">Сховати кнопку відбитка пальця на екрані блокування</string>
+	<string name="fingerprint_icon_off">Кнопка відбитка активна</string>
+	<string name="fingerprint_icon_on">Кнопка відбитка схована</string>
 	<string name="custom_text_category">Користувацький текст на екрані блокування</string>
 	<string name="configure_carrier_text">Налаштування тексту носія - Зверху екрана</string>
 	<string name="carrier_text_mod_disabled">Текст носія не змінено</string>
@@ -76,7 +85,7 @@
 	<string name="lockscreen_center_text_value">Користувацький текст в області годинника</string>
 	<string name="keyguard_dim_amount_title">Клавіатурні шпалери тьмяні</string>
 	<string name="keyguard_bottom_category">Ярлики нижньої області</string>
-	<string name="keyguard_bottom_buttons_transparent_title">Сховати коло біля значків</string>
+	<string name="keyguard_bottom_buttons_transparent_title">Сховати круг для значків</string>
 	<string name="LSleftShortcutTitle">Лівий ярлик</string>
 	<string name="LSrightShortcutTitle">Правий ярлик</string>
 	<string name="LSleftLongClickShortcutTitle">Ліва клавіша швидкого доступу (тривале натискання)</string>
@@ -153,7 +162,7 @@
 	<string name="nt_mode_total">Завантаження + Відправлення (Разом)</string>
 	<string name="nt_mode_rxonly">Лише завантаження</string>
 	<string name="nt_mode_txonly">Лише відправлення</string>
-	<string name="nt_unit_show_bits">Show in bits/s</string>
+	<string name="nt_unit_show_bits">Показати в бітах/с</string>
 	<string name="statusbar_general_options">Налаштування рядка стану</string>
 	<string name="dual_tone_battery_title">Увімкнути двотональний індикатор заряду батареї</string>
 	<string name="dual_tone_battery_on_summary">Увімк (працює лише зі значком портретної орієнтації)</string>
@@ -172,14 +181,14 @@
 	<string name="BB_Thickness_title">Товщина рядку</string>
 	<string name="BB_indicate_charging">Позначати заряджання</string>
 	<string name="BB_indicate_fast_charging">Позначати швидке заряджання</string>
-	<string name="BB_indicate_power_save">Indicate power save</string>
+	<string name="BB_indicate_power_save">Показати режим енергоощадження</string>
 	<string name="BB_warning_level">Діапазон попередження про заряд</string>
 	<string name="BB_warning_tip">Встановіть обидва на 0, щоб вимкнути кольори на основі рівнів</string>
 	<string name="BB_batteryCriticalColor">Колір критичного заряду</string>
 	<string name="BB_batteryWarningColor">Колір попередження про заряд</string>
 	<string name="BB_batteryChargingColor">Колір заряджання</string>
 	<string name="BB_batteryFastChargingColor">Колір швидкого заряджання</string>
-	<string name="BB_batteryPowerSaveColor">Power Save color</string>
+	<string name="BB_batteryPowerSaveColor">Колір енергоощадження</string>
 	<string name="BB_transit_colors">Кольори відтінків між діапазоном</string>
 	<string name="colored_battery_percentage_title">Кольоровий відсоток заряду батареї під час зарядки</string>
 	<string name="nt_stat_mode_today">Сьогодні</string>
@@ -204,7 +213,7 @@
 	<string name="qs_tile_vertical_title">Перемістіть значки плиток угору</string>
 	<string name="qs_tile_qty_title">Налаштування кількості плиток швидкого налаштування</string>
 	<string name="qs_leveled_flashlight_summary">Потрібне підтримуване обладнання</string>
-	<string name="light_qs_title">Засвітити панель швидких налаштувань під час світлої теми</string>
+	<string name="light_qs_title">Висвітлити панель швидких налаштувань для світлої теми</string>
 	<string name="qs_pulldown_size">Ширина Швидких налагтувань</string>
 	<string name="qs_pulldown_switch_title">Розкривний список панелі швидких налаштувань у рядку стану</string>
 	<string name="qs_pulldown_side_title">Потягніть вниз</string>
@@ -225,7 +234,7 @@
 	<string name="wifi_cell_on">Використовувати окремі плитки Wi-Fi та мобільних даних</string>
 	<string name="wifi_cell_off">Використовувати одинарну плитку Інтернету</string>
 	<string name="QQS_brightness_category">Налаштування повзунка яскравості</string>
-	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
+	<string name="QS_auto_brightness_title">Ярлик адаптивної яскравості</string>
 	<string name="QQS_brightness_title">Показувати повзунок яскравості на панелі QQS</string>
 	<string name="QQS_brightness_bottom_title">Перемістити повзунок яскравості вниз</string>
 	<string name="QS_brightness_disable_title">Сховати повзунок яскравості з панелі Швидких налаштувань</string>
@@ -258,13 +267,13 @@
 	<string name="taskbar_force_enable_title">Примусово ввімкнено</string>
 	<string name="taskbar_force_disable_title">Примусово вимкнено</string>
 	<string name="taskbar_transient_title">Автоматичне приховування</string>
-	<string name="remap_physical_buttons_title">Remap physical buttons</string>
+	<string name="remap_physical_buttons_title">Переналаштування фізичних кнопок</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Обійти перевірку підпису пакета</string>
 	<string name="pm_allow_downgrade_title">Дозволити програмі повернутися до версії</string>
 	<string name="auto_off_five_minutes">Увімкнено на наступні 5 хвилин</string>
 	<!--Miscellaneous section related-->
-	<string name="launcher_section">Launcher options</string>
+	<string name="launcher_section">Параметри запуску</string>
 	<string name="screenshot_sound_disable_title">Вимкнути звук знімку екрана</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Дозволити знімок екрана з обмеженого вмісту</string>
@@ -297,7 +306,7 @@
 	<string name="force_aod_while_charging_summary">Залишати екран увімкненим коли пристрій заряджається</string>
 	<string name="doze_header">Поки екран вимкнено…</string>
 	<string name="custom_themed_icons_title">Користувацькі теми для значків</string>
-	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
+	<string name="px_in_settings_title">Додати PixelXpert до системних налаштувань</string>
 	<string name="custom_themed_icons_off">Користувацькі значки вимкнено</string>
 	<string name="custom_themed_icons_on">Користувацькі значки увімкнено</string>
 	<string name="so_vol_longpress_skip">Утримуйте кнопку гучності, щоб пропустити музичний трек</string>
@@ -310,16 +319,17 @@
 	<string name="notif_always_collapse">Завжди згортати</string>
 	<string name="disable_overscroll">Вимкнути еластичний ефект прокрутки</string>
 	<string name="overscroll_on_summary">Важливо: ОБОВ\'ЯЗКОВО увімкніть програми, для яких ви хочете вимкнути прокрутку в LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Керувати ліхтариком за допомогою кнопок гучності</string>
 	<string name="milliseconds">мілісекунди</string>
-	<string name="hours">Hours</string>
-	<string name="system_time_title">System time</string>
-	<string name="sync_ntp_time_title">Use NTP to sync time</string>
-	<string name="ntp_time_interval_title">Time synchronization interval</string>
-	<string name="ntp_servers_title">NTP servers</string>
-	<string name="ntp_servers_summary">Use semicolon to separate multiple servers</string>
-	<string name="sync_ntp_time_now_title">Sync now</string>
-	<string name="sync_ntp_successful">Time synced successfully</string>
-	<string name="sync_ntp_failed">NTP server connection error!</string>
+	<string name="hours">Години</string>
+	<string name="system_time_title">Системний час</string>
+	<string name="sync_ntp_time_title">Використовувати NTP для синхронізації часу</string>
+	<string name="ntp_time_interval_title">Інтервал синхронізації часу</string>
+	<string name="ntp_servers_title">NTP-сервери</string>
+	<string name="ntp_servers_summary">Використовуйте крапку з комою для відокремлення кількох серверів</string>
+	<string name="sync_ntp_time_now_title">Синхронізувати</string>
+	<string name="sync_ntp_successful">Час успішно синхронізовано</string>
+	<string name="sync_ntp_failed">Помилка з\'єднання з NTP-сервером!</string>
 	<!-- Volume panel -->
 	<string name="volume_panel_category">Панель гучності</string>
 	<string name="volume_dialog_timeout">Затримка звукової панелі</string>
@@ -390,9 +400,9 @@
 	<string name="app_kill_alert_body">Програма зараз закриється. Ви можете відкрити його знову, торкнувшись нового значка</string>
 	<string name="app_kill_ok_btn">в порядку</string>
 	<!-- Depth Effect Alert -->
-	<string name="depth_effect_alert_title">Attention</string>
-	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
-	<string name="depth_effect_ok_btn">OK</string>
+	<string name="depth_effect_alert_title">Увага</string>
+	<string name="depth_effect_alert_body">Використовуйте підхожі шпалери для екрана блокування, де їх елементи переднього плану не закривають увесь годинник на екрані блокування, забезпечуючи як візуальну привабливість, так і функціональну чіткість екрана блокування.\n\nNote: %s.</string>
+	<string name="depth_effect_ok_btn">ОК</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">Для застосування налаштувань потрібно перезавантажити систему</string>
 	<!-- Menu Items -->
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">Увімкнути режим однієї руки</string>
 	<string name="sleep">сон</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">Пошук…</string>
 	<string name="searchpreference_clear">ясно</string>
 	<string name="searchpreference_history_entry">Запис історії</string>
@@ -478,17 +489,17 @@
 	<string name="navigation_hooks">Хуки</string>
 	<string name="navigation_settings">Налаштування</string>
 	<!-- Remap Physical Buttons -->
-	<string name="while_screen_is_off_title">While screen is off</string>
-	<string name="while_screen_is_on_title">While screen is on</string>
-	<string name="remap_long_press_power_button_title">Long press power button</string>
-	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
-	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
-	<string name="remap_double_press_power_button_title">Double press power button</string>
-	<string name="torch">Toggle torch</string>
-	<string name="camera">Launch camera</string>
-	<string name="assistant">Launch assistant</string>
-	<string name="do_not_disturb">Toggle Do not disturb</string>
-	<string name="pause_media">Play/Pause media</string>
-	<string name="skip_media_next">Media control - Skip</string>
-	<string name="skip_media_prev">Media control - Previous</string>
+	<string name="while_screen_is_off_title">Коли екран вимкнено</string>
+	<string name="while_screen_is_on_title">Коли екран увімкнено</string>
+	<string name="remap_long_press_power_button_title">Утримування кнопки живлення</string>
+	<string name="remap_long_press_volume_up_button_title">Утримування кнопки збільшення гучності</string>
+	<string name="remap_long_press_volume_down_button_title">Утримування кнопки зменшення гучності</string>
+	<string name="remap_double_press_power_button_title">Подвійне натискання кнопки живлення</string>
+	<string name="torch">Увімкнути ліхтарик</string>
+	<string name="camera">Запустити камеру</string>
+	<string name="assistant">Запустити асистента</string>
+	<string name="do_not_disturb">Увімкнути \"Не турбувати\"</string>
+	<string name="pause_media">Відтворення/Павза медіа</string>
+	<string name="skip_media_next">Управління медіа - Пропустити</string>
+	<string name="skip_media_prev">Управління медіа - Попереднє</string>
 </resources>

@@ -11,8 +11,8 @@ android {
 		applicationId "sh.siava.pixelxpert"
 		minSdk 33
 		targetSdk 34
-		versionCode 371
-		versionName "3.4.0"
+		versionCode 392
+		versionName "canary-392"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
@@ -36,13 +36,15 @@ android {
 
 	buildTypes {
 		release {
-			minifyEnabled false
-			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			minifyEnabled true
+			shrinkResources true
+			crunchPngs true
+			proguardFiles("proguard-android-optimize.txt", "proguard.pro", "proguard-rules.pro")
 			signingConfig releaseSignature
 		}
 		debug {
 			minifyEnabled false
-			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			proguardFiles("proguard-android-optimize.txt", "proguard.pro", "proguard-rules.pro")
 			signingConfig releaseSignature
 		}
 	}
@@ -72,59 +74,61 @@ android {
 }
 
 dependencies {
-	def libsuVersion = '5.2.2'
-
 	// Xposed api
 	compileOnly files('lib/api-82.jar')
 	compileOnly files('lib/api-82-sources.jar')
 
 	implementation project(path: ':RangeSliderPreference')
 
-	implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-	implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
-	implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
-	implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
-	implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
-	implementation 'androidx.appcompat:appcompat:1.7.0'
-	implementation 'androidx.annotation:annotation:1.8.0'
-	implementation 'androidx.preference:preference-ktx:1.2.1'
-	implementation 'androidx.recyclerview:recyclerview:1.3.2'
-	implementation 'com.google.android.material:material:1.12.0'
-	implementation 'androidx.compose.ui:ui-geometry:1.6.7'
+	implementation libs.androidx.constraintlayout
+	implementation libs.navigation.fragment.ktx
+	implementation libs.navigation.ui.ktx
+	implementation libs.navigation.fragment.ktx
+	implementation libs.navigation.ui.ktx
+	implementation libs.androidx.appcompat
+	implementation libs.androidx.annotation
+	implementation libs.androidx.preference.ktx
+	implementation libs.androidx.recyclerview
+	implementation libs.android.material
+	implementation libs.androidx.ui.geometry
 	//noinspection KtxExtensionAvailable
-	implementation 'androidx.activity:activity:1.9.0'
-	implementation 'androidx.work:work-runtime:2.9.0'
-	implementation "androidx.concurrent:concurrent-futures:1.1.0"
+	implementation libs.androidx.activity
+	implementation libs.androidx.work.runtime
+	implementation libs.androidx.concurrent.futures
 
 	// The core module that provides APIs to a shell
-	implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
+	implementation libs.libsuCore
 	// Optional: APIs for creating root services. Depends on ":core"
-	implementation "com.github.topjohnwu.libsu:service:${libsuVersion}"
+	implementation libs.libsuService
 	// Optional: Provides remote file system support
-	implementation "com.github.topjohnwu.libsu:nio:${libsuVersion}"
+	implementation libs.libsuNIO
 
-	implementation 'com.crossbowffs.remotepreferences:remotepreferences:0.8'
+	implementation libs.remotepreferences
 	// Remote Preferences for Xposed Module prefs
-	implementation 'com.jaredrummler:colorpicker:1.1.0' //Color Picker Component for UI
-	implementation 'com.github.mfathi91:persian-date-time:4.2.1' //Persian Calendar
+	implementation libs.colorpicker //Color Picker Component for UI
+	implementation libs.persian.date.time //Persian Calendar
 
-	implementation 'com.github.tiagohm.MarkdownView:library:0.19.0' //Markdown reader
+	implementation libs.markdown //Markdown reader
 
 	// Search Preference
-	implementation 'androidx.cardview:cardview:1.0.0'
-	implementation 'org.apache.commons:commons-text:1.11.0'
+	implementation libs.androidx.cardview
+	implementation libs.apache.commons.text
 
-	// SwipeRefreshLayout
-	implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
+	implementation libs.androidx.swiperefreshlayout
 
 	// Class initializer
 	// https://mvnrepository.com/artifact/org.objenesis/objenesis
-	implementation 'org.objenesis:objenesis:3.3'
+	implementation libs.objenesis
 
-	//NTP Client
-	implementation "com.lyft.kronos:kronos-android:0.0.1-alpha11"
+	implementation libs.ntpClient //NTP Client
 
 	//Google Subject Segmentation - MLKit
-	implementation 'com.google.android.gms:play-services-mlkit-subject-segmentation:16.0.0-beta1'
-	implementation 'com.google.android.gms:play-services-base:18.5.0'
+	implementation libs.play.services.mlkit.subject.segmentation
+	implementation libs.play.services.base
+  
+  // Collapsing Toolbar with subtitle
+	implementation libs.collapsingtoolbarlayout.subtitle
+
+	// Splash screen
+	implementation libs.androidx.core.splashscreen
 }

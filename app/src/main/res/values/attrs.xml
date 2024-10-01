@@ -4,6 +4,7 @@
 	<declare-styleable name="MaterialTimePickerPreference">
 		<attr name="presetValue" format="string" />
 	</declare-styleable>
+
 	<!-- SearchPreference -->
 	<declare-styleable name="SearchPreference">
 		<attr name="textHint" format="string" />

@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">लॉक स्क्रीन</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">स्टेटस बार</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">नेविगेशन पट्टी</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">फ़ोन &amp; डायलर</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">विभिन्न मिश्रित</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">क्यूएस पैनल सेटिंग</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">थीम सेटिंग</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">एप्लिकेशन पैकेज मैनेजर</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">पोर्टेबल हॉटस्पॉट</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">SSID छिपाएं</string>
 	<string name="hotspot_inactivity_timeout_title">निष्क्रियता मध्यांतर</string>
@@ -310,6 +319,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">इलास्टिक ओवरस्क्रॉलिंग प्रभाव अक्षम करें</string>
 	<string name="overscroll_on_summary">महत्वपूर्ण: आप उन ऐप्स को अवश्य सक्षम करें जिनके लिए आप LSPosed में ओवरस्क्रॉल अक्षम करना चाहते हैं</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">मिलीसेकंड</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">एक हाथ वाला मोड टॉगल करें</string>
 	<string name="sleep">डिवाइस को स्लीप मोड में रखें</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">खोजें…</string>
 	<string name="searchpreference_clear">स्पष्ट</string>
 	<string name="searchpreference_history_entry">इतिहास प्रविष्टि</string>

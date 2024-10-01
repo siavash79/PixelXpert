@@ -7,15 +7,22 @@ import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isPowerS
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BaseInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -34,6 +41,8 @@ public class BatteryBarView extends FrameLayout {
 	private static float[] shadeLevels = new float[0];
 	private final ShapeDrawable mDrawable = new ShapeDrawable();
 	FrameLayout maskLayout;
+	private final ImageView chargingIndicatorView;
+	private final ImageView chargingIndicatorViewForCenter;
 	private boolean colorful = false;
 	private int alphaPct = 100;
 	private int singleColorTone = Color.WHITE;
@@ -55,8 +64,13 @@ public class BatteryBarView extends FrameLayout {
 	private static boolean indicateFastCharging = false;
 	private static boolean indicatePowerSave = false;
 	private static boolean transitColors = false;
+	private static boolean animateCharging = false;
+	private static final int ANIM_DURATION = 1000;
+	private static final int ANIM_DELAY = 2000;
+	private final Handler animationHandler = new Handler(Looper.getMainLooper());
+	private Runnable chargingAnimationRunnable;
 
-	public static void setStaticColor(List<Float> batteryLevels, int[] batteryColors, boolean indicateCharging, int chargingColor, boolean indicateFastCharging, int fastChargingColor, boolean indicatePowerSave, int powerSaveColor, boolean transitColors) {
+	public static void setStaticColor(List<Float> batteryLevels, int[] batteryColors, boolean indicateCharging, int chargingColor, boolean indicateFastCharging, int fastChargingColor, boolean indicatePowerSave, int powerSaveColor, boolean transitColors, boolean animate) {
 		BatteryBarView.transitColors = transitColors;
 		BatteryBarView.batteryLevels = batteryLevels;
 		BatteryBarView.batteryColors = batteryColors;
@@ -66,6 +80,7 @@ public class BatteryBarView extends FrameLayout {
 		BatteryBarView.powerSaveColor = powerSaveColor;
 		BatteryBarView.indicateCharging = indicateCharging;
 		BatteryBarView.indicateFastCharging = indicateFastCharging;
+		BatteryBarView.animateCharging = animate;
 	}
 
 	public void setOnTop(boolean onTop) {
@@ -93,6 +108,8 @@ public class BatteryBarView extends FrameLayout {
 		if (barView.getVisibility() == GONE) return;
 		maskLayout.setLayoutParams(maskLayoutParams());
 		barView.setLayoutParams(barLayoutParams());
+		chargingIndicatorView.setLayoutParams(charginLayoutParams());
+		chargingIndicatorViewForCenter.setLayoutParams(charginLayoutParams());
 
 		refreshColors(barView.getWidth(), barView.getHeight());
 		mDrawable.invalidateSelf();
@@ -111,6 +128,69 @@ public class BatteryBarView extends FrameLayout {
 		refreshLayout();
 	}
 
+	private void startChargingAnimation() {
+		if (chargingAnimationRunnable == null) {
+			chargingAnimationRunnable = new Runnable() {
+				@Override
+				public void run() {
+					animateChargingIndicator();
+					animationHandler.postDelayed(this, ANIM_DELAY);
+				}
+			};
+			animationHandler.post(chargingAnimationRunnable);
+		}
+	}
+
+	private void stopChargingAnimation() {
+		animationHandler.removeCallbacks(chargingAnimationRunnable);
+
+		post(() -> {
+			chargingIndicatorView.setVisibility(GONE);
+			chargingIndicatorView.clearAnimation();
+
+			chargingIndicatorViewForCenter.setVisibility(GONE);
+			chargingIndicatorViewForCenter.clearAnimation();
+		});
+
+		chargingAnimationRunnable = null;
+	}
+
+	private void animateChargingIndicator() {
+		int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+
+		chargingIndicatorView.post(() -> chargingIndicatorView.setVisibility(VISIBLE));
+		int secondaryVisibility = (isCenterBased) ? GONE : VISIBLE;
+		chargingIndicatorViewForCenter.post(() -> chargingIndicatorViewForCenter.setVisibility(secondaryVisibility));
+
+		float startX, startXCenter, endX;
+
+		if (RTL) {
+			startX = 0;
+			startXCenter = getWidth();
+			endX = getWidth() - Math.round(getWidth() * getCurrentLevel() / 100f);
+		} else {
+			startX = screenWidth;
+			startXCenter = 0;
+			endX = Math.round(getWidth() * getCurrentLevel() / 100f);
+		}
+
+		if (isCenterBased) endX = getWidth() * (1 - ((100 - getCurrentLevel()) / 200f));
+
+		BaseInterpolator interpolator = new AccelerateInterpolator();
+
+		TranslateAnimation animation = new TranslateAnimation(startX, endX, 0, 0);
+		animation.setDuration(ANIM_DURATION);
+		animation.setInterpolator(interpolator);
+		chargingIndicatorView.startAnimation(animation);
+
+		if (isCenterBased) {
+			TranslateAnimation animationCenter = new TranslateAnimation(startXCenter, getWidth() - endX, 0, 0);
+			animationCenter.setDuration(ANIM_DURATION);
+			animationCenter.setInterpolator(interpolator);
+			chargingIndicatorViewForCenter.startAnimation(animationCenter);
+		}
+	}
+
 	public BatteryBarView(Context context) {
 		super(context);
 		instance = this;
@@ -123,12 +203,21 @@ public class BatteryBarView extends FrameLayout {
 		barView = new ImageView(context);
 		barView.setImageDrawable(mDrawable);
 
-		maskLayout = new FrameLayout(context);
+		chargingIndicatorView = new ImageView(context);
+		chargingIndicatorView.setLayoutParams(new LayoutParams(20, barHeight));
+		chargingIndicatorView.setBackgroundColor(singleColorTone);
 
+		chargingIndicatorViewForCenter = new ImageView(context);
+		chargingIndicatorViewForCenter.setLayoutParams(new LayoutParams(20, barHeight));
+		chargingIndicatorViewForCenter.setBackgroundColor(singleColorTone);
+
+		maskLayout = new FrameLayout(context);
 		maskLayout.addView(barView);
 		maskLayout.setClipChildren(true);
 
 		this.addView(maskLayout);
+		this.addView(chargingIndicatorView);
+		this.addView(chargingIndicatorViewForCenter);
 		this.setClipChildren(true);
 
 		RTL = (TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == LAYOUT_DIRECTION_RTL);
@@ -150,6 +239,18 @@ public class BatteryBarView extends FrameLayout {
 
 		result.gravity = (isCenterBased) ? Gravity.CENTER : Gravity.START;
 
+		result.gravity |= (onTop) ? Gravity.TOP : Gravity.BOTTOM;
+
+		return result;
+	}
+
+	private LayoutParams charginLayoutParams() {
+		DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
+		float dp = 4f;
+		int pixels = (int) (metrics.density * dp + 0.5f);
+		LayoutParams result = new LayoutParams(pixels, barHeight);
+
+		result.gravity = (RTL) ? Gravity.END : Gravity.START;
 		result.gravity |= (onTop) ? Gravity.TOP : Gravity.BOTTOM;
 
 		return result;
@@ -179,9 +280,13 @@ public class BatteryBarView extends FrameLayout {
 		mDrawable.setIntrinsicHeight(lenY);
 		if (isFastCharging() && indicateFastCharging) //fast charging color
 		{
+			chargingIndicatorView.setBackgroundColor(fastChargingColor);
+			chargingIndicatorViewForCenter.setBackgroundColor(fastChargingColor);
 			mPaint.setColor(fastChargingColor);
 		} else if (isCharging() && indicateCharging) //normal charging color
 		{
+			chargingIndicatorView.setBackgroundColor(chargingColor);
+			chargingIndicatorViewForCenter.setBackgroundColor(chargingColor);
 			mPaint.setColor(chargingColor);
 		} else if (isPowerSaving() && indicatePowerSave) //power saving color
 		{
@@ -254,8 +359,15 @@ public class BatteryBarView extends FrameLayout {
 	private void refreshVisibility() {
 		if (!mIsEnabled || mIsHidden || (onlyWhileCharging && !isCharging())) {
 			barView.setVisibility(GONE);
+			stopChargingAnimation();
 		} else {
 			barView.setVisibility(VISIBLE);
+
+			if(isCharging() && animateCharging) {
+				startChargingAnimation();
+			} else {
+				stopChargingAnimation();
+			}
 		}
 	}
 

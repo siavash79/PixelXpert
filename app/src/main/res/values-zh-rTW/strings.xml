@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">幫助我們將 %s 翻譯成自己的語言</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">鎖定畫面</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">狀態列</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">導航欄</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Phone &amp; dialer</string>
+	<string name="dialer_header_summary">為通話功能提供一些選項</string>
 	<string name="misc_header">雜項</string>
+	<string name="misc_header_summary">PixelXpert提供的更多選項</string>
 	<string name="qs_panel_category_title">方塊面板</string>
+	<string name="qs_panel_category_summary">狀態列亮度滑桿、手電筒亮度...等</string>
 	<string name="theme_customization_category">主題化</string>
+	<string name="theme_customization_summary">快速設定中的淺色主題</string>
 	<string name="pm_header">包管理器</string>
+	<string name="pm_header_summary">繞過APK安全性檢查</string>
 	<string name="hotspot_header">無線基地台</string>
+	<string name="hotspot_header_summary">隱藏Wi-Fi SSID等設定</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">隱藏 SSID</string>
 	<string name="hotspot_inactivity_timeout_title">自動關閉時間</string>
@@ -225,7 +234,7 @@
 	<string name="wifi_cell_on">分離 WIFI 和資料方塊</string>
 	<string name="wifi_cell_off">合併 WIFI 和資料方塊</string>
 	<string name="QQS_brightness_category">亮度滑塊選項</string>
-	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
+	<string name="QS_auto_brightness_title">自動亮度快捷方式</string>
 	<string name="QQS_brightness_title">在下拉方塊面板顯示</string>
 	<string name="QQS_brightness_bottom_title">將亮度條移動到底部</string>
 	<string name="QS_brightness_disable_title">在方塊面板中隱藏</string>
@@ -258,13 +267,13 @@
 	<string name="taskbar_force_enable_title">強制開啟</string>
 	<string name="taskbar_force_disable_title">強制關閉</string>
 	<string name="taskbar_transient_title">Auto hide</string>
-	<string name="remap_physical_buttons_title">Remap physical buttons</string>
+	<string name="remap_physical_buttons_title">重新映射物理按鍵</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">繞過應用簽名檢查</string>
 	<string name="pm_allow_downgrade_title">允許應用降級</string>
 	<string name="auto_off_five_minutes">在接下來的五分鐘內保持開啟</string>
 	<!--Miscellaneous section related-->
-	<string name="launcher_section">Launcher options</string>
+	<string name="launcher_section">啓動器選項</string>
 	<string name="screenshot_sound_disable_title">關閉截圖提示音</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Allow screenshot from restricted content</string>
@@ -310,6 +319,7 @@
 	<string name="notif_always_collapse">總是折疊</string>
 	<string name="disable_overscroll">禁用過度滾動效果</string>
 	<string name="overscroll_on_summary">重要:你必須在 LSPosed 作用域中勾選你要禁用的應用程式</string>
+	<string name="control_flashlight_with_volume_keys">使用音量按鍵控制手電筒</string>
 	<string name="milliseconds">毫秒</string>
 	<string name="hours">小時</string>
 	<string name="system_time_title">系統時間</string>
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">啟用單手模式</string>
 	<string name="sleep">睡眠</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">搜尋</string>
 	<string name="searchpreference_search">Search…</string>
 	<string name="searchpreference_clear">Clear</string>
 	<string name="searchpreference_history_entry">History entry</string>
@@ -478,17 +489,17 @@
 	<string name="navigation_hooks">掛鈎</string>
 	<string name="navigation_settings">設定</string>
 	<!-- Remap Physical Buttons -->
-	<string name="while_screen_is_off_title">While screen is off</string>
-	<string name="while_screen_is_on_title">While screen is on</string>
-	<string name="remap_long_press_power_button_title">Long press power button</string>
-	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
-	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
-	<string name="remap_double_press_power_button_title">Double press power button</string>
-	<string name="torch">Toggle torch</string>
-	<string name="camera">Launch camera</string>
-	<string name="assistant">Launch assistant</string>
-	<string name="do_not_disturb">Toggle Do not disturb</string>
-	<string name="pause_media">Play/Pause media</string>
-	<string name="skip_media_next">Media control - Skip</string>
-	<string name="skip_media_prev">Media control - Previous</string>
+	<string name="while_screen_is_off_title">螢幕關閉時</string>
+	<string name="while_screen_is_on_title">螢幕開啟時</string>
+	<string name="remap_long_press_power_button_title">長按電源鍵</string>
+	<string name="remap_long_press_volume_up_button_title">長按音量上鍵</string>
+	<string name="remap_long_press_volume_down_button_title">長按音量下鍵</string>
+	<string name="remap_double_press_power_button_title">按兩下電源鍵</string>
+	<string name="torch">開關手電筒</string>
+	<string name="camera">啟動相機</string>
+	<string name="assistant">啟動助手</string>
+	<string name="do_not_disturb">開關請勿打擾</string>
+	<string name="pause_media">播放/暫停 媒體</string>
+	<string name="skip_media_next">媒體控制 - 跳過</string>
+	<string name="skip_media_prev">媒體控制 - 上一項</string>
 </resources>

@@ -137,6 +137,7 @@ public class StatusbarMods extends XposedModPack {
 	private static boolean indicateFastCharging = false;
 	private static boolean indicatePowerSave = false;
 	private static boolean BBarTransitColors = false;
+	private static boolean BBAnimateCharging = false;
 	//endregion
 
 	//region privacy chip
@@ -242,8 +243,9 @@ public class StatusbarMods extends XposedModPack {
 	private void initSwitchIcon() {
 		try {
 			Icon appSwitchIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_app_switch);
-			//noinspection JavaReflectionMemberAccess
-			Object appSwitchStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, appSwitchIcon, 0, 0, APP_SWITCH_SLOT);
+
+			Object appSwitchStatusbarIcon = getStatusbarIconFor(appSwitchIcon, APP_SWITCH_SLOT);
+
 			mAppSwitchStatusbarIconHolder = getStatusbarIconHolderFor(appSwitchStatusbarIcon);
 		}catch (Throwable ignored){}
 	}
@@ -308,6 +310,7 @@ public class StatusbarMods extends XposedModPack {
 		BBOpacity = Xprefs.getSliderInt( "BBOpacity", 100);
 		BBarHeight = Xprefs.getSliderInt( "BBarHeight", 50);
 		BBarTransitColors = Xprefs.getBoolean("BBarTransitColors", false);
+		BBAnimateCharging = Xprefs.getBoolean("BBAnimateCharging", false);
 
 		batteryLevels = Xprefs.getSliderValues("batteryWarningRange", 0);
 
@@ -1119,7 +1122,7 @@ public class StatusbarMods extends XposedModPack {
 
 	//region battery bar related
 	private void refreshBatteryBar(BatteryBarView instance) {
-		BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, chargingColor, indicateFastCharging, fastChargingColor, indicatePowerSave, powerSaveColor, BBarTransitColors);
+		BatteryBarView.setStaticColor(batteryLevels, batteryColors, indicateCharging, chargingColor, indicateFastCharging, fastChargingColor, indicatePowerSave, powerSaveColor, BBarTransitColors, BBAnimateCharging);
 		instance.setVisibility((BBarEnabled) ? VISIBLE : GONE);
 		instance.setColorful(BBarColorful);
 		instance.setOnlyWhileCharging(BBOnlyWhileCharging);
@@ -1146,6 +1149,29 @@ public class StatusbarMods extends XposedModPack {
 	//endregion
 
 	//region statusbar icon holder
+	private Object getStatusbarIconFor(Icon icon, String slotName)
+	{
+		try {
+			Object statusbarIcon = ObjenesisHelper.newInstance(StatusBarIconClass);
+
+			setObjectField(statusbarIcon, "visible", true);
+
+			//noinspection JavaReflectionMemberAccess
+			setObjectField(statusbarIcon, "user", UserHandle.class.getDeclaredConstructor(int.class).newInstance(0));
+			setObjectField(statusbarIcon, "pkg", BuildConfig.APPLICATION_ID);
+			setObjectField(statusbarIcon, "icon", icon);
+			setObjectField(statusbarIcon, "iconLevel", 0);
+			setObjectField(statusbarIcon, "number", 0);
+			setObjectField(statusbarIcon, "contentDescription", slotName);
+
+			return statusbarIcon;
+		}
+		catch (Throwable ignored)
+		{
+			return null;
+		}
+	}
+
 	private Object getStatusbarIconHolderFor(Object statusbarIcon)
 	{
 		Object holder = ObjenesisHelper.newInstance(StatusBarIconHolderClass);
@@ -1169,13 +1195,11 @@ public class StatusbarMods extends XposedModPack {
 			if (!telephonyCallbackRegistered) {
 
 				Icon volteIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_volte);
-				//noinspection JavaReflectionMemberAccess
-				Object volteStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, volteIcon, 0, 0, VO_LTE_SLOT);
+				Object volteStatusbarIcon = getStatusbarIconFor(volteIcon, VO_LTE_SLOT);
 				volteStatusbarIconHolder = getStatusbarIconHolderFor(volteStatusbarIcon);
 
 				Icon vowifiIcon = Icon.createWithResource(BuildConfig.APPLICATION_ID, R.drawable.ic_vowifi);
-				//noinspection JavaReflectionMemberAccess
-				Object vowifiStatusbarIcon = StatusBarIconClass.getDeclaredConstructor(UserHandle.class, String.class, Icon.class, int.class, int.class, CharSequence.class).newInstance(UserHandle.class.getDeclaredConstructor(int.class).newInstance(0), BuildConfig.APPLICATION_ID, vowifiIcon, 0, 0, VO_WIFI_SLOT);
+				Object vowifiStatusbarIcon = getStatusbarIconFor(vowifiIcon, VO_WIFI_SLOT);
 				vowifiStatusbarIconHolder = getStatusbarIconHolderFor(vowifiStatusbarIcon);
 
 				//noinspection DataFlowIssue
@@ -1212,7 +1236,7 @@ public class StatusbarMods extends XposedModPack {
 
 		if (lastVolteAvailable != volteStateAvailable || force) {
 			lastVolteAvailable = volteStateAvailable;
-			if (volteStateAvailable) {
+			if (volteStateAvailable && VolteIconEnabled) {
 				mStatusBar.post(() -> {
 					try {
 						callMethod(mStatusBarIconController, "setIcon", VO_LTE_SLOT, volteStatusbarIconHolder);
@@ -1227,7 +1251,7 @@ public class StatusbarMods extends XposedModPack {
 
 		if (lastVowifiAvailable != voWifiAvailable || force) {
 			lastVowifiAvailable = voWifiAvailable;
-			if (voWifiAvailable) {
+			if (voWifiAvailable && VowifiIconEnabled) {
 				mStatusBar.post(() -> {
 					try {
 						callMethod(mStatusBarIconController, "setIcon", VO_WIFI_SLOT, vowifiStatusbarIconHolder);

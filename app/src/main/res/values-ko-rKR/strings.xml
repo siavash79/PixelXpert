@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">%s를 당신의 언어로 번역하는것을 도와주세요</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">잠금 화면</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">상태 표시줄</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">네비게이션 바</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">전화 &amp; 다이얼</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">기타 설정</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">빠른 설정 화면</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">테마</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">패키지 매니저</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">휴대용 핫스팟</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">SSID 숨기기</string>
 	<string name="hotspot_inactivity_timeout_title">비활성 상태 시간 제한</string>
@@ -310,6 +319,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">늘어나는 오버스크롤 효과 비활성화</string>
 	<string name="overscroll_on_summary">중요: LSPosed 설정 내에서 오버스크롤 효과를 비활성화시킬 앱을 추가해야 합니다</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">밀리초</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">한 손 모드 토글</string>
 	<string name="sleep">화면 끄기</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">검색...</string>
 	<string name="searchpreference_clear">지우기</string>
 	<string name="searchpreference_history_entry">이전 기록</string>

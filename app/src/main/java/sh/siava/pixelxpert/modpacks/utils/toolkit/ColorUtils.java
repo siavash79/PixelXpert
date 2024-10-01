@@ -34,4 +34,8 @@ public class ColorUtils {
 		}
 		return stateList;
 	}
+
+	public static int compositeAlpha(int foregroundAlpha, int backgroundAlpha) {
+		return 0xFF - (((0xFF - backgroundAlpha) * (0xFF - foregroundAlpha)) / 0xFF);
+	}
 }

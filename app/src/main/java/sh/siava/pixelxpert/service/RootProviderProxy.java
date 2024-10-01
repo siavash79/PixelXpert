@@ -12,12 +12,12 @@ import androidx.annotation.Nullable;
 
 import com.topjohnwu.superuser.Shell;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import sh.siava.pixelxpert.IRootProviderProxy;
+import sh.siava.pixelxpert.PixelXpert;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.Constants;
 import sh.siava.pixelxpert.utils.BitmapSubjectSegmenter;
@@ -26,10 +26,10 @@ public class RootProviderProxy extends Service {
 	@Nullable
 	@Override
 	public IBinder onBind(Intent intent) {
-		return new RootPoviderProxyIPC(this);
+		return new RootProviderProxyIPC(this);
 	}
 
-	class RootPoviderProxyIPC extends IRootProviderProxy.Stub
+	class RootProviderProxyIPC extends IRootProviderProxy.Stub
 	{
 		/** @noinspection unused*/
 		String TAG = getClass().getSimpleName();
@@ -37,7 +37,7 @@ public class RootProviderProxy extends Service {
 		private final List<String> rootAllowedPacks;
 		private final boolean rootGranted;
 
-		private RootPoviderProxyIPC(Context context)
+		private RootProviderProxyIPC(Context context)
 		{
 			try {
 				Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER));
@@ -69,31 +69,33 @@ public class RootProviderProxy extends Service {
 		}
 
 		@Override
-		public void extractSubject(Bitmap input, String resultPath) throws RemoteException {
+		public Bitmap extractSubject(Bitmap input) throws RemoteException {
 			ensureEnvironment();
 
+			if(!PixelXpert.get().isCoreRootServiceBound())
+			{
+				PixelXpert.get().tryConnectRootService();
+			}
+
+			final Bitmap[] resultBitmap = new Bitmap[]{null};
+			CountDownLatch resultWaiter = new CountDownLatch(1);
 			try {
-				new BitmapSubjectSegmenter(getApplicationContext()).segmentSubject(input, new BitmapSubjectSegmenter.SegmentResultListener() {
-					@Override
-					public void onSuccess(Bitmap result) {
-						try {
-							File tempFile = File.createTempFile("lswt", ".png");
+					new BitmapSubjectSegmenter(getApplicationContext()).segmentSubject(input, new BitmapSubjectSegmenter.SegmentResultListener() {
+						@Override
+						public void onSuccess(Bitmap result) {
+							resultBitmap[0] = result;
+							resultWaiter.countDown();
+						}
 
-							FileOutputStream outputStream = new FileOutputStream(tempFile);
-							result.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-
-							outputStream.close();
-							result.recycle();
-
-							Shell.cmd("cp -F " + tempFile.getAbsolutePath() + " " + resultPath).exec();
-							Shell.cmd("chmod 644 " + resultPath).exec();
-						} catch (Throwable ignored) {}
-					}
-
-					@Override
-					public void onFail() {}
-				});
+						@Override
+						public void onFail() {
+							resultWaiter.countDown();
+						}
+					});
+				resultWaiter.await();
+				return resultBitmap[0];
 			} catch (Throwable ignored) {}
+			return null;
 		}
 
 		private void ensureEnvironment() throws RemoteException {

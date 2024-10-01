@@ -1,3 +1,73 @@
+**canary-392**  
+- PX App UI redesign - bugfix  
+  
+**canary-391**  
+- PX App UI redesign (by DrDisagree)  
+  
+**canary-390**  
+- Wallpaper depth effect: remade (no change in use experience in expected)  
+  
+**canary-389**  
+- Fixed wallpaper depth effect - broken in last canary  
+  
+**canary-388**  
+- Build optimization  
+  
+**canary-387**  
+- Improved app startup duration  
+  
+**canary-386**  
+- A15QPR1B2: Compatibility with new settings app  
+  
+**canary-385**  
+- A15QPR1B2: Wallpaper depth effect bugfix  
+  
+**canary-384**  
+- A15QPR1B2: Fixed wallpaper depth effect  
+  
+**canary-383**  
+- Minor bugfix  
+  
+**canary-382**  
+- A15QPR1B2: Fixed lockscreen shortcuts transparency  
+  
+**canary-381**  
+- A15QPR1B2: Fixed Lockscreen mods - bottom shortcut transparency will probably be a "wont fix"  
+- A15QPR1B2: Fixed screenshot mods  
+- A15: fixed app profile switch tile  
+  
+**canary-380**  
+- A15QPR1B1: Fixed taskbar in recents mode  
+- A15QPR1B1: Fixed navigation bar mods  
+  
+**canary-379**  
+- Added support for Hijri calendar (thanks to @forabi)  
+  
+**canary-378**  
+- VoLTE - VoWifi: Fixed random icon showup when not even enabled  
+  
+**canary-377**  
+- VoLTE - VoWiFi icon update (again)  
+  
+**canary-376**  
+- VoLTE - VoWiFi icon update  
+  
+**canary-375**  
+- A15b4: Fixed QS light theme  
+- A15b4: Fixed QS column count not getting applied  
+- A15b4: Fixed additional statusbar icons causing system crash  
+  
+**canary-374**  
+- Added option to control torch level via volume keys  
+  
+**canary-373**  
+- monochrome icon generator: bugfix  
+- Keygyard wallpaper dim now respects bedtime mode  
+  
+**canary-372**  
+- Wallpaper depth effect: fixed unwanted transparency on main subject  
+- Fixed keyguard wallpaper dim  
+  
 **canary-371**  
 - A15beta3: Fixed transparent fingerprint color  
   

@@ -42,14 +42,23 @@
 
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Lock screen</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">Status bar</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">Navigation bar</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Phone &amp; dialer</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">Miscellaneous</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">Quick settings panel</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">Theming</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">Package manager</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">Portable hotspot</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Hide SSID</string>
@@ -178,6 +187,7 @@
 	<string name="BB_Opacity_title">Bar opacity</string>
 	<string name="BB_center_align_title">Center Aligned</string>
 	<string name="BB_Thickness_title">Bar thickness</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">Indicate charging</string>
 	<string name="BB_indicate_fast_charging">Indicate fast charging</string>
 	<string name="BB_indicate_power_save">Indicate power save</string>
@@ -348,6 +358,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Disable elastic overscroll effect</string>
 	<string name="overscroll_on_summary">Important: you MUST enable the apps you want to disable overscroll for within LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">Milliseconds</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>
@@ -524,6 +535,7 @@
 	<string name="sleep">Sleep</string>
 
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">Search…</string>
 	<string name="searchpreference_clear">Clear</string>
 	<string name="searchpreference_history_entry">History entry</string>

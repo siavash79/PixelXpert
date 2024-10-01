@@ -1,5 +1,6 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
+import static android.graphics.Color.TRANSPARENT;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static de.robv.android.xposed.XposedBridge.hookAllConstructors;
@@ -15,13 +16,18 @@ import static sh.siava.pixelxpert.modpacks.systemui.BatteryDataProvider.isChargi
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ColorUtils.getColorAttr;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ColorUtils.getColorAttrDefaultColor;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.hookAllMethodsMatchPattern;
+import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.tryHookAllMethods;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Outline;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.TypedValue;
@@ -31,7 +37,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
+
+import java.lang.ref.WeakReference;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -58,7 +68,7 @@ public class KeyguardMods extends XposedModPack {
 	public static final String SHORTCUT_TORCH = "torch";
 	public static final String SHORTCUT_ZEN = "zen";
 	public static final String SHORTCUT_QR_SCANNER = "qrscanner";
-
+	private static final Object WALLPAPER_DIM_AMOUNT_DIMMED = 0.6F; //DefaultDeviceEffectsApplier
 	private static KeyguardMods instance = null;
 
 	private float max_charging_current = 0;
@@ -74,7 +84,7 @@ public class KeyguardMods extends XposedModPack {
 
 	final StringFormatter carrierStringFormatter = new StringFormatter();
 	final StringFormatter clockStringFormatter = new StringFormatter();
-	private TextView KGMiddleCustomTextView;
+	private TextView KGMiddleCustomTextView, mComposeKGMiddleCustomTextView;
 	private static String KGMiddleCustomText = "";
 	LinearLayout mStatusArea = null;
 	private Object KGCS;
@@ -111,6 +121,7 @@ public class KeyguardMods extends XposedModPack {
 	private boolean HideLockScreenUserAvatar = false;
 	private static boolean ForceAODwCharging = false;
 	private Object KeyguardIndicationController;
+	private LinearLayout mComposeSmartSpaceContainer;
 	//endregion
 
 
@@ -150,7 +161,7 @@ public class KeyguardMods extends XposedModPack {
 		if (Key.length > 0) {
 			switch (Key[0]) {
 				case "KGMiddleCustomText":
-					setMiddleText();
+					updateMiddleTexts();
 					break;
 				case "carrierTextValue":
 				case "carrierTextMod":
@@ -183,7 +194,7 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> ScrimStateEnum = findClass("com.android.systemui.statusbar.phone.ScrimState", lpParam.classLoader);
 		Class<?> KeyguardStatusBarViewClass = findClass("com.android.systemui.statusbar.phone.KeyguardStatusBarView", lpParam.classLoader);
 		Class<?> CentralSurfacesImplClass = findClass("com.android.systemui.statusbar.phone.CentralSurfacesImpl", lpParam.classLoader);
-		Class<?> KeyguardBottomAreaViewBinderClass = findClass("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpParam.classLoader);
+		Class<?> KeyguardBottomAreaViewBinderClass = findClassIfExists("com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder", lpParam.classLoader);
 		Class<?> NotificationPanelViewControllerClass = findClass("com.android.systemui.shade.NotificationPanelViewController", lpParam.classLoader); //used to launch camera
 		Class<?> QRCodeScannerControllerClass = findClass("com.android.systemui.qrcodescanner.controller.QRCodeScannerController", lpParam.classLoader);
 //		Class<?> ActivityStarterDelegateClass = findClass("com.android.systemui.ActivityStarterDelegate", lpParam.classLoader);
@@ -192,11 +203,73 @@ public class KeyguardMods extends XposedModPack {
 		Class<?> CommandQueueClass = findClass("com.android.systemui.statusbar.CommandQueue", lpParam.classLoader);
 		Class<?> AmbientDisplayConfigurationClass = findClass("android.hardware.display.AmbientDisplayConfiguration", lpParam.classLoader);
 		Class<?> AssistManagerClass = findClassIfExists("com.android.systemui.assist.AssistManager", lpParam.classLoader);
+		Class<?> DefaultShortcutsSectionClass = findClassIfExists("com.android.systemui.keyguard.ui.view.layout.sections.DefaultShortcutsSection", lpParam.classLoader);
 		if(AssistManagerClass == null)
 		{
 			AssistManagerClass = findClass("com.google.android.systemui.assist.AssistManagerGoogle", lpParam.classLoader);
 		}
 
+		tryHookAllMethods(DefaultShortcutsSectionClass, "addViews", new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				Resources res = mContext.getResources();
+
+				ControlledLaunchableImageViewBackgroundDrawable.captureDrawable(
+						(ImageView) callMethod(param.args[0], "findViewById", res.getIdentifier(
+								"end_button",
+								"id",
+								mContext.getPackageName())));
+
+				ControlledLaunchableImageViewBackgroundDrawable.captureDrawable(
+						(ImageView) callMethod(param.args[0], "findViewById", res.getIdentifier(
+								"start_button",
+								"id",
+								mContext.getPackageName())));
+
+			}
+		});
+
+		Class<?> SmartspaceSectionClass = findClassIfExists("com.android.systemui.keyguard.ui.view.layout.sections.SmartspaceSection", lpParam.classLoader);
+		tryHookAllMethods(SmartspaceSectionClass, "addViews", new XC_MethodHook() {
+			@Override
+			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+				try {
+					mComposeKGMiddleCustomTextView = new TextView(mContext);
+					mComposeKGMiddleCustomTextView.setMaxLines(2);
+					mComposeKGMiddleCustomTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+					mComposeKGMiddleCustomTextView.setLetterSpacing(.03f);
+					mComposeKGMiddleCustomTextView.setId(View.generateViewId());
+
+					mComposeSmartSpaceContainer = (LinearLayout) getObjectField(param.thisObject, "dateWeatherView");
+					mComposeSmartSpaceContainer.setOrientation(LinearLayout.VERTICAL);
+
+					LinearLayout l = new LinearLayout(mContext);
+					l.setLayoutParams(new LinearLayout.LayoutParams(-1,-2));
+					l.setId(View.generateViewId());
+					while(mComposeSmartSpaceContainer.getChildCount() > 0)
+					{
+						View c = mComposeSmartSpaceContainer.getChildAt(0);
+						mComposeSmartSpaceContainer.removeView(c);
+						l.addView(c);
+					}
+					mComposeSmartSpaceContainer.addView(l);
+
+					mComposeSmartSpaceContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+						ViewGroup.LayoutParams lp = v.getLayoutParams();
+						if(lp.width != -1)
+						{
+							lp.width = -1;
+							setObjectField(lp, "rightMargin", getObjectField(lp, "leftMargin"));
+						}
+					});
+
+					updateMiddleTexts();
+					setMiddleColor();
+				}
+				catch (Throwable ignored){}
+			}
+		});
 
 		hookAllMethods(AmbientDisplayConfigurationClass, "alwaysOnEnabled", new XC_MethodHook() {
 			@Override
@@ -272,62 +345,68 @@ public class KeyguardMods extends XposedModPack {
 		//endregion
 
 		//region keyguard bottom area shortcuts and transparency
-		hookAllMethods(KeyguardBottomAreaViewBinderClass, "bind", new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				KeyguardBottomAreaView = param.args[0];
-			}
-		});
 
-		hookAllMethodsMatchPattern(KeyguardBottomAreaViewBinderClass, ".*updateButton", new XC_MethodHook() {
-			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-				ImageView v = (ImageView) param.args[0];
 
-				try {
-					if(Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { //feature deprecated for Android 14
-						String shortcutID = mContext.getResources().getResourceName(v.getId());
+		if(KeyguardBottomAreaViewBinderClass != null)
+		{
+			hookAllMethods(KeyguardBottomAreaViewBinderClass, "bind", new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					KeyguardBottomAreaView = param.args[0];
+				}
+			});
 
-						if (shortcutID.contains("start")) {
-							convertShortcut(v, leftShortcutClick);
-							if (isShortcutSet(v)) {
-								setLongPress(v, leftShortcutLongClick);
-							}
-						} else if (shortcutID.contains("end")) {
-							convertShortcut(v, rightShortcutClick);
-							if (isShortcutSet(v)) {
-								setLongPress(v, rightShortcutLongClick);
+			hookAllMethodsMatchPattern(KeyguardBottomAreaViewBinderClass, ".*updateButton", new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					ImageView v = (ImageView) param.args[0];
+
+					try {
+						if(Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { //feature deprecated for Android 14
+							String shortcutID = mContext.getResources().getResourceName(v.getId());
+
+							if (shortcutID.contains("start")) {
+								convertShortcut(v, leftShortcutClick);
+								if (isShortcutSet(v)) {
+									setLongPress(v, leftShortcutLongClick);
+								}
+							} else if (shortcutID.contains("end")) {
+								convertShortcut(v, rightShortcutClick);
+								if (isShortcutSet(v)) {
+									setLongPress(v, rightShortcutLongClick);
+								}
 							}
 						}
+
+						if (transparentBGcolor) {
+							@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = getColorAttrDefaultColor(
+									mContext,
+									mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
+
+							try {
+								v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
+								v.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+							} catch (Throwable ignored) {}
+						} else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE){
+							@SuppressLint("DiscouragedApi")
+							int mTextColorPrimary = getColorAttrDefaultColor(
+									mContext,
+									mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"));
+
+							@SuppressLint("DiscouragedApi")
+							ColorStateList colorSurface = getColorAttr(
+									mContext,
+									mContext.getResources().getIdentifier("colorSurface", "attr", "android"));
+
+							v.getDrawable().setTint(mTextColorPrimary);
+
+							v.setBackgroundTintList(colorSurface);
+						}
+					} catch (Throwable ignored) {
 					}
-
-					if (transparentBGcolor) {
-						@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = getColorAttrDefaultColor(
-								mContext,
-								mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
-
-						try {
-							v.getDrawable().setTintList(ColorStateList.valueOf(wallpaperTextColorAccent));
-							v.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
-						} catch (Throwable ignored) {}
-					} else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE){
-						@SuppressLint("DiscouragedApi")
-						int mTextColorPrimary = getColorAttrDefaultColor(
-								mContext,
-								mContext.getResources().getIdentifier("textColorPrimary", "attr", "android"));
-
-						@SuppressLint("DiscouragedApi")
-						ColorStateList colorSurface = getColorAttr(
-								mContext,
-								mContext.getResources().getIdentifier("colorSurface", "attr", "android"));
-
-						v.getDrawable().setTint(mTextColorPrimary);
-
-						v.setBackgroundTintList(colorSurface);
-					}
-				} catch (Throwable ignored) {}
-			}
-		});
+				}
+			});
+		}
 
 		//endregion
 
@@ -384,6 +463,7 @@ public class KeyguardMods extends XposedModPack {
 		//endregion
 
 		//region keyguardDimmer
+		//A13 - A14
 		hookAllMethodsMatchPattern(ScrimControllerClass, "scheduleUpdate.*", new XC_MethodHook() {
 			@Override
 			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -396,11 +476,24 @@ public class KeyguardMods extends XposedModPack {
 				}
 			}
 		});
+
+		//A15
+		hookAllMethods(WallpaperManager.class, "getWallpaperDimAmount", new XC_MethodHook() {
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						if ((KeyGuardDimAmount < 0 || KeyGuardDimAmount > 1)
+								|| param.getResult().equals(WALLPAPER_DIM_AMOUNT_DIMMED))
+							return;
+
+						//ref ColorUtils.compositeAlpha - Since KEYGUARD_SCRIM_ALPHA = .2f, we need to range the result between -70 and 255 to get the correct value when composed with 20% - we use 60 to cover float inaccuracies and never see a negative final result
+						param.setResult((325 * KeyGuardDimAmount - 60) / 255);
+					}
+				});
 		//endregion
 
 		carrierStringFormatter.registerCallback(this::setCarrierText);
 
-		clockStringFormatter.registerCallback(this::setMiddleText);
+		clockStringFormatter.registerCallback(this::updateMiddleTexts);
 
 		Resources res = mContext.getResources();
 
@@ -429,12 +522,13 @@ public class KeyguardMods extends XposedModPack {
 				if (mDozing != (boolean) getObjectField(param.thisObject, "mDozing")) {
 					mDozing = !mDozing;
 					setMiddleColor();
-					setShortcutVisibility();
+					//setShortcutVisibility();
 				}
 			}
 		});
 
 		hookAllMethods(KeyguardClockSwitchClass, "onFinishInflate", new XC_MethodHook() {
+			@SuppressLint("DiscouragedApi")
 			@Override
 			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 				try {
@@ -443,6 +537,7 @@ public class KeyguardMods extends XposedModPack {
 					KGMiddleCustomTextView.setMaxLines(2);
 					KGMiddleCustomTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 					KGMiddleCustomTextView.setLetterSpacing(.03f);
+					KGMiddleCustomTextView.setId(View.generateViewId());
 
 					@SuppressLint("DiscouragedApi") int sidePadding = res.getDimensionPixelSize(
 							res.getIdentifier(
@@ -455,12 +550,12 @@ public class KeyguardMods extends XposedModPack {
 							sidePadding,
 							0);
 
-					mStatusArea = ((LinearLayout) getObjectField(param.thisObject, "mStatusArea"));
+					mStatusArea = ((View)param.thisObject).findViewById(mContext.getResources().getIdentifier("keyguard_status_area", "id", lpParam.packageName));
 
-					setMiddleText();
+					updateMiddleTexts();
 					setMiddleColor();
-				} catch (Exception ignored) {
-				}
+
+				} catch (Exception ignored) {}
 			}
 		});
 	}
@@ -622,8 +717,17 @@ public class KeyguardMods extends XposedModPack {
 		}
 		int color = (mDozing || !mSupportsDarkText) ? Color.WHITE : Color.BLACK;
 
-		KGMiddleCustomTextView.setShadowLayer(1, 1, 1, color == Color.BLACK ? Color.TRANSPARENT : Color.BLACK); //shadow only for white color
-		KGMiddleCustomTextView.setTextColor(color);
+		try {
+			mComposeKGMiddleCustomTextView.setShadowLayer(1, 1, 1, color == Color.BLACK ? Color.TRANSPARENT : Color.BLACK); //shadow only for white color
+			mComposeKGMiddleCustomTextView.setTextColor(color);
+		}
+		catch (Throwable ignored) {}
+
+		try {
+			KGMiddleCustomTextView.setShadowLayer(1, 1, 1, color == Color.BLACK ? Color.TRANSPARENT : Color.BLACK); //shadow only for white color
+			KGMiddleCustomTextView.setTextColor(color);
+		}
+		catch (Throwable ignored) {}
 	}
 
 	private void setCarrierText() {
@@ -635,11 +739,29 @@ public class KeyguardMods extends XposedModPack {
 		} catch (Throwable ignored) {} //probably not initiated yet
 	}
 
-	private void setMiddleText() {
+	private void updateMiddleTexts()
+	{
+		CharSequence text = null;
+		if(!KGMiddleCustomText.isEmpty())
+		{
+			text = clockStringFormatter.formatString(KGMiddleCustomText);
+		}
+
+		try {
+			setMiddleText(text);
+		}
+		catch (Throwable ignored){}
+
+		try {
+			setMiddleTextCompose(text);
+		} catch (Throwable ignored) {}
+	}
+
+	private void setMiddleText(CharSequence text) {
 		if (KGCS == null) return;
 
 		mStatusArea.post(() -> {
-			if (KGMiddleCustomText.isEmpty()) {
+			if (text == null) {
 				mStatusArea.removeView(KGMiddleCustomTextView);
 			} else {
 				try {
@@ -648,10 +770,22 @@ public class KeyguardMods extends XposedModPack {
 						((ViewGroup) KGMiddleCustomTextView.getParent()).removeView(KGMiddleCustomTextView);
 					}
 					mStatusArea.addView(KGMiddleCustomTextView, 0);
-					KGMiddleCustomTextView.setText(clockStringFormatter.formatString(KGMiddleCustomText));
-
+					KGMiddleCustomTextView.setText(text);
 				} catch (Exception ignored) {
 				}
+			}
+		});
+	}
+
+	private void setMiddleTextCompose(CharSequence text) {
+		mComposeSmartSpaceContainer.post(() -> {
+			if (text == null) {
+				mComposeSmartSpaceContainer.removeView(mComposeKGMiddleCustomTextView);
+			} else {
+				if(mComposeKGMiddleCustomTextView.getParent() == null) {
+					mComposeSmartSpaceContainer.addView(mComposeKGMiddleCustomTextView);
+				}
+				mComposeKGMiddleCustomTextView.setText(text);
 			}
 		});
 	}
@@ -665,6 +799,175 @@ public class KeyguardMods extends XposedModPack {
 		catch (Throwable ignored)
 		{
 			return ResourceManager.modRes.getString(R.string.power_indication_error);
+		}
+	}
+
+	public static class ControlledLaunchableImageViewBackgroundDrawable extends Drawable
+	{
+		Context mContext;
+		Drawable mDrawable;
+		WeakReference<ImageView> parentImageViewReference;
+
+		public static void captureDrawable(ImageView imageView)
+		{
+			try {
+				Drawable background = imageView.getBackground();
+
+				background = new ControlledLaunchableImageViewBackgroundDrawable(background.getCurrent().mutate(), imageView);
+				imageView.setBackground(background);
+			} catch (Throwable ignored) {}
+		}
+		@Override
+		public Drawable mutate()
+		{
+			return new ControlledLaunchableImageViewBackgroundDrawable(mDrawable.mutate(), parentImageViewReference.get());
+		}
+		public ControlledLaunchableImageViewBackgroundDrawable(Drawable drawable, ImageView parentView)
+		{
+			parentImageViewReference = new WeakReference<>(parentView);
+			mContext = parentView.getContext();
+			mDrawable = drawable;
+		}
+		@Override
+		public void setTint(int tintColor)
+		{
+			if(!transparentBGcolor)
+			{
+				mDrawable.setTint(tintColor);
+			}
+			else
+			{
+				mDrawable.setTint(TRANSPARENT);
+			}
+		}
+
+		@Override
+		public void setTintList(ColorStateList tintList) {
+			if(transparentBGcolor)
+			{
+				mDrawable.setTint(TRANSPARENT);
+
+				ImageView parentView = parentImageViewReference.get();
+				if (parentView != null && parentView.getDrawable() != null) {
+					@SuppressLint("DiscouragedApi") int wallpaperTextColorAccent = getColorAttrDefaultColor(
+							mContext,
+							mContext.getResources().getIdentifier("wallpaperTextColorAccent", "attr", mContext.getPackageName()));
+
+					parentView.getDrawable().setTint(wallpaperTextColorAccent);
+				}
+			}
+			else
+			{
+				mDrawable.setTintList(tintList);
+			}
+		}
+
+		@Override
+		public void draw(@NonNull Canvas canvas) {
+			mDrawable.draw(canvas);
+		}
+
+		@Override
+		public void jumpToCurrentState()
+		{
+			mDrawable.jumpToCurrentState();
+		}
+
+		@Override
+		public void setAlpha(int alpha) {
+			mDrawable.setAlpha(alpha);
+		}
+
+		@Override
+		public void setColorFilter(@Nullable ColorFilter colorFilter) {
+			if(!transparentBGcolor)
+			{
+				mDrawable.setColorFilter(colorFilter);
+			}
+		}
+
+		@Override
+		public int getOpacity() {
+			//noinspection deprecation
+			return mDrawable.getOpacity();
+		}
+
+		@Override
+		public boolean getPadding(Rect padding)
+		{
+			return mDrawable.getPadding(padding);
+		}
+
+		@Override
+		public int getMinimumHeight()
+		{
+			return mDrawable.getMinimumHeight();
+		}
+
+		@Override
+		public int getMinimumWidth()
+		{
+			return mDrawable.getMinimumWidth();
+		}
+
+		@Override
+		public boolean isStateful()
+		{
+			return mDrawable.isStateful();
+		}
+
+		@Override
+		public boolean setVisible(boolean visible, boolean restart)
+		{
+			return mDrawable.setVisible(visible, restart);
+		}
+
+		@Override
+		public void getOutline(Outline outline)
+		{
+			mDrawable.getOutline(outline);
+		}
+
+		@Override
+		public boolean isProjected()
+		{
+			return mDrawable.isProjected();
+		}
+
+		@Override
+		public void setBounds(Rect bounds)
+		{
+			mDrawable.setBounds(bounds);
+		}
+
+		@Override
+		public void setBounds(int l, int t, int r, int b)
+		{
+			mDrawable.setBounds(l,t,r,b);
+		}
+
+		@Override
+		public Drawable getCurrent()
+		{
+			return mDrawable.getCurrent();
+		}
+
+		@Override
+		public boolean setState(int[] stateSet)
+		{
+			return mDrawable.setState(stateSet);
+		}
+
+		@Override
+		public int getIntrinsicWidth()
+		{
+			return mDrawable.getIntrinsicWidth();
+		}
+
+		@Override
+		public int getIntrinsicHeight()
+		{
+			return mDrawable.getIntrinsicHeight();
 		}
 	}
 }

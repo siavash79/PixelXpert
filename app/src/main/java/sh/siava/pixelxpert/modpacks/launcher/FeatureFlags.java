@@ -55,6 +55,11 @@ public class FeatureFlags extends XposedModPack {
 					try {
 						if(param.getResult() == null && ForceThemedLauncherIcons)
 						{
+							if(new Throwable().getStackTrace()[4].getMethodName().toLowerCase().contains("override")) //It's from com.android.launcher3.icons.IconProvider.getIconWithOverrides. Monochrome is included
+							{
+								return;
+							}
+
 							GoogleMonochromeIconFactory mono = (GoogleMonochromeIconFactory) getAdditionalInstanceField(param.thisObject, "mMonoFactoryPX");
 							if(mono == null)
 							{

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!--General strings-->
-	<string name="app_themed_icon_title">Включение альтернативной иконки AOSPMods </string>
+	<string name="app_themed_icon_title">Включение альтернативной иконки </string>
 	<string name="xposed_desc">Настройки для устройств Google Pixel</string>
 	<string name="volume_tile_title">Громкость мультимедиа </string>
 	<string name="app_switch_tile_title">Сменить профиль приложения</string>
@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Помогите нам в переводе %s на ваш язык</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Экран блокировки</string>
+	<string name="lockscreen_header_summary">Изменить клавиатуру по своему вкусу</string>
 	<string name="statusbar_header">Строка состояния</string>
+	<string name="statusbar_header_summary">Эта тонкая полоска, которая показывает полезные данные</string>
 	<string name="nav_header">Панель навигации</string>
+	<string name="nav_header_summary">Измените способ навигации по приложениям</string>
 	<string name="dialer_header">Телефон</string>
+	<string name="dialer_header_summary">Небольшая помощь для телефонных звонков</string>
 	<string name="misc_header">Разное</string>
+	<string name="misc_header_summary">Все, что еще предлагает PixelXpert</string>
 	<string name="qs_panel_category_title">Панель быстрых настроек</string>
+	<string name="qs_panel_category_summary">Ползунок яркости, яркость фонарика и многое другое</string>
 	<string name="theme_customization_category">Иконки и стили</string>
+	<string name="theme_customization_summary">Световая тема в быстрых настройках</string>
 	<string name="pm_header">Менеджер пакетов</string>
+	<string name="pm_header_summary">Обход проверки безопасности apk файлов</string>
 	<string name="hotspot_header">Портативная точка доступа </string>
+	<string name="hotspot_header_summary">Если вы хотите скрыть точку доступа</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Скрыть SSID </string>
 	<string name="hotspot_inactivity_timeout_title">Таймаут бездействия </string>
@@ -225,7 +234,7 @@
 	<string name="wifi_cell_on">Использовать отдельные плитки для WiFi и мобильных данных</string>
 	<string name="wifi_cell_off">Использовать одну плитку интернета</string>
 	<string name="QQS_brightness_category">Параметры ползунка яркости</string>
-	<string name="QS_auto_brightness_title">Ярлык адаптивной яркости</string>
+	<string name="QS_auto_brightness_title">Быстрый доступ к адаптивной яркости</string>
 	<string name="QQS_brightness_title">Показывать ползунок яркости в полураскрытой панели быстрых настроек</string>
 	<string name="QQS_brightness_bottom_title">Переместить ползунок яркости в нижнюю часть быстрых настроек</string>
 	<string name="QS_brightness_disable_title">Скрыть ползунок яркости из быстрых настроек</string>
@@ -310,6 +319,7 @@
 	<string name="notif_always_collapse">Всегда сворачивать</string>
 	<string name="disable_overscroll">Отключить эффект упругости в конце прокрутки</string>
 	<string name="overscroll_on_summary">Важно: Вы ДОЛЖНЫ включить приложения, для которых Вы хотите отключить прокрутку, в LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Контроль фонарика кнопками громкости</string>
 	<string name="milliseconds">Миллисекунды</string>
 	<string name="hours">Часы</string>
 	<string name="system_time_title">Системное время</string>
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">Переключение режима управления одной рукой</string>
 	<string name="sleep">Режим сна</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Поиск</string>
 	<string name="searchpreference_search">Поиск…</string>
 	<string name="searchpreference_clear">Очистить</string>
 	<string name="searchpreference_history_entry">История записей</string>

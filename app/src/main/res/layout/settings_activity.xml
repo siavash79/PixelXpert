@@ -13,12 +13,7 @@
 		android:id="@+id/settings"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_above="@+id/bottomNavigationView"
-		android:layout_below="@+id/header" />
-
-	<include
-		android:id="@+id/header"
-		layout="@layout/view_header" />
+		android:layout_above="@+id/bottomNavigationView" />
 
 	<com.google.android.material.bottomnavigation.BottomNavigationView
 		android:id="@+id/bottomNavigationView"
@@ -26,6 +21,7 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
 		android:layout_gravity="bottom"
+		android:background="?attr/colorSurfaceContainerHighest"
 		app:labelVisibilityMode="auto"
 		app:menu="@menu/bottom_nav_menu" />
 

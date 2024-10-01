@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Aiutaci a tradurre %s nella tua lingua</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Blocco schermo</string>
+	<string name="lockscreen_header_summary">Cambia il tuo keyguard in base al tuo gusto</string>
 	<string name="statusbar_header">Status Bar</string>
+	<string name="statusbar_header_summary">Quella barra sottile che mostra i dati utili</string>
 	<string name="nav_header">NavBar</string>
+	<string name="nav_header_summary">Cambia il modo in cui navighi tra le app</string>
 	<string name="dialer_header">Telefono &amp; Tastierino</string>
+	<string name="dialer_header_summary">Un po\' di aiuto per le telefonate</string>
 	<string name="misc_header">Varie</string>
+	<string name="misc_header_summary">Qualsiasi altra cosa offerta da PixelXpert</string>
 	<string name="qs_panel_category_title">Pannello Quick Settings</string>
+	<string name="qs_panel_category_summary">Cursore luminosità, livello torcia e molto altro</string>
 	<string name="theme_customization_category">Temi</string>
+	<string name="theme_customization_summary">Un tema chiaro nelle impostazioni rapide</string>
 	<string name="pm_header">Gestore pacchetti</string>
+	<string name="pm_header_summary">Ignora i controlli di sicurezza per i file apk</string>
 	<string name="hotspot_header">Hotspot portatile</string>
+	<string name="hotspot_header_summary">Se sei dentro alla roba WiFi nascosta</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Nascondi SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Timeout inattività</string>
@@ -310,6 +319,7 @@
 	<string name="notif_always_collapse">Comprimi sempre</string>
 	<string name="disable_overscroll">Disattiva l\'effetto di overscroll elastico</string>
 	<string name="overscroll_on_summary">Importante: DEVI abilitare le app per le quali desideri disabilitare l\'overscroll all\'interno di LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Controllo torcia con pulsanti volume</string>
 	<string name="milliseconds">Milliseconds</string>
 	<string name="hours">Ore</string>
 	<string name="system_time_title">Ora di sistema</string>
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">Attiva/disattiva modalità a una mano</string>
 	<string name="sleep">Spegni schermo</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Cerca</string>
 	<string name="searchpreference_search">Cerca…</string>
 	<string name="searchpreference_clear">Chiaro</string>
 	<string name="searchpreference_history_entry">Voce della storia</string>

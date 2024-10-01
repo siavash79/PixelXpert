@@ -2,6 +2,7 @@ package sh.siava.pixelxpert.modpacks.systemui;
 
 import static de.robv.android.xposed.XposedBridge.hookAllMethods;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.content.Context;
@@ -37,7 +38,11 @@ public class ThreeButtonNavMods extends XposedModPack {
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) {
 		if (!lpParam.packageName.equals(listenPackage)) return;
 
-		Class<?> NavigationBarInflaterViewClass = findClass("com.android.systemui.navigationbar.NavigationBarInflaterView", lpParam.classLoader);
+		Class<?> NavigationBarInflaterViewClass = findClassIfExists("com.android.systemui.navigationbar.views.NavigationBarInflaterView", lpParam.classLoader);
+		if(NavigationBarInflaterViewClass == null)
+		{
+			NavigationBarInflaterViewClass = findClassIfExists("com.android.systemui.navigationbar.NavigationBarInflaterView", lpParam.classLoader);
+		}
 
 		hookAllMethods(NavigationBarInflaterViewClass, "inflateLayout", new XC_MethodHook() {
 			@Override

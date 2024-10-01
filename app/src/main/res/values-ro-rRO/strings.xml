@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Ajută-ne să traducem %s în limba ta</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Ecran de blocare</string>
+	<string name="lockscreen_header_summary">Schimbă aspectul pe gustul tău</string>
 	<string name="statusbar_header">Bară de stare</string>
+	<string name="statusbar_header_summary">Acea bară subțire care arată date utile</string>
 	<string name="nav_header">Bară de navigare</string>
+	<string name="nav_header_summary">Schimbă modul în care navighezi prin aplicații</string>
 	<string name="dialer_header">Telefon și tastatură numerică</string>
+	<string name="dialer_header_summary">Un mic ajutor pentru apelurile telefonice</string>
 	<string name="misc_header">Diverse</string>
+	<string name="misc_header_summary">Orice altceva oferit de PixelXpert</string>
 	<string name="qs_panel_category_title">Panoul Setări rapide</string>
+	<string name="qs_panel_category_summary">Glisor de luminozitate, nivel lanternă și multe altele</string>
 	<string name="theme_customization_category">Tematică</string>
+	<string name="theme_customization_summary">Temă luminoasă în Setările rapide</string>
 	<string name="pm_header">Manager de pachete</string>
+	<string name="pm_header_summary">Omite verificările de securitate pentru fișierele apk</string>
 	<string name="hotspot_header">Hotspot portabil</string>
+	<string name="hotspot_header_summary">Dacă cunoști chestii ascunse WiFi</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Ascunde SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Expirare inactivitate</string>
@@ -310,6 +319,7 @@
 	<string name="notif_always_collapse">Restrânse întotdeauna</string>
 	<string name="disable_overscroll">Dezactivare efect de derulare elastică</string>
 	<string name="overscroll_on_summary">Important: TREBUIE să activezi aplicațiile pentru care dorești să dezactivezi derularea elastică în LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Controlează lanterna cu butoanele de volum</string>
 	<string name="milliseconds">Milisecunde</string>
 	<string name="hours">Ore</string>
 	<string name="system_time_title">Ora sistemului</string>
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">Comută modul cu o mână</string>
 	<string name="sleep">Somn</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Căutare</string>
 	<string name="searchpreference_search">Căutare…</string>
 	<string name="searchpreference_clear">Elimină</string>
 	<string name="searchpreference_history_entry">Intrare în istoric</string>

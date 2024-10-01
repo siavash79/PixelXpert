@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Låseskjerm</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">Statuslinjen</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">Navigasjonslinje</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Telefon &amp; oppringer</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">Diverse</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">Hurtiginnstillingspanel</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">Tema</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">Pakkeansvarlig</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">Bærbar hotspot</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Gjem SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Tidsavbrudd for inaktivitet</string>
@@ -310,6 +319,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Deaktiver elastisk overrullingseffekt</string>
 	<string name="overscroll_on_summary">Viktig: du MÅ aktivere appene du vil deaktivere overscroll for i LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">Millisekunder</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">Bytt enhåndsmodus</string>
 	<string name="sleep">Sove</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">Søk…</string>
 	<string name="searchpreference_clear">Klar</string>
 	<string name="searchpreference_history_entry">Historieoppføring</string>

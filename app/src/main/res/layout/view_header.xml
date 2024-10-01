@@ -5,9 +5,9 @@
 	android:id="@+id/appBarLayout"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/colorSurfaceContainer"
+	android:background="?attr/colorSurfaceContainerHighest"
 	android:fitsSystemWindows="true"
-	app:liftOnScroll="true">
+	app:liftOnScroll="false">
 
 	<com.google.android.material.appbar.MaterialToolbar
 		android:id="@+id/toolbar"

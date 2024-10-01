@@ -2,7 +2,7 @@
 <resources>
 	<!--General strings-->
 	<string name="app_themed_icon_title">Ikona s alternativní tématikou</string>
-	<string name="xposed_desc">Customizations for Google Pixel devices</string>
+	<string name="xposed_desc">Přizpůsobení zařízení Google Pixel</string>
 	<string name="volume_tile_title">Hlasitost médií</string>
 	<string name="app_switch_tile_title">Přepnout profil aplikace</string>
 	<string name="hide_default">Skrýt (výchozí)</string>
@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Help us in translating %s into your own language</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Uzamknout obrazovku</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">Stavový řádek</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">Navigační lišta</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Telefon &amp;</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">Smíšený</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">Panel rychlého nastavení</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">Theming</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">Správce balíčků</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">Přenosný hotspot</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Skrýt SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Časový limit nečinnosti vypršel</string>
@@ -310,6 +319,7 @@
 	<string name="notif_always_collapse">Always collapse</string>
 	<string name="disable_overscroll">Zakázat efekt elastického přetažení</string>
 	<string name="overscroll_on_summary">Důležité: MUSÍTE povolit aplikace, u kterých chcete zakázat přetáčení v rámci LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Control flashlight with volume buttons</string>
 	<string name="milliseconds">milisekundy</string>
 	<string name="hours">Hours</string>
 	<string name="system_time_title">System time</string>
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">Přepnout režim jedné ruky</string>
 	<string name="sleep">Spát</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">Hledat…</string>
 	<string name="searchpreference_clear">Průhledná</string>
 	<string name="searchpreference_history_entry">Záznam historie</string>

@@ -27,7 +27,7 @@
 	<string name="settings_about_section_title">について</string>
 	<string name="settings_check_for_update_title">アップデートを確認</string>
 	<string name="auto_update_title">アップデートを自動的にチェックする</string>
-	<string name="auto_update_summary">時々新しいバージョンをチェックしてください</string>
+	<string name="auto_update_summary">自動的に新しいバージョンを確認</string>
 	<string name="update_over_wifi_title">WiFi 経由でのみアップデートを確認する</string>
 	<string name="update_over_wifi_summary">Wi-Fi に接続している場合にのみバックグラウンドでアップデートを確認する</string>
 	<string name="github_repo_title">GitHub リポジトリ</string>
@@ -38,14 +38,23 @@
 	<string name="crowdin_summary"></string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">ロック画面</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">ステータスバー</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">ナビゲーションバー</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">電話 &amp; ダイヤラ</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">その他</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">クイック設定パネル</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">テーマ</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">パッケージマネージャー</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">ポータブルホットスポット</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">SSIDを隠します</string>
 	<string name="hotspot_inactivity_timeout_title">非アクティブタイムアウト</string>
@@ -53,21 +62,21 @@
 	<string name="hotspot_disable_approval_title">Hotspot connectivity issues workaround</string>
 	<string name="hotspot_disable_approval_summary">Allow non-\"pre-approved\" clients to connect seamlessly</string>
 	<!--Lock screen related-->
-	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
-	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
-	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
-	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
-	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
-	<string name="depth_wallpaper_model_not_available">AI model isn\'t available on the device (yet)</string>
+	<string name="depth_wallpaper_title">被写体深度エフェクト</string>
+	<string name="depth_wallpaper_summary">壁紙の背景と時計を統合</string>
+	<string name="depth_wallpaper_opacity_title">壁紙の不透過度</string>
+	<string name="depth_wallpaper_aod_title">AOD時も適用</string>
+	<string name="depth_wallpaper_model_ready">AIモデルがデバイスにダウンロードされます</string>
+	<string name="depth_wallpaper_model_not_available">現段階で、AIモデルはこのデバイスでは利用できません</string>
 	<string name="disable_unlock_hint_title">ロック解除ヒントのアニメーションを無効にする</string>
 	<string name="ls_general_options">ロック画面のオプション</string>
 	<string name="hide_avatar_title">ユーザーアバター表示を削除 (マルチユーザーモード)</string>
 	<string name="transparent_fingerprint_circle">ディスプレイ下部の指紋認証の円の表示を削除</string>
 	<string name="transparent_fingerprint_circle_off">指紋認証アイコンを囲む円は表示されています</string>
 	<string name="transparent_fingerprint_circle_on">指紋認証アイコンを囲む円は非表示です</string>
-	<string name="fingerprint_icon">Remove foreground icon from under-display fingerprint</string>
-	<string name="fingerprint_icon_off">Fingerprint icon is active</string>
-	<string name="fingerprint_icon_on">Fingerprint icon will be hidden</string>
+	<string name="fingerprint_icon">指紋アイコンを無効化</string>
+	<string name="fingerprint_icon_off">指紋アイコンは有効です</string>
+	<string name="fingerprint_icon_on">指紋アイコンを非表示にします</string>
 	<string name="custom_text_category">ロック画面に変更をしたテキストを表示します</string>
 	<string name="configure_carrier_text">キャリアテキストの設定 - 画面上部</string>
 	<string name="carrier_text_mod_disabled">キャリアテキスト変更は無効です</string>
@@ -172,14 +181,14 @@
 	<string name="BB_Thickness_title">バーの太さ</string>
 	<string name="BB_indicate_charging">充電中である事を表示</string>
 	<string name="BB_indicate_fast_charging">急速充電の表示</string>
-	<string name="BB_indicate_power_save">Indicate power save</string>
+	<string name="BB_indicate_power_save">バッテリーセーバー表示</string>
 	<string name="BB_warning_level">警告レベルの範囲</string>
 	<string name="BB_warning_tip">両方とも0にするとレベルの設定が無効になります</string>
 	<string name="BB_batteryCriticalColor">致命的レベルの色</string>
 	<string name="BB_batteryWarningColor">警告レベルの色</string>
 	<string name="BB_batteryChargingColor">充電中の色</string>
 	<string name="BB_batteryFastChargingColor">急速充電の色</string>
-	<string name="BB_batteryPowerSaveColor">Power Save color</string>
+	<string name="BB_batteryPowerSaveColor">バッテリーセーバーの色</string>
 	<string name="BB_transit_colors">この範囲内のシェード色</string>
 	<string name="colored_battery_percentage_title">充電中の残量に応じて電池残量（%）に色を付ける</string>
 	<string name="nt_stat_mode_today">今日</string>
@@ -225,7 +234,7 @@
 	<string name="wifi_cell_on">Wi-Fiとモバイルデータのタイルを分離</string>
 	<string name="wifi_cell_off">インターネットタイルを単一表示</string>
 	<string name="QQS_brightness_category">画面の明るさのスライダーの設定</string>
-	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
+	<string name="QS_auto_brightness_title">「明るさの自動調節」のショートカット</string>
 	<string name="QQS_brightness_title">クイック設定パネルに画面の明るさのスライダーを表示</string>
 	<string name="QQS_brightness_bottom_title">画面の明るさのスライダーを下部に移動</string>
 	<string name="QS_brightness_disable_title">クイック設定から画面の明るさのスライダーを非表示</string>
@@ -264,7 +273,7 @@
 	<string name="pm_allow_downgrade_title">アプリのダウングレードを許可する</string>
 	<string name="auto_off_five_minutes">次の 5 分間有効になります</string>
 	<!--Miscellaneous section related-->
-	<string name="launcher_section">Launcher options</string>
+	<string name="launcher_section">ホームの設定</string>
 	<string name="screenshot_sound_disable_title">スクリーンショットの音を無効化</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">制限されたコンテンツからのスクリーンショットを許可する</string>
@@ -297,7 +306,7 @@
 	<string name="force_aod_while_charging_summary">充電中は常に画面をオンにする</string>
 	<string name="doze_header">While screen is off…</string>
 	<string name="custom_themed_icons_title">カスタムテーマアイコン</string>
-	<string name="px_in_settings_title">Add PixelXpert to settings items</string>
+	<string name="px_in_settings_title">PixelXpert を設定画面に追加</string>
 	<string name="custom_themed_icons_off">カスタムアイコン無効</string>
 	<string name="custom_themed_icons_on">カスタムアイコン有効</string>
 	<string name="so_vol_longpress_skip">音量ボタン長押しで曲をスキップ</string>
@@ -310,6 +319,7 @@
 	<string name="notif_always_collapse">常に折りたたむ</string>
 	<string name="disable_overscroll">オーバースクロール効果を無効化</string>
 	<string name="overscroll_on_summary">重要事項: LSPosedでオーバースクロールを無効化するアプリをスコープに追加をする必要があります</string>
+	<string name="control_flashlight_with_volume_keys">音量ボタンでライトを制御</string>
 	<string name="milliseconds">ミリ秒</string>
 	<string name="hours">時間</string>
 	<string name="system_time_title">システム時刻</string>
@@ -390,8 +400,8 @@
 	<string name="app_kill_alert_body">アプリは今すぐ終了します。新しいアイコンをタップすると、再度開くことができます</string>
 	<string name="app_kill_ok_btn">わかりました</string>
 	<!-- Depth Effect Alert -->
-	<string name="depth_effect_alert_title">Attention</string>
-	<string name="depth_effect_alert_body">Use a suitable lockscreen wallpaper where the foreground elements do not obstruct the entire clock on your lock screen, ensuring both visual appeal and functional clarity on your lock screen.\n\nNote: %s.</string>
+	<string name="depth_effect_alert_title">注意</string>
+	<string name="depth_effect_alert_body">被写体深度エフェクトを利用するには、時計全体を覆わない壁紙を使用してください\n\n注: %s</string>
 	<string name="depth_effect_ok_btn">OK</string>
 	<!-- Reboot alert -->
 	<string name="reboot_alert_body">設定を適用するにはシステムの再起動が必要です</string>
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">片手モードの切り替え</string>
 	<string name="sleep">スリープ</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">検索…</string>
 	<string name="searchpreference_clear">クリア</string>
 	<string name="searchpreference_history_entry">履歴エントリ</string>
@@ -478,17 +489,17 @@
 	<string name="navigation_hooks">フック</string>
 	<string name="navigation_settings">設定</string>
 	<!-- Remap Physical Buttons -->
-	<string name="while_screen_is_off_title">While screen is off</string>
-	<string name="while_screen_is_on_title">While screen is on</string>
-	<string name="remap_long_press_power_button_title">Long press power button</string>
-	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
-	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
-	<string name="remap_double_press_power_button_title">Double press power button</string>
-	<string name="torch">Toggle torch</string>
-	<string name="camera">Launch camera</string>
-	<string name="assistant">Launch assistant</string>
-	<string name="do_not_disturb">Toggle Do not disturb</string>
-	<string name="pause_media">Play/Pause media</string>
-	<string name="skip_media_next">Media control - Skip</string>
-	<string name="skip_media_prev">Media control - Previous</string>
+	<string name="while_screen_is_off_title">画面がオフのとき</string>
+	<string name="while_screen_is_on_title">画面がオンのとき</string>
+	<string name="remap_long_press_power_button_title">電源ボタンを長押し</string>
+	<string name="remap_long_press_volume_up_button_title">音量上ボタンを長押し</string>
+	<string name="remap_long_press_volume_down_button_title">音量下ボタンを長押し</string>
+	<string name="remap_double_press_power_button_title">電源ボタンを2回押す</string>
+	<string name="torch">ライト</string>
+	<string name="camera">カメラを起動</string>
+	<string name="assistant">アシスタントアプリを起動</string>
+	<string name="do_not_disturb">サイレント モード</string>
+	<string name="pause_media">メディアの再生/一時停止</string>
+	<string name="skip_media_next">再生中のメディアをスキップ</string>
+	<string name="skip_media_prev">前のメディアに戻る</string>
 </resources>

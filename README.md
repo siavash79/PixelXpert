@@ -31,7 +31,7 @@ Currently, PixelXpert offers customizations on different aspects of system frame
 <hr>
 
 ### **Compatibility:**
-PixelXpert is only fully compatible with pixel stock firmware. Any custom ROM is not tested and may not be fully (or even at all) compatible.
+PixelXpert is ONLY compatible with pixel stock firmware on Google Pixel devices. Any custom ROM (including PE, PE plus, pixel plus ui and etc) or stock ROM outside stock pixel firmware on Google pixel devices (e.g. OneUI on Samsung, MIUI on Xiaomi and etc) is not supported and may not be fully (or even at all) compatible.
 
 Here is the compatibility chart according to different android versions and QPRs:
 
@@ -40,13 +40,13 @@ Here is the compatibility chart according to different android versions and QPRs
 - Android 13 stable QPR3 (starting from December 2022 firmware till QPR3): [starting with v.2.5](https://github.com/siavash79/PixelXpert/releases/tag/v2.5.0) up until the latest stable/canary versions.
 - Android 14: [starting with v.2.9](https://github.com/siavash79/PixelXpert/releases/tag/v2.9.0) up until the latest stable/canary versions.
 <hr>
-- Android 14 QPR2 beta builds not yet fully compatible. Please be patient until we iron out the incompatibilities caused by code changes in source (source code not available for QPR beta)
+- Android 15 beta builds: only latest canary version (anytime)
 <hr>
 
 ### **Prerequisites:**
 - Compatible ROM (see Compatibility text above)
 - Device Rooted with Magisk 24.2+ or KSU
-- LSPosed (Zygisk Version preferred)
+- LSPosed (Zygisk Version preferred) (For Android 14+ use [LSPosed_mod](https://github.com/mywalkb/LSPosed_mod/releases))
 <hr>
 
 ### **How to install:**

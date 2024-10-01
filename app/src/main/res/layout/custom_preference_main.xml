@@ -1,81 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginHorizontal="@dimen/ui_container_margin_side"
-	android:layout_marginVertical="6dp"
-	android:background="@drawable/container"
+	android:layout_marginBottom="2dp"
+	android:background="@drawable/container_mid"
 	android:baselineAligned="false"
+	android:clipToPadding="false"
 	android:gravity="center_vertical"
+	android:minHeight="72dp"
 	android:orientation="horizontal"
-	android:paddingVertical="18dp"
-	android:paddingStart="23dp"
-	android:paddingEnd="16dp"
-	tools:ignore="RtlSymmetry">
+	android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+	android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
-	<ImageView
-		android:id="@android:id/icon"
-		android:layout_width="56dp"
-		android:layout_height="56dp"
-		android:layout_alignParentStart="true"
-		android:layout_centerVertical="true"
-		android:layout_marginEnd="18dp"
-		android:background="@drawable/icon_background"
-		android:contentDescription="@android:string/untitled"
-		android:scaleType="centerInside"
-		android:visibility="gone"
-		app:tint="?attr/colorOnSurface" />
+	<LinearLayout
+		android:id="@+id/icon_frame"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="-8dp"
+		android:gravity="center"
+		android:minWidth="40dp"
+		android:minHeight="40dp"
+		android:orientation="horizontal"
+		tools:ignore="RtlSymmetry">
+
+		<ImageView
+			android:id="@android:id/icon"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:contentDescription="@android:string/untitled"
+			android:scaleType="centerInside"
+			app:tint="?attr/colorOnSurface" />
+
+	</LinearLayout>
 
 	<RelativeLayout
-		android:id="@+id/content"
-		android:layout_width="match_parent"
+		android:id="@+id/text_frame"
+		android:layout_width="0dp"
 		android:layout_height="wrap_content"
-		android:layout_centerVertical="true"
-		android:layout_gravity="center_vertical"
-		android:layout_toStartOf="@id/arrow_icon"
-		android:layout_toEndOf="@android:id/icon">
+		android:layout_weight="1"
+		android:paddingStart="16dp"
+		android:paddingTop="16dp"
+		android:paddingEnd="16dp"
+		android:paddingBottom="16dp">
 
-		<com.google.android.material.textview.MaterialTextView
+		<TextView
 			android:id="@android:id/title"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="start"
 			android:ellipsize="marquee"
-			android:fadingEdge="horizontal"
-			android:fontFamily="sans-serif-medium"
+			android:hyphenationFrequency="normalFast"
+			android:lineBreakWordStyle="phrase"
 			android:singleLine="true"
-			android:textColor="?attr/colorOnSurface"
-			android:textSize="16sp"
-			android:textStyle="normal" />
+			android:textAlignment="viewStart"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:textColor="?attr/colorOnSurface" />
 
-		<com.google.android.material.textview.MaterialTextView
+		<TextView
 			android:id="@android:id/summary"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_below="@android:id/title"
 			android:layout_alignStart="@android:id/title"
-			android:layout_marginTop="2dp"
-			android:alpha="0.7"
-			android:fontFamily="sans-serif"
-			android:lineSpacingExtra="3sp"
+			android:layout_gravity="start"
+			android:alpha="0.8"
+			android:hyphenationFrequency="normalFast"
+			android:lineBreakWordStyle="phrase"
 			android:maxLines="4"
-			android:textColor="?attr/colorOnSurface"
-			android:textSize="14sp"
-			android:textStyle="normal" />
+			android:textAlignment="viewStart"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:textColor="?attr/colorOnSurfaceVariant" />
 
 	</RelativeLayout>
-
-	<ImageView
-		android:id="@+id/arrow_icon"
-		android:layout_width="24dp"
-		android:layout_height="24dp"
-		android:layout_alignParentEnd="true"
-		android:layout_centerVertical="true"
-		android:layout_marginStart="16dp"
-		android:contentDescription="@android:string/untitled"
-		android:scaleType="centerInside"
-		android:src="@drawable/ic_arrow_right"
-		app:tint="?attr/colorOnSurface" />
-
-</RelativeLayout>
+</LinearLayout>

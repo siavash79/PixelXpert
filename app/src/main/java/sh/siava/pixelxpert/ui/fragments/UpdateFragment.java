@@ -29,7 +29,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import com.topjohnwu.superuser.Shell;
@@ -57,7 +56,7 @@ import sh.siava.pixelxpert.utils.ExtendedSharedPreferences;
 import sh.siava.pixelxpert.utils.PreferenceHelper;
 
 
-public class UpdateFragment extends Fragment {
+public class UpdateFragment extends BaseFragment {
 	public static final String MOD_NAME = "PixelXpert";
 	public static final String MAGISK_UPDATE_DIR = "/data/adb/modules_update";
 	public static final String MAGISK_MODULES_DIR = "/data/adb/modules";
@@ -121,6 +120,11 @@ public class UpdateFragment extends Fragment {
 	private boolean rebootPending = false;
 	//	private boolean downloadStarted = false;
 	private boolean installFullVersion = false;
+
+	@Override
+	public String getTitle() {
+		return getString(R.string.menu_updates);
+	}
 
 	@Override
 	public View onCreateView(

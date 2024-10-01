@@ -38,14 +38,23 @@
 	<string name="crowdin_summary">Aidez-nous à traduire %s dans votre propre langue</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Écran de verrouillage</string>
+	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
 	<string name="statusbar_header">Barre d’état</string>
+	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
 	<string name="nav_header">Barre de navigation</string>
+	<string name="nav_header_summary">Change the way you navigate through apps</string>
 	<string name="dialer_header">Numéroteur du téléphone &amp;</string>
+	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
 	<string name="misc_header">Divers</string>
+	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
 	<string name="qs_panel_category_title">Fenêtre de configuration rapide</string>
+	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
 	<string name="theme_customization_category">Thèmes et styles</string>
+	<string name="theme_customization_summary">A light theme on Quick Settings</string>
 	<string name="pm_header">Gestion des applications</string>
+	<string name="pm_header_summary">Bypass security checks for apk files</string>
 	<string name="hotspot_header">Un hotspot portable</string>
+	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Masquer le SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Délai d\'inactivité</string>
@@ -225,7 +234,7 @@
 	<string name="wifi_cell_on">Utiliser deux blocs séparés pour les données mobiles et le Wi-Fi</string>
 	<string name="wifi_cell_off">Utiliser un bloc Internet</string>
 	<string name="QQS_brightness_category">Préférence pour le curseur de luminosité</string>
-	<string name="QS_auto_brightness_title">Adaptive brightness shortcut</string>
+	<string name="QS_auto_brightness_title">Raccourci de luminosité adaptative</string>
 	<string name="QQS_brightness_title">Montrer le curseur de luminosité dans la fenêtre de configuration rapide</string>
 	<string name="QQS_brightness_bottom_title">Bouger le curseur en bas</string>
 	<string name="QS_brightness_disable_title">Cacher le curseur</string>
@@ -258,13 +267,13 @@
 	<string name="taskbar_force_enable_title">Forcer l’activation</string>
 	<string name="taskbar_force_disable_title">Forcer la désactivation</string>
 	<string name="taskbar_transient_title">Masquage automatique</string>
-	<string name="remap_physical_buttons_title">Remap physical buttons</string>
+	<string name="remap_physical_buttons_title">Redéfinir les boutons physiques</string>
 	<!-- Package manager -->
 	<string name="pm_bypass_signature_title">Contourner la vérification des signatures des paquets</string>
 	<string name="pm_allow_downgrade_title">Autoriser le rétrogradage des applications</string>
 	<string name="auto_off_five_minutes">Actif pour les cinq prochaines minutes</string>
 	<!--Miscellaneous section related-->
-	<string name="launcher_section">Launcher options</string>
+	<string name="launcher_section">Options du Lanceur</string>
 	<string name="screenshot_sound_disable_title">Désactiver le son des captures d’écran</string>
 	<!--string name="screenshot_chord_insecure">VolDown+Power unrestricted screenshot</string-->
 	<string name="screenshot_insecure">Autoriser les captures d\'écran à partir de contenus restreints</string>
@@ -310,6 +319,7 @@
 	<string name="notif_always_collapse">Toujours réduire</string>
 	<string name="disable_overscroll">Désactiver l’effet elastique de fin de défilement</string>
 	<string name="overscroll_on_summary">Important : les applications dans lesquelles l’effet sera actif sont celles activées dans LSPosed</string>
+	<string name="control_flashlight_with_volume_keys">Contrôlez la lampe de poche avec les boutons de volume</string>
 	<string name="milliseconds">Millisecondes</string>
 	<string name="hours">Heures</string>
 	<string name="system_time_title">Heure du système</string>
@@ -447,6 +457,7 @@
 	<string name="toggle_one_handed">Basculer en mode à une main</string>
 	<string name="sleep">En veille</string>
 	<!-- Search Preference -->
+	<string name="searchpreference_title">Search</string>
 	<string name="searchpreference_search">Recherche…</string>
 	<string name="searchpreference_clear">Nettoyé</string>
 	<string name="searchpreference_history_entry">Saisie de l\'historique</string>
@@ -478,17 +489,17 @@
 	<string name="navigation_hooks">Crochets</string>
 	<string name="navigation_settings">Paramètres</string>
 	<!-- Remap Physical Buttons -->
-	<string name="while_screen_is_off_title">While screen is off</string>
-	<string name="while_screen_is_on_title">While screen is on</string>
-	<string name="remap_long_press_power_button_title">Long press power button</string>
-	<string name="remap_long_press_volume_up_button_title">Long press volume up button</string>
-	<string name="remap_long_press_volume_down_button_title">Long press volume down button</string>
-	<string name="remap_double_press_power_button_title">Double press power button</string>
-	<string name="torch">Toggle torch</string>
-	<string name="camera">Launch camera</string>
-	<string name="assistant">Launch assistant</string>
-	<string name="do_not_disturb">Toggle Do not disturb</string>
-	<string name="pause_media">Play/Pause media</string>
-	<string name="skip_media_next">Media control - Skip</string>
-	<string name="skip_media_prev">Media control - Previous</string>
+	<string name="while_screen_is_off_title">Lorsque l\'écran est éteint</string>
+	<string name="while_screen_is_on_title">Lorsque l\'écran est allumé</string>
+	<string name="remap_long_press_power_button_title">Appui prolongé sur le bouton Marche/Arrêt</string>
+	<string name="remap_long_press_volume_up_button_title">Appui long sur le bouton Volume haut</string>
+	<string name="remap_long_press_volume_down_button_title">Appui long sur le bouton Volume bas</string>
+	<string name="remap_double_press_power_button_title">Appui rapide deux fois sur le bouton Marche/Arrêt</string>
+	<string name="torch">Activer/désactiver la lampe</string>
+	<string name="camera">Lancer l’appareil photo</string>
+	<string name="assistant">Lancer l\'Assistant Vocal</string>
+	<string name="do_not_disturb">Activer/désactiver le mode \"Ne pas déranger\"</string>
+	<string name="pause_media">Lecture/Pause de la musique</string>
+	<string name="skip_media_next">Contrôle des médias - Passer</string>
+	<string name="skip_media_prev">Contrôle du média - Précédent</string>
 </resources>

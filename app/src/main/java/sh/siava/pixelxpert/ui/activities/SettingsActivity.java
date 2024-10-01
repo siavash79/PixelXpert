@@ -29,7 +29,6 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -75,22 +74,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	private HeaderFragment headerFragment;
 	private static SearchPreferenceItem[] searchItems = null;
 
-	private static ActionBar actionBar;
-
-	public static void backButtonEnabled() {
-		if (actionBar != null) {
-			actionBar.setDisplayHomeAsUpEnabled(true);
-			actionBar.setDisplayShowHomeEnabled(true);
-		}
-	}
-
-	public static void backButtonDisabled() {
-		if (actionBar != null) {
-			actionBar.setDisplayHomeAsUpEnabled(false);
-			actionBar.setDisplayShowHomeEnabled(false);
-		}
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(@NonNull Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -107,8 +90,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 		createNotificationChannel();
 		fragmentManager = getSupportFragmentManager();
-		setSupportActionBar(binding.header.toolbar);
-		actionBar = getSupportActionBar();
 		initSearchableItems();
 
 		PreferenceHelper.init(ExtendedSharedPreferences.from(getDefaultSharedPreferences(createDeviceProtectedStorageContext())));
@@ -117,8 +98,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 		if (savedInstanceState == null) {
 			replaceFragment(new HeaderFragment());
-		} else {
-			setHeader(this, savedInstanceState.getCharSequence(TITLE_TAG));
 		}
 
 		if (getIntent() != null && getIntent().getBooleanExtra("updateTapped", false)) {
@@ -142,8 +121,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 		setupBottomNavigationView();
 
-		if (!isLikelyPixelBuild() && !BuildConfig.DEBUG)
-		{
+		if (!isLikelyPixelBuild() && !BuildConfig.DEBUG) {
 			new MaterialAlertDialogBuilder(this, R.style.MaterialComponents_MaterialAlertDialog)
 					.setTitle(R.string.incompatible_alert_title)
 					.setMessage(R.string.incompatible_alert_body)
@@ -185,23 +163,15 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 			if (Objects.equals(tag, HeaderFragment.class.getSimpleName())) {
 				selectedFragment = R.id.navigation_home;
 				binding.bottomNavigationView.getMenu().getItem(0).setChecked(true);
-				setHeader(this, getString(R.string.app_name));
-				backButtonDisabled();
 			} else if (Objects.equals(tag, UpdateFragment.class.getSimpleName())) {
 				selectedFragment = R.id.navigation_update;
 				binding.bottomNavigationView.getMenu().getItem(1).setChecked(true);
-				setHeader(this, getString(R.string.menu_updates));
-				backButtonEnabled();
 			} else if (Objects.equals(tag, HooksFragment.class.getSimpleName())) {
 				selectedFragment = R.id.navigation_hooks;
 				binding.bottomNavigationView.getMenu().getItem(2).setChecked(true);
-				setHeader(this, getString(R.string.hooked_packages_title));
-				backButtonEnabled();
 			} else if (Objects.equals(tag, OwnPrefsFragment.class.getSimpleName())) {
 				selectedFragment = R.id.navigation_settings;
 				binding.bottomNavigationView.getMenu().getItem(3).setChecked(true);
-				setHeader(this, getString(R.string.own_prefs_header));
-				backButtonEnabled();
 			}
 		});
 
@@ -327,16 +297,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		if (Objects.equals(getTopFragment(), HeaderFragment.class.getSimpleName())) {
-			backButtonDisabled();
-		} else {
-			backButtonEnabled();
-		}
-	}
-
-	@Override
 	public boolean onSupportNavigateUp() {
 		if (getSupportFragmentManager().popBackStackImmediate()) {
 			return true;
@@ -353,8 +313,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		fragment.setTargetFragment(caller, 0);
 		// Replace the existing Fragment with the new Fragment
 		replaceFragment(fragment);
-		setHeader(this, pref.getTitle());
-		backButtonEnabled();
 		return true;
 	}
 
@@ -419,6 +377,11 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		SearchPreference searchPreference;
 
 		@Override
+		public boolean isBackButtonEnabled() {
+			return false;
+		}
+
+		@Override
 		public String getTitle() {
 			return getString(R.string.app_name);
 		}
@@ -426,6 +389,11 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		@Override
 		public int getLayoutResource() {
 			return R.xml.header_preferences;
+		}
+
+		@Override
+		protected int getDefaultThemeResource() {
+			return R.style.PrefsThemeCollapsingToolbar;
 		}
 
 		@Override
@@ -462,12 +430,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 					}
 				}
 			}
-		}
-
-		@Override
-		public void onResume() {
-			super.onResume();
-			backButtonDisabled();
 		}
 	}
 
@@ -1075,14 +1037,14 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 			PackageManager packageManager = getActivity().getPackageManager();
 
 			packageManager.setComponentEnabledSetting(
-					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".SplashScreenActivityNormalIcon"),
+					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".FakeSplashActivityNormalIcon"),
 					alternativeThemedAppIconEnabled ? PackageManager.COMPONENT_ENABLED_STATE_DISABLED : PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
 					PackageManager.DONT_KILL_APP
 			);
 
 			// Enable themed app icon component
 			packageManager.setComponentEnabledSetting(
-					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".SplashScreenActivityAlternateIcon"),
+					new ComponentName(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID + ".FakeSplashActivityAlternateIcon"),
 					alternativeThemedAppIconEnabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
 					PackageManager.DONT_KILL_APP
 			);

@@ -9,6 +9,7 @@ commonsText = "1.11.0"
 concurrentFutures = "1.2.0"
 constraintlayout = "2.1.4"
 coreSplashscreen = "1.0.1"
+gradle = "8.5.2"
 markdown = "0.19.0"
 libsuVersion = "5.2.2"
 android-material = "1.12.0"
@@ -25,6 +26,7 @@ remotepreferences = "0.8"
 swiperefreshlayout = "1.2.0-alpha01"
 uiGeometry = "1.7.2"
 workRuntime = "2.9.1"
+kotlin = "1.8.0"
 
 [libraries]
 androidx-activity = { module = "androidx.activity:activity", version.ref = "activity" }
@@ -41,6 +43,8 @@ androidx-concurrent-futures = { module = "androidx.concurrent:concurrent-futures
 collapsingtoolbarlayout-subtitle = { module = "com.hendraanggrian.material:collapsingtoolbarlayout-subtitle", version.ref = "collapsingtoolbarlayoutSubtitle" }
 colorpicker = { module = "com.jaredrummler:colorpicker", version.ref = "colorpicker" }
 apache-commons-text = { module = "org.apache.commons:commons-text", version.ref = "commonsText" }
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin"}
 markdown = { module = "com.github.tiagohm.MarkdownView:library", version.ref = "markdown" }
 android-material = { module = "com.google.android.material:material", version.ref = "android-material" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtxVersion" }

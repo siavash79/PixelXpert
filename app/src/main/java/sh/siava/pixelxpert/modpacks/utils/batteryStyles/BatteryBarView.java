@@ -206,10 +206,12 @@ public class BatteryBarView extends FrameLayout {
 		chargingIndicatorView = new ImageView(context);
 		chargingIndicatorView.setLayoutParams(new LayoutParams(20, barHeight));
 		chargingIndicatorView.setBackgroundColor(singleColorTone);
+		chargingIndicatorView.setAlpha(alphaPct / 100f);
 
 		chargingIndicatorViewForCenter = new ImageView(context);
 		chargingIndicatorViewForCenter.setLayoutParams(new LayoutParams(20, barHeight));
 		chargingIndicatorViewForCenter.setBackgroundColor(singleColorTone);
+		chargingIndicatorViewForCenter.setAlpha(alphaPct / 100f);
 
 		maskLayout = new FrameLayout(context);
 		maskLayout.addView(barView);
@@ -344,6 +346,9 @@ public class BatteryBarView extends FrameLayout {
 	public void setAlphaPct(int alphaPct) {
 		this.alphaPct = alphaPct;
 		mDrawable.setAlpha(Math.round(alphaPct * 2.55f));
+		if (chargingIndicatorView != null) chargingIndicatorView.setAlpha(alphaPct / 100f);
+		if (chargingIndicatorViewForCenter != null) chargingIndicatorViewForCenter.setAlpha(alphaPct / 100f);
+
 	}
 
 	public void setEnabled(boolean enabled) {

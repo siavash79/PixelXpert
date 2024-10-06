@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">Palkin läpinäkyvyys</string>
 	<string name="BB_center_align_title">Keskitetty</string>
 	<string name="BB_Thickness_title">Tangon paksuus</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">Ilmoita lataus</string>
 	<string name="BB_indicate_fast_charging">Ilmoita pikalatauksesta</string>
 	<string name="BB_indicate_power_save">Indicate power save</string>

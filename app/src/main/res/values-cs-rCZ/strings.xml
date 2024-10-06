@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">Neprůhlednost pruhu</string>
 	<string name="BB_center_align_title">Zarovnáno na střed</string>
 	<string name="BB_Thickness_title">Tloušťka tyče</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">Označte nabíjení</string>
 	<string name="BB_indicate_fast_charging">Označte rychlé nabíjení</string>
 	<string name="BB_indicate_power_save">Indicate power save</string>

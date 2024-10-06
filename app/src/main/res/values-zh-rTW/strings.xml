@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">不透明度</string>
 	<string name="BB_center_align_title">居中對齊</string>
 	<string name="BB_Thickness_title">粗細度</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">充電顯示</string>
 	<string name="BB_indicate_fast_charging">快充顯示</string>
 	<string name="BB_indicate_power_save">顯示省電模式已開啟</string>

@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">Opacità barra</string>
 	<string name="BB_center_align_title">Centrata</string>
 	<string name="BB_Thickness_title">Spessore barra</string>
+	<string name="BB_animate_charging">Carica animata</string>
 	<string name="BB_indicate_charging">Indica ricarica</string>
 	<string name="BB_indicate_fast_charging">Indica ricarica rapida</string>
 	<string name="BB_indicate_power_save">Indicare risparmio energetico</string>

@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">Barondoorzichtigheid</string>
 	<string name="BB_center_align_title">Midden uitgelijnd</string>
 	<string name="BB_Thickness_title">Staafdikte</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">Geef opladen aan</string>
 	<string name="BB_indicate_fast_charging">Geef snel opladen aan</string>
 	<string name="BB_indicate_power_save">Indicate power save</string>

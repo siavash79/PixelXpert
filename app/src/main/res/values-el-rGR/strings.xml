@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">Αδιαφάνεια γραμμής</string>
 	<string name="BB_center_align_title">Στοίχιση στο κέντρο</string>
 	<string name="BB_Thickness_title">Πάχος ράβδου</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">Υποδείξτε τη φόρτιση</string>
 	<string name="BB_indicate_fast_charging">Υποδεικνύει γρήγορη φόρτιση</string>
 	<string name="BB_indicate_power_save">Indicate power save</string>

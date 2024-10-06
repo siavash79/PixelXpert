@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">Прозрачность строки</string>
 	<string name="BB_center_align_title">Выравнивание по центру</string>
 	<string name="BB_Thickness_title">Толщина строки</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">Индикатор зарядки</string>
 	<string name="BB_indicate_fast_charging">Индикатор быстрой зарядки</string>
 	<string name="BB_indicate_power_save">Индикатор энергосбережения</string>

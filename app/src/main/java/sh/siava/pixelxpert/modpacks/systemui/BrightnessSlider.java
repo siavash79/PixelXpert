@@ -253,8 +253,9 @@ public class BrightnessSlider extends XposedModPack {
 
 		hookAllMethods(QSPanelClass, "setBrightnessViewMargin", new XC_MethodHook() {
 			@Override
-			protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 				setSliderMargins((View) getObjectField(param.thisObject, "mBrightnessView"));
+				param.setResult(null);
 			}
 		});
 
@@ -388,10 +389,18 @@ public class BrightnessSlider extends XposedModPack {
 			Resources res = mContext.getResources();
 			ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) slider.getLayoutParams();
 
+			int offset = 0;
+			try {
+				offset = res.getDimensionPixelSize(
+						res.getIdentifier("rounded_slider_boundary_offset", "dimen", mContext.getPackageName()));
+			} catch (Throwable ignored) {/*It's older than 15 then*/}
+
 			int top = res.getDimensionPixelSize(
-					res.getIdentifier("qs_brightness_margin_top", "dimen", mContext.getPackageName()));
+					res.getIdentifier("qs_brightness_margin_top", "dimen", mContext.getPackageName()))
+					- offset;
 			int bottom = res.getDimensionPixelSize(
-					res.getIdentifier("qs_brightness_margin_bottom", "dimen", mContext.getPackageName()));
+					res.getIdentifier("qs_brightness_margin_bottom", "dimen", mContext.getPackageName()))
+					- offset;
 
 			lp.topMargin = (BrightnessSliderOnBottom)
 					? bottom

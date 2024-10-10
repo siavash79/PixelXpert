@@ -194,6 +194,11 @@ public class BatteryBarView extends FrameLayout {
 	public BatteryBarView(Context context) {
 		super(context);
 		instance = this;
+
+		chargingIndicatorView = new ImageView(context);
+		chargingIndicatorViewForCenter = new ImageView(context);
+		initChargingAnimationView();
+
 		this.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
 		mDrawable.setShape(new RectShape());
@@ -202,16 +207,6 @@ public class BatteryBarView extends FrameLayout {
 
 		barView = new ImageView(context);
 		barView.setImageDrawable(mDrawable);
-
-		chargingIndicatorView = new ImageView(context);
-		chargingIndicatorView.setLayoutParams(new LayoutParams(20, barHeight));
-		chargingIndicatorView.setBackgroundColor(singleColorTone);
-		chargingIndicatorView.setAlpha(alphaPct / 100f);
-
-		chargingIndicatorViewForCenter = new ImageView(context);
-		chargingIndicatorViewForCenter.setLayoutParams(new LayoutParams(20, barHeight));
-		chargingIndicatorViewForCenter.setBackgroundColor(singleColorTone);
-		chargingIndicatorViewForCenter.setAlpha(alphaPct / 100f);
 
 		maskLayout = new FrameLayout(context);
 		maskLayout.addView(barView);
@@ -231,6 +226,17 @@ public class BatteryBarView extends FrameLayout {
 		BatteryBarView instance = this;
 		BatteryDataProvider.registerInfoCallback(() -> instance.post(instance::refreshLayout));
 	}
+
+	private void initChargingAnimationView() {
+		ViewGroup.LayoutParams lp = new LayoutParams(20, barHeight);
+
+		chargingIndicatorView.setLayoutParams(lp);
+		chargingIndicatorViewForCenter.setLayoutParams(lp);
+
+		chargingIndicatorView.setBackgroundColor(singleColorTone);
+		chargingIndicatorViewForCenter.setBackgroundColor(singleColorTone);
+	}
+
 	@Override
 	public void setLayoutDirection(int direction) {
 		super.setLayoutDirection(direction);
@@ -346,8 +352,9 @@ public class BatteryBarView extends FrameLayout {
 	public void setAlphaPct(int alphaPct) {
 		this.alphaPct = alphaPct;
 		mDrawable.setAlpha(Math.round(alphaPct * 2.55f));
-		if (chargingIndicatorView != null) chargingIndicatorView.setAlpha(alphaPct / 100f);
-		if (chargingIndicatorViewForCenter != null) chargingIndicatorViewForCenter.setAlpha(alphaPct / 100f);
+
+		chargingIndicatorView.setAlpha(alphaPct / 100f);
+		chargingIndicatorViewForCenter.setAlpha(alphaPct / 100f);
 
 	}
 

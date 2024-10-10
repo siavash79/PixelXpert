@@ -1,3 +1,7 @@
+**canary-394**  
+- Battery bar: fixed charging animation opacity  
+- A15: Fixed increased brightness slider margins  
+  
 **canary-393**  
 - Added charging animation option to the battery bar (Thanks to: OnePlus Customizer dev: @DHD2280)  
   

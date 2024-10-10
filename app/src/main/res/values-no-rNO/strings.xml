@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">Bar opasitet</string>
 	<string name="BB_center_align_title">Senterjustert</string>
 	<string name="BB_Thickness_title">Bar tykkelse</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">Indiker lading</string>
 	<string name="BB_indicate_fast_charging">Indikerer hurtiglading</string>
 	<string name="BB_indicate_power_save">Indicate power save</string>

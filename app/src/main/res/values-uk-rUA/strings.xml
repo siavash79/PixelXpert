@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">Прозорість рядку</string>
 	<string name="BB_center_align_title">Вирівняно по центру</string>
 	<string name="BB_Thickness_title">Товщина рядку</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">Позначати заряджання</string>
 	<string name="BB_indicate_fast_charging">Позначати швидке заряджання</string>
 	<string name="BB_indicate_power_save">Показати режим енергоощадження</string>

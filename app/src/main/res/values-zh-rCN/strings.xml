@@ -38,23 +38,23 @@
 	<string name="crowdin_summary">帮助我们将 %s 翻译成您的语言</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">锁屏</string>
-	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
+	<string name="lockscreen_header_summary">把屏幕锁改成合你口味的样子</string>
 	<string name="statusbar_header">状态栏</string>
-	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
+	<string name="statusbar_header_summary">小小一条杠，信息大有用</string>
 	<string name="nav_header">导航栏</string>
-	<string name="nav_header_summary">Change the way you navigate through apps</string>
+	<string name="nav_header_summary">改变您穿梭于 App 之间的方式</string>
 	<string name="dialer_header">电话与拨号</string>
-	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
+	<string name="dialer_header_summary">为您的电话拨打提供一些助力</string>
 	<string name="misc_header">杂项</string>
-	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
+	<string name="misc_header_summary">PixelXpert 提供的其他功能</string>
 	<string name="qs_panel_category_title">磁贴面板</string>
-	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
+	<string name="qs_panel_category_summary">亮度滑块，闪光灯级别等更多内容</string>
 	<string name="theme_customization_category">主题</string>
-	<string name="theme_customization_summary">A light theme on Quick Settings</string>
+	<string name="theme_customization_summary">亮色主题的快速设置</string>
 	<string name="pm_header">包管理器</string>
-	<string name="pm_header_summary">Bypass security checks for apk files</string>
+	<string name="pm_header_summary">跳过 APK 文件的安全检查</string>
 	<string name="hotspot_header">热点</string>
-	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
+	<string name="hotspot_header_summary">如果您要深挖 WiFi 隐藏的功能</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">隐藏 SSID</string>
 	<string name="hotspot_inactivity_timeout_title">自动关闭时间</string>
@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">不透明度</string>
 	<string name="BB_center_align_title">居中对齐</string>
 	<string name="BB_Thickness_title">厚度</string>
+	<string name="BB_animate_charging">动画充电</string>
 	<string name="BB_indicate_charging">充电显示</string>
 	<string name="BB_indicate_fast_charging">快充显示</string>
 	<string name="BB_indicate_power_save">指示节能</string>
@@ -457,7 +458,7 @@
 	<string name="toggle_one_handed">打开单手模式</string>
 	<string name="sleep">睡眠</string>
 	<!-- Search Preference -->
-	<string name="searchpreference_title">Search</string>
+	<string name="searchpreference_title">搜索</string>
 	<string name="searchpreference_search">搜索…</string>
 	<string name="searchpreference_clear">清空</string>
 	<string name="searchpreference_history_entry">历史条目</string>

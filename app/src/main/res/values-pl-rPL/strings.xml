@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">Krycie paska</string>
 	<string name="BB_center_align_title">Wyrównany do środka</string>
 	<string name="BB_Thickness_title">Grubość pręta</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">Wskaż ładowanie</string>
 	<string name="BB_indicate_fast_charging">Wskaż szybkie ładowanie</string>
 	<string name="BB_indicate_power_save">Indicate power save</string>

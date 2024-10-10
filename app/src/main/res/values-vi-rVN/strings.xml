@@ -38,23 +38,23 @@
 	<string name="crowdin_summary">Hãy giúp chúng tôi dịch %s sang ngôn ngữ của bạn</string>
 	<!--Category titles-->
 	<string name="lockscreen_header_title">Màn hình khóa</string>
-	<string name="lockscreen_header_summary">Change your keyguard to match your taste</string>
+	<string name="lockscreen_header_summary">Cài đặt màn hình khóa theo sở thích của bạn</string>
 	<string name="statusbar_header">Thanh trạng thái</string>
-	<string name="statusbar_header_summary">That thin bar that shows useful data</string>
+	<string name="statusbar_header_summary">Thanh mỏng hiển thị dữ liệu hữu ích</string>
 	<string name="nav_header">Thanh điều hướng</string>
-	<string name="nav_header_summary">Change the way you navigate through apps</string>
+	<string name="nav_header_summary">Thay đổi cách bạn điều hướng qua các ứng dụng</string>
 	<string name="dialer_header">Trình gọi &amp; quay số điện thoại</string>
-	<string name="dialer_header_summary">A bit of aid for your phone calls</string>
+	<string name="dialer_header_summary">Một chút hỗ trợ cho các cuộc gọi của bạn</string>
 	<string name="misc_header">Tuỳ chỉnh khác</string>
-	<string name="misc_header_summary">Whatever else offered by PixelXpert</string>
+	<string name="misc_header_summary">Bất kỳ tính năng nào khác được cung cấp bởi PixelXpert</string>
 	<string name="qs_panel_category_title">Cài đặt nhanh</string>
-	<string name="qs_panel_category_summary">Brightness slider, flashlight level and more</string>
+	<string name="qs_panel_category_summary">Thanh trượt độ sáng, mức độ đèn pin và nhiều tính năng khác</string>
 	<string name="theme_customization_category">Chủ đề</string>
-	<string name="theme_customization_summary">A light theme on Quick Settings</string>
+	<string name="theme_customization_summary">Giao diện sáng cho Cài đặt nhanh</string>
 	<string name="pm_header">Trình quản lý gói ứng dụng</string>
-	<string name="pm_header_summary">Bypass security checks for apk files</string>
+	<string name="pm_header_summary">Vượt qua các kiểm tra bảo mật cho tệp apk</string>
 	<string name="hotspot_header">Điểm phát sóng di động</string>
-	<string name="hotspot_header_summary">If you\'re into hidden WiFi stuff</string>
+	<string name="hotspot_header_summary">Nếu bạn quan tâm đến những thứ WiFi ẩn</string>
 	<!-- Hotspot settings-->
 	<string name="hotspot_hide_ssid_title">Ẩn SSID</string>
 	<string name="hotspot_inactivity_timeout_title">Thời gian không hoạt động</string>
@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">Độ mờ của thanh</string>
 	<string name="BB_center_align_title">Căn chính giữa</string>
 	<string name="BB_Thickness_title">Độ dày thanh</string>
+	<string name="BB_animate_charging">Hiệu ứng sạc</string>
 	<string name="BB_indicate_charging">Cho biết đang sạc</string>
 	<string name="BB_indicate_fast_charging">Cho biết đang sạc nhanh</string>
 	<string name="BB_indicate_power_save">Chỉ ra tiết kiệm năng lượng</string>
@@ -457,7 +458,7 @@
 	<string name="toggle_one_handed">Mở chế độ một tay</string>
 	<string name="sleep">Tắt màn hình</string>
 	<!-- Search Preference -->
-	<string name="searchpreference_title">Search</string>
+	<string name="searchpreference_title">Tìm kiếm</string>
 	<string name="searchpreference_search">Tìm kiếm…</string>
 	<string name="searchpreference_clear">Xóa</string>
 	<string name="searchpreference_history_entry">Lịch sử tìm kiếm</string>

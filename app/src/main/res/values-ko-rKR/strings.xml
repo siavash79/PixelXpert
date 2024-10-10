@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">배터리 막대 투명도</string>
 	<string name="BB_center_align_title">가운데 정렬</string>
 	<string name="BB_Thickness_title">막대 굵기</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">충전 상태 표시</string>
 	<string name="BB_indicate_fast_charging">고속 충전 표시</string>
 	<string name="BB_indicate_power_save">Indicate power save</string>

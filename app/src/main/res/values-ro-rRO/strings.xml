@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">Opacitate bară</string>
 	<string name="BB_center_align_title">Aliniere la centru</string>
 	<string name="BB_Thickness_title">Grosimea barei</string>
+	<string name="BB_animate_charging">Animare încărcare</string>
 	<string name="BB_indicate_charging">Indică încărcarea</string>
 	<string name="BB_indicate_fast_charging">Indică încărcarea rapidă</string>
 	<string name="BB_indicate_power_save">Indică economisirea energiei</string>

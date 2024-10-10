@@ -179,6 +179,7 @@
 	<string name="BB_Opacity_title">شفافیت</string>
 	<string name="BB_center_align_title">از وسط صفحه</string>
 	<string name="BB_Thickness_title">ضخامت</string>
+	<string name="BB_animate_charging">Animate charging</string>
 	<string name="BB_indicate_charging">نمایش شارژ شدن</string>
 	<string name="BB_indicate_fast_charging">نمایش شارژ سریع</string>
 	<string name="BB_indicate_power_save">نشان دادن ذخیره باتری</string>

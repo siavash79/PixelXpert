@@ -1,5 +1,8 @@
 package sh.siava.pixelxpert.service;
 
+import static sh.siava.pixelxpert.modpacks.Constants.AI_METHOD_MLKIT;
+import static sh.siava.pixelxpert.modpacks.Constants.AI_METHOD_PYTORCH;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -14,13 +17,13 @@ import com.topjohnwu.superuser.Shell;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 import sh.siava.pixelxpert.IRootProviderProxy;
 import sh.siava.pixelxpert.PixelXpert;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.modpacks.Constants;
-import sh.siava.pixelxpert.utils.BitmapSubjectSegmenter;
+import sh.siava.pixelxpert.utils.PyTorchSegmentor;
+import sh.siava.pixelxpert.utils.MLKitSegmentor;
 
 public class RootProviderProxy extends Service {
 	@Nullable
@@ -69,7 +72,7 @@ public class RootProviderProxy extends Service {
 		}
 
 		@Override
-		public Bitmap extractSubject(Bitmap input) throws RemoteException {
+		public Bitmap extractSubject(Bitmap input, int method) throws RemoteException {
 			ensureEnvironment();
 
 			if(!PixelXpert.get().isCoreRootServiceBound())
@@ -77,24 +80,14 @@ public class RootProviderProxy extends Service {
 				PixelXpert.get().tryConnectRootService();
 			}
 
-			final Bitmap[] resultBitmap = new Bitmap[]{null};
-			CountDownLatch resultWaiter = new CountDownLatch(1);
-			try {
-					new BitmapSubjectSegmenter(getApplicationContext()).segmentSubject(input, new BitmapSubjectSegmenter.SegmentResultListener() {
-						@Override
-						public void onSuccess(Bitmap result) {
-							resultBitmap[0] = result;
-							resultWaiter.countDown();
-						}
+			switch (method)
+			{
+				case AI_METHOD_MLKIT:
+					return MLKitSegmentor.extractSubject(getApplicationContext(), input);
+				case AI_METHOD_PYTORCH:
+					return PyTorchSegmentor.extractSubject(getApplicationContext(), input);
+			}
 
-						@Override
-						public void onFail() {
-							resultWaiter.countDown();
-						}
-					});
-				resultWaiter.await();
-				return resultBitmap[0];
-			} catch (Throwable ignored) {}
 			return null;
 		}
 

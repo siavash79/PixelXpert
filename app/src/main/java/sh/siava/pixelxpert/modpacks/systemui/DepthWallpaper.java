@@ -9,6 +9,8 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static sh.siava.pixelxpert.modpacks.Constants.AI_METHOD_MLKIT;
+import static sh.siava.pixelxpert.modpacks.Constants.AI_METHOD_PYTORCH;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.reAddView;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.tryHookAllConstructors;
@@ -58,6 +60,8 @@ public class DepthWallpaper extends XposedModPack {
 	private FrameLayout mWallpaperBitmapContainer;
 	private FrameLayout mWallpaperDimmingOverlay;
 	private boolean mLayersCreated = false;
+
+	private static int SegmentorAI = AI_METHOD_MLKIT;
 	public DepthWallpaper(Context context) {
 		super(context);
 	}
@@ -67,6 +71,7 @@ public class DepthWallpaper extends XposedModPack {
 		DWallpaperEnabled = Xprefs.getBoolean("DWallpaperEnabled", false);
 		DWOpacity = Xprefs.getSliderInt("DWOpacity", 192);
 		DWonAOD = Xprefs.getBoolean("DWonAOD", false);
+		SegmentorAI = Integer.parseInt(Xprefs.getString("SegmentorAI", String.valueOf(AI_METHOD_MLKIT)));
 	}
 
 	@Override
@@ -235,7 +240,8 @@ public class DepthWallpaper extends XposedModPack {
 						if(!cacheIsValid) {
 							try {
 								String cachePath = Constants.getLockScreenSubjectCachePath(mContext);
-								Bitmap subjectBitmap = XPLauncher.getRootProviderProxy().extractSubject(finalScaledWallpaperBitmap);
+
+								Bitmap subjectBitmap = XPLauncher.getRootProviderProxy().extractSubject(finalScaledWallpaperBitmap, SegmentorAI);
 
 								if(subjectBitmap != null) {
 									FileOutputStream subjectOutputStream = new FileOutputStream(cachePath);

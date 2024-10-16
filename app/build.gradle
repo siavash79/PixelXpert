@@ -131,4 +131,9 @@ dependencies {
 
 	// Splash screen
 	implementation libs.androidx.core.splashscreen
+
+	implementation libs.prdownloader
+
+	implementation libs.pytorch.android.lite
+	implementation libs.pytorch.android.torchvision.lite
 }

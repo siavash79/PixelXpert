@@ -46,7 +46,7 @@ import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.databinding.SettingsActivityBinding;
 import sh.siava.pixelxpert.ui.models.SearchPreferenceItem;
-import sh.siava.pixelxpert.utils.BitmapSubjectSegmenter;
+import sh.siava.pixelxpert.utils.MLKitSegmentor;
 import sh.siava.pixelxpert.ui.fragments.HooksFragment;
 import sh.siava.pixelxpert.ui.fragments.UpdateFragment;
 import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchConfiguration;
@@ -482,7 +482,7 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		{
 			super.onCreatePreferences(savedInstanceState, rootKey);
 
-			new BitmapSubjectSegmenter(getActivity()).checkModelAvailability(moduleAvailabilityResponse ->
+			new MLKitSegmentor(getActivity()).checkModelAvailability(moduleAvailabilityResponse ->
 					findPreference("DWallpaperEnabled")
 							.setSummary(
 									moduleAvailabilityResponse.areModulesAvailable()

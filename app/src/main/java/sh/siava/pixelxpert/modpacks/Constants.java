@@ -32,6 +32,9 @@ public final class Constants {
 
 	public static final String PX_ROOT_EXTRA = "EXTRA_PX_ROOT";
 
+	public static final int AI_METHOD_MLKIT = 0;
+	public static final int AI_METHOD_PYTORCH = 1;
+
 	public static final List<String> PREF_UPDATE_EXCLUSIONS = Arrays.asList(BootLoopProtector.LOAD_TIME_KEY_KEY, BootLoopProtector.PACKAGE_STRIKE_KEY_KEY);
 
 	public static String getLockScreenSubjectCachePath(Context context)

@@ -13,20 +13,23 @@ gradle = "8.5.2"
 markdown = "0.19.0"
 libsuVersion = "5.2.2"
 android-material = "1.12.0"
-navigationUiKtxVersion = "2.8.1"
-navigationFragmentKtxVersion = "2.8.1"
+navigationUiKtxVersion = "2.8.2"
+navigationFragmentKtxVersion = "2.8.2"
 objenesis = "3.3"
 ntpClient = "0.0.1-alpha11"
 persianDateTime = "4.2.1"
 playServicesBase = "18.5.0"
 playServicesMlkitSubjectSegmentation = "16.0.0-beta1"
+prdownloader = "1.0.1"
+pytorch_android_torchvision_lite = "1.13.1"
 recyclerview = "1.3.2"
 preferenceKtx = "1.2.1"
 remotepreferences = "0.8"
 swiperefreshlayout = "1.2.0-alpha01"
-uiGeometry = "1.7.2"
+uiGeometry = "1.7.3"
 workRuntime = "2.9.1"
 kotlin = "1.8.0"
+
 
 [libraries]
 androidx-activity = { module = "androidx.activity:activity", version.ref = "activity" }
@@ -58,4 +61,7 @@ persian-date-time = { module = "com.github.mfathi91:persian-date-time", version.
 play-services-base = { module = "com.google.android.gms:play-services-base", version.ref = "playServicesBase" }
 play-services-mlkit-subject-segmentation = { module = "com.google.android.gms:play-services-mlkit-subject-segmentation", version.ref = "playServicesMlkitSubjectSegmentation" }
 androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+prdownloader = { module = "com.github.amitshekhariitbhu:PRDownloader", version.ref = "prdownloader" }
+pytorch_android_lite = { module = "org.pytorch:pytorch_android_lite", version.ref = "pytorch_android_torchvision_lite" }
+pytorch_android_torchvision_lite = { module = "org.pytorch:pytorch_android_torchvision_lite", version.ref = "pytorch_android_torchvision_lite" }
 remotepreferences = { module = "com.crossbowffs.remotepreferences:remotepreferences", version.ref = "remotepreferences" }

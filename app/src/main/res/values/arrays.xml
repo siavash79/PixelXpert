@@ -215,7 +215,6 @@
 		<item>@string/thursday</item>
 		<item>@string/friday</item>
 		<item>@string/saturday</item>
-
 	</string-array>
 
 	<string-array name="days_of_week_codes">
@@ -560,6 +559,16 @@
 		<item>0</item>
 		<item>1</item>
 		<item>2</item>
+	</string-array>
+
+	<string-array name="segmentor_ai_model_names">
+		<item>ML Kit</item>
+		<item>Pytorch</item>
+	</string-array>
+
+	<string-array name="segmentor_ai_model_codes">
+		<item>0</item>
+		<item>1</item>
 	</string-array>
 
 </resources>

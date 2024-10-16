@@ -27,10 +27,19 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
-			app:allowDividerAbove="true"
 			android:key="DWallpaperEnabled"
 			android:summary="@string/depth_wallpaper_summary"
 			android:title="@string/depth_wallpaper_title"
+			app:allowDividerAbove="true"
+			app:iconSpaceReserved="false" />
+
+		<sh.siava.pixelxpert.ui.preferences.MaterialListPreference
+			android:defaultValue="0"
+			android:entries="@array/segmentor_ai_model_names"
+			android:entryValues="@array/segmentor_ai_model_codes"
+			android:key="SegmentorAI"
+			android:summary="%s"
+			android:title="@string/depth_wallpaper_ai_model_title"
 			app:iconSpaceReserved="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialRangeSliderPreference
@@ -51,11 +60,11 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
-			app:allowDividerAbove="true"
 			android:key="fingerprint_circle_hide"
 			android:summaryOff="@string/transparent_fingerprint_circle_off"
 			android:summaryOn="@string/transparent_fingerprint_circle_on"
 			android:title="@string/transparent_fingerprint_circle"
+			app:allowDividerAbove="true"
 			app:iconSpaceReserved="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
@@ -68,11 +77,11 @@
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
 			android:defaultValue="false"
-			app:allowDividerAbove="true"
 			android:key="DisableUnlockHintAnimation"
 			android:summaryOff="@string/general_off"
 			android:summaryOn="@string/general_on"
 			android:title="@string/disable_unlock_hint_title"
+			app:allowDividerAbove="true"
 			app:iconSpaceReserved="false" />
 
 		<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference

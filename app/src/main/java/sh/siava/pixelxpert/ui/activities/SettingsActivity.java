@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.LocaleList;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,14 +42,14 @@ import com.topjohnwu.superuser.Shell;
 
 import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
 import sh.siava.pixelxpert.databinding.SettingsActivityBinding;
-import sh.siava.pixelxpert.ui.models.SearchPreferenceItem;
-import sh.siava.pixelxpert.utils.MLKitSegmentor;
 import sh.siava.pixelxpert.ui.fragments.HooksFragment;
 import sh.siava.pixelxpert.ui.fragments.UpdateFragment;
+import sh.siava.pixelxpert.ui.models.SearchPreferenceItem;
 import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchConfiguration;
 import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreference;
 import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreferenceResult;
@@ -56,9 +57,11 @@ import sh.siava.pixelxpert.ui.preferences.preferencesearch.SearchPreferenceResul
 import sh.siava.pixelxpert.utils.AppUtils;
 import sh.siava.pixelxpert.utils.ControlledPreferenceFragmentCompat;
 import sh.siava.pixelxpert.utils.ExtendedSharedPreferences;
+import sh.siava.pixelxpert.utils.MLKitSegmentor;
 import sh.siava.pixelxpert.utils.NTPTimeSyncer;
 import sh.siava.pixelxpert.utils.PrefManager;
 import sh.siava.pixelxpert.utils.PreferenceHelper;
+import sh.siava.pixelxpert.utils.PyTorchSegmentor;
 import sh.siava.pixelxpert.utils.TimeSyncScheduler;
 import sh.siava.pixelxpert.utils.UpdateScheduler;
 
@@ -478,19 +481,6 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 
 	public static class LockScreenFragment extends ControlledPreferenceFragmentCompat {
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey)
-		{
-			super.onCreatePreferences(savedInstanceState, rootKey);
-
-			new MLKitSegmentor(getActivity()).checkModelAvailability(moduleAvailabilityResponse ->
-					findPreference("DWallpaperEnabled")
-							.setSummary(
-									moduleAvailabilityResponse.areModulesAvailable()
-											? R.string.depth_wallpaper_model_ready
-											: R.string.depth_wallpaper_model_not_available));
-		}
-
-		@Override
 		public String getTitle() {
 			return getString(R.string.lockscreen_header_title);
 		}
@@ -504,7 +494,10 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 		public void updateScreen(String key) {
 			super.updateScreen(key);
 
-			if (key == null) return;
+			if (key == null) {
+				updateModelAvailabilitySummary();
+				return;
+			}
 
 			if (key.equals("DWallpaperEnabled")) {
 				try {
@@ -520,6 +513,29 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 					}
 				} catch (Exception ignored) {
 				}
+			} else if (key.equals("SegmentorAI")) {
+				updateModelAvailabilitySummary();
+			}
+		}
+
+		private void updateModelAvailabilitySummary() {
+			try {
+				boolean mlKitModel = Integer.parseInt(mPreferences.getString("SegmentorAI", "0")) == 0;
+
+				if (mlKitModel) {
+					new MLKitSegmentor(getActivity()).checkModelAvailability(moduleAvailabilityResponse ->
+							findPreference("DWallpaperEnabled")
+									.setSummary(moduleAvailabilityResponse.areModulesAvailable()
+											? R.string.depth_wallpaper_model_ready
+											: R.string.depth_wallpaper_model_not_available));
+				} else {
+					findPreference("DWallpaperEnabled")
+							.setSummary(PyTorchSegmentor.loadAssets(getContext())
+									? R.string.depth_wallpaper_model_ready
+									: R.string.depth_wallpaper_model_not_available);
+				}
+			} catch (Exception exception) {
+				Log.e(LockScreenFragment.class.getSimpleName(), exception.getMessage());
 			}
 		}
 	}

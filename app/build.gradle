@@ -15,6 +15,10 @@ android {
 		versionName "canary-394"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+		packagingOptions {
+			exclude "**/libpytorch_jni_lite.so"  // exclude pytorch lib
+		}
 	}
 
 	final def keystorePropertiesFile = rootProject.file("ReleaseKey.properties")

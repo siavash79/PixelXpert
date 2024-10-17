@@ -1,3 +1,6 @@
+**canary-395**  
+- Added a second AI model to wallpaper depth effect  
+  
 **canary-394**  
 - Battery bar: fixed charging animation opacity  
 - A15: Fixed increased brightness slider margins  

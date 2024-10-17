@@ -1,6 +1,9 @@
 package sh.siava.pixelxpert.ui.fragments;
 
 import static android.content.Context.RECEIVER_EXPORTED;
+import static sh.siava.pixelxpert.ui.Constants.UPDATES_CHANNEL_ID;
+import static sh.siava.pixelxpert.ui.Constants.UPDATE_DOWNLOADED_ID;
+import static sh.siava.pixelxpert.ui.Constants.UPDATE_DOWNLOAD_FAILED_ID;
 import static sh.siava.pixelxpert.utils.AppUtils.installDoubleZip;
 import static sh.siava.pixelxpert.utils.MiscUtils.getColorFromAttribute;
 import static sh.siava.pixelxpert.utils.MiscUtils.intToHex;
@@ -62,7 +65,6 @@ public class UpdateFragment extends BaseFragment {
 	public static final String MAGISK_MODULES_DIR = "/data/adb/modules";
 	private static final String updateRoot = String.format("%s/%s", MAGISK_UPDATE_DIR, MOD_NAME);
 
-	public static final String UPDATES_CHANNEL_ID = "Updates";
 	private static final String stableUpdatesURL = "https://raw.githubusercontent.com/siavash79/PixelXpert/stable/latestStable.json";
 	private static final String canaryUpdatesURL = "https://raw.githubusercontent.com/siavash79/PixelXpert/canary/latestCanary.json";
 	DownloadManager downloadManager;
@@ -109,7 +111,7 @@ public class UpdateFragment extends BaseFragment {
 						.setContentText(requireContext().getText(R.string.try_again_later))
 						.setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-				NotificationManagerCompat.from(requireContext()).notify(2, builder.build());
+				NotificationManagerCompat.from(requireContext()).notify(UPDATE_DOWNLOAD_FAILED_ID, builder.build());
 			}
 		}
 	};
@@ -359,7 +361,7 @@ public class UpdateFragment extends BaseFragment {
 				.setContentIntent(pendingIntent)
 				.setAutoCancel(true);
 
-		NotificationManagerCompat.from(getContext()).notify(1, builder.build());
+		NotificationManagerCompat.from(getContext()).notify(UPDATE_DOWNLOADED_ID, builder.build());
 	}
 
 	public interface TaskDoneCallback extends Callback {
@@ -399,6 +401,7 @@ public class UpdateFragment extends BaseFragment {
 
 	public static class updateChecker extends Thread {
 		private final TaskDoneCallback mCallback;
+		private static final String TAG = "Update Fragment";
 
 		public updateChecker(TaskDoneCallback callback) {
 			mCallback = callback;
@@ -437,7 +440,7 @@ public class UpdateFragment extends BaseFragment {
 				error.put("version", "Connection Error");
 				error.put("versionCode", -1);
 				mCallback.onFinished(error);
-				e.printStackTrace();
+				Log.e(TAG, "update install: ", e);
 			}
 		}
 	}

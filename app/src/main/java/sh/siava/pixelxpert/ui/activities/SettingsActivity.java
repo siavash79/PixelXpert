@@ -1,7 +1,9 @@
 package sh.siava.pixelxpert.ui.activities;
 
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
-import static sh.siava.pixelxpert.ui.fragments.UpdateFragment.UPDATES_CHANNEL_ID;
+import static sh.siava.pixelxpert.R.string.update_channel_name;
+import static sh.siava.pixelxpert.ui.Constants.UPDATES_CHANNEL_ID;
 import static sh.siava.pixelxpert.utils.AppUtils.isLikelyPixelBuild;
 
 import android.animation.Animator;
@@ -42,7 +44,6 @@ import com.topjohnwu.superuser.Shell;
 
 import java.util.Locale;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import sh.siava.pixelxpert.BuildConfig;
 import sh.siava.pixelxpert.R;
@@ -291,12 +292,9 @@ public class SettingsActivity extends BaseActivity implements PreferenceFragment
 	}
 
 	private void createNotificationChannel() {
-		CharSequence name = getString(R.string.update_channel_name);
-		int importance = NotificationManager.IMPORTANCE_DEFAULT;
-
-		NotificationChannel channel = new NotificationChannel(UPDATES_CHANNEL_ID, name, importance);
 		NotificationManager notificationManager = getSystemService(NotificationManager.class);
-		notificationManager.createNotificationChannel(channel);
+
+		notificationManager.createNotificationChannel(new NotificationChannel(UPDATES_CHANNEL_ID, getString(update_channel_name), IMPORTANCE_DEFAULT));
 	}
 
 	@Override

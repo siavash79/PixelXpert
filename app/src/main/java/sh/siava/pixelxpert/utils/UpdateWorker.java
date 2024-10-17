@@ -2,6 +2,8 @@ package sh.siava.pixelxpert.utils;
 
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
+import static sh.siava.pixelxpert.ui.Constants.UPDATE_AVAILABLE_ID;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -77,7 +79,7 @@ public class UpdateWorker extends ListenableWorker {
 
 		NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 		createChannel(notificationManager);
-		notificationManager.notify(0, notificationBuilder.build());
+		notificationManager.notify(UPDATE_AVAILABLE_ID, notificationBuilder.build());
 	}
 
 	public void createChannel(NotificationManager notificationManager) {

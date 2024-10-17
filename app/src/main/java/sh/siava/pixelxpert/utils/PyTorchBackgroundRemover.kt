@@ -16,15 +16,14 @@ import org.pytorch.IValue
 import org.pytorch.LiteModuleLoader
 import org.pytorch.Module
 import org.pytorch.torchvision.TensorImageUtils
-import sh.siava.pixelxpert.utils.PyTorchSegmentor.MODEL_FILENAME
 
 
 /**
  * Created by erenalpaslan on 18.08.2023
  */
-class PyTorchBackgroundRemover(context: Context) {
+class PyTorchBackgroundRemover(context: Context, modelPath: String) {
 
-    private var module: Module = LiteModuleLoader.load(String.format("%s/%s", context.cacheDir.absolutePath, MODEL_FILENAME))
+    private var module: Module = LiteModuleLoader.load(String.format("%s/%s", context.cacheDir.absolutePath, modelPath))
     private val maskPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val size = 320
 

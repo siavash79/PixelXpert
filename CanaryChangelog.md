@@ -1,3 +1,6 @@
+**canary-396**  
+- Improved the AI model download process  
+  
 **canary-395**  
 - Added a second AI model to wallpaper depth effect  
   

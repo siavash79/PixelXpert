@@ -6,7 +6,6 @@
 
 package sh.siava.pixelxpert.utils
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -21,9 +20,9 @@ import org.pytorch.torchvision.TensorImageUtils
 /**
  * Created by erenalpaslan on 18.08.2023
  */
-class PyTorchBackgroundRemover(context: Context, modelPath: String) {
+class PyTorchBackgroundRemover(modelPath: String) {
 
-    private var module: Module = LiteModuleLoader.load(String.format("%s/%s", context.cacheDir.absolutePath, modelPath))
+    private var module: Module = LiteModuleLoader.load(modelPath)
     private val maskPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val size = 320
 
@@ -59,9 +58,11 @@ class PyTorchBackgroundRemover(context: Context, modelPath: String) {
         val scaledMask = convertArrayToBitmap(arr, size, size)?.let {
             Bitmap.createScaledBitmap(it, width, height, true)
         }
+
         return scaledMask?.let { getMaskedImage(mutable, it) }
     }
 
+    @Suppress("SameParameterValue")
     private fun convertArrayToBitmap(arr: FloatArray, width: Int, height: Int): Bitmap? {
         val grayToneImage = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         for (i in 0 until width) {

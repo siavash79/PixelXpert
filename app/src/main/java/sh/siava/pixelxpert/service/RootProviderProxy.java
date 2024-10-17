@@ -83,9 +83,9 @@ public class RootProviderProxy extends Service {
 			switch (method)
 			{
 				case AI_METHOD_MLKIT:
-					return MLKitSegmentor.extractSubject(getApplicationContext(), input);
+					return MLKitSegmentor.extractSubject(PixelXpert.get(), input);
 				case AI_METHOD_PYTORCH:
-					return PyTorchSegmentor.extractSubject(getApplicationContext(), input);
+					return PyTorchSegmentor.extractSubject(PixelXpert.get(), input);
 			}
 
 			return null;

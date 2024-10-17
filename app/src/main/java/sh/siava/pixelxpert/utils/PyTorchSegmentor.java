@@ -36,7 +36,8 @@ public class PyTorchSegmentor {
 			if (!loadAssets(context)) return null;
 
 			String modelPath = String.format("%s/%s", context.getCacheDir().getAbsolutePath(), MODEL_FILENAME);
-			return new PyTorchBackgroundRemover(context, modelPath).removeBackground(input);
+
+			return new PyTorchBackgroundRemover(modelPath).removeBackground(input);
 		} catch (Throwable ignored) {
 			return null;
 		}
@@ -54,7 +55,7 @@ public class PyTorchSegmentor {
 		createNotificationChannel(context);
 
 		boolean libLoaded = loadPyTorchLibrary(context);
-		boolean modelLoaded =  downloadAIModel(context);
+		boolean modelLoaded = downloadAIModel(context);
 
 		return libLoaded && modelLoaded;
 	}
@@ -65,24 +66,38 @@ public class PyTorchSegmentor {
 
 		String downloadURL = String.format("%s/%s", MODEL_BASE_URL, MODEL_FILENAME);
 
-		String tag = "ai_model";
-
-		postNotification(context, tag);
-		PRDownloader.download(downloadURL, context.getCacheDir().getPath(), MODEL_FILENAME).build().start(new OnDownloadListener(){
-			@Override
-			public void onDownloadComplete() {
-				removeNotification(context, tag);
-			}
-
-			@Override
-			public void onError(Error error) {
-				removeNotification(context, tag);
-			}
-		});
+		downloadFile(downloadURL, AIPath, "ai_model", context);
 
 		return false;
 	}
 
+	private static void downloadFile(String downloadURL, String destPath, String notificationTag, Context context) {
+		postNotification(context, notificationTag);
+
+		try {
+			File tempFile = File.createTempFile("AITemp", "tmp");
+			tempFile.deleteOnExit();
+
+			//noinspection DataFlowIssue
+			PRDownloader.download(downloadURL, tempFile.getParentFile().getAbsolutePath(), tempFile.getName()).build().start(new OnDownloadListener() {
+				@Override
+				public void onDownloadComplete() {
+					//noinspection ResultOfMethodCallIgnored
+					tempFile.renameTo(new File(destPath));
+
+					removeNotification(context, notificationTag);
+				}
+
+				@Override
+				public void onError(Error error) {
+					//noinspection ResultOfMethodCallIgnored
+					tempFile.delete();
+					removeNotification(context, notificationTag);
+				}
+			});
+		} catch (Throwable ignored) {}
+
+	}
 	private static void removeNotification(Context context, String tag) {
 		NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
 
@@ -122,21 +137,8 @@ public class PyTorchSegmentor {
 	private static void downloadLibrary(Context context) {
 		String architecture = Build.SUPPORTED_ABIS[0];
 		String downloadURL = String.format("%s%s/%s", LIB_BASE_URL, architecture, PYTORCH_LIB);
+		String libPath = String.format("%s/%s", context.getCacheDir(), PYTORCH_LIB);
 
-		String tag = "ai_lib";
-
-		postNotification(context, tag);
-
-		PRDownloader.download(downloadURL, context.getCacheDir().getPath(), PYTORCH_LIB).build().start(new OnDownloadListener() {
-			@Override
-			public void onDownloadComplete() {
-				removeNotification(context, tag);
-			}
-
-			@Override
-			public void onError(Error error) {
-				removeNotification(context, tag);
-			}
-		});
+		downloadFile(downloadURL, libPath, "ai_lib", context);
 	}
 }

@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Indstillinger for netværksstatistik</string>
 	<string name="string_formatter_manual_body_v3">Ud over den normale tekst er dynamiske variabler også tilgængelige, såsom dato, dataforbrug og temperatur:\n\n$G\&lt;format\&gt; : Gregoriansk dato, baseret på format*\n$P&lt;format&gt; : Persisk dato, baseret på format*\n$Nrx : Samlet antal downloads i specificeret periode ** ***\n$Ntx: Total uploads i specificeret periode ** ***\n$Nall : Total trafik i specificeret periode ** ***\n$Nssid : WiFi SSID navn (hvis relevant)\n\n$T\&lt;format\&gt;[interval] : Temperatur; \nformat kan være b (for batteri), c (for CPU), g (for GPU) og s (for skin) \nEndelig er der VALGFRI antal opdateringsinterval i sekunder (standard: 60 sekunder)\n\n*for format dokumentation, søg på \"Java Date Format\"\n**Du kan angive statistikperioden i PixelXpert/Diverse menu/Netværksstatistikindstillinger\n***Hvis du erstatter $N med $Nc får du med mobildatastatistik (f.eks. $Ncrx i stedet for Nrx )</string>
 	<string name="update_channel_name">Opdateringer</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">Opdatering downloadet</string>
 	<string name="update_notification_text">Tryk her for at installere</string>
 	<string name="download_failed">Kunne ikke downloade opdateringen</string>

@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Innstillinger for nettverksstatistikk</string>
 	<string name="string_formatter_manual_body_v3">I tillegg til vanlig tekst er dynamiske variabler også tilgjengelige, som dato, databruk og temperatur:\n\n$G\&lt;format\&gt; : gregoriansk dato, basert på format*\n$P&lt;format&gt; : persisk dato, basert på format*\n$Nrx : Totalt antall nedlastinger i spesifisert periode ** ***\n$Ntx: Totalt opplastinger i spesifisert periode ** ***\n$Nall : Total trafikk i spesifisert periode ** ***\n$Nssid : WiFi SSID-navn (hvis aktuelt)\n\n$T\&lt;format\&gt;[interval] : Temperatur; \nformat kan være b (for batteri), c (for CPU), g (for GPU) og s (for hud) \nTil slutt er det VALGFRITT antall oppdateringsintervaller i sekunder (standard: 60 sekunder)\n\n*for format dokumentasjon, søk på \"Java Date Format\"\n**Du kan spesifisere statistikkperioden i PixelXpert/Diverse-meny/Nettverksstatistikkinnstillinger\n***Hvis du bytter ut $N med $Nc får du med mobildatastatistikk (f.eks. $Ncrx i stedet for Nrx )</string>
 	<string name="update_channel_name">Oppdateringer</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">Oppdatering lastet ned</string>
 	<string name="update_notification_text">Trykk her for å installere</string>
 	<string name="download_failed">Kunne ikke laste ned oppdateringen</string>

@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Hình nền hiệu ứng chiều sâu</string>
 	<string name="depth_wallpaper_summary">Tích hợp động hình nền với đồng hồ</string>
+	<string name="depth_wallpaper_ai_model_title">Chọn mô hình AI theo sở thích</string>
 	<string name="depth_wallpaper_opacity_title">Độ mờ nền trước hình nền</string>
 	<string name="depth_wallpaper_aod_title">Bao gồm cả \"màn hình luôn bật\"</string>
 	<string name="depth_wallpaper_model_ready">Mẫu AI đã được tải xuống thiết bị</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Cài đặt thống kê mạng</string>
 	<string name="string_formatter_manual_body_v3">Ngoài văn bản thông thường, các biến động cũng có sẵn, như Ngày, Sử dụng dữ liệu và Nhiệt độ:\n\n$G\&lt;format\&gt; : Ngày Gregory, dựa trên định dạng*\n$P&lt;format&gt; : Ngày Ba Tư, dựa trên định dạng*\n$Nrx : Tổng số lượt tải xuống trong khoảng thời gian được chỉ định ** ***\n$Ntx: Tổng số lượt tải lên trong khoảng thời gian được chỉ định ** ***\n$Nall : Tổng lưu lượng truy cập trong khoảng thời gian được chỉ định ** ***\n$Nssid : Tên SSID WiFi (nếu có)\n\n$T\&lt;format\&gt;[interval] : Nhiệt độ; \nđịnh dạng có thể là b (đối với pin), c (đối với CPU), g (đối với GPU) và s (đối với giao diện) \nCuối cùng, có số khoảng thời gian cập nhật TÙY CHỌN tính bằng giây (mặc định: 60 giây)\n\n*đối với định dạng tài liệu, tìm kiếm \"Định dạng ngày Java\"\n**Bạn có thể chỉ định khoảng thời gian thống kê trong PixelXpert/menu Khác/Cài đặt thống kê mạng\n***Nếu bạn thay thế $N bằng $Nc , bạn sẽ nhận được số liệu thống kê dữ liệu di động (ví dụ: $Ncrx thay vì Nrx )</string>
 	<string name="update_channel_name">Cập nhật</string>
+	<string name="download_channel_name">Tải xuống</string>
+	<string name="assets_download_title">Các tệp đang tải xuống</string>
+	<string name="assets_download_body">Đồng hành tải xuống các tệp tin</string>
 	<string name="update_notification_title">Đã tải xuống cập nhật</string>
 	<string name="update_notification_text">Nhấn vào đây để cài đặt</string>
 	<string name="download_failed">Không thể tải xuống bản cập nhật</string>

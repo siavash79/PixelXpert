@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Mélységi effektes háttérkép</string>
 	<string name="depth_wallpaper_summary">Dinamikusan előtérbe helyezi a háttér bizonyos részei az óra elé</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Háttérkép előtérbeni áttetszősége</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Hálózati statisztikai beállítások</string>
 	<string name="string_formatter_manual_body_v3">A normál szövegen kívül dinamikus változók is rendelkezésre állnak, mint a dátum, adathasználat és hőmérséklet:\n\n$G\&lt;format\&gt; : Gergely dátum, formátum alapján*\n$P&lt;format&gt; : perzsa dátum, formátum alapján*\n$Nrx : Letöltések száma meghatározott időszakban ** ***\n$Ntx: Összes feltöltés a megadott időszakban ** ***\n$Nall : Teljes forgalom meghatározott időszakban ** ***\n$Nssid : WiFi SSID neve (ha van)\n\n$T\&lt;format\&gt;[interval] : Hőfok; \nformátum lehet b (akkumulátorhoz), c (CPU-hoz), g (GPU-hoz) és s (bőrhöz) \nVégül OPCIONÁLIS számú frissítési intervallum másodpercben (alapértelmezett: 60 másodperc)\n\n*formátumhoz dokumentáció, keressen $N a \" $Ncrx Date Format\" kifejezésre\n** $Nc statisztikai időszakot a PixelXpert/Egyes menü/\nstatisztika beállítások menüpontban adhatja meg )</string>
 	<string name="update_channel_name">Frissítések</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">Frissítés letöltve</string>
 	<string name="update_notification_text">Koppintson ide a telepítéshez</string>
 	<string name="download_failed">Nem sikerült letölteni a frissítést</string>

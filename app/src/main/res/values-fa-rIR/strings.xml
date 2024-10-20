@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">تنظیمات آمار شبکه</string>
 	<string name="string_formatter_manual_body_v3">علاوه بر متن معمولی، متغیرهای پویا نیز موجود است، مانند تاریخ، مصرف داده و دما:\n\n$G\&lt;format\&gt; : تاریخ میلادی، بر اساس فرمت*\n$P&lt;format&gt; : تاریخ فارسی، بر اساس فرمت*\n$Nrx : کل دانلودها در دوره مشخص شده ** ***\n$Ntx: کل آپلودها در دوره مشخص شده ** ***\n$Nall : کل ترافیک در دوره مشخص شده ** ***\n$Nssid : نام SSID WiFi (در صورت وجود)\n\n$T\&lt;format\&gt;[interval] : درجه حرارت؛ فرمت \nمی تواند b (برای باتری)، c (برای CPU)، g (برای GPU) و s (برای پوست) باشد \nدر نهایت، تعداد اختیاری فاصله به روز رسانی بر حسب ثانیه وجود دارد (پیش فرض: 60 ثانیه)\n\n*برای قالب مستندات، جستجوی \"فرمت تاریخ جاوا\"\n**می توانید دوره آمار را در PixelXpert/منو متفرقه/تنظیمات آمار شبکه\nمشخص کنید ***اگر $N با $Nc جایگزین کنید، آمار داده های تلفن همراه را دریافت خواهید کرد (مثلاً $Ncrx به جای Nrx )</string>
 	<string name="update_channel_name">به روز رسانی ها</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">به روز رسانی دانلود شد</string>
 	<string name="update_notification_text">برای نصب اینجا ضربه بزنید</string>
 	<string name="download_failed">نسخه جدید دریافت نشد</string>

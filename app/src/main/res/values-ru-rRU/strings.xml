@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Обои с эффектом глубины</string>
 	<string name="depth_wallpaper_summary">Динамическая интеграция переднего плана обоев с часами</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Прозрачность переднего плана обоев</string>
 	<string name="depth_wallpaper_aod_title">Также на \"Always on display\"</string>
 	<string name="depth_wallpaper_model_ready">Модель ИИ загружена на устройство</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Настройки сетевой статистики</string>
 	<string name="string_formatter_manual_body_v3">В дополнение к обычному тексту доступны динамические переменные, такие как дата, использование данных и температура:\n\n$G\&lt;format\&gt; : григорианская дата, основанная на формате*\n$P&lt;format&gt; : персидская дата, основанная на формате*\n$Nrx : Общее количество скачиваний за указанный период ** ***\n$Ntx: Всего загрузок за указанный период ** ***\n$Nall: Общий трафик за указанный период ** ***\n$Nssid: Имя WiFi SSID (если применимо)\n\n$T\&lt;format\&gt;[interval]: Температура; \nформат может быть b (для батареи), c (для CPU), g (для GPU) и s (для кожи)\nИ наконец, есть ОПЦИОНАЛЬНОЕ количество интервалов обновления в секундах (по умолчанию: 60 секунд)\n\n*Для получения документации по формату ищите \"Java Date Format\"\n**Вы можете указать период статистики в PixelXpert/Miscellaneous menu/Network Statistics Settings\n***Если вы замените $N на $Nc, то получите статистику по мобильным данным (например, $Ncrx вместо Nrx)</string>
 	<string name="update_channel_name">Обновления</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">Обновление загружено</string>
 	<string name="update_notification_text">Нажмите здесь, чтобы установить</string>
 	<string name="download_failed">Не удалось загрузить обновление </string>

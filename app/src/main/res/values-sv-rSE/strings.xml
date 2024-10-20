@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Inställningar för nätverksstatistik</string>
 	<string name="string_formatter_manual_body_v3">Utöver den normala texten finns även dynamiska variabler tillgängliga, som datum, dataanvändning och temperatur:\n\n$G\&lt;format\&gt; : gregorianskt datum, baserat på format*\n$P&lt;format&gt; : persiskt datum, baserat på format*\n$Nrx : Totalt antal nedladdningar under angiven period ** ***\n$Ntx: Totalt antal uppladdningar under angiven period ** ***\n$Nall : Total trafik under angiven period ** ***\n$Nssid : WiFi SSID-namn (om tillämpligt)\n\n$T\&lt;format\&gt;[interval] : Temperatur; \nformat kan vara b (för batteri), c (för CPU), g (för GPU) och s (för hud) \nSlutligen finns det VALFRITT antal uppdateringsintervall i sekunder (standard: 60 sekunder)\n\n*för format dokumentation, sök efter \"Java Date Format\"\n**Du kan ange statistikperioden i PixelXpert/Övrigt meny/Nätverksstatistikinställningar\n***Om du ersätter $N med $Nc får du med mobildatastatistik (t.ex. $Ncrx istället för Nrx )</string>
 	<string name="update_channel_name">Uppdateringar</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">Uppdatering nedladdad</string>
 	<string name="update_notification_text">Tryck här för att installera</string>
 	<string name="download_failed">Det gick inte att ladda ner uppdateringen</string>

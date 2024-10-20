@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Fundal cu efect de adâncime</string>
 	<string name="depth_wallpaper_summary">Integrare dinamică a imaginii de fundal cu ceasul</string>
+	<string name="depth_wallpaper_ai_model_title">Modelul AI preferat</string>
 	<string name="depth_wallpaper_opacity_title">Opacitatea fundalului în prim-plan</string>
 	<string name="depth_wallpaper_aod_title">De asemenea, pe „Afișaj ambiental”</string>
 	<string name="depth_wallpaper_model_ready">Modelul AI a fost descărcat pe dispozitiv</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Setări statistici de rețea</string>
 	<string name="string_formatter_manual_body_v3">Pe lângă textul normal, sunt disponibile și variabile dinamice, cum ar fi Data, Utilizarea datelor și Temperatura:\n\n$G\&lt;format\&gt; : Data gregoriană, pe baza formatului*\n$P&lt;format&gt; : Data persană, pe baza formatului*\n$Nrx : Descărcări totale în perioada specificată ** ***\n$Ntx: Încărcări totale în perioada specificată ** ***\n$Nall : Trafic total în perioada specificată ** ***\n$Nssid : Nume SSID WiFi (dacă este cazul)\n\n$T\&lt;format\&gt;[interval] : Temperatura; Formatul \npoate fi b (pentru baterie), c (pentru CPU), g (pentru GPU) și s (pentru piele) \nÎn sfârșit, există un număr OPȚIONAL de interval de actualizare în secunde (implicit: 60 de secunde)\n\n*pentru format documentație, caută „Java Date Format”\n**Poți specifica perioada de statistici în PixelXpert/Meniul Diverse/Setări statistici de rețea\n***Dacă înlocuiești $N cu $Nc , vei obține statistici de date mobile (de ex. $Ncrx în loc de Nrx )</string>
 	<string name="update_channel_name">Actualizări</string>
+	<string name="download_channel_name">Descărcări</string>
+	<string name="assets_download_title">Se descarcă fișierele</string>
+	<string name="assets_download_body">Se descarcă fișierele companion</string>
 	<string name="update_notification_title">Actualizare descărcată</string>
 	<string name="update_notification_text">Atinge aici pentru instalare</string>
 	<string name="download_failed">Nu s-a putut descărca actualizarea</string>

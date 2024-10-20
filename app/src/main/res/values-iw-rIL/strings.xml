@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">הגדרות סטטיסטיקות רשת</string>
 	<string name="string_formatter_manual_body_v3">בנוסף לטקסט הרגיל, משתנים דינמיים זמינים גם, כמו תאריך, שימוש בנתונים וטמפרטורה:\n\n$G\&lt;format\&gt; : תאריך גרגוריאני, מבוסס על פורמט*\n$P&lt;format&gt; : תאריך פרסי, מבוסס על פורמט*\n$Nrx : סך הורדות בתקופה שצוינה ** ***\n$Ntx: סך העלאות בתקופה שצוינה ** ***\n$Nall : סה\"כ תנועה בתקופה שצוינה ** ***\n$Nssid : שם SSID WiFi (אם רלוונטי)\n\n$T\&lt;format\&gt;[interval] : טמפרטורה; פורמט \nיכול להיות b (עבור סוללה), c (עבור CPU), g (עבור GPU) ו-s (עבור עור) \nלבסוף, יש מספר אופציונלי של מרווח עדכון בשניות (ברירת מחדל: 60 שניות)\n\n*לפורמט תיעוד, חפש \"פורמט תאריך Java\"\n**ניתן לציין את תקופת הסטטיסטיקה ב-PixelXpert/תפריט שונות/הגדרות סטטיסטיקות רשת\n***אם תחליף את $N ב $Nc תקבל בסטטיסטיקה של נתונים ניידים (למשל $Ncrx במקום Nrx )</string>
 	<string name="update_channel_name">עדכונים</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">העדכון הורד</string>
 	<string name="update_notification_text">הקש כאן כדי להתקין</string>
 	<string name="download_failed">הורדת העדכון נכשלה</string>

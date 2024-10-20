@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Papel de parede com efeito de profundidade</string>
 	<string name="depth_wallpaper_summary">Integre dinamicamente o primeiro plano do papel de parede com o relógio</string>
+	<string name="depth_wallpaper_ai_model_title">Modelo de IA preferencial</string>
 	<string name="depth_wallpaper_opacity_title">Opacidade do primeiro plano do papel de parede</string>
 	<string name="depth_wallpaper_aod_title">Também no \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">O modelo AI é baixado no dispositivo</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Definições das estatísticas de rede</string>
 	<string name="string_formatter_manual_body_v3">Além do texto normal, também estão disponíveis variáveis dinâmicas, como Data, Uso de dados e Temperatura:\n\n$G\&lt;format\&gt; : Data gregoriana, com base no formato*\n$P&lt;format&gt; : Data persa, com base no formato*\n$Nrx : Total de downloads no período especificado ** ***\n$Ntx: Total de uploads no período especificado ** ***\n$Nall : Tráfego total no período especificado ** ***\n$Nssid : Nome SSID do WiFi (se aplicável)\n\n$T\&lt;format\&gt;[interval] : Temperatura; \no formato pode ser b (para bateria), c (para CPU), g (para GPU) e s (para skin) \nPor último, há um número OPCIONAL de intervalo de atualização em segundos (padrão: 60 segundos)\n\n*para formato documentação, procure por \"Formato de data Java\"\n**Você pode especificar o período de estatísticas em PixelXpert/menu Diversos/Configurações de estatísticas de rede\n***Se você substituir $N por $Nc , obterá estatísticas de dados móveis (por exemplo, $Ncrx em vez de Nrx )</string>
 	<string name="update_channel_name">Atualizações</string>
+	<string name="download_channel_name">Transferências</string>
+	<string name="assets_download_title">A transferir ficheiros</string>
+	<string name="assets_download_body">A transferir ficheiros adicionais</string>
 	<string name="update_notification_title">Atualização descarregada</string>
 	<string name="update_notification_text">Toque aqui para instalar</string>
 	<string name="download_failed">Falha ao descarregar atualização</string>

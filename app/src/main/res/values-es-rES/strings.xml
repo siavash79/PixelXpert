@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Fondo de pantalla de efecto profundo</string>
 	<string name="depth_wallpaper_summary">Integrar dinámicamente el fondo de pantalla con el reloj</string>
+	<string name="depth_wallpaper_ai_model_title">Modelo preferido de IA</string>
 	<string name="depth_wallpaper_opacity_title">Opacidad del fondo de pantalla</string>
 	<string name="depth_wallpaper_aod_title">También en \"siempre en pantalla\"</string>
 	<string name="depth_wallpaper_model_ready">El modelo de IA se ha descargado en el dispositivo</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Configuración de estadísticas de red</string>
 	<string name="string_formatter_manual_body_v3">Además del texto normal, las variables dinámicas también están disponibles, como fecha, uso de datos y temperatura:\n\n$G\&lt;format\&gt; : Fecha georgiana, según el formato*\n$P&lt;format&gt; : Fecha persa, según el formato*\n$Nrx : Descargas totales en el período especificado ** ***\n$Ntx: Subidas totales en el período especificado ** ***\n$Nall : Tráfico total en el período especificado Nombre SSID WiFi (si corresponde)\n\n$T\&lt;format\&gt;[interval] : Temperatura; \nformat puede ser b (para batería), c (para cpu), g (para gpu) y s (para piel) \nLastly, hay un número opcional de intervalo de actualización en segundos (predeterminado: 60 segundos) \n\n*for documentación de formato, busque \"Formato de fecha Java\"\n** Puede especificar el período de estadísticas en AOSPMods/Menú misceláneo/Configuración de estadísticas de red\n*** si reemplazas $N con $Nc obtendrás con estadísticas de datos móviles (por ejemplo, $Ncrx en lugar de Nrx)</string>
 	<string name="update_channel_name">Actualizaciones</string>
+	<string name="download_channel_name">Descargas</string>
+	<string name="assets_download_title">Descargando archivos</string>
+	<string name="assets_download_body">Descargar archivos adicionales</string>
 	<string name="update_notification_title">Actualización descargada</string>
 	<string name="update_notification_text">Toque aquí para instalar</string>
 	<string name="download_failed">Error al descargar la actualización</string>

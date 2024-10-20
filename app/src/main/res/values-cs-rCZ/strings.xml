@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Nastavení statistik sítě</string>
 	<string name="string_formatter_manual_body_v3">Kromě normálního textu jsou k dispozici také dynamické proměnné, jako je datum, využití dat a teplota:\n\n$G\&lt;format\&gt; : gregoriánské datum, podle formátu*\n$P&lt;format&gt; : perské datum, podle formátu*\n$Nrx : Celkový počet stažení v určeném období ** ***\n$Ntx: Celkový počet uploadů v určeném období ** ***\n$Nall : Celkový provoz v zadaném období ** ***\n$Nssid : Název WiFi SSID (pokud existuje)\n\n$T\&lt;format\&gt;[interval] : Teplota; \nformát může být b (pro baterii), c (pro CPU), g (pro GPU) a s (pro skin) \nNakonec je zde VOLITELNÝ počet intervalů aktualizace v sekundách (výchozí: 60 sekund)\n\n*pro formát dokumentace, vyhledejte \"Java Date Format\"\n**Období statistiky můžete určit v PixelXpert/Miscellaneous menu/Network Statistics Settings\n***Pokud nahradíte $N za $Nc , dostanete statistiku mobilních dat (např. $Ncrx místo Nrx )</string>
 	<string name="update_channel_name">Aktualizace</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">Aktualizace stažena</string>
 	<string name="update_notification_text">Klepnutím sem nainstalujte</string>
 	<string name="download_failed">Stažení aktualizace se nezdařilo</string>

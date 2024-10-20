@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Шпалери з ефектом глибини</string>
 	<string name="depth_wallpaper_summary">Динамічна інтеграція переднього плану шпалер із годинником</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Непрозорість переднього плану шпалер</string>
 	<string name="depth_wallpaper_aod_title">Також на \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">ШІ-модель завантажена на пристрій</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Налаштування мережевої статистики</string>
 	<string name="string_formatter_manual_body_v3">Окрім звичайного тексту, також доступні динамічні змінні, як-от дата, використання даних і температура:\n\n$G\&lt;format\&gt; : григоріанська дата на основі формату*\n$P&lt;format&gt; : перська дата на основі формату*\n$Nrx : загальна кількість завантажень за вказаний період ** ***\n$Ntx: Загальна кількість завантажень за вказаний період ** ***\n$Nall : Загальний трафік за вказаний період ** ***\n$Nssid : Назва SSID WiFi (якщо застосовно)\n\n$T\&lt;format\&gt;[interval] : Температура; \nформат може бути b (для батареї), c (для процесора), g (для графічного процесора) і s (для оболонки) \nНарешті, є НЕОБОВ’ЯЗКОВО кількість інтервалу оновлення в секундах (за замовчуванням: 60 секунд)\n\n*для формату документація, знайдіть «Формат дати Java»\n**Ви можете вказати період статистики в меню PixelXpert/Різне/Налаштування статистики мережі\n***Якщо ви заміните $N на $Nc , ви отримаєте статистику мобільних даних (наприклад, $Ncrx замість Nrx )</string>
 	<string name="update_channel_name">Оновлення</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">Оновлення завантажено</string>
 	<string name="update_notification_text">Тицьніть сюди, щоб встановити</string>
 	<string name="download_failed">Не вдалося завантажити оновлення</string>

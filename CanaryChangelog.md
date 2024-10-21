@@ -1,3 +1,6 @@
+**canary-398**  
+- Pytorch AI model: fixed model not working on canary releases  
+  
 **canary-397**  
 - Pytorch AI model: bugfix  
   

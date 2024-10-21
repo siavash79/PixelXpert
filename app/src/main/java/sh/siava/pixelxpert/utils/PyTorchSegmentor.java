@@ -75,7 +75,7 @@ public class PyTorchSegmentor {
 		postNotification(context, notificationTag);
 
 		try {
-			File tempFile = File.createTempFile("AITemp", "tmp");
+			File tempFile = File.createTempFile("DLTmp", "tmp");
 			tempFile.deleteOnExit();
 
 			//noinspection DataFlowIssue

@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Sfondo effetto profondità</string>
 	<string name="depth_wallpaper_summary">Integra dinamicamente il primo piano dello sfondo con l\'orologio</string>
+	<string name="depth_wallpaper_ai_model_title">Modello AI preferito</string>
 	<string name="depth_wallpaper_opacity_title">Opacità primo piano dello sfondo</string>
 	<string name="depth_wallpaper_aod_title">Anche su \"schermo sempre attivo\"</string>
 	<string name="depth_wallpaper_model_ready">Il modello AI è scaricato sul dispositivo</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Impostazioni delle statistiche di rete</string>
 	<string name="string_formatter_manual_body_v3">Oltre al testo normale, sono disponibili anche variabili dinamiche, come Data, Utilizzo dati e Temperatura:\n\n$G\&lt;format\&gt; : Data gregoriana, in base al formato*\n$P&lt;format&gt; : Data persiana, in base al formato*\n$Nrx : Download totali nel periodo specificato ** ***\n$Ntx: Caricamenti totali nel periodo specificato ** ***\n$Nall : Traffico totale nel periodo specificato ** ***\n$Nssid : Nome SSID WiFi (se applicabile)\n\n$T\&lt;format\&gt;[interval] : Temperatura; \nil formato può essere b (per batteria), c (per CPU), g (per GPU) e s (per skin) \nInfine, è disponibile un numero FACOLTATIVO di intervallo di aggiornamento in secondi (impostazione predefinita: 60 secondi)\n\n*per formato documentazione, cercare \"Java Date Format\"\n**È possibile specificare il periodo delle statistiche in PixelXpert/menu Varie/Impostazioni statistiche di rete\n***Se si sostituisce $N con $Nc si otterranno statistiche sui dati mobili (ad esempio $Ncrx invece di Nrx )</string>
 	<string name="update_channel_name">Aggiornamenti</string>
+	<string name="download_channel_name">Download</string>
+	<string name="assets_download_title">Download files in corso</string>
+	<string name="assets_download_body">Download file compagni in corso</string>
 	<string name="update_notification_title">Aggiornamento scaricato</string>
 	<string name="update_notification_text">Tocca qui per installare</string>
 	<string name="download_failed">Errore download aggiornamento</string>

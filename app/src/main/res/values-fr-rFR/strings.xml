@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Effet de profondeur du fond d\'écran</string>
 	<string name="depth_wallpaper_summary">Intégration dynamique du fond d\'écran avec l\'horloge</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Opacité du fond d\'écran</string>
 	<string name="depth_wallpaper_aod_title">Également sur \"toujours à l\'écran\"</string>
 	<string name="depth_wallpaper_model_ready">Le modèle IA est téléchargé sur l\'appareil</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Préférences des statistiques du réseau</string>
 	<string name="string_formatter_manual_body_v3">En plus du texte normal, des variables dynamiques sont également disponibles, comme la date, l\'utilisation des données et la température :\n\n$G\&lt;format\&gt;  : Date grégorienne, basée sur le format*\n$P&lt;format&gt;  : Date persane, basée sur le format*\n$Nrx  : Nombre total de téléchargements dans la période spécifiée ** ***\n$Ntx: Total des envois de données dans la période spécifiée ** ***\n$Nall : Trafic total dans la période spécifiée ** ***\n$Nssid : Nom SSID WiFi (le cas échéant)\n\n$T\&lt;format\&gt;[interval] : Température; \nle format peut être b (pour la batterie), c (pour le CPU), g (pour le GPU) et s (pour le skin) \nEnfin, il existe un nombre OPTIONNEL d\'intervalle de mise à jour en secondes (par défaut : 60 secondes)\n\n*Pour la documentation sur le format, recherchez \"Java Date Format\"\n**Vous pouvez spécifier la période des statistiques dans PixelXpert/Menu Divers/Paramètres des statistiques réseau\n***Si vous remplacez $N par $Nc , vous obtiendrez des statistiques sur les données mobiles (par exemple $Ncrx au lieu de Nrx )</string>
 	<string name="update_channel_name">Mises à jour</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">Mise à jour téléchargée</string>
 	<string name="update_notification_text">Installer</string>
 	<string name="download_failed">Échec du téléchargement de la mise à jour</string>

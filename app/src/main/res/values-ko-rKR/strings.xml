@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">네트워크 기록 설정</string>
 	<string name="string_formatter_manual_body_v3">일반 텍스트 외에도 날짜, 데이터 사용량 및 온도와 같은 동적 변수도 사용할 수 있습니다.\n\n$G\&lt;format\&gt; : 그레고리력 날짜, 형식 기반*\n$P&lt;format&gt; : 페르시아 날짜, 형식 기반*\n$Nrx : 총 다운로드 수 지정된 기간 ** ***\n$Ntx: 지정된 기간의 총 업로드 ** ***\n$Nall : 지정된 기간의 총 트래픽 ** ***\n$Nssid : WiFi SSID 이름(해당되는 경우)\n\n$T\&lt;format\&gt;[interval] : 온도; \n형식은 b(배터리용), c(CPU용), g(GPU용) 및 s(스킨용)일 수 있습니다. \n마지막으로 초 단위의 업데이트 간격 수(기본값: 60초)가 있습니다\n\n*형식의 경우 설명서에서 \"Java Date Format\"을 검색하세요.\n**PixelXpert/기타 메뉴/네트워크 통계 설정에서 통계 기간을 지정할 수 있습니다.\n*** $N $Nc 로 바꾸면 모바일 데이터 통계가 표시됩니다(예: Nrx 대신 $Ncrx)</string>
 	<string name="update_channel_name">업데이트</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">업데이트 다운로드됨</string>
 	<string name="update_notification_text">여기를 눌러 설치하세요</string>
 	<string name="download_failed">업데이트 다운로드 실패</string>

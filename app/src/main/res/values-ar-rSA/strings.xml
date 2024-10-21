@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">خلفية بتأثير العمق</string>
 	<string name="depth_wallpaper_summary">دمج خلفية الساعة ديناميكيًا مع الخلفية</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">شفافية خلفية الشاشة</string>
 	<string name="depth_wallpaper_aod_title">أيضًا على \"الشاشة دائمًا مفتوحة\"</string>
 	<string name="depth_wallpaper_model_ready">تم تنزيل نموذج الذكاء الاصطناعي على الجهاز</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">إعدادات إحصائيات الشبكة</string>
 	<string name="string_formatter_manual_body_v3">وبالإضافة إلى النص العادي، فإن المتغيرات الدينامية متاحة أيضا، مثل التاريخ، استخدام البيانات و درجة الحرارة:\n\n$G\&lt;format\&gt; : تاريخ غريغوري، بناء على تنسيق*\n$P&lt;format&gt; : التاريخ الفارسي، استنادا إلى التنسيق*\n$Nrx : مجموع التنزيلات في فترة محددة **\n$Ntx: مجموع التحميلات في فترة محددة **\n$Nall : مجموع حركة المرور في فترة محددة ** ***\n$Nssid : اسم WiFi SSID (إذا كان ذلك منطبقا)\n\n$T\&lt;format\&gt;[interval] : درجة الحرارة؛ \nيمكن أن يكون التنسيق ب (للبطارية) و ج (للوحدة المعالجة) و غ (للوحدة المعالجة) و ص (للبشرة) \nوأخيرا. هناك عدد من فواصل التحديث بالثواني (الافتراضي: 60 ثانية)\n\n*لنسق الوثائق، البحث عن \"تنسيق تاريخ الجافا\"\n**يمكنك تحديد فترة الإحصاءات في PixelXpert/Miscellaneous menu/Network Statistics إعدادات\n***إذا قمت باستبدال $N ب $Nc ستحصل على إحصاءات بيانات الجوال (e. . $Ncrx بدلا من Nrx)</string>
 	<string name="update_channel_name">التحديثات</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">تم تنزيل التحديث</string>
 	<string name="update_notification_text">انقر هنا للتثبيت</string>
 	<string name="download_failed">فشل تنزيل التحديث</string>

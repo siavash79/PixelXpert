@@ -1,3 +1,6 @@
+**canary-397**  
+- Pytorch AI model: bugfix  
+  
 **canary-396**  
 - Improved the AI model download process  
   

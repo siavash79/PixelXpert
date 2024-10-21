@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Netwerkstatistiekinstellings</string>
 	<string name="string_formatter_manual_body_v3">Benewens die normale teks, is dinamiese veranderlikes ook beskikbaar, soos Datum, Datagebruik en Temperatuur:\n\n$G\&lt;format\&gt; : Gregoriaanse datum, gebaseer op formaat*\n$P&lt;format&gt; : Persiese datum, gebaseer op formaat*\n$Nrx : Totale aflaaie in gespesifiseerde tydperk ** ***\n$Ntx: Totale oplaaie in gespesifiseerde tydperk ** ***\n$Nall : Totale verkeer in gespesifiseerde tydperk ** ***\n$Nssid : WiFi SSID naam (indien van toepassing)\n\n$T\&lt;format\&gt;[interval] : Temperatuur; \nformaat kan b (vir battery), c (vir SVE), g (vir GPU) en s (vir vel) wees \nLaastens is daar OPSIONELE aantal opdateringsinterval in sekondes (verstek: 60 sekondes)\n\n*vir formaat dokumentasie, soek vir \"Java Date Format\"\n**Jy kan die statistiekperiode in PixelXpert/Diverse-kieslys/Netwerkstatistiekinstellings spesifiseer\n***As jy $N vervang met $Nc , sal jy met mobiele datastatistieke kry (bv. $Ncrx in plaas van Nrx )</string>
 	<string name="update_channel_name">Opdaterings</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">Opdatering afgelaai</string>
 	<string name="update_notification_text">Tik hier om te installeer</string>
 	<string name="download_failed">Kon nie die opdatering aflaai nie</string>

@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Derinlik efekti duvar kağıdı</string>
 	<string name="depth_wallpaper_summary">Saat ile duvar kağıdının ön planını dinamik olarak entegre edin</string>
+	<string name="depth_wallpaper_ai_model_title">Tercih edilen yapay zeka modeli</string>
 	<string name="depth_wallpaper_opacity_title">Duvar kağıdı ön planı opaklığı</string>
 	<string name="depth_wallpaper_aod_title">\"Her zaman açık ekranda\" da göster</string>
 	<string name="depth_wallpaper_model_ready">AI modeli cihaza indirildi</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Ağ istatistik ayarları</string>
 	<string name="string_formatter_manual_body_v3">Normal metne ek olarak, Tarih, Veri kullanımı ve Sıcaklık gibi dinamik değişkenler de kullanılabilir:\n\n$G&lt;format&gt; : Formatına göre Gregoryen tarih*\n$P&lt;format&gt; : Formatına göre Farsça tarih*\n$Nrx : Belirtilen dönemde Toplam İndirilenler ** ***\n$Ntx: Belirtilen dönemde Toplam Yüklemeler ** ***\n$Nall : Belirtilen dönemde Toplam Trafik ** ***\n$Nssid : WiFi SSID adı (varsa)\n\n$T&lt;format&gt;[interval] : Sıcaklık; \nformat b (pil için), c (CPU için), g (GPU için) ve s (cilt için) olabilir \nSon olarak, saniye cinsinden isteğe bağlı bir güncelleme aralığı (varsayılan: 60 saniye) vardır\n\n*format dokümantasyonu için \"Java Tarih Formatı\" arayın\n**İstatistik süresini PixelXpert/Çeşitli menü/Ağ İstatistik Ayarları bölümünde belirtebilirsiniz\n***$N\'yi $Nc ile değiştirirseniz mobil veri istatistiklerini elde edersiniz (örn. Nrx yerine $Ncrx)</string>
 	<string name="update_channel_name">Güncellemeler</string>
+	<string name="download_channel_name">İndirilenler</string>
+	<string name="assets_download_title">Dosyalar indiriliyor</string>
+	<string name="assets_download_body">Yardımcı dosyalar indiriliyor</string>
 	<string name="update_notification_title">Güncelleme indirildi</string>
 	<string name="update_notification_text">Yüklemek için buraya dokunun</string>
 	<string name="download_failed">Güncelleme indirilemedi</string>

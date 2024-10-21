@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">被写体深度エフェクト</string>
 	<string name="depth_wallpaper_summary">壁紙の背景と時計を統合</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">壁紙の不透過度</string>
 	<string name="depth_wallpaper_aod_title">AOD時も適用</string>
 	<string name="depth_wallpaper_model_ready">AIモデルがデバイスにダウンロードされます</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">ネットワーク統計の設定</string>
 	<string name="string_formatter_manual_body_v3">通常のテキストに加えて、日付、データ使用量、温度などの動的変数も使用できます。\n\n$G\&lt;format\&gt; : グレゴリオ暦の日付、形式* に基づく\n$P&lt;format&gt; : ペルシアの日付、形式* に基づく\n$Nrx : 総ダウンロード数指定された期間の ** ***\n$Ntx: 指定された期間の合計アップロード数 ** ***\n$Nall : 指定された期間の合計トラフィック ** ***\n$Nssid : WiFi SSID 名 (該当する場合)\n\n$T\&lt;format\&gt;[interval] ： 温度; \nフォーマットは、b (バッテリー用)、c (CPU 用)、g (GPU 用)、および s (スキン用) です。 \n最後に、オプションの更新間隔の秒数があります (デフォルト: 60 秒)\n\n*フォーマット用ドキュメントで「Java Date Format」を検索してください\n**PixelXpert/その他メニュー/ネットワーク統計設定で統計期間を指定できます\n*** $N $Nc に置き換えると、モバイル データ統計が得られます (例: Nrx の代わりに $Ncrx ) )</string>
 	<string name="update_channel_name">アップデート</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">アップデートのダウンロード</string>
 	<string name="update_notification_text">タップでインストール</string>
 	<string name="download_failed">アップデートのダウンロードに失敗しました</string>

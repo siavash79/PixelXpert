@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">深度效果壁纸</string>
 	<string name="depth_wallpaper_summary">动态整合壁纸的前景和时钟</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">壁纸前景透明度</string>
 	<string name="depth_wallpaper_aod_title">也在“息屏显示”上展示</string>
 	<string name="depth_wallpaper_model_ready">AI 模型已下载到设备</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">网络统计设置</string>
 	<string name="string_formatter_manual_body_v3">除了普通文本之外，还可以使用动态变量，例如日期、数据使用情况和温度：\n\n$G\&lt;format\&gt; ：公历日期，基于格式*\n$P&lt;format&gt; ：波斯日期，基于格式*\n$Nrx ：下载总量指定时间段内的总上传量 ** ***\n$Ntx：指定时间段内的总上传量 ** ***\n$Nall ：指定时间段内的总流量 ** ***\n$Nssid ：WiFi SSID 名称（如适用）\n\n$T\&lt;format\&gt;[interval] ： 温度; \n格式可以是 b（针对电池）、c（针对 CPU）、g（针对 GPU）和 s（针对皮肤） \n最后，还有可选的更新间隔数（以秒为单位）（默认值：60 秒）\n\n*针对格式文档，搜索“Java 日期格式”\n**您可以在 PixelXpert/杂项菜单/网络统计设置中指定统计周期\n***如果将 $N 替换为 $Nc ，您将获得移动数据统计信息（例如 $Ncrx 而不是 Nrx ）</string>
 	<string name="update_channel_name">更新</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">已下载更新</string>
 	<string name="update_notification_text">点此安装</string>
 	<string name="download_failed">下载更新失败</string>

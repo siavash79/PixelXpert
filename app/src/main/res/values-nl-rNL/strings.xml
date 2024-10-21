@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Instellingen voor netwerkstatistieken</string>
 	<string name="string_formatter_manual_body_v3">Naast de normale tekst zijn er ook dynamische variabelen beschikbaar, zoals Datum, Datagebruik en Temperatuur:\n\n$G\&lt;format\&gt; : Gregoriaanse datum, gebaseerd op formaat*\n$P&lt;format&gt; : Perzische datum, gebaseerd op formaat*\n$Nrx : Totaal aantal downloads in gespecificeerde periode ** ***\n$Ntx: Totaal aantal uploads in gespecificeerde periode ** ***\n$Nall : Totaal verkeer in gespecificeerde periode ** ***\n$Nssid : WiFi SSID-naam (indien van toepassing)\n\n$T\&lt;format\&gt;[interval] : Temperatuur; \nHet formaat kan b (voor batterij), c (voor CPU), g (voor GPU) en s (voor skin) zijn \nTen slotte is er een OPTIONEEL aantal update-intervallen in seconden (standaard: 60 seconden)\n\n*voor formaat documentatie, zoek naar \"Java Date Format\"\n**U kunt de statistiekperiode specificeren in PixelXpert/Diversenmenu/Netwerkstatistiekinstellingen\n***Als u $N vervangt door $Nc , krijgt u mobiele datastatistieken (bijv. $Ncrx in plaats van Nrx )</string>
 	<string name="update_channel_name">Updates</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">Update gedownload</string>
 	<string name="update_notification_text">Tik hier om te installeren</string>
 	<string name="download_failed">Kan de update niet downloaden</string>

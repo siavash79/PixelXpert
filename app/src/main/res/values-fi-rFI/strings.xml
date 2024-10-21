@@ -64,6 +64,7 @@
 	<!--Lock screen related-->
 	<string name="depth_wallpaper_title">Depth effect wallpaper</string>
 	<string name="depth_wallpaper_summary">Dynamically integrate wallpaper\'s foreground with the clock</string>
+	<string name="depth_wallpaper_ai_model_title">Preferred AI model</string>
 	<string name="depth_wallpaper_opacity_title">Wallpaper foreground opacity</string>
 	<string name="depth_wallpaper_aod_title">Also on \"always on display\"</string>
 	<string name="depth_wallpaper_model_ready">AI model is downloaded on the device</string>
@@ -420,6 +421,9 @@
 	<string name="netstat_header">Verkon tilastoasetukset</string>
 	<string name="string_formatter_manual_body_v3">Normaalin tekstin lisäksi saatavilla on myös dynaamisia muuttujia, kuten päivämäärä, tiedon käyttö ja lämpötila:\n\n$G\&lt;format\&gt; : gregoriaaninen päivämäärä muotoon perustuen*\n$P&lt;format&gt; : persialainen päivämäärä muotoon perustuen*\n$Nrx : latauksia yhteensä määrätyllä ajanjaksolla ** ***\n$Ntx: latauksia yhteensä tietyllä ajanjaksolla ** ***\n$Nall : liikenne yhteensä tietyllä ajanjaksolla ** ***\n$Nssid : WiFi SSID:n nimi (jos käytössä)\n\n$T\&lt;format\&gt;[interval] : Lämpötila; \nmuoto voi olla b (akku), c (suoritin), g (grafiikkasuoritin) ja s (skin) \nLopuksi on VALINNAINEN päivitysvälin määrä sekunneissa (oletus: 60 sekuntia)\n\n*muodolle dokumentaatio, hae \"Java Date Format\"\n**Voit määrittää tilastojakson PixelXpert/Sekalaiset-valikossa/Verkkotilastoasetukset\n***Jos korvaat $N :lla $Nc , saat mobiilidatatilastot (esim. $Ncrx Nrx:n sijaan )</string>
 	<string name="update_channel_name">Päivitykset</string>
+	<string name="download_channel_name">Downloads</string>
+	<string name="assets_download_title">Downloading Files</string>
+	<string name="assets_download_body">Downloading companion files</string>
 	<string name="update_notification_title">Päivitys ladattu</string>
 	<string name="update_notification_text">Asenna napauttamalla tätä</string>
 	<string name="download_failed">Päivityksen lataaminen epäonnistui</string>

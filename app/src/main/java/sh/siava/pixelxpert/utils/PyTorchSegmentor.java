@@ -76,7 +76,6 @@ public class PyTorchSegmentor {
 
 		try {
 			File tempFile = File.createTempFile("DLTmp", "tmp");
-			tempFile.deleteOnExit();
 
 			//noinspection DataFlowIssue
 			PRDownloader.download(downloadURL, tempFile.getParentFile().getAbsolutePath(), tempFile.getName()).build().start(new OnDownloadListener() {

@@ -10,7 +10,6 @@ import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
 import static de.robv.android.xposed.XposedHelpers.getFloatField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static sh.siava.pixelxpert.modpacks.Constants.AI_METHOD_MLKIT;
-import static sh.siava.pixelxpert.modpacks.Constants.AI_METHOD_PYTORCH;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.reAddView;
 import static sh.siava.pixelxpert.modpacks.utils.toolkit.ReflectionTools.tryHookAllConstructors;

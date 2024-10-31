@@ -152,5 +152,5 @@ dependencies {
 
 	implementation (libs.pytorch.android.lite)
 	implementation (libs.pytorch.android.torchvision.lite)
-
+	implementation ("com.google.code.gson:gson:2.11.0")
 }

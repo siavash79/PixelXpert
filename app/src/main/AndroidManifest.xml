@@ -24,7 +24,12 @@
 			android:name=".ui.activities.FakeSplashActivity"
 			android:exported="true"
 			android:label="@string/title_activity_settings"
-			android:theme="@style/AppTheme.PixelXpert.SplashScreen" />
+			android:theme="@style/AppTheme.PixelXpert.SplashScreen" >
+			<intent-filter>
+				<action android:name="sh.siava.pixelxpert.iconpack" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
 		<activity
 			android:name=".ui.activities.SplashScreenActivity"
 			android:exported="true"
@@ -39,7 +44,6 @@
 			android:targetActivity=".ui.activities.FakeSplashActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
-
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity-alias>

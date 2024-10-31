@@ -35,6 +35,7 @@ import sh.siava.pixelxpert.modpacks.systemui.FeatureFlagsMods;
 import sh.siava.pixelxpert.modpacks.systemui.FingerprintWhileDozing;
 import sh.siava.pixelxpert.modpacks.systemui.FlashLightLevel;
 import sh.siava.pixelxpert.modpacks.systemui.GestureNavbarManager;
+import sh.siava.pixelxpert.modpacks.systemui.IconPacks;
 import sh.siava.pixelxpert.modpacks.systemui.KSURootReceiver;
 import sh.siava.pixelxpert.modpacks.systemui.KeyGuardPinScrambler;
 import sh.siava.pixelxpert.modpacks.systemui.KeyguardMods;
@@ -102,6 +103,7 @@ public class ModPacks {
 					}
 
 					modPacks.add(BatteryDataProvider.class);
+					modPacks.add(IconPacks.class);
 					modPacks.add(BrightnessRange.class);
 					modPacks.add(NotificationExpander.class);
 					modPacks.add(QSTileGrid.class);

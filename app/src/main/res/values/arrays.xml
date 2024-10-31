@@ -10,6 +10,14 @@
 		<item>@string/qr_scanner_shortcut</item>
 	</array>
 
+	<string-array name="mapping_drawable">
+		<item>qs_flashlight_icon_off</item>
+	</string-array>
+
+	<string-array name="mapping_replacement">
+		<item>ic_notification_foreground</item>
+	</string-array>
+
 	<array name="lockScreenShortcut_values">
 		<item>""</item>
 		<item>camera</item>

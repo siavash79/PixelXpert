@@ -1,11 +1,14 @@
 package sh.siava.pixelxpert.modpacks.systemui;
 
-import static de.robv.android.xposed.XposedBridge.hookAllMethods;
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
@@ -14,6 +17,7 @@ import androidx.core.content.res.ResourcesCompat;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
+import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -21,7 +25,7 @@ import sh.siava.pixelxpert.modpacks.XposedModPack;
 
 public class IconPacks extends XposedModPack {
 
-	static Mapping drawableMapping = new Mapping();
+	static IDMapping drawableMapping = new IDMapping();
 	private final PackageManager p;
 
 	public IconPacks(Context context) {
@@ -31,24 +35,46 @@ public class IconPacks extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		drawableMapping = getMapping("drawableMapping");
+		if(Key.length == 0 && drawableMapping.isEmpty()) //only refresh the mapping once at process startup. No more
+			drawableMapping = getIDMapping("drawableMapping", "drawable");
+	}
+
+	/** @noinspection SameParameterValue*/
+	private IDMapping getIDMapping(String prefKey, String type) {
+		Mapping prefMapping = getMapping(prefKey);
+
+		IDMapping idMapping = new IDMapping();
+		for (String key : prefMapping.keySet()) {
+			try {
+				OverlayIDName overlayIDName = prefMapping.get(key);
+				//noinspection DataFlowIssue
+				@SuppressLint("DiscouragedApi")
+				OverlayID overlayID = new OverlayID(overlayIDName.packageName, p.getResourcesForApplication(overlayIDName.packageName).getIdentifier(overlayIDName.resName, type, overlayIDName.packageName));
+				@SuppressLint("DiscouragedApi")
+				int mappingID = mContext.getResources().getIdentifier(key, type, mContext.getPackageName());
+				idMapping.put(mappingID, overlayID);
+			} catch (Throwable ignored) {}
+		}
+		return idMapping;
 	}
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
-
+		//test part - shall go to UI later
 /*		Intent i = new Intent("sh.siava.pixelxpert.iconpack");
 		List<ResolveInfo> l = p.queryIntentActivities(i, 0);
 		log("l " + l.size());
 		String packageName = l.get(0).activityInfo.packageName;
 		log("name " + packageName);
-		HashMap<Integer, OverlayID> mapping = new HashMap<>();
+		Mapping mapping = new Mapping();
 		Resources r = p.getResourcesForApplication(packageName);
 
-		mapping = getMapping(r, packageName);
+		mapping = getMappingUI(r, packageName);
 
-		HashMap<Integer, OverlayID> finalMapping = mapping;
+
 		Gson gson = new Gson();
-		Xprefs.edit().putString("drawableMapping", gson.toJson(finalMapping)).commit();*/
+		Xprefs.edit().putString("drawableMapping", gson.toJson(mapping)).commit();*/
+
+		if(drawableMapping.isEmpty()) return; //don't hook into anything if we don't have a mapping
 
 		findAndHookMethod(Resources.class, "getDrawable", int.class, Resources.Theme.class, new XC_MethodHook() {
 			@Override
@@ -113,36 +139,40 @@ public class IconPacks extends XposedModPack {
 	}
 
 	private Drawable getDrawableForDensity(int id, int density, Resources.Theme theme) throws Throwable {
-		if(drawableMapping.containsKey(String.valueOf(id)))
+		if(drawableMapping.containsKey(id))
 		{
-			OverlayID overlayID = drawableMapping.get(String.valueOf(id));
+			OverlayID overlayID = drawableMapping.get(id);
+			//noinspection DataFlowIssue
 			return ResourcesCompat.getDrawableForDensity(p.getResourcesForApplication(overlayID.packageName), overlayID.resID, density, theme);
 		}
 		return null;
 	}
 
 	private Drawable getDrawable(int id, Resources.Theme theme) throws Throwable {
-		if(drawableMapping.containsKey(String.valueOf(id)))
+		if(drawableMapping.containsKey(id))
 		{
-			OverlayID overlayID = drawableMapping.get(String.valueOf(id));
+			OverlayID overlayID = drawableMapping.get(id);
+			//noinspection DataFlowIssue
 			return ResourcesCompat.getDrawable(p.getResourcesForApplication(overlayID.packageName), overlayID.resID, theme);
 		}
 		return null;
 	}
 
-/*	private HashMap<Integer, OverlayID> getMapping(Resources r, String packageName) {
-		HashMap<Integer, OverlayID> mapping = new HashMap<>();
+	/** @noinspection unused*/ //shall go to UI for release
+	private Mapping getMappingUI(Resources r, String packageName) {
+		Mapping mapping = new Mapping();
+
+		@SuppressLint("DiscouragedApi")
 		String[] replacements = r.getStringArray(r.getIdentifier("mapping_replacement", "array", packageName));
+		@SuppressLint("DiscouragedApi")
 		String[] drawables = r.getStringArray(r.getIdentifier("mapping_drawable", "array", packageName));
 
 		for(int i = 0; i < replacements.length; i++)
 		{
-			int repid = r.getIdentifier(replacements[i], "drawable", packageName);
-			int drawid = mContext.getResources().getIdentifier(drawables[i], "drawable", mContext.getPackageName());
-			mapping.put(drawid, new OverlayID(packageName, repid));
+			mapping.put(drawables[i], new OverlayIDName(packageName, replacements[i]));
 		}
 		return mapping;
-	}*/
+	}
 
 	@Override
 	public boolean listensTo(String packageName) {
@@ -150,6 +180,7 @@ public class IconPacks extends XposedModPack {
 	}
 
 	private Mapping getMapping(String key) {
+		log(Xprefs.getString(key, ""));
 		return new Gson()
 				.fromJson(
 						Xprefs.getString(key, ""),
@@ -168,6 +199,23 @@ public class IconPacks extends XposedModPack {
 		}
 	}
 
-	static class Mapping extends HashMap<String, OverlayID>
+	private static class OverlayIDName
+	{
+		public String resName;
+		public String packageName;
+
+		private OverlayIDName(String packageName, String resName)
+		{
+			this.resName = resName;
+			this.packageName = packageName;
+		}
+	}
+
+
+	static class IDMapping extends HashMap<Integer, OverlayID>
 	{}
+
+	static class Mapping extends HashMap<String, OverlayIDName>
+	{}
+
 }

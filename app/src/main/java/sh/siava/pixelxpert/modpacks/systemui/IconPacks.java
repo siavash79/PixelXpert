@@ -22,6 +22,11 @@ import java.util.List;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
+import sh.siava.pixelxpert.utils.ThemePackMapping;
+import sh.siava.pixelxpert.utils.ThemePackMapping.IDMapping;
+import sh.siava.pixelxpert.utils.ThemePackMapping.Mapping;
+import sh.siava.pixelxpert.utils.ThemePackMapping.OverlayID;
+import sh.siava.pixelxpert.utils.ThemePackMapping.OverlayIDName;
 
 public class IconPacks extends XposedModPack {
 
@@ -55,7 +60,6 @@ public class IconPacks extends XposedModPack {
 				@SuppressLint("DiscouragedApi")
 				OverlayID overlayID = new OverlayID(overlayIDName.packageName, p.getResourcesForApplication(overlayIDName.packageName).getIdentifier(overlayIDName.resName, type, overlayIDName.packageName));
 				String[] keyParts = key.split(":");
-				//noinspection DataFlowIssue
 				String resName = keyParts[keyParts.length - 1];
 				String sourcePackage = keyParts.length > 1 ? keyParts[0] : mContext.getPackageName();
 				@SuppressLint("DiscouragedApi")
@@ -164,7 +168,6 @@ public class IconPacks extends XposedModPack {
 		{
 			log("available");
 			OverlayID overlayID = drawableMapping.get(id);
-			//noinspection DataFlowIssue
 			return ResourcesCompat.getDrawable(p.getResourcesForApplication(overlayID.packageName), overlayID.resID, theme);
 		}
 		return null;
@@ -199,35 +202,5 @@ public class IconPacks extends XposedModPack {
 						Mapping.class);
 	}
 
-	private static class OverlayID
-	{
-		public int resID;
-		public String packageName;
-
-		private OverlayID(String packageName, int resID)
-		{
-			this.resID = resID;
-			this.packageName = packageName;
-		}
-	}
-
-	private static class OverlayIDName
-	{
-		public String resName;
-		public String packageName;
-
-		private OverlayIDName(String packageName, String resName)
-		{
-			this.resName = resName;
-			this.packageName = packageName;
-		}
-	}
-
-
-	static class IDMapping extends HashMap<Integer, OverlayID>
-	{}
-
-	static class Mapping extends HashMap<String, OverlayIDName>
-	{}
 
 }

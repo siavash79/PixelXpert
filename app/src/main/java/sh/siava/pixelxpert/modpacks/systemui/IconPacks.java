@@ -35,8 +35,12 @@ public class IconPacks extends XposedModPack {
 
 	@Override
 	public void updatePrefs(String... Key) {
-		if(Key.length == 0 && drawableMapping.isEmpty()) //only refresh the mapping once at process startup. No more
+		if(Key.length == 0 && drawableMapping.isEmpty()) { //only refresh the mapping once at process startup. No more
+			log("updating");
 			drawableMapping = getIDMapping("drawableMapping", "drawable");
+			Gson g = new Gson();
+			log(g.toJson(drawableMapping));
+		}
 	}
 
 	/** @noinspection SameParameterValue*/
@@ -50,9 +54,15 @@ public class IconPacks extends XposedModPack {
 				//noinspection DataFlowIssue
 				@SuppressLint("DiscouragedApi")
 				OverlayID overlayID = new OverlayID(overlayIDName.packageName, p.getResourcesForApplication(overlayIDName.packageName).getIdentifier(overlayIDName.resName, type, overlayIDName.packageName));
+				String[] keyParts = key.split(":");
+				//noinspection DataFlowIssue
+				String resName = keyParts[keyParts.length - 1];
+				String sourcePackage = keyParts.length > 1 ? keyParts[0] : mContext.getPackageName();
 				@SuppressLint("DiscouragedApi")
-				int mappingID = mContext.getResources().getIdentifier(key, type, mContext.getPackageName());
-				idMapping.put(mappingID, overlayID);
+				int mappingID = mContext.getResources().getIdentifier(resName, type, sourcePackage);
+				if(mappingID != 0) {
+					idMapping.put(mappingID, overlayID);
+				}
 			} catch (Throwable ignored) {}
 		}
 		return idMapping;
@@ -63,8 +73,10 @@ public class IconPacks extends XposedModPack {
 /*		Intent i = new Intent("sh.siava.pixelxpert.iconpack");
 		List<ResolveInfo> l = p.queryIntentActivities(i, 0);
 		log("l " + l.size());
-		String packageName = l.get(0).activityInfo.packageName;
+		l.forEach(ri -> log(ri.activityInfo.packageName));
+		String packageName = "sh.siava.testiconpack";
 		log("name " + packageName);
+
 		Mapping mapping = new Mapping();
 		Resources r = p.getResourcesForApplication(packageName);
 
@@ -118,7 +130,6 @@ public class IconPacks extends XposedModPack {
 				{
 					param.setResult(drawable);
 				}
-
 			}
 		});
 
@@ -151,6 +162,7 @@ public class IconPacks extends XposedModPack {
 	private Drawable getDrawable(int id, Resources.Theme theme) throws Throwable {
 		if(drawableMapping.containsKey(id))
 		{
+			log("available");
 			OverlayID overlayID = drawableMapping.get(id);
 			//noinspection DataFlowIssue
 			return ResourcesCompat.getDrawable(p.getResourcesForApplication(overlayID.packageName), overlayID.resID, theme);

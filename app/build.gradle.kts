@@ -9,12 +9,12 @@ plugins {
 android {
 
 	namespace = "sh.siava.pixelxpert"
-	compileSdk = 34
+	compileSdk = 35
 
 	defaultConfig {
 		applicationId = "sh.siava.pixelxpert"
 		minSdk = 33
-		targetSdk = 34
+		targetSdk = 35
 		versionCode = 401
 		versionName = "canary-11"
 		setProperty("archivesBaseName", "PixelXpert.apk")
@@ -74,11 +74,11 @@ android {
 	}
 
 	compileOptions {
-		sourceCompatibility = JavaVersion.VERSION_1_9
-		targetCompatibility = JavaVersion.VERSION_1_9
+		sourceCompatibility = JavaVersion.VERSION_21
+		targetCompatibility = JavaVersion.VERSION_21
 	}
 	kotlinOptions {
-		jvmTarget = "9"
+		jvmTarget = "21"
 	}
 	packaging {
 		jniLibs.excludes += setOf(
@@ -152,5 +152,5 @@ dependencies {
 
 	implementation (libs.pytorch.android.lite)
 	implementation (libs.pytorch.android.torchvision.lite)
-	implementation ("com.google.code.gson:gson:2.11.0")
+	implementation (libs.gson)
 }

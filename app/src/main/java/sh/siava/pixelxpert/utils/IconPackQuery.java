@@ -3,7 +3,6 @@ package sh.siava.pixelxpert.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
@@ -27,9 +26,19 @@ public class IconPackQuery {
 		mPackageManager = mContext.getPackageManager();
 	}
 
-	public IconPackMapping queryIconPacks()
+	public IconPackMapping queryIconPackMapping()
 	{
-		IconPackMapping mapping = new IconPackMapping();
+		return (IconPackMapping) queryMappingInternal(true);
+	}
+
+	public ResourceMapping queryResourceMapping()
+	{
+		return (ResourceMapping) queryMappingInternal(false);
+	}
+
+	private HashMap<?,?> queryMappingInternal(boolean queryIconPack)
+	{
+		HashMap<?,?> mapping = queryIconPack ? new IconPackMapping() : new ResourceMapping();
 
 		List<ResolveInfo> activities = mPackageManager.queryIntentActivities(new Intent("sh.siava.pixelxpert.iconpack"), 0);
 
@@ -42,6 +51,7 @@ public class IconPackQuery {
 
 				Resources packResources = mPackageManager.getResourcesForApplication(packageName);
 
+				@SuppressLint("DiscouragedApi")
 				String[] packData = packResources.getStringArray(packResources.getIdentifier(packName, "array", packageName));
 				IconPack iconPack = new IconPack(packageName, packLabel, null);
 
@@ -52,7 +62,14 @@ public class IconPackQuery {
 				String[] replacements = packResources.getStringArray(replacementNameArrayID);
 
 				for (int i = 0; i < resNames.length; i++) {
-					mapping.add(resNames[i], new ReplacementIcon(iconPack, replacements[i]));
+					if(mapping instanceof IconPackMapping)
+					{
+						((IconPackMapping) mapping).add(iconPack, resNames[i], replacements[i]);
+					}
+					else
+					{
+						((ResourceMapping) mapping).add(resNames[i], new ReplacementIcon(iconPack, replacements[i]));
+					}
 				}
 			} catch (Exception e)
 			{
@@ -68,7 +85,7 @@ public class IconPackQuery {
 		return packResources.getIdentifier(resName, "array", packageName);
 	}
 
-	public class IconPack
+	public static class IconPack
 	{
 		public String mName;
 		public String mAuthor;
@@ -93,11 +110,13 @@ public class IconPackQuery {
 		public Drawable getDrawable() throws PackageManager.NameNotFoundException {
 			Resources packResources = mPackageManager.getResourcesForApplication(mIconPack.mPackageName);
 
+			@SuppressLint("DiscouragedApi")
 			int resID = packResources.getIdentifier(mReplacementRes, "drawable", mIconPack.mPackageName);
 			return ResourcesCompat.getDrawable(packResources, resID, mContext.getTheme());
 		}
 	}
-	public class IconPackMapping extends HashMap<String, ArrayList<ReplacementIcon>>
+
+	public class ResourceMapping extends HashMap<String, ArrayList<ReplacementIcon>>
 	{
 		public void add(String originalRes, ReplacementIcon replacementIcon)
 		{
@@ -107,6 +126,24 @@ public class IconPackQuery {
 			}
 			//noinspection DataFlowIssue
 			get(originalRes).add(replacementIcon);
+		}
+	}
+
+	public class IconPackMapping extends HashMap<IconPack, HashMap<String, ArrayList<ReplacementIcon>>>{
+		/** @noinspection DataFlowIssue*/
+		public void add(IconPack iconPack, String resName, String replacementName)
+		{
+			if(!containsKey(iconPack))
+			{
+				put(iconPack, new HashMap<>());
+			}
+			HashMap<String, ArrayList<ReplacementIcon>> thisPack = get(iconPack);
+
+			if(!thisPack.containsKey(resName))
+			{
+				thisPack.put(resName, new ArrayList<>());
+			}
+			thisPack.get(resName).add(new ReplacementIcon(iconPack, replacementName));
 		}
 	}
 }

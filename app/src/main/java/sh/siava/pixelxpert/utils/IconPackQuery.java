@@ -1,7 +1,9 @@
 package sh.siava.pixelxpert.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
@@ -61,6 +63,7 @@ public class IconPackQuery {
 		return mapping;
 	}
 
+	@SuppressLint("DiscouragedApi")
 	private int getStringArrayID(String resName, Resources packResources, String packageName) {
 		return packResources.getIdentifier(resName, "array", packageName);
 	}
@@ -80,8 +83,8 @@ public class IconPackQuery {
 
 	public class ReplacementIcon
 	{
-		IconPack mIconPack;
-		String mReplacementRes;
+		public IconPack mIconPack;
+		public String mReplacementRes;
 		public ReplacementIcon(IconPack iconPack, String replacementRes)
 		{
 			mIconPack = iconPack;

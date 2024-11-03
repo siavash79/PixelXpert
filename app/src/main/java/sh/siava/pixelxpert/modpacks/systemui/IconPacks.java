@@ -6,9 +6,7 @@ import static sh.siava.pixelxpert.modpacks.XPrefs.Xprefs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
@@ -16,13 +14,10 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.google.gson.Gson;
 
-import java.util.HashMap;
-import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import sh.siava.pixelxpert.modpacks.XposedModPack;
-import sh.siava.pixelxpert.utils.ThemePackMapping;
 import sh.siava.pixelxpert.utils.ThemePackMapping.IDMapping;
 import sh.siava.pixelxpert.utils.ThemePackMapping.Mapping;
 import sh.siava.pixelxpert.utils.ThemePackMapping.OverlayID;
@@ -73,23 +68,6 @@ public class IconPacks extends XposedModPack {
 	}
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
-		//test part - shall go to UI later
-/*		Intent i = new Intent("sh.siava.pixelxpert.iconpack");
-		List<ResolveInfo> l = p.queryIntentActivities(i, 0);
-		log("l " + l.size());
-		l.forEach(ri -> log(ri.activityInfo.packageName));
-		String packageName = "sh.siava.testiconpack";
-		log("name " + packageName);
-
-		Mapping mapping = new Mapping();
-		Resources r = p.getResourcesForApplication(packageName);
-
-		mapping = getMappingUI(r, packageName);
-
-
-		Gson gson = new Gson();
-		Xprefs.edit().putString("drawableMapping", gson.toJson(mapping)).commit();*/
-
 		if(drawableMapping.isEmpty()) return; //don't hook into anything if we don't have a mapping
 
 		findAndHookMethod(Resources.class, "getDrawable", int.class, Resources.Theme.class, new XC_MethodHook() {
@@ -136,26 +114,12 @@ public class IconPacks extends XposedModPack {
 				}
 			}
 		});
-
-
-/*		hookAllMethods(Resources.class, "getDrawable", new XC_MethodHook() {
-			@Override
-			protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-				int id = (int) param.args[0];
-				if(drawableMapping.containsKey(String.valueOf(id)))
-				{
-					OverlayID overlayID = drawableMapping.get(String.valueOf(id));
-					Drawable drawable = ResourcesCompat.getDrawable(p.getResourcesForApplication(overlayID.packageName), overlayID.resID, mContext.getTheme());
-					if(drawable != null)
-						param.setResult(drawable);
-				}
-			}
-		});*/
 	}
 
 	private Drawable getDrawableForDensity(int id, int density, Resources.Theme theme) throws Throwable {
 		if(drawableMapping.containsKey(id))
 		{
+			log("available - density");
 			OverlayID overlayID = drawableMapping.get(id);
 			//noinspection DataFlowIssue
 			return ResourcesCompat.getDrawableForDensity(p.getResourcesForApplication(overlayID.packageName), overlayID.resID, density, theme);
@@ -173,22 +137,6 @@ public class IconPacks extends XposedModPack {
 		return null;
 	}
 
-	/** @noinspection unused*/ //shall go to UI for release
-	private Mapping getMappingUI(Resources r, String packageName) {
-		Mapping mapping = new Mapping();
-
-		@SuppressLint("DiscouragedApi")
-		String[] replacements = r.getStringArray(r.getIdentifier("mapping_replacement", "array", packageName));
-		@SuppressLint("DiscouragedApi")
-		String[] drawables = r.getStringArray(r.getIdentifier("mapping_drawable", "array", packageName));
-
-		for(int i = 0; i < replacements.length; i++)
-		{
-			mapping.put(drawables[i], new OverlayIDName(packageName, replacements[i]));
-		}
-		return mapping;
-	}
-
 	@Override
 	public boolean listensTo(String packageName) {
 		return true;
@@ -201,6 +149,4 @@ public class IconPacks extends XposedModPack {
 						Xprefs.getString(key, ""),
 						Mapping.class);
 	}
-
-
 }

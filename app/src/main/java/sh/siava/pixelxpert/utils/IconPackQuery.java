@@ -118,18 +118,19 @@ public class IconPackQuery {
 
 	public class ResourceMapping extends HashMap<String, ArrayList<ReplacementIcon>>
 	{
+		/** @noinspection DataFlowIssue*/
 		public void add(String originalRes, ReplacementIcon replacementIcon)
 		{
 			if(!containsKey(originalRes))
 			{
 				put(originalRes, new ArrayList<>());
 			}
-			//noinspection DataFlowIssue
 			get(originalRes).add(replacementIcon);
 		}
 	}
 
-	public class IconPackMapping extends HashMap<IconPack, HashMap<String, ArrayList<ReplacementIcon>>>{
+	public class IconPackMapping extends HashMap<IconPack, HashMap<String, ArrayList<ReplacementIcon>>>
+	{
 		/** @noinspection DataFlowIssue*/
 		public void add(IconPack iconPack, String resName, String replacementName)
 		{

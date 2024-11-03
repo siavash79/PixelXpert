@@ -1,0 +1,109 @@
+package sh.siava.pixelxpert.utils;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class IconPackQuery {
+	private static final String TAG = "IconPackQuery";
+	Context mContext;
+	PackageManager mPackageManager;
+	public IconPackQuery(@NonNull Context context)
+	{
+		mContext = context;
+		mPackageManager = mContext.getPackageManager();
+	}
+
+	public IconPackMapping queryIconPacks()
+	{
+		IconPackMapping mapping = new IconPackMapping();
+
+		List<ResolveInfo> activities = mPackageManager.queryIntentActivities(new Intent("sh.siava.pixelxpert.iconpack"), 0);
+
+		for(ResolveInfo activity : activities)
+		{
+			try {
+				String packageName = activity.activityInfo.packageName;
+				String packName = activity.activityInfo.name.replaceAll(String.format("^%s\\.", packageName),"");
+				String packLabel = String.valueOf(activity.activityInfo.loadLabel(mPackageManager));
+
+				Resources packResources = mPackageManager.getResourcesForApplication(packageName);
+
+				String[] packData = packResources.getStringArray(packResources.getIdentifier(packName, "array", packageName));
+				IconPack iconPack = new IconPack(packageName, packLabel, null);
+
+				int resNameArrayID = getStringArrayID(packData[0], packResources, packageName);
+				int replacementNameArrayID = getStringArrayID(packData[1], packResources, packageName);
+
+				String[] resNames = packResources.getStringArray(resNameArrayID);
+				String[] replacements = packResources.getStringArray(replacementNameArrayID);
+
+				for (int i = 0; i < resNames.length; i++) {
+					mapping.add(resNames[i], new ReplacementIcon(iconPack, replacements[i]));
+				}
+			} catch (Exception e)
+			{
+				Log.e(TAG, "queryIconPacks: ", e);
+			}
+		}
+
+		return mapping;
+	}
+
+	private int getStringArrayID(String resName, Resources packResources, String packageName) {
+		return packResources.getIdentifier(resName, "array", packageName);
+	}
+
+	public class IconPack
+	{
+		public String mName;
+		public String mAuthor;
+		public String mPackageName;
+		public IconPack(String packageName, String name, String author)
+		{
+			mName = name;
+			mAuthor = author;
+			mPackageName = packageName;
+		}
+	}
+
+	public class ReplacementIcon
+	{
+		IconPack mIconPack;
+		String mReplacementRes;
+		public ReplacementIcon(IconPack iconPack, String replacementRes)
+		{
+			mIconPack = iconPack;
+			mReplacementRes = replacementRes;
+		}
+		public Drawable getDrawable() throws PackageManager.NameNotFoundException {
+			Resources packResources = mPackageManager.getResourcesForApplication(mIconPack.mPackageName);
+
+			int resID = packResources.getIdentifier(mReplacementRes, "drawable", mIconPack.mPackageName);
+			return ResourcesCompat.getDrawable(packResources, resID, mContext.getTheme());
+		}
+	}
+	public class IconPackMapping extends HashMap<String, ArrayList<ReplacementIcon>>
+	{
+		public void add(String originalRes, ReplacementIcon replacementIcon)
+		{
+			if(!containsKey(originalRes))
+			{
+				put(originalRes, new ArrayList<>());
+			}
+			//noinspection DataFlowIssue
+			get(originalRes).add(replacementIcon);
+		}
+	}
+}

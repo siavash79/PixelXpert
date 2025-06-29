@@ -182,7 +182,7 @@
     <string name="nt_stat_mode_month">Aktuální měsíc</string>
     <string name="sb_ignored_icons_category">Status Bar ignored icons</string>
     <string name="sb_ignored_icons">Stavový řádek</string>
-    <string name="sb_ignored_icons_statusbar">Select which icon will be hidden in statusbar</string>
+    <string name="sb_ignored_icons_statusbar">Vyberte, která ikona bude skryta ve stavovém řádku</string>
     <string name="sb_kg_ignored_icons">Lockscreen</string>
     <string name="sb_ignored_icons_kg">Select which icon will be hidden in keyguard statusbar</string>
     <string name="sb_qs_ignored_icons">Quick Settings</string>
@@ -192,7 +192,7 @@
     <string name="status_bar_no_calling">No Calling</string>
     <string name="status_bar_call_strength">Call Strength</string>
     <string name="status_bar_alarm_clock">Alarm Clock</string>
-    <string name="status_bar_rotate">Auto Rotate</string>
+    <string name="status_bar_rotate">Automatické otáčení</string>
     <string name="status_bar_headset">Headset Connected</string>
     <string name="status_bar_data_saver">Spořič dat</string>
     <string name="status_bar_ime">Input Method</string>

@@ -73,7 +73,7 @@ public class AppUtils {
 			//noinspection ResultOfMethodCallIgnored
 			process.getInputStream().read(buffer);
 			String result = new String(buffer, StandardCharsets.US_ASCII).replace("\n", "");
-			return Pattern.matches("^[TUAB][A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result); //Pixel standard build number of A13/14 + new weird build numbers of 'A,B,...' prefix
+			return Pattern.matches("^[TUABZ][A-Z]([A-Z0-9]){2}\\.[0-9]{6}\\.[0-9]{3}(\\.[A-Z0-9]{2})?$", result); //Pixel standard build number of A13/14 + new weird build numbers of 'A,B,...' prefix
 		}
 		catch (Throwable ignored)
 		{

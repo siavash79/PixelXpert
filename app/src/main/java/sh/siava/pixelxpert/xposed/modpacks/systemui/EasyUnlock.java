@@ -9,8 +9,8 @@ import android.content.Context;
 import android.view.View;
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import sh.siava.pixelxpert.xposed.annotations.SystemUIModPack;
 import sh.siava.pixelxpert.xposed.XposedModPack;
+import sh.siava.pixelxpert.xposed.annotations.SystemUIModPack;
 import sh.siava.pixelxpert.xposed.utils.toolkit.ReflectedClass;
 
 @SuppressWarnings("RedundantThrows")
@@ -76,12 +76,22 @@ public class EasyUnlock extends XposedModPack {
 
 								Object password = LockscreenCredentialClass.callStaticMethod(methodName, getObjectField(getObjectField(param.thisObject, "mPasswordEntry"), "mText").toString());
 
-								boolean accepted = (boolean) callMethod(
+								Object verificationResult = callMethod(
 										getObjectField(param.thisObject, "mLockPatternUtils"),
 										"checkCredential",
 										password,
 										userId,
 										null /* callback */);
+
+								boolean accepted;
+
+								try{ //16qpr3
+									accepted = (boolean) callMethod(verificationResult, "isMatched");
+								}
+								catch (Throwable ignored) //older
+								{
+									accepted = (boolean) verificationResult;
+								}
 
 								if (accepted) {
 									View mView = (View) getObjectField(param.thisObject, "mView");
@@ -103,7 +113,7 @@ public class EasyUnlock extends XposedModPack {
 				.run(param -> {
 					if (!easyUnlockEnabled) return;
 
-					boolean successful = (boolean) param.args[2];
+					boolean successful = (boolean) param.args[1];
 
 					if (successful) {
 						expectedPassLen = lastPassLen;

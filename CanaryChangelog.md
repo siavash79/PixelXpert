@@ -1,3 +1,7 @@
+**canary-481**  
+- A16QPR3b1 - fixed easyUnlock  
+- A16QPR3b1 - fixed module not recognizing qpr3  
+  
 **canary-480**  
 - A16QPR3b1 - fixed network traffic on statusbar  
 - A16QPR3b1 - fixed notification expand/collapse buttons  

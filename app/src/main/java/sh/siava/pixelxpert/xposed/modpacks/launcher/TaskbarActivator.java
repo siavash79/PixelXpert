@@ -39,6 +39,7 @@ public class TaskbarActivator extends XposedModPack {
 	private static int numShownHotseatIcons = 0;
 	private static boolean TaskbarAsRecents = false;
 	private static boolean TaskbarOnLauncher = false;
+	private static boolean TaskbarOnIme = false;
 	private static boolean GoogleRecents = false;
 	private static boolean TaskbarShowAllRecents = false;
 	private static float taskbarHeightOverride = 1f;
@@ -108,6 +109,8 @@ public class TaskbarActivator extends XposedModPack {
 
 		TaskbarOnLauncher = Xprefs.getBoolean("TaskbarOnLauncher", false);
 
+		TaskbarOnIme = Xprefs.getBoolean("TaskbarOnIme", false);
+
 		GoogleRecents = Xprefs.getBoolean("EnableGoogleRecents", false);
 
 		TaskbarShowAllRecents = Xprefs.getBoolean("ShowAllRecentIcons", false);
@@ -128,6 +131,7 @@ public class TaskbarActivator extends XposedModPack {
 		ReflectedClass QuickSwitchStateClass = ReflectedClass.of("com.android.launcher3.uioverrides.states.QuickSwitchState");
 		ReflectedClass TaskbarUiControllerClass = ReflectedClass.of("com.android.launcher3.taskbar.FallbackTaskbarUIController");
 		ReflectedClass TaskbarProfileClass = ReflectedClass.of("com.android.launcher3.deviceprofile.TaskbarProfile");
+		ReflectedClass TaskbarStashControllerClass = ReflectedClass.of("com.android.launcher3.taskbar.TaskbarStashController");
 
 		//3 button nav order on A15+
 		AbstractNavButtonLayoutterClass
@@ -255,6 +259,13 @@ public class TaskbarActivator extends XposedModPack {
 						param.setResult(dedupedTasks);
 					}
 				});
+
+		// Show taskbar even with keyboard displayed
+		TaskbarStashControllerClass.after("shouldStashForIme").run (param -> {
+			if (TaskbarOnIme) {
+				param.setResult(false);
+			}
+		});
 
 		RecentAppsControllerClass
 				.before("onRecentsOrHotseatChanged")

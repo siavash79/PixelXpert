@@ -25,6 +25,14 @@
         app:iconSpaceReserved="false" />
 
     <sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+        android:defaultValue="false"
+        android:key="TaskbarOnIme"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/taskbar_on_ime_title"
+        app:iconSpaceReserved="false" />
+
+    <sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
         android:defaultValue="true"
         android:key="TaskbarAsRecents"
         android:summaryOff="@string/general_off"

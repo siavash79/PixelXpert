@@ -40,6 +40,7 @@ public class TaskbarActivator extends XposedModPack {
 	private static boolean TaskbarAsRecents = false;
 	private static boolean TaskbarOnLauncher = false;
 	private static boolean GoogleRecents = false;
+	private static boolean TaskbarShowAllRecents = false;
 	private static float taskbarHeightOverride = 1f;
 	private static float TaskbarRadiusOverride = 1f;
 
@@ -108,6 +109,8 @@ public class TaskbarActivator extends XposedModPack {
 		TaskbarOnLauncher = Xprefs.getBoolean("TaskbarOnLauncher", false);
 
 		GoogleRecents = Xprefs.getBoolean("EnableGoogleRecents", false);
+
+		TaskbarShowAllRecents = Xprefs.getBoolean("ShowAllRecentIcons", false);
 	}
 
 	@SuppressLint("DiscouragedApi")
@@ -236,6 +239,20 @@ public class TaskbarActivator extends XposedModPack {
 						RecentAppsControllerClass.findMethods(
 								Pattern.compile("setCanShowRecentApps")).stream().findFirst().get()
 								.invoke(param.thisObject, true);
+					}
+				});
+
+		RecentAppsControllerClass
+				.before("computeShownRecentTasks")
+				.run(param -> {
+					if (TaskbarShowAllRecents) {
+						Object dedupedTasks = callMethod(param.thisObject,
+								"dedupeHotseatTasks",
+								getObjectField(param.thisObject, "allRecentTasks"),
+								getObjectField(param.thisObject, "shownHotseatItems")
+						);
+
+						param.setResult(dedupedTasks);
 					}
 				});
 

@@ -68,4 +68,12 @@
         app:tickInterval=".1"
         app:updatesContinuously="false" />
 
+    <sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+        android:defaultValue="false"
+        android:key="ShowAllRecentIcons"
+        android:summaryOff="@string/general_off"
+        android:summaryOn="@string/general_on"
+        android:title="@string/taskbar_show_all_recents_icons"
+        app:iconSpaceReserved="false" />
+
 </PreferenceScreen>

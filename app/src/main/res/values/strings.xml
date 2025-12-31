@@ -297,6 +297,7 @@
     <string name="taskbar_on_launcher_title">Show on home</string>
     <string name="remap_physical_buttons_title">Remap physical buttons</string>
     <string name="taskbar_on_ime_title">Show with keyboard open</string>
+    <string name="taskbar_show_all_recents_icons">Show more recent app icons</string>
 
     <!-- Package manager -->
     <string name="pm_bypass_signature_title">Bypass package signature check</string>

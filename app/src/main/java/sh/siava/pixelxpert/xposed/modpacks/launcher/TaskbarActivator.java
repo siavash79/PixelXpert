@@ -300,11 +300,20 @@ public class TaskbarActivator extends XposedModPack {
 				});
 
 		// Show taskbar even with keyboard displayed
+		// Pre 16 QPR2
 		TaskbarStashControllerClass.after("shouldStashForIme").run (param -> {
 			if (TaskbarOnIme) {
 				param.setResult(false);
 			}
 		});
+
+		// 16 QPR2
+		TaskbarActivityContextClass.before("isImeDocked").run(param -> {
+			if (TaskbarOnIme) {
+				param.setResult(false);
+			}
+		});
+
 
 		RecentAppsControllerClass
 				.before("onRecentsOrHotseatChanged")

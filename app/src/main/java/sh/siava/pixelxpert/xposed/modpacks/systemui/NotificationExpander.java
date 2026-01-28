@@ -10,9 +10,7 @@ import static sh.siava.pixelxpert.xposed.utils.SystemUtils.idOf;
 import static sh.siava.pixelxpert.xposed.utils.toolkit.ObjectTools.tryParseInt;
 import static sh.siava.pixelxpert.xposed.utils.toolkit.ReflectionTools.reAddView;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -49,7 +47,7 @@ public class NotificationExpander extends XposedModPack {
 	private Button ExpandBtn, CollapseBtn;
 	private FrameLayout FooterView;
 	private LinearLayout BtnLayout;
-	private Object Scroller;
+	private View Scroller;
 	private Object NotifCollection = null;
 	private LinearLayout mDismissContainer;
 
@@ -158,7 +156,7 @@ public class NotificationExpander extends XposedModPack {
 		//grab notification scroll page
 		NotificationStackScrollLayoutClass
 				.afterConstruction()
-				.run(param -> Scroller = param.thisObject);
+				.run(param -> Scroller = (View) param.thisObject);
 	}
 
 	private void updateFooterBtn() {
@@ -166,8 +164,6 @@ public class NotificationExpander extends XposedModPack {
 
 		FooterView.post(() -> {
 			try {
-				Resources res = mContext.getResources();
-
 				Button clearAllButton = BtnLayout.findViewById(idOf("dismiss_text"));
 
 				clearAllButton.getLayoutParams().width = -1;
@@ -176,17 +172,10 @@ public class NotificationExpander extends XposedModPack {
 				dismissContainerParams.weight = 1;
 				mDismissContainer.setLayoutParams(dismissContainerParams);
 
-				@SuppressLint({"UseCompatLoadingForDrawables", "DiscouragedApi"})
-				Drawable backgroundShape = res.getDrawable(
-						res.getIdentifier(
-								"notif_footer_btn_background",
-								"drawable",
-								mContext.getPackageName()),
-						mContext.getTheme());
-
-				ExpandBtn.setBackground(backgroundShape);
-				backgroundShape.setColorFilter(clearAllButton.getBackground().getColorFilter());
-				CollapseBtn.setBackground(backgroundShape);
+				//must clone a fully new drawable for each to avoid effects conflict
+				//noinspection DataFlowIssue
+				ExpandBtn.setBackground(clearAllButton.getBackground().getConstantState().newDrawable());
+				CollapseBtn.setBackground(clearAllButton.getBackground().getConstantState().newDrawable());
 
 				int textColor =  clearAllButton.getCurrentTextColor();
 				ExpandBtn.getForeground().setTint(textColor);
@@ -223,14 +212,6 @@ public class NotificationExpander extends XposedModPack {
 	public void expandAll(boolean expand) {
 		if (NotifCollection == null) return;
 
-		if (!expand) {
-			callMethod(
-					Scroller,
-					"setOwnScrollY",
-					/* pisition */0,
-					/* animate */ true);
-		}
-
 		Collection<Object> entries;
 		//noinspection unchecked
 		entries = (Collection<Object>) getObjectField(NotifCollection, "mReadOnlyNotificationSet");
@@ -240,6 +221,11 @@ public class NotificationExpander extends XposedModPack {
 				setRowExpansion(row, expand);
 			}
 		}
+
+		if (!expand) {
+			Scroller.requestLayout();
+		}
+
 	}
 
 	private void setRowExpansion(Object row, boolean expand) {

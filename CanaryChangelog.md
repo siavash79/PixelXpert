@@ -1,3 +1,9 @@
+**canary-485**  
+- A16qpr3b1 - Fixed taskbar in recents mode  
+  
+**canary-484**  
+- Improved notification collapse/expand buttons + fixed colors  
+  
 **canary-483**  
 - A16QPR3b1 - Adopted the new flashlight tile to PX  
   

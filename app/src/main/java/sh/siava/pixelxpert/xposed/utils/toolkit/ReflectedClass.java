@@ -6,11 +6,14 @@ import static de.robv.android.xposed.XposedBridge.hookMethod;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.findClassIfExists;
-import static sh.siava.pixelxpert.xposed.utils.toolkit.ReflectionTools.dumpClass;
 
 import android.annotation.SuppressLint;
 import android.util.ArraySet;
 
+import androidx.annotation.NonNull;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Set;
@@ -50,10 +53,43 @@ public class ReflectedClass
 		defaultClassloader = classloader;
 	}
 
-	public void dumpStructure()
-	{
-		dumpClass(clazz);
+	public void dumpStructure() {
+		Method[] ms = clazz.getDeclaredMethods();
+		log("Class: " + clazz.getName());
+		log("extends: " + clazz.getSuperclass().getName());
+		log("Subclasses:");
+		Class<?>[] scs = clazz.getClasses();
+		for(Class <?> c : scs)
+		{
+			log(c.getName());
+		}
+		log("Methods:");
+
+		Constructor<?>[] cons = clazz.getDeclaredConstructors();
+		for (Constructor<?> m : cons) {
+			log(m.getName() + " - " + " - " + m.getParameterCount());
+			Class<?>[] cs = m.getParameterTypes();
+			for (Class<?> c : cs) {
+				log("\t\t" + c.getTypeName());
+			}
+		}
+
+		for (Method m : ms) {
+			log(m.getName() + " - " + m.getReturnType() + " - " + m.getParameterCount());
+			Class<?>[] cs = m.getParameterTypes();
+			for (Class<?> c : cs) {
+				log("\t\t" + c.getTypeName());
+			}
+		}
+		log("Fields:");
+
+		Field[] fs = clazz.getDeclaredFields();
+		for (Field f : fs) {
+			log("\t\t" + f.getName() + "-" + f.getType().getName());
+		}
+		log("End dump");
 	}
+
 
 	public Class<?> getClazz()
 	{
@@ -205,7 +241,7 @@ public class ReflectedClass
 					StackTraceElement element = Thread.currentThread().getStackTrace()[2];
 					String callingClassName = element.getClassName();
 					int lineNumber = element.getLineNumber();
-					log(String.format("%s line %d: Hook to %s before method %s size = %d", callingClassName,lineNumber, clazz.getName(), method.getName(), unhooks.size()));
+					log(String.format("%s line %d: Hook to %s before method %s size = %d", callingClassName,lineNumber, clazz.getName(), methodName, unhooks.size()));
 				}
 			}
 			return unhooks;
@@ -371,6 +407,33 @@ public class ReflectedClass
 			return runAfter(consumer, log);
 		}
 	}
+
+	/**
+	 * Finds FIRST instance of a class by hooking to every METHOD defined in it.
+	 * Obviously, won't be able to find any instance if there's no method defined or called in that class.
+	 * <br>
+	 * It's useful if the constructor is removed due to build optimizations
+	 * @param foundCallback callback that will be called once instance was found, and delivers the instance captured
+	 */
+	public void findFirstInstance(InstanceFoundCallback foundCallback)
+	{
+		Set<XC_MethodHook.Unhook> unhooks = new ArraySet<>();
+		findMethods(Pattern.compile(".+"))
+				.forEach(
+						method -> unhooks.addAll(
+								before(method)
+										.run(param -> {
+											unhooks.forEach(XC_MethodHook.Unhook::unhook);
+											unhooks.clear();
+											foundCallback.onInstanceCaptured(param.thisObject);
+										})));
+	}
+
+	public interface InstanceFoundCallback
+	{
+		void onInstanceCaptured(@NonNull Object instance);
+	}
+
 
 	public interface ReflectionConsumer
 	{

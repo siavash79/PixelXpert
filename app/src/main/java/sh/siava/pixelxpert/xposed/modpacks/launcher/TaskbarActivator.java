@@ -13,6 +13,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -285,6 +286,7 @@ public class TaskbarActivator extends XposedModPack {
 					}
 				});
 
+		// TaskbarShowAllRecents Pre-16QPR2
 		RecentAppsControllerClass
 				.before("computeShownRecentTasks")
 				.run(param -> {
@@ -298,6 +300,16 @@ public class TaskbarActivator extends XposedModPack {
 						param.setResult(dedupedTasks);
 					}
 				});
+
+		// TaskbarShowAllRecents 16QPR2
+		RecentAppsControllerClass.after("onRecentsOrHotseatChanged").run(param -> {
+			if (TaskbarShowAllRecents) {
+				ArrayList allRecentTasks = (ArrayList) getObjectField(param.thisObject, "allRecentTasks");
+				setObjectField(param.thisObject, "shownTasks", allRecentTasks.subList(0, allRecentTasks.size() - 1));
+				callMethod(param.thisObject, "fetchIcons");
+			}
+		});
+
 
 		// Show taskbar even with keyboard displayed
 		// Pre 16 QPR2

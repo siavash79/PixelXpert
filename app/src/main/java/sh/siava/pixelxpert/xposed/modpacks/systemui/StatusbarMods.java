@@ -90,6 +90,8 @@ public class StatusbarMods extends XposedModPack {
 
 	private static final int AM_PM_STYLE_SMALL = 1;
 	private static final int AM_PM_STYLE_GONE = 2;
+	private static final String ORIGINAL_STATUS_BAR_CONTENTS_TOP_PADDING = "px_original_status_bar_contents_top_padding";
+	private static final String ORIGINAL_STATUS_BAR_TRANSLATION_Y = "px_original_status_bar_translation_y";
 	private final int leftClockPadding, rightClockPadding;
 	private static int clockPosition = POSITION_LEFT;
 	private static int mAmPmStyle = AM_PM_STYLE_GONE;
@@ -134,6 +136,8 @@ public class StatusbarMods extends XposedModPack {
 	private static final ArrayList<ClockVisibilityCallback> clockVisibilityCallbacks = new ArrayList<>();
 	private Object mActivityStarter;
 	private static boolean notificationAreaMultiRow = false;
+	private static boolean noCutoutEnabled = false;
+	private static int statusbarHeightFactor = 100;
 	private static int NotificationAODIconLimit = 3;
 	private static int NotificationIconLimit = 4;
 	private Object AODNIC;
@@ -147,11 +151,13 @@ public class StatusbarMods extends XposedModPack {
 
 	private TextView mClockView;
 	private ViewGroup mNotificationIconContainer = null;
+	private ViewGroup mNotificationIconArea = null;
 	LinearLayout mNotificationContainerContainer;
 	private LinearLayout mLeftVerticalSplitContainer;
 	private LinearLayout mLeftExtraRowContainer;
 	private static float SBPaddingStart = 0, SBPaddingEnd = 0;
 	private FrameLayout mPhoneStatusbarView;
+	private View mStatusBarContents;
 
 	//endregion
 
@@ -244,6 +250,8 @@ public class StatusbarMods extends XposedModPack {
 			}
 		}
 		notificationAreaMultiRow = Xprefs.getBoolean("notificationAreaMultiRow", false);
+		noCutoutEnabled = Xprefs.getBoolean("noCutoutEnabled", false);
+		statusbarHeightFactor = Xprefs.getSliderInt("statusbarHeightFactor", 100);
 
 		try {
 			NotificationIconLimit = Integer.parseInt(Xprefs.getString("NotificationIconLimit", "").trim());
@@ -452,6 +460,53 @@ public class StatusbarMods extends XposedModPack {
 		}
 	}
 
+	private void applyStatusBarContentPadding(View sbContentsView) {
+		if (sbContentsView == null) return;
+
+		Object originalTopPadding = getAdditionalInstanceField(sbContentsView, ORIGINAL_STATUS_BAR_CONTENTS_TOP_PADDING);
+		if (!(originalTopPadding instanceof Integer)) {
+			originalTopPadding = sbContentsView.getPaddingTop();
+			setAdditionalInstanceField(sbContentsView, ORIGINAL_STATUS_BAR_CONTENTS_TOP_PADDING, originalTopPadding);
+		}
+
+		int paddingTop = (Integer) originalTopPadding;
+
+		int screenWidth = mContext.getResources().getDisplayMetrics().widthPixels;
+
+		int paddingStart = SBPaddingStart == PADDING_DEFAULT
+				? sbContentsView.getPaddingStart()
+				: Math.round(SBPaddingStart * screenWidth / 100f);
+
+		int paddingEnd = SBPaddingEnd == PADDING_DEFAULT
+				? sbContentsView.getPaddingEnd()
+				: Math.round(SBPaddingEnd * screenWidth / 100f);
+
+		sbContentsView.setPaddingRelative(paddingStart, paddingTop, paddingEnd, sbContentsView.getPaddingBottom());
+	}
+
+	private int getStatusBarContentTopInset() {
+		if (!noCutoutEnabled && !notificationAreaMultiRow) return 0;
+
+		int safeTopInset = ResourceTools.dpToPx(mContext, 6);
+		if (!notificationAreaMultiRow) return safeTopInset;
+
+		int statusbarHeight = getPhoneStatusBarHeight();
+		int iconSize = getAndroidDimensionPixelSize("status_bar_icon_size", ResourceTools.dpToPx(mContext, 22));
+		if (statusbarHeight <= 0 || iconSize <= 0) return safeTopInset;
+
+		int maxTopInset = Math.max(0, statusbarHeight - (2 * iconSize));
+		return Math.min(safeTopInset, maxTopInset);
+	}
+
+	private int getAndroidDimensionPixelSize(String resourceName, int defaultValue) {
+		try {
+			int resId = mContext.getResources().getIdentifier(resourceName, "dimen", "android");
+			return resId == 0 ? defaultValue : mContext.getResources().getDimensionPixelSize(resId);
+		} catch (Throwable ignored) {
+			return defaultValue;
+		}
+	}
+
 	@SuppressLint("DiscouragedApi")
 	@Override
 	public void onPackageLoaded(XposedModuleInterface.PackageReadyParam PRParam) throws Throwable {
@@ -574,21 +629,11 @@ public class StatusbarMods extends XposedModPack {
 				.run(param -> {
 					@SuppressLint("DiscouragedApi")
 					View sbContentsView = ((View) param.thisObject).findViewById(idOf("status_bar_contents"));
+					mStatusBarContents = sbContentsView;
 
-					if (SBPaddingStart == PADDING_DEFAULT && SBPaddingEnd == PADDING_DEFAULT)
-						return;
-
-					int screenWidth = mContext.getResources().getDisplayMetrics().widthPixels;
-
-					int paddingStart = SBPaddingStart == PADDING_DEFAULT
-							? sbContentsView.getPaddingStart()
-							: Math.round(SBPaddingStart * screenWidth / 100f);
-
-					int paddingEnd = SBPaddingEnd == PADDING_DEFAULT
-							? sbContentsView.getPaddingEnd()
-							: Math.round(SBPaddingEnd * screenWidth / 100f);
-
-					sbContentsView.setPaddingRelative(paddingStart, sbContentsView.getPaddingTop(), paddingEnd, sbContentsView.getPaddingBottom());
+					applyPhoneStatusBarViewHeight();
+					applyStatusBarContentPadding(sbContentsView);
+					applyStatusBarContainerLayout();
 				});
 		//endregion
 
@@ -646,8 +691,11 @@ public class StatusbarMods extends XposedModPack {
 					updateClockColor();
 
 					mPhoneStatusbarView.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setHeights());
+					applyPhoneStatusBarViewHeight();
 
 					mStatusbarStartSide = mPhoneStatusbarView.findViewById(idOf("status_bar_start_side_except_heads_up"));
+					mStatusBarContents = mPhoneStatusbarView.findViewById(idOf("status_bar_contents"));
+					applyStatusBarContentPadding(mStatusBarContents);
 
 					mSystemIconArea = mPhoneStatusbarView.findViewById(idOf("statusIcons"));
 
@@ -677,6 +725,7 @@ public class StatusbarMods extends XposedModPack {
 					setHeights();
 
 					placeClock();
+					setHeights();
 				});
 
 		//clock mods
@@ -789,6 +838,8 @@ public class StatusbarMods extends XposedModPack {
 		mNotificationIconContainer = mPhoneStatusbarView.findViewById(idOf("notificationIcons"));
 
 		mNotificationContainerContainer = new LinearLayout(mContext);
+		mNotificationContainerContainer.setBaselineAligned(false);
+		mNotificationContainerContainer.setGravity(Gravity.CENTER_VERTICAL);
 		mNotificationContainerContainer.setClipChildren(false); //allowing headsup icon to go beyond
 
 		if (mLeftVerticalSplitContainer == null) {
@@ -802,9 +853,7 @@ public class StatusbarMods extends XposedModPack {
 
 		mLeftVerticalSplitContainer.setOrientation(VERTICAL);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
-		int margin = ResourceTools.dpToPx(mContext, 4);
-		lp.topMargin = margin;
-		lp.bottomMargin = margin;
+		setLeftSplitAreaMargins(lp);
 
 		mLeftVerticalSplitContainer.setLayoutParams(lp);
 		mLeftVerticalSplitContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setHeights());
@@ -815,9 +864,15 @@ public class StatusbarMods extends XposedModPack {
 		mLeftVerticalSplitContainer.setLayoutTransition(layoutTransition);
 
 		mLeftExtraRowContainer = new ShyLinearLayout(mContext);
+		mLeftExtraRowContainer.setBaselineAligned(false);
+		mLeftExtraRowContainer.setGravity(Gravity.CENTER_VERTICAL);
+		mLeftExtraRowContainer.setClipChildren(false);
 		mLeftVerticalSplitContainer.addView(mLeftExtraRowContainer, 0);
 
 		ViewGroup parent = (ViewGroup) mNotificationIconContainer.getParent();
+		mNotificationIconArea = parent;
+		mNotificationIconArea.setClipChildren(false);
+		mNotificationIconArea.setClipToPadding(false);
 
 		parent.addView(mLeftVerticalSplitContainer, parent.indexOfChild(mNotificationIconContainer));
 		parent.removeView(mNotificationIconContainer);
@@ -827,7 +882,10 @@ public class StatusbarMods extends XposedModPack {
 
 		mNotificationContainerContainer.addView(mNotificationIconContainer);
 
-		((LinearLayout.LayoutParams) mNotificationIconContainer.getLayoutParams()).weight = 100;
+		LinearLayout.LayoutParams notificationIconParams = (LinearLayout.LayoutParams) mNotificationIconContainer.getLayoutParams();
+		notificationIconParams.weight = 100;
+		notificationIconParams.gravity = Gravity.CENTER_VERTICAL;
+		mNotificationIconContainer.setLayoutParams(notificationIconParams);
 		mNotificationIconContainer.setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
 			@Override
 			public void onChildViewAdded(View parent, View child) {
@@ -847,6 +905,7 @@ public class StatusbarMods extends XposedModPack {
 		((View) mStatusbarStartSide.getParent()).getLayoutParams().height = MATCH_PARENT;
 		mStatusbarStartSide.getLayoutParams().height = MATCH_PARENT;
 		mLeftVerticalSplitContainer.getLayoutParams().height = MATCH_PARENT;
+		applyStatusBarContainerLayout();
 	}
 
 	private void repositionOngoingChip() {
@@ -866,14 +925,305 @@ public class StatusbarMods extends XposedModPack {
 
 
 	private void setHeights() {
-		@SuppressLint("DiscouragedApi") int statusbarHeight = mPhoneStatusbarView.getLayoutParams().height
-				- mContext.getResources().getDimensionPixelSize(dimenIdOf("status_bar_padding_top"));
+		applyPhoneStatusBarViewHeight();
+		int statusbarHeight = getStatusbarContentHeight();
+		if (statusbarHeight <= 0) return;
 
-		mNotificationContainerContainer.getLayoutParams().height = (mLeftExtraRowContainer.getVisibility() == VISIBLE) ? statusbarHeight / 2 : MATCH_PARENT;
-		mLeftExtraRowContainer.getLayoutParams().height = ((mNotificationContainerContainer.getVisibility() == VISIBLE) ? statusbarHeight / 2 : MATCH_PARENT);
+		applyStatusBarContainerLayout();
+		setLeftSplitAreaMargins(mLeftVerticalSplitContainer);
+
+		int splitHeight = Math.max(1, statusbarHeight / 2);
+
+		setHeight(mNotificationContainerContainer, (mLeftExtraRowContainer.getVisibility() == VISIBLE) ? splitHeight : MATCH_PARENT);
+		setHeight(mLeftExtraRowContainer, ((mNotificationContainerContainer.getVisibility() == VISIBLE) ? splitHeight : MATCH_PARENT));
+		setHeight(mNotificationIconContainer, MATCH_PARENT);
 		if (networkOnSBEnabled) {
-			networkTrafficSB.getLayoutParams().height = statusbarHeight / ((networkTrafficPosition == POSITION_LEFT && notificationAreaMultiRow) ? 2 : 1);
+			setHeight(networkTrafficSB, statusbarHeight / ((networkTrafficPosition == POSITION_LEFT && notificationAreaMultiRow) ? 2 : 1));
 		}
+	}
+
+	private int getStatusbarContentHeight() {
+		return Math.max(0, getPhoneStatusBarHeight() - getStatusBarContentTopInset());
+	}
+
+	private int getPhoneStatusBarHeight() {
+		int insetsHeight = getStatusBarInsetsHeight();
+		if (insetsHeight > 0) {
+			return insetsHeight;
+		}
+
+		int targetHeight = getTargetPhoneStatusBarHeight();
+		if (targetHeight > 0) {
+			return targetHeight;
+		}
+
+		int statusbarHeight = 0;
+		if (statusbarHeight <= 0) {
+			statusbarHeight = getViewHeight(mPhoneStatusbarView);
+		}
+		if (statusbarHeight <= 0) {
+			statusbarHeight = getViewHeight(mStatusBarContents);
+		}
+		return statusbarHeight;
+	}
+
+	private int getStatusBarInsetsHeight() {
+		try {
+			if (mPhoneStatusbarView == null || mPhoneStatusbarView.getRootWindowInsets() == null) return 0;
+
+			return mPhoneStatusbarView
+					.getRootWindowInsets()
+					.getInsetsIgnoringVisibility(android.view.WindowInsets.Type.statusBars())
+					.top;
+		} catch (Throwable ignored) {
+			return 0;
+		}
+	}
+
+	private int getTargetPhoneStatusBarHeight() {
+		try {
+			Context portraitContext = getPortraitContext();
+			int height = getAndroidDimensionPixelSize(
+					portraitContext,
+					"status_bar_height_portrait",
+					getAndroidDimensionPixelSize(portraitContext, "status_bar_height", 0));
+			return Math.round(height * statusbarHeightFactor / 100f);
+		} catch (Throwable ignored) {
+			return 0;
+		}
+	}
+
+	private Context getPortraitContext() {
+		android.content.res.Configuration config = new android.content.res.Configuration(mContext.getResources().getConfiguration());
+		config.orientation = android.content.res.Configuration.ORIENTATION_PORTRAIT;
+		return mContext.createConfigurationContext(config);
+	}
+
+	private int getViewHeight(View view) {
+		if (view == null) return 0;
+
+		int height = view.getHeight();
+		if (height <= 0) {
+			height = view.getMeasuredHeight();
+		}
+		if (height <= 0 && view.getLayoutParams() != null && view.getLayoutParams().height > 0) {
+			height = view.getLayoutParams().height;
+		}
+		return height;
+	}
+
+	private int getAndroidDimensionPixelSize(Context context, String resourceName, int defaultValue) {
+		try {
+			int resId = context.getResources().getIdentifier(resourceName, "dimen", "android");
+			return resId == 0 ? defaultValue : context.getResources().getDimensionPixelSize(resId);
+		} catch (Throwable ignored) {
+			return defaultValue;
+		}
+	}
+
+	private void setLeftSplitAreaMargins(ViewGroup.MarginLayoutParams layoutParams) {
+		if (notificationAreaMultiRow) {
+			layoutParams.topMargin = 0;
+			layoutParams.bottomMargin = 0;
+		} else {
+			int margin = ResourceTools.dpToPx(mContext, 4);
+			layoutParams.topMargin = margin;
+			layoutParams.bottomMargin = margin;
+		}
+	}
+
+	private void setLeftSplitAreaMargins(View view) {
+		if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams layoutParams) {
+			setLeftSplitAreaMargins(layoutParams);
+			view.setLayoutParams(layoutParams);
+		}
+	}
+
+	private void setHeight(View view, int height) {
+		if (view == null) return;
+
+		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+		if (layoutParams != null && layoutParams.height != height) {
+			layoutParams.height = height;
+			view.setLayoutParams(layoutParams);
+		}
+	}
+
+	private void applyStatusBarContainerLayout() {
+		int topInset = getStatusBarContentTopInset();
+		int contentHeight = getStatusbarContentHeight();
+
+		applyPhoneStatusBarViewHeight();
+		applyMatchParentHeight(mStatusBarContents);
+		applyMatchParentHeight(mStatusbarStartSide);
+		applyMatchParentHeight(mNotificationIconArea);
+		if (mStatusbarStartSide != null && mStatusbarStartSide.getParent() instanceof View) {
+			applyMatchParentHeight((View) mStatusbarStartSide.getParent());
+		}
+
+		applyVerticalContentBounds(mCenteredIconArea, 0, contentHeight);
+		applyStatusBarTranslationY(mCenteredIconArea, getSingleRowStatusBarTranslationY(mCenteredIconArea));
+		if (mSystemIconArea != null) {
+			if (mSystemIconArea.getParent() instanceof View) {
+				View systemIconParent = (View) mSystemIconArea.getParent();
+				applyVerticalContentBounds(systemIconParent, 0, contentHeight);
+				applyStatusBarTranslationY(systemIconParent, getSingleRowStatusBarTranslationY(systemIconParent));
+				applyContentChildBounds(mSystemIconArea);
+				applyStatusBarTranslationY(mSystemIconArea, 0);
+			} else {
+				applyVerticalContentBounds(mSystemIconArea, 0, contentHeight);
+				applyStatusBarTranslationY(mSystemIconArea, getSingleRowStatusBarTranslationY(mSystemIconArea));
+			}
+		}
+		if (mLeftVerticalSplitContainer != null) {
+			applyStatusBarTranslationY(mLeftVerticalSplitContainer, notificationAreaMultiRow
+					? topInset
+					: getSingleRowStatusBarTranslationY(mLeftVerticalSplitContainer));
+		}
+		applyLinearLayoutGravity(mLeftExtraRowContainer, Gravity.CENTER_VERTICAL);
+		applyLinearLayoutGravity(mNotificationContainerContainer, Gravity.CENTER_VERTICAL);
+		applyLinearLayoutGravity(mSystemIconArea, Gravity.CENTER_VERTICAL);
+
+		if (mClockView != null) {
+			mClockView.setGravity(Gravity.CENTER_VERTICAL);
+			applyLayoutGravity(mClockView, Gravity.CENTER_VERTICAL);
+		}
+	}
+
+	private float getSingleRowStatusBarTranslationY(View view) {
+		if (view == null) return 0;
+
+		int statusbarHeight = getPhoneStatusBarHeight();
+		int contentHeight = Math.max(0, statusbarHeight - getStatusBarContentTopInset());
+		int viewHeight = getViewHeight(view);
+		if (contentHeight <= 0 || viewHeight <= 0) return getStatusBarContentTopInset();
+
+		return getStatusBarContentTopInset() + Math.max(0, (contentHeight - viewHeight) / 2f);
+	}
+
+	private void applyStatusBarTranslationY(View view, float translationY) {
+		if (view == null) return;
+
+		Object originalTranslationY = getAdditionalInstanceField(view, ORIGINAL_STATUS_BAR_TRANSLATION_Y);
+		if (!(originalTranslationY instanceof Float)) {
+			originalTranslationY = view.getTranslationY();
+			setAdditionalInstanceField(view, ORIGINAL_STATUS_BAR_TRANSLATION_Y, originalTranslationY);
+		}
+		view.setTranslationY((Float) originalTranslationY + translationY);
+	}
+
+	private void applyMatchParentHeight(View view) {
+		if (view == null || view.getLayoutParams() == null) return;
+
+		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+		if (layoutParams.height != MATCH_PARENT) {
+			layoutParams.height = MATCH_PARENT;
+			view.setLayoutParams(layoutParams);
+		}
+		if (view instanceof ViewGroup viewGroup) {
+			viewGroup.setClipChildren(false);
+			viewGroup.setClipToPadding(false);
+		}
+	}
+
+	private void applyPhoneStatusBarViewHeight() {
+		int targetHeight = getPhoneStatusBarHeight();
+		if (mPhoneStatusbarView == null || targetHeight <= 0) return;
+
+		ViewGroup.LayoutParams layoutParams = mPhoneStatusbarView.getLayoutParams();
+		if (layoutParams != null && layoutParams.height != targetHeight) {
+			layoutParams.height = targetHeight;
+			mPhoneStatusbarView.setLayoutParams(layoutParams);
+			mPhoneStatusbarView.requestLayout();
+		}
+	}
+
+	private void applyVerticalContentBounds(View view, int topMargin, int height) {
+		if (view == null || view.getLayoutParams() == null || height <= 0) return;
+
+		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+		boolean changed = false;
+		if (layoutParams.height != height) {
+			layoutParams.height = height;
+			changed = true;
+		}
+		if (layoutParams instanceof ViewGroup.MarginLayoutParams marginLayoutParams) {
+			if (marginLayoutParams.topMargin != topMargin) {
+				marginLayoutParams.topMargin = topMargin;
+				changed = true;
+			}
+			if (marginLayoutParams.bottomMargin != 0) {
+				marginLayoutParams.bottomMargin = 0;
+				changed = true;
+			}
+		}
+		if (changed) {
+			view.setLayoutParams(layoutParams);
+		}
+		applyLayoutGravity(view, Gravity.CENTER_VERTICAL);
+		if (view instanceof ViewGroup viewGroup) {
+			viewGroup.setClipChildren(false);
+			viewGroup.setClipToPadding(false);
+		}
+	}
+
+	private void applyContentChildBounds(View view) {
+		if (view == null || view.getLayoutParams() == null) return;
+
+		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+		boolean changed = false;
+		if (layoutParams.height != MATCH_PARENT) {
+			layoutParams.height = MATCH_PARENT;
+			changed = true;
+		}
+		if (layoutParams instanceof ViewGroup.MarginLayoutParams marginLayoutParams) {
+			if (marginLayoutParams.topMargin != 0) {
+				marginLayoutParams.topMargin = 0;
+				changed = true;
+			}
+			if (marginLayoutParams.bottomMargin != 0) {
+				marginLayoutParams.bottomMargin = 0;
+				changed = true;
+			}
+		}
+		if (changed) {
+			view.setLayoutParams(layoutParams);
+		}
+		applyLayoutGravity(view, Gravity.CENTER_VERTICAL);
+	}
+
+	private void applyLayoutGravity(View view, int gravity) {
+		if (view == null || view.getLayoutParams() == null) return;
+
+		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+		if (layoutParams instanceof LinearLayout.LayoutParams linearLayoutParams) {
+			int updatedGravity = mergeVerticalGravity(linearLayoutParams.gravity, gravity);
+			if (linearLayoutParams.gravity != updatedGravity) {
+				linearLayoutParams.gravity = updatedGravity;
+				view.setLayoutParams(linearLayoutParams);
+			}
+		} else if (layoutParams instanceof FrameLayout.LayoutParams frameLayoutParams) {
+			int updatedGravity = mergeVerticalGravity(frameLayoutParams.gravity, gravity);
+			if (frameLayoutParams.gravity != updatedGravity) {
+				frameLayoutParams.gravity = updatedGravity;
+				view.setLayoutParams(frameLayoutParams);
+			}
+		}
+	}
+
+	private void applyLinearLayoutGravity(LinearLayout view, int gravity) {
+		if (view == null) return;
+
+		int updatedGravity = mergeVerticalGravity(view.getGravity(), gravity);
+		if (view.getGravity() != updatedGravity) {
+			view.setGravity(updatedGravity);
+		}
+	}
+
+	private int mergeVerticalGravity(int originalGravity, int verticalGravity) {
+		if (originalGravity < 0) originalGravity = 0;
+
+		return (originalGravity & ~Gravity.VERTICAL_GRAVITY_MASK) | verticalGravity;
 	}
 	//endregion
 

@@ -4,6 +4,7 @@
         <item>com.android.systemui</item> <!-- systemUI -->
         <item>com.google.android.apps.nexuslauncher</item> <!-- Pixel Launcher - Taskbar -->
         <item>android</item>  <!-- System Framework -->
+        <item>system</item>  <!-- system_server on Vector -->
         <item>com.android.settings</item> <!-- settings app -->
         <item>com.google.android.dialer</item> <!-- google dialer -->
         <item>me.weishu.kernelsu</item> <!-- KSU Manager -->

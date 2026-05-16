@@ -18,7 +18,6 @@ import static sh.siava.pixelxpert.xposed.utils.SystemUtils.resourceIdOf;
 import static sh.siava.pixelxpert.xposed.utils.toolkit.ObjectTools.getStateFlowImplOf;
 import static sh.siava.pixelxpert.xposed.utils.reflection.ReflectionTools.reAddView;
 
-import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -158,6 +157,7 @@ public class StatusbarMods extends XposedModPack {
 	private static float SBPaddingStart = 0, SBPaddingEnd = 0;
 	private FrameLayout mPhoneStatusbarView;
 	private View mStatusBarContents;
+	private final Runnable mSetHeightsRunnable = this::setHeights;
 
 	//endregion
 
@@ -498,6 +498,7 @@ public class StatusbarMods extends XposedModPack {
 		return Math.min(safeTopInset, maxTopInset);
 	}
 
+	@SuppressLint("DiscouragedApi")
 	private int getAndroidDimensionPixelSize(String resourceName, int defaultValue) {
 		try {
 			int resId = mContext.getResources().getIdentifier(resourceName, "dimen", "android");
@@ -690,7 +691,7 @@ public class StatusbarMods extends XposedModPack {
 					mClockView = mPhoneStatusbarView.findViewById(idOf("clock"));
 					updateClockColor();
 
-					mPhoneStatusbarView.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setHeights());
+					mPhoneStatusbarView.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> scheduleHeightsUpdate());
 					applyPhoneStatusBarViewHeight();
 
 					mStatusbarStartSide = mPhoneStatusbarView.findViewById(idOf("status_bar_start_side_except_heads_up"));
@@ -719,9 +720,6 @@ public class StatusbarMods extends XposedModPack {
 					}
 
 
-					if (mNotificationIconContainer.getChildCount() == 0) {
-						mNotificationContainerContainer.setVisibility(GONE);
-					}
 					setHeights();
 
 					placeClock();
@@ -852,16 +850,12 @@ public class StatusbarMods extends XposedModPack {
 		}
 
 		mLeftVerticalSplitContainer.setOrientation(VERTICAL);
+		mLeftVerticalSplitContainer.setLayoutTransition(null);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
 		setLeftSplitAreaMargins(lp);
 
 		mLeftVerticalSplitContainer.setLayoutParams(lp);
-		mLeftVerticalSplitContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setHeights());
-
-		LayoutTransition layoutTransition = new LayoutTransition();
-		layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
-		layoutTransition.setDuration(200);
-		mLeftVerticalSplitContainer.setLayoutTransition(layoutTransition);
+		mLeftVerticalSplitContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> scheduleHeightsUpdate());
 
 		mLeftExtraRowContainer = new ShyLinearLayout(mContext);
 		mLeftExtraRowContainer.setBaselineAligned(false);
@@ -889,16 +883,12 @@ public class StatusbarMods extends XposedModPack {
 		mNotificationIconContainer.setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
 			@Override
 			public void onChildViewAdded(View parent, View child) {
-				mNotificationContainerContainer.setVisibility(VISIBLE);
-				setHeights();
+				scheduleHeightsUpdate();
 			}
 
 			@Override
 			public void onChildViewRemoved(View parent, View child) {
-				if (mNotificationIconContainer.getChildCount() == 0) {
-					mNotificationContainerContainer.setVisibility(GONE);
-					setHeights();
-				}
+				scheduleHeightsUpdate();
 			}
 		});
 
@@ -925,6 +915,12 @@ public class StatusbarMods extends XposedModPack {
 
 
 	private void setHeights() {
+		if (mPhoneStatusbarView == null
+				|| mNotificationContainerContainer == null
+				|| mLeftExtraRowContainer == null
+				|| mNotificationIconContainer == null)
+			return;
+
 		applyPhoneStatusBarViewHeight();
 		int statusbarHeight = getStatusbarContentHeight();
 		if (statusbarHeight <= 0) return;
@@ -933,13 +929,25 @@ public class StatusbarMods extends XposedModPack {
 		setLeftSplitAreaMargins(mLeftVerticalSplitContainer);
 
 		int splitHeight = Math.max(1, statusbarHeight / 2);
+		boolean hasExtraRow = mLeftExtraRowContainer.getVisibility() == VISIBLE;
+		boolean hasNotificationIcons = mNotificationIconContainer.getChildCount() > 0;
 
-		setHeight(mNotificationContainerContainer, (mLeftExtraRowContainer.getVisibility() == VISIBLE) ? splitHeight : MATCH_PARENT);
-		setHeight(mLeftExtraRowContainer, ((mNotificationContainerContainer.getVisibility() == VISIBLE) ? splitHeight : MATCH_PARENT));
+		if (mNotificationContainerContainer.getVisibility() != VISIBLE) {
+			mNotificationContainerContainer.setVisibility(VISIBLE);
+		}
+		setHeight(mNotificationContainerContainer, hasNotificationIcons ? (hasExtraRow ? splitHeight : MATCH_PARENT) : 0);
+		setHeight(mLeftExtraRowContainer, (hasExtraRow && hasNotificationIcons) ? splitHeight : MATCH_PARENT);
 		setHeight(mNotificationIconContainer, MATCH_PARENT);
 		if (networkOnSBEnabled) {
 			setHeight(networkTrafficSB, statusbarHeight / ((networkTrafficPosition == POSITION_LEFT && notificationAreaMultiRow) ? 2 : 1));
 		}
+	}
+
+	private void scheduleHeightsUpdate() {
+		if (mPhoneStatusbarView == null) return;
+
+		mPhoneStatusbarView.removeCallbacks(mSetHeightsRunnable);
+		mPhoneStatusbarView.post(mSetHeightsRunnable);
 	}
 
 	private int getStatusbarContentHeight() {
@@ -1012,6 +1020,7 @@ public class StatusbarMods extends XposedModPack {
 		return height;
 	}
 
+	@SuppressLint("DiscouragedApi")
 	private int getAndroidDimensionPixelSize(Context context, String resourceName, int defaultValue) {
 		try {
 			int resId = context.getResources().getIdentifier(resourceName, "dimen", "android");
@@ -1034,8 +1043,12 @@ public class StatusbarMods extends XposedModPack {
 
 	private void setLeftSplitAreaMargins(View view) {
 		if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams layoutParams) {
+			int oldTopMargin = layoutParams.topMargin;
+			int oldBottomMargin = layoutParams.bottomMargin;
 			setLeftSplitAreaMargins(layoutParams);
-			view.setLayoutParams(layoutParams);
+			if (layoutParams.topMargin != oldTopMargin || layoutParams.bottomMargin != oldBottomMargin) {
+				view.setLayoutParams(layoutParams);
+			}
 		}
 	}
 

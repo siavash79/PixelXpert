@@ -41,6 +41,7 @@ import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -90,7 +91,6 @@ public class StatusbarMods extends XposedModPack {
 	private static final int AM_PM_STYLE_SMALL = 1;
 	private static final int AM_PM_STYLE_GONE = 2;
 	private static final String ORIGINAL_STATUS_BAR_CONTENTS_TOP_PADDING = "px_original_status_bar_contents_top_padding";
-	private static final String ORIGINAL_STATUS_BAR_TRANSLATION_Y = "px_original_status_bar_translation_y";
 	private final int leftClockPadding, rightClockPadding;
 	private static int clockPosition = POSITION_LEFT;
 	private static int mAmPmStyle = AM_PM_STYLE_GONE;
@@ -426,6 +426,9 @@ public class StatusbarMods extends XposedModPack {
 				case "statusbarPaddings":
 					updateStatusbarHeight();
 					break;
+				case "NotificationIconLimit":
+					applyNotificationIconLimit();
+					break;
 				case "VolteIconEnabled":
 				case "VowifiIconEnabled":
 					if (VolteIconEnabled || VowifiIconEnabled) {
@@ -485,17 +488,31 @@ public class StatusbarMods extends XposedModPack {
 	}
 
 	private int getStatusBarContentTopInset() {
-		if (!noCutoutEnabled && !notificationAreaMultiRow) return 0;
+		if (!noCutoutEnabled) return 0;
+		if (notificationAreaMultiRow) return 0;
 
-		int safeTopInset = ResourceTools.dpToPx(mContext, 6);
-		if (!notificationAreaMultiRow) return safeTopInset;
+		return ResourceTools.dpToPx(mContext, 6);
+	}
 
-		int statusbarHeight = getPhoneStatusBarHeight();
-		int iconSize = getAndroidDimensionPixelSize("status_bar_icon_size", ResourceTools.dpToPx(mContext, 22));
-		if (statusbarHeight <= 0 || iconSize <= 0) return safeTopInset;
+	private int getStatusBarIconRowHeight() {
+		return getAndroidDimensionPixelSize("status_bar_icon_size_sp",
+				getAndroidDimensionPixelSize("status_bar_icon_size", ResourceTools.dpToPx(mContext, 22)));
+	}
 
-		int maxTopInset = Math.max(0, statusbarHeight - (2 * iconSize));
-		return Math.min(safeTopInset, maxTopInset);
+	private int getStatusBarIconSlotWidth() {
+		int iconSize = getStatusBarIconRowHeight();
+		int horizontalMargin = getSystemUiDimensionPixelSize("status_bar_icon_horizontal_margin", 0);
+		return iconSize + (2 * horizontalMargin);
+	}
+
+	@SuppressLint("DiscouragedApi")
+	private int getSystemUiDimensionPixelSize(String resourceName, int defaultValue) {
+		try {
+			int resId = dimenIdOf(resourceName);
+			return resId == 0 ? defaultValue : mContext.getResources().getDimensionPixelSize(resId);
+		} catch (Throwable ignored) {
+			return defaultValue;
+		}
 	}
 
 	@SuppressLint("DiscouragedApi")
@@ -620,33 +637,76 @@ public class StatusbarMods extends XposedModPack {
 				});
 		//endregion
 
-		//region SB Padding
-		PhoneStatusBarViewClass
-				.afterConstruction()
-				.run(param -> mPhoneStatusbarView = (FrameLayout) param.thisObject);
+			//region SB Padding
+			PhoneStatusBarViewClass
+					.afterConstruction()
+					.run(param -> mPhoneStatusbarView = (FrameLayout) param.thisObject);
 
-		PhoneStatusBarViewClass
-				.after("updateStatusBarHeight")
-				.run(param -> {
+			PhoneStatusBarViewClass
+					.after("onFinishInflate")
+					.run(param -> {
+						mPhoneStatusbarView = (FrameLayout) param.thisObject;
+						scheduleHeightsUpdate();
+					});
+
+			PhoneStatusBarViewClass
+					.after("onAttachedToWindow")
+					.run(param -> {
+						mPhoneStatusbarView = (FrameLayout) param.thisObject;
+						scheduleHeightsUpdate();
+					});
+
+			PhoneStatusBarViewClass
+					.after("updateStatusBarHeight")
+					.run(param -> {
 					@SuppressLint("DiscouragedApi")
 					View sbContentsView = ((View) param.thisObject).findViewById(idOf("status_bar_contents"));
 					mStatusBarContents = sbContentsView;
 
-					applyPhoneStatusBarViewHeight();
-					applyStatusBarContentPadding(sbContentsView);
-					applyStatusBarContainerLayout();
-				});
+						applyPhoneStatusBarViewHeight();
+						applyStatusBarContentPadding(sbContentsView);
+						applyStatusBarContainerLayout();
+					});
 		//endregion
 
 		//region multi row statusbar
 		//bypassing the max icon limit during measurement
-		NotificationIconContainerClass
-				.before("onMeasure")
-				.run(param -> setObjectField(param.thisObject, "mIsStaticLayout", false));
+			NotificationIconContainerClass
+					.before("onMeasure")
+					.run(param -> {
+						if (param.thisObject == mNotificationIconContainer) {
+							setObjectField(param.thisObject, "mMaxIcons", NotificationIconLimit);
+						}
+						setObjectField(param.thisObject, "mIsStaticLayout", false);
+					});
+
+			NotificationIconContainerClass
+					.after("onMeasure")
+					.run(param -> {
+						setObjectField(param.thisObject, "mIsStaticLayout", true);
+						if (param.thisObject == mNotificationIconContainer) {
+							applyNotificationIconLayoutWidth();
+						} else if (((View) param.thisObject).getId() == idOf("notificationIcons")) {
+							mNotificationIconContainer = (ViewGroup) param.thisObject;
+						}
+					});
 
 		NotificationIconContainerClass
-				.after("onMeasure")
-				.run(param -> setObjectField(param.thisObject, "mIsStaticLayout", true));
+				.before("setMaxIconsAmount")
+				.run(param -> {
+					if (param.thisObject == mNotificationIconContainer && param.args.length > 0) {
+						param.args[0] = NotificationIconLimit;
+					}
+				});
+
+			NotificationIconContainerClass
+					.after("setMaxIconsAmount")
+					.run(param -> {
+						if (param.thisObject == mNotificationIconContainer) {
+							applyNotificationIconLayoutWidth();
+							scheduleHeightsUpdate();
+						}
+					});
 
 		//endregion
 
@@ -720,11 +780,11 @@ public class StatusbarMods extends XposedModPack {
 					}
 
 
-					setHeights();
+						setHeights();
 
-					placeClock();
-					setHeights();
-				});
+						placeClock();
+						setHeights();
+					});
 
 		//clock mods
 		ClockClass
@@ -830,6 +890,17 @@ public class StatusbarMods extends XposedModPack {
 		}
 	}
 
+	private void applyNotificationIconLimit() {
+		if (mNotificationIconContainer == null) return;
+
+		try {
+			callMethod(mNotificationIconContainer, "setMaxIconsAmount", NotificationIconLimit);
+			applyNotificationIconLayoutWidth();
+			scheduleHeightsUpdate();
+		} catch (Throwable ignored) {
+		}
+	}
+
 	//region double row left area
 	@SuppressLint("DiscouragedApi")
 	private void makeLeftSplitArea() {
@@ -880,6 +951,7 @@ public class StatusbarMods extends XposedModPack {
 		notificationIconParams.weight = 100;
 		notificationIconParams.gravity = Gravity.CENTER_VERTICAL;
 		mNotificationIconContainer.setLayoutParams(notificationIconParams);
+		applyNotificationIconLimit();
 		mNotificationIconContainer.setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
 			@Override
 			public void onChildViewAdded(View parent, View child) {
@@ -930,17 +1002,54 @@ public class StatusbarMods extends XposedModPack {
 
 		int splitHeight = Math.max(1, statusbarHeight / 2);
 		boolean hasExtraRow = mLeftExtraRowContainer.getVisibility() == VISIBLE;
-		boolean hasNotificationIcons = mNotificationIconContainer.getChildCount() > 0;
 
 		if (mNotificationContainerContainer.getVisibility() != VISIBLE) {
 			mNotificationContainerContainer.setVisibility(VISIBLE);
 		}
-		setHeight(mNotificationContainerContainer, hasNotificationIcons ? (hasExtraRow ? splitHeight : MATCH_PARENT) : 0);
-		setHeight(mLeftExtraRowContainer, (hasExtraRow && hasNotificationIcons) ? splitHeight : MATCH_PARENT);
+		setHeight(mNotificationContainerContainer, hasExtraRow ? splitHeight : MATCH_PARENT);
+		setHeight(mLeftExtraRowContainer, hasExtraRow ? splitHeight : MATCH_PARENT);
 		setHeight(mNotificationIconContainer, MATCH_PARENT);
+		applyNotificationIconLayoutWidth();
 		if (networkOnSBEnabled) {
 			setHeight(networkTrafficSB, statusbarHeight / ((networkTrafficPosition == POSITION_LEFT && notificationAreaMultiRow) ? 2 : 1));
 		}
+	}
+
+	private void applyNotificationIconLayoutWidth() {
+		if (!notificationAreaMultiRow || mNotificationIconContainer == null) return;
+
+		int desiredWidth = getDesiredNotificationIconLayoutWidth();
+		if (desiredWidth <= 0) return;
+
+		try {
+			Object currentWidth = getObjectField(mNotificationIconContainer, "mActualLayoutWidth");
+			if (currentWidth instanceof Integer && (Integer) currentWidth == desiredWidth) return;
+
+			callMethod(mNotificationIconContainer, "setActualLayoutWidth", desiredWidth);
+			mNotificationIconContainer.requestLayout();
+			mNotificationIconContainer.invalidate();
+		} catch (Throwable ignored) {
+		}
+	}
+
+	private int getDesiredNotificationIconLayoutWidth() {
+		if (mNotificationIconContainer == null) return 0;
+
+		int childCount = mNotificationIconContainer.getChildCount();
+		if (childCount <= 0 || NotificationIconLimit <= 0) return 0;
+
+		int iconSlots = Math.min(childCount, NotificationIconLimit + 1);
+		try {
+			Object calculatedWidth = callMethod(mNotificationIconContainer, "calculateWidthFor", (float) iconSlots);
+			if (calculatedWidth instanceof Number) {
+				int width = (int) Math.ceil(((Number) calculatedWidth).doubleValue());
+				if (width > 0) return width;
+			}
+		} catch (Throwable ignored) {
+		}
+
+		int slotWidth = getStatusBarIconSlotWidth();
+		return slotWidth <= 0 ? 0 : iconSlots * slotWidth;
 	}
 
 	private void scheduleHeightsUpdate() {
@@ -951,28 +1060,14 @@ public class StatusbarMods extends XposedModPack {
 	}
 
 	private int getStatusbarContentHeight() {
-		return Math.max(0, getPhoneStatusBarHeight() - getStatusBarContentTopInset());
+		return Math.max(0, getPhoneStatusBarHeight() - getStatusBarContentsTopPadding() - getStatusBarContentTopInset());
 	}
 
 	private int getPhoneStatusBarHeight() {
-		int insetsHeight = getStatusBarInsetsHeight();
-		if (insetsHeight > 0) {
-			return insetsHeight;
-		}
-
-		int targetHeight = getTargetPhoneStatusBarHeight();
-		if (targetHeight > 0) {
-			return targetHeight;
-		}
-
-		int statusbarHeight = 0;
-		if (statusbarHeight <= 0) {
-			statusbarHeight = getViewHeight(mPhoneStatusbarView);
-		}
-		if (statusbarHeight <= 0) {
-			statusbarHeight = getViewHeight(mStatusBarContents);
-		}
-		return statusbarHeight;
+		int height = Math.max(getTargetPhoneStatusBarHeight(), getStatusBarInsetsHeight());
+		height = Math.max(height, getViewHeight(mPhoneStatusbarView));
+		height = Math.max(height, getViewHeight(mStatusBarContents));
+		return height;
 	}
 
 	private int getStatusBarInsetsHeight() {
@@ -1018,6 +1113,22 @@ public class StatusbarMods extends XposedModPack {
 			height = view.getLayoutParams().height;
 		}
 		return height;
+	}
+
+	private int getStatusBarContentsTopPadding() {
+		if (mStatusBarContents != null) {
+			Object originalTopPadding = getAdditionalInstanceField(mStatusBarContents, ORIGINAL_STATUS_BAR_CONTENTS_TOP_PADDING);
+			if (originalTopPadding instanceof Integer) {
+				return (Integer) originalTopPadding;
+			}
+			return mStatusBarContents.getPaddingTop();
+		}
+
+		try {
+			return mContext.getResources().getDimensionPixelSize(dimenIdOf("status_bar_padding_top"));
+		} catch (Throwable ignored) {
+			return 0;
+		}
 	}
 
 	@SuppressLint("DiscouragedApi")
@@ -1075,21 +1186,21 @@ public class StatusbarMods extends XposedModPack {
 		}
 
 		applyVerticalContentBounds(mCenteredIconArea, 0, contentHeight);
-		applyStatusBarTranslationY(mCenteredIconArea, getSingleRowStatusBarTranslationY(mCenteredIconArea));
+		setStatusBarTranslationY(mCenteredIconArea, getSingleRowStatusBarTranslationY(mCenteredIconArea));
 		if (mSystemIconArea != null) {
 			if (mSystemIconArea.getParent() instanceof View) {
 				View systemIconParent = (View) mSystemIconArea.getParent();
 				applyVerticalContentBounds(systemIconParent, 0, contentHeight);
-				applyStatusBarTranslationY(systemIconParent, getSingleRowStatusBarTranslationY(systemIconParent));
+				setStatusBarTranslationY(systemIconParent, getSingleRowStatusBarTranslationY(systemIconParent));
 				applyContentChildBounds(mSystemIconArea);
-				applyStatusBarTranslationY(mSystemIconArea, 0);
+				setStatusBarTranslationY(mSystemIconArea, 0);
 			} else {
 				applyVerticalContentBounds(mSystemIconArea, 0, contentHeight);
-				applyStatusBarTranslationY(mSystemIconArea, getSingleRowStatusBarTranslationY(mSystemIconArea));
+				setStatusBarTranslationY(mSystemIconArea, getSingleRowStatusBarTranslationY(mSystemIconArea));
 			}
 		}
 		if (mLeftVerticalSplitContainer != null) {
-			applyStatusBarTranslationY(mLeftVerticalSplitContainer, notificationAreaMultiRow
+			setStatusBarTranslationY(mLeftVerticalSplitContainer, notificationAreaMultiRow
 					? topInset
 					: getSingleRowStatusBarTranslationY(mLeftVerticalSplitContainer));
 		}
@@ -1106,23 +1217,19 @@ public class StatusbarMods extends XposedModPack {
 	private float getSingleRowStatusBarTranslationY(View view) {
 		if (view == null) return 0;
 
-		int statusbarHeight = getPhoneStatusBarHeight();
-		int contentHeight = Math.max(0, statusbarHeight - getStatusBarContentTopInset());
+		int contentHeight = getStatusbarContentHeight();
 		int viewHeight = getViewHeight(view);
 		if (contentHeight <= 0 || viewHeight <= 0) return getStatusBarContentTopInset();
 
 		return getStatusBarContentTopInset() + Math.max(0, (contentHeight - viewHeight) / 2f);
 	}
 
-	private void applyStatusBarTranslationY(View view, float translationY) {
+	private void setStatusBarTranslationY(View view, float translationY) {
 		if (view == null) return;
 
-		Object originalTranslationY = getAdditionalInstanceField(view, ORIGINAL_STATUS_BAR_TRANSLATION_Y);
-		if (!(originalTranslationY instanceof Float)) {
-			originalTranslationY = view.getTranslationY();
-			setAdditionalInstanceField(view, ORIGINAL_STATUS_BAR_TRANSLATION_Y, originalTranslationY);
+		if (view.getTranslationY() != translationY) {
+			view.setTranslationY(translationY);
 		}
-		view.setTranslationY((Float) originalTranslationY + translationY);
 	}
 
 	private void applyMatchParentHeight(View view) {
@@ -1143,11 +1250,31 @@ public class StatusbarMods extends XposedModPack {
 		int targetHeight = getPhoneStatusBarHeight();
 		if (mPhoneStatusbarView == null || targetHeight <= 0) return;
 
-		ViewGroup.LayoutParams layoutParams = mPhoneStatusbarView.getLayoutParams();
+		applyStatusBarHeight(mPhoneStatusbarView, targetHeight);
+		applyStatusBarAncestorHeights(targetHeight);
+	}
+
+	private void applyStatusBarAncestorHeights(int targetHeight) {
+		View rootView = mPhoneStatusbarView.getRootView();
+		ViewParent parent = mPhoneStatusbarView.getParent();
+		while (parent instanceof View parentView && parentView != rootView) {
+			if (parentView.getHeight() > 0 && parentView.getHeight() < targetHeight) {
+				applyStatusBarHeight(parentView, targetHeight);
+			}
+			if (parentView instanceof ViewGroup viewGroup) {
+				viewGroup.setClipChildren(false);
+				viewGroup.setClipToPadding(false);
+			}
+			parent = parentView.getParent();
+		}
+	}
+
+	private void applyStatusBarHeight(View view, int targetHeight) {
+		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
 		if (layoutParams != null && layoutParams.height != targetHeight) {
 			layoutParams.height = targetHeight;
-			mPhoneStatusbarView.setLayoutParams(layoutParams);
-			mPhoneStatusbarView.requestLayout();
+			view.setLayoutParams(layoutParams);
+			view.requestLayout();
 		}
 	}
 

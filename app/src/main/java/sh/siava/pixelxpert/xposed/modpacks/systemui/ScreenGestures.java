@@ -191,6 +191,7 @@ public class ScreenGestures extends XposedModPack {
 	}
 
 	private void setHooks(HookHelper.RunParam param) {
+		try {
 		Object mPulsingWakeupGestureHandler = getObjectField(param.thisObject, "mPulsingWakeupGestureHandler");//A13 R18
 
 		Object mListener = getObjectField(mPulsingWakeupGestureHandler, "mListener");
@@ -275,6 +276,9 @@ public class ScreenGestures extends XposedModPack {
 						turnOffTTT();
 					}
 				});
+		} catch (Throwable ignored) {
+			// mPulsingWakeupGestureHandler removed in Android 17 QPR1 Beta 3+ (CP31.260508.005)
+		}
 	}
 
 	private boolean isQSExpanded() {

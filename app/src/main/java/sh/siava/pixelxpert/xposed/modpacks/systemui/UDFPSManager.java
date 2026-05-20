@@ -73,21 +73,23 @@ public class UDFPSManager extends XposedModPack {
 					setUDFPSGraphics(false);
 
 
-					//making sure it remains on top on wallpaper subject
-					mDeviceEntryIconView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
-						@Override
-						public void onViewAttachedToWindow(@NonNull View v) {
-							v.setZ(100);
-						}
+					//making sure it remains on top on wallpaper subject (only needed when depth wallpaper is active)
+					if (android.os.Build.VERSION.SDK_INT < 37) {
+						mDeviceEntryIconView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+							@Override
+							public void onViewAttachedToWindow(@NonNull View v) {
+								v.setZ(100);
+							}
 
-						@Override
-						public void onViewDetachedFromWindow(@NonNull View v) {
+							@Override
+							public void onViewDetachedFromWindow(@NonNull View v) {
 
-						}
-					});
+							}
+						});
 
-					mDeviceEntryIconView.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) ->
-							                                               v.setZ(100));
+						mDeviceEntryIconView.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) ->
+								                                               v.setZ(100));
+					}
 				});
 	}
 

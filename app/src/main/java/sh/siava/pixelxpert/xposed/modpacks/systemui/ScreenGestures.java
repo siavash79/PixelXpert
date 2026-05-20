@@ -167,7 +167,9 @@ public class ScreenGestures extends XposedModPack {
 				.afterConstruction()
 				.run(param -> new Thread(() -> {
 					SystemUtils.threadSleep(5000); //for some reason lsposed doesn't find methods in the class. so we'll hook to constructor and wait a bit!
-					setHooks(param);
+					try {
+						setHooks(param);
+					} catch (Throwable ignored) {}
 				}).start());
 
 		NotificationPanelViewControllerClass

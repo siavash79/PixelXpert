@@ -27,6 +27,7 @@ public class FingerprintWhileDozing extends XposedModPack {
 
 	@Override
 	public void onPackageLoaded(XposedModuleInterface.PackageReadyParam PRParam) throws Throwable {
+		if (android.os.Build.VERSION.SDK_INT >= 37) return;
 		ReflectedClass KeyguardUpdateMonitorClass = ReflectedClass.of("com.android.keyguard.KeyguardUpdateMonitor");
 
 		KeyguardUpdateMonitorClass

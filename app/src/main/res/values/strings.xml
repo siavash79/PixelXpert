@@ -391,6 +391,7 @@
     <string name="radio_force_ss_over_ut">Force SS over UT in unsupported regions</string>
     <string name="radio_force_cross_sim">Force Cross-SIM calling in unsupported regions</string>
     <string name="radio_force_wfc">Force WFC (Wi-Fi Calling) in unsupported regions</string>
+    <string name="radio_force_call_record">Force call recording in unsupported regions</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

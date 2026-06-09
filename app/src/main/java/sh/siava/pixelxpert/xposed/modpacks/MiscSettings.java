@@ -69,6 +69,9 @@ public class MiscSettings extends XposedModPack {
 				case "force_wfc":
 					force_wfc();
 					break;
+				case "force_call_record":
+					force_call_record();
+					break;
 				case "force_hotspot":
 					force_hotspot();
 					break;
@@ -91,7 +94,24 @@ public class MiscSettings extends XposedModPack {
 
 			force_wfc();
 
+			force_call_record();
+
 			force_hotspot();
+		}
+	}
+
+	private void force_call_record() {
+		if(Xprefs.getBoolean("force_call_record", false))
+		{
+			String sqlite = "/data/adb/modules/PixelXpert/sqlite3";
+			String phenotype = "/data/user/0/com.google.android.gms/databases/phenotype.db";
+			String q1 = sqlite + " " + phenotype + " "INSERT OR REPLACE INTO Flags (packageName, user, name, boolVal, committed) VALUES ('com.google.android.dialer', '', 'enable_call_recording', 1, 0);"";
+			String q2 = sqlite + " " + phenotype + " "INSERT OR REPLACE INTO Flags (packageName, user, name, boolVal, committed) VALUES ('com.google.android.dialer', '', 'call_recording_state', 1, 0);"";
+			XPLauncher.enqueueProxyCommand(proxy -> {
+				proxy.runRootCommand(q1);
+				proxy.runRootCommand(q2);
+				proxy.runRootCommand("am force-stop com.google.android.gms");
+			});
 		}
 	}
 

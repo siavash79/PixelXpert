@@ -18,6 +18,16 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - name: Signature files preparation
+        run: |
+          if [ ! -z "${{ secrets.SIGNING_KEY }}" ]; then
+            echo storePassword='${{ secrets.KEY_STORE_PASSWORD }}' >> ReleaseKey.properties
+            echo keyAlias='${{ secrets.ALIAS }}' >> ReleaseKey.properties
+            echo keyPassword='${{ secrets.KEY_PASSWORD }}' >> ReleaseKey.properties
+            echo storeFile='${{ github.workspace }}/ReleaseKey.jks' >> ReleaseKey.properties
+            echo ${{ secrets.SIGNING_KEY }} | base64 --decode > ${{ github.workspace }}/ReleaseKey.jks
+          fi
+
       - name: Grant permission shell scripts
         run: chmod +x .github/*.sh
 
@@ -26,19 +36,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      - uses: r0adkll/sign-android-release@v1
-        name: Sign app APK
-
-        id: sign_app
-        with:
-          releaseDirectory: app/build/outputs/apk/debug
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: "33.0.0"
-          
       - name: Magisk Module Generation
         run: .github/make_debug_zip.sh
 
@@ -46,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: PixelXpert_Xposed.apk
-          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+          path: app/build/outputs/apk/release/PixelXpert.apk
         
       - name: Upload Xposed Artifact to Actions
         uses: actions/upload-artifact@v4

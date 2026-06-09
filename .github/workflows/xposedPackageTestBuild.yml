@@ -12,7 +12,7 @@ jobs:
         name: Grab source code
         
       - name: Setup JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -43,13 +43,13 @@ jobs:
         run: .github/make_debug_zip.sh
 
       - name: Upload APK file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: PixelXpert_Xposed.apk
           path: ${{steps.sign_app.outputs.signedReleaseFile}}
         
       - name: Upload Xposed Artifact to Actions
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with: 
           name: PixelXpert_Xposed.zip
           path: output

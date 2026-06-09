@@ -8,21 +8,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Source Code Download
-        run: git clone -b ${GITHUB_REF_NAME} --recurse-submodules ${{ github.server_url }}/${{ github.repository }}.git .
+    - name: Source Code Download
+      run: git clone -b ${GITHUB_REF_NAME} --recurse-submodules ${{ github.server_url }}/${{ github.repository }}.git .
 
-      - name: JDK 21 Setup
-        uses: actions/setup-java@v5.2.0
-        with:
-          java-version: '21'
-          distribution: 'jetbrains'
-          cache: gradle
+    - name: JDK 21 Setup
+      uses: actions/setup-java@v5.2.0
+      with:
+        java-version: '21'
+        distribution: 'jetbrains'
+        cache: gradle
 
-      - name: Gradlew Permissions
-        run: chmod +x gradlew
+    - name: Gradlew Permissions
+      run: chmod +x gradlew
 
-      - name: Signature files preparation
-        run: |
+    - name: Signature files preparation
+      run: |
           if [ ! -z "${{ secrets.SIGNING_KEY }}" ]; then
             echo storePassword='${{ secrets.KEY_STORE_PASSWORD }}' >> ReleaseKey.properties
             echo keyAlias='${{ secrets.ALIAS }}' >> ReleaseKey.properties
@@ -31,23 +31,11 @@ jobs:
             echo ${{ secrets.SIGNING_KEY }} | base64 --decode > ${{ github.workspace }}/ReleaseKey.jks
           fi
 
-      - name: Shell Scripts Permissions
-        run: chmod +x .github/*.sh
+    - name: Gradle Build
+      run: ./gradlew assembleRelease createZip
 
-      - name: Gradle Build
-        run: ./gradlew assembleRelease
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: PixelXpert.apk
-          path: app/build/outputs/apk/release/PixelXpert.apk
-
-      - name: Zip Generation
-        run: .github/make_debug_zip.sh
-
-      - name: Upload Zip
-        uses: actions/upload-artifact@v4
-        with:
-          name: PixelXpert.zip
-          path: output
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: PixelXpert.zip
+        path: output/PixelXpert.zip

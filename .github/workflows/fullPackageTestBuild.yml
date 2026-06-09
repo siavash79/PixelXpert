@@ -8,15 +8,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: git clone -b ${GITHUB_REF_NAME} --recurse-submodules ${{ github.server_url }}/${{ github.repository }}.git .
-        name: Grab source code
-        
-      - name: Setup JDK 18
-        uses: actions/setup-java@v4
+      - name: Source Code Download
+        run: git clone -b ${GITHUB_REF_NAME} --recurse-submodules ${{ github.server_url }}/${{ github.repository }}.git .
+
+      - name: JDK 21 Setup
+        uses: actions/setup-java@v5.2.0
         with:
-          java-version: '18'
-          distribution: 'temurin'
+          java-version: '21'
+          distribution: 'jetbrains'
           cache: gradle
+
+      - name: Gradlew Permissions
+        run: chmod +x gradlew
 
       - name: Signature files preparation
         run: |
@@ -28,21 +31,19 @@ jobs:
             echo ${{ secrets.SIGNING_KEY }} | base64 --decode > ${{ github.workspace }}/ReleaseKey.jks
           fi
 
-      - name: Grant permission shell scripts
+      - name: Shell Scripts Permissions
         run: chmod +x .github/*.sh
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-      - name: Build with Gradle
-        run: ./gradlew assembleRelease --no-configuration-cache
+      - name: Gradle Build
+        run: ./gradlew assembleRelease
 
-      - uses: actions/upload-artifact@v4
-        name: Upload APK file
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
           name: PixelXpert.apk
           path: app/build/outputs/apk/release/PixelXpert.apk
 
-      - name: Run the zip script
+      - name: Zip Generation
         run: .github/make_debug_zip.sh
 
       - name: Upload Zip

@@ -56,7 +56,20 @@ public class MiscSettings extends XposedModPack {
 					break;
 				case "force_volte":
 					force_volte();
-					case "force_hotspot":
+					break;
+				case "force_vonr":
+					force_vonr();
+					break;
+				case "force_ss_over_ut":
+					force_ss_over_ut();
+					break;
+				case "force_cross_sim":
+					force_cross_sim();
+					break;
+				case "force_wfc":
+					force_wfc();
+					break;
+				case "force_hotspot":
 					force_hotspot();
 					break;
 			}
@@ -69,6 +82,14 @@ public class MiscSettings extends XposedModPack {
 			setVolumeSteps();
 
 			force_volte();
+
+			force_vonr();
+
+			force_ss_over_ut();
+
+			force_cross_sim();
+
+			force_wfc();
 
 			force_hotspot();
 		}
@@ -85,7 +106,36 @@ public class MiscSettings extends XposedModPack {
 	private void force_volte() {
 		if(Xprefs.getBoolean("force_volte", false))
 		{
-			XPLauncher.enqueueProxyCommand(proxy -> proxy.runRootCommand("setprop persist.dbg.volte_avail_ovr 1; setprop persist.dbg.vonr_avail_ovr 1"));
+			XPLauncher.enqueueProxyCommand(proxy -> proxy.runRootCommand("setprop persist.dbg.volte_avail_ovr 1"));
+		}
+	}
+
+
+	private void force_vonr() {
+		if(Xprefs.getBoolean("force_vonr", false))
+		{
+			XPLauncher.enqueueProxyCommand(proxy -> proxy.runRootCommand("setprop persist.dbg.vonr_avail_ovr 1"));
+		}
+	}
+
+	private void force_ss_over_ut() {
+		if(Xprefs.getBoolean("force_ss_over_ut", false))
+		{
+			XPLauncher.enqueueProxyCommand(proxy -> proxy.runRootCommand("cmd phone cc set-value carrier_supports_ss_over_ut_bool 1"));
+		}
+	}
+
+	private void force_cross_sim() {
+		if(Xprefs.getBoolean("force_cross_sim", false))
+		{
+			XPLauncher.enqueueProxyCommand(proxy -> proxy.runRootCommand("cmd phone cc set-value carrier_cross_sim_ims_available_bool 1; cmd phone cc set-value enable_cross_sim_calling_on_opportunistic_data_bool 1"));
+		}
+	}
+
+	private void force_wfc() {
+		if(Xprefs.getBoolean("force_wfc", false))
+		{
+			XPLauncher.enqueueProxyCommand(proxy -> proxy.runRootCommand("setprop persist.dbg.wfc_avail_ovr 1; cmd phone cc set-value carrier_wfc_ims_available_bool 1; cmd phone cc set-value carrier_wfc_supports_wifi_only_bool 1; cmd phone cc set-value editable_wfc_mode_bool 1; cmd phone cc set-value editable_wfc_roaming_mode_bool 1"));
 		}
 	}
 

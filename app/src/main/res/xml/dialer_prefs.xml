@@ -39,4 +39,37 @@
 		android:summaryOn="@string/general_on"
 		android:title="@string/radio_force_volte_nr"
 		app:iconSpaceReserved="false" />
+
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="force_vonr"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/radio_force_vonr"
+		app:iconSpaceReserved="false" />
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="force_ss_over_ut"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/radio_force_ss_over_ut"
+		app:iconSpaceReserved="false" />
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="force_cross_sim"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/radio_force_cross_sim"
+		app:iconSpaceReserved="false" />
+
+	<sh.siava.pixelxpert.ui.preferences.MaterialSwitchPreference
+		android:defaultValue="false"
+		android:key="force_wfc"
+		android:summaryOff="@string/general_off"
+		android:summaryOn="@string/general_on"
+		android:title="@string/radio_force_wfc"
+		app:iconSpaceReserved="false" />
 </PreferenceScreen>

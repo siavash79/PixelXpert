@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Source Code Download
-      run: git clone --branch canary --single-branch --recurse-submodules https://github.com/siavash79/PixelXpert.git .
+      run: git clone --branch canary --single-branch --recurse-submodules ${{ github.server_url }}/${{ github.repository }}.git .
       
     - name: JDK 21 Setup
       uses: actions/setup-java@v5.2.0

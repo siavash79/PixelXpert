@@ -387,11 +387,9 @@
     <string name="dialer_mute_record_message_title">Remove call recording announcement</string>
     <string name="dialer_mute_record_message_summary">Only applies to Google phone app with call recording enabled</string>
     <string name="radio_force_volte_nr">Force VoLTE/NR in unsupported regions</string>
-    <string name="radio_force_vonr">Force VoNR in unsupported regions</string>
     <string name="radio_force_ss_over_ut">Force SS over UT in unsupported regions</string>
     <string name="radio_force_cross_sim">Force Cross-SIM calling in unsupported regions</string>
     <string name="radio_force_wfc">Force WFC (Wi-Fi Calling) in unsupported regions</string>
-    <string name="radio_force_call_record">Force call recording in unsupported regions</string>
 
     <!-- Arrays strings -->
     <!-- Quick pull down -->

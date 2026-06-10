@@ -57,9 +57,6 @@ public class MiscSettings extends XposedModPack {
 				case "force_volte":
 					force_volte();
 					break;
-				case "force_vonr":
-					force_vonr();
-					break;
 				case "force_ss_over_ut":
 					force_ss_over_ut();
 					break;
@@ -68,9 +65,6 @@ public class MiscSettings extends XposedModPack {
 					break;
 				case "force_wfc":
 					force_wfc();
-					break;
-				case "force_call_record":
-					force_call_record();
 					break;
 				case "force_hotspot":
 					force_hotspot();
@@ -86,32 +80,13 @@ public class MiscSettings extends XposedModPack {
 
 			force_volte();
 
-			force_vonr();
-
 			force_ss_over_ut();
 
 			force_cross_sim();
 
 			force_wfc();
 
-			force_call_record();
-
 			force_hotspot();
-		}
-	}
-
-	private void force_call_record() {
-		if(Xprefs.getBoolean("force_call_record", false))
-		{
-			String sqlite = "/data/adb/modules/PixelXpert/sqlite3";
-			String phenotype = "/data/user/0/com.google.android.gms/databases/phenotype.db";
-			String q1 = sqlite + " " + phenotype + " "INSERT OR REPLACE INTO Flags (packageName, user, name, boolVal, committed) VALUES ('com.google.android.dialer', '', 'enable_call_recording', 1, 0);"";
-			String q2 = sqlite + " " + phenotype + " "INSERT OR REPLACE INTO Flags (packageName, user, name, boolVal, committed) VALUES ('com.google.android.dialer', '', 'call_recording_state', 1, 0);"";
-			XPLauncher.enqueueProxyCommand(proxy -> {
-				proxy.runRootCommand(q1);
-				proxy.runRootCommand(q2);
-				proxy.runRootCommand("am force-stop com.google.android.gms");
-			});
 		}
 	}
 
@@ -126,15 +101,10 @@ public class MiscSettings extends XposedModPack {
 	private void force_volte() {
 		if(Xprefs.getBoolean("force_volte", false))
 		{
-			XPLauncher.enqueueProxyCommand(proxy -> proxy.runRootCommand("setprop persist.dbg.volte_avail_ovr 1"));
-		}
-	}
-
-
-	private void force_vonr() {
-		if(Xprefs.getBoolean("force_vonr", false))
-		{
-			XPLauncher.enqueueProxyCommand(proxy -> proxy.runRootCommand("setprop persist.dbg.vonr_avail_ovr 1"));
+			XPLauncher.enqueueProxyCommand(proxy -> {
+				proxy.runRootCommand("setprop persist.dbg.volte_avail_ovr 1");
+				proxy.runRootCommand("setprop persist.dbg.vonr_avail_ovr 1");
+			});
 		}
 	}
 
